@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import nl.vpro.domain.image.Image;
 import nl.vpro.domain.image.ImageService;
-import nl.vpro.domain.image.UnsupportedImageTypeException;
+import nl.vpro.domain.image.UnsupportedImageFormatException;
 
 @Service("imageServiceWs")
 public class ImageServiceWsImpl implements ImageServiceWs {
@@ -32,7 +32,7 @@ public class ImageServiceWsImpl implements ImageServiceWs {
             ;
         } catch(IOException e) {
             e.printStackTrace();
-        } catch(UnsupportedImageTypeException e) {
+        } catch(UnsupportedImageFormatException e) {
             e.printStackTrace();
         }
 
