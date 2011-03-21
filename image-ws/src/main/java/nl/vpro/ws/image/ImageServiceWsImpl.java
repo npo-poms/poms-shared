@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import nl.vpro.domain.image.Image;
 import nl.vpro.domain.image.ImageService;
 import nl.vpro.domain.image.UnsupportedImageFormatException;
+import nl.vpro.domain.image.cache.NotFoundException;
 
 @Service("imageServiceWs")
 public class ImageServiceWsImpl implements ImageServiceWs {
@@ -28,11 +29,12 @@ public class ImageServiceWsImpl implements ImageServiceWs {
         image.setDescription(description);
 
         try {
-            image = imageService.setData(image, data.getInputStream())
-            ;
+            image = imageService.setData(image, data.getInputStream());
         } catch(IOException e) {
             e.printStackTrace();
         } catch(UnsupportedImageFormatException e) {
+            e.printStackTrace();
+        } catch(NotFoundException e) {
             e.printStackTrace();
         }
 
