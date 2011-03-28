@@ -9,9 +9,9 @@ import javax.xml.ws.AsyncHandler;
 import javax.xml.ws.Response;
 import java.util.concurrent.ExecutionException;
 
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 
-@Service("uploadService")
+//@Service("uploadService")
 public class UploadServiceImpl implements UploadService {
 
     @Resource(name = "imageServiceWSClient")

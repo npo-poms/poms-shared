@@ -9,14 +9,13 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.xml.ws.AsyncHandler;
-import javax.xml.ws.RequestWrapper;
-import javax.xml.ws.Response;
-import javax.xml.ws.ResponseWrapper;
+import javax.xml.ws.*;
+import javax.xml.ws.soap.SOAPBinding;
 import java.util.concurrent.Future;
 
+import nl.vpro.domain.image.ImageType;
+
 @WebService(
-//        serviceName = "ImageService",
     portName = "ImageServicePort",
     targetNamespace = "urn:vpro:ws:image:2009")
 public interface ImageServiceWs {
@@ -72,7 +71,11 @@ public interface ImageServiceWs {
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
     String download(
-        @WebParam(name = "url", targetNamespace = "") String url);
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "url", targetNamespace = "") String url,
+        @WebParam(name = "principalId", targetNamespace = "") String principalId) throws DownloadFault;
 
     @WebMethod(operationName = "download")
     @RequestWrapper(
@@ -82,8 +85,12 @@ public interface ImageServiceWs {
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
     Future<?> downloadAsync(
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "url", targetNamespace = "") String url,
-        /*@WebParam(name = "handler", partName = "parameters")*/ AsyncHandler<DownloadResponse> handler);
+        @WebParam(name = "principalId", targetNamespace = "") String principalId,
+        AsyncHandler<DownloadResponse> handler);
 
     @WebMethod(operationName = "download")
     @RequestWrapper(
@@ -93,5 +100,9 @@ public interface ImageServiceWs {
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
     Response<DownloadResponse> downloadAsync(
-        @WebParam(name = "url", targetNamespace = "") String url);
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "url", targetNamespace = "") String url,
+        @WebParam(name = "principalId", targetNamespace = "") String principalId);
 }

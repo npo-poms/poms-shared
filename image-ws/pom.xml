@@ -13,20 +13,12 @@
   <artifactId>image-ws</artifactId>
 
   <name>image-ws</name>
-  <description>Image Webservices</description>
+  <description>Images Webservices API</description>
 
   <dependencies>
     <dependency>
       <groupId>nl.vpro.image</groupId>
-      <artifactId>image-backend</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-frontend-jaxws</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-rt-transports-http</artifactId>
+      <artifactId>image-domain</artifactId>
     </dependency>
   </dependencies>
 </project>
