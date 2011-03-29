@@ -18,7 +18,7 @@ import nl.vpro.domain.image.ImageType;
 @WebService(
     portName = "ImageServicePort",
     targetNamespace = "urn:vpro:ws:image:2009")
-public interface ImageServiceWs {
+public interface ImageWebService {
 
     @WebMethod
     @WebResult(

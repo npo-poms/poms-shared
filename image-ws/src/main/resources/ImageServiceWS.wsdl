@@ -70,7 +70,7 @@
     <wsdl:part element="tns:upload" name="parameters">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:portType name="ImageServiceWs">
+  <wsdl:portType name="ImageWebService">
     <wsdl:operation name="upload">
       <wsdl:input message="tns:upload" name="upload">
     </wsdl:input>
@@ -86,7 +86,7 @@
     </wsdl:fault>
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="ImageServiceSoapBinding" type="tns:ImageServiceWs">
+  <wsdl:binding name="ImageServiceSoapBinding" type="tns:ImageWebService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
     <wsdl:operation name="upload">
       <soap:operation soapAction="" style="document"/>
