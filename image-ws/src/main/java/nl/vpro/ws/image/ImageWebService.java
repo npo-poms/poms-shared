@@ -16,7 +16,8 @@ import java.util.concurrent.Future;
 import nl.vpro.domain.image.ImageType;
 
 @WebService(
-    portName = "ImageServicePort",
+    name = "imageService",
+    portName = "imageServicePort",
     targetNamespace = "urn:vpro:ws:image:2009")
 public interface ImageWebService {
 
