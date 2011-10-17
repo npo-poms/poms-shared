@@ -27,38 +27,41 @@ public interface ImageWebService {
         targetNamespace = "")
     @RequestWrapper(
         localName = "upload",
-        className = "nl.vpro.ws.image.Upload")
+        className = "nl.vpro.ws.image.UploadRequest")
     @ResponseWrapper(
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
     String upload(
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "data", targetNamespace = "") DataHandler data);
 
     @WebMethod(operationName = "upload")
     @RequestWrapper(
         localName = "upload",
-        className = "nl.vpro.ws.image.Upload")
+        className = "nl.vpro.ws.image.UploadRequest")
     @ResponseWrapper(
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
     Future<?> uploadAsync(
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "data", targetNamespace = "") DataHandler data,
         AsyncHandler<UploadResponse> handler);
 
     @WebMethod(operationName = "upload")
     @RequestWrapper(
         localName = "upload",
-        className = "nl.vpro.ws.image.Upload")
+        className = "nl.vpro.ws.image.UploadRequest")
     @ResponseWrapper(
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
     Response<UploadResponse> uploadAsync(
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "data", targetNamespace = "") DataHandler data);
 
     @WebMethod
@@ -67,7 +70,7 @@ public interface ImageWebService {
         targetNamespace = "")
     @RequestWrapper(
         localName = "download",
-        className = "nl.vpro.ws.image.Download")
+        className = "nl.vpro.ws.image.DownloadRequest")
     @ResponseWrapper(
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
@@ -75,13 +78,12 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "url", targetNamespace = "") String url,
-        @WebParam(name = "principalId", targetNamespace = "") String principalId) throws DownloadFault;
+        @WebParam(name = "url", targetNamespace = "") String url) throws DownloadFault;
 
     @WebMethod(operationName = "download")
     @RequestWrapper(
         localName = "download",
-        className = "nl.vpro.ws.image.Download")
+        className = "nl.vpro.ws.image.DownloadRequest")
     @ResponseWrapper(
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
@@ -90,13 +92,12 @@ public interface ImageWebService {
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "url", targetNamespace = "") String url,
-        @WebParam(name = "principalId", targetNamespace = "") String principalId,
         AsyncHandler<DownloadResponse> handler);
 
     @WebMethod(operationName = "download")
     @RequestWrapper(
         localName = "download",
-        className = "nl.vpro.ws.image.Download")
+        className = "nl.vpro.ws.image.DownloadRequest")
     @ResponseWrapper(
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
@@ -104,6 +105,5 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "url", targetNamespace = "") String url,
-        @WebParam(name = "principalId", targetNamespace = "") String principalId);
+        @WebParam(name = "url", targetNamespace = "") String url);
 }

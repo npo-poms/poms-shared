@@ -7,29 +7,36 @@ package nl.vpro.ws.image;
 import javax.activation.DataHandler;
 import javax.xml.bind.annotation.*;
 
-@XmlRootElement(name = "upload", namespace = "urn:vpro:ws:image:2009")
+import nl.vpro.domain.image.ImageType;
+
+@XmlRootElement(name = "uploadRequest", namespace = "urn:vpro:ws:image:2009")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "uploadType", propOrder = {
+@XmlType(name = "uploadRequestType", propOrder = {
         "title",
         "description",
+        "type",
         "data"})
-public class Upload {
+public class UploadRequest {
     @XmlElement(name = "title", namespace = "urn:vpro:ws:image:2009", required = true)
     private String title;
 
     @XmlElement(name = "description", namespace = "urn:vpro:ws:image:2009", required = true)
     private String description;
 
+    @XmlElement(name = "type", namespace = "urn:vpro:ws:image:2009", required = true)
+    private ImageType type;
+
     @XmlElement(name = "data", namespace = "urn:vpro:ws:image:2009", required = true)
     @XmlMimeType("application/octet-stream")
     private DataHandler data;
 
-    public Upload() {
+    public UploadRequest() {
     }
 
-    public Upload(String title, String description, DataHandler data) {
+    public UploadRequest(String title, String description, ImageType type, DataHandler data) {
         this.title = title;
         this.description = description;
+        this.type = type;
         this.data = data;
     }
 
@@ -47,6 +54,14 @@ public class Upload {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public ImageType getType() {
+        return type;
+    }
+
+    public void setType(ImageType type) {
+        this.type = type;
     }
 
     public DataHandler getData() {

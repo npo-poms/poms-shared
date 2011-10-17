@@ -8,15 +8,14 @@ import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
 
-@XmlRootElement(name = "download", namespace = "urn:vpro:ws:image:2009")
+@XmlRootElement(name = "downloadRequest", namespace = "urn:vpro:ws:image:2009")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "downloadType", propOrder = {
+@XmlType(name = "downloadRequestType", propOrder = {
         "title",
         "description",
         "type",
-        "url",
-        "principalId"})
-public class Download {
+        "url"})
+public class DownloadRequest {
 
     @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
     private String title;
@@ -29,9 +28,6 @@ public class Download {
 
     @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
     private String url;
-
-    @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
-    private String principalId;
 
     public String getTitle() {
         return title;
@@ -63,13 +59,5 @@ public class Download {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public String getPrincipalId() {
-        return principalId;
-    }
-
-    public void setPrincipalId(String principalId) {
-        this.principalId = principalId;
     }
 }
