@@ -4,19 +4,22 @@
  */
 package nl.vpro.ws.image;
 
+import java.util.concurrent.Future;
+
 import javax.activation.DataHandler;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.xml.ws.*;
-import javax.xml.ws.soap.SOAPBinding;
-import java.util.concurrent.Future;
+import javax.xml.ws.AsyncHandler;
+import javax.xml.ws.RequestWrapper;
+import javax.xml.ws.Response;
+import javax.xml.ws.ResponseWrapper;
 
 import nl.vpro.domain.image.ImageType;
 
 @WebService(
-    name = "imageService",
+    name = "imageWebService",
     portName = "imageServicePort",
     targetNamespace = "urn:vpro:ws:image:2009")
 public interface ImageWebService {
