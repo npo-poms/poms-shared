@@ -26,6 +26,9 @@ public class UploadRequest {
     @XmlElement(name = "type", namespace = "urn:vpro:ws:image:2009", required = true)
     private ImageType type;
 
+
+    // the set ContentType from the client is not communicated, see also:
+    // https://issues.jboss.org/browse/JBWS-3074
     @XmlElement(name = "data", namespace = "urn:vpro:ws:image:2009", required = true)
     @XmlMimeType("application/octet-stream")
     private DataHandler data;
