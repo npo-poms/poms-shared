@@ -17,6 +17,7 @@ import nl.vpro.domain.image.ImageType;
         "type",
         "data"})
 public class UploadRequest {
+
     @XmlElement(name = "title", namespace = "urn:vpro:ws:image:2009", required = true)
     private String title;
 
@@ -43,7 +44,7 @@ public class UploadRequest {
         this.data = data;
     }
 
-    public String getTitle() {
+	public String getTitle() {
         return title;
     }
 
