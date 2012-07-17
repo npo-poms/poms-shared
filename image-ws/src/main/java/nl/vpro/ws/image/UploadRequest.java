@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.*;
 import nl.vpro.domain.image.ImageType;
 
 @XmlRootElement(name = "uploadRequest", namespace = "urn:vpro:ws:image:2009")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "uploadRequestType", propOrder = {
         "title",
         "description",
@@ -18,20 +18,12 @@ import nl.vpro.domain.image.ImageType;
         "data"})
 public class UploadRequest {
 
-    @XmlElement(name = "title", namespace = "urn:vpro:ws:image:2009", required = true)
     private String title;
 
-    @XmlElement(name = "description", namespace = "urn:vpro:ws:image:2009", required = true)
     private String description;
 
-    @XmlElement(name = "type", namespace = "urn:vpro:ws:image:2009", required = true)
     private ImageType type;
 
-
-    // the set ContentType from the client is not communicated, see also:
-    // https://issues.jboss.org/browse/JBWS-3074
-    @XmlElement(name = "data", namespace = "urn:vpro:ws:image:2009", required = true)
-    @XmlMimeType("application/octet-stream")
     private DataHandler data;
 
     public UploadRequest() {
@@ -44,7 +36,8 @@ public class UploadRequest {
         this.data = data;
     }
 
-	public String getTitle() {
+    @XmlElement(name = "title", namespace = "urn:vpro:ws:image:2009", required = true)
+    public String getTitle() {
         return title;
     }
 
@@ -52,6 +45,7 @@ public class UploadRequest {
         this.title = title;
     }
 
+    @XmlElement(name = "description", namespace = "urn:vpro:ws:image:2009", required = true)
     public String getDescription() {
         return description;
     }
@@ -60,6 +54,7 @@ public class UploadRequest {
         this.description = description;
     }
 
+    @XmlElement(name = "type", namespace = "urn:vpro:ws:image:2009", required = true)
     public ImageType getType() {
         return type;
     }
@@ -68,6 +63,10 @@ public class UploadRequest {
         this.type = type;
     }
 
+    // the set ContentType from the client is not communicated, see also:
+    // https://issues.jboss.org/browse/JBWS-3074
+    @XmlElement(name = "data", namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlMimeType("application/octet-stream")
     public DataHandler getData() {
         return data;
     }
