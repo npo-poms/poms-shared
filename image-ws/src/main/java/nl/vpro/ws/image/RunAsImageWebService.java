@@ -174,6 +174,6 @@ public interface RunAsImageWebService {
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "url", targetNamespace = "") String url);
-	
-	
+
+
 }
