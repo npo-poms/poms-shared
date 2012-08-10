@@ -7,7 +7,7 @@ package nl.vpro.ws.image;
 import javax.xml.ws.WebFault;
 
 @WebFault(name = "downloadFault", targetNamespace = "urn:vpro:ws:image:2009")
-public class DownloadFault extends Exception {
+public class DownloadFault extends RuntimeException {
 
     private ImageNotFound faultInfo;
 
