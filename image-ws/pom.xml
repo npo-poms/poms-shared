@@ -9,7 +9,7 @@
 
   <groupId>nl.vpro.image</groupId>
   <artifactId>image-ws</artifactId>
-  <version>1.5-SNAPSHOT</version>
+  <version>1.6-SNAPSHOT</version>
 
   <name>image-ws</name>
   <description>Images Webservices API</description>
@@ -20,10 +20,4 @@
       <artifactId>image-domain</artifactId>
     </dependency>
   </dependencies>
-
-  <scm>
-    <connection>scm:svn:svn+ssh://onthemove.vpro.nl/export/svn/nl/vpro/images/branches/REL-1.5.1/image-ws</connection>
-    <developerConnection>scm:svn:svn+ssh://onthemove.vpro.nl/export/svn/nl/vpro/images/branches/REL-1.5.1/image-ws</developerConnection>
-    <url>https://subversion.vpro.nl/cgi-bin/viewvc.cgi/nl/vpro/images/branches/REL-1.5.1/image-ws</url>
-  </scm>
 </project>
