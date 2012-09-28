@@ -3,7 +3,7 @@
   <parent>
     <groupId>nl.publiekeomroep</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>1.5.0</version>
+    <version>1.6-SNAPSHOT</version>
   </parent>
 
   <artifactId>poms-shared</artifactId>
@@ -22,11 +22,7 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-beans</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.apache.cxf</groupId>
-      <artifactId>cxf-bundle</artifactId>
-    </dependency>
-    <dependency>
+   <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
     </dependency>
@@ -41,10 +37,20 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.easytesting</groupId>
       <artifactId>fest-assert</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
     </dependency>
   </dependencies>
 
