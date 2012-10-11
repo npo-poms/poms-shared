@@ -5,6 +5,7 @@ import java.io.OutputStream;
 /**
  * Executor for external commands.
  * @author Michiel Meeuwissen
+ * @since 1.6
  */
 public interface CommandExecutor {
 

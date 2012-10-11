@@ -21,6 +21,7 @@ import nl.vpro.logging.LoggerOutputStream;
  * It makes calling that somewhat simpler and also implements an interface, for easier mocking in test cases.
  *
  * @author Michiel Meeuwissen
+ * @since 1.6
  */
 public class CommandExecutorImpl implements CommandExecutor {
 
