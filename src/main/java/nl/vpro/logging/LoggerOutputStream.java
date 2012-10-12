@@ -39,7 +39,7 @@ public abstract class LoggerOutputStream extends OutputStream {
         };
     }
 
-    private final boolean MAC = "\r".equals(System.getProperty("line.separator"));
+    private final boolean WINDOWS = "\n\r".equals(System.getProperty("line.separator"));
 
 
     final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -60,7 +60,9 @@ public abstract class LoggerOutputStream extends OutputStream {
                 log();
                 break;
             case '\r':
-                if (MAC) log(); // I think even macs use \n now, but well
+                if (! WINDOWS) {
+                    log();
+                }
                 break;
             default:
                 buffer.write(b);
