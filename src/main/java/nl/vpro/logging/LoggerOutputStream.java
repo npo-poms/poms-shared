@@ -39,12 +39,11 @@ public abstract class LoggerOutputStream extends OutputStream {
         };
     }
 
-    private final boolean WINDOWS = "\n\r".equals(System.getProperty("line.separator"));
-
 
     final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     final Logger log;
     final boolean skipEmptyLines;
+    int lastChar = -1;
 
     LoggerOutputStream(Logger log, boolean skipEmptyLines) {
         this.log = log;
@@ -60,13 +59,14 @@ public abstract class LoggerOutputStream extends OutputStream {
                 log();
                 break;
             case '\r':
-                if (! WINDOWS) {
+                if (lastChar != '\n') {
                     log();
                 }
                 break;
             default:
                 buffer.write(b);
         }
+        lastChar = b;
     }
 
     @Override
