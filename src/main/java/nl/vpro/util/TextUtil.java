@@ -4,6 +4,10 @@
  */
 package nl.vpro.util;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -104,5 +108,27 @@ public class TextUtil {
                     replaceNonBreakingSpace(
                         replaceHtmlEscapedNonBreakingSpace(
                             unescapeHtml(input))))));
+    }
+
+    private static final Set<String> DUTCH_PARTICLES =
+        new HashSet<String>(Arrays.asList("de", "het", "een"));
+
+    public static String getLexico(String title, Locale locale) {
+        if ("nl".equals(locale.getLanguage())) {
+            for (String particle : DUTCH_PARTICLES) {
+                if (title.toLowerCase().matches(particle + "\\b.*")) {
+                    String start = title.substring(0, particle.length());
+                    boolean uppercase = title.toUpperCase().equals(title);
+                    StringBuilder b = new StringBuilder(title.substring(particle.length()).trim()).append(", ").append(uppercase ? start.toUpperCase() : start.toLowerCase());
+                    if (Character.isUpperCase(start.charAt(0))) {
+                        b.setCharAt(0, Character.toTitleCase(b.charAt(0)));
+                    }
+                    return b.toString();
+                }
+            }
+            return title;
+        } else {
+            return title;
+        }
     }
 }

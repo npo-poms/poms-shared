@@ -5,6 +5,7 @@
 package nl.vpro.util;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Locale;
 
 import org.junit.Test;
 
@@ -108,5 +109,14 @@ public class TextUtilTest {
     public void testSanitizeUnicodeChar() throws UnsupportedEncodingException {
         String result = sanitize("KRO De Re&#252;nie");
         assertThat(result.getBytes("UTF8")).isEqualTo("KRO De Reünie".getBytes("UTF8"));
+    }
+
+    @Test
+    public void testLexico() throws UnsupportedEncodingException {
+        assertThat(TextUtil.getLexico("Het grote huis", new Locale("nl", "NL"))).isEqualTo("Grote huis, het");
+        assertThat(TextUtil.getLexico("het grote huis", new Locale("nl", "NL"))).isEqualTo("grote huis, het");
+        assertThat(TextUtil.getLexico("HET GROTE HUIS", new Locale("nl", "NL"))).isEqualTo("GROTE HUIS, HET");
+        assertThat(TextUtil.getLexico("Daar gaat ie weer", new Locale("nl", "NL"))).isEqualTo("Daar gaat ie weer");
+        assertThat(TextUtil.getLexico("Hete broodjes", new Locale("nl", "NL"))).isEqualTo("Hete broodjes");
     }
 }
