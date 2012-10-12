@@ -114,9 +114,30 @@ public class TextUtilTest {
     @Test
     public void testLexico() throws UnsupportedEncodingException {
         assertThat(TextUtil.getLexico("Het grote huis", new Locale("nl", "NL"))).isEqualTo("Grote huis, het");
+    }
+
+    @Test
+    public void testLexicoLowercase() throws UnsupportedEncodingException {
         assertThat(TextUtil.getLexico("het grote huis", new Locale("nl", "NL"))).isEqualTo("grote huis, het");
+    }
+
+    @Test
+    public void testLexicoUppercase() throws UnsupportedEncodingException {
         assertThat(TextUtil.getLexico("HET GROTE HUIS", new Locale("nl", "NL"))).isEqualTo("GROTE HUIS, HET");
+    }
+
+    @Test
+    public void testLexicoOtherwise() throws UnsupportedEncodingException {
         assertThat(TextUtil.getLexico("Daar gaat ie weer", new Locale("nl", "NL"))).isEqualTo("Daar gaat ie weer");
+    }
+
+    @Test
+    public void testLexicoNoWrdboundary() throws UnsupportedEncodingException {
         assertThat(TextUtil.getLexico("Hete broodjes", new Locale("nl", "NL"))).isEqualTo("Hete broodjes");
+    }
+
+    @Test
+    public void testLexicoParticleOnly() throws UnsupportedEncodingException {
+        assertThat(TextUtil.getLexico("Het", new Locale("nl", "NL"))).isEqualTo("Het");
     }
 }
