@@ -110,14 +110,17 @@ public class TextUtil {
                             unescapeHtml(input))))));
     }
 
-    private static final Set<Pattern> DUTCH_PARTICLES =
+    private static Set<Pattern> DUTCH_PARTICLES =
         new HashSet<Pattern>(
             Arrays.asList(
-                Pattern.compile("(?i)^(de)\\b.+"),
-                Pattern.compile("(?i)^(het)\\b.+"),
-                Pattern.compile("(?i)^(een)\\b.+")
+                getPattern("de"),
+                getPattern("het"),
+                getPattern("een")
                 /*, "'t", "'n" ?*/
             ));
+    private static Pattern getPattern(String particle) {
+        return Pattern.compile("(?i)^(" + particle + ")\\b.+");
+    }
 
     public static String getLexico(String title, Locale locale) {
         if ("nl".equals(locale.getLanguage())) {
