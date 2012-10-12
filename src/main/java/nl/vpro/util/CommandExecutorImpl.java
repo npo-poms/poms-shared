@@ -36,7 +36,7 @@ public class CommandExecutorImpl implements CommandExecutor {
 
     @Override
     public void execute(String... args) {
-        execute(LoggerOutputStream.info(LOG), args);
+        execute(LoggerOutputStream.info(getLogger()), args);
     }
     @Override
     public void execute(OutputStream out, String... args) {
@@ -49,7 +49,7 @@ public class CommandExecutorImpl implements CommandExecutor {
             LOG.info("Executing " + command);
             p = pb.start();
             Copier copier       = copyThread(p.getInputStream(), out);
-            OutputStream errors = LoggerOutputStream.error(LOG, true);
+            OutputStream errors = LoggerOutputStream.error(getLogger(), true);
             Copier errorCopier  = copyThread(p.getErrorStream(), errors);
             p.waitFor();
             copier.waitFor();
@@ -65,6 +65,11 @@ public class CommandExecutorImpl implements CommandExecutor {
             LOG.error(e.getMessage(), e);
             throw new RuntimeException(e);
         }
+    }
+
+    private Logger getLogger() {
+        return LoggerFactory.getLogger(CommandExecutorImpl.class +
+            ("." + binary).replaceAll("[\\/\\.\\\\]+", "."));
     }
 
 
