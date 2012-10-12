@@ -110,16 +110,24 @@ public class TextUtil {
                             unescapeHtml(input))))));
     }
 
-    private static final Set<String> DUTCH_PARTICLES =
-        new HashSet<String>(Arrays.asList("de", "het", "een"));
+    private static final Set<Pattern> DUTCH_PARTICLES =
+        new HashSet<Pattern>(
+            Arrays.asList(
+                Pattern.compile("(?i)^(de)\\b.+"),
+                Pattern.compile("(?i)^(het)\\b.+"),
+                Pattern.compile("(?i)^(een)\\b.+")
+                /*, "'t", "'n" ?*/
+            ));
 
     public static String getLexico(String title, Locale locale) {
         if ("nl".equals(locale.getLanguage())) {
-            for (String particle : DUTCH_PARTICLES) {
-                if (title.toLowerCase().matches(particle + "\\b.+")) {
-                    String start = title.substring(0, particle.length());
+            for (Pattern particle : DUTCH_PARTICLES) {
+                Matcher matcher = particle.matcher(title);
+                if (matcher.matches()) {
+                    int matchLength = matcher.group(1).length();
+                    String start = title.substring(0, matchLength);
                     boolean uppercase = title.toUpperCase().equals(title);
-                    StringBuilder b = new StringBuilder(title.substring(particle.length()).trim()).append(", ").append(uppercase ? start.toUpperCase() : start.toLowerCase());
+                    StringBuilder b = new StringBuilder(title.substring(matchLength).trim()).append(", ").append(uppercase ? start.toUpperCase() : start.toLowerCase());
                     if (Character.isUpperCase(start.charAt(0))) {
                         b.setCharAt(0, Character.toTitleCase(b.charAt(0)));
                     }
