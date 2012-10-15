@@ -123,6 +123,7 @@ public class TextUtil {
     }
 
     public static String getLexico(String title, Locale locale) {
+        // Deze code staat ook als javascript in media-server/src/main/webapp/vpro/media/1.0/util/format.js
         if ("nl".equals(locale.getLanguage())) {
             for (Pattern particle : DUTCH_PARTICLES) {
                 Matcher matcher = particle.matcher(title);
