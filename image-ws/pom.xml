@@ -19,5 +19,10 @@
       <groupId>nl.vpro.image</groupId>
       <artifactId>image-domain</artifactId>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>shared-ws</artifactId>
+      <version>0.9</version>
+    </dependency>
   </dependencies>
 </project>
