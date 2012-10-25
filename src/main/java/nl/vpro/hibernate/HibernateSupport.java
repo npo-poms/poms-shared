@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.support;
+package nl.vpro.hibernate;
 
 
 import org.hibernate.Session;
