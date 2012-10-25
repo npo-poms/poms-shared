@@ -13,7 +13,7 @@ import org.hibernate.type.descriptor.java.AbstractTypeDescriptor;
  *
  * @author Michiel Meeuwissen
  */
-public class URITypeDescriptor extends AbstractTypeDescriptor<URI> {
+class URITypeDescriptor extends AbstractTypeDescriptor<URI> {
     public static final URITypeDescriptor INSTANCE = new URITypeDescriptor();
 
     public URITypeDescriptor() {
