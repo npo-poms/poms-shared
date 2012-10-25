@@ -35,11 +35,11 @@ public class CommandExecutorImpl implements CommandExecutor {
 
 
     @Override
-    public void execute(String... args) {
-        execute(LoggerOutputStream.info(getLogger()), args);
+    public int execute(String... args) {
+        return execute(LoggerOutputStream.info(getLogger()), args);
     }
     @Override
-    public void execute(OutputStream out, String... args) {
+    public int execute(OutputStream out, String... args) {
         final List<String> command = new ArrayList<String>();
         command.add(binary);
         ProcessBuilder pb = new ProcessBuilder(command);
@@ -59,6 +59,7 @@ public class CommandExecutorImpl implements CommandExecutor {
             }
             out.flush();
             errors.close();
+            return p.exitValue();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -68,7 +69,7 @@ public class CommandExecutorImpl implements CommandExecutor {
     }
 
     private Logger getLogger() {
-        return LoggerFactory.getLogger(CommandExecutorImpl.class +
+        return LoggerFactory.getLogger(CommandExecutorImpl.class.getName() +
             ("." + binary).replaceAll("[\\/\\.\\\\]+", "."));
     }
 
