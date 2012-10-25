@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2010 All rights reserved VPRO The Netherlands
  */
-package nl.vpro.lucene.media;
+package nl.vpro.lucene;
 
 import java.io.Reader;
 import java.util.Arrays;
