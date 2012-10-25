@@ -23,6 +23,6 @@ public interface CommandExecutor {
      * @param args
      * @return The exit code
      */
-    int execute(OutputStream out, String... args);
+    int execute(OutputStream out, OutputStream error, String... args);
 
 }

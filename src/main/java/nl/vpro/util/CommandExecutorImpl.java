@@ -36,10 +36,11 @@ public class CommandExecutorImpl implements CommandExecutor {
 
     @Override
     public int execute(String... args) {
-        return execute(LoggerOutputStream.info(getLogger()), args);
+        return execute(LoggerOutputStream.info(getLogger()), LoggerOutputStream.error(getLogger()),  args);
     }
+
     @Override
-    public int execute(OutputStream out, String... args) {
+    public int execute(OutputStream out, OutputStream errors, String... args) {
         final List<String> command = new ArrayList<String>();
         command.add(binary);
         ProcessBuilder pb = new ProcessBuilder(command);
@@ -49,17 +50,17 @@ public class CommandExecutorImpl implements CommandExecutor {
             LOG.info("Executing " + command);
             p = pb.start();
             Copier copier       = copyThread(p.getInputStream(), out);
-            OutputStream errors = LoggerOutputStream.error(getLogger(), true);
             Copier errorCopier  = copyThread(p.getErrorStream(), errors);
             p.waitFor();
             copier.waitFor();
             errorCopier.waitFor();
-            if (errorCopier.getCount() > 0) {
-                throw new IllegalArgumentException("Error occurred while calling " + command + " (see log)");
+            int result = p.exitValue();
+            if (result != 0) {
+                LOG.error("Error occurred while calling " + command + " (see log)");
             }
             out.flush();
             errors.close();
-            return p.exitValue();
+            return result;
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
