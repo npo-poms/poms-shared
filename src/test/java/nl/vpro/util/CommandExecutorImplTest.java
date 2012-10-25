@@ -15,7 +15,7 @@ public class CommandExecutorImplTest {
     public void execute() {
         CommandExecutorImpl instance = new CommandExecutorImpl("/usr/bin/env");
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        instance.execute(out, "echo", "hoi");
+        instance.execute(out, null, "echo", "hoi");
         assertEquals("hoi\n", new String(out.toByteArray()));
 
         instance.execute("echo", "hoi");

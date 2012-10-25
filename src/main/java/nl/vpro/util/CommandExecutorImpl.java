@@ -36,11 +36,14 @@ public class CommandExecutorImpl implements CommandExecutor {
 
     @Override
     public int execute(String... args) {
-        return execute(LoggerOutputStream.info(getLogger()), LoggerOutputStream.error(getLogger()),  args);
+        return execute(LoggerOutputStream.info(getLogger()), null,  args);
     }
 
     @Override
     public int execute(OutputStream out, OutputStream errors, String... args) {
+        if (errors == null) {
+            errors = LoggerOutputStream.error(getLogger());
+        }
         final List<String> command = new ArrayList<String>();
         command.add(binary);
         ProcessBuilder pb = new ProcessBuilder(command);
