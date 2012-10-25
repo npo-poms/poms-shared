@@ -9,7 +9,7 @@ import org.hibernate.type.StringType;
 import org.hibernate.type.descriptor.sql.VarcharTypeDescriptor;
 
 /**
- * A type that maps between {@link java.sql.Types#VARCHAR VARCHAR} and {@link java.net.URL}
+ * A type that maps between {@link java.sql.Types#VARCHAR VARCHAR} and {@link java.net.URI}
  *
  * @author Michiel Meeuwissen
  */
