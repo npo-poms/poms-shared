@@ -72,9 +72,15 @@ public class CommandExecutorImpl implements CommandExecutor {
         }
     }
 
-    private Logger getLogger() {
-        return LoggerFactory.getLogger(CommandExecutorImpl.class.getName() +
-            ("." + binary).replaceAll("[\\/\\.\\\\]+", "."));
+    Logger getLogger() {
+        String[] split = binary.split("[\\/\\.\\\\]+");
+        StringBuilder category = new StringBuilder(CommandExecutorImpl.class.getName());
+        for (int i = split.length -1; i >=0; i-- ) {
+            if (split[i].length() > 0) {
+                category.append('.').append(split[i]);
+            }
+        }
+        return LoggerFactory.getLogger(category.toString());
     }
 
 
