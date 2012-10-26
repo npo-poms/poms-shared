@@ -2,18 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>nl.publiekeomroep</groupId>
-    <artifactId>poms-parent</artifactId>
+    <artifactId>poms-shared-parent</artifactId>
     <version>1.6-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-
   <artifactId>poms-shared</artifactId>
-  <version>1.6-SNAPSHOT</version>
-
-  <scm>
-   <connection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/trunk</connection>
-   <developerConnection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/trunk</developerConnection>
-   <url>https://subversion.vpro.nl/cgi-bin/viewvc.cgi/trunk</url>
- </scm>
 
   <properties>
   </properties>
