@@ -42,7 +42,7 @@ public class CommandExecutorImpl implements CommandExecutor {
     @Override
     public int execute(OutputStream out, OutputStream errors, String... args) {
         if (errors == null) {
-            errors = LoggerOutputStream.error(getLogger());
+            errors = LoggerOutputStream.error(getLogger(), true);
         }
         final List<String> command = new ArrayList<String>();
         command.add(binary);

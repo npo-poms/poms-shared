@@ -56,11 +56,11 @@ public abstract class LoggerOutputStream extends OutputStream {
     public void write(int b) {
         switch(b) {
             case '\n':
-                log();
+                log(skipEmptyLines);
                 break;
             case '\r':
                 if (lastChar != '\n') {
-                    log();
+                    log(skipEmptyLines);
                 }
                 break;
             default:
@@ -72,12 +72,12 @@ public abstract class LoggerOutputStream extends OutputStream {
     @Override
     public void close() throws IOException {
         super.close();
-        log();
+        log(true);
     }
 
-    private void log() {
+    private void log(boolean skipEmpty) {
         String line = buffer.toString();
-        if (!skipEmptyLines || !StringUtils.isBlank(line)) {
+        if (!skipEmpty || !StringUtils.isBlank(line)) {
             log(line);
         }
         buffer.reset();

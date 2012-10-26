@@ -15,7 +15,7 @@ public class LoggerOutputStreamTest {
     @Test
     public void test() throws IOException {
         String testString = "bla bla\n\nbloe bloe ";
-        final StringBuffer buf = new StringBuffer();
+        final StringBuilder buf = new StringBuilder();
         LoggerOutputStream instance = new LoggerOutputStream(null, false) {
             @Override
             void log(String line) {
