@@ -59,7 +59,7 @@ public class CommandExecutorImpl implements CommandExecutor {
             errorCopier.waitFor();
             int result = p.exitValue();
             if (result != 0) {
-                LOG.error("Error occurred while calling " + command + " (see log)");
+                LOG.error("Error {} occurred while calling {}  (see log)", result, command);
             }
             out.flush();
             errors.close();
