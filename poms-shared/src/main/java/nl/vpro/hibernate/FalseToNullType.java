@@ -63,8 +63,7 @@ public class FalseToNullType implements UserType {
 
     @Override
     public Object deepCopy(Object value) throws HibernateException {
-        System.out.println("--");
-        return null;//To change body of implemented methods Settings | File Templates.
+        return value;
     }
 
     @Override
