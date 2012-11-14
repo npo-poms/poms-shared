@@ -11,9 +11,9 @@
   <packaging>pom</packaging>
 
   <scm>
-   <connection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/branches/REL-1.7-SNAPSHOT</connection>
-   <developerConnection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/branches/REL-1.7-SNAPSHOT</developerConnection>
-   <url>https://subversion.vpro.nl/cgi-bin/viewvc.cgi/branches/REL-1.7-SNAPSHOT</url>
+   <connection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/branches/REL-1.7.0-SNAPSHOT</connection>
+   <developerConnection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/branches/REL-1.7.0-SNAPSHOT</developerConnection>
+   <url>https://subversion.vpro.nl/cgi-bin/viewvc.cgi/branches/REL-1.7.0-SNAPSHOT</url>
  </scm>
  <modules>
    <module>poms-shared</module>
