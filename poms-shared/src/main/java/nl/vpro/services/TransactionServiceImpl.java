@@ -19,4 +19,18 @@ public class TransactionServiceImpl implements TransactionService {
     public void executeInNewTransaction(Runnable runnable) {
         runnable.run();
     }
+
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    public <T> T executeInReadonlyTransaction(Callable<T> callable) throws Exception {
+        return callable.call();
+    }
+
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
+    public void executeInReadonlyTransaction(Runnable runnable) {
+        runnable.run();
+    }
 }

@@ -18,6 +18,11 @@ public interface TransactionService {
      */
     <T> T executeInNewTransaction(Callable<T> callable) throws Exception;
 
-    void  executeInNewTransaction(Runnable runnable) throws Exception;
+    void  executeInNewTransaction(Runnable runnable);
+
+    <T> T executeInReadonlyTransaction(Callable<T> callable) throws Exception;
+
+    void executeInReadonlyTransaction(Runnable runnable);
+
 
 }
