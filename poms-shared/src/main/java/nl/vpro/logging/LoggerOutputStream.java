@@ -39,6 +39,19 @@ public abstract class LoggerOutputStream extends OutputStream {
         };
     }
 
+    public static LoggerOutputStream warn(Logger log) {
+        return warn(log, false);
+    }
+
+    public static LoggerOutputStream warn(Logger log, boolean skipEmptyLines) {
+        return new LoggerOutputStream(log, skipEmptyLines) {
+            @Override
+            void log(String line) {
+                log.warn(line);
+            }
+        };
+    }
+
 
     final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
     final Logger log;
