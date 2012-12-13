@@ -1,5 +1,6 @@
 package nl.vpro.util;
 
+import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
@@ -24,5 +25,14 @@ public interface CommandExecutor {
      * @return The exit code
      */
     int execute(OutputStream out, OutputStream error, String... args);
+
+
+    /**
+     * Executes the command
+     *
+     * @param out Stdout of the command will be written to this. (stderr is logged to error)
+     * @return The exit code
+     */
+    int execute(InputStream in, OutputStream out, OutputStream error, String... args);
 
 }

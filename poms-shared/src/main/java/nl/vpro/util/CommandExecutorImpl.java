@@ -46,6 +46,11 @@ public class CommandExecutorImpl implements CommandExecutor {
 
     @Override
     public int execute(final OutputStream out, OutputStream errors, String... args) {
+        return execute(null, out, errors,  args);
+    }
+
+    @Override
+    public int execute(final InputStream in, final OutputStream out, OutputStream errors, String... args) {
         if (errors == null) {
             errors = LoggerOutputStream.error(getLogger(), true);
         }
@@ -57,14 +62,21 @@ public class CommandExecutorImpl implements CommandExecutor {
             Collections.addAll(command, args);
             LOG.info("Executing " + command);
             p = pb.start();
+
             final ProcessTimeoutHandle handle;
             if (processTimeout > 0l) {
                 handle = startProcessTimeoutMonitor(p, "" + command, processTimeout * 1000);
             } else {
                 handle = null;
             }
+            Copier inputCopier= in != null ? copyThread(in, p.getOutputStream()) : null;
+
             Copier copier       = out != null ? copyThread(p.getInputStream(), out) : null;
             Copier errorCopier  = copyThread(p.getErrorStream(), errors);
+            if (inputCopier != null) {
+                inputCopier.waitFor();
+                p.getOutputStream().close();
+            }
             p.waitFor();
             if (copier != null) {
                 copier.waitFor();
