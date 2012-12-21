@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
  * An extension of {@link PropertyPlaceholderConfigurer} that only exposes the map of properties (for use in e.g. JSP).
@@ -36,16 +37,18 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
     }
 
     public void setExposeAsSystemProperty(String properties) {
-        systemProperties = properties.split(",");
+        systemProperties = properties.split("\\s*,\\s*");
     }
 
     private void initMap(Properties props) {
+        PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper(
+            placeholderPrefix, placeholderSuffix, valueSeparator, ignoreUnresolvablePlaceholders);
         propertiesMap = new HashMap<String, String>();
         for(Object key : props.keySet()) {
             String keyStr = key.toString();
-            propertiesMap.put(
-                keyStr,
-                resolvePlaceholder(keyStr, props));
+            String value = props.getProperty(keyStr);
+            String v = helper.replacePlaceholders(value, props);
+            propertiesMap.put(keyStr, v);
         }
     }
 
