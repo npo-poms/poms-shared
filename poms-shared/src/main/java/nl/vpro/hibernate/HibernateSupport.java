@@ -19,6 +19,10 @@ public class HibernateSupport {
 
 //    private TransactionTemplate transactionTemplate;
 
+    protected SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
     protected Session getSession() {
         return sessionFactory.getCurrentSession();
     }
