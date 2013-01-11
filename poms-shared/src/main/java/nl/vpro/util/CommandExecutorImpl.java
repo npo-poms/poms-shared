@@ -17,10 +17,8 @@ import nl.vpro.logging.LoggerOutputStream;
 /**
  * Wrapper around ProcessorBuilder
  * It makes calling that somewhat simpler and also implements an interface, for easier mocking in test cases.
- * It supports a timeout, for implicit killing the process if it takes to long. It also can wrap stderr to log that as errors.
- * It does not yet support anything for stdin (but that would be easy to add)
- *
- * @author Michiel Meeuwissen
+ * It supports a timeout, for implicit killing the process if it takes too long. It also can wrap stderr to log that as errors.
+  * @author Michiel Meeuwissen
  * @since 1.6
  */
 public class CommandExecutorImpl implements CommandExecutor {

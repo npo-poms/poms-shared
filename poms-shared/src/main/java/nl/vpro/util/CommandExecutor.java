@@ -5,6 +5,7 @@ import java.io.OutputStream;
 
 /**
  * Executor for external commands.
+ *
  * @author Michiel Meeuwissen
  * @since 1.6
  */
@@ -20,6 +21,7 @@ public interface CommandExecutor {
 
     /**
      * Executes the command
+     *
      * @param out Stdout of the command will be written to this. (stderr is logged to error)
      * @param args
      * @return The exit code
@@ -30,7 +32,9 @@ public interface CommandExecutor {
     /**
      * Executes the command
      *
-     * @param out Stdout of the command will be written to this. (stderr is logged to error)
+     * @param in  Stdin of the command will be taken from this.
+     * @param out Stdout of the command will be written to this.
+     * @param error Stder of the command will be written to this.
      * @return The exit code
      */
     int execute(InputStream in, OutputStream out, OutputStream error, String... args);
