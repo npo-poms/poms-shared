@@ -3,17 +3,14 @@ package nl.vpro.util;
 import java.util.*;
 
 /**
+ * Extension of properties that remembers insertion order.
  * @author Michiel Meeuwissen
  * @since 1.8
  */
 public class OrderedProperties extends Properties {
 
-    private final List<Object> names;
+    private final List<Object> names = new ArrayList<Object>();
 
-    public OrderedProperties() {
-        super();
-        names = new ArrayList<Object>();
-    }
 
     @Override
     public Enumeration propertyNames() {
@@ -56,9 +53,7 @@ public class OrderedProperties extends Properties {
 
     @Override
     public Object put(Object key, Object value) {
-        if (names.contains(key)) {
-            names.remove(key);
-        }
+        names.remove(key);
         names.add(key);
 
         return super.put(key, value);
