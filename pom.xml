@@ -8,13 +8,13 @@
   </parent>
 
   <artifactId>poms-shared-parent</artifactId>
-  <version>1.8.0</version>
+  <version>1.8.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <scm>
-   <connection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/tags/REL-1.8.0</connection>
-   <developerConnection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/tags/REL-1.8.0</developerConnection>
-   <url>https://subversion.vpro.nl/cgi-bin/viewvc.cgi/tags/REL-1.8.0</url>
+   <connection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/branches/REL-1.8-SNAPSHOT</connection>
+   <developerConnection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/branches/REL-1.8-SNAPSHOT</developerConnection>
+   <url>https://subversion.vpro.nl/cgi-bin/viewvc.cgi/branches/REL-1.8-SNAPSHOT</url>
  </scm>
 
  <modules>
