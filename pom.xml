@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.publiekeomroep</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <version>1.9-SNAPSHOT</version>
   </parent>
 
   <artifactId>poms-shared-parent</artifactId>
