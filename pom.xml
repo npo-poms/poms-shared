@@ -8,8 +8,9 @@
   </parent>
 
   <artifactId>poms-shared-parent</artifactId>
-  <version>1.9-SNAPSHOT</version>
   <packaging>pom</packaging>
+
+  <name>poms-shared-parent</name>
 
   <scm>
    <connection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/trunk</connection>
