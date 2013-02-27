@@ -34,8 +34,12 @@ public class FalseToNullType implements UserType {
 
     @Override
     public boolean equals(Object x, Object y) throws HibernateException {
-        if (x == null && y == null) return true;
-        if (x == null && y.equals(Boolean.FALSE)) return true;
+        if(x == null) {
+            x = Boolean.FALSE;
+        }
+        if(y == null) {
+            y = Boolean.FALSE;
+        }
         return x.equals(y);
 
     }
