@@ -1,5 +1,10 @@
 package nl.vpro.util;
 
+import nl.vpro.logging.LoggerOutputStream;
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -7,12 +12,6 @@ import java.util.*;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import nl.vpro.logging.LoggerOutputStream;
 
 /**
  * Wrapper around ProcessorBuilder
@@ -123,12 +122,17 @@ public class CommandExecutorImpl implements CommandExecutor {
     }
 
     private static final ThreadPoolExecutor copyExecutor =
-        new ThreadPoolExecutor(2, 2000, 60, TimeUnit.SECONDS,
+        new ThreadPoolExecutor(0, 2000, 60, TimeUnit.SECONDS,
             new SynchronousQueue<Runnable>(),
             ThreadPools.createThreadFactory(
                 CommandExecutorImpl.class.getName() + "-Copier",
                 false,
                 Thread.NORM_PRIORITY));
+
+
+	public static void shutdown() {
+		copyExecutor.shutdown();
+	}
 
 
     private  static class Copier implements Runnable {
