@@ -1,11 +1,11 @@
 package nl.vpro.logging;
 
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
 
 /**
  * Wraps a {@link Logger} in an {@link OutputStream}, making logging available as an outputstream, which can be useful for things that accept outputstreams (e.g. external processes)
@@ -51,6 +51,19 @@ public abstract class LoggerOutputStream extends OutputStream {
             }
         };
     }
+
+	public static LoggerOutputStream debug(Logger log) {
+		return debug(log, false);
+	}
+
+	public static LoggerOutputStream debug(Logger log, boolean skipEmptyLines) {
+		return new LoggerOutputStream(log, skipEmptyLines) {
+			@Override
+			void log(String line) {
+				log.debug(line);
+			}
+		};
+	}
 
 
     final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
