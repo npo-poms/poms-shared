@@ -1,6 +1,9 @@
 package nl.vpro.util;
 
+import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Utilities related to ThreadPools
@@ -33,4 +36,17 @@ public final class ThreadPools {
         };
     }
 
+	static final ThreadPoolExecutor copyExecutor =
+			new ThreadPoolExecutor(0, 2000, 60, TimeUnit.SECONDS,
+					new SynchronousQueue<Runnable>(),
+					ThreadPools.createThreadFactory(
+							"nl.vpro-util-Copier",
+							false,
+							Thread.NORM_PRIORITY));
+
+
+	public static void shutdown() {
+		copyExecutor.shutdown();
+	}
 }
+

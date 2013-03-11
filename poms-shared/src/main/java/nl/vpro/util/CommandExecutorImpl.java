@@ -2,16 +2,15 @@ package nl.vpro.util;
 
 import nl.vpro.logging.LoggerOutputStream;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.*;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Wrapper around ProcessorBuilder
@@ -34,6 +33,16 @@ public class CommandExecutorImpl implements CommandExecutor {
     public CommandExecutorImpl(String c) {
         binary = c;
     }
+	public CommandExecutorImpl(File f) {
+		if (!f.exists()) {
+			throw new RuntimeException("Executable " + f.getAbsolutePath() + " not found!");
+		}
+		if (!f.canExecute()) {
+			throw new RuntimeException("Executable " + f.getAbsolutePath() + " is not executable!");
+		}
+		binary = f.getAbsolutePath();
+
+	}
 
 
     @Override
@@ -57,7 +66,7 @@ public class CommandExecutorImpl implements CommandExecutor {
         Process p;
         try {
             Collections.addAll(command, args);
-            LOG.info("Executing {}", command);
+            LOG.info("Executing {}", StringUtils.join(command, " "));
             p = pb.start();
 
             final ProcessTimeoutHandle handle;
@@ -86,7 +95,7 @@ public class CommandExecutorImpl implements CommandExecutor {
             if (out != null) {
                 out.flush();
             }
-            errors.close();
+            errors.flush();
             if (handle != null) {
                 handle.cancel();
             }
@@ -117,22 +126,11 @@ public class CommandExecutorImpl implements CommandExecutor {
 
     protected Copier copyThread(InputStream in, OutputStream out) {
         Copier copier = new Copier(in, out);
-        copyExecutor.execute(copier);
+        ThreadPools.copyExecutor.execute(copier);
         return copier;
     }
 
-    private static final ThreadPoolExecutor copyExecutor =
-        new ThreadPoolExecutor(0, 2000, 60, TimeUnit.SECONDS,
-            new SynchronousQueue<Runnable>(),
-            ThreadPools.createThreadFactory(
-                CommandExecutorImpl.class.getName() + "-Copier",
-                false,
-                Thread.NORM_PRIORITY));
 
-
-	public static void shutdown() {
-		copyExecutor.shutdown();
-	}
 
 
     private  static class Copier implements Runnable {
