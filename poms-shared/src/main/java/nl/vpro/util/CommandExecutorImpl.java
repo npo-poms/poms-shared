@@ -2,7 +2,6 @@ package nl.vpro.util;
 
 import nl.vpro.logging.LoggerOutputStream;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +55,7 @@ public class CommandExecutorImpl implements CommandExecutor {
     }
 
     @Override
-    public int execute(final InputStream in, final OutputStream out, OutputStream errors, String... args) {
+    public int execute(InputStream in, final OutputStream out, OutputStream errors, String... args) {
         if (errors == null) {
             errors = LoggerOutputStream.error(getLogger(), true);
         }
@@ -66,7 +65,7 @@ public class CommandExecutorImpl implements CommandExecutor {
         Process p;
         try {
             Collections.addAll(command, args);
-            LOG.info("Executing {}", StringUtils.join(command, " "));
+            LOG.info("Executing {}", toString(command));
             p = pb.start();
 
             final ProcessTimeoutHandle handle;
@@ -75,7 +74,7 @@ public class CommandExecutorImpl implements CommandExecutor {
             } else {
                 handle = null;
             }
-            Copier inputCopier= in != null ? copyThread(in, p.getOutputStream()) : null;
+            Copier inputCopier  = in != null ? copyThread(in, p.getOutputStream()) : null;
 
             Copier copier       = out != null ? copyThread(p.getInputStream(), out) : null;
             Copier errorCopier  = copyThread(p.getErrorStream(), errors);
@@ -131,7 +130,18 @@ public class CommandExecutorImpl implements CommandExecutor {
     }
 
 
+    public static String toString(Iterable<String> args) {
+        StringBuilder builder = new StringBuilder();
+        for (String a : args) {
+            if (builder.length() > 0) builder.append(' ');
+            boolean needsQuotes = a.indexOf(' ') >= 0;
+            if (needsQuotes) builder.append('"');
+            builder.append(a.replaceAll("\"", "\\\""));
+            if (needsQuotes) builder.append('"');
+        }
+        return builder.toString();
 
+    }
 
     private  static class Copier implements Runnable {
         private boolean ready;
@@ -183,6 +193,8 @@ public class CommandExecutorImpl implements CommandExecutor {
         }
 
     }
+
+
 
     private static class ProcessTimeoutTask extends TimerTask {
         private final Process monitoredProcess;
