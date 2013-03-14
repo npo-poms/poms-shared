@@ -65,7 +65,7 @@ public class CommandExecutorImpl implements CommandExecutor {
         Process p;
         try {
             Collections.addAll(command, args);
-            LOG.info("Executing {}", toString(command));
+            LOG.info(toString(command));
             p = pb.start();
 
             final ProcessTimeoutHandle handle;
