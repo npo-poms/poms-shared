@@ -134,7 +134,7 @@ public class CommandExecutorImpl implements CommandExecutor {
         StringBuilder builder = new StringBuilder();
         for (String a : args) {
             if (builder.length() > 0) builder.append(' ');
-            boolean needsQuotes = a.indexOf(' ') >= 0;
+            boolean needsQuotes = a.indexOf(' ') >= 0 || a.indexOf('|') > 0;
             if (needsQuotes) builder.append('"');
             builder.append(a.replaceAll("\"", "\\\""));
             if (needsQuotes) builder.append('"');
