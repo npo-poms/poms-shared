@@ -61,6 +61,11 @@ public class TextUtilTest {
     }
 
     @Test
+    public void testPatternOnNewLine() {
+        assertThat(isValid("Text with newline\nbreak.")).isTrue();
+    }
+
+    @Test
     public void testSanitizePreserveInputWithSmallerThen() {
         assertThat(sanitize("a < b")).isEqualTo("a < b");
     }
@@ -88,6 +93,11 @@ public class TextUtilTest {
     @Test
     public void testSanitizeOnIllegalLineBreak() {
         assertThat(sanitize("Hello\u2028world")).isEqualTo("Hello world");
+    }
+
+    @Test
+    public void testSanitizeOnNewLine() {
+        assertThat(sanitize("Hello\nworld")).isEqualTo("Hello\nworld");
     }
 
     @Test
