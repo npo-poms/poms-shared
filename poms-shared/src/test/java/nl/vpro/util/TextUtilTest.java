@@ -96,11 +96,6 @@ public class TextUtilTest {
     }
 
     @Test
-    public void testSanitizeOnNewLine() {
-        assertThat(sanitize("Hello\nworld")).isEqualTo("Hello\nworld");
-    }
-
-    @Test
     public void testSanitizeOnHtmlEscapedNbsp() {
         assertThat(sanitize("Hello&nbsp;world")).isEqualTo("Hello world");
     }
