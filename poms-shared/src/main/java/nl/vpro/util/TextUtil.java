@@ -23,6 +23,8 @@ import org.jsoup.safety.Whitelist;
  */
 public class TextUtil {
 
+    Whitelist whitelist = Whitelist.none().addTags("\n");
+
     /**
      * Reusable pattern for matching text against illegal characters
      */
@@ -107,7 +109,12 @@ public class TextUtil {
                 replaceLineBreaks(
                     replaceNonBreakingSpace(
                         replaceHtmlEscapedNonBreakingSpace(
-                            unescapeHtml(input))))));
+                            unescapeHtml(input)
+                        )
+                    )
+                )
+            )
+        );
     }
 
     private static Set<Pattern> DUTCH_PARTICLES =
