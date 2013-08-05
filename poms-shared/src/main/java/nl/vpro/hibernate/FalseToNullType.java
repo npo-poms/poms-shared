@@ -11,6 +11,8 @@ import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
 /**
+ * TODO Not in use anymore?
+ *
  * @author Michiel Meeuwissen
  */
 public class FalseToNullType implements UserType {
