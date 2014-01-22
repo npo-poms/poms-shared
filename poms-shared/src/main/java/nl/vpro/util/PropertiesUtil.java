@@ -1,16 +1,16 @@
 package nl.vpro.util;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.util.PropertyPlaceholderHelper;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * An extension of {@link PropertyPlaceholderConfigurer} that only exposes the map of properties (for use in e.g. JSP).
@@ -41,13 +41,21 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
     }
 
     private void initMap(Properties props) {
+
+        Properties p = new Properties();
+        p.putAll(System.getProperties());
+        p.putAll(props);
+
         PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper(
             placeholderPrefix, placeholderSuffix, valueSeparator, ignoreUnresolvablePlaceholders);
+
+
         propertiesMap = new HashMap<String, String>();
-        for(Object key : props.keySet()) {
+        for(Object key : p.keySet()) {
             String keyStr = key.toString();
-            String value = props.getProperty(keyStr);
-            String v = helper.replacePlaceholders(value, props);
+            String value = p.getProperty(keyStr);
+            if (value == null && p.containsKey(keyStr)) value = "";
+            String v = helper.replacePlaceholders(value, p);
             propertiesMap.put(keyStr, v);
         }
     }
