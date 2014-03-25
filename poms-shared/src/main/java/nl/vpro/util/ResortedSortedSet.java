@@ -1,5 +1,6 @@
 package nl.vpro.util;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,7 +8,9 @@ import java.util.*;
  * @author Michiel Meeuwissen
  * @since 2.1
  */
-public class ResortedSortedSet<T> extends AbstractSet<T> implements SortedSet<T> {
+public class ResortedSortedSet<T> extends AbstractSet<T> implements SortedSet<T>, Serializable {
+
+    private static final long serialVersionUID = 0l;
 
     final Collection<T> wrapped;
     final SortedSet<T> set;
