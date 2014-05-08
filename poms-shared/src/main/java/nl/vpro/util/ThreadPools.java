@@ -36,7 +36,7 @@ public final class ThreadPools {
         };
     }
 
-	static final ThreadPoolExecutor copyExecutor =
+	public static final ThreadPoolExecutor copyExecutor =
 			new ThreadPoolExecutor(0, 2000, 60, TimeUnit.SECONDS,
 					new SynchronousQueue<Runnable>(),
 					ThreadPools.createThreadFactory(

@@ -1,15 +1,15 @@
 package nl.vpro.util;
 
-import nl.vpro.logging.LoggerOutputStream;
-import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.*;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import nl.vpro.logging.LoggerOutputStream;
 
 /**
  * Wrapper around ProcessorBuilder
@@ -59,7 +59,7 @@ public class CommandExecutorImpl implements CommandExecutor {
         if (errors == null) {
             errors = LoggerOutputStream.error(getLogger(), true);
         }
-        final List<String> command = new ArrayList<String>();
+        final List<String> command = new ArrayList<>();
         command.add(binary);
         ProcessBuilder pb = new ProcessBuilder(command);
         Process p;
@@ -123,7 +123,7 @@ public class CommandExecutorImpl implements CommandExecutor {
     }
 
 
-    protected Copier copyThread(InputStream in, OutputStream out) {
+    public static Copier copyThread(InputStream in, OutputStream out) {
         Copier copier = new Copier(in, out);
         ThreadPools.copyExecutor.execute(copier);
         return copier;
@@ -140,43 +140,6 @@ public class CommandExecutorImpl implements CommandExecutor {
             if (needsQuotes) builder.append('"');
         }
         return builder.toString();
-
-    }
-
-    private  static class Copier implements Runnable {
-        private boolean ready;
-        private long count = 0;
-        private final InputStream in;
-        private final OutputStream out;
-
-        public Copier(InputStream i, OutputStream o) {
-            in = i;
-            out = o;
-        }
-
-        @Override
-        public void run() {
-            try {
-                count = IOUtils.copy(in, out);
-            } catch (Throwable t) {
-                LOG.error("Connector " + toString() + ": " + t.getClass() + " " + t.getMessage());
-            }
-            synchronized (this) {
-                ready = true;
-                notifyAll();
-            }
-        }
-
-        public void waitFor() throws InterruptedException {
-            synchronized (this) {
-                while (!ready) wait();
-            }
-        }
-
-
-        public long getCount() {
-            return count;
-        }
 
     }
 
