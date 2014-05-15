@@ -16,7 +16,7 @@ public class LoggerOutputStreamTest {
     public void test() throws IOException {
         String testString = "bla bla\n\nbloe bloe ";
         final StringBuilder buf = new StringBuilder();
-        LoggerOutputStream instance = new LoggerOutputStream(null, false) {
+        LoggerOutputStream instance = new LoggerOutputStream(false) {
             @Override
             void log(String line) {
                 buf.append(line).append("\n");
