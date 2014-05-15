@@ -15,14 +15,15 @@ public interface CommandExecutor {
     /**
      * Executes with the given arguments. The command itself is supposed to be a member of the implementation, so you
      * would have a CommandExecutor instance for every external program you'd like to wrap.
-     * The version with no outputstream argument logs the output.    *
+     * The version with no outputstream argument logs the output.
      */
     int execute(String... args);
 
     /**
      * Executes the command
      *
-     * @param out Stdout of the command will be written to this. (stderr is logged to error)
+     * @param out Stdout of the command will be written to this.
+     * @param error Stderr of the comman will be written to this. To log errors use {@link nl.vpro.logging.LoggerOutputStream#error(org.slf4j.Logger)}
      * @param args
      * @return The exit code
      */
