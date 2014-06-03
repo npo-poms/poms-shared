@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import nl.vpro.logging.LoggerOutputStream;
 
 /**
+ * Wrapper around the command line tools 'ssh' and 'scp'.
  * @author Michiel Meeuwissen
  * @since 3.1
  */
