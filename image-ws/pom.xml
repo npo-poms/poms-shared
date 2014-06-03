@@ -7,7 +7,6 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>nl.vpro.image</groupId>
   <artifactId>image-ws</artifactId>
   <name>image-ws</name>
   <description>Images Webservices API</description>
@@ -20,7 +19,7 @@
     <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>shared-ws</artifactId>
-      <version>0.9</version>
+      <version>${shared.version}</version>
     </dependency>
   </dependencies>
 </project>
