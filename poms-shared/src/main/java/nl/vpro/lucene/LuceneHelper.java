@@ -69,7 +69,7 @@ public class LuceneHelper {
      * @param stop            - inclusive stop or null
      * @param indexResolution - the resolution of the index which can be more precise when you want to order with
      *                        more precision
-     * @return
+     * @return The create TempRangeQuery
      */
 
     public static TermRangeQuery createDayRangeQuery(String field, Date start, Date stop, DateTools.Resolution indexResolution) {

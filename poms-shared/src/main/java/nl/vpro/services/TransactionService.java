@@ -11,10 +11,9 @@ import java.util.concurrent.Callable;
 public interface TransactionService {
     /**
      * Run callable in new transaction. Transaction is rolled back ONLY in case of a runtime exception
-     * @param callable
-     * @param <T>
-     * @return
-     * @throws Exception
+     * @param callable The jobs to be processed in the new transaction
+     * @return The result of the callable
+     * @throws Exception The exception thrown by the callable
      */
     <T> T executeInNewTransaction(Callable<T> callable) throws Exception;
 

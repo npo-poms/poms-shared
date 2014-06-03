@@ -77,7 +77,7 @@ public class TextUtil {
     }
 
     /**
-     * Un-escapes all html escape characters. For example: Replaces "&amp" with "&".
+     * Un-escapes all html escape characters. For example: Replaces "&amp;amp;" with "&amp;".
      *
      * @param input
      * @return
