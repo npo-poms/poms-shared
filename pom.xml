@@ -22,5 +22,6 @@
  <modules>
    <module>poms-shared</module>
    <module>poms-shared-test</module>
+   <module>poms-ext</module>
  </modules>
 </project>
