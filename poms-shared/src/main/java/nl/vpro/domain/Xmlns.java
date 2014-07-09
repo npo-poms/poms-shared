@@ -29,6 +29,9 @@ public final class Xmlns {
     public static final String SEARCH_NAMESPACE = "urn:vpro:media:search:2012";
     public static final URL    SEARCH_XSD        = Xmlns.class.getResource("/nl/vpro/domain/media/search/vproMediaSearch.xsd");
 
+
+    public static final String PAGEUPDATE_NAMESPACE = "urn:vpro:pages:update:2013";
+
     public static final Schema SCHEMA;
 
     static {
