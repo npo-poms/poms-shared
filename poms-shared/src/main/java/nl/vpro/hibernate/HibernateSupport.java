@@ -15,7 +15,7 @@ public class HibernateSupport {
     private SessionFactory sessionFactory;
 
     @Autowired
-    private PlatformTransactionManager transactionManager;
+    private PlatformTransactionManager txManager;
 
 //    private TransactionTemplate transactionTemplate;
 
@@ -42,6 +42,6 @@ public class HibernateSupport {
 //            this.transactionTemplate = new TransactionTemplate(transactionManager);
 //        }
 
-        return new TransactionTemplate(transactionManager);
+        return new TransactionTemplate(txManager);
     }
 }
