@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TransactionServiceImpl implements TransactionService {
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor = {Throwable.class})
+    @Transactional(propagation = Propagation.REQUIRES_NEW , rollbackFor = {Exception.class})
     public <T> T executeInNewTransaction(Callable<T> callable) throws Exception {
         return callable.call();
     }
