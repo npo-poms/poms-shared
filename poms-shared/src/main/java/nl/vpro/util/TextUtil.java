@@ -118,7 +118,7 @@ public class TextUtil {
     }
 
     private static Set<Pattern> DUTCH_PARTICLES =
-        new HashSet<Pattern>(
+        new HashSet<>(
             Arrays.asList(
                 getPattern("de"),
                 getPattern("het"),
