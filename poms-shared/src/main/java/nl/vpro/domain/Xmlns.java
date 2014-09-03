@@ -36,6 +36,12 @@ public final class Xmlns {
 
     public static final String API_NAMESPACE = "urn:vpro:api:2013";
 
+    public static final String PROFILE_NAMESPACE = "urn:vpro:api:profile:2013";
+
+    public static final String MEDIA_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:media:2013";
+
+    public static final String PAGE_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:page:2013";
+
 
     public static final Schema SCHEMA;
 
