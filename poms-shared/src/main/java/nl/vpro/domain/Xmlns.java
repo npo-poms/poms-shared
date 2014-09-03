@@ -34,6 +34,8 @@ public final class Xmlns {
 
     public static final String PAGE_NAMESPACE = "urn:vpro:pages:2013";
 
+    public static final String API_NAMESPACE = "urn:vpro:api:2013";
+
 
     public static final Schema SCHEMA;
 
