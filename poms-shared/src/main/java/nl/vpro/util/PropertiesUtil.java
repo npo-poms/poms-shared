@@ -1,16 +1,14 @@
 package nl.vpro.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
-import org.springframework.util.PropertyPlaceholderHelper;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
  * An extension of {@link PropertyPlaceholderConfigurer} that only exposes the map of properties (for use in e.g. JSP).
@@ -18,7 +16,6 @@ import java.util.Properties;
  * @author Michiel Meeuwissen
  */
 public class PropertiesUtil extends PropertyPlaceholderConfigurer {
-    private static final Logger LOG = LoggerFactory.getLogger(PropertiesUtil.class);
 
     private Map<String, String> propertiesMap;
 
@@ -30,6 +27,7 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
         super.processProperties(beanFactory, props);
         initMap(props);
         initSystemProperties();
+        logger.info(String.valueOf(getMap()));
     }
 
     public Map<String, String> getMap() {
@@ -50,7 +48,7 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
             placeholderPrefix, placeholderSuffix, valueSeparator, ignoreUnresolvablePlaceholders);
 
 
-        propertiesMap = new HashMap<String, String>();
+        propertiesMap = new HashMap<>();
         for(Object key : p.keySet()) {
             String keyStr = key.toString();
             String value = p.getProperty(keyStr);
@@ -68,10 +66,10 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
                     if(System.getProperty(property) == null || localOverride) {
                         System.setProperty(property, value);
                     } else {
-                        LOG.warn("Can not override System property {} because it allready exists", property);
+                        logger.warn("Can not override System property " + property + " because it allready exists");
                     }
                 } else {
-                    LOG.error("Property {} not found, please check the property configuration", property);
+                    logger.error("Property " + property + " not found, please check the property configuration");
                 }
             }
         }
