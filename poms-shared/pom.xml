@@ -65,9 +65,14 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-      <version>3.2.3.RELEASE</version>
+
       <scope>test</scope>
     </dependency>
   </dependencies>
