@@ -14,9 +14,9 @@
   <name>poms-shared-parent</name>
 
   <scm>
-   <connection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/trunk</connection>
-   <developerConnection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/trunk</developerConnection>
-   <url>https://subversion.vpro.nl/cgi-bin/viewvc.cgi/trunk</url>
+   <connection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/branches/REL-3.3-SNAPSHOT</connection>
+   <developerConnection>scm:svn:svn+ssh://subversion.vpro.nl/export/svn/nl/publiekeomroep/poms-shared/branches/REL-3.3-SNAPSHOT</developerConnection>
+   <url>https://subversion.vpro.nl/cgi-bin/viewvc.cgi/branches/REL-3.3-SNAPSHOT</url>
  </scm>
 
  <modules>
