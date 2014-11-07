@@ -19,6 +19,8 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 
     private Map<String, String> propertiesMap;
 
+    private Map<String, String> logMap = new HashMap<>();
+
     private String[] systemProperties;
 
     @Override
@@ -27,7 +29,13 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
         super.processProperties(beanFactory, props);
         initMap(props);
         initSystemProperties();
-        logger.info(String.valueOf(getMap()));
+        if (logMap.isEmpty()) {
+            logger.debug(String.valueOf(getMap()));
+        } else {
+            for (Map.Entry<String, String> logEntry : logMap.entrySet()) {
+                logger.info(String.format(logEntry.getValue(), logEntry.getKey()));
+            }
+        }
     }
 
     public Map<String, String> getMap() {
@@ -36,6 +44,11 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 
     public void setExposeAsSystemProperty(String properties) {
         systemProperties = properties.split("\\s*,\\s*");
+    }
+
+    public void setLog(Map<String, String> map) {
+        this.logMap = map;
+
     }
 
     private void initMap(Properties props) {
