@@ -33,7 +33,7 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
             logger.debug(String.valueOf(getMap()));
         } else {
             for (Map.Entry<String, String> logEntry : logMap.entrySet()) {
-                logger.info(String.format(logEntry.getValue(), logEntry.getKey()));
+                logger.info(String.format(logEntry.getValue(), getMap().get(logEntry.getKey())));
             }
         }
     }
