@@ -48,7 +48,10 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 
     public void setLog(Map<String, String> map) {
         this.logMap = map;
+    }
 
+    public Map<String, String> getLog() {
+        return this.logMap;
     }
 
     private void initMap(Properties props) {
