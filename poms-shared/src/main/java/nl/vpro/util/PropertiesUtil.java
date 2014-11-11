@@ -32,8 +32,10 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
         if (logMap.isEmpty()) {
             logger.debug(String.valueOf(getMap()));
         } else {
+            PropertyPlaceholderHelper helper = new PropertyPlaceholderHelper(
+                placeholderPrefix, placeholderSuffix, valueSeparator, ignoreUnresolvablePlaceholders);
             for (Map.Entry<String, String> logEntry : logMap.entrySet()) {
-                logger.info(String.format(logEntry.getValue(), getMap().get(logEntry.getKey())));
+                logger.info(String.format(helper.replacePlaceholders(logEntry.getValue(), props), getMap().get(logEntry.getKey())));
             }
         }
     }
@@ -48,10 +50,6 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 
     public void setLog(Map<String, String> map) {
         this.logMap = map;
-    }
-
-    public Map<String, String> getLog() {
-        return this.logMap;
     }
 
     private void initMap(Properties props) {
