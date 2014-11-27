@@ -143,4 +143,13 @@ public class TextUtil {
             return title;
         }
     }
+
+    public static String select(String... options) {
+        for(String option : options) {
+            if(option != null) {
+                return option;
+            }
+        }
+        return null;
+    }
 }
