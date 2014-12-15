@@ -1,7 +1,12 @@
 package nl.vpro.controllers;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.time.DateUtils;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,16 +17,12 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.time.DateUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 /**
  * @author Michiel Meeuwissen
@@ -29,7 +30,10 @@ import java.util.Map;
  */
 public class AbstractSchemaController {
 
-	protected static Map<String, Class[]> MAPPING = new HashMap<>();
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractSchemaController.class);
+
+
+    protected static Map<String, Class[]> MAPPING = new HashMap<>();
 
 
 	protected final long startTime = System.currentTimeMillis();
@@ -85,11 +89,22 @@ public class AbstractSchemaController {
 
 
 	protected void generateXSDs(final String namespace) throws IOException, JAXBException {
-		JAXBContext context = JAXBContext.newInstance(MAPPING.get(namespace));
+        Class[] classes = MAPPING.get(namespace);
+        if (classes == null) {
+            throw new IllegalArgumentException("No classes found for " + namespace);
+        }
+        LOG.info("Generating xsds for {}, {}", namespace, Arrays.asList(classes));
+		JAXBContext context = JAXBContext.newInstance(classes);
 		context.generateSchema(new SchemaOutputResolver() {
 			@Override
 			public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-				File f = getFile(namespaceUri);
+                File f;
+                if (StringUtils.isEmpty(namespaceUri)) {
+                    f = new File(getTempDir(), suggestedFileName);
+                } else {
+                    f = getFile(namespaceUri);
+                }
+                LOG.info("Creating {} -> {}", namespaceUri, f);
 				StreamResult result = new StreamResult(f);
 				result.setSystemId(f);
 				result.setOutputStream(new FileOutputStream(f));
@@ -110,7 +125,6 @@ public class AbstractSchemaController {
 	}
 
 	protected File getFile(String namespace) throws IOException {
-
 		String fileName = namespace.substring("urn:vpro:".length()).replace(':', '_') + ".xsd";
 
 		File file = new File(getTempDir(), fileName);
