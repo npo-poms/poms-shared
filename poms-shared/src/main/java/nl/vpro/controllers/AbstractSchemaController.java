@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBContext;
@@ -33,7 +35,18 @@ public class AbstractSchemaController {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractSchemaController.class);
 
 
-    protected static Map<String, Class[]> MAPPING = new HashMap<>();
+    protected static Map<String, Class[]> MAPPING = new LinkedHashMap<>();
+
+    @PostConstruct
+    public void init() {
+        /*for (String namespace : MAPPING.keySet()) {
+            try {
+                 generateXSDs(namespace);
+            } catch (IOException | JAXBException ioe) {
+                LOG.error(ioe.getMessage(), ioe);
+            }
+        }
+*/    }
 
 
 	protected final long startTime = System.currentTimeMillis();
@@ -88,12 +101,12 @@ public class AbstractSchemaController {
 	}
 
 
-	protected void generateXSDs(final String namespace) throws IOException, JAXBException {
+	public void generateXSDs(final String namespace) throws IOException, JAXBException {
         Class[] classes = MAPPING.get(namespace);
         if (classes == null) {
             throw new IllegalArgumentException("No classes found for " + namespace);
         }
-        LOG.info("Generating xsds for {}, {}", namespace, Arrays.asList(classes));
+        LOG.info("Generating xsds for {}: {}", namespace, Arrays.asList(classes));
 		JAXBContext context = JAXBContext.newInstance(classes);
 		context.generateSchema(new SchemaOutputResolver() {
 			@Override
@@ -104,14 +117,16 @@ public class AbstractSchemaController {
                 } else {
                     f = getFile(namespaceUri);
                 }
-                LOG.info("Creating {} -> {}", namespaceUri, f);
-				StreamResult result = new StreamResult(f);
-				result.setSystemId(f);
-				result.setOutputStream(new FileOutputStream(f));
-				return result;
+                LOG.info("{} Creating {} -> {}", namespace, namespaceUri, f);
 
+                StreamResult result = new StreamResult(f);
+                result.setSystemId(f);
+                FileOutputStream fo = new FileOutputStream(f);
+                result.setOutputStream(fo);
+                return result;
 			}
 		});
+
 	}
 
 
@@ -124,13 +139,14 @@ public class AbstractSchemaController {
 		return tempDir.toFile();
 	}
 
-	protected File getFile(String namespace) throws IOException {
+	public File getFile(String namespace) throws IOException {
 		String fileName = namespace.substring("urn:vpro:".length()).replace(':', '_') + ".xsd";
-
 		File file = new File(getTempDir(), fileName);
-		if (file.exists() && file.lastModified() < startTime) {
-			file.delete();
-		}
+        // last modified on fs only granalur to seconds.
+        if (file.exists() && TimeUnit.SECONDS.convert(file.lastModified(), TimeUnit.MILLISECONDS) < TimeUnit.SECONDS.convert(startTime, TimeUnit.MILLISECONDS)) {
+            LOG.info("Deleting {}, it is old {} < {}", file, file.lastModified(), startTime);
+            file.delete();
+        }
 		return file;
 	}
 }

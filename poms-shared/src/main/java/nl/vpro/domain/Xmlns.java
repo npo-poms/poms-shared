@@ -42,7 +42,7 @@ public final class Xmlns {
 
     public static final String PAGE_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:page:2013";
 
-    public static final String CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:2013";
+    public static final String CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:2014";
 
 
     public static final Schema SCHEMA;
