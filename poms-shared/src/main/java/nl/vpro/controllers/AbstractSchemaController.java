@@ -39,14 +39,14 @@ public class AbstractSchemaController {
 
     @PostConstruct
     public void init() {
-        /*for (String namespace : MAPPING.keySet()) {
+        for (String namespace : MAPPING.keySet()) {
             try {
-                 generateXSDs(namespace);
+                generateXSDs(namespace);
             } catch (IOException | JAXBException ioe) {
                 LOG.error(ioe.getMessage(), ioe);
             }
         }
-*/    }
+    }
 
 
 	protected final long startTime = System.currentTimeMillis();
@@ -117,13 +117,19 @@ public class AbstractSchemaController {
                 } else {
                     f = getFile(namespaceUri);
                 }
-                LOG.info("{} Creating {} -> {}", namespace, namespaceUri, f);
+                if (! f.exists()) {
+                    LOG.info("{} Creating {} -> {}", namespace, namespaceUri, f);
 
-                StreamResult result = new StreamResult(f);
-                result.setSystemId(f);
-                FileOutputStream fo = new FileOutputStream(f);
-                result.setOutputStream(fo);
-                return result;
+                    StreamResult result = new StreamResult(f);
+                    result.setSystemId(f);
+                    FileOutputStream fo = new FileOutputStream(f);
+                    result.setOutputStream(fo);
+                    return result;
+                } else {
+                    LOG.debug("{} -> {} Was already generated", namespaceUri, f);
+                    return null;
+                }
+
 			}
 		});
 
