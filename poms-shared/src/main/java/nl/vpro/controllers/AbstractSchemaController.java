@@ -38,14 +38,12 @@ public class AbstractSchemaController {
     protected static Map<String, Class[]> MAPPING = new LinkedHashMap<>();
 
     @PostConstruct
-    public void init() {
-        for (String namespace : MAPPING.keySet()) {
-            try {
-                generateXSDs(namespace);
-            } catch (IOException | JAXBException ioe) {
-                LOG.error(ioe.getMessage(), ioe);
-            }
+    public void init() throws IOException, JAXBException {
+        Set<Class> classes = new HashSet<>();
+        for (Class[] c : MAPPING.values()) {
+            classes.addAll(Arrays.asList(c));
         }
+        generateXSDs(new ArrayList<>(classes).toArray(new Class[classes.size()]));
     }
 
 
@@ -80,9 +78,6 @@ public class AbstractSchemaController {
 			final HttpServletResponse response,
 			final String namespace) throws JAXBException, IOException {
 		File file = getFile(namespace);
-		if (!file.exists() || file.length() == 0) {
-			generateXSDs(namespace);
-		}
 		serveXml(file, request, response);
 	}
 
@@ -101,12 +96,8 @@ public class AbstractSchemaController {
 	}
 
 
-	public void generateXSDs(final String namespace) throws IOException, JAXBException {
-        Class[] classes = MAPPING.get(namespace);
-        if (classes == null) {
-            throw new IllegalArgumentException("No classes found for " + namespace);
-        }
-        LOG.info("Generating xsds for {}: {}", namespace, Arrays.asList(classes));
+	protected void generateXSDs(Class... classes) throws IOException, JAXBException {
+        LOG.info("Generating xsds for {}", Arrays.asList(classes));
 		JAXBContext context = JAXBContext.newInstance(classes);
 		context.generateSchema(new SchemaOutputResolver() {
 			@Override
@@ -118,7 +109,7 @@ public class AbstractSchemaController {
                     f = getFile(namespaceUri);
                 }
                 if (! f.exists()) {
-                    LOG.info("{} Creating {} -> {}", namespace, namespaceUri, f);
+                    LOG.info("Creating {} -> {}", namespaceUri, f);
 
                     StreamResult result = new StreamResult(f);
                     result.setSystemId(f);
