@@ -97,7 +97,7 @@ public class AbstractSchemaController {
 
 
 	protected void generateXSDs(Class... classes) throws IOException, JAXBException {
-        LOG.info("Generating xsds for {}", Arrays.asList(classes));
+        LOG.info("Generating xsds in {}", Arrays.asList(classes), getTempDir());
 		JAXBContext context = JAXBContext.newInstance(classes);
 		context.generateSchema(new SchemaOutputResolver() {
 			@Override
@@ -109,7 +109,7 @@ public class AbstractSchemaController {
                     f = getFile(namespaceUri);
                 }
                 if (! f.exists()) {
-                    LOG.info("Creating {} -> {}", namespaceUri, f);
+                    LOG.debug("Creating {} -> {}", namespaceUri, f);
 
                     StreamResult result = new StreamResult(f);
                     result.setSystemId(f);
