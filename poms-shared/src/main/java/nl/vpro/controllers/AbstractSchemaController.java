@@ -39,7 +39,7 @@ public class AbstractSchemaController {
 
     @PostConstruct
     public void init() throws IOException, JAXBException {
-        Set<Class> classes = new HashSet<>();
+        Set<Class> classes = new LinkedHashSet<>();
         for (Class[] c : MAPPING.values()) {
             classes.addAll(Arrays.asList(c));
         }
