@@ -46,6 +46,8 @@ public final class Xmlns {
 
     public static final String CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:2014";
 
+    public static final String MEDIA_WS_NAMESPACE = "urn:vpro:ws:media:2009";
+
 
     public static final Schema SCHEMA;
 
