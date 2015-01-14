@@ -1,5 +1,7 @@
 package nl.vpro.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.Properties;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.core.io.Resource;
 import org.springframework.util.PropertyPlaceholderHelper;
 
 /**
@@ -50,6 +53,21 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 
     public void setLog(Map<String, String> map) {
         this.logMap = map;
+    }
+
+    @Override
+    public void setLocations(Resource[] locations) {
+
+        System.out.println("Configuring with");
+        for (Resource location : locations) {
+            try {
+                File file = location.getFile();
+                System.out.println(location + " -> " + file + " (" + (file.canRead() ? "can be read" : "not readable ") + ")");
+            } catch (IOException ioe) {
+                System.out.println(location);
+            }
+        }
+        super.setLocations(locations);
     }
 
     private void initMap(Properties props) {
