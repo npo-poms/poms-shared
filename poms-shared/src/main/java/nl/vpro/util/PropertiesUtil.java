@@ -62,7 +62,7 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
         for (Resource location : locations) {
             try {
                 File file = location.getFile();
-                System.out.println(location + " -> " + file + " (" + (file.canRead() ? "can be read" : "not readable ") + ")");
+                System.out.println(location + " -> " + file + " (" + (file.canRead() ? "can be read" : "not readable") + ")");
             } catch (IOException ioe) {
                 System.out.println(location);
             }
