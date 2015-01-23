@@ -40,9 +40,13 @@ public final class Xmlns {
 
     public static final String MEDIA_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:media:2013";
 
+    public static final String MEDIA_SUBTITLES_NAMESPACE = "urn:vpro:media:subtitles:2009";
+
     public static final String PAGE_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:page:2013";
 
     public static final String CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:2014";
+
+    public static final String MEDIA_WS_NAMESPACE = "urn:vpro:ws:media:2009";
 
 
     public static final Schema SCHEMA;
