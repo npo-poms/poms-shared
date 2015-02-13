@@ -4,16 +4,16 @@
  */
 package nl.vpro.util;
 
-import org.apache.commons.lang.StringEscapeUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang.StringEscapeUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.safety.Whitelist;
 
 /**
  * See https://jira.vpro.nl/browse/MSE-1372
@@ -41,8 +41,16 @@ public class TextUtil {
         if(!matcher.find()) {
             return true;
         }
-        return input.equals(sanitize(input));
+        return normalizeWhiteSpace(input).equals(normalizeWhiteSpace(sanitize(input)));
     }
+
+    public static String normalizeWhiteSpace(String input) {
+        if (input == null) {
+            return input;
+        }
+        return input.trim().replaceAll("\\s+", "");
+    }
+
 
     /**
      * Replaces all line separators with a single white space character. The line separator character (\u2028) is
