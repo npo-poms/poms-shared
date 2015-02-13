@@ -48,7 +48,7 @@ public class TextUtil {
         if (input == null) {
             return input;
         }
-        return input.trim().replaceAll("\\s+", "");
+        return input.trim().replaceAll("\\s+", " ");
     }
 
 
