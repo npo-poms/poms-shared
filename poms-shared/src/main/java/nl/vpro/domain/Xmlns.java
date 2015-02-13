@@ -48,6 +48,8 @@ public final class Xmlns {
 
     public static final String MEDIA_WS_NAMESPACE = "urn:vpro:ws:media:2009";
 
+    public static final String IMAGE_NAMESPACE = "urn:vpro:image:2009";
+
 
     public static final Schema SCHEMA;
 
