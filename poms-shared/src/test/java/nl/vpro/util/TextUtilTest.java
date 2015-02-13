@@ -31,6 +31,11 @@ public class TextUtilTest {
     }
 
     @Test
+    public void testPatternOnMoreComplicatedText() {
+        assertThat(isValid("Magere vrouwen zijn net zo crashbestendig als vrouwen met een normaal gewicht, maar daarna loopt ook bij hen het overlijdensrisico op met de BMI. Er is echter weinig verschil in overlijdensrisico tussen ernstig obese (BMI > 40) en 'gewoon' obese (35 <  BMI  < 40) vrouwen: beide categorien...")).isTrue();
+    }
+
+    @Test
     public void testPatternOnValidAmpersand() {
         assertThat(isValid("Pauw & Witteman;")).isTrue();
     }
