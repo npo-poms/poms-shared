@@ -127,7 +127,7 @@ public class TextUtilTest {
     @Test
     public void testSanitizeMSE_2589() {
         String result = sanitize(MSE_2589);
-        assertThat(result).isEqualTo(MSE_2589);
+        assertThat(result.replaceAll("\\s", "")).isEqualTo(MSE_2589.replaceAll("\\s", ""));
     }
 
     @Test
