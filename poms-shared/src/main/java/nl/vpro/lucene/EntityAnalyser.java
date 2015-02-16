@@ -24,7 +24,7 @@ public final class EntityAnalyser extends Analyzer {
         stopSet.addAll(StopAnalyzer.ENGLISH_STOP_WORDS_SET);
         stopWords = CharArraySet.unmodifiableSet(stopSet);
     }
-    private static SimpleEntityAnalyser wrapped = new SimpleEntityAnalyser();
+    private final SimpleEntityAnalyser wrapped = new SimpleEntityAnalyser();
 
     @Override
     public TokenStream tokenStream(String fieldName, Reader reader) {
