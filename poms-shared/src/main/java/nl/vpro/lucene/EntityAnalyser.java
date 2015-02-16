@@ -6,20 +6,19 @@ package nl.vpro.lucene;
 import java.io.Reader;
 import java.util.Arrays;
 
-import org.apache.lucene.analysis.*;
-import org.apache.lucene.analysis.standard.StandardFilter;
-import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
+import org.apache.lucene.analysis.CharArraySet;
+import org.apache.lucene.analysis.StopAnalyzer;
+import org.apache.lucene.analysis.StopFilter;
+import org.apache.lucene.analysis.TokenStream;
 
-public final class EntityAnalyser extends Analyzer {
-
-    private static final Version VERSION = Version.LUCENE_30;
+public final class EntityAnalyser extends SimpleEntityAnalyser {
 
     private static final String[] DUTCH_STOP_WORDS = {
         "aan", "af", "al", "als", "bij", "dan", "dat", "de", "die", "dit", "een", "en",
         "er", "hem", "het", "hij", "hoe", "hun", "ik", "in", "je", "me", "men", "met",
         "mij", "nog", "nu", "of", "ons", "ook", "te", "tot", "uit", "van", "was", "wat",
-        "we", "wel", "wij", "zal", "ze", "zij", "zijn", "zo", "zou"};
+        "we", "wel", "wij", "zal", "ze", "zij", "zijn", "zo", "zou"
+    };
     private static CharArraySet stopWords;
 
     static {
@@ -33,15 +32,7 @@ public final class EntityAnalyser extends Analyzer {
     public TokenStream tokenStream(String fieldName, Reader reader) {
         return new StopFilter(
             VERSION,
-            new ASCIIFoldingFilter(
-                new LowerCaseFilter(
-                    VERSION,
-                    new StandardFilter(
-                        VERSION,
-                        new StandardTokenizer(LuceneHelper.VERSION, reader)
-                    )
-                )
-            ),
+            super.tokenStream(fieldName, reader),
             stopWords
         );
     }
