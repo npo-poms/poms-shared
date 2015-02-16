@@ -13,7 +13,7 @@ import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.util.Version;
 
-public class SimpleEntityAnalyser extends Analyzer {
+public final class SimpleEntityAnalyser extends Analyzer {
 
     static final Version VERSION = Version.LUCENE_30;
 
