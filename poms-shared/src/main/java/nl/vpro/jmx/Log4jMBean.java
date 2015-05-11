@@ -10,7 +10,7 @@ import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
 @ManagedResource(
-        objectName="nl.vpro.media:name=logging",
+        objectName="nl.vpro:name=logging",
         description="Logging configuration.",
         log=true,
         logFile="jmx.log"
