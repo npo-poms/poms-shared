@@ -86,10 +86,10 @@ public abstract class LoggerOutputStream extends OutputStream {
             void log(String line) {
                 if (max != null) {
                     count++;
-                    if (count == max + 1) {
-                        log.warn("...");
-                    }
                     if (count >  max) {
+                        if (count == max + 1) {
+                            log.warn("...");
+                        }
                         return;
                     }
                 }
