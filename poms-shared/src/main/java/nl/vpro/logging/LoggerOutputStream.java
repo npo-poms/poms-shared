@@ -68,7 +68,7 @@ public abstract class LoggerOutputStream extends OutputStream {
     }
 
     public static LoggerOutputStream warn(Logger log) {
-        return warn(log, false);
+        return warn(log, false, null);
     }
 
     public static LoggerOutputStream warn(java.util.logging.Logger log) {
@@ -76,9 +76,23 @@ public abstract class LoggerOutputStream extends OutputStream {
     }
 
     public static LoggerOutputStream warn(final Logger log, boolean skipEmptyLines) {
+        return warn(log, skipEmptyLines, null);
+    }
+
+    public static LoggerOutputStream warn(final Logger log, boolean skipEmptyLines, final Integer max) {
         return new LoggerOutputStream(skipEmptyLines) {
+            private int count = 0;
             @Override
             void log(String line) {
+                if (max != null) {
+                    count++;
+                    if (count == max + 1) {
+                        log.warn("...");
+                    }
+                    if (count >  max) {
+                        return;
+                    }
+                }
                 log.warn(line);
             }
         };
