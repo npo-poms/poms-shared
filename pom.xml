@@ -4,8 +4,9 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>3.7.0</version>
+    <version>3.7.1</version>
   </parent>
+
   <groupId>nl.publiekeomroep</groupId>
   <artifactId>poms-shared-parent</artifactId>
   <version>3.7.1-SNAPSHOT</version>
