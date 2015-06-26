@@ -44,9 +44,18 @@ public final class ThreadPools {
 							false,
 							Thread.NORM_PRIORITY));
 
+    public static final ThreadPoolExecutor startUpExecutor =
+        new ThreadPoolExecutor(0, 2, 60, TimeUnit.SECONDS,
+            new SynchronousQueue<>(),
+            ThreadPools.createThreadFactory(
+                "nl.vpro-util-StartUp",
+                false,
+                Thread.NORM_PRIORITY));
+
 
 	public static void shutdown() {
 		copyExecutor.shutdown();
+        startUpExecutor.shutdown();
 	}
 }
 
