@@ -45,7 +45,7 @@ public final class ThreadPools {
 							Thread.NORM_PRIORITY));
 
     public static final ThreadPoolExecutor startUpExecutor =
-        new ThreadPoolExecutor(0, 2, 60, TimeUnit.SECONDS,
+        new ThreadPoolExecutor(0, 20, 60, TimeUnit.SECONDS,
             new SynchronousQueue<>(),
             ThreadPools.createThreadFactory(
                 "nl.vpro-util-StartUp",
