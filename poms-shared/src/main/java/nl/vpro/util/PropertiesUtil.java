@@ -24,6 +24,9 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
 
     private Map<String, String> logMap = new HashMap<>();
 
+    private Map<String, String> copyMap = new HashMap<>();
+
+
     private String[] systemProperties;
 
     @Override
@@ -55,14 +58,22 @@ public class PropertiesUtil extends PropertyPlaceholderConfigurer {
         this.logMap = map;
     }
 
+    public void setCopy(Map<String, String> map) {
+        this.copyMap = map;
+    }
+
     @Override
     public void setLocations(Resource[] locations) {
 
         System.out.println("Configuring with");
         for (Resource location : locations) {
             try {
-                File file = location.getFile();
-                System.out.println(location + " -> " + file + " (" + (file.canRead() ? "can be read" : "not readable") + ")");
+                if (location != null) {
+                    File file = location.getFile();
+                    if (file != null) {
+                        System.out.println(location + " -> " + file + " (" + (file.canRead() ? "can be read" : "not readable") + ")");
+                    }
+                }
             } catch (IOException ioe) {
                 System.out.println(location);
             }
