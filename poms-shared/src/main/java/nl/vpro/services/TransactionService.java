@@ -1,6 +1,8 @@
 package nl.vpro.services;
 
 import java.util.concurrent.Callable;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -20,7 +22,11 @@ public interface TransactionService {
 
     <T> T getInNewTransaction(Supplier<T> supplier);
 
-    void  executeInNewTransaction(Runnable runnable);
+    void executeInNewTransaction(Runnable runnable);
+
+    <T, S> T executeInNewTransaction(S argument, Function<S, T> function);
+
+    <T> void executeInNewTransaction(T argument, Consumer<T> consumer);
 
 
     <T> T executeInReadonlyTransaction(Callable<T> callable) throws Exception;
@@ -28,6 +34,10 @@ public interface TransactionService {
     <T> T getInReadonlyTransaction(Supplier<T> supplier);
 
     void executeInReadonlyTransaction(Runnable runnable);
+
+    <T, S> T executeInReadonlyTransaction(S argument, Function<S, T> function);
+
+    <T> void executeInReadonlyTransaction(T argument, Consumer<T> consumer);
 
 
 }
