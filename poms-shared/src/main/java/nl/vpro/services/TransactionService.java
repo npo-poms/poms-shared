@@ -1,6 +1,7 @@
 package nl.vpro.services;
 
 import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 /**
  * Please note that transactions are only rolled back in case of a runtime exception
@@ -17,9 +18,14 @@ public interface TransactionService {
      */
     <T> T executeInNewTransaction(Callable<T> callable) throws Exception;
 
+    <T> T getInNewTransaction(Supplier<T> supplier);
+
     void  executeInNewTransaction(Runnable runnable);
 
+
     <T> T executeInReadonlyTransaction(Callable<T> callable) throws Exception;
+
+    <T> T getInReadonlyTransaction(Supplier<T> supplier);
 
     void executeInReadonlyTransaction(Runnable runnable);
 
