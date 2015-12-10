@@ -5,10 +5,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@org.springframework.stereotype.Service("transactionService")
+@Service("transactionService")
 public class TransactionServiceImpl implements TransactionService {
 
     @Override
