@@ -4,7 +4,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>4.1.0</version>
+    <version>4.2-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.publiekeomroep</groupId>
@@ -21,6 +21,7 @@
  </scm>
 
  <modules>
+   <module>poms-shared-domain</module>
    <module>poms-shared</module>
    <module>poms-shared-test</module>
    <module>poms-ext</module>
