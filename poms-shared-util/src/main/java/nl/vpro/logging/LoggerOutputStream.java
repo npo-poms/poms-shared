@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 
 /**
@@ -172,7 +171,7 @@ public abstract class LoggerOutputStream extends OutputStream {
 
     private void log(boolean skipEmpty) {
         String line = buffer.toString();
-        if (!skipEmpty || !StringUtils.isBlank(line)) {
+        if (!skipEmpty || ! (line == null || line.length() == 0)) {
             log(line);
         }
         buffer.reset();
