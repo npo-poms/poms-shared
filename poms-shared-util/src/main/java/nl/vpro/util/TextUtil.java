@@ -11,7 +11,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringEscapeUtils;
+
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
 
@@ -86,7 +87,7 @@ public class TextUtil {
      * @param input
      */
     public static String unescapeHtml(String input) {
-        return input != null ? StringEscapeUtils.unescapeHtml(input.replace("&nbsp;", " ")) : null;
+        return input != null ? StringEscapeUtils.unescapeHtml4(input.replace("&nbsp;", " ")) : null;
     }
 
     /**
