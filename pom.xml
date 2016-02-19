@@ -8,7 +8,7 @@
 
   <groupId>nl.publiekeomroep</groupId>
   <artifactId>poms-shared-parent</artifactId>
-  <version>4.2.2</version>
+  <version>4.2.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>poms-shared-parent</name>
@@ -18,9 +18,9 @@
   </properties>
 
   <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-4.2.2</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-4.2.2</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/tags/REL-4.2.2</url>
+    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-4.2-SNAPSHOT</connection>
+    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-4.2-SNAPSHOT</developerConnection>
+    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-4.2-SNAPSHOT</url>
  </scm>
 
  <modules>
