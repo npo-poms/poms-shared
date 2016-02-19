@@ -3,7 +3,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>4.2.6</version>
+    <version>4.2.7</version>
   </parent>
 
   <groupId>nl.publiekeomroep</groupId>
@@ -12,6 +12,10 @@
   <packaging>pom</packaging>
 
   <name>poms-shared-parent</name>
+
+  <properties>
+    <bintray.package>poms-shared</bintray.package>
+  </properties>
 
   <scm>
     <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-4.2-SNAPSHOT</connection>
