@@ -13,19 +13,24 @@
 
   <name>poms-shared-parent</name>
 
+  <properties>
+    <bintray.package>poms-shared</bintray.package>
+  </properties>
+
+
   <scm>
     <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/trunk</connection>
     <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/trunk</developerConnection>
     <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/trunk</url>
- </scm>
+  </scm>
 
- <modules>
-   <module>poms-shared-domain</module>
-   <module>poms-shared-services</module>
-   <module>poms-shared-util</module>
-   <module>poms-shared</module>
-   <module>poms-shared-test</module>
-   <module>poms-ext</module>
- </modules>
+  <modules>
+    <module>poms-shared-domain</module>
+    <module>poms-shared-services</module>
+    <module>poms-shared-util</module>
+    <module>poms-shared</module>
+    <module>poms-shared-test</module>
+    <module>poms-ext</module>
+  </modules>
 
 </project>
