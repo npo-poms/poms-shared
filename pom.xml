@@ -13,10 +13,6 @@
 
   <name>poms-shared-parent</name>
 
-  <properties>
-    <bintray.package>poms-shared</bintray.package>
-  </properties>
-
   <scm>
     <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-4.2-SNAPSHOT</connection>
     <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-4.2-SNAPSHOT</developerConnection>
