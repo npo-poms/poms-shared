@@ -1,20 +1,21 @@
 package nl.vpro.hibernate;
 
 
+import javax.inject.Inject;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.search.FullTextSession;
 import org.hibernate.search.Search;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
 public class HibernateSupport {
 
-    @Autowired
+    @Inject
     private SessionFactory sessionFactory;
 
-    @Autowired
+    @Inject
     private PlatformTransactionManager txManager;
 
 //    private TransactionTemplate transactionTemplate;
