@@ -1,12 +1,13 @@
 package nl.vpro.util;
 
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
-
-import javax.annotation.PostConstruct;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+
+import javax.annotation.PostConstruct;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @author Michiel Meeuwissen

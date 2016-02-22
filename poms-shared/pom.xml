@@ -80,6 +80,10 @@
       <artifactId>poms-shared-util</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core</artifactId>
+    </dependency>
   </dependencies>
 
 </project>
