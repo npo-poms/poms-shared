@@ -26,7 +26,6 @@
   <modules>
     <module>poms-shared-domain</module>
     <module>poms-shared-services</module>
-    <module>poms-shared-util</module>
     <module>poms-shared</module>
     <module>poms-shared-test</module>
     <module>poms-ext</module>
