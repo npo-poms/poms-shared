@@ -1,0 +1,206 @@
+/**
+ * Copyright (C) 2014 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.classification;
+
+import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+
+import javax.annotation.PreDestroy;
+import javax.xml.bind.JAXB;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+
+/**
+ * @author Roelof Jan Koekoek
+ * @since 3.0
+ */
+public abstract class AbstractClassificationServiceImpl implements ClassificationService {
+
+    protected final Logger LOG = LoggerFactory.getLogger(getClass());
+
+    protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
+    protected SortedMap<TermId, Term> terms = null;
+
+    protected Date lastModified = null;
+
+    @Override
+    public Term getTerm(String termId) throws TermNotFoundException {
+        Term term = getTermsMap().get(new TermId(termId));
+        if(term == null) {
+            throw new TermNotFoundException(termId);
+        }
+        return term;
+    }
+
+    @Override
+    public List<Term> getTermsByReference(String reference) {
+        return getTermsByReference(reference, values());
+    }
+
+    static List<Term> getTermsByReference(String reference, Collection<Term> values) {
+        List<Term> result = new ArrayList<>();
+        for (Term term : values) {
+            for (Reference ref : term.getReferences()) {
+                if (ref.getValue().equals(reference)) {
+                    result.add(term);
+                }
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean hasTerm(String termId) {
+        return getTermsMap().containsKey(new TermId(termId));
+    }
+
+    @Override
+    public Collection<Term> values() {
+        return getTermsMap().values();
+    }
+
+    @Override
+    public Collection<Term> valuesOf(String termId) {
+        TermId id = new TermId(termId);
+        return getTermsMap().subMap(id.first(), id.next()).values();
+    }
+
+    @Override
+    public ClassificationScheme getClassificationScheme() {
+        return new ClassificationScheme(null, new ArrayList<>(Collections2.filter(values(), new Predicate<Term>() {
+            @Override
+            public boolean apply(Term input) {
+                TermId id = new TermId(input.getTermId());
+                return id.getParts().length == 2 && id.getParts()[0] == 3;
+            }
+        })));
+    }
+
+    @Override
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    @PreDestroy
+    public void cleanUp() throws Exception {
+        executorService.shutdownNow();
+    }
+
+    protected SortedMap<TermId, Term> getTermsMap() {
+        if(terms == null) {
+            synchronized(this) {
+                if (terms == null) {
+                    // This can be called via Jaxb unmarshalling, so it cannot happen in the same thread.
+                    Future future = executorService.submit((Runnable) () -> {
+                        try {
+                            List<InputSource> sources = getSources(true);
+                            if (sources != null) {
+                                terms = readTerms(sources);
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            LOG.error(e.getMessage(), e);
+                        }
+                    });
+                    try {
+                        future.get();
+                    } catch (InterruptedException e) {
+                        // never mind
+                    } catch (ExecutionException e) {
+                        LOG.error(e.getMessage(), e);
+                    }
+                    if (terms == null) {
+                        terms = new TreeMap<>();
+                    }
+                }
+
+            }
+        }
+
+        return terms;
+    }
+
+    protected SortedMap<TermId, Term> readTerms(Iterable<InputSource> streams) throws ParserConfigurationException {
+        SortedMap<TermId, Term> result = new TreeMap<>();
+        final DocumentBuilder  builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+
+        for (InputSource input : streams) {
+            SortedMap<TermId, Term> subResult = new TreeMap<>();
+            try {
+                Document document = builder.parse(input);
+                if (document.getDocumentElement().getNodeName().equals("Term")) {
+                    Term term = JAXB.unmarshal(new DOMSource(document), Term.class);
+                    put(term, subResult);
+                    putAll(term, subResult);
+                } else {
+                    ClassificationScheme genreCs = JAXB.unmarshal(new DOMSource(document), ClassificationScheme.class);
+                    putAll(genreCs, subResult);
+                }
+            } catch (Exception e) {
+                LOG.error(input.getSystemId() + ":" + e.getMessage(), e);
+                continue;
+            }
+            // only if success, set the parents right
+            for (Term term : subResult.values()) {
+                try {
+                    TermId id = new TermId(term.getTermId());
+                    Term parent = result.get(id.getParentId());
+                    if (parent != null) {
+                        term.setParent(parent);
+                        parent.addTerm(term);
+                    }
+                } catch (Exception e){
+                    LOG.error(input.getSystemId() + ":" + e.getMessage(), e);
+                }
+
+            }
+            result.putAll(subResult);
+        }
+        if (lastModified == null) {
+            lastModified = new Date();
+        }
+        LOG.info("Read " + result.size() + " terms from " + this + " last modified " + lastModified);
+        return result;
+    }
+
+    void put(Term term, Map<TermId, Term> map) {
+        if (term.getTermId() == null) {
+            throw new IllegalArgumentException("No id in " + term);
+        }
+        if (map.containsKey(new TermId(term.getTermId()))) {
+            throw new IllegalStateException("Double occurrence of " + term.getTermId());
+        }
+        map.put(new TermId(term.getTermId()), term);
+
+
+    }
+
+    void putAll(TermContainer container, Map<TermId, Term> map) {
+        for(Term term : container.getTerms()) {
+            put(term, map);
+            putAll(term, map);
+        }
+    }
+
+    protected abstract List<InputSource> getSources(boolean init);
+
+}
+
+

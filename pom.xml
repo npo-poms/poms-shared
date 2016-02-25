@@ -33,6 +33,7 @@
     <module>user-domain</module>
     <module>image-domain</module>
     <module>media-i18n</module>
+    <module>media-classification</module>
   </modules>
 
 </project>
