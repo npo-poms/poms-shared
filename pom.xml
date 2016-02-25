@@ -14,7 +14,6 @@
   <name>poms-shared-parent</name>
 
   <properties>
-    <bintray.package>poms-shared</bintray.package>
   </properties>
 
 
