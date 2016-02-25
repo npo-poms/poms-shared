@@ -31,6 +31,10 @@
     <module>poms-shared</module>
     <module>poms-shared-test</module>
     <module>poms-ext</module>
+
+    <module>user-domain</module>
+    <module>image-domain</module>
+    <module>media-i18n</module>
   </modules>
 
 </project>
