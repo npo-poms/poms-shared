@@ -5,7 +5,6 @@ import java.net.URL;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 
 import static org.fest.assertions.Assertions.assertThat;
 
