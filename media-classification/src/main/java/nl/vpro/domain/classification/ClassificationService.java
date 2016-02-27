@@ -1,5 +1,6 @@
 package nl.vpro.domain.classification;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +10,15 @@ import java.util.List;
  * @since 3.2
  */
 public interface ClassificationService {
+    
+    static ClassificationService getInstance() {
+        try {
+            // TODO
+            return (ClassificationService) Class.forName("nl.vpro.domain.classification.ClassificationServiceLocator").getMethod("getInstance").invoke(null);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
 
     /**
      * Returns the Term with the given id.
