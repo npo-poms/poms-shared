@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URLConnection;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.*;
 
 import javax.cache.annotation.CacheResult;
@@ -36,7 +37,7 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
     protected List<InputSource> getSources(boolean init) {
         try {
             URLConnection connection = url.toURL().openConnection();
-            lastModified = new Date(connection.getHeaderFieldDate("Last-Modified", System.currentTimeMillis()));
+            lastModified = Instant.ofEpochMilli(connection.getHeaderFieldDate("Last-Modified", System.currentTimeMillis()));
             InputSource source = new InputSource(connection.getInputStream());
             source.setSystemId(url.toURL().toExternalForm());
             return Collections.singletonList(source);
@@ -69,13 +70,13 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
                 case HttpServletResponse.SC_OK:
                     InputSource input = new InputSource(connection.getInputStream());
                     input.setSystemId(url.toURL().toExternalForm());
-                    Date prevMod = lastModified;
+                    Instant prevMod = lastModified;
                     try {
                         terms = readTerms(Collections.singletonList(input));
                     } catch (ParserConfigurationException e) {
                         LOG.error(e.getMessage(), e);
                     }
-                    lastModified = new Date(connection.getHeaderFieldDate("Last-Modified", System.currentTimeMillis()));
+                    lastModified = Instant.ofEpochMilli(connection.getHeaderFieldDate("Last-Modified", System.currentTimeMillis()));
                     if (ifModifiedCheck) {
                         LOG.info("Reloaded " + url + " as it is modified since " + prevMod + " -> " + lastModified);
                     }

@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.classification;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -37,7 +38,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     protected SortedMap<TermId, Term> terms = null;
 
-    protected Date lastModified = null;
+    protected Instant lastModified = null;
 
     @Override
     public Term getTerm(String termId) throws TermNotFoundException {
@@ -93,7 +94,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
     }
 
     @Override
-    public Date getLastModified() {
+    public Instant getLastModified() {
         return lastModified;
     }
 
@@ -174,7 +175,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
             result.putAll(subResult);
         }
         if (lastModified == null) {
-            lastModified = new Date();
+            lastModified = Instant.now();
         }
         LOG.info("Read " + result.size() + " terms from " + this + " last modified " + lastModified);
         return result;

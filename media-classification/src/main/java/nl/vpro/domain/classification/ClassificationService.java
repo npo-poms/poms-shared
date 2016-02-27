@@ -1,6 +1,7 @@
 package nl.vpro.domain.classification;
 
 import java.lang.reflect.InvocationTargetException;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -11,24 +12,6 @@ import java.util.List;
  */
 public interface ClassificationService {
     
-    static ClassificationService getInstance() {
-        try {
-            // TODO
-            return (ClassificationService) Class.forName("nl.vpro.domain.classification.ClassificationServiceLocator").getMethod("getInstance").invoke(null);
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
-    }
-    static void setInstance(ClassificationService classificationService) {
-        try {
-            // TODO
-            Class.forName("nl.vpro.domain.classification.ClassificationServiceLocator").getMethod("setInstance").invoke(null, classificationService);
-        } catch (Exception e) {
-            throw new IllegalStateException(e);
-        }
-
-    }
-
     /**
      * Returns the Term with the given id.
      * @param termId
@@ -47,6 +30,6 @@ public interface ClassificationService {
 
     ClassificationScheme getClassificationScheme();
 
-    Date getLastModified();
+    Instant getLastModified();
 
 }

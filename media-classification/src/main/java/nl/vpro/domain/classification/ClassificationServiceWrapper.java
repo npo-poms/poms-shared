@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -89,7 +90,7 @@ public class ClassificationServiceWrapper implements ClassificationService {
     }
 
     @Override
-    public Date getLastModified() {
+    public Instant getLastModified() {
         return service.getLastModified();
     }
 
