@@ -19,6 +19,15 @@ public interface ClassificationService {
             throw new IllegalStateException(e);
         }
     }
+    static void setInstance(ClassificationService classificationService) {
+        try {
+            // TODO
+            Class.forName("nl.vpro.domain.classification.ClassificationServiceLocator").getMethod("setInstance").invoke(null, classificationService);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+
+    }
 
     /**
      * Returns the Term with the given id.
