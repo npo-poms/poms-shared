@@ -1,39 +1,47 @@
 package nl.vpro.domain.user;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * @author Michiel Meeuwissen
  * @since 3.2
  */
-public class ServiceLocator implements ApplicationContextAware {
+public class ServiceLocator  {
 
-    private static ApplicationContext context;
+
+    @Inject
+    Provider<BroadcasterService> broadcasterService = () -> null;
+
+    @Inject
+    Provider<PortalService> portalService = () -> null;
+
+    @Inject
+    Provider<ThirdPartyService> thirdPartyService = () -> null;
+
+    @Inject
+    Provider<EditorService> editorService = () -> null;
+
+    private static ServiceLocator serviceLocator;
 
     private ServiceLocator() {
+        serviceLocator = this;
     }
 
     public static BroadcasterService getBroadcasterService() {
-        return context.getBean(BroadcasterService.class);
+        return serviceLocator.broadcasterService.get();
     }
 
     public static PortalService getPortalService() {
-        return context.getBean(PortalService.class);
+        return serviceLocator.portalService.get();
     }
 
     public static ThirdPartyService getThirdPartyService() {
-        return context.getBean(ThirdPartyService.class);
+        return serviceLocator.thirdPartyService.get();
     }
 
     public static EditorService getEditorService() {
-        return context.getBean(EditorService.class);
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        context = applicationContext;
+        return serviceLocator.editorService.get();
     }
 
 
