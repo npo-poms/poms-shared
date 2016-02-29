@@ -37,8 +37,8 @@ public class ClassificationServiceLocator  {
             new ClassificationServiceLocator();
         }
 
-        if (singleton.classificationService != null && singleton.classificationService.get() != null &&
-            ! singleton.classificationService.get().equals(classificationService)
+        if (singleton.classificationService.get() != EmptyClassificationService.INSTANCE
+            && ! singleton.classificationService.get().equals(classificationService)
             ) {
             throw new IllegalStateException();
         }
