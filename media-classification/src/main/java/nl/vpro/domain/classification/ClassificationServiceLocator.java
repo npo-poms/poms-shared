@@ -17,7 +17,7 @@ public class ClassificationServiceLocator  {
     private static ClassificationServiceLocator singleton;
 
     @Inject
-    private Provider<ClassificationService> classificationService;
+    private Provider<ClassificationService> classificationService = () -> EmptyClassificationService.INSTANCE;
 
     private ClassificationServiceLocator() {
         singleton = this;
