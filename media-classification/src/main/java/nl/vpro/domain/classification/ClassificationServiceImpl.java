@@ -1,16 +1,16 @@
 package nl.vpro.domain.classification;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.net.*;
 import java.nio.file.*;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,13 +21,14 @@ import org.xml.sax.InputSource;
  * @since 3.2
  */
 public class ClassificationServiceImpl extends AbstractClassificationServiceImpl {
-    
+
+    private final Instant startTime = Instant.now();
     private static Logger LOG = LoggerFactory.getLogger(ClassificationServiceImpl.class);
 
     private final URI[] resources;
 
     private long pollIntervalInMillis = 60000;
-    
+
     public static ClassificationServiceImpl fromClassPath(String... url)  {
         URI[] uris = Arrays.stream(url)
             .map(ClassificationServiceImpl::uriFromClassPath)
@@ -103,7 +104,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         }
         return result;
     }
-    
+
     private static URI uriFromClassPath(String resource) {
         URL url = ClassificationServiceImpl.class.getClassLoader().getResource(resource);
         try {
@@ -112,10 +113,15 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
             LOG.error(e.getMessage(), e);
             return null;
         }
-    } 
-    
+    }
+
     private Instant lastModified(URI uri) throws MalformedURLException {
-        return Instant.ofEpochMilli(new File(uri).lastModified());
+        try {
+            return Instant.ofEpochMilli(new File(uri).lastModified());
+        } catch (IllegalArgumentException ia) {
+            LOG.debug("Could not get last modified from {}", uri);
+            return startTime;
+        }
     }
 
     private List<File> getDirectory(URI resource, boolean startWatchers) {
@@ -182,8 +188,10 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
 
     private long lastCheck = -1;
     private void pollingWatchDirectory(final File directory) throws IOException {
+        LOG.info("Watching " + directory + " (using polling, since NFS doesn't support more sane methods)");
         executorService.scheduleAtFixedRate((Runnable) () -> {
             if (directory.lastModified() > lastCheck) {
+                LOG.info("Found change in {}", directory);
                 lastCheck = directory.lastModified();
                 List<InputSource> sources = getSources(false);
                 if (sources != null) {
@@ -193,7 +201,8 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                         LOG.error(e.getMessage(), e);
                     }
                 }
-
+            } else {
+                LOG.debug("No changes in {}", directory);
             }
         }, pollIntervalInMillis, pollIntervalInMillis, TimeUnit.MILLISECONDS);
     }
@@ -236,6 +245,6 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
 
     @Override
     public String toString() {
-        return String.valueOf(Arrays.asList(resources));
+        return super.toString() + " " + (resources == null ? "[unconfigured] " : String.valueOf(Arrays.asList(resources)));
     }
 }
