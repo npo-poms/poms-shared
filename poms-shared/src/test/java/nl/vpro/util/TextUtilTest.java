@@ -159,4 +159,26 @@ public class TextUtilTest {
     public void testLexicoParticleOnly() {
         assertThat(TextUtil.getLexico("Het", new Locale("nl", "NL"))).isEqualTo("Het");
     }
+
+    @Test
+    public void testTruncateLong() {
+        assertThat(TextUtil.truncate("Bla bla. Bloe bloe", 10)).isEqualTo("Bla bla.");
+    }
+
+    @Test
+    public void testTruncateShorter() {
+        assertThat(TextUtil.truncate("Bla bla", 3)).isEqualTo("Bla");
+    }
+
+    @Test
+    public void testTruncateShort() {
+        assertThat(TextUtil.truncate("Bla bla. Bloe bloe", 3)).isEqualTo("Bla");
+
+    }
+
+    @Test
+    public void testTruncateShort2() {
+        assertThat(TextUtil.truncate("Bla bla. Bloe bloe", 5)).isEqualTo("Bla");
+
+    }
 }
