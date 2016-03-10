@@ -161,4 +161,52 @@ public class TextUtil {
         }
         return null;
     }
+
+     public static String truncate(String text, int max) {
+        return truncate(text, max, false);
+    }
+
+
+    static int lastIndexOfWhiteSpace(String s) {
+        for (int i = s.length() - 1; i > 0; i--) {
+            if (Character.isWhitespace(s.charAt(i))) {
+                return i;
+            }
+
+
+        }
+        return -1;
+    }
+    public static String truncate(String text, int max, boolean ellipses) {
+        if (text == null) {
+            return null;
+        }
+        boolean truncated = false;
+        while(text.length() > max) {
+            {
+                int end = text.lastIndexOf('.');
+                if (end > 0 && end < text.length() - 1) {
+                    text = text.substring(0, end + 1);
+                    truncated = true;
+                    continue;
+                }
+            }
+            {
+
+
+                int end = lastIndexOfWhiteSpace(text);
+                if (end > 0 && end < text.length() - 1) {
+                    text = text.substring(0, end);
+                    truncated = true;
+                    continue;
+                }
+            }
+            text = text.substring(0, max);
+        }
+        if (ellipses && truncated) {
+            return text + "...";
+        } else {
+            return text;
+        }
+    }
 }
