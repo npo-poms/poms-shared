@@ -1,9 +1,7 @@
 package nl.vpro.domain.classification;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URLConnection;
+import java.net.*;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.*;
@@ -27,6 +25,16 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
 
     public URLClassificationServiceImpl(URI url) {
         this.url = url;
+    }
+
+
+    @Deprecated
+    public URLClassificationServiceImpl(URL url) {
+        try {
+            this.url = url.toURI();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public URLClassificationServiceImpl(String url) {
