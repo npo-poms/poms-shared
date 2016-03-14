@@ -2,9 +2,11 @@ package nl.vpro.domain.classification;
 
 import java.io.IOException;
 import java.net.*;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.util.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
+import java.util.SortedMap;
 
 import javax.cache.annotation.CacheResult;
 import javax.servlet.http.HttpServletResponse;
@@ -60,13 +62,11 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
     @CacheResult(cacheName = "URLClassificationServiceImpl")
     protected SortedMap<TermId, Term> getTermsMap() {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat(RFC822, Locale.US);
-            sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
             URLConnection connection = url.toURL().openConnection();
             boolean ifModifiedCheck = connection instanceof HttpURLConnection;
             int code;
             if (ifModifiedCheck && lastModified != null) {
-                connection.setRequestProperty("If-Modified-Since", sdf.format(lastModified));
+                connection.setRequestProperty("If-Modified-Since", DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified));
                 code = ((HttpURLConnection) connection).getResponseCode();
             } else {
                 code = HttpServletResponse.SC_OK;
