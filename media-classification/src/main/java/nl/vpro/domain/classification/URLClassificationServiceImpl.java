@@ -21,9 +21,8 @@ import org.xml.sax.InputSource;
  */
 public class URLClassificationServiceImpl extends AbstractClassificationServiceImpl {
 
-    private static final String RFC822 = "EEE, dd MMM yyyy HH:mm:ss z";
-
-
+    private Instant lastLoad = null;
+    Integer code = null;
     final URI url;
 
     public URLClassificationServiceImpl(URI url) {
@@ -65,7 +64,6 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
         try {
             URLConnection connection = url.toURL().openConnection();
             boolean ifModifiedCheck = connection instanceof HttpURLConnection;
-            int code;
             if (ifModifiedCheck && lastModified != null) {
                 connection.setRequestProperty("If-Modified-Since", DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified.atOffset(ZoneOffset.UTC)));
                 code = ((HttpURLConnection) connection).getResponseCode();
@@ -89,6 +87,7 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
                     if (ifModifiedCheck) {
                         LOG.info("Reloaded " + url + " as it is modified since " + prevMod + " -> " + lastModified);
                     }
+                    lastLoad = Instant.now();
                     break;
                 default:
                     LOG.error(code + ":" + connection);
@@ -119,5 +118,9 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
     @Override
     public int hashCode() {
         return url != null ? url.hashCode() : 0;
+    }
+
+    public Instant getLastLoad() {
+        return lastLoad;
     }
 }
