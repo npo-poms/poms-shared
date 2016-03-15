@@ -3,6 +3,7 @@ package nl.vpro.domain.classification;
 import java.io.IOException;
 import java.net.*;
 import java.time.Instant;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
@@ -66,7 +67,7 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
             boolean ifModifiedCheck = connection instanceof HttpURLConnection;
             int code;
             if (ifModifiedCheck && lastModified != null) {
-                connection.setRequestProperty("If-Modified-Since", DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified));
+                connection.setRequestProperty("If-Modified-Since", DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified.atOffset(ZoneOffset.UTC)));
                 code = ((HttpURLConnection) connection).getResponseCode();
             } else {
                 code = HttpServletResponse.SC_OK;
