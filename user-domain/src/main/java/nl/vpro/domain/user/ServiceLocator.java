@@ -29,19 +29,19 @@ public class ServiceLocator  {
     }
 
     public static BroadcasterService getBroadcasterService() {
-        return serviceLocator.broadcasterService.get();
+        return serviceLocator == null ? null : serviceLocator.broadcasterService.get();
     }
 
     public static PortalService getPortalService() {
-        return serviceLocator.portalService.get();
+        return serviceLocator == null ? null : serviceLocator.portalService.get();
     }
 
     public static ThirdPartyService getThirdPartyService() {
-        return serviceLocator.thirdPartyService.get();
+        return serviceLocator == null ? null : serviceLocator.thirdPartyService.get();
     }
 
     public static EditorService getEditorService() {
-        return serviceLocator.editorService.get();
+        return serviceLocator == null ? null : serviceLocator.editorService.get();
     }
 
 
