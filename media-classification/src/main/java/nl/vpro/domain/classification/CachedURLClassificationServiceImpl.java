@@ -2,7 +2,8 @@ package nl.vpro.domain.classification;
 
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.SortedMap;
 
 import javax.inject.Inject;
@@ -16,9 +17,12 @@ import javax.inject.Named;
 public class CachedURLClassificationServiceImpl extends URLClassificationServiceImpl {
 
 
-    private long lastCheck = 0;
+    Instant lastCheck = Instant.EPOCH;
 
-    private long checkIntervalInMilliseconds = 300 * 1000L;
+    private Duration checkInterval = Duration.ofSeconds(300);
+
+    private long hits = 0;
+    private long misses = 0;
 
     @Inject
     public CachedURLClassificationServiceImpl(
@@ -32,18 +36,35 @@ public class CachedURLClassificationServiceImpl extends URLClassificationService
 
     @Override
     protected SortedMap<TermId, Term> getTermsMap() {
-        if (terms == null || System.currentTimeMillis() > lastCheck + checkIntervalInMilliseconds) {
-            lastCheck = System.currentTimeMillis();
+        if (terms == null || Instant.now().isAfter(lastCheck.plus(checkInterval))) {
+            lastCheck = Instant.now();
+            misses++;
             return super.getTermsMap();
         }
+        hits++;
         return terms;
     }
 
     public long getCheckIntervalInSeconds() {
-        return checkIntervalInMilliseconds / 1000;
+        return checkInterval.getSeconds();
     }
 
     public void setCheckIntervalInSeconds(long checkIntervalInSeconds) {
-        this.checkIntervalInMilliseconds = checkIntervalInSeconds * 1000;
+        this.checkInterval = Duration.ofSeconds(checkIntervalInSeconds);
+    }
+
+    public void setCheckInterval(Duration duration) {
+        this.checkInterval = duration;
+    }
+    public Duration getCheckInterval() {
+        return checkInterval;
+    }
+
+    public long getHits() {
+        return hits;
+    }
+
+    public long getMisses() {
+        return misses;
     }
 }

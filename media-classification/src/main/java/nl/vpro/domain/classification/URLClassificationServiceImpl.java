@@ -102,9 +102,11 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
                         }
                     } else {
                         if (newTerms != null) {
-                            if (terms.size() != newTerms.size()) {
+                            if (terms != null && terms.size() != newTerms.size()) {
                                 terms = newTerms;
                                 LOG.info("Reloaded " + url + ". It is modified since " + lastModified + " (Reason unknown)");
+                            } else {
+                                terms = newTerms;
                             }
                         }
 
