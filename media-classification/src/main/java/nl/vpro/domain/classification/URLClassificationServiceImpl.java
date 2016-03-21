@@ -2,9 +2,11 @@ package nl.vpro.domain.classification;
 
 import java.io.IOException;
 import java.net.*;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 import java.util.SortedMap;
@@ -24,6 +26,8 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
     private Instant lastLoad = null;
     Integer code = null;
     final URI url;
+
+    private Duration maxAge = Duration.of(1, ChronoUnit.HOURS);
 
     public URLClassificationServiceImpl(URI url) {
         this.url = url;
@@ -65,7 +69,12 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
             URLConnection connection = url.toURL().openConnection();
             boolean ifModifiedCheck = connection instanceof HttpURLConnection;
             if (ifModifiedCheck && lastModified != null) {
-                connection.setRequestProperty("If-Modified-Since", DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified.atOffset(ZoneOffset.UTC)));
+                if (lastLoad == null || lastLoad.isAfter(Instant.now().minus(maxAge))) {
+                    connection.setRequestProperty("If-Modified-Since", DateTimeFormatter.RFC_1123_DATE_TIME.format(lastModified.atOffset(ZoneOffset.UTC)));
+                } else {
+                    // last load was pretty long ago, simply do a normal request always.
+                    ifModifiedCheck = false;
+                }
                 code = ((HttpURLConnection) connection).getResponseCode();
             } else {
                 code = HttpServletResponse.SC_OK;
@@ -78,14 +87,27 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
                     InputSource input = new InputSource(connection.getInputStream());
                     input.setSystemId(url.toURL().toExternalForm());
                     Instant prevMod = lastModified;
+                    lastModified = Instant.ofEpochMilli(connection.getHeaderFieldDate("Last-Modified", System.currentTimeMillis()));
+                    SortedMap<TermId, Term> newTerms;
                     try {
-                        terms = readTerms(Collections.singletonList(input));
+                        newTerms = readTerms(Collections.singletonList(input));
                     } catch (ParserConfigurationException e) {
                         LOG.error(e.getMessage(), e);
+                        newTerms = null;
                     }
-                    lastModified = Instant.ofEpochMilli(connection.getHeaderFieldDate("Last-Modified", System.currentTimeMillis()));
                     if (ifModifiedCheck) {
-                        LOG.info("Reloaded " + url + " as it is modified since " + prevMod + " -> " + lastModified);
+                        if (newTerms != null) {
+                            terms = newTerms;
+                            LOG.info("Reloaded " + url + " as it is modified since " + prevMod + " -> " + lastModified);
+                        }
+                    } else {
+                        if (newTerms != null) {
+                            if (terms.size() != newTerms.size()) {
+                                terms = newTerms;
+                                LOG.info("Reloaded " + url + ". It is modified since " + lastModified + " (Reason unknown)");
+                            }
+                        }
+
                     }
                     lastLoad = Instant.now();
                     break;

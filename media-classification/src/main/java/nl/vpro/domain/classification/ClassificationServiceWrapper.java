@@ -1,18 +1,17 @@
 package nl.vpro.domain.classification;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Wraps another ClassifcationService. The goal is that this can implicitely user an {@link URLClassificationServiceImpl} (using cache headers), or a simple {@link ClassificationServiceImpl}.
  * @author Michiel Meeuwissen
  * @since 3.2
  */
@@ -37,15 +36,12 @@ public class ClassificationServiceWrapper implements ClassificationService {
 
     private static ClassificationService getService(String url) {
         if (url.startsWith("http")) {
-            return new URLClassificationServiceImpl(URI.create(url));
+            return new CachedURLClassificationServiceImpl(URI.create(url));
         } else {
             try {
-                Class<ClassificationService> c =
-                    (Class<ClassificationService>) Class.forName("nl.vpro.domain.classification.ClassificationServiceImpl");
-                Constructor<ClassificationService>  constructor = c.getConstructor(String.class);
-                return constructor.newInstance(url);
-            } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                throw new IllegalStateException(e);
+                return new ClassificationServiceImpl(url);
+            } catch (MalformedURLException | URISyntaxException e) {
+                throw new IllegalArgumentException(e);
             }
         }
 
