@@ -45,4 +45,32 @@ public class ServiceLocator  {
     }
 
 
+    public static void setBroadcasterService(final BroadcasterService broadcasterService) {
+        if (serviceLocator == null) {
+            new ServiceLocator();
+        }
+        serviceLocator.broadcasterService = () -> broadcasterService;
+    }
+
+    public static void setPortalService(final PortalService portalService) {
+        if (serviceLocator == null) {
+            new ServiceLocator();
+        }
+        serviceLocator.portalService = () -> portalService;
+    }
+
+    public static void setThirdPartyService(final ThirdPartyService thirdPartyService) {
+        if (serviceLocator == null) {
+            new ServiceLocator();
+        }
+        serviceLocator.thirdPartyService = () -> thirdPartyService;
+    }
+
+    public static void getEditorService(EditorService editorService) {
+        if (serviceLocator == null) {
+            new ServiceLocator();
+        }
+        serviceLocator.editorService = () -> editorService;
+    }
+
 }
