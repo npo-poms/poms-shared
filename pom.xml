@@ -34,6 +34,7 @@
     <module>image-domain</module>
     <module>media-i18n</module>
     <module>media-classification</module>
+    <module>media-organizations</module>
   </modules>
 
 </project>
