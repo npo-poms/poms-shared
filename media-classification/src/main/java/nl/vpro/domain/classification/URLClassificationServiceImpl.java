@@ -19,6 +19,7 @@ import org.xml.sax.InputSource;
 
 /**
  * @author Michiel Meeuwissen
+ * @TODO Use {@link URLResource}
  * @since 3.2
  */
 public class URLClassificationServiceImpl extends AbstractClassificationServiceImpl {
