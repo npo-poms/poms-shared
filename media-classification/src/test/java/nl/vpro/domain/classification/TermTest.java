@@ -6,7 +6,8 @@ import java.net.URL;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 /**
  * @author Michiel Meeuwissen
@@ -15,13 +16,13 @@ import static org.fest.assertions.Assertions.assertThat;
 public class TermTest {
     private ClassificationService classificationService;
 
-    
+
     @Before
     public void setup() throws URISyntaxException {
         URL url = getClass().getResource("/nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
         classificationService = new URLClassificationServiceImpl(url.toURI());
     }
-    
+
     @Test
     public void testIsTopTerm() throws Exception {
 

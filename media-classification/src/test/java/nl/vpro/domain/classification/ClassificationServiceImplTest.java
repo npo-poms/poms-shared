@@ -4,11 +4,12 @@
  */
 package nl.vpro.domain.classification;
 
-import javax.xml.bind.JAXB;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
+
+import javax.xml.bind.JAXB;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
@@ -16,7 +17,8 @@ import org.junit.Test;
 
 import com.google.common.io.Files;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 /**
  * @author Roelof Jan Koekoek
