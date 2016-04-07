@@ -14,6 +14,7 @@
   <name>poms-shared-parent</name>
 
   <properties>
+    <poms.shared.version>${project.version}</poms.shared.version>
   </properties>
 
 
@@ -36,5 +37,7 @@
     <module>media-classification</module>
     <module>media-organizations</module>
   </modules>
+
+   
 
 </project>
