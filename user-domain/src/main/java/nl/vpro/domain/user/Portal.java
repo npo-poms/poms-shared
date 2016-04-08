@@ -15,10 +15,14 @@ import nl.vpro.domain.Xmlns;
 @Entity
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "portalsType", namespace = Xmlns.MEDIA_NAMESPACE)
-@Cacheable(true)
+@Cacheable
 public class Portal extends Organization {
 
     public Portal() {
+    }
+    
+    public Portal(String id) {
+        this(id, null);
     }
 
     public Portal(String id, String displayName) {
