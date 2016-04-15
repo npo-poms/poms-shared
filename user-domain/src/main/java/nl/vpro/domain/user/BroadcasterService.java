@@ -6,11 +6,41 @@ package nl.vpro.domain.user;
 
 public interface BroadcasterService extends OrganizationService<Broadcaster> {
 
-    Broadcaster findForMisId(String id);
+    default Broadcaster findForMisId(String id) {
+        for (Broadcaster b : findAll()) {
+            if (b.misId == null) {
+                throw new UnsupportedOperationException();
+            }
+            if (id.equals(b.misId)) {
+                return b;
+            }
+        }
+        return null;
+    }
 
-    Broadcaster findForWhatsOnId(String id);
+    default Broadcaster findForWhatsOnId(String id) {
+        for (Broadcaster b : findAll()) {
+            if (b.whatsOnId == null) {
+                throw new UnsupportedOperationException();
+            }
+            if (id.equals(b.whatsOnId)) {
+                return b;
+            }
+        }
+        return null;
+    }
 
-    Broadcaster findForNeboId(String s);
+    default Broadcaster findForNeboId(String id) {
+        for (Broadcaster b : findAll()) {
+            if (b.neboId == null) {
+                throw new UnsupportedOperationException();
+            }
+            if (id.equals(b.neboId)) {
+                return b;
+            }
+        }
+        return null;
+    }
 
 
 }

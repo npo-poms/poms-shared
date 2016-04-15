@@ -4,16 +4,10 @@
  */
 package nl.vpro.media.broadcaster;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URL;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.function.Function;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,30 +23,35 @@ import nl.vpro.util.URLResource;
 public class BroadcasterServiceImpl implements BroadcasterService {
 
     private static final Logger LOG = LoggerFactory.getLogger(BroadcasterServiceImpl.class);
-    
-    private URLResource<Map<String, Broadcaster>> resource;
 
-    
+
+    private Map<String, Broadcaster> broadcasterMap = new HashMap<>();
+    private URLResource<Properties> displayNameResource;
+
+    private URLResource<Properties> misResource;
+
+
     public BroadcasterServiceImpl(String configFile) {
-        this.resource = new URLResource(URI.create(configFile), READER)
+        URI uri = URI.create(configFile);
+        if (uri.getScheme().startsWith("http")) {
+            setMisResource(configFile + "mis");
+        }
+        this.displayNameResource = new URLResource<>(URI.create(configFile), URLResource.PROPERTIES)
             .setMinAge(Duration.of(1, ChronoUnit.HOURS))
-            .setAsync(true);
+            .setAsync(true)
+            .setCallbacks(this::fillMap)
+        ;
     }
 
-    @Override
-    public Broadcaster findForMisId(String id) {
-        throw new UnsupportedOperationException();
+    public void setMisResource(String configFile) {
+        LOG.info("Using {} for mis ids", configFile);
+        this.misResource = new URLResource<>(URI.create(configFile), URLResource.PROPERTIES)
+            .setMinAge(Duration.of(1, ChronoUnit.HOURS))
+            .setAsync(true)
+            .setCallbacks(this::fillMap)
+        ;
     }
 
-    @Override
-    public Broadcaster findForWhatsOnId(String id) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Broadcaster findForNeboId(String s) {
-        throw new UnsupportedOperationException();
-    }
 
     @Override
     public Broadcaster find(String id) {
@@ -76,24 +75,30 @@ public class BroadcasterServiceImpl implements BroadcasterService {
     }
 
     Map<String, Broadcaster> getRepository() {
-        return resource.get();
-    }
-    
-    protected static final Function<InputStream, Map<String, Broadcaster>> READER = inputStream -> {
-        try {
-            Properties broadcastersConfig = new Properties();
-            broadcastersConfig.load(inputStream);
-            Map<String, Broadcaster> result = new HashMap<>();
-            for (Map.Entry<Object, Object> entry : broadcastersConfig.entrySet()) {
-                String id = (String) entry.getKey();
-                String name = (String) entry.getValue();
-                Broadcaster broadcaster = new Broadcaster(id.trim(), name.trim());
-                result.put(broadcaster.getId(), broadcaster);
-            }
-            return result;
-        } catch (IOException e) {
-            LOG.error(e.getMessage(), e);
-            throw new RuntimeException(e);
+        displayNameResource.get();
+        if (misResource != null) {
+            misResource.get();
         }
-    };
+        return Collections.unmodifiableMap(broadcasterMap);
+    }
+
+    protected void fillMap(Properties properties) {
+        Map<String, Broadcaster> result = new HashMap<>();
+        for (Map.Entry<Object, Object> entry : displayNameResource.get().entrySet()) {
+            String id = (String) entry.getKey();
+            String name = (String) entry.getValue();
+            String misId = null;
+            if (misResource != null) {
+                misId = (String) misResource.get().get(id);
+            }
+            String whatonId = null;
+            String neboId = null;
+
+            Broadcaster broadcaster = new Broadcaster(id.trim(), name.trim(), whatonId, neboId, misId);
+            result.put(broadcaster.getId(), broadcaster);
+
+        }
+        broadcasterMap = result;
+    }
+
 }
