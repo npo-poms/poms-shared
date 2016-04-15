@@ -27,31 +27,37 @@ public class BroadcasterServiceImpl implements BroadcasterService {
 
     private Map<String, Broadcaster> broadcasterMap = new HashMap<>();
     private URLResource<Properties> displayNameResource;
-
     private URLResource<Properties> misResource;
+    private URLResource<Properties> whatsonResource;
 
 
     public BroadcasterServiceImpl(String configFile) {
         URI uri = URI.create(configFile);
         if (uri.getScheme().startsWith("http")) {
             setMisResource(configFile + "mis");
+            setWhatsonResource(configFile + "whats_on");
         }
-        this.displayNameResource = new URLResource<>(URI.create(configFile), URLResource.PROPERTIES)
-            .setMinAge(Duration.of(1, ChronoUnit.HOURS))
-            .setAsync(true)
-            .setCallbacks(this::fillMap)
-        ;
+
+        this.displayNameResource = getURLResource(configFile);
     }
 
     public void setMisResource(String configFile) {
         LOG.info("Using {} for mis ids", configFile);
-        this.misResource = new URLResource<>(URI.create(configFile), URLResource.PROPERTIES)
-            .setMinAge(Duration.of(1, ChronoUnit.HOURS))
-            .setAsync(true)
-            .setCallbacks(this::fillMap)
-        ;
+        this.misResource = getURLResource(configFile);
     }
 
+
+    public void setWhatsonResource(String configFile) {
+        LOG.info("Using {} for what'son ids", configFile);
+        this.whatsonResource = getURLResource(configFile);
+    }
+
+    protected URLResource<Properties> getURLResource(String configFile) {
+        return new URLResource<>(URI.create(configFile), URLResource.PROPERTIES)
+            .setMinAge(Duration.of(1, ChronoUnit.HOURS))
+            .setAsync(true)
+            .setCallbacks(this::fillMap);
+    }
 
     @Override
     public Broadcaster find(String id) {
@@ -78,6 +84,9 @@ public class BroadcasterServiceImpl implements BroadcasterService {
         displayNameResource.get();
         if (misResource != null) {
             misResource.get();
+        }
+        if (whatsonResource!= null) {
+            whatsonResource.get();
         }
         return Collections.unmodifiableMap(broadcasterMap);
     }
