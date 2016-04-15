@@ -35,7 +35,9 @@ public class BroadcasterServiceImpl implements BroadcasterService {
         URI uri = URI.create(configFile);
         if (uri.getScheme().startsWith("http")) {
             setMisResource(configFile + "mis");
+            setWhatsonResource(configFile + "whats_on");
         }
+
         this.displayNameResource = getURLResource(configFile);
     }
 
