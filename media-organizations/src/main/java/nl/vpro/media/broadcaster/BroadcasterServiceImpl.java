@@ -100,10 +100,14 @@ public class BroadcasterServiceImpl implements BroadcasterService {
             if (misResource != null) {
                 misId = (String) misResource.get().get(id);
             }
-            String whatonId = null;
+            String whatsonId = null;
+            if (whatsonResource != null) {
+                whatsonId = (String) whatsonResource.get().get(id);
+            }
+
             String neboId = null;
 
-            Broadcaster broadcaster = new Broadcaster(id.trim(), name.trim(), whatonId, neboId, misId);
+            Broadcaster broadcaster = new Broadcaster(id.trim(), name.trim(), whatsonId, neboId, misId);
             result.put(broadcaster.getId(), broadcaster);
 
         }
