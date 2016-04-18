@@ -1,0 +1,21 @@
+package nl.vpro.domain;
+
+import java.io.Serializable;
+
+/**
+ * @author Michiel Meeuwissen
+ * @since 4.4
+ */
+public class NotFoundException extends RuntimeException {
+
+    private final Serializable identifier;
+
+    public NotFoundException(String identifier, String message) {
+        super(message);
+        this.identifier = identifier;
+    }
+
+    public Serializable getIdentifier() {
+        return identifier;
+    }
+}
