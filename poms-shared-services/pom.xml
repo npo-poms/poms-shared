@@ -17,7 +17,7 @@
     </dependency>
     <dependency>
       <groupId>nl.vpro.user</groupId>
-      <artifactId>user-services</artifactId>
+      <artifactId>user-domain</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
