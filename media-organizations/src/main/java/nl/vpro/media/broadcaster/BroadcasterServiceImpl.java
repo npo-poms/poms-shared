@@ -26,9 +26,9 @@ public class BroadcasterServiceImpl implements BroadcasterService {
 
 
     private Map<String, Broadcaster> broadcasterMap = new HashMap<>();
-    private URLResource<Properties> displayNameResource;
-    private URLResource<Properties> misResource;
-    private URLResource<Properties> whatsonResource;
+    private URLResource<Map<String, String>> displayNameResource;
+    private URLResource<Map<String, String>> misResource;
+    private URLResource<Map<String, String>> whatsonResource;
 
 
     public BroadcasterServiceImpl(String configFile) {
@@ -52,11 +52,10 @@ public class BroadcasterServiceImpl implements BroadcasterService {
         this.whatsonResource = getURLResource(configFile);
     }
 
-    protected URLResource<Properties> getURLResource(String configFile) {
-        return new URLResource<>(URI.create(configFile), URLResource.PROPERTIES)
+    protected URLResource<Map<String, String>> getURLResource(String configFile) {
+        return URLResource.map(URI.create(configFile), this::fillMap)
             .setMinAge(Duration.of(1, ChronoUnit.HOURS))
-            .setAsync(true)
-            .setCallbacks(this::fillMap);
+            .setAsync(true);
     }
 
     @Override
@@ -91,19 +90,23 @@ public class BroadcasterServiceImpl implements BroadcasterService {
         return Collections.unmodifiableMap(broadcasterMap);
     }
 
-    protected void fillMap(Properties properties) {
+    protected void fillMap(Map<String, String> properties) {
         Map<String, Broadcaster> result = new HashMap<>();
-        for (Map.Entry<Object, Object> entry : displayNameResource.get().entrySet()) {
-            String id = (String) entry.getKey();
-            String name = (String) entry.getValue();
+        for (Map.Entry<String, String> entry : displayNameResource.get().entrySet()) {
+            String id = entry.getKey();
+            String name = entry.getValue();
             String misId = null;
             if (misResource != null) {
-                misId = (String) misResource.get().get(id);
+                misId = misResource.get().get(id);
             }
-            String whatonId = null;
+            String whatsonId = null;
+            if (whatsonResource != null) {
+                whatsonId = whatsonResource.get().get(id);
+            }
+
             String neboId = null;
 
-            Broadcaster broadcaster = new Broadcaster(id.trim(), name.trim(), whatonId, neboId, misId);
+            Broadcaster broadcaster = new Broadcaster(id.trim(), name.trim(), whatsonId, neboId, misId);
             result.put(broadcaster.getId(), broadcaster);
 
         }
