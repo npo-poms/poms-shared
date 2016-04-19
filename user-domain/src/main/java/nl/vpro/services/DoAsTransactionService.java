@@ -1,8 +1,6 @@
-package nl.vpro.domain.services;
+package nl.vpro.services;
 
 import java.util.concurrent.Callable;
-
-import nl.vpro.services.TransactionService;
 
 /**
  * @author Michiel Meeuwissen
