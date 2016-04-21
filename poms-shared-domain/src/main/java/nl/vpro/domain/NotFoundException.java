@@ -11,7 +11,7 @@ public class NotFoundException extends RuntimeException {
     private final Serializable identifier;
 
     public NotFoundException(String identifier, String message) {
-        super(message);
+        super("For '" + identifier + "'. " + message);
         this.identifier = identifier;
     }
 
