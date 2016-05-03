@@ -74,6 +74,13 @@ public class Broadcaster extends Organization {
     }
 
 
+    @Override
+    @Size(min = 1, max = 4, message = "0 < id < 5")
+    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}+", message = "Broadcaster id should be {regexp}")
+    public String getId() {
+        return super.getId();
+    }
+
     public String getWhatsOnId() {
         if(StringUtils.isBlank(whatsOnId)) {
             return getId();

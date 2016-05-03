@@ -28,8 +28,6 @@ import nl.vpro.domain.Xmlns;
 public abstract class Organization implements Serializable, Identifiable<String>, Comparable<Organization> {
 
     @Id
-    @Size(min = 1, max = 255, message = "0 < id < 256")
-    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,}+", message = "type should conform to: [A-Z0-9_-]{2,}+")
     @XmlAttribute
     protected String id;
 
@@ -50,6 +48,8 @@ public abstract class Organization implements Serializable, Identifiable<String>
     }
 
     @Override
+    @Size(min = 1, max = 255, message = "0 < id < 256")
+    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,}+", message = "type should conform to: [A-Z0-9_-]{2,}+")
     public String getId() {
         return id;
     }
