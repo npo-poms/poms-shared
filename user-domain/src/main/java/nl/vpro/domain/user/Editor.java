@@ -33,7 +33,7 @@ public class Editor extends AbstractUser {
 ////    @IsEmployee Works on domain model, but not on Hibernate persisted collections
     @Valid
     @XmlTransient
-    private SortedSet<BroadcasterEditor> broadcasters = new TreeSet<>();
+    SortedSet<BroadcasterEditor> broadcasters = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "principalid")
@@ -42,7 +42,7 @@ public class Editor extends AbstractUser {
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @XmlTransient
-    private SortedSet<PortalEditor> portals = new TreeSet<>();
+    SortedSet<PortalEditor> portals = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "principalid")
@@ -56,7 +56,7 @@ public class Editor extends AbstractUser {
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
-    private SortedSet<ThirdPartyEditor> thirdParties = new TreeSet<>();
+    SortedSet<ThirdPartyEditor> thirdParties = new TreeSet<>();
 
     @Transient
     private SortedSet<Broadcaster> allowedBroadcasterCache;
