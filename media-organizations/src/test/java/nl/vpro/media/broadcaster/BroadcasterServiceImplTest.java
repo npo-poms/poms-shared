@@ -8,7 +8,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class BroadcasterServiceImplTest {
 
 
-    BroadcasterService broadcasterService = new BroadcasterServiceImpl("classpath:/broadcasters.properties");
+    BroadcasterService broadcasterService = new BroadcasterServiceImpl("classpath:/broadcasters.properties", false);
 
     @Test
     public void testFind() throws Exception {

@@ -32,30 +32,36 @@ public class BroadcasterServiceImpl implements BroadcasterService {
 
 
     public BroadcasterServiceImpl(String configFile) {
+        this(configFile, true);
+    }
+
+
+    public BroadcasterServiceImpl(String configFile, boolean async) {
+        this.displayNameResource = getURLResource(configFile, async);
         URI uri = URI.create(configFile);
         if (uri.getScheme().startsWith("http")) {
             setMisResource(configFile + "mis");
             setWhatsonResource(configFile + "whats_on");
         }
 
-        this.displayNameResource = getURLResource(configFile);
+
     }
 
     public void setMisResource(String configFile) {
         LOG.info("Using {} for mis ids", configFile);
-        this.misResource = getURLResource(configFile);
+        this.misResource = getURLResource(configFile, displayNameResource.isAsync());
     }
 
 
     public void setWhatsonResource(String configFile) {
         LOG.info("Using {} for what'son ids", configFile);
-        this.whatsonResource = getURLResource(configFile);
+        this.whatsonResource = getURLResource(configFile, displayNameResource.isAsync());
     }
 
-    protected URLResource<Map<String, String>> getURLResource(String configFile) {
+    protected URLResource<Map<String, String>> getURLResource(String configFile, boolean async) {
         return URLResource.map(URI.create(configFile), this::fillMap)
             .setMinAge(Duration.of(1, ChronoUnit.HOURS))
-            .setAsync(true);
+            .setAsync(async);
     }
 
     @Override
