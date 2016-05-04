@@ -24,7 +24,7 @@ public class BroadcasterServiceImplTest {
     @Test
     public void testMisId() {
         BroadcasterService broadcasterService = new BroadcasterServiceImpl("http://poms.omroep.nl/broadcasters/");
-
+        assertThat(broadcasterService.find("RTUT")).isNotNull();
         assertThat(broadcasterService.find("RTUT").getMisId()).isEqualTo("RTV Utrecht");
 
     }
