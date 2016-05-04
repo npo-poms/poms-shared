@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.user;
 
+import java.io.Serializable;
+import java.time.Instant;
+
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Id;
@@ -11,8 +14,6 @@ import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import java.io.Serializable;
-import java.time.Instant;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.persistence.InstantToTimestampConverter;
