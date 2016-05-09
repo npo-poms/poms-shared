@@ -14,14 +14,14 @@ import static org.junit.Assume.assumeNotNull;
 public class ComparableTest<S extends Comparable<S>> extends ObjectTest<S> {
 
     @Theory
-    public final void equalsConstistentWithComparable(S x, S y) {
+    public final void equalsConstistentWithComparable(Comparable x, Comparable y) {
         assumeNotNull(x);
         assumeNotNull(y);
         assertThat(x.compareTo(y) == 0, is(x.equals(y)));
     }
 
     @Theory
-    public final void compareToNull(S x) {
+    public final void compareToNull(Comparable x) {
         assumeNotNull(x);
         try {
             x.compareTo(null);

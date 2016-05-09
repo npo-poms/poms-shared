@@ -27,7 +27,7 @@ public abstract class ObjectTest<T> {
      * For any non-null reference value x, x.equals(x) should return true
      */
     @Theory
-    public final void equalsIsReflexive(T x) {
+    public final void equalsIsReflexive(Object x) {
         assumeThat(x, is(not(equalTo(null))));
         assertThat(x.equals(x), is(true));
     }
@@ -37,7 +37,7 @@ public abstract class ObjectTest<T> {
      * should return true if and only if y.equals(x) returns true.
      */
     @Theory
-    public final void equalsIsSymmetric(T x, T y) {
+    public final void equalsIsSymmetric(Object x, Object y) {
         assumeThat(x, is(not(equalTo(null))));
         assumeThat(y, is(not(equalTo(null))));
         assumeThat(y.equals(x), is(true));
@@ -50,7 +50,7 @@ public abstract class ObjectTest<T> {
      * should return true.
      */
     @Theory
-    public final void equalsIsTransitive(T x, T y, T z) {
+    public final void equalsIsTransitive(Object x, Object y, Object z) {
         assumeThat(x, is(not(equalTo(null))));
         assumeThat(y, is(not(equalTo(null))));
         assumeThat(z, is(not(equalTo(null))));
@@ -65,7 +65,7 @@ public abstract class ObjectTest<T> {
      * the objects is modified.
      */
     @Theory
-    public final void equalsIsConsistent(T x, T y) {
+    public final void equalsIsConsistent(Object x, Object y) {
         assumeThat(x, is(not(equalTo(null))));
         boolean alwaysTheSame = x.equals(y);
 
@@ -79,7 +79,7 @@ public abstract class ObjectTest<T> {
      * return false.
      */
     @Theory
-    public final void equalsReturnFalseOnNull(T x) {
+    public final void equalsReturnFalseOnNull(Object x) {
         assumeThat(x, is(not(equalTo(null))));
         assertThat(x.equals(null), is(false));
     }
@@ -90,7 +90,7 @@ public abstract class ObjectTest<T> {
      * integer.
      */
     @Theory
-    public final void hashCodeIsSelfConsistent(T x) {
+    public final void hashCodeIsSelfConsistent(Object x) {
         assumeThat(x, is(not(equalTo(null))));
         int alwaysTheSame = x.hashCode();
 
@@ -105,7 +105,7 @@ public abstract class ObjectTest<T> {
      * must produce the same integer result.
      */
     @Theory
-    public final void hashCodeIsConsistentWithEquals(T x, T y) {
+    public final void hashCodeIsConsistentWithEquals(Object x, Object y) {
         assumeThat(x, is(not(equalTo(null))));
         assumeThat(x.equals(y), is(true));
         assertThat(x.hashCode(), is(equalTo(y.hashCode())));
@@ -116,7 +116,7 @@ public abstract class ObjectTest<T> {
      * instance works. User must provide datapoints that are not equal.
      */
     @Theory
-    public final void equalsWorks(T x, T y) {
+    public final void equalsWorks(Object x, Object y) {
         assumeThat(x, is(not(equalTo(null))));
         assumeThat(x == y, is(true));
         assertThat(x.equals(y), is(true));
