@@ -87,11 +87,11 @@ public class Editor extends AbstractUser {
         if(broadcaster != null) {
             broadcasters.add(new BroadcasterEditor(this, broadcaster, true));
         }
-        this.roles = roles == null ? Collections.<String>emptySet() : Collections.unmodifiableSet(roles);
+        this.roles = roles == null ? Collections.emptySet() : Collections.unmodifiableSet(roles);
     }
 
     Editor(String principalId, String displayName, String email, Broadcaster broadcaster, String givenName, String familyName, Instant lastLogin) {
-        this(principalId, displayName, email, broadcaster, Collections.<String>emptySet());
+        this(principalId, displayName, email, broadcaster, Collections.emptySet());
         this.givenName = givenName;
         this.familyName = familyName;
         this.lastLogin = lastLogin;
@@ -112,7 +112,7 @@ public class Editor extends AbstractUser {
         this.roles = roles;
     }
 
-        public Set<String> getRoles() {
+    public Set<String> getRoles() {
         return this.roles;
     }
 
