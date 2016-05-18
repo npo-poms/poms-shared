@@ -15,12 +15,18 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable(true)
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 public class Editor extends AbstractUser {
+
+    private static final Logger LOG = LoggerFactory.getLogger(Editor.class);
+
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "principalid")
@@ -86,6 +92,9 @@ public class Editor extends AbstractUser {
         super(principalId, displayName, email);
         if(broadcaster != null) {
             broadcasters.add(new BroadcasterEditor(this, broadcaster, true));
+        }
+        if (roles == null) {
+            LOG.warn("No roles for {}", principalId);
         }
         this.roles = roles == null ? Collections.emptySet() : Collections.unmodifiableSet(roles);
     }
