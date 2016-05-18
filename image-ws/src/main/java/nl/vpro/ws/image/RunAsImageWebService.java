@@ -26,15 +26,7 @@ import nl.vpro.domain.image.ImageType;
 public interface RunAsImageWebService {
 	// all methods get @WebParam(name = "principalId", targetNamespace = "") String principalId,
 
-	/**
-	 * upload
-     * @param principalId
-	 * @param title
-	 * @param description
-	 * @param type
-	 * @param data
-	 * @return String
-	 */
+
     @WebMethod
     @WebResult(
         name = "urn",
@@ -52,16 +44,6 @@ public interface RunAsImageWebService {
         @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "data", targetNamespace = "") DataHandler data);
 
-    /**
-     * uploadAsync
-     * @param principalId
-     * @param title
-     * @param description
-     * @param type
-     * @param data
-     * @param handler Future<?>
-     * @return
-     */
     @WebMethod(operationName = "upload")
     @RequestWrapper(
         localName = "upload",
@@ -77,15 +59,6 @@ public interface RunAsImageWebService {
         @WebParam(name = "data", targetNamespace = "") DataHandler data,
         AsyncHandler<UploadResponse> handler);
 
-    /**
-     * uploadAsync
-     * @param principalId
-     * @param title
-     * @param description
-     * @param type
-     * @param data
-     * @return UploadResponse
-     */
     @WebMethod(operationName = "upload")
     @RequestWrapper(
         localName = "upload",
@@ -100,16 +73,6 @@ public interface RunAsImageWebService {
         @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "data", targetNamespace = "") DataHandler data);
 
-    /**
-     * download
-     * @param principalId
-     * @param title
-     * @param description
-     * @param type
-     * @param url
-     * @return String result
-     * @throws DownloadFault
-     */
     @WebMethod
     @WebResult(
         name = "urn",
@@ -127,16 +90,7 @@ public interface RunAsImageWebService {
         @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "url", targetNamespace = "") String url) throws DownloadFault;
 
-    /**
-     * downloadAsync
-     * @param principalId
-     * @param title
-     * @param description
-     * @param type
-     * @param url
-     * @param handler
-     * @return Future<?>
-     */
+
     @WebMethod(operationName = "download")
     @RequestWrapper(
         localName = "download",
@@ -152,15 +106,6 @@ public interface RunAsImageWebService {
         @WebParam(name = "url", targetNamespace = "") String url,
         AsyncHandler<DownloadResponse> handler);
 
-    /**
-     * downloadAsync
-     * @param principalId
-     * @param title
-     * @param description
-     * @param type
-     * @param url
-     * @return DownloadResponse
-     */
     @WebMethod(operationName = "download")
     @RequestWrapper(
         localName = "download",
