@@ -24,7 +24,7 @@ import nl.vpro.domain.Xmlns;
 @MappedSuperclass
 @Cacheable(true)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "organizationsType", namespace = Xmlns.MEDIA_NAMESPACE)
+@XmlType(name = "organizationType", namespace = Xmlns.MEDIA_NAMESPACE)
 public abstract class Organization implements Serializable, Identifiable<String>, Comparable<Organization> {
 
     @Id
