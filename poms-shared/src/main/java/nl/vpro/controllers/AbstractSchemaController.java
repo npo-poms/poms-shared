@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
@@ -18,6 +19,7 @@ import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;
+import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.IOUtils;
@@ -30,15 +32,20 @@ import org.springframework.util.StringUtils;
  * @author Michiel Meeuwissen
  * @since 3.4
  */
-public class AbstractSchemaController {
+public abstract class AbstractSchemaController {
 
     private static final Logger LOG = LoggerFactory.getLogger(AbstractSchemaController.class);
 
 
-    protected static Map<String, Class[]> MAPPING = new LinkedHashMap<>();
+    protected final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
+
+	protected final Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
+
+    abstract protected void fillMappings();
 
     @PostConstruct
     public void init() throws IOException, JAXBException {
+        fillMappings();
         Set<Class> classes = new LinkedHashSet<>();
         for (Class[] c : MAPPING.values()) {
             classes.addAll(Arrays.asList(c));
@@ -102,6 +109,11 @@ public class AbstractSchemaController {
 		context.generateSchema(new SchemaOutputResolver() {
 			@Override
 			public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+                if (KNOWN_LOCATIONS.containsKey(namespaceUri)) {
+                    Result result = new DOMResult();
+                    result.setSystemId(KNOWN_LOCATIONS.get(namespaceUri).toString());
+                    return result;
+                }
                 File f;
                 if (StringUtils.isEmpty(namespaceUri)) {
                     f = new File(getTempDir(), suggestedFileName);

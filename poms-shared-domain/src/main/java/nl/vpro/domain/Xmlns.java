@@ -1,9 +1,11 @@
 package nl.vpro.domain;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
@@ -46,6 +48,7 @@ public final class Xmlns {
 
     public static final String PAGE_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:page:2013";
 
+
     public static final String CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:2014";
 
     public static final String MEDIA_WS_NAMESPACE = "urn:vpro:ws:media:2009";
@@ -76,6 +79,14 @@ public final class Xmlns {
             }
         }
         return result.toArray(new StreamSource[result.size()]);
+
+    }
+
+    public static void fillLocationsAtPoms(Map<String, URI> map, String pomsLocation) {
+        map.put(MEDIA_NAMESPACE, URI.create(pomsLocation + "schema/vproMedia.xsd"));
+        map.put(SHARED_NAMESPACE, URI.create(pomsLocation + "schema/vproShared.xsd"));
+        map.put(SEARCH_NAMESPACE, URI.create(pomsLocation + "schema/search/vproMediaSearch.xsd"));
+        map.put(UPDATE_NAMESPACE, URI.create(pomsLocation + "schema/update/vproMediaUpdate.xsd"));
 
     }
 
