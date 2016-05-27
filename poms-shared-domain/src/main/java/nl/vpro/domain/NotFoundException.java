@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Michiel Meeuwissen
  * @since 4.4
  */
-public class NotFoundException extends RuntimeException {
+public class NotFoundException extends Exception {
 
     private final Serializable identifier;
 

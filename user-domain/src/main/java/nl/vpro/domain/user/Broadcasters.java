@@ -2,6 +2,8 @@ package nl.vpro.domain.user;
 
 import java.util.*;
 
+import nl.vpro.domain.NotFoundException;
+
 /**
  * @author Michiel Meeuwissen
  */
@@ -12,7 +14,7 @@ public final class Broadcasters {
     }
 
 
-    public static List<Broadcaster> match(BroadcasterService broadcasterService, List<Broadcaster> broadcasters) {
+    public static List<Broadcaster> match(BroadcasterService broadcasterService, List<Broadcaster> broadcasters) throws NotFoundException {
         List<Broadcaster> result = new ArrayList<>(broadcasters.size());
         for (Broadcaster b : broadcasters) {
             if (b.getId() != null) {
