@@ -41,6 +41,10 @@ public class Broadcaster extends Organization {
     @XmlTransient
     protected String misId;
 
+    public static Broadcaster of(String id) {
+        return new Broadcaster(id);
+    }
+
     public static Broadcaster whatsOnBroadcaster(String id) {
         return new Broadcaster(null, null, id, null, null);
     }
