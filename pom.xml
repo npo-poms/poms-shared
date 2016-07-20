@@ -35,6 +35,7 @@
     <module>media-i18n</module>
     <module>media-classification</module>
     <module>media-organizations</module>
+    <module>media-es-mappings</module>
   </modules>
 
   <repositories>
