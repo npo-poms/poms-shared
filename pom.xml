@@ -36,6 +36,7 @@
     <module>media-classification</module>
     <module>media-organizations</module>
     <module>media-es-mappings</module>
+    <module>pages-es-mappings</module>
   </modules>
 
   <repositories>
