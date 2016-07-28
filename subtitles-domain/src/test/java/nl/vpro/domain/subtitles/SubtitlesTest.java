@@ -11,7 +11,6 @@ import java.util.Locale;
 
 import javax.xml.bind.JAXB;
 
-import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -51,7 +50,7 @@ public class SubtitlesTest {
 
         Subtitles subtitles = JAXB.unmarshal(reader, Subtitles.class);
 
-        assertThat(subtitles.getPoProgID()).isEqualTo("VPRO_1234");
+        assertThat(subtitles.getMid()).isEqualTo("VPRO_1234");
         assertThat(subtitles.getOffset()).isEqualTo(Duration.ofMillis(120000));
         assertThat(subtitles.getContent()).isEqualTo("Ondertiteling tekst");
     }

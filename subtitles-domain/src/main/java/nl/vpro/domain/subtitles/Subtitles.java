@@ -31,7 +31,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @XmlRootElement(name = "subtitles")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "subtitlesType", propOrder = {
-        "poProgID",
+    "mid",
         "offset",
         "content"
         })
@@ -47,7 +47,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     @Id
     @XmlElement(required = true)
-    protected String poProgID;
+    protected String mid;
 
     @Column(name = "[offset]")
     @Convert(converter = DurationToLongConverter.class)
@@ -79,8 +79,8 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     protected Subtitles() {}
 
-    public Subtitles(String poProgID, Duration offset, String content) {
-        this.poProgID = poProgID;
+    public Subtitles(String mid, Duration offset, String content) {
+        this.mid = mid;
         this.offset = offset;
         this.content = content;
     }
@@ -94,12 +94,12 @@ public class Subtitles implements Serializable, Identifiable<String> {
     }
 
 
-    public String getPoProgID() {
-        return poProgID;
+    public String getMid() {
+        return mid;
     }
 
-    public void setPoProgID(String poProgID) {
-        this.poProgID = poProgID;
+    public void setMid(String mid) {
+        this.mid = mid;
     }
 
     public Duration getOffset() {
@@ -121,7 +121,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     @Override
     public String getId() {
-        return poProgID;
+        return mid;
     }
 
     public SubtitlesType getType() {
@@ -152,7 +152,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Subtitles");
-        sb.append("{poProgID='").append(poProgID).append('\'');
+        sb.append("{poProgID='").append(mid).append('\'');
         sb.append(", creationDate=").append(creationDate);
         sb.append('}');
         return sb.toString();
@@ -169,7 +169,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
         Subtitles subtitles = (Subtitles)o;
 
-        if(poProgID != null ? !poProgID.equals(subtitles.poProgID) : subtitles.poProgID != null) {
+        if(mid != null ? !mid.equals(subtitles.mid) : subtitles.mid != null) {
             return false;
         }
 
@@ -178,6 +178,6 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     @Override
     public int hashCode() {
-        return poProgID != null ? poProgID.hashCode() : 0;
+        return mid != null ? mid.hashCode() : 0;
     }
 }
