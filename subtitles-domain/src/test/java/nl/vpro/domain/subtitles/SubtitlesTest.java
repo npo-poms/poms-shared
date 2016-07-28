@@ -30,8 +30,7 @@ public class SubtitlesTest {
 
 
         JAXBTestUtil.roundTripAndSimilar(subtitles,
-            "<subtitles creationDate=\"1970-01-01T01:00:00.000+01:00\" type=\"CAPTION\" format=\"WEBVTT\" xml:lang=\"nl-NL\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
-                "    <poProgID>VPRO_1234</poProgID>\n" +
+                "<subtitles mid=\"VPRO_1234\" creationDate=\"1970-01-01T01:00:00.000+01:00\" type=\"CAPTION\" format=\"WEBVTT\" xml:lang=\"nl-NL\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
                 "    <offset>P0DT0H2M0.000S</offset>\n" +
                 "    <content>Ondertiteling tekst</content>\n" +
                 "</subtitles>");
@@ -39,9 +38,8 @@ public class SubtitlesTest {
 
     @Test
     public void testUnmarshallFromXml() {
-        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<subtitles creationDate=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
-            "    <poProgID>VPRO_1234</poProgID>\n" +
+        String xml =
+            "<subtitles mid=\"VPRO_1234\" creationDate=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
             "    <offset>P0DT0H2M0.000S</offset>\n" +
             "    <content>Ondertiteling tekst</content>\n" +
             "</subtitles>\n";

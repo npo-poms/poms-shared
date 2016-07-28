@@ -46,7 +46,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
     protected Instant creationDate = Instant.now();
 
     @Id
-    @XmlElement(required = true)
+    @XmlAttribute(required = true)
     protected String mid;
 
     @Column(name = "[offset]")
