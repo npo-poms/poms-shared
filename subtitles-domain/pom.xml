@@ -12,6 +12,25 @@
   <artifactId>subtitles-domain</artifactId>
   <name>subtitles-domain</name>
   <dependencies>
-
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>shared-persistence</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>shared-xml</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>shared-jackson2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.publiekeomroep</groupId>
+      <artifactId>poms-shared-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>shared-test</artifactId>
+    </dependency>
   </dependencies>
 </project>
