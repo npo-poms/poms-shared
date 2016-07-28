@@ -21,12 +21,15 @@ public class Cue {
     static {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UT"));
     }
+
+    public final String parent;
     public final int sequence;
     public final Duration start;
     public final Duration end;
     public final String content;
 
-    private Cue(int sequence, Duration start, Duration end, String content) {
+    private Cue(String parent, int sequence, Duration start, Duration end, String content) {
+        this.parent = parent;
         this.sequence = sequence;
         this.start = start;
         this.end = end;
@@ -34,9 +37,10 @@ public class Cue {
     }
 
 
-    public static Cue parse(String timeLine, String content) throws ParseException {
+    public static Cue parse(String parent, String timeLine, String content) throws ParseException {
         String[] split = timeLine.split("\\s+");
         return new Cue(
+            parent,
             Integer.parseInt(split[0]),
             Duration.ofMillis(dateFormat.parse(split[1] + "0").getTime()),
             Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime()),

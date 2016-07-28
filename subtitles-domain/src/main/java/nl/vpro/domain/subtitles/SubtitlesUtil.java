@@ -25,15 +25,15 @@ public class SubtitlesUtil {
 
 
     public static Stream<Cue> parse(Subtitles subtitles) {
-        return parse(new StringReader(subtitles.getContent()));
+        return parse(subtitles.getMid(), new StringReader(subtitles.getContent()));
     }
 
 
-    public static Stream<Cue> parse(InputStream inputStream) throws UnsupportedEncodingException {
-        return parse(new InputStreamReader(inputStream, "ISO-6937"));
+    public static Stream<Cue> parse(String parent, InputStream inputStream) throws UnsupportedEncodingException {
+        return parse(parent, new InputStreamReader(inputStream, "ISO-6937"));
     }
 
-    public static Stream<Cue> parse(Reader reader) {
+    public static Stream<Cue> parse(final String parent, Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
         Iterator<Cue> cues = new Iterator<Cue>() {
@@ -56,7 +56,7 @@ public class SubtitlesUtil {
                 }
                 needsFindNext = true;
                 try {
-                    return Cue.parse(timeLine, content.toString());
+                    return Cue.parse(parent, timeLine, content.toString());
                 }  catch (ParseException e) {
                     LOG.error(e.getMessage(), e);
                     return null;
