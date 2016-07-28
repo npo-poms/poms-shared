@@ -72,6 +72,7 @@ public class SubtitlesUtil {
                         String l = stream.next();
                         if (StringUtils.isNotBlank(l)) {
                             timeLine = l.trim();
+                            break;
                         }
                     }
                     while (stream.hasNext()) {
@@ -82,7 +83,7 @@ public class SubtitlesUtil {
                         if (content.length() > 0) {
                             content.append('\n');
                         }
-                        content.append(l);
+                        content.append(l.trim());
                     }
                     needsFindNext = false;
                 }
