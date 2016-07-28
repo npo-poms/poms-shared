@@ -1,0 +1,27 @@
+{
+  "memberRef": {
+    "_parent": {
+      "type": "program",
+      "property": "parent"
+    },
+    "dynamic": "strict",
+    "properties": {
+      "parent": {
+        "type": "string",
+        "format": "not_analyze"
+      },
+      "sequence": {
+        "type": "long"
+      },
+      "start": {
+        "type": "long"
+      },
+      "end": {
+        "type": "long",
+      },
+      "content": {
+        "type": "string",
+      }
+    }
+  }
+}

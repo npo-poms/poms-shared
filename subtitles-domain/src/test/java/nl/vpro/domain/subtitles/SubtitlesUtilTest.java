@@ -24,8 +24,8 @@ public class SubtitlesUtilTest {
     public void basic() throws IOException {
         List<Cue> list = SubtitlesUtil.parse(getSubtitles()).collect(Collectors.toList());
         assertThat(list).hasSize(403);
-        assertThat(list.get(0).content).isEqualTo("888");
-        assertThat(list.get(199).content).isEqualTo(
+        assertThat(list.get(0).getContent()).isEqualTo("888");
+        assertThat(list.get(199).getContent()).isEqualTo(
             "Nee? Nee.\nHoe ziet-ie eruit?");
 
     }
