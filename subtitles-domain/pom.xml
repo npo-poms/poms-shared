@@ -17,6 +17,18 @@
       <artifactId>shared-persistence</artifactId>
     </dependency>
     <dependency>
+      <!-- contains javax.persistence -->
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.sun.mail</groupId>
+          <artifactId>javax.mail</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>shared-xml</artifactId>
     </dependency>
