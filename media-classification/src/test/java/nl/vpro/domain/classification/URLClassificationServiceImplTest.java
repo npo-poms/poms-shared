@@ -20,12 +20,12 @@ public class URLClassificationServiceImplTest {
         service.setCheckIntervalInSeconds(1);
 
         assertThat(service.values().size()).isGreaterThan(10);
-        assertThat(service.code).isEqualTo(200);
+        assertThat(service.getCode()).isEqualTo(200);
 
 
         // call another time to show that it would not be loaded again.
         assertThat(service.values().size()).isGreaterThan(11);
-        assertThat(service.code).isEqualTo(200);
+        assertThat(service.getCode()).isEqualTo(200);
 
 
     }
@@ -38,12 +38,12 @@ public class URLClassificationServiceImplTest {
         service.setCheckIntervalInSeconds(1);
 
         assertThat(service.values().size()).isGreaterThan(10);
-        assertThat(service.code).isEqualTo(200);
+        assertThat(service.getCode()).isEqualTo(200);
 
 
         // call another time to show that it would not be loaded again.
         assertThat(service.values().size()).isGreaterThan(11);
-        assertThat(service.code).isEqualTo(200);
+        assertThat(service.getCode()).isEqualTo(200);
 
     }
 
@@ -55,7 +55,7 @@ public class URLClassificationServiceImplTest {
         URLClassificationServiceImpl service = new URLClassificationServiceImpl(url.toURI());
 
         assertThat(service.values().size()).isGreaterThan(10);
-        assertThat(service.code).isEqualTo(200);
+        assertThat(service.getCode()).isEqualTo(200);
         Instant load = service.getLastLoad();
         assertThat(load.isAfter(service.getLastModified()));
 
@@ -63,7 +63,7 @@ public class URLClassificationServiceImplTest {
         assertThat(service.values().size()).isGreaterThan(11);
 
         assertThat(service.getLastLoad()).isEqualTo(load);
-        assertThat(service.code).isEqualTo(304);
+        assertThat(service.getCode()).isEqualTo(304);
 
 
 

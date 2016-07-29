@@ -51,6 +51,10 @@
       <artifactId>media-i18n</artifactId>
     </dependency>
     <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>shared-util</artifactId>
+    </dependency>
+    <dependency>
       <groupId>javax.cache</groupId>
       <artifactId>cache-api</artifactId>
     </dependency>

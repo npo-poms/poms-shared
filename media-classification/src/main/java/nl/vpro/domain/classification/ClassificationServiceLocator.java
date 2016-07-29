@@ -3,6 +3,8 @@ package nl.vpro.domain.classification;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
+import java.util.ServiceLoader;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +23,10 @@ public class ClassificationServiceLocator  {
 
     private ClassificationServiceLocator() {
         singleton = this;
+        ServiceLoader.load(ClassificationService.class).iterator().forEachRemaining(c -> {
+            // TODO load this stuff a bit more easily
+            } 
+        );
     }
 
     public static ClassificationService getInstance() {

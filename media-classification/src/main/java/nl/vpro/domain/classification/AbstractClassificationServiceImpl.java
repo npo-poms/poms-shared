@@ -4,27 +4,24 @@
  */
 package nl.vpro.domain.classification;
 
-import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-
 import javax.annotation.PreDestroy;
 import javax.xml.bind.JAXB;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
+import java.time.Instant;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 
 /**
  * @author Roelof Jan Koekoek
@@ -84,13 +81,10 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     @Override
     public ClassificationScheme getClassificationScheme() {
-        return new ClassificationScheme(null, new ArrayList<>(Collections2.filter(values(), new Predicate<Term>() {
-            @Override
-            public boolean apply(Term input) {
-                TermId id = new TermId(input.getTermId());
-                return id.getParts().length == 2 && id.getParts()[0] == 3;
-            }
-        })));
+        return new ClassificationScheme(null, values().stream().filter(input -> {
+            TermId id = new TermId(input.getTermId());
+            return id.getParts().length == 2 && id.getParts()[0] == 3;
+        }).collect(Collectors.toList()));
     }
 
     @Override
@@ -108,7 +102,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
             synchronized(this) {
                 if (terms == null) {
                     // This can be called via Jaxb unmarshalling, so it cannot happen in the same thread.
-                    Future future = executorService.submit((Runnable) () -> {
+                    Future future = executorService.submit(() -> {
                         try {
                             List<InputSource> sources = getSources(true);
                             if (sources != null) {
