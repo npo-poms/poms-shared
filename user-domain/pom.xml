@@ -17,10 +17,6 @@
       <artifactId>poms-shared-domain</artifactId>
     </dependency>
     <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-    </dependency>
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
     </dependency>
@@ -33,8 +29,16 @@
       <artifactId>shared-persistence</artifactId>
     </dependency>
     <dependency>
+      <!-- contains javax.persistence -->
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.sun.mail</groupId>
+          <artifactId>javax.mail</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
