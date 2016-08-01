@@ -11,6 +11,9 @@
   <name>media-secondscreen</name>
 
   <dependencies>
-
+    <dependency>
+      <groupId>nl.vpro.media</groupId>
+      <artifactId>media-domain</artifactId>
+    </dependency>
   </dependencies>
 </project>
