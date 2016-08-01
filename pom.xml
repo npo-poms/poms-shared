@@ -34,6 +34,7 @@
     <module>media-domain</module>
     <module>image-domain</module>
     <module>subtitles-domain</module>
+    <module>media-secondscreen</module>
 
     <module>media-test</module>
     <module>user-test</module>
