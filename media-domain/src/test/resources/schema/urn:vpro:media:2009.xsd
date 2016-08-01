@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:media:2009" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:tns="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
+
+  <xs:element name="group" type="groupType"/>
+
+  <xs:element name="mediaInformation" type="mediaTableType"/>
+
+  <xs:element name="program" type="programType"/>
+
+  <xs:element name="schedule" type="scheduleType"/>
+
+  <xs:element name="segment" type="segmentType"/>
+
+  <xs:complexType name="programType">
+    <xs:complexContent>
+      <xs:extension base="baseMediaType">
+        <xs:sequence>
+          <xs:element name="episodeOf" type="memberRefType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="segments" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="segment" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="poProgType" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="programTypeEnum" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="baseMediaType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="shared:publishableObjectType">
+        <xs:sequence>
+          <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="broadcaster" type="broadcasterType" maxOccurs="unbounded"/>
+          <xs:element name="portal" type="portalType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="exclusive" type="portalRestrictionType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="region" type="geoRestrictionType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="title" type="titleType" maxOccurs="unbounded"/>
+          <xs:element name="description" type="descriptionType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="source" type="xs:string" minOccurs="0"/>
+          <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="avAttributes" type="avAttributesType" minOccurs="0"/>
+          <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
+          <xs:element name="duration" type="shared:durationType" minOccurs="0"/>
+          <xs:element name="credits" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="person" type="personType" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="award" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="descendantOf" type="descendantRefType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="memberOf" type="memberRefType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="ageRating" type="ageRating" minOccurs="0"/>
+          <xs:element name="contentRating" type="contentRatingEnum" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="website" type="websiteType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="twitter" type="twitterRefType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="teletext" type="xs:short" minOccurs="0"/>
+          <xs:element name="prediction" type="predictionType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="locations" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="location" type="locationType" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="scheduleEvents" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="scheduleEvent" type="scheduleEventType" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="relation" type="relationType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="images" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="shared:image" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="avType" type="avTypeEnum" use="required"/>
+        <xs:attribute name="embeddable" type="xs:boolean" use="required"/>
+        <xs:attribute name="hasSubtitles" type="xs:boolean"/>
+        <xs:attribute name="mergedTo" type="xs:string"/>
+        <xs:attribute name="mid" type="xs:string" use="required"/>
+        <xs:attribute name="sortDate" type="xs:dateTime" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="memberRefType">
+    <xs:sequence/>
+    <xs:attribute name="added" type="xs:dateTime"/>
+    <xs:attribute name="cridRef" type="xs:string"/>
+    <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
+    <xs:attribute name="midRef" type="xs:string"/>
+    <xs:attribute name="index" type="xs:int"/>
+    <xs:attribute name="type" type="mediaTypeEnum"/>
+    <xs:attribute name="urnRef" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="segmentType">
+    <xs:complexContent>
+      <xs:extension base="baseMediaType">
+        <xs:sequence>
+          <xs:element name="start" type="xs:duration"/>
+        </xs:sequence>
+        <xs:attribute name="midRef" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="segmentTypeEnum" use="required"/>
+        <xs:attribute name="urnRef" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="broadcasterType">
+    <xs:simpleContent>
+      <xs:extension base="organizationType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="organizationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="id" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="portalType">
+    <xs:simpleContent>
+      <xs:extension base="organizationType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="portalRestrictionType">
+    <xs:complexContent>
+      <xs:extension base="restriction">
+        <xs:sequence/>
+        <xs:attribute name="portalId" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="restriction" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="shared:domainObjectType">
+        <xs:sequence/>
+        <xs:attribute name="start" type="xs:dateTime"/>
+        <xs:attribute name="stop" type="xs:dateTime"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="geoRestrictionType">
+    <xs:complexContent>
+      <xs:extension base="restriction">
+        <xs:sequence/>
+        <xs:attribute name="regionId" type="region"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="titleType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+        <xs:attribute name="type" type="textualTypeEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="descriptionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
+        <xs:attribute name="type" type="textualTypeEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="genreType">
+    <xs:sequence>
+      <xs:element name="term" type="termType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:simpleType name="termType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="tagType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="countryType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="code" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="languageType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="code" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="avAttributesType">
+    <xs:sequence>
+      <xs:element name="bitrate" type="xs:int" minOccurs="0"/>
+      <xs:element name="avFileFormat" type="avFileFormatEnum" minOccurs="0"/>
+      <xs:element name="videoAttributes" type="videoAttributesType" minOccurs="0"/>
+      <xs:element name="audioAttributes" type="audioAttributesType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="videoAttributesType">
+    <xs:sequence>
+      <xs:element name="color" type="colorType" minOccurs="0"/>
+      <xs:element name="videoCoding" type="xs:string" minOccurs="0"/>
+      <xs:element name="aspectRatio" type="aspectRatio" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="width" type="xs:int"/>
+    <xs:attribute name="heigth" type="xs:int"/>
+  </xs:complexType>
+
+  <xs:complexType name="audioAttributesType">
+    <xs:sequence>
+      <xs:element name="numberOfChannels" type="xs:int" minOccurs="0"/>
+      <xs:element name="audioCoding" type="xs:string" minOccurs="0"/>
+      <xs:element name="language" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="personType">
+    <xs:complexContent>
+      <xs:extension base="shared:domainObjectType">
+        <xs:sequence>
+          <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+          <xs:element name="familyName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="role" type="roleType" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="descendantRefType">
+    <xs:sequence/>
+    <xs:attribute name="urnRef" type="xs:string"/>
+    <xs:attribute name="midRef" type="xs:string"/>
+    <xs:attribute name="type" type="mediaTypeEnum"/>
+  </xs:complexType>
+
+  <xs:simpleType name="websiteType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="twitterRefType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="type"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="predictionType">
+    <xs:simpleContent>
+      <xs:extension base="platform">
+        <xs:attribute name="state" type="predictionStateEnum"/>
+        <xs:attribute name="publishStart" type="xs:dateTime"/>
+        <xs:attribute name="publishStop" type="xs:dateTime"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="locationType">
+    <xs:complexContent>
+      <xs:extension base="shared:publishableObjectType">
+        <xs:sequence>
+          <xs:element name="programUrl" type="xs:string" minOccurs="0"/>
+          <xs:element name="avAttributes" type="avAttributesType" minOccurs="0"/>
+          <xs:element name="subtitles" type="xs:string" minOccurs="0"/>
+          <xs:element name="offset" type="xs:duration" minOccurs="0"/>
+          <xs:element name="duration" type="xs:duration" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
+        <xs:attribute name="platform" type="platform"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="scheduleEventType">
+    <xs:sequence>
+      <xs:element name="repeat" type="repeatType" minOccurs="0"/>
+      <xs:element name="memberOf" type="xs:string" minOccurs="0"/>
+      <xs:element name="avAttributes" type="avAttributesType" minOccurs="0"/>
+      <xs:element name="textSubtitles" type="xs:string" minOccurs="0"/>
+      <xs:element name="textPage" type="xs:string" minOccurs="0"/>
+      <xs:element name="guideDay" type="xs:date" minOccurs="0"/>
+      <xs:element name="start" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="offset" type="xs:duration" minOccurs="0"/>
+      <xs:element name="duration" type="xs:duration" minOccurs="0"/>
+      <xs:element name="poProgID" type="xs:string" minOccurs="0"/>
+      <xs:element name="poSeriesID" type="xs:string" minOccurs="0"/>
+      <xs:element name="primaryLifestyle" type="lifestyle" minOccurs="0"/>
+      <xs:element name="secondaryLifestyle" type="secondaryLifestyle" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="channel" type="channelEnum"/>
+    <xs:attribute name="imi" type="xs:string"/>
+    <xs:attribute name="midRef" type="xs:string" use="required"/>
+    <xs:attribute name="net" type="net"/>
+    <xs:attribute name="type" type="scheduleEventTypeEnum"/>
+    <xs:attribute name="urnRef" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="repeatType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="isRerun" type="xs:boolean" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="lifestyle">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="secondaryLifestyle">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="net">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="relationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="uriRef" type="xs:string"/>
+        <xs:attribute name="broadcaster" type="xs:string" use="required"/>
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="urn" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="groupType">
+    <xs:complexContent>
+      <xs:extension base="baseMediaType">
+        <xs:sequence>
+          <xs:element name="poSequenceInformation" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="defaultElement" type="xs:long"/>
+        <xs:attribute name="isOrdered" type="xs:boolean" use="required"/>
+        <xs:attribute name="type" type="groupTypeEnum" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="scheduleType">
+    <xs:sequence>
+      <xs:element name="scheduleEvent" type="scheduleEventType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="channel" type="channelEnum"/>
+    <xs:attribute name="net" type="net"/>
+    <xs:attribute name="start" type="xs:dateTime"/>
+    <xs:attribute name="releaseVersion" type="xs:int"/>
+    <xs:attribute name="stop" type="xs:dateTime"/>
+  </xs:complexType>
+
+  <xs:complexType name="mediaTableType">
+    <xs:sequence>
+      <xs:element name="programTable" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="program" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="groupTable" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="group" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="locationTable" type="locationTableType" minOccurs="0"/>
+      <xs:element ref="schedule" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="publicationTime" type="xs:dateTime"/>
+    <xs:attribute name="publisher" type="xs:string"/>
+    <xs:attribute name="version" type="xs:short"/>
+    <xs:attribute name="source" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="locationTableType">
+    <xs:sequence>
+      <xs:element name="location" type="locationType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="scheduleEvent" type="scheduleEventType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="mediaTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MEDIA"/>
+      <xs:enumeration value="PROGRAM"/>
+      <xs:enumeration value="BROADCAST"/>
+      <xs:enumeration value="CLIP"/>
+      <xs:enumeration value="STRAND"/>
+      <xs:enumeration value="TRAILER"/>
+      <xs:enumeration value="MOVIE"/>
+      <xs:enumeration value="GROUP"/>
+      <xs:enumeration value="SERIES"/>
+      <xs:enumeration value="SEASON"/>
+      <xs:enumeration value="ARCHIVE"/>
+      <xs:enumeration value="COLLECTION"/>
+      <xs:enumeration value="PLAYLIST"/>
+      <xs:enumeration value="ALBUM"/>
+      <xs:enumeration value="SEGMENT"/>
+      <xs:enumeration value="TRACK"/>
+      <xs:enumeration value="VISUALRADIO"/>
+      <xs:enumeration value="RECORDING"/>
+      <xs:enumeration value="PROMO"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="segmentTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SEGMENT"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="region">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BENELUX"/>
+      <xs:enumeration value="NL"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="textualTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="MAIN"/>
+      <xs:enumeration value="SHORT"/>
+      <xs:enumeration value="SUB"/>
+      <xs:enumeration value="EPISODE"/>
+      <xs:enumeration value="ORIGINAL"/>
+      <xs:enumeration value="KICKER"/>
+      <xs:enumeration value="LEXICO"/>
+      <xs:enumeration value="WORK"/>
+      <xs:enumeration value="ABBREVIATION"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="avFileFormatEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="HASP"/>
+      <xs:enumeration value="H264"/>
+      <xs:enumeration value="MP4"/>
+      <xs:enumeration value="M4A"/>
+      <xs:enumeration value="M4V"/>
+      <xs:enumeration value="MP3"/>
+      <xs:enumeration value="WVC1"/>
+      <xs:enumeration value="WM"/>
+      <xs:enumeration value="WMP"/>
+      <xs:enumeration value="FLV"/>
+      <xs:enumeration value="DGPP"/>
+      <xs:enumeration value="RM"/>
+      <xs:enumeration value="RAM"/>
+      <xs:enumeration value="RA"/>
+      <xs:enumeration value="MPEG2"/>
+      <xs:enumeration value="HTML"/>
+      <xs:enumeration value="UNKNOWN"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="colorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BLACK AND WHITE"/>
+      <xs:enumeration value="BLACK AND WHITE AND COLOR"/>
+      <xs:enumeration value="COLOR"/>
+      <xs:enumeration value="COLORIZED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="aspectRatio">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="4:3"/>
+      <xs:enumeration value="16:9"/>
+      <xs:enumeration value="xCIF"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="roleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DIRECTOR"/>
+      <xs:enumeration value="CHIEF_EDITOR"/>
+      <xs:enumeration value="EDITOR"/>
+      <xs:enumeration value="PRESENTER"/>
+      <xs:enumeration value="INTERVIEWER"/>
+      <xs:enumeration value="PRODUCER"/>
+      <xs:enumeration value="RESEARCH"/>
+      <xs:enumeration value="GUEST"/>
+      <xs:enumeration value="REPORTER"/>
+      <xs:enumeration value="ACTOR"/>
+      <xs:enumeration value="COMMENTATOR"/>
+      <xs:enumeration value="COMPOSER"/>
+      <xs:enumeration value="SCRIPTWRITER"/>
+      <xs:enumeration value="UNDEFINED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ageRating">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="6"/>
+      <xs:enumeration value="9"/>
+      <xs:enumeration value="12"/>
+      <xs:enumeration value="16"/>
+      <xs:enumeration value="ALL"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="contentRatingEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DISCRIMINATIE"/>
+      <xs:enumeration value="GROF_TAALGEBRUIK"/>
+      <xs:enumeration value="ANGST"/>
+      <xs:enumeration value="GEWELD"/>
+      <xs:enumeration value="SEKS"/>
+      <xs:enumeration value="DRUGS_EN_ALCOHOL"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ACCOUNT"/>
+      <xs:enumeration value="HASHTAG"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="predictionStateEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ANNOUNCED"/>
+      <xs:enumeration value="REALIZED"/>
+      <xs:enumeration value="REVOKED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="platform">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INTERNETVOD"/>
+      <xs:enumeration value="TVVOD"/>
+      <xs:enumeration value="PLUSVOD"/>
+      <xs:enumeration value="NPOPLUSVOD"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="channelEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NED1"/>
+      <xs:enumeration value="NED2"/>
+      <xs:enumeration value="NED3"/>
+      <xs:enumeration value="RAD1"/>
+      <xs:enumeration value="RAD2"/>
+      <xs:enumeration value="RAD3"/>
+      <xs:enumeration value="RAD4"/>
+      <xs:enumeration value="RAD5"/>
+      <xs:enumeration value="RAD6"/>
+      <xs:enumeration value="RTL4"/>
+      <xs:enumeration value="RTL5"/>
+      <xs:enumeration value="SBS6"/>
+      <xs:enumeration value="RTL7"/>
+      <xs:enumeration value="VERO"/>
+      <xs:enumeration value="NET5"/>
+      <xs:enumeration value="RTL8"/>
+      <xs:enumeration value="REGI"/>
+      <xs:enumeration value="OFRY"/>
+      <xs:enumeration value="NOOR"/>
+      <xs:enumeration value="RTVD"/>
+      <xs:enumeration value="OOST"/>
+      <xs:enumeration value="GELD"/>
+      <xs:enumeration value="FLEV"/>
+      <xs:enumeration value="BRAB"/>
+      <xs:enumeration value="REGU"/>
+      <xs:enumeration value="NORH"/>
+      <xs:enumeration value="WEST"/>
+      <xs:enumeration value="RIJN"/>
+      <xs:enumeration value="L1TV"/>
+      <xs:enumeration value="OZEE"/>
+      <xs:enumeration value="TVDR"/>
+      <xs:enumeration value="AT5_"/>
+      <xs:enumeration value="RNN7"/>
+      <xs:enumeration value="BVNT"/>
+      <xs:enumeration value="EEN_"/>
+      <xs:enumeration value="KETN"/>
+      <xs:enumeration value="VTM_"/>
+      <xs:enumeration value="KA2_"/>
+      <xs:enumeration value="VT4_"/>
+      <xs:enumeration value="LUNE"/>
+      <xs:enumeration value="LDUE"/>
+      <xs:enumeration value="RTBF"/>
+      <xs:enumeration value="ARD_"/>
+      <xs:enumeration value="ZDF_"/>
+      <xs:enumeration value="WDR_"/>
+      <xs:enumeration value="N_3_"/>
+      <xs:enumeration value="SUDW"/>
+      <xs:enumeration value="SWF_"/>
+      <xs:enumeration value="RTL_"/>
+      <xs:enumeration value="SAT1"/>
+      <xs:enumeration value="PRO7"/>
+      <xs:enumeration value="3SAT"/>
+      <xs:enumeration value="KABE"/>
+      <xs:enumeration value="ARTE"/>
+      <xs:enumeration value="T5ME"/>
+      <xs:enumeration value="FRA2"/>
+      <xs:enumeration value="FRA3"/>
+      <xs:enumeration value="BBC1"/>
+      <xs:enumeration value="BBC2"/>
+      <xs:enumeration value="BBTH"/>
+      <xs:enumeration value="BBTC"/>
+      <xs:enumeration value="BBCF"/>
+      <xs:enumeration value="BBFC"/>
+      <xs:enumeration value="BBCP"/>
+      <xs:enumeration value="TRTI"/>
+      <xs:enumeration value="SHOW"/>
+      <xs:enumeration value="LIGT"/>
+      <xs:enumeration value="TURK"/>
+      <xs:enumeration value="RRTM"/>
+      <xs:enumeration value="RMBC"/>
+      <xs:enumeration value="RART"/>
+      <xs:enumeration value="ARTM"/>
+      <xs:enumeration value="TVBS"/>
+      <xs:enumeration value="ASIA"/>
+      <xs:enumeration value="TIVI"/>
+      <xs:enumeration value="B4UM"/>
+      <xs:enumeration value="PCNE"/>
+      <xs:enumeration value="PATN"/>
+      <xs:enumeration value="ZEET"/>
+      <xs:enumeration value="ZEEC"/>
+      <xs:enumeration value="TVE_"/>
+      <xs:enumeration value="RAI_"/>
+      <xs:enumeration value="RAID"/>
+      <xs:enumeration value="RAIT"/>
+      <xs:enumeration value="TEVE"/>
+      <xs:enumeration value="ERTS"/>
+      <xs:enumeration value="STV_"/>
+      <xs:enumeration value="NTV_"/>
+      <xs:enumeration value="NOSJ"/>
+      <xs:enumeration value="CULT"/>
+      <xs:enumeration value="101_"/>
+      <xs:enumeration value="PO24"/>
+      <xs:enumeration value="HILV"/>
+      <xs:enumeration value="HOLL"/>
+      <xs:enumeration value="GESC"/>
+      <xs:enumeration value="3VCN"/>
+      <xs:enumeration value="3VOS"/>
+      <xs:enumeration value="NEDE"/>
+      <xs:enumeration value="STER"/>
+      <xs:enumeration value="OMEG"/>
+      <xs:enumeration value="NCRV"/>
+      <xs:enumeration value="OPVO"/>
+      <xs:enumeration value="CONS"/>
+      <xs:enumeration value="HUMO"/>
+      <xs:enumeration value="DIER"/>
+      <xs:enumeration value="ENTE"/>
+      <xs:enumeration value="FASH"/>
+      <xs:enumeration value="COMC"/>
+      <xs:enumeration value="TBN_"/>
+      <xs:enumeration value="DISC"/>
+      <xs:enumeration value="ZONE"/>
+      <xs:enumeration value="ANPL"/>
+      <xs:enumeration value="CLUB"/>
+      <xs:enumeration value="NAGE"/>
+      <xs:enumeration value="TRAC"/>
+      <xs:enumeration value="NGHD"/>
+      <xs:enumeration value="WILD"/>
+      <xs:enumeration value="GARU"/>
+      <xs:enumeration value="ZAZA"/>
+      <xs:enumeration value="FAM7"/>
+      <xs:enumeration value="DTAL"/>
+      <xs:enumeration value="SCIE"/>
+      <xs:enumeration value="CIVI"/>
+      <xs:enumeration value="DIHD"/>
+      <xs:enumeration value="HIST"/>
+      <xs:enumeration value="TRAV"/>
+      <xs:enumeration value="HETG"/>
+      <xs:enumeration value="GOED"/>
+      <xs:enumeration value="BABY"/>
+      <xs:enumeration value="DH1_"/>
+      <xs:enumeration value="LITV"/>
+      <xs:enumeration value="LIVE"/>
+      <xs:enumeration value="STAR"/>
+      <xs:enumeration value="WEER"/>
+      <xs:enumeration value="REAL"/>
+      <xs:enumeration value="SCIF"/>
+      <xs:enumeration value="13ST"/>
+      <xs:enumeration value="CARC"/>
+      <xs:enumeration value="NOSN"/>
+      <xs:enumeration value="HISH"/>
+      <xs:enumeration value="NICK"/>
+      <xs:enumeration value="NIJN"/>
+      <xs:enumeration value="NIKT"/>
+      <xs:enumeration value="NIKH"/>
+      <xs:enumeration value="CART"/>
+      <xs:enumeration value="BOOM"/>
+      <xs:enumeration value="CNN_"/>
+      <xs:enumeration value="BBCW"/>
+      <xs:enumeration value="EURN"/>
+      <xs:enumeration value="SKNE"/>
+      <xs:enumeration value="BLOO"/>
+      <xs:enumeration value="CNBC"/>
+      <xs:enumeration value="PALJ"/>
+      <xs:enumeration value="ALJA"/>
+      <xs:enumeration value="FOXN"/>
+      <xs:enumeration value="MTV_"/>
+      <xs:enumeration value="MTV2"/>
+      <xs:enumeration value="HITS"/>
+      <xs:enumeration value="BASE"/>
+      <xs:enumeration value="MTVB"/>
+      <xs:enumeration value="TMF_"/>
+      <xs:enumeration value="TMFN"/>
+      <xs:enumeration value="TMFP"/>
+      <xs:enumeration value="TMFY"/>
+      <xs:enumeration value="TVOR"/>
+      <xs:enumeration value="VH1E"/>
+      <xs:enumeration value="VH1C"/>
+      <xs:enumeration value="PERC"/>
+      <xs:enumeration value="MEZZ"/>
+      <xs:enumeration value="EURO"/>
+      <xs:enumeration value="EUR2"/>
+      <xs:enumeration value="EXTR"/>
+      <xs:enumeration value="MOTO"/>
+      <xs:enumeration value="SAIL"/>
+      <xs:enumeration value="ESPN"/>
+      <xs:enumeration value="NASE"/>
+      <xs:enumeration value="SP11"/>
+      <xs:enumeration value="SP12"/>
+      <xs:enumeration value="SP13"/>
+      <xs:enumeration value="SP14"/>
+      <xs:enumeration value="SP15"/>
+      <xs:enumeration value="SP16"/>
+      <xs:enumeration value="SP17"/>
+      <xs:enumeration value="SP18"/>
+      <xs:enumeration value="S1HD"/>
+      <xs:enumeration value="FIL1"/>
+      <xs:enumeration value="FIL2"/>
+      <xs:enumeration value="FIL3"/>
+      <xs:enumeration value="FL11"/>
+      <xs:enumeration value="FL1P"/>
+      <xs:enumeration value="FL12"/>
+      <xs:enumeration value="FL13"/>
+      <xs:enumeration value="FLHD"/>
+      <xs:enumeration value="MGMM"/>
+      <xs:enumeration value="TCM_"/>
+      <xs:enumeration value="HALL"/>
+      <xs:enumeration value="ACNW"/>
+      <xs:enumeration value="RHUS"/>
+      <xs:enumeration value="PLAY"/>
+      <xs:enumeration value="ADUL"/>
+      <xs:enumeration value="PSPI"/>
+      <xs:enumeration value="HUST"/>
+      <xs:enumeration value="OXMO"/>
+      <xs:enumeration value="REGR"/>
+      <xs:enumeration value="RFRY"/>
+      <xs:enumeration value="RNOO"/>
+      <xs:enumeration value="ROST"/>
+      <xs:enumeration value="RGEL"/>
+      <xs:enumeration value="RFLE"/>
+      <xs:enumeration value="RBRA"/>
+      <xs:enumeration value="RUTR"/>
+      <xs:enumeration value="RNOH"/>
+      <xs:enumeration value="RWST"/>
+      <xs:enumeration value="RRIJ"/>
+      <xs:enumeration value="LRAD"/>
+      <xs:enumeration value="RZEE"/>
+      <xs:enumeration value="COMM"/>
+      <xs:enumeration value="RVER"/>
+      <xs:enumeration value="SLAM"/>
+      <xs:enumeration value="SKYR"/>
+      <xs:enumeration value="RTLF"/>
+      <xs:enumeration value="BNRN"/>
+      <xs:enumeration value="KINK"/>
+      <xs:enumeration value="PCAZ"/>
+      <xs:enumeration value="QMUS"/>
+      <xs:enumeration value="R538"/>
+      <xs:enumeration value="GOLD"/>
+      <xs:enumeration value="ARRO"/>
+      <xs:enumeration value="FUNX"/>
+      <xs:enumeration value="CLAS"/>
+      <xs:enumeration value="BEL1"/>
+      <xs:enumeration value="BEL2"/>
+      <xs:enumeration value="KLAR"/>
+      <xs:enumeration value="BBR1"/>
+      <xs:enumeration value="BBR2"/>
+      <xs:enumeration value="BBR3"/>
+      <xs:enumeration value="BBR4"/>
+      <xs:enumeration value="BBWS"/>
+      <xs:enumeration value="BBCX"/>
+      <xs:enumeration value="NDR3"/>
+      <xs:enumeration value="WDR4"/>
+      <xs:enumeration value="WDR3"/>
+      <xs:enumeration value="D24K"/>
+      <xs:enumeration value="H1NL"/>
+      <xs:enumeration value="SYFY"/>
+      <xs:enumeration value="SBS9"/>
+      <xs:enumeration value="DIXD"/>
+      <xs:enumeration value="BRNL"/>
+      <xs:enumeration value="FOXL"/>
+      <xs:enumeration value="TLC_"/>
+      <xs:enumeration value="VRTC"/>
+      <xs:enumeration value="BFIR"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="scheduleEventTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="STRAND"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="avTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AUDIO"/>
+      <xs:enumeration value="VIDEO"/>
+      <xs:enumeration value="MIXED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="groupTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SERIES"/>
+      <xs:enumeration value="SEASON"/>
+      <xs:enumeration value="ARCHIVE"/>
+      <xs:enumeration value="COLLECTION"/>
+      <xs:enumeration value="PLAYLIST"/>
+      <xs:enumeration value="ALBUM"/>
+      <xs:enumeration value="STRAND"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="programTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BROADCAST"/>
+      <xs:enumeration value="MOVIE"/>
+      <xs:enumeration value="TRAILER"/>
+      <xs:enumeration value="CLIP"/>
+      <xs:enumeration value="STRAND"/>
+      <xs:enumeration value="TRACK"/>
+      <xs:enumeration value="VISUALRADIO"/>
+      <xs:enumeration value="RECORDING"/>
+      <xs:enumeration value="PROMO"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
