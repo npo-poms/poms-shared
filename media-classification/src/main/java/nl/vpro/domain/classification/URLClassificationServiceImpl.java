@@ -1,7 +1,5 @@
 package nl.vpro.domain.classification;
 
-import javax.cache.annotation.CacheResult;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -13,7 +11,9 @@ import java.util.List;
 import java.util.SortedMap;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
+
+import javax.cache.annotation.CacheResult;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.InputSource;
 
@@ -24,10 +24,10 @@ import nl.vpro.util.URLResource;
  * @since 3.2
  */
 public class URLClassificationServiceImpl extends AbstractClassificationServiceImpl  implements Consumer<SortedMap<TermId, Term>> {
-    
+
     final URLResource<SortedMap<TermId, Term>> resource;
 
-    
+
 
     public URLClassificationServiceImpl(URI url) {
         this.resource = create(url);
@@ -42,7 +42,7 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
             throw new RuntimeException(e);
         }
     }
-    
+
     URLResource<SortedMap<TermId, Term>> create(final URI url) {
         Function<InputStream, SortedMap<TermId, Term>> f = inputStream -> {
             try {
@@ -73,7 +73,7 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
         return super.getTermsMap();
     }
 
-    
+
     private SortedMap<TermId, Term> create(InputSource inputSource){
         try{
             return readTerms(Collections.singletonList(inputSource));
@@ -107,9 +107,13 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
     public Instant getLastLoad() {
         return resource.getLastLoad();
     }
-    
+
     public Integer getCode() {
         return resource.getCode();
+    }
+
+    public URLResource<SortedMap<TermId, Term>> getResource() {
+        return resource;
     }
 
     @Override

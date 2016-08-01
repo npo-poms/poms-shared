@@ -1,8 +1,10 @@
 package nl.vpro.domain.classification;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.Instant;
 
 import org.junit.Test;
@@ -11,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class URLClassificationServiceImplTest {
 
+    public static URI publicURL = URI.create("http://publish.pages.omroep.nl/schema/classification");
+    //URL url = new URL("http://localhost:8060/schema/classification");
 
     @Test
     public void testResource() throws MalformedURLException, InterruptedException, URISyntaxException {
@@ -33,8 +37,7 @@ public class URLClassificationServiceImplTest {
 
     @Test
     public void testCachingURL() throws MalformedURLException, InterruptedException, URISyntaxException {
-        URL url = new URL("http://publish.pages.omroep.nl/schema/classification");
-        CachedURLClassificationServiceImpl service = new CachedURLClassificationServiceImpl(url.toURI());
+        CachedURLClassificationServiceImpl service = new CachedURLClassificationServiceImpl(publicURL);
         service.setCheckIntervalInSeconds(1);
 
         assertThat(service.values().size()).isGreaterThan(10);
@@ -50,9 +53,8 @@ public class URLClassificationServiceImplTest {
 
     @Test
     public void testURL() throws MalformedURLException, InterruptedException, URISyntaxException {
-        URL url = new URL("http://publish.pages.omroep.nl/schema/classification");
-        //URL url = new URL("http://localhost:8060/schema/classification");
-        URLClassificationServiceImpl service = new URLClassificationServiceImpl(url.toURI());
+        URLClassificationServiceImpl service = new URLClassificationServiceImpl(publicURL);
+        service.getResource().setMinAge(Duration.ZERO);
 
         assertThat(service.values().size()).isGreaterThan(10);
         assertThat(service.getCode()).isEqualTo(200);
@@ -61,7 +63,6 @@ public class URLClassificationServiceImplTest {
 
         // call another time to show that it would not be loaded again.
         assertThat(service.values().size()).isGreaterThan(11);
-
         assertThat(service.getLastLoad()).isEqualTo(load);
         assertThat(service.getCode()).isEqualTo(304);
 
