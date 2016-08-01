@@ -3,7 +3,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>4.7.0</version>
+    <version>4.7.1</version>
   </parent>
 
   <groupId>nl.publiekeomroep</groupId>
@@ -34,9 +34,11 @@
     <module>media-domain</module>
     <module>image-domain</module>
     <module>subtitles-domain</module>
+    <module>media-secondscreen</module>
 
     <module>media-test</module>
     <module>media-i18n</module>
+
     <module>media-classification</module>
     <module>media-organizations</module>
     <module>media-es-mappings</module>
