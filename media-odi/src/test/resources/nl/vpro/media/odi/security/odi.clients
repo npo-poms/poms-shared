@@ -1,0 +1,6 @@
+#publicKey:privateKey:allowXOrigin:origins(multiple list with * and ,)
+
+apiKey:privateKey:true:http://localhost:8080
+apiKey:privateKey:true:file://somepath
+apiKey:privateKey:false:http://*.vpro.nl,http://www.cinema.nl,http://*.vpro.nl:*,http://www.wetenschap24.nl
+apiKey:privateKey:false:http://rs.test.vpro.nl

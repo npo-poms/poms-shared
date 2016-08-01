@@ -35,6 +35,7 @@
     <module>image-domain</module>
     <module>subtitles-domain</module>
     <module>media-secondscreen</module>
+    <module>media-odi</module>
 
     <module>media-test</module>
     <module>user-test</module>
