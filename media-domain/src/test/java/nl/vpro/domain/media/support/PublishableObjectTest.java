@@ -32,40 +32,40 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     public static PublishableObject nullArgument = null;
 
     @DataPoint
-    public static PublishableObject withId1 = data(1l, null, null, null);
+    public static PublishableObject withId1 = data(1L, null, null, null);
 
     @DataPoint
-    public static PublishableObject withId2 = data(2l, null, null, null);
+    public static PublishableObject withId2 = data(2L, null, null, null);
 
     @DataPoint
-    public static PublishableObject draft = data(1l, Workflow.DRAFT, null, null);
+    public static PublishableObject draft = data(1L, Workflow.DRAFT, null, null);
 
     @DataPoint
-    public static PublishableObject forPublication = data(2l, Workflow.FOR_PUBLICATION, null, null);
+    public static PublishableObject forPublication = data(2L, Workflow.FOR_PUBLICATION, null, null);
 
     @DataPoint
-    public static PublishableObject forRePublication = data(3l, Workflow.FOR_REPUBLICATION, null, null);
+    public static PublishableObject forRePublication = data(3L, Workflow.FOR_REPUBLICATION, null, null);
 
     @DataPoint
-    public static PublishableObject revoked = data(1l, Workflow.REVOKED, null, null);
+    public static PublishableObject revoked = data(1L, Workflow.REVOKED, null, null);
 
     @DataPoint
-    public static PublishableObject published = data(2l, Workflow.PUBLISHED, null, null);
+    public static PublishableObject published = data(2L, Workflow.PUBLISHED, null, null);
 
     @DataPoint
-    public static PublishableObject publishedWithFutureStop = data(2l, Workflow.PUBLISHED, null, new Date(System.currentTimeMillis() + 100000));
+    public static PublishableObject publishedWithFutureStop = data(2L, Workflow.PUBLISHED, null, new Date(System.currentTimeMillis() + 100000));
 
     @DataPoint
-    public static PublishableObject forDeletion = data(3l, Workflow.FOR_DELETION, null, null);
+    public static PublishableObject forDeletion = data(3L, Workflow.FOR_DELETION, null, null);
 
     @DataPoint
-    public static PublishableObject deleted = data(4l, Workflow.DELETED, null, null);
+    public static PublishableObject deleted = data(4L, Workflow.DELETED, null, null);
 
     @DataPoint
-    public static PublishableObject futurePublication = data(5l, Workflow.FOR_PUBLICATION, new Date(System.currentTimeMillis() + 100000), null);
+    public static PublishableObject futurePublication = data(5L, Workflow.FOR_PUBLICATION, new Date(System.currentTimeMillis() + 100000), null);
 
     @DataPoint
-    public static PublishableObject revocationFallsForPublication = data(7l, Workflow.PUBLISHED, new Date(System.currentTimeMillis() + 100000), new Date(System.currentTimeMillis() - 100000));
+    public static PublishableObject revocationFallsForPublication = data(7L, Workflow.PUBLISHED, new Date(System.currentTimeMillis() + 100000), new Date(System.currentTimeMillis() - 100000));
 
     @Theory
     public void testIsActivationWhenTrue(PublishableObject data) {
