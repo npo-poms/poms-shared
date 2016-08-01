@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+  <bean id="odiService" class="nl.vpro.media.odi.OdiServiceImpl">
+    <property name="handlers">
+      <util:list value-type="nl.vpro.media.odi.LocationHandler">
+<!--
+        <bean class="nl.vpro.media.odi.handler.OdiPlusLocationHandler">
+          <property name="odiPlusBaseUrl" value="${odiplus.baseUrl}"/>
+          <property name="odiPlusApplication" value="${odiplus.aplication}"/>
+        </bean>
+-->
+        <bean class="nl.vpro.media.odi.handler.OdiLocationHandler">
+          <property name="odiBaseUrl" value="${odi.baseUrl}"/>
+          <property name="odiApplication" value="${odi.aplication}"/>
+          <property name="odiSecret" value="${odi.***REMOVED***}"/>
+        </bean>
+        <bean class="nl.vpro.media.odi.handler.DeeplinkProtectionLocationHandler">
+          <property name="streamAPISecret" value="${streamAPI.***REMOVED***}"/>
+        </bean>
+        <bean class="nl.vpro.media.odi.handler.AAPILocationHandler">
+          <property name="AAPIServer" value="${aapi.server}"/>
+        </bean>
+      </util:list>
+    </property>
+    <property name="finalHandler">
+      <bean class="nl.vpro.media.odi.handler.MatchAllLocationHandler"/>
+    </property>
+  </bean>
+</beans>

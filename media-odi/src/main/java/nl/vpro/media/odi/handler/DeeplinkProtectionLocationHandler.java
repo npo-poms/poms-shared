@@ -1,0 +1,92 @@
+/*
+ * Copyright (C) 2012 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.media.odi.handler;
+
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import nl.vpro.domain.media.Location;
+import nl.vpro.media.odi.LocationHandler;
+import nl.vpro.media.odi.util.LocationResult;
+
+/**
+ * See <a href="http://hosting.omroep.nl/sterretje-cluster:content-hosting#hotlink_bescherming">Hotlink bescherming</a>
+ */
+public class DeeplinkProtectionLocationHandler implements LocationHandler {
+    private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
+
+    private static Logger log = LoggerFactory.getLogger(DeeplinkProtectionLocationHandler.class);
+
+    private static String STREAM_API_SCHEME_PREFIX = "odis+";
+
+    private String streamAAPISecret;
+
+    @Override
+    public boolean supports(Location location, String... pubOptions) {
+        String programUrl = location.getProgramUrl();
+        return programUrl.startsWith(STREAM_API_SCHEME_PREFIX) || programUrl.contains("/protected/");
+    }
+
+    @Override
+    public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
+        if(!supports(location)) {
+            return null;
+        }
+
+        String programUrl = location.getProgramUrl();
+
+        String odiUrl = null;
+        try {
+            if(programUrl.startsWith(STREAM_API_SCHEME_PREFIX)) {
+                programUrl = programUrl.substring(STREAM_API_SCHEME_PREFIX.length());
+            }
+
+            URL url = new URL(programUrl);
+            String server = url.getProtocol() + "://" + url.getHost() + (url.getPort() < 0 ? "" : ":" + url.getPort());
+            String path = url.getPath();
+            String timehex = String.format("%08x", ((new Date()).getTime() / 1000));
+            String token = md5(streamAAPISecret + path + timehex);
+            odiUrl = String.format("%s/secure/%s/%s%s?md5=%s&t=%s",
+                server, token, timehex, path, token, timehex);
+        } catch(MalformedURLException e) {
+            log.error("Invalid url " + programUrl + " " + e.getMessage());
+        }
+
+        if(odiUrl != null) {
+            return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl);
+        }
+
+        return null;
+    }
+
+    private static String md5(String data) {
+        String digestHex = null;
+
+        try {
+            MessageDigest digester = MessageDigest.getInstance("MD5");
+            byte[] digest = digester.digest(data.getBytes("UTF8"));
+            digestHex = hexBinaryAdapter.marshal(digest).toLowerCase();
+        } catch(NoSuchAlgorithmException e) {
+            log.error("Can't get MD5 " + e.getMessage());
+        } catch(UnsupportedEncodingException e) {
+            log.error("Character encoding UTF8 not supported " + e.getMessage());
+        }
+        return digestHex;
+    }
+
+    public void setStreamAPISecret(String streamAAPISecret) {
+        this.streamAAPISecret = streamAAPISecret;
+    }
+}
