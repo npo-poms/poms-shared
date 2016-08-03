@@ -647,6 +647,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return (T) this;
         }
 
+        @SuppressWarnings("unchecked")
+        public T episodeOf(Group group, Integer number) throws CircularReferenceException {
+            build().createEpisodeOf(group, number);
+            return (T) this;
+        }
+
+        public T episodeOf(String mid, Integer number) {
+            return episodeOf(new MemberRef(mid, number));
+        }
+
         public T segments(Segment... segments) {
             return segments(Arrays.asList(segments));
         }
@@ -659,11 +669,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             return (T) this;
         }
 
-        @SuppressWarnings("unchecked")
-        public T episodeOf(Group group, Integer number) throws CircularReferenceException {
-            build().createEpisodeOf(group, number);
-            return (T) this;
-        }
 
 
         @SuppressWarnings("unchecked")
