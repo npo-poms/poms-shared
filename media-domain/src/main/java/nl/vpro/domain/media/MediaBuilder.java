@@ -467,9 +467,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
-    @SuppressWarnings("unchecked")
-    default B memberOf(String mid , Integer number) throws CircularReferenceException {
+    default B memberOf(String mid, Integer number) throws CircularReferenceException {
         return memberOf(new MemberRef(mid, number));
+    }
+
+
+    default B memberOf(String mid) throws CircularReferenceException {
+        return memberOf(new MemberRef(mid));
     }
 
     @SuppressWarnings("unchecked")
@@ -655,6 +659,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         public T episodeOf(String mid, Integer number) {
             return episodeOf(new MemberRef(mid, number));
+        }
+
+        public T episodeOf(String mid) {
+            return episodeOf(new MemberRef(mid));
         }
 
         public T segments(Segment... segments) {
