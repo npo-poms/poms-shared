@@ -32,9 +32,9 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "subtitlesType", propOrder = {
     "mid",
-        "offset",
-        "content"
-        })
+    "offset",
+    "content"
+})
 public class Subtitles implements Serializable, Identifiable<String> {
 
     private static final long serialVersionUID = 0L;
