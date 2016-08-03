@@ -1,5 +1,7 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.ToString;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,9 +12,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -26,9 +25,8 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 * @since 1.8
 */
 @XmlRootElement(name = "cue")
+@ToString(of = {"parent", "sequence"})
 public class Cue {
-
-    private static Logger LOG = LoggerFactory.getLogger(Cue.class);
 
     static final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
     static {
@@ -36,24 +34,24 @@ public class Cue {
     }
 
     @XmlAttribute
-    private String parent;
+    String parent;
     @XmlAttribute
-    private int sequence;
+    int sequence;
 
     @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
-    private Duration start;
+    Duration start;
 
     @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
-    private Duration end;
+    Duration end;
     @XmlValue
     @JsonProperty("content")
-    private String content;
+    String content;
 
 
     Cue(String parent,
@@ -66,6 +64,14 @@ public class Cue {
         this.start = start;
         this.end = end;
         this.content = content;
+    }
+
+    Cue(Cue cue) {
+        this.parent = cue.parent;
+        this.sequence = cue.sequence;
+        this.start = cue.start;
+        this.end = cue.end;
+        this.content = cue.content;
     }
 
     protected Cue() {

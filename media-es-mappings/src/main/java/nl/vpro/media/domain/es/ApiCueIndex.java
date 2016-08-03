@@ -8,11 +8,20 @@ public class ApiCueIndex {
 
     public static String NAME = "subtitles";
 
-    public static String source() {
-        return source("setting/cue.json");
+    public static String TYPE = "cue";
+
+
+    public static String typeSource() {
+        return source("mapping/cue.json");
+    }
+
+    public static String settingSource() {
+        return source("setting/apimedia.json");
     }
 
     public static String source(String s) {
         return ApiMediaIndex.source(s);
     }
+
+
 }
