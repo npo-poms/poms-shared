@@ -21,7 +21,7 @@ import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.TestEditors;
 
 public interface MediaTestDataBuilder<
-        T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>, 
+        T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>,
         M extends MediaObject
         >
     extends MediaBuilder<T, M>, Cloneable {
@@ -341,10 +341,10 @@ public interface MediaTestDataBuilder<
 
     default T withScheduleEvents() {
         return scheduleEvents(
-            new ScheduleEvent(Channel.NED3, new Date(100), new Date(200)),
-            new ScheduleEvent(Channel.NED3, new Net("ZAPP"), new Date(300 + 3 * 24 * 3600 * 1000), new Date(50)),
-            new ScheduleEvent(Channel.HOLL, new Date(350 + 8 * 24 * 3600 * 1000), new Date(250)),
-            new ScheduleEvent(Channel.CONS, new Date(600 + 10 * 24 * 3600 * 1000), new Date(200))
+            new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), java.time.Duration.ofMillis(200)),
+            new ScheduleEvent(Channel.NED3, new Net("ZAPP"), Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000), java.time.Duration.ofMillis(50)),
+            new ScheduleEvent(Channel.HOLL, Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000), java.time.Duration.ofMillis(250)),
+            new ScheduleEvent(Channel.CONS, Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000), java.time.Duration.ofMillis(200))
         );
     }
 
@@ -379,7 +379,7 @@ public interface MediaTestDataBuilder<
     default T withMergedTo() {
         return mergedTo(MediaBuilder.group().type(GroupType.SEASON).build());
     }
-    
+
 
     class ProgramTestDataBuilder extends MediaBuilder.AbstractProgramBuilder<ProgramTestDataBuilder> implements MediaTestDataBuilder<ProgramTestDataBuilder, Program> {
 
