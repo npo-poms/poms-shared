@@ -1350,7 +1350,7 @@
       <xs:enumeration value="BRNL"/>
       <xs:enumeration value="FOXL"/>
       <xs:enumeration value="TLC_"/>
-      <xs:enumeration value="BFIR"/>
+      <xs:enumeration value="BCFS"/>
 
     </xs:restriction>
   </xs:simpleType>
