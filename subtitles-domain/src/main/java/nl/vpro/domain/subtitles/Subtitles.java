@@ -51,7 +51,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     @Column(name = "[offset]")
     @Convert(converter = DurationToLongConverter.class)
-    @XmlElement
+    @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)

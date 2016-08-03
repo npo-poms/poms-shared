@@ -1,14 +1,18 @@
 {
-  "memberRef": {
-    "_parent": {
-      "type": "program",
-      "property": "parent"
-    },
+  "cue": {
     "dynamic": "strict",
     "properties": {
       "parent": {
         "type": "string",
-        "format": "not_analyze"
+        "format": "not_analyzed"
+      },
+      "lang": {
+        "type": "string",
+        "format": "not_analyzed"
+      },
+      "type": {
+        "type": "string",
+        "format": "not_analyzed"
       },
       "sequence": {
         "type": "long"
@@ -17,10 +21,13 @@
         "type": "long"
       },
       "end": {
-        "type": "long",
+        "type": "long"
+      },
+      "offset": {
+        "type": "long"
       },
       "content": {
-        "type": "string",
+        "type": "string"
       }
     }
   }
