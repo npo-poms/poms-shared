@@ -2291,14 +2291,13 @@ public enum Channel {
         }
     },
 
-    @XmlEnumValue("BFIR")
-    BFIR {
+    @XmlEnumValue("BCFS")
+    BCFS {
         @Override
         public String toString() {
             return "BBC First";
         }
     };
-
 
     public String misId() {
         return name();
