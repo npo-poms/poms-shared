@@ -1,18 +1,22 @@
 {
   "cue": {
+    "_parent": {
+      "type": "program",
+      "property": "mid"
+    },
     "dynamic": "strict",
     "properties": {
       "parent": {
         "type": "string",
-        "format": "not_analyzed"
+        "index": "not_analyzed"
       },
       "lang": {
         "type": "string",
-        "format": "not_analyzed"
+        "index": "not_analyzed"
       },
       "type": {
         "type": "string",
-        "format": "not_analyzed"
+        "index": "not_analyzed"
       },
       "sequence": {
         "type": "long"
