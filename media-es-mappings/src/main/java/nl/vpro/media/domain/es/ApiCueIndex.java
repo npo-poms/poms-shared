@@ -6,7 +6,7 @@ package nl.vpro.media.domain.es;
  */
 public class ApiCueIndex {
 
-    public static String NAME = "subtitles";
+    public static String NAME = ApiMediaIndex.NAME;
 
     public static String TYPE = "cue";
 
