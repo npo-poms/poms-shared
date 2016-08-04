@@ -44,6 +44,11 @@ public class StandaloneCue extends Cue {
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     private Duration offset = Duration.ZERO;
 
+
+    public static StandaloneCue translation(Cue cue, Locale locale) {
+        return new StandaloneCue(cue, locale, SubtitlesType.TRANSLATION, Duration.ZERO);
+    }
+
     protected StandaloneCue() {
 
     }
