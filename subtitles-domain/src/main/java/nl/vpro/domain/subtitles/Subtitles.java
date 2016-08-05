@@ -54,8 +54,8 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerDate.class)
     private Duration offset;
 
     @Column(nullable = false)
@@ -77,7 +77,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     private Locale language;
 
-    protected Subtitles() {}
+    public Subtitles() {}
 
     public Subtitles(String mid, Duration offset, String content) {
         this.mid = mid;
