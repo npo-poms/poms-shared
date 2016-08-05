@@ -8,10 +8,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,11 +27,13 @@ public class DateRange implements Predicate<Instant> {
     @XmlElement
     @JsonIgnore
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     private Instant start;
 
     @XmlElement
     @JsonIgnore
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlJavaTypeAdapter(value = InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     private Instant stop;
 
     public  DateRange() {
