@@ -14,7 +14,6 @@ import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,15 +30,27 @@ public class SubtitlesUtil {
 
 
     public static Stream<Cue> parse(Subtitles subtitles) {
-        return parse(subtitles.getMid(), new StringReader(subtitles.getContent()));
+        switch (subtitles.getFormat()) {
+            case EBU:
+                return parseEBU(subtitles.getMid(), new StringReader(subtitles.getContent()));
+            case WEBVTT:
+                return parseWEBVTT(subtitles.getMid(), new StringReader(subtitles.getContent()));
+            default:
+                throw new IllegalStateException();
+        }
+
     }
 
 
-    public static Stream<Cue> parse(String parent, InputStream inputStream) throws UnsupportedEncodingException {
-        return parse(parent, new InputStreamReader(inputStream, "ISO-6937"));
+    public static Stream<Cue> parseWEBVTT(String parent, Reader inputStream) {
+        throw new IllegalStateException();
     }
 
-    public static Stream<Cue> parse(final String parent, Reader reader) {
+    public static Stream<Cue> parseEBU(String parent, InputStream inputStream) {
+        return parseEBU(parent, new InputStreamReader(inputStream, Charset.forName("ISO-6937")));
+    }
+
+    public static Stream<Cue> parseEBU(final String parent, Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
         Iterator<Cue> cues = new Iterator<Cue>() {
