@@ -68,7 +68,7 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
 
     @Override
     public boolean test(ScheduleEvent scheduleEvent) {
-        return (dateRange == null || dateRange.test(scheduleEvent.getStart()))
+        return (dateRange == null || dateRange.test(scheduleEvent.getStartInstant()))
             && (channels == null || channels.contains(scheduleEvent.getChannel()));
     }
 }
