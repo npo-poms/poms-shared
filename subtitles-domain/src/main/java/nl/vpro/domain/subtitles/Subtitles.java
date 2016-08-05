@@ -45,6 +45,13 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @Convert(converter = InstantToTimestampConverter.class)
     protected Instant creationDate = Instant.now();
 
+
+    @Column(nullable = false)
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @Convert(converter = InstantToTimestampConverter.class)
+    protected Instant lastModified = Instant.now();
+
     @Id
     @XmlAttribute(required = true)
     protected String mid;
