@@ -101,6 +101,14 @@ public class Subtitles implements Serializable, Identifiable<String> {
     }
 
 
+    public Instant getLastModified() {
+        return creationDate;
+    }
+
+    public void setLastModified(Instant lastModified) {
+        this.lastModified = lastModified;
+    }
+
     public String getMid() {
         return mid;
     }
