@@ -61,11 +61,11 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
         return new Relation(def, uriRef, text);
     }
 
-    public static Relation text(RelationDefinition def, String text) {
+    public static Relation ofText(RelationDefinition def, String text) {
         return new Relation(def, null, text);
     }
 
-    public static Relation uri(RelationDefinition def, String uri) {
+    public static Relation ofUri(RelationDefinition def, String uri) {
         return new Relation(def, uri, null);
     }
 
