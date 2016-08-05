@@ -26,11 +26,14 @@ public class SubtitlesTest {
     public void testMarshalToXml() throws IOException, SAXException {
         Subtitles subtitles = new Subtitles("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), "Ondertiteling tekst");
         subtitles.setCreationDate(Instant.ofEpochMilli(0));
+        subtitles.setLastModified(Instant.ofEpochMilli(0));
+
+
         subtitles.setLanguage(new Locale("nl", "NL"));
 
 
         JAXBTestUtil.roundTripAndSimilar(subtitles,
-                "<subtitles mid=\"VPRO_1234\" creationDate=\"1970-01-01T01:00:00.000+01:00\" type=\"CAPTION\" format=\"WEBVTT\" xml:lang=\"nl-NL\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
+                "<subtitles mid=\"VPRO_1234\" creationDate=\"1970-01-01T01:00:00.000+01:00\" lastModified=\"1970-01-01T01:00:00.000+01:00\" type=\"CAPTION\" format=\"WEBVTT\" xml:lang=\"nl-NL\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
                 "    <offset>P0DT0H2M0.000S</offset>\n" +
                 "    <content>Ondertiteling tekst</content>\n" +
                 "</subtitles>");
