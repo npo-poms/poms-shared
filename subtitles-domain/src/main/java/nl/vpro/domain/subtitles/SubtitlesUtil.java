@@ -99,8 +99,10 @@ public class SubtitlesUtil {
 
     }
 
-    public static void toVVT(Iterator<? extends Cue> cueIterator, OutputStream writer) throws IOException {
-        toVVT(cueIterator, new OutputStreamWriter(writer, Charset.forName("UTF-8")));
+    public static void toVVT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
+        Writer writer = new OutputStreamWriter(out, Charset.forName("UTF-8"));
+        toVVT(cueIterator, writer);
+        writer.flush();
     }
 
     public static void toVVT(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
