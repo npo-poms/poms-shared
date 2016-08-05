@@ -43,7 +43,16 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @Convert(converter = InstantToTimestampConverter.class)
+    @XmlSchemaType(name = "dateTime")
     protected Instant creationDate = Instant.now();
+
+
+    @Column(nullable = false)
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @Convert(converter = InstantToTimestampConverter.class)
+    @XmlSchemaType(name = "dateTime")
+    protected Instant lastModified = Instant.now();
 
     @Id
     @XmlAttribute(required = true)
@@ -79,10 +88,11 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     public Subtitles() {}
 
-    public Subtitles(String mid, Duration offset, String content) {
+    public Subtitles(String mid, Duration offset, SubtitlesFormat format, String content) {
         this.mid = mid;
         this.offset = offset;
         this.content = content;
+        this.format = format;
     }
 
     public Instant getCreationDate() {
@@ -95,7 +105,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
 
     public Instant getLastModified() {
-        return creationDate;
+        return lastModified;
     }
 
     public void setLastModified(Instant lastModified) {
