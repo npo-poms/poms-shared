@@ -104,6 +104,7 @@ public class SubtitlesUtil {
     }
 
     public static void toVVT(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
+        writer.write("WEBVTT\n\n");
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
             formatVVT(cueIterator.next(), builder);
