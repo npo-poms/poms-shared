@@ -23,7 +23,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
 * @author Michiel Meeuwissen
-* @since 1.8
+* @since 4.8
 */
 @XmlRootElement(name = "cue")
 public class Cue {
