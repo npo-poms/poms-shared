@@ -18,6 +18,8 @@ import java.util.stream.StreamSupport;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import nl.vpro.util.ISO6937CharsetProvider;
+
 
 /**
  * @author Michiel Meeuwissen
@@ -26,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 @Slf4j
 public class SubtitlesUtil {
 
-    public static Charset ISO6937 = Charset.forName("ISO-6937");
+    public static Charset ISO6937 = ISO6937CharsetProvider.ISO6937;
 
     private static final DateTimeFormatter WEBVTT_FORMATTER = DateTimeFormatter.ofPattern("m:ss.SSS");
     private static final DateTimeFormatter EBU_FORMATTER = DateTimeFormatter.ofPattern("m:ss");
@@ -136,7 +138,7 @@ public class SubtitlesUtil {
 
     public static void toEBU(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
         Writer writer = new OutputStreamWriter(out, ISO6937);
-        toVTT(cueIterator, writer);
+        toEBU(cueIterator, writer);
         writer.flush();
     }
 
