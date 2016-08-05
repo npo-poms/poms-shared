@@ -14,6 +14,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -25,10 +28,12 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class DateRange implements Predicate<Instant> {
 
     @XmlElement
+    @JsonIgnore
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     private Instant start;
 
     @XmlElement
+    @JsonIgnore
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     private Instant stop;
 
@@ -53,15 +58,26 @@ public class DateRange implements Predicate<Instant> {
     /**
      * Start date time of date-range (inclusive)
      */
+    @JsonProperty
     public Instant getStart() {
         return start;
     }
 
+    public void setStart(Instant start) {
+        this.start = start;
+    }
+
+
     /**
      * End date time of date-range (exclusive)
      */
+    @JsonProperty
     public Instant getStop() {
         return stop;
+    }
+
+    public void setStop(Instant stop) {
+        this.stop = stop;
     }
 
     @Override
