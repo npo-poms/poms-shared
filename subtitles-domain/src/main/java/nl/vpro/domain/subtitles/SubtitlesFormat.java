@@ -5,5 +5,6 @@ package nl.vpro.domain.subtitles;
  * @since 4.7
  */
 public enum SubtitlesFormat {
-    WEBVTT
+    WEBVTT,
+    EBU
 }
