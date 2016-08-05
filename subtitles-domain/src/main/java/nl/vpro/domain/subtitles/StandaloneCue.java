@@ -26,7 +26,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
 
 /**
  * @author Michiel Meeuwissen
- * @since 1.8
+ * @since 4.8
  */
 @XmlRootElement(name = "standaloneCue")
 @ToString(includeFieldNames = false, callSuper = true, of = {"locale"})
