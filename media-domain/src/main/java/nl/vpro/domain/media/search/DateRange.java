@@ -12,8 +12,10 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dateRangeType", propOrder = {
@@ -23,9 +25,11 @@ import nl.vpro.domain.media.Schedule;
 public class DateRange implements Predicate<Instant> {
 
     @XmlElement
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     private Instant start;
 
     @XmlElement
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     private Instant stop;
 
     public  DateRange() {
