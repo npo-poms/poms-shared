@@ -85,4 +85,9 @@ public class DateRange implements Predicate<Instant> {
         return (start == null || start.equals(date) || start.isBefore(date)) && (stop == null || stop.isAfter(date));
 
     }
+
+    @Override
+    public String toString() {
+        return start + " - " + stop;
+    }
 }
