@@ -252,6 +252,11 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         return start;
     }
 
+
+    public Instant getStartInstant() {
+        return DateUtils.toInstant(start);
+    }
+
     public void setStart(Date start) {
         this.start = start;
     }
@@ -279,6 +284,11 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
 
     public void setStop(Date stop) {
         this.stop = stop;
+    }
+
+
+    public Instant getStopInstant() {
+        return DateUtils.toInstant(stop);
     }
 
     public void setStop(LocalDateTime stop) {
