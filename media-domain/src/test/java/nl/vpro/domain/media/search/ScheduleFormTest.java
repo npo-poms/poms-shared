@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.search;
 
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -14,7 +15,7 @@ public class ScheduleFormTest {
 
     @Test
     public void testTest() {
-        ScheduleForm form = new ScheduleForm(new Pager(), new DateRange(new Date(100), new Date(200)));
+        ScheduleForm form = new ScheduleForm(new Pager(), new DateRange(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
 
         assertThat(form.test(ev(null, 150))).isTrue();
         assertThat(form.test(ev(null, 80))).isFalse();
