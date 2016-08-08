@@ -1,9 +1,15 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 
 import javax.persistence.*;
 import javax.xml.XMLConstants;
@@ -13,6 +19,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.PeekingIterator;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
@@ -32,9 +40,10 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "subtitlesType", propOrder = {
     "mid",
-        "offset",
-        "content"
-        })
+    "offset",
+    "content"
+})
+@Slf4j
 public class Subtitles implements Serializable, Identifiable<String> {
 
     private static final long serialVersionUID = 0L;
@@ -43,6 +52,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @Convert(converter = InstantToTimestampConverter.class)
+    @XmlSchemaType(name = "dateTime")
     protected Instant creationDate = Instant.now();
 
 
@@ -50,6 +60,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @Convert(converter = InstantToTimestampConverter.class)
+    @XmlSchemaType(name = "dateTime")
     protected Instant lastModified = Instant.now();
 
     @Id
@@ -58,38 +69,79 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     @Column(name = "[offset]")
     @Convert(converter = DurationToLongConverter.class)
-    @XmlElement
+    @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Duration offset;
 
-    @Column(nullable = false)
-    @Lob
+    @Embedded
     @XmlElement(required = true)
-    private String content;
+    private SubtitlesContent content;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
     private SubtitlesType type = SubtitlesType.CAPTION;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @XmlAttribute
-    private SubtitlesFormat format = SubtitlesFormat.WEBVTT;
-
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     private Locale language;
 
+    public static Subtitles ebu(String mid, Duration offset, Locale language, String content) {
+        return new Subtitles(mid, offset, language, SubtitlesFormat.EBU, content);
+    }
+
+    public static Subtitles ebuCaption(String mid, Duration offset, String content) {
+        Subtitles subtitles = new Subtitles(mid, offset, SubtitlesUtil.DUTCH, SubtitlesFormat.EBU, content);
+        subtitles.setType(SubtitlesType.CAPTION);
+        return subtitles;
+    }
+
+    public static Subtitles webvtt(String mid, Duration offset, Locale language, String content) {
+        return new Subtitles(mid, offset, language, SubtitlesFormat.WEBVTT, content);
+    }
+
+    public static Subtitles from(Iterator<StandaloneCue> cueIterator) {
+        PeekingIterator<StandaloneCue> peeking = Iterators.peekingIterator(cueIterator);
+        Subtitles subtitles = new Subtitles();
+        StringWriter writer = new StringWriter();
+        try {
+            StandaloneCue first = peeking.peek();
+            WEBVTT.format(peeking, writer);
+            subtitles.setMid(first.getParent());
+            subtitles.setLanguage(first.getLocale());
+            subtitles.setOffset(first.getOffset());
+            subtitles.setContent(new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString()));
+            subtitles.setCreationDate(null);
+        } catch(NoSuchElementException nse) {
+            log.error(nse.getMessage());
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return subtitles;
+
+    }
+
+    public static Subtitles from(String mid, Duration offset, Locale language, Iterator<Cue> cues)  {
+        StringWriter writer = new StringWriter();
+        try {
+            WEBVTT.format(cues, writer);
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return new Subtitles(mid, offset, language, SubtitlesFormat.WEBVTT, writer.toString());
+    }
+
+
     public Subtitles() {}
 
-    public Subtitles(String mid, Duration offset, String content) {
+    public Subtitles(String mid, Duration offset, Locale language, SubtitlesFormat format, String content) {
         this.mid = mid;
         this.offset = offset;
-        this.content = content;
+        this.content = new SubtitlesContent(format, content);
+        this.language = language;
     }
 
     public Instant getCreationDate() {
@@ -102,7 +154,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
 
     public Instant getLastModified() {
-        return creationDate;
+        return lastModified;
     }
 
     public void setLastModified(Instant lastModified) {
@@ -126,11 +178,11 @@ public class Subtitles implements Serializable, Identifiable<String> {
         return this;
     }
 
-    public String getContent() {
+    public SubtitlesContent getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(SubtitlesContent content) {
         this.content = content;
     }
 
@@ -145,14 +197,6 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     public void setType(SubtitlesType type) {
         this.type = type;
-    }
-
-    public SubtitlesFormat getFormat() {
-        return format;
-    }
-
-    public void setFormat(SubtitlesFormat format) {
-        this.format = format;
     }
 
     public Locale getLanguage() {
