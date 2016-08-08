@@ -24,7 +24,7 @@ public class SubtitlesTest {
 
     @Test
     public void testMarshalToXml() throws IOException, SAXException {
-        Subtitles subtitles = new Subtitles("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), "Ondertiteling tekst");
+        Subtitles subtitles = new Subtitles("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), SubtitlesFormat.WEBVTT,  "Ondertiteling tekst");
         subtitles.setCreationDate(Instant.ofEpochMilli(0));
         subtitles.setLastModified(Instant.ofEpochMilli(0));
 
