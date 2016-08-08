@@ -1,9 +1,15 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 
 import javax.persistence.*;
 import javax.xml.XMLConstants;
@@ -13,6 +19,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.PeekingIterator;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
@@ -35,6 +43,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
     "offset",
     "content"
 })
+@Slf4j
 public class Subtitles implements Serializable, Identifiable<String> {
 
     private static final long serialVersionUID = 0L;
@@ -86,24 +95,54 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     private Locale language;
 
-    public static Subtitles ebu(String mid, Duration offset, String content) {
-        return new Subtitles(mid, offset, SubtitlesFormat.EBU, content);
+    public static Subtitles ebu(String mid, Duration offset, Locale language, String content) {
+        return new Subtitles(mid, offset, language, SubtitlesFormat.EBU, content);
     }
 
-    public static Subtitles webvtt(String mid, Duration offset, String content) {
-        return new Subtitles(mid, offset, SubtitlesFormat.WEBVTT, content);
+    public static Subtitles webvtt(String mid, Duration offset, Locale language, String content) {
+        return new Subtitles(mid, offset, language, SubtitlesFormat.WEBVTT, content);
     }
 
+    public static Subtitles from(Iterator<StandaloneCue> cueIterator) {
+        PeekingIterator<StandaloneCue> peeking = Iterators.peekingIterator(cueIterator);
+        Subtitles subtitles = new Subtitles();
+        StringWriter writer = new StringWriter();
+        try {
+            StandaloneCue first = peeking.peek();
+            SubtitlesUtil.toVTT(peeking, writer);
+            subtitles.setMid(first.getParent());
+            subtitles.setLanguage(first.getLocale());
+            subtitles.setOffset(first.getOffset());
+            subtitles.setContent(writer.toString());
+            subtitles.setCreationDate(null);
+        } catch(NoSuchElementException nse) {
+            log.error(nse.getMessage());
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return subtitles;
 
+    }
+
+    public static Subtitles from(String mid, Duration offset, Locale language, Iterator<Cue> cues)  {
+        StringWriter writer = new StringWriter();
+        try {
+            SubtitlesUtil.toVTT(cues, writer);
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return new Subtitles(mid, offset, language, SubtitlesFormat.WEBVTT, writer.toString());
+    }
 
 
     public Subtitles() {}
 
-    public Subtitles(String mid, Duration offset, SubtitlesFormat format, String content) {
+    public Subtitles(String mid, Duration offset, Locale language, SubtitlesFormat format, String content) {
         this.mid = mid;
         this.offset = offset;
         this.content = content;
         this.format = format;
+        this.language = language;
     }
 
     public Instant getCreationDate() {
