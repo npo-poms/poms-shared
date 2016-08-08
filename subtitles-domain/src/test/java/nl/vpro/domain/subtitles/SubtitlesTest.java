@@ -49,7 +49,7 @@ public class SubtitlesTest {
 
         assertThat(subtitles.getMid()).isEqualTo("VPRO_1234");
         assertThat(subtitles.getOffset()).isEqualTo(Duration.ofMillis(120000));
-        assertThat(subtitles.getContent()).isEqualTo("Ondertiteling tekst");
+        assertThat(subtitles.getContent().getValue()).isEqualTo("Ondertiteling tekst");
     }
 
     @Test
