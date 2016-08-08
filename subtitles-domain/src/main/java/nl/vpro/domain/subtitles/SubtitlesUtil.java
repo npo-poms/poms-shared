@@ -51,6 +51,10 @@ public class SubtitlesUtil {
         }
 
     }
+    
+    public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
+        return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()));
+    }
 
     public static Stream<Cue> parseWEBVTT(String parent, Reader inputStream) {
         throw new IllegalStateException();
