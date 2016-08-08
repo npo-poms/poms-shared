@@ -86,7 +86,7 @@ if [ "$2" != "" ] ; then
    curl -XPOST $desthost/_aliases -d "$publishalias"
 
 
-   echo -e "\nConsider:\n stream2es es  --source $desthost/$previndex --target $desthost/$destindex"
+   echo -e "\nConsider:\n stream2es es --log debug  --source $desthost/$previndex --target $desthost/$destindex"
    echo "(streams2es can be found at https://github.com/elasticsearch/stream2es)"
 
    alias="{
