@@ -29,14 +29,23 @@ public class SubtitlesUtilTest {
 
 
 
-    protected Subtitles getSubtitles() throws IOException {
-        InputStream example = getClass().getResourceAsStream("/PRID_VPRO_1140017.txt");
-        return SubtitlesUtil.ebu("VPRO_1140017", Duration.ofMillis(2 * 60 * 1000), example);
+    protected static Subtitles getSubtitles() throws IOException {
+        InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/PRID_VPRO_1140017.txt");
+        return SubtitlesUtil.ebu("VPRO_1140017", Duration.ofMillis(2 * 60 * 1000), SubtitlesUtil.DUTCH, example);
     }
 
     @Test
     public void toEBU() throws IOException {
-        assertThat(SubtitlesUtil.formatEBU(SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder()).toString()).isEqualTo("\"0001 2:02 2:04\n" +
+        assertThat(EBU.format(SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder()).toString()).isEqualTo("0001 2:02 2:04\n" +
+            "888\n" +
+            "\n");
+
+    }
+
+
+    @Test
+    public void toWEBVTT() throws IOException {
+        assertThat(WEBVTT.formatVVT(SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder()).toString()).isEqualTo("0001 2:02 2:04\n" +
             "888\n" +
             "\n");
 
