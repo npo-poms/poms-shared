@@ -109,7 +109,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
         StringWriter writer = new StringWriter();
         try {
             StandaloneCue first = peeking.peek();
-            WEBVTT.toVTT(peeking, writer);
+            WEBVTT.format(peeking, writer);
             subtitles.setMid(first.getParent());
             subtitles.setLanguage(first.getLocale());
             subtitles.setOffset(first.getOffset());
@@ -127,7 +127,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
     public static Subtitles from(String mid, Duration offset, Locale language, Iterator<Cue> cues)  {
         StringWriter writer = new StringWriter();
         try {
-            WEBVTT.toVTT(cues, writer);
+            WEBVTT.format(cues, writer);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
