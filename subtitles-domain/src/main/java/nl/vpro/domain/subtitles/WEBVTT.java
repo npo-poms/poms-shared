@@ -23,16 +23,20 @@ import org.apache.commons.lang3.StringUtils;
 class WEBVTT {
 
 
+    public static String INTRO = "WEBVTT";
+
 
     static Stream<Cue> parse(String parent, Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
+
         Iterator<Cue> cues = new Iterator<Cue>() {
 
             boolean needsFindNext = true;
             String headLine= null;
             String timeLine = null;
             StringBuilder content = new StringBuilder();
+            boolean readIntro = false;
 
             @Override
             public boolean hasNext() {
@@ -59,15 +63,25 @@ class WEBVTT {
             protected void findNext() {
                 if (needsFindNext) {
                     headLine = null;
+                    timeLine = null;
                     content.setLength(0);
                     while (stream.hasNext()) {
                         String l = stream.next();
                         if (StringUtils.isNotBlank(l)) {
-                            timeLine = l.trim();
+                            if (! readIntro) {
+                                if (INTRO.equals(l.trim())) {
+                                    readIntro = true;
+                                    continue;
+                                }
+                            }
+                            headLine = l.trim();
+                            readIntro = true;
                             break;
                         }
                     }
-                    timeLine = stream.next();
+                    if (stream.hasNext()) {
+                        timeLine = stream.next();
+                    }
                     while (stream.hasNext()) {
                         String l = stream.next();
                         if (StringUtils.isBlank(l)) {
@@ -100,23 +114,23 @@ class WEBVTT {
     }
 
 
-    public static void toVTT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
+    static void format(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
         Writer writer = new OutputStreamWriter(out, Charset.forName("UTF-8"));
-        toVTT(cueIterator, writer);
+        format(cueIterator, writer);
         writer.flush();
     }
 
-    public static void toVTT(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
-        writer.write("WEBVTT\n\n");
+    static void format(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
+        writer.write(INTRO); writer.write("\n\n");
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
-            formatVVT(cueIterator.next(), builder);
+            formatCue(cueIterator.next(), builder);
             writer.write(builder.toString());
             builder.setLength(0);
         }
     }
 
-    protected static String formatDuration(Duration duration) {
+    static String formatDuration(Duration duration) {
         Long millis = duration.toMillis();
         Long minutes = millis / 60000;
         millis -= minutes * 60000;
@@ -125,7 +139,7 @@ class WEBVTT {
         return String.format("%d:%02d.%03d", minutes, seconds, millis);
     }
 
-    protected static Duration parseDuration(String duration) {
+    static Duration parseDuration(String duration) {
         String[] split = duration.split(":", 2);
         int index = 0;
         Long minutes;
@@ -141,7 +155,7 @@ class WEBVTT {
         return Duration.ofMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
     }
 
-    protected static StringBuilder formatVVT(Cue cue, StringBuilder builder) {
+    static StringBuilder formatCue(Cue cue, StringBuilder builder) {
         builder.append(cue.getSequence());
         builder.append("\n");
         if (cue.getStart() != null) {
