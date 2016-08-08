@@ -8,10 +8,7 @@ import java.text.ParseException;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Spliterator;
-import java.util.Spliterators;
+import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -34,10 +31,10 @@ public class SubtitlesUtil {
     private static final DateTimeFormatter EBU_FORMATTER = DateTimeFormatter.ofPattern("m:ss");
 
 
-    public static Subtitles ebu(String parent, Duration duration, InputStream input) throws IOException {
+    public static Subtitles ebu(String parent, Duration duration, Locale locale, InputStream input) throws IOException {
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(input, ISO6937), w);
-        return new Subtitles(parent, duration, SubtitlesFormat.EBU,  w.toString());
+        return new Subtitles(parent, duration, locale, SubtitlesFormat.EBU,  w.toString());
     }
 
     public static Stream<Cue> parse(Subtitles subtitles) {
@@ -51,7 +48,7 @@ public class SubtitlesUtil {
         }
 
     }
-    
+
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
         return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()));
     }
