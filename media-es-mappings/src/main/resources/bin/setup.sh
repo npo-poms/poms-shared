@@ -62,6 +62,10 @@ curl -XPUT $desthost/$destindex/deletedgroup/_mapping -d @$basedir/mapping/group
 curl -XPUT $desthost/$destindex/deletedprogram/_mapping -d @$basedir/mapping/program.json
 curl -XPUT $desthost/$destindex/deletedsegment/_mapping -d @$basedir/mapping/segment.json
 
+curl -XPUT $desthost/$destindex/deletedgroup/_mapping -d @$basedir/mapping/deletedgroup.json
+curl -XPUT $desthost/$destindex/deletedprogram/_mapping -d @$basedir/mapping/deletedprogram.json
+curl -XPUT $desthost/$destindex/deletedsegment/_mapping -d @$basedir/mapping/deletedsegment.json
+
 echo
 
 if [ "$2" != "" ] ; then
