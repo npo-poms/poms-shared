@@ -86,6 +86,17 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     private Locale language;
 
+    public static Subtitles ebu(String mid, Duration offset, String content) {
+        return new Subtitles(mid, offset, SubtitlesFormat.EBU, content);
+    }
+
+    public static Subtitles webvtt(String mid, Duration offset, String content) {
+        return new Subtitles(mid, offset, SubtitlesFormat.WEBVTT, content);
+    }
+
+
+
+
     public Subtitles() {}
 
     public Subtitles(String mid, Duration offset, SubtitlesFormat format, String content) {
