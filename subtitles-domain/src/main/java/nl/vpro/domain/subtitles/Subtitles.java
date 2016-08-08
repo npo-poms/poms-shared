@@ -76,20 +76,14 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Duration offset;
 
-    @Column(nullable = false)
-    @Lob
+    @Embedded
     @XmlElement(required = true)
-    private String content;
+    private SubtitlesContent content;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
     private SubtitlesType type = SubtitlesType.CAPTION;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @XmlAttribute
-    private SubtitlesFormat format = SubtitlesFormat.WEBVTT;
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
@@ -97,6 +91,12 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     public static Subtitles ebu(String mid, Duration offset, Locale language, String content) {
         return new Subtitles(mid, offset, language, SubtitlesFormat.EBU, content);
+    }
+
+    public static Subtitles ebuCaption(String mid, Duration offset, String content) {
+        Subtitles subtitles = new Subtitles(mid, offset, SubtitlesUtil.DUTCH, SubtitlesFormat.EBU, content);
+        subtitles.setType(SubtitlesType.CAPTION);
+        return subtitles;
     }
 
     public static Subtitles webvtt(String mid, Duration offset, Locale language, String content) {
@@ -109,11 +109,11 @@ public class Subtitles implements Serializable, Identifiable<String> {
         StringWriter writer = new StringWriter();
         try {
             StandaloneCue first = peeking.peek();
-            SubtitlesUtil.toVTT(peeking, writer);
+            WEBVTT.toVTT(peeking, writer);
             subtitles.setMid(first.getParent());
             subtitles.setLanguage(first.getLocale());
             subtitles.setOffset(first.getOffset());
-            subtitles.setContent(writer.toString());
+            subtitles.setContent(new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString()));
             subtitles.setCreationDate(null);
         } catch(NoSuchElementException nse) {
             log.error(nse.getMessage());
@@ -127,7 +127,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
     public static Subtitles from(String mid, Duration offset, Locale language, Iterator<Cue> cues)  {
         StringWriter writer = new StringWriter();
         try {
-            SubtitlesUtil.toVTT(cues, writer);
+            WEBVTT.toVTT(cues, writer);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
@@ -140,8 +140,7 @@ public class Subtitles implements Serializable, Identifiable<String> {
     public Subtitles(String mid, Duration offset, Locale language, SubtitlesFormat format, String content) {
         this.mid = mid;
         this.offset = offset;
-        this.content = content;
-        this.format = format;
+        this.content = new SubtitlesContent(format, content);
         this.language = language;
     }
 
@@ -179,11 +178,11 @@ public class Subtitles implements Serializable, Identifiable<String> {
         return this;
     }
 
-    public String getContent() {
+    public SubtitlesContent getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(SubtitlesContent content) {
         this.content = content;
     }
 
@@ -198,14 +197,6 @@ public class Subtitles implements Serializable, Identifiable<String> {
 
     public void setType(SubtitlesType type) {
         this.type = type;
-    }
-
-    public SubtitlesFormat getFormat() {
-        return format;
-    }
-
-    public void setFormat(SubtitlesFormat format) {
-        this.format = format;
     }
 
     public Locale getLanguage() {
