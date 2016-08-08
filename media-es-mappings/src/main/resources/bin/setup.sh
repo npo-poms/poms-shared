@@ -54,9 +54,12 @@ curl -XPUT $desthost/$destindex/group/_mapping -d @$basedir/mapping/group.json
 curl -XPUT $desthost/$destindex/program/_mapping -d @$basedir/mapping/program.json
 curl -XPUT $desthost/$destindex/segment/_mapping -d @$basedir/mapping/segment.json
 
-curl -XPUT $desthost/$destindex/deletedgroup/_mapping -d @$basedir/mapping/group.json
-curl -XPUT $desthost/$destindex/deletedprogram/_mapping -d @$basedir/mapping/program.json
-curl -XPUT $desthost/$destindex/deletedsegment/_mapping -d @$basedir/mapping/segment.json
+curl -XPUT $desthost/$destindex/cue/_mapping -d @$basedir/mapping/cue.json
+curl -XPUT $desthost/$destindex/memberRef/_mapping -d @$basedir/mapping/memberRef.json
+
+curl -XPUT $desthost/$destindex/deletedgroup/_mapping -d @$basedir/mapping/deletedgroup.json
+curl -XPUT $desthost/$destindex/deletedprogram/_mapping -d @$basedir/mapping/deletedprogram.json
+curl -XPUT $desthost/$destindex/deletedsegment/_mapping -d @$basedir/mapping/deletedsegment.json
 
 echo
 
