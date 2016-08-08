@@ -2,11 +2,7 @@ package nl.vpro.domain.subtitles;
 
 import lombok.ToString;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.TimeZone;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,16 +18,12 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
 * @author Michiel Meeuwissen
-* @since 1.8
+* @since 4.8
 */
 @XmlRootElement(name = "cue")
 @ToString(of = {"parent", "sequence"})
 public class Cue {
 
-    static final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
-    static {
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UT"));
-    }
 
     @XmlAttribute
     String parent;
@@ -54,7 +46,7 @@ public class Cue {
     String content;
 
 
-    Cue(String parent,
+    public Cue(String parent,
         int sequence,
         Duration start,
         Duration end,
@@ -79,17 +71,6 @@ public class Cue {
     }
 
 
-    public static Cue parse(String parent, String timeLine, String content) throws ParseException {
-        String[] split = timeLine.split("\\s+");
-        return new Cue(
-            parent,
-            Integer.parseInt(split[0]),
-            Duration.ofMillis(dateFormat.parse(split[1] + "0").getTime()),
-            Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime()),
-            content
-        );
-
-    }
 
     public String getParent() {
         return parent;
