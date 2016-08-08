@@ -43,12 +43,5 @@ public class SubtitlesUtilTest {
     }
 
 
-    @Test
-    public void toWEBVTT() throws IOException {
-        assertThat(WEBVTT.formatVVT(SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder()).toString()).isEqualTo("0001 2:02 2:04\n" +
-            "888\n" +
-            "\n");
-
-    }
 
 }
