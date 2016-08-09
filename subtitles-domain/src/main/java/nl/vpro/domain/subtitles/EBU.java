@@ -127,7 +127,7 @@ class EBU {
                 content
             );
         } catch (NumberFormatException | ParseException nfe) {
-            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Expected content: " + content + " Reason: " + nfe.getClass() + " " + nfe.getMessage());
+            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Expected content: " + content + " Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
         }
 
     }
