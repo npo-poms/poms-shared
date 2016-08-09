@@ -74,7 +74,7 @@ class EBU {
                 needsFindNext = true;
                 try {
                     return parseCue(parent, timeLine, content.toString());
-                } catch (ParseException e) {
+                } catch (IllegalArgumentException e) {
                     log.error(e.getMessage(), e);
                     return null;
                 }
@@ -116,15 +116,19 @@ class EBU {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UT"));
     }
 
-    public static Cue parseCue(String parent, String timeLine, String content) throws ParseException {
+    public static Cue parseCue(String parent, String timeLine, String content) {
         String[] split = timeLine.split("\\s+");
-        return new Cue(
-            parent,
-            Integer.parseInt(split[0]),
-            Duration.ofMillis(dateFormat.parse(split[1] + "0").getTime()),
-            Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime()),
-            content
-        );
+        try {
+            return new Cue(
+                parent,
+                Integer.parseInt(split[0]),
+                Duration.ofMillis(dateFormat.parse(split[1] + "0").getTime()),
+                Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime()),
+                content
+            );
+        } catch (NumberFormatException | ParseException nfe) {
+            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Expected content: " + content + " Reason: " + nfe.getClass() + " " + nfe.getMessage());
+        }
 
     }
 
