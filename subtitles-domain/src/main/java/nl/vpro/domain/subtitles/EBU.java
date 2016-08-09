@@ -26,7 +26,7 @@ class EBU {
     private static final DateTimeFormatter EBU_FORMATTER = DateTimeFormatter.ofPattern("m:ss");
 
 
-    protected static StringBuilder format(Cue cue, StringBuilder builder) {
+    static StringBuilder format(Cue cue, StringBuilder builder) {
         //001 0:01 0:02 ondertitels !
 
         builder.append(String.format("%04d ", cue.getSequence()));
@@ -46,11 +46,11 @@ class EBU {
     }
 
 
-    public static Stream<Cue> parse(String parent, InputStream inputStream) {
+    static Stream<Cue> parse(String parent, InputStream inputStream) {
         return parse(parent, new InputStreamReader(inputStream, ISO6937));
     }
 
-    public static Stream<Cue> parse(final String parent, Reader reader) {
+    static Stream<Cue> parse(final String parent, Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
         Iterator<Cue> cues = new Iterator<Cue>() {
@@ -116,7 +116,7 @@ class EBU {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UT"));
     }
 
-    public static Cue parseCue(String parent, String timeLine, String content) throws ParseException {
+    static Cue parseCue(String parent, String timeLine, String content) throws ParseException {
         String[] split = timeLine.split("\\s+");
         return new Cue(
             parent,
@@ -129,13 +129,13 @@ class EBU {
     }
 
 
-    public static void toEBU(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
+    static void format(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
         Writer writer = new OutputStreamWriter(out, ISO6937);
-        toEBU(cueIterator, writer);
+        format(cueIterator, writer);
         writer.flush();
     }
 
-    public static void toEBU(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
+    static void format(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
             format(cueIterator.next(), builder);
