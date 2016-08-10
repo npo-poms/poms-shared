@@ -111,6 +111,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     public static Subtitles from(Iterator<StandaloneCue> cueIterator) {
         PeekingIterator<StandaloneCue> peeking = Iterators.peekingIterator(cueIterator);
         Subtitles subtitles = new Subtitles();
+        subtitles.setLastModified(null);
         StringWriter writer = new StringWriter();
         try {
             StandaloneCue first = peeking.peek();
@@ -120,6 +121,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
             subtitles.setOffset(first.getOffset());
             subtitles.setContent(new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString()));
             subtitles.setCreationDate(null);
+            subtitles.setLastModified(null);
         } catch(NoSuchElementException nse) {
             log.error(nse.getMessage());
         } catch (IOException e) {
