@@ -120,6 +120,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
             subtitles.setOffset(first.getOffset());
             subtitles.setContent(new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString()));
             subtitles.setCreationDate(null);
+            subtitles.setLastModified(null);
         } catch(NoSuchElementException nse) {
             log.error(nse.getMessage());
         } catch (IOException e) {

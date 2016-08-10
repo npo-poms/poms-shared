@@ -4,12 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.text.ParseException;
 import java.time.Duration;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Spliterator;
-import java.util.Spliterators;
+import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -23,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 class WEBVTT {
 
 
-    public static String INTRO = "WEBVTT";
+    static String INTRO = "WEBVTT";
 
 
     static Stream<Cue> parse(String parent, Reader reader) {
@@ -53,7 +49,7 @@ class WEBVTT {
                 needsFindNext = true;
                 try {
                     return parseCue(parent, headLine, timeLine, content.toString());
-                } catch (ParseException e) {
+                } catch (IllegalArgumentException e) {
                     log.error(e.getMessage(), e);
                     return null;
                 }
@@ -101,15 +97,19 @@ class WEBVTT {
     }
 
 
-    static Cue parseCue(String parent, String headLine, String timeLine, String content) throws ParseException {
+    static Cue parseCue(String parent, String headLine, String timeLine, String content) {
         String[] split = timeLine.split("\\s+");
-        return new Cue(
-            parent,
-            Integer.parseInt(headLine),
-            parseDuration(split[0]),
-            parseDuration(split[2]),
-            content
-        );
+        try {
+            return new Cue(
+                parent,
+                Integer.parseInt(headLine),
+                parseDuration(split[0]),
+                parseDuration(split[2]),
+                content
+            );
+        } catch(NumberFormatException nfe) {
+            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Headline: " + headLine + ". Expected content: " + content + ".  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
+        }
 
     }
 
