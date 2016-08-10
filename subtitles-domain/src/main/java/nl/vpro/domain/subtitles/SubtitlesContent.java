@@ -16,17 +16,15 @@ import javax.xml.bind.annotation.*;
 @Slf4j
 public class SubtitlesContent implements Serializable {
 
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @XmlAttribute
-    private SubtitlesFormat format = SubtitlesFormat.WEBVTT;
-    
     @Column(nullable = false)
     @Lob
     @XmlValue
     private String content;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @XmlAttribute
+    private SubtitlesFormat format = SubtitlesFormat.WEBVTT;
 
 
     public SubtitlesContent() {
