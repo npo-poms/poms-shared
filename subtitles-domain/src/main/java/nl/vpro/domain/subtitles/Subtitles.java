@@ -44,7 +44,8 @@ import nl.vpro.xml.bind.LocaleAdapter;
     "content"
 })
 @Slf4j
-public class Subtitles implements Serializable, Identifiable<String> {
+@IdClass(SubtitlesId.class)
+public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
 
     private static final long serialVersionUID = 0L;
 
@@ -67,6 +68,18 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlAttribute(required = true)
     protected String mid;
 
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @XmlAttribute
+    @Id
+    private SubtitlesType type = SubtitlesType.CAPTION;
+
+    @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
+    @XmlJavaTypeAdapter(LocaleAdapter.class)
+    @Id
+    private Locale language;
+
     @Column(name = "[offset]")
     @Convert(converter = DurationToLongConverter.class)
     @XmlAttribute
@@ -80,14 +93,6 @@ public class Subtitles implements Serializable, Identifiable<String> {
     @XmlElement(required = true)
     private SubtitlesContent content;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @XmlAttribute
-    private SubtitlesType type = SubtitlesType.CAPTION;
-
-    @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
-    @XmlJavaTypeAdapter(LocaleAdapter.class)
-    private Locale language;
 
     public static Subtitles ebu(String mid, Duration offset, Locale language, String content) {
         return new Subtitles(mid, offset, language, SubtitlesFormat.EBU, content);
@@ -106,7 +111,6 @@ public class Subtitles implements Serializable, Identifiable<String> {
     public static Subtitles from(Iterator<StandaloneCue> cueIterator) {
         PeekingIterator<StandaloneCue> peeking = Iterators.peekingIterator(cueIterator);
         Subtitles subtitles = new Subtitles();
-        subtitles.setLastModified(null);
         StringWriter writer = new StringWriter();
         try {
             StandaloneCue first = peeking.peek();
@@ -116,7 +120,6 @@ public class Subtitles implements Serializable, Identifiable<String> {
             subtitles.setOffset(first.getOffset());
             subtitles.setContent(new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString()));
             subtitles.setCreationDate(null);
-            subtitles.setLastModified(null);
         } catch(NoSuchElementException nse) {
             log.error(nse.getMessage());
         } catch (IOException e) {
@@ -189,8 +192,8 @@ public class Subtitles implements Serializable, Identifiable<String> {
     }
 
     @Override
-    public String getId() {
-        return mid;
+    public SubtitlesId getId() {
+        return new SubtitlesId(mid, language, type);
     }
 
     public SubtitlesType getType() {
