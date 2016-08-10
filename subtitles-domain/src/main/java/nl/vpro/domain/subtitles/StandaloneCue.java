@@ -51,6 +51,10 @@ public class StandaloneCue extends Cue {
         return new StandaloneCue(cue, locale, SubtitlesType.TRANSLATION, Duration.ZERO);
     }
 
+    public static StandaloneCue tt888(Cue cue) {
+        return new StandaloneCue(cue, SubtitlesUtil.DUTCH, SubtitlesType.CAPTION, Duration.ZERO);
+    }
+
     protected StandaloneCue() {
 
     }
