@@ -43,10 +43,10 @@ public class SubtitlesUtil {
     }
 
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
-        return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), Duration.ZERO));
+        return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()));
     }
 
-    public static void toEBU(Iterator<Cue> cueIterator, OutputStream entityStream) throws IOException {
+    public static void toEBU(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
         EBU.format(cueIterator, entityStream);
 
     }
