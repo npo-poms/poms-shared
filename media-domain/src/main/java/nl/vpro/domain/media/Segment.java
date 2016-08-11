@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -223,6 +224,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
 
 
     @XmlTransient
+    @JsonIgnore
     public void setStart(java.time.Duration start) {
         this.start = start == null ? null : new Date(start.toMillis());
     }
