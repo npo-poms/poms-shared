@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since 4.8
  */
 @Slf4j
-class WEBVTT {
+class WEBVTTANDSRT {
 
 
     static String INTRO = "WEBVTT";
@@ -113,25 +113,32 @@ class WEBVTT {
 
     }
 
+    static void formatWEBVTT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
+        format(cueIterator, out, Charset.forName("UTF-8"), ".");
+    }
 
-    static void format(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
-        Writer writer = new OutputStreamWriter(out, Charset.forName("UTF-8"));
-        format(cueIterator, writer);
+    static void formatSRT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
+        format(cueIterator, out, Charset.forName("CP1252"), ",");
+    }
+
+    private static void format(Iterator<? extends Cue> cueIterator, OutputStream out, Charset charset, String decimalSeparator) throws IOException {
+        Writer writer = new OutputStreamWriter(out, charset);
+        format(cueIterator, writer, decimalSeparator);
         writer.flush();
     }
 
-    static void format(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
+    static void format(Iterator<? extends Cue> cueIterator, Writer writer, String decimalSeparator) throws IOException {
         writer.write(INTRO);
         writer.write("\n\n");
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
-            formatCue(cueIterator.next(), builder);
+            formatCue(cueIterator.next(), builder, decimalSeparator);
             writer.write(builder.toString());
             builder.setLength(0);
         }
     }
 
-    static String formatDuration(Duration duration) {
+    static String formatDuration(Duration duration, String separator) {
         Long millis = duration.toMillis();
         Long hours = millis / 3600000;
         millis -= hours * 3600000;
@@ -139,7 +146,7 @@ class WEBVTT {
         millis -= minutes * 60000;
         Long seconds = millis / 1000;
         millis -= seconds * 1000;
-        return String.format("%02d:%02d:%02d.%03d", hours, minutes, seconds, millis);
+        return String.format("%02d:%02d:%02d%s%03d", hours, minutes, seconds, separator, millis);
     }
 
     static Duration parseDuration(String duration) {
@@ -165,7 +172,7 @@ class WEBVTT {
         return Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
     }
 
-    static StringBuilder formatCue(Cue cue, StringBuilder builder) {
+    static StringBuilder formatCue(Cue cue, StringBuilder builder, String decimalSeparator) {
         builder.append(cue.getSequence());
         Duration offset = Duration.ZERO;
         if (cue instanceof StandaloneCue) {
@@ -176,11 +183,11 @@ class WEBVTT {
         }
         builder.append("\n");
         if (cue.getStart() != null) {
-            builder.append(formatDuration(cue.getStart().minus(offset)));
+            builder.append(formatDuration(cue.getStart().minus(offset), decimalSeparator));
         }
         builder.append(" --> ");
         if (cue.getEnd() != null) {
-            builder.append(formatDuration(cue.getEnd().minus(offset)));
+            builder.append(formatDuration(cue.getEnd().minus(offset), decimalSeparator));
         }
         builder.append("\n");
         if (cue.getContent() != null) {
