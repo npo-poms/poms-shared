@@ -121,7 +121,8 @@ class WEBVTT {
     }
 
     static void format(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
-        writer.write(INTRO); writer.write("\n\n");
+        writer.write(INTRO);
+        writer.write("\n\n");
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
             formatCue(cueIterator.next(), builder);
