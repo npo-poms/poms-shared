@@ -71,4 +71,9 @@ public class SubtitlesId implements Serializable {
         result = 31 * result + language.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return mid + "\t" + type + "\t" + language;
+    }
 }
