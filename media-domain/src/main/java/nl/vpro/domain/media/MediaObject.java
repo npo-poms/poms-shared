@@ -338,9 +338,8 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @ElementCollection
     @JoinTable(name = "mediaobject_awards")
     @OrderColumn(name = "list_index")
-    @Column(name = "awards", length = 1024)
+    @Column(name = "awards")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @StringList(maxLength = 1024)
     protected List<String> awards;
 
     @OneToMany(orphanRemoval = true)
