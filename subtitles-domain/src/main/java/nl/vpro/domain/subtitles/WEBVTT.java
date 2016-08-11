@@ -133,19 +133,28 @@ class WEBVTT {
 
     static String formatDuration(Duration duration) {
         Long millis = duration.toMillis();
+        Long hours = millis / 3600000;
+        millis -= hours * 3600000;
         Long minutes = millis / 60000;
         millis -= minutes * 60000;
         Long seconds = millis / 1000;
         millis -= seconds * 1000;
-        return String.format("%d:%02d.%03d", minutes, seconds, millis);
+        return String.format("%02d:%02d:%02d.%03d", hours, minutes, seconds, millis);
     }
 
     static Duration parseDuration(String duration) {
-        String[] split = duration.split(":", 2);
+        String[] split = duration.split(":", 3);
         int index = 0;
+        Long hours;
+        if (split.length == 3) {
+            hours = Long.parseLong(split[0]);
+            index++;
+        } else {
+            hours = 0L;
+        }
         Long minutes;
         if (split.length == 2) {
-            minutes =  Long.parseLong(split[0]);
+            minutes =  Long.parseLong(split[index]);
             index++;
         } else {
             minutes = 0L;
@@ -153,7 +162,7 @@ class WEBVTT {
         String [] split2 = split[index].split("\\.", 2);
         Long seconds = Long.parseLong(split2[0]);
         Long millis = Long.parseLong(split2[1]);
-        return Duration.ofMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
+        return Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
     }
 
     static StringBuilder formatCue(Cue cue, StringBuilder builder) {
@@ -161,6 +170,9 @@ class WEBVTT {
         Duration offset = Duration.ZERO;
         if (cue instanceof StandaloneCue) {
             offset = ((StandaloneCue) cue).getOffset();
+            if (offset == null){
+                offset = Duration.ZERO;
+            }
         }
         builder.append("\n");
         if (cue.getStart() != null) {
@@ -172,7 +184,7 @@ class WEBVTT {
         }
         builder.append("\n");
         if (cue.getContent() != null) {
-            builder.append(cue.getContent());
+            builder.append(cue.getContent().replaceAll("\\s+", " "));
         }
         builder.append("\n\n");
         return builder;

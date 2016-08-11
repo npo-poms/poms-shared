@@ -1,11 +1,11 @@
 package nl.vpro.domain.subtitles;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -40,6 +40,17 @@ public class SubtitlesUtilTest {
             "888\n" +
             "\n");
 
+    }
+
+    @Test
+    public void toWEBTTVtoEBU() throws IOException {
+        InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POW_00943209.utf8.txt");
+        StringWriter w = new StringWriter();
+        IOUtils.copy(new InputStreamReader(example, "UTF-8"), w);
+        Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), SubtitlesUtil.DUTCH, SubtitlesFormat.EBU, w.toString());
+        subtitles.setType(SubtitlesType.CAPTION);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), out);
     }
 
 

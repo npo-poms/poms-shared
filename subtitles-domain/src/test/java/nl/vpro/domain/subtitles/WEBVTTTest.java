@@ -33,24 +33,23 @@ public class WEBVTTTest {
     @Test
     public void toWEBVTT() throws IOException {
         StringWriter writer = new StringWriter();
-        WEBVTT.format(SubtitlesUtil.parse(getSubtitles()).limit(3).collect(Collectors.toList()).iterator(), writer);
+        WEBVTT.format(SubtitlesUtil.standaloneStream(getSubtitles()).limit(3).collect(Collectors.toList()).iterator(), writer);
         assertThat(writer.toString()).isEqualTo(
             "WEBVTT\n" +
                 "\n" +
                 "1\n" +
-                "2:02.200 --> 2:04.150\n" +
+                "00:00:02.200 --> 00:00:04.150\n" +
                 "888\n" +
                 "\n" +
                 "2\n" +
-                "2:04.200 --> 2:08.060\n" +
-                "*'k Heb een paar puntjes\n" +
-                "die ik met je wil bespreken\n" +
+                "00:00:04.200 --> 00:00:08.060\n" +
+                "*'k Heb een paar puntjes die ik met je wil bespreken\n" +
                 "\n" +
                 "3\n" +
-                "2:08.110 --> 2:11.060\n" +
-                "*Dat wil ik doen\n" +
-                "in jouw mobiele bakkerij\n" +
-                "\n");
+                "00:00:08.110 --> 00:00:11.060\n" +
+                "*Dat wil ik doen in jouw mobiele bakkerij\n" +
+                "\n" +
+                "");
     }
 
     @Test
