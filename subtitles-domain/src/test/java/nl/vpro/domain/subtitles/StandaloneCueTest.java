@@ -21,7 +21,6 @@ public class StandaloneCueTest {
             "  \"parent\" : \"MID_123\",\n" +
             "  \"sequence\" : 0,\n" +
             "  \"type\" : \"TRANSLATION\",\n" +
-            "  \"offset\" : 0,\n" +
             "  \"content\" : \"bla bla\",\n" +
             "  \"lang\" : \"en-US\"\n" +
             "}");
