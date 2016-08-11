@@ -72,21 +72,20 @@ public class SubtitlesTest {
             "  \"lang\" : \"nl-NL\"\n" +
             "}");
     }
-    
+
     @Test
     public void from() throws Exception {
         Subtitles subtitles = Subtitles.from(Arrays.asList(StandaloneCue.tt888(new Cue(
                 "mid", 1, Duration.ZERO, Duration.ofSeconds(64), "bla"))).iterator());
         Jackson2TestUtil.roundTripAndSimilar(subtitles, "{\n" +
-                "  \"mid\" : \"mid\",\n" +
-                "  \"offset\" : 0,\n" +
-                "  \"content\" : {\n" +
-                "    \"format\" : \"WEBVTT\",\n" +
-                "    \"value\" : \"WEBVTT\\n\\n1\\n0:00.000 --> 1:04.000\\nbla\\n\\n\"\n" +
-                "  },\n" +
-                "  \"type\" : \"CAPTION\",\n" +
-                "  \"lang\" : \"nl-NL\"\n" +
-                "}");
-        
+            "  \"mid\" : \"mid\",\n" +
+            "  \"content\" : {\n" +
+            "    \"format\" : \"WEBVTT\",\n" +
+            "    \"value\" : \"WEBVTT\\n\\n1\\n00:00:00.000 --> 00:01:04.000\\nbla\\n\\n\"\n" +
+            "  },\n" +
+            "  \"type\" : \"CAPTION\",\n" +
+            "  \"lang\" : \"nl-NL\"\n" +
+            "}");
+
     }
 }
