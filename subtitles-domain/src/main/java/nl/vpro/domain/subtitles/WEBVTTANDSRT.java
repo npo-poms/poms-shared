@@ -113,26 +113,28 @@ class WEBVTTANDSRT {
 
     }
 
-    static void formatWEBVTT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
-        format(cueIterator, out, Charset.forName("UTF-8"), ".");
-    }
-
     static void formatSRT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
-        format(cueIterator, out, Charset.forName("CP1252"), ",");
+        Writer writer = new OutputStreamWriter(out, Charset.forName("cp1252"));
+        StringBuilder builder = new StringBuilder();
+        while (cueIterator.hasNext()) {
+            formatCue(cueIterator.next(), builder, ".");
+            writer.write(builder.toString());
+            builder.setLength(0);
+        }
     }
 
-    private static void format(Iterator<? extends Cue> cueIterator, OutputStream out, Charset charset, String decimalSeparator) throws IOException {
-        Writer writer = new OutputStreamWriter(out, charset);
-        format(cueIterator, writer, decimalSeparator);
+    private static void formatWEBVTT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
+        Writer writer = new OutputStreamWriter(out, Charset.forName("UTF-8"));
+        formatWEBVTT(cueIterator, writer);
         writer.flush();
     }
 
-    static void format(Iterator<? extends Cue> cueIterator, Writer writer, String decimalSeparator) throws IOException {
+    static void formatWEBVTT(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
         writer.write(INTRO);
         writer.write("\n\n");
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
-            formatCue(cueIterator.next(), builder, decimalSeparator);
+            formatCue(cueIterator.next(), builder, ".");
             writer.write(builder.toString());
             builder.setLength(0);
         }
