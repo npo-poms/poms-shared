@@ -50,7 +50,7 @@ public class SubtitlesUtilTest {
         Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), SubtitlesUtil.DUTCH, SubtitlesFormat.EBU, w.toString());
         subtitles.setType(SubtitlesType.CAPTION);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), out);
+        SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);
     }
 
 
