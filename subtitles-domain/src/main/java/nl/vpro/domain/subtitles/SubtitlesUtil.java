@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.time.Duration;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.stream.Stream;
 
@@ -43,6 +44,16 @@ public class SubtitlesUtil {
 
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
         return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()));
+    }
+
+    public static void toEBU(Iterator<Cue> cueIterator, OutputStream entityStream) throws IOException {
+        EBU.format(cueIterator, entityStream);
+
+    }
+
+    public static void toVTT(Iterator<Cue> cueIterator, OutputStream entityStream) throws IOException {
+        WEBVTT.format(cueIterator, entityStream);
+
     }
 
 }
