@@ -123,7 +123,7 @@ class WEBVTTANDSRT {
         }
     }
 
-    private static void formatWEBVTT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
+    static void formatWEBVTT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
         Writer writer = new OutputStreamWriter(out, Charset.forName("UTF-8"));
         formatWEBVTT(cueIterator, writer);
         writer.flush();
