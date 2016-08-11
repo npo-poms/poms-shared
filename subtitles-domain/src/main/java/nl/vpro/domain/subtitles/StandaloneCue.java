@@ -44,7 +44,7 @@ public class StandaloneCue extends Cue {
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Duration offset = Duration.ZERO;
+    private Duration offset = null;
 
 
     public static StandaloneCue translation(Cue cue, Locale locale) {
@@ -64,7 +64,7 @@ public class StandaloneCue extends Cue {
         super(cue);
         this.locale = locale;
         this.type = type;
-        this.offset = offset;
+        this.offset = offset == null || offset.isZero() ? null : offset;
     }
 
     public Locale getLocale() {

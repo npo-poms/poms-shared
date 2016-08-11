@@ -43,7 +43,7 @@ public class SubtitlesUtil {
     }
 
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
-        return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()));
+        return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), Duration.ZERO));
     }
 
     public static void toEBU(Iterator<Cue> cueIterator, OutputStream entityStream) throws IOException {
@@ -51,9 +51,10 @@ public class SubtitlesUtil {
 
     }
 
-    public static void toVTT(Iterator<Cue> cueIterator, OutputStream entityStream) throws IOException {
+    public static void toVTT(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
         WEBVTT.format(cueIterator, entityStream);
 
     }
+
 
 }
