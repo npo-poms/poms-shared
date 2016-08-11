@@ -24,9 +24,9 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 @ToString(of = {"parent", "sequence"})
 public class Cue {
 
-
     @XmlAttribute
     String parent;
+
     @XmlAttribute
     int sequence;
 
@@ -41,6 +41,7 @@ public class Cue {
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     Duration end;
+    
     @XmlValue
     @JsonProperty("content")
     String content;
