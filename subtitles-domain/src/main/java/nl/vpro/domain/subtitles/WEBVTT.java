@@ -22,7 +22,7 @@ class WEBVTT {
     static String INTRO = "WEBVTT";
 
 
-    static Stream<Cue> parse(String parent, Reader reader) {
+    static Stream<Cue> parse(String parent, Duration offset,  Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
 
@@ -48,7 +48,7 @@ class WEBVTT {
                 }
                 needsFindNext = true;
                 try {
-                    return parseCue(parent, headLine, timeLine, content.toString());
+                    return parseCue(parent, headLine, offset, timeLine, content.toString());
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage(), e);
                     return null;
@@ -97,14 +97,14 @@ class WEBVTT {
     }
 
 
-    static Cue parseCue(String parent, String headLine, String timeLine, String content) {
+    static Cue parseCue(String parent, String headLine, Duration offset, String timeLine, String content) {
         String[] split = timeLine.split("\\s+");
         try {
             return new Cue(
                 parent,
                 Integer.parseInt(headLine),
-                parseDuration(split[0]),
-                parseDuration(split[2]),
+                parseDuration(split[0]).minus(offset),
+                parseDuration(split[2]).minus(offset),
                 content
             );
         } catch(NumberFormatException nfe) {
