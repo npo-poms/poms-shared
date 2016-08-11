@@ -158,13 +158,17 @@ class WEBVTT {
 
     static StringBuilder formatCue(Cue cue, StringBuilder builder) {
         builder.append(cue.getSequence());
+        Duration offset = Duration.ZERO;
+        if (cue instanceof StandaloneCue) {
+            offset = ((StandaloneCue) cue).getOffset();
+        }
         builder.append("\n");
         if (cue.getStart() != null) {
-            builder.append(formatDuration(cue.getStart()));
+            builder.append(formatDuration(cue.getStart().minus(offset)));
         }
         builder.append(" --> ");
         if (cue.getEnd() != null) {
-            builder.append(formatDuration(cue.getEnd()));
+            builder.append(formatDuration(cue.getEnd().minus(offset)));
         }
         builder.append("\n");
         if (cue.getContent() != null) {
