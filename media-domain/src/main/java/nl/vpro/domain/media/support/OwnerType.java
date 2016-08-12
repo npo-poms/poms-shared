@@ -59,6 +59,12 @@ public enum OwnerType implements Displayable {
     NEBO("Nebo"),
 
     /**
+     * MSE-3358
+     */
+    NPO("NPO"),
+
+    /**
+    /**
      * Represents Ownable data updated by MIS via TVAnytime deliveries
      */
     MIS("MIS"),
