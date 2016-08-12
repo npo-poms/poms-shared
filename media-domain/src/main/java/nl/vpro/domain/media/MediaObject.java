@@ -1559,7 +1559,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     MemberRef createMember(MediaObject member, Integer number) throws CircularReferenceException {
-        if (number == null || number < 1) {
+        if (number == null) {
             throw new IllegalArgumentException(
                 "Must supply an ordering number.");
         }
