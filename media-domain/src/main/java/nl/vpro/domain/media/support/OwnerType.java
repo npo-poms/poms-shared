@@ -60,6 +60,7 @@ public enum OwnerType implements Displayable {
 
     /**
      * MSE-3358
+     * @since 4.7
      */
     NPO("NPO"),
 
