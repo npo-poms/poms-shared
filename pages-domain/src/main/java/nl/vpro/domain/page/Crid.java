@@ -1,0 +1,70 @@
+/**
+ * Copyright (C) 2014 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.page;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
+
+import org.hibernate.validator.constraints.URL;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.page.bind.CridToString;
+import nl.vpro.validation.CRID;
+
+/**
+ * @author Roelof Jan Koekoek
+ * @since 2.3
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "pridType")
+@JsonSerialize(using = CridToString.Serializer.class)
+@JsonDeserialize(using = CridToString.Deserializer.class)
+public class Crid {
+
+    @XmlValue
+    @CRID
+    private String value;
+
+    protected Crid() {
+    }
+
+    public Crid(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Crid crid = (Crid) o;
+
+        if (!value.equals(crid.value)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+    }
+}
