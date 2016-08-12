@@ -117,10 +117,12 @@ class WEBVTTANDSRT {
         Writer writer = new OutputStreamWriter(out, Charset.forName("cp1252"));
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
-            formatCue(cueIterator.next(), builder, ".");
+            Cue cue = cueIterator.next();
+            formatCue(cue, builder, ",");
             writer.write(builder.toString());
             builder.setLength(0);
         }
+        writer.flush();
     }
 
     static void formatWEBVTT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
