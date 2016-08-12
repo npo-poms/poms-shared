@@ -32,6 +32,7 @@
 
     <module>user-domain</module>
     <module>media-domain</module>
+    <module>pages-domain</module>
     <module>image-domain</module>
     <module>subtitles-domain</module>
     <module>media-secondscreen</module>
