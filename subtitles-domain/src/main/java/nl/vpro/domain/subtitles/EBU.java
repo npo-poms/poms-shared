@@ -7,8 +7,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
@@ -23,19 +21,18 @@ import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
  */
 @Slf4j
 class EBU {
-    private static final DateTimeFormatter EBU_FORMATTER = DateTimeFormatter.ofPattern("m:ss");
 
 
     static StringBuilder format(Cue cue, StringBuilder builder) {
-        //001 0:01 0:02 ondertitels !
+        //001 0:01:00 0:02:00 ondertitels !
 
         builder.append(String.format("%04d ", cue.getSequence()));
         if (cue.getStart() != null) {
-            builder.append(EBU_FORMATTER.format(LocalTime.MIDNIGHT.plus(cue.getStart())));
+            builder.append(formatDuration(cue.getStart()));
         }
         builder.append(" ");
         if (cue.getEnd() != null) {
-            builder.append(EBU_FORMATTER.format(LocalTime.MIDNIGHT.plus(cue.getEnd())));
+            builder.append(formatDuration(cue.getEnd()));
         }
         builder.append("\n");
         if (cue.getContent() != null) {
@@ -43,6 +40,18 @@ class EBU {
         }
         builder.append("\n\n");
         return builder;
+    }
+
+    static String formatDuration(Duration duration) {
+        long centiseconds = duration.toMillis() / 10;
+        /*long hours = centiseconds / 360000;
+        centiseconds -= hours * 360000;
+        */
+        long minutes = centiseconds / 6000;
+        centiseconds -= minutes * 6000;
+        long seconds = centiseconds / 100;
+        centiseconds -= seconds * 100;
+        return String.format("%02d:%02d:%02d", minutes, seconds, centiseconds);
     }
 
 

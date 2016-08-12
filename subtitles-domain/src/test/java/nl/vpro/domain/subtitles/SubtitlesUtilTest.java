@@ -36,7 +36,7 @@ public class SubtitlesUtilTest {
 
     @Test
     public void toEBU() throws IOException {
-        assertThat(EBU.format(SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder()).toString()).isEqualTo("0001 2:02 2:04\n" +
+        assertThat(EBU.format(SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
             "888\n" +
             "\n");
 
