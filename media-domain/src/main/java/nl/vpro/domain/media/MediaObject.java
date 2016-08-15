@@ -1316,6 +1316,19 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         this.duration = duration;
     }
 
+    public void setDuration(java.time.Duration duration) throws ModificationException {
+        if (this.duration != null && ObjectUtils.notEqual(this.duration.get(), duration) && hasAuthorizedDuration()) {
+            throw new ModificationException("Updating an existing and authorized duration is not allowed");
+        }
+        if (duration == null) {
+            this.duration = null;
+        } else if (this.duration == null) {
+            this.duration = Duration.of(duration);
+        } else {
+            this.duration.set(duration);
+        }
+    }
+
     public void setDurationWithDate(Date duration) throws ModificationException {
         Date oldDuration = getDurationAsDate(this.duration);
         if (ObjectUtils.notEqual(oldDuration, duration) && hasAuthorizedDuration()) {
