@@ -16,6 +16,7 @@ import javax.xml.bind.JAXB;
 import nl.vpro.domain.LocalizedString;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.user.Broadcaster;
@@ -421,14 +422,22 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     @Deprecated
     default B duration(Date duration) {
-        build().setDuration(new Duration(duration));
+        try {
+            build().setDurationWithDate(duration);
+        } catch (ModificationException e) {
+            throw new IllegalStateException(e);
+        }
         return (B)this;
     }
 
 
     @SuppressWarnings("unchecked")
     default B duration(java.time.Duration duration) {
-        build().setDuration(Duration.of(duration));
+        try {
+            build().setDuration(duration);
+        } catch (ModificationException e) {
+            throw new IllegalStateException(e);
+        }
         return (B) this;
     }
 
