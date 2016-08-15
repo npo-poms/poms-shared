@@ -72,6 +72,7 @@
       <xs:enumeration value="BROADCASTER"/>
       <xs:enumeration value="RADIOBOX"/>
       <xs:enumeration value="NEBO"/>
+      <xs:enumeration value="NPO"/>
       <xs:enumeration value="MIS"/>
       <xs:enumeration value="CERES"/>
       <xs:enumeration value="PLUTO"/>
