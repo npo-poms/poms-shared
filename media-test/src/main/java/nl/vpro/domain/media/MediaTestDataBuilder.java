@@ -121,9 +121,16 @@ public interface MediaTestDataBuilder<
         return creationDate(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).toInstant());
     }
 
+    default T withFixedLastPublished() {
+        return lastPublished(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).plusHours(2).toInstant());
+    }
+
 
     default T withLastModified() {
         return lastModified(Instant.now());
+    }
+    default T withFixedLastModified() {
+        return lastModified(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).plusHours(1).toInstant());
     }
 
     default T withPublishStart() {
@@ -132,6 +139,10 @@ public interface MediaTestDataBuilder<
 
     default T withPublishStop() {
         return publishStop(Instant.now().plus(2, ChronoUnit.HOURS));
+    }
+
+    default T withFixedDates() {
+        return withFixedCreationDate().withFixedLastModified().withFixedLastPublished();
     }
 
 
