@@ -1316,6 +1316,8 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         this.duration = duration;
     }
 
+    @JsonIgnore
+    @XmlTransient
     public void setDuration(java.time.Duration duration) throws ModificationException {
         if (this.duration != null && ObjectUtils.notEqual(this.duration.get(), duration) && hasAuthorizedDuration()) {
             throw new ModificationException("Updating an existing and authorized duration is not allowed");
