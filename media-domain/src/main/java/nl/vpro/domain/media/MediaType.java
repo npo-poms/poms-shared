@@ -42,7 +42,7 @@ public enum MediaType {
         }
 
     },
-    
+
     PROGRAM {
         @Override
         public String toString() {
@@ -65,8 +65,8 @@ public enum MediaType {
             return true;
         }
     },
-    
-    
+
+
     BROADCAST {
         @Override
         public String toString() {
@@ -216,11 +216,16 @@ public enum MediaType {
         }
 
         @Override
+        public Class<Group> getMediaObjectClass() {
+            return Group.class;
+        }
+
+        @Override
         public GroupType getSubType() {
             return null;
         }
     },
-    
+
     SERIES {
         @Override
         public String toString() {
