@@ -7,8 +7,8 @@ import java.util.*;
 
 import javax.validation.ConstraintViolation;
 
-import org.custommonkey.xmlunit.XMLUnit;
 import org.assertj.core.api.Assertions;
+import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,7 +17,6 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static nl.vpro.domain.media.MediaBuilder.ProgramBuilder;
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -220,7 +219,7 @@ public class MediaObjectTest {
         Relation r = new Relation(new RelationDefinition("AAAA", "a", "a"));
         r.setUriRef(":");
         Program p = new Program(AVType.AUDIO, ProgramType.BROADCAST);
-        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);       
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setType(ProgramType.CLIP);
         p.addRelation(r);
 
@@ -474,6 +473,12 @@ public class MediaObjectTest {
             .build();
         program.acceptChanges();
         assertThat(program.getHash()).isEqualTo(362556323L);
+
+
+        program.setType(ProgramType.CLIP);
+        program.acceptChanges();
+
+        assertThat(program.getHash()).isNotEqualTo(362556323L);
     }
 
 
