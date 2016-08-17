@@ -6,6 +6,7 @@ package nl.vpro.domain.media.search;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.*;
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -39,7 +41,14 @@ public class DateRange implements Predicate<Instant> {
     public  DateRange() {
     }
 
-    public DateRange(Instant  start, Instant stop) {
+    @Deprecated
+    public DateRange(Date start, Date stop) {
+        this.start = DateUtils.toInstant(start);
+        this.stop = DateUtils.toInstant(stop);
+    }
+
+
+    public DateRange(Instant start, Instant stop) {
         this.start = start;
         this.stop = stop;
     }
