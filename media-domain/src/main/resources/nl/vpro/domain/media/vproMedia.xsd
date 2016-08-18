@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
-  targetNamespace="urn:vpro:media:2009" xmlns="urn:vpro:media:2009"
-  xmlns:shared="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+           targetNamespace="urn:vpro:media:2009" xmlns="urn:vpro:media:2009"
+           xmlns:shared="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="vproShared.xsd"/>
 
@@ -19,28 +19,28 @@
   <xs:element name="program" type="programType">
     <xs:annotation>
       <xs:documentation>
-        This is the most used entity in POMs. It represent e.g. one broadcast program or one webonly clip. It represent a standalone entity which a consumer can view or listen to.
+        This is the most used entity in POMS. It represents e.g. one broadcast program or one web-only clip. It represent a standalone entity which a consumer can view or listen to.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="group" type="groupType">
     <xs:annotation>
       <xs:documentation>
-        A groups collects a number of programs and/or other groups. E.g. seasons, series, playlists and albums..
+        A groups collects a number of programs and/or other groups. Examples: season, series, playlist and album.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="segment" type="segmentType">
     <xs:annotation>
       <xs:documentation>
-        Any program can contain a number of 'segments'. A segment is an identifiable part of a program.
+        A program can contain a number of segments. A segment is an identifiable part of a program.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="schedule" type="scheduleType">
     <xs:annotation>
       <xs:documentation>
-        Programs (of the type 'BROADCAST') can contain 'schedule events' which indicate when and on which channels it is or was broadcast. A schedule is a container which only contains the 'schedule event' of different programs, but collected for a certain period of time.
+        Programs of type 'BROADCAST' can contain schedule events. A schedule indicates on which channel and at what time the program is broadcast. A schedule is a container which contains the schedule events of different programs, for a certain period of time.
       </xs:documentation>
     </xs:annotation>
   </xs:element>
@@ -49,19 +49,18 @@
     <xs:sequence>
       <xs:element type="programTableType" name="programTable" minOccurs="0">
         <xs:annotation>
-          <xs:documentation> A table with all program object in this container</xs:documentation>
+          <xs:documentation>A table with all program objects in this container</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element type="groupTableType" name="groupTable" minOccurs="0">
         <xs:annotation>
-          <xs:documentation>A table with all group object in this container</xs:documentation>
+          <xs:documentation>A table with all group objects in this container</xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element type="locationTableType" name="locationTable" minOccurs="0"/>
       <xs:element ref="schedule" minOccurs="0">
         <xs:annotation>
-          <xs:documentation>A table with all schedule information in this containe
-          </xs:documentation>
+          <xs:documentation>A table with all schedule information in this container</xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
@@ -162,7 +161,6 @@
     </xs:restriction>
   </xs:simpleType>
 
-
   <xs:simpleType name="workflowTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="PUBLISHED"/>
@@ -174,36 +172,37 @@
     </xs:restriction>
   </xs:simpleType>
 
-
   <xs:complexType name="baseMediaType" abstract="true">
     <xs:annotation>
       <xs:documentation>
-        This is the abstract base entity for program's, group's and segment. Actually these object are very similar and share most properties.
-        </xs:documentation>
+        This is the abstract base entity for programs, groups and segments. Actually these objects are very similar and share most properties.
+      </xs:documentation>
     </xs:annotation>
     <xs:sequence>
       <xs:element type="xs:anyURI" name="crid" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
-            Crids are used to refer to entities in other systems. E.g. a crid like
-            crid://broadcast.radiobox2/335793  woudl refer to a broadcast with id 335793 in
-            Radiobox. A crid must be a valid URI  starting with "crid://". The must be unique, but they can be made up freely.
-            Het is a good idea to use a logic structure which can easily be associated with another system.
-            Any POMS object can have zero or more CRIDS. This can refer to different systems, or it can mean that the POMS object actually represents more than one entity in the remote system.
-             </xs:documentation>
+            A crid (content reference identifier) is a reference to an entity in another system. E.g. a crid like
+            crid://broadcast.radiobox2/335793 refers to a broadcast with id 335793 in Radiobox. A crid must be a valid
+            URI starting with "crid://". Crids must be unique, but they can be made up freely. It is a good idea to use
+            a logical structure which can easily be associated with another system. Any POMS object can have zero or
+            more crids. They can refer to different systems, but a POMS object could also actually represent more than
+            one entity in a remote system.
+          </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element type="organizationType" name="broadcaster" minOccurs="1" maxOccurs="unbounded">
         <xs:annotation>
-          <xs:documentation>One or more broadcaster can be the owner of a POMS media object. This information is meta information about the object, but it is also used
-            for assigning write access to the object in the POMS backend to employees if these given broadcasting companies.
+          <xs:documentation>
+            One or more broadcasters can be the owner of a POMS media object. This information is meta information about the object, but it is also used
+            for assigning write access to the object in the POMS backend to employees of these given broadcasting companies.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element type="organizationType" name="portal" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
-            Optionally also 'portals' can be assigned to a media object. Portals are also 'owners', and employees can also work for a certain portal.
+            Optionally 'portals' can be assigned to a media object. Portals are also 'owners', and employees can also work for a certain portal.
             This is because some portal are shared by several broadcasting companies.
           </xs:documentation>
         </xs:annotation>
@@ -212,37 +211,34 @@
         <xs:annotation>
           <xs:documentation>
             Besides having portals, which mainly indicates where the object originates, a media object can also be assigned 'portal restrictions'.
-            If it does, that means that the media object may not be used in other portals at all.
+            If a media object has any portal restrictions the media object may only be shown on these portals.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element type="geoRestrictionType" name="region" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
-          <xs:documentation>Media with a geo restrictie can only be played (!) in the indicated geo region
-            (NL, BENELUX, WORLD)</xs:documentation>
           <xs:documentation>
-            This doesn't apply to the meta data of the media object. It only applies to viewing the actual playable content.
-            </xs:documentation>
+            Media with a geo restriction can only be played in the indicated region (NL, BENELUX, WORLD). This
+            restriction doesn't apply to the metadata of the media object. It only applies to the actual playable content.
+          </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element type="titleType" name="title" minOccurs="1" maxOccurs="unbounded">
         <xs:annotation>
-          <xs:documentation>One or more titles</xs:documentation>
-          <xs:documentation>Titels hebben altijd een type (MAIN, SUB etc.) en een owner
-            (BROADCASTER, MIS etc.) de combinatie type-owner is altijd uniek binnen één media
-            instantie; er zijn dus nooit twee titels met zelfde type en owner binnen één
-            programma.</xs:documentation>
-          <xs:documentation>Titles worden bij publicatie eerst op volgorde van de textualTypeEnum en
-            daarbinnen op volgorde van de ownerTypeEnum geordend. Eerste titel in een gepubliceerd
-            document is dus titel met BROADCASTER - MAIN, mist deze beschikbaar
-            is.</xs:documentation>
+          <xs:documentation>
+            A media object has one or more titles. All titles have a type (MAIN, SUB etc.) and an owner (BROADCASTER, MIS etc.).
+            The combination of type and owner is always unique for a particular media object, so a media object cannot
+            have multiple titles of the same type and owner. Titles are sorted in order of the textualTypeEnum and the in order
+            of ownerTypeEnum when published, so the first title in a published document will be a title owned by BROADCASTER of type
+            MAIN, if that title exists.
+          </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element type="descriptionType" name="description" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
-          <xs:documentation>Optionele eschrijvingen bij deze media</xs:documentation>
-          <xs:documentation>Beschrijvingen krijgen dezelfde verplichte attributen en hiervoor gelden
-            dezelfde regels.</xs:documentation>
+          <xs:documentation>
+            Optional descriptions for the media object. Descriptions have an owner and a type, and are ordered just like titles.
+          </xs:documentation>
         </xs:annotation>
       </xs:element>
       <xs:element type="genreType" name="genre" minOccurs="0" maxOccurs="unbounded"/>
@@ -270,7 +266,6 @@
       <xs:element type="imagesType" name="images" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute type="midType" name="mid"/>
-    <!--TODO required when all media has a mid-->
     <xs:attribute type="avTypeEnum" name="avType" use="required"/>
     <xs:attribute type="xs:dateTime" name="sortDate" use="optional"/>
     <xs:attribute type="xs:boolean" name="embeddable" use="optional" default="true"/>
@@ -558,15 +553,13 @@
   <xs:complexType name="locationTableType">
     <xs:sequence>
       <xs:element type="locationType" name="location" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element type="scheduleEventType" name="scheduleEvent" minOccurs="0" maxOccurs="unbounded"
-      />
+      <xs:element type="scheduleEventType" name="scheduleEvent" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="scheduleType">
     <xs:sequence>
-      <xs:element type="scheduleEventType" name="scheduleEvent" maxOccurs="unbounded" minOccurs="1"
-      />
+      <xs:element type="scheduleEventType" name="scheduleEvent" maxOccurs="unbounded" minOccurs="1"/>
     </xs:sequence>
     <xs:attribute type="channelEnum" name="channel"/>
     <xs:attribute type="xs:string" name="net"/>
@@ -576,8 +569,7 @@
 
   <xs:complexType name="scheduleEventsType">
     <xs:sequence>
-      <xs:element type="scheduleEventType" name="scheduleEvent" minOccurs="0" maxOccurs="unbounded"
-      />
+      <xs:element type="scheduleEventType" name="scheduleEvent" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -680,20 +672,25 @@
   <xs:complexType name="memberRefType">
     <xs:attribute type="midType" name="midRef" use="required">
       <xs:annotation>
-        <xs:documentation> Verwijst naar het mid van de ouder van dit onderdeel. </xs:documentation>
+        <xs:documentation>
+          Reference to the MID of the parent of this object.
+        </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute type="xs:anyURI" name="urnRef" use="required">
       <xs:annotation>
-        <xs:documentation> Verwijst naar de urn van de ouder van dit onderdeel. Urn's worden nu niet
-          meer gebruikt, maar backward compatibility is dit attribuut behouden </xs:documentation>
+        <xs:documentation>
+          Reference to the URN of the parent of this object. URN's are no longer actively used, but the attribute is
+          still available for backwards compatibility.
+        </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute type="xs:anyURI" name="cridRef" use="optional">
       <xs:annotation>
-        <xs:documentation> Verwijst naar de crid van de ouder van dit onderdeel. Wordt alleen
-          gebruikt bij imports vanuit systemen die geen mid/urn kunnen leveren. Bij
-          export/publicatie wordt het niet gevuld. </xs:documentation>
+        <xs:documentation>
+          Reference to a crid of the parent of this object. This is only used for imports from systems that cannot
+          supply a MID or URN. POMS does not export or publish parent crids.
+        </xs:documentation>
       </xs:annotation>
     </xs:attribute>
     <xs:attribute type="mediaTypeEnum" name="type" use="optional"/>
@@ -755,35 +752,119 @@
 
   <xs:simpleType name="genreIdType">
     <xs:restriction base="xs:string">
-      <xs:pattern value="3(\.[0-9]+)+"/>
+      <xs:pattern value="3(\.[0-9]+)+">
+        <xs:annotation>
+          <xs:documentation>
+            A reference to a genre as specificied by http://poms.omroep.nl/schema/classification
+          </xs:documentation>
+        </xs:annotation>
+      </xs:pattern>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="geoRestrictionEnum">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="NL"/>
-      <xs:enumeration value="BENELUX"/>
+      <xs:enumeration value="NL">
+        <xs:annotation>
+          <xs:documentation>
+            Media only playable in the Netherlands.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BENELUX">
+        <xs:annotation>
+          <xs:documentation>
+            Media only playable in the Benelux (Belgium, Netherlands, Luxembourg).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="contentRatingType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="DISCRIMINATIE"/>
-      <xs:enumeration value="GROF_TAALGEBRUIK"/>
-      <xs:enumeration value="ANGST"/>
-      <xs:enumeration value="GEWELD"/>
-      <xs:enumeration value="SEKS"/>
-      <xs:enumeration value="DRUGS_EN_ALCOHOL"/>
+      <xs:enumeration value="DISCRIMINATIE">
+        <xs:annotation>
+          <xs:documentation>
+            Discrimination. Contains depictions, or material which may encourage, discrimination.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GROF_TAALGEBRUIK">
+        <xs:annotation>
+          <xs:documentation>
+            Coarse language.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ANGST">
+        <xs:annotation>
+          <xs:documentation>
+            Fear. May be frightening or scary for young children.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GEWELD">
+        <xs:annotation>
+          <xs:documentation>
+            Violence. Contains depictions of violence.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SEKS">
+        <xs:annotation>
+          <xs:documentation>
+            Sex. Contains nudity and/or sexual behavior or sexual references.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DRUGS_EN_ALCOHOL">
+        <xs:annotation>
+          <xs:documentation>
+            Drugs. Refers to or depicts the use of drugs.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="ageRatingType">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="6"/>
-      <xs:enumeration value="9"/>
-      <xs:enumeration value="12"/>
-      <xs:enumeration value="16"/>
-      <xs:enumeration value="ALL"/>
+      <xs:enumeration value="6">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of age 6 and up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="9">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of age 9 and up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="12">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of age 12 and up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="16">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of age 16 and up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ALL">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of all ages.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 
@@ -797,7 +878,13 @@
 
   <xs:simpleType name="countryCodeType">
     <xs:restriction base="xs:string">
-      <xs:pattern value="(\w){2,4}"/>
+      <xs:pattern value="(\w){2,4}">
+        <xs:annotation>
+          <xs:documentation>
+            ISO 3166-1 country code.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:pattern>
     </xs:restriction>
   </xs:simpleType>
 
@@ -811,535 +898,1846 @@
 
   <xs:simpleType name="languageCodeType">
     <xs:restriction base="xs:string">
-      <xs:pattern value="(\w){2,4}"/>
+      <xs:pattern value="(\w){2,4}">
+        <xs:annotation>
+          <xs:documentation>
+            ISO 639-1 language code.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:pattern>
     </xs:restriction>
   </xs:simpleType>
 
   <xs:simpleType name="channelEnum">
     <xs:restriction base="xs:string">
-      <!-- NPO 1 -->
-      <xs:enumeration value="NED1"/>
-      <!-- NPO 2 -->
-      <xs:enumeration value="NED2"/>
-      <!-- NPO 3 & Z@pp -->
-      <xs:enumeration value="NED3"/>
-      <!-- RTL 4 -->
-      <xs:enumeration value="RTL4"/>
-      <!-- RTL 5 -->
-      <xs:enumeration value="RTL5"/>
-      <!-- SBS 6 -->
-      <xs:enumeration value="SBS6"/>
-      <!-- RTL 7 -->
-      <xs:enumeration value="RTL7"/>
-      <!-- Veronica/Jetix -->
-      <xs:enumeration value="VERO"/>
-      <!-- Net 5 -->
-      <xs:enumeration value="NET5"/>
-      <!-- RTL 8 -->
-      <xs:enumeration value="RTL8"/>
-      <!-- Regionale TV combikanaal -->
-      <xs:enumeration value="REGI"/>
-      <!-- Omrop Fryslan -->
-      <xs:enumeration value="OFRY"/>
-      <!-- TV Noord -->
-      <xs:enumeration value="NOOR"/>
-      <!-- RTV Drenthe -->
-      <xs:enumeration value="RTVD"/>
-      <!-- TV Oost -->
-      <xs:enumeration value="OOST"/>
-      <!-- TV Gelderland -->
-      <xs:enumeration value="GELD"/>
-      <!-- TV Flevoland -->
-      <xs:enumeration value="FLEV"/>
-      <!-- Omroep Brabant -->
-      <xs:enumeration value="BRAB"/>
-      <!-- Regio TV Utrecht -->
-      <xs:enumeration value="REGU"/>
-      <!-- TV Noord-Holland -->
-      <xs:enumeration value="NORH"/>
-      <!-- TV West -->
-      <xs:enumeration value="WEST"/>
-      <!-- TV Rijnmond -->
-      <xs:enumeration value="RIJN"/>
-      <!-- L1 TV -->
-      <xs:enumeration value="L1TV"/>
-      <!-- Omroep Zeeland -->
-      <xs:enumeration value="OZEE"/>
-      <!-- AT 5 -->
-      <xs:enumeration value="AT5_"/>
-      <!-- RNN7 -->
-      <xs:enumeration value="RNN7"/>
-      <!-- BVN-TV -->
-      <xs:enumeration value="BVNT"/>
-      <!-- Eén -->
-      <xs:enumeration value="EEN_"/>
-      <!-- Ketnet & Canvas -->
-      <xs:enumeration value="KETN"/>
-      <!-- VTM -->
-      <xs:enumeration value="VTM_"/>
-      <!-- 2BE -->
-      <xs:enumeration value="KA2_"/>
-      <!-- VT4 -->
-      <xs:enumeration value="VT4_"/>
-      <!-- La Une (RTBF 1) -->
-      <xs:enumeration value="LUNE"/>
-      <!-- La Deux (RTBF 2) -->
-      <xs:enumeration value="LDUE"/>
-      <!-- RTBF Sat -->
-      <xs:enumeration value="RTBF"/>
-      <!-- ARD -->
-      <xs:enumeration value="ARD_"/>
-      <!-- ZDF -->
-      <xs:enumeration value="ZDF_"/>
-      <!-- WDR Fehrsehen -->
-      <xs:enumeration value="WDR_"/>
-      <!-- N3 (NDR) -->
-      <xs:enumeration value="N_3_"/>
-      <!-- SWF Baden-Württemberg -->
-      <xs:enumeration value="SUDW"/>
-      <!-- SWF Rheinland-Pfalz -->
-      <xs:enumeration value="SWF_"/>
-      <!-- RTL Television -->
-      <xs:enumeration value="RTL_"/>
-      <!-- Sat1 -->
-      <xs:enumeration value="SAT1"/>
-      <!-- Pro7 -->
-      <xs:enumeration value="PRO7"/>
-      <!-- 3 Sat -->
-      <xs:enumeration value="3SAT"/>
-      <!-- Kabel 1 -->
-      <xs:enumeration value="KABE"/>
-      <!-- ARTE -->
-      <xs:enumeration value="ARTE"/>
-      <!-- TV 5 Monde Europe -->
-      <xs:enumeration value="T5ME"/>
-      <!-- France 2 -->
-      <xs:enumeration value="FRA2"/>
-      <!-- France 3 -->
-      <xs:enumeration value="FRA3"/>
-      <!-- BBC 1 -->
-      <xs:enumeration value="BBC1"/>
-      <!-- BBC 2 -->
-      <xs:enumeration value="BBC2"/>
-      <!-- BBC Three -->
-      <xs:enumeration value="BBTH"/>
-      <!-- BBC Three / CBBC -->
-      <xs:enumeration value="BBTC"/>
-      <!-- BBC Four -->
-      <xs:enumeration value="BBCF"/>
-      <!-- BBC Four / Ceebies -->
-      <xs:enumeration value="BBFC"/>
-      <!-- BBC Prime -->
-      <xs:enumeration value="BBCP"/>
-      <!-- TRT International -->
-      <xs:enumeration value="TRTI"/>
-      <!-- ShowTV -->
-      <xs:enumeration value="SHOW"/>
-      <!-- LigTV -->
-      <xs:enumeration value="LIGT"/>
-      <!-- Türkmax -->
-      <xs:enumeration value="TURK"/>
-      <!-- ATV -->
-      <xs:enumeration value="ATVT"/>
-      <!-- Fox Türk -->
-      <xs:enumeration value="FOXT"/>
-      <!-- HaberTürk -->
-      <xs:enumeration value="HABN"/>
-      <!-- Star TV -->
-      <xs:enumeration value="STTV"/>
-      <!-- RTM -->
-      <xs:enumeration value="RRTM"/>
-      <!-- MBC -->
-      <xs:enumeration value="RMBC"/>
-      <!-- ART Europe -->
-      <xs:enumeration value="RART"/>
-      <!-- ART Movie -->
-      <xs:enumeration value="ARTM"/>
-      <!-- TVBS Europe -->
-      <xs:enumeration value="TVBS"/>
-      <!-- Sony Ent TV MAX -->
-      <xs:enumeration value="ASIA"/>
-      <!-- A-Tivi -->
-      <xs:enumeration value="TIVI"/>
-      <!-- B4U Movies -->
-      <xs:enumeration value="B4UM"/>
+      <xs:enumeration value="NED1">
+        <xs:annotation>
+          <xs:documentation>
+            NPO 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NED2">
+        <xs:annotation>
+          <xs:documentation>
+            NPO 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NED3">
+        <xs:annotation>
+          <xs:documentation>
+            NPO 3 &amp; Z@pp.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RTL4">
+        <xs:annotation>
+          <xs:documentation>
+            RTL 4.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RTL5">
+        <xs:annotation>
+          <xs:documentation>
+            RTL 5.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SBS6">
+        <xs:annotation>
+          <xs:documentation>
+            SBS 6.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RTL7">
+        <xs:annotation>
+          <xs:documentation>
+            RTL 7.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VERO">
+        <xs:annotation>
+          <xs:documentation>
+            Veronica/Jetix.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NET5">
+        <xs:annotation>
+          <xs:documentation>
+            Net 5.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RTL8">
+        <xs:annotation>
+          <xs:documentation>
+            RTL 8.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="REGI">
+        <xs:annotation>
+          <xs:documentation>
+            Regional TV combi-channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OFRY">
+        <xs:annotation>
+          <xs:documentation>
+            Omrop Fryslân tv.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NOOR">
+        <xs:annotation>
+          <xs:documentation>
+            TV Noord.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RTVD">
+        <xs:annotation>
+          <xs:documentation>
+            RTV Drenthe tv.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OOST">
+        <xs:annotation>
+          <xs:documentation>
+            TV Oost.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GELD">
+        <xs:annotation>
+          <xs:documentation>
+            TV Gelderland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FLEV">
+        <xs:annotation>
+          <xs:documentation>
+            TV Flevoland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BRAB">
+        <xs:annotation>
+          <xs:documentation>
+            Omroep Brabant.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="REGU">
+        <xs:annotation>
+          <xs:documentation>
+            Regio TV Utrecht.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NORH">
+        <xs:annotation>
+          <xs:documentation>
+            TV Noord-Holland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WEST">
+        <xs:annotation>
+          <xs:documentation>
+            TV West.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RIJN">
+        <xs:annotation>
+          <xs:documentation>
+            TV Rijnmond.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="L1TV">
+        <xs:annotation>
+          <xs:documentation>
+            L1 TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OZEE">
+        <xs:annotation>
+          <xs:documentation>
+            Omroep Zeeland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AT5_">
+        <xs:annotation>
+          <xs:documentation>
+            AT5.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RNN7">
+        <xs:annotation>
+          <xs:documentation>
+            RNN7.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BVNT">
+        <xs:annotation>
+          <xs:documentation>
+            BVN.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EEN_">
+        <xs:annotation>
+          <xs:documentation>
+            Eén.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KETN">
+        <xs:annotation>
+          <xs:documentation>
+            Ketnet &amp; Canvas.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VTM_">
+        <xs:annotation>
+          <xs:documentation>
+            VTM.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KA2_">
+        <xs:annotation>
+          <xs:documentation>
+            2BE.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VT4_">
+        <xs:annotation>
+          <xs:documentation>
+            VT4.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LUNE">
+        <xs:annotation>
+          <xs:documentation>
+            La Une (RTBF 1).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LDUE">
+        <xs:annotation>
+          <xs:documentation>
+            La Deux (RTBF 2).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RTBF">
+        <xs:annotation>
+          <xs:documentation>
+            RTBF Sat.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ARD_">
+        <xs:annotation>
+          <xs:documentation>
+            ARD.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZDF_">
+        <xs:annotation>
+          <xs:documentation>
+            ZDF.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WDR_">
+        <xs:annotation>
+          <xs:documentation>
+            WDR Fehrsehen
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="N_3_">
+        <xs:annotation>
+          <xs:documentation>
+            N3 (NDR).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SUDW">
+        <xs:annotation>
+          <xs:documentation>
+            SWF Baden-Württemberg.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SWF_">
+        <xs:annotation>
+          <xs:documentation>
+            SWF Rheinland-Pfalz.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RTL_">
+        <xs:annotation>
+          <xs:documentation>
+            RTL Television.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SAT1">
+        <xs:annotation>
+          <xs:documentation>
+            Sat1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PRO7">
+        <xs:annotation>
+          <xs:documentation>
+            Pro7.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3SAT">
+        <xs:annotation>
+          <xs:documentation>
+            3 Sat.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KABE">
+        <xs:annotation>
+          <xs:documentation>
+            Kabel 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ARTE">
+        <xs:annotation>
+          <xs:documentation>
+            ARTE.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="T5ME">
+        <xs:annotation>
+          <xs:documentation>
+            TV 5 Monde Europe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FRA2">
+        <xs:annotation>
+          <xs:documentation>
+            France 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FRA3">
+        <xs:annotation>
+          <xs:documentation>
+            France 3.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBC1">
+        <xs:annotation>
+          <xs:documentation>
+            BBC 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBC2">
+        <xs:annotation>
+          <xs:documentation>
+            BBC 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBTH">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Three.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBTC">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Three / CBBC.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBCF">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Four.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBFC">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Four / Ceebies.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBCP">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Prime.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TRTI">
+        <xs:annotation>
+          <xs:documentation>
+            TRT International.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SHOW">
+        <xs:annotation>
+          <xs:documentation>
+            ShowTV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LIGT">
+        <xs:annotation>
+          <xs:documentation>
+            LigTV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TURK">
+        <xs:annotation>
+          <xs:documentation>
+            Türkmax.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ATVT">
+        <xs:annotation>
+          <xs:documentation>
+            ATV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FOXT">
+        <xs:annotation>
+          <xs:documentation>
+            Fox Türk.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HABN">
+        <xs:annotation>
+          <xs:documentation>
+            HaberTürk.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="STTV">
+        <xs:annotation>
+          <xs:documentation>
+            Star TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RRTM">
+        <xs:annotation>
+          <xs:documentation>
+            RTM.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RMBC">
+        <xs:annotation>
+          <xs:documentation>
+            MBC.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RART">
+        <xs:annotation>
+          <xs:documentation>
+            ART Europe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ARTM">
+        <xs:annotation>
+          <xs:documentation>
+            ART Movie.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TVBS">
+        <xs:annotation>
+          <xs:documentation>
+            TVBS Europe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ASIA">
+        <xs:annotation>
+          <xs:documentation>
+            Sony Ent TV MAX.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TIVI">
+        <xs:annotation>
+          <xs:documentation>
+            A-Tivi.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="B4UM">
+        <xs:annotation>
+          <xs:documentation>
+            B4U Movies.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <!-- Phoenix CNE -->
-      <xs:enumeration value="PCNE"/>
-      <!-- ATN -->
-      <xs:enumeration value="PATN"/>
-      <!-- Zee TV -->
-      <xs:enumeration value="ZEET"/>
-      <!-- Zee Cinema -->
-      <xs:enumeration value="ZEEC"/>
-      <!-- TVE -->
-      <xs:enumeration value="TVE_"/>
-      <!-- Rai Uno -->
-      <xs:enumeration value="RAI_"/>
-      <!-- Rai Due -->
-      <xs:enumeration value="RAID"/>
-      <!-- Rai Tre -->
-      <xs:enumeration value="RAIT"/>
-      <!-- TeVe Sur -->
-      <xs:enumeration value="TEVE"/>
-      <!-- ERT Sat -->
-      <xs:enumeration value="ERTS"/>
-      <!-- STV -->
-      <xs:enumeration value="STV_"/>
-      <!-- NTV -->
-      <xs:enumeration value="NTV_"/>
-      <!-- TV Polonia -->
-      <xs:enumeration value="TVPO"/>
-      <!-- NOS Journaal 24 -->
-      <xs:enumeration value="NOSJ"/>
-      <!-- Cultura -->
-      <xs:enumeration value="CULT"/>
-      <!-- 101 -->
-      <xs:enumeration value="101_"/>
-      <!-- Politiek24 -->
-      <xs:enumeration value="PO24"/>
-      <!-- HilversumBest -->
-      <xs:enumeration value="HILV"/>
-      <!-- Holland Doc -->
-      <xs:enumeration value="HOLL"/>
-      <!-- /Geschiedenis -->
-      <xs:enumeration value="GESC"/>
-      <!-- Sterren.nl -->
-      <xs:enumeration value="STER"/>
-      <!-- Spirit24 -->
-      <xs:enumeration value="NCRV"/>
-      <!-- Zappelin24/Familie24 -->
-      <xs:enumeration value="OPVO"/>
-      <!-- Consumenten TV -->
-      <xs:enumeration value="CONS"/>
-      <!-- Humor TV -->
-      <xs:enumeration value="HUMO"/>
-      <!-- E! Entertainment -->
-      <xs:enumeration value="ENTE"/>
-      <!-- Fashion TV -->
-      <xs:enumeration value="FASH"/>
-      <!-- Comedy CentralNickelodeon -->
-      <xs:enumeration value="COMC"/>
-      <!-- TBN Europe -->
-      <xs:enumeration value="TBN_"/>
-      <!-- Discovery Channel -->
-      <xs:enumeration value="DISC"/>
-      <!-- Zone Reality (UK) -->
-      <xs:enumeration value="ZONE"/>
-      <!-- Animal Planet -->
-      <xs:enumeration value="ANPL"/>
-      <!-- Zone Club -->
-      <xs:enumeration value="CLUB"/>
-      <!-- National Geographic/CNBC -->
-      <xs:enumeration value="NAGE"/>
-      <!-- Trace TV -->
-      <xs:enumeration value="TRAC"/>
-      <!-- National Geographic HD -->
-      <xs:enumeration value="NGHD"/>
-      <!-- Nat Geo Wild -->
-      <xs:enumeration value="WILD"/>
-      <!-- Garuda TV -->
-      <xs:enumeration value="GARU"/>
-      <!-- Zazaro TV -->
-      <xs:enumeration value="ZAZA"/>
-      <!-- Family7 -->
-      <xs:enumeration value="FAM7"/>
-      <!-- Discovery Travel & Living -->
-      <xs:enumeration value="DTAL"/>
-      <!-- Discovery Science -->
-      <xs:enumeration value="SCIE"/>
-      <!-- Discovery Civilisation -->
-      <xs:enumeration value="CIVI"/>
-      <!-- Discovery HD -->
-      <xs:enumeration value="DIHD"/>
-      <!-- The History Channel -->
-      <xs:enumeration value="HIST"/>
-      <!-- Travel Channel -->
-      <xs:enumeration value="TRAV"/>
-      <!-- Het Gesprek -->
-      <xs:enumeration value="HETG"/>
-      <!-- GoedTV -->
-      <xs:enumeration value="GOED"/>
-      <!-- Baby TV (NL) -->
-      <xs:enumeration value="BABY"/>
-      <!-- HD-NL -->
-      <xs:enumeration value="DH1_"/>
-      <!-- Liberty TV -->
-      <xs:enumeration value="LITV"/>
-      <!-- Liveshop -->
-      <xs:enumeration value="LIVE"/>
-      <!-- Star! -->
-      <xs:enumeration value="STAR"/>
-      <!-- Weerkanaal -->
-      <xs:enumeration value="WEER"/>
-      <!-- Zone Reality -->
-      <xs:enumeration value="REAL"/>
-      <!-- Sci-Fi Channel -->
-      <xs:enumeration value="SCIF"/>
-      <!-- 13Th Street -->
-      <xs:enumeration value="13ST"/>
-      <!-- Car Channel -->
-      <xs:enumeration value="CARC"/>
-      <!-- NostalgieNet -->
-      <xs:enumeration value="NOSN"/>
-      <!-- The History Channel HD -->
-      <xs:enumeration value="HISH"/>
-      <!-- Brava HD -->
-      <xs:enumeration value="BRHD"/>
-      <!-- Fan TV -->
-      <xs:enumeration value="FANT"/>
-      <!-- Raceworld TV -->
-      <xs:enumeration value="RACW"/>
-      <!-- Comedy Family -->
-      <xs:enumeration value="COMF"/>
-      <!-- Poker Channel -->
-      <xs:enumeration value="POKE"/>
-      <!-- Misdaadnet -->
-      <xs:enumeration value="MNET"/>
-      <!-- Voom HD -->
-      <xs:enumeration value="VOOM"/>
-      <!-- Zone Horror -->
-      <xs:enumeration value="ZONH"/>
-      <!-- Eredivisie Live 1 -->
-      <xs:enumeration value="KPN1"/>
-      <!-- Eredivisie Live 2 -->
-      <xs:enumeration value="KPN2"/>
-      <!-- Eredivisie Live 3 -->
-      <xs:enumeration value="KPN3"/>
-      <!-- Eredivisie Live 4 -->
-      <xs:enumeration value="KPN4"/>
-      <!-- PO Zizone TV -->
-      <xs:enumeration value="ZIZO"/>
-      <!-- PO DVB-H 1 -->
-      <xs:enumeration value="DVB1"/>
-      <!-- PO DVB-H 2 -->
-      <xs:enumeration value="DVB2"/>
-      <!-- PO DVB-H 3 -->
-      <xs:enumeration value="DVB3"/>
-      <!-- Nickelodeon -->
-      <xs:enumeration value="NICK"/>
-      <!-- Nick Jr. -->
-      <xs:enumeration value="NIJN"/>
-      <!-- Nick Toons -->
-      <xs:enumeration value="NIKT"/>
-      <!-- Nick Hits -->
-      <xs:enumeration value="NIKH"/>
-      <!-- Cartoon Network -->
-      <xs:enumeration value="CART"/>
-      <!-- Boomerang -->
-      <xs:enumeration value="BOOM"/>
-      <!-- CNN -->
-      <xs:enumeration value="CNN_"/>
-      <!-- BBC World -->
-      <xs:enumeration value="BBCW"/>
-      <!-- Euronews -->
-      <xs:enumeration value="EURN"/>
-      <!-- Sky News -->
-      <xs:enumeration value="SKNE"/>
-      <!-- Bloomberg TV -->
-      <xs:enumeration value="BLOO"/>
-      <!-- CNBC Europe -->
-      <xs:enumeration value="CNBC"/>
-      <!-- Al Jazeera Arabisch -->
-      <xs:enumeration value="PALJ"/>
-      <!-- Al Jazeera -->
-      <xs:enumeration value="ALJA"/>
-      <!-- Fox News -->
-      <xs:enumeration value="FOXN"/>
-      <!-- MTV -->
-      <xs:enumeration value="MTV_"/>
-      <!-- MTV2 -->
-      <xs:enumeration value="MTV2"/>
-      <!-- MTV Hits -->
-      <xs:enumeration value="HITS"/>
-      <!-- MTV Base -->
-      <xs:enumeration value="BASE"/>
-      <!-- MTV Brand New -->
-      <xs:enumeration value="MTVB"/>
-      <!-- TMF -->
-      <xs:enumeration value="TMF_"/>
-      <!-- TMF NL -->
-      <xs:enumeration value="TMFN"/>
-      <!-- TMF Party -->
-      <xs:enumeration value="TMFP"/>
-      <!-- TMF Pure -->
-      <xs:enumeration value="TMFY"/>
-      <!-- TV Oranje -->
-      <xs:enumeration value="TVOR"/>
-      <!-- VH-1 (EU) -->
-      <xs:enumeration value="VH1E"/>
-      <!-- VH-1 Classic -->
-      <xs:enumeration value="VH1C"/>
-      <!-- Performance Channel -->
-      <xs:enumeration value="PERC"/>
-      <!-- Mezzo -->
-      <xs:enumeration value="MEZZ"/>
-      <!-- Eurosport -->
-      <xs:enumeration value="EURO"/>
-      <!-- Eurosport 2 -->
-      <xs:enumeration value="EUR2"/>
-      <!-- Extreme Sports Channel (EU) -->
-      <xs:enumeration value="EXTR"/>
-      <!-- Motors TV -->
-      <xs:enumeration value="MOTO"/>
-      <!-- Sailing channel -->
-      <xs:enumeration value="SAIL"/>
-      <!-- ESPN Classic Sport -->
-      <xs:enumeration value="ESPN"/>
-      <!-- ESPN America -->
-      <xs:enumeration value="NASE"/>
-      <!-- Sport1.1 -->
-      <xs:enumeration value="SP11"/>
-      <!-- Sport1.2 -->
-      <xs:enumeration value="SP12"/>
-      <!-- Sport1.3 -->
-      <xs:enumeration value="SP13"/>
-      <!-- Sport1.4 -->
-      <xs:enumeration value="SP14"/>
-      <!-- Sport1.5 -->
-      <xs:enumeration value="SP15"/>
-      <!-- Sport1.6 -->
-      <xs:enumeration value="SP16"/>
-      <!-- Sport1.7 -->
-      <xs:enumeration value="SP17"/>
-      <!-- Sport1.8 -->
-      <xs:enumeration value="SP18"/>
-      <!-- Sport1 HD -->
-      <xs:enumeration value="S1HD"/>
-      <!-- Film1.1 pepe -->
-      <xs:enumeration value="FIL1"/>
-      <!-- Film1.2 pepe -->
-      <xs:enumeration value="FIL2"/>
-      <!-- Film1.3 pepe -->
-      <xs:enumeration value="FIL3"/>
-      <!-- Film1.1 DI -->
-      <xs:enumeration value="FL11"/>
-      <!-- Film1+1 DI -->
-      <xs:enumeration value="FL1P"/>
-      <!-- Film1.2 DI -->
-      <xs:enumeration value="FL12"/>
-      <!-- Film1.3 DI -->
-      <xs:enumeration value="FL13"/>
-      <!-- Film1 HD DI -->
-      <xs:enumeration value="FLHD"/>
-      <!-- MGM Movie Channel -->
-      <xs:enumeration value="MGMM"/>
-      <!-- TCM -->
-      <xs:enumeration value="TCM_"/>
-      <!-- Hallmark -->
-      <xs:enumeration value="HALL"/>
-      <!-- Action Now! -->
-      <xs:enumeration value="ACNW"/>
-      <!-- Hustler TV -->
-      <xs:enumeration value="RHUS"/>
-      <!-- Playboy TV -->
-      <xs:enumeration value="PLAY"/>
-      <!-- Adult Channel -->
-      <xs:enumeration value="ADUL"/>
-      <!-- Private Spice -->
-      <xs:enumeration value="PSPI"/>
-      <!-- Blue Hustler -->
-      <xs:enumeration value="HUST"/>
-      <!-- PO X-MO -->
-      <xs:enumeration value="OXMO"/>
-      <!-- X-MO DI -->
-      <xs:enumeration value="XM24"/>
-      <!-- PO Out TV -->
-      <xs:enumeration value="OU24"/>
-      <!-- Radio 1 -->
-      <xs:enumeration value="RAD1"/>
-      <!-- Radio 2 -->
-      <xs:enumeration value="RAD2"/>
-      <!-- 3FM -->
-      <xs:enumeration value="RAD3"/>
-      <!-- Radio 4 -->
-      <xs:enumeration value="RAD4"/>
-      <!-- Radio 5 -->
-      <xs:enumeration value="RAD5"/>
-      <!-- Radio 6 -->
-      <xs:enumeration value="RAD6"/>
-      <!-- Regionale radio combikanaal -->
-      <xs:enumeration value="REGR"/>
-      <!-- Omrop Fryslan -->
-      <xs:enumeration value="RFRY"/>
-      <!-- Radio Noord -->
-      <xs:enumeration value="RNOO"/>
-      <!-- RTV Drenthe -->
-      <xs:enumeration value="RTVD"/>
-      <!-- Radio Oost -->
-      <xs:enumeration value="ROST"/>
-      <!-- Radio Gelderland -->
-      <xs:enumeration value="RGEL"/>
-      <!-- Radio Flevoland -->
-      <xs:enumeration value="RFLE"/>
-      <!-- Omroep Brabant -->
-      <xs:enumeration value="RBRA"/>
-      <!-- Radio M Utrecht -->
-      <xs:enumeration value="RUTR"/>
-      <!-- Radio Noord-Holland -->
-      <xs:enumeration value="RNOH"/>
-      <!-- 89,3 Radio West -->
-      <xs:enumeration value="RWST"/>
-      <!-- Radio Rijnmond -->
-      <xs:enumeration value="RRIJ"/>
-      <!-- L1 Radio -->
-      <xs:enumeration value="LRAD"/>
-      <!-- Omroep Zeeland -->
-      <xs:enumeration value="RZEE"/>
-      <!-- Commercieelen radio combikanaal -->
-      <xs:enumeration value="COMM"/>
-      <!-- Radio Veronica -->
-      <xs:enumeration value="RVER"/>
-      <!-- SLAM! FM -->
-      <xs:enumeration value="SLAM"/>
-      <!-- Sky Radio -->
-      <xs:enumeration value="SKYR"/>
-      <!-- BNR Nieuwsradio -->
-      <xs:enumeration value="BNRN"/>
-      <!-- Kink FM -->
-      <xs:enumeration value="KINK"/>
-      <!-- CAZ! -->
-      <xs:enumeration value="PCAZ"/>
-      <!-- Q-Music -->
-      <xs:enumeration value="QMUS"/>
-      <!-- Radio 538 -->
-      <xs:enumeration value="R538"/>
-      <!-- Radio 10 Gold -->
-      <xs:enumeration value="GOLD"/>
-      <!-- Arrow Classic Rock -->
-      <xs:enumeration value="ARRO"/>
-      <!-- FunX -->
-      <xs:enumeration value="FUNX"/>
-      <!-- Classic FM -->
-      <xs:enumeration value="CLAS"/>
-      <!-- VRT/Radio 1 -->
-      <xs:enumeration value="BEL1"/>
-      <!-- VRT/Radio 2 -->
-      <xs:enumeration value="BEL2"/>
-      <!-- Klara -->
-      <xs:enumeration value="KLAR"/>
-      <!-- BBC Radio 1 -->
-      <xs:enumeration value="BBR1"/>
-      <!-- BBC Radio 2 -->
-      <xs:enumeration value="BBR2"/>
-      <!-- BBC Radio 3 -->
-      <xs:enumeration value="BBR3"/>
-      <!-- BBC Radio 4 -->
-      <xs:enumeration value="BBR4"/>
-      <!-- BBC Worldservice -->
-      <xs:enumeration value="BBWS"/>
-      <!-- BBC 1XTRA -->
-      <xs:enumeration value="BBCX"/>
-      <!-- NDR3 -->
-      <xs:enumeration value="NDR3"/>
-      <!-- WDR 4 -->
-      <xs:enumeration value="WDR4"/>
-      <!-- WDR3 -->
-      <xs:enumeration value="WDR3"/>
-      <!-- Digitenne 1 -->
-      <xs:enumeration value="DIG1"/>
-      <!-- Digitenne 2 -->
-      <xs:enumeration value="DIG2"/>
-
+      <xs:enumeration value="PCNE">
+        <xs:annotation>
+          <xs:documentation>
+            Phoenix CNE.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PATN">
+        <xs:annotation>
+          <xs:documentation>
+            ATN.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZEET">
+        <xs:annotation>
+          <xs:documentation>
+            Zee TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZEEC">
+        <xs:annotation>
+          <xs:documentation>
+            Zee Cinema.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TVE_">
+        <xs:annotation>
+          <xs:documentation>
+            TVE.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAI_">
+        <xs:annotation>
+          <xs:documentation>
+            Rai Uno.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAID">
+        <xs:annotation>
+          <xs:documentation>
+            Rai Due.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAIT">
+        <xs:annotation>
+          <xs:documentation>
+            Rai Tre.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TEVE">
+        <xs:annotation>
+          <xs:documentation>
+            TeVe Sur.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ERTS">
+        <xs:annotation>
+          <xs:documentation>
+            ERT Sat.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="STV_">
+        <xs:annotation>
+          <xs:documentation>
+            STV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NTV_">
+        <xs:annotation>
+          <xs:documentation>
+            NTV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TVPO">
+        <xs:annotation>
+          <xs:documentation>
+            TV Polonia.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NOSJ">
+        <xs:annotation>
+          <xs:documentation>
+            NOS Journaal 24.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CULT">
+        <xs:annotation>
+          <xs:documentation>
+            Cultura.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="101_">
+        <xs:annotation>
+          <xs:documentation>
+            101.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PO24">
+        <xs:annotation>
+          <xs:documentation>
+            Politiek24.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HILV">
+        <xs:annotation>
+          <xs:documentation>
+            HilversumBest.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HOLL">
+        <xs:annotation>
+          <xs:documentation>
+            Holland Doc.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GESC">
+        <xs:annotation>
+          <xs:documentation>
+            /Geschiedenis.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="STER">
+        <xs:annotation>
+          <xs:documentation>
+            Sterren.nl.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NCRV">
+        <xs:annotation>
+          <xs:documentation>
+            Spirit24.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OPVO">
+        <xs:annotation>
+          <xs:documentation>
+            Zappelin24/Familie24.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CONS">
+        <xs:annotation>
+          <xs:documentation>
+            Consumenten TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HUMO">
+        <xs:annotation>
+          <xs:documentation>
+            Humor TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ENTE">
+        <xs:annotation>
+          <xs:documentation>
+            E! Enterntainment.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FASH">
+        <xs:annotation>
+          <xs:documentation>
+            Fashion TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="COMC">
+        <xs:annotation>
+          <xs:documentation>
+            Comedy Central/Nickelodeon.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TBN_">
+        <xs:annotation>
+          <xs:documentation>
+            TBN Europe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DISC">
+        <xs:annotation>
+          <xs:documentation>
+            Discovery Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZONE">
+        <xs:annotation>
+          <xs:documentation>
+            Zone Reality (UK).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ANPL">
+        <xs:annotation>
+          <xs:documentation>
+            Animal Planet.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CLUB">
+        <xs:annotation>
+          <xs:documentation>
+            Zone Club.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NAGE">
+        <xs:annotation>
+          <xs:documentation>
+            National Geographic/CNBC.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TRAC">
+        <xs:annotation>
+          <xs:documentation>
+            Trace TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NGHD">
+        <xs:annotation>
+          <xs:documentation>
+            National Geographic HD.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WILD">
+        <xs:annotation>
+          <xs:documentation>
+            Nat Geo Wild.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GARU">
+        <xs:annotation>
+          <xs:documentation>
+            Garuda TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZAZA">
+        <xs:annotation>
+          <xs:documentation>
+            Zazaro TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FAM7">
+        <xs:annotation>
+          <xs:documentation>
+            Family7.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DTAL">
+        <xs:annotation>
+          <xs:documentation>
+            Discovery Travel &amp; Living.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SCIE">
+        <xs:annotation>
+          <xs:documentation>
+            Discovery Science.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CIVI">
+        <xs:annotation>
+          <xs:documentation>
+            Discovery Civilisation.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DIHD">
+        <xs:annotation>
+          <xs:documentation>
+            Discovery HD.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HIST">
+        <xs:annotation>
+          <xs:documentation>
+            The History Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TRAV">
+        <xs:annotation>
+          <xs:documentation>
+            Travel Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HETG">
+        <xs:annotation>
+          <xs:documentation>
+            Het Gesprek.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GOED">
+        <xs:annotation>
+          <xs:documentation>
+            GoedTV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BABY">
+        <xs:annotation>
+          <xs:documentation>
+            Baby TV (NL).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DH1_">
+        <xs:annotation>
+          <xs:documentation>
+            HD-NL.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LITV">
+        <xs:annotation>
+          <xs:documentation>
+            Liberty TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LIVE">
+        <xs:annotation>
+          <xs:documentation>
+            Liveshop.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="STAR">
+        <xs:annotation>
+          <xs:documentation>
+            Star!
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WEER">
+        <xs:annotation>
+          <xs:documentation>
+            Weerkanaal.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="REAL">
+        <xs:annotation>
+          <xs:documentation>
+            Zone Reality.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SCIF">
+        <xs:annotation>
+          <xs:documentation>
+            Sci-Fi Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="13ST">
+        <xs:annotation>
+          <xs:documentation>
+            13th Street.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CARC">
+        <xs:annotation>
+          <xs:documentation>
+            Car Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NOSN">
+        <xs:annotation>
+          <xs:documentation>
+            NostalgieNet.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HISH">
+        <xs:annotation>
+          <xs:documentation>
+            The History Channel HD.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BRHD">
+        <xs:annotation>
+          <xs:documentation>
+            Brava HD.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FANT">
+        <xs:annotation>
+          <xs:documentation>
+            Fan TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RACW">
+        <xs:annotation>
+          <xs:documentation>
+            Raceworld TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="COMF">
+        <xs:annotation>
+          <xs:documentation>
+            Comedy Family.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="POKE">
+        <xs:annotation>
+          <xs:documentation>
+            Poker Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MNET">
+        <xs:annotation>
+          <xs:documentation>
+            Misdaadnet.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VOOM">
+        <xs:annotation>
+          <xs:documentation>
+            Voom HD.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZONH">
+        <xs:annotation>
+          <xs:documentation>
+            Zone Horror.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KPN1">
+        <xs:annotation>
+          <xs:documentation>
+            Eredivisie Live 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KPN2">
+        <xs:annotation>
+          <xs:documentation>
+            Eredivisie Live 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KPN3">
+        <xs:annotation>
+          <xs:documentation>
+            Eredivisie Live 3.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KPN4">
+        <xs:annotation>
+          <xs:documentation>
+            Eredivisie Live 4.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ZIZO">
+        <xs:annotation>
+          <xs:documentation>
+            PO Zizone TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DVB1">
+        <xs:annotation>
+          <xs:documentation>
+            PO DVB-H 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DVB2">
+        <xs:annotation>
+          <xs:documentation>
+            PO DVB-H 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DVB3">
+        <xs:annotation>
+          <xs:documentation>
+            PO DVB-H 3.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NICK">
+        <xs:annotation>
+          <xs:documentation>
+            Nickelodeon.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NIJN">
+        <xs:annotation>
+          <xs:documentation>
+            Nick Jr.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NIKT">
+        <xs:annotation>
+          <xs:documentation>
+            Nick Toons.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NIKH">
+        <xs:annotation>
+          <xs:documentation>
+            Nick Hits.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CART">
+        <xs:annotation>
+          <xs:documentation>
+            Cartoon Network.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BOOM">
+        <xs:annotation>
+          <xs:documentation>
+            Boomerang.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CNN_">
+        <xs:annotation>
+          <xs:documentation>
+            CNN.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBCW">
+        <xs:annotation>
+          <xs:documentation>
+            BBC World.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EURN">
+        <xs:annotation>
+          <xs:documentation>
+            Euronews.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SKNE">
+        <xs:annotation>
+          <xs:documentation>
+            Sky News.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BLOO">
+        <xs:annotation>
+          <xs:documentation>
+            Bloomberg TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CNBC">
+        <xs:annotation>
+          <xs:documentation>
+            CNBC Europe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PALJ">
+        <xs:annotation>
+          <xs:documentation>
+            Al Jazeera Arabic.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ALJA">
+        <xs:annotation>
+          <xs:documentation>
+            Al Jazeera.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FOXN">
+        <xs:annotation>
+          <xs:documentation>
+            Fox News.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MTV_">
+        <xs:annotation>
+          <xs:documentation>
+            MTV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MTV2">
+        <xs:annotation>
+          <xs:documentation>
+            MTV2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HITS">
+        <xs:annotation>
+          <xs:documentation>
+            MTV Hits.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BASE">
+        <xs:annotation>
+          <xs:documentation>
+            MTV Base.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MTVB">
+        <xs:annotation>
+          <xs:documentation>
+            MTV Brand New.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TMF_">
+        <xs:annotation>
+          <xs:documentation>
+            TMF.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TMFN">
+        <xs:annotation>
+          <xs:documentation>
+            TMF NL.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TMFP">
+        <xs:annotation>
+          <xs:documentation>
+            TMF Party.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TMFY">
+        <xs:annotation>
+          <xs:documentation>
+            TMF Pure.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TVOR">
+        <xs:annotation>
+          <xs:documentation>
+            TV Oranje.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VH1E">
+        <xs:annotation>
+          <xs:documentation>
+            VH-1 (EU).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VH1C">
+        <xs:annotation>
+          <xs:documentation>
+            VH-1 Classic.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PERC">
+        <xs:annotation>
+          <xs:documentation>
+            Performance Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MEZZ">
+        <xs:annotation>
+          <xs:documentation>
+            Mezzo.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EURO">
+        <xs:annotation>
+          <xs:documentation>
+            Eurosport.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EUR2">
+        <xs:annotation>
+          <xs:documentation>
+            Eurosport 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EXTR">
+        <xs:annotation>
+          <xs:documentation>
+            Extreme Sports Channel (EU).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MOTO">
+        <xs:annotation>
+          <xs:documentation>
+            Motors TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SAIL">
+        <xs:annotation>
+          <xs:documentation>
+            Sailing channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ESPN">
+        <xs:annotation>
+          <xs:documentation>
+            ESPN.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NASE">
+        <xs:annotation>
+          <xs:documentation>
+            ESPN America.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP11">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1.1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP12">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1.2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP13">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1.3.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP14">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1.4.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP15">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1.5.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP16">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1.6.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP17">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1.7.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SP18">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1.8.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="S1HD">
+        <xs:annotation>
+          <xs:documentation>
+            Sport1 HD.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FIL1">
+        <xs:annotation>
+          <xs:documentation>
+            Film1.1 pepe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FIL2">
+        <xs:annotation>
+          <xs:documentation>
+            Film1.2 pepe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FIL3">
+        <xs:annotation>
+          <xs:documentation>
+            Film1.3 pepe.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FL11">
+        <xs:annotation>
+          <xs:documentation>
+            Film1.1 DI.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FL1P">
+        <xs:annotation>
+          <xs:documentation>
+            Film1+1 DI.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FL12">
+        <xs:annotation>
+          <xs:documentation>
+            Film1.2 DI.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FL13">
+        <xs:annotation>
+          <xs:documentation>
+            Film1.3 DI.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FLHD">
+        <xs:annotation>
+          <xs:documentation>
+            Film1 HD DI.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MGMM">
+        <xs:annotation>
+          <xs:documentation>
+            MGM Movie Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TCM_">
+        <xs:annotation>
+          <xs:documentation>
+            TCM.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HALL">
+        <xs:annotation>
+          <xs:documentation>
+            Hallmark.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ACNW">
+        <xs:annotation>
+          <xs:documentation>
+            Action Now!
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RHUS">
+        <xs:annotation>
+          <xs:documentation>
+            Hustler TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PLAY">
+        <xs:annotation>
+          <xs:documentation>
+            Playboy TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ADUL">
+        <xs:annotation>
+          <xs:documentation>
+            Adult Channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PSPI">
+        <xs:annotation>
+          <xs:documentation>
+            Private Spice.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="HUST">
+        <xs:annotation>
+          <xs:documentation>
+            Blue Hustler.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OXMO">
+        <xs:annotation>
+          <xs:documentation>
+            PO X-MO.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="XM24">
+        <xs:annotation>
+          <xs:documentation>
+            X-MO DI.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OU24">
+        <xs:annotation>
+          <xs:documentation>
+            PO Out TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAD1">
+        <xs:annotation>
+          <xs:documentation>
+            NPO Radio 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAD2">
+        <xs:annotation>
+          <xs:documentation>
+            NPO Radio 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAD3">
+        <xs:annotation>
+          <xs:documentation>
+            NPO 3FM.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAD4">
+        <xs:annotation>
+          <xs:documentation>
+            NPO Radio 4.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAD5">
+        <xs:annotation>
+          <xs:documentation>
+            NPO Radio 5.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RAD6">
+        <xs:annotation>
+          <xs:documentation>
+            NPO Radio 6.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="REGR">
+        <xs:annotation>
+          <xs:documentation>
+            Regional radio combi-channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RFRY">
+        <xs:annotation>
+          <xs:documentation>
+            Omrop Fryslân radio.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RNOO">
+        <xs:annotation>
+          <xs:documentation>
+            Radio Noord.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RTVD">
+        <xs:annotation>
+          <xs:documentation>
+            RTV Drenthe radio.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ROST">
+        <xs:annotation>
+          <xs:documentation>
+            Radio Oost.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RGEL">
+        <xs:annotation>
+          <xs:documentation>
+            Radio Gelderland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RFLE">
+        <xs:annotation>
+          <xs:documentation>
+            Radio Flevoland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RBRA">
+        <xs:annotation>
+          <xs:documentation>
+            Omroep Brabant.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RUTR">
+        <xs:annotation>
+          <xs:documentation>
+            Radio M Utrecht.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RNOH">
+        <xs:annotation>
+          <xs:documentation>
+            Radio Noord-Holland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RWST">
+        <xs:annotation>
+          <xs:documentation>
+            89,3 Radio West.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RRIJ">
+        <xs:annotation>
+          <xs:documentation>
+            Radio Rijnmond.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LRAD">
+        <xs:annotation>
+          <xs:documentation>
+            L1 Radio.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RZEE">
+        <xs:annotation>
+          <xs:documentation>
+            Omroep Zeeland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="COMM">
+        <xs:annotation>
+          <xs:documentation>
+            Commercial radio combi-channel.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RVER">
+        <xs:annotation>
+          <xs:documentation>
+            Radio Veronica.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SLAM">
+        <xs:annotation>
+          <xs:documentation>
+            SLAM! FM.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SKYR">
+        <xs:annotation>
+          <xs:documentation>
+            Sky Radio.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BNRN">
+        <xs:annotation>
+          <xs:documentation>
+            BNR Nieuwsradio.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KINK">
+        <xs:annotation>
+          <xs:documentation>
+            Kink FM.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PCAZ">
+        <xs:annotation>
+          <xs:documentation>
+            CAZ!.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="QMUS">
+        <xs:annotation>
+          <xs:documentation>
+            Qmusic.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="R538">
+        <xs:annotation>
+          <xs:documentation>
+            Radio 538.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GOLD">
+        <xs:annotation>
+          <xs:documentation>
+            Radio 10 Gold.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ARRO">
+        <xs:annotation>
+          <xs:documentation>
+            Arrow Classic Rock.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FUNX">
+        <xs:annotation>
+          <xs:documentation>
+            FunX.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CLAS">
+        <xs:annotation>
+          <xs:documentation>
+            Classic FM.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BEL1">
+        <xs:annotation>
+          <xs:documentation>
+            VRT/Radio 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BEL2">
+        <xs:annotation>
+          <xs:documentation>
+            VRT/Radio 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KLAR">
+        <xs:annotation>
+          <xs:documentation>
+            Klara.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBR1">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Radio 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBR2">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Radio 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBR3">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Radio 3.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBR4">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Radio 4.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBWS">
+        <xs:annotation>
+          <xs:documentation>
+            BBC Worldservice.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BBCX">
+        <xs:annotation>
+          <xs:documentation>
+            BBC 1XTRA.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NDR3">
+        <xs:annotation>
+          <xs:documentation>
+            NDR3.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WDR4">
+        <xs:annotation>
+          <xs:documentation>
+            WDR 4.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WDR3">
+        <xs:annotation>
+          <xs:documentation>
+            WDR3.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DIG1">
+        <xs:annotation>
+          <xs:documentation>
+            Digitenne 1.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DIG2">
+        <xs:annotation>
+          <xs:documentation>
+            Digitenne 2.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
 
       <!-- missing channels -->
       <xs:enumeration value="D24K"/>
