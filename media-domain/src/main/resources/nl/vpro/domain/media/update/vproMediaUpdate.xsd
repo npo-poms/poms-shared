@@ -368,7 +368,7 @@
 
   <xs:complexType name="memberUpdateType" final="extension restriction">
     <xs:sequence>
-      <xs:element name="mediaUpdate" type="mediaUpdateType" minOccurs="0"/>
+      <xs:any />
     </xs:sequence>
     <xs:attribute name="position" type="xs:integer"/>
     <xs:attribute name="highlighted" type="xs:boolean"/>
