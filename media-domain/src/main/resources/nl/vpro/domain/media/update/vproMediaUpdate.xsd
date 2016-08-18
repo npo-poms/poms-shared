@@ -319,38 +319,28 @@
           <xs:element name="episodeOf" type="memberRefUpdateType" form="qualified" maxOccurs="unbounded" minOccurs="0">
             <xs:annotation>
               <xs:documentation>
-                EpisodeOf werkt analoog aan memberOf. Belangrijk verschil is dat alleen programma's een aflevering van
-                een groep
-                kunnen worden, dat de groep van het type SERIES of SEASON moet zijn, en dat het programma van het type
-                CLIP of BROADCAST moet.
+                episodeOf works similar to memberOf. Important differences: only programs of type CLIP or BROADCAST can
+                be an episode of a group and the group can only be of type SERIES or SEASON.
               </xs:documentation>
             </xs:annotation>
           </xs:element>
           <xs:element form="qualified" name="segments" minOccurs="0">
             <xs:annotation>
               <xs:documentation>
-                Optionele lijst met segmenten van een programma.
+                Optional list of program segments. A segment is a part of a program that can be visually shown on the
+                timeline of a player. A segment always has a start time indicating the start of the segment relative to
+                the parent program. A segment can have the same fields as other media objects, like titles, descriptions,
+                images, locations, etc.
 
-                Een segment is een deel van een programma dat gevisualiseerd kan worden op de tijdlijn in de speler. Een
-                segment heeft
-                altijd een start tijdstip dat het begin van het segment t.o.v het bijheborende programma. Voor zijn
-                overige velden is een
-                segment identiek aan alle media types (). Een segment kan dus alles bevatten wat hierboven boven
-                episodeOf wordt getoond, d.w.z. titels,
-                beschijvingen, afbeeldingen, locaties, etc..
+                The standard scenario when playing a segment is to load a location of the parent media object and
+                to use the start time as an offset to start playing the segment. However, it is also possible for a
+                segment to have its own locations. This makes it possible to for instance have a podcast of a weekly
+                segment in a radio show without providing the complete radio program it is a part of.
 
-                In het standaard gebruikscenario zal een speler bij het afspelen van een segment de locatie van het
-                omhullende programma aanroepen met
-                een start offset om op de tijdlijn naar het gevraagde segment te springen. Het is echter ook mogelijk om
-                locaties direct aan een segment
-                te koppelen. Hierdoor is het mogelijk om een MP3 podcast te maken van een vast wekelijks terugkerend
-                programma item, of om een deel van
-                een programma al online beschikbaar te maken, zonder het hele programma aan te bieden.
-
-                Regels:
-                - Start is vereist
-                - Als duration niet is ingevuld loopt het segment door tot het einde van het programma
-                - Als het programma wordt verwijderd verdwijnen ook de bijbehorende segmenten.
+                Rules:
+                - Start time is required
+                - If duration is not set the player should play until the end of the program
+                - Removing a program also deletes its segments
               </xs:documentation>
             </xs:annotation>
             <xs:complexType>
