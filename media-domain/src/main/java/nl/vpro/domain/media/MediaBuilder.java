@@ -596,8 +596,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B mergedTo(MediaObject media) {
+        workflow(Workflow.MERGED);
         build().setMergedTo(media);
         return (B)this;
+    }
+
+    @SuppressWarnings("unchecked")
+    default B mergedTo(String media) {
+        workflow(Workflow.MERGED);
+        build().setMergedToRef(media);
+        return (B) this;
     }
 
 
