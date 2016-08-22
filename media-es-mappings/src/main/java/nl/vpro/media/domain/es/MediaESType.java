@@ -10,9 +10,9 @@ public enum MediaESType {
     program,
     group,
     segment,
-    deletedprogram("program"),
-    deletedgroup("group"),
-    deletedsegment("segment"),
+    deletedprogram,
+    deletedgroup,
+    deletedsegment,
     memberRef;
 
 
@@ -31,6 +31,8 @@ public enum MediaESType {
 
     public static MediaESType[] MEDIAOBJECTS = {program, group, segment};
 
+    public static MediaESType[] DELETED_MEDIAOBJECTS = {deletedprogram, deletedgroup, deletedsegment};
+
 
     public static String[] toString(MediaESType... types) {
         return Arrays.stream(types).map(Enum::name).toArray(String[]::new);
@@ -39,5 +41,9 @@ public enum MediaESType {
 
     public static String[] mediaObjects() {
         return toString(MEDIAOBJECTS);
+    }
+
+    public static String[] deletedMediaObjects() {
+        return toString(DELETED_MEDIAOBJECTS);
     }
 }
