@@ -10,9 +10,9 @@ public enum MediaESType {
     program,
     group,
     segment,
-    deletedprogram("program"),
-    deletedgroup("group"),
-    deletedsegment("segment"),
+    deletedprogram,
+    deletedgroup,
+    deletedsegment,
     memberRef;
 
 
