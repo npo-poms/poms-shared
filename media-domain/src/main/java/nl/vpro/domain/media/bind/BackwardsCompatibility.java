@@ -65,7 +65,7 @@ public class BackwardsCompatibility {
                 if (v1Compatibility.get()) {
                     return new Broadcaster(node.textValue());
                 } else {
-                    return Jackson2Mapper.getInstance().reader(Broadcaster.class).readValue(node);
+                    return Jackson2Mapper.getInstance().readerFor(Broadcaster.class).readValue(node);
                 }
             }
         }
@@ -95,7 +95,7 @@ public class BackwardsCompatibility {
                         return null;
                     }
                 } else {
-                    LocaleWrapper wrapper = Jackson2Mapper.getInstance().reader(LocaleWrapper.class).readValue(node);
+                    LocaleWrapper wrapper = Jackson2Mapper.getInstance().readerFor(LocaleWrapper.class).readValue(node);
                     return wrapper.getLocale();
                 }
             }
@@ -137,7 +137,7 @@ public class BackwardsCompatibility {
                         return null;
                     }
                 } else {
-                    CountryWrapper wrapper = Jackson2Mapper.getInstance().reader(CountryWrapper.class).readValue(node);
+                    CountryWrapper wrapper = Jackson2Mapper.getInstance().readerFor(CountryWrapper.class).readValue(node);
                     return wrapper.getCode();
                 }
             }
@@ -194,7 +194,7 @@ public class BackwardsCompatibility {
                 } else {
 
                     for (JsonNode jsonNode : array) {
-                        Genre type = Jackson2Mapper.getInstance().reader(Genre.class).readValue(jsonNode);
+                        Genre type = Jackson2Mapper.getInstance().readerFor(Genre.class).readValue(jsonNode);
                         types.add(type);
                     }
                 }
