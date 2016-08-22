@@ -151,9 +151,12 @@ public interface MediaTestDataBuilder<
     }
 
     default T withWorkflow() {
-        return workflow(Workflow.PUBLISHED);
+        return published();
     }
 
+    default T published() {
+        return workflow(Workflow.PUBLISHED);
+    }
 
     default T withUrn() {
         return id(id.incrementAndGet());
