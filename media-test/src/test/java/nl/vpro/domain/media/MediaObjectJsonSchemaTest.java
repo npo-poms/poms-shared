@@ -100,7 +100,7 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testMergedTo() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"mergedTo\":\"MERGE_TARGET\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
+        String expected = "{\"objectType\":\"program\",\"workflow\":\"MERGED\",\"mergedTo\":\"MERGE_TARGET\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().mergedTo(program().mid("MERGE_TARGET").build()).build();
         String actual = toJson(program);
