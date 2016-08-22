@@ -26,7 +26,7 @@
   <xs:element name="memberRef" type="memberRefUpdateType"/>
 
   <xs:element name="memberUpdate" type="memberUpdateType"/>
-  
+
   <xs:element name="move" type="moveActionType"/>
 
   <xs:complexType name="avAtributeUpdateType">
@@ -368,7 +368,10 @@
 
   <xs:complexType name="memberUpdateType" final="extension restriction">
     <xs:sequence>
+      <xs:any/>
+      <!---
       <xs:element name="mediaUpdate" type="mediaUpdateType" minOccurs="0"/>
+      -->
     </xs:sequence>
     <xs:attribute name="position" type="xs:integer"/>
     <xs:attribute name="highlighted" type="xs:boolean"/>
