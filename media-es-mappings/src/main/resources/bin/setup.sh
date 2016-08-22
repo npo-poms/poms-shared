@@ -6,7 +6,7 @@ fi
 
 if [ $# -lt 1 ];
 then
-    echo "Usage $0 npo_dev|npo_test|npo_prod|localhost|<es-url> [<index number>]"
+    echo "Usage $0 npo_dev|npo_test|npo_prod|localhost|<es-url> [<index number>|<alias>]"
     echo "index number:  Number of the new index to create (e.g. 2 in apimedia-2). If ommited the mappings are put over the old ones (only possible if they are compatible)"
     exit
 fi
@@ -38,12 +38,18 @@ if [ "$2" == "" ] ; then
     echo "No index number found, trying to put mappings over existing ones (supposing they are compatible)"
     destindex=apimedia
 else
-    previndex=apimedia-$(($2-1))
-    destindex=apimedia-$2
+    if [[ $2 =~ ^[0-9]+$ ]] ; then
+        previndex=apimedia-$(($2-1))
+        destindex=apimedia-$2
+    else
+        echo "No index number found, trying to put mappings over existing ones (supposing they are compatible)"
+        destindex=$2
+    fi
+
 fi
 
 echo "Echo putting $basedir to $desthost/$destindex"
-if [ "$2" != "" ]; then
+if [ "$previndex" != "" ]; then
     echo "putting settings"
     curl -XPUT $desthost/$destindex -d @$basedir/setting/apimedia.json
 fi
@@ -63,7 +69,7 @@ curl -XPUT $desthost/$destindex/deletedsegment/_mapping -d @$basedir/mapping/del
 
 echo
 
-if [ "$2" != "" ] ; then
+if [ "$previndex" != "" ] ; then
 
    echo "moving alias $previndex $destindex"
 
