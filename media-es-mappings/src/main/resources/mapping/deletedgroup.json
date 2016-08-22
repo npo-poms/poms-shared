@@ -5,6 +5,10 @@
         },
         "dynamic" : "strict",
         "properties" : {
+            "mergedTo": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
             "poSequenceInformation": {
                 "type": "string",
                 "index": "not_analyzed"
