@@ -16,17 +16,9 @@ public enum MediaESType {
     memberRef;
 
 
-    private final String source;
 
-    MediaESType(String s) {
-        source = s;
-    }
-
-    MediaESType() {
-        source = name();
-    }
     public String source() {
-        return ApiMediaIndex.source("mapping/" + source + ".json");
+        return ApiMediaIndex.source("mapping/" + name() + ".json");
     }
 
     public static MediaESType[] MEDIAOBJECTS = {program, group, segment};
