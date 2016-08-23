@@ -1,4 +1,4 @@
-package nl.vpro.domain;
+package nl.vpro.i18n;
 
 import java.util.HashMap;
 import java.util.Locale;

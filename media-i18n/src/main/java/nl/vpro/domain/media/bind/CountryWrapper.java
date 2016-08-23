@@ -39,7 +39,7 @@ public class CountryWrapper {
     @XmlValue
     @JsonProperty("value")
     public String getName() {
-        return new Locale("nl", code.getAlpha2()).getDisplayCountry(NL);
+        return new Locale("en", code.getAlpha2()).getDisplayCountry(Locale.getDefault(Locale.Category.DISPLAY));
     }
 
     public void setName(String name) {

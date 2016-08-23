@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.xml.bind.JAXB;
 
-import nl.vpro.domain.LocalizedString;
+import nl.vpro.i18n.LocalizedString;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
