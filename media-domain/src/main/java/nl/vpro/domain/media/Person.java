@@ -12,6 +12,9 @@ import nl.vpro.beeldengeluid.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.DomainObject;
 import nl.vpro.validation.NoHtml;
 
+import java.util.Objects;
+import java.util.Optional;
+
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -123,8 +126,6 @@ public class Person extends DomainObject {
 
     /**
      * Sets both the given name and the family name by splitting the String.
-     *
-     * @param name
      */
     public void setName(String name) {
         String[] split = name.split("\\s+", 2);
@@ -173,6 +174,13 @@ public class Person extends DomainObject {
         this.gtaaRecord = gtaaRecord;
     }
 
+    @XmlAttribute
+    public String getGtaaUri() {
+        return Optional.ofNullable(gtaaRecord)
+                .map(GTAARecord::getUri)
+                .orElse(null);
+    }
+
     @Override
     public boolean equals(Object o) {
         if(super.equals(o)) {
@@ -193,7 +201,9 @@ public class Person extends DomainObject {
         if(role != person.role) {
             return false;
         }
-
+        if(!Objects.equals(getGtaaUri(), person.getGtaaUri())) {
+            return false;
+        }
         return true;
     }
 
@@ -203,6 +213,8 @@ public class Person extends DomainObject {
         result = 31 * result + (givenName != null ? givenName.hashCode() : 0);
         result = 31 * result + (familyName != null ? familyName.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
+        String gtaaUri = getGtaaUri();
+        result = 31 * result + (gtaaUri != null ? gtaaUri.hashCode() : 0);
         return result;
     }
 
@@ -213,6 +225,7 @@ public class Person extends DomainObject {
             .append("givenName", givenName)
             .append("familyName", familyName)
             .append("role", role)
+            .append("gtaa_uri", getGtaaUri())
             .toString();
     }
 }
