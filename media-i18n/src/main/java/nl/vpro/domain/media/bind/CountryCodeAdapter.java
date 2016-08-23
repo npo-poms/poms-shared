@@ -4,6 +4,8 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 
+import java.util.Optional;
+
 /**
  * @author Michiel Meeuwissen
  * @since 3.0
@@ -11,30 +13,31 @@ import nl.vpro.com.neovisionaries.i18n.CountryCode;
 public class CountryCodeAdapter extends XmlAdapter<CountryWrapper, CountryCode> {
 
     @Override
-    public CountryCode unmarshal(CountryWrapper v) {
-        return v == null ? null : v.getCode();
+    public CountryCode unmarshal(CountryWrapper countryWrapper) {
+        return Optional.ofNullable(countryWrapper)
+                .map(CountryWrapper::getCode)
+                .orElse(null);
     }
 
     @Override
     public CountryWrapper marshal(CountryCode v)  {
-        return v == null ? null : new CountryWrapper(v);
+        return Optional.ofNullable(v)
+                .map(CountryWrapper::new)
+                .orElse(null);
     }
 
     public static class Code extends XmlAdapter<String, CountryCode> {
         @Override
         public CountryCode unmarshal(String v) throws Exception {
-
-            CountryCode countryCode = CountryCode.getByCode(v);
-            if (countryCode == null) {
-                throw new IllegalArgumentException("No such country " + v);
-            }
-            return countryCode;
-
+            return Optional.ofNullable(CountryCode.getByCode(v))
+                    .orElseThrow(() -> new IllegalArgumentException("No such country " + v));
         }
 
         @Override
-        public String marshal(CountryCode v) throws Exception {
-            return v == null ? null : v.name();
+        public String marshal(CountryCode countryCode) throws Exception {
+            return Optional.ofNullable(countryCode)
+                    .map(Enum::name)
+                    .orElse(null);
         }
     }
 }
