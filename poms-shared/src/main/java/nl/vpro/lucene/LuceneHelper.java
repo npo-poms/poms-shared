@@ -88,37 +88,43 @@ public class LuceneHelper {
 
         String upper = null;
         if(stop != null) {
-            Instant nextUnit = stop;
-            switch(indexResolution) {
-                case YEAR:
-                    nextUnit = stop.atZone(ZONE_ID).plusYears(1).toInstant();
-                    break;
-                case MONTH:
-                    nextUnit = stop.atZone(ZONE_ID).plusMonths(1).toInstant();
-                    break;
-                case DAY:
-                    nextUnit = stop.plus(1, ChronoUnit.DAYS);
-                    break;
-                case HOUR:
-                    nextUnit = stop.plus(1, ChronoUnit.HOURS);
-                    break;
-                case MINUTE:
-                    nextUnit = stop.plus(1, ChronoUnit.MINUTES);
-                    break;
-                case SECOND:
-                    nextUnit = stop.plusSeconds(1);
-                    break;
-                case MILLISECOND:
-                    nextUnit = stop.plusMillis(1);
-                    break;
-
-            }
-            upper = DateTools.dateToString(DateUtils.toDate(nextUnit), indexResolution);
+            upper = DateTools.dateToString(DateUtils.toDate(inc(stop, 1, indexResolution)), indexResolution);
         }
 
         return new TermRangeQuery(field, lower, upper, true, false);
     }
 
+    public static Instant inc(Instant instant, int amount, DateTools.Resolution indexResolution) {
+        Instant nextUnit = instant;
+        switch (indexResolution) {
+            case YEAR:
+                nextUnit = instant.atZone(ZONE_ID).plusYears(amount).toInstant();
+                break;
+            case MONTH:
+                nextUnit = instant.atZone(ZONE_ID).plusMonths(1).toInstant();
+                break;
+            case DAY:
+                nextUnit = instant.plus(amount, ChronoUnit.DAYS);
+                break;
+            case HOUR:
+                nextUnit = instant.plus(amount, ChronoUnit.HOURS);
+                break;
+            case MINUTE:
+                nextUnit = instant.plus(amount, ChronoUnit.MINUTES);
+                break;
+            case SECOND:
+                nextUnit = instant.plusSeconds(amount);
+                break;
+            case MILLISECOND:
+                nextUnit = instant.plusMillis(amount);
+                break;
+            default:
+                LOG.warn("Unrecognized unit " + indexResolution);
+        }
+        return nextUnit;
+    }
+
+    @Deprecated
     public static TermRangeQuery createDayRangeQuery(String field, Date start, Date stop, DateTools.Resolution indexResolution) {
         return createRangeQuery(field, DateUtils.toInstant(start), DateUtils.toInstant(stop), indexResolution);
     }
