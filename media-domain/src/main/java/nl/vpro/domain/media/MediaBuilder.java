@@ -8,6 +8,7 @@ import java.io.StringWriter;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -559,6 +560,20 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
         return (B)this;
     }
+
+    @SuppressWarnings("unchecked")
+    default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger) {
+        ScheduleEvent event = new ScheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration);
+        event.setMediaObject(build());
+        event = merger.apply(event);
+        return (B) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration) {
+        return scheduleEvent(c, time, duration, e -> e);
+    }
+
 
     @SuppressWarnings("unchecked")
     default B descendantOf(DescendantRef... refs) throws CircularReferenceException {
