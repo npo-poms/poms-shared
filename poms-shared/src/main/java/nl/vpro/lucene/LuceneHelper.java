@@ -4,6 +4,9 @@
  */
 package nl.vpro.lucene;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -19,8 +22,12 @@ import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import nl.vpro.util.DateUtils;
+
 public class LuceneHelper {
-    private static final Logger log = LoggerFactory.getLogger(LuceneHelper.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LuceneHelper.class);
+
+    private static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
     public static final Version VERSION = Version.LUCENE_29; // Newer version make searching behave differently (and fail test)
 
@@ -55,7 +62,7 @@ public class LuceneHelper {
         try {
             return parser.parse(text);
         } catch(ParseException e) {
-            log.warn("Exception parsing query text: \"{}\", returning all documents.", text);
+            LOG.warn("Exception parsing query text: \"{}\", returning all documents.", text);
             return new MatchAllDocsQuery();
         }
     }
@@ -72,21 +79,50 @@ public class LuceneHelper {
      * @return The create TempRangeQuery
      */
 
-    public static TermRangeQuery createDayRangeQuery(String field, Date start, Date stop, DateTools.Resolution indexResolution) {
+    public static TermRangeQuery createRangeQuery(String field, Instant start, Instant stop, DateTools.Resolution indexResolution) {
 
         String lower = null;
         if(start != null) {
-            lower = DateTools.dateToString(start, indexResolution);
+            lower = DateTools.dateToString(DateUtils.toDate(start), indexResolution);
         }
 
         String upper = null;
         if(stop != null) {
-            Date nextDay = new Date(stop.getTime() + 24 * 60 * 60 * 1000);
-            upper = DateTools.dateToString(nextDay, indexResolution);
+            Instant nextUnit = stop;
+            switch(indexResolution) {
+                case YEAR:
+                    nextUnit = stop.atZone(ZONE_ID).plusYears(1).toInstant();
+                    break;
+                case MONTH:
+                    nextUnit = stop.atZone(ZONE_ID).plusMonths(1).toInstant();
+                    break;
+                case DAY:
+                    nextUnit = stop.plus(1, ChronoUnit.DAYS);
+                    break;
+                case HOUR:
+                    nextUnit = stop.plus(1, ChronoUnit.HOURS);
+                    break;
+                case MINUTE:
+                    nextUnit = stop.plus(1, ChronoUnit.MINUTES);
+                    break;
+                case SECOND:
+                    nextUnit = stop.plusSeconds(1);
+                    break;
+                case MILLISECOND:
+                    nextUnit = stop.plusMillis(1);
+                    break;
+
+            }
+            upper = DateTools.dateToString(DateUtils.toDate(nextUnit), indexResolution);
         }
 
         return new TermRangeQuery(field, lower, upper, true, false);
     }
+
+    public static TermRangeQuery createDayRangeQuery(String field, Date start, Date stop, DateTools.Resolution indexResolution) {
+        return createRangeQuery(field, DateUtils.toInstant(start), DateUtils.toInstant(stop), indexResolution);
+    }
+
 
     public static PhraseQuery createPhraseQuery(String field, String phrase, String splitRegex, int slop) {
         String[] words = phrase.split(regex + "|" + splitRegex);
