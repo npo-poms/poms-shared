@@ -288,7 +288,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
 
 
     public Instant getStopInstant() {
-        return DateUtils.toInstant(stop);
+        return DateUtils.toInstant(getStop());
     }
 
     public void setStop(LocalDateTime stop) {
