@@ -12,7 +12,7 @@ import java.util.Locale;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.LocalizedString;
+import nl.vpro.i18n.LocalizedString;
 
 /**
  * @author Roelof Jan Koekoek

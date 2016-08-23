@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.LocalizedString;
+import nl.vpro.i18n.LocalizedString;
 
 /**
  * @author Michiel Meeuwissen
