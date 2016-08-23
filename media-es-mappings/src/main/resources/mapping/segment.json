@@ -138,6 +138,10 @@
                     "role" : {
                         "type" : "string",
                         "index" : "not_analyzed"
+                    },
+                    "gtaaUri" : {
+                        "type" : "string",
+                        "index" : "not_analyzed"
                     }
                 }
             },
