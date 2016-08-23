@@ -2,10 +2,7 @@ package nl.vpro.domain.media;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
@@ -16,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.UnmodifiableIterator;
+
+import nl.vpro.util.DateUtils;
 
 import static nl.vpro.domain.media.MediaObjects.deepCopy;
 
@@ -66,6 +65,10 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
 
     public Schedule(Channel channel, Date start) {
         this(channel, start, start);
+    }
+
+    public Schedule(Channel channel, Instant start) {
+        this(channel, DateUtils.toDate(start), DateUtils.toDate(start));
     }
 
     public Schedule(Net net, Date start) {
