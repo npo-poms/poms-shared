@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Function;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -34,6 +35,14 @@ public interface MediaTestDataBuilder<
         return new ProgramTestDataBuilder();
     }
 
+    static ProgramTestDataBuilder program(Program program) {
+        return new ProgramTestDataBuilder(program);
+    }
+
+    static ProgramTestDataBuilder program(ProgramBuilder program) {
+        return new ProgramTestDataBuilder(program.build());
+    }
+
     static ProgramTestDataBuilder broadcast() {
         return new ProgramTestDataBuilder().type(ProgramType.BROADCAST);
     }
@@ -48,6 +57,14 @@ public interface MediaTestDataBuilder<
 
     static GroupTestDataBuilder group() {
         return new GroupTestDataBuilder();
+    }
+
+    static GroupTestDataBuilder group(Group group) {
+        return new GroupTestDataBuilder(group);
+    }
+
+    static GroupTestDataBuilder group(GroupBuilder group) {
+        return new GroupTestDataBuilder(group.build());
     }
 
     static GroupTestDataBuilder playlist() {
@@ -66,6 +83,14 @@ public interface MediaTestDataBuilder<
         return new SegmentTestDataBuilder();
     }
 
+    static SegmentTestDataBuilder segment(Segment segment) {
+        return new SegmentTestDataBuilder(segment);
+    }
+
+    static SegmentTestDataBuilder segment(SegmentBuilder segment) {
+        return new SegmentTestDataBuilder(segment.build());
+    }
+
 
     /**
      * @deprecated This is itself a mediabuilder nowadays.
@@ -73,12 +98,12 @@ public interface MediaTestDataBuilder<
     @Deprecated
     <TT extends MediaBuilder<TT, M>> MediaBuilder<TT, M> getMediaBuilder();
 
-    @SuppressWarnings("unchecked")
+
     default T lean() {
         return creationDate((Instant) null).workflow(null);
     }
 
-    default T valid() throws ModificationException {
+    default T valid() {
         return constrained();
     }
 
@@ -234,8 +259,12 @@ public interface MediaTestDataBuilder<
         return genres(new Genre("3.0.1.7.21"), new Genre("3.0.1.8.25"));
     }
 
+    @SuppressWarnings("unchecked")
     default T withSource() {
-        return source("Naar het gelijknamige boek van W.F. Hermans");
+        if (build().getSource() == null) {
+            return source("Naar het gelijknamige boek van W.F. Hermans");
+        }
+        return (T) this;
     }
 
     default T withCountries() {
@@ -245,6 +274,7 @@ public interface MediaTestDataBuilder<
     default T withLanguages() {
         return languages("nl", "fr");
     }
+
 
     default T withAvAttributes() {
         return avAttributes(new AVAttributes(1000000, AVFileFormat.M4V));
@@ -258,13 +288,15 @@ public interface MediaTestDataBuilder<
         return aspectRatio(AspectRatio._16x9);
     }
 
+    @SuppressWarnings("unchecked")
     default T withDuration() throws ModificationException {
         return duration(java.time.Duration.of(2, ChronoUnit.HOURS));
     }
 
+    @SuppressWarnings("unchecked")
     default T withReleaseYear() {
         return releaseYear(Short.valueOf("2004"));
-    }
+            }
     default T withPersons() {
         return persons(
             new Person("Bregtje", "van der Haak", RoleType.DIRECTOR),
@@ -317,17 +349,6 @@ public interface MediaTestDataBuilder<
         return websites(new Website("http://www.omroep.nl/programma/journaal"), new Website("http://tegenlicht.vpro.nl/afleveringen/222555"));
     }
 
-    /**
-     * @since 1.5
-     */
-    default T websites(final String... websites) {
-        Website[] ws = new Website[websites.length];
-        for(int i = 0; i < websites.length; i++) {
-            ws[i] = new Website(websites[i]);
-        }
-        return websites(ws);
-    }
-
     default T withTwitterRefs() {
         return twitterRefs("#vpro", "@twitter");
     }
@@ -360,6 +381,22 @@ public interface MediaTestDataBuilder<
             new ScheduleEvent(Channel.HOLL, Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000), java.time.Duration.ofMillis(250)),
             new ScheduleEvent(Channel.CONS, Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000), java.time.Duration.ofMillis(200))
         );
+    }
+
+    default T withScheduleEvent(LocalDateTime localDateTime, Function<ScheduleEvent, ScheduleEvent> merger) {
+        return scheduleEvent(Channel.NED1, localDateTime, java.time.Duration.ofMinutes(30L), merger);
+    }
+
+    default T withScheduleEvent(LocalDateTime localDateTime) {
+        return scheduleEvent(Channel.NED1, localDateTime, java.time.Duration.ofMinutes(30L));
+    }
+
+    default T withScheduleEvent(int year, int month, int day, int hour, int minutes, Function<ScheduleEvent, ScheduleEvent> merger) {
+        return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes), merger);
+    }
+
+    default T withScheduleEvent(int year, int month, int day, int hour, int minutes) {
+        return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes));
     }
 
     default T withRelations() {
@@ -397,14 +434,20 @@ public interface MediaTestDataBuilder<
 
     class ProgramTestDataBuilder extends MediaBuilder.AbstractProgramBuilder<ProgramTestDataBuilder> implements MediaTestDataBuilder<ProgramTestDataBuilder, Program> {
 
+        ProgramTestDataBuilder() {
+            super();
+        }
+        ProgramTestDataBuilder(Program program) {
+            super(program);
+        }
         @Override
         public MediaBuilder<MediaBuilder.ProgramBuilder, Program> getMediaBuilder() {
             return MediaBuilder.program(build());
         }
 
         @Override
-        public ProgramTestDataBuilder constrained() {
-            return MediaTestDataBuilder.super.constrained().withType();
+        public ProgramTestDataBuilder constrainedNew() {
+            return MediaTestDataBuilder.super.constrainedNew().withType();
         }
 
         public ProgramTestDataBuilder withType() {
@@ -466,6 +509,13 @@ public interface MediaTestDataBuilder<
 
     class GroupTestDataBuilder extends MediaBuilder.AbstractGroupBuilder<GroupTestDataBuilder> implements MediaTestDataBuilder<GroupTestDataBuilder, Group> {
 
+        GroupTestDataBuilder() {
+            super();
+        }
+
+        GroupTestDataBuilder(Group group) {
+            super(group);
+        }
         @Override
         public MediaBuilder<MediaBuilder.GroupBuilder, Group> getMediaBuilder() {
             return MediaBuilder.group(build());
@@ -493,6 +543,14 @@ public interface MediaTestDataBuilder<
 
     class SegmentTestDataBuilder extends MediaBuilder.AbstractSegmentBuilder<SegmentTestDataBuilder>
         implements MediaTestDataBuilder<SegmentTestDataBuilder, Segment> {
+
+        SegmentTestDataBuilder() {
+            super();
+        }
+
+        SegmentTestDataBuilder(Segment segment) {
+            super(segment);
+        }
 
 
         @Override
