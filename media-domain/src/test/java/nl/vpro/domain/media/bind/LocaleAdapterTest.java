@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import nl.vpro.domain.LocalizedString;
+import nl.vpro.i18n.LocalizedString;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
