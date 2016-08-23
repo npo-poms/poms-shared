@@ -15,11 +15,19 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class CountryWrapperTest {
     @Test
-    public void getNameNL() throws Exception {
-        //Locale.setDefault(Locales.DUTCH);
+    public void getNameUKNL() throws Exception {
+        Locale.setDefault(Locales.DUTCH);
         CountryWrapper wrapper = new CountryWrapper(CountryCode.GB);
         assertThat(wrapper.getName()).isEqualTo("Verenigd Koninkrijk");
         
+    }
+
+    @Test
+    public void getNameGBNL() throws Exception {
+        Locale.setDefault(Locales.DUTCH);
+        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB_GBN);
+        assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië");
+
     }
 
     @Test

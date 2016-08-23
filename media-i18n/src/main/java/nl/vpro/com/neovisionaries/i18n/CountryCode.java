@@ -737,7 +737,13 @@ public enum CountryCode
             return Locale.UK;
         }
     },
-
+    GB_GBN(GB, "GB-GBN") {
+        @Override
+        public Locale toLocale() {
+            return Locale.UK;
+        }
+    },
+    
     /**
      * <a href="http://en.wikipedia.org/wiki/Grenada">Grenada</a>
      * [<a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#GD">GD</a>, GRD, 308,
@@ -2257,17 +2263,27 @@ public enum CountryCode
     private final String alpha3;
     private final int numeric;
     private final Assignment assignment;
+    private final String iso3166_2;
+    private final CountryCode iso3166_1;
 
+    CountryCode(CountryCode c, String iso3166_2) {
+        this.name = c.name;
+        this.alpha3 = c.alpha3;
+        this.numeric = c.numeric;
+        this.assignment = c.assignment;
+        this.iso3166_2 = iso3166_2;
+        this.iso3166_1 = c;
+    }
 
-    private CountryCode(String name, String alpha3, int numeric, Assignment assignment)
-    {
+    CountryCode(String name, String alpha3, int numeric, Assignment assignment) {
         this.name = name;
         this.alpha3 = alpha3;
         this.numeric = numeric;
         this.assignment = assignment;
+        this.iso3166_2 = null;
+        this.iso3166_1 = this;
     }
-
-
+    
     /**
      * Get the country name.
      *
@@ -2340,6 +2356,13 @@ public enum CountryCode
         return assignment;
     }
 
+    public String getIso3166_2() {
+        return iso3166_2;
+    }
+
+    public CountryCode getIso3166_1() {
+        return iso3166_1;
+    }
 
     /**
      * Convert this {@code CountryCode} instance to a {@link Locale} instance.
