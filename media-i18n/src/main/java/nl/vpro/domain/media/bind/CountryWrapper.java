@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
+import nl.vpro.i18n.Locales;
 
 /**
  * @author Michiel Meeuwissen
@@ -39,7 +40,7 @@ public class CountryWrapper {
     @XmlValue
     @JsonProperty("value")
     public String getName() {
-        return new Locale("en", code.getAlpha2()).getDisplayCountry(Locale.getDefault(Locale.Category.DISPLAY));
+        return Locales.getCountryName(code, Locale.getDefault(Locale.Category.DISPLAY));
     }
 
     public void setName(String name) {
