@@ -31,6 +31,14 @@ public class CountryWrapperTest {
     }
 
     @Test
+    public void getNameGBUK() throws Exception {
+        Locale.setDefault(Locale.UK);
+        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB_GBN);
+        assertThat(wrapper.getName()).isEqualTo("Great Britain");
+
+    }
+    
+    @Test
     public void getNameUS() throws Exception {
         Locale.setDefault(Locale.US);
         CountryWrapper wrapper = new CountryWrapper(CountryCode.GB);
