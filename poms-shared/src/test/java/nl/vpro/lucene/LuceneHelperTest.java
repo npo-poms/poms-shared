@@ -4,6 +4,11 @@
  */
 package nl.vpro.lucene;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
+import org.apache.lucene.document.DateTools;
+import org.apache.lucene.search.TermRangeQuery;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -36,5 +41,47 @@ public class LuceneHelperTest {
         for(Pair pair : pairs) {
             assertThat(LuceneHelper.escape(pair.input)).isEqualTo(pair.escaped);
         }
+    }
+
+
+    @Test
+    public void testRangeQueryMinutes() throws Exception {
+        TermRangeQuery p = LuceneHelper.createRangeQuery("bla",
+            LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+            LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+            DateTools.Resolution.MINUTE);
+        assertThat(p.getLowerTerm()).isEqualTo("201608231030");
+        assertThat(p.getUpperTerm()).isEqualTo("201608231131");
+    }
+
+    @Test
+    public void testRangeQueryDays() throws Exception {
+        TermRangeQuery p = LuceneHelper.createRangeQuery("bla",
+            LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+            LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+            DateTools.Resolution.DAY);
+        assertThat(p.getLowerTerm()).isEqualTo("20160823");
+        assertThat(p.getUpperTerm()).isEqualTo("20160824");
+    }
+
+
+    @Test
+    public void testRangeQueryYear() throws Exception {
+        TermRangeQuery p = LuceneHelper.createRangeQuery("bla",
+            LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+            LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+            DateTools.Resolution.YEAR);
+        assertThat(p.getLowerTerm()).isEqualTo("2016");
+        assertThat(p.getUpperTerm()).isEqualTo("2017");
+    }
+
+    @Test
+    public void testRangeQueryMonth() throws Exception {
+        TermRangeQuery p = LuceneHelper.createRangeQuery("bla",
+            LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+            LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+            DateTools.Resolution.MONTH);
+        assertThat(p.getLowerTerm()).isEqualTo("201608");
+        assertThat(p.getUpperTerm()).isEqualTo("201609");
     }
 }

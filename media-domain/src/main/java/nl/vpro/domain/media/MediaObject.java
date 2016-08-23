@@ -5,6 +5,7 @@
  */
 package nl.vpro.domain.media;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -44,6 +45,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.nicam.NicamRated;
+import nl.vpro.util.DateUtils;
 import nl.vpro.util.ResortedSortedSet;
 import nl.vpro.util.SortedSetSameElementWrapper;
 import nl.vpro.validation.Language;
@@ -2542,6 +2544,11 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             sortDateValid = true;
         }
         return sortDate;
+    }
+
+    @XmlTransient
+    public Instant getSortInstant() {
+        return DateUtils.toInstant(getSortDate());
     }
 
     /**
