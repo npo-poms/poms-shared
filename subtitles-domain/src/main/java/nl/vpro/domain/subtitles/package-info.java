@@ -2,12 +2,14 @@
     xmlns =
         {
             @XmlNs(
-                prefix = "",
+                prefix = "subtitles",
                 namespaceURI = Xmlns.MEDIA_SUBTITLES_NAMESPACE)
 
         },
     namespace = Xmlns.MEDIA_SUBTITLES_NAMESPACE,
-    elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED
+    elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+    attributeFormDefault = javax.xml.bind.annotation.XmlNsForm.UNQUALIFIED
+
 )
 package nl.vpro.domain.subtitles;
 
