@@ -49,7 +49,7 @@ public abstract class AbstractSchemaController {
     @PostConstruct
     public void init() throws IOException, JAXBException {
         SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("http://www.w3.org/2009/01/xml.xsd"));
-        KNOWN_LOCATIONS.putAll(KNOWN_LOCATIONS);
+        KNOWN_LOCATIONS.putAll(SYSTEM_MAPPING);
         fillMappings();
         Set<Class> classes = new LinkedHashSet<>();
         for (Class[] c : MAPPING.values()) {
