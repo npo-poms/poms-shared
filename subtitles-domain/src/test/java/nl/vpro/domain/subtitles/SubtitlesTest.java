@@ -32,9 +32,9 @@ public class SubtitlesTest {
 
 
         JAXBTestUtil.roundTripAndSimilar(subtitles,
-                "<subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00.000+01:00\" lastModified=\"1970-01-01T01:00:00.000+01:00\" type=\"CAPTION\" xml:lang=\"nl-NL\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
-                    "    <content format=\"WEBVTT\">Ondertiteling tekst</content>\n" +
-                    "</subtitles>");
+                "<subtitles:subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00.000+01:00\" lastModified=\"1970-01-01T01:00:00.000+01:00\" type=\"CAPTION\" xml:lang=\"nl-NL\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\">\n" +
+                    "    <subtitles:content format=\"WEBVTT\">Ondertiteling tekst</subtitles:content>\n" +
+                    "</subtitles:subtitles>");
     }
 
     @Test

@@ -39,7 +39,7 @@ public class CueTest {
     @Test
     public void xml() throws Exception {
         Cue cue = new Cue("MID_1234", 10, Duration.ofSeconds(20), Duration.ofSeconds(30), "bla bla bla");
-        JAXBTestUtil.roundTripAndSimilar(cue, "<cue parent=\"MID_1234\" sequence=\"10\" start=\"P0DT0H0M20.000S\" end=\"P0DT0H0M30.000S\" xmlns=\"urn:vpro:media:subtitles:2009\">bla bla bla</cue>");
+        JAXBTestUtil.roundTripAndSimilar(cue, "<subtitles:cue parent=\"MID_1234\" sequence=\"10\" start=\"P0DT0H0M20.000S\" end=\"P0DT0H0M30.000S\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\">bla bla bla</subtitles:cue>");
     }
 
 }
