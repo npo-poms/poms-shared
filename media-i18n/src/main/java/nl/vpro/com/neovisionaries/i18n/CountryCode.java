@@ -773,7 +773,7 @@ public enum CountryCode
             return Locale.UK;
         }
     },
-    GB_SCT(GB, "North Scotland", "GB-SCT") {
+    GB_SCT(GB, "Scotland", "GB-SCT") {
         @Override
         public Locale toLocale() {
             return Locale.UK;
