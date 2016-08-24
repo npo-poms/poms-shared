@@ -46,4 +46,29 @@ public class CountryWrapperTest {
 
     }
 
+
+    @Test
+    public void getNameENGNL() throws Exception {
+        Locale.setDefault(Locales.DUTCH);
+        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB_ENG);
+        assertThat(wrapper.getName()).isEqualTo("Engeland");
+
+    }
+
+    @Test
+    public void getNameENGUK() throws Exception {
+        Locale.setDefault(Locale.UK);
+        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB_ENG);
+        assertThat(wrapper.getName()).isEqualTo("England");
+
+    }
+
+    @Test
+    public void getNameUTUK() throws Exception {
+        Locale.setDefault(Locale.UK);
+        CountryWrapper wrapper = new CountryWrapper(CountryCode.NL_UT);
+        assertThat(wrapper.getName()).isEqualTo("Utrecht");
+
+    }
+
 }
