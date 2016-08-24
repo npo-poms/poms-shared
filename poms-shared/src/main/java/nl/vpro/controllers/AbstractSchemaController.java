@@ -13,6 +13,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
@@ -38,13 +39,17 @@ public abstract class AbstractSchemaController {
 
 
     protected final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
+    protected final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
-	protected final Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
+
+    protected final Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
 
     abstract protected void fillMappings();
 
     @PostConstruct
     public void init() throws IOException, JAXBException {
+        SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("http://www.w3.org/2009/01/xml.xsd"));
+        KNOWN_LOCATIONS.putAll(KNOWN_LOCATIONS);
         fillMappings();
         Set<Class> classes = new LinkedHashSet<>();
         for (Class[] c : MAPPING.values()) {
@@ -121,10 +126,12 @@ public abstract class AbstractSchemaController {
                     f = getFile(namespaceUri);
                 }
                 if (! f.exists()) {
-                    LOG.debug("Creating {} -> {}", namespaceUri, f);
+                    f.getParentFile().mkdirs();
+                    LOG.info("Creating {} -> {}", namespaceUri, f);
 
                     StreamResult result = new StreamResult(f);
                     result.setSystemId(f);
+					
                     FileOutputStream fo = new FileOutputStream(f);
                     result.setOutputStream(fo);
                     return result;
