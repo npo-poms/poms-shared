@@ -749,7 +749,7 @@ public enum CountryCode
     /**
      * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
      */
-    GB_EAW(GB, "England and Wales", "GBEAW") {
+    GB_EAW(GB, "England and Wales", "GB-EAW") {
         @Override
         public Locale toLocale() {
             return Locale.UK;
