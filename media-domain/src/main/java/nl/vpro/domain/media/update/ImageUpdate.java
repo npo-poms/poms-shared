@@ -15,6 +15,8 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.image.ImageMetadata;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.URL;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -153,6 +155,26 @@ public class ImageUpdate {
         result.setSource(source);
         result.setDate(date);
         result.setOffset(offset);
+        return result;
+    }
+
+    public Image toImage(ImageMetadata metadata) {
+        Image result = toImage(metadata.getUrn());
+        if (metadata.getImageType() != null) {
+            result.setType(metadata.getImageType());
+        }
+        if (StringUtils.isNotEmpty(metadata.getTitle())) {
+            result.setTitle(metadata.getTitle());
+        }
+        if (StringUtils.isNotEmpty(metadata.getDescription())) {
+            result.setDescription(metadata.getDescription());
+        }
+        if (metadata.getWidth() != null) {
+            result.setWidth(metadata.getWidth());
+        }
+        if (metadata.getHeight() != null) {
+            result.setHeight(metadata.getHeight());
+        }
         return result;
     }
 
