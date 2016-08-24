@@ -35,7 +35,7 @@ public class SubtitlesUtil {
             case EBU:
                 return EBU.parse(subtitles.getMid(), new StringReader(subtitles.getContent().getValue()));
             case WEBVTT:
-                return WEBVTTANDSRT.parse(subtitles.getMid(), subtitles.getOffset(), new StringReader(subtitles.getContent().getValue()));
+                return WEBVTTandSRT.parse(subtitles.getMid(), subtitles.getOffset(), new StringReader(subtitles.getContent().getValue()));
             default:
                 throw new IllegalStateException();
         }
@@ -52,11 +52,11 @@ public class SubtitlesUtil {
     }
 
     public static void toVTT(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
-        WEBVTTANDSRT.formatWEBVTT(cueIterator, entityStream);
+        WEBVTTandSRT.formatWEBVTT(cueIterator, entityStream);
     }
 
     public static void toSRT(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
-        WEBVTTANDSRT.formatSRT(cueIterator, entityStream);
+        WEBVTTandSRT.formatSRT(cueIterator, entityStream);
 
     }
 

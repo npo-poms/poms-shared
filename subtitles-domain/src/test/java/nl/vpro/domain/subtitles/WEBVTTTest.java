@@ -23,7 +23,7 @@ public class WEBVTTTest {
 
     @Test
     public void toWEBVTTCue() throws IOException {
-        assertThat(WEBVTTANDSRT.formatCue(SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder(), ".").toString()).isEqualTo("1\n" +
+        assertThat(WEBVTTandSRT.formatCue(SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder(), ".").toString()).isEqualTo("1\n" +
             "00:02:02.200 --> 00:02:04.150\n" +
             "888\n" +
             "\n" +
@@ -33,7 +33,7 @@ public class WEBVTTTest {
     @Test
     public void toWEBVTT() throws IOException {
         StringWriter writer = new StringWriter();
-        WEBVTTANDSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitles()).limit(3).collect(Collectors.toList()).iterator(), writer);
+        WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitles()).limit(3).collect(Collectors.toList()).iterator(), writer);
         assertThat(writer.toString()).isEqualTo(
             "WEBVTT\n" +
                 "\n" +
@@ -70,7 +70,7 @@ public class WEBVTTTest {
             "*Dat wil ik doen\n" +
             "in jouw mobiele bakkerij\n" +
             "\n";
-        List<Cue> cues = WEBVTTANDSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example)).collect(Collectors.toList());
+        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example)).collect(Collectors.toList());
         assertThat(cues).hasSize(3);
         assertThat(cues.get(0).getSequence()).isEqualTo(1);
         assertThat(cues.get(0).getContent()).isEqualTo("888");
@@ -82,7 +82,7 @@ public class WEBVTTTest {
     public void parseTimeLine() throws ParseException {
         String timeLine = "2:02.200 --> 2:04.150";
 
-        Cue cue = WEBVTTANDSRT.parseCue("parent", "1", Duration.ofMinutes(2), timeLine, "bla bla");
+        Cue cue = WEBVTTandSRT.parseCue("parent", "1", Duration.ofMinutes(2), timeLine, "bla bla");
 
         assertThat(cue.getStart()).isEqualTo(Duration.parse("PT0M2.2S"));
 

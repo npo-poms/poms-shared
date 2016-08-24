@@ -16,10 +16,10 @@ import org.apache.commons.lang3.StringUtils;
  * @since 4.8
  */
 @Slf4j
-class WEBVTTANDSRT {
+class WEBVTTandSRT {
 
 
-    static String INTRO = "WEBVTT";
+    static String WEBVTT_INTRO = "WEBVTT";
 
 
     static Stream<Cue> parse(String parent, Duration offset,  Reader reader) {
@@ -65,7 +65,7 @@ class WEBVTTANDSRT {
                         String l = stream.next();
                         if (StringUtils.isNotBlank(l)) {
                             if (! readIntro) {
-                                if (INTRO.equals(l.trim())) {
+                                if (WEBVTT_INTRO.equals(l.trim())) {
                                     readIntro = true;
                                     continue;
                                 }
@@ -132,7 +132,7 @@ class WEBVTTANDSRT {
     }
 
     static void formatWEBVTT(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
-        writer.write(INTRO);
+        writer.write(WEBVTT_INTRO);
         writer.write("\n\n");
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
