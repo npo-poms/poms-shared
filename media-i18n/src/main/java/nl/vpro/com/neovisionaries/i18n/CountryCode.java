@@ -1442,6 +1442,23 @@ public enum CountryCode
      */
     NL("Netherlands", "NLD", 528, Assignment.OFFICIALLY_ASSIGNED),
 
+
+    /**
+     * https://en.wikipedia.org/wiki/ISO_3166-2:NL
+     */
+    NL_DR(NL, "Drenthe", "NL-DR"),
+    NL_FL(NL, "Flevoland", "NL_FL"), 
+    NL_FR(NL, "Fryslân", "NL_FR"),
+    NL_GE(NL, "Gelderland", "NL-GE"),
+    NL_GR(NL, "Groningen", "NL-GR"),
+    NL_LI(NL, "Limburg", "NL-LI"),
+    NL_NB(NL, "Noord-Brabant", "NL-NB"),
+    NL_NH(NL, "Noord-Holland", "NL-NH"),
+    NL_OV(NL, "Overijssel", "NL-OV"),
+    NL_UT(NL, "Utrecht", "NL-UT"),
+    NL_ZE(NL, "Zeeland", "NL-ZE"),
+    NL_ZH(NL, "Zuid-Holland", "NL-ZH"),
+
     /**
      * <a href="http://en.wikipedia.org/wiki/Norway">Norway</a>
      * [<a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#NO">NO</a>, NOR, 578,

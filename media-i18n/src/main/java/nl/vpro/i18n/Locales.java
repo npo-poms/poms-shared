@@ -1,6 +1,7 @@
 package nl.vpro.i18n;
 
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
@@ -23,8 +24,12 @@ public class Locales {
     
     public static String getCountryName(CountryCode code, Locale locale) {
         if (code.getIso3166_2() != null) {
-            ResourceBundle bundle = ResourceBundle.getBundle("CountryCode", locale);
-            return bundle.getString(code.getIso3166_2());
+            try {
+                ResourceBundle bundle = ResourceBundle.getBundle("CountryCode", locale);
+                return bundle.getString(code.getIso3166_2());
+            } catch(MissingResourceException mre) {
+                return code.getName();
+            }
         }  else {
             return code.toLocale().getDisplayCountry(locale);
         }
