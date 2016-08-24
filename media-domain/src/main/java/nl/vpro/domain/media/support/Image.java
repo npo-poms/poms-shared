@@ -6,25 +6,11 @@
 
 package nl.vpro.domain.media.support;
 
-import java.util.Date;
-import java.util.Objects;
-import java.util.regex.Pattern;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.URL;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
@@ -32,6 +18,18 @@ import nl.vpro.validation.ImageURI;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.ReleaseDate;
 import nl.vpro.xml.bind.DateToDuration;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.URL;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.util.Date;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * A {@link MediaObject} can have more than one images which should differ in URL and
@@ -371,6 +369,27 @@ public class Image extends PublishableObject implements Ownable {
         }
 
         return true;
+    }
+
+    public static Image of(ImageMetadata metaData) {
+        Image image = new Image();
+        image.setImageUri(metaData.getUrn());
+        image.setType(metaData.getImageType());
+        image.setTitle(metaData.getTitle());
+        image.setDescription(metaData.getDescription());
+        image.setHeight(metaData.getHeight());
+        image.setWidth(metaData.getWidth());
+        return image;
+    }
+
+    public Image copyFrom(ImageMetadata metaData) {
+        setImageUri(metaData.getUrn());
+        setType(metaData.getImageType());
+        setTitle(metaData.getTitle());
+        setDescription(metaData.getDescription());
+        setHeight(metaData.getHeight());
+        setWidth(metaData.getWidth());
+        return this;
     }
 
     @Override
