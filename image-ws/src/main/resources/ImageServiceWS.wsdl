@@ -2,54 +2,77 @@
 <wsdl:definitions name="ImageService" targetNamespace="urn:vpro:ws:image:2009" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:vpro:ws:image:2009" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsdl:types>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="urn:vpro:ws:image:2009" xmlns:tns="urn:vpro:ws:image:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-   <xs:element name="download" type="tns:downloadType"/>
-   <xs:element name="downloadResponse" type="tns:downloadResponseType"/>
-   <xs:element name="imageNotFound" type="tns:imageNotFoundType"/>
-   <xs:element name="upload" type="tns:uploadType"/>
-   <xs:element name="uploadResponse" type="tns:uploadResponseType"/>
-   <xs:complexType name="uploadType">
-      <xs:sequence>
-         <xs:element form="qualified" name="title" type="xs:string"/>
-         <xs:element form="qualified" name="description" type="xs:string"/>
-         <xs:element form="qualified" name="data" ns1:expectedContentTypes="application/octet-stream" type="xs:base64Binary" xmlns:ns1="http://www.w3.org/2005/05/xmlmime"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="uploadResponseType">
-      <xs:sequence>
-         <xs:element form="qualified" name="urn" type="xs:string"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="downloadType">
-      <xs:sequence>
-         <xs:element form="qualified" name="title" type="xs:string"/>
-         <xs:element form="qualified" name="description" type="xs:string"/>
-         <xs:element form="qualified" name="type" type="tns:imageTypeEnum"/>
-         <xs:element form="qualified" name="url" type="xs:string"/>
+  <xs:element name="download" type="tns:downloadType"/>
+  <xs:element name="downloadResponse" type="tns:downloadResponseType"/>
+  <xs:element name="imageNotFound" type="tns:imageNotFoundType"/>
+  <xs:element name="upload" type="tns:uploadType"/>
+  <xs:element name="uploadResponse" type="tns:uploadResponseType"/>
+  <xs:complexType name="uploadType">
+    <xs:sequence>
+      <xs:element form="qualified" name="title" type="xs:string"/>
+      <xs:element form="qualified" name="description" type="xs:string"/>
+       <xs:element form="qualified" name="data" ns1:expectedContentTypes="application/octet-stream" type="xs:base64Binary" xmlns:ns1="http://www.w3.org/2005/05/xmlmime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="uploadResponseType">
+    <xs:sequence>
+      <xs:element form="qualified" name="urn" type="xs:string"/>
+      <xs:element minOccurs="0" name="imageMetadata" type="tns:imageMetadataType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="imageMetadataType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="urn" type="xs:string"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="height" type="xs:int"/>
+      <xs:element minOccurs="0" name="width" type="xs:int"/>
+      <xs:element minOccurs="0" name="heightInMm" type="xs:float"/>
+      <xs:element minOccurs="0" name="widthInMm" type="xs:float"/>
+      <xs:element minOccurs="0" name="imageType" type="tns:imageTypeEnum"/>
+      <xs:element minOccurs="0" name="mimeType" type="xs:string"/>
+      <xs:element minOccurs="0" name="size" type="xs:long"/>
+      <xs:element minOccurs="0" name="downloadUrl" type="xs:anyURI"/>
+      <xs:element minOccurs="0" name="etag" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="downloadType">
+    <xs:sequence>
+      <xs:element form="qualified" name="title" type="xs:string"/>
+      <xs:element form="qualified" name="description" type="xs:string"/>
+      <xs:element form="qualified" name="type" type="tns:imageTypeEnum"/>
+      <xs:element form="qualified" name="url" type="xs:string"/>
          <xs:element form="qualified" name="principalId" type="xs:string"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="downloadResponseType">
-      <xs:sequence>
-         <xs:element form="qualified" name="urn" type="xs:string"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="imageNotFoundType">
-      <xs:sequence>
-         <xs:element minOccurs="0" name="message" type="xs:string"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:simpleType name="imageTypeEnum">
-      <xs:restriction base="xs:string">
-         <xs:enumeration value="PICTURE"/>
-         <xs:enumeration value="PORTRAIT"/>
-         <xs:enumeration value="STILL"/>
-         <xs:enumeration value="LOGO"/>
-         <xs:enumeration value="ICON"/>
-         <xs:enumeration value="BACKGROUND"/>
-      </xs:restriction>
-   </xs:simpleType>
-   <xs:element name="downloadFault" nillable="true" type="tns:imageNotFoundType"/>
-</xs:schema>  </wsdl:types>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="downloadResponseType">
+    <xs:sequence>
+      <xs:element form="qualified" name="urn" type="xs:string"/>
+      <xs:element minOccurs="0" name="imageMetadata" type="tns:imageMetadataType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="imageNotFoundType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="imageTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PICTURE"/>
+      <xs:enumeration value="PORTRAIT"/>
+      <xs:enumeration value="STILL"/>
+      <xs:enumeration value="LOGO"/>
+      <xs:enumeration value="ICON"/>
+      <xs:enumeration value="PROMO_LANDSCAPE"/>
+      <xs:enumeration value="PROMO_PORTRAIT"/>
+      <xs:enumeration value="BACKGROUND"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="imageMetadata" type="tns:imageMetadataType"/>
+  <xs:element name="downloadFault" nillable="true" type="tns:imageNotFoundType"/>
+</xs:schema>
+  </wsdl:types>
   <wsdl:message name="DownloadFault">
     <wsdl:part element="tns:downloadFault" name="DownloadFault">
     </wsdl:part>

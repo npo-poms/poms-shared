@@ -1,6 +1,7 @@
 package nl.vpro.ws.image;
 
-import java.util.concurrent.Future;
+import nl.vpro.domain.image.ImageMetadata;
+import nl.vpro.domain.image.ImageType;
 
 import javax.activation.DataHandler;
 import javax.jws.WebMethod;
@@ -11,8 +12,7 @@ import javax.xml.ws.AsyncHandler;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.Response;
 import javax.xml.ws.ResponseWrapper;
-
-import nl.vpro.domain.image.ImageType;
+import java.util.concurrent.Future;
 
 /**
  * 'Run as' Wrapper for ImageWebService
@@ -37,7 +37,7 @@ public interface RunAsImageWebService {
     @ResponseWrapper(
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
-    String upload(
+    ImageMetadata upload(
     	@WebParam(name = "principalId", targetNamespace = "") String principalId,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
@@ -83,7 +83,7 @@ public interface RunAsImageWebService {
     @ResponseWrapper(
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
-    String download(
+    ImageMetadata download(
     	@WebParam(name = "principalId", targetNamespace = "") String principalId,
     	@WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
