@@ -11,6 +11,7 @@ import java.io.Writer;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Locale;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
@@ -25,6 +26,7 @@ import javax.xml.validation.Validator;
 
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -32,6 +34,7 @@ import org.xml.sax.SAXException;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
@@ -77,6 +80,11 @@ public class MediaObjectXmlSchemaTest {
         schemaValidator = schema.newValidator();
 
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
+    }
+    
+    @Before
+    public void init() {
+        Locale.setDefault(Locales.DUTCH);
     }
 
     @Test
