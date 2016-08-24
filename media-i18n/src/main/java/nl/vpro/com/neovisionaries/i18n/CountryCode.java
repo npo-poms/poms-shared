@@ -737,7 +737,52 @@ public enum CountryCode
             return Locale.UK;
         }
     },
-    GB_GBN(GB, "GB-GBN") {
+    /**
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
+     */
+    GB_GBN(GB, "Great Britain", "GB-GBN") {
+        @Override
+        public Locale toLocale() {
+            return Locale.UK;
+        }
+    },
+    /**
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
+     */
+    GB_EAW(GB, "England and Wales", "GBEAW") {
+        @Override
+        public Locale toLocale() {
+            return Locale.UK;
+        }
+    },
+    /**
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
+     */
+    GB_ENG(GB, "England", "GB-ENG") {
+        @Override
+        public Locale toLocale() {
+            return Locale.UK;
+        }
+    },
+    /**
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
+     */
+    GB_NIR(GB, "North Ireland", "GB-NIR") {
+        @Override
+        public Locale toLocale() {
+            return Locale.UK;
+        }
+    },
+    GB_SCT(GB, "North Scotland", "GB-SCT") {
+        @Override
+        public Locale toLocale() {
+            return Locale.UK;
+        }
+    },
+    /**
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
+     */
+    GB_WLS(GB, "Wales", "GB-WLS") {
         @Override
         public Locale toLocale() {
             return Locale.UK;
@@ -2266,8 +2311,8 @@ public enum CountryCode
     private final String iso3166_2;
     private final CountryCode iso3166_1;
 
-    CountryCode(CountryCode c, String iso3166_2) {
-        this.name = c.name;
+    CountryCode(CountryCode c, String name, String iso3166_2) {
+        this.name = name;
         this.alpha3 = c.alpha3;
         this.numeric = c.numeric;
         this.assignment = c.assignment;
