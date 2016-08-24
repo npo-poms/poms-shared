@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.Locale;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,6 +27,7 @@ import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
@@ -45,6 +47,7 @@ public class MediaObjectJsonSchemaTest {
     }
     @Before
     public void before() {
+        Locale.setDefault(Locales.DUTCH);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }
 
