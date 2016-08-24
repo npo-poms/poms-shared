@@ -740,54 +740,12 @@ public enum CountryCode
     /**
      * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
      */
-    GB_GBN(GB, "Great Britain", "GB-GBN") {
-        @Override
-        public Locale toLocale() {
-            return Locale.UK;
-        }
-    },
-    /**
-     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
-     */
-    GB_EAW(GB, "England and Wales", "GB-EAW") {
-        @Override
-        public Locale toLocale() {
-            return Locale.UK;
-        }
-    },
-    /**
-     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
-     */
-    GB_ENG(GB, "England", "GB-ENG") {
-        @Override
-        public Locale toLocale() {
-            return Locale.UK;
-        }
-    },
-    /**
-     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
-     */
-    GB_NIR(GB, "North Ireland", "GB-NIR") {
-        @Override
-        public Locale toLocale() {
-            return Locale.UK;
-        }
-    },
-    GB_SCT(GB, "Scotland", "GB-SCT") {
-        @Override
-        public Locale toLocale() {
-            return Locale.UK;
-        }
-    },
-    /**
-     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:GB">United Kingdom</a>
-     */
-    GB_WLS(GB, "Wales", "GB-WLS") {
-        @Override
-        public Locale toLocale() {
-            return Locale.UK;
-        }
-    },
+    GB_GBN(GB, "Great Britain", "GB-GBN"),
+    GB_EAW(GB, "England and Wales", "GB-EAW"),
+    GB_ENG(GB, "England", "GB-ENG"),
+    GB_NIR(GB, "North Ireland", "GB-NIR"),
+    GB_SCT(GB, "Scotland", "GB-SCT"),
+    GB_WLS(GB, "Wales", "GB-WLS"),
     
     /**
      * <a href="http://en.wikipedia.org/wiki/Grenada">Grenada</a>
