@@ -26,7 +26,7 @@ public interface ImageWebService {
 
     @WebMethod
     @WebResult(
-        name = "urn",
+        name = "imageMetadata",
         targetNamespace = "")
     @RequestWrapper(
         localName = "upload",
@@ -69,7 +69,7 @@ public interface ImageWebService {
 
     @WebMethod
     @WebResult(
-        name = "urn",
+        name = "imageMetadata",
         targetNamespace = "")
     @RequestWrapper(
         localName = "download",
