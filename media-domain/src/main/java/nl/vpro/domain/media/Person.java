@@ -157,7 +157,6 @@ public class Person extends DomainObject {
                 .map(GTAARecord::getUri)
                 .orElse(null);
     }
-
     public void setGtaaUri(String uri) {
         this.gtaaRecord= new GTAARecord(uri, null);
     }
