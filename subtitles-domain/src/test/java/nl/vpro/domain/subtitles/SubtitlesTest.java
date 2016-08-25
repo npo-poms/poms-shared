@@ -18,6 +18,7 @@ import org.xml.sax.SAXException;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static nl.vpro.i18n.Locales.DUTCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SubtitlesTest {
@@ -26,7 +27,7 @@ public class SubtitlesTest {
 
     @Test
     public void testMarshalToXml() throws IOException, SAXException {
-        Subtitles subtitles = Subtitles.webvtt("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), SubtitlesUtil.DUTCH,  "Ondertiteling tekst");
+        Subtitles subtitles = Subtitles.webvtt("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), DUTCH,  "Ondertiteling tekst");
         subtitles.setCreationDate(Instant.ofEpochMilli(0));
         subtitles.setLastModified(Instant.ofEpochMilli(0));
 
@@ -55,7 +56,7 @@ public class SubtitlesTest {
 
     @Test
     public void json() throws Exception {
-        Subtitles subtitles = Subtitles.webvtt("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), SubtitlesUtil.DUTCH, "Ondertiteling tekst");
+        Subtitles subtitles = Subtitles.webvtt("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), DUTCH, "Ondertiteling tekst");
         subtitles.setCreationDate(Instant.ofEpochMilli(0));
         subtitles.setLastModified(Instant.ofEpochMilli(0));
 
