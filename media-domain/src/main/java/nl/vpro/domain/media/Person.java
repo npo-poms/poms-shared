@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import java.util.Objects;
+import java.util.Optional;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -11,9 +14,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import nl.vpro.beeldengeluid.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.DomainObject;
 import nl.vpro.validation.NoHtml;
-
-import java.util.Objects;
-import java.util.Optional;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -84,42 +84,19 @@ public class Person extends DomainObject {
         return new Person(source, parent);
     }
 
-    /**
-     * Gets the value of the givenName property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
     public String getGivenName() {
         return givenName;
     }
 
-    /**
-     * Sets the value of the givenName property.
-     *
-     * @param value allowed object is
-     *              {@link String }
-     */
     public void setGivenName(String value) {
         this.givenName = value;
     }
 
-    /**
-     * Gets the value of the familyName property.
-     *
-     * @return possible object is
-     *         {@link String }
-     */
     public String getFamilyName() {
         return familyName;
     }
 
-    /**
-     * Sets the value of the familyName property.
-     *
-     * @param value allowed object is
-     *              {@link String }
-     */
+
     public void setFamilyName(String value) {
         this.familyName = value;
     }
@@ -179,6 +156,10 @@ public class Person extends DomainObject {
         return Optional.ofNullable(gtaaRecord)
                 .map(GTAARecord::getUri)
                 .orElse(null);
+    }
+
+    public void setGtaaUri(String uri) {
+        this.gtaaRecord= new GTAARecord(uri, null);
     }
 
     @Override
