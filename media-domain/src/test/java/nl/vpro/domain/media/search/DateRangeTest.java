@@ -4,6 +4,7 @@ import java.time.Instant;
 
 import org.junit.Test;
 
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -51,6 +52,17 @@ public class DateRangeTest {
             "  \"stop\" : 200\n" +
             "}");
 
+
+    }
+
+    @Test
+    public void jsonString() throws Exception {
+        String example = "{\n" +
+            "  \"start\" :\"2016-08-10T22:00:00.000Z\",\n" +
+            "  \"stop\" : 200\n" +
+            "}";
+        DateRange r = Jackson2Mapper.getInstance().readerFor(DateRange.class).readValue(example);
+        assertThat(r.getStart().toEpochMilli()).isEqualTo(1470866400000L);
 
     }
 
