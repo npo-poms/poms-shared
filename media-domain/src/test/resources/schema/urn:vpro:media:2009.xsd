@@ -430,6 +430,7 @@
       <xs:enumeration value="GROUP"/>
       <xs:enumeration value="SERIES"/>
       <xs:enumeration value="SEASON"/>
+      <xs:enumeration value="UMBRELLA"/>
       <xs:enumeration value="ARCHIVE"/>
       <xs:enumeration value="COLLECTION"/>
       <xs:enumeration value="PLAYLIST"/>
@@ -847,6 +848,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="SERIES"/>
       <xs:enumeration value="SEASON"/>
+      <xs:enumeration value="UMBRELLA"/>
       <xs:enumeration value="ARCHIVE"/>
       <xs:enumeration value="COLLECTION"/>
       <xs:enumeration value="PLAYLIST"/>
