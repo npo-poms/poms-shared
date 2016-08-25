@@ -4,17 +4,17 @@
  */
 package nl.vpro.domain.image;
 
-import nl.vpro.domain.Xmlns;
+import java.net.URL;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.net.URL;
+
+import nl.vpro.domain.Xmlns;
 
 /**
  * @author rico
- * @date 24/08/2016
  */
 @SuppressWarnings("serial")
 @XmlRootElement(name = "imageMetadata", namespace = Xmlns.IMAGE_NAMESPACE)
@@ -72,7 +72,7 @@ public class ImageMetadata {
         metaData.title = image.getTitle();
         metaData.description = image.getDescription();
         metaData.height = image.getHeight();
-        metaData.width = image.getHeight();
+        metaData.width = image.getWidth();
         metaData.heightInMm = image.getHeightInMm();
         metaData.widthInMm = image.getWidthInMm();
         metaData.size = image.getSize();
