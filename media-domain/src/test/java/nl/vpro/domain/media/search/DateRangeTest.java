@@ -5,7 +5,9 @@ import java.time.Instant;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import nl.vpro.jackson2.DateModule;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -58,11 +60,16 @@ public class DateRangeTest {
 
     @Test
     public void jsonString() throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        JavaTimeModule javaTimeModule = new JavaTimeModule();
+        mapper.registerModule(javaTimeModule);
+        mapper.registerModule(new DateModule());
+
         String example = "{\n" +
             "  \"start\" :\"2016-08-10T22:00:00.000Z\",\n" +
             "  \"stop\" : 200\n" +
             "}";
-        DateRange r = new ObjectMapper().readerFor(DateRange.class).readValue(example);
+        DateRange r = mapper.readerFor(DateRange.class).readValue(example);
         assertThat(r.getStart().toEpochMilli()).isEqualTo(1470866400000L);
 
     }
