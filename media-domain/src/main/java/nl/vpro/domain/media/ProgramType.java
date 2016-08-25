@@ -17,15 +17,15 @@ import javax.xml.bind.annotation.XmlType;
 public enum ProgramType implements SubMediaType {
 
 
-    BROADCAST(MediaType.BROADCAST),
+    BROADCAST(MediaType.BROADCAST, true),
 
-    MOVIE(MediaType.MOVIE),
+    MOVIE(MediaType.MOVIE, true),
 
     TRAILER(MediaType.TRAILER),
 
     CLIP(MediaType.CLIP),
 
-    STRAND(MediaType.STRAND),
+    STRAND(MediaType.STRAND, true),
 
     TRACK(MediaType.TRACK),
 
@@ -41,9 +41,15 @@ public enum ProgramType implements SubMediaType {
     public static final String URN_PREFIX = "urn:vpro:media:program:";
 
     private MediaType mediaType;
+    private boolean hasEpisodeOf;
+
+    ProgramType(MediaType mediaType, boolean hasEpisodeOf) {
+        this.mediaType = mediaType;
+        this.hasEpisodeOf = hasEpisodeOf;
+    }
 
     ProgramType(MediaType mediaType) {
-        this.mediaType = mediaType;
+        this(mediaType, false);
     }
 
 
