@@ -24,6 +24,8 @@ import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
 
+import static nl.vpro.i18n.Locales.DUTCH;
+
 /**
  * @author Michiel Meeuwissen
  * @since 4.8
@@ -53,7 +55,7 @@ public class StandaloneCue extends Cue {
 
 
     public static StandaloneCue tt888(Cue cue) {
-        return new StandaloneCue(cue, SubtitlesUtil.DUTCH, SubtitlesType.CAPTION, Duration.ZERO);
+        return new StandaloneCue(cue, DUTCH, SubtitlesType.CAPTION, Duration.ZERO);
     }
 
     protected StandaloneCue() {

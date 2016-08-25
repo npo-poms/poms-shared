@@ -85,8 +85,12 @@ public class WEBVTTTest {
         Cue cue = WEBVTTandSRT.parseCue("parent", "1", Duration.ofMinutes(2), timeLine, "bla bla");
 
         assertThat(cue.getStart()).isEqualTo(Duration.parse("PT0M2.2S"));
+    }
 
-
+    @Test
+    public void parseDuration() {
+        Duration duration = WEBVTTandSRT.parseDuration("00:00:20.000");
+        assertThat(duration).isEqualTo(Duration.ofSeconds(20));
     }
 
 }

@@ -20,9 +20,6 @@ import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
 @Slf4j
 public class SubtitlesUtil {
 
-    public static Locale DUTCH = new Locale("nl", "NL");
-    public static Locale FLEMISH = new Locale("nl", "BE");
-
 
     public static Subtitles ebu(String parent, Duration offset, Locale locale, InputStream input) throws IOException {
         StringWriter w = new StringWriter();
