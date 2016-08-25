@@ -18,7 +18,8 @@ public class PersonTest {
     public void json() throws Exception {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaRecord(new GTAARecord("http://data.beeldengeluid.nl/gtaa/1869521", Status.approved));
-        Jackson2TestUtil.roundTripAndSimilar(person, "{\n" +
+        Jackson2TestUtil.roundTripAndSimilar(person,
+            "{\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"Puk\",\n" +
             "  \"role\" : \"ACTOR\",\n" +
@@ -32,7 +33,8 @@ public class PersonTest {
     public void xml() throws Exception {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaRecord(new GTAARecord("http://data.beeldengeluid.nl/gtaa/1869521", Status.approved));
-        JAXBTestUtil.roundTripAndSimilar(person, "<local:person role=\"ACTOR\" gtaaUri=\"http://data.beeldengeluid.nl/gtaa/1869521\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
+        JAXBTestUtil.roundTripAndSimilar(person,
+            "<local:person role=\"ACTOR\" gtaaUri=\"http://data.beeldengeluid.nl/gtaa/1869521\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
             "    <givenName>Pietje</givenName>\n" +
             "    <familyName>Puk</familyName>\n" +
             "</local:person>");
