@@ -8,7 +8,6 @@ package nl.vpro.domain.image;
 
 /**
  * @author arne
- * @version $Id$
  */
 public class UnsupportedImageFormatException extends RuntimeException {
 
