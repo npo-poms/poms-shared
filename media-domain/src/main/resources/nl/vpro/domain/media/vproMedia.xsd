@@ -115,6 +115,7 @@
       <xs:enumeration value="UG ARCHIVE"/>
       <xs:enumeration value="SEASON"/>
       <xs:enumeration value="SERIES"/>
+      <xs:enumeration value="UMBRELLA"/>
       <xs:enumeration value="BROADCAST"/>
       <xs:enumeration value="MOVIE"/>
       <xs:enumeration value="TRAILER"/>
@@ -138,6 +139,7 @@
       <xs:enumeration value="COLLECTION"/>
       <xs:enumeration value="SEASON"/>
       <xs:enumeration value="SERIES"/>
+      <xs:enumeration value="UMBRELLA"/>
     </xs:restriction>
   </xs:simpleType>
 
