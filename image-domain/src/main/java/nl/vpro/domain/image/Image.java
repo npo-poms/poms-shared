@@ -23,7 +23,6 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.support.PublishableObject;
 
 @Entity
-@SuppressWarnings("serial")
 @XmlRootElement(name = "image", namespace = Xmlns.IMAGE_NAMESPACE)
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(
@@ -41,6 +40,7 @@ import nl.vpro.domain.image.support.PublishableObject;
         "etag",
         "data"})
 public class Image extends PublishableObject<Image> implements Resource<Image>, Identifiable {
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -82,7 +82,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
     @Transient
     private InputStream cachedInputStream;
 
-    Image() {
+    public Image() {
     }
 
     public Image(String title) {

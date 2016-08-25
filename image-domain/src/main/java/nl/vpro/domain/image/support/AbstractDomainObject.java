@@ -15,14 +15,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import nl.vpro.domain.Xmlns;
+
 /**
  * @author roekoe
- * @version $Id$
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(name = "domainType", namespace = "urn:vpro:image:2009")
+@XmlType(name = "domainType", namespace = Xmlns.IMAGE_NAMESPACE)
 public abstract class AbstractDomainObject<T extends AbstractDomainObject> implements DomainObject<T> {
 
     @Id

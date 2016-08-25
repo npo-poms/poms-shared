@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
 
 /**
@@ -17,13 +18,12 @@ import nl.vpro.domain.user.Editor;
  *
  * @author arne
  * @author roekoe
- * @version $Id$
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(name = "publishableType", namespace = "urn:vpro:image:2009")
+@XmlType(name = "publishableType", namespace = Xmlns.IMAGE_NAMESPACE)
 public abstract class PublishableObject<T extends PublishableObject> extends AbstractDomainObject<T> implements Modifiable<T> {
 
     @ManyToOne(optional = false)
