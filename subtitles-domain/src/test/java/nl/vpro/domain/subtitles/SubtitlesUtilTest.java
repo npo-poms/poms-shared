@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
+import static nl.vpro.i18n.Locales.DUTCH;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
@@ -31,7 +32,7 @@ public class SubtitlesUtilTest {
 
     protected static Subtitles getSubtitles() throws IOException {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/PRID_VPRO_1140017.txt");
-        return SubtitlesUtil.ebu("VPRO_1140017", Duration.ofMillis(2 * 60 * 1000), SubtitlesUtil.DUTCH, example);
+        return SubtitlesUtil.ebu("VPRO_1140017", Duration.ofMillis(2 * 60 * 1000), DUTCH, example);
     }
 
     @Test
@@ -47,7 +48,7 @@ public class SubtitlesUtilTest {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POW_00943209.utf8.txt");
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(example, "UTF-8"), w);
-        Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), SubtitlesUtil.DUTCH, SubtitlesFormat.EBU, w.toString());
+        Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), DUTCH, SubtitlesFormat.EBU, w.toString());
         subtitles.setType(SubtitlesType.CAPTION);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);

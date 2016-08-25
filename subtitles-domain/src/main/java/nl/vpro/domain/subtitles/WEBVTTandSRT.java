@@ -164,7 +164,7 @@ class WEBVTTandSRT {
             hours = 0L;
         }
         Long minutes;
-        if (split.length == 2) {
+        if (split.length >= 2) {
             minutes =  Long.parseLong(split[index]);
             index++;
         } else {

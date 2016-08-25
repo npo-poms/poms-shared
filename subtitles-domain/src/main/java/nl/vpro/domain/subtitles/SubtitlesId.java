@@ -3,6 +3,8 @@ package nl.vpro.domain.subtitles;
 import java.io.Serializable;
 import java.util.Locale;
 
+import static nl.vpro.i18n.Locales.DUTCH;
+
 /**
  * @author Michiel Meeuwissen
  * @since 4.7.7
@@ -14,7 +16,7 @@ public class SubtitlesId implements Serializable {
     private Locale language;
 
     public static SubtitlesId ebuCaption(String mid) {
-        return new SubtitlesId(mid, SubtitlesUtil.DUTCH, SubtitlesType.CAPTION);
+        return new SubtitlesId(mid, DUTCH, SubtitlesType.CAPTION);
     }
 
     public SubtitlesId()  {

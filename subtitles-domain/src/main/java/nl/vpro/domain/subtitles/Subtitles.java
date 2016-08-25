@@ -30,6 +30,8 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
 
+import static nl.vpro.i18n.Locales.DUTCH;
+
 /**
  * Closed captions (subtitles for hearing impaired). We could also store translation subtitles in this.
  *
@@ -99,7 +101,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     }
 
     public static Subtitles ebuCaption(String mid, Duration offset, String content) {
-        Subtitles subtitles = new Subtitles(mid, offset, SubtitlesUtil.DUTCH, SubtitlesFormat.EBU, content);
+        Subtitles subtitles = new Subtitles(mid, offset, DUTCH, SubtitlesFormat.EBU, content);
         subtitles.setType(SubtitlesType.CAPTION);
         return subtitles;
     }
