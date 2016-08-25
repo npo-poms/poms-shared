@@ -9,11 +9,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.validation.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.validation.WarningValidatorGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -141,10 +143,10 @@ public  abstract class MediaUpdate<M extends MediaObject> {
         return violations().isEmpty();
     }
 
-    public Set<ConstraintViolation<MediaUpdate<M>>> violations() {
+    public Set<ConstraintViolation<MediaUpdate<M>>> violations(Class<?>... groups) {
         fetch();
         if (VALIDATOR != null) {
-            return VALIDATOR.validate(this);
+            return VALIDATOR.validate(this, groups);
         } else {
             LOG.warn("Cannot validate since no validator available");
             return Collections.emptySet();
@@ -617,6 +619,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
 
     @XmlElement
+    @NotNull(groups = { WarningValidatorGroup.class })
     public AgeRating getAgeRating() {
         return build().getAgeRating();
     }
