@@ -42,7 +42,7 @@ public enum MediaType {
         }
 
     },
-    
+
     PROGRAM {
         @Override
         public String toString() {
@@ -65,8 +65,8 @@ public enum MediaType {
             return true;
         }
     },
-    
-    
+
+
     BROADCAST {
         @Override
         public String toString() {
@@ -87,11 +87,6 @@ public enum MediaType {
 
         @Override
         public boolean hasSegments() {
-            return true;
-        }
-
-        @Override
-        public boolean hasEpisodeOf() {
             return true;
         }
 
@@ -133,11 +128,6 @@ public enum MediaType {
             Program p = new Program();
             p.setType(getSubType());
             return p;
-        }
-
-        @Override
-        public boolean hasEpisodeOf() {
-            return true;
         }
 
         @Override
@@ -191,11 +181,6 @@ public enum MediaType {
         }
 
         @Override
-        public boolean hasEpisodeOf() {
-            return true;
-        }
-
-        @Override
         public ProgramType getSubType() {
             return ProgramType.MOVIE;
 
@@ -220,7 +205,7 @@ public enum MediaType {
             return null;
         }
     },
-    
+
     SERIES {
         @Override
         public String toString() {
@@ -242,13 +227,6 @@ public enum MediaType {
         @Override
         public GroupType getSubType() {
             return GroupType.SERIES;
-        }
-
-
-
-        @Override
-        public boolean hasEpisodes() {
-            return true;
         }
 
         @Override
@@ -274,10 +252,6 @@ public enum MediaType {
             return Group.class;
         }
 
-        @Override
-        public boolean hasEpisodes() {
-            return true;
-        }
 
         @Override
         public boolean hasOrdering() {
@@ -287,6 +261,34 @@ public enum MediaType {
         @Override
         public GroupType getSubType() {
             return GroupType.SEASON;
+        }
+    },
+    UMBRELLA {
+        @Override
+        public String toString() {
+            return "Paraplu";
+        }
+
+        @Override
+        public Group getMediaInstance() {
+            Group g = new Group();
+            g.setType(getSubType());
+            return g;
+        }
+
+        @Override
+        public Class<Group> getMediaObjectClass() {
+            return Group.class;
+        }
+
+        @Override
+        public boolean hasOrdering() {
+            return true;
+        }
+
+        @Override
+        public GroupType getSubType() {
+            return GroupType.UMBRELLA;
         }
     },
     // MSE-1453
@@ -589,8 +591,8 @@ public enum MediaType {
         return false;
     }
 
-    public boolean hasEpisodeOf() {
-        return false;
+    public final boolean hasEpisodeOf() {
+        return getSubType().hasEpisodeOf();
     }
 
     public MediaType[] preferredEpisodeOfTypes() {
@@ -609,8 +611,8 @@ public enum MediaType {
         return new MediaType[]{MediaType.SERIES, MediaType.SEASON};
     }
 
-    public boolean hasEpisodes() {
-        return false;
+    public final boolean hasEpisodes() {
+        return getSubType().canContainEpisodes();
     }
 
     public MediaType[] preferredEpisodeTypes() {

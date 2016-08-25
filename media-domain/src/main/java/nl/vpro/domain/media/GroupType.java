@@ -23,6 +23,7 @@ public enum GroupType implements SubMediaType {
 
     SERIES(MediaType.SERIES, true),
     SEASON(MediaType.SEASON, true),
+    UMBRELLA(MediaType.UMBRELLA, false),
     @Deprecated   // MSE-1453
     ARCHIVE(MediaType.ARCHIVE),
     COLLECTION(MediaType.COLLECTION),
