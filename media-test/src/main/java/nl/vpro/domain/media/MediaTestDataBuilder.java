@@ -83,6 +83,11 @@ public interface MediaTestDataBuilder<
         return new SegmentTestDataBuilder();
     }
 
+
+    static SegmentTestDataBuilder segment(Program parent) {
+        return new SegmentTestDataBuilder().parent(parent);
+    }
+
     static SegmentTestDataBuilder segment(Segment segment) {
         return new SegmentTestDataBuilder(segment);
     }
