@@ -180,7 +180,11 @@ public interface MediaTestDataBuilder<
     }
 
     default T published() {
-        return workflow(Workflow.PUBLISHED);
+        if (build().isMerged()) {
+            return workflow(Workflow.MERGED);
+        } else {
+            return workflow(Workflow.PUBLISHED);
+        }
     }
 
     default T withUrn() {
