@@ -237,7 +237,9 @@ public class Editor extends AbstractUser {
             allowedPortalCache = new TreeSet<>();
 
             for(PortalEditor rel : portals) {
-                allowedPortalCache.add(rel.getOrganization());
+                if (rel.getOrganization() != null) {
+                    allowedPortalCache.add(rel.getOrganization());
+                }
             }
             allowedPortalCache = Collections.unmodifiableSortedSet(allowedPortalCache);
         }
@@ -283,6 +285,10 @@ public class Editor extends AbstractUser {
     }
 
     void addPortal(Portal portal) {
+        if (portal == null) {
+            LOG.warn("Cannot add null to {}", this);
+            return;
+        }
         PortalEditor toAdd = new PortalEditor(this, portal);
         if(portals.add(toAdd)) {
             allowedPortalCache = null;
@@ -311,6 +317,10 @@ public class Editor extends AbstractUser {
     }
 
     void addThirdParty(ThirdParty thirdParty) {
+        if (thirdParty == null) {
+            LOG.warn("Cannot add null to {}", this);
+            return;
+        }
         ThirdPartyEditor toAdd = new ThirdPartyEditor(this, thirdParty);
         toAdd.setActive(true);
         if(thirdParties.add(toAdd)) {
