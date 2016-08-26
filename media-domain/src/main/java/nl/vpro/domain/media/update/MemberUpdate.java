@@ -6,8 +6,6 @@ package nl.vpro.domain.media.update;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.Xmlns;
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberUpdateType")
 @XmlRootElement(name = "memberUpdate")
