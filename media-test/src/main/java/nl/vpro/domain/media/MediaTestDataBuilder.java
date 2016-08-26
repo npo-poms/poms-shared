@@ -424,6 +424,15 @@ public interface MediaTestDataBuilder<
             new Image(OwnerType.NEBO, "urn:vpro:image:8888"));
     }
 
+    default T withPublishedImages() {
+        return images(
+            image(OwnerType.BROADCASTER, "urn:vpro:image:1234", Workflow.PUBLISHED),
+            image(OwnerType.BROADCASTER, "urn:vpro:image:5678", Workflow.PUBLISHED)
+        );
+    }
+
+
+
     default T withAuthorityRecord() {
         return authoritativeRecord(Platform.INTERNETVOD);
     }
@@ -438,6 +447,12 @@ public interface MediaTestDataBuilder<
 
     default T withMergedTo() {
         return mergedTo(MediaBuilder.group().type(GroupType.SEASON).build());
+    }
+
+    static Image image(OwnerType ownerType, String urn, Workflow workflow) {
+        Image image = new Image(ownerType, urn);
+        image.setWorkflow(workflow);
+        return image;
     }
 
 
