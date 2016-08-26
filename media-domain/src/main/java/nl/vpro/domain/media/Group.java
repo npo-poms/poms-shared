@@ -6,11 +6,12 @@
  */
 package nl.vpro.domain.media;
 
+import java.util.Date;
+import java.util.TreeSet;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
-import java.util.Date;
-import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,7 +106,7 @@ public class Group extends MediaObject {
         }
 
         if(member.memberOf == null) {
-            member.memberOf = new TreeSet<MemberRef>();
+            member.memberOf = new TreeSet<>();
         }
 
         MemberRef memberRef = new MemberRef(member, this, null);
