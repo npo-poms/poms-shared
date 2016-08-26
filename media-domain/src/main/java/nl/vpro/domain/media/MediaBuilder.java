@@ -487,6 +487,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
+    default B memberOf(MediaObject media) throws CircularReferenceException {
+        return memberOf(media, 1);
+    }
+
 
     default B memberOf(String mid, Integer number) throws CircularReferenceException {
         return memberOf(new MemberRef(mid, number));
@@ -805,6 +809,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         public T parent(ProgramUpdate parent) {
             build().setParent(parent.fetch());
+            return (T) this;
+        }
+
+        public T parent(Program parent) {
+            build().setParent(parent);
             return (T) this;
         }
 
