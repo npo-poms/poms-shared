@@ -7,6 +7,7 @@ package nl.vpro.domain.media;
 import java.io.StringWriter;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -121,6 +122,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return creationDate(toDate(date));
     }
 
+    default B creationDate(ZonedDateTime date) {
+        return creationDate(toDate(date));
+    }
     default B creationDate(LocalDateTime date) {
         return creationDate(fromLocalDate(date));
     }
@@ -139,6 +143,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return lastModified(toDate(date));
     }
 
+    default B lastModified(ZonedDateTime date) {
+        return lastModified(toDate(date));
+    }
+
     default B lastModified(LocalDateTime date) {
         return lastModified(fromLocalDate(date));
     }
@@ -150,6 +158,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B publishStart(Instant date) {
+        return publishStart(toDate(date));
+    }
+    default B publishStart(ZonedDateTime date) {
         return publishStart(toDate(date));
     }
 
