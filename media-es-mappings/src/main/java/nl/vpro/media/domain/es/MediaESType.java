@@ -13,7 +13,11 @@ public enum MediaESType {
     deletedprogram,
     deletedgroup,
     deletedsegment,
-    memberRef;
+    programMemberRef,
+    groupMemberRef,
+    segmentMemberRef,
+    episodeRef
+    ;
 
 
 
@@ -22,6 +26,9 @@ public enum MediaESType {
     }
 
     public static MediaESType[] MEDIAOBJECTS = {program, group, segment};
+
+    public static MediaESType[] MEMBERREFS= {programMemberRef, groupMemberRef, segmentMemberRef};
+
 
     public static MediaESType[] DELETED_MEDIAOBJECTS = {deletedprogram, deletedgroup, deletedsegment};
 
@@ -33,6 +40,11 @@ public enum MediaESType {
 
     public static String[] mediaObjects() {
         return toString(MEDIAOBJECTS);
+    }
+
+
+    public static String[] memberRefs() {
+        return toString(MEMBERREFS);
     }
 
     public static String[] deletedMediaObjects() {
