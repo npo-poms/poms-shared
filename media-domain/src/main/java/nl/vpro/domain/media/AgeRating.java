@@ -45,6 +45,11 @@ public enum AgeRating implements Displayable {
         }
     }
 
+    public String getXmlValue() {
+        String n = name();
+        return n.startsWith("_") ? n.substring(1) : n;
+    }
+
     public static AgeRating valueOf(Short kort) {
         if (kort == null) {
             return ALL;
