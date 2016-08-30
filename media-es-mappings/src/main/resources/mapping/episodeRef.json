@@ -1,0 +1,38 @@
+{
+  "episodeRef": {
+    "_parent": {
+      "type": "group",
+      "property": "mid"
+    },
+    "dynamic": "strict",
+    "properties": {
+      "added": {
+        "type": "date",
+        "format": "date_time"
+      },
+      "highlighted": {
+        "type": "boolean"
+      },
+      "index": {
+        "type": "long"
+      },
+      "midRef": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "type": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "urnRef": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "childRef": {
+        "type": "string",
+        "index": "not_analyzed"
+      }
+
+    }
+  }
+}

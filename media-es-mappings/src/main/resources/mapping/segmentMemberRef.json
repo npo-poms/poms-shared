@@ -1,7 +1,7 @@
 {
-  "memberRef": {
+  "segmentMemberRef": {
     "_parent": {
-      "type": "program",
+      "type": "segment",
       "property": "mid"
     },
     "dynamic": "strict",
