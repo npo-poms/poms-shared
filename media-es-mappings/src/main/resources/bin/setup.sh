@@ -56,8 +56,13 @@ fi
 
 echo
 
-for mappping in ("group", "program", "segment", "deletedprogram", "deletedgroup", "deletedsegment", "cue", "programMemberRef", "groupMemberRef", "segmentMemberRef", "episodeRef") do;
-  curl -XPUT $desthost/$destindex/$mapping/_mapping -d @$basedir/mapping/$mapping.json
+declare -a arr=( "group" "program" "segment" "deletedprogram" "deletedgroup" "deletedsegment" "cue" "programMemberRef" "groupMemberRef" "segmentMemberRef" "episodeRef" )
+
+for mapping in "${arr[@]}"
+do
+    echo $mapping
+    curl -XPUT $desthost/$destindex/$mapping/_mapping -d @$basedir/mapping/$mapping.json
+    echo
 done
 
 echo
