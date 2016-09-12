@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.media.bind.AgeRatingToString;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.media.support.Displayable;
 
@@ -35,7 +34,9 @@ public enum AgeRating implements Displayable {
     }
 
     public static AgeRating xmlValueOf(String text) {
-        if (text == null) return null;
+        if (text == null) {
+            return null;
+        }
         switch (text) {
             case "": return null;
             case "ALL":
