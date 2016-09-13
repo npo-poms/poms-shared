@@ -499,14 +499,10 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withSegments() {
-            Segment segment1 = new Segment(build(), new Date(0), new Date(100000));
-            segment1.setMid("VPROWON_12345_1");
-            Segment segment2 = new Segment(build(), new Date(100000), new Date(100000));
-            segment2.setMid("VPROWON_12345_2");
-            Segment segment3 = new Segment(build(), new Date(1000000), new Date(300000));
-            segment3.setMid("VPROWON_12345_3");
-
-            return segments(segment1, segment2, segment3);
+            new Segment(build(), "VPROWON_12345_1", new Date(0), Duration.ofMillis(100000));
+            new Segment(build(), "VPROWON_12345_2", new Date(100000), Duration.ofMillis(100000));
+            new Segment(build(), "VPROWON_12345_3", new Date(1000000), Duration.ofMillis(300000));
+            return this;
         }
 
 

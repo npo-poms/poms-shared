@@ -58,19 +58,24 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     public Segment() {
     }
 
-    public Segment(Program program) {
-        this(program, new Date(0), program.getDuration());
-    }
-
-    public Segment(Program program, Date start, Date duration) {
-        this(program, start, new Duration(duration));
-    }
-
-    public Segment(Program program, Date start, Duration duration) {
+    public Segment(Program program, String mid, Date start, Duration duration) {
         this.start = start;
+        this.midRef = mid;
         this.duration = duration;
         avType = program.getAVType();
         program.addSegment(this);
+    }
+
+    public Segment(Program program) {
+        this(program, program.getMid(), new Date(0), program.getDuration());
+    }
+
+    public Segment(Program program, Date start, Date duration) {
+        this(program, program.getMid(), start, new Duration(duration));
+    }
+
+    public Segment(Program program, Date start, Duration duration) {
+        this(program, program.getMid(), start, duration);
     }
 
     public Segment(AVType avType) {
