@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import nl.vpro.com.neovisionaries.i18n.LanguageCode;
 
 /**
@@ -53,6 +55,7 @@ public class LocalizedString {
 
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
+    @JsonProperty("lang")
     @XmlJavaTypeAdapter(value = XmlLangAdapter.class)
     private Locale locale;
 
