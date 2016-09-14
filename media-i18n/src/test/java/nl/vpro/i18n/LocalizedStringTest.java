@@ -1,13 +1,17 @@
 package nl.vpro.i18n;
 
 import java.io.IOException;
+import java.io.StringReader;
 
+import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElement;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
@@ -27,6 +31,13 @@ public class LocalizedStringTest {
         JAXBTestUtil.roundTripAndSimilar(a, "<local:a xmlns:local=\"uri:local\">\n" +
             "    <string xml:lang=\"nl_NL\">bla</string>\n" +
             "</local:a>");
+    }
+    @Test
+    public void unmarshal() {
+        A a = JAXB.unmarshal(new StringReader("<local:a xmlns:local=\"uri:local\">\n" +
+            "    <string xml:lang=\"nl_NL\">bla</string>\n" +
+            "</local:a>"), A.class);
+        assertThat(a.string.getLocale()).isEqualTo(Locales.DUTCH);
     }
 
 }

@@ -15,6 +15,7 @@
 
   <properties>
     <poms.shared.version>${project.version}</poms.shared.version>
+    <shared.version>0.50-SNAPSHOT</shared.version>
   </properties>
 
 
