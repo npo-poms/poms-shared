@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -51,7 +52,7 @@ public class LocalizedString {
 
 
 
-    @XmlAttribute(name = "xml:lang")
+    @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(value = XmlLangAdapter.class)
     private Locale locale;
 
