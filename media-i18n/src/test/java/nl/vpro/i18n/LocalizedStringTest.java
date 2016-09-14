@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -31,6 +32,19 @@ public class LocalizedStringTest {
         JAXBTestUtil.roundTripAndSimilar(a, "<local:a xmlns:local=\"uri:local\">\n" +
             "    <string xml:lang=\"nl_NL\">bla</string>\n" +
             "</local:a>");
+    }
+
+    @Test
+    public void json() throws Exception {
+        A a = new A();
+        a.string = LocalizedString.of("bla", Locales.DUTCH);
+        Jackson2TestUtil.roundTripAndSimilar(a, "{\n" +
+            "  \"string\" : {\n" +
+            "    \"value\" : \"bla\",\n" +
+            "    \"lang\" : \"nl_NL\"\n" +
+            "  }\n" +
+            "}");
+
     }
     @Test
     public void unmarshal() {
