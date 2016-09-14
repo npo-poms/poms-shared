@@ -38,6 +38,19 @@ public class LocalizedString {
     }
 
 
+    public static LocalizedString of(String value, Locale locale) {
+        if (value == null) {
+            return null;
+        } else {
+            LocalizedString string = new LocalizedString();
+            string.value = value;
+            string.locale = locale;
+            return string;
+        }
+    }
+
+
+
     @XmlAttribute(name = "xml:lang")
     @XmlJavaTypeAdapter(value = XmlLangAdapter.class)
     private Locale locale;
@@ -104,7 +117,7 @@ public class LocalizedString {
 
         @Override
         public String marshal(Locale v) throws Exception {
-            return v.toString();
+            return v == null ? null : v.toString();
 
         }
     }
