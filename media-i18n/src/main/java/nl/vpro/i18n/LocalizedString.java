@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import javax.xml.registry.JAXRException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,7 +65,7 @@ public class LocalizedString  { //implements javax.xml.registry.infomodel.Locali
     private String charset;
 
     //@Override
-    public String getCharsetName() throws JAXRException {
+    public String getCharsetName()  {
         return charset;
 
     }
@@ -87,7 +86,7 @@ public class LocalizedString  { //implements javax.xml.registry.infomodel.Locali
     }
 
     //@Override
-    public void setCharsetName(String charsetName) throws JAXRException {
+    public void setCharsetName(String charsetName) {
         this.charset = charsetName;
 
     }
@@ -114,6 +113,9 @@ public class LocalizedString  { //implements javax.xml.registry.infomodel.Locali
     }
     private int getScore(Locale locale) {
         int score = 0;
+        if (this.locale == null || locale == null) {
+            return score;
+        }
         if (Objects.equals(locale.getLanguage(), this.locale.getLanguage())) {
             score++;
         } else {
