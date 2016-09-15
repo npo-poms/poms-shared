@@ -113,6 +113,9 @@ public class LocalizedString  { //implements javax.xml.registry.infomodel.Locali
     }
     private int getScore(Locale locale) {
         int score = 0;
+        if (this.locale == null || locale == null) {
+            return score;
+        }
         if (Objects.equals(locale.getLanguage(), this.locale.getLanguage())) {
             score++;
         } else {
