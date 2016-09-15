@@ -128,6 +128,9 @@ public class LocalizedString {
 
 
     public static Locale adapt(String v) {
+        if (v == null) {
+            return null;
+        }
         String[] split = v.split("[_-]", 3);
         String replace = MAP_TO_ISO.get(split[0].toLowerCase());
         if (replace != null) {
