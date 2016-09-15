@@ -16,7 +16,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since 0.50
+ * @since 4.8.2
  */
 public class LocalizedStringTest {
 
