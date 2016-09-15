@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -14,6 +15,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.com.neovisionaries.i18n.LanguageCode;
 
@@ -51,7 +54,8 @@ public class LocalizedString {
 
 
 
-    @XmlAttribute(name = "xml:lang")
+    @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
+    @JsonProperty("lang")
     @XmlJavaTypeAdapter(value = XmlLangAdapter.class)
     private Locale locale;
 
@@ -124,6 +128,9 @@ public class LocalizedString {
 
 
     public static Locale adapt(String v) {
+        if (v == null) {
+            return null;
+        }
         String[] split = v.split("[_-]", 3);
         String replace = MAP_TO_ISO.get(split[0].toLowerCase());
         if (replace != null) {
