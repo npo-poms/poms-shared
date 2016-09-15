@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.registry.JAXRException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +26,7 @@ import nl.vpro.com.neovisionaries.i18n.LanguageCode;
  * @since 3.2
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class LocalizedString {
+public class LocalizedString implements javax.xml.registry.infomodel.LocalizedString {
 
     private static final Logger LOG = LoggerFactory.getLogger(LocalizedString.class);
 
@@ -62,18 +63,36 @@ public class LocalizedString {
     @XmlValue
     private String value;
 
+    private String charset;
+
+    @Override
+    public String getCharsetName() throws JAXRException {
+        return charset;
+
+    }
+
+    @Override
     public Locale getLocale() {
         return locale;
     }
 
+    @Override
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
 
+    @Override
     public String getValue() {
         return value;
     }
 
+    @Override
+    public void setCharsetName(String charsetName) throws JAXRException {
+        this.charset = charsetName;
+
+    }
+
+    @Override
     public void setValue(String value) {
         this.value = value;
     }
