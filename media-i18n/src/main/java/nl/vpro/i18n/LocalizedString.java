@@ -26,7 +26,7 @@ import nl.vpro.com.neovisionaries.i18n.LanguageCode;
  * @since 3.2
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class LocalizedString implements javax.xml.registry.infomodel.LocalizedString {
+public class LocalizedString  { //implements javax.xml.registry.infomodel.LocalizedString {
 
     private static final Logger LOG = LoggerFactory.getLogger(LocalizedString.class);
 
@@ -65,34 +65,34 @@ public class LocalizedString implements javax.xml.registry.infomodel.LocalizedSt
 
     private String charset;
 
-    @Override
+    //@Override
     public String getCharsetName() throws JAXRException {
         return charset;
 
     }
 
-    @Override
+    //@Override
     public Locale getLocale() {
         return locale;
     }
 
-    @Override
+    //@Override
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
 
-    @Override
+    //@Override
     public String getValue() {
         return value;
     }
 
-    @Override
+    //@Override
     public void setCharsetName(String charsetName) throws JAXRException {
         this.charset = charsetName;
 
     }
 
-    @Override
+    //@Override
     public void setValue(String value) {
         this.value = value;
     }
