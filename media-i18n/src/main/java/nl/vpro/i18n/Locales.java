@@ -16,7 +16,19 @@ public class Locales {
     public static Locale DUTCH   = of(LanguageCode.nl, CountryCode.NL);
     public static Locale FLEMISH = of(LanguageCode.nl, CountryCode.BE);
 
+    private static final ThreadLocal<Locale> DEFAULT = ThreadLocal.withInitial(Locale::getDefault);
+ 
 
+    
+    public static Locale getDefault() {
+        return DEFAULT.get();
+    }
+    public static void setDefault(Locale locale) {
+        DEFAULT.set(locale);
+    }
+    public static void resetDefault() {
+        DEFAULT.remove();
+    }
 
     public static Locale of(LanguageCode lc, CountryCode code) {
         return new Locale(lc.name(), code.getAlpha2());
