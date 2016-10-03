@@ -827,6 +827,7 @@
       <xs:enumeration value="TLC_"/>
       <xs:enumeration value="VRTC"/>
       <xs:enumeration value="BCFS"/>
+      <xs:enumeration value="FXNL"/>
     </xs:restriction>
   </xs:simpleType>
 
