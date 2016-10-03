@@ -97,12 +97,6 @@
       <classifier>jdk15</classifier>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>io.swagger</groupId>
-      <artifactId>swagger-annotations</artifactId>
-    </dependency>
-      
-
     <!-- This is needed to let hibernate validation work, it somewhy needs an el-implementation -->
     <dependency>
       <groupId>org.glassfish.web</groupId>
