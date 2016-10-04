@@ -3,11 +3,11 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.*;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.user.Broadcaster;
@@ -24,22 +24,16 @@ import nl.vpro.domain.user.Broadcaster;
 })
 public class RelationDefinition implements Serializable, Identifiable<RelationDefinitionIdentifier> {
 
-
     public static RelationDefinition of(String type, Broadcaster broadcaster) {
         return new RelationDefinition(type, broadcaster.getId());
     }
-
     public static RelationDefinition of(String type, String broadcaster) {
         return new RelationDefinition(type, broadcaster);
     }
 
     @Id
-    @NotEmpty(message = "{nl.vpro.constraints.NotEmpty}")
-    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
     private String type;
-
     @Id
-    @NotEmpty(message = "{nl.vpro.constraints.NotEmpty}")
     private String broadcaster;
 
     private String displayText;

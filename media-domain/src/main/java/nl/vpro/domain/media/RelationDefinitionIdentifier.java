@@ -1,13 +1,19 @@
 package nl.vpro.domain.media;
 
 import java.io.Serializable;
+
 import javax.persistence.Embeddable;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Embeddable
 public class RelationDefinitionIdentifier implements Serializable {
 
+    @NotEmpty(message = "{nl.vpro.constraints.NotEmpty}")
+    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
     private String type;
 
+    @NotEmpty(message = "{nl.vpro.constraints.NotEmpty}")
     private String broadcaster;
 
     protected RelationDefinitionIdentifier() {
