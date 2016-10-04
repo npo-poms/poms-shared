@@ -12,12 +12,13 @@ import java.util.Date;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.TermRangeQuery;
+import org.apache.lucene.util.BytesRef;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +30,7 @@ public class LuceneHelper {
 
     private static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
-    public static final Version VERSION = Version.LUCENE_29; // Newer version make searching behave differently (and fail test)
+    public static final Version VERSION = Version.LUCENE_5_3_1;
 
     // Disallowed input. Only allowing phrase and wildcard queries with: " , * and ?.
 
@@ -54,7 +55,7 @@ public class LuceneHelper {
     public static Query createStandardQuery(String field, String text, Analyzer analyzer) {
         text = escape(text);
 
-        QueryParser parser = new QueryParser(VERSION, field, analyzer);
+        QueryParser parser = new QueryParser(field, analyzer);
         parser.setPhraseSlop(STANDARD_SLOP);
         parser.setEnablePositionIncrements(true);
 //            parser.setAllowLeadingWildcard(true);
@@ -81,14 +82,14 @@ public class LuceneHelper {
 
     public static TermRangeQuery createRangeQuery(String field, Instant start, Instant stop, DateTools.Resolution indexResolution) {
 
-        String lower = null;
+        BytesRef lower = null;
         if(start != null) {
-            lower = DateTools.dateToString(DateUtils.toDate(start), indexResolution);
+            lower = new BytesRef(DateTools.dateToString(DateUtils.toDate(start), indexResolution));
         }
 
-        String upper = null;
+        BytesRef upper = null;
         if(stop != null) {
-            upper = DateTools.dateToString(DateUtils.toDate(inc(stop, 1, indexResolution)), indexResolution);
+            upper = new BytesRef(DateTools.dateToString(DateUtils.toDate(inc(stop, 1, indexResolution)), indexResolution));
         }
 
         return new TermRangeQuery(field, lower, upper, true, false);

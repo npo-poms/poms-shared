@@ -3,10 +3,11 @@
  */
 package nl.vpro.lucene;
 
-import java.io.Reader;
 import java.util.Arrays;
 
-import org.apache.lucene.analysis.*;
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.core.StopAnalyzer;
+import org.apache.lucene.analysis.util.CharArraySet;
 
 public final class EntityAnalyser extends Analyzer {
 
@@ -19,19 +20,18 @@ public final class EntityAnalyser extends Analyzer {
     private static CharArraySet stopWords;
 
     static {
-        CharArraySet stopSet = new CharArraySet(SimpleEntityAnalyser.VERSION, DUTCH_STOP_WORDS.length + StopAnalyzer.ENGLISH_STOP_WORDS_SET.size(), false);
+        CharArraySet stopSet = new CharArraySet(DUTCH_STOP_WORDS.length + StopAnalyzer.ENGLISH_STOP_WORDS_SET.size(), false);
         stopSet.addAll(Arrays.asList(DUTCH_STOP_WORDS));
         stopSet.addAll(StopAnalyzer.ENGLISH_STOP_WORDS_SET);
         stopWords = CharArraySet.unmodifiableSet(stopSet);
     }
+
     private final SimpleEntityAnalyser wrapped = new SimpleEntityAnalyser();
 
     @Override
-    public TokenStream tokenStream(String fieldName, Reader reader) {
-        return new StopFilter(
-            SimpleEntityAnalyser.VERSION,
-            wrapped.tokenStream(fieldName, reader),
-            stopWords
-        );
+    protected TokenStreamComponents createComponents(String fieldName) {
+         throw new UnsupportedOperationException("TODO");
     }
+
+
 }

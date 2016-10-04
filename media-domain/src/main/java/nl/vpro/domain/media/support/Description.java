@@ -38,7 +38,7 @@ public class Description implements Ownable, Typable<TextualType>, Comparable<De
 
     @Column(name = "description", nullable = false)
     @Lob
-    @Type(type="org.hibernate.type.StringClobType")
+    @Type(type = "org.hibernate.type.StringType")
     @NotNull(message = "description not set")
     @NoHtml
     @XmlValue
