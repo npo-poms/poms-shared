@@ -6,10 +6,8 @@
 package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
@@ -22,16 +20,15 @@ import nl.vpro.domain.Xmlns;
 
 /**
  * @author roekoe
- * @version $Id$
  */
-@SuppressWarnings("serial")
 @MappedSuperclass
 @XmlType(name = "domainObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
     @XmlTransient // Don't remove!
     protected Long id;
 

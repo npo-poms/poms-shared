@@ -3,22 +3,23 @@
  */
 package nl.vpro.lucene;
 
-import java.io.Reader;
-
-import org.apache.lucene.analysis.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.LowerCaseFilter;
-import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
-import org.apache.lucene.util.Version;
 
 public final class SimpleEntityAnalyser extends Analyzer {
 
-    static final Version VERSION = Version.LUCENE_30;
 
     @Override
-    public TokenStream tokenStream(String fieldName, Reader reader) {
+    protected TokenStreamComponents createComponents(String fieldName) {
+
+        return new TokenStreamComponents(new StandardTokenizer()) {
+
+        };
+
+    }
+
+/*
+    protected TokenStream tokenStream(String fieldName, Reader reader) {
         return new ASCIIFoldingFilter(
             new LowerCaseFilter(
                 VERSION,
@@ -29,4 +30,5 @@ public final class SimpleEntityAnalyser extends Analyzer {
             )
         );
     }
+*/
 }
