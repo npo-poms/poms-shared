@@ -50,4 +50,9 @@ public class CountryWrapper {
     public CountryCode getCode() {
         return code;
     }
+
+    @Override
+    public String toString() {
+        return code + ":" + getName();
+    }
 }

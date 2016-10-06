@@ -1,14 +1,25 @@
 package nl.vpro.domain.media.bind;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
+import nl.vpro.i18n.Locales;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class CountryCodeAdapterTest {
+
+    @BeforeClass
+    public static void setup() {
+        Locale.setDefault(Locales.DUTCH);
+    }
+
 
     @Test
     @Ignore
@@ -30,5 +41,17 @@ public class CountryCodeAdapterTest {
         for (Map.Entry<String, CountryCode> e : result.entrySet()) {
             System.out.println("|" + e.getKey() + "|" + e.getValue().getName() + "|" + e.getValue().getAssignment() + "|");
         }
+    }
+
+    @Test
+    public void finlandReserved() throws Exception {
+        CountryCodeAdapter cca = new CountryCodeAdapter();
+        assertThat(cca.marshal(CountryCode.SF).getName()).isEqualTo("Finland");
+    }
+
+    @Test
+    public void finland() throws Exception {
+        CountryCodeAdapter cca = new CountryCodeAdapter();
+        assertThat(cca.marshal(CountryCode.FI).getName()).isEqualTo("Finland");
     }
 }
