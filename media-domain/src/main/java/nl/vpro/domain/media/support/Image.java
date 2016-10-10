@@ -131,6 +131,10 @@ public class Image extends PublishableObject implements Ownable {
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String date;
 
+    @ManyToOne
+    @XmlTransient
+    private MediaObject mediaObject;
+
     public Image() {
     }
 
@@ -335,6 +339,13 @@ public class Image extends PublishableObject implements Ownable {
         return this;
     }
 
+    public MediaObject getMediaObject() {
+        return mediaObject;
+    }
+
+    public void setMediaObject(MediaObject mediaObject) {
+        this.mediaObject = mediaObject;
+    }
 
     @Override
     public String getUrnPrefix() {
