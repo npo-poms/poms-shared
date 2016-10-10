@@ -373,7 +373,10 @@ public class MediaObjectXmlSchemaTest {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\"/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withMemberOf().build();
+        /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
+        program.getMemberOf().first().getOwner().setMid(null);
         program.getMemberOf().first().getOwner().setMid("AVRO_7777777");
+        program.getMemberOf().first().getOwner().getMemberOf().first().getOwner().setMid(null);
         program.getMemberOf().first().getOwner().getMemberOf().first().getOwner().setMid("AVRO_5555555");
         program.getMemberOf().first().setAdded(new Date(0));
         String actual = toXml(program);
@@ -387,7 +390,10 @@ public class MediaObjectXmlSchemaTest {
 
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
         program.getEpisodeOf().first().setAdded(new Date(0));
+        /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
+        program.getEpisodeOf().first().getOwner().setMid(null);
         program.getEpisodeOf().first().getOwner().setMid("AVRO_7777777");
+        program.getEpisodeOf().first().getOwner().getMemberOf().first().getOwner().setMid(null);
         program.getEpisodeOf().first().getOwner().getMemberOf().first().getOwner().setMid("AVRO_5555555");
         String actual = toXml(program);
 
