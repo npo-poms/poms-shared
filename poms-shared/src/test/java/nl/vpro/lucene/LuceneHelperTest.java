@@ -9,6 +9,7 @@ import java.time.ZoneId;
 
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.search.TermRangeQuery;
+import org.apache.lucene.util.BytesRef;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -50,8 +51,8 @@ public class LuceneHelperTest {
             LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             DateTools.Resolution.MINUTE);
-        assertThat(p.getLowerTerm()).isEqualTo("201608231030");
-        assertThat(p.getUpperTerm()).isEqualTo("201608231131");
+        assertThat(p.getLowerTerm()).isEqualTo(new BytesRef("201608231030"));
+        assertThat(p.getUpperTerm()).isEqualTo(new BytesRef("201608231131"));
     }
 
     @Test
@@ -60,8 +61,8 @@ public class LuceneHelperTest {
             LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             DateTools.Resolution.DAY);
-        assertThat(p.getLowerTerm()).isEqualTo("20160823");
-        assertThat(p.getUpperTerm()).isEqualTo("20160824");
+        assertThat(p.getLowerTerm()).isEqualTo(new BytesRef("20160823"));
+        assertThat(p.getUpperTerm()).isEqualTo(new BytesRef("20160824"));
     }
 
 
@@ -71,8 +72,8 @@ public class LuceneHelperTest {
             LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             DateTools.Resolution.YEAR);
-        assertThat(p.getLowerTerm()).isEqualTo("2016");
-        assertThat(p.getUpperTerm()).isEqualTo("2017");
+        assertThat(p.getLowerTerm()).isEqualTo(new BytesRef("2016"));
+        assertThat(p.getUpperTerm()).isEqualTo(new BytesRef("2017"));
     }
 
     @Test
@@ -81,7 +82,7 @@ public class LuceneHelperTest {
             LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             DateTools.Resolution.MONTH);
-        assertThat(p.getLowerTerm()).isEqualTo("201608");
-        assertThat(p.getUpperTerm()).isEqualTo("201609");
+        assertThat(p.getLowerTerm()).isEqualTo(new BytesRef("201608"));
+        assertThat(p.getUpperTerm()).isEqualTo(new BytesRef("201609"));
     }
 }

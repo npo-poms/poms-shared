@@ -198,7 +198,8 @@ public interface MediaTestDataBuilder<
 
 
     default T withMid() {
-        return mid("VPROWON_" + mid.incrementAndGet());
+        /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
+        return mid(null).mid("VPROWON_" + mid.incrementAndGet());
     }
 
     default T title(String mainTitle) {
