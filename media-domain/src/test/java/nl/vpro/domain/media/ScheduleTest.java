@@ -6,6 +6,10 @@ package nl.vpro.domain.media;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -13,6 +17,7 @@ import javax.xml.bind.JAXB;
 
 import org.junit.Test;
 
+import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ScheduleTest {
@@ -25,13 +30,13 @@ public class ScheduleTest {
         table.addProgram(program);
 
         // Need three to trigger ConcurrentModificationException
-        ScheduleEvent event1 = new ScheduleEvent(Channel.CONS, new Date(0), new Date(10));
+        ScheduleEvent event1 = new ScheduleEvent(Channel.CONS, Instant.EPOCH, Duration.of(10, SECONDS));
         event1.setUrnRef(program.getCrids().get(0));
         event1.setPoProgID("id1");
-        ScheduleEvent event2 = new ScheduleEvent(Channel.CONS, new Date(10), new Date(10));
+        ScheduleEvent event2 = new ScheduleEvent(Channel.CONS, Instant.EPOCH.plus(10, SECONDS), Duration.of(10, SECONDS));
         event2.setUrnRef(program.getCrids().get(0));
         event2.setPoProgID("id2");
-        ScheduleEvent event3 = new ScheduleEvent(Channel.CONS, new Date(20), new Date(10));
+        ScheduleEvent event3 = new ScheduleEvent(Channel.CONS, Instant.EPOCH.plus(20, SECONDS), Duration.of(10, SECONDS));
         event2.setUrnRef(program.getCrids().get(0));
         event2.setPoProgID("id2");
 

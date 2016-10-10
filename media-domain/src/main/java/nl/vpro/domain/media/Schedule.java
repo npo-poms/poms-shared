@@ -211,9 +211,13 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
                                 scheduleEvent.setMediaObject(program);
                             } else {
                                 log.debug("Cloning a MIS duplicate");
-                                // Create a clone for the second poPRogId and it's event
+                                // Create a clone for the second poProgId and it's event
                                 clone = cloneMisDuplicate(program);
                                 if (scheduleEventPoProgID != null) {
+                                    /* Reset MID to null first, then set it to the poProgID from the Schedule event; otherwise an
+                                     IllegalArgumentException will be thrown setting the MID to another value.
+                                    */
+                                    clone.setMid(null);
                                     clone.setMid(scheduleEventPoProgID);
                                 }
                                 scheduleEvent.setMediaObject(clone);
