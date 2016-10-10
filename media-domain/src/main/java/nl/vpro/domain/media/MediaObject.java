@@ -442,9 +442,9 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected SortedSet<Relation> relations;
 
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "mediaobject_id") // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = true)
+    @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
+    @JoinColumn(name = "mediaobject_id", nullable = false)
+    @OrderColumn(name = "list_index", nullable = false)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -2369,6 +2369,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         } else {
             images.add(index, image);
         }
+        image.setMediaObject(this);
         return this;
     }
 
