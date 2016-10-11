@@ -2305,8 +2305,18 @@ public enum Channel {
         public String toString () {
             return "Fox Nederland";
         }
-    }
+    },
+    @XmlEnumValue("AMC_")
+    AMC_ {
 
+    },
+    @XmlEnumValue("FLM1")
+    FLM1 {
+        @Override
+        public String toString() {
+            return "Film 1";
+        }
+    }
 
     ;
 
