@@ -4,7 +4,6 @@
  */
 package nl.vpro.domain.media;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -18,7 +17,6 @@ import org.junit.experimental.theories.DataPoint;
 
 import nl.vpro.theory.ObjectTest;
 
-import static nl.vpro.domain.media.MediaDomainTestHelper.getErrorMessagesFromConstraintViolations;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RelationDefinitionTest extends ObjectTest<RelationDefinition> {
