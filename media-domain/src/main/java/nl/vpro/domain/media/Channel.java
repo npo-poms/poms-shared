@@ -508,7 +508,7 @@ public enum Channel {
     WDR_ {
         @Override
         public String toString() {
-            return "WDR Fehrsehen";
+            return "WDR Fernsehen";
         }
     },
 
