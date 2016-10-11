@@ -2300,7 +2300,7 @@ public enum Channel {
     },
 
     @XmlEnumValue("FXNL")
-    FOXNL {
+    FXNL {
         @Override
         public String toString () {
             return "Fox Nederland";
@@ -2308,7 +2308,10 @@ public enum Channel {
     },
     @XmlEnumValue("AMC_")
     AMC_ {
-
+        @Override
+        public String toString() {
+            return "AMC";
+        }
     },
     @XmlEnumValue("FLM1")
     FLM1 {
