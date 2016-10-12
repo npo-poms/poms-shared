@@ -305,16 +305,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     private static LocalDate guideLocalDate(Instant start) {
-        if (start == null) {
-            return null;
-        }
-        ZonedDateTime dateTime = start.atZone(Schedule.ZONE_ID);
-
-        if (dateTime.toLocalTime().isBefore(Schedule.START_OF_SCHEDULE.minus(2, ChronoUnit.MINUTES))) {
-            dateTime = dateTime.minusDays(1);
-        }
-
-        return dateTime.toLocalDate();
+        return Schedule.scheduleDate(start);
     }
 
     private static Duration duration(Date duration) {

@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
@@ -32,6 +33,22 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
 
     public static ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
     public static LocalTime START_OF_SCHEDULE = LocalTime.of(6, 0);
+
+    public static LocalDate scheduleDate(Instant instant) {
+        if (instant == null) {
+            return null;
+        }
+        ZonedDateTime dateTime = instant.atZone(Schedule.ZONE_ID);
+
+        if (dateTime.toLocalTime().isBefore(Schedule.START_OF_SCHEDULE.minus(2, ChronoUnit.MINUTES))) {
+            dateTime = dateTime.minusDays(1);
+        }
+
+        return dateTime.toLocalDate();
+    }
+    public static LocalDate currentScheduleDate() {
+        return scheduleDate(Instant.now());
+    }
 
 
 
