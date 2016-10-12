@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 import static nl.vpro.domain.media.MediaType.*;
@@ -70,5 +72,37 @@ public class MediaTypeTest {
     public void testAllowedEpisodeTypeOnArchive() {
         assertThat(COLLECTION.allowedEpisodeTypes()).isEmpty();
         //assertThat(ARCHIVE.allowedEpisodeTypes()).isEmpty(); deprecated
+    }
+
+    @Test
+    public void noErrors() {
+        for (MediaType type : MediaType.values()) {
+            System.out.println("\n\n" + type.name() + " " + type.toString());
+            System.out.println(Arrays.asList(type.allowedEpisodeOfTypes()));
+            System.out.println(Arrays.asList(type.allowedEpisodeTypes()));
+            System.out.println(Arrays.asList(type.allowedMemberOfTypes()));
+            System.out.println(Arrays.asList(type.allowedMemberTypes()));
+            System.out.println(type.getMediaClass());
+            try {
+                System.out.println(type.getMediaInstance());
+            } catch (RuntimeException rte) {
+                assertThat(type).isEqualTo(MediaType.MEDIA);
+            }
+            System.out.println(type.getMediaObjectClass());
+            System.out.println(type.getSubType());
+            System.out.println(type.hasEpisodeOf());
+            System.out.println(type.hasEpisodes());
+            System.out.println(type.hasMemberOf());
+            System.out.println(type.hasMembers());
+            System.out.println(type.hasOrdering());
+            System.out.println(type.hasSegments());
+            System.out.println(Arrays.asList(type.preferredEpisodeOfTypes()));
+            System.out.println(Arrays.asList(type.preferredEpisodeTypes()));
+            System.out.println(Arrays.asList(type.preferredMemberOfTypes()));
+            System.out.println(Arrays.asList(type.preferredMemberTypes()));
+            for (MediaType t : MediaType.values()) {
+                System.out.print(type.compareTo(t));
+            }
+        }
     }
 }
