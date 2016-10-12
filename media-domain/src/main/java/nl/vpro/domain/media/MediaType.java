@@ -26,7 +26,7 @@ public enum MediaType {
 
         @Override
         public MediaObject getMediaInstance() {
-            throw new RuntimeException();
+            throw new RuntimeException("Not possible to make instances of " + this);
 
         }
 
@@ -592,7 +592,7 @@ public enum MediaType {
     }
 
     public final boolean hasEpisodeOf() {
-        return getSubType().hasEpisodeOf();
+        return getSubType() != null && getSubType().hasEpisodeOf();
     }
 
     public MediaType[] preferredEpisodeOfTypes() {
@@ -612,7 +612,7 @@ public enum MediaType {
     }
 
     public final boolean hasEpisodes() {
-        return getSubType().canContainEpisodes();
+        return getSubType() != null && getSubType().canContainEpisodes();
     }
 
     public MediaType[] preferredEpisodeTypes() {
