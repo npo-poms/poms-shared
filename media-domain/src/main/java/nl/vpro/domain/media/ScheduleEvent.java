@@ -12,8 +12,6 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -305,7 +303,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     private static LocalDate guideLocalDate(Instant start) {
-        return Schedule.scheduleDate(start);
+        return Schedule.guideDay(start);
     }
 
     private static Duration duration(Date duration) {
