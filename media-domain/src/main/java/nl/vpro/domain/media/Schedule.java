@@ -34,7 +34,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
     public static ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
     public static LocalTime START_OF_SCHEDULE = LocalTime.of(6, 0);
 
-    public static LocalDate scheduleDate(Instant instant) {
+    public static LocalDate guideDay(Instant instant) {
         if (instant == null) {
             return null;
         }
@@ -46,8 +46,8 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
 
         return dateTime.toLocalDate();
     }
-    public static LocalDate currentScheduleDate() {
-        return scheduleDate(Instant.now());
+    public static LocalDate guideDay() {
+        return guideDay(Instant.now());
     }
 
 
