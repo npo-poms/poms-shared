@@ -828,6 +828,8 @@
       <xs:enumeration value="VRTC"/>
       <xs:enumeration value="BCFS"/>
       <xs:enumeration value="FXNL"/>
+      <xs:enumeration value="AMC_"/>
+      <xs:enumeration value="FLM1"/>
     </xs:restriction>
   </xs:simpleType>
 
