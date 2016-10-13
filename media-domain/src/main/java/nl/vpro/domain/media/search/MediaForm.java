@@ -254,6 +254,10 @@ public class MediaForm {
         return collection(types);
     }
 
+    public void setTypes(Collection<MediaType> types) {
+        this.types = types;
+    }
+
     public MediaForm addType(MediaType type) {
         if(types == null) {
             types = new ArrayList<>();
