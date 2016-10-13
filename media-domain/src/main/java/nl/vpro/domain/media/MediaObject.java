@@ -357,7 +357,6 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             "or mediaobjec10_.publishstart < now() " +
             "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec10_.id and o.broadcasters_id in (:broadcasters)))"),
         @Filter(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))")})
-
     protected SortedSet<MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
@@ -443,7 +442,6 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     protected SortedSet<Relation> relations;
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
-    @JoinColumn(name = "mediaobject_id", nullable = false)
     @OrderColumn(name = "list_index", nullable = false)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @Valid
@@ -1182,7 +1180,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     /**
-     * Consider using {@link nl.vpro.domain.media.TagService#findOrCreate} first.
+     * Consider using {@link nl.vpro.domain.media.TagService#findOrCreate(} first.
      */
     public void setTags(SortedSet<Tag> tags) {
         this.tags = updateSortedSet(this.tags, tags);
