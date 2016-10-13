@@ -5,6 +5,8 @@
 package nl.vpro.domain.media;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
@@ -41,6 +43,19 @@ public enum MediaType {
 
         }
 
+        @Override
+        public List<SubMediaType> getSubTypes () {
+            return
+                Stream.concat(
+                    Stream.concat(
+                        Arrays.stream(ProgramType.values()),
+                        Arrays.stream(GroupType.values())),
+                    Arrays.stream(SegmentType.values())
+                ).collect(Collectors.toList());
+
+        }
+
+
     },
 
     PROGRAM {
@@ -58,6 +73,12 @@ public enum MediaType {
         @Override
         public ProgramType getSubType() {
             return null;
+        }
+
+
+        @Override
+        public List<SubMediaType> getSubTypes() {
+            return Arrays.asList(ProgramType.values());
         }
 
         @Override
@@ -203,6 +224,11 @@ public enum MediaType {
         @Override
         public GroupType getSubType() {
             return null;
+        }
+
+        @Override
+        public List<SubMediaType> getSubTypes() {
+            return Arrays.asList(GroupType.values());
         }
     },
 
@@ -418,6 +444,11 @@ public enum MediaType {
         public SegmentType getSubType() {
             return SegmentType.SEGMENT;
 
+        }
+
+        @Override
+        public List<SubMediaType> getSubTypes() {
+            return Arrays.asList(SegmentType.values());
         }
     },
 /*
@@ -668,6 +699,10 @@ public enum MediaType {
     }
 
     public abstract SubMediaType getSubType();
+
+    public List<SubMediaType> getSubTypes() {
+        return getSubType() != null ? Collections.singletonList(getSubType()) : null;
+    }
 
 
     public static MediaType of(String type) {
