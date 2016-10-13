@@ -90,6 +90,7 @@ public class MediaTypeTest {
             }
             System.out.println(type.getMediaObjectClass());
             System.out.println(type.getSubType());
+            System.out.println(type.getSubTypes());
             System.out.println(type.hasEpisodeOf());
             System.out.println(type.hasEpisodes());
             System.out.println(type.hasMemberOf());
