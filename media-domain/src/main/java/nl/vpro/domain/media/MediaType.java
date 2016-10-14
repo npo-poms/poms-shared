@@ -222,6 +222,12 @@ public enum MediaType {
         }
 
         @Override
+        public Class<Group> getMediaObjectClass() {
+            return Group.class;
+        }
+
+
+        @Override
         public GroupType getSubType() {
             return null;
         }
@@ -708,10 +714,8 @@ public enum MediaType {
     public static MediaType of(String type) {
         return type == null ? null : valueOf(type.toUpperCase());
     }
-    /**
-     * @param media
-     * @return
-     */
+
+
     public static MediaType getMediaType(MediaObject media) {
         SubMediaType type = media.getType();
         return type == null ? null : type.getMediaType();
