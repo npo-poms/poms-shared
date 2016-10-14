@@ -2669,7 +2669,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     /**
      * @since 3.2
      */
-    public MediaType getMediaType() {
+    public final MediaType getMediaType() {
         SubMediaType subMediaType = getType();
         return subMediaType == null ? null : subMediaType.getMediaType();
     }

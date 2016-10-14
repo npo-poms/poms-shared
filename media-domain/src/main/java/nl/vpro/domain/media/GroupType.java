@@ -65,13 +65,18 @@ public enum GroupType implements SubMediaType {
         return mediaType;
     }
 
+    @Override
     public boolean canContainEpisodes() {
         return canContainEpisodes;
     }
 
     public static final Set<GroupType> EPISODE_CONTAINERS;
     static {
-        EPISODE_CONTAINERS = Collections.unmodifiableSet(Arrays.stream(GroupType.values()).filter(GroupType::canContainEpisodes).collect(Collectors.toSet()));
+        EPISODE_CONTAINERS = Collections.unmodifiableSet(
+            Arrays.stream(GroupType.values())
+                .filter(GroupType::canContainEpisodes)
+                .collect(Collectors.toSet())
+        );
     }
 
 }
