@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassificationScheme uri="urn:ebu:metadata-cs:ContentGenreCS" versionDate="2013-07-16">
+  <!--ClassificationScheme uri="urn:ebu:metadata-cs:ContentGenreCS" versionDate="2013-07-16"  xmlns="urn:ebu:metadata-schema:ebucs_2013"-->
+
+  <!--#####################################################################
+      CONTENT GENRE CS
+      Definition: This dimension is used to classify programmes according to their content or subject.
+      Unlike in the case of the form dimension, it is essential to hear the programme.
+      This classification schemeis a superset of different classification shemes including in
+      particular TV-Anytime's ContentCS and Mpeg-7's ContentCS, themselves originally based
+      on EBU's ESCORT 2.4. Backward compatibility has been maintained with TV-Anytime's ContentCS
+      termIDs of TS 102 822 v010301. Ather significant resource to be used for news applications
+      is the IPTC's SubjectCode list.
+
+      The following Creative Commons Rights apply to the use of
+      this EBU resource:   http://creativecommons.org/licenses/by-nc-sa/3.0/
+
+      Owner: EBU Technical Department
+      Author: Jean-Pierre Evain
+      Contact: evain@ebu.ch
+      ##################################################################### -->
+
+
+  <Alias>EBUContentGenre</Alias>
+
+  <Link xml:lang="en">
+    <URL>http://en.wikipedia.org/wiki/List_of_genres</URL>
+    <LinkName>Wikipedia - List of genres</LinkName>
+  </Link>
+
+  <Term termID="3.0">
+    <Name xml:lang="en">Proprietary</Name>
+    <Definition xml:lang="en">For use where proprietary extensions are required, or the use of
+      keywords that do not fit in any classification below
+    </Definition>
+    <ChangeComment>First version after conversion of P/META into XML</ChangeComment>
+    <ChangeVersionDate>2007-04-12</ChangeVersionDate>
+    <ValidityFlag>1</ValidityFlag>
+
+    <!--
+     WARNING: As long as the MIS 'legacy' genres need to be supported, any addition to this, must be added to nl.vpro.domain.media.EpgGenreType
+     Don't forget to release the publisher, which also needs this XML, as well as the backwards compatibility in EpgGenreType.
+    -->
+
+    <Term termID="3.0.1">
+      <Name xml:lang="nl">NPO Epg</Name>
+      <Definition xml:lang="nl">Omroepbrede genres zoals die gebruikt worden op UG/Npo.nl en alle EPG's van de
+        publieke omroep.
+      </Definition>
+      <Reference/>
+      <ChangeComment>Eerste versie NPO Epg genres</ChangeComment>
+      <ChangeVersionDate>2014-04-08</ChangeVersionDate>
+      <ValidityFlag>1</ValidityFlag>
+      <Term termID="3.0.1.1">
+        <Name xml:lang="nl">Jeugd</Name>
+        <Reference>urn:tva:metadata:cs:2004:01</Reference>
+        <Reference>urn:mis:genre:YOUTH</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.1.2">
+          <Name xml:lang="nl">Film</Name>
+          <Reference>urn:tva:metadata:cs:2004:0102</Reference>
+          <Reference>urn:mis:genre:MOVIE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.3">
+          <Name xml:lang="nl">Serie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0103</Reference>
+          <Reference>urn:mis:genre:SERIES_SOAP</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.11">
+          <Name xml:lang="nl">Animatie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0111</Reference>
+          <Reference>urn:mis:genre:CARTOON</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.4">
+          <Name xml:lang="nl">Sport</Name>
+          <Reference>urn:tva:metadata:cs:2004:0104</Reference>
+          <Reference>urn:mis:genre:SPORT</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.5">
+          <Name xml:lang="nl">Muziek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0105</Reference>
+          <Reference>urn:mis:genre:MUSIC</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.6">
+          <Name xml:lang="nl">Amusement</Name>
+          <Reference>urn:tva:metadata:cs:2004:0106</Reference>
+          <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.7">
+          <Name xml:lang="nl">Informatief</Name>
+          <Reference>urn:tva:metadata:cs:2004:0107</Reference>
+          <Reference>urn:mis:genre:INFORMATIVE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.8">
+          <Name xml:lang="nl">Documentaire</Name>
+          <Reference>urn:tva:metadata:cs:2004:0108</Reference>
+          <Reference>urn:mis:genre:DOCUMENTARY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.19">
+          <Name xml:lang="nl">Spel/quiz</Name>
+          <Reference>urn:tva:metadata:cs:2004:0119</Reference>
+          <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.1.25">
+          <Name xml:lang="nl">Natuur</Name>
+          <Reference>urn:tva:metadata:cs:2004:0125</Reference>
+          <Reference>urn:mis:genre:NATURE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+      <Term termID="3.0.1.2">
+        <Name xml:lang="nl">Film</Name>
+        <Reference>urn:tva:metadata:cs:2004:02</Reference>
+        <Reference>urn:mis:genre:MOVIE</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.2.9">
+          <Name xml:lang="nl">Komisch</Name>
+          <Reference>urn:tva:metadata:cs:2004:0209</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.10">
+          <Name xml:lang="nl">Spanning</Name>
+          <Reference>urn:tva:metadata:cs:2004:0210</Reference>
+          <Reference>urn:mis:genre:CRIME</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.11">
+          <Name xml:lang="nl">Animatie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0211</Reference>
+          <Reference>urn:mis:genre:CARTOON</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.2.12">
+          <Name xml:lang="nl">Drama</Name>
+          <Reference>urn:tva:metadata:cs:2004:0212</Reference>
+          <Reference>urn:mis:genre:DRAMA</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+      <Term termID="3.0.1.3">
+        <Name xml:lang="nl">Serie</Name>
+        <Reference>urn:tva:metadata:cs:2004:03</Reference>
+        <Reference>urn:mis:genre:SERIES_SOAP</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.3.9">
+          <Name xml:lang="nl">Komisch</Name>
+          <Reference>urn:tva:metadata:cs:2004:0309</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.3.10">
+          <Name xml:lang="nl">Spanning</Name>
+          <Reference>urn:tva:metadata:cs:2004:0310</Reference>
+          <Reference>urn:mis:genre:SERIES_SOAP</Reference>
+          <Reference>urn:mis:genre:CRIME</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.3.11">
+          <Name xml:lang="nl">Animatie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0311</Reference>
+          <Reference>urn:mis:genre:CARTOON</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.3.12">
+          <Name xml:lang="nl">Drama</Name>
+          <Reference>urn:tva:metadata:cs:2004:0312</Reference>
+          <Reference>urn:mis:genre:DRAMA</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.3.13">
+          <Name xml:lang="nl">Soap serie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0313</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+      <Term termID="3.0.1.4">
+        <Name xml:lang="nl">Sport</Name>
+        <Reference>urn:tva:metadata:cs:2004:04</Reference>
+        <Reference>urn:mis:genre:SPORT</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.4.14">
+          <Name xml:lang="nl">Sport - informatie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0414</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.4.15">
+          <Name xml:lang="nl">Sport wedstrijd</Name>
+          <Reference>urn:tva:metadata:cs:2004:0415</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+      <Term termID="3.0.1.5">
+        <Name xml:lang="nl">Muziek</Name>
+        <Reference>urn:tva:metadata:cs:2004:05</Reference>
+        <Reference>urn:mis:genre:MUSIC</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.5.16">
+          <Name xml:lang="nl">Muziek klassiek</Name>
+          <Reference>urn:tva:metadata:cs:2004:0516</Reference>
+          <Reference>urn:mis:genre:CLASSIC</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.5.17">
+          <Reference>urn:tva:metadata:cs:2004:0517</Reference>
+          <Name xml:lang="nl">Muziek populair</Name>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+      <Term termID="3.0.1.6">
+        <Name xml:lang="nl">Amusement</Name>
+        <Reference>urn:tva:metadata:cs:2004:06</Reference>
+        <Reference>urn:mis:genre:ENTERTAINMENT</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.6.19">
+          <Name xml:lang="nl">Spel/quiz</Name>
+          <Reference>urn:tva:metadata:cs:2004:0619</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.6.20">
+          <Name xml:lang="nl">Cabaret</Name>
+          <Reference>urn:tva:metadata:cs:2004:0620</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.6.9">
+          <Name xml:lang="nl">Komisch</Name>
+          <Reference>urn:tva:metadata:cs:2004:0609</Reference>
+          <Reference>urn:mis:genre:COMEDY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+      <Term termID="3.0.1.7">
+        <Name xml:lang="nl">Informatief</Name>
+        <Reference>urn:tva:metadata:cs:2004:07</Reference>
+        <Reference>urn:mis:genre:INFORMATIVE</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.7.19">
+          <Name xml:lang="nl">Spel/quiz</Name>
+          <Reference>urn:tva:metadata:cs:2004:0719</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.21">
+          <Name xml:lang="nl">Nieuws/actualiteiten</Name>
+          <Reference>urn:tva:metadata:cs:2004:0721</Reference>
+          <Reference>urn:mis:genre:NEWS</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.22">
+          <Name xml:lang="nl">Gezondheid/opvoeding</Name>
+          <Reference>urn:tva:metadata:cs:2004:0722</Reference>
+          <Reference>urn:mis:genre:HEALTH</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.23">
+          <Name xml:lang="nl">Koken/eten</Name>
+          <Reference>urn:tva:metadata:cs:2004:0723</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.24">
+          <Name xml:lang="nl">Kunst/cultuur</Name>
+          <Reference>urn:tva:metadata:cs:2004:0724</Reference>
+          <Reference>urn:mis:genre:ART_CULTURE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.25">
+          <Name xml:lang="nl">Natuur</Name>
+          <Reference>urn:tva:metadata:cs:2004:0725</Reference>
+          <Reference>urn:mis:genre:NATURE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.26">
+          <Name xml:lang="nl">Religieus</Name>
+          <Reference>urn:tva:metadata:cs:2004:0726</Reference>
+          <Reference>urn:mis:genre:RELIGIOUS</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.27">
+          <Name xml:lang="nl">Wetenschap</Name>
+          <Reference>urn:tva:metadata:cs:2004:0727</Reference>
+          <Reference>urn:mis:genre:SCIENCE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.28">
+          <Name xml:lang="nl">Consumenten informatie</Name>
+          <Reference>urn:tva:metadata:cs:2004:0728</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.29">
+          <Name xml:lang="nl">Reizen</Name>
+          <Reference>urn:tva:metadata:cs:2004:0729</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.30">
+          <Name xml:lang="nl">Geschiedenis</Name>
+          <Reference>urn:tva:metadata:cs:2004:0730</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.7.31">
+          <Name xml:lang="nl">Wonen/Tuin</Name>
+          <Reference>urn:tva:metadata:cs:2004:0731</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+      <Term termID="3.0.1.8">
+        <Name xml:lang="nl">Documentaire</Name>
+        <Reference>urn:tva:metadata:cs:2004:08</Reference>
+        <Reference>urn:mis:genre:DOCUMENTARY</Reference>
+        <ValidityFlag>1</ValidityFlag>
+        <Term termID="3.0.1.8.22">
+          <Name xml:lang="nl">Gezondheid/opvoeding</Name>
+          <Reference>urn:tva:metadata:cs:2004:0822</Reference>
+          <Reference>urn:mis:genre:HEALTH</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.23">
+          <Name xml:lang="nl">Koken/eten</Name>
+          <Reference>urn:tva:metadata:cs:2004:0823</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.24">
+          <Name xml:lang="nl">Kunst/cultuur</Name>
+          <Reference>urn:tva:metadata:cs:2004:0824</Reference>
+          <Reference>urn:mis:genre:ART_CULTURE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.25">
+          <Name xml:lang="nl">Natuur</Name>
+          <Reference>urn:tva:metadata:cs:2004:0825</Reference>
+          <Reference>urn:mis:genre:NATURE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.26">
+          <Name xml:lang="nl">Religieus</Name>
+          <Reference>urn:tva:metadata:cs:2004:0826</Reference>
+          <Reference>urn:mis:genre:RELIGIOUS</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.27">
+          <Name xml:lang="nl">Wetenschap</Name>
+          <Reference>urn:tva:metadata:cs:2004:0827</Reference>
+          <Reference>urn:mis:genre:SCIENCE</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.29">
+          <Name xml:lang="nl">Reizen</Name>
+          <Reference>urn:tva:metadata:cs:2004:0829</Reference>
+          <Reference>urn:mis:genre:DOCUMENTARY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+        <Term termID="3.0.1.8.30">
+          <Name xml:lang="nl">Geschiedenis</Name>
+          <Reference>urn:tva:metadata:cs:2004:0830</Reference>
+          <Reference>urn:mis:genre:DOCUMENTARY</Reference>
+          <ValidityFlag>1</ValidityFlag>
+        </Term>
+      </Term>
+    </Term>
+  </Term>
+</ClassificationScheme>

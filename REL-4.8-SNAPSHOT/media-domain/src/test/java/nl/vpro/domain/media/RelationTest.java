@@ -1,0 +1,148 @@
+/**
+ * Copyright (C) 2011 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.media;
+
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.xml.bind.util.JAXBSource;
+
+import org.junit.Test;
+import org.junit.experimental.theories.DataPoint;
+
+import nl.vpro.theory.ComparableTest;
+
+import static nl.vpro.domain.media.MediaDomainTestHelper.getXmlValidProgram;
+import static nl.vpro.domain.media.MediaDomainTestHelper.marshaller;
+import static nl.vpro.domain.media.MediaDomainTestHelper.schemaValidator;
+import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class RelationTest extends ComparableTest<Relation> {
+
+    @DataPoint
+    public static Relation nullArgument = null;
+
+    @DataPoint
+    public static Relation withDefinition = relation(null, "TYPE", "VPRO");
+
+    @DataPoint
+    public static Relation persisted = relation(1l, "TYPE", "VPRO");
+
+    private static Relation relation(Long id, String type, String broadcaster) {
+        Relation relation = new Relation(new RelationDefinition(type, broadcaster));
+        relation.setId(id);
+        return relation;
+    }
+
+    @Test
+    public void testGetUrnOnNull() throws Exception {
+        Relation relation = new Relation();
+        assertThat(relation.getUrn()).isNull();
+    }
+
+    @Test
+    public void testGetUrnFormat() throws Exception {
+        Relation relation = new Relation();
+        relation.setId(1l);
+        assertThat(relation.getUrn()).isEqualTo("urn:vpro:media:relation:1");
+    }
+
+    @Test
+    public void testSetUrn() throws Exception {
+        Relation relation = new Relation();
+        relation.setUrn("urn:vpro:media:relation:79");
+
+        assertThat(relation.getId().intValue()).isEqualTo(79);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetUrnWithoutAnId() throws Exception {
+        Relation relation = new Relation();
+        relation.setUrn("urn:vpro:media:relation:");
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSetUrnFormat() throws Exception {
+        Relation relation = new Relation();
+        relation.setUrn("vpro:media:relation:79");
+    }
+
+    @Test
+    public void testDefinitionValidation() {
+        Relation r = new Relation();
+        Set<ConstraintViolation<Relation>> constraintViolations = validator.validate(r);
+
+        assertThat(constraintViolations).hasSize(1);
+    }
+
+    @Test
+    public void testURIValidation() {
+        Relation r = new Relation(getDefinition());
+        r.setUriRef(":");
+        Set<ConstraintViolation<Relation>> constraintViolations = validator.validate(r);
+
+        assertThat(constraintViolations).hasSize(1);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testUpdateOnDifferentDefinitions() throws Exception {
+        Relation to = new Relation(new RelationDefinition());
+        Relation from = new Relation(new RelationDefinition("GIDS", "BNN"));
+        Relation.update(from, to);
+    }
+
+    @Test
+    public void testUpdateOnFieldsCopied() throws Exception {
+        Relation to = new Relation(new RelationDefinition("LABEL", "VPRO"));
+        Relation from = new Relation(new RelationDefinition("LABEL", "VPRO"));
+        from.setId(1l);
+        from.setText("Text");
+        from.setUriRef("uri");
+
+        to = Relation.update(from, to);
+
+        assertThat(to.getId()).isNull();
+        assertThat(to.getText()).isEqualTo("Text");
+        assertThat(to.getUriRef()).isEqualTo("uri");
+    }
+
+    @Test
+    public void testUpdateOnFieldsNullArgs() throws Exception {
+        Relation to = null;
+        Relation from = new Relation(new RelationDefinition());
+        to = Relation.update(from, to);
+        assertThat(to).isNotNull();
+
+        to = new Relation(new RelationDefinition());
+        from = null;
+
+        to = Relation.update(from, to);
+
+        assertThat(to).isNull();
+    }
+
+    @Test
+    public void testSchemaMapping() throws Exception {
+        schemaValidator.validate(new JAXBSource(marshaller, validProgramWithRelation()));
+    }
+
+    private Program validProgramWithRelation() {
+        Program program = getXmlValidProgram();
+
+        final Relation relation = new Relation(
+            new RelationDefinition("LABEL", "VPRO", "Record label"),
+            "http://sony.com",
+            "Sony"
+        );
+        relation.setId(56l);
+        program.addRelation(relation);
+        return program;
+    }
+
+    private RelationDefinition getDefinition() {
+        return new RelationDefinition("TYPE", "broadcaster", "text");
+    }
+}

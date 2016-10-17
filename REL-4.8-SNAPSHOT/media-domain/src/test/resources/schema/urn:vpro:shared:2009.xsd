@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="urn:vpro:shared:2009" xmlns:tns="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="image" type="tns:imageType"/>
+
+  <xs:complexType name="publishableObjectType" abstract="true">
+    <xs:complexContent>
+      <xs:extension base="tns:domainObjectType">
+        <xs:sequence/>
+        <xs:attribute name="creationDate" type="xs:dateTime"/>
+        <xs:attribute name="lastModified" type="xs:dateTime"/>
+        <xs:attribute name="publishDate" type="xs:dateTime"/>
+        <xs:attribute name="publishStart" type="xs:dateTime"/>
+        <xs:attribute name="publishStop" type="xs:dateTime"/>
+        <xs:attribute name="urn" type="xs:string"/>
+        <xs:attribute name="workflow" type="tns:workflowEnumType"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="domainObjectType" abstract="true">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="durationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:duration">
+        <xs:attribute name="authorized" type="xs:boolean"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="imageType">
+    <xs:complexContent>
+      <xs:extension base="tns:publishableObjectType">
+        <xs:sequence>
+          <xs:element name="title" type="xs:string" form="qualified"/>
+          <xs:element name="description" type="xs:string" form="qualified" minOccurs="0"/>
+          <xs:element name="imageUri" type="xs:string" form="qualified"/>
+          <xs:element name="offset" type="xs:duration" form="qualified" minOccurs="0"/>
+          <xs:element name="height" type="xs:int" form="qualified" minOccurs="0"/>
+          <xs:element name="width" type="xs:int" form="qualified" minOccurs="0"/>
+          <xs:element name="credits" type="xs:string" form="qualified" minOccurs="0"/>
+          <xs:element name="source" type="xs:string" form="qualified" minOccurs="0"/>
+          <xs:element name="date" type="xs:string" form="qualified" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="owner" type="tns:ownerTypeEnum"/>
+        <xs:attribute name="type" type="tns:imageTypeEnum" use="required"/>
+        <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:simpleType name="ownerTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BROADCASTER"/>
+      <xs:enumeration value="RADIOBOX"/>
+      <xs:enumeration value="NEBO"/>
+      <xs:enumeration value="NPO"/>
+      <xs:enumeration value="MIS"/>
+      <xs:enumeration value="CERES"/>
+      <xs:enumeration value="PLUTO"/>
+      <xs:enumeration value="PROJECTM"/>
+      <xs:enumeration value="WHATS_ON"/>
+      <xs:enumeration value="IMMIX"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="workflowEnumType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DRAFT"/>
+      <xs:enumeration value="FOR APPROVAL"/>
+      <xs:enumeration value="REFUSED"/>
+      <xs:enumeration value="FOR PUBLICATION"/>
+      <xs:enumeration value="FOR REPUBLICATION"/>
+      <xs:enumeration value="PUBLISHED"/>
+      <xs:enumeration value="MERGED"/>
+      <xs:enumeration value="PARENT REVOKED"/>
+      <xs:enumeration value="REVOKED"/>
+      <xs:enumeration value="FOR DELETION"/>
+      <xs:enumeration value="DELETED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="imageTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PICTURE"/>
+      <xs:enumeration value="PORTRAIT"/>
+      <xs:enumeration value="STILL"/>
+      <xs:enumeration value="LOGO"/>
+      <xs:enumeration value="ICON"/>
+      <xs:enumeration value="PROMO_LANDSCAPE"/>
+      <xs:enumeration value="PROMO_PORTRAIT"/>
+      <xs:enumeration value="BACKGROUND"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

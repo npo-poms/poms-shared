@@ -1,0 +1,354 @@
+package nl.vpro.domain.media.search;
+
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.SortedSet;
+
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.Tag;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.domain.user.Portal;
+import nl.vpro.domain.user.ThirdParty;
+
+/**
+ * Represents the result of a search-action. I.e. a short representation of a media object.
+ *
+ * @author Michiel Meeuwissen
+ * @since 1.5
+ */
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "item")
+@XmlType(
+    name = "mediaListItem",
+    propOrder =
+        {
+            "broadcasters",
+            "title",
+            "subTitle",
+            "description",
+            "creationDate",
+            "lastModified",
+            "createdByPrincipalId",
+            "lastModifiedByPrincipalId",
+            "sortDate",
+            "type",
+            "publishStart",
+            "publishStop",
+            "lastPublished",
+            "firstScheduleEvent",
+            "locations",
+            "tags",
+            "image"
+        }
+)
+public class MediaListItem extends PublishableListItem {
+
+    @XmlAttribute
+    private String mid;
+
+    @XmlAttribute
+    private AVType avType;
+
+    private Date lastPublished;
+
+    @XmlAttribute
+    private String mediaType;
+
+    @XmlAttribute
+    private Boolean episodesLocked;
+
+    private String description;
+
+    private String title;
+
+    private String subTitle;
+
+    @XmlTransient
+    private String lastModifiedByHolder;
+
+    @XmlTransient
+    private String createdByHolder;
+
+
+    @XmlElement(name = "broadcaster")
+    private List<Broadcaster> broadcasters;
+
+    @XmlElement(name = "tag")
+    @JsonProperty("tags")
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_EMPTY)
+    private SortedSet<Tag> tags;
+
+    @XmlTransient
+    private List<Portal> portals;
+
+    @XmlTransient
+    private List<ThirdParty> thirdParties;
+
+    private Date sortDate;
+
+    private MediaType type;
+
+    private SortedSet<Location> locations;
+
+    private ImageListItem image;
+
+    private ScheduleEvent firstScheduleEvent;
+
+    public MediaListItem() {
+    }
+
+    public MediaListItem(MediaObject media) {
+        super(media);
+
+        setUrn(media.getUrn());
+
+        this.mid = media.getMid();
+        this.avType = media.getAVType();
+
+        this.title = media.getMainTitle();
+        this.subTitle = media.getSubTitle();
+
+        this.description = media.getMainDescription();
+
+        this.broadcasters = Collections.unmodifiableList(media.getBroadcasters());
+        this.portals = Collections.unmodifiableList(media.getPortals());
+        this.thirdParties = Collections.unmodifiableList(media.getThirdParties());
+
+        if(media instanceof Program) {
+            // proxy's...
+            this.mediaType = Program.class.getName();
+        } else if(media instanceof Group) {
+            this.mediaType = Group.class.getName();
+        } else if(media instanceof Segment) {
+            this.mediaType = Segment.class.getName();
+        } else {
+            this.mediaType = getClass().getName();
+        }
+        this.type = media.getType().getMediaType();
+        this.sortDate = media.getSortDate();
+        this.locations = media.getLocations();
+        this.tags = media.getTags();
+
+        this.lastPublished = media.getLastPublished();
+
+        if(media.getScheduleEvents().size() > 0) {
+            this.firstScheduleEvent = media.getScheduleEvents().first();
+        }
+    }
+
+    @Override
+    public String getUrn() {
+        return (type == null ? "null" : type.getSubType().getUrnPrefix()) + id;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
+    }
+
+    public AVType getAvType() {
+        return avType;
+    }
+
+    public void setAvType(AVType avType) {
+        this.avType = avType;
+    }
+
+    public Date getLastPublished() {
+        return lastPublished;
+    }
+
+    public void setLastPublished(Date lastPublished) {
+        this.lastPublished = lastPublished;
+    }
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
+
+    public Boolean getEpisodesLocked() {
+        return episodesLocked;
+    }
+
+    public void setEpisodesLocked(Boolean episodesLocked) {
+        this.episodesLocked = episodesLocked;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+    public List<Broadcaster> getBroadcasters() {
+        return broadcasters;
+    }
+
+    public void setBroadcasters(List<Broadcaster> broadcasters) {
+        this.broadcasters = broadcasters;
+    }
+
+    public List<Portal> getPortals() {
+        return portals;
+    }
+
+    public void setPortals(List<Portal> portals) {
+        this.portals = portals;
+    }
+
+    public List<ThirdParty> getThirdParties() {
+        return thirdParties;
+    }
+
+    public void setThirdParties(List<ThirdParty> thirdParties) {
+        this.thirdParties = thirdParties;
+    }
+
+    public Date getSortDate() {
+        return sortDate;
+    }
+
+    public void setSortDate(Date sortDate) {
+        this.sortDate = sortDate;
+    }
+
+    public MediaType getType() {
+        return type;
+    }
+
+    public void setType(MediaType type) {
+        this.type = type;
+    }
+
+    public SortedSet<Location> getLocations() {
+        return locations;
+    }
+
+    public void setLocations(SortedSet<Location> locations) {
+        this.locations = locations;
+    }
+
+    public SortedSet<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(SortedSet<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public ImageListItem getImage() {
+        return image;
+    }
+
+    public void setImage(ImageListItem image) {
+        this.image = image;
+    }
+
+    public ScheduleEvent getFirstScheduleEvent() {
+        return firstScheduleEvent;
+    }
+
+    public void setFirstScheduleEvent(ScheduleEvent firstScheduleEvent) {
+        this.firstScheduleEvent = firstScheduleEvent;
+    }
+
+    @XmlElement(name = "createdBy")
+    public String getCreatedByPrincipalId() {
+        return createdBy == null ? createdByHolder : createdBy.getPrincipalId();
+    }
+
+    public void setCreatedByPrincipalId(String principalId) {
+        createdByHolder = principalId;
+    }
+
+    @Override
+    @XmlElement
+    public Date getCreationDate() {
+        return super.getCreationDate();
+    }
+
+    @Override
+    public void setCreationDate(Date creationDate) {
+        super.setCreationDate(creationDate);
+    }
+
+    @Override
+    @XmlElement
+    public Date getLastModified() {
+        return super.getLastModified();
+    }
+
+    @Override
+    public void setLastModified(Date lastModified) {
+        super.setLastModified(lastModified);
+    }
+
+    @XmlElement(name = "lastModifiedBy")
+    public String getLastModifiedByPrincipalId() {
+        return lastModifiedBy == null ? lastModifiedByHolder : lastModifiedBy.getPrincipalId();
+    }
+
+    public void setLastModifiedByPrincipalId(String principalId) {
+        lastModifiedByHolder = principalId;
+    }
+
+    @Override
+    @XmlElement
+    public Date getPublishStart() {
+        return super.getPublishStart();
+    }
+
+    @Override
+    public void setPublishStart(Date publishStart) {
+        super.setPublishStart(publishStart);
+    }
+
+    @Override
+    @XmlElement
+    public Date getPublishStop() {
+        return super.getPublishStop();
+    }
+
+    @Override
+    public void setPublishStop(Date publishStop) {
+        super.setPublishStop(publishStop);
+    }
+
+    @Override
+    public String toString() {
+        return mid + " " + title;
+    }
+
+}
