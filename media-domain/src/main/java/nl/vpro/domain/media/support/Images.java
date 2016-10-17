@@ -21,21 +21,33 @@ public class Images {
 
     public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
 
+    private static String imageHost;
+
+    public static String getImageHost() {
+        String fromSystem = System.getProperty(IMAGE_SERVER_BASE_URL_PROPERTY);
+        if (fromSystem != null) {
+            return  fromSystem;
+        }
+        return imageHost;
+    }
+    public static void setImageHost(String host) {
+        imageHost = host;
+    }
+
     /**
      * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
      * obtain a base url for an image host.
      *
-     * @param image
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
     public static String getImageLocation(Image image, String fileExtension, String... conversions) {
-        String imageHost = System.getProperty(IMAGE_SERVER_BASE_URL_PROPERTY);
-
-        if(imageHost == null) {
+        String imageHost = getImageHost();
+        if (imageHost == null) {
             LOG.warn("Property: {} not set. Can't determine a base url to an image host, producing data with empty image URLs", IMAGE_SERVER_BASE_URL_PROPERTY);
             return null;
         }
+
 
         if(fileExtension == null) {
             throw new NullPointerException("Should provide a file extension, not null");
