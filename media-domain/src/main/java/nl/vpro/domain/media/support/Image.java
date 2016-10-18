@@ -180,6 +180,7 @@ public class Image extends PublishableObject implements Ownable {
         return Long.valueOf(id);
     }
 
+
     public static Image update(Image from, Image to, OwnerType owner) {
         if(from != null) {
             if(to == null) {
@@ -197,12 +198,10 @@ public class Image extends PublishableObject implements Ownable {
             to.setWidth(from.getWidth());
             to.setType(from.getType());
             to.setImageUri(from.getImageUri());
-
-        } else if(from == null) {
-            to = null;
+            return to;
+        } else {
+            return null;
         }
-
-        return to;
     }
 
     @Override
