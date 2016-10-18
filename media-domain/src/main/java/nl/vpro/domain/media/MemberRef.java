@@ -488,4 +488,12 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
         return false;
     }
+
+    @PrePersist
+    @PreUpdate
+    public void prePersist() {
+        if (this.added == null) {
+            this.added = new Date();
+        }
+    }
 }
