@@ -11,7 +11,7 @@ import static org.junit.Assume.assumeNotNull;
  * @author Michiel Meeuwissen
  * @since 1.6
  */
-public class ComparableTest<S extends Comparable<S>> extends ObjectTest<S> {
+public abstract class ComparableTest<S extends Comparable<S>> extends ObjectTest<S> {
 
     @Theory
     public final void equalsConstistentWithComparable(Comparable x, Comparable y) {

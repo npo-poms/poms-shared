@@ -5,20 +5,10 @@
  */
 package nl.vpro.domain.media.support;
 
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.zip.CRC32;
-
-import javax.persistence.*;
-import javax.xml.bind.JAXB;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
+import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.user.Editor;
+import nl.vpro.validation.Publishable;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.Filter;
@@ -27,11 +17,27 @@ import org.hibernate.internal.FilterImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.user.Editor;
-import nl.vpro.validation.Publishable;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.xml.bind.JAXB;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.zip.CRC32;
 
 /**
  * Publishable contains all items for Publishables.
@@ -446,5 +452,4 @@ public abstract class PublishableObject extends DomainObject {
         workflow = null;
         creationDate = null;
     }
-
 }

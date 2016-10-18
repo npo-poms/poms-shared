@@ -47,11 +47,13 @@ public class GeoRestriction extends Restriction {
     public GeoRestriction(Region region, Date start, Date stop) {
         super(start, stop);
         this.region = region;
+        authorityUpdate = true;
     }
 
     public GeoRestriction(Long id, Region region, Date start, Date stop) {
         super(id, start, stop);
         this.region = region;
+        authorityUpdate = true;
     }
 
     public GeoRestriction(GeoRestriction source) {
@@ -75,6 +77,9 @@ public class GeoRestriction extends Restriction {
     }
 
     public void setRegion(Region region) {
+        if (region != this.region) {
+            authorityUpdate = true;
+        }
         this.region = region;
     }
 
