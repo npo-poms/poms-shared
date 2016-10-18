@@ -5,33 +5,15 @@
  */
 package nl.vpro.domain.media;
 
-import java.time.Instant;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageType;
@@ -40,7 +22,15 @@ import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.bind.LocaleAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.Description;
+import nl.vpro.domain.media.support.Duration;
+import nl.vpro.domain.media.support.Image;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.PublishableObject;
+import nl.vpro.domain.media.support.Tag;
+import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
@@ -50,6 +40,68 @@ import nl.vpro.util.ResortedSortedSet;
 import nl.vpro.util.SortedSetSameElementWrapper;
 import nl.vpro.validation.Language;
 import nl.vpro.validation.StringList;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.FilterDefs;
+import org.hibernate.annotations.Filters;
+import org.hibernate.annotations.ParamDef;
+import org.hibernate.annotations.SortNatural;
+import org.hibernate.annotations.Type;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderColumn;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Transient;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * Base objects for programs and groups
@@ -1660,6 +1712,9 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     public void setAgeRating(AgeRating ageRating) {
+        if (this.ageRating != ageRating) {
+            this.locationAuthorityUpdate = true;
+        }
         this.ageRating = ageRating;
     }
 
@@ -2501,7 +2556,19 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @Override
     public PublishableObject setPublishStart(Date publishStart) {
         sortDateValid = false;
+        if (this.publishStart != publishStart && getLocationAuthorityRecord(Platform.INTERNETVOD) != null && getLocationAuthorityRecord(Platform.INTERNETVOD).hasAuthority()) {
+            locationAuthorityUpdate = true;
+        }
         return super.setPublishStart(publishStart);
+    }
+
+    @Override
+    public PublishableObject setPublishStop(Date publishStop) {
+        sortDateValid = false;
+        if (this.publishStop != publishStop && getLocationAuthorityRecord(Platform.INTERNETVOD) != null && getLocationAuthorityRecord(Platform.INTERNETVOD).hasAuthority()) {
+            locationAuthorityUpdate = true;
+        }
+        return super.setPublishStop(publishStop);
     }
 
     @Override
@@ -2514,6 +2581,11 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     public void setWorkflow(Workflow workflow) {
         if (workflow == Workflow.PUBLISHED && isMerged()) {
             throw new IllegalArgumentException("Merged media should obtain workflow  \"MERGED\" instead of \"PUBLISHED\"");
+        }
+
+        if (((this.workflow == Workflow.DELETED && workflow != Workflow.DELETED) || (this.workflow != Workflow.DELETED && workflow == Workflow.DELETED)) &&
+                getLocationAuthorityRecord(Platform.INTERNETVOD) != null && getLocationAuthorityRecord(Platform.INTERNETVOD).hasAuthority()) {
+            locationAuthorityUpdate = true;
         }
 
         super.setWorkflow(workflow);
@@ -2706,6 +2778,18 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             for (Prediction pred : predictions) {
                 LocationAuthorityRecord.unknownAuthority(this, pred.getPlatform());
             }
+        }
+    }
+
+    @PreUpdate
+    @PrePersist
+    public void updateLastModified() {
+        if (lastModified == null) {
+            lastModified = new Date();
+        }
+
+        if (creationDate == null) {
+            creationDate = new Date();
         }
     }
 }

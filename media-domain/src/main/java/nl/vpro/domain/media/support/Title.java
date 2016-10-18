@@ -158,7 +158,7 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = title != null ? title.replaceAll("[\f\\u0085\\u2028\\u2029  ]", " ") : title;
         crop();
     }
 

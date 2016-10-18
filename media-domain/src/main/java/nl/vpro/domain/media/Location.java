@@ -444,7 +444,12 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
                 }
                 mediaObject.realizePrediction(this);
             }
+
+            if (hasCeresAuthority()) {
+                authorityUpdate = true;
+            }
         }
+
         return this;
     }
 
@@ -463,14 +468,21 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
     @Override
     public PublishableObject setPublishStop(Date publishStop) {
+        if (! Objects.equals(this.publishStop, publishStop)) {
 
-        super.setPublishStop(publishStop);
-        if(mediaObject != null) {
-            if (isCeresLocation()) {
-                getAuthorityRecord().setRestrictionStop(publishStop);
+            super.setPublishStop(publishStop);
+            if (mediaObject != null) {
+                if (isCeresLocation()) {
+                    getAuthorityRecord().setRestrictionStop(publishStop);
+                }
+                mediaObject.realizePrediction(this);
             }
-            mediaObject.realizePrediction(this);
+
+            if (hasCeresAuthority()) {
+                authorityUpdate = true;
+            }
         }
+
         return this;
     }
 
@@ -578,16 +590,13 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
      * Returns true if ceres has the authority about this record. So normall it can not be edited in POMS.
      *
      */
-    public Boolean ceresHasAuthority() {
+    private boolean hasCeresAuthority() {
         if (mediaObject == null) {
             // unknown
-            return null;
-        }
-        LocationAuthorityRecord record = getAuthorityRecord();
-        if (record == null) {
             return false;
         }
-        return record.hasAuthority();
+        LocationAuthorityRecord record = getAuthorityRecord();
+        return record != null && record.hasAuthority();
     }
 
     public final static Comparator<Location> PRESENTATION_ORDER = new PresentationComparator();
