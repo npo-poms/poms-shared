@@ -48,7 +48,7 @@
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
-      <artifactId>shared-test</artifactId>
+      <artifactId>vpro-shared-test</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
