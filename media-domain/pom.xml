@@ -19,19 +19,19 @@
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
-      <artifactId>shared-xml</artifactId>
+      <artifactId>vpro-shared-xml</artifactId>
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
-      <artifactId>shared-util</artifactId>
+      <artifactId>vpro-shared-util</artifactId>
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
-      <artifactId>shared-validation</artifactId>
+      <artifactId>vpro-shared-validation</artifactId>
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
-      <artifactId>shared-jackson2</artifactId>
+      <artifactId>vpro-shared-jackson2</artifactId>
     </dependency>
     <dependency>
       <groupId>nl.vpro.user</groupId>
@@ -110,7 +110,7 @@
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
-      <artifactId>shared-test</artifactId>
+      <artifactId>vpro-shared-test</artifactId>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
