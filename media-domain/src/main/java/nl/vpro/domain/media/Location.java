@@ -587,10 +587,10 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         return hasPlatform();
     }
     /**
-     * Returns true if ceres has the authority about this record. So normall it can not be edited in POMS.
+     * Returns true if ceres has the authority about this record. So normally it can not be edited in POMS.
      *
      */
-    private boolean hasCeresAuthority() {
+    public boolean hasCeresAuthority() {
         if (mediaObject == null) {
             // unknown
             return false;
