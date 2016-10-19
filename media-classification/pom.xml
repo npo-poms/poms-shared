@@ -52,7 +52,7 @@
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
-      <artifactId>shared-util</artifactId>
+      <artifactId>vpro-shared-util</artifactId>
     </dependency>
     <dependency>
       <groupId>javax.cache</groupId>
