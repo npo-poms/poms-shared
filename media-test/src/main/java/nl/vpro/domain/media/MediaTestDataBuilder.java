@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
@@ -27,9 +30,9 @@ public interface MediaTestDataBuilder<
         >
     extends MediaBuilder<T, M>, Cloneable {
 
-    AtomicLong id = new AtomicLong(0L);
+    AtomicLong idBase = new AtomicLong(0L);
 
-    AtomicLong mid = new AtomicLong(12345L);
+    AtomicLong midBase = new AtomicLong(12345L);
 
     static ProgramTestDataBuilder program() {
         return new ProgramTestDataBuilder();
@@ -177,7 +180,7 @@ public interface MediaTestDataBuilder<
 
 
     default T withId() {
-        return id(id.incrementAndGet());
+        return id(idBase.incrementAndGet());
     }
 
     default T withWorkflow() {
@@ -193,12 +196,12 @@ public interface MediaTestDataBuilder<
     }
 
     default T withUrn() {
-        return id(id.incrementAndGet());
+        return id(idBase.incrementAndGet());
     }
 
 
     default T withMid() {
-        return mid("VPROWON_" + mid.incrementAndGet());
+        return mid("VPROWON_" + midBase.incrementAndGet());
     }
 
     default T title(String mainTitle) {
@@ -323,9 +326,9 @@ public interface MediaTestDataBuilder<
     }
 
     default T withMemberOf() throws ModificationException {
-        Group series = group().constrained().id(100L).type(GroupType.SERIES).mediaObject();
+        Group series = group().constrained().id(100L).type(GroupType.SERIES).build();
 
-        Group season = group().constrained().id(200L).type(GroupType.SEASON).mediaObject();
+        Group season = group().constrained().id(200L).type(GroupType.SEASON).build();
         try {
             season.createMemberOf(series, 1);
         } catch(CircularReferenceException e) {
@@ -446,7 +449,7 @@ public interface MediaTestDataBuilder<
     }
 
     default T withMergedTo() {
-        return mergedTo(MediaBuilder.group().type(GroupType.SEASON).mediaObject());
+        return mergedTo(MediaBuilder.group().type(GroupType.SEASON).build());
     }
 
     static Image image(OwnerType ownerType, String urn, Workflow workflow) {
@@ -458,6 +461,8 @@ public interface MediaTestDataBuilder<
 
     class ProgramTestDataBuilder extends MediaBuilder.AbstractProgramBuilder<ProgramTestDataBuilder> implements MediaTestDataBuilder<ProgramTestDataBuilder, Program> {
 
+        static final Logger LOG = LoggerFactory.getLogger(ProgramTestDataBuilder.class);
+
         ProgramTestDataBuilder() {
             super();
         }
@@ -466,7 +471,9 @@ public interface MediaTestDataBuilder<
         }
         @Override
         public MediaBuilder<MediaBuilder.ProgramBuilder, Program> getMediaBuilder() {
-            return MediaBuilder.program(mediaObject());
+            ProgramBuilder builder = MediaBuilder.program(mediaObject());
+            builder.mid(mid);
+            return builder;
         }
 
         @Override
@@ -486,13 +493,12 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withEpisodeOf(Long group1, Long group2) throws ModificationException {
-            Group series = MediaTestDataBuilder.group().constrained().type(GroupType.SERIES).id(group1).mediaObject();
-
-            Group season = MediaTestDataBuilder.group().constrained().type(GroupType.SEASON).id(group2).mediaObject();
+            Group series = MediaTestDataBuilder.group().constrained().type(GroupType.SERIES).id(group1).build();
+            Group season = MediaTestDataBuilder.group().constrained().type(GroupType.SEASON).id(group2).build();
             try {
                 season.createMemberOf(series, 1);
             } catch(CircularReferenceException e) {
-                e.printStackTrace();
+                LOG.error(e.getMessage());
             }
 
             return episodeOf(season, 1);
@@ -538,7 +544,9 @@ public interface MediaTestDataBuilder<
         }
         @Override
         public MediaBuilder<MediaBuilder.GroupBuilder, Group> getMediaBuilder() {
-            return MediaBuilder.group(mediaObject());
+            GroupBuilder builder = MediaBuilder.group(mediaObject());
+            builder.mid(mid);
+            return builder;
         }
 
         @Override
@@ -575,7 +583,9 @@ public interface MediaTestDataBuilder<
 
         @Override
         public MediaBuilder<MediaBuilder.SegmentBuilder, Segment> getMediaBuilder() {
-            return MediaBuilder.segment(mediaObject());
+            SegmentBuilder builder = MediaBuilder.segment(mediaObject());
+            builder.mid(mid);
+            return builder;
         }
 
         public SegmentTestDataBuilder withStart() {

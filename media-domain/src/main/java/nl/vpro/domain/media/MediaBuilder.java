@@ -654,7 +654,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     abstract class AbstractBuilder<T extends AbstractBuilder<T, M>, M extends MediaObject>  implements MediaBuilder<T, M>, Cloneable {
 
-        private String mid;
+        protected String mid;
 
         protected AbstractBuilder(M m) {
             this.mediaObject = m;
@@ -757,6 +757,12 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
                 }
             }
             return (T) this;
+        }
+
+        @Override
+        public Program build() {
+            super.build();
+            return mediaObject;
         }
 
     }
