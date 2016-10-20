@@ -168,6 +168,8 @@ public class ImageUpdate {
         result.setHeight(height);
         result.setCredits(credits);
         result.setSource(source);
+        result.setSourceName(sourceName);
+        result.setLicense(license);
         result.setDate(date);
         result.setOffset(offset);
         return result;
