@@ -18,7 +18,7 @@
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
-      <artifactId>shared-ws</artifactId>
+      <artifactId>vpro-shared-ws</artifactId>
       <version>${shared.version}</version>
     </dependency>
   </dependencies>
