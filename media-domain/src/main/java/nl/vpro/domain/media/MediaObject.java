@@ -2232,11 +2232,13 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     private void clearCeresRecord(Platform platform) {
-        Iterator<LocationAuthorityRecord> i = locationAuthorityRecords.iterator();
-        while (i.hasNext()) {
-            LocationAuthorityRecord cr = i.next();
-            if (cr.getPlatform() == platform) {
-                i.remove();
+        if (locationAuthorityRecords != null) {
+            Iterator<LocationAuthorityRecord> i = locationAuthorityRecords.iterator();
+            while (i.hasNext()) {
+                LocationAuthorityRecord cr = i.next();
+                if (cr.getPlatform() == platform) {
+                    i.remove();
+                }
             }
         }
     }
