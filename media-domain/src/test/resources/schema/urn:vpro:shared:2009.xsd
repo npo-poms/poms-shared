@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema version="1.0" targetNamespace="urn:vpro:shared:2009" xmlns:tns="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema version="1.0" targetNamespace="urn:vpro:shared:2009" xmlns:tns="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:vpro:media:2009">
+
+  <xs:import namespace="urn:vpro:media:2009" schemaLocation="urn:vpro:media:2009.xsd"/>
 
   <xs:element name="image" type="tns:imageType"/>
 
@@ -42,6 +44,8 @@
           <xs:element name="width" type="xs:int" form="qualified" minOccurs="0"/>
           <xs:element name="credits" type="xs:string" form="qualified" minOccurs="0"/>
           <xs:element name="source" type="xs:string" form="qualified" minOccurs="0"/>
+          <xs:element name="sourceName" type="xs:string" form="qualified" minOccurs="0"/>
+          <xs:element name="license" type="ns1:license" form="qualified" minOccurs="0"/>
           <xs:element name="date" type="xs:string" form="qualified" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="owner" type="tns:ownerTypeEnum"/>
