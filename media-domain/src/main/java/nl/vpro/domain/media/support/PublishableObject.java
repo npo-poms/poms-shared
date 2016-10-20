@@ -22,6 +22,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.JAXB;
@@ -48,7 +49,7 @@ import java.util.zip.CRC32;
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Publishable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
@@ -111,9 +112,11 @@ public abstract class PublishableObject extends DomainObject {
     protected Date lastModified;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "createdby_principalid")
     protected Editor createdBy;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "lastmodifiedby_principalid")
     protected Editor lastModifiedBy;
 
     protected Date publishStart;

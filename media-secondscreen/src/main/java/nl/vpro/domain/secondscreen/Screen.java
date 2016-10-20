@@ -30,7 +30,7 @@ import nl.vpro.domain.media.support.PublishableObject;
  * @author Roelof Jan Koekoek
  * @since 3.8
  */
-@Entity
+@Entity(name = "screen")
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "screenType", propOrder = {
