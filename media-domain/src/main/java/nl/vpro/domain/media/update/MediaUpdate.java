@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,7 +16,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.validation.WarningValidatorGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,6 +27,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Organization;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.validation.StringList;
+import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -173,62 +174,62 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     public abstract MediaUpdateConfig getConfig();
 
     public M fetch() {
-        build().setCreationDate(null);
+        builder.creationDate((Instant) null);
         if (notTransforming(broadcasters)) {
-            build().setBroadcasters(broadcasters.stream().map(Broadcaster::new).collect(Collectors.toList()));
+            mediaObject().setBroadcasters(broadcasters.stream().map(Broadcaster::new).collect(Collectors.toList()));
             broadcasters = null;
         }
         if (notTransforming(portals)) {
-            build().setPortals(portals.stream().map(p -> new Portal(p, p)).collect(Collectors.toList()));
+            mediaObject().setPortals(portals.stream().map(p -> new Portal(p, p)).collect(Collectors.toList()));
             portals = null;
         }
         if (notTransforming(tags)) {
-            build().setTags(tags.stream().map(Tag::new).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject().setTags(tags.stream().map(Tag::new).collect(Collectors.toCollection(TreeSet::new)));
             tags = null;
         }
         if (notTransforming(persons)) {
-            build().setPersons(persons.stream().map(PersonUpdate::toPerson).collect(Collectors.toList()));
+            mediaObject().setPersons(persons.stream().map(PersonUpdate::toPerson).collect(Collectors.toList()));
             persons = null;
 
         }
         if (notTransforming(portalRestrictions)) {
-            build().setPortalRestrictions(portalRestrictions.stream().map(PortalRestrictionUpdate::toPortalRestriction).collect(Collectors.toList()));
+            mediaObject().setPortalRestrictions(portalRestrictions.stream().map(PortalRestrictionUpdate::toPortalRestriction).collect(Collectors.toList()));
             portalRestrictions = null;
         }
         if (notTransforming(geoRestrictions)) {
-            build().setGeoRestrictions(geoRestrictions.stream().map(GeoRestrictionUpdate::toGeoRestriction).collect(Collectors.toList()));
+            mediaObject().setGeoRestrictions(geoRestrictions.stream().map(GeoRestrictionUpdate::toGeoRestriction).collect(Collectors.toList()));
             geoRestrictions = null;
         }
         if (notTransforming(titles)) {
-            build().setTitles(titles.stream().map(t -> new Title(t.getTitle(), owner, t.getType())).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject().setTitles(titles.stream().map(t -> new Title(t.getTitle(), owner, t.getType())).collect(Collectors.toCollection(TreeSet::new)));
             titles = null;
         }
         if (notTransforming(descriptions)) {
-            build().setDescriptions(descriptions.stream().map(d -> new Description(d.getDescription(), owner, d.getType())).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject().setDescriptions(descriptions.stream().map(d -> new Description(d.getDescription(), owner, d.getType())).collect(Collectors.toCollection(TreeSet::new)));
             descriptions = null;
         }
         if (notTransforming(websites)) {
-            build().setWebsites(websites.stream().map(Website::new).collect(Collectors.toList()));
+            mediaObject().setWebsites(websites.stream().map(Website::new).collect(Collectors.toList()));
             websites = null;
         }
         if (notTransforming(genres)) {
-            build().setWebsites(websites.stream().map(Website::new).collect(Collectors.toList()));
+            mediaObject().setWebsites(websites.stream().map(Website::new).collect(Collectors.toList()));
             websites = null;
         }
         if (notTransforming(memberOf)) {
-            build().setMemberOf(memberOf.stream().map(this::toMemberRef).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject().setMemberOf(memberOf.stream().map(this::toMemberRef).collect(Collectors.toCollection(TreeSet::new)));
             memberOf = null;
         }
         if (notTransforming(locations)) {
-            build().setLocations(locations.stream().map(LocationUpdate::toLocation).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject().setLocations(locations.stream().map(LocationUpdate::toLocation).collect(Collectors.toCollection(TreeSet::new)));
             locations = null;
         }
         if (notTransforming(relations)) {
-            build().setRelations(relations.stream().map(RelationUpdate::toRelation).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject().setRelations(relations.stream().map(RelationUpdate::toRelation).collect(Collectors.toCollection(TreeSet::new)));
             relations = null;
         }
         if (notTransforming(scheduleEvents)) {
-            build().setScheduleEvents(scheduleEvents.stream().map(ScheduleEventUpdate::toScheduleEvent).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject().setScheduleEvents(scheduleEvents.stream().map(ScheduleEventUpdate::toScheduleEvent).collect(Collectors.toCollection(TreeSet::new)));
             scheduleEvents = null;
         }
 
@@ -273,7 +274,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @Size.List({@Size(max = 255), @Size(min = 4)})
     @Pattern(regexp = "^[ \\.a-zA-Z0-9_-]+$", flags = {Pattern.Flag.CASE_INSENSITIVE}, message = "{nl.vpro.constraints.mid}")
     public final String getMid() {
-        return build().getMid();
+        return mediaObject().getMid();
     }
 
     /**
@@ -285,12 +286,12 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
 
     public SubMediaType getType() {
-        return build().getType();
+        return mediaObject().getType();
     }
 
     @XmlAttribute
     public Boolean isDeleted() {
-        if (build().isDeleted()) {
+        if (mediaObject().isDeleted()) {
             return Boolean.TRUE;
         }
         return null;
@@ -304,10 +305,10 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlAttribute
     public String getUrn() {
-        if(build().getId() == null) {
+        if(mediaObject().getId() == null) {
             return null;
         }
-        return build().getUrn();
+        return mediaObject().getUrn();
     }
 
 
@@ -317,7 +318,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlAttribute(name = "avType")
     public AVType getAVType() {
-        return build().getAVType();
+        return mediaObject().getAVType();
     }
 
     public void setAVType(AVType avType) {
@@ -326,7 +327,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlAttribute
     public Boolean getEmbeddable() {
-        return build().isEmbeddable();
+        return mediaObject().isEmbeddable();
     }
 
     public void setEmbeddable(Boolean isEmbeddable) {
@@ -335,7 +336,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlAttribute
     public Date getPublishStart() {
-        return build().getPublishStart();
+        return mediaObject().getPublishStart();
     }
 
     public void setPublishStart(Date publishStart) {
@@ -344,7 +345,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlAttribute
     public Date getPublishStop() {
-        return build().getPublishStop();
+        return mediaObject().getPublishStop();
     }
 
     public void setPublishStop(Date publishStop) {
@@ -354,17 +355,17 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "crid")
     @StringList(pattern = "(?i)crid://.*/.*")
     public List<String> getCrids() {
-        return build().getCrids();
+        return mediaObject().getCrids();
     }
 
     public void setCrids(List<String> crids) {
-        build().setCrids(crids);
+        mediaObject().setCrids(crids);
     }
 
     @XmlElement(name = "broadcaster", required = true)
     public List<String> getBroadcasters() {
         if (broadcasters == null) {
-            broadcasters = new TransformingList<>(build().getBroadcasters(),
+            broadcasters = new TransformingList<>(mediaObject().getBroadcasters(),
                 Organization::getId,
                 Broadcaster::new
             );
@@ -383,7 +384,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "portal", required = false)
     public List<String> getPortals() {
         if (portals == null) {
-            portals  = new TransformingList<>(build().getPortals(),
+            portals  = new TransformingList<>(mediaObject().getPortals(),
                 Organization::getId,
                 p -> new Portal(p, p)
             );
@@ -401,7 +402,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "exclusive")
     public List<PortalRestrictionUpdate> getPortalRestrictions() {
         if (portalRestrictions == null) {
-            portalRestrictions = new TransformingList<>(build().getPortalRestrictions(),
+            portalRestrictions = new TransformingList<>(mediaObject().getPortalRestrictions(),
                 PortalRestrictionUpdate::new,
                 PortalRestrictionUpdate::toPortalRestriction
             );
@@ -424,7 +425,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "region")
     public List<GeoRestrictionUpdate> getGeoRestrictions() {
         if (geoRestrictions == null) {
-            geoRestrictions = new TransformingList<>(build().getGeoRestrictions(),
+            geoRestrictions = new TransformingList<>(mediaObject().getGeoRestrictions(),
                 GeoRestrictionUpdate::new,
                 GeoRestrictionUpdate::toGeoRestriction
             );
@@ -440,7 +441,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     public SortedSet<TitleUpdate> getTitles() {
         if (titles == null) {
             titles =
-                new TransformingSortedSet<TitleUpdate, Title>(build().getTitles(),
+                new TransformingSortedSet<TitleUpdate, Title>(mediaObject().getTitles(),
                     t -> new TitleUpdate(t.getTitle(), t.getType(), MediaUpdate.this),
                     t -> new Title(t.getTitle(), owner, t.getType())
                 ).filter(); // update object filter titles with same type different owner
@@ -471,7 +472,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "description")
     public SortedSet<DescriptionUpdate> getDescriptions() {
         if (descriptions == null) {
-            descriptions = new TransformingSortedSet<DescriptionUpdate, Description>(build().getDescriptions(),
+            descriptions = new TransformingSortedSet<DescriptionUpdate, Description>(mediaObject().getDescriptions(),
                 d -> new DescriptionUpdate(d.getDescription(), d.getType(), MediaUpdate.this),
                 d -> new Description(d.getDescription(), owner, d.getType())).filter();
         }
@@ -502,7 +503,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "tag")
     public SortedSet<String> getTags() {
         if (tags == null) {
-            tags = new TransformingSortedSet<>(build().getTags(),
+            tags = new TransformingSortedSet<>(mediaObject().getTags(),
                 Tag::getText,
                 Tag::new
             );
@@ -521,7 +522,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "genre")
     public SortedSet<String> getGenres() {
         if (genres == null) {
-            genres = new TransformingSortedSet<>(build().getGenres(),
+            genres = new TransformingSortedSet<>(mediaObject().getGenres(),
                 Genre::getTermId,
                 Genre::new);
         }
@@ -539,10 +540,10 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlElement(name = "avAttributes")
     public AVAttributesUpdate getAvAttributes() {
-        if(build().getAvAttributes() == null) {
+        if(mediaObject().getAvAttributes() == null) {
             return null;
         }
-        return new AVAttributesUpdate(build().getAvAttributes());
+        return new AVAttributesUpdate(mediaObject().getAvAttributes());
     }
 
     public void setAvAttributes(AVAttributesUpdate avAttributes) {
@@ -553,7 +554,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     public java.time.Duration getDuration() {
-        Duration dur = build().getDuration();
+        Duration dur = mediaObject().getDuration();
         return dur == null ? null : dur.get();
     }
 
@@ -568,7 +569,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlElement
     public Short getReleaseYear() {
-        return build().getReleaseYear();
+        return mediaObject().getReleaseYear();
     }
 
     public void setReleaseYear(Short releaseYear) {
@@ -578,8 +579,8 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElementWrapper(name = "credits")
     @XmlElement(name = "person")
     public List<PersonUpdate> getPersons() {
-        if (persons == null && ! build().getPersons().isEmpty()) {
-            persons = new TransformingList<>(build().getPersons(),
+        if (persons == null && ! mediaObject().getPersons().isEmpty()) {
+            persons = new TransformingList<>(mediaObject().getPersons(),
                 PersonUpdate::new,
                 PersonUpdate::toPerson);
         }
@@ -596,7 +597,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement
     public SortedSet<MemberRefUpdate> getMemberOf() {
         if (memberOf == null) {
-            memberOf = new TransformingSortedSet<>(build().getMemberOf(),
+            memberOf = new TransformingSortedSet<>(mediaObject().getMemberOf(),
                 MemberRefUpdate::create,
                 this::toMemberRef
             );
@@ -605,7 +606,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     }
     protected MemberRef toMemberRef(MemberRefUpdate m) {
         MemberRef ref = new MemberRef();
-        ref.setMember(build());
+        ref.setMember(mediaObject());
         ref.setMediaRef(m.getMediaRef());
         ref.setNumber(m.getPosition());
         ref.setHighlighted(m.isHighlighted());
@@ -621,7 +622,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement
     @NotNull(groups = { WarningValidatorGroup.class })
     public AgeRating getAgeRating() {
-        return build().getAgeRating();
+        return mediaObject().getAgeRating();
     }
 
     public void setAgeRating(AgeRating ageRating) {
@@ -631,7 +632,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlElement(name = "contentRating")
     public List<ContentRating> getContentRatings() {
-        return build().getContentRatings();
+        return mediaObject().getContentRatings();
     }
 
     public void setContentRatings(List<ContentRating> list) {
@@ -641,7 +642,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @XmlElement
     public List<String> getEmail() {
-        return build().getEmail();
+        return mediaObject().getEmail();
     }
 
     public void setEmail(List<String> emails) {
@@ -655,7 +656,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "website")
     public List<String> getWebsites() {
         if (websites == null) {
-            websites = new TransformingList<>(build().getWebsites(),
+            websites = new TransformingList<>(mediaObject().getWebsites(),
                 Website::getUrl,
                 Website::new
             );
@@ -672,7 +673,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     }
 
     public void setWebsiteObjects(List<Website> websites) {
-        build().setWebsites(websites);
+        mediaObject().setWebsites(websites);
         this.websites = null;
     }
 
@@ -680,7 +681,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "location")
     public SortedSet<LocationUpdate> getLocations() {
         if (locations == null) {
-            locations = new TransformingSortedSet<>(build().getLocations(),
+            locations = new TransformingSortedSet<>(mediaObject().getLocations(),
                 LocationUpdate::new,
                 LocationUpdate::toLocation)
                 .filter(l -> l.getOwner() == MediaUpdate.this.owner)  // MSE-2261
@@ -700,7 +701,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "scheduleEvent")
     public Set<ScheduleEventUpdate> getScheduleEvents() {
         if (scheduleEvents == null) {
-            scheduleEvents = new TransformingSortedSet<>(build().getScheduleEvents(),
+            scheduleEvents = new TransformingSortedSet<>(mediaObject().getScheduleEvents(),
                 ScheduleEventUpdate::new,
                 ScheduleEventUpdate::toScheduleEvent);
         }
@@ -714,7 +715,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "relation")
     public SortedSet<RelationUpdate> getRelations() {
         if (relations == null) {
-            relations = new TransformingSortedSet<>(build().getRelations(),
+            relations = new TransformingSortedSet<>(mediaObject().getRelations(),
                 RelationUpdate::new,
                 RelationUpdate::toRelation
             );
@@ -731,7 +732,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     public List<ImageUpdate> getImages() {
         if(images == null) {
             images = new ArrayList<>();
-            for(Image image : build().getImages()) {
+            for(Image image : mediaObject().getImages()) {
                 if(this.owner == null || image.getOwner() == this.owner) { // MSE-2261
                     images.add(new ImageUpdate(image));
                 }
@@ -775,5 +776,9 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     protected M build() {
         return builder.build();
+    }
+
+    protected M mediaObject() {
+        return builder.mediaObject();
     }
 }
