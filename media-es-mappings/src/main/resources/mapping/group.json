@@ -319,6 +319,13 @@
                         "type": "string",
                         "index": "not_analyzed"
                     },
+                    "sourceName": {
+                        "type": "string"
+                    },
+                    "license": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                    },
                     "date" : {
                         "type" : "string",
                         "index" : "not_analyzed"
