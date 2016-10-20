@@ -6,7 +6,7 @@ package nl.vpro.domain.user;
 
 import java.util.List;
 
-interface UserRepository<T extends User> {
+public interface UserRepository<T extends User> {
 
     Long count();
 

@@ -146,6 +146,7 @@ public class Image extends PublishableObject implements Ownable {
 
 
     @ManyToOne
+    @JoinColumn(insertable=false, updatable=false, nullable=false)
     @XmlTransient
     private MediaObject mediaObject;
 
