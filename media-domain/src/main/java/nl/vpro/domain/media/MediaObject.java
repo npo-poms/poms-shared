@@ -111,7 +111,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("serial")
 @Entity
 @Language
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({Program.class, Group.class, Segment.class})
@@ -264,7 +264,7 @@ import java.util.stream.Collectors;
     ),
     @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")})
 
-public abstract class MediaObject extends PublishableObject implements NicamRated {
+public class MediaObject extends PublishableObject implements NicamRated {
 
     private static final Logger LOG = LoggerFactory.getLogger(MediaObject.class);
 
@@ -276,27 +276,27 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     @ElementCollection
     @Column(name = "crids", nullable = false, unique = true)
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // TODO cache configuration can be put in a hibernate-config.xml. See https://docs.jboss.org/hibernate/orm/4.0/devguide/en-US/html/ch06.html
     @StringList(maxLength = 255)
     protected List<String> crids;
 
     @ManyToMany
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor bij imports.
     protected List<Broadcaster> broadcasters;
 
     @ManyToMany
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     // @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<Portal> portals;
 
     @ManyToMany
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     // @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<ThirdParty> thirdParties;
@@ -356,13 +356,13 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @ElementCollection
     @Enumerated(EnumType.STRING)
     @Column(length = 10)
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<CountryCode> countries;
 
     @ElementCollection
     @Column(length = 10)
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<Locale> languages;
 
@@ -385,13 +385,13 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<Person> persons;
 
     @ElementCollection
     @JoinTable(name = "mediaobject_awards")
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     @Column(name = "awards")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<String> awards;
@@ -415,13 +415,13 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     protected AgeRating ageRating;
 
     @ElementCollection
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(value = EnumType.STRING)
     protected List<ContentRating> contentRatings;
 
     @ElementCollection
-    @OrderColumn(name = "list_index")
+    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @StringList(maxLength = 255)
     protected List<String> email;
@@ -430,7 +430,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @OneToMany(targetEntity = Website.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = true)
+    @OrderColumn(name = "list_index", nullable = false)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<Website> websites;
@@ -438,7 +438,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @OneToMany(targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = true)
+    @OrderColumn(name = "list_index", nullable = false)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
@@ -2738,7 +2738,9 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             .toString();
     }
 
-    public abstract SubMediaType getType();
+    public SubMediaType getType() {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * @since 3.2
@@ -2794,4 +2796,11 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             creationDate = new Date();
         }
     }
+
+    @Override
+    protected String getUrnPrefix() {
+        throw new UnsupportedOperationException();
+    }
+
+
 }
