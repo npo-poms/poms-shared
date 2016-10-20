@@ -24,6 +24,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Broadcaster;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -75,9 +76,18 @@ public class MediaUpdateListTest {
 
     @Test
     public void mediaUdateList() throws IOException, SAXException {
-        Program program = MediaBuilder.program().urn("urn:vpro:media:program:123").avType(AVType.VIDEO).titles(new Title("hoi", OwnerType.BROADCASTER, TextualType.MAIN)).broadcasters(new Broadcaster("VPRO")).mid("POMS_1234")
-            .segments(MediaBuilder.segment().broadcasters(new Broadcaster("VPRO")).avType(AVType.VIDEO).titles(new Title("segmenttitel", OwnerType.BROADCASTER, TextualType.MAIN)).start(new Date(0)).build()).build();
+        Program program = MediaBuilder
+            .program()
+            .  urn("urn:vpro:media:program:123")
+            .  avType(AVType.VIDEO)
+            .  mainTitle("hoi")
+            .  broadcasters("VPRO")
+            .  mid("POMS_1234")
+            .segments(
+                MediaBuilder.segment().broadcasters(new Broadcaster("VPRO")).avType(AVType.VIDEO).titles(new Title("segmenttitel", OwnerType.BROADCASTER, TextualType.MAIN)).start(new Date(0)).build()
+            ).build();
 
+        assertThat(program.getMid()).isEqualTo("POMS_1234");
         MediaUpdateList<ProgramUpdate> list = new MediaUpdateList<>(ProgramUpdate.create(program));
         StringWriter writer = new StringWriter();
         JAXB.marshal(list, writer);

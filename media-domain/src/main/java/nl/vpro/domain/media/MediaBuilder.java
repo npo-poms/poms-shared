@@ -656,6 +656,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         private String mid;
 
+        protected AbstractBuilder(M m) {
+            this.mediaObject = m;
+            this.mid = m.getMid();
+        }
+
         @Override
         public T mid(String m) {
             this.mid = m;
@@ -695,11 +700,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     abstract class AbstractProgramBuilder<T extends AbstractProgramBuilder<T> & MediaBuilder<T,Program>> extends AbstractBuilder<T, Program> implements MediaBuilder<T, Program> {
 
         protected AbstractProgramBuilder() {
-            this.mediaObject = new Program();
+            this(new Program());
         }
 
         protected AbstractProgramBuilder(Program program) {
-            this.mediaObject = program;
+            super(program);
         }
 
         public T type(ProgramType type) {
@@ -768,11 +773,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     abstract  class AbstractGroupBuilder<T extends AbstractGroupBuilder<T>> extends AbstractBuilder<T, Group> implements MediaBuilder<T, Group> {
 
         protected AbstractGroupBuilder() {
-            this.mediaObject = new Group();
+            this(new Group());
         }
 
         protected AbstractGroupBuilder(Group group) {
-            this.mediaObject = group;
+            super(group);
         }
 
         public T type(GroupType type) {
@@ -800,11 +805,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     abstract class AbstractSegmentBuilder<T extends AbstractSegmentBuilder<T>> extends AbstractBuilder<T, Segment> implements MediaBuilder<T, Segment> {
 
         protected AbstractSegmentBuilder() {
-            this.mediaObject = new Segment();
+            this(new Segment());
         }
 
         protected AbstractSegmentBuilder(Segment segment) {
-            this.mediaObject = segment;
+            super(segment);
         }
 
         /**
