@@ -63,6 +63,8 @@ import nl.vpro.xml.bind.DateToDuration;
         "width",
         "credits",
         "source",
+        "sourceName",
+        "license",
         "date"
     })
 public class Image extends PublishableObject implements Ownable {
@@ -127,13 +129,21 @@ public class Image extends PublishableObject implements Ownable {
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String source;
 
+    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @Size.List({
+        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
+    })
+    private String sourceName;
+
+    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @Enumerated(EnumType.STRING)
+    private License license;
+
+
     @ReleaseDate()
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String date;
 
-    @ManyToOne
-    @XmlTransient
-    private MediaObject mediaObject;
 
     public Image() {
     }
@@ -317,6 +327,15 @@ public class Image extends PublishableObject implements Ownable {
         return this;
     }
 
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public Image setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+        return this;
+    }
+
     public String getDate() {
         return date;
     }
@@ -338,12 +357,13 @@ public class Image extends PublishableObject implements Ownable {
         return this;
     }
 
-    public MediaObject getMediaObject() {
-        return mediaObject;
+    public License getLicense() {
+        return license;
     }
 
-    public void setMediaObject(MediaObject mediaObject) {
-        this.mediaObject = mediaObject;
+    public Image setLicense(License license) {
+        this.license = license;
+        return this;
     }
 
     @Override
