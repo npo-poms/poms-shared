@@ -95,7 +95,6 @@ public class ImageUpdate {
     })
     private String sourceName;
 
-    @URL
     @XmlElement
     private License license;
 
