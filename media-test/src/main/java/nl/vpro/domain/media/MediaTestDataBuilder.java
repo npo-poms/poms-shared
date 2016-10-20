@@ -40,7 +40,7 @@ public interface MediaTestDataBuilder<
     }
 
     static ProgramTestDataBuilder program(ProgramBuilder program) {
-        return new ProgramTestDataBuilder(program.build());
+        return new ProgramTestDataBuilder(program.mediaObject());
     }
 
     static ProgramTestDataBuilder broadcast() {
@@ -64,7 +64,7 @@ public interface MediaTestDataBuilder<
     }
 
     static GroupTestDataBuilder group(GroupBuilder group) {
-        return new GroupTestDataBuilder(group.build());
+        return new GroupTestDataBuilder(group.mediaObject());
     }
 
     static GroupTestDataBuilder playlist() {
@@ -93,7 +93,7 @@ public interface MediaTestDataBuilder<
     }
 
     static SegmentTestDataBuilder segment(SegmentBuilder segment) {
-        return new SegmentTestDataBuilder(segment.build());
+        return new SegmentTestDataBuilder(segment.mediaObject());
     }
 
 
@@ -185,7 +185,7 @@ public interface MediaTestDataBuilder<
     }
 
     default T published() {
-        if (build().isMerged()) {
+        if (mediaObject().isMerged()) {
             return workflow(Workflow.MERGED);
         } else {
             return workflow(Workflow.PUBLISHED);
@@ -198,8 +198,7 @@ public interface MediaTestDataBuilder<
 
 
     default T withMid() {
-        /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
-        return mid(null).mid("VPROWON_" + mid.incrementAndGet());
+        return mid("VPROWON_" + mid.incrementAndGet());
     }
 
     default T title(String mainTitle) {
@@ -271,7 +270,7 @@ public interface MediaTestDataBuilder<
 
     @SuppressWarnings("unchecked")
     default T withSource() {
-        if (build().getSource() == null) {
+        if (mediaObject().getSource() == null) {
             return source("Naar het gelijknamige boek van W.F. Hermans");
         }
         return (T) this;
@@ -324,9 +323,9 @@ public interface MediaTestDataBuilder<
     }
 
     default T withMemberOf() throws ModificationException {
-        Group series = group().constrained().id(100L).type(GroupType.SERIES).build();
+        Group series = group().constrained().id(100L).type(GroupType.SERIES).mediaObject();
 
-        Group season = group().constrained().id(200L).type(GroupType.SEASON).build();
+        Group season = group().constrained().id(200L).type(GroupType.SEASON).mediaObject();
         try {
             season.createMemberOf(series, 1);
         } catch(CircularReferenceException e) {
@@ -441,13 +440,13 @@ public interface MediaTestDataBuilder<
     @SuppressWarnings("unchecked")
     default T authoritativeRecord(Platform... platforms) {
         for (Platform platform : platforms) {
-            LocationAuthorityRecord.authoritative(build(), platform);
+            LocationAuthorityRecord.authoritative(mediaObject(), platform);
         }
         return (T)this;
     }
 
     default T withMergedTo() {
-        return mergedTo(MediaBuilder.group().type(GroupType.SEASON).build());
+        return mergedTo(MediaBuilder.group().type(GroupType.SEASON).mediaObject());
     }
 
     static Image image(OwnerType ownerType, String urn, Workflow workflow) {
@@ -467,7 +466,7 @@ public interface MediaTestDataBuilder<
         }
         @Override
         public MediaBuilder<MediaBuilder.ProgramBuilder, Program> getMediaBuilder() {
-            return MediaBuilder.program(build());
+            return MediaBuilder.program(mediaObject());
         }
 
         @Override
@@ -476,7 +475,7 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withType() {
-            if (build().getType() == null) {
+            if (mediaObject().getType() == null) {
                 type(ProgramType.BROADCAST);
             }
             return this;
@@ -487,9 +486,9 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withEpisodeOf(Long group1, Long group2) throws ModificationException {
-            Group series = MediaTestDataBuilder.group().constrained().type(GroupType.SERIES).id(group1).build();
+            Group series = MediaTestDataBuilder.group().constrained().type(GroupType.SERIES).id(group1).mediaObject();
 
-            Group season = MediaTestDataBuilder.group().constrained().type(GroupType.SEASON).id(group2).build();
+            Group season = MediaTestDataBuilder.group().constrained().type(GroupType.SEASON).id(group2).mediaObject();
             try {
                 season.createMemberOf(series, 1);
             } catch(CircularReferenceException e) {
@@ -500,15 +499,15 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withSegments() {
-            new Segment(build(), "VPROWON_12345_1", new Date(0), Duration.ofMillis(100000));
-            new Segment(build(), "VPROWON_12345_2", new Date(100000), Duration.ofMillis(100000));
-            new Segment(build(), "VPROWON_12345_3", new Date(1000000), Duration.ofMillis(300000));
+            new Segment(mediaObject(), "VPROWON_12345_1", new Date(0), Duration.ofMillis(100000));
+            new Segment(mediaObject(), "VPROWON_12345_2", new Date(100000), Duration.ofMillis(100000));
+            new Segment(mediaObject(), "VPROWON_12345_3", new Date(1000000), Duration.ofMillis(300000));
             return this;
         }
 
 
         public ProgramTestDataBuilder withPoProgType() {
-            build().setPoProgTypeLegacy("Verkeersmagazine");
+            mediaObject().setPoProgTypeLegacy("Verkeersmagazine");
             return this;
         }
 
@@ -539,7 +538,7 @@ public interface MediaTestDataBuilder<
         }
         @Override
         public MediaBuilder<MediaBuilder.GroupBuilder, Group> getMediaBuilder() {
-            return MediaBuilder.group(build());
+            return MediaBuilder.group(mediaObject());
         }
 
         @Override
@@ -549,7 +548,7 @@ public interface MediaTestDataBuilder<
         }
 
         public GroupTestDataBuilder withType() {
-            if (build().getType() == null) {
+            if (mediaObject().getType() == null) {
                 return type(GroupType.PLAYLIST);
             }
             return this;
@@ -576,7 +575,7 @@ public interface MediaTestDataBuilder<
 
         @Override
         public MediaBuilder<MediaBuilder.SegmentBuilder, Segment> getMediaBuilder() {
-            return MediaBuilder.segment(build());
+            return MediaBuilder.segment(mediaObject());
         }
 
         public SegmentTestDataBuilder withStart() {

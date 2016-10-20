@@ -65,56 +65,55 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     M build();
 
+    M mediaObject();
+
     @SuppressWarnings("unchecked")
     default B id(Long id) {
-        build().setId(id);
+        mediaObject().setId(id);
         return (B)this;
     }
 
-    default B mid(String mid) {
-        build().setMid(mid);
-        return (B)this;
-    }
+    B mid(String mid);
 
     @SuppressWarnings("unchecked")
     default B urn(String urn) {
-        build().setUrn(urn);
+        mediaObject().setUrn(urn);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B hasSubtitles(boolean hasSubtitles) {
-        build().setHasSubtitles(hasSubtitles);
+        mediaObject().setHasSubtitles(hasSubtitles);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B createdBy(Editor user) {
-        build().setCreatedBy(user);
+        mediaObject().setCreatedBy(user);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B createdBy(String user) {
-        build().setCreatedBy(user(user));
+        mediaObject().setCreatedBy(user(user));
         return (B) this;
     }
 
     @SuppressWarnings("unchecked")
     default B lastModifiedBy(Editor user) {
-        build().setLastModifiedBy(user);
+        mediaObject().setLastModifiedBy(user);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B lastModifiedBy(String user) {
-        build().setLastModifiedBy(user(user));
+        mediaObject().setLastModifiedBy(user(user));
         return (B) this;
     }
 
     @SuppressWarnings("unchecked")
     default B creationDate(Date date) {
-        build().setCreationDate(date);
+        mediaObject().setCreationDate(date);
         return (B)this;
     }
 
@@ -130,13 +129,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B clearCreationDate() {
-        build().setCreationDate(null);
+        mediaObject().setCreationDate(null);
         return (B) this;
     }
 
     @SuppressWarnings("unchecked")
     default B lastModified(Date date) {
-        build().setLastModified(date);
+        mediaObject().setLastModified(date);
         return (B)this;
     }
     default B lastModified(Instant date) {
@@ -153,7 +152,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B publishStart(Date date) {
-        build().setPublishStart(date);
+        mediaObject().setPublishStart(date);
         return (B)this;
     }
 
@@ -170,7 +169,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B publishStop(Date date) {
-        build().setPublishStop(date);
+        mediaObject().setPublishStop(date);
         return (B)this;
     }
 
@@ -185,7 +184,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B lastPublished(Date date) {
-        build().setLastPublished(date);
+        mediaObject().setLastPublished(date);
         return (B) this;
     }
 
@@ -199,14 +198,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B workflow(Workflow workflow) {
-        build().setWorkflow(workflow);
+        mediaObject().setWorkflow(workflow);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B crids(String... crids) {
         for(String crid : crids) {
-            build().addCrid(crid);
+            mediaObject().addCrid(crid);
         }
         return (B)this;
     }
@@ -215,35 +214,35 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B broadcasters(Broadcaster... broadcasters) {
         for(Broadcaster broadcaster : broadcasters) {
-            build().addBroadcaster(broadcaster);
+            mediaObject().addBroadcaster(broadcaster);
         }
         return (B)this;
     }
 
     default B broadcasters(String... broadcasters) {
         for (String broadcaster : broadcasters) {
-            build().addBroadcaster(new Broadcaster(broadcaster));
+            mediaObject().addBroadcaster(new Broadcaster(broadcaster));
         }
         return (B) this;
     }
 
     @SuppressWarnings("unchecked")
     default B clearBroadcasters() {
-        build().getBroadcasters().clear();
+        mediaObject().getBroadcasters().clear();
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B portals(Portal... portals) {
         for (Portal portal : portals) {
-            build().addPortal(portal);
+            mediaObject().addPortal(portal);
         }
         return (B) this;
     }
 
     default B portals(String... portals) {
         for (String portal : portals) {
-            build().addPortal(new Portal(portal));
+            mediaObject().addPortal(new Portal(portal));
         }
         return (B) this;
     }
@@ -251,7 +250,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B clearPortals() {
-        build().clearPortals();
+        mediaObject().clearPortals();
         return (B)this;
     }
 
@@ -259,7 +258,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B thirdParties(ThirdParty... thirdParties) {
         for(ThirdParty thirdParty : thirdParties) {
-            build().addThirdParty(thirdParty);
+            mediaObject().addThirdParty(thirdParty);
         }
         return (B)this;
     }
@@ -267,7 +266,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B portalRestrictions(PortalRestriction... restrictions) {
         for(PortalRestriction publicationRule : restrictions) {
-            build().addPortalRestriction(publicationRule);
+            mediaObject().addPortalRestriction(publicationRule);
         }
         return (B)this;
     }
@@ -275,7 +274,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B portalRestrictions(Portal... restrictions) {
         for (Portal publicationRule : restrictions) {
-            build().addPortalRestriction(new PortalRestriction(publicationRule));
+            mediaObject().addPortalRestriction(new PortalRestriction(publicationRule));
         }
         return (B) this;
     }
@@ -283,7 +282,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B portalRestrictions(String... portals) {
         for (String portal : portals) {
-            build().addPortalRestriction(new PortalRestriction(new Portal(portal)));
+            mediaObject().addPortalRestriction(new PortalRestriction(new Portal(portal)));
         }
         return (B) this;
     }
@@ -291,7 +290,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B geoRestrictions(GeoRestriction... restrictions) {
         for(GeoRestriction publicationRule : restrictions) {
-            build().addGeoRestriction(publicationRule);
+            mediaObject().addGeoRestriction(publicationRule);
         }
         return (B)this;
     }
@@ -299,7 +298,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B geoRestrictions(Region... restrictions) {
         for (Region region : restrictions) {
-            build().addGeoRestriction(new GeoRestriction(region));
+            mediaObject().addGeoRestriction(new GeoRestriction(region));
         }
         return (B) this;
     }
@@ -307,7 +306,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B titles(Title... titles) {
         for(Title title : titles) {
-            build().addTitle(title);
+            mediaObject().addTitle(title);
         }
         return (B)this;
     }
@@ -324,7 +323,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B descriptions(Description... descriptions) {
         for(Description description : descriptions) {
-            build().addDescription(description);
+            mediaObject().addDescription(description);
         }
         return (B)this;
     }
@@ -340,7 +339,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B genres(Genre... genres) {
         for(Genre genre : genres) {
-            build().addGenre(genre);
+            mediaObject().addGenre(genre);
         }
         return (B)this;
     }
@@ -348,7 +347,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B genres(Collection<Genre> genres) {
         for(Genre genre : genres) {
-            build().addGenre(genre);
+            mediaObject().addGenre(genre);
         }
         return (B)this;
     }
@@ -356,7 +355,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B genres(String... termIds) {
         for (String genre : termIds) {
-            build().addGenre(new Genre(new Term(genre)));
+            mediaObject().addGenre(new Genre(new Term(genre)));
         }
         return (B) this;
     }
@@ -364,7 +363,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B tags(Tag... tags) {
         for(Tag tag : tags) {
-            build().addTag(tag);
+            mediaObject().addTag(tag);
         }
         return (B)this;
     }
@@ -373,7 +372,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B tags(String... tags) {
         for (String tag : tags) {
-            build().addTag(new Tag(tag));
+            mediaObject().addTag(new Tag(tag));
         }
         return (B) this;
     }
@@ -381,14 +380,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B source(String source) {
-        build().setSource(source);
+        mediaObject().setSource(source);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B countries(String... countries) {
         for(String country : countries) {
-            build().addCountry(country);
+            mediaObject().addCountry(country);
         }
         return (B)this;
     }
@@ -396,30 +395,30 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B languages(String... languages) {
         for(String language : languages) {
-            build().addLanguage(LocalizedString.adapt(language));
+            mediaObject().addLanguage(LocalizedString.adapt(language));
         }
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B avType(AVType type) {
-        build().setAVType(type);
+        mediaObject().setAVType(type);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B avAttributes(AVAttributes avAttribute) {
-        build().setAvAttributes(avAttribute);
+        mediaObject().setAvAttributes(avAttribute);
         return (B)this;
 
     }
 
     @SuppressWarnings("unchecked")
     default B aspectRatio(AspectRatio as) {
-        AVAttributes av = build().getAvAttributes();
+        AVAttributes av = mediaObject().getAvAttributes();
         if(av == null) {
             av = new AVAttributes();
-            build().setAvAttributes(av);
+            mediaObject().setAvAttributes(av);
         }
         VideoAttributes va = av.getVideoAttributes();
         if(va == null) {
@@ -435,7 +434,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @Deprecated
     default B duration(Date duration) {
         try {
-            build().setDurationWithDate(duration);
+            mediaObject().setDurationWithDate(duration);
         } catch (ModificationException e) {
             throw new IllegalStateException(e);
         }
@@ -446,7 +445,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B duration(java.time.Duration duration) {
         try {
-            build().setDuration(duration);
+            mediaObject().setDuration(duration);
         } catch (ModificationException e) {
             throw new IllegalStateException(e);
         }
@@ -455,14 +454,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B releaseYear(Short y) {
-        build().setReleaseYear(y);
+        mediaObject().setReleaseYear(y);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B persons(Person... persons) {
         for(Person person : persons) {
-            build().addPerson(person);
+            mediaObject().addPerson(person);
         }
         return (B)this;
     }
@@ -470,20 +469,20 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B awards(String... awards) {
         for(String award : awards) {
-            build().addAward(award);
+            mediaObject().addAward(award);
         }
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B memberOf(MemberRef... memberRef) throws CircularReferenceException {
-        build().getMemberOf().addAll(Arrays.asList(memberRef));
+        mediaObject().getMemberOf().addAll(Arrays.asList(memberRef));
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B memberOf(MediaObject media, Integer number) throws CircularReferenceException {
-        build().createMemberOf(media, number);
+        mediaObject().createMemberOf(media, number);
         return (B) this;
     }
 
@@ -503,31 +502,31 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B ageRating(AgeRating ageRating) {
-        build().setAgeRating(ageRating);
+        mediaObject().setAgeRating(ageRating);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B contentRatings(ContentRating... contentRatings) {
-        build().setContentRatings(Arrays.asList(contentRatings));
+        mediaObject().setContentRatings(Arrays.asList(contentRatings));
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B emails(String... emails) {
-        build().setEmail(Arrays.asList(emails));
+        mediaObject().setEmail(Arrays.asList(emails));
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B websites(Website... websites) {
-        build().setWebsites(Arrays.asList(websites));
+        mediaObject().setWebsites(Arrays.asList(websites));
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B websites(String... websites) {
-        build().setWebsites(Arrays.stream(websites).map(Website::new).collect(Collectors.toList()));
+        mediaObject().setWebsites(Arrays.stream(websites).map(Website::new).collect(Collectors.toList()));
         return (B) this;
     }
 
@@ -536,20 +535,20 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         for(String t : twitter) {
             reference.add(new TwitterRef(t));
         }
-        build().setTwitterRefs(reference);
+        mediaObject().setTwitterRefs(reference);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B teletext(Short teletext) {
-        build().setTeletext(teletext);
+        mediaObject().setTeletext(teletext);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B locations(Location... locations) {
         for(Location location : locations) {
-            build().addLocation(location);
+            mediaObject().addLocation(location);
         }
         return (B)this;
     }
@@ -557,21 +556,21 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B locations(String... locations) {
         for (String location : locations) {
-            build().addLocation(new Location(location, OwnerType.BROADCASTER));
+            mediaObject().addLocation(new Location(location, OwnerType.BROADCASTER));
         }
         return (B) this;
     }
 
     @SuppressWarnings("unchecked")
     default B clearLocations() {
-        build().getLocations().clear();
+        mediaObject().getLocations().clear();
         return (B) this;
     }
 
     @SuppressWarnings("unchecked")
     default B scheduleEvents(ScheduleEvent... scheduleEvents) {
         for(ScheduleEvent event : scheduleEvents) {
-            event.setMediaObject(build());
+            event.setMediaObject(mediaObject());
         }
         return (B)this;
     }
@@ -579,7 +578,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger) {
         ScheduleEvent event = new ScheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration);
-        event.setMediaObject(build());
+        event.setMediaObject(mediaObject());
         event = merger.apply(event);
         return (B) this;
     }
@@ -592,14 +591,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B descendantOf(DescendantRef... refs) throws CircularReferenceException {
-        build().setDescendantOf(new TreeSet<>(Arrays.asList(refs)));
+        mediaObject().setDescendantOf(new TreeSet<>(Arrays.asList(refs)));
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B relations(Relation... relations) {
         for(Relation relation : relations) {
-            build().addRelation(relation);
+            mediaObject().addRelation(relation);
         }
         return (B)this;
     }
@@ -607,34 +606,34 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B images(Image... images) {
         for(Image image : images) {
-            build().addImage(image);
+            mediaObject().addImage(image);
         }
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B embeddable(boolean isEmbeddable) {
-        build().setEmbeddable(isEmbeddable);
+        mediaObject().setEmbeddable(isEmbeddable);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B authorityRecord(LocationAuthorityRecord record) {
-        build().setLocationAuthorityRecord(record);
+        mediaObject().setLocationAuthorityRecord(record);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B mergedTo(MediaObject media) {
         workflow(Workflow.MERGED);
-        build().setMergedTo(media);
+        mediaObject().setMergedTo(media);
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B mergedTo(String media) {
         workflow(Workflow.MERGED);
-        build().setMergedToRef(media);
+        mediaObject().setMergedToRef(media);
         return (B) this;
     }
 
@@ -654,11 +653,25 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     abstract class AbstractBuilder<T extends AbstractBuilder<T, M>, M extends MediaObject>  implements MediaBuilder<T, M>, Cloneable {
+
+        private String mid;
+
+        @Override
+        public T mid(String m) {
+            this.mid = m;
+            return (T) this;
+        }
+
         @Valid
         transient M mediaObject;
 
         @Override
         public M build() {
+            mediaObject.setMid(mid);
+            return mediaObject;
+        }
+        @Override
+        public M mediaObject() {
             return mediaObject;
         }
 
@@ -669,6 +682,8 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
                 StringWriter writer = new StringWriter();
                 JAXB.marshal(this.mediaObject, writer);
                 o.mediaObject = MediaObjects.deepCopy(this.mediaObject);
+                o.mediaObject.setMid(null);
+                o.mid(this.mid);
                 return o;
             } catch (CloneNotSupportedException e) {
                 throw new RuntimeException(e);
@@ -688,19 +703,19 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
 
         public T type(ProgramType type) {
-            build().setType(type);
+            mediaObject().setType(type);
             return (T) this;
         }
 
         @SuppressWarnings("unchecked")
         public T episodeOf(MemberRef... memberRef) throws CircularReferenceException {
-            build().getEpisodeOf().addAll(Arrays.asList(memberRef));
+            mediaObject().getEpisodeOf().addAll(Arrays.asList(memberRef));
             return (T) this;
         }
 
         @SuppressWarnings("unchecked")
         public T episodeOf(Group group, Integer number) throws CircularReferenceException {
-            build().createEpisodeOf(group, number);
+            mediaObject().createEpisodeOf(group, number);
             return (T) this;
         }
 
@@ -719,7 +734,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         @SuppressWarnings("unchecked")
         public T segments(Iterable<Segment> segments) {
             for (Segment segment : segments) {
-                build().addSegment(segment);
+                mediaObject().addSegment(segment);
             }
             return (T) this;
         }
@@ -729,11 +744,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         @SuppressWarnings("unchecked")
         public T predictions(Prediction... predictions) {
             if(predictions == null || predictions.length == 0) {
-                build().getPredictions().clear();
+                mediaObject().getPredictions().clear();
             } else {
                 for(Prediction pred : predictions) {
                     pred.setMediaObject(mediaObject);
-                    build().getPredictions().add(pred);
+                    mediaObject().getPredictions().add(pred);
                 }
             }
             return (T) this;
@@ -761,16 +776,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
 
         public T type(GroupType type) {
-            build().setType(type);
+            mediaObject().setType(type);
             return (T) this;
         }
 
         public T poSeriesID(String poSeriesID) {
-            build().setMid(poSeriesID);
+            mediaObject().setMid(poSeriesID);
             return (T) this;
         }
         public T ordered(Boolean ordered) {
-            build().setOrdered(ordered);
+            mediaObject().setOrdered(ordered);
             return (T) this;
         }
     }
@@ -798,27 +813,27 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
          */
         @Deprecated
         public T start(Date start) {
-            build().setStart(start);
+            mediaObject().setStart(start);
             return (T) this;
         }
 
         public T start(java.time.Duration start) {
-            build().setStart(start);
+            mediaObject().setStart(start);
             return (T) this;
         }
 
         public T parent(ProgramUpdate parent) {
-            build().setParent(parent.fetch());
+            mediaObject().setParent(parent.fetch());
             return (T) this;
         }
 
         public T parent(Program parent) {
-            build().setParent(parent);
+            mediaObject().setParent(parent);
             return (T) this;
         }
 
         public T midRef(String midRef) {
-            build().setMidRef(midRef);
+            mediaObject().setMidRef(midRef);
             return (T) this;
         }
     }
