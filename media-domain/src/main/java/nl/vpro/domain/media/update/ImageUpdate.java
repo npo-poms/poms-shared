@@ -15,7 +15,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.image.ImageMetadata;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.URL;
 
@@ -23,10 +22,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.domain.media.support.Image;
+import nl.vpro.domain.media.support.License;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.ReleaseDate;
 import nl.vpro.xml.bind.DateToDuration;
@@ -38,6 +39,8 @@ import nl.vpro.xml.bind.DateToDuration;
     "title",
     "description",
     "source",
+    "sourceName",
+    "license",
     "width",
     "height",
     "credits",
@@ -84,6 +87,17 @@ public class ImageUpdate {
     @URL
     @XmlElement
     private String source;
+
+    @URL
+    @XmlElement
+    @Size.List({
+        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
+    })
+    private String sourceName;
+
+    @URL
+    @XmlElement
+    private License license;
 
     @ReleaseDate()
     @XmlElement
@@ -139,6 +153,8 @@ public class ImageUpdate {
         source = image.getSource();
         date = image.getDate();
         offset = image.getOffset();
+        license = image.getLicense();
+        sourceName = image.getSource();
     }
 
     public Image toImage(String urn) {
@@ -257,6 +273,23 @@ public class ImageUpdate {
 
     public void setSource(String source) {
         this.source = source;
+    }
+
+
+    public String getSourceName() {
+        return sourceName;
+    }
+
+    public void setSourceName(String sourceName) {
+        this.sourceName = sourceName;
+    }
+
+    public License getLicense() {
+        return license;
+    }
+
+    public void setLicense(License license) {
+        this.license = license;
     }
 
     public String getDate() {
