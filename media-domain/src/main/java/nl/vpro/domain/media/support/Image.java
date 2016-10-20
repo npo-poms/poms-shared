@@ -204,6 +204,8 @@ public class Image extends PublishableObject implements Ownable {
             to.setWidth(from.getWidth());
             to.setType(from.getType());
             to.setImageUri(from.getImageUri());
+            to.setLicense(from.getLicense());
+            to.setSourceName(from.getSourceName());
 
         } else if(from == null) {
             to = null;
