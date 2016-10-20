@@ -68,7 +68,13 @@ public class GroupUpdateTest extends MediaUpdateTest {
         GroupUpdate update = GroupUpdate.create();
         update.setPoSeriesID("VPWON_333");
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><group  ordered=\"true\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" mid=\"VPWON_333\"><locations/><scheduleEvents/><images/><poSeriesID>VPWON_333</poSeriesID></group>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<group xmlns=\"urn:vpro:media:update:2009\" ordered=\"true\" embeddable=\"true\" mid=\"VPWON_333\">\n" +
+            "  <locations/>\n" +
+            "  <scheduleEvents/>\n" +
+            "  <images/>\n" +
+            "  <poSeriesID>VPWON_333</poSeriesID>\n" +
+            "</group>\n";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }

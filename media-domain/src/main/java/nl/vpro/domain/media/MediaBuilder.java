@@ -781,8 +781,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
 
         public T poSeriesID(String poSeriesID) {
-            mediaObject().setMid(poSeriesID);
-            return (T) this;
+            return mid(poSeriesID);
         }
         public T ordered(Boolean ordered) {
             mediaObject().setOrdered(ordered);
