@@ -2557,18 +2557,23 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     @Override
     public PublishableObject setPublishStart(Date publishStart) {
-        sortDateValid = false;
-        if (! Objects.equals(this.publishStart, publishStart) && hasInternetVodAuthority()) {
-            locationAuthorityUpdate = true;
+
+        if (! Objects.equals(this.publishStart, publishStart)) {
+            sortDateValid = false;
+            if (hasInternetVodAuthority()) {
+                locationAuthorityUpdate = true;
+            }
         }
         return super.setPublishStart(publishStart);
     }
 
     @Override
     public PublishableObject setPublishStop(Date publishStop) {
-        sortDateValid = false;
-        if (!Objects.equals(this.publishStop, publishStop) && hasInternetVodAuthority()) {
-            locationAuthorityUpdate = true;
+        if (!Objects.equals(this.publishStop, publishStop)) {
+            sortDateValid = false;
+            if (hasInternetVodAuthority()) {
+                locationAuthorityUpdate = true;
+            }
         }
         return super.setPublishStop(publishStop);
     }
