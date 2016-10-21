@@ -2546,8 +2546,6 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     /**
      * When true Ceres/Pluto.. needs a restriction update. The underlying field is managed by Hibernate, and not accessible.
-     *
-     * @return
      */
     public boolean isLocationAuthorityUpdate() {
         return locationAuthorityUpdate;
