@@ -2594,8 +2594,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             throw new IllegalArgumentException("Merged media should obtain workflow  \"MERGED\" instead of \"PUBLISHED\"");
         }
 
-        if (((this.workflow == Workflow.DELETED && workflow != Workflow.DELETED) || (this.workflow != Workflow.DELETED && workflow == Workflow.DELETED)) &&
-                getLocationAuthorityRecord(Platform.INTERNETVOD) != null && getLocationAuthorityRecord(Platform.INTERNETVOD).hasAuthority()) {
+        if (((this.workflow == Workflow.DELETED && workflow != Workflow.DELETED) || (this.workflow != Workflow.DELETED && workflow == Workflow.DELETED)) && hasInternetVodAuthority()) {
             locationAuthorityUpdate = true;
         }
 
