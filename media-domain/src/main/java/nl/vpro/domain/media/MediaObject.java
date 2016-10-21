@@ -2558,7 +2558,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @Override
     public PublishableObject setPublishStart(Date publishStart) {
         sortDateValid = false;
-        if (this.publishStart != publishStart && getLocationAuthorityRecord(Platform.INTERNETVOD) != null && getLocationAuthorityRecord(Platform.INTERNETVOD).hasAuthority()) {
+        if (! Objects.equals(this.publishStart, publishStart) && hasInternetVodAuthority()) {
             locationAuthorityUpdate = true;
         }
         return super.setPublishStart(publishStart);
@@ -2567,10 +2567,14 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @Override
     public PublishableObject setPublishStop(Date publishStop) {
         sortDateValid = false;
-        if (this.publishStop != publishStop && getLocationAuthorityRecord(Platform.INTERNETVOD) != null && getLocationAuthorityRecord(Platform.INTERNETVOD).hasAuthority()) {
+        if (!Objects.equals(this.publishStop, publishStop) && hasInternetVodAuthority()) {
             locationAuthorityUpdate = true;
         }
         return super.setPublishStop(publishStop);
+    }
+
+    protected boolean hasInternetVodAuthority() {
+        return getLocationAuthorityRecord(Platform.INTERNETVOD) != null && getLocationAuthorityRecord(Platform.INTERNETVOD).hasAuthority();
     }
 
     @Override
