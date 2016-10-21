@@ -108,10 +108,8 @@ import java.util.stream.Collectors;
  *
  * @author roekoe
  */
-@SuppressWarnings("serial")
 @Entity
 @Language
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({Program.class, Group.class, Segment.class})
@@ -264,7 +262,7 @@ import java.util.stream.Collectors;
     ),
     @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")})
 
-public abstract class MediaObject extends PublishableObject implements NicamRated {
+public class MediaObject extends PublishableObject implements NicamRated {
 
     private static final Logger LOG = LoggerFactory.getLogger(MediaObject.class);
 

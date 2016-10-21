@@ -37,7 +37,6 @@ import nl.vpro.validation.Broadcast;
  */
 @Entity
 @Cacheable
-@Inheritance(strategy = InheritanceType.JOINED)
 @Broadcast
 @XmlRootElement(name = "program")
 @XmlAccessorType(XmlAccessType.NONE)
