@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.Builder;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -101,6 +103,7 @@ public class Editor extends AbstractUser {
     protected Editor() {
     }
 
+    @Builder
     public Editor(String principalId, String displayName, String email, Broadcaster broadcaster, Set<String> roles) {
         super(principalId, displayName, email);
         if(broadcaster != null) {
