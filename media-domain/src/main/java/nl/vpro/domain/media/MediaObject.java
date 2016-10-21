@@ -2530,9 +2530,11 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
      * @return An existing CeresRecord or null when not managed by Ceres
      */
     public LocationAuthorityRecord getLocationAuthorityRecord(Platform platform) {
-        for (LocationAuthorityRecord locationAuthorityRecord : locationAuthorityRecords) {
-            if (platform.equals(locationAuthorityRecord.getPlatform())) {
-                return locationAuthorityRecord;
+        if (locationAuthorityRecords != null) {
+            for (LocationAuthorityRecord locationAuthorityRecord : locationAuthorityRecords) {
+                if (platform.equals(locationAuthorityRecord.getPlatform())) {
+                    return locationAuthorityRecord;
+                }
             }
         }
         return null;
