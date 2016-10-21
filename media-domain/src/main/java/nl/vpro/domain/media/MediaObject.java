@@ -264,7 +264,7 @@ import java.util.stream.Collectors;
     ),
     @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")})
 
-public class MediaObject extends PublishableObject implements NicamRated {
+public abstract class MediaObject extends PublishableObject implements NicamRated {
 
     private static final Logger LOG = LoggerFactory.getLogger(MediaObject.class);
 
