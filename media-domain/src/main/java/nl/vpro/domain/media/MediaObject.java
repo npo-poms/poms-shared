@@ -964,7 +964,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
     }
 
     public String getMainTitle() {
-        return MediaObjects.getTitle(titles, TextualType.MAIN);
+        return MediaObjects.getTitle(sorted(titles), TextualType.MAIN);
     }
 
     public void setMainTitle(String mainTitle) {

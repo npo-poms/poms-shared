@@ -64,7 +64,7 @@ public class Description implements Ownable, Typable<TextualType>, Comparable<De
     }
 
     public Description(String description, OwnerType owner, TextualType type) {
-        this.description = description;
+        this.description = strip(description);
         this.owner = owner;
         this.type = type;
     }
@@ -95,7 +95,14 @@ public class Description implements Ownable, Typable<TextualType>, Comparable<De
     }
 
     public void setDescription(String description) {
-        this.description = description != null ? description.replaceAll("[\f\\u0085\\u2028\\u2029  ]", "\n") : null;
+        this.description = strip(description);
+    }
+
+    protected static String strip(String s) {
+        if (s == null) {
+            return null;
+        }
+        return s.replaceAll("[\f\\u0085\\u2028\\u2029  ]", "\n");
     }
 
     @Override
