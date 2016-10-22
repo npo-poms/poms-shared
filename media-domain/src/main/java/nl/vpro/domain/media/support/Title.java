@@ -92,7 +92,7 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
      * characters which is the default.
      */
     public Title(String title, OwnerType owner, TextualType type, boolean crop) {
-        this.title = title;
+        this.title = strip(title);
         this.owner = owner;
         this.type = type;
 
@@ -158,8 +158,15 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
     }
 
     public void setTitle(String title) {
-        this.title = title != null ? title.replaceAll("[\f\\u0085\\u2028\\u2029  ]", " ") : title;
+        this.title = strip(title);
         crop();
+    }
+
+    protected static String strip(String s) {
+        if (s == null){
+            return null;
+        }
+        return s.replaceAll("[\f\\u0085\\u2028\\u2029  ]", " ");
     }
 
     @XmlAttribute
