@@ -2,11 +2,11 @@ package nl.vpro.domain.media;
 
 import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -21,13 +21,7 @@ import nl.vpro.domain.media.support.DomainObject;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressWarnings("serial")
-abstract public class Restriction implements DomainObject {
-
-    @Id
-    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
-    @XmlTransient // Don't remove!
-    private Long id;
+abstract public class Restriction extends DomainObject {
 
     @Column
     @XmlAttribute
@@ -53,17 +47,6 @@ abstract public class Restriction implements DomainObject {
 
     protected Restriction(Restriction source) {
         this(source.start, source.stop);
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public Restriction setId(Long id) {
-        this.id = id;
-        return this;
     }
 
     public Date getStart() {

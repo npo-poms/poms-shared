@@ -32,7 +32,7 @@ public class GeoRestriction extends Restriction {
     @XmlTransient
     private boolean authorityUpdate = false;
 
-    private GeoRestriction() {
+    public GeoRestriction() {
     }
 
     public GeoRestriction(String region) {

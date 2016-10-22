@@ -23,7 +23,7 @@ import nl.vpro.validation.NoHtml;
         "givenName",
         "familyName"
     })
-public class Person implements DomainObject {
+public class Person extends DomainObject {
 
 
     public static Person copy(Person source) {
@@ -37,13 +37,6 @@ public class Person implements DomainObject {
 
         return new Person(source, parent);
     }
-
-
-    @Id
-    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
-    @XmlTransient // Don't remove!
-    private Long id;
 
     @NoHtml
     @XmlElement
@@ -91,19 +84,6 @@ public class Person implements DomainObject {
 
         this.mediaObject = parent;
     }
-
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public Person setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
 
 
     public String getGivenName() {
