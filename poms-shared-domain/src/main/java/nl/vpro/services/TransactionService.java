@@ -7,9 +7,7 @@ import java.util.function.Supplier;
 
 /**
  * Please note that transactions are only rolled back in case of a runtime exception
- * User: Danny
- * Date: 9-7-12
- * Time: 16:24
+ * @author Danny Sedney
  */
 public interface TransactionService {
     /**
