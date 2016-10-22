@@ -2,10 +2,7 @@ package nl.vpro.domain.media;
 
 import java.util.Date;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -35,7 +32,7 @@ public class PortalRestriction extends Restriction {
     @NotNull(message = "nl.vpro.constraints.NotNull")
     protected Portal portal;
 
-    private PortalRestriction() {
+    public PortalRestriction() {
     }
 
     public PortalRestriction(Portal portal) {

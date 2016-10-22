@@ -7,10 +7,13 @@ package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.Xmlns;
@@ -21,9 +24,38 @@ import nl.vpro.domain.Xmlns;
 @MappedSuperclass
 @XmlType(name = "domainObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
-public interface DomainObject extends Identifiable<Long>, Serializable {
+public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
-    DomainObject setId(Long id);
+    @Id
+    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
+    @XmlTransient // Don't remove!
+    protected Long id;
+
+    public DomainObject() {
+    }
+
+    protected DomainObject(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Under normal operation this should not be used!
+     * <p/>
+     * While testing it sometimes comes in handy to be able to set an Id to simulate
+     * a persisted object.
+     *
+     * @param id
+     */
+    public DomainObject setId(Long id) {
+        this.id = id;
+        return this;
+    }
 
     /**
      * Checks for database identity or object identity if one side of the comparison can
@@ -37,23 +69,18 @@ public interface DomainObject extends Identifiable<Long>, Serializable {
      * @return true if both objects are equal
      */
     @Override
-    boolean equals(Object object);
-
-
-    /*
-    @Override
     public boolean equals(Object object) {
-        if (object == null) {
+        if(object == null) {
             return false;
         }
 
-        if (this.getClass() != object.getClass()) {
+        if(this.getClass() != object.getClass()) {
             return false;
         }
 
-        DomainObject that = (DomainObject) object;
+        DomainObject that = (DomainObject)object;
 
-        if (this.getId() != null && that.getId() != null) {
+        if(this.getId() != null && that.getId() != null) {
             return this.getId().equals(that.getId());
         }
 
@@ -70,5 +97,5 @@ public interface DomainObject extends Identifiable<Long>, Serializable {
         return new ToStringBuilder(this)
             .append("id", id)
             .toString();
-    }*/
+    }
 }

@@ -5,15 +5,33 @@
  */
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import java.time.Instant;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageType;
@@ -22,15 +40,7 @@ import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.bind.LocaleAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.Description;
-import nl.vpro.domain.media.support.Duration;
-import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.PublishableObject;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
-import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
@@ -40,68 +50,6 @@ import nl.vpro.util.ResortedSortedSet;
 import nl.vpro.util.SortedSetSameElementWrapper;
 import nl.vpro.validation.Language;
 import nl.vpro.validation.StringList;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.FilterDefs;
-import org.hibernate.annotations.Filters;
-import org.hibernate.annotations.ParamDef;
-import org.hibernate.annotations.SortNatural;
-import org.hibernate.annotations.Type;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.OrderColumn;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
-import javax.persistence.Transient;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 /**
  * Base objects for programs and groups
@@ -109,6 +57,7 @@ import java.util.stream.Collectors;
  * @author roekoe
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Language
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
@@ -319,35 +268,33 @@ public class MediaObject extends PublishableObject implements NicamRated {
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
-    @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     //@NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy hibernates on merge first merges an object without titles.
     @Size.List({
         @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}"),
     })
     @Valid
-    protected SortedSet<Title> titles;
+    protected Set<Title> titles;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected SortedSet<Description> descriptions;
+    protected Set<Description> descriptions;
 
     @ManyToMany
     @Cascade({CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REPLICATE, CascadeType.SAVE_UPDATE, CascadeType.PERSIST})
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected SortedSet<Genre> genres;
+    protected Set<Genre> genres;
 
     @ManyToMany
     @Cascade({CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REPLICATE, CascadeType.SAVE_UPDATE, CascadeType.PERSIST})
-    @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected SortedSet<Tag> tags;
+    protected Set<Tag> tags;
 
     protected String source;
 
@@ -407,7 +354,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
             "or mediaobjec10_.publishstart < now() " +
             "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec10_.id and o.broadcasters_id in (:broadcasters)))"),
         @Filter(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))")})
-    protected SortedSet<MemberRef> memberOf;
+    protected Set<MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
     protected AgeRating ageRating;
@@ -450,8 +397,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
-    @SortNatural
-    protected SortedSet<Prediction> predictions;
+    protected Set<Prediction> predictions;
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
@@ -525,7 +471,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
     // Holds the descendantOf value when unmarshalled from XML. Used by XML
     // clients working in a detached environment.
     @Transient
-    protected SortedSet<DescendantRef> descendantOfHolder;
+    protected Set<DescendantRef> descendantOfHolder;
 
     @Transient
     private String mergedToRefHolder;
@@ -533,7 +479,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
     @Transient
     protected boolean sortDateValid = false;
 
-    protected MediaObject() {
+    public MediaObject() {
     }
 
     public MediaObject(long id) {
@@ -615,7 +561,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
         return toUpdate;
     }
 
-    protected static <T> SortedSet<T> updateSortedSet(SortedSet<T> toUpdate,
+    protected static <T> Set<T> updateSortedSet(Set<T> toUpdate,
                                                       Collection<T> values) {
         if (toUpdate != null && toUpdate == values) {
             return toUpdate;
@@ -930,7 +876,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
             titles = new TreeSet<>();
         }
 
-        return titles;
+        return sorted(titles);
     }
 
     public void setTitles(SortedSet<Title> titles) {
@@ -1071,7 +1017,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
         if (descriptions == null) {
             descriptions = new TreeSet<>();
         }
-        return descriptions;
+        return sorted(descriptions);
     }
 
     public void setDescriptions(SortedSet<Description> descriptions) {
@@ -1158,7 +1104,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
 
     public String getMainDescription() {
         if (descriptions != null && descriptions.size() > 0) {
-            return descriptions.first().getDescription();
+            return sorted(descriptions).first().getDescription();
         }
         return null;
     }
@@ -1194,7 +1140,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
         if (genres == null) {
             genres = new TreeSet<>();
         }
-        return genres;
+        return sorted(genres);
     }
 
     public void setGenres(SortedSet<Genre> genres) {
@@ -1226,13 +1172,13 @@ public class MediaObject extends PublishableObject implements NicamRated {
         if (tags == null) {
             tags = new TreeSet<>();
         }
-        return tags;
+        return sorted(tags);
     }
 
     /**
      * Consider using {@link nl.vpro.domain.media.TagService#findOrCreate(} first.
      */
-    public void setTags(SortedSet<Tag> tags) {
+    public void setTags(Set<Tag> tags) {
         this.tags = updateSortedSet(this.tags, tags);
     }
 
@@ -1250,7 +1196,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
     }
 
     boolean removeTag(Tag tag) {
-        return getTags().remove(tag);
+        return tags != null && tags.remove(tag);
     }
 
     @XmlElement
@@ -1518,19 +1464,17 @@ public class MediaObject extends PublishableObject implements NicamRated {
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<DescendantRef> getDescendantOf() {
-        if (descendantOfHolder != null) {
-            return descendantOfHolder;
-        } else {
+        if (descendantOfHolder == null) {
             descendantOfHolder = new TreeSet<>();
             for (MediaObject media : getAncestors()) {
                 descendantOfHolder.add(DescendantRef.forOwner(media));
             }
         }
-        return descendantOfHolder;
+        return sorted(descendantOfHolder);
     }
 
 
-    void setDescendantOf(SortedSet<DescendantRef> descendantOf) {
+    void setDescendantOf(Set<DescendantRef> descendantOf) {
         this.descendantOfHolder = updateSortedSet(this.descendantOfHolder, descendantOf);
     }
 
@@ -1540,7 +1484,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
         if (memberOf == null) {
             memberOf = new TreeSet<>();
         }
-        return memberOf;
+        return sorted(memberOf);
     }
 
     public void setMemberOf(SortedSet<MemberRef> memberOf) {
@@ -1997,7 +1941,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
         }
 
         // SEE https://jira.vpro.nl/browse/MSE-2313
-        return new SortedSetSameElementWrapper<Prediction>(predictions) {
+        return new SortedSetSameElementWrapper<Prediction>(sorted(predictions)) {
             @Override
             protected Prediction adapt(Prediction prediction) {
                 if (prediction.getState() == Prediction.State.ANNOUNCED) {
@@ -2788,6 +2732,14 @@ public class MediaObject extends PublishableObject implements NicamRated {
             for (Prediction pred : predictions) {
                 LocationAuthorityRecord.unknownAuthority(this, pred.getPlatform());
             }
+        }
+    }
+
+    protected static <S> SortedSet<S> sorted(Set<S> set) {
+        if (set instanceof SortedSet) {
+            return (SortedSet) set;
+        } else {
+            return new ResortedSortedSet<S>(set);
         }
     }
 
