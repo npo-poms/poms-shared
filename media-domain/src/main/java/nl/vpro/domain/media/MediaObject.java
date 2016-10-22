@@ -422,12 +422,12 @@ public class MediaObject extends PublishableObject implements NicamRated {
             ")"
 
     )
-    protected SortedSet<Location> locations;
+    protected Set<Location> locations;
 
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = false)
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected SortedSet<ScheduleEvent> scheduleEvents;
+    protected Set<ScheduleEvent> scheduleEvents;
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", updatable = false, nullable = false)
@@ -435,7 +435,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected SortedSet<Relation> relations;
+    protected Set<Relation> relations;
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
     @OrderColumn(name = "list_index", nullable = false)
@@ -1122,7 +1122,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
 
     public String getShortDescription() {
         if (descriptions != null) {
-            for (Description description : descriptions) {
+            for (Description description : sorted(descriptions)) {
                 if (description.getType().equals(TextualType.SHORT)) {
                     return description.getDescription();
                 }
@@ -1143,7 +1143,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
         return sorted(genres);
     }
 
-    public void setGenres(SortedSet<Genre> genres) {
+    public void setGenres(Set<Genre> genres) {
         this.genres = updateSortedSet(this.genres, genres);
     }
 
@@ -2199,7 +2199,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
             scheduleEvents = new TreeSet<>();
         }
         // return Collections.unmodifiableSortedSet(scheduleEvents); Would be nice for hibernate, but jaxb gets confused (run ScheduleTest)
-        return scheduleEvents;
+        return sorted(scheduleEvents);
     }
 
     public void setScheduleEvents(SortedSet<ScheduleEvent> scheduleEvents) {
@@ -2232,7 +2232,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
         if (this.relations == null) {
             this.relations = new TreeSet<>();
         }
-        return relations;
+        return sorted(relations);
     }
 
     public void setRelations(SortedSet<Relation> relations) {
@@ -2736,6 +2736,9 @@ public class MediaObject extends PublishableObject implements NicamRated {
     }
 
     protected static <S> SortedSet<S> sorted(Set<S> set) {
+        if (set == null) {
+            return null;
+        }
         if (set instanceof SortedSet) {
             return (SortedSet) set;
         } else {

@@ -19,6 +19,8 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 
+import static nl.vpro.domain.media.MediaObject.sorted;
+
 
 /**
  * @since 1.5
@@ -393,7 +395,7 @@ public class MediaObjects {
         }
         Date date = null;
         if(mo.scheduleEvents != null && mo.scheduleEvents.size() > 0) {
-            date = mo.scheduleEvents.first().getStart();
+            date = sorted(mo.scheduleEvents).first().getStart();
         }
         if(date == null) {
             date = mo.getPublishStart();
