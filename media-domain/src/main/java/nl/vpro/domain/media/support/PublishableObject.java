@@ -45,7 +45,7 @@ import nl.vpro.validation.Publishable;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
-public abstract class PublishableObject implements DomainObject {
+public abstract class PublishableObject extends DomainObject {
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
@@ -96,13 +96,6 @@ public abstract class PublishableObject implements DomainObject {
 
     private static final Logger LOG = LoggerFactory.getLogger(PublishableObject.class);
 
-    @Id
-    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
-    @XmlTransient // Don't remove!
-    protected Long id;
-
-
     @Column(nullable = false)
     protected Date creationDate = new Date();
 
@@ -141,22 +134,10 @@ public abstract class PublishableObject implements DomainObject {
     }
 
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public PublishableObject setId(Long id) {
-        this.id = id;
-        return this;
-    }
 
     /**
      * Checks if this object is changed compared to the persistant version
      * by calculating the runtime CRC32 and compare it to the stored CRC
-     *
-     * @return
      */
     public boolean hasChanges() {
         long currentState;
@@ -246,7 +227,7 @@ public abstract class PublishableObject implements DomainObject {
         }
     }
 
-    protected PublishableObject() {
+    public PublishableObject() {
     }
 
     public PublishableObject(long id) {
