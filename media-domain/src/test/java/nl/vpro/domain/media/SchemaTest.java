@@ -44,7 +44,7 @@ import static org.custommonkey.xmlunit.XMLAssert.assertXMLIdentical;
  */
 public class SchemaTest {
 
-    private final static File dir = Files.createTempDir();
+    private final static File DIR = Files.createTempDir();
 
     @BeforeClass
     public static void generateXSDs() throws JAXBException, IOException, SAXException {
@@ -103,7 +103,7 @@ public class SchemaTest {
         if (StringUtils.isEmpty(namespace)) {
             filename = "absentnamespace";
         }
-        return new File(dir, filename + ".xsd");
+        return new File(DIR, filename + ".xsd");
     }
 
     private  Schema testNamespace(String namespace) throws IOException, SAXException {
