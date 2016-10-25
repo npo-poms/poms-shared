@@ -211,7 +211,7 @@ import nl.vpro.validation.StringList;
     ),
     @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")})
 
-public class MediaObject extends PublishableObject implements NicamRated {
+public abstract class MediaObject extends PublishableObject implements NicamRated {
 
     private static final Logger LOG = LoggerFactory.getLogger(MediaObject.class);
 
@@ -2688,9 +2688,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
             .toString();
     }
 
-    public SubMediaType getType() {
-        throw new UnsupportedOperationException();
-    }
+    public abstract SubMediaType getType();
 
     /**
      * @since 3.2
@@ -2759,9 +2757,7 @@ public class MediaObject extends PublishableObject implements NicamRated {
     }
 
     @Override
-    protected String getUrnPrefix() {
-        throw new UnsupportedOperationException();
-    }
+    protected abstract String getUrnPrefix();
 
 
 }
