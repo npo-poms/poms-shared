@@ -15,10 +15,14 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.MatchAllDocsQuery;
+import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
+import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.util.BytesRef;
+import org.apache.lucene.util.BytesRefBuilder;
+import org.apache.lucene.util.NumericUtils;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,19 +84,16 @@ public class LuceneHelper {
      * @return The create TempRangeQuery
      */
 
-    public static TermRangeQuery createRangeQuery(String field, Instant start, Instant stop, DateTools.Resolution indexResolution) {
-
-        BytesRef lower = null;
-        if(start != null) {
-            lower = new BytesRef(DateTools.dateToString(DateUtils.toDate(start), indexResolution));
+    public static NumericRangeQuery<Long> createRangeQuery(String field, Instant start, Instant stop, DateTools.Resolution indexResolution) {
+        if (start != null) {
+            start = DateTools.round(DateUtils.toDate(start), indexResolution).toInstant();
         }
 
-        BytesRef upper = null;
-        if(stop != null) {
-            upper = new BytesRef(DateTools.dateToString(DateUtils.toDate(inc(stop, 1, indexResolution)), indexResolution));
+        if (stop != null) {
+            stop = DateTools.round(DateUtils.toDate(inc(stop, 1, indexResolution)), indexResolution).toInstant();
         }
 
-        return new TermRangeQuery(field, lower, upper, true, false);
+        return NumericRangeQuery.newLongRange(field, start != null ? start.getEpochSecond() : null, stop != null ? stop.getEpochSecond() : null, true, false);
     }
 
     public static Instant inc(Instant instant, int amount, DateTools.Resolution indexResolution) {
@@ -126,7 +127,7 @@ public class LuceneHelper {
     }
 
     @Deprecated
-    public static TermRangeQuery createDayRangeQuery(String field, Date start, Date stop, DateTools.Resolution indexResolution) {
+    public static NumericRangeQuery createDayRangeQuery(String field, Date start, Date stop, DateTools.Resolution indexResolution) {
         return createRangeQuery(field, DateUtils.toInstant(start), DateUtils.toInstant(stop), indexResolution);
     }
 
