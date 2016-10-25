@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -291,9 +292,12 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     protected Set<Genre> genres;
 
     @ManyToMany
-    @Cascade({CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REPLICATE, CascadeType.SAVE_UPDATE, CascadeType.PERSIST})
+    @Cascade({CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REPLICATE, CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.REMOVE})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
+    @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"),
+        inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag")
+    )
     protected Set<Tag> tags;
 
     protected String source;
@@ -426,6 +430,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = false)
     @SortNatural
+    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<ScheduleEvent> scheduleEvents;
 
