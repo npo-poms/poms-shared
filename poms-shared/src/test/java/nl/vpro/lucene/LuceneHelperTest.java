@@ -4,10 +4,12 @@
  */
 package nl.vpro.lucene;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 import org.apache.lucene.document.DateTools;
+import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.TermRangeQuery;
 import org.apache.lucene.util.BytesRef;
 import org.junit.Test;
@@ -47,42 +49,48 @@ public class LuceneHelperTest {
 
     @Test
     public void testRangeQueryMinutes() throws Exception {
-        TermRangeQuery p = LuceneHelper.createRangeQuery("bla",
-            LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
-            LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+        Instant start = LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
+        Instant stop  = LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
+        NumericRangeQuery<Long> p = LuceneHelper.createRangeQuery("bla",
+            start,
+            stop,
             DateTools.Resolution.MINUTE);
-        assertThat(p.getLowerTerm()).isEqualTo(new BytesRef("201608231030"));
-        assertThat(p.getUpperTerm()).isEqualTo(new BytesRef("201608231131"));
+        assertThat(p.getMin()).isEqualTo(1471948200);
+        assertThat(p.getMax()).isEqualTo(1471951860);
     }
 
     @Test
     public void testRangeQueryDays() throws Exception {
-        TermRangeQuery p = LuceneHelper.createRangeQuery("bla",
-            LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
-            LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+        Instant start = LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
+        Instant stop  = LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
+        NumericRangeQuery<Long> p = LuceneHelper.createRangeQuery("bla",
+            start,
+            stop,
             DateTools.Resolution.DAY);
-        assertThat(p.getLowerTerm()).isEqualTo(new BytesRef("20160823"));
-        assertThat(p.getUpperTerm()).isEqualTo(new BytesRef("20160824"));
+        assertThat(p.getMin()).isEqualTo(1471910400);
+        assertThat(p.getMax()).isEqualTo(1471996800);
     }
 
 
     @Test
     public void testRangeQueryYear() throws Exception {
-        TermRangeQuery p = LuceneHelper.createRangeQuery("bla",
-            LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
-            LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
+        Instant start = LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
+        Instant stop  = LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
+        NumericRangeQuery<Long> p = LuceneHelper.createRangeQuery("bla",
+            start,
+            stop,
             DateTools.Resolution.YEAR);
-        assertThat(p.getLowerTerm()).isEqualTo(new BytesRef("2016"));
-        assertThat(p.getUpperTerm()).isEqualTo(new BytesRef("2017"));
+        assertThat(p.getMin()).isEqualTo(1451606400);
+        assertThat(p.getMax()).isEqualTo(1483228800);
     }
 
     @Test
     public void testRangeQueryMonth() throws Exception {
-        TermRangeQuery p = LuceneHelper.createRangeQuery("bla",
+        NumericRangeQuery<Long> p = LuceneHelper.createRangeQuery("bla",
             LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             DateTools.Resolution.MONTH);
-        assertThat(p.getLowerTerm()).isEqualTo(new BytesRef("201608"));
-        assertThat(p.getUpperTerm()).isEqualTo(new BytesRef("201609"));
+        assertThat(p.getMin()).isEqualTo(1470009600);
+        assertThat(p.getMax()).isEqualTo(1472688000);
     }
 }
