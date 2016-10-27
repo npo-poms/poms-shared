@@ -1,13 +1,22 @@
 package nl.vpro.domain.media;
 
-import java.io.Serializable;
-
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import java.io.Serializable;
 
 @Entity(name = "avattributes")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
