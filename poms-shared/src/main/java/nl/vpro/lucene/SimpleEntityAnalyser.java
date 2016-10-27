@@ -6,6 +6,8 @@ package nl.vpro.lucene;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 
+@Deprecated
+/* Use DutchAnalyzer instead */
 public final class SimpleEntityAnalyser extends Analyzer {
 
 

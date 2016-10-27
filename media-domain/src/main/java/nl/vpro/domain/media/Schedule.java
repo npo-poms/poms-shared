@@ -282,6 +282,12 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
     public void setGuideDate(LocalDate start) {
         this.start = start == null ? null : Date.from(start.atTime(START_OF_SCHEDULE).atZone(ZONE_ID).toInstant());
     }
+
+    /* Need a getter with the above setter, otherwise Hibernate fails */
+    public LocalDate getGuideDate() {
+        return LocalDate.from(getStartInstant());
+    }
+
     public void setStart(LocalDateTime start) {
         this.start = start == null ? null : Date.from(start.atZone(ZONE_ID).toInstant());
     }

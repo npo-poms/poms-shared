@@ -8,9 +8,13 @@ import java.util.List;
 
 public interface UserRepository<T extends User> {
 
+    T attach(T user);
+
     Long count();
 
     T get(String id);
+
+    T save(T user);
 
     T merge(T user);
 

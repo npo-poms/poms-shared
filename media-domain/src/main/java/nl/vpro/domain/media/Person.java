@@ -52,6 +52,10 @@ public class Person extends DomainObject {
     @Enumerated(EnumType.STRING)
     protected RoleType role;
 
+    @Column(name = "list_index", nullable = false)
+    @XmlTransient
+    private int listIndex = 0;
+
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
     protected MediaObject mediaObject;
@@ -143,6 +147,14 @@ public class Person extends DomainObject {
 
     public void setMediaObject(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
+    }
+
+    public int getListIndex() {
+        return listIndex;
+    }
+
+    public void setListIndex(int listIndex) {
+        this.listIndex = listIndex;
     }
 
     public GTAARecord getGtaaRecord() {

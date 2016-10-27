@@ -1404,8 +1404,11 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         }
 
         if (!persons.contains(person)) {
-            person.setMediaObject(this);
-            persons.add(person);
+            if (person != null) {
+                person.setMediaObject(this);
+                person.setListIndex(persons.size());
+                persons.add(person);
+            }
         }
 
         return this;
@@ -2371,7 +2374,11 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         } else {
             images.add(index, image);
         }
-        image.setMediaObject(this);
+
+        if (image != null) {
+            image.setMediaObject(this);
+            image.setListIndex(images.size());
+        }
         return this;
     }
 

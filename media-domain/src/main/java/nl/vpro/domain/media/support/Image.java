@@ -144,9 +144,12 @@ public class Image extends PublishableObject implements Ownable {
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String date;
 
+    @Column(name = "list_index", nullable = false)
+    @XmlTransient
+    private int listIndex = 0;
 
     @ManyToOne
-    @JoinColumn(insertable=false, updatable=false, nullable=false)
+//    @JoinColumn(insertable=false, updatable=false, nullable=false)
     @XmlTransient
     private MediaObject mediaObject;
 
@@ -382,6 +385,13 @@ public class Image extends PublishableObject implements Ownable {
         this.mediaObject = mediaObject;
     }
 
+    public int getListIndex() {
+        return listIndex;
+    }
+
+    public void setListIndex(int listIndex) {
+        this.listIndex = listIndex;
+    }
 
     @Override
     public String getUrnPrefix() {
