@@ -9,6 +9,8 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.StopAnalyzer;
 import org.apache.lucene.analysis.util.CharArraySet;
 
+@Deprecated
+/* Use DutchAnalyzer instead */
 public final class EntityAnalyser extends Analyzer {
 
     private static final String[] DUTCH_STOP_WORDS = {
