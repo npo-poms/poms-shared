@@ -19,7 +19,7 @@ public enum License implements Displayable {
 
     String displayName;
 
-    private License(String displayName) {
+    License(String displayName) {
         this.displayName = displayName;
     }
 
