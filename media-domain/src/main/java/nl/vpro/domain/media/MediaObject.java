@@ -430,7 +430,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = false)
     @SortNatural
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    @Cascade({org.hibernate.annotations.CascadeType.MERGE})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<ScheduleEvent> scheduleEvents;
 
