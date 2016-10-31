@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.PublishableObject;
+import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.DurationToTimeConverter;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -103,7 +104,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     @Convert(converter = DurationToTimeConverter.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
-    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerDate.class)
+    @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     protected Duration offset;
 
     @XmlElement
@@ -111,7 +112,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonSerialize(using = XMLDurationToJsonTimestamp .Serializer.class)
-    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerDate.class)
+    @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     protected Duration duration;
 
     @Enumerated(EnumType.STRING)
