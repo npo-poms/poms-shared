@@ -25,7 +25,7 @@ import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DateToDuration;
 
 /**
- * @javadoc
+ * A segment is a view on a program.
  */
 
 @Entity
