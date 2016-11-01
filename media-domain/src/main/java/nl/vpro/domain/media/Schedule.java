@@ -124,6 +124,14 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         }
     }
 
+    public Schedule(Channel channel, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
+        this(channel, Date.from(start), Date.from(stop), scheduleEvents);
+    }
+
+    public Schedule(Channel channel, Instant start, Instant stop) {
+        this(channel, Date.from(start), Date.from(stop), null);
+    }
+
     public Schedule(Net net, Date start, Date stop, Collection<ScheduleEvent> scheduleEvents) {
         this.net = net;
         this.start = start;
@@ -131,6 +139,14 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         if (scheduleEvents != null && scheduleEvents.size() > 0) {
             this.scheduleEvents = new TreeSet<>(scheduleEvents);
         }
+    }
+
+    public Schedule(Net net, Instant start, Instant stop) {
+        this(net, Date.from(start), Date.from(stop), null);
+    }
+
+    public Schedule(Net net, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
+        this(net, Date.from(start), Date.from(stop), scheduleEvents);
     }
 
     @XmlElement(name = "scheduleEvent")
