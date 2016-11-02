@@ -98,10 +98,6 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     }
 
     public Segment(Segment source) {
-        this(source, source.parent);
-    }
-
-    public Segment(Segment source, Program parent) {
         super(source);
         this.start = source.start;
         this.midRef = source.midRef;
@@ -109,15 +105,9 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     }
 
     public static Segment copy(Segment source) {
-        return copy(source, source.parent);
+        return copy(source);
     }
-
-    public static Segment copy(Segment source, Program parent) {
-        if(source == null) {
-            return null;
-        }
-        return new Segment(source);
-    }
+ 
 
     @Override
     public boolean isActivation() {

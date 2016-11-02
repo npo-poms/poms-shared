@@ -110,7 +110,7 @@ public class Program extends MediaObject {
     public Program(Program source) {
         super(source);
         source.getEpisodeOf().stream().forEach(ref -> this.createEpisodeOf((Group)ref.getOwner(), ref.getNumber()));
-        source.getSegments().stream().forEach(segment -> this.addSegment(Segment.copy(segment, this)));
+        source.getSegments().stream().forEach(segment -> this.addSegment(Segment.copy(segment)));
         this.type = source.type;
         this.poProgType = source.poProgType;
     }
