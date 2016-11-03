@@ -125,7 +125,7 @@ public class Image extends PublishableObject implements Ownable {
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String credits;
 
-    @URL
+    @URL()
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String source;
 
@@ -284,6 +284,10 @@ public class Image extends PublishableObject implements Ownable {
 
     public void setOffset(Date offset) {
         this.offset = offset;
+    }
+
+    public void setOffset(java.time.Duration offset) {
+        this.offset = new Date(offset.toMillis());
     }
 
     public Integer getWidth() {
