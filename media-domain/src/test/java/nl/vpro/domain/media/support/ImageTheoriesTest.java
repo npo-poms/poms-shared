@@ -17,7 +17,7 @@ import nl.vpro.theory.ObjectTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ImageTest extends ObjectTest<Image> {
+public class ImageTheoriesTest extends ObjectTest<Image> {
 
     @DataPoint
     public static Image nullArgument = null;
