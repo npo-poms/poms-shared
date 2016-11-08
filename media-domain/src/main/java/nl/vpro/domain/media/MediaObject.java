@@ -607,6 +607,9 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     public void setMid(String mid) {
+        if (mid != null && mid.length() == 0) {
+            mid = null;
+        }
         if (this.mid != null && mid != null && !this.mid.equals(mid)) {
             throw new IllegalArgumentException("Not allowed to assign new value to MID (current = " + this.mid + ", new = " + mid + ")");
         }
