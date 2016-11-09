@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.URL;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -286,6 +287,7 @@ public class Image extends PublishableObject implements Ownable {
         this.offset = offset;
     }
 
+    @JsonIgnore
     public void setOffset(java.time.Duration offset) {
         this.offset = new Date(offset.toMillis());
     }
