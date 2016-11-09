@@ -10,8 +10,6 @@ import java.time.ZoneId;
 
 import org.apache.lucene.document.DateTools;
 import org.apache.lucene.search.NumericRangeQuery;
-import org.apache.lucene.search.TermRangeQuery;
-import org.apache.lucene.util.BytesRef;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -55,8 +53,8 @@ public class LuceneHelperTest {
             start,
             stop,
             DateTools.Resolution.MINUTE);
-        assertThat(p.getMin()).isEqualTo(1471948200);
-        assertThat(p.getMax()).isEqualTo(1471951860);
+        assertThat(p.getMin()).isEqualTo(1471948200000L);
+        assertThat(p.getMax()).isEqualTo(1471951860000L);
     }
 
     @Test
@@ -67,8 +65,8 @@ public class LuceneHelperTest {
             start,
             stop,
             DateTools.Resolution.DAY);
-        assertThat(p.getMin()).isEqualTo(1471910400);
-        assertThat(p.getMax()).isEqualTo(1471996800);
+        assertThat(p.getMin()).isEqualTo(1471910400000L);
+        assertThat(p.getMax()).isEqualTo(1471996800000L);
     }
 
 
@@ -80,8 +78,8 @@ public class LuceneHelperTest {
             start,
             stop,
             DateTools.Resolution.YEAR);
-        assertThat(p.getMin()).isEqualTo(1451606400);
-        assertThat(p.getMax()).isEqualTo(1483228800);
+        assertThat(p.getMin()).isEqualTo(1451606400000L);
+        assertThat(p.getMax()).isEqualTo(1483228800000L);
     }
 
     @Test
@@ -90,7 +88,7 @@ public class LuceneHelperTest {
             LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             DateTools.Resolution.MONTH);
-        assertThat(p.getMin()).isEqualTo(1470009600);
-        assertThat(p.getMax()).isEqualTo(1472688000);
+        assertThat(p.getMin()).isEqualTo(1470009600000L);
+        assertThat(p.getMax()).isEqualTo(1472688000000L);
     }
 }
