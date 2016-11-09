@@ -18,11 +18,6 @@ import org.apache.lucene.search.MatchAllDocsQuery;
 import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
-import org.apache.lucene.search.TermQuery;
-import org.apache.lucene.search.TermRangeQuery;
-import org.apache.lucene.util.BytesRef;
-import org.apache.lucene.util.BytesRefBuilder;
-import org.apache.lucene.util.NumericUtils;
 import org.apache.lucene.util.Version;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,8 +87,12 @@ public class LuceneHelper {
         if (stop != null) {
             stop = DateTools.round(DateUtils.toDate(inc(stop, 1, indexResolution)), indexResolution).toInstant();
         }
+        //1471940220000
 
-        return NumericRangeQuery.newLongRange(field, start != null ? start.getEpochSecond() : null, stop != null ? stop.getEpochSecond() : null, true, false);
+        return NumericRangeQuery.newLongRange(field,
+            start != null ? start.toEpochMilli() : null,
+            stop != null ? stop.toEpochMilli() : null,
+            true, false);
     }
 
     public static Instant inc(Instant instant, int amount, DateTools.Resolution indexResolution) {
