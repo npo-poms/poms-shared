@@ -1,6 +1,7 @@
 package nl.vpro.media.domain.es;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 /**
  * @author Michiel Meeuwissen
@@ -29,7 +30,6 @@ public enum MediaESType {
 
     public static MediaESType[] MEMBERREFS= {programMemberRef, groupMemberRef, segmentMemberRef};
 
-
     public static MediaESType[] DELETED_MEDIAOBJECTS = {deletedprogram, deletedgroup, deletedsegment};
 
 
@@ -49,5 +49,9 @@ public enum MediaESType {
 
     public static String[] deletedMediaObjects() {
         return toString(DELETED_MEDIAOBJECTS);
+    }
+
+    public static String[] nonRefs() {
+        return toString(Stream.concat(Arrays.stream(MEDIAOBJECTS), Arrays.stream(DELETED_MEDIAOBJECTS)).toArray(MediaESType[]::new));
     }
 }
