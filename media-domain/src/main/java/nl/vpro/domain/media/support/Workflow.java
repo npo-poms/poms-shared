@@ -106,6 +106,10 @@ public enum Workflow {
     public static final List<Workflow> DELETES =
         Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED);
 
+
+    public static final List<Workflow> PUBLISHED_AS_DELETED =
+        Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED, Workflow.MERGED, Workflow.PARENT_REVOKED);
+
     public static final List<Workflow> REVOKES =
         Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED, Workflow.REVOKED);
 
@@ -113,7 +117,7 @@ public enum Workflow {
         Arrays.asList(Workflow.FOR_DELETION, Workflow.FOR_PUBLICATION, Workflow.FOR_REPUBLICATION);
 
     public static final List<Workflow> DEPRECATED =
-        Arrays.asList(Workflow.DRAFT, Workflow.REFUSED, Workflow.MERGED);
+        Arrays.asList(Workflow.DRAFT, Workflow.REFUSED);
 
     private final String description;
 
