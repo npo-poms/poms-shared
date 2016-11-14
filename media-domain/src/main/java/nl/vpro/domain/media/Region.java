@@ -8,5 +8,6 @@ import javax.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
 public enum Region {
-    BENELUX, NL
+    BENELUX,
+    NL
 }
