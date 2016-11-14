@@ -575,17 +575,25 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    @SuppressWarnings("unchecked")
     default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger) {
-        ScheduleEvent event = new ScheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration);
-        event.setMediaObject(mediaObject());
-        event = merger.apply(event);
-        return (B) this;
+        return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration, merger);
     }
 
     @SuppressWarnings("unchecked")
     default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration) {
         return scheduleEvent(c, time, duration, e -> e);
+    }
+
+    default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger) {
+        ScheduleEvent event = new ScheduleEvent(c, time, duration);
+        event.setMediaObject(mediaObject());
+        event = merger.apply(event);
+        return (B) this;
+    }
+
+
+    default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration) {
+        return scheduleEvent(c, time, duration, e->e);
     }
 
 
