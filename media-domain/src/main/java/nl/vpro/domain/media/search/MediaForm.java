@@ -4,18 +4,20 @@
  */
 package nl.vpro.domain.media.search;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import nl.vpro.domain.media.AVType;
+import nl.vpro.domain.media.MediaType;
+import nl.vpro.domain.user.Organization;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-
-import javax.xml.bind.annotation.*;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.MediaType;
-import nl.vpro.domain.user.Organization;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "mediaForm")
@@ -42,6 +44,8 @@ import nl.vpro.domain.user.Organization;
     "tags",
     "avType",
     "notAnEpisode",
+    "noMembers",
+    "noCredits",
     "findDeleted",
     "excludedMids"
 
@@ -132,6 +136,12 @@ public class MediaForm {
     private Boolean notAnEpisode;
 
     @XmlElement
+    private Boolean noMembers;
+
+    @XmlElement
+    private Boolean noCredits;
+
+    @XmlElement
     private Boolean findDeleted;
 
     @XmlElement(name = "excludedMid")
@@ -144,15 +154,15 @@ public class MediaForm {
     }
 
     public MediaForm(Pager pager) {
-        this(pager, null, null, null, null, false, false, false, null, null, null, null, null, false);
+        this(pager, null, null, null, null, false, false, false, null, null, null, null, null, false, false, false);
     }
 
     public MediaForm(Pager pager, String text) {
-        this(pager, null, null, text, null, false, false, false, null, null, null, null, null, false);
+        this(pager, null, null, text, null, false, false, false, null, null, null, null, null, false, false, false);
     }
 
     public MediaForm(Pager pager, Collection<MediaType> types) {
-        this(pager, null, null, null, types, false, false, false, null, null, null, null, null, false);
+        this(pager, null, null, null, types, false, false, false, null, null, null, null, null, false, false, false);
     }
 
     public MediaForm(
@@ -169,7 +179,9 @@ public class MediaForm {
         DateRange creationRange,
         String lastModifiedBy,
         DateRange lastModifiedRange,
-        Boolean notAnEpisode) {
+        Boolean notAnEpisode,
+        Boolean noMembers,
+        Boolean noCredits) {
 
         if(pager == null) {
             throw new IllegalArgumentException("Must supply a pager, got null");
@@ -190,6 +202,8 @@ public class MediaForm {
         this.lastModifiedRange = lastModifiedRange;
         this.notAnEpisode = notAnEpisode;
         this.findDeleted = null; // backwards compatiblity
+        this.noMembers = noMembers;
+        this.noCredits = noCredits;
     }
 
     public Pager getPager() {
@@ -334,6 +348,22 @@ public class MediaForm {
 
     public void setNoPlaylist(boolean noPlaylist) {
         this.noPlaylist = noPlaylist;
+    }
+
+    public Boolean hasNoMembers() {
+        return noMembers;
+    }
+
+    public void setNoMembers(Boolean noMembers) {
+        this.noMembers = noMembers;
+    }
+
+    public Boolean hasNoCredits() {
+        return noCredits;
+    }
+
+    public void setNoCredits(Boolean noCredits) {
+        this.noCredits = noCredits;
     }
 
     /**

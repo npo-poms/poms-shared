@@ -424,7 +424,17 @@ public interface MediaTestDataBuilder<
             new Image(OwnerType.BROADCASTER, "urn:vpro:image:1234"),
             new Image(OwnerType.BROADCASTER, "urn:vpro:image:5678"),
             new Image(OwnerType.NEBO, "urn:vpro:image:2468"),
-            new Image(OwnerType.NEBO, "urn:vpro:image:8888"));
+            new Image(OwnerType.NEBO, "urn:vpro:image:8888")
+        );
+    }
+
+    default T withImagesWithCredits() {
+        return images(
+                new Image(OwnerType.BROADCASTER, "urn:vpro:image:1234").setCredits("CREDITS").setLicense(License.PUBLIC_DOMAIN).setSource("SOURCE"),
+                new Image(OwnerType.BROADCASTER, "urn:vpro:image:5678").setCredits("CREDITS").setLicense(License.PUBLIC_DOMAIN).setSource("SOURCE"),
+                new Image(OwnerType.NEBO, "urn:vpro:image:2468"),
+                new Image(OwnerType.NEBO, "urn:vpro:image:8888")
+        );
     }
 
     default T withPublishedImages() {
