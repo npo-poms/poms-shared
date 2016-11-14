@@ -50,8 +50,6 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         return guideDay(Instant.now());
     }
 
-
-
     @XmlTransient // See property
     protected SortedSet<ScheduleEvent> scheduleEvents;
 
@@ -103,6 +101,11 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         this(channel, start, start, scheduleEvents);
     }
 
+
+    public Schedule(Channel channel, Instant start, Collection<ScheduleEvent> scheduleEvents) {
+        this(channel, start, start, scheduleEvents);
+    }
+
     public Schedule(Net net, Date start, Collection<ScheduleEvent> scheduleEvents) {
         this(net, start, start, scheduleEvents);
     }
@@ -110,6 +113,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
     public Schedule(Channel channel, Date start, Date stop) {
         this(channel, start, stop, null);
     }
+
 
     public Schedule(Net net, Date start, Date stop) {
         this(net, start, stop, null);
