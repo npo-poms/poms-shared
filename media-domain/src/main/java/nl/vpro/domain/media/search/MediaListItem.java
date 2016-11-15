@@ -44,6 +44,7 @@ import nl.vpro.domain.user.ThirdParty;
             "lastPublished",
             "firstScheduleEvent",
             "locations",
+            "numberOfLocations",
             "tags",
             "image"
         }
@@ -97,6 +98,8 @@ public class MediaListItem extends PublishableListItem {
 
     private SortedSet<Location> locations;
 
+    private Integer numberOfLocations;
+
     private ImageListItem image;
 
     private ScheduleEvent firstScheduleEvent;
@@ -134,6 +137,7 @@ public class MediaListItem extends PublishableListItem {
         this.type = media.getType().getMediaType();
         this.sortDate = media.getSortDate();
         this.locations = media.getLocations();
+        this.numberOfLocations = media.getLocations().size();
         this.tags = media.getTags();
 
         this.lastPublished = media.getLastPublished();
@@ -344,6 +348,14 @@ public class MediaListItem extends PublishableListItem {
     @Override
     public void setPublishStop(Date publishStop) {
         super.setPublishStop(publishStop);
+    }
+
+    public Integer getNumberOfLocations() {
+        return numberOfLocations;
+    }
+
+    public void setNumberOfLocations(Integer numberOfLocations) {
+        this.numberOfLocations = numberOfLocations;
     }
 
     @Override
