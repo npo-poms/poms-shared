@@ -63,6 +63,7 @@ public class MediaListTest {
             "        <s:createdBy>editor@vpro.nl</s:createdBy>\n" +
             "        <s:sortDate>2012-08-02T17:41:25.885+02:00</s:sortDate>\n" +
             "        <s:type>CLIP</s:type>\n" +
+            "        <s:numberOfLocations>0</s:numberOfLocations>\n" +
             "        <s:tag>bar</s:tag>\n" +
             "        <s:tag>foo</s:tag>\n" +
             "    </s:item>\n" +
