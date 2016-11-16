@@ -7,6 +7,7 @@ import java.util.SortedSet;
 
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -83,7 +84,7 @@ public class MediaListItem extends PublishableListItem {
 
     @XmlElement(name = "tag")
     @JsonProperty("tags")
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_EMPTY)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private SortedSet<Tag> tags;
 
     @XmlTransient
