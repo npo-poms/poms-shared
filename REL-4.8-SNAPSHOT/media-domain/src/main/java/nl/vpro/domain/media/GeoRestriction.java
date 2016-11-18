@@ -1,0 +1,118 @@
+package nl.vpro.domain.media;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.*;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.fasterxml.jackson.annotation.JsonValue;
+
+@Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(name = "geoRestrictionType")
+@SuppressWarnings("serial")
+public class GeoRestriction extends Restriction {
+
+    @Column(nullable=false)
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "nl.vpro.constraints.NotNull")
+    protected Region region;
+
+    @XmlTransient
+    private boolean authorityUpdate = false;
+
+    private GeoRestriction() {
+    }
+
+    public GeoRestriction(String region) {
+        // When loading from JSON
+        this.region = Region.valueOf(region);
+    }
+
+    public GeoRestriction(Region region) {
+        this.region = region;
+    }
+
+    public GeoRestriction(Region region, Date start, Date stop) {
+        super(start, stop);
+        this.region = region;
+    }
+
+    public GeoRestriction(Long id, Region region, Date start, Date stop) {
+        super(id, start, stop);
+        this.region = region;
+    }
+
+    public GeoRestriction(GeoRestriction source) {
+        super(source);
+        this.region = source.region;
+        this.authorityUpdate = source.authorityUpdate;
+    }
+
+    public static GeoRestriction copy(GeoRestriction source){
+        if(source == null) {
+            return null;
+        }
+        return new GeoRestriction(source);
+    }
+
+
+    @XmlAttribute(name = "regionId")
+    @JsonValue
+    public Region getRegion() {
+        return region;
+    }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
+
+    public boolean isAuthorityUpdate() {
+        return authorityUpdate;
+    }
+
+    public void setAuthorityUpdate(boolean ceresUpdate) {
+        this.authorityUpdate = ceresUpdate;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) { return false; }
+        if (obj == this) { return true; }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        GeoRestriction rhs = (GeoRestriction) obj;
+        return new EqualsBuilder()
+            .appendSuper(super.equals(obj))
+            .append(region, rhs.region)
+            .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(39, 53)
+            .appendSuper(super.hashCode())
+            .append(region)
+            .toHashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .appendSuper(super.toString())
+            .append("region", region)
+            .toString();
+    }
+}

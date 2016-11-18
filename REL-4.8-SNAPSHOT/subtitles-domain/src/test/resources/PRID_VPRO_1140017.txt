@@ -1,0 +1,1502 @@
+0001 00:02:02:20 00:02:04:15
+888                   
+
+0002 00:02:04:20 00:02:08:06
+*'k Heb een paar puntjes         
+die ik met je wil bespreken       
+
+0003 00:02:08:11 00:02:11:06
+*Dat wil ik doen            
+in jouw mobiele bakkerij        
+
+0004 00:02:11:11 00:02:14:16
+*'k Loop ermee rond           
+al minstens zeven we-e-ken       
+
+0005 00:02:14:21 00:02:18:01
+*Kom alsjeblieft             
+met je bakspullen bij mij        
+
+0006 00:02:18:06 00:02:21:21
+*Dan gaan we appelpunten maken     
+en bespreken alle zaken         
+
+0007 00:02:22:01 00:02:24:18
+*En we snoepen              
+van het deeg en van de room       
+
+0008 00:02:24:23 00:02:28:14
+*We boren met de appelboor       
+en nemen alle puntjes door       
+
+0009 00:02:28:19 00:02:31:06
+*Je bent de allerleukste suikeroom! 
+
+0010 00:02:31:11 00:02:34:22
+*'k Heb een paar puntjes         
+die ik met je wil bespreken       
+
+0011 00:02:35:02 00:02:37:22
+*Dat wil ik doen            
+in jouw mobiele bakkerij        
+
+0012 00:02:38:02 00:02:41:07
+*'k Loop ermee rond           
+al minstens zeven we-e-ken       
+
+0013 00:02:41:12 00:02:44:17
+*Kom alsjeblieft            
+met je bakspullen bij mij*       
+
+0014 00:02:51:22 00:02:54:18
+Ha. Hee!                
+Een hele goeiedag.           
+
+0015 00:02:54:23 00:02:57:10
+Ik ben Beau.               
+Aangenaam, ik ben Abel.         
+
+0016 00:02:57:15 00:03:00:18
+Ik kom een taart met je maken.     
+Had je me verwacht?           
+
+0017 00:03:00:23 00:03:02:14
+Mag ik binnenkomen? Ja.         
+
+0018 00:03:03:19 00:03:07:12
+Dat is m'n zusje. Je zusje?       
+Nou, ik doe even m'n jas uit.      
+
+0019 00:03:08:19 00:03:11:21
+Dag zusje, ik ben Abel.         
+Aangenaam.                
+
+0020 00:03:13:10 00:03:17:10
+Vertel, Beau, we zitten in...      
+Lutjebroek. Lutjebroek.         
+
+0021 00:03:17:15 00:03:21:14
+De meeste mensen denken dat       
+dat niet bestaat, wist je dat?     
+
+0022 00:03:21:19 00:03:26:00
+Dat het een verzonnen naam is.    
+ZUSJE KREUNT Omdat het zo klein is. 
+
+0023 00:03:26:05 00:03:29:10
+Voor wie gaan we een taart maken?   
+Voor Merakel.             
+
+0024 00:03:29:15 00:03:33:11
+En wat is dat? Een logeerhuis      
+voor gehandicapte kinderen.       
+
+0025 00:03:33:16 00:03:37:21
+En daar logeert je zusje ook? Ja.   
+Want zij is gehandicapt? Ja.      
+
+0026 00:03:38:01 00:03:41:02
+Wat heeft ze?              
+Ze is meervoudig gehandicapt.      
+
+0027 00:03:42:08 00:03:45:24
+En hoe is dat gekomen?         
+Bij de geboorte.            
+
+0028 00:03:46:04 00:03:48:03
+Te weinig zuurstof of zo?        
+
+0029 00:03:48:08 00:03:51:05
+Nou, in de buik was ze         
+al gehandicapt. O ja?          
+
+0030 00:03:52:11 00:03:57:08
+En, behalve... Is het een blije zus,
+of is ze... Ja.           
+
+0031 00:03:57:13 00:04:01:04
+Ze kan ook heel verdrietig zijn.    
+Ook verdrietig? Ja.           
+
+0032 00:04:01:09 00:04:03:12
+En kun je haar dan troosten?      
+Ja?                   
+
+0033 00:04:03:17 00:04:06:18
+Want ik hoorde dat jullie        
+tweeling zijn. Ja.            
+
+0034 00:04:06:23 00:04:08:22
+Kijk aan. EEN- of twee-eiig?      
+
+0035 00:04:09:02 00:04:11:20
+Dat weet ik niet.            
+Maar jullie lijken...          
+
+0036 00:04:12:00 00:04:16:01
+Ja, een beetje op elkaar.       
+Hoewel zij weer langer lijkt. Ja.   
+
+0037 00:04:16:06 00:04:21:20
+Goed, dus een taart voor Merakel,  
+een huis voor gehandicapte kinderen.
+
+0038 00:04:22:00 00:04:23:20
+Ja. Een vakantiehuis, he?        
+
+0039 00:04:24:00 00:04:27:08
+Kom jij er ook regelmatig?       
+Ik ga soms kijken.           
+
+0040 00:04:27:13 00:04:30:12
+Oke, want je ouders zijn        
+er ook vrijwilliger?          
+
+0041 00:04:30:17 00:04:34:03
+M'n vader heeft het opgericht      
+met nog een mevrouw.           
+
+0042 00:04:34:08 00:04:36:04
+Wat een stoere actie! Ja.        
+
+0043 00:04:36:09 00:04:38:10
+Dus een taart voor de Merakel.     
+
+0044 00:04:38:15 00:04:41:14
+Heb je enig idee voor          
+hoeveel mensen dat is?         
+
+0045 00:04:41:19 00:04:43:18
+Nou, ik denk ongeveer, eh...      
+
+0046 00:04:43:23 00:04:46:10
+20, 30.                 
+20, 30 mensen, oke.           
+
+0047 00:04:46:15 00:04:50:08
+En ik zag toen ik door het dorp reed
+dat er kermis is. Ja.        
+
+0048 00:04:50:13 00:04:53:12
+Dus we hebben eigenlijk         
+feest vandaag? Ja.            
+
+0049 00:04:53:17 00:04:58:05
+Nou, laten we kijken of we die taart
+hier in de keuken kunnen maken.   
+
+0050 00:04:58:10 00:05:01:09
+Oke. Dit is de prachtige        
+inbouwkeuken? Ja.            
+
+0051 00:05:01:14 00:05:04:01
+Van Lutjebroek.             
+Hij is geweldig...           
+
+0052 00:05:04:06 00:05:07:03
+maar jij hebt vandaag          
+driedubbel mazzel.            
+
+0053 00:05:07:08 00:05:11:15
+Want jij en ik gaan de allergrootste
+Taart van Abel ooit maken.     
+
+0054 00:05:11:20 00:05:14:11
+Ik ben bang dat die hier niet past. 
+Oke.                 
+
+0055 00:05:14:16 00:05:19:06
+Nu liep ik toevallig langs     
+het kerkie, Bessie, of hoe heet het?
+
+0056 00:05:19:11 00:05:24:06
+Bessie. Ik heb de koster gevraagd  
+of we daar de taart mochten maken...
+
+0057 00:05:24:11 00:05:25:23
+en dat mocht.              
+
+0058 00:05:26:03 00:05:29:22
+Dus zullen we daar naartoe lopen?   
+Ja. Oke. Goed.             
+
+0059 00:05:30:02 00:05:33:03
+Zullen we je zusje           
+nog even gedag zeggen? Ja.       
+
+0060 00:05:33:08 00:05:36:05
+Die komt ook wel?            
+Ze brengen haar toch wel?        
+
+0061 00:05:36:10 00:05:40:13
+Wij gaan een taart maken voor      
+Merakel. We zien je vanmiddag.     
+
+0062 00:05:40:18 00:05:42:05
+Dag lieverd!              
+
+0063 00:05:43:16 00:05:47:04
+Geef je haar wel eens een knuffel?  
+Ja. Hoe doe je dat?          
+
+0064 00:05:50:04 00:05:52:06
+Haha! Kom, schat.            
+
+0065 00:05:57:24 00:06:01:04
+We zijn in goed gezelschap,       
+de paus en kardinaal.          
+
+0066 00:06:01:09 00:06:05:00
+Meer zegeningen krijgen we niet.    
+Hier wonen mensen.           
+
+0067 00:06:05:05 00:06:08:00
+Maar niet de paus en de kardinaal?  
+Nee. Oke.               
+
+0068 00:06:08:05 00:06:10:10
+En wat doet die Duitse vlag hier?   
+
+0069 00:06:10:15 00:06:13:18
+Morgen is het thema           
+Duitse bierfeesten. Oke.        
+
+0070 00:06:13:23 00:06:17:16
+En wat doe je dan aan?         
+Het is eigenlijk voor ouderen...    
+
+0071 00:06:17:21 00:06:19:12
+die gaan verkleed. Oke.         
+
+0072 00:06:19:17 00:06:22:24
+Dus jij doet gewoon dit         
+flitsende setje aan? Ja.        
+
+0073 00:06:23:04 00:06:27:01
+Jij was er ook nog nooit geweest?   
+Nee. Nou, dit is Bessie.        
+
+0074 00:06:27:06 00:06:29:20
+Laat ik je effe             
+mijn Lutjebroek zien.          
+
+0075 00:06:32:09 00:06:35:17
+Wat vind je ervan? Leuk.        
+Leuk? Ja.                
+
+0076 00:06:35:22 00:06:39:13
+Het is een hervormde kerk,       
+maar nu een buurtcentrum.        
+
+0077 00:06:39:18 00:06:43:23
+Omdat we zo'n grote taart gaan maken
+ben ik zo vrij geweest...      
+
+0078 00:06:44:03 00:06:45:19
+de boel al uit te pakken.        
+
+0079 00:06:45:24 00:06:49:15
+Kijk, een nieuw schortje. Leuk.     
+Vind je hem leuk? Ja.          
+
+0080 00:06:51:07 00:06:52:19
+VROLIJK MUZIEKJE            
+
+0081 00:06:52:24 00:06:56:00
+Even kijken, Beau,            
+hoe gaan we dat ophangen?        
+
+0082 00:06:56:05 00:06:59:04
+Een beetje gezellig           
+over de schilderijen.          
+
+0083 00:07:00:12 00:07:02:24
+Hebben we dat gezellig hangen hier. 
+
+0084 00:07:04:23 00:07:06:10
+Zo.                   
+
+0085 00:07:06:15 00:07:09:08
+Nou, vrolijker kan niet.        
+Wat dacht jij?             
+
+0086 00:07:15:15 00:07:17:02
+Nou, vrouw.               
+Ja.                   
+
+0087 00:07:18:04 00:07:21:21
+Even kijken, laten we beginnen     
+bij het begin.             
+
+0088 00:07:22:01 00:07:25:23
+Het is anders dan normaal, he,     
+zo'n zusje. Hoe voelt dat?       
+
+0089 00:07:27:09 00:07:29:04
+Ik ben er nu wel aan gewend.      
+
+0090 00:07:29:09 00:07:32:18
+Ja, want je kent haar al        
+haar hele leven. Ja.          
+
+0091 00:07:32:23 00:07:37:07
+Want je hebt nog een ander zusje?   
+Ja. Ik zag er nog een daar, jaja.   
+
+0092 00:07:37:12 00:07:40:11
+En Britt is de enige           
+die gehandicapt is? Ja.         
+
+0093 00:07:40:16 00:07:43:02
+En is het zwaar voor jullie familie?
+
+0094 00:07:43:07 00:07:45:14
+Nou... Nee.               
+Niet.                  
+
+0095 00:07:45:19 00:07:48:24
+Je ouders zijn er niet         
+verdrietig om? Nee hoor.        
+
+0096 00:07:49:04 00:07:51:11
+Niet? Dat gaat goed allemaal?      
+Ja.                   
+
+0097 00:07:51:16 00:07:54:07
+Oke. En hoe vaak is Britt        
+in het Merakel?             
+
+0098 00:07:54:12 00:07:56:04
+Elke woensdag. Ja.           
+
+0099 00:07:56:09 00:07:59:08
+En in het weekend soms.         
+In het weekend.             
+
+0100 00:07:59:13 00:08:02:19
+Is het een groot huis?         
+Ja, heel groot.             
+
+0101 00:08:02:24 00:08:06:23
+En die vrijwilligers komen helpen,  
+geweldig natuurlijk...        
+
+0102 00:08:07:03 00:08:10:08
+en die wil jij bedanken         
+met een mooie taart. Ja.        
+
+0103 00:08:10:13 00:08:15:05
+Dus we gaan de allergrootste taart  
+maken die we ooit gemaakt hebben.   
+
+0104 00:08:15:10 00:08:17:22
+Heb je er de kracht voor? Ja.      
+Goed zo.                 
+
+0105 00:08:18:02 00:08:21:20
+Wellicht is het leuk,          
+voor Merakel als opvanghuis...     
+
+0106 00:08:22:00 00:08:24:05
+als we een mooi huis gaan bouwen.   
+
+0107 00:08:24:10 00:08:27:15
+Kijk, ik heb een hele grote schaal  
+meegenomen.              
+
+0108 00:08:27:20 00:08:30:07
+Wat dacht je van een mooi huis     
+hier op?                
+
+0109 00:08:30:12 00:08:35:02
+Dan gaan we hier met suikerspin en  
+zuurstokken een soort wolken maken. 
+
+0110 00:08:35:07 00:08:37:23
+Dan wordt het een soort huis      
+in de wolken.              
+
+0111 00:08:38:03 00:08:41:23
+Merakel is toch ook een soort      
+wonder? 't Is een mirakel!        
+
+0112 00:08:42:03 00:08:44:23
+Dus we hebben een soort huis      
+in de wolken...             
+
+0113 00:08:45:03 00:08:47:10
+wat een mirakel is.           
+Goed idee? Ja.              
+
+0114 00:08:47:15 00:08:50:22
+Wat denk je...             
+Dit is natuurlijk makkelijk. Ja.    
+
+0115 00:08:51:02 00:08:53:18
+Als we dit als basis          
+voor het huis doen.           
+
+0116 00:08:55:07 00:08:56:19
+PING                  
+
+0117 00:08:56:24 00:08:59:04
+VROLIJK MUZIEKJE            
+
+0118 00:08:59:09 00:09:03:02
+Komt dat wel vaker voor,        
+dat de ene van een tweeling...     
+
+0119 00:09:03:07 00:09:06:08
+gehandicapt is en de ander niet?    
+HIJ SCHRIKT               
+
+0120 00:09:06:13 00:09:08:23
+Jaha, verse cake!            
+Hahaha!                 
+
+0121 00:09:09:03 00:09:11:15
+Geeft niks, we hebben er zat      
+bij ons.                
+
+0122 00:09:15:15 00:09:18:24
+En een gezellige kermis,        
+hier in Lutjebroek. Ja.         
+
+0123 00:09:19:04 00:09:21:20
+Wat gebeurt er allemaal met kermis? 
+
+0124 00:09:22:00 00:09:23:18
+Feest. Feest?              
+Ja.                   
+
+0125 00:09:23:23 00:09:26:06
+En wat is feest in Lutjebroek?     
+
+0126 00:09:26:11 00:09:29:04
+Gewoon gezellig.            
+Gewoon gezellig. Ja.          
+
+0127 00:09:29:09 00:09:32:12
+Maar dansen, drinken?          
+
+0128 00:09:32:17 00:09:35:12
+Nou, de kinderen gaan          
+over de kermis. Ja.           
+
+0129 00:09:35:17 00:09:39:01
+En de ouders zijn dan bij de Paus   
+en gaan dan, eh...           
+
+0130 00:09:39:06 00:09:43:15
+De ouders bij de Paus? Dan bedoel je
+de kroeg die we net zagen? Ja.   
+
+0131 00:09:43:20 00:09:47:13
+Anders denkt Nederland dat ze      
+bij de paus in Rome zijn.        
+
+0132 00:09:47:18 00:09:50:08
+Maar die gaan naar de kroeg. Ja.    
+En?                   
+
+0133 00:09:50:13 00:09:53:07
+Dan gaan ze...             
+Bier drinken, en eh...         
+
+0134 00:09:53:12 00:09:56:17
+Staat je school ook in Lutjebroek?  
+Ja. Oke.               
+
+0135 00:09:56:22 00:10:01:10
+Loopafstand, of moet je op de fiets?
+Lopen. We liepen er net langs.   
+
+0136 00:10:01:15 00:10:03:02
+O ja? Ja.                
+
+0137 00:10:03:07 00:10:07:14
+Misschien wil jij alvast even      
+wat specie maken voor de huizen.    
+
+0138 00:10:07:19 00:10:09:12
+Ik heb hier jam. Ja.          
+
+0139 00:10:09:17 00:10:11:08
+Zo.                   
+
+0140 00:10:11:13 00:10:15:04
+En dat maken we altijd wat dunner   
+met wat citroensap.          
+
+0141 00:10:15:09 00:10:18:24
+Dan ga je effe die citroen masseren,
+zo.                 
+
+0142 00:10:20:06 00:10:23:11
+En wat doet je zus dan,         
+als jij naar school gaat?        
+
+0143 00:10:23:16 00:10:27:11
+Die gaat ook naar school.        
+Maar niet naar mijn school...      
+
+0144 00:10:27:16 00:10:31:21
+naar een speciale school voor      
+gehandicapte kinderen. Waar?       
+
+0145 00:10:32:01 00:10:34:17
+In Hoorn. Dat is niet zo ver, toch? 
+Nee.                 
+
+0146 00:10:34:22 00:10:37:19
+Ze wordt met een bus opgehaald     
+van school.               
+
+0147 00:10:37:24 00:10:40:17
+Ze kan niet lopen en praten...     
+Nee.                  
+
+0148 00:10:40:22 00:10:44:04
+Hoe gaat dat 's morgens dan?      
+Wast je moeder haar?          
+
+0149 00:10:44:09 00:10:47:10
+Ze gaat gewoon onder de douche     
+in haar stoel.             
+
+0150 00:10:47:15 00:10:52:05
+Dan moeten jullie zeker wel vroeg   
+opstaan, om op tijd klaar te zijn?  
+
+0151 00:10:52:10 00:10:54:20
+Nou, ze doucht meestal in de avond. 
+
+0152 00:10:55:00 00:10:59:07
+Oke. Dan ze 's morgens gelijk      
+haar kleding aan, en... Ja.       
+
+0153 00:10:59:12 00:11:03:21
+En plassen enzo, kan ze dat wel?    
+Ze heeft een luier.           
+
+0154 00:11:04:01 00:11:06:17
+Zo, da's een hoop werk, of niet?    
+Ja.                   
+
+0155 00:11:07:19 00:11:12:11
+En 's avonds, gaat ze dan met jullie
+televisie kijken?          
+
+0156 00:11:12:16 00:11:14:03
+Ehm, ja.                
+
+0157 00:11:14:08 00:11:17:01
+En heeft ze dan favoriete        
+programma's?               
+
+0158 00:11:17:06 00:11:21:17
+Nee, we kijken gewoon ons programma.
+En zij vindt alles goed? Ja.    
+
+0159 00:11:21:22 00:11:25:02
+Je zei net dat ze ook wel eens     
+verdrietig is. Ja.           
+
+0160 00:11:25:07 00:11:26:23
+Weet je dan hoe dat komt?        
+
+0161 00:11:27:03 00:11:29:21
+Ze heeft speciale tijden        
+waarop ze eet.             
+
+0162 00:11:30:01 00:11:33:10
+Dat weet ze zelf dan ook, ban...    
+O, dat weet ze wel?           
+
+0163 00:11:33:15 00:11:36:16
+Ja, maar ze kan niet zien        
+hoe laat het is of zo.          
+
+0164 00:11:36:21 00:11:40:22
+Maar soms denkt ze: Ik heb honger,  
+dan ga ik schreeuwen. Ja.       
+
+0165 00:11:41:02 00:11:44:06
+Zo is-ie genoeg gemasseerd,       
+nu voorzichtig...            
+
+0166 00:11:45:06 00:11:47:24
+Er zitten wat pitjes in,        
+dat wil je niet.            
+
+0167 00:11:48:04 00:11:52:01
+Dus ik doe 't meestal zo,       
+dan is je hand een beetje de zeef.  
+
+0168 00:11:55:02 00:11:57:07
+Hoe lang bestaat het Merakel al?    
+
+0169 00:11:58:19 00:12:01:14
+Volgens mij... 5 december drie jaar.
+
+0170 00:12:07:05 00:12:09:21
+Kijk, Beau, ik doe iets         
+ingewikkelds.              
+
+0171 00:12:10:01 00:12:14:08
+Ik wil namelijk een schuin dak,   
+dus ik probeer dat een beetje zo... 
+
+0172 00:12:14:13 00:12:17:21
+met cake voor elkaar te krijgen.    
+Ja.                   
+
+0173 00:12:18:01 00:12:19:13
+Zou het wat zijn...           
+
+0174 00:12:19:18 00:12:22:13
+als we de muren bekleden        
+met kokosbrood?             
+
+0175 00:12:23:22 00:12:27:06
+Ja. En dan later met           
+allemaal marsepein...          
+
+0176 00:12:27:11 00:12:32:15
+dat we daar dan ramen en deuren     
+en toestanden van maken. Ja. Ja?    
+
+0177 00:12:35:04 00:12:39:01
+Kijk je altijd uit naar de kermis,  
+of niet? Ja.             
+
+0178 00:12:39:06 00:12:43:02
+En ga je dan ook met je zus       
+over de kermis heen? Ja.         
+
+0179 00:12:43:07 00:12:47:00
+En hoe merk je dan dat ze dat      
+leuk vindt? Ze gaat lachen.       
+
+0180 00:12:47:05 00:12:50:06
+O ja? Waar wordt ze blij van, dan?  
+In de zweef.             
+
+0181 00:12:50:11 00:12:52:02
+Daar gaat ze in? Ja.          
+O ja?                  
+
+0182 00:12:52:07 00:12:56:06
+Is dat niet gevaarlijk dan?       
+Nee, ze gaat samen met m'n zus.     
+
+0183 00:12:56:11 00:12:59:08
+Oke, en die houdt haar vast?      
+Ja. Spannend.              
+
+0184 00:13:02:12 00:13:05:07
+Ga je ook wel eens in Hoorn       
+naar de kermis?             
+
+0185 00:13:05:12 00:13:09:21
+Ja, daar woont m'n broer. O ja?   
+Hoeveel kinderen hebben jullie dan? 
+
+0186 00:13:10:01 00:13:14:06
+M'n vader had eerst een andere    
+vrouw, daar had hij 3 kinderen mee. 
+
+0187 00:13:14:11 00:13:18:03
+En goede contacten met je broer?    
+Ja. Hoe oud is hij?           
+
+0188 00:13:18:08 00:13:20:02
+Ehm, ik heb drie broers.        
+
+0189 00:13:20:07 00:13:21:23
+Kijk aan. Dus je hebt...        
+
+0190 00:13:22:03 00:13:24:10
+Ik heb nu twee zussen ontmoet. Ja.  
+
+0191 00:13:24:15 00:13:28:12
+En je vader had van z'n eerste     
+huwelijk drie jongens. Ja.       
+
+0192 00:13:30:06 00:13:34:06
+En hoe oud zijn die?           
+In de 20 zijn ze allemaal. Oke.     
+
+0193 00:13:34:11 00:13:38:24
+En hebben die ook al weer kinderen? 
+M'n oudste broer heeft 2 kinderen.  
+
+0194 00:13:39:04 00:13:41:16
+Dus je bent al tante? Ja.        
+Nou, vrouw.               
+
+0195 00:13:43:16 00:13:45:14
+Heb je al verkering? Nee.        
+
+0196 00:13:45:19 00:13:47:21
+Nog nooit gehad, of eh...        
+
+0197 00:13:48:01 00:13:50:12
+Jawel. Wel al gehad.          
+Met wie?                
+
+0198 00:13:50:17 00:13:52:24
+Met... een jongetje uit m'n klas.   
+
+0199 00:13:53:04 00:13:56:01
+Mogen we namen horen,          
+of is dat, eh... Nee.          
+
+0200 00:13:56:06 00:13:58:05
+Nee? Nee.                
+Hoe ziet-ie eruit?           
+
+0201 00:13:59:14 00:14:01:01
+Blond haar. Mm-hm.           
+
+0202 00:14:01:06 00:14:05:19
+Ja, dat is... Ik zag veel blonden,  
+in Lutjebroek.            
+
+0203 00:14:05:24 00:14:08:21
+Maar hij is heel lelijk, hoor.     
+Lelijk? Ja.               
+
+0204 00:14:09:01 00:14:11:17
+Val je op lelijke jongens?       
+Nee, man.                
+
+0205 00:14:11:22 00:14:16:06
+Ik, eh... vind het ook niet leuk    
+dat ik met hem gehad heb.        
+
+0206 00:14:16:11 00:14:20:01
+Wat zeg je? Ik vind het niet leuk   
+dat ik met hem gehad heb.       
+
+0207 00:14:20:06 00:14:23:21
+Dat vergeet je liever?         
+Ja. Moeilijk in zo'n klein dorp.    
+
+0208 00:14:24:01 00:14:28:08
+Iedereen weet natuurlijk dat je     
+met hem gelopen hebt, of niet?      
+
+0209 00:14:28:13 00:14:31:20
+En hoe werkt dat, verkering?      
+Wanneer heb je dat?           
+
+0210 00:14:32:00 00:14:34:16
+Eh, weet ik niet.            
+Als je verliefd bent.          
+
+0211 00:14:34:21 00:14:36:18
+Verliefd, wat is verliefd?       
+
+0212 00:14:36:23 00:14:39:22
+Dat je op iemand bent.         
+Op iemand bent? Ja.           
+
+0213 00:14:40:02 00:14:42:08
+Maar... Hoe werkt dat dan?       
+
+0214 00:14:42:13 00:14:45:18
+Denk je: Hier wil ik gezellig      
+mee praten, of...            
+
+0215 00:14:45:23 00:14:48:17
+dansen, of zoenen?           
+Nee.                  
+
+0216 00:14:48:22 00:14:51:01
+Maar je was op hem? Ja.         
+
+0217 00:14:51:06 00:14:53:07
+Hij was ook de laatste? Ja.       
+
+0218 00:14:53:12 00:14:57:06
+Dus je hebt er maar EEN gehad,     
+of meer? EEN.              
+
+0219 00:14:57:11 00:15:00:14
+En zit er verder niks meer       
+in de klas? Nee.            
+
+0220 00:15:00:19 00:15:05:11
+Want meestal op zo'n kermis leer je 
+wel weer nieuwe mensen kennen, toch?
+
+0221 00:15:05:16 00:15:09:10
+Ja. Mijn ouders hebben elkaar      
+op de kermis ontmoet.          
+
+0222 00:15:09:15 00:15:13:12
+Meestal komt van een kermis       
+wel weer een nieuwe relatie.      
+
+0223 00:15:13:17 00:15:15:04
+Goed. Nou, ehm...            
+
+0224 00:15:15:09 00:15:19:05
+Ik denk dat we nu...          
+aan de ramen toe zijn.         
+
+0225 00:15:21:18 00:15:23:05
+VROLIJK MUZIEKJE            
+
+0226 00:15:27:17 00:15:29:19
+Zo. En dan zo, weet je? Ja.       
+
+0227 00:15:29:24 00:15:32:13
+Dus als je die alvast          
+op maat maakt...             
+
+0228 00:15:41:00 00:15:45:09
+Kijk, vrouw, eiwit plakt lekker.   
+Je smeert het marsepein er mee in.  
+
+0229 00:15:45:14 00:15:47:17
+Dan kunnen we die zo erop leggen.   
+
+0230 00:15:47:22 00:15:52:10
+Wat vind je, dit als schoorsteen?   
+Ja. Doop ik ze even in de chocola.  
+
+0231 00:16:00:09 00:16:01:21
+En nu woon je dus...          
+
+0232 00:16:02:01 00:16:03:13
+Je ouders...              
+
+0233 00:16:03:18 00:16:08:21
+Beau en Britt, en je andere zusje...
+Didi. Hoe oud is Didi?       
+
+0234 00:16:09:01 00:16:12:08
+14. Heb jij een eigen kamer,      
+of slaap je met Didi?          
+
+0235 00:16:12:13 00:16:15:05
+Eigen kamer.               
+Eigen kamer, oke.            
+
+0236 00:16:15:10 00:16:18:03
+En hoe ziet die kamer          
+van je zusje eruit?           
+
+0237 00:16:18:08 00:16:20:03
+Van Britt? Gewoon, een...        
+
+0238 00:16:21:03 00:16:23:14
+slaapkamer met een, eh...        
+
+0239 00:16:23:19 00:16:26:21
+speciaal bed.              
+Wat is er speciaal aan?         
+
+0240 00:16:27:01 00:16:30:17
+Een bed met hekken, dat ze er      
+niet uit kan vallen. Oke.        
+
+0241 00:16:31:19 00:16:36:09
+En, eh... Lichtjes in het plafond.  
+Waarom lichtjes in het plafond?    
+
+0242 00:16:36:14 00:16:40:18
+Omdat ze dan... Soms gaat ze,      
+als ze verdrietig is...         
+
+0243 00:16:40:23 00:16:42:14
+effe op bed.              
+
+0244 00:16:42:19 00:16:44:06
+En dan is ze...             
+
+0245 00:16:44:11 00:16:48:12
+Doen we die lichtjes aan,       
+dat vind ze leuk om te zien. Oke.   
+
+0246 00:16:48:17 00:16:52:03
+Dit is misschien ook wel leuk,     
+wat vind jij?              
+
+0247 00:16:52:08 00:16:54:09
+Zo'n beetje rode dakgoot?        
+Ja.                   
+
+0248 00:16:54:14 00:16:58:14
+Zeg, maar qua zusters,         
+met wie heb je het best contact?    
+
+0249 00:16:58:19 00:17:00:16
+Met Didi.                
+Met Didi.                
+
+0250 00:17:00:21 00:17:04:21
+Maar ik heb ook best wel vaak      
+ruzie met Didi, hoor. O ja?       
+
+0251 00:17:05:01 00:17:06:21
+Maar is ook gezond, toch?        
+
+0252 00:17:07:01 00:17:09:18
+Waar hebben jullie dan ruzie over?  
+
+0253 00:17:09:23 00:17:11:18
+Zij doet altijd irritant.        
+
+0254 00:17:11:23 00:17:14:15
+Vertel, wat stoort je aan Didi?     
+
+0255 00:17:14:20 00:17:19:07
+Nou, ze bemoeit zich altijd       
+overal mee. He he. Waarmee dan?     
+
+0256 00:17:19:12 00:17:22:13
+Als ik met vriendinnen         
+aan het spelen zit...          
+
+0257 00:17:22:18 00:17:24:07
+komt ze altijd binnen.         
+
+0258 00:17:24:12 00:17:27:11
+Doet ze net alsof ze wat        
+moet pakken.              
+
+0259 00:17:27:16 00:17:31:19
+Moet ze precies in mijn kamer wezen 
+als ik aan het spelen ben!      
+
+0260 00:17:31:24 00:17:35:04
+En dat heb je liever niet? Nee.     
+En wat zeg je dan?            
+
+0261 00:17:36:04 00:17:38:24
+Dat ze op moet rotten.         
+Op moet rotten. Ja.           
+
+0262 00:17:39:04 00:17:42:19
+En slaan jullie elkaar ook wel eens?
+Ja. O ja?!             
+
+0263 00:17:42:24 00:17:45:15
+Gewoon, op d'r arm of op d'r rug.   
+
+0264 00:17:45:20 00:17:50:15
+En dan huilen, of eh...?      
+Didi huilt nooit, maar ik wel. O ja?
+
+0265 00:17:50:20 00:17:53:00
+Want Didi slaat altijd heel hard.   
+
+0266 00:17:54:00 00:17:55:14
+Dus dat is wel grappig.         
+
+0267 00:17:55:19 00:18:00:03
+Met Didi kun je het best opschieten,
+maar je hebt ook vaak ruzie.    
+
+0268 00:18:00:08 00:18:02:15
+Nou, met Britt kan ik niet praten.  
+
+0269 00:18:02:20 00:18:05:23
+Je kan wel wat zeggen,         
+maar ze zegt niks terug.        
+
+0270 00:18:06:03 00:18:08:19
+Ik stop er even...            
+Het glijdt er nog af.          
+
+0271 00:18:08:24 00:18:13:04
+Ik stop er een paar prikkertjes in  
+om het vast te laten drogen.     
+
+0272 00:18:13:09 00:18:17:14
+Misschien is voor het beeld      
+een mooie oranje wimpel wel leuk.   
+
+0273 00:18:17:19 00:18:20:06
+En daarop 'Het Merakel' schrijven.  
+
+0274 00:18:25:22 00:18:29:02
+Beau? Ja? Heb je Abels liedje      
+wel eens gehoord?            
+
+0275 00:18:29:07 00:18:31:16
+Ja. Ken je het?             
+Een beetje.               
+
+0276 00:18:33:07 00:18:37:16
+Even kijken, vrouw. Laten we net    
+als professionele zangers...      
+
+0277 00:18:37:21 00:18:41:05
+Want ik heb het gevoel dat je      
+nog een beetje vastzit.         
+
+0278 00:18:41:10 00:18:43:20
+Doe effe lekker los.          
+Schouder los.              
+
+0279 00:18:44:00 00:18:46:22
+HIJ MAAKT BLUBBEREND GELUID       
+
+0280 00:18:47:02 00:18:49:19
+Oke. HIJ NEURIET ABELS LIEDJE      
+
+0281 00:18:49:24 00:18:51:12
+Moet ik beginnen?            
+
+0282 00:18:51:17 00:18:54:20
+*Ik heb een paar puntjes         
+die ik met je wil bespreken       
+
+0283 00:18:55:00 00:18:58:00
+*Dat wil ik doen            
+in jouw mobiele bakkerij        
+
+0284 00:18:58:05 00:19:01:09
+*Loop er mee rond,           
+al minstens 7 we-e-ken         
+
+0285 00:19:01:14 00:19:04:13
+*Kom alsjeblieft             
+met je bakspullen bij mij        
+
+0286 00:19:04:18 00:19:08:08
+SAMEN: *Dan gaan we appelpunten     
+maken en bespreken alle zaken      
+
+0287 00:19:08:13 00:19:11:08
+*En we snoepen              
+van het deeg en van de room       
+
+0288 00:19:11:13 00:19:15:02
+*We boren met de appelboor       
+en nemen alle puntjes door       
+
+0289 00:19:15:07 00:19:18:20
+*Je bent de allerleukste suikeroom! 
+Dank je wel.             
+
+0290 00:19:19:00 00:19:22:02
+*'k Heb een paar puntjes         
+die ik met je wil bespreken       
+
+0291 00:19:22:07 00:19:25:11
+*Dat wil ik doen            
+in jouw mobiele bakkerij        
+
+0292 00:19:25:16 00:19:28:24
+*'k Loop ermee rond           
+al minstens zeven we-e-ken       
+
+0293 00:19:29:04 00:19:32:02
+*Kom alsjeblieft            
+met je bakspullen bij mij*       
+
+0294 00:19:33:16 00:19:35:08
+Helemaal goed!             
+
+0295 00:19:35:13 00:19:39:04
+Wordt het een beetje wat je       
+gedacht had, of, eh... Ja.        
+
+0296 00:19:39:09 00:19:43:20
+En lijkt het een beetje op Merakel? 
+Het was vroeger toch een kerk?    
+
+0297 00:19:44:00 00:19:45:14
+Ja, een pastorie. Oke.         
+
+0298 00:19:45:19 00:19:48:01
+Daar woonde de pastoor, toch? Ja.   
+
+0299 00:19:48:06 00:19:52:07
+Gaan jullie zelf naar de kerk?     
+Ik ben misdienaar. Oke!         
+
+0300 00:19:52:12 00:19:55:03
+Ik dacht dat dat iets          
+voor jongens was.            
+
+0301 00:19:55:08 00:19:58:03
+Er zijn meer meiden dan jongens.    
+O ja? Ja.                
+
+0302 00:19:58:08 00:20:01:02
+En vind je dat leuk om te doen?     
+Soms.                  
+
+0303 00:20:01:07 00:20:03:00
+Wat houdt misdienaar in?        
+
+0304 00:20:03:05 00:20:07:08
+Dat je de pastoor moet helpen,     
+met dingen klaarzetten enzo.      
+
+0305 00:20:07:13 00:20:11:18
+Oke, je moet de hosties klaarzetten.
+En die staan op de tafel?      
+
+0306 00:20:11:23 00:20:15:11
+Wat moet je nog meer klaarzetten?   
+Water, wijn. Oke.           
+
+0307 00:20:15:16 00:20:19:17
+En gewoon een flesje wijn, of eh...?
+Nee, kleine glaasjes.        
+
+0308 00:20:19:22 00:20:23:10
+En moet je ook de pastoor helpen    
+met zijn jurk? Niet?          
+
+0309 00:20:23:15 00:20:25:02
+Doet-ie zelf?              
+
+0310 00:20:25:07 00:20:30:11
+En dan moeten jullie achter hem     
+aan lopen als de mis begint? Ja.    
+
+0311 00:20:30:16 00:20:32:15
+En is er ook wierook?          
+
+0312 00:20:32:20 00:20:35:05
+Alleen als er iemand overleden is.  
+
+0313 00:20:35:10 00:20:39:08
+En moet je ook misdienen         
+als er iemand overleden is? Ja.     
+
+0314 00:20:39:13 00:20:42:06
+Oke, dan wordt je extra opgeroepen? 
+Ja.                 
+
+0315 00:20:42:11 00:20:46:14
+En is dat nog financieel       
+aantrekkelijk, of alleen om de eer? 
+
+0316 00:20:46:19 00:20:48:06
+Krijg je er nog...           
+
+0317 00:20:48:11 00:20:52:20
+Na een begrafenis krijg je wel geld,
+maar na een gewone mis niet.    
+
+0318 00:20:53:00 00:20:56:11
+Wat verdien je met een begrafenis?  
+2 euro. 2 euro?!           
+
+0319 00:20:56:16 00:20:59:21
+En hoeveel uur moet je daarvoor     
+in de kerk zijn?             
+
+0320 00:21:00:01 00:21:04:02
+Anderhalf uur. Zo lang duurt      
+een begrafenis? Volgens mij wel.    
+
+0321 00:21:04:07 00:21:08:02
+En wie was er overleden toen jij    
+die begrafenis moest doen?       
+
+0322 00:21:08:07 00:21:12:22
+Heel veel. Je hebt het vaker gedaan?
+Ja. Zeven keer, of zo.       
+
+0323 00:21:13:02 00:21:16:20
+En hoe lang ben je al misdienaar?   
+Dit is m'n derde jaar.         
+
+0324 00:21:17:00 00:21:21:05
+En hoe lang mag je dat blijven?     
+Ik ga dit jaar stoppen. Waarom?     
+
+0325 00:21:21:10 00:21:25:13
+Omdat ik het niet meer leuk vind.   
+En wat zei pastoor daarvan?      
+
+0326 00:21:25:18 00:21:27:13
+Ik heb het nog niet gezegd.       
+
+0327 00:21:27:18 00:21:29:13
+Hoe ga je dat vertellen?        
+
+0328 00:21:29:18 00:21:32:19
+Gewoon, zeggen.             
+En ga je dan ander werk doen?      
+
+0329 00:21:32:24 00:21:36:19
+Want 2 euro is natuurlijk        
+mooi meegenomen. Ja, maar...      
+
+0330 00:21:36:24 00:21:39:00
+Daar doe je het niet voor? Nee.     
+
+0331 00:21:40:16 00:21:42:03
+PING                  
+
+0332 00:21:42:08 00:21:43:20
+Nou, Beau... Ja?            
+
+0333 00:21:44:00 00:21:46:21
+Ik til... Wauw!             
+Hij is zwaar, hoor!           
+
+0334 00:21:47:01 00:21:49:07
+Hier kan wel een man of 69 van eten.
+
+0335 00:21:50:07 00:21:53:17
+Moet je wel helpen zometeen...     
+Oeps!                  
+
+0336 00:21:53:22 00:21:56:07
+Kijk, zetten we het huis hier.     
+
+0337 00:22:03:23 00:22:06:24
+Oke, vrouw, nou mag je         
+die suikerspinnen...          
+
+0338 00:22:07:04 00:22:09:24
+een beetje als wolken          
+op het dienblad...            
+
+0339 00:22:20:01 00:22:24:12
+Oke! Vind je het al een beetje    
+een jubileumtaart, of niet? Ehm...  
+
+0340 00:22:24:17 00:22:26:20
+Of moet er nog meer bij? Ja.      
+Kom!                  
+
+0341 00:22:40:14 00:22:42:11
+Deze er ook op? Welja, kind.      
+
+0342 00:22:43:24 00:22:46:22
+'t Is kermis, kan ons 't schelen.   
+
+0343 00:22:47:02 00:22:48:14
+Dank u wel.               
+
+0344 00:22:50:16 00:22:53:15
+Nou, vriendin, we hebben        
+hard gewerkt. Ja.            
+
+0345 00:22:53:20 00:22:56:07
+Wat vind je ervan?           
+Hartstikke leuk.            
+
+0346 00:22:56:12 00:23:00:11
+Denk je dat we genoeg hebben      
+voor iedereen? Ja. Gelukkig.      
+
+0347 00:23:00:16 00:23:04:15
+Aan wie ga je hem bij Merakel      
+zo aanbieden? De begeleider.       
+
+0348 00:23:04:20 00:23:06:07
+En wat zeg je dan?            
+
+0349 00:23:06:12 00:23:10:07
+Dat ik het heel fijn vind        
+dat m'n zusje daar mag logeren.     
+
+0350 00:23:10:12 00:23:12:05
+Oke. Helemaal geweldig.         
+
+0351 00:23:12:10 00:23:14:09
+Goed, gaan we zo de kermis op.     
+
+0352 00:23:15:11 00:23:18:19
+Nou Beau, ik denk:           
+Ik pak goed uit.            
+
+0353 00:23:18:24 00:23:20:21
+Ik heb de fanfare geregeld.       
+
+0354 00:23:21:01 00:23:24:00
+De lieve mensen,            
+die gaan met ons meelopen.       
+
+0355 00:23:24:05 00:23:27:23
+En kijk daar, allemaal lieve meisjes
+in taartjurken.           
+
+0356 00:23:28:03 00:23:31:19
+Dus je valt zeker op.         
+Jij weet de weg naar het Merakel?   
+
+0357 00:23:31:24 00:23:34:09
+Goed, gaan we samen de kar trekken. 
+
+0358 00:23:34:14 00:23:37:19
+Beste fanfare en taartdames,      
+hartelijk welkom!            
+
+0359 00:23:37:24 00:23:42:23
+Mogen Beau en ik voor lopen, en dat 
+jullie gezellig achter ons aanlopen?
+
+0360 00:23:43:03 00:23:45:21
+Helemaal goed.             
+Oke, Beau, pak hem beet.        
+
+0361 00:23:47:22 00:23:49:09
+En daar gaan we!            
+
+0362 00:23:51:24 00:23:54:18
+FANFARE SPEELT ABELS LIED        
+
+0363 00:23:54:23 00:23:58:09
+*Ik heb een paar puntjes         
+die ik met je wil bespreken       
+
+0364 00:23:58:14 00:24:02:07
+*Dat wil ik doen            
+in jouw mobiele bakkerij        
+
+0365 00:24:02:12 00:24:05:19
+*Loop er mee rond,           
+al minstens 7 we-e-ken         
+
+0366 00:24:05:24 00:24:09:07
+*Kom alsjeblieft             
+met je bakspullen bij mij        
+
+0367 00:24:09:12 00:24:13:24
+*Dan gaan we appelpunten         
+maken en bespreken alle zaken      
+
+0368 00:24:14:04 00:24:16:24
+*En we snoepen              
+van het deeg en van de room       
+
+0369 00:24:17:04 00:24:21:03
+*We boren met de appelboor       
+en nemen alle puntjes door       
+
+0370 00:24:21:08 00:24:24:20
+*Je bent de allerleukste suikeroom!*
+
+0371 00:24:25:00 00:24:26:24
+Hallo, Lutjebroek! GEJUICH       
+
+0372 00:24:27:04 00:24:29:08
+FANFARE BEGINT WEER TE SPELEN      
+
+0373 00:24:29:15 00:24:33:01
+*Ik heb een paar puntjes         
+die ik met je wil bespreken       
+
+0374 00:24:33:06 00:24:36:24
+*Dat wil ik doen            
+in jouw mobiele bakkerij        
+
+0375 00:24:37:04 00:24:40:11
+*Loop er mee rond,           
+al minstens 7 we-e-ken         
+
+0376 00:24:40:16 00:24:43:24
+*Kom alsjeblieft             
+met je bakspullen bij mij        
+
+0377 00:24:44:04 00:24:48:02
+*Gaan we die taart aan iemand geven,
+nou die zal eens wat beleven!    
+
+0378 00:24:48:07 00:24:51:12
+*Want zo'n taart heeft hij of zij   
+nog nooit gehad            
+
+0379 00:24:51:17 00:24:55:12
+*Dan gaan we met de bakkerij      
+lekker naar die hij of zij       
+
+0380 00:24:55:17 00:24:58:24
+*Ook al woont die            
+in een andere stad! Allemaal!      
+
+0381 00:24:59:04 00:25:02:15
+*Ik heb een paar puntjes         
+die ik met je wil bespreken       
+
+0382 00:25:02:20 00:25:06:13
+*Dat wil ik doen            
+in jouw mobiele bakkerij        
+
+0383 00:25:06:18 00:25:10:00
+*Loop er mee rond,           
+al minstens 7 we-e-ken         
+
+0384 00:25:10:05 00:25:13:13
+*Kom alsjeblieft            
+met je bakspullen bij mij*       
+
+0385 00:25:13:18 00:25:16:11
+Ja, geweldig, Lutjebroek!        
+
+0386 00:25:16:16 00:25:19:05
+Applaus voor jezelf, Lutjebroek!    
+
+0387 00:25:19:10 00:25:21:08
+Oke, en nu naar het Merakel!      
+
+0388 00:25:21:13 00:25:24:24
+*'k Heb een paar puntjes         
+die ik met je wil bespreken       
+
+0389 00:25:25:04 00:25:28:06
+*Dat wil ik doen in jouw mobiele    
+bakkerij                
+
+0390 00:25:28:11 00:25:32:04
+HIJ NEURIET DE MELODIE VERDER      
+
+0391 00:25:32:09 00:25:33:21
+Beau! Hee!               
+
+0392 00:25:34:21 00:25:36:12
+Wat ziet dat er mooi uit!        
+
+0393 00:25:36:17 00:25:40:08
+Ik heb dit gemaakt omdat ik       
+het leuk vind dat kinderen...      
+
+0394 00:25:40:13 00:25:44:12
+hier mogen logeren. Geweldig!      
+Applaus voor het Merakel!        
+
+0395 00:25:44:17 00:25:47:08
+APPLAUS                 
+Hartstikke mooi, dank je wel.      
+
+0396 00:25:47:13 00:25:49:00
+Geweldig, Beau.             
+
+0397 00:25:50:08 00:25:52:05
+Lukt het, Beau?             
+
+0398 00:25:52:10 00:25:55:19
+Zo, Britt, lekker taartje!       
+Britt!                 
+
+0399 00:25:55:24 00:26:01:02
+GEROEZEMOES EN VROLIJK DEUNTJE     
+
+0400 00:26:16:19 00:26:23:13
+GEROEZEMOES EN VROLIJK DEUNTJE     
+
+0401 00:26:25:22 00:26:27:09
+AUTO START               
+
+0402 00:26:27:14 00:26:29:01
+GETOETER                
+
+0403 00:26:29:06 00:26:32:09
+NPO ONDERTITELING TT888, 2010      
+www.tt888.nl               
+

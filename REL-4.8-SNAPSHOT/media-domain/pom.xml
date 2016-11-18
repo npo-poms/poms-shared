@@ -1,0 +1,187 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+
+  <parent>
+    <groupId>nl.publiekeomroep</groupId>
+    <artifactId>poms-shared-parent</artifactId>
+    <version>4.8.10</version>
+  </parent>
+
+  <groupId>nl.vpro.media</groupId>
+  <artifactId>media-domain</artifactId>
+  <name>media-domain</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>nl.vpro.image</groupId>
+      <artifactId>image-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-xml</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-util</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-validation</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-jackson2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.user</groupId>
+      <artifactId>user-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.user</groupId>
+      <artifactId>user-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.media</groupId>
+      <artifactId>media-classification</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <artifactId>jackson-module-jaxb-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.1-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-validator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jcl-over-slf4j</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>xmlunit</groupId>
+      <artifactId>xmlunit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nl.publiekeomroep</groupId>
+      <artifactId>poms-shared-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.json-lib</groupId>
+      <artifactId>json-lib</artifactId>
+      <classifier>jdk15</classifier>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- This is needed to let hibernate validation work, it somewhy needs an el-implementation -->
+    <dependency>
+      <groupId>org.glassfish.web</groupId>
+      <artifactId>javax.el</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.hamcrest</groupId>
+      <artifactId>hamcrest-all</artifactId>
+    </dependency>
+  </dependencies>
+
+
+  <profiles>
+    <profile>
+      <id>schemagen</id>
+      <build>
+        <plugins>
+          <plugin>
+            <!--
+
+              Currently this plugin only works when our own hibernate validator annotations (nl.vpro.hibernate.validator.*) are
+              commented out in the following classes:
+
+              nl.vpro.domain.media.Program
+              nl.vpro.domain.media.Relation
+              nl.vpro.domain.media.support.Image
+              nl.vpro.domain.media.support.PublishableObject
+
+              We have no idea why this is needed and what can be done to avoid this.
+
+            -->
+            <groupId>com.sun.tools.jxc.maven2</groupId>
+            <artifactId>maven-jaxb-schemagen-plugin</artifactId>
+            <!-- http://jaxb.java.net/maven-jaxb-schemagen/generate-mojo.html -->
+            <version>1.2</version>
+            <executions>
+              <execution>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <project>${project}</project>
+              <srcdir>${project.build.sourceDirectory}/nl/vpro/domain/media/search</srcdir>
+              <excludes>
+                <exclude>bind/**</exclude>
+                <exclude>exceptions/**</exclude>
+                <!-- Workaround for "error: java.lang.StackTraceElement does not have a no-arg default constructor." -->
+                <exclude>lucene/**</exclude>
+              </excludes>
+              <schemas>
+                <schema>
+                  <namespace>urn:vpro:media:2009</namespace>
+                  <file>vproMedia.xsd</file>
+                </schema>
+                <schema>
+                  <namespace>urn:vpro:media:update:2009</namespace>
+                  <file>vproMediaUpdate.xsd</file>
+                </schema>
+                <schema>
+                  <namespace>urn:vpro:shared:2009</namespace>
+                  <file>vproShared.xsd</file>
+                </schema>
+                <schema>
+                  <namespace>urn:vpro:media:search:2012</namespace>
+                  <file>vproSearch.xsd</file>
+                </schema>
+              </schemas>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

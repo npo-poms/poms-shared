@@ -1,0 +1,123 @@
+package nl.vpro.domain.classification;
+
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.time.Instant;
+import java.util.Collections;
+import java.util.List;
+import java.util.SortedMap;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+import javax.cache.annotation.CacheResult;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.InputSource;
+
+import nl.vpro.util.URLResource;
+
+/**
+ * @author Michiel Meeuwissen
+ * @since 3.2
+ */
+public class URLClassificationServiceImpl extends AbstractClassificationServiceImpl  implements Consumer<SortedMap<TermId, Term>> {
+
+    final URLResource<SortedMap<TermId, Term>> resource;
+
+
+
+    public URLClassificationServiceImpl(URI url) {
+        this.resource = create(url);
+    }
+
+
+    @Deprecated
+    public URLClassificationServiceImpl(URL url) {
+        try {
+            this.resource = create(url.toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    URLResource<SortedMap<TermId, Term>> create(final URI url) {
+        Function<InputStream, SortedMap<TermId, Term>> f = inputStream -> {
+            try {
+                InputSource source = new InputSource(inputStream);
+                source.setSystemId(url.toURL().toExternalForm());
+                return create(source);
+            } catch (MalformedURLException e) {
+                URLClassificationServiceImpl.this.LOG.error(e.getMessage(), e);
+                return null;
+            }
+        };
+        return new URLResource<>(url, f, this);
+    }
+
+    public URLClassificationServiceImpl(String url) {
+        this(URI.create(url));
+    }
+
+    @Override
+    protected List<InputSource> getSources(boolean init) {
+        return null;
+    }
+
+    @Override
+    @CacheResult(cacheName = "URLClassificationServiceImpl")
+    protected SortedMap<TermId, Term> getTermsMap() {
+        resource.get();
+        return super.getTermsMap();
+    }
+
+
+    private SortedMap<TermId, Term> create(InputSource inputSource){
+        try{
+            return readTerms(Collections.singletonList(inputSource));
+        }catch(ParserConfigurationException e){
+            LOG.error(e.getMessage(),e);
+            return null;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(resource);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        URLClassificationServiceImpl that = (URLClassificationServiceImpl) o;
+
+        return resource != null ? resource.equals(that.resource) : that.resource == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return resource != null ? resource.hashCode() : 0;
+    }
+
+    public Instant getLastLoad() {
+        return resource.getLastLoad();
+    }
+
+    public Integer getCode() {
+        return resource.getCode();
+    }
+
+    public URLResource<SortedMap<TermId, Term>> getResource() {
+        return resource;
+    }
+
+    @Override
+    public void accept(SortedMap<TermId, Term> termIdTermSortedMap) {
+        this.terms = termIdTermSortedMap;
+    }
+}

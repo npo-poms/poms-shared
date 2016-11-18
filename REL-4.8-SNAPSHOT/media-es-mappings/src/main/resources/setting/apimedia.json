@@ -1,0 +1,67 @@
+{
+    "index" : {
+        "mapper" : {
+            "dynamic" : false
+        },
+        "analysis" : {
+            "analyzer" : {
+                "default" : {
+                    "type" : "dutch"
+                },
+                "dutch" : {
+                    "type" : "custom",
+                    "tokenizer" : "icu_tokenizer",
+                    "filter": [
+                        "icu_folding",
+                        "icu_normalizer",
+                        "apostrof_stemmer",
+                        "lowercase"
+                    ]
+                },
+                "dutch_stemmed" : {
+                    "type" : "custom",
+                    "tokenizer": "icu_tokenizer",
+                    "filter": [
+                        "icu_folding",
+                        "icu_normalizer",
+                        "apostrof_stemmer",
+                        "dutch_snowball"
+                    ]
+                },
+                "lowercase" : {
+                    "type" : "custom",
+                    "tokenizer" : "keyword",
+                    "filter" : ["lowercase"]
+                },
+                "reverse" : {
+                    "type" : "custom",
+                    "tokenizer" : "keyword",
+                    "filter" : ["reverse"]
+                },
+                "extension" : {
+                    "type" : "custom",
+                    "tokenizer" : "extension",
+                    "filter" : ["lowercase"]
+                }
+            },
+            "filter" : {
+                "dutch_snowball": {
+                    "type": "snowball",
+                    "language": "Dutch"
+                },
+                "apostrof_stemmer": {
+                    "type": "pattern_replace",
+                    "pattern": "(.*)'s$",
+                    "replacement": "$1"
+                }
+            },
+            "tokenizer" : {
+                "extension" : {
+                    "type" : "pattern",
+                    "pattern" : "\\.([\\w\\d]+)(?:($|\\?|#|\\s))",
+                    "group" : 1
+                }
+            }
+        }
+    }
+}
