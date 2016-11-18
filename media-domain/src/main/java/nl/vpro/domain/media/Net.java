@@ -49,7 +49,7 @@ public class Net implements Displayable, Serializable {
 
     @Override
     public String toString() {
-        return this.displayName;
+        return this.id + (this.displayName == null ? "" : " (" + this.displayName + ")");
     }
 
     @Override
