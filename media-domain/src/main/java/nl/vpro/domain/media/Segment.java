@@ -10,9 +10,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -21,6 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.support.Duration;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.util.TimeUtils;
 import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DateToDuration;
 
@@ -38,7 +36,7 @@ import nl.vpro.xml.bind.DateToDuration;
 @JsonTypeName("segment")
 @SegmentValidation
 public class Segment extends MediaObject implements Comparable<Segment> {
-    private static final Logger LOG = LoggerFactory.getLogger(Segment.class);
+
 
     private static final long serialVersionUID = -868293795041160925L;
 
@@ -231,7 +229,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     @XmlTransient
     @JsonIgnore
     public void setStart(java.time.Duration start) {
-        this.start = start == null ? null : new Date(start.toMillis());
+        this.start = TimeUtils.asDate(start);
     }
 
     @Override
