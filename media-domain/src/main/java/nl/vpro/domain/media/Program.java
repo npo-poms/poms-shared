@@ -83,7 +83,7 @@ public class Program extends MediaObject {
     @org.hibernate.annotations.Cascade({
         org.hibernate.annotations.CascadeType.ALL
     })
-    @OrderBy
+
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filters({
         @Filter(name = PUBLICATION_FILTER, condition =
@@ -92,7 +92,7 @@ public class Program extends MediaObject {
 
         @Filter(name = DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
     })
-    private SortedSet<Segment> segments;
+    private Set<Segment> segments;
 
     public Program() {
         this(null, null);
@@ -384,7 +384,7 @@ public class Program extends MediaObject {
         if(segments == null) {
             segments = new TreeSet<>();
         }
-        return segments;
+        return sorted(segments);
     }
 
     public void setSegments(SortedSet<Segment> segments) {
@@ -403,6 +403,9 @@ public class Program extends MediaObject {
         }
 
         return null;
+    }
+    protected Optional<Segment> findSegment(Segment segment) {
+        return getSegments().stream().filter(existing -> existing.equals(segment)).findFirst();
     }
 
     public Program addSegment(Segment segment) {
@@ -436,14 +439,11 @@ public class Program extends MediaObject {
         if(segments == null) {
             return false;
         }
-
-        for(Segment existing : segments) {
-            if(existing.equals(segment)) {
-                existing.setWorkflow(Workflow.FOR_DELETION);
-                return true;
+        return findSegment(segment).map((existing) -> {
+            existing.setWorkflow(Workflow.FOR_DELETION);
+            return true;
             }
-        }
-        return false;
+        ).orElse(false);
     }
 
     @Override
