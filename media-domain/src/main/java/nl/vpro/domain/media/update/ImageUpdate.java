@@ -4,10 +4,13 @@
  */
 package nl.vpro.domain.media.update;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,6 +20,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.URL;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -32,6 +37,8 @@ import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.ReleaseDate;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DateToDuration;
+
+import static nl.vpro.domain.media.update.MediaUpdate.VALIDATOR;
 
 
 @XmlRootElement(name = "image")
@@ -50,6 +57,9 @@ import nl.vpro.xml.bind.DateToDuration;
     "image"
 })
 public class ImageUpdate {
+
+    private static final Logger LOG = LoggerFactory.getLogger(ImageUpdate.class);
+
 
     @XmlAttribute(required = true)
     @NotNull
@@ -336,5 +346,14 @@ public class ImageUpdate {
             "image=" + image +
             ", type=" + type +
             '}';
+    }
+
+    public Set<ConstraintViolation<ImageUpdate>> violations(Class<?>... groups) {
+        if (VALIDATOR != null) {
+            return VALIDATOR.validate(this, groups);
+        } else {
+            LOG.warn("Cannot validate since no validator available");
+            return Collections.emptySet();
+        }
     }
 }
