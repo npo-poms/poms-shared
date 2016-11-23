@@ -30,6 +30,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.validation.WarningValidatorGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -495,6 +496,16 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         rounded.setTags(new TreeSet<>(Arrays.asList("foo")));
         assertThat(rounded.fetch().getTags()).hasSize(1);
 
+    }
+
+    @Test
+    public void testImageWithoutCredits() {
+        ProgramUpdate update = ProgramUpdate.create();
+        update.setAgeRating(AgeRating._6);
+        update.setImages(new ImageUpdate(ImageType.LOGO, "title", null, new ImageLocation("https://placeholdit.imgix.net/~text?txt=adsfl")));
+        Set<ConstraintViolation<MediaUpdate<Program>>> violations = update.violations(WarningValidatorGroup.class);
+        System.out.println(violations);
+        assertThat(violations).isNotEmpty();
     }
 
     @Test
