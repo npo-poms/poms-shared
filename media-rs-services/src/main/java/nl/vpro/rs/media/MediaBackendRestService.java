@@ -23,7 +23,7 @@ import nl.vpro.domain.media.update.collections.XmlCollection;
  */
 @Path("/media")
 @Consumes({MediaType.APPLICATION_XML, MultipartConstants.MULTIPART_RELATED})
-@Produces(MediaType.APPLICATION_XML + ";charset=UTF-8")
+@Produces(MediaType.APPLICATION_XML)
 public interface MediaBackendRestService {
 
     @POST
