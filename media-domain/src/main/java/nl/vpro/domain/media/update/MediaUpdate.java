@@ -93,7 +93,6 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @Valid
     protected MediaBuilder<?, M>  builder;
 
-
     @Valid
     protected List<ImageUpdate> images;
 
@@ -103,16 +102,31 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     private List<String> broadcasters;
     private List<String> portals;
     private SortedSet<String> tags;
+
+    @Valid
     private List<PersonUpdate> persons;
+
+    @Valid
     private List<PortalRestrictionUpdate> portalRestrictions;
+
+    @Valid
     private List<GeoRestrictionUpdate> geoRestrictions;
+
+    @Valid
     private SortedSet<TitleUpdate> titles;
+
+    @Valid
     private SortedSet<DescriptionUpdate> descriptions;
     private SortedSet<String> genres;
+
+    @Valid
     private SortedSet<MemberRefUpdate> memberOf;
     private List<String> websites;
+    @Valid
     private SortedSet<LocationUpdate> locations;
+    @Valid
     private SortedSet<RelationUpdate> relations;
+    @Valid
     private SortedSet<ScheduleEventUpdate> scheduleEvents;
 
 
