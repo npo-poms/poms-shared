@@ -46,7 +46,8 @@ public interface MediaBackendRestService {
     Response deleteMedia(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
-        @QueryParam("followMerges") @DefaultValue("true") boolean followMerges
+        @QueryParam("followMerges") @DefaultValue("true") boolean followMerges,
+        @QueryParam("errors") String errors
     ) throws IOException;
 
     @GET
