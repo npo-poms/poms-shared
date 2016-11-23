@@ -2612,7 +2612,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     public void setMergedTo(MediaObject mergedTo) {
-        if (this.mergedTo != null && !this.mergedTo.equals(mergedTo)) {
+        if (this.mergedTo != null && mergedTo != null && !this.mergedTo.equals(mergedTo)) {
             throw new IllegalArgumentException("Can not merge " + this + " to " + mergedTo + " since it is already merged to " + this.mergedTo);
         }
 
