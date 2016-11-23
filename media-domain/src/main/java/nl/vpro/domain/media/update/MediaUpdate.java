@@ -620,7 +620,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
 
     @XmlElement
-    @NotNull(groups = { WarningValidatorGroup.class })
+    @NotNull(groups = {WarningValidatorGroup.class })
     public AgeRating getAgeRating() {
         return mediaObject().getAgeRating();
     }

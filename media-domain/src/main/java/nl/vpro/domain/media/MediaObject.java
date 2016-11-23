@@ -51,6 +51,7 @@ import nl.vpro.util.ResortedSortedSet;
 import nl.vpro.util.SortedSetSameElementWrapper;
 import nl.vpro.validation.Language;
 import nl.vpro.validation.StringList;
+import nl.vpro.validation.WarningValidatorGroup;
 
 /**
  * Base objects for programs and groups
@@ -361,6 +362,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     protected Set<MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(groups = {WarningValidatorGroup.class})
     protected AgeRating ageRating;
 
     @ElementCollection

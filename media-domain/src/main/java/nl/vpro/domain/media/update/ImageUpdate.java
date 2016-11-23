@@ -30,6 +30,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.ReleaseDate;
+import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DateToDuration;
 
 
@@ -82,10 +83,12 @@ public class ImageUpdate {
 
     @NoHtml
     @XmlElement
+    @NotNull(groups = {WarningValidatorGroup.class})
     private String credits;
 
     @URL
     @XmlElement
+    @NotNull(groups = {WarningValidatorGroup.class})
     private String source;
 
     @URL
@@ -93,9 +96,11 @@ public class ImageUpdate {
     @Size.List({
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
+    @NotNull(groups = {WarningValidatorGroup.class})
     private String sourceName;
 
     @XmlElement
+    @NotNull(groups = {WarningValidatorGroup.class})
     private License license;
 
     @ReleaseDate()
