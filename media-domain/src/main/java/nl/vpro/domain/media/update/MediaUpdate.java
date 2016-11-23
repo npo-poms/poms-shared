@@ -63,7 +63,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     private static final Logger LOG = LoggerFactory.getLogger(MediaUpdate.class);
 
-    private static final Validator VALIDATOR;
+    static final Validator VALIDATOR;
 
     static {
         Validator validator;
