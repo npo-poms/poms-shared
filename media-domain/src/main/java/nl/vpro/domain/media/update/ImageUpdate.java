@@ -199,19 +199,26 @@ public class ImageUpdate {
 
     public Image toImage(ImageMetadata metadata) {
         Image result = toImage(metadata.getUrn());
-        if (metadata.getImageType() != null) {
+        if (metadata.getImageType() != null && type == null) {
             result.setType(metadata.getImageType());
         }
-        if (StringUtils.isNotEmpty(metadata.getTitle())) {
+        if (StringUtils.isNotEmpty(metadata.getTitle()) && title == null) {
             result.setTitle(metadata.getTitle());
         }
-        if (StringUtils.isNotEmpty(metadata.getDescription())) {
+        if (StringUtils.isNotEmpty(metadata.getDescription()) && description == null) {
             result.setDescription(metadata.getDescription());
         }
         if (metadata.getWidth() != null) {
+            if (width != null && !metadata.getWidth().equals(width)) {
+                LOG.warn("Width was set {} but it is actually {}, so ignoring", width, metadata.getWidth());
+            }
             result.setWidth(metadata.getWidth());
         }
         if (metadata.getHeight() != null) {
+            if (height != null && !metadata.getHeight().equals(height)) {
+                LOG.warn("Height was set {} but it is actually {}, so ignoring", height, metadata.getHeight());
+
+            }
             result.setHeight(metadata.getHeight());
         }
         return result;
