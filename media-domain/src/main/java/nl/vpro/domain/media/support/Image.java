@@ -72,7 +72,7 @@ import nl.vpro.xml.bind.DateToDuration;
 public class Image extends PublishableObject implements Ownable {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
-    private static final String BASE_URN = "urn:vpro:media:image:";
+    public static final String BASE_URN = "urn:vpro:media:image:";
 
     private static final long serialVersionUID = 2182582685395751329L;
 
@@ -200,6 +200,9 @@ public class Image extends PublishableObject implements Ownable {
     }
 
     public static Long idFromUrn(String urn) {
+        if (urn == null)  {
+            return null;
+        }
         final String id = urn.substring(BASE_URN.length());
         return Long.valueOf(id);
     }
@@ -438,11 +441,8 @@ public class Image extends PublishableObject implements Ownable {
             return true;
         }
 
-        if(!Objects.equals(imageUri, image.imageUri)) {
-            return false;
-        }
-
-        return true;
+        return
+            Objects.equals(imageUri, image.imageUri) && Objects.equals(type, image.type);
     }
 
     public static Image of(ImageMetadata metaData) {

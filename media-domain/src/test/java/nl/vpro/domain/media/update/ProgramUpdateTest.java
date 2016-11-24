@@ -480,9 +480,10 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetTags() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
+        update.setId(10L);
         update.setTags(new TreeSet<>(Arrays.asList("foo", "bar")));
 
-        String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        String expected = "<program embeddable=\"true\" urn=\"urn:vpro:media:program:10\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <tag>bar</tag>\n" +
             "    <tag>foo</tag>\n" +
             "    <locations/>\n" +
