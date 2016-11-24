@@ -66,6 +66,11 @@ public class ImageUpdate {
     private ImageType type;
 
     @XmlAttribute
+    private String urn;
+
+
+
+    @XmlAttribute
     private Date publishStart;
 
     @XmlAttribute
@@ -169,10 +174,11 @@ public class ImageUpdate {
         offset = image.getOffset();
         license = image.getLicense();
         sourceName = image.getSource();
+        urn = image.getUrn();
     }
 
-    public Image toImage(String urn) {
-        Image result = new Image(OwnerType.BROADCASTER, urn);
+    public Image toImage(String imageUri) {
+        Image result = new Image(OwnerType.BROADCASTER, imageUri);
         result.setType(type);
         result.setTitle(title);
         result.setDescription(description);
@@ -187,6 +193,7 @@ public class ImageUpdate {
         result.setLicense(license);
         result.setDate(date);
         result.setOffset(offset);
+        result.setUrn(urn);
         return result;
     }
 
@@ -216,6 +223,24 @@ public class ImageUpdate {
 
     public void setType(ImageType type) {
         this.type = type;
+    }
+
+
+    public String getUrn() {
+        return urn;
+    }
+
+    public void setUrn(String s) {
+        this.urn = s;
+    }
+
+    public Long getId() {
+        return Image.idFromUrn(urn);
+    }
+
+
+    public void setId(Long id) {
+        urn = id == null ? null : Image.BASE_URN + id;
     }
 
     public Date getPublishStart() {
