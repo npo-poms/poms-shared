@@ -330,6 +330,16 @@ public  abstract class MediaUpdate<M extends MediaObject> {
         builder.urn(s);
     }
 
+    @XmlTransient
+    public Long getId() {
+        return mediaObject().getId();
+    }
+
+
+    public void setId(Long id) {
+        builder.id(id);
+    }
+
     @XmlAttribute(name = "avType")
     public AVType getAVType() {
         return mediaObject().getAVType();
