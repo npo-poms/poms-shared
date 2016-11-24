@@ -97,7 +97,7 @@ public abstract class PublishableObject extends DomainObject {
     private static final Logger LOG = LoggerFactory.getLogger(PublishableObject.class);
 
     @Column(nullable = false)
-    protected Date creationDate = new Date();
+        protected Date creationDate = new Date();
 
     @Column(nullable = false)
     protected Date lastModified;
