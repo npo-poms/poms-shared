@@ -139,7 +139,7 @@ public class ImageUpdate {
     @Valid
     private Object image;
 
-    private ImageUpdate() {
+    public ImageUpdate() {
     }
 
     public ImageUpdate(ImageType type, String title, String description, ImageData image) {
@@ -377,6 +377,7 @@ public class ImageUpdate {
         return "ImageUpdate{" +
             "image=" + image +
             ", type=" + type +
+            ", title=" + title +
             '}';
     }
 
