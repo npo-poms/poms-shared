@@ -437,8 +437,8 @@ public class Image extends PublishableObject implements Ownable {
         }
 
         Image image = (Image)o;
-        if(id != null && id.equals(image.id)) {
-            return true;
+        if((id != null || image.id != null) && ! Objects.equals(id, image.id)) {
+            return false;
         }
 
         return
