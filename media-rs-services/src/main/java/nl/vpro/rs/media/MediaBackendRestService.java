@@ -26,6 +26,10 @@ import nl.vpro.domain.media.update.collections.XmlCollection;
 @Produces(MediaType.APPLICATION_XML)
 public interface MediaBackendRestService {
 
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    String version();
+
     @POST
     @Path("find")
     MediaList<MediaListItem> find(
