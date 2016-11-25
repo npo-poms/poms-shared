@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import static nl.vpro.domain.Xmlns.SEARCH_NAMESPACE;
+import static nl.vpro.domain.media.search.MediaSortField.creationDate;
 import static nl.vpro.domain.media.search.MediaSortField.lastModified;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -29,8 +30,13 @@ public class MediaPager extends Pager<MediaSortField> {
         super(offset, max, sort, order);
     }
 
+    public MediaPager(Integer max) {
+        this(0, max, creationDate, Direction.ASC);
+    }
+
+
     public MediaPager() {
-        super(0, null, lastModified, Direction.ASC);
+        this(0, null, creationDate, Direction.ASC);
     }
 
     @Override
