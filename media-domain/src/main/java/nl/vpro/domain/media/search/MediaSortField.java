@@ -19,10 +19,12 @@ public enum MediaSortField implements SortField {
             return "locationCount";
         }
     },
+    memberofCount(Type.LONG),
     sortDate(Type.LONG),
     mid(Type.STRING),
     type(Type.STRING),
     lastModifiedBy(Type.STRING),
+    createdBy(Type.STRING),
     publishStop(Type.LONG),
     publishStart(Type.LONG),
     lastPublished(Type.LONG);
