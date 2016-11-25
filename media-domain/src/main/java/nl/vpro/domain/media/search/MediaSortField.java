@@ -14,15 +14,21 @@ public enum MediaSortField implements SortField {
             return "locationCount";
         }
     },
-    sortDate(Type.LONG);
+    sortDate(Type.LONG),
+    mid(Type.STRING),
+    type(Type.STRING),
+    lastModifiedBy(Type.STRING),
+    publishStop(Type.LONG),
+    publishStart(Type.LONG),
+    publishDate(Type.LONG);
 
-    private final Type type;
+    private final Type t;
 
     MediaSortField(Type type) {
-        this.type = type;
+        this.t = type;
     }
     @Override
     public Type type() {
-        return type;
+        return t;
     }
 }
