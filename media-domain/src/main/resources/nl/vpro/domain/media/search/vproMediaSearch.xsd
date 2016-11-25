@@ -20,7 +20,7 @@
       </xsd:documentation>
     </xsd:annotation>
     <xsd:sequence>
-      <xsd:element name="pager" type="tns:mediaPagerType"/>
+      <xsd:element name="pager" type="mediaPagerType"/>
       <xsd:element type="xsd:string" name="broadcaster" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element type="xsd:string" name="portal" minOccurs="0" maxOccurs="unbounded"/>
       <!--
@@ -82,7 +82,7 @@
           </xsd:restriction>
         </xsd:simpleType>
       </xsd:element>
-      <xsd:element name="sort" type="tns:mediaSortField" minOccurs="0"/>
+      <xsd:element name="sort" type="mediaSortField" minOccurs="0"/>
       <xsd:element name="order" minOccurs="0">
         <xsd:simpleType>
           <xsd:restriction base="xsd:string">
