@@ -6,12 +6,7 @@ package nl.vpro.domain.media.search;
  */
 public enum MediaSortField implements SortField {
     lastModified(Type.LONG),
-    title(Type.STRING) {
-        @Override
-        public String field() {
-            return "sortField";
-        }
-    },
+    sortTitle(Type.STRING),
     creationDate(Type.LONG),
     locations(Type.LONG) {
         @Override
