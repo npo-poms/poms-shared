@@ -32,7 +32,7 @@ public class MediaList<T> implements Iterable<T> {
     protected Integer max;
 
     @XmlAttribute
-    protected String sort;
+    protected MediaSortField sort;
 
     @XmlAttribute
     protected String order;
@@ -59,7 +59,7 @@ public class MediaList<T> implements Iterable<T> {
     }
 
 
-    public MediaList(Pager pager, long totalCount, final List<T> list) {
+    public MediaList(MediaPager pager, long totalCount, final List<T> list) {
         this.list = list == null ? Collections.<T>emptyList() : Collections.unmodifiableList(list);
         this.totalCount = totalCount;
         this.offset = pager.getOffset();
@@ -68,7 +68,7 @@ public class MediaList<T> implements Iterable<T> {
         this.order = pager.getOrder() == null ? null : pager.getOrder().toString();
     }
 
-    public MediaList(Pager pager, long totalCount, T... list) {
+    public MediaList(MediaPager pager, long totalCount, T... list) {
         this.list = Collections.unmodifiableList(new ArrayList<T>(Arrays.asList(list)));
         this.totalCount = totalCount;
         this.offset = pager.getOffset();

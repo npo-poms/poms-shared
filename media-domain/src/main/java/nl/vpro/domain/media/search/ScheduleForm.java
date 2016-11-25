@@ -21,7 +21,7 @@ import nl.vpro.domain.media.ScheduleEvent;
     "channels"
 })
 public class ScheduleForm implements Predicate<ScheduleEvent> {
-    private Pager pager;
+    private SchedulePager pager;
 
     private DateRange dateRange;
 
@@ -30,7 +30,7 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
     private ScheduleForm() {
     }
 
-    public ScheduleForm(Pager pager, DateRange dateRange) {
+    public ScheduleForm(SchedulePager pager, DateRange dateRange) {
         if(pager == null) {
             throw new IllegalArgumentException("Must supply a pager, got: null");
         }
@@ -38,7 +38,7 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
         this.dateRange = dateRange == null ? new DateRange() : dateRange;
     }
 
-    public Pager getPager() {
+    public SchedulePager getPager() {
         return pager;
     }
 

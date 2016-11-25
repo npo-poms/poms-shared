@@ -11,7 +11,7 @@
 
   <xsd:complexType name="mediaFormType">
     <xsd:sequence>
-      <xsd:element name="pager" type="tns:pagerType"/>
+      <xsd:element name="pager" type="tns:mediaPagerType"/>
       <xsd:element name="broadcaster" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="portal" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="organization" type="organizationType" minOccurs="0" maxOccurs="unbounded"/>
@@ -40,11 +40,11 @@
     </xsd:sequence>
   </xsd:complexType>
 
-  <xsd:complexType name="pagerType">
+  <xsd:complexType name="mediaPagerType">
     <xsd:sequence>
       <xsd:element name="offset" type="xsd:long"/>
       <xsd:element name="max" type="xsd:int"/>
-      <xsd:element name="sort" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="sort" type="tns:mediaSortField" minOccurs="0"/>
       <xsd:element name="order" type="tns:direction" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
@@ -137,6 +137,16 @@
       </xsd:extension>
     </xsd:complexContent>
   </xsd:complexType>
+
+  <xsd:simpleType name="mediaSortField">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="lastModified"/>
+      <xsd:enumeration value="sortTitle"/>
+      <xsd:enumeration value="creationDate"/>
+      <xsd:enumeration value="locations"/>
+      <xsd:enumeration value="sortDate"/>
+    </xsd:restriction>
+  </xsd:simpleType>
 
   <xsd:simpleType name="direction">
     <xsd:restriction base="xsd:string">

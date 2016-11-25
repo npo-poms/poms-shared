@@ -7,9 +7,8 @@ package nl.vpro.domain.media.search;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import nl.vpro.domain.media.MediaObject;
 
-import static nl.vpro.domain.Xmlns.SEARCH_NAMESPACE;
+import nl.vpro.domain.media.MediaObject;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "locationFormType", propOrder = {
@@ -20,11 +19,11 @@ public class LocationForm {
 
     private MediaObject mediaObject;
 
-    private Pager pager;
+    private LocationPager pager;
 
     private LocationForm() {}
 
-    public LocationForm(Pager pager) {
+    public LocationForm(LocationPager pager) {
         this.pager = pager;
     }
 
@@ -36,11 +35,11 @@ public class LocationForm {
         this.mediaObject = mediaObject;
     }
 
-    public Pager getPager() {
+    public LocationPager getPager() {
         return pager;
     }
 
-    public void setPager(Pager pager) {
+    public void setPager(LocationPager pager) {
         this.pager = pager;
     }
 }
