@@ -4,7 +4,9 @@
  */
 package nl.vpro.domain.media;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -12,10 +14,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import nl.vpro.domain.media.support.Description;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 
 import static nl.vpro.domain.media.MediaObjects.findOwnersForTextFields;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,7 +55,7 @@ public class MediaObjectsTest {
         program.setPublishStart(publishDate);
         assertThat(MediaObjects.getSortDate(program)).isEqualTo(publishDate);
         ScheduleEvent se = new ScheduleEvent();
-        se.setStart(new Date(1444043500362L));
+        se.setStartInstant(Instant.ofEpochMilli(1444043500362L));
         program.addScheduleEvent(se);
         assertThat(MediaObjects.getSortDate(program)).isEqualTo(se.getStart());
         Segment segment = new Segment();
@@ -70,8 +69,8 @@ public class MediaObjectsTest {
             .creationDate(new Date(1))
             .publishStart(new Date(2))
             .scheduleEvents(
-                new ScheduleEvent(Channel.NED2, new Date(13), new Date(10)),
-                new ScheduleEvent(Channel.NED1, new Date(3), new Date(10))
+                new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(13), Duration.ofMillis(10)),
+                new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(3), Duration.ofMillis(10))
             )
             .build();
 
@@ -117,15 +116,23 @@ public class MediaObjectsTest {
     @Test
     public void testFindScheduleEventHonoringOffset() throws Exception {
         final Program program = MediaBuilder.program()
-            .scheduleEvents(new ScheduleEvent(Channel.NED1, new Date(100), new Date(100)))
+            .scheduleEvents(new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(100), Duration.ofMillis(100)))
             .build();
 
-        final ScheduleEvent mismatch = new ScheduleEvent(Channel.NED1, new Date(90), new Date(100));
+        final ScheduleEvent mismatch = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(90), Duration.ofMillis(100));
         mismatch.setOffset(Duration.ofMillis(9));
         assertThat(MediaObjects.findScheduleEventHonoringOffset(program, mismatch)).isNull();
 
-        final ScheduleEvent match = new ScheduleEvent(Channel.NED1, new Date(90), new Date(100));
+        final ScheduleEvent match = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(90), Duration.ofMillis(100));
         match.setOffset(Duration.ofMillis(10));
         assertThat(MediaObjects.findScheduleEventHonoringOffset(program, match)).isNotNull();
+    }
+
+    @Test
+    public void filterOnWorkflow() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        final Program program = MediaBuilder.program().build();
+
+        final Program copy = MediaObjects.filterOnWorkflow(program, Workflow.PUBLICATIONS::contains);
+
     }
 }
