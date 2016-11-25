@@ -49,7 +49,7 @@ public class MediaListTest {
         program.setTags(new TreeSet<>(Arrays.asList(new Tag("foo"), new Tag("bar"))));
 
 
-        MediaList<MediaListItem> xmlList = new MediaList<>(new Pager(1, 10, null, Pager.Direction.ASC), 1000, new MediaListItem(program));
+        MediaList<MediaListItem> xmlList = new MediaList<>(new MediaPager(1, 10, null, Pager.Direction.ASC), 1000, new MediaListItem(program));
 
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
