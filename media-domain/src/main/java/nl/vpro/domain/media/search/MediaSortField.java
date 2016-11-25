@@ -20,7 +20,7 @@ public enum MediaSortField implements SortField {
     lastModifiedBy(Type.STRING),
     publishStop(Type.LONG),
     publishStart(Type.LONG),
-    publishDate(Type.LONG);
+    lastPublished(Type.LONG);
 
     private final Type t;
 
