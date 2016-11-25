@@ -100,7 +100,15 @@
       <xsd:enumeration value="sortTitle"/>
       <xsd:enumeration value="creationDate"/>
       <xsd:enumeration value="locations"/>
+      <xsd:enumeration value="memberofCount"/>
       <xsd:enumeration value="sortDate"/>
+      <xsd:enumeration value="mid"/>
+      <xsd:enumeration value="type"/>
+      <xsd:enumeration value="lastModifiedBy"/>
+      <xsd:enumeration value="createdBy"/>
+      <xsd:enumeration value="publishStop"/>
+      <xsd:enumeration value="publishStart"/>
+      <xsd:enumeration value="lastPublished"/>
     </xsd:restriction>
   </xsd:simpleType>
 
