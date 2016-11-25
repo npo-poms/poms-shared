@@ -5,6 +5,9 @@
 package nl.vpro.domain.media;
 
 import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -452,4 +455,34 @@ public class MediaObjects {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
         }
     }
+
+
+    /**
+     * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
+     *
+     * @TODO work in progres. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
+     */
+    public static <T extends PublishableObject> T  filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Class<T> clazz = (Class<T>) object.getClass();
+        T copy = clazz.getConstructor().newInstance();
+        for (Field f : clazz.getFields()) {
+            if (Modifier.isStatic(f.getModifiers())) {
+                continue;
+            }
+            f.setAccessible(true);
+            Object cloned = f.get(object);
+            if (cloned != null && cloned instanceof List) {
+                List<?> copyOfList = new ArrayList<>();
+                copyOfList.addAll((List) cloned);
+                cloned = copyOfList;
+            }
+            f.set(copy, cloned);
+        }
+        return copy;
+    }
+
+
+
+
+
 }
