@@ -4,20 +4,18 @@
  */
 package nl.vpro.domain.media.search;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.MediaType;
-import nl.vpro.domain.user.Organization;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import nl.vpro.domain.media.AVType;
+import nl.vpro.domain.media.MediaType;
+import nl.vpro.domain.user.Organization;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "mediaForm")
@@ -53,7 +51,7 @@ import java.util.List;
 public class MediaForm {
 
     @XmlElement(required = true)
-    private Pager pager;
+    private MediaPager pager;
 
     @XmlElement(name = "broadcaster")
     @JsonProperty("broadcasters")
@@ -150,23 +148,23 @@ public class MediaForm {
 
 
     public MediaForm() {
-        this(new Pager());
+        this(new MediaPager());
     }
 
-    public MediaForm(Pager pager) {
+    public MediaForm(MediaPager pager) {
         this(pager, null, null, null, null, false, false, false, null, null, null, null, null, false, false, false);
     }
 
-    public MediaForm(Pager pager, String text) {
+    public MediaForm(MediaPager pager, String text) {
         this(pager, null, null, text, null, false, false, false, null, null, null, null, null, false, false, false);
     }
 
-    public MediaForm(Pager pager, Collection<MediaType> types) {
+    public MediaForm(MediaPager pager, Collection<MediaType> types) {
         this(pager, null, null, null, types, false, false, false, null, null, null, null, null, false, false, false);
     }
 
     public MediaForm(
-        Pager pager,
+        MediaPager pager,
         Collection<String> broadcasters,
         Collection<String> portals,
         String text,
@@ -206,7 +204,7 @@ public class MediaForm {
         this.noCredits = noCredits;
     }
 
-    public Pager getPager() {
+    public MediaPager getPager() {
         return pager;
     }
 
