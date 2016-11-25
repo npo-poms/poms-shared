@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import static nl.vpro.domain.Xmlns.SEARCH_NAMESPACE;
 import static nl.vpro.domain.media.search.MediaSortField.creationDate;
-import static nl.vpro.domain.media.search.MediaSortField.lastModified;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaPagerType", namespace = SEARCH_NAMESPACE, propOrder = {
