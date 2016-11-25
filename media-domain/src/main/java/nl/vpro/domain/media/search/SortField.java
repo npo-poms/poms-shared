@@ -8,4 +8,15 @@ public interface SortField {
 
 
     String name();
+
+    Type type();
+
+    default String field() {
+        return name();
+    }
+
+    enum Type {
+        STRING,
+        LONG
+    }
 }
