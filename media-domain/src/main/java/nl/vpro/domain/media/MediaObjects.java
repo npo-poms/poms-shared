@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -41,13 +42,13 @@ public class MediaObjects {
     }
 
     public static boolean equalsOnCrid(MediaObject first, MediaObject second) {
-        if(first.getCrids().isEmpty() || second.getCrids().isEmpty()) {
+        if (first.getCrids().isEmpty() || second.getCrids().isEmpty()) {
             return false;
         }
 
-        for(String firstCrid : first.getCrids()) {
-            for(String secondCrid : second.getCrids()) {
-                if(secondCrid.equals(firstCrid)) {
+        for (String firstCrid : first.getCrids()) {
+            for (String secondCrid : second.getCrids()) {
+                if (secondCrid.equals(firstCrid)) {
                     return true;
                 }
             }
@@ -70,16 +71,16 @@ public class MediaObjects {
      * Sets the owner of all titles, descriptions, locations and images found in given MediaObject
      */
     public static void forOwner(MediaObject media, OwnerType owner) {
-        for(Title title : media.getTitles()) {
+        for (Title title : media.getTitles()) {
             title.setOwner(owner);
         }
-        for(Description description : media.getDescriptions()) {
+        for (Description description : media.getDescriptions()) {
             description.setOwner(owner);
         }
-        for(Location location : media.getLocations()) {
+        for (Location location : media.getLocations()) {
             location.setOwner(owner);
         }
-        for(Image image : media.getImages()) {
+        for (Image image : media.getImages()) {
             image.setOwner(owner);
         }
     }
@@ -89,8 +90,8 @@ public class MediaObjects {
     }
 
     public static String getTitle(MediaObject media, OwnerType owner, TextualType type) {
-        for(Title title : media.getTitles()) {
-            if(title.getOwner() == owner && title.getType() == type) {
+        for (Title title : media.getTitles()) {
+            if (title.getOwner() == owner && title.getType() == type) {
                 return title.getTitle();
             }
         }
@@ -107,10 +108,10 @@ public class MediaObjects {
     }
 
     public static Title getTitleObject(Collection<Title> titles, TextualType... types) {
-        if(titles != null) {
-            for(Title title : titles) {
-                for(TextualType type : types) {
-                    if(type == title.getType()) {
+        if (titles != null) {
+            for (Title title : titles) {
+                for (TextualType type : types) {
+                    if (type == title.getType()) {
                         return title;
                     }
                 }
@@ -121,10 +122,10 @@ public class MediaObjects {
 
     public static Collection<Title> getTitles(Collection<Title> titles, TextualType... types) {
         List<Title> returnValue = new ArrayList<Title>();
-        if(titles != null) {
-            for(Title title : titles) {
-                for(TextualType type : types) {
-                    if(type == title.getType()) {
+        if (titles != null) {
+            for (Title title : titles) {
+                for (TextualType type : types) {
+                    if (type == title.getType()) {
                         returnValue.add(title);
                     }
                 }
@@ -134,8 +135,8 @@ public class MediaObjects {
     }
 
     public static String getDescription(MediaObject media, OwnerType owner, TextualType type) {
-        for(Description description : media.getDescriptions()) {
-            if(description.getOwner() == owner && description.getType() == type) {
+        for (Description description : media.getDescriptions()) {
+            if (description.getOwner() == owner && description.getType() == type) {
                 return description.getDescription();
             }
         }
@@ -151,10 +152,10 @@ public class MediaObjects {
     }
 
     public static String getDescription(Collection<Description> descriptions, String defaultValue, TextualType... types) {
-        if(descriptions != null) {
-            for(Description description : descriptions) {
-                for(TextualType type : types) {
-                    if(type == description.getType()) {
+        if (descriptions != null) {
+            for (Description description : descriptions) {
+                for (TextualType type : types) {
+                    if (type == description.getType()) {
                         return description.getDescription();
                     }
                 }
@@ -165,16 +166,16 @@ public class MediaObjects {
 
     public static OwnerType[] findOwnersForTextFields(MediaObject media) {
         SortedSet<OwnerType> result = new TreeSet<>();
-        for(Title title : media.getTitles()) {
+        for (Title title : media.getTitles()) {
             result.add(title.getOwner());
         }
-        for(Description description : media.getDescriptions()) {
+        for (Description description : media.getDescriptions()) {
             result.add(description.getOwner());
         }
         return result.toArray(new OwnerType[result.size()]);
     }
 
-    public static <T extends MediaObject> T deepCopy(T media)  {
+    public static <T extends MediaObject> T deepCopy(T media) {
         ObjectOutputStream objectOut = null;
         ObjectInputStream objectIn = null;
         try {
@@ -185,23 +186,23 @@ public class MediaObjects {
 
             ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
             objectIn = new ObjectInputStream(byteIn);
-            return (T)objectIn.readObject();
+            return (T) objectIn.readObject();
         } catch (ClassNotFoundException | IOException e) {
             LOG.error(e.getMessage(), e);
             throw new RuntimeException(e);
         } finally {
-            if(objectOut != null) {
+            if (objectOut != null) {
                 try {
                     objectOut.close();
-                } catch(IOException e) {
+                } catch (IOException e) {
                     LOG.error("Error closing object output stream after deep copy: {}", e.getMessage());
                 }
             }
 
-            if(objectIn != null) {
+            if (objectIn != null) {
                 try {
                     objectIn.close();
-                } catch(IOException e) {
+                } catch (IOException e) {
                     LOG.error("Error closing object input stream after deep copy: {}", e.getMessage());
                 }
             }
@@ -218,8 +219,8 @@ public class MediaObjects {
     }
 
     public static boolean hasChannel(MediaObject media, Collection<Channel> channels) {
-        for(ScheduleEvent scheduleEvent : media.getScheduleEvents()) {
-            if(channels.contains(scheduleEvent.getChannel())) {
+        for (ScheduleEvent scheduleEvent : media.getScheduleEvents()) {
+            if (channels.contains(scheduleEvent.getChannel())) {
                 return true;
             }
         }
@@ -227,8 +228,8 @@ public class MediaObjects {
     }
 
     public static ScheduleEvent findScheduleEventHonoringOffset(MediaObject media, ScheduleEvent source) {
-        for(ScheduleEvent existing : media.getScheduleEvents()) {
-            if(ScheduleEvents.equalHonoringOffset(existing, source)) {
+        for (ScheduleEvent existing : media.getScheduleEvents()) {
+            if (ScheduleEvents.equalHonoringOffset(existing, source)) {
                 return existing;
             }
         }
@@ -236,8 +237,8 @@ public class MediaObjects {
     }
 
     public static ScheduleEvent findScheduleEvent(Channel channel, Date start, Collection<ScheduleEvent> events) {
-        for(ScheduleEvent event : events) {
-            if(event.getStartInstant().toEpochMilli() == start.getTime() && event.getChannel().equals(channel)) {
+        for (ScheduleEvent event : events) {
+            if (event.getStartInstant().toEpochMilli() == start.getTime() && event.getChannel().equals(channel)) {
                 return event;
             }
         }
@@ -251,8 +252,8 @@ public class MediaObjects {
 
     public static SortedSet<ScheduleEvent> filterScheduleEvents(Collection<ScheduleEvent> events, Collection<Channel> channelList) {
         SortedSet<ScheduleEvent> result = new TreeSet<>();
-        for(ScheduleEvent event : events) {
-            if(channelList.contains(event.getChannel())) {
+        for (ScheduleEvent event : events) {
+            if (channelList.contains(event.getChannel())) {
                 result.add(event);
             }
         }
@@ -260,9 +261,9 @@ public class MediaObjects {
     }
 
     public static Channel getChannel(MediaObject program) {
-        for(ScheduleEvent se : program.getScheduleEvents()) {
+        for (ScheduleEvent se : program.getScheduleEvents()) {
             Repeat repeat = se.getRepeat();
-            if(repeat == null || (!repeat.isRerun())) {
+            if (repeat == null || (!repeat.isRerun())) {
                 return se.getChannel();
             }
         }
@@ -282,8 +283,8 @@ public class MediaObjects {
      * @since 3.3.0
      */
     public static Relation getRelation(MediaObject object, String relationType) {
-        for(Relation relation : object.getRelations()) {
-            if(relation.getType().equals(relationType)) {
+        for (Relation relation : object.getRelations()) {
+            if (relation.getType().equals(relationType)) {
                 return relation;
             }
         }
@@ -291,8 +292,8 @@ public class MediaObjects {
     }
 
     public static TwitterRef getTwitterHash(MediaObject object) {
-        for(TwitterRef ref : object.getTwitterRefs()) {
-            if(ref.getType() == TwitterRef.Type.HASHTAG) {
+        for (TwitterRef ref : object.getTwitterRefs()) {
+            if (ref.getType() == TwitterRef.Type.HASHTAG) {
                 return ref;
             }
         }
@@ -300,8 +301,8 @@ public class MediaObjects {
     }
 
     public static TwitterRef getTwitterAccount(MediaObject object) {
-        for(TwitterRef ref : object.getTwitterRefs()) {
-            if(ref.getType() == TwitterRef.Type.ACCOUNT) {
+        for (TwitterRef ref : object.getTwitterRefs()) {
+            if (ref.getType() == TwitterRef.Type.ACCOUNT) {
                 return ref;
             }
         }
@@ -310,8 +311,8 @@ public class MediaObjects {
 
     public static String getKijkwijzer(MediaObject media) {
         StringBuilder sb = new StringBuilder();
-        if(media.getAgeRating() != null) {
-            switch(media.getAgeRating()) {
+        if (media.getAgeRating() != null) {
+            switch (media.getAgeRating()) {
                 case _6:
                     sb.append('2');
                     break;
@@ -327,8 +328,8 @@ public class MediaObjects {
             }
         }
 
-        for(ContentRating contentRating : media.getContentRatings()) {
-            if(contentRating != null) {
+        for (ContentRating contentRating : media.getContentRatings()) {
+            if (contentRating != null) {
                 sb.append(contentRating.toChar());
             }
         }
@@ -338,33 +339,33 @@ public class MediaObjects {
 
 
     protected static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject, Set<MediaObject> handled) throws NotFoundException {
-        if(handled == null) {
+        if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
-        if(!handled.contains(mediaObject)) {
+        if (!handled.contains(mediaObject)) {
             handled.add(mediaObject);
             List<Broadcaster> copy = new ArrayList<>(mediaObject.getBroadcasters());
 
 
             mediaObject.getBroadcasters().clear();
 
-            for(Broadcaster b : copy) {
-                if(b.getId() != null) {
+            for (Broadcaster b : copy) {
+                if (b.getId() != null) {
                     mediaObject.addBroadcaster(broadcasterService.find(b.getId()));
-                } else if(b.getWhatsOnId() != null) {
+                } else if (b.getWhatsOnId() != null) {
                     mediaObject.addBroadcaster(broadcasterService.findForWhatsOnId(b.getWhatsOnId()));
-                } else if(b.getNeboId() != null) {
+                } else if (b.getNeboId() != null) {
                     mediaObject.addBroadcaster(broadcasterService.findForNeboId(b.getNeboId()));
                 } else {
                     mediaObject.addBroadcaster(b);
                 }
             }
-            for(MemberRef memberRef : mediaObject.getMemberOf()) {
+            for (MemberRef memberRef : mediaObject.getMemberOf()) {
                 matchBroadcasters(broadcasterService, memberRef.getOwner(), handled);
             }
-            if(mediaObject instanceof Program) {
-                Program p = (Program)mediaObject;
-                for(MemberRef memberRef : p.getEpisodeOf()) {
+            if (mediaObject instanceof Program) {
+                Program p = (Program) mediaObject;
+                for (MemberRef memberRef : p.getEpisodeOf()) {
                     matchBroadcasters(broadcasterService, memberRef.getOwner(), handled);
                 }
             }
@@ -372,13 +373,13 @@ public class MediaObjects {
     }
 
     public static void removeLocations(MediaObject mediaObject) {
-        while(mediaObject.getLocations().size() > 0) {
+        while (mediaObject.getLocations().size() > 0) {
             mediaObject.removeLocation(mediaObject.getLocations().first());
         }
     }
 
     public static void addAll(MediaObject mediaObject, Iterable<Location> i) {
-        for(Location l : i) {
+        for (Location l : i) {
             mediaObject.addLocation(l);
         }
     }
@@ -388,22 +389,22 @@ public class MediaObjects {
      * @since 2.1
      */
     public static Date getSortDate(MediaObject mo) {
-        if(mo instanceof Group) {
+        if (mo instanceof Group) {
             return mo.sortDate;
-        } else if(mo instanceof Segment) {
-            Segment segment = (Segment)mo;
-            if(segment.parent != null) {
+        } else if (mo instanceof Segment) {
+            Segment segment = (Segment) mo;
+            if (segment.parent != null) {
                 return getSortDate(segment.parent);
             }
         }
         Date date = null;
-        if(mo.scheduleEvents != null && mo.scheduleEvents.size() > 0) {
+        if (mo.scheduleEvents != null && mo.scheduleEvents.size() > 0) {
             date = sorted(mo.scheduleEvents).first().getStart();
         }
-        if(date == null) {
+        if (date == null) {
             date = mo.getPublishStart();
         }
-        if(date == null) {
+        if (date == null) {
             date = mo.getCreationDate();
         }
         return date;
@@ -412,9 +413,9 @@ public class MediaObjects {
 
     public static boolean trim(Collection<?> collection) {
         boolean trimmed = false;
-        for(java.util.Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
+        for (java.util.Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
             Object next = iterator.next();
-            if(next == null) {
+            if (next == null) {
                 iterator.remove();
                 trimmed = true;
             }
@@ -425,16 +426,16 @@ public class MediaObjects {
 
     public static <T extends UpdatableIdentifiable<?, T>> void integrate(List<T> existing, List<T> updates) {
         T move = null;
-        for(int i = 0; i < updates.size(); i++) {
+        for (int i = 0; i < updates.size(); i++) {
             T incoming = updates.get(i);
-            if(move != null || i < existing.size()) {
+            if (move != null || i < existing.size()) {
                 T target = move != null ? move : existing.get(i);
                 move = null;
 
-                if(incoming.getId() == null) {
+                if (incoming.getId() == null) {
                     existing.set(i, incoming);
                     move = target;
-                } else if(incoming.getId().equals(target.getId())) {
+                } else if (incoming.getId().equals(target.getId())) {
                     target.update(incoming);
                 } else {
                     existing.set(i, incoming);
@@ -445,13 +446,13 @@ public class MediaObjects {
 
         }
 
-        for(int i = updates.size(); i < existing.size(); i++) {
+        for (int i = updates.size(); i < existing.size(); i++) {
             existing.remove(i);
         }
     }
 
     public static void markForRepublication(MediaObject media) {
-        if((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.isPublishable()) {
+        if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.isPublishable()) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
         }
     }
@@ -462,27 +463,65 @@ public class MediaObjects {
      *
      * @TODO work in progres. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
      */
-    public static <T extends PublishableObject> T  filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Class<T> clazz = (Class<T>) object.getClass();
-        T copy = clazz.getConstructor().newInstance();
-        for (Field f : clazz.getFields()) {
-            if (Modifier.isStatic(f.getModifiers())) {
-                continue;
-            }
-            f.setAccessible(true);
-            Object cloned = f.get(object);
-            if (cloned != null && cloned instanceof List) {
-                List<?> copyOfList = new ArrayList<>();
-                copyOfList.addAll((List) cloned);
-                cloned = copyOfList;
-            }
-            f.set(copy, cloned);
-        }
-        return copy;
+    public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        return _filterOnWorkflow(object, predicate, new HashMap<>());
     }
 
+    protected static Collection<?> filterCollectionOnWorkflow(Collection<?> object, Supplier<Collection> constructor, Predicate<Workflow> predicate, Map<Integer, Object> objects) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Collection<Object> copyOfList = constructor.get();
+        for (Object o : object) {
+            if (!(o instanceof PublishableObject)) {
+                copyOfList.add(o);
+            } else {
+                if (predicate.apply(((PublishableObject) o).getWorkflow())) {
+                    copyOfList.add(_filterOnWorkflow(o, predicate, objects));
+                }
+            }
+        }
+        return copyOfList;
 
+    }
 
+    public static <T> T _filterOnWorkflow(final T object, final Predicate<Workflow> predicate, final Map<Integer, Object> objects) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        if (object == null)  {
+            return null;
+        } else if (object instanceof List) {
+            return (T) filterCollectionOnWorkflow((List) object, ArrayList::new, predicate, objects);
+        } else if (object instanceof Set) {
+            return (T) filterCollectionOnWorkflow((Set) object, TreeSet::new, predicate, objects);
+        } else if (! (object instanceof PublishableObject)) {
+            return object;
+        } else {
+            int hash = object.hashCode();
+            if (! objects.containsKey(hash)) {
+                Class<T> clazz = (Class<T>) object.getClass();
+                T copy = clazz.getConstructor().newInstance();
+                objects.put(hash, copy);
+                for (Field f : listAllFields(clazz)) {
+                    if (Modifier.isStatic(f.getModifiers())) {
+                        continue;
+                    }
+                    if (Modifier.isTransient(f.getModifiers())) {
+                        continue;
+                    }
+                    f.setAccessible(true);
+                    Object cloned = _filterOnWorkflow(f.get(object), predicate, objects);
+                    f.set(copy, cloned);
+                }
+                return copy;
+            } else {
+                return (T) objects.get(hash);
+            }
 
-
+        }
+    }
+    protected static List<Field> listAllFields(Class clazz) {
+        List<Field> fieldList = new ArrayList<Field>();
+        Class tmpClass = clazz;
+        while (tmpClass != null) {
+            fieldList.addAll(Arrays.asList(tmpClass.getDeclaredFields()));
+            tmpClass = tmpClass.getSuperclass();
+        }
+        return fieldList;
+    }
 }

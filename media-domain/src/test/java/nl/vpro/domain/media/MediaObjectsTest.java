@@ -130,9 +130,17 @@ public class MediaObjectsTest {
 
     @Test
     public void filterOnWorkflow() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        final Program program = MediaBuilder.program().build();
+        Location location1 = new Location("http://www.vpro.nl/1", OwnerType.BROADCASTER);
+        Location location2 = new Location("http://www.vpro.nl/2", OwnerType.BROADCASTER);
+        location2.setWorkflow(Workflow.DELETED);
+
+        final Program program = MediaBuilder.program()
+            .locations(location1, location2)
+            .build();
 
         final Program copy = MediaObjects.filterOnWorkflow(program, Workflow.PUBLICATIONS::contains);
+        assertThat(copy.getLocations()).hasSize(1);
+        assertThat(copy.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
 
     }
 }
