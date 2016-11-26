@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.search;
 
+import lombok.Builder;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.function.Predicate;
@@ -39,6 +41,7 @@ public class DateRange implements Predicate<Instant> {
     public  DateRange() {
     }
 
+    @Builder
     public DateRange(Instant  start, Instant stop) {
         this.start = start;
         this.stop = stop;
