@@ -18,6 +18,7 @@ public enum MediaSortField implements SortField {
     sortDate(Type.LONG),
     mid(Type.STRING),
     type(Type.STRING),
+    mediaType(Type.STRING),
     lastModifiedBy(Type.STRING),
     createdBy(Type.STRING),
     publishStop(Type.LONG),
