@@ -21,25 +21,21 @@ import nl.vpro.domain.media.update.collections.XmlCollection;
  * @author Michiel Meeuwissen
  * @since 3.3
  */
-@Path("/")
+@Path("/media")
 @Consumes({MediaType.APPLICATION_XML, MultipartConstants.MULTIPART_RELATED})
 @Produces(MediaType.APPLICATION_XML)
 public interface MediaBackendRestService {
 
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    @Path("version")
-    String version();
 
     @POST
-    @Path("media/find")
+    @Path("find")
     MediaList<MediaListItem> find(
         MediaForm form,
         @QueryParam("writable") @DefaultValue("false") boolean writable
     ) throws IOException;
 
     @GET
-    @Path("media/{entity:(media|program|group|segment)}/{id}")
+    @Path("{entity:(media|program|group|segment)}/{id}")
     MediaUpdate getMedia(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -47,7 +43,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @DELETE
-    @Path("media/{entity:(media|program|group|segment)}/{id}")
+    @Path("{entity:(media|program|group|segment)}/{id}")
     Response deleteMedia(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -56,7 +52,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("media/{entity:(media|program|group|segment)}/{id}/full")
+    @Path("{entity:(media|program|group|segment)}/{id}/full")
     MediaObject getFullMediaObject(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -64,7 +60,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("media/{entity:(media|segment|program|group)}")
+    @Path("{entity:(media|segment|program|group)}")
     @Produces("text/plain")
     Response update(
         @PathParam("entity") final String entity,
@@ -75,7 +71,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("media/{entity:(media|program|group|segment)}/{id}/location")
+    @Path("{entity:(media|program|group|segment)}/{id}/location")
     @Produces("text/plain")
     Response addLocation(
         @PathParam("entity") final String entity,
@@ -86,7 +82,7 @@ public interface MediaBackendRestService {
     );
 
     @DELETE
-    @Path("media/{entity:(media|program|group|segment)}/{id}/location/{locationId}")
+    @Path("{entity:(media|program|group|segment)}/{id}/location/{locationId}")
     @Produces("text/plain")
     Response removeLocation(
         @PathParam("entity") final String entity,
@@ -97,7 +93,7 @@ public interface MediaBackendRestService {
     );
 
     @GET
-    @Path("media/{entity:(media|program|group|segment)}/{id}/locations")
+    @Path("{entity:(media|program|group|segment)}/{id}/locations")
     XmlCollection<LocationUpdate> getLocations(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -105,7 +101,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("media/{entity:(media|program|group|segment)}/{id}/image")
+    @Path("{entity:(media|program|group|segment)}/{id}/image")
     @Produces("text/plain")
     Response addImage(
         ImageUpdate imageUpdate,
@@ -117,7 +113,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("media/{entity:(media|program|group|segment)}/{id}/images")
+    @Path("{entity:(media|program|group|segment)}/{id}/images")
     XmlCollection<ImageUpdate> getImages(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -126,7 +122,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("media/{entity:(media|program|group|segment)}/{id}/members")
+    @Path("{entity:(media|program|group|segment)}/{id}/members")
     MediaUpdateList<MemberUpdate> getGroupMembers(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -137,7 +133,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @PUT
-    @Path("media/{entity:(media|program|group|segment)}/{id}/members")
+    @Path("{entity:(media|program|group|segment)}/{id}/members")
     Response moveMembers(
         MoveAction move,
         @PathParam("entity") final String entity,
@@ -147,7 +143,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("media/{entity:(media|program|group|segment)}/{id}/memberOfs")
+    @Path("{entity:(media|program|group|segment)}/{id}/memberOfs")
     MediaUpdateList<MemberRefUpdate> getMemberOfs(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -155,7 +151,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("media/{entity:(media|program|group|segment)}/{id}/memberOf")
+    @Path("{entity:(media|program|group|segment)}/{id}/memberOf")
     Response addMemberOf(
         MemberRefUpdate memberRefUpdate,
         @PathParam("entity") final String entity,
@@ -166,7 +162,7 @@ public interface MediaBackendRestService {
 
 
     @DELETE
-    @Path("media/{entity:(media|program|group|segment)}/{id}/memberOf/{owner}")
+    @Path("{entity:(media|program|group|segment)}/{id}/memberOf/{owner}")
     Response removeMemberOf(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -178,7 +174,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("media/group/{id}/episodes")
+    @Path("group/{id}/episodes")
     MediaUpdateList<MemberUpdate> getGroupEpisodes(
         @PathParam("id") final String id,
         @QueryParam("offset") @DefaultValue("0") final Long offset,
@@ -188,7 +184,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @PUT
-    @Path("media/{entity:(media|program|group|segment)}/{id}/episodes")
+    @Path("{entity:(media|program|group|segment)}/{id}/episodes")
     Response moveEpisodes(
         MoveAction move,
         @PathParam("entity") final String entity,
@@ -198,14 +194,14 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("media/program/{id}/episodeOfs")
+    @Path("program/{id}/episodeOfs")
     MediaUpdateList<MemberRefUpdate> getEpisodeOfs(
         @PathParam("id") final String id,
         @QueryParam("followMerges") @DefaultValue("true") boolean followMerges
     ) throws IOException;
 
     @POST
-    @Path("media/program/{id}/episodeOf")
+    @Path("program/{id}/episodeOf")
     Response addEpisodeOf(
         MemberRefUpdate memberRefUpdate,
         @PathParam("id") final String id,
@@ -215,7 +211,7 @@ public interface MediaBackendRestService {
 
 
     @DELETE
-    @Path("media/program/{id}/episodeOf/{owner}")
+    @Path("program/{id}/episodeOf/{owner}")
     Response removeEpisodeOf(
         @PathParam("id") final String id,
         @PathParam("owner") final String owner,
