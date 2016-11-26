@@ -57,10 +57,10 @@ public class MediaObjectsTest {
         ScheduleEvent se = new ScheduleEvent();
         se.setStartInstant(Instant.ofEpochMilli(1444043500362L));
         program.addScheduleEvent(se);
-        assertThat(MediaObjects.getSortDate(program)).isEqualTo(se.getStart());
+        assertThat(MediaObjects.getSortInstant(program)).isEqualTo(se.getStartInstant());
         Segment segment = new Segment();
         program.addSegment(segment);
-        assertThat(MediaObjects.getSortDate(segment)).isEqualTo(se.getStart());
+        assertThat(MediaObjects.getSortInstant(segment)).isEqualTo(se.getStartInstant());
     }
 
     @Test
@@ -139,6 +139,22 @@ public class MediaObjectsTest {
             .build();
 
         final Program copy = MediaObjects.filterOnWorkflow(program, Workflow.PUBLICATIONS::contains);
+        assertThat(copy.getLocations()).hasSize(1);
+        assertThat(copy.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
+
+    }
+
+    @Test
+    public void filterPublishable() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        Location location1 = new Location("http://www.vpro.nl/1", OwnerType.BROADCASTER);
+        Location location2 = new Location("http://www.vpro.nl/2", OwnerType.BROADCASTER);
+        location2.setWorkflow(Workflow.DELETED);
+
+        final Program program = MediaBuilder.program()
+            .locations(location1, location2)
+            .build();
+
+        final Program copy = MediaObjects.filterPublishable(program);
         assertThat(copy.getLocations()).hasSize(1);
         assertThat(copy.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
 

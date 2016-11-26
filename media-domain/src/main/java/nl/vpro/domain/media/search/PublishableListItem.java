@@ -42,6 +42,9 @@ public abstract class PublishableListItem {
 
     protected Date publishStop;
 
+    protected Date lastPublished;
+
+
     protected PublishableListItem() {
     }
 
@@ -59,6 +62,8 @@ public abstract class PublishableListItem {
 
         this.publishStart = mediaObject.getPublishStart();
         this.publishStop = mediaObject.getPublishStop();
+        this.lastPublished = mediaObject.getLastPublished();
+
     }
 
     public String getUrn() {
@@ -144,5 +149,13 @@ public abstract class PublishableListItem {
 
     public void setPublishStop(Date publishStop) {
         this.publishStop = publishStop;
+    }
+
+    public Date getLastPublished() {
+        return lastPublished;
+    }
+
+    public void setLastPublished(Date lastPublished) {
+        this.lastPublished = lastPublished;
     }
 }

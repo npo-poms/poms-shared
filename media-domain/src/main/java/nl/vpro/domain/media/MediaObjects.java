@@ -6,6 +6,7 @@ package nl.vpro.domain.media;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.time.Instant;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -17,6 +18,7 @@ import nl.vpro.domain.NotFoundException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
 import static nl.vpro.domain.media.MediaObject.sorted;
@@ -402,7 +404,12 @@ public class MediaObjects {
 
     }
 
-    public static boolean trim(Collection<?> collection) {
+    public static Instant getSortInstant(MediaObject mo) {
+        return DateUtils.toInstant(getSortDate(mo));
+    }
+
+
+        public static boolean trim(Collection<?> collection) {
         boolean trimmed = false;
         for (java.util.Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
             Object next = iterator.next();
@@ -449,11 +456,22 @@ public class MediaObjects {
     }
 
 
+
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
      *
      * @TODO work in progres. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
      */
+    public static <T extends PublishableObject> T filterPublishable(T object) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Predicate<Object> p = (o) -> {
+            if (o instanceof PublishableObject) {
+                return ((PublishableObject) o).isPublishable();
+            } else {
+                return true;
+            }
+        };
+        return ObjectFilter.filter(object, p);
+    }
     public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
