@@ -470,7 +470,9 @@ public class MediaObjects {
                 return true;
             }
         };
-        return ObjectFilter.filter(object, p);
+        ObjectFilter.Result<T> result = ObjectFilter.filter(object, p);
+        LOG.debug("Filtered {} from {}", result.filterCount(), result.get());
+        return result.get();
     }
     public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Predicate<Object> p = (o) -> {
@@ -480,7 +482,9 @@ public class MediaObjects {
                 return true;
             }
         };
-        return ObjectFilter.filter(object, p);
+        ObjectFilter.Result<T> result = ObjectFilter.filter(object, p);
+        LOG.debug("Filtered {} from {}", result.filterCount(), result.get());
+        return result.get();
     }
 
 }
