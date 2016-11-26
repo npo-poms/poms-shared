@@ -5,23 +5,19 @@
 package nl.vpro.domain.media;
 
 import java.io.*;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
 import java.util.*;
-import java.util.function.Supplier;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-
 import nl.vpro.domain.NotFoundException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+import nl.vpro.util.ObjectFilter;
 
 import static nl.vpro.domain.media.MediaObject.sorted;
 
@@ -59,12 +55,7 @@ public class MediaObjects {
     }
 
     public static Collection<String> filterCrids(Collection<String> crids, final String contains) {
-        return Collections2.filter(crids, new Predicate<String>() {
-            @Override
-            public boolean apply(String crid) {
-                return crid != null && crid.contains(contains);
-            }
-        });
+        return crids.stream().filter(crid -> crid != null && crid.contains(contains)).collect(Collectors.toList());
     }
 
     /**
@@ -464,64 +455,14 @@ public class MediaObjects {
      * @TODO work in progres. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
      */
     public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        return _filterOnWorkflow(object, predicate, new HashMap<>());
-    }
-
-    protected static Collection<?> filterCollectionOnWorkflow(Collection<?> object, Supplier<Collection> constructor, Predicate<Workflow> predicate, Map<Integer, Object> objects) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Collection<Object> copyOfList = constructor.get();
-        for (Object o : object) {
-            if (!(o instanceof PublishableObject)) {
-                copyOfList.add(o);
+        Predicate<Object> p = (o) -> {
+            if (o instanceof PublishableObject) {
+                return predicate.test(((PublishableObject) o).getWorkflow());
             } else {
-                if (predicate.apply(((PublishableObject) o).getWorkflow())) {
-                    copyOfList.add(_filterOnWorkflow(o, predicate, objects));
-                }
+                return true;
             }
-        }
-        return copyOfList;
-
+        };
+        return ObjectFilter.filter(object, p);
     }
 
-    public static <T> T _filterOnWorkflow(final T object, final Predicate<Workflow> predicate, final Map<Integer, Object> objects) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        if (object == null)  {
-            return null;
-        } else if (object instanceof List) {
-            return (T) filterCollectionOnWorkflow((List) object, ArrayList::new, predicate, objects);
-        } else if (object instanceof Set) {
-            return (T) filterCollectionOnWorkflow((Set) object, TreeSet::new, predicate, objects);
-        } else if (! (object instanceof PublishableObject)) {
-            return object;
-        } else {
-            int hash = object.hashCode();
-            if (! objects.containsKey(hash)) {
-                Class<T> clazz = (Class<T>) object.getClass();
-                T copy = clazz.getConstructor().newInstance();
-                objects.put(hash, copy);
-                for (Field f : listAllFields(clazz)) {
-                    if (Modifier.isStatic(f.getModifiers())) {
-                        continue;
-                    }
-                    if (Modifier.isTransient(f.getModifiers())) {
-                        continue;
-                    }
-                    f.setAccessible(true);
-                    Object cloned = _filterOnWorkflow(f.get(object), predicate, objects);
-                    f.set(copy, cloned);
-                }
-                return copy;
-            } else {
-                return (T) objects.get(hash);
-            }
-
-        }
-    }
-    protected static List<Field> listAllFields(Class clazz) {
-        List<Field> fieldList = new ArrayList<Field>();
-        Class tmpClass = clazz;
-        while (tmpClass != null) {
-            fieldList.addAll(Arrays.asList(tmpClass.getDeclaredFields()));
-            tmpClass = tmpClass.getSuperclass();
-        }
-        return fieldList;
-    }
 }
