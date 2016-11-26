@@ -155,15 +155,15 @@ public class MediaForm {
     }
 
     public MediaForm(MediaPager pager) {
-        this(pager, null, null, null, null, false, false, false, null, null, null, null, null, false, false, false);
+        this(pager, (String) null);
     }
 
     public MediaForm(MediaPager pager, String text) {
-        this(pager, null, null, text, null, false, false, false, null, null, null, null, null, false, false, false);
+        this(pager, null, null, text, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public MediaForm(MediaPager pager, Collection<MediaType> types) {
-        this(pager, null, null, null, types, false, false, false, null, null, null, null, null, false, false, false);
+        this(pager, null, null, null, types, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @Builder
@@ -353,7 +353,7 @@ public class MediaForm {
     }
 
     public Boolean hasNoMembers() {
-        return noMembers;
+        return noMembers == null ? false : noMembers;
     }
 
     public void setNoMembers(Boolean noMembers) {
