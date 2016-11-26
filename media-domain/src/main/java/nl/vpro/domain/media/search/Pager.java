@@ -27,7 +27,10 @@ public abstract class Pager<S extends SortField> {
     private Direction order = Direction.ASC;
 
     public Pager(long offset, Integer max, S sort, Direction order) {
-        if(offset < 0 || (max != null && max < 0) || order == null) {
+        if (order == null) {
+            order = Direction.ASC;
+        }
+        if(offset < 0 || (max != null && max < 0)) {
             throw new IllegalArgumentException(String.format("Must supply valid arguments, got offset: %1$s, max: %d$s %2$s, sort: %3$s, order: %4$s", offset, max, sort, order));
         }
 
