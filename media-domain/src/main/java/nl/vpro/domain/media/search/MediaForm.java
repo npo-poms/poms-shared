@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.search;
 
 import lombok.Builder;
+import lombok.Singular;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -169,7 +170,7 @@ public class MediaForm {
     @Builder
     public MediaForm(
         MediaPager pager,
-        Collection<String> broadcasters,
+        @Singular  Collection<String> broadcasters,
         Collection<String> portals,
         String text,
         Collection<MediaType> types,
