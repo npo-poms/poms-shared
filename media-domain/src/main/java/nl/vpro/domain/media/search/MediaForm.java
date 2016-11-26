@@ -4,11 +4,14 @@
  */
 package nl.vpro.domain.media.search;
 
+import lombok.Builder;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -163,6 +166,7 @@ public class MediaForm {
         this(pager, null, null, null, types, false, false, false, null, null, null, null, null, false, false, false);
     }
 
+    @Builder
     public MediaForm(
         MediaPager pager,
         Collection<String> broadcasters,
@@ -182,7 +186,7 @@ public class MediaForm {
         Boolean noCredits) {
 
         if(pager == null) {
-            throw new IllegalArgumentException("Must supply a pager, got null");
+            pager = MediaPager.builder().build();
         }
 
         this.pager = pager;
@@ -356,8 +360,8 @@ public class MediaForm {
         this.noMembers = noMembers;
     }
 
-    public Boolean hasNoCredits() {
-        return noCredits;
+    public boolean hasNoCredits() {
+        return noCredits == null ? false : noCredits;
     }
 
     public void setNoCredits(Boolean noCredits) {
@@ -518,4 +522,27 @@ public class MediaForm {
             return Collections.unmodifiableCollection(col);
         }
     }
+
+    void beforeUnmarshal(Unmarshaller u, Object parent) {
+        if (! isNotAnEpisode()) {
+            this.notAnEpisode = null;
+        }
+        if (!hasNoCredits()) {
+            this.noCredits = null;
+        }
+        if (!hasNoMembers()) {
+            this.noMembers = null;
+        }
+        if (!hasNoPlaylist()) {
+            this.noPlaylist = null;
+        }
+        if (!hasNoBroadcast()) {
+            this.noBroadcast = null;
+        }
+        if (!hasLocations()) {
+            this.hasLocations = null;
+        }
+
+    }
+
 }

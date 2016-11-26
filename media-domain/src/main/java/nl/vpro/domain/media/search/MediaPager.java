@@ -26,16 +26,16 @@ public class MediaPager extends Pager<MediaSortField> {
 
     @Builder
     public MediaPager(long offset, Integer max, MediaSortField sort, Direction order) {
-        super(offset, max, sort, order);
+        super(offset, max, sort == null ? creationDate : sort, order);
     }
 
     public MediaPager(Integer max) {
-        this(0, max, creationDate, Direction.ASC);
+        this(0, max, null, Direction.ASC);
     }
 
 
     public MediaPager() {
-        this(0, null, creationDate, Direction.ASC);
+        this(0, null, null, Direction.ASC);
     }
 
     @Override
