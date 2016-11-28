@@ -1,9 +1,16 @@
 package nl.vpro.domain.media.support;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
+
+import nl.vpro.domain.Xmlns;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.0
  */
+@XmlEnum
+@XmlType(name = "licenseEnum", namespace = Xmlns.SHARED_NAMESPACE)
 public enum License implements Displayable {
 
 

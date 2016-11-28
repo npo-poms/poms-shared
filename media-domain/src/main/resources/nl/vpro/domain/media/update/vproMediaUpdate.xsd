@@ -246,7 +246,9 @@
     <xs:sequence>
       <xs:element name="title" type="media:baseTextType" form="qualified"/>
       <xs:element name="description" type="xs:string" form="qualified" minOccurs="0"/>
-      <xs:element name="source" type="xs:string" form="qualified" minOccurs="0"/>
+      <xs:element name="source" type="xs:string" minOccurs="0"/>
+      <xs:element name="sourceName" type="xs:string" minOccurs="0"/>
+      <xs:element name="license" type="shared:licenseEnum" minOccurs="0"/>
       <xs:element name="width" type="xs:int" form="qualified" minOccurs="0"/>
       <xs:element name="height" type="xs:int" form="qualified" minOccurs="0"/>
       <xs:element name="credits" type="xs:string" form="qualified" minOccurs="0"/>
