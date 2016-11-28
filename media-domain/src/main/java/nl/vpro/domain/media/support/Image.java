@@ -29,6 +29,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.secondscreen.Screen;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.ImageURI;
 import nl.vpro.validation.NoHtml;
@@ -158,6 +159,12 @@ public class Image extends PublishableObject implements Ownable {
 //    @JoinColumn(insertable=false, updatable=false, nullable=false)
     @XmlTransient
     private MediaObject mediaObject;
+
+    @ManyToOne
+//    @JoinColumn(insertable=false, updatable=false, nullable=false)
+    @XmlTransient
+    private Screen screen;
+
 
     public Image() {
     }
@@ -397,6 +404,14 @@ public class Image extends PublishableObject implements Ownable {
 
     public void setMediaObject(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
+    }
+
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public void setScreen(Screen mediaObject) {
+        this.screen = mediaObject;
     }
 
     public int getListIndex() {
