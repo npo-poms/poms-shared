@@ -43,4 +43,10 @@ public class MediaPager extends Pager<MediaSortField> {
     public MediaSortField getSort() {
         return super.getSort();
     }
+
+    @Override
+    public void setSort(MediaSortField sort) {
+        super.setSort(sort);
+    }
+
 }
