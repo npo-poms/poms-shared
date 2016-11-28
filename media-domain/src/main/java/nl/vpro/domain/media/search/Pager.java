@@ -49,9 +49,14 @@ public abstract class Pager<S extends SortField> {
         return max;
     }
 
-    public S getSort() {
+    protected S getSort() {
         return sort;
     }
+
+    protected void setSort(S sort) {
+        this.sort = sort;
+    }
+
     public String getSortField() {
         return getSort().name();
     }

@@ -38,4 +38,10 @@ public class SchedulePager extends Pager<ScheduleSortField> {
     public ScheduleSortField getSort() {
         return super.getSort();
     }
+
+
+    @Override
+    public void setSort(ScheduleSortField sort) {
+        super.setSort(sort);
+    }
 }
