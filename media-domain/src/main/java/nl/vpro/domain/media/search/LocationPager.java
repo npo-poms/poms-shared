@@ -38,4 +38,9 @@ public class LocationPager extends Pager<LocationSortField> {
     public LocationSortField getSort() {
         return super.getSort();
     }
+
+    @Override
+    public void setSort(LocationSortField sort) {
+        super.setSort(sort);
+    }
 }
