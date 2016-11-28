@@ -156,12 +156,10 @@ public class Image extends PublishableObject implements Ownable {
     private int listIndex = 0;
 
     @ManyToOne
-//    @JoinColumn(insertable=false, updatable=false, nullable=false)
     @XmlTransient
     private MediaObject mediaObject;
 
     @ManyToOne
-//    @JoinColumn(insertable=false, updatable=false, nullable=false)
     @XmlTransient
     private Screen secondscreen;
 
