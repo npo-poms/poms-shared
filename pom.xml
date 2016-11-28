@@ -35,7 +35,6 @@
     <module>pages-domain</module>
     <module>image-domain</module>
     <module>subtitles-domain</module>
-    <module>media-secondscreen</module>
     <module>media-odi</module>
     <module>media-rs-services</module>
 
