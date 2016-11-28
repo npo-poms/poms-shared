@@ -163,7 +163,7 @@ public class Image extends PublishableObject implements Ownable {
     @ManyToOne
 //    @JoinColumn(insertable=false, updatable=false, nullable=false)
     @XmlTransient
-    private Screen screen;
+    private Screen secondscreen;
 
 
     public Image() {
@@ -406,12 +406,12 @@ public class Image extends PublishableObject implements Ownable {
         this.mediaObject = mediaObject;
     }
 
-    public Screen getScreen() {
-        return screen;
+    public Screen getSecondscreen() {
+        return secondscreen;
     }
 
-    public void setScreen(Screen mediaObject) {
-        this.screen = mediaObject;
+    public void setSecondscreen(Screen mediaObject) {
+        this.secondscreen = mediaObject;
     }
 
     public int getListIndex() {
