@@ -2,8 +2,8 @@ package nl.vpro.domain.media.search;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.TreeSet;
 
 import javax.xml.bind.JAXB;
@@ -33,8 +33,8 @@ public class MediaListTest {
     @Test
     public void marshalMediaListItem() throws IOException, SAXException {
         Program program = JAXB.unmarshal(new StringReader("<program xmlns=\"urn:vpro:media:2009\" urn='urn:vpro:media:program:123'><broadcaster>VPRO</broadcaster></program>"), Program.class);
-        program.setCreationDate(new Date(1343922085885L));
-        program.setLastModified(new Date(1343922085885L));
+        program.setCreationInstant(Instant.ofEpochMilli(1343922085885L));
+        program.setLastModifiedInstant(Instant.ofEpochMilli(1343922085885L));
         program.setCreatedBy(TestEditors.vproEditor());
         program.setType(ProgramType.CLIP);
         program.setAVType(AVType.VIDEO);

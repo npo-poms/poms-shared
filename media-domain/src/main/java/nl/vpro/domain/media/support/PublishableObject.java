@@ -8,6 +8,7 @@ package nl.vpro.domain.media.support;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -17,7 +18,10 @@ import java.util.zip.CRC32;
 import javax.persistence.*;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -31,6 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
+import nl.vpro.util.DateUtils;
 import nl.vpro.validation.Publishable;
 
 /**
@@ -301,6 +306,24 @@ public abstract class PublishableObject extends DomainObject {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+
+    public Instant getLastModifiedInstant() {
+        return DateUtils.toInstant(getLastModified());
+    }
+
+    public void setLastModifiedInstant(Instant lastModified) {
+        setLastModified(DateUtils.toDate(lastModified));
+    }
+
+
+    public Instant getCreationInstant() {
+        return DateUtils.toInstant(getCreationDate());
+    }
+
+    public void setCreationInstant(Instant creationDate) {
+        setCreationDate(DateUtils.toDate(creationDate));
     }
 
     public Editor getCreatedBy() {
