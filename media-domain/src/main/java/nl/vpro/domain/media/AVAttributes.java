@@ -2,6 +2,8 @@ package nl.vpro.domain.media;
 
 import java.io.Serializable;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
