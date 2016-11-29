@@ -18,12 +18,12 @@ public class ApiMediaIndex {
         return source("setting/apimedia.json");
     }
 
-    public static String source(String s) {
+    public static String source(String name) {
         try {
             StringWriter writer = new StringWriter();
-            InputStream inputStream = ApiMediaIndex.class.getClassLoader().getResourceAsStream(s);
+            InputStream inputStream = ApiMediaIndex.class.getClassLoader().getResourceAsStream(name);
             if (inputStream == null) {
-                throw new IllegalStateException("Could not find " + s);
+                throw new IllegalStateException("Could not find " + name);
             }
             IOUtils.copy(inputStream, writer, "utf-8");
             return writer.toString();
