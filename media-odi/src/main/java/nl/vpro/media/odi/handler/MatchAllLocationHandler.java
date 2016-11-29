@@ -27,6 +27,6 @@ public class MatchAllLocationHandler implements LocationHandler {
 
     @Override
     public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
-        return new LocationResult(location.getAvFileFormat(), location.getBitrate(), location.getProgramUrl());
+        return LocationResult.of(location);
     }
 }

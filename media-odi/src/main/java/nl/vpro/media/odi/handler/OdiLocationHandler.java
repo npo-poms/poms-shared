@@ -4,6 +4,8 @@
  */
 package nl.vpro.media.odi.handler;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,8 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.LocationHandler;
@@ -25,10 +25,9 @@ import nl.vpro.media.odi.util.LocationResult;
 /**
  * TODO
  */
+@Slf4j
 public class OdiLocationHandler implements LocationHandler {
     private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
-
-    private static Logger log = LoggerFactory.getLogger(OdiLocationHandler.class);
 
     private static String ODI_SCHEME_PREFIX = "odi+";
 

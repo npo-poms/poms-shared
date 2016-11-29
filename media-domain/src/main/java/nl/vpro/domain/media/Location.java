@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -161,11 +163,38 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         this.avAttributes = avAttributes;
     }
 
+
     public Location(String programUrl, OwnerType owner, AVAttributes avAttributes, Duration duration) {
         this(programUrl, owner, avAttributes);
         this.duration = duration;
     }
 
+    @Builder
+    public Location(
+        String programUrl,
+        OwnerType owner,
+        AVAttributes avAttributes,
+        Duration duration,
+        Integer bitrate,
+        AVFileFormat avFileFormat,
+        AudioAttributes audioAttributes,
+        VideoAttributes videoAttributes
+    ) {
+        this.programUrl = programUrl;
+        this.owner = owner;
+        if (avAttributes == null) {
+            avAttributes = new AVAttributes();
+        };
+        this.duration = duration;
+        this.avAttributes = AVAttributes
+            .builder()
+            .bitrate(bitrate == null ? avAttributes.getBitrate() : bitrate)
+            .avFileFormat(avFileFormat == null ? avAttributes.getAvFileFormat() : avFileFormat)
+            .audioAttributes(audioAttributes == null ? avAttributes.getAudioAttributes() : audioAttributes)
+            .videoAttributes(videoAttributes == null ? avAttributes.getVideoAttributes() : videoAttributes)
+            .build();
+
+    }
 
     @Deprecated
     public Location(String programUrl, OwnerType owner, AVAttributes avAttributes, Date duration) {

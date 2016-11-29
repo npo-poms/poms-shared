@@ -7,6 +7,7 @@ package nl.vpro.media.odi.util;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.AVFileFormat;
+import nl.vpro.domain.media.Location;
 
 /**
  * @author Roelof Jan Koekoek
@@ -29,6 +30,9 @@ public class LocationResult {
     protected LocationResult() {
     }
 
+    public static LocationResult of(Location location) {
+        return new LocationResult(location.getAvFileFormat(), location.getBitrate(), location.getProgramUrl());
+    }
 
     public LocationResult(AVFileFormat avFileFormat, Integer bitrate, String programUrl) {
         this.avFileFormat = avFileFormat;

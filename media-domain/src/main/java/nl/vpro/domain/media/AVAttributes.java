@@ -1,22 +1,15 @@
 package nl.vpro.domain.media;
 
+import lombok.Builder;
+
+import java.io.Serializable;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
 
 @Entity(name = "avattributes")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -68,10 +61,16 @@ public class AVAttributes implements Serializable {
         this.avFileFormat = avFileFormat;
     }
 
+    @Builder
+    public AVAttributes(Integer bitrate, AVFileFormat avFileFormat, AudioAttributes audioAttributes, VideoAttributes videoAttributes) {
+        this.bitrate = bitrate;
+        this.avFileFormat = avFileFormat;
+        this.audioAttributes = audioAttributes;
+        this.videoAttributes = videoAttributes;
+    }
+
     public AVAttributes(AVAttributes source) {
-        this(source.bitrate, source.avFileFormat);
-        this.audioAttributes = AudioAttributes.copy(source.audioAttributes);
-        this.videoAttributes = VideoAttributes.copy(source.videoAttributes);
+        this(source.bitrate, source.avFileFormat, AudioAttributes.copy(source.audioAttributes), VideoAttributes.copy(source.videoAttributes));
     }
 
     public static AVAttributes copy(AVAttributes source){
