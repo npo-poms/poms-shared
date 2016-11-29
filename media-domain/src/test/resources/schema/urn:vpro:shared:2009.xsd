@@ -3,8 +3,6 @@
 
   <xs:element name="image" type="tns:imageType"/>
 
-  <xs:element name="license" type="tns:licenseEnum"/>
-
   <xs:complexType name="publishableObjectType" abstract="true">
     <xs:complexContent>
       <xs:extension base="tns:domainObjectType">
