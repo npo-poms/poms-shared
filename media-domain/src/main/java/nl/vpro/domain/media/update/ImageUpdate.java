@@ -107,7 +107,6 @@ public class ImageUpdate {
     @NotNull(groups = {WarningValidatorGroup.class})
     private String source;
 
-    @URL
     @XmlElement
     @Size.List({
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
