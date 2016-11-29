@@ -22,6 +22,9 @@ import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.LocationHandler;
 import nl.vpro.media.odi.util.LocationResult;
 
+/**
+ * TODO
+ */
 public class OdiLocationHandler implements LocationHandler {
     private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 

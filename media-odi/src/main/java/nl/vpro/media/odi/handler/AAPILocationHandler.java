@@ -37,6 +37,9 @@ import nl.vpro.media.odi.LocationHandler;
 import nl.vpro.media.odi.util.InetAddressUtil;
 import nl.vpro.media.odi.util.LocationResult;
 
+/**
+ * TODO
+ */
 public class AAPILocationHandler implements LocationHandler {
     private static Logger LOG = LoggerFactory.getLogger(AAPILocationHandler.class);
 
@@ -55,7 +58,6 @@ public class AAPILocationHandler implements LocationHandler {
      *
      * @param location location with a programUrl
      * @param pubOptions ordered list with puboptions which should contain one of [m3u8, f4m]
-     * @return
      */
     @Override
     public boolean supports(Location location, String... pubOptions) {

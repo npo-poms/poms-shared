@@ -9,10 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.util.LocationResult;
 
+
+/**
+ * TODO
+ */
 public interface LocationHandler {
 
+    /**
+     * TODO
+     */
     boolean supports(Location location, String... pubOptions);
 
+    /**
+     * TODO
+     */
     LocationResult handle(Location location, HttpServletRequest request, String... pubOptions);
 
 }
