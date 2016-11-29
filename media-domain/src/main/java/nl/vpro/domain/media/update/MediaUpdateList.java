@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.xml.bind.annotation.*;
 
@@ -87,5 +88,9 @@ public class MediaUpdateList<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return list == null ? Collections.<T>emptyList().iterator() : list.iterator();
+    }
+
+    public Stream<T> stream() {
+        return list == null ? Stream.empty() : list.stream();
     }
 }
