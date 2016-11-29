@@ -17,7 +17,7 @@ public class ImageUpdateTest {
 
     @Test
     public void xml() throws IOException, SAXException {
-        ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a")); // redirects
+        ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
         update.setCredits(getClass().getName());
