@@ -15,17 +15,20 @@
           <property name="odiPlusApplication" value="${odiplus.aplication}"/>
         </bean>
 -->
+
         <bean class="nl.vpro.media.odi.handler.OdiLocationHandler">
           <property name="odiBaseUrl" value="${odi.baseUrl}"/>
           <property name="odiApplication" value="${odi.aplication}"/>
           <property name="odiSecret" value="${odi.secret}"/>
         </bean>
+
         <bean class="nl.vpro.media.odi.handler.DeeplinkProtectionLocationHandler">
           <property name="streamAPISecret" value="${streamAPI.secret}"/>
         </bean>
         <bean class="nl.vpro.media.odi.handler.AAPILocationHandler">
           <property name="AAPIServer" value="${aapi.server}"/>
         </bean>
+        <bean class="nl.vpro.media.odi.handler.MatchAVFileFormatLocationHandler"/>
       </util:list>
     </property>
     <property name="finalHandler">

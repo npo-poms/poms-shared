@@ -59,10 +59,16 @@ public class AVAttributes implements Serializable {
         this.avFileFormat = avFileFormat;
     }
 
+    @Builder
+    public AVAttributes(Integer bitrate, AVFileFormat avFileFormat, AudioAttributes audioAttributes, VideoAttributes videoAttributes) {
+        this.bitrate = bitrate;
+        this.avFileFormat = avFileFormat;
+        this.audioAttributes = audioAttributes;
+        this.videoAttributes = videoAttributes;
+    }
+
     public AVAttributes(AVAttributes source) {
-        this(source.bitrate, source.avFileFormat);
-        this.audioAttributes = AudioAttributes.copy(source.audioAttributes);
-        this.videoAttributes = VideoAttributes.copy(source.videoAttributes);
+        this(source.bitrate, source.avFileFormat, AudioAttributes.copy(source.audioAttributes), VideoAttributes.copy(source.videoAttributes));
     }
 
     public static AVAttributes copy(AVAttributes source){
