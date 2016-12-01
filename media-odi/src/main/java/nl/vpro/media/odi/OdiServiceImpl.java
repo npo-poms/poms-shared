@@ -4,8 +4,11 @@
  */
 package nl.vpro.media.odi;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.*;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import nl.vpro.domain.media.AVFileFormat;
@@ -20,6 +23,7 @@ import nl.vpro.media.odi.util.LocationResult;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
+@Slf4j
 public class OdiServiceImpl implements OdiService {
 
     private static final List<String> ODIP_OPTIONS = Arrays.asList("m3u8", "f4m");
@@ -113,6 +117,11 @@ public class OdiServiceImpl implements OdiService {
      */
     public void setFinalHandler(LocationHandler finalHandler) {
         this.finalHandler = finalHandler;
+    }
+
+    @PostConstruct
+    public void log() {
+        log.info("using {} (final handler: {})", handlers, finalHandler);
     }
 
     private LocationResult handleLocations(MediaObject media, Comparator<Location> comparator, HttpServletRequest request, String... pubOptions) {
