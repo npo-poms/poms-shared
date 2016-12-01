@@ -151,10 +151,6 @@ public class Image extends PublishableObject implements Ownable {
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String date;
 
-    @Column(name = "list_index", nullable = false)
-    @XmlTransient
-    private int listIndex = 0;
-
     @ManyToOne
     @XmlTransient
     private MediaObject mediaObject;
@@ -410,14 +406,6 @@ public class Image extends PublishableObject implements Ownable {
 
     public void setSecondscreen(Screen mediaObject) {
         this.secondscreen = mediaObject;
-    }
-
-    public int getListIndex() {
-        return listIndex;
-    }
-
-    public void setListIndex(int listIndex) {
-        this.listIndex = listIndex;
     }
 
     @Override

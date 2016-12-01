@@ -2370,20 +2370,12 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     public MediaObject addImage(Image image, int index) {
         if (images == null) {
             images = new ArrayList<>();
-        } else if (images.contains(image)) {
-            return this;
         }
 
-        if (index >= images.size()) {
-            images.add(image);
-        } else {
-            images.add(index, image);
-        }
+        images.add(index, image);
 
-        if (image != null) {
-            image.setMediaObject(this);
-            image.setListIndex(images.size());
-        }
+        image.setMediaObject(this);
+
         return this;
     }
 
