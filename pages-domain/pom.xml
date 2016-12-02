@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.publiekeomroep</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>4.8.12-SNAPSHOT</version>
+    <version>4.8.11</version>
   </parent>
 
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-domain</artifactId>
-  <version>4.8.12-SNAPSHOT</version>
+  <version>4.8.11</version>
 
   <name>pages-domain</name>
 
