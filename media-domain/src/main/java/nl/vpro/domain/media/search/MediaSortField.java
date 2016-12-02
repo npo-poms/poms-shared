@@ -43,4 +43,11 @@ public enum MediaSortField implements SortField {
     public Type type() {
         return t;
     }
+
+    public static MediaSortField valueOfNullable(String string) {
+        if (string == null) {
+            return null;
+        }
+        return valueOf(string);
+    }
 }
