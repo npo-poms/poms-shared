@@ -153,7 +153,7 @@ public class ImageUpdate {
         date = image.getDate();
         offset = image.getOffset();
         license = image.getLicense();
-        sourceName = image.getSource();
+        sourceName = image.getSourceName();
     }
 
     public Image toImage(String urn) {
