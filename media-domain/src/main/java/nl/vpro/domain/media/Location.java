@@ -250,8 +250,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
                 to = new Location(owner);
             }
 
-            if(!owner.equals(to.getOwner())) {
-                throw new UnsupportedOperationException("Can not update the owner field for a location");
+            if(to.getOwner() != null && !Objects.equals(owner, to.getOwner())) {
+                LOG.info("Updating owner of {} {} -> {}", to, to.getOwner(), owner);
             }
 
             to.setProgramUrl(from.getProgramUrl());
