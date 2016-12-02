@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:media:update:2009" xmlns="urn:vpro:media:update:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:tns="urn:vpro:media:update:2009" xmlns:media="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="urn:vpro:media:2009" schemaLocation="urn:vpro:media:2009.xsd"/>
+
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
+
+  <xs:import namespace="http://www.w3.org/2005/05/xmlmime" schemaLocation="http://www.w3.org/2005/05/xmlmime"/>
+  <xs:element name="group" type="groupUpdateType"/>
+
+  <xs:element name="image" type="imageUpdateType"/>
+
+  <xs:element name="location" type="locationUpdateType"/>
+
+  <xs:element name="memberRef" type="memberRefUpdateType"/>
+
+  <xs:element name="memberUpdate" type="memberUpdateType"/>
+
+  <xs:element name="midAndType" type="midAndTypeType"/>
+
+  <xs:element name="move" type="moveActionType"/>
+
+  <xs:element name="person" type="personUpdateType"/>
+
+  <xs:element name="program" type="programUpdateType"/>
+
+  <xs:element name="segment" type="segmentUpdateType"/>
+
+  <xs:complexType name="midAndTypeType">
+    <xs:sequence>
+      <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="mid" type="xs:string"/>
+    <xs:attribute name="type" type="media:mediaTypeEnum"/>
+  </xs:complexType>
+
+  <xs:complexType name="programUpdateType" final="extension restriction">
+    <xs:complexContent>
+      <xs:extension base="mediaUpdateType">
+        <xs:sequence>
+          <xs:element name="episodeOf" type="memberRefUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="segments" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="segment" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+        <xs:attribute name="type" type="media:programTypeEnum"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="mediaUpdateType" abstract="true">
+    <xs:sequence>
+      <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="broadcaster" type="xs:string" maxOccurs="unbounded"/>
+      <xs:element name="portal" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="exclusive" type="portalRestrictionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="region" type="geoRestrictionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="title" type="titleUpdateType" maxOccurs="unbounded"/>
+      <xs:element name="description" type="descriptionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="avAttributes" type="avAtributeUpdateType" minOccurs="0"/>
+      <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
+      <xs:element name="duration" type="xs:duration" minOccurs="0"/>
+      <xs:element name="credits" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="person" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="memberOf" type="memberRefUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ageRating" type="media:ageRating" minOccurs="0"/>
+      <xs:element name="contentRating" type="media:contentRatingEnum" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="website" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="locations" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="location" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="scheduleEvents" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="scheduleEvent" type="scheduleEventUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="relation" type="relationUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="images" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="image" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="asset" type="assetType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="avType" type="media:avTypeEnum"/>
+    <xs:attribute name="deleted" type="xs:boolean"/>
+    <xs:attribute name="embeddable" type="xs:boolean"/>
+    <xs:attribute name="mid" type="xs:string"/>
+    <xs:attribute name="publishStart" type="xs:dateTime"/>
+    <xs:attribute name="publishStop" type="xs:dateTime"/>
+    <xs:attribute name="urn" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="memberRefUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="position" type="xs:int"/>
+        <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="segmentUpdateType" final="extension restriction">
+    <xs:complexContent>
+      <xs:extension base="mediaUpdateType">
+        <xs:sequence>
+          <xs:element name="start" type="xs:duration"/>
+        </xs:sequence>
+        <xs:attribute name="midRef" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="portalRestrictionUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="start" type="xs:dateTime"/>
+        <xs:attribute name="stop" type="xs:dateTime"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="geoRestrictionUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="media:region">
+        <xs:attribute name="start" type="xs:dateTime"/>
+        <xs:attribute name="stop" type="xs:dateTime"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="titleUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="media:textualTypeEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="descriptionUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="media:textualTypeEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="avAtributeUpdateType">
+    <xs:sequence>
+      <xs:element name="bitrate" type="xs:int" minOccurs="0"/>
+      <xs:element name="avFileFormat" type="media:avFileFormatEnum"/>
+      <xs:element name="videoAttributes" type="videoAttributesUpdateType" minOccurs="0"/>
+      <xs:element name="audioAttributes" type="audioAttributesUpdateType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="videoAttributesUpdateType">
+    <xs:sequence>
+      <xs:element name="aspectRatio" type="media:aspectRatio" minOccurs="0"/>
+      <xs:element name="color" type="media:colorType" minOccurs="0"/>
+      <xs:element name="coding" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="width" type="xs:int"/>
+    <xs:attribute name="height" type="xs:int"/>
+  </xs:complexType>
+
+  <xs:complexType name="audioAttributesUpdateType">
+    <xs:sequence>
+      <xs:element name="channels" type="xs:int" minOccurs="0"/>
+      <xs:element name="coding" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="personUpdateType">
+    <xs:sequence>
+      <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+      <xs:element name="familyName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="role" type="media:roleType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="locationUpdateType">
+    <xs:sequence>
+      <xs:element name="programUrl" type="xs:string"/>
+      <xs:element name="avAttributes" type="avAtributeUpdateType"/>
+      <xs:element name="offset" type="xs:duration" minOccurs="0"/>
+      <xs:element name="duration" type="xs:duration" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="publishStart" type="xs:dateTime"/>
+    <xs:attribute name="publishStop" type="xs:dateTime"/>
+    <xs:attribute name="urn" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="scheduleEventUpdateType">
+    <xs:sequence>
+      <xs:element name="start" type="xs:dateTime"/>
+      <xs:element name="duration" type="xs:duration"/>
+    </xs:sequence>
+    <xs:attribute name="channel" type="media:channelEnum" use="required"/>
+    <xs:attribute name="net" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="relationUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="xs:string" use="required"/>
+        <xs:attribute name="broadcaster" type="xs:string" use="required"/>
+        <xs:attribute name="uriRef" type="xs:string"/>
+        <xs:attribute name="urn" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="imageUpdateType">
+    <xs:sequence>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="source" type="xs:string" minOccurs="0"/>
+      <xs:element name="sourceName" type="xs:string" minOccurs="0"/>
+      <xs:element name="license" type="media:license" minOccurs="0"/>
+      <xs:element name="width" type="xs:int" minOccurs="0"/>
+      <xs:element name="height" type="xs:int" minOccurs="0"/>
+      <xs:element name="credits" type="xs:string" minOccurs="0"/>
+      <xs:element name="date" type="xs:string" minOccurs="0"/>
+      <xs:element name="offset" type="xs:duration" minOccurs="0"/>
+      <xs:choice minOccurs="0">
+        <xs:element name="imageData" type="imageDataType"/>
+        <xs:element name="imageLocation" type="imageLocationType"/>
+        <xs:element name="urn" type="xs:string"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="type" type="shared:imageTypeEnum" use="required"/>
+    <xs:attribute name="publishStart" type="xs:dateTime"/>
+    <xs:attribute name="publishStop" type="xs:dateTime"/>
+    <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="imageDataType">
+    <xs:sequence>
+      <xs:element name="data" xmime:expectedContentTypes="application/octet-stream" type="xs:base64Binary" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="imageLocationType">
+    <xs:sequence>
+      <xs:element name="url" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assetType">
+    <xs:sequence>
+      <xs:choice minOccurs="0">
+        <xs:element name="assetData" type="assetDataType"/>
+        <xs:element name="assetLocation" type="assetLocationType"/>
+      </xs:choice>
+    </xs:sequence>
+    <xs:attribute name="publishStart" type="xs:dateTime"/>
+    <xs:attribute name="publishStop" type="xs:dateTime"/>
+  </xs:complexType>
+
+  <xs:complexType name="assetDataType">
+    <xs:sequence>
+      <xs:element name="data" xmime:expectedContentTypes="application/octet-stream" type="xs:base64Binary" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assetLocationType">
+    <xs:sequence>
+      <xs:element name="url" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="groupUpdateType" final="extension restriction">
+    <xs:complexContent>
+      <xs:extension base="mediaUpdateType">
+        <xs:sequence>
+          <xs:element name="poSeriesID" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="ordered" type="xs:boolean"/>
+        <xs:attribute name="type" type="media:groupTypeEnum"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="moveActionType">
+    <xs:sequence>
+      <xs:element name="from" type="xs:int"/>
+      <xs:element name="to" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bulkUpdateType">
+    <xs:sequence>
+      <xs:element name="titles" type="titleUpdateType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="descriptions" type="descriptionUpdateType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="tags" type="media:tagType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="memberUpdateType">
+    <xs:sequence>
+      <xs:element name="mediaUpdate" type="mediaUpdateType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="position" type="xs:int"/>
+    <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
+  </xs:complexType>
+</xs:schema>
+

@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>nl.vpro.poms</groupId>
+    <artifactId>poms-parent</artifactId>
+    <version>4.8.11</version>
+  </parent>
+
+  <groupId>nl.publiekeomroep</groupId>
+  <artifactId>poms-shared-parent</artifactId>
+  <version>4.8.11</version>
+  <packaging>pom</packaging>
+
+  <name>poms-shared-parent</name>
+
+  <properties>
+    <poms.shared.version>${project.version}</poms.shared.version>
+  </properties>
+
+
+  <scm>
+    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-4.8.11</connection>
+    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-4.8.11</developerConnection>
+    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/tags/REL-4.8.11</url>
+  </scm>
+
+  <modules>
+    <module>poms-shared-domain</module>
+    <module>poms-shared</module>
+    <module>poms-shared-test</module>
+    <module>poms-ext</module>
+
+    <module>user-domain</module>
+    <module>media-domain</module>
+    <module>pages-domain</module>
+    <module>image-domain</module>
+    <module>subtitles-domain</module>
+    <module>media-secondscreen</module>
+    <module>media-odi</module>
+    <module>media-rs-services</module>
+
+    <module>media-test</module>
+    <module>user-test</module>
+    <module>media-i18n</module>
+    <module>media-classification</module>
+    <module>media-organizations</module>
+    <module>media-es-mappings</module>
+    <module>pages-es-mappings</module>
+    <module>stats-services</module>
+    <module>stats-events</module>
+  </modules>
+
+  <repositories>
+    <repository>
+      <id>vpro</id>
+      <url>https://nexus.vpro.nl/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>vpro</id>
+      <url>https://nexus.vpro.nl/content/groups/public</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+</project>

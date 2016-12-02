@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           targetNamespace="urn:vpro:media:search:2012"
+           xmlns="urn:vpro:media:search:2012"
+           xmlns:media="urn:vpro:media:2009"
+           xmlns:shared="urn:vpro:shared:2009"
+           xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:import namespace="urn:vpro:shared:2009" schemaLocation="../vproShared.xsd"/>
+  <xsd:import namespace="urn:vpro:media:2009"  schemaLocation="../vproMedia.xsd"/>
+
+  <xsd:element name="mediaForm" type="mediaFormType" />
+
+  <xsd:element name="list" type="mediaListResultType"/>
+
+  <xsd:complexType name="mediaFormType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element type="pagerType"  name="pager" minOccurs="1" />
+      <xsd:element type="xsd:string" name="broadcaster" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element type="xsd:string" name="portal" minOccurs="0" maxOccurs="unbounded"/>
+      <!--
+      TODO
+      <xsd:element type="organizationType" name="organization" maxOccurs="unbounded"/>
+      -->
+      <xsd:element type="xsd:string"  name="text" minOccurs="0"/>
+      <xsd:element name="title" minOccurs="0" maxOccurs="unbounded">
+        <xsd:complexType>
+          <xsd:simpleContent>
+            <xsd:extension base="xsd:string" >
+              <xsd:attribute name="type" type="media:textualTypeEnum"/>
+              <xsd:attribute name="owner" type="shared:ownerTypeEnum"/>
+              <xsd:attribute name="tokenized" type="xsd:boolean" default="false"/>
+            </xsd:extension>
+          </xsd:simpleContent>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element type="media:mediaTypeEnum"  name="type" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="releaseYear" type="xsd:short" minOccurs="0" />
+      <xsd:element name="relation"    type="relationFormType" minOccurs="0" />
+      <xsd:element name="noBroadcast" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="hasLocations" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="noPlaylist" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="sortRange" type="dateRangeType" minOccurs="0"/>
+      <xsd:element name="eventRange" type="dateRangeType" minOccurs="0"/>
+      <xsd:element name="channel" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="createdBy" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="creationRange" type="dateRangeType" minOccurs="0"/>
+      <xsd:element name="lastModifiedBy" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="lastModifiedRange" type="dateRangeType" minOccurs="0"/>
+      <xsd:element name="tag" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="avType" type="media:avTypeEnum" minOccurs="0" />
+      <xsd:element name="notAnEpisode" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="findDeleted" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="excludedMid" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="pagerType">
+    <xsd:annotation>
+      <xsd:documentation>
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="offset" minOccurs="0">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0" />
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element name="max" minOccurs="1">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+      <xsd:element type="xsd:string" name="sort" minOccurs="0" />
+      <xsd:element name="order" minOccurs="0">
+        <xsd:simpleType>
+          <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="ASC"/>
+            <xsd:enumeration value="DESC"/>
+          </xsd:restriction>
+        </xsd:simpleType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="relationFormType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="type" type="xsd:string" />
+        <xsd:attribute name="broadcaster" type="media:organizationIdType"/>
+        <xsd:attribute name="uriRef" type="xsd:string" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="dateRangeType">
+    <xsd:sequence>
+      <xsd:element name="start" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="stop"  type="xsd:dateTime" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="mediaListResultType">
+    <xsd:sequence>
+      <xsd:element type="mediaListItem" name="item" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attribute name="totalCount" type="xsd:long" />
+    <xsd:attribute name="offset" type="xsd:long"/>
+    <xsd:attribute name="max" type="xsd:integer"/>
+    <xsd:attribute name="size" type="xsd:integer"/>
+    <xsd:attribute name="sort" type="xsd:string"/>
+    <xsd:attribute name="order">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="ASC"/>
+          <xsd:enumeration value="DESC"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+  </xsd:complexType>
+
+
+  <xsd:complexType name="mediaListItem">
+    <xsd:complexContent>
+      <xsd:extension base="publishableListItem">
+        <xsd:sequence>
+          <xsd:element name="broadcaster" type="media:organizationType"  maxOccurs="unbounded"/>
+          <xsd:element name="title" type="xsd:string" />
+          <xsd:element name="subTitle" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="description" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="creationDate" type="xsd:dateTime" />
+          <xsd:element name="lastModified" type="xsd:dateTime" minOccurs="0"/>
+          <xsd:element name="createdBy" type="xsd:string" />
+          <xsd:element name="lastModifiedBy" type="xsd:string" minOccurs="0"/>
+          <xsd:element name="sortDate" type="xsd:dateTime" minOccurs="0"/>
+          <xsd:element name="type" type="media:mediaTypeEnum" />
+          <xsd:element name="publishStart" type="xsd:dateTime" minOccurs="0"/>
+          <xsd:element name="publishStop" type="xsd:dateTime" minOccurs="0"/>
+          <xsd:element name="lastPublished" type="xsd:dateTime" minOccurs="0"/>
+          <xsd:element name="firstScheduleEvent" type="media:scheduleEventType" minOccurs="0"/>
+          <xsd:element name="locations" type="media:locationType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="tag" type="media:tagType" minOccurs="0" maxOccurs="unbounded"/>
+          <xsd:element name="image" type="imageListItem" minOccurs="0"/>
+        </xsd:sequence>
+        <xsd:attribute name="mid" type="xsd:string"/>
+        <xsd:attribute name="avType" type="media:avTypeEnum"/>
+        <xsd:attribute name="mediaType" type="xsd:string"/>
+        <xsd:attribute name="episodesLocked" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+  <xsd:complexType name="publishableListItem" abstract="true">
+    <xsd:sequence/>
+    <xsd:attribute name="id" type="xsd:long"/>
+    <xsd:attribute name="urn" type="xsd:string"/>
+    <xsd:attribute name="workflow" type="shared:workflowEnumType"/>
+    <xsd:attribute name="deleted" type="xsd:boolean"/>
+  </xsd:complexType>
+
+  <xsd:complexType name="imageListItem">
+    <xsd:complexContent>
+      <xsd:extension base="publishableListItem">
+        <xsd:sequence/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+
+
+</xsd:schema>

@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>nl.publiekeomroep</groupId>
+    <artifactId>poms-shared-parent</artifactId>
+    <version>4.8.11</version>
+  </parent>
+  <groupId>nl.vpro.media</groupId>
+  <artifactId>media-organizations</artifactId>
+  <name>media-organizations</name>
+  <description>Provides access to the POMS organization interfaces</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>nl.vpro.user</groupId>
+      <artifactId>user-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-util</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.easytesting</groupId>
+      <artifactId>fest-assert</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
