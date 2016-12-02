@@ -2367,6 +2367,9 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     public MediaObject addImage(Image image, int index) {
+        if (image == null) {
+            throw new IllegalArgumentException();
+        }
         if (images == null) {
             images = new ArrayList<>();
         }

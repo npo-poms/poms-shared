@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -15,9 +17,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -59,9 +58,8 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "asset"
 })
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
+@Slf4j
 public  abstract class MediaUpdate<M extends MediaObject> {
-
-    private static final Logger LOG = LoggerFactory.getLogger(MediaUpdate.class);
 
     static final Validator VALIDATOR;
 
@@ -71,7 +69,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
             ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
             validator = factory.getValidator();
         } catch (ValidationException ve) {
-            LOG.info(ve.getClass().getName() + " " + ve.getMessage());
+            log.info(ve.getClass().getName() + " " + ve.getMessage());
             validator = null;
 
         }
@@ -163,7 +161,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
         if (VALIDATOR != null) {
             return VALIDATOR.validate(this, groups);
         } else {
-            LOG.warn("Cannot validate since no validator available");
+            log.warn("Cannot validate since no validator available");
             return Collections.emptySet();
         }
     }
@@ -266,10 +264,14 @@ public  abstract class MediaUpdate<M extends MediaObject> {
         if(!imported && images != null) {
             for(ImageUpdate imageUpdate : images) {
                 Image image = importer.save(imageUpdate);
-                if(builder != null) {
-                    builder.images(image);
+                if (image == null) {
+                    log.warn("Cannot add null as image to {}", builder);
                 } else {
-                    throw new RuntimeException("Both builder and media are NULL; therefore cannot add image");
+                    if (builder != null) {
+                        builder.images(image);
+                    } else {
+                        throw new RuntimeException("Both builder and media are NULL; therefore cannot add image");
+                    }
                 }
             }
         }
