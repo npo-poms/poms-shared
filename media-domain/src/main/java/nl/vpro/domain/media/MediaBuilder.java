@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.ToString;
+
 import java.io.StringWriter;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -15,7 +17,6 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.xml.bind.JAXB;
 
-import nl.vpro.i18n.LocalizedString;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -25,6 +26,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
+import nl.vpro.i18n.LocalizedString;
 import nl.vpro.util.DateUtils;
 
 import static nl.vpro.util.DateUtils.toDate;
@@ -660,6 +662,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
+    @ToString
     abstract class AbstractBuilder<T extends AbstractBuilder<T, M>, M extends MediaObject>  implements MediaBuilder<T, M>, Cloneable {
 
         protected String mid;
@@ -705,6 +708,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
     }
 
+    @ToString(callSuper = true)
     abstract class AbstractProgramBuilder<T extends AbstractProgramBuilder<T> & MediaBuilder<T,Program>> extends AbstractBuilder<T, Program> implements MediaBuilder<T, Program> {
 
         protected AbstractProgramBuilder() {
@@ -784,6 +788,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
     }
 
+    @ToString(callSuper = true)
     abstract  class AbstractGroupBuilder<T extends AbstractGroupBuilder<T>> extends AbstractBuilder<T, Group> implements MediaBuilder<T, Group> {
 
         protected AbstractGroupBuilder() {
@@ -816,6 +821,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
     }
 
+    @ToString(callSuper = true)
     abstract class AbstractSegmentBuilder<T extends AbstractSegmentBuilder<T>> extends AbstractBuilder<T, Segment> implements MediaBuilder<T, Segment> {
 
         protected AbstractSegmentBuilder() {

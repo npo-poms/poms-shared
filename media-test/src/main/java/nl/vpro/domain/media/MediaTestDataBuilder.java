@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,9 +16,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -469,9 +469,9 @@ public interface MediaTestDataBuilder<
     }
 
 
+    @Slf4j
+    @ToString(callSuper = true)
     class ProgramTestDataBuilder extends MediaBuilder.AbstractProgramBuilder<ProgramTestDataBuilder> implements MediaTestDataBuilder<ProgramTestDataBuilder, Program> {
-
-        static final Logger LOG = LoggerFactory.getLogger(ProgramTestDataBuilder.class);
 
         ProgramTestDataBuilder() {
             super();
@@ -508,7 +508,7 @@ public interface MediaTestDataBuilder<
             try {
                 season.createMemberOf(series, 1);
             } catch(CircularReferenceException e) {
-                LOG.error(e.getMessage());
+                log.error(e.getMessage());
             }
 
             return episodeOf(season, 1);
@@ -543,6 +543,8 @@ public interface MediaTestDataBuilder<
         }
     }
 
+    @Slf4j
+    @ToString(callSuper = true)
     class GroupTestDataBuilder extends MediaBuilder.AbstractGroupBuilder<GroupTestDataBuilder> implements MediaTestDataBuilder<GroupTestDataBuilder, Group> {
 
         GroupTestDataBuilder() {
@@ -579,6 +581,8 @@ public interface MediaTestDataBuilder<
 
     }
 
+    @Slf4j
+    @ToString(callSuper = true)
     class SegmentTestDataBuilder extends MediaBuilder.AbstractSegmentBuilder<SegmentTestDataBuilder>
         implements MediaTestDataBuilder<SegmentTestDataBuilder, Segment> {
 
