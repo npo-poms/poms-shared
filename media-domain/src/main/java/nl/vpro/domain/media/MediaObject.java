@@ -2371,24 +2371,18 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         if (images == null) {
             images = new ArrayList<>();
         }
-
         images.add(index, image);
-
         image.setMediaObject(this);
-
         return this;
     }
 
+
+
     public List<Image> findImages(OwnerType owner) {
-        List<Image> imageList = new ArrayList<>();
-
-        for (Image image : getImages()) {
-            if (owner.equals(image.getOwner())) {
-                imageList.add(image);
-            }
-        }
-
-        return Collections.unmodifiableList(imageList);
+        return getImages()
+            .stream()
+            .filter(i -> owner.equals(i.getOwner()))
+            .collect(Collectors.toList());
     }
 
     public Image findImage(ImageType type) {
@@ -2431,6 +2425,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     public boolean removeImage(Image image) {
         if (images != null) {
+            image.setMediaObject(null);
             return images.remove(image);
         }
         return false;
@@ -2453,10 +2448,10 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     public MediaObject removeImagesForOwner(OwnerType owner) {
         if (images != null) {
             Iterator<Image> iterator = getImages().iterator();
-
             while (iterator.hasNext()) {
                 Image image = iterator.next();
                 if (image.getOwner().equals(owner)) {
+                    image.setMediaObject(null);
                     iterator.remove();
                 }
             }
