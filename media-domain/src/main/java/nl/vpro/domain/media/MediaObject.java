@@ -2315,9 +2315,8 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         }
         // Occasionally images contains null elements due to a Hibernate
         // synchronous access issue.
-        while (images.contains(null)) {
-            images.remove(null);
-        }
+        images.removeIf(Objects::isNull);
+
         return images;
     }
 
@@ -2373,6 +2372,17 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         }
         images.add(index, image);
         image.setMediaObject(this);
+        return this;
+    }
+    public MediaObject clearImages() {
+        if (images == null) {
+            return this;
+        }
+        images.forEach(i -> {
+            i.setMediaObject(null);
+            i.setId(null);
+        });
+        images.clear();
         return this;
     }
 
