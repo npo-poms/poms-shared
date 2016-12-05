@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.page.update;
 
+import lombok.Builder;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,6 +19,7 @@ import nl.vpro.validation.NoHtml;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "embedUpdateType")
+@Builder
 public class EmbedUpdate {
 
     @NotNull
@@ -29,7 +32,7 @@ public class EmbedUpdate {
     @NoHtml
     private String description;
 
-    protected EmbedUpdate() {
+    public EmbedUpdate() {
     }
 
     public EmbedUpdate(String midRef) {
