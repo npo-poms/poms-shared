@@ -28,7 +28,9 @@
     <module>poms-shared-domain</module>
     <module>poms-shared</module>
     <module>poms-shared-test</module>
-    <module>poms-ext</module>
+    <!--
+        <module>poms-ext</module>
+        -->
 
     <module>user-domain</module>
     <module>media-domain</module>
