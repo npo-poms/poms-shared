@@ -478,7 +478,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     // Holds the descendantOf value when unmarshalled from XML. Used by XML
     // clients working in a detached environment.
     @Transient
-    private Set<DescendantRef> descendantOf;
+    Set<DescendantRef> descendantOf;
 
     // Holds the descendantOf value when unmarshalled from XML. Used by XML
     // clients working in a detached environment.

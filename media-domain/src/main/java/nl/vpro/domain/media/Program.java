@@ -322,7 +322,7 @@ public class Program extends MediaObject {
 
                 if(existing.equals(memberRef)) {
                     it.remove();
-                    descendantOfHolder = null;
+                    descendantOf = null;
                     return true;
                 }
             }
@@ -340,7 +340,7 @@ public class Program extends MediaObject {
         }
 
         episodeOf.add(memberRef);
-        descendantOfHolder = null;
+        descendantOf = null;
 
         return this;
     }
