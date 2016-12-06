@@ -477,7 +477,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     // Holds the descendantOf value when unmarshalled from XML. Used by XML
     // clients working in a detached environment.
     @Transient
-    protected SortedSet<DescendantRef> descendantOfHolder;
+    SortedSet<DescendantRef> descendantOf;
 
     // Holds the descendantOf value when unmarshalled from XML. Used by XML
     // clients working in a detached environment.
@@ -1469,15 +1469,15 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<DescendantRef> getDescendantOf() {
-        if (descendantOfHolder != null) {
-            return descendantOfHolder;
+        if (descendantOf != null) {
+            return descendantOf;
         } else {
-            descendantOfHolder = new TreeSet<>();
+            descendantOf = new TreeSet<>();
             for (MediaObject media : getAncestors()) {
                 descendantOf.add(DescendantRef.forOwner(media));
             }
         }
-        return descendantOfHolder;
+        return descendantOf;
     }
 
 
