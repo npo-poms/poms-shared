@@ -479,8 +479,10 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @Transient
     protected SortedSet<DescendantRef> descendantOfHolder;
 
+    // Holds the descendantOf value when unmarshalled from XML. Used by XML
+    // clients working in a detached environment.
     @Transient
-    private String mergedToRefHolder;
+    private String mergedToRef;
 
     @Transient
     protected boolean sortDateValid = false;
@@ -1472,7 +1474,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         } else {
             descendantOfHolder = new TreeSet<>();
             for (MediaObject media : getAncestors()) {
-                descendantOfHolder.add(DescendantRef.forOwner(media));
+                descendantOf.add(DescendantRef.forOwner(media));
             }
         }
         return descendantOfHolder;
@@ -1480,7 +1482,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
 
     void setDescendantOf(SortedSet<DescendantRef> descendantOf) {
-        this.descendantOfHolder = updateSortedSet(this.descendantOfHolder, descendantOf);
+        this.descendantOf = updateSortedSet(this.descendantOf, descendantOf);
     }
 
     @XmlElement()
@@ -1591,7 +1593,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
         MemberRef memberRef = new MemberRef(member, this, number);
         member.memberOf.add(memberRef);
-        member.descendantOfHolder = null;
+        member.descendantOf = null;
         return memberRef;
     }
 
@@ -1610,7 +1612,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
                 if (memberRef.getOwner().equals(reference)) {
                     it.remove();
                     success = true;
-                    descendantOfHolder = null;
+                    descendantOf = null;
                 }
             }
         }
@@ -1628,7 +1630,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
                 if (memberRef.getId().equals(memberRefId)) {
                     it.remove();
                     success = true;
-                    descendantOfHolder = null;
+                    descendantOf = null;
                 }
             }
         }
@@ -2561,7 +2563,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     public boolean isMerged() {
-        return mergedTo != null || mergedToRefHolder != null;
+        return mergedTo != null || mergedToRef != null;
     }
 
     public MediaObject getMergedTo() {
@@ -2594,15 +2596,15 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @XmlAttribute(name = "mergedTo")
     @JsonProperty
     public String getMergedToRef() {
-        if (mergedToRefHolder != null) {
-            return mergedToRefHolder;
+        if (mergedToRef != null) {
+            return mergedToRef;
         }
 
         return mergedTo != null ? mergedTo.getMid() : null;
     }
 
     public void setMergedToRef(String mergedToRef) {
-        this.mergedToRefHolder = mergedToRef;
+        this.mergedToRef = mergedToRef;
     }
 
     /**
@@ -2658,7 +2660,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             .append("relations", relations)
             .append("images", images)
             .append("isEmbeddable", isEmbeddable)
-            .append("descendantOfHolder", descendantOfHolder)
+            .append("descendantOf", descendantOf)
             .toString();
     }
 
