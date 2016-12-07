@@ -80,8 +80,9 @@ public class OdiServiceImpl implements OdiService {
         }
 
         if(hasFinalHandler()) {
-            LocationResult finalResult = finalHandler.handle(location, request);
+            LocationResult finalResult = finalHandler.handleIfSupports(location, request);
             if(finalResult != null) {
+                log.debug("No handler found to hande {}, using final handler {} resulted {}", location, finalHandler, finalResult);
                 return finalResult;
             }
         }
@@ -137,7 +138,7 @@ public class OdiServiceImpl implements OdiService {
 
         if(hasFinalHandler()) {
             for(Location location : locations) {
-                LocationResult result = finalHandler.handle(location, request, pubOptions);
+                LocationResult result = finalHandler.handleIfSupports(location, request, pubOptions);
                 if(result != null) {
                     return result;
                 }
@@ -149,8 +150,9 @@ public class OdiServiceImpl implements OdiService {
 
     private LocationResult handleLocation(Location location, HttpServletRequest request, String... pubOptions) {
         for(LocationHandler handler : handlers) {
-            LocationResult result = handler.handle(location, request, pubOptions);
-            if(result != null) {
+            LocationResult result = handler.handleIfSupports(location, request, pubOptions);
+            if (result != null) {
+                log.debug("Found result {} for handler {}", result, handler);
                 return result;
             }
         }

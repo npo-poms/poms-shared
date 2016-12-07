@@ -71,9 +71,6 @@ public class AAPILocationHandler implements LocationHandler {
 
     @Override
     public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
-        if(!location.getProgramUrl().startsWith(AWO_SCHEME_PREFIX) || pubOptions == null) {
-            return null;
-        }
 
         String pubOption = null;
         for(String p : pubOptions) {

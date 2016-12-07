@@ -51,7 +51,7 @@ public class OdiServiceDefaultConfigTest {
     }
 
     @Test
-    public void test2() {
+    public void API_293() {
         String programXml =
             "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" hasSubtitles=\"true\" mid=\"VPWON_1225089\" sortDate=\"2014-12-24T18:23:00+01:00\" creationDate=\"2014-11-19T22:44:52.724+01:00\" lastModified=\"2015-06-10T09:35:24.822+02:00\" publishDate=\"2016-04-08T13:05:49.696+02:00\" urn=\"urn:vpro:media:program:47769966\" workflow=\"PUBLISHED\">\n" +
             "<broadcaster id=\"NTR\">NTR</broadcaster>\n" +
@@ -101,17 +101,13 @@ public class OdiServiceDefaultConfigTest {
             "<prediction state=\"REALIZED\" publishStart=\"2014-12-24T18:40:52+01:00\" publishStop=\"2014-12-24T18:40:52+01:00\">PLUSVOD</prediction>\n" +
             "<locations>\n" +
             "<location owner=\"CERES\" platform=\"INTERNETVOD\" creationDate=\"2014-12-24T19:06:40.459+01:00\" lastModified=\"2014-12-24T19:06:40.616+01:00\" urn=\"urn:vpro:media:location:49491099\" workflow=\"PUBLISHED\">\n" +
-            "<programUrl>\n" +
-            "odip+http://odi.omroep.nl/video/adaptive/VPWON_1225089\n" +
-            "</programUrl>\n" +
+            "<programUrl>odip+http://odi.omroep.nl/video/adaptive/VPWON_1225089</programUrl>\n" +
             "<avAttributes>\n" +
             "<avFileFormat>HASP</avFileFormat>\n" +
             "</avAttributes>\n" +
             "</location>\n" +
             "<location owner=\"CERES\" platform=\"INTERNETVOD\" creationDate=\"2014-12-24T18:56:30.332+01:00\" lastModified=\"2014-12-24T18:56:30.569+01:00\" urn=\"urn:vpro:media:location:49490903\" workflow=\"PUBLISHED\">\n" +
-            "<programUrl>\n" +
-            "odi+http://odi.omroep.nl/video/h264_sb/VPWON_1225089\n" +
-            "</programUrl>\n" +
+            "<programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1225089</programUrl>\n" +
             "<avAttributes>\n" +
             "<bitrate>200000</bitrate>\n" +
             "<avFileFormat>H264</avFileFormat>\n" +
@@ -198,6 +194,7 @@ public class OdiServiceDefaultConfigTest {
         Program program = JAXB.unmarshal(new StringReader(programXml), Program.class);
         assertThat(program.getLocations()).hasSize(5);
 
+        //assertThat(odiService.playMedia(program, null, null).getProgramUrl()).startsWith("${odi.baseUrl}/video/");
 
         assertThat(odiService.playMedia(program, null, "mp4").getProgramUrl()).startsWith("${odi.baseUrl}/video/");
 

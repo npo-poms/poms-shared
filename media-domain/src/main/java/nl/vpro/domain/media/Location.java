@@ -290,6 +290,9 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
 
     public String getProgramUrl() {
+        if (this.programUrl != null) {
+            this.programUrl = this.programUrl.trim();
+        }
         return programUrl;
     }
 

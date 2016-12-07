@@ -15,4 +15,12 @@ public interface LocationHandler {
 
     LocationResult handle(Location location, HttpServletRequest request, String... pubOptions);
 
+
+    default LocationResult handleIfSupports(Location location, HttpServletRequest request, String... pubOptions) {
+        if (supports(location, pubOptions)) {
+            return handle(location, request, pubOptions);
+        } else {
+            return null;
+        }
+    }
 }
