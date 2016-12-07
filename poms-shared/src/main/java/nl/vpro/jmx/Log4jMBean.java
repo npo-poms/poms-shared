@@ -17,7 +17,7 @@ import org.springframework.jmx.export.annotation.ManagedResource;
 )
 public class Log4jMBean {
 
-    @ManagedOperation(description="Get current level vor category")
+    @ManagedOperation(description="Get current level for category")
     public String getLevel(String category) {
         return LogManager.getLogger(category).getLevel().toString();
     }
