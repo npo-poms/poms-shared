@@ -28,7 +28,9 @@
         <bean class="nl.vpro.media.odi.handler.AAPILocationHandler">
           <property name="AAPIServer" value="${aapi.server}"/>
         </bean>
+
         <bean class="nl.vpro.media.odi.handler.MatchAVFileFormatLocationHandler"/>
+
       </util:list>
     </property>
     <property name="finalHandler">
