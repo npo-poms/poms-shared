@@ -38,8 +38,12 @@ public class OdiLocationHandler implements LocationHandler {
     private String odiApplication;
 
     @Override
-    public boolean supports(Location location, String... pubOptions) {
-        return location.getProgramUrl().startsWith(ODI_SCHEME_PREFIX);
+    public int score(Location location, String... pubOptions) {
+        if (location.getProgramUrl().startsWith(ODI_SCHEME_PREFIX)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -59,7 +63,7 @@ public class OdiLocationHandler implements LocationHandler {
                 String odiUrl =
                     StringUtils.join(new String[]{odiBaseUrl, prefix, odiApplication, publicationoption, token, timehex, prid}, "/");
                 odiUrl += "?type=http";
-                return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl);
+                return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl, location.getUrn());
 
             }
         } catch(MalformedURLException mue) {

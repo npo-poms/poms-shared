@@ -14,6 +14,7 @@ import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Program;
+import nl.vpro.media.odi.util.LocationResult;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
