@@ -18,13 +18,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.media.Location;
-import nl.vpro.media.odi.LocationHandler;
+import nl.vpro.media.odi.LocationProducer;
 import nl.vpro.media.odi.util.LocationResult;
 
 /**
  * See <a href="http://hosting.omroep.nl/sterretje-cluster:content-hosting#hotlink_bescherming">Hotlink bescherming</a>
  */
-public class DeeplinkProtectionLocationHandler implements LocationHandler {
+public class DeeplinkProtectionLocationHandler implements LocationProducer {
     private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 
     private static Logger log = LoggerFactory.getLogger(DeeplinkProtectionLocationHandler.class);
@@ -37,13 +37,13 @@ public class DeeplinkProtectionLocationHandler implements LocationHandler {
     public int score(Location location, String... pubOptions) {
         String programUrl = location.getProgramUrl();
         if (programUrl.startsWith(STREAM_API_SCHEME_PREFIX) || programUrl.contains("/protected/")) {
-            return 1;
+            return 2;
         }
         return 0;
     }
 
     @Override
-    public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
+    public LocationResult produce(Location location, HttpServletRequest request, String... pubOptions) {
 
         String programUrl = location.getProgramUrl();
 

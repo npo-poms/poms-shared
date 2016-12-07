@@ -8,7 +8,7 @@
 
   <bean id="odiService" class="nl.vpro.media.odi.OdiServiceImpl">
     <property name="handlers">
-      <util:list value-type="nl.vpro.media.odi.LocationHandler">
+      <util:list value-type="nl.vpro.media.odi.LocationProducer">
 <!--
         <bean class="nl.vpro.media.odi.handler.OdiPlusLocationHandler">
           <property name="odiPlusBaseUrl" value="${odiplus.baseUrl}"/>
@@ -28,13 +28,24 @@
         <bean class="nl.vpro.media.odi.handler.AAPILocationHandler">
           <property name="AAPIServer" value="${aapi.server}"/>
         </bean>
-
-        <bean class="nl.vpro.media.odi.handler.MatchAVFileFormatLocationHandler"/>
-
+        <bean class="nl.vpro.media.odi.FinalLocationHandler">
+          <constructor-arg>
+            <bean class="nl.vpro.media.odi.handler.MatchSchemesLocationHandler">
+              <constructor-arg>
+                <list>
+                  <value>https</value>
+                  <value>http</value>
+                </list>
+              </constructor-arg>
+            </bean>
+          </constructor-arg>
+        </bean>
       </util:list>
     </property>
-    <property name="finalHandler">
-      <bean class="nl.vpro.media.odi.handler.MatchAllLocationHandler"/>
+    <property name="sorters">
+      <util:list>
+        <bean class="nl.vpro.media.odi.handler.AVFileFormatLocationSorter" />
+      </util:list>
     </property>
-  </bean>
+    </bean>
 </beans>

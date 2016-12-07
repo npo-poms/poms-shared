@@ -5,6 +5,7 @@
 package nl.vpro.media.odi.util;
 
 import lombok.Builder;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.*;
 
@@ -18,7 +19,8 @@ import nl.vpro.domain.media.Location;
 @XmlAccessorType(value = XmlAccessType.FIELD)
 @XmlType(propOrder = {"avFileFormat", "bitrate", "programUrl"})
 @XmlRootElement
-public class LocationResult {
+@ToString
+public class LocationResult implements Comparable<LocationResult> {
 
     @XmlElement
     private AVFileFormat avFileFormat;
@@ -32,7 +34,14 @@ public class LocationResult {
     @XmlAttribute
     private String urn;
 
-    protected LocationResult() {
+    @XmlAttribute
+    private int score = 0;
+
+    @XmlAttribute
+    private String producer;
+
+
+    public LocationResult() {
     }
 
     public static LocationResult of(Location location) {
@@ -79,12 +88,33 @@ public class LocationResult {
         this.urn = urn;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public String getProducer() {
+        return producer;
+    }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
+    }
+
     @Override
-    public String toString() {
-        return "LocationResult{" +
-            "avFileFormat=" + avFileFormat +
-            ", bitrate=" + bitrate +
-            ", programUrl='" + programUrl + '\'' +
-            '}';
+    public int compareTo(LocationResult o) {
+        int s = o.score - score;
+        if (s == 0 && o.avFileFormat!= null && avFileFormat != null) {
+            s = o.avFileFormat.compareTo(avFileFormat);
+        }
+        if (s == 0 && o.bitrate != null && bitrate != null) {
+            s = o.bitrate - bitrate;
+        }
+        return s;
+
+
     }
 }
