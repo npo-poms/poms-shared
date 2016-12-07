@@ -33,14 +33,15 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import nl.vpro.domain.media.Location;
-import nl.vpro.media.odi.LocationHandler;
+import nl.vpro.media.odi.LocationProducer;
 import nl.vpro.media.odi.util.InetAddressUtil;
 import nl.vpro.media.odi.util.LocationResult;
 
 /**
  * TODO
  */
-public class AAPILocationHandler implements LocationHandler {
+@Slf4j
+public class AAPILocationHandler implements LocationProducer {
 
     private static final String M3U8 = "m3u8";
 
@@ -63,7 +64,7 @@ public class AAPILocationHandler implements LocationHandler {
         if(location.getProgramUrl().startsWith(AWO_SCHEME_PREFIX)) {
             for(String pubOption : pubOptions) {
                 if(FILE_TYPES.contains(pubOption.toLowerCase())) {
-                    return 1;
+                    return 2;
                 }
             }
         }
@@ -71,7 +72,7 @@ public class AAPILocationHandler implements LocationHandler {
     }
 
     @Override
-    public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
+    public LocationResult produce(Location location, HttpServletRequest request, String... pubOptions) {
 
         String pubOption = null;
         for(String p : pubOptions) {

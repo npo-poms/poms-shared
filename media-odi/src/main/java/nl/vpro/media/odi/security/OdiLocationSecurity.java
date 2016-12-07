@@ -25,7 +25,7 @@ public class OdiLocationSecurity {
     @Autowired
     private EventServiceProvider eventService;
 
-    @Before("execution(* nl.vpro.media.odi.LocationHandler.handle(..)) && args(location, request, ..)")
+    @Before("execution(* nl.vpro.media.odi.LocationProducer.produce(..)) && args(location, request, ..)")
     public void handle(Location location, HttpServletRequest request) {
         eventService.send(new OdiEvent(
             location.getProgramUrl(),

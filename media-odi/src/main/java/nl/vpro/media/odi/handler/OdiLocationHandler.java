@@ -19,14 +19,14 @@ import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.Location;
-import nl.vpro.media.odi.LocationHandler;
+import nl.vpro.media.odi.LocationProducer;
 import nl.vpro.media.odi.util.LocationResult;
 
 /**
  * TODO
  */
 @Slf4j
-public class OdiLocationHandler implements LocationHandler {
+public class OdiLocationHandler implements LocationProducer {
     private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 
     private static String ODI_SCHEME_PREFIX = "odi+";
@@ -40,14 +40,14 @@ public class OdiLocationHandler implements LocationHandler {
     @Override
     public int score(Location location, String... pubOptions) {
         if (location.getProgramUrl().startsWith(ODI_SCHEME_PREFIX)) {
-            return 1;
+            return 2;
         } else {
             return 0;
         }
     }
 
     @Override
-    public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
+    public LocationResult produce(Location location, HttpServletRequest request, String... pubOptions) {
 
         String programUrl = location.getProgramUrl().substring(ODI_SCHEME_PREFIX.length());
         try {
