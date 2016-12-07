@@ -19,7 +19,7 @@ public class AAPILocationHandlerTest {
         AAPILocationHandler handler = new AAPILocationHandler();
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "somepath");
         Location location = new Location("odiw+http://livestreams.omroep.nl/live/npo/thematv/cultura24/cultura24.isml", OwnerType.BROADCASTER);
-        LocationResult result = handler.handle(location, request, "m3u8");
+        LocationResult result = handler.produce(location, request, "m3u8");
         assertThat(result.getProgramUrl()).matches(Pattern.quote("http://adaptive.npostreaming.nl/live/npo/thematv/cultura24/cultura24.isml/cultura24.m3u8?hash=") + ".*?" + Pattern.quote("&protection=url&type=http"));
 
     }

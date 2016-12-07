@@ -25,14 +25,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.media.Location;
-import nl.vpro.media.odi.LocationHandler;
+import nl.vpro.media.odi.LocationProducer;
 import nl.vpro.media.odi.util.InetAddressUtil;
 import nl.vpro.media.odi.util.LocationResult;
 
 /**
  * TODO
  */
-public class OdiPlusLocationHandler implements LocationHandler {
+public class OdiPlusLocationHandler implements LocationProducer {
     private static final Logger LOG = LoggerFactory.getLogger(OdiLocationHandler.class);
 
     private static String ODI_PLUS_SCHEME_PREFIX = "odip+";
@@ -44,14 +44,14 @@ public class OdiPlusLocationHandler implements LocationHandler {
     @Override
     public int score(Location location, String... pubOptions) {
         if (location.getProgramUrl().startsWith(ODI_PLUS_SCHEME_PREFIX)) {
-            return 1;
+            return 2;
         } else {
             return 0;
         }
     }
 
     @Override
-    public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
+    public LocationResult produce(Location location, HttpServletRequest request, String... pubOptions) {
 
 
         String programUrl = location.getProgramUrl().substring(ODI_PLUS_SCHEME_PREFIX.length());
