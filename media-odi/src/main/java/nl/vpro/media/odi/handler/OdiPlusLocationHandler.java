@@ -39,8 +39,12 @@ public class OdiPlusLocationHandler implements LocationHandler {
     private String odiPlusApplication;
 
     @Override
-    public boolean supports(Location location, String... pubOptions) {
-        return location.getProgramUrl().startsWith(ODI_PLUS_SCHEME_PREFIX);
+    public int score(Location location, String... pubOptions) {
+        if (location.getProgramUrl().startsWith(ODI_PLUS_SCHEME_PREFIX)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -57,7 +61,7 @@ public class OdiPlusLocationHandler implements LocationHandler {
                 String publicationoption = pieces[2];
                 String prid = pieces[3];
                 String odiUrl = getUrlFromODI(ip, prefix, publicationoption, prid);
-                return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl);
+                return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl, location.getUrn());
             }
         } catch(MalformedURLException e) {
             LOG.warn("Invalid programUrl " + programUrl + " " + e.getMessage());

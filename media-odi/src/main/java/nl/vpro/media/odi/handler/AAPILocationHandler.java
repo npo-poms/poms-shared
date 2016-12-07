@@ -4,6 +4,8 @@
  */
 package nl.vpro.media.odi.handler;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -29,16 +31,14 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.LocationHandler;
 import nl.vpro.media.odi.util.InetAddressUtil;
 import nl.vpro.media.odi.util.LocationResult;
 
+@Slf4j
 public class AAPILocationHandler implements LocationHandler {
-    private static Logger LOG = LoggerFactory.getLogger(AAPILocationHandler.class);
 
     private static final String M3U8 = "m3u8";
 
@@ -58,15 +58,15 @@ public class AAPILocationHandler implements LocationHandler {
      * @return
      */
     @Override
-    public boolean supports(Location location, String... pubOptions) {
+    public int score(Location location, String... pubOptions) {
         if(location.getProgramUrl().startsWith(AWO_SCHEME_PREFIX)) {
             for(String pubOption : pubOptions) {
                 if(FILE_TYPES.contains(pubOption.toLowerCase())) {
-                    return true;
+                    return 1;
                 }
             }
         }
-        return false;
+        return 0;
     }
 
     @Override
@@ -98,19 +98,19 @@ public class AAPILocationHandler implements LocationHandler {
 
             odiUrl = addDefaultParameters(url, pubOption, callback);
         } catch(MalformedURLException mue) {
-            LOG.error("Invalid url " + programUrl + " : " + mue.getMessage());
+            log.error("Invalid url " + programUrl + " : " + mue.getMessage());
         } catch(ClientProtocolException e) {
-            LOG.error("Can't execute request, invalid protocol: " + e.getMessage());
+            log.error("Can't execute request, invalid protocol: " + e.getMessage());
         } catch(URISyntaxException e) {
-            LOG.error("Can't encode url for response: " + e.getMessage());
+            log.error("Can't encode url for response: " + e.getMessage());
         } catch(UnsupportedEncodingException e) {
-            LOG.error("Can't encode values for aapi request: " + e.getMessage());
+            log.error("Can't encode values for aapi request: " + e.getMessage());
         } catch(IOException e) {
-            LOG.error("I/O Exception: " + e.getMessage());
+            log.error("I/O Exception: " + e.getMessage());
         }
 
         if(odiUrl != null) {
-            return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl);
+            return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl, location.getUrn());
         }
 
         return null;

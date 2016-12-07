@@ -34,9 +34,12 @@ public class DeeplinkProtectionLocationHandler implements LocationHandler {
     private String streamAAPISecret;
 
     @Override
-    public boolean supports(Location location, String... pubOptions) {
+    public int score(Location location, String... pubOptions) {
         String programUrl = location.getProgramUrl();
-        return programUrl.startsWith(STREAM_API_SCHEME_PREFIX) || programUrl.contains("/protected/");
+        if (programUrl.startsWith(STREAM_API_SCHEME_PREFIX) || programUrl.contains("/protected/")) {
+            return 1;
+        }
+        return 0;
     }
 
     @Override
@@ -62,7 +65,7 @@ public class DeeplinkProtectionLocationHandler implements LocationHandler {
         }
 
         if(odiUrl != null) {
-            return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl);
+            return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl, location.getUrn());
         }
 
         return null;

@@ -11,7 +11,7 @@ import nl.vpro.media.odi.util.LocationResult;
 
 public interface LocationHandler {
 
-    boolean supports(Location location, String... pubOptions);
+    int score(Location location, String... pubOptions);
 
     LocationResult handle(Location location, HttpServletRequest request, String... pubOptions);
 
@@ -20,7 +20,7 @@ public interface LocationHandler {
         if (pubOptions == null) {
             pubOptions = new String[] {};
         }
-        if (supports(location, pubOptions)) {
+        if (score(location, pubOptions) > 0) {
             return handle(location, request, pubOptions);
         } else {
             return null;

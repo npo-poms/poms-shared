@@ -21,8 +21,8 @@ import nl.vpro.media.odi.util.LocationResult;
 public class MatchAllLocationHandler implements LocationHandler {
 
     @Override
-    public boolean supports(Location location, String... pubOptions) {
-        return true;
+    public int score(Location location, String... pubOptions) {
+        return 1;
     }
 
     @Override
