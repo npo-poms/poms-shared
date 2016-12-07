@@ -4,6 +4,8 @@
  */
 package nl.vpro.media.odi.util;
 
+import lombok.Builder;
+
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.AVFileFormat;
@@ -27,17 +29,22 @@ public class LocationResult {
     @XmlElement
     private String programUrl;
 
+    @XmlAttribute
+    private String urn;
+
     protected LocationResult() {
     }
 
     public static LocationResult of(Location location) {
-        return new LocationResult(location.getAvFileFormat(), location.getBitrate(), location.getProgramUrl());
+        return new LocationResult(location.getAvFileFormat(), location.getBitrate(), location.getProgramUrl(), location.getUrn());
     }
 
-    public LocationResult(AVFileFormat avFileFormat, Integer bitrate, String programUrl) {
+    @Builder
+    public LocationResult(AVFileFormat avFileFormat, Integer bitrate, String programUrl, String urn) {
         this.avFileFormat = avFileFormat;
         this.bitrate = bitrate;
         this.programUrl = programUrl;
+        this.urn = urn;
     }
 
     public AVFileFormat getAvFileFormat() {
@@ -62,6 +69,14 @@ public class LocationResult {
 
     public void setProgramUrl(String programUrl) {
         this.programUrl = programUrl;
+    }
+
+    public String getUrn() {
+        return urn;
+    }
+
+    public void setUrn(String urn) {
+        this.urn = urn;
     }
 
     @Override
