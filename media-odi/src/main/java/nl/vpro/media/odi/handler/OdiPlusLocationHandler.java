@@ -49,9 +49,6 @@ public class OdiPlusLocationHandler implements LocationHandler {
     @Override
     public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
 
-        if(!supports(location)) {
-            return null;
-        }
 
         String programUrl = location.getProgramUrl().substring(ODI_PLUS_SCHEME_PREFIX.length());
         String ip = InetAddressUtil.getClientHost(request);

@@ -41,9 +41,6 @@ public class DeeplinkProtectionLocationHandler implements LocationHandler {
 
     @Override
     public LocationResult handle(Location location, HttpServletRequest request, String... pubOptions) {
-        if(!supports(location)) {
-            return null;
-        }
 
         String programUrl = location.getProgramUrl();
 
