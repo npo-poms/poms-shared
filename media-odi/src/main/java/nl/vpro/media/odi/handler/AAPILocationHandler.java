@@ -61,7 +61,7 @@ public class AAPILocationHandler implements LocationHandler {
      */
     @Override
     public boolean supports(Location location, String... pubOptions) {
-        if(location.getProgramUrl().startsWith(AWO_SCHEME_PREFIX) && pubOptions != null) {
+        if(location.getProgramUrl().startsWith(AWO_SCHEME_PREFIX)) {
             for(String pubOption : pubOptions) {
                 if(FILE_TYPES.contains(pubOption.toLowerCase())) {
                     return true;
