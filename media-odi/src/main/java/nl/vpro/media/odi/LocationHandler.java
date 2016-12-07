@@ -17,6 +17,9 @@ public interface LocationHandler {
 
 
     default LocationResult handleIfSupports(Location location, HttpServletRequest request, String... pubOptions) {
+        if (pubOptions == null) {
+            pubOptions = new String[] {};
+        }
         if (supports(location, pubOptions)) {
             return handle(location, request, pubOptions);
         } else {
