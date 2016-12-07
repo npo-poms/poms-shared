@@ -1,6 +1,9 @@
 package nl.vpro.media.odi;
 
+import java.io.StringReader;
+
 import javax.inject.Inject;
+import javax.xml.bind.JAXB;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -191,7 +194,7 @@ public class OdiServiceDefaultConfigTest {
         Program program = JAXB.unmarshal(new StringReader(programXml), Program.class);
         assertThat(program.getLocations()).hasSize(5);
 
-        //assertThat(odiService.playMedia(program, null, null).getProgramUrl()).startsWith("${odi.baseUrl}/video/");
+        assertThat(odiService.playMedia(program, null, null).getProgramUrl()).startsWith("${odi.baseUrl}/video/");
 
         assertThat(odiService.playMedia(program, null, "mp4").getProgramUrl()).startsWith("${odi.baseUrl}/video/");
 
