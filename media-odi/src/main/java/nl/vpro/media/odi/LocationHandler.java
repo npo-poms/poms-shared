@@ -30,7 +30,7 @@ public interface LocationHandler {
         if (pubOptions == null) {
             pubOptions = new String[] {};
         }
-        if (supports(location, pubOptions)) {
+        if (score(location, pubOptions) > 0) {
             return handle(location, request, pubOptions);
         } else {
             return null;

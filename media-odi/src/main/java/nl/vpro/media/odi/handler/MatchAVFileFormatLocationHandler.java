@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
+import nl.vpro.domain.media.Platform;
 import nl.vpro.media.odi.LocationHandler;
 import nl.vpro.media.odi.util.LocationResult;
 
@@ -14,19 +15,22 @@ import nl.vpro.media.odi.util.LocationResult;
 public class MatchAVFileFormatLocationHandler implements LocationHandler {
 
     @Override
-    public boolean supports(Location location, String... pubOptions) {
+    public int score(Location location, String... pubOptions) {
+        if (location.getPlatform() != null && location.getPlatform() != Platform.INTERNETVOD) {
+            return 0;
+        }
         for (String puboption : pubOptions) {
             try {
                 AVFileFormat format = AVFileFormat.valueOf(puboption.toUpperCase());
                 if (location.getAvFileFormat() == format) {
-                    return true;
+                    return 2;
                 }
             } catch (IllegalArgumentException iae) {
 
             }
 
         }
-        return false;
+        return 0;
 
     }
 
