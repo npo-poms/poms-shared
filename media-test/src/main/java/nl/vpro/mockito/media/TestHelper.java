@@ -4,11 +4,12 @@
  */
 package nl.vpro.mockito.media;
 
-import org.mockito.Matchers;
+import org.mockito.ArgumentMatchers;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.Schedule;
 import nl.vpro.mockito.media.answer.FirstArgument;
 import nl.vpro.mockito.media.matcher.*;
 
@@ -36,23 +37,23 @@ public class TestHelper {
         };
     }
 
-    public static MediaObject anyMediaObject() {
-        return Matchers.argThat(new IsAnyMediaObject());
+    public static Object anyMediaObject() {
+        return ArgumentMatchers.argThat(new IsAnyMediaObject());
     }
 
-    public static Program anyProgram() {
-        return Matchers.argThat(new IsAnyProgram());
+    public static MediaObject anyProgram() {
+        return ArgumentMatchers.argThat(new IsAnyProgram());
     }
 
-    public static Group anyGroup() {
-        return Matchers.argThat(new IsAnyGroup());
+    public static MediaObject anyGroup() {
+        return ArgumentMatchers.argThat(new IsAnyGroup());
     }
 
-    public static Segment anySegment() {
-        return Matchers.argThat(new IsAnySegment());
+    public static MediaObject anySegment() {
+        return ArgumentMatchers.argThat(new IsAnySegment());
     }
 
-    public static Schedule anySchedule() {
-        return Matchers.argThat(new IsAnySchedule());
+    public static Object anySchedule() {
+        return ArgumentMatchers.argThat(new IsAnySchedule());
     }
 }

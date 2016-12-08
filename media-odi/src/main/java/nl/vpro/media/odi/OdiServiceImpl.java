@@ -33,20 +33,22 @@ public class OdiServiceImpl implements OdiService {
 
     @Override
     public LocationResult playMedia(MediaObject media, HttpServletRequest request, String... pubOptions) {
-        return handleLocations(media, request, pubOptions)
-            .stream()
-            .sorted(sorter(pubOptions))
-            .findFirst()
-            .orElse(null);
+        return
+            handleLocations(media, request, pubOptions)
+                .stream()
+                .sorted(sorter(pubOptions))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public LocationResult playLocation(Location location, HttpServletRequest request, String... pubOptions) {
-        return handleLocation(location, request, pubOptions)
-            .stream()
-            .sorted(sorter(pubOptions))
-            .findFirst()
-            .orElse(null);
+        return
+            handleLocation(location, request, pubOptions)
+                .stream()
+                .sorted(sorter(pubOptions))
+                .findFirst()
+                .orElse(null);
     }
 
     protected Comparator<LocationResult> sorter(String... pubOptions) {
@@ -100,6 +102,7 @@ public class OdiServiceImpl implements OdiService {
         return
             handlers.stream()
                 .map(h -> h.produceIfSupports(location, request, pubOptions))
+                .filter(Objects::nonNull)
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .collect(Collectors.toList());
