@@ -48,7 +48,7 @@ public class TestHelper {
         return ArgumentMatchers.argThat(new IsAnyGroup());
     }
 
-    private static Segment anySegment() {
+    public static Segment anySegment() {
         return ArgumentMatchers.argThat(new IsAnySegment());
     }
 
