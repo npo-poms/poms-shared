@@ -4,13 +4,13 @@
  */
 package nl.vpro.mockito.media;
 
-import org.mockito.ArgumentMatchers;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.mockito.media.answer.FirstArgument;
-import nl.vpro.mockito.media.matcher.*;
+
+import static org.mockito.ArgumentMatchers.any;
 
 public class TestHelper {
 
@@ -37,22 +37,22 @@ public class TestHelper {
     }
 
     public static MediaObject anyMediaObject() {
-        return ArgumentMatchers.argThat(new IsAnyMediaObject());
+        return any(MediaObject.class);
     }
 
     public static Program anyProgram() {
-        return ArgumentMatchers.argThat(new IsAnyProgram());
+        return any(Program.class);
     }
 
     public static Group anyGroup() {
-        return ArgumentMatchers.argThat(new IsAnyGroup());
+        return any(Group.class);
     }
 
     public static Segment anySegment() {
-        return ArgumentMatchers.argThat(new IsAnySegment());
+        return any(Segment.class);
     }
 
     public static Schedule anySchedule() {
-        return ArgumentMatchers.argThat(new IsAnySchedule());
+        return any(Schedule.class);
     }
 }
