@@ -8,9 +8,9 @@ import org.mockito.ArgumentMatcher;
 
 import nl.vpro.domain.media.MediaObject;
 
-public class IsAnyMediaObject implements ArgumentMatcher<Object>{
+public class IsAnyMediaObject implements ArgumentMatcher<MediaObject>{
     @Override
-    public boolean matches(Object o) {
-        return o == null || o instanceof MediaObject;
+    public boolean matches(MediaObject o) {
+        return true;
     }
 }

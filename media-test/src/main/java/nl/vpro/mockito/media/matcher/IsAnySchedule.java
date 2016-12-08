@@ -8,10 +8,10 @@ import org.mockito.ArgumentMatcher;
 
 import nl.vpro.domain.media.Schedule;
 
-public class IsAnySchedule implements  ArgumentMatcher<Object> {
+public class IsAnySchedule implements  ArgumentMatcher<Schedule> {
 
     @Override
-    public boolean matches(Object o) {
-        return o == null || o instanceof Schedule;
+    public boolean matches(Schedule o) {
+        return true;
     }
 }
