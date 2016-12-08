@@ -137,6 +137,6 @@ public class PageJsonSchemaTest {
     private Page roundTripContains(Page page, String content) throws IOException {
         String json = Jackson2Mapper.INSTANCE.writeValueAsString(page);
         assertThat(json).contains(content);
-        return Jackson2Mapper.getInstance().reader(Page.class).readValue(json);
+        return Jackson2Mapper.getInstance().readerFor(Page.class).readValue(json);
     }
 }
