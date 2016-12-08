@@ -6,13 +6,12 @@ package nl.vpro.mockito.media.matcher;
 
 import org.mockito.ArgumentMatcher;
 
-import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Segment;
 
-public class IsAnySegment implements ArgumentMatcher<MediaObject> {
+public class IsAnySegment implements ArgumentMatcher<Segment> {
 
     @Override
-    public boolean matches(MediaObject o) {
-        return o == null || o instanceof Segment;
+    public boolean matches(Segment o) {
+        return true;
     }
 }

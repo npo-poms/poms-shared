@@ -6,13 +6,12 @@ package nl.vpro.mockito.media.matcher;
 
 import org.mockito.ArgumentMatcher;
 
-import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Program;
 
-public class IsAnyProgram implements  ArgumentMatcher<MediaObject> {
+public class IsAnyProgram implements  ArgumentMatcher<Program> {
     @Override
-    public boolean matches(MediaObject o) {
-        return o == null || o instanceof Program;
+    public boolean matches(Program o) {
+        return true;
     }
 
 }
