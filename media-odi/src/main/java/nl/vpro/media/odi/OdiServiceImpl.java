@@ -51,11 +51,13 @@ public class OdiServiceImpl implements OdiService {
 
     protected Comparator<LocationResult> sorter(String... pubOptions) {
         Comparator<LocationResult> result = null;
-        for (LocationSorter comp: sorters) {
-            if (result == null) {
-                result = comp.getComparator(pubOptions);
-            } else {
-                result = result.thenComparing(comp.getComparator(pubOptions));
+        if (sorters != null) {
+            for (LocationSorter comp : sorters) {
+                if (result == null) {
+                    result = comp.getComparator(pubOptions);
+                } else {
+                    result = result.thenComparing(comp.getComparator(pubOptions));
+                }
             }
         }
         if (result == null) {
