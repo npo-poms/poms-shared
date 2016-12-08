@@ -7,11 +7,12 @@ package nl.vpro.mockito.media.matcher;
 import org.mockito.ArgumentMatcher;
 
 import nl.vpro.domain.media.Group;
+import nl.vpro.domain.media.MediaObject;
 
-public class IsAnyGroup extends ArgumentMatcher<Group> {
+public class IsAnyGroup implements ArgumentMatcher<MediaObject> {
 
     @Override
-    public boolean matches(Object o) {
+    public boolean matches(MediaObject o) {
         return o == null || o instanceof Group;
     }
 }

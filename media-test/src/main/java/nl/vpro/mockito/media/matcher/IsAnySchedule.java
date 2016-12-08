@@ -6,10 +6,9 @@ package nl.vpro.mockito.media.matcher;
 
 import org.mockito.ArgumentMatcher;
 
-import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.Schedule;
 
-public class IsAnySchedule extends ArgumentMatcher<Schedule> {
+public class IsAnySchedule implements  ArgumentMatcher<Object> {
 
     @Override
     public boolean matches(Object o) {

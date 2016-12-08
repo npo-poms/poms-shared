@@ -5,7 +5,8 @@
 package nl.vpro.media.odi;
 
 import java.util.Arrays;
-import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class OdiServiceImplTest {
 
     private Program program;
 
-    private LocationProducer handlerMock = mock(LocationProducer.class);
+    private final LocationProducer handlerMock = mock(LocationProducer.class);
 
     private MockHttpServletRequest request = new MockHttpServletRequest("GET", "somepath");
     private OdiServiceImpl target;
@@ -48,7 +49,11 @@ public class OdiServiceImplTest {
 
 
         LocationResult result = mock(LocationResult.class);
-        when(handlerMock.produceIfSupports(any(Location.class), eq(request))).thenReturn(Optional.of(result));
+        when(handlerMock.produce(any(Location.class), any(HttpServletRequest.class), any(String[].class))).thenReturn(result);
+        when(handlerMock.score(any(Location.class), any(String[].class))).thenReturn(1);
+        when(handlerMock.produceIfSupports(any(Location.class), any(HttpServletRequest.class), any(String[].class))).thenCallRealMethod();
+        when(handlerMock.supports(any(Integer.class))).thenCallRealMethod();
+
 
         target = new OdiServiceImpl();
         target.setHandlers(Arrays.asList(handlerMock));
@@ -58,7 +63,7 @@ public class OdiServiceImplTest {
     public void testPlayMediaOnDefault() throws Exception {
         target.playMedia(program, request);
 
-        verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));
+        verify(handlerMock).produce(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));
     }
 
     @Test
@@ -85,6 +90,7 @@ public class OdiServiceImplTest {
 
     @Test
     public void testPlayLocation() throws Exception {
+
         target.playLocation(program.getLocations().first(), request);
 
         verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));
