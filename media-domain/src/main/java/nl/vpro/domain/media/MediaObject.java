@@ -2771,7 +2771,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         }
 
         if (creationDate == null) {
-            creationDate = new Date();
+            creationDate = Instant.now();
         }
     }
 

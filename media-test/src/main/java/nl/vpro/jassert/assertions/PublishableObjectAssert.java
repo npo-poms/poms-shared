@@ -4,6 +4,7 @@
  */
 package nl.vpro.jassert.assertions;
 
+import java.time.Instant;
 import java.util.Date;
 
 import org.assertj.core.api.AbstractObjectAssert;
@@ -11,6 +12,7 @@ import org.assertj.core.api.Fail;
 
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.util.DateUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,6 +42,18 @@ public abstract class PublishableObjectAssert<S extends PublishableObjectAssert<
     public S hasPublishStop(Date stop) {
         isNotNull();
         assertThat(actual.getPublishStop()).isEqualTo(stop);
+        return myself;
+    }
+
+    public S hasPublishStart(Instant start) {
+        isNotNull();
+        assertThat(DateUtils.toInstant(actual.getPublishStart())).isEqualTo(start);
+        return myself;
+    }
+
+    public S hasPublishStop(Instant stop) {
+        isNotNull();
+        assertThat(DateUtils.toInstant(actual.getPublishStop())).isEqualTo(stop);
         return myself;
     }
 
