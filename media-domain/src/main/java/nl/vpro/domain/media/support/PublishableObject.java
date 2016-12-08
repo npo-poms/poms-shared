@@ -102,7 +102,7 @@ public abstract class PublishableObject extends DomainObject {
     private static final Logger LOG = LoggerFactory.getLogger(PublishableObject.class);
 
     @Column(nullable = false)
-        protected Date creationDate = new Date();
+    protected Instant creationDate = Instant.now();
 
     @Column(nullable = false)
     protected Date lastModified;
@@ -301,12 +301,13 @@ public abstract class PublishableObject extends DomainObject {
 
     @XmlAttribute
     public Date getCreationDate() {
-        return creationDate;
+        return DateUtils.toDate(creationDate);
     }
 
     public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+        this.creationDate = DateUtils.toInstant(creationDate);
     }
+
 
 
     public Instant getLastModifiedInstant() {
