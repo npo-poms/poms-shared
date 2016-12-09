@@ -92,7 +92,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Id
     @NotNull
     //@Convert(converter = InstantToTimestampConverter.class)
-    protected Date start;
+    protected Instant start;
 
     @ManyToOne
     @Valid
@@ -187,7 +187,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay;
-        this.start = start == null ? null : Date.from(start);
+        this.start = start;
         this.duration = duration;
         setMediaObject(media);
     }
@@ -396,24 +396,24 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlElement
     @Deprecated
     public Date getStart() {
-        return start;
+        return DateUtils.toDate(start);
     }
 
 
     @Deprecated
     public void setStart(Date start) {
         // if (this.start != null) throw new IllegalStateException(); Used in test cases.
-        this.start = start;
+        this.start = DateUtils.toInstant(start);
     }
 
     @XmlTransient
     public Instant getStartInstant() {
-        return start == null ? null : start.toInstant();
+        return start;
     }
 
 
     public void setStartInstant(Instant start) {
-        this.start = start == null ? null : Date.from(start);
+        this.start = start;
     }
 
     @XmlTransient
@@ -424,10 +424,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
 
         if(offset == null) {
-            return Date.from(start.toInstant());
+            return Date.from(start);
         }
 
-        return Date.from(start.toInstant().plus(offset));
+        return Date.from(start.plus(offset));
     }
 
 
@@ -438,10 +438,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
 
         if (offset == null) {
-            return start.toInstant();
+            return start;
         }
 
-        return start.toInstant().plus(offset);
+        return start.plus(offset);
     }
 
     @XmlElement
@@ -562,7 +562,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlTransient
     @Override
     public ScheduleEventIdentifier getId() {
-        return new ScheduleEventIdentifier(channel, DateUtils.toInstant(start));
+        return new ScheduleEventIdentifier(channel, start);
     }
 
     @XmlAttribute
@@ -639,7 +639,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Override
     public int compareTo(ScheduleEvent o) {
 
-        Date otherStart = o.start;
+        Instant otherStart = o.start;
         if(start != null
             && otherStart != null
             && (!start.equals(otherStart))) {
