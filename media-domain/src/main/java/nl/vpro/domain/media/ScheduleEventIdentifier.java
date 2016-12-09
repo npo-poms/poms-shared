@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+
+import nl.vpro.util.DateUtils;
 
 /**
  * @author Michiel Meeuwissen
@@ -12,23 +15,25 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ScheduleEventIdentifier implements Serializable {
 
+    @Column
     private Channel channel;
 
-    protected Date start;
+    @Column
+    protected Instant start;
 
     public ScheduleEventIdentifier() {
         // to help hibernate
     }
 
     public ScheduleEventIdentifier(Channel channel, Instant start) {
-        this.start = start == null ? null : Date.from(start);
+        this.start = start;
         this.channel = channel;
     }
 
 
     @Deprecated
     public ScheduleEventIdentifier(Channel channel, Date start) {
-        this(channel, start == null ? null : start.toInstant());
+        this(channel, DateUtils.toInstant(start));
     }
 
     public Channel getChannel() {
@@ -36,12 +41,12 @@ public class ScheduleEventIdentifier implements Serializable {
     }
 
     public Instant getStartInstant() {
-        return start == null ? null : start.toInstant();
+        return start;
     }
 
 
     public Date getStart() {
-        return start;
+        return DateUtils.toDate(start);
     }
 
     @Override
@@ -58,7 +63,7 @@ public class ScheduleEventIdentifier implements Serializable {
         if(channel == null || that.channel == null || channel != that.channel) {
             return false;
         }
-        if(start == null || that.start == null || !(start.getTime() == that.start.getTime())) {
+        if(start == null || that.start == null || !(start.toEpochMilli() == that.start.toEpochMilli())) {
             return false;
         }
 
