@@ -31,6 +31,7 @@ import nl.vpro.util.DateUtils;
 
 import static nl.vpro.util.DateUtils.toDate;
 
+@SuppressWarnings("ALL")
 public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObject>   {
 
     static ProgramBuilder program() {
@@ -153,6 +154,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
+    @Deprecated
     default B publishStart(Date date) {
         mediaObject().setPublishStart(date);
         return (B)this;
@@ -170,6 +172,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
+    @Deprecated
     default B publishStop(Date date) {
         mediaObject().setPublishStop(date);
         return (B)this;

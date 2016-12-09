@@ -114,7 +114,7 @@ public class MediaObjects {
     }
 
     public static Collection<Title> getTitles(Collection<Title> titles, TextualType... types) {
-        List<Title> returnValue = new ArrayList<Title>();
+        List<Title> returnValue = new ArrayList<>();
         if (titles != null) {
             for (Title title : titles) {
                 for (TextualType type : types) {
@@ -168,6 +168,7 @@ public class MediaObjects {
         return result.toArray(new OwnerType[result.size()]);
     }
 
+    @SuppressWarnings("unchecked")
     public static <T extends MediaObject> T deepCopy(T media) {
         ObjectOutputStream objectOut = null;
         ObjectInputStream objectIn = null;
@@ -382,30 +383,31 @@ public class MediaObjects {
      * @since 2.1
      */
     public static Date getSortDate(MediaObject mo) {
+        return DateUtils.toDate(getSortInstant(mo));
+
+    }
+
+    public static Instant getSortInstant(MediaObject mo) {
         if (mo instanceof Group) {
             return mo.sortDate;
         } else if (mo instanceof Segment) {
             Segment segment = (Segment) mo;
             if (segment.parent != null) {
-                return getSortDate(segment.parent);
+                return getSortInstant(segment.parent);
             }
         }
-        Date date = null;
+        Instant date = null;
         if (mo.scheduleEvents != null && mo.scheduleEvents.size() > 0) {
-            date = sorted(mo.scheduleEvents).first().getStart();
+            date = sorted(mo.scheduleEvents).first().getStartInstant();
         }
         if (date == null) {
-            date = mo.getPublishStart();
+            date = mo.getPublishStartInstant();
         }
         if (date == null) {
-            date = mo.getCreationDate();
+            date = mo.getCreationInstant();
         }
         return date;
 
-    }
-
-    public static Instant getSortInstant(MediaObject mo) {
-        return DateUtils.toInstant(getSortDate(mo));
     }
 
 
@@ -460,7 +462,7 @@ public class MediaObjects {
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
      *
-     * @TODO work in progres. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
+     * TODO work in progres. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
      */
     public static <T extends PublishableObject> T filterPublishable(T object) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Predicate<Object> p = (o) -> {

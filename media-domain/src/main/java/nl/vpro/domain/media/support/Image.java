@@ -6,6 +6,7 @@
 
 package nl.vpro.domain.media.support;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -303,7 +304,7 @@ public class Image extends PublishableObject implements Ownable {
     }
 
     public Image setImageUri(String uri) {
-        this.imageUri = uri == null ? uri : uri.trim();
+        this.imageUri = uri == null ? null : uri.trim();
         return this;
     }
 
@@ -390,14 +391,14 @@ public class Image extends PublishableObject implements Ownable {
     }
 
     @Override
-    public Image setPublishStop(Date publishStop) {
-        super.setPublishStop(publishStop);
+    public Image setPublishStopInstant(Instant publishStop) {
+        super.setPublishStopInstant(publishStop);
         return this;
     }
 
     @Override
-    public Image setPublishStart(Date publishStart) {
-        super.setPublishStart(publishStart);
+    public Image setPublishStartInstant(Instant publishStart) {
+        super.setPublishStartInstant(publishStart);
         return this;
     }
 
