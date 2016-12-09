@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -58,6 +59,15 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
         "subtitles",
         "offset",
         "duration"})
+
+@JsonPropertyOrder({
+    "programUrl",
+    "avAttributes",
+    "owner",
+    "creationDate",
+    "workflow"
+
+})
 public class Location extends PublishableObject implements Ownable, Comparable<Location> {
     //TODO Validate URL, TYPE and Owner AVTYPE
 

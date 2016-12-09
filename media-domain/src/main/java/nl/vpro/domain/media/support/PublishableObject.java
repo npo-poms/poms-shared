@@ -29,9 +29,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
 import nl.vpro.validation.Publishable;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -326,6 +329,8 @@ public abstract class PublishableObject extends DomainObject {
     @XmlAttribute(name = "creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getCreationInstant() {
         return creationDate;
     }
