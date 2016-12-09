@@ -1,15 +1,6 @@
 package nl.vpro.domain.page;
 
 import net.sf.json.test.JSONAssert;
-import nl.vpro.domain.classification.ClassificationService;
-import nl.vpro.domain.media.MediaClassificationService;
-import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -17,6 +8,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
+
+import org.junit.Test;
+import org.xml.sax.SAXException;
+
+import nl.vpro.domain.classification.ClassificationService;
+import nl.vpro.domain.media.MediaClassificationService;
+import nl.vpro.domain.media.Schedule;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
@@ -35,7 +37,7 @@ public class PageBuilderTest {
     @Test
     public void testSortDate() throws Exception {
         Page page = PageBuilder.page(PageType.ARTICLE).publishStart(TEST_INSTANT).build();
-        String test = "<local:page publishStart=\"2016-04-18T12:00:00.000+02:00\" sortDate=\"2016-04-18T12:00:00.000+02:00\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\"/>\n";
+        String test = "<local:page publishStart=\"2016-04-18T12:00:00+02:00\" sortDate=\"2016-04-18T12:00:00+02:00\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\"/>\n";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getPublishStart()).isEqualTo(TEST_INSTANT);
 
@@ -135,7 +137,7 @@ public class PageBuilderTest {
     @Test
     public void testLastPublished() throws IOException, SAXException {
         Page page = PageBuilder.page(PageType.ARTICLE).lastPublished(Instant.EPOCH).build();
-        String test = "<local:page xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\" lastPublished=\"1970-01-01T01:00:00.000+01:00\" type=\"ARTICLE\"/>";
+        String test = "<local:page xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\" lastPublished=\"1970-01-01T01:00:00+01:00\" type=\"ARTICLE\"/>";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getLastPublished()).isEqualTo(Instant.EPOCH);
     }
