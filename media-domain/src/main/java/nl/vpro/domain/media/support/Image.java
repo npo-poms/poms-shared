@@ -22,6 +22,7 @@ import org.hibernate.validator.constraints.URL;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -70,6 +71,24 @@ import nl.vpro.xml.bind.DateToDuration;
         "license",
         "date"
     })
+@JsonPropertyOrder({
+    "title",
+    "description",
+    "imageUri",
+    "offset",
+    "height",
+    "width",
+    "credits",
+    "source",
+    "sourceName",
+    "license",
+    "date",
+    "owner",
+    "type",
+    "highlighted",
+    "creationDate",
+    "workflow"
+})
 public class Image extends PublishableObject implements Ownable {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
