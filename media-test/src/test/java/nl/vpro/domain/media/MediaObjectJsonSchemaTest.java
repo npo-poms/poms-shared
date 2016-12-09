@@ -366,7 +366,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"locations\":[{\"programUrl\":\"2\",\"avAttributes\":{\"avFileFormat\":\"UNKNOWN\"},\"owner\":\"BROADCASTER\",\"creationDate\":1,\"workflow\":\"FOR_PUBLICATION\"}]}";
 
         Location location = new Location("2", OwnerType.BROADCASTER);
-        location.setCreationDate(new Date(1));
+        location.setCreationInstant(Instant.ofEpochMilli(1));
         Program program = program().id(100L).lean().locations(location).build();
 
         String actual = toJson(program);

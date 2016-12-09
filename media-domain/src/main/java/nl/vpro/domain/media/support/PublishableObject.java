@@ -18,12 +18,9 @@ import java.util.zip.CRC32;
 import javax.persistence.*;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.Filter;
 import org.hibernate.Session;
@@ -37,6 +34,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.util.DateUtils;
 import nl.vpro.validation.Publishable;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * Publishable contains all items for Publishables.
@@ -105,7 +103,7 @@ public abstract class PublishableObject extends DomainObject {
     protected Instant creationDate = Instant.now();
 
     @Column(nullable = false)
-    protected Date lastModified;
+    protected Instant lastModified;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "createdby_principalid")
@@ -115,10 +113,10 @@ public abstract class PublishableObject extends DomainObject {
     @JoinColumn(name = "lastmodifiedby_principalid")
     protected Editor lastModifiedBy;
 
-    protected Date publishStart;
-    protected Date publishStop;
+    protected Instant publishStart;
+    protected Instant  publishStop;
 
-    protected Date lastPublished;
+    protected Instant lastPublished;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -291,40 +289,45 @@ public abstract class PublishableObject extends DomainObject {
     }
 
     @XmlAttribute
+    @Deprecated
     public Date getLastModified() {
-        return lastModified;
+        return DateUtils.toDate(lastModified);
     }
 
+    @Deprecated
     public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
+        this.lastModified = DateUtils.toInstant(lastModified);
     }
 
-    @XmlAttribute
+    @Deprecated
     public Date getCreationDate() {
         return DateUtils.toDate(creationDate);
     }
 
+    @Deprecated
     public void setCreationDate(Date creationDate) {
-        this.creationDate = DateUtils.toInstant(creationDate);
+        setCreationInstant(DateUtils.toInstant(creationDate));
     }
 
 
 
     public Instant getLastModifiedInstant() {
-        return DateUtils.toInstant(getLastModified());
+        return lastModified;
     }
 
     public void setLastModifiedInstant(Instant lastModified) {
-        setLastModified(DateUtils.toDate(lastModified));
+        this.lastModified = lastModified;
     }
 
-
+    @XmlAttribute(name = "creationDate")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     public Instant getCreationInstant() {
-        return DateUtils.toInstant(getCreationDate());
+        return creationDate;
     }
 
     public void setCreationInstant(Instant creationDate) {
-        setCreationDate(DateUtils.toDate(creationDate));
+        this.creationDate = creationDate;
     }
 
     public Editor getCreatedBy() {
@@ -346,25 +349,23 @@ public abstract class PublishableObject extends DomainObject {
     @XmlAttribute
     @JsonProperty("publishStart")
     public Date getPublishStart() {
-        return publishStart;
+        return DateUtils.toDate(publishStart);
     }
 
 
     public PublishableObject setPublishStart(Date publishStart) {
-        if (ObjectUtils.notEqual(publishStart, this.publishStart)) {
-            this.publishStart = publishStart;
-        }
+        this.publishStart = DateUtils.toInstant(publishStart);
         return this;
     }
 
     @XmlAttribute
     @JsonProperty("publishStop")
     public Date getPublishStop() {
-        return publishStop;
+        return DateUtils.toDate(publishStop);
     }
 
     public PublishableObject setPublishStop(Date publishStop) {
-        this.publishStop = publishStop;
+        this.publishStop = DateUtils.toInstant(publishStop);
         return this;
     }
 
@@ -404,10 +405,18 @@ public abstract class PublishableObject extends DomainObject {
     @XmlAttribute(name = "publishDate")
     @JsonProperty("publishDate")
     public Date getLastPublished() {
-        return lastPublished;
+        return DateUtils.toDate(lastPublished);
     }
 
     public void setLastPublished(Date lastPublished) {
+        this.lastPublished = DateUtils.toInstant(lastPublished);
+    }
+
+    public Instant getLastPublishedInstant() {
+        return lastPublished;
+    }
+
+    public void setLastPublishedInstant(Instant lastPublished) {
         this.lastPublished = lastPublished;
     }
 
