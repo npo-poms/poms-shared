@@ -111,6 +111,12 @@ public class LocalizedString  { //implements javax.xml.registry.infomodel.Locali
         return candidate == null ? null : candidate.getValue();
 
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
     private int getScore(Locale locale) {
         int score = 0;
         if (this.locale == null || locale == null) {
