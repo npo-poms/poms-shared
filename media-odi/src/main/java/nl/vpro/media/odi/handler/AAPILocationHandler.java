@@ -4,6 +4,7 @@
  */
 package nl.vpro.media.odi.handler;
 
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -41,6 +42,7 @@ import nl.vpro.media.odi.util.LocationResult;
  * TODO
  */
 @Slf4j
+@ToString
 public class AAPILocationHandler implements LocationProducer {
 
     private static final String M3U8 = "m3u8";
