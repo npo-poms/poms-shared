@@ -44,7 +44,7 @@ public class ScheduleEventIdentifier implements Serializable {
         return start;
     }
 
-
+    @Deprecated
     public Date getStart() {
         return DateUtils.toDate(start);
     }
