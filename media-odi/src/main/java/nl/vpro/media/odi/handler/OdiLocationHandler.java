@@ -27,7 +27,7 @@ import nl.vpro.media.odi.util.LocationResult;
  * TODO
  */
 @Slf4j
-@ToString
+@ToString(exclude = "odiSecret")
 public class OdiLocationHandler implements LocationProducer {
     private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 

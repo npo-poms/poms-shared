@@ -26,7 +26,7 @@ import nl.vpro.media.odi.util.LocationResult;
 /**
  * See <a href="http://hosting.omroep.nl/sterretje-cluster:content-hosting#hotlink_bescherming">Hotlink bescherming</a>
  */
-@ToString
+@ToString(exclude = "streamAAPISecret")
 public class DeeplinkProtectionLocationHandler implements LocationProducer {
     private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 
