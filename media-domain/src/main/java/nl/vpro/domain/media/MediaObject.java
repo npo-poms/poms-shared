@@ -2544,9 +2544,9 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     @Override
-    public void setCreationDate(Date publishStart) {
+    public void setCreationInstant(Instant publishStart) {
         sortDateValid = false;
-        super.setCreationDate(publishStart);
+        super.setCreationInstant(publishStart);
     }
 
     @Override
