@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media;
 
+import java.time.Instant;
 import java.util.*;
 
 import javax.validation.ConstraintViolation;
@@ -78,7 +79,7 @@ public class MediaDomainTestHelper extends ValidationTestHelper {
         program.setPredictions(null);
         program.addTitle(new Title("Test program", OwnerType.BROADCASTER, TextualType.MAIN));
 
-        program.setCreationDate(new Date(0));
+        program.setCreationInstant(Instant.ofEpochMilli(0));
 
         return program;
     }

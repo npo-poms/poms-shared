@@ -1,6 +1,5 @@
 package nl.vpro.domain.media.support;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -41,7 +40,7 @@ public class ImageTest {
         Image image = new Image();
         image.setSource(null);
         image.setImageUri("urn:vpro:image:123");
-        image.setCreationDate(Date.from(LocalDate.of(2016, 11, 9).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant()));
+        image.setCreationInstant(LocalDate.of(2016, 11, 9).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant());
         image.setOffset(java.time.Duration.ofMillis(100));
         image.setLicense(License.CC_BY);
 
@@ -63,7 +62,7 @@ public class ImageTest {
         Image image = new Image();
         image.setSource(null);
         image.setImageUri("urn:vpro:image:123");
-        image.setCreationDate(Date.from(LocalDate.of(2016, 11, 9).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant()));
+        image.setCreationInstant(LocalDate.of(2016, 11, 9).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant());
         image.setOffset(java.time.Duration.ofMillis(100));
         image.setLicense(License.CC_BY);
 

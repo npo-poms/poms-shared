@@ -113,7 +113,7 @@ public class LocationUpdate implements Comparable<LocationUpdate> {
         result.setDuration(duration);
         result.setOffset(offset);
         result.setUrn(urn);
-        result.setCreationDate(null);
+        result.setCreationInstant(null);
         return result;
     }
 

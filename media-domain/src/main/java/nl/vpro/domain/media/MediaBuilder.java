@@ -115,7 +115,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B creationDate(Date date) {
-        mediaObject().setCreationDate(date);
+        mediaObject().setCreationInstant(DateUtils.toInstant(date));
         return (B)this;
     }
 
@@ -131,13 +131,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B clearCreationDate() {
-        mediaObject().setCreationDate(null);
+        mediaObject().setCreationInstant(null);
         return (B) this;
     }
 
     @SuppressWarnings("unchecked")
     default B lastModified(Date date) {
-        mediaObject().setLastModified(date);
+        mediaObject().setLastModifiedInstant(DateUtils.toInstant(date));
         return (B)this;
     }
     default B lastModified(Instant date) {
