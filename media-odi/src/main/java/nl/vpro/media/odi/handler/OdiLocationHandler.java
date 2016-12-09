@@ -4,6 +4,7 @@
  */
 package nl.vpro.media.odi.handler;
 
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
@@ -26,6 +27,7 @@ import nl.vpro.media.odi.util.LocationResult;
  * TODO
  */
 @Slf4j
+@ToString
 public class OdiLocationHandler implements LocationProducer {
     private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 

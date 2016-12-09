@@ -4,6 +4,9 @@
  */
 package nl.vpro.media.odi.handler;
 
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,8 +24,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.media.Location;
 import nl.vpro.media.odi.LocationProducer;
@@ -32,8 +33,10 @@ import nl.vpro.media.odi.util.LocationResult;
 /**
  * TODO
  */
+@ToString
+@Slf4j
 public class OdiPlusLocationHandler implements LocationProducer {
-    private static final Logger LOG = LoggerFactory.getLogger(OdiLocationHandler.class);
+
 
     private static String ODI_PLUS_SCHEME_PREFIX = "odip+";
 
@@ -67,9 +70,9 @@ public class OdiPlusLocationHandler implements LocationProducer {
                 return new LocationResult(location.getAvFileFormat(), location.getBitrate(), odiUrl, location.getUrn());
             }
         } catch(MalformedURLException e) {
-            LOG.warn("Invalid programUrl " + programUrl + " " + e.getMessage());
+            log.warn("Invalid programUrl " + programUrl + " " + e.getMessage());
         } catch(IOException e) {
-            LOG.warn("Error while obtaining an ODI url for " + programUrl + ". Root cause: " + e.getMessage());
+            log.warn("Error while obtaining an ODI url for " + programUrl + ". Root cause: " + e.getMessage());
         }
 
         return null;

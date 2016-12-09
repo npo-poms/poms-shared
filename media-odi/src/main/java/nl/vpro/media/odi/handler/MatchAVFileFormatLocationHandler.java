@@ -1,5 +1,7 @@
 package nl.vpro.media.odi.handler;
 
+import lombok.ToString;
+
 import javax.servlet.http.HttpServletRequest;
 
 import nl.vpro.domain.media.AVFileFormat;
@@ -12,6 +14,7 @@ import nl.vpro.media.odi.util.LocationResult;
  * @author Michiel Meeuwissen
  * @since 4.9
  */
+@ToString
 public class MatchAVFileFormatLocationHandler implements LocationProducer {
 
     @Override

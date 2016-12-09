@@ -4,6 +4,8 @@
  */
 package nl.vpro.media.odi.handler;
 
+import lombok.ToString;
+
 import java.net.URI;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import nl.vpro.media.odi.util.LocationResult;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
+@ToString
 public class MatchSchemesLocationHandler implements LocationProducer {
 
     final List<String> schemes;
