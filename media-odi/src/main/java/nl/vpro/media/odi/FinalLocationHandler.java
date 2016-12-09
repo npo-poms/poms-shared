@@ -9,6 +9,7 @@ import nl.vpro.media.odi.util.LocationResult;
  * @author Michiel Meeuwissen
  * @since 5.0
  */
+
 public class FinalLocationHandler implements LocationProducer {
 
     private final LocationProducer finalHandler;
@@ -34,5 +35,10 @@ public class FinalLocationHandler implements LocationProducer {
     public LocationResult produce(Location location, HttpServletRequest request, String... pubOptions) {
         return finalHandler.produce(location, request, pubOptions);
 
+    }
+
+    @Override
+    public String toString() {
+        return "finally " + finalHandler.toString();
     }
 }

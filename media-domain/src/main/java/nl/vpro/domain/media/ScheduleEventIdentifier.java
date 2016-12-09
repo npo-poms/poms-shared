@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 import nl.vpro.util.DateUtils;
 
@@ -16,7 +18,8 @@ import nl.vpro.util.DateUtils;
 public class ScheduleEventIdentifier implements Serializable {
 
     @Column
-    private Channel channel;
+    @Enumerated(EnumType.STRING)
+    protected Channel channel;
 
     @Column
     protected Instant start;

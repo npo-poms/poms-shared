@@ -4,6 +4,8 @@
  */
 package nl.vpro.media.odi.handler;
 
+import lombok.ToString;
+
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,6 +26,7 @@ import nl.vpro.media.odi.util.LocationResult;
 /**
  * See <a href="http://hosting.omroep.nl/sterretje-cluster:content-hosting#hotlink_bescherming">Hotlink bescherming</a>
  */
+@ToString
 public class DeeplinkProtectionLocationHandler implements LocationProducer {
     private static HexBinaryAdapter hexBinaryAdapter = new HexBinaryAdapter();
 
