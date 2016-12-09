@@ -130,10 +130,12 @@ public class Image extends PublishableObject implements Ownable {
     @Size.List({
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
+    @Transient // Will be added > 5.0
     private String sourceName;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @Enumerated(EnumType.STRING)
+    @Transient // Will be added > 5.0
     private License license;
 
 
