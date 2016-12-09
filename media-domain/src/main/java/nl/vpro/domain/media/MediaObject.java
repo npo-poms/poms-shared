@@ -2763,18 +2763,6 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         }
     }
 
-    @PreUpdate
-    @PrePersist
-    public void updateLastModified() {
-        if (lastModified == null) {
-            lastModified = new Date();
-        }
-
-        if (creationDate == null) {
-            creationDate = Instant.now();
-        }
-    }
-
     @Override
     protected abstract String getUrnPrefix();
 
