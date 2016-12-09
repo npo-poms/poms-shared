@@ -463,12 +463,12 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     // The sortDate field is actually calculatable, but it can be a bit expensive, so we cache it's value in a persistent field.
     @Column(name = "sortdate", nullable = true, unique = false)
-    protected Date sortDate;
+    protected Instant sortDate;
 
     // Used for monitoring publication delau. Not exposed via java.
     // Set its value in sql to now() when unmodified media is republished.
     @Column(name = "repubDate", nullable = true, unique = false)
-    protected Date repubDate;
+    protected Instant repubDate;
 
     @Column(nullable = false)
     @JsonIgnore // Oh Jackson2...
@@ -589,6 +589,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
                 for (T v : values) {
                     for (T toUpdateValue : toUpdate) {
                         if (toUpdateValue != null && toUpdateValue instanceof Updatable && toUpdateValue.equals(v)) {
+                            //noinspection unchecked
                             ((Updatable) toUpdateValue).update(v);
                         }
                     }
@@ -931,14 +932,8 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     public MediaObject removeTitlesForOwner(OwnerType owner) {
         if (titles != null) {
-            Iterator<Title> iterator = titles.iterator();
 
-            while (iterator.hasNext()) {
-                Title title = iterator.next();
-                if (title.getOwner().equals(owner)) {
-                    iterator.remove();
-                }
-            }
+            titles.removeIf(title -> title.getOwner().equals(owner));
         }
         return this;
     }
@@ -1068,14 +1063,8 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     public MediaObject removeDescriptionsForOwner(OwnerType owner) {
         if (descriptions != null) {
-            Iterator<Description> iterator = descriptions.iterator();
 
-            while (iterator.hasNext()) {
-                Description description = iterator.next();
-                if (description.getOwner().equals(owner)) {
-                    iterator.remove();
-                }
-            }
+            descriptions.removeIf(description -> description.getOwner().equals(owner));
         }
         return this;
     }
@@ -1190,7 +1179,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     /**
-     * Consider using {@link nl.vpro.domain.media.TagService#findOrCreate(} first.
+     * Consider using nl.vpro.domain.media.TagService#findOrCreate() first.
      */
     public void setTags(Set<Tag> tags) {
         this.tags = updateSortedSet(this.tags, tags);
@@ -2172,13 +2161,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     public void revokeLocations(Platform platform) {
         if (locations != null) {
-            Iterator<Location> iterator = locations.iterator();
-            while (iterator.hasNext()) {
-                Location location = iterator.next();
-                if (platform.equals(location.getPlatform())) {
-                    iterator.remove();
-                }
-            }
+            locations.removeIf(location -> platform.equals(location.getPlatform()));
         }
 
         Prediction prediction = findOrCreatePrediction(platform);
@@ -2192,13 +2175,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     private void clearCeresRecord(Platform platform) {
         if (locationAuthorityRecords != null) {
-            Iterator<LocationAuthorityRecord> i = locationAuthorityRecords.iterator();
-            while (i.hasNext()) {
-                LocationAuthorityRecord cr = i.next();
-                if (cr.getPlatform() == platform) {
-                    i.remove();
-                }
-            }
+            locationAuthorityRecords.removeIf(cr -> cr.getPlatform() == platform);
         }
     }
 
@@ -2259,20 +2236,18 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     public MediaObject addRelation(Relation relation) {
         nullCheck(relation, "relation");
 
-        if (relation != null) {
-            if (this.relations == null) {
-                this.relations = new TreeSet<>();
-            }
-
-            this.relations.add(relation);
+        if (this.relations == null) {
+            this.relations = new TreeSet<>();
         }
+
+        this.relations.add(relation);
         return this;
     }
 
     public Relation findRelation(Relation relation) {
         if (relations != null) {
             for (Relation existing : relations) {
-                if (existing == null && relation == null || existing.equals(relation)) {
+                if (Objects.equals(existing, relation)) {
                     return existing;
                 }
             }
@@ -2519,26 +2494,25 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     @Override
-    public PublishableObject setPublishStart(Date publishStart) {
-
+    public PublishableObject setPublishStartInstant(Instant publishStart) {
         if (! Objects.equals(this.publishStart, publishStart)) {
             sortDateValid = false;
             if (hasInternetVodAuthority()) {
                 locationAuthorityUpdate = true;
             }
         }
-        return super.setPublishStart(publishStart);
+        return super.setPublishStartInstant(publishStart);
     }
 
     @Override
-    public PublishableObject setPublishStop(Date publishStop) {
+    public PublishableObject setPublishStopInstant(Instant publishStop) {
         if (!Objects.equals(this.publishStop, publishStop)) {
             sortDateValid = false;
             if (hasInternetVodAuthority()) {
                 locationAuthorityUpdate = true;
             }
         }
-        return super.setPublishStop(publishStop);
+        return super.setPublishStopInstant(publishStop);
     }
 
     protected boolean hasInternetVodAuthority() {
@@ -2583,8 +2557,13 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @XmlAttribute(name = "sortDate", required = true)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     final public Date getSortDate() {
+        return DateUtils.toDate(getSortInstant());
+    }
+
+    @XmlTransient
+    public final Instant getSortInstant() {
         if (!sortDateValid) {
-            Date date = MediaObjects.getSortDate(this);
+            Instant date = MediaObjects.getSortInstant(this);
             if (date != null) {
                 sortDate = date;
             }
@@ -2593,15 +2572,17 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return sortDate;
     }
 
-    @XmlTransient
-    public Instant getSortInstant() {
-        return DateUtils.toInstant(getSortDate());
+    /**
+     * Method is needed for unmarshalling. It does nothing. It may do something in overrides (as in {@link Group})
+     */
+    final void setSortDate(Date date) {
+        this.setSortInstant(DateUtils.toInstant(date));
     }
 
     /**
      * Method is needed for unmarshalling. It does nothing. It may do something in overrides (as in {@link Group})
      */
-    void setSortDate(Date date) {
+    void setSortInstant(Instant date) {
         this.sortDate = date;
         this.sortDateValid = true;
 
@@ -2657,10 +2638,8 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
      * NewRelic. It contains the scheduled publication date of this MediaObject. This field is set (in SQL) when
      * republishing descendants, and (in code) when revoking locations/images. When the republication delay reaches a
      * certain value an alert is raised in NewRelic.
-     *
-     * @param repubDate
      */
-    public void setRepubDate(Date repubDate) {
+    public void setRepubDate(Instant repubDate) {
         this.repubDate = repubDate;
     }
 
@@ -2759,6 +2738,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             return null;
         }
         if (set instanceof SortedSet) {
+            //noinspection unchecked
             return (SortedSet) set;
         } else {
             return new ResortedSortedSet<S>(set);

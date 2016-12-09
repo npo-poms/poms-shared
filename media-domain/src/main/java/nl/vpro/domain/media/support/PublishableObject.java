@@ -357,24 +357,42 @@ public abstract class PublishableObject extends DomainObject {
 
     @XmlAttribute
     @JsonProperty("publishStart")
-    public  Date getPublishStart() {
-        return DateUtils.toDate(publishStart);
+    public final Date getPublishStart() {
+        return DateUtils.toDate(getPublishStartInstant());
     }
 
 
-    public PublishableObject setPublishStart(Date publishStart) {
-        this.publishStart = DateUtils.toInstant(publishStart);
+    @Deprecated
+    public final PublishableObject setPublishStart(Date publishStart) {
+        return setPublishStartInstant(DateUtils.toInstant(publishStart));
+    }
+
+    public Instant getPublishStartInstant() {
+        return publishStart;
+    }
+
+    public PublishableObject setPublishStartInstant(Instant publishStart) {
+        this.publishStart = publishStart;
         return this;
     }
 
     @XmlAttribute
     @JsonProperty("publishStop")
-    public Date getPublishStop() {
-        return DateUtils.toDate(publishStop);
+    public final Date getPublishStop() {
+        return DateUtils.toDate(getPublishStopInstant());
     }
 
-    public PublishableObject setPublishStop(Date publishStop) {
-        this.publishStop = DateUtils.toInstant(publishStop);
+    public final PublishableObject setPublishStop(Date publishStop) {
+        return setPublishStopInstant(DateUtils.toInstant(publishStop));
+    }
+
+
+    public Instant getPublishStopInstant() {
+        return publishStop;
+    }
+
+    public PublishableObject setPublishStopInstant(Instant publishStart) {
+        this.publishStart = publishStart;
         return this;
     }
 
