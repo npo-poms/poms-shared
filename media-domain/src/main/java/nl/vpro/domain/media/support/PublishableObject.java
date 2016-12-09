@@ -113,9 +113,13 @@ public abstract class PublishableObject extends DomainObject {
     @JoinColumn(name = "lastmodifiedby_principalid")
     protected Editor lastModifiedBy;
 
+    @Column(nullable = true)
     protected Instant publishStart;
+
+    @Column(nullable = true)
     protected Instant  publishStop;
 
+    @Column(nullable = true)
     protected Instant lastPublished;
 
     @Column(nullable = false)
@@ -348,7 +352,7 @@ public abstract class PublishableObject extends DomainObject {
 
     @XmlAttribute
     @JsonProperty("publishStart")
-    public Date getPublishStart() {
+    public  Date getPublishStart() {
         return DateUtils.toDate(publishStart);
     }
 

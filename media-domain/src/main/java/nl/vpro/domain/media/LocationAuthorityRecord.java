@@ -5,7 +5,7 @@
 package nl.vpro.domain.media;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
@@ -45,13 +45,13 @@ public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<L
 
     @Column
     @XmlTransient
-    private Date restrictionStart;
+    private Instant restrictionStart;
 
     @Column
     @XmlTransient
-    private Date restrictionStop;
+    private Instant restrictionStop;
 
-    private LocationAuthorityRecord() {
+    public LocationAuthorityRecord() {
     }
 
     LocationAuthorityRecord(MediaObject object, Platform platform, Boolean authority) {
@@ -115,15 +115,15 @@ public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<L
      *
      * @return restrictionStart
      */
-    public Date getRestrictionStart() {
+    public Instant getRestrictionStart() {
         return restrictionStart;
     }
 
     /**
      * See {@link #getRestrictionStart()}
      */
-    public void setRestrictionStart(Date restrictionStart) {
-        if(restrictionStart != null && restrictionStop != null && restrictionStop.getTime() < restrictionStart.getTime()) {
+    public void setRestrictionStart(Instant restrictionStart) {
+        if(restrictionStart != null && restrictionStop != null && restrictionStop.isBefore(restrictionStart)) {
             this.restrictionStart = restrictionStop;
         }
         if (restrictionStart == null && this.restrictionStart != null) {
@@ -135,15 +135,15 @@ public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<L
     /**
      * See {@link #getRestrictionStart()}
      */
-    public Date getRestrictionStop() {
+    public Instant getRestrictionStop() {
         return restrictionStop;
     }
 
     /**
      * See {@link #getRestrictionStart()}
      */
-    public void setRestrictionStop(Date restrictionStop) {
-        if(restrictionStop != null && restrictionStart != null && restrictionStop.getTime() < restrictionStart.getTime()) {
+    public void setRestrictionStop(Instant restrictionStop) {
+        if(restrictionStop != null && restrictionStart != null && restrictionStop.isBefore(restrictionStart)) {
             this.restrictionStart = restrictionStop;
         }
         if (restrictionStop== null && this.restrictionStop != null) {

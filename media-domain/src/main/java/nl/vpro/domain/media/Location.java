@@ -32,6 +32,7 @@ import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.DurationToTimeConverter;
+import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
@@ -454,7 +455,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         if(isCeresLocation() && mediaObject != null) {
             try {
                 LocationAuthorityRecord record = getAuthorityRecord();
-                return record.getRestrictionStart();
+                return DateUtils.toDate(record.getRestrictionStart());
             } catch (IllegalAuthorativeRecord iea) {
                 LOG.debug(iea.getMessage());
             }
@@ -465,14 +466,14 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
     @Override
     public PublishableObject setPublishStart(Date publishStart) {
-        if (! Objects.equals(this.publishStart, publishStart)) {
+        if (! Objects.equals(this.publishStart, DateUtils.toInstant(publishStart))) {
 
             super.setPublishStart(publishStart);
 
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
                 if (isCeresLocation()) {
-                    getAuthorityRecord().setRestrictionStart(publishStart);
+                    getAuthorityRecord().setRestrictionStart(DateUtils.toInstant(publishStart));
                 }
                 mediaObject.realizePrediction(this);
             }
@@ -489,7 +490,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     public Date getPublishStop() {
         if(isCeresLocation() && mediaObject != null) {
             try {
-                return getAuthorityRecord().getRestrictionStop();
+                return DateUtils.toDate(getAuthorityRecord().getRestrictionStop());
             } catch (IllegalAuthorativeRecord iea) {
                 LOG.debug(iea.getMessage());
             }
@@ -500,12 +501,12 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
     @Override
     public PublishableObject setPublishStop(Date publishStop) {
-        if (! Objects.equals(this.publishStop, publishStop)) {
+        if (! Objects.equals(this.publishStop, DateUtils.toInstant(publishStop))) {
 
             super.setPublishStop(publishStop);
             if (mediaObject != null) {
                 if (isCeresLocation()) {
-                    getAuthorityRecord().setRestrictionStop(publishStop);
+                    getAuthorityRecord().setRestrictionStop(DateUtils.toInstant(publishStop));
                 }
                 mediaObject.realizePrediction(this);
             }
