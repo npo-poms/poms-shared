@@ -10,7 +10,10 @@ import org.mockito.stubbing.Answer;
 import nl.vpro.domain.media.*;
 
 import static org.mockito.AdditionalAnswers.returnsFirstArg;
+import static org.mockito.AdditionalMatchers.or;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.isNull;
 
 public class TestHelper {
 
@@ -34,22 +37,27 @@ public class TestHelper {
     }
 
     public static MediaObject anyMediaObject() {
-        return any(MediaObject.class);
+        return or(isNull(), any(MediaObject.class));
     }
 
     public static Program anyProgram() {
-        return any(Program.class);
+        return or(isNull(), any(Program.class));
     }
 
     public static Group anyGroup() {
-        return any(Group.class);
+        return or(isNull(), any(Group.class));
     }
 
     public static Segment anySegment() {
-        return any(Segment.class);
+        return or(isNull(), any(Segment.class));
+    }
+
+
+    public static String anyStringOrNull() {
+        return or(isNull(), anyString());
     }
 
     public static Schedule anySchedule() {
-        return any(Schedule.class);
+        return or(isNull(), any(Schedule.class));
     }
 }
