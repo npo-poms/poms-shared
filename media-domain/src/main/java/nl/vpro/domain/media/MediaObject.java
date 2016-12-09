@@ -5,6 +5,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -26,8 +28,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -213,10 +213,8 @@ import nl.vpro.validation.WarningValidatorGroup;
     ),
     @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")})
 
+@Slf4j
 public abstract class MediaObject extends PublishableObject implements NicamRated {
-
-    private static final Logger LOG = LoggerFactory.getLogger(MediaObject.class);
-
 
     @Column(name = "mid", nullable = false, unique = true)
     @Size.List({@Size(max = 255), @Size(min = 4)})
@@ -352,9 +350,13 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filters({
-        @Filter(name = PUBLICATION_FILTER, condition = "((mediaobjec10_.publishstart is null or mediaobjec10_.publishstart < now())"
-            + "and (mediaobjec10_.publishstop is null or mediaobjec10_.publishstop > now()))"),
-        @Filter(name = EMBARGO_FILTER, condition = "(mediaobjec10_2_.type != 'CLIP' " +
+        @Filter(name = PUBLICATION_FILTER, condition = "(" +
+            "(mediaobjec10_.mergedTo_id is null) and " +  // MSE-3526 ?
+            "(mediaobjec10_.publishstart is null or mediaobjec10_.publishstart < now()) and " +
+            "(mediaobjec10_.publishstop is null or mediaobjec10_.publishstop > now())" +
+            ")"),
+        @Filter(name = EMBARGO_FILTER, condition =
+            "(mediaobjec10_2_.type != 'CLIP' " +
             "or mediaobjec10_.publishstart is null " +
             "or mediaobjec10_.publishstart < now() " +
             "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec10_.id and o.broadcasters_id in (:broadcasters)))"),
@@ -1962,7 +1964,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
                 if (prediction.getState() == Prediction.State.ANNOUNCED) {
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform()) {
-                            LOG.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
+                            log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
                             realizePrediction(prediction, location);
                             MediaObjects.markForRepublication(MediaObject.this);
                             break;
@@ -2001,7 +2003,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
         Platform platform = location.getPlatform();
         if (platform == null) {
-            LOG.debug("Can't realize prediction with location {} because it has no platform", location);
+            log.debug("Can't realize prediction with location {} because it has no platform", location);
             return;
         }
 
