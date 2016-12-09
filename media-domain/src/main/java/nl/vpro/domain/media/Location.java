@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
@@ -33,7 +34,7 @@ import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.DurationToTimeConverter;
-import nl.vpro.util.DateUtils;
+import nl.vpro.util.TimeUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
@@ -195,7 +196,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         this.owner = owner;
         if (avAttributes == null) {
             avAttributes = new AVAttributes();
-        };
+        }
         this.duration = duration;
         this.avAttributes = AVAttributes
             .builder()
@@ -210,7 +211,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     @Deprecated
     public Location(String programUrl, OwnerType owner, AVAttributes avAttributes, Date duration) {
         this(programUrl, owner, avAttributes);
-        setDuration(duration);
+        setDuration(TimeUtils.durationOf(duration).orElse(null));
     }
 
     public Location(Location source) {
@@ -235,6 +236,9 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
 
     public static Location copy(Location source){
+        if (source == null) {
+            return null;
+        }
         return copy(source, source.mediaObject);
     }
 
@@ -269,12 +273,12 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             to.setDuration(from.getDuration());
             to.setOffset(from.getOffset());
             to.setSubtitles(from.getSubtitles());
-            to.setPublishStart(from.getPublishStart());
-            to.setPublishStop(from.getPublishStop());
+            to.setPublishStartInstant(from.getPublishStartInstant());
+            to.setPublishStopInstant(from.getPublishStopInstant());
 
             to.setAvAttributes(AVAttributes.update(from.getAvAttributes(), to.getAvAttributes()));
 
-        } else if(from == null) {
+        } else {
             to = null;
         }
 
@@ -461,29 +465,29 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     }
 
     @Override
-    public Date getPublishStart() {
+    public Instant getPublishStartInstant() {
         if(isCeresLocation() && mediaObject != null) {
             try {
                 LocationAuthorityRecord record = getAuthorityRecord();
-                return DateUtils.toDate(record.getRestrictionStart());
+                return record.getRestrictionStart();
             } catch (IllegalAuthorativeRecord iea) {
                 LOG.debug(iea.getMessage());
             }
         }
 
-        return super.getPublishStart();
+        return super.getPublishStartInstant();
     }
 
     @Override
-    public PublishableObject setPublishStart(Date publishStart) {
-        if (! Objects.equals(this.publishStart, DateUtils.toInstant(publishStart))) {
+    public PublishableObject setPublishStartInstant(Instant publishStart) {
+        if (! Objects.equals(this.publishStart, publishStart)) {
 
-            super.setPublishStart(publishStart);
+            super.setPublishStartInstant(publishStart);
 
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
                 if (isCeresLocation()) {
-                    getAuthorityRecord().setRestrictionStart(DateUtils.toInstant(publishStart));
+                    getAuthorityRecord().setRestrictionStart(publishStart);
                 }
                 mediaObject.realizePrediction(this);
             }
@@ -497,26 +501,26 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     }
 
     @Override
-    public Date getPublishStop() {
+    public Instant getPublishStopInstant() {
         if(isCeresLocation() && mediaObject != null) {
             try {
-                return DateUtils.toDate(getAuthorityRecord().getRestrictionStop());
+                return getAuthorityRecord().getRestrictionStop();
             } catch (IllegalAuthorativeRecord iea) {
                 LOG.debug(iea.getMessage());
             }
         }
 
-        return super.getPublishStop();
+        return super.getPublishStopInstant();
     }
 
     @Override
-    public PublishableObject setPublishStop(Date publishStop) {
-        if (! Objects.equals(this.publishStop, DateUtils.toInstant(publishStop))) {
+    public PublishableObject setPublishStopInstant(Instant publishStop) {
+        if (! Objects.equals(this.publishStop, publishStop)) {
 
-            super.setPublishStop(publishStop);
+            super.setPublishStopInstant(publishStop);
             if (mediaObject != null) {
                 if (isCeresLocation()) {
-                    getAuthorityRecord().setRestrictionStop(DateUtils.toInstant(publishStop));
+                    getAuthorityRecord().setRestrictionStop(publishStop);
                 }
                 mediaObject.realizePrediction(this);
             }
@@ -645,7 +649,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     public final static Comparator<Location> PRESENTATION_ORDER = new PresentationComparator();
 
     public static class PresentationComparator implements Comparator<Location>, Serializable {
-        private static final long serialVersionUID = 0l;
+        private static final long serialVersionUID = 0L;
 
         @Override
         public int compare(Location loc1, Location loc2) {
