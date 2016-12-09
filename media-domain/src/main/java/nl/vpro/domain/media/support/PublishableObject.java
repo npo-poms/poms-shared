@@ -382,6 +382,7 @@ public abstract class PublishableObject extends DomainObject {
         return DateUtils.toDate(getPublishStopInstant());
     }
 
+    @Deprecated
     public final PublishableObject setPublishStop(Date publishStop) {
         return setPublishStopInstant(DateUtils.toInstant(publishStop));
     }
