@@ -6,27 +6,17 @@
  */
 package nl.vpro.domain.media;
 
+import java.time.Instant;
+import java.util.TreeSet;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.*;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import java.util.Date;
-import java.util.TreeSet;
+import nl.vpro.domain.media.exceptions.CircularReferenceException;
 
 @Entity
 @Table(name = "group_table")
@@ -41,7 +31,6 @@ public class Group extends MediaObject {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOG = LoggerFactory.getLogger(Group.class);
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -142,8 +131,8 @@ public class Group extends MediaObject {
 
 
     @Override // to make it public
-    public void setSortDate(Date date) {
-        super.setSortDate(date);
+    public void setSortInstant(Instant date) {
+        super.setSortInstant(date);
     }
 
     @XmlAttribute(required = true)
@@ -157,7 +146,7 @@ public class Group extends MediaObject {
     }
 
     public boolean isEpisodesLocked() {
-        return episodesLocked != null ? episodesLocked : null;
+        return episodesLocked != null ? episodesLocked : false;
     }
 
     public void setEpisodesLocked(boolean episodesLocked) {
@@ -202,12 +191,10 @@ public class Group extends MediaObject {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Group");
-        sb.append("{mid=").append(mid);
-        sb.append(", type=").append(type);
-        sb.append(", title=").append(getMainTitle());
-        sb.append('}');
-        return sb.toString();
+        return "Group" +
+            "{mid=" + mid +
+            ", type=" + type +
+            ", title=" + getMainTitle() +
+            '}';
     }
 }

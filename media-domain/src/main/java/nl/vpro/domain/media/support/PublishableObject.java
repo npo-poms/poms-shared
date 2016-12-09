@@ -392,8 +392,8 @@ public abstract class PublishableObject extends DomainObject {
         return publishStop;
     }
 
-    public PublishableObject setPublishStopInstant(Instant publishStart) {
-        this.publishStart = publishStart;
+    public PublishableObject setPublishStopInstant(Instant publishStop) {
+        this.publishStop = publishStop;
         return this;
     }
 
