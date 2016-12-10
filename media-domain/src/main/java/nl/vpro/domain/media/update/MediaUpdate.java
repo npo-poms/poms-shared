@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
@@ -25,6 +25,10 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Organization;
 import nl.vpro.domain.user.Portal;
+import nl.vpro.util.TimeUtils;
+import nl.vpro.util.TransformingCollection;
+import nl.vpro.util.TransformingList;
+import nl.vpro.util.TransformingSortedSet;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -78,6 +82,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
 
 
+    @SuppressWarnings("unchecked")
     public static <M extends MediaObject> MediaUpdate<M> create(M object) {
         if(object instanceof Program) {
             return (MediaUpdate<M>) ProgramUpdate.create((Program)object);
@@ -361,20 +366,20 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     }
 
     @XmlAttribute
-    public Date getPublishStart() {
-        return mediaObject().getPublishStart();
+    public Instant getPublishStart() {
+        return mediaObject().getPublishStartInstant();
     }
 
-    public void setPublishStart(Date publishStart) {
+    public void setPublishStart(Instant publishStart) {
         builder.publishStart(publishStart);
     }
 
     @XmlAttribute
-    public Date getPublishStop() {
-        return mediaObject().getPublishStop();
+    public Instant getPublishStop() {
+        return mediaObject().getPublishStopInstant();
     }
 
-    public void setPublishStop(Date publishStop) {
+    public void setPublishStop(Instant publishStop) {
         builder.publishStop(publishStop);
     }
 
@@ -442,10 +447,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     public void setPortalRestrictions(String... restrictions) {
         List<PortalRestrictionUpdate> updates = getPortalRestrictions();
-        Stream.of(restrictions).forEach(r -> {
-                updates.add(PortalRestrictionUpdate.of(r));
-            }
-        );
+        Stream.of(restrictions).forEach(r -> updates.add(PortalRestrictionUpdate.of(r)));
     }
 
     @XmlElement(name = "region")
@@ -467,7 +469,8 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     public SortedSet<TitleUpdate> getTitles() {
         if (titles == null) {
             titles =
-                new TransformingSortedSet<TitleUpdate, Title>(mediaObject().getTitles(),
+                new TransformingSortedSet<TitleUpdate, Title>(
+                    mediaObject().getTitles(),
                     t -> new TitleUpdate(t.getTitle(), t.getType(), MediaUpdate.this),
                     t -> new Title(t.getTitle(), owner, t.getType())
                 ).filter(); // update object filter titles with same type different owner
@@ -498,9 +501,11 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     @XmlElement(name = "description")
     public SortedSet<DescriptionUpdate> getDescriptions() {
         if (descriptions == null) {
-            descriptions = new TransformingSortedSet<DescriptionUpdate, Description>(mediaObject().getDescriptions(),
+            descriptions = new TransformingSortedSet<DescriptionUpdate, Description>(
+                mediaObject().getDescriptions(),
                 d -> new DescriptionUpdate(d.getDescription(), d.getType(), MediaUpdate.this),
-                d -> new Description(d.getDescription(), owner, d.getType())).filter();
+                d -> new Description(d.getDescription(), owner, d.getType())
+            ).filter();
         }
         return descriptions;
     }
@@ -586,7 +591,7 @@ public  abstract class MediaUpdate<M extends MediaObject> {
 
     @Deprecated
     public void setDuration(Date duration) throws ModificationException {
-        builder.duration(duration);
+        builder.duration(TimeUtils.durationOf(duration).orElse(null));
     }
 
     public void setDuration(java.time.Duration duration) throws ModificationException {

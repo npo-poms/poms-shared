@@ -5,9 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlValue;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 import nl.vpro.domain.media.support.Displayable;
 
@@ -16,7 +15,7 @@ import nl.vpro.domain.media.support.Displayable;
 public class Net implements Displayable, Serializable {
 
     @Id
-    @NotEmpty(message = "type is required")
+    @NotNull(message = "type is required")
     @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,12}", message = "type should conform to: [A-Z0-9_-]{2,12}")
     @XmlValue
     private String id;

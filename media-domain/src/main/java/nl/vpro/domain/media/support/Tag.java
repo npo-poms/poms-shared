@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -29,7 +29,7 @@ public class Tag implements Serializable, Comparable<Tag> {
 
     @Column(nullable = false, unique = true)
     @NotNull
-    @Length(min = 1, max = 255)
+    @Size(min = 1, max = 255)
     @NoHtml
     private String text;
 
@@ -56,7 +56,7 @@ public class Tag implements Serializable, Comparable<Tag> {
     }
 
     @Override
-    public int compareTo(Tag tag) {
+    public int compareTo(@NotNull Tag tag) {
         int result = text.compareToIgnoreCase(tag.text);
         return result == 0 ? text.compareTo(tag.text) : result;
     }

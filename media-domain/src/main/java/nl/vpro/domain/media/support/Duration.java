@@ -35,8 +35,7 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 @XmlType(name = "durationType",
     namespace = Xmlns.SHARED_NAMESPACE,
     propOrder = {
-    "duration"
-})
+    })
 @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)

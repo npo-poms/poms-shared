@@ -5,14 +5,13 @@
  */
 package nl.vpro.domain.media.support;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.time.Instant;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.zip.CRC32;
 
 import javax.persistence.*;
@@ -22,11 +21,6 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.Filter;
-import org.hibernate.Session;
-import org.hibernate.internal.FilterImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -51,6 +45,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
+@Slf4j
 public abstract class PublishableObject extends DomainObject {
 
     public static final String DELETED_FILTER = "deletedFilter";
@@ -59,48 +54,6 @@ public abstract class PublishableObject extends DomainObject {
     public static final String INVERSE_PUBLICATION_FILTER = "inversePublicationFilter";
     public static final String EMBARGO_FILTER = "embargoFilter";
     public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
-
-    public static final String[] FILTERS = {
-        DELETED_FILTER,
-        INVERSE_DELETED_FILTER,
-        PUBLICATION_FILTER,
-        INVERSE_PUBLICATION_FILTER,
-        EMBARGO_FILTER,
-        INVERSE_EMBARGO_FILTER
-    };
-
-    public static Map<String, Filter> getEnabledFilters(Session session) {
-        Map<String, Filter> enabledFilters = new HashMap<>();
-        for (String filter : FILTERS) {
-            Filter f = session.getEnabledFilter(filter);
-            if (f != null) {
-                enabledFilters.put(filter, f);
-            }
-        }
-        return enabledFilters;
-    }
-
-    public static void restoreFilters(Session session, Map<String, Filter> enabledFilters) {
-        for (String filter : FILTERS) {
-            if (enabledFilters.containsKey(filter)) {
-                FilterImpl originalFilter = (FilterImpl) enabledFilters.get(filter);
-                Filter newFilter = session.enableFilter(filter);
-                for (Map.Entry<String, ?> entry : originalFilter.getParameters().entrySet()) {
-                    Object value = entry.getValue();
-                    String name = entry.getKey();
-                    if (value instanceof Collection) {
-                        newFilter.setParameterList(name, (Collection) value);
-                    } else {
-                        newFilter.setParameter(name, value);
-                    }
-                }
-            } else {
-                session.disableFilter(filter);
-            }
-        }
-    }
-
-    private static final Logger LOG = LoggerFactory.getLogger(PublishableObject.class);
 
     @Column(nullable = false)
     protected Instant creationDate = Instant.now();
@@ -215,8 +168,8 @@ public abstract class PublishableObject extends DomainObject {
 
             crc32Local.reset();
             crc32Local.update(serialized);
-            if(LOG.isDebugEnabled()) {
-                LOG.debug(new String(serialized));
+            if(log.isDebugEnabled()) {
+                log.debug(new String(serialized));
             }
             return crc32Local.getValue();
 
@@ -225,13 +178,13 @@ public abstract class PublishableObject extends DomainObject {
             if(baos != null) {
                 try {
                     baos.close();
-                } catch(Exception e) {
+                } catch(Exception ignored) {
                 }
             }
             if(writer != null) {
                 try {
                     writer.close();
-                } catch(Exception e) {
+                } catch(Exception ignored) {
                 }
             }
         }
@@ -254,11 +207,8 @@ public abstract class PublishableObject extends DomainObject {
             return true;
         }
 
-        if(Workflow.PUBLISHED == workflow && isRevocable()) {
-            return true;
-        }
+        return Workflow.PUBLISHED == workflow && isRevocable();
 
-        return false;
     }
 
     public boolean isPublishable() {
@@ -307,12 +257,12 @@ public abstract class PublishableObject extends DomainObject {
     }
 
     @Deprecated
-    public Date getCreationDate() {
-        return DateUtils.toDate(creationDate);
+    public final Date getCreationDate() {
+        return DateUtils.toDate(getCreationInstant());
     }
 
     @Deprecated
-    public void setCreationDate(Date creationDate) {
+    public final void setCreationDate(Date creationDate) {
         setCreationInstant(DateUtils.toInstant(creationDate));
     }
 
@@ -417,14 +367,14 @@ public abstract class PublishableObject extends DomainObject {
         }
         int i = urn.lastIndexOf(':') + 1;
         if(!getUrnPrefix().equals(urn.substring(0, i))) {
-            LOG.debug("Specified prefix '" + urn.substring(0, i) + "' is not equal to" +
+            log.debug("Specified prefix '" + urn.substring(0, i) + "' is not equal to" +
                 " required prefix " + getUrnPrefix());
             setUnrecognizedUrn(urn);
             return;
         }
         String id = urn.substring(i, urn.length());
         if("null".equals(id)) {
-            LOG.debug("Urn was unset");
+            log.debug("Urn was unset");
             setId(null);
         } else {
             setId(Long.parseLong(id));

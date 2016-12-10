@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2013 All rights reserved
  * VPRO The Netherlands
  */
@@ -9,9 +9,10 @@ import java.io.InputStream;
 import java.net.*;
 
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
-
-import org.hibernate.validator.constraints.URL;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.Xmlns;
 
@@ -27,7 +28,7 @@ public class AssetLocation implements AssetSource {
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
     @NotNull(message = "provide asset location")
-    @URL
+    @nl.vpro.validation.URI
     private String url;
 
     private AssetLocation() {
@@ -77,8 +78,6 @@ public class AssetLocation implements AssetSource {
             }
 
             return urlConnection.getInputStream();
-        } catch(MalformedURLException e) {
-            throw new RuntimeException(e);
         } catch(IOException e) {
             throw new RuntimeException(e);
         }
@@ -86,10 +85,8 @@ public class AssetLocation implements AssetSource {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("AssetLocation");
-        sb.append("{url='").append(url).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "AssetLocation" +
+            "{url='" + url + '\'' +
+            '}';
     }
 }
