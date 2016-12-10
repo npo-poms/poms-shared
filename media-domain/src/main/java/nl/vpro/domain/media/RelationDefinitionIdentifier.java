@@ -3,17 +3,17 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Embeddable
 public class RelationDefinitionIdentifier implements Serializable {
 
-    @NotEmpty(message = "{nl.vpro.constraints.NotEmpty}")
-    @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
+    @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
+    @Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
     private String type;
 
-    @NotEmpty(message = "{nl.vpro.constraints.NotEmpty}")
+    @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
     private String broadcaster;
 
     protected RelationDefinitionIdentifier() {

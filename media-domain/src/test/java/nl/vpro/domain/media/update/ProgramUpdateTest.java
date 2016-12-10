@@ -7,6 +7,8 @@ package nl.vpro.domain.media.update;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 
 import javax.validation.ConstraintViolation;
@@ -111,7 +113,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPublishStart() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setPublishStart(new Date(4444));
+        update.setPublishStart(Instant.ofEpochMilli(4444));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program publishStart=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
 
@@ -121,7 +123,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPublishStop() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setPublishStop(new Date(4444));
+        update.setPublishStop(Instant.ofEpochMilli(4444));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program publishStop=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
 
@@ -251,7 +253,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetDuration() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setDuration(new Date(656565));
+        update.setDuration(Duration.ofMillis(656565));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><duration>P0DT0H10M56.565S</duration><locations/><scheduleEvents/><images/><segments/></program>";
 
@@ -261,7 +263,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetDuration2() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setDuration(new Date(1000L * (3 * 3600 + 46 * 60)));
+        update.setDuration(Duration.ofSeconds(3 * 3600 + 46 * 60));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><duration>P0DT3H46M0.000S</duration><locations/><scheduleEvents/><images/><segments/></program>";
         JAXBTestUtil.roundTripAndSimilar(update, expected);
@@ -318,7 +320,10 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetLocations() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setLocations(new TreeSet<>(Collections.singletonList(new LocationUpdate("rtsp:someurl", new Date(100000), 320, 180, 1000000, AVFileFormat.M4V))));
+        update.setLocations(new TreeSet<>(Collections.singletonList(
+            new LocationUpdate("rtsp:someurl",
+                Duration.ofSeconds(100),
+                320, 180, 1000000, AVFileFormat.M4V))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +

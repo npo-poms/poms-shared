@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.util.TransformingSortedSet;
 
 
 @XmlRootElement(name = "program")

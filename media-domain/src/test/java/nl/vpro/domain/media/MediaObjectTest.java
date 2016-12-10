@@ -1,14 +1,15 @@
-/**
+/*
  * Copyright (C) 2008 All rights reserved VPRO The Netherlands
  */
 package nl.vpro.domain.media;
 
+import java.time.Instant;
 import java.util.*;
 
 import javax.validation.ConstraintViolation;
 
-import org.custommonkey.xmlunit.XMLUnit;
 import org.assertj.core.api.Assertions;
+import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,7 +18,6 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static nl.vpro.domain.media.MediaBuilder.ProgramBuilder;
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -170,7 +170,7 @@ public class MediaObjectTest {
         Program program = new Program(1L);
         program.setPredictions(Arrays.asList(new Prediction(Platform.INTERNETVOD)));
         program.setUrn("urn:vpro:media:program:123");
-        program.setCreationDate(new Date(0));
+        program.setCreationInstant(Instant.EPOCH);
         Title t = new Title("bla", OwnerType.BROADCASTER, TextualType.MAIN);
         program.addTitle(t);
         program.addDescription("bloe", OwnerType.BROADCASTER, TextualType.MAIN);
@@ -180,7 +180,7 @@ public class MediaObjectTest {
         program.addBroadcaster(new Broadcaster("VPRO", "V.P.R.O"));
         MemberRef ref = group.createMember(program, 1);
         ref.setHighlighted(true);
-        ref.setAdded(new Date(0));
+        ref.setAdded(Instant.EPOCH);
 
         return program;
     }
@@ -220,7 +220,7 @@ public class MediaObjectTest {
         Relation r = new Relation(new RelationDefinition("AAAA", "a", "a"));
         r.setUriRef(":");
         Program p = new Program(AVType.AUDIO, ProgramType.BROADCAST);
-        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);       
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
         p.setType(ProgramType.CLIP);
         p.addRelation(r);
 
@@ -232,16 +232,16 @@ public class MediaObjectTest {
     public void sortDate() {
         Program program = new Program();
         assertThat(Math.abs(program.getSortDate().getTime() - System.currentTimeMillis())).isLessThan(10000);
-        Date publishDate = new Date(1344043500362L);
-        program.setPublishStart(publishDate);
+        Instant publishDate = Instant.ofEpochMilli(1344043500362L);
+        program.setPublishStartInstant(publishDate);
         assertThat(program.getSortDate()).isEqualTo(publishDate);
         ScheduleEvent se = new ScheduleEvent();
-        se.setStartInstant(new Date(1444043500362L).toInstant());
+        se.setStartInstant(Instant.ofEpochMilli(1444043500362L));
         program.addScheduleEvent(se);
-        assertThat(program.getSortDate()).isEqualTo(se.getStart());
+        assertThat(program.getSortInstant()).isEqualTo(se.getStartInstant());
         Segment segment = new Segment();
         program.addSegment(segment);
-        assertThat(segment.getSortDate()).isEqualTo(se.getStart());
+        assertThat(segment.getSortInstant()).isEqualTo(se.getStartInstant());
     }
 
     @Test
@@ -373,8 +373,8 @@ public class MediaObjectTest {
         target.addLocation(l1);
 
         l1.setPlatform(Platform.PLUSVOD);
-        l1.setPublishStart(new Date(5));
-        l1.setPublishStop(new Date(10));
+        l1.setPublishStartInstant(Instant.ofEpochMilli(5));
+        l1.setPublishStopInstant(Instant.ofEpochMilli(10));
 
 
 
@@ -389,11 +389,11 @@ public class MediaObjectTest {
     @Test
     public void testSortDateWithScheduleEvents() throws Exception {
         final Program program = MediaBuilder.program()
-            .creationDate(new Date(1))
-            .publishStart(new Date(2))
+            .creationInstant(Instant.ofEpochMilli(1))
+            .publishInstant(Instant.ofEpochMilli(2))
             .scheduleEvents(
-                new ScheduleEvent(Channel.NED2, new Date(13), new Date(10)),
-                new ScheduleEvent(Channel.NED1, new Date(3), new Date(10))
+                new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(13), java.time.Duration.ofMillis(10)),
+                new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(3), java.time.Duration.ofMillis(10))
             )
             .build();
 
@@ -403,17 +403,17 @@ public class MediaObjectTest {
     @Test
     public void testSortDateWithPublishStart() throws Exception {
         final Program program = MediaBuilder.program()
-            .creationDate(new Date(1))
-            .publishStart(new Date(2))
+            .creationInstant(Instant.ofEpochMilli(1))
+            .publishInstant(Instant.ofEpochMilli(2))
             .build();
 
-        assertThat(program.getSortDate()).isEqualTo(new Date(2));
+        assertThat(program.getSortInstant()).isEqualTo(Instant.ofEpochMilli(2));
     }
 
     @Test
     public void testSortDateWithCreationDate() throws Exception {
         final Program program = MediaBuilder.program()
-            .creationDate(new Date(1))
+            .creationInstant(Instant.ofEpochMilli(1))
             .build();
 
         assertThat(program.getSortDate()).isEqualTo(new Date(1));
@@ -467,9 +467,9 @@ public class MediaObjectTest {
     @Test
     public void testHash() {
         final Program program = MediaBuilder.program()
-            .lastModified(new Date())
-            .creationDate(new Date(10000))
-            .lastPublished(new Date())
+            .lastModified(Instant.now())
+            .creationInstant(Instant.ofEpochMilli(10000))
+            .lastPublished(Instant.now())
             .id(1L)
             .build();
         program.acceptChanges();
@@ -480,15 +480,15 @@ public class MediaObjectTest {
     @Test
     public void testHasChanges() {
         final Program program = MediaBuilder.program()
-            .lastModified(new Date())
-            .lastPublished(new Date())
+            .lastModified(Instant.now())
+            .lastPublished(Instant.now())
             .id(1L)
             .build();
 
         assertThat(program.hasChanges()).isTrue();
         program.acceptChanges();
         assertThat(program.hasChanges()).isFalse();
-        program.setPublishStart(new Date());
+        program.setPublishStartInstant(Instant.now());
         assertThat(program.hasChanges()).isTrue();
         program.acceptChanges();
         assertThat(program.hasChanges()).isFalse();

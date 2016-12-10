@@ -4,35 +4,27 @@
  */
 package nl.vpro.domain.secondscreen;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.*;
+
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Cascade;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.PublishableObject;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.validator.constraints.URL;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderColumn;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import nl.vpro.validation.URI;
 
 /**
  * @author Roelof Jan Koekoek
@@ -83,7 +75,7 @@ public class Screen extends PublishableObject {
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 1024, message = "{nl.vpro.constraints.text.Size.max}")
     })
-    @URL
+    @URI
     @XmlElement
     @XmlSchemaType(name = "anyURI")
     private String url;

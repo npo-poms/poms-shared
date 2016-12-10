@@ -1,6 +1,6 @@
 package nl.vpro.domain.media.search;
 
-import java.util.Date;
+import java.time.Instant;
 
 import nl.vpro.domain.media.MemberRef;
 
@@ -18,8 +18,7 @@ public class MemberRefItem {
 
     private MediaListItem owner;
 
-
-    private Date added;
+    private Instant added;
 
     private Boolean highlighted;
 
@@ -40,11 +39,11 @@ public class MemberRefItem {
         this.number = number;
     }
 
-    public Date getAdded() {
+    public Instant getAdded() {
         return added;
     }
 
-    public void setAdded(Date added) {
+    public void setAdded(Instant added) {
         this.added = added;
     }
 

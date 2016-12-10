@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -16,8 +15,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 import nl.vpro.domain.Identifiable;
-import nl.vpro.persistence.InstantToTimestampConverter;
-
 
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -38,7 +35,6 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
     protected String email;
 
     @Column
-    @Convert(converter = InstantToTimestampConverter.class)
     protected Instant lastLogin;
 
     protected AbstractUser() {

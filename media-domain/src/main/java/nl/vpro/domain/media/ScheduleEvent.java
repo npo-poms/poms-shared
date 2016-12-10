@@ -277,6 +277,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public static ScheduleEvent copy(ScheduleEvent source) {
+        if (source == null) {
+            return null;
+        }
         return copy(source, source.mediaObject);
     }
 
@@ -365,11 +368,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.textPage = textPage;
     }
 
-    @XmlElement(name = "guideDay")
-    @XmlSchemaType(name = "date")
     /**
      * @deprecated use {@link #getGuideDate}
      */
+    @XmlElement(name = "guideDay")
+    @XmlSchemaType(name = "date")
     @Deprecated
     public Date getGuideDay() {
         return guideDay == null ? null : Date.from(guideDay.atStartOfDay(Schedule.ZONE_ID).toInstant());
@@ -455,12 +458,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.offset = offset;
     }
 
+
+    /**
+     *
+     * @since 4.3
+     */
     @XmlElement(name = "duration")
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonIgnore
-    /**
-     * @since 4.3
-     */
     public Duration getDurationTime() {
         return duration;
     }
@@ -666,7 +671,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
         ScheduleEvent that = (ScheduleEvent)o;
 
-        return getId() != null ? getId().equals(that.getId()) : false;
+        return getId() != null && getId().equals(that.getId());
     }
 
     @Override

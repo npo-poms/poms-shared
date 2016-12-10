@@ -25,10 +25,6 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
-      <groupId>nl.vpro.shared</groupId>
-      <artifactId>vpro-shared-persistence</artifactId>
-    </dependency>
-    <dependency>
       <!-- contains javax.persistence -->
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>

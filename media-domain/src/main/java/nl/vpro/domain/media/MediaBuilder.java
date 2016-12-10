@@ -115,6 +115,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
+    @Deprecated
     default B creationDate(Date date) {
         mediaObject().setCreationInstant(DateUtils.toInstant(date));
         return (B)this;
@@ -131,12 +132,17 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return creationDate(fromLocalDate(date));
     }
 
+    default B creationInstant(Instant date) {
+        return creationDate(date);
+    }
+
     default B clearCreationDate() {
         mediaObject().setCreationInstant(null);
         return (B) this;
     }
 
     @SuppressWarnings("unchecked")
+    @Deprecated
     default B lastModified(Date date) {
         mediaObject().setLastModifiedInstant(DateUtils.toInstant(date));
         return (B)this;
@@ -161,6 +167,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B publishStart(Instant date) {
+        return publishStart(toDate(date));
+    }
+
+    default B publishInstant(Instant date) {
         return publishStart(toDate(date));
     }
     default B publishStart(ZonedDateTime date) {
@@ -188,6 +198,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
+    @Deprecated
     default B lastPublished(Date date) {
         mediaObject().setLastPublished(date);
         return (B) this;
