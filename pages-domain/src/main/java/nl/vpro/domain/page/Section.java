@@ -95,11 +95,7 @@ public class Section implements Displayable {
         if(!path.equals(section.path)) {
             return false;
         }
-        if(portal != null ? !portal.equals(section.portal) : section.portal != null) {
-            return false;
-        }
-
-        return true;
+        return portal != null ? portal.equals(section.portal) : section.portal == null;
     }
 
     @Override

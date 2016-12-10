@@ -1,15 +1,15 @@
-/**
+/*
  * Copyright (C) 2013 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.domain.page;
 
-import nl.vpro.domain.media.AVFileFormat;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import nl.vpro.domain.media.AVFileFormat;
 
 /**
  * @author Roelof Jan Koekoek

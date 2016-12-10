@@ -4,13 +4,12 @@ package nl.vpro.domain.page;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import org.hibernate.validator.constraints.URL;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.media.support.Displayable;
 import nl.vpro.domain.page.util.Urls;
+import nl.vpro.validation.URI;
 
 /**
  * @author Michiel Meeuwissen
@@ -29,7 +28,7 @@ import nl.vpro.domain.page.util.Urls;
 public class Portal implements Displayable {
 
     @NotNull
-    @URL
+    @URI
     private String url;
 
     @NotNull
@@ -102,11 +101,7 @@ public class Portal implements Displayable {
 
         Portal portal = (Portal)o;
 
-        if(!url.equals(portal.url)) {
-            return false;
-        }
-
-        return true;
+        return url.equals(portal.url);
     }
 
     @Override

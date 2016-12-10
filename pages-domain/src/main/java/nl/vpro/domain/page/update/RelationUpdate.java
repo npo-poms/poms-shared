@@ -75,12 +75,11 @@ public class RelationUpdate implements Comparable<RelationUpdate> {
         if (relationDefinition == null){
             throw new IllegalArgumentException("The relationtype " +  getBroadcaster() + "/" + getType() + "  is not defined");
         }
-        Relation relation = new Relation(
+        return new Relation(
             relationDefinition,
             uriRef,
             text
         );
-        return relation;
     }
 
     public String getBroadcaster() {

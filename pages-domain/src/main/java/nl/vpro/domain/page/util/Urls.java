@@ -1,16 +1,18 @@
-/**
+/*
  * Copyright (C) 2013 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.domain.page.util;
 
 import java.io.UnsupportedEncodingException;
-import java.net.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.*;
 
 import nl.vpro.domain.page.Portal;
 import nl.vpro.domain.page.Section;
-import org.hibernate.engine.transaction.jta.platform.internal.SunOneJtaPlatform;
 
 /**
  * See http://stackoverflow.com/questions/2993649/how-to-normalize-a-url-in-java with some additions
@@ -51,12 +53,7 @@ public class Urls {
 
         if(params.size() > 0) {
             // Some params are only relevant for user tracking, so remove the most commons ones.
-            for(Iterator<String> i = params.keySet().iterator(); i.hasNext(); ) {
-                final String key = i.next();
-                if(key.startsWith("utm_") || key.contains("session")) {
-                    i.remove();
-                }
-            }
+            params.keySet().removeIf(key -> key.startsWith("utm_") || key.contains("session"));
             queryString = "?" + canonicalize(params);
         } else {
             queryString = "";
@@ -98,7 +95,7 @@ public class Urls {
         }
 
         final String[] pairs = queryString.split("&");
-        final Map<String, String> params = new HashMap<String, String>(pairs.length);
+        final Map<String, String> params = new HashMap<>(pairs.length);
 
         for(final String pair : pairs) {
             if(pair.length() < 1) {

@@ -26,12 +26,6 @@
     <dependency>
       <groupId>nl.vpro.media</groupId>
       <artifactId>media-domain</artifactId>
-      <exclusions>
-        <exclusion>
-          <artifactId>hibernate-search-analyzers</artifactId>
-          <groupId>org.hibernate</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>nl.vpro.media</groupId>
@@ -90,10 +84,6 @@
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>annotations</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
