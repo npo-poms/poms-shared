@@ -80,7 +80,7 @@ public class Relation implements Comparable<Relation> {
             to.setUriRef(from.getUriRef());
             to.setText(from.getText());
 
-        } else if (from == null) {
+        } else {
             to = null;
         }
 

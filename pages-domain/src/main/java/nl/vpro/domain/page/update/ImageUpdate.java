@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
@@ -131,11 +131,7 @@ public class ImageUpdate {
 
         ImageUpdate that = (ImageUpdate)o;
 
-        if(!image.equals(that.image)) {
-            return false;
-        }
-
-        return true;
+        return image.equals(that.image);
     }
 
     @Override

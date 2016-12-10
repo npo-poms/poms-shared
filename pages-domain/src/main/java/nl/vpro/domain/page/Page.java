@@ -10,8 +10,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.hibernate.validator.constraints.URL;
-
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -19,6 +17,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
+import nl.vpro.validation.URI;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -84,14 +83,14 @@ public class Page {
     private PageType type;
 
     @NotNull
-    @URL
+    @URI
     protected String url;
 
     @Valid
     protected List<Crid> crids;
 
     @Valid
-    @URL
+    @URI
     protected List<String> alternativeUrls;
 
     @Valid
@@ -476,9 +475,6 @@ public class Page {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Page{");
-        sb.append("url='").append(url).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Page{url='" + url + '\'' + '}';
     }
 }

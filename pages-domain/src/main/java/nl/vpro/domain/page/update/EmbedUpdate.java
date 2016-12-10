@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2013 All rights reserved
  * VPRO The Netherlands
  */
@@ -85,11 +85,7 @@ public class EmbedUpdate {
 
         EmbedUpdate that = (EmbedUpdate)o;
 
-        if(midRef != null ? !midRef.equals(that.midRef) : that.midRef != null) {
-            return false;
-        }
-
-        return true;
+        return midRef != null ? midRef.equals(that.midRef) : that.midRef == null;
     }
 
     @Override

@@ -6,9 +6,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import org.hibernate.validator.constraints.URL;
-
 import nl.vpro.validation.NoHtml;
+import nl.vpro.validation.URI;
 
 /**
  * A link is an outgoing {@link Association}
@@ -29,7 +28,7 @@ public class Link implements Association {
     }
 
     @NotNull
-    @URL
+    @URI
     @XmlAttribute
     private String pageRef;
 

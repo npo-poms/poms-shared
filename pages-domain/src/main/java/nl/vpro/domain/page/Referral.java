@@ -1,31 +1,26 @@
-/**
+/*
  * Copyright (C) 2013 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.domain.page;
 
-/**
- * @author Roelof Jan Koekoek
- * @since 2.0
- */
-
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
-
-import org.hibernate.validator.constraints.URL;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.validation.NoHtml;
+import nl.vpro.validation.URI;
 
 /**
  * A referral is an incoming {@link Association}
-
+ * @author Roelof Jan Koekoek
+ * @since 2.0
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "referralType")
 public class Referral implements  Association {
-    
+
     public static Referral of(String url, String title, LinkType type) {
         Referral referral = new Referral();
         referral.setLinkText(title);
@@ -35,7 +30,7 @@ public class Referral implements  Association {
     }
 
     @XmlAttribute
-    @URL
+    @URI
     @NotNull
     private String referrer;
 
