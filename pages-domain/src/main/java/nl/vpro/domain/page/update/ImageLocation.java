@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.hibernate.validator.constraints.URL;
+import nl.vpro.validation.URI;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "imageLocationType", propOrder = {
@@ -20,7 +20,7 @@ public final class ImageLocation {
 
     @XmlElement
     @NotNull(message = "provide image location")
-    @URL(message = "provide a valid url to image location")
+    @URI(message = "provide a valid url to image location")
     private String url;
 
     private ImageLocation() {
@@ -41,11 +41,9 @@ public final class ImageLocation {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("ImageLocation");
-        sb.append("{url='").append(url).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "ImageLocation" +
+            "{url='" + url + '\'' +
+            '}';
     }
 
     @Override
@@ -59,11 +57,7 @@ public final class ImageLocation {
 
         ImageLocation that = (ImageLocation)o;
 
-        if(url != null ? !url.equals(that.url) : that.url != null) {
-            return false;
-        }
-
-        return true;
+        return url != null ? url.equals(that.url) : that.url == null;
     }
 
     @Override

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2014 All rights reserved
  * VPRO The Netherlands
  */
@@ -8,8 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
-
-import org.hibernate.validator.constraints.URL;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -58,9 +56,7 @@ public class Crid {
 
         Crid crid = (Crid) o;
 
-        if (!value.equals(crid.value)) return false;
-
-        return true;
+        return value.equals(crid.value);
     }
 
     @Override

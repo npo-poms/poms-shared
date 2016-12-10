@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2013 All rights reserved
  * VPRO The Netherlands
  */
@@ -106,11 +106,7 @@ public class ParagraphUpdate {
         if(image != null ? !image.equals(paragraph.image) : paragraph.image != null) {
             return false;
         }
-        if(title != null ? !title.equals(paragraph.title) : paragraph.title != null) {
-            return false;
-        }
-
-        return true;
+        return title != null ? title.equals(paragraph.title) : paragraph.title == null;
     }
 
     @Override

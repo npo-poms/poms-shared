@@ -1,12 +1,23 @@
-/**
+/*
  * Copyright (C) 2013 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.domain.page.update;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import nl.vpro.domain.page.Crid;
 import nl.vpro.domain.page.PageType;
 import nl.vpro.domain.page.util.Urls;
@@ -15,17 +26,8 @@ import nl.vpro.domain.page.validation.ValidGenre;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.NoHtmlList;
+import nl.vpro.validation.URI;
 import nl.vpro.xml.bind.InstantXmlAdapter;
-import org.hibernate.validator.constraints.URL;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Roelof Jan Koekoek
@@ -40,7 +42,7 @@ public class PageUpdate {
     protected PageType type;
 
     @NotNull
-    @URL
+    @URI
     @XmlAttribute(required = true)
     protected String url;
 

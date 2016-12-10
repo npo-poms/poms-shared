@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2013 All rights reserved
  * VPRO The Netherlands
  */
@@ -10,12 +10,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import org.hibernate.validator.constraints.URL;
-
 import nl.vpro.domain.page.Link;
-
 import nl.vpro.domain.page.LinkType;
 import nl.vpro.validation.NoHtml;
+import nl.vpro.validation.URI;
 
 /**
  * @author Roelof Jan Koekoek
@@ -25,7 +23,7 @@ import nl.vpro.validation.NoHtml;
 public class LinkUpdate {
 
     @NotNull
-    @URL
+    @URI
     @XmlAttribute
     private String pageRef;
 
@@ -98,11 +96,7 @@ public class LinkUpdate {
         if(pageRef != null ? !pageRef.equals(that.pageRef) : that.pageRef != null ) {
             return false;
         }
-        if (type != null ? ! type.equals(that.type) : that.type != null) {
-            return false;
-        }
-
-        return true;
+        return type != null ? type.equals(that.type) : that.type == null;
     }
 
     @Override

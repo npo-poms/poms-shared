@@ -3,12 +3,11 @@ package nl.vpro.domain.page;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import org.hibernate.validator.constraints.URL;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.validation.NoHtml;
+import nl.vpro.validation.URI;
 
 /**
  * @author Michiel Meeuwissen
@@ -23,7 +22,7 @@ public class Image {
 
     @XmlAttribute
     @NotNull
-    @URL
+    @URI
     private String url;
 
     @XmlElement
@@ -95,11 +94,7 @@ public class Image {
 
         Image image = (Image)o;
 
-        if(!url.equals(image.url)) {
-            return false;
-        }
-
-        return true;
+        return url.equals(image.url);
     }
 
     @Override
