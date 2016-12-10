@@ -2117,8 +2117,8 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
             }
 
             existing.setAvAttributes(location.getAvAttributes());
-            existing.setPublishStart(location.getPublishStart());
-            existing.setPublishStop(location.getPublishStop());
+            existing.setPublishStartInstant(location.getPublishStartInstant());
+            existing.setPublishStopInstant(location.getPublishStopInstant());
             existing.setSubtitles(location.getSubtitles());
             existing.setDuration(location.getDuration());
             existing.setOffset(location.getOffset());

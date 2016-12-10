@@ -1,6 +1,6 @@
 package nl.vpro.domain.media;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class StandaloneMemberRef {
 
-    protected Date added;
+    protected Instant added;
     protected Boolean highlighted;
     protected MediaType type;
     protected Integer index;
@@ -46,11 +46,11 @@ public class StandaloneMemberRef {
     }
 
     @XmlAttribute
-    public Date getAdded() {
+    public Instant getAdded() {
         return added;
     }
 
-    public void setAdded(Date added) {
+    public void setAdded(Instant added) {
         this.added = added;
     }
 

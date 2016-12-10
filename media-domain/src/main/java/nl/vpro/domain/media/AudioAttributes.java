@@ -6,12 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.Length;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -30,7 +30,7 @@ public class AudioAttributes implements Serializable {
     private Long id;
 
     @XmlElement
-    @Length(min = 1, max = 255)
+    @Size(min = 1, max = 255)
     protected String audioCoding;
 
     @XmlElement
@@ -84,7 +84,7 @@ public class AudioAttributes implements Serializable {
             to.setLanguage(from.getLanguage());
             to.setNumberOfChannels(from.getNumberOfChannels());
 
-        } else if(from == null) {
+        } else {
             to = null;
         }
 

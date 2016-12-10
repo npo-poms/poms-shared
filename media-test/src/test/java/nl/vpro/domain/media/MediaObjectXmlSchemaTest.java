@@ -9,6 +9,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
@@ -74,14 +75,14 @@ public class MediaObjectXmlSchemaTest {
         Schema schema = null;
         try {
             schema = factory.newSchema(new Source[]{new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproShared.xsd")), new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"))});
+            schemaValidator = schema.newValidator();
         } catch(SAXException e) {
             e.printStackTrace();
         }
-        schemaValidator = schema.newValidator();
 
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }
-    
+
     @Before
     public void init() {
         Locale.setDefault(Locales.DUTCH);
@@ -378,7 +379,7 @@ public class MediaObjectXmlSchemaTest {
         program.getMemberOf().first().getOwner().setMid("AVRO_7777777");
         program.getMemberOf().first().getOwner().getMemberOf().first().getOwner().setMid(null);
         program.getMemberOf().first().getOwner().getMemberOf().first().getOwner().setMid("AVRO_5555555");
-        program.getMemberOf().first().setAdded(new Date(0));
+        program.getMemberOf().first().setAdded(Instant.EPOCH);
         String actual = toXml(program);
 
         assertThat(actual).isEqualTo(expected);
@@ -389,7 +390,7 @@ public class MediaObjectXmlSchemaTest {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><locations/><scheduleEvents/><images/><episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\"/><segments/></program>";
 
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
-        program.getEpisodeOf().first().setAdded(new Date(0));
+        program.getEpisodeOf().first().setAdded(Instant.EPOCH);
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
         program.getEpisodeOf().first().getOwner().setMid(null);
         program.getEpisodeOf().first().getOwner().setMid("AVRO_7777777");
@@ -463,8 +464,8 @@ public class MediaObjectXmlSchemaTest {
             "    <segments/>\n" +
             "</program>";
 
-        ScheduleEvent event = new ScheduleEvent(Channel.NED1, new Date(0), new Date(100000));
-        event.setGuideDay(new Date(0));
+        ScheduleEvent event = new ScheduleEvent(Channel.NED1, Instant.EPOCH, java.time.Duration.ofSeconds((100)));
+        event.setGuideDate(LocalDate.ofEpochDay(0));
         event.setNet(new Net("ZAPP", "Zapp"));
         event.setPoProgID("VPRO_123456");
         event.setPrimaryLifestyle(new Lifestyle("Onbezorgde Trendbewusten"));
@@ -479,7 +480,8 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testScheduleEventsWithNetSchema() throws Exception {
-        ScheduleEvent event = new ScheduleEvent(Channel.NED1, new Date(0), new Date(100000));
+        ScheduleEvent event = new ScheduleEvent(Channel.NED1, Instant.EPOCH,
+            java.time.Duration.ofSeconds(100));
         event.setGuideDay(new Date(0));
         event.setNet(new Net("ZAPP", "Zapp"));
         event.setPoProgID("VPRO_123456");
@@ -496,8 +498,8 @@ public class MediaObjectXmlSchemaTest {
             .segment()
             .withPublishStart()
             .withPublishStop()
-            .duration(new Date(100000))
-            .start(new Date(5000000))
+            .duration(java.time.Duration.ofSeconds(100))
+            .start(java.time.Duration.ofSeconds(5000))
             .withImages()
             .withTitles()
             .withDescriptions()

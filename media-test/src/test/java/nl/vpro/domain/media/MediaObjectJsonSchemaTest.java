@@ -75,7 +75,9 @@ public class MediaObjectJsonSchemaTest {
     public void testDatesCreatedAndModified() throws Exception {
         String expected = "{\"objectType\":\"program\",\"sortDate\":1,\"creationDate\":1,\"lastModified\":7200000,\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
-        Program program = program().lean().creationDate(new Date(1)).lastModified(new Date(2 * 60 * 60 * 1000)).build();
+        Program program = program().lean().creationInstant(Instant.ofEpochMilli(1))
+            .lastModified(Instant.ofEpochSecond(2 * 60 * 60))
+            .build();
         String actual = toJson(program);
 
         JSONAssert.assertEquals(expected, actual);
@@ -95,7 +97,8 @@ public class MediaObjectJsonSchemaTest {
     public void testPulishStartStop() throws Exception {
         String expected = "{\"objectType\":\"program\",\"sortDate\":1,\"publishStart\":1,\"publishStop\":7200000,\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
-        Program program = program().lean().publishStart(new Date(1)).publishStop(new Date(2 * 60 * 60 * 1000)).build();
+        Program program = program().lean().publishInstant(Instant.ofEpochMilli(1))
+            .publishStop(Instant.ofEpochSecond(2 * 60 * 60)).build();
         String actual = toJson(program);
 
         JSONAssert.assertEquals(expected, actual);
@@ -150,7 +153,7 @@ public class MediaObjectJsonSchemaTest {
 
         String input = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[\"BNN\",\"AVRO\"]}";
 
-        Program program = Jackson2Mapper.getInstance().reader(Program.class).readValue(input);
+        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
 
         assertThat(program.getBroadcasters()).hasSize(2);
     }
@@ -250,7 +253,7 @@ public class MediaObjectJsonSchemaTest {
     public void testReverseGenres() throws Exception {
         String input = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[{\"id\":\"3.0.1.7.21\",\"terms\":[\"Informatief\",\"Nieuws/actualiteiten\"]},{\"id\":\"3.0.1.8.25\",\"terms\":[\"Documentaire\",\"Natuur\"]}]}";
 
-        Program program = Jackson2Mapper.getInstance().reader(Program.class).readValue(input);
+        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
 
         assertThat(program.getGenres()).hasSize(2);
         assertThat(program.getGenres().first().getTermId()).isEqualTo("3.0.1.7.21");
@@ -264,7 +267,7 @@ public class MediaObjectJsonSchemaTest {
 
         String input = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"genres\":[\"Film\",\"Jeugd\",\"Serie/soap\"]}";
 
-        Program program = Jackson2Mapper.getInstance().reader(Program.class).readValue(input);
+        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
 
         assertThat(program.getGenres()).hasSize(2);
     }
@@ -310,7 +313,7 @@ public class MediaObjectJsonSchemaTest {
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
         program.getMemberOf().first().getOwner().getMemberOf().first().getOwner().setMid(null);
         program.getMemberOf().first().getOwner().getMemberOf().first().getOwner().setMid("AVRO_5555555");
-        program.getMemberOf().first().setAdded(new Date(0));
+        program.getMemberOf().first().setAdded(Instant.EPOCH);
         String actual = toJson(program);
 
         JSONAssert.assertEquals(expected, actual);
@@ -321,7 +324,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"type\":\"BROADCAST\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"episodeOf\":[{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:102\",\"type\":\"SEASON\",\"index\":1,\"highlighted\":false,\"added\":0}],\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"descendantOf\":[{\"midRef\":\"AVRO_5555555\",\"urnRef\":\"urn:vpro:media:group:101\",\"type\":\"SERIES\"},{\"midRef\":\"AVRO_7777777\",\"urnRef\":\"urn:vpro:media:group:102\",\"type\":\"SEASON\"}]}";
 
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
-        program.getEpisodeOf().first().setAdded(new Date(0));
+        program.getEpisodeOf().first().setAdded(Instant.EPOCH);
         program.getEpisodeOf().first().getOwner().setMid(null);
         program.getEpisodeOf().first().getOwner().setMid("AVRO_7777777");
         program.getEpisodeOf().first().getOwner().getMemberOf().first().getOwner().setMid(null);
@@ -380,7 +383,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"images\":[{\"imageUri\":\"http://images.poms.omroep.nl/plaatje\",\"owner\":\"BROADCASTER\",\"type\":\"PICTURE\",\"highlighted\":false,\"creationDate\":1,\"workflow\":\"FOR_PUBLICATION\"}]}";
 
         Image image = new Image(OwnerType.BROADCASTER, "http://images.poms.omroep.nl/plaatje");
-        image.setCreationDate(new Date(1));
+        image.setCreationInstant(Instant.ofEpochMilli(1));
         Program program = program().id(100L).lean().images(image).build();
 
         String actual = toJson(program);
@@ -432,7 +435,7 @@ public class MediaObjectJsonSchemaTest {
 
         String input = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"languages\":[\"NL\"]}";
 
-        Program program = Jackson2Mapper.getInstance().reader(Program.class).readValue(input);
+        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
 
         assertThat(program.getLanguages()).hasSize(1);
     }
@@ -467,7 +470,7 @@ public class MediaObjectJsonSchemaTest {
 
         String input = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"countries\":[\"NL\"]}";
 
-        Program program = Jackson2Mapper.getInstance().reader(Program.class).readValue(input);
+        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
 
         assertThat(program.getCountries()).hasSize(1);
     }

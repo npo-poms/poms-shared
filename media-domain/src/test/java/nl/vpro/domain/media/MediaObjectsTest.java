@@ -51,8 +51,8 @@ public class MediaObjectsTest {
     public void sortDate() {
         Program program = new Program();
         assertThat(Math.abs(MediaObjects.getSortDate(program).getTime() - System.currentTimeMillis())).isLessThan(10000);
-        Date publishDate = new Date(1344043500362L);
-        program.setPublishStart(publishDate);
+        Instant publishDate = Instant.ofEpochMilli(1344043500362L);
+        program.setPublishStartInstant(publishDate);
         assertThat(MediaObjects.getSortDate(program)).isEqualTo(publishDate);
         ScheduleEvent se = new ScheduleEvent();
         se.setStartInstant(Instant.ofEpochMilli(1444043500362L));
@@ -66,8 +66,8 @@ public class MediaObjectsTest {
     @Test
     public void testSortDateWithScheduleEvents() throws Exception {
         final Program program = MediaBuilder.program()
-            .creationDate(new Date(1))
-            .publishStart(new Date(2))
+            .creationDate(Instant.ofEpochMilli(1))
+            .publishStart(Instant.ofEpochMilli(2))
             .scheduleEvents(
                 new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(13), Duration.ofMillis(10)),
                 new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(3), Duration.ofMillis(10))

@@ -57,7 +57,7 @@
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-jaxb-annotations</artifactId>
     </dependency>
-    <dependency>
+   <!-- <dependency>
       <groupId>org.hibernate.javax.persistence</groupId>
       <artifactId>hibernate-jpa-2.1-api</artifactId>
     </dependency>
@@ -68,6 +68,26 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
+    </dependency>-->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+    </dependency>
+    <dependency>
+      <!-- contains javax.persistence -->
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>com.sun.mail</groupId>
+          <artifactId>javax.mail</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-persistence</artifactId>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -122,69 +142,4 @@
     </dependency>
   </dependencies>
 
-
-  <profiles>
-    <profile>
-      <id>schemagen</id>
-      <build>
-        <plugins>
-          <plugin>
-            <!--
-
-              Currently this plugin only works when our own hibernate validator annotations (nl.vpro.hibernate.validator.*) are
-              commented out in the following classes:
-
-              nl.vpro.domain.media.Program
-              nl.vpro.domain.media.Relation
-              nl.vpro.domain.media.support.Image
-              nl.vpro.domain.media.support.PublishableObject
-
-              We have no idea why this is needed and what can be done to avoid this.
-
-            -->
-            <groupId>com.sun.tools.jxc.maven2</groupId>
-            <artifactId>maven-jaxb-schemagen-plugin</artifactId>
-            <!-- http://jaxb.java.net/maven-jaxb-schemagen/generate-mojo.html -->
-            <version>1.2</version>
-            <executions>
-              <execution>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>generate</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <project>${project}</project>
-              <srcdir>${project.build.sourceDirectory}/nl/vpro/domain/media/search</srcdir>
-              <excludes>
-                <exclude>bind/**</exclude>
-                <exclude>exceptions/**</exclude>
-                <!-- Workaround for "error: java.lang.StackTraceElement does not have a no-arg default constructor." -->
-                <exclude>lucene/**</exclude>
-              </excludes>
-              <schemas>
-                <schema>
-                  <namespace>urn:vpro:media:2009</namespace>
-                  <file>vproMedia.xsd</file>
-                </schema>
-                <schema>
-                  <namespace>urn:vpro:media:update:2009</namespace>
-                  <file>vproMediaUpdate.xsd</file>
-                </schema>
-                <schema>
-                  <namespace>urn:vpro:shared:2009</namespace>
-                  <file>vproShared.xsd</file>
-                </schema>
-                <schema>
-                  <namespace>urn:vpro:media:search:2012</namespace>
-                  <file>vproSearch.xsd</file>
-                </schema>
-              </schemas>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

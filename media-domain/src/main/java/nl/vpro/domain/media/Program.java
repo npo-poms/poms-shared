@@ -69,7 +69,7 @@ public class Program extends MediaObject {
                 "and (mediaobjec10_.publishstop is null or mediaobjec10_.publishstop > now()))"),
         @Filter(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))")
     })
-    protected SortedSet<MemberRef> episodeOf = new TreeSet<>();
+    protected Set<MemberRef> episodeOf = new TreeSet<>();
 
     @Size.List({@Size(max = 255), @Size(min = 1)})
     protected String poProgType;
@@ -83,7 +83,6 @@ public class Program extends MediaObject {
     @org.hibernate.annotations.Cascade({
         org.hibernate.annotations.CascadeType.ALL
     })
-
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filters({
         @Filter(name = PUBLICATION_FILTER, condition =
@@ -159,7 +158,7 @@ public class Program extends MediaObject {
         if(this.episodeOf == null) {
             this.episodeOf = new TreeSet<>();
         }
-        return episodeOf;
+        return sorted(episodeOf);
     }
 
     public void setEpisodeOf(SortedSet<MemberRef> episodeOf) {

@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Set;
@@ -19,7 +20,6 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.validator.constraints.URL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +35,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.ReleaseDate;
+import nl.vpro.validation.URI;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DateToDuration;
 
@@ -71,10 +72,10 @@ public class ImageUpdate {
 
 
     @XmlAttribute
-    private Date publishStart;
+    private Instant publishStart;
 
     @XmlAttribute
-    private Date publishStop;
+    private Instant publishStop;
 
     @XmlAttribute(required = true)
     Boolean highlighted = false;
@@ -101,7 +102,7 @@ public class ImageUpdate {
     @NotNull(groups = {WarningValidatorGroup.class})
     private String credits;
 
-    @URL
+    @URI
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
     private String source;
@@ -157,8 +158,8 @@ public class ImageUpdate {
 
     public ImageUpdate(Image image) {
         type = image.getType();
-        publishStart = image.getPublishStart();
-        publishStop = image.getPublishStop();
+        publishStart = image.getPublishStartInstant();
+        publishStop = image.getPublishStopInstant();
         highlighted = image.isHighlighted();
         title = image.getTitle();
         description = image.getDescription();
@@ -181,8 +182,8 @@ public class ImageUpdate {
         result.setType(type);
         result.setTitle(title);
         result.setDescription(description);
-        result.setPublishStart(publishStart);
-        result.setPublishStop(publishStop);
+        result.setPublishStartInstant(publishStart);
+        result.setPublishStopInstant(publishStop);
         result.setHighlighted(highlighted);
         result.setWidth(width);
         result.setHeight(height);
@@ -249,19 +250,19 @@ public class ImageUpdate {
         urn = id == null ? null : Image.BASE_URN + id;
     }
 
-    public Date getPublishStart() {
+    public Instant getPublishStart() {
         return publishStart;
     }
 
-    public void setPublishStart(Date publishStart) {
+    public void setPublishStart(Instant publishStart) {
         this.publishStart = publishStart;
     }
 
-    public Date getPublishStop() {
+    public Instant getPublishStop() {
         return publishStop;
     }
 
-    public void setPublishStop(Date publishStop) {
+    public void setPublishStop(Instant publishStop) {
         this.publishStop = publishStop;
     }
 
