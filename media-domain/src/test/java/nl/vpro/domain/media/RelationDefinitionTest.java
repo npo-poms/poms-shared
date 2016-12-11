@@ -75,8 +75,7 @@ public class RelationDefinitionTest extends ObjectTest<RelationDefinition> {
     public void testSetBroadcasterWithEmptyValue() throws Exception {
         RelationDefinition definition = new RelationDefinition("ABC1", "", "Tekst");
 
-        Set<ConstraintViolation<RelationDefinition>> constraintViolations =
-            validator.validate(definition);
+        Set<ConstraintViolation<RelationDefinition>> constraintViolations = validator.validate(definition);
 
         assertThat(constraintViolations).hasSize(1);
     }

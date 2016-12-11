@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.*;
@@ -40,6 +41,7 @@ public class RelationDefinition implements Serializable, Identifiable<RelationDe
 
     @Id
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
+    @Size(min = 1)
     private String broadcaster;
 
     private String displayText;
