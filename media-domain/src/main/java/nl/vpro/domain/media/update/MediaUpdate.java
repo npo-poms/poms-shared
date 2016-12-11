@@ -18,6 +18,9 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -25,6 +28,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Organization;
 import nl.vpro.domain.user.Portal;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.TimeUtils;
 import nl.vpro.util.TransformingCollection;
 import nl.vpro.util.TransformingList;
@@ -32,6 +36,7 @@ import nl.vpro.util.TransformingSortedSet;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(
@@ -366,6 +371,10 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     }
 
     @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStart() {
         return mediaObject().getPublishStartInstant();
     }
@@ -375,6 +384,10 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     }
 
     @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStop() {
         return mediaObject().getPublishStopInstant();
     }
