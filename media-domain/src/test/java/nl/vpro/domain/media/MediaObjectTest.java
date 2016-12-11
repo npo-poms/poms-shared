@@ -231,10 +231,10 @@ public class MediaObjectTest {
     @Test
     public void sortDate() {
         Program program = new Program();
-        assertThat(Math.abs(program.getSortDate().getTime() - System.currentTimeMillis())).isLessThan(10000);
+        assertThat(Math.abs(program.getSortInstant().toEpochMilli() - System.currentTimeMillis())).isLessThan(10000);
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
         program.setPublishStartInstant(publishDate);
-        assertThat(program.getSortDate()).isEqualTo(publishDate);
+        assertThat(program.getSortInstant()).isEqualTo(publishDate);
         ScheduleEvent se = new ScheduleEvent();
         se.setStartInstant(Instant.ofEpochMilli(1444043500362L));
         program.addScheduleEvent(se);
