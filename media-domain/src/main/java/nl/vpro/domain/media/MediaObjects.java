@@ -382,6 +382,7 @@ public class MediaObjects {
     /**
      * @since 2.1
      */
+    @Deprecated
     public static Date getSortDate(MediaObject mo) {
         return DateUtils.toDate(getSortInstant(mo));
 
