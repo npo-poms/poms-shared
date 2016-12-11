@@ -19,6 +19,7 @@ import nl.vpro.domain.Xmlns;
 
 /**
  * @author roekoe
+
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
@@ -48,8 +49,6 @@ public abstract class AbstractDomainObject<T extends AbstractDomainObject> imple
      * <p/>
      * While testing it sometimes comes in handy to be able to set an Id to simulate
      * a persisted object.
-     *
-     * @param id
      */
     @Override
     public T setId(Long id) {
