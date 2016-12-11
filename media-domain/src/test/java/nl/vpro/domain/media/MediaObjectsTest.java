@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
@@ -9,7 +9,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -50,10 +49,10 @@ public class MediaObjectsTest {
     @Test
     public void sortDate() {
         Program program = new Program();
-        assertThat(Math.abs(MediaObjects.getSortDate(program).getTime() - System.currentTimeMillis())).isLessThan(10000);
+        assertThat(Math.abs(MediaObjects.getSortInstant(program).toEpochMilli() - System.currentTimeMillis())).isLessThan(10000);
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
         program.setPublishStartInstant(publishDate);
-        assertThat(MediaObjects.getSortDate(program)).isEqualTo(publishDate);
+        assertThat(MediaObjects.getSortInstant(program)).isEqualTo(publishDate);
         ScheduleEvent se = new ScheduleEvent();
         se.setStartInstant(Instant.ofEpochMilli(1444043500362L));
         program.addScheduleEvent(se);
@@ -74,26 +73,26 @@ public class MediaObjectsTest {
             )
             .build();
 
-        assertThat(MediaObjects.getSortDate(program)).isEqualTo(new Date(3));
+        assertThat(MediaObjects.getSortInstant(program)).isEqualTo(Instant.ofEpochMilli(3));
     }
 
     @Test
     public void testSortDateWithPublishStart() throws Exception {
         final Program program = MediaBuilder.program()
-            .creationDate(new Date(1))
-            .publishStart(new Date(2))
+            .creationDate(Instant.ofEpochMilli(1))
+            .publishStart(Instant.ofEpochMilli(2))
             .build();
 
-        assertThat(MediaObjects.getSortDate(program)).isEqualTo(new Date(2));
+        assertThat(MediaObjects.getSortInstant(program)).isEqualTo(Instant.ofEpochMilli(2));
     }
 
     @Test
     public void testSortDateWithCreationDate() throws Exception {
         final Program program = MediaBuilder.program()
-            .creationDate(new Date(1))
+            .creationDate(Instant.ofEpochMilli(1))
             .build();
 
-        assertThat(MediaObjects.getSortDate(program)).isEqualTo(new Date(1));
+        assertThat(MediaObjects.getSortInstant(program)).isEqualTo(Instant.ofEpochMilli(1));
     }
 
     @Test
