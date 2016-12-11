@@ -38,6 +38,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  *
  * @author arne
  * @author roekoe
+ * TODO duplicated in image-domain
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
