@@ -2556,6 +2556,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     //@JsonDeserialize(using = DateToJsonTimestamp.Deserializer.class)
     @XmlAttribute(name = "sortDate", required = true)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Deprecated
     final public Date getSortDate() {
         return DateUtils.toDate(getSortInstant());
     }
