@@ -32,12 +32,14 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.License;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.ReleaseDate;
 import nl.vpro.validation.URI;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DateToDuration;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.media.update.MediaUpdate.VALIDATOR;
 
@@ -72,9 +74,17 @@ public class ImageUpdate {
 
 
     @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant publishStart;
 
     @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant publishStop;
 
     @XmlAttribute(required = true)
