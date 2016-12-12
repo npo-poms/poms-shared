@@ -127,6 +127,10 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
         return new Title(main, type, TextualType.MAIN);
     }
 
+    public static Title sub(String main, OwnerType type) {
+        return new Title(main, type, TextualType.SUB);
+    }
+
     public Title() {
     }
 
