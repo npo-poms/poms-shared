@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.support;
 
+import lombok.ToString;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -7,8 +9,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -49,9 +49,10 @@ import nl.vpro.validation.NoHtml;
     propOrder = {
             "title"
     })
+@ToString
 public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, Serializable {
 
-    private static final long serialVersionUID = 1l;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -120,6 +121,10 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
         }
 
         return new Title(source, parent);
+    }
+
+    public static Title main(String main, OwnerType type) {
+        return new Title(main, type, TextualType.MAIN);
     }
 
     public Title() {
@@ -238,15 +243,6 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
         return (type == null ? -1 : type.ordinal()) - (o.getType() == null ? -1 : o.getType().ordinal());
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-            .append("id", id)
-            .append("title", title)
-            .append("owner", owner)
-            .append("type", type)
-            .toString();
-    }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         this.parent = (MediaObject) parent;
