@@ -49,7 +49,7 @@ import nl.vpro.validation.NoHtml;
     propOrder = {
             "title"
     })
-@ToString
+@ToString(exclude = "parent")
 public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -129,6 +129,10 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
 
     public static Title sub(String main, OwnerType type) {
         return new Title(main, type, TextualType.SUB);
+    }
+
+    public static Title shortTitle(String main, OwnerType type) {
+        return new Title(main, type, TextualType.SHORT);
     }
 
     public Title() {
