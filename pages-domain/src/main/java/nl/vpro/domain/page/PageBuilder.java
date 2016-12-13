@@ -1,5 +1,7 @@
 package nl.vpro.domain.page;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.*;
@@ -7,9 +9,6 @@ import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.classification.Term;
@@ -23,8 +22,9 @@ import nl.vpro.domain.user.BroadcasterService;
  * @author Michiel Meeuwissen
  * @since 2.0
  */
+
+@Slf4j
 public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
-    private static final Logger LOG = LoggerFactory.getLogger(PageBuilder.class);
 
     protected final P page;
 
@@ -169,7 +169,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
 
     public PB genres(SortedSet<Genre> genres) {
         page.setGenres(genres);
-        return (PB) this;
+        return self;
     }
 
     public PB genres(Genre... g) {
@@ -179,7 +179,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         }
         genres.addAll(Arrays.asList(g));
         page.setGenres(genres);
-        return (PB) this;
+        return self;
     }
 
 
@@ -192,7 +192,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
             genres.add(new Genre(term));
         }
         page.setGenres(genres);
-        return (PB) this;
+        return self;
     }
 
     public PB broadcasters(Broadcaster... broadcasters) {
@@ -370,7 +370,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
                     Term term = classificationService.getTerm(termId);
                     genres.add(new Genre(term));
                 } catch(TermNotFoundException e) {
-                    LOG.warn("Can not add genre to {}, root cause: {}", update.getUrl(), e.getMessage());
+                    log.warn("Can not add genre to {}, root cause: {}", update.getUrl(), e.getMessage());
                 }
 
                 if(!genres.isEmpty()) {

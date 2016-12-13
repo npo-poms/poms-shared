@@ -1,6 +1,8 @@
 package nl.vpro.domain.page;
 
 
+import lombok.ToString;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.Unmarshaller;
@@ -17,6 +19,7 @@ import nl.vpro.validation.PathSegment;
  */
 @XmlType(name = "sectionType")
 @XmlAccessorType(XmlAccessType.NONE)
+@ToString(exclude = "portal")
 public class Section implements Displayable {
 
     @NotNull
@@ -34,6 +37,10 @@ public class Section implements Displayable {
     public Section(String path, String displayName) {
         this.displayName = displayName;
         setPath(path);
+    }
+
+    public static Section copy(Section section) {
+        return new Section(section.getPath(), section.getDisplayName());
     }
 
     @XmlAttribute
