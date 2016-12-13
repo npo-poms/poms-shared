@@ -29,7 +29,7 @@ basedir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 
 if [ $# -lt 1 ];
 then
-    echo "Usage $0 vpro_test|npo_dev|npo_test|npo_prod|localhost|<es-url> <index number>"
+    echo "Usage $0 vpro_test|npo_dev|npo_test|npo_prod|localhost|<es-url> [<index number>]"
     echo "index name:  Number of the new index to create (e.g. 2 in apipages-2)"
     exit
 fi
@@ -104,5 +104,6 @@ if [ "$2" != "" ] ; then
 "
 
    echo "Followed by"
-   echo curl -XPOST $desthost/_aliases -d "$alias"
+   echo curl -XPOST $desthost/_aliases -d "'$alias'"
+
 fi
