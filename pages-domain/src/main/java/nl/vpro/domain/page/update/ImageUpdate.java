@@ -105,6 +105,10 @@ public class ImageUpdate {
         result.setType(type);
         result.setTitle(title);
         result.setDescription(description);
+        result.setSource(source);
+        result.setSourceName(sourceName);
+        result.setCredits(credits);
+        result.setLicense(license);
         if(image instanceof ImageLocation) {
             result.setUrl(((ImageLocation)image).getUrl());
         } else {
