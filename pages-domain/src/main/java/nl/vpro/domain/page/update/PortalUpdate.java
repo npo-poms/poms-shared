@@ -1,11 +1,10 @@
 package nl.vpro.domain.page.update;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.page.Portal;
 import nl.vpro.domain.page.Section;
@@ -19,9 +18,8 @@ import nl.vpro.domain.user.ServiceLocator;
  */
 @XmlType(name = "portalUpdateType", propOrder = {"section"})
 @XmlAccessorType(XmlAccessType.NONE)
+@Slf4j
 public class PortalUpdate {
-
-    private static final Logger LOG = LoggerFactory.getLogger(PortalUpdate.class);
 
     @ValidPortal
     @NotNull
@@ -75,14 +73,14 @@ public class PortalUpdate {
         if (portalService != null) {
             userPortal = portalService.find(getId());
             if (userPortal == null) {
-                LOG.warn("Could not find portal " + getId() + " in " + portalService);
+                log.warn("Could not find portal " + getId() + " in " + portalService);
             }
         } else {
-            LOG.warn("No portalService found!");
+            log.warn("No portalService found!");
             userPortal = null;
         }
         Portal portal = new Portal(getId(), getUrl(), userPortal == null ? getId() : userPortal.getDisplayName());
-        portal.setSection(getSection());
+        portal.setSection(Section.copy(getSection()));
         return portal;
     }
 
