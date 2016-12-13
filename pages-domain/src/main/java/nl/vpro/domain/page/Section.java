@@ -40,6 +40,9 @@ public class Section implements Displayable {
     }
 
     public static Section copy(Section section) {
+        if (section == null) {
+            return null;
+        }
         return new Section(section.getPath(), section.getDisplayName());
     }
 
