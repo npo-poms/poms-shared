@@ -24,7 +24,11 @@ import nl.vpro.validation.WarningValidatorGroup;
 @XmlType(name = "imageUpdateType", propOrder = {
     "title",
     "description",
-    "image"
+    "image",
+    "source",
+    "sourceName",
+    "license",
+    "credits"
 })
 @Builder
 public class ImageUpdate {
