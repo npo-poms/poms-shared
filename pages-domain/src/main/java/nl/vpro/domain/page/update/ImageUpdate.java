@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.page.update;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 import javax.validation.Valid;
@@ -31,6 +32,7 @@ import nl.vpro.validation.WarningValidatorGroup;
     "image",
 })
 @Builder
+@AllArgsConstructor
 public class ImageUpdate {
 
     @XmlAttribute(required = true)
