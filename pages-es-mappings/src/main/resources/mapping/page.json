@@ -469,6 +469,13 @@
                     "type": "string",
                     "index": "not_analyzed"
                   },
+                  "sourceName": {
+                    "type": "string"
+                  },
+                  "license": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  },
                   "date" : {
                     "type" : "string",
                     "index" : "not_analyzed"
@@ -1234,6 +1241,13 @@
                         "type": "string",
                         "index": "not_analyzed"
                       },
+                      "sourceName": {
+                        "type": "string"
+                      },
+                      "license": {
+                        "type": "string",
+                        "index": "not_analyzed"
+                      },
                       "date" : {
                         "type" : "string",
                         "index" : "not_analyzed"
@@ -1947,6 +1961,23 @@
           "url" : {
             "type" : "string",
             "index" : "not_analyzed"
+          },
+          "credits": {
+            "type": "string",
+            "norms": {
+              "enabled": false
+            }
+          },
+          "source": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "sourceName": {
+            "type": "string"
+          },
+          "license": {
+            "type": "string",
+            "index": "not_analyzed"
           }
         }
       },
