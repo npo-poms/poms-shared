@@ -31,7 +31,7 @@ public class PortalUpdate {
     @Valid
     private Section section;
 
-    private PortalUpdate() {
+    public PortalUpdate() {
 
     }
 
