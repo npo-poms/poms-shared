@@ -10,8 +10,11 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.License;
 import nl.vpro.domain.page.Image;
 import nl.vpro.validation.NoHtml;
+import nl.vpro.validation.URI;
+import nl.vpro.validation.WarningValidatorGroup;
 
 
 @XmlRootElement(name = "image")
@@ -38,6 +41,29 @@ public class ImageUpdate {
     @XmlElement
     @NoHtml
     private String description;
+
+
+    @NoHtml
+    @XmlElement
+    @NotNull(groups = {WarningValidatorGroup.class})
+    private String credits;
+
+    @URI
+    @XmlElement
+    @NotNull(groups = {WarningValidatorGroup.class})
+    private String source;
+
+    @XmlElement
+    @Size.List({
+        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
+    })
+    @NotNull(groups = {WarningValidatorGroup.class})
+    private String sourceName;
+
+    @XmlElement
+    @NotNull(groups = {WarningValidatorGroup.class})
+    private License license;
+
 
     @XmlElements(value = {
 //        @XmlElement(name = "imageData", namespace = Xmlns.UPDATE_NAMESPACE, type = ImageData.class),
