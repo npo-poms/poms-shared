@@ -1,6 +1,6 @@
 package nl.vpro.domain.media;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,13 +44,13 @@ public class GeoRestriction extends Restriction {
         this.region = region;
     }
 
-    public GeoRestriction(Region region, Date start, Date stop) {
+    public GeoRestriction(Region region, Instant start, Instant stop) {
         super(start, stop);
         this.region = region;
         authorityUpdate = true;
     }
 
-    public GeoRestriction(Long id, Region region, Date start, Date stop) {
+    public GeoRestriction(Long id, Region region, Instant start, Instant stop) {
         super(id, start, stop);
         this.region = region;
         authorityUpdate = true;

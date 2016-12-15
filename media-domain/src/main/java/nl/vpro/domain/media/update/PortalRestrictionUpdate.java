@@ -4,12 +4,18 @@
  */
 package nl.vpro.domain.media.update;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.PortalRestriction;
 import nl.vpro.domain.user.Portal;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.Xmlns.UPDATE_NAMESPACE;
 
@@ -22,9 +28,9 @@ import static nl.vpro.domain.Xmlns.UPDATE_NAMESPACE;
     name = "portalRestrictionUpdateType",
     namespace = UPDATE_NAMESPACE)
 public class PortalRestrictionUpdate {
-    protected Date start;
+    protected Instant start;
 
-    protected Date stop;
+    protected Instant stop;
 
     protected String portal;
 
@@ -48,20 +54,28 @@ public class PortalRestrictionUpdate {
     }
 
     @XmlAttribute
-    public Date getStart() {
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    public Instant getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(Instant start) {
         this.start = start;
     }
 
     @XmlAttribute
-    public Date getStop() {
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    public Instant getStop() {
         return stop;
     }
 
-    public void setStop(Date stop) {
+    public void setStop(Instant stop) {
         this.stop = stop;
     }
 
