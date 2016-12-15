@@ -162,7 +162,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPortalRestrictions() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setPortalRestrictions(Arrays.asList(new PortalRestrictionUpdate(new PortalRestriction(new Portal("3VOOR12_GRONINGEN", "3voor12 Groningen"))), new PortalRestrictionUpdate(new PortalRestriction(new Portal("STERREN24", "Sterren24"), new Date(0), new Date(1000000)))));
+        update.setPortalRestrictions(Arrays.asList(new PortalRestrictionUpdate(new PortalRestriction(new Portal("3VOOR12_GRONINGEN", "3voor12 Groningen"))),
+            new PortalRestrictionUpdate(new PortalRestriction(new Portal("STERREN24", "Sterren24"), Instant.ofEpochMilli(0), Instant.ofEpochMilli(1000000)))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><exclusive>3VOOR12_GRONINGEN</exclusive><exclusive stop=\"1970-01-01T01:16:40+01:00\" start=\"1970-01-01T01:00:00+01:00\">STERREN24</exclusive><locations/><scheduleEvents/><images/><segments/></program>";
 
@@ -172,7 +173,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetGeoRestrictions() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setGeoRestrictions(Arrays.asList(new GeoRestrictionUpdate(new GeoRestriction(Region.BENELUX)), new GeoRestrictionUpdate(new GeoRestriction(Region.NL, new Date(0), new Date(1000000)))));
+        update.setGeoRestrictions(Arrays.asList(new GeoRestrictionUpdate(new GeoRestriction(Region.BENELUX)), new GeoRestrictionUpdate(new GeoRestriction(Region.NL, Instant.ofEpochMilli(0), Instant.ofEpochMilli((1000000))))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><region>BENELUX</region><region stop=\"1970-01-01T01:16:40+01:00\" start=\"1970-01-01T01:00:00+01:00\">NL</region><locations/><scheduleEvents/><images/><segments/></program>";
 
