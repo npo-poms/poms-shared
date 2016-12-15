@@ -1,10 +1,10 @@
-/**
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.domain.media;
 
-import java.util.Date;
+import java.time.Instant;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
@@ -23,13 +23,13 @@ public class RestrictionTest extends ObjectTest<Restriction> {
     public static Restriction nullArgument = null;
 
     @DataPoint
-    public static Restriction withStartAndStop = new TestRestriction(null, new Date(0), new Date(2));
+    public static Restriction withStartAndStop = new TestRestriction(null, Instant.EPOCH, Instant.ofEpochMilli(2));
 
     @DataPoint
-    public static Restriction persistedWithStartAndStop = new TestRestriction(1l, new Date(0), new Date(2));
+    public static Restriction persistedWithStartAndStop = new TestRestriction(1L, Instant.EPOCH, Instant.ofEpochMilli(2));
 
     @DataPoint
-    public static Restriction persistedWithStartUpdate = new TestRestriction(1l, new Date(1), new Date(2));
+    public static Restriction persistedWithStartUpdate = new TestRestriction(1L, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
 
     @Test
     public void testEqualsWhenIncomingWithNullId() throws Exception {
@@ -37,7 +37,7 @@ public class RestrictionTest extends ObjectTest<Restriction> {
     }
 
     private static class TestRestriction extends Restriction {
-        private TestRestriction(Long id, Date start, Date stop) {
+        private TestRestriction(Long id, Instant start, Instant stop) {
             super(id, start, stop);
         }
     }

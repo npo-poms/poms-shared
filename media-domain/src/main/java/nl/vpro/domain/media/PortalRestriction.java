@@ -1,8 +1,11 @@
 package nl.vpro.domain.media;
 
-import java.util.Date;
+import java.time.Instant;
 
-import javax.persistence.*;
+import javax.persistence.Cacheable;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -39,12 +42,12 @@ public class PortalRestriction extends Restriction {
         this.portal = portal;
     }
 
-    public PortalRestriction(Portal portal, Date start, Date stop) {
+    public PortalRestriction(Portal portal, Instant start, Instant stop) {
         super(start, stop);
         this.portal = portal;
     }
 
-    public PortalRestriction(Long id, Portal portal, Date start, Date stop) {
+    public PortalRestriction(Long id, Portal portal, Instant start, Instant stop) {
         super(id, start, stop);
         this.portal = portal;
     }
