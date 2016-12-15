@@ -1,12 +1,14 @@
 package nl.vpro.domain.media;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -14,7 +16,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import nl.vpro.domain.media.support.DomainObject;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @MappedSuperclass
 @nl.vpro.validation.Restriction
@@ -25,21 +32,29 @@ abstract public class Restriction extends DomainObject {
 
     @Column
     @XmlAttribute
-    protected Date start;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    protected Instant start;
 
     @Column
     @XmlAttribute
-    protected Date stop;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    protected Instant stop;
 
     protected Restriction() {
     }
 
-    protected Restriction(Date start, Date stop) {
+    protected Restriction(Instant start, Instant stop) {
         this.start = start;
         this.stop = stop;
     }
 
-    protected Restriction(Long id, Date start, Date stop) {
+    protected Restriction(Long id, Instant start, Instant stop) {
         this.id = id;
         this.start = start;
         this.stop = stop;
@@ -49,19 +64,19 @@ abstract public class Restriction extends DomainObject {
         this(source.start, source.stop);
     }
 
-    public Date getStart() {
+    public Instant getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(Instant start) {
         this.start = start;
     }
 
-    public Date getStop() {
+    public Instant getStop() {
         return stop;
     }
 
-    public void setStop(Date stop) {
+    public void setStop(Instant stop) {
         this.stop = stop;
     }
 
