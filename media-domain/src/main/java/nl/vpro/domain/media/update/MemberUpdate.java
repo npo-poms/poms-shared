@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
@@ -18,9 +18,9 @@ public class MemberUpdate {
     Boolean highlighted = false;
 
     @XmlElement
-    private MediaUpdate mediaUpdate;
+    private MediaUpdate<?> mediaUpdate;
 
-    private MemberUpdate() {
+    public MemberUpdate() {
     }
 
     public MemberUpdate(Integer position, MediaUpdate mediaUpdate) {
@@ -36,7 +36,7 @@ public class MemberUpdate {
         this.position = position;
     }
 
-    public MediaUpdate getMediaUpdate() {
+    public MediaUpdate<?> getMediaUpdate() {
         return mediaUpdate;
     }
 
