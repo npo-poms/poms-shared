@@ -238,13 +238,13 @@ public interface MediaTestDataBuilder<
     default T withPortalRestrictions() {
         return portalRestrictions(
             new PortalRestriction(new Portal("STERREN24", "Sterren24")),
-            new PortalRestriction(new Portal("3VOOR12_GRONINGEN", "3voor12 Groningen"), new Date(0), new Date(100000)));
+            new PortalRestriction(new Portal("3VOOR12_GRONINGEN", "3voor12 Groningen"), Instant.ofEpochMilli(0), Instant.ofEpochMilli(100000)));
     }
 
     default T withGeoRestrictions() {
         return geoRestrictions(
             new GeoRestriction(Region.NL),
-            new GeoRestriction(Region.BENELUX, new Date(0), new Date(100000)));
+            new GeoRestriction(Region.BENELUX, Instant.ofEpochMilli(0), Instant.ofEpochMilli(100000)));
     }
 
     default T withTitles() {
@@ -371,16 +371,16 @@ public interface MediaTestDataBuilder<
 
     default T withLocations() {
         Location l1 = new Location("http://player.omroep.nl/?aflID=4393288", OwnerType.NEBO);
-        l1.setCreationDate(Date.from(LocalDateTime.of(2016, 3, 4, 12, 45).atZone(Schedule.ZONE_ID).toInstant()));
+        l1.setCreationInstant(LocalDateTime.of(2016, 3, 4, 12, 45).atZone(Schedule.ZONE_ID).toInstant());
         Location l2 = new Location("http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf", OwnerType.BROADCASTER);
-        l2.setCreationDate(Date.from(LocalDateTime.of(2016, 3, 4, 13, 45).atZone(Schedule.ZONE_ID).toInstant()));
+        l2.setCreationInstant(LocalDateTime.of(2016, 3, 4, 13, 45).atZone(Schedule.ZONE_ID).toInstant());
         l2.setDuration(java.time.Duration.of(30L, ChronoUnit.MINUTES).plus(java.time.Duration.of(33, ChronoUnit.SECONDS)));
         Location l3 = new Location("http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf", OwnerType.BROADCASTER);
-        l3.setCreationDate(Date.from(LocalDateTime.of(2016, 3, 4, 14, 45).atZone(Schedule.ZONE_ID).toInstant()));
+        l3.setCreationInstant(LocalDateTime.of(2016, 3, 4, 14, 45).atZone(Schedule.ZONE_ID).toInstant());
         Location l4 = new Location("http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v", OwnerType.BROADCASTER);
         l4.setDuration(java.time.Duration.of(10L, ChronoUnit.MINUTES));
         l4.setOffset(java.time.Duration.of(13L, ChronoUnit.MINUTES));
-        l4.setCreationDate(Date.from(LocalDateTime.of(2016, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant()));
+        l4.setCreationInstant(LocalDateTime.of(2016, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant());
 
         return locations(l1, l2, l3, l4);
 

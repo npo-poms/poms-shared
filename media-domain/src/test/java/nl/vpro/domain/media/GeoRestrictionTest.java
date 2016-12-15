@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import java.util.Date;
+import java.time.Instant;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
@@ -23,16 +23,16 @@ public class GeoRestrictionTest extends ObjectTest<GeoRestriction> {
     public static GeoRestriction nullArgument = null;
 
     @DataPoint
-    public static GeoRestriction benuluxNoTime = new GeoRestriction(Region.BENELUX);
+    public static GeoRestriction beneluxNoTime = new GeoRestriction(Region.BENELUX);
 
     @DataPoint
     public static GeoRestriction nlNoTime = new GeoRestriction(Region.NL);
 
     @DataPoint
-    public static GeoRestriction benulux = new GeoRestriction(Region.BENELUX, new Date(1), new Date(2));
+    public static GeoRestriction benelux = new GeoRestriction(Region.BENELUX, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
 
     @DataPoint
-    public static GeoRestriction nl = new GeoRestriction(Region.NL, new Date(3), new Date(3));
+    public static GeoRestriction nl = new GeoRestriction(Region.NL, Instant.ofEpochMilli(3), Instant.ofEpochMilli(3));
 
     @Test
     public void testEquals() throws Exception {
@@ -41,6 +41,6 @@ public class GeoRestrictionTest extends ObjectTest<GeoRestriction> {
 
     @Test
     public void testEqualsOnTime() throws Exception {
-        assertThat(new GeoRestriction(Region.BENELUX)).isNotEqualTo(new GeoRestriction(Region.BENELUX, new Date(1), new Date(2)));
+        assertThat(new GeoRestriction(Region.BENELUX)).isNotEqualTo(new GeoRestriction(Region.BENELUX, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2)));
     }
 }
