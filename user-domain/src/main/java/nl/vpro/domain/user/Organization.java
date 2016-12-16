@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
@@ -20,12 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.Displayable;
 
 @MappedSuperclass
 @Cacheable(true)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "organizationType", namespace = Xmlns.MEDIA_NAMESPACE)
-public abstract class Organization implements Serializable, Identifiable<String>, Comparable<Organization> {
+public abstract class Organization implements Serializable, Identifiable<String>, Comparable<Organization>, Displayable {
 
     @Id
     @XmlAttribute
@@ -58,6 +59,7 @@ public abstract class Organization implements Serializable, Identifiable<String>
         this.id = id == null ? null : id.toUpperCase().trim();
     }
 
+    @Override
     public String getDisplayName() {
         return displayName;
     }
