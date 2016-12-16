@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+<xs:schema
+  attributeFormDefault="unqualified"
+  elementFormDefault="qualified"
   targetNamespace="urn:vpro:shared:2009" xmlns="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:element type="imageType" name="image"/>
@@ -44,11 +46,10 @@
       <xs:element type="xs:positiveInteger" name="height" minOccurs="0"/>
       <xs:element type="xs:positiveInteger" name="width" minOccurs="0"/>
       <xs:element type="xs:string" name="credits" minOccurs="0"/>
-      <xs:element name="source" type="xs:string" form="qualified" minOccurs="0"/>
-      <xs:element name="sourceName" type="xs:string" form="qualified" minOccurs="0"/>
-      <xs:element name="license" type="licenseEnum" form="qualified" minOccurs="0"/>
+      <xs:element name="source" type="xs:string"  minOccurs="0"/>
+      <xs:element name="sourceName" type="xs:string"  minOccurs="0"/>
+      <xs:element name="license" type="licenseEnum"  minOccurs="0"/>
       <xs:element type="xs:string" name="date" minOccurs="0"/>
-
     </xs:sequence>
     <xs:attribute type="imageTypeEnum" name="type"/>
     <xs:attribute type="ownerTypeEnum" name="owner" use="required"/>
