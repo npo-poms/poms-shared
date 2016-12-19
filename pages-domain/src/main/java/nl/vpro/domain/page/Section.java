@@ -67,6 +67,7 @@ public class Section implements Displayable {
         return displayName;
     }
 
+    @JsonProperty("value")
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
