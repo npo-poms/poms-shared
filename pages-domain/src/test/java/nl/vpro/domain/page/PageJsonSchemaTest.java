@@ -61,7 +61,20 @@ public class PageJsonSchemaTest {
         portal.setSection(section);
         Page news = builder.portal(portal).build();
 
-        news = roundTripContains(news, "\"portal\":{\"id\":\"VPRONL\",\"url\":\"http://vpro.nl\",\"value\":\"VPRO\",\"section\":{\"path\":\"/tegenlicht\",\"id\":\"VPRONL./tegenlicht\",\"value\":\"Tegenlicht\"}}");
+        news = Jackson2TestUtil.roundTripAndSimilarAndEquals(news, "{\n" +
+            "  \"objectType\" : \"page\",\n" +
+            "  \"type\" : \"ARTICLE\",\n" +
+            "  \"portal\" : {\n" +
+            "    \"id\" : \"VPRONL\",\n" +
+            "    \"url\" : \"http://vpro.nl\",\n" +
+            "    \"value\" : \"VPRO\",\n" +
+            "    \"section\" : {\n" +
+            "      \"path\" : \"/tegenlicht\",\n" +
+            "      \"value\" : \"Tegenlicht\",\n" +
+            "      \"id\" : \"VPRONL./tegenlicht\"\n" +
+            "    }\n" +
+            "  }\n" +
+            "}");
 
         assertThat(news.getPortal()).isNotNull();
         assertThat(news.getPortal().getSection()).isNotNull();
