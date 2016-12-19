@@ -221,4 +221,13 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
 
+    @DELETE
+    @Path("program/{id}/member/{segmentId}")
+    Response removeSegment(
+        @PathParam("id") final String id,
+        @PathParam("segmentId") final String segment,
+        @QueryParam("number") final Integer number,
+        @QueryParam("followMerges") @DefaultValue("true") boolean followMerges,
+        @QueryParam("errors") String errors
+    ) throws IOException;
 }
