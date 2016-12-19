@@ -1,6 +1,8 @@
 package nl.vpro.domain.page;
 
 
+import lombok.EqualsAndHashCode;
+
 import java.time.Instant;
 import java.util.*;
 
@@ -77,6 +79,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "creationDate",
         "lastModified"
     })
+@EqualsAndHashCode
 public class Page {
 
     @NotNull
@@ -478,66 +481,5 @@ public class Page {
         return "Page{url='" + url + '\'' + '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Page page = (Page) o;
-
-        if (type != page.type) return false;
-        if (url != null ? !url.equals(page.url) : page.url != null) return false;
-        if (crids != null ? !crids.equals(page.crids) : page.crids != null) return false;
-        if (alternativeUrls != null ? !alternativeUrls.equals(page.alternativeUrls) : page.alternativeUrls != null)
-            return false;
-        if (broadcasters != null ? !broadcasters.equals(page.broadcasters) : page.broadcasters != null) return false;
-        if (portal != null ? !portal.equals(page.portal) : page.portal != null) return false;
-        if (title != null ? !title.equals(page.title) : page.title != null) return false;
-        if (subtitle != null ? !subtitle.equals(page.subtitle) : page.subtitle != null) return false;
-        if (keywords != null ? !keywords.equals(page.keywords) : page.keywords != null) return false;
-        if (genres != null ? !genres.equals(page.genres) : page.genres != null) return false;
-        if (summary != null ? !summary.equals(page.summary) : page.summary != null) return false;
-        if (paragraphs != null ? !paragraphs.equals(page.paragraphs) : page.paragraphs != null) return false;
-        if (tags != null ? !tags.equals(page.tags) : page.tags != null) return false;
-        if (refCount != null ? !refCount.equals(page.refCount) : page.refCount != null) return false;
-        if (referrals != null ? !referrals.equals(page.referrals) : page.referrals != null) return false;
-        if (links != null ? !links.equals(page.links) : page.links != null) return false;
-        if (embeds != null ? !embeds.equals(page.embeds) : page.embeds != null) return false;
-        if (statRefs != null ? !statRefs.equals(page.statRefs) : page.statRefs != null) return false;
-        if (images != null ? !images.equals(page.images) : page.images != null) return false;
-        if (relations != null ? !relations.equals(page.relations) : page.relations != null) return false;
-        if (creationDate != null ? !creationDate.equals(page.creationDate) : page.creationDate != null) return false;
-        if (lastModified != null ? !lastModified.equals(page.lastModified) : page.lastModified != null) return false;
-        if (publishStart != null ? !publishStart.equals(page.publishStart) : page.publishStart != null) return false;
-        return lastPublished != null ? lastPublished.equals(page.lastPublished) : page.lastPublished == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = type != null ? type.hashCode() : 0;
-        result = 31 * result + (url != null ? url.hashCode() : 0);
-        result = 31 * result + (crids != null ? crids.hashCode() : 0);
-        result = 31 * result + (alternativeUrls != null ? alternativeUrls.hashCode() : 0);
-        result = 31 * result + (broadcasters != null ? broadcasters.hashCode() : 0);
-        result = 31 * result + (portal != null ? portal.hashCode() : 0);
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (subtitle != null ? subtitle.hashCode() : 0);
-        result = 31 * result + (keywords != null ? keywords.hashCode() : 0);
-        result = 31 * result + (genres != null ? genres.hashCode() : 0);
-        result = 31 * result + (summary != null ? summary.hashCode() : 0);
-        result = 31 * result + (paragraphs != null ? paragraphs.hashCode() : 0);
-        result = 31 * result + (tags != null ? tags.hashCode() : 0);
-        result = 31 * result + (refCount != null ? refCount.hashCode() : 0);
-        result = 31 * result + (referrals != null ? referrals.hashCode() : 0);
-        result = 31 * result + (links != null ? links.hashCode() : 0);
-        result = 31 * result + (embeds != null ? embeds.hashCode() : 0);
-        result = 31 * result + (statRefs != null ? statRefs.hashCode() : 0);
-        result = 31 * result + (images != null ? images.hashCode() : 0);
-        result = 31 * result + (relations != null ? relations.hashCode() : 0);
-        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
-        result = 31 * result + (lastModified != null ? lastModified.hashCode() : 0);
-        result = 31 * result + (publishStart != null ? publishStart.hashCode() : 0);
-        result = 31 * result + (lastPublished != null ? lastPublished.hashCode() : 0);
-        return result;
-    }
 }
