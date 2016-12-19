@@ -44,6 +44,7 @@ public interface MediaBackendRestService {
 
     @DELETE
     @Path("{entity:(media|program|group|segment)}/{id}")
+    @Produces(MediaType.TEXT_PLAIN)
     Response deleteMedia(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -61,7 +62,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("{entity:(media|segment|program|group)}")
-    @Produces("text/plain")
+    @Produces(MediaType.TEXT_PLAIN)
     Response update(
         @PathParam("entity") final String entity,
         @XopWithMultipartRelated MediaUpdate update,
@@ -72,7 +73,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id}/location")
-    @Produces("text/plain")
+    @Produces(MediaType.TEXT_PLAIN)
     Response addLocation(
         @PathParam("entity") final String entity,
         LocationUpdate location,
@@ -83,7 +84,7 @@ public interface MediaBackendRestService {
 
     @DELETE
     @Path("{entity:(media|program|group|segment)}/{id}/location/{locationId}")
-    @Produces("text/plain")
+    @Produces(MediaType.TEXT_PLAIN)
     Response removeLocation(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -102,7 +103,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id}/image")
-    @Produces("text/plain")
+    @Produces(MediaType.TEXT_PLAIN)
     Response addImage(
         ImageUpdate imageUpdate,
         @PathParam("entity") final String entity,
@@ -134,6 +135,7 @@ public interface MediaBackendRestService {
 
     @PUT
     @Path("{entity:(media|program|group|segment)}/{id}/members")
+    @Produces(MediaType.TEXT_PLAIN)
     Response moveMembers(
         MoveAction move,
         @PathParam("entity") final String entity,
@@ -152,6 +154,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id}/memberOf")
+    @Produces(MediaType.TEXT_PLAIN)
     Response addMemberOf(
         MemberRefUpdate memberRefUpdate,
         @PathParam("entity") final String entity,
@@ -163,6 +166,7 @@ public interface MediaBackendRestService {
 
     @DELETE
     @Path("{entity:(media|program|group|segment)}/{id}/memberOf/{owner}")
+    @Produces(MediaType.TEXT_PLAIN)
     Response removeMemberOf(
         @PathParam("entity") final String entity,
         @PathParam("id") final String id,
@@ -185,6 +189,7 @@ public interface MediaBackendRestService {
 
     @PUT
     @Path("{entity:(media|program|group|segment)}/{id}/episodes")
+    @Produces(MediaType.TEXT_PLAIN)
     Response moveEpisodes(
         MoveAction move,
         @PathParam("entity") final String entity,
@@ -202,6 +207,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("program/{id}/episodeOf")
+    @Produces(MediaType.TEXT_PLAIN)
     Response addEpisodeOf(
         MemberRefUpdate memberRefUpdate,
         @PathParam("id") final String id,
@@ -212,6 +218,7 @@ public interface MediaBackendRestService {
 
     @DELETE
     @Path("program/{id}/episodeOf/{owner}")
+    @Produces(MediaType.TEXT_PLAIN)
     Response removeEpisodeOf(
         @PathParam("id") final String id,
         @PathParam("owner") final String owner,
@@ -223,6 +230,7 @@ public interface MediaBackendRestService {
 
     @DELETE
     @Path("program/{id}/segment/{segmentId}")
+    @Produces(MediaType.TEXT_PLAIN)
     Response removeSegment(
         @PathParam("id") final String id,
         @PathParam("segmentId") final String segment,
