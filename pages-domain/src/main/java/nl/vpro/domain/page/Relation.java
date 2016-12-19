@@ -1,5 +1,7 @@
 package nl.vpro.domain.page;
 
+import lombok.EqualsAndHashCode;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,6 +14,7 @@ import nl.vpro.validation.URI;
 @XmlType(name = "relationType", propOrder = {
     "text"
 })
+@EqualsAndHashCode
 public class Relation implements Comparable<Relation> {
 
     @Valid
