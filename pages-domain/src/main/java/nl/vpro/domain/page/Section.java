@@ -1,6 +1,8 @@
 package nl.vpro.domain.page;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
@@ -20,6 +22,8 @@ import nl.vpro.validation.PathSegment;
 @XmlType(name = "sectionType")
 @XmlAccessorType(XmlAccessType.NONE)
 @ToString(exclude = "portal")
+@AllArgsConstructor
+@Builder
 public class Section implements Displayable {
 
     @NotNull
@@ -63,6 +67,7 @@ public class Section implements Displayable {
         return displayName;
     }
 
+    @JsonProperty("value")
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }

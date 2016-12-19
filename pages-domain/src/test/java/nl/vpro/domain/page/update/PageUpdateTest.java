@@ -13,7 +13,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.page.Section;
 import nl.vpro.domain.user.*;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -69,6 +71,35 @@ public class PageUpdateTest {
             "</page>";
         PageUpdate update = JAXB.unmarshal(new StringReader(xml), PageUpdate.class);
         assertThat(update.getTitle()).isEqualTo("Hoi2");
+    }
+
+    @Test
+    public void json() throws Exception {
+        PageUpdate page = PageUpdateBuilder
+            .article("http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html")
+            .portal(PortalUpdate
+                .builder()
+                .id("3voor12")
+                .url("http://3voor12-beta-test.vpro.nl/")
+                .section(Section.builder().displayName("display").path("/bla").build()).build())
+            .build();
+        PageUpdate rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(page, "{\n" +
+            "  \"type\" : \"ARTICLE\",\n" +
+            "  \"url\" : \"http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html\",\n" +
+            "  \"portal\" : {\n" +
+            "    \"section\" : {\n" +
+            "      \"path\" : \"/bla\",\n" +
+            "      \"value\" : \"display\"\n" +
+            "    },\n" +
+            "    \"id\" : \"3voor12\",\n" +
+            "    \"url\" : \"http://3voor12-beta-test.vpro.nl/\"\n" +
+            "  },\n" +
+            "  \"_id\" : \"http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html\"\n" +
+            "}");
+
+        assertThat(rounded.getPortal().getSection().getDisplayName()).isEqualTo("display");
+
+
     }
 
 }
