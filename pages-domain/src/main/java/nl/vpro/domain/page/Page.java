@@ -1,6 +1,8 @@
 package nl.vpro.domain.page;
 
 
+import lombok.EqualsAndHashCode;
+
 import java.time.Instant;
 import java.util.*;
 
@@ -77,6 +79,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "creationDate",
         "lastModified"
     })
+@EqualsAndHashCode
 public class Page {
 
     @NotNull
@@ -477,4 +480,6 @@ public class Page {
     public String toString() {
         return "Page{url='" + url + '\'' + '}';
     }
+
+
 }
