@@ -407,4 +407,65 @@ public class PageUpdate {
         return url + (crids != null ? (" " + crids) : "") + " " + getTitle();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PageUpdate that = (PageUpdate) o;
+
+        if (type != that.type) return false;
+        if (url != null ? !url.equals(that.url) : that.url != null) return false;
+        if (publishStart != null ? !publishStart.equals(that.publishStart) : that.publishStart != null) return false;
+        if (crids != null ? !crids.equals(that.crids) : that.crids != null) return false;
+        if (alternativeUrls != null ? !alternativeUrls.equals(that.alternativeUrls) : that.alternativeUrls != null)
+            return false;
+        if (broadcasters != null ? !broadcasters.equals(that.broadcasters) : that.broadcasters != null) return false;
+        if (portal != null ? !portal.equals(that.portal) : that.portal != null) return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (subtitle != null ? !subtitle.equals(that.subtitle) : that.subtitle != null) return false;
+        if (keywords != null ? !keywords.equals(that.keywords) : that.keywords != null) return false;
+        if (summary != null ? !summary.equals(that.summary) : that.summary != null) return false;
+        if (paragraphs != null ? !paragraphs.equals(that.paragraphs) : that.paragraphs != null) return false;
+        if (tags != null ? !tags.equals(that.tags) : that.tags != null) return false;
+        if (genres != null ? !genres.equals(that.genres) : that.genres != null) return false;
+        if (links != null ? !links.equals(that.links) : that.links != null) return false;
+        if (embeds != null ? !embeds.equals(that.embeds) : that.embeds != null) return false;
+        if (statRefs != null ? !statRefs.equals(that.statRefs) : that.statRefs != null) return false;
+        if (images != null ? !images.equals(that.images) : that.images != null) return false;
+        if (relations != null ? !relations.equals(that.relations) : that.relations != null) return false;
+        if (rev != null ? !rev.equals(that.rev) : that.rev != null) return false;
+        if (lastPublished != null ? !lastPublished.equals(that.lastPublished) : that.lastPublished != null)
+            return false;
+        if (creationDate != null ? !creationDate.equals(that.creationDate) : that.creationDate != null) return false;
+        return lastModified != null ? lastModified.equals(that.lastModified) : that.lastModified == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (publishStart != null ? publishStart.hashCode() : 0);
+        result = 31 * result + (crids != null ? crids.hashCode() : 0);
+        result = 31 * result + (alternativeUrls != null ? alternativeUrls.hashCode() : 0);
+        result = 31 * result + (broadcasters != null ? broadcasters.hashCode() : 0);
+        result = 31 * result + (portal != null ? portal.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (subtitle != null ? subtitle.hashCode() : 0);
+        result = 31 * result + (keywords != null ? keywords.hashCode() : 0);
+        result = 31 * result + (summary != null ? summary.hashCode() : 0);
+        result = 31 * result + (paragraphs != null ? paragraphs.hashCode() : 0);
+        result = 31 * result + (tags != null ? tags.hashCode() : 0);
+        result = 31 * result + (genres != null ? genres.hashCode() : 0);
+        result = 31 * result + (links != null ? links.hashCode() : 0);
+        result = 31 * result + (embeds != null ? embeds.hashCode() : 0);
+        result = 31 * result + (statRefs != null ? statRefs.hashCode() : 0);
+        result = 31 * result + (images != null ? images.hashCode() : 0);
+        result = 31 * result + (relations != null ? relations.hashCode() : 0);
+        result = 31 * result + (rev != null ? rev.hashCode() : 0);
+        result = 31 * result + (lastPublished != null ? lastPublished.hashCode() : 0);
+        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+        result = 31 * result + (lastModified != null ? lastModified.hashCode() : 0);
+        return result;
+    }
 }
