@@ -222,7 +222,7 @@ public interface MediaBackendRestService {
 
 
     @DELETE
-    @Path("program/{id}/member/{segmentId}")
+    @Path("program/{id}/segment/{segmentId}")
     Response removeSegment(
         @PathParam("id") final String id,
         @PathParam("segmentId") final String segment,
@@ -230,4 +230,5 @@ public interface MediaBackendRestService {
         @QueryParam("followMerges") @DefaultValue("true") boolean followMerges,
         @QueryParam("errors") String errors
     ) throws IOException;
+
 }
