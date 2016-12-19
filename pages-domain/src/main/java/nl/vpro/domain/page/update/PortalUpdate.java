@@ -1,5 +1,7 @@
 package nl.vpro.domain.page.update;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.Valid;
@@ -19,6 +21,8 @@ import nl.vpro.domain.user.ServiceLocator;
 @XmlType(name = "portalUpdateType", propOrder = {"section"})
 @XmlAccessorType(XmlAccessType.NONE)
 @Slf4j
+@AllArgsConstructor
+@Builder
 public class PortalUpdate {
 
     @ValidPortal
@@ -34,7 +38,6 @@ public class PortalUpdate {
     public PortalUpdate() {
 
     }
-
     public PortalUpdate(String id, String url) {
         this.id = id;
         this.url = url;
