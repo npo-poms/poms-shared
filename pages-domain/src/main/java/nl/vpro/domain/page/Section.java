@@ -11,8 +11,9 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.media.support.Displayable;
+import nl.vpro.domain.Displayable;
 import nl.vpro.validation.PathSegment;
 
 /**
@@ -22,6 +23,7 @@ import nl.vpro.validation.PathSegment;
 @XmlType(name = "sectionType")
 @XmlAccessorType(XmlAccessType.NONE)
 @ToString(exclude = "portal")
+@JsonPropertyOrder({"path", "id", "value"})
 @AllArgsConstructor
 @Builder
 public class Section implements Displayable {
