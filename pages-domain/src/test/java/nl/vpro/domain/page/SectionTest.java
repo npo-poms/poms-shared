@@ -15,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -58,10 +59,36 @@ public class SectionTest {
         target.setPath("/tegenlicht");
         target.setDisplayName("Tegenlicht");
         Portal portal = new Portal();
+        portal.setId("vpronl");
         portal.setSection(target);
-        Portal result = JAXBTestUtil.roundTrip(portal, "<pages:section path=\"/tegenlicht\">Tegenlicht</pages:section>");
+        Portal result = JAXBTestUtil.roundTripAndSimilar(portal, "<local:portal id=\"vpronl\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+            "    <pages:section path=\"/tegenlicht\">Tegenlicht</pages:section>\n" +
+            "</local:portal>");
         assertThat(result.getSection()).isNotNull();
         assertThat(result.getSection().getPortal()).isSameAs(result);
+        assertThat(result.getSection().getDisplayName()).isEqualTo("Tegenlicht");
+
+    }
+
+    @Test
+    public void testJsonBinding() throws Exception {
+        target.setPath("/tegenlicht");
+        target.setDisplayName("Tegenlicht");
+        Portal portal = new Portal();
+        portal.setId("vpronl");
+        portal.setSection(target);
+        Portal result = Jackson2TestUtil.roundTripAndSimilar(portal, "{\n" +
+            "  \"id\" : \"vpronl\",\n" +
+            "  \"section\" : {\n" +
+            "    \"path\" : \"/tegenlicht\",\n" +
+            "    \"id\" : \"vpronl./tegenlicht\",\n" +
+            "    \"value\" : \"Tegenlicht\"\n" +
+            "  }\n" +
+            "}");
+        assertThat(result.getSection()).isNotNull();
+        assertThat(result.getSection().getPortal()).isSameAs(result);
+        assertThat(result.getSection().getDisplayName()).isEqualTo("Tegenlicht");
+
     }
 
     @Test
