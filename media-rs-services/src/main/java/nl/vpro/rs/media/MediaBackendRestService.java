@@ -73,7 +73,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id}/location")
-    //@Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     Response addLocation(
         @PathParam("entity") final String entity,
         LocationUpdate location,
@@ -103,7 +103,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id}/image")
-    //@Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
     Response addImage(
         ImageUpdate imageUpdate,
         @PathParam("entity") final String entity,
