@@ -70,8 +70,8 @@ public class PageJsonSchemaTest {
             "    \"value\" : \"VPRO\",\n" +
             "    \"section\" : {\n" +
             "      \"path\" : \"/tegenlicht\",\n" +
-            "      \"value\" : \"Tegenlicht\",\n" +
-            "      \"id\" : \"VPRONL./tegenlicht\"\n" +
+            "      \"id\" : \"VPRONL./tegenlicht\",\n" +
+            "      \"value\" : \"Tegenlicht\"\n" +
             "    }\n" +
             "  }\n" +
             "}");
