@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.media.support.Displayable;
+import nl.vpro.domain.Displayable;
 import nl.vpro.domain.page.util.Urls;
 import nl.vpro.validation.URI;
 
