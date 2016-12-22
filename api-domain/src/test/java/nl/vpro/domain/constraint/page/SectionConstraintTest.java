@@ -1,0 +1,48 @@
+/*
+ * Copyright (C) 2016 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.constraint.page;
+
+import nl.vpro.domain.page.*;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * @author rico
+ * @since 4.3
+ */
+public class SectionConstraintTest {
+    @Test
+    public void testGetValue() throws Exception {
+        SectionConstraint in = new SectionConstraint("cinema");
+        SectionConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:sectionConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">cinema</local:sectionConstraint>\n");
+        assertThat(out.getValue()).isEqualTo("cinema");
+    }
+
+    @Test
+    public void testGetESPath() throws Exception {
+        assertThat(new SectionConstraint().getESPath()).isEqualTo("portal.section.path");
+    }
+
+    @Test
+    public void testApplyWhenTrue() throws Exception {
+        final Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VproNL");
+        final Section section = new Section("cinema", "Cinema NL");
+        portal.setSection(section);
+        Page article = PageBuilder.page(PageType.ARTICLE).portal(portal).build();
+        assertThat(new SectionConstraint("cinema").test(article)).isTrue();
+    }
+
+    @Test
+    public void testApplyWhenFalse() throws Exception {
+        final Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VproNL");
+        final Section section = new Section("cinema", "Cinema NL");
+        portal.setSection(section);
+        Page article = PageBuilder.page(PageType.ARTICLE).portal(portal).build();
+        assertThat(new SectionConstraint("tegenlicht").test(article)).isFalse();
+    }
+}
