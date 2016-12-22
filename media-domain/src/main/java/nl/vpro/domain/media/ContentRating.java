@@ -8,7 +8,7 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.media.support.Displayable;
+import nl.vpro.domain.Displayable;
 
 /**
  * @author Michiel Meeuwissen
@@ -39,7 +39,7 @@ public enum ContentRating implements Displayable {
 
     private final char letter;
 
-    private ContentRating(String displayName, char letter) {
+    ContentRating(String displayName, char letter) {
         this.displayName = displayName;
         this.letter = letter;
     }

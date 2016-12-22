@@ -1,10 +1,10 @@
-/**
+/*
  * Copyright (C) 2015 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.beeldengeluid.gtaa;
 
-import nl.vpro.domain.media.support.Displayable;
+import nl.vpro.domain.Displayable;
 
 /**
  * @author Roelof Jan Koekoek

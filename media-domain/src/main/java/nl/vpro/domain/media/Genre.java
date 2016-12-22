@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.classification.*;
 import nl.vpro.domain.classification.bind.TermWrapper;
-import nl.vpro.domain.media.support.Displayable;
+import nl.vpro.domain.Displayable;
 import nl.vpro.validation.GenreValidation;
 
 /**
