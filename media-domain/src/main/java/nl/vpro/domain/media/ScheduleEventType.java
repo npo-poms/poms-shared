@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2008 All rights reserved
  * VPRO The Netherlands
  */
