@@ -1,0 +1,16 @@
+@XmlSchema(
+        namespace = Xmlns.PROFILE_NAMESPACE,
+        xmlns = {
+            @XmlNs(prefix = "",        namespaceURI = Xmlns.PROFILE_NAMESPACE),
+            @XmlNs(prefix = "media",   namespaceURI = Xmlns.MEDIA_CONSTRAINT_NAMESPACE),
+            @XmlNs(prefix = "page",    namespaceURI = Xmlns.PAGE_CONSTRAINT_NAMESPACE)
+        },
+        elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
+        attributeFormDefault = javax.xml.bind.annotation.XmlNsForm.UNQUALIFIED
+)
+package nl.vpro.domain.api.profile;
+
+import javax.xml.bind.annotation.XmlNs;
+import javax.xml.bind.annotation.XmlSchema;
+
+import nl.vpro.domain.Xmlns;

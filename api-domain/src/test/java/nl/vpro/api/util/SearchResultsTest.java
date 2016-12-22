@@ -1,0 +1,161 @@
+package nl.vpro.api.util;
+
+import nl.vpro.domain.api.*;
+import nl.vpro.domain.api.media.*;
+import nl.vpro.domain.classification.ClassificationServiceLocator;
+import nl.vpro.domain.media.MediaClassificationService;
+import nl.vpro.domain.media.MediaObject;
+import nl.vpro.jackson2.Jackson2Mapper;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import javax.xml.bind.JAXB;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+
+public class SearchResultsTest {
+
+    @BeforeClass
+    public static void init() {
+        ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
+    }
+
+    @Test
+    public void testSetSelectedTermFacet() throws Exception {
+
+        TextMatcherList searches = new TextMatcherList();
+        searches.asList().add(new TextMatcher("ID"));
+        searches.asList().add(new TextMatcher("MATCHESNOTHING"));
+
+        List<TermFacetResultItem> facetResultItems = new ArrayList<>();
+        facetResultItems.add(new TermFacetResultItem("Id", "ID", 10));
+        facetResultItems.add(new TermFacetResultItem("AnotherId", "ANOTHERID", 5));
+
+        List<TermFacetResultItem> selected = new ArrayList<>();
+        SearchResults.setSelected(searches, facetResultItems, selected, TermFacetResultItem::new, "cache");
+
+        assertThat(facetResultItems).hasSize(2);
+        assertThat(facetResultItems.get(0).getId()).isEqualTo("ID");
+        assertThat(facetResultItems.get(0).isSelected()).isTrue();
+        assertThat(facetResultItems.get(1).getId()).isEqualTo("ANOTHERID");
+        assertThat(facetResultItems.get(1).isSelected()).isFalse();
+
+        assertThat(selected).hasSize(2);
+        assertThat(selected.get(0).getId()).isEqualTo("ID");
+        assertThat(selected.get(1).getId()).isEqualTo("MATCHESNOTHING");
+        assertThat(selected.get(1).getCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void testSetSelectedDateFacet() throws Exception {
+        DateRangeMatcherList searches = new DateRangeMatcherList();
+        searches.asList().add(new DateRangeMatcher(new Date(0), new Date(100000)));
+        searches.asList().add(new DateRangeMatcher(null, new Date(1000000)));
+
+        List<DateFacetResultItem> facetResultItems = new ArrayList<>();
+        facetResultItems.add(new DateFacetResultItem("range1", new Date(0), new Date(100000), 100));
+        facetResultItems.add(new DateFacetResultItem("range2", new Date(100000), new Date(2000000), 50));
+
+        List<DateFacetResultItem> selected = new ArrayList<>();
+
+        SearchResults.setSelected(searches, new DateRangeFacets(), facetResultItems, selected, DateFacetResultItem::new, true);
+
+        assertThat(facetResultItems).hasSize(2);
+        assertThat(facetResultItems.get(0).isSelected()).isTrue();
+        assertThat(facetResultItems.get(1).isSelected()).isFalse();
+
+        assertThat(selected).hasSize(2);
+        assertThat(selected.get(0).isSelected()).isTrue();
+        assertThat(selected.get(0).getCount()).isEqualTo(100);
+        assertThat(selected.get(0).getValue()).isEqualTo("range1");
+        assertThat(selected.get(1).isSelected()).isTrue();
+        assertThat(selected.get(1).getValue()).isNull();
+        assertThat(selected.get(1).getCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void testSetSelectedRelationFacet() throws Exception {
+
+        RelationSearchList searches = new RelationSearchList();
+        RelationSearch search1 = new RelationSearch();
+        search1.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
+        search1.setTypes(new TextMatcherList(new TextMatcher("LABEL")));
+        search1.setValues(new ExtendedTextMatcherList(new ExtendedTextMatcher("Een label")));
+        searches.asList().add(search1);
+
+        RelationSearch search2 = new RelationSearch();
+        search2.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
+        search2.setTypes(new TextMatcherList(new TextMatcher("ARTIST")));
+        search2.setValues(new ExtendedTextMatcherList(new ExtendedTextMatcher("Een artiest")));
+        searches.asList().add(search2);
+
+        RelationSearch search3 = new RelationSearch();
+        search3.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
+        search3.setTypes(new TextMatcherList(new TextMatcher("LABEL")));
+        search3.setValues(new ExtendedTextMatcherList(new ExtendedTextMatcher("Nog een label")));
+        searches.asList().add(search3);
+
+
+        List<MultipleFacetsResult> facetResultItems = new ArrayList<>();
+        MultipleFacetsResult result = new MultipleFacetsResult();
+        result.setName("labels");
+        List<TermFacetResultItem> labels = new ArrayList<>();
+        labels.add(new TermFacetResultItem("VALUE", "LABEL1", 10));
+        labels.add(new TermFacetResultItem("VALUE", "Een label", 5));
+        result.setFacets(labels);
+        facetResultItems.add(result);
+
+
+        RelationFacetList relationFacetList  = new RelationFacetList();
+        RelationFacet facet = new RelationFacet();
+        facet.setName("labels");
+        RelationSearch facetSearch = new RelationSearch();
+        facet.setSubSearch(facetSearch);
+        facetSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
+        facetSearch.setTypes(new TextMatcherList(new TextMatcher("LABEL")));
+        relationFacetList.setFacets(new ArrayList<>());
+        relationFacetList.getFacets().add(facet);
+
+
+        List<MultipleFacetsResult> selected = new ArrayList<>();
+        MediaSearchResults.setSelected(searches, relationFacetList, facetResultItems, selected);
+
+        assertThat(facetResultItems.size()).isEqualTo(1);
+        assertThat(facetResultItems.get(0).getName()).isEqualTo("labels");
+        assertThat(facetResultItems.get(0).getFacets().size()).isEqualTo(2);
+        assertThat(facetResultItems.get(0).getFacets().get(0).getId()).isEqualTo("LABEL1");
+        assertThat(facetResultItems.get(0).getFacets().get(0).getCount()).isEqualTo(10);
+        assertThat(facetResultItems.get(0).getFacets().get(0).isSelected()).isFalse();
+        assertThat(facetResultItems.get(0).getFacets().get(1).getId()).isEqualTo("Een label");
+        assertThat(facetResultItems.get(0).getFacets().get(1).getCount()).isEqualTo(5);
+        assertThat(facetResultItems.get(0).getFacets().get(1).isSelected()).isTrue();
+
+
+        assertThat(selected.get(0).getName()).isEqualTo("labels");
+        assertThat(selected.get(0).getFacets().size()).isEqualTo(2);
+
+        assertThat(selected.get(0).getFacets().get(0).getId()).isEqualTo("Een label");
+        assertThat(selected.get(0).getFacets().get(0).getCount()).isEqualTo(5);
+        assertThat(selected.get(0).getFacets().get(1).getId()).isEqualTo("Nog een label");
+        assertThat(selected.get(0).getFacets().get(1).getCount()).isEqualTo(0);
+    }
+
+    @Test
+    public void unmarshalJson() throws IOException {
+        MediaSearchResult result = Jackson2Mapper.INSTANCE.readValue(getClass().getResource("/related.json"), MediaSearchResult.class);
+        MediaObject o = result.asList().get(0);
+        assertThat(o.getDescendantOf().iterator().next().getMidRef()).isEqualTo("VPRO_1154287");
+    }
+
+    @Test
+    public void unmarshalXml() throws IOException {
+        MediaSearchResult result = JAXB.unmarshal(getClass().getResource("/related.xml"), MediaSearchResult.class);
+        MediaObject o = result.asList().get(0);
+        assertThat(o.getDescendantOf().iterator().next().getMidRef()).isEqualTo("VPRO_1154287");
+    }
+}

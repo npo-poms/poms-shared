@@ -1,0 +1,27 @@
+{
+  "highlight": true,
+  "searches": {
+    "genres": [
+      {
+        "value": "3.0.4.3",
+        "match": "MUST"
+      },
+      {
+        "value": "3.0.4.5",
+        "match": "MUST"
+      }
+    ],
+    "sortDates": []
+  },
+  "facets": {
+    "sortDates": [
+      "YEAR"
+    ],
+    "broadcasters": {
+      "sort": "COUNT"
+    },
+    "genres": {
+      "sort": "COUNT"
+    }
+  }
+}
