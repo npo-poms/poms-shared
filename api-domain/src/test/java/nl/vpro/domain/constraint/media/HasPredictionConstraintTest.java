@@ -1,0 +1,43 @@
+/**
+ * Copyright (C) 2013 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.constraint.media;
+
+import nl.vpro.domain.media.MediaTestDataBuilder;
+import nl.vpro.domain.media.Program;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * @author Rico Jansen
+ * @since 3.1
+ */
+public class HasPredictionConstraintTest {
+
+    @Test
+    public void testGetValue() throws Exception {
+        HasPredictionConstraint in = new HasPredictionConstraint();
+        JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:hasPredictionConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\"/>");
+    }
+
+    @Test
+    public void testApplyTrue() throws Exception {
+        Program program = MediaTestDataBuilder.program().withPredictions().build();
+        assertThat(new HasPredictionConstraint().test(program)).isTrue();
+    }
+
+    @Test
+    public void testApplyFalse() throws Exception {
+        Program program = MediaTestDataBuilder.program().build();
+        assertThat(new HasPredictionConstraint().test(program)).isFalse();
+    }
+
+    @Test
+    public void testGetESPath() throws Exception {
+        assertThat(new HasPredictionConstraint().getESPath()).isEqualTo("predictions.platform");
+    }
+}

@@ -1,0 +1,1007 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<ns3:mediaSearchResult xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:pages="urn:vpro:pages:2013" xmlns:media="urn:vpro:media:2009" xmlns:ns3="urn:vpro:api:2013" total="10" offset="0" max="10">
+  <ns3:items>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="8.952893">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPWON_1154295" sortDate="2011-05-22T10:00:00+02:00" creationDate="2011-05-16T12:51:50.425+02:00" lastModified="2013-02-05T19:13:52.287+01:00" urn="urn:vpro:media:program:9490462" workflow="PUBLISHED">
+        <media:crid>crid://bds.tv/29737836</media:crid>
+        <media:crid>crid://tmp.program.omroep.nl/12595679</media:crid>
+        <media:crid>crid://bds.tv/29876639</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="NEBO" type="SUB">Yasmine</media:title>
+        <media:title owner="MIS" type="SUB">Yasmine</media:title>
+        <media:description owner="NEBO" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="MIS" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="NEBO" type="SUB">Het is nu een jaar geleden dat Groningse Yasmine (10) en haar familie verhuisden naar Marokko. Ondanks het feit dat ze het leuke avontuur vindt, miste ze haar leventje en haar vriendinnen in Nederland heel erg. Haar tantes vingen Yasmine en familie in die tijd op en hebben heel goed voor hen gezorgd. Daar werd Yasmine zo blij van, dat ze hen nu eens blij wil maken! Samen met Abel, laten ze zich inspireren door de Marokkaanse lekkernijen.</media:description>
+        <media:description owner="NEBO" type="EPISODE">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Yasmine. Het is nu een jaar geleden dat Groningse Yasmine (10) en haar familie verhuisden naar Marokko. Ondanks het feit dat ze het leuke avontuur vindt, miste ze haar leventje en haar vriendinnen in Nederland heel erg. Haar tantes vingen Yasmine en familie in die tijd op en hebben heel goed voor hen gezorgd. Daar werd Yasmine zo blij van, dat ze hen nu eens blij wil maken! Samen met Abel, laten ze zich inspireren door de Marokkaanse lekkernijen.</media:description>
+        <media:description owner="MIS" type="EPISODE">Het is nu een jaar geleden dat Groningse Yasmine (10) en haar familie verhuisden naar Marokko. Ondanks het feit dat ze het leuke avontuur vindt, miste ze haar leventje en haar vriendinnen in Nederland heel erg. Haar tantes vingen Yasmine en familie in die tijd op en hebben heel goed voor hen gezorgd. Daar werd Yasmine zo blij van, dat ze hen nu eens blij wil maken! Samen met Abel, laten ze zich inspireren door de Marokkaanse lekkernijen.</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:avAttributes>
+          <media:videoAttributes>
+            <media:aspectRatio>16:9</media:aspectRatio>
+          </media:videoAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H25M0.000S</media:duration>
+        <media:credits/>
+        <media:descendantOf urnRef="urn:vpro:media:group:20078082" midRef="VPRO_1154287" type="SEASON"/>
+        <media:descendantOf urnRef="urn:vpro:media:group:72840" midRef="POMS_S_VPRO_084124" type="SERIES"/>
+        <media:prediction state="REALIZED" publishStart="2011-05-22T10:41:02+02:00">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:52.130+01:00" lastModified="2013-02-05T19:13:52.199+01:00" publishStart="2011-05-22T10:41:02+02:00" urn="urn:vpro:media:location:20078483" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1154295</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:52.129+01:00" lastModified="2013-02-05T19:13:52.200+01:00" publishStart="2011-05-22T10:41:02+02:00" urn="urn:vpro:media:location:20078486" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPWON_1154295</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:52.130+01:00" lastModified="2013-02-05T19:13:52.202+01:00" publishStart="2011-05-22T10:41:02+02:00" urn="urn:vpro:media:location:20078489" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_std/VPWON_1154295</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:52.130+01:00" lastModified="2013-02-05T19:13:52.208+01:00" publishStart="2011-05-22T10:41:02+02:00" urn="urn:vpro:media:location:20078498" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1154295</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>WVC1</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:52.129+01:00" lastModified="2013-02-05T19:13:52.203+01:00" publishStart="2011-05-22T10:41:02+02:00" urn="urn:vpro:media:location:20078492" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1154295</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:52.129+01:00" lastModified="2013-02-05T19:13:52.206+01:00" publishStart="2011-05-22T10:41:02+02:00" urn="urn:vpro:media:location:20078495" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1154295</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" midRef="VPWON_1154295" urnRef="urn:vpro:media:program:9490462">
+            <media:avAttributes>
+              <media:bitrate>0</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2011-05-22T10:00:00+02:00</media:start>
+            <media:duration>P0DT0H25M0.000S</media:duration>
+            <media:poProgID>VPWON_1154295</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images/>
+        <media:episodeOf added="2013-02-05T19:13:52.235+01:00" highlighted="false" midRef="VPRO_1154287" index="4" type="SEASON" urnRef="urn:vpro:media:group:20078082"/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="2.7622175">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPRO_1132327" sortDate="2009-03-01T09:35:00+01:00" creationDate="2013-01-28T11:26:18.711+01:00" lastModified="2013-10-15T16:27:05.687+02:00" urn="urn:vpro:media:program:18231309" workflow="PUBLISHED">
+        <media:crid>crid://tmp.program.omroep.nl/9021709</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:description owner="NEBO" type="MAIN">jeugdprogramma waarin bakker Abel openhartige gesprekken voert met kinderen van acht tot twaalf jaar, terwijl ze samen een bijzondere taart voor een speciaal persoon bouwen. De kinderen luchten hun hart, wat voor aangrijpende en komische momenten zorgt.</media:description>
+        <media:description owner="NEBO" type="SUB">Om het jubileum te vieren zijn er dit seizoen twee heel bijzondere afleveringen, waarvoor Abel naar Marokko reist. Hij bouwt er taarten met twee Nederlands-Marokkaanse bakkersassistenten. De eerste assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.</media:description>
+        <media:description owner="NEBO" type="EPISODE">7-delige jeugdprogramma waarin bakker Abel openhartige gesprekken voert met kinderen van acht tot twaalf jaar, terwijl ze samen een bijzondere taart voor een speciaal persoon bouwen. De kinderen luchten hun hart, wat voor aangrijpende en komische momenten zorgt. Afl.1. Om het jubileum te vieren zijn er dit seizoen twee heel bijzondere afleveringen, waarvoor Abel naar Marokko reist. Hij bouwt er taarten met twee Nederlands-Marokkaanse bakkersassistenten. De eerste assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:avAttributes>
+          <media:bitrate>0</media:bitrate>
+          <media:avFileFormat>WM</media:avFileFormat>
+          <media:videoAttributes>
+            <media:videoCoding>WM</media:videoCoding>
+            <media:aspectRatio>16:9</media:aspectRatio>
+          </media:videoAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H25M0.000S</media:duration>
+        <media:credits/>
+        <media:descendantOf urnRef="urn:vpro:media:group:18223066" midRef="AUTO_TAARTENVANABEL" type="SEASON"/>
+        <media:descendantOf urnRef="urn:vpro:media:group:72840" midRef="POMS_S_VPRO_084124" type="SERIES"/>
+        <media:prediction state="REALIZED" publishStart="2009-03-01T10:06:00+01:00" publishStop="2009-03-15T10:06:00+01:00">INTERNETVOD</media:prediction>
+        <media:locations/>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" midRef="VPRO_1132327" urnRef="urn:vpro:media:program:18231309">
+            <media:avAttributes>
+              <media:bitrate>0</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2009-03-01T09:35:00+01:00</media:start>
+            <media:duration>P0DT0H25M0.000S</media:duration>
+            <media:poProgID>VPRO_1132327</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images/>
+        <media:episodeOf added="2013-01-28T11:26:18.750+01:00" highlighted="false" midRef="AUTO_TAARTENVANABEL" index="4" type="SEASON" urnRef="urn:vpro:media:group:18223066"/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="2.394271">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPWON_1154294" sortDate="2011-05-15T10:00:00+02:00" creationDate="2011-05-12T16:11:02.901+02:00" lastModified="2013-02-05T19:13:34.027+01:00" urn="urn:vpro:media:program:9460427" workflow="PUBLISHED">
+        <media:crid>crid://bds.tv/29639397</media:crid>
+        <media:crid>crid://tmp.program.omroep.nl/12566463</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="NEBO" type="SUB">Khalil</media:title>
+        <media:title owner="MIS" type="SUB">Khalil</media:title>
+        <media:description owner="NEBO" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="MIS" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="NEBO" type="SUB">De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!</media:description>
+        <media:description owner="NEBO" type="EPISODE">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Khalil. De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!</media:description>
+        <media:description owner="MIS" type="EPISODE">De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:avAttributes>
+          <media:videoAttributes>
+            <media:aspectRatio>4:3</media:aspectRatio>
+          </media:videoAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H25M0.000S</media:duration>
+        <media:credits/>
+        <media:descendantOf urnRef="urn:vpro:media:group:20078082" midRef="VPRO_1154287" type="SEASON"/>
+        <media:descendantOf urnRef="urn:vpro:media:group:72840" midRef="POMS_S_VPRO_084124" type="SERIES"/>
+        <media:prediction state="REALIZED" publishStart="2011-05-15T10:32:01+02:00">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:33.892+01:00" lastModified="2013-02-05T19:13:33.957+01:00" publishStart="2011-05-15T10:32:01+02:00" urn="urn:vpro:media:location:20078340" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1154294</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:33.892+01:00" lastModified="2013-02-05T19:13:33.958+01:00" publishStart="2011-05-15T10:32:01+02:00" urn="urn:vpro:media:location:20078343" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPWON_1154294</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:33.893+01:00" lastModified="2013-02-05T19:13:33.959+01:00" publishStart="2011-05-15T10:32:01+02:00" urn="urn:vpro:media:location:20078346" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_std/VPWON_1154294</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:33.893+01:00" lastModified="2013-02-05T19:13:33.962+01:00" publishStart="2011-05-15T10:32:01+02:00" urn="urn:vpro:media:location:20078355" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1154294</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>WVC1</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:33.893+01:00" lastModified="2013-02-05T19:13:33.960+01:00" publishStart="2011-05-15T10:32:01+02:00" urn="urn:vpro:media:location:20078349" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1154294</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:33.893+01:00" lastModified="2013-02-05T19:13:33.961+01:00" publishStart="2011-05-15T10:32:01+02:00" urn="urn:vpro:media:location:20078352" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1154294</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" midRef="VPWON_1154294" urnRef="urn:vpro:media:program:9460427">
+            <media:avAttributes>
+              <media:bitrate>0</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2011-05-15T10:00:00+02:00</media:start>
+            <media:duration>P0DT0H25M0.000S</media:duration>
+            <media:poProgID>VPWON_1154294</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images/>
+        <media:episodeOf added="2013-02-05T19:13:33.985+01:00" highlighted="false" midRef="VPRO_1154287" index="3" type="SEASON" urnRef="urn:vpro:media:group:20078082"/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="2.1974375">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="VPWON_1174494" sortDate="2012-12-02T10:00:00+01:00" creationDate="2012-11-08T06:46:12.139+01:00" lastModified="2013-12-05T17:10:44.535+01:00" urn="urn:vpro:media:program:16071382" workflow="PUBLISHED">
+        <media:crid>crid://tmp.program.omroep.nl/15033978</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:broadcaster id="ZAPP">Zapp</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="CERES" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="WHATS_ON" type="MAIN">Khalil</media:title>
+        <media:title owner="NEBO" type="SUB">Khalil</media:title>
+        <media:title owner="MIS" type="SUB">Khalil</media:title>
+        <media:title owner="CERES" type="SUB">Khalil</media:title>
+        <media:description owner="NEBO" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="MIS" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="CERES" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="WHATS_ON" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.  Aflevering 7 - Khalil De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!</media:description>
+        <media:description owner="NEBO" type="SUB">De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!</media:description>
+        <media:description owner="CERES" type="SUB">De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!</media:description>
+        <media:description owner="NEBO" type="EPISODE">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Khalil. De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!</media:description>
+        <media:description owner="MIS" type="EPISODE">De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:avAttributes>
+          <media:videoAttributes>
+            <media:color>BLACK AND WHITE AND COLOR</media:color>
+            <media:aspectRatio>16:9</media:aspectRatio>
+          </media:videoAttributes>
+          <media:audioAttributes>
+            <media:numberOfChannels>2</media:numberOfChannels>
+          </media:audioAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H25M0.000S</media:duration>
+        <media:credits/>
+        <media:descendantOf urnRef="urn:vpro:media:group:15899658" midRef="VPWON_1174487" type="SEASON"/>
+        <media:descendantOf urnRef="urn:vpro:media:group:72840" midRef="POMS_S_VPRO_084124" type="SERIES"/>
+        <media:prediction state="REALIZED" publishStart="2012-12-02T10:28:35+01:00">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="CERES" creationDate="2012-12-02T11:01:08.117+01:00" lastModified="2012-12-02T11:01:08.341+01:00" publishStart="2012-12-02T10:28:35+01:00" urn="urn:vpro:media:location:16654839" workflow="PUBLISHED">
+            <media:programUrl>odip+http://odi.omroep.nl/video/adaptive/VPWON_1174494</media:programUrl>
+            <media:avAttributes>
+              <media:avFileFormat>HASP</media:avFileFormat>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:51:04.434+01:00" lastModified="2013-02-05T17:51:04.528+01:00" publishStart="2012-12-02T10:28:35+01:00" urn="urn:vpro:media:location:20043715" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1174494</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:51:04.435+01:00" lastModified="2013-02-05T17:51:04.530+01:00" publishStart="2012-12-02T10:28:35+01:00" urn="urn:vpro:media:location:20043718" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPWON_1174494</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:51:04.435+01:00" lastModified="2013-02-05T17:51:04.533+01:00" publishStart="2012-12-02T10:28:35+01:00" urn="urn:vpro:media:location:20043721" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_std/VPWON_1174494</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:51:04.435+01:00" lastModified="2013-02-05T17:51:04.538+01:00" publishStart="2012-12-02T10:28:35+01:00" urn="urn:vpro:media:location:20043730" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1174494</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>WVC1</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:51:04.435+01:00" lastModified="2013-02-05T17:51:04.535+01:00" publishStart="2012-12-02T10:28:35+01:00" urn="urn:vpro:media:location:20043724" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1174494</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:51:04.434+01:00" lastModified="2013-02-05T17:51:04.537+01:00" publishStart="2012-12-02T10:28:35+01:00" urn="urn:vpro:media:location:20043727" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1174494</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" midRef="VPWON_1174494" urnRef="urn:vpro:media:program:16071382">
+            <media:avAttributes>
+              <media:bitrate>0</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2012-12-02T10:00:00+01:00</media:start>
+            <media:duration>P0DT0H25M0.000S</media:duration>
+            <media:poProgID>VPWON_1174494</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-12-02T11:00:31.274+01:00" lastModified="2012-12-02T11:00:35.836+01:00" urn="urn:vpro:media:image:16654832" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:118809</shared:imageUri>
+          </shared:image>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-12-02T11:00:33.549+01:00" lastModified="2012-12-02T11:00:35.837+01:00" urn="urn:vpro:media:image:16654833" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:118810</shared:imageUri>
+          </shared:image>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-12-02T11:00:35.758+01:00" lastModified="2012-12-02T11:00:35.837+01:00" urn="urn:vpro:media:image:16654834" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:118811</shared:imageUri>
+          </shared:image>
+        </media:images>
+        <media:episodeOf added="2012-12-02T10:31:04.241+01:00" highlighted="false" midRef="VPWON_1174487" index="1" type="SEASON" urnRef="urn:vpro:media:group:15899658"/>
+        <media:episodeOf added="2012-11-08T06:46:12.285+01:00" highlighted="false" midRef="VPWON_1174487" index="7" type="SEASON" urnRef="urn:vpro:media:group:15899658"/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="1.7157961">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="VPRO_1140254" sortDate="2010-05-02T10:00:00+02:00" creationDate="2013-02-05T18:21:48.794+01:00" lastModified="2013-12-05T04:24:05.470+01:00" urn="urn:vpro:media:program:20056513" workflow="PUBLISHED">
+        <media:crid>crid://tmp.program.omroep.nl/10919748</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="NEBO" type="SUB">Yasmine - Dolfijnentaart voor tantes in Marokko</media:title>
+        <media:description owner="NEBO" type="MAIN">Koud buiten hè? Maar binnen hoef je je zeker niet te vervelen, want je kunt weer genieten van de Taarten van Abel! Rond de feestdagen is Taarten van Abel zelfs in een speciaal winterjasje gestoken en maken we mooie wintertaarten voor stoere brandweermannen, de allerliefste mama, en het knuffeligste broertje en zusje. Krijg je het daar ook niet een beetje warm van? Abel reist ook weer door stad en land met zijn tassen vol bakkerspullen, snoep en lekkernijen. Op bezoek bij bijzondere en smaakmakende bakkersassistenten vol verhalen, om samen de mooiste, grootste, kleurrijkste en zoetste taarten te maken.</media:description>
+        <media:description owner="NEBO" type="SUB">De tweede assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.</media:description>
+        <media:description owner="NEBO" type="EPISODE">Koud buiten hè? Maar binnen hoef je je zeker niet te vervelen, want je kunt weer genieten van de Taarten van Abel! Rond de feestdagen is Taarten van Abel zelfs in een speciaal winterjasje gestoken en maken we mooie wintertaarten voor stoere brandweermannen, de allerliefste mama, en het knuffeligste broertje en zusje. Krijg je het daar ook niet een beetje warm van? Abel reist ook weer door stad en land met zijn tassen vol bakkerspullen, snoep en lekkernijen. Op bezoek bij bijzondere en smaakmakende bakkersassistenten vol verhalen, om samen de mooiste, grootste, kleurrijkste en zoetste taarten te maken. Afl.: Yasmine - Dolfijnentaart voor tantes in Marokko. De tweede assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:avAttributes>
+          <media:bitrate>0</media:bitrate>
+          <media:avFileFormat>WM</media:avFileFormat>
+          <media:videoAttributes>
+            <media:videoCoding>WM</media:videoCoding>
+            <media:aspectRatio>16:9</media:aspectRatio>
+          </media:videoAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H30M0.000S</media:duration>
+        <media:credits/>
+        <media:descendantOf urnRef="urn:vpro:media:group:20054711" midRef="VPRO_1140262" type="SEASON"/>
+        <media:descendantOf urnRef="urn:vpro:media:group:72840" midRef="POMS_S_VPRO_084124" type="SERIES"/>
+        <media:prediction state="REALIZED" publishStart="2010-05-02T10:31:01+02:00">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T18:21:48.797+01:00" lastModified="2013-02-05T18:21:48.805+01:00" publishStart="2010-05-02T10:31:01+02:00" urn="urn:vpro:media:location:20056519" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPRO_1140254</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T18:21:48.796+01:00" lastModified="2013-02-05T18:21:48.807+01:00" publishStart="2010-05-02T10:31:01+02:00" urn="urn:vpro:media:location:20056522" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPRO_1140254</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T18:21:48.796+01:00" lastModified="2013-02-05T18:21:48.808+01:00" publishStart="2010-05-02T10:31:01+02:00" urn="urn:vpro:media:location:20056525" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_sb/VPRO_1140254</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T18:21:48.796+01:00" lastModified="2013-02-05T18:21:48.809+01:00" publishStart="2010-05-02T10:31:01+02:00" urn="urn:vpro:media:location:20056528" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_bb/VPRO_1140254</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" midRef="VPRO_1140254" urnRef="urn:vpro:media:program:20056513">
+            <media:avAttributes>
+              <media:bitrate>0</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2010-05-02T10:00:00+02:00</media:start>
+            <media:duration>P0DT0H30M0.000S</media:duration>
+            <media:poProgID>VPRO_1140254</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images/>
+        <media:episodeOf added="2013-02-05T18:21:48.831+01:00" highlighted="false" midRef="VPRO_1140262" index="2" type="SEASON" urnRef="urn:vpro:media:group:20054711"/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="1.6000471">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="VPWON_1174497" sortDate="2012-12-16T10:00:00+01:00" creationDate="2012-11-22T06:46:11.650+01:00" lastModified="2013-12-05T17:11:04.140+01:00" urn="urn:vpro:media:program:16399800" workflow="PUBLISHED">
+        <media:crid>crid://tmp.program.omroep.nl/15050802</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:broadcaster id="ZAPP">Zapp</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="CERES" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="WHATS_ON" type="MAIN">Nina</media:title>
+        <media:title owner="NEBO" type="SUB">Nina</media:title>
+        <media:title owner="MIS" type="SUB">Nina</media:title>
+        <media:title owner="CERES" type="SUB">Nina</media:title>
+        <media:description owner="NEBO" type="MAIN">Samen met bakker Abel bouwen kinderen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="MIS" type="MAIN">Samen met bakker Abel bouwen kinderen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="CERES" type="MAIN">Samen met bakker Abel bouwen kinderen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="WHATS_ON" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.  Aflevering 10 - Nina Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek. waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een café hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke café-taart!</media:description>
+        <media:description owner="NEBO" type="SUB">Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek, waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een café hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke café-taart!</media:description>
+        <media:description owner="CERES" type="SUB">Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek, waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een cafÃ© hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke cafÃ©-taart!</media:description>
+        <media:description owner="NEBO" type="EPISODE">Samen met bakker Abel bouwen kinderen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Nina. Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek, waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een café hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke café-taart!</media:description>
+        <media:description owner="MIS" type="EPISODE">Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek, waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een café hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke café-taart!</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:avAttributes>
+          <media:videoAttributes>
+            <media:color>BLACK AND WHITE AND COLOR</media:color>
+            <media:aspectRatio>16:9</media:aspectRatio>
+          </media:videoAttributes>
+          <media:audioAttributes>
+            <media:numberOfChannels>2</media:numberOfChannels>
+          </media:audioAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H25M0.000S</media:duration>
+        <media:credits/>
+        <media:descendantOf urnRef="urn:vpro:media:group:15899658" midRef="VPWON_1174487" type="SEASON"/>
+        <media:descendantOf urnRef="urn:vpro:media:group:72840" midRef="POMS_S_VPRO_084124" type="SERIES"/>
+        <media:prediction state="REALIZED" publishStart="2012-12-16T10:31:55+01:00">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="CERES" creationDate="2012-12-16T11:16:08.215+01:00" lastModified="2012-12-16T11:16:08.395+01:00" publishStart="2012-12-16T10:31:55+01:00" urn="urn:vpro:media:location:17061232" workflow="PUBLISHED">
+            <media:programUrl>odip+http://odi.omroep.nl/video/adaptive/VPWON_1174497</media:programUrl>
+            <media:avAttributes>
+              <media:avFileFormat>HASP</media:avFileFormat>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:53:18.397+01:00" lastModified="2013-02-05T17:53:18.520+01:00" publishStart="2012-12-16T10:31:55+01:00" urn="urn:vpro:media:location:20044370" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1174497</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:53:18.397+01:00" lastModified="2013-02-05T17:53:18.521+01:00" publishStart="2012-12-16T10:31:55+01:00" urn="urn:vpro:media:location:20044373" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPWON_1174497</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:53:18.397+01:00" lastModified="2013-02-05T17:53:18.523+01:00" publishStart="2012-12-16T10:31:55+01:00" urn="urn:vpro:media:location:20044376" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_std/VPWON_1174497</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:53:18.397+01:00" lastModified="2013-02-05T17:53:18.528+01:00" publishStart="2012-12-16T10:31:55+01:00" urn="urn:vpro:media:location:20044385" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1174497</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>WVC1</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:53:18.397+01:00" lastModified="2013-02-05T17:53:18.525+01:00" publishStart="2012-12-16T10:31:55+01:00" urn="urn:vpro:media:location:20044379" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1174497</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T17:53:18.396+01:00" lastModified="2013-02-05T17:53:18.526+01:00" publishStart="2012-12-16T10:31:55+01:00" urn="urn:vpro:media:location:20044382" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1174497</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" midRef="VPWON_1174497" urnRef="urn:vpro:media:program:16399800">
+            <media:avAttributes>
+              <media:bitrate>0</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2012-12-16T10:00:00+01:00</media:start>
+            <media:duration>P0DT0H25M0.000S</media:duration>
+            <media:poProgID>VPWON_1174497</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-12-16T11:00:25.757+01:00" lastModified="2012-12-16T11:00:30.364+01:00" urn="urn:vpro:media:image:17061214" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:122509</shared:imageUri>
+          </shared:image>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-12-16T11:00:28.033+01:00" lastModified="2012-12-16T11:00:30.365+01:00" urn="urn:vpro:media:image:17061215" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:122510</shared:imageUri>
+          </shared:image>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-12-16T11:00:30.259+01:00" lastModified="2012-12-16T11:00:30.365+01:00" urn="urn:vpro:media:image:17061216" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:122511</shared:imageUri>
+          </shared:image>
+        </media:images>
+        <media:episodeOf added="2012-11-22T06:46:11.805+01:00" highlighted="false" midRef="VPWON_1174487" index="1" type="SEASON" urnRef="urn:vpro:media:group:15899658"/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="1.5734694">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" mid="POMS_VPRO_157891" sortDate="2010-04-18T02:03:49.367+02:00" creationDate="2010-04-18T02:03:49.367+02:00" lastModified="2013-01-28T11:10:49.987+01:00" urn="urn:vpro:media:program:998567" workflow="PUBLISHED">
+        <media:crid>crid://bds.tv/22316831</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:title owner="MIS" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="SUB">Yasmine - Dolfijnentaart voor tantes in Marokko</media:title>
+        <media:description owner="MIS" type="MAIN">Koud buiten hè? Maar binnen hoef je je zeker niet te vervelen, want je kunt weer genieten van de Taarten van Abel! Rond de feestdagen is Taarten van Abel zelfs in een speciaal winterjasje gestoken en maken we mooie wintertaarten voor stoere brandweermannen, de allerliefste mama, en het knuffeligste broertje en zusje. Krijg je het daar ook niet een beetje warm van? Abel reist ook weer door stad en land met zijn tassen vol bakkerspullen, snoep en lekkernijen. Op bezoek bij bijzondere en smaakmakende bakkersassistenten vol verhalen, om samen de mooiste, grootste, kleurrijkste en zoetste taarten te maken.</media:description>
+        <media:description owner="MIS" type="EPISODE">De tweede assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:language code="nl">Nederlands</media:language>
+        <media:duration>P0DT0H30M0.000S</media:duration>
+        <media:credits/>
+        <media:prediction state="REALIZED">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="NEBO" creationDate="2010-05-04T17:45:18.634+02:00" lastModified="2010-05-04T17:46:28.617+02:00" urn="urn:vpro:media:location:1407721" workflow="PUBLISHED">
+            <media:programUrl>http://player.omroep.nl/aflevering/10919748</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>500000</media:bitrate>
+              <media:avFileFormat>HTML</media:avFileFormat>
+            </media:avAttributes>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents/>
+        <media:images/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="1.4540464">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPWON_1154298" sortDate="2011-06-12T10:00:00+02:00" creationDate="2011-05-31T20:32:26.532+02:00" lastModified="2013-01-28T11:10:49.985+01:00" urn="urn:vpro:media:program:9756398" workflow="PUBLISHED">
+        <media:crid>crid://tmp.program.omroep.nl/12738606</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="SUB">Seven</media:title>
+        <media:title owner="NEBO" type="EPISODE">Seven</media:title>
+        <media:description owner="NEBO" type="MAIN">Samen met bakker Abel bouwen kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="MIS" type="MAIN">Samen met bakker Abel bouwen kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="MIS" type="EPISODE">'Hallootjes!' klinkt het vrolijk vanaf het balkon als Abel voor de deur staat. In een kleurig huis, in een Rotterdamse wijk, woont Seven (9) samen met zijn moeder. Seven heeft het Syndroom van Asperger, dit houdt in dat hij soms heel heftig op de dingen reageert. Elke dag om 15.00 slikt hij zijn pilletjes, waardoor hij er minder last van heeft. 'Door de medicijnen ben ik dikker geworden, maar mijn moeder zegt dat ik niet dik ben.' Daarom vindt Seven dat zijn moeder een gezellige poezentaart verdient. Want op lieve poezen zijn zij beiden heel erg gek!</media:description>
+        <media:avAttributes>
+          <media:videoAttributes>
+            <media:aspectRatio>16:9</media:aspectRatio>
+          </media:videoAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H25M0.000S</media:duration>
+        <media:credits/>
+        <media:prediction state="REALIZED" publishStart="2011-06-12T10:31:02+02:00">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="NEBO" creationDate="2011-06-12T11:27:58.389+02:00" lastModified="2011-06-12T11:27:58.389+02:00" publishStart="2011-06-12T10:31:02+02:00" urn="urn:vpro:media:location:9899105" workflow="PUBLISHED">
+            <media:programUrl>http://player.omroep.nl/?aflID=12738606</media:programUrl>
+            <media:avAttributes>
+              <media:avFileFormat>HTML</media:avFileFormat>
+              <media:videoAttributes>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:duration>P0DT0H30M0.000S</media:duration>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" imi="imi:19990" midRef="VPWON_1154298" urnRef="urn:vpro:media:program:9756398">
+            <media:memberOf>crid://bds.tv/17410479</media:memberOf>
+            <media:avAttributes>
+              <media:videoAttributes>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2011-06-12T10:00:00+02:00</media:start>
+            <media:duration>P0DT0H30M0.000S</media:duration>
+            <media:poProgID>VPWON_1154298</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="1.4160845">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" hasSubtitles="true" mid="VPWON_1174493" sortDate="2012-11-25T10:00:00+01:00" creationDate="2012-11-01T06:46:39.528+01:00" lastModified="2013-12-05T17:10:44.007+01:00" urn="urn:vpro:media:program:15899655" workflow="PUBLISHED">
+        <media:crid>crid://tmp.program.omroep.nl/15011833</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:broadcaster id="ZAPP">Zapp</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="CERES" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="WHATS_ON" type="MAIN">Ahlam</media:title>
+        <media:title owner="NEBO" type="SUB">Ahlam</media:title>
+        <media:title owner="MIS" type="SUB">Ahlam</media:title>
+        <media:title owner="CERES" type="SUB">Ahlam</media:title>
+        <media:description owner="NEBO" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="MIS" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="CERES" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="WHATS_ON" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.  Aflevering 6 - Ahlam Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van 10 vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.</media:description>
+        <media:description owner="NEBO" type="SUB">Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.</media:description>
+        <media:description owner="CERES" type="SUB">Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.</media:description>
+        <media:description owner="NEBO" type="EPISODE">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Ahlam. Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.</media:description>
+        <media:description owner="MIS" type="EPISODE">Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:avAttributes>
+          <media:videoAttributes>
+            <media:color>BLACK AND WHITE AND COLOR</media:color>
+            <media:aspectRatio>16:9</media:aspectRatio>
+          </media:videoAttributes>
+          <media:audioAttributes>
+            <media:numberOfChannels>2</media:numberOfChannels>
+          </media:audioAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H25M0.000S</media:duration>
+        <media:credits/>
+        <media:descendantOf urnRef="urn:vpro:media:group:15899658" midRef="VPWON_1174487" type="SEASON"/>
+        <media:descendantOf urnRef="urn:vpro:media:group:72840" midRef="POMS_S_VPRO_084124" type="SERIES"/>
+        <media:prediction state="REALIZED" publishStart="2012-11-25T10:29:57+01:00">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="CERES" creationDate="2012-11-25T10:46:12.351+01:00" lastModified="2012-11-25T10:46:12.495+01:00" publishStart="2012-11-25T10:29:57+01:00" urn="urn:vpro:media:location:16478835" workflow="PUBLISHED">
+            <media:programUrl>odip+http://odi.omroep.nl/video/adaptive/VPWON_1174493</media:programUrl>
+            <media:avAttributes>
+              <media:avFileFormat>HASP</media:avFileFormat>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T20:54:54.156+01:00" lastModified="2013-02-05T20:54:54.254+01:00" publishStart="2012-11-25T10:29:57+01:00" urn="urn:vpro:media:location:20109426" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1174493</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T20:54:54.155+01:00" lastModified="2013-02-05T20:54:54.255+01:00" publishStart="2012-11-25T10:29:57+01:00" urn="urn:vpro:media:location:20109429" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPWON_1174493</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T20:54:54.156+01:00" lastModified="2013-02-05T20:54:54.256+01:00" publishStart="2012-11-25T10:29:57+01:00" urn="urn:vpro:media:location:20109432" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_std/VPWON_1174493</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T20:54:54.156+01:00" lastModified="2013-02-05T20:54:54.259+01:00" publishStart="2012-11-25T10:29:57+01:00" urn="urn:vpro:media:location:20109441" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1174493</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>WVC1</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T20:54:54.155+01:00" lastModified="2013-02-05T20:54:54.257+01:00" publishStart="2012-11-25T10:29:57+01:00" urn="urn:vpro:media:location:20109435" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1174493</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T20:54:54.155+01:00" lastModified="2013-02-05T20:54:54.258+01:00" publishStart="2012-11-25T10:29:57+01:00" urn="urn:vpro:media:location:20109438" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1174493</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" midRef="VPWON_1174493" urnRef="urn:vpro:media:program:15899655">
+            <media:avAttributes>
+              <media:bitrate>0</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>WM</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2012-11-25T10:00:00+01:00</media:start>
+            <media:duration>P0DT0H25M0.000S</media:duration>
+            <media:poProgID>VPWON_1174493</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-11-25T11:00:30.359+01:00" lastModified="2012-11-25T11:00:34.938+01:00" urn="urn:vpro:media:image:16478877" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:117048</shared:imageUri>
+          </shared:image>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-11-25T11:00:32.593+01:00" lastModified="2012-11-25T11:00:34.939+01:00" urn="urn:vpro:media:image:16478878" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:117049</shared:imageUri>
+          </shared:image>
+          <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2012-11-25T11:00:34.821+01:00" lastModified="2012-11-25T11:00:34.939+01:00" urn="urn:vpro:media:image:16478879" workflow="PUBLISHED">
+            <shared:title>Taarten van Abel</shared:title>
+            <shared:imageUri>urn:vpro:image:117050</shared:imageUri>
+          </shared:image>
+        </media:images>
+        <media:episodeOf added="2012-11-25T10:31:06.559+01:00" highlighted="false" midRef="VPWON_1174487" index="1" type="SEASON" urnRef="urn:vpro:media:group:15899658"/>
+        <media:episodeOf added="2012-11-01T06:46:39.584+01:00" highlighted="false" midRef="VPWON_1174487" index="6" type="SEASON" urnRef="urn:vpro:media:group:15899658"/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+    <ns3:item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns3:searchResultItem" score="1.3513944">
+      <ns3:result xsi:type="media:programType" type="BROADCAST" avType="VIDEO" embeddable="true" mid="VPWON_1154293" sortDate="2011-05-08T10:00:00+02:00" creationDate="2011-04-24T03:38:25.775+02:00" lastModified="2013-02-05T19:13:12.591+01:00" urn="urn:vpro:media:program:9389113" workflow="PUBLISHED">
+        <media:crid>crid://bds.tv/29290128</media:crid>
+        <media:crid>crid://tmp.program.omroep.nl/12530093</media:crid>
+        <media:broadcaster id="VPRO">VPRO</media:broadcaster>
+        <media:title owner="NEBO" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="MIS" type="MAIN">Taarten van Abel</media:title>
+        <media:title owner="NEBO" type="SUB">Ahlam</media:title>
+        <media:title owner="MIS" type="SUB">Ahlam</media:title>
+        <media:description owner="NEBO" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="MIS" type="MAIN">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.</media:description>
+        <media:description owner="NEBO" type="SUB">Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.</media:description>
+        <media:description owner="NEBO" type="EPISODE">Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Ahlam. Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.</media:description>
+        <media:description owner="MIS" type="EPISODE">Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.</media:description>
+        <media:genre id="3.0.1.1">
+          <media:term>Jeugd</media:term>
+        </media:genre>
+        <media:avAttributes>
+          <media:videoAttributes>
+            <media:aspectRatio>16:9</media:aspectRatio>
+          </media:videoAttributes>
+        </media:avAttributes>
+        <media:duration>P0DT0H25M0.000S</media:duration>
+        <media:credits/>
+        <media:descendantOf urnRef="urn:vpro:media:group:20078082" midRef="VPRO_1154287" type="SEASON"/>
+        <media:descendantOf urnRef="urn:vpro:media:group:72840" midRef="POMS_S_VPRO_084124" type="SERIES"/>
+        <media:prediction state="REALIZED" publishStart="2011-05-08T10:31:02+02:00">INTERNETVOD</media:prediction>
+        <media:locations>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:12.449+01:00" lastModified="2013-02-05T19:13:12.520+01:00" publishStart="2011-05-08T10:31:02+02:00" urn="urn:vpro:media:location:20078190" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1154293</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:12.449+01:00" lastModified="2013-02-05T19:13:12.522+01:00" publishStart="2011-05-08T10:31:02+02:00" urn="urn:vpro:media:location:20078193" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPWON_1154293</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:12.450+01:00" lastModified="2013-02-05T19:13:12.524+01:00" publishStart="2011-05-08T10:31:02+02:00" urn="urn:vpro:media:location:20078196" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/h264_std/VPWON_1154293</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:12.450+01:00" lastModified="2013-02-05T19:13:12.528+01:00" publishStart="2011-05-08T10:31:02+02:00" urn="urn:vpro:media:location:20078205" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1154293</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>1024000</media:bitrate>
+              <media:avFileFormat>WVC1</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:12.449+01:00" lastModified="2013-02-05T19:13:12.525+01:00" publishStart="2011-05-08T10:31:02+02:00" urn="urn:vpro:media:location:20078199" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1154293</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>204800</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+          <media:location owner="NEBO" platform="INTERNETVOD" creationDate="2013-02-05T19:13:12.450+01:00" lastModified="2013-02-05T19:13:12.526+01:00" publishStart="2011-05-08T10:31:02+02:00" urn="urn:vpro:media:location:20078202" workflow="PUBLISHED">
+            <media:programUrl>odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1154293</media:programUrl>
+            <media:avAttributes>
+              <media:bitrate>512000</media:bitrate>
+              <media:avFileFormat>WM</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+          </media:location>
+        </media:locations>
+        <media:scheduleEvents>
+          <media:scheduleEvent channel="NED3" midRef="VPWON_1154293" urnRef="urn:vpro:media:program:9389113">
+            <media:avAttributes>
+              <media:bitrate>0</media:bitrate>
+              <media:avFileFormat>MP4</media:avFileFormat>
+              <media:videoAttributes>
+                <media:videoCoding>MP4</media:videoCoding>
+                <media:aspectRatio>16:9</media:aspectRatio>
+              </media:videoAttributes>
+            </media:avAttributes>
+            <media:textSubtitles>Teletekst ondertitels</media:textSubtitles>
+            <media:start>2011-05-08T10:00:00+02:00</media:start>
+            <media:duration>P0DT0H25M0.000S</media:duration>
+            <media:poProgID>VPWON_1154293</media:poProgID>
+          </media:scheduleEvent>
+        </media:scheduleEvents>
+        <media:images/>
+        <media:episodeOf added="2013-02-05T19:13:12.549+01:00" highlighted="false" midRef="VPRO_1154287" index="2" type="SEASON" urnRef="urn:vpro:media:group:20078082"/>
+        <media:segments/>
+      </ns3:result>
+    </ns3:item>
+  </ns3:items>
+</ns3:mediaSearchResult>
