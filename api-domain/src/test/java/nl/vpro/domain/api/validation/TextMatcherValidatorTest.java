@@ -22,13 +22,13 @@ public class TextMatcherValidatorTest {
 
     private final ConstraintValidatorContext.ConstraintViolationBuilder builder = mock(ConstraintValidatorContext.ConstraintViolationBuilder.class);
     private final ConstraintValidatorContext context = mock(ConstraintValidatorContext.class);
-    private final ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderDefinedContext nodeBuildercontext = mock(ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderDefinedContext.class);
+    private final ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderCustomizableContext nodeBuildercontext = mock(ConstraintValidatorContext.ConstraintViolationBuilder.NodeBuilderCustomizableContext.class);
 
     @Before
     public void setup() {
         reset(context, builder);
         when(context.buildConstraintViolationWithTemplate(anyString())).thenReturn(builder);
-        when(builder.addNode(anyString())).thenReturn(nodeBuildercontext);
+        when(builder.addPropertyNode(anyString())).thenReturn(nodeBuildercontext);
     }
 
     @Test
