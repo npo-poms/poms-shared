@@ -1,0 +1,1933 @@
+{
+  "total" : 10,
+  "offset" : 0,
+  "max" : 10,
+  "items" : [ {
+    "score" : 8.952893,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPWON_1154295",
+      "creationDate" : 1305543110425,
+      "lastModified" : 1360088032287,
+      "sortDate" : 1306051200000,
+      "urn" : "urn:vpro:media:program:9490462",
+      "embeddable" : true,
+      "episodeOf" : [ {
+        "midRef" : "VPRO_1154287",
+        "urnRef" : "urn:vpro:media:group:20078082",
+        "type" : "SEASON",
+        "index" : 4,
+        "highlighted" : false,
+        "added" : 1360088032235
+      } ],
+      "crids" : [ "crid://bds.tv/29737836", "crid://tmp.program.omroep.nl/12595679", "crid://bds.tv/29876639" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Yasmine",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Yasmine",
+        "owner" : "MIS",
+        "type" : "SUB"
+      } ],
+      "descriptions" : [ {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Het is nu een jaar geleden dat Groningse Yasmine (10) en haar familie verhuisden naar Marokko. Ondanks het feit dat ze het leuke avontuur vindt, miste ze haar leventje en haar vriendinnen in Nederland heel erg. Haar tantes vingen Yasmine en familie in die tijd op en hebben heel goed voor hen gezorgd. Daar werd Yasmine zo blij van, dat ze hen nu eens blij wil maken! Samen met Abel, laten ze zich inspireren door de Marokkaanse lekkernijen.",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Yasmine. Het is nu een jaar geleden dat Groningse Yasmine (10) en haar familie verhuisden naar Marokko. Ondanks het feit dat ze het leuke avontuur vindt, miste ze haar leventje en haar vriendinnen in Nederland heel erg. Haar tantes vingen Yasmine en familie in die tijd op en hebben heel goed voor hen gezorgd. Daar werd Yasmine zo blij van, dat ze hen nu eens blij wil maken! Samen met Abel, laten ze zich inspireren door de Marokkaanse lekkernijen.",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      }, {
+        "value" : "Het is nu een jaar geleden dat Groningse Yasmine (10) en haar familie verhuisden naar Marokko. Ondanks het feit dat ze het leuke avontuur vindt, miste ze haar leventje en haar vriendinnen in Nederland heel erg. Haar tantes vingen Yasmine en familie in die tijd op en hebben heel goed voor hen gezorgd. Daar werd Yasmine zo blij van, dat ze hen nu eens blij wil maken! Samen met Abel, laten ze zich inspireren door de Marokkaanse lekkernijen.",
+        "owner" : "MIS",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "videoAttributes" : {
+          "aspectRatio" : "16:9"
+        }
+      },
+      "duration" : 1500000,
+      "descendantOf" : [ {
+        "midRef" : "VPRO_1154287",
+        "urnRef" : "urn:vpro:media:group:20078082",
+        "type" : "SEASON"
+      }, {
+        "midRef" : "POMS_S_VPRO_084124",
+        "urnRef" : "urn:vpro:media:group:72840",
+        "type" : "SERIES"
+      } ],
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1306053662000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_sb/VPWON_1154295",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088032130,
+        "lastModified" : 1360088032199,
+        "publishStart" : 1306053662000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078483"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_bb/VPWON_1154295",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088032129,
+        "lastModified" : 1360088032200,
+        "publishStart" : 1306053662000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078486"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_std/VPWON_1154295",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088032130,
+        "lastModified" : 1360088032202,
+        "publishStart" : 1306053662000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078489"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1154295",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "WVC1",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088032130,
+        "lastModified" : 1360088032208,
+        "publishStart" : 1306053662000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078498"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1154295",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088032129,
+        "lastModified" : 1360088032203,
+        "publishStart" : 1306053662000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078492"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1154295",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088032129,
+        "lastModified" : 1360088032206,
+        "publishStart" : 1306053662000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078495"
+      } ],
+      "scheduleEvents" : [ {
+        "avAttributes" : {
+          "bitrate" : 0,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1306051200000,
+        "duration" : 1500000,
+        "poProgID" : "VPWON_1154295",
+        "channel" : "NED3",
+        "urnRef" : "urn:vpro:media:program:9490462",
+        "midRef" : "VPWON_1154295"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 2.7622175,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPRO_1132327",
+      "creationDate" : 1359368778711,
+      "lastModified" : 1381847225687,
+      "sortDate" : 1235896500000,
+      "urn" : "urn:vpro:media:program:18231309",
+      "embeddable" : true,
+      "episodeOf" : [ {
+        "midRef" : "AUTO_TAARTENVANABEL",
+        "urnRef" : "urn:vpro:media:group:18223066",
+        "type" : "SEASON",
+        "index" : 4,
+        "highlighted" : false,
+        "added" : 1359368778750
+      } ],
+      "crids" : [ "crid://tmp.program.omroep.nl/9021709" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      } ],
+      "descriptions" : [ {
+        "value" : "jeugdprogramma waarin bakker Abel openhartige gesprekken voert met kinderen van acht tot twaalf jaar, terwijl ze samen een bijzondere taart voor een speciaal persoon bouwen. De kinderen luchten hun hart, wat voor aangrijpende en komische momenten zorgt.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Om het jubileum te vieren zijn er dit seizoen twee heel bijzondere afleveringen, waarvoor Abel naar Marokko reist. Hij bouwt er taarten met twee Nederlands-Marokkaanse bakkersassistenten. De eerste assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "7-delige jeugdprogramma waarin bakker Abel openhartige gesprekken voert met kinderen van acht tot twaalf jaar, terwijl ze samen een bijzondere taart voor een speciaal persoon bouwen. De kinderen luchten hun hart, wat voor aangrijpende en komische momenten zorgt. Afl.1. Om het jubileum te vieren zijn er dit seizoen twee heel bijzondere afleveringen, waarvoor Abel naar Marokko reist. Hij bouwt er taarten met twee Nederlands-Marokkaanse bakkersassistenten. De eerste assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "bitrate" : 0,
+        "avFileFormat" : "WM",
+        "videoAttributes" : {
+          "videoCoding" : "WM",
+          "aspectRatio" : "16:9"
+        }
+      },
+      "duration" : 1500000,
+      "descendantOf" : [ {
+        "midRef" : "AUTO_TAARTENVANABEL",
+        "urnRef" : "urn:vpro:media:group:18223066",
+        "type" : "SEASON"
+      }, {
+        "midRef" : "POMS_S_VPRO_084124",
+        "urnRef" : "urn:vpro:media:group:72840",
+        "type" : "SERIES"
+      } ],
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1235898360000,
+        "publishStop" : 1237107960000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "scheduleEvents" : [ {
+        "avAttributes" : {
+          "bitrate" : 0,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1235896500000,
+        "duration" : 1500000,
+        "poProgID" : "VPRO_1132327",
+        "channel" : "NED3",
+        "urnRef" : "urn:vpro:media:program:18231309",
+        "midRef" : "VPRO_1132327"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 2.394271,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPWON_1154294",
+      "creationDate" : 1305209462901,
+      "lastModified" : 1360088014027,
+      "sortDate" : 1305446400000,
+      "urn" : "urn:vpro:media:program:9460427",
+      "embeddable" : true,
+      "episodeOf" : [ {
+        "midRef" : "VPRO_1154287",
+        "urnRef" : "urn:vpro:media:group:20078082",
+        "type" : "SEASON",
+        "index" : 3,
+        "highlighted" : false,
+        "added" : 1360088013985
+      } ],
+      "crids" : [ "crid://bds.tv/29639397", "crid://tmp.program.omroep.nl/12566463" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Khalil",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Khalil",
+        "owner" : "MIS",
+        "type" : "SUB"
+      } ],
+      "descriptions" : [ {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Khalil. De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      }, {
+        "value" : "De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!",
+        "owner" : "MIS",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "videoAttributes" : {
+          "aspectRatio" : "4:3"
+        }
+      },
+      "duration" : 1500000,
+      "descendantOf" : [ {
+        "midRef" : "VPRO_1154287",
+        "urnRef" : "urn:vpro:media:group:20078082",
+        "type" : "SEASON"
+      }, {
+        "midRef" : "POMS_S_VPRO_084124",
+        "urnRef" : "urn:vpro:media:group:72840",
+        "type" : "SERIES"
+      } ],
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1305448321000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_sb/VPWON_1154294",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088013892,
+        "lastModified" : 1360088013957,
+        "publishStart" : 1305448321000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078340"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_bb/VPWON_1154294",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088013892,
+        "lastModified" : 1360088013958,
+        "publishStart" : 1305448321000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078343"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_std/VPWON_1154294",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088013893,
+        "lastModified" : 1360088013959,
+        "publishStart" : 1305448321000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078346"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1154294",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "WVC1",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088013893,
+        "lastModified" : 1360088013962,
+        "publishStart" : 1305448321000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078355"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1154294",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088013893,
+        "lastModified" : 1360088013960,
+        "publishStart" : 1305448321000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078349"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1154294",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360088013893,
+        "lastModified" : 1360088013961,
+        "publishStart" : 1305448321000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078352"
+      } ],
+      "scheduleEvents" : [ {
+        "avAttributes" : {
+          "bitrate" : 0,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1305446400000,
+        "duration" : 1500000,
+        "poProgID" : "VPWON_1154294",
+        "channel" : "NED3",
+        "urnRef" : "urn:vpro:media:program:9460427",
+        "midRef" : "VPWON_1154294"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 2.1974375,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPWON_1174494",
+      "creationDate" : 1352353572139,
+      "lastModified" : 1386259844535,
+      "hasSubtitles" : true,
+      "sortDate" : 1354438800000,
+      "urn" : "urn:vpro:media:program:16071382",
+      "embeddable" : true,
+      "episodeOf" : [ {
+        "midRef" : "VPWON_1174487",
+        "urnRef" : "urn:vpro:media:group:15899658",
+        "type" : "SEASON",
+        "index" : 1,
+        "highlighted" : false,
+        "added" : 1354440664241
+      }, {
+        "midRef" : "VPWON_1174487",
+        "urnRef" : "urn:vpro:media:group:15899658",
+        "type" : "SEASON",
+        "index" : 7,
+        "highlighted" : false,
+        "added" : 1352353572285
+      } ],
+      "crids" : [ "crid://tmp.program.omroep.nl/15033978" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      }, {
+        "id" : "ZAPP",
+        "value" : "Zapp"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "CERES",
+        "type" : "MAIN"
+      }, {
+        "value" : "Khalil",
+        "owner" : "WHATS_ON",
+        "type" : "MAIN"
+      }, {
+        "value" : "Khalil",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Khalil",
+        "owner" : "MIS",
+        "type" : "SUB"
+      }, {
+        "value" : "Khalil",
+        "owner" : "CERES",
+        "type" : "SUB"
+      } ],
+      "descriptions" : [ {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "CERES",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.  Aflevering 7 - Khalil De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!",
+        "owner" : "WHATS_ON",
+        "type" : "MAIN"
+      }, {
+        "value" : "De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!",
+        "owner" : "CERES",
+        "type" : "SUB"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Khalil. De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      }, {
+        "value" : "De oma van de Enschedese Khalil (12) wilde niet naar Marokko verhuizen, daarom is zijn opa alleen vertrokken om daar een nieuw leven te beginnen. Toch verraad het typisch Hollandse klompje aan zijn voordeur, het gemis van Nederland. Khalil en Abel maken samen onder de Marokkaanse zon een heerlijke oer-Hollandse klompentaart, om zijn opa een hart onder de riem te steken en omdat hij hem natuurlijk heel erg heeft gemist!",
+        "owner" : "MIS",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "videoAttributes" : {
+          "color" : "BLACK_AND_WHITE_AND_COLOR",
+          "aspectRatio" : "16:9"
+        },
+        "audioAttributes" : {
+          "numberOfChannels" : 2
+        }
+      },
+      "duration" : 1500000,
+      "descendantOf" : [ {
+        "midRef" : "VPWON_1174487",
+        "urnRef" : "urn:vpro:media:group:15899658",
+        "type" : "SEASON"
+      }, {
+        "midRef" : "POMS_S_VPRO_084124",
+        "urnRef" : "urn:vpro:media:group:72840",
+        "type" : "SERIES"
+      } ],
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1354440515000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "odip+http://odi.omroep.nl/video/adaptive/VPWON_1174494",
+        "avAttributes" : {
+          "avFileFormat" : "HASP"
+        },
+        "owner" : "CERES",
+        "creationDate" : 1354442468117,
+        "lastModified" : 1354442468341,
+        "publishStart" : 1354440515000,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:location:16654839"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_sb/VPWON_1174494",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083064434,
+        "lastModified" : 1360083064528,
+        "publishStart" : 1354440515000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20043715"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_bb/VPWON_1174494",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083064435,
+        "lastModified" : 1360083064530,
+        "publishStart" : 1354440515000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20043718"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_std/VPWON_1174494",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083064435,
+        "lastModified" : 1360083064533,
+        "publishStart" : 1354440515000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20043721"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1174494",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "WVC1",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083064435,
+        "lastModified" : 1360083064538,
+        "publishStart" : 1354440515000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20043730"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1174494",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083064435,
+        "lastModified" : 1360083064535,
+        "publishStart" : 1354440515000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20043724"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1174494",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083064434,
+        "lastModified" : 1360083064537,
+        "publishStart" : 1354440515000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20043727"
+      } ],
+      "scheduleEvents" : [ {
+        "avAttributes" : {
+          "bitrate" : 0,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1354438800000,
+        "duration" : 1500000,
+        "poProgID" : "VPWON_1174494",
+        "channel" : "NED3",
+        "urnRef" : "urn:vpro:media:program:16071382",
+        "midRef" : "VPWON_1174494"
+      } ],
+      "images" : [ {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:118809",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1354442431274,
+        "lastModified" : 1354442435836,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:16654832"
+      }, {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:118810",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1354442433549,
+        "lastModified" : 1354442435837,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:16654833"
+      }, {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:118811",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1354442435758,
+        "lastModified" : 1354442435837,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:16654834"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 1.7157961,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPRO_1140254",
+      "creationDate" : 1360084908794,
+      "lastModified" : 1386213845470,
+      "hasSubtitles" : true,
+      "sortDate" : 1272787200000,
+      "urn" : "urn:vpro:media:program:20056513",
+      "embeddable" : true,
+      "episodeOf" : [ {
+        "midRef" : "VPRO_1140262",
+        "urnRef" : "urn:vpro:media:group:20054711",
+        "type" : "SEASON",
+        "index" : 2,
+        "highlighted" : false,
+        "added" : 1360084908831
+      } ],
+      "crids" : [ "crid://tmp.program.omroep.nl/10919748" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Yasmine - Dolfijnentaart voor tantes in Marokko",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      } ],
+      "descriptions" : [ {
+        "value" : "Koud buiten hè? Maar binnen hoef je je zeker niet te vervelen, want je kunt weer genieten van de Taarten van Abel! Rond de feestdagen is Taarten van Abel zelfs in een speciaal winterjasje gestoken en maken we mooie wintertaarten voor stoere brandweermannen, de allerliefste mama, en het knuffeligste broertje en zusje. Krijg je het daar ook niet een beetje warm van? Abel reist ook weer door stad en land met zijn tassen vol bakkerspullen, snoep en lekkernijen. Op bezoek bij bijzondere en smaakmakende bakkersassistenten vol verhalen, om samen de mooiste, grootste, kleurrijkste en zoetste taarten te maken.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "De tweede assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Koud buiten hè? Maar binnen hoef je je zeker niet te vervelen, want je kunt weer genieten van de Taarten van Abel! Rond de feestdagen is Taarten van Abel zelfs in een speciaal winterjasje gestoken en maken we mooie wintertaarten voor stoere brandweermannen, de allerliefste mama, en het knuffeligste broertje en zusje. Krijg je het daar ook niet een beetje warm van? Abel reist ook weer door stad en land met zijn tassen vol bakkerspullen, snoep en lekkernijen. Op bezoek bij bijzondere en smaakmakende bakkersassistenten vol verhalen, om samen de mooiste, grootste, kleurrijkste en zoetste taarten te maken. Afl.: Yasmine - Dolfijnentaart voor tantes in Marokko. De tweede assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "bitrate" : 0,
+        "avFileFormat" : "WM",
+        "videoAttributes" : {
+          "videoCoding" : "WM",
+          "aspectRatio" : "16:9"
+        }
+      },
+      "duration" : 1800000,
+      "descendantOf" : [ {
+        "midRef" : "VPRO_1140262",
+        "urnRef" : "urn:vpro:media:group:20054711",
+        "type" : "SEASON"
+      }, {
+        "midRef" : "POMS_S_VPRO_084124",
+        "urnRef" : "urn:vpro:media:group:72840",
+        "type" : "SERIES"
+      } ],
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1272789061000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_sb/VPRO_1140254",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360084908797,
+        "lastModified" : 1360084908805,
+        "publishStart" : 1272789061000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20056519"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_bb/VPRO_1140254",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360084908796,
+        "lastModified" : 1360084908807,
+        "publishStart" : 1272789061000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20056522"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_sb/VPRO_1140254",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360084908796,
+        "lastModified" : 1360084908808,
+        "publishStart" : 1272789061000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20056525"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_bb/VPRO_1140254",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360084908796,
+        "lastModified" : 1360084908809,
+        "publishStart" : 1272789061000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20056528"
+      } ],
+      "scheduleEvents" : [ {
+        "avAttributes" : {
+          "bitrate" : 0,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1272787200000,
+        "duration" : 1800000,
+        "poProgID" : "VPRO_1140254",
+        "channel" : "NED3",
+        "urnRef" : "urn:vpro:media:program:20056513",
+        "midRef" : "VPRO_1140254"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 1.6000471,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPWON_1174497",
+      "creationDate" : 1353563171650,
+      "lastModified" : 1386259864140,
+      "hasSubtitles" : true,
+      "sortDate" : 1355648400000,
+      "urn" : "urn:vpro:media:program:16399800",
+      "embeddable" : true,
+      "episodeOf" : [ {
+        "midRef" : "VPWON_1174487",
+        "urnRef" : "urn:vpro:media:group:15899658",
+        "type" : "SEASON",
+        "index" : 1,
+        "highlighted" : false,
+        "added" : 1353563171805
+      } ],
+      "crids" : [ "crid://tmp.program.omroep.nl/15050802" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      }, {
+        "id" : "ZAPP",
+        "value" : "Zapp"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "CERES",
+        "type" : "MAIN"
+      }, {
+        "value" : "Nina",
+        "owner" : "WHATS_ON",
+        "type" : "MAIN"
+      }, {
+        "value" : "Nina",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Nina",
+        "owner" : "MIS",
+        "type" : "SUB"
+      }, {
+        "value" : "Nina",
+        "owner" : "CERES",
+        "type" : "SUB"
+      } ],
+      "descriptions" : [ {
+        "value" : "Samen met bakker Abel bouwen kinderen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "CERES",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.  Aflevering 10 - Nina Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek. waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een café hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke café-taart!",
+        "owner" : "WHATS_ON",
+        "type" : "MAIN"
+      }, {
+        "value" : "Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek, waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een café hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke café-taart!",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek, waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een cafÃ© hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke cafÃ©-taart!",
+        "owner" : "CERES",
+        "type" : "SUB"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Nina. Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek, waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een café hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke café-taart!",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      }, {
+        "value" : "Twee jaar geleden is de vader van Nina begonnen met de verbouwing van hun huis in Rhenoy. Tijdens de verbouwing sliep Nina met haar ouders en twee zussen zolang in een omgebouwde schuur. Helaas werd de vader van Nina, plotseling, ongeneeslijk ziek, waardoor hij de verbouwing niet af kon maken. De hele familie woont dus nu nog steeds in dit kleine huis, zonder dat ze weten of het echte huis ooit nog af komt. Omdat haar vader en moeder vroeger een café hadden en nog steeds van een borreltje houden, maakt ze samen met Abel een vrolijke café-taart!",
+        "owner" : "MIS",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "videoAttributes" : {
+          "color" : "BLACK_AND_WHITE_AND_COLOR",
+          "aspectRatio" : "16:9"
+        },
+        "audioAttributes" : {
+          "numberOfChannels" : 2
+        }
+      },
+      "duration" : 1500000,
+      "descendantOf" : [ {
+        "midRef" : "VPWON_1174487",
+        "urnRef" : "urn:vpro:media:group:15899658",
+        "type" : "SEASON"
+      }, {
+        "midRef" : "POMS_S_VPRO_084124",
+        "urnRef" : "urn:vpro:media:group:72840",
+        "type" : "SERIES"
+      } ],
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1355650315000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "odip+http://odi.omroep.nl/video/adaptive/VPWON_1174497",
+        "avAttributes" : {
+          "avFileFormat" : "HASP"
+        },
+        "owner" : "CERES",
+        "creationDate" : 1355652968215,
+        "lastModified" : 1355652968395,
+        "publishStart" : 1355650315000,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:location:17061232"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_sb/VPWON_1174497",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083198397,
+        "lastModified" : 1360083198520,
+        "publishStart" : 1355650315000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20044370"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_bb/VPWON_1174497",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083198397,
+        "lastModified" : 1360083198521,
+        "publishStart" : 1355650315000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20044373"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_std/VPWON_1174497",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083198397,
+        "lastModified" : 1360083198523,
+        "publishStart" : 1355650315000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20044376"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1174497",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "WVC1",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083198397,
+        "lastModified" : 1360083198528,
+        "publishStart" : 1355650315000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20044385"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1174497",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083198397,
+        "lastModified" : 1360083198525,
+        "publishStart" : 1355650315000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20044379"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1174497",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360083198396,
+        "lastModified" : 1360083198526,
+        "publishStart" : 1355650315000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20044382"
+      } ],
+      "scheduleEvents" : [ {
+        "avAttributes" : {
+          "bitrate" : 0,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1355648400000,
+        "duration" : 1500000,
+        "poProgID" : "VPWON_1174497",
+        "channel" : "NED3",
+        "urnRef" : "urn:vpro:media:program:16399800",
+        "midRef" : "VPWON_1174497"
+      } ],
+      "images" : [ {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:122509",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1355652025757,
+        "lastModified" : 1355652030364,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:17061214"
+      }, {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:122510",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1355652028033,
+        "lastModified" : 1355652030365,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:17061215"
+      }, {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:122511",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1355652030259,
+        "lastModified" : 1355652030365,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:17061216"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 1.5734694,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "POMS_VPRO_157891",
+      "creationDate" : 1271549029367,
+      "lastModified" : 1359367849987,
+      "sortDate" : 1271549029367,
+      "urn" : "urn:vpro:media:program:998567",
+      "embeddable" : true,
+      "crids" : [ "crid://bds.tv/22316831" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Yasmine - Dolfijnentaart voor tantes in Marokko",
+        "owner" : "MIS",
+        "type" : "SUB"
+      } ],
+      "descriptions" : [ {
+        "value" : "Koud buiten hè? Maar binnen hoef je je zeker niet te vervelen, want je kunt weer genieten van de Taarten van Abel! Rond de feestdagen is Taarten van Abel zelfs in een speciaal winterjasje gestoken en maken we mooie wintertaarten voor stoere brandweermannen, de allerliefste mama, en het knuffeligste broertje en zusje. Krijg je het daar ook niet een beetje warm van? Abel reist ook weer door stad en land met zijn tassen vol bakkerspullen, snoep en lekkernijen. Op bezoek bij bijzondere en smaakmakende bakkersassistenten vol verhalen, om samen de mooiste, grootste, kleurrijkste en zoetste taarten te maken.",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "De tweede assistente is Yasmine (10), die van Groningen naar Marokko verhuisde. Ze mist haar oude leventje, maar is ook blij dat haar tantes haar zo goed hebben opgevangen. Samen met Abel maakt ze een taart voor hen met Marokkaanse lekkernijen.",
+        "owner" : "MIS",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ {
+        "code" : "nl",
+        "value" : "Nederlands"
+      } ],
+      "duration" : 1800000,
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "http://player.omroep.nl/aflevering/10919748",
+        "avAttributes" : {
+          "bitrate" : 500000,
+          "avFileFormat" : "HTML"
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1272987918634,
+        "lastModified" : 1272987988617,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:location:1407721"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 1.4540464,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPWON_1154298",
+      "creationDate" : 1306866746532,
+      "lastModified" : 1359367849985,
+      "sortDate" : 1307865600000,
+      "urn" : "urn:vpro:media:program:9756398",
+      "embeddable" : true,
+      "crids" : [ "crid://tmp.program.omroep.nl/12738606" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Seven",
+        "owner" : "MIS",
+        "type" : "SUB"
+      }, {
+        "value" : "Seven",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      } ],
+      "descriptions" : [ {
+        "value" : "Samen met bakker Abel bouwen kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "'Hallootjes!' klinkt het vrolijk vanaf het balkon als Abel voor de deur staat. In een kleurig huis, in een Rotterdamse wijk, woont Seven (9) samen met zijn moeder. Seven heeft het Syndroom van Asperger, dit houdt in dat hij soms heel heftig op de dingen reageert. Elke dag om 15.00 slikt hij zijn pilletjes, waardoor hij er minder last van heeft. 'Door de medicijnen ben ik dikker geworden, maar mijn moeder zegt dat ik niet dik ben.' Daarom vindt Seven dat zijn moeder een gezellige poezentaart verdient. Want op lieve poezen zijn zij beiden heel erg gek!",
+        "owner" : "MIS",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "videoAttributes" : {
+          "aspectRatio" : "16:9"
+        }
+      },
+      "duration" : 1500000,
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1307867462000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "http://player.omroep.nl/?aflID=12738606",
+        "avAttributes" : {
+          "avFileFormat" : "HTML",
+          "videoAttributes" : {
+            "aspectRatio" : "16:9"
+          }
+        },
+        "duration" : 1800000,
+        "owner" : "NEBO",
+        "creationDate" : 1307870878389,
+        "lastModified" : 1307870878389,
+        "publishStart" : 1307867462000,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:location:9899105"
+      } ],
+      "scheduleEvents" : [ {
+        "memberOf" : "crid://bds.tv/17410479",
+        "avAttributes" : {
+          "videoAttributes" : {
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1307865600000,
+        "duration" : 1800000,
+        "poProgID" : "VPWON_1154298",
+        "channel" : "NED3",
+        "imi" : "imi:19990",
+        "urnRef" : "urn:vpro:media:program:9756398",
+        "midRef" : "VPWON_1154298"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 1.4160845,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPWON_1174493",
+      "creationDate" : 1351748799528,
+      "lastModified" : 1386259844007,
+      "hasSubtitles" : true,
+      "sortDate" : 1353834000000,
+      "urn" : "urn:vpro:media:program:15899655",
+      "embeddable" : true,
+      "episodeOf" : [ {
+        "midRef" : "VPWON_1174487",
+        "urnRef" : "urn:vpro:media:group:15899658",
+        "type" : "SEASON",
+        "index" : 1,
+        "highlighted" : false,
+        "added" : 1353835866559
+      }, {
+        "midRef" : "VPWON_1174487",
+        "urnRef" : "urn:vpro:media:group:15899658",
+        "type" : "SEASON",
+        "index" : 6,
+        "highlighted" : false,
+        "added" : 1351748799584
+      } ],
+      "crids" : [ "crid://tmp.program.omroep.nl/15011833" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      }, {
+        "id" : "ZAPP",
+        "value" : "Zapp"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "CERES",
+        "type" : "MAIN"
+      }, {
+        "value" : "Ahlam",
+        "owner" : "WHATS_ON",
+        "type" : "MAIN"
+      }, {
+        "value" : "Ahlam",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Ahlam",
+        "owner" : "MIS",
+        "type" : "SUB"
+      }, {
+        "value" : "Ahlam",
+        "owner" : "CERES",
+        "type" : "SUB"
+      } ],
+      "descriptions" : [ {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "CERES",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.  Aflevering 6 - Ahlam Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van 10 vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.",
+        "owner" : "WHATS_ON",
+        "type" : "MAIN"
+      }, {
+        "value" : "Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.",
+        "owner" : "CERES",
+        "type" : "SUB"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Ahlam. Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      }, {
+        "value" : "Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.",
+        "owner" : "MIS",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "videoAttributes" : {
+          "color" : "BLACK_AND_WHITE_AND_COLOR",
+          "aspectRatio" : "16:9"
+        },
+        "audioAttributes" : {
+          "numberOfChannels" : 2
+        }
+      },
+      "duration" : 1500000,
+      "descendantOf" : [ {
+        "midRef" : "VPWON_1174487",
+        "urnRef" : "urn:vpro:media:group:15899658",
+        "type" : "SEASON"
+      }, {
+        "midRef" : "POMS_S_VPRO_084124",
+        "urnRef" : "urn:vpro:media:group:72840",
+        "type" : "SERIES"
+      } ],
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1353835797000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "odip+http://odi.omroep.nl/video/adaptive/VPWON_1174493",
+        "avAttributes" : {
+          "avFileFormat" : "HASP"
+        },
+        "owner" : "CERES",
+        "creationDate" : 1353836772351,
+        "lastModified" : 1353836772495,
+        "publishStart" : 1353835797000,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:location:16478835"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_sb/VPWON_1174493",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360094094156,
+        "lastModified" : 1360094094254,
+        "publishStart" : 1353835797000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20109426"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_bb/VPWON_1174493",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360094094155,
+        "lastModified" : 1360094094255,
+        "publishStart" : 1353835797000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20109429"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_std/VPWON_1174493",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360094094156,
+        "lastModified" : 1360094094256,
+        "publishStart" : 1353835797000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20109432"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1174493",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "WVC1",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360094094156,
+        "lastModified" : 1360094094259,
+        "publishStart" : 1353835797000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20109441"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1174493",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360094094155,
+        "lastModified" : 1360094094257,
+        "publishStart" : 1353835797000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20109435"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1174493",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360094094155,
+        "lastModified" : 1360094094258,
+        "publishStart" : 1353835797000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20109438"
+      } ],
+      "scheduleEvents" : [ {
+        "avAttributes" : {
+          "bitrate" : 0,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "WM",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1353834000000,
+        "duration" : 1500000,
+        "poProgID" : "VPWON_1174493",
+        "channel" : "NED3",
+        "urnRef" : "urn:vpro:media:program:15899655",
+        "midRef" : "VPWON_1174493"
+      } ],
+      "images" : [ {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:117048",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1353837630359,
+        "lastModified" : 1353837634938,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:16478877"
+      }, {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:117049",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1353837632593,
+        "lastModified" : 1353837634939,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:16478878"
+      }, {
+        "title" : "Taarten van Abel",
+        "imageUri" : "urn:vpro:image:117050",
+        "owner" : "NEBO",
+        "type" : "STILL",
+        "highlighted" : false,
+        "creationDate" : 1353837634821,
+        "lastModified" : 1353837634939,
+        "workflow" : "PUBLISHED",
+        "urn" : "urn:vpro:media:image:16478879"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  }, {
+    "score" : 1.3513944,
+    "highlights" : [ ],
+    "result" : {
+      "objectType" : "program",
+      "mid" : "VPWON_1154293",
+      "creationDate" : 1303609105775,
+      "lastModified" : 1360087992591,
+      "sortDate" : 1304841600000,
+      "urn" : "urn:vpro:media:program:9389113",
+      "embeddable" : true,
+      "episodeOf" : [ {
+        "midRef" : "VPRO_1154287",
+        "urnRef" : "urn:vpro:media:group:20078082",
+        "type" : "SEASON",
+        "index" : 2,
+        "highlighted" : false,
+        "added" : 1360087992549
+      } ],
+      "crids" : [ "crid://bds.tv/29290128", "crid://tmp.program.omroep.nl/12530093" ],
+      "broadcasters" : [ {
+        "id" : "VPRO",
+        "value" : "VPRO"
+      } ],
+      "titles" : [ {
+        "value" : "Taarten van Abel",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Taarten van Abel",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Ahlam",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Ahlam",
+        "owner" : "MIS",
+        "type" : "SUB"
+      } ],
+      "descriptions" : [ {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "NEBO",
+        "type" : "MAIN"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon.",
+        "owner" : "MIS",
+        "type" : "MAIN"
+      }, {
+        "value" : "Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.",
+        "owner" : "NEBO",
+        "type" : "SUB"
+      }, {
+        "value" : "Samen met bakker Abel bouwen kinderen in kinderen in het feestelijke vijfde seizoen fantasierijke, multiculturele taarten voor een speciaal persoon. Afl.: Ahlam. Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.",
+        "owner" : "NEBO",
+        "type" : "EPISODE"
+      }, {
+        "value" : "Al jaren helpt orkestmoeder Hillie in Monnickendam de kinderen van het orkest met muziekles. In huis helpt ze kinderen die bij hun ouders geen thuis meer hebben. Ahlam van tien vindt Hillie zoveel goeds doen dat ze een eetbare viool heeft gemaakt zoals haar eigen viool en Hilie heeft verrast tijdens een orkestrepetitie; naast een taart trakteerde Ahlam Hillie ook op haar lievelingslied.",
+        "owner" : "MIS",
+        "type" : "EPISODE"
+      } ],
+      "genres" : [ {
+        "id" : "3.0.1.1",
+        "terms" : [ "Jeugd" ]
+      } ],
+      "countries" : [ ],
+      "languages" : [ ],
+      "avAttributes" : {
+        "videoAttributes" : {
+          "aspectRatio" : "16:9"
+        }
+      },
+      "duration" : 1500000,
+      "descendantOf" : [ {
+        "midRef" : "VPRO_1154287",
+        "urnRef" : "urn:vpro:media:group:20078082",
+        "type" : "SEASON"
+      }, {
+        "midRef" : "POMS_S_VPRO_084124",
+        "urnRef" : "urn:vpro:media:group:72840",
+        "type" : "SERIES"
+      } ],
+      "predictions" : [ {
+        "state" : "REALIZED",
+        "publishStart" : 1304843462000,
+        "platform" : "INTERNETVOD"
+      } ],
+      "locations" : [ {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_sb/VPWON_1154293",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360087992449,
+        "lastModified" : 1360087992520,
+        "publishStart" : 1304843462000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078190"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_bb/VPWON_1154293",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360087992449,
+        "lastModified" : 1360087992522,
+        "publishStart" : 1304843462000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078193"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/h264_std/VPWON_1154293",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360087992450,
+        "lastModified" : 1360087992524,
+        "publishStart" : 1304843462000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078196"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1154293",
+        "avAttributes" : {
+          "bitrate" : 1024000,
+          "avFileFormat" : "WVC1",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360087992450,
+        "lastModified" : 1360087992528,
+        "publishStart" : 1304843462000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078205"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1154293",
+        "avAttributes" : {
+          "bitrate" : 204800,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360087992449,
+        "lastModified" : 1360087992525,
+        "publishStart" : 1304843462000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078199"
+      }, {
+        "programUrl" : "odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1154293",
+        "avAttributes" : {
+          "bitrate" : 512000,
+          "avFileFormat" : "WM",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "owner" : "NEBO",
+        "creationDate" : 1360087992450,
+        "lastModified" : 1360087992526,
+        "publishStart" : 1304843462000,
+        "workflow" : "PUBLISHED",
+        "platform" : "INTERNETVOD",
+        "urn" : "urn:vpro:media:location:20078202"
+      } ],
+      "scheduleEvents" : [ {
+        "avAttributes" : {
+          "bitrate" : 0,
+          "avFileFormat" : "MP4",
+          "videoAttributes" : {
+            "videoCoding" : "MP4",
+            "aspectRatio" : "16:9"
+          }
+        },
+        "textSubtitles" : "Teletekst ondertitels",
+        "start" : 1304841600000,
+        "duration" : 1500000,
+        "poProgID" : "VPWON_1154293",
+        "channel" : "NED3",
+        "urnRef" : "urn:vpro:media:program:9389113",
+        "midRef" : "VPWON_1154293"
+      } ],
+      "workflow" : "PUBLISHED",
+      "type" : "BROADCAST",
+      "avType" : "VIDEO"
+    }
+  } ]
+}

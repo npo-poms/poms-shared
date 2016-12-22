@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>api-parent</artifactId>
+    <groupId>nl.vpro.api</groupId>
+    <version>5.0-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>api-domain</artifactId>
+  <name>api-domain</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.joestelmach</groupId>
+      <artifactId>natty</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.pages</groupId>
+      <artifactId>pages-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.media</groupId>
+      <artifactId>media-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.subtitles</groupId>
+      <artifactId>subtitles-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.media</groupId>
+      <artifactId>media-test</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-rs</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-jackson2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+    </dependency>
+ <!--   <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-core</artifactId>
+    </dependency>-->
+  </dependencies>
+</project>

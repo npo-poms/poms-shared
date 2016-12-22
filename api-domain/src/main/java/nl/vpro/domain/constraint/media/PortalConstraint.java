@@ -1,0 +1,48 @@
+/*
+ * Copyright (C) 2013 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.constraint.media;
+
+import javax.annotation.Nullable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+
+import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.user.Portal;
+
+/**
+ * @author Michiel Meeuwissen
+ * @since 3.1
+ */
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(name = "portalConstraintType")
+public class PortalConstraint extends TextConstraint<MediaObject> {
+
+    public PortalConstraint() {
+        caseHandling = CaseHandling.ASIS;
+    }
+
+    public PortalConstraint(Portal value) {
+        super(value.getId());
+        caseHandling = CaseHandling.ASIS;
+    }
+
+    @Override
+    public String getESPath() {
+        return "portals.id";
+    }
+
+    @Override
+    public boolean test(@Nullable MediaObject input) {
+        if (input == null) return false;
+        for (Portal e : input.getPortals()) {
+            if (value.equals(e.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

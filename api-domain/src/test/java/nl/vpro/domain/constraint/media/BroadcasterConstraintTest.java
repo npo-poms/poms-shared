@@ -1,0 +1,55 @@
+/**
+ * Copyright (C) 2013 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.constraint.media;
+
+import nl.vpro.domain.media.MediaTestDataBuilder;
+import nl.vpro.domain.media.Program;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.Locale;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * @author Roelof Jan Koekoek
+ * @since 2.0
+ */
+public class BroadcasterConstraintTest {
+
+    @Before
+    public void setup() {
+        Locale.setDefault(Locale.US);
+    }
+
+    @Test
+    public void testGetStringValue() throws Exception {
+        BroadcasterConstraint in = new BroadcasterConstraint("VPRO");
+        BroadcasterConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:broadcasterConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">VPRO</local:broadcasterConstraint>");
+        assertThat(out.getValue()).isEqualTo("VPRO");
+    }
+
+    @Test
+    public void testApplyWhenTrue() throws Exception {
+        Program program = MediaTestDataBuilder.program().withBroadcasters().build();
+        assertThat(new BroadcasterConstraint("BNN").test(program)).isTrue();
+    }
+
+    @Test
+    public void testApplyWhenFalse() throws Exception {
+        Program program = MediaTestDataBuilder.program().mid("mid_123").withBroadcasters().build();
+        assertThat(new BroadcasterConstraint("Bnn").test(program)).isFalse();
+        assertThat(new BroadcasterConstraint("Bnn").testWithReason(program).applies()).isFalse();
+        assertThat(new BroadcasterConstraint("Bnn").testWithReason(program).getReason()).isEqualTo("BroadcasterConstraint/broadcasters.id/Bnn");
+        assertThat(new BroadcasterConstraint("Bnn").testWithReason(program).getDescription(Locale.US)).isEqualTo("'mid_123' is not of the broadcaster Bnn");
+    }
+
+    @Test
+    public void testGetESPath() throws Exception {
+        assertThat(new BroadcasterConstraint().getESPath()).isEqualTo("broadcasters.id");
+    }
+}

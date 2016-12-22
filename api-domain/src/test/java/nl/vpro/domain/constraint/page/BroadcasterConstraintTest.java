@@ -1,0 +1,46 @@
+/**
+ * Copyright (C) 2013 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.constraint.page;
+
+import nl.vpro.domain.page.Page;
+import nl.vpro.domain.page.PageBuilder;
+import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * @author Roelof Jan Koekoek
+ * @since 2.0
+ */
+public class BroadcasterConstraintTest {
+
+    @Test
+    public void testGetValue() throws Exception {
+        BroadcasterConstraint in = new BroadcasterConstraint("VPRO");
+        BroadcasterConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:broadcasterConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">VPRO</local:broadcasterConstraint>");
+        assertThat(out.getValue()).isEqualTo("VPRO");
+    }
+
+    @Test
+    public void testGetESPath() throws Exception {
+        assertThat(new BroadcasterConstraint().getESPath()).isEqualTo("broadcasters.id");
+    }
+
+    @Test
+    public void testApplyWhenTrue() throws Exception {
+        Page article = PageBuilder.page(PageType.ARTICLE).broadcasters(new Broadcaster("BNN", "BNN")).build();
+        assertThat(new BroadcasterConstraint("BNN").test(article)).isTrue();
+    }
+
+    @Test
+    public void testApplyWhenFalse() throws Exception {
+        Page article = PageBuilder.page(PageType.ARTICLE).broadcasters(new Broadcaster("BNN", "BNN")).build();
+        assertThat(new BroadcasterConstraint("Bnn").test(article)).isFalse();
+    }
+}
