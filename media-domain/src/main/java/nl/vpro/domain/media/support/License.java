@@ -11,7 +11,7 @@ import nl.vpro.domain.Xmlns;
  */
 @XmlEnum
 @XmlType(name = "licenseEnum", namespace = Xmlns.SHARED_NAMESPACE)
-public enum License implements Displayable {
+public enum License implements nl.vpro.domain.Displayable {
 
 
     COPYRIGHTED("Copyrighted"),

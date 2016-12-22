@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import nl.vpro.domain.media.support.Displayable;
+import nl.vpro.domain.Displayable;
 
 /**
  * @author Michiel Meeuwissen
@@ -49,6 +49,6 @@ public enum PageType implements Displayable {
             }
         }
 
-        throw new IllegalArgumentException("Unknow PageType for displayName " + displayName);
+        throw new IllegalArgumentException("Unknown PageType for displayName " + displayName);
     }
 }

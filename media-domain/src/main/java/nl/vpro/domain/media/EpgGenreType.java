@@ -2,7 +2,7 @@ package nl.vpro.domain.media;
 
 import java.util.*;
 
-import nl.vpro.domain.media.support.Displayable;
+import nl.vpro.domain.Displayable;
 
 /**
  * This was the original implementation of MSE-2417.  It is not used now, only for legacy mapping.

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
-import nl.vpro.domain.media.support.Displayable;
+import nl.vpro.domain.Displayable;
 
 /**
  * @author Michiel Meeuwissen
