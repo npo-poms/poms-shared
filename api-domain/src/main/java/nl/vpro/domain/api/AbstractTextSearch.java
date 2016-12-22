@@ -1,0 +1,40 @@
+/*
+ * Copyright (C) 2014 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.api;
+
+import javax.validation.Valid;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+
+import nl.vpro.domain.api.media.MediaSearch;
+import nl.vpro.domain.api.page.PageSearch;
+
+/**
+ * A Search interface but JAXB won't handle interfaces
+ *
+ * @author Michiel Meeuwissen
+ * @since 4.2
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlSeeAlso({MediaSearch.class, PageSearch.class})
+@XmlTransient
+public abstract class AbstractTextSearch extends AbstractSearch {
+
+
+    @Valid
+    protected SimpleTextMatcher text;
+
+    public SimpleTextMatcher getText() {
+        return text;
+    }
+
+    public void setText(SimpleTextMatcher text) {
+        this.text = text;
+    }
+
+
+}

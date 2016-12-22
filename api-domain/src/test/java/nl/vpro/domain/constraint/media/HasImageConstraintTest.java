@@ -1,0 +1,43 @@
+/**
+ * Copyright (C) 2013 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.constraint.media;
+
+import nl.vpro.domain.media.MediaTestDataBuilder;
+import nl.vpro.domain.media.Program;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * @author Roelof Jan Koekoek
+ * @since 2.0
+ */
+public class HasImageConstraintTest {
+
+    @Test
+    public void testGetValue() throws Exception {
+        HasImageConstraint in = new HasImageConstraint();
+        JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:hasImageConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\"/>");
+    }
+
+    @Test
+    public void testApplyTrue() throws Exception {
+        Program program = MediaTestDataBuilder.program().withImages().build();
+        assertThat(new HasImageConstraint().test(program)).isTrue();
+    }
+
+    @Test
+    public void testApplyFalse() throws Exception {
+        Program program = MediaTestDataBuilder.program().build();
+        assertThat(new HasImageConstraint().test(program)).isFalse();
+    }
+
+    @Test
+    public void testGetESPath() throws Exception {
+        assertThat(new HasImageConstraint().getESPath()).isEqualTo("images.urn");
+    }
+}
