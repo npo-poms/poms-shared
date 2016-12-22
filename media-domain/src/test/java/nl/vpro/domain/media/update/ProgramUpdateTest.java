@@ -1,5 +1,5 @@
 /**
- /**
+ /*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
