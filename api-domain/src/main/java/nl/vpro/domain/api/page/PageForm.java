@@ -1,0 +1,142 @@
+package nl.vpro.domain.api.page;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Predicate;
+
+import javax.annotation.Nullable;
+import javax.validation.Valid;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import nl.vpro.domain.api.FormUtils;
+import nl.vpro.domain.api.Order;
+import nl.vpro.domain.api.SortableForm;
+import nl.vpro.domain.api.media.MediaForm;
+import nl.vpro.domain.api.page.bind.PageSortTypeAdapter;
+import nl.vpro.domain.page.Page;
+
+/**
+ * @author Michiel Meeuwissen
+ * @since 2.0
+ */
+@XmlRootElement(name = "pagesForm")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "pagesFormType",
+    propOrder = {
+        "searches", "sortFields", "facets", "mediaForm"
+    })
+public class PageForm implements SortableForm, Predicate<Page> {
+
+    @XmlTransient
+    private Boolean highlighted = false;
+
+    @XmlElement
+    @Valid
+    private PageSearch searches;
+
+    @XmlElement
+    @XmlJavaTypeAdapter(PageSortTypeAdapter.class)
+    @JsonIgnore
+    private LinkedHashMap<PageSortField, Order> sortFields;
+
+    @XmlElement
+    @Valid
+    private PageFacets facets;
+
+    @XmlElement
+    @Valid
+    private MediaForm mediaForm;
+
+    @Override
+    public boolean isFaceted() {
+        return facets != null && facets.isFaceted();
+    }
+
+    @Override
+    public String getText() {
+        return FormUtils.getText(searches);
+
+    }
+
+    public PageFacets getFacets() {
+        return facets;
+    }
+
+    public void setFacets(PageFacets facets) {
+        this.facets = facets;
+    }
+
+    public MediaForm getMediaForm() {
+        return mediaForm;
+    }
+
+    public void setMediaForm(MediaForm mediaForm) {
+        this.mediaForm = mediaForm;
+    }
+
+    @Override
+    public boolean isSorted() {
+        return sortFields != null && !sortFields.isEmpty();
+    }
+
+    @JsonProperty("sort")
+    public Map<PageSortField, Order> getSortFields() {
+        return sortFields;
+    }
+
+    public void setSortFields(LinkedHashMap<PageSortField, Order> sortFields) {
+        this.sortFields = sortFields;
+    }
+
+    public void addSortField(PageSortField field) {
+        addSortField(field, null);
+    }
+
+    public void addSortField(PageSortField field, Order order) {
+        if (sortFields == null) {
+            sortFields = new LinkedHashMap<>(3);
+        }
+
+        sortFields.put(field, order);
+    }
+
+
+    @Override
+    @JsonProperty("highlight")
+    @XmlAttribute(name = "highlight")
+    public boolean isHighlight() {
+        return highlighted != null ? highlighted : false;
+    }
+
+    public void setHighlight(boolean highlight) {
+        this.highlighted = highlight;
+    }
+
+    public PageSearch getSearches() {
+        return searches;
+    }
+
+    public void setSearches(PageSearch searches) {
+        this.searches = searches;
+    }
+
+    @Override
+    public boolean test(@Nullable Page input) {
+        return searches == null || searches.test(input);
+    }
+
+    @Override
+    public String toString() {
+        return "PageForm{" +
+            "highlighted=" + highlighted +
+            ", searches=" + searches +
+            ", sortFields=" + sortFields +
+            ", facets=" + facets +
+            ", mediaForm=" + mediaForm +
+            '}';
+    }
+}

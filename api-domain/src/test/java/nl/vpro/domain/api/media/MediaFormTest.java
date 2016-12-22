@@ -1,0 +1,190 @@
+/**
+ * Copyright (C) 2013 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.api.media;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.text.SimpleDateFormat;
+import java.util.LinkedHashMap;
+
+import javax.xml.bind.JAXB;
+
+import org.junit.Test;
+
+import nl.vpro.domain.api.FacetOrder;
+import nl.vpro.domain.api.Match;
+import nl.vpro.domain.api.Order;
+import nl.vpro.domain.api.StandardMatchType;
+import nl.vpro.domain.media.support.Tag;
+import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertNotNull;
+
+/**
+ * @author Roelof Jan Koekoek
+ * @since 2.0
+ */
+public class MediaFormTest {
+
+    @Test
+    public void testGetSort() throws Exception {
+        MediaForm in = new MediaForm();
+        LinkedHashMap<MediaSortField, Order> sort = new LinkedHashMap<>();
+        sort.put(MediaSortField.sortDate, Order.DESC);
+        sort.put(MediaSortField.title, null);
+        in.setHighlight(true);
+
+        in.setSortFields(sort);
+        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<api:mediaForm highlight=\"true\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <api:sortFields>\n" +
+                "        <api:sort order=\"DESC\">sortDate</api:sort>\n" +
+                "        <api:sort order=\"ASC\">title</api:sort>\n" +
+                "    </api:sortFields>\n" +
+                "</api:mediaForm>"
+        );
+        assertThat(out.getSortFields().keySet()).hasSize(2);
+        assertThat(Jackson2Mapper.INSTANCE.writeValueAsString(out)).isEqualTo("{\"sort\":{\"sortDate\":\"DESC\",\"title\":\"ASC\"},\"highlight\":true}");
+    }
+
+    @Test
+    public void testGetTags() throws Exception {
+        MediaForm in = MediaFormBuilder.form().tags(Match.SHOULD, new Tag("XML")).build();
+        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
+                "<api:mediaForm  xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                    "    <api:searches>\n" +
+                    "        <api:tags match=\"SHOULD\">\n" +
+                    "            <api:matcher match=\"SHOULD\">XML</api:matcher>\n" +
+                    "        </api:tags>\n" +
+                    "    </api:searches>\n" +
+                    "</api:mediaForm>"
+        );
+        assertThat(out.getSearches().getTags().size()).isEqualTo(1);
+        assertThat(out.getSearches().getTags().get(0).getMatch()).isEqualTo(Match.SHOULD);
+        assertThat(out.getSearches().getTags().get(0).getValue()).isEqualTo("XML");
+    }
+
+    @Test
+    public void testGetFacets() throws Exception {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(new ScheduleEventSearch("NED3", simpleDateFormat.parse("2015-01-26"), simpleDateFormat.parse("2015-01-27"))).build();
+        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in, "<api:mediaForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <api:searches>\n" +
+            "        <api:scheduleEvents inclusiveEnd=\"true\">\n" +
+            "            <api:begin>2015-01-26T00:00:00+01:00</api:begin>\n" +
+            "            <api:end>2015-01-27T00:00:00+01:00</api:end>\n" +
+            "            <api:channel>NED3</api:channel>\n" +
+            "        </api:scheduleEvents>\n" +
+            "    </api:searches>\n" +
+            "    <api:facets>\n" +
+            "        <api:broadcasters sort=\"VALUE_ASC\">\n" +
+            "            <api:max>24</api:max>\n" +
+            "        </api:broadcasters>\n" +
+            "    </api:facets>\n" +
+            "</api:mediaForm>");
+        assertThat(out.getFacets().getBroadcasters().getSort()).isEqualTo(FacetOrder.VALUE_ASC);
+    }
+
+    @Test
+    public void testGetFacetsBackwards() throws Exception {
+        MediaForm out = JAXB.unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<mediaForm xmlns=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" highlight=\"false\">\n" +
+            "    <searches>\n" +
+            "        <scheduleEvents inclusiveEnd=\"true\">\n" +
+            "            <begin>2015-01-26T00:00:00+01:00</begin>\n" +
+            "            <end>2015-01-27T00:00:00+01:00</end>\n" +
+            "            <channel>NED3</channel>\n" +
+            "        </scheduleEvents>\n" +
+            "    </searches>\n" +
+            "    <facets>\n" +
+            "        <broadcasters sort=\"REVERSE_TERM\">\n" +
+            "            <threshold>0</threshold>\n" +
+            "            <offset>0</offset>\n" +
+            "            <max>24</max>\n" +
+            "        </broadcasters>\n" +
+            "    </facets>\n" +
+            "</mediaForm>"), MediaForm.class);
+        assertThat(out.getFacets().getBroadcasters().getSort()).isEqualTo(FacetOrder.VALUE_DESC);
+    }
+
+
+    @Test
+    public void testFilterTags() throws IOException {
+        String tagForm = "{\n" +
+            "    \"facets\": {\n" +
+            "        \"tags\": {\n" +
+            "            \"filter\": {\n" +
+            "                \"tags\":  {\n" +
+            "                    \"matchType\": \"WILDCARD\",\n" +
+            "                    \"match\": \"MUST\",\n" +
+            "                    \"value\": \"Lief*\"\n" +
+            "                }\n" +
+            "            },\n" +
+            "            \"max\": 10000\n" +
+            "        }\n" +
+            "    },\n" +
+            "    \"searches\": {\n" +
+            "        \"tags\": {\n" +
+            "            \"matchType\": \"WILDCARD\",\n" +
+            "            \"match\": \"SHOULD\",\n" +
+            "            \"value\": \"Lief*\"\n" +
+            "        }\n" +
+            "\n" +
+            "    }\n" +
+            "}";
+        MediaForm form = Jackson2Mapper.getInstance().readValue(tagForm, MediaForm.class);
+        assertThat(form.getSearches().getTags().get(0).getValue()).isEqualTo("Lief*");
+        assertThat(form.getSearches().getTags().get(0).getMatch()).isEqualTo(Match.SHOULD);
+        assertThat(form.getSearches().getTags().get(0).getMatchType().getName()).isEqualTo(StandardMatchType.WILDCARD.getName());
+        assertThat(form.getFacets().getTags().getFilter().getTags().get(0).getMatch()).isEqualTo(Match.MUST);
+        assertThat(form.getFacets().getTags().getFilter().getTags().get(0).getMatchType().getName()).isEqualTo(StandardMatchType.WILDCARD.getName());
+    }
+
+    @Test
+    public void testSubSearch() throws IOException {
+        String example = "{\n" +
+            "    \"facets\": {\n" +
+            "        \"relations\":  {\n" +
+            "            \"subSearch\": {\n" +
+            "                \"broadcasters\": \"VPRO\"\n" +
+            "            },\n" +
+            "            \"value\": [\n" +
+            "                {\n" +
+            "                    \"name\": \"labels\",\n" +
+            "                    \"sort\": \"COUNT_DESC\",\n" +
+            "                    \"max\": 3,\n" +
+            "                    \"subSearch\": {\n" +
+            "                        \"types\": \"LABEL\"\n" +
+            "                    }\n" +
+            "                },\n" +
+            "                {\n" +
+            "                    \"name\": \"artiesten\",\n" +
+            "                    \"sort\": \"COUNT_DESC\",\n" +
+            "                    \"max\": 3,\n" +
+            "                    \"subSearch\": {\n" +
+            "                        \"types\": \"ARTIST\"\n" +
+            "                    }\n" +
+            "                }\n" +
+            "            ]\n" +
+            "        }\n" +
+            "    }\n" +
+            "}\n";
+        MediaForm form = Jackson2TestUtil.assertThatJson(MediaForm.class, example).isSimilarTo(example).get();
+        assertThat(form.getFacets()).isNotNull();
+        assertThat(form.getFacets().getRelations()).isNotNull();
+        assertNotNull(form.getFacets().getRelations().getSubSearch());
+        assertNotNull(form.getFacets().getRelations().getSubSearch().getBroadcasters());
+        assertThat(form.getFacets().getRelations().getSubSearch().getBroadcasters().getMatchers().get(0).getValue()).isEqualTo("VPRO");
+
+        assertThat(form.getFacets().getRelations().getFacets()).hasSize(2);
+        assertNotNull(form.getFacets().getRelations().getFacets().get(0).getSubSearch());
+        assertThat(form.getFacets().getRelations().getFacets().get(0).getSubSearch().getTypes().get(0).getValue()).isEqualTo("LABEL");
+
+
+    }
+}

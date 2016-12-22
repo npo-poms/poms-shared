@@ -3,7 +3,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>5.0.1</version>
+    <version>5.0.2-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.publiekeomroep</groupId>
@@ -49,6 +49,9 @@
     <module>pages-es-mappings</module>
     <module>stats-services</module>
     <module>stats-events</module>
+
+    <module>api-domain</module>
+    <module>api-rs-services</module>
   </modules>
 
   <repositories>

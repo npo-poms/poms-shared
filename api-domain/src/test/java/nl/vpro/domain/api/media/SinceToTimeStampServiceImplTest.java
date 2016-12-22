@@ -1,0 +1,52 @@
+package nl.vpro.domain.api.media;
+
+import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
+import org.junit.Test;
+
+import nl.vpro.domain.media.Schedule;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * @author Michiel Meeuwissen
+ */
+public class SinceToTimeStampServiceImplTest {
+
+    private SinceToTimeStampServiceImpl impl = new SinceToTimeStampServiceImpl();
+
+    public SinceToTimeStampServiceImplTest() throws IOException {
+    }
+
+    @Test
+    public void getInstance() throws Exception {
+        assertThat(impl.getInstance(0L)).isEqualTo(Instant.EPOCH);
+
+        long now = System.currentTimeMillis();
+        assertThat(impl.getInstance(now).toEpochMilli()).isEqualTo(now);
+    }
+
+    @Test
+    public void getInstance2() throws Exception {
+        assertThat(impl.getInstance(17019615L).truncatedTo(ChronoUnit.MINUTES)).isEqualTo(LocalDateTime.of(2015, 7 , 1, 15, 24, 0).atZone(Schedule.ZONE_ID).toInstant());
+
+
+    }
+
+
+    @Test
+    public void getInstance3() throws Exception {
+        assertThat(impl.getInstance(25387000L).truncatedTo(ChronoUnit.MINUTES)).isEqualTo(LocalDateTime.of(2016, 11, 1, 12, 0, 0).atZone(Schedule.ZONE_ID).toInstant());
+
+
+    }
+
+    @Test
+    public void getSince() throws Exception {
+
+    }
+
+}
