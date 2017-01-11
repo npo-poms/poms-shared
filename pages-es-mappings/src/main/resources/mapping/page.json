@@ -227,12 +227,12 @@
                   "familyName": {
                     "type": "string",
                     "index": "not_analyzed",
-                    "copy_to": "credits.fullName"
+                    "copy_to": "embeds.media.credits.fullName"
                   },
                   "givenName": {
                     "type": "string",
                     "index": "not_analyzed",
-                    "copy_to": "credits.fullName"
+                    "copy_to": "embeds.media.credits.fullName"
                   },
                   "fullName": {
                     "type": "string",
@@ -1057,6 +1057,10 @@
                       "role" : {
                         "type" : "string",
                         "index" : "not_analyzed"
+                      },
+                      "gtaaUri": {
+                        "type": "string",
+                        "index": "not_analyzed"
                       }
                     }
                   },
