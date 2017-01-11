@@ -224,34 +224,35 @@
               },
               "credits" : {
                 "properties" : {
-                  "familyName" : {
-                    "type" : "string",
-                    "index" : "not_analyzed",
-                    "copy_to":  "embeds.media.credits.fullName"
+                  "familyName": {
+                    "type": "string",
+                    "index": "not_analyzed",
+                    "copy_to": "credits.fullName"
                   },
-                  "givenName" : {
-                    "type" : "string",
-                    "index" : "not_analyzed",
-                    "copy_to":  "embeds.media.credits.fullName"
+                  "givenName": {
+                    "type": "string",
+                    "index": "not_analyzed",
+                    "copy_to": "credits.fullName"
                   },
-                  "fullName" : {
-                    "type" : "multi_field",
-                    "fields" : {
-                      "fullName" : {
-                        "type" : "string",
-                        "index" : "not_analyzed"
-                      },
-                      "text" : {
-                        "type" : "string",
+                  "fullName": {
+                    "type": "string",
+                    "index": "not_analyzed",
+                    "fields": {
+                      "text": {
+                        "type": "string",
                         "norms": {
                           "enabled": false
                         }
                       }
                     }
                   },
-                  "role" : {
-                    "type" : "string",
-                    "index" : "not_analyzed"
+                  "role": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  },
+                  "gtaaUri": {
+                    "type": "string",
+                    "index": "not_analyzed"
                   }
                 }
               },
