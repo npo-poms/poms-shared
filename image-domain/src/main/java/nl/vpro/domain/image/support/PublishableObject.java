@@ -18,7 +18,7 @@ import nl.vpro.domain.user.Editor;
  *
  * @author arne
  * @author roekoe
- * TODO duplicated in media-domain
+ * TODO duplicated in media-domain. THIS IS HORRIBLE!!
  */
 @SuppressWarnings("serial")
 @MappedSuperclass
