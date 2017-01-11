@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.image;
 
-import java.net.URL;
+import java.net.URI;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -56,7 +56,7 @@ public class ImageMetadata {
 
     private Long size;
 
-    private URL downloadUrl;
+    private URI downloadUrl;
 
     private String etag;
 
@@ -137,7 +137,7 @@ public class ImageMetadata {
         return size;
     }
 
-    public URL getDownloadUrl() {
+    public URI getDownloadUrl() {
         return downloadUrl;
     }
 
@@ -185,7 +185,7 @@ public class ImageMetadata {
         this.size = size;
     }
 
-    public void setDownloadUrl(URL downloadUrl) {
+    public void setDownloadUrl(URI downloadUrl) {
         this.downloadUrl = downloadUrl;
     }
 
