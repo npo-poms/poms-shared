@@ -19,7 +19,6 @@
     <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-ws</artifactId>
-      <version>${shared.version}</version>
     </dependency>
   </dependencies>
 </project>
