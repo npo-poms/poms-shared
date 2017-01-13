@@ -20,5 +20,6 @@ public enum MediaSortField {
     episode,
     episodeAdded,
     memberAdded,
-    member
+    member,
+    creationDate
 }
