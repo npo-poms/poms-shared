@@ -160,7 +160,7 @@ public class PageUpdateBuilderTest {
             .creationDate(TEST_INSTANT.minus(1, ChronoUnit.DAYS))
             .lastPublished(TEST_INSTANT.plus(1, ChronoUnit.DAYS))
             .build();
-        String test = "<pageUpdate:page type=\"ARTICLE\" url=\"http://www/vpro.nl\" publishStart=\"2016-04-18T12:00:00.000+02:00\" lastPublished=\"2016-04-19T12:00:00.000+02:00\" creationDate=\"2016-04-17T12:00:00.000+02:00\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\"/>\n";
+        String test = "<pageUpdate:page type=\"ARTICLE\" url=\"http://www/vpro.nl\" publishStart=\"2016-04-18T12:00:00+02:00\" lastPublished=\"2016-04-19T12:00:00+02:00\" creationDate=\"2016-04-17T12:00:00+02:00\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\"/>\n";
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getPublishStart()).isEqualTo(TEST_INSTANT);
         assertThat(result.getCreationDate()).isEqualTo(TEST_INSTANT.minus(1, ChronoUnit.DAYS));
