@@ -8,7 +8,6 @@ package nl.vpro.domain.image;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -70,7 +69,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
     private Long size;
 
     @Column(columnDefinition = "TEXT", unique = true, length = 1024)
-    private URI downloadUrl;
+    private String downloadUrl;
 
     private String etag;
 
@@ -282,11 +281,11 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return getId() == null ? null : "urn:vpro:image:" + getId();
     }
 
-    public URI getDownloadUrl() {
+    public String getDownloadUrl() {
         return downloadUrl;
     }
 
-    public void setDownloadUrl(URI downloadUrl) {
+    public void setDownloadUrl(String downloadUrl) {
         this.downloadUrl = downloadUrl;
     }
 
