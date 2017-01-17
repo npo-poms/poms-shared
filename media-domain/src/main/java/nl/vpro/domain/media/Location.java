@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -19,8 +20,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -69,10 +68,9 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "workflow"
 
 })
+@Slf4j
 public class Location extends PublishableObject implements Ownable, Comparable<Location> {
     //TODO Validate URL, TYPE and Owner AVTYPE
-
-    private static final Logger LOG = LoggerFactory.getLogger(Location.class);
 
     private static final long serialVersionUID = -140942203904508506L;
 
@@ -266,7 +264,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             }
 
             if(to.getOwner() != null && !Objects.equals(owner, to.getOwner())) {
-                LOG.info("Updating owner of {} {} -> {}", to, to.getOwner(), owner);
+                log.info("Updating owner of {} {} -> {}", to, to.getOwner(), owner);
             }
 
             to.setProgramUrl(from.getProgramUrl());
@@ -471,7 +469,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
                 LocationAuthorityRecord record = getAuthorityRecord();
                 return record.getRestrictionStart();
             } catch (IllegalAuthorativeRecord iea) {
-                LOG.debug(iea.getMessage());
+                log.debug(iea.getMessage());
             }
         }
 
@@ -506,7 +504,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             try {
                 return getAuthorityRecord().getRestrictionStop();
             } catch (IllegalAuthorativeRecord iea) {
-                LOG.debug(iea.getMessage());
+                log.debug(iea.getMessage());
             }
         }
 
@@ -532,6 +530,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
         return this;
     }
+
 
     @Override
     public int compareTo(Location that) {
@@ -585,7 +584,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
                 locationAuthorityRecord.setRestrictionStop(publishStop);
             }
         } catch (Throwable t) {
-            LOG.error(t.getMessage());
+            log.error(t.getMessage());
         }
     }
 

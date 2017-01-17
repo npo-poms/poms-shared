@@ -546,16 +546,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return duration != null ? duration.getValue() : null;
     }
 
-    private static Prediction getPrediction(Platform platform, Collection<Prediction> preds) {
-        if (preds != null) {
-            for (Prediction prediction : preds) {
-                if (prediction.getPlatform().equals(platform)) {
-                    return prediction;
-                }
-            }
-        }
-        return null;
-    }
+
 
     protected static <T> List<T> updateList(List<T> toUpdate, Collection<T> values) {
         if (toUpdate != null && toUpdate == values) {
@@ -1971,7 +1962,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     public Prediction getPrediction(Platform platform) {
-        return getPrediction(platform, getPredictions());
+        return MediaObjects.getPrediction(platform, getPredictions());
     }
 
     public void updatePrediction(Platform platform, Instant publishStart, Instant publishStop) {
@@ -2015,6 +2006,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         }
     }
 
+
     public boolean removePrediction(Platform platform) {
         if (predictions == null) {
             return false;
@@ -2024,7 +2016,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     }
 
     private Prediction findOrCreatePrediction(Platform platform) {
-        Prediction prediction = getPrediction(platform, this.predictions);
+        Prediction prediction = MediaObjects.getPrediction(platform, this.predictions);
         if (prediction == null) {
             prediction = new Prediction(platform);
             prediction.setMediaObject(this);
