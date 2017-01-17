@@ -13,7 +13,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 import java.util.Locale;
 
 import org.junit.After;
@@ -186,8 +185,8 @@ public class MediaObjectJsonSchemaTest {
 
         Prediction prediction = new Prediction(Platform.TVVOD);
         prediction.setState(Prediction.State.REALIZED);
-        prediction.setPublishStart(new Date(10));
-        prediction.setPublishStop(new Date(100));
+        prediction.setPublishStart(Instant.ofEpochMilli(10));
+        prediction.setPublishStop(Instant.ofEpochMilli(100));
 
         program.getPredictions().add(prediction);
 
