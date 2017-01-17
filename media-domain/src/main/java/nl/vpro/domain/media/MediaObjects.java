@@ -458,7 +458,48 @@ public class MediaObjects {
         }
     }
 
+    public static void realizeAndExpirePredictions(MediaObject object) {
+        for (Prediction prediction : object.getPredictions()) {
+            realizeAndExpirePredictions(prediction.getPlatform(), object);
+        }
+    }
 
+    public static void realizeAndExpirePredictions(Platform platform, MediaObject object) {
+        if (platform == null) {
+            return;
+        }
+        Prediction prediction = getPrediction(platform, object.getPredictions());
+        if (prediction != null) {
+            Prediction.State requiredState = Prediction.State.ANNOUNCED;
+
+            for (Location location : object.getLocations()) {
+                if (location.getPlatform() == platform) {
+                    if (location.isPublishable()) {
+                        requiredState = Prediction.State.REALIZED;
+                        break;
+                    }
+                    if (location.getPublishStopInstant() != null && location.getPublishStopInstant().isBefore(Instant.now())) {
+                        requiredState = Prediction.State.EXPIRED;
+                    }
+
+                }
+            }
+            if (prediction.getState() != requiredState) {
+                prediction.setState(requiredState);
+            }
+        }
+    }
+
+    public static Prediction getPrediction(Platform platform, Collection<Prediction> preds) {
+        if (preds != null) {
+            for (Prediction prediction : preds) {
+                if (prediction.getPlatform().equals(platform)) {
+                    return prediction;
+                }
+            }
+        }
+        return null;
+    }
 
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.

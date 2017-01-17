@@ -37,7 +37,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     public enum State {
         ANNOUNCED,
         REALIZED,
-        REVOKED
+        REVOKED,
+        EXPIRED
     }
 
     @Id
