@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import java.util.Date;
+import java.time.Instant;
 
 import org.junit.Test;
 
@@ -18,8 +18,8 @@ public class PredictionTest {
 
     @Test
     public void testGetPublishStartStop() throws Exception {
-        Prediction target = new Prediction(null, new Date(1), new Date(2));
-        assertThat(target.getPublishStart().getTime()).isLessThan(target.getPublishStop().getTime());
+        Prediction target = new Prediction(null, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
+        assertThat(target.getPublishStart()).isLessThan(target.getPublishStop());
     }
 
     @Test
