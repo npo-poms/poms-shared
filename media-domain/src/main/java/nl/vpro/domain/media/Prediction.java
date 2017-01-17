@@ -1,7 +1,7 @@
 package nl.vpro.domain.media;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -48,7 +48,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     @Column(nullable = false)
     @NotNull
-    protected Date issueDate = new Date();
+    protected Instant issueDate = Instant.now();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -57,10 +57,10 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     protected State state = State.ANNOUNCED;
 
     @XmlAttribute
-    protected Date publishStart;
+    protected Instant publishStart;
 
     @XmlAttribute
-    protected Date publishStop;
+    protected Instant publishStop;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -92,7 +92,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.state = state;
     }
 
-    public Prediction(Platform platform, Date publishStart, Date publishStop) {
+    public Prediction(Platform platform, Instant publishStart, Instant publishStop) {
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
@@ -137,11 +137,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.mediaObject = mediaObject;
     }
 
-    public Date getIssueDate() {
+    public Instant getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(Date issueDate) {
+    public void setIssueDate(Instant issueDate) {
         this.issueDate = issueDate;
     }
 
@@ -153,19 +153,19 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.state = state;
     }
 
-    public Date getPublishStart() {
+    public Instant getPublishStart() {
         return publishStart;
     }
 
-    public void setPublishStart(Date publishStart) {
+    public void setPublishStart(Instant publishStart) {
         this.publishStart = publishStart;
     }
 
-    public Date getPublishStop() {
+    public Instant getPublishStop() {
         return publishStop;
     }
 
-    public void setPublishStop(Date publishStop) {
+    public void setPublishStop(Instant publishStop) {
         this.publishStop = publishStop;
     }
 

@@ -1974,7 +1974,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return getPrediction(platform, getPredictions());
     }
 
-    public void updatePrediction(Platform platform, Date publishStart, Date publishStop) {
+    public void updatePrediction(Platform platform, Instant publishStart, Instant publishStop) {
         Prediction prediction = findOrCreatePrediction(platform);
         prediction.setPublishStart(publishStart);
         prediction.setPublishStop(publishStop);
@@ -2006,10 +2006,10 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         Platform platform = location.getPlatform();
         if (platform != null) {
             if (platform == prediction.getPlatform()) {
-                prediction.setPublishStart(location.getPublishStart());
-                prediction.setPublishStop(location.getPublishStop());
+                prediction.setPublishStart(location.getPublishStartInstant());
+                prediction.setPublishStop(location.getPublishStopInstant());
             } else {
-                throw new IllegalArgumentException("");
+                throw new IllegalArgumentException(platform + " is not equal to " + prediction.getPlatform() + " (for " + location + ")");
             }
 
         }

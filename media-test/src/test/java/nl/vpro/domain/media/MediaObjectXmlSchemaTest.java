@@ -245,7 +245,7 @@ public class MediaObjectXmlSchemaTest {
 
         Prediction prediction = new Prediction(Platform.INTERNETVOD);
         prediction.setState(Prediction.State.REVOKED);
-        prediction.setIssueDate(new Date(0));
+        prediction.setIssueDate(Instant.EPOCH);
 
         program.getPredictions().add(prediction);
         String actual = toXml(program);
