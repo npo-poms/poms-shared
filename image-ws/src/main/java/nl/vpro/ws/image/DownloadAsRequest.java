@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 All rights reserved
  * VPRO The Netherlands
  */
@@ -20,17 +20,17 @@ public class DownloadAsRequest extends DownloadRequest {
     public DownloadAsRequest() {
     	// nothing
     }
-    
+
  	public DownloadAsRequest(String principalId, String title, String description, ImageType type,
 			String url) {
 		super(title, description, type, url);
 		this.principalId = principalId;
 	}
-    
+
 	public String getPrincipalId() {
     	return principalId;
     }
-    
+
     public void setPrincipalId(String principalId) {
 		this.principalId = principalId;
 	}

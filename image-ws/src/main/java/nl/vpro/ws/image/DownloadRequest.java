@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 All rights reserved
  * VPRO The Netherlands
  */
@@ -29,11 +29,11 @@ public class DownloadRequest {
     @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
     private String url;
 
-    
+
     public DownloadRequest() {
     	// nothing
     }
-    
+
 	public DownloadRequest(String title, String description, ImageType type,
 			String url) {
 		this.title = title;

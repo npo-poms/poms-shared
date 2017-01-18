@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (C) 2011 All rights reserved
  * VPRO The Netherlands
  */
@@ -17,7 +17,7 @@ public class UploadAsRequest extends UploadRequest {
 
 	@XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
     private String principalId;
-	
+
     public UploadAsRequest() {
     	// nothing
     }
