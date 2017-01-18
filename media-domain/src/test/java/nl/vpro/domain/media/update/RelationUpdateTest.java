@@ -31,4 +31,6 @@ public class RelationUpdateTest {
 		assertThat(rel1.compareTo(rel2)).isNotEqualTo(0); // different objects, so different
 
 	}
+
+
 }

@@ -1,5 +1,4 @@
-/**
- /*
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
@@ -524,5 +523,18 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Schema schema = schemaFactory.newSchema(getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
         Validator validator = schema.newValidator();
         validator.validate(xmlFile);
+    }
+
+    @Test
+    public void updateRelations() {
+        Program program = MediaBuilder.program().relations(Relation.ofText(RelationDefinition.of("A", "VPRO"), "aa")).build();
+        ProgramUpdate update = ProgramUpdate.create(program);
+        update.getRelations().first().setText("bbb");
+
+        assertThat(update.getRelations().first().getText()).isEqualTo("bbb");
+
+
+        assertThat(update.build().getRelations().first().getText()).isEqualTo("bbb");
+
     }
 }
