@@ -2714,7 +2714,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
         if (locations != null) {
             for (Location loc : locations) {
-                if (loc.isCeresLocation()) {
+                if (loc.hasPlatform()) {
                     LocationAuthorityRecord.unknownAuthority(this, loc.getPlatform());
                 }
             }

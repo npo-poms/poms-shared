@@ -464,7 +464,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
     @Override
     public Instant getPublishStartInstant() {
-        if(isCeresLocation() && mediaObject != null) {
+        if(hasPlatform() && mediaObject != null) {
             try {
                 LocationAuthorityRecord record = getAuthorityRecord();
                 return record.getRestrictionStart();
@@ -484,13 +484,13 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
-                if (isCeresLocation()) {
+                if (hasPlatform()) {
                     getAuthorityRecord().setRestrictionStart(publishStart);
                 }
                 mediaObject.realizePrediction(this);
             }
 
-            if (hasCeresAuthority()) {
+            if (hasAuthority()) {
                 authorityUpdate = true;
             }
         }
@@ -500,7 +500,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
     @Override
     public Instant getPublishStopInstant() {
-        if(isCeresLocation() && mediaObject != null) {
+        if(hasPlatform() && mediaObject != null) {
             try {
                 return getAuthorityRecord().getRestrictionStop();
             } catch (IllegalAuthorativeRecord iea) {
@@ -517,13 +517,13 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
             super.setPublishStopInstant(publishStop);
             if (mediaObject != null) {
-                if (isCeresLocation()) {
+                if (hasPlatform()) {
                     getAuthorityRecord().setRestrictionStop(publishStop);
                 }
                 mediaObject.realizePrediction(this);
             }
 
-            if (hasCeresAuthority()) {
+            if (hasAuthority()) {
                 authorityUpdate = true;
             }
         }
@@ -628,15 +628,11 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         this.neboId = neboId;
     }
 
-
-    public boolean isCeresLocation() {
-        return hasPlatform();
-    }
     /**
      * Returns true if ceres has the authority about this record. So normally it can not be edited in POMS.
      *
      */
-    public boolean hasCeresAuthority() {
+    public boolean hasAuthority() {
         if (mediaObject == null) {
             // unknown
             return false;
