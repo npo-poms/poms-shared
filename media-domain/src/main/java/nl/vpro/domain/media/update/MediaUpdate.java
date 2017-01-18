@@ -819,7 +819,12 @@ public  abstract class MediaUpdate<M extends MediaObject> {
     }
 
     protected M build() {
-        return builder.build();
+
+        M result = builder.build();
+        if (relations != null) {
+            result.setRelations(relations.stream().map(RelationUpdate::toRelation).collect(Collectors.toCollection(TreeSet::new)));
+        }
+        return result;
     }
 
     protected M mediaObject() {
