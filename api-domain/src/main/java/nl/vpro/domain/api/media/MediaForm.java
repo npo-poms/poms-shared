@@ -43,6 +43,24 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     @Valid
     private LinkedHashMap<MediaSortField, Order> sortFields;
 
+    @XmlElement
+    @Valid
+    private MediaFacets facets;
+
+
+    @Override
+    public boolean isFaceted() {
+        return facets != null && facets.isFaceted();
+    }
+
+    public MediaFacets getFacets() {
+        return facets;
+    }
+
+    public void setFacets(MediaFacets facets) {
+        this.facets = facets;
+    }
+
 
     @Override
     public boolean isSorted() {

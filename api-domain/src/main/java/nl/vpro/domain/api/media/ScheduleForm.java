@@ -24,19 +24,21 @@ import nl.vpro.domain.media.MediaObject;
 @XmlType(name = "scheduleFormType",
     propOrder = {
         // Intellij warnings are incorrect since parent class is @XmlTransient
-        "searches",
-        "facets"
+        "searches"
     })
 public class ScheduleForm extends AbstractMediaForm implements Form, Predicate<MediaObject> {
-
 
     public static ScheduleForm from(MediaForm form) {
         ScheduleForm scheduleForm = new ScheduleForm();
         scheduleForm.setSearches(form.getSearches());
-        scheduleForm.setFacets(form.getFacets());
         scheduleForm.setHighlight(form.isHighlight());
         return scheduleForm;
     }
 
 
+    @Override
+    public boolean isFaceted() {
+        return false;
+
+    }
 }

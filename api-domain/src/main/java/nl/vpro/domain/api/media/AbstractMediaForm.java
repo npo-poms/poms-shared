@@ -25,7 +25,7 @@ import nl.vpro.domain.media.MediaObject;
  */
 
 @XmlTransient
-public class AbstractMediaForm implements Form, Predicate<MediaObject> {
+public abstract class AbstractMediaForm implements Form, Predicate<MediaObject> {
 
     @JsonProperty("highlight")
     @XmlAttribute(name = "highlight")
@@ -35,9 +35,7 @@ public class AbstractMediaForm implements Form, Predicate<MediaObject> {
     @Valid
     private MediaSearch searches;
 
-    @XmlElement
-    @Valid
-    private MediaFacets facets;
+
 
 
     @Override
@@ -45,19 +43,6 @@ public class AbstractMediaForm implements Form, Predicate<MediaObject> {
         return FormUtils.getText(searches);
     }
 
-
-    @Override
-    public boolean isFaceted() {
-        return facets != null && facets.isFaceted();
-    }
-
-    public MediaFacets getFacets() {
-        return facets;
-    }
-
-    public void setFacets(MediaFacets facets) {
-        this.facets = facets;
-    }
 
     @Override
     public boolean isHighlight() {
