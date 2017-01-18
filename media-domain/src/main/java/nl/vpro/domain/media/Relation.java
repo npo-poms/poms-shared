@@ -1,11 +1,12 @@
 package nl.vpro.domain.media;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -29,6 +30,7 @@ import nl.vpro.validation.URI;
 @XmlType(name = "relationType", propOrder = {
         "text"
         })
+
 public class Relation implements Comparable<Relation>, Serializable, Identifiable<Long> {
 
     private static final String BASE_URN = "urn:vpro:media:relation:";
@@ -77,6 +79,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
         this.definition = definition;
     }
 
+    @Builder
     public Relation(RelationDefinition definition, String uriRef, String text) {
         this.definition = definition;
         this.uriRef = uriRef;
