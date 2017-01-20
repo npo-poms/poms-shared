@@ -382,8 +382,8 @@ public class MediaObjectTest {
         Prediction plus = target.getPrediction(Platform.PLUSVOD);
         assertThat(plus).isNotNull();
         assertThat(plus.getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(plus.getPublishStart()).isEqualTo(new Date(5));
-        assertThat(plus.getPublishStop()).isEqualTo(new Date(10));
+        assertThat(plus.getPublishStart()).isEqualTo(Instant.ofEpochMilli(5));
+        assertThat(plus.getPublishStop()).isEqualTo(Instant.ofEpochMilli(10));
     }
 
     @Test
