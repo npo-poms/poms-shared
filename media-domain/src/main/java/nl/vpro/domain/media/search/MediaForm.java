@@ -387,6 +387,10 @@ public class MediaForm {
         this.sortRange = sortRange;
     }
 
+
+    /**
+     * Searches only in 'first showing' event
+     */
     public DateRange getEventRange() {
         return eventRange;
     }
@@ -455,6 +459,9 @@ public class MediaForm {
         return lastModifiedRange != null && lastModifiedRange.hasValues();
     }
 
+    /**
+     * Searches in all available events.
+     */
     public DateRange getScheduleEventRange() {
         return scheduleEventRange;
     }
