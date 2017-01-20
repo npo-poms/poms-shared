@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:constraint:page:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:tns="urn:vpro:api:constraint:page:2013" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="filter" type="tns:filter"/>
+
+  <xs:complexType name="filter">
+    <xs:sequence>
+      <xs:choice minOccurs="0">
+        <xs:element name="and" type="tns:and"/>
+        <xs:element name="or" type="tns:or"/>
+        <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
+        <xs:element name="type" type="tns:pageTypeConstraintType"/>
+        <xs:element name="portal" type="tns:pagePortalConstraintType"/>
+        <xs:element name="section" type="tns:pageSectionConstraintType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="and">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="and" type="tns:and"/>
+        <xs:element name="or" type="tns:or"/>
+        <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
+        <xs:element name="type" type="tns:pageTypeConstraintType"/>
+        <xs:element name="portal" type="tns:pagePortalConstraintType"/>
+        <xs:element name="section" type="tns:pageSectionConstraintType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="or">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="and" type="tns:and"/>
+        <xs:element name="or" type="tns:or"/>
+        <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
+        <xs:element name="type" type="tns:pageTypeConstraintType"/>
+        <xs:element name="portal" type="tns:pagePortalConstraintType"/>
+        <xs:element name="section" type="tns:pageSectionConstraintType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="broadcasterConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="pageTypeConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="pagePortalConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="pageSectionConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+</xs:schema>
+

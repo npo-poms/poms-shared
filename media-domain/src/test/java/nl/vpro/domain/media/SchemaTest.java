@@ -69,6 +69,8 @@ public class SchemaTest {
             LocationUpdate.class,
             // no namespace
             XmlCollection.class
+            //
+
         );
 
     }
