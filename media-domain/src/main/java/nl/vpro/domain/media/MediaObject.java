@@ -487,8 +487,20 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @Transient
     private String mergedToRef;
 
+
+    /**
+     * If this is set to true, then that indicates that something is changed in the mediaobject which would require
+     * a recalculation of the sort date.
+     */
     @Transient
-    protected boolean sortDateValid = false;
+    private boolean sortDateValid = false;
+
+    /**
+     * If this is set to false, then that indicates that the sort date was set _explictely_ (JAXB unmarshalling), and no other setters can
+     * invalidate that.
+     */
+    @Transient
+    private boolean sortDateInvalidatable = true;
 
     public MediaObject() {
     }
@@ -2198,7 +2210,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     public void setScheduleEvents(SortedSet<ScheduleEvent> scheduleEvents) {
         this.scheduleEvents = scheduleEvents;
-        sortDateValid = false;
+        invalidateSortDate();
     }
 
     MediaObject addScheduleEvent(ScheduleEvent scheduleEvent) {
@@ -2207,7 +2219,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
                 scheduleEvents = new TreeSet<>();
             }
             scheduleEvents.add(scheduleEvent);
-            sortDateValid = false;
+            invalidateSortDate();
         }
         return this;
     }
@@ -2496,7 +2508,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @Override
     public PublishableObject setPublishStartInstant(Instant publishStart) {
         if (! Objects.equals(this.publishStart, publishStart)) {
-            sortDateValid = false;
+            invalidateSortDate();
             if (hasInternetVodAuthority()) {
                 locationAuthorityUpdate = true;
             }
@@ -2507,7 +2519,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     @Override
     public PublishableObject setPublishStopInstant(Instant publishStop) {
         if (!Objects.equals(this.publishStop, publishStop)) {
-            sortDateValid = false;
+            invalidateSortDate();
             if (hasInternetVodAuthority()) {
                 locationAuthorityUpdate = true;
             }
@@ -2521,7 +2533,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
 
     @Override
     public void setCreationInstant(Instant publishStart) {
-        sortDateValid = false;
+        invalidateSortDate();
         super.setCreationInstant(publishStart);
     }
 
@@ -2586,7 +2598,14 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
     void setSortInstant(Instant date) {
         this.sortDate = date;
         this.sortDateValid = true;
+        this.sortDateInvalidatable = false;
 
+    }
+
+    protected void invalidateSortDate() {
+        if (this.sortDateInvalidatable) {
+            this.sortDateValid = false;
+        }
     }
 
     public boolean isMerged() {
