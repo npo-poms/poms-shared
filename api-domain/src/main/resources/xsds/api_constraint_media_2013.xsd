@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:constraint:media:2013" xmlns:tns="urn:vpro:api:constraint:media:2013" xmlns:constraint="urn:vpro:api:constraint" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:vpro:api:constraint:2014">
+
+  <xs:import namespace="urn:vpro:api:constraint:2014" schemaLocation="api_constraint_2014.xsd"/>
+
+  <xs:element name="filter" type="tns:filter"/>
+
+  <xs:complexType name="filter">
+    <xs:sequence>
+      <xs:choice minOccurs="0">
+        <xs:element name="and" type="tns:and"/>
+        <xs:element name="or" type="tns:or"/>
+        <xs:element name="not" type="tns:not"/>
+        <xs:element name="avType" type="tns:avTypeConstraintType"/>
+        <xs:element name="avFileFormat" type="tns:avFileFormatConstraintType"/>
+        <xs:element name="avFileExtension" type="tns:avFileExtensionConstraintType"/>
+        <xs:element name="programUrl" type="tns:programUrlConstraintType"/>
+        <xs:element name="descendantOf" type="tns:descendantOfConstraintType"/>
+        <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
+        <xs:element name="hasImage" type="tns:hasImageConstraintType"/>
+        <xs:element name="hasLocation" type="tns:hasLocationConstraintType"/>
+        <xs:element name="hasPrediction" type="tns:hasPredictionConstraintType"/>
+        <xs:element name="type" type="tns:typeConstraintType"/>
+        <xs:element name="channel" type="tns:channelConstraintType"/>
+        <xs:element name="scheduleEvent" type="tns:scheduleEventType"/>
+        <xs:element name="hasPortal" type="tns:hasPortalConstraintType"/>
+        <xs:element name="portal" type="tns:portalConstraintType"/>
+        <xs:element name="hasPortal" type="tns:hasPortalConstraintType"/>
+        <xs:element name="portal" type="tns:portalConstraintType"/>
+        <xs:element name="isExclusive" type="tns:hasPortalRestrictionConstraintType"/>
+        <xs:element name="exclusive" type="tns:portalRestrictionConstraintType"/>
+        <xs:element name="hasGeoRestriction" type="tns:hasGeoRestrictionConstraintType"/>
+        <xs:element name="geoRestriction" type="tns:geoRestrictionConstraintType"/>
+        <xs:element name="ageRating" type="tns:ageRatingConstraintType"/>
+        <xs:element name="hasAgeRating" type="tns:hasAgeRatingConstraintType"/>
+        <xs:element name="contentRating" type="tns:contentRatingConstraintType"/>
+        <xs:element name="hasContentRating" type="tns:hasContentRatingConstraintType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="and">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="and" type="tns:and"/>
+        <xs:element name="or" type="tns:or"/>
+        <xs:element name="not" type="tns:not"/>
+        <xs:element name="avType" type="tns:avTypeConstraintType"/>
+        <xs:element name="avFileFormat" type="tns:avFileFormatConstraintType"/>
+        <xs:element name="avFileExtension" type="tns:avFileExtensionConstraintType"/>
+        <xs:element name="programUrl" type="tns:programUrlConstraintType"/>
+        <xs:element name="descendantOf" type="tns:descendantOfConstraintType"/>
+        <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
+        <xs:element name="hasImage" type="tns:hasImageConstraintType"/>
+        <xs:element name="hasLocation" type="tns:hasLocationConstraintType"/>
+        <xs:element name="hasPrediction" type="tns:hasPredictionConstraintType"/>
+        <xs:element name="type" type="tns:typeConstraintType"/>
+        <xs:element name="channel" type="tns:channelConstraintType"/>
+        <xs:element name="scheduleEvent" type="tns:scheduleEventType"/>
+        <xs:element name="hasPortal" type="tns:hasPortalConstraintType"/>
+        <xs:element name="portal" type="tns:portalConstraintType"/>
+        <xs:element name="isExclusive" type="tns:hasPortalRestrictionConstraintType"/>
+        <xs:element name="exclusive" type="tns:portalRestrictionConstraintType"/>
+        <xs:element name="hasGeoRestriction" type="tns:hasGeoRestrictionConstraintType"/>
+        <xs:element name="geoRestriction" type="tns:geoRestrictionConstraintType"/>
+        <xs:element name="ageRating" type="tns:ageRatingConstraintType"/>
+        <xs:element name="hasAgeRating" type="tns:hasAgeRatingConstraintType"/>
+        <xs:element name="contentRating" type="tns:contentRatingConstraintType"/>
+        <xs:element name="hasContentRating" type="tns:hasContentRatingConstraintType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="or">
+    <xs:sequence>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="and" type="tns:and"/>
+        <xs:element name="or" type="tns:or"/>
+        <xs:element name="not" type="tns:not"/>
+        <xs:element name="avType" type="tns:avTypeConstraintType"/>
+        <xs:element name="avFileFormat" type="tns:avFileFormatConstraintType"/>
+        <xs:element name="avFileExtension" type="tns:avFileExtensionConstraintType"/>
+        <xs:element name="programUrl" type="tns:programUrlConstraintType"/>
+        <xs:element name="descendantOf" type="tns:descendantOfConstraintType"/>
+        <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
+        <xs:element name="hasImage" type="tns:hasImageConstraintType"/>
+        <xs:element name="hasLocation" type="tns:hasLocationConstraintType"/>
+        <xs:element name="hasPrediction" type="tns:hasPredictionConstraintType"/>
+        <xs:element name="type" type="tns:typeConstraintType"/>
+        <xs:element name="channel" type="tns:channelConstraintType"/>
+        <xs:element name="scheduleEvent" type="tns:scheduleEventType"/>
+        <xs:element name="hasPortal" type="tns:hasPortalConstraintType"/>
+        <xs:element name="portal" type="tns:portalConstraintType"/>
+        <xs:element name="isExclusive" type="tns:hasPortalRestrictionConstraintType"/>
+        <xs:element name="exclusive" type="tns:portalRestrictionConstraintType"/>
+        <xs:element name="hasGeoRestriction" type="tns:hasGeoRestrictionConstraintType"/>
+        <xs:element name="geoRestriction" type="tns:geoRestrictionConstraintType"/>
+        <xs:element name="ageRating" type="tns:ageRatingConstraintType"/>
+        <xs:element name="hasAgeRating" type="tns:hasAgeRatingConstraintType"/>
+        <xs:element name="contentRating" type="tns:contentRatingConstraintType"/>
+        <xs:element name="hasContentRating" type="tns:hasContentRatingConstraintType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="not">
+    <xs:sequence>
+      <xs:choice minOccurs="0">
+        <xs:element name="and" type="tns:and"/>
+        <xs:element name="or" type="tns:or"/>
+        <xs:element name="not" type="tns:not"/>
+        <xs:element name="avType" type="tns:avTypeConstraintType"/>
+        <xs:element name="avFileFormat" type="tns:avFileFormatConstraintType"/>
+        <xs:element name="avFileExtension" type="tns:avFileExtensionConstraintType"/>
+        <xs:element name="programUrl" type="tns:programUrlConstraintType"/>
+        <xs:element name="descendantOf" type="tns:descendantOfConstraintType"/>
+        <xs:element name="broadcaster" type="tns:broadcasterConstraintType"/>
+        <xs:element name="hasImage" type="tns:hasImageConstraintType"/>
+        <xs:element name="hasLocation" type="tns:hasLocationConstraintType"/>
+        <xs:element name="hasPrediction" type="tns:hasPredictionConstraintType"/>
+        <xs:element name="type" type="tns:typeConstraintType"/>
+        <xs:element name="channel" type="tns:channelConstraintType"/>
+        <xs:element name="scheduleEvent" type="tns:scheduleEventType"/>
+        <xs:element name="hasPortal" type="tns:hasPortalConstraintType"/>
+        <xs:element name="portal" type="tns:portalConstraintType"/>
+        <xs:element name="isExclusive" type="tns:hasPortalRestrictionConstraintType"/>
+        <xs:element name="exclusive" type="tns:portalRestrictionConstraintType"/>
+        <xs:element name="hasGeoRestriction" type="tns:hasGeoRestrictionConstraintType"/>
+        <xs:element name="geoRestriction" type="tns:geoRestrictionConstraintType"/>
+        <xs:element name="ageRating" type="tns:ageRatingConstraintType"/>
+        <xs:element name="hasAgeRating" type="tns:hasAgeRatingConstraintType"/>
+        <xs:element name="contentRating" type="tns:contentRatingConstraintType"/>
+        <xs:element name="hasContentRating" type="tns:hasContentRatingConstraintType"/>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="avTypeConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="avFileFormatConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="avFileExtensionConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="programUrlConstraintType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="exact" type="xs:boolean"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="descendantOfConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="broadcasterConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="hasImageConstraintType">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="hasLocationConstraintType">
+    <xs:sequence/>
+    <xs:attribute name="platform" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="hasPredictionConstraintType">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:simpleType name="typeConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="channelConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="scheduleEventType">
+    <xs:sequence/>
+    <xs:attribute name="date" type="xs:string"/>
+    <xs:attribute name="operator" type="ns1:operatorType"/>
+  </xs:complexType>
+
+  <xs:complexType name="hasPortalConstraintType">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:simpleType name="portalConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="hasPortalRestrictionConstraintType">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:simpleType name="portalRestrictionConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="hasGeoRestrictionConstraintType">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:simpleType name="geoRestrictionConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:simpleType name="ageRatingConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="hasAgeRatingConstraintType">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:simpleType name="contentRatingConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
+  <xs:complexType name="hasContentRatingConstraintType">
+    <xs:sequence/>
+  </xs:complexType>
+</xs:schema>
+
