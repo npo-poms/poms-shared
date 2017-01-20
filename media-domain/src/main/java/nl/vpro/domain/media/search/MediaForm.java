@@ -127,6 +127,9 @@ public class MediaForm {
     @XmlElement
     private DateRange lastModifiedRange;
 
+    @XmlElement
+    private DateRange scheduleEventRange;
+
     @XmlElement(name = "tag")
     @JsonProperty("tags")
     private Collection<String> tags;
@@ -450,6 +453,18 @@ public class MediaForm {
 
     public boolean hasModifiedRange() {
         return lastModifiedRange != null && lastModifiedRange.hasValues();
+    }
+
+    public DateRange getScheduleEventRange() {
+        return scheduleEventRange;
+    }
+
+    public void setScheduleEventRange(DateRange scheduleEventRange) {
+        this.scheduleEventRange = scheduleEventRange;
+    }
+
+    public boolean hasScheduleEventRange() {
+        return scheduleEventRange != null && scheduleEventRange.hasValues();
     }
 
     public Collection<Organization> getOrganizations() {
