@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="urn:vpro:api:constraint:2014" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:simpleType name="operatorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LT"/>
+      <xs:enumeration value="GT"/>
+      <xs:enumeration value="EQ"/>
+      <xs:enumeration value="LTE"/>
+      <xs:enumeration value="GTE"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
