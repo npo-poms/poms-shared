@@ -152,7 +152,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
             throw new IllegalArgumentException();
         }
         this.parent = parent;
-        this.sortDateValid = false;
+        invalidateSortDate();
         this.midRef = null;
     }
 
