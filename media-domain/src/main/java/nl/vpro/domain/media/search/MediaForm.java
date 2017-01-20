@@ -38,6 +38,7 @@ import nl.vpro.domain.user.Organization;
     "noPlaylist",
     "sortRange",
     "eventRange",
+    "scheduleEventRange",
     "channels",
     "createdBy",
     "creationRange",
@@ -126,6 +127,9 @@ public class MediaForm {
 
     @XmlElement
     private DateRange lastModifiedRange;
+
+    @XmlElement
+    private DateRange scheduleEventRange;
 
     @XmlElement(name = "tag")
     @JsonProperty("tags")
@@ -384,6 +388,10 @@ public class MediaForm {
         this.sortRange = sortRange;
     }
 
+
+    /**
+     * Searches only in 'first showing' event
+     */
     public DateRange getEventRange() {
         return eventRange;
     }
@@ -450,6 +458,21 @@ public class MediaForm {
 
     public boolean hasModifiedRange() {
         return lastModifiedRange != null && lastModifiedRange.hasValues();
+    }
+
+    /**
+     * Searches in all available events.
+     */
+    public DateRange getScheduleEventRange() {
+        return scheduleEventRange;
+    }
+
+    public void setScheduleEventRange(DateRange scheduleEventRange) {
+        this.scheduleEventRange = scheduleEventRange;
+    }
+
+    public boolean hasScheduleEventRange() {
+        return scheduleEventRange != null && scheduleEventRange.hasValues();
     }
 
     public Collection<Organization> getOrganizations() {
