@@ -38,6 +38,7 @@ import nl.vpro.domain.user.Organization;
     "noPlaylist",
     "sortRange",
     "eventRange",
+    "scheduleEventRange",
     "channels",
     "createdBy",
     "creationRange",
