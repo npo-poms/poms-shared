@@ -55,8 +55,6 @@ public class Filter extends AbstractFilter<MediaObject> {
         //@XmlElement(name = "sortDate", type = SortDateConstraint.class),
         @XmlElement(name = "hasPortal", type = HasPortalConstraint.class),
         @XmlElement(name = "portal", type = PortalConstraint.class),
-        @XmlElement(name = "hasPortal", type = HasPortalConstraint.class),
-        @XmlElement(name = "portal", type = PortalConstraint.class),
         @XmlElement(name = "isExclusive", type = HasPortalRestrictionConstraint.class),
         @XmlElement(name = "exclusive", type = PortalRestrictionConstraint.class),
         @XmlElement(name = "hasGeoRestriction", type = HasGeoRestrictionConstraint.class),
