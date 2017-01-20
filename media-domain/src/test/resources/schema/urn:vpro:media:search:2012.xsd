@@ -25,6 +25,7 @@
       <xsd:element name="noPlaylist" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="sortRange" type="tns:dateRangeType" minOccurs="0"/>
       <xsd:element name="eventRange" type="tns:dateRangeType" minOccurs="0"/>
+      <xsd:element name="scheduleEventRange" type="tns:dateRangeType" minOccurs="0"/>
       <xsd:element name="channel" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="createdBy" type="xsd:string" minOccurs="0"/>
       <xsd:element name="creationRange" type="tns:dateRangeType" minOccurs="0"/>
