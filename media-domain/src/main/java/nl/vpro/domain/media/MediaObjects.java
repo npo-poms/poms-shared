@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
@@ -11,10 +13,9 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import nl.vpro.domain.NotFoundException;
+import nl.vpro.domain.TextualObject;
+import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
@@ -27,9 +28,9 @@ import static nl.vpro.domain.media.MediaObject.sorted;
 /**
  * @since 1.5
  */
+@Slf4j
 public class MediaObjects {
 
-    private final static Logger LOG = LoggerFactory.getLogger(MediaObjects.class);
 
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
         return first == second ||
@@ -64,12 +65,7 @@ public class MediaObjects {
      * Sets the owner of all titles, descriptions, locations and images found in given MediaObject
      */
     public static void forOwner(MediaObject media, OwnerType owner) {
-        for (Title title : media.getTitles()) {
-            title.setOwner(owner);
-        }
-        for (Description description : media.getDescriptions()) {
-            description.setOwner(owner);
-        }
+        TextualObjects.forOwner(media, owner);
         for (Location location : media.getLocations()) {
             location.setOwner(owner);
         }
@@ -78,94 +74,93 @@ public class MediaObjects {
         }
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#filter}
+     */
+    @Deprecated
     public static <T extends Ownable> List<T> filter(Collection<T> ownables, OwnerType owner) {
-        return ownables.stream().filter(item -> item.getOwner() == owner).collect(Collectors.toList());
+        return TextualObjects.filter(ownables, owner);
     }
 
+
+    /**
+     * @deprecated Use {@link TextualObjects#get}
+     */
+    @Deprecated
     public static String getTitle(MediaObject media, OwnerType owner, TextualType type) {
-        for (Title title : media.getTitles()) {
-            if (title.getOwner() == owner && title.getType() == type) {
-                return title.getTitle();
-            }
-        }
-        return "";
+        return TextualObjects.getTitle(media, owner, type);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#get}
+     */
+    @Deprecated
     public static String getTitle(Collection<Title> titles, TextualType... types) {
-        return getTitle(titles, "", types);
+        return TextualObjects.get(titles, types);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#get}
+     */
+    @Deprecated
     public static String getTitle(Collection<Title> titles, String defaultValue, TextualType... types) {
-        Title title = getTitleObject(titles, types);
-        return title == null ? defaultValue : title.getTitle();
+        return TextualObjects.get(titles, defaultValue, types);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#getObject}
+     */
+    @Deprecated
     public static Title getTitleObject(Collection<Title> titles, TextualType... types) {
-        if (titles != null) {
-            for (Title title : titles) {
-                for (TextualType type : types) {
-                    if (type == title.getType()) {
-                        return title;
-                    }
-                }
-            }
-        }
-        return null;
+        return TextualObjects.getObject(titles, types);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#getObjects}
+     */
+    @Deprecated
     public static Collection<Title> getTitles(Collection<Title> titles, TextualType... types) {
-        List<Title> returnValue = new ArrayList<>();
-        if (titles != null) {
-            for (Title title : titles) {
-                for (TextualType type : types) {
-                    if (type == title.getType()) {
-                        returnValue.add(title);
-                    }
-                }
-            }
-        }
-        return returnValue;
+        return TextualObjects.getObjects(titles, types);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#getDescription(TextualObject, OwnerType, TextualType)}
+     */
+    @Deprecated
     public static String getDescription(MediaObject media, OwnerType owner, TextualType type) {
-        for (Description description : media.getDescriptions()) {
-            if (description.getOwner() == owner && description.getType() == type) {
-                return description.getDescription();
-            }
-        }
-        return "";
+        return TextualObjects.getDescription(media, owner, type);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#getDescription(TextualObject, TextualType...)}
+     */
+    @Deprecated
     public static String getDescription(MediaObject media, TextualType... types) {
-        return getDescription(media.getDescriptions(), "", types);
+        return TextualObjects.getDescription(media, types);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#get(Collection, TextualType...)}
+     */
+    @Deprecated
     public static String getDescription(Collection<Description> descriptions, TextualType... types) {
-        return getDescription(descriptions, "", types);
+        return TextualObjects.get(descriptions, types);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#get(Collection, String, TextualType...)}
+     */
+    @Deprecated
     public static String getDescription(Collection<Description> descriptions, String defaultValue, TextualType... types) {
-        if (descriptions != null) {
-            for (Description description : descriptions) {
-                for (TextualType type : types) {
-                    if (type == description.getType()) {
-                        return description.getDescription();
-                    }
-                }
-            }
-        }
-        return defaultValue;
+        return TextualObjects.get(descriptions, defaultValue, types);
     }
 
+    /**
+     * @deprecated Use {@link TextualObjects#findOwnersForTextFields(TextualObject)}
+     */
+    @Deprecated
     public static OwnerType[] findOwnersForTextFields(MediaObject media) {
-        SortedSet<OwnerType> result = new TreeSet<>();
-        for (Title title : media.getTitles()) {
-            result.add(title.getOwner());
-        }
-        for (Description description : media.getDescriptions()) {
-            result.add(description.getOwner());
-        }
-        return result.toArray(new OwnerType[result.size()]);
+        return TextualObjects.findOwnersForTextFields(media);
     }
 
     @SuppressWarnings("unchecked")
@@ -182,14 +177,14 @@ public class MediaObjects {
             objectIn = new ObjectInputStream(byteIn);
             return (T) objectIn.readObject();
         } catch (ClassNotFoundException | IOException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             throw new RuntimeException(e);
         } finally {
             if (objectOut != null) {
                 try {
                     objectOut.close();
                 } catch (IOException e) {
-                    LOG.error("Error closing object output stream after deep copy: {}", e.getMessage());
+                    log.error("Error closing object output stream after deep copy: {}", e.getMessage());
                 }
             }
 
@@ -197,7 +192,7 @@ public class MediaObjects {
                 try {
                     objectIn.close();
                 } catch (IOException e) {
-                    LOG.error("Error closing object input stream after deep copy: {}", e.getMessage());
+                    log.error("Error closing object input stream after deep copy: {}", e.getMessage());
                 }
             }
         }
@@ -515,7 +510,7 @@ public class MediaObjects {
             }
         };
         ObjectFilter.Result<T> result = ObjectFilter.filter(object, p);
-        LOG.debug("Filtered {} from {}", result.filterCount(), result.get());
+        log.debug("Filtered {} from {}", result.filterCount(), result.get());
         return result.get();
     }
     public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
@@ -527,7 +522,7 @@ public class MediaObjects {
             }
         };
         ObjectFilter.Result<T> result = ObjectFilter.filter(object, p);
-        LOG.debug("Filtered {} from {}", result.filterCount(), result.get());
+        log.debug("Filtered {} from {}", result.filterCount(), result.get());
         return result.get();
     }
 
