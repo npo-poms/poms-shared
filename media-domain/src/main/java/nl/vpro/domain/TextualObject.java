@@ -164,18 +164,7 @@ public interface TextualObject<T extends OwnedText, D extends OwnedText, TO exte
         return null;
     }
 
-    default TextualObject addDescription(String description, OwnerType owner,
-                                      TextualType type) {
-        final D existingDescription = findDescription(owner, type);
-
-        if (existingDescription != null) {
-            existingDescription.set(description);
-        } else {
-            this.addDescription(description, owner, type);
-        }
-
-        return this;
-    }
+    TO addDescription(String description, OwnerType owner, TextualType type);
 
     default String getMainDescription() {
         if (hasDescriptions()) {
