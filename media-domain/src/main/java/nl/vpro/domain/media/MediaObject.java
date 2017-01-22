@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
+import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
@@ -214,7 +215,8 @@ import nl.vpro.validation.WarningValidatorGroup;
     @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")})
 
 @Slf4j
-public abstract class MediaObject extends PublishableObject implements NicamRated {
+public abstract class MediaObject extends PublishableObject
+    implements NicamRated, TextualObject<Title, Description, MediaObject> {
 
     @Column(name = "mid", nullable = false, unique = true)
     @Size.List({@Size(max = 255), @Size(min = 4)})
@@ -886,6 +888,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return false;
     }
 
+    @Override
     @XmlElement(name = "title", required = true)
     @JsonProperty("titles")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -897,6 +900,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return sorted(titles);
     }
 
+    @Override
     public void setTitles(SortedSet<Title> titles) {
         this.titles = titles;
         for (Title t : titles) {
@@ -904,6 +908,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         }
     }
 
+    @Override
     public MediaObject addTitle(Title title) {
         if (title != null) {
             title.setParent(this);
@@ -917,6 +922,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return this;
     }
 
+    @Override
     public boolean removeTitle(Title title) {
         if (titles == null) {
             return false;
@@ -925,44 +931,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return titles.remove(title);
     }
 
-    public boolean removeTitle(OwnerType owner, TextualType type) {
-        if (titles == null) {
-            return false;
-        }
-
-        return titles.remove(new Title("", owner, type));
-    }
-
-    public MediaObject removeTitlesForOwner(OwnerType owner) {
-        if (titles != null) {
-
-            titles.removeIf(title -> title.getOwner().equals(owner));
-        }
-        return this;
-    }
-
-    public Title findTitle(TextualType type) {
-        if (titles != null) {
-            for (Title title : titles) {
-                if (type == title.getType()) {
-                    return title;
-                }
-            }
-        }
-        return null;
-    }
-
-    public Title findTitle(OwnerType owner, TextualType type) {
-        if (titles != null) {
-            for (Title title : titles) {
-                if (owner == title.getOwner() && type == title.getType()) {
-                    return title;
-                }
-            }
-        }
-        return null;
-    }
-
+    @Override
     public MediaObject addTitle(String title, OwnerType owner, TextualType type) {
         final Title existingTitle = findTitle(owner, type);
 
@@ -975,53 +944,17 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return this;
     }
 
-    public String getMainTitle() {
-        return MediaObjects.getTitle(sorted(titles), TextualType.MAIN);
+    @Override
+    public boolean hasTitles() {
+        return titles != null && ! titles.isEmpty();
     }
 
-    public void setMainTitle(String mainTitle) {
-        addTitle(mainTitle, OwnerType.BROADCASTER, TextualType.MAIN);
+    @Override
+    public boolean hasDescriptions() {
+        return descriptions != null && !descriptions.isEmpty();
     }
 
-    /**
-     * Retrieves the first sub- or episode title. MIS distributes episode
-     * titles. For internal use this episode title is handled as a subtitle.
-     *
-     * @return - the first subtitle
-     */
-    public String getSubTitle() {
-        return MediaObjects.getTitle(titles, TextualType.SUB);
-    }
-
-    public String getShortTitle() {
-        return MediaObjects.getTitle(titles, TextualType.SHORT);
-    }
-
-    public String getOriginalTitle() {
-        return MediaObjects.getTitle(titles, TextualType.ORIGINAL);
-    }
-
-    public String getWorkTitle() {
-        return MediaObjects.getTitle(titles, TextualType.WORK);
-    }
-
-    public String getLexicoTitle() {
-        String string = MediaObjects.getTitle(titles, TextualType.LEXICO);
-        if (StringUtils.isEmpty(string)) {
-            return getMainTitle();
-            //return StringUtils.isNotEmpty(string) ? string : TextUtil.getLexico(getMainTitle(), new Locale("nl", "NL"));
-        } else {
-            return string;
-        }
-    }
-
-    /**
-     * @since 2.1
-     */
-    public String getAbbreviatedTitle() {
-        return MediaObjects.getTitle(titles, TextualType.ABBREVIATION);
-    }
-
+    @Override
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -1032,6 +965,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return sorted(descriptions);
     }
 
+    @Override
     public void setDescriptions(SortedSet<Description> descriptions) {
         this.descriptions = descriptions;
         for (Description d : descriptions) {
@@ -1039,6 +973,7 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         }
     }
 
+    @Override
     public MediaObject addDescription(Description description) {
         if (description != null) {
             description.setParent(this);
@@ -1052,89 +987,13 @@ public abstract class MediaObject extends PublishableObject implements NicamRate
         return this;
     }
 
+    @Override
     public boolean removeDescription(Description description) {
         if (descriptions == null) {
             return false;
         }
 
         return descriptions.remove(description);
-    }
-
-    public boolean removeDescription(OwnerType owner, TextualType type) {
-        return removeDescription(new Description("", owner, type));
-    }
-
-    public MediaObject removeDescriptionsForOwner(OwnerType owner) {
-        if (descriptions != null) {
-
-            descriptions.removeIf(description -> description.getOwner().equals(owner));
-        }
-        return this;
-    }
-
-    public Description findDescription(TextualType type) {
-        if (descriptions != null) {
-            for (Description description : descriptions) {
-                if (type == description.getType()) {
-                    return description;
-                }
-            }
-        }
-        return null;
-    }
-
-    public Description findDescription(OwnerType owner, TextualType type) {
-        if (descriptions != null) {
-            for (Description description : descriptions) {
-                if (owner == description.getOwner()
-                    && type == description.getType()) {
-                    return description;
-                }
-            }
-        }
-        return null;
-    }
-
-    public MediaObject addDescription(String description, OwnerType owner,
-                                      TextualType type) {
-        final Description existingDescription = findDescription(owner, type);
-
-        if (existingDescription != null) {
-            existingDescription.setDescription(description);
-        } else {
-            this.addDescription(new Description(description, owner, type));
-        }
-
-        return this;
-    }
-
-    public String getMainDescription() {
-        if (descriptions != null && descriptions.size() > 0) {
-            return sorted(descriptions).first().getDescription();
-        }
-        return null;
-    }
-
-    public String getSubDescription() {
-        if (descriptions != null) {
-            for (Description description : descriptions) {
-                if (description.getType().equals(TextualType.SUB)) {
-                    return description.getDescription();
-                }
-            }
-        }
-        return null;
-    }
-
-    public String getShortDescription() {
-        if (descriptions != null) {
-            for (Description description : sorted(descriptions)) {
-                if (description.getType().equals(TextualType.SHORT)) {
-                    return description.getDescription();
-                }
-            }
-        }
-        return null;
     }
 
     @XmlElement(name = "genre")
