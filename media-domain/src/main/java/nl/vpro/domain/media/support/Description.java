@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 
+import nl.vpro.domain.OwnedText;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.validation.NoHtml;
@@ -28,7 +29,7 @@ import nl.vpro.validation.NoHtml;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "descriptionType", namespace = Xmlns.MEDIA_NAMESPACE,
          propOrder = {"description"})
-public class Description implements Ownable, Typable<TextualType>, Comparable<Description>, Serializable {
+public class Description implements OwnedText, Comparable<Description>, Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -71,6 +72,17 @@ public class Description implements Ownable, Typable<TextualType>, Comparable<De
 
     public Description(Description source) {
         this(source, source.parent);
+    }
+
+    @Override
+    public String get() {
+        return getDescription();
+    }
+
+    @Override
+    public void set(String s) {
+        setDescription(s);
+
     }
 
     public <S extends MediaObject> Description(Description source, MediaObject parent) {

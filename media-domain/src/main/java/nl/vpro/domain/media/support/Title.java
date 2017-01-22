@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import nl.vpro.domain.OwnedText;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.validation.NoHtml;
@@ -50,7 +51,7 @@ import nl.vpro.validation.NoHtml;
             "title"
     })
 @ToString(exclude = "parent")
-public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, Serializable {
+public class Title implements OwnedText, Comparable<Title>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -112,14 +113,13 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
     }
 
     public static Title copy(Title source){
-        return copy(source, source.parent);
+        return source == null ? null : copy(source, source.parent);
     }
 
     public static Title copy(Title source, MediaObject parent){
         if(source == null) {
             return null;
         }
-
         return new Title(source, parent);
     }
 
@@ -145,6 +145,18 @@ public class Title implements Ownable, Typable<TextualType>, Comparable<Title>, 
 
     public Title() {
     }
+
+    @Override
+    public String get() {
+        return getTitle();
+    }
+
+    @Override
+    public void set(String s) {
+        setTitle(s);
+
+    }
+
 
     public void crop() {
         crop(0, 255);
