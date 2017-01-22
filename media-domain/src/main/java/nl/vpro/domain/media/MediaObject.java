@@ -996,6 +996,20 @@ public abstract class MediaObject extends PublishableObject
         return descriptions.remove(description);
     }
 
+    @Override
+    public MediaObject addDescription(String description, OwnerType owner,
+                                         TextualType type) {
+        final Description existingDescription = findDescription(owner, type);
+
+        if (existingDescription != null) {
+            existingDescription.set(description);
+        } else {
+            this.addDescription(new Description(description, owner, type));
+        }
+
+        return this;
+    }
+
     @XmlElement(name = "genre")
     @JsonProperty("genres")
     @JsonSerialize(using = BackwardsCompatibility.GenreSortedSet.Serializer.class)
