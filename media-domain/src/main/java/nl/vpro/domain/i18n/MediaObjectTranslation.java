@@ -6,8 +6,10 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.LocalizedObject;
@@ -23,6 +25,8 @@ import static nl.vpro.domain.TextualObjects.sorted;
  * @since 5.1
  */
 @Entity
+@XmlRootElement(name = "media")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class MediaObjectTranslation implements LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, TwitterRefTranslation, MediaObjectTranslation>, Identifiable<Long> {
 
     @Id
@@ -45,24 +49,38 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
         @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}"),
     })
     @Valid
+    @XmlElement(name = "title", required = true)
+    @JsonProperty("titles")
     protected Set<TitleTranslation> titles = new TreeSet<>();
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
     @Valid
+    @XmlElement(name = "description", required = true)
+    @JsonProperty("descriptions")
     protected Set<DescriptionTranslation> descriptions = new TreeSet<>();
 
     @ManyToMany
     @Valid
     @JoinTable
+    @XmlElement(name = "tag")
+    @JsonProperty("tags")
     protected Set<Tag> tags = new TreeSet<>();
 
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn
+    @OrderColumn(name = "list_index")
+    @XmlElement(name = "website")
+    @JsonProperty("websites")
     protected List<WebsiteTranslation> websites = new ArrayList<>();
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @JoinColumn
+    @OrderColumn(name = "list_index")
     @Valid
+    @XmlElement(name = "twitter")
+    @JsonProperty("twitter")
     protected List<TwitterRefTranslation> twitterRefs = new ArrayList<>();
 
     public MediaObjectTranslation(String mid, Locale locale) {
@@ -74,6 +92,7 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     }
 
 
+    @Override
     public Locale getLanguage() {
         return language;
 
