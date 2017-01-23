@@ -56,7 +56,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
 
 
     public <S extends MediaObject> Description(Description source, MediaObject parent) {
-        this(source.getDescription(), source.getOwner(), source.getType());
+        this(source.get(), source.getOwner(), source.getType());
         this.parent = parent;
     }
 
@@ -91,6 +91,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return s.replaceAll("[\f\\u0085\\u2028\\u2029  ]", "\n");
     }
 
+    @XmlTransient
     public MediaObject getParent() {
         return parent;
     }
