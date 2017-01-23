@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import java.io.*;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
@@ -119,8 +120,6 @@ public class SchemaTest {
         Diff diff = new Diff(new InputSource(control), new InputSource(new FileInputStream(file)));
 
         assertXMLIdentical(diff, true);
-        /*SchemaFactory factory = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        return factory.newSchema(new StreamSource(getClass().getResourceAsStream("/schema/" + file.getName())));*/
         return null;
     }
 
@@ -129,6 +128,9 @@ public class SchemaTest {
         context.generateSchema(new SchemaOutputResolver() {
             @Override
             public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+                if (XMLConstants.XML_NS_URI.equals(namespaceUri)) {
+                    return null;
+                }
                 File f = getFile(namespaceUri);
                 if (f.exists()) {
                     f = File.createTempFile(namespaceUri, "");

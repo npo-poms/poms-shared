@@ -3,6 +3,8 @@
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
 
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
   <xs:element name="group" type="groupType"/>
 
   <xs:element name="mediaInformation" type="mediaTableType"/>
@@ -185,7 +187,7 @@
   <xs:complexType name="descriptionType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
+        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
         <xs:attribute name="type" type="textualTypeEnum"/>
       </xs:extension>
     </xs:simpleContent>
@@ -202,9 +204,13 @@
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
 
-  <xs:simpleType name="tagType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
+  <xs:complexType name="tagType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute ref="xml:lang"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:complexType name="countryType">
     <xs:simpleContent>
