@@ -1,8 +1,8 @@
 package nl.vpro.domain.i18n;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 
-import nl.vpro.domain.AbstractOwnedText;
+import nl.vpro.domain.AbstractOwnedTextEntity;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
@@ -11,42 +11,12 @@ import nl.vpro.domain.media.support.TextualType;
  * @since 5.1
  */
 @Entity
-public class TitleTranslation extends AbstractOwnedText<TitleTranslation> {
-
-    @ManyToOne
-    private MediaObjectTranslation parent;
-
-    @Id
-    @GeneratedValue
-    private Long id;
+public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, MediaObjectTranslation> {
 
     public TitleTranslation(String title, OwnerType owner, TextualType type) {
         super(title, owner, type);
     }
 
     public TitleTranslation() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public MediaObjectTranslation getParent() {
-        return parent;
-    }
-
-    public void setParent(MediaObjectTranslation parent) {
-        this.parent = parent;
-    }
-
-    @Override
-    @Column(name = "value")
-    public String get() {
-        return super.get();
-
     }
 }

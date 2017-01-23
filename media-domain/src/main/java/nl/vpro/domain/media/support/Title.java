@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import nl.vpro.domain.AbstractOwnedText;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
@@ -43,10 +45,10 @@ import nl.vpro.validation.NoHtml;
  */
 @Entity
 @Cacheable
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "titleType", namespace = Xmlns.MEDIA_NAMESPACE,
     propOrder = {
-            "title"
+
     })
 @ToString(exclude = "parent")
 public class Title extends AbstractOwnedText<Title> implements  Serializable {
@@ -58,8 +60,21 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable {
     @XmlTransient
     private Long id;
 
+    @Column(nullable = false)
+    @NotNull(message = "{nl.vpro.constraints.NotNull}")
+    @Size.List({
+        @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
+        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
+    })
+    @NoHtml
+    @JsonProperty("value")
+    @XmlValue
+    protected String title;
+
     @ManyToOne
     protected MediaObject parent;
+
+
 
     /**
      * Creates a new <code>Title</code> with a length of 256 characters.
@@ -73,10 +88,8 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable {
      * characters which is the default.
      */
     public Title(String title, OwnerType owner, TextualType type, boolean crop) {
-        this.value = strip(title);
-        this.owner = owner;
-        this.type = type;
-
+        super(owner, type);
+        this.title = strip(title);
         if (crop) {
             this.crop();
         }
@@ -87,7 +100,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable {
     }
 
     public Title(Title source, MediaObject parent) {
-        this(source.value, source.owner, source.type);
+        this(source.get(), source.owner, source.type);
         this.parent = parent;
     }
 
@@ -134,40 +147,42 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable {
     }
 
     public void crop(int start, int stop) {
-        if (value == null) {
+        if (title == null) {
             return;
         }
         if (start < 0) {
             start = 0;
         }
 
-        if (value.length() < stop) {
-            stop = value.length();
+        if (title.length() < stop) {
+            stop = title.length();
         }
 
-        value = value.substring(start, stop);
+        title = title.substring(start, stop);
     }
 
     public Long getId() {
         return id;
     }
 
-    @XmlValue
-    @Column(nullable = false)
-    @NotNull(message = "{nl.vpro.constraints.NotNull}")
-    @Size.List({
-        @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
-        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
-    })
-    @NoHtml
     public String getTitle() {
-        return get();
+        return title;
     }
 
     public void setTitle(String title) {
-        set(strip(title));
+        this.title = strip(title);
         crop();
     }
+
+    @Override
+    public String get() {
+        return getTitle();
+    }
+    @Override
+    public void set(String s) {
+        setTitle(s);
+    }
+
 
     protected static String strip(String s) {
         if (s == null){
