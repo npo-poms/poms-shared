@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -18,6 +20,7 @@ import org.xml.sax.SAXException;
  * @author Michiel Meeuwissen
  * @since 1.5
  */
+@Slf4j
 public final class Xmlns {
     public static final String MEDIA_NAMESPACE = "urn:vpro:media:2009";
     public static final URL    MEDIA_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/vproMedia.xsd");
@@ -57,13 +60,15 @@ public final class Xmlns {
 
     public static final String MEDIA_I18N_NAMESPACE = "urn:vpro:media:i18n:2017";
 
+    public static final URL XML_XSD = Xmlns.class.getResource("/nl/vpro/domain/xml.xsd");
+
 
     public static final Schema SCHEMA;
 
     static {
         try {
             SCHEMA = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI)
-                .newSchema(getStreamSources(SHARED_XSD, MEDIA_XSD, UPDATE_XSD, SEARCH_XSD));
+                .newSchema(getStreamSources(XML_XSD, SHARED_XSD, MEDIA_XSD, UPDATE_XSD, SEARCH_XSD));
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
@@ -78,6 +83,8 @@ public final class Xmlns {
                     System.err.println(ioe.getMessage());
 
                 }
+            } else {
+                log.error("Null url");
             }
         }
         return result.toArray(new StreamSource[result.size()]);
@@ -85,6 +92,7 @@ public final class Xmlns {
     }
 
     public static void fillLocationsAtPoms(Map<String, URI> map, String pomsLocation) {
+        //map.put(XMLConstants.XML_NS_URI, URI.create(pomsLocation + "schema/xml.xsd"));
         map.put(MEDIA_NAMESPACE, URI.create(pomsLocation + "schema/vproMedia.xsd"));
         map.put(SHARED_NAMESPACE, URI.create(pomsLocation + "schema/vproShared.xsd"));
         map.put(SEARCH_NAMESPACE, URI.create(pomsLocation + "schema/search/vproMediaSearch.xsd"));
