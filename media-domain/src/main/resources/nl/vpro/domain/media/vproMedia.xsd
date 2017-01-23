@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
            targetNamespace="urn:vpro:media:2009" xmlns="urn:vpro:media:2009"
-           xmlns:shared="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+           xmlns:shared="urn:vpro:shared:2009"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="vproShared.xsd"/>
 
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
 
   <xs:annotation>
     <xs:documentation>This is the XSD for the POMS domain.</xs:documentation>
