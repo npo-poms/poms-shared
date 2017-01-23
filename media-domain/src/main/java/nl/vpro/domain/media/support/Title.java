@@ -11,6 +11,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.AbstractOwnedText;
 import nl.vpro.domain.Xmlns;
@@ -46,10 +47,8 @@ import nl.vpro.validation.NoHtml;
 @Entity
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "titleType", namespace = Xmlns.MEDIA_NAMESPACE,
-    propOrder = {
-
-    })
+@XmlType(name = "titleType", namespace = Xmlns.MEDIA_NAMESPACE)
+@JsonPropertyOrder({"value", "owner", "type"})
 @ToString(exclude = "parent")
 public class Title extends AbstractOwnedText<Title> implements  Serializable {
 
