@@ -74,7 +74,11 @@ public class MediaObjectXmlSchemaTest {
         SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
         Schema schema = null;
         try {
-            schema = factory.newSchema(new Source[]{new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproShared.xsd")), new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"))});
+            schema = factory.newSchema(new Source[]{
+                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/xml.xsd")),
+                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproShared.xsd")),
+                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"))}
+            );
             schemaValidator = schema.newValidator();
         } catch(SAXException e) {
             e.printStackTrace();
