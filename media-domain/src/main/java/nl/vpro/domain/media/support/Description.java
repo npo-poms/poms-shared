@@ -5,10 +5,14 @@ import lombok.ToString;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.Type;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.AbstractOwnedText;
 import nl.vpro.domain.Xmlns;
@@ -25,10 +29,12 @@ import nl.vpro.validation.NoHtml;
  */
 @Entity
 @nl.vpro.validation.Description
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "descriptionType",
     namespace = Xmlns.MEDIA_NAMESPACE,
-    propOrder = {"description"}
+    propOrder = {
+
+    }
     )
 @ToString(exclude = "parent")
 public class Description extends AbstractOwnedText<Description> implements Serializable {
@@ -39,16 +45,26 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     @XmlTransient
     private Long id;
 
+    @Column(name = "description", nullable = false)
+    @Lob
+    @Type(type = "org.hibernate.type.StringType")
+    @NotNull(message = "description not set")
+    @NoHtml
+    @XmlValue
+    @JsonProperty("value")
+    @Size(min = 1)
+    protected String description;
 
-    @ManyToOne(targetEntity = MediaObject.class)
     @XmlTransient
+    @ManyToOne(targetEntity = MediaObject.class)
     protected MediaObject parent;
 
     public Description() {
     }
 
     public Description(String description, OwnerType owner, TextualType type) {
-        super(description, owner, type);
+        super(owner, type);
+        this.description = description;
     }
 
     public Description(Description source) {
@@ -73,17 +89,21 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return new Description(source, parent);
     }
 
-    @XmlValue
-    @Column(name = "description", nullable = false)
-    @Lob
-    @Type(type = "org.hibernate.type.StringType")
-    @NoHtml
     public String getDescription() {
-        return get();
+        return description;
     }
 
     public void setDescription(String description) {
-        set(description);
+        this.description = strip(description);
+    }
+
+    @Override
+    public String get() {
+        return getDescription();
+    }
+    @Override
+    public void set(String s) {
+        setDescription(s);
     }
 
     protected static String strip(String s) {
@@ -100,6 +120,14 @@ public class Description extends AbstractOwnedText<Description> implements Seria
 
     public void setParent(MediaObject parent) {
         this.parent = parent;
+    }
+
+    protected Long getId() {
+        return id;
+    }
+
+    protected void setId(Long id) {
+        this.id = id;
     }
 
     @Override
