@@ -6,6 +6,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,6 +19,7 @@ import nl.vpro.validation.NoHtml;
  * @since 5.1
  */
 @MappedSuperclass
+@XmlTransient
 public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Comparable<T> {
 
     @NoHtml

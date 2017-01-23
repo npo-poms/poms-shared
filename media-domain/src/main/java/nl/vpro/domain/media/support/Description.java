@@ -5,19 +5,14 @@ import lombok.ToString;
 import java.io.Serializable;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Type;
 
 import nl.vpro.domain.AbstractOwnedText;
-import nl.vpro.domain.OwnedText;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
-import nl.vpro.validation.NoHtml;
 
 /**
  * A {@link MediaObject} can have more than one description which should differ in type and
@@ -29,9 +24,11 @@ import nl.vpro.validation.NoHtml;
  */
 @Entity
 @nl.vpro.validation.Description
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "descriptionType", namespace = Xmlns.MEDIA_NAMESPACE,
-         propOrder = {"description"})
+@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlType(name = "descriptionType",
+    namespace = Xmlns.MEDIA_NAMESPACE,
+    propOrder = {"description"}
+    )
 @ToString(exclude = "parent")
 public class Description extends AbstractOwnedText<Description> implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -57,16 +54,6 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         this(source, source.parent);
     }
 
-    @Override
-    public String get() {
-        return getDescription();
-    }
-
-    @Override
-    public void set(String s) {
-        setDescription(s);
-
-    }
 
     public <S extends MediaObject> Description(Description source, MediaObject parent) {
         this(source.getDescription(), source.getOwner(), source.getType());
@@ -85,6 +72,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return new Description(source, parent);
     }
 
+    @XmlValue
     @Column(name = "description", nullable = false)
     @Lob
     @Type(type = "org.hibernate.type.StringType")
@@ -101,26 +89,6 @@ public class Description extends AbstractOwnedText<Description> implements Seria
             return null;
         }
         return s.replaceAll("[\f\\u0085\\u2028\\u2029  ]", "\n");
-    }
-
-    @Override
-    public OwnerType getOwner() {
-        return owner;
-    }
-
-    @Override
-    public void setOwner(OwnerType value) {
-        this.owner = value;
-    }
-
-    @Override
-    public TextualType getType() {
-        return type;
-    }
-
-    @Override
-    public void setType(TextualType value) {
-        this.type = value;
     }
 
     public MediaObject getParent() {
