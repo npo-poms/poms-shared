@@ -20,18 +20,19 @@ import nl.vpro.domain.media.support.TextualType;
 public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Comparable<T> {
 
 
-
-    protected String value;
-
-
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @XmlAttribute
     protected OwnerType owner = OwnerType.BROADCASTER;
 
-
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{nl.vpro.constraints.NotNull}")
+    @XmlAttribute
     protected TextualType type;
 
 
-    public AbstractOwnedText(String title, OwnerType owner, TextualType type) {
-        this.value = title;
+    protected AbstractOwnedText(OwnerType owner, TextualType type) {
         this.owner = owner;
         this.type = type;
     }
@@ -40,10 +41,6 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
     }
 
     @Override
-    @XmlAttribute
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = "{nl.vpro.constraints.NotNull}")
     public TextualType getType() {
         return type;
 
@@ -55,9 +52,6 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
     }
 
     @Override
-    @XmlAttribute
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     public OwnerType getOwner() {
         return owner;
 
@@ -69,22 +63,12 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
 
     }
 
-    @Override
-    public String get() {
-        return value;
-    }
-
-    @Override
-    public void set(String s) {
-        this.value = s;
-
-    }
-
 
 
     @Override
     public int hashCode() {
-        int result = value != null ? value .hashCode() : 0;
+        String value = get();
+        int result = value != null ? value.hashCode() : 0;
         result = 31 * result + (owner != null ? owner.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
