@@ -13,6 +13,7 @@ import org.hibernate.annotations.Type;
 import nl.vpro.domain.AbstractOwnedText;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.validation.NoHtml;
 
 /**
  * A {@link MediaObject} can have more than one description which should differ in type and
@@ -76,6 +77,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     @Column(name = "description", nullable = false)
     @Lob
     @Type(type = "org.hibernate.type.StringType")
+    @NoHtml
     public String getDescription() {
         return get();
     }
