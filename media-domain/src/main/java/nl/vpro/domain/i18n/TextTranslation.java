@@ -20,9 +20,8 @@ public class TextTranslation<P>  implements Supplier<String> {
     @NoHtml
     protected String value;
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @XmlTransient
     private Long id;
 
