@@ -922,6 +922,8 @@ public abstract class MediaObject extends PublishableObject
         return this;
     }
 
+
+
     @Override
     public boolean removeTitle(Title title) {
         if (titles == null) {
@@ -1008,6 +1010,31 @@ public abstract class MediaObject extends PublishableObject
         }
 
         return this;
+    }
+
+
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     */
+    @Override
+    public String getMainTitle() {
+        return TextualObject.super.getMainTitle();
+    }
+
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     */
+    @Override
+    public String getSubTitle() {
+        return TextualObject.super.getMainTitle();
+    }
+
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     */
+    @Override
+    public String getMainDescription() {
+        return TextualObject.super.getMainDescription();
     }
 
     @XmlElement(name = "genre")
