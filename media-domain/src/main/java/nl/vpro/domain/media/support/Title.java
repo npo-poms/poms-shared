@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
 import nl.vpro.domain.AbstractOwnedText;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.validation.NoHtml;
 
 /**
  * A {@link MediaObject} can have more than one title which should differ in type and
@@ -158,6 +159,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable {
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
+    @NoHtml
     public String getTitle() {
         return get();
     }
