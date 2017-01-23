@@ -8,11 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.validation.NoHtml;
 
 /**
  * @author Michiel Meeuwissen
@@ -22,17 +19,14 @@ import nl.vpro.validation.NoHtml;
 @XmlTransient
 public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Comparable<T> {
 
-    @NoHtml
-    @JsonProperty("value")
+
+
     protected String value;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+
     protected OwnerType owner = OwnerType.BROADCASTER;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = "{nl.vpro.constraints.NotNull}")
+
     protected TextualType type;
 
 
@@ -47,6 +41,9 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
 
     @Override
     @XmlAttribute
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "{nl.vpro.constraints.NotNull}")
     public TextualType getType() {
         return type;
 
@@ -59,6 +56,8 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
 
     @Override
     @XmlAttribute
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     public OwnerType getOwner() {
         return owner;
 
