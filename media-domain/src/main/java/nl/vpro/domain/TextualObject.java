@@ -20,11 +20,23 @@ public interface TextualObject<T extends OwnedText, D extends OwnedText, TO exte
         return Locales.DUTCH;
     }
 
-    boolean hasTitles();
     SortedSet<T> getTitles();
+
     void setTitles(SortedSet<T> titles);
-    TO addTitle(T title);
-    boolean removeTitle(T title);
+
+    TO addTitle(String title, OwnerType owner, TextualType type);
+
+    default boolean hasTitles() {
+        return getTitles() != null && getTitles().size() > 0;
+    }
+
+    default TO addTitle(T title) {
+        getTitles().add(title);
+        return self();
+    }
+    default boolean removeTitle(T title) {
+        return getTitles().remove(title);
+    }
 
     default TO self() {
         return (TO) this;
@@ -67,7 +79,6 @@ public interface TextualObject<T extends OwnedText, D extends OwnedText, TO exte
         return null;
     }
 
-    TO addTitle(String title, OwnerType owner, TextualType type);
 
 
     default String getMainTitle() {
@@ -117,13 +128,22 @@ public interface TextualObject<T extends OwnedText, D extends OwnedText, TO exte
         return TextualObjects.get(getTitles(), TextualType.ABBREVIATION);
     }
 
-
-    boolean hasDescriptions();
     SortedSet<D> getDescriptions();
     void setDescriptions(SortedSet<D> descriptions);
-    TextualObject addDescription(D description);
-    boolean removeDescription(D description);
 
+    TO addDescription(String description, OwnerType owner, TextualType type);
+
+    default boolean hasDescriptions() {
+        return getDescriptions() != null && getDescriptions().size() > 0;
+    }
+
+    default TextualObject addDescription(D description) {
+        getDescriptions().add(description);
+        return self();
+    }
+    default boolean removeDescription(D description) {
+        return getDescriptions().remove(description);
+    }
 
     default boolean removeDescription(OwnerType owner, TextualType type) {
         if (hasDescriptions()) {
@@ -164,7 +184,6 @@ public interface TextualObject<T extends OwnedText, D extends OwnedText, TO exte
         return null;
     }
 
-    TO addDescription(String description, OwnerType owner, TextualType type);
 
     default String getMainDescription() {
         if (hasDescriptions()) {
@@ -194,5 +213,7 @@ public interface TextualObject<T extends OwnedText, D extends OwnedText, TO exte
         }
         return null;
     }
+
+
 
 }

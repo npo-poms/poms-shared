@@ -54,6 +54,8 @@ import nl.vpro.validation.Language;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 
+import static nl.vpro.domain.TextualObjects.sorted;
+
 /**
  * Base objects for programs and groups
  *
@@ -2645,17 +2647,6 @@ public abstract class MediaObject extends PublishableObject
         }
     }
 
-    protected static <S> SortedSet<S> sorted(Set<S> set) {
-        if (set == null) {
-            return null;
-        }
-        if (set instanceof SortedSet) {
-            //noinspection unchecked
-            return (SortedSet) set;
-        } else {
-            return new ResortedSortedSet<S>(set);
-        }
-    }
 
     @Override
     protected abstract String getUrnPrefix();

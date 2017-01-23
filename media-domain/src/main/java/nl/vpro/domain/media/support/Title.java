@@ -10,12 +10,9 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import nl.vpro.domain.OwnedText;
+import nl.vpro.domain.AbstractOwnedText;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
-import nl.vpro.validation.NoHtml;
 
 /**
  * A {@link MediaObject} can have more than one title which should differ in type and
@@ -51,7 +48,7 @@ import nl.vpro.validation.NoHtml;
             "title"
     })
 @ToString(exclude = "parent")
-public class Title implements OwnedText, Comparable<Title>, Serializable {
+public class Title extends AbstractOwnedText<Title> implements  Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -59,25 +56,6 @@ public class Title implements OwnedText, Comparable<Title>, Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient
     private Long id;
-
-    @Column(nullable = false)
-    @NotNull(message = "{nl.vpro.constraints.NotNull}")
-    @Size.List({
-        @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
-        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
-    })
-    @NoHtml
-    @JsonProperty("value")
-    protected String title;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    protected OwnerType owner = OwnerType.BROADCASTER;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    @NotNull(message = "{nl.vpro.constraints.NotNull}")
-    protected TextualType type;
 
     @ManyToOne
     protected MediaObject parent;
@@ -94,7 +72,7 @@ public class Title implements OwnedText, Comparable<Title>, Serializable {
      * characters which is the default.
      */
     public Title(String title, OwnerType owner, TextualType type, boolean crop) {
-        this.title = strip(title);
+        this.value = strip(title);
         this.owner = owner;
         this.type = type;
 
@@ -108,7 +86,7 @@ public class Title implements OwnedText, Comparable<Title>, Serializable {
     }
 
     public Title(Title source, MediaObject parent) {
-        this(source.title, source.owner, source.type);
+        this(source.value, source.owner, source.type);
         this.parent = parent;
     }
 
@@ -146,18 +124,6 @@ public class Title implements OwnedText, Comparable<Title>, Serializable {
     public Title() {
     }
 
-    @Override
-    public String get() {
-        return getTitle();
-    }
-
-    @Override
-    public void set(String s) {
-        setTitle(s);
-
-    }
-
-
     public void crop() {
         crop(0, 255);
     }
@@ -167,18 +133,18 @@ public class Title implements OwnedText, Comparable<Title>, Serializable {
     }
 
     public void crop(int start, int stop) {
-        if (title == null) {
+        if (value == null) {
             return;
         }
         if (start < 0) {
             start = 0;
         }
 
-        if (title.length() < stop) {
-            stop = title.length();
+        if (value.length() < stop) {
+            stop = value.length();
         }
 
-        title = title.substring(start, stop);
+        value = value.substring(start, stop);
     }
 
     public Long getId() {
@@ -186,12 +152,18 @@ public class Title implements OwnedText, Comparable<Title>, Serializable {
     }
 
     @XmlValue
+    @Column(nullable = false)
+    @NotNull(message = "{nl.vpro.constraints.NotNull}")
+    @Size.List({
+        @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
+        @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
+    })
     public String getTitle() {
-        return title;
+        return get();
     }
 
     public void setTitle(String title) {
-        this.title = strip(title);
+        set(strip(title));
         crop();
     }
 
@@ -202,27 +174,7 @@ public class Title implements OwnedText, Comparable<Title>, Serializable {
         return s.replaceAll("[\f\\u0085\\u2028\\u2029  ]", " ");
     }
 
-    @XmlAttribute
-    @Override
-    public OwnerType getOwner() {
-        return owner;
-    }
 
-    @Override
-    public void setOwner(OwnerType value) {
-        this.owner = value;
-    }
-
-    @Override
-    @XmlAttribute
-    public TextualType getType() {
-        return type;
-    }
-
-    @Override
-    public void setType(TextualType value) {
-        this.type = value;
-    }
 
     @XmlTransient
     public MediaObject getParent() {
@@ -250,25 +202,6 @@ public class Title implements OwnedText, Comparable<Title>, Serializable {
         }
 
         return owner == tit.getOwner() && type == tit.getType() && parent.equals(tit.getParent());
-    }
-
-    @Override
-    public int hashCode() {
-        int result = title != null ? title.hashCode() : 0;
-        result = 31 * result + (owner != null ? owner.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public int compareTo(Title o) {
-        if (o == null) {
-            return -1;
-        }
-        if (type != null && type.equals(o.getType()) && owner != null && o.getOwner() != null) {
-            return owner.ordinal() - o.getOwner().ordinal();
-        }
-        return (type == null ? -1 : type.ordinal()) - (o.getType() == null ? -1 : o.getType().ordinal());
     }
 
 

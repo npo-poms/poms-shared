@@ -23,6 +23,8 @@ import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.validation.Broadcast;
 
+import static nl.vpro.domain.TextualObjects.sorted;
+
 /**
  * The main feature that distinguishes a Program from a generic media entity is its ability
  * to become an episode of other media entities. This association type is a functional
