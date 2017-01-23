@@ -13,6 +13,7 @@ import nl.vpro.domain.media.support.TextualType;
  */
 public class TextualObjects {
 
+    // some methods working on collections of 'OwnedText' objects (think of titles and descriptions)
 
     public static <OT extends OwnedText> String get(Collection<OT> titles, TextualType... types) {
         return get(titles, "", types);
@@ -59,8 +60,9 @@ public class TextualObjects {
         return returnValue;
     }
 
+    // some methods working TextualObjects themselves.
 
-    public static <T extends OwnedText, D extends OwnedText, DT extends TextualObject<T, D, DT>>  OwnerType[] findOwnersForTextFields(DT media) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>>  OwnerType[] findOwnersForTextFields(TO media) {
         SortedSet<OwnerType> result = new TreeSet<>();
         for (T title : media.getTitles()) {
             result.add(title.getOwner());
@@ -72,15 +74,15 @@ public class TextualObjects {
     }
 
 
-    public static <T extends OwnedText, D extends OwnedText, DT extends TextualObject<T, D, DT>> String getTitle(DT media, OwnerType owner, TextualType type) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getTitle(TO media, OwnerType owner, TextualType type) {
         return get(media.getTitles(), owner, type);
     }
 
-    public static <T extends OwnedText, D extends OwnedText, DT extends TextualObject<T, D, DT>> String getDescription(DT media, OwnerType owner, TextualType type) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, OwnerType owner, TextualType type) {
         return get(media.getDescriptions(), owner, type);
     }
 
-    public static <T extends OwnedText, D extends OwnedText, DT extends TextualObject<T, D, DT>> String getDescription(DT media, TextualType... types) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, TextualType... types) {
         return get(media.getDescriptions(), types);
     }
 
@@ -88,7 +90,7 @@ public class TextualObjects {
     /**
      * Sets the owner of all titles, descriptions, locations and images found in given MediaObject
      */
-    public static <T extends OwnedText, D extends OwnedText, DT extends TextualObject<T, D, DT>> void forOwner(DT media, OwnerType owner) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> void forOwner(TO media, OwnerType owner) {
         for (T title : media.getTitles()) {
             title.setOwner(owner);
         }
