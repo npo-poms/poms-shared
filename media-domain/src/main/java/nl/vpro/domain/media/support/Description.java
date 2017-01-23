@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.AbstractOwnedText;
 import nl.vpro.domain.Xmlns;
@@ -31,11 +32,9 @@ import nl.vpro.validation.NoHtml;
 @nl.vpro.validation.Description
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "descriptionType",
-    namespace = Xmlns.MEDIA_NAMESPACE,
-    propOrder = {
+    namespace = Xmlns.MEDIA_NAMESPACE)
+@JsonPropertyOrder({"value", "owner", "type"})
 
-    }
-    )
 @ToString(exclude = "parent")
 public class Description extends AbstractOwnedText<Description> implements Serializable {
     private static final long serialVersionUID = 1L;
