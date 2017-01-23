@@ -5,12 +5,16 @@ import java.util.*;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.LocalizedObject;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.xml.bind.LocaleAdapter;
 
 import static nl.vpro.domain.TextualObjects.sorted;
 
@@ -23,13 +27,17 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
 
     @Id
     @GeneratedValue
+    @XmlAttribute
     protected Long id;
 
     @Column
+    @XmlAttribute
     protected String mid;
 
     @Column
-    protected Locale locale;
+    @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
+    @XmlJavaTypeAdapter(LocaleAdapter.class)
+    protected Locale language;
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
@@ -59,20 +67,19 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
 
     public MediaObjectTranslation(String mid, Locale locale) {
         this.mid = mid;
-        this.locale = locale;
+        this.language = locale;
     }
 
     public MediaObjectTranslation() {
     }
 
 
-    @Override
-    public Locale getLocale() {
-        return locale;
+    public Locale getLanguage() {
+        return language;
 
     }
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public void setLanguage(Locale language) {
+        this.language = language;
 
     }
 

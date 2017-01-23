@@ -16,7 +16,7 @@ import nl.vpro.i18n.Locales;
  */
 public interface TextualObject<T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> {
 
-    default Locale getLocale() {
+    default Locale getLanguage() {
         return Locales.DUTCH;
     }
 

@@ -1,21 +1,23 @@
 package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import nl.vpro.domain.Xmlns;
+import nl.vpro.i18n.Locales;
 import nl.vpro.validation.NoHtml;
+import nl.vpro.xml.bind.LocaleAdapter;
 
 @Entity
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -33,6 +35,9 @@ public class Tag implements Serializable, Comparable<Tag> {
     @NoHtml
     private String text;
 
+    @Column
+    private Locale language = Locales.DUTCH;
+
     protected Tag() {
     }
 
@@ -48,6 +53,16 @@ public class Tag implements Serializable, Comparable<Tag> {
 
     public void setText(final String text) {
         this.text = text.trim();
+    }
+
+    @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
+    @XmlJavaTypeAdapter(LocaleAdapter.class)
+    public Locale getLanguage() {
+        return language == null || language.equals(Locales.DUTCH) ? null : language;
+    }
+
+    public void setLanguage(Locale locale) {
+        this.language = locale;
     }
 
     @Override
