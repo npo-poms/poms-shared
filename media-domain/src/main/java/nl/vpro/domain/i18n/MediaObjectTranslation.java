@@ -1,5 +1,7 @@
 package nl.vpro.domain.i18n;
 
+import lombok.Getter;
+
 import java.util.*;
 
 import javax.persistence.*;
@@ -32,15 +34,18 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @Id
     @GeneratedValue
     @XmlAttribute
+    @Getter
     protected Long id;
 
     @Column
     @XmlAttribute
+    @Getter
     protected String mid;
 
     @Column
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
+    @Getter
     protected Locale language;
 
 
@@ -69,14 +74,14 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
 
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn
+    @JoinColumn(name = "parent_id")
     @OrderColumn(name = "list_index")
     @XmlElement(name = "website")
     @JsonProperty("websites")
     protected List<WebsiteTranslation> websites = new ArrayList<>();
 
     @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
-    @JoinColumn
+    @JoinColumn(name = "parent_id")
     @OrderColumn(name = "list_index")
     @Valid
     @XmlElement(name = "twitter")
@@ -89,17 +94,6 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     }
 
     public MediaObjectTranslation() {
-    }
-
-
-    @Override
-    public Locale getLanguage() {
-        return language;
-
-    }
-    public void setLanguage(Locale language) {
-        this.language = language;
-
     }
 
 
@@ -163,12 +157,6 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
 
         return this;
 
-    }
-
-
-    @Override
-    public Long getId() {
-        return id;
     }
 
 
