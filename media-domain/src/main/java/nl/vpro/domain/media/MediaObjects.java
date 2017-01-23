@@ -22,7 +22,7 @@ import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
-import static nl.vpro.domain.media.MediaObject.sorted;
+import static nl.vpro.domain.TextualObjects.sorted;
 
 
 /**

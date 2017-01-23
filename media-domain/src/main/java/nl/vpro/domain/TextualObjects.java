@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.util.ResortedSortedSet;
 
 /**
  * @author Michiel Meeuwissen
@@ -101,6 +102,19 @@ public class TextualObjects {
 
     public static <T extends Ownable> List<T> filter(Collection<T> ownables, OwnerType owner) {
         return ownables.stream().filter(item -> item.getOwner() == owner).collect(Collectors.toList());
+    }
+
+
+    public static <S> SortedSet<S> sorted(Set<S> set) {
+        if (set == null) {
+            return null;
+        }
+        if (set instanceof SortedSet) {
+            //noinspection unchecked
+            return (SortedSet) set;
+        } else {
+            return new ResortedSortedSet<S>(set);
+        }
     }
 
 
