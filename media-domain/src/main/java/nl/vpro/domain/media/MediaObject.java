@@ -34,7 +34,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
-import nl.vpro.domain.TextualObject;
+import nl.vpro.domain.LocalizedObject;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
@@ -218,7 +218,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 
 @Slf4j
 public abstract class MediaObject extends PublishableObject
-    implements NicamRated, TextualObject<Title, Description, MediaObject> {
+    implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject> {
 
     @Column(name = "mid", nullable = false, unique = true)
     @Size.List({@Size(max = 255), @Size(min = 4)})
@@ -1020,7 +1020,7 @@ public abstract class MediaObject extends PublishableObject
      */
     @Override
     public String getMainTitle() {
-        return TextualObject.super.getMainTitle();
+        return LocalizedObject.super.getMainTitle();
     }
 
     /**
@@ -1028,7 +1028,7 @@ public abstract class MediaObject extends PublishableObject
      */
     @Override
     public String getSubTitle() {
-        return TextualObject.super.getMainTitle();
+        return LocalizedObject.super.getMainTitle();
     }
 
     /**
@@ -1036,7 +1036,7 @@ public abstract class MediaObject extends PublishableObject
      */
     @Override
     public String getMainDescription() {
-        return TextualObject.super.getMainDescription();
+        return LocalizedObject.super.getMainDescription();
     }
 
     @XmlElement(name = "genre")
@@ -1086,26 +1086,12 @@ public abstract class MediaObject extends PublishableObject
     /**
      * Consider using nl.vpro.domain.media.TagService#findOrCreate() first.
      */
+    @Override
     public void setTags(Set<Tag> tags) {
         this.tags = updateSortedSet(this.tags, tags);
     }
 
-    public MediaObject addTag(Tag tag) {
-        nullCheck(tag, "tag");
 
-        if (tags == null) {
-            tags = new TreeSet<>();
-        }
-
-        if (!tags.contains(tag)) {
-            tags.add(tag);
-        }
-        return this;
-    }
-
-    boolean removeTag(Tag tag) {
-        return tags != null && tags.remove(tag);
-    }
 
     @XmlElement
     public String getSource() {

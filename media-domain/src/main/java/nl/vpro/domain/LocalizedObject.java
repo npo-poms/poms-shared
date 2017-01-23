@@ -1,0 +1,114 @@
+package nl.vpro.domain;
+
+import java.util.*;
+import java.util.function.Supplier;
+
+import nl.vpro.domain.media.UpdatableIdentifiable;
+import nl.vpro.domain.media.Website;
+import nl.vpro.domain.media.support.Tag;
+
+/**
+ * @author Michiel Meeuwissen
+ * @since 5.1
+ */
+public interface LocalizedObject<T extends OwnedText, D extends OwnedText, WS extends Supplier<String> & UpdatableIdentifiable, TR extends Supplier<String>, TO extends LocalizedObject<T, D, WS, TR, TO>>  extends TextualObject<T, D, TO> {
+
+
+    SortedSet<Tag> getTags();
+    void setTags(Set<Tag> tags);
+    default TO addTag(Tag tag) {
+        getTags().add(tag);
+        return self();
+    }
+    default boolean removeTag(Tag  tag) {
+        SortedSet<Tag> tags = getTags();
+        return tags != null && tags.remove(tag);
+    }
+
+    List<WS> getWebsites();
+
+    TO setWebsites(List<WS> websites);
+
+    default WS getMainWebsite() {
+        return getWebsites().stream().findFirst().orElse(null);
+    }
+
+    default WS findWebsite(Long id) {
+        for (WS website : getWebsites()) {
+            if (id.equals(website.getId())) {
+                return website;
+            }
+        }
+        return null;
+    }
+
+    default WS findWebsite(Website website) {
+        List<WS > websites = getWebsites();
+        int index = websites.indexOf(website);
+        if (index >= 0) {
+            return websites.get(index);
+        }
+        return null;
+    }
+
+    default WS getWebsite(final Website website) {
+        for (WS existing : getWebsites()) {
+            if (existing.equals(website)) {
+                return existing;
+            }
+        }
+        return null;
+    }
+
+    default void addWebsite(final WS website) {
+        if (website != null) {
+            getWebsites().remove(website);
+            getWebsites().add(website);
+        }
+    }
+
+    default void addWebsite(int index, final WS website) {
+        if (website != null) {
+            List<WS> websites = getWebsites();
+            websites.remove(website);
+            if (index < websites.size()) {
+                websites.add(index, website);
+            } else {
+                websites.add(website);
+            }
+        }
+    }
+
+    default boolean removeWebsite(final Long id) {
+        for (Iterator<WS> iterator = getWebsites().iterator(); iterator.hasNext(); ) {
+            WS website = iterator.next();
+            if (id.equals(website.getId())) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    default boolean removeWebsite(final WS website) {
+        return getWebsites().remove(website);
+    }
+
+    List<TR> getTwitterRefs();
+
+    void setTwitterRefs(List<TR> twitterRefs);
+
+    default void addTwitterRef(TR ref) {
+        List<TR> twitterRefs = getTwitterRefs();
+
+        if (twitterRefs == null) {
+            twitterRefs = new ArrayList<>();
+        }
+
+        if (!twitterRefs.contains(ref)) {
+            twitterRefs.add(ref);
+        }
+    }
+
+
+}

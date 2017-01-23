@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import java.io.Serializable;
+import java.util.function.Supplier;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @nl.vpro.validation.TwitterRef
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "twitterRefType")
-public class TwitterRef implements Serializable {
+public class TwitterRef implements Serializable, Supplier<String> {
 
     public enum Type {
         ACCOUNT, HASHTAG
@@ -106,6 +107,13 @@ public class TwitterRef implements Serializable {
     @Override
     public String toString() {
         return value;
+    }
+
+
+    @Override
+    public String get() {
+        return value;
+
     }
 
     public static String getValueOrNull(TwitterRef ref) {

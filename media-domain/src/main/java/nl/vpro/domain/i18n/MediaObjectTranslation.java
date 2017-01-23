@@ -1,17 +1,15 @@
 package nl.vpro.domain.i18n;
 
-import java.util.Locale;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
 import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.TextualObject;
+import nl.vpro.domain.LocalizedObject;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 
 import static nl.vpro.domain.TextualObjects.sorted;
@@ -21,12 +19,11 @@ import static nl.vpro.domain.TextualObjects.sorted;
  * @since 5.1
  */
 @Entity
-public class MediaObjectTranslation implements TextualObject<TitleTranslation, DescriptionTranslation, MediaObjectTranslation>, Identifiable<Long> {
+public class MediaObjectTranslation implements LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, TwitterRefTranslation, MediaObjectTranslation>, Identifiable<Long> {
 
     @Id
     @GeneratedValue
     protected Long id;
-
 
     @Column
     protected String mid;
@@ -47,6 +44,18 @@ public class MediaObjectTranslation implements TextualObject<TitleTranslation, D
     @Valid
     protected Set<DescriptionTranslation> descriptions = new TreeSet<>();
 
+    @ManyToMany
+    @Valid
+    @JoinTable
+    protected Set<Tag> tags = new TreeSet<>();
+
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    protected List<WebsiteTranslation> websites = new ArrayList<>();
+
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
+    @Valid
+    protected List<TwitterRefTranslation> twitterRefs = new ArrayList<>();
 
     public MediaObjectTranslation(String mid, Locale locale) {
         this.mid = mid;
@@ -134,6 +143,41 @@ public class MediaObjectTranslation implements TextualObject<TitleTranslation, D
     @Override
     public Long getId() {
         return id;
+    }
 
+
+    @Override
+    public SortedSet<Tag> getTags() {
+        return sorted(tags);
+
+    }
+
+    @Override
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
+
+    @Override
+    public List<WebsiteTranslation> getWebsites() {
+        return websites;
+
+    }
+
+    @Override
+    public MediaObjectTranslation setWebsites(List<WebsiteTranslation> websites) {
+        this.websites = websites;
+        return self();
+
+    }
+
+    @Override
+    public List<TwitterRefTranslation> getTwitterRefs() {
+        return this.twitterRefs;
+
+    }
+
+    @Override
+    public void setTwitterRefs(List<TwitterRefTranslation> twitterRefs) {
+        this.twitterRefs = twitterRefs;
     }
 }
