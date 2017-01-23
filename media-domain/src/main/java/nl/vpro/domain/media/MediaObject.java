@@ -1028,7 +1028,7 @@ public abstract class MediaObject extends PublishableObject
      */
     @Override
     public String getSubTitle() {
-        return LocalizedObject.super.getMainTitle();
+        return LocalizedObject.super.getSubTitle();
     }
 
     /**
