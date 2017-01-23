@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import lombok.ToString;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,6 +17,7 @@ import nl.vpro.validation.NoHtml;
  * @since 5.1
  */
 @MappedSuperclass
+@ToString(exclude = {"parent"})
 public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity, P> extends AbstractOwnedText<T> {
 
     @Column(nullable = false)
