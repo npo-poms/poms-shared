@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import java.io.Serializable;
+import java.util.function.Supplier;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ import nl.vpro.validation.URI;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "websiteType")
-public class Website implements UpdatableIdentifiable<Long, Website>, Serializable {
+public class Website implements UpdatableIdentifiable<Long, Website>, Serializable, Supplier<String> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -132,6 +133,10 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         return id != null ? id.hashCode() : super.hashCode();
     }
 */
+    @Override
+    public String get() {
+        return url;
+    }
 
     @Override
     public String toString() {

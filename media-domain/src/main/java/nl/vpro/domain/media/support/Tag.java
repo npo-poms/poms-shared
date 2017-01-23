@@ -21,7 +21,7 @@ import nl.vpro.validation.NoHtml;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "tagType", namespace = Xmlns.MEDIA_NAMESPACE)
 public class Tag implements Serializable, Comparable<Tag> {
-    private static final long serialVersionUID = 0l;
+    private static final long serialVersionUID = 0L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,6 +57,12 @@ public class Tag implements Serializable, Comparable<Tag> {
 
     @Override
     public int compareTo(@NotNull Tag tag) {
+        if (text == null) {
+            if (tag.text == null) {
+                return 0;
+            }
+            return -1;
+        }
         int result = text.compareToIgnoreCase(tag.text);
         return result == 0 ? text.compareTo(tag.text) : result;
     }
