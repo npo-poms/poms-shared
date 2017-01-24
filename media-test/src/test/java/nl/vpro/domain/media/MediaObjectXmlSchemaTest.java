@@ -75,7 +75,7 @@ public class MediaObjectXmlSchemaTest {
         Schema schema = null;
         try {
             schema = factory.newSchema(new Source[]{
-                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/xml.xsd")),
+                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/xml.xsd")),
                 new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproShared.xsd")),
                 new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"))}
             );
