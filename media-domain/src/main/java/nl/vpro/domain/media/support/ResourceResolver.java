@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.xml.XMLConstants;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
@@ -39,7 +41,8 @@ public class ResourceResolver implements LSResourceResolver {
     }
     private static Map<String, URL> MAP = new TreeMap<>();
     static {
-        MAP.put(Xmlns.MEDIA_NAMESPACE,  Xmlns.MEDIA_XSD);
+        MAP.put(XMLConstants.XML_NS_URI, Xmlns.XML_XSD);
+        MAP.put(Xmlns.MEDIA_NAMESPACE, Xmlns.MEDIA_XSD);
         MAP.put(Xmlns.SHARED_NAMESPACE, Xmlns.SHARED_XSD);
         MAP.put(Xmlns.UPDATE_NAMESPACE, Xmlns.UPDATE_XSD);
         MAP.put(Xmlns.SEARCH_NAMESPACE, Xmlns.SEARCH_XSD);
