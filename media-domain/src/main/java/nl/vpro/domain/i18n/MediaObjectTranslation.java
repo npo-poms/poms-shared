@@ -1,7 +1,9 @@
 package nl.vpro.domain.i18n;
 
 import lombok.Getter;
+import lombok.Setter;
 
+import java.time.Instant;
 import java.util.*;
 
 import javax.persistence.*;
@@ -12,12 +14,18 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.LocalizedObject;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.user.Editor;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.persistence.InstantToTimestampConverter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
 
 import static nl.vpro.domain.TextualObjects.sorted;
@@ -41,6 +49,37 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @XmlAttribute
     @Getter
     protected String mid;
+
+    @Column
+    @Convert(converter = InstantToTimestampConverter.class)
+    @XmlAttribute(name = "lastModified")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @Getter
+    @Setter
+    protected Instant lastModifiedInstant;
+
+    @Column()
+    @Convert(converter = InstantToTimestampConverter.class)
+    @XmlAttribute(name = "creationDate")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @Getter
+    protected Instant creationInstant;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "lastmodifiedby_principalid")
+    @Getter
+    @Setter
+    protected Editor lastModifiedBy;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "createdby_principalid")
+    @Getter
+    @Setter
+    protected Editor createdBy;
 
     @Column
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
@@ -193,5 +232,16 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @Override
     public void setTwitterRefs(List<TwitterRefTranslation> twitterRefs) {
         this.twitterRefs = twitterRefs;
+    }
+
+    @Override
+    public void setCreationInstant(Instant instant) {
+        this.creationInstant = instant;
+    }
+
+    @Override
+    public boolean hasChanges() {
+        return true;
+
     }
 }

@@ -11,7 +11,8 @@ import nl.vpro.domain.media.support.Tag;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public interface LocalizedObject<T extends OwnedText, D extends OwnedText, WS extends Supplier<String> & UpdatableIdentifiable, TR extends Supplier<String>, TO extends LocalizedObject<T, D, WS, TR, TO>>  extends TextualObject<T, D, TO> {
+public interface LocalizedObject<T extends OwnedText, D extends OwnedText, WS extends Supplier<String> & UpdatableIdentifiable, TR extends Supplier<String>, TO extends LocalizedObject<T, D, WS, TR, TO>>
+    extends TextualObject<T, D, TO>, Accountable {
 
 
     SortedSet<Tag> getTags();

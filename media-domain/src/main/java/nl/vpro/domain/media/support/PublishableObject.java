@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Accountable;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -47,7 +48,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
-public abstract class PublishableObject extends DomainObject {
+public abstract class PublishableObject extends DomainObject implements Accountable {
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
@@ -65,6 +66,7 @@ public abstract class PublishableObject extends DomainObject {
     @ManyToOne(optional = false)
     @JoinColumn(name = "createdby_principalid")
     protected Editor createdBy;
+
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "lastmodifiedby_principalid")
@@ -269,14 +271,17 @@ public abstract class PublishableObject extends DomainObject {
 
 
 
+    @Override
     public Instant getLastModifiedInstant() {
         return lastModified;
     }
 
+    @Override
     public void setLastModifiedInstant(Instant lastModified) {
         this.lastModified = lastModified;
     }
 
+    @Override
     @XmlAttribute(name = "creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -286,22 +291,27 @@ public abstract class PublishableObject extends DomainObject {
         return creationDate;
     }
 
+    @Override
     public void setCreationInstant(Instant creationDate) {
         this.creationDate = creationDate;
     }
 
+    @Override
     public Editor getCreatedBy() {
         return createdBy;
     }
 
+    @Override
     public void setCreatedBy(Editor createdBy) {
         this.createdBy = createdBy;
     }
 
+    @Override
     public Editor getLastModifiedBy() {
         return lastModifiedBy;
     }
 
+    @Override
     public void setLastModifiedBy(Editor lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
