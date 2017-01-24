@@ -63,7 +63,10 @@ public class MediaDomainTestHelper extends ValidationTestHelper {
         SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
         Schema schema = null;
         try {
-            schema = factory.newSchema(new Source[]{new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproShared.xsd")), new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"))});
+            schema = factory.newSchema(new Source[]{
+                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/xml.xsd")),
+                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproShared.xsd")),
+                new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"))});
         } catch(SAXException e) {
             e.printStackTrace();
         }
