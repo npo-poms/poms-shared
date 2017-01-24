@@ -244,4 +244,9 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
         return true;
 
     }
+
+    @Override
+    public void acceptChanges() {
+
+    }
 }
