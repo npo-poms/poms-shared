@@ -1073,6 +1073,7 @@ public abstract class MediaObject extends PublishableObject
         return getGenres().remove(genre);
     }
 
+    @Override
     @XmlElement(name = "tag")
     @JsonProperty("tags")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -1623,6 +1624,7 @@ public abstract class MediaObject extends PublishableObject
         return this;
     }
 
+    @Override
     @XmlElement(name = "website")
     @JsonProperty("websites")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -1633,74 +1635,14 @@ public abstract class MediaObject extends PublishableObject
         return websites;
     }
 
+    @Override
     public MediaObject setWebsites(List<Website> websites) {
         this.websites = updateList(this.websites, websites);
         return this;
     }
 
-    public Website getMainWebsite() {
-        return getFromList(websites);
-    }
 
-    public Website findWebsite(Long id) {
-        for (Website website : websites) {
-            if (id.equals(website.getId())) {
-                return website;
-            }
-        }
-        return null;
-    }
-
-    public Website findWebsite(Website website) {
-        int index = websites.indexOf(website);
-        if (index >= 0) {
-            return websites.get(index);
-        }
-        return null;
-    }
-
-    public Website getWebsite(final Website website) {
-        for (Website existing : websites) {
-            if (existing.equals(website)) {
-                return existing;
-            }
-        }
-        return null;
-    }
-
-    public void addWebsite(final Website website) {
-        if (website != null) {
-            getWebsites().remove(website);
-            websites.add(website);
-        }
-    }
-
-    public void addWebsite(int index, final Website website) {
-        if (website != null) {
-            getWebsites().remove(website);
-            if (index < websites.size()) {
-                websites.add(index, website);
-            } else {
-                websites.add(website);
-            }
-        }
-    }
-
-    public boolean removeWebsite(final Long id) {
-        for (Iterator<Website> iterator = websites.iterator(); iterator.hasNext(); ) {
-            Website website = iterator.next();
-            if (id.equals(website.getId())) {
-                iterator.remove();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean removeWebsite(final Website website) {
-        return getWebsites().remove(website);
-    }
-
+    @Override
     @XmlElement(name = "twitter")
     @JsonProperty("twitter")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -1711,19 +1653,11 @@ public abstract class MediaObject extends PublishableObject
         return twitterRefs;
     }
 
+    @Override
     public void setTwitterRefs(List<TwitterRef> twitterRefs) {
         this.twitterRefs = updateList(this.twitterRefs, twitterRefs);
     }
 
-    public void addTwitterRef(TwitterRef ref) {
-        if (twitterRefs == null) {
-            twitterRefs = new ArrayList<>();
-        }
-
-        if (!twitterRefs.contains(ref)) {
-            twitterRefs.add(ref);
-        }
-    }
 
     @XmlElement()
     public Short getTeletext() {

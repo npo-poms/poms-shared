@@ -29,7 +29,7 @@ public class RelationTest extends ComparableTest<Relation> {
     public static Relation withDefinition = relation(null, "TYPE", "VPRO");
 
     @DataPoint
-    public static Relation persisted = relation(1l, "TYPE", "VPRO");
+    public static Relation persisted = relation(1L, "TYPE", "VPRO");
 
     private static Relation relation(Long id, String type, String broadcaster) {
         Relation relation = new Relation(new RelationDefinition(type, broadcaster));
@@ -46,7 +46,7 @@ public class RelationTest extends ComparableTest<Relation> {
     @Test
     public void testGetUrnFormat() throws Exception {
         Relation relation = new Relation();
-        relation.setId(1l);
+        relation.setId(1L);
         assertThat(relation.getUrn()).isEqualTo("urn:vpro:media:relation:1");
     }
 
@@ -98,7 +98,7 @@ public class RelationTest extends ComparableTest<Relation> {
     public void testUpdateOnFieldsCopied() throws Exception {
         Relation to = new Relation(new RelationDefinition("LABEL", "VPRO"));
         Relation from = new Relation(new RelationDefinition("LABEL", "VPRO"));
-        from.setId(1l);
+        from.setId(1L);
         from.setText("Text");
         from.setUriRef("uri");
 
@@ -137,7 +137,7 @@ public class RelationTest extends ComparableTest<Relation> {
             "http://sony.com",
             "Sony"
         );
-        relation.setId(56l);
+        relation.setId(56L);
         program.addRelation(relation);
         return program;
     }
