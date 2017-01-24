@@ -520,7 +520,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         SchemaFactory schemaFactory = SchemaFactory
             .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         System.out.println(getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
-        Schema schema = schemaFactory.newSchema(getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
+        Schema schema = schemaFactory.newSchema(
+            getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd")
+        );
         Validator validator = schema.newValidator();
         validator.validate(xmlFile);
     }
