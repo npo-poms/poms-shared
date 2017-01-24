@@ -25,8 +25,6 @@
         <xs:element name="scheduleEvent" type="tns:scheduleEventType"/>
         <xs:element name="hasPortal" type="tns:hasPortalConstraintType"/>
         <xs:element name="portal" type="tns:portalConstraintType"/>
-        <xs:element name="hasPortal" type="tns:hasPortalConstraintType"/>
-        <xs:element name="portal" type="tns:portalConstraintType"/>
         <xs:element name="isExclusive" type="tns:hasPortalRestrictionConstraintType"/>
         <xs:element name="exclusive" type="tns:portalRestrictionConstraintType"/>
         <xs:element name="hasGeoRestriction" type="tns:hasGeoRestrictionConstraintType"/>
