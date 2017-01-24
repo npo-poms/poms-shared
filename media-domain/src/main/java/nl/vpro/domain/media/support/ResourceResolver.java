@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.support;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,8 +12,6 @@ import java.util.TreeMap;
 
 import javax.xml.XMLConstants;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
@@ -26,9 +26,9 @@ import nl.vpro.domain.Xmlns;
  *
  * @author Michiel Meeuwissen
  */
+@Slf4j
 public class ResourceResolver implements LSResourceResolver {
 
-    private static final Logger LOG  = LoggerFactory.getLogger(ResourceResolver.class);
 
     private static DOMImplementationLS DOM;
     static {
@@ -36,7 +36,7 @@ public class ResourceResolver implements LSResourceResolver {
             DOMImplementation impl  = DOMImplementationRegistry.newInstance().getDOMImplementation("XML 3.0");
             DOM = (DOMImplementationLS) impl;
         } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
         }
     }
     private static Map<String, URL> MAP = new TreeMap<>();
@@ -66,7 +66,7 @@ public class ResourceResolver implements LSResourceResolver {
             try {
                 return resource.openStream();
             } catch (IOException e) {
-                LOG.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
                 return null;
             }
         } else {
