@@ -68,7 +68,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 })
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
-public  abstract class MediaUpdate<M extends MediaObject> {
+public abstract class MediaUpdate<M extends MediaObject> {
 
     static final Validator VALIDATOR;
 
