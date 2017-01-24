@@ -105,6 +105,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
      * Checks if this object is changed compared to the persistant version
      * by calculating the runtime CRC32 and compare it to the stored CRC
      */
+    @Override
     public boolean hasChanges() {
         long currentState;
 
@@ -127,6 +128,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
      * Accept the mutations on this object by recalculating crc32.
      * If hasChanges() is called after this, it always returns false
      */
+    @Override
     public void acceptChanges() {
         this.crc32 = calcCRC32();
     }
