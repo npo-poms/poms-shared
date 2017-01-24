@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -20,7 +22,7 @@ import nl.vpro.domain.media.support.TextualType;
 @MappedSuperclass
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Comparable<T> {
+public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Comparable<T>, Serializable {
 
 
     @Column(nullable = false)
