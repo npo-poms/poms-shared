@@ -220,7 +220,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Subtitles");
-        sb.append("{poProgID='").append(mid).append('\'');
+        sb.append("{mid='").append(mid).append('\'');
         sb.append(", creationDate=").append(creationDate);
         sb.append('}');
         return sb.toString();
