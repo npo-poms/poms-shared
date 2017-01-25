@@ -1,14 +1,17 @@
 package nl.vpro.rs.media;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
 
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaList;
@@ -245,25 +248,30 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}/subtitles/{language}/{type}")
+    @Path("subtitles/{id}/{language}/{type}")
     Subtitles getSubtitles(
-        @PathParam(ENTITY) final String entity,
         @PathParam(ID) final String id,
         @PathParam("language") final String languages,
         @PathParam("type") final String type,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     );
 
+    @GET
+    @Path("subtitles/{id}")
+    @Wrapped(element = "subtitles", namespace = Xmlns.MEDIA_SUBTITLES_NAMESPACE)
+    List<Subtitles> getAllSubtitles(
+        @PathParam(ID) final String id,
+        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+    ) throws IOException;
+
 
     @POST
-    @Path("{entity:(media|program|group|segment)}/{id}/subtitles/{language}/{type}")
+    @Path("subtitles")
     Response setSubtitles(
-        @PathParam(ENTITY) final String entity,
-        @PathParam(ID) final String id,
-        @PathParam("language") final String languages,
-        @PathParam("type") final String type,
         Subtitles subtitles,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors
     );
 }
+
+
