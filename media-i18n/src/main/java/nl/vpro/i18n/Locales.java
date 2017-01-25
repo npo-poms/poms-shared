@@ -35,6 +35,9 @@ public class Locales {
         return new Locale(lc.name(), code.getAlpha2());
     }
 
+    public static Locale ofString(String s) {
+        return s == null ? null : Locale.forLanguageTag(s.replace('_', '-'));
+    }
 
 
     public static String getCountryName(CountryCode code, Locale locale) {
