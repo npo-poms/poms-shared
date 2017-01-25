@@ -35,6 +35,8 @@ import static nl.vpro.i18n.Locales.DUTCH;
 /**
  * Closed captions (subtitles for hearing impaired). We could also store translation subtitles in this.
  *
+ * The subtitles cues are represented as one String. For parsing this use {@link SubtitlesUtil#parse(nl.vpro.domain.subtitles.Subtitles)}
+ *
  * @author Michiel Meeuwissen
  */
 @Entity

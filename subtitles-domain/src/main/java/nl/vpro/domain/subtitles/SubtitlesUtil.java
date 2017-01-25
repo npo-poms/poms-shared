@@ -27,12 +27,18 @@ public class SubtitlesUtil {
         return new Subtitles(parent, offset, locale, SubtitlesFormat.EBU,  w.toString());
     }
 
+
+
     public static Stream<Cue> parse(Subtitles subtitles) {
-        switch (subtitles.getContent().getFormat()) {
+        return parse(subtitles.getContent(), subtitles.getMid(), subtitles.getOffset());
+    }
+
+    public static Stream<Cue> parse(SubtitlesContent content, String mid, Duration offset) {
+        switch (content.getFormat()) {
             case EBU:
-                return EBU.parse(subtitles.getMid(), new StringReader(subtitles.getContent().getValue()));
+                return EBU.parse(mid, new StringReader(content.getValue()));
             case WEBVTT:
-                return WEBVTTandSRT.parse(subtitles.getMid(), subtitles.getOffset(), new StringReader(subtitles.getContent().getValue()));
+                return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()));
             default:
                 throw new IllegalStateException();
         }
