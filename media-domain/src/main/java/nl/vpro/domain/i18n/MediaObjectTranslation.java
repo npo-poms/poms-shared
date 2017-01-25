@@ -37,17 +37,16 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @Entity
 @XmlRootElement(name = "media")
 @XmlAccessorType(XmlAccessType.FIELD)
+@Getter
 public class MediaObjectTranslation implements LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, TwitterRefTranslation, MediaObjectTranslation>, Identifiable<Long> {
 
     @Id
     @GeneratedValue
     @XmlAttribute
-    @Getter
     protected Long id;
 
     @Column
     @XmlAttribute
-    @Getter
     protected String mid;
 
     @Column(name = "lastModified")
@@ -57,7 +56,6 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    @Getter
     @Setter
     protected Instant lastModifiedInstant;
 
@@ -66,25 +64,22 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @XmlAttribute(name = "creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
-    @Getter
+    @Setter
     protected Instant creationInstant;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "lastmodifiedby_principalid")
-    @Getter
     @Setter
     protected Editor lastModifiedBy;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "createdby_principalid")
-    @Getter
     @Setter
     protected Editor createdBy;
 
     @Column
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
-    @Getter
     protected Locale language;
 
 
@@ -234,10 +229,6 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
         this.twitterRefs = twitterRefs;
     }
 
-    @Override
-    public void setCreationInstant(Instant instant) {
-        this.creationInstant = instant;
-    }
 
     @Override
     public boolean hasChanges() {
@@ -248,5 +239,10 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @Override
     public void acceptChanges() {
 
+    }
+
+    @Override
+    public String toString() {
+        return language + ":" + mid + ":" + getMainTitle();
     }
 }
