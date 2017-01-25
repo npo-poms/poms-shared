@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 /**
+ * The subtitles as a String (to parse this use {@link SubtitlesUtil#parse(nl.vpro.domain.subtitles.SubtitlesContent, java.lang.String, java.time.Duration)}
  * @author Michiel Meeuwissen
  */
 @Embeddable
