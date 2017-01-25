@@ -50,7 +50,7 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @Getter
     protected String mid;
 
-    @Column
+    @Column(name = "lastModified")
     @Convert(converter = InstantToTimestampConverter.class)
     @XmlAttribute(name = "lastModified")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -61,7 +61,7 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @Setter
     protected Instant lastModifiedInstant;
 
-    @Column()
+    @Column(name = "creationDate")
     @Convert(converter = InstantToTimestampConverter.class)
     @XmlAttribute(name = "creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
