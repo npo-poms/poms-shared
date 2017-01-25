@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.page;
 
+import lombok.ToString;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
@@ -19,6 +21,7 @@ import nl.vpro.validation.URI;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "referralType")
+@ToString
 public class Referral implements  Association {
 
     public static Referral of(String url, String title, LinkType type) {
