@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -234,6 +235,14 @@ public class MediaObjects {
         return null;
     }
 
+    public static ScheduleEvent findScheduleEvent(Channel channel, LocalDateTime start, Collection<ScheduleEvent> events) {
+        for (ScheduleEvent event : events) {
+            if (event.getStartInstant().atZone(Schedule.ZONE_ID).toLocalDateTime().equals(start) && event.getChannel().equals(channel)) {
+                return event;
+            }
+        }
+        return null;
+    }
     public static SortedSet<ScheduleEvent> filterScheduleEvents(Collection<ScheduleEvent> events, Channel... channels) {
         return filterScheduleEvents(events, Arrays.asList(channels));
 
