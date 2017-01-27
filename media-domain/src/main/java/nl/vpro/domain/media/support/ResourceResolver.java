@@ -46,6 +46,7 @@ public class ResourceResolver implements LSResourceResolver {
         MAP.put(Xmlns.SHARED_NAMESPACE, Xmlns.SHARED_XSD);
         MAP.put(Xmlns.UPDATE_NAMESPACE, Xmlns.UPDATE_XSD);
         MAP.put(Xmlns.SEARCH_NAMESPACE, Xmlns.SEARCH_XSD);
+        //MAP.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, Xmlns.MEDIA_SUBTITLES_XSD)
     }
 
     public static Map<String, URL> getSchemas() {
