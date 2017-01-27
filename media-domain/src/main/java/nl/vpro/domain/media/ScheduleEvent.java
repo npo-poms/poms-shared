@@ -14,7 +14,6 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -162,18 +161,15 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     protected String poSeriesID;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
-    @Size.List({
-        @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}"),
-    })
     @Valid
-    @XmlElement(name = "title", required = true)
+    @XmlElement(name = "title")
     @JsonProperty("titles")
     protected Set<ScheduleEventTitle> titles = new TreeSet<>();
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
     @Valid
-    @XmlElement(name = "description", required = true)
+    @XmlElement(name = "description")
     @JsonProperty("descriptions")
     protected Set<ScheduleEventDescription> descriptions = new TreeSet<>();
 
