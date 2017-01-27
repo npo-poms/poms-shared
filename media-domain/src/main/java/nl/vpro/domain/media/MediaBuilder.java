@@ -591,27 +591,65 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger) {
-        return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration, merger);
+    default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger, ScheduleEventTitle... titles) {
+        return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration, merger, titles);
     }
 
     @SuppressWarnings("unchecked")
-    default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration) {
-        return scheduleEvent(c, time, duration, e -> e);
+    default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, ScheduleEventTitle... titles) {
+        return scheduleEvent(c, time, duration, e -> e, titles);
     }
 
-    default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger) {
+    default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger, ScheduleEventTitle... titles) {
         ScheduleEvent event = new ScheduleEvent(c, time, duration);
         event.setMediaObject(mediaObject());
+        for (ScheduleEventTitle title : titles) {
+            event.addTitle(title);
+        }
         event = merger.apply(event);
         return (B) this;
     }
 
 
-    default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration) {
-        return scheduleEvent(c, time, duration, e->e);
+    default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, ScheduleEventTitle... titles) {
+        return scheduleEvent(c, time, duration, e->e, titles);
     }
 
+
+    @SuppressWarnings("unchecked")
+    default B firstScheduleEventTitles(ScheduleEventTitle... titles) {
+        for (ScheduleEventTitle title : titles) {
+            mediaObject().getScheduleEvents().first().addTitle(title);
+        }
+        return (B) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    default B scheduleEventTitles(Channel channel, LocalDateTime time, ScheduleEventTitle... titles) {
+        ScheduleEvent scheduleEvent = MediaObjects.findScheduleEvent(channel, time, mediaObject().getScheduleEvents());
+        for (ScheduleEventTitle title : titles) {
+            scheduleEvent.addTitle(title);
+        }
+        return (B) this;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    default B firstScheduleEventDescriptions(ScheduleEventDescription... descriptions) {
+        for (ScheduleEventDescription description : descriptions) {
+            mediaObject().getScheduleEvents().first().addDescription(description);
+        }
+        return (B) this;
+    }
+
+    @SuppressWarnings("unchecked")
+    default B scheduleEventDescriptions(Channel channel, LocalDateTime time, ScheduleEventDescription... descriptions) {
+        ScheduleEvent scheduleEvent = MediaObjects.findScheduleEvent(channel, time, mediaObject().getScheduleEvents());
+        for (ScheduleEventDescription description : descriptions) {
+            scheduleEvent.addDescription(description);
+        }
+        return (B) this;
+    }
 
     @SuppressWarnings("unchecked")
     default B descendantOf(DescendantRef... refs) throws CircularReferenceException {
