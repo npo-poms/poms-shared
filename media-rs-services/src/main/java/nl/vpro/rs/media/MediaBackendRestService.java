@@ -296,6 +296,15 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors,
         Iterator<Cue> cues);
 
+    @DELETE
+    @Path("subtitles/{id}/{language}/{type}")
+    Response deleteSubtitles(
+        @PathParam("id") String id,
+        @PathParam("language") Locale language,
+        @PathParam("type") SubtitlesType type,
+        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(ERRORS) String errors);
+
 }
 
 
