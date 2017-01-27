@@ -1,6 +1,7 @@
 package nl.vpro.rs.media;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -292,6 +293,7 @@ public interface MediaBackendRestService {
         @PathParam("id") String id,
         @PathParam("language") Locale language,
         @PathParam("type") SubtitlesType type,
+        @QueryParam("offset") @DefaultValue("0") Duration offset,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
         Iterator<Cue> cues);
