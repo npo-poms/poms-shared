@@ -58,6 +58,10 @@ public class StandaloneCue extends Cue {
         return new StandaloneCue(cue, DUTCH, SubtitlesType.CAPTION, Duration.ZERO);
     }
 
+    public static StandaloneCue of(Cue cue, Subtitles subtitles) {
+        return new StandaloneCue(cue, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset());
+    }
+
     protected StandaloneCue() {
 
     }
