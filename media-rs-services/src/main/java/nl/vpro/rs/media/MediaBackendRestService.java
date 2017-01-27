@@ -21,9 +21,11 @@ import nl.vpro.domain.media.search.MediaListItem;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
+import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.SubtitlesId;
 import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.util.CountedIterator;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
 
@@ -256,10 +258,21 @@ public interface MediaBackendRestService {
     @GET
     @Path("subtitles/{id}/{language}/{type}")
     @Produces({VTT, EBU, SRT})
-    Iterator<StandaloneCue> get(
+    CountedIterator<StandaloneCue> get(
         @PathParam("id") String id,
         @PathParam("language") Locale language,
         @PathParam("type") SubtitlesType type,
+        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+    );
+
+
+    @GET
+    @Path("subtitles/{id}/{language}/{type}/{seq}")
+    StandaloneCue get(
+        @PathParam("id") String id,
+        @PathParam("language") Locale language,
+        @PathParam("type") SubtitlesType type,
+        @PathParam("seq") Integer seq,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     );
 
@@ -281,7 +294,7 @@ public interface MediaBackendRestService {
         @PathParam("type") SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
-        Iterator<StandaloneCue> cues);
+        Iterator<Cue> cues);
 
 }
 
