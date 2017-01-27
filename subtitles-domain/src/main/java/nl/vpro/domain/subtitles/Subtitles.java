@@ -93,6 +93,11 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Duration offset;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @XmlAttribute
+    private Integer cueCount;
+
     @Embedded
     @XmlElement(required = true)
     private SubtitlesContent content;
@@ -218,6 +223,23 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         this.language = language;
     }
 
+    public Integer getCueCount() {
+        if (cueCount == null) {
+            Iterator<Cue> cues = SubtitlesUtil.parse(this).iterator();
+            int result = 0;
+            while(cues.hasNext()) {
+                cues.next();
+                result++;
+            }
+            cueCount = result;
+        }
+        return cueCount;
+    }
+
+    public void setCueCount(Integer cueCount) {
+        this.cueCount = cueCount;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -250,4 +272,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     public int hashCode() {
         return mid != null ? mid.hashCode() : 0;
     }
+
+
 }

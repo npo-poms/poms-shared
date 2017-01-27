@@ -20,10 +20,10 @@ import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
  * @since 4.8
  */
 @Slf4j
-class EBU {
+public class EBU {
 
 
-    static StringBuilder format(Cue cue, StringBuilder builder) {
+    public static StringBuilder format(Cue cue, StringBuilder builder) {
         //001 0:01:00 0:02:00 ondertitels !
 
         builder.append(String.format("%04d ", cue.getSequence()));
@@ -55,7 +55,7 @@ class EBU {
     }
 
 
-    static Stream<Cue> parse(String parent, InputStream inputStream) {
+    public static Stream<Cue> parse(String parent, InputStream inputStream) {
         return parse(parent, new InputStreamReader(inputStream, ISO6937));
     }
 
