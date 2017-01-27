@@ -4,8 +4,6 @@
  */
 package nl.vpro.domain.api;
 
-import javax.ws.rs.core.MediaType;
-
 /**
  * See https://jira.vpro.nl/browse/API-
  *
@@ -14,15 +12,6 @@ import javax.ws.rs.core.MediaType;
  */
 public class Constants {
 
-
-    public static final String VTT = "text/vtt";
-    public static final MediaType VTT_TYPE = new MediaType("text", "vtt");
-
-    public static final String SRT = "text/srt";
-    public static final MediaType SRT_TYPE = new MediaType("text", "srt");
-
-    public static final String EBU = "text/ebu-tt";
-    public static final MediaType EBU_TYPE = new MediaType("text", "ebu-tt");
 
     public static final int MAX_RESULTS = 240;
 
