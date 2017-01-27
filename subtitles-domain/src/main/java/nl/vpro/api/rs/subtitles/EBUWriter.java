@@ -13,7 +13,6 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
-import nl.vpro.domain.api.Constants;
 import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 import nl.vpro.util.CountedIterator;
