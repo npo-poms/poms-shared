@@ -94,7 +94,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     private Duration offset;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     @XmlAttribute
     private Integer cueCount;
 
