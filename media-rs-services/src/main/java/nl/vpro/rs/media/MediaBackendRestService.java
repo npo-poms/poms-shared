@@ -22,12 +22,10 @@ import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
 import nl.vpro.domain.subtitles.StandaloneCue;
-import nl.vpro.domain.subtitles.Subtitles;
+import nl.vpro.domain.subtitles.SubtitlesId;
 import nl.vpro.domain.subtitles.SubtitlesType;
 
-import static nl.vpro.api.rs.subtitles.Constants.EBU;
-import static nl.vpro.api.rs.subtitles.Constants.SRT;
-import static nl.vpro.api.rs.subtitles.Constants.VTT;
+import static nl.vpro.api.rs.subtitles.Constants.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -268,7 +266,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("subtitles/{id}")
     @Wrapped(element = "subtitles", namespace = Xmlns.MEDIA_SUBTITLES_NAMESPACE)
-    List<Subtitles> getAllSubtitles(
+    List<SubtitlesId> getAllSubtitles(
         @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
