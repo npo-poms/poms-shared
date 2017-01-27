@@ -747,4 +747,28 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         descriptions.add(new ScheduleEventDescription(description, owner, type));
         return self();
     }
+
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     */
+    @Override
+    public String getMainTitle() {
+        return TextualObject.super.getMainTitle();
+    }
+
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     */
+    @Override
+    public String getSubTitle() {
+        return TextualObject.super.getSubTitle();
+    }
+
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     */
+    @Override
+    public String getMainDescription() {
+        return TextualObject.super.getMainDescription();
+    }
 }
