@@ -95,7 +95,7 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
     @Valid
-    @XmlElement(name = "description", required = true)
+    @XmlElement(name = "description")
     @JsonProperty("descriptions")
     protected Set<DescriptionTranslation> descriptions = new TreeSet<>();
 
