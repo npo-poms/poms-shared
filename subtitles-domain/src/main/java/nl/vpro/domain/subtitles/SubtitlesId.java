@@ -3,16 +3,33 @@ package nl.vpro.domain.subtitles;
 import java.io.Serializable;
 import java.util.Locale;
 
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import nl.vpro.xml.bind.LocaleAdapter;
+
 import static nl.vpro.i18n.Locales.DUTCH;
 
 /**
  * @author Michiel Meeuwissen
  * @since 4.7.7
  */
+@XmlRootElement(name = "id")
+@XmlAccessorType(XmlAccessType.NONE)
 public class SubtitlesId implements Serializable {
 
+    @XmlAttribute
     private String mid;
+
+    @XmlAttribute
     private SubtitlesType type = SubtitlesType.CAPTION;
+
+    @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
+    @XmlJavaTypeAdapter(LocaleAdapter.class)
     private Locale language;
 
     public static SubtitlesId ebuCaption(String mid) {
