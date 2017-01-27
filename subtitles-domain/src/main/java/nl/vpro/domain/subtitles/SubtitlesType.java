@@ -13,6 +13,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "subtitlesTypeEnum")
 public enum SubtitlesType {
     CAPTION,
-    TRANSLATION
-    //TRANSCRIPT
+    TRANSLATION,
+    TRANSCRIPT
 }
