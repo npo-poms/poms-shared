@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
  * @since 4.8
  */
 @Slf4j
-class WEBVTTandSRT {
+public class WEBVTTandSRT {
 
 
     static String WEBVTT_INTRO = "WEBVTT";
