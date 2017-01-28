@@ -598,6 +598,8 @@
 
   <xs:complexType name="scheduleEventType">
     <xs:sequence>
+      <xs:element name="title" type="scheduleEventTitle" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="description" type="scheduleEventDescription" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="repeatType" name="repeat" minOccurs="0"/>
       <xs:element type="xs:anyURI" name="memberOf" minOccurs="0"/>
       <xs:element type="avAttributesType" name="avAttributes" minOccurs="0"/>
@@ -618,6 +620,24 @@
     <xs:attribute type="midType" name="midRef" use="required"/>
     <xs:attribute type="xs:anyURI" name="urnRef" use="required"/>
     <xs:attribute type="scheduleEventTypeEnum" name="type"/>
+  </xs:complexType>
+
+  <xs:complexType name="scheduleEventTitle">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+        <xs:attribute name="type" type="textualTypeEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="scheduleEventDescription">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+        <xs:attribute name="type" type="textualTypeEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
   <xs:simpleType name="scheduleEventTypeEnum">
