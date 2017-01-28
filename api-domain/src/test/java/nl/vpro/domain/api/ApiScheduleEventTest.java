@@ -4,6 +4,8 @@ import net.sf.json.test.JSONAssert;
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Program;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
@@ -30,7 +32,56 @@ public class ApiScheduleEventTest {
         ApiScheduleEvent scheduleEvent = new ApiScheduleEvent(program.getScheduleEvents().first(), program);
         String json = Jackson2Mapper.getInstance().writeValueAsString(scheduleEvent);
 
-        JSONAssert.assertJsonEquals(json, "{\"channel\":\"NED3\",\"start\":100,\"guideDay\":-90000000,\"duration\":200,\"midRef\":\"VPROWON_12345\",\"media\":{\"objectType\":\"program\",\"mid\":\"VPROWON_12345\",\"creationDate\":1409733642642,\"sortDate\":100,\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"scheduleEvents\":[{\"guideDay\":-90000000,\"start\":100,\"duration\":200,\"poProgID\":\"VPROWON_12345\",\"channel\":\"NED3\",\"midRef\":\"VPROWON_12345\"},{\"guideDay\":169200000,\"start\":259200300,\"duration\":50,\"poProgID\":\"VPROWON_12345\",\"channel\":\"NED3\",\"net\":\"ZAPP\",\"midRef\":\"VPROWON_12345\"},{\"guideDay\":601200000,\"start\":691200350,\"duration\":250,\"poProgID\":\"VPROWON_12345\",\"channel\":\"HOLL\",\"midRef\":\"VPROWON_12345\"},{\"guideDay\":774000000,\"start\":864000600,\"duration\":200,\"poProgID\":\"VPROWON_12345\",\"channel\":\"CONS\",\"midRef\":\"VPROWON_12345\"}],\"workflow\":\"FOR_PUBLICATION\"}}", json);
+        Jackson2TestUtil.assertThatJson(json)
+            .isSimilarTo("{\n" +
+                "  \"channel\" : \"NED3\",\n" +
+                "  \"start\" : 100,\n" +
+                "  \"guideDay\" : -90000000,\n" +
+                "  \"duration\" : 200,\n" +
+                "  \"midRef\" : \"VPROWON_12345\",\n" +
+                "  \"media\" : {\n" +
+                "    \"objectType\" : \"program\",\n" +
+                "    \"mid\" : \"VPROWON_12345\",\n" +
+                "    \"creationDate\" : 1409733642642,\n" +
+                "    \"sortDate\" : 100,\n" +
+                "    \"embeddable\" : true,\n" +
+                "    \"broadcasters\" : [ ],\n" +
+                "    \"genres\" : [ ],\n" +
+                "    \"countries\" : [ ],\n" +
+                "    \"languages\" : [ ],\n" +
+                "    \"scheduleEvents\" : [ {\n" +
+                "      \"guideDay\" : -90000000,\n" +
+                "      \"start\" : 100,\n" +
+                "      \"duration\" : 200,\n" +
+                "      \"poProgID\" : \"VPROWON_12345\",\n" +
+                "      \"channel\" : \"NED3\",\n" +
+                "      \"midRef\" : \"VPROWON_12345\"\n" +
+                "    }, {\n" +
+                "      \"guideDay\" : 169200000,\n" +
+                "      \"start\" : 259200300,\n" +
+                "      \"duration\" : 50,\n" +
+                "      \"poProgID\" : \"VPROWON_12345\",\n" +
+                "      \"channel\" : \"NED3\",\n" +
+                "      \"net\" : \"ZAPP\",\n" +
+                "      \"midRef\" : \"VPROWON_12345\"\n" +
+                "    }, {\n" +
+                "      \"guideDay\" : 601200000,\n" +
+                "      \"start\" : 691200350,\n" +
+                "      \"duration\" : 250,\n" +
+                "      \"poProgID\" : \"VPROWON_12345\",\n" +
+                "      \"channel\" : \"HOLL\",\n" +
+                "      \"midRef\" : \"VPROWON_12345\"\n" +
+                "    }, {\n" +
+                "      \"guideDay\" : 774000000,\n" +
+                "      \"start\" : 864000600,\n" +
+                "      \"duration\" : 200,\n" +
+                "      \"poProgID\" : \"VPROWON_12345\",\n" +
+                "      \"channel\" : \"CONS\",\n" +
+                "      \"midRef\" : \"VPROWON_12345\"\n" +
+                "    } ],\n" +
+                "    \"workflow\" : \"FOR_PUBLICATION\"\n" +
+                "  }\n" +
+                "}");
     }
 
     @Test
