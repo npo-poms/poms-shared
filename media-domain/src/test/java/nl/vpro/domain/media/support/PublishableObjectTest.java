@@ -1,9 +1,10 @@
-/**
+/*
  * Copyright (C) 2012 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.domain.media.support;
 
+import java.time.Instant;
 import java.util.Date;
 
 import org.junit.experimental.theories.DataPoint;
@@ -53,8 +54,12 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     public static PublishableObject published = data(2L, Workflow.PUBLISHED, null, null);
 
     @DataPoint
-    public static PublishableObject publishedWithFutureStop = data(2L, Workflow.PUBLISHED, null, new Date(System.currentTimeMillis() + 100000));
-
+    public static PublishableObject publishedWithFutureStop = data(2L, 
+        Workflow.PUBLISHED, 
+        null,
+        Instant.now().plusSeconds(100)
+    );
+        
     @DataPoint
     public static PublishableObject forDeletion = data(3L, Workflow.FOR_DELETION, null, null);
 
@@ -62,11 +67,16 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     public static PublishableObject deleted = data(4L, Workflow.DELETED, null, null);
 
     @DataPoint
-    public static PublishableObject futurePublication = data(5L, Workflow.FOR_PUBLICATION, new Date(System.currentTimeMillis() + 100000), null);
+    public static PublishableObject futurePublication = data(5L, Workflow.FOR_PUBLICATION,
+        Instant.now().plusSeconds(100), null);
 
     @DataPoint
-    public static PublishableObject revocationFallsForPublication = data(7L, Workflow.PUBLISHED, new Date(System.currentTimeMillis() + 100000), new Date(System.currentTimeMillis() - 100000));
-
+    public static PublishableObject revocationFallsForPublication = data(7L, 
+        Workflow.PUBLISHED,
+        Instant.now().plusSeconds(100),
+        Instant.now().minusSeconds(100)
+    );
+        
     @Theory
     public void testIsActivationWhenTrue(PublishableObject data) {
         assumeNotNull(data);
@@ -198,7 +208,7 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         assertFalse(data.isRevocable());
     }
 
-    private static PublishableObject data(Long id, Workflow workflow, Date start, Date stop) {
+    private static PublishableObject data(Long id, Workflow workflow, Instant start, Instant stop) {
         PublishableObject result = new PublishableObject(id) {
             @Override
             protected String getUrnPrefix() {
@@ -206,8 +216,8 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
             }
         };
         result.setWorkflow(workflow);
-        result.setPublishStart(start);
-        result.setPublishStop(stop);
+        result.setPublishStartInstant(start);
+        result.setPublishStopInstant(stop);
         return result;
     }
 }

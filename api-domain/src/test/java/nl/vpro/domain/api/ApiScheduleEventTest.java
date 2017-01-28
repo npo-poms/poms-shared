@@ -12,6 +12,7 @@ import org.xml.sax.SAXException;
 import javax.xml.bind.JAXB;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.time.Instant;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,12 @@ public class ApiScheduleEventTest {
 
     @Test
     public void json() throws IOException {
-        Program program = MediaTestDataBuilder.program().mid("VPROWON_12345").withScheduleEvents().creationDate(new Date(1409733642642L)).build();
+        Program program = MediaTestDataBuilder
+            .program()
+            .mid("VPROWON_12345")
+            .withScheduleEvents()
+            .creationDate(Instant.ofEpochMilli(1409733642642L))
+            .build();
         ApiScheduleEvent scheduleEvent = new ApiScheduleEvent(program.getScheduleEvents().first(), program);
         String json = Jackson2Mapper.getInstance().writeValueAsString(scheduleEvent);
 
