@@ -5,6 +5,7 @@
 package nl.vpro.domain.media;
 
 import java.io.StringReader;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Set;
 
@@ -57,8 +58,8 @@ public class LocationTest extends ObjectTest<Location> {
     public void testPublishableInvalidWhenStopBeforeStart() {
         Location invalid = new Location("http://www.bla.nl", OwnerType.BROADCASTER);
         invalid
-            .setPublishStart(new Date(20))
-            .setPublishStop(new Date(10));
+            .setPublishStartInstant(Instant.ofEpochMilli(20))
+            .setPublishStopInstant(Instant.ofEpochMilli(10));
 
         Set<ConstraintViolation<Location>> constraintViolations = validator.validate(invalid);
 
