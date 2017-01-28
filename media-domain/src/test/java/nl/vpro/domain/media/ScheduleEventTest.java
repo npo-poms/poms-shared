@@ -4,7 +4,8 @@
  */
 package nl.vpro.domain.media;
 
-import java.util.Date;
+import java.time.Duration;
+import java.time.Instant;
 
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
@@ -30,28 +31,35 @@ public class ScheduleEventTest extends ObjectTest<ScheduleEvent> { // TODO doesn
     public static ScheduleEvent moreNullValues = new ScheduleEvent();
 
     @DataPoint
-    public static ScheduleEvent nullChannel = new ScheduleEvent(null, new Date(100), new Date(1000));
+    public static ScheduleEvent nullChannel = new ScheduleEvent(null, Instant.ofEpochMilli(100), Duration.ofMillis(1000));
 
     @DataPoint
-    public static ScheduleEvent withNet = new ScheduleEvent(Channel.NED3, new Net("ZAP", "Zappnet"), new Date(100), new Date(1000));
+    public static ScheduleEvent withNet = new ScheduleEvent(Channel.NED3, new Net("ZAP", "Zappnet"), 
+        Instant.ofEpochMilli(100), Duration.ofMillis(1000));
 
     @DataPoint
-    public static ScheduleEvent nullStart = new ScheduleEvent(Channel.NED2, null, new Date(1000));
+    public static ScheduleEvent nullStart = new ScheduleEvent(Channel.NED2, null, Duration.ofMillis(1000));
 
     @DataPoint
-    public static ScheduleEvent nullDuration = new ScheduleEvent(Channel.NED2, new Date(100), null);
+    public static ScheduleEvent nullDuration = new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(100), null);
 
     @Test
     public void testGuideDayBeforeCutOff() throws Exception {
-        ScheduleEvent target = new ScheduleEvent(Channel.NED1, new Date(0), new Date(10));
+        ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.EPOCH, Duration.ofMillis(10));
 
+        //noinspection deprecation
         assertThat(target.getGuideDay().toString()).isEqualTo("Wed Dec 31 00:00:00 CET 1969");
+        assertThat(target.getGuideDate().toString()).isEqualTo("1969-12-31");
+
     }
 
     @Test
     public void testGuideDayAfterCutOff() throws Exception {
-        ScheduleEvent target = new ScheduleEvent(Channel.NED1, new Date((5 * 3600 + 58 * 60) * 1000), new Date(10));
+        ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli((5 * 3600 + 58 * 60) * 1000), Duration.ofMillis(10));
 
+        //noinspection deprecation
         assertThat(target.getGuideDay().toString()).isEqualTo("Thu Jan 01 00:00:00 CET 1970");
+        assertThat(target.getGuideDate().toString()).isEqualTo("1970-01-01");
+
     }
 }
