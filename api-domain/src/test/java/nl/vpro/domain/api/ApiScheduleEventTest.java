@@ -1,21 +1,20 @@
 package nl.vpro.domain.api;
 
-import net.sf.json.test.JSONAssert;
-import nl.vpro.domain.media.MediaTestDataBuilder;
-import nl.vpro.domain.media.Program;
-import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import javax.xml.bind.JAXB;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.time.Instant;
+import java.util.Date;
 
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXB;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.time.Instant;
-import java.util.Date;
+import nl.vpro.domain.media.MediaTestDataBuilder;
+import nl.vpro.domain.media.Program;
+import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,47 +38,48 @@ public class ApiScheduleEventTest {
                 "  \"guideDay\" : -90000000,\n" +
                 "  \"duration\" : 200,\n" +
                 "  \"midRef\" : \"VPROWON_12345\",\n" +
+                "  \"poProgID\" : \"VPROWON_12345\",\n" +
                 "  \"media\" : {\n" +
                 "    \"objectType\" : \"program\",\n" +
                 "    \"mid\" : \"VPROWON_12345\",\n" +
-                "    \"creationDate\" : 1409733642642,\n" +
+                "    \"workflow\" : \"FOR_PUBLICATION\",\n" +
                 "    \"sortDate\" : 100,\n" +
+                "    \"creationDate\" : 1409733642642,\n" +
                 "    \"embeddable\" : true,\n" +
                 "    \"broadcasters\" : [ ],\n" +
                 "    \"genres\" : [ ],\n" +
                 "    \"countries\" : [ ],\n" +
                 "    \"languages\" : [ ],\n" +
                 "    \"scheduleEvents\" : [ {\n" +
-                "      \"guideDay\" : -90000000,\n" +
+                "      \"channel\" : \"NED3\",\n" +
                 "      \"start\" : 100,\n" +
+                "      \"guideDay\" : -90000000,\n" +
                 "      \"duration\" : 200,\n" +
-                "      \"poProgID\" : \"VPROWON_12345\",\n" +
-                "      \"channel\" : \"NED3\",\n" +
-                "      \"midRef\" : \"VPROWON_12345\"\n" +
+                "      \"midRef\" : \"VPROWON_12345\",\n" +
+                "      \"poProgID\" : \"VPROWON_12345\"\n" +
                 "    }, {\n" +
-                "      \"guideDay\" : 169200000,\n" +
+                "      \"channel\" : \"NED3\",\n" +
                 "      \"start\" : 259200300,\n" +
+                "      \"guideDay\" : 169200000,\n" +
                 "      \"duration\" : 50,\n" +
+                "      \"midRef\" : \"VPROWON_12345\",\n" +
                 "      \"poProgID\" : \"VPROWON_12345\",\n" +
-                "      \"channel\" : \"NED3\",\n" +
-                "      \"net\" : \"ZAPP\",\n" +
-                "      \"midRef\" : \"VPROWON_12345\"\n" +
+                "      \"net\" : \"ZAPP\"\n" +
                 "    }, {\n" +
-                "      \"guideDay\" : 601200000,\n" +
-                "      \"start\" : 691200350,\n" +
-                "      \"duration\" : 250,\n" +
-                "      \"poProgID\" : \"VPROWON_12345\",\n" +
                 "      \"channel\" : \"HOLL\",\n" +
-                "      \"midRef\" : \"VPROWON_12345\"\n" +
+                "      \"start\" : 691200350,\n" +
+                "      \"guideDay\" : 601200000,\n" +
+                "      \"duration\" : 250,\n" +
+                "      \"midRef\" : \"VPROWON_12345\",\n" +
+                "      \"poProgID\" : \"VPROWON_12345\"\n" +
                 "    }, {\n" +
-                "      \"guideDay\" : 774000000,\n" +
-                "      \"start\" : 864000600,\n" +
-                "      \"duration\" : 200,\n" +
-                "      \"poProgID\" : \"VPROWON_12345\",\n" +
                 "      \"channel\" : \"CONS\",\n" +
-                "      \"midRef\" : \"VPROWON_12345\"\n" +
-                "    } ],\n" +
-                "    \"workflow\" : \"FOR_PUBLICATION\"\n" +
+                "      \"start\" : 864000600,\n" +
+                "      \"guideDay\" : 774000000,\n" +
+                "      \"duration\" : 200,\n" +
+                "      \"midRef\" : \"VPROWON_12345\",\n" +
+                "      \"poProgID\" : \"VPROWON_12345\"\n" +
+                "    } ]\n" +
                 "  }\n" +
                 "}");
     }
