@@ -1,7 +1,6 @@
 package nl.vpro.domain.page.update;
 
 import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 
@@ -16,7 +15,6 @@ import nl.vpro.domain.AbstractChange;
 @XmlRootElement
 @XmlType(name = "changeType")
 @XmlAccessorType(XmlAccessType.NONE)
-@Slf4j
 @XmlSeeAlso(PageUpdate.class)
 public class PageUpdateChange extends AbstractChange<PageUpdate> {
 
