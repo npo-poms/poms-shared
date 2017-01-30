@@ -42,12 +42,24 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return form;
     }
 
-    // if proprerty can have more than one value, the default Match value is MUST, otherwise it is SHOULD
+    // if property can have more than one value, the default Match value is MUST, otherwise it is SHOULD
 
     public MediaFormBuilder text(String text) {
         search().setText(simpleTextMatcher(text, Match.SHOULD));
         return this;
     }
+
+    public MediaFormBuilder fuzzyText(String text) {
+        return fuzzyText(text, "2");
+    }
+
+    public MediaFormBuilder fuzzyText(String text, String fuzziness) {
+        SimpleTextMatcher matcher = simpleTextMatcher(text, Match.SHOULD);
+        matcher.setFuzziness(fuzziness);
+        search().setText(matcher);
+        return this;
+    }
+
 
     public MediaFormBuilder mediaIds(String... mediaIds) {
         search().setMediaIds(textMatchers(Match.SHOULD, mediaIds));
