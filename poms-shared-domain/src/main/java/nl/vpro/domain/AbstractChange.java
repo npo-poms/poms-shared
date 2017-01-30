@@ -52,4 +52,7 @@ public abstract class AbstractChange<T>  {
     }
 
 
+    public boolean isDeleted() {
+        return deleted != null ? deleted : false;
+    }
 }
