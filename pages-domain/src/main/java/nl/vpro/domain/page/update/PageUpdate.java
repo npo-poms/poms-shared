@@ -135,7 +135,6 @@ public class PageUpdate {
     @Valid
     protected List<RelationUpdate> relations;
 
-
     @XmlTransient
     private String rev;
 
