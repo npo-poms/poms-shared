@@ -11,6 +11,7 @@ import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,13 +28,15 @@ public class ChangeTest {
 
     @Test
     public void json() throws Exception {
-        Change change = new Change();
-        change.setPublishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant());
-        change.setMid("MID_123");
-        change.setDeleted(false);
-        change.setMedia(MediaTestDataBuilder.program().lean().build());
+        Change change = Change.builder()
+            .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
+            .mid("MID_123")
+            .deleted(false)
+            .media(MediaTestDataBuilder.program().lean().build())
+            .build();
 
-        Jackson2TestUtil.roundTripAndSimilar(change, "{\n" +
+        Jackson2TestUtil.assertThatJson(change).isSimilarTo("{\n" +
+            "  \"sequence\" :1469014680000,\n" +
             "  \"publishDate\" : 1469014680000,\n" +
             "  \"mid\" : \"MID_123\",\n" +
             "  \"media\" : {\n" +
@@ -47,4 +50,26 @@ public class ChangeTest {
             "}");
     }
 
+    @Test
+    public void xml() throws Exception {
+        Change change = Change.builder()
+            .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
+            .mid("MID_123")
+            .deleted(false)
+            .media(MediaTestDataBuilder.program().lean().build())
+            .build()
+        ;
+
+        JAXBTestUtil.assertThatXml(change).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<local:change sequence=\"1469014680000\" publishDate=\"2016-07-20T13:38:00+02:00\" mid=\"MID_123\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+            "    <api:media xsi:type=\"media:programType\" embeddable=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+            "        <media:credits/>\n" +
+            "        <media:locations/>\n" +
+            "        <media:scheduleEvents/>\n" +
+            "        <media:images/>\n" +
+            "        <media:segments/>\n" +
+            "    </api:media>\n" +
+            "</local:change>");
+
+    }
 }

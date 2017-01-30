@@ -4,16 +4,22 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -36,6 +42,9 @@ public class Change {
     private Long sequence;
 
     @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     private Instant publishDate;
 
     @XmlAttribute
@@ -59,6 +68,7 @@ public class Change {
     public Change() {
     }
 
+    @Builder
     private Change(Instant publishDate, Long revision, String mid, MediaObject media, Boolean deleted) {
         this(DateUtils.toLong(publishDate), revision, mid, media, deleted);
         this.publishDate = publishDate;
