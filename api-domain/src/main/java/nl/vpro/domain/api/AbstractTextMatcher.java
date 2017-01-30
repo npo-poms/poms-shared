@@ -4,12 +4,14 @@
  */
 package nl.vpro.domain.api;
 
-import javax.annotation.Nullable;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlValue;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.function.Predicate;
+
+import javax.annotation.Nullable;
+import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author rico
@@ -22,6 +24,12 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
 
     @XmlValue
     protected String value;
+
+    @XmlAttribute
+    @Pattern(regexp = "^1|2|3|AUTO|0\\.[1-9]$")
+    @Getter
+    @Setter
+    protected String fuzziness;
 
     public AbstractTextMatcher(String value) {
         this.value = value;
@@ -82,6 +90,7 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
     public int hashCode() {
         return (value != null ? value.hashCode() : 0);
     }
+
 
     public boolean isCaseSensitive() {
         return true;
