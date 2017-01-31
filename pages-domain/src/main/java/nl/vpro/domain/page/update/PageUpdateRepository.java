@@ -6,6 +6,7 @@ package nl.vpro.domain.page.update;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.Future;
 
 import nl.vpro.domain.Changes;
 
@@ -21,11 +22,11 @@ public interface PageUpdateRepository {
 
     PageUpdate loadByCrid(String crid);
 
-    void save(PageUpdate oldPage, PageUpdate update);
+    Future<?> save(PageUpdate update);
 
-    boolean delete(String pageRef);
+    Future<?> delete(String pageRef);
 
-    boolean deleteAll(String url, int max);
+    Future<?> deleteAll(String url, int max);
 
     Changes<PageUpdate> getChanges(Instant since);
 
