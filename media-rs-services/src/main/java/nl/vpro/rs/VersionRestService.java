@@ -15,5 +15,5 @@ public interface VersionRestService {
 
 
     @GET
-    String version();
+    String getVersion();
 }
