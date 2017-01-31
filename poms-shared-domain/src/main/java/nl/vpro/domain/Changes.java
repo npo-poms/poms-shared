@@ -20,7 +20,7 @@ public class Changes<T> implements AutoCloseable, Iterable<AbstractChange<T>> {
 
     private final Instant until;
     private final long count;
-    private final CloseableIterator<AbstractChange<T>> iterator;
+    private final CloseableIterator<? extends AbstractChange<T>> iterator;
 
     @Override
     public void close() throws Exception {
