@@ -198,6 +198,7 @@ public class PageUpdateBuilder<PB extends PageUpdateBuilder<PB, P>, P extends Pa
         return self;
     }
 
+
     Instant fromDate(Date date) {
         return date == null ? null : date.toInstant();
     }
