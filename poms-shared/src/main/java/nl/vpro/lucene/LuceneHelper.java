@@ -4,6 +4,8 @@
  */
 package nl.vpro.lucene;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -19,13 +21,11 @@ import org.apache.lucene.search.NumericRangeQuery;
 import org.apache.lucene.search.PhraseQuery;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.Version;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.util.DateUtils;
 
+@Slf4j
 public class LuceneHelper {
-    private static final Logger LOG = LoggerFactory.getLogger(LuceneHelper.class);
 
     private static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
@@ -62,7 +62,7 @@ public class LuceneHelper {
         try {
             return parser.parse(text);
         } catch(ParseException e) {
-            LOG.warn("Exception parsing query text: \"{}\", returning all documents.", text);
+            log.warn("Exception parsing query text: \"{}\", returning all documents.", text);
             return new MatchAllDocsQuery();
         }
     }
@@ -120,7 +120,7 @@ public class LuceneHelper {
                 nextUnit = instant.plusMillis(amount);
                 break;
             default:
-                LOG.warn("Unrecognized unit " + indexResolution);
+                log.warn("Unrecognized unit " + indexResolution);
         }
         return nextUnit;
     }
@@ -134,7 +134,7 @@ public class LuceneHelper {
     public static PhraseQuery createPhraseQuery(String field, String phrase, String splitRegex, int slop) {
         String[] words = phrase.split(regex + "|" + splitRegex);
 
-        PhraseQuery phraseQuery = new PhraseQuery();
+        PhraseQuery.Builder phraseQuery = new PhraseQuery.Builder();
         phraseQuery.setSlop(slop);
         for(String word : words) {
             if(word.length() > 0) {
@@ -142,6 +142,6 @@ public class LuceneHelper {
             }
         }
 
-        return phraseQuery;
+        return phraseQuery.build();
     }
 }
