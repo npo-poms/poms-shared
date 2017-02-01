@@ -1,5 +1,7 @@
 package nl.vpro.domain.page;
 
+import java.util.concurrent.Future;
+
 /**
  * @author Michiel Meeuwissen
  * @since 4.3
@@ -7,10 +9,10 @@ package nl.vpro.domain.page;
 public interface PagePublisher {
 
 
-    void publish(Page page);
+    Future<?> publish(Page page);
 
-    void republishPage(String url);
+    Future<?> republishPage(String url);
 
-    void revoke(String url);
+    Future<?> revoke(String url);
 
 }
