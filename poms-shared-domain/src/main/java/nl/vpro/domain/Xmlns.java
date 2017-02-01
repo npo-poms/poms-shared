@@ -60,6 +60,9 @@ public final class Xmlns {
 
     public static final String MEDIA_I18N_NAMESPACE = "urn:vpro:media:i18n:2017";
 
+    public static final String NEP_NOTIFY_NAMESPACE = "urn:vpro:media:notify:2017";
+
+
     public static final URL XML_XSD = Xmlns.class.getResource("/nl/vpro/domain/xml.xsd");
 
 
