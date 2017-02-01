@@ -16,7 +16,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
 import org.junit.After;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -44,8 +44,8 @@ public class MediaObjectJsonSchemaTest {
     public void after() {
         BackwardsCompatibility.clearCompatibility();
     }
-    @Before
-    public void before() {
+    @BeforeClass
+    public static void before() {
         Locale.setDefault(Locales.DUTCH);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }
@@ -333,9 +333,29 @@ public class MediaObjectJsonSchemaTest {
         JSONAssert.assertEquals(expected, actual);
     }
 
+
     @Test
     public void testScheduleEvent() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"sortDate\":0,\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"scheduleEvents\":[{\"guideDay\":-90000000,\"start\":0,\"duration\":100000,\"poProgID\":\"VPRO_123456\",\"channel\":\"NED1\",\"net\":\"ZAPP\",\"urnRef\":\"urn:vpro:media:program:100\",\"midRef\":\"VPRO_123456\"}]}";
+        String expected = "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"sortDate\" : 0,\n" +
+            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"scheduleEvents\" : [ {\n" +
+            "    \"guideDay\" : -90000000,\n" +
+            "    \"start\" : 0,\n" +
+            "    \"duration\" : 100000,\n" +
+            "    \"poProgID\" : \"VPRO_123456\",\n" +
+            "    \"channel\" : \"NED1\",\n" +
+            "    \"net\" : \"ZAPP\",\n" +
+            "    \"urnRef\" : \"urn:vpro:media:program:100\",\n" +
+            "    \"midRef\" : \"VPRO_123456\"\n" +
+            "  } ]\n" +
+            "}";
 
         ScheduleEvent event = new ScheduleEvent(Channel.NED1, LocalDate.of(1970, 1, 1), Instant.ofEpochMilli(0), java.time.Duration.ofMillis(100000L));
         event.setGuideDate(LocalDate.of(1969, 12, 31));
@@ -344,10 +364,8 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().id(100L).lean().scheduleEvents(event).build();
 
-        String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
-        Program unmarshalled = Jackson2Mapper.getInstance().readValue(actual, Program.class);
+        Program unmarshalled = Jackson2TestUtil.assertThatJson(program).isSimilarTo(expected).get();
         assertThat(unmarshalled.getScheduleEvents().first().getMediaObject()).isNotNull();
     }
 
