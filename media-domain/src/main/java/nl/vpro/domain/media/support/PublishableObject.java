@@ -320,6 +320,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
 
     @XmlAttribute
     @JsonProperty("publishStart")
+    @Deprecated
     public final Date getPublishStart() {
         return DateUtils.toDate(getPublishStartInstant());
     }
@@ -341,6 +342,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
 
     @XmlAttribute
     @JsonProperty("publishStop")
+    @Deprecated
     public final Date getPublishStop() {
         return DateUtils.toDate(getPublishStopInstant());
     }
