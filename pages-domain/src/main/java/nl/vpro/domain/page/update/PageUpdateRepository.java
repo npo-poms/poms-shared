@@ -5,7 +5,6 @@
 package nl.vpro.domain.page.update;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.concurrent.Future;
 
 import nl.vpro.domain.Changes;
@@ -14,9 +13,7 @@ import nl.vpro.domain.Changes;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
-public interface PageUpdateRepository {
-
-    List<String> namesForSectionPath(String path, String portalId);
+public interface PageUpdateRepository extends SectionRepository {
 
     PageUpdate loadByUrl(String url);
 

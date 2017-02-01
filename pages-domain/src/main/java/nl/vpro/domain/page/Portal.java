@@ -1,6 +1,8 @@
 package nl.vpro.domain.page;
 
 
+import lombok.Builder;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
@@ -49,6 +51,13 @@ public class Portal implements Displayable {
         setUrl(url);
     }
 
+    @Builder
+    public Portal(String id, String url, String displayName, Section section) {
+        this.id = id;
+        this.displayName = displayName;
+        setUrl(url);
+        this.section = section;
+    }
     @XmlAttribute(required = true)
     public String getUrl() {
         return url;
