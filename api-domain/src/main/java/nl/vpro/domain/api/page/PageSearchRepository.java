@@ -4,12 +4,13 @@ import java.util.concurrent.CompletableFuture;
 
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.page.Page;
+import nl.vpro.domain.page.update.SectionRepository;
 
 /**
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public interface PageSearchRepository {
+public interface PageSearchRepository extends SectionRepository {
 
     Page load(String id);
 
