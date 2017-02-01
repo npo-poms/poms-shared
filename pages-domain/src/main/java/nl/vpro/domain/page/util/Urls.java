@@ -20,6 +20,9 @@ import nl.vpro.domain.page.Section;
 public class Urls {
 
     public static String normalize(final String taintedURI) {
+        if (taintedURI == null) {
+            return null;
+        }
         URI uri;
         try {
             String noWhiteSpace =
