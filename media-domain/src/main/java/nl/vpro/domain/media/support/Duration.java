@@ -81,6 +81,7 @@ public class Duration implements Serializable {
         this.duration = value;
     }
 
+    @Deprecated
     public Duration(Date value, boolean authorized) {
         this(value);
         this.authorized = authorized;
