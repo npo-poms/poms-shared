@@ -60,7 +60,9 @@ public enum AVFileFormat {
         }
         if(urlLowerCase.endsWith(".m4v") ||
             urlLowerCase.endsWith(".m4a") ||
-            urlLowerCase.endsWith(".mov")) {
+            urlLowerCase.endsWith(".mov") ||
+            urlLowerCase.endsWith(".mp4")
+            ) {
             return MP4;
         }
         if(urlLowerCase.endsWith(".ra") ||
