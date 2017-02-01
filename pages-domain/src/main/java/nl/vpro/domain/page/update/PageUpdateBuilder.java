@@ -1,7 +1,7 @@
 package nl.vpro.domain.page.update;
 
-import java.net.URISyntaxException;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -13,8 +13,10 @@ import com.google.common.collect.Lists;
 
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.page.Crid;
 import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.page.Section;
 
 /**
  * @author Michiel Meeuwissen
@@ -181,15 +183,27 @@ public class PageUpdateBuilder<PB extends PageUpdateBuilder<PB, P>, P extends Pa
         return self;
     }
 
+    public PB publishStart(LocalDateTime date) {
+        return publishStart(date.atZone(Schedule.ZONE_ID).toInstant());
+
+    }
+
     public PB lastPublished(Instant date) {
         page.setLastPublished(date);
         return self;
     }
 
+    public PB lastPublished(LocalDateTime date) {
+        return lastPublished(date.atZone(Schedule.ZONE_ID).toInstant());
+    }
 
     public PB creationDate(Instant date) {
         page.setCreationDate(date);
         return self;
+    }
+
+    public PB creationDate(LocalDateTime date) {
+        return creationDate(date.atZone(Schedule.ZONE_ID).toInstant());
     }
 
 
@@ -199,23 +213,42 @@ public class PageUpdateBuilder<PB extends PageUpdateBuilder<PB, P>, P extends Pa
     }
 
 
+    public PB lastModified(LocalDateTime date) {
+        return lastModified(date.atZone(Schedule.ZONE_ID).toInstant());
+    }
+
+
     Instant fromDate(Date date) {
         return date == null ? null : date.toInstant();
     }
 
-    public PB example() throws URISyntaxException {
+    public PB example() {
         return
             title("Groot brein in klein dier")
                 .subtitle("De naakte molrat heeft ‘m")
                 .summary("Een klein, harig beestje met het gewicht van een paperclip was mogelijk de directe voorouder van alle hedendaagse zoogdieren, waaronder de mens. Levend in de schaduw van de dinosaurussen kroop het diertje 195 miljoen jaar geleden tussen de planten door, op zoek naar insecten die het met zijn vlijmscherpe tandjes vermaalde. Het is de oudste zoogdierachtige die tot nu toe is gevonden.")
                 .paragraphs(new ParagraphUpdate("Voorouders", "Onderzoekers vonden de directe voorouder van ...", null))
-                .portal(new PortalUpdate("WETENSCHAP24", "http://npowetenschap.nl"))
+                .portal(
+                    PortalUpdate.builder()
+                        .id("WETENSCHAP24")
+                        .url("http://npowetenschap.nl")
+                        .section(
+                            Section.builder().displayName("quantummechanica").path("/quantum").build()
+                        ).build())
                 .images(new ImageUpdate(ImageType.ICON, null, null, new ImageLocation("http://www.wetenschap24.nl/.imaging/stk/wetenschap/vtk-imagegallery-normal/media/wetenschap/noorderlicht/artikelen/2001/May/3663525/original/3663525.jpeg")))
                 .tags("molrat", "brein", "naakt", "jura")
                 .keywords("wetenschap", "hoezo", "biologie")
                 .broadcasters("VPRO", "KRO")
                 .links(LinkUpdate.topStory("http://www.vpro.nl/heelgoed.html", "kijk hier!"))
                 .embeds(new EmbedUpdate("POMS_VPRO_203778", "Noorderlicht"))
+                .genres("3.0.1.1")
+                .crids("crid://example/1")
+                .creationDate(LocalDateTime.of(2017, 2, 1, 7, 52))
+                .lastModified(LocalDateTime.of(2017, 2, 1, 8, 52))
+                .lastPublished(LocalDateTime.of(2017, 2, 1, 9, 52))
+                .publishStart(LocalDateTime.of(2017, 2, 1, 9, 52))
+                .statRefs("http://comscore/1")
+                .alternativeUrls(build().getUrl() + "?alternative")
             ;
     }
 
