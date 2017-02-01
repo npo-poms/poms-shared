@@ -4,16 +4,18 @@
  */
 package nl.vpro.domain.api;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.Getter;
+import lombok.Setter;
+import nl.vpro.domain.api.jackson.ExtendedTextMatcherJson;
+import nl.vpro.domain.api.validation.ValidTextMatcher;
+
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import nl.vpro.domain.api.jackson.ExtendedTextMatcherJson;
-import nl.vpro.domain.api.validation.ValidTextMatcher;
 
 /**
  * @author rico
@@ -25,6 +27,12 @@ import nl.vpro.domain.api.validation.ValidTextMatcher;
 @JsonDeserialize(using = ExtendedTextMatcherJson.Deserializer.class)
 @ValidTextMatcher
 public class ExtendedTextMatcher extends AbstractTextMatcher<ExtendedMatchType> {
+    @XmlAttribute
+    @Pattern(regexp = "^AUTO|$")
+    @Getter
+    @Setter
+    protected String fuzziness;
+
     public static final ExtendedMatchType DEFAULT_MATCHTYPE = ExtendedMatchType.TEXT;
 
     public static ExtendedTextMatcher must(String value) {
