@@ -4,20 +4,16 @@
  */
 package nl.vpro.domain.api.media;
 
+import nl.vpro.domain.api.*;
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.Tag;
+import nl.vpro.util.DateUtils;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
-
-import nl.vpro.domain.api.*;
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.AgeRating;
-import nl.vpro.domain.media.ContentRating;
-import nl.vpro.domain.media.MediaType;
-import nl.vpro.domain.media.RelationDefinition;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.util.DateUtils;
 
 /**
  * @author Roelof Jan Koekoek
@@ -50,10 +46,10 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     }
 
     public MediaFormBuilder fuzzyText(String text) {
-        return fuzzyText(text, "2");
+        return fuzzyText(text, "AUTO");
     }
 
-    public MediaFormBuilder fuzzyText(String text, String fuzziness) {
+    private MediaFormBuilder fuzzyText(String text, String fuzziness) {
         SimpleTextMatcher matcher = simpleTextMatcher(text, Match.SHOULD);
         matcher.setFuzziness(fuzziness);
         search().setText(matcher);
