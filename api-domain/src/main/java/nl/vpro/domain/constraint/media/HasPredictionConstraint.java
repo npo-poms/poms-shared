@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.constraint.ExistsConstraint;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Platform;
@@ -24,7 +25,7 @@ import nl.vpro.domain.media.Platform;
 @XmlType(name = "hasPredictionConstraintType")
 public class HasPredictionConstraint implements ExistsConstraint<MediaObject> {
 
-    @XmlAttribute
+    @XmlAttribute(namespace = Xmlns.MEDIA_CONSTRAINT_NAMESPACE)
     @Getter
     @Setter
     private Platform platform;

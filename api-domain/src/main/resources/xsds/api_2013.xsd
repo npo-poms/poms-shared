@@ -56,6 +56,7 @@
   <xs:complexType name="simpleMatcherType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
+        <xs:attribute name="fuzziness" type="xs:string"/>
         <xs:attribute name="matchType" type="simpleMatchType"/>
         <xs:attribute name="match" type="match"/>
       </xs:extension>
@@ -99,6 +100,7 @@
   <xs:complexType name="extendedMatcherType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
+        <xs:attribute name="fuzziness" type="xs:string"/>
         <xs:attribute name="matchType" type="extendedMatchType"/>
         <xs:attribute name="caseSensitive" type="xs:boolean"/>
         <xs:attribute name="match" type="match"/>
