@@ -289,7 +289,7 @@
 
   <xs:complexType name="predictionType">
     <xs:simpleContent>
-      <xs:extension base="platform">
+      <xs:extension base="platformTypeEnum">
         <xs:attribute name="state" type="predictionStateEnum"/>
         <xs:attribute name="publishStart" type="xs:dateTime"/>
         <xs:attribute name="publishStop" type="xs:dateTime"/>
@@ -308,7 +308,7 @@
           <xs:element name="duration" type="xs:duration" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
-        <xs:attribute name="platform" type="platform"/>
+        <xs:attribute name="platform" type="platformTypeEnum"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -591,7 +591,7 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="platform">
+  <xs:simpleType name="platformTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="INTERNETVOD"/>
       <xs:enumeration value="TVVOD"/>
