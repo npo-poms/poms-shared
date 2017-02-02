@@ -46,6 +46,12 @@ public class ResourceResolver implements LSResourceResolver {
         MAP.put(Xmlns.SHARED_NAMESPACE, Xmlns.SHARED_XSD);
         MAP.put(Xmlns.UPDATE_NAMESPACE, Xmlns.UPDATE_XSD);
         MAP.put(Xmlns.SEARCH_NAMESPACE, Xmlns.SEARCH_XSD);
+        MAP.put(Xmlns.API_NAMESPACE, Xmlns.API_XSD);
+        MAP.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, Xmlns.PAGE_CONSTRAINT_XSD);
+        MAP.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, Xmlns.MEDIA_CONSTRAINT_XSD);
+        MAP.put(Xmlns.CONSTRAINT_NAMESPACE, Xmlns.CONSTRAINT_XSD);
+
+
         //MAP.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, Xmlns.MEDIA_SUBTITLES_XSD)
     }
 
@@ -58,8 +64,6 @@ public class ResourceResolver implements LSResourceResolver {
     }
     /**
      * Resolve namespace to an InputStream representing the XSD.
-     * @param namespaceURI
-     * @return
      */
     public static InputStream resolve(String namespaceURI)  {
         URL resource = resolveToURL(namespaceURI);
@@ -71,6 +75,7 @@ public class ResourceResolver implements LSResourceResolver {
                 return null;
             }
         } else {
+            log.debug("No xsd found for {}", namespaceURI);
             return null;
         }
     }

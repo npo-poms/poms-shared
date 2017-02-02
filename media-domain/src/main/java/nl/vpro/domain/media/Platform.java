@@ -1,11 +1,13 @@
 package nl.vpro.domain.media;
 
 import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author Michiel Meeuwissen
  */
 @XmlEnum
+@XmlType(name = "platformTypeEnum")
 public enum Platform {
     INTERNETVOD,
     TVVOD,
