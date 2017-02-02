@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:constraint:media:2013" xmlns:tns="urn:vpro:api:constraint:media:2013" xmlns:constraint="urn:vpro:api:constraint" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:vpro:api:constraint:2014">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:constraint:media:2013" xmlns:mediaconstraint="urn:vpro:api:constraint:media:2013" xmlns:tns="urn:vpro:api:constraint:media:2013" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:media="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="urn:vpro:media:2009" schemaLocation="http://poms.omroep.nl/schema/vproMedia.xsd"/>
 
   <xs:import namespace="urn:vpro:api:constraint:2014" schemaLocation="api_constraint_2014.xsd"/>
 
@@ -172,6 +174,7 @@
 
   <xs:complexType name="hasPredictionConstraintType">
     <xs:sequence/>
+    <xs:attribute ref="tns:platform"/>
   </xs:complexType>
 
   <xs:simpleType name="typeConstraintType">
@@ -185,7 +188,7 @@
   <xs:complexType name="scheduleEventType">
     <xs:sequence/>
     <xs:attribute name="date" type="xs:string"/>
-    <xs:attribute name="operator" type="ns1:operatorType"/>
+    <xs:attribute name="operator" type="constraint:operatorType"/>
   </xs:complexType>
 
   <xs:complexType name="hasPortalConstraintType">
@@ -227,5 +230,7 @@
   <xs:complexType name="hasContentRatingConstraintType">
     <xs:sequence/>
   </xs:complexType>
+
+  <xs:attribute name="platform" type="media:platform"/>
 </xs:schema>
 
