@@ -42,17 +42,24 @@ public final class Xmlns {
     public static final String PAGE_NAMESPACE = "urn:vpro:pages:2013";
 
     public static final String API_NAMESPACE = "urn:vpro:api:2013";
+    public static final URL    API_XSD = Xmlns.class.getResource("/xsds/api_2013.xsd");
+
 
     public static final String PROFILE_NAMESPACE = "urn:vpro:api:profile:2013";
 
     public static final String MEDIA_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:media:2013";
+    public static final URL MEDIA_CONSTRAINT_XSD = Xmlns.class.getResource("/xsds/api_constraint_media_2013.xsd");
+
 
     public static final String MEDIA_SUBTITLES_NAMESPACE = "urn:vpro:media:subtitles:2009";
 
     public static final String PAGE_CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:page:2013";
+    public static final URL    PAGE_CONSTRAINT_XSD = Xmlns.class.getResource("/xsds/api_constraint_page_2013.xsd");
 
 
     public static final String CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:2014";
+    public static final URL CONSTRAINT_XSD = Xmlns.class.getResource("/xsds/api_constraint_2014.xsd");
+
 
     public static final String MEDIA_WS_NAMESPACE = "urn:vpro:ws:media:2009";
 

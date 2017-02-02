@@ -174,7 +174,7 @@
 
   <xs:complexType name="hasPredictionConstraintType">
     <xs:sequence/>
-    <xs:attribute ref="tns:platform"/>
+    <xs:attribute name="platform" type="media:platformTypeEnum"/>
   </xs:complexType>
 
   <xs:simpleType name="typeConstraintType">
@@ -230,7 +230,5 @@
   <xs:complexType name="hasContentRatingConstraintType">
     <xs:sequence/>
   </xs:complexType>
-
-  <xs:attribute name="platform" type="media:platform"/>
 </xs:schema>
 
