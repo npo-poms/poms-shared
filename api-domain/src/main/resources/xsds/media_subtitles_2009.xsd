@@ -15,6 +15,7 @@
     <xs:attribute name="lastModified" type="xs:dateTime"/>
     <xs:attribute name="type" type="tns:subtitlesTypeEnum"/>
     <xs:attribute ref="xml:lang"/>
+    <xs:attribute name="cueCount" type="xs:int"/>
   </xs:complexType>
 
   <xs:complexType name="subtitlesContentType">
@@ -37,6 +38,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="CAPTION"/>
       <xs:enumeration value="TRANSLATION"/>
+      <xs:enumeration value="TRANSCRIPT"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
