@@ -485,7 +485,6 @@ public abstract class MediaObject extends PublishableObject
     @Transient
     private String mergedToRef;
 
-
     /**
      * If this is set to true, then that indicates that something is changed in the mediaobject which would require
      * a recalculation of the sort date.
@@ -539,8 +538,8 @@ public abstract class MediaObject extends PublishableObject
         source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
-            this.updatePrediction(prediction.getPlatform(), prediction.getPublishStart(), prediction.getPublishStop());
-            this.updatePrediction(prediction.getPlatform(), prediction.getState());
+            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getPublishStart(), prediction.getPublishStop());
+            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getState());
         });
         source.getLocations().forEach(location -> this.addLocation(Location.copy(location, this)));
         source.getScheduleEvents().forEach(scheduleevent -> this.addScheduleEvent(ScheduleEvent.copy(scheduleevent, this)));
@@ -1803,17 +1802,6 @@ public abstract class MediaObject extends PublishableObject
     }
 
 
-    public void updatePrediction(Platform platform, Prediction.State state) {
-        Prediction prediction = findOrCreatePrediction(platform);
-        prediction.setState(state);
-    }
-
-    public void updatePrediction(Platform platform, Instant start, Instant stop) {
-        Prediction prediction = findOrCreatePrediction(platform);
-        prediction.setPublishStart(start);
-        prediction.setPublishStop(stop);
-    }
-
 
     void realizePrediction(Location location) {
         if (locations == null || (!locations.contains(location) && findLocation(location.getId()) == null)) {
@@ -1841,7 +1829,7 @@ public abstract class MediaObject extends PublishableObject
     }
 
     public Prediction findOrCreatePrediction(Platform platform) {
-        Prediction prediction = MediaObjects.getPrediction(platform, this.predictions);
+        Prediction prediction = getPrediction(platform);
         if (prediction == null) {
             prediction = new Prediction(platform);
             prediction.setMediaObject(this);
@@ -2433,7 +2421,7 @@ public abstract class MediaObject extends PublishableObject
      * republishing descendants, and (in code) when revoking locations/images. When the republication delay reaches a
      * certain value an alert is raised in NewRelic.
      */
-    public void setRepubDate(Instant repubDate) {
+    void setRepubDate(Instant repubDate) {
         this.repubDate = repubDate;
     }
 

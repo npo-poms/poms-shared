@@ -505,6 +505,19 @@ public class MediaObjects {
         return null;
     }
 
+
+    public static void updatePrediction(MediaObject media, Platform platform, Prediction.State state) {
+        Prediction prediction = media.findOrCreatePrediction(platform);
+        prediction.setState(state);
+    }
+
+    public static void updatePrediction(MediaObject media, Platform platform, Instant start, Instant stop) {
+        Prediction prediction = media.findOrCreatePrediction(platform);
+        prediction.setPublishStart(start);
+        prediction.setPublishStop(stop);
+    }
+
+
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
      *
