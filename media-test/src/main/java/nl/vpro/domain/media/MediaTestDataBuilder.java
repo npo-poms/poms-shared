@@ -453,7 +453,8 @@ public interface MediaTestDataBuilder<
     @SuppressWarnings("unchecked")
     default T authoritativeRecord(Platform... platforms) {
         for (Platform platform : platforms) {
-            LocationAuthorityRecord.authoritative(mediaObject(), platform);
+            Prediction prediction = mediaObject().findOrCreatePrediction(platform);
+            prediction.setAuthority(true);
         }
         return (T)this;
     }
