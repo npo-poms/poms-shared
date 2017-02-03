@@ -1,7 +1,6 @@
 /*
  * Copyright (C) 2008 All rights reserved
  * VPRO The Netherlands
- * Creation date 3 nov 2008.
  */
 package nl.vpro.domain.media;
 
@@ -423,8 +422,8 @@ public abstract class MediaObject extends PublishableObject
             + " or " +
             " ( not(platform is null)  " +
             "   and ( " +
-            "        select count(*) from locationauthorityrecord c where c.platform = platform and c.mediaobject_id = mediaobject_id and " +
-            "              (c.restrictionStart is null or c.restrictionStart <= now()) and (c.restrictionStop is null or c.restrictionStop > now()) " +
+            "        select count(*) from prediction c where c.platform = platform and c.mediaobject_id = mediaobject_id and " +
+            "              (c.publishStart is null or c.publishStart <= now()) and (c.publishStop is null or c.publishStop > now()) " +
             "       ) > 0)" +
             ")"
 
@@ -2510,18 +2509,7 @@ public abstract class MediaObject extends PublishableObject
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 
-        if (locations != null) {
-            for (Location loc : locations) {
-                if (loc.hasPlatform()) {
-                    LocationAuthorityRecord.unknownAuthority(this, loc.getPlatform());
-                }
-            }
-        }
-        if (predictions != null) {
-            for (Prediction pred : predictions) {
-                LocationAuthorityRecord.unknownAuthority(this, pred.getPlatform());
-            }
-        }
+
     }
 
 
