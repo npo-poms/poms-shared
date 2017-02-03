@@ -218,6 +218,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         state = from.state;
     }
 
+    public Boolean getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Boolean authority) {
+        this.authority = authority;
+    }
+
     /**
      * Determines if users have the authority to update Location on state change
      *
