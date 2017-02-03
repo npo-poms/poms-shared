@@ -680,12 +680,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
-    default B authorityRecord(LocationAuthorityRecord record) {
-        mediaObject().setLocationAuthorityRecord(record);
-        return (B)this;
-    }
-
-    @SuppressWarnings("unchecked")
     default B mergedTo(MediaObject media) {
         workflow(Workflow.MERGED);
         mediaObject().setMergedTo(media);

@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.*;
 
 import javax.persistence.*;
@@ -16,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.support.StreamingStatus;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Broadcaster;
@@ -94,6 +98,14 @@ public class Program extends MediaObject {
         @Filter(name = DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
     })
     private Set<Segment> segments;
+
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    @XmlTransient
+    @Setter
+    @Getter
+    private StreamingStatus streamingPlatformStatus = StreamingStatus.NOT_AVAILABLE;
 
     public Program() {
         this(null, null);
@@ -451,6 +463,8 @@ public class Program extends MediaObject {
     protected String getUrnPrefix() {
         return ProgramType.URN_PREFIX;
     }
+
+
 
     @Override
     public String toString() {

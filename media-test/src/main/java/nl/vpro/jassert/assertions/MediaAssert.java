@@ -508,15 +508,6 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         return myself;
     }
 
-    public MediaAssert hasCeresRecord(Platform platform) {
-        isNotNull();
-        try {
-            assertThat(actual.getLocationAuthorityRecord(platform)).isNotNull();
-        } catch(AssertionError e) {
-            Fail.fail("expecting nog-empty ceres record");
-        }
-        return myself;
-    }
 
     public MediaAssert hasRelations() {
         isNotNull();
