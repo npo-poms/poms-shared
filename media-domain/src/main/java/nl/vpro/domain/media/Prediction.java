@@ -36,15 +36,14 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 )
 public class Prediction implements Comparable<Prediction>, Updatable<Prediction>,  Serializable {
 
-    private static final long serialVersionUID = 0l;
+    private static final long serialVersionUID = 0L;
 
     @XmlEnum
     @XmlType(name = "predictionStateEnum")
     public enum State {
         ANNOUNCED,
         REALIZED,
-        REVOKED,
-        EXPIRED
+        REVOKED
     }
 
     @Id
@@ -83,6 +82,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlValue
     @JsonProperty("platform")
     protected Platform platform;
+
+    @Column
+    @XmlTransient
+    private Boolean authority = null;
+
 
     @ManyToOne
     @XmlTransient
@@ -169,12 +173,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     public Instant getPublishStart() {
-        return publishStart;
+        return publishStop;
     }
 
-    public void setPublishStart(Instant publishStart) {
-        this.publishStart = publishStart;
+
+    public void setPublishStart(Instant start) {
+        this. publishStart = start;
     }
+
 
     public Instant getPublishStop() {
         return publishStop;
@@ -212,6 +218,16 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         state = from.state;
     }
 
+    /**
+     * Determines if users have the authority to update Location on state change
+     *
+     * @return true when a user can update Ceres on restriction change, false otherwise
+     */
+    public boolean hasAuthority() {
+        return authority != null && authority;
+    }
+
+
     @Override
     public String toString() {
         return
@@ -223,9 +239,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
         if (parent instanceof MediaObject) {
             MediaObject mediaObject = (MediaObject) parent;
-            if (this.platform != null) {
-                LocationAuthorityRecord.unknownAuthority(mediaObject, platform);
-            }
         }
     }
 
