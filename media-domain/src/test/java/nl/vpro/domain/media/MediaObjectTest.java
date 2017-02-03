@@ -294,7 +294,7 @@ public class MediaObjectTest {
 
         assertThat(program.getLocations()).hasSize(2);
 
-        LocationAuthorityRecord record = program.getLocationAuthorityRecord(Platform.INTERNETVOD);
+        Prediction record = program.getPrediction(Platform.INTERNETVOD);
         assertThat(record).isNotNull();
         assertThat(record).isSameAs(program.getLocations().first().getAuthorityRecord());
         assertThat(record).isSameAs(program.getLocations().last().getAuthorityRecord());
@@ -456,12 +456,12 @@ public class MediaObjectTest {
             .id(1L)
             .build();
 
-        LocationAuthorityRecord.nonAuthoritative(program, Platform.INTERNETVOD);
+        program.findOrCreatePrediction(Platform.INTERNETVOD);
         program.updatePrediction(Platform.INTERNETVOD, Prediction.State.ANNOUNCED);
 
         Program result = JAXBTestUtil.roundTrip(program);
 
-        assertThat(result.getLocationAuthorityRecord(Platform.INTERNETVOD)).isNotNull();
+        assertThat(result.getPrediction(Platform.INTERNETVOD)).isNotNull();
     }
 
     @Test

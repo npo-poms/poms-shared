@@ -411,12 +411,7 @@ public abstract class MediaObject extends PublishableObject
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
     protected Set<Prediction> predictions;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
-    @SortNatural
-    @XmlTransient
-    // TODO, why don't we merge ceresRecords and predictions completely?
-    protected Set<LocationAuthorityRecord> locationAuthorityRecords = new TreeSet<>();
+
 
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = true)
     @Cascade({org.hibernate.annotations.CascadeType.ALL})
@@ -505,6 +500,8 @@ public abstract class MediaObject extends PublishableObject
      */
     @Transient
     private boolean sortDateInvalidatable = true;
+
+
 
     public MediaObject() {
     }
@@ -1779,7 +1776,7 @@ public abstract class MediaObject extends PublishableObject
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform()) {
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
-                            realizePrediction(prediction, location);
+                            prediction.setState(Prediction.State.REALIZED);
                             MediaObjects.markForRepublication(MediaObject.this);
                             break;
                         }
@@ -1798,17 +1795,22 @@ public abstract class MediaObject extends PublishableObject
     public Prediction getPrediction(Platform platform) {
         return MediaObjects.getPrediction(platform, getPredictions());
     }
-
-    public void updatePrediction(Platform platform, Instant publishStart, Instant publishStop) {
-        Prediction prediction = findOrCreatePrediction(platform);
-        prediction.setPublishStart(publishStart);
-        prediction.setPublishStop(publishStop);
+    public boolean hasAuthority(Platform platform) {
+        return getPrediction(platform) == null || getPrediction(platform).hasAuthority();
     }
+
 
     public void updatePrediction(Platform platform, Prediction.State state) {
         Prediction prediction = findOrCreatePrediction(platform);
         prediction.setState(state);
     }
+
+    public void updatePrediction(Platform platform, Instant start, Instant stop) {
+        Prediction prediction = findOrCreatePrediction(platform);
+        prediction.setPublishStart(start);
+        prediction.setPublishStop(stop);
+    }
+
 
     void realizePrediction(Location location) {
         if (locations == null || (!locations.contains(location) && findLocation(location.getId()) == null)) {
@@ -1822,22 +1824,8 @@ public abstract class MediaObject extends PublishableObject
         }
 
         Prediction prediction = findOrCreatePrediction(platform);
-        realizePrediction(prediction, location);
-
-    }
-
-    void realizePrediction(Prediction prediction, Location location) {
         prediction.setState(Prediction.State.REALIZED);
-        Platform platform = location.getPlatform();
-        if (platform != null) {
-            if (platform == prediction.getPlatform()) {
-                prediction.setPublishStart(location.getPublishStartInstant());
-                prediction.setPublishStop(location.getPublishStopInstant());
-            } else {
-                throw new IllegalArgumentException(platform + " is not equal to " + prediction.getPlatform() + " (for " + location + ")");
-            }
 
-        }
     }
 
 
@@ -1849,7 +1837,7 @@ public abstract class MediaObject extends PublishableObject
         return predictions.remove(new Prediction(platform));
     }
 
-    private Prediction findOrCreatePrediction(Platform platform) {
+    public Prediction findOrCreatePrediction(Platform platform) {
         Prediction prediction = MediaObjects.getPrediction(platform, this.predictions);
         if (prediction == null) {
             prediction = new Prediction(platform);
@@ -1992,18 +1980,8 @@ public abstract class MediaObject extends PublishableObject
 
         Prediction prediction = findOrCreatePrediction(platform);
         prediction.setState(Prediction.State.REVOKED);
-
-        if (platform == Platform.INTERNETVOD) {
-            // Clearing this record re-enables asset uploads
-            clearCeresRecord(Platform.INTERNETVOD);
-        }
     }
 
-    private void clearCeresRecord(Platform platform) {
-        if (locationAuthorityRecords != null) {
-            locationAuthorityRecords.removeIf(cr -> cr.getPlatform() == platform);
-        }
-    }
 
     public boolean hasScheduleEvents() {
         return scheduleEvents != null && scheduleEvents.size() > 0;
@@ -2286,27 +2264,6 @@ public abstract class MediaObject extends PublishableObject
         isEmbeddable = embeddable;
     }
 
-    /**
-     * MediaObjects with locations managed by Ceres contain a <i>CeresRecord</i> with a Ceres Guci. These records are
-     * stored here because Ceres restrictions exist independent of the locations they apply to. Once a location is added
-     * it should receive the corresponding CeresRecord as well when it is an Ceres managed location.
-     *
-     * @return An existing CeresRecord or null when not managed by Ceres
-     */
-    public LocationAuthorityRecord getLocationAuthorityRecord(Platform platform) {
-        if (locationAuthorityRecords != null) {
-            for (LocationAuthorityRecord locationAuthorityRecord : locationAuthorityRecords) {
-                if (platform.equals(locationAuthorityRecord.getPlatform())) {
-                    return locationAuthorityRecord;
-                }
-            }
-        }
-        return null;
-    }
-
-    public void setLocationAuthorityRecord(LocationAuthorityRecord locationAuthorityRecord) {
-        locationAuthorityRecords.add(locationAuthorityRecord);
-    }
 
     /**
      * When true Ceres/Pluto.. needs a restriction update. The underlying field is managed by Hibernate, and not accessible.
@@ -2342,7 +2299,7 @@ public abstract class MediaObject extends PublishableObject
     }
 
     protected boolean hasInternetVodAuthority() {
-        return getLocationAuthorityRecord(Platform.INTERNETVOD) != null && getLocationAuthorityRecord(Platform.INTERNETVOD).hasAuthority();
+        return getPrediction(Platform.INTERNETVOD) != null && getPrediction(Platform.INTERNETVOD).hasAuthority();
     }
 
     @Override
@@ -2479,7 +2436,7 @@ public abstract class MediaObject extends PublishableObject
 
     private void markCeresUpdate() {
         // Shouldn't this check on authoritative?
-        if (getLocationAuthorityRecord(Platform.INTERNETVOD) != null) {
+        if (getPrediction(Platform.INTERNETVOD) != null) {
             locationAuthorityUpdate = true;
         }
     }

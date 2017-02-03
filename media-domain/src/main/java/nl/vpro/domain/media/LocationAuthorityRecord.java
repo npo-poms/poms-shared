@@ -21,6 +21,7 @@ import nl.vpro.domain.Identifiable;
  */
 @Entity
 @Slf4j
+@Deprecated
 public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<LocationAuthorityRecord>, Serializable {
 
     private static final long serialVersionUID = 0L;
@@ -71,7 +72,7 @@ public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<L
     public static LocationAuthorityRecord authoritative(MediaObject object, Platform platform) {
         LocationAuthorityRecord record = new LocationAuthorityRecord(object, platform, true);
         if (object != null) {
-            object.setLocationAuthorityRecord(record);
+            //object.setLocationAuthorityRecord(record);
         }
         return record;
     }
@@ -84,13 +85,13 @@ public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<L
      */
     public static LocationAuthorityRecord nonAuthoritative(MediaObject object, Platform platform) {
         LocationAuthorityRecord record = new LocationAuthorityRecord(object, platform, false);
-        object.setLocationAuthorityRecord(record);
+        //object.setLocationAuthorityRecord(record);
         return record;
     }
 
     public static LocationAuthorityRecord unknownAuthority(MediaObject object, Platform platform) {
         LocationAuthorityRecord record = new LocationAuthorityRecord(object, platform, null);
-        object.setLocationAuthorityRecord(record);
+        //object.setLocationAuthorityRecord(record);
         return record;
     }
 
