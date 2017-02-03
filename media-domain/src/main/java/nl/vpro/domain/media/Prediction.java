@@ -22,6 +22,9 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 /**
  * A prediction is related to a program and indicates that locations (for a certain platform) <em>will be</em> available.
  *
+ * Also it contains information about the embargo restrictions for that platform.
+ *
+ *
  * @author Michiel Meeuwissen
  * @since 1.6
  */
