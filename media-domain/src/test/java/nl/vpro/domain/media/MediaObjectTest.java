@@ -366,7 +366,7 @@ public class MediaObjectTest {
     @Test
     public void testAddLocationsOnPredictionUpdate() throws Exception {
         Program target = new Program(1L);
-        LocationAuthorityRecord.authoritative(target, Platform.PLUSVOD);
+        target.findOrCreatePrediction(Platform.PLUSVOD);
 
         Location l1 = new Location("aaa", OwnerType.BROADCASTER);
 
