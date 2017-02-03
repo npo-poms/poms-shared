@@ -4,14 +4,13 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlTransient;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.Identifiable;
 
@@ -21,11 +20,10 @@ import nl.vpro.domain.Identifiable;
  * @since 1.8
  */
 @Entity
+@Slf4j
 public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<LocationAuthorityRecord>, Serializable {
 
     private static final long serialVersionUID = 0L;
-
-    private static final Logger LOG = LoggerFactory.getLogger(LocationAuthorityRecord.class);
 
 
     @Id
@@ -41,7 +39,11 @@ public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<L
     protected Platform platform;
 
 
+    @Column
     private Boolean authority = false;
+
+    @Column
+    private Boolean drm = false;
 
     @Column
     @XmlTransient
@@ -127,7 +129,7 @@ public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<L
             this.restrictionStart = restrictionStop;
         }
         if (restrictionStart == null && this.restrictionStart != null) {
-            LOG.warn("Clearing restriction start of {}", this);
+            log.warn("Clearing restriction start of {}", this);
         }
         this.restrictionStart = restrictionStart;
     }
@@ -147,7 +149,7 @@ public class LocationAuthorityRecord implements Identifiable<Long>, Comparable<L
             this.restrictionStart = restrictionStop;
         }
         if (restrictionStop== null && this.restrictionStop != null) {
-            LOG.warn("Clearing restriction stop of {}", this);
+            log.warn("Clearing restriction stop of {}", this);
         }
         this.restrictionStop = restrictionStop;
     }
