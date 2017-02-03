@@ -279,7 +279,7 @@ public class MediaObjectTest {
     @Test
     public void testAddTwoLocationsWithSameAuthorityRecords() throws Exception {
         Program program = new Program(1L);
-        LocationAuthorityRecord.authoritative(program, Platform.INTERNETVOD);
+
 
         Location l1 = new Location("aaa", OwnerType.BROADCASTER);
         Location l2 = new Location("bbb", OwnerType.BROADCASTER);
@@ -306,7 +306,7 @@ public class MediaObjectTest {
         Location l1 = new Location("aaa", OwnerType.BROADCASTER);
 
         Program target = new Program(1L);
-        LocationAuthorityRecord.nonAuthoritative(target, Platform.PLUSVOD);
+
 
         target.addLocation(l1);
 
@@ -318,7 +318,7 @@ public class MediaObjectTest {
     public void testAddLocationsOnlyUpdatePlatformPredictions() throws Exception {
         Program target = new Program(1L);
         Location l1 = new Location("aaa", OwnerType.BROADCASTER);
-        LocationAuthorityRecord.authoritative(target, Platform.PLUSVOD);
+
         target.addLocation(l1);
 
         l1.setPlatform(Platform.PLUSVOD);
@@ -335,7 +335,7 @@ public class MediaObjectTest {
 
         Program program = new Program(1L);
         program.setWorkflow(Workflow.PUBLISHED);
-        LocationAuthorityRecord.authoritative(program, Platform.INTERNETVOD);
+
 
         program.addLocation(l1);
 
@@ -353,7 +353,7 @@ public class MediaObjectTest {
         l1.setPlatform(Platform.PLUSVOD);
 
         Program program = new Program(1L);
-        LocationAuthorityRecord.authoritative(program, Platform.PLUSVOD);
+
 
         program.addLocation(l1);
 
@@ -416,7 +416,7 @@ public class MediaObjectTest {
             .creationInstant(Instant.ofEpochMilli(1))
             .build();
 
-        assertThat(program.getSortDate()).isEqualTo(new Date(1));
+        assertThat(program.getSortInstant()).isEqualTo(Instant.ofEpochMilli(1));
     }
 
 
@@ -427,8 +427,6 @@ public class MediaObjectTest {
             .id(1L)
             .build();
 
-
-        LocationAuthorityRecord.nonAuthoritative(program, Platform.INTERNETVOD);
 
         final Location location1 = new Location("http://bla/1", OwnerType.BROADCASTER);
         location1.setPlatform(Platform.INTERNETVOD);

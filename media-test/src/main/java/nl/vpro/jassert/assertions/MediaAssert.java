@@ -390,7 +390,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         try {
             assertThat(predictions).contains(expected);
         } catch(AssertionError error) {
-            Fail.fail(String.format("missing title\n" +
+            Fail.fail(String.format(
                 "    PREDICTIONS:    %s\n" +
                 "    EXPECTED:  %s", predictions, expected));
         }
