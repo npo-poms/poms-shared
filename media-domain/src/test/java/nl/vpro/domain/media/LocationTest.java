@@ -6,7 +6,6 @@ package nl.vpro.domain.media;
 
 import java.io.StringReader;
 import java.time.Instant;
-import java.util.Date;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -16,7 +15,6 @@ import javax.validation.ValidatorFactory;
 import javax.xml.bind.JAXB;
 
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
 
@@ -83,21 +81,13 @@ public class LocationTest extends ObjectTest<Location> {
     }
     @Test
     public void testAddCeresRecordWhenNew() throws Exception {
-        LocationAuthorityRecord record = LocationAuthorityRecord.authoritative(new Program(1L), Platform.INTERNETVOD);
+        Program program = new Program(1L);
+        Prediction pred = program.findOrCreatePrediction(Platform.INTERNETVOD);
         Location location = new Location();
-        location.setMediaObject(record.getMediaObject());
+        location.setMediaObject(program);
         location.setPlatform(Platform.INTERNETVOD);
 
-        assertThat(location.getAuthorityRecord()).isSameAs(record);
-    }
-
-    @Test(expected = IllegalStateException.class)
-    @Ignore("")
-    public void testAddCeresRecordWhenNotNew() throws Exception {
-        LocationAuthorityRecord.authoritative(new Program(1L), Platform.INTERNETVOD);
-        Location location = new Location();
-        location.setId(1L);
-        location.setPlatform(Platform.INTERNETVOD);
+        assertThat(location.getAuthorityRecord()).isSameAs(pred);
     }
 
     @Test
