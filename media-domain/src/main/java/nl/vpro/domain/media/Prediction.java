@@ -232,7 +232,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     /**
      * Determines if users have the authority to update Location on state change
      *
-     * @return true when a user can update Ceres on restriction change, false otherwise
+     * @return true when a normal user can update restrictions, false otherwise
      */
     public boolean hasAuthority() {
         return authority != null && authority;
