@@ -500,6 +500,9 @@ public abstract class MediaObject extends PublishableObject
     private boolean sortDateInvalidatable = true;
 
 
+    @Column
+    private boolean subtitlesPublished = false;
+
 
     public MediaObject() {
     }
@@ -2430,6 +2433,14 @@ public abstract class MediaObject extends PublishableObject
         if (getPrediction(Platform.INTERNETVOD) != null) {
             locationAuthorityUpdate = true;
         }
+    }
+
+    boolean isSubtitlesPublished() {
+        return subtitlesPublished;
+    }
+
+    void setSubtitlesPublished(boolean subtitlesPublished) {
+        this.subtitlesPublished = subtitlesPublished;
     }
 
     @Override
