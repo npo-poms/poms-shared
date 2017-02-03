@@ -587,7 +587,6 @@
       <xs:enumeration value="ANNOUNCED"/>
       <xs:enumeration value="REALIZED"/>
       <xs:enumeration value="REVOKED"/>
-      <xs:enumeration value="EXPIRED"/>
     </xs:restriction>
   </xs:simpleType>
 
