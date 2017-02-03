@@ -173,12 +173,12 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     public Instant getPublishStart() {
-        return publishStop;
+        return publishStart;
     }
 
 
     public void setPublishStart(Instant start) {
-        this. publishStart = start;
+        this.publishStart = start;
     }
 
 

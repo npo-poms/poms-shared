@@ -434,10 +434,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
                 throw new IllegalStateException("Location does not have a parent mediaobject");
             }
 
-            Prediction rec = mediaObject.getPrediction(platform);
-            if (rec == null) {
-                throw new IllegalAuthorativeRecord(mediaObject.getMid(), String.format("MediaObject %s of %s has no authorative record %s", mediaObject, this, platform));
-            }
+            Prediction rec = mediaObject.findOrCreatePrediction(platform);
             return rec;
         } else {
             return null;
