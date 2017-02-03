@@ -1794,6 +1794,10 @@ public abstract class MediaObject extends PublishableObject
     public Prediction getPrediction(Platform platform) {
         return MediaObjects.getPrediction(platform, getPredictions());
     }
+
+    /**
+     * see {@link Prediction#hasAuthority()} or true, if no such prediction record.
+     */
     public boolean hasAuthority(Platform platform) {
         return getPrediction(platform) == null || getPrediction(platform).hasAuthority();
     }
