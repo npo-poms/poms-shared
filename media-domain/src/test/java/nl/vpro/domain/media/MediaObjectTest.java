@@ -454,8 +454,7 @@ public class MediaObjectTest {
             .id(1L)
             .build();
 
-        program.findOrCreatePrediction(Platform.INTERNETVOD);
-        program.updatePrediction(Platform.INTERNETVOD, Prediction.State.ANNOUNCED);
+        program.findOrCreatePrediction(Platform.INTERNETVOD).setState(Prediction.State.ANNOUNCED);
 
         Program result = JAXBTestUtil.roundTrip(program);
 
