@@ -386,6 +386,19 @@ public interface MediaTestDataBuilder<
 
     }
 
+    default T withPublishedLocations() {
+        Location l1 = new Location("http://www.vpro.nl/location/1", OwnerType.BROADCASTER);
+        l1.setCreationInstant(LocalDateTime.of(2017, 2, 5, 11, 42).atZone(Schedule.ZONE_ID).toInstant());
+        l1.setWorkflow(Workflow.PUBLISHED);
+        Location l2 = new Location("http://www.npo.nl/location/1", OwnerType.NPO);
+        l2.setDuration(java.time.Duration.of(10L, ChronoUnit.MINUTES));
+        l2.setOffset(java.time.Duration.of(13L, ChronoUnit.MINUTES));
+        l2.setCreationInstant(LocalDateTime.of(2017, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant());
+
+        return locations(l1, l2);
+
+    }
+
     default T withScheduleEvents() {
         return scheduleEvents(
             new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), java.time.Duration.ofMillis(200)),
