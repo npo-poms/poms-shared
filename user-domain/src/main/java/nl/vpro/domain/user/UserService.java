@@ -29,6 +29,10 @@ public interface UserService<T extends User> {
 
     void authenticate(String principalId);
 
+    default void systemAuthenticate(String principalId, String... roles) {
+        authenticate(principalId);
+    }
+
     void dropAuthentication();
 
 }

@@ -5,43 +5,26 @@
 package nl.vpro.domain.user;
 
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.time.Instant;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
-import java.time.Instant;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable(true)
 @XmlAccessorType(XmlAccessType.FIELD)
 @Entity
+@Slf4j
 public class Editor extends AbstractUser {
-
-    private static final Logger LOG = LoggerFactory.getLogger(Editor.class);
-
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "principalid")
@@ -110,7 +93,7 @@ public class Editor extends AbstractUser {
             broadcasters.add(new BroadcasterEditor(this, broadcaster, true));
         }
         if (roles == null) {
-            LOG.warn("No roles for {}", principalId);
+            log.warn("No roles for {}", principalId);
         }
         this.roles = roles == null ? Collections.emptySet() : Collections.unmodifiableSet(roles);
     }
@@ -302,7 +285,7 @@ public class Editor extends AbstractUser {
 
     void addPortal(Portal portal) {
         if (portal == null) {
-            LOG.warn("Cannot add null to {}", this);
+            log.warn("Cannot add null to {}", this);
             return;
         }
         PortalEditor toAdd = new PortalEditor(this, portal);
@@ -334,7 +317,7 @@ public class Editor extends AbstractUser {
 
     void addThirdParty(ThirdParty thirdParty) {
         if (thirdParty == null) {
-            LOG.warn("Cannot add null to {}", this);
+            log.warn("Cannot add null to {}", this);
             return;
         }
         ThirdPartyEditor toAdd = new ThirdPartyEditor(this, thirdParty);
