@@ -450,15 +450,15 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     }
 
     public boolean isInAllowedPublicationWindow(long millisFromNow) {
-        Date stop = getPublishStop();
+        Instant stop = getPublishStopInstant();
         if(stop != null
-            && stop.getTime() < System.currentTimeMillis() + millisFromNow) {
+            && stop.isBefore(Instant.now().plusMillis(millisFromNow))) {
 
             return false;
         }
-        Date start = getPublishStart();
+        Instant start = getPublishStartInstant();
         if(start != null
-            && start.getTime() > System.currentTimeMillis() + millisFromNow) {
+            && start.isAfter(Instant.now().plusMillis(millisFromNow))) {
 
             return false;
         }
