@@ -257,10 +257,10 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("subtitles/{id}/{language}/{type}")
+    @Path("subtitles/{mid}/{language}/{type}")
     @Produces({VTT, EBU, SRT})
     CountedIterator<StandaloneCue> get(
-        @PathParam("id") String id,
+        @PathParam("mid") String mid,
         @PathParam("language") Locale language,
         @PathParam("type") SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
@@ -268,9 +268,9 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("subtitles/{id}/{language}/{type}/{seq}")
+    @Path("subtitles/{mid}/{language}/{type}/{seq}")
     StandaloneCue get(
-        @PathParam("id") String id,
+        @PathParam("mid") String mid,
         @PathParam("language") Locale language,
         @PathParam("type") SubtitlesType type,
         @PathParam("seq") Integer seq,
@@ -287,10 +287,10 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("subtitles/{id}/{language}/{type}")
+    @Path("subtitles/{mid}/{language}/{type}")
     @Consumes({VTT, EBU, SRT})
     Response setSubtitles(
-        @PathParam("id") String id,
+        @PathParam("mid") String mid,
         @PathParam("language") Locale language,
         @PathParam("type") SubtitlesType type,
         @QueryParam("offset") @DefaultValue("0") Duration offset,
@@ -299,9 +299,9 @@ public interface MediaBackendRestService {
         Iterator<Cue> cues);
 
     @DELETE
-    @Path("subtitles/{id}/{language}/{type}")
+    @Path("subtitles/{mid}/{language}/{type}")
     Response deleteSubtitles(
-        @PathParam("id") String id,
+        @PathParam("mid") String mid,
         @PathParam("language") Locale language,
         @PathParam("type") SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
