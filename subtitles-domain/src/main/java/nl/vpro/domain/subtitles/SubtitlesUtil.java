@@ -49,14 +49,23 @@ public class SubtitlesUtil {
     }
 
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
-        return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()));
+        return parse(subtitles)
+            .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset())
+            );
     }
 
-    public static CountedIterator<StandaloneCue> iterator(Subtitles subtitles){
+    public static CountedIterator<Cue> iterator(Subtitles subtitles){
         return new BasicWrappedIterator<>(
             (long) subtitles.getCueCount(),
             parse(subtitles)
-                .map(c -> StandaloneCue.of(c, subtitles))
+                .iterator());
+    }
+
+    public static CountedIterator<StandaloneCue> standaloneIterator(Subtitles subtitles) {
+        return new BasicWrappedIterator<>(
+            (long) subtitles.getCueCount(),
+            parse(subtitles)
+                .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()))
                 .iterator());
     }
 

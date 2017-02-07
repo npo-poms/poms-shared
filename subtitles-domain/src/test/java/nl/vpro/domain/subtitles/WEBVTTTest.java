@@ -79,6 +79,13 @@ public class WEBVTTTest {
     }
 
     @Test
+    public void parseEmpty() {
+        String example = "WEBVTT\n\n";
+        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example)).collect(Collectors.toList());
+        assertThat(cues).hasSize(0);
+    }
+
+    @Test
     public void parseTimeLine() throws ParseException {
         String timeLine = "2:02.200 --> 2:04.150";
 
