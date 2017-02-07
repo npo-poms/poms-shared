@@ -1775,7 +1775,7 @@ public abstract class MediaObject extends PublishableObject
             protected Prediction adapt(Prediction prediction) {
                 if (prediction.getState() == Prediction.State.ANNOUNCED) {
                     for (Location location : MediaObject.this.getLocations()) {
-                        if (location.getPlatform() == prediction.getPlatform() && Workflow.PUBLICATIONS.contains(location.getWorkflow())) {
+                        if (location.getPlatform() == prediction.getPlatform() && Workflow.PUBLICATIONS.contains(location.getWorkflow()) && location.isPublishable()) {
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
                             MediaObjects.markForRepublication(MediaObject.this);
