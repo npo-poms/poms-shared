@@ -41,7 +41,10 @@ public interface MediaBackendRestService {
     String ENTITY = "entity";
     String FOLLOW = "followMerges";
     String ERRORS = "errors";
-    String ID  = "id";
+    String ID     = "id";
+    String MID    = "mid";
+    String LANGUAGE = "language";
+    String TYPE = "type";
 
 
     @POST
@@ -260,9 +263,9 @@ public interface MediaBackendRestService {
     @Path("subtitles/{mid}/{language}/{type}")
     @Produces({VTT, EBU, SRT})
     CountedIterator<StandaloneCue> get(
-        @PathParam("mid") String mid,
-        @PathParam("language") Locale language,
-        @PathParam("type") SubtitlesType type,
+        @PathParam(MID) String mid,
+        @PathParam(LANGUAGE) Locale language,
+        @PathParam(TYPE) SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     );
 
@@ -270,18 +273,18 @@ public interface MediaBackendRestService {
     @GET
     @Path("subtitles/{mid}/{language}/{type}/{seq}")
     StandaloneCue get(
-        @PathParam("mid") String mid,
-        @PathParam("language") Locale language,
-        @PathParam("type") SubtitlesType type,
+        @PathParam(MID) String mid,
+        @PathParam(LANGUAGE) Locale language,
+        @PathParam(TYPE) SubtitlesType type,
         @PathParam("seq") Integer seq,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     );
 
     @GET
-    @Path("subtitles/{id}")
+    @Path("subtitles/{mid}")
     @Wrapped(element = "subtitles", namespace = Xmlns.MEDIA_SUBTITLES_NAMESPACE)
     List<SubtitlesId> getAllSubtitles(
-        @PathParam(ID) final String id,
+        @PathParam(MID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
 
@@ -290,9 +293,9 @@ public interface MediaBackendRestService {
     @Path("subtitles/{mid}/{language}/{type}")
     @Consumes({VTT, EBU, SRT})
     Response setSubtitles(
-        @PathParam("mid") String mid,
-        @PathParam("language") Locale language,
-        @PathParam("type") SubtitlesType type,
+        @PathParam(MID) String mid,
+        @PathParam(LANGUAGE) Locale language,
+        @PathParam(TYPE) SubtitlesType type,
         @QueryParam("offset") @DefaultValue("0") Duration offset,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
@@ -301,9 +304,9 @@ public interface MediaBackendRestService {
     @DELETE
     @Path("subtitles/{mid}/{language}/{type}")
     Response deleteSubtitles(
-        @PathParam("mid") String mid,
-        @PathParam("language") Locale language,
-        @PathParam("type") SubtitlesType type,
+        @PathParam(MID) String mid,
+        @PathParam(LANGUAGE) Locale language,
+        @PathParam(TYPE) SubtitlesType type,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors);
 
