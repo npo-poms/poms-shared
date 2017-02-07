@@ -87,7 +87,7 @@ public class Editor extends AbstractUser {
     }
 
     public Editor(String principalId, String displayName, String email, Broadcaster broadcaster, Set<String> roles) {
-        this(principalId, displayName, email, null, null, broadcaster, roles, null);
+        this(principalId, displayName, null, null, email, broadcaster, roles, null);
     }
 
     Editor(String principalId, String displayName, String email, Broadcaster broadcaster, String givenName, String familyName, Instant lastLogin) {
