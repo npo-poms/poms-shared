@@ -1,5 +1,7 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -40,10 +42,13 @@ public class SubtitlesId implements Serializable {
 
     }
 
+    @Builder
     public SubtitlesId(String mid, Locale language, SubtitlesType type) {
         this.mid = mid;
         this.language = language;
-        this.type = type;
+        if (type != null) {
+            this.type = type;
+        }
     }
 
     public String getMid() {
