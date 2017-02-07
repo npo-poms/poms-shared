@@ -4,6 +4,8 @@ import java.time.Duration;
 import java.time.Instant;
 
 /**
+ * An object describing a publication embargo, meaning that it has a publish start and stop instant.
+ *
  * @author Michiel Meeuwissen
  * @since 5.1
  */

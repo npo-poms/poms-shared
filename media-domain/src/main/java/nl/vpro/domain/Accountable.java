@@ -5,6 +5,8 @@ import java.time.Instant;
 import nl.vpro.domain.user.Editor;
 
 /**
+ * The basic accountability fields like 'last modified by', 'last modified instant' and 'created by'.
+ *
  * @author Michiel Meeuwissen
  * @since 5.1
  */
