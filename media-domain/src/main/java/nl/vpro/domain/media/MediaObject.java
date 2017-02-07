@@ -1798,10 +1798,11 @@ public abstract class MediaObject extends PublishableObject
     }
 
     /**
-     * see {@link Prediction#hasAuthority()} or true, if no such prediction record.
+     * see {@link Prediction#getAuthority()} ()} or User, if no such prediction record.
      */
-    public boolean hasAuthority(Platform platform) {
-        return getPrediction(platform) == null || getPrediction(platform).hasAuthority();
+    public Authority getAuthority(Platform platform) {
+        Prediction prediction = getPrediction(platform);
+        return prediction == null ? Authority.USER : prediction.getAuthority();
     }
 
 
@@ -2293,7 +2294,7 @@ public abstract class MediaObject extends PublishableObject
     }
 
     protected boolean hasInternetVodAuthority() {
-        return getPrediction(Platform.INTERNETVOD) != null && getPrediction(Platform.INTERNETVOD).hasAuthority();
+        return getAuthority(Platform.INTERNETVOD) == Authority.USER;
     }
 
     @Override

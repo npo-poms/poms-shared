@@ -506,15 +506,17 @@ public class MediaObjects {
     }
 
 
-    public static void updatePrediction(MediaObject media, Platform platform, Prediction.State state) {
+    public static Prediction updatePrediction(MediaObject media, Platform platform, Prediction.State state) {
         Prediction prediction = media.findOrCreatePrediction(platform);
         prediction.setState(state);
+        return prediction;
     }
 
-    public static void updatePrediction(MediaObject media, Platform platform, Instant start, Instant stop) {
+    public static Prediction updatePrediction(MediaObject media, Platform platform, Instant start, Instant stop) {
         Prediction prediction = media.findOrCreatePrediction(platform);
         prediction.setPublishStart(start);
         prediction.setPublishStop(stop);
+        return prediction;
     }
 
 

@@ -489,7 +489,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
                 mediaObject.realizePrediction(this);
             }
 
-            if (hasAuthority()) {
+            if (hasSystemAuthority()) {
                 authorityUpdate = true;
             }
         }
@@ -522,12 +522,19 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
                 mediaObject.realizePrediction(this);
             }
 
-            if (hasAuthority()) {
+            if (hasSystemAuthority()) {
                 authorityUpdate = true;
             }
         }
 
         return this;
+    }
+
+    public Authority getAuthority() {
+        if (platform == null) {
+            return Authority.USER;
+        }
+        return getAuthorityRecord().getAuthority();
     }
 
 
@@ -609,6 +616,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         return compareTo(that) == 0;
     }
 
+
+
     @Override
     public int hashCode() {
         int result = super.hashCode();
@@ -625,16 +634,16 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     }
 
     /**
-     * Returns true if ceres has the authority about this record. So normally it can not be edited in POMS.
+     * Returns true if the system has the authority about this record. So normally it can not be edited in POMS GUI.
      *
      */
-    public boolean hasAuthority() {
+    private boolean hasSystemAuthority() {
         if (mediaObject == null) {
             // unknown
             return false;
         }
         Prediction record = getAuthorityRecord();
-        return record != null && record.hasAuthority();
+        return record != null && record.getAuthority() == Authority.SYSTEM;
     }
 
     public final static Comparator<Location> PRESENTATION_ORDER = new PresentationComparator();

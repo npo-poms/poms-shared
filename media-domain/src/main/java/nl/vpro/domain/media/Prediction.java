@@ -87,8 +87,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     protected Platform platform;
 
     @Column
+    @Enumerated(EnumType.STRING)
     @XmlTransient
-    private Boolean authority = null;
+    private Authority authority = Authority.USER;
 
 
     @ManyToOne
@@ -221,21 +222,12 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         state = from.state;
     }
 
-    public Boolean getAuthority() {
+    public Authority getAuthority() {
         return authority;
     }
 
-    public void setAuthority(Boolean authority) {
+    public void setAuthority(Authority authority) {
         this.authority = authority;
-    }
-
-    /**
-     * Determines if users have the authority to update Location on state change
-     *
-     * @return true when a normal user can update restrictions, false otherwise
-     */
-    public boolean hasAuthority() {
-        return authority != null && authority;
     }
 
 
