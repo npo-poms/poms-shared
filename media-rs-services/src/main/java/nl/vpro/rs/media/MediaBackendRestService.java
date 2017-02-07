@@ -262,7 +262,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("subtitles/{mid}/{language}/{type}")
     @Produces({VTT, EBU, SRT})
-    CountedIterator<StandaloneCue> get(
+    CountedIterator<StandaloneCue> getSubtitles(
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
@@ -272,7 +272,7 @@ public interface MediaBackendRestService {
 
     @GET
     @Path("subtitles/{mid}/{language}/{type}/{seq}")
-    StandaloneCue get(
+    StandaloneCue getCue(
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
