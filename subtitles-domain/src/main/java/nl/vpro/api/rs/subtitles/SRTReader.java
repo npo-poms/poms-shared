@@ -13,8 +13,8 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.Provider;
 
-import nl.vpro.domain.subtitles.StandaloneCue;
-import nl.vpro.util.CountedIterator;
+import nl.vpro.domain.subtitles.Cue;
+import nl.vpro.domain.subtitles.WEBVTTandSRT;
 
 /**
  * @author Michiel Meeuwissen
@@ -22,7 +22,7 @@ import nl.vpro.util.CountedIterator;
  */
 @Provider
 @Consumes(Constants.VTT)
-public class SRTReader implements MessageBodyReader<CountedIterator<StandaloneCue>> {
+public class SRTReader implements MessageBodyReader<Iterator<Cue>> {
 
 
     @Override
@@ -32,9 +32,8 @@ public class SRTReader implements MessageBodyReader<CountedIterator<StandaloneCu
     }
 
     @Override
-    public CountedIterator<StandaloneCue> readFrom(Class<CountedIterator<StandaloneCue>> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
-
-        return null;
+    public Iterator<Cue> readFrom(Class<Iterator<Cue>> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
+        return WEBVTTandSRT.parseSRT(null, entityStream).iterator();
 
     }
 }
