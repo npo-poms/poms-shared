@@ -4,12 +4,17 @@
  */
 package nl.vpro.domain.media.update;
 
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.time.Instant;
+import java.util.Date;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
-import java.io.InputStream;
-import java.net.URISyntaxException;
-import java.util.Date;
+
+import nl.vpro.domain.Embargo;
+import nl.vpro.util.DateUtils;
 
 /**
  * @author Roelof Jan Koekoek
@@ -19,7 +24,7 @@ import java.util.Date;
 @XmlType(name = "assetType", propOrder = {
     "source"
 })
-public class Asset {
+public class Asset implements Embargo<Asset> {
 
     @XmlAttribute
     private Date publishStart;
@@ -100,5 +105,31 @@ public class Asset {
         }
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public Instant getPublishStartInstant() {
+        return DateUtils.toInstant(getPublishStart());
+
+    }
+
+    @Override
+    public Asset setPublishStartInstant(Instant publishStart) {
+        setPublishStart(DateUtils.toDate(publishStart));
+        return this;
+
+    }
+
+    @Override
+    public Instant getPublishStopInstant() {
+        return DateUtils.toInstant(getPublishStop());
+
+    }
+
+    @Override
+    public Asset setPublishStopInstant(Instant publishStop) {
+        setPublishStop(DateUtils.toDate(publishStop));
+        return null;
+
     }
 }
