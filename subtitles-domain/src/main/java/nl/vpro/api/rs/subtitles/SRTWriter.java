@@ -13,6 +13,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 import javax.ws.rs.ext.Provider;
 
+import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 import nl.vpro.util.CountedIterator;
@@ -40,7 +41,7 @@ public class SRTWriter implements MessageBodyWriter<CountedIterator<StandaloneCu
 
     @Override
     public void writeTo(CountedIterator<StandaloneCue> cueIterator, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
-        Iterator<StandaloneCue> i = Util.headers(cueIterator, httpHeaders, "srt");
+        Iterator<? extends Cue> i = Util.headers(cueIterator, httpHeaders, "srt");
         SubtitlesUtil.toSRT(i, entityStream);
     }
 

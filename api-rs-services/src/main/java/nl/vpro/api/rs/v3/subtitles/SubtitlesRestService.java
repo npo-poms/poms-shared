@@ -33,15 +33,15 @@ public interface SubtitlesRestService {
     String PATH = "/" + TAG;
 
     @GET
-    @Path("/{id}/{language}/{type}")
+    @Path("/{mid}/{language}/{type}")
     Iterator<StandaloneCue> get(
-        @PathParam("id") String mid,
+        @PathParam("mid") String mid,
         @PathParam("language") Locale locale,
         @PathParam("type") SubtitlesType type
     );
 
     @GET
-    @Path("/{id}/{language}")
+    @Path("/{mid}/{language}")
     Iterator<StandaloneCue> get(
         @PathParam("id") String mid,
         @PathParam("language") Locale locale);
