@@ -382,8 +382,8 @@ public class MediaObjectTest {
         Prediction plus = target.getPrediction(Platform.PLUSVOD);
         assertThat(plus).isNotNull();
         assertThat(plus.getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(plus.getPublishStart()).isEqualTo(Instant.ofEpochMilli(5));
-        assertThat(plus.getPublishStop()).isEqualTo(Instant.ofEpochMilli(10));
+        assertThat(plus.getPublishStartInstant()).isEqualTo(Instant.ofEpochMilli(5));
+        assertThat(plus.getPublishStopInstant()).isEqualTo(Instant.ofEpochMilli(10));
     }
 
     @Test
@@ -442,8 +442,8 @@ public class MediaObjectTest {
 
 
         assertThat(program.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(program.getPrediction(Platform.INTERNETVOD).getPublishStart()).isNull();
-        assertThat(program.getPrediction(Platform.INTERNETVOD).getPublishStop()).isNull();
+        assertThat(program.getPrediction(Platform.INTERNETVOD).getPublishStartInstant()).isNull();
+        assertThat(program.getPrediction(Platform.INTERNETVOD).getPublishStopInstant()).isNull();
 
 
     }

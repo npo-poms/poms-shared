@@ -320,9 +320,9 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         }
 
         ScheduleEvent lastEvent = scheduleEvents.last();
-        long collectionEnd = lastEvent.getStart().getTime() + lastEvent.getDurationTime().toMillis();
+        Instant collectionEnd = lastEvent.getStartInstant().plus(lastEvent.getDurationTime());
 
-        return stop.getTime() >= collectionEnd ? stop : new Date(collectionEnd);
+        return stop.getTime() >= collectionEnd.toEpochMilli() ? stop : Date.from(collectionEnd);
 
     }
 
@@ -357,8 +357,8 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
     }
 
     private boolean inTimeRange(ScheduleEvent event) {
-        return (start == null || event.getStart().compareTo(start) >= 0) &&
-                (stop == null || event.getStart().compareTo(stop) <= 0);
+        return (start == null || event.getStartInstant().compareTo(getStartInstant()) >= 0) &&
+                (stop == null || event.getStartInstant().compareTo(getStopInstant()) <= 0);
     }
 
     @Override

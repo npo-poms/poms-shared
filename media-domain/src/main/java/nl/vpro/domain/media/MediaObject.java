@@ -501,7 +501,7 @@ public abstract class MediaObject extends PublishableObject
 
 
     @Column
-    private boolean subtitlesPublished = false;
+    private Boolean subtitlesPublished;
 
 
     public MediaObject() {
@@ -541,7 +541,7 @@ public abstract class MediaObject extends PublishableObject
         source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
-            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getPublishStart(), prediction.getPublishStop());
+            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getPublishStartInstant(), prediction.getPublishStopInstant());
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getState());
         });
         source.getLocations().forEach(location -> this.addLocation(Location.copy(location, this)));
@@ -1775,7 +1775,9 @@ public abstract class MediaObject extends PublishableObject
             protected Prediction adapt(Prediction prediction) {
                 if (prediction.getState() == Prediction.State.ANNOUNCED) {
                     for (Location location : MediaObject.this.getLocations()) {
-                        if (location.getPlatform() == prediction.getPlatform() && Workflow.PUBLICATIONS.contains(location.getWorkflow()) && location.isPublishable()) {
+                        if (location.getPlatform() == prediction.getPlatform() &&
+                            Workflow.PUBLICATIONS.contains(location.getWorkflow()) &&
+                            prediction.isInAllowedPublicationWindow()) {
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
                             MediaObjects.markForRepublication(MediaObject.this);
@@ -2434,10 +2436,6 @@ public abstract class MediaObject extends PublishableObject
         if (getPrediction(Platform.INTERNETVOD) != null) {
             locationAuthorityUpdate = true;
         }
-    }
-
-    boolean isSubtitlesPublished() {
-        return subtitlesPublished;
     }
 
     void setSubtitlesPublished(boolean subtitlesPublished) {

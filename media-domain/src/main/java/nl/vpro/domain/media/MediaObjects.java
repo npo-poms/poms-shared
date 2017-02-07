@@ -514,8 +514,8 @@ public class MediaObjects {
 
     public static Prediction updatePrediction(MediaObject media, Platform platform, Instant start, Instant stop) {
         Prediction prediction = media.findOrCreatePrediction(platform);
-        prediction.setPublishStart(start);
-        prediction.setPublishStop(stop);
+        prediction.setPublishStartInstant(start);
+        prediction.setPublishStopInstant(stop);
         return prediction;
     }
 

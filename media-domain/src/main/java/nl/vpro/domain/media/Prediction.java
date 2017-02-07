@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Embargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -37,7 +38,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Table(
     uniqueConstraints = {@UniqueConstraint(columnNames = {"mediaobject_id", "platform"})}
 )
-public class Prediction implements Comparable<Prediction>, Updatable<Prediction>,  Serializable {
+public class Prediction implements Comparable<Prediction>, Updatable<Prediction>,  Serializable, Embargo<Prediction> {
 
     private static final long serialVersionUID = 0L;
 
@@ -126,7 +127,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     public Prediction(Prediction source, MediaObject parent) {
-        this(source.getPlatform(), source.getPublishStart(), source.getPublishStop());
+        this(source.getPlatform(), source.getPublishStartInstant(), source.getPublishStopInstant());
         this.issueDate = source.issueDate;
         this.state = source.state;
         this.mediaObject = parent;
@@ -176,22 +177,28 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.state = state;
     }
 
-    public Instant getPublishStart() {
+    @Override
+    public Instant getPublishStartInstant() {
         return publishStart;
     }
 
 
-    public void setPublishStart(Instant start) {
+    @Override
+    public Prediction setPublishStartInstant(Instant start) {
         this.publishStart = start;
+        return this;
     }
 
 
-    public Instant getPublishStop() {
+    @Override
+    public Instant getPublishStopInstant() {
         return publishStop;
     }
 
-    public void setPublishStop(Instant publishStop) {
+    @Override
+    public Prediction setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
+        return this;
     }
 
 

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.support.StreamingStatus;
 import nl.vpro.domain.media.support.TextualType;
@@ -360,11 +361,11 @@ public class Program extends MediaObject {
     }
 
     public String getEpisodeTitle() {
-        return MediaObjects.getTitle(titles, (String)null, TextualType.EPISODE);
+        return TextualObjects.get(titles, (String)null, TextualType.EPISODE);
     }
 
     public String getEpisodeDescription() {
-        return MediaObjects.getDescription(descriptions, (String)null, TextualType.EPISODE);
+        return TextualObjects.get(descriptions, (String)null, TextualType.EPISODE);
     }
 
     public String getPoProgType() {
