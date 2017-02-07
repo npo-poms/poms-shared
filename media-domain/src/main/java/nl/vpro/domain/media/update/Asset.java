@@ -24,7 +24,7 @@ import nl.vpro.util.DateUtils;
 @XmlType(name = "assetType", propOrder = {
     "source"
 })
-public class Asset implements Embargo<Asset> {
+public class Asset implements Embargo {
 
     @XmlAttribute
     private Date publishStart;
@@ -108,26 +108,26 @@ public class Asset implements Embargo<Asset> {
     }
 
     @Override
-    public Instant getPublishStartInstant() {
+    public Instant getEmbargoStart() {
         return DateUtils.toInstant(getPublishStart());
 
     }
 
     @Override
-    public Asset setPublishStartInstant(Instant publishStart) {
+    public Asset setEmbargoStart(Instant publishStart) {
         setPublishStart(DateUtils.toDate(publishStart));
         return this;
 
     }
 
     @Override
-    public Instant getPublishStopInstant() {
+    public Instant getEmbargoStop() {
         return DateUtils.toInstant(getPublishStop());
 
     }
 
     @Override
-    public Asset setPublishStopInstant(Instant publishStop) {
+    public Asset setEmbargoStop(Instant publishStop) {
         setPublishStop(DateUtils.toDate(publishStop));
         return null;
 

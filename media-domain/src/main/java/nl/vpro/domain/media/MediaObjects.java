@@ -406,7 +406,7 @@ public class MediaObjects {
             date = sorted(mo.scheduleEvents).first().getStartInstant();
         }
         if (date == null) {
-            date = mo.getPublishStartInstant();
+            date = mo.getEmbargoStart();
         }
         if (date == null) {
             date = mo.getCreationInstant();
@@ -514,8 +514,8 @@ public class MediaObjects {
 
     public static Prediction updatePrediction(MediaObject media, Platform platform, Instant start, Instant stop) {
         Prediction prediction = media.findOrCreatePrediction(platform);
-        prediction.setPublishStartInstant(start);
-        prediction.setPublishStopInstant(stop);
+        prediction.setEmbargoStart(start);
+        prediction.setEmbargoStop(stop);
         return prediction;
     }
 
