@@ -1,14 +1,15 @@
 package nl.vpro.domain.media.bind;
 
-/**
- * @author Michiel Meeuwissen
- * @since 3.0
- */
+
 
 import java.util.Locale;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
+/**
+ * @author Michiel Meeuwissen
+ * @since 3.0
+ */
 public class LocaleAdapter extends XmlAdapter<LocaleWrapper, Locale> {
 
 
