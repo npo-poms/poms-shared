@@ -295,8 +295,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         if (platform != null && this.mediaObject != null) {
             Prediction record = getAuthorityRecord();
             // in sync so we can query this class its fields on publishables
-            this.publishStart = record.getPublishStart();
-            this.publishStop = record.getPublishStop();
+            this.publishStart = record.getPublishStartInstant();
+            this.publishStop = record.getPublishStopInstant();
             if (this.mediaObject.getLocations().contains(this)) {
                 this.mediaObject.realizePrediction(this);
             }
@@ -466,7 +466,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         if(hasPlatform() && mediaObject != null) {
             try {
                 Prediction record = getAuthorityRecord();
-                return record.getPublishStart();
+                return record.getPublishStartInstant();
             } catch (IllegalAuthorativeRecord iea) {
                 log.debug(iea.getMessage());
             }
@@ -484,7 +484,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
                 if (hasPlatform()) {
-                    getAuthorityRecord().setPublishStart(publishStart);
+                    getAuthorityRecord().setPublishStartInstant(publishStart);
                 }
                 mediaObject.realizePrediction(this);
             }
@@ -501,7 +501,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     public Instant getPublishStopInstant() {
         if(hasPlatform() && mediaObject != null) {
             try {
-                return getAuthorityRecord().getPublishStop();
+                return getAuthorityRecord().getPublishStopInstant();
             } catch (IllegalAuthorativeRecord iea) {
                 log.debug(iea.getMessage());
             }
@@ -517,7 +517,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             super.setPublishStopInstant(publishStop);
             if (mediaObject != null) {
                 if (hasPlatform()) {
-                    getAuthorityRecord().setPublishStop(publishStop);
+                    getAuthorityRecord().setPublishStopInstant(publishStop);
                 }
                 mediaObject.realizePrediction(this);
             }
@@ -583,8 +583,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             Prediction locationAuthorityRecord = getAuthorityRecord();
 
             if (locationAuthorityRecord != null) {
-                locationAuthorityRecord.setPublishStart(publishStart);
-                locationAuthorityRecord.setPublishStop(publishStop);
+                locationAuthorityRecord.setPublishStartInstant(publishStart);
+                locationAuthorityRecord.setPublishStopInstant(publishStop);
             }
         } catch (Throwable t) {
             log.error(t.getMessage());
