@@ -22,6 +22,24 @@ public class WEBVTTandSRT {
     static String WEBVTT_INTRO = "WEBVTT";
 
 
+    public static Stream<Cue> parseWEBVTT(String parent, InputStream inputStream) {
+        try {
+            return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public static Stream<Cue> parseSRT(String parent, InputStream inputStream) {
+        try {
+            return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, "cp1252"));
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
     static Stream<Cue> parse(String parent, Duration offset,  Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
