@@ -467,7 +467,7 @@ public interface MediaTestDataBuilder<
     default T authoritativeRecord(Platform... platforms) {
         for (Platform platform : platforms) {
             Prediction prediction = mediaObject().findOrCreatePrediction(platform);
-            prediction.setAuthority(true);
+            prediction.setAuthority(Authority.SYSTEM);
         }
         return (T)this;
     }
