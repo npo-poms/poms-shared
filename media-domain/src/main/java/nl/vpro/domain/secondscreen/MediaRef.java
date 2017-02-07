@@ -4,15 +4,11 @@
  */
 package nl.vpro.domain.secondscreen;
 
-import java.util.List;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
-import org.hibernate.annotations.Cascade;
-
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.MediaType;
@@ -23,7 +19,7 @@ import nl.vpro.domain.media.MediaType;
  */
 @Entity
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlType(name = "mediaRefType")
 @JsonPropertyOrder({
     "midRef",
@@ -44,7 +40,7 @@ public class MediaRef {
     @Transient
     private MediaType mediaType;
 
-    private MediaRef() {
+    public MediaRef() {
     }
 
     public MediaRef(MediaObject media) {
