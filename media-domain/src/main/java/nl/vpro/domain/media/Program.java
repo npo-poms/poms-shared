@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -103,8 +104,8 @@ public class Program extends MediaObject {
     @Enumerated(EnumType.STRING)
     @Column
     @XmlTransient
-    @Setter
-    @Getter
+    @Setter(AccessLevel.PACKAGE)
+    @Getter(AccessLevel.PACKAGE)
     private StreamingStatus streamingPlatformStatus = StreamingStatus.NOT_AVAILABLE;
 
     public Program() {
