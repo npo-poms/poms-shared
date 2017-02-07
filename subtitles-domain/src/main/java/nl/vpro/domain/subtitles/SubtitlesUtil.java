@@ -10,6 +10,9 @@ import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 
+import nl.vpro.util.BasicWrappedIterator;
+import nl.vpro.util.CountedIterator;
+
 import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
 
 
@@ -47,6 +50,14 @@ public class SubtitlesUtil {
 
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
         return parse(subtitles).map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()));
+    }
+
+    public static CountedIterator<StandaloneCue> iterator(Subtitles subtitles){
+        return new BasicWrappedIterator<>(
+            (long) subtitles.getCueCount(),
+            parse(subtitles)
+                .map(c -> StandaloneCue.of(c, subtitles))
+                .iterator());
     }
 
     public static void toEBU(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
