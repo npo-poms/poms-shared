@@ -116,6 +116,13 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         return new Subtitles(mid, offset, language, SubtitlesFormat.WEBVTT, content);
     }
 
+    public static Subtitles webvttTranslation(String mid, Duration offset, Locale language, String content) {
+        Subtitles subtitles  = webvtt(mid, offset, language, content);
+        subtitles.setType(SubtitlesType.TRANSLATION);
+        return subtitles;
+    }
+
+
     public static Subtitles from(Iterator<StandaloneCue> cueIterator) {
         PeekingIterator<StandaloneCue> peeking = Iterators.peekingIterator(cueIterator);
         Subtitles subtitles = new Subtitles();
