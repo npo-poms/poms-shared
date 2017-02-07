@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Accountable;
+import nl.vpro.domain.Embargo;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -48,7 +49,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
-public abstract class PublishableObject extends DomainObject implements Accountable {
+public abstract class PublishableObject extends DomainObject implements Accountable, Embargo<PublishableObject> {
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
@@ -331,10 +332,12 @@ public abstract class PublishableObject extends DomainObject implements Accounta
         return setPublishStartInstant(DateUtils.toInstant(publishStart));
     }
 
+    @Override
     public Instant getPublishStartInstant() {
         return publishStart;
     }
 
+    @Override
     public PublishableObject setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
         return this;
@@ -353,10 +356,12 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     }
 
 
+    @Override
     public Instant getPublishStopInstant() {
         return publishStop;
     }
 
+    @Override
     public PublishableObject setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
         return this;
@@ -441,29 +446,10 @@ public abstract class PublishableObject extends DomainObject implements Accounta
             .toString();
     }
 
-    public boolean isInAllowedPublicationWindow() {
-        return isInAllowedPublicationWindow(0);
-    }
 
-    public boolean isInAllowedPublicationWindow(java.time.Duration millisFromNow) {
-        return isInAllowedPublicationWindow(millisFromNow.toMillis());
-    }
-
+    @Deprecated
     public boolean isInAllowedPublicationWindow(long millisFromNow) {
-        Instant stop = getPublishStopInstant();
-        if(stop != null
-            && stop.isBefore(Instant.now().plusMillis(millisFromNow))) {
-
-            return false;
-        }
-        Instant start = getPublishStartInstant();
-        if(start != null
-            && start.isAfter(Instant.now().plusMillis(millisFromNow))) {
-
-            return false;
-        }
-
-        return true;
+        return isInAllowedPublicationWindow(java.time.Duration.ofMillis(millisFromNow));
     }
 
 

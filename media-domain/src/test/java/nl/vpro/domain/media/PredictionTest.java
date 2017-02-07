@@ -19,7 +19,7 @@ public class PredictionTest {
     @Test
     public void testGetPublishStartStop() throws Exception {
         Prediction target = new Prediction(null, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
-        assertThat(target.getPublishStart()).isLessThan(target.getPublishStop());
+        assertThat(target.getPublishStartInstant()).isLessThan(target.getPublishStopInstant());
     }
 
     @Test

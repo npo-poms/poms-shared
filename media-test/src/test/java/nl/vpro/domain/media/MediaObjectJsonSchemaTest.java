@@ -185,8 +185,8 @@ public class MediaObjectJsonSchemaTest {
 
         Prediction prediction = new Prediction(Platform.TVVOD);
         prediction.setState(Prediction.State.REALIZED);
-        prediction.setPublishStart(Instant.ofEpochMilli(10));
-        prediction.setPublishStop(Instant.ofEpochMilli(100));
+        prediction.setPublishStartInstant(Instant.ofEpochMilli(10));
+        prediction.setPublishStopInstant(Instant.ofEpochMilli(100));
 
         program.getPredictions().add(prediction);
 
