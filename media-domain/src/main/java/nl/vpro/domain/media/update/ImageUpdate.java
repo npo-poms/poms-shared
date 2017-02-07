@@ -168,8 +168,8 @@ public class ImageUpdate {
 
     public ImageUpdate(Image image) {
         type = image.getType();
-        publishStart = image.getPublishStartInstant();
-        publishStop = image.getPublishStopInstant();
+        publishStart = image.getEmbargoStart();
+        publishStop = image.getEmbargoStop();
         highlighted = image.isHighlighted();
         title = image.getTitle();
         description = image.getDescription();
@@ -192,8 +192,8 @@ public class ImageUpdate {
         result.setType(type);
         result.setTitle(title);
         result.setDescription(description);
-        result.setPublishStartInstant(publishStart);
-        result.setPublishStopInstant(publishStop);
+        result.setEmbargoStart(publishStart);
+        result.setEmbargoStop(publishStop);
         result.setHighlighted(highlighted);
         result.setWidth(width);
         result.setHeight(height);

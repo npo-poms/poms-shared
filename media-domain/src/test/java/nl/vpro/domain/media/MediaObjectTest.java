@@ -233,7 +233,7 @@ public class MediaObjectTest {
         Program program = new Program();
         assertThat(Math.abs(program.getSortInstant().toEpochMilli() - System.currentTimeMillis())).isLessThan(10000);
         Instant publishDate = Instant.ofEpochMilli(1344043500362L);
-        program.setPublishStartInstant(publishDate);
+        program.setEmbargoStart(publishDate);
         assertThat(program.getSortInstant()).isEqualTo(publishDate);
         ScheduleEvent se = new ScheduleEvent();
         se.setStartInstant(Instant.ofEpochMilli(1444043500362L));
@@ -373,8 +373,8 @@ public class MediaObjectTest {
         target.addLocation(l1);
 
         l1.setPlatform(Platform.PLUSVOD);
-        l1.setPublishStartInstant(Instant.ofEpochMilli(5));
-        l1.setPublishStopInstant(Instant.ofEpochMilli(10));
+        l1.setEmbargoStart(Instant.ofEpochMilli(5));
+        l1.setEmbargoStop(Instant.ofEpochMilli(10));
 
 
 
@@ -382,8 +382,8 @@ public class MediaObjectTest {
         Prediction plus = target.getPrediction(Platform.PLUSVOD);
         assertThat(plus).isNotNull();
         assertThat(plus.getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(plus.getPublishStartInstant()).isEqualTo(Instant.ofEpochMilli(5));
-        assertThat(plus.getPublishStopInstant()).isEqualTo(Instant.ofEpochMilli(10));
+        assertThat(plus.getEmbargoStart()).isEqualTo(Instant.ofEpochMilli(5));
+        assertThat(plus.getEmbargoStop()).isEqualTo(Instant.ofEpochMilli(10));
     }
 
     @Test
@@ -442,8 +442,8 @@ public class MediaObjectTest {
 
 
         assertThat(program.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.REALIZED);
-        assertThat(program.getPrediction(Platform.INTERNETVOD).getPublishStartInstant()).isNull();
-        assertThat(program.getPrediction(Platform.INTERNETVOD).getPublishStopInstant()).isNull();
+        assertThat(program.getPrediction(Platform.INTERNETVOD).getEmbargoStart()).isNull();
+        assertThat(program.getPrediction(Platform.INTERNETVOD).getEmbargoStop()).isNull();
 
 
     }
@@ -485,7 +485,7 @@ public class MediaObjectTest {
         assertThat(program.hasChanges()).isTrue();
         program.acceptChanges();
         assertThat(program.hasChanges()).isFalse();
-        program.setPublishStartInstant(Instant.now());
+        program.setEmbargoStart(Instant.now());
         assertThat(program.hasChanges()).isTrue();
         program.acceptChanges();
         assertThat(program.hasChanges()).isFalse();

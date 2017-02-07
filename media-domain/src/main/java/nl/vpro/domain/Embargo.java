@@ -9,30 +9,34 @@ import java.time.Instant;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public interface Embargo<T extends Embargo<T>> {
+public interface Embargo {
 
 
-    Instant getPublishStartInstant();
+    Instant getEmbargoStart();
 
-    T setPublishStartInstant(Instant publishStart);
+    Embargo setEmbargoStart(Instant publishStart);
 
-    Instant getPublishStopInstant();
+    Instant getEmbargoStop();
 
-    T setPublishStopInstant(Instant publishStop);
+    Embargo setEmbargoStop(Instant publishStop);
 
+
+    default boolean isUnderEmbargo() {
+        return ! isInAllowedPublicationWindow();
+    }
 
     default boolean isInAllowedPublicationWindow() {
         return isInAllowedPublicationWindow(Duration.ZERO);
     }
 
     default boolean isInAllowedPublicationWindow(java.time.Duration fromNow) {
-        Instant stop = getPublishStopInstant();
+        Instant stop = getEmbargoStop();
         if (stop != null
             && stop.isBefore(Instant.now().plus(fromNow))) {
 
             return false;
         }
-        Instant start = getPublishStartInstant();
+        Instant start = getEmbargoStart();
         if (start != null
             && start.isAfter(Instant.now().plus(fromNow))) {
 

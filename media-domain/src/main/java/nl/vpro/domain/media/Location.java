@@ -273,8 +273,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             to.setDuration(from.getDuration());
             to.setOffset(from.getOffset());
             to.setSubtitles(from.getSubtitles());
-            to.setPublishStartInstant(from.getPublishStartInstant());
-            to.setPublishStopInstant(from.getPublishStopInstant());
+            to.setEmbargoStart(from.getEmbargoStart());
+            to.setEmbargoStop(from.getEmbargoStop());
 
             to.setAvAttributes(AVAttributes.update(from.getAvAttributes(), to.getAvAttributes()));
 
@@ -295,8 +295,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         if (platform != null && this.mediaObject != null) {
             Prediction record = getAuthorityRecord();
             // in sync so we can query this class its fields on publishables
-            this.publishStart = record.getPublishStartInstant();
-            this.publishStop = record.getPublishStopInstant();
+            this.publishStart = record.getEmbargoStart();
+            this.publishStop = record.getEmbargoStop();
             if (this.mediaObject.getLocations().contains(this)) {
                 this.mediaObject.realizePrediction(this);
             }
@@ -462,29 +462,29 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     }
 
     @Override
-    public Instant getPublishStartInstant() {
+    public Instant getEmbargoStart() {
         if(hasPlatform() && mediaObject != null) {
             try {
                 Prediction record = getAuthorityRecord();
-                return record.getPublishStartInstant();
+                return record.getEmbargoStart();
             } catch (IllegalAuthorativeRecord iea) {
                 log.debug(iea.getMessage());
             }
         }
 
-        return super.getPublishStartInstant();
+        return super.getEmbargoStart();
     }
 
     @Override
-    public PublishableObject setPublishStartInstant(Instant publishStart) {
+    public PublishableObject setEmbargoStart(Instant publishStart) {
         if (! Objects.equals(this.publishStart, publishStart)) {
 
-            super.setPublishStartInstant(publishStart);
+            super.setEmbargoStart(publishStart);
 
             // Recalculate media permissions, when no media present, this is done by the add to collection
             if (mediaObject != null) {
                 if (hasPlatform()) {
-                    getAuthorityRecord().setPublishStartInstant(publishStart);
+                    getAuthorityRecord().setEmbargoStart(publishStart);
                 }
                 mediaObject.realizePrediction(this);
             }
@@ -498,26 +498,26 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     }
 
     @Override
-    public Instant getPublishStopInstant() {
+    public Instant getEmbargoStop() {
         if(hasPlatform() && mediaObject != null) {
             try {
-                return getAuthorityRecord().getPublishStopInstant();
+                return getAuthorityRecord().getEmbargoStop();
             } catch (IllegalAuthorativeRecord iea) {
                 log.debug(iea.getMessage());
             }
         }
 
-        return super.getPublishStopInstant();
+        return super.getEmbargoStop();
     }
 
     @Override
-    public PublishableObject setPublishStopInstant(Instant publishStop) {
+    public PublishableObject setEmbargoStop(Instant publishStop) {
         if (! Objects.equals(this.publishStop, publishStop)) {
 
-            super.setPublishStopInstant(publishStop);
+            super.setEmbargoStop(publishStop);
             if (mediaObject != null) {
                 if (hasPlatform()) {
-                    getAuthorityRecord().setPublishStopInstant(publishStop);
+                    getAuthorityRecord().setEmbargoStop(publishStop);
                 }
                 mediaObject.realizePrediction(this);
             }
@@ -583,8 +583,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             Prediction locationAuthorityRecord = getAuthorityRecord();
 
             if (locationAuthorityRecord != null) {
-                locationAuthorityRecord.setPublishStartInstant(publishStart);
-                locationAuthorityRecord.setPublishStopInstant(publishStop);
+                locationAuthorityRecord.setEmbargoStart(publishStart);
+                locationAuthorityRecord.setEmbargoStop(publishStop);
             }
         } catch (Throwable t) {
             log.error(t.getMessage());

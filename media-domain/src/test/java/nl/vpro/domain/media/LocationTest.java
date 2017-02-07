@@ -56,8 +56,8 @@ public class LocationTest extends ObjectTest<Location> {
     public void testPublishableInvalidWhenStopBeforeStart() {
         Location invalid = new Location("http://www.bla.nl", OwnerType.BROADCASTER);
         invalid
-            .setPublishStartInstant(Instant.ofEpochMilli(20))
-            .setPublishStopInstant(Instant.ofEpochMilli(10));
+            .setEmbargoStart(Instant.ofEpochMilli(20))
+            .setEmbargoStop(Instant.ofEpochMilli(10));
 
         Set<ConstraintViolation<Location>> constraintViolations = validator.validate(invalid);
 
