@@ -86,22 +86,26 @@ public class Editor extends AbstractUser {
     protected Editor() {
     }
 
-    @Builder
     public Editor(String principalId, String displayName, String email, Broadcaster broadcaster, Set<String> roles) {
+        this(principalId, displayName, email, null, null, broadcaster, roles, null);
+    }
+
+    Editor(String principalId, String displayName, String email, Broadcaster broadcaster, String givenName, String familyName, Instant lastLogin) {
+        this(principalId, displayName, givenName, familyName, email, broadcaster, Collections.emptySet(), lastLogin);
+    }
+
+    @Builder
+    Editor(String principalId, String displayName, String givenName, String familiyName, String email, Broadcaster broadcaster, Set<String> roles, Instant lastLogin) {
         super(principalId, displayName, email);
-        if(broadcaster != null) {
+        if (broadcaster != null) {
             broadcasters.add(new BroadcasterEditor(this, broadcaster, true));
         }
         if (roles == null) {
             log.warn("No roles for {}", principalId);
         }
         this.roles = roles == null ? Collections.emptySet() : Collections.unmodifiableSet(roles);
-    }
-
-    Editor(String principalId, String displayName, String email, Broadcaster broadcaster, String givenName, String familyName, Instant lastLogin) {
-        this(principalId, displayName, email, broadcaster, Collections.emptySet());
         this.givenName = givenName;
-        this.familyName = familyName;
+        this.familyName = familiyName;
         this.lastLogin = lastLogin;
     }
 
