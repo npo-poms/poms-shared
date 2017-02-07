@@ -387,14 +387,14 @@ public class Image extends PublishableObject implements Ownable {
     }
 
     @Override
-    public Image setPublishStopInstant(Instant publishStop) {
-        super.setPublishStopInstant(publishStop);
+    public Image setEmbargoStop(Instant publishStop) {
+        super.setEmbargoStop(publishStop);
         return this;
     }
 
     @Override
-    public Image setPublishStartInstant(Instant publishStart) {
-        super.setPublishStartInstant(publishStart);
+    public Image setEmbargoStart(Instant publishStart) {
+        super.setEmbargoStart(publishStart);
         return this;
     }
 

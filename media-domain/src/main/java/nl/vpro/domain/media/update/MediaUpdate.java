@@ -376,7 +376,7 @@ public abstract class MediaUpdate<M extends MediaObject> {
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStart() {
-        return mediaObject().getPublishStartInstant();
+        return mediaObject().getEmbargoStart();
     }
 
     public void setPublishStart(Instant publishStart) {
@@ -389,7 +389,7 @@ public abstract class MediaUpdate<M extends MediaObject> {
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStop() {
-        return mediaObject().getPublishStopInstant();
+        return mediaObject().getEmbargoStop();
     }
 
     public void setPublishStop(Instant publishStop) {

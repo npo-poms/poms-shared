@@ -38,7 +38,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Table(
     uniqueConstraints = {@UniqueConstraint(columnNames = {"mediaobject_id", "platform"})}
 )
-public class Prediction implements Comparable<Prediction>, Updatable<Prediction>,  Serializable, Embargo<Prediction> {
+public class Prediction implements Comparable<Prediction>, Updatable<Prediction>,  Serializable, Embargo {
 
     private static final long serialVersionUID = 0L;
 
@@ -127,7 +127,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     public Prediction(Prediction source, MediaObject parent) {
-        this(source.getPlatform(), source.getPublishStartInstant(), source.getPublishStopInstant());
+        this(source.getPlatform(), source.getEmbargoStart(), source.getEmbargoStop());
         this.issueDate = source.issueDate;
         this.state = source.state;
         this.mediaObject = parent;
@@ -178,25 +178,25 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     @Override
-    public Instant getPublishStartInstant() {
+    public Instant getEmbargoStart() {
         return publishStart;
     }
 
 
     @Override
-    public Prediction setPublishStartInstant(Instant start) {
+    public Prediction setEmbargoStart(Instant start) {
         this.publishStart = start;
         return this;
     }
 
 
     @Override
-    public Instant getPublishStopInstant() {
+    public Instant getEmbargoStop() {
         return publishStop;
     }
 
     @Override
-    public Prediction setPublishStopInstant(Instant publishStop) {
+    public Prediction setEmbargoStop(Instant publishStop) {
         this.publishStop = publishStop;
         return this;
     }

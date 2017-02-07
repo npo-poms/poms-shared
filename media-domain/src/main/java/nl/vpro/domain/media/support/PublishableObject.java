@@ -49,7 +49,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
-public abstract class PublishableObject extends DomainObject implements Accountable, Embargo<PublishableObject> {
+public abstract class PublishableObject extends DomainObject implements Accountable, Embargo {
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
@@ -323,22 +323,22 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     @JsonProperty("publishStart")
     @Deprecated
     public final Date getPublishStart() {
-        return DateUtils.toDate(getPublishStartInstant());
+        return DateUtils.toDate(getEmbargoStart());
     }
 
 
     @Deprecated
     public final PublishableObject setPublishStart(Date publishStart) {
-        return setPublishStartInstant(DateUtils.toInstant(publishStart));
+        return setEmbargoStart(DateUtils.toInstant(publishStart));
     }
 
     @Override
-    public Instant getPublishStartInstant() {
+    public Instant getEmbargoStart() {
         return publishStart;
     }
 
     @Override
-    public PublishableObject setPublishStartInstant(Instant publishStart) {
+    public PublishableObject setEmbargoStart(Instant publishStart) {
         this.publishStart = publishStart;
         return this;
     }
@@ -347,22 +347,22 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     @JsonProperty("publishStop")
     @Deprecated
     public final Date getPublishStop() {
-        return DateUtils.toDate(getPublishStopInstant());
+        return DateUtils.toDate(getEmbargoStop());
     }
 
     @Deprecated
     public final PublishableObject setPublishStop(Date publishStop) {
-        return setPublishStopInstant(DateUtils.toInstant(publishStop));
+        return setEmbargoStop(DateUtils.toInstant(publishStop));
     }
 
 
     @Override
-    public Instant getPublishStopInstant() {
+    public Instant getEmbargoStop() {
         return publishStop;
     }
 
     @Override
-    public PublishableObject setPublishStopInstant(Instant publishStop) {
+    public PublishableObject setEmbargoStop(Instant publishStop) {
         this.publishStop = publishStop;
         return this;
     }

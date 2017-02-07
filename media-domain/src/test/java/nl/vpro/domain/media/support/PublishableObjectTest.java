@@ -54,12 +54,12 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     public static PublishableObject published = data(2L, Workflow.PUBLISHED, null, null);
 
     @DataPoint
-    public static PublishableObject publishedWithFutureStop = data(2L, 
-        Workflow.PUBLISHED, 
+    public static PublishableObject publishedWithFutureStop = data(2L,
+        Workflow.PUBLISHED,
         null,
         Instant.now().plusSeconds(100)
     );
-        
+
     @DataPoint
     public static PublishableObject forDeletion = data(3L, Workflow.FOR_DELETION, null, null);
 
@@ -71,12 +71,12 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         Instant.now().plusSeconds(100), null);
 
     @DataPoint
-    public static PublishableObject revocationFallsForPublication = data(7L, 
+    public static PublishableObject revocationFallsForPublication = data(7L,
         Workflow.PUBLISHED,
         Instant.now().plusSeconds(100),
         Instant.now().minusSeconds(100)
     );
-        
+
     @Theory
     public void testIsActivationWhenTrue(PublishableObject data) {
         assumeNotNull(data);
@@ -216,8 +216,8 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
             }
         };
         result.setWorkflow(workflow);
-        result.setPublishStartInstant(start);
-        result.setPublishStopInstant(stop);
+        result.setEmbargoStart(start);
+        result.setEmbargoStop(stop);
         return result;
     }
 }

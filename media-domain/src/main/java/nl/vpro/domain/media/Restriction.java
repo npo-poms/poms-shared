@@ -19,6 +19,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Embargo;
 import nl.vpro.domain.media.support.DomainObject;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -28,7 +29,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressWarnings("serial")
-abstract public class Restriction extends DomainObject {
+abstract public class Restriction extends DomainObject implements Embargo {
 
     @Column
     @XmlAttribute
@@ -80,6 +81,8 @@ abstract public class Restriction extends DomainObject {
         this.stop = stop;
     }
 
+
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) { return false; }
@@ -115,5 +118,31 @@ abstract public class Restriction extends DomainObject {
             .append("start", start)
             .append("stop", stop)
             .toString();
+    }
+
+    @Override
+    public Instant getEmbargoStart() {
+        return getStart();
+
+    }
+
+    @Override
+    public Restriction setEmbargoStart(Instant publishStart) {
+        setStart(publishStart);
+        return this;
+
+    }
+
+    @Override
+    public Instant getEmbargoStop() {
+        return getStop();
+
+    }
+
+    @Override
+    public Restriction setEmbargoStop(Instant publishStop) {
+        setStop(publishStop);
+        return this;
+
     }
 }

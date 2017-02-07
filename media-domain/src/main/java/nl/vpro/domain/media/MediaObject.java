@@ -541,7 +541,7 @@ public abstract class MediaObject extends PublishableObject
         source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
-            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getPublishStartInstant(), prediction.getPublishStopInstant());
+            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getEmbargoStart(), prediction.getEmbargoStop());
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getState());
         });
         source.getLocations().forEach(location -> this.addLocation(Location.copy(location, this)));
@@ -1928,8 +1928,8 @@ public abstract class MediaObject extends PublishableObject
             }
 
             existing.setAvAttributes(location.getAvAttributes());
-            existing.setPublishStartInstant(location.getPublishStartInstant());
-            existing.setPublishStopInstant(location.getPublishStopInstant());
+            existing.setEmbargoStart(location.getEmbargoStart());
+            existing.setEmbargoStop(location.getEmbargoStop());
             existing.setSubtitles(location.getSubtitles());
             existing.setDuration(location.getDuration());
             existing.setOffset(location.getOffset());
@@ -2274,25 +2274,25 @@ public abstract class MediaObject extends PublishableObject
     }
 
     @Override
-    public PublishableObject setPublishStartInstant(Instant publishStart) {
+    public PublishableObject setEmbargoStart(Instant publishStart) {
         if (! Objects.equals(this.publishStart, publishStart)) {
             invalidateSortDate();
             if (hasInternetVodAuthority()) {
                 locationAuthorityUpdate = true;
             }
         }
-        return super.setPublishStartInstant(publishStart);
+        return super.setEmbargoStart(publishStart);
     }
 
     @Override
-    public PublishableObject setPublishStopInstant(Instant publishStop) {
+    public PublishableObject setEmbargoStop(Instant publishStop) {
         if (!Objects.equals(this.publishStop, publishStop)) {
             invalidateSortDate();
             if (hasInternetVodAuthority()) {
                 locationAuthorityUpdate = true;
             }
         }
-        return super.setPublishStopInstant(publishStop);
+        return super.setEmbargoStop(publishStop);
     }
 
     protected boolean hasInternetVodAuthority() {
