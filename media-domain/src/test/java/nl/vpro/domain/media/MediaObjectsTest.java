@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import nl.vpro.domain.media.support.*;
 
-import static nl.vpro.domain.media.MediaObjects.findOwnersForTextFields;
+import static nl.vpro.domain.TextualObjects.findOwnersForTextFields;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
