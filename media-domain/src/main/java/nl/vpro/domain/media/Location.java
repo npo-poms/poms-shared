@@ -180,7 +180,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     }
 
     @Builder
-    public Location(
+    protected Location(
         String programUrl,
         OwnerType owner,
         AVAttributes avAttributes,
@@ -188,7 +188,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         Integer bitrate,
         AVFileFormat avFileFormat,
         AudioAttributes audioAttributes,
-        VideoAttributes videoAttributes
+        VideoAttributes videoAttributes,
+        Platform platform
     ) {
         this.programUrl = programUrl;
         this.owner = owner;
@@ -203,6 +204,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             .audioAttributes(audioAttributes == null ? avAttributes.getAudioAttributes() : audioAttributes)
             .videoAttributes(videoAttributes == null ? avAttributes.getVideoAttributes() : videoAttributes)
             .build();
+        this.platform = platform;
 
     }
 
