@@ -35,7 +35,7 @@ public class Util {
     }
 
     static String getContentDisposition(SubtitlesId id, String extension) {
-        return "inline; fileName=" + id.getMid() + "." + id.getLanguage() + "." + extension + ";";
+        return "inline; filename=\"" + id.getMid() + "." + id.getLanguage() + "." + extension + "\"";
     }
 
     static Iterator<Cue> headers(Iterator<Cue> cueIterator, MultivaluedMap<String, Object> httpHeaders, String extension) {
@@ -47,7 +47,7 @@ public class Util {
             if (head instanceof StandaloneCue) {
                 httpHeaders.putSingle("Content-Disposition",  getContentDisposition(((StandaloneCue) head).getSubtitlesId(), extension));
             } else {
-                httpHeaders.putSingle("Content-Disposition", "inline; fileName=" + head.getParent() + "." + "." + extension + ";");
+                httpHeaders.putSingle("Content-Disposition", "inline; filename=" + head.getParent() + "." + "." + extension);
             }
         }
         return peeking;
