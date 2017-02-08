@@ -11,6 +11,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 
 import nl.vpro.domain.subtitles.Subtitles;
+import nl.vpro.domain.subtitles.SubtitlesFormat;
 
 /**
  * @author Michiel Meeuwissen
@@ -21,9 +22,9 @@ abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
     private final MediaType mediaType;
     private final String extension;
 
-    public AbstractSubtitlesWriter(MediaType mediaType, String extension) {
-        this.mediaType = mediaType;
-        this.extension = extension;
+    public AbstractSubtitlesWriter(SubtitlesFormat format) {
+        this.mediaType = MediaType.valueOf(format.getMediaType());
+        this.extension = format.getExtension();
     }
 
     @Override
