@@ -107,6 +107,7 @@ public class StandaloneCue extends Cue {
         return getParent() + "\t" + getType() + "\t" + getLanguage() + "\t" + getSequence();
         //return getParent() + "_" + getType() + "_" + getLocale() + "_" + getSequence();
     }
+    @XmlTransient
     public SubtitlesId getSubtitlesId() {
         return SubtitlesId.builder().mid(parent).language(language).type(type).build();
     }
