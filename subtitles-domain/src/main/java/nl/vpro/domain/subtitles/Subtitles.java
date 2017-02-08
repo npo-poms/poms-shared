@@ -136,6 +136,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
             subtitles.setMid(first.getParent());
             subtitles.setLanguage(first.getLanguage());
             subtitles.setOffset(first.getOffset());
+            subtitles.setType(first.getType());
             subtitles.setContent(new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString()));
         } catch(NoSuchElementException nse) {
             log.error(nse.getMessage());
