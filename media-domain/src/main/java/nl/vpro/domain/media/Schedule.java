@@ -315,7 +315,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
 
     @XmlAttribute(name = "stop")
     public Date getStop() {
-        if (filtered || scheduleEvents == null || scheduleEvents.size() == 0 || scheduleEvents.last().getStart() == null) {
+        if (filtered || scheduleEvents == null || scheduleEvents.size() == 0 || scheduleEvents.last().getStartInstant() == null) {
             return stop;
         }
 
