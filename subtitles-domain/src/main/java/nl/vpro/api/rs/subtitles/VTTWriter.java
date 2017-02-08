@@ -15,6 +15,7 @@ import javax.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.StandaloneCue;
+import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 import nl.vpro.util.CountedIterator;
 
@@ -29,7 +30,7 @@ public class VTTWriter implements MessageBodyWriter<CountedIterator<StandaloneCu
 
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        return mediaType.isCompatible(Constants.VTT_TYPE) && Iterator.class.isAssignableFrom(type);
+        return mediaType.isCompatible(Constants.VTT_TYPE) && Subtitles.class.isAssignableFrom(type);
 
     }
 
