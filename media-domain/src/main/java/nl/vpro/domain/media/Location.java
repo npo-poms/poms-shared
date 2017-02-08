@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.PublishableObject;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.DurationToTimeConverter;
@@ -572,6 +573,13 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         }
     }
 
+    @Override
+    public void setWorkflow(Workflow workflow) {
+        super.setWorkflow(workflow);
+        if (Workflow.REVOKES.contains(workflow) && platform != null && this.mediaObject != null) {
+            MediaObjects.realizeAndExpirePredictions(platform, this.mediaObject);
+        }
+    }
 
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
