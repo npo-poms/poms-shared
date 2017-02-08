@@ -45,7 +45,8 @@ public class Util {
         if (peeking.hasNext()) {
             Cue head = peeking.peek();
             if (head instanceof StandaloneCue) {
-                httpHeaders.putSingle("Content-Disposition",  getContentDisposition(((StandaloneCue) head).getSubtitlesId(), extension));
+                SubtitlesId id = ((StandaloneCue) head).getSubtitlesId();
+                headers(id, httpHeaders, extension);
             } else {
                 httpHeaders.putSingle("Content-Disposition", "inline; filename=" + head.getParent() + "." + "." + extension);
             }
