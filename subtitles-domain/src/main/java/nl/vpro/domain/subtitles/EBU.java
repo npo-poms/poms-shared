@@ -3,6 +3,7 @@ package nl.vpro.domain.subtitles;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,6 +23,7 @@ import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
 @Slf4j
 public class EBU {
 
+    public static Charset EBU_CHARSET = ISO6937;
 
     public static StringBuilder format(Cue cue, StringBuilder builder) {
         //001 0:01:00 0:02:00 ondertitels !
@@ -56,7 +58,7 @@ public class EBU {
 
 
     public static Stream<Cue> parse(String parent, InputStream inputStream) {
-        return parse(parent, new InputStreamReader(inputStream, ISO6937));
+        return parse(parent, new InputStreamReader(inputStream, EBU_CHARSET));
     }
 
     static Stream<Cue> parse(final String parent, Reader reader) {
