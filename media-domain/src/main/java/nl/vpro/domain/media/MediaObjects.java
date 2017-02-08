@@ -482,10 +482,9 @@ public class MediaObjects {
                         requiredState = Prediction.State.REALIZED;
                         break;
                     }
-          /*          if (location.getPublishStopInstant() != null && location.getPublishStopInstant().isBefore(Instant.now())) {
-                        requiredState = Prediction.State.EXPIRED;
+                    if (location.wasUnderEmbargo()) {
+                        requiredState = Prediction.State.REVOKED;
                     }
-*/
                 }
             }
             if (prediction.getState() != requiredState) {

@@ -2315,6 +2315,7 @@ public abstract class MediaObject extends PublishableObject
             locationAuthorityUpdate = true;
         }
 
+
         super.setWorkflow(workflow);
     }
 
