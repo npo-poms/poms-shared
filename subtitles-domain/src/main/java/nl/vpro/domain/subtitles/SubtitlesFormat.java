@@ -4,11 +4,11 @@ import lombok.Getter;
 
 import java.nio.charset.Charset;
 
-import javax.ws.rs.core.MediaType;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.api.rs.subtitles.Constants;
+import nl.vpro.util.ISO6937CharsetProvider;
 
 
 /**
@@ -17,18 +17,21 @@ import nl.vpro.api.rs.subtitles.Constants;
  */
 @XmlEnum
 @XmlType(name = "subtitlesFormatEnum")
-@Getter
 public enum SubtitlesFormat {
-    WEBVTT("vtt", Constants.VTT_TYPE, WEBVTTandSRT.VTT_CHARSET),
-    EBU("ebu", Constants.EBU_TYPE, nl.vpro.domain.subtitles.EBU.EBU_CHARSET),
-    SRT("srt", Constants.SRT_TYPE, WEBVTTandSRT.SRT_CHARSET);
+    WEBVTT("vtt", Constants.VTT, Charset.forName("UTF-8")),
+    EBU("ebu", Constants.VTT, ISO6937CharsetProvider.ISO6937),
+    SRT("srt", Constants.SRT, Charset.forName("cp1252"))
+    ;
 
 
+    @Getter
     private final String extension;
-    private final MediaType mediaType;
+    @Getter
+    private final String mediaType;
+    @Getter
     private final Charset charset;
 
-    SubtitlesFormat(String extension, MediaType mediaType, Charset charset) {
+    SubtitlesFormat(String extension, String mediaType, Charset charset) {
         this.extension = extension;
         this.mediaType = mediaType;
         this.charset = charset;
