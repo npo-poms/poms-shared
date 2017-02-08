@@ -9,17 +9,19 @@ import javax.ws.rs.ext.Provider;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 
+import static nl.vpro.api.rs.subtitles.Constants.*;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.1
  */
 @Provider
-@Produces(Constants.SRT)
+@Produces(SRT)
 public class SRTSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
     public SRTSubtitlesWriter() {
-        super(Constants.SRT_TYPE, "srt");
+        super(SRT_TYPE, SRT_EXTENSION);
     }
 
     @Override

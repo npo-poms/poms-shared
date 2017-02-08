@@ -9,17 +9,19 @@ import javax.ws.rs.ext.Provider;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 
+import static nl.vpro.api.rs.subtitles.Constants.*;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.1
  */
 @Provider
-@Produces(Constants.EBU)
+@Produces(EBU)
 public class EBUSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
     public EBUSubtitlesWriter() {
-        super(Constants.EBU_TYPE, "ebu");
+        super(EBU_TYPE,  EBU_EXTENSION);
     }
 
     @Override
