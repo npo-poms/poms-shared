@@ -1,6 +1,8 @@
 package nl.vpro.api.rs.subtitles;
 
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.ws.rs.core.MultivaluedMap;
 
@@ -17,10 +19,19 @@ import nl.vpro.domain.subtitles.SubtitlesId;
  */
 public class Util {
 
+    public static Map<String, String> headers(SubtitlesId id, String extension) {
+        Map<String, String> result = new HashMap<>();
+        result.put("Content-Disposition", "inline; fileName=" + id.getMid() + "." + id.getLanguage() + "." + extension + ";");
+        result.put("X-subtitlesId", id.toString());
+        return result;
 
-    static void headers(SubtitlesId id, MultivaluedMap<String, Object> httpHeaders, String extension) {
-        httpHeaders.putSingle("Content-Disposition", "inline; fileName=" + id.getMid() + "." +  id.getLanguage() + "." + extension + ";");
-        httpHeaders.putSingle("X-subtitlesId", id.toString());
+    }
+
+
+     static void headers(SubtitlesId id, MultivaluedMap<String, Object> httpHeaders, String extension) {
+        for(Map.Entry<String, String> e : headers(id, extension).entrySet()) {
+            httpHeaders.putSingle(e.getKey(), e.getValue());
+        }
 
     }
 
@@ -31,7 +42,7 @@ public class Util {
         if (peeking.hasNext()) {
             Cue head = peeking.peek();
             if (head instanceof StandaloneCue) {
-                httpHeaders.putSingle("Content-Disposition", "inline; fileName=" + head.getParent() + "." + ((StandaloneCue) head).getLocale().toString() + "." + extension + ";");
+                httpHeaders.putSingle("Content-Disposition", "inline; fileName=" + head.getParent() + "." + ((StandaloneCue) head).getLanguage().toString() + "." + extension + ";");
             } else {
                 httpHeaders.putSingle("Content-Disposition", "inline; fileName=" + head.getParent() + "." + "." + extension + ";");
             }
