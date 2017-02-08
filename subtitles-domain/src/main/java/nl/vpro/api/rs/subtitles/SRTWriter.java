@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.Cue;
+import nl.vpro.domain.subtitles.SubtitlesFormat;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
@@ -21,7 +22,7 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
 public class SRTWriter extends AbstractIteratorWriter {
 
     public SRTWriter() {
-        super(SRT_TYPE, SRT_EXTENSION);
+        super(SubtitlesFormat.SRT);
     }
 
     @Override
