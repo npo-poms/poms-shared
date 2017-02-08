@@ -24,7 +24,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
  */
 @Provider
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-public class SubtitlesWriter implements MessageBodyWriter<Iterator<StandaloneCue>> {
+public class XmlAndJsonWriter implements MessageBodyWriter<Iterator<StandaloneCue>> {
 
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
