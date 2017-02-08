@@ -14,10 +14,7 @@ import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.SubtitlesType;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
-
 import static nl.vpro.domain.api.Constants.*;
-import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
-import static nl.vpro.domain.api.Constants.MAX;
 
 
 /**

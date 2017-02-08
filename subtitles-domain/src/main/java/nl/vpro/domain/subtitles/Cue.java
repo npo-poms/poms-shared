@@ -1,5 +1,6 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.Builder;
 import lombok.ToString;
 
 import java.time.Duration;
@@ -41,12 +42,12 @@ public class Cue {
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     Duration end;
-    
+
     @XmlValue
     @JsonProperty("content")
     String content;
 
-
+    @Builder
     public Cue(String parent,
         int sequence,
         Duration start,
