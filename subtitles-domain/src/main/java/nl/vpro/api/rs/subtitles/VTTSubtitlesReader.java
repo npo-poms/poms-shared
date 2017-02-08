@@ -4,7 +4,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.SubtitlesFormat;
-import nl.vpro.domain.subtitles.WEBVTTandSRT;
 
 /**
  * @author Michiel Meeuwissen
@@ -16,7 +15,7 @@ public class VTTSubtitlesReader extends AbstractSubtitlesReader {
 
 
     public VTTSubtitlesReader() {
-        super(Constants.VTT_TYPE, WEBVTTandSRT.VTT_CHARSET, SubtitlesFormat.WEBVTT);
+        super(SubtitlesFormat.WEBVTT);
     }
 
 }

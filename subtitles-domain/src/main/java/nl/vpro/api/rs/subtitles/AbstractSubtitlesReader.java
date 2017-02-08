@@ -29,9 +29,9 @@ abstract class AbstractSubtitlesReader implements MessageBodyReader<Subtitles> {
     private final Charset charset;
     private final SubtitlesFormat format;
 
-    public AbstractSubtitlesReader(MediaType mediaType, Charset charset, SubtitlesFormat format) {
-        this.mediaType = mediaType;
-        this.charset = charset;
+    public AbstractSubtitlesReader(SubtitlesFormat format) {
+        this.mediaType = format.getMediaType();
+        this.charset = format.getCharset();
         this.format = format;
     }
 
