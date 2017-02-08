@@ -19,26 +19,20 @@ import org.apache.commons.lang3.StringUtils;
 public class WEBVTTandSRT {
 
 
-    static String WEBVTT_INTRO = "WEBVTT";
+    static final String WEBVTT_INTRO = "WEBVTT";
+
+    public static final Charset SRT_CHARSET = Charset.forName("cp1252");
+    public static final Charset VTT_CHARSET = Charset.forName("UTF-8");
 
 
     public static Stream<Cue> parseWEBVTT(String parent, InputStream inputStream) {
-        try {
-            return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-
+        return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, VTT_CHARSET));
     }
 
     public static Stream<Cue> parseSRT(String parent, InputStream inputStream) {
-        try {
-            return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, "cp1252"));
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
-
+        return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, SRT_CHARSET));
     }
+
 
     static Stream<Cue> parse(String parent, Duration offset,  Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
@@ -118,6 +112,9 @@ public class WEBVTTandSRT {
     static Cue parseCue(String parent, String headLine, Duration offset, String timeLine, String content) {
         String[] split = timeLine.split("\\s+");
         try {
+            if (offset == null) {
+                offset = Duration.ZERO;
+            }
             return new Cue(
                 parent,
                 Integer.parseInt(headLine),
