@@ -5,6 +5,7 @@ package nl.vpro.domain.subtitles;
  * @since 4.8
  */
 
+import lombok.Builder;
 import lombok.ToString;
 
 import java.time.Duration;
@@ -72,6 +73,22 @@ public class StandaloneCue extends Cue {
         this.type = type;
         this.offset = offset == null || offset.isZero() ? null : offset;
     }
+
+    @Builder
+    StandaloneCue(String parent,
+                  int sequence,
+                  Duration start,
+                  Duration end,
+                  String content,
+                  Locale locale,
+                  SubtitlesType type,
+                  Duration offset) {
+        super(Cue.builder().parent(parent).sequence(sequence).start(start).end(end).content(content).build());
+        this.locale = locale;
+        this.type = type;
+        this.offset = offset == null || offset.isZero() ? null : offset;
+    }
+
 
     public Locale getLocale() {
         return locale;
