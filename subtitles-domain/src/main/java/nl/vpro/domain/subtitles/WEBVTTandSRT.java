@@ -21,7 +21,7 @@ public class WEBVTTandSRT {
 
     static final String WEBVTT_INTRO = "WEBVTT";
 
-    public static final Charset SRT_CHARSET = Charset.forName("cp1252");
+    public static final Charset SRT_CHARSET = SubtitlesFormat.SRT.getCharset();
     public static final Charset VTT_CHARSET = Charset.forName("UTF-8");
 
 
