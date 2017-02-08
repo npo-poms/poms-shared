@@ -32,12 +32,12 @@ import static nl.vpro.i18n.Locales.DUTCH;
  * @since 4.8
  */
 @XmlRootElement(name = "standaloneCue")
-@ToString(includeFieldNames = false, callSuper = true, of = {"locale"})
+@ToString(includeFieldNames = false, callSuper = true, of = {"language"})
 public class StandaloneCue extends Cue {
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
-    private Locale locale;
+    private Locale language;
 
     @XmlAttribute
     private SubtitlesType type = SubtitlesType.CAPTION;
@@ -67,9 +67,9 @@ public class StandaloneCue extends Cue {
 
     }
 
-    public StandaloneCue(Cue cue, Locale locale, SubtitlesType type, Duration offset) {
+    public StandaloneCue(Cue cue, Locale language, SubtitlesType type, Duration offset) {
         super(cue);
-        this.locale = locale;
+        this.language = language;
         this.type = type;
         this.offset = offset == null || offset.isZero() ? null : offset;
     }
@@ -80,18 +80,18 @@ public class StandaloneCue extends Cue {
                   Duration start,
                   Duration end,
                   String content,
-                  Locale locale,
+                  Locale language,
                   SubtitlesType type,
                   Duration offset) {
         super(Cue.builder().parent(parent).sequence(sequence).start(start).end(end).content(content).build());
-        this.locale = locale;
+        this.language = language;
         this.type = type;
         this.offset = offset == null || offset.isZero() ? null : offset;
     }
 
 
-    public Locale getLocale() {
-        return locale;
+    public Locale getLanguage() {
+        return language;
     }
 
     public SubtitlesType getType() {
@@ -104,7 +104,11 @@ public class StandaloneCue extends Cue {
 
     @XmlTransient
     public String getId() {
-        return getParent() + "\t" + getType() + "\t" + getLocale() + "\t" + getSequence();
+        return getParent() + "\t" + getType() + "\t" + getLanguage() + "\t" + getSequence();
         //return getParent() + "_" + getType() + "_" + getLocale() + "_" + getSequence();
     }
+    public SubtitlesId getSubtitlesId() {
+        return SubtitlesId.builder().mid(parent).language(language).type(type).build();
+    }
+
 }

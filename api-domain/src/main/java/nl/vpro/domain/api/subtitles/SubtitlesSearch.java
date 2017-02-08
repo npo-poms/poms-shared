@@ -100,7 +100,7 @@ public class SubtitlesSearch extends AbstractTextSearch implements Predicate<Sta
 
 
     protected boolean applyLanguages(StandaloneCue input) {
-        return Matchers.listPredicate(languages).test(input.getLocale().toString());
+        return Matchers.listPredicate(languages).test(input.getLanguage().toString());
     }
 
 }
