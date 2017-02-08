@@ -14,7 +14,6 @@ import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang3.StringUtils;
 
-import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
 
 /**
  * @author Michiel Meeuwissen
@@ -23,7 +22,7 @@ import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
 @Slf4j
 public class EBU {
 
-    public static Charset EBU_CHARSET = ISO6937;
+    public static Charset EBU_CHARSET = SubtitlesFormat.EBU.getCharset();
 
     public static StringBuilder format(Cue cue, StringBuilder builder) {
         //001 0:01:00 0:02:00 ondertitels !
@@ -145,7 +144,7 @@ public class EBU {
 
 
     static void format(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
-        Writer writer = new OutputStreamWriter(out, ISO6937);
+        Writer writer = new OutputStreamWriter(out, EBU_CHARSET);
         format(cueIterator, writer);
         writer.flush();
     }

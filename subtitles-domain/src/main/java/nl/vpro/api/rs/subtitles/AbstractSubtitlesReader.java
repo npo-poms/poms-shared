@@ -30,7 +30,7 @@ abstract class AbstractSubtitlesReader implements MessageBodyReader<Subtitles> {
     private final SubtitlesFormat format;
 
     public AbstractSubtitlesReader(SubtitlesFormat format) {
-        this.mediaType = format.getMediaType();
+        this.mediaType = MediaType.valueOf(format.getMediaType());
         this.charset = format.getCharset();
         this.format = format;
     }
