@@ -10,7 +10,6 @@ import com.google.common.collect.PeekingIterator;
 import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.SubtitlesId;
-import nl.vpro.util.CountedIterator;
 
 /**
  * @author Michiel Meeuwissen
@@ -25,13 +24,11 @@ public class Util {
 
     }
 
-    static Iterator<? extends Cue> headers(CountedIterator<? extends Cue> cueIterator, MultivaluedMap<String, Object> httpHeaders, String extension) {
+    static Iterator<Cue> headers(Iterator<Cue> cueIterator, MultivaluedMap<String, Object> httpHeaders, String extension) {
 
 
-        Iterator<? extends Cue> i = cueIterator;
-        if (cueIterator.getTotalSize().orElse(0L) > 0L) {
-            PeekingIterator<? extends Cue> peeking = Iterators.peekingIterator(cueIterator);
-            i = peeking;
+        PeekingIterator<Cue> peeking = Iterators.peekingIterator(cueIterator);
+        if (peeking.hasNext()) {
             Cue head = peeking.peek();
             if (head instanceof StandaloneCue) {
                 httpHeaders.putSingle("Content-Disposition", "inline; fileName=" + head.getParent() + "." + ((StandaloneCue) head).getLocale().toString() + "." + extension + ";");
@@ -39,6 +36,6 @@ public class Util {
                 httpHeaders.putSingle("Content-Disposition", "inline; fileName=" + head.getParent() + "." + "." + extension + ";");
             }
         }
-        return i;
+        return peeking;
     }
 }

@@ -10,17 +10,19 @@ import javax.ws.rs.ext.Provider;
 import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 
+import static nl.vpro.api.rs.subtitles.Constants.*;
+
 /**
  * @author Michiel Meeuwissen
  * @since 4.8
  */
 @Provider
-@Produces(Constants.VTT)
+@Produces(VTT)
 public class VTTWriter extends AbstractIteratorWriter {
 
 
     public VTTWriter() {
-        super(Constants.VTT_TYPE);
+        super(VTT_TYPE, VTT_EXTENSION);
     }
 
     @Override
