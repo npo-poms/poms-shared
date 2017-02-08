@@ -129,7 +129,7 @@ public class WEBVTTandSRT {
     }
 
     static void formatSRT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
-        Writer writer = new OutputStreamWriter(out, Charset.forName("cp1252"));
+        Writer writer = new OutputStreamWriter(out, SRT_CHARSET);
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
             Cue cue = cueIterator.next();
@@ -141,7 +141,7 @@ public class WEBVTTandSRT {
     }
 
     static void formatWEBVTT(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
-        Writer writer = new OutputStreamWriter(out, Charset.forName("UTF-8"));
+        Writer writer = new OutputStreamWriter(out, VTT_CHARSET);
         formatWEBVTT(cueIterator, writer);
         writer.flush();
     }
