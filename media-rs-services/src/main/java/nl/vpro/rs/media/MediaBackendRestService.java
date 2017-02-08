@@ -22,11 +22,7 @@ import nl.vpro.domain.media.search.MediaListItem;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
-import nl.vpro.domain.subtitles.Cue;
-import nl.vpro.domain.subtitles.StandaloneCue;
-import nl.vpro.domain.subtitles.SubtitlesId;
-import nl.vpro.domain.subtitles.SubtitlesType;
-import nl.vpro.util.CountedIterator;
+import nl.vpro.domain.subtitles.*;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
 
@@ -262,7 +258,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("subtitles/{mid}/{language}/{type}")
     @Produces({VTT, EBU, SRT})
-    CountedIterator<StandaloneCue> getSubtitles(
+    Subtitles getSubtitles(
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,

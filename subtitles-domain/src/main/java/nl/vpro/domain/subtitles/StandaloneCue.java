@@ -74,7 +74,7 @@ public class StandaloneCue extends Cue {
         this.offset = offset == null || offset.isZero() ? null : offset;
     }
 
-    @Builder
+    @Builder(builderMethodName = "standaloneBuilder")
     StandaloneCue(String parent,
                   int sequence,
                   Duration start,
