@@ -1,6 +1,5 @@
 package nl.vpro.api.rs.v3.subtitles;
 
-import java.util.Iterator;
 import java.util.Locale;
 
 import javax.validation.Valid;
@@ -10,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.api.subtitles.SubtitlesForm;
 import nl.vpro.domain.api.subtitles.SubtitlesSearchResult;
-import nl.vpro.domain.subtitles.StandaloneCue;
+import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesType;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
@@ -31,7 +30,7 @@ public interface SubtitlesRestService {
 
     @GET
     @Path("/{mid}/{language}/{type}")
-    Iterator<StandaloneCue> get(
+    Subtitles get(
         @PathParam("mid") String mid,
         @PathParam("language") Locale locale,
         @PathParam("type") SubtitlesType type
@@ -39,7 +38,7 @@ public interface SubtitlesRestService {
 
     @GET
     @Path("/{mid}/{language}")
-    Iterator<StandaloneCue> get(
+    Subtitles get(
         @PathParam("id") String mid,
         @PathParam("language") Locale locale);
 
