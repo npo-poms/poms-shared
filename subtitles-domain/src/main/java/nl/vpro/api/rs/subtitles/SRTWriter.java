@@ -10,16 +10,18 @@ import javax.ws.rs.ext.Provider;
 import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 
+import static nl.vpro.api.rs.subtitles.Constants.*;
+
 /**
  * @author Michiel Meeuwissen
  * @since 4.8
  */
 @Provider
-@Produces(Constants.SRT)
+@Produces(SRT)
 public class SRTWriter extends AbstractIteratorWriter {
 
     public SRTWriter() {
-        super(Constants.SRT_TYPE);
+        super(SRT_TYPE, SRT_EXTENSION);
     }
 
     @Override

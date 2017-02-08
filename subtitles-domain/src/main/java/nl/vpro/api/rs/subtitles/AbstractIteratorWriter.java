@@ -20,9 +20,11 @@ import nl.vpro.domain.subtitles.Cue;
 abstract class AbstractIteratorWriter implements MessageBodyWriter<Iterator<Cue>> {
 
     private final MediaType mediaType;
+    private final String extension;
 
-    public AbstractIteratorWriter(MediaType mediaType) {
+    public AbstractIteratorWriter(MediaType mediaType, String extension) {
         this.mediaType = mediaType;
+        this.extension = extension;
     }
 
     @Override
@@ -38,6 +40,7 @@ abstract class AbstractIteratorWriter implements MessageBodyWriter<Iterator<Cue>
 
     @Override
     public void writeTo(Iterator<Cue> cueIterator, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
+        cueIterator = Util.headers(cueIterator, httpHeaders, extension);
         stream(cueIterator, entityStream);
     }
 
