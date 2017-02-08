@@ -25,6 +25,16 @@ public interface Embargo {
         return ! isInAllowedPublicationWindow();
     }
 
+    default boolean wasUnderEmbargo() {
+        Instant stop = getEmbargoStop();
+        return stop != null && stop.isBefore(Instant.now());
+    }
+
+    default boolean willBeUnderEmbargo() {
+        Instant start = getEmbargoStart();
+        return start != null && start.isAfter(Instant.now());
+    }
+
     default boolean isInAllowedPublicationWindow() {
         return isInAllowedPublicationWindow(Duration.ZERO);
     }
