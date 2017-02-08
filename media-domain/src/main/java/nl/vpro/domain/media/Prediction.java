@@ -38,7 +38,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Table(
     uniqueConstraints = {@UniqueConstraint(columnNames = {"mediaobject_id", "platform"})}
 )
-public class Prediction implements Comparable<Prediction>, Updatable<Prediction>,  Serializable, Embargo {
+public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, Embargo {
 
     private static final long serialVersionUID = 0L;
 
