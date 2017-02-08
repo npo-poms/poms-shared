@@ -7,6 +7,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.Subtitles;
+import nl.vpro.domain.subtitles.SubtitlesFormat;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
@@ -21,7 +22,7 @@ public class EBUSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
     public EBUSubtitlesWriter() {
-        super(EBU_TYPE,  EBU_EXTENSION);
+        super(SubtitlesFormat.EBU);
     }
 
     @Override

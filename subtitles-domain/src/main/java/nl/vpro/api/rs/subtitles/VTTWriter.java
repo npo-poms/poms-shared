@@ -8,6 +8,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.Cue;
+import nl.vpro.domain.subtitles.SubtitlesFormat;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
@@ -22,7 +23,7 @@ public class VTTWriter extends AbstractIteratorWriter {
 
 
     public VTTWriter() {
-        super(VTT_TYPE, VTT_EXTENSION);
+        super(SubtitlesFormat.WEBVTT);
     }
 
     @Override

@@ -12,6 +12,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 
 import nl.vpro.domain.subtitles.Cue;
+import nl.vpro.domain.subtitles.SubtitlesFormat;
 
 /**
  * @author Michiel Meeuwissen
@@ -22,9 +23,9 @@ abstract class AbstractIteratorWriter implements MessageBodyWriter<Iterator<Cue>
     private final MediaType mediaType;
     private final String extension;
 
-    public AbstractIteratorWriter(MediaType mediaType, String extension) {
-        this.mediaType = mediaType;
-        this.extension = extension;
+    public AbstractIteratorWriter(SubtitlesFormat format) {
+        this.mediaType = MediaType.valueOf(format.getMediaType());
+        this.extension = format.getExtension();
     }
 
     @Override
