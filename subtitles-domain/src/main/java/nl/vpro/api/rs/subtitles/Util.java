@@ -9,15 +9,25 @@ import com.google.common.collect.PeekingIterator;
 
 import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.StandaloneCue;
+import nl.vpro.domain.subtitles.SubtitlesId;
 import nl.vpro.util.CountedIterator;
 
 /**
  * @author Michiel Meeuwissen
  * @since 4.8
  */
-class Util {
+public class Util {
+
+
+    static void headers(SubtitlesId id, MultivaluedMap<String, Object> httpHeaders, String extension) {
+        httpHeaders.putSingle("Content-Disposition", "inline; fileName=" + id.getMid() + "." +  id.getLanguage() + "." + extension + ";");
+        httpHeaders.putSingle("X-subtitlesId", id.toString());
+
+    }
 
     static Iterator<? extends Cue> headers(CountedIterator<? extends Cue> cueIterator, MultivaluedMap<String, Object> httpHeaders, String extension) {
+
+
         Iterator<? extends Cue> i = cueIterator;
         if (cueIterator.getTotalSize().orElse(0L) > 0L) {
             PeekingIterator<? extends Cue> peeking = Iterators.peekingIterator(cueIterator);

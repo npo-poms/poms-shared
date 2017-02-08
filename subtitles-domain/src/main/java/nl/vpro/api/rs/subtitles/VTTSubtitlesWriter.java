@@ -19,7 +19,7 @@ public class VTTSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
     public VTTSubtitlesWriter() {
-        super(Constants.VTT_TYPE);
+        super(Constants.VTT_TYPE, "vtt");
     }
 
     @Override
