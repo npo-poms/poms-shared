@@ -19,7 +19,7 @@ public class SRTSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
     public SRTSubtitlesWriter() {
-        super(Constants.SRT_TYPE);
+        super(Constants.SRT_TYPE, "srt");
     }
 
     @Override

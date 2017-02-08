@@ -19,9 +19,11 @@ import nl.vpro.domain.subtitles.Subtitles;
 abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
 
     private final MediaType mediaType;
+    private final String extension;
 
-    public AbstractSubtitlesWriter(MediaType mediaType) {
+    public AbstractSubtitlesWriter(MediaType mediaType, String extension) {
         this.mediaType = mediaType;
+        this.extension = extension;
     }
 
     @Override
@@ -38,7 +40,7 @@ abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
 
     @Override
     public void writeTo(Subtitles subtitles, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
-        //Iterator<? extends Cue> i = Util.headers(cueIterator, httpHeaders, "vtt");
+        Util.headers(subtitles.getId(), httpHeaders, extension);
         stream(subtitles, entityStream);
     }
 

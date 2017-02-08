@@ -19,7 +19,7 @@ public class EBUSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
     public EBUSubtitlesWriter() {
-        super(Constants.EBU_TYPE);
+        super(Constants.EBU_TYPE, "ebu");
     }
 
     @Override
