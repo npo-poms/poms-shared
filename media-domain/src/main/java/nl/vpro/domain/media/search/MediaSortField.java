@@ -6,6 +6,8 @@ package nl.vpro.domain.media.search;
  */
 public enum MediaSortField implements SortField {
     sortTitle(Type.STRING),
+    sortTitle_NPO(Type.STRING),
+
 
     mid(Type.STRING),
     type(Type.STRING),
