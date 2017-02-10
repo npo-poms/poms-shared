@@ -69,6 +69,10 @@ public interface MediaSortField extends SortField {
         return Enum.valueOf(string);
     }
 
+    static MediaSortField valueOf(String string) {
+        return Enum.valueOf(string);
+    }
+
     static MediaSortField valueOf(MediaSortField.Enum e, OwnerType ot) {
         return new MediaSortField() {
             @Override
