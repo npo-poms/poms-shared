@@ -39,7 +39,7 @@ public interface SubtitlesRestService {
     @GET
     @Path("/{mid}/{language}")
     Subtitles get(
-        @PathParam("id") String mid,
+        @PathParam("mid") String mid,
         @PathParam("language") Locale locale);
 
     @POST

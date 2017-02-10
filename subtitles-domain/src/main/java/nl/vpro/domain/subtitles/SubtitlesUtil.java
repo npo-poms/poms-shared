@@ -49,10 +49,15 @@ public class SubtitlesUtil {
     }
 
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
+        if (subtitles == null) {
+            return Stream.empty();
+        }
         return parse(subtitles)
             .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset())
             );
     }
+
+
 
     public static CountedIterator<Cue> iterator(Subtitles subtitles){
         return new BasicWrappedIterator<>(
