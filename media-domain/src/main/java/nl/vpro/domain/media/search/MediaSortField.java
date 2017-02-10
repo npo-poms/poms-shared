@@ -48,7 +48,7 @@ public enum MediaSortField implements SortField {
         return t;
     }
 
-    static MediaSortField valueOfNullable(String string) {
+    public static MediaSortField valueOfNullable(String string) {
         if (string == null) {
             return null;
         }
@@ -56,7 +56,7 @@ public enum MediaSortField implements SortField {
     }
 
 
-    static MediaSortField valueOf(MediaSortField sortTitle, OwnerType ownerType) {
+    public static MediaSortField valueOf(MediaSortField sortTitle, OwnerType ownerType) {
         return valueOf(sortTitle.name() + "_" + ownerType.name());
     }
 }
