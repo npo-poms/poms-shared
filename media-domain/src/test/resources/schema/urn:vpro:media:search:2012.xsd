@@ -142,6 +142,7 @@
   <xsd:simpleType name="mediaSortField">
     <xsd:restriction base="xsd:string">
       <xsd:enumeration value="sortTitle"/>
+      <xsd:enumeration value="sortTitle_NPO"/>
       <xsd:enumeration value="mid"/>
       <xsd:enumeration value="type"/>
       <xsd:enumeration value="mediaType"/>
