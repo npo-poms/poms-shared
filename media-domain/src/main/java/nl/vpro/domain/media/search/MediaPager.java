@@ -6,10 +6,7 @@ package nl.vpro.domain.media.search;
 
 import lombok.Builder;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import static nl.vpro.domain.Xmlns.SEARCH_NAMESPACE;
 import static nl.vpro.domain.media.search.MediaSortField.creationDate;
