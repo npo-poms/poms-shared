@@ -1,5 +1,7 @@
 package nl.vpro.api;
 
+import lombok.ToString;
+
 import javax.inject.Singleton;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +18,7 @@ import nl.vpro.domain.api.RepositoryType;
 @Component
 @ManagedResource(objectName = "nl.vpro.api:name=Settings")
 @Singleton
+@ToString
 public class Settings {
 
 
