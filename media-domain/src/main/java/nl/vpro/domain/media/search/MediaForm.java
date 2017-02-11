@@ -5,6 +5,8 @@
 package nl.vpro.domain.media.search;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.Singular;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.MediaType;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Organization;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -154,6 +157,11 @@ public class MediaForm {
     @JsonProperty("excludedMids")
     private Collection<String> excludedMids;
 
+    @XmlAttribute
+    @Getter
+    @Setter
+    private OwnerType forOwner;
+
 
     public MediaForm() {
         this(new MediaPager());
@@ -164,15 +172,15 @@ public class MediaForm {
     }
 
     public MediaForm(MediaPager pager, String text) {
-        this(pager, null, null, text, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(pager, null, null, text, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public MediaForm(MediaPager pager, Collection<MediaType> types) {
-        this(pager, null, null, null, types, null, null, null, null, null, null, null, null, null, null, null);
+        this(pager, null, null, null, types, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @Builder
-    public MediaForm(
+    MediaForm(
         MediaPager pager,
         @Singular  Collection<String> broadcasters,
         Collection<String> portals,
@@ -188,7 +196,9 @@ public class MediaForm {
         DateRange lastModifiedRange,
         Boolean notAnEpisode,
         Boolean noMembers,
-        Boolean noCredits) {
+        Boolean noCredits,
+        OwnerType ownerType
+        ) {
 
         if(pager == null) {
             pager = MediaPager.builder().build();
@@ -211,6 +221,7 @@ public class MediaForm {
         this.findDeleted = null; // backwards compatiblity
         this.noMembers = noMembers;
         this.noCredits = noCredits;
+        this.forOwner = ownerType == null ? OwnerType.BROADCASTER : ownerType;
     }
 
     public MediaPager getPager() {
