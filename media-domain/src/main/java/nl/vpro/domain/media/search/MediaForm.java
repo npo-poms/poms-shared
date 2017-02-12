@@ -197,7 +197,7 @@ public class MediaForm {
         Boolean notAnEpisode,
         Boolean noMembers,
         Boolean noCredits,
-        OwnerType ownerType
+        OwnerType forOwner
         ) {
 
         if(pager == null) {
@@ -221,7 +221,7 @@ public class MediaForm {
         this.findDeleted = null; // backwards compatiblity
         this.noMembers = noMembers;
         this.noCredits = noCredits;
-        this.forOwner = ownerType == null ? OwnerType.BROADCASTER : ownerType;
+        this.forOwner = forOwner == null ? OwnerType.BROADCASTER : forOwner;
     }
 
     public MediaPager getPager() {
