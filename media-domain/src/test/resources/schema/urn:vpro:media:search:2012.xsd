@@ -39,6 +39,7 @@
       <xsd:element name="findDeleted" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="excludedMid" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
+    <xsd:attribute name="forOwner" type="shared:ownerTypeEnum"/>
   </xsd:complexType>
 
   <xsd:complexType name="mediaPagerType">
