@@ -16,27 +16,31 @@ public class TextualObjects {
 
     // some methods working on collections of 'OwnedText' objects (think of titles and descriptions)
 
-    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, TextualType... types) {
-        return get(titles, "", types);
+    public static <OT extends OwnedText<OT>> Optional<String> getOptional(Collection<OT> titles, TextualType... types) {
+        return Optional.ofNullable(getObject(titles, types)).map(OwnedText::get);
     }
 
-    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, String defaultValue, TextualType... types) {
+    public static <OT extends OwnedText<OT>> String get(Collection<? extends OT> titles, String defaultValue, TextualType... types) {
         OT title = getObject(titles, types);
         return title == null ? defaultValue : title.get();
     }
 
-
-    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, OwnerType owner, TextualType type) {
-        for (OT title : titles) {
-            if (title.getOwner() == owner && title.getType() == type) {
-                return title.get();
-            }
-        }
-        return "";
+    public static <OT extends OwnedText<OT>> String get(Collection<? extends OT> titles, TextualType... types) {
+        return get(titles, "", types);
     }
 
-    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, Comparator<OwnerType> ownerType, TextualType... type) {
-        return getObjects(titles, ownerType, type).stream().map(OwnedText::get).findFirst().orElse("");
+
+    public static <OT extends OwnedText<OT>> Optional<String> getOptional(Collection<OT> titles, OwnerType owner, TextualType type) {
+        for (OT title : titles) {
+            if (title.getOwner() == owner && title.getType() == type) {
+                return Optional.of(title.get());
+            }
+        }
+        return Optional.empty();
+    }
+
+    public static <OT extends OwnedText<OT>> Optional<String> get(Collection<OT> titles, Comparator<OwnerType> ownerType, TextualType... type) {
+        return getObjects(titles, ownerType, type).stream().map(OwnedText::get).findFirst();
     }
 
     public static <OT extends OwnedText> OT getObject(Collection<OT> titles, TextualType... types) {
@@ -114,15 +118,18 @@ public class TextualObjects {
 
 
     public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getTitle(TO media, OwnerType owner, TextualType type) {
-        return get(media.getTitles(), owner, type);
+        Optional<String> opt = getOptional(media.getTitles(), owner, type);
+        return opt.orElse("");
     }
 
     public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, OwnerType owner, TextualType type) {
-        return get(media.getDescriptions(), owner, type);
+        Optional<String> opt = getOptional(media.getDescriptions(), owner, type);
+        return opt.orElse("");
     }
 
     public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, TextualType... types) {
-        return get(media.getDescriptions(), types);
+        Optional<String> opt = getOptional(media.getDescriptions(), types);
+        return opt.orElse("");
     }
 
 
