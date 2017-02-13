@@ -1,5 +1,9 @@
 package nl.vpro.domain.media.support;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -114,5 +118,22 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
     @Override
     public String getDisplayName() {
         return displayName;
+    }
+
+    public static Comparator<OwnerType> comparator(OwnerType... order) {
+        final List<OwnerType> list = Arrays.asList(order);
+        return new Comparator<OwnerType>() {
+            @Override
+            public int compare(OwnerType o1, OwnerType o2) {
+                return ord(o2) - ord(o1);
+            }
+            int ord(OwnerType o) {
+                int i = list.indexOf(o);
+                if (i < 0) {
+                    i = order.length + o.ordinal();
+                }
+                return i;
+            }
+        };
     }
 }
