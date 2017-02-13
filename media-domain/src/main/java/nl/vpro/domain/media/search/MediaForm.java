@@ -221,7 +221,7 @@ public class MediaForm {
         this.findDeleted = null; // backwards compatiblity
         this.noMembers = noMembers;
         this.noCredits = noCredits;
-        this.forOwner = forOwner == null ? OwnerType.BROADCASTER : forOwner;
+        this.forOwner = forOwner;
     }
 
     public MediaPager getPager() {
