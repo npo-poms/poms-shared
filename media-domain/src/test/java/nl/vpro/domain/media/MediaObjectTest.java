@@ -397,7 +397,7 @@ public class MediaObjectTest {
             )
             .build();
 
-        assertThat(program.getSortDate()).isEqualTo(new Date(3));
+        assertThat(program.getSortInstant()).isEqualTo(Instant.ofEpochMilli(3));
     }
 
     @Test
