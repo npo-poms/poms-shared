@@ -136,4 +136,8 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
             }
         };
     }
+
+    public static OwnerType[] after(OwnerType ownerType) {
+        return Arrays.stream(OwnerType.values()).filter(ot -> ot.ordinal() >= ownerType.ordinal()).toArray(OwnerType[]::new);
+    }
 }
