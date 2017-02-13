@@ -3,8 +3,6 @@ package nl.vpro.domain;
 import java.util.Locale;
 import java.util.SortedSet;
 
-import org.apache.commons.lang3.StringUtils;
-
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
@@ -14,7 +12,7 @@ import nl.vpro.i18n.Locales;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public interface TextualObject<T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> {
+public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> {
 
     default Locale getLanguage() {
         return Locales.DUTCH;
@@ -112,13 +110,7 @@ public interface TextualObject<T extends OwnedText, D extends OwnedText, TO exte
     }
 
     default String getLexicoTitle() {
-        String string = TextualObjects.get(getTitles(), TextualType.LEXICO);
-        if (StringUtils.isEmpty(string)) {
-            return getMainTitle();
-            //return StringUtils.isNotEmpty(string) ? string : TextUtil.getLexico(getMainTitle(), new Locale("nl", "NL"));
-        } else {
-            return string;
-        }
+        return TextualObjects.getOptional(getTitles(), TextualType.LEXICO).orElse(getMainTitle());
     }
 
     /**

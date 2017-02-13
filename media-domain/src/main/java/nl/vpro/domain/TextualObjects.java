@@ -25,11 +25,6 @@ public class TextualObjects {
         return title == null ? defaultValue : title.get();
     }
 
-    public static <OT extends OwnedText<OT>> String get(Collection<? extends OT> titles, TextualType... types) {
-        return get(titles, "", types);
-    }
-
-
     public static <OT extends OwnedText<OT>> Optional<String> getOptional(Collection<OT> titles, OwnerType owner, TextualType type) {
         for (OT title : titles) {
             if (title.getOwner() == owner && title.getType() == type) {
@@ -105,7 +100,7 @@ public class TextualObjects {
 
     // some methods working TextualObjects themselves.
 
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>>  OwnerType[] findOwnersForTextFields(TO media) {
+    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>>  OwnerType[] findOwnersForTextFields(TO media) {
         SortedSet<OwnerType> result = new TreeSet<>();
         for (T title : media.getTitles()) {
             result.add(title.getOwner());
@@ -117,17 +112,17 @@ public class TextualObjects {
     }
 
 
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getTitle(TO media, OwnerType owner, TextualType type) {
+    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> String getTitle(TO media, OwnerType owner, TextualType type) {
         Optional<String> opt = getOptional(media.getTitles(), owner, type);
         return opt.orElse("");
     }
 
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, OwnerType owner, TextualType type) {
+    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> String getDescription(TO media, OwnerType owner, TextualType type) {
         Optional<String> opt = getOptional(media.getDescriptions(), owner, type);
         return opt.orElse("");
     }
 
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, TextualType... types) {
+    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> String getDescription(TO media, TextualType... types) {
         Optional<String> opt = getOptional(media.getDescriptions(), types);
         return opt.orElse("");
     }
@@ -136,7 +131,7 @@ public class TextualObjects {
     /**
      * Sets the owner of all titles, descriptions, locations and images found in given MediaObject
      */
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> void forOwner(TO media, OwnerType owner) {
+    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> void forOwner(TO media, OwnerType owner) {
         for (T title : media.getTitles()) {
             title.setOwner(owner);
         }
@@ -163,4 +158,7 @@ public class TextualObjects {
     }
 
 
+    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, TextualType... work) {
+        return getOptional(titles, work).orElse(null);
+    }
 }
