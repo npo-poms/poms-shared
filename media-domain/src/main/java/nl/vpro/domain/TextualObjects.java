@@ -16,21 +16,27 @@ public class TextualObjects {
 
     // some methods working on collections of 'OwnedText' objects (think of titles and descriptions)
 
-    public static <OT extends OwnedText> String get(Collection<OT> titles, TextualType... types) {
+    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, TextualType... types) {
         return get(titles, "", types);
     }
 
-    public static <OT extends OwnedText> String get(Collection<OT> titles, String defaultValue, TextualType... types) {
+    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, String defaultValue, TextualType... types) {
         OT title = getObject(titles, types);
         return title == null ? defaultValue : title.get();
     }
-    public static <OT extends OwnedText> String get(Collection<OT> titles, OwnerType owner, TextualType type) {
+
+
+    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, OwnerType owner, TextualType type) {
         for (OT title : titles) {
             if (title.getOwner() == owner && title.getType() == type) {
                 return title.get();
             }
         }
         return "";
+    }
+
+    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, Comparator<OwnerType> ownerType, TextualType... type) {
+        return getObjects(titles, ownerType, type).stream().map(OwnedText::get).findFirst().orElse("");
     }
 
     public static <OT extends OwnedText> OT getObject(Collection<OT> titles, TextualType... types) {
@@ -47,13 +53,13 @@ public class TextualObjects {
     }
 
 
-    public static <OT extends OwnedText & Comparable<OT>> Collection<OT> getObjects(Collection<OT> titles, TextualType... types) {
+    public static <OT extends OwnedText<OT>> Collection<OT> getObjects(Collection<? extends OT> titles, TextualType... types) {
         Comparator<OwnerType> comparator = Comparator.naturalOrder();
         return getObjects(titles, comparator, types);
     }
 
 
-    protected static <OT extends OwnedText> Comparator<OT> getComparator(Comparator<OwnerType> ownerTypeComparator) {
+    protected static <OT extends OwnedText<OT>> Comparator<OT> getComparator(Comparator<OwnerType> ownerTypeComparator) {
         return (o1, o2) -> {
             int result = o1.getType().compareTo(o2.getType());
             if (result == 0) {
@@ -65,7 +71,7 @@ public class TextualObjects {
     }
 
     public static <OT extends OwnedText> Collection<OT> getObjects(
-        Collection<OT> titles,
+        Collection<? extends OT> titles,
         Comparator<OwnerType> ownerTypeComparator,
         TextualType... types) {
 
