@@ -125,7 +125,7 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
         return new Comparator<OwnerType>() {
             @Override
             public int compare(OwnerType o1, OwnerType o2) {
-                return ord(o2) - ord(o1);
+                return ord(o1) - ord(o2);
             }
             int ord(OwnerType o) {
                 int i = list.indexOf(o);

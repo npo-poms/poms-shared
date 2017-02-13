@@ -22,7 +22,7 @@ import nl.vpro.domain.media.support.TextualType;
 @MappedSuperclass
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Comparable<T>, Serializable {
+public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText<T>, Comparable<T>, Serializable {
 
 
     @Column(nullable = false)
