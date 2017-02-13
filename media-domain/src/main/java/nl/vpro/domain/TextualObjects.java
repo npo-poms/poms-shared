@@ -47,14 +47,46 @@ public class TextualObjects {
     }
 
 
-    public static <OT extends OwnedText> Collection<OT> getObjects(Collection<OT> titles, TextualType... types) {
+    public static <OT extends OwnedText & Comparable<OT>> Collection<OT> getObjects(Collection<OT> titles, TextualType... types) {
+        Comparator<OwnerType> comparator = Comparator.naturalOrder();
+        return getObjects(titles, comparator, types);
+    }
+
+
+    protected static <OT extends OwnedText> Comparator<OT> getComparator(Comparator<OwnerType> ownerTypeComparator) {
+        return (o1, o2) -> {
+            int result = o1.getType().compareTo(o2.getType());
+            if (result == 0) {
+                return ownerTypeComparator.compare(o1.getOwner(), o2.getOwner());
+            } else {
+                return result;
+            }
+        };
+    }
+
+    public static <OT extends OwnedText> Collection<OT> getObjects(
+        Collection<OT> titles,
+        Comparator<OwnerType> ownerTypeComparator,
+        TextualType... types) {
+
+
         List<OT> returnValue = new ArrayList<>();
-        if (titles != null) {
-            for (OT title : titles) {
-                for (TextualType type : types) {
-                    if (type == title.getType()) {
-                        returnValue.add(title);
-                    }
+        if (titles == null){
+            return returnValue;
+        }
+        Comparator<OT> comparator = getComparator(ownerTypeComparator);
+        List<OT> list;
+        if (titles instanceof List) {
+            list = (List<OT>) titles;
+        } else {
+            list = new ArrayList<OT>();
+            list.addAll(titles);
+        }
+        list.sort(comparator);
+        for (OT title : list) {
+            for (TextualType type : types) {
+                if (type == title.getType()) {
+                    returnValue.add(title);
                 }
             }
         }
