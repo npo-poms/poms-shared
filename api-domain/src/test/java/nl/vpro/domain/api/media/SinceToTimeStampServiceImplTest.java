@@ -39,8 +39,15 @@ public class SinceToTimeStampServiceImplTest {
 
     @Test
     public void getInstance3() throws Exception {
-        assertThat(impl.getInstance(25387000L).truncatedTo(ChronoUnit.MINUTES)).isEqualTo(LocalDateTime.of(2016, 11, 1, 12, 0, 0).atZone(Schedule.ZONE_ID).toInstant());
+        assertThat(impl.getInstance(25387000L)
+            .truncatedTo(ChronoUnit.MINUTES)).isEqualTo(LocalDateTime.of(2016, 11, 1, 12, 0, 0).atZone(Schedule.ZONE_ID).toInstant());
 
+
+    }
+
+
+    @Test
+    public void getInstance4() {
 
     }
 
