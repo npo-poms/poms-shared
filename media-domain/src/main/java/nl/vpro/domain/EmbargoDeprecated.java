@@ -5,7 +5,7 @@ import java.util.Date;
 import nl.vpro.util.DateUtils;
 
 /**
- * An object describing a publication embargo, meaning that it has a publish start and stop instant.
+ * Some deprecated methods related to Embargos
  *
  * @author Michiel Meeuwissen
  * @since 5.2
@@ -30,5 +30,6 @@ public interface EmbargoDeprecated extends Embargo {
     default void setPublishStop(Date publishStop) {
         setEmbargoStop(DateUtils.toInstant(publishStop));
     }
+
 
 }
