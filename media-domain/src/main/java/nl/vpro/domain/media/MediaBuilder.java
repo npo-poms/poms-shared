@@ -166,19 +166,41 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
+    @Deprecated
     default B publishStart(Instant date) {
         return publishStart(toDate(date));
     }
 
+    @Deprecated
     default B publishInstant(Instant date) {
         return publishStart(toDate(date));
     }
+
+    @Deprecated
     default B publishStart(ZonedDateTime date) {
         return publishStart(toDate(date));
     }
 
+    @Deprecated
     default B publishStart(LocalDateTime date) {
         return publishStart(fromLocalDate(date));
+    }
+
+    default B embargoStart(Instant date) {
+        mediaObject().setEmbargoStart(date);
+        return (B) this;
+    }
+    default B embargoStart(ZonedDateTime date) {
+        return publishStart(date.toInstant());
+    }
+
+    default B embargoStop(Instant date) {
+        mediaObject().setEmbargoStop(date);
+        return (B) this;
+    }
+
+    default B embargoStop(ZonedDateTime date) {
+        return publishStop(date.toInstant());
     }
 
     @SuppressWarnings("unchecked")
@@ -188,11 +210,12 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-
+    @Deprecated
     default B publishStop(Instant date) {
         return publishStop(toDate(date));
     }
 
+    @Deprecated
     default B publishStop(LocalDateTime date) {
         return publishStop(fromLocalDate(date));
     }
