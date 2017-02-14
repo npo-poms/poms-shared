@@ -6,15 +6,18 @@ package nl.vpro.domain.media.update;
 
 import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Date;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.media.AVAttributes;
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 @XmlRootElement(name = "location")
@@ -25,7 +28,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
         "offset",
         "duration"
         })
-public class LocationUpdate implements Comparable<LocationUpdate> {
+public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprecated {
 
 
     public static LocationUpdate copy(LocationUpdate copy) {
@@ -159,21 +162,7 @@ public class LocationUpdate implements Comparable<LocationUpdate> {
         this.programUrl = programUrl;
     }
 
-    public Date getPublishStart() {
-        return publishStart;
-    }
 
-    public void setPublishStart(Date publishStart) {
-        this.publishStart = publishStart;
-    }
-
-    public Date getPublishStop() {
-        return publishStop;
-    }
-
-    public void setPublishStop(Date publishStop) {
-        this.publishStop = publishStop;
-    }
 
     public String getUrn() {
         return urn;
@@ -202,4 +191,28 @@ public class LocationUpdate implements Comparable<LocationUpdate> {
     }
 
 
+    @Override
+    public Instant getEmbargoStart() {
+        return DateUtils.toInstant(publishStart);
+
+    }
+
+    @Override
+    public LocationUpdate setEmbargoStart(Instant publishStart) {
+        this.publishStart = DateUtils.toDate(publishStart);
+        return this;
+    }
+
+    @Override
+    public Instant getEmbargoStop() {
+        return DateUtils.toInstant(publishStop);
+
+    }
+
+    @Override
+    public LocationUpdate setEmbargoStop(Instant publishStop) {
+        this.publishStop = DateUtils.toDate(publishStop);
+        return this;
+
+    }
 }

@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Embargo;
+import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -68,7 +70,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 })
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
-public abstract class MediaUpdate<M extends MediaObject> {
+public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDeprecated {
 
     static final Validator VALIDATOR;
 
@@ -370,30 +372,36 @@ public abstract class MediaUpdate<M extends MediaObject> {
         builder.embeddable(isEmbeddable);
     }
 
-    @XmlAttribute
+    @Override
+    @XmlAttribute(name = "publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public Instant getPublishStart() {
+    public Instant getEmbargoStart() {
         return mediaObject().getEmbargoStart();
     }
 
-    public void setPublishStart(Instant publishStart) {
-        builder.publishStart(publishStart);
+    @Override
+    public MediaUpdate<M> setEmbargoStart(Instant publishStart) {
+        builder.embargoStop(publishStart);
+        return this;
     }
 
-    @XmlAttribute
+    @Override
+    @XmlAttribute(name = "publishStop")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public Instant getPublishStop() {
+    public Instant getEmbargoStop() {
         return mediaObject().getEmbargoStop();
     }
 
-    public void setPublishStop(Instant publishStop) {
-        builder.publishStop(publishStop);
+    @Override
+    public MediaUpdate<M> setEmbargoStop(Instant publishStop) {
+        builder.embargoStop(publishStop);
+        return this;
     }
 
     @XmlElement(name = "crid")
