@@ -3,20 +3,21 @@
  */
 package nl.vpro.domain.media;
 
-import java.time.Instant;
-import java.util.*;
-
-import javax.validation.ConstraintViolation;
-
+import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import org.assertj.core.api.Assertions;
 import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import javax.validation.ConstraintViolation;
+import java.time.Instant;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+import java.util.SortedSet;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -390,7 +391,7 @@ public class MediaObjectTest {
     public void testSortDateWithScheduleEvents() throws Exception {
         final Program program = MediaBuilder.program()
             .creationInstant(Instant.ofEpochMilli(1))
-            .publishInstant(Instant.ofEpochMilli(2))
+            .publishStart(Instant.ofEpochMilli(2))
             .scheduleEvents(
                 new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(13), java.time.Duration.ofMillis(10)),
                 new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(3), java.time.Duration.ofMillis(10))
@@ -404,7 +405,7 @@ public class MediaObjectTest {
     public void testSortDateWithPublishStart() throws Exception {
         final Program program = MediaBuilder.program()
             .creationInstant(Instant.ofEpochMilli(1))
-            .publishInstant(Instant.ofEpochMilli(2))
+            .publishStart(Instant.ofEpochMilli(2))
             .build();
 
         assertThat(program.getSortInstant()).isEqualTo(Instant.ofEpochMilli(2));
