@@ -17,7 +17,9 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ProgramType;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Tag;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.user.TestEditors;
 
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
@@ -39,6 +41,8 @@ public class MediaListTest {
         program.setType(ProgramType.CLIP);
         program.setAVType(AVType.VIDEO);
         program.setTags(new TreeSet<>(Arrays.asList(new Tag("foo"), new Tag("bar"))));
+        program.setMainTitle("");
+        program.addTitle("", OwnerType.BROADCASTER, TextualType.SUB);
 
 
         MediaList<MediaListItem> xmlList = new MediaList<>(new MediaPager(1, 10, null, Pager.Direction.ASC), 1000, new MediaListItem(program));

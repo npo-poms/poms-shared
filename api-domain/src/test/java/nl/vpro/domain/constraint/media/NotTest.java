@@ -4,12 +4,13 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import nl.vpro.domain.media.Program;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import java.util.Locale;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Locale;
+import nl.vpro.domain.media.Program;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -97,7 +98,7 @@ public class NotTest {
         assertThat(not.test(new Program())).isTrue();
         assertThat(not.testWithReason(new Program()).applies()).isTrue();
         assertThat(not.testWithReason(new Program()).getReason()).isEqualTo("Not");
-        assertThat(not.testWithReason(new Program()).getDescription(Locale.US)).isEqualTo("The value 'Program{mid=\"null\", title=\"\"}' does not match Never matches");
+        assertThat(not.testWithReason(new Program()).getDescription(Locale.US)).isEqualTo("The value 'Program{mid=\"null\", title=null}' does not match Never matches");
     }
 
     @Test

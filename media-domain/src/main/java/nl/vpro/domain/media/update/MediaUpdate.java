@@ -21,7 +21,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Embargo;
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -384,7 +383,7 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
 
     @Override
     public MediaUpdate<M> setEmbargoStart(Instant publishStart) {
-        builder.embargoStop(publishStart);
+        builder.embargoStart(publishStart);
         return this;
     }
 
