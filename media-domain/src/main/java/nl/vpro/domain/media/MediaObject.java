@@ -2443,43 +2443,7 @@ public abstract class MediaObject extends PublishableObject
         this.subtitlesPublished = subtitlesPublished;
     }
 
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-            .appendSuper(super.toString())
-            .append("crids", crids)
-            .append("broadcasters", broadcasters)
-            .append("portals", portals)
-            .append("thirdParties", thirdParties)
-            .append("portalRestrictions", portalRestrictions)
-            .append("geoRestrictions", geoRestrictions)
-            .append("titles", titles)
-            .append("descriptions", descriptions)
-            .append("genres", genres)
-            .append("tags", tags)
-            .append("source", source)
-            .append("countries", countries)
-            .append("languages", languages)
-            .append("avType", avType)
-            .append("avAttributes", avAttributes)
-            .append("releaseYear", releaseYear)
-            .append("duration", duration)
-            .append("persons", persons)
-            .append("awards", awards)
-            .append("memberOf", memberOf)
-            .append("ageRating", ageRating)
-            .append("contentRatings", contentRatings)
-            .append("email", email)
-            .append("websites", websites)
-            .append("teletext", teletext)
-            .append("locations", locations)
-            .append("scheduleEvents", scheduleEvents)
-            .append("relations", relations)
-            .append("images", images)
-            .append("isEmbeddable", isEmbeddable)
-            .append("descendantOf", descendantOf)
-            .toString();
-    }
+
 
     public abstract SubMediaType getType();
 

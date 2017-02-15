@@ -472,7 +472,8 @@ public class Program extends MediaObject {
     public String toString() {
         String mainTitle;
         try {
-            mainTitle = '"' + getMainTitle() + '"';
+            String mt = getMainTitle();
+            mainTitle = mt == null ? "null" : ('"' + mt + '"');
         } catch(RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
