@@ -62,7 +62,7 @@ public class Asset implements Embargo {
         }
     }
 
-    public Date getPublishStart() {
+    public Date getPublishStartInstant() {
         return publishStart;
     }
 
@@ -108,26 +108,26 @@ public class Asset implements Embargo {
     }
 
     @Override
-    public Instant getEmbargoStart() {
+    public Instant getPublishStart() {
         return DateUtils.toInstant(getPublishStart());
 
     }
 
     @Override
-    public Asset setEmbargoStart(Instant publishStart) {
+    public Asset setPublishStartInstant(Instant publishStart) {
         setPublishStart(DateUtils.toDate(publishStart));
         return this;
 
     }
 
     @Override
-    public Instant getEmbargoStop() {
+    public Instant getPublishStopInstant() {
         return DateUtils.toInstant(getPublishStop());
 
     }
 
     @Override
-    public Asset setEmbargoStop(Instant publishStop) {
+    public Asset setPublishStopInstant(Instant publishStop) {
         setPublishStop(DateUtils.toDate(publishStop));
         return null;
 

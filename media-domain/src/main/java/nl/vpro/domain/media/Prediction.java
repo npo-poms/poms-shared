@@ -127,7 +127,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     public Prediction(Prediction source, MediaObject parent) {
-        this(source.getPlatform(), source.getEmbargoStart(), source.getEmbargoStop());
+        this(source.getPlatform(), source.getPublishStartInstant(), source.getPublishStopInstant());
         this.issueDate = source.issueDate;
         this.state = source.state;
         this.mediaObject = parent;
@@ -178,25 +178,25 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     @Override
-    public Instant getEmbargoStart() {
+    public Instant getPublishStartInstant() {
         return publishStart;
     }
 
 
     @Override
-    public Prediction setEmbargoStart(Instant start) {
+    public Prediction setPublishStartInstant(Instant start) {
         this.publishStart = start;
         return this;
     }
 
 
     @Override
-    public Instant getEmbargoStop() {
+    public Instant getPublishStopInstant() {
         return publishStop;
     }
 
     @Override
-    public Prediction setEmbargoStop(Instant publishStop) {
+    public Prediction setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
         return this;
     }

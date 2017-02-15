@@ -216,8 +216,8 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
             }
         };
         result.setWorkflow(workflow);
-        result.setEmbargoStart(start);
-        result.setEmbargoStop(stop);
+        result.setPublishStartInstant(start);
+        result.setPublishStopInstant(stop);
         return result;
     }
 }
