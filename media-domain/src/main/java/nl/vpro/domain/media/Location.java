@@ -473,7 +473,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             }
         }
 
-        return super.getPublishStart();
+        return super.getPublishStartInstant();
     }
 
     @Override
