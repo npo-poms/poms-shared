@@ -406,7 +406,7 @@ public class MediaObjects {
             date = sorted(mo.scheduleEvents).first().getStartInstant();
         }
         if (date == null) {
-            date = mo.getPublishStart();
+            date = mo.getPublishStartInstant();
         }
         if (date == null) {
             date = mo.getCreationInstant();
