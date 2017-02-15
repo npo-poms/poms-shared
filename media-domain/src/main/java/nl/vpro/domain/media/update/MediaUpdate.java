@@ -489,7 +489,7 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
     public SortedSet<TitleUpdate> getTitles() {
         if (titles == null) {
             titles =
-                new TransformingSortedSet<>(
+                new TransformingSortedSet<TitleUpdate, Title>(
                     mediaObject().getTitles(),
                     t -> new TitleUpdate(t.getTitle(), t.getType(), MediaUpdate.this),
                     t -> new Title(t.getTitle(), owner, t.getType())
