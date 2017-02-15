@@ -104,10 +104,10 @@
     </xs:sequence>
     <xs:attribute name="avType" type="media:avTypeEnum"/>
     <xs:attribute name="deleted" type="xs:boolean"/>
-    <xs:attribute name="embeddable" type="xs:boolean"/>
-    <xs:attribute name="mid" type="xs:string"/>
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="publishStop" type="xs:dateTime"/>
+    <xs:attribute name="embeddable" type="xs:boolean"/>
+    <xs:attribute name="mid" type="xs:string"/>
     <xs:attribute name="urn" type="xs:string"/>
   </xs:complexType>
 
