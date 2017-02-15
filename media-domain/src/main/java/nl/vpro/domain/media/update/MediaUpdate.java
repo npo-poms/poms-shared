@@ -383,7 +383,7 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
 
     @Override
     public MediaUpdate<M> setPublishStartInstant(Instant publishStart) {
-        builder.embargoStart(publishStart);
+        builder.publishStart(publishStart);
         return this;
     }
 
@@ -399,7 +399,7 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
 
     @Override
     public MediaUpdate<M> setPublishStopInstant(Instant publishStop) {
-        builder.embargoStop(publishStop);
+        builder.publishStop(publishStop);
         return this;
     }
 
@@ -489,7 +489,7 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
     public SortedSet<TitleUpdate> getTitles() {
         if (titles == null) {
             titles =
-                new TransformingSortedSet<TitleUpdate, Title>(
+                new TransformingSortedSet<>(
                     mediaObject().getTitles(),
                     t -> new TitleUpdate(t.getTitle(), t.getType(), MediaUpdate.this),
                     t -> new Title(t.getTitle(), owner, t.getType())
