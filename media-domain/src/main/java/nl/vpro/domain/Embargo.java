@@ -1,6 +1,5 @@
 package nl.vpro.domain;
 
-import java.time.Duration;
 import java.time.Instant;
 
 /**
@@ -12,44 +11,42 @@ import java.time.Instant;
 public interface Embargo {
 
 
-    Instant getEmbargoStart();
+    Instant getPublishStartInstant();
 
-    Embargo setEmbargoStart(Instant publishStart);
+    Embargo setPublishStartInstant(Instant publishStart);
 
-    Instant getEmbargoStop();
+    Instant getPublishStopInstant();
 
-    Embargo setEmbargoStop(Instant publishStop);
+    Embargo setPublishStopInstant(Instant publishStop);
 
+
+    default boolean isUnderEmbargo(Instant now) {
+        return !inPublicationWindow(now);
+    }
 
     default boolean isUnderEmbargo() {
-        return ! isInAllowedPublicationWindow();
+        return isUnderEmbargo(Instant.now());
     }
 
     default boolean wasUnderEmbargo() {
-        Instant stop = getEmbargoStop();
+        Instant stop = getPublishStopInstant();
         return stop != null && stop.isBefore(Instant.now());
     }
 
     default boolean willBeUnderEmbargo() {
-        Instant start = getEmbargoStart();
+        Instant start = getPublishStartInstant();
         return start != null && start.isAfter(Instant.now());
     }
 
-    default boolean isInAllowedPublicationWindow() {
-        return isInAllowedPublicationWindow(Duration.ZERO);
-    }
-
-    default boolean isInAllowedPublicationWindow(java.time.Duration fromNow) {
-        Instant stop = getEmbargoStop();
+    default boolean inPublicationWindow(Instant now) {
+        Instant stop = getPublishStopInstant();
         if (stop != null
-            && stop.isBefore(Instant.now().plus(fromNow))) {
+            && stop.isBefore(now)) {
 
             return false;
         }
-        Instant start = getEmbargoStart();
-        if (start != null
-            && start.isAfter(Instant.now().plus(fromNow))) {
-
+        Instant start = getPublishStartInstant();
+        if (start != null && start.isAfter(now)) {
             return false;
         }
 

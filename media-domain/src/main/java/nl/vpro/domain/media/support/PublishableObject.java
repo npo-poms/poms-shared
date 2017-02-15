@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Accountable;
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -49,7 +49,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
-public abstract class PublishableObject extends DomainObject implements Accountable, Embargo {
+public abstract class PublishableObject extends DomainObject implements Accountable, EmbargoDeprecated {
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
@@ -228,7 +228,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
             || Workflow.PARENT_REVOKED.equals(workflow)
             || Workflow.REVOKED.equals(workflow)) {
 
-            return isInAllowedPublicationWindow();
+            return inPublicationWindow(Instant.now());
         }
 
         return false;
@@ -245,7 +245,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
             || Workflow.FOR_PUBLICATION == workflow
             || Workflow.REVOKED == workflow) {
 
-            return !isInAllowedPublicationWindow();
+            return !inPublicationWindow(Instant.now());
         }
 
         return false;
@@ -323,22 +323,18 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     @JsonProperty("publishStart")
     @Deprecated
     public final Date getPublishStart() {
-        return DateUtils.toDate(getEmbargoStart());
+        return DateUtils.toDate(getPublishStartInstant());
     }
 
 
-    @Deprecated
-    public final PublishableObject setPublishStart(Date publishStart) {
-        return setEmbargoStart(DateUtils.toInstant(publishStart));
-    }
 
     @Override
-    public Instant getEmbargoStart() {
+    public Instant getPublishStartInstant() {
         return publishStart;
     }
 
     @Override
-    public PublishableObject setEmbargoStart(Instant publishStart) {
+    public PublishableObject setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
         return this;
     }
@@ -347,22 +343,18 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     @JsonProperty("publishStop")
     @Deprecated
     public final Date getPublishStop() {
-        return DateUtils.toDate(getEmbargoStop());
+        return DateUtils.toDate(getPublishStopInstant());
     }
 
-    @Deprecated
-    public final PublishableObject setPublishStop(Date publishStop) {
-        return setEmbargoStop(DateUtils.toInstant(publishStop));
-    }
 
 
     @Override
-    public Instant getEmbargoStop() {
+    public Instant getPublishStopInstant() {
         return publishStop;
     }
 
     @Override
-    public PublishableObject setEmbargoStop(Instant publishStop) {
+    public PublishableObject setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
         return this;
     }
@@ -449,7 +441,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
 
     @Deprecated
     public boolean isInAllowedPublicationWindow(long millisFromNow) {
-        return isInAllowedPublicationWindow(java.time.Duration.ofMillis(millisFromNow));
+        return inPublicationWindow(Instant.now().plusMillis(millisFromNow));
     }
 
 

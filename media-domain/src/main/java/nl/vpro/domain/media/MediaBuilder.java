@@ -187,7 +187,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B embargoStart(Instant date) {
-        mediaObject().setEmbargoStart(date);
+        mediaObject().setPublishStartInstant(date);
         return (B) this;
     }
     default B embargoStart(ZonedDateTime date) {
@@ -195,7 +195,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B embargoStop(Instant date) {
-        mediaObject().setEmbargoStop(date);
+        mediaObject().setPublishStopInstant(date);
         return (B) this;
     }
 

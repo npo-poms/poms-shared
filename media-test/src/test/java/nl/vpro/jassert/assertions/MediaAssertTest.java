@@ -372,7 +372,7 @@ public class MediaAssertTest {
     @Test
     public void testHasLocationWithRestriction() throws Exception {
         Program program = program().withLocations().build();
-        program.getLocations().first().setEmbargoStart(Instant.now());
+        program.getLocations().first().setPublishStartInstant(Instant.now());
         mediaAssertThat(program).hasLocationWithRestriction();
     }
 
@@ -389,7 +389,7 @@ public class MediaAssertTest {
     @Test(expected = AssertionError.class)
     public void testHasLocationWithRestrictionOnlyWhenNotAllSet() throws Exception {
         Program program = program().withLocations().build();
-        program.getLocations().first().setEmbargoStart(Instant.now());
+        program.getLocations().first().setPublishStartInstant(Instant.now());
         mediaAssertThat(program).hasOnlyLocationsWithRestriction();
     }
 
@@ -397,7 +397,7 @@ public class MediaAssertTest {
     public void testHasLocationWithRestrictionOnly() throws Exception {
         Program program = program().withLocations().build();
         for(Location location : program.getLocations()) {
-            location.setEmbargoStart(Instant.now());
+            location.setPublishStartInstant(Instant.now());
         }
         mediaAssertThat(program).hasOnlyLocationsWithRestriction();
     }
@@ -481,7 +481,7 @@ public class MediaAssertTest {
     public void testIsRestrictedWithRestrictedLocations() throws Exception {
         Program program = program().withLocations().build();
         for(Location location : program.getLocations()) {
-            location.setEmbargoStart(Instant.now());
+            location.setPublishStartInstant(Instant.now());
         }
         mediaAssertThat(program).isRestricted();
     }

@@ -377,12 +377,12 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public Instant getEmbargoStart() {
-        return mediaObject().getEmbargoStart();
+    public Instant getPublishStartInstant() {
+        return mediaObject().getPublishStart();
     }
 
     @Override
-    public MediaUpdate<M> setEmbargoStart(Instant publishStart) {
+    public MediaUpdate<M> setPublishStartInstant(Instant publishStart) {
         builder.embargoStart(publishStart);
         return this;
     }
@@ -393,12 +393,12 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public Instant getEmbargoStop() {
-        return mediaObject().getEmbargoStop();
+    public Instant getPublishStopInstant() {
+        return mediaObject().getPublishStopInstant();
     }
 
     @Override
-    public MediaUpdate<M> setEmbargoStop(Instant publishStop) {
+    public MediaUpdate<M> setPublishStopInstant(Instant publishStop) {
         builder.embargoStop(publishStop);
         return this;
     }
