@@ -378,7 +378,7 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStartInstant() {
-        return mediaObject().getPublishStart();
+        return mediaObject().getPublishStartInstant();
     }
 
     @Override

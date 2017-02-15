@@ -319,16 +319,12 @@ public abstract class PublishableObject extends DomainObject implements Accounta
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    @XmlAttribute
-    @JsonProperty("publishStart")
-    @Deprecated
-    public final Date getPublishStart() {
-        return DateUtils.toDate(getPublishStartInstant());
-    }
-
-
-
     @Override
+    @XmlAttribute(name = "publishStart")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStartInstant() {
         return publishStart;
     }
@@ -339,16 +335,12 @@ public abstract class PublishableObject extends DomainObject implements Accounta
         return this;
     }
 
-    @XmlAttribute
-    @JsonProperty("publishStop")
-    @Deprecated
-    public final Date getPublishStop() {
-        return DateUtils.toDate(getPublishStopInstant());
-    }
-
-
-
     @Override
+    @XmlAttribute(name = "publishStop")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStopInstant() {
         return publishStop;
     }

@@ -102,7 +102,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
         avAttributes = ats == null ? null : new AVAttributesUpdate(ats);
         offset = location.getOffset();
         duration = location.getDuration();
-        publishStart = location.getPublishStartInstant();
+        publishStart = location.getPublishStart();
         publishStop = location.getPublishStop();
         urn = location.getUrn();
     }
