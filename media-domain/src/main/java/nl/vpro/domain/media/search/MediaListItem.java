@@ -1,20 +1,26 @@
 package nl.vpro.domain.media.search;
 
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.SortedSet;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * Represents the result of a search-action. I.e. a short representation of a media object.
@@ -168,10 +174,12 @@ public class MediaListItem extends PublishableListItem {
         this.avType = avType;
     }
 
+    @Override
     public Date getLastPublished() {
         return lastPublished;
     }
 
+    @Override
     public void setLastPublished(Date lastPublished) {
         this.lastPublished = lastPublished;
     }
@@ -329,26 +337,25 @@ public class MediaListItem extends PublishableListItem {
     }
 
     @Override
-    @XmlElement
-    public Date getPublishStart() {
-        return super.getPublishStart();
+    @XmlElement(name = "publishStart")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    public Instant getPublishStartInstant() {
+        return super.getPublishStartInstant();
     }
 
     @Override
-    public void setPublishStart(Date publishStart) {
-        super.setPublishStart(publishStart);
+    @XmlElement(name = "publishStop")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    public Instant getPublishStopInstant() {
+        return super.getPublishStopInstant();
     }
 
-    @Override
-    @XmlElement
-    public Date getPublishStop() {
-        return super.getPublishStop();
-    }
-
-    @Override
-    public void setPublishStop(Date publishStop) {
-        super.setPublishStop(publishStop);
-    }
 
     public Integer getNumberOfLocations() {
         return numberOfLocations;

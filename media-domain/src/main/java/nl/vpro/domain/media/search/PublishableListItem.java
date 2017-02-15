@@ -4,13 +4,21 @@
  */
 package nl.vpro.domain.media.search;
 
+import java.time.Instant;
 import java.util.Date;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.Embargo;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Editor;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -20,7 +28,7 @@ import nl.vpro.domain.user.Editor;
 @XmlRootElement(name = "item")
 @XmlType(
     name = "publishableListItem")
-public abstract class PublishableListItem {
+public abstract class PublishableListItem implements Embargo {
     @XmlAttribute
     protected Long id;
 
@@ -38,9 +46,10 @@ public abstract class PublishableListItem {
 
     protected Date creationDate;
 
-    protected Date publishStart;
+    protected Instant publishStart;
 
-    protected Date publishStop;
+    protected Instant publishStop;
+
 
     protected Date lastPublished;
 
@@ -60,8 +69,8 @@ public abstract class PublishableListItem {
         Editor creator = mediaObject.getCreatedBy();
         this.createdBy = creator;
 
-        this.publishStart = mediaObject.getPublishStart();
-        this.publishStop = mediaObject.getPublishStop();
+        this.publishStart = mediaObject.getPublishStartInstant();
+        this.publishStop = mediaObject.getPublishStopInstant();
         this.lastPublished = mediaObject.getLastPublished();
 
     }
@@ -135,20 +144,32 @@ public abstract class PublishableListItem {
         this.creationDate = creationDate;
     }
 
-    public Date getPublishStart() {
+    @Override
+    @XmlElement(name = "publishStart")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    public Instant getPublishStartInstant() {
         return publishStart;
     }
 
-    public void setPublishStart(Date publishStart) {
+    @Override
+    public PublishableListItem setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
+        return this;
     }
 
-    public Date getPublishStop() {
+    @Override
+
+    public Instant getPublishStopInstant() {
         return publishStop;
     }
 
-    public void setPublishStop(Date publishStop) {
+    @Override
+    public PublishableListItem setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
+        return this;
     }
 
     public Date getLastPublished() {
