@@ -96,7 +96,7 @@ public class MediaObjectJsonSchemaTest {
     public void testPulishStartStop() throws Exception {
         String expected = "{\"objectType\":\"program\",\"sortDate\":1,\"publishStart\":1,\"publishStop\":7200000,\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
-        Program program = program().lean().publishInstant(Instant.ofEpochMilli(1))
+        Program program = program().lean().publishStart(Instant.ofEpochMilli(1))
             .publishStop(Instant.ofEpochSecond(2 * 60 * 60)).build();
         String actual = toJson(program);
 
