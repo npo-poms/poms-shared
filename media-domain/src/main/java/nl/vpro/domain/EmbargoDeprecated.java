@@ -14,21 +14,21 @@ public interface EmbargoDeprecated extends Embargo {
 
     @Deprecated
     default Date getPublishStart() {
-        return DateUtils.toDate(getEmbargoStart());
+        return DateUtils.toDate(getPublishStartInstant());
     }
 
     @Deprecated
     default void setPublishStart(Date publishStart) {
-        setEmbargoStart(DateUtils.toInstant(publishStart));
+        setPublishStartInstant(DateUtils.toInstant(publishStart));
     }
     @Deprecated
     default Date getPublishStop() {
-        return DateUtils.toDate(getEmbargoStop());
+        return DateUtils.toDate(getPublishStopInstant());
     }
 
     @Deprecated
     default void setPublishStop(Date publishStop) {
-        setEmbargoStop(DateUtils.toInstant(publishStop));
+        setPublishStopInstant(DateUtils.toInstant(publishStop));
     }
 
 

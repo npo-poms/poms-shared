@@ -121,26 +121,26 @@ abstract public class Restriction extends DomainObject implements Embargo {
     }
 
     @Override
-    public Instant getEmbargoStart() {
+    public Instant getPublishStartInstant() {
         return getStart();
 
     }
 
     @Override
-    public Restriction setEmbargoStart(Instant publishStart) {
+    public Restriction setPublishStartInstant(Instant publishStart) {
         setStart(publishStart);
         return this;
 
     }
 
     @Override
-    public Instant getEmbargoStop() {
+    public Instant getPublishStopInstant() {
         return getStop();
 
     }
 
     @Override
-    public Restriction setEmbargoStop(Instant publishStop) {
+    public Restriction setPublishStopInstant(Instant publishStop) {
         setStop(publishStop);
         return this;
 

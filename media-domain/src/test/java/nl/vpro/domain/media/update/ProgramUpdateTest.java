@@ -112,7 +112,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPublishStart() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setEmbargoStart(Instant.ofEpochMilli(4444));
+        update.setPublishStartInstant(Instant.ofEpochMilli(4444));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program publishStart=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
 
@@ -122,7 +122,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPublishStop() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setEmbargoStop(Instant.ofEpochMilli(4444));
+        update.setPublishStopInstant(Instant.ofEpochMilli(4444));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program publishStop=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
 

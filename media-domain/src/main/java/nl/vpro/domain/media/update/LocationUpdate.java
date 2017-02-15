@@ -102,7 +102,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
         avAttributes = ats == null ? null : new AVAttributesUpdate(ats);
         offset = location.getOffset();
         duration = location.getDuration();
-        publishStart = location.getPublishStart();
+        publishStart = location.getPublishStartInstant();
         publishStop = location.getPublishStop();
         urn = location.getUrn();
     }
@@ -192,25 +192,25 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
 
 
     @Override
-    public Instant getEmbargoStart() {
+    public Instant getPublishStartInstant() {
         return DateUtils.toInstant(publishStart);
 
     }
 
     @Override
-    public LocationUpdate setEmbargoStart(Instant publishStart) {
+    public LocationUpdate setPublishStartInstant(Instant publishStart) {
         this.publishStart = DateUtils.toDate(publishStart);
         return this;
     }
 
     @Override
-    public Instant getEmbargoStop() {
+    public Instant getPublishStopInstant() {
         return DateUtils.toInstant(publishStop);
 
     }
 
     @Override
-    public LocationUpdate setEmbargoStop(Instant publishStop) {
+    public LocationUpdate setPublishStopInstant(Instant publishStop) {
         this.publishStop = DateUtils.toDate(publishStop);
         return this;
 

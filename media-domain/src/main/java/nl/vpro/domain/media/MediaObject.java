@@ -541,7 +541,7 @@ public abstract class MediaObject extends PublishableObject
         source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
-            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getEmbargoStart(), prediction.getEmbargoStop());
+            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getPublishStartInstant(), prediction.getPublishStopInstant());
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getState());
         });
         source.getLocations().forEach(location -> this.addLocation(Location.copy(location, this)));
@@ -1777,7 +1777,7 @@ public abstract class MediaObject extends PublishableObject
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform() &&
                             Workflow.PUBLICATIONS.contains(location.getWorkflow()) &&
-                            prediction.isInAllowedPublicationWindow()) {
+                            prediction.isInAllowedPublicationWindow(Instant.now())) {
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction, location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
                             MediaObjects.markForRepublication(MediaObject.this);
@@ -1928,8 +1928,8 @@ public abstract class MediaObject extends PublishableObject
             }
 
             existing.setAvAttributes(location.getAvAttributes());
-            existing.setEmbargoStart(location.getEmbargoStart());
-            existing.setEmbargoStop(location.getEmbargoStop());
+            existing.setPublishStartInstant(location.getPublishStartInstant());
+            existing.setPublishStopInstant(location.getPublishStopInstant());
             existing.setSubtitles(location.getSubtitles());
             existing.setDuration(location.getDuration());
             existing.setOffset(location.getOffset());
@@ -2274,25 +2274,25 @@ public abstract class MediaObject extends PublishableObject
     }
 
     @Override
-    public PublishableObject setEmbargoStart(Instant publishStart) {
+    public PublishableObject setPublishStartInstant(Instant publishStart) {
         if (! Objects.equals(this.publishStart, publishStart)) {
             invalidateSortDate();
             if (hasInternetVodAuthority()) {
                 locationAuthorityUpdate = true;
             }
         }
-        return super.setEmbargoStart(publishStart);
+        return super.setPublishStartInstant(publishStart);
     }
 
     @Override
-    public PublishableObject setEmbargoStop(Instant publishStop) {
+    public PublishableObject setPublishStopInstant(Instant publishStop) {
         if (!Objects.equals(this.publishStop, publishStop)) {
             invalidateSortDate();
             if (hasInternetVodAuthority()) {
                 locationAuthorityUpdate = true;
             }
         }
-        return super.setEmbargoStop(publishStop);
+        return super.setPublishStopInstant(publishStop);
     }
 
     protected boolean hasInternetVodAuthority() {
