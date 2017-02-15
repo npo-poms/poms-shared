@@ -162,46 +162,22 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     @Deprecated
     default B publishStart(Date date) {
-        mediaObject().setPublishStart(date);
+        mediaObject().setPublishStartInstant(DateUtils.toInstant(date));
         return (B)this;
     }
 
-    @Deprecated
     default B publishStart(Instant date) {
         return publishStart(toDate(date));
     }
 
-    @Deprecated
-    default B publishInstant(Instant date) {
-        return publishStart(toDate(date));
-    }
-
-    @Deprecated
     default B publishStart(ZonedDateTime date) {
         return publishStart(toDate(date));
     }
 
-    @Deprecated
-    default B publishStart(LocalDateTime date) {
+        default B publishStart(LocalDateTime date) {
         return publishStart(fromLocalDate(date));
     }
 
-    default B embargoStart(Instant date) {
-        mediaObject().setPublishStartInstant(date);
-        return (B) this;
-    }
-    default B embargoStart(ZonedDateTime date) {
-        return publishStart(date.toInstant());
-    }
-
-    default B embargoStop(Instant date) {
-        mediaObject().setPublishStopInstant(date);
-        return (B) this;
-    }
-
-    default B embargoStop(ZonedDateTime date) {
-        return publishStop(date.toInstant());
-    }
 
     @SuppressWarnings("unchecked")
     @Deprecated
@@ -210,12 +186,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    @Deprecated
     default B publishStop(Instant date) {
         return publishStop(toDate(date));
     }
 
-    @Deprecated
     default B publishStop(LocalDateTime date) {
         return publishStop(fromLocalDate(date));
     }
