@@ -8,17 +8,11 @@ import java.time.Instant;
 import java.util.Date;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Embargo;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Editor;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -145,11 +139,6 @@ public abstract class PublishableListItem implements Embargo {
     }
 
     @Override
-    @XmlElement(name = "publishStart")
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-    @XmlSchemaType(name = "dateTime")
-    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStartInstant() {
         return publishStart;
     }
