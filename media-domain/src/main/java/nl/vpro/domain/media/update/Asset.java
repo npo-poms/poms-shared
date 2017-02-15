@@ -7,14 +7,18 @@ package nl.vpro.domain.media.update;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.time.Instant;
-import java.util.Date;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Embargo;
-import nl.vpro.util.DateUtils;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -27,10 +31,18 @@ import nl.vpro.util.DateUtils;
 public class Asset implements Embargo {
 
     @XmlAttribute
-    private Date publishStart;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant publishStart;
 
     @XmlAttribute
-    private Date publishStop;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant publishStop;
 
     @XmlElements(value = {
         @XmlElement(name = "assetData",  type = AssetData.class),
@@ -43,7 +55,7 @@ public class Asset implements Embargo {
     public Asset() {
     }
 
-    public Asset(Date publishStart, Date publishStop) {
+    public Asset(Instant publishStart, Instant publishStop) {
         this.publishStart = publishStart;
         this.publishStop = publishStop;
     }
@@ -62,20 +74,26 @@ public class Asset implements Embargo {
         }
     }
 
-    public Date getPublishStartInstant() {
+    @Override
+    public Instant getPublishStartInstant() {
         return publishStart;
     }
 
-    public void setPublishStart(Date publishStart) {
+    @Override
+    public Asset setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
+        return this;
     }
 
-    public Date getPublishStop() {
+    @Override
+    public Instant getPublishStopInstant() {
         return publishStop;
     }
 
-    public void setPublishStop(Date publishStop) {
+    @Override
+    public Asset setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
+        return this;
     }
 
     public Object getSource() {
@@ -107,29 +125,4 @@ public class Asset implements Embargo {
         return sb.toString();
     }
 
-    @Override
-    public Instant getPublishStart() {
-        return DateUtils.toInstant(getPublishStart());
-
     }
-
-    @Override
-    public Asset setPublishStartInstant(Instant publishStart) {
-        setPublishStart(DateUtils.toDate(publishStart));
-        return this;
-
-    }
-
-    @Override
-    public Instant getPublishStopInstant() {
-        return DateUtils.toInstant(getPublishStop());
-
-    }
-
-    @Override
-    public Asset setPublishStopInstant(Instant publishStop) {
-        setPublishStop(DateUtils.toDate(publishStop));
-        return null;
-
-    }
-}
