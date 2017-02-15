@@ -168,7 +168,7 @@ public class ImageUpdate {
 
     public ImageUpdate(Image image) {
         type = image.getType();
-        publishStart = image.getPublishStart();
+        publishStart = image.getPublishStartInstant();
         publishStop = image.getPublishStopInstant();
         highlighted = image.isHighlighted();
         title = image.getTitle();
