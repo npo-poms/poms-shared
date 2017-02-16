@@ -249,7 +249,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
     }
 
     public PB publishStart(Date date) {
-        page.setPublishStart(fromDate(date));
+        page.setPublishStartInstant(fromDate(date));
         return self;
     }
 
@@ -269,7 +269,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
 
 
     public PB publishStart(Instant date) {
-        page.setPublishStart(date);
+        page.setPublishStartInstant(date);
         return self;
     }
 
@@ -302,7 +302,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         final Page page = new Page(update.getType());
         page.setType(update.getType());
         page.setUrl(update.getUrl());
-        page.setPublishStart(update.getPublishStart());
+        page.setPublishStartInstant(update.getPublishStart());
         page.setLastPublished(update.getLastPublished());
         page.setCreationDate(update.getCreationDate());
         if (page.getCreationDate() == null) {
