@@ -39,7 +39,7 @@ public class PageBuilderTest {
         Page page = PageBuilder.page(PageType.ARTICLE).publishStart(TEST_INSTANT).build();
         String test = "<local:page publishStart=\"2016-04-18T12:00:00+02:00\" sortDate=\"2016-04-18T12:00:00+02:00\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\"/>\n";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
-        assertThat(result.getPublishStart()).isEqualTo(TEST_INSTANT);
+        assertThat(result.getPublishStartInstant()).isEqualTo(TEST_INSTANT);
 
 
     }
@@ -48,7 +48,7 @@ public class PageBuilderTest {
         Page page = PageBuilder.page(PageType.ARTICLE).publishStart(TEST_INSTANT).build();
         String test = "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"sortDate\":1460973600000,\"publishStart\":1460973600000}";
         Page result = Jackson2TestUtil.roundTripAndSimilar(page, test);
-        assertThat(result.getPublishStart()).isEqualTo(TEST_INSTANT);
+        assertThat(result.getPublishStartInstant()).isEqualTo(TEST_INSTANT);
 
 
     }
