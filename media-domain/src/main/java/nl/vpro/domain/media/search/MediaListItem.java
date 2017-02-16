@@ -338,6 +338,7 @@ public class MediaListItem extends PublishableListItem {
 
     @Override
     @XmlElement(name = "publishStart")
+    @JsonProperty("publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
@@ -348,6 +349,7 @@ public class MediaListItem extends PublishableListItem {
 
     @Override
     @XmlElement(name = "publishStop")
+    @JsonProperty("publishStop")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)

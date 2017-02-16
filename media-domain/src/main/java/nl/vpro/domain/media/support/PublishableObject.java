@@ -321,6 +321,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
 
     @Override
     @XmlAttribute(name = "publishStart")
+    @JsonProperty("publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
@@ -337,6 +338,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
 
     @Override
     @XmlAttribute(name = "publishStop")
+    @JsonProperty("publishStop")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)

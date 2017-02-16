@@ -53,7 +53,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  */
 @Entity
 @Cacheable
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "locationType",
     propOrder = {"programUrl",
         "avAttributes",
