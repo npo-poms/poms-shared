@@ -1,18 +1,19 @@
 package nl.vpro.domain.api.page;
 
-import nl.vpro.domain.api.*;
-import nl.vpro.domain.classification.Term;
-import nl.vpro.domain.page.*;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
-import org.xml.sax.SAXException;
-
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.Date;
 import java.util.TreeSet;
+
+import org.junit.Test;
+import org.xml.sax.SAXException;
+
+import nl.vpro.domain.api.*;
+import nl.vpro.domain.classification.Term;
+import nl.vpro.domain.page.*;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -213,15 +214,15 @@ public class PageSearchTest {
         Page object = new Page(PageType.ARTICLE);
         assertThat(in.test(object)).isFalse();
 
-        object.setPublishStart(Instant.ofEpochMilli(50));
+        object.setPublishStartInstant(Instant.ofEpochMilli(50));
         assertThat(in.test(object)).isFalse();
-        object.setPublishStart(Instant.ofEpochMilli(100));
+        object.setPublishStartInstant(Instant.ofEpochMilli(100));
         assertThat(in.test(object)).isTrue();
-        object.setPublishStart(Instant.ofEpochMilli(150));
+        object.setPublishStartInstant(Instant.ofEpochMilli(150));
         assertThat(in.test(object)).isTrue();
-        object.setPublishStart(Instant.ofEpochMilli(200));
+        object.setPublishStartInstant(Instant.ofEpochMilli(200));
         assertThat(in.test(object)).isFalse();
-        object.setPublishStart(Instant.ofEpochMilli(250));
+        object.setPublishStartInstant(Instant.ofEpochMilli(250));
         assertThat(in.test(object)).isFalse();
     }
 
@@ -233,15 +234,15 @@ public class PageSearchTest {
         Page object = new Page(PageType.ARTICLE);
         assertThat(in.test(object)).isFalse();
 
-        object.setPublishStart(Instant.ofEpochMilli(50));
+        object.setPublishStartInstant(Instant.ofEpochMilli(50));
         assertThat(in.test(object)).isTrue();
-        object.setPublishStart(Instant.ofEpochMilli(100));
+        object.setPublishStartInstant(Instant.ofEpochMilli(100));
         assertThat(in.test(object)).isFalse();
-        object.setPublishStart(Instant.ofEpochMilli(150));
+        object.setPublishStartInstant(Instant.ofEpochMilli(150));
         assertThat(in.test(object)).isFalse();
-        object.setPublishStart(Instant.ofEpochMilli(200));
+        object.setPublishStartInstant(Instant.ofEpochMilli(200));
         assertThat(in.test(object)).isTrue();
-        object.setPublishStart(Instant.ofEpochMilli(250));
+        object.setPublishStartInstant(Instant.ofEpochMilli(250));
         assertThat(in.test(object)).isTrue();
     }
 
