@@ -52,6 +52,7 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @Column(name = "lastModified")
     @Convert(converter = InstantToTimestampConverter.class)
     @XmlAttribute(name = "lastModified")
+    @JsonProperty("lastModified")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
@@ -62,6 +63,7 @@ public class MediaObjectTranslation implements LocalizedObject<TitleTranslation,
     @Column(name = "creationDate")
     @Convert(converter = InstantToTimestampConverter.class)
     @XmlAttribute(name = "creationDate")
+    @JsonProperty("lastModified")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @Setter

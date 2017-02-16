@@ -12,6 +12,7 @@ import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Locale;
 
@@ -596,7 +597,8 @@ public class MediaObjectJsonSchemaTest {
             "    \"duration\" : 600000,\n" +
             "    \"owner\" : \"BROADCASTER\",\n" +
             "    \"creationDate\" : 1457102700000,\n" +
-            "    \"workflow\" : \"FOR_PUBLICATION\"\n" +
+            "    \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "     \"publishStart\" : 1487244180000\n" +
             "  }, {\n" +
             "    \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf\",\n" +
             "    \"avAttributes\" : {\n" +
@@ -626,6 +628,7 @@ public class MediaObjectJsonSchemaTest {
             "}";
 
         Program program = program().id(100L).lean().withLocations().build();
+        program.getLocations().first().setPublishStartInstant(LocalDateTime.of(2017, 2, 16, 12, 23).atZone(Schedule.ZONE_ID).toInstant());
 
         Program out = Jackson2TestUtil.roundTripAndSimilar(program, expected);
         assertThat(out.getLocations().first().getDuration()).isEqualTo(Duration.of(10, ChronoUnit.MINUTES));
