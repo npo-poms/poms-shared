@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Embargo;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
@@ -80,7 +81,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "lastModified"
     })
 @EqualsAndHashCode
-public class Page {
+public class Page implements Embargo {
 
     @NotNull
     private PageType type;
@@ -143,6 +144,9 @@ public class Page {
     protected Instant lastModified;
 
     protected Instant publishStart;
+
+    protected Instant publishStop;
+
 
     protected Instant lastPublished;
 
@@ -448,17 +452,38 @@ public class Page {
 
     }
 
-    @XmlAttribute
+    @Override
+    @XmlAttribute(name = "publishStart")
+    @JsonProperty("publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    public Instant getPublishStart() {
+    public Instant getPublishStartInstant() {
         return publishStart;
     }
 
-    public void setPublishStart(Instant publishStart) {
+    @Override
+    public Page setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
+        return this;
+    }
+
+    @Override
+    @XmlAttribute(name = "publishStop")
+    @JsonProperty("publishStop")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    public Instant getPublishStopInstant() {
+        return publishStop;
+    }
+
+    @Override
+    public Page setPublishStopInstant(Instant publishStop) {
+        this.publishStop = publishStop;
+        return this;
     }
 
 
