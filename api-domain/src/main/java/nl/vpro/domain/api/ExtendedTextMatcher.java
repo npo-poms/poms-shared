@@ -4,18 +4,20 @@
  */
 package nl.vpro.domain.api;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
-import nl.vpro.domain.api.jackson.ExtendedTextMatcherJson;
-import nl.vpro.domain.api.validation.ValidTextMatcher;
 
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.api.jackson.ExtendedTextMatcherJson;
+import nl.vpro.domain.api.validation.ValidTextMatcher;
 
 /**
  * @author rico
