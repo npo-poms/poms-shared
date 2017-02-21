@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -31,7 +30,6 @@ import nl.vpro.domain.api.validation.ValidTextMatcher;
 @ValidTextMatcher
 public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
 
-    @JsonProperty
     @XmlAttribute
     @Pattern(regexp = "^AUTO|$")
     @Getter
