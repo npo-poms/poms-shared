@@ -4,18 +4,21 @@
  */
 package nl.vpro.domain.api;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
-import nl.vpro.domain.api.jackson.SimpleTextMatcherJson;
-import nl.vpro.domain.api.validation.ValidTextMatcher;
 
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.api.jackson.SimpleTextMatcherJson;
+import nl.vpro.domain.api.validation.ValidTextMatcher;
 
 /**
  * @author Michiel Meeuwissen
@@ -27,6 +30,8 @@ import javax.xml.bind.annotation.XmlType;
 @JsonDeserialize(using = SimpleTextMatcherJson.Deserializer.class)
 @ValidTextMatcher
 public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
+
+    @JsonProperty
     @XmlAttribute
     @Pattern(regexp = "^AUTO|$")
     @Getter
