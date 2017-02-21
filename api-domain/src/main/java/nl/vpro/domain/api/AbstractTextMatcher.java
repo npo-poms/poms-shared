@@ -4,12 +4,13 @@
  */
 package nl.vpro.domain.api;
 
+import java.util.function.Predicate;
+
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
-import java.util.function.Predicate;
 
 /**
  * @author rico
@@ -38,6 +39,9 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
     public String getFuzziness() {
         return null;
     }
+    public void setFuzziness(String fuzziness) {
+
+    }
 
     @Override
     public boolean test(@Nullable String input) {
@@ -56,6 +60,9 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
         }
         if(getMatchType() != null) {
             sb.append(", matchType='").append(getMatchType().getName()).append('\'');
+        }
+        if (getFuzziness() != null) {
+            sb.append(", fuzziness='").append(getFuzziness()).append('\'');
         }
         sb.append('}');
         return sb.toString();

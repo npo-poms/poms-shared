@@ -25,6 +25,8 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
     private static final String MATCH = "match";
     private static final String MATCH_TYPE = "matchType";
     private static final String CASE_SENSITIVE= "caseSensitive";
+    private static final String FUZZINESS = "fuzziness";
+
 
     protected final Function<String, T> constructor;
     protected final Function<String, S> valueOf;
@@ -47,6 +49,9 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
             }
             if (! value.isCaseSensitive()) {
                 jgen.writeBooleanField(CASE_SENSITIVE, false);
+            }
+            if (value.getFuzziness() != null) {
+                jgen.writeStringField(FUZZINESS, value.getFuzziness().toLowerCase());
             }
             jgen.writeEndObject();
         } else {
@@ -78,6 +83,12 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
             if (! caseSensitive) {
                 textMatcher.setCaseSensitive(false);
             }
+            JsonNode fuzzinessNode = jsonNode.get(FUZZINESS);
+            if (fuzzinessNode != null) {
+                String fuzziness = fuzzinessNode.asText().toUpperCase();
+                textMatcher.setFuzziness(fuzziness);
+            }
+
             textMatcher.setMatch(match);
             textMatcher.setMatchType(matchType);
             return textMatcher;
