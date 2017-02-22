@@ -2465,6 +2465,7 @@ public abstract class MediaObject extends PublishableObject
     /**
      * Overriden to help hibernate search (see MediaSearchMappingFactory)
      * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     * {@inheritDoc}
      */
     @Override
     public String getMainTitle() {
@@ -2474,6 +2475,7 @@ public abstract class MediaObject extends PublishableObject
     /**
      * Overriden to help hibernate search (see MediaSearchMappingFactory)
      * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     * {@inheritDoc}
      */
     @Override
     public String getSubTitle() {
@@ -2483,6 +2485,7 @@ public abstract class MediaObject extends PublishableObject
     /**
      * Overriden to help hibernate search (see MediaSearchMappingFactory)
      * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     * {@inheritDoc}
      */
     @Override
     public String getMainDescription() {
@@ -2490,35 +2493,73 @@ public abstract class MediaObject extends PublishableObject
     }
 
 
+    /**
+     * Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * {@inheritDoc}
+     */
     @Override
     public String getShortTitle() {
         return LocalizedObject.super.getShortTitle();
     }
 
+    /**
+     * Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * {@inheritDoc}
+     */
     @Override
     public String getOriginalTitle() {
         return LocalizedObject.super.getOriginalTitle();
     }
 
+    /**
+     * Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * {@inheritDoc}
+     */
     @Override
     public String getWorkTitle() {
         return LocalizedObject.super.getWorkTitle();
     }
+
+    /**
+     * Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * {@inheritDoc}
+     */
     @Override
     public String getLexicoTitle() {
         return LocalizedObject.super.getLexicoTitle();
     }
+
+    /**
+     * Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * {@inheritDoc}
+     */
     @Override
     public String getAbbreviatedTitle() {
         return LocalizedObject.super.getAbbreviatedTitle();
     }
 
 
+    /**
+     * Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * {@inheritDoc}
+     */
     @Override
     public String getSubDescription() {
         return LocalizedObject.super.getSubDescription();
     }
 
+
+    /**
+     * Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * {@inheritDoc}
+     */
     @Override
     public String getShortDescription() {
         return LocalizedObject.super.getShortDescription();
