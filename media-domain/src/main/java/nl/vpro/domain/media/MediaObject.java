@@ -2462,9 +2462,10 @@ public abstract class MediaObject extends PublishableObject
 
     // Following are overriden to help FTL and hibernate
     // See https://issues.apache.org/jira/browse/FREEMARKER-24
+
     /**
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
-     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     * <p>Overriden to help hibernate search (see MediaSearchMappingFactory)
+     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693</p>
      * {@inheritDoc}
      */
     @Override
@@ -2472,9 +2473,10 @@ public abstract class MediaObject extends PublishableObject
         return LocalizedObject.super.getMainTitle();
     }
 
+
     /**
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
-     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     * <p>Overriden to help hibernate search (see MediaSearchMappingFactory)
+     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693</p>
      * {@inheritDoc}
      */
     @Override
@@ -2483,8 +2485,8 @@ public abstract class MediaObject extends PublishableObject
     }
 
     /**
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
-     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     * <p>Overriden to help hibernate search (see MediaSearchMappingFactory)
+     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693</p>
      * {@inheritDoc}
      */
     @Override
@@ -2494,8 +2496,8 @@ public abstract class MediaObject extends PublishableObject
 
 
     /**
-     * Overriden to help FTL.
-     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * <p> Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24</p>
      * {@inheritDoc}
      */
     @Override
@@ -2504,8 +2506,8 @@ public abstract class MediaObject extends PublishableObject
     }
 
     /**
-     * Overriden to help FTL.
-     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * <p> Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24</p>
      * {@inheritDoc}
      */
     @Override
@@ -2514,8 +2516,8 @@ public abstract class MediaObject extends PublishableObject
     }
 
     /**
-     * Overriden to help FTL.
-     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * <p> Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24</p>
      * {@inheritDoc}
      */
     @Override
@@ -2524,8 +2526,8 @@ public abstract class MediaObject extends PublishableObject
     }
 
     /**
-     * Overriden to help FTL.
-     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * <p> Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24</p>
      * {@inheritDoc}
      */
     @Override
@@ -2534,8 +2536,8 @@ public abstract class MediaObject extends PublishableObject
     }
 
     /**
-     * Overriden to help FTL.
-     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * <p> Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24</p>
      * {@inheritDoc}
      */
     @Override
@@ -2545,8 +2547,8 @@ public abstract class MediaObject extends PublishableObject
 
 
     /**
-     * Overriden to help FTL.
-     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * <p> Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24</p>
      * {@inheritDoc}
      */
     @Override
@@ -2556,8 +2558,8 @@ public abstract class MediaObject extends PublishableObject
 
 
     /**
-     * Overriden to help FTL.
-     * See https://issues.apache.org/jira/browse/FREEMARKER-24
+     * <p> Overriden to help FTL.
+     * See https://issues.apache.org/jira/browse/FREEMARKER-24</p>
      * {@inheritDoc}
      */
     @Override
