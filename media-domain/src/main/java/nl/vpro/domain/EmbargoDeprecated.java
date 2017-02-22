@@ -5,7 +5,7 @@ import java.util.Date;
 import nl.vpro.util.DateUtils;
 
 /**
- * Some deprecated methods related to Embargos
+ * Some deprecated methods related to {@link Embargo}s
  *
  * @author Michiel Meeuwissen
  * @since 5.2

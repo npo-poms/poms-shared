@@ -9,6 +9,7 @@ import nl.vpro.i18n.Locales;
 
 /**
  * Represents an object having titles and descriptions.
+ *
  * @author Michiel Meeuwissen
  * @since 5.1
  */
