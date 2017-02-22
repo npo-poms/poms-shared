@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Accountable;
+import nl.vpro.domain.Embargo;
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
@@ -36,7 +37,7 @@ import nl.vpro.validation.Publishable;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
- * Publishable contains all items for Publishables.
+ * Publishable contains all items for Publishables, this is largely the abstract implemention of {@link Accountable} and {@link Embargo}.
  *
  * @author arne
  * @author roekoe
