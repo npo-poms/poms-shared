@@ -170,20 +170,6 @@ public class LocationTest extends ObjectTest<Location> {
             "    \"videoAttributes\" : { }\n" +
             "  },\n" +
             "  \"duration\" : 30000,\n" +
-            "  \"createdBy\" : {\n" +
-            "    \"principalId\" : \"parkpost-upload\",\n" +
-            "    \"displayName\" : \"ParkPost Upload\",\n" +
-            "    \"email\" : \"media-beheer@omroep.nl\",\n" +
-            "    \"lastLogin\" : 1427872839521,\n" +
-            "    \"id\" : \"parkpost-upload\"\n" +
-            "  },\n" +
-            "  \"lastModifiedBy\" : {\n" +
-            "    \"principalId\" : \"parkpost-upload\",\n" +
-            "    \"displayName\" : \"ParkPost Upload\",\n" +
-            "    \"email\" : \"media-beheer@omroep.nl\",\n" +
-            "    \"lastLogin\" : 1427872839521,\n" +
-            "    \"id\" : \"parkpost-upload\"\n" +
-            "  },\n" +
             "  \"owner\" : \"BROADCASTER\",\n" +
             "  \"creationDate\" : 1425497262985,\n" +
             "  \"lastModified\" : 1425497263370,\n" +
