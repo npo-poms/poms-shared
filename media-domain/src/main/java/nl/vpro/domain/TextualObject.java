@@ -111,6 +111,11 @@ public interface TextualObject<T extends OwnedText, D extends OwnedText, TO exte
         return TextualObjects.get(getTitles(), TextualType.WORK);
     }
 
+    /**
+     * Return the 'lexicographic title'. This is the title where the object normally would be sorted on.
+     * This defaults to {@link #getMainTitle()} if no explicit value was set. If an explicit value is set, it may
+     * e.g. be the same as {@link #getMainTitle()} but with leading articles ommitted.
+     */
     default String getLexicoTitle() {
         String string = TextualObjects.get(getTitles(), TextualType.LEXICO);
         if (StringUtils.isEmpty(string)) {
