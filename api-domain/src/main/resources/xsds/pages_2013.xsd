@@ -44,6 +44,7 @@
     <xs:attribute name="lastModified" type="xs:dateTime"/>
     <xs:attribute name="lastPublished" type="xs:dateTime"/>
     <xs:attribute name="publishStart" type="xs:dateTime"/>
+    <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="refCount" type="xs:int"/>
     <xs:attribute name="sortDate" type="xs:dateTime"/>
     <xs:attribute name="type" type="tns:pageTypeEnum" use="required"/>
