@@ -301,7 +301,6 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     }
 
     @Override
-    @JsonProperty
     public Editor getCreatedBy() {
         return createdBy;
     }
@@ -312,7 +311,6 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     }
 
     @Override
-    @JsonProperty
     public Editor getLastModifiedBy() {
         return lastModifiedBy;
     }
