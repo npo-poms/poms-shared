@@ -163,7 +163,33 @@ public class LocationTest extends ObjectTest<Location> {
 
     @Test
     public void fromJson() throws Exception {
-        String json = "[{\"programUrl\":\"http://adaptive.npostreaming.nl/u/npo/promo/1P0603VD_BEDBREAK/1P0603VD_BEDBREAK.ism\",\"avAttributes\":{\"avFileFormat\":\"HASP\",\"videoAttributes\":{}},\"duration\":30000,\"createdBy\":{\"principalId\":\"parkpost-upload\",\"displayName\":\"ParkPost Upload\",\"email\":\"media-beheer@omroep.nl\",\"lastLogin\":1427872839521,\"id\":\"parkpost-upload\"},\"lastModifiedBy\":{\"principalId\":\"parkpost-upload\",\"displayName\":\"ParkPost Upload\",\"email\":\"media-beheer@omroep.nl\",\"lastLogin\":1427872839521,\"id\":\"parkpost-upload\"},\"owner\":\"BROADCASTER\",\"creationDate\":1425497262985,\"lastModified\":1425497263370,\"workflow\":\"PUBLISHED\",\"urn\":\"urn:vpro:media:location:52197707\"}]";
+        String json = "[ {\n" +
+            "  \"programUrl\" : \"http://adaptive.npostreaming.nl/u/npo/promo/1P0603VD_BEDBREAK/1P0603VD_BEDBREAK.ism\",\n" +
+            "  \"avAttributes\" : {\n" +
+            "    \"avFileFormat\" : \"HASP\",\n" +
+            "    \"videoAttributes\" : { }\n" +
+            "  },\n" +
+            "  \"duration\" : 30000,\n" +
+            "  \"createdBy\" : {\n" +
+            "    \"principalId\" : \"parkpost-upload\",\n" +
+            "    \"displayName\" : \"ParkPost Upload\",\n" +
+            "    \"email\" : \"media-beheer@omroep.nl\",\n" +
+            "    \"lastLogin\" : 1427872839521,\n" +
+            "    \"id\" : \"parkpost-upload\"\n" +
+            "  },\n" +
+            "  \"lastModifiedBy\" : {\n" +
+            "    \"principalId\" : \"parkpost-upload\",\n" +
+            "    \"displayName\" : \"ParkPost Upload\",\n" +
+            "    \"email\" : \"media-beheer@omroep.nl\",\n" +
+            "    \"lastLogin\" : 1427872839521,\n" +
+            "    \"id\" : \"parkpost-upload\"\n" +
+            "  },\n" +
+            "  \"owner\" : \"BROADCASTER\",\n" +
+            "  \"creationDate\" : 1425497262985,\n" +
+            "  \"lastModified\" : 1425497263370,\n" +
+            "  \"workflow\" : \"PUBLISHED\",\n" +
+            "  \"urn\" : \"urn:vpro:media:location:52197707\"\n" +
+            "} ]";
 
         Location[] locations = Jackson2Mapper.getInstance().readValue(json, Location[].class);
         Jackson2TestUtil.roundTripAndSimilar(locations, json);
