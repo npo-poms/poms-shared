@@ -23,7 +23,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
@@ -1013,29 +1012,6 @@ public abstract class MediaObject extends PublishableObject
     }
 
 
-    /**
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
-     */
-    @Override
-    public String getMainTitle() {
-        return LocalizedObject.super.getMainTitle();
-    }
-
-    /**
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
-     */
-    @Override
-    public String getSubTitle() {
-        return LocalizedObject.super.getSubTitle();
-    }
-
-    /**
-     * Overriden to help hibernate search (see MediaSearchMappingFactory)
-     */
-    @Override
-    public String getMainDescription() {
-        return LocalizedObject.super.getMainDescription();
-    }
 
     @XmlElement(name = "genre")
     @JsonProperty("genres")
@@ -2482,6 +2458,71 @@ public abstract class MediaObject extends PublishableObject
 
     @Override
     protected abstract String getUrnPrefix();
+
+
+    // Following are overriden to help FTL and hibernate
+    // See https://issues.apache.org/jira/browse/FREEMARKER-24
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     */
+    @Override
+    public String getMainTitle() {
+        return LocalizedObject.super.getMainTitle();
+    }
+
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     */
+    @Override
+    public String getSubTitle() {
+        return LocalizedObject.super.getSubTitle();
+    }
+
+    /**
+     * Overriden to help hibernate search (see MediaSearchMappingFactory)
+     * Probably has to to with https://bugs.openjdk.java.net/browse/JDK-8071693
+     */
+    @Override
+    public String getMainDescription() {
+        return LocalizedObject.super.getMainDescription();
+    }
+
+
+    @Override
+    public String getShortTitle() {
+        return LocalizedObject.super.getShortTitle();
+    }
+
+    @Override
+    public String getOriginalTitle() {
+        return LocalizedObject.super.getOriginalTitle();
+    }
+
+    @Override
+    public String getWorkTitle() {
+        return LocalizedObject.super.getWorkTitle();
+    }
+    @Override
+    public String getLexicoTitle() {
+        return LocalizedObject.super.getLexicoTitle();
+    }
+    @Override
+    public String getAbbreviatedTitle() {
+        return LocalizedObject.super.getAbbreviatedTitle();
+    }
+
+
+    @Override
+    public String getSubDescription() {
+        return LocalizedObject.super.getSubDescription();
+    }
+
+    @Override
+    public String getShortDescription() {
+        return LocalizedObject.super.getShortDescription();
+    }
 
 
 }
