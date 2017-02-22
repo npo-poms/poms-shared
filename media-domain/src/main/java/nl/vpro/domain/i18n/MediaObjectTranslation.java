@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Accountable;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.LocalizedObject;
 import nl.vpro.domain.media.support.OwnerType;
@@ -38,7 +39,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @XmlRootElement(name = "media")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
-public class MediaObjectTranslation implements LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, TwitterRefTranslation, MediaObjectTranslation>, Identifiable<Long> {
+public class MediaObjectTranslation implements LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, TwitterRefTranslation, MediaObjectTranslation>, Identifiable<Long>, Accountable {
 
     @Id
     @GeneratedValue

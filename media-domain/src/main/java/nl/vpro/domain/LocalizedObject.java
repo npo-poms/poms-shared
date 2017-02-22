@@ -8,6 +8,8 @@ import nl.vpro.domain.media.Website;
 import nl.vpro.domain.media.support.Tag;
 
 /**
+ * An object that can be translated. The is valid for the fields of {@link TextualObject}, but also for tags, websites, and twitter references.
+ *
  * @author Michiel Meeuwissen
  * @since 5.1
  */
@@ -15,7 +17,7 @@ public interface LocalizedObject<
     T extends OwnedText<T>,
     D extends OwnedText<D>,
     WS extends Supplier<String> & UpdatableIdentifiable, TR extends Supplier<String>, TO extends LocalizedObject<T, D, WS, TR, TO>>
-    extends TextualObject<T, D, TO>, Accountable {
+    extends TextualObject<T, D, TO> {
 
 
     SortedSet<Tag> getTags();
