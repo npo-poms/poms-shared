@@ -3,6 +3,8 @@ package nl.vpro.domain.media.support;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nl.vpro.domain.Xmlns;
 
 /**
@@ -33,6 +35,15 @@ public enum License implements nl.vpro.domain.Displayable {
     @Override
     public String getDisplayName() {
         return displayName;
+    }
+
+    public static License valueOfOrNull(String id) {
+        if (StringUtils.isEmpty(id)) {
+            return null;
+        } else {
+            return valueOf(id);
+        }
+
     }
 
 }
