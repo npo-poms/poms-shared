@@ -4,8 +4,7 @@
  */
 package nl.vpro.ws.image;
 
-import nl.vpro.domain.image.ImageMetadata;
-import nl.vpro.domain.image.ImageType;
+import java.util.concurrent.Future;
 
 import javax.activation.DataHandler;
 import javax.jws.WebMethod;
@@ -16,12 +15,16 @@ import javax.xml.ws.AsyncHandler;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.Response;
 import javax.xml.ws.ResponseWrapper;
-import java.util.concurrent.Future;
+
+import nl.vpro.domain.image.ImageMetadata;
+import nl.vpro.domain.image.ImageType;
+
+import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
 @WebService(
     name = "imageWebService",
     portName = "imageServicePort",
-    targetNamespace = "urn:vpro:ws:image:2009")
+    targetNamespace = IMAGE_WS_NAMESPACE)
 public interface ImageWebService {
 
     @WebMethod

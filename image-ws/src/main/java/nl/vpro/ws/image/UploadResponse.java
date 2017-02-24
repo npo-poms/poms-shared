@@ -4,11 +4,13 @@
  */
 package nl.vpro.ws.image;
 
-import nl.vpro.domain.image.ImageMetadata;
-
 import javax.xml.bind.annotation.*;
 
-@XmlRootElement(name = "uploadResponse", namespace = "urn:vpro:ws:image:2009")
+import nl.vpro.domain.image.ImageMetadata;
+
+import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
+
+@XmlRootElement(name = "uploadResponse", namespace = IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "uploadResponseType", propOrder = {
     "urn",
@@ -16,7 +18,7 @@ import javax.xml.bind.annotation.*;
 })
 public class UploadResponse {
 
-    @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private String urn;
 
     private ImageMetadata imageMetadata;

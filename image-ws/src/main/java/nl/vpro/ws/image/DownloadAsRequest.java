@@ -6,15 +6,16 @@ package nl.vpro.ws.image;
 
 import javax.xml.bind.annotation.*;
 
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageType;
 
-@XmlRootElement(name = "downloadAsRequest", namespace = "urn:vpro:ws:image:2009")
+@XmlRootElement(name = "downloadAsRequest", namespace = Xmlns.IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "downloadAsRequestType", propOrder = {
 		"principalId"})
 public class DownloadAsRequest extends DownloadRequest {
 
-    @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(namespace = Xmlns.IMAGE_WS_NAMESPACE, required = true)
     private String principalId;
 
     public DownloadAsRequest() {

@@ -8,7 +8,9 @@ import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
 
-@XmlRootElement(name = "downloadRequest", namespace = "urn:vpro:ws:image:2009")
+import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
+
+@XmlRootElement(name = "downloadRequest", namespace = IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "downloadRequestType", propOrder = {
         "title",
@@ -17,16 +19,16 @@ import nl.vpro.domain.image.ImageType;
         "url"})
 public class DownloadRequest {
 
-    @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private String title;
 
-    @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private String description;
 
-    @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private ImageType type;
 
-    @XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private String url;
 
 

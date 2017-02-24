@@ -7,15 +7,16 @@ package nl.vpro.ws.image;
 import javax.activation.DataHandler;
 import javax.xml.bind.annotation.*;
 
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageType;
 
-@XmlRootElement(name = "uploadAsRequest", namespace = "urn:vpro:ws:image:2009")
+@XmlRootElement(name = "uploadAsRequest", namespace = Xmlns.IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "uploadAsRequestType", propOrder = {
 		"principalId"})
 public class UploadAsRequest extends UploadRequest {
 
-	@XmlElement(namespace = "urn:vpro:ws:image:2009", required = true)
+	@XmlElement(namespace = Xmlns.IMAGE_WS_NAMESPACE, required = true)
     private String principalId;
 
     public UploadAsRequest() {

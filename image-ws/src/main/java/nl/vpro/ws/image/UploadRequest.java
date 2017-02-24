@@ -9,7 +9,9 @@ import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
 
-@XmlRootElement(name = "uploadRequest", namespace = "urn:vpro:ws:image:2009")
+import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
+
+@XmlRootElement(name = "uploadRequest", namespace = IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "uploadRequestType", propOrder = {
         "title",
@@ -36,7 +38,7 @@ public class UploadRequest {
         this.data = data;
     }
 
-    @XmlElement(name = "title", namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(name = "title", namespace = IMAGE_WS_NAMESPACE, required = true)
     public String getTitle() {
         return title;
     }
@@ -45,7 +47,7 @@ public class UploadRequest {
         this.title = title;
     }
 
-    @XmlElement(name = "description", namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(name = "description", namespace = IMAGE_WS_NAMESPACE, required = true)
     public String getDescription() {
         return description;
     }
@@ -54,7 +56,7 @@ public class UploadRequest {
         this.description = description;
     }
 
-    @XmlElement(name = "type", namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(name = "type", namespace = IMAGE_WS_NAMESPACE, required = true)
     public ImageType getType() {
         return type;
     }
@@ -65,7 +67,7 @@ public class UploadRequest {
 
     // the set ContentType from the client is not communicated, see also:
     // https://issues.jboss.org/browse/JBWS-3074
-    @XmlElement(name = "data", namespace = "urn:vpro:ws:image:2009", required = true)
+    @XmlElement(name = "data", namespace = IMAGE_WS_NAMESPACE, required = true)
     @XmlMimeType("application/octet-stream")
     public DataHandler getData() {
         return data;
