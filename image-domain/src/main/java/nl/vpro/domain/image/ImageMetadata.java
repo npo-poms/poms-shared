@@ -76,7 +76,7 @@ public class ImageMetadata {
         metaData.heightInMm = image.getHeightInMm();
         metaData.widthInMm = image.getWidthInMm();
         metaData.size = image.getSize();
-        metaData.downloadUrl = URI.create(image.getDownloadUrl());
+        metaData.downloadUrl = image.getDownloadUrl() == null ? null : URI.create(image.getDownloadUrl());
         metaData.etag = image.getEtag();
         return metaData;
     }
