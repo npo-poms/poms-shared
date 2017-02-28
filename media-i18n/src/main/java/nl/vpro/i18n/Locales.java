@@ -14,8 +14,9 @@ import nl.vpro.com.neovisionaries.i18n.LanguageCode;
  */
 public class Locales {
 
-    public static Locale DUTCH   = of(LanguageCode.nl, CountryCode.NL);
-    public static Locale FLEMISH = of(LanguageCode.nl, CountryCode.BE);
+    public static Locale DUTCH         = of(LanguageCode.nl);
+    public static Locale NETHERLANDISH = of(LanguageCode.nl, CountryCode.NL);
+    public static Locale FLEMISH       = of(LanguageCode.nl, CountryCode.BE);
 
     private static final ThreadLocal<Locale> DEFAULT = ThreadLocal.withInitial(Locale::getDefault);
 
@@ -33,6 +34,10 @@ public class Locales {
 
     public static Locale of(LanguageCode lc, CountryCode code) {
         return new Locale(lc.name(), code.getAlpha2());
+    }
+
+    public static Locale of(LanguageCode lc) {
+        return new Locale(lc.name());
     }
 
     public static Locale ofString(String s) {
