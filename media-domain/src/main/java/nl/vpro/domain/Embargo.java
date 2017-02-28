@@ -40,9 +40,7 @@ public interface Embargo {
 
     default boolean inPublicationWindow(Instant now) {
         Instant stop = getPublishStopInstant();
-        if (stop != null
-            && stop.isBefore(now)) {
-
+        if (stop != null && stop.isBefore(now)) {
             return false;
         }
         Instant start = getPublishStartInstant();
