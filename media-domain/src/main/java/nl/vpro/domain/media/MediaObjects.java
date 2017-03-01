@@ -488,6 +488,7 @@ public class MediaObjects {
                 }
             }
             if (prediction.getState() != requiredState) {
+                log.info("Set state of {} {} {} -> {}", object.getMid(), prediction, prediction.getState(), requiredState);
                 prediction.setState(requiredState);
             }
         }
