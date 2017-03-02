@@ -241,7 +241,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public String toString() {
         return
-            "Prediction{platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + "}";
+            "Prediction{id=" + id + ",platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + "}";
     }
 
 
