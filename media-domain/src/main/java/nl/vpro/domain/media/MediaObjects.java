@@ -462,16 +462,19 @@ public class MediaObjects {
         }
     }
 
-    public static void realizeAndExpirePredictions(MediaObject object) {
+    public static boolean realizeAndExpirePredictions(MediaObject object) {
+        boolean change = false;
         for (Prediction prediction : object.getPredictions()) {
-            realizeAndExpirePredictions(prediction.getPlatform(), object);
+            change |= realizeAndExpirePredictions(prediction.getPlatform(), object);
         }
+        return change;
     }
 
-    public static void realizeAndExpirePredictions(Platform platform, MediaObject object) {
+    public static boolean realizeAndExpirePredictions(Platform platform, MediaObject object) {
         if (platform == null) {
-            return;
+            return false;
         }
+        boolean changes = false;
         Prediction prediction = getPrediction(platform, object.getPredictions());
         if (prediction != null) {
             Prediction.State requiredState = Prediction.State.ANNOUNCED;
@@ -490,8 +493,10 @@ public class MediaObjects {
             if (prediction.getState() != requiredState) {
                 log.info("Set state of {} {} {} -> {}", object.getMid(), prediction, prediction.getState(), requiredState);
                 prediction.setState(requiredState);
+                changes = true;
             }
         }
+        return changes;
     }
 
     public static Prediction getPrediction(Platform platform, Collection<Prediction> preds) {
