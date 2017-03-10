@@ -12,6 +12,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import javax.validation.groups.Default;
 import javax.xml.bind.JAXB;
 
 import org.junit.BeforeClass;
@@ -24,6 +25,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.theory.ObjectTest;
+import nl.vpro.validation.PomsValidatorGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -59,7 +61,7 @@ public class LocationTest extends ObjectTest<Location> {
             .setPublishStartInstant(Instant.ofEpochMilli(20))
             .setPublishStopInstant(Instant.ofEpochMilli(10));
 
-        Set<ConstraintViolation<Location>> constraintViolations = validator.validate(invalid);
+        Set<ConstraintViolation<Location>> constraintViolations = validator.validate(invalid, PomsValidatorGroup.class, Default.class);
 
         assertThat(constraintViolations).isNotEmpty();
     }
