@@ -30,14 +30,14 @@ public class LocalizedStringTest {
         A a = new A();
         a.string = LocalizedString.of("bla", Locales.DUTCH);
         JAXBTestUtil.roundTripAndSimilar(a, "<local:a xmlns:local=\"uri:local\">\n" +
-            "    <string xml:lang=\"nl_NL\">bla</string>\n" +
+            "    <string xml:lang=\"nl\">bla</string>\n" +
             "</local:a>");
     }
 
     @Test
     public void json() throws Exception {
         A a = new A();
-        a.string = LocalizedString.of("bla", Locales.DUTCH);
+        a.string = LocalizedString.of("bla", Locales.NETHERLANDISH);
         Jackson2TestUtil.roundTripAndSimilar(a, "{\n" +
             "  \"string\" : {\n" +
             "    \"value\" : \"bla\",\n" +
@@ -51,7 +51,7 @@ public class LocalizedStringTest {
         A a = JAXB.unmarshal(new StringReader("<local:a xmlns:local=\"uri:local\">\n" +
             "    <string xml:lang=\"nl_NL\">bla</string>\n" +
             "</local:a>"), A.class);
-        assertThat(a.string.getLocale()).isEqualTo(Locales.DUTCH);
+        assertThat(a.string.getLocale()).isEqualTo(Locales.NETHERLANDISH);
     }
 
 }
