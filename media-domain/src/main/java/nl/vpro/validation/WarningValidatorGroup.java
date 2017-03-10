@@ -1,8 +1,9 @@
 package nl.vpro.validation;
 
 /**
- * @author Jeroen van Vianen
  * Marker interface voor validation messages die als WARN gelogd dienen te worden.
+ * @author Jeroen van Vianen
+ * @since 5.1
  */
 public interface WarningValidatorGroup {
 }
