@@ -15,6 +15,7 @@ import javax.validation.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -34,6 +35,7 @@ import nl.vpro.util.TimeUtils;
 import nl.vpro.util.TransformingCollection;
 import nl.vpro.util.TransformingList;
 import nl.vpro.util.TransformingSortedSet;
+import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -169,6 +171,11 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
 
     public Set<ConstraintViolation<MediaUpdate<M>>> violations(Class<?>... groups) {
         fetch();
+        if (groups.length == 0) {
+            groups = new Class<?>[] {
+                Default.class, PomsValidatorGroup.class
+            };
+        }
         if (VALIDATOR != null) {
             return VALIDATOR.validate(this, groups);
         } else {
