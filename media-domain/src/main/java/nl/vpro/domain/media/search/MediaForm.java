@@ -222,7 +222,7 @@ public class MediaForm {
         this.forOwner = forOwner;
     }
 
-    static class Builder {
+    public static class Builder {
         Collection<String> broadcasters = new ArrayList<>();
         public Builder broadcasters(Collection<String> b) {
             if (b != null) {
