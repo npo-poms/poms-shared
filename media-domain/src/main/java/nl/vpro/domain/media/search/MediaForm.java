@@ -4,10 +4,8 @@
  */
 package nl.vpro.domain.media.search;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Singular;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -179,10 +177,10 @@ public class MediaForm {
         this(pager, null, null, null, types, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
-    @Builder
+    @lombok.Builder(builderClassName = "Builder")
     MediaForm(
         MediaPager pager,
-        @Singular  Collection<String> broadcasters,
+        Collection<String> broadcasters,
         Collection<String> portals,
         String text,
         Collection<MediaType> types,
@@ -222,6 +220,21 @@ public class MediaForm {
         this.noMembers = noMembers;
         this.noCredits = noCredits;
         this.forOwner = forOwner;
+    }
+
+    static class Builder {
+        Collection<String> broadcasters = new ArrayList<>();
+        public Builder broadcasters(Collection<String> b) {
+            if (b != null) {
+                this.broadcasters.addAll(b);
+            }
+            return this;
+
+        }
+        public Builder broadcaster(String broadcaster) {
+            this.broadcasters.add(broadcaster);
+            return this;
+        }
     }
 
     public MediaPager getPager() {
