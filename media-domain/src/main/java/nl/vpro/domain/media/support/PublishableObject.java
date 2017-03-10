@@ -33,8 +33,8 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
+import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.Publishable;
-import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -46,7 +46,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-@Publishable(groups = {WarningValidatorGroup.class})
+@Publishable(groups = {PomsValidatorGroup.class})
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
