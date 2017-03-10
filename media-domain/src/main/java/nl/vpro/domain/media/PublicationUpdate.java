@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
@@ -12,6 +15,7 @@ import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.util.DateUtils;
@@ -47,6 +51,10 @@ public class PublicationUpdate implements Delayed, Serializable {
     private final boolean republication;
 
     private final UUID transactionUUID;
+
+    @Getter
+    @Setter
+    private PublicationUpdateConsumer consumer;
 
 
     public PublicationUpdate(Action action, String reason, String mid, Long id, Instant time, String[] destinations) {
@@ -271,5 +279,9 @@ public class PublicationUpdate implements Delayed, Serializable {
         return  getDelay(now).multipliedBy(-1);
     }
 
+
+    public  interface PublicationUpdateConsumer extends Consumer<MediaObject>, Serializable {
+
+    }
 
 }
