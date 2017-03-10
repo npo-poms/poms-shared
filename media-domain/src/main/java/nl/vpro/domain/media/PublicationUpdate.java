@@ -4,22 +4,25 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import nl.vpro.domain.media.support.Workflow;
-import nl.vpro.util.DateUtils;
 
 /**
  *  Helper class for publication and revoke queue's.
  *  @author roekoe
  */
+@Getter
 public class PublicationUpdate implements Delayed, Serializable {
     private static final long serialVersionUID = 0L;
 
@@ -47,6 +50,9 @@ public class PublicationUpdate implements Delayed, Serializable {
     private final boolean republication;
 
     private final UUID transactionUUID;
+
+    @Setter
+    private PublicationUpdateConsumer consumer;
 
 
     public PublicationUpdate(Action action, String reason, String mid, Long id, Instant time, String[] destinations) {
@@ -83,11 +89,11 @@ public class PublicationUpdate implements Delayed, Serializable {
 
 
     public static PublicationUpdate revoke(String reason, MediaObject media) {
-        return new PublicationUpdate(Action.REVOKE, reason, media.getMid(), media.getId(), DateUtils.toInstant(media.getPublishStop()), null);
+        return new PublicationUpdate(Action.REVOKE, reason, media.getMid(), media.getId(), media.getPublishStopInstant(), null);
     }
 
     public static PublicationUpdate revoke(String reason, MediaObject media, String... destinations) {
-        return new PublicationUpdate(Action.REVOKE, reason, media.getMid(), media.getId(), DateUtils.toInstant(media.getPublishStop()), destinations);
+        return new PublicationUpdate(Action.REVOKE, reason, media.getMid(), media.getId(), media.getPublishStopInstant(), destinations);
     }
 
     public static PublicationUpdate republish(MediaObject media, String... destinations) {
@@ -107,41 +113,14 @@ public class PublicationUpdate implements Delayed, Serializable {
     }
 
     private static Instant getPublishTime(MediaObject media) {
-        Date publishTime = media.getPublishStart();
-        if (publishTime == null || publishTime.before(media.getLastModified())) {
-            publishTime = media.getLastModified();
+        Instant publishTime = media.getPublishStartInstant();
+        if (publishTime == null || publishTime.isBefore(media.getLastModifiedInstant())) {
+            publishTime = media.getLastModifiedInstant();
         }
-        return DateUtils.toInstant(publishTime);
+        return publishTime;
     }
 
 
-    public Long getId() {
-        return id;
-    }
-
-    public Instant getTime() {
-        return time;
-    }
-
-    public String getMid() {
-        return mid;
-    }
-
-    public boolean isRepublication() {
-        return republication;
-    }
-
-    public String[] getDestinations() {
-        return destinations;
-    }
-
-    public Action getAction() {
-        return action;
-    }
-
-    public String getReason() {
-        return reason;
-    }
 
     private static int getWorkFlowPriorityForPublication(Workflow w) {
         switch (w) {
@@ -271,5 +250,9 @@ public class PublicationUpdate implements Delayed, Serializable {
         return  getDelay(now).multipliedBy(-1);
     }
 
+
+    public  interface PublicationUpdateConsumer extends Function<MediaObject, Boolean>, Serializable {
+
+    }
 
 }

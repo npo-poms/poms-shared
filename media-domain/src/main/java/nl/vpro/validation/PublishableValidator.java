@@ -17,8 +17,8 @@ public class PublishableValidator implements ConstraintValidator<Publishable, Pu
 
     @Override
     public boolean isValid(PublishableObject value, ConstraintValidatorContext constraintValidatorContext) {
-        return value.getPublishStart() == null
-            || value.getPublishStop() == null
-            || value.getPublishStart().getTime() <= value.getPublishStop().getTime();
+        return value.getPublishStartInstant() == null
+            || value.getPublishStopInstant() == null
+            || value.getPublishStartInstant().toEpochMilli() <= value.getPublishStopInstant().toEpochMilli();
     }
 }
