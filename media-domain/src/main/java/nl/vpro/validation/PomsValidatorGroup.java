@@ -5,5 +5,5 @@ package nl.vpro.validation;
  * @author Michiel Meeuwissen
  * @since 5.2.1
  */
-public class PomsValidatorGroup {
+public interface PomsValidatorGroup {
 }
