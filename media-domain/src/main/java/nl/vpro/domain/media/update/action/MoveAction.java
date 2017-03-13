@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update.action;
 
+import lombok.ToString;
+
 import javax.xml.bind.annotation.*;
 
 /**
@@ -17,6 +19,7 @@ import javax.xml.bind.annotation.*;
         "from",
         "to"
     })
+@ToString
 public class MoveAction {
 
     @XmlElement(required = true)
