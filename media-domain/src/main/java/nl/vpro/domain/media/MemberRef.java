@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.*;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -454,7 +455,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     @Override
     public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this);
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE);
         if (id != null) {
             builder.append("id", id);
         }
