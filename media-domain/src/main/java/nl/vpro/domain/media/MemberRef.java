@@ -454,16 +454,29 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-            .appendSuper(super.toString())
-            .append("id", id)
-            .append("urnRef", urnRef)
-            .append("cridRef", cridRef)
-            .append("ownerMidRef", midRef)
-            .append("number", number)
-            .append("added", added)
-            .append("highlighted", highlighted)
-            .toString();
+        ToStringBuilder builder = new ToStringBuilder(this);
+        if (id != null) {
+            builder.append("id", id);
+        }
+        if (urnRef != null) {
+            builder.append("urnRef", urnRef);
+        }
+        if (cridRef != null) {
+            builder.append("cridRef", cridRef);
+        }
+        if (midRef != null) {
+            builder.append("midRef", midRef);
+        }
+        if (number != null) {
+            builder.append("number", number);
+        }
+        if (added != null) {
+            builder.append("added", added);
+        }
+        if (highlighted != null) {
+            builder.append("highlighted", highlighted);
+        }
+        return builder.toString();
     }
 
     private boolean memberEqualsOnRef(MemberRef that) {
