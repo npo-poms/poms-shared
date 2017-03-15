@@ -106,7 +106,6 @@ public interface MediaRestService {
 
     @POST
     @Path("/multiple/")
-
     MultipleMediaResult loadMultiple(
         IdList ids,
         @QueryParam(PROPERTIES) String properties,
@@ -117,6 +116,7 @@ public interface MediaRestService {
     @Path("/{mid}/members")
     MediaResult listMembers(
         @PathParam(ID) String mid,
+        @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
@@ -141,6 +141,7 @@ public interface MediaRestService {
     @Path("/{mid}/episodes")
     ProgramResult listEpisodes(
         @PathParam(ID) String mid,
+        @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
@@ -165,6 +166,7 @@ public interface MediaRestService {
     @Path("/{mid}/descendants")
     MediaResult listDescendants(
         @PathParam(ID) String mid,
+        @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
