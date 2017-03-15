@@ -29,7 +29,7 @@ public class Broadcaster extends Organization {
     protected String whatsOnId;
 
     @Column(unique = true)
-    @Size(min = 1, max = 255, message = "0 < id < 256")
+    @Size(min = 1, max = 255, message = "0 < neboId < 256")
     @XmlTransient
     protected String neboId;
 
