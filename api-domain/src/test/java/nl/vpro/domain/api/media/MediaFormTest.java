@@ -213,7 +213,10 @@ public class MediaFormTest {
 
     @Test
     public void testTitleSearch() throws Exception {
-        MediaForm form = MediaForm.builder().build();
+        MediaForm form = MediaForm
+            .builder()
+            .fuzzyText("bla")
+            .build();
         JAXBTestUtil.roundTripAndSimilar(form, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:text fuzziness=\"AUTO\" match=\"SHOULD\">bla</api:text>\n" +
