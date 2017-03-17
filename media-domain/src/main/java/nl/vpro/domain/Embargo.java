@@ -20,6 +20,7 @@ public interface Embargo {
     Embargo setPublishStopInstant(Instant publishStop);
 
 
+
     default boolean isUnderEmbargo(Instant now) {
         return !inPublicationWindow(now);
     }
