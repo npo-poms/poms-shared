@@ -47,7 +47,11 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
 
     default boolean removeTitle(OwnerType owner, TextualType type) {
         if (hasTitles()) {
-            return getTitles().removeIf(title -> title.getOwner().equals(owner) && title.getType() == type);
+            return getTitles()
+                .removeIf(
+                    title ->
+                        title.getOwner().equals(owner) && title.getType() == type
+                );
 
         }
         return false;
@@ -55,7 +59,9 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
 
     default TO removeTitlesForOwner(OwnerType owner) {
         if (hasTitles()) {
-            getTitles().removeIf(title -> title.getOwner().equals(owner));
+            getTitles().removeIf(
+                title -> title.getOwner().equals(owner)
+            );
         }
         return self();
     }
@@ -149,8 +155,11 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
 
     default boolean removeDescription(OwnerType owner, TextualType type) {
         if (hasDescriptions()) {
-            return getDescriptions().removeIf(description -> description.getOwner().equals(owner) && description.getType() == type);
-
+            return getDescriptions().removeIf(
+                description ->
+                    description.getOwner().equals(owner) &&
+                        description.getType() == type
+            );
         }
         return false;
     }
