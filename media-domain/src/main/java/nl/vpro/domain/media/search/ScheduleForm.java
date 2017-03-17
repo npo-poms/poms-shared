@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.search;
 
+import lombok.ToString;
+
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -20,6 +22,7 @@ import nl.vpro.domain.media.ScheduleEvent;
     "dateRange",
     "channels"
 })
+@ToString
 public class ScheduleForm implements Predicate<ScheduleEvent> {
     private SchedulePager pager;
 

@@ -17,7 +17,7 @@ import nl.vpro.domain.user.Broadcaster;
  * @author Michiel Meeuwissen
  * @since 3.6
  */
-@ToString
+@ToString(callSuper = true)
 class ExtendedScheduleForm extends ScheduleForm {
 
     private String broadcaster;
