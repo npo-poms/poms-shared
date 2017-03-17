@@ -1,5 +1,7 @@
 package nl.vpro.domain.api.schedule;
 
+import lombok.ToString;
+
 import java.time.LocalDate;
 
 import nl.vpro.domain.media.MediaType;
@@ -15,6 +17,7 @@ import nl.vpro.domain.user.Broadcaster;
  * @author Michiel Meeuwissen
  * @since 3.6
  */
+@ToString
 class ExtendedScheduleForm extends ScheduleForm {
 
     private String broadcaster;
