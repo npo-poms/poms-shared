@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.search;
 
 import lombok.Builder;
+import lombok.ToString;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -24,6 +25,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "start",
         "stop"
         })
+@ToString
 public class DateRange implements Predicate<Instant> {
 
     @XmlElement

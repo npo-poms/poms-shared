@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.search;
 
 import lombok.Builder;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
