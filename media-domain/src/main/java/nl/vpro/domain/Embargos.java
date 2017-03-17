@@ -10,4 +10,13 @@ public class Embargos {
         to.setPublishStartInstant(from.getPublishStartInstant());
         to.setPublishStopInstant(from.getPublishStopInstant());
     }
+
+    public static void copyIfTargetUnset(Embargo from, Embargo to) {
+        if (to.getPublishStartInstant() == null) {
+            to.setPublishStartInstant(from.getPublishStartInstant());
+        }
+        if (to.getPublishStopInstant() == null) {
+            to.setPublishStopInstant(from.getPublishStopInstant());
+        }
+    }
 }
