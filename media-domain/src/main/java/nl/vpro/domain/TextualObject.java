@@ -8,13 +8,16 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
 
 /**
- * Represents an object having titles and descriptions.
+ * Represents an object having owned and typed titles and descriptions.
  *
  * @author Michiel Meeuwissen
  * @since 5.1
  */
 public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> {
 
+    /**
+     * Describes in which language the contained text objects are. This defaults to {@link Locales#DUTCH}.
+     */
     default Locale getLanguage() {
         return Locales.DUTCH;
     }
@@ -33,6 +36,7 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
         getTitles().add(title);
         return self();
     }
+
     default boolean removeTitle(T title) {
         return getTitles().remove(title);
     }
@@ -77,8 +81,6 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
         }
         return null;
     }
-
-
 
     default String getMainTitle() {
         return TextualObjects.get(getTitles(), TextualType.MAIN);
@@ -127,6 +129,7 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
     }
 
     SortedSet<D> getDescriptions();
+
     void setDescriptions(SortedSet<D> descriptions);
 
     TO addDescription(String description, OwnerType owner, TextualType type);
@@ -139,6 +142,7 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
         getDescriptions().add(description);
         return self();
     }
+
     default boolean removeDescription(D description) {
         return getDescriptions().remove(description);
     }
@@ -182,7 +186,6 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
         return null;
     }
 
-
     default String getMainDescription() {
         if (hasDescriptions()) {
             return getDescriptions().first().get();
@@ -211,7 +214,4 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
         }
         return null;
     }
-
-
-
 }
