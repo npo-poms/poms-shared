@@ -4,9 +4,12 @@
  */
 package nl.vpro.domain.media.search;
 
+import lombok.ToString;
+
 import javax.xml.bind.annotation.*;
 
 @XmlTransient
+@ToString
 public abstract class Pager<S extends SortField> {
 
     public enum Direction {
