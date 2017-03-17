@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.domain.EmbargoDeprecated;
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.AVAttributes;
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
@@ -102,8 +103,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
         avAttributes = ats == null ? null : new AVAttributesUpdate(ats);
         offset = location.getOffset();
         duration = location.getDuration();
-        publishStart = location.getPublishStart();
-        publishStop = location.getPublishStop();
+        Embargos.copy(location, this);
         urn = location.getUrn();
     }
 
@@ -111,8 +111,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
         Location result = new Location(
             programUrl,
             OwnerType.BROADCASTER, avAttributes == null ? null : avAttributes.toAvAttributes());
-        result.setPublishStart(publishStart);
-        result.setPublishStop(publishStop);
+        Embargos.copy(this, result);
         result.setDuration(duration);
         result.setOffset(offset);
         result.setUrn(urn);
