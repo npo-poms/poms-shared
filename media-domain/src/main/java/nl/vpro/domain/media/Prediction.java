@@ -97,7 +97,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     protected MediaObject mediaObject;
 
-    private Prediction() {
+    public Prediction() {
     }
 
     /**
