@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import nl.vpro.util.DateUtils;
+import nl.vpro.util.TimeUtils;
 
 /**
  * @author Michiel Meeuwissen
@@ -85,5 +86,14 @@ public class ScheduleEventIdentifier implements Serializable {
         return super.toString() + ":" + channel + ":" + start;
     }
 
+    public String asString() {
+        return channel.name() + ":" + start;
+    }
+
+    public static ScheduleEventIdentifier parse(String id) {
+        String[] split = id.split("\\:", 2);
+        return new ScheduleEventIdentifier(Channel.valueOf(split[0]), TimeUtils.parse(split[1]).orElseThrow(() -> new IllegalArgumentException("Could not parse " + id)));
+
+    }
 
 }
