@@ -6,8 +6,10 @@ package nl.vpro.domain.media.update;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
@@ -16,6 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -23,7 +26,9 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "scheduleEventUpdateType",
     propOrder = {
         "start",
-        "duration"
+        "duration",
+        "titles",
+        "descriptions"
         })
 public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate> {
 
@@ -117,6 +122,68 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate> {
 
     public void setDuration(Date duration) {
         this.duration = duration == null ? null : Duration.ofMillis(duration.getTime());
+    }
+
+    @XmlElementWrapper(name = "titles", required = false)
+    @XmlElement(name = "title")
+    public SortedSet<TitleUpdate> getTitles() {
+        if (titles == null) {
+            titles = new TreeSet<>();
+        }
+        return titles;
+    }
+
+    public void setTitles(SortedSet<TitleUpdate> titles) {
+        this.titles = titles;
+    }
+
+    public void setTitles(TitleUpdate... titles) {
+        this.titles = new TreeSet<>(Arrays.asList(titles));
+    }
+
+    public void setMainTitle(String title) {
+        setTitle(title, TextualType.MAIN);
+    }
+
+    public void setTitle(String title, TextualType type) {
+        for (TitleUpdate t : getTitles()) {
+            if (t.getType() == type) {
+                t.setTitle(title);
+                return;
+            }
+        }
+        getTitles().add(new TitleUpdate(title, type));
+    }
+
+    @XmlElementWrapper(name = "descriptions", required = false)
+    @XmlElement(name = "description")
+    public SortedSet<DescriptionUpdate> getDescriptions() {
+        if (descriptions == null) {
+            descriptions = new TreeSet<>();
+        }
+        return descriptions;
+    }
+
+    public void setDescriptions(SortedSet<DescriptionUpdate> descriptions) {
+        this.descriptions = descriptions;
+    }
+
+    public void setDescriptions(DescriptionUpdate... descriptions) {
+        this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
+    }
+
+    public void setMainDescription(String description) {
+        setDescription(description, TextualType.MAIN);
+    }
+
+    public void setDescription(String description, TextualType type) {
+        for (DescriptionUpdate t : getDescriptions()) {
+            if (t.getType() == type) {
+                t.setDescription(description);
+                return;
+            }
+        }
+        getDescriptions().add(new DescriptionUpdate(description, type));
     }
 
     @Override
