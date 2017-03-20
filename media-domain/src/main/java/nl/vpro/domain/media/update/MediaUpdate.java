@@ -504,7 +504,6 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
         }
         return titles;
     }
-
     public void setTitles(SortedSet<TitleUpdate> titles) {
         this.titles = titles;
     }
