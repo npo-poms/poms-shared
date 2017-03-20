@@ -26,8 +26,6 @@ import nl.vpro.domain.media.support.Workflow;
 public class PublicationUpdate implements Delayed, Serializable {
     private static final long serialVersionUID = 0L;
 
-
-
     public enum Action {
         PUBLISH,
         REVOKE

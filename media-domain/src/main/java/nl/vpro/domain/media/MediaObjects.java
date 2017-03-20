@@ -478,7 +478,13 @@ public class MediaObjects {
             Prediction.State requiredState = Prediction.State.ANNOUNCED;
 
             for (Location location : object.getLocations()) {
-                if (location.getPlatform() == platform) {
+                Platform locationPlatform = location.getPlatform();
+                if (locationPlatform == null) {
+                    // this might be a good idea?
+                    //log.debug("Location has no explicit platform. Taking it {} implicitely", Platform.INTERNETVOD);
+                    //locationPlatform = Platform.INTERNETVOD;
+                }
+                if (locationPlatform == platform) {
                     if (location.isPublishable()) {
                         requiredState = Prediction.State.REALIZED;
                         break;
