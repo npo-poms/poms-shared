@@ -215,6 +215,20 @@
     <xs:sequence>
       <xs:element name="start" type="xs:dateTime"/>
       <xs:element name="duration" type="xs:duration"/>
+      <xs:element name="titles" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="title" type="titleUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="descriptions" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="description" type="descriptionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name="channel" type="media:channelEnum" use="required"/>
     <xs:attribute name="net" type="xs:string"/>
