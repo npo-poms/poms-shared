@@ -14,9 +14,7 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import nl.vpro.domain.NotFoundException;
-import nl.vpro.domain.TextualObject;
-import nl.vpro.domain.TextualObjects;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
@@ -517,10 +515,9 @@ public class MediaObjects {
         return prediction;
     }
 
-    public static Prediction updatePrediction(MediaObject media, Platform platform, Instant start, Instant stop) {
+    public static Prediction updatePrediction(MediaObject media, Platform platform, Embargo embargo) {
         Prediction prediction = media.findOrCreatePrediction(platform);
-        prediction.setPublishStartInstant(start);
-        prediction.setPublishStopInstant(stop);
+        Embargos.copy(embargo, prediction);
         return prediction;
     }
 
