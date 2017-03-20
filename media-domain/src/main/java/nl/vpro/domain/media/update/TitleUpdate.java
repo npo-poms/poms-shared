@@ -7,12 +7,13 @@ package nl.vpro.domain.media.update;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import nl.vpro.domain.TypedText;
 import nl.vpro.domain.media.support.TextualType;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "titleUpdateType",
     propOrder = {"title"})
-public class TitleUpdate implements Comparable<TitleUpdate>{
+public class TitleUpdate implements Comparable<TitleUpdate>, TypedText {
 
     private String title;
 
@@ -37,6 +38,11 @@ public class TitleUpdate implements Comparable<TitleUpdate>{
         this.media = media;
     }
 
+    public static TitleUpdate of(TypedText to) {
+        return new TitleUpdate(to.get(), to.getType());
+    }
+
+
     @XmlValue
     public String getTitle() {
         return title;
@@ -46,11 +52,13 @@ public class TitleUpdate implements Comparable<TitleUpdate>{
         this.title = title;
     }
 
+    @Override
     @XmlAttribute
     public TextualType getType() {
         return type;
     }
 
+    @Override
     public void setType(TextualType type) {
         this.type = type;
     }
@@ -114,5 +122,15 @@ public class TitleUpdate implements Comparable<TitleUpdate>{
             ", type=" + type +
             ", media=" + (media == null ? null : media.getMid()) +
             '}';
+    }
+
+    @Override
+    public void set(String s) {
+        setTitle(s);
+    }
+
+    @Override
+    public String get() {
+        return getTitle();
     }
 }

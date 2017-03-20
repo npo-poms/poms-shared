@@ -259,7 +259,7 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
             relations = null;
         }
         if (notTransforming(scheduleEvents)) {
-            mediaObject().setScheduleEvents(scheduleEvents.stream().map(ScheduleEventUpdate::toScheduleEvent).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject().setScheduleEvents(scheduleEvents.stream().map(e -> e.toScheduleEvent(owner)).collect(Collectors.toCollection(TreeSet::new)));
             scheduleEvents = null;
         }
 
@@ -760,7 +760,8 @@ public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDepre
         if (scheduleEvents == null) {
             scheduleEvents = new TransformingSortedSet<>(mediaObject().getScheduleEvents(),
                 ScheduleEventUpdate::new,
-                ScheduleEventUpdate::toScheduleEvent);
+                e -> e.toScheduleEvent(owner)
+            );
         }
         return scheduleEvents;
     }

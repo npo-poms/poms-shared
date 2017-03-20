@@ -18,6 +18,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.ScheduleEventDescription;
+import nl.vpro.domain.media.support.ScheduleEventTitle;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -68,10 +71,33 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate> {
 
     public ScheduleEventUpdate(ScheduleEvent event) {
         this(event.getChannel(), event.getStartInstant(), event.getDurationTime());
+        if (event.getTitles() != null) {
+            SortedSet<TitleUpdate> titleSet = getTitles();
+            for (ScheduleEventTitle et : event.getTitles()) {
+                titleSet.add(TitleUpdate.of(et));
+            }
+        }
+        if (event.getDescriptions() != null) {
+            SortedSet<DescriptionUpdate> descriptionSet = getDescriptions();
+            for (ScheduleEventDescription et : event.getDescriptions()) {
+                descriptionSet.add(DescriptionUpdate.of(et));
+            }
+        }
     }
 
-    public ScheduleEvent toScheduleEvent() {
-        return new ScheduleEvent(channel, net == null ? null : new Net(net), start, duration);
+    public ScheduleEvent toScheduleEvent(OwnerType ownerType) {
+        ScheduleEvent event = new ScheduleEvent(channel, net == null ? null : new Net(net), start, duration);
+        if (titles != null) {
+            for (TitleUpdate up : titles) {
+                event.addTitle(up.get(), ownerType, up.getType());
+            }
+        }
+        if (descriptions != null) {
+            for (DescriptionUpdate up : descriptions) {
+                event.addDescription(up.get(), ownerType, up.getType());
+            }
+        }
+        return event;
     }
 
     public Channel getChannel() {
@@ -208,6 +234,6 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate> {
 
     @Override
     public int compareTo(ScheduleEventUpdate o) {
-        return toScheduleEvent().compareTo(o.toScheduleEvent());
+        return toScheduleEvent(OwnerType.BROADCASTER).compareTo(o.toScheduleEvent(OwnerType.BROADCASTER));
     }
 }
