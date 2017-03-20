@@ -7,7 +7,9 @@ package nl.vpro.domain.media.update;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
+import java.util.SortedSet;
 
+import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -40,9 +42,15 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate> {
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     private Duration duration;
 
+    @Valid
+    private SortedSet<TitleUpdate> titles;
+
+    @Valid
+    private SortedSet<DescriptionUpdate> descriptions;
+
     private ScheduleEventUpdate() {
     }
-
+    @Deprecated
     public ScheduleEventUpdate(Channel channel, Date start, Date duration) {
         this(channel, instant(start), duration(duration));
     }

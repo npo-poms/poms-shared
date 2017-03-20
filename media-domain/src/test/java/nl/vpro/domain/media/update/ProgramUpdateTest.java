@@ -368,8 +368,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = ProgramUpdate.create();
         update.setScheduleEvent(new ScheduleEventUpdate(
             Channel.RAD5,
-            new Date(97779),
-            new Date(100))
+            Instant.ofEpochMilli(97779),
+            Duration.ofMillis(100))
         );
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents><scheduleEvent channel=\"RAD5\"><start>1970-01-01T01:01:37.779+01:00</start><duration>P0DT0H0M0.100S</duration></scheduleEvent></scheduleEvents><images/><segments/></program>";
