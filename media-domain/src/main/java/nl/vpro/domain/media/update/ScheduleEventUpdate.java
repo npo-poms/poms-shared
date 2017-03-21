@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
@@ -33,7 +34,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "titles",
         "descriptions"
         })
-public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate> {
+public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, TextualObjectUpdate<TitleUpdate, DescriptionUpdate, ScheduleEventUpdate> {
 
     @XmlAttribute(required = true)
     private Channel channel;
@@ -153,9 +154,6 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate> {
     @XmlElementWrapper(name = "titles", required = false)
     @XmlElement(name = "title")
     public SortedSet<TitleUpdate> getTitles() {
-        if (titles == null) {
-            titles = new TreeSet<>();
-        }
         return titles;
     }
 
@@ -184,9 +182,6 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate> {
     @XmlElementWrapper(name = "descriptions", required = false)
     @XmlElement(name = "description")
     public SortedSet<DescriptionUpdate> getDescriptions() {
-        if (descriptions == null) {
-            descriptions = new TreeSet<>();
-        }
         return descriptions;
     }
 
