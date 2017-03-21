@@ -35,22 +35,6 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         addTitle(title, type);
     }
 
-    default void setDescription(String description, TextualType type) {
-        if (getDescriptions() != null) {
-            for (D t : getDescriptions()) {
-                if (t.getType() == type) {
-                    t.set(description);
-                    return;
-                }
-            }
-        }
-        addDescription(description, type);
-    }
-
-
-    TO addDescription(String description, TextualType type);
-
-
     SortedSet<T> getTitles();
 
     void setTitles(SortedSet<T> titles);
@@ -99,9 +83,6 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         setTitle(title, TextualType.MAIN);
     }
 
-    default void setMainDescription(String description) {
-        setDescription(description, TextualType.MAIN);
-    }
 
     /**
      * Retrieves the first sub- or episode title. MIS distributes episode
@@ -140,6 +121,23 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     default String getAbbreviatedTitle() {
         return TextualObjects.get(getTitles(), TextualType.ABBREVIATION);
     }
+
+
+    default void setDescription(String description, TextualType type) {
+        if (getDescriptions() != null) {
+            for (D t : getDescriptions()) {
+                if (t.getType() == type) {
+                    t.set(description);
+                    return;
+                }
+            }
+        }
+        addDescription(description, type);
+    }
+
+
+    TO addDescription(String description, TextualType type);
+
 
     SortedSet<D> getDescriptions();
 
@@ -181,6 +179,10 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
             return getDescriptions().first().get();
         }
         return null;
+    }
+
+    default void setMainDescription(String description) {
+        setDescription(description, TextualType.MAIN);
     }
 
     default String getSubDescription() {
