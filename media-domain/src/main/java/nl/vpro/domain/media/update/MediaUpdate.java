@@ -496,6 +496,7 @@ public abstract class MediaUpdate<M extends MediaObject>
         this.geoRestrictions = restrictions;
     }
 
+    @Override
     @XmlElement(name = "title", required = true)
     public SortedSet<TitleUpdate> getTitles() {
         if (titles == null) {
@@ -508,26 +509,15 @@ public abstract class MediaUpdate<M extends MediaObject>
         }
         return titles;
     }
+    @Override
     public void setTitles(SortedSet<TitleUpdate> titles) {
         this.titles = titles;
     }
     public void setTitles(TitleUpdate... titles) {
         this.titles = new TreeSet<>(Arrays.asList(titles));
     }
-    public void setMainTitle(String title) {
-        setTitle(title, TextualType.MAIN);
-    }
 
-    public void setTitle(String title, TextualType type) {
-        for (TitleUpdate t : getTitles()) {
-            if (t.getType() == type) {
-                t.setTitle(title);
-                return;
-            }
-        }
-        getTitles().add(new TitleUpdate(title, type));
-    }
-
+    @Override
     @XmlElement(name = "description")
     public SortedSet<DescriptionUpdate> getDescriptions() {
         if (descriptions == null) {
@@ -540,6 +530,7 @@ public abstract class MediaUpdate<M extends MediaObject>
         return descriptions;
     }
 
+    @Override
     public void setDescriptions(SortedSet<DescriptionUpdate> descriptions) {
         this.descriptions = descriptions;
     }
@@ -547,18 +538,18 @@ public abstract class MediaUpdate<M extends MediaObject>
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
 
-    public void setMainDescription(String description) {
-        setDescription(description, TextualType.MAIN);
+
+    @Override
+    public MediaUpdate<M>  addDescription(String description, TextualType type) {
+        getDescriptions().add(new DescriptionUpdate(description, type));
+        return this;
     }
 
-    public void setDescription(String description, TextualType type) {
-        for (DescriptionUpdate t : getDescriptions()) {
-            if (t.getType() == type) {
-                t.setDescription(description);
-                return;
-            }
-        }
-        getDescriptions().add(new DescriptionUpdate(description, type));
+
+    @Override
+    public MediaUpdate<M> addTitle(String title, TextualType type) {
+        getTitles().add(new TitleUpdate(title, type));
+        return this;
     }
 
     @XmlElement(name = "tag")
