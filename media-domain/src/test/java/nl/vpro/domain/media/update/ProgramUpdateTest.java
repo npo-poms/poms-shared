@@ -372,7 +372,50 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             Duration.ofMillis(100))
         );
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents><scheduleEvent channel=\"RAD5\"><start>1970-01-01T01:01:37.779+01:00</start><duration>P0DT0H0M0.100S</duration></scheduleEvent></scheduleEvents><images/><segments/></program>";
+        String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents>\n" +
+            "        <scheduleEvent channel=\"RAD5\">\n" +
+            "            <start>1970-01-01T01:01:37.779+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.100S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "    </scheduleEvents>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>";
+
+        JAXBTestUtil.roundTripAndSimilar(update, expected);
+    }
+
+    @Test
+    public void testGetScheduleEventWithTexts() throws Exception {
+        ProgramUpdate update = ProgramUpdate.create();
+        ScheduleEventUpdate se = new ScheduleEventUpdate(
+            Channel.RAD5,
+            Instant.ofEpochMilli(97779),
+            Duration.ofMillis(100));
+        se.addTitle(TitleUpdate.main("bla"));
+        se.addDescription(new DescriptionUpdate("bloe", TextualType.LEXICO));
+
+        update.setScheduleEvent(se);
+
+        String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents>\n" +
+            "        <scheduleEvent channel=\"RAD5\">\n" +
+            "            <start>1970-01-01T01:01:37.779+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.100S</duration>\n" +
+            "            <titles>\n" +
+            "                <title type=\"MAIN\">bla</title>\n" +
+            "            </titles>\n" +
+            "            <descriptions>\n" +
+            "                <description type=\"LEXICO\">bloe</description>\n" +
+            "            </descriptions>\n" +
+            "        </scheduleEvent>\n" +
+            "    </scheduleEvents>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
