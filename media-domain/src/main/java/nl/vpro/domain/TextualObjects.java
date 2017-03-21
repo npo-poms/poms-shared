@@ -16,11 +16,11 @@ public class TextualObjects {
 
     // some methods working on collections of 'OwnedText' objects (think of titles and descriptions)
 
-    public static <OT extends OwnedText<OT>> Optional<String> getOptional(Collection<OT> titles, TextualType... types) {
-        return Optional.ofNullable(getObject(titles, types)).map(OwnedText::get);
+    public static <OT extends TypedText> Optional<String> getOptional(Collection<OT> titles, TextualType... types) {
+        return Optional.ofNullable(getObject(titles, types)).map(TypedText::get);
     }
 
-    public static <OT extends OwnedText<OT>> String get(Collection<? extends OT> titles, String defaultValue, TextualType... types) {
+    public static <OT extends TypedText> String get(Collection<? extends OT> titles, String defaultValue, TextualType... types) {
         OT title = getObject(titles, types);
         return title == null ? defaultValue : title.get();
     }
@@ -38,7 +38,7 @@ public class TextualObjects {
         return getObjects(titles, ownerType, type).stream().map(OwnedText::get).findFirst();
     }
 
-    public static <OT extends OwnedText> OT getObject(Collection<OT> titles, TextualType... types) {
+    public static <OT extends TypedText> OT getObject(Collection<OT> titles, TextualType... types) {
         if (titles != null) {
             for (OT title : titles) {
                 for (TextualType type : types) {
@@ -158,7 +158,7 @@ public class TextualObjects {
     }
 
 
-    public static <OT extends OwnedText<OT>> String get(Collection<OT> titles, TextualType... work) {
+    public static <OT extends TypedText> String get(Collection<OT> titles, TextualType... work) {
         return getOptional(titles, work).orElse(null);
     }
 }

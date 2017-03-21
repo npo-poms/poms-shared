@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.EmbargoDeprecated;
+import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -71,7 +72,10 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 })
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
-public abstract class MediaUpdate<M extends MediaObject> implements EmbargoDeprecated {
+public abstract class MediaUpdate<M extends MediaObject>
+    implements
+    EmbargoDeprecated,
+    TextualObjectUpdate<TitleUpdate,DescriptionUpdate,  MediaUpdate<M>> {
 
     static final Validator VALIDATOR;
 
