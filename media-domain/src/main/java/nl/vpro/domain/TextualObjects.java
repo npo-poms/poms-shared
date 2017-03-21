@@ -170,11 +170,15 @@ public class TextualObjects {
         > void copy(
             FROM from,
             TO to) {
-        for (T1 title : from.getTitles()) {
-            to.addTitle(title.get(), title.getOwner(), title.getType());
+        if (from.getTitles() != null) {
+            for (T1 title : from.getTitles()) {
+                to.addTitle(title.get(), title.getOwner(), title.getType());
+            }
         }
-        for (D1 description : from.getDescriptions()) {
-            to.addTitle(description.get(), description.getOwner(), description.getType());
+        if (from.getDescriptions() != null) {
+            for (D1 description : from.getDescriptions()) {
+                to.addTitle(description.get(), description.getOwner(), description.getType());
+            }
         }
     }
 }
