@@ -187,7 +187,7 @@ public class TextualObjects {
         T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>,
         FROM extends TextualObject<T1, D1, TO1>,
         TO extends TextualObjectUpdate<T2, D2, TO2>
-        > void copyToOpdate(
+        > void copyToUpdate(
         FROM from,
         TO to) {
         if (from.getTitles() != null) {

@@ -8,7 +8,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
 
 /**
- * An object that has titles and descriptions, which are typed, but not necessary owned (unlike {@link TextualObject}. This means that the object generally is used to update 'TextualObjects', since the user updating is associated with only one {@link nl.vpro.domain.media.support.OwnerType}.
+ * An object that has titles and descriptions, which are typed, but not necessary owned (unlike {@link TextualObject}). This means that the object generally is used to update 'TextualObjects', since the user updating is associated with only one {@link nl.vpro.domain.media.support.OwnerType}.
  * @author Michiel Meeuwissen
  * @since 5.3
  */
