@@ -69,7 +69,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.AUDIO);
         update.setImages(Collections.singletonList(new ImageUpdate(ImageType.BACKGROUND, "Title", "Description", new ImageLocation(null))));
-        Set<ConstraintViolation<MediaUpdate<Program>>> errors = update.violations();
+        Set<? extends ConstraintViolation<MediaUpdate<Program>>> errors = update.violations();
         assertThat(errors).hasSize(1);
     }
 
@@ -552,7 +552,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = ProgramUpdate.create();
         update.setAgeRating(AgeRating._6);
         update.setImages(new ImageUpdate(ImageType.LOGO, "title", null, new ImageLocation("https://placeholdit.imgix.net/~text?txt=adsfl")));
-        Set<ConstraintViolation<MediaUpdate<Program>>> violations = update.violations(WarningValidatorGroup.class);
+        Set<? extends ConstraintViolation<MediaUpdate<Program>>> violations = update.violations(WarningValidatorGroup.class);
         System.out.println(violations);
         assertThat(violations).isNotEmpty();
     }
