@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.domain.TextualObjectUpdate;
+import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
@@ -72,6 +73,8 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     public ScheduleEventUpdate(ScheduleEvent event) {
         this(event.getChannel(), event.getStartInstant(), event.getDurationTime());
+
+        TextualObjects.copyToOpdate(event, this);
         if (event.getTitles() != null) {
             SortedSet<TitleUpdate> titleSet = getTitles();
             for (ScheduleEventTitle et : event.getTitles()) {
@@ -151,12 +154,14 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.duration = duration == null ? null : Duration.ofMillis(duration.getTime());
     }
 
+    @Override
     @XmlElementWrapper(name = "titles", required = false)
     @XmlElement(name = "title")
     public SortedSet<TitleUpdate> getTitles() {
         return titles;
     }
 
+    @Override
     public void setTitles(SortedSet<TitleUpdate> titles) {
         this.titles = titles;
     }
@@ -165,26 +170,24 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.titles = new TreeSet<>(Arrays.asList(titles));
     }
 
-    public void setMainTitle(String title) {
-        setTitle(title, TextualType.MAIN);
-    }
 
-    public void setTitle(String title, TextualType type) {
-        for (TitleUpdate t : getTitles()) {
-            if (t.getType() == type) {
-                t.setTitle(title);
-                return;
-            }
+    @Override
+    public ScheduleEventUpdate addTitle(String title, TextualType type) {
+        if (titles == null) {
+            titles = new TreeSet<>();
         }
         getTitles().add(new TitleUpdate(title, type));
+        return this;
     }
 
+    @Override
     @XmlElementWrapper(name = "descriptions", required = false)
     @XmlElement(name = "description")
     public SortedSet<DescriptionUpdate> getDescriptions() {
         return descriptions;
     }
 
+    @Override
     public void setDescriptions(SortedSet<DescriptionUpdate> descriptions) {
         this.descriptions = descriptions;
     }
@@ -197,14 +200,13 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         setDescription(description, TextualType.MAIN);
     }
 
-    public void setDescription(String description, TextualType type) {
-        for (DescriptionUpdate t : getDescriptions()) {
-            if (t.getType() == type) {
-                t.setDescription(description);
-                return;
-            }
+    @Override
+    public ScheduleEventUpdate addDescription(String description, TextualType type) {
+        if (descriptions == null) {
+            descriptions  = new TreeSet<>();
         }
         getDescriptions().add(new DescriptionUpdate(description, type));
+        return this;
     }
 
     @Override

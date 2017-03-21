@@ -12,14 +12,14 @@ import nl.vpro.domain.media.support.TextualType;
 public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>>
     extends TextualObjectUpdate<T, D, TO> {
 
+    OwnerType DEFAULT_OWNER = OwnerType.BROADCASTER;
+
     TO addTitle(String title, OwnerType owner, TextualType type);
 
     @Override
-    default void setMainTitle(String mainTitle) {
-        addTitle(mainTitle, OwnerType.BROADCASTER, TextualType.MAIN);
-
+    default TO addTitle(String title, TextualType type) {
+        return addTitle(title, DEFAULT_OWNER, type);
     }
-
 
     default boolean removeTitle(OwnerType owner, TextualType type) {
         if (hasTitles()) {
@@ -54,6 +54,12 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
     }
 
     TO addDescription(String description, OwnerType owner, TextualType type);
+
+
+    @Override
+    default TO addDescription(String title, TextualType type) {
+        return addDescription(title, DEFAULT_OWNER, type);
+    }
 
     default boolean removeDescription(OwnerType owner, TextualType type) {
         if (hasDescriptions()) {

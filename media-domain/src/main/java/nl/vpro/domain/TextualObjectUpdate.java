@@ -21,6 +21,36 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return Locales.DUTCH;
     }
 
+    TO addTitle(String title, TextualType type);
+
+    default void setTitle(String title, TextualType type) {
+        if (getTitles() != null) {
+            for (T t : getTitles()) {
+                if (t.getType() == type) {
+                    t.set(title);
+                    return;
+                }
+            }
+        }
+        addTitle(title, type);
+    }
+
+    default void setDescription(String description, TextualType type) {
+        if (getDescriptions() != null) {
+            for (D t : getDescriptions()) {
+                if (t.getType() == type) {
+                    t.set(description);
+                    return;
+                }
+            }
+        }
+        addDescription(description, type);
+    }
+
+
+    TO addDescription(String description, TextualType type);
+
+
     SortedSet<T> getTitles();
 
     void setTitles(SortedSet<T> titles);
@@ -64,7 +94,14 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return TextualObjects.get(getTitles(), TextualType.MAIN);
     }
 
-    void setMainTitle(String mainTitle);
+
+    default void setMainTitle(String title) {
+        setTitle(title, TextualType.MAIN);
+    }
+
+    default void setMainDescription(String description) {
+        setDescription(description, TextualType.MAIN);
+    }
 
     /**
      * Retrieves the first sub- or episode title. MIS distributes episode
