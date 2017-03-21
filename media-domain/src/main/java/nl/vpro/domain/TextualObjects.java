@@ -181,4 +181,24 @@ public class TextualObjects {
             }
         }
     }
+
+    public static <
+        T1 extends OwnedText<T1>, D1 extends OwnedText<D1>, TO1 extends TextualObject<T1, D1, TO1>,
+        T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>,
+        FROM extends TextualObject<T1, D1, TO1>,
+        TO extends TextualObjectUpdate<T2, D2, TO2>
+        > void copyToOpdate(
+        FROM from,
+        TO to) {
+        if (from.getTitles() != null) {
+            for (T1 title : from.getTitles()) {
+                to.setTitle(title.get(), title.getType());
+            }
+        }
+        if (from.getDescriptions() != null) {
+            for (D1 description : from.getDescriptions()) {
+                to.setDescription(description.get(), description.getType());
+            }
+        }
+    }
 }

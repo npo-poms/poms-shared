@@ -73,8 +73,10 @@ public class TitleUpdate implements Comparable<TitleUpdate>, TypedText {
     }
 
 
-    void afterUnmarshal(Unmarshaller unmarshaller, Object media) {
-        this.media = (MediaUpdate)media;
+    void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+        if (parent instanceof MediaUpdate) {
+            this.media = (MediaUpdate) parent;
+        }
     }
 
     @Override

@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.util.TransformingSortedSet;
 
 
@@ -175,4 +176,5 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
             .append('}');
         return sb.toString();
     }
+
 }
