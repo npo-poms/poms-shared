@@ -52,7 +52,7 @@ public interface MediaBackendRestService {
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id}")
-    MediaUpdate getMedia(
+    MediaUpdate<?> getMedia(
         @PathParam(ENTITY) final String entity,
         @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
@@ -81,7 +81,7 @@ public interface MediaBackendRestService {
     @Produces(MediaType.WILDCARD)
     Response update(
         @PathParam(ENTITY) final String entity,
-        @XopWithMultipartRelated MediaUpdate update,
+        @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam("lookupcrid") @DefaultValue("true") Boolean lookupcrid
