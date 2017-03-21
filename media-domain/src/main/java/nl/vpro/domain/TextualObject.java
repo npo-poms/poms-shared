@@ -14,6 +14,7 @@ public interface TextualObject<T extends OwnedText<T>, D extends OwnedText<D>, T
 
     TO addTitle(String title, OwnerType owner, TextualType type);
 
+    @Override
     default void setMainTitle(String mainTitle) {
         addTitle(mainTitle, OwnerType.BROADCASTER, TextualType.MAIN);
 
