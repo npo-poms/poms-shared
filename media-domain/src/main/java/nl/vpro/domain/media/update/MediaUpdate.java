@@ -173,7 +173,7 @@ public abstract class MediaUpdate<M extends MediaObject>
         return violations().isEmpty();
     }
 
-    public Set<ConstraintViolation<MediaUpdate<M>>> violations(Class<?>... groups) {
+    public Set<? extends ConstraintViolation<MediaUpdate<M>>> violations(Class<?>... groups) {
         fetch();
         if (groups.length == 0) {
             groups = new Class<?>[] {
@@ -189,7 +189,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     }
 
     public String violationMessage() {
-        Set<ConstraintViolation<MediaUpdate<M>>> violations = violations();
+        Set<? extends ConstraintViolation<? extends MediaUpdate<M>>> violations = violations();
         if(violations.isEmpty()) {
             return null;
         }
