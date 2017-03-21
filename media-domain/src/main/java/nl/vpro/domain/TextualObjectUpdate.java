@@ -2,6 +2,7 @@ package nl.vpro.domain;
 
 import java.util.Locale;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
@@ -30,12 +31,15 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
     default TO addTitle(T title) {
+        if (getTitles() == null) {
+            setTitles(new TreeSet<T>());
+        }
         getTitles().add(title);
         return self();
     }
 
     default boolean removeTitle(T title) {
-        return getTitles().remove(title);
+        return getTitles() != null && getTitles().remove(title);
     }
 
     default TO self() {
@@ -110,6 +114,9 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
     default TO addDescription(D description) {
+        if (getDescriptions() == null) {
+            setDescriptions(new TreeSet<D>());
+        }
         getDescriptions().add(description);
         return self();
     }
