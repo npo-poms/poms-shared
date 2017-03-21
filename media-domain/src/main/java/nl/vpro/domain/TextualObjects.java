@@ -162,6 +162,10 @@ public class TextualObjects {
         return getOptional(titles, work).orElse(null);
     }
 
+
+    /**
+     * @since 5.3
+     */
     public static <
         T1 extends OwnedText<T1>, D1 extends OwnedText<D1>, TO1 extends TextualObject<T1, D1, TO1>,
         T2 extends OwnedText<T2>,D2 extends OwnedText<D2>,TO2 extends TextualObject<T2, D2, TO2>,
@@ -182,6 +186,9 @@ public class TextualObjects {
         }
     }
 
+    /**
+     * @since 5.3
+     */
     public static <
         T1 extends OwnedText<T1>, D1 extends OwnedText<D1>, TO1 extends TextualObject<T1, D1, TO1>,
         T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>,
