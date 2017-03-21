@@ -161,4 +161,20 @@ public class TextualObjects {
     public static <OT extends TypedText> String get(Collection<OT> titles, TextualType... work) {
         return getOptional(titles, work).orElse(null);
     }
+
+    public static <
+        T1 extends OwnedText<T1>, D1 extends OwnedText<D1>, TO1 extends TextualObject<T1, D1, TO1>,
+        T2 extends OwnedText<T2>,D2 extends OwnedText<D2>,TO2 extends TextualObject<T2, D2, TO2>,
+        FROM extends TextualObject<T1, D1, TO1>,
+        TO extends TextualObject<T2, D2, TO2>
+        > void copy(
+            FROM from,
+            TO to) {
+        for (T1 title : from.getTitles()) {
+            to.addTitle(title.get(), title.getOwner(), title.getType());
+        }
+        for (D1 description : from.getDescriptions()) {
+            to.addTitle(description.get(), description.getOwner(), description.getType());
+        }
+    }
 }
