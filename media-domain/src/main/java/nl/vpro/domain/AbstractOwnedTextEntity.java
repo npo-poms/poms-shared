@@ -2,6 +2,8 @@ package nl.vpro.domain;
 
 import lombok.ToString;
 
+import java.util.Objects;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -73,5 +75,28 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity,
 
     public void setParent(P  parent) {
         this.parent = parent;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this.getClass().isInstance(o)) {
+            AbstractOwnedTextEntity<T, P> ownedTextEntity = (AbstractOwnedTextEntity) o;
+            if (ownedTextEntity.id != null && id != null) {
+                return Objects.equals(ownedTextEntity.id, id);
+            } else {
+                if (ownedTextEntity.parent != null && parent != null) {
+                    if (!Objects.equals(ownedTextEntity.parent, parent)) {
+                        // different parents, we require equals value too!
+                        if (!Objects.equals(ownedTextEntity.value, value)) {
+                            return false;
+                        }
+                        return false;
+                    }
+                }
+                return Objects.equals(ownedTextEntity.owner, owner) && Objects.equals(ownedTextEntity.type, type);
+            }
+        } else {
+            return false;
+        }
     }
 }
