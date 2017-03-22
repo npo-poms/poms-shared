@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.*;
@@ -165,14 +166,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Valid
     @XmlElement(name = "title")
     @JsonProperty("titles")
-    protected Set<ScheduleEventTitle> titles = null;
+    protected Set<ScheduleEventTitle> titles = new TreeSet<>();
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
     @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
-    protected Set<ScheduleEventDescription> descriptions = null;
+    protected Set<ScheduleEventDescription> descriptions = new TreeSet<>();
 
     public ScheduleEvent() {
     }
@@ -713,9 +714,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     /**
-     * The titles associated with the schedule event. May be <code>null</code> if undefined. (The schedule event may or may not have titles)
-     * That will only occur in update scenarios.
-     * @return
+     * The titles associated with the schedule event.
      */
     @Override
     public SortedSet<ScheduleEventTitle> getTitles() {
@@ -733,6 +732,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return addTitle(new ScheduleEventTitle(title, owner, type));
     }
 
+
     @Override
     public ScheduleEvent addTitle(ScheduleEventTitle title) {
         title.setParent(this);
@@ -743,6 +743,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public SortedSet<ScheduleEventDescription> getDescriptions() {
         return sorted(descriptions);
     }
+
 
     @Override
     public void setDescriptions(SortedSet<ScheduleEventDescription> descriptions) {
@@ -784,4 +785,5 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public String getMainDescription() {
         return TextualObject.super.getMainDescription();
     }
+
 }
