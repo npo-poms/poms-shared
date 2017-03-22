@@ -128,7 +128,7 @@ public class MediaObjectXmlSchemaTest {
     public void testDatesCreatedAndModified() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" lastModified=\"1970-01-01T03:00:00+01:00\" creationDate=\"1970-01-01T01:00:00+01:00\" sortDate=\"1970-01-01T01:00:00+01:00\"  xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
-        Program program = program().lean().creationDate(new Date(0)).lastModified(new Date(2 * 60 * 60 * 1000)).build();
+        Program program = program().lean().creationInstant(Instant.EPOCH).lastModified(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
         String actual = toXml(program);
         Diff diff = XMLUnit.compareXML(expected, actual);
         assertTrue(diff.toString() + " " + actual, diff.identical());
@@ -154,7 +154,7 @@ public class MediaObjectXmlSchemaTest {
     public void testPulishStartStop() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" publishStop=\"1970-01-01T03:00:00+01:00\" publishStart=\"1970-01-01T01:00:00+01:00\" sortDate=\"1970-01-01T01:00:00+01:00\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
-        Program program = program().lean().publishStart(new Date(0)).publishStop(new Date(2 * 60 * 60 * 1000)).build();
+        Program program = program().lean().publishStart(Instant.EPOCH).publishStop(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
         String actual = toXml(program);
 
         Diff diff = XMLUnit.compareXML(expected, actual);
@@ -486,7 +486,7 @@ public class MediaObjectXmlSchemaTest {
     public void testScheduleEventsWithNetSchema() throws Exception {
         ScheduleEvent event = new ScheduleEvent(Channel.NED1, Instant.EPOCH,
             java.time.Duration.ofSeconds(100));
-        event.setGuideDay(new Date(0));
+        event.setGuideDate(LocalDate.of(1970, 1, 1));
         event.setNet(new Net("ZAPP", "Zapp"));
         event.setPoProgID("VPRO_123456");
 
