@@ -40,6 +40,10 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     void setTitles(SortedSet<T> titles);
 
 
+    /**
+     * Default implementation based on {@link #getTitles}, you may want to override this, if getTitles may modify
+     * the object (it is e.g. required by jaxb that this will never return <code>null</code>
+     */
     default boolean hasTitles() {
         return getTitles() != null && getTitles().size() > 0;
     }
@@ -144,6 +148,10 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     void setDescriptions(SortedSet<D> descriptions);
 
 
+    /**
+     * Default implementation based on {@link #getDescriptions()}, you may want to override this, if getDescriptions may modify
+     * the object (it is e.g. required by hibernate that this will never return <code>null</code>
+     */
     default boolean hasDescriptions() {
         return getDescriptions() != null && getDescriptions().size() > 0;
     }
