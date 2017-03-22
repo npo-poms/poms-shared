@@ -95,11 +95,16 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
             for (TitleUpdate up : titles) {
                 event.addTitle(up.get(), ownerType, up.getType());
             }
+        } else {
+            event.setTitles(null);
         }
+
         if (descriptions != null) {
             for (DescriptionUpdate up : descriptions) {
                 event.addDescription(up.get(), ownerType, up.getType());
             }
+        } else {
+            event.setDescriptions(null);
         }
         return event;
     }
