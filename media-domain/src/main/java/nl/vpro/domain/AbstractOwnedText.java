@@ -72,9 +72,7 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
 
     @Override
     public int hashCode() {
-        String value = get();
-        int result = value != null ? value.hashCode() : 0;
-        result = 31 * result + (owner != null ? owner.hashCode() : 0);
+        int result = (owner != null ? owner.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
@@ -88,6 +86,11 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
             return owner.ordinal() - o.getOwner().ordinal();
         }
         return (type == null ? -1 : type.ordinal()) - (o.getType() == null ? -1 : o.getType().ordinal());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        throw new UnsupportedOperationException("Please implement equals!");
     }
 
 

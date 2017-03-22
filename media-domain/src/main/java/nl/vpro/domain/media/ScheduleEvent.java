@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 import java.util.SortedSet;
-import java.util.TreeSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.*;
@@ -166,14 +165,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Valid
     @XmlElement(name = "title")
     @JsonProperty("titles")
-    protected Set<ScheduleEventTitle> titles = new TreeSet<>();
+    protected Set<ScheduleEventTitle> titles = null;
 
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
     @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
-    protected Set<ScheduleEventDescription> descriptions = new TreeSet<>();
+    protected Set<ScheduleEventDescription> descriptions = null;
 
     public ScheduleEvent() {
     }
@@ -713,6 +712,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
     }
 
+    /**
+     * The titles associated with the schedule event. May be <code>null</code> if undefined. (The schedule event may or may not have titles)
+     * That will only occur in update scenarios.
+     * @return
+     */
     @Override
     public SortedSet<ScheduleEventTitle> getTitles() {
         return sorted(titles);

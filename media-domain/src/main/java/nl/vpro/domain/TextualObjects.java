@@ -164,6 +164,26 @@ public class TextualObjects {
 
 
     /**
+     * Give a collection, find the first object which equals the object we want to be in it.
+     * If one found, the 'value' is copied to it.
+     * If not, then the object is added to the collection.
+     *
+     * TypedText's are commonly stored in SortedSet's, where equals matches only owner and type, not the value itself.
+     *
+     * @param titles Collection
+     * @param add the object to add or update.
+     */
+    public static <OT extends TypedText> boolean addOrUpdate(Collection<OT> titles, OT add) {
+        Optional<OT> existing = titles.stream().filter(d -> d.equals(add)).findFirst();
+        if (existing.isPresent()) {
+            existing.get().set(add.get());
+            return false;
+        } else {
+            titles.add(add);
+            return true;
+        }
+    }
+    /**
      * @since 5.3
      */
     public static <
@@ -185,6 +205,36 @@ public class TextualObjects {
             }
         }
     }
+
+    /**
+     * @since 5.3
+     */
+    public static <
+        T1 extends OwnedText<T1>, D1 extends OwnedText<D1>, TO1 extends TextualObject<T1, D1, TO1>,
+        T2 extends OwnedText<T2>, D2 extends OwnedText<D2>, TO2 extends TextualObject<T2, D2, TO2>,
+        FROM extends TextualObject<T1, D1, TO1>,
+        TO extends TextualObject<T2, D2, TO2>
+        > void copyAndRemove(
+        FROM from,
+        TO to,
+        OwnerType owner) {
+        copy(from, to);
+        if (from.getTitles() != null) {
+            to.getTitles()
+                .removeIf(t ->
+                (owner == null || t.getOwner().equals(owner))
+                    && (! from.getTitles().contains(t))
+            );
+        }
+        if (from.getDescriptions() != null) {
+            to.getDescriptions()
+                .removeIf(d ->
+                    (owner == null || d.getOwner().equals(owner))
+                        && (!from.getDescriptions().contains(d))
+                );
+        }
+    }
+
 
     /**
      * @since 5.3

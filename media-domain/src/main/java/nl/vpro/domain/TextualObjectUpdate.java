@@ -48,12 +48,12 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         if (getTitles() == null) {
             setTitles(new TreeSet<T>());
         }
-        getTitles().add(title);
+        TextualObjects.addOrUpdate(getTitles(), title);
         return self();
     }
 
     default boolean removeTitle(T title) {
-        return getTitles() != null && getTitles().remove(title);
+        return hasTitles() && getTitles().remove(title);
     }
 
     default TO self() {
@@ -152,12 +152,12 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         if (getDescriptions() == null) {
             setDescriptions(new TreeSet<D>());
         }
-        getDescriptions().add(description);
+        TextualObjects.addOrUpdate(getDescriptions(), description);
         return self();
     }
 
     default boolean removeDescription(D description) {
-        return getDescriptions().remove(description);
+        return hasDescriptions() && getDescriptions().remove(description);
     }
 
 
