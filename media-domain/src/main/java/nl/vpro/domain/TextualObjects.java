@@ -219,19 +219,18 @@ public class TextualObjects {
         TO to,
         OwnerType owner) {
         copy(from, to);
-        if (from.getTitles() != null) {
-            to.getTitles()
-                .removeIf(t ->
+        removeIf(from.getTitles(), to.getTitles(), owner);
+        removeIf(from.getDescriptions(), to.getDescriptions(), owner);
+    }
+
+    /**
+     * @since 5.3
+     */
+    public static <TO extends OwnedText<TO>, TO2 extends OwnedText<TO2>> void removeIf(Collection<TO> from, Collection<TO2> to, OwnerType owner) {
+        if (from != null) {
+            to.removeIf(t ->
                 (owner == null || t.getOwner().equals(owner))
-                    && (! from.getTitles().contains(t))
-            );
-        }
-        if (from.getDescriptions() != null) {
-            to.getDescriptions()
-                .removeIf(d ->
-                    (owner == null || d.getOwner().equals(owner))
-                        && (!from.getDescriptions().contains(d))
-                );
+                    && (!from.contains(t)));
         }
     }
 
