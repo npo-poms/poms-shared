@@ -90,7 +90,6 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity,
                         if (!Objects.equals(ownedTextEntity.value, value)) {
                             return false;
                         }
-                        return false;
                     }
                 }
                 return Objects.equals(ownedTextEntity.owner, owner) && Objects.equals(ownedTextEntity.type, type);
