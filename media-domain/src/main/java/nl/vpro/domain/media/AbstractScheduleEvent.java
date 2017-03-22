@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -176,7 +177,9 @@ public abstract class AbstractScheduleEvent {
     @XmlJavaTypeAdapter(DateToDuration.class)
     @Temporal(TemporalType.TIME)
     @XmlElement
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class, include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerDate.class)
     public Date getOffset() {
         return offset;
@@ -188,7 +191,8 @@ public abstract class AbstractScheduleEvent {
 
     @XmlJavaTypeAdapter(DateToDuration.class)
     @XmlElement
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class, include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerDate.class)
     public Date getDuration() {
         return duration;
@@ -215,7 +219,8 @@ public abstract class AbstractScheduleEvent {
     }
 
     @XmlAttribute
-    @JsonSerialize(using = NetToString.class, include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonSerialize(using = NetToString.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Net getNet() {
         return net;
     }

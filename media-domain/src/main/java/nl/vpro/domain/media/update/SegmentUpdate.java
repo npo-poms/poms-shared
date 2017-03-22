@@ -14,6 +14,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.SegmentType;
+import nl.vpro.util.TimeUtils;
 import nl.vpro.xml.bind.DateToDuration;
 
 @XmlRootElement(name = "segment")
@@ -74,7 +75,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
     }
 
     public void setStart(Date start) {
-        getBuilder().start(start);
+        getBuilder().start(TimeUtils.durationOf(start).orElse(null));
     }
     @XmlAttribute
     public void setMidRef(String string) {

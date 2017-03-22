@@ -4,9 +4,6 @@
  */
 package nl.vpro.domain.media;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 /**
  * @author Roelof Jan Koekoek
  * @since 1.7
@@ -37,13 +34,12 @@ public class ScheduleEvents {
     }
 
     public static String userFriendlyToString(Iterable<ScheduleEvent> scheduleEvents) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
         StringBuilder builder = new StringBuilder();
         for (ScheduleEvent event : scheduleEvents) {
             if (builder.length() > 0) {
                 builder.append("; ");
             }
-            builder.append(event.getChannel()).append(", ").append(df.format(event.getStart()));
+            builder.append(event.getChannel()).append(", ").append(event.getStartInstant().toString());
 
         }
         return builder.toString();

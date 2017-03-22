@@ -3,7 +3,7 @@ package nl.vpro.domain.media.update;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.Date;
+import java.time.Duration;
 
 import javax.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
@@ -15,10 +15,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Program;
-import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
@@ -84,7 +84,12 @@ public class MediaUpdateListTest {
             .  broadcasters("VPRO")
             .  mid("POMS_1234")
             .segments(
-                MediaBuilder.segment().broadcasters(new Broadcaster("VPRO")).avType(AVType.VIDEO).titles(new Title("segmenttitel", OwnerType.BROADCASTER, TextualType.MAIN)).start(new Date(0)).build()
+                MediaBuilder.segment()
+                    .broadcasters("VPRO")
+                    .avType(AVType.VIDEO)
+                    .titles(new Title("segmenttitel", OwnerType.BROADCASTER, TextualType.MAIN))
+                    .start(Duration.ZERO)
+                    .build()
             ).build();
 
         assertThat(program.getMid()).isEqualTo("POMS_1234");
