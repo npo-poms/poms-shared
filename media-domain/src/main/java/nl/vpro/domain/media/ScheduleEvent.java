@@ -726,11 +726,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     public ScheduleEvent addTitle(String title, OwnerType owner, TextualType type) {
+        return addTitle(new ScheduleEventTitle(title, owner, type));
+    }
 
-        ScheduleEventTitle set = new ScheduleEventTitle(title, owner, type);
-        set.setParent(this);
-        titles.add(set);
-        return self();
+    @Override
+    public ScheduleEvent addTitle(ScheduleEventTitle title) {
+        title.setParent(this);
+        return TextualObject.super.addTitle(title);
     }
 
     @Override
@@ -745,10 +747,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     public ScheduleEvent addDescription(String description, OwnerType owner, TextualType type) {
-        ScheduleEventDescription sed = new ScheduleEventDescription(description, owner, type);
-        sed.setParent(this);
-        descriptions.add(sed);
-        return self();
+        return addDescription(new ScheduleEventDescription(description, owner, type));
+    }
+
+
+    @Override
+    public ScheduleEvent addDescription(ScheduleEventDescription description) {
+        description.setParent(this);
+        return TextualObject.super.addDescription(description);
     }
 
     /**
