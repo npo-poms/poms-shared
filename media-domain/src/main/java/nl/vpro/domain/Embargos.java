@@ -3,6 +3,7 @@ package nl.vpro.domain;
 import java.time.Instant;
 
 /**
+ * Utilities related to {@link Embargo}
  * @author Michiel Meeuwissen
  * @since 5.3
  */

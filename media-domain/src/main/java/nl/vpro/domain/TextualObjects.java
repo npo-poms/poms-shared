@@ -9,6 +9,8 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.util.ResortedSortedSet;
 
 /**
+ * Utilities related to {@link TextualObject}s
+ * 
  * @author Michiel Meeuwissen
  * @since 5.1
  */
