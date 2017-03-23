@@ -17,7 +17,7 @@ import nl.vpro.validation.NoHtml;
 @ToString
 @Access(AccessType.FIELD)
 @EqualsAndHashCode(exclude = {"id"})
-public class TextTranslation<P>  implements Supplier<String> {
+public class TextTranslation implements Supplier<String> {
 
     @Column(nullable = false)
     @NoHtml

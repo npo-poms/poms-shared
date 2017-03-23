@@ -10,5 +10,5 @@ import javax.persistence.Entity;
  */
 @Entity
 @ToString(callSuper = true)
-public class TwitterRefTranslation extends TextTranslation<MediaObjectTranslation> {
+public class TwitterRefTranslation extends TextTranslation {
 }
