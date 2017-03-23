@@ -1,7 +1,5 @@
 package nl.vpro.domain.i18n;
 
-import lombok.ToString;
-
 import javax.persistence.Entity;
 
 import nl.vpro.domain.AbstractOwnedTextEntity;
