@@ -22,29 +22,24 @@ public class Embargos {
         }
     }
 
-    public static Embargo readyOnly(final Instant start, final Instant stop) {
-        return new Embargo() {
+    public static ReadonlyEmbargo readyOnly(final Embargo embargo) {
+        return readyOnly(
+            embargo.getPublishStartInstant(), 
+            embargo.getPublishStopInstant()
+        );
+    }
+
+    public static ReadonlyEmbargo readyOnly(final Instant start, final Instant stop) {
+        return new ReadonlyEmbargo() {
             @Override
             public Instant getPublishStartInstant() {
                 return start;
 
             }
-
-            @Override
-            public Embargo setPublishStartInstant(Instant publishStart) {
-                throw new UnsupportedOperationException();
-
-            }
-
             @Override
             public Instant getPublishStopInstant() {
                 return stop;
 
-            }
-
-            @Override
-            public Embargo setPublishStopInstant(Instant publishStop) {
-                throw new UnsupportedOperationException();
             }
         };
     }

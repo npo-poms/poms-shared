@@ -12,7 +12,8 @@ import nl.vpro.domain.media.UpdatableIdentifiable;
  */
 @Entity
 @ToString(callSuper = true)
-public class WebsiteTranslation extends TextTranslation<MediaObjectTranslation> implements UpdatableIdentifiable<Long, WebsiteTranslation> {
+public class WebsiteTranslation extends TextTranslation 
+    implements UpdatableIdentifiable<Long, WebsiteTranslation> {
 
 
     public WebsiteTranslation(String value) {

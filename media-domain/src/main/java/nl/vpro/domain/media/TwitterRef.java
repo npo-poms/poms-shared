@@ -23,7 +23,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class TwitterRef implements Serializable, Supplier<String> {
 
     public enum Type {
-        ACCOUNT, HASHTAG
+        ACCOUNT, 
+        HASHTAG
     }
 
     @Id
