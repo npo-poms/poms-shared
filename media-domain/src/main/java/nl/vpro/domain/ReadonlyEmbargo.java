@@ -3,13 +3,14 @@ package nl.vpro.domain;
 import java.time.Instant;
 
 /**
+ *  An object having or defining a publication embargo, meaning that it has publish start and stop instants.
  * @author Michiel Meeuwissen
  * @since 5.3
  */
 public interface ReadonlyEmbargo {
 
     Instant getPublishStartInstant();
-    
+
     Instant getPublishStopInstant();
 
     default boolean isUnderEmbargo(Instant now) {
