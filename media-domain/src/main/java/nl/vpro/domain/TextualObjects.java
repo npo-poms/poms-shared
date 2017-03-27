@@ -10,7 +10,7 @@ import nl.vpro.util.ResortedSortedSet;
 
 /**
  * Utilities related to {@link TextualObject}s
- * 
+ *
  * @author Michiel Meeuwissen
  * @since 5.1
  */
@@ -203,7 +203,7 @@ public class TextualObjects {
         }
         if (from.getDescriptions() != null) {
             for (D1 description : from.getDescriptions()) {
-                to.addTitle(description.get(), description.getOwner(), description.getType());
+                to.addDescription(description.get(), description.getOwner(), description.getType());
             }
         }
     }
