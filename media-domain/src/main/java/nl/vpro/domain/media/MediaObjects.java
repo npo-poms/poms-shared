@@ -521,7 +521,7 @@ public class MediaObjects {
         return prediction;
     }
 
-    public static Prediction updatePrediction(MediaObject media, Platform platform, Embargo embargo) {
+    public static Prediction updatePrediction(MediaObject media, Platform platform, ReadonlyEmbargo embargo) {
         Prediction prediction = media.findOrCreatePrediction(platform);
         Embargos.copy(embargo, prediction);
         return prediction;

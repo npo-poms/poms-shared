@@ -9,12 +9,12 @@ import java.time.Instant;
  */
 public class Embargos {
 
-    public static void copy(Embargo from, Embargo to) {
+    public static void copy(ReadonlyEmbargo from, Embargo to) {
         to.setPublishStartInstant(from.getPublishStartInstant());
         to.setPublishStopInstant(from.getPublishStopInstant());
     }
 
-    public static void copyIfTargetUnset(Embargo from, Embargo to) {
+    public static void copyIfTargetUnset(ReadonlyEmbargo from, Embargo to) {
         if (to.getPublishStartInstant() == null) {
             to.setPublishStartInstant(from.getPublishStartInstant());
         }
@@ -25,7 +25,7 @@ public class Embargos {
 
     public static ReadonlyEmbargo readyOnly(final Embargo embargo) {
         return readyOnly(
-            embargo.getPublishStartInstant(), 
+            embargo.getPublishStartInstant(),
             embargo.getPublishStopInstant()
         );
     }
