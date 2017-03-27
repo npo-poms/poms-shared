@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.7
  */
-public class ScheduleEventTest extends ObjectTest<ScheduleEvent> { // TODO doesn't properly implement ComparableTest<ScheduleEvent> {
+public class ScheduleEventTheoryTest extends ObjectTest<ScheduleEvent> { // TODO doesn't properly implement ComparableTest<ScheduleEvent> {
 
     @DataPoint
     public static ScheduleEvent nullEvent = null;
@@ -34,7 +34,7 @@ public class ScheduleEventTest extends ObjectTest<ScheduleEvent> { // TODO doesn
     public static ScheduleEvent nullChannel = new ScheduleEvent(null, Instant.ofEpochMilli(100), Duration.ofMillis(1000));
 
     @DataPoint
-    public static ScheduleEvent withNet = new ScheduleEvent(Channel.NED3, new Net("ZAP", "Zappnet"), 
+    public static ScheduleEvent withNet = new ScheduleEvent(Channel.NED3, new Net("ZAP", "Zappnet"),
         Instant.ofEpochMilli(100), Duration.ofMillis(1000));
 
     @DataPoint
@@ -60,6 +60,5 @@ public class ScheduleEventTest extends ObjectTest<ScheduleEvent> { // TODO doesn
         //noinspection deprecation
         assertThat(target.getGuideDay().toString()).isEqualTo("Thu Jan 01 00:00:00 CET 1970");
         assertThat(target.getGuideDate().toString()).isEqualTo("1970-01-01");
-
     }
 }
