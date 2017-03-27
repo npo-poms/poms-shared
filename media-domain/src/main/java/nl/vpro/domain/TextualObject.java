@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import java.util.function.Supplier;
+
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
