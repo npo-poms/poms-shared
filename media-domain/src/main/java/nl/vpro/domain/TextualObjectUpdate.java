@@ -3,6 +3,7 @@ package nl.vpro.domain;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.Supplier;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
@@ -34,6 +35,17 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         }
         addTitle(title, type);
     }
+
+    /**
+     * Updates a title with a {@link Supplier}, if at least the given supplier is not null.
+     */
+    default TO setTitle(Supplier<String> up, TextualType type) {
+        if (up != null) {
+            setTitle(up.get(), type);
+        }
+        return self();
+    }
+
 
     SortedSet<T> getTitles();
 
@@ -137,6 +149,16 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
             }
         }
         addDescription(description, type);
+    }
+
+    /**
+     * Updates a description with a {@link Supplier}, if at least the given supplier is not null.
+     */
+    default TO setDescription(Supplier<String> up, TextualType type) {
+        if (up != null) {
+            setDescription(up.get(), type);
+        }
+        return self();
     }
 
 
