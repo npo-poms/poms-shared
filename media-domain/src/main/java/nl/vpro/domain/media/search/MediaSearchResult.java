@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.domain.media.MediaObject;
 
 @XmlType(name = "mediaSearchResultType")
-public class MediaSearchResult extends SearchResult<MediaObject> {
+public class MediaSearchResult extends AbstractSearchResult<MediaObject> {
 
     public MediaSearchResult() {
         super();

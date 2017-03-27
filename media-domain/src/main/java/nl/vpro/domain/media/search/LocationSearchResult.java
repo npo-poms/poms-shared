@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.domain.media.Location;
 
 @XmlType(name = "locationSearchResultType")
-public class LocationSearchResult extends SearchResult<Location> {
+public class LocationSearchResult extends AbstractSearchResult<Location> {
 
     public LocationSearchResult() {
         super();
