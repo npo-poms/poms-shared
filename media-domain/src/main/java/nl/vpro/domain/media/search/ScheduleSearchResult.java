@@ -11,13 +11,13 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.domain.media.Schedule;
 
 @XmlType(name = "scheduleSearchResultType", propOrder = {})
-public class ScheduleSearchResult extends SearchResult<Schedule> {
+public class ScheduleSearchResult extends AbstractSearchResult<Schedule> {
 
     public ScheduleSearchResult() {
         super();
     }
 
-    public ScheduleSearchResult(final Integer count, final List<ScoredResult<Schedule>> result) {
+    public ScheduleSearchResult(final Integer count, final List<Schedule> result) {
         super(count, result);
     }
 }

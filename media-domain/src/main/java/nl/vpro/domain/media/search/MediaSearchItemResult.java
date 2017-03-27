@@ -9,13 +9,13 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name = "mediaSearchResultItemType")
-public class MediaSearchItemResult extends SearchResult<MediaListItem> {
+public class MediaSearchItemResult extends AbstractScoredSearchResult<MediaListItem> {
 
     public MediaSearchItemResult() {
         super();
     }
 
-    public MediaSearchItemResult(final Integer count, final List<MediaListItem> result) {
+    public MediaSearchItemResult(final Integer count, final List<ScoredResult<MediaListItem>> result) {
         super(count, result);
     }
 }
