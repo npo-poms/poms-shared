@@ -64,6 +64,6 @@ public abstract class SearchResult<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return result.iterator();
+        return getResult().iterator();
     }
 }

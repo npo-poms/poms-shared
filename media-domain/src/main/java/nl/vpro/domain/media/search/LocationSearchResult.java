@@ -9,7 +9,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.media.Location;
-import nl.vpro.domain.Xmlns;
 
 @XmlType(name = "locationSearchResultType")
 public class LocationSearchResult extends SearchResult<Location> {

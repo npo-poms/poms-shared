@@ -9,7 +9,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.Xmlns;
 
 @XmlType(name = "scheduleSearchResultType", propOrder = {})
 public class ScheduleSearchResult extends SearchResult<Schedule> {
@@ -18,7 +17,7 @@ public class ScheduleSearchResult extends SearchResult<Schedule> {
         super();
     }
 
-    public ScheduleSearchResult(final Integer count, final List<Schedule> result) {
+    public ScheduleSearchResult(final Integer count, final List<ScoredResult<Schedule>> result) {
         super(count, result);
     }
 }
