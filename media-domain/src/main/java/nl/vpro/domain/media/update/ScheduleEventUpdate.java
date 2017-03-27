@@ -200,10 +200,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     public void setDescriptions(DescriptionUpdate... descriptions) {
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
-
-    public void setMainDescription(String description) {
-        setDescription(description, TextualType.MAIN);
-    }
+    
 
     @Override
     public ScheduleEventUpdate addDescription(String description, TextualType type) {

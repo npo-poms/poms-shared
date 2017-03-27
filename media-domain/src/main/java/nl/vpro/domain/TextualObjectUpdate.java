@@ -1,5 +1,6 @@
 package nl.vpro.domain;
 
+import javax.validation.constraints.NotNull;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -9,7 +10,12 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
 
 /**
- * An object that has titles and descriptions, which are typed, but not necessary owned (unlike {@link TextualObject}). This means that the object generally is used to update 'TextualObjects', since the user updating is associated with only one {@link nl.vpro.domain.media.support.OwnerType}.
+ * An object that has titles and descriptions, which are typed, but not necessary owned (unlike {@link TextualObject}). 
+ * This means that the object generally is used to update 'TextualObjects', since the user updating is associated with only one {@link nl.vpro.domain.media.support.OwnerType}.
+ * 
+ * @param <T> The type of 'titles' in this object.
+ * @param <D> The type of 'descriptions'.
+ * @param <TO> The type of {@link #self()} which is returned by several setters, so they can easily be chained
  * @author Michiel Meeuwissen
  * @since 5.3
  */
@@ -22,9 +28,9 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return Locales.DUTCH;
     }
 
-    TO addTitle(String title, TextualType type);
+    TO addTitle(String title, @NotNull TextualType type);
 
-    default void setTitle(String title, TextualType type) {
+    default void setTitle(String title, @NotNull TextualType type) {
         if (getTitles() != null) {
             for (T t : getTitles()) {
                 if (t.getType() == type) {
@@ -39,7 +45,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * Updates a title with a {@link Supplier}, if at least the given supplier is not null.
      */
-    default TO setTitle(Supplier<String> up, TextualType type) {
+    default TO setTitle(Supplier<String> up, @NotNull TextualType type) {
         if (up != null) {
             setTitle(up.get(), type);
         }
@@ -77,7 +83,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
-    default T findTitle(TextualType type) {
+    default T findTitle(@NotNull TextualType type) {
         if (hasTitles()) {
             for (T title : getTitles()) {
                 if (type == title.getType()) {
@@ -139,7 +145,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
-    default void setDescription(String description, TextualType type) {
+    default void setDescription(String description, @NotNull TextualType type) {
         if (getDescriptions() != null) {
             for (D t : getDescriptions()) {
                 if (t.getType() == type) {
@@ -154,7 +160,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * Updates a description with a {@link Supplier}, if at least the given supplier is not null.
      */
-    default TO setDescription(Supplier<String> up, TextualType type) {
+    default TO setDescription(Supplier<String> up, @NotNull TextualType type) {
         if (up != null) {
             setDescription(up.get(), type);
         }
@@ -162,7 +168,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
-    TO addDescription(String description, TextualType type);
+    TO addDescription(String description, @NotNull TextualType type);
 
 
     SortedSet<D> getDescriptions();
@@ -192,7 +198,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
 
 
-    default D findDescription(TextualType type) {
+    default D findDescription(@NotNull TextualType type) {
         if (hasDescriptions()) {
             for (D description : getDescriptions()) {
                 if (type == description.getType()) {
