@@ -66,9 +66,7 @@ public class Repeat implements Serializable {
         Repeat repeat = (Repeat) o;
 
         if (isRerun != repeat.isRerun) return false;
-        if (value != null ? !value.equals(repeat.value) : repeat.value != null) return false;
-
-        return true;
+        return value != null ? value.equals(repeat.value) : repeat.value == null;
     }
 
     @Override

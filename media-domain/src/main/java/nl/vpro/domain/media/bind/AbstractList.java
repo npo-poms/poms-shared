@@ -36,8 +36,8 @@ public class AbstractList {
 
     public static abstract class Deserializer<T> extends JsonDeserializer<Iterable<T>> {
 
-        @Override
-        public Iterable<T> deserialize (JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        @Override 
+        public Iterable<T> deserialize (JsonParser jp, DeserializationContext ctxt) throws IOException {
             List<T> answer = new ArrayList<>();
 
             // See https://github.com/helun/Ektorp/pull/184

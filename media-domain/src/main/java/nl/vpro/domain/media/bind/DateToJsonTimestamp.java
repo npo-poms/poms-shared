@@ -32,7 +32,7 @@ public class DateToJsonTimestamp {
 
     public static class Deserializer extends JsonDeserializer<Date> {
         @Override
-        public Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        public Date deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
             return new Date(jp.getLongValue());
         }
     }

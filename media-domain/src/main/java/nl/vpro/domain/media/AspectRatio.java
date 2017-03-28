@@ -28,7 +28,7 @@ public enum AspectRatio {
     private final int w;
     private final int h;
 
-    private AspectRatio(int w, int h) {
+    AspectRatio(int w, int h) {
         int gcd = gcd(w, h);
         this.w = w / gcd;
         this.h = h / gcd;

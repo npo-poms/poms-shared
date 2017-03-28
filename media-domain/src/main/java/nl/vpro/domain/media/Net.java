@@ -58,9 +58,7 @@ public class Net implements Displayable, Serializable {
 
         Net net = (Net) o;
 
-        if (!id.equals(net.id)) return false;
-
-        return true;
+        return id.equals(net.id);
     }
 
     @Override
