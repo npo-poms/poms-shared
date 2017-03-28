@@ -37,7 +37,7 @@ public class DurationToJsonTimestamp {
 
     public static class Deserializer extends JsonDeserializer<Duration> {
         @Override
-        public Duration deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        public Duration deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
             return Duration.ofMillis(jp.getLongValue());
         }
     }

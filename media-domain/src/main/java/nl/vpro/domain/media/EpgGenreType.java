@@ -80,7 +80,7 @@ public enum EpgGenreType implements Displayable {
     private final SortedSet<MisGenreType> legacyGenreAsSortedSet;
 
 
-    private EpgGenreType(String genreName, MisGenreType... legacy) {
+    EpgGenreType(String genreName, MisGenreType... legacy) {
         this.genreName = genreName;
         this.legacyGenre = Arrays.asList(legacy);
         this.legacyGenreAsSortedSet = new TreeSet<>(this.legacyGenre);

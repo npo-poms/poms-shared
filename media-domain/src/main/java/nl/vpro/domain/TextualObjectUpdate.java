@@ -1,6 +1,7 @@
 package nl.vpro.domain;
 
-import javax.validation.constraints.NotNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -28,9 +29,9 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return Locales.DUTCH;
     }
 
-    TO addTitle(String title, @NotNull TextualType type);
+    TO addTitle(String title, @Nonnull TextualType type);
 
-    default void setTitle(String title, @NotNull TextualType type) {
+    default void setTitle(String title, @Nonnull TextualType type) {
         if (getTitles() != null) {
             for (T t : getTitles()) {
                 if (t.getType() == type) {
@@ -45,7 +46,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * Updates a title with a {@link Supplier}, if at least the given supplier is not null.
      */
-    default TO setTitle(Supplier<String> up, @NotNull TextualType type) {
+    default TO setTitle(@Nullable Supplier<String> up, @Nonnull TextualType type) {
         if (up != null) {
             setTitle(up.get(), type);
         }
@@ -68,7 +69,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
     default TO addTitle(T title) {
         if (getTitles() == null) {
-            setTitles(new TreeSet<T>());
+            setTitles(new TreeSet<>());
         }
         TextualObjects.addOrUpdate(getTitles(), title);
         return self();
@@ -83,7 +84,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
-    default T findTitle(@NotNull TextualType type) {
+    default T findTitle(@Nonnull TextualType type) {
         if (hasTitles()) {
             for (T title : getTitles()) {
                 if (type == title.getType()) {
@@ -145,7 +146,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
-    default void setDescription(String description, @NotNull TextualType type) {
+    default void setDescription(String description, @Nonnull TextualType type) {
         if (getDescriptions() != null) {
             for (D t : getDescriptions()) {
                 if (t.getType() == type) {
@@ -160,7 +161,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * Updates a description with a {@link Supplier}, if at least the given supplier is not null.
      */
-    default TO setDescription(Supplier<String> up, @NotNull TextualType type) {
+    default TO setDescription(@Nullable  Supplier<String> up, @Nonnull TextualType type) {
         if (up != null) {
             setDescription(up.get(), type);
         }
@@ -168,7 +169,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
-    TO addDescription(String description, @NotNull TextualType type);
+    TO addDescription(String description, @Nonnull TextualType type);
 
 
     SortedSet<D> getDescriptions();
@@ -186,7 +187,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
     default TO addDescription(D description) {
         if (getDescriptions() == null) {
-            setDescriptions(new TreeSet<D>());
+            setDescriptions(new TreeSet<>());
         }
         TextualObjects.addOrUpdate(getDescriptions(), description);
         return self();
@@ -198,7 +199,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
 
 
-    default D findDescription(@NotNull TextualType type) {
+    default D findDescription(@Nonnull TextualType type) {
         if (hasDescriptions()) {
             for (D description : getDescriptions()) {
                 if (type == description.getType()) {
