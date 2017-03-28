@@ -235,6 +235,10 @@ public class MediaForm {
             this.broadcasters.add(broadcaster);
             return this;
         }
+
+        public Builder quotedText(String text) {
+            return text('"' + text + '"');
+        }
     }
 
     public MediaPager getPager() {
