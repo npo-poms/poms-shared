@@ -18,7 +18,7 @@ import nl.vpro.validation.StringList;
 @XmlType(name = "midAndTypeType")
 public class MidAndType implements Serializable {
 
-    private static final long serialVersionUID = 0l;
+    private static final long serialVersionUID = 0L;
 
     @XmlAttribute
     private String mid;

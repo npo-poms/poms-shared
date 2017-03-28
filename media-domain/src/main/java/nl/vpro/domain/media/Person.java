@@ -3,8 +3,10 @@ package nl.vpro.domain.media;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -30,7 +32,7 @@ public class Person extends DomainObject {
         return copy(source, source.mediaObject);
     }
 
-    public static Person copy(Person source, MediaObject parent) {
+    public static Person copy(Person source,  MediaObject parent) {
         if (source == null) {
             return null;
         }

@@ -15,10 +15,10 @@ public abstract class AbstractTextualObjectUpdate<T extends TypedText, D extends
 
     @Getter
     @Setter
-    private SortedSet<T> titles = new TreeSet<T>();
+    private SortedSet<T> titles = new TreeSet<>();
 
 
     @Getter
     @Setter
-    private SortedSet<D> descriptions = new TreeSet<D>();
+    private SortedSet<D> descriptions = new TreeSet<>();
 }
