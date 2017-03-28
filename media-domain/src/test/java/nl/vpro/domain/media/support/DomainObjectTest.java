@@ -19,15 +19,15 @@ public class DomainObjectTest {
 
     @Test
     public void testEqualsWithIdenticalIDs() {
-        Program program = new Program(123l);
-        Program program2 = new Program(123l);
+        Program program = new Program(123L);
+        Program program2 = new Program(123L);
         assertThat(program).isEqualTo(program2);
     }
 
     @Test
     public void testEqualsWithNoIdenticalIDs() {
-        Program program = new Program(123l);
-        Program program2 = new Program(124l);
+        Program program = new Program(123L);
+        Program program2 = new Program(124L);
         assertThat(program).isNotEqualTo(program2);
     }
 

@@ -13,7 +13,7 @@ public class TitleTest {
 
     @Test
     public void testCompareTo() {
-        SortedSet<Title> set = new TreeSet<Title>();
+        SortedSet<Title> set = new TreeSet<>();
         set.add(new Title("1", OwnerType.MIS, TextualType.MAIN));
         set.add(new Title("2", OwnerType.MIS, TextualType.EPISODE));
         set.add(new Title("3", OwnerType.MIS, TextualType.ORIGINAL));

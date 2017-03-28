@@ -86,7 +86,7 @@ public class TextualObjects {
         if (titles instanceof List) {
             list = (List<OT>) titles;
         } else {
-            list = new ArrayList<OT>();
+            list = new ArrayList<>();
             list.addAll(titles);
         }
         list.sort(comparator);
@@ -155,7 +155,7 @@ public class TextualObjects {
             //noinspection unchecked
             return (SortedSet) set;
         } else {
-            return new ResortedSortedSet<S>(set);
+            return new ResortedSortedSet<>(set);
         }
     }
 

@@ -10,9 +10,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MemberRefTest extends ComparableTest<MemberRef> {
 
-    private static Program member = new Program(1l);
+    private static Program member = new Program(1L);
 
-    private static Group owner = new Group(2l);
+    private static Group owner = new Group(2L);
 
     @DataPoint
     public static MemberRef nullArgument = null;
@@ -39,10 +39,10 @@ public class MemberRefTest extends ComparableTest<MemberRef> {
     public static MemberRef duplicateWithHigherPosition = new MemberRef(member, owner, 2);
 
     @DataPoint
-    public static MemberRef duplicateWithId10 = new MemberRef(10l, member, owner, 1);
+    public static MemberRef duplicateWithId10 = new MemberRef(10L, member, owner, 1);
 
     @DataPoint
-    public static MemberRef duplicateWithId20 = new MemberRef(20l, member, owner, 1);
+    public static MemberRef duplicateWithId20 = new MemberRef(20L, member, owner, 1);
 
     @Test
     public void testEqualsOnDuplicates() throws Exception {

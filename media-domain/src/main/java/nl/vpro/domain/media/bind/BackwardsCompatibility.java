@@ -29,12 +29,7 @@ public class BackwardsCompatibility {
     private final static Logger LOG = LoggerFactory.getLogger(BackwardsCompatibility.class);
 
 
-    private static final ThreadLocal<Boolean> v1Compatibility = new ThreadLocal<Boolean>() {
-        @Override
-        protected Boolean initialValue() {
-            return false;
-        }
-    };
+    private static final ThreadLocal<Boolean> v1Compatibility = ThreadLocal.withInitial(() -> false);
 
     public static void setV1Compatibility(boolean compatibility) {
         v1Compatibility.set(compatibility);

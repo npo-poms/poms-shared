@@ -88,9 +88,9 @@ public class MediaDomainTestHelper extends ValidationTestHelper {
     }
 
     public static List<String> getErrorMessagesFromConstraintViolations(Collection constraintViolations) {
-        List<String> messages = new ArrayList<String>();
-        for(Iterator it = constraintViolations.iterator(); it.hasNext(); ) {
-            ConstraintViolation violation = (ConstraintViolation)it.next();
+        List<String> messages = new ArrayList<>();
+        for (Object constraintViolation : constraintViolations) {
+            ConstraintViolation violation = (ConstraintViolation) constraintViolation;
             messages.add(violation.getMessage());
         }
         return messages;

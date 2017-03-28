@@ -85,7 +85,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         if (parts.length == 4) {
             try {
                 parts[3] = URLEncoder.encode(parts[3], "UTF-8");
-            } catch (UnsupportedEncodingException e) {
+            } catch (UnsupportedEncodingException ignored) {
 
             }
         }
@@ -703,7 +703,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
             if(loc1.getProgramUrl().equals(loc2.getProgramUrl())) {
                 return loc1.getId() != null && loc2.getId() != null ? loc1.getId().compareTo(loc2.getId()) :
-                    loc1.getId() == loc2.getId() ? 0 :
+                    Objects.equals(loc1.getId(), loc2.getId()) ? 0 :
                         loc1.getId() == null ? -1 : 1;
             }
 

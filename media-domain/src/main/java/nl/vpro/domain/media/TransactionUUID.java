@@ -24,12 +24,7 @@ public class TransactionUUID {
         }
     }
 
-    private static ThreadLocal<UUID> threadLocal = new ThreadLocal<UUID>() {
-        @Override
-        public UUID initialValue() {
-            return UUID.randomUUID();
-        }
-    };
+    private static ThreadLocal<UUID> threadLocal = ThreadLocal.withInitial(() -> UUID.randomUUID());
 
     public static UUID get() {
         UUID uuid = threadLocal.get();

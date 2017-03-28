@@ -92,7 +92,7 @@ public class AVAttributes implements Serializable {
             to.setAudioAttributes(AudioAttributes.update(from.getAudioAttributes(), to.getAudioAttributes()));
             to.setVideoAttributes(VideoAttributes.update(from.getVideoAttributes(), to.getVideoAttributes()));
 
-        } else if(from == null) {
+        } else {
             to = null;
         }
 
