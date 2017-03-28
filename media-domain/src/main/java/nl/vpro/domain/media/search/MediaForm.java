@@ -235,6 +235,12 @@ public class MediaForm {
             this.broadcasters.add(broadcaster);
             return this;
         }
+
+        public Builder sortOrder(MediaSortField field) {
+            MediaPager p = new MediaPager();
+            p.setSort(field);
+            return pager(p);
+        }
     }
 
     public MediaPager getPager() {
