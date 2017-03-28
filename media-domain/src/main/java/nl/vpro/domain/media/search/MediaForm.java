@@ -239,6 +239,12 @@ public class MediaForm {
         public Builder quotedText(String text) {
             return text('"' + text + '"');
         }
+
+        public Builder sortOrder(MediaSortField field) {
+            MediaPager p = new MediaPager();
+            p.setSort(field);
+            return pager(p);
+        }
     }
 
     public MediaPager getPager() {
