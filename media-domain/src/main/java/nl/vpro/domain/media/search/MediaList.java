@@ -42,7 +42,7 @@ public class MediaList<T> implements Iterable<T> {
     }
 
     public MediaList(final List<T> list) {
-        this.list = list == null ? Collections.<T>emptyList() : Collections.unmodifiableList(list);
+        this.list = list == null ? Collections.emptyList() : Collections.unmodifiableList(list);
         this.totalCount = this.list.size();
         this.offset = 0l;
         this.max = null;
@@ -51,7 +51,7 @@ public class MediaList<T> implements Iterable<T> {
     }
 
     public MediaList(long offset, Integer max, long totalCount, Pager.Direction direction, final List<T> list) {
-        this.list = list == null ? Collections.<T>emptyList() : Collections.unmodifiableList(list);
+        this.list = list == null ? Collections.emptyList() : Collections.unmodifiableList(list);
         this.totalCount = totalCount;
         this.offset = offset;
         this.max = max;
@@ -60,7 +60,7 @@ public class MediaList<T> implements Iterable<T> {
 
 
     public MediaList(MediaPager pager, long totalCount, final List<T> list) {
-        this.list = list == null ? Collections.<T>emptyList() : Collections.unmodifiableList(list);
+        this.list = list == null ? Collections.emptyList() : Collections.unmodifiableList(list);
         this.totalCount = totalCount;
         this.offset = pager.getOffset();
         this.max = pager.getMax();

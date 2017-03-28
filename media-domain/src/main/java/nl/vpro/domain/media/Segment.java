@@ -239,7 +239,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
 
     @Override
     public boolean hasAncestor(MediaObject ancestor) {
-        return super.hasAncestor(ancestor) || parent != null ? parent.hasAncestor(ancestor) : false;
+        return (super.hasAncestor(ancestor) || parent != null) && parent.hasAncestor(ancestor);
     }
 
     @Override
@@ -302,6 +302,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
         }
     }
 
+    @Override
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if(parent instanceof Program) {
             this.parent = (Program)parent;

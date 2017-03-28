@@ -103,11 +103,7 @@ public class TitleUpdate implements Comparable<TitleUpdate>, TypedText {
         if(media != null ? !media.equals(that.media) : that.media != null) {
             return false;
         }
-        if(type != that.type) {
-            return false;
-        }
-
-        return true;
+        return type == that.type;
     }
 
     @Override

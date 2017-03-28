@@ -211,11 +211,8 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
 
         Relation relation = (Relation)o;
 
-        if(id != null && id.equals(relation.getId())) {
-            return true;
-        }
+        return id != null && id.equals(relation.getId());
 
-        return false;
     }
 
     @Override

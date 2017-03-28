@@ -195,10 +195,7 @@ public class Person extends DomainObject {
         if(role != person.role) {
             return false;
         }
-        if(!Objects.equals(getGtaaUri(), person.getGtaaUri())) {
-            return false;
-        }
-        return true;
+        return Objects.equals(getGtaaUri(), person.getGtaaUri());
     }
 
     @Override
