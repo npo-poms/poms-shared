@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -16,6 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(
+    name ="searchResult",
     propOrder =
         {
             "count",
@@ -28,7 +28,7 @@ public abstract class AbstractSearchResult<T> implements SearchResult<T> {
     @Getter
     @Setter
     protected Integer count;
-    
+
     protected List<T> result;
 
     public AbstractSearchResult() {
@@ -48,11 +48,11 @@ public abstract class AbstractSearchResult<T> implements SearchResult<T> {
         this.result = Collections.unmodifiableList(l);
         this.count = l.size();
     }
-    
+
 
     @Override
     public String toString() {
         return "" + result;
     }
- 
+
 }
