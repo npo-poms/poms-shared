@@ -45,7 +45,13 @@ public class MediaListTest {
         program.addTitle("", OwnerType.BROADCASTER, TextualType.SUB);
 
 
-        MediaList<MediaListItem> xmlList = new MediaList<>(new MediaPager(1, 10, null, Pager.Direction.ASC), 1000, new MediaListItem(program));
+        MediaList<MediaListItem> xmlList = new MediaList<>(
+            MediaPager.builder()
+                .offset(1)
+                .max(10)
+                .sort(MediaSortField.creationDate)
+                .build()
+            , 1000, new MediaListItem(program));
 
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
