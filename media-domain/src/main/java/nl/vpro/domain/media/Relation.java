@@ -116,7 +116,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
             to.setUriRef(from.getUriRef());
             to.setText(from.getText());
 
-        } else if(from == null) {
+        } else {
             to = null;
         }
 

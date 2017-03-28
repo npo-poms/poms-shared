@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -30,9 +32,8 @@ import nl.vpro.validation.GenreValidation;
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 // TODO cache configuration can be put in a hibernate-config.xml. See https://docs.jboss.org/hibernate/orm/4.0/devguide/en-US/html/ch06.html
 @GenreValidation
+@Slf4j
 public class Genre implements Displayable, Comparable<Genre>, Serializable {
-
-    private final static Logger LOG = LoggerFactory.getLogger(Genre.class);
 
     @Id
     @Column(name = "termid", nullable = false, updatable = false)
@@ -210,7 +211,7 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
             try {
                 term = ClassificationServiceLocator.getInstance().getTerm(termId);
             } catch (TermNotFoundException iae) {
-                LOG.error("No such term " + termId);
+                log.error("No such term " + termId);
                 return result;
             }
             result.add(new TermWrapper(term));

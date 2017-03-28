@@ -2367,9 +2367,11 @@ public enum Channel {
             if(Character.isDigit(s.charAt(0))) {
                 s = "_" + s;
             }
-            while(s.length() < 4) {
-                s = s + "_";
+            StringBuilder sBuilder = new StringBuilder(s);
+            while(sBuilder.length() < 4) {
+                sBuilder.append("_");
             }
+            s = sBuilder.toString();
             result.add(Channel.valueOf(s));
         }
         return result;
