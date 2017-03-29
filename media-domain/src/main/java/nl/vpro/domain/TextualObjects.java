@@ -186,16 +186,15 @@ public class TextualObjects {
         }
     }
     /**
+     * Copies all titles and descriptions from one {@link TextualObject} to another.
      * @since 5.3
      */
     public static <
         T1 extends OwnedText, D1 extends OwnedText, TO1 extends TextualObject<T1, D1, TO1>,
-        T2 extends OwnedText,D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>,
-        FROM extends TextualObject<T1, D1, TO1>,
-        TO extends TextualObject<T2, D2, TO2>
+        T2 extends OwnedText,D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>
         > void copy(
-            FROM from,
-            TO to) {
+            TO1 from,
+            TO2 to) {
         if (from.getTitles() != null) {
             for (T1 title : from.getTitles()) {
                 to.addTitle(title.get(), title.getOwner(), title.getType());
@@ -209,41 +208,43 @@ public class TextualObjects {
     }
 
     /**
+     * Copies all titles and descriptions from one {@link TextualObjectUpdate} to a {@link TextualObject}.
+     * @param owner The owner of the fields in the destination
      * @since 5.3
      */
     public static <
         T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
-        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>,
-        FROM extends TextualObjectUpdate<T1, D1, TO1>,
-        TO extends TextualObject<T2, D2, TO2>
+        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>
         > void copy(
-        FROM from,
-        TO to,
-        OwnerType ownerType
+        TO1 from,
+        TO2 to,
+        OwnerType owner
     ) {
         if (from.getTitles() != null) {
             for (T1 title : from.getTitles()) {
-                to.addTitle(title.get(), ownerType, title.getType());
+                to.addTitle(title.get(), owner, title.getType());
             }
         }
         if (from.getDescriptions() != null) {
             for (D1 description : from.getDescriptions()) {
-                to.addDescription(description.get(), ownerType, description.getType());
+                to.addDescription(description.get(), owner, description.getType());
             }
         }
     }
 
     /**
+     * Copies all titles and descriptions from one {@link TextualObjectUpdate} to a {@link TextualObject}.
+     * Then, remove all titles and descriptions (of the given owner) which were not in the source object.
+     *
+     * @param owner The owner of the fields in the destination
      * @since 5.3
      */
     public static <
         T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
-        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>,
-        FROM extends TextualObjectUpdate<T1, D1, TO1>,
-        TO extends TextualObject<T2, D2, TO2>
+        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>
         > void copyAndRemove(
-        FROM from,
-        TO to,
+        TO1 from,
+        TO2 to,
         OwnerType owner) {
         copy(from, to, owner);
         removeIf(from.getTitles(), to.getTitles(), owner);
@@ -251,28 +252,42 @@ public class TextualObjects {
     }
 
     /**
+     * From a collection of {@link OwnedText}'s remove all all elements with certain owner, which are not in the source collection of {@link TypedText}'s.
+     * @param from The collection of texts which are to be retained in to
+     * @param to The collection to remove objects from
      * @since 5.3
      */
-    public static <TO extends TypedText, TO2 extends OwnedText> void removeIf(Collection<TO> from, Collection<TO2> to, OwnerType owner) {
+    public static <TO extends TypedText, TO2 extends OwnedText> void removeIf(
+        Collection<TO> from,
+        Collection<TO2> to,
+        OwnerType owner) {
         if (from != null) {
-            to.removeIf(t ->
-                (owner == null || t.getOwner().equals(owner))
-                    && (!from.contains(t)));
+            to.removeIf(t -> t.getOwner().equals(owner) && (!from.contains(t)));
+        }
+    }
+
+    /**
+     * @since 5.3
+     */
+    @SuppressWarnings("SuspiciousMethodCalls")
+    public static <TO extends TypedText, TO2 extends TypedText> void removeIf(Collection<TO> from, Collection<TO2> to) {
+        if (from != null) {
+            to.removeIf(t -> (!from.contains(t)));
         }
     }
 
 
     /**
+     * Copy all texts from one collection of {@link TextualObjectUpdate} to another.
+     * If the target collection is a {@link TextualObject} you want to use {@link #copy(TextualObjectUpdate, TextualObject, OwnerType)}
      * @since 5.3
      */
     public static <
-        T1 extends OwnedText, D1 extends OwnedText, TO1 extends TextualObject<T1, D1, TO1>,
-        T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>,
-        FROM extends TextualObject<T1, D1, TO1>,
-        TO extends TextualObjectUpdate<T2, D2, TO2>
+        T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
+        T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>
         > void copyToUpdate(
-        FROM from,
-        TO to) {
+        TO1 from,
+        TO2 to) {
         if (from.getTitles() != null) {
             for (T1 title : from.getTitles()) {
                 to.setTitle(title.get(), title.getType());
