@@ -91,21 +91,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     public ScheduleEvent toScheduleEvent(OwnerType ownerType) {
         ScheduleEvent event = new ScheduleEvent(channel, net == null ? null : new Net(net), start, duration);
-        if (titles != null) {
-            for (TitleUpdate up : titles) {
-                event.addTitle(up.get(), ownerType, up.getType());
-            }
-        } else {
-            event.setTitles(null);
-        }
-
-        if (descriptions != null) {
-            for (DescriptionUpdate up : descriptions) {
-                event.addDescription(up.get(), ownerType, up.getType());
-            }
-        } else {
-            event.setDescriptions(null);
-        }
+        TextualObjects.copyAndRemove(this, event, ownerType);
         return event;
     }
 
@@ -200,7 +186,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     public void setDescriptions(DescriptionUpdate... descriptions) {
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
-    
+
 
     @Override
     public ScheduleEventUpdate addDescription(String description, TextualType type) {

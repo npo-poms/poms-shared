@@ -10,7 +10,7 @@ import nl.vpro.domain.media.support.TextualType;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class BasicOwnedText extends BasicTypedText implements OwnedText<BasicOwnedText> {
+public class BasicOwnedText extends BasicTypedText implements OwnedText {
 
     @Getter
     @Setter
@@ -25,8 +25,4 @@ public class BasicOwnedText extends BasicTypedText implements OwnedText<BasicOwn
         this.owner = owner;
     }
 
-    @Override
-    public int compareTo(BasicOwnedText o) {
-        return super.compareTo(o);
-    }
 }
