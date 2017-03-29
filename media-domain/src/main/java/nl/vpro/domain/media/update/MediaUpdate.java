@@ -501,7 +501,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     public SortedSet<TitleUpdate> getTitles() {
         if (titles == null) {
             titles =
-                new TransformingSortedSet<>(
+                new TransformingSortedSet<TitleUpdate, Title>(
                     mediaObject().getTitles(),
                     t -> new TitleUpdate(t.getTitle(), t.getType(), MediaUpdate.this),
                     t -> new Title(t.getTitle(), owner, t.getType())
@@ -521,7 +521,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     @XmlElement(name = "description")
     public SortedSet<DescriptionUpdate> getDescriptions() {
         if (descriptions == null) {
-            descriptions = new TransformingSortedSet<>(
+            descriptions = new TransformingSortedSet<DescriptionUpdate, Description>(
                 mediaObject().getDescriptions(),
                 d -> new DescriptionUpdate(d.getDescription(), d.getType(), MediaUpdate.this),
                 d -> new Description(d.getDescription(), owner, d.getType())
