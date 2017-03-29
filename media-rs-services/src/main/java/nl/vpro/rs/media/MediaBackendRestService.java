@@ -16,6 +16,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.Member;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaList;
 import nl.vpro.domain.media.search.MediaListItem;
@@ -149,6 +150,17 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
 
+    @GET
+    @Path("{entity:(media|program|group|segment)}/{id}/members/full")
+    MediaList<Member> getFullGroupMembers(
+        @PathParam(ENTITY) final String entity,
+        @PathParam(ID) final String id,
+        @QueryParam("offset") @DefaultValue("0") final Long offset,
+        @QueryParam("max") @DefaultValue("20") final Integer max,
+        @QueryParam("order") @DefaultValue("ASC") final String order,
+        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+    ) throws IOException;
+
     @PUT
     @Path("{entity:(media|program|group|segment)}/{id}/members")
     @Produces(MediaType.WILDCARD)
@@ -199,6 +211,18 @@ public interface MediaBackendRestService {
         @PathParam(ID) final String id,
         @QueryParam("offset") @DefaultValue("0") final Long offset,
         @QueryParam("max") @DefaultValue("10") final Integer max,
+        @QueryParam("order") @DefaultValue("ASC") final String order,
+        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+    ) throws IOException;
+
+
+    @GET
+    @Path("group/{id}/episodes/full")
+    MediaList<Member> getFullGroupEpisodes(
+        @PathParam(ENTITY) final String entity,
+        @PathParam(ID) final String id,
+        @QueryParam("offset") @DefaultValue("0") final Long offset,
+        @QueryParam("max") @DefaultValue("20") final Integer max,
         @QueryParam("order") @DefaultValue("ASC") final String order,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
