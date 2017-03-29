@@ -2319,8 +2319,21 @@ public enum Channel {
         public String toString() {
             return "Film 1";
         }
+    },
+    @XmlEnumValue("ZGS1")
+    ZGS1 {
+        @Override
+        public String toString() {
+            return "Ziggo Sport";
+        }
+    },
+    @XmlEnumValue("BRTZ")
+    BRTZ {
+        @Override
+        public String toString() {
+            return "RTL Z";
+        }
     }
-
     ;
 
 
