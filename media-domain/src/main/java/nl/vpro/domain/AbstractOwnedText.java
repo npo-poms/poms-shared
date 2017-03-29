@@ -22,7 +22,7 @@ import nl.vpro.domain.media.support.TextualType;
 @MappedSuperclass
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText<T>, Comparable<T>, Serializable {
+public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Serializable {
 
 
     @Column(nullable = false)
@@ -77,16 +77,6 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
         return result;
     }
 
-    @Override
-    public int compareTo(T o) {
-        if (o == null) {
-            return -1;
-        }
-        if (type != null && type.equals(o.getType()) && owner != null && o.getOwner() != null) {
-            return owner.ordinal() - o.getOwner().ordinal();
-        }
-        return (type == null ? -1 : type.ordinal()) - (o.getType() == null ? -1 : o.getType().ordinal());
-    }
 
     @Override
     public boolean equals(Object o) {

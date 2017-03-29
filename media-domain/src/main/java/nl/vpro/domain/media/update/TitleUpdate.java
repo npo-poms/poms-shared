@@ -13,7 +13,7 @@ import nl.vpro.domain.media.support.TextualType;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "titleUpdateType",
     propOrder = {"title"})
-public class TitleUpdate implements Comparable<TitleUpdate>, TypedText {
+public class TitleUpdate implements TypedText {
 
     private String title;
 
@@ -79,15 +79,6 @@ public class TitleUpdate implements Comparable<TitleUpdate>, TypedText {
         }
     }
 
-    @Override
-    public int compareTo(TitleUpdate title) {
-
-        if (title == null) {
-            return -1;
-        }
-
-        return (type == null ? -1 : type.ordinal()) - (title.getType() == null ? -1 : title.getType().ordinal());
-    }
 
     @Override
     public boolean equals(Object o) {

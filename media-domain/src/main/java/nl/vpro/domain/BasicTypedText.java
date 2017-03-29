@@ -9,7 +9,7 @@ import nl.vpro.domain.media.support.TextualType;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class BasicTypedText implements TypedText {
+public class BasicTypedText implements TypedText, Comparable<TypedText> {
     @Getter
     @Setter
     private TextualType type;
@@ -36,4 +36,5 @@ public class BasicTypedText implements TypedText {
         return text;
 
     }
+
 }
