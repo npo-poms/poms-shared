@@ -13,8 +13,8 @@ import nl.vpro.domain.media.support.TextualType;
  * @since 5.1
  */
 public interface TextualObject<
-    T extends OwnedText<T>, 
-    D extends OwnedText<D>, 
+    T extends OwnedText,
+    D extends OwnedText,
     TO extends TextualObject<T, D, TO>>
     extends TextualObjectUpdate<T, D, TO> {
 

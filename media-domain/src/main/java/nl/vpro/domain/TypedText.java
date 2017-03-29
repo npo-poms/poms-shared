@@ -9,7 +9,7 @@ import nl.vpro.domain.media.support.Typable;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public interface TypedText extends Typable<TextualType>, Supplier<String> {
+public interface TypedText extends Typable<TextualType>, Supplier<String>, Comparable<TypedText> {
 
 
     void set(String s);
@@ -17,12 +17,13 @@ public interface TypedText extends Typable<TextualType>, Supplier<String> {
     @Override
     String get();
 
+    @Override
     default int compareTo(TypedText title) {
         if (title == null) {
             return -1;
         }
 
-        return (getType() == null ? 
+        return (getType() == null ?
             -1 : getType().ordinal()) - (
                 title.getType() == null ? -1 : title.getType().ordinal()
         );

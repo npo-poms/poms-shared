@@ -27,7 +27,7 @@ public class TextualObjects {
         return title == null ? defaultValue : title.get();
     }
 
-    public static <OT extends OwnedText<OT>> Optional<String> getOptional(Collection<OT> titles, OwnerType owner, TextualType type) {
+    public static <OT extends OwnedText> Optional<String> getOptional(Collection<OT> titles, OwnerType owner, TextualType type) {
         for (OT title : titles) {
             if (title.getOwner() == owner && title.getType() == type) {
                 return Optional.of(title.get());
@@ -36,7 +36,7 @@ public class TextualObjects {
         return Optional.empty();
     }
 
-    public static <OT extends OwnedText<OT>> Optional<String> get(Collection<OT> titles, Comparator<OwnerType> ownerType, TextualType... type) {
+    public static <OT extends OwnedText> Optional<String> get(Collection<OT> titles, Comparator<OwnerType> ownerType, TextualType... type) {
         return getObjects(titles, ownerType, type).stream().map(OwnedText::get).findFirst();
     }
 
@@ -54,13 +54,13 @@ public class TextualObjects {
     }
 
 
-    public static <OT extends OwnedText<OT>> Collection<OT> getObjects(Collection<? extends OT> titles, TextualType... types) {
+    public static <OT extends OwnedText> Collection<OT> getObjects(Collection<? extends OT> titles, TextualType... types) {
         Comparator<OwnerType> comparator = Comparator.naturalOrder();
         return getObjects(titles, comparator, types);
     }
 
 
-    protected static <OT extends OwnedText<OT>> Comparator<OT> getComparator(Comparator<OwnerType> ownerTypeComparator) {
+    protected static <OT extends OwnedText> Comparator<OT> getComparator(Comparator<OwnerType> ownerTypeComparator) {
         return (o1, o2) -> {
             int result = o1.getType().compareTo(o2.getType());
             if (result == 0) {
@@ -102,7 +102,7 @@ public class TextualObjects {
 
     // some methods working TextualObjects themselves.
 
-    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>>  OwnerType[] findOwnersForTextFields(TO media) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>>  OwnerType[] findOwnersForTextFields(TO media) {
         SortedSet<OwnerType> result = new TreeSet<>();
         for (T title : media.getTitles()) {
             result.add(title.getOwner());
@@ -114,17 +114,17 @@ public class TextualObjects {
     }
 
 
-    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> String getTitle(TO media, OwnerType owner, TextualType type) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getTitle(TO media, OwnerType owner, TextualType type) {
         Optional<String> opt = getOptional(media.getTitles(), owner, type);
         return opt.orElse("");
     }
 
-    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> String getDescription(TO media, OwnerType owner, TextualType type) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, OwnerType owner, TextualType type) {
         Optional<String> opt = getOptional(media.getDescriptions(), owner, type);
         return opt.orElse("");
     }
 
-    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> String getDescription(TO media, TextualType... types) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, TextualType... types) {
         Optional<String> opt = getOptional(media.getDescriptions(), types);
         return opt.orElse("");
     }
@@ -133,7 +133,7 @@ public class TextualObjects {
     /**
      * Sets the owner of all titles, descriptions, locations and images found in given MediaObject
      */
-    public static <T extends OwnedText<T>, D extends OwnedText<D>, TO extends TextualObject<T, D, TO>> void forOwner(TO media, OwnerType owner) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> void forOwner(TO media, OwnerType owner) {
         for (T title : media.getTitles()) {
             title.setOwner(owner);
         }
@@ -189,8 +189,8 @@ public class TextualObjects {
      * @since 5.3
      */
     public static <
-        T1 extends OwnedText<T1>, D1 extends OwnedText<D1>, TO1 extends TextualObject<T1, D1, TO1>,
-        T2 extends OwnedText<T2>,D2 extends OwnedText<D2>,TO2 extends TextualObject<T2, D2, TO2>,
+        T1 extends OwnedText, D1 extends OwnedText, TO1 extends TextualObject<T1, D1, TO1>,
+        T2 extends OwnedText,D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>,
         FROM extends TextualObject<T1, D1, TO1>,
         TO extends TextualObject<T2, D2, TO2>
         > void copy(
@@ -212,15 +212,40 @@ public class TextualObjects {
      * @since 5.3
      */
     public static <
-        T1 extends OwnedText<T1>, D1 extends OwnedText<D1>, TO1 extends TextualObject<T1, D1, TO1>,
-        T2 extends OwnedText<T2>, D2 extends OwnedText<D2>, TO2 extends TextualObject<T2, D2, TO2>,
-        FROM extends TextualObject<T1, D1, TO1>,
+        T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
+        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>,
+        FROM extends TextualObjectUpdate<T1, D1, TO1>,
+        TO extends TextualObject<T2, D2, TO2>
+        > void copy(
+        FROM from,
+        TO to,
+        OwnerType ownerType
+    ) {
+        if (from.getTitles() != null) {
+            for (T1 title : from.getTitles()) {
+                to.addTitle(title.get(), ownerType, title.getType());
+            }
+        }
+        if (from.getDescriptions() != null) {
+            for (D1 description : from.getDescriptions()) {
+                to.addDescription(description.get(), ownerType, description.getType());
+            }
+        }
+    }
+
+    /**
+     * @since 5.3
+     */
+    public static <
+        T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
+        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>,
+        FROM extends TextualObjectUpdate<T1, D1, TO1>,
         TO extends TextualObject<T2, D2, TO2>
         > void copyAndRemove(
         FROM from,
         TO to,
         OwnerType owner) {
-        copy(from, to);
+        copy(from, to, owner);
         removeIf(from.getTitles(), to.getTitles(), owner);
         removeIf(from.getDescriptions(), to.getDescriptions(), owner);
     }
@@ -228,7 +253,7 @@ public class TextualObjects {
     /**
      * @since 5.3
      */
-    public static <TO extends OwnedText<TO>, TO2 extends OwnedText<TO2>> void removeIf(Collection<TO> from, Collection<TO2> to, OwnerType owner) {
+    public static <TO extends TypedText, TO2 extends OwnedText> void removeIf(Collection<TO> from, Collection<TO2> to, OwnerType owner) {
         if (from != null) {
             to.removeIf(t ->
                 (owner == null || t.getOwner().equals(owner))
@@ -241,7 +266,7 @@ public class TextualObjects {
      * @since 5.3
      */
     public static <
-        T1 extends OwnedText<T1>, D1 extends OwnedText<D1>, TO1 extends TextualObject<T1, D1, TO1>,
+        T1 extends OwnedText, D1 extends OwnedText, TO1 extends TextualObject<T1, D1, TO1>,
         T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>,
         FROM extends TextualObject<T1, D1, TO1>,
         TO extends TextualObjectUpdate<T2, D2, TO2>
@@ -252,11 +277,15 @@ public class TextualObjects {
             for (T1 title : from.getTitles()) {
                 to.setTitle(title.get(), title.getType());
             }
+        } else {
+            to.setTitles(null);
         }
         if (from.getDescriptions() != null) {
             for (D1 description : from.getDescriptions()) {
                 to.setDescription(description.get(), description.getType());
             }
+        } else {
+            to.setDescriptions(null);
         }
     }
 }
