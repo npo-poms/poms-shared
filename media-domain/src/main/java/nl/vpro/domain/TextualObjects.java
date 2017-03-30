@@ -253,32 +253,36 @@ public class TextualObjects {
         TO2 to,
         OwnerType owner) {
         copy(from, to, owner);
-        removeIf(from.getTitles(), to.getTitles(), owner);
-        removeIf(from.getDescriptions(), to.getDescriptions(), owner);
+        retainAll(to.getTitles(), from.getTitles(), owner);
+        retainAll(to.getDescriptions(), from.getDescriptions(), owner);
     }
 
     /**
      * From a collection of {@link OwnedText}'s remove all all elements with certain owner, which are not in the source collection of {@link TypedText}'s.
-     * @param from The collection of texts which are to be retained in to
-     * @param to The collection to remove objects from
+     * @param collection The collection to remove objects from
+     * @param toRetain The collection of texts which are to be retained in collection
      * @since 5.3
      */
-    public static <TO extends TypedText, TO2 extends OwnedText> void removeIf(
-        Collection<TO> from,
-        Collection<TO2> to,
+    public static <TO extends TypedText, TO2 extends OwnedText> void retainAll(
+        Collection<TO2> collection,
+        Collection<TO> toRetain,
         OwnerType owner) {
-        if (from != null) {
-            to.removeIf(t -> t.getOwner().equals(owner) && (!from.contains(t)));
+        if (toRetain != null) {
+            collection.removeIf(t -> t.getOwner().equals(owner) && (!toRetain.contains(t)));
         }
     }
 
     /**
+     * @param collection The collection to remove objects from
+     * @param toRetain The collection of texts which are to be retained in collection
      * @since 5.3
      */
     @SuppressWarnings("SuspiciousMethodCalls")
-    public static <TO extends TypedText, TO2 extends TypedText> void removeIf(Collection<TO> from, Collection<TO2> to) {
-        if (from != null) {
-            to.removeIf(t -> (!from.contains(t)));
+    public static <TO extends TypedText, TO2 extends TypedText> void retainAll(
+        Collection<TO2> collection,
+        Collection<TO> toRetain) {
+        if (toRetain != null) {
+            collection.removeIf(t -> (!toRetain.contains(t)));
         }
     }
 
