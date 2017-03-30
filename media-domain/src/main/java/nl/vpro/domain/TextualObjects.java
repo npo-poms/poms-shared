@@ -18,9 +18,15 @@ public class TextualObjects {
 
     // some methods working on collections of 'OwnedText' objects (think of titles and descriptions)
 
+    /**
+     * Finds the first text in a collection of {@link TypedText}s with one of the given types. Wrapped in an optional, so never returns <code>null</code>
+     */
     public static <OT extends TypedText> Optional<String> getOptional(Collection<OT> titles, TextualType... types) {
-        return Optional.ofNullable(getObject(titles, types)).map(TypedText::get);
+        return Optional.ofNullable(
+            getObject(titles, types)
+        ).map(TypedText::get);
     }
+
 
     public static <OT extends TypedText> String get(Collection<? extends OT> titles, String defaultValue, TextualType... types) {
         OT title = getObject(titles, types);
