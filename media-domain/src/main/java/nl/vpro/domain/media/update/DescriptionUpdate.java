@@ -49,7 +49,7 @@ public class DescriptionUpdate implements TypedText {
     }
 
     @Override
-    @XmlAttribute
+    @XmlAttribute(required = true)
     public TextualType getType() {
         return type;
     }
