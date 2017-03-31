@@ -27,13 +27,13 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    @XmlAttribute
+    @XmlAttribute(required = true)
     protected OwnerType owner = OwnerType.BROADCASTER;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
-    @XmlAttribute
+    @XmlAttribute(required = true)
     protected TextualType type;
 
 
