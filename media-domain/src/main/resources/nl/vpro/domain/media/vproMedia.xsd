@@ -625,8 +625,8 @@
   <xs:complexType name="scheduleEventTitle">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
-        <xs:attribute name="type" type="textualTypeEnum"/>
+        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
+        <xs:attribute name="type" type="textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -634,8 +634,8 @@
   <xs:complexType name="scheduleEventDescription">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
-        <xs:attribute name="type" type="textualTypeEnum"/>
+        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
+        <xs:attribute name="type" type="textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
