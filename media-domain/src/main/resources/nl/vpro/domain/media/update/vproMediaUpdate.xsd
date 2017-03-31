@@ -59,7 +59,7 @@
   <xs:complexType name="descriptionUpdateType">
     <xs:simpleContent>
       <xs:extension base="media:unboundedTextType">
-        <xs:attribute name="type" type="media:textualTypeEnum"/>
+        <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -189,7 +189,7 @@
   <xs:complexType name="titleUpdateType">
     <xs:simpleContent>
       <xs:extension base="media:baseTextType">
-        <xs:attribute name="type" type="media:textualTypeEnum"/>
+        <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
