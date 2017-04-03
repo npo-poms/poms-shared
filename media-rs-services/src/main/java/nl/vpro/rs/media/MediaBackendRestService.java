@@ -42,6 +42,7 @@ public interface MediaBackendRestService {
     String MID    = "mid";
     String LANGUAGE = "language";
     String TYPE = "type";
+    String VALIDATE_INPUT = "validateInput";
 
 
     @POST
@@ -85,7 +86,8 @@ public interface MediaBackendRestService {
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
-        @QueryParam("lookupcrid") @DefaultValue("true") Boolean lookupcrid
+        @QueryParam("lookupcrid") @DefaultValue("true") Boolean lookupcrid,
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     ) throws IOException;
 
     @POST
@@ -96,7 +98,8 @@ public interface MediaBackendRestService {
         LocationUpdate location,
         @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
-        @QueryParam(ERRORS) String errors
+        @QueryParam(ERRORS) String errors,
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     );
 
     @DELETE
@@ -126,7 +129,8 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) final String entity,
         @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
-        @QueryParam(ERRORS) String errors
+        @QueryParam(ERRORS) String errors,
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     );
 
 
@@ -188,7 +192,8 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) final String entity,
         @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
-        @QueryParam(ERRORS) String errors
+        @QueryParam(ERRORS) String errors,
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     ) throws IOException;
 
 
@@ -252,7 +257,8 @@ public interface MediaBackendRestService {
         MemberRefUpdate memberRefUpdate,
         @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
-        @QueryParam(ERRORS) String errors
+        @QueryParam(ERRORS) String errors,
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     ) throws IOException;
 
 
