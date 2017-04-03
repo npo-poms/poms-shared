@@ -8,5 +8,5 @@ public enum StreamingStatus {
 
     NOT_AVAILABLE,
     AVAILABLE,
-    AVAIlABLE_WITH_DRM
+    AVAILABLE_WITH_DRM
 }
