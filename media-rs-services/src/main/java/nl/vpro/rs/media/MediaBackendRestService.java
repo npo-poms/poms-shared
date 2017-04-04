@@ -226,7 +226,6 @@ public interface MediaBackendRestService {
     @GET
     @Path("group/{id}/episodes/full")
     MediaList<Member> getFullGroupEpisodes(
-        @PathParam(ENTITY) final String entity,
         @PathParam(ID) final String id,
         @QueryParam("offset") @DefaultValue("0") final Long offset,
         @QueryParam("max") @DefaultValue("20") final Integer max,
