@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
@@ -57,6 +58,7 @@ import nl.vpro.domain.user.Organization;
 public class MediaForm {
 
     @XmlElement(required = true)
+    @Valid
     private MediaPager pager;
 
     @XmlElement(name = "broadcaster")

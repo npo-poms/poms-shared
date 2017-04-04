@@ -6,6 +6,7 @@ package nl.vpro.domain.media.search;
 
 import lombok.ToString;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
 @XmlTransient
@@ -18,9 +19,11 @@ public abstract class Pager<S extends SortField> {
     }
 
     @XmlElement
+    @NotNull
     private long offset = 0;
 
     @XmlElement(required = true)
+    @NotNull
     private Integer max = null;
 
     @XmlTransient
