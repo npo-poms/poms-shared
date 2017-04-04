@@ -2795,6 +2795,8 @@
 
       <xs:enumeration value="AMC_"/>
       <xs:enumeration value="FLM1"/>
+      <xs:enumeration value="ZGS1"/>
+      <xs:enumeration value="BRTZ"/>
 
 
     </xs:restriction>
