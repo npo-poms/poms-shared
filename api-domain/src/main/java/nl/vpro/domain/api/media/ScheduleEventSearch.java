@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.DateRangeMatcher;
 import nl.vpro.domain.media.ScheduleEvent;
+import nl.vpro.util.DateUtils;
 
 /**
  * @author rico
@@ -78,10 +79,10 @@ public class ScheduleEventSearch extends DateRangeMatcher {
     }
 
     public boolean apply(@Nullable ScheduleEvent t) {
-        return (channel == null || channel.equals(t.getChannel().name()))
+        return t != null && (channel == null || channel.equals(t.getChannel().name()))
             && (net == null || net.equals(t.getNet().getId()))
-            && (rerun == null || rerun==t.getRepeat().isRerun())
-            && super.test(t.getStart());
+            && (rerun == null || rerun == t.getRepeat().isRerun())
+            && super.test(DateUtils.toDate(t.getStartInstant()));
     }
 
     @Override
