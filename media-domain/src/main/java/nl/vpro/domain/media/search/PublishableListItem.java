@@ -13,6 +13,7 @@ import nl.vpro.domain.Embargo;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Editor;
+import nl.vpro.util.DateUtils;
 
 /**
  * @author Roelof Jan Koekoek
@@ -55,13 +56,11 @@ public abstract class PublishableListItem implements Embargo {
         this.id       = mediaObject.getId();
         this.workflow = mediaObject.getWorkflow();
 
-        this.lastModified = mediaObject.getLastModified();
-        Editor lastModifier = mediaObject.getLastModifiedBy();
-        this.lastModifiedBy = lastModifier;
+        this.lastModified = DateUtils.toDate(mediaObject.getLastModifiedInstant());
+        this.lastModifiedBy = mediaObject.getLastModifiedBy();
 
-        this.creationDate = mediaObject.getCreationDate();
-        Editor creator = mediaObject.getCreatedBy();
-        this.createdBy = creator;
+        this.creationDate = DateUtils.toDate(mediaObject.getCreationInstant());
+        this.createdBy = mediaObject.getCreatedBy();
 
         this.publishStart = mediaObject.getPublishStartInstant();
         this.publishStop = mediaObject.getPublishStopInstant();
