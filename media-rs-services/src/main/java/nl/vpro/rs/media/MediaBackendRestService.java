@@ -43,6 +43,7 @@ public interface MediaBackendRestService {
     String LANGUAGE = "language";
     String TYPE = "type";
     String VALIDATE_INPUT = "validateInput";
+    String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated against the XSD first";
 
 
     @POST
