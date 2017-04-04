@@ -49,7 +49,8 @@ public interface MediaBackendRestService {
     @Path("find")
     MediaList<MediaListItem> find(
         MediaForm form,
-        @QueryParam("writable") @DefaultValue("false") boolean writable
+        @QueryParam("writable") @DefaultValue("false") boolean writable,
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     ) throws IOException;
 
     @GET
