@@ -106,9 +106,23 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
      * Represents Ownable data from Immix ("Beeld en Geluid") send to Poms via updates from their archive.
      *
      * @since 1.4
+     * @deprecated Use {@link #BEELDENGELUID}
      */
-    IMMIX("Immix");
+    @Deprecated
+    IMMIX("Immix"),
 
+
+    /**
+     * @since 5.2
+     */
+    AUTHORITY("Autoratieve bron"),
+
+    /**
+     * @since 5.3
+     */
+    BEELDENGELUID("Beeld & Geluid")
+
+    ;
     private String displayName;
 
     OwnerType(String displayName) {
