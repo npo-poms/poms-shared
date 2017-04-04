@@ -82,6 +82,8 @@
       <xs:enumeration value="PROJECTM"/>
       <xs:enumeration value="WHATS_ON"/>
       <xs:enumeration value="IMMIX"/>
+      <xs:enumeration value="AUTHORITY"/>
+      <xs:enumeration value="BEELDENGELUID"/>
     </xs:restriction>
   </xs:simpleType>
 
