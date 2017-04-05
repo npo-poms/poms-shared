@@ -5,9 +5,7 @@
 package nl.vpro.domain.api;
 
 import java.util.Date;
-import java.util.function.Predicate;
 
-import javax.annotation.Nullable;
 import javax.xml.bind.annotation.*;
 
 
@@ -18,7 +16,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "rangeMatcherType")
 @XmlSeeAlso({Integer.class, Date.class, String.class})
-public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatcher implements Predicate<T> {
+public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatcher {
 
     @XmlAttribute
     private Boolean inclusiveEnd = false;
@@ -26,31 +24,23 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
     @XmlTransient// We don't expose this..
     private  Boolean inclusiveBegin = true;
 
-    @XmlTransient
-    protected T begin;
-
-    @XmlTransient
-    protected T end;
 
     public RangeMatcher() {
     }
 
     protected RangeMatcher(T begin, T end) {
-        this.begin = begin;
-        this.end = end;
+        this(begin, end, null, null);
     }
 
     protected RangeMatcher(T begin, T end, Boolean inclusiveEnd) {
-        this.begin = begin;
-        this.end = end;
-        this.inclusiveEnd = inclusiveEnd;
+        this(begin, end, inclusiveEnd, null);
     }
 
 
     protected RangeMatcher(T begin, T end, Boolean inclusiveEnd, Match match) {
         super(match);
-        this.begin = begin;
-        this.end = end;
+        setBegin(begin);
+        setEnd(end);
         this.inclusiveEnd = inclusiveEnd;
     }
 
@@ -81,14 +71,13 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
 
     @Override
     public String toString() {
-        return "RangeMatcher{begin=" + begin + ", end=" + end + ", inclusiveEnd=" + inclusiveEnd + "}";
+        return "RangeMatcher{begin=" + getBegin() + ", end=" + getEnd() + ", inclusiveEnd=" + inclusiveEnd + "}";
     }
 
-    @Override
-    public boolean test(@Nullable T t) {
-        boolean apply =  (begin == null || begin.compareTo(t) <= 0) &&
-                (end == null || (end.compareTo(t) > 0 || (includeEnd() && end.compareTo(t) == 0)));
-        return match == Match.NOT ? ! apply : apply;
+    protected boolean testComparable(T t) {
+        boolean apply = (getBegin()== null || getBegin().compareTo(t) <= 0) &&
+            (getEnd() == null || (getEnd().compareTo(t) > 0 || (includeEnd() && getEnd().compareTo(t) == 0)));
+        return match == Match.NOT ? !apply : apply;
     }
 
     @Override
@@ -101,11 +90,13 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
         }
 
         RangeMatcher that = (RangeMatcher)o;
+        T begin = getBegin();
+        T end = getEnd();
 
-        if(begin != null ? !begin.equals(that.begin) : that.begin != null) {
+        if(begin != null ? !begin.equals(that.getBegin()) : that.getBegin() != null) {
             return false;
         }
-        if(end != null ? !end.equals(that.end) : that.end != null) {
+        if(end != null ? !end.equals(that.getEnd()) : that.getEnd() != null) {
             return false;
         }
         if(inclusiveEnd != null ? !inclusiveEnd.equals(that.inclusiveEnd) : that.inclusiveEnd != null) {
@@ -118,8 +109,8 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
     @Override
     public int hashCode() {
         int result = inclusiveEnd != null ? inclusiveEnd.hashCode() : 0;
-        result = 31 * result + (begin != null ? begin.hashCode() : 0);
-        result = 31 * result + (end != null ? end.hashCode() : 0);
+        result = 31 * result + (getBegin() != null ? getBegin().hashCode() : 0);
+        result = 31 * result + (getEnd() != null ? getEnd().hashCode() : 0);
         return result;
     }
 }

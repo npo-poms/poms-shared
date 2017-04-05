@@ -21,6 +21,7 @@ import nl.vpro.domain.media.support.Tag;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.DateUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
@@ -72,7 +73,10 @@ public class MediaFormTest {
     @Test
     public void testGetFacets() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(new ScheduleEventSearch("NED3", simpleDateFormat.parse("2015-01-26"), simpleDateFormat.parse("2015-01-27"))).build();
+        MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
+            new ScheduleEventSearch("NED3",
+                DateUtils.toInstant(simpleDateFormat.parse("2015-01-26")),
+                DateUtils.toInstant(simpleDateFormat.parse("2015-01-27")))).build();
         MediaForm out = JAXBTestUtil.roundTripAndSimilar(in, "<api:mediaForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:scheduleEvents inclusiveEnd=\"true\">\n" +

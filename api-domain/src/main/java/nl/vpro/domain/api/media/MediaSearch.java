@@ -360,7 +360,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         }
 
         for(ScheduleEvent event : input.getScheduleEvents()) {
-            if(scheduleEvents.apply(event)) {
+            if(scheduleEvents.test(event)) {
                 return true;
             }
         }
