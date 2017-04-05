@@ -73,7 +73,7 @@ public class PublicationUpdate implements Delayed, Serializable {
         this.transactionUUID = TransactionUUID.get();
     }
 
-    public static PublicationUpdate publish(String reason, MediaObject media) {
+    public static PublicationUpdate publishToAll(String reason, MediaObject media) {
         return publish(reason, media, (String[]) null);
     }
 
@@ -86,7 +86,15 @@ public class PublicationUpdate implements Delayed, Serializable {
     }
 
 
-    public static PublicationUpdate revoke(String reason, MediaObject media) {
+    /**
+     * Publish to <em>All</em> destinations. This is the normal action.
+     */
+    public static PublicationUpdate publishToAll(String reason, Instant time, MediaObject media) {
+        return new PublicationUpdate(Action.PUBLISH, reason, media.getMid(), media.getId(), time, null);
+    }
+
+
+    public static PublicationUpdate revokeFromAll(String reason, MediaObject media) {
         return new PublicationUpdate(Action.REVOKE, reason, media.getMid(), media.getId(), media.getPublishStopInstant(), null);
     }
 
@@ -104,9 +112,9 @@ public class PublicationUpdate implements Delayed, Serializable {
 
     public static PublicationUpdate create(String reason, MediaObject media) {
         if (media.isPublishable()) {
-            return publish(reason, media);
+            return publishToAll(reason, media);
         } else {
-            return revoke(reason, media);
+            return revokeFromAll(reason, media);
         }
     }
 
