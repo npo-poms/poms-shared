@@ -1,5 +1,10 @@
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.function.Predicate;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -8,7 +13,16 @@ import javax.xml.bind.annotation.XmlType;
  * @since 2.0
  */
 @XmlType(name = "integerRangeMatcherType", propOrder = {"begin", "end"})
-public class IntegerRangeMatcher extends RangeMatcher<Integer> {
+public class IntegerRangeMatcher extends RangeMatcher<Integer> implements Predicate<Integer> {
+
+    @XmlElement
+    @Getter
+    @Setter
+    private Integer begin;
+    @XmlElement
+    @Getter
+    @Setter
+    private Integer end;
 
     public IntegerRangeMatcher() {
 
@@ -20,25 +34,10 @@ public class IntegerRangeMatcher extends RangeMatcher<Integer> {
         this.end = end;
     }
 
-    @Override
-    @XmlElement
-    public Integer getBegin() {
-        return begin;
-    }
 
     @Override
-    public void setBegin(Integer begin) {
-        this.begin = begin;
-    }
+    public boolean test(Integer integer) {
+        return super.testComparable(integer);
 
-    @Override
-    @XmlElement
-    public Integer getEnd() {
-        return end;
-    }
-
-    @Override
-    public void setEnd(Integer end) {
-        this.end = end;
     }
 }

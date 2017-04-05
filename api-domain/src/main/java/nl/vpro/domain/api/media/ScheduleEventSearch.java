@@ -4,91 +4,101 @@
  */
 package nl.vpro.domain.api.media;
 
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.Instant;
+import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.api.DateRangeMatcher;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.api.RangeMatcher;
 import nl.vpro.domain.media.ScheduleEvent;
-import nl.vpro.util.DateUtils;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author rico
  */
-@XmlType(name = "scheduleEventSearchType", propOrder = {"channel", "net", "rerun" })
-public class ScheduleEventSearch extends DateRangeMatcher {
+@XmlType(name = "scheduleEventSearchType", propOrder = {"begin", "end", "channel", "net", "rerun"})
+public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predicate<ScheduleEvent> {
 
     @XmlElement
+    @Getter
+    @Setter
     private String channel;
 
     @XmlElement
+    @Getter
+    @Setter
     private String net;
 
     @XmlElement
+    @Getter
+    @Setter
     private Boolean rerun;
+
+    @XmlElement
+    @Getter
+    @Setter
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant begin;
+
+    @XmlElement
+    @Getter
+    @Setter
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant end;
 
     public ScheduleEventSearch() {
     }
 
-    public ScheduleEventSearch(String channel, Date begin, Date end) {
+
+    public ScheduleEventSearch(String channel, Instant begin, Instant end) {
         super(begin, end, true);
         this.channel = channel;
     }
 
-    public ScheduleEventSearch(String channel, Date begin, Date end, Boolean rerun) {
+    public ScheduleEventSearch(String channel, Instant begin, Instant end, Boolean rerun) {
         super(begin, end, true);
         this.channel = channel;
         this.rerun = rerun;
     }
 
-    public ScheduleEventSearch(String channel, String net, Date begin, Date end, Boolean rerun) {
+    public ScheduleEventSearch(String channel, String net, Instant begin, Instant end, Boolean rerun) {
         super(begin, end, true);
         this.channel = channel;
         this.net = net;
         this.rerun = rerun;
     }
 
-    public String getChannel() {
-        return channel;
-    }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
-    }
-
-    public String getNet() {
-        return net;
-    }
-
-    public void setNet(String net) {
-        this.net = net;
-    }
-
-    public Boolean getRerun() {
-        return rerun;
-    }
-
-    public void setRerun(Boolean rerun) {
-        this.rerun = rerun;
-    }
 
     public boolean hasSearches() {
         return channel != null || net != null || rerun != null;
     }
 
-    public boolean apply(@Nullable ScheduleEvent t) {
+    @Override
+    public boolean test(@Nullable ScheduleEvent t) {
         return t != null && (channel == null || channel.equals(t.getChannel().name()))
             && (net == null || net.equals(t.getNet().getId()))
             && (rerun == null || rerun == t.getRepeat().isRerun())
-            && super.test(DateUtils.toDate(t.getStartInstant()));
+            && super.testComparable(t.getStartInstant());
     }
 
-    @Override
-    public boolean test(@Nullable Date t) {
-        throw new UnsupportedOperationException("Invalid methodcall, call apply(ScheduleEvent) instead");
-    }
 
     @Override
     public String toString() {

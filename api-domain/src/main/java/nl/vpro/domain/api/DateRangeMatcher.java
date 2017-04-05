@@ -4,9 +4,13 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
+import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
@@ -18,7 +22,17 @@ import nl.vpro.util.DateUtils;
  * @since 2.0
  */
 @XmlType(name = "dateRangeMatcherType", propOrder = {"begin", "end"})
-public class DateRangeMatcher extends RangeMatcher<Date> {
+public class DateRangeMatcher extends RangeMatcher<Date> implements Predicate<Date> {
+
+    @XmlElement
+    @Getter
+    @Setter
+    private Date begin;
+    @XmlElement
+    @Getter
+    @Setter
+    private Date end;
+
 
     public DateRangeMatcher() {
     }
@@ -51,25 +65,9 @@ public class DateRangeMatcher extends RangeMatcher<Date> {
         super(begin, end, inclusiveEnd, match);
     }
 
-    @XmlElement
     @Override
-    public Date getBegin() {
-        return begin;
-    }
+    public boolean test(Date date) {
+        return super.testComparable(date);
 
-    @Override
-    public void setBegin(Date begin) {
-        this.begin = begin;
-    }
-
-    @XmlElement
-    @Override
-    public Date getEnd() {
-        return end;
-    }
-
-    @Override
-    public void setEnd(Date end) {
-        this.end = end;
     }
 }
