@@ -61,7 +61,7 @@ public class PublicationUpdateTest {
             .lastModified(LocalDate.of(2016, 5, 24).atTime(11, 50))
             .build();
 
-        PublicationUpdate publicationUpdate = PublicationUpdate.publish("test", program);
+        PublicationUpdate publicationUpdate = PublicationUpdate.publishToAll("test", program);
 
         Duration overdue = publicationUpdate.getOverdue(now);
         assertThat(overdue).isEqualTo(Duration.ofMinutes(10));
