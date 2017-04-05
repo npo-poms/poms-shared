@@ -78,6 +78,11 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         this((Channel)null, start, stop, null);
     }
 
+
+    public Schedule(Instant  start, Instant stop) {
+        this((Channel) null, DateUtils.toDate(start), DateUtils.toDate(stop), null);
+    }
+
     public Schedule(Channel channel, Date start) {
         this(channel, start, start);
     }
