@@ -40,7 +40,7 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Date, DateRangeMatche
 
     @Override
     public void testHashCode() {
-        assertEquals(1192057, getInstance().hashCode());
+        assertEquals(3300, getInstance().hashCode());
     }
 
     @Test
