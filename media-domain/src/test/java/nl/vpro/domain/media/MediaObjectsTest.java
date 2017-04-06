@@ -14,9 +14,12 @@ import java.util.List;
 import org.junit.Test;
 
 import nl.vpro.domain.media.support.*;
+import nl.vpro.i18n.Locales;
 
 import static nl.vpro.domain.TextualObjects.findOwnersForTextFields;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Roelof Jan Koekoek
@@ -156,6 +159,29 @@ public class MediaObjectsTest {
         final Program copy = MediaObjects.filterPublishable(program);
         assertThat(copy.getLocations()).hasSize(1);
         assertThat(copy.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
-
     }
+    
+    @Test
+    public void hasSubtitles_NoSubs() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        final Program program = MediaBuilder.program()
+            .build();
+        assertFalse(program.isHasSubtitles());
+    }
+    
+    @Test
+    public void hasSubtitles_Translation() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    	
+    	final Program program = MediaBuilder.program()
+    			.build();
+    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "translation"));
+    	assertFalse(program.isHasSubtitles());
+    }
+    
+    @Test
+    public void hasSubtitles_DutchCaption() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        final Program program = MediaBuilder.program()
+            .build();
+        program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "caption"));
+        assertTrue(program.isHasSubtitles());
+    }    
 }
