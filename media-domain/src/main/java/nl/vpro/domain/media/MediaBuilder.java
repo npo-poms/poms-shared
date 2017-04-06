@@ -26,6 +26,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
+import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.LocalizedString;
 import nl.vpro.util.DateUtils;
 
@@ -81,12 +82,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B urn(String urn) {
         mediaObject().setUrn(urn);
-        return (B)this;
-    }
-
-    @SuppressWarnings("unchecked")
-    default B hasSubtitles(boolean hasSubtitles) {
-        mediaObject().setHasSubtitles(hasSubtitles);
         return (B)this;
     }
 
@@ -330,6 +325,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     default B mainTitle(String title) {
         return mainTitle(title, OwnerType.BROADCASTER);
+    }
+    
+    default B addDutchCaptions() {
+    	mediaObject().getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "caption"));
+    	return (B) this;
     }
 
 

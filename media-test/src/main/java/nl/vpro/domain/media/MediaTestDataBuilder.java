@@ -110,7 +110,7 @@ public interface MediaTestDataBuilder<
     default T lean() {
         return creationDate((Instant) null).workflow(null);
     }
-
+    
     default T valid() {
         return constrained();
     }
@@ -208,9 +208,8 @@ public interface MediaTestDataBuilder<
         return mainTitle(mainTitle);
     }
 
-
     default T withSubtitles() {
-        return hasSubtitles(true);
+        return addDutchCaptions();
     }
 
     default T withCrids() {

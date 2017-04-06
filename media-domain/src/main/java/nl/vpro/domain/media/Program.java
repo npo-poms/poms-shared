@@ -1,15 +1,37 @@
 package nl.vpro.domain.media;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import static nl.vpro.domain.TextualObjects.sorted;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
-import javax.persistence.*;
+import javax.persistence.Cacheable;
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.Filters;
@@ -19,6 +41,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.support.StreamingStatus;
@@ -28,8 +53,6 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.validation.Broadcast;
-
-import static nl.vpro.domain.TextualObjects.sorted;
 
 /**
  * The main feature that distinguishes a Program from a generic media entity is its ability
@@ -99,8 +122,8 @@ public class Program extends MediaObject {
 
         @Filter(name = DELETED_FILTER, condition = "(segments0_1_.workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and (segments0_1_.mergedTo_id is null))")
     })
+    
     private Set<Segment> segments;
-
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -498,5 +521,7 @@ public class Program extends MediaObject {
 
         return null;
     }
+    
+
 }
 
