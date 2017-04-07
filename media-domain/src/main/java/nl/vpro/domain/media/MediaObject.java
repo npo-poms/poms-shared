@@ -1552,18 +1552,13 @@ public abstract class MediaObject extends PublishableObject
 
 	@XmlAttribute
 	public Boolean isHasSubtitles() {
-		return getAvailableSubtitles().stream().anyMatch(sub -> {
-			return Locales.DUTCH.equals(sub.getLanguage()) && "caption".equalsIgnoreCase(sub.getType());
-		});
+		return getAvailableSubtitles().stream().anyMatch(sub -> Locales.DUTCH.equals(sub.getLanguage()) && "caption".equalsIgnoreCase(sub.getType()));
 	}
 
-//	public void setHasSubtitles(Boolean hasSubtitles) {
-//		this.hasSubtitles = hasSubtitles;
-//	}
-//
-//	public boolean isHasSubtitlesNotNull() {
-//		return hasSubtitles == null ? false : hasSubtitles;
-//	}
+	public void setHasSubtitles(Boolean hasSubtitles) {
+		// only to satisfy jaxb
+		// it will set 'available subtitles' too.
+	}
 
 	public boolean hasEpisode(Program episode) {
 		return episode.isEpisodeOf(this);
