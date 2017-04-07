@@ -70,6 +70,10 @@ public class Duration implements Serializable {
         return duration == null ? null : new Duration(duration);
     }
 
+    public static Duration authorized(java.time.Duration duration) {
+        return duration == null ? null : new Duration(duration, true);
+    }
+
     public Duration() {
     }
 
