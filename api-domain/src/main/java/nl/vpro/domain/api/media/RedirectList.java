@@ -1,12 +1,10 @@
 package nl.vpro.domain.api.media;
 
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -25,6 +23,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class RedirectList implements Iterable<RedirectEntry> {
 
     Map<String, String> redirects;
+
+    List<RedirectEntry> entries;
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -56,15 +56,15 @@ public class RedirectList implements Iterable<RedirectEntry> {
     @XmlElement(name = "entry", namespace = Xmlns.API_NAMESPACE)
     @JsonIgnore
     public List<RedirectEntry> getList() {
-        return getMap()
-            .entrySet()
-            .stream()
-            .map(RedirectEntry::new)
-            .collect(Collectors.toList());
-    }
+        if (entries == null) {
+            entries = getMap()
+                .entrySet()
+                .stream()
+                .map(RedirectEntry::new)
+                .collect(Collectors.toList());
+        }
+        return entries;
 
-    public void setMap(Map<String, String> redirects) {
-        this.redirects = redirects;
     }
 
     public Instant getLastUpdate() {
@@ -99,5 +99,18 @@ public class RedirectList implements Iterable<RedirectEntry> {
     public Iterator<RedirectEntry> iterator() {
         return getList().iterator();
 
+    }
+
+    protected void reduce() {
+        if (entries != null) {
+            redirects = new HashMap<>();
+            for (RedirectEntry e : entries) {
+                redirects.put(e.getFrom(), e.getTo());
+            }
+            entries = null;
+        }
+    }
+    void afterUnmarshal(Unmarshaller u, Object parent) {
+        reduce();
     }
 }
