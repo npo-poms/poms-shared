@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
@@ -31,90 +34,90 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
 
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList mediaIds;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList types;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList avTypes;
 
     @Valid
+    @Getter
+    @Setter
     private DateRangeMatcherList sortDates;
 
     @Valid
+    @Getter
+    @Setter
     private DateRangeMatcherList publishDates;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList broadcasters;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList locations;
 
     @Valid
+    @Getter
+    @Setter
     private ExtendedTextMatcherList tags;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList genres;
 
     @Valid
+    @Getter
+    @Setter
     private DateRangeMatcherList durations;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList descendantOf;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList episodeOf;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList memberOf;
 
     @Valid
+    @Getter
+    @Setter
     private RelationSearchList relations;
 
     @Valid
+    @Getter
+    @Setter
     private ScheduleEventSearch scheduleEvents;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList ageRatings;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList contentRatings;
 
-
-    public TextMatcherList getMediaIds() {
-        return mediaIds;
-    }
-
-    public void setMediaIds(TextMatcherList mediaIds) {
-        this.mediaIds = mediaIds;
-    }
-
-    public TextMatcherList getTypes() {
-        return types;
-    }
-
-    public void setTypes(TextMatcherList types) {
-        this.types = types;
-    }
-
-
-    public TextMatcherList getAvTypes() {
-        return avTypes;
-    }
-
-    public void setAvTypes(TextMatcherList avTypes) {
-        this.avTypes = avTypes;
-    }
-
-
-    public DateRangeMatcherList getSortDates() {
-        return sortDates;
-    }
-
-    public void setSortDates(DateRangeMatcherList sortDate) {
-        this.sortDates = sortDate;
-    }
 
     /**
      * @deprecated For json backwards compatibility
@@ -124,109 +127,6 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         this.sortDates = sortDate;
     }
 
-    public DateRangeMatcherList getPublishDates() {
-        return publishDates;
-    }
-
-    public void setPublishDates(DateRangeMatcherList publishDates) {
-        this.publishDates = publishDates;
-    }
-
-    public TextMatcherList getBroadcasters() {
-        return broadcasters;
-    }
-
-    public void setBroadcasters(TextMatcherList broadcasters) {
-        this.broadcasters = broadcasters;
-    }
-
-    public TextMatcherList getLocations() {
-        return locations;
-    }
-
-    public void setLocations(TextMatcherList locations) {
-        this.locations = locations;
-    }
-
-    public ExtendedTextMatcherList getTags() {
-        return tags;
-    }
-
-    public void setTags(ExtendedTextMatcherList tags) {
-        this.tags = tags;
-    }
-
-    public TextMatcherList getGenres() {
-        return genres;
-    }
-
-    public void setGenres(TextMatcherList genres) {
-        this.genres = genres;
-    }
-
-    public TextMatcherList getDescendantOf() {
-        return descendantOf;
-    }
-
-    public DateRangeMatcherList getDurations() {
-        return durations;
-    }
-
-    public void setDurations(DateRangeMatcherList duration) {
-        this.durations = duration;
-    }
-
-    public void setDescendantOf(TextMatcherList descendantOf) {
-        this.descendantOf = descendantOf;
-    }
-
-    public TextMatcherList getEpisodeOf() {
-        return episodeOf;
-    }
-
-    public void setEpisodeOf(TextMatcherList episodeOf) {
-        this.episodeOf = episodeOf;
-    }
-
-    public TextMatcherList getMemberOf() {
-        return memberOf;
-    }
-
-    public void setMemberOf(TextMatcherList memberOf) {
-        this.memberOf = memberOf;
-    }
-
-    public RelationSearchList getRelations() {
-        return relations;
-    }
-
-    public void setRelations(RelationSearchList relations) {
-        this.relations = relations;
-    }
-
-    public ScheduleEventSearch getScheduleEvents() {
-        return scheduleEvents;
-    }
-
-    public void setScheduleEvents(ScheduleEventSearch scheduleEvents) {
-        this.scheduleEvents = scheduleEvents;
-    }
-
-    public TextMatcherList getAgeRatings() {
-        return ageRatings;
-    }
-
-    public void setAgeRatings(TextMatcherList ageRating) {
-        this.ageRatings = ageRating;
-    }
-
-    public TextMatcherList getContentRatings() {
-        return contentRatings;
-    }
-
-    public void setContentRatings(TextMatcherList contentRatings) {
-        this.contentRatings = contentRatings;
-    }
 
     @Override
     public boolean hasSearches() {
