@@ -8,7 +8,6 @@
 
   <groupId>nl.publiekeomroep</groupId>
   <artifactId>poms-shared-parent</artifactId>
-  <version>5.3-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>poms-shared-parent</name>
