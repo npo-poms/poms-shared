@@ -4,10 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import static nl.vpro.domain.media.MediaTestDataBuilder.group;
-import static nl.vpro.domain.media.MediaTestDataBuilder.program;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import net.sf.json.test.JSONAssert;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -30,7 +27,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-import net.sf.json.test.JSONAssert;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.media.support.Image;
@@ -39,6 +35,11 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+
+import static nl.vpro.domain.media.MediaTestDataBuilder.group;
+import static nl.vpro.domain.media.MediaTestDataBuilder.program;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Roelof Jan Koekoek
@@ -644,6 +645,47 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
+    public void testWithLocationsWithUnknownOwner() throws Exception {
+        String example = "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"hasSubtitles\" : false,\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"locations\" : [ {\n" +
+            "    \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v\",\n" +
+            "    \"avAttributes\" : {\n" +
+            "      \"avFileFormat\" : \"MP4\"\n" +
+            "    },\n" +
+            "    \"offset\" : 780000,\n" +
+            "    \"duration\" : 600000,\n" +
+            "    \"owner\" : \"UNKNOWN\",\n" +
+            "    \"creationDate\" : 1457102700000,\n" +
+            "    \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "     \"publishStart\" : 1487244180000\n" +
+            "  }, {\n" +
+            "    \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf\",\n" +
+            "    \"avAttributes\" : {\n" +
+            "      \"avFileFormat\" : \"WM\"\n" +
+            "    },\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"creationDate\" : 1457099100000,\n" +
+            "    \"workflow\" : \"FOR_PUBLICATION\"\n" +
+            "  } ]\n" +
+            "}";
+
+
+        Program program = Jackson2Mapper.LENIENT.readerFor(Program.class).readValue(example);
+
+        assertThat(program.getLocations().first().getOwner()).isNull();
+
+
+    }
+
+    @Test
     public void testAvailableSubtitles() throws Exception {
     	ObjectNode media = JsonNodeFactory.instance.objectNode();
     	media.put("objectType", "program");
@@ -664,11 +706,11 @@ public class MediaObjectJsonSchemaTest {
     	subNLT.put("language", "nl");
     	subs.add(subNLT);
     	media.set("availableSubtitles", subs);
-    	
+
     	Program program = program().id(100L).lean().build();
     	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "CAPTION"));
     	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "TRANSLATION"));
-    	
+
     	Program out = Jackson2TestUtil.roundTripAndSimilar(program, pretty(media));
         assertEquals(2, out.getAvailableSubtitles().size());
         assertEquals("nl", out.getAvailableSubtitles().get(0).getLanguage().toString());
@@ -678,7 +720,7 @@ public class MediaObjectJsonSchemaTest {
 
     }
 	private String pretty(ObjectNode node) throws JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper(); 
+		ObjectMapper mapper = new ObjectMapper();
     	String pretty = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(node);
 		return pretty;
 	}
@@ -692,7 +734,7 @@ public class MediaObjectJsonSchemaTest {
             "  \"embeddable\" : true,\n" +
             "  \"broadcasters\" : [ ],\n" +
             "  \"genres\" : [ ],\n" +
-            "  \"hasSubtitles\" : false,\n" +            
+            "  \"hasSubtitles\" : false,\n" +
             "  \"countries\" : [ ],\n" +
             "  \"languages\" : [ ],\n" +
             "  \"credits\" : [ {\n" +
