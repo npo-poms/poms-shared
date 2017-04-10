@@ -102,7 +102,7 @@ public class MediaObjectXmlSchemaTest {
         Diff diff = XMLUnit.compareXML(expected, actual);
         assertTrue(diff.toString() + " " + actual, diff.identical());
     }
-    
+
     @Test
     public void testAvailableSubtitles() throws Exception {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program mid=\"MID_000001\" embeddable=\"true\" hasSubtitles=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><availableSubtitles><availableSubtitle language=\"nl\" type=\"CAPTION\"/><availableSubtitle language=\"nl\" type=\"TRANSLATION\"/></availableSubtitles><segments/></program>";
@@ -115,7 +115,7 @@ public class MediaObjectXmlSchemaTest {
 
         Diff diff = XMLUnit.compareXML(expected, actual);
         assertTrue(diff.toString() + " " + actual, diff.identical());
-    }    
+    }
 
     @Test
     public void testMidSchema() throws Exception {
@@ -684,6 +684,27 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
+    public void testWithLocationWithUnknownOwner() throws Exception {
+        String example = "<program embeddable=\"true\" hasSubtitles=\"false\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <locations>\n" +
+            "        <location owner=\"UNKNOWN\" creationDate=\"2016-03-04T15:45:00+01:00\" workflow=\"FOR PUBLICATION\">\n" +
+            "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
+            "            <avAttributes>\n" +
+            "                <avFileFormat>MP4</avFileFormat>\n" +
+            "            </avAttributes>\n" +
+            "            <offset>P0DT0H13M0.000S</offset>\n" +
+            "            <duration>P0DT0H10M0.000S</duration>\n" +
+            "        </location>\n" +
+            "    </locations>\n" +
+            "</program>";
+
+
+
+        Program program = JAXBTestUtil.unmarshal(example, Program.class);
+        assertThat(program.getLocations().first().getOwner()).isNull();
+    }
+
+        @Test
     public void testWithDescendantOf() throws IOException, SAXException {
 
         Program program = program().lean().withDescendantOf().build();
