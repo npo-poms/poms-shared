@@ -140,11 +140,11 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
     }
 
     public Schedule(Channel channel, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
-        this(channel, Date.from(start), Date.from(stop), scheduleEvents);
+        this(channel, DateUtils.toDate(start), DateUtils.toDate(stop), scheduleEvents);
     }
 
     public Schedule(Channel channel, Instant start, Instant stop) {
-        this(channel, Date.from(start), Date.from(stop), null);
+        this(channel, DateUtils.toDate(start), DateUtils.toDate(stop), null);
     }
 
     public Schedule(Net net, Date start, Date stop, Collection<ScheduleEvent> scheduleEvents) {
@@ -157,11 +157,11 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
     }
 
     public Schedule(Net net, Instant start, Instant stop) {
-        this(net, Date.from(start), Date.from(stop), null);
+        this(net, DateUtils.toDate(start), DateUtils.toDate(stop), null);
     }
 
     public Schedule(Net net, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
-        this(net, Date.from(start), Date.from(stop), scheduleEvents);
+        this(net, DateUtils.toDate(start), DateUtils.toDate(stop), scheduleEvents);
     }
 
     @XmlElement(name = "scheduleEvent")
