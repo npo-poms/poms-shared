@@ -53,6 +53,7 @@ import nl.vpro.util.SortedSetSameElementWrapper;
 import nl.vpro.validation.Language;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.xml.bind.FalseToNullAdapter;
 
 import static nl.vpro.domain.TextualObjects.sorted;
 
@@ -1551,6 +1552,7 @@ public abstract class MediaObject extends PublishableObject
 	}
 
 	@XmlAttribute
+    @XmlJavaTypeAdapter(FalseToNullAdapter.class)
 	public Boolean isHasSubtitles() {
 		return getAvailableSubtitles().stream().anyMatch(sub -> Locales.DUTCH.equals(sub.getLanguage()) && "caption".equalsIgnoreCase(sub.getType()));
 	}
