@@ -791,6 +791,7 @@
       <xs:enumeration value="memberAdded"/>
       <xs:enumeration value="member"/>
       <xs:enumeration value="creationDate"/>
+      <xs:enumeration value="lastModified"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
