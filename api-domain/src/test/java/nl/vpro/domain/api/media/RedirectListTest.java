@@ -1,15 +1,14 @@
 package nl.vpro.domain.api.media;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.bind.JAXB;
-
-import org.junit.Assert;
 import org.junit.Test;
 
-import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class RedirectListTest {
 
@@ -22,14 +21,20 @@ public class RedirectListTest {
     }
 
     @Test
-    public void json() throws IOException {
+    public void json() throws Exception {
         //Jackson2Mapper.getInstance().writeValue(System.out, instance);
-        Assert.assertEquals("{\"lastUpdate\":\"1970-01-01T01:00:00+01:00\",\"map\":{\"a\":\"b\"}}", Jackson2Mapper.getInstance().writeValueAsString(instance));
+        String expected = "{\"lastUpdate\":\"1970-01-01T01:00:00+01:00\",\"map\":{\"a\":\"b\"}}";
+        RedirectList rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(instance, expected);
+        assertThat(rounded.getList()).hasSize(1);
     }
 
     @Test
-    public void jaxb() throws IOException {
-        JAXB.marshal(instance, System.out);
+    public void jaxb() throws Exception {
+        JAXBTestUtil.roundTripAndSimilarAndEquals(instance,
+            "<redirects lastUpdate=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <entry from=\"a\" to=\"b\"/>\n" +
+            "</redirects>");
+
     }
 
 }
