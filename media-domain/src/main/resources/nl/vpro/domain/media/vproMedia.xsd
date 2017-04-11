@@ -8,7 +8,7 @@
 
   <xs:import
     namespace="http://www.w3.org/XML/1998/namespace"
-    schemaLocation="xml.xsd" />
+    schemaLocation="w3/xml.xsd" />
 
   <xs:annotation>
     <xs:documentation>This is the XSD for the POMS domain.</xs:documentation>
