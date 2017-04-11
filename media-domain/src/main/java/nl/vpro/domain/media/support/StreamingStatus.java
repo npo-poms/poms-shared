@@ -9,4 +9,12 @@ public enum StreamingStatus {
     NOT_AVAILABLE,
     AVAILABLE,
     AVAILABLE_WITH_DRM
+    ;
+
+    public static boolean isAvailable(StreamingStatus status) {
+        return status == AVAILABLE || status == AVAILABLE_WITH_DRM;
+    }
+    public static StreamingStatus available(boolean drm) {
+        return drm ? StreamingStatus.AVAILABLE_WITH_DRM : StreamingStatus.AVAILABLE;
+    }
 }
