@@ -6,7 +6,9 @@
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="vproShared.xsd"/>
 
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../xml.xsd" />
+  <xs:import
+    namespace="http://www.w3.org/XML/1998/namespace"
+    schemaLocation="xml.xsd" />
 
   <xs:annotation>
     <xs:documentation>This is the XSD for the POMS domain.</xs:documentation>
@@ -275,7 +277,7 @@
              <xs:element name="availableSubtitle" type="AvailableSubtitleType" minOccurs="0" maxOccurs="unbounded"/>
            </xs:sequence>
          </xs:complexType>
-      </xs:element>      
+      </xs:element>
     </xs:sequence>
     <xs:attribute type="midType" name="mid"/>
     <xs:attribute type="avTypeEnum" name="avType" use="required"/>
@@ -705,7 +707,7 @@
     <xs:attribute name="language" type="xs:string"/>
     <xs:attribute name="type" type="xs:string"/>
   </xs:complexType>
-  
+
   <xs:complexType name="groupType">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
