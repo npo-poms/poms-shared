@@ -166,7 +166,6 @@ public abstract class MediaUpdate<M extends MediaObject>
     protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, OwnerType type) {
         this.builder = builder;
         this.owner = type;
-
     }
 
     public boolean isValid() {

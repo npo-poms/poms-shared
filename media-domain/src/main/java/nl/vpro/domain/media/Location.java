@@ -193,7 +193,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         Platform platform
     ) {
         this.programUrl = programUrl;
-        this.owner = owner;
+        this.owner = owner == null ? OwnerType.BROADCASTER : owner;
         if (avAttributes == null) {
             avAttributes = new AVAttributes();
         }
