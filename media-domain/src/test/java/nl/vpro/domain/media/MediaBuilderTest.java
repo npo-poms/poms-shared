@@ -11,6 +11,8 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import nl.vpro.domain.media.update.ProgramUpdate;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MediaBuilderTest {
@@ -87,6 +89,27 @@ public class MediaBuilderTest {
         assertThat(program1.getMid()).isEqualTo("mid1");
         assertThat(program2.getMainTitle()).isEqualTo("base");
         assertThat(program2.getMid()).isEqualTo("mid2");
+
+    }
+
+    @Test
+    public void testLocations() throws Exception {
+        Program program = MediaBuilder.program()
+            .locations(
+                Location.builder()
+                    .programUrl("http://www.vpro.nl/1")
+                    .build()
+            )
+            .build();
+
+
+        assertThat(program.getLocations()).hasSize(1);
+        assertThat(program.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
+
+        ProgramUpdate update = ProgramUpdate.create(program);
+
+        assertThat(update.getLocations()).hasSize(1);
+        assertThat(update.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
 
     }
 }
