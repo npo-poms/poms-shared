@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.time.Duration;
@@ -30,12 +32,14 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Portal;
+import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.validation.WarningValidatorGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
+@Slf4j
 public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
@@ -581,5 +585,28 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         assertThat(update.build().getRelations().first().getText()).isEqualTo("bbb");
 
+    }
+
+    @Test
+    public void testLocations() {
+        Location expiredLocation =
+            Location.builder()
+                .avAttributes(AVAttributes.builder().avFileFormat(AVFileFormat.H264).build())
+                .platform(Platform.INTERNETVOD)
+                .programUrl("https://www.vpro.nl/1")
+                .build();
+        expiredLocation.setPublishStopInstant(Instant.now().minus(Duration.ofMinutes(1)));
+
+
+        ProgramUpdate clip = ProgramUpdate
+            .create(
+                MediaBuilder.program(ProgramType.CLIP)
+                    .clearBroadcasters()
+                    .broadcasters("VPRO")
+                    .locations(
+                        expiredLocation
+                    )
+            );
+        JAXB.marshal(clip, LoggerOutputStream.info(log));
     }
 }
