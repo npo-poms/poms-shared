@@ -45,7 +45,6 @@ public class PageSearchResultTest {
             "          \"embeddable\" : true,\n" +
             "          \"broadcasters\" : [ ],\n" +
             "          \"genres\" : [ ],\n" +
-            "          \"hasSubtitles\" : false,\n" +
             "          \"countries\" : [ ],\n" +
             "          \"languages\" : [ ],\n" +
             "          \"locations\" : [ {\n" +
