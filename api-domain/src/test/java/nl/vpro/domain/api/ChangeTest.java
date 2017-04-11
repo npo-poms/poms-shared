@@ -42,7 +42,6 @@ public class ChangeTest {
             "  \"media\" : {\n" +
             "    \"objectType\" : \"program\",\n" +
             "    \"embeddable\" : true,\n" +
-            "    \"hasSubtitles\" : false,\n" +
             "    \"broadcasters\" : [ ],\n" +
             "    \"genres\" : [ ],\n" +
             "    \"countries\" : [ ],\n" +
@@ -63,7 +62,7 @@ public class ChangeTest {
 
         JAXBTestUtil.assertThatXml(change).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<local:change sequence=\"1469014680000\" publishDate=\"2016-07-20T13:38:00+02:00\" mid=\"MID_123\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <api:media xsi:type=\"media:programType\" embeddable=\"true\" hasSubtitles=\"false\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+            "    <api:media xsi:type=\"media:programType\" embeddable=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "        <media:credits/>\n" +
             "        <media:locations/>\n" +
             "        <media:scheduleEvents/>\n" +

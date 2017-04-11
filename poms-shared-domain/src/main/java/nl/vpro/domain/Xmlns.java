@@ -75,7 +75,6 @@ public final class Xmlns {
 
     public static final URL XML_XSD = Xmlns.class.getResource("/nl/vpro/domain/media/w3/xml.xsd");
 
-
     public static final Schema SCHEMA;
 
     static {
