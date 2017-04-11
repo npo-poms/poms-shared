@@ -2,6 +2,7 @@
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
   <xs:include schemaLocation="absentnamespace.xsd"/>
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="w3/xml.xsd"/>
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="vproShared.xsd"/>
   <xs:import namespace="urn:vpro:media:2009" schemaLocation="vproMedia.xsd"/>
   <xs:import namespace="urn:vpro:media:update:2009" schemaLocation="update/vproMediaUpdate.xsd"/>
