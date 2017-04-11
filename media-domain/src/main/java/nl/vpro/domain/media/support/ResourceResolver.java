@@ -51,7 +51,6 @@ public class ResourceResolver implements LSResourceResolver {
         MAP.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, Xmlns.MEDIA_CONSTRAINT_XSD);
         MAP.put(Xmlns.CONSTRAINT_NAMESPACE, Xmlns.CONSTRAINT_XSD);
 
-
         //MAP.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, Xmlns.MEDIA_SUBTITLES_XSD)
     }
 
