@@ -11,6 +11,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.update.ProgramUpdate;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -98,6 +99,7 @@ public class MediaBuilderTest {
             .locations(
                 Location.builder()
                     .programUrl("http://www.vpro.nl/1")
+                    .owner(OwnerType.BROADCASTER)
                     .build()
             )
             .build();
