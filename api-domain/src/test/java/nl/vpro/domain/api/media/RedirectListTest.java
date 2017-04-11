@@ -22,18 +22,27 @@ public class RedirectListTest {
 
     @Test
     public void json() throws Exception {
-        //Jackson2Mapper.getInstance().writeValue(System.out, instance);
-        String expected = "{\"lastUpdate\":\"1970-01-01T01:00:00+01:00\",\"map\":{\"a\":\"b\"}}";
-        RedirectList rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(instance, expected);
+        RedirectList rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(instance,
+            "{\"lastUpdate\":\"1970-01-01T01:00:00+01:00\",\"map\":{\"a\":\"b\"}}");
         assertThat(rounded.getList()).hasSize(1);
+        assertThat(rounded.getList().get(0).getFrom()).isEqualTo("a");
+        assertThat(rounded.getList().get(0).getTo()).isEqualTo("b");
+        assertThat(rounded.getMap()).hasSize(1);
+        assertThat(rounded.getMap().get("a")).isEqualTo("b");
     }
 
     @Test
     public void jaxb() throws Exception {
-        JAXBTestUtil.roundTripAndSimilarAndEquals(instance,
+        RedirectList rounded = JAXBTestUtil.roundTripAndSimilarAndEquals(instance,
             "<redirects lastUpdate=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <entry from=\"a\" to=\"b\"/>\n" +
             "</redirects>");
+        assertThat(rounded.getList()).hasSize(1);
+        assertThat(rounded.getList().get(0).getFrom()).isEqualTo("a");
+        assertThat(rounded.getList().get(0).getTo()).isEqualTo("b");
+        assertThat(rounded.getMap()).hasSize(1);
+        assertThat(rounded.getMap().get("a")).isEqualTo("b");
+
 
     }
 
