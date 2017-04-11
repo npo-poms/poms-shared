@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Builder;
+
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
@@ -80,6 +82,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
         this.avAttributes = new AVAttributesUpdate(format, bitrate);
     }
 
+    @Builder
     public LocationUpdate(String programUrl, Duration duration, Integer width, Integer height, Integer bitrate, AVFileFormat format) {
         this(programUrl, duration, bitrate, format);
         this.avAttributes.setVideoAttributes(new VideoAttributesUpdate(width, height));
