@@ -1,10 +1,11 @@
 package nl.vpro.domain.api;
 
-import javax.xml.bind.JAXB;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.time.Instant;
 import java.util.Date;
+
+import javax.xml.bind.JAXB;
 
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLUnit;
@@ -46,7 +47,6 @@ public class ApiScheduleEventTest {
                 "    \"sortDate\" : 100,\n" +
                 "    \"creationDate\" : 1409733642642,\n" +
                 "    \"embeddable\" : true,\n" +
-                "    \"hasSubtitles\" : false,\n" +
                 "    \"broadcasters\" : [ ],\n" +
                 "    \"genres\" : [ ],\n" +
                 "    \"countries\" : [ ],\n" +
@@ -99,7 +99,7 @@ public class ApiScheduleEventTest {
             "    <media:start>1970-01-01T01:00:00.100+01:00</media:start>\n" +
             "    <media:duration>P0DT0H0M0.200S</media:duration>\n" +
             "    <media:poProgID>VPROWON_12345</media:poProgID>\n" +
-            "    <media:program embeddable=\"true\" hasSubtitles=\"false\" mid=\"VPROWON_12345\" sortDate=\"1970-01-01T01:00:00.100+01:00\" creationDate=\"2014-09-03T10:40:42.642+02:00\" workflow=\"FOR PUBLICATION\">\n" +
+            "    <media:program embeddable=\"true\" mid=\"VPROWON_12345\" sortDate=\"1970-01-01T01:00:00.100+01:00\" creationDate=\"2014-09-03T10:40:42.642+02:00\" workflow=\"FOR PUBLICATION\">\n" +
             "        <media:credits/>\n" +
             "        <media:locations/>\n" +
             "        <media:scheduleEvents>\n" +
