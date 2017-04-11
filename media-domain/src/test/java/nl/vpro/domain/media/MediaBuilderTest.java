@@ -103,6 +103,8 @@ public class MediaBuilderTest {
                     .build()
             )
             .build();
+        program.getLocations().first().setPublishStopInstant(
+            LocalDate.of(2017, 4, 11).atStartOfDay(Schedule.ZONE_ID).toInstant());
 
 
         assertThat(program.getLocations()).hasSize(1);
@@ -112,6 +114,7 @@ public class MediaBuilderTest {
 
         assertThat(update.getLocations()).hasSize(1);
         assertThat(update.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
+        assertThat(update.getLocations().first().getPublishStopInstant()).isEqualTo(LocalDate.of(2017, 4, 11).atStartOfDay(Schedule.ZONE_ID).toInstant());
 
     }
 }
