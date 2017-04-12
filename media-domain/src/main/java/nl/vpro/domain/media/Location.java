@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.PublishableObject;
@@ -296,8 +297,11 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         if (platform != null && this.mediaObject != null) {
             Prediction record = getAuthorityRecord();
             // in sync so we can query this class its fields on publishables
-            this.publishStart = record.getPublishStartInstant();
-            this.publishStop = record.getPublishStopInstant();
+            if (record.getAuthority() == Authority.USER) {
+                Embargos.copyIfMoreRestricted(record, this);
+            } else {
+                Embargos.copy(record, this);
+            }
             if (this.mediaObject.getLocations().contains(this)) {
                 this.mediaObject.realizePrediction(this);
             }
@@ -436,8 +440,11 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             if (mediaObject == null) {
                 throw new IllegalStateException("Location does not have a parent mediaobject");
             }
-
+            Prediction existing = mediaObject.getPrediction(platform);
             Prediction rec = mediaObject.findOrCreatePrediction(platform);
+            if (existing == null) {
+                Embargos.copy(Embargos.of(publishStart, publishStop), rec);
+            }
             return rec;
         } else {
             return null;
