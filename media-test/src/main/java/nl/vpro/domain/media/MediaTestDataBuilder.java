@@ -428,19 +428,20 @@ public interface MediaTestDataBuilder<
 
     default T withImages() {
         return images(
-            Image.builder().id(1L).imageUri("urn:vpro:image:1234").title("Eerste plaatje"),
-            Image.builder().id(2L).imageUri("urn:vpro:image:5678").title("Tweede plaatje"),
-            Image.builder().id(3L).owner(OwnerType.NEBO).imageUri("urn:vpro:image:2468").title("Een plaatje met andere owner"),
-            Image.builder().id(4L).owner(OwnerType.NEBO).imageUri("urn:vpro:image:8888").title("Nog een plaatje met andere owner")
+            Image.builder().imageUri("urn:vpro:image:1234").title("Eerste plaatje"),
+            Image.builder().imageUri("urn:vpro:image:5678").title("Tweede plaatje"),
+            Image.builder().owner(OwnerType.NEBO).imageUri("urn:vpro:image:2468").title("Een plaatje met andere owner"),
+            Image.builder().owner(OwnerType.NEBO).imageUri("urn:vpro:image:8888").title("Nog een plaatje met andere owner")
         );
     }
 
     default T withImagesWithCredits() {
         return images(
-            Image.builder().id(1L).imageUri("urn:vpro:image:11234").title("Eerste plaatje").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
-            Image.builder().id(2L).imageUri("urn:vpro:image:15678").title("Tweede plaatje").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
-            Image.builder().id(3L).owner(OwnerType.NEBO).imageUri("urn:vpro:image:12468").title("Een plaatje met andere owner").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
-            Image.builder().id(4L).owner(OwnerType.NEBO).imageUri("urn:vpro:image:108888").title("Nog een plaatje met andere owner").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE")
+            Image.builder().imageUri("urn:vpro:image:11234").title("Eerste plaatje met credits").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
+            Image.builder().imageUri("urn:vpro:image:15678").title("Tweede plaatje met credits").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
+            // ALso some without credits
+            Image.builder().owner(OwnerType.NEBO).imageUri("urn:vpro:image:12468").title("Een plaatje met andere owner"),
+            Image.builder().owner(OwnerType.NEBO).imageUri("urn:vpro:image:18888").title("Nog een plaatje met andere owner")
         );
     }
 
