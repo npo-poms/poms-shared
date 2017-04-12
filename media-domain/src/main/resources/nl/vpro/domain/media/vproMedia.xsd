@@ -725,18 +725,20 @@
     <xs:attribute type="midType" name="midRef" />
     <xs:attribute type="xs:anyURI" name="urnRef" />
     <xs:attribute type="mediaTypeEnum" name="type" use="required"/>
+    <!-- not yet supported in java?
     <xs:assert test="(@midRef and not(@urnRef)) or (not(@midRef) and @urnRef)"/>
+    -->
   </xs:complexType>
 
   <xs:complexType name="memberRefType">
-    <xs:attribute type="midType" name="midRef" use="required">
+    <xs:attribute type="midType" name="midRef" use="optional">
       <xs:annotation>
         <xs:documentation>
           Reference to the MID of the parent of this object.
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
-    <xs:attribute type="xs:anyURI" name="urnRef" use="required">
+    <xs:attribute type="xs:anyURI" name="urnRef" use="optional">
       <xs:annotation>
         <xs:documentation>
           Reference to the URN of the parent of this object. URN's are no longer actively used, but the attribute is
@@ -756,6 +758,9 @@
     <xs:attribute type="xs:positiveInteger" name="index"/>
     <xs:attribute type="xs:boolean" name="highlighted" default="false"/>
     <xs:attribute type="xs:dateTime" name="added" use="optional"/>
+    <!-- not yet supported in java?
+   <xs:assert test="(@midRef and not(@urnRef)) or (not(@midRef) and @urnRef)"/>
+   -->
   </xs:complexType>
 
   <xs:simpleType name="midType">
