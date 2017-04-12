@@ -722,9 +722,10 @@
   </xs:complexType>
 
   <xs:complexType name="descendantRefType">
-    <xs:attribute type="midType" name="midRef" use="required"/>
-    <xs:attribute type="xs:anyURI" name="urnRef" use="required"/>
+    <xs:attribute type="midType" name="midRef" />
+    <xs:attribute type="xs:anyURI" name="urnRef" />
     <xs:attribute type="mediaTypeEnum" name="type" use="required"/>
+    <xs:assert test="(@midRef and not(@urnRef)) or (not(@midRef) and @urnRef)"/>
   </xs:complexType>
 
   <xs:complexType name="memberRefType">
