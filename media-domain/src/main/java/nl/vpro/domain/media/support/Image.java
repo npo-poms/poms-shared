@@ -201,7 +201,19 @@ public class Image extends PublishableObject implements Ownable {
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    protected Image(OwnerType owner, ImageType type, String imageUri, String title, String description, Long id, String credits, License license, String source, Integer height, Integer width, java.time.Duration offset) {
+    protected Image(
+        OwnerType owner,
+        ImageType type,
+        String imageUri,
+        String title,
+        String description,
+        Long id,
+        String credits,
+        License license,
+        String source,
+        Integer height,
+        Integer width,
+        java.time.Duration offset) {
         this(owner, type, imageUri);
         this.title = title;
         this.description = description;

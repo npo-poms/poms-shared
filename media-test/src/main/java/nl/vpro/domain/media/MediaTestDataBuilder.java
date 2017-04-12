@@ -7,9 +7,7 @@ package nl.vpro.domain.media;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +18,7 @@ import java.util.function.Function;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.Duration;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.TestEditors;
@@ -473,7 +472,8 @@ public interface MediaTestDataBuilder<
 
     default T withEverything() {
         return
-            withAgeRating()
+            withId()
+                .withAgeRating()
                 .withAspectRatio()
                 .withAuthorityRecord()
                 .withAvAttributes()
@@ -542,7 +542,7 @@ public interface MediaTestDataBuilder<
                 .withEpisodeOf()
                 .withPoProgType()
                 .withPredictions()
-                .withSegments();
+                .withSegmentsWithEveryting();
 
         }
         @Override
@@ -586,6 +586,16 @@ public interface MediaTestDataBuilder<
             new Segment(mediaObject(), "VPROWON_12345_3", new Date(1000000), Duration.ofMillis(300000));
             return this;
         }
+
+        public ProgramTestDataBuilder withSegmentsWithEveryting() {
+            return
+                segments(
+                    MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_1").start(java.time.Duration.ZERO).duration(java.time.Duration.ofMillis(100000)).build(),
+                    MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(java.time.Duration.ofMillis(100000)).duration(java.time.Duration.ofMillis(100000)).build());
+
+        }
+
+
 
 
         public ProgramTestDataBuilder withPoProgType() {
