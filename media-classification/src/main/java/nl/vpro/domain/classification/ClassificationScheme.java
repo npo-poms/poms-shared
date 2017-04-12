@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.classification;
 
+import lombok.ToString;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import javax.xml.bind.annotation.*;
 })
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "ClassificationScheme")
+@ToString
 public class ClassificationScheme implements TermContainer {
 
     @XmlElement(name = "Term")
