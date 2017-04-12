@@ -20,6 +20,14 @@ public class ImageData {
     @NotNull(message = "provide image data")
     private DataHandler data;
 
+    public ImageData() {
+
+    }
+
+    public ImageData(DataHandler data) {
+        this.data = data;
+    }
+
     public DataHandler getData() {
         return data;
     }
