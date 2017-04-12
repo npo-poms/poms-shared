@@ -326,7 +326,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     default B mainTitle(String title) {
         return mainTitle(title, OwnerType.BROADCASTER);
     }
-    
+
     default B addDutchCaptions() {
     	mediaObject().getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "caption"));
     	return (B) this;
@@ -668,6 +668,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             mediaObject().addImage(image);
         }
         return (B)this;
+    }
+
+    @SuppressWarnings("unchecked")
+    default B images(Image.Builder... images) {
+        for (Image.Builder image : images) {
+            mediaObject().addImage(image.build());
+        }
+        return (B) this;
     }
 
     @SuppressWarnings("unchecked")

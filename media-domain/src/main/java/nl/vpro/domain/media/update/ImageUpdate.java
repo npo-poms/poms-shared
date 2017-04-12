@@ -71,8 +71,8 @@ public class ImageUpdate {
     @NotNull
     private ImageType type;
 
-    @XmlAttribute
-    private String urn;
+    @XmlAttribute(name = "urn")
+    private String urnAttribute;
 
 
 
@@ -227,7 +227,7 @@ public class ImageUpdate {
         offset = image.getOffset();
         license = image.getLicense();
         sourceName = image.getSourceName();
-        urn = image.getUrn();
+        urnAttribute = image.getUrn();
     }
 
     public Image toImage(String imageUri) {
@@ -246,7 +246,7 @@ public class ImageUpdate {
         result.setLicense(license);
         result.setDate(date);
         result.setOffset(offset);
-        result.setUrn(urn);
+        result.setUrn(urnAttribute);
         return result;
     }
 
@@ -286,21 +286,21 @@ public class ImageUpdate {
     }
 
 
-    public String getUrn() {
-        return urn;
+    public String getUrnAttribute() {
+        return urnAttribute;
     }
 
-    public void setUrn(String s) {
-        this.urn = s;
+    public void setUrnAttribute(String s) {
+        this.urnAttribute = s;
     }
 
     public Long getId() {
-        return Image.idFromUrn(urn);
+        return Image.idFromUrn(urnAttribute);
     }
 
 
     public void setId(Long id) {
-        urn = id == null ? null : Image.BASE_URN + id;
+        urnAttribute = id == null ? null : Image.BASE_URN + id;
     }
 
     public Instant getPublishStart() {
