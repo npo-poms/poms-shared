@@ -32,7 +32,6 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Portal;
-import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.validation.WarningValidatorGroup;
 
@@ -597,6 +596,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 .build();
         expiredLocation.setPublishStopInstant(Instant.now().minus(Duration.ofMinutes(1)));
 
+        assertThat(expiredLocation.getPublishStopInstant()).isNotNull();
 
         ProgramUpdate clip = ProgramUpdate
             .create(
@@ -607,6 +607,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                         expiredLocation
                     )
             );
-        JAXB.marshal(clip, LoggerOutputStream.info(log));
+        assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); // fails
+        ProgramUpdate rounded = JAXBTestUtil.roundTrip(clip);
+        assertThat(rounded.getLocations().first().getPublishStopInstant()).isNotNull();
+
     }
 }
