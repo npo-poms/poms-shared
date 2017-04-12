@@ -10,6 +10,10 @@ public class TermId implements Comparable<TermId> {
 
     final int[] parts;
 
+    public static TermId of(String id) {
+        return new TermId(id);
+    }
+
     public TermId(String id) {
         String[] stringParts = id.split("\\.");
         parts = new int[stringParts.length];
