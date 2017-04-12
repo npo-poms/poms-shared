@@ -7,8 +7,11 @@ package nl.vpro.domain.media.update;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
+import javax.activation.DataHandler;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.ConstraintViolation;
@@ -165,6 +168,46 @@ public class ImageUpdate {
         this.type = type;
         this.image = image;
     }
+
+    public static class Builder {
+
+        public Builder imageUrl(String imageLocation) {
+            return imageLocation(new ImageLocation(imageLocation));
+        }
+
+        public Builder imageDataHandler(DataHandler dataHandler) {
+            return imageData(new ImageData(dataHandler));
+        }
+
+    }
+
+    @lombok.Builder(builderClassName = "Builder")
+    public ImageUpdate(
+        ImageType type,
+        String title,
+        String description,
+        ImageLocation imageLocation,
+        ImageData imageData,
+        String imageUrn,
+        License license,
+        String sourceName,
+        String credits
+        ) {
+        this.description = description;
+        this.title = title;
+        this.type = type;
+        Stream.of(imageLocation, imageData, imageUrn).filter(Objects::nonNull).forEach(o -> {
+                if (this.image != null) {
+                    throw new IllegalStateException("Can specify only on of imageLocation, imageData or imageUrn");
+                }
+                this.image = o;
+            }
+        );
+        this.license = license;
+        this.sourceName = sourceName;
+        this.credits = credits;
+    }
+
 
     public ImageUpdate(Image image) {
         type = image.getType();
