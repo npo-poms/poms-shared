@@ -23,6 +23,19 @@ public class Embargos {
         }
     }
 
+    public static void copyIfMoreRestricted(ReadonlyEmbargo from, Embargo to) {
+        if (from.getPublishStartInstant() != null &&
+            (to.getPublishStartInstant() == null || to.getPublishStartInstant().isBefore(from.getPublishStartInstant()))
+            ) {
+            to.setPublishStartInstant(from.getPublishStartInstant());
+        }
+        if (from.getPublishStopInstant() != null &&
+            (to.getPublishStopInstant() == null && to.getPublishStopInstant().isAfter(from.getPublishStopInstant()))
+            ) {
+            to.setPublishStopInstant(from.getPublishStopInstant());
+        }
+    }
+
     public static ReadonlyEmbargo readyOnly(final Embargo embargo) {
         return readyOnly(
             embargo.getPublishStartInstant(),
@@ -44,4 +57,8 @@ public class Embargos {
             }
         };
     }
+    public static Embargo of(final Instant start, final Instant stop) {
+        return new BasicEmbargo(start, stop);
+    }
+
 }

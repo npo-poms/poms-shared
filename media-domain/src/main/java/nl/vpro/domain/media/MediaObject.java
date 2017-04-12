@@ -33,6 +33,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.LocalizedObject;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageType;
@@ -1678,7 +1679,7 @@ public abstract class MediaObject extends PublishableObject
 	}
 
 	public Prediction getPrediction(Platform platform) {
-		return MediaObjects.getPrediction(platform, getPredictions());
+		return MediaObjects.getPrediction(platform, predictions);
 	}
 
 	/**
@@ -1808,18 +1809,16 @@ public abstract class MediaObject extends PublishableObject
 			}
 
 			existing.setAvAttributes(location.getAvAttributes());
-			existing.setPublishStartInstant(location.getPublishStartInstant());
-			existing.setPublishStopInstant(location.getPublishStopInstant());
+			Embargos.copy(location, existing);
 			existing.setSubtitles(location.getSubtitles());
 			existing.setDuration(location.getDuration());
 			existing.setOffset(location.getOffset());
 		} else {
 			location.setMediaObject(this);
 			locations.add(location);
-
-			if (location.hasPlatform()) {
-				realizePrediction(location);
-			}
+            if (location.hasPlatform()) {
+                realizePrediction(location);
+            }
 		}
 
 		return this;
