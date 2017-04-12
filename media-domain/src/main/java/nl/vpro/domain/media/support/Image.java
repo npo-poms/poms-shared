@@ -32,6 +32,7 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.secondscreen.Screen;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.util.TimeUtils;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DateToDuration;
 
@@ -192,6 +193,28 @@ public class Image extends PublishableObject implements Ownable {
         this(owner, imageUri);
         this.type = type;
     }
+
+    public static class Builder {
+        private OwnerType owner = OwnerType.BROADCASTER;
+        private ImageType type = ImageType.PICTURE;
+
+    }
+
+    @lombok.Builder(builderClassName = "Builder")
+    protected Image(OwnerType owner, ImageType type, String imageUri, String title, String description, Long id, String credits, License license, String source, Integer height, Integer width, java.time.Duration offset) {
+        this(owner, type, imageUri);
+        this.title = title;
+        this.description = description;
+        this.id = id;
+        this.credits = credits;
+        this.license = license;
+        this.source = source;
+        this.height = height;
+        this.width = width;
+        this.offset = TimeUtils.asDate(offset);
+
+    }
+
 
     public Image(Image source) {
         super(source);

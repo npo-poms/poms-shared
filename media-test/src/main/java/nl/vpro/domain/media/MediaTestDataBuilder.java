@@ -110,7 +110,7 @@ public interface MediaTestDataBuilder<
     default T lean() {
         return creationDate((Instant) null).workflow(null);
     }
-    
+
     default T valid() {
         return constrained();
     }
@@ -126,16 +126,12 @@ public interface MediaTestDataBuilder<
     }
 
     default T constrainedNew() {
-        try {
-            return
-                withAVType()
+        return
+            withAVType()
                 .withBroadcasters()
                 .withTitles()
                 .withCreationDate()
                 .withDuration();
-        } catch (ModificationException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     default T withCreatedBy() {
@@ -300,7 +296,7 @@ public interface MediaTestDataBuilder<
     }
 
     @SuppressWarnings("unchecked")
-    default T withDuration() throws ModificationException {
+    default T withDuration()  {
         return duration(java.time.Duration.of(2, ChronoUnit.HOURS));
     }
 
@@ -324,7 +320,7 @@ public interface MediaTestDataBuilder<
             "De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn.");
     }
 
-    default T withMemberOf() throws ModificationException {
+    default T withMemberOf()  {
         Group series = group().constrained().id(100L).type(GroupType.SERIES).build();
 
         Group season = group().constrained().id(200L).type(GroupType.SEASON).build();
@@ -433,19 +429,19 @@ public interface MediaTestDataBuilder<
 
     default T withImages() {
         return images(
-            new Image(OwnerType.BROADCASTER, "urn:vpro:image:1234"),
-            new Image(OwnerType.BROADCASTER, "urn:vpro:image:5678"),
-            new Image(OwnerType.NEBO, "urn:vpro:image:2468"),
-            new Image(OwnerType.NEBO, "urn:vpro:image:8888")
+            Image.builder().id(1L).imageUri("urn:vpro:image:1234").title("Eerste plaatje"),
+            Image.builder().id(2L).imageUri("urn:vpro:image:5678").title("Tweede plaatje"),
+            Image.builder().id(3L).owner(OwnerType.NEBO).imageUri("urn:vpro:image:2468").title("Een plaatje met andere owner"),
+            Image.builder().id(4L).owner(OwnerType.NEBO).imageUri("urn:vpro:image:8888").title("Nog een plaatje met andere owner")
         );
     }
 
     default T withImagesWithCredits() {
         return images(
-                new Image(OwnerType.BROADCASTER, "urn:vpro:image:1234").setCredits("CREDITS").setLicense(License.PUBLIC_DOMAIN).setSource("SOURCE"),
-                new Image(OwnerType.BROADCASTER, "urn:vpro:image:5678").setCredits("CREDITS").setLicense(License.PUBLIC_DOMAIN).setSource("SOURCE"),
-                new Image(OwnerType.NEBO, "urn:vpro:image:2468"),
-                new Image(OwnerType.NEBO, "urn:vpro:image:8888")
+            Image.builder().id(1L).imageUri("urn:vpro:image:11234").title("Eerste plaatje").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
+            Image.builder().id(2L).imageUri("urn:vpro:image:15678").title("Tweede plaatje").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
+            Image.builder().id(3L).owner(OwnerType.NEBO).imageUri("urn:vpro:image:12468").title("Een plaatje met andere owner").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
+            Image.builder().id(4L).owner(OwnerType.NEBO).imageUri("urn:vpro:image:108888").title("Nog een plaatje met andere owner").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE")
         );
     }
 
@@ -475,6 +471,52 @@ public interface MediaTestDataBuilder<
         return mergedTo(MediaBuilder.group().type(GroupType.SEASON).build());
     }
 
+    default T withEverything() {
+        return
+            withAgeRating()
+                .withAspectRatio()
+                .withAuthorityRecord()
+                .withAvAttributes()
+                .withAVType()
+                .withAwards()
+                .withBroadcasters()
+                .withContentRating()
+                .withCountries()
+                .withCreatedBy()
+                .withDescendantOf()
+                .withDescriptions()
+                .withDuration()
+                .withEmail()
+                .withFixedDates()
+                .withGenres()
+                .withGeoRestrictions()
+                .withImagesWithCredits()
+                .withLanguages()
+                .withLastModifiedBy()
+                .withLocations()
+                .withMemberOf()
+                .withMergedTo()
+                .withMid()
+                .withPersons()
+                .withPortalRestrictions()
+                .withPortals()
+                .withPublishedLocations()
+                .withRelations()
+                .withReleaseYear()
+                .withScheduleEvents()
+                .withSource()
+                .withSubtitles()
+                .withTags()
+                .withTeletext()
+                .withTitles()
+                .withTwitterRefs()
+                .withWebsites()
+                .withWorkflow()
+
+            ;
+    }
+
+
     static Image image(OwnerType ownerType, String urn, Workflow workflow) {
         Image image = new Image(ownerType, urn);
         image.setWorkflow(workflow);
@@ -491,6 +533,17 @@ public interface MediaTestDataBuilder<
         }
         ProgramTestDataBuilder(Program program) {
             super(program);
+        }
+
+        @Override
+        public ProgramTestDataBuilder withEverything() {
+            return MediaTestDataBuilder.super.withEverything()
+                .withType()
+                .withEpisodeOf()
+                .withPoProgType()
+                .withPredictions()
+                .withSegments();
+
         }
         @Override
         public MediaBuilder<MediaBuilder.ProgramBuilder, Program> getMediaBuilder() {
@@ -511,11 +564,11 @@ public interface MediaTestDataBuilder<
             return this;
         }
 
-        public ProgramTestDataBuilder withEpisodeOf() throws ModificationException {
+        public ProgramTestDataBuilder withEpisodeOf()  {
             return withEpisodeOf(null, null);
         }
 
-        public ProgramTestDataBuilder withEpisodeOf(Long group1, Long group2) throws ModificationException {
+        public ProgramTestDataBuilder withEpisodeOf(Long group1, Long group2)  {
             Group series = MediaTestDataBuilder.group().constrained().type(GroupType.SERIES).id(group1).build();
             Group season = MediaTestDataBuilder.group().constrained().type(GroupType.SEASON).id(group2).build();
             try {
@@ -592,6 +645,15 @@ public interface MediaTestDataBuilder<
             return poSeriesID("VPRO_12345");
         }
 
+        @Override
+        public GroupTestDataBuilder withEverything() {
+            return MediaTestDataBuilder.super.withEverything()
+                .withType()
+                .withPoSeriesID()
+                ;
+
+        }
+
     }
 
     @Slf4j
@@ -624,6 +686,13 @@ public interface MediaTestDataBuilder<
         public SegmentTestDataBuilder constrainedNew() {
             return MediaTestDataBuilder.super.constrainedNew().
                 withStart();
+        }
+
+        @Override
+        public SegmentTestDataBuilder withEverything() {
+            return MediaTestDataBuilder.super.withEverything()
+                .withStart();
+
         }
     }
 }
