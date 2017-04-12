@@ -471,10 +471,31 @@ public interface MediaTestDataBuilder<
         return mergedTo(MediaBuilder.group().type(GroupType.SEASON).build());
     }
 
+    default T withIds() {
+        return withIds(idBase);
+    }
+
+    default T withIds(AtomicLong id) {
+
+        for (Image image : mediaObject().getImages()) {
+            if (image.getId() == null) {
+                image.setId(id.incrementAndGet());
+            }
+        }
+        for (Location location : mediaObject().getLocations()) {
+            if (location.getId() == null) {
+                location.setId(id.incrementAndGet());
+            }
+        }
+        if (mediaObject().getId() == null) {
+            id(id.incrementAndGet());
+        }
+        return (T) this;
+    }
+
     default T withEverything() {
         return
-            withId()
-                .withAgeRating()
+            withAgeRating()
                 .withAspectRatio()
                 .withAuthorityRecord()
                 .withAvAttributes()
@@ -513,8 +534,9 @@ public interface MediaTestDataBuilder<
                 .withTwitterRefs()
                 .withWebsites()
                 .withWorkflow()
+                .withIds()
 
-            ;
+        ;
     }
 
 
@@ -597,6 +619,17 @@ public interface MediaTestDataBuilder<
         }
 
 
+        @Override
+        public ProgramTestDataBuilder withIds(AtomicLong id) {
+            MediaTestDataBuilder.super.withIds(id);
+            for (Segment segment : mediaObject.getSegments()) {
+                if (segment.getId() != null) {
+                    segment.setId(id.incrementAndGet());
+                }
+            }
+            return this;
+
+        }
 
 
         public ProgramTestDataBuilder withPoProgType() {
@@ -664,6 +697,8 @@ public interface MediaTestDataBuilder<
                 ;
 
         }
+
+
 
     }
 
