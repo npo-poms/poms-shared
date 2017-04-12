@@ -1,5 +1,8 @@
 package nl.vpro.domain.classification;
 
+import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -23,11 +26,11 @@ import nl.vpro.util.URLResource;
  * @author Michiel Meeuwissen
  * @since 3.2
  */
+@Slf4j
+@ToString(callSuper = true)
 public class URLClassificationServiceImpl extends AbstractClassificationServiceImpl  implements Consumer<SortedMap<TermId, Term>> {
 
     final URLResource<SortedMap<TermId, Term>> resource;
-
-
 
     public URLClassificationServiceImpl(URI url) {
         this.resource = create(url);
@@ -50,7 +53,7 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
                 source.setSystemId(url.toURL().toExternalForm());
                 return create(source);
             } catch (MalformedURLException e) {
-                URLClassificationServiceImpl.this.LOG.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
                 return null;
             }
         };
@@ -78,15 +81,12 @@ public class URLClassificationServiceImpl extends AbstractClassificationServiceI
         try{
             return readTerms(Collections.singletonList(inputSource));
         }catch(ParserConfigurationException e){
-            LOG.error(e.getMessage(),e);
+            log.error(e.getMessage(),e);
             return null;
         }
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(resource);
-    }
+
 
     @Override
     public boolean equals(Object o) {

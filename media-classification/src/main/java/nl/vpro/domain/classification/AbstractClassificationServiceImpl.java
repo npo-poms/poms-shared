@@ -4,12 +4,8 @@
  */
 package nl.vpro.domain.classification;
 
-import javax.annotation.PreDestroy;
-import javax.xml.bind.JAXB;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.dom.DOMSource;
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -18,8 +14,13 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.annotation.PreDestroy;
+import javax.xml.bind.JAXB;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.dom.DOMSource;
+
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -27,9 +28,8 @@ import org.xml.sax.InputSource;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
+@Slf4j
 public abstract class AbstractClassificationServiceImpl implements ClassificationService {
-
-    protected final Logger LOG = LoggerFactory.getLogger(getClass());
 
     protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
@@ -111,7 +111,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
                             }
                         } catch (Exception e) {
-                            LOG.error(e.getMessage(), e);
+                            log.error(e.getMessage(), e);
                         }
                     });
                     try {
@@ -119,7 +119,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
                     } catch (InterruptedException e) {
                         // never mind
                     } catch (ExecutionException e) {
-                        LOG.error(e.getMessage(), e);
+                        log.error(e.getMessage(), e);
                     }
                     if (terms == null) {
                         terms = new TreeMap<>();
@@ -149,7 +149,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
                     putAll(genreCs, subResult);
                 }
             } catch (Exception e) {
-                LOG.error(input.getSystemId() + ":" + e.getMessage(), e);
+                log.error(input.getSystemId() + ":" + e.getMessage(), e);
                 continue;
             }
             // only if success, set the parents right
@@ -162,7 +162,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
                         parent.addTerm(term);
                     }
                 } catch (Exception e){
-                    LOG.error(input.getSystemId() + ":" + e.getMessage(), e);
+                    log.error(input.getSystemId() + ":" + e.getMessage(), e);
                 }
 
             }
@@ -171,7 +171,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
         if (lastModified == null) {
             lastModified = Instant.now();
         }
-        LOG.info("Read " + result.size() + " terms from " + this + " last modified " + lastModified);
+        log.info("Read " + this);
         return result;
     }
 
@@ -196,6 +196,15 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     protected abstract List<InputSource> getSources(boolean init);
 
+    @Override
+    public String toString() {
+        return getTermsMap().size() + " terms, last modified: " + lastModified +
+            " (" + getTermsMap().values()
+            .stream()
+            .filter(t -> TermId.of(t.getTermId()).getParts().length == 3)
+            .map(t -> t.getTermId() + ":" + t.getName())
+            .collect(Collectors.joining(", ")) + ")";
+    }
 }
 
 
