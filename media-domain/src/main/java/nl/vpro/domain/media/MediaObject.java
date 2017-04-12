@@ -1679,7 +1679,7 @@ public abstract class MediaObject extends PublishableObject
 	}
 
 	public Prediction getPrediction(Platform platform) {
-		return MediaObjects.getPrediction(platform, predictions);
+		return MediaObjects.getPrediction(platform, getPredictions());
 	}
 
 	/**

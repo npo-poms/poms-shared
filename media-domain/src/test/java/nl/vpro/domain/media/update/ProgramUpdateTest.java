@@ -607,7 +607,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                         expiredLocation
                     )
             );
-        assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); // fails
+        assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); // Used to fail
         ProgramUpdate rounded = JAXBTestUtil.roundTrip(clip);
         assertThat(rounded.getLocations().first().getPublishStopInstant()).isNotNull();
 
