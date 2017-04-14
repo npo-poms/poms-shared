@@ -19,6 +19,7 @@ public interface FrameCreatorRestService {
     @PUT
     @Path("/{mid}/{offset}")
     @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     Response createFrame(
         @PathParam("mid") String mid,
         @PathParam("offset") Duration duration,
