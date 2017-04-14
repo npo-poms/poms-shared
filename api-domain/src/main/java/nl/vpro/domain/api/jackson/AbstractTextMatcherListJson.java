@@ -71,6 +71,9 @@ public abstract class AbstractTextMatcherListJson<L extends AbstractTextMatcherL
                 return constructor.apply(list, matcher.getMatch());
             } else if (jsonNode.isObject()) {
                 JsonNode value = jsonNode.get("value");
+                if (value == null) {
+                    throw new IllegalArgumentException("No key named 'value' found on " + jsonNode);
+                }
                 List<T> list = new ArrayList<>();
                 Match match = Match.MUST;
                 if (value.isTextual()) {
