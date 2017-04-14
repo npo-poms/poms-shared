@@ -213,7 +213,9 @@ public class Image extends PublishableObject implements Ownable {
         String source,
         Integer height,
         Integer width,
-        java.time.Duration offset) {
+        java.time.Duration offset,
+        String date
+        ) {
         this(owner, type, imageUri);
         this.title = title;
         this.description = description;
@@ -224,6 +226,7 @@ public class Image extends PublishableObject implements Ownable {
         this.height = height;
         this.width = width;
         this.offset = TimeUtils.asDate(offset);
+        this.date = date;
 
     }
 
