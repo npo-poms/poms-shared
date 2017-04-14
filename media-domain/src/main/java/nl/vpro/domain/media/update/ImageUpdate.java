@@ -190,6 +190,7 @@ public class ImageUpdate {
         ImageData imageData,
         String imageUrn,
         License license,
+        String source,
         String sourceName,
         String credits
         ) {
@@ -205,6 +206,7 @@ public class ImageUpdate {
         );
         this.license = license;
         this.sourceName = sourceName;
+        this.source = source;
         this.credits = credits;
     }
 
