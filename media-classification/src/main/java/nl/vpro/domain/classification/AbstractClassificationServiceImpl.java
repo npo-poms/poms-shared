@@ -171,7 +171,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
         if (lastModified == null) {
             lastModified = Instant.now();
         }
-        log.info("Read " + this);
+        log.info("Read {}",  toString(result));
         return result;
     }
 
@@ -198,8 +198,12 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
 
     @Override
     public String toString() {
-        return getTermsMap().size() + " terms, last modified: " + lastModified +
-            " (" + getTermsMap().values()
+        return toString(getTermsMap());
+    }
+
+    protected String toString(Map<TermId, Term> map) {
+        return map.size() + " terms, last modified: " + lastModified +
+            " (" + map.values()
             .stream()
             .filter(t -> TermId.of(t.getTermId()).getParts().length == 3)
             .map(t -> t.getTermId() + ":" + t.getName())
