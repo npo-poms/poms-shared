@@ -10,6 +10,8 @@ public interface SubMediaType {
 
     String getUrnPrefix();
 
+    String name();
+
     default boolean canContainEpisodes() {
         return false;
     }
