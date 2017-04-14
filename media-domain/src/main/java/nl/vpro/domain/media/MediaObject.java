@@ -2139,7 +2139,6 @@ public abstract class MediaObject extends PublishableObject
         }
         images.forEach(i -> {
             i.setMediaObject(null);
-            i.setId(null);
         });
         images.clear();
         return this;
