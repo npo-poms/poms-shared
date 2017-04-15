@@ -69,71 +69,139 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({ Program.class, Group.class, Segment.class })
-@XmlType(name = "baseMediaType", propOrder = { "crids", "broadcasters", "portals", "portalRestrictions",
-        "geoRestrictions", "titles", "descriptions", "genres", "tags", "source", "countries", "languages",
-        "avAttributes", "releaseYear", "duration", "persons", "awards", "descendantOf", "memberOf", "ageRating",
-        "contentRatings", "email", "websites", "twitterRefs", "teletext", "predictions", "locations", "scheduleEvents",
-        "relations", "images", "availableSubtitles" })
+@XmlType(name = "baseMediaType",
+    propOrder = {
+        "crids",
+        "broadcasters",
+        "portals",
+        "portalRestrictions",
+        "geoRestrictions",
+        "titles",
+        "descriptions",
+        "genres",
+        "tags",
+        "source",
+        "countries",
+        "languages",
+        "avAttributes",
+        "releaseYear",
+        "duration",
+        "persons",
+        "awards",
+        "descendantOf",
+        "memberOf",
+        "ageRating",
+        "contentRatings",
+        "email",
+        "websites",
+        "twitterRefs",
+        "teletext",
+        "predictions",
+        "locations",
+        "scheduleEvents",
+        "relations",
+        "images",
+        "availableSubtitles"
+    })
 
 @JsonPropertyOrder({ "objectType",
-        /* xml attributes */
-        "mid", "type", "avType", "workflow", "mergedTo", "sortDate", "creationDate", "lastModified", "publishStart",
-        "publishStop", "urn", "embeddable",
-        /* xml elements */
-        "episodeOf", "crids", "broadcasters", "portals", "portalRestrictions", "geoRestrictions", "titles",
-        "descriptions", "genres", "tags", "source", "hasSubtitles", "countries", "languages", "avAttributes",
-        "releaseYear", "duration", "persons", "awards", "descendantOf", "memberOf", "ageRating", "contentRatings",
-        "email", "websites", "twitter", "teletext", "predictions", "locations", "scheduleEvents", "relations", "images",
-        "availableSubtitles" })
+    /* xml attributes */
+    "mid",
+    "type",
+    "avType",
+    "workflow",
+    "mergedTo",
+    "sortDate",
+    "creationDate",
+    "lastModified",
+    "publishStart",
+    "publishStop",
+    "urn",
+    "embeddable",
+    /* xml elements */
+    "episodeOf",
+    "crids",
+    "broadcasters",
+    "portals",
+    "portalRestrictions",
+    "geoRestrictions",
+    "titles",
+    "descriptions",
+    "genres",
+    "tags",
+    "source",
+    "hasSubtitles",
+    "countries",
+    "languages",
+    "avAttributes",
+    "releaseYear",
+    "duration",
+    "persons",
+    "awards",
+    "descendantOf",
+    "memberOf",
+    "ageRating",
+    "contentRatings",
+    "email",
+    "websites",
+    "twitter",
+    "teletext",
+    "predictions",
+    "locations",
+    "scheduleEvents",
+    "relations",
+    "images",
+    "availableSubtitles"
+})
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
 @JsonSubTypes({ @JsonSubTypes.Type(value = Program.class, name = "program"),
-        @JsonSubTypes.Type(value = Group.class, name = "group"),
-        @JsonSubTypes.Type(value = Segment.class, name = "segment") })
+    @JsonSubTypes.Type(value = Group.class, name = "group"),
+    @JsonSubTypes.Type(value = Segment.class, name = "segment") })
 
 // TODO: Filters can be defined in hibernate-mapping in the hibernate-config.xml
 // See https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch19.html
 @FilterDefs({ @FilterDef(name = "titleFilter", parameters = { @ParamDef(name = "title", type = "string") }),
-        @FilterDef(name = "typeFilter", parameters = { @ParamDef(name = "types", type = "string"),
-                @ParamDef(name = "segments", type = "boolean") }),
-        @FilterDef(name = "organizationFilter", parameters = { @ParamDef(name = "organizations", type = "string") }),
-        @FilterDef(name = "noBroadcast"), @FilterDef(name = "hasLocations"), @FilterDef(name = "noPlaylist"),
-        @FilterDef(name = "eventRange", parameters = { @ParamDef(name = "eventStart", type = "date"),
-                @ParamDef(name = "eventStop", type = "date") }),
-        @FilterDef(name = "creationRange", parameters = { @ParamDef(name = "creationStart", type = "date"),
-                @ParamDef(name = "creationStop", type = "date") }),
-        @FilterDef(name = "modifiedRange", parameters = { @ParamDef(name = "modifiedStart", type = "date"),
-                @ParamDef(name = "modifiedStop", type = "date") }),
-        @FilterDef(name = PublishableObject.PUBLICATION_FILTER),
-        @FilterDef(name = PublishableObject.EMBARGO_FILTER, parameters = {
-                @ParamDef(name = "broadcasters", type = "string") }),
-        @FilterDef(name = PublishableObject.DELETED_FILTER),
-        @FilterDef(name = "relationFilter", parameters = { @ParamDef(name = "broadcasters", type = "string") }) })
+    @FilterDef(name = "typeFilter", parameters = { @ParamDef(name = "types", type = "string"),
+        @ParamDef(name = "segments", type = "boolean") }),
+    @FilterDef(name = "organizationFilter", parameters = { @ParamDef(name = "organizations", type = "string") }),
+    @FilterDef(name = "noBroadcast"), @FilterDef(name = "hasLocations"), @FilterDef(name = "noPlaylist"),
+    @FilterDef(name = "eventRange", parameters = { @ParamDef(name = "eventStart", type = "date"),
+        @ParamDef(name = "eventStop", type = "date") }),
+    @FilterDef(name = "creationRange", parameters = { @ParamDef(name = "creationStart", type = "date"),
+        @ParamDef(name = "creationStop", type = "date") }),
+    @FilterDef(name = "modifiedRange", parameters = { @ParamDef(name = "modifiedStart", type = "date"),
+        @ParamDef(name = "modifiedStop", type = "date") }),
+    @FilterDef(name = PublishableObject.PUBLICATION_FILTER),
+    @FilterDef(name = PublishableObject.EMBARGO_FILTER, parameters = {
+        @ParamDef(name = "broadcasters", type = "string") }),
+    @FilterDef(name = PublishableObject.DELETED_FILTER),
+    @FilterDef(name = "relationFilter", parameters = { @ParamDef(name = "broadcasters", type = "string") }) })
 @Filters({
-        @Filter(name = "titleFilter", condition = "0 < (select count(*) from title t where t.parent_id = id and lower(t.title) like :title)"),
-        @Filter(name = "typeFilter", condition = "(0 < (select count(*) from program p where p.id = id and p.type in (:types)))"
-                + " or (0 < (select count(*) from group_table g where g.id = id and g.type in (:types)))"
-                + " or (:segments and 0 < (select count(*) from segment s where s.id = id))"),
-        @Filter(name = "organizationFilter", condition = "0 < ("
-                + "(select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))"
-                + " + "
-                + "(select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))"
-                + " + "
-                + "(select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))"
-                + ")"),
-        @Filter(name = "noBroadcast", condition = "0 = (select count(*) from scheduleevent e where e.mediaobject_id = id)"),
-        @Filter(name = "hasLocations", condition = "0 < (select count(*) from location l where l.mediaobject_nid = id)"),
-        @Filter(name = "noPlaylist", condition = "0 = (select count(*) from group_table g, memberref mr where mr.member_id = id "
-                + "and g.id = mr.owner_id " + "and g.type = 'PLAYLIST')"),
-        @Filter(name = "eventRange", condition = ":eventStart <= (select min(e.start) from scheduleevent e where e.mediaobject_id = id) and "
-                + ":eventStop >= (select min(e.start) from scheduleevent e where e.mediaobject_id = id)"),
-        @Filter(name = "creationRange", condition = ":creationStart <= creationDate and :creationStop >= creationDate"),
-        @Filter(name = "modifiedRange", condition = ":modifiedStart <= lastModified and :modifiedStop >= lastModified"),
-        @Filter(name = PublishableObject.PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
-                + "and (publishStop is null or publishStop > now())"),
-        @Filter(name = PublishableObject.EMBARGO_FILTER, condition = "(publishstart is null "
-                + "or publishstart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
-                + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))"),
-        @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)") })
+    @Filter(name = "titleFilter", condition = "0 < (select count(*) from title t where t.parent_id = id and lower(t.title) like :title)"),
+    @Filter(name = "typeFilter", condition = "(0 < (select count(*) from program p where p.id = id and p.type in (:types)))"
+        + " or (0 < (select count(*) from group_table g where g.id = id and g.type in (:types)))"
+        + " or (:segments and 0 < (select count(*) from segment s where s.id = id))"),
+    @Filter(name = "organizationFilter", condition = "0 < ("
+        + "(select count(*) from mediaobject_portal o where o.mediaobject_id = id and o.portals_id in (:organizations))"
+        + " + "
+        + "(select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:organizations))"
+        + " + "
+        + "(select count(*) from mediaobject_thirdparty o where o.mediaobject_id = id and o.thirdparties_id in (:organizations))"
+        + ")"),
+    @Filter(name = "noBroadcast", condition = "0 = (select count(*) from scheduleevent e where e.mediaobject_id = id)"),
+    @Filter(name = "hasLocations", condition = "0 < (select count(*) from location l where l.mediaobject_nid = id)"),
+    @Filter(name = "noPlaylist", condition = "0 = (select count(*) from group_table g, memberref mr where mr.member_id = id "
+        + "and g.id = mr.owner_id " + "and g.type = 'PLAYLIST')"),
+    @Filter(name = "eventRange", condition = ":eventStart <= (select min(e.start) from scheduleevent e where e.mediaobject_id = id) and "
+        + ":eventStop >= (select min(e.start) from scheduleevent e where e.mediaobject_id = id)"),
+    @Filter(name = "creationRange", condition = ":creationStart <= creationDate and :creationStop >= creationDate"),
+    @Filter(name = "modifiedRange", condition = ":modifiedStart <= lastModified and :modifiedStop >= lastModified"),
+    @Filter(name = PublishableObject.PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
+        + "and (publishStop is null or publishStop > now())"),
+    @Filter(name = PublishableObject.EMBARGO_FILTER, condition = "(publishstart is null "
+        + "or publishstart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
+        + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))"),
+    @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)") })
 
 @Slf4j
 public abstract class MediaObject extends PublishableObject
