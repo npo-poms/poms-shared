@@ -1,5 +1,7 @@
 package nl.vpro.domain.classification;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.net.*;
 import java.nio.file.*;
@@ -7,23 +9,23 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 /**
  * @author Michiel Meeuwissen
  * @since 3.2
  */
+
+@Slf4j
 public class ClassificationServiceImpl extends AbstractClassificationServiceImpl {
 
     private final Instant startTime = Instant.now();
-    private static Logger LOG = LoggerFactory.getLogger(ClassificationServiceImpl.class);
 
     private final URI[] resources;
 
@@ -32,7 +34,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
     public static ClassificationServiceImpl fromClassPath(String... url)  {
         URI[] uris = Arrays.stream(url)
             .map(ClassificationServiceImpl::uriFromClassPath)
-            .filter(u -> u != null)
+            .filter(Objects::nonNull)
             .toArray(URI[]::new);
         return new ClassificationServiceImpl(uris);
     }
@@ -85,7 +87,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                             this.lastModified = Instant.ofEpochMilli(file.lastModified());
                         }
                     } catch (FileNotFoundException e) {
-                        LOG.warn(file + ":" + e.getMessage());
+                        log.warn(file + ":" + e.getMessage());
                     }
                 }
                 continue;
@@ -99,7 +101,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                     this.lastModified = lastModified;
                 }
             } catch (IOException e) {
-                LOG.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
         }
         return result;
@@ -110,7 +112,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         try {
             return url == null ? null : url.toURI();
         } catch (URISyntaxException e) {
-            LOG.error(e.getMessage(), e);
+            log.error(e.getMessage(), e);
             return null;
         }
     }
@@ -119,7 +121,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         try {
             return Instant.ofEpochMilli(new File(uri).lastModified());
         } catch (IllegalArgumentException ia) {
-            LOG.debug("Could not get last modified from {}", uri);
+            log.debug("Could not get last modified from {}", uri);
             return startTime;
         }
     }
@@ -130,7 +132,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
             String protocol = resource.toURL().getProtocol().toLowerCase();
             String path = "file".equals(protocol) ? resource.getPath() : null;
             resourceFile = path == null ? null : new File(URLDecoder.decode(path, "UTF-8")); // e.g. on Jenkins.
-        } catch (IOException e1) {
+        } catch (IOException ignored) {
 
         }
         if (resourceFile != null) {
@@ -148,7 +150,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                             tempFile.setLastModified(System.currentTimeMillis());
                             tempFile.deleteOnExit();
                         } catch (IOException ioe) {
-                            LOG.warn(tempFile + ": " + ioe.getClass() + " " + ioe.getMessage());
+                            log.warn(tempFile + ": " + ioe.getClass() + " " + ioe.getMessage());
                         }
                     }
                 }
@@ -179,30 +181,30 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                 //watchOnADecentFileSystem(directory);
                 pollingWatchDirectory(directory);
             } catch (IOException e) {
-                LOG.error(e.getMessage(), e);
+                log.error(e.getMessage(), e);
             }
         }
-        LOG.debug("Watching " + directory);
+        log.debug("Watching " + directory);
     }
 
 
     private long lastCheck = -1;
     private void pollingWatchDirectory(final File directory) throws IOException {
-        LOG.info("Watching " + directory + " (using polling, since NFS doesn't support more sane methods)");
+        log.info("Watching " + directory + " (using polling, since NFS doesn't support more sane methods)");
         executorService.scheduleAtFixedRate((Runnable) () -> {
             if (directory.lastModified() > lastCheck) {
-                LOG.info("Found change in {}", directory);
+                log.info("Found change in {}", directory);
                 lastCheck = directory.lastModified();
                 List<InputSource> sources = getSources(false);
                 if (sources != null) {
                     try {
                         ClassificationServiceImpl.this.terms = readTerms(sources);
                     } catch (ParserConfigurationException e) {
-                        LOG.error(e.getMessage(), e);
+                        log.error(e.getMessage(), e);
                     }
                 }
             } else {
-                LOG.debug("No changes in {}", directory);
+                log.debug("No changes in {}", directory);
             }
         }, pollIntervalInMillis, pollIntervalInMillis, TimeUnit.MILLISECONDS);
     }
@@ -216,25 +218,25 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
             StandardWatchEventKinds.ENTRY_DELETE
         );
         Callable<Void> callable = () -> {
-            LOG.info("Watching " + directory);
+            log.info("Watching " + directory);
             while (true) {
                 try {
                     WatchKey key = watcher.take();
                     for (WatchEvent event : key.pollEvents()) {
                         if (String.valueOf(event.context()).endsWith(".xml")) {
-                            LOG.info(String.valueOf(event.kind() + " " + event.context()));
+                            log.info(String.valueOf(event.kind() + " " + event.context()));
                             List<InputSource> sources = getSources(false);
                             if (sources != null) {
                                 ClassificationServiceImpl.this.terms = readTerms(sources);
                             }
                             break;
                         } else {
-                            LOG.debug("Ignored " + String.valueOf(event.kind() + " " + event.context()));
+                            log.debug("Ignored " + String.valueOf(event.kind() + " " + event.context()));
                         }
                     }
                     key.reset();
                 } catch (InterruptedException e) {
-                    LOG.info("Interrupted watcher");
+                    log.info("Interrupted watcher");
                     break;
                 }
             }

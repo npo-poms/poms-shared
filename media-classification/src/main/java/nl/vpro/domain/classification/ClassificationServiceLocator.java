@@ -1,22 +1,23 @@
 package nl.vpro.domain.classification;
 
-import javax.inject.Inject;
-import javax.inject.Provider;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ServiceLoader;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * @author Michiel Meeuwissen
  * @since 3.2
  */
+@Slf4j
 public class ClassificationServiceLocator  {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ClassificationServiceLocator.class);
 
     private static ClassificationServiceLocator singleton;
+
+    private static boolean warned = false;
 
     @Inject
     private Provider<ClassificationService> classificationService = () -> EmptyClassificationService.INSTANCE;
@@ -25,13 +26,16 @@ public class ClassificationServiceLocator  {
         singleton = this;
         ServiceLoader.load(ClassificationService.class).iterator().forEachRemaining(c -> {
             // TODO load this stuff a bit more easily
-            } 
+            }
         );
     }
 
     public static ClassificationService getInstance() {
         if (singleton == null || singleton.classificationService == null || singleton.classificationService.get() == null) {
-            LOG.warn("No classification service bean found, returning the empty one");
+            if (! warned) {
+                log.warn("No classification service bean found, returning the empty one");
+                warned = true;
+            }
             return EmptyClassificationService.INSTANCE;
         } else {
             return singleton.classificationService.get();
@@ -49,9 +53,10 @@ public class ClassificationServiceLocator  {
             throw new IllegalStateException();
         }
         if (classificationService != null) {
-            LOG.info("Using classification service {}", classificationService);
+            log.info("Using classification service {}", classificationService);
         }
         singleton.classificationService = () -> classificationService;
+        warned = false;
     }
 
 
