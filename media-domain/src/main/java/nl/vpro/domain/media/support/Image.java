@@ -123,7 +123,6 @@ public class Image extends PublishableObject implements Ownable {
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String description;
 
-    @Temporal(TemporalType.TIME)
     @Column(name = "start_offset")
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @XmlElement
