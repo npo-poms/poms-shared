@@ -77,15 +77,11 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     }
 
     public static Description copy(Description source){
-        return copy(source, source.parent);
+        return source == null ? null : copy(source, source.parent);
     }
 
     public static Description copy(Description source, MediaObject parent){
-        if(source == null) {
-            return null;
-        }
-
-        return new Description(source, parent);
+        return source == null ? null : new Description(source, parent);
     }
 
     public String getDescription() {
