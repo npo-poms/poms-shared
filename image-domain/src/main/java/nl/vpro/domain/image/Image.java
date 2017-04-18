@@ -116,7 +116,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
 
     @Override
     public Image setTitle(String title) {
-        if(title.length() < 255) {
+        if(title == null || title.length() < 255) {
             this.title = title;
         } else {
             this.title = title.substring(255);
