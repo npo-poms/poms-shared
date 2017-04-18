@@ -138,13 +138,13 @@ public class Editor extends AbstractUser {
     }
 
 
-    void setEmployer(Broadcaster broadcaster) {
-        BroadcasterEditor toAdd = new BroadcasterEditor(this, broadcaster, true);
+    void setEmployer(final Broadcaster broadcaster) {
+        BroadcasterEditor toAdd = broadcaster == null ? null : new BroadcasterEditor(this, broadcaster, true);
 
         for(Iterator<BroadcasterEditor> iterator = broadcasters.iterator(); iterator.hasNext(); ) {
             BroadcasterEditor existing = iterator.next();
 
-            if(broadcaster != null && toAdd.equals(existing)) {
+            if(toAdd != null && toAdd.equals(existing)) {
                 if(existing.isEmployee()) {
                     return;
                 } else {
@@ -154,7 +154,9 @@ public class Editor extends AbstractUser {
                 iterator.remove();
             }
         }
-        broadcasters.add(toAdd);
+        if (toAdd != null) {
+            broadcasters.add(toAdd);
+        }
         allowedBroadcasterCache = null;
     }
 
