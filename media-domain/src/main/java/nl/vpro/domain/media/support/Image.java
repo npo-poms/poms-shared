@@ -7,7 +7,6 @@
 package nl.vpro.domain.media.support;
 
 import java.time.Instant;
-import java.util.Date;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -20,7 +19,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -32,9 +30,8 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.secondscreen.Screen;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.util.TimeUtils;
 import nl.vpro.validation.*;
-import nl.vpro.xml.bind.DateToDuration;
+import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
  * A {@link MediaObject} can have more than one images which should differ in URL and
@@ -128,12 +125,12 @@ public class Image extends PublishableObject implements Ownable {
 
     @Temporal(TemporalType.TIME)
     @Column(name = "start_offset")
-    @XmlJavaTypeAdapter(DateToDuration.class)
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @XmlElement
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerDate.class)
-    protected Date offset;
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
+    protected java.time.Duration offset;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private Integer width;
@@ -225,7 +222,7 @@ public class Image extends PublishableObject implements Ownable {
         this.source = source;
         this.height = height;
         this.width = width;
-        this.offset = TimeUtils.asDate(offset);
+        this.offset = offset;
         this.date = date;
 
     }
@@ -342,18 +339,14 @@ public class Image extends PublishableObject implements Ownable {
         return this;
     }
 
-    public Date getOffset() {
+    public java.time.Duration getOffset() {
         return offset;
     }
 
-    public void setOffset(Date offset) {
+    public void setOffset(java.time.Duration offset) {
         this.offset = offset;
     }
 
-    @JsonIgnore
-    public void setOffset(java.time.Duration offset) {
-        this.offset = new Date(offset.toMillis());
-    }
 
     public Integer getWidth() {
         return width;

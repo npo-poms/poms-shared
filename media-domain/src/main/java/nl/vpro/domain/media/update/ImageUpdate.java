@@ -6,7 +6,6 @@ package nl.vpro.domain.media.update;
 
 import java.time.Instant;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -41,7 +40,7 @@ import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.ReleaseDate;
 import nl.vpro.validation.URI;
 import nl.vpro.validation.WarningValidatorGroup;
-import nl.vpro.xml.bind.DateToDuration;
+import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.media.update.MediaUpdate.VALIDATOR;
@@ -136,12 +135,12 @@ public class ImageUpdate {
     private String date;
 
     @Temporal(TemporalType.TIME)
-    @XmlJavaTypeAdapter(DateToDuration.class)
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @XmlElement
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
-    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerDate.class)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    protected Date offset;
+    protected java.time.Duration offset;
 
     @XmlElements(value = {
         @XmlElement(name = "imageData", type = ImageData.class),
@@ -403,11 +402,11 @@ public class ImageUpdate {
         this.date = date;
     }
 
-    public Date getOffset() {
+    public java.time.Duration getOffset() {
         return offset;
     }
 
-    public void setOffset(Date offset) {
+    public void setOffset(java.time.Duration offset) {
         this.offset = offset;
     }
 
