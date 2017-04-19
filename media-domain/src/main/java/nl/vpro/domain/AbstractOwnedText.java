@@ -1,5 +1,10 @@
 package nl.vpro.domain;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -22,52 +27,27 @@ import nl.vpro.domain.media.support.TextualType;
 @MappedSuperclass
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements  OwnedText, Serializable {
 
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute(required = true)
+    @Getter
+    @Setter
     protected OwnerType owner = OwnerType.BROADCASTER;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @XmlAttribute(required = true)
+    @Getter
+    @Setter
     protected TextualType type;
-
-
-    protected AbstractOwnedText(OwnerType owner, TextualType type) {
-        this.owner = owner;
-        this.type = type;
-    }
 
     protected AbstractOwnedText() {
     }
-
-    @Override
-    public TextualType getType() {
-        return type;
-
-    }
-
-    @Override
-    public void setType(TextualType type) {
-        this.type = type;
-    }
-
-    @Override
-    public OwnerType getOwner() {
-        return owner;
-
-    }
-
-    @Override
-    public void setOwner(OwnerType owner) {
-        this.owner = owner;
-
-    }
-
 
 
     @Override
