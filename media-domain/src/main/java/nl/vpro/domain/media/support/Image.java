@@ -123,7 +123,7 @@ public class Image extends PublishableObject implements Ownable {
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String description;
 
-    @Column
+    @Column(name = "`offset`")
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @XmlElement
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
