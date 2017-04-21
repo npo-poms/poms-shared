@@ -38,6 +38,7 @@ import nl.vpro.domain.user.Organization;
     "noBroadcast",
     "hasLocations",
     "noPlaylist",
+    "memberOfCount",
     "sortRange",
     "eventRange",
     "scheduleEventRange",
@@ -49,6 +50,7 @@ import nl.vpro.domain.user.Organization;
     "tags",
     "avType",
     "notAnEpisode",
+    "episodeOfCount",
     "noMembers",
     "noCredits",
     "findDeleted",
@@ -143,6 +145,16 @@ public class MediaForm {
 
     @XmlElement
     private Boolean notAnEpisode;
+
+    @XmlElement
+    @Getter
+    @Setter
+    private IntegerRange memberOfCount;
+
+    @XmlElement
+    @Getter
+    @Setter
+    private IntegerRange episodeOfCount;
 
     @XmlElement
     private Boolean noMembers;

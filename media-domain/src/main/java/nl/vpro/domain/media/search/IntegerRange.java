@@ -23,13 +23,13 @@ import javax.xml.bind.annotation.XmlType;
 @Data
 @AllArgsConstructor
 @Builder
-public class IntegerRange implements Range<Integer> {
+public class IntegerRange implements Range<Long> {
 
     @XmlElement
-    private Integer start;
+    private Long start;
 
     @XmlElement
-    private Integer stop;
+    private Long stop;
 
     public IntegerRange() {
     }
