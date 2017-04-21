@@ -37,6 +37,7 @@ import nl.vpro.domain.user.Organization;
     "relations",
     "noBroadcast",
     "hasLocations",
+    "locationsCount",
     "noPlaylist",
     "memberOfCount",
     "sortRange",
@@ -106,7 +107,17 @@ public class MediaForm {
     private Boolean noBroadcast;
 
     @XmlElement
+    @Getter
+    @Setter
+    private IntegerRange scheduleEventsCount;
+
+    @XmlElement
     private Boolean hasLocations;
+
+    @XmlElement
+    @Getter
+    @Setter
+    private IntegerRange locationsCount;
 
     @XmlElement
     private Boolean noPlaylist;
@@ -381,26 +392,32 @@ public class MediaForm {
         return !isEmpty(relations);
     }
 
+    @Deprecated
     public boolean hasNoBroadcast() {
         return noBroadcast == null ? false : noBroadcast;
     }
 
+    @Deprecated
     public void setNoBroadcast(boolean noBroadcast) {
         this.noBroadcast = noBroadcast;
     }
 
+    @Deprecated
     public boolean hasLocations() {
         return hasLocations == null ? false : hasLocations;
     }
 
+    @Deprecated
     public void setHasLocations(boolean hasLocations) {
         this.hasLocations = hasLocations;
     }
 
+    @Deprecated
     public boolean hasNoPlaylist() {
         return noPlaylist == null ? false : noPlaylist;
     }
 
+    @Deprecated
     public void setNoPlaylist(boolean noPlaylist) {
         this.noPlaylist = noPlaylist;
     }
@@ -555,10 +572,12 @@ public class MediaForm {
         this.avType = avType;
     }
 
+    @Deprecated
     public boolean isNotAnEpisode() {
         return notAnEpisode == null ? false : notAnEpisode;
     }
 
+    @Deprecated
     public void setNotAnEpisode(boolean notAnEpisode) {
         this.notAnEpisode = notAnEpisode;
     }
