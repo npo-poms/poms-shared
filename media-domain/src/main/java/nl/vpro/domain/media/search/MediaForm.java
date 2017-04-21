@@ -36,6 +36,7 @@ import nl.vpro.domain.user.Organization;
     "releaseYear",
     "relations",
     "noBroadcast",
+    "scheduleEventsCount",
     "hasLocations",
     "locationsCount",
     "noPlaylist",
