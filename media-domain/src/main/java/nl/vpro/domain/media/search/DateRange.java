@@ -15,7 +15,11 @@ import java.time.LocalDateTime;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -32,10 +36,14 @@ public class DateRange implements Range<Instant> {
     @XmlElement
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant start;
 
     @XmlElement
     @XmlJavaTypeAdapter(value = InstantXmlAdapter.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @XmlSchemaType(name = "dateTime")
     private Instant stop;
 
