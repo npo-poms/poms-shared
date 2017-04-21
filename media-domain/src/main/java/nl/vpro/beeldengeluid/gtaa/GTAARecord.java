@@ -4,6 +4,10 @@
  */
 package nl.vpro.beeldengeluid.gtaa;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
@@ -14,13 +18,17 @@ import javax.persistence.Enumerated;
  * @since 3.7
  */
 @Embeddable
+@ToString
 public class GTAARecord {
 
     @Column(nullable = true, name = "gtaa_uri")
+    @Getter
     private String uri;
 
     @Column(nullable = true, length = 30, name = "gtaa_status")
     @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
     private Status status;
 
     @Column(name = "gtaa_knownas")
@@ -40,28 +48,11 @@ public class GTAARecord {
         this.knownAs = knownAs;
     }
 
-    public String getUri() {
-        return uri;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public boolean isKnownAs() {
         return knownAs != null ? knownAs : false;
     }
 
     public void setKnownAs(boolean knownAs) {
         this.knownAs = knownAs;
-    }
-
-    @Override
-    public String toString() {
-        return uri + " (" + status + ")";
     }
 }
