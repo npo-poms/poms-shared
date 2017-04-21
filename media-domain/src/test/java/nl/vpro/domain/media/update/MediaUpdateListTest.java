@@ -44,7 +44,7 @@ public class MediaUpdateListTest {
 
         StringWriter writer = new StringWriter();
         JAXB.marshal(xmlList, writer);
-        Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
+        Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).checkForSimilar().ignoreWhitespace().build();
         assertFalse(diff.toString() + " " + writer.toString(), diff.hasDifferences());
 
         MediaUpdateList<String> list = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);
