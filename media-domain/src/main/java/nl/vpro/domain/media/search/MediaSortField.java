@@ -33,7 +33,8 @@ public enum MediaSortField implements SortField {
         }
     },
     memberofCount(Type.LONG),
-    episodeofCount(Type.LONG)
+    episodeofCount(Type.LONG),
+    scheduleEventsCount(Type.LONG)
 
 
 
