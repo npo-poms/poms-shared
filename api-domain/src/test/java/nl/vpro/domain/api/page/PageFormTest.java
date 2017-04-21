@@ -13,10 +13,10 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.custommonkey.xmlunit.Diff;
-import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 import org.xml.sax.SAXException;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 
@@ -134,8 +134,8 @@ public class PageFormTest {
                 "</api:pagesForm>";
 
         System.out.println(out.toString());
-        Diff diff = XMLUnit.compareXML(expected, out.toString());
-        if (!diff.identical()) {
+        Diff diff = DiffBuilder.compare(expected).withTest(out.toString()).build();
+        if (diff.hasDifferences()) {
             assertThat(out.toString()).isEqualTo(expected);
         }
 
