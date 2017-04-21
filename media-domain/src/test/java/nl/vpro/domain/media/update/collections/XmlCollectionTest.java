@@ -6,14 +6,14 @@ import java.util.Arrays;
 
 import javax.xml.bind.JAXB;
 
-import org.custommonkey.xmlunit.Diff;
-import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 import org.xml.sax.SAXException;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.media.update.LocationUpdate;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class XmlCollectionTest {
 
@@ -27,8 +27,8 @@ public class XmlCollectionTest {
         StringWriter writer = new StringWriter();
         JAXB.marshal(col, System.out);
         JAXB.marshal(col, writer);
-        Diff diff = XMLUnit.compareXML(expected, writer.toString());
-        assertTrue(diff.toString() + " " + expected, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
+        assertFalse(diff.toString() + " " + expected, diff.hasDifferences());
 
     }
 

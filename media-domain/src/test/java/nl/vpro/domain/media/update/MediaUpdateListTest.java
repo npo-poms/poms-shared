@@ -9,11 +9,10 @@ import javax.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Validator;
 
-import org.custommonkey.xmlunit.Diff;
-import org.custommonkey.xmlunit.XMLUnit;
-import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.AVType;
@@ -26,18 +25,13 @@ import nl.vpro.domain.user.Broadcaster;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * @author Michiel Meeuwissen
  */
 public class MediaUpdateListTest {
 
-    @Before
-    public void setup() {
-        XMLUnit.setIgnoreWhitespace(true);
-        XMLUnit.setIgnoreAttributeOrder(true);
-    }
 
     @Test
     public void marshalStrings() throws IOException, SAXException {
@@ -50,8 +44,8 @@ public class MediaUpdateListTest {
 
         StringWriter writer = new StringWriter();
         JAXB.marshal(xmlList, writer);
-        Diff diff = XMLUnit.compareXML(expected, writer.toString());
-        assertTrue(diff.toString() + " " + writer.toString(), diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
+        assertFalse(diff.toString() + " " + writer.toString(), diff.hasDifferences());
 
         MediaUpdateList<String> list = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);
         assertEquals("a", list.getList().get(0));
@@ -118,9 +112,9 @@ public class MediaUpdateListTest {
             "    </item>\n" +
             "</list>\n";
         //System.out.println(writer.toString());
-        Diff diff = XMLUnit.compareXML(expected, writer.toString());
+        Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
         MediaUpdateList<ProgramUpdate> list2 = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);
-        assertTrue(diff.toString() + " " + writer.toString(), diff.identical());
+        assertFalse(diff.toString() + " " + writer.toString(), diff.hasDifferences());
         //JAXB.marshal(list2, System.out);
 
         assertEquals(1, list2.getList().get(0).getSegments().size());

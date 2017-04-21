@@ -12,11 +12,11 @@ import javax.xml.validation.Schema;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.custommonkey.xmlunit.Diff;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import com.google.common.io.Files;
 
@@ -29,7 +29,7 @@ import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
 import nl.vpro.domain.user.Broadcaster;
 
-import static org.custommonkey.xmlunit.XMLAssert.assertXMLIdentical;
+import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
 /**
@@ -117,9 +117,12 @@ public class SchemaTest {
             IOUtils.copy(new FileInputStream(file), System.out);
             throw new RuntimeException("No file " + file.getName());
         }
-        Diff diff = new Diff(new InputSource(control), new InputSource(new FileInputStream(file)));
+        Diff diff = DiffBuilder.compare(control)
+            .withTest(file)
+            .checkForIdentical()
+            .build();
 
-        assertXMLIdentical(diff, true);
+        assertThat(diff.hasDifferences()).isFalse();
         return null;
     }
 

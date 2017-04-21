@@ -42,11 +42,6 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>xmlunit</groupId>
-      <artifactId>xmlunit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-test</artifactId>
     </dependency>

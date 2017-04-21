@@ -4,18 +4,10 @@
  */
 package nl.vpro.domain.media.update;
 
-import org.custommonkey.xmlunit.XMLUnit;
-import org.junit.Before;
-
 import nl.vpro.domain.media.AVFileFormat;
 
 public abstract class MediaUpdateTest {
 
-    @Before
-    public void setup()  {
-        XMLUnit.setIgnoreWhitespace(true);
-        XMLUnit.setIgnoreAttributeOrder(true);
-    }
 
 
     protected AVAttributesUpdate avAttributes() {
