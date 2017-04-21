@@ -12,7 +12,6 @@ import java.util.SortedSet;
 import javax.validation.ConstraintViolation;
 
 import org.assertj.core.api.Assertions;
-import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -25,12 +24,6 @@ import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MediaObjectTest {
-
-    @BeforeClass
-    public static void setup() {
-        XMLUnit.setIgnoreWhitespace(true);
-        XMLUnit.setIgnoreAttributeOrder(true);
-    }
 
     @Test
     public void testIdFromUrn() {
