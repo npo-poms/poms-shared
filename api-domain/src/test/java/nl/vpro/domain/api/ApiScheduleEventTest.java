@@ -7,10 +7,10 @@ import java.util.Date;
 
 import javax.xml.bind.JAXB;
 
-import org.custommonkey.xmlunit.Diff;
-import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Test;
 import org.xml.sax.SAXException;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Program;
@@ -133,8 +133,8 @@ public class ApiScheduleEventTest {
             "        <media:segments/>\n" +
             "    </media:program>\n" +
             "</api:scheduleItem>";
-        Diff diff = XMLUnit.compareXML(expected, xml);
-        if (!diff.identical()) {
+        Diff diff = DiffBuilder.compare(expected).withTest(xml).build();
+        if (diff.hasDifferences()) {
             assertThat(xml).isEqualTo(expected);
         }
     }
