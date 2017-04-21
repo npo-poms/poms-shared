@@ -21,7 +21,9 @@
       <xsd:element name="releaseYear" type="xsd:short" minOccurs="0"/>
       <xsd:element name="relation" type="tns:relationFormType" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="noBroadcast" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="scheduleEventsCount" type="tns:integerRangeType" minOccurs="0"/>
       <xsd:element name="hasLocations" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="locationsCount" type="tns:integerRangeType" minOccurs="0"/>
       <xsd:element name="noPlaylist" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="memberOfCount" type="tns:integerRangeType" minOccurs="0"/>
       <xsd:element name="sortRange" type="tns:dateRangeType" minOccurs="0"/>
@@ -75,8 +77,8 @@
 
   <xsd:complexType name="integerRangeType">
     <xsd:sequence>
-      <xsd:element name="start" type="xsd:int" minOccurs="0"/>
-      <xsd:element name="stop" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="start" type="xsd:long" minOccurs="0"/>
+      <xsd:element name="stop" type="xsd:long" minOccurs="0"/>
     </xsd:sequence>
   </xsd:complexType>
 
@@ -167,6 +169,7 @@
       <xsd:enumeration value="locations"/>
       <xsd:enumeration value="memberofCount"/>
       <xsd:enumeration value="episodeofCount"/>
+      <xsd:enumeration value="scheduleEventsCount"/>
     </xsd:restriction>
   </xsd:simpleType>
 
