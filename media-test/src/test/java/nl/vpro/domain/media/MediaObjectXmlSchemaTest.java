@@ -25,12 +25,12 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.custommonkey.xmlunit.Diff;
-import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.xml.sax.SAXException;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.Workflow;
@@ -40,7 +40,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * This class verifies JAXB XML output format and wether this format complies to the vproMedia.xsd schema definitions.
@@ -99,8 +99,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().mid("MID_000001").build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -113,8 +113,8 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -129,8 +129,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withSubtitles().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -144,8 +144,8 @@ public class MediaObjectXmlSchemaTest {
 
         Program program = program().lean().creationInstant(Instant.EPOCH).lastModified(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
         String actual = toXml(program);
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -155,8 +155,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withCreatedBy().withLastModifiedBy().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -171,8 +171,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().publishStart(Instant.EPOCH).publishStop(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -187,8 +187,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withCrids().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -203,8 +203,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withBroadcasters().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -214,8 +214,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withPortalRestrictions().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -230,8 +230,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withGeoRestrictions().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -246,8 +246,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withDuration().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -268,8 +268,8 @@ public class MediaObjectXmlSchemaTest {
         program.getPredictions().add(prediction);
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -284,8 +284,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withTitles().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -295,8 +295,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withDescriptions().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -362,8 +362,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withTags().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
@@ -378,8 +378,8 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().lean().withPortals().build();
         String actual = toXml(program);
 
-        Diff diff = XMLUnit.compareXML(expected, actual);
-        assertTrue(diff.toString() + " " + actual, diff.identical());
+        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
+        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
     }
 
     @Test
