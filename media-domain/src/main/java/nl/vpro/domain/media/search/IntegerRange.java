@@ -55,6 +55,7 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
 
     @Data
     @EqualsAndHashCode(callSuper = true)
+    @XmlType(name = "integerRangeValueType")
     public static class Value extends Range.RangeValue<Long> {
         
         @XmlValue

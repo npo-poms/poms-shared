@@ -53,6 +53,7 @@ public class DateRange implements Range<Instant, DateRange.Value> {
 
     @Data
     @EqualsAndHashCode(callSuper = true)
+    @XmlType(name = "dateRangeValueType")
     public static class Value extends Range.RangeValue<Instant> {
 
         @XmlValue
