@@ -17,7 +17,7 @@ import java.time.Instant;
 @ToString
 @Data
 @AllArgsConstructor
-@Builder
+@lombok.Builder(builderClassName = "Builder")
 public class IntegerRange implements Range<Long, IntegerRange.Value> {
 
     @XmlElement
@@ -27,6 +27,28 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
     private Value stop;
 
     public IntegerRange() {
+    }
+    
+    public static class Builder {
+        public Builder start(Long start) {
+            this.start = Value.builder().value(start).build();
+            return this;
+        }
+
+        public Builder stop(Long stop) {
+            this.stop = Value.builder().value(stop).build();
+            return this;
+        }
+
+        public Builder start(Value start) {
+            this.start = start;
+            return this;
+        }
+
+        public Builder stop(Value stop) {
+            this.stop = stop;
+            return this;
+        }
     }
     
     
@@ -41,7 +63,7 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
         public Value() {
             
         }
-        @Builder
+        @lombok.Builder
         public Value(Boolean inclusive, Long value) {
             super(inclusive);
             this.value = value;
