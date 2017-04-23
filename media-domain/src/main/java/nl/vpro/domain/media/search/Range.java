@@ -1,25 +1,87 @@
 package nl.vpro.domain.media.search;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public interface Range<T extends Comparable> extends Predicate<T> {
+public interface Range<T extends Comparable, S extends Range.RangeValue<T>> extends Predicate<T> {
 
-    T getStart();
-    void setStart(T start);
-    T getStop();
-    void setStop(T  stop);
+    S getStart();
+    void setStart(S start);
+
+    S getStop();
+    void setStop(S  stop);
+    
+    default T getStartValue() {
+        S start = getStart();
+        return start == null ? null : start.get();
+    }
+
+    default T getStopValue() {
+        S stop= getStop();
+        return stop == null ? null : stop.get();
+    }
+    
     @Override
     default boolean test(T other) {
-        T start = getStart();
-        T stop = getStop();
-        return (start == null || start.compareTo(other) <= 0) && (stop == null || stop.compareTo(other) > 0);
+        return testStart(other) && testStop(other);
+    }
+    default boolean testStart(T other) {
+        RangeValue<T> start = getStart();
+        if (start == null) {
+            return true;
+        }
+        if (start.isInclusive()) {
+            return start.get().compareTo(other) <= 0;
+        } else {
+            return start.get().compareTo(other) < 0;
+        }
+    }
+
+    default boolean testStop(T other) {
+        S stop = getStop();
+        if (stop == null) {
+            return true;
+        }
+        if (stop.isInclusive()) {
+            return stop.get().compareTo(other) >= 0;
+        } else {
+            return stop.get().compareTo(other) > 0;
+        }
     }
     default boolean hasValues() {
         return getStart() != null || getStop() != null;
-
+    }
+    
+    @Data
+    @AllArgsConstructor
+    @XmlAccessorType(XmlAccessType.NONE)
+    @XmlTransient
+    abstract class RangeValue<T extends Comparable> implements Supplier<T> {
+        @XmlAttribute
+        Boolean inclusive = null;
+        
+        RangeValue() {
+            
+        }
+        
+        public boolean isInclusive() {
+            return inclusive == null || inclusive;
+        }
+        @Override
+        public T get() {
+            return getValue();
+        }
+        public abstract T getValue();
     }
 }
