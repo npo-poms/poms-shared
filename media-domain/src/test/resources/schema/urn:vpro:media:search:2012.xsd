@@ -77,16 +77,32 @@
 
   <xsd:complexType name="integerRangeType">
     <xsd:sequence>
-      <xsd:element name="start" type="xsd:long" minOccurs="0"/>
-      <xsd:element name="stop" type="xsd:long" minOccurs="0"/>
+      <xsd:element name="start" type="tns:integerRangeValueType" minOccurs="0"/>
+      <xsd:element name="stop" type="tns:integerRangeValueType" minOccurs="0"/>
     </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="integerRangeValueType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:long">
+        <xsd:attribute name="inclusive" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:simpleContent>
   </xsd:complexType>
 
   <xsd:complexType name="dateRangeType">
     <xsd:sequence>
-      <xsd:element name="start" type="xsd:dateTime" minOccurs="0"/>
-      <xsd:element name="stop" type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="start" type="tns:dateRangeValueType" minOccurs="0"/>
+      <xsd:element name="stop" type="tns:dateRangeValueType" minOccurs="0"/>
     </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="dateRangeValueType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="inclusive" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:simpleContent>
   </xsd:complexType>
 
   <xsd:complexType name="mediaSearchResultType">
