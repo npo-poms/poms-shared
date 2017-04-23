@@ -37,8 +37,8 @@ public interface Range<T extends Comparable, S extends Range.RangeValue<T>> exte
         return testStart(other) && testStop(other);
     }
     default boolean testStart(T other) {
-        RangeValue<T> start = getStart();
-        if (start == null) {
+        S  start = getStart();
+        if (start == null || start.get() == null) {
             return true;
         }
         if (start.isInclusive()) {
@@ -50,7 +50,7 @@ public interface Range<T extends Comparable, S extends Range.RangeValue<T>> exte
 
     default boolean testStop(T other) {
         S stop = getStop();
-        if (stop == null) {
+        if (stop == null || stop.get() == null) {
             return true;
         }
         if (stop.isInclusive()) {
@@ -60,7 +60,7 @@ public interface Range<T extends Comparable, S extends Range.RangeValue<T>> exte
         }
     }
     default boolean hasValues() {
-        return getStart() != null || getStop() != null;
+        return getStartValue() != null || getStopValue() != null;
     }
     
     @Data

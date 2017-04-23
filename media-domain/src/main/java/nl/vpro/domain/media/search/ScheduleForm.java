@@ -58,11 +58,11 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
     }
 
     public boolean hasStart() {
-        return dateRange != null && dateRange.getStart() != null;
+        return dateRange != null && dateRange.getStartValue() != null;
     }
 
     public boolean hasStop() {
-        return dateRange != null && dateRange.getStop() != null;
+        return dateRange != null && dateRange.getStopValue() != null;
     }
 
     public boolean hasChannels() {
