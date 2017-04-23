@@ -23,10 +23,7 @@
       <xsd:element name="pager" type="mediaPagerType"/>
       <xsd:element type="xsd:string" name="broadcaster" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element type="xsd:string" name="portal" minOccurs="0" maxOccurs="unbounded"/>
-      <!--
-      TODO
-      <xsd:element type="organizationType" name="organization" maxOccurs="unbounded"/>
-      -->
+      <xsd:element type="media:organizationIdType" name="organization" maxOccurs="unbounded"/>
       <xsd:element type="xsd:string"  name="text" minOccurs="0"/>
       <xsd:element name="title" minOccurs="0" maxOccurs="unbounded">
         <xsd:complexType>
@@ -43,10 +40,14 @@
       <xsd:element name="releaseYear" type="xsd:short" minOccurs="0" />
       <xsd:element name="relation"    type="relationFormType" minOccurs="0" />
       <xsd:element name="noBroadcast" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="scheduleEventsCount" type="integerRangeType" minOccurs="0"/>
       <xsd:element name="hasLocations" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="locationsCount" type="integerRangeType" minOccurs="0"/>
       <xsd:element name="noPlaylist" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="memberOfCount" type="integerRangeType" minOccurs="0"/>
       <xsd:element name="sortRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="eventRange" type="dateRangeType" minOccurs="0"/>
+      <xsd:element name="scheduleEventRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="channel" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="createdBy" type="xsd:string" minOccurs="0"/>
       <xsd:element name="creationRange" type="dateRangeType" minOccurs="0"/>
@@ -55,6 +56,7 @@
       <xsd:element name="tag" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="avType" type="media:avTypeEnum" minOccurs="0" />
       <xsd:element name="notAnEpisode" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="episodeOfCount" type="integerRangeType" minOccurs="0"/>
       <xsd:element name="noMembers" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="noCredits" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="findDeleted" type="xsd:boolean" minOccurs="0"/>
@@ -125,11 +127,35 @@
     </xsd:simpleContent>
   </xsd:complexType>
 
+
+  <xsd:complexType name="integerRangeType">
+    <xsd:sequence>
+      <xsd:element name="start" type="integerRangeValueType" minOccurs="0"/>
+      <xsd:element name="stop" type="integerRangeValueType" minOccurs="0"/>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="integerRangeValueType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:long">
+        <xsd:attribute name="inclusive" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
   <xsd:complexType name="dateRangeType">
     <xsd:sequence>
-      <xsd:element name="start" type="xsd:dateTime" minOccurs="0"/>
-      <xsd:element name="stop"  type="xsd:dateTime" minOccurs="0"/>
+      <xsd:element name="start" type="dateRangeValueType" minOccurs="0"/>
+      <xsd:element name="stop" type="dateRangeValueType" minOccurs="0"/>
     </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="dateRangeValueType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="inclusive" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:simpleContent>
   </xsd:complexType>
 
   <xsd:complexType name="mediaListResultType">
