@@ -348,10 +348,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public void setNumber(Integer number) {
-        if(number == null && owner != null && !(owner instanceof Group && !((Group)owner).isOrdered())) {
-            throw new IllegalArgumentException("Must supply an ordering number when the owner of the association is something else than an unordered group.");
-        }
-
         this.number = number;
     }
 
@@ -511,6 +507,14 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public void prePersist() {
         if (this.added == null) {
             this.added = Instant.now();
+        }
+    }
+
+    public Integer getValidNumber(MemberRef existingRef) {
+        if(number == null || number > 1500 || (existingRef != null && existingRef.number == null)) {
+            return null;
+        } else {
+            return number;
         }
     }
 }
