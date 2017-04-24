@@ -624,12 +624,9 @@
                         "index" : "not_analyzed"
                     },
                     "value" : {
-                      "type" : "multi_field",
+                      "type": "string",
+                      "index": "not_analyzed",
                       "fields" : {
-                        "value" : {
-                          "type" : "string",
-  			              "index" : "not_analyzed"
-                        },
                         "lower" : {
                           "type" : "string",
                           "analyzer" : "lowercase"
@@ -1052,6 +1049,13 @@
                                 }
                             },
                             "source": {
+                                "type": "string",
+                                "index": "not_analyzed"
+                            },
+                            "sourceName": {
+                                "type": "string"
+                            },
+                            "license": {
                                 "type": "string",
                                 "index": "not_analyzed"
                             },
