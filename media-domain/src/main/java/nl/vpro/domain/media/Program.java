@@ -315,10 +315,6 @@ public class Program extends MediaObject {
             throw new IllegalArgumentException("Must supply a group type " + GroupType.EPISODE_CONTAINERS + " when adding episodes.");
         }
 
-        if(episodeNr == null || episodeNr < 1) {
-            throw new IllegalArgumentException(String.format("Must supply an episode number greater than zero. Got: %s", episodeNr));
-        }
-
         if(owner.hasAncestor(this)) {
             throw new CircularReferenceException(owner, owner.findAncestry(this));
         }
