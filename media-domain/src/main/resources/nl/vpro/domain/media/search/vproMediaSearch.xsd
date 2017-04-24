@@ -23,7 +23,7 @@
       <xsd:element name="pager" type="mediaPagerType"/>
       <xsd:element type="xsd:string" name="broadcaster" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element type="xsd:string" name="portal" minOccurs="0" maxOccurs="unbounded"/>
-      <xsd:element type="media:organizationIdType" name="organization" maxOccurs="unbounded"/>
+      <xsd:element type="media:organizationIdType" minOccurs="0" name="organization" maxOccurs="unbounded"/>
       <xsd:element type="xsd:string"  name="text" minOccurs="0"/>
       <xsd:element name="title" minOccurs="0" maxOccurs="unbounded">
         <xsd:complexType>
