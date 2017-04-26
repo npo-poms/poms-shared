@@ -56,7 +56,8 @@ import nl.vpro.domain.user.Organization;
     "noMembers",
     "noCredits",
     "findDeleted",
-    "excludedMids"
+    "excludedMids",
+    "descendantOf"
 
 })
 public class MediaForm {
@@ -185,6 +186,12 @@ public class MediaForm {
     @Getter
     @Setter
     private OwnerType forOwner;
+
+    @XmlElement(name = "descendantOf")
+    @JsonProperty("descendantOf")
+    @Getter
+    @Setter
+    private Collection<String> descendantOfs;
 
 
     public MediaForm() {
