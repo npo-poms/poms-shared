@@ -57,7 +57,7 @@ import nl.vpro.domain.user.Organization;
     "noCredits",
     "findDeleted",
     "excludedMids",
-    "descendantOf"
+    "descendantOfs"
 
 })
 public class MediaForm {
