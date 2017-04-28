@@ -57,7 +57,7 @@ import nl.vpro.domain.user.Organization;
     "noCredits",
     "findDeleted",
     "excludedMids",
-    "descendantOfs"
+    "descendantOf"
 
 })
 public class MediaForm {
@@ -191,7 +191,7 @@ public class MediaForm {
     @JsonProperty("descendantOf")
     @Getter
     @Setter
-    private Collection<String> descendantOfs;
+    private Collection<String> descendantOf;
 
 
     public MediaForm() {
