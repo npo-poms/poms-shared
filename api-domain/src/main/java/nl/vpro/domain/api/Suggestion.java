@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,6 +19,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlRootElement(name = "suggestion")
 @XmlType(name = "suggestionType")
 @XmlAccessorType(XmlAccessType.FIELD)
+@Data
+@AllArgsConstructor
 public class Suggestion {
 
     @XmlValue
@@ -25,15 +30,5 @@ public class Suggestion {
     public Suggestion() {
     }
 
-    public Suggestion(String text) {
-        this.text = text;
-    }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
 }
