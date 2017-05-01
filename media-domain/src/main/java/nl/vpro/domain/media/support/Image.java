@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
@@ -475,21 +476,23 @@ public class Image extends PublishableObject implements Ownable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if(this == o) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
             return true;
         }
-        if(o == null || getClass() != o.getClass()) {
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        Image rhs = (Image) obj;
+
+        if ((id != null && rhs.id != null) && !Objects.equals(id, rhs.id)) {
             return false;
         }
 
-        Image image = (Image)o;
-        if((id != null || image.id != null) && ! Objects.equals(id, image.id)) {
-            return false;
-        }
-
-        return
-            Objects.equals(imageUri, image.imageUri) && Objects.equals(type, image.type);
+        return Objects.equals(imageUri, rhs.imageUri) && Objects.equals(type, rhs.type);
     }
 
     public static Image of(ImageMetadata metaData) {
@@ -516,5 +519,23 @@ public class Image extends PublishableObject implements Ownable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : (imageUri == null ? 0 : imageUri.hashCode());
+    }
+
+    public void updateImageProperties(Image imageToUpdate) {
+        imageToUpdate.setTitle(getTitle());
+        imageToUpdate.setDescription(getDescription());
+        imageToUpdate.setType(getType());
+        imageToUpdate.setHeight(getHeight());
+        imageToUpdate.setWidth(getWidth());
+        imageToUpdate.setType(getType());
+        imageToUpdate.setImageUri(getImageUri());
+        imageToUpdate.setHighlighted(isHighlighted());
+        imageToUpdate.setCredits(getCredits());
+        imageToUpdate.setSource(getSource());
+        imageToUpdate.setSourceName(getSourceName());
+        imageToUpdate.setDate(getDate());
+        imageToUpdate.setLicense(getLicense());
+    
+        Embargos.copy(this, imageToUpdate);
     }
 }

@@ -2096,22 +2096,8 @@ public abstract class MediaObject extends PublishableObject
         if (image == null) {
             throw new IllegalArgumentException();
         }
-        if (images == null) {
-            images = new ArrayList<>();
-        }
-        images.add(index, image);
+        getImages().add(index, image);
         image.setMediaObject(this);
-        return this;
-    }
-
-    public MediaObject clearImages() {
-        if (images == null) {
-            return this;
-        }
-        images.forEach(i -> {
-            i.setMediaObject(null);
-        });
-        images.clear();
         return this;
     }
 
@@ -2176,20 +2162,6 @@ public abstract class MediaObject extends PublishableObject
             }
         }
         return success;
-    }
-
-    public MediaObject removeImagesForOwner(OwnerType owner) {
-        if (images != null) {
-            Iterator<Image> iterator = getImages().iterator();
-            while (iterator.hasNext()) {
-                Image image = iterator.next();
-                if (image.getOwner().equals(owner)) {
-                    image.setMediaObject(null);
-                    iterator.remove();
-                }
-            }
-        }
-        return this;
     }
 
     @XmlAttribute(name = "embeddable")
@@ -2549,6 +2521,41 @@ public abstract class MediaObject extends PublishableObject
     @Override
     public String getShortDescription() {
         return LocalizedObject.super.getShortDescription();
+    }
+
+    public void mergeImages(MediaObject obj, OwnerType owner) {
+        obj.getImages().forEach(img -> {
+            addOrUpdate(img);
+        });
+        splitImagesByOwner(owner);
+    }
+
+    private void splitImagesByOwner(OwnerType owner) {
+        Map<Boolean, List<Image>> split = getImages().stream().collect(Collectors.partitioningBy(img -> {
+            return img.getOwner().equals(owner);
+        }));
+        getImages().clear();
+        images.addAll(split.get(true));
+        images.addAll(split.get(false));
+    }
+    
+    public void addAllImages(List<Image> imgs) {
+        imgs.forEach(img -> {img.setMediaObject(this);});
+        getImages().addAll(imgs);
+    }
+    
+    public void removeImages() {
+        getImages().forEach(img -> {img.setMediaObject(null);});
+        images.clear();
+    }
+
+    private void addOrUpdate(Image img) {
+        Image existing = this.getImage(img);
+        if (existing != null) {
+            existing.updateImageProperties(img);
+        } else {
+            addImage(img);
+        }
     }
 
 }
