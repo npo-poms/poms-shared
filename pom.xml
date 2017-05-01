@@ -49,6 +49,7 @@
 
     <module>api-domain</module>
     <module>api-rs-services</module>
+    <module>api-spring</module>
   </modules>
 
   <repositories>
