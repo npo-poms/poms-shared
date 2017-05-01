@@ -108,8 +108,8 @@ public class MediaObjectsTest {
         c.setId(3L);
         Website d = new Website("d"); // new
 
-        List<Website> existing = new ArrayList<>(Arrays.asList(new Website[]{a, b, c}));
-        List<Website> updates = new ArrayList<>(Arrays.asList(new Website[]{b, d, a}));
+        List<Website> existing = new ArrayList<>(Arrays.asList(a, b, c));
+        List<Website> updates = new ArrayList<>(Arrays.asList(b, d, a));
         MediaObjects.integrate(existing, updates);
 
         assertThat(existing).containsSequence(b, d, a);
@@ -160,28 +160,28 @@ public class MediaObjectsTest {
         assertThat(copy.getLocations()).hasSize(1);
         assertThat(copy.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
     }
-    
+
     @Test
     public void hasSubtitles_NoSubs() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         final Program program = MediaBuilder.program()
             .build();
         assertFalse(program.isHasSubtitles());
     }
-    
+
     @Test
     public void hasSubtitles_Translation() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-    	
+
     	final Program program = MediaBuilder.program()
     			.build();
     	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "translation"));
     	assertFalse(program.isHasSubtitles());
     }
-    
+
     @Test
     public void hasSubtitles_DutchCaption() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         final Program program = MediaBuilder.program()
             .build();
         program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "caption"));
         assertTrue(program.isHasSubtitles());
-    }    
+    }
 }
