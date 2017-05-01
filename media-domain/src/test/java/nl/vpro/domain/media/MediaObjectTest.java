@@ -21,7 +21,10 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
+import static nl.vpro.domain.media.support.OwnerType.NEBO;
+import static nl.vpro.domain.media.support.OwnerType.CERES;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
 
 public class MediaObjectTest {
 
@@ -505,5 +508,27 @@ public class MediaObjectTest {
         assertThat(ancestry).hasSize(2);
         assertThat(ancestry.get(0)).isSameAs(grandParent);
         assertThat(ancestry.get(1)).isSameAs(parent);
+    }
+    
+    @Test
+    public void testAddImageWithMultipleOwners() {
+        Image imgn1 = Image.builder().imageUri("urn:image:1").owner(NEBO).build();
+        Image imgn2 = Image.builder().imageUri("urn:image:2").owner(NEBO).build();
+        Image imgc1 = Image.builder().imageUri("urn:image:ceres3").owner(CERES).build();
+        Image imgc2 = Image.builder().imageUri("urn:image:ceres1").owner(CERES).build();
+        Image imgc3 = Image.builder().imageUri("urn:image:ceres2").owner(CERES).build();
+        
+        Program program1 = MediaBuilder.program().images(imgn1, imgn2, imgc1, imgc2, imgc3).build();
+        Image imgn3 = Image.builder().imageUri("urn:image:3").owner(NEBO).build();
+        Program program2 = MediaBuilder.program().images(imgn3, imgn1, imgn2, imgc1, imgc2, imgc3).build();
+        
+        program1.mergeImages(program2, NEBO);
+        
+        assertEquals("urn:image:1", program1.getImages().get(0).getImageUri());
+        assertEquals("urn:image:2", program1.getImages().get(1).getImageUri());
+        assertEquals("urn:image:3", program1.getImages().get(2).getImageUri());
+        assertEquals("urn:image:ceres3", program1.getImages().get(3).getImageUri());
+        assertEquals("urn:image:ceres1", program1.getImages().get(4).getImageUri());
+        assertEquals("urn:image:ceres2", program1.getImages().get(5).getImageUri());
     }
 }
