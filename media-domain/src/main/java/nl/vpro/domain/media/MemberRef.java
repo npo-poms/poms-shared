@@ -341,9 +341,6 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     @XmlAttribute(name = "index")
     public Integer getNumber() {
-        if(number == null) {
-            return null;
-        }
         return number;
     }
 
@@ -510,11 +507,4 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         }
     }
 
-    public Integer getValidNumber(MemberRef existingRef) {
-        if(number == null || number > 1500 || (existingRef != null && existingRef.number == null)) {
-            return null;
-        } else {
-            return number;
-        }
-    }
 }
