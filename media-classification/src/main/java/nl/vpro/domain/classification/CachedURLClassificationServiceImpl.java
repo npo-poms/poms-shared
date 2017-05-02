@@ -26,7 +26,7 @@ public class CachedURLClassificationServiceImpl extends URLClassificationService
 
     @Inject
     public CachedURLClassificationServiceImpl(
-        @Named("pageupdate-api.baseUrl") String url) throws MalformedURLException {
+        @Named("npo-pageupdate-api.baseUrl") String url) throws MalformedURLException {
         this(URI.create(url + "schema/classification/"));
     }
 
