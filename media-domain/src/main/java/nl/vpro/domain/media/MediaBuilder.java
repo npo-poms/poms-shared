@@ -512,6 +512,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     default B memberOf(String mid) throws CircularReferenceException {
         return memberOf(new MemberRef(mid));
     }
+    default B clearMemberOf() {
+        mediaObject().getMemberOf().clear();
+        return (B) this;
+    }
 
     @SuppressWarnings("unchecked")
     default B ageRating(AgeRating ageRating) {
@@ -703,7 +707,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-
+    default B clearMergedTo() {
+        if (mediaObject().getWorkflow() == Workflow.MERGED) {
+            workflow(Workflow.PUBLISHED);
+        }
+        mediaObject().setMergedTo(null);
+        return (B) this;
+    }
     /**
      * Makes a (deep) copy of this builder. This returns a new instance on which you can make changes without affecting the original one.
      */
