@@ -51,7 +51,9 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
     /**
      * Represents Ownable data updated by NEBO batch updates. Before version 1.4 we did not distinguish between NEBO
      * and Ceres as different sources. There might be legacy data incorrectly revering to NEBO as it's owner.
+     * @deprecated NEBO doesn't exist any more
      */
+    @Deprecated
     NEBO("Nebo"),
 
     /**
