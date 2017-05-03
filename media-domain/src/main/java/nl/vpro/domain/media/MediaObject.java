@@ -2524,19 +2524,23 @@ public abstract class MediaObject extends PublishableObject
     }
 
     public void mergeImages(MediaObject obj, OwnerType owner) {
-        obj.getImages().forEach(this::addOrUpdate);
-        splitImagesByOwner(owner);
-    }
-
-    private void splitImagesByOwner(OwnerType owner) {
-        Map<Boolean, List<Image>> split = getImages()
+        List<Image> firstImages = new ArrayList<>();
+        obj.getImages().forEach(i -> {
+            firstImages.add(addOrUpdate(i));
+        });
+        List<Image> toRemove = getImages()
             .stream()
-            .collect(
-                Collectors.partitioningBy(img -> img.getOwner().equals(owner))
-            );
+            .filter(i -> Objects.equals(i.getOwner(), owner))
+            .filter(i -> ! obj.getImages().contains(i))
+            .collect(Collectors.toList());
+
+        toRemove.forEach(this::removeImage);
+        List<Image> rest = getImages().stream().filter(i -> !owner.equals(i.getOwner())).collect(Collectors.toList());
+
         getImages().clear();
-        images.addAll(split.get(true));
-        images.addAll(split.get(false));
+        images.addAll(firstImages);
+        images.addAll(rest);
+
     }
 
     public void addAllImages(List<Image> imgs) {
@@ -2549,12 +2553,14 @@ public abstract class MediaObject extends PublishableObject
         images.clear();
     }
 
-    private void addOrUpdate(Image img) {
+    private Image addOrUpdate(Image img) {
         Image existing = this.getImage(img);
         if (existing != null) {
             existing.updateImageProperties(img);
+            return existing;
         } else {
             addImage(img);
+            return img;
         }
     }
 
