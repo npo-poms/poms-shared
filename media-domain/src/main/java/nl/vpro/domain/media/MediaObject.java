@@ -2544,12 +2544,12 @@ public abstract class MediaObject extends PublishableObject
     }
 
     public void addAllImages(List<Image> imgs) {
-        imgs.forEach(img -> {img.setMediaObject(this);});
+        imgs.forEach(img -> img.setMediaObject(this));
         getImages().addAll(imgs);
     }
 
     public void removeImages() {
-        getImages().forEach(img -> {img.setMediaObject(null);});
+        getImages().forEach(img -> img.setMediaObject(null));
         images.clear();
     }
 
