@@ -1,9 +1,11 @@
 package nl.vpro.domain.api.schedule;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import org.junit.Test;
 
+import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
 import nl.vpro.domain.media.search.SchedulePager;
@@ -38,6 +40,29 @@ public class ExtendedScheduleFormTest {
         assertThat(form.test(eventWithoutNet)).isFalse();
         assertThat(form.test(eventWithDifferentNet)).isFalse();
 
+
+
+    }
+
+    @Test
+    public void applyDescendantOf() throws Exception {
+
+        ScheduleEvent event = new ScheduleEvent();
+        event.setMediaObject(MediaBuilder.program().descendantOf("mid123").build());
+
+
+        ExtendedScheduleForm form = new ExtendedScheduleForm(new SchedulePager(), (LocalDate) null);
+        form.setDescendantOf(Arrays.asList("mid123"));
+
+        assertThat(form.test(event)).isTrue();
+
+        form.setDescendantOf(Arrays.asList("mid456"));
+
+        assertThat(form.test(event)).isFalse();
+
+        form.setDescendantOf(null);
+
+        assertThat(form.test(event)).isTrue();
 
 
     }
