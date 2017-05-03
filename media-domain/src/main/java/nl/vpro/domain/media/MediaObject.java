@@ -2524,26 +2524,26 @@ public abstract class MediaObject extends PublishableObject
     }
 
     public void mergeImages(MediaObject obj, OwnerType owner) {
-        obj.getImages().forEach(img -> {
-            addOrUpdate(img);
-        });
+        obj.getImages().forEach(this::addOrUpdate);
         splitImagesByOwner(owner);
     }
 
     private void splitImagesByOwner(OwnerType owner) {
-        Map<Boolean, List<Image>> split = getImages().stream().collect(Collectors.partitioningBy(img -> {
-            return img.getOwner().equals(owner);
-        }));
+        Map<Boolean, List<Image>> split = getImages()
+            .stream()
+            .collect(
+                Collectors.partitioningBy(img -> img.getOwner().equals(owner))
+            );
         getImages().clear();
         images.addAll(split.get(true));
         images.addAll(split.get(false));
     }
-    
+
     public void addAllImages(List<Image> imgs) {
         imgs.forEach(img -> {img.setMediaObject(this);});
         getImages().addAll(imgs);
     }
-    
+
     public void removeImages() {
         getImages().forEach(img -> {img.setMediaObject(null);});
         images.clear();
