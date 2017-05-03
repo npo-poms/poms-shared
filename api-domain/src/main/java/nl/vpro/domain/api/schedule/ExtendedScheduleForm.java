@@ -1,9 +1,13 @@
 package nl.vpro.domain.api.schedule;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
+import nl.vpro.domain.media.DescendantRef;
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
@@ -18,6 +22,8 @@ import nl.vpro.domain.user.Broadcaster;
  * @since 3.6
  */
 @ToString(callSuper = true)
+@Data
+@EqualsAndHashCode(callSuper = true)
 class ExtendedScheduleForm extends ScheduleForm {
 
     private String broadcaster;
@@ -27,6 +33,9 @@ class ExtendedScheduleForm extends ScheduleForm {
     private MediaType mediaType;
 
     private LocalDate guideDay;
+
+    private Collection<String> descendantOf;
+
 
     public ExtendedScheduleForm(SchedulePager pager, DateRange dateRange) {
         super(pager, dateRange);
@@ -40,41 +49,13 @@ class ExtendedScheduleForm extends ScheduleForm {
     @Override
     public boolean test(ScheduleEvent e) {
         return super.test(e)
-                && (broadcaster == null || e.getMediaObject().getBroadcasters().contains(new Broadcaster(broadcaster)))
-                && (guideDay == null || (e.getGuideDate() != null && e.getGuideDate().equals(guideDay)))
-                && (net == null || (e.getNet() != null && e.getNet().equals(new Net(net))))
-                && (mediaType == null || (e.getMediaObject().getMediaType() == mediaType));
+            && (broadcaster == null || e.getMediaObject().getBroadcasters().contains(new Broadcaster(broadcaster)))
+            && (guideDay == null || (e.getGuideDate() != null && e.getGuideDate().equals(guideDay)))
+            && (net == null || (e.getNet() != null && e.getNet().equals(new Net(net))))
+            && (mediaType == null || (e.getMediaObject().getMediaType() == mediaType))
+            && (descendantOf == null || descendantOf.isEmpty() ||
+            e.getMediaObject().getDescendantOf().stream().map(DescendantRef::getMidRef).filter(descendantOf::contains).findFirst().isPresent());
+
     }
 
-    public String getBroadcaster() {
-        return broadcaster;
-    }
-
-    public void setBroadcaster(String broadcaster) {
-        this.broadcaster = broadcaster;
-    }
-
-    public String getNet() {
-        return net;
-    }
-
-    public void setNet(String net) {
-        this.net = net;
-    }
-
-    public MediaType getMediaType() {
-        return mediaType;
-    }
-
-    public void setMediaType(MediaType mediaType) {
-        this.mediaType = mediaType;
-    }
-
-    public LocalDate getGuideDay() {
-        return guideDay;
-    }
-
-    public void setGuideDay(LocalDate guideDay) {
-        this.guideDay = guideDay;
-    }
 }
