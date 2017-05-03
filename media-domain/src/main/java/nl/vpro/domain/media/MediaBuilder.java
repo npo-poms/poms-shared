@@ -653,6 +653,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         mediaObject().setDescendantOf(new TreeSet<>(Arrays.asList(refs)));
         return (B)this;
     }
+    default B descendantOf(String... mids) {
+        List<DescendantRef> ref = Arrays.stream(mids).map(m -> DescendantRef.builder().midRef(m).build()).collect(Collectors.toList());
+        return descendantOf(ref.toArray(new DescendantRef[ref.size()]));
+
+    }
 
     @SuppressWarnings("unchecked")
     default B relations(Relation... relations) {

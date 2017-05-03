@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Builder;
+
 import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -37,6 +39,7 @@ public class DescendantRef implements Comparable<DescendantRef>, Serializable {
     public DescendantRef() {
     }
 
+    @Builder
     public DescendantRef(String midRef, String urnRef, MediaType type) {
         this.urnRef = urnRef;
         this.midRef = midRef;

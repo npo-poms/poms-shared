@@ -30,6 +30,7 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
 
     private List<Channel> channels;
 
+
     private ScheduleForm() {
     }
 
