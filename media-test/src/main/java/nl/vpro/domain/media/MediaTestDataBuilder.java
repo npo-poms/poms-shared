@@ -210,8 +210,12 @@ public interface MediaTestDataBuilder<
     default T withCrids() {
         return crids("crid://bds.tv/9876", "crid://tmp.fragment.mmbase.vpro.nl/1234");
     }
+
+    Broadcaster BNN = Broadcaster.of("BNN");
+    Broadcaster AVRO = Broadcaster.of("AVRO");
+
     default T withBroadcasters() {
-        return broadcasters(new Broadcaster("BNN", "BNN"), new Broadcaster("AVRO", "AVRO"));
+        return broadcasters(BNN, AVRO);
     }
 
     default T withoutBroadcasters() {
@@ -261,8 +265,12 @@ public interface MediaTestDataBuilder<
         return tags(new Tag("tag1"), new Tag("tag2"), new Tag("tag3"));
     }
 
+    Genre NIEUWS_ACTUALITEITEN = new Genre("3.0.1.7.21");
+    Genre DOCUMENTAIRE_NATUUR = new Genre("3.0.1.8.25");
+
+
     default T withGenres() {
-        return genres(new Genre("3.0.1.7.21"), new Genre("3.0.1.8.25"));
+        return genres(NIEUWS_ACTUALITEITEN, DOCUMENTAIRE_NATUUR);
     }
 
     @SuppressWarnings("unchecked")
@@ -363,6 +371,8 @@ public interface MediaTestDataBuilder<
         return teletext(Short.valueOf("100"));
     }
 
+
+
     default T withLocations() {
         Location l1 = new Location("http://player.omroep.nl/?aflID=4393288", OwnerType.NEBO);
         l1.setCreationInstant(LocalDateTime.of(2016, 3, 4, 12, 45).atZone(Schedule.ZONE_ID).toInstant());
@@ -418,12 +428,19 @@ public interface MediaTestDataBuilder<
         return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes));
     }
 
+    RelationDefinition VPRO_LABEL     = RelationDefinition.of("LABEL", "VPRO");
+    RelationDefinition AVRO_THESAURUS = RelationDefinition.of("THESAURUS", "AVRO");
+    RelationDefinition VPRO_ARTIST    = RelationDefinition.of("ARTIST", "VPRO");
+    RelationDefinition EO_KOOR        = RelationDefinition.of("KOOR", "EO");
+
+    RelationDefinition[] RELATION_DEFINITIONS = new RelationDefinition[] {VPRO_LABEL, AVRO_THESAURUS, VPRO_ARTIST, EO_KOOR};
+
     default T withRelations() {
         return relations(
-            new Relation(RelationDefinition.of("LABEL", "VPRO"), "http://www.bluenote.com/", "Blue Note"),
-            new Relation(RelationDefinition.of("THESAURUS", "AVRO"), null, "synoniem"),
-            new Relation(RelationDefinition.of("ARTIST", "VPRO"), null, "Marco Borsato"),
-            new Relation(RelationDefinition.of("KOOR", "EO"), null, "Ulfts Mannenkoor"));
+            new Relation(VPRO_LABEL, "http://www.bluenote.com/", "Blue Note"),
+            new Relation(AVRO_THESAURUS, null, "synoniem"),
+            new Relation(VPRO_ARTIST, null, "Marco Borsato"),
+            new Relation(EO_KOOR, null, "Ulfts Mannenkoor"));
     }
 
     default T withImages() {
@@ -517,7 +534,6 @@ public interface MediaTestDataBuilder<
                 .withLastModifiedBy()
                 .withLocations()
                 .withMemberOf()
-                .withMergedTo()
                 .withMid()
                 .withPersons()
                 .withPortalRestrictions()
@@ -591,9 +607,14 @@ public interface MediaTestDataBuilder<
             return withEpisodeOf(null, null);
         }
 
-        public ProgramTestDataBuilder withEpisodeOf(Long group1, Long group2)  {
-            Group series = MediaTestDataBuilder.group().constrained().type(GroupType.SERIES).id(group1).build();
-            Group season = MediaTestDataBuilder.group().constrained().type(GroupType.SEASON).id(group2).build();
+        public ProgramTestDataBuilder clearEpisodeOf() {
+            mediaObject.getEpisodeOf().clear();
+            return this;
+        }
+
+        public ProgramTestDataBuilder withEpisodeOf(Long seriesId, Long seasonId)  {
+            Group series = MediaTestDataBuilder.group().constrained().type(GroupType.SERIES).id(seriesId).build();
+            Group season = MediaTestDataBuilder.group().constrained().type(GroupType.SEASON).id(seasonId).build();
             try {
                 season.createMemberOf(series, 1);
             } catch(CircularReferenceException e) {
