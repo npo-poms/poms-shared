@@ -2526,7 +2526,9 @@ public abstract class MediaObject extends PublishableObject
     public void mergeImages(MediaObject obj, OwnerType owner) {
         List<Image> firstImages = new ArrayList<>();
         obj.getImages().forEach(i -> {
-            firstImages.add(addOrUpdate(i));
+            if (Objects.equals(i.getOwner(), owner)) {
+                firstImages.add(addOrUpdate(i));
+            }
         });
         List<Image> toRemove = getImages()
             .stream()
@@ -2535,7 +2537,8 @@ public abstract class MediaObject extends PublishableObject
             .collect(Collectors.toList());
 
         toRemove.forEach(this::removeImage);
-        List<Image> rest = getImages().stream().filter(i -> !owner.equals(i.getOwner())).collect(Collectors.toList());
+        List<Image> rest =
+            getImages().stream().filter(i -> !owner.equals(i.getOwner())).collect(Collectors.toList());
 
         getImages().clear();
         images.addAll(firstImages);

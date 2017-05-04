@@ -359,12 +359,16 @@ public interface MediaTestDataBuilder<
         return emails("info@npo.nl", "programma@avro.nl");
     }
 
+    Website HTTP_JOURNAAL = new Website("http://www.omroep.nl/programma/journaal");
+    Website HTTP_TEGENLICHT = new Website("http://tegenlicht.vpro.nl/afleveringen/222555");
     default T withWebsites() {
-        return websites(new Website("http://www.omroep.nl/programma/journaal"), new Website("http://tegenlicht.vpro.nl/afleveringen/222555"));
+        return websites(HTTP_JOURNAAL, HTTP_TEGENLICHT);
     }
 
+    TwitterRef HASH_VPRO = new TwitterRef("#vpro");
+    TwitterRef AT_TWITTER = new TwitterRef("@twitter");
     default T withTwitterRefs() {
-        return twitterRefs("#vpro", "@twitter");
+        return twitterRefs(HASH_VPRO, AT_TWITTER);
     }
 
     default T withTeletext() {
@@ -637,6 +641,10 @@ public interface MediaTestDataBuilder<
                     MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_1").start(java.time.Duration.ZERO).duration(java.time.Duration.ofMillis(100000)).build(),
                     MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(java.time.Duration.ofMillis(100000)).duration(java.time.Duration.ofMillis(100000)).build());
 
+        }
+        public ProgramTestDataBuilder clearSegments() {
+            mediaObject().getSegments().clear();
+            return this;
         }
 
 
