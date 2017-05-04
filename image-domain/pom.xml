@@ -10,7 +10,7 @@
 
   <groupId>nl.vpro.image</groupId>
   <artifactId>image-domain</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>5.4-SNAPSHOT</version>
 
   <name>image-domain</name>
   <description>Interfaces and domain classes without an interface.</description>
@@ -33,10 +33,4 @@
       </exclusions>
     </dependency>
   </dependencies>
-
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/image-domain</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/image-domain</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.3.0/image-domain</url>
-  </scm>
 </project>

@@ -10,7 +10,7 @@
 
   <groupId>nl.vpro.user</groupId>
   <artifactId>user-test</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>5.4-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
@@ -19,10 +19,4 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/user-test</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/user-test</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.3.0/user-test</url>
-  </scm>
 </project>
