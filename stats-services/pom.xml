@@ -10,7 +10,7 @@
 
   <groupId>nl.vpro.stats</groupId>
   <artifactId>stats-services</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>5.3.0</version>
 
   <dependencies>
     <dependency>
@@ -24,8 +24,8 @@
   </dependencies>
 
   <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/stats-services</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/stats-services</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.3.0/stats-services</url>
+    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-5.3.0/stats-services</connection>
+    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-5.3.0/stats-services</developerConnection>
+    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/tags/REL-5.3.0/stats-services</url>
   </scm>
 </project>

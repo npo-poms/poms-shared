@@ -10,7 +10,7 @@
 
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-domain</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>5.3.0</version>
 
   <name>pages-domain</name>
 
@@ -106,8 +106,8 @@
   </build>
 
   <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/pages-domain</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/pages-domain</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.3.0/pages-domain</url>
+    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-5.3.0/pages-domain</connection>
+    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-5.3.0/pages-domain</developerConnection>
+    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/tags/REL-5.3.0/pages-domain</url>
   </scm>
 </project>
