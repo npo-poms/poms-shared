@@ -11,7 +11,7 @@
 
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-domain</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>5.4-SNAPSHOT</version>
   <name>api-domain</name>
 
   <dependencies>
@@ -77,10 +77,4 @@
       <artifactId>spring-security-core</artifactId>
     </dependency>-->
   </dependencies>
-
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/api-domain</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/api-domain</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.3.0/api-domain</url>
-  </scm>
 </project>

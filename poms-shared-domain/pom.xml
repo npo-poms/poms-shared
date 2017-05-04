@@ -8,7 +8,7 @@
   </parent>
 
   <artifactId>poms-shared-domain</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>5.4-SNAPSHOT</version>
   <name>poms-shared-domain</name>
 
   <dependencies>
@@ -25,11 +25,4 @@
       <artifactId>vpro-shared-jackson2</artifactId>
     </dependency>
   </dependencies>
-
-
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/poms-shared-domain</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/poms-shared-domain</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.3.0/poms-shared-domain</url>
-  </scm>
 </project>

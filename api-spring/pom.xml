@@ -11,7 +11,7 @@
 
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-spring</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>5.4-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
@@ -27,10 +27,4 @@
       <artifactId>spring-context</artifactId>
     </dependency>
   </dependencies>
-
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/api-spring</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/api-spring</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.3.0/api-spring</url>
-  </scm>
 </project>
