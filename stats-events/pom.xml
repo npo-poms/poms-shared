@@ -11,7 +11,7 @@
 
   <groupId>nl.vpro.stats</groupId>
   <artifactId>stats-events</artifactId>
-  <version>5.3-SNAPSHOT</version>
+  <version>5.4-SNAPSHOT</version>
 
   <properties>
     <avro.version>1.7.6</avro.version>
@@ -78,10 +78,4 @@
       </resource>
     </resources>
   </build>
-
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/stats-events</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.3.0/stats-events</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.3.0/stats-events</url>
-  </scm>
 </project>
