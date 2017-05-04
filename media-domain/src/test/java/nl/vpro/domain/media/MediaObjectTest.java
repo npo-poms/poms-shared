@@ -12,7 +12,6 @@ import java.util.SortedSet;
 import javax.validation.ConstraintViolation;
 
 import org.assertj.core.api.Assertions;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -21,8 +20,8 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
-import static nl.vpro.domain.media.support.OwnerType.NEBO;
 import static nl.vpro.domain.media.support.OwnerType.CERES;
+import static nl.vpro.domain.media.support.OwnerType.NEBO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -509,26 +508,39 @@ public class MediaObjectTest {
         assertThat(ancestry.get(0)).isSameAs(grandParent);
         assertThat(ancestry.get(1)).isSameAs(parent);
     }
-    
+
     @Test
     public void testAddImageWithMultipleOwners() {
         Image imgn1 = Image.builder().imageUri("urn:image:1").owner(NEBO).build();
         Image imgn2 = Image.builder().imageUri("urn:image:2").owner(NEBO).build();
-        Image imgc1 = Image.builder().imageUri("urn:image:ceres3").owner(CERES).build();
-        Image imgc2 = Image.builder().imageUri("urn:image:ceres1").owner(CERES).build();
-        Image imgc3 = Image.builder().imageUri("urn:image:ceres2").owner(CERES).build();
-        
-        Program program1 = MediaBuilder.program().images(imgn1, imgn2, imgc1, imgc2, imgc3).build();
         Image imgn3 = Image.builder().imageUri("urn:image:3").owner(NEBO).build();
-        Program program2 = MediaBuilder.program().images(imgn3, imgn1, imgn2, imgc1, imgc2, imgc3).build();
-        
-        program1.mergeImages(program2, NEBO);
-        
-        assertEquals("urn:image:1", program1.getImages().get(0).getImageUri());
-        assertEquals("urn:image:2", program1.getImages().get(1).getImageUri());
-        assertEquals("urn:image:3", program1.getImages().get(2).getImageUri());
-        assertEquals("urn:image:ceres3", program1.getImages().get(3).getImageUri());
-        assertEquals("urn:image:ceres1", program1.getImages().get(4).getImageUri());
-        assertEquals("urn:image:ceres2", program1.getImages().get(5).getImageUri());
+
+        Image imgc1 = Image.builder().imageUri("urn:image:ceres1").owner(CERES).build();
+        Image imgc2 = Image.builder().imageUri("urn:image:ceres2").owner(CERES).build();
+        Image imgc3 = Image.builder().imageUri("urn:image:ceres3").owner(CERES).build();
+
+        Program existing = MediaBuilder.program().images(
+            imgn1, imgn2, //nebo
+            imgc1, imgc2, imgc3 // ceres
+        ).build();
+
+
+        // incoming has ceres images too, this is odd, but they will be ignored
+        Program incoming = MediaBuilder.program().images(
+            imgn3, imgn1, imgn2, // nebo, added one and ordered
+            imgc1, imgc3 // other images should be ignored
+        ).build();
+
+        existing.mergeImages(incoming, NEBO); // because we are nebo, and should not have shipped any thing different
+
+        // arrived and in correct order
+        assertEquals("urn:image:3", existing.getImages().get(0).getImageUri());
+        assertEquals("urn:image:1", existing.getImages().get(1).getImageUri());
+        assertEquals("urn:image:2", existing.getImages().get(2).getImageUri());
+
+        // other images remain untouched and in same  same order
+        assertEquals("urn:image:ceres1", existing.getImages().get(3).getImageUri());
+        assertEquals("urn:image:ceres2", existing.getImages().get(4).getImageUri());
+        assertEquals("urn:image:ceres3", existing.getImages().get(5).getImageUri());
     }
 }

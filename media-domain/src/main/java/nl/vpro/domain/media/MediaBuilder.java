@@ -556,6 +556,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
+    default B twitterRefs(TwitterRef... twitter) {
+        List<TwitterRef> reference = new ArrayList<>();
+        Arrays.stream(twitter).forEach(a -> reference.add(a));
+        mediaObject().setTwitterRefs(reference);
+        return (B) this;
+    }
+    default B clearTwitterRefs() {
+        mediaObject().getTwitterRefs().clear();
+        return (B) this;
+    }
     @SuppressWarnings("unchecked")
     default B teletext(Short teletext) {
         mediaObject().setTeletext(teletext);
