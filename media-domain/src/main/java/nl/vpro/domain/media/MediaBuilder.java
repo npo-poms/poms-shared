@@ -327,10 +327,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return mainTitle(title, OwnerType.BROADCASTER);
     }
 
-    default B addDutchCaptions() {
-    	mediaObject().getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "caption"));
-    	return (B) this;
-    }
 
 
     @SuppressWarnings("unchecked")
@@ -544,6 +540,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B websites(String... websites) {
         mediaObject().setWebsites(Arrays.stream(websites).map(Website::new).collect(Collectors.toList()));
+        return (B) this;
+    }
+
+    default B clearWebsites() {
+        mediaObject().getWebsites().clear();
         return (B) this;
     }
 
