@@ -4,12 +4,13 @@ import java.util.Locale;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.apache.commons.lang3.StringUtils;
-
+import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.xml.bind.LocaleAdapter;
 
 @Embeddable
@@ -18,34 +19,36 @@ import nl.vpro.xml.bind.LocaleAdapter;
 public class AvailableSubtitle {
 
 	private Locale language;
-	private String type;
-	
+
+	@Enumerated(EnumType.STRING)
+	private SubtitlesType type;
+
 	public AvailableSubtitle() {
-		
+
 	}
-	
-	public AvailableSubtitle(Locale language, String type) {
+
+	public AvailableSubtitle(Locale language, SubtitlesType type) {
 		this.language = language;
 		this.type = type;
-		
+
 	}
-	
+
 	@XmlJavaTypeAdapter(LocaleAdapter.class)
 	@XmlAttribute
 	public Locale getLanguage() {
 		return language;
 	}
-	
+
 	public void setLanguage(Locale language) {
 		this.language = language;
 	}
-	
+
 	@XmlAttribute
-	public String getType() {
-		return StringUtils.upperCase(type);
+	public SubtitlesType getType() {
+		return type;
 	}
-	
-	public void setType(String type) {
+
+	public void setType(SubtitlesType type) {
 		this.type = type;
 	}
 
