@@ -372,7 +372,9 @@ public abstract class MediaObject extends PublishableObject
     @OneToMany(targetEntity = Website.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = false)
+    @OrderColumn(name = "list_index",
+        nullable = true // Did I mention that hibernate sucks?
+    )
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<Website> websites;
@@ -380,7 +382,9 @@ public abstract class MediaObject extends PublishableObject
     @OneToMany(targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = false)
+    @OrderColumn(name = "list_index",
+        nullable = true // hibernate sucks
+    )
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid

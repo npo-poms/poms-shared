@@ -3,10 +3,8 @@ package nl.vpro.domain.media;
 import java.util.Objects;
 import java.util.Optional;
 
-import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -54,9 +52,12 @@ public class Person extends DomainObject {
     @Enumerated(EnumType.STRING)
     protected RoleType role;
 
-    @Column(name = "list_index", nullable = false)
+    @Column(name = "list_index",
+        nullable = true // hibernate sucks incredibly
+    )
     @XmlTransient
-    private int listIndex = 0;
+    @NotNull
+    private Integer listIndex = 0;
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
@@ -151,11 +152,11 @@ public class Person extends DomainObject {
         this.mediaObject = mediaObject;
     }
 
-    public int getListIndex() {
+    public Integer getListIndex() {
         return listIndex;
     }
 
-    public void setListIndex(int listIndex) {
+    public void setListIndex(Integer listIndex) {
         this.listIndex = listIndex;
     }
 
