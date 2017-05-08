@@ -8,10 +8,9 @@
 
   <groupId>nl.publiekeomroep</groupId>
   <artifactId>poms-shared-parent</artifactId>
-  <version>5.4-SNAPSHOT</version>
   <packaging>pom</packaging>
+  <version>5.4-SNAPSHOT</version>
 
-  <name>poms-shared-parent</name>
 
   <properties>
     <poms.shared.version>${project.version}</poms.shared.version>
