@@ -31,6 +31,7 @@ import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -705,15 +706,17 @@ public class MediaObjectJsonSchemaTest {
     	media.set("availableSubtitles", subs);
 
     	Program program = program().id(100L).lean().build();
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "CAPTION"));
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "TRANSLATION"));
+    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+            SubtitlesType.CAPTION));
+    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+            SubtitlesType.TRANSLATION));
 
     	Program out = Jackson2TestUtil.roundTripAndSimilar(program, pretty(media));
         assertEquals(2, out.getAvailableSubtitles().size());
         assertEquals("nl", out.getAvailableSubtitles().get(0).getLanguage().toString());
-        assertEquals("CAPTION", out.getAvailableSubtitles().get(0).getType());
+        assertEquals(SubtitlesType.CAPTION, out.getAvailableSubtitles().get(0).getType());
         assertEquals("nl", out.getAvailableSubtitles().get(1).getLanguage().toString());
-        assertEquals("TRANSLATION", out.getAvailableSubtitles().get(1).getType());
+        assertEquals(SubtitlesType.TRANSLATION, out.getAvailableSubtitles().get(1).getType());
 
     }
 	private String pretty(ObjectNode node) throws JsonProcessingException {

@@ -14,6 +14,7 @@ import java.util.List;
 import org.junit.Test;
 
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 
 import static nl.vpro.domain.TextualObjects.findOwnersForTextFields;
@@ -173,7 +174,8 @@ public class MediaObjectsTest {
 
     	final Program program = MediaBuilder.program()
     			.build();
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "translation"));
+    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+            SubtitlesType.TRANSLATION));
     	assertFalse(program.isHasSubtitles());
     }
 
@@ -181,7 +183,8 @@ public class MediaObjectsTest {
     public void hasSubtitles_DutchCaption() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         final Program program = MediaBuilder.program()
             .build();
-        program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "caption"));
+        program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+            SubtitlesType.CAPTION));
         assertTrue(program.isHasSubtitles());
     }
 }
