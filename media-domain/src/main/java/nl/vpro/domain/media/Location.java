@@ -629,6 +629,9 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
         Location that = (Location)o;
 
+        if (id != null && that.id != null) {
+            return id.equals(that.id);
+        }
         return compareTo(that) == 0;
     }
 

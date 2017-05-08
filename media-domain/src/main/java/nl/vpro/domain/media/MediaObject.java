@@ -43,6 +43,7 @@ import nl.vpro.domain.media.bind.LocaleAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
@@ -1627,7 +1628,9 @@ public abstract class MediaObject extends PublishableObject
     @XmlAttribute
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
     public Boolean isHasSubtitles() {
-        return getAvailableSubtitles().stream().anyMatch(sub -> Locales.DUTCH.equals(sub.getLanguage()) && "caption".equalsIgnoreCase(sub.getType()));
+        return getAvailableSubtitles().stream().anyMatch(
+            sub -> Locales.DUTCH.equals(sub.getLanguage()) &&
+                SubtitlesType.CAPTION == sub.getType());
     }
 
     public void setHasSubtitles(Boolean hasSubtitles) {

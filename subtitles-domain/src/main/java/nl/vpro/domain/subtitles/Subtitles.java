@@ -165,6 +165,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         this.offset = offset;
         this.content = new SubtitlesContent(format, content);
         this.language = language;
+        getCueCount();
     }
 
     public Instant getCreationDate() {
@@ -207,6 +208,8 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
 
     public void setContent(SubtitlesContent content) {
         this.content = content;
+        this.cueCount = null;
+        getCueCount();
     }
 
     @Override
