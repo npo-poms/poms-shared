@@ -34,6 +34,7 @@ import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.persistence.DurationToTimeCESTConverter;
 import nl.vpro.persistence.DurationToTimeConverter;
 import nl.vpro.util.TimeUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -115,7 +116,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     @Column(name = "start_offset")
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    @Convert(converter = DurationToTimeConverter.class)
+    @Convert(converter = DurationToTimeCESTConverter.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
@@ -630,6 +631,9 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
 
         Location that = (Location)o;
 
+        if (id != null && that.id != null) {
+            return id.equals(that.id);
+        }
         return compareTo(that) == 0;
     }
 

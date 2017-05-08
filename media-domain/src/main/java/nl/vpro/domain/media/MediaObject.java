@@ -43,6 +43,7 @@ import nl.vpro.domain.media.bind.LocaleAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
@@ -372,7 +373,9 @@ public abstract class MediaObject extends PublishableObject
     @OneToMany(targetEntity = Website.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = false)
+    @OrderColumn(name = "list_index",
+        nullable = true // Did I mention that hibernate sucks?
+    )
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<Website> websites;
@@ -380,7 +383,9 @@ public abstract class MediaObject extends PublishableObject
     @OneToMany(targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = false)
+    @OrderColumn(name = "list_index",
+        nullable = true // hibernate sucks
+    )
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
@@ -1623,7 +1628,9 @@ public abstract class MediaObject extends PublishableObject
     @XmlAttribute
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
     public Boolean isHasSubtitles() {
-        return getAvailableSubtitles().stream().anyMatch(sub -> Locales.DUTCH.equals(sub.getLanguage()) && "caption".equalsIgnoreCase(sub.getType()));
+        return getAvailableSubtitles().stream().anyMatch(
+            sub -> Locales.DUTCH.equals(sub.getLanguage()) &&
+                SubtitlesType.CAPTION == sub.getType());
     }
 
     public void setHasSubtitles(Boolean hasSubtitles) {
