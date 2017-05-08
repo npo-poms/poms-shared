@@ -35,6 +35,7 @@ import org.xmlunit.diff.Diff;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -108,8 +109,10 @@ public class MediaObjectXmlSchemaTest {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program mid=\"MID_000001\" embeddable=\"true\" hasSubtitles=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><availableSubtitles><availableSubtitle language=\"nl\" type=\"CAPTION\"/><availableSubtitle language=\"nl\" type=\"TRANSLATION\"/></availableSubtitles><segments/></program>";
 
         Program program = program().lean().mid("MID_000001").build();
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "CAPTION"));
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "TRANSLATION"));
+    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+            SubtitlesType.CAPTION));
+    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+            SubtitlesType.TRANSLATION));
 
         String actual = toXml(program);
 

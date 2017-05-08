@@ -19,6 +19,7 @@ import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.support.Duration;
+import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.TestEditors;
@@ -204,9 +205,12 @@ public interface MediaTestDataBuilder<
         return mainTitle(mainTitle);
     }
 
+    AvailableSubtitle DUTCH_CAPTION = new AvailableSubtitle(
+        Locales.DUTCH,
+        SubtitlesType.CAPTION);
 
     default T withDutchCaptions() {
-        mediaObject().getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "caption"));
+        mediaObject().getAvailableSubtitles().add(DUTCH_CAPTION);
         return (T) this;
     }
     default T withSubtitles() {
@@ -664,9 +668,7 @@ public interface MediaTestDataBuilder<
         public ProgramTestDataBuilder withIds(AtomicLong id) {
             MediaTestDataBuilder.super.withIds(id);
             for (Segment segment : mediaObject.getSegments()) {
-                if (segment.getId() != null) {
-                    segment.setId(id.incrementAndGet());
-                }
+                MediaTestDataBuilder.segment(segment).withIds(id);
             }
             return this;
 
