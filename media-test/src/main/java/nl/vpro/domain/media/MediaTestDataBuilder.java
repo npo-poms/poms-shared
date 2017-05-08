@@ -22,6 +22,7 @@ import nl.vpro.domain.media.support.Duration;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.TestEditors;
+import nl.vpro.i18n.Locales;
 
 public interface MediaTestDataBuilder<
         T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>,
@@ -203,9 +204,19 @@ public interface MediaTestDataBuilder<
         return mainTitle(mainTitle);
     }
 
-    default T withSubtitles() {
-        return addDutchCaptions();
+
+    default T withDutchCaptions() {
+        mediaObject().getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH, "caption"));
+        return (T) this;
     }
+    default T withSubtitles() {
+        return withDutchCaptions();
+    }
+    default T clearSubtitles() {
+        mediaObject().getAvailableSubtitles().clear();
+        return (T) this;
+    }
+
 
     default T withCrids() {
         return crids("crid://bds.tv/9876", "crid://tmp.fragment.mmbase.vpro.nl/1234");
@@ -638,7 +649,8 @@ public interface MediaTestDataBuilder<
         public ProgramTestDataBuilder withSegmentsWithEveryting() {
             return
                 segments(
-                    MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_1").start(java.time.Duration.ZERO).duration(java.time.Duration.ofMillis(100000)).build(),
+                    MediaTestDataBuilder.segment().parent(mediaObject())
+                        .withEverything().mid("VPROWON_12345_1").start(java.time.Duration.ZERO).duration(java.time.Duration.ofMillis(100000)).build(),
                     MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(java.time.Duration.ofMillis(100000)).duration(java.time.Duration.ofMillis(100000)).build());
 
         }
