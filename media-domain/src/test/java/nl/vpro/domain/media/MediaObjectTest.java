@@ -3,21 +3,24 @@
  */
 package nl.vpro.domain.media;
 
-import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.assertj.core.api.Assertions;
-import org.custommonkey.xmlunit.XMLUnit;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import javax.validation.ConstraintViolation;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
+
+import javax.validation.ConstraintViolation;
+
+import org.assertj.core.api.Assertions;
+import org.custommonkey.xmlunit.XMLUnit;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.exceptions.ModificationException;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -510,5 +513,14 @@ public class MediaObjectTest {
         assertThat(ancestry).hasSize(2);
         assertThat(ancestry.get(0)).isSameAs(grandParent);
         assertThat(ancestry.get(1)).isSameAs(parent);
+    }
+
+    @Test
+    public void testSetDurationAsDate() throws ModificationException {
+        java.time.Duration duration = java.time.Duration.ofMillis(500);
+        Program program = new Program();
+        program.setDuration(duration);
+        program.setDurationWithDate(program.getDurationAsDate());
+        assertThat(program.getDuration().get()).isEqualTo(java.time.Duration.ofMillis(500));
     }
 }
