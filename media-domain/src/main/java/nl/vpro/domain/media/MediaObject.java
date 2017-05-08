@@ -1882,8 +1882,8 @@ public abstract class MediaObject extends PublishableObject
             existing.setDuration(location.getDuration());
             existing.setOffset(location.getOffset());
         } else {
-            location.setMediaObject(this);
             locations.add(location);
+            location.setMediaObject(this);
             if (location.hasPlatform()) {
                 realizePrediction(location);
             }

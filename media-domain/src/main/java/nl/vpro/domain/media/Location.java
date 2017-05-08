@@ -613,6 +613,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             .append("format", avAttributes != null ? avAttributes.getAvFileFormat() : null)
             .append("programUrl", programUrl)
             .append("owner", owner)
+            .append("start", publishStart)
+            .append("stop", publishStop)
             .toString();
     }
 

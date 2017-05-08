@@ -24,6 +24,7 @@ import static nl.vpro.domain.media.support.OwnerType.CERES;
 import static nl.vpro.domain.media.support.OwnerType.NEBO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class MediaObjectTest {
 
@@ -542,5 +543,18 @@ public class MediaObjectTest {
         assertEquals("urn:image:ceres1", existing.getImages().get(3).getImageUri());
         assertEquals("urn:image:ceres2", existing.getImages().get(4).getImageUri());
         assertEquals("urn:image:ceres3", existing.getImages().get(5).getImageUri());
+    }
+    
+    @Test
+    public void addLocationToProgramWIthSystemAuthorizedPrediction() {
+        Program program = MediaBuilder.program().build();
+        Prediction prediction = new Prediction(Platform.INTERNETVOD);
+        prediction.setAuthority(Authority.SYSTEM);
+        prediction.setPublishStartInstant(Instant.now());
+        program.setPredictions(Arrays.asList(prediction));
+        Location l1 = new Location("TEST_URL", OwnerType.AUTHORITY);
+        l1.setPlatform(Platform.INTERNETVOD);
+        program.addLocation(l1);
+        assertNotNull(program.getLocation(l1));
     }
 }
