@@ -3,12 +3,12 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>5.3.0</version>
+    <version>5.4-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.publiekeomroep</groupId>
   <artifactId>poms-shared-parent</artifactId>
-  <version>5.3.0</version>
+  <version>5.4-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>poms-shared-parent</name>
