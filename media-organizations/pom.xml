@@ -36,9 +36,4 @@
     </dependency>
   </dependencies>
 
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-5.3.0/media-organizations</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-5.3.0/media-organizations</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/tags/REL-5.3.0/media-organizations</url>
-  </scm>
 </project>
