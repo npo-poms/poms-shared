@@ -111,5 +111,13 @@
       <xs:enumeration value="BACKGROUND"/>
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="subtitlesTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CAPTION"/>
+      <xs:enumeration value="TRANSLATION"/>
+      <xs:enumeration value="TRANSCRIPT"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
 
