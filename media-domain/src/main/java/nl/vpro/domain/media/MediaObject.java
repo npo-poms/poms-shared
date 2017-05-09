@@ -278,16 +278,26 @@ public abstract class MediaObject extends PublishableObject
     protected Set<Description> descriptions;
 
     @ManyToMany
-    @Cascade({ CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REPLICATE, CascadeType.SAVE_UPDATE,
-            CascadeType.PERSIST })
+    @Cascade({
+        CascadeType.MERGE,
+        CascadeType.REFRESH,
+        CascadeType.REPLICATE,
+        CascadeType.SAVE_UPDATE,
+        CascadeType.PERSIST
+    })
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<Genre> genres;
 
     @ManyToMany
-    @Cascade({ CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REPLICATE, CascadeType.SAVE_UPDATE,
-            CascadeType.PERSIST, CascadeType.REMOVE })
+    @Cascade({
+        CascadeType.MERGE,
+        CascadeType.REFRESH,
+        CascadeType.REPLICATE,
+        CascadeType.SAVE_UPDATE,
+        CascadeType.PERSIST
+    })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
@@ -297,6 +307,7 @@ public abstract class MediaObject extends PublishableObject
 
     @ElementCollection
     @Enumerated(EnumType.STRING)
+
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -424,8 +435,14 @@ public abstract class MediaObject extends PublishableObject
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<Relation> relations;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
-    @OrderColumn(name = "list_index", nullable = false)
+    @OneToMany(
+        orphanRemoval = true,
+        mappedBy = "mediaObject"
+    )
+    @OrderColumn(
+        name = "list_index",
+        nullable = true // hibernate sucks
+    )
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
