@@ -398,7 +398,7 @@
   <xs:complexType name="AvailableSubtitleType">
     <xs:sequence/>
     <xs:attribute name="language" type="xs:string"/>
-    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="type" type="shared:subtitlesTypeEnum"/>
   </xs:complexType>
 
   <xs:complexType name="groupType">
