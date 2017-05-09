@@ -33,20 +33,20 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 abstract public class Restriction extends DomainObject implements Embargo {
 
 
-    protected static abstract class RestrictionBuilder<B extends RestrictionBuilder<B>> implements EmbargoBuilder<RestrictionBuilder<B>> {
+    protected static abstract class RestrictionBuilder<B extends RestrictionBuilder<B>> implements EmbargoBuilder<B> {
 
 
-        public abstract RestrictionBuilder<B> start(Instant date);
+        public abstract B start(Instant date);
 
-        public abstract RestrictionBuilder<B> stop(Instant date);
+        public abstract B stop(Instant date);
 
         @Override
-        public RestrictionBuilder<B> publishStop(Instant date) {
+        public B publishStop(Instant date) {
             return stop(date);
         }
 
         @Override
-        public RestrictionBuilder<B> publishStart(Instant date) {
+        public B publishStart(Instant date) {
             return start(date);
         }
 
