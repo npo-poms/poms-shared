@@ -187,7 +187,9 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         AVFileFormat avFileFormat,
         AudioAttributes audioAttributes,
         VideoAttributes videoAttributes,
-        Platform platform
+        Platform platform,
+        Instant publishStart,
+        Instant publishStop
     ) {
         this.programUrl = programUrl;
         this.owner = owner == null ? OwnerType.BROADCASTER : owner;
@@ -203,7 +205,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
             .videoAttributes(videoAttributes == null ? avAttributes.getVideoAttributes() : videoAttributes)
             .build();
         this.platform = platform;
-
+        this.publishStart = publishStart;
+        this.publishStop = publishStop;
     }
 
     @Deprecated
@@ -369,8 +372,9 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         return duration;
     }
 
-    public void setDuration(Duration duration) {
+    public Location setDuration(Duration duration) {
         this.duration = duration;
+        return this;
     }
 
     @Override
