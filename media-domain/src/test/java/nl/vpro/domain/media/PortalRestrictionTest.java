@@ -23,10 +23,11 @@ public class PortalRestrictionTest {
 
     @Test
     public void testBuilder() throws Exception {
+
         PortalRestriction input = PortalRestriction
             .builder()
             .portal(Portal.builder().id("PORTAL_ID").displayName("DISPLAY_NAME").build())
-            .start(LocalDate.of(2017, 5, 9).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant())
+            .publishStart(LocalDate.of(2017, 5, 9).atStartOfDay())
             .build();
         assertThat(input.getStart().atZone(Schedule.ZONE_ID).toLocalDate()).isEqualTo(LocalDate.of(2017, 5, 9));
 
