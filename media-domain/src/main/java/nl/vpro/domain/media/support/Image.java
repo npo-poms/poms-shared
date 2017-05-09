@@ -49,7 +49,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  */
 @Entity
 @Table(uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"mediaobject_id", "list_index"})
+    //@UniqueConstraint(columnNames = {"mediaobject_id", "list_index"})
 })
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "imageType",
