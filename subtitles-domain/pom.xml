@@ -64,9 +64,4 @@
     </dependency>
   </dependencies>
 
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-5.3.0/subtitles-domain</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/tags/REL-5.3.0/subtitles-domain</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/tags/REL-5.3.0/subtitles-domain</url>
-  </scm>
 </project>
