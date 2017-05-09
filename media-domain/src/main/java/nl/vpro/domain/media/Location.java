@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
@@ -177,7 +178,11 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         this.duration = duration;
     }
 
-    @Builder
+    public static class Builder implements EmbargoBuilder<Builder> {
+
+    }
+
+    @lombok.Builder(builderClassName = "Builder")
     protected Location(
         String programUrl,
         OwnerType owner,
@@ -372,9 +377,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         return duration;
     }
 
-    public Location setDuration(Duration duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
-        return this;
     }
 
     @Override
