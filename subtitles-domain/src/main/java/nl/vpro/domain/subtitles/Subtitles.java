@@ -84,7 +84,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     @Id
     private Locale language;
 
-    @Column(name = "[offset]")
+    @Column(name = "`offset`")
     @Convert(converter = DurationToLongConverter.class)
     @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
