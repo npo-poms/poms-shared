@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.Collections;
 import java.util.Objects;
@@ -22,13 +24,14 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Embargo;
+import nl.vpro.domain.EmbargoBuilder;
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.Image;
@@ -61,10 +64,9 @@ import static nl.vpro.domain.media.update.MediaUpdate.VALIDATOR;
     "offset",
     "image"
 })
-public class ImageUpdate {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ImageUpdate.class);
-
+@Slf4j
+public class ImageUpdate implements Embargo {
 
     @XmlAttribute(required = true)
     @NotNull
@@ -168,7 +170,7 @@ public class ImageUpdate {
         this.image = image;
     }
 
-    public static class Builder {
+    public static class Builder implements EmbargoBuilder<Builder> {
 
         public Builder imageUrl(String imageLocation) {
             return imageLocation(new ImageLocation(imageLocation));
@@ -191,7 +193,9 @@ public class ImageUpdate {
         License license,
         String source,
         String sourceName,
-        String credits
+        String credits,
+        Instant publishStart,
+        Instant publishStop
         ) {
         this.description = description;
         this.title = title;
@@ -207,6 +211,8 @@ public class ImageUpdate {
         this.sourceName = sourceName;
         this.source = source;
         this.credits = credits;
+        this.publishStart = publishStart;
+        this.publishStop = publishStop;
     }
 
 
@@ -248,6 +254,7 @@ public class ImageUpdate {
         result.setDate(date);
         result.setOffset(offset);
         result.setUrn(urnAttribute);
+        Embargos.copy(this, result);
         return result;
     }
 
@@ -264,13 +271,13 @@ public class ImageUpdate {
         }
         if (metadata.getWidth() != null) {
             if (width != null && !metadata.getWidth().equals(width)) {
-                LOG.warn("Width was set {} but it is actually {}, so ignoring", width, metadata.getWidth());
+                log.warn("Width was set {} but it is actually {}, so ignoring", width, metadata.getWidth());
             }
             result.setWidth(metadata.getWidth());
         }
         if (metadata.getHeight() != null) {
             if (height != null && !metadata.getHeight().equals(height)) {
-                LOG.warn("Height was set {} but it is actually {}, so ignoring", height, metadata.getHeight());
+                log.warn("Height was set {} but it is actually {}, so ignoring", height, metadata.getHeight());
 
             }
             result.setHeight(metadata.getHeight());
@@ -304,20 +311,26 @@ public class ImageUpdate {
         urnAttribute = id == null ? null : Image.BASE_URN + id;
     }
 
-    public Instant getPublishStart() {
+    @Override
+    public Instant getPublishStartInstant() {
         return publishStart;
     }
 
-    public void setPublishStart(Instant publishStart) {
+    @Override
+    public ImageUpdate setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
+        return this;
     }
 
-    public Instant getPublishStop() {
+    @Override
+    public Instant getPublishStopInstant() {
         return publishStop;
     }
 
-    public void setPublishStop(Instant publishStop) {
+    @Override
+    public ImageUpdate setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
+        return this;
     }
 
 
@@ -439,7 +452,7 @@ public class ImageUpdate {
         if (VALIDATOR != null) {
             return VALIDATOR.validate(this, groups);
         } else {
-            LOG.warn("Cannot validate since no validator available");
+            log.warn("Cannot validate since no validator available");
             return Collections.emptySet();
         }
     }

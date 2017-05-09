@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.xml.bind.JAXB;
 
+import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -26,14 +27,14 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
-import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.LocalizedString;
 import nl.vpro.util.DateUtils;
 
+import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toDate;
 
 @SuppressWarnings("ALL")
-public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObject>   {
+public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObject> extends EmbargoBuilder<B> {
 
     static ProgramBuilder program() {
         return new ProgramBuilder();
@@ -154,39 +155,15 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return lastModified(fromLocalDate(date));
     }
 
-    @SuppressWarnings("unchecked")
-    @Deprecated
-    default B publishStart(Date date) {
-        mediaObject().setPublishStartInstant(DateUtils.toInstant(date));
-        return (B)this;
-    }
 
     default B publishStart(Instant date) {
-        return publishStart(toDate(date));
-    }
-
-    default B publishStart(ZonedDateTime date) {
-        return publishStart(toDate(date));
-    }
-
-        default B publishStart(LocalDateTime date) {
-        return publishStart(fromLocalDate(date));
-    }
-
-
-    @SuppressWarnings("unchecked")
-    @Deprecated
-    default B publishStop(Date date) {
-        mediaObject().setPublishStop(date);
-        return (B)this;
+        mediaObject().setPublishStartInstant(date);
+        return (B) this;
     }
 
     default B publishStop(Instant date) {
-        return publishStop(toDate(date));
-    }
-
-    default B publishStop(LocalDateTime date) {
-        return publishStop(fromLocalDate(date));
+        mediaObject().setPublishStopInstant(date);
+        return (B) this;
     }
 
     @SuppressWarnings("unchecked")
@@ -730,9 +707,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
      */
     B copy();
 
-    static Date fromLocalDate(LocalDateTime date) {
-        return DateUtils.toDate(date, Schedule.ZONE_ID);
-    }
 
     static Editor user(String principalId) {
         return new Editor(principalId, null, null, null, null);

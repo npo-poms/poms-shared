@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Embargo;
+import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.media.support.DomainObject;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -30,6 +31,26 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressWarnings("serial")
 abstract public class Restriction extends DomainObject implements Embargo {
+
+
+    protected static abstract class RestrictionBuilder<B extends RestrictionBuilder<B>> implements EmbargoBuilder<RestrictionBuilder<B>> {
+
+
+        public abstract RestrictionBuilder<B> start(Instant date);
+
+        public abstract RestrictionBuilder<B> stop(Instant date);
+
+        @Override
+        public RestrictionBuilder<B> publishStop(Instant date) {
+            return stop(date);
+        }
+
+        @Override
+        public RestrictionBuilder<B> publishStart(Instant date) {
+            return start(date);
+        }
+
+    }
 
     @Column
     @XmlAttribute

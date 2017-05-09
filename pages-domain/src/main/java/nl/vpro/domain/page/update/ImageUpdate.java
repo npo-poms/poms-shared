@@ -5,7 +5,7 @@
 package nl.vpro.domain.page.update;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.Data;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -31,8 +31,9 @@ import nl.vpro.validation.WarningValidatorGroup;
     "credits",
     "image",
 })
-@Builder
+@lombok.Builder(builderClassName = "Builder")
 @AllArgsConstructor
+@Data
 public class ImageUpdate {
 
     @XmlAttribute(required = true)
@@ -125,70 +126,6 @@ public class ImageUpdate {
         }
 
         return result;
-    }
-
-    public ImageType getType() {
-        return type;
-    }
-
-    public void setType(ImageType type) {
-        this.type = type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Object getImage() {
-        return image;
-    }
-
-    public void setImage(ImageLocation image) {
-        this.image = image;
-    }
-
-    public String getCredits() {
-        return credits;
-    }
-
-    public void setCredits(String credits) {
-        this.credits = credits;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
-
-    public License getLicense() {
-        return license;
-    }
-
-    public void setLicense(License license) {
-        this.license = license;
     }
 
     @Override
