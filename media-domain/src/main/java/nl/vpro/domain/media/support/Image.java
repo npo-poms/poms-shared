@@ -535,7 +535,7 @@ public class Image extends PublishableObject implements Ownable {
         imageToUpdate.setSourceName(getSourceName());
         imageToUpdate.setDate(getDate());
         imageToUpdate.setLicense(getLicense());
-    
+
         Embargos.copy(this, imageToUpdate);
     }
 }
