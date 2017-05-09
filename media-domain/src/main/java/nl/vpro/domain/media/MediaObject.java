@@ -435,8 +435,14 @@ public abstract class MediaObject extends PublishableObject
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<Relation> relations;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
-    @OrderColumn(name = "list_index", nullable = false)
+    @OneToMany(
+        orphanRemoval = true,
+        mappedBy = "mediaObject"
+    )
+    @OrderColumn(
+        name = "list_index",
+        nullable = true // hibernate sucks
+    )
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
