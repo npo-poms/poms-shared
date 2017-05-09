@@ -378,16 +378,8 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         return duration;
     }
 
-    public Location setDuration(Duration duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
-        return this;
-    }
-
-    @Deprecated
-    @JsonIgnore
-    public Location setDuration(Date duration) {
-        this.duration = duration == null ? null : Duration.ofMillis(duration.getTime());
-        return this;
     }
 
     @Override
