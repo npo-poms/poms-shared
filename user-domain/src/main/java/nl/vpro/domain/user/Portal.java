@@ -25,6 +25,7 @@ public class Portal extends Organization {
         this(id, null);
     }
 
+    @lombok.Builder(builderClassName = "Builder")
     public Portal(String id, String displayName) {
         super(id, displayName);
     }

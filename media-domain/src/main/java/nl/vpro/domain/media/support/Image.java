@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageMetadata;
@@ -191,7 +192,7 @@ public class Image extends PublishableObject implements Ownable {
         this.type = type;
     }
 
-    public static class Builder {
+    public static class Builder implements EmbargoBuilder<Builder> {
         private OwnerType owner = OwnerType.BROADCASTER;
         private ImageType type = ImageType.PICTURE;
 
@@ -211,7 +212,9 @@ public class Image extends PublishableObject implements Ownable {
         Integer height,
         Integer width,
         java.time.Duration offset,
-        String date
+        String date,
+        Instant publishStart,
+        Instant publishStop
         ) {
         this(owner, type, imageUri);
         this.title = title;
@@ -224,6 +227,8 @@ public class Image extends PublishableObject implements Ownable {
         this.width = width;
         this.offset = offset;
         this.date = date;
+        this.publishStart = publishStart;
+        this.publishStop = publishStop;
 
     }
 
