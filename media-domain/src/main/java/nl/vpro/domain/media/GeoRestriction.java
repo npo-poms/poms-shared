@@ -22,7 +22,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoRestrictionType")
 @SuppressWarnings("serial")
+
 public class GeoRestriction extends Restriction {
+
+    public static class Builder extends RestrictionBuilder<Builder> {
+
+    }
 
     @Column(nullable=false)
     @Enumerated(EnumType.STRING)
@@ -50,6 +55,7 @@ public class GeoRestriction extends Restriction {
         authorityUpdate = true;
     }
 
+    @lombok.Builder(builderClassName = "Builder")
     public GeoRestriction(Long id, Region region, Instant start, Instant stop) {
         super(id, start, stop);
         this.region = region;
