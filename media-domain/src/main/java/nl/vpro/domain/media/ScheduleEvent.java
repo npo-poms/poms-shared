@@ -95,7 +95,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Id
     @NotNull
-    //@Convert(converter = InstantToTimestampConverter.class)
     protected Instant start;
 
     @ManyToOne
@@ -123,14 +122,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     protected String textPage;
 
     @Column(name = "start_offset")
-    //@Convert(converter = DurationToTimeCESTConverter.class)
     @Convert(converter = DurationToLongConverter.class)
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     protected Duration offset;
 
-    //@Convert(converter = DurationToTimeConverter.class)
     @Convert(converter = DurationToLongConverter.class)
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
@@ -665,7 +662,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     public int compareTo(ScheduleEvent o) {
-
         Instant otherStart = o.start;
         if(start != null
             && otherStart != null
