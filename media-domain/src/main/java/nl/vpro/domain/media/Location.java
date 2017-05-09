@@ -21,7 +21,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -111,17 +110,15 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     @XmlElement
     protected String subtitles;
 
-    @Column(name = "start_offset")
+    @Column(name = "`start_offset`")
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    //@Convert(converter = DurationToTimeCESTConverter.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     protected Duration offset;
 
     @XmlElement
-    //@Convert(converter = DurationToTimeConverter.class)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonSerialize(using = XMLDurationToJsonTimestamp .Serializer.class)
@@ -367,27 +364,13 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
         return this;
     }
 
-    @JsonIgnore
-    public Location setOffset(Date offset) {
-        this.offset = offset == null ? null : Duration.ofMillis(offset.getTime());
-        return this;
-    }
-
 
     public Duration getDuration() {
         return duration;
     }
 
-    public Location setDuration(Duration duration) {
+    public void setDuration(Duration duration) {
         this.duration = duration;
-        return this;
-    }
-
-    @Deprecated
-    @JsonIgnore
-    public Location setDuration(Date duration) {
-        this.duration = duration == null ? null : Duration.ofMillis(duration.getTime());
-        return this;
     }
 
     @Override
