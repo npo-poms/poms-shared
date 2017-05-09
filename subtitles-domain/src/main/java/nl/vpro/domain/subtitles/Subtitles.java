@@ -41,7 +41,7 @@ import static nl.vpro.i18n.Locales.DUTCH;
  */
 @Entity
 @XmlRootElement(name = "subtitles")
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "subtitlesType", propOrder = {
     "mid",
     "offset",
@@ -94,11 +94,9 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     private Duration offset;
 
     @Column(nullable = false)
-    @XmlAttribute
     private Integer cueCount;
 
     @Embedded
-    @XmlElement(required = true)
     private SubtitlesContent content;
 
 
@@ -165,7 +163,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         this.offset = offset;
         this.content = new SubtitlesContent(format, content);
         this.language = language;
-        getCueCount();
+        this.cueCount = null;
     }
 
     public Instant getCreationDate() {
@@ -202,6 +200,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         return this;
     }
 
+    @XmlElement(required = true)
     public SubtitlesContent getContent() {
         return content;
     }
@@ -233,6 +232,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         this.language = language;
     }
 
+    @XmlAttribute
     public Integer getCueCount() {
         if (cueCount == null) {
             Iterator<Cue> cues = SubtitlesUtil.parse(this).iterator();
@@ -282,6 +282,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     public int hashCode() {
         return mid != null ? mid.hashCode() : 0;
     }
+
 
 
 }
