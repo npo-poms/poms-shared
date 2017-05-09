@@ -30,6 +30,9 @@ import nl.vpro.domain.user.Portal;
 @SuppressWarnings("serial")
 public class PortalRestriction extends Restriction {
 
+    public static class Builder extends RestrictionBuilder<Builder> {
+
+    }
     @ManyToOne(optional = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @NotNull(message = "nl.vpro.constraints.NotNull")
@@ -47,6 +50,7 @@ public class PortalRestriction extends Restriction {
         this.portal = portal;
     }
 
+    @lombok.Builder(builderClassName = "Builder")
     public PortalRestriction(Long id, Portal portal, Instant start, Instant stop) {
         super(id, start, stop);
         this.portal = portal;
