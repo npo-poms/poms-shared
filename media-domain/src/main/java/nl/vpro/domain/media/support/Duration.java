@@ -9,7 +9,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Convert;
 import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -22,7 +21,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.bind.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.persistence.DurationToTimeCESTConverter;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.FalseToNullAdapter;
 
@@ -54,7 +52,7 @@ public class Duration implements Serializable {
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.Deserializer.class)
-    @Convert(converter = DurationToTimeCESTConverter.class)
+    //@Convert(converter = DurationToTimeCESTConverter.class)
     @NotNull
     private java.time.Duration duration;
 
