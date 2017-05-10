@@ -20,11 +20,12 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
+import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.CERES;
 import static nl.vpro.domain.media.support.OwnerType.NEBO;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class MediaObjectTest {
 
@@ -544,9 +545,41 @@ public class MediaObjectTest {
         assertEquals("urn:image:ceres2", existing.getImages().get(4).getImageUri());
         assertEquals("urn:image:ceres3", existing.getImages().get(5).getImageUri());
     }
-    
+
+
     @Test
-    public void addLocationToProgramWIthSystemAuthorizedPrediction() {
+    public void testMergeImagesChange() {
+        Image existingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).build();
+        Image existingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).build();
+        Image existingImage3= Image.builder().imageUri("urn:image:ceres1").owner(CERES).build();
+
+
+        Image incomingImage1 = Image.builder().imageUri("urn:image:1").owner(BROADCASTER).title("Updated title").build();
+        Image incomingImage2 = Image.builder().imageUri("urn:image:2").owner(BROADCASTER).build();
+
+        Program existing = MediaBuilder.program().images(
+            existingImage1, existingImage2, existingImage3
+        ).build();
+
+        // incoming has ceres images too, this is odd, but they will be ignored
+        Program incoming = MediaBuilder.program().images(
+            incomingImage2, incomingImage1
+        ).build();
+
+        existing.mergeImages(incoming, BROADCASTER);
+
+        // arrived and in correct order
+        assertEquals("urn:image:2", existing.getImages().get(0).getImageUri());
+        assertEquals("urn:image:1", existing.getImages().get(1).getImageUri());
+        assertEquals("urn:image:ceres1", existing.getImages().get(2).getImageUri());
+
+        // fields are updated too
+        assertThat(existing.getImages().get(1).getTitle()).isEqualTo("Updated title");
+    }
+
+
+    @Test
+    public void addLocationToProgramWithSystemAuthorizedPrediction() {
         Program program = MediaBuilder.program().build();
         Prediction prediction = new Prediction(Platform.INTERNETVOD);
         prediction.setAuthority(Authority.SYSTEM);
@@ -557,4 +590,5 @@ public class MediaObjectTest {
         program.addLocation(l1);
         assertNotNull(program.getLocation(l1));
     }
+
 }
