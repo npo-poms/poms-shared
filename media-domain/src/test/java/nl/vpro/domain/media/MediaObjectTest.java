@@ -24,6 +24,7 @@ import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.CERES;
 import static nl.vpro.domain.media.support.OwnerType.NEBO;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
 public class MediaObjectTest {
@@ -575,4 +576,19 @@ public class MediaObjectTest {
         // fields are updated too
         assertThat(existing.getImages().get(1).getTitle()).isEqualTo("Updated title");
     }
+
+
+    @Test
+    public void addLocationToProgramWithSystemAuthorizedPrediction() {
+        Program program = MediaBuilder.program().build();
+        Prediction prediction = new Prediction(Platform.INTERNETVOD);
+        prediction.setAuthority(Authority.SYSTEM);
+        prediction.setPublishStartInstant(Instant.now());
+        program.setPredictions(Arrays.asList(prediction));
+        Location l1 = new Location("TEST_URL", OwnerType.AUTHORITY);
+        l1.setPlatform(Platform.INTERNETVOD);
+        program.addLocation(l1);
+        assertNotNull(program.getLocation(l1));
+    }
+
 }
