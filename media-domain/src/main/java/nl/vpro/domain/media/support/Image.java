@@ -505,8 +505,8 @@ public class Image extends PublishableObject implements Ownable {
 
         return Objects.equals(imageUri, other.imageUri)
             && Objects.equals(type, other.type)
-            && Objects.equals(moParent, otherMoParent)
-            && Objects.equals(ssParent, otherSsParent)
+            && (moParent == null || otherMoParent == null || Objects.equals(moParent, otherMoParent))
+            && (ssParent == null || otherSsParent == null || Objects.equals(ssParent, otherSsParent))
         ;
     }
 
