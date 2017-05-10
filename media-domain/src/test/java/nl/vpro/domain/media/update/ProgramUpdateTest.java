@@ -596,7 +596,19 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 .build();
         expiredLocation.setPublishStopInstant(Instant.now().minus(Duration.ofMinutes(1)));
 
+        Location publishedLocation =
+            Location.builder()
+                .avAttributes(AVAttributes.builder().avFileFormat(AVFileFormat.H264).build())
+                .platform(Platform.INTERNETVOD)
+                .programUrl("https://www.vpro.nl/2")
+                .build();
+        publishedLocation.setPublishStopInstant(Instant.now().plus(Duration.ofMinutes(10)));
+
         assertThat(expiredLocation.getPublishStopInstant()).isNotNull();
+        assertThat(expiredLocation.getPublishStopInstant()).isLessThan(Instant.now());
+
+        assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
+        assertThat(publishedLocation.getPublishStopInstant()).isGreaterThan(Instant.now());
 
         ProgramUpdate clip = ProgramUpdate
             .create(
@@ -604,12 +616,27 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                     .clearBroadcasters()
                     .broadcasters("VPRO")
                     .locations(
-                        expiredLocation
+                        expiredLocation,
+                        publishedLocation
                     )
             );
-        assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); // Used to fail
+        assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); //Used to fail
+        assertThat(expiredLocation.getPublishStopInstant()).isLessThan(Instant.now());
+
+        assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
+        assertThat(publishedLocation.getPublishStopInstant()).isGreaterThan(Instant.now());
+
         ProgramUpdate rounded = JAXBTestUtil.roundTrip(clip);
-        assertThat(rounded.getLocations().first().getPublishStopInstant()).isNotNull();
+
+        expiredLocation = rounded.getLocations().first().toLocation();
+        publishedLocation = rounded.getLocations().last().toLocation();
+
+        assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); //Used to fail
+        assertThat(expiredLocation.getPublishStopInstant()).isLessThan(Instant.now());
+
+        assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
+        assertThat(publishedLocation.getPublishStopInstant()).isGreaterThan(Instant.now());
+
 
     }
 }
