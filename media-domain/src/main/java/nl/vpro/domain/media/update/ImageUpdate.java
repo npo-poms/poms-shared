@@ -99,7 +99,7 @@ public class ImageUpdate implements Embargo {
     @Size.List({@Size(max = 255), @Size(min = 1)})
     private String title;
 
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     private String description;
 
     @XmlElement
