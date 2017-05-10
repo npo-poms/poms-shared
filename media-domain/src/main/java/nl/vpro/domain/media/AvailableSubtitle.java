@@ -56,4 +56,22 @@ public class AvailableSubtitle {
 	public String toString() {
 		return "AvailableSubtitles [language=" + language + ", type=" + type + "]";
 	}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AvailableSubtitle that = (AvailableSubtitle) o;
+
+        if (language != null ? !language.equals(that.language) : that.language != null) return false;
+        return type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = language != null ? language.hashCode() : 0;
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
+    }
 }
