@@ -491,13 +491,23 @@ public class Image extends PublishableObject implements Ownable {
         if (obj.getClass() != getClass()) {
             return false;
         }
-        Image rhs = (Image) obj;
+        Image other = (Image) obj;
 
-        if ((id != null && rhs.id != null) && !Objects.equals(id, rhs.id)) {
+        if ((id != null && other.id != null) && !Objects.equals(id, other.id)) {
             return false;
         }
 
-        return Objects.equals(imageUri, rhs.imageUri) && Objects.equals(type, rhs.type);
+        Long moParent = mediaObject == null ? null : mediaObject.getId();
+        Long ssParent = secondscreen == null ? null : secondscreen.getId();
+
+        Long otherMoParent = other.mediaObject == null ? null : other.mediaObject.getId();
+        Long otherSsParent = other.secondscreen == null ? null : other.secondscreen.getId();
+
+        return Objects.equals(imageUri, other.imageUri)
+            && Objects.equals(type, other.type)
+            && Objects.equals(moParent, otherMoParent)
+            && Objects.equals(ssParent, otherSsParent)
+        ;
     }
 
     public static Image of(ImageMetadata metaData) {
