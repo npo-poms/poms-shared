@@ -333,6 +333,26 @@ public class ImageUpdate implements Embargo {
         return this;
     }
 
+    @Deprecated
+    public Instant getPublishStart() {
+        return getPublishStartInstant();
+    }
+
+    @Deprecated
+    public ImageUpdate setPublishStart(Instant publishStart) {
+        return setPublishStartInstant(publishStart);
+    }
+
+    @Deprecated
+    public Instant getPublishStop() {
+        return getPublishStopInstant();
+    }
+
+    @Deprecated
+    public ImageUpdate setPublishStop(Instant publishStop) {
+        return setPublishStopInstant(publishStop);
+    }
+
 
     public Boolean isHighlighted() {
         return highlighted;
