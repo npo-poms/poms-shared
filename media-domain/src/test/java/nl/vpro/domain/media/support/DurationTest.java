@@ -1,10 +1,9 @@
 package nl.vpro.domain.media.support;
 
 import java.io.IOException;
+import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -31,6 +30,19 @@ public class DurationTest {
     public void testOf() throws Exception {
         Duration duration = Duration.of(100, ChronoUnit.SECONDS);
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
+    }
+
+    @Test
+    public void testOfPeriod() throws Exception {
+        Duration duration = Duration.of(Period.ofDays(1));
+        assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(86400L);
+    }
+
+
+    @Test
+    public void testUnits() throws Exception {
+        Duration duration = Duration.ofMillis(1000);
+        assertThat(duration.getUnits()).containsExactly(ChronoUnit.SECONDS, ChronoUnit.NANOS);
     }
 
     @Test
