@@ -6,7 +6,11 @@ package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -37,7 +41,7 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
-public class Duration implements Serializable {
+public class Duration  implements Serializable, TemporalAmount {
 
     private static long serialVersionUID = 0L;
 
@@ -114,10 +118,12 @@ public class Duration implements Serializable {
         this.authorized = authorized;
     }
 
+    @Deprecated
     public Date getValue() {
         return duration == null ? null : new Date(duration.toMillis());
     }
 
+    @Deprecated
     public void setValue(Date value) {
         this.duration = value == null ? null : java.time.Duration.of(value.getTime(), ChronoUnit.MILLIS);
     }
@@ -165,5 +171,31 @@ public class Duration implements Serializable {
     @Override
     public String toString() {
         return this.duration + (authorized ? " (authorized)" : " (not authorized)");
+    }
+
+    public static java.time.Duration get(Duration dur) {
+        return dur == null ? null : dur.get();
+    }
+
+    @Override
+    public long get(TemporalUnit unit) {
+        return get().get(unit);
+
+    }
+
+    @Override
+    public List<TemporalUnit> getUnits() {
+        return get().getUnits();
+    }
+
+    @Override
+    public Temporal addTo(Temporal temporal) {
+        return get().addTo(temporal);
+
+    }
+
+    @Override
+    public Temporal subtractFrom(Temporal temporal) {
+        return get().subtractFrom(temporal);
     }
 }

@@ -1205,6 +1205,7 @@ public abstract class MediaObject extends PublishableObject
         }
     }
 
+    @Deprecated
     public void setDurationWithDate(Date duration) throws ModificationException {
         Date oldDuration = getDurationAsDate(this.duration);
         if (ObjectUtils.notEqual(oldDuration, duration) && hasAuthorizedDuration()) {
@@ -1221,6 +1222,7 @@ public abstract class MediaObject extends PublishableObject
 
     }
 
+    @Deprecated
     public Date getDurationAsDate() {
         return getDurationAsDate(duration);
     }
