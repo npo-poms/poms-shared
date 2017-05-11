@@ -29,6 +29,7 @@ import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.i18n.LocalizedString;
 import nl.vpro.util.DateUtils;
+import nl.vpro.util.TimeUtils;
 
 import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toDate;
@@ -888,7 +889,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
          */
         @Deprecated
         public T start(Date start) {
-            mediaObject().setStart(start);
+            mediaObject().setStart(TimeUtils.durationOf(start).orElse(null));
             return (T) this;
         }
 
