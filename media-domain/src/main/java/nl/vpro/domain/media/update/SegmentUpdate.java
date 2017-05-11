@@ -6,11 +6,18 @@ package nl.vpro.domain.media.update;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.SegmentType;
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.xml.bind.DurationXmlAdapter;
 
 @XmlRootElement(name = "segment")
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -64,6 +71,10 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
 
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE, required = true)
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     public java.time.Duration getStart() {
         return builder.build().getStart();
     }
