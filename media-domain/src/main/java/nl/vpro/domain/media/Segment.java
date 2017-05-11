@@ -10,7 +10,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -18,9 +17,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.support.Duration;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.util.TimeUtils;
 import nl.vpro.validation.SegmentValidation;
-import nl.vpro.xml.bind.DateToDuration;
+import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
  * A segment is a view on a program.
@@ -45,7 +43,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
 
     @Column(nullable = false)
     @NotNull(message = "start property is required")
-    protected Date start;
+    protected java.time.Duration start;
 
     @Transient
     protected String urnRef;
@@ -56,7 +54,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     public Segment() {
     }
 
-    public Segment(Program program, String mid, Date start, Duration duration) {
+    public Segment(Program program, String mid, java.time.Duration start, Duration duration) {
         this.start = start;
         this.midRef = mid;
         this.duration = duration;
@@ -65,14 +63,14 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     }
 
     public Segment(Program program) {
-        this(program, program.getMid(), new Date(0), program.getDuration());
+        this(program, program.getMid(), java.time.Duration.ZERO, program.getDuration());
     }
 
-    public Segment(Program program, Date start, Date duration) {
+    public Segment(Program program, java.time.Duration start, Date duration) {
         this(program, program.getMid(), start, new Duration(duration));
     }
 
-    public Segment(Program program, Date start, Duration duration) {
+    public Segment(Program program, java.time.Duration start, Duration duration) {
         this(program, program.getMid(), start, duration);
     }
 
@@ -80,16 +78,16 @@ public class Segment extends MediaObject implements Comparable<Segment> {
         this.avType = avType;
     }
 
-    public Segment(AVType avType, Date start) {
+    public Segment(AVType avType, java.time.Duration start) {
         this.avType = avType;
         this.start = start;
     }
 
-    public Segment(AVType avType, Date start, Date duration) {
+    public Segment(AVType avType, java.time.Duration start, Date duration) {
         this(avType, start, new Duration(duration));
     }
 
-    public Segment(AVType avType, Date start, Duration duration) {
+    public Segment(AVType avType, java.time.Duration start, Duration duration) {
         this.avType = avType;
         this.start = start;
         this.duration = duration;
@@ -205,24 +203,17 @@ public class Segment extends MediaObject implements Comparable<Segment> {
         return SegmentType.URN_PREFIX;
     }
 
-    @XmlJavaTypeAdapter(DateToDuration.class)
     @XmlElement(required = true)
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
-    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerDate.class)
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public Date getStart() {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
+    public java.time.Duration getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
-    }
-
-
-    @XmlTransient
-    @JsonIgnore
     public void setStart(java.time.Duration start) {
-        this.start = TimeUtils.asDate(start);
+        this.start = start;
     }
 
     @Override

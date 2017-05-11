@@ -4,18 +4,13 @@
  */
 package nl.vpro.domain.media.update;
 
-import java.util.Date;
-
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.SegmentType;
-import nl.vpro.util.TimeUtils;
-import nl.vpro.xml.bind.DateToDuration;
 
 @XmlRootElement(name = "segment")
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -69,13 +64,12 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
 
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE, required = true)
-	@XmlJavaTypeAdapter(DateToDuration.class)
-    public Date getStart() {
+    public java.time.Duration getStart() {
         return builder.build().getStart();
     }
 
-    public void setStart(Date start) {
-        getBuilder().start(TimeUtils.durationOf(start).orElse(null));
+    public void setStart(java.time.Duration start) {
+        getBuilder().start(start);
     }
     @XmlAttribute
     public void setMidRef(String string) {
