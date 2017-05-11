@@ -5,7 +5,7 @@
 package nl.vpro.domain.media.update;
 
 import java.io.StringReader;
-import java.util.Date;
+import java.time.Duration;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -21,7 +21,7 @@ public class SegmentUpdateTest extends MediaUpdateTest {
     @Test
     public void testCreate() throws Exception {
         SegmentUpdate update = SegmentUpdate.create();
-        update.setStart(new Date(100));
+        update.setStart(Duration.ZERO);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><segment embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><start>P0DT0H0M0.100S</start></segment>";
 

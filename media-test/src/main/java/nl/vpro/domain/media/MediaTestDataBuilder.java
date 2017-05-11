@@ -7,10 +7,11 @@ package nl.vpro.domain.media;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
@@ -18,7 +19,6 @@ import java.util.function.Function;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.Duration;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
@@ -172,7 +172,10 @@ public interface MediaTestDataBuilder<
     }
 
     default T withFixedDates() {
-        return withFixedCreationDate().withFixedLastModified().withFixedLastPublished();
+        return
+            withFixedCreationDate()
+                .withFixedLastModified()
+                .withFixedLastPublished();
     }
 
 
@@ -472,12 +475,35 @@ public interface MediaTestDataBuilder<
     }
 
     default T withImagesWithCredits() {
+        Instant fixedDate = LocalDateTime.of(2017, 5, 11, 10, 0).atZone(Schedule.ZONE_ID).toInstant();
         return images(
-            Image.builder().imageUri("urn:vpro:image:11234").title("Eerste plaatje met credits").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
-            Image.builder().imageUri("urn:vpro:image:15678").title("Tweede plaatje met credits").credits("CREDITS").license(License.PUBLIC_DOMAIN).source("SOURCE"),
+            Image.builder()
+                .imageUri("urn:vpro:image:11234")
+                .title("Eerste plaatje met credits")
+                .credits("CREDITS")
+                .license(License.PUBLIC_DOMAIN)
+                .source("SOURCE")
+                .creationDate(fixedDate)
+            ,
+            Image.builder()
+                .imageUri("urn:vpro:image:15678")
+                .title("Tweede plaatje met credits")
+                .credits("CREDITS")
+                .license(License.PUBLIC_DOMAIN)
+                .source("SOURCE")
+                .creationDate(fixedDate)
+            ,
             // ALso some without credits
-            Image.builder().owner(OwnerType.NEBO).imageUri("urn:vpro:image:12468").title("Een plaatje met andere owner"),
-            Image.builder().owner(OwnerType.NEBO).imageUri("urn:vpro:image:18888").title("Nog een plaatje met andere owner")
+            Image.builder()
+                .owner(OwnerType.NEBO)
+                .imageUri("urn:vpro:image:12468")
+                .title("Een plaatje met andere owner")
+                .creationDate(fixedDate),
+            Image.builder()
+                .owner(OwnerType.NEBO)
+                .imageUri("urn:vpro:image:18888")
+                .title("Nog een plaatje met andere owner")
+                .creationDate(fixedDate)
         );
     }
 
@@ -644,9 +670,9 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withSegments() {
-            new Segment(mediaObject(), "VPROWON_12345_1", new Date(0), Duration.ofMillis(100000));
-            new Segment(mediaObject(), "VPROWON_12345_2", new Date(100000), Duration.ofMillis(100000));
-            new Segment(mediaObject(), "VPROWON_12345_3", new Date(1000000), Duration.ofMillis(300000));
+            new Segment(mediaObject(), "VPROWON_12345_1", java.time.Duration.ZERO, Duration.ofMillis(100000));
+            new Segment(mediaObject(), "VPROWON_12345_2", java.time.Duration.ofMillis(100000), Duration.ofMillis(100000));
+            new Segment(mediaObject(), "VPROWON_12345_3", java.time.Duration.ofMillis(1000000), Duration.ofMillis(300000));
             return this;
         }
 
