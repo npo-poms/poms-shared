@@ -170,8 +170,15 @@ public interface MediaTestDataBuilder<
         return publishStart(Instant.now());
     }
 
+    default T withFixedPublishStart() {
+        return publishStart(Instant.EPOCH);
+    }
+
     default T withPublishStop() {
         return publishStop(Instant.now().plus(2, ChronoUnit.HOURS));
+    }
+    default T withFixedPublishStop() {
+        return publishStop(LocalDate.of(2500, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant());
     }
 
     default T withFixedDates() {

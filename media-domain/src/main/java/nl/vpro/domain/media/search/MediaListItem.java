@@ -184,6 +184,8 @@ public class MediaListItem extends PublishableListItem {
         this.lastPublished = lastPublished;
     }
 
+
+
     public String getMediaType() {
         return mediaType;
     }
@@ -348,6 +350,11 @@ public class MediaListItem extends PublishableListItem {
     }
 
     @Override
+    public MediaListItem setPublishStartInstant(Instant stop) {
+        return (MediaListItem) super.setPublishStartInstant(stop);
+    }
+
+    @Override
     @XmlElement(name = "publishStop")
     @JsonProperty("publishStop")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -356,6 +363,11 @@ public class MediaListItem extends PublishableListItem {
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStopInstant() {
         return super.getPublishStopInstant();
+    }
+
+    @Override
+    public MediaListItem setPublishStopInstant(Instant stop) {
+        return (MediaListItem) super.setPublishStopInstant(stop);
     }
 
 

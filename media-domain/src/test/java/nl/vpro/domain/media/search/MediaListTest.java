@@ -38,6 +38,7 @@ public class MediaListTest {
         program.setCreationInstant(Instant.ofEpochMilli(1343922085885L));
         program.setLastModifiedInstant(Instant.ofEpochMilli(1343922085885L));
         program.setCreatedBy(TestEditors.vproEditor());
+        program.setPublishStopInstant(Instant.ofEpochMilli(1343922085885L));
         program.setType(ProgramType.CLIP);
         program.setAVType(AVType.VIDEO);
         program.setTags(new TreeSet<>(Arrays.asList(new Tag("foo"), new Tag("bar"))));
@@ -65,6 +66,7 @@ public class MediaListTest {
             "        <s:createdBy>editor@vpro.nl</s:createdBy>\n" +
             "        <s:sortDate>2012-08-02T17:41:25.885+02:00</s:sortDate>\n" +
             "        <s:type>CLIP</s:type>\n" +
+            "        <s:publishStop>2012-08-02T17:41:25.885+02:00</s:publishStop>\n" +
             "        <s:numberOfLocations>0</s:numberOfLocations>\n" +
             "        <s:tag>bar</s:tag>\n" +
             "        <s:tag>foo</s:tag>\n" +
