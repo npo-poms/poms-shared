@@ -208,7 +208,26 @@ public interface MediaTestDataBuilder<
 
 
     default T withMid() {
-        return mid("VPROWON_" + midBase.incrementAndGet());
+        return withMid(midBase);
+    }
+
+    default T withMid(AtomicLong base) {
+        return mid("VPROWON_" + base.incrementAndGet());
+    }
+
+
+    default T withMids() {
+        return withMids(midBase);
+    }
+    default T withFixedMids() {
+        return withMids(new AtomicLong(20000L));
+    }
+
+    default T withMids(AtomicLong id) {
+        if (mediaObject().getMid() == null) {
+            withMid(id);
+        }
+        return (T) this;
     }
 
     default T title(String mainTitle) {
@@ -543,6 +562,9 @@ public interface MediaTestDataBuilder<
     default T withIds() {
         return withIds(idBase);
     }
+    default T withFixedIds() {
+        return withIds(new AtomicLong(1));
+    }
 
     default T withIds(AtomicLong id) {
 
@@ -586,7 +608,6 @@ public interface MediaTestDataBuilder<
                 .withLastModifiedBy()
                 .withLocations()
                 .withMemberOf()
-                .withMid()
                 .withPersons()
                 .withPortalRestrictions()
                 .withPortals()
@@ -605,8 +626,8 @@ public interface MediaTestDataBuilder<
                 .withTwitterRefs()
                 .withWebsites()
                 .withWorkflow()
-                .withIds()
-
+                .withFixedIds()
+                .withFixedMids()
         ;
     }
 
@@ -636,7 +657,8 @@ public interface MediaTestDataBuilder<
                 .withEpisodeOf()
                 .withPoProgType()
                 .withPredictions()
-                .withSegmentsWithEveryting();
+                .withSegmentsWithEveryting()
+                .withFixedSegmentMids(new AtomicLong(30000L));
 
         }
         @Override
@@ -691,7 +713,9 @@ public interface MediaTestDataBuilder<
                 segments(
                     MediaTestDataBuilder.segment().parent(mediaObject())
                         .withEverything().mid("VPROWON_12345_1").start(java.time.Duration.ZERO).duration(java.time.Duration.ofMillis(100000)).build(),
-                    MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(java.time.Duration.ofMillis(100000)).duration(java.time.Duration.ofMillis(100000)).build());
+                    MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(java.time.Duration.ofMillis(100000)).duration(java.time.Duration.ofMillis(100000)).build())
+                    ;
+
 
         }
         public ProgramTestDataBuilder clearSegments() {
@@ -708,6 +732,21 @@ public interface MediaTestDataBuilder<
             }
             return this;
 
+        }
+
+        @Override
+        public ProgramTestDataBuilder withMids(AtomicLong id) {
+            MediaTestDataBuilder.super.withMids(id);
+            for (Segment segment : mediaObject.getSegments()) {
+                MediaTestDataBuilder.segment(segment).withMids(id);
+            }
+            return this;
+        }
+        protected ProgramTestDataBuilder withFixedSegmentMids(AtomicLong id) {
+            for (Segment segment : mediaObject.getSegments()) {
+                MediaTestDataBuilder.segment(segment).withMids(id);
+            }
+            return this;
         }
 
 

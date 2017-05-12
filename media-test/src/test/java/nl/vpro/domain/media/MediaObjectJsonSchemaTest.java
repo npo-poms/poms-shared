@@ -769,8 +769,22 @@ public class MediaObjectJsonSchemaTest {
     public void segmentWithEverything() throws Exception {
         StringWriter segment = new StringWriter();
         org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/segment-with-everything.json"), segment, "UTF-8");
-        Jackson2TestUtil.roundTripAndSimilar(MediaTestDataBuilder.segment().withEverything().build(),
+        Jackson2TestUtil.roundTripAndSimilar(MediaTestDataBuilder
+                .segment()
+                .withEverything()
+                .build(),
             segment.toString());
+    }
+
+    @Test
+    public void programWithEverything() throws Exception {
+        StringWriter program = new StringWriter();
+        org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), program, "UTF-8");
+        Jackson2TestUtil.roundTripAndSimilar(MediaTestDataBuilder
+                .program()
+                .withEverything()
+                .build(),
+            program.toString());
     }
 
     private String toJson(MediaObject program) throws IOException {
