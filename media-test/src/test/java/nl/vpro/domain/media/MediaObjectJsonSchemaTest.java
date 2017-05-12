@@ -780,7 +780,6 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     @Ignore("todo")
-
     public void programWithEverything() throws Exception {
         StringWriter program = new StringWriter();
         org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), program, "UTF-8");
