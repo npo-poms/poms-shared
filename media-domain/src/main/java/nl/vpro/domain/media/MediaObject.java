@@ -293,7 +293,7 @@ public abstract class MediaObject extends PublishableObject
     protected Set<Genre> genres;
 
     @ManyToMany
-    @Cascade({CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REPLICATE, CascadeType.SAVE_UPDATE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @Cascade({CascadeType.MERGE, CascadeType.REFRESH, CascadeType.REPLICATE, CascadeType.SAVE_UPDATE, CascadeType.PERSIST})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"),
@@ -385,16 +385,20 @@ public abstract class MediaObject extends PublishableObject
     @OneToMany(targetEntity = Website.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = false)
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    @OrderColumn(name = "list_index",
+        nullable = true // Did I mention that hibernate sucks?
+    )
+    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<Website> websites;
 
     @OneToMany(targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
-    @OrderColumn(name = "list_index", nullable = false)
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
+    @OrderColumn(name = "list_index",
+        nullable = true // hibernate sucks
+    )
+    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected List<TwitterRef> twitterRefs;
@@ -921,8 +925,6 @@ public abstract class MediaObject extends PublishableObject
         return this;
     }
 
-
-
     @Override
     public boolean removeTitle(Title title) {
         if (titles == null) {
@@ -947,7 +949,7 @@ public abstract class MediaObject extends PublishableObject
 
     @Override
     public boolean hasTitles() {
-        return titles != null && ! titles.isEmpty();
+        return titles != null && !titles.isEmpty();
     }
 
     @Override
@@ -998,8 +1000,7 @@ public abstract class MediaObject extends PublishableObject
     }
 
     @Override
-    public MediaObject addDescription(String description, OwnerType owner,
-                                         TextualType type) {
+    public MediaObject addDescription(String description, OwnerType owner, TextualType type) {
         final Description existingDescription = findDescription(owner, type);
 
         if (existingDescription != null) {
@@ -1010,8 +1011,6 @@ public abstract class MediaObject extends PublishableObject
 
         return this;
     }
-
-
 
     @XmlElement(name = "genre")
     @JsonProperty("genres")
@@ -1199,6 +1198,7 @@ public abstract class MediaObject extends PublishableObject
         }
     }
 
+    @Deprecated
     public void setDurationWithDate(Date duration) throws ModificationException {
         Date oldDuration = getDurationAsDate(this.duration);
         if (ObjectUtils.notEqual(oldDuration, duration) && hasAuthorizedDuration()) {
@@ -1215,6 +1215,7 @@ public abstract class MediaObject extends PublishableObject
 
     }
 
+    @Deprecated
     public Date getDurationAsDate() {
         return getDurationAsDate(duration);
     }
@@ -1898,7 +1899,7 @@ public abstract class MediaObject extends PublishableObject
 
         if (existing != null) {
             if (!Objects.equals(location.getOwner(), existing.getOwner())
-                || !Objects.equals(location.getPlatform(), existing.getPlatform())) {
+                    || !Objects.equals(location.getPlatform(), existing.getPlatform())) {
 
                 throw new IllegalArgumentException("Collisions while updating " + existing + " with " + location);
             }
@@ -1910,9 +1911,8 @@ public abstract class MediaObject extends PublishableObject
             existing.setDuration(location.getDuration());
             existing.setOffset(location.getOffset());
         } else {
-            location.setMediaObject(this);
             locations.add(location);
-
+            location.setMediaObject(this);
             if (location.hasPlatform()) {
                 realizePrediction(location);
             }
@@ -2566,5 +2566,48 @@ public abstract class MediaObject extends PublishableObject
         return LocalizedObject.super.getShortDescription();
     }
 
+    public void mergeImages(MediaObject obj, OwnerType owner) {
+        List<Image> firstImages = new ArrayList<>();
+        obj.getImages().forEach(i -> {
+            if (Objects.equals(i.getOwner(), owner)) {
+                firstImages.add(addOrUpdate(i));
+            }
+        });
+        List<Image> toRemove = getImages()
+            .stream()
+            .filter(i -> Objects.equals(i.getOwner(), owner))
+            .filter(i -> ! obj.getImages().contains(i))
+            .collect(Collectors.toList());
+
+        toRemove.forEach(this::removeImage);
+        List<Image> rest =
+            getImages().stream().filter(i -> !owner.equals(i.getOwner())).collect(Collectors.toList());
+
+        getImages().clear();
+        images.addAll(firstImages);
+        images.addAll(rest);
+
+    }
+
+    public void addAllImages(List<Image> imgs) {
+        imgs.forEach(img -> img.setMediaObject(this));
+        getImages().addAll(imgs);
+    }
+
+    public void removeImages() {
+        getImages().forEach(img -> img.setMediaObject(null));
+        images.clear();
+    }
+
+    private Image addOrUpdate(Image img) {
+        Image existing = this.getImage(img);
+        if (existing != null) {
+            img.updateImageProperties(existing);
+            return existing;
+        } else {
+            addImage(img);
+            return img;
+        }
+    }
 
 }

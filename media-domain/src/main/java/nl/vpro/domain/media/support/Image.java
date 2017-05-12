@@ -483,6 +483,25 @@ public class Image extends PublishableObject implements Ownable {
         return this;
     }
 
+    public void updateImageProperties(Image imageToUpdate) {
+        imageToUpdate.setTitle(getTitle());
+        imageToUpdate.setDescription(getDescription());
+        imageToUpdate.setType(getType());
+        imageToUpdate.setHeight(getHeight());
+        imageToUpdate.setWidth(getWidth());
+        imageToUpdate.setType(getType());
+        imageToUpdate.setImageUri(getImageUri());
+        imageToUpdate.setHighlighted(isHighlighted());
+        imageToUpdate.setCredits(getCredits());
+        imageToUpdate.setSource(getSource());
+        imageToUpdate.setSourceName(getSourceName());
+        imageToUpdate.setDate(getDate());
+        imageToUpdate.setLicense(getLicense());
+
+        imageToUpdate.setPublishStartInstant(getPublishStartInstant());
+        imageToUpdate.setPublishStopInstant(getPublishStopInstant());
+    }
+
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : (imageUri == null ? 0 : imageUri.hashCode());
