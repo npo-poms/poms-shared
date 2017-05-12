@@ -1,7 +1,6 @@
 package nl.vpro.domain.media.support;
 
 import java.io.IOException;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -31,12 +30,14 @@ public class DurationTest {
         Duration duration = Duration.of(100, ChronoUnit.SECONDS);
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
     }
+/*
 
     @Test
     public void testOfPeriod() throws Exception {
         Duration duration = Duration.ofTemporalAmount(Period.ofDays(1));
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(86400L);
     }
+*/
 
 
     @Test
