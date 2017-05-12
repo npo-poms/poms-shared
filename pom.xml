@@ -14,6 +14,7 @@
   <name>poms-shared-parent</name>
 
   <properties>
+    <vpro.shared.version>1.68.3-SNAPSHOT</vpro.shared.version>
     <poms.shared.version>${project.version}</poms.shared.version>
   </properties>
 
