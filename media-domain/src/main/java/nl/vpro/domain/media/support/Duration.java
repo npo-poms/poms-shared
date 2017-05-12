@@ -68,8 +68,24 @@ public class Duration  implements Serializable, TemporalAmount {
         return new Duration(java.time.Duration.ofMillis(amount));
     }
 
-    public static Duration of(TemporalAmount duration) {
-        return duration == null ? null : new Duration(duration);
+
+    public static Duration of(java.time.Duration duration) {
+        if (duration == null) {
+            return null;
+        }
+        return new Duration(duration);
+    }
+
+
+    public static Duration ofTemporalAmount(TemporalAmount duration) {
+        if (duration == null) {
+            return null;
+        }
+        java.time.Duration value  = java.time.Duration.ZERO;
+        for (TemporalUnit unit : duration.getUnits()) {
+            value = value.plus(java.time.Duration.of(duration.get(unit), unit));
+        }
+        return new Duration(value);
     }
 
     public static Duration authorized(java.time.Duration duration) {
@@ -87,10 +103,6 @@ public class Duration  implements Serializable, TemporalAmount {
         this.duration = value;
     }
 
-    public Duration(TemporalAmount value) {
-        TemporalUnit temporalUnit = value.getUnits().get(value.getUnits().size() - 1);
-        this.duration = java.time.Duration.of(value.get(temporalUnit), temporalUnit);
-    }
 
     @Deprecated
     public Duration(Date value, boolean authorized) {
