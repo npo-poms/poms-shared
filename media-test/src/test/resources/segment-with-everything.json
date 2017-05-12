@@ -1,1553 +1,309 @@
 {
-"objectType": "segment",
-"mid": "VPROWON_12348",
-"type": "SEGMENT",
-"avType": "VIDEO",
-"workflow" : "PUBLISHED",
-"sortDate": 100,
-"creationDate": 1425596400000,
-"lastModified": 1425600000000,
-"publishStart": 0,
-"publishStop" : 16725222000000,
-"urn": "urn:vpro:media:segment:13",
-"embeddable": true,
-"broadcasters": [
-{
-"id": "BNN",
-"value": "BNN"
-}, {
-"id": "AVRO",
-"value": "AVRO"
-}
-],
-"portals": [
-{
-"id": "3VOOR12_GRONINGEN",
-"value": "3voor12 Groningen"
-}, {
-"id": "STERREN24",
-"value": "Sterren24"
-}
-],
-"exclusives": ["STERREN24", "3VOOR12_GRONINGEN"],
-"regions": ["NL", "BENELUX"],
-"titles": [
-{
-"value": "Main title",
-"owner": "BROADCASTER",
-"type" : "MAIN"
-}, {
-"value": "Main title MIS",
-"owner" : "MIS",
-"type": "MAIN"
-}, {
-"value" : "Short title",
-"owner": "BROADCASTER",
-"type": "SHORT"
-}, {
-"value": "Episode title MIS",
-"owner": "MIS",
-"type": "SUB"
-}
-],
-"descriptions": [
-{
-"value": "Main description",
-"owner": "BROADCASTER",
-"type" : "MAIN"
-}, {
-"value": "Main description MIS",
-"owner" : "MIS",
-"type": "MAIN"
-}, {
-"value" : "Short description",
-"owner": "BROADCASTER",
-"type": "SHORT"
-}, {
-"value": "Episode description MIS",
-"owner": "MIS",
-"type": "EPISODE"
-}
-],
-"genres": [
-{
-"id": "3.0.1.7.21",
-"terms": ["Informatief", "Nieuws/actualiteiten"]
-}, {
-"id": "3.0.1.8.25",
-"terms": ["Documentaire", "Natuur"]
-}
-],
-"tags": ["tag1", "tag2", "tag3"],
-"source": "Naar het gelijknamige boek van W.F. Hermans",
-"hasSubtitles": true,
-"countries" : [
-{
-"code": "GB",
-"value": "Verenigd Koninkrijk"
-}, {
-"code": "US",
-"value": "Verenigde Staten"
-}
-],
-"languages": [
-{
-"code": "nl",
-"value": "Nederlands"
-}, {
-"code": "fr",
-"value": "Frans"
-}
-],
-"avAttributes": {
-"bitrate": 1000000,
-"avFileFormat": "M4V"
-},
-"releaseYear": 2004,
-"duration": 7200000,
-"credits": [
-{
-"givenName": "Bregtje",
-"familyName": "van der Haak",
-"role" : "DIRECTOR"
-}, {
-"givenName": "Hans",
-"familyName" : "Goedkoop",
-"role": "PRESENTER"
-}, {
-"givenName" : "Meta",
-"familyName": "de Vries",
-"role": "PRESENTER"
-}, {
-"givenName": "Claire",
-"familyName": "Holt",
-"role": "ACTOR"
-}
-],
-"awards": ["In 2003 bekroond met een Gouden Kalf", "Winnaar IDFA scenarioprijs 2008.", "De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.", "De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn."],
-"descendantOf": [
-{
-"midRef": "VPROWON_12346",
-"urnRef": "urn:vpro:media:group:100",
-"type" : "SERIES"
-}, {
-"midRef": "VPROWON_12347",
-"urnRef" : "urn:vpro:media:group:200",
-"type": "SEASON"
-}
-],
-"memberOf": [
-{
-"midRef": "VPROWON_12347",
-"urnRef": "urn:vpro:media:group:200",
-"type" : "SEASON",
-"index": 1,
-"highlighted": false
-}
-],
-"ageRating": "12",
-"contentRatings": ["ANGST", "DRUGS_EN_ALCOHOL"],
-"email": ["info@npo.nl", "programma@avro.nl"],
-"websites": [
-{
-"value": "http://www.omroep.nl/programma/journaal"
-}, {
-"value": "http://tegenlicht.vpro.nl/afleveringen/222555"
-}
-],
-"twitter": [
-{
-"type": "HASHTAG",
-"value": "#vpro"
-}, {
-"type": "ACCOUNT",
-"value": "@twitter"
-}
-],
-"teletext": 100,
-"predictions": [
-{
-"state": "ANNOUNCED",
-"platform": "INTERNETVOD"
-}
-],
-"locations": [
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
-"avAttributes": {
-"avFileFormat": "MP4"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457102700000,
-"workflow": "FOR_PUBLICATION",
-"offset": 780000,
-"duration" : 600000,
-"urn": "urn:vpro:media:location:7"
-}, {
-"programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
-"avAttributes": {
-"avFileFormat": "WM"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457099100000,
-"workflow" : "FOR_PUBLICATION",
-"urn": "urn:vpro:media:location:8"
-}, {
-"programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
-"avAttributes": {
-"avFileFormat": "WM"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457095500000,
-"workflow" : "FOR_PUBLICATION",
-"duration": 1833000,
-"urn": "urn:vpro:media:location:9"
-}, {
-"programUrl": "http://player.omroep.nl/?aflID=4393288",
-"avAttributes": {
-"avFileFormat": "HTML"
-},
-"owner": "NEBO",
-"creationDate" : 1457091900000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:location:10"
-}, {
-"programUrl": "http://www.npo.nl/location/1",
-"avAttributes": {
-"avFileFormat": "UNKNOWN"
-},
-"owner": "NPO",
-"creationDate" : 1488638700000,
-"workflow": "FOR_PUBLICATION",
-"offset": 780000,
-"duration": 600000,
-"urn": "urn:vpro:media:location:11"
-}, {
-"programUrl": "http://www.vpro.nl/location/1",
-"avAttributes": {
-"avFileFormat": "UNKNOWN"
-},
-"owner": "BROADCASTER",
-"creationDate": 1486291320000,
-"workflow": "PUBLISHED",
-"urn": "urn:vpro:media:location:12"
-}
-],
-"scheduleEvents": [
-{
-"channel": "NED3",
-"start": 100,
-"guideDay" : -90000000,
-"duration": 200,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef": "urn:vpro:media:segment:13"
-}, {
-"channel": "NED3",
-"start": 259200300,
-"guideDay" : 169200000,
-"duration": 50,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"net": "ZAPP",
-"urnRef" : "urn:vpro:media:segment:13"
-}, {
-"channel": "HOLL",
-"start" : 691200350,
-"guideDay": 601200000,
-"duration": 250,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef" : "urn:vpro:media:segment:13"
-}, {
-"channel": "CONS",
-"start" : 864000600,
-"guideDay": 774000000,
-"duration": 200,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef" : "urn:vpro:media:segment:13"
-}
-],
-"relations": [
-{
-"value": "synoniem",
-"type": "THESAURUS",
-"broadcaster" : "AVRO"
-}, {
-"value": "Ulfts Mannenkoor",
-"type" : "KOOR",
-"broadcaster": "EO"
-}, {
-"value" : "Marco Borsato",
-"type": "ARTIST",
-"broadcaster": "VPRO"
-}, {
-"uriRef": "http://www.bluenote.com/",
-"value": "Blue Note",
-"type": "LABEL",
-"broadcaster": "VPRO"
-}
-],
-"images": [
-{
-"title": "Eerste plaatje met credits",
-"imageUri": "urn:vpro:image:11234",
-"credits" : "CREDITS",
-"source": "SOURCE",
-"license": "PUBLIC_DOMAIN",
-"owner": "BROADCASTER",
-"type": "PICTURE",
-"highlighted" : false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:3"
-}, {
-"title": "Tweede plaatje met credits",
-"imageUri": "urn:vpro:image:15678",
-"credits": "CREDITS",
-"source" : "SOURCE",
-"license": "PUBLIC_DOMAIN",
-"owner": "BROADCASTER",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate" : 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:4"
-}, {
-"title": "Een plaatje met andere owner",
-"imageUri": "urn:vpro:image:12468",
-"owner": "NEBO",
-"type": "PICTURE",
-"highlighted" : false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:5"
-}, {
-"title": "Nog een plaatje met andere owner",
-"imageUri": "urn:vpro:image:18888",
-"owner": "NEBO",
-"type" : "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:6"
-}
-],
-"availableSubtitles": [
-{
-"language": "nl",
-"type": "CAPTION"
-}
-],
-"publishDate": 1425603600000,
-"start": 120000
-}
-is different from expected
-{
-"objectType": "segment",
-"mid": "VPROWON_12348",
-"type": "SEGMENT",
-"avType": "VIDEO",
-"workflow": "PUBLISHED",
-"sortDate": 100,
-"creationDate": 1425596400000,
-"lastModified": 1425600000000,
-"publishStart": 0,
-"publishStop": 16725222000000,
-"urn": "urn:vpro:media:segment:15",
-"embeddable": true,
-"broadcasters": [
-{
-"id": "BNN",
-"value": "BNN"
-},
-{
-"id": "AVRO",
-"value": "AVRO"
-}
-],
-"portals": [
-{
-"id": "3VOOR12_GRONINGEN",
-"value": "3voor12 Groningen"
-},
-{
-"id": "STERREN24",
-"value": "Sterren24"
-}
-],
-"exclusives": [
-"STERREN24",
-"3VOOR12_GRONINGEN"
-],
-"regions": [
-"NL",
-"BENELUX"
-],
-"titles": [
-{
-"value": "Main title",
-"owner": "BROADCASTER",
-"type": "MAIN"
-},
-{
-"value": "Main title MIS",
-"owner": "MIS",
-"type": "MAIN"
-},
-{
-"value": "Short title",
-"owner": "BROADCASTER",
-"type": "SHORT"
-},
-{
-"value": "Episode title MIS",
-"owner": "MIS",
-"type": "SUB"
-}
-],
-"descriptions": [
-{
-"value": "Main description",
-"owner": "BROADCASTER",
-"type": "MAIN"
-},
-{
-"value": "Main description MIS",
-"owner": "MIS",
-"type": "MAIN"
-},
-{
-"value": "Short description",
-"owner": "BROADCASTER",
-"type": "SHORT"
-},
-{
-"value": "Episode description MIS",
-"owner": "MIS",
-"type": "EPISODE"
-}
-],
-"genres": [
-{
-"id": "3.0.1.7.21",
-"terms": [
-"Informatief",
-"Nieuws/actualiteiten"
-]
-},
-{
-"id": "3.0.1.8.25",
-"terms": [
-"Documentaire",
-"Natuur"
-]
-}
-],
-"tags": [
-"tag1",
-"tag2",
-"tag3"
-],
-"source": "Naar het gelijknamige boek van W.F. Hermans",
-"hasSubtitles": true,
-"countries": [
-{
-"code": "GB",
-"value": "Verenigd Koninkrijk"
-},
-{
-"code": "US",
-"value": "Verenigde Staten"
-}
-],
-"languages": [
-{
-"code": "nl",
-"value": "Nederlands"
-},
-{
-"code": "fr",
-"value": "Frans"
-}
-],
-"avAttributes": {
-"bitrate": 1000000,
-"avFileFormat": "M4V"
-},
-"releaseYear": 2004,
-"duration": 7200000,
-"credits": [
-{
-"givenName": "Bregtje",
-"familyName": "van der Haak",
-"role": "DIRECTOR"
-},
-{
-"givenName": "Hans",
-"familyName": "Goedkoop",
-"role": "PRESENTER"
-},
-{
-"givenName": "Meta",
-"familyName": "de Vries",
-"role": "PRESENTER"
-},
-{
-"givenName": "Claire",
-"familyName": "Holt",
-"role": "ACTOR"
-}
-],
-"awards": [
-"In 2003 bekroond met een Gouden Kalf",
-"Winnaar IDFA scenarioprijs 2008.",
-"De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.",
-"De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn."
-],
-"descendantOf": [
-{
-"midRef": "VPROWON_12348",
-"urnRef": "urn:vpro:media:group:100",
-"type": "SERIES"
-},
-{
-"midRef": "VPROWON_12349",
-"urnRef": "urn:vpro:media:group:200",
-"type": "SEASON"
-}
-],
-"memberOf": [
-{
-"midRef": "VPROWON_12349",
-"urnRef": "urn:vpro:media:group:200",
-"type": "SEASON",
-"index": 1,
-"highlighted": false
-}
-],
-"ageRating": "12",
-"contentRatings": [
-"ANGST",
-"DRUGS_EN_ALCOHOL"
-],
-"email": [
-"info@npo.nl",
-"programma@avro.nl"
-],
-"websites": [
-{
-"value": "http://www.omroep.nl/programma/journaal"
-},
-{
-"value": "http://tegenlicht.vpro.nl/afleveringen/222555"
-}
-],
-"twitter": [
-{
-"type": "HASHTAG",
-"value": "#vpro"
-},
-{
-"type": "ACCOUNT",
-"value": "@twitter"
-}
-],
-"teletext": 100,
-"predictions": [
-{
-"state": "ANNOUNCED",
-"platform": "INTERNETVOD"
-}
-],
-"locations": [
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
-"avAttributes": {
-"avFileFormat": "MP4"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457102700000,
-"workflow": "FOR_PUBLICATION",
-"offset": 780000,
-"duration": 600000,
-"urn": "urn:vpro:media:location:9"
-},
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
-"avAttributes": {
-"avFileFormat": "WM"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457099100000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:location:10"
-},
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
-"avAttributes": {
-"avFileFormat": "WM"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457095500000,
-"workflow": "FOR_PUBLICATION",
-"duration": 1833000,
-"urn": "urn:vpro:media:location:11"
-},
-{
-"programUrl": "http://player.omroep.nl/?aflID=4393288",
-"avAttributes": {
-"avFileFormat": "HTML"
-},
-"owner": "NEBO",
-"creationDate": 1457091900000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:location:12"
-},
-{
-"programUrl": "http://www.npo.nl/location/1",
-"avAttributes": {
-"avFileFormat": "UNKNOWN"
-},
-"owner": "NPO",
-"creationDate": 1488638700000,
-"workflow": "FOR_PUBLICATION",
-"offset": 780000,
-"duration": 600000,
-"urn": "urn:vpro:media:location:13"
-},
-{
-"programUrl": "http://www.vpro.nl/location/1",
-"avAttributes": {
-"avFileFormat": "UNKNOWN"
-},
-"owner": "BROADCASTER",
-"creationDate": 1486291320000,
-"workflow": "PUBLISHED",
-"urn": "urn:vpro:media:location:14"
-}
-],
-"scheduleEvents": [
-{
-"channel": "NED3",
-"start": 100,
-"guideDay": -90000000,
-"duration": 200,
-"midRef": "VPROWON_12350",
-"poProgID": "VPROWON_12350",
-"urnRef": "urn:vpro:media:segment:15"
-},
-{
-"channel": "NED3",
-"start": 259200300,
-"guideDay": 169200000,
-"duration": 50,
-"midRef": "VPROWON_12350",
-"poProgID": "VPROWON_12350",
-"net": "ZAPP",
-"urnRef": "urn:vpro:media:segment:15"
-},
-{
-"channel": "HOLL",
-"start": 691200350,
-"guideDay": 601200000,
-"duration": 250,
-"midRef": "VPROWON_12350",
-"poProgID": "VPROWON_12350",
-"urnRef": "urn:vpro:media:segment:15"
-},
-{
-"channel": "CONS",
-"start": 864000600,
-"guideDay": 774000000,
-"duration": 200,
-"midRef": "VPROWON_12350",
-"poProgID": "VPROWON_12350",
-"urnRef": "urn:vpro:media:segment:15"
-}
-],
-"relations": [
-{
-"value": "synoniem",
-"type": "THESAURUS",
-"broadcaster": "AVRO"
-},
-{
-"value": "Ulfts Mannenkoor",
-"type": "KOOR",
-"broadcaster": "EO"
-},
-{
-"value": "Marco Borsato",
-"type": "ARTIST",
-"broadcaster": "VPRO"
-},
-{
-"uriRef": "http://www.bluenote.com/",
-"value": "Blue Note",
-"type": "LABEL",
-"broadcaster": "VPRO"
-}
-],
-"images": [
-{
-"title": "Eerste plaatje met credits",
-"imageUri": "urn:vpro:image:11234",
-"credits": "CREDITS",
-"source": "SOURCE",
-"license": "PUBLIC_DOMAIN",
-"owner": "BROADCASTER",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:5"
-},
-{
-"title": "Tweede plaatje met credits",
-"imageUri": "urn:vpro:image:15678",
-"credits": "CREDITS",
-"source": "SOURCE",
-"license": "PUBLIC_DOMAIN",
-"owner": "BROADCASTER",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:6"
-},
-{
-"title": "Een plaatje met andere owner",
-"imageUri": "urn:vpro:image:12468",
-"owner": "NEBO",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:7"
-},
-{
-"title": "Nog een plaatje met andere owner",
-"imageUri": "urn:vpro:image:18888",
-"owner": "NEBO",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:8"
-}
-],
-"availableSubtitles": [
-{
-"language": "nl",
-"type": "CAPTION"
-}
-],
-"publishDate": 1425603600000,
-"start": 120000
-}
-is different from expected
-{
-"objectType": "segment",
-"mid": "VPROWON_12348",
-"type": "SEGMENT",
-"avType": "VIDEO",
-"workflow": "PUBLISHED",
-"sortDate": 100,
-"creationDate": 1425596400000,
-"lastModified": 1425600000000,
-"urn": "urn:vpro:media:segment:13",
-"embeddable": true,
-"broadcasters": [
-{
-"id": "BNN",
-"value": "BNN"
-},
-{
-"id": "AVRO",
-"value": "AVRO"
-}
-],
-"portals": [
-{
-"id": "3VOOR12_GRONINGEN",
-"value": "3voor12 Groningen"
-},
-{
-"id": "STERREN24",
-"value": "Sterren24"
-}
-],
-"exclusives": [
-"STERREN24",
-"3VOOR12_GRONINGEN"
-],
-"regions": [
-"NL",
-"BENELUX"
-],
-"titles": [
-{
-"value": "Main title",
-"owner": "BROADCASTER",
-"type": "MAIN"
-},
-{
-"value": "Main title MIS",
-"owner": "MIS",
-"type": "MAIN"
-},
-{
-"value": "Short title",
-"owner": "BROADCASTER",
-"type": "SHORT"
-},
-{
-"value": "Episode title MIS",
-"owner": "MIS",
-"type": "SUB"
-}
-],
-"descriptions": [
-{
-"value": "Main description",
-"owner": "BROADCASTER",
-"type": "MAIN"
-},
-{
-"value": "Main description MIS",
-"owner": "MIS",
-"type": "MAIN"
-},
-{
-"value": "Short description",
-"owner": "BROADCASTER",
-"type": "SHORT"
-},
-{
-"value": "Episode description MIS",
-"owner": "MIS",
-"type": "EPISODE"
-}
-],
-"genres": [
-{
-"id": "3.0.1.7.21",
-"terms": [
-"Informatief",
-"Nieuws/actualiteiten"
-]
-},
-{
-"id": "3.0.1.8.25",
-"terms": [
-"Documentaire",
-"Natuur"
-]
-}
-],
-"tags": [
-"tag1",
-"tag2",
-"tag3"
-],
-"source": "Naar het gelijknamige boek van W.F. Hermans",
-"hasSubtitles": true,
-"countries": [
-{
-"code": "GB",
-"value": "Verenigd Koninkrijk"
-},
-{
-"code": "US",
-"value": "Verenigde Staten"
-}
-],
-"languages": [
-{
-"code": "nl",
-"value": "Nederlands"
-},
-{
-"code": "fr",
-"value": "Frans"
-}
-],
-"avAttributes": {
-"bitrate": 1000000,
-"avFileFormat": "M4V"
-},
-"releaseYear": 2004,
-"duration": 7200000,
-"credits": [
-{
-"givenName": "Bregtje",
-"familyName": "van der Haak",
-"role": "DIRECTOR"
-},
-{
-"givenName": "Hans",
-"familyName": "Goedkoop",
-"role": "PRESENTER"
-},
-{
-"givenName": "Meta",
-"familyName": "de Vries",
-"role": "PRESENTER"
-},
-{
-"givenName": "Claire",
-"familyName": "Holt",
-"role": "ACTOR"
-}
-],
-"awards": [
-"In 2003 bekroond met een Gouden Kalf",
-"Winnaar IDFA scenarioprijs 2008.",
-"De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.",
-"De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn."
-],
-"descendantOf": [
-{
-"midRef": "VPROWON_12346",
-"urnRef": "urn:vpro:media:group:100",
-"type": "SERIES"
-},
-{
-"midRef": "VPROWON_12347",
-"urnRef": "urn:vpro:media:group:200",
-"type": "SEASON"
-}
-],
-"memberOf": [
-{
-"midRef": "VPROWON_12347",
-"urnRef": "urn:vpro:media:group:200",
-"type": "SEASON",
-"index": 1,
-"highlighted": false
-}
-],
-"ageRating": "12",
-"contentRatings": [
-"ANGST",
-"DRUGS_EN_ALCOHOL"
-],
-"email": [
-"info@npo.nl",
-"programma@avro.nl"
-],
-"websites": [
-{
-"value": "http://www.omroep.nl/programma/journaal"
-},
-{
-"value": "http://tegenlicht.vpro.nl/afleveringen/222555"
-}
-],
-"twitter": [
-{
-"type": "HASHTAG",
-"value": "#vpro"
-},
-{
-"type": "ACCOUNT",
-"value": "@twitter"
-}
-],
-"teletext": 100,
-"predictions": [
-{
-"state": "ANNOUNCED",
-"platform": "INTERNETVOD"
-}
-],
-"locations": [
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
-"avAttributes": {
-"avFileFormat": "MP4"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457102700000,
-"workflow": "FOR_PUBLICATION",
-"offset": 780000,
-"duration": 600000,
-"urn": "urn:vpro:media:location:7"
-},
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
-"avAttributes": {
-"avFileFormat": "WM"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457099100000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:location:8"
-},
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
-"avAttributes": {
-"avFileFormat": "WM"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457095500000,
-"workflow": "FOR_PUBLICATION",
-"duration": 1833000,
-"urn": "urn:vpro:media:location:9"
-},
-{
-"programUrl": "http://player.omroep.nl/?aflID=4393288",
-"avAttributes": {
-"avFileFormat": "HTML"
-},
-"owner": "NEBO",
-"creationDate": 1457091900000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:location:10"
-},
-{
-"programUrl": "http://www.npo.nl/location/1",
-"avAttributes": {
-"avFileFormat": "UNKNOWN"
-},
-"owner": "NPO",
-"creationDate": 1488638700000,
-"workflow": "FOR_PUBLICATION",
-"offset": 780000,
-"duration": 600000,
-"urn": "urn:vpro:media:location:11"
-},
-{
-"programUrl": "http://www.vpro.nl/location/1",
-"avAttributes": {
-"avFileFormat": "UNKNOWN"
-},
-"owner": "BROADCASTER",
-"creationDate": 1486291320000,
-"workflow": "PUBLISHED",
-"urn": "urn:vpro:media:location:12"
-}
-],
-"scheduleEvents": [
-{
-"channel": "NED3",
-"start": 100,
-"guideDay": -90000000,
-"duration": 200,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef": "urn:vpro:media:segment:13"
-},
-{
-"channel": "NED3",
-"start": 259200300,
-"guideDay": 169200000,
-"duration": 50,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"net": "ZAPP",
-"urnRef": "urn:vpro:media:segment:13"
-},
-{
-"channel": "HOLL",
-"start": 691200350,
-"guideDay": 601200000,
-"duration": 250,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef": "urn:vpro:media:segment:13"
-},
-{
-"channel": "CONS",
-"start": 864000600,
-"guideDay": 774000000,
-"duration": 200,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef": "urn:vpro:media:segment:13"
-}
-],
-"relations": [
-{
-"value": "synoniem",
-"type": "THESAURUS",
-"broadcaster": "AVRO"
-},
-{
-"value": "Ulfts Mannenkoor",
-"type": "KOOR",
-"broadcaster": "EO"
-},
-{
-"value": "Marco Borsato",
-"type": "ARTIST",
-"broadcaster": "VPRO"
-},
-{
-"uriRef": "http://www.bluenote.com/",
-"value": "Blue Note",
-"type": "LABEL",
-"broadcaster": "VPRO"
-}
-],
-"images": [
-{
-"title": "Eerste plaatje met credits",
-"imageUri": "urn:vpro:image:11234",
-"credits": "CREDITS",
-"source": "SOURCE",
-"license": "PUBLIC_DOMAIN",
-"owner": "BROADCASTER",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:3"
-},
-{
-"title": "Tweede plaatje met credits",
-"imageUri": "urn:vpro:image:15678",
-"credits": "CREDITS",
-"source": "SOURCE",
-"license": "PUBLIC_DOMAIN",
-"owner": "BROADCASTER",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:4"
-},
-{
-"title": "Een plaatje met andere owner",
-"imageUri": "urn:vpro:image:12468",
-"owner": "NEBO",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:5"
-},
-{
-"title": "Nog een plaatje met andere owner",
-"imageUri": "urn:vpro:image:18888",
-"owner": "NEBO",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494489600000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:6"
-}
-],
-"availableSubtitles": [
-{
-"language": "nl",
-"type": "CAPTION"
-}
-],
-"publishDate": 1425603600000,
-"start": 120000
-}
-is different from expected
-{
-"objectType": "segment",
-"mid": "VPROWON_12348",
-"type": "SEGMENT",
-"avType": "VIDEO",
-"workflow": "PUBLISHED",
-"sortDate": 100,
-"creationDate": 1425596400000,
-"lastModified": 1425600000000,
-"urn": "urn:vpro:media:segment:13",
-"embeddable": true,
-"broadcasters": [
-{
-"id": "BNN",
-"value": "BNN"
-},
-{
-"id": "AVRO",
-"value": "AVRO"
-}
-],
-"portals": [
-{
-"id": "3VOOR12_GRONINGEN",
-"value": "3voor12 Groningen"
-},
-{
-"id": "STERREN24",
-"value": "Sterren24"
-}
-],
-"exclusives": [
-"STERREN24",
-"3VOOR12_GRONINGEN"
-],
-"regions": [
-"NL",
-"BENELUX"
-],
-"titles": [
-{
-"value": "Main title",
-"owner": "BROADCASTER",
-"type": "MAIN"
-},
-{
-"value": "Main title MIS",
-"owner": "MIS",
-"type": "MAIN"
-},
-{
-"value": "Short title",
-"owner": "BROADCASTER",
-"type": "SHORT"
-},
-{
-"value": "Episode title MIS",
-"owner": "MIS",
-"type": "SUB"
-}
-],
-"descriptions": [
-{
-"value": "Main description",
-"owner": "BROADCASTER",
-"type": "MAIN"
-},
-{
-"value": "Main description MIS",
-"owner": "MIS",
-"type": "MAIN"
-},
-{
-"value": "Short description",
-"owner": "BROADCASTER",
-"type": "SHORT"
-},
-{
-"value": "Episode description MIS",
-"owner": "MIS",
-"type": "EPISODE"
-}
-],
-"genres": [
-{
-"id": "3.0.1.7.21",
-"terms": [
-"Informatief",
-"Nieuws/actualiteiten"
-]
-},
-{
-"id": "3.0.1.8.25",
-"terms": [
-"Documentaire",
-"Natuur"
-]
-}
-],
-"tags": [
-"tag1",
-"tag2",
-"tag3"
-],
-"source": "Naar het gelijknamige boek van W.F. Hermans",
-"hasSubtitles": true,
-"countries": [
-{
-"code": "GB",
-"value": "Verenigd Koninkrijk"
-},
-{
-"code": "US",
-"value": "Verenigde Staten"
-}
-],
-"languages": [
-{
-"code": "nl",
-"value": "Nederlands"
-},
-{
-"code": "fr",
-"value": "Frans"
-}
-],
-"avAttributes": {
-"bitrate": 1000000,
-"avFileFormat": "M4V"
-},
-"releaseYear": 2004,
-"duration": 7200000,
-"credits": [
-{
-"givenName": "Bregtje",
-"familyName": "van der Haak",
-"role": "DIRECTOR"
-},
-{
-"givenName": "Hans",
-"familyName": "Goedkoop",
-"role": "PRESENTER"
-},
-{
-"givenName": "Meta",
-"familyName": "de Vries",
-"role": "PRESENTER"
-},
-{
-"givenName": "Claire",
-"familyName": "Holt",
-"role": "ACTOR"
-}
-],
-"awards": [
-"In 2003 bekroond met een Gouden Kalf",
-"Winnaar IDFA scenarioprijs 2008.",
-"De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.",
-"De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn."
-],
-"descendantOf": [
-{
-"midRef": "VPROWON_12346",
-"urnRef": "urn:vpro:media:group:100",
-"type": "SERIES"
-},
-{
-"midRef": "VPROWON_12347",
-"urnRef": "urn:vpro:media:group:200",
-"type": "SEASON"
-}
-],
-"memberOf": [
-{
-"midRef": "VPROWON_12347",
-"urnRef": "urn:vpro:media:group:200",
-"type": "SEASON",
-"index": 1,
-"highlighted": false
-}
-],
-"ageRating": "12",
-"contentRatings": [
-"ANGST",
-"DRUGS_EN_ALCOHOL"
-],
-"email": [
-"info@npo.nl",
-"programma@avro.nl"
-],
-"websites": [
-{
-"value": "http://www.omroep.nl/programma/journaal"
-},
-{
-"value": "http://tegenlicht.vpro.nl/afleveringen/222555"
-}
-],
-"twitter": [
-{
-"type": "HASHTAG",
-"value": "#vpro"
-},
-{
-"type": "ACCOUNT",
-"value": "@twitter"
-}
-],
-"teletext": 100,
-"predictions": [
-{
-"state": "ANNOUNCED",
-"platform": "INTERNETVOD"
-}
-],
-"locations": [
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
-"avAttributes": {
-"avFileFormat": "MP4"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457102700000,
-"workflow": "FOR_PUBLICATION",
-"offset": 780000,
-"duration": 600000,
-"urn": "urn:vpro:media:location:7"
-},
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
-"avAttributes": {
-"avFileFormat": "WM"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457099100000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:location:8"
-},
-{
-"programUrl": "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
-"avAttributes": {
-"avFileFormat": "WM"
-},
-"owner": "BROADCASTER",
-"creationDate": 1457095500000,
-"workflow": "FOR_PUBLICATION",
-"duration": 1833000,
-"urn": "urn:vpro:media:location:9"
-},
-{
-"programUrl": "http://player.omroep.nl/?aflID=4393288",
-"avAttributes": {
-"avFileFormat": "HTML"
-},
-"owner": "NEBO",
-"creationDate": 1457091900000,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:location:10"
-},
-{
-"programUrl": "http://www.npo.nl/location/1",
-"avAttributes": {
-"avFileFormat": "UNKNOWN"
-},
-"owner": "NPO",
-"creationDate": 1488638700000,
-"workflow": "FOR_PUBLICATION",
-"offset": 780000,
-"duration": 600000,
-"urn": "urn:vpro:media:location:11"
-},
-{
-"programUrl": "http://www.vpro.nl/location/1",
-"avAttributes": {
-"avFileFormat": "UNKNOWN"
-},
-"owner": "BROADCASTER",
-"creationDate": 1486291320000,
-"workflow": "PUBLISHED",
-"urn": "urn:vpro:media:location:12"
-}
-],
-"scheduleEvents": [
-{
-"channel": "NED3",
-"start": 100,
-"guideDay": -90000000,
-"duration": 200,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef": "urn:vpro:media:segment:13"
-},
-{
-"channel": "NED3",
-"start": 259200300,
-"guideDay": 169200000,
-"duration": 50,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"net": "ZAPP",
-"urnRef": "urn:vpro:media:segment:13"
-},
-{
-"channel": "HOLL",
-"start": 691200350,
-"guideDay": 601200000,
-"duration": 250,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef": "urn:vpro:media:segment:13"
-},
-{
-"channel": "CONS",
-"start": 864000600,
-"guideDay": 774000000,
-"duration": 200,
-"midRef": "VPROWON_12348",
-"poProgID": "VPROWON_12348",
-"urnRef": "urn:vpro:media:segment:13"
-}
-],
-"relations": [
-{
-"value": "synoniem",
-"type": "THESAURUS",
-"broadcaster": "AVRO"
-},
-{
-"value": "Ulfts Mannenkoor",
-"type": "KOOR",
-"broadcaster": "EO"
-},
-{
-"value": "Marco Borsato",
-"type": "ARTIST",
-"broadcaster": "VPRO"
-},
-{
-"uriRef": "http://www.bluenote.com/",
-"value": "Blue Note",
-"type": "LABEL",
-"broadcaster": "VPRO"
-}
-],
-"images": [
-{
-"title": "Eerste plaatje met credits",
-"imageUri": "urn:vpro:image:11234",
-"credits": "CREDITS",
-"source": "SOURCE",
-"license": "PUBLIC_DOMAIN",
-"owner": "BROADCASTER",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494488791099,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:3"
-},
-{
-"title": "Tweede plaatje met credits",
-"imageUri": "urn:vpro:image:15678",
-"credits": "CREDITS",
-"source": "SOURCE",
-"license": "PUBLIC_DOMAIN",
-"owner": "BROADCASTER",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494488791100,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:4"
-},
-{
-"title": "Een plaatje met andere owner",
-"imageUri": "urn:vpro:image:12468",
-"owner": "NEBO",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494488791100,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:5"
-},
-{
-"title": "Nog een plaatje met andere owner",
-"imageUri": "urn:vpro:image:18888",
-"owner": "NEBO",
-"type": "PICTURE",
-"highlighted": false,
-"creationDate": 1494488791100,
-"workflow": "FOR_PUBLICATION",
-"urn": "urn:vpro:media:image:6"
-}
-],
-"availableSubtitles": [
-{
-"language": "nl",
-"type": "CAPTION"
-}
-],
-"publishDate": 1425603600000,
-"start": 120000
+  "objectType" : "segment",
+  "mid" : "VPROWON_12348",
+  "type" : "SEGMENT",
+  "avType" : "VIDEO",
+  "workflow" : "PUBLISHED",
+  "sortDate" : 100,
+  "creationDate" : 1425596400000,
+  "lastModified" : 1425600000000,
+  "publishStart" : 0,
+  "publishStop" : 16725222000000,
+  "urn" : "urn:vpro:media:segment:13",
+  "embeddable" : true,
+  "broadcasters" : [ {
+    "id" : "BNN",
+    "value" : "BNN"
+  }, {
+    "id" : "AVRO",
+    "value" : "AVRO"
+  } ],
+  "portals" : [ {
+    "id" : "3VOOR12_GRONINGEN",
+    "value" : "3voor12 Groningen"
+  }, {
+    "id" : "STERREN24",
+    "value" : "Sterren24"
+  } ],
+  "exclusives" : [ "STERREN24", "3VOOR12_GRONINGEN" ],
+  "regions" : [ "NL", "BENELUX" ],
+  "titles" : [ {
+    "value" : "Main title",
+    "owner" : "BROADCASTER",
+    "type" : "MAIN"
+  }, {
+    "value" : "Main title MIS",
+    "owner" : "MIS",
+    "type" : "MAIN"
+  }, {
+    "value" : "Short title",
+    "owner" : "BROADCASTER",
+    "type" : "SHORT"
+  }, {
+    "value" : "Episode title MIS",
+    "owner" : "MIS",
+    "type" : "SUB"
+  } ],
+  "descriptions" : [ {
+    "value" : "Main description",
+    "owner" : "BROADCASTER",
+    "type" : "MAIN"
+  }, {
+    "value" : "Main description MIS",
+    "owner" : "MIS",
+    "type" : "MAIN"
+  }, {
+    "value" : "Short description",
+    "owner" : "BROADCASTER",
+    "type" : "SHORT"
+  }, {
+    "value" : "Episode description MIS",
+    "owner" : "MIS",
+    "type" : "EPISODE"
+  } ],
+  "genres" : [ {
+    "id" : "3.0.1.7.21",
+    "terms" : [ "Informatief", "Nieuws/actualiteiten" ]
+  }, {
+    "id" : "3.0.1.8.25",
+    "terms" : [ "Documentaire", "Natuur" ]
+  } ],
+  "tags" : [ "tag1", "tag2", "tag3" ],
+  "source" : "Naar het gelijknamige boek van W.F. Hermans",
+  "hasSubtitles" : true,
+  "countries" : [ {
+    "code" : "GB",
+    "value" : "Verenigd Koninkrijk"
+  }, {
+    "code" : "US",
+    "value" : "Verenigde Staten"
+  } ],
+  "languages" : [ {
+    "code" : "nl",
+    "value" : "Nederlands"
+  }, {
+    "code" : "fr",
+    "value" : "Frans"
+  } ],
+  "avAttributes" : {
+    "bitrate" : 1000000,
+    "avFileFormat" : "M4V"
+  },
+  "releaseYear" : 2004,
+  "duration" : 7200000,
+  "credits" : [ {
+    "givenName" : "Bregtje",
+    "familyName" : "van der Haak",
+    "role" : "DIRECTOR"
+  }, {
+    "givenName" : "Hans",
+    "familyName" : "Goedkoop",
+    "role" : "PRESENTER"
+  }, {
+    "givenName" : "Meta",
+    "familyName" : "de Vries",
+    "role" : "PRESENTER"
+  }, {
+    "givenName" : "Claire",
+    "familyName" : "Holt",
+    "role" : "ACTOR"
+  } ],
+  "awards" : [ "In 2003 bekroond met een Gouden Kalf", "Winnaar IDFA scenarioprijs 2008.", "De NCRV-documentaire Onverklaarbaar? van Patrick Bisschops is genomineerd voor de prestigieuze Prix Europa 2010.", "De jeugdfilm BlueBird won diverse internationale prijzen, waaronder de Grote Prijs op het Montreal International Children's Film Festival en de Glazen Beer van de jongerenjury op het Filmfestival van Berlijn." ],
+  "descendantOf" : [ {
+    "midRef" : "VPROWON_12346",
+    "urnRef" : "urn:vpro:media:group:100",
+    "type" : "SERIES"
+  }, {
+    "midRef" : "VPROWON_12347",
+    "urnRef" : "urn:vpro:media:group:200",
+    "type" : "SEASON"
+  } ],
+  "memberOf" : [ {
+    "midRef" : "VPROWON_12347",
+    "urnRef" : "urn:vpro:media:group:200",
+    "type" : "SEASON",
+    "index" : 1,
+    "highlighted" : false
+  } ],
+  "ageRating" : "12",
+  "contentRatings" : [ "ANGST", "DRUGS_EN_ALCOHOL" ],
+  "email" : [ "info@npo.nl", "programma@avro.nl" ],
+  "websites" : [ {
+    "value" : "http://www.omroep.nl/programma/journaal"
+  }, {
+    "value" : "http://tegenlicht.vpro.nl/afleveringen/222555"
+  } ],
+  "twitter" : [ {
+    "type" : "HASHTAG",
+    "value" : "#vpro"
+  }, {
+    "type" : "ACCOUNT",
+    "value" : "@twitter"
+  } ],
+  "teletext" : 100,
+  "predictions" : [ {
+    "state" : "ANNOUNCED",
+    "platform" : "INTERNETVOD"
+  } ],
+  "locations" : [ {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+    "avAttributes" : {
+      "avFileFormat" : "MP4"
+    },
+    "owner" : "BROADCASTER",
+    "creationDate" : 1457102700000,
+    "workflow" : "FOR_PUBLICATION",
+    "offset" : 780000,
+    "duration" : 600000,
+    "urn" : "urn:vpro:media:location:7"
+  }, {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+    "avAttributes" : {
+      "avFileFormat" : "WM"
+    },
+    "owner" : "BROADCASTER",
+    "creationDate" : 1457099100000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:location:8"
+  }, {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
+    "avAttributes" : {
+      "avFileFormat" : "WM"
+    },
+    "owner" : "BROADCASTER",
+    "creationDate" : 1457095500000,
+    "workflow" : "FOR_PUBLICATION",
+    "duration" : 1833000,
+    "urn" : "urn:vpro:media:location:9"
+  }, {
+    "programUrl" : "http://player.omroep.nl/?aflID=4393288",
+    "avAttributes" : {
+      "avFileFormat" : "HTML"
+    },
+    "owner" : "NEBO",
+    "creationDate" : 1457091900000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:location:10"
+  }, {
+    "programUrl" : "http://www.npo.nl/location/1",
+    "avAttributes" : {
+      "avFileFormat" : "UNKNOWN"
+    },
+    "owner" : "NPO",
+    "creationDate" : 1488638700000,
+    "workflow" : "FOR_PUBLICATION",
+    "offset" : 780000,
+    "duration" : 600000,
+    "urn" : "urn:vpro:media:location:11"
+  }, {
+    "programUrl" : "http://www.vpro.nl/location/1",
+    "avAttributes" : {
+      "avFileFormat" : "UNKNOWN"
+    },
+    "owner" : "BROADCASTER",
+    "creationDate" : 1486291320000,
+    "workflow" : "PUBLISHED",
+    "urn" : "urn:vpro:media:location:12"
+  } ],
+  "scheduleEvents" : [ {
+    "channel" : "NED3",
+    "start" : 100,
+    "guideDay" : -90000000,
+    "duration" : 200,
+    "midRef" : "VPROWON_12348",
+    "poProgID" : "VPROWON_12348",
+    "urnRef" : "urn:vpro:media:segment:13"
+  }, {
+    "channel" : "NED3",
+    "start" : 259200300,
+    "guideDay" : 169200000,
+    "duration" : 50,
+    "midRef" : "VPROWON_12348",
+    "poProgID" : "VPROWON_12348",
+    "net" : "ZAPP",
+    "urnRef" : "urn:vpro:media:segment:13"
+  }, {
+    "channel" : "HOLL",
+    "start" : 691200350,
+    "guideDay" : 601200000,
+    "duration" : 250,
+    "midRef" : "VPROWON_12348",
+    "poProgID" : "VPROWON_12348",
+    "urnRef" : "urn:vpro:media:segment:13"
+  }, {
+    "channel" : "CONS",
+    "start" : 864000600,
+    "guideDay" : 774000000,
+    "duration" : 200,
+    "midRef" : "VPROWON_12348",
+    "poProgID" : "VPROWON_12348",
+    "urnRef" : "urn:vpro:media:segment:13"
+  } ],
+  "relations" : [ {
+    "value" : "synoniem",
+    "type" : "THESAURUS",
+    "broadcaster" : "AVRO"
+  }, {
+    "value" : "Ulfts Mannenkoor",
+    "type" : "KOOR",
+    "broadcaster" : "EO"
+  }, {
+    "value" : "Marco Borsato",
+    "type" : "ARTIST",
+    "broadcaster" : "VPRO"
+  }, {
+    "uriRef" : "http://www.bluenote.com/",
+    "value" : "Blue Note",
+    "type" : "LABEL",
+    "broadcaster" : "VPRO"
+  } ],
+  "images" : [ {
+    "title" : "Eerste plaatje met credits",
+    "imageUri" : "urn:vpro:image:11234",
+    "credits" : "CREDITS",
+    "source" : "SOURCE",
+    "license" : "PUBLIC_DOMAIN",
+    "owner" : "BROADCASTER",
+    "type" : "PICTURE",
+    "highlighted" : false,
+    "creationDate" : 1494489600000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:image:3"
+  }, {
+    "title" : "Tweede plaatje met credits",
+    "imageUri" : "urn:vpro:image:15678",
+    "credits" : "CREDITS",
+    "source" : "SOURCE",
+    "license" : "PUBLIC_DOMAIN",
+    "owner" : "BROADCASTER",
+    "type" : "PICTURE",
+    "highlighted" : false,
+    "creationDate" : 1494489600000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:image:4"
+  }, {
+    "title" : "Een plaatje met andere owner",
+    "imageUri" : "urn:vpro:image:12468",
+    "owner" : "NEBO",
+    "type" : "PICTURE",
+    "highlighted" : false,
+    "creationDate" : 1494489600000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:image:5"
+  }, {
+    "title" : "Nog een plaatje met andere owner",
+    "imageUri" : "urn:vpro:image:18888",
+    "owner" : "NEBO",
+    "type" : "PICTURE",
+    "highlighted" : false,
+    "creationDate" : 1494489600000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:image:6"
+  } ],
+  "availableSubtitles" : [ {
+    "language" : "nl",
+    "type" : "CAPTION"
+  } ],
+  "publishDate" : 1425603600000,
+  "start" : 120000
 }
