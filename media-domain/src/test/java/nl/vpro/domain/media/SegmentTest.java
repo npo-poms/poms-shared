@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 
 import org.junit.Test;
 
@@ -27,8 +28,21 @@ public class SegmentTest {
     public void json() throws Exception {
         Segment segment = MediaBuilder.segment()
             .start(Duration.ofMillis(100))
+            .creationDate(LocalDateTime.of(2017, 5, 9, 14, 0))
             .build();
-        Jackson2TestUtil.roundTripAndSimilar(segment, "{}");
+        Jackson2TestUtil.roundTripAndSimilar(segment, "{\n" +
+            "  \"objectType\" : \"segment\",\n" +
+            "  \"type\" : \"SEGMENT\",\n" +
+            "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "  \"sortDate\" : 1494331200000,\n" +
+            "  \"creationDate\" : 1494331200000,\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"start\" : 100\n" +
+            "}\n");
     }
 
     @Test
