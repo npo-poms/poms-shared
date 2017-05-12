@@ -13,7 +13,7 @@
   "embeddable": true,
   "episodeOf": [
     {
-      "midRef": "VPROWON_12349",
+      "midRef": "VPROWON_12357",
       "type": "SEASON",
       "index": 1,
       "highlighted": false
@@ -170,27 +170,19 @@
   ],
   "descendantOf": [
     {
-      "midRef": "VPROWON_12346",
+      "midRef": "VPROWON_DG_20002",
       "urnRef": "urn:vpro:media:group:100",
       "type": "SERIES"
     },
     {
-      "midRef": "VPROWON_12347",
+      "midRef": "VPROWON_DG_20003",
       "urnRef": "urn:vpro:media:group:200",
-      "type": "SEASON"
-    },
-    {
-      "midRef": "VPROWON_12348",
-      "type": "SERIES"
-    },
-    {
-      "midRef": "VPROWON_12349",
       "type": "SEASON"
     }
   ],
   "memberOf": [
     {
-      "midRef": "VPROWON_12347",
+      "midRef": "VPROWON_12355",
       "urnRef": "urn:vpro:media:group:200",
       "type": "SEASON",
       "index": 1,
@@ -584,32 +576,32 @@
       ],
       "descendantOf": [
         {
-          "midRef": "VPROWON_12348",
+          "midRef": "VPROWON_DG_30001",
           "type": "SERIES"
         },
         {
-          "midRef": "VPROWON_12349",
+          "midRef": "VPROWON_DG_30002",
           "type": "SEASON"
         },
         {
-          "midRef": "VPROWON_12350",
+          "midRef": "VPROWON_DG_30003",
           "urnRef": "urn:vpro:media:group:100",
           "type": "SERIES"
         },
         {
-          "midRef": "VPROWON_12351",
+          "midRef": "VPROWON_DG_30004",
           "urnRef": "urn:vpro:media:group:200",
           "type": "SEASON"
         },
         {
-          "midRef": "VPROWON_20001",
+          "midRef": "VPROWON_DG_30005",
           "urnRef": "urn:vpro:media:program:12",
           "type": "BROADCAST"
         }
       ],
       "memberOf": [
         {
-          "midRef": "VPROWON_12351",
+          "midRef": "VPROWON_12359",
           "urnRef": "urn:vpro:media:group:200",
           "type": "SEASON",
           "index": 1,
