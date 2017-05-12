@@ -34,7 +34,7 @@ public class DurationTest {
 
     @Test
     public void testOfPeriod() throws Exception {
-        Duration duration = Duration.of(Period.ofDays(1));
+        Duration duration = Duration.ofTemporalAmount(Period.ofDays(1));
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(86400L);
     }
 
