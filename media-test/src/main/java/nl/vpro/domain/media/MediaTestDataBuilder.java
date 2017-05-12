@@ -227,6 +227,10 @@ public interface MediaTestDataBuilder<
         if (mediaObject().getMid() == null) {
             withMid(id);
         }
+        for (DescendantRef ref : mediaObject().getDescendantOf()) {
+            ref.setMidRef("VPROWON_DG_" + id.incrementAndGet());
+
+        }
         return (T) this;
     }
 
@@ -378,7 +382,7 @@ public interface MediaTestDataBuilder<
         try {
             season.createMemberOf(series, 1);
         } catch(CircularReferenceException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return memberOf(season, 1);
@@ -577,6 +581,12 @@ public interface MediaTestDataBuilder<
             if (location.getId() == null) {
                 location.setId(id.incrementAndGet());
             }
+        }
+        for (MemberRef ref : mediaObject().getMemberOf()) {
+
+        }
+        for (DescendantRef ref : mediaObject().getDescendantOf()) {
+
         }
         if (mediaObject().getId() == null) {
             id(id.incrementAndGet());
