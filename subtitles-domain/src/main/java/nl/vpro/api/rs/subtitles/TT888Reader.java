@@ -15,9 +15,9 @@ import nl.vpro.domain.subtitles.TT888;
  */
 @Provider
 @Consumes(Constants.TT888)
-public class EBUReader  extends AbstractIteratorReader {
+public class TT888Reader extends AbstractIteratorReader {
 
-    public EBUReader() {
+    public TT888Reader() {
         super(Constants.TT888_TYPE);
     }
 
