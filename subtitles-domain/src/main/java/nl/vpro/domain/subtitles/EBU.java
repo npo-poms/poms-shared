@@ -109,7 +109,7 @@ public class EBU {
 
                 //if we have additional text pending, we do not create a new caption
                 if (currentCaption != null) {
-                    currentCaption.content = currentContent.toString();
+                    currentCaption.content = currentContent.toString().trim();
                 }
                 if (!additionalText) {
                     currentCaption = new Cue();
@@ -117,8 +117,6 @@ public class EBU {
                     currentCaption.parent = parent;
 
                     cues.add(currentCaption);
-                } else {
-
                 }
 
                 //SGN : Subtitle group number 0
@@ -127,8 +125,6 @@ public class EBU {
                 if (currentSubNumber != subtitleNumber) {
                     //missing subtitle number?
                     log.debug("Unexpected subtitle number {} (expected {}) at TTI block {}  Parsing proceeds...", subtitleNumber, currentSubNumber, i);
-                } else {
-
                 }
                 currentCaption.sequence = subtitleNumber;
 
@@ -175,7 +171,7 @@ public class EBU {
 
             }
             if (currentCaption != null) {
-                currentCaption.content = currentContent.toString();
+                currentCaption.content = currentContent.toString().trim();
             }
             if (subtitleNumber != numberOfSubtitles) {
                 log.warn("Number of parsed subtitles ({}) different from expected number of subtitles ({})", subtitleNumber, numberOfSubtitles);
@@ -235,12 +231,12 @@ public class EBU {
                             break;
                         case -118:
                             //line break
-                            currentCaption.append(text).append("\n"); //line could be trimmed here
+                            currentCaption.append(text.trim()).append("\n");
                             text = "";
                             break;
                         case -113:
                             //end of caption
-                            currentCaption.append(text); //line could be trimmed here
+                            currentCaption.append(text.trim());
                             text = "";
                             //we check the style
                             if (underline)

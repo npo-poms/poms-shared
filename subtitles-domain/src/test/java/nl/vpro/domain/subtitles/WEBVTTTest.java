@@ -70,7 +70,7 @@ public class WEBVTTTest {
             "*Dat wil ik doen\n" +
             "in jouw mobiele bakkerij\n" +
             "\n";
-        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example)).collect(Collectors.toList());
+        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example), ".").collect(Collectors.toList());
         assertThat(cues).hasSize(3);
         assertThat(cues.get(0).getSequence()).isEqualTo(1);
         assertThat(cues.get(0).getContent()).isEqualTo("888");
@@ -81,7 +81,7 @@ public class WEBVTTTest {
     @Test
     public void parseEmpty() {
         String example = "WEBVTT\n\n";
-        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example)).collect(Collectors.toList());
+        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example), ".").collect(Collectors.toList());
         assertThat(cues).hasSize(0);
     }
 
@@ -89,14 +89,20 @@ public class WEBVTTTest {
     public void parseTimeLine() throws ParseException {
         String timeLine = "2:02.200 --> 2:04.150";
 
-        Cue cue = WEBVTTandSRT.parseCue("parent", "1", Duration.ofMinutes(2), timeLine, "bla bla");
+        Cue cue = WEBVTTandSRT.parseCue("parent", "1", Duration.ofMinutes(2), timeLine, "bla bla", ".");
 
         assertThat(cue.getStart()).isEqualTo(Duration.parse("PT0M2.2S"));
     }
 
     @Test
     public void parseDuration() {
-        Duration duration = WEBVTTandSRT.parseDuration("00:00:20.000");
+        Duration duration = WEBVTTandSRT.parseDuration("00:00:20.000", ".");
+        assertThat(duration).isEqualTo(Duration.ofSeconds(20));
+    }
+
+    @Test
+    public void parseDurationWithComma() {
+        Duration duration = WEBVTTandSRT.parseDuration("00:00:20,000", ",");
         assertThat(duration).isEqualTo(Duration.ofSeconds(20));
     }
 
