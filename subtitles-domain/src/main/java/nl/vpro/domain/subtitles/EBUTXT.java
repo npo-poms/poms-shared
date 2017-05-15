@@ -20,9 +20,9 @@ import org.apache.commons.lang3.StringUtils;
  * @since 4.8
  */
 @Slf4j
-public class EBU {
+public class EBUTXT {
 
-    public static Charset EBU_CHARSET = SubtitlesFormat.EBU.getCharset();
+    public static Charset EBU_CHARSET = SubtitlesFormat.EBUTXT.getCharset();
 
     public static StringBuilder format(Cue cue, StringBuilder builder) {
         //001 0:01:00 0:02:00 ondertitels !
