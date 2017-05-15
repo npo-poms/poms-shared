@@ -1,6 +1,6 @@
 package nl.vpro.domain.subtitles;
 
-import lombok.Builder;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -154,10 +154,15 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
 
     public Subtitles() {}
 
-    @Builder
-    public Subtitles(String mid, Duration offset, Locale language, SubtitlesFormat format, String content) {
+    @lombok.Builder(builderClassName = "Builder")
+    public Subtitles(
+        @NonNull String mid,
+        Duration offset,
+        @NonNull Locale language,
+        @NonNull SubtitlesFormat format,
+        @NonNull String content) {
         this.mid = mid;
-        this.offset = offset;
+        this.offset = offset == null ? Duration.ZERO : offset;
         this.content = new SubtitlesContent(format, content);
         this.language = language;
         this.cueCount = null;
