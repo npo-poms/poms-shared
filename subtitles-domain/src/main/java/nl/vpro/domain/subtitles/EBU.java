@@ -220,7 +220,7 @@ public class EBU {
                             //we close the reader
                             is.close();
                             if (subtitleNumber != numberOfSubtitles) {
-                                log.warn("Number of parsed subtitles ({}) different from expected number of subtitles ({})", subtitleNumber, numberOfSubtitles);
+                                log.debug("Number of parsed subtitles ({}) different from expected number of subtitles ({})", subtitleNumber, numberOfSubtitles);
                             }
                         }
 
