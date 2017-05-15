@@ -48,8 +48,14 @@ public class SubtitlesUtilTest {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POW_00943209.utf8.txt");
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(example, "UTF-8"), w);
-        Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), DUTCH, SubtitlesFormat.TT888, w.toString());
-        subtitles.setType(SubtitlesType.CAPTION);
+        Subtitles subtitles = Subtitles.builder()
+            .mid("POW_00943209")
+            .offset(Duration.ofMinutes(2))
+            .language(DUTCH)
+            .format(SubtitlesFormat.TT888)
+            .content(w.toString())
+            .type(SubtitlesType.CAPTION)
+            .build();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);
     }
