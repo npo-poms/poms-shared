@@ -28,7 +28,13 @@ public class SubtitlesUtil {
     public static Subtitles tt888(String parent, Duration offset, Locale locale, InputStream input) throws IOException {
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(input, ISO6937), w);
-        return new Subtitles(parent, offset, locale, SubtitlesFormat.TT888,  w.toString());
+        return Subtitles.builder()
+            .mid(parent)
+            .offset(offset)
+            .language(locale)
+            .format(SubtitlesFormat.TT888)
+            .content(w.toString())
+            .build();
     }
 
 
