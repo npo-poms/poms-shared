@@ -7,22 +7,22 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.ext.Provider;
 
 import nl.vpro.domain.subtitles.Cue;
-import nl.vpro.domain.subtitles.EBU;
+import nl.vpro.domain.subtitles.TT888;
 
 /**
  * @author Michiel Meeuwissen
- * @since 5.4
+ * @since 5.1
  */
 @Provider
-@Consumes(Constants.EBU)
-public class EBUReader extends AbstractIteratorReader {
+@Consumes(Constants.TT888)
+public class TT888Reader extends AbstractIteratorReader {
 
-    public EBUReader() {
-        super(Constants.EBU_TYPE);
+    public TT888Reader() {
+        super(Constants.TT888_TYPE);
     }
 
     @Override
     protected Iterator<Cue> read(InputStream entityStream) {
-        return EBU.parse(null, entityStream).iterator();
+        return TT888.parse(null, entityStream).iterator();
     }
 }

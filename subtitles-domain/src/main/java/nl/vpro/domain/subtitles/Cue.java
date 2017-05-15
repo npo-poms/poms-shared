@@ -1,6 +1,8 @@
 package nl.vpro.domain.subtitles;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.time.Duration;
@@ -22,7 +24,9 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 * @since 4.8
 */
 @XmlRootElement(name = "cue")
-@ToString(of = {"parent", "sequence"})
+@ToString(of = {"parent", "sequence", "content"})
+@EqualsAndHashCode
+@Getter
 public class Cue {
 
     @XmlAttribute
@@ -72,25 +76,4 @@ public class Cue {
 
     }
 
-
-
-    public String getParent() {
-        return parent;
-    }
-
-    public int getSequence() {
-        return sequence;
-    }
-
-    public Duration getStart() {
-        return start;
-    }
-
-    public Duration getEnd() {
-        return end;
-    }
-
-    public String getContent() {
-        return content;
-    }
 }

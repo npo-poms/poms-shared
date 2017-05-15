@@ -77,7 +77,7 @@ public class Duration  implements Serializable, TemporalAmount {
     }
 
 
-    public static Duration ofTemporalAmount(TemporalAmount duration) {
+    /*public static Duration ofTemporalAmount(TemporalAmount duration) {
         if (duration == null) {
             return null;
         }
@@ -86,7 +86,7 @@ public class Duration  implements Serializable, TemporalAmount {
             value = value.plus(java.time.Duration.of(duration.get(unit), unit));
         }
         return new Duration(value);
-    }
+    }*/
 
     public static Duration authorized(java.time.Duration duration) {
         return duration == null ? null : new Duration(duration, true);

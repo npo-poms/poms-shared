@@ -10,11 +10,12 @@ import nl.vpro.domain.subtitles.SubtitlesFormat;
  * @since 5.1
  */
 @Provider
-@Consumes(Constants.EBU)
-public class EBUSubtitlesReader extends AbstractSubtitlesReader {
+@Consumes(Constants.TT888)
+public class TT888SubtitlesReader extends AbstractSubtitlesReader {
 
-    public EBUSubtitlesReader() {
-        super(SubtitlesFormat.EBU);
+
+    public TT888SubtitlesReader() {
+        super(SubtitlesFormat.TT888);
     }
 
 }
