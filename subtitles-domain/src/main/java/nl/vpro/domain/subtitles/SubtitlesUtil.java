@@ -41,7 +41,9 @@ public class SubtitlesUtil {
             case EBUTXT:
                 return EBUTXT.parse(mid, new StringReader(content.getValue()));
             case WEBVTT:
-                return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()));
+                return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ".");
+            case SRT:
+                return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ",");
             default:
                 throw new IllegalStateException();
         }

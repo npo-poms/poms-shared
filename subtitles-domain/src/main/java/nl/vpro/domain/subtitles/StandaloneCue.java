@@ -6,6 +6,8 @@ package nl.vpro.domain.subtitles;
  */
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 import java.time.Duration;
@@ -33,6 +35,8 @@ import static nl.vpro.i18n.Locales.DUTCH;
  */
 @XmlRootElement(name = "standaloneCue")
 @ToString(includeFieldNames = false, callSuper = true, of = {"language"})
+@EqualsAndHashCode(callSuper = true)
+@Getter
 public class StandaloneCue extends Cue {
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
@@ -89,18 +93,6 @@ public class StandaloneCue extends Cue {
         this.offset = offset == null || offset.isZero() ? null : offset;
     }
 
-
-    public Locale getLanguage() {
-        return language;
-    }
-
-    public SubtitlesType getType() {
-        return type;
-    }
-
-    public Duration getOffset() {
-        return offset;
-    }
 
     @XmlTransient
     public String getId() {
