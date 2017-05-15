@@ -36,7 +36,7 @@ public class SubtitlesUtilTest {
     }
 
     @Test
-    public void toEBU() throws IOException {
+    public void toTT888() throws IOException {
         assertThat(TT888.format(SubtitlesUtil.parse(getSubtitles()).findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
             "888\n" +
             "\n");
@@ -44,7 +44,7 @@ public class SubtitlesUtilTest {
     }
 
     @Test
-    public void toWEBTTVtoEBU() throws IOException {
+    public void toWEBTTVtoTT888() throws IOException {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POW_00943209.utf8.txt");
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(example, "UTF-8"), w);
