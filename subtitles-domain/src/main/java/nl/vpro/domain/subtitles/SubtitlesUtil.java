@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.time.Duration;
+import java.util.Base64;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.stream.Stream;
@@ -44,8 +45,10 @@ public class SubtitlesUtil {
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ".");
             case SRT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ",");
+            case EBU:
+                return EBU.parse(mid, new ByteArrayInputStream(Base64.getDecoder().decode(content.getValue())));
             default:
-                throw new IllegalStateException();
+                throw new IllegalArgumentException("Not supported format " + content.getFormat());
         }
 
     }
