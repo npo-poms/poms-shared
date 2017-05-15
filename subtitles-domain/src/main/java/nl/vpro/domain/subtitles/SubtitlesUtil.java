@@ -24,10 +24,10 @@ import static nl.vpro.util.ISO6937CharsetProvider.ISO6937;
 public class SubtitlesUtil {
 
 
-    public static Subtitles ebu(String parent, Duration offset, Locale locale, InputStream input) throws IOException {
+    public static Subtitles tt888(String parent, Duration offset, Locale locale, InputStream input) throws IOException {
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(input, ISO6937), w);
-        return new Subtitles(parent, offset, locale, SubtitlesFormat.EBUTXT,  w.toString());
+        return new Subtitles(parent, offset, locale, SubtitlesFormat.TT888,  w.toString());
     }
 
 
@@ -38,8 +38,8 @@ public class SubtitlesUtil {
 
     public static Stream<Cue> parse(SubtitlesContent content, String mid, Duration offset) {
         switch (content.getFormat()) {
-            case EBUTXT:
-                return EBUTXT.parse(mid, new StringReader(content.getValue()));
+            case TT888:
+                return TT888.parse(mid, new StringReader(content.getValue()));
             case WEBVTT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ".");
             case SRT:
@@ -77,7 +77,7 @@ public class SubtitlesUtil {
     }
 
     public static void toEBU(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
-        EBUTXT.format(cueIterator, entityStream);
+        TT888.format(cueIterator, entityStream);
 
     }
 

@@ -101,11 +101,11 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
 
 
     public static Subtitles ebutxt(String mid, Duration offset, Locale language, String content) {
-        return new Subtitles(mid, offset, language, SubtitlesFormat.EBUTXT, content);
+        return new Subtitles(mid, offset, language, SubtitlesFormat.TT888, content);
     }
 
     public static Subtitles ebutxtCaption(String mid, Duration offset, String content) {
-        Subtitles subtitles = new Subtitles(mid, offset, DUTCH, SubtitlesFormat.EBUTXT, content);
+        Subtitles subtitles = new Subtitles(mid, offset, DUTCH, SubtitlesFormat.TT888, content);
         subtitles.setType(SubtitlesType.CAPTION);
         return subtitles;
     }
