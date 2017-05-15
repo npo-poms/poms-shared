@@ -19,7 +19,8 @@ import nl.vpro.util.ISO6937CharsetProvider;
 @XmlType(name = "subtitlesFormatEnum")
 public enum SubtitlesFormat {
     WEBVTT("vtt", Constants.VTT, Charset.forName("UTF-8")),
-    EBU("stl", Constants.EBU, ISO6937CharsetProvider.ISO6937),
+    EBUTXT("txt", Constants.EBUTXT, ISO6937CharsetProvider.ISO6937),
+    //EBU("stl", Constants.EBUTXT, ISO6937CharsetProvider.ISO6937),
     SRT("srt", Constants.SRT, Charset.forName("cp1252"))
     ;
 

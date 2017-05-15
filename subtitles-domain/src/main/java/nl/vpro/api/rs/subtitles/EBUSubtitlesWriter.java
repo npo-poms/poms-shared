@@ -17,12 +17,12 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
  * @since 5.1
  */
 @Provider
-@Produces(EBU)
+@Produces(EBUTXT)
 public class EBUSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
     public EBUSubtitlesWriter() {
-        super(SubtitlesFormat.EBU);
+        super(SubtitlesFormat.EBUTXT);
     }
 
     @Override
