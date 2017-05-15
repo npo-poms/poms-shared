@@ -18,10 +18,10 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
  */
 @Provider
 @Produces(TT888)
-public class EBUSubtitlesWriter extends AbstractSubtitlesWriter {
+public class TT888SubtitlesWriter extends AbstractSubtitlesWriter {
 
 
-    public EBUSubtitlesWriter() {
+    public TT888SubtitlesWriter() {
         super(SubtitlesFormat.TT888);
     }
 
