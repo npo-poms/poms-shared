@@ -96,6 +96,7 @@ public class EBU {
             int subtitleNumber = 1;
             boolean additionalText = false;
             Cue currentCaption = null;
+            StringBuilder currentContent = new StringBuilder();
             //the TTI blocks are read
             for (int i = 0; i < numberOfTTIBlocks; i++) {
                 //the TTI block is loaded
@@ -107,8 +108,12 @@ public class EBU {
                 }
 
                 //if we have additional text pending, we do not create a new caption
+                if (currentCaption != null) {
+                    currentCaption.content = currentContent.toString();
+                }
                 if (!additionalText) {
                     currentCaption = new Cue();
+                    currentContent.setLength(0);
                     currentCaption.parent = parent;
 
                     cues.add(currentCaption);
@@ -157,17 +162,20 @@ public class EBU {
 
                     if (additionalText)
                         //if it is just additional text for the caption
-                        parseTextForSTL(currentCaption, textField, justification);
+                        parseTextForSTL(currentContent, textField, justification);
                     else {
                         currentCaption.start = parseTime(startTime + "/" + fps);
                         currentCaption.end = parseTime(endTime + "/" + fps);
-                        parseTextForSTL(currentCaption, textField, justification);
+                        parseTextForSTL(currentContent, textField, justification);
                     }
                 }
                 //we increase the subtitle number
                 if (!additionalText)
                     subtitleNumber++;
 
+            }
+            if (currentCaption != null) {
+                currentCaption.content = currentContent.toString();
             }
             if (subtitleNumber != numberOfSubtitles) {
                 log.warn("Number of parsed subtitles ({}) different from expected number of subtitles ({})", subtitleNumber, numberOfSubtitles);
@@ -189,7 +197,7 @@ public class EBU {
     /**
      * This method parses the text field taking into account STL control codes
      */
-    private static void parseTextForSTL(Cue currentCaption, byte[] textField, int justification) {
+    private static void parseTextForSTL(StringBuilder currentCaption, byte[] textField, int justification) {
 
         boolean italics = false;
         boolean underline = false;
@@ -227,12 +235,12 @@ public class EBU {
                             break;
                         case -118:
                             //line break
-                            currentCaption.content += text + "\n"; //line could be trimmed here
+                            currentCaption.append(text).append("\n"); //line could be trimmed here
                             text = "";
                             break;
                         case -113:
                             //end of caption
-                            currentCaption.content += text; //line could be trimmed here
+                            currentCaption.append(text); //line could be trimmed here
                             text = "";
                             //we check the style
                             if (underline)
@@ -248,10 +256,6 @@ public class EBU {
                                 color += "R";
 
                             }
-
-                            //and save the caption
-                            Duration key = currentCaption.start;
-                            //in case the key is already there, we increase it by a millisecond, since no duplicates are allowed
 
                             //we end the loop
                             i = textField.length;
