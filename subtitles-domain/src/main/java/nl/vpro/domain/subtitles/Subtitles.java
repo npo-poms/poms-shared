@@ -101,13 +101,25 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     private SubtitlesContent content;
 
     public static Subtitles tt888Caption(String mid, Duration offset, String content) {
-        Subtitles subtitles = new Subtitles(mid, offset, DUTCH, SubtitlesFormat.TT888, content);
-        subtitles.setType(SubtitlesType.CAPTION);
-        return subtitles;
+        return builder()
+            .mid(mid)
+            .offset(offset)
+            .language(DUTCH)
+            .format(SubtitlesFormat.TT888)
+            .content(content)
+            .type(SubtitlesType.CAPTION)
+            .build();
+
     }
 
     public static Subtitles webvtt(String mid, Duration offset, Locale language, String content) {
-        return new Subtitles(mid, offset, language, SubtitlesFormat.WEBVTT, content);
+        return builder()
+            .mid(mid)
+            .offset(offset)
+            .language(language)
+            .format(SubtitlesFormat.WEBVTT)
+            .content(content)
+            .build();
     }
 
     public static Subtitles webvttTranslation(String mid, Duration offset, Locale language, String content) {
@@ -148,24 +160,32 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
-        return new Subtitles(mid, offset, language, SubtitlesFormat.WEBVTT, writer.toString());
+        return builder()
+            .mid(mid)
+            .offset(offset)
+            .language(language)
+            .format(SubtitlesFormat.WEBVTT)
+            .content(writer.toString())
+            .build();
     }
 
 
     public Subtitles() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    public Subtitles(
+    protected Subtitles(
         @NonNull String mid,
         Duration offset,
         @NonNull Locale language,
         @NonNull SubtitlesFormat format,
-        @NonNull String content) {
+        @NonNull String content,
+        SubtitlesType type) {
         this.mid = mid;
         this.offset = offset == null ? Duration.ZERO : offset;
         this.content = new SubtitlesContent(format, content);
         this.language = language;
         this.cueCount = null;
+        this.type = type == null ? SubtitlesType.CAPTION : type;
     }
 
     public Instant getCreationDate() {
