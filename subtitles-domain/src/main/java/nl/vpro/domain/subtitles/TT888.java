@@ -20,9 +20,9 @@ import org.apache.commons.lang3.StringUtils;
  * @since 4.8
  */
 @Slf4j
-public class EBUTXT {
+public class TT888 {
 
-    public static Charset EBU_CHARSET = SubtitlesFormat.EBUTXT.getCharset();
+    public static Charset CHARSET = SubtitlesFormat.TT888.getCharset();
 
     public static StringBuilder format(Cue cue, StringBuilder builder) {
         //001 0:01:00 0:02:00 ondertitels !
@@ -57,7 +57,7 @@ public class EBUTXT {
 
 
     public static Stream<Cue> parse(String parent, InputStream inputStream) {
-        return parse(parent, new InputStreamReader(inputStream, EBU_CHARSET));
+        return parse(parent, new InputStreamReader(inputStream, CHARSET));
     }
 
     static Stream<Cue> parse(final String parent, Reader reader) {
@@ -144,7 +144,7 @@ public class EBUTXT {
 
 
     static void format(Iterator<? extends Cue> cueIterator, OutputStream out) throws IOException {
-        Writer writer = new OutputStreamWriter(out, EBU_CHARSET);
+        Writer writer = new OutputStreamWriter(out, CHARSET);
         format(cueIterator, writer);
         writer.flush();
     }
