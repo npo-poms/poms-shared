@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.time.Duration;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -26,15 +27,15 @@ public class WEBVTTandSRT {
 
 
     public static Stream<Cue> parseWEBVTT(String parent, InputStream inputStream) {
-        return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, VTT_CHARSET));
+        return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, VTT_CHARSET), ".");
     }
 
     public static Stream<Cue> parseSRT(String parent, InputStream inputStream) {
-        return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, SRT_CHARSET));
+        return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, SRT_CHARSET), ",");
     }
 
 
-    static Stream<Cue> parse(String parent, Duration offset,  Reader reader) {
+    static Stream<Cue> parse(String parent, Duration offset,  Reader reader, String decimalSeparator) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
 
@@ -60,7 +61,7 @@ public class WEBVTTandSRT {
                 }
                 needsFindNext = true;
                 try {
-                    return parseCue(parent, headLine, offset, timeLine, content.toString());
+                    return parseCue(parent, headLine, offset, timeLine, content.toString(), decimalSeparator);
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage(), e);
                     return null;
@@ -109,7 +110,7 @@ public class WEBVTTandSRT {
     }
 
 
-    static Cue parseCue(String parent, String headLine, Duration offset, String timeLine, String content) {
+    static Cue parseCue(String parent, String headLine, Duration offset, String timeLine, String content, String decimalSeparator) {
         String[] split = timeLine.split("\\s+");
         try {
             if (offset == null) {
@@ -118,8 +119,8 @@ public class WEBVTTandSRT {
             return new Cue(
                 parent,
                 Integer.parseInt(headLine),
-                parseDuration(split[0]).minus(offset),
-                parseDuration(split[2]).minus(offset),
+                parseDuration(split[0], decimalSeparator).minus(offset),
+                parseDuration(split[2], decimalSeparator).minus(offset),
                 content
             );
         } catch(NumberFormatException nfe) {
@@ -168,7 +169,7 @@ public class WEBVTTandSRT {
         return String.format("%02d:%02d:%02d%s%03d", hours, minutes, seconds, separator, millis);
     }
 
-    static Duration parseDuration(String duration) {
+    static Duration parseDuration(String duration, String decimalSeparator) {
         String[] split = duration.split(":", 3);
         int index = 0;
         Long hours;
@@ -185,7 +186,7 @@ public class WEBVTTandSRT {
         } else {
             minutes = 0L;
         }
-        String [] split2 = split[index].split("\\.", 2);
+        String [] split2 = split[index].split(Pattern.quote(decimalSeparator), 2);
         Long seconds = Long.parseLong(split2[0]);
         Long millis = Long.parseLong(split2[1]);
         return Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
