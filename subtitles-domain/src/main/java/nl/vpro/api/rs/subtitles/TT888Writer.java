@@ -2,11 +2,12 @@ package nl.vpro.api.rs.subtitles;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Iterator;
 
 import javax.ws.rs.Produces;
 import javax.ws.rs.ext.Provider;
 
-import nl.vpro.domain.subtitles.Subtitles;
+import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.SubtitlesFormat;
 import nl.vpro.domain.subtitles.SubtitlesUtil;
 
@@ -14,20 +15,22 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
 
 /**
  * @author Michiel Meeuwissen
- * @since 5.1
+ * @since 4.8
  */
 @Provider
-@Produces(EBU)
-public class EBUSubtitlesWriter extends AbstractSubtitlesWriter {
+@Produces(TT888)
+public class TT888Writer extends AbstractIteratorWriter {
 
 
-    public EBUSubtitlesWriter() {
-        super(SubtitlesFormat.EBU);
+    public TT888Writer() {
+        super(SubtitlesFormat.TT888);
     }
 
     @Override
-    protected void stream(Subtitles subtitles, OutputStream entityStream) throws IOException {
-        SubtitlesUtil.toEBU(SubtitlesUtil.iterator(subtitles), entityStream);
+    protected void stream(Iterator<Cue> cueIterator, OutputStream entityStream) throws IOException {
+        SubtitlesUtil.toEBU(cueIterator, entityStream);
     }
+
+
 
 }
