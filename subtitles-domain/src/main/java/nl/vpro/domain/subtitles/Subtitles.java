@@ -1,5 +1,6 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -99,12 +100,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     @Embedded
     private SubtitlesContent content;
 
-
-    public static Subtitles ebutxt(String mid, Duration offset, Locale language, String content) {
-        return new Subtitles(mid, offset, language, SubtitlesFormat.TT888, content);
-    }
-
-    public static Subtitles ebutxtCaption(String mid, Duration offset, String content) {
+    public static Subtitles tt888Caption(String mid, Duration offset, String content) {
         Subtitles subtitles = new Subtitles(mid, offset, DUTCH, SubtitlesFormat.TT888, content);
         subtitles.setType(SubtitlesType.CAPTION);
         return subtitles;
@@ -158,6 +154,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
 
     public Subtitles() {}
 
+    @Builder
     public Subtitles(String mid, Duration offset, Locale language, SubtitlesFormat format, String content) {
         this.mid = mid;
         this.offset = offset;
