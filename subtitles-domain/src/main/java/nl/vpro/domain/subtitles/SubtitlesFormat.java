@@ -18,6 +18,7 @@ import nl.vpro.util.ISO6937CharsetProvider;
 @XmlEnum
 @XmlType(name = "subtitlesFormatEnum")
 public enum SubtitlesFormat {
+
     WEBVTT("vtt", Constants.VTT, Charset.forName("UTF-8")),
     TT888("txt", Constants.TT888, ISO6937CharsetProvider.ISO6937),
     EBU("stl", Constants.EBU, null),
@@ -36,5 +37,17 @@ public enum SubtitlesFormat {
         this.extension = extension;
         this.mediaType = mediaType;
         this.charset = charset;
+    }
+
+    public static SubtitlesFormat ofExtension(String extension) {
+        if ("".equals(extension)) {
+            return TT888;
+        }
+        for (SubtitlesFormat sf : values()) {
+            if (sf.extension.equalsIgnoreCase(extension)) {
+                return sf;
+            }
+        }
+        return null;
     }
 }
