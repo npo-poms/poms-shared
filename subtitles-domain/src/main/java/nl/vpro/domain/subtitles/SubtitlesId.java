@@ -34,7 +34,7 @@ public class SubtitlesId implements Serializable {
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     private Locale language;
 
-    public static SubtitlesId ebuCaption(String mid) {
+    public static SubtitlesId tt888Caption(String mid) {
         return new SubtitlesId(mid, DUTCH, SubtitlesType.CAPTION);
     }
 

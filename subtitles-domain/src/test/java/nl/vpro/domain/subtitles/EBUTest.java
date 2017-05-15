@@ -1,0 +1,32 @@
+package nl.vpro.domain.subtitles;
+
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+/**
+ * @author Michiel Meeuwissen
+ * @since 5.3
+ */
+@Slf4j
+public class EBUTest {
+
+
+    @Test
+    public void parse() throws IOException {
+        List<Cue> cuesFromStl = EBU.parse("bla", getClass().getResourceAsStream("/VPWON_1272504.stl")).collect(Collectors.toList());
+
+        List<Cue> cuesFromSrt = WEBVTTandSRT.parseSRT("bla", getClass().getResourceAsStream("/VPWON_1272504.srt")).collect(Collectors.toList());
+
+        for (int i = 0; i < cuesFromSrt.size(); i ++) {
+            assertThat(cuesFromStl.get(i)).isEqualTo(cuesFromSrt.get(i));
+        }
+
+    }
+}

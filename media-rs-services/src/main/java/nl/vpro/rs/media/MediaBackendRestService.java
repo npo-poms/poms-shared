@@ -288,7 +288,7 @@ public interface MediaBackendRestService {
 
     @GET
     @Path("subtitles/{mid}/{language}/{type}")
-    @Produces({VTT, EBU, SRT})
+    @Produces({VTT, TT888, SRT})
     Subtitles getSubtitles(
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
@@ -318,7 +318,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("subtitles/{mid}/{language}/{type}")
-    @Consumes({VTT, EBU, SRT})
+    @Consumes({VTT, EBU, TT888,  SRT})
     Response setSubtitles(
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
