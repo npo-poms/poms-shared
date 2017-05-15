@@ -32,12 +32,12 @@ public class SubtitlesUtilTest {
 
     protected static Subtitles getSubtitles() throws IOException {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/PRID_VPRO_1140017.txt");
-        return SubtitlesUtil.ebu("VPRO_1140017", Duration.ofMillis(2 * 60 * 1000), DUTCH, example);
+        return SubtitlesUtil.tt888("VPRO_1140017", Duration.ofMillis(2 * 60 * 1000), DUTCH, example);
     }
 
     @Test
     public void toEBU() throws IOException {
-        assertThat(EBUTXT.format(SubtitlesUtil.parse(getSubtitles()).findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
+        assertThat(TT888.format(SubtitlesUtil.parse(getSubtitles()).findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
             "888\n" +
             "\n");
 
@@ -48,7 +48,7 @@ public class SubtitlesUtilTest {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POW_00943209.utf8.txt");
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(example, "UTF-8"), w);
-        Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), DUTCH, SubtitlesFormat.EBUTXT, w.toString());
+        Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), DUTCH, SubtitlesFormat.TT888, w.toString());
         subtitles.setType(SubtitlesType.CAPTION);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);
