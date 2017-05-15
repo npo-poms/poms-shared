@@ -37,7 +37,7 @@ public class SubtitlesUtilTest {
 
     @Test
     public void toEBU() throws IOException {
-        assertThat(EBU.format(SubtitlesUtil.parse(getSubtitles()).findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
+        assertThat(EBUTXT.format(SubtitlesUtil.parse(getSubtitles()).findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
             "888\n" +
             "\n");
 
@@ -48,7 +48,7 @@ public class SubtitlesUtilTest {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POW_00943209.utf8.txt");
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(example, "UTF-8"), w);
-        Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), DUTCH, SubtitlesFormat.EBU, w.toString());
+        Subtitles subtitles = new Subtitles("POW_00943209", Duration.ofMinutes(2), DUTCH, SubtitlesFormat.EBUTXT, w.toString());
         subtitles.setType(SubtitlesType.CAPTION);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);

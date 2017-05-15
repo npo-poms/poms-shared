@@ -100,12 +100,12 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     private SubtitlesContent content;
 
 
-    public static Subtitles ebu(String mid, Duration offset, Locale language, String content) {
-        return new Subtitles(mid, offset, language, SubtitlesFormat.EBU, content);
+    public static Subtitles ebutxt(String mid, Duration offset, Locale language, String content) {
+        return new Subtitles(mid, offset, language, SubtitlesFormat.EBUTXT, content);
     }
 
-    public static Subtitles ebuCaption(String mid, Duration offset, String content) {
-        Subtitles subtitles = new Subtitles(mid, offset, DUTCH, SubtitlesFormat.EBU, content);
+    public static Subtitles ebutxtCaption(String mid, Duration offset, String content) {
+        Subtitles subtitles = new Subtitles(mid, offset, DUTCH, SubtitlesFormat.EBUTXT, content);
         subtitles.setType(SubtitlesType.CAPTION);
         return subtitles;
     }

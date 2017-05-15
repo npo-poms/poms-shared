@@ -27,7 +27,7 @@ public class SubtitlesUtil {
     public static Subtitles ebu(String parent, Duration offset, Locale locale, InputStream input) throws IOException {
         StringWriter w = new StringWriter();
         IOUtils.copy(new InputStreamReader(input, ISO6937), w);
-        return new Subtitles(parent, offset, locale, SubtitlesFormat.EBU,  w.toString());
+        return new Subtitles(parent, offset, locale, SubtitlesFormat.EBUTXT,  w.toString());
     }
 
 
@@ -38,8 +38,8 @@ public class SubtitlesUtil {
 
     public static Stream<Cue> parse(SubtitlesContent content, String mid, Duration offset) {
         switch (content.getFormat()) {
-            case EBU:
-                return EBU.parse(mid, new StringReader(content.getValue()));
+            case EBUTXT:
+                return EBUTXT.parse(mid, new StringReader(content.getValue()));
             case WEBVTT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()));
             default:
@@ -75,7 +75,7 @@ public class SubtitlesUtil {
     }
 
     public static void toEBU(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
-        EBU.format(cueIterator, entityStream);
+        EBUTXT.format(cueIterator, entityStream);
 
     }
 
