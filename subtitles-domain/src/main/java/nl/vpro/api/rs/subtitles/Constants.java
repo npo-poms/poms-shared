@@ -20,7 +20,7 @@ public class Constants {
     public static final String SRT = "text/srt";
     public static final MediaType SRT_TYPE = new MediaType("text", "srt");
 
-    public static final String TT888 = "text/tt88";
+    public static final String TT888 = "text/tt888";
     public static final MediaType TT888_TYPE = new MediaType("text", "tt888");
 
     public static final String EBU = "application/ebu-stl";

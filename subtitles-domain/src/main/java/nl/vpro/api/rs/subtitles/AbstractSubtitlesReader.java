@@ -44,6 +44,9 @@ abstract class AbstractSubtitlesReader implements MessageBodyReader<Subtitles> {
     public Subtitles readFrom(Class<Subtitles> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
         StringWriter writer = new StringWriter();
         IOUtils.copy(new InputStreamReader(entityStream, charset), writer);
-        return new Subtitles(null, null, null, format, writer.toString());
+        return Subtitles.builder()
+            .content(writer.toString())
+            .format(format)
+            .build();
     }
 }
