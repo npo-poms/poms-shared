@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.media.support.Duration;
+import nl.vpro.domain.media.support.AuthorizedDuration;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -54,7 +54,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     public Segment() {
     }
 
-    public Segment(Program program, String mid, java.time.Duration start, Duration duration) {
+    public Segment(Program program, String mid, java.time.Duration start, AuthorizedDuration duration) {
         this.start = start;
         this.midRef = mid;
         this.duration = duration;
@@ -67,10 +67,10 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     }
 
     public Segment(Program program, java.time.Duration start, Date duration) {
-        this(program, program.getMid(), start, new Duration(duration));
+        this(program, program.getMid(), start, new AuthorizedDuration(duration));
     }
 
-    public Segment(Program program, java.time.Duration start, Duration duration) {
+    public Segment(Program program, java.time.Duration start, AuthorizedDuration duration) {
         this(program, program.getMid(), start, duration);
     }
 
@@ -84,10 +84,10 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     }
 
     public Segment(AVType avType, java.time.Duration start, Date duration) {
-        this(avType, start, new Duration(duration));
+        this(avType, start, new AuthorizedDuration(duration));
     }
 
-    public Segment(AVType avType, java.time.Duration start, Duration duration) {
+    public Segment(AVType avType, java.time.Duration start, AuthorizedDuration duration) {
         this.avType = avType;
         this.start = start;
         this.duration = duration;
