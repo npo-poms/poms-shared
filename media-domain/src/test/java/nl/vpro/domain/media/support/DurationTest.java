@@ -20,14 +20,14 @@ public class DurationTest {
 
     @Test
     public void testGetDuration() throws Exception {
-        Duration duration = new Duration(new Date(100 * 1000));
+        AuthorizedDuration duration = new AuthorizedDuration(new Date(100 * 1000));
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
 
     }
 
     @Test
     public void testOf() throws Exception {
-        Duration duration = Duration.of(100, ChronoUnit.SECONDS);
+        AuthorizedDuration duration = AuthorizedDuration.of(100, ChronoUnit.SECONDS);
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
     }
 /*
@@ -42,13 +42,13 @@ public class DurationTest {
 
     @Test
     public void testUnits() throws Exception {
-        Duration duration = Duration.ofMillis(1000);
+        AuthorizedDuration duration = AuthorizedDuration.ofMillis(1000);
         assertThat(duration.getUnits()).containsExactly(ChronoUnit.SECONDS, ChronoUnit.NANOS);
     }
 
     @Test
     public void xml() throws IOException, SAXException {
-        Duration result = JAXBTestUtil.roundTripAndSimilar(Duration.of(186010, ChronoUnit.MILLIS),
+        AuthorizedDuration result = JAXBTestUtil.roundTripAndSimilar(AuthorizedDuration.of(186010, ChronoUnit.MILLIS),
             "<local:duration xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">P0DT0H3M6.010S</local:duration>"
         );
         assertThat(result.get().toMillis()).isEqualTo(186010);
@@ -57,8 +57,8 @@ public class DurationTest {
 
     @Test
     public void json() throws Exception {
-        Duration result =  Jackson2TestUtil.roundTripAndSimilarValue(
-            Duration.of(185010, ChronoUnit.MILLIS),
+        AuthorizedDuration result =  Jackson2TestUtil.roundTripAndSimilarValue(
+            AuthorizedDuration.of(185010, ChronoUnit.MILLIS),
             "185010"
         );
         assertThat(result.get().toMillis()).isEqualTo(185010);
