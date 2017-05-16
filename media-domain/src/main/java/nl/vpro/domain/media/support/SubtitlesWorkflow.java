@@ -57,11 +57,23 @@ public enum SubtitlesWorkflow {
      */
     FOR_REVOCATION_MEDIA(REVOKED_MEDIA),
 
+    /**
+     * Never set by code, but you can update values in the database to make sure that publisher is ignoring this, which can be usefull during testing.
+     */
     IGNORE(null)
     ;
 
-    public static final Set<SubtitlesWorkflow> PUBLISHED_WORKFLOW = new HashSet<>(Arrays.asList(PUBLISHED, PUBLISHED_MEDIA, FOR_PUBLICATION, FOR_PUBLICATION_MEDIA));
-    public static final Set<SubtitlesWorkflow> REVOKED_WORKFLOW = new HashSet<>(Arrays.asList(REVOKED, REVOKED_MEDIA, FOR_REVOCATION, FOR_REVOCATION_MEDIA));
+    /**
+     * All workflows indicating that the subtitles themselves are not completely published
+     */
+    public static final Set<SubtitlesWorkflow> PUBLISHED_WORKFLOW = new HashSet<>(Arrays.asList(PUBLISHED, PUBLISHED_MEDIA));
+    /**
+     * All workflows indicating that the subtitles themselves are not completely revoked
+     */
+    public static final Set<SubtitlesWorkflow> REVOKED_WORKFLOW = new HashSet<>(Arrays.asList(REVOKED, REVOKED_MEDIA));
+    /**
+     * All workflows indicating that the subtitles are ready, but the associated media still needs republishing.
+     */
     public static final Set<SubtitlesWorkflow> MEDIA_WORKFLOW = new HashSet<>(Arrays.asList(REVOKED_MEDIA, PUBLISHED_MEDIA));
 
 
