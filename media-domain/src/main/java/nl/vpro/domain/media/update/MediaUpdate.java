@@ -605,7 +605,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     public java.time.Duration getDuration() {
-        Duration dur = mediaObject().getDuration();
+        AuthorizedDuration dur = mediaObject().getDuration();
         return dur == null ? null : dur.get();
     }
 

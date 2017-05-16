@@ -41,7 +41,7 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
-public class Duration  implements Serializable, TemporalAmount {
+public class AuthorizedDuration implements Serializable, TemporalAmount {
 
     private static long serialVersionUID = 0L;
 
@@ -60,20 +60,20 @@ public class Duration  implements Serializable, TemporalAmount {
     @NotNull
     private java.time.Duration duration;
 
-    public static Duration of(long amount, ChronoUnit unit) {
-        return new Duration(java.time.Duration.of(amount, unit));
+    public static AuthorizedDuration of(long amount, ChronoUnit unit) {
+        return new AuthorizedDuration(java.time.Duration.of(amount, unit));
     }
 
-    public static Duration ofMillis(long amount) {
-        return new Duration(java.time.Duration.ofMillis(amount));
+    public static AuthorizedDuration ofMillis(long amount) {
+        return new AuthorizedDuration(java.time.Duration.ofMillis(amount));
     }
 
 
-    public static Duration of(java.time.Duration duration) {
+    public static AuthorizedDuration of(java.time.Duration duration) {
         if (duration == null) {
             return null;
         }
-        return new Duration(duration);
+        return new AuthorizedDuration(duration);
     }
 
 
@@ -88,43 +88,43 @@ public class Duration  implements Serializable, TemporalAmount {
         return new Duration(value);
     }*/
 
-    public static Duration authorized(java.time.Duration duration) {
-        return duration == null ? null : new Duration(duration, true);
+    public static AuthorizedDuration authorized(java.time.Duration duration) {
+        return duration == null ? null : new AuthorizedDuration(duration, true);
     }
 
-    public Duration() {
+    public AuthorizedDuration() {
     }
 
-    public Duration(Date value) {
+    public AuthorizedDuration(Date value) {
         this.duration = value == null ? null : java.time.Duration.of(value.toInstant().toEpochMilli(), ChronoUnit.MILLIS);
     }
 
-    public Duration(java.time.Duration value) {
+    public AuthorizedDuration(java.time.Duration value) {
         this.duration = value;
     }
 
 
     @Deprecated
-    public Duration(Date value, boolean authorized) {
+    public AuthorizedDuration(Date value, boolean authorized) {
         this(value);
         this.authorized = authorized;
     }
 
-    public Duration(java.time.Duration value, boolean authorized) {
+    public AuthorizedDuration(java.time.Duration value, boolean authorized) {
         this.duration = value;
         this.authorized = authorized;
     }
 
 
-    public Duration(Duration source) {
+    public AuthorizedDuration(AuthorizedDuration source) {
         this(source.duration, source.authorized);
     }
 
-    public static Duration copy(Duration source) {
+    public static AuthorizedDuration copy(AuthorizedDuration source) {
         if(source == null) {
             return null;
         }
-        return new Duration(source);
+        return new AuthorizedDuration(source);
     }
 
     public boolean isAuthorized() {
@@ -166,7 +166,7 @@ public class Duration  implements Serializable, TemporalAmount {
             return false;
         }
 
-        Duration other = (Duration)o;
+        AuthorizedDuration other = (AuthorizedDuration)o;
 
         if(authorized != null ? !authorized.equals(other.authorized) : other.authorized != null) {
             return false;
@@ -190,7 +190,7 @@ public class Duration  implements Serializable, TemporalAmount {
         return this.duration + (authorized ? " (authorized)" : " (not authorized)");
     }
 
-    public static java.time.Duration get(Duration dur) {
+    public static java.time.Duration get(AuthorizedDuration dur) {
         return dur == null ? null : dur.get();
     }
 

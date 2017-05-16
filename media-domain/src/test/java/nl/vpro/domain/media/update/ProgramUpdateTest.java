@@ -27,10 +27,7 @@ import org.xml.sax.SAXException;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -483,7 +480,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testGetSegments() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
         update.setSegments(new TreeSet<>(Collections.singletonList(SegmentUpdate.create(
-            new Segment(update.fetch(), Duration.ofMillis(5555), nl.vpro.domain.media.support.Duration.ofMillis(100))))));
+            new Segment(update.fetch(), Duration.ofMillis(5555), AuthorizedDuration.ofMillis(100))))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments><segment embeddable=\"true\"><duration>P0DT0H0M0.100S</duration><locations/><scheduleEvents/><images/><start>P0DT0H0M5.555S</start></segment></segments></program>";
 
