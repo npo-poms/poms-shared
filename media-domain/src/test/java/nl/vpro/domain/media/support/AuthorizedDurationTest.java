@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.3
  */
-public class DurationTest {
+public class AuthorizedDurationTest {
 
     @Test
     public void testGetDuration() throws Exception {
@@ -49,7 +49,7 @@ public class DurationTest {
     @Test
     public void xml() throws IOException, SAXException {
         AuthorizedDuration result = JAXBTestUtil.roundTripAndSimilar(AuthorizedDuration.of(186010, ChronoUnit.MILLIS),
-            "<local:duration xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">P0DT0H3M6.010S</local:duration>"
+            "<local:authorizedDuration xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">P0DT0H3M6.010S</local:authorizedDuration>"
         );
         assertThat(result.get().toMillis()).isEqualTo(186010);
 
