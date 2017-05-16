@@ -2,6 +2,10 @@ package nl.vpro.domain.media.support;
 
 import lombok.Getter;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.3
@@ -53,6 +57,11 @@ public enum SubtitlesWorkflow {
      */
     FOR_REVOCATION_MEDIA(REVOKED_MEDIA)
     ;
+
+    public static final Set<SubtitlesWorkflow> PUBLISHED_WORKFLOW = new HashSet<>(Arrays.asList(PUBLISHED, PUBLISHED_MEDIA, FOR_PUBLICATION, FOR_PUBLICATION_MEDIA));
+    public static final Set<SubtitlesWorkflow> REVOKED_WORKFLOW = new HashSet<>(Arrays.asList(REVOKED, REVOKED_MEDIA, FOR_REVOCATION, FOR_REVOCATION_MEDIA));
+    public static final Set<SubtitlesWorkflow> MEDIA_WORKFLOW = new HashSet<>(Arrays.asList(REVOKED_MEDIA, PUBLISHED_MEDIA));
+
 
     @Getter
     private final SubtitlesWorkflow target;
