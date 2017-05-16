@@ -333,7 +333,7 @@ public abstract class MediaObject extends PublishableObject
 
     @Embedded
     @Valid
-    protected Duration duration;
+    protected AuthorizedDuration duration;
 
     @OneToMany(orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
@@ -534,7 +534,7 @@ public abstract class MediaObject extends PublishableObject
         source.getLanguages().forEach(this::addLanguage);
         this.avAttributes = AVAttributes.copy(source.avAttributes);
         this.releaseYear = source.releaseYear;
-        this.duration = Duration.copy(source.duration);
+        this.duration = AuthorizedDuration.copy(source.duration);
         source.getPersons().forEach(person -> this.addPerson(Person.copy(person, this)));
         source.getAwards().forEach(this::addAward);
         source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getOwner(), ref.getNumber()));
@@ -561,7 +561,7 @@ public abstract class MediaObject extends PublishableObject
         return Long.valueOf(id);
     }
 
-    protected static Date getDurationAsDate(Duration duration) {
+    protected static Date getDurationAsDate(AuthorizedDuration duration) {
         return duration != null ? duration.getValue() : null;
     }
 
@@ -1182,11 +1182,11 @@ public abstract class MediaObject extends PublishableObject
     }
 
     @XmlElement()
-    public Duration getDuration() {
+    public AuthorizedDuration getDuration() {
         return duration;
     }
 
-    void setDuration(Duration duration) {
+    void setDuration(AuthorizedDuration duration) {
         this.duration = duration;
     }
 
@@ -1199,7 +1199,7 @@ public abstract class MediaObject extends PublishableObject
         if (duration == null) {
             this.duration = null;
         } else if (this.duration == null) {
-            this.duration = Duration.of(duration);
+            this.duration = AuthorizedDuration.of(duration);
         } else {
             this.duration.set(duration);
         }
@@ -1215,7 +1215,7 @@ public abstract class MediaObject extends PublishableObject
         if (duration == null) {
             this.duration = null;
         } else if (this.duration == null) {
-            this.duration = new Duration(duration);
+            this.duration = new AuthorizedDuration(duration);
         } else {
             this.duration.setValue(duration);
         }

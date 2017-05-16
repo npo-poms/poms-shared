@@ -712,9 +712,9 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withSegments() {
-            new Segment(mediaObject(), "VPROWON_12345_1", java.time.Duration.ZERO, Duration.ofMillis(100000));
-            new Segment(mediaObject(), "VPROWON_12345_2", java.time.Duration.ofMillis(100000), Duration.ofMillis(100000));
-            new Segment(mediaObject(), "VPROWON_12345_3", java.time.Duration.ofMillis(1000000), Duration.ofMillis(300000));
+            new Segment(mediaObject(), "VPROWON_12345_1", java.time.Duration.ZERO, AuthorizedDuration.ofMillis(100000));
+            new Segment(mediaObject(), "VPROWON_12345_2", java.time.Duration.ofMillis(100000), AuthorizedDuration.ofMillis(100000));
+            new Segment(mediaObject(), "VPROWON_12345_3", java.time.Duration.ofMillis(1000000), AuthorizedDuration.ofMillis(300000));
             return this;
         }
 

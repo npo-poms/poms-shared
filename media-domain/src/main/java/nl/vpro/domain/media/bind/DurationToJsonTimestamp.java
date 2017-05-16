@@ -4,13 +4,12 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import nl.vpro.domain.media.support.Duration;
+import nl.vpro.domain.media.support.AuthorizedDuration;
 
 /**
  * Adaptes the Duration of the media domain. (This actualy contains an 'authoritity', but we don't expose that in json).
@@ -19,10 +18,10 @@ import nl.vpro.domain.media.support.Duration;
  */
 public class DurationToJsonTimestamp {
 
-    public static class Serializer extends JsonSerializer<Duration> {
+    public static class Serializer extends JsonSerializer<AuthorizedDuration> {
 
         @Override
-        public void serialize(Duration value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+        public void serialize(AuthorizedDuration value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
             if (value == null || value.get() == null) {
                 jgen.writeNull();
             } else {
@@ -35,10 +34,10 @@ public class DurationToJsonTimestamp {
      * @since 2.0
      */
 
-    public static class Deserializer extends JsonDeserializer<Duration> {
+    public static class Deserializer extends JsonDeserializer<AuthorizedDuration> {
         @Override
-        public Duration deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            return Duration.ofMillis(jp.getLongValue());
+        public AuthorizedDuration deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+            return AuthorizedDuration.ofMillis(jp.getLongValue());
         }
     }
 }
