@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -501,6 +503,8 @@ public abstract class MediaObject extends PublishableObject
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @Getter(AccessLevel.PACKAGE)
+    @Setter(AccessLevel.PACKAGE)
     private SubtitlesWorkflow subtitlesWorkflow = SubtitlesWorkflow.UNDEFINED;
 
     @ElementCollection(fetch = FetchType.LAZY)
@@ -2388,9 +2392,7 @@ public abstract class MediaObject extends PublishableObject
         }
     }
 
-    void setSubtitlesWorkflow(SubtitlesWorkflow subtitlesWorkflow) {
-        this.subtitlesWorkflow = subtitlesWorkflow;
-    }
+
 
     public abstract SubMediaType getType();
 
