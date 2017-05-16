@@ -499,8 +499,9 @@ public abstract class MediaObject extends PublishableObject
     @Transient
     private boolean sortDateInvalidatable = true;
 
-    @Column
-    private Boolean subtitlesPublished;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private SubtitlesWorkflow subtitlesWorkflow = SubtitlesWorkflow.UNDEFINED;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
@@ -639,6 +640,7 @@ public abstract class MediaObject extends PublishableObject
         }
         return availableSubtitles;
     }
+
 
     @XmlElement(name = "crid")
     @JsonProperty("crids")
@@ -2386,8 +2388,8 @@ public abstract class MediaObject extends PublishableObject
         }
     }
 
-    void setSubtitlesPublished(boolean subtitlesPublished) {
-        this.subtitlesPublished = subtitlesPublished;
+    void setSubtitlesWorkflow(SubtitlesWorkflow subtitlesWorkflow) {
+        this.subtitlesWorkflow = subtitlesWorkflow;
     }
 
     public abstract SubMediaType getType();
