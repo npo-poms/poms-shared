@@ -55,7 +55,9 @@ public enum SubtitlesWorkflow {
     /**
      * All subtitles for this object are revoked
      */
-    FOR_REVOCATION_MEDIA(REVOKED_MEDIA)
+    FOR_REVOCATION_MEDIA(REVOKED_MEDIA),
+
+    IGNORE(null)
     ;
 
     public static final Set<SubtitlesWorkflow> PUBLISHED_WORKFLOW = new HashSet<>(Arrays.asList(PUBLISHED, PUBLISHED_MEDIA, FOR_PUBLICATION, FOR_PUBLICATION_MEDIA));
