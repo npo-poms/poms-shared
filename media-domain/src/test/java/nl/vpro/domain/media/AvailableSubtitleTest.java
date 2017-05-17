@@ -12,7 +12,7 @@ public class AvailableSubtitleTest {
 
 	@Test
 	public void test() {
-		JAXB.marshal(new AvailableSubtitle(Locale.ENGLISH, SubtitlesType.TRANSLATION), System.out);
+		JAXB.marshal(new AvailableSubtitles(Locale.ENGLISH, SubtitlesType.TRANSLATION), System.out);
 	}
 
 }

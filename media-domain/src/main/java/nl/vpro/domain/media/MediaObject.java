@@ -511,7 +511,7 @@ public abstract class MediaObject extends PublishableObject
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
     @Setter
-    private List<AvailableSubtitle> availableSubtitles = null;
+    private List<AvailableSubtitles> availableSubtitles = null;
 
     public MediaObject() {
     }
@@ -638,7 +638,7 @@ public abstract class MediaObject extends PublishableObject
     }
 
     @XmlElement(name = "availableSubtitles")
-    public List<AvailableSubtitle> getAvailableSubtitles() {
+    public List<AvailableSubtitles> getAvailableSubtitles() {
         if (availableSubtitles == null) {
             availableSubtitles = new ArrayList<>();
         }

@@ -117,9 +117,9 @@ public class MediaObjectXmlSchemaTest {
             "</program>";
 
         Program program = program().lean().mid("MID_000001").build();
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+    	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.CAPTION));
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+    	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.TRANSLATION));
 
 
