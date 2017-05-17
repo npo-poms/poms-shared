@@ -58,7 +58,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
     "guideDay",
     "start",
     "offset",
-    "durationTime",
+    "duration",
     "poProgID",
     "poSeriesIDLegacy",
     "primaryLifestyle",
