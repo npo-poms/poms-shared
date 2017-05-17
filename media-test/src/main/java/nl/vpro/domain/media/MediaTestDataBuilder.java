@@ -238,7 +238,7 @@ public interface MediaTestDataBuilder<
         return mainTitle(mainTitle);
     }
 
-    AvailableSubtitle DUTCH_CAPTION = new AvailableSubtitle(
+    AvailableSubtitles DUTCH_CAPTION = new AvailableSubtitles(
         Locales.DUTCH,
         SubtitlesType.CAPTION);
 
