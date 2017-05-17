@@ -15,19 +15,19 @@ import nl.vpro.xml.bind.LocaleAdapter;
 
 @Embeddable
 @Cacheable
-@XmlType(name="AvailableSubtitleType")
-public class AvailableSubtitle {
+@XmlType(name="AvailableSubtitlesType")
+public class AvailableSubtitles {
 
 	private Locale language;
 
 	@Enumerated(EnumType.STRING)
 	private SubtitlesType type;
 
-	public AvailableSubtitle() {
+	public AvailableSubtitles() {
 
 	}
 
-	public AvailableSubtitle(Locale language, SubtitlesType type) {
+	public AvailableSubtitles(Locale language, SubtitlesType type) {
 		this.language = language;
 		this.type = type;
 
@@ -62,7 +62,7 @@ public class AvailableSubtitle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AvailableSubtitle that = (AvailableSubtitle) o;
+        AvailableSubtitles that = (AvailableSubtitles) o;
 
         if (language != null ? !language.equals(that.language) : that.language != null) return false;
         return type == that.type;
