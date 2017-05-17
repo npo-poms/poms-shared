@@ -50,6 +50,7 @@
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="availableSubtitles" type="AvailableSubtitlesType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="avAttributes" type="avAttributesType" minOccurs="0"/>
           <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
           <xs:element name="duration" type="shared:durationType" minOccurs="0"/>
@@ -89,13 +90,6 @@
             <xs:complexType>
               <xs:sequence>
                 <xs:element ref="shared:image" minOccurs="0" maxOccurs="unbounded"/>
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="availableSubtitles" minOccurs="0">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="availableSubtitle" type="AvailableSubtitleType" minOccurs="0" maxOccurs="unbounded"/>
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -233,6 +227,12 @@
         <xs:attribute name="code" type="xs:string"/>
       </xs:extension>
     </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="AvailableSubtitlesType">
+    <xs:sequence/>
+    <xs:attribute name="language" type="xs:string"/>
+    <xs:attribute name="type" type="shared:subtitlesTypeEnum"/>
   </xs:complexType>
 
   <xs:complexType name="avAttributesType">
@@ -393,12 +393,6 @@
         <xs:attribute name="urn" type="xs:string"/>
       </xs:extension>
     </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:complexType name="AvailableSubtitleType">
-    <xs:sequence/>
-    <xs:attribute name="language" type="xs:string"/>
-    <xs:attribute name="type" type="shared:subtitlesTypeEnum"/>
   </xs:complexType>
 
   <xs:complexType name="groupType">
