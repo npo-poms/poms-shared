@@ -129,7 +129,6 @@ public class ApiScheduleEventTest {
             "            </media:scheduleEvent>\n" +
             "        </media:scheduleEvents>\n" +
             "        <media:images/>\n" +
-            "        <media:availableSubtitles/>\n" +
             "        <media:segments/>\n" +
             "    </media:program>\n" +
             "</api:scheduleItem>";
