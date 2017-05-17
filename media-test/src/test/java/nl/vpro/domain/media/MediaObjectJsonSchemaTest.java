@@ -707,9 +707,9 @@ public class MediaObjectJsonSchemaTest {
     	media.set("availableSubtitles", subs);
 
     	Program program = program().id(100L).lean().build();
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+    	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.CAPTION));
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+    	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.TRANSLATION));
 
     	Program out = Jackson2TestUtil.roundTripAndSimilar(program, pretty(media));
