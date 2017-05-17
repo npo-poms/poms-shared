@@ -72,7 +72,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     }
 
     public ScheduleEventUpdate(ScheduleEvent event) {
-        this(event.getChannel(), event.getStartInstant(), event.getDurationTime());
+        this(event.getChannel(), event.getStartInstant(), event.getDuration());
 
         TextualObjects.copyToUpdate(event, this);
         if (event.getTitles() != null) {
