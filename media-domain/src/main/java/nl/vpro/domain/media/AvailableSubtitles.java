@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.Locale;
 
 import javax.persistence.Cacheable;
@@ -16,6 +19,9 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @Embeddable
 @Cacheable
 @XmlType(name="AvailableSubtitlesType")
+@EqualsAndHashCode
+@ToString
+
 public class AvailableSubtitles {
 
 	private Locale language;
@@ -27,6 +33,7 @@ public class AvailableSubtitles {
 
 	}
 
+	@lombok.Builder
 	public AvailableSubtitles(Locale language, SubtitlesType type) {
 		this.language = language;
 		this.type = type;
@@ -51,27 +58,4 @@ public class AvailableSubtitles {
 	public void setType(SubtitlesType type) {
 		this.type = type;
 	}
-
-	@Override
-	public String toString() {
-		return "AvailableSubtitles [language=" + language + ", type=" + type + "]";
-	}
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        AvailableSubtitles that = (AvailableSubtitles) o;
-
-        if (language != null ? !language.equals(that.language) : that.language != null) return false;
-        return type == that.type;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = language != null ? language.hashCode() : 0;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        return result;
-    }
 }
