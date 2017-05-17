@@ -22,6 +22,8 @@ import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
 import static nl.vpro.domain.TextualObjects.sorted;
+import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
+import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 
 
 /**
@@ -527,6 +529,11 @@ public class MediaObjects {
         return prediction;
     }
 
+
+
+    public static boolean subtitlesMayBePublished(MediaObject media) {
+        return media != null && PUBLICATIONS.contains(media.getWorkflow()) && media.getLocations().stream().anyMatch(l -> l.getWorkflow() == PUBLISHED);
+    }
 
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
