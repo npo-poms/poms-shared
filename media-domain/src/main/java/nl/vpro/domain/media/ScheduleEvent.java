@@ -30,7 +30,6 @@ import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
-import nl.vpro.persistence.DurationToLongConverter;
 import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -122,13 +121,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     protected String textPage;
 
     @Column(name = "start_offset")
-    @Convert(converter = DurationToLongConverter.class)
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     protected Duration offset;
 
-    @Convert(converter = DurationToLongConverter.class)
     @JsonSerialize(using = DurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
