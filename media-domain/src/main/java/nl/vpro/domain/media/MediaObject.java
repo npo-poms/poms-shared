@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -499,8 +501,11 @@ public abstract class MediaObject extends PublishableObject
     @Transient
     private boolean sortDateInvalidatable = true;
 
-    @Column
-    private Boolean subtitlesPublished;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Getter(AccessLevel.PACKAGE)
+    @Setter(AccessLevel.PACKAGE)
+    private SubtitlesWorkflow subtitlesWorkflow = SubtitlesWorkflow.UNDEFINED;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
@@ -639,6 +644,7 @@ public abstract class MediaObject extends PublishableObject
         }
         return availableSubtitles;
     }
+
 
     @XmlElement(name = "crid")
     @JsonProperty("crids")
@@ -2386,9 +2392,7 @@ public abstract class MediaObject extends PublishableObject
         }
     }
 
-    void setSubtitlesPublished(boolean subtitlesPublished) {
-        this.subtitlesPublished = subtitlesPublished;
-    }
+
 
     public abstract SubMediaType getType();
 
