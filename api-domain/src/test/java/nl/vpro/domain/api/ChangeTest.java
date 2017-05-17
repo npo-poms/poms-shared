@@ -67,7 +67,6 @@ public class ChangeTest {
             "        <media:locations/>\n" +
             "        <media:scheduleEvents/>\n" +
             "        <media:images/>\n" +
-            "        <media:availableSubtitles/>\n" +
             "        <media:segments/>\n" +
             "    </api:media>\n" +
             "</local:change>");
