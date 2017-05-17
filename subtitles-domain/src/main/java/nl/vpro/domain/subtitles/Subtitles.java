@@ -24,7 +24,6 @@ import com.google.common.collect.PeekingIterator;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.persistence.DurationToLongConverter;
 import nl.vpro.persistence.InstantToTimestampConverter;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -85,7 +84,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     private Locale language;
 
     @Column(name = "`offset`")
-    @Convert(converter = DurationToLongConverter.class)
     @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
