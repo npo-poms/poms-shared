@@ -86,6 +86,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
         "source",
         "countries",
         "languages",
+        "availableSubtitles",
         "avAttributes",
         "releaseYear",
         "duration",
@@ -103,8 +104,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
         "locations",
         "scheduleEvents",
         "relations",
-        "images",
-        "availableSubtitles"
+        "images"
     })
 
 @JsonPropertyOrder({ "objectType",
@@ -136,6 +136,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
     "hasSubtitles",
     "countries",
     "languages",
+    "availableSubtitles",
     "avAttributes",
     "releaseYear",
     "duration",
@@ -153,8 +154,8 @@ import static nl.vpro.domain.TextualObjects.sorted;
     "locations",
     "scheduleEvents",
     "relations",
-    "images",
-    "availableSubtitles"
+    "images"
+
 })
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
 @JsonSubTypes({ @JsonSubTypes.Type(value = Program.class, name = "program"),
@@ -510,7 +511,7 @@ public abstract class MediaObject extends PublishableObject
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
     @Setter
-    private List<AvailableSubtitle> availableSubtitles = null;
+    private List<AvailableSubtitles> availableSubtitles = null;
 
     public MediaObject() {
     }
@@ -636,9 +637,8 @@ public abstract class MediaObject extends PublishableObject
         this.mid = mid;
     }
 
-    @XmlElement(name = "availableSubtitle")
-    @XmlElementWrapper(name = "availableSubtitles", required = false, nillable = false)
-    public List<AvailableSubtitle> getAvailableSubtitles() {
+    @XmlElement(name = "availableSubtitles")
+    public List<AvailableSubtitles> getAvailableSubtitles() {
         if (availableSubtitles == null) {
             availableSubtitles = new ArrayList<>();
         }

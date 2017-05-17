@@ -95,7 +95,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testMid() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program mid=\"MID_000001\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program mid=\"MID_000001\" embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().mid("MID_000001").build();
         String actual = toXml(program);
@@ -106,18 +106,26 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testAvailableSubtitles() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program mid=\"MID_000001\" embeddable=\"true\" hasSubtitles=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><availableSubtitles><availableSubtitle language=\"nl\" type=\"CAPTION\"/><availableSubtitle language=\"nl\" type=\"TRANSLATION\"/></availableSubtitles><segments/></program>";
+        String expected = "<program embeddable=\"true\" hasSubtitles=\"true\" mid=\"MID_000001\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <availableSubtitles language=\"nl\" type=\"CAPTION\"/>\n" +
+            "    <availableSubtitles language=\"nl\" type=\"TRANSLATION\"/>\n" +
+            "    <credits/>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>";
 
         Program program = program().lean().mid("MID_000001").build();
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+    	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.CAPTION));
-    	program.getAvailableSubtitles().add(new AvailableSubtitle(Locales.DUTCH,
+    	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.TRANSLATION));
 
-        String actual = toXml(program);
 
-        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
+    	JAXBTestUtil.roundTripAndSimilar(program, expected);
+
+
     }
 
     @Test
@@ -127,13 +135,22 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testHasSubtitles() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" hasSubtitles=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><availableSubtitles><availableSubtitle language=\"nl\" type=\"CAPTION\"/></availableSubtitles><segments/></program>";
+        String expected = "<program embeddable=\"true\" hasSubtitles=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <availableSubtitles language=\"nl\" type=\"CAPTION\"/>\n" +
+            "    <credits/>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>\n";
 
         Program program = program().lean().withSubtitles().build();
-        String actual = toXml(program);
 
-        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
+
+        Program rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
+
+        assertThat(rounded.isHasSubtitles()).isTrue();
+
     }
 
     @Test
@@ -143,7 +160,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testDatesCreatedAndModified() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" lastModified=\"1970-01-01T03:00:00+01:00\" creationDate=\"1970-01-01T01:00:00+01:00\" sortDate=\"1970-01-01T01:00:00+01:00\"  xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" lastModified=\"1970-01-01T03:00:00+01:00\" creationDate=\"1970-01-01T01:00:00+01:00\" sortDate=\"1970-01-01T01:00:00+01:00\"  xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().creationInstant(Instant.EPOCH).lastModified(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
         String actual = toXml(program);
@@ -153,7 +170,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testCreatedAndModifiedBy() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images /><segments/></program>";
 
         Program program = program().lean().withCreatedBy().withLastModifiedBy().build();
         String actual = toXml(program);
@@ -169,7 +186,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testPublishStartStop() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" publishStop=\"1970-01-01T03:00:00+01:00\" publishStart=\"1970-01-01T01:00:00+01:00\" sortDate=\"1970-01-01T01:00:00+01:00\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" publishStop=\"1970-01-01T03:00:00+01:00\" publishStart=\"1970-01-01T01:00:00+01:00\" sortDate=\"1970-01-01T01:00:00+01:00\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().publishStart(Instant.EPOCH).publishStop(Instant.ofEpochMilli(2 * 60 * 60 * 1000)).build();
         String actual = toXml(program);
@@ -185,7 +202,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testCrids() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><crid>crid://bds.tv/9876</crid><crid>crid://tmp.fragment.mmbase.vpro.nl/1234</crid><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><crid>crid://bds.tv/9876</crid><crid>crid://tmp.fragment.mmbase.vpro.nl/1234</crid><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withCrids().build();
         String actual = toXml(program);
@@ -201,7 +218,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testBroadcasters() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><broadcaster id=\"BNN\">BNN</broadcaster><broadcaster id=\"AVRO\">AVRO</broadcaster><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><broadcaster id=\"BNN\">BNN</broadcaster><broadcaster id=\"AVRO\">AVRO</broadcaster><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withBroadcasters().build();
         String actual = toXml(program);
@@ -212,7 +229,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testExclusives() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><exclusive portalId=\"STERREN24\"/><exclusive portalId=\"3VOOR12_GRONINGEN\" stop=\"1970-01-01T01:01:40+01:00\" start=\"1970-01-01T01:00:00+01:00\"/><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><exclusive portalId=\"STERREN24\"/><exclusive portalId=\"3VOOR12_GRONINGEN\" stop=\"1970-01-01T01:01:40+01:00\" start=\"1970-01-01T01:00:00+01:00\"/><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withPortalRestrictions().build();
         String actual = toXml(program);
@@ -228,7 +245,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testRegions() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><region regionId=\"NL\"/><region regionId=\"BENELUX\" stop=\"1970-01-01T01:01:40+01:00\" start=\"1970-01-01T01:00:00+01:00\"/><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><region regionId=\"NL\"/><region regionId=\"BENELUX\" stop=\"1970-01-01T01:01:40+01:00\" start=\"1970-01-01T01:00:00+01:00\"/><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withGeoRestrictions().build();
         String actual = toXml(program);
@@ -244,7 +261,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testDuration() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><duration>P0DT2H0M0.000S</duration><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><duration>P0DT2H0M0.000S</duration><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withDuration().build();
         String actual = toXml(program);
@@ -260,7 +277,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testPredictions() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><prediction state=\"REVOKED\">INTERNETVOD</prediction><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><prediction state=\"REVOKED\">INTERNETVOD</prediction><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().build();
 
@@ -282,7 +299,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testTitles() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><title type=\"MAIN\" owner=\"BROADCASTER\">Main title</title><title type=\"MAIN\" owner=\"MIS\">Main title MIS</title><title type=\"SHORT\" owner=\"BROADCASTER\">Short title</title><title type=\"SUB\" owner=\"MIS\">Episode title MIS</title><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><title type=\"MAIN\" owner=\"BROADCASTER\">Main title</title><title type=\"MAIN\" owner=\"MIS\">Main title MIS</title><title type=\"SHORT\" owner=\"BROADCASTER\">Short title</title><title type=\"SUB\" owner=\"MIS\">Episode title MIS</title><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withTitles().build();
         String actual = toXml(program);
@@ -293,7 +310,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testDescriptions() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><description type=\"MAIN\" owner=\"BROADCASTER\">Main description</description><description type=\"MAIN\" owner=\"MIS\">Main description MIS</description><description type=\"SHORT\" owner=\"BROADCASTER\">Short description</description><description type=\"EPISODE\" owner=\"MIS\">Episode description MIS</description><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><description type=\"MAIN\" owner=\"BROADCASTER\">Main description</description><description type=\"MAIN\" owner=\"MIS\">Main description MIS</description><description type=\"SHORT\" owner=\"BROADCASTER\">Short description</description><description type=\"EPISODE\" owner=\"MIS\">Episode description MIS</description><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withDescriptions().build();
         String actual = toXml(program);
@@ -360,7 +377,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testTags() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><tag>tag1</tag><tag>tag2</tag><tag>tag3</tag><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><tag>tag1</tag><tag>tag2</tag><tag>tag3</tag><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withTags().build();
         String actual = toXml(program);
@@ -376,7 +393,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testPortals() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><portal id=\"3VOOR12_GRONINGEN\">3voor12 Groningen</portal><portal id=\"STERREN24\">Sterren24</portal><credits/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><portal id=\"3VOOR12_GRONINGEN\">3voor12 Groningen</portal><portal id=\"STERREN24\">Sterren24</portal><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withPortals().build();
         String actual = toXml(program);
@@ -392,7 +409,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testMemberOfAndDescendantOfGraph() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\"/><locations/><scheduleEvents/><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:100\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:200\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><memberOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:200\"/><locations/><scheduleEvents/><images/><segments/></program>";
 
         Program program = program().lean().withMemberOf().build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
@@ -408,7 +425,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testEpisodeOfAndDescendantOfGraph() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><locations/><scheduleEvents/><images/><availableSubtitles/><episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\"/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program type=\"BROADCAST\" embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><descendantOf urnRef=\"urn:vpro:media:group:101\" midRef=\"AVRO_5555555\" type=\"SERIES\"/><descendantOf urnRef=\"urn:vpro:media:group:102\" midRef=\"AVRO_7777777\" type=\"SEASON\"/><locations/><scheduleEvents/><images/><episodeOf added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" midRef=\"AVRO_7777777\" index=\"1\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:102\"/><segments/></program>";
 
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
@@ -434,7 +451,6 @@ public class MediaObjectXmlSchemaTest {
             "    <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
             "    <relation uriRef=\"http://www.bluenote.com/\" broadcaster=\"VPRO\" type=\"LABEL\">Blue Note</relation>\n" +
             "    <images/>\n" +
-            "    <availableSubtitles/>\n" +
             "    <segments/>\n" +
             "</program>";
 
@@ -452,7 +468,7 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testScheduleEvents() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00.100+01:00\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><locations/><scheduleEvents><scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1969-12-31+01:00</guideDay><start>1970-01-01T01:00:00.100+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent><scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-03+01:00</guideDay><start>1970-01-04T01:00:00.300+01:00</start><duration>P0DT0H0M0.050S</duration></scheduleEvent><scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-08+01:00</guideDay><start>1970-01-09T01:00:00.350+01:00</start><duration>P0DT0H0M0.250S</duration></scheduleEvent><scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-10+01:00</guideDay><start>1970-01-11T01:00:00.600+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent></scheduleEvents><images/><availableSubtitles/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00.100+01:00\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><locations/><scheduleEvents><scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1969-12-31+01:00</guideDay><start>1970-01-01T01:00:00.100+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent><scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-03+01:00</guideDay><start>1970-01-04T01:00:00.300+01:00</start><duration>P0DT0H0M0.050S</duration></scheduleEvent><scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-08+01:00</guideDay><start>1970-01-09T01:00:00.350+01:00</start><duration>P0DT0H0M0.250S</duration></scheduleEvent><scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-10+01:00</guideDay><start>1970-01-11T01:00:00.600+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent></scheduleEvents><images/><segments/></program>";
 
         Program program = program().id(100L).lean().withScheduleEvents().build();
         String actual = toXml(program);
@@ -483,7 +499,6 @@ public class MediaObjectXmlSchemaTest {
             "        </scheduleEvent>\n" +
             "    </scheduleEvents>\n" +
             "    <images/>\n" +
-            "    <availableSubtitles/>\n" +
             "    <segments/>\n" +
             "</program>";
 
@@ -676,7 +691,6 @@ public class MediaObjectXmlSchemaTest {
             "    </locations>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
-            "    <availableSubtitles/>\n" +
             "    <segments/>\n" +
             "</program>";
 
@@ -720,7 +734,6 @@ public class MediaObjectXmlSchemaTest {
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
-            "    <availableSubtitles/>\n" +
             "    <segments/>\n" +
             "</program>");
 

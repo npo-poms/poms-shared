@@ -253,6 +253,7 @@
       <xs:element type="xs:string" name="source" minOccurs="0"/>
       <xs:element type="countryType" name="country" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="languageType" name="language" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="availableSubtitles" type="AvailableSubtitleType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="avAttributesType" name="avAttributes" minOccurs="0"/>
       <xs:element type="xs:short" name="releaseYear" minOccurs="0"/>
       <xs:element type="xs:duration" name="duration" minOccurs="0"/>
@@ -271,13 +272,6 @@
       <xs:element type="scheduleEventsType" name="scheduleEvents" minOccurs="0"/>
       <xs:element type="relationType" name="relation" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="imagesType" name="images" minOccurs="0"/>
-	  <xs:element name="availableSubtitles" minOccurs="0">
-         <xs:complexType>
-           <xs:sequence>
-             <xs:element name="availableSubtitle" type="AvailableSubtitleType" minOccurs="0" maxOccurs="unbounded"/>
-           </xs:sequence>
-         </xs:complexType>
-      </xs:element>
     </xs:sequence>
     <xs:attribute type="midType" name="mid"/>
     <xs:attribute type="avTypeEnum" name="avType" use="required"/>
