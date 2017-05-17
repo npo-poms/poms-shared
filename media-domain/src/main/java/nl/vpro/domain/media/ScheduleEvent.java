@@ -484,32 +484,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlElement(name = "duration")
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonIgnore
-    public Duration getDurationTime() {
+    public Duration getDuration() {
         return duration;
     }
 
-    public void setDurationTime(Duration value) {
-        this.duration = value;
-    }
-
-    @JsonIgnore
     public void setDuration(Duration value) {
         this.duration = value;
     }
-
-    @Deprecated
-    @JsonIgnore
-    @XmlTransient
-    public Date getDuration() {
-        return this.duration == null ? null : new Date(this.duration.toMillis());
-    }
-
-    @Deprecated
-    @JsonIgnore
-    public void setDuration(Date value) {
-        this.duration = value == null ? null : Duration.ofMillis(value.getTime());
-    }
-
 
     @XmlAttribute
     public Channel getChannel() {
