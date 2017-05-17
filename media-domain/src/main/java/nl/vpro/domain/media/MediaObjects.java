@@ -538,7 +538,7 @@ public class MediaObjects {
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
      *
-     * TODO work in progres. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
+     * TODO work in progress. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
      */
     public static <T extends PublishableObject> T filterPublishable(T object) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Predicate<Object> p = (o) -> {
