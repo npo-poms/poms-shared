@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.*;
@@ -10,8 +12,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.UnmodifiableIterator;
 
@@ -25,8 +25,8 @@ import static nl.vpro.util.DateUtils.toInstant;
 @XmlType(name = "scheduleType", propOrder = {
     "scheduleEvents"
 })
+@Slf4j
 public class Schedule implements Serializable, Iterable<ScheduleEvent> {
-    private static final Logger log = LoggerFactory.getLogger(Schedule.class);
 
     private static long serialVersionUID = 0L;
 
@@ -331,7 +331,10 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         }
 
         ScheduleEvent lastEvent = scheduleEvents.last();
-        Instant collectionEnd = lastEvent.getStartInstant().plus(lastEvent.getDurationTime());
+        Instant collectionEnd = lastEvent.getStartInstant();
+        if (lastEvent.getDuration() != null) {
+            collectionEnd = lastEvent.getStartInstant().plus(lastEvent.getDuration());
+        }
 
         return stop.getTime() >= collectionEnd.toEpochMilli() ? stop : Date.from(collectionEnd);
 
