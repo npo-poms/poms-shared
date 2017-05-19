@@ -304,7 +304,8 @@ public interface MediaBackendRestService {
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @PathParam("seq") Integer seq,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam("guessOffset") @DefaultValue("false") boolean guessOffset
     );
 
     @GET
