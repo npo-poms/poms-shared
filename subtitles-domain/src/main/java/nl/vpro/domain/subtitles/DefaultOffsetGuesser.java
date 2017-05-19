@@ -17,18 +17,31 @@ public class DefaultOffsetGuesser implements Function<TimeLine, Duration> {
 
     static final Instant AFTER_THIS_DATE_ALSO_NON_LIVE_BROADCASTS_HAVE_NULL_OFFSET = LocalDate.of(2017, 4, 1).atStartOfDay().atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
 
+    static final Duration FIRST_CUE_OF_LIVE = Duration.ofSeconds(3);
+
+    static final Duration OFFSET_OF_RECORDED = Duration.ofMinutes(2);
+
+    static final Duration FIRST_CUE_RECORDED_MIN = Duration.ofMinutes(1);
+    static final Duration FIRST_CUE_RECORDED_MAX= Duration.ofMinutes(5);
+
     final Instant creationDate;
     public DefaultOffsetGuesser(Instant creationDate) {
         this.creationDate = creationDate;
     }
     @Override
     public Duration apply(TimeLine timeline) {
-        if (creationDate.isAfter(AFTER_THIS_DATE_ALSO_NON_LIVE_BROADCASTS_HAVE_NULL_OFFSET) && timeline.start.compareTo(Duration.ofMinutes(5)) < 0) {
+        if (timeline.end.minus(timeline.start).compareTo(Duration.ofMinutes(30)) > 0)  {
+            log.debug("This must be live. We sometimes saw very long initial queues. We suppose that the offset is end");
+            return timeline.end.minus(FIRST_CUE_OF_LIVE);
+        }
+        if (creationDate.isAfter(AFTER_THIS_DATE_ALSO_NON_LIVE_BROADCASTS_HAVE_NULL_OFFSET) &&
+            timeline.start.compareTo(FIRST_CUE_RECORDED_MAX) < 0 &&
+            timeline.start.compareTo(FIRST_CUE_RECORDED_MIN) > 0) {
             log.debug("This was probably not a live broadcast");
-            return Duration.ofMinutes(2);
+            return OFFSET_OF_RECORDED;
         } else {
             log.debug("This was probably a live broadcast. Cues are indicated by time of time. The first cue defines the offset for all of them");
-            return timeline.start.plus(Duration.ofSeconds(3));
+            return timeline.start.minus(FIRST_CUE_OF_LIVE);
         }
 
     }
