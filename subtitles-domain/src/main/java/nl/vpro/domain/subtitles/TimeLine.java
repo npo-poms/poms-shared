@@ -1,11 +1,14 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.Getter;
+
 import java.time.Duration;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.3
  */
+@Getter
 public class TimeLine {
 
     final Integer sequence;

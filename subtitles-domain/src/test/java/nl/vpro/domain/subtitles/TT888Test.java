@@ -1,20 +1,23 @@
 package nl.vpro.domain.subtitles;
 
+import java.time.Duration;
+
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.assertj.core.api.Java6Assertions.assertThat;
+
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.3
  */
 public class TT888Test {
     @Test
     public void parseTimeline() throws Exception {
         String line = "0003 00:02:08:11 00:02:11:06";
-        TT888.TimeLine timeLine = TT888.TimeLine.parse(line);
-        assertEquals(3, timeLine.getSequence());
-        assertEquals((2 * 60 + 8) * 1000L + 110, timeLine.getStart().toMillis());
-        assertEquals((2 * 60 + 11) * 1000L + 60, timeLine.getEnd().toMillis());
+        TimeLine timeLine = TT888.parseTimeline(line);
+        assertThat(timeLine.getSequence()).isEqualTo(3);
+        assertThat(timeLine.getStart()).isEqualTo(Duration.ofMillis((2 * 60 + 8) * 1000L + 110));
+        assertThat(timeLine.getEnd()).isEqualTo(Duration.ofMillis((2 * 60 + 11) * 1000L + 60));
     }
 }
