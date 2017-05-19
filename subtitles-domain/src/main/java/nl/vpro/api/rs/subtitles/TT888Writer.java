@@ -28,7 +28,7 @@ public class TT888Writer extends AbstractIteratorWriter {
 
     @Override
     protected void stream(Iterator<Cue> cueIterator, OutputStream entityStream) throws IOException {
-        SubtitlesUtil.toEBU(cueIterator, entityStream);
+        SubtitlesUtil.toTT888(cueIterator, entityStream);
     }
 
 

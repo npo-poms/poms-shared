@@ -506,6 +506,8 @@ public abstract class MediaObject extends PublishableObject
     @Enumerated(EnumType.STRING)
     @Getter(AccessLevel.PACKAGE)
     @Setter(AccessLevel.PACKAGE)
+    // It is a bit odd that this is not on {@link Subtitles}.
+    // Perhaps that is possible too, it would however complicate matters in MaintenanceRepository
     private SubtitlesWorkflow subtitlesWorkflow = SubtitlesWorkflow.UNDEFINED;
 
     @ElementCollection(fetch = FetchType.LAZY)

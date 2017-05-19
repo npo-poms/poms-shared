@@ -19,12 +19,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
 
 import static nl.vpro.i18n.Locales.DUTCH;
@@ -46,36 +40,28 @@ public class StandaloneCue extends Cue {
     @XmlAttribute
     private SubtitlesType type = SubtitlesType.CAPTION;
 
-    @XmlAttribute
-    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
-    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Duration offset = null;
-
 
     public static StandaloneCue translation(Cue cue, Locale locale) {
-        return new StandaloneCue(cue, locale, SubtitlesType.TRANSLATION, Duration.ZERO);
+        return new StandaloneCue(cue, locale, SubtitlesType.TRANSLATION);
     }
 
 
     public static StandaloneCue tt888(Cue cue) {
-        return new StandaloneCue(cue, DUTCH, SubtitlesType.CAPTION, Duration.ZERO);
+        return new StandaloneCue(cue, DUTCH, SubtitlesType.CAPTION);
     }
 
-    public static StandaloneCue of(Cue cue, Subtitles subtitles) {
-        return new StandaloneCue(cue, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset());
+    public static StandaloneCue of(Cue cue, SubtitlesId subtitles) {
+        return new StandaloneCue(cue, subtitles.getLanguage(), subtitles.getType());
     }
 
     protected StandaloneCue() {
 
     }
 
-    public StandaloneCue(Cue cue, Locale language, SubtitlesType type, Duration offset) {
+    public StandaloneCue(Cue cue, Locale language, SubtitlesType type) {
         super(cue);
         this.language = language;
         this.type = type;
-        this.offset = offset == null || offset.isZero() ? null : offset;
     }
 
     @Builder(builderMethodName = "standaloneBuilder")
@@ -90,7 +76,6 @@ public class StandaloneCue extends Cue {
         super(Cue.builder().parent(parent).sequence(sequence).start(start).end(end).content(content).build());
         this.language = language;
         this.type = type;
-        this.offset = offset == null || offset.isZero() ? null : offset;
     }
 
 
