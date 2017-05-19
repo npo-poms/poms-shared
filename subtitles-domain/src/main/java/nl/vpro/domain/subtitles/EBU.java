@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -23,14 +24,12 @@ import java.util.stream.StreamSupport;
 public class EBU {
 
 
-    public static Stream<Cue> parse(String parent, Duration offset, InputStream is) {
-        if (offset == null) {
-            offset = Duration.ZERO;
-        }
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(parseToIterator(parent, offset, is), Spliterator.ORDERED), false);
+    public static Stream<Cue> parse(String parent, Duration offset, Function<TimeLine, Duration> offsetGuesser, InputStream is) {
+
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(parseToIterator(parent, offset, offsetGuesser, is), Spliterator.ORDERED), false);
     }
 
-    protected static Iterator<Cue> parseToIterator(final String parent, final Duration offset,  final InputStream is) {
+    protected static Iterator<Cue> parseToIterator(final String parent, final Duration offsetArgument, Function<TimeLine, Duration> offsetGuesser, final InputStream is) {
 
 
         return new Iterator<Cue>() {
@@ -44,6 +43,7 @@ public class EBU {
             final int fps;
             final int numberOfSubtitles;
             int subtitleNumber = 1;
+            Duration offset = offsetArgument;
 
 
             {
@@ -202,6 +202,10 @@ public class EBU {
                                     //if it is just additional text for the caption
                                     parseTextForSTL(currentContent, textField, justification);
                                 else {
+                                    TimeLine timeLine = parseTime(startTime, endTime, fps);
+                                    if (offset == null) {
+                                        offset = offsetGuesser.apply(timeLine);
+                                    }
                                     toFill.start = parseTime(startTime + "/" + fps).minus(offset);
                                     toFill.end = parseTime(endTime + "/" + fps).minus(offset);
                                     parseTextForSTL(currentContent, textField, justification);
@@ -238,6 +242,10 @@ public class EBU {
         };
     }
 
+
+    private static TimeLine parseTime(String startTime, String endTime, int fps) {
+        return new TimeLine(null, parseTime(startTime + "/" + fps), parseTime(endTime + "/" + fps));
+    }
 
     /**
      * This method parses the text field taking into account STL control codes
