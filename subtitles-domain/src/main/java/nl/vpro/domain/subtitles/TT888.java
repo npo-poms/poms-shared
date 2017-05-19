@@ -1,5 +1,6 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
@@ -68,6 +69,8 @@ public class TT888 {
             boolean needsFindNext = true;
             String timeLine = null;
             StringBuilder content = new StringBuilder();
+            Duration offset = Duration.ZERO;
+            long count = 0;
 
             @Override
             public boolean hasNext() {
@@ -83,10 +86,17 @@ public class TT888 {
                 }
                 needsFindNext = true;
                 try {
-                    return parseCue(parent, timeLine, content.toString());
+                    String contentString = content.toString();
+                    TimeLine parsedTimeLine = TimeLine.parse(timeLine);
+                    if (count == 0 && contentString.equals("888")) {
+                        offset = parsedTimeLine.start;
+                    }
+                    return createCue(parent, parsedTimeLine, offset, contentString);
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage(), e);
                     return null;
+                } finally {
+                    count++;
                 }
 
             }
@@ -126,20 +136,41 @@ public class TT888 {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UT"));
     }
 
-    static Cue parseCue(String parent, String timeLine, String content) {
-        String[] split = timeLine.split("\\s+");
-        try {
-            return new Cue(
-                parent,
-                Integer.parseInt(split[0]),
-                Duration.ofMillis(dateFormat.parse(split[1] + "0").getTime()),
-                Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime()),
-                content
-            );
-        } catch (NumberFormatException | ParseException nfe) {
-            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Expected content: " + content + " Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
+    static Cue createCue(String parent, TimeLine timeLine, Duration offset, String content) {
+        return new Cue(
+            parent,
+            timeLine.sequence,
+            timeLine.start.minus(offset),
+            timeLine.end.minus(offset),
+            content
+        );
+        }
+    @Getter
+    static class TimeLine {
+        final int sequence;
+        final Duration start;
+        final Duration end;
+
+        TimeLine(int sequence, Duration start, Duration end) {
+            this.sequence = sequence;
+            this.start = start;
+            this.end= end;
         }
 
+        public static TimeLine parse(String timeLine) {
+            String[] split = timeLine.split("\\s+");
+            try {
+                return new TimeLine(
+                    Integer.parseInt(split[0]),
+                    Duration.ofMillis(dateFormat.parse(split[1] + "0").getTime()),
+                    Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime())
+                );
+            } catch (NumberFormatException | ParseException nfe) {
+                throw new IllegalArgumentException("Could not parse " + timeLine + " (" + Arrays.asList(split) + ").  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
+            }
+
+
+        }
     }
 
 
