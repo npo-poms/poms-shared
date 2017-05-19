@@ -4,14 +4,17 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.Iterator;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 
+import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesFormat;
+import nl.vpro.domain.subtitles.SubtitlesUtil;
 
 /**
  * @author Michiel Meeuwissen
@@ -45,6 +48,10 @@ abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
         stream(subtitles, entityStream);
     }
 
+
+    protected Iterator<Cue> iterate(Subtitles subtitles) {
+        return SubtitlesUtil.iterator(subtitles, true);
+    }
     abstract protected void stream(Subtitles subtitles, OutputStream entityStream) throws IOException;
 
 

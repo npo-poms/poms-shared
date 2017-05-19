@@ -27,7 +27,7 @@ public class SRTSubtitlesWriter extends AbstractSubtitlesWriter {
 
     @Override
     protected void stream(Subtitles subtitles, OutputStream entityStream) throws IOException {
-        SubtitlesUtil.toSRT(SubtitlesUtil.iterator(subtitles), entityStream);
+        SubtitlesUtil.toSRT(iterate(subtitles), entityStream);
     }
 
 }
