@@ -37,7 +37,8 @@ public class SubtitlesUtilTest {
 
     @Test
     public void toTT888() throws IOException {
-        assertThat(TT888.format(SubtitlesUtil.parse(getSubtitles()).findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
+        assertThat(TT888.format(SubtitlesUtil
+            .parse(getSubtitles()).findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
             "888\n" +
             "\n");
 
