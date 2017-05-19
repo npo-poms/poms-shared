@@ -46,7 +46,7 @@ public class SubtitlesUtil {
     public static Stream<Cue> parse(SubtitlesContent content, String mid, Duration offset) {
         switch (content.getFormat()) {
             case TT888:
-                return TT888.parse(mid, new StringReader(content.getValue()));
+                return TT888.parse(mid, offset, new StringReader(content.getValue()));
             case WEBVTT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ".");
             case SRT:
