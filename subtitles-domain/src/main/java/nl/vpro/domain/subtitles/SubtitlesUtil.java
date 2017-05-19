@@ -52,7 +52,7 @@ public class SubtitlesUtil {
             case SRT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ",");
             case EBU:
-                return EBU.parse(mid, new ByteArrayInputStream(Base64.getDecoder().decode(content.getValue())));
+                return EBU.parse(mid, offset, new ByteArrayInputStream(Base64.getDecoder().decode(content.getValue())));
             default:
                 throw new IllegalArgumentException("Not supported format " + content.getFormat());
         }
@@ -64,7 +64,7 @@ public class SubtitlesUtil {
             return Stream.empty();
         }
         return parse(subtitles)
-            .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset())
+            .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType())
             );
     }
 
@@ -81,7 +81,7 @@ public class SubtitlesUtil {
         return new BasicWrappedIterator<>(
             (long) subtitles.getCueCount(),
             parse(subtitles)
-                .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType(), subtitles.getOffset()))
+                .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType()))
                 .iterator());
     }
 
