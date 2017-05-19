@@ -27,6 +27,6 @@ public class VTTSubtitlesWriter extends AbstractSubtitlesWriter {
 
     @Override
     protected void stream(Subtitles subtitles, OutputStream entityStream) throws IOException {
-        SubtitlesUtil.toVTT(SubtitlesUtil.iterator(subtitles), entityStream);
+        SubtitlesUtil.toVTT(iterate(subtitles), entityStream);
     }
 }
