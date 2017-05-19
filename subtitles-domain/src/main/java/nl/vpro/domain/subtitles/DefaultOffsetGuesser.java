@@ -9,6 +9,7 @@ import java.time.ZoneId;
 import java.util.function.Function;
 
 /**
+ * See NPA-390
  * @author Michiel Meeuwissen
  * @since 5.3
  */
