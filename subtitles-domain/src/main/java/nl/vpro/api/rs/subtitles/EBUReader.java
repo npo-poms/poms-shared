@@ -24,6 +24,6 @@ public class EBUReader extends AbstractIteratorReader {
 
     @Override
     protected Iterator<Cue> read(InputStream entityStream) {
-        return EBU.parse(null, Duration.ZERO, entityStream).iterator();
+        return EBU.parse(null, null, (timeLine) -> Duration.ZERO,  entityStream).iterator();
     }
 }

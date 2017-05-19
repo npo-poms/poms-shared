@@ -1,6 +1,7 @@
 package nl.vpro.api.rs.subtitles;
 
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.Iterator;
 
 import javax.ws.rs.Consumes;
@@ -23,6 +24,6 @@ public class TT888Reader extends AbstractIteratorReader {
 
     @Override
     protected Iterator<Cue> read(InputStream entityStream) {
-        return TT888.parse(null, null, entityStream).iterator();
+        return TT888.parse(null, null, (timeLine) -> Duration.ZERO, entityStream).iterator();
     }
 }

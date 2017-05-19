@@ -44,15 +44,16 @@ public class SubtitlesUtil {
     }
 
     public static Stream<Cue> parse(SubtitlesContent content, String mid, Duration offset) {
+
         switch (content.getFormat()) {
             case TT888:
-                return TT888.parse(mid, offset, new StringReader(content.getValue()));
+                return TT888.parse(mid, offset, DefaultOffsetGuesser.INSTANCE, new StringReader(content.getValue()));
             case WEBVTT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ".");
             case SRT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ",");
             case EBU:
-                return EBU.parse(mid, offset, new ByteArrayInputStream(Base64.getDecoder().decode(content.getValue())));
+                return EBU.parse(mid, offset, DefaultOffsetGuesser.INSTANCE, new ByteArrayInputStream(Base64.getDecoder().decode(content.getValue())));
             default:
                 throw new IllegalArgumentException("Not supported format " + content.getFormat());
         }
