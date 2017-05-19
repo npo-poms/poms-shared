@@ -4,9 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.nio.charset.Charset;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
@@ -138,13 +135,6 @@ public class TT888 {
 
     }
 
-
-    static final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
-
-    static {
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UT"));
-    }
-
     static Cue createCue(String parent, TimeLine timeLine, Duration offset, String content) {
         return new Cue(
             parent,
@@ -160,14 +150,24 @@ public class TT888 {
         try {
             return new TimeLine(
                 Integer.parseInt(split[0]),
-                Duration.ofMillis(dateFormat.parse(split[1] + "0").getTime()),
-                Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime())
+                parseTime(split[1]),
+                parseTime(split[2])
             );
-        } catch (NumberFormatException | ParseException nfe) {
+        } catch (NumberFormatException nfe) {
             throw new IllegalArgumentException("Could not parse " + timeLine + " (" + Arrays.asList(split) + ").  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
         }
 
 
+    }
+
+    private static Duration parseTime(String duration) {
+        String[] split = duration.split(":", 4);
+        int index = 0;
+        Long hours = Long.parseLong(split[0]);
+        Long minutes = Long.parseLong(split[1]);
+        Long seconds = Long.parseLong(split[2]);
+        Long hunderds = Long.parseLong(split[3]);
+        return Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(hunderds * 10);
     }
 
 
