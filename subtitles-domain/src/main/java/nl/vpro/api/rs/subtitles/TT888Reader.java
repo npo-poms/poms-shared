@@ -23,6 +23,6 @@ public class TT888Reader extends AbstractIteratorReader {
 
     @Override
     protected Iterator<Cue> read(InputStream entityStream) {
-        return TT888.parse(null, entityStream).iterator();
+        return TT888.parse(null, null, entityStream).iterator();
     }
 }
