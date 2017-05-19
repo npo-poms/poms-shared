@@ -133,15 +133,6 @@ public class TT888 {
 
     }
 
-    public static Duration guessOffset(TimeLine timeline) {
-        if (timeline.start.compareTo(Duration.ofMinutes(5)) < 0) {
-            log.debug("This was probably not a live broadcast");
-            return Duration.ofMinutes(2);
-        } else {
-            log.debug("This was probably a live broadcast. The first cues indicates a time of the day");
-            return timeline.start.plus(Duration.ofSeconds(3));
-        }
-    }
 
     static final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
 
