@@ -162,7 +162,7 @@ public class WEBVTTandSRT {
         Long millis = duration.toMillis();
         boolean negative = millis < 0L;
         if (negative) {
-            millis = -1 * millis;
+            millis *= -1;
         }
         Long hours = millis / 3600000;
         millis -= hours * 3600000;

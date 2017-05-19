@@ -45,7 +45,12 @@ public class TT888 {
     }
 
     static String formatDuration(Duration duration) {
-        long centiseconds = duration.toMillis() / 10;
+        long millis = duration.toMillis();
+        boolean negative = millis < 0;
+        if (negative) {
+            millis *= -1;
+        }
+        long centiseconds = millis / 10;
         /*long hours = centiseconds / 360000;
         centiseconds -= hours * 360000;
         */
@@ -53,7 +58,7 @@ public class TT888 {
         centiseconds -= minutes * 6000;
         long seconds = centiseconds / 100;
         centiseconds -= seconds * 100;
-        return String.format("%02d:%02d:%02d", minutes, seconds, centiseconds);
+        return String.format("%s%02d:%02d:%02d", negative ? "-": "", minutes, seconds, centiseconds);
     }
 
 
