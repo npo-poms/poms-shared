@@ -15,7 +15,7 @@ import java.util.function.Function;
 @Slf4j
 public class DefaultOffsetGuesser implements Function<TimeLine, Duration> {
 
-    static final Instant afterThisDateAlsoNonLiveBroadcastsHaveNullOffset = LocalDate.of(2017, 4, 1).atStartOfDay().atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
+    static final Instant AFTER_THIS_DATE_ALSO_NON_LIVE_BROADCASTS_HAVE_NULL_OFFSET = LocalDate.of(2017, 4, 1).atStartOfDay().atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
 
     final Instant creationDate;
     public DefaultOffsetGuesser(Instant creationDate) {
@@ -23,7 +23,7 @@ public class DefaultOffsetGuesser implements Function<TimeLine, Duration> {
     }
     @Override
     public Duration apply(TimeLine timeline) {
-        if (creationDate.isAfter(afterThisDateAlsoNonLiveBroadcastsHaveNullOffset) && timeline.start.compareTo(Duration.ofMinutes(5)) < 0) {
+        if (creationDate.isAfter(AFTER_THIS_DATE_ALSO_NON_LIVE_BROADCASTS_HAVE_NULL_OFFSET) && timeline.start.compareTo(Duration.ofMinutes(5)) < 0) {
             log.debug("This was probably not a live broadcast");
             return Duration.ofMinutes(2);
         } else {
