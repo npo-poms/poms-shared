@@ -177,7 +177,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         String content,
         SubtitlesType type) {
         this.mid = mid;
-        this.offset = offset == null ? Duration.ZERO : offset;
+        this.offset = offset;
         this.content = new SubtitlesContent(format, content);
         this.language = language;
         this.cueCount = null;
