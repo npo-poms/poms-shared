@@ -21,7 +21,7 @@ public class EBUTest {
 
     @Test
     public void parse() throws IOException {
-        List<Cue> cuesFromStl = EBU.parse("bla", Duration.ZERO, getClass().getResourceAsStream("/VPWON_1272504.stl")).collect(Collectors.toList());
+        List<Cue> cuesFromStl = EBU.parse("bla", Duration.ZERO, (timeline) -> Duration.ZERO, getClass().getResourceAsStream("/VPWON_1272504.stl")).collect(Collectors.toList());
 
         List<Cue> cuesFromSrt = WEBVTTandSRT.parseSRT("bla", getClass().getResourceAsStream("/VPWON_1272504.srt")).collect(Collectors.toList());
 
