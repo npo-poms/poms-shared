@@ -254,7 +254,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     public Integer getCueCount() {
         if (cueCount == null) {
             try {
-                Iterator<Cue> cues = SubtitlesUtil.parse(this).iterator();
+                Iterator<Cue> cues = SubtitlesUtil.parse(this, false).iterator();
                 int result = 0;
                 while (cues.hasNext()) {
                     cues.next();

@@ -24,7 +24,7 @@ public class WEBVTTTest {
     @Test
     public void toWEBVTTCue() throws IOException {
         assertThat(WEBVTTandSRT.formatCue(
-            SubtitlesUtil.parse(getSubtitles()).findFirst().get(), new StringBuilder(), ".").toString()).isEqualTo("1\n" +
+            SubtitlesUtil.parse(getSubtitles(), false).findFirst().get(), new StringBuilder(), ".").toString()).isEqualTo("1\n" +
             "00:00:02.200 --> 00:00:04.150\n" +
             "888\n" +
             "\n" +
@@ -34,7 +34,7 @@ public class WEBVTTTest {
     @Test
     public void toWEBVTT() throws IOException {
         StringWriter writer = new StringWriter();
-        WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitles()).limit(3).collect(Collectors.toList()).iterator(), writer);
+        WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitles(), false).limit(3).collect(Collectors.toList()).iterator(), writer);
         assertThat(writer.toString()).isEqualTo(
             "WEBVTT\n" +
                 "\n" +

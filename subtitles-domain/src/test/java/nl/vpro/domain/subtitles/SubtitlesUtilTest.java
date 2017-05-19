@@ -20,7 +20,7 @@ public class SubtitlesUtilTest {
 
     @Test
     public void basic() throws IOException {
-        List<Cue> list = SubtitlesUtil.parse(getSubtitles()).collect(Collectors.toList());
+        List<Cue> list = SubtitlesUtil.parse(getSubtitles(), true).collect(Collectors.toList());
         assertThat(list).hasSize(403);
         assertThat(list.get(0).getContent()).isEqualTo("888");
         assertThat(list.get(199).getContent()).isEqualTo(
@@ -38,7 +38,7 @@ public class SubtitlesUtilTest {
     @Test
     public void toTT888() throws IOException {
         assertThat(TT888.format(SubtitlesUtil
-            .parse(getSubtitles())
+            .parse(getSubtitles(), true)
             .findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 00:02:20 00:04:15\n" +
             "888\n" +
             "\n");
@@ -59,7 +59,7 @@ public class SubtitlesUtilTest {
             .type(SubtitlesType.CAPTION)
             .build();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        SubtitlesUtil.toTT888(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);
+        SubtitlesUtil.toTT888(SubtitlesUtil.standaloneStream(subtitles, true).iterator(), System.out);
     }
 
 
