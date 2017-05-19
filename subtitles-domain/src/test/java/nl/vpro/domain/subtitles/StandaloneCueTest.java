@@ -1,6 +1,5 @@
 package nl.vpro.domain.subtitles;
 
-import java.time.Duration;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -15,7 +14,7 @@ public class StandaloneCueTest {
 
     @Test
     public void json() throws Exception {
-        StandaloneCue cue = new StandaloneCue(CueBuilder.forMid("MID_123").content("bla bla").sequence(0).build(), Locale.US, SubtitlesType.TRANSLATION, Duration.ZERO);
+        StandaloneCue cue = new StandaloneCue(CueBuilder.forMid("MID_123").content("bla bla").sequence(0).build(), Locale.US, SubtitlesType.TRANSLATION);
 
         Jackson2TestUtil.roundTripAndSimilar(cue, "{\n" +
             "  \"parent\" : \"MID_123\",\n" +
