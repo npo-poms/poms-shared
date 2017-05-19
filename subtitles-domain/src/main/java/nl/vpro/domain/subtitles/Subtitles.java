@@ -138,7 +138,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
             WEBVTTandSRT.formatWEBVTT(peeking, writer);
             subtitles.setMid(first.getParent());
             subtitles.setLanguage(first.getLanguage());
-            subtitles.setOffset(first.getOffset());
             subtitles.setType(first.getType());
             subtitles.setContent(new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString()));
         } catch(NoSuchElementException nse) {
@@ -178,7 +177,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         String content,
         SubtitlesType type) {
         this.mid = mid;
-        this.offset = offset == null ? Duration.ZERO : offset;
+        this.offset = offset;
         this.content = new SubtitlesContent(format, content);
         this.language = language;
         this.cueCount = null;

@@ -32,12 +32,14 @@ public class SubtitlesUtilTest {
 
     protected static Subtitles getSubtitles() throws IOException {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/PRID_VPRO_1140017.txt");
-        return SubtitlesUtil.tt888("VPRO_1140017", Duration.ofMillis(2 * 60 * 1000), DUTCH, example);
+        return SubtitlesUtil.tt888("VPRO_1140017", Duration.ofMinutes(2), DUTCH, example);
     }
 
     @Test
     public void toTT888() throws IOException {
-        assertThat(TT888.format(SubtitlesUtil.parse(getSubtitles()).findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 02:02:20 02:04:15\n" +
+        assertThat(TT888.format(SubtitlesUtil
+            .parse(getSubtitles())
+            .findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 00:02:20 00:04:15\n" +
             "888\n" +
             "\n");
 
@@ -57,7 +59,7 @@ public class SubtitlesUtilTest {
             .type(SubtitlesType.CAPTION)
             .build();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);
+        SubtitlesUtil.toTT888(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);
     }
 
 
