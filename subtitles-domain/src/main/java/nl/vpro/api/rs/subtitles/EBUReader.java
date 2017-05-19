@@ -1,6 +1,7 @@
 package nl.vpro.api.rs.subtitles;
 
 import java.io.InputStream;
+import java.time.Duration;
 import java.util.Iterator;
 
 import javax.ws.rs.Consumes;
@@ -23,6 +24,6 @@ public class EBUReader extends AbstractIteratorReader {
 
     @Override
     protected Iterator<Cue> read(InputStream entityStream) {
-        return EBU.parse(null, entityStream).iterator();
+        return EBU.parse(null, Duration.ZERO, entityStream).iterator();
     }
 }
