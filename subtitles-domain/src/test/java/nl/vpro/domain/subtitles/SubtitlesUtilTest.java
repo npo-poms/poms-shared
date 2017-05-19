@@ -59,7 +59,7 @@ public class SubtitlesUtilTest {
             .type(SubtitlesType.CAPTION)
             .build();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        SubtitlesUtil.toEBU(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);
+        SubtitlesUtil.toTT888(SubtitlesUtil.standaloneStream(subtitles).iterator(), System.out);
     }
 
 

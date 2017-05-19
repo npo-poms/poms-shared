@@ -57,6 +57,7 @@ public class TT888 {
     }
 
 
+
     public static Stream<Cue> parse(String parent, Duration offset, InputStream inputStream) {
         return parse(parent, offset, new InputStreamReader(inputStream, CHARSET));
     }
@@ -64,12 +65,13 @@ public class TT888 {
     static Stream<Cue> parse(final String parent, final Duration offsetParameter, Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
-        final Duration offset = offsetParameter == null ? Duration.ZERO : offsetParameter;
+
         Iterator<Cue> cues = new Iterator<Cue>() {
 
             boolean needsFindNext = true;
             String timeLine = null;
             StringBuilder content = new StringBuilder();
+            Duration offset = offsetParameter;
 
             long count = 0;
 
@@ -89,6 +91,9 @@ public class TT888 {
                 try {
                     String contentString = content.toString();
                     TimeLine parsedTimeLine = TimeLine.parse(timeLine);
+                    if (offset == null) {
+                        offset = guessOffset(parsedTimeLine);
+                    }
                     return createCue(parent, parsedTimeLine, offset, contentString);
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage(), e);
@@ -126,6 +131,16 @@ public class TT888 {
         };
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(cues, Spliterator.ORDERED), false);
 
+    }
+
+    public static Duration guessOffset(TimeLine timeline) {
+        if (timeline.start.compareTo(Duration.ofMinutes(5)) < 0) {
+            log.debug("This was probably not a live broadcast");
+            return Duration.ofMinutes(2);
+        } else {
+            log.debug("This was probably a live broadcast. The first cues indicates a time of the day");
+            return timeline.start.plus(Duration.ofSeconds(3));
+        }
     }
 
     static final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
