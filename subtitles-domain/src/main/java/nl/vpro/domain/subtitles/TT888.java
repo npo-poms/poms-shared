@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -56,18 +57,23 @@ public class TT888 {
     }
 
 
-    public static Stream<Cue> parse(String parent, InputStream inputStream) {
-        return parse(parent, new InputStreamReader(inputStream, CHARSET));
+
+    public static Stream<Cue> parse(String parent, Duration offset, Function<TimeLine, Duration> offsetGuesser, InputStream inputStream) {
+        return parse(parent, offset, offsetGuesser, new InputStreamReader(inputStream, CHARSET));
     }
 
-    static Stream<Cue> parse(final String parent, Reader reader) {
+    static Stream<Cue> parse(final String parent, final Duration offsetParameter, Function<TimeLine, Duration> offsetGuesser, Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
+
         Iterator<Cue> cues = new Iterator<Cue>() {
 
             boolean needsFindNext = true;
             String timeLine = null;
             StringBuilder content = new StringBuilder();
+            Duration offset = offsetParameter;
+
+            long count = 0;
 
             @Override
             public boolean hasNext() {
@@ -83,10 +89,17 @@ public class TT888 {
                 }
                 needsFindNext = true;
                 try {
-                    return parseCue(parent, timeLine, content.toString());
+                    String contentString = content.toString();
+                    TimeLine parsedTimeLine = parseTimeline(timeLine);
+                    if (offset == null) {
+                        offset = offsetGuesser.apply(parsedTimeLine);
+                    }
+                    return createCue(parent, parsedTimeLine, offset, contentString);
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage(), e);
                     return null;
+                } finally {
+                    count++;
                 }
 
             }
@@ -120,25 +133,35 @@ public class TT888 {
 
     }
 
+
     static final DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss:SSS");
 
     static {
         dateFormat.setTimeZone(TimeZone.getTimeZone("UT"));
     }
 
-    static Cue parseCue(String parent, String timeLine, String content) {
+    static Cue createCue(String parent, TimeLine timeLine, Duration offset, String content) {
+        return new Cue(
+            parent,
+            timeLine.sequence,
+            timeLine.start.minus(offset),
+            timeLine.end.minus(offset),
+            content
+        );
+        }
+
+    public static TimeLine parseTimeline(String timeLine) {
         String[] split = timeLine.split("\\s+");
         try {
-            return new Cue(
-                parent,
+            return new TimeLine(
                 Integer.parseInt(split[0]),
                 Duration.ofMillis(dateFormat.parse(split[1] + "0").getTime()),
-                Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime()),
-                content
+                Duration.ofMillis(dateFormat.parse(split[2] + "0").getTime())
             );
         } catch (NumberFormatException | ParseException nfe) {
-            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Expected content: " + content + " Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
+            throw new IllegalArgumentException("Could not parse " + timeLine + " (" + Arrays.asList(split) + ").  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
         }
+
 
     }
 
