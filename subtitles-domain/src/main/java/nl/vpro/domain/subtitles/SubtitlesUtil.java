@@ -84,20 +84,37 @@ public class SubtitlesUtil {
                 .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType()))
                 .iterator());
     }
+    public static void stream(Iterator<? extends Cue> cueIterator, SubtitlesFormat format, OutputStream output) throws IOException {
+        switch(format) {
+            case TT888:
+                toTT888(cueIterator, output);
+                return;
+            case WEBVTT:
+                toVTT(cueIterator, output);
+                return;
+            case SRT:
+                toSRT(cueIterator, output);
+                return;
+            default:
+                throw new UnsupportedOperationException();
+        }
+    }
 
-    public static void toEBU(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
-        TT888.format(cueIterator, entityStream);
+
+    public static void toTT888(Iterator<? extends Cue> cueIterator, OutputStream outputStream) throws IOException {
+        TT888.format(cueIterator, outputStream);
 
     }
 
-    public static void toVTT(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
-        WEBVTTandSRT.formatWEBVTT(cueIterator, entityStream);
+    public static void toVTT(Iterator<? extends Cue> cueIterator, OutputStream outputStream) throws IOException {
+        WEBVTTandSRT.formatWEBVTT(cueIterator, outputStream);
     }
 
-    public static void toSRT(Iterator<? extends Cue> cueIterator, OutputStream entityStream) throws IOException {
-        WEBVTTandSRT.formatSRT(cueIterator, entityStream);
+    public static void toSRT(Iterator<? extends Cue> cueIterator, OutputStream outputStream) throws IOException {
+        WEBVTTandSRT.formatSRT(cueIterator, outputStream);
 
     }
+
 
 
 }
