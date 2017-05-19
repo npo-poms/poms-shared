@@ -1,6 +1,8 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 import java.time.Duration;
 
@@ -9,6 +11,8 @@ import java.time.Duration;
  * @since 5.3
  */
 @Getter
+@EqualsAndHashCode
+@ToString
 public class TimeLine {
 
     final Integer sequence;
