@@ -41,12 +41,13 @@ public class SubtitlesUtil {
 
 
     public static Stream<Cue> parse(Subtitles subtitles, boolean guessOffset) {
-        return parse(subtitles.getContent(), subtitles.getMid(), subtitles.getOffset(), guessOffset);
-    }
 
-    public static Stream<Cue> parse(SubtitlesContent content, String mid, Duration offset, boolean guessOffset) {
+        SubtitlesContent content = subtitles.getContent();
+        String mid = subtitles.getMid();
+        Duration offset = subtitles.getOffset();
 
-        Function<TimeLine, Duration> offsetGuesser = guessOffset ? DefaultOffsetGuesser.INSTANCE : timeLine -> Duration.ZERO;
+
+        Function<TimeLine, Duration> offsetGuesser = guessOffset ? new DefaultOffsetGuesser(subtitles.getCreationDate()) : timeLine -> Duration.ZERO;
         switch (content.getFormat()) {
             case TT888:
                 return TT888.parse(mid, offset, offsetGuesser, new StringReader(content.getValue()));
