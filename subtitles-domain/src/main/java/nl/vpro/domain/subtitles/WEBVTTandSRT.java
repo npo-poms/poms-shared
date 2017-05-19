@@ -160,13 +160,17 @@ public class WEBVTTandSRT {
 
     static String formatDuration(Duration duration, String separator) {
         Long millis = duration.toMillis();
+        boolean negative = millis < 0L;
+        if (negative) {
+            millis = -1 * millis;
+        }
         Long hours = millis / 3600000;
         millis -= hours * 3600000;
         Long minutes = millis / 60000;
         millis -= minutes * 60000;
         Long seconds = millis / 1000;
         millis -= seconds * 1000;
-        return String.format("%02d:%02d:%02d%s%03d", hours, minutes, seconds, separator, millis);
+        return String.format("%s%02d:%02d:%02d%s%03d", negative ? "-" : "",  hours, minutes, seconds, separator, millis);
     }
 
     static Duration parseDuration(String duration, String decimalSeparator) {
