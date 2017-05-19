@@ -23,11 +23,14 @@ import java.util.stream.StreamSupport;
 public class EBU {
 
 
-    public static Stream<Cue> parse(String parent, InputStream is) {
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(parseToIterator(parent, is), Spliterator.ORDERED), false);
+    public static Stream<Cue> parse(String parent, Duration offset, InputStream is) {
+        if (offset == null) {
+            offset = Duration.ZERO;
+        }
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(parseToIterator(parent, offset, is), Spliterator.ORDERED), false);
     }
 
-    protected static Iterator<Cue> parseToIterator(final String parent, final InputStream is) {
+    protected static Iterator<Cue> parseToIterator(final String parent, final Duration offset,  final InputStream is) {
 
 
         return new Iterator<Cue>() {
@@ -199,8 +202,8 @@ public class EBU {
                                     //if it is just additional text for the caption
                                     parseTextForSTL(currentContent, textField, justification);
                                 else {
-                                    toFill.start = parseTime(startTime + "/" + fps);
-                                    toFill.end = parseTime(endTime + "/" + fps);
+                                    toFill.start = parseTime(startTime + "/" + fps).minus(offset);
+                                    toFill.end = parseTime(endTime + "/" + fps).minus(offset);
                                     parseTextForSTL(currentContent, textField, justification);
                                 }
                             }
