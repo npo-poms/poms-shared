@@ -57,19 +57,20 @@ public class TT888 {
     }
 
 
-    public static Stream<Cue> parse(String parent, InputStream inputStream) {
-        return parse(parent, new InputStreamReader(inputStream, CHARSET));
+    public static Stream<Cue> parse(String parent, Duration offset, InputStream inputStream) {
+        return parse(parent, offset, new InputStreamReader(inputStream, CHARSET));
     }
 
-    static Stream<Cue> parse(final String parent, Reader reader) {
+    static Stream<Cue> parse(final String parent, final Duration offsetParameter, Reader reader) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
+        final Duration offset = offsetParameter == null ? Duration.ZERO : offsetParameter;
         Iterator<Cue> cues = new Iterator<Cue>() {
 
             boolean needsFindNext = true;
             String timeLine = null;
             StringBuilder content = new StringBuilder();
-            Duration offset = Duration.ZERO;
+
             long count = 0;
 
             @Override
@@ -88,9 +89,6 @@ public class TT888 {
                 try {
                     String contentString = content.toString();
                     TimeLine parsedTimeLine = TimeLine.parse(timeLine);
-                    if (count == 0 && contentString.equals("888")) {
-                        offset = parsedTimeLine.start;
-                    }
                     return createCue(parent, parsedTimeLine, offset, contentString);
                 } catch (IllegalArgumentException e) {
                     log.error(e.getMessage(), e);
