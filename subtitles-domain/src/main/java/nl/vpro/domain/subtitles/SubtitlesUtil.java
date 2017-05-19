@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
@@ -39,49 +40,50 @@ public class SubtitlesUtil {
 
 
 
-    public static Stream<Cue> parse(Subtitles subtitles) {
-        return parse(subtitles.getContent(), subtitles.getMid(), subtitles.getOffset());
+    public static Stream<Cue> parse(Subtitles subtitles, boolean guessOffset) {
+        return parse(subtitles.getContent(), subtitles.getMid(), subtitles.getOffset(), guessOffset);
     }
 
-    public static Stream<Cue> parse(SubtitlesContent content, String mid, Duration offset) {
+    public static Stream<Cue> parse(SubtitlesContent content, String mid, Duration offset, boolean guessOffset) {
 
+        Function<TimeLine, Duration> offsetGuesser = guessOffset ? DefaultOffsetGuesser.INSTANCE : timeLine -> Duration.ZERO;
         switch (content.getFormat()) {
             case TT888:
-                return TT888.parse(mid, offset, DefaultOffsetGuesser.INSTANCE, new StringReader(content.getValue()));
+                return TT888.parse(mid, offset, offsetGuesser, new StringReader(content.getValue()));
             case WEBVTT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ".");
             case SRT:
                 return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ",");
             case EBU:
-                return EBU.parse(mid, offset, DefaultOffsetGuesser.INSTANCE, new ByteArrayInputStream(Base64.getDecoder().decode(content.getValue())));
+                return EBU.parse(mid, offset, offsetGuesser, new ByteArrayInputStream(Base64.getDecoder().decode(content.getValue())));
             default:
                 throw new IllegalArgumentException("Not supported format " + content.getFormat());
         }
 
     }
 
-    public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles) {
+    public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles, boolean guessOffset) {
         if (subtitles == null) {
             return Stream.empty();
         }
-        return parse(subtitles)
+        return parse(subtitles, guessOffset)
             .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType())
             );
     }
 
 
 
-    public static CountedIterator<Cue> iterator(Subtitles subtitles){
+    public static CountedIterator<Cue> iterator(Subtitles subtitles, boolean guessOffset){
         return new BasicWrappedIterator<>(
             (long) subtitles.getCueCount(),
-            parse(subtitles)
+            parse(subtitles, guessOffset)
                 .iterator());
     }
 
-    public static CountedIterator<StandaloneCue> standaloneIterator(Subtitles subtitles) {
+    public static CountedIterator<StandaloneCue> standaloneIterator(Subtitles subtitles, boolean guessOffset) {
         return new BasicWrappedIterator<>(
             (long) subtitles.getCueCount(),
-            parse(subtitles)
+            parse(subtitles, guessOffset)
                 .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType()))
                 .iterator());
     }
