@@ -25,22 +25,32 @@ import static nl.vpro.domain.api.Constants.*;
 @Produces({VTT, TT888, SRT})// APPLICATION_JSON, APPLICATION_XML})
 public interface SubtitlesRestService {
 
+    String MID = "mid";
+    String LANGUAGE = "language";
+    String TYPE = "type";
+
     String TAG = "subtitles";
     String PATH = "/" + TAG;
 
     @GET
     @Path("/{mid}/{language}/{type}")
     Subtitles get(
-        @PathParam("mid") String mid,
-        @PathParam("language") Locale locale,
-        @PathParam("type") SubtitlesType type
+        @PathParam(MID) String mid,
+        @PathParam(LANGUAGE) Locale locale,
+        @PathParam(TYPE) SubtitlesType type
     );
 
     @GET
     @Path("/{mid}/{language}")
     Subtitles get(
-        @PathParam("mid") String mid,
-        @PathParam("language") Locale locale);
+        @PathParam(MID) String mid,
+        @PathParam(LANGUAGE) Locale locale);
+
+
+    @GET
+    @Path("/{mid}")
+    Subtitles get(
+        @PathParam(MID) String mid);
 
     @POST
     @Path("/")
