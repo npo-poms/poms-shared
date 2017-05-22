@@ -175,10 +175,23 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         Locale language,
         SubtitlesFormat format,
         String content,
+        Iterator<Cue> cues,
         SubtitlesType type) {
         this.mid = mid;
         this.offset = offset;
-        this.content = new SubtitlesContent(format, content);
+        if (content == null && format == null && cues != null) {
+            StringWriter writer = new StringWriter();
+            try {
+                WEBVTTandSRT.formatWEBVTT(cues, writer);
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+            this.content = new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString());
+        } else if (content != null && format != null && cues == null) {
+            this.content = new SubtitlesContent(format, content);
+        } else {
+            throw new IllegalArgumentException("Should either give iterator of cues, or content and format");
+        }
         this.language = language;
         this.cueCount = null;
         this.type = type == null ? SubtitlesType.CAPTION : type;
