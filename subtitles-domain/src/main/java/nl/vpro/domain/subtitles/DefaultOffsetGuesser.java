@@ -18,9 +18,9 @@ public class DefaultOffsetGuesser implements Function<TimeLine, Duration> {
 
     static final Instant AFTER_THIS_DATE_ALSO_NON_LIVE_BROADCASTS_HAVE_NULL_OFFSET = LocalDate.of(2017, 4, 1).atStartOfDay().atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
 
-    static final Duration FIRST_CUE_OF_LIVE = Duration.ofSeconds(3);
+    static final Duration FIRST_CUE_OF_LIVE = Duration.ofSeconds(3); // The assumption is that the first cue of a live broadcast always is at 3 seconds
 
-    static final Duration OFFSET_OF_RECORDED = Duration.ofMinutes(2);
+    static final Duration OFFSET_OF_RECORDED = Duration.ofMinutes(2); // For recorded broadcasts, the subtitles always have this offset
 
     static final Duration FIRST_CUE_RECORDED_MIN = Duration.ofMinutes(1);
     static final Duration FIRST_CUE_RECORDED_MAX= Duration.ofMinutes(5);
