@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.google.common.collect.Iterators;
@@ -26,8 +27,12 @@ public class Util {
         return result;
 
     }
-
-     static void headers(SubtitlesId id, MultivaluedMap<String, Object> httpHeaders, String extension) {
+    public static void headers(SubtitlesId id, String extension, HttpServletResponse response) {
+        for (Map.Entry<String, String> e : Util.headers(id, extension).entrySet()) {
+            response.addHeader(e.getKey(), e.getValue());
+        }
+    }
+    static void headers(SubtitlesId id, MultivaluedMap<String, Object> httpHeaders, String extension) {
         for(Map.Entry<String, String> e : headers(id, extension).entrySet()) {
             httpHeaders.putSingle(e.getKey(), e.getValue());
         }
