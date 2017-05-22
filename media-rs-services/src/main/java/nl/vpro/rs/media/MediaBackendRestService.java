@@ -316,9 +316,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
 
-
     @POST
-    @PUT
     @Path("subtitles/{mid}/{language}/{type}")
     @Consumes({VTT, EBU, TT888, SRT})
     Response setSubtitles(
