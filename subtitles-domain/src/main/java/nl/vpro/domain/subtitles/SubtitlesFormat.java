@@ -40,9 +40,6 @@ public enum SubtitlesFormat {
     }
 
     public static SubtitlesFormat ofExtension(String extension) {
-        if ("".equals(extension)) {
-            return TT888;
-        }
         for (SubtitlesFormat sf : values()) {
             if (sf.extension.equalsIgnoreCase(extension)) {
                 return sf;
