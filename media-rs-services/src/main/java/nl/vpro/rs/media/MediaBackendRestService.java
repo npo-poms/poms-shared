@@ -318,6 +318,7 @@ public interface MediaBackendRestService {
 
 
     @POST
+    @PUT
     @Path("subtitles/{mid}/{language}/{type}")
     @Consumes({VTT, EBU, TT888, SRT})
     Response setSubtitles(
@@ -328,6 +329,17 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
         Iterator<Cue> cues);
+
+    @POST
+    @Path("subtitles/{mid}/{language}/{type}/{offset}")
+    Response setSubtitlesOffset(
+        @PathParam(MID) String mid,
+        @PathParam(LANGUAGE) Locale language,
+        @PathParam(TYPE) SubtitlesType type,
+        @QueryParam("offset") @DefaultValue("0") Duration offset,
+        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(ERRORS) String errors);
+
 
     @DELETE
     @Path("subtitles/{mid}/{language}/{type}")
