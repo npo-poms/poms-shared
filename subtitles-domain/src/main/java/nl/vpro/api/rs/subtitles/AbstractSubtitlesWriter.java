@@ -22,6 +22,8 @@ import nl.vpro.domain.subtitles.SubtitlesUtil;
  */
 abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
 
+    public static final String OFFSET_HEADER = "X-subtitles-offset";
+
     private final MediaType mediaType;
     private final String extension;
 
@@ -45,6 +47,7 @@ abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
     @Override
     public void writeTo(Subtitles subtitles, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
         Util.headers(subtitles.getId(), httpHeaders, extension);
+        httpHeaders.putSingle(OFFSET_HEADER, subtitles.getOffset() == null ? "GUESSED" : subtitles.getOffset().toString());
         stream(subtitles, entityStream);
     }
 
