@@ -3,6 +3,7 @@ package nl.vpro.domain.subtitles;
 import lombok.Getter;
 
 import java.nio.charset.Charset;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
@@ -39,15 +40,12 @@ public enum SubtitlesFormat {
         this.charset = charset;
     }
 
-    public static SubtitlesFormat ofExtension(String extension) {
-        if ("".equals(extension)) {
-            return TT888;
-        }
+    public static Optional<SubtitlesFormat> ofExtension(String extension) {
         for (SubtitlesFormat sf : values()) {
             if (sf.extension.equalsIgnoreCase(extension)) {
-                return sf;
+                return Optional.of(sf);
             }
         }
-        return null;
+        return Optional.empty();
     }
 }
