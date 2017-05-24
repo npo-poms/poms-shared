@@ -24,7 +24,7 @@ import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
  * @since 3.1
  */
 @XmlType(name = "dateRangeIntervalType", propOrder = {
-    "interval"})
+})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DateRangeInterval extends AbstractTemporalRangeInterval<Date> {
 

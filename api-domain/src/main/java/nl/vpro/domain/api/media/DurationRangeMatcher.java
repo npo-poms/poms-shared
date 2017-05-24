@@ -12,8 +12,15 @@ import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.api.RangeMatcher;
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.xml.bind.DefaultDurationXmlAdapter;
 
 /**
  * @author Michiel Meeuwissen
@@ -25,10 +32,19 @@ public class DurationRangeMatcher extends RangeMatcher<Duration> implements Pred
     @XmlElement
     @Getter
     @Setter
+    @XmlJavaTypeAdapter(DefaultDurationXmlAdapter.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     private Duration begin;
+
     @XmlElement
     @Getter
     @Setter
+    @XmlJavaTypeAdapter(DefaultDurationXmlAdapter.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     private Duration end;
 
 

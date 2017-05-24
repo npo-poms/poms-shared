@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  * @since 5.3
  */
 @XmlType(name = "durationRangeIntervalType", propOrder = {
-    "interval"})
+})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DurationRangeInterval extends AbstractTemporalRangeInterval<Duration> {
 

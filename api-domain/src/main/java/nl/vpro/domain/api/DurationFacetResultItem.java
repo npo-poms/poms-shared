@@ -1,17 +1,18 @@
 package nl.vpro.domain.api;
 
-import java.io.IOException;
 import java.time.Duration;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.xml.bind.DefaultDurationXmlAdapter;
 
 /**
  * @author Michiel Meeuwissen
@@ -29,7 +30,9 @@ public class DurationFacetResultItem extends RangeFacetResultItem<Duration> {
     }
 
     @Override
-    @JsonSerialize(using = DurationFacetResultItem.Serializer.class)
+    @XmlJavaTypeAdapter(DefaultDurationXmlAdapter.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public Duration getBegin() {
         return begin;
@@ -40,7 +43,9 @@ public class DurationFacetResultItem extends RangeFacetResultItem<Duration> {
     }
 
     @Override
-    @JsonSerialize(using = DurationFacetResultItem.Serializer.class)
+    @XmlJavaTypeAdapter(DefaultDurationXmlAdapter.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public Duration getEnd() {
         return end;
@@ -51,16 +56,6 @@ public class DurationFacetResultItem extends RangeFacetResultItem<Duration> {
     }
 
 
-
-    // Work around
-    // https://jira.codehaus.org/browse/JACKSON-920
-    public static class Serializer extends JsonSerializer<Duration> {
-        @Override
-        public void serialize(Duration value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-            jgen.writeNumber(value.toMillis());
-
-        }
-    }
 
 
 
