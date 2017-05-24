@@ -66,6 +66,12 @@ public class DateRangeMatcher extends RangeMatcher<Date> implements Predicate<Da
     }
 
     @Override
+    protected boolean defaultIncludeEnd() {
+        return true;
+
+    }
+
+    @Override
     public boolean test(Date date) {
         return super.testComparable(date);
 
