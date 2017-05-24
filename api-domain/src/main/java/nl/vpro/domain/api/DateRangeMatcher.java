@@ -67,7 +67,7 @@ public class DateRangeMatcher extends RangeMatcher<Date> implements Predicate<Da
 
     @Override
     protected boolean defaultIncludeEnd() {
-        return true;
+        return false;
 
     }
 
