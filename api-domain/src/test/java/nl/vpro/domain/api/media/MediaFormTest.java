@@ -17,6 +17,7 @@ import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.StandardMatchType;
+import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -74,7 +75,7 @@ public class MediaFormTest {
     public void testGetFacets() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
-            new ScheduleEventSearch("NED3",
+            new ScheduleEventSearch(Channel.NED3,
                 DateUtils.toInstant(simpleDateFormat.parse("2015-01-26")),
                 DateUtils.toInstant(simpleDateFormat.parse("2015-01-27")))).build();
         MediaForm out = JAXBTestUtil.roundTripAndSimilar(in, "<api:mediaForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
