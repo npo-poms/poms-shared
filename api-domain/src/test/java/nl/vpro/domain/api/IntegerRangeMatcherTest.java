@@ -36,6 +36,6 @@ public class IntegerRangeMatcherTest extends RangeMatcherTest<Integer, RangeMatc
     @Override
     public void testHashCode() {
         IntegerRangeMatcher instance = getInstance();
-        assertEquals(1188791, instance.hashCode());
+        assertEquals(34, instance.hashCode());
     }
 }
