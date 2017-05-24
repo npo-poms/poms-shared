@@ -5,7 +5,10 @@
 package nl.vpro.domain.api;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
@@ -13,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.api.jackson.DateRangeFacetsToJson;
+import nl.vpro.domain.api.jackson.DurationRangeFacetsToJson;
 
 /**
  * @author Roelof Jan Koekoek
@@ -22,8 +25,8 @@ import nl.vpro.domain.api.jackson.DateRangeFacetsToJson;
 @XmlType(name = "durationRangeFacetsType", propOrder = {
     "ranges"})
 @XmlAccessorType(XmlAccessType.FIELD)
-@JsonSerialize(using = DateRangeFacetsToJson.Serializer.class)
-@JsonDeserialize(using = DateRangeFacetsToJson.Deserializer.class)
+@JsonSerialize(using = DurationRangeFacetsToJson.Serializer.class)
+@JsonDeserialize(using = DurationRangeFacetsToJson.Deserializer.class)
 public class DurationRangeFacets<T extends AbstractSearch> extends AbstractFacet<T> implements Facet<T> {
 
     @XmlElements({
