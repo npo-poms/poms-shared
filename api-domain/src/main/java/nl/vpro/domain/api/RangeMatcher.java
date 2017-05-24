@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.*;
 public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatcher {
 
     @XmlAttribute
+    // TODO it is a bit odd that this attribute is not on the _end_ element
     private Boolean inclusiveEnd = null;
 
     @XmlTransient// We don't expose this..
@@ -53,8 +54,9 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
     public abstract void setEnd(T end);
 
     public boolean includeEnd() {
-        return inclusiveEnd != null ? inclusiveEnd : false;
+        return inclusiveEnd != null ? inclusiveEnd : defaultIncludeEnd();
     }
+
 
     public void setInclusiveEnd(Boolean inclusiveEnd) {
         this.inclusiveEnd = inclusiveEnd;
@@ -68,6 +70,7 @@ public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatc
         this.inclusiveBegin = inclusiveBegin;
     }
 
+    protected abstract boolean defaultIncludeEnd();
 
     @Override
     public String toString() {

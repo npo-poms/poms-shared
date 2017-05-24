@@ -67,6 +67,12 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
     public ScheduleEventSearch() {
     }
 
+    @Override
+    protected boolean defaultIncludeEnd() {
+        return true;
+
+    }
+
 
     public ScheduleEventSearch(Channel channel, Instant begin, Instant end) {
         super(begin, end, null);
@@ -79,7 +85,6 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
         this.rerun = rerun;
     }
 
-    @lombok.Builder
     public ScheduleEventSearch(Channel channel, String net, Instant begin, Instant end, Boolean rerun) {
         super(begin, end, null);
         this.channel = channel;
@@ -87,6 +92,13 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
         this.rerun = rerun;
     }
 
+    @lombok.Builder(builderClassName = "Builder")
+    private ScheduleEventSearch(Channel channel, String net, Instant begin, Instant end, Boolean rerun, Boolean inclusiveEnd) {
+        super(begin, end, inclusiveEnd);
+        this.channel = channel;
+        this.net = net;
+        this.rerun = rerun;
+    }
 
 
     public boolean hasSearches() {

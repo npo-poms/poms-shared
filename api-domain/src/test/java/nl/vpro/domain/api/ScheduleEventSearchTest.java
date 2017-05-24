@@ -31,7 +31,7 @@ public class ScheduleEventSearchTest {
         Channel channel = Channel.NED3;
         ScheduleEventSearch in = new ScheduleEventSearch(channel, begin, null);
         ScheduleEventSearch out = JAXBTestUtil.roundTripAndSimilarAndEquals(in,
-            "<local:scheduleEventSearch inclusiveEnd=\"true\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+            "<local:scheduleEventSearch xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
                 "    <api:begin>1970-01-01T01:00:00+01:00</api:begin>\n" +
                 "    <api:channel>NED3</api:channel>\n" +
                 "</local:scheduleEventSearch>");
@@ -43,7 +43,11 @@ public class ScheduleEventSearchTest {
     public void testGetEndXml() throws Exception {
         Instant end = Instant.EPOCH;
         Channel channel = Channel.NED3;
-        ScheduleEventSearch in = new ScheduleEventSearch(channel, null, end);
+        ScheduleEventSearch in = ScheduleEventSearch.builder()
+            .channel(channel)
+            .end(end)
+            .inclusiveEnd(true)
+            .build();
         ScheduleEventSearch out = JAXBTestUtil.roundTripAndSimilarAndEquals(in,
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<local:scheduleEventSearch inclusiveEnd=\"true\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
@@ -54,15 +58,13 @@ public class ScheduleEventSearchTest {
         assertThat(out.getChannel()).isEqualTo(channel);
     }
 
-    private ScheduleEventSearch getInstance() {
-        return new ScheduleEventSearch(Channel.NED3, Instant.ofEpochMilli(100), Instant.ofEpochMilli(150));
-    }
 
 
     @Test
     public void testApply() {
         ScheduleEventSearch instance = getInstance();
-        ScheduleEvent event = new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), Duration.ofMillis(10));
+        ScheduleEvent event = new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), Duration.ofMillis(100));
+
         assertTrue(instance.test(event));
         event.setStartInstant(Instant.ofEpochMilli(150));
         assertTrue(instance.test(event));
@@ -71,4 +73,13 @@ public class ScheduleEventSearchTest {
         event.setStartInstant(Instant.ofEpochMilli(-1));
         assertFalse(instance.test(event));
     }
+
+    private ScheduleEventSearch getInstance() {
+        return ScheduleEventSearch.builder().channel(Channel.NED3)
+            .begin(Instant.ofEpochMilli(100))
+            .end(Instant.ofEpochMilli(150))
+            .build()
+            ;
+    }
+
 }
