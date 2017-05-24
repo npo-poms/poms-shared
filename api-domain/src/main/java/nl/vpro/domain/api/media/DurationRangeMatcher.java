@@ -39,6 +39,11 @@ public class DurationRangeMatcher extends RangeMatcher<Duration> implements Pred
         super(begin, end, inclusiveEnd);
     }
 
+    public DurationRangeMatcher(Duration begin, Duration end) {
+        super(begin, end, null);
+    }
+
+
     @Override
     protected boolean defaultIncludeEnd() {
         return false;

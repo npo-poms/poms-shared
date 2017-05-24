@@ -236,10 +236,10 @@ public class MediaSearchTest {
 
     @Test
     public void testApplyIncludeDurations() throws Exception{
-        DateRangeMatcher range = new DateRangeMatcher(new Date(0), new Date(10));
+        DurationRangeMatcher range = new DurationRangeMatcher(Duration.ofMillis(0), Duration.ofMillis(10));
 
         MediaSearch search = new MediaSearch();
-        search.setDurations(new DateRangeMatcherList(range));
+        search.setDurations(new DurationRangeMatcherList(range));
 
         {
             MediaObject object = MediaTestDataBuilder.program().duration(Duration.ofMillis(5)).build();
@@ -254,11 +254,11 @@ public class MediaSearchTest {
 
     @Test
     public void testApplyExcludeDurations() throws Exception{
-        DateRangeMatcher range = new DateRangeMatcher(new Date(0), new Date(10));
+        DurationRangeMatcher range = new DurationRangeMatcher(Duration.ofMillis(0), Duration.ofMillis(10));
         range.setMatch(Match.NOT);
 
         MediaSearch search = new MediaSearch();
-        search.setDurations(new DateRangeMatcherList(range));
+        search.setDurations(new DurationRangeMatcherList(range));
 
         {
             MediaObject object = MediaTestDataBuilder.program().duration(Duration.ofMillis(5)).build();
