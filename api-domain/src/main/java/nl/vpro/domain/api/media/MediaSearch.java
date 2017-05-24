@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.jackson.media.ScheduleEventSearchListJson;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.AuthorizedDuration;
 import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.Title;
@@ -85,7 +86,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Valid
     @Getter
     @Setter
-    private DateRangeMatcherList durations;
+    private DurationRangeMatcherList durations;
 
     @Valid
     @Getter
@@ -229,7 +230,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected boolean applyDurations(MediaObject input) {
-        return durations == null || durations.test(input.getDurationAsDate());
+        return durations == null || durations.test(AuthorizedDuration.get(input.getDuration()));
     }
 
     protected boolean applyDescendantOf(MediaObject input) {
