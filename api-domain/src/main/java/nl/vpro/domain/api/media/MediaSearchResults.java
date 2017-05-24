@@ -1,11 +1,12 @@
 package nl.vpro.domain.api.media;
 
+import java.util.List;
+
 import nl.vpro.api.util.SearchResults;
 import nl.vpro.domain.api.DateFacetResultItem;
+import nl.vpro.domain.api.DurationFacetResultItem;
 import nl.vpro.domain.api.MultipleFacetsResult;
 import nl.vpro.domain.api.TermFacetResultItem;
-
-import java.util.List;
 
 /**
  * @author Michiel Meeuwissen
@@ -36,9 +37,9 @@ public class MediaSearchResults {
             setSelected(search.getRelations(), form.getFacets().getRelations(), facetResults.getRelations(), selected.getRelations(search));
         }
 
-        SearchResults.setSelected(search.getSortDates(), form.getFacets().getSortDates(), facetResults.getSortDates(), selected.getSortDates(search), DateFacetResultItem::new, false);
+        SearchResults.setSelected(search.getSortDates(), form.getFacets().getSortDates(), facetResults.getSortDates(), selected.getSortDates(search), DateFacetResultItem::new);
 
-        SearchResults.setSelected(search.getDurations(), form.getFacets().getDurations(), facetResults.getDurations(), selected.getDurations(search), DateFacetResultItem::new, true);
+        SearchResults.setSelected(search.getDurations(), form.getFacets().getDurations(), facetResults.getDurations(), selected.getDurations(search), DurationFacetResultItem::new);
 
 
     }

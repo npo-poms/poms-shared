@@ -193,7 +193,7 @@ public class SearchResults {
         }
     }
 
-    public static void setSelected(DurationRangeMatcherList searches, DurationRangeFacets<?> dateRangeFacets, List<DurationFacetResultItem> facetResultItems, List<DurationFacetResultItem> selected, Callable<DurationFacetResultItem> creator, boolean asDuration) {
+    public static void setSelected(DurationRangeMatcherList searches, DurationRangeFacets<?> dateRangeFacets, List<DurationFacetResultItem> facetResultItems, List<DurationFacetResultItem> selected, Callable<DurationFacetResultItem> creator) {
 
         if (facetResultItems != null && searches != null) {
             for (DurationFacetResultItem facetResultItem : facetResultItems) {
@@ -228,23 +228,11 @@ public class SearchResults {
                             newItem.setSelected(true);
                             if (dateRangeFacets != null && dateRangeFacets.getRanges() != null) {
                                 for (RangeFacet<Duration> range : dateRangeFacets.getRanges()) {
-                                    final DateRangeFacetItem dateRangeFacetItem;
-                                    if (range instanceof DateRangePreset) {
-                                        dateRangeFacetItem = ((DateRangePreset) range).asDateRangeFacetItem();
-                                    } else if (range instanceof DateRangeFacetItem) {
-                                        dateRangeFacetItem = (DateRangeFacetItem) range;
-                                    } else {
-                                        DurationRangeInterval dateRangeInterval = (DurationRangeInterval) range;
-                                        if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
-                                            newItem.setValue(dateRangeInterval.parsed().print(Instant.ofEpochMilli(item.getBegin().toMillis()), true));
-                                            selected.add(newItem);
-                                        }
-                                        continue;
-                                    }
-                                    if (dateRangeFacetItem.getBegin().equals(item.getBegin()) && dateRangeFacetItem.getEnd().equals(item.getEnd())) {
-                                        newItem.setValue(dateRangeFacetItem.getName());
+                                    final DurationRangeFacetItem dateRangeFacetItem;
+                                    DurationRangeInterval dateRangeInterval = (DurationRangeInterval) range;
+                                    if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
+                                        newItem.setValue(dateRangeInterval.parsed().print(Instant.ofEpochMilli(item.getBegin().toMillis()), true));
                                         selected.add(newItem);
-                                        break;
                                     }
                                 }
                             } else {

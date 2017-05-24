@@ -1,19 +1,21 @@
 package nl.vpro.api.util;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.xml.bind.JAXB;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.*;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.MediaClassificationService;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.jackson2.Jackson2Mapper;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import javax.xml.bind.JAXB;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -63,7 +65,7 @@ public class SearchResultsTest {
 
         List<DateFacetResultItem> selected = new ArrayList<>();
 
-        SearchResults.setSelected(searches, new DateRangeFacets(), facetResultItems, selected, DateFacetResultItem::new, true);
+        SearchResults.setSelected(searches, new DateRangeFacets(), facetResultItems, selected, DateFacetResultItem::new);
 
         assertThat(facetResultItems).hasSize(2);
         assertThat(facetResultItems.get(0).isSelected()).isTrue();
