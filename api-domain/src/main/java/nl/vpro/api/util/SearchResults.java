@@ -4,15 +4,17 @@
  */
 package nl.vpro.api.util;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.time.Duration;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import nl.vpro.domain.api.*;
+import nl.vpro.domain.api.media.DurationRangeMatcher;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.util.DateUtils;
@@ -21,10 +23,8 @@ import nl.vpro.util.DateUtils;
  * @author Roelof Jan Koekoek
  * @since 2.3
  */
+@Slf4j
 public class SearchResults {
-
-    private static final Logger LOG = LoggerFactory.getLogger(SearchResults.class);
-
 
     public static <M> List<M> unwrap(final SearchResult<M> wrapped) {
         return new AbstractList<M>() {
@@ -73,7 +73,7 @@ public class SearchResults {
                 if (facetResultItem.getValue() != null && !Objects.equals(id, facetResultItem.getValue())) {
                     if (!valueCache.containsKey(id)) {
                         valueCache.put(id, Optional.ofNullable(facetResultItem.getValue()));
-                        LOG.info("{}: {} -> {}", valueCacheName, id, facetResultItem.getValue());
+                        log.info("{}: {} -> {}", valueCacheName, id, facetResultItem.getValue());
                     }
                 }
                 facetResultItem.setSelected(contains(searches, id));
@@ -121,12 +121,12 @@ public class SearchResults {
                 return Optional.ofNullable(term.getName());
             }
         } catch (Exception e) {
-            LOG.warn(e.getClass() + " " + e.getMessage());
+            log.warn(e.getClass() + " " + e.getMessage());
             return Optional.empty();
         }
     }
 
-    public static void setSelected(DateRangeMatcherList searches, DateRangeFacets<?> dateRangeFacets,  List<DateFacetResultItem> facetResultItems, List<DateFacetResultItem> selected, Callable<DateFacetResultItem> creator, boolean asDuration) {
+    public static void setSelected(DateRangeMatcherList searches, DateRangeFacets<?> dateRangeFacets,  List<DateFacetResultItem> facetResultItems, List<DateFacetResultItem> selected, Callable<DateFacetResultItem> creator) {
 
         if (facetResultItems != null && searches != null) {
             for (DateFacetResultItem facetResultItem : facetResultItems) {
@@ -169,7 +169,7 @@ public class SearchResults {
                                     } else {
                                         DateRangeInterval dateRangeInterval = (DateRangeInterval) range;
                                         if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
-                                            newItem.setValue(dateRangeInterval.parsed().print(DateUtils.toInstant(item.getBegin()), asDuration));
+                                            newItem.setValue(dateRangeInterval.parsed().print(DateUtils.toInstant(item.getBegin()), false));
                                             selected.add(newItem);
                                         }
                                         continue;
@@ -185,7 +185,74 @@ public class SearchResults {
                             }
 
                         } catch (Exception e) {
-                            LOG.error(e.getMessage(), e);
+                            log.error(e.getMessage(), e);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static void setSelected(DurationRangeMatcherList searches, DurationRangeFacets<?> dateRangeFacets, List<DurationFacetResultItem> facetResultItems, List<DurationFacetResultItem> selected, Callable<DurationFacetResultItem> creator, boolean asDuration) {
+
+        if (facetResultItems != null && searches != null) {
+            for (DurationFacetResultItem facetResultItem : facetResultItems) {
+                Duration begin = facetResultItem.getBegin();
+                Duration end = facetResultItem.getEnd();
+                for (DurationRangeMatcher matcher : searches) {
+                    Duration matcherBegin = matcher.getBegin();
+                    Duration matcherEnd = matcher.getEnd();
+                    if (Objects.equals(matcherBegin, begin) &&
+                        Objects.equals(matcherEnd, end)) {
+                        facetResultItem.setSelected(true);
+                        selected.add(facetResultItem);
+                    }
+                }
+
+            }
+            for (DurationRangeMatcher item : searches) {
+                if (item.getMatch() != Match.NOT) {
+                    boolean found = false;
+                    for (DurationFacetResultItem selectItem : selected) {
+                        if (Objects.equals(selectItem.getBegin(), item.getBegin()) && Objects.equals(selectItem.getEnd(), item.getEnd())) {
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        try {
+                            DurationFacetResultItem newItem = creator.call();
+                            newItem.setBegin(item.getBegin());
+                            newItem.setEnd(item.getEnd());
+                            newItem.setCount(0);
+                            newItem.setSelected(true);
+                            if (dateRangeFacets != null && dateRangeFacets.getRanges() != null) {
+                                for (RangeFacet<Duration> range : dateRangeFacets.getRanges()) {
+                                    final DateRangeFacetItem dateRangeFacetItem;
+                                    if (range instanceof DateRangePreset) {
+                                        dateRangeFacetItem = ((DateRangePreset) range).asDateRangeFacetItem();
+                                    } else if (range instanceof DateRangeFacetItem) {
+                                        dateRangeFacetItem = (DateRangeFacetItem) range;
+                                    } else {
+                                        DurationRangeInterval dateRangeInterval = (DurationRangeInterval) range;
+                                        if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
+                                            newItem.setValue(dateRangeInterval.parsed().print(Instant.ofEpochMilli(item.getBegin().toMillis()), true));
+                                            selected.add(newItem);
+                                        }
+                                        continue;
+                                    }
+                                    if (dateRangeFacetItem.getBegin().equals(item.getBegin()) && dateRangeFacetItem.getEnd().equals(item.getEnd())) {
+                                        newItem.setValue(dateRangeFacetItem.getName());
+                                        selected.add(newItem);
+                                        break;
+                                    }
+                                }
+                            } else {
+                                selected.add(newItem);
+                            }
+
+                        } catch (Exception e) {
+                            log.error(e.getMessage(), e);
                         }
                     }
                 }
