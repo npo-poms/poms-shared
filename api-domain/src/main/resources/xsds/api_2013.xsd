@@ -168,7 +168,7 @@
       <xs:element name="episodeOf" type="textMatcherListType" minOccurs="0"/>
       <xs:element name="memberOf" type="textMatcherListType" minOccurs="0"/>
       <xs:element name="relations" type="mediaRelationSearchListType" minOccurs="0"/>
-      <xs:element name="scheduleEvents" type="scheduleEventSearchType" minOccurs="0"/>
+      <xs:element name="scheduleEvents" type="scheduleEventSearchType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="ageRatings" type="textMatcherListType" minOccurs="0"/>
       <xs:element name="contentRatings" type="textMatcherListType" minOccurs="0"/>
     </xs:sequence>
@@ -213,7 +213,7 @@
         <xs:sequence>
           <xs:element name="begin" type="xs:dateTime" minOccurs="0"/>
           <xs:element name="end" type="xs:dateTime" minOccurs="0"/>
-          <xs:element name="channel" type="xs:string" minOccurs="0"/>
+          <xs:element name="channel" type="media:channelEnum" minOccurs="0"/>
           <xs:element name="net" type="xs:string" minOccurs="0"/>
           <xs:element name="rerun" type="xs:boolean" minOccurs="0"/>
         </xs:sequence>
