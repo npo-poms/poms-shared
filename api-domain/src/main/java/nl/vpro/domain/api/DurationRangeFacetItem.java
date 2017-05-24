@@ -9,6 +9,14 @@ import java.time.Duration;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.xml.bind.DefaultDurationXmlAdapter;
 
 /**
  * @author Michiel Meeuwissen
@@ -20,8 +28,16 @@ public class DurationRangeFacetItem implements RangeFacetItem<Duration> {
 
     private String name;
 
+    @XmlJavaTypeAdapter(DefaultDurationXmlAdapter .class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Duration begin;
 
+    @XmlJavaTypeAdapter(DefaultDurationXmlAdapter .class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Duration end;
 
     public DurationRangeFacetItem() {

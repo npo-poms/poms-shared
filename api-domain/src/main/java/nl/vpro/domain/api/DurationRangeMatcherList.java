@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.api.jackson.DateRangeMatcherListJson;
+import nl.vpro.domain.api.jackson.DurationRangeMatcherListJson;
 import nl.vpro.domain.api.media.DurationRangeMatcher;
 
 /**
@@ -25,8 +25,8 @@ import nl.vpro.domain.api.media.DurationRangeMatcher;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "durationRangeMatcherListType")
-@JsonSerialize(using = DateRangeMatcherListJson.Serializer.class)
-@JsonDeserialize(using = DateRangeMatcherListJson.Deserializer.class)
+@JsonSerialize(using = DurationRangeMatcherListJson.Serializer.class)
+@JsonDeserialize(using = DurationRangeMatcherListJson.Deserializer.class)
 public class DurationRangeMatcherList extends MatcherList<DurationRangeMatcher> implements Predicate<Duration> {
 
     @XmlElement(name = "matcher")

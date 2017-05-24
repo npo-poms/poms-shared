@@ -23,7 +23,7 @@ import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-@XmlType(name = "dateRangeIntervalType", propOrder = {
+@XmlType(name = "abstractRangeIntervalType", propOrder = {
     "interval"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class AbstractTemporalRangeInterval<T extends Comparable<T>> implements RangeFacet<T> {
