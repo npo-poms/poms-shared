@@ -76,20 +76,21 @@ public class MediaFormTest {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
             new ScheduleEventSearch(Channel.NED3, DateUtils.toInstant(simpleDateFormat.parse("2015-01-26")), DateUtils.toInstant(simpleDateFormat.parse("2015-01-27")))).build();
-        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in, "<api:mediaForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:searches>\n" +
-            "        <api:scheduleEvents inclusiveEnd=\"true\">\n" +
-            "            <api:begin>2015-01-26T00:00:00+01:00</api:begin>\n" +
-            "            <api:end>2015-01-27T00:00:00+01:00</api:end>\n" +
-            "            <api:channel>NED3</api:channel>\n" +
-            "        </api:scheduleEvents>\n" +
-            "    </api:searches>\n" +
-            "    <api:facets>\n" +
-            "        <api:broadcasters sort=\"VALUE_ASC\">\n" +
-            "            <api:max>24</api:max>\n" +
-            "        </api:broadcasters>\n" +
-            "    </api:facets>\n" +
-            "</api:mediaForm>");
+        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <api:searches>\n" +
+                "        <api:scheduleEvents>\n" +
+                "            <api:begin>2015-01-26T00:00:00+01:00</api:begin>\n" +
+                "            <api:end>2015-01-27T00:00:00+01:00</api:end>\n" +
+                "            <api:channel>NED3</api:channel>\n" +
+                "        </api:scheduleEvents>\n" +
+                "    </api:searches>\n" +
+                "    <api:facets>\n" +
+                "        <api:broadcasters sort=\"VALUE_ASC\">\n" +
+                "            <api:max>24</api:max>\n" +
+                "        </api:broadcasters>\n" +
+                "    </api:facets>\n" +
+                "</api:mediaForm>");
         assertThat(out.getFacets().getBroadcasters().getSort()).isEqualTo(FacetOrder.VALUE_ASC);
     }
 
