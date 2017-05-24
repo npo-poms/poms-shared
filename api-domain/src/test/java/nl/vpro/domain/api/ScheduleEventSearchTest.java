@@ -4,8 +4,8 @@
  */
 package nl.vpro.domain.api;
 
+import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
 
 import org.junit.Test;
 
@@ -28,7 +28,7 @@ public class ScheduleEventSearchTest {
     @Test
     public void testGetBeginXml() throws Exception {
         Instant begin = Instant.EPOCH;
-        String channel = "NED3";
+        Channel channel = Channel.NED3;
         ScheduleEventSearch in = new ScheduleEventSearch(channel, begin, null);
         ScheduleEventSearch out = JAXBTestUtil.roundTripAndSimilarAndEquals(in,
             "<local:scheduleEventSearch inclusiveEnd=\"true\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
@@ -42,7 +42,7 @@ public class ScheduleEventSearchTest {
     @Test
     public void testGetEndXml() throws Exception {
         Instant end = Instant.EPOCH;
-        String channel = "NED3";
+        Channel channel = Channel.NED3;
         ScheduleEventSearch in = new ScheduleEventSearch(channel, null, end);
         ScheduleEventSearch out = JAXBTestUtil.roundTripAndSimilarAndEquals(in,
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -55,20 +55,20 @@ public class ScheduleEventSearchTest {
     }
 
     private ScheduleEventSearch getInstance() {
-        return new ScheduleEventSearch("NED3", Instant.ofEpochMilli(100), Instant.ofEpochMilli(150));
+        return new ScheduleEventSearch(Channel.NED3, Instant.ofEpochMilli(100), Instant.ofEpochMilli(150));
     }
 
 
     @Test
     public void testApply() {
         ScheduleEventSearch instance = getInstance();
-        ScheduleEvent event = new ScheduleEvent(Channel.NED3, new Date(100), new Date(10));
+        ScheduleEvent event = new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), Duration.ofMillis(10));
         assertTrue(instance.test(event));
-        event.setStart(new Date(150));
+        event.setStartInstant(Instant.ofEpochMilli(150));
         assertTrue(instance.test(event));
-        event.setStart(new Date(200));
+        event.setStartInstant(Instant.ofEpochMilli(200));
         assertFalse(instance.test(event));
-        event.setStart(new Date(-1));
+        event.setStartInstant(Instant.ofEpochMilli(-1));
         assertFalse(instance.test(event));
     }
 }
