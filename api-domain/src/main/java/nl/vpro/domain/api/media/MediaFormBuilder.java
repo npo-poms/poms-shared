@@ -291,7 +291,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    public MediaFormBuilder scheduleEvents(ScheduleEventSearch scheduleEventSearch) {
+    public MediaFormBuilder scheduleEvents(ScheduleEventSearch... scheduleEventSearch) {
         search().setScheduleEvents(Arrays.asList(scheduleEventSearch));
         return this;
     }
@@ -483,5 +483,6 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         }
         return form.getFacets();
     }
+
 
 }
