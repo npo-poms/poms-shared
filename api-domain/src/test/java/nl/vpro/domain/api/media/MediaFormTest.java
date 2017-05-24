@@ -75,9 +75,7 @@ public class MediaFormTest {
     public void testGetFacets() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
-            new ScheduleEventSearch(Channel.NED3,
-                DateUtils.toInstant(simpleDateFormat.parse("2015-01-26")),
-                DateUtils.toInstant(simpleDateFormat.parse("2015-01-27")))).build();
+            new ScheduleEventSearch(Channel.NED3, DateUtils.toInstant(simpleDateFormat.parse("2015-01-26")), DateUtils.toInstant(simpleDateFormat.parse("2015-01-27")))).build();
         MediaForm out = JAXBTestUtil.roundTripAndSimilar(in, "<api:mediaForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:scheduleEvents inclusiveEnd=\"true\">\n" +
