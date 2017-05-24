@@ -206,32 +206,18 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    public MediaFormBuilder duration(Date begin, Date end) {
-        return duration(begin, end, false);
-    }
-
-    public MediaFormBuilder duration(Date begin, Date end, boolean inclusiveEnd) {
-        DateRangeMatcherList list  = search().getDurations();
-        if (list == null) {
-            list = new DateRangeMatcherList();
-            search().setDurations(list);
-        }
-        list.asList().add(new DateRangeMatcher(begin, end, inclusiveEnd));
-        return this;
-    }
-
 
     public MediaFormBuilder duration(Duration begin, Duration end) {
         return duration(begin, end, false);
     }
 
     public MediaFormBuilder duration(Duration begin, Duration end, boolean inclusiveEnd) {
-        DateRangeMatcherList list = search().getDurations();
+        DurationRangeMatcherList list = search().getDurations();
         if (list == null) {
-            list = new DateRangeMatcherList();
+            list = new DurationRangeMatcherList();
             search().setDurations(list);
         }
-        list.asList().add(new DateRangeMatcher(begin, end, inclusiveEnd));
+        list.asList().add(new DurationRangeMatcher(begin, end, inclusiveEnd));
         return this;
     }
 
