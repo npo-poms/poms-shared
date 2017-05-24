@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.api.RangeMatcher;
+import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.ScheduleEvent;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -33,7 +34,7 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
     @XmlElement
     @Getter
     @Setter
-    private String channel;
+    private Channel channel;
 
     @XmlElement
     @Getter
@@ -67,19 +68,20 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
     }
 
 
-    public ScheduleEventSearch(String channel, Instant begin, Instant end) {
-        super(begin, end, true);
+    public ScheduleEventSearch(Channel channel, Instant begin, Instant end) {
+        super(begin, end, null);
         this.channel = channel;
     }
 
-    public ScheduleEventSearch(String channel, Instant begin, Instant end, Boolean rerun) {
-        super(begin, end, true);
+    public ScheduleEventSearch(Channel channel, Instant begin, Instant end, Boolean rerun) {
+        super(begin, end, null);
         this.channel = channel;
         this.rerun = rerun;
     }
 
-    public ScheduleEventSearch(String channel, String net, Instant begin, Instant end, Boolean rerun) {
-        super(begin, end, true);
+    @lombok.Builder
+    public ScheduleEventSearch(Channel channel, String net, Instant begin, Instant end, Boolean rerun) {
+        super(begin, end, null);
         this.channel = channel;
         this.net = net;
         this.rerun = rerun;
@@ -93,7 +95,7 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
 
     @Override
     public boolean test(@Nullable ScheduleEvent t) {
-        return t != null && (channel == null || channel.equals(t.getChannel().name()))
+        return t != null && (channel == null || channel.equals(t.getChannel()))
             && (net == null || net.equals(t.getNet().getId()))
             && (rerun == null || rerun == t.getRepeat().isRerun())
             && super.testComparable(t.getStartInstant());

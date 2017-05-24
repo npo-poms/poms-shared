@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.*;
 public abstract class RangeMatcher<T extends Comparable<T>> extends AbstractMatcher {
 
     @XmlAttribute
-    private Boolean inclusiveEnd = false;
+    private Boolean inclusiveEnd = null;
 
     @XmlTransient// We don't expose this..
     private  Boolean inclusiveBegin = true;

@@ -4,16 +4,16 @@
  */
 package nl.vpro.domain.api.media;
 
-import nl.vpro.domain.api.*;
-import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.Tag;
-import nl.vpro.util.DateUtils;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+
+import nl.vpro.domain.api.*;
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.Tag;
+import nl.vpro.util.DateUtils;
 
 /**
  * @author Roelof Jan Koekoek
@@ -292,7 +292,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     }
 
     public MediaFormBuilder scheduleEvents(ScheduleEventSearch scheduleEventSearch) {
-        search().setScheduleEvents(scheduleEventSearch);
+        search().setScheduleEvents(Arrays.asList(scheduleEventSearch));
         return this;
     }
 
