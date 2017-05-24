@@ -332,8 +332,8 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    public MediaFormBuilder durationFacet(RangeFacet<Date>... ranges) {
-        DateRangeFacets dateRangeFacets = new DateRangeFacets();
+    public MediaFormBuilder durationFacet(RangeFacet<Duration>... ranges) {
+        DurationRangeFacets dateRangeFacets = new DurationRangeFacets();
         dateRangeFacets.setRanges(Arrays.asList(ranges));
         facets().setDurations(dateRangeFacets);
         return this;

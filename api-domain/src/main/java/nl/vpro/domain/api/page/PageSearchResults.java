@@ -1,11 +1,11 @@
 package nl.vpro.domain.api.page;
 
+import java.util.List;
+
 import nl.vpro.api.util.SearchResults;
 import nl.vpro.domain.api.DateFacetResultItem;
 import nl.vpro.domain.api.MultipleFacetsResult;
 import nl.vpro.domain.api.TermFacetResultItem;
-
-import java.util.List;
 
 /**
  * @author Michiel Meeuwissen
@@ -37,7 +37,7 @@ public class PageSearchResults {
 
         SearchResults.setSelected(search.getSections(), facetResults.getSections(), selected.getSections(form), TermFacetResultItem::new, "page.sections");
 
-        SearchResults.setSelected(search.getSortDates(), form.getFacets().getSortDates(), facetResults.getSortDates(), selected.getSortDates(form), DateFacetResultItem::new, false);
+        SearchResults.setSelected(search.getSortDates(), form.getFacets().getSortDates(), facetResults.getSortDates(), selected.getSortDates(form), DateFacetResultItem::new);
         if (form.getFacets() != null) {
             setSelected(search.getRelations(), form.getFacets().getRelations(), facetResults.getRelations(), selected.getRelations(form));
         }

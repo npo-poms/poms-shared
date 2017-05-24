@@ -142,8 +142,8 @@ public class MediaFacetsTest {
     @Test
     public void testGetDurations() throws Exception {
         MediaFacets in = new MediaFacets();
-        in.setDurations(new DateRangeFacets(
-            new DateRangeInterval("YEAR")
+        in.setDurations(new DurationRangeFacets(
+            new DurationRangeInterval("YEAR")
         ));
 
         assertThat(in.isFaceted()).isTrue();
