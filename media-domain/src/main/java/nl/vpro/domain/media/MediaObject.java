@@ -359,6 +359,9 @@ public abstract class MediaObject extends PublishableObject
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
     // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
+
+    // Before hiberante 5.2 we used Filter rather then FilterJointTable.
+    // It doesn't really make much sense.
     @FilterJoinTables({
             @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec10_.mergedTo_id is null) and " + // MSE-3526
                                                                                                                 // ?
