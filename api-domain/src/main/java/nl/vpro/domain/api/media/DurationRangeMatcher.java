@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -36,6 +37,7 @@ public class DurationRangeMatcher extends RangeMatcher<Duration> implements Pred
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
+    @XmlSchemaType(name = "duration")
     private Duration begin;
 
     @XmlElement
@@ -45,6 +47,7 @@ public class DurationRangeMatcher extends RangeMatcher<Duration> implements Pred
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
+    @XmlSchemaType(name = "duration")
     private Duration end;
 
 
