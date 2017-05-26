@@ -53,8 +53,8 @@ import static nl.vpro.domain.Xmlns.*;
 @Slf4j
 public class Mappings {
 
-    public final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
-    public final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
+    private final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
+    private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
 
     String pomsLocation = "http://poms.omroep.nl/";
@@ -68,6 +68,14 @@ public class Mappings {
 
     }
 
+
+    public Collection<String> knownNamespaces() {
+        return MAPPING.keySet();
+    }
+
+    public Map<String, URI> systemNamespaces() {
+        return Collections.unmodifiableMap(SYSTEM_MAPPING);
+    }
 
     protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
 
