@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.function.Function;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,11 +25,8 @@ import org.apache.commons.lang3.time.DateUtils;
 public abstract class AbstractSchemaController {
 
 
-    private final Function<String, File> getFileForNamespace;
 
-    protected AbstractSchemaController(Function<String, File> getFileForNamespace) {
-        this.getFileForNamespace = getFileForNamespace;
-    }
+    protected abstract File getFileForNamespace(String namespace);
 
     protected void el(XMLStreamWriter w, String name, String chars) throws XMLStreamException {
         w.writeStartElement(name);
@@ -59,7 +55,7 @@ public abstract class AbstractSchemaController {
             final HttpServletRequest request,
             final HttpServletResponse response,
             final String namespace) throws JAXBException, IOException {
-        File file = getFileForNamespace.apply(namespace);
+        File file = getFileForNamespace(namespace);
         serveXml(file, request, response);
     }
 

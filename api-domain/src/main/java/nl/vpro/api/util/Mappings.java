@@ -17,11 +17,16 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Result;
 import javax.xml.transform.dom.DOMResult;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.lang3.StringUtils;
+import org.xml.sax.SAXException;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.api.media.MediaSearchResult;
@@ -56,7 +61,10 @@ public class Mappings {
 
     @Inject
     public Mappings(@Named("${poms.location}") String pomsLocation) {
-        this.pomsLocation = pomsLocation;
+        this.pomsLocation = pomsLocation == null ? "https://poms.omroep.nl" : pomsLocation;
+        if (pomsLocation == null){
+            log.warn("No explicit poms location given");
+        }
 
     }
 
@@ -74,9 +82,7 @@ public class Mappings {
         }
         try {
             generateXSDs(new ArrayList<>(classes).toArray(new Class[classes.size()]));
-        } catch (JAXBException e) {
-            log.error(e.getMessage(), e);
-        } catch (IOException e) {
+        } catch (JAXBException | IOException e) {
             log.error(e.getMessage(), e);
         }
     }
@@ -131,6 +137,52 @@ public class Mappings {
         });
 
     }
+
+    public Schema getSchema(Class<?>... classesToRead) throws JAXBException, IOException, SAXException {
+        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        JAXBContext context = JAXBContext.newInstance(classesToRead);
+        final DOMResult[] result = new DOMResult[1];
+        result[0] = new DOMResult();
+        context.generateSchema(new SchemaOutputResolver() {
+            @Override
+            public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+                result[0].setSystemId(namespaceUri);
+                return result[0];
+            }
+        });
+        return sf.newSchema(new DOMSource(result[0].getNode()));
+    }
+
+
+    public ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, Class<?> ... classes) {
+        return ThreadLocal.withInitial(() -> {
+            try {
+                Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
+                if (validate) {
+                    result.setSchema(getSchema(classes));
+                }
+                return result;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    };
+
+    public ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, String namespace) {
+        return ThreadLocal.withInitial(() -> {
+            try {
+                Unmarshaller result = JAXBContext.newInstance(MAPPING.get(namespace)).createUnmarshaller();
+                if (validate) {
+                    result.setSchema(getSchema(MAPPING.get(namespace)));
+                }
+                return result;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    ;
 
     protected static final long startTime = System.currentTimeMillis();
 
