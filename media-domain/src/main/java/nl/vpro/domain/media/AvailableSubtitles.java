@@ -10,6 +10,8 @@ import javax.persistence.Cacheable;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -20,6 +22,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @Embeddable
 @Cacheable
 @XmlType(name="availableSubtitlesType")
+@XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode
 @ToString
 @Data
