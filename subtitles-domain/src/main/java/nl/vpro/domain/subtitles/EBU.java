@@ -31,7 +31,9 @@ public class EBU {
 
     protected static Iterator<Cue> parseToIterator(final String parent, final Duration offsetArgument, Function<TimeLine, Duration> offsetGuesser, final InputStream is) {
 
-
+        if (is == null) {
+            throw new IllegalArgumentException("Inputstream cannot be null");
+        }
         return new Iterator<Cue>() {
 
             protected Cue next;
