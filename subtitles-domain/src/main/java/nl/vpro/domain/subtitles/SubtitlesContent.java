@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
 /**
- * The subtitles as a String (to parse this use {@link SubtitlesUtil#parse(nl.vpro.domain.subtitles.SubtitlesContent, java.lang.String, java.time.Duration)}
+ * The subtitles as a String (to parse this use {@link SubtitlesUtil#parse(nl.vpro.domain.subtitles.Subtitles, boolean)}
  * @author Michiel Meeuwissen
  */
 @Embeddable
@@ -24,7 +24,6 @@ public class SubtitlesContent implements Serializable {
 
 
     @Column(nullable = false)
-    @Lob
     @XmlValue
     private String content;
 
