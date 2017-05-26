@@ -7,13 +7,12 @@ import lombok.Setter;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.Filters;
-import org.hibernate.annotations.SortNatural;
+import org.hibernate.annotations.*;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -73,11 +72,11 @@ public class Program extends MediaObject {
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
     // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
-    @Filters({
-        @Filter(name = PUBLICATION_FILTER, condition =
+    @FilterJoinTables({
+        @FilterJoinTable(name = PUBLICATION_FILTER, condition =
             "((mediaobjec10_.publishstart is null or mediaobjec10_.publishstart < now())" +
                 "and (mediaobjec10_.publishstop is null or mediaobjec10_.publishstop > now()))"),
-        @Filter(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))")
+        @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))")
     })
     protected Set<MemberRef> episodeOf = new TreeSet<>();
 
@@ -359,10 +358,12 @@ public class Program extends MediaObject {
         return this;
     }
 
+    @Deprecated
     public String getEpisodeTitle() {
         return TextualObjects.get(titles, (String)null, TextualType.EPISODE);
     }
 
+    @Deprecated
     public String getEpisodeDescription() {
         return TextualObjects.get(descriptions, (String)null, TextualType.EPISODE);
     }
