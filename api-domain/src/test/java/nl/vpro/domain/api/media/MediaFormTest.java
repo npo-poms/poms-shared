@@ -7,16 +7,16 @@ package nl.vpro.domain.api.media;
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.LinkedHashMap;
 
 import javax.xml.bind.JAXB;
 
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
-import nl.vpro.domain.api.FacetOrder;
-import nl.vpro.domain.api.Match;
-import nl.vpro.domain.api.Order;
-import nl.vpro.domain.api.StandardMatchType;
+import nl.vpro.domain.api.*;
+import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -74,23 +74,22 @@ public class MediaFormTest {
     public void testGetFacets() throws Exception {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
-            new ScheduleEventSearch("NED3",
-                DateUtils.toInstant(simpleDateFormat.parse("2015-01-26")),
-                DateUtils.toInstant(simpleDateFormat.parse("2015-01-27")))).build();
-        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in, "<api:mediaForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <api:searches>\n" +
-            "        <api:scheduleEvents inclusiveEnd=\"true\">\n" +
-            "            <api:begin>2015-01-26T00:00:00+01:00</api:begin>\n" +
-            "            <api:end>2015-01-27T00:00:00+01:00</api:end>\n" +
-            "            <api:channel>NED3</api:channel>\n" +
-            "        </api:scheduleEvents>\n" +
-            "    </api:searches>\n" +
-            "    <api:facets>\n" +
-            "        <api:broadcasters sort=\"VALUE_ASC\">\n" +
-            "            <api:max>24</api:max>\n" +
-            "        </api:broadcasters>\n" +
-            "    </api:facets>\n" +
-            "</api:mediaForm>");
+            new ScheduleEventSearch(Channel.NED3, DateUtils.toInstant(simpleDateFormat.parse("2015-01-26")), DateUtils.toInstant(simpleDateFormat.parse("2015-01-27")))).build();
+        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <api:searches>\n" +
+                "        <api:scheduleEvents>\n" +
+                "            <api:begin>2015-01-26T00:00:00+01:00</api:begin>\n" +
+                "            <api:end>2015-01-27T00:00:00+01:00</api:end>\n" +
+                "            <api:channel>NED3</api:channel>\n" +
+                "        </api:scheduleEvents>\n" +
+                "    </api:searches>\n" +
+                "    <api:facets>\n" +
+                "        <api:broadcasters sort=\"VALUE_ASC\">\n" +
+                "            <api:max>24</api:max>\n" +
+                "        </api:broadcasters>\n" +
+                "    </api:facets>\n" +
+                "</api:mediaForm>");
         assertThat(out.getFacets().getBroadcasters().getSort()).isEqualTo(FacetOrder.VALUE_ASC);
     }
 
@@ -237,6 +236,132 @@ public class MediaFormTest {
             "  }\n" +
             "}");
 
+
+    }
+    private static String LUNATIC_BACKWARD_COMPATIBLE = "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        "    <api:searches>\n" +
+        "        <api:durations match=\"MUST\">\n" +
+        "            <api:matcher inclusiveEnd=\"false\">\n" +
+        "                <api:begin>1970-01-01T01:05:00.001+01:00</api:begin>\n" +
+        "                <api:end>1970-01-01T01:10:00+01:00</api:end>\n" +
+        "            </api:matcher>\n" +
+        "        </api:durations>\n" +
+        "    </api:searches>\n" +
+        "    <api:facets>\n" +
+        "        <api:durations>\n" +
+        "            <api:range>\n" +
+        "                <api:name>0-5m</api:name>\n" +
+        "                <api:begin>1970-01-01T01:00:00.001+01:00</api:begin>\n" +
+        "                <api:end>1970-01-01T01:05:00+01:00</api:end>\n" +
+        "            </api:range>\n" +
+        "            <api:range>\n" +
+        "                <api:name>5-10m</api:name>\n" +
+        "                <api:begin>1970-01-01T01:05:00.001+01:00</api:begin>\n" +
+        "                <api:end>1970-01-01T01:10:00+01:00</api:end>\n" +
+        "            </api:range>\n" +
+        "            <api:range>\n" +
+        "                <api:name>10m-30m</api:name>\n" +
+        "                <api:begin>1970-01-01T01:10:00.001+01:00</api:begin>\n" +
+        "                <api:end>1970-01-01T01:30:00+01:00</api:end>\n" +
+        "            </api:range>\n" +
+        "            <api:range>\n" +
+        "                <api:name>30m-60m</api:name>\n" +
+        "                <api:begin>1970-01-01T01:30:00.001+01:00</api:begin>\n" +
+        "                <api:end>1970-01-01T02:00:00+01:00</api:end>\n" +
+        "            </api:range>\n" +
+        "            <api:range>\n" +
+        "                <api:name>60m-∞</api:name>\n" +
+        "                <api:begin>1970-01-01T02:00:00.001+01:00</api:begin>\n" +
+        "                <api:end>1970-01-01T05:00:00+01:00</api:end>\n" +
+        "            </api:range>\n" +
+        "        </api:durations>\n" +
+        "    </api:facets>\n" +
+        "</api:mediaForm>\n";
+    @Test
+    public void testDurations() throws IOException, SAXException {
+        String json = "{\n" +
+            "\n" +
+            "    \"searches\" : {\n" +
+            "        \"durations\" : [ {\n" +
+            "            \"begin\" : 300001,\n" +
+            "            \"end\" : 600000\n" +
+            "        } ]\n" +
+            "    },\n" +
+            "    \"facets\" : {\n" +
+            "        \"durations\" : [ {\n" +
+            "            \"name\" : \"0-5m\",\n" +
+            "            \"begin\" : 1,\n" +
+            "            \"end\" : 300000,\n" +
+            "            \"inclusiveEnd\" : true\n" +
+            "        }, {\n" +
+            "            \"name\" : \"5-10m\",\n" +
+            "            \"begin\" : 300001,\n" +
+            "            \"end\" : 600000,\n" +
+            "            \"inclusiveEnd\" : true\n" +
+            "        }, {\n" +
+            "            \"name\" : \"10m-30m\",\n" +
+            "            \"begin\" : 600001,\n" +
+            "            \"end\" : 1800000,\n" +
+            "            \"inclusiveEnd\" : true\n" +
+            "        }, {\n" +
+            "            \"name\" : \"30m-60m\",\n" +
+            "            \"begin\" : 1800001,\n" +
+            "            \"end\" : 3600000,\n" +
+            "            \"inclusiveEnd\" : true\n" +
+            "        }, {\n" +
+            "            \"name\" : \"60m-∞\",\n" +
+            "            \"begin\" : 3600001,\n" +
+            "            \"end\" : 14400000,\n" +
+            "            \"inclusiveEnd\" : true\n" +
+            "        } ]\n" +
+            "    }\n" +
+            "}\n";
+
+        MediaForm fromJson = Jackson2Mapper.STRICT.readerFor(MediaForm.class).readValue(new StringReader(json));
+        JAXBTestUtil.roundTripAndSimilar(fromJson, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <api:searches>\n" +
+            "        <api:durations match=\"MUST\">\n" +
+            "            <api:matcher>\n" +
+            "                <api:begin>PT5M0.001S</api:begin>\n" +
+            "                <api:end>PT10M</api:end>\n" +
+            "            </api:matcher>\n" +
+            "        </api:durations>\n" +
+            "    </api:searches>\n" +
+            "    <api:facets>\n" +
+            "        <api:durations>\n" +
+            "            <api:range>\n" +
+            "                <api:name>0-5m</api:name>\n" +
+            "                <api:begin>PT0.001S</api:begin>\n" +
+            "                <api:end>PT5M</api:end>\n" +
+            "            </api:range>\n" +
+            "            <api:range>\n" +
+            "                <api:name>5-10m</api:name>\n" +
+            "                <api:begin>PT5M0.001S</api:begin>\n" +
+            "                <api:end>PT10M</api:end>\n" +
+            "            </api:range>\n" +
+            "            <api:range>\n" +
+            "                <api:name>10m-30m</api:name>\n" +
+            "                <api:begin>PT10M0.001S</api:begin>\n" +
+            "                <api:end>PT30M</api:end>\n" +
+            "            </api:range>\n" +
+            "            <api:range>\n" +
+            "                <api:name>30m-60m</api:name>\n" +
+            "                <api:begin>PT30M0.001S</api:begin>\n" +
+            "                <api:end>PT1H</api:end>\n" +
+            "            </api:range>\n" +
+            "            <api:range>\n" +
+            "                <api:name>60m-∞</api:name>\n" +
+            "                <api:begin>PT1H0.001S</api:begin>\n" +
+            "                <api:end>PT4H</api:end>\n" +
+            "            </api:range>\n" +
+            "        </api:durations>\n" +
+            "    </api:facets>\n" +
+            "</api:mediaForm>\n");
+    }
+    @Test
+    public void testBackwards() {
+        MediaForm form = JAXB.unmarshal(new StringReader(LUNATIC_BACKWARD_COMPATIBLE), MediaForm.class);
+        assertThat(((DurationRangeFacetItem) form.getFacets().getDurations().getRanges().get(0)).getEnd()).isEqualTo(Duration.ofMinutes(5));
 
     }
 }

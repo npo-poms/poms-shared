@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.DateRangeFacets;
+import nl.vpro.domain.api.DurationRangeFacets;
 
 /**
  * @author Roelof Jan Koekoek
@@ -41,7 +42,7 @@ public class MediaFacets {
     private ExtendedMediaFacet tags;
 
     @XmlElement
-    private DateRangeFacets durations;
+    private DurationRangeFacets durations;
 
     @XmlElement
     private MemberRefFacet descendantOf;
@@ -139,11 +140,11 @@ public class MediaFacets {
         this.tags = tags;
     }
 
-    public DateRangeFacets getDurations() {
+    public DurationRangeFacets getDurations() {
         return durations;
     }
 
-    public void setDurations(DateRangeFacets durations) {
+    public void setDurations(DurationRangeFacets durations) {
         this.durations = durations;
     }
 

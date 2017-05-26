@@ -7,6 +7,7 @@ package nl.vpro.domain.api.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
@@ -16,9 +17,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.api.*;
+import nl.vpro.domain.api.jackson.media.ScheduleEventSearchListJson;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.AuthorizedDuration;
 import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.Title;
@@ -81,7 +86,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Valid
     @Getter
     @Setter
-    private DateRangeMatcherList durations;
+    private DurationRangeMatcherList durations;
 
     @Valid
     @Getter
@@ -106,7 +111,10 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Valid
     @Getter
     @Setter
-    private ScheduleEventSearch scheduleEvents;
+    @JsonSerialize(using = ScheduleEventSearchListJson.Serializer.class)
+    @JsonDeserialize(using = ScheduleEventSearchListJson.Deserializer.class)
+    private List<ScheduleEventSearch> scheduleEvents;
+
 
     @Valid
     @Getter
@@ -142,7 +150,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             || episodeOf != null && !episodeOf.isEmpty()
             || memberOf != null && !memberOf.isEmpty()
             || relations != null && !relations.hasSearches()
-            || scheduleEvents != null && scheduleEvents.hasSearches()
+            || scheduleEvents != null && ! scheduleEvents.isEmpty()
             || ageRatings != null && !ageRatings.isEmpty()
             || contentRatings != null && !contentRatings.isEmpty();
     }
@@ -222,7 +230,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected boolean applyDurations(MediaObject input) {
-        return durations == null || durations.test(input.getDurationAsDate());
+        return durations == null || durations.test(AuthorizedDuration.get(input.getDuration()));
     }
 
     protected boolean applyDescendantOf(MediaObject input) {
@@ -260,8 +268,10 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         }
 
         for(ScheduleEvent event : input.getScheduleEvents()) {
-            if(scheduleEvents.test(event)) {
-                return true;
+            for (ScheduleEventSearch search : scheduleEvents) {
+                if(search.test(event)) {
+                    return true;
+                }
             }
         }
         return false;
