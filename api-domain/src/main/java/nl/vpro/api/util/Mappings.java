@@ -43,6 +43,7 @@ import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.update.PageUpdate;
 import nl.vpro.domain.secondscreen.Screen;
 import nl.vpro.domain.subtitles.Subtitles;
+import nl.vpro.domain.subtitles.SubtitlesType;
 
 import static nl.vpro.domain.Xmlns.*;
 
@@ -57,7 +58,7 @@ public class Mappings {
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
 
-    String pomsLocation = "http://poms.omroep.nl/";
+    String pomsLocation = null;
 
     @Inject
     public Mappings(@Named("${poms.location}") String pomsLocation) {
@@ -80,7 +81,7 @@ public class Mappings {
     protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
 
     {
-        SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("http://www.w3.org/2009/01/xml.xsd"));
+        SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("https://www.w3.org/2009/01/xml.xsd"));
         KNOWN_LOCATIONS.putAll(SYSTEM_MAPPING);
 
         fillMappings();
@@ -103,8 +104,7 @@ public class Mappings {
         MAPPING.put(SECOND_SCREEN_NAMESPACE, new Class[]{Screen.class});
         MAPPING.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.media.Filter.class});
         MAPPING.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
-        MAPPING.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class});
-
+        MAPPING.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class, SubtitlesType.class});
 
         Xmlns.fillLocationsAtPoms(KNOWN_LOCATIONS, pomsLocation);
     }
@@ -143,26 +143,29 @@ public class Mappings {
 
             }
         });
+        log.info("Ready");
+
 
     }
 
-    public Schema getSchema(Class<?>... classesToRead) throws JAXBException, IOException, SAXException {
+    private Schema getSchema(Class<?>... classesToRead) throws JAXBException, IOException, SAXException {
         SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         JAXBContext context = JAXBContext.newInstance(classesToRead);
-        final DOMResult[] result = new DOMResult[1];
-        result[0] = new DOMResult();
+        final List<DOMResult> result = new ArrayList<>();
         context.generateSchema(new SchemaOutputResolver() {
             @Override
             public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-                result[0].setSystemId(namespaceUri);
-                return result[0];
+                DOMResult dom = new DOMResult();
+                dom.setSystemId(namespaceUri);
+                result.add(dom);
+                return dom;
             }
         });
-        return sf.newSchema(new DOMSource(result[0].getNode()));
+        return sf.newSchema(new DOMSource(result.get(0).getNode()));
     }
 
 
-    public ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, Class<?> ... classes) {
+    private ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, Class<?> ... classes) {
         return ThreadLocal.withInitial(() -> {
             try {
                 Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
@@ -181,7 +184,12 @@ public class Mappings {
             try {
                 Unmarshaller result = JAXBContext.newInstance(MAPPING.get(namespace)).createUnmarshaller();
                 if (validate) {
-                    result.setSchema(getSchema(MAPPING.get(namespace)));
+                    File xsd = getFile(namespace);
+                    if (xsd.exists()) {
+                        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                        Schema schema = sf.newSchema(xsd);
+                        result.setSchema(schema);
+                    }
                 }
                 return result;
             } catch (Exception e) {
