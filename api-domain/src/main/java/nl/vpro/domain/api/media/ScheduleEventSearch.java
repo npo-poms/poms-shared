@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.RangeMatcher;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.ScheduleEvent;
@@ -93,8 +94,9 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private ScheduleEventSearch(Channel channel, String net, Instant begin, Instant end, Boolean rerun, Boolean inclusiveEnd) {
+    private ScheduleEventSearch(Channel channel, String net, Instant begin, Instant end, Boolean rerun, Boolean inclusiveEnd, Match match) {
         super(begin, end, inclusiveEnd);
+        this.match = match;
         this.channel = channel;
         this.net = net;
         this.rerun = rerun;

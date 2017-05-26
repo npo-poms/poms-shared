@@ -4,6 +4,7 @@ import java.time.Duration;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -34,6 +35,7 @@ public class DurationFacetResultItem extends RangeFacetResultItem<Duration> {
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @XmlSchemaType(name = "duration")
     public Duration getBegin() {
         return begin;
     }
@@ -47,6 +49,7 @@ public class DurationFacetResultItem extends RangeFacetResultItem<Duration> {
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @XmlSchemaType(name = "duration")
     public Duration getEnd() {
         return end;
     }

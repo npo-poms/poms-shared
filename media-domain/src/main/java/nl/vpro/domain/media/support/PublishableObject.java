@@ -390,10 +390,12 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     }
     @XmlAttribute(name = "publishDate")
     @JsonProperty("publishDate")
+    @Deprecated
     public Date getLastPublished() {
         return DateUtils.toDate(lastPublished);
     }
 
+    @Deprecated
     public void setLastPublished(Date lastPublished) {
         this.lastPublished = DateUtils.toInstant(lastPublished);
     }

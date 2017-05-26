@@ -102,7 +102,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         DateRangeMatcherList list = search().getPublishDates();
         if (list == null) {
             list = new DateRangeMatcherList();
-            search().setSortDates(list);
+            search().setPublishDates(list);
         }
         list.asList().add(new DateRangeMatcher(begin, end, inclusiveEnd));
         return this;
