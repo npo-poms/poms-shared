@@ -163,7 +163,7 @@
       <xs:element name="locations" type="textMatcherListType" minOccurs="0"/>
       <xs:element name="tags" type="extendedTextMatcherListType" minOccurs="0"/>
       <xs:element name="genres" type="textMatcherListType" minOccurs="0"/>
-      <xs:element name="durations" type="dateRangeMatcherListType" minOccurs="0"/>
+      <xs:element name="durations" type="durationRangeMatcherListType" minOccurs="0"/>
       <xs:element name="descendantOf" type="textMatcherListType" minOccurs="0"/>
       <xs:element name="episodeOf" type="textMatcherListType" minOccurs="0"/>
       <xs:element name="memberOf" type="textMatcherListType" minOccurs="0"/>
@@ -173,6 +173,27 @@
       <xs:element name="contentRatings" type="textMatcherListType" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="match" type="match"/>
+  </xs:complexType>
+
+  <xs:complexType name="durationRangeMatcherListType">
+    <xs:complexContent>
+      <xs:extension base="matcherList">
+        <xs:sequence>
+          <xs:element name="matcher" type="durationRangeMatcherType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="durationRangeMatcherType">
+    <xs:complexContent>
+      <xs:extension base="rangeMatcherType">
+        <xs:sequence>
+          <xs:element name="begin" type="xs:duration" minOccurs="0"/>
+          <xs:element name="end" type="xs:duration" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="mediaRelationSearchListType">
@@ -274,7 +295,13 @@
     <xs:sequence/>
   </xs:complexType>
 
-  <xs:simpleType name="dateRangeIntervalType">
+  <xs:complexType name="dateRangeIntervalType">
+    <xs:simpleContent>
+      <xs:extension base="abstractRangeIntervalType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="abstractRangeIntervalType">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
 
@@ -403,7 +430,7 @@
       <xs:element name="broadcasters" type="mediaFacetType" minOccurs="0"/>
       <xs:element name="genres" type="mediaSearchableTermFacetType" minOccurs="0"/>
       <xs:element name="tags" type="extendedMediaFacetType" minOccurs="0"/>
-      <xs:element name="durations" type="dateRangeFacetsType" minOccurs="0"/>
+      <xs:element name="durations" type="durationRangeFacetsType" minOccurs="0"/>
       <xs:element name="descendantOf" type="memberRefFacetType" minOccurs="0"/>
       <xs:element name="episodeOf" type="memberRefFacetType" minOccurs="0"/>
       <xs:element name="memberOf" type="memberRefFacetType" minOccurs="0"/>
@@ -433,6 +460,34 @@
         <xs:attribute name="caseSensitive" type="xs:boolean"/>
       </xs:extension>
     </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="durationRangeFacetsType">
+    <xs:complexContent>
+      <xs:extension base="abstractFacetType">
+        <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="interval" type="durationRangeIntervalType"/>
+            <xs:element name="preset" type="dateRangePresetTypeEnum"/>
+            <xs:element name="range" type="durationRangeFacetItemType"/>
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="durationRangeIntervalType">
+    <xs:simpleContent>
+      <xs:extension base="abstractRangeIntervalType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="durationRangeFacetItemType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="begin" type="xs:duration" minOccurs="0"/>
+      <xs:element name="end" type="xs:duration" minOccurs="0"/>
+    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="memberRefFacetType">
@@ -564,7 +619,7 @@
       <xs:element name="broadcasters" type="termFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genres" type="mediaGenreFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tags" type="termFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="durations" type="dateFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="durations" type="durationFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="descendantOf" type="memberRefFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="episodeOf" type="memberRefFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="memberOf" type="memberRefFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
@@ -617,6 +672,17 @@
       <xs:extension base="termFacetResultItemType">
         <xs:sequence>
           <xs:element name="term" type="media:termType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="durationFacetResultItemType">
+    <xs:complexContent>
+      <xs:extension base="rangeFacetResultItem">
+        <xs:sequence>
+          <xs:element name="begin" type="xs:duration" minOccurs="0"/>
+          <xs:element name="end" type="xs:duration" minOccurs="0"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
