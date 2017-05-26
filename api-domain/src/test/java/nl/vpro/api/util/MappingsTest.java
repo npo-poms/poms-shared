@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
@@ -86,6 +87,13 @@ public class MappingsTest {
     }
 
 
+
+    @Test
+    public void testUnmarshallers() {
+        for (String ns : mappings.knownNamespaces()) {
+            Unmarshaller schema = mappings.getUnmarshaller(true, ns).get();
+        }
+    }
 
 
     protected void testNamespace(String xmlns) throws IOException, JAXBException, SAXException {
