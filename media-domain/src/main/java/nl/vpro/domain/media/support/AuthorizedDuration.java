@@ -95,6 +95,7 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
     public AuthorizedDuration() {
     }
 
+    @Deprecated
     public AuthorizedDuration(Date value) {
         this.duration = value == null ? null : java.time.Duration.of(value.toInstant().toEpochMilli(), ChronoUnit.MILLIS);
     }
@@ -137,7 +138,7 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
 
     @Deprecated
     public Date getValue() {
-        return duration == null ? null : new Date(duration.toMillis());
+        return asDate(this);
     }
 
     @Deprecated
@@ -192,6 +193,14 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
 
     public static java.time.Duration get(AuthorizedDuration dur) {
         return dur == null ? null : dur.get();
+    }
+
+    @Deprecated
+    public static java.util.Date asDate(AuthorizedDuration dur) {
+        if (dur == null) {
+            return null;
+        }
+        return dur.duration == null ? null : new Date(dur.duration.toMillis());
     }
 
     @Override

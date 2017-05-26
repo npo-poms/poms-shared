@@ -359,15 +359,15 @@ public abstract class MediaObject extends PublishableObject
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
     // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
-    @Filters({
-            @Filter(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec10_.mergedTo_id is null) and " + // MSE-3526
+    @FilterJoinTables({
+            @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec10_.mergedTo_id is null) and " + // MSE-3526
                                                                                                                 // ?
                     "(mediaobjec10_.publishstart is null or mediaobjec10_.publishstart < now()) and "
                     + "(mediaobjec10_.publishstop is null or mediaobjec10_.publishstop > now())" + ")"),
-            @Filter(name = EMBARGO_FILTER, condition = "(mediaobjec10_2_.type != 'CLIP' "
+            @FilterJoinTable(name = EMBARGO_FILTER, condition = "(mediaobjec10_2_.type != 'CLIP' "
                     + "or mediaobjec10_.publishstart is null " + "or mediaobjec10_.publishstart < now() "
                     + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec10_.id and o.broadcasters_id in (:broadcasters)))"),
-            @Filter(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))") })
+            @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))") })
     protected Set<MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
@@ -572,10 +572,6 @@ public abstract class MediaObject extends PublishableObject
     public static Long idFromUrn(String urn) {
         final String id = urn.substring(urn.lastIndexOf(':') + 1);
         return Long.valueOf(id);
-    }
-
-    protected static Date getDurationAsDate(AuthorizedDuration duration) {
-        return duration != null ? duration.getValue() : null;
     }
 
     protected static <T> List<T> updateList(List<T> toUpdate, Collection<T> values) {
@@ -1220,7 +1216,7 @@ public abstract class MediaObject extends PublishableObject
 
     @Deprecated
     public void setDurationWithDate(Date duration) throws ModificationException {
-        Date oldDuration = getDurationAsDate(this.duration);
+        Date oldDuration = AuthorizedDuration.asDate(this.duration);
         if (ObjectUtils.notEqual(oldDuration, duration) && hasAuthorizedDuration()) {
             throw new ModificationException("Updating an existing and authorized duration is not allowed");
         }
@@ -1237,7 +1233,7 @@ public abstract class MediaObject extends PublishableObject
 
     @Deprecated
     public Date getDurationAsDate() {
-        return getDurationAsDate(duration);
+        return AuthorizedDuration.asDate(duration);
     }
 
     public boolean hasAuthorizedDuration() {
