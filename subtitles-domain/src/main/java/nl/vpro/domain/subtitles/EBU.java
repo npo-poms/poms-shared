@@ -61,7 +61,7 @@ public class EBU {
                     if (bytesRead < 1024) {
                         //the file must contain at least a GSI block and a TTI block
                         //this is a fatal parsing error.
-                        throw new IllegalArgumentException("The file must contain at least a GSI block");
+                        throw new IllegalArgumentException("The file must contain at least a GSI block, but read only " + bytesRead + " (< 1024)");
                     }
                     //CPC : code page number 0..2
                     //DFC : disk format code 3..10
