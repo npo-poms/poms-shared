@@ -1,15 +1,13 @@
 package nl.vpro.domain.api.page;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.*;
 import javax.xml.transform.Result;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
@@ -20,6 +18,8 @@ import org.xmlunit.diff.Diff;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 
+import nl.vpro.api.util.Mappings;
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.Order;
@@ -141,14 +141,15 @@ public class PageFormTest {
 
     }
     @Test
-    public void toXml2() throws IOException, JAXBException, SAXException {
+    public void toXmlValidated() throws IOException, JAXBException, SAXException {
         String json = "{\"searches\":{\"types\":[\"PLAYER\"]},\"sort\":{\"sortDate\":\"DESC\"},\"facets\":{\"keywords\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24},\"genres\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24},\"sections\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24}},\"mediaForm\":{\"facets\":{\"avTypes\":{\"threshold\":0,\"sort\":\"COUNT_DESC\",\"offset\":0,\"max\":24}},\"highlight\":false},\"highlight\":false}";
         PageForm form = Jackson2Mapper.INSTANCE.readValue(new StringReader(json), PageForm.class);
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(form, out);
         System.out.println(out.toString());
-        PageForm validated = (PageForm) getUnmarshaller(PageForm.class).unmarshal(new StringReader(out.toString()));
+        Mappings mappings = new Mappings(null);
+        PageForm validated = (PageForm) mappings.getUnmarshaller(true, Xmlns.API_NAMESPACE).get().unmarshal(new StreamSource(new ByteArrayInputStream(out.toByteArray())));
     }
 
     @Test
