@@ -71,6 +71,8 @@ public class Program extends MediaObject {
     })
     @SortNatural
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+
+    // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
     @Filters({
         @Filter(name = PUBLICATION_FILTER, condition =
             "((mediaobjec10_.publishstart is null or mediaobjec10_.publishstart < now())" +
@@ -92,6 +94,7 @@ public class Program extends MediaObject {
         org.hibernate.annotations.CascadeType.ALL
     })
     //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
     @Filters({
         @Filter(name = PUBLICATION_FILTER, condition =
             "((segments0_1_.publishstart is null or segments0_1_.publishstart < now())" +

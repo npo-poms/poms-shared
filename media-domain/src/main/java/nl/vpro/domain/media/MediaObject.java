@@ -357,6 +357,8 @@ public abstract class MediaObject extends PublishableObject
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+
+    // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
     @Filters({
             @Filter(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec10_.mergedTo_id is null) and " + // MSE-3526
                                                                                                                 // ?
