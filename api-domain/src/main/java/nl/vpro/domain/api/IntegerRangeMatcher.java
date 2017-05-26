@@ -34,6 +34,12 @@ public class IntegerRangeMatcher extends RangeMatcher<Integer> implements Predic
         this.end = end;
     }
 
+    @Override
+    protected boolean defaultIncludeEnd() {
+        return false;
+
+    }
+
 
     @Override
     public boolean test(Integer integer) {

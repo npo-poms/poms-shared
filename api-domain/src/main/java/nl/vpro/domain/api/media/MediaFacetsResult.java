@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.DateFacetResultItem;
+import nl.vpro.domain.api.DurationFacetResultItem;
 import nl.vpro.domain.api.MultipleFacetsResult;
 import nl.vpro.domain.api.TermFacetResultItem;
 
@@ -53,7 +54,7 @@ public class MediaFacetsResult {
 
     private List<TermFacetResultItem> tags;
 
-    private List<DateFacetResultItem> durations;
+    private List<DurationFacetResultItem> durations;
 
     private List<MemberRefFacetResultItem> descendantOf;
 
@@ -123,11 +124,11 @@ public class MediaFacetsResult {
         this.tags = tags;
     }
 
-    public List<DateFacetResultItem> getDurations() {
+    public List<DurationFacetResultItem> getDurations() {
         return durations;
     }
 
-    public void setDurations(List<DateFacetResultItem> durations) {
+    public void setDurations(List<DurationFacetResultItem> durations) {
         this.durations = durations;
     }
 
@@ -228,7 +229,7 @@ public class MediaFacetsResult {
         return tags;
     }
 
-    List<DateFacetResultItem> getDurations(MediaSearch search) {
+    List<DurationFacetResultItem> getDurations(MediaSearch search) {
         if (search != null && search.getDurations() != null && durations == null) {
             durations = new ArrayList<>();
         }

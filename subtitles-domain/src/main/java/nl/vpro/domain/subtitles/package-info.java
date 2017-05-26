@@ -3,7 +3,10 @@
         {
             @XmlNs(
                 prefix = "subtitles",
-                namespaceURI = Xmlns.MEDIA_SUBTITLES_NAMESPACE)
+                namespaceURI = Xmlns.MEDIA_SUBTITLES_NAMESPACE),
+            @XmlNs(
+                prefix = "shared",
+                namespaceURI = Xmlns.SHARED_NAMESPACE)
 
         },
     namespace = Xmlns.MEDIA_SUBTITLES_NAMESPACE,

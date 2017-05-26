@@ -15,6 +15,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -235,10 +236,10 @@ public class MediaSearchTest {
 
     @Test
     public void testApplyIncludeDurations() throws Exception{
-        DateRangeMatcher range = new DateRangeMatcher(new Date(0), new Date(10));
+        DurationRangeMatcher range = new DurationRangeMatcher(Duration.ofMillis(0), Duration.ofMillis(10));
 
         MediaSearch search = new MediaSearch();
-        search.setDurations(new DateRangeMatcherList(range));
+        search.setDurations(new DurationRangeMatcherList(range));
 
         {
             MediaObject object = MediaTestDataBuilder.program().duration(Duration.ofMillis(5)).build();
@@ -253,11 +254,11 @@ public class MediaSearchTest {
 
     @Test
     public void testApplyExcludeDurations() throws Exception{
-        DateRangeMatcher range = new DateRangeMatcher(new Date(0), new Date(10));
+        DurationRangeMatcher range = new DurationRangeMatcher(Duration.ofMillis(0), Duration.ofMillis(10));
         range.setMatch(Match.NOT);
 
         MediaSearch search = new MediaSearch();
-        search.setDurations(new DateRangeMatcherList(range));
+        search.setDurations(new DurationRangeMatcherList(range));
 
         {
             MediaObject object = MediaTestDataBuilder.program().duration(Duration.ofMillis(5)).build();
@@ -283,6 +284,56 @@ public class MediaSearchTest {
             MediaObject object = MediaTestDataBuilder.program().descendantOf(new DescendantRef("MID", "urn", MediaType.ALBUM)).build();
             assertThat(search.test(object)).isFalse();
         }
+    }
+
+    private static final ScheduleEventSearch AT_NED1 = ScheduleEventSearch.builder().channel(Channel.NED1).build();
+    private static final ScheduleEventSearch AT_NED2 = ScheduleEventSearch.builder().channel(Channel.NED2).begin(Instant.EPOCH).build();
+
+    @Test
+    public void testScheduleEventSearchXml() throws Exception {
+        MediaSearch in = new MediaSearch();
+        in.setScheduleEvents(Arrays.asList(AT_NED1, AT_NED2));
+        MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<local:mediaSearch xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:scheduleEvents>\n" +
+                "        <api:channel>NED1</api:channel>\n" +
+                "    </api:scheduleEvents>\n" +
+                "     <api:scheduleEvents>\n" +
+                "       <api:begin>1970-01-01T01:00:00+01:00</api:begin>\n" +
+                "       <api:channel>NED2</api:channel>\n" +
+                "   </api:scheduleEvents>\n"+
+                "</local:mediaSearch>");
+        assertThat(out.getScheduleEvents()).containsExactly(AT_NED1, AT_NED2);
+
+    }
+   @Test
+    public void testScheduleEventSearchJson() throws Exception {
+        MediaSearch in = new MediaSearch();
+        in.setScheduleEvents(Arrays.asList(AT_NED1));
+        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
+            "  \"scheduleEvents\" : {\n" +
+            "    \"channel\" : \"NED1\"\n" +
+            "  }\n" +
+            "}");
+       assertThat(out.getScheduleEvents()).containsExactly(AT_NED1);
+
+    }
+
+    @Test
+    public void testScheduleEventSearchJson2() throws Exception {
+        MediaSearch in = new MediaSearch();
+        in.setScheduleEvents(Arrays.asList(AT_NED1, AT_NED2));
+        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
+            "  \"scheduleEvents\" : [ {\n" +
+            "    \"channel\" : \"NED1\"\n" +
+            "  }, {\n" +
+            "    \"begin\" : 0,\n" +
+            "    \"channel\" : \"NED2\"\n" +
+            "  } ]\n" +
+            "}");
+        assertThat(out.getScheduleEvents()).containsExactly(AT_NED1, AT_NED2);
+
     }
   /*  @Test
     public void testApplyRelations() {
