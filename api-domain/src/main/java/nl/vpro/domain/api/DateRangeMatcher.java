@@ -7,7 +7,6 @@ package nl.vpro.domain.api;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 import java.util.function.Predicate;
@@ -53,16 +52,15 @@ public class DateRangeMatcher extends RangeMatcher<Date> implements Predicate<Da
         super(DateUtils.toDate(begin), DateUtils.toDate(end));
     }
 
-    /**
-     * TODO Makes no sense. Durations are not dates.
-     */
-    @Deprecated
-    public DateRangeMatcher(Duration begin, Duration end, Boolean inclusiveEnd) {
-        super(DateUtils.toDate(begin), DateUtils.toDate(end), inclusiveEnd);
-    }
 
     public DateRangeMatcher(Date begin, Date end, Boolean inclusiveEnd, Match match) {
         super(begin, end, inclusiveEnd, match);
+    }
+
+    @Override
+    protected boolean defaultIncludeEnd() {
+        return false;
+
     }
 
     @Override

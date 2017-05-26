@@ -8,7 +8,7 @@ import nl.vpro.theory.ComparableTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MemberRefTest extends ComparableTest<MemberRef> {
+public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
 
     private static Program member = new Program(1L);
 
