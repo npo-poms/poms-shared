@@ -3,7 +3,7 @@
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-parent</artifactId>
-    <version>5.3.2</version>
+    <version>5.3.3-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.publiekeomroep</groupId>
@@ -15,7 +15,6 @@
 
   <properties>
     <poms.shared.version>${project.version}</poms.shared.version>
-    <vpro.shared.version>1.69.3-SNAPSHOT</vpro.shared.version>
   </properties>
 
 

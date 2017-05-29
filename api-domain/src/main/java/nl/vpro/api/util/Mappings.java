@@ -39,6 +39,7 @@ import nl.vpro.domain.api.page.PageSearchResults;
 import nl.vpro.domain.api.profile.Profile;
 import nl.vpro.domain.api.subtitles.SubtitlesForm;
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.ResourceResolver;
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.update.PageUpdate;
 import nl.vpro.domain.secondscreen.Screen;
@@ -57,6 +58,8 @@ public class Mappings {
     private final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
+    private final SchemaFactory SCHEMA_FACTORY = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
 
     String pomsLocation = null;
 
@@ -66,6 +69,8 @@ public class Mappings {
         if (pomsLocation == null){
             log.warn("No explicit poms location given");
         }
+        SCHEMA_FACTORY.setResourceResolver(new ResourceResolver());
+
 
     }
 
@@ -149,7 +154,6 @@ public class Mappings {
     }
 
     private Schema getSchema(Class<?>... classesToRead) throws JAXBException, IOException, SAXException {
-        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         JAXBContext context = JAXBContext.newInstance(classesToRead);
         final List<DOMResult> result = new ArrayList<>();
         context.generateSchema(new SchemaOutputResolver() {
@@ -161,7 +165,7 @@ public class Mappings {
                 return dom;
             }
         });
-        return sf.newSchema(new DOMSource(result.get(0).getNode()));
+        return SCHEMA_FACTORY.newSchema(new DOMSource(result.get(0).getNode()));
     }
 
 
@@ -186,8 +190,7 @@ public class Mappings {
                 if (validate) {
                     File xsd = getFile(namespace);
                     if (xsd.exists()) {
-                        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-                        Schema schema = sf.newSchema(xsd);
+                        Schema schema = SCHEMA_FACTORY.newSchema(xsd);
                         result.setSchema(schema);
                     }
                 }
