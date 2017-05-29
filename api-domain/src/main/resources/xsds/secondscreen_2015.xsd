@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:secondscreen:2015" xmlns:shared="urn:vpro:shared:2009" xmlns:tns="urn:vpro:secondscreen:2015" xmlns:screen="urn:vpro:secondscreen:2015" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:vpro:media:2009">
 
-  <xs:import namespace="urn:vpro:media:2009" schemaLocation="http://poms.omroep.nl/schema/vproMedia.xsd"/>
+  <xs:import namespace="urn:vpro:media:2009" schemaLocation="https://poms.omroep.nl/schema/vproMedia.xsd"/>
 
-  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="http://poms.omroep.nl/schema/vproShared.xsd"/>
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="https://poms.omroep.nl/schema/vproShared.xsd"/>
 
   <xs:element name="screen" type="tns:screenType"/>
 
