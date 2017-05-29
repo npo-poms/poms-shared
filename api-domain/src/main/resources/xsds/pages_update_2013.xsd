@@ -3,7 +3,7 @@
 
   <xs:import namespace="urn:vpro:pages:2013" schemaLocation="pages_2013.xsd"/>
 
-  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="http://poms.omroep.nl/schema/vproShared.xsd"/>
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="https://poms.omroep.nl/schema/vproShared.xsd"/>
 
   <xs:element name="image" type="tns:imageUpdateType"/>
 
