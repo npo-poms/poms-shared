@@ -6,9 +6,11 @@ package nl.vpro.domain.subtitles;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.Base64;
 
 import javax.xml.bind.JAXB;
 
@@ -33,20 +35,17 @@ public class SubtitlesTest {
 
 
         JAXBTestUtil.roundTripAndSimilar(subtitles,
-                "<subtitles:subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00+01:00\" lastModified=\"1970-01-01T01:00:00+01:00\" type=\"CAPTION\"  cueCount=\"1\"  xml:lang=\"nl-NL\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\">\n" +
-                    "    <subtitles:content format=\"WEBVTT\">WEBVTT\n" +
-                    "\n" +
-                    "1\n" +
-                    "00:00:00.000 --> 00:01:04.000\n" +
-                    "bla</subtitles:content>\n" +
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                    "<subtitles:subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00+01:00\" lastModified=\"1970-01-01T01:00:00+01:00\" type=\"CAPTION\" xml:lang=\"nl-NL\" cueCount=\"1\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+                    "    <subtitles:content format=\"WEBVTT\" charset=\"UTF-8\">V0VCVlRUCgoxCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDE6MDQuMDAwCmJsYQoK</subtitles:content>\n" +
                     "</subtitles:subtitles>");
     }
 
     @Test
-    public void testUnmarshallFromXml() {
+    public void testUnmarshallFromXml() throws UnsupportedEncodingException {
         String xml =
             "<subtitles mid=\"VPRO_1234\" offset=\"P0DT0H2M0.000S\" creationDate=\"1970-01-01T01:00:00+01:00\" lastModified=\"1970-01-01T01:00:00+01:00\" type=\"CAPTION\" xml:lang=\"nl-NL\" xmlns=\"urn:vpro:media:subtitles:2009\">\n" +
-                "    <content format=\"WEBVTT\">Ondertiteling tekst</content>\n" +
+                "    <content format=\"WEBVTT\">" + Base64.getEncoder().encodeToString("Ondertiteling tekst".getBytes()) + "</content>\n" +
                 "</subtitles>";
 
         StringReader reader = new StringReader(xml);
@@ -55,7 +54,7 @@ public class SubtitlesTest {
 
         assertThat(subtitles.getMid()).isEqualTo("VPRO_1234");
         assertThat(subtitles.getOffset()).isEqualTo(Duration.ofMillis(120000));
-        assertThat(subtitles.getContent().getValue()).isEqualTo("Ondertiteling tekst");
+        assertThat(new String(subtitles.getContent().getValue(), "UTF-8")).isEqualTo("Ondertiteling tekst");
     }
 
     @Test
@@ -76,14 +75,15 @@ public class SubtitlesTest {
             "  \"mid\" : \"VPRO_1234\",\n" +
             "  \"offset\" : 120000,\n" +
             "  \"content\" : {\n" +
-            "    \"value\" : \"WEBVTT\\n\\n1\\n00:00:02.200 --> 00:00:04.150\\n888\\n\\n\",\n" +
-            "    \"format\" : \"WEBVTT\"\n" +
+            "    \"format\" : \"WEBVTT\",\n" +
+            "    \"value\" : \"V0VCVlRUCgoxCjAwOjAwOjAyLjIwMCAtLT4gMDA6MDA6MDQuMTUwCjg4OAoK\",\n" +
+            "    \"charset\" : \"UTF-8\"\n" +
             "  },\n" +
             "  \"creationDate\" : \"1970-01-01T01:00:00+01:00\",\n" +
             "  \"lastModified\" : \"1970-01-01T01:00:00+01:00\",\n" +
             "  \"type\" : \"CAPTION\",\n" +
             "  \"lang\" : \"nl-NL\",\n" +
-            "   \"cueCount\" : 1" +
+            "  \"cueCount\" : 1\n" +
             "}");
     }
 
@@ -92,15 +92,16 @@ public class SubtitlesTest {
         Subtitles subtitles = Subtitles.from(Arrays.asList(
                 StandaloneCue.tt888(new Cue(
                 "mid", 1, Duration.ZERO, Duration.ofSeconds(64), "bla"))).iterator());
-        Jackson2TestUtil.roundTripAndSimilar(subtitles, "{\n" +
+        Jackson2TestUtil.roundTripAndSimilar(subtitles, "{" +
             "  \"mid\" : \"mid\",\n" +
             "  \"content\" : {\n" +
             "    \"format\" : \"WEBVTT\",\n" +
-            "    \"value\" : \"WEBVTT\\n\\n1\\n00:00:00.000 --> 00:01:04.000\\nbla\\n\\n\"\n" +
+            "    \"value\" : \"V0VCVlRUCgoxCjAwOjAwOjAwLjAwMCAtLT4gMDA6MDE6MDQuMDAwCmJsYQoK\",\n" +
+            "    \"charset\" : \"UTF-8\"\n" +
             "  },\n" +
             "  \"type\" : \"CAPTION\",\n" +
-            "  \"cueCount\" :1,\n" +
-            "  \"lang\" : \"nl\"\n" +
+            "  \"lang\" : \"nl\",\n" +
+            "  \"cueCount\" : 1\n" +
             "}");
 
     }
