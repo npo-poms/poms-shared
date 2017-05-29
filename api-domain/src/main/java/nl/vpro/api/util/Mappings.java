@@ -65,7 +65,7 @@ public class Mappings {
 
     @Inject
     public Mappings(@Named("${poms.location}") String pomsLocation) {
-        this.pomsLocation = pomsLocation == null ? "http://poms.omroep.nl/" : pomsLocation;
+        this.pomsLocation = pomsLocation == null ? "https://poms.omroep.nl/" : pomsLocation;
 
         SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("https://www.w3.org/2009/01/xml.xsd"));
         KNOWN_LOCATIONS.putAll(SYSTEM_MAPPING);
@@ -103,6 +103,8 @@ public class Mappings {
         MAPPING.put(SECOND_SCREEN_NAMESPACE, new Class[]{Screen.class});
         MAPPING.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.media.Filter.class});
         MAPPING.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
+        MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class});
+
         MAPPING.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class, SubtitlesType.class});
 
         Xmlns.fillLocationsAtPoms(KNOWN_LOCATIONS, pomsLocation);
