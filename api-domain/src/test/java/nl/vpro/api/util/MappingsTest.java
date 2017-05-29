@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
@@ -27,7 +28,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @Slf4j
 public class MappingsTest {
 
-    Mappings mappings = new Mappings("http://poms.omroep.nl/");
+    Mappings mappings = new Mappings("https://poms-dev.omroep.nl");
 
 
 
@@ -87,8 +88,19 @@ public class MappingsTest {
 
 
 
+    @Test
+    public void testUnmarshallers() {
+        for (String ns : mappings.knownNamespaces()) {
+            Unmarshaller schema = mappings.getUnmarshaller(true, ns).get();
+        }
+    }
+
 
     protected void testNamespace(String xmlns) throws IOException, JAXBException, SAXException {
+
+        mappings.getUnmarshaller(true, xmlns).get();
+
+
         File file = mappings.getFile(xmlns);
         InputStream control = getClass().getResourceAsStream("/xsds/" + file.getName());
         if (control == null) {
@@ -105,7 +117,9 @@ public class MappingsTest {
         diff.getDifferences();
 
         assertThat(diff.hasDifferences()).withFailMessage("Not identical " + file + " " + getClass().getResource("/xsds/" + file.getName())).isFalse();
-        log.info("Indentical {} {}", file, getClass().getResource("/xsds/" + file.getName()));
+        log.info("Identical {} {}", file, getClass().getResource("/xsds/" + file.getName()));
+
+
     }
 
 }
