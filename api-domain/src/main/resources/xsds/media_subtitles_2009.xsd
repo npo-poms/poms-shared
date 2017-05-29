@@ -22,8 +22,9 @@
 
   <xs:complexType name="subtitlesContentType">
     <xs:simpleContent>
-      <xs:extension base="xs:string">
+      <xs:extension base="xs:base64Binary">
         <xs:attribute name="format" type="tns:subtitlesFormatEnum"/>
+        <xs:attribute name="charset" type="xs:string"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
