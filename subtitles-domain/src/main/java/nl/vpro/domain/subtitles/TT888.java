@@ -61,7 +61,12 @@ public class TT888 {
 
 
     public static Stream<Cue> parse(String parent, Duration offset, Function<TimeLine, Duration> offsetGuesser, InputStream inputStream) {
-        return parse(parent, offset, offsetGuesser, new InputStreamReader(inputStream, CHARSET));
+        return parse(parent, offset, offsetGuesser, inputStream, CHARSET);
+    }
+
+
+    public static Stream<Cue> parse(String parent, Duration offset, Function<TimeLine, Duration> offsetGuesser, InputStream inputStream, Charset charset) {
+        return parse(parent, offset, offsetGuesser, new InputStreamReader(inputStream, charset));
     }
 
     static Stream<Cue> parse(final String parent, final Duration offsetParameter, Function<TimeLine, Duration> offsetGuesser, Reader reader) {

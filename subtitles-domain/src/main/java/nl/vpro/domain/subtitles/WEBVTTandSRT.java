@@ -27,13 +27,21 @@ public class WEBVTTandSRT {
 
 
     public static Stream<Cue> parseWEBVTT(String parent, InputStream inputStream) {
-        return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, VTT_CHARSET), ".");
+        return parseWEBVTT(parent, Duration.ZERO, inputStream, null);
     }
 
     public static Stream<Cue> parseSRT(String parent, InputStream inputStream) {
-        return parse(parent, Duration.ZERO, new InputStreamReader(inputStream, SRT_CHARSET), ",");
+        return parseSRT(parent, Duration.ZERO, inputStream, null);
     }
 
+
+    public static Stream<Cue> parseWEBVTT(String parent, Duration offset, InputStream inputStream, Charset charset) {
+        return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? VTT_CHARSET : charset), ".");
+    }
+
+    public static Stream<Cue> parseSRT(String parent, Duration offset, InputStream inputStream, Charset charset) {
+        return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? SRT_CHARSET : charset), ",");
+    }
 
     static Stream<Cue> parse(String parent, Duration offset,  Reader reader, String decimalSeparator) {
         final Iterator<String> stream = new BufferedReader(reader)

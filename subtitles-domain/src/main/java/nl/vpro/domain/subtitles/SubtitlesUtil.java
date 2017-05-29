@@ -3,8 +3,8 @@ package nl.vpro.domain.subtitles;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.time.Duration;
-import java.util.Base64;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.function.Function;
@@ -50,17 +50,24 @@ public class SubtitlesUtil {
         Function<TimeLine, Duration> offsetGuesser = guessOffset ? new DefaultOffsetGuesser(subtitles.getCreationDate()) : timeLine -> Duration.ZERO;
         switch (content.getFormat()) {
             case TT888:
-                return TT888.parse(mid, offset, offsetGuesser, new StringReader(content.getValue()));
+                return TT888.parse(mid, offset, offsetGuesser, new ByteArrayInputStream(content.getValue()), getCharset(content.getCharset()));
             case WEBVTT:
-                return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ".");
+                return WEBVTTandSRT.parseWEBVTT(mid, offset, new ByteArrayInputStream(content.getValue()), getCharset(content.getCharset()));
             case SRT:
-                return WEBVTTandSRT.parse(mid, offset, new StringReader(content.getValue()), ",");
+                return WEBVTTandSRT.parseSRT(mid, offset, new ByteArrayInputStream(content.getValue()), getCharset(content.getCharset()));
             case EBU:
-                return EBU.parse(mid, offset, offsetGuesser, new ByteArrayInputStream(Base64.getDecoder().decode(content.getValue())));
+                return EBU.parse(mid, offset, offsetGuesser, new ByteArrayInputStream(content.getValue()));
             default:
                 throw new IllegalArgumentException("Not supported format " + content.getFormat());
         }
 
+    }
+
+    private static Charset getCharset(String c) {
+        if (c == null) {
+            return null;
+        }
+        return Charset.forName(c);
     }
 
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles, boolean guessOffset) {
