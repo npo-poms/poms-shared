@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -25,9 +26,6 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @EqualsAndHashCode
 @ToString
 @Data
-@EqualsAndHashCode
-@ToString
-
 public class AvailableSubtitles {
 
     @XmlJavaTypeAdapter(LocaleAdapter.class)
@@ -47,24 +45,5 @@ public class AvailableSubtitles {
 		this.language = language;
 		this.type = type;
 
-	}
-
-	@XmlJavaTypeAdapter(LocaleAdapter.class)
-	@XmlAttribute
-	public Locale getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(Locale language) {
-		this.language = language;
-	}
-
-	@XmlAttribute
-	public SubtitlesType getType() {
-		return type;
-	}
-
-	public void setType(SubtitlesType type) {
-		this.type = type;
 	}
 }

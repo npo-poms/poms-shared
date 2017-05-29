@@ -104,6 +104,9 @@ public final class Xmlns {
     }
 
     public static void fillLocationsAtPoms(Map<String, URI> map, String pomsLocation) {
+        if (pomsLocation == null) {
+            throw new IllegalArgumentException();
+        }
         //map.put(XMLConstants.XML_NS_URI, URI.create(pomsLocation + "schema/xml.xsd"));
         map.put(MEDIA_NAMESPACE, URI.create(pomsLocation + "schema/vproMedia.xsd"));
         map.put(SHARED_NAMESPACE, URI.create(pomsLocation + "schema/vproShared.xsd"));

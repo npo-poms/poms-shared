@@ -28,7 +28,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 @Slf4j
 public class MappingsTest {
 
-    Mappings mappings = new Mappings("https://poms-dev.omroep.nl");
+    Mappings mappings = new Mappings(null);
 
 
 
