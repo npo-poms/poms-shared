@@ -39,6 +39,7 @@ import nl.vpro.domain.api.page.PageSearchResults;
 import nl.vpro.domain.api.profile.Profile;
 import nl.vpro.domain.api.subtitles.SubtitlesForm;
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.ResourceResolver;
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.update.PageUpdate;
 import nl.vpro.domain.secondscreen.Screen;
@@ -56,6 +57,8 @@ public class Mappings {
 
     private final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
+
+    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
 
     String pomsLocation = null;
@@ -77,6 +80,8 @@ public class Mappings {
         } catch (JAXBException | IOException e) {
             log.error(e.getMessage(), e);
         }
+        sf.setResourceResolver(new ResourceResolver());
+
     }
 
 
@@ -143,7 +148,6 @@ public class Mappings {
     }
 
     private Schema getSchema(Class<?>... classesToRead) throws JAXBException, IOException, SAXException {
-        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         JAXBContext context = JAXBContext.newInstance(classesToRead);
         final List<DOMResult> result = new ArrayList<>();
         context.generateSchema(new SchemaOutputResolver() {
@@ -162,6 +166,8 @@ public class Mappings {
     private ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, Class<?> ... classes) {
         return ThreadLocal.withInitial(() -> {
             try {
+
+
                 Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
                 if (validate) {
                     result.setSchema(getSchema(classes));
@@ -184,7 +190,6 @@ public class Mappings {
                 if (validate) {
                     File xsd = getFile(namespace);
                     if (xsd.exists()) {
-                        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
                         Schema schema = sf.newSchema(xsd);
                         result.setSchema(schema);
                     } else {
