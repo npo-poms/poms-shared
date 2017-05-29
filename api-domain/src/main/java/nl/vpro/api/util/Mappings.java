@@ -58,7 +58,7 @@ public class Mappings {
     private final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
-    SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    private final SchemaFactory SCHEMA_FACTORY = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
 
     String pomsLocation = null;
@@ -80,7 +80,7 @@ public class Mappings {
         } catch (JAXBException | IOException e) {
             log.error(e.getMessage(), e);
         }
-        sf.setResourceResolver(new ResourceResolver());
+        SCHEMA_FACTORY.setResourceResolver(new ResourceResolver());
 
     }
 
@@ -159,7 +159,7 @@ public class Mappings {
                 return dom;
             }
         });
-        return sf.newSchema(new DOMSource(result.get(0).getNode()));
+        return SCHEMA_FACTORY.newSchema(new DOMSource(result.get(0).getNode()));
     }
 
 
@@ -190,7 +190,7 @@ public class Mappings {
                 if (validate) {
                     File xsd = getFile(namespace);
                     if (xsd.exists()) {
-                        Schema schema = sf.newSchema(xsd);
+                        Schema schema = SCHEMA_FACTORY.newSchema(xsd);
                         result.setSchema(schema);
                     } else {
                         log.warn("Not found for {}: {}", namespace, xsd);
