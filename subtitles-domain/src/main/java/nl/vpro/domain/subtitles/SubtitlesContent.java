@@ -1,8 +1,10 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+import java.nio.charset.Charset;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -15,6 +17,7 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "subtitlesContentType")
 @Slf4j
+@Data
 public class SubtitlesContent implements Serializable {
 
     @Column(nullable = false)
@@ -25,31 +28,27 @@ public class SubtitlesContent implements Serializable {
 
     @Column(nullable = false)
     @XmlValue
-    private String content;
+    private byte[] value;
 
+    @Column
+    @XmlAttribute
+    private String charset;
 
     public SubtitlesContent() {
-
     }
 
     public SubtitlesContent(SubtitlesFormat format, String content) {
         this.format = format;
-        this.content = content;
+        this.value = content.getBytes(Charset.forName("UTF-8"));
+        this.charset = "UTF-8";
     }
 
-    public String getValue() {
-        return content;
-    }
 
-    public void setValue(String content) {
-        this.content = content;
-    }
-
-    public SubtitlesFormat getFormat() {
-        return format;
-    }
-
-    public void setFormat(SubtitlesFormat format) {
+    @lombok.Builder
+    private SubtitlesContent(SubtitlesFormat format, byte[] content, Charset charset) {
         this.format = format;
+        this.value = content;
+        this.charset = charset.name();
     }
+
 }
