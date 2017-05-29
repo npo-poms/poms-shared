@@ -2,14 +2,9 @@ package nl.vpro.domain.api.page;
 
 import java.io.*;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.*;
-import javax.xml.transform.Result;
-import javax.xml.transform.dom.DOMResult;
-import javax.xml.transform.dom.DOMSource;
+import javax.xml.bind.JAXB;
+import javax.xml.bind.JAXBException;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -215,21 +210,4 @@ public class PageFormTest {
 
 
 
-    private Unmarshaller getUnmarshaller(Class clazz) throws JAXBException, IOException, SAXException {
-        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        JAXBContext context = JAXBContext.newInstance(clazz);
-        final DOMResult[] result = new DOMResult[1];
-        result[0] = new DOMResult();
-        context.generateSchema(new SchemaOutputResolver() {
-            @Override
-            public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-                result[0].setSystemId(namespaceUri);
-                return result[0];
-            }
-        });
-        Schema schema = sf.newSchema(new DOMSource(result[0].getNode()));
-        Unmarshaller unmarshaller = JAXBContext.newInstance(PageForm.class).createUnmarshaller();
-        unmarshaller.setSchema(schema);
-        return unmarshaller;
-    }
 }
