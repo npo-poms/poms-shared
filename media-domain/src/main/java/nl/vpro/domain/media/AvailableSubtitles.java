@@ -9,6 +9,8 @@ import javax.persistence.Cacheable;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -18,20 +20,27 @@ import nl.vpro.xml.bind.LocaleAdapter;
 
 @Embeddable
 @Cacheable
-@XmlType(name="AvailableSubtitlesType")
+@XmlType(name="availableSubtitlesType")
+@XmlAccessorType(XmlAccessType.NONE)
+@EqualsAndHashCode
+@ToString
+@Data
 @EqualsAndHashCode
 @ToString
 
 public class AvailableSubtitles {
 
-	private Locale language;
+    @XmlJavaTypeAdapter(LocaleAdapter.class)
+    @XmlAttribute
+    private Locale language;
 
-	@Enumerated(EnumType.STRING)
-	private SubtitlesType type;
+    @Enumerated(EnumType.STRING)
+    @XmlAttribute
+    private SubtitlesType type;
 
-	public AvailableSubtitles() {
+    public AvailableSubtitles() {
 
-	}
+    }
 
 	@lombok.Builder
 	public AvailableSubtitles(Locale language, SubtitlesType type) {

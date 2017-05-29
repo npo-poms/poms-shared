@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:media:subtitles:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:subtitles="urn:vpro:media:subtitles:2009" xmlns:tns="urn:vpro:media:subtitles:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="http://poms.omroep.nl/schema/vproShared.xsd"/>
-
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2009/01/xml.xsd"/>
 
   <xs:element name="subtitles" type="tns:subtitlesType"/>
@@ -15,7 +13,6 @@
     <xs:attribute name="offset" type="xs:duration"/>
     <xs:attribute name="creationDate" type="xs:dateTime"/>
     <xs:attribute name="lastModified" type="xs:dateTime"/>
-    <xs:attribute name="type" type="shared:subtitlesTypeEnum"/>
     <xs:attribute ref="xml:lang"/>
     <xs:attribute name="cueCount" type="xs:int"/>
   </xs:complexType>
