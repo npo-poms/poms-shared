@@ -65,27 +65,11 @@ public class Mappings {
 
     @Inject
     public Mappings(@Named("${poms.location}") String pomsLocation) {
-        this.pomsLocation = pomsLocation == null ? "https://poms.omroep.nl" : pomsLocation;
+        this.pomsLocation = pomsLocation == null ? "https://poms.omroep.nl/" : pomsLocation;
         if (pomsLocation == null){
             log.warn("No explicit poms location given");
         }
         SCHEMA_FACTORY.setResourceResolver(new ResourceResolver());
-
-
-    }
-
-
-    public Collection<String> knownNamespaces() {
-        return MAPPING.keySet();
-    }
-
-    public Map<String, URI> systemNamespaces() {
-        return Collections.unmodifiableMap(SYSTEM_MAPPING);
-    }
-
-    protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
-
-    {
         SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("https://www.w3.org/2009/01/xml.xsd"));
         KNOWN_LOCATIONS.putAll(SYSTEM_MAPPING);
 
@@ -99,7 +83,19 @@ public class Mappings {
         } catch (JAXBException | IOException e) {
             log.error(e.getMessage(), e);
         }
+
     }
+
+
+    public Collection<String> knownNamespaces() {
+        return MAPPING.keySet();
+    }
+
+    public Map<String, URI> systemNamespaces() {
+        return Collections.unmodifiableMap(SYSTEM_MAPPING);
+    }
+
+    protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
 
     protected void fillMappings() {
         MAPPING.put(PROFILE_NAMESPACE, new Class[]{Profile.class});
@@ -186,7 +182,11 @@ public class Mappings {
     public ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, String namespace) {
         return ThreadLocal.withInitial(() -> {
             try {
-                Unmarshaller result = JAXBContext.newInstance(MAPPING.get(namespace)).createUnmarshaller();
+                Class[] classes = MAPPING.get(namespace);
+                if (classes == null) {
+                    throw new IllegalArgumentException("No mapping found for " + namespace);
+                }
+                Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
                 if (validate) {
                     File xsd = getFile(namespace);
                     if (xsd.exists()) {
