@@ -173,7 +173,13 @@ public class MediaForm {
     private Boolean noMembers;
 
     @XmlElement
+    @Deprecated
     private Boolean noCredits;
+
+    @XmlElement
+    @Getter
+    @Setter
+    private IntegerRange imagesWithoutCreditsCount;
 
     @XmlElement
     private Boolean findDeleted;
@@ -438,10 +444,12 @@ public class MediaForm {
         this.noMembers = noMembers;
     }
 
+    @Deprecated
     public boolean hasNoCredits() {
         return noCredits == null ? false : noCredits;
     }
 
+    @Deprecated
     public void setNoCredits(Boolean noCredits) {
         this.noCredits = noCredits;
     }
