@@ -55,6 +55,8 @@ import nl.vpro.domain.user.Organization;
     "episodeOfCount",
     "noMembers",
     "noCredits",
+    "imagesWithoutCreditsCount",
+    "imagesCount",
     "findDeleted",
     "excludedMids",
     "descendantOf"
