@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.RangeMatcher;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.xml.bind.DefaultDurationXmlAdapter;
@@ -34,7 +35,7 @@ public class DurationRangeMatcher extends RangeMatcher<Duration> implements Pred
     @Getter
     @Setter
     @XmlJavaTypeAdapter(DefaultDurationXmlAdapter.class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.SerializerString.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @XmlSchemaType(name = "duration")
@@ -44,7 +45,7 @@ public class DurationRangeMatcher extends RangeMatcher<Duration> implements Pred
     @Getter
     @Setter
     @XmlJavaTypeAdapter(DefaultDurationXmlAdapter.class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.SerializerString.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @XmlSchemaType(name = "duration")
@@ -60,6 +61,12 @@ public class DurationRangeMatcher extends RangeMatcher<Duration> implements Pred
 
     public DurationRangeMatcher(Duration begin, Duration end) {
         super(begin, end, null);
+    }
+
+
+    @lombok.Builder
+    public DurationRangeMatcher(Duration begin, Duration end, Boolean inclusiveEnd, Match match) {
+        super(begin, end, inclusiveEnd, match);
     }
 
 

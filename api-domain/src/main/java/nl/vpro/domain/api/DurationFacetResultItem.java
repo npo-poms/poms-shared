@@ -32,7 +32,7 @@ public class DurationFacetResultItem extends RangeFacetResultItem<Duration> {
 
     @Override
     @XmlJavaTypeAdapter(DefaultDurationXmlAdapter.class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.SerializerString.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @XmlSchemaType(name = "duration")
@@ -46,7 +46,7 @@ public class DurationFacetResultItem extends RangeFacetResultItem<Duration> {
 
     @Override
     @XmlJavaTypeAdapter(DefaultDurationXmlAdapter.class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.SerializerString.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @XmlSchemaType(name = "duration")
