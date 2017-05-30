@@ -30,14 +30,14 @@ public class DurationRangeFacetItem implements RangeFacetItem<Duration> {
     private String name;
 
     @XmlJavaTypeAdapter(DefaultDurationXmlAdapter .class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.SerializerString.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @XmlSchemaType(name = "duration")
     private Duration begin;
 
     @XmlJavaTypeAdapter(DefaultDurationXmlAdapter .class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.SerializerString.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @XmlSchemaType(name = "duration")
