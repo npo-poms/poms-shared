@@ -182,6 +182,11 @@ public class MediaForm {
     private IntegerRange imagesWithoutCreditsCount;
 
     @XmlElement
+    @Getter
+    @Setter
+    private IntegerRange imagesCount;
+
+    @XmlElement
     private Boolean findDeleted;
 
     @XmlElement(name = "excludedMid")
