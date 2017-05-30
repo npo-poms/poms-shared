@@ -50,7 +50,7 @@
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="availableSubtitles" type="AvailableSubtitlesType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="availableSubtitles" type="availableSubtitlesType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="avAttributes" type="avAttributesType" minOccurs="0"/>
           <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
           <xs:element name="duration" type="shared:durationType" minOccurs="0"/>
@@ -229,7 +229,7 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:complexType name="AvailableSubtitlesType">
+  <xs:complexType name="availableSubtitlesType">
     <xs:sequence/>
     <xs:attribute name="language" type="xs:string"/>
     <xs:attribute name="type" type="shared:subtitlesTypeEnum"/>
