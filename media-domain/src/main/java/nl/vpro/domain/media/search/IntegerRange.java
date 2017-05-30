@@ -4,10 +4,12 @@
  */
 package nl.vpro.domain.media.search;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.*;
-import java.time.Instant;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "integerRangeType", propOrder = {
@@ -28,7 +30,7 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
 
     public IntegerRange() {
     }
-    
+
     public static class Builder {
         public Builder start(Long start) {
             this.start = Value.builder().value(start).build();
@@ -37,6 +39,16 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
 
         public Builder stop(Long stop) {
             this.stop = Value.builder().value(stop).build();
+            return this;
+        }
+
+        public Builder start(Long start, boolean inclusive) {
+            this.start = Value.builder().value(start).inclusive(inclusive).build();
+            return this;
+        }
+
+        public Builder stop(Long stop, boolean inclusive) {
+            this.stop = Value.builder().value(stop).inclusive(inclusive).build();
             return this;
         }
 
@@ -50,19 +62,19 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
             return this;
         }
     }
-    
-    
+
+
 
     @Data
     @EqualsAndHashCode(callSuper = true)
     @XmlType(name = "integerRangeValueType")
     public static class Value extends Range.RangeValue<Long> {
-        
+
         @XmlValue
         Long value;
-        
+
         public Value() {
-            
+
         }
         @lombok.Builder
         public Value(Boolean inclusive, Long value) {
