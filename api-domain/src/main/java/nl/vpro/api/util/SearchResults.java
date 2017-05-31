@@ -193,7 +193,7 @@ public class SearchResults {
         }
     }
 
-    public static void setSelected(DurationRangeMatcherList searches, DurationRangeFacets<?> dateRangeFacets, List<DurationFacetResultItem> facetResultItems, List<DurationFacetResultItem> selected, Callable<DurationFacetResultItem> creator) {
+    public static void setSelected(DurationRangeMatcherList searches, DurationRangeFacets<?> durationRangeFacets, List<DurationFacetResultItem> facetResultItems, List<DurationFacetResultItem> selected, Callable<DurationFacetResultItem> creator) {
 
         if (facetResultItems != null && searches != null) {
             for (DurationFacetResultItem facetResultItem : facetResultItems) {
@@ -226,13 +226,24 @@ public class SearchResults {
                             newItem.setEnd(item.getEnd());
                             newItem.setCount(0);
                             newItem.setSelected(true);
-                            if (dateRangeFacets != null && dateRangeFacets.getRanges() != null) {
-                                for (RangeFacet<Duration> range : dateRangeFacets.getRanges()) {
-                                    final DurationRangeFacetItem dateRangeFacetItem;
-                                    DurationRangeInterval dateRangeInterval = (DurationRangeInterval) range;
-                                    if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
-                                        newItem.setValue(dateRangeInterval.parsed().print(Instant.ofEpochMilli(item.getBegin().toMillis()), true));
+                            if (durationRangeFacets != null && durationRangeFacets.getRanges() != null) {
+                                for (RangeFacet<Duration> range : durationRangeFacets.getRanges()) {
+                                    final DurationRangeFacetItem durationRangeFacetItem;
+                                    if (range instanceof DurationRangeFacetItem) {
+                                        durationRangeFacetItem = (DurationRangeFacetItem) range;
+                                    } else {
+                                        DurationRangeInterval dateRangeInterval = (DurationRangeInterval) range;
+                                        if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
+                                            newItem.setValue(dateRangeInterval.parsed().print(Instant.ofEpochMilli(item.getBegin().toMillis()), false));
+                                            selected.add(newItem);
+                                        }
+                                        continue;
+                                    }
+                                    newItem.setValue(durationRangeFacetItem.getName());
+                                    if (durationRangeFacetItem.getBegin().equals(item.getBegin()) && durationRangeFacetItem.getEnd().equals(item.getEnd())) {
+                                        newItem.setValue(durationRangeFacetItem.getName());
                                         selected.add(newItem);
+                                        break;
                                     }
                                 }
                             } else {
