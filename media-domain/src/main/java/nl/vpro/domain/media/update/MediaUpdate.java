@@ -105,6 +105,16 @@ public abstract class MediaUpdate<M extends MediaObject>
         }
     }
 
+    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object) {
+        if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
+            return (MediaUpdate<M>) SegmentUpdate.create((MediaBuilder.AbstractSegmentBuilder) object);
+        } else if (object instanceof MediaBuilder.AbstractProgramBuilder) {
+            return (MediaUpdate<M>) ProgramUpdate.create((MediaBuilder.AbstractProgramBuilder) object);
+        } else {
+            return (MediaUpdate<M>) GroupUpdate.create((MediaBuilder.AbstractGroupBuilder) object);
+        }
+    }
+
     @Valid
     protected MediaBuilder<?, M>  builder;
 
