@@ -59,6 +59,8 @@
       <xsd:element name="episodeOfCount" type="integerRangeType" minOccurs="0"/>
       <xsd:element name="noMembers" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="noCredits" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="imagesWithoutCreditsCount" type="integerRangeType" minOccurs="0"/>
+      <xsd:element name="imagesCount" type="integerRangeType" minOccurs="0"/>
       <xsd:element name="findDeleted" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="excludedMid" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
