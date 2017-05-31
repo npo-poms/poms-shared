@@ -30,7 +30,7 @@ public class Embargos {
             to.setPublishStartInstant(from.getPublishStartInstant());
         }
         if (from.getPublishStopInstant() != null &&
-            (to.getPublishStopInstant() == null && to.getPublishStopInstant().isAfter(from.getPublishStopInstant()))
+            (to.getPublishStopInstant() == null || to.getPublishStopInstant().isAfter(from.getPublishStopInstant()))
             ) {
             to.setPublishStopInstant(from.getPublishStopInstant());
         }

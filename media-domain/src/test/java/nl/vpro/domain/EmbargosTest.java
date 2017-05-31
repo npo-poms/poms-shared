@@ -44,4 +44,28 @@ public class EmbargosTest {
 
     }
 
+
+    @Test
+    public void copyIfMoreRestricted4() throws Exception {
+        Embargo to = Embargos.of(Instant.ofEpochMilli(100), null);
+        ReadonlyEmbargo from = Embargos.readyOnly(Instant.ofEpochMilli(150), Instant.ofEpochMilli(500));
+        Embargos.copyIfMoreRestricted(from, to);
+        assertThat(to.getPublishStartInstant().toEpochMilli()).isEqualTo(150);
+        assertThat(to.getPublishStopInstant().toEpochMilli()).isEqualTo(500);
+
+
+    }
+
+
+    @Test
+    public void copyIfMoreRestricted5() throws Exception {
+        Embargo to = Embargos.of(Instant.ofEpochMilli(100), Instant.ofEpochMilli(600));
+        ReadonlyEmbargo from = Embargos.readyOnly(Instant.ofEpochMilli(150), Instant.ofEpochMilli(500));
+        Embargos.copyIfMoreRestricted(from, to);
+        assertThat(to.getPublishStartInstant().toEpochMilli()).isEqualTo(150);
+        assertThat(to.getPublishStopInstant().toEpochMilli()).isEqualTo(500);
+
+
+    }
+
 }
