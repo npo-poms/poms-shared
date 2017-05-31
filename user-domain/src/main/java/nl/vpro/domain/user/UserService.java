@@ -21,6 +21,11 @@ public interface UserService<T extends User> {
 
     T currentUser();
 
+    default String currentPrincipalId() {
+        T currentUser = currentUser();
+        return currentUser == null ? null : currentUser.getPrincipalId();
+    }
+
     void authenticate(String principalId, String password);
 
     boolean currentUserHasRole(String... roles);
