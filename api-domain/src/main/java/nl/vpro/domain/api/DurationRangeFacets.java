@@ -31,7 +31,6 @@ public class DurationRangeFacets<T extends AbstractSearch> extends AbstractFacet
 
     @XmlElements({
         @XmlElement(name = "interval", type = DurationRangeInterval.class),
-        @XmlElement(name = "preset", type = DateRangePreset.class),
         @XmlElement(name = "range", type = DurationRangeFacetItem.class)
     })
     @JsonIgnore
