@@ -468,7 +468,6 @@
         <xs:sequence>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element name="interval" type="durationRangeIntervalType"/>
-            <xs:element name="preset" type="dateRangePresetTypeEnum"/>
             <xs:element name="range" type="durationRangeFacetItemType"/>
           </xs:choice>
         </xs:sequence>
