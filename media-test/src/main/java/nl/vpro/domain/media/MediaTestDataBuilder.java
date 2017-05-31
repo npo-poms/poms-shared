@@ -202,6 +202,10 @@ public interface MediaTestDataBuilder<
         }
     }
 
+    default T published(Instant lastPublished) {
+        return published().lastPublished(lastPublished);
+    }
+
     default T withUrn() {
         return id(idBase.incrementAndGet());
     }
