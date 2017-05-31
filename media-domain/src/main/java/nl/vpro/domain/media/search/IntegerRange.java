@@ -52,6 +52,10 @@ public class IntegerRange implements Range<Long, IntegerRange.Value> {
             return this;
         }
 
+
+        public Builder equals(Long stopandstart) {
+            return stop(stopandstart, true).start(stopandstart, true);
+        }
         public Builder start(Value start) {
             this.start = start;
             return this;
