@@ -111,7 +111,7 @@ public enum Workflow {
         Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED, Workflow.MERGED, Workflow.PARENT_REVOKED);
 
     public static final List<Workflow> REVOKES =
-        Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED, Workflow.REVOKED);
+        Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED, Workflow.REVOKED, Workflow.MERGED);
 
     public static final List<Workflow> NEEDWORK =
         Arrays.asList(Workflow.FOR_DELETION, Workflow.FOR_PUBLICATION, Workflow.FOR_REPUBLICATION);
