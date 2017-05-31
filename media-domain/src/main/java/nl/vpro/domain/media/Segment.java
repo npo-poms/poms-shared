@@ -25,7 +25,6 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  */
 
 @Entity
-@Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "segment")
 @XmlType(name = "segmentType", propOrder = {
@@ -66,7 +65,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
         this(program, program.getMid(), java.time.Duration.ZERO, program.getDuration());
     }
 
-    public Segment(Program program, java.time.Duration start, Date duration) {
+    public Segment(Program program, java.time.Duration start, java.time.Duration duration) {
         this(program, program.getMid(), start, new AuthorizedDuration(duration));
     }
 
