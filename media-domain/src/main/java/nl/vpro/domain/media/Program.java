@@ -44,7 +44,6 @@ import static nl.vpro.domain.TextualObjects.sorted;
  * @author roekoe
  */
 @Entity
-@Cacheable
 @Broadcast
 @XmlRootElement(name = "program")
 @XmlAccessorType(XmlAccessType.NONE)

@@ -1,10 +1,12 @@
 package nl.vpro.domain.media;
 
-import java.util.Date;
 import java.util.List;
 import java.util.SortedSet;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -25,7 +27,6 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  */
 
 @Entity
-@Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "segment")
 @XmlType(name = "segmentType", propOrder = {
@@ -66,7 +67,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
         this(program, program.getMid(), java.time.Duration.ZERO, program.getDuration());
     }
 
-    public Segment(Program program, java.time.Duration start, Date duration) {
+    public Segment(Program program, java.time.Duration start, java.time.Duration duration) {
         this(program, program.getMid(), start, new AuthorizedDuration(duration));
     }
 
@@ -83,7 +84,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
         this.start = start;
     }
 
-    public Segment(AVType avType, java.time.Duration start, Date duration) {
+    public Segment(AVType avType, java.time.Duration start, java.time.Duration duration) {
         this(avType, start, new AuthorizedDuration(duration));
     }
 

@@ -32,7 +32,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
         this(MediaBuilder.segment());
     }
 
-    private SegmentUpdate(MediaBuilder.SegmentBuilder builder) {
+    private SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder) {
         super(builder);
     }
 
@@ -45,7 +45,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
         return new SegmentUpdate(MediaBuilder.segment());
     }
 
-    public static SegmentUpdate create(MediaBuilder.SegmentBuilder builder) {
+    public static SegmentUpdate create(MediaBuilder.AbstractSegmentBuilder builder) {
         return new SegmentUpdate(builder);
     }
 

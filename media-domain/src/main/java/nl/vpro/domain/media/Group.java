@@ -20,7 +20,6 @@ import nl.vpro.domain.media.exceptions.CircularReferenceException;
 
 @Entity
 @Table(name = "group_table")
-@Cacheable
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "groupType", propOrder = {
