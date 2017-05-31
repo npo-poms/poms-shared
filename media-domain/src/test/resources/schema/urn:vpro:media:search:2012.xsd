@@ -40,7 +40,6 @@
       <xsd:element name="episodeOfCount" type="tns:integerRangeType" minOccurs="0"/>
       <xsd:element name="noMembers" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="noCredits" type="xsd:boolean" minOccurs="0"/>
-
       <xsd:element name="imagesWithoutCreditsCount" type="tns:integerRangeType" minOccurs="0"/>
       <xsd:element name="imagesCount" type="tns:integerRangeType" minOccurs="0"/>
       <xsd:element name="findDeleted" type="xsd:boolean" minOccurs="0"/>
