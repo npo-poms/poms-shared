@@ -27,36 +27,21 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Editor extends AbstractUser {
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "principalid")
-    /*@org.hibernate.annotations.Cascade({
-        org.hibernate.annotations.CascadeType.ALL
-    })
-    */
+    @JoinColumn(name = "editor_principalid")
     @OrderBy("organization.id asc")
-    //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-////    @IsEmployee Works on domain model, but not on Hibernate persisted collections
     @Valid
     @XmlTransient
     SortedSet<BroadcasterEditor> broadcasters = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "principalid")
+    @JoinColumn(name = "editor_principalid")
     @OrderBy("organization.id asc")
-    //@Cacheable(true)
-    //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @XmlTransient
     SortedSet<PortalEditor> portals = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "principalid")
-/*
-    @org.hibernate.annotations.Cascade({
-        org.hibernate.annotations.CascadeType.ALL
-    })
-    @SortNatural
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-*/
+    @JoinColumn(name = "editor_principalid")
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
