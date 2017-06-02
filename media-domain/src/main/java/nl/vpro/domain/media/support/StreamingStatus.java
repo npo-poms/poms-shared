@@ -17,4 +17,8 @@ public enum StreamingStatus {
     public static StreamingStatus available(boolean drm) {
         return drm ? StreamingStatus.AVAILABLE_WITH_DRM : StreamingStatus.AVAILABLE;
     }
+
+    public boolean hasDrm() {
+        return this == AVAILABLE_WITH_DRM;
+    }
 }
