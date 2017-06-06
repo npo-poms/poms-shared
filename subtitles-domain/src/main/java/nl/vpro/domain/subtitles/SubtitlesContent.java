@@ -3,10 +3,15 @@ package nl.vpro.domain.subtitles;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -49,6 +54,10 @@ public class SubtitlesContent implements Serializable {
         this.format = format;
         this.value = content;
         this.charset = charset.name();
+    }
+
+    public InputStream asStream() {
+        return new ByteArrayInputStream(value == null ? new byte[0] : value);
     }
 
 }
