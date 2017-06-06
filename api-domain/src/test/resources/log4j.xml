@@ -8,6 +8,9 @@
     </layout>
   </appender>
 
+  <logger name="com.joestelmach.natty.Parser">
+    <level value="WARN"/>
+  </logger>
   <root>
     <level value="INFO"/>
     <appender-ref ref="console"/>
