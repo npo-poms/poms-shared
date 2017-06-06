@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<program xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" type="BROADCAST" avType="VIDEO"
+         embeddable="true" hasSubtitles="true" mid="VPWON_1267277" sortDate="2017-01-01T12:25:00+01:00"
+         creationDate="2016-11-17T12:12:47.726+01:00" lastModified="2017-04-26T16:54:22.107+02:00"
+         publishDate="2017-05-10T16:34:50.819+02:00" urn="urn:vpro:media:program:83991860" workflow="PUBLISHED">
+  <crid>crid://npo/programmagegevens/1286999130668</crid>
+  <broadcaster id="VPRO">VPRO</broadcaster>
+  <title owner="MIS" type="MAIN">Alleen op de wereld marathon</title>
+  <description owner="MIS" type="SHORT">Vondeling Remi gaat mee met Vitalis, een oude man die met zijn dieren rondtrekt
+    met een busje. Het is het begin van een avontuurlijke reis waarin Remi door alle ups en downs zijn geluk vindt.
+  </description>
+  <description owner="MIS" type="KICKER">Vondeling Remi gaat mee met Vitalis, een oude man die met zijn dieren rondtrekt
+    met een busje. Het is het begin van een avontuurlijke reis.
+  </description>
+  <genre id="3.0.1.1.3">
+    <term>Jeugd</term>
+    <term>Serie</term>
+  </genre>
+  <country code="NL">Nederland</country>
+  <language code="nl">Nederlands</language>
+  <releaseYear>2016</releaseYear>
+  <duration>P0DT1H21M39.910S</duration>
+  <credits/>
+  <descendantOf urnRef="urn:vpro:media:group:42699520" midRef="POMS_S_VPRO_549994" type="PLAYLIST"/>
+  <descendantOf urnRef="urn:vpro:media:group:45760423" midRef="POMS_S_VPRO_652484" type="COLLECTION"/>
+  <descendantOf urnRef="urn:vpro:media:group:45760505" midRef="POMS_S_VPRO_652517" type="COLLECTION"/>
+  <descendantOf urnRef="urn:vpro:media:group:83213090" midRef="VPWON_1266930" type="SERIES"/>
+  <descendantOf urnRef="urn:vpro:media:group:83407032" midRef="VPWON_1266925" type="SEASON"/>
+  <descendantOf urnRef="urn:vpro:media:group:92057552" midRef="POMS_S_NPO_8165797" type="PLAYLIST"/>
+  <descendantOf urnRef="urn:vpro:media:group:93589006" midRef="POMS_S_NPO_8709896" type="COLLECTION"/>
+  <prediction state="REALIZED">INTERNETVOD</prediction>
+  <prediction state="REVOKED" publishStart="2017-01-01T13:49:56+01:00" publishStop="2017-01-11T13:49:56+01:00">TVVOD
+  </prediction>
+  <prediction state="REALIZED" publishStart="2017-01-01T13:49:56+01:00" publishStop="2018-01-01T13:49:56+01:00">
+    PLUSVOD
+  </prediction>
+  <locations>
+    <location owner="PLUTO" platform="INTERNETVOD" creationDate="2017-01-01T14:35:04.933+01:00"
+              lastModified="2017-01-01T14:35:04.982+01:00" urn="urn:vpro:media:location:85236975" workflow="PUBLISHED">
+      <programUrl>odip+http://odi.omroep.nl/video/adaptive/VPWON_1267277</programUrl>
+      <avAttributes>
+        <avFileFormat>HASP</avFileFormat>
+      </avAttributes>
+    </location>
+    <location owner="AUTHORITY" platform="INTERNETVOD" creationDate="2017-04-26T16:54:22.095+02:00"
+              lastModified="2017-04-26T16:54:22.100+02:00" urn="urn:vpro:media:location:93398122" workflow="PUBLISHED">
+      <programUrl>npo://internetvod.omroep.nl/VPWON_1267277</programUrl>
+      <avAttributes>
+        <bitrate>3500000</bitrate>
+        <avFileFormat>HASP</avFileFormat>
+      </avAttributes>
+    </location>
+    <location owner="AUTHORITY" platform="PLUSVOD" creationDate="2017-04-26T16:54:22.050+02:00"
+              lastModified="2017-04-26T16:54:22.089+02:00" publishStart="2017-01-01T13:49:56+01:00"
+              publishStop="2018-01-01T13:49:56+01:00" urn="urn:vpro:media:location:93398118" workflow="PUBLISHED">
+      <programUrl>npo://plusvod.omroep.nl/VPWON_1267277</programUrl>
+      <avAttributes>
+        <bitrate>3500000</bitrate>
+        <avFileFormat>HASP</avFileFormat>
+      </avAttributes>
+    </location>
+    <location owner="PLUTO" platform="INTERNETVOD" creationDate="2017-01-01T14:28:03.547+01:00"
+              lastModified="2017-01-01T14:28:03.551+01:00" urn="urn:vpro:media:location:85236955" workflow="PUBLISHED">
+      <programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1267277</programUrl>
+      <avAttributes>
+        <bitrate>200000</bitrate>
+        <avFileFormat>H264</avFileFormat>
+      </avAttributes>
+    </location>
+    <location owner="PLUTO" platform="INTERNETVOD" creationDate="2017-01-01T14:31:04.166+01:00"
+              lastModified="2017-01-01T14:31:04.184+01:00" urn="urn:vpro:media:location:85236973" workflow="PUBLISHED">
+      <programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPWON_1267277</programUrl>
+      <avAttributes>
+        <bitrate>500000</bitrate>
+        <avFileFormat>H264</avFileFormat>
+      </avAttributes>
+    </location>
+    <location owner="PLUTO" platform="INTERNETVOD" creationDate="2017-01-01T14:41:05.938+01:00"
+              lastModified="2017-01-01T14:41:05.982+01:00" urn="urn:vpro:media:location:85237239" workflow="PUBLISHED">
+      <programUrl>odi+http://odi.omroep.nl/video/h264_std/VPWON_1267277</programUrl>
+      <avAttributes>
+        <bitrate>1000000</bitrate>
+        <avFileFormat>H264</avFileFormat>
+      </avAttributes>
+    </location>
+    <location owner="PROJECTM" platform="PLUSVOD" creationDate="2017-01-01T14:45:08.913+01:00"
+              lastModified="2017-01-01T14:45:08.918+01:00" publishStart="2017-01-01T13:49:56+01:00"
+              publishStop="2018-01-01T13:49:56+01:00" urn="urn:vpro:media:location:85237386" workflow="PUBLISHED">
+      <programUrl>sub+http://npo.npoplus.nl/video/MXF/VPWON_1267277</programUrl>
+      <avAttributes>
+        <bitrate>3500000</bitrate>
+        <avFileFormat>MPEG2</avFileFormat>
+      </avAttributes>
+    </location>
+  </locations>
+  <scheduleEvents>
+    <scheduleEvent channel="NED3" midRef="VPWON_1267277" net="ZAPP" urnRef="urn:vpro:media:program:83991860">
+      <textSubtitles>Teletekst ondertitels</textSubtitles>
+      <guideDay>2017-01-01+01:00</guideDay>
+      <start>2017-01-01T12:25:00+01:00</start>
+      <duration>P0DT1H20M0.000S</duration>
+      <poProgID>VPWON_1267277</poProgID>
+    </scheduleEvent>
+  </scheduleEvents>
+  <images>
+    <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2017-01-01T15:00:07.188+01:00"
+                  lastModified="2017-01-01T15:00:08.536+01:00" urn="urn:vpro:media:image:85240276" workflow="PUBLISHED">
+      <shared:title>Alleen op de wereld marathon</shared:title>
+      <shared:description>Vondeling Remi gaat mee met Vitalis, een oude man die met zijn dieren rondtrekt met een busje.
+        Het is het begin van een avontuurlijke reis waarin Remi door alle ups en downs zijn geluk vindt.
+      </shared:description>
+      <shared:imageUri>urn:vpro:image:847609</shared:imageUri>
+      <shared:offset>P0DT0H1M0.000S</shared:offset>
+      <shared:height>406</shared:height>
+      <shared:width>720</shared:width>
+    </shared:image>
+    <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2017-01-01T15:00:07.811+01:00"
+                  lastModified="2017-01-01T15:00:08.536+01:00" urn="urn:vpro:media:image:85240277" workflow="PUBLISHED">
+      <shared:title>Alleen op de wereld</shared:title>
+      <shared:description>Remi probeert om de aandacht van Lise te trekken, maar de andere bakkersknechten hebben meer
+        succes dan hij. * Remi kan eindelijk de beesten terugkopen.
+      </shared:description>
+      <shared:imageUri>urn:vpro:image:843057</shared:imageUri>
+      <shared:offset>P0DT0H2M0.000S</shared:offset>
+      <shared:height>406</shared:height>
+      <shared:width>720</shared:width>
+    </shared:image>
+    <shared:image owner="NEBO" type="STILL" highlighted="false" creationDate="2017-01-01T15:00:08.450+01:00"
+                  lastModified="2017-01-01T15:00:08.536+01:00" urn="urn:vpro:media:image:85240278" workflow="PUBLISHED">
+      <shared:title>Alleen op de wereld</shared:title>
+      <shared:description>Remi probeert om de aandacht van Lise te trekken, maar de andere bakkersknechten hebben meer
+        succes dan hij. * Remi kan eindelijk de beesten terugkopen.
+      </shared:description>
+      <shared:imageUri>urn:vpro:image:843058</shared:imageUri>
+      <shared:offset>P0DT0H3M0.000S</shared:offset>
+      <shared:height>406</shared:height>
+      <shared:width>720</shared:width>
+    </shared:image>
+  </images>
+  <episodeOf added="2016-11-17T12:12:47.833+01:00" highlighted="false" midRef="VPWON_1266925" index="4" type="SEASON"
+             urnRef="urn:vpro:media:group:83407032"/>
+  <segments/>
+</program>
