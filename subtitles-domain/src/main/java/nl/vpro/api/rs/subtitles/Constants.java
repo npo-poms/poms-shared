@@ -27,4 +27,7 @@ public class Constants {
     public static final MediaType EBU_TYPE = new MediaType("application", "ebu-stl");
 
 
+    public static final String XML = "application/xml";
+    public static final MediaType XML_TYPE = new MediaType("application", "xml");
+
 }

@@ -50,22 +50,25 @@ public class SubtitlesUtil {
         Function<TimeLine, Duration> offsetGuesser = guessOffset ? new DefaultOffsetGuesser(subtitles.getCreationDate()) : timeLine -> Duration.ZERO;
         switch (content.getFormat()) {
             case TT888:
-                return TT888.parse(mid, offset, offsetGuesser, new ByteArrayInputStream(content.getValue()), getCharset(content.getCharset()));
+                return TT888.parse(mid, offset, offsetGuesser, content.asStream(), getCharset(content.getCharset(),  TT888.CHARSET));
             case WEBVTT:
-                return WEBVTTandSRT.parseWEBVTT(mid, offset, new ByteArrayInputStream(content.getValue()), getCharset(content.getCharset()));
+                return WEBVTTandSRT.parseWEBVTT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.VTT_CHARSET));
             case SRT:
-                return WEBVTTandSRT.parseSRT(mid, offset, new ByteArrayInputStream(content.getValue()), getCharset(content.getCharset()));
+                return WEBVTTandSRT.parseSRT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.SRT_CHARSET));
             case EBU:
-                return EBU.parse(mid, offset, offsetGuesser, new ByteArrayInputStream(content.getValue()));
+                return EBU.parse(mid, offset, offsetGuesser, content.asStream());
             default:
                 throw new IllegalArgumentException("Not supported format " + content.getFormat());
         }
 
     }
 
-    private static Charset getCharset(String c) {
+
+
+    private static Charset getCharset(String c, Charset defaultValue) {
         if (c == null) {
-            return null;
+            log.debug("Using default");
+            return defaultValue;
         }
         return Charset.forName(c);
     }
