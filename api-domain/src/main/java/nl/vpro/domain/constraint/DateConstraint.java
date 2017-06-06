@@ -56,7 +56,7 @@ public abstract class DateConstraint<T> implements FieldConstraint<T> {
         return DateUtils.toInstant(PARSER.parse(date).get(0).getDates().get(0));
     }
 
-    
+
     protected boolean applyDate(Instant date) {
         if (date == null) return false;
         switch(operator) {
@@ -65,9 +65,9 @@ public abstract class DateConstraint<T> implements FieldConstraint<T> {
             case GT:
                 return date.isAfter(getDateAsInstant());
             case LTE:
-                return ! date.isBefore(getDateAsInstant());
-            case GTE:
                 return ! date.isAfter(getDateAsInstant());
+            case GTE:
+                return ! date.isBefore(getDateAsInstant());
 
         }
         return false;

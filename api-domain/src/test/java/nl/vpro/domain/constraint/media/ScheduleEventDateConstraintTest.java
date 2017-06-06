@@ -13,6 +13,7 @@ import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ScheduleEvent;
 
+import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class ScheduleEventDateConstraintTest {
@@ -43,5 +44,19 @@ public class ScheduleEventDateConstraintTest {
         JAXB.marshal(profileDefinition, System.out);
 
     }
+
+    @Test
+    public void testGTE() {
+        Filter filter = new Filter();
+        ScheduleEventDateConstraint constraint = new ScheduleEventDateConstraint();
+        constraint.setDate("2000-01-01");
+        constraint.setOperator(Operator.GT);
+        filter.setConstraint(constraint);
+
+        Program program = JAXB.unmarshal(getClass().getResourceAsStream("/VPWON_1267277.xml"), Program.class);
+
+        assertThat(filter.test(program)).isTrue();
+    }
+
 
 }
