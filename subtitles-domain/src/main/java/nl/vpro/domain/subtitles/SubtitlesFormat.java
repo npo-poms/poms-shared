@@ -23,7 +23,9 @@ public enum SubtitlesFormat {
     WEBVTT("vtt", Constants.VTT, Charset.forName("UTF-8")),
     TT888("txt", Constants.TT888, ISO6937CharsetProvider.ISO6937),
     EBU("stl", Constants.EBU, null),
-    SRT("srt", Constants.SRT, Charset.forName("cp1252"))
+    SRT("srt", Constants.SRT, Charset.forName("cp1252")),
+    XML("xml", Constants.SRT, null),
+
     ;
 
 
