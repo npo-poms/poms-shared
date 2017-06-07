@@ -79,6 +79,7 @@ public class SimpleTextMatcher extends AbstractTextMatcher<SimpleMatchType> {
         this(value, match, null);
     }
 
+    @lombok.Builder
     public SimpleTextMatcher(String value, Match match, SimpleMatchType matchType) {
         super(value);
         this.match = match == DEFAULT_MATCH ? null : match;
