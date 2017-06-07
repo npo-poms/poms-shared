@@ -29,17 +29,17 @@ public class Editor extends AbstractUser {
     @OneToMany(cascade = CascadeType.ALL)
     @Valid
     @XmlTransient
-    @JoinColumn(name = "organization_id")
+    @JoinColumn(name = "editor_principalid")
     Set<BroadcasterEditor> broadcasters = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "organization_id")
+    @JoinColumn(name = "editor_principalid")
     @Valid
     @XmlTransient
     Set<PortalEditor> portals = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "organization_id")
+    @JoinColumn(name = "editor_principalid")
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
