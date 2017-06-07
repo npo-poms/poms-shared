@@ -26,7 +26,7 @@ public class SubtitlesFormTest {
             ).build();
         Jackson2TestUtil.roundTripAndSimilar(form, "{\n" +
             "  \"searches\" : {\n" +
-            "    \"text\" : \"blad\",\n" +
+            "    \"text\" : \"bla\",\n" +
             "    \"types\" : \"CAPTION\"\n" +
             "  }\n" +
             "}");
