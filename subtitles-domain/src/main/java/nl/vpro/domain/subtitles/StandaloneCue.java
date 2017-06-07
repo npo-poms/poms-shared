@@ -70,11 +70,11 @@ public class StandaloneCue extends Cue {
                   Duration end,
                   String content,
                   Locale language,
-                  SubtitlesType type,
-                  Duration offset) {
+                  SubtitlesType type) {
         super(Cue.builder().parent(parent).sequence(sequence).start(start).end(end).content(content).build());
         this.language = language;
         this.type = type;
+
     }
 
 
