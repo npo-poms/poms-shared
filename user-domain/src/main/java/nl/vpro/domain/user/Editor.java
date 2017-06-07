@@ -27,25 +27,23 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Editor extends AbstractUser {
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "editor_principalid")
-    @OrderBy("organization.id asc")
     @Valid
     @XmlTransient
-    SortedSet<BroadcasterEditor> broadcasters = new TreeSet<>();
+    @JoinColumn(name = "organization_id")
+    Set<BroadcasterEditor> broadcasters = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "editor_principalid")
-    @OrderBy("organization.id asc")
+    @JoinColumn(name = "organization_id")
     @Valid
     @XmlTransient
-    SortedSet<PortalEditor> portals = new TreeSet<>();
+    Set<PortalEditor> portals = new TreeSet<>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "editor_principalid")
+    @JoinColumn(name = "organization_id")
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
-    SortedSet<ThirdPartyEditor> thirdParties = new TreeSet<>();
+    Set<ThirdPartyEditor> thirdParties = new TreeSet<>();
 
     @Transient
     private SortedSet<Broadcaster> allowedBroadcasterCache;
