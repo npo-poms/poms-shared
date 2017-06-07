@@ -6,7 +6,6 @@ package nl.vpro.domain.media.update;
 
 import lombok.Builder;
 
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
@@ -181,10 +180,9 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
 
     @Override
     public String toString() {
-        final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         return "LocationUpdate{" +
             "programUrl='" + programUrl + '\'' +
-            ", duration=" + (duration != null ? timeFormat.format(duration) : "-") +
+            ", duration=" + (duration != null ? duration : "-") +
             ", width=" + ((avAttributes != null && avAttributes.getVideoAttributes() != null) ? avAttributes.getVideoAttributes().getWidth() : "-") +
             ", height=" + ((avAttributes != null && avAttributes.getVideoAttributes() != null) ? avAttributes.getVideoAttributes().getHeight() : "-") +
             ", bitrate=" + ((avAttributes != null) ? avAttributes.getBitrate() : "-") +
