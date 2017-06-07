@@ -26,9 +26,20 @@ import nl.vpro.domain.subtitles.StandaloneCue;
 public class SubtitlesForm implements Form, Predicate<StandaloneCue> {
 
 
+
     @XmlElement
     @Valid
     private SubtitlesSearch searches;
+
+
+
+    public SubtitlesForm() {
+
+    }
+    @lombok.Builder
+    private SubtitlesForm(SubtitlesSearch searches) {
+        this.searches = searches;
+    }
 
 
     public SubtitlesSearch getSearches() {
