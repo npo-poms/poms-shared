@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.AbstractTextSearch;
 import nl.vpro.domain.api.Matchers;
+import nl.vpro.domain.api.SimpleTextMatcher;
 import nl.vpro.domain.api.TextMatcherList;
 import nl.vpro.domain.subtitles.StandaloneCue;
 
@@ -26,6 +27,8 @@ import nl.vpro.domain.subtitles.StandaloneCue;
 public class SubtitlesSearch extends AbstractTextSearch implements Predicate<StandaloneCue> {
 
 
+
+
     @Valid
     private TextMatcherList mids;
 
@@ -34,6 +37,18 @@ public class SubtitlesSearch extends AbstractTextSearch implements Predicate<Sta
 
     @Valid
     private TextMatcherList languages;
+
+    public SubtitlesSearch() {
+
+    }
+
+    @lombok.Builder(builderClassName = "Builder")
+    private SubtitlesSearch(TextMatcherList mids, TextMatcherList types, TextMatcherList languages, SimpleTextMatcher text) {
+        this.text = text;
+        this.mids = mids;
+        this.types = types;
+        this.languages = languages;
+    }
 
 
     public TextMatcherList getMediaIds() {
