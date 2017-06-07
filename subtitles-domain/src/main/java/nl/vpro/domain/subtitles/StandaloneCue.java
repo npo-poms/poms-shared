@@ -5,7 +5,6 @@ package nl.vpro.domain.subtitles;
  * @since 4.8
  */
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -64,7 +63,7 @@ public class StandaloneCue extends Cue {
         this.type = type;
     }
 
-    @Builder(builderMethodName = "standaloneBuilder")
+    @lombok.Builder(builderClassName = "Builder", builderMethodName = "standaloneBuilder")
     StandaloneCue(String parent,
                   int sequence,
                   Duration start,
