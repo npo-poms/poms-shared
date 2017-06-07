@@ -3,10 +3,7 @@ package nl.vpro.domain.api.subtitles;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.SearchResult;
 import nl.vpro.domain.api.SearchResultItem;
@@ -21,6 +18,7 @@ import nl.vpro.domain.subtitles.StandaloneCue;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "subtitlesSearchResult")
 @XmlType(name = "subtitlesSearchResultType")
+@XmlSeeAlso({StandaloneCue.class})
 public class SubtitlesSearchResult extends SearchResult<StandaloneCue> {
 
     public SubtitlesSearchResult() {
