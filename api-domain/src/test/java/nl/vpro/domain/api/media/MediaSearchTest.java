@@ -1,5 +1,6 @@
 package nl.vpro.domain.api.media;
 
+import java.io.StringReader;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -288,6 +290,7 @@ public class MediaSearchTest {
 
     private static final ScheduleEventSearch AT_NED1 = ScheduleEventSearch.builder().channel(Channel.NED1).build();
     private static final ScheduleEventSearch AT_NED2 = ScheduleEventSearch.builder().channel(Channel.NED2).begin(Instant.EPOCH).build();
+    private static final ScheduleEventSearch FROM_EPOCH = ScheduleEventSearch.builder().begin(Instant.EPOCH).build();
 
     @Test
     public void testScheduleEventSearchXml() throws Exception {
@@ -333,6 +336,21 @@ public class MediaSearchTest {
             "  } ]\n" +
             "}");
         assertThat(out.getScheduleEvents()).containsExactly(AT_NED1, AT_NED2);
+
+    }
+
+    @Test
+    public void testScheduleEventSearchJsonLenientChannel() throws Exception {
+
+        MediaSearch out = Jackson2Mapper.getLenientInstance().readerFor(MediaSearch.class).readValue(new StringReader("{\n" +
+            "  \"scheduleEvents\" : [ {\n" +
+            "    \"channel\" : \"NED1\"\n" +
+            "  }, {\n" +
+            "    \"begin\" : 0,\n" +
+            "    \"channel\" : \"\"\n" +
+            "  } ]\n" +
+            "}"));
+        assertThat(out.getScheduleEvents()).containsExactly(AT_NED1, FROM_EPOCH);
 
     }
   /*  @Test
