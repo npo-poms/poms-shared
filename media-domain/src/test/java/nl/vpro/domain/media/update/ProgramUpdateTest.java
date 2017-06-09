@@ -603,10 +603,10 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         publishedLocation.setPublishStopInstant(Instant.now().plus(Duration.ofMinutes(10)));
 
         assertThat(expiredLocation.getPublishStopInstant()).isNotNull();
-        assertThat(expiredLocation.getPublishStopInstant()).isLessThan(Instant.now());
+        assertThat(expiredLocation.getPublishStopInstant()).isBefore(Instant.now());
 
         assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
-        assertThat(publishedLocation.getPublishStopInstant()).isGreaterThan(Instant.now());
+        assertThat(publishedLocation.getPublishStopInstant()).isAfter(Instant.now());
 
         ProgramUpdate clip = ProgramUpdate
             .create(
@@ -619,10 +619,10 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                     )
             );
         assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); //Used to fail
-        assertThat(expiredLocation.getPublishStopInstant()).isLessThan(Instant.now());
+        assertThat(expiredLocation.getPublishStopInstant()).isBefore(Instant.now());
 
         assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
-        assertThat(publishedLocation.getPublishStopInstant()).isGreaterThan(Instant.now());
+        assertThat(publishedLocation.getPublishStopInstant()).isAfter(Instant.now());
 
         ProgramUpdate rounded = JAXBTestUtil.roundTrip(clip);
 
@@ -630,10 +630,10 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         publishedLocation = rounded.getLocations().last().toLocation();
 
         assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); //Used to fail
-        assertThat(expiredLocation.getPublishStopInstant()).isLessThan(Instant.now());
+        assertThat(expiredLocation.getPublishStopInstant()).isBefore(Instant.now());
 
         assertThat(publishedLocation.getPublishStopInstant()).isNotNull();
-        assertThat(publishedLocation.getPublishStopInstant()).isGreaterThan(Instant.now());
+        assertThat(publishedLocation.getPublishStopInstant()).isAfter(Instant.now());
 
 
     }
