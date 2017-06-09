@@ -1,6 +1,5 @@
 package nl.vpro.domain.api.media;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.time.Duration;
 import java.time.Instant;
@@ -10,10 +9,6 @@ import java.util.Date;
 import java.util.TreeSet;
 
 import org.junit.Test;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.*;
@@ -26,7 +21,6 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 
 /**
  * @author Michiel Meeuwissen
@@ -345,46 +339,9 @@ public class MediaSearchTest {
 
     }
 
-    enum ExampleEnum {
-        a, b
-    }
-
-
-    static class ExampleClass  {
-        @JsonProperty
-        ExampleEnum enumValue;
-    }
-
-
-
-    // Hmm, this proofs that  READ_UNKNOWN_ENUM_VALUES_AS_NULL in resteasy _can_ work
     @Test
-    public void testLenient() throws IOException {
-        ObjectMapper lenient = new ObjectMapper();
-        lenient.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
-
-        ExampleClass example1  = lenient.readerFor(ExampleClass.class).readValue(new StringReader("{\"enumValue\": \"a\"}"));
-        assertEquals(ExampleEnum.a, example1.enumValue);
-
-        ExampleClass example2 = lenient.readerFor(ExampleClass.class).readValue(new StringReader("{\"enumValue\": \"x\"}"));
-        assertEquals(null, example2.enumValue); // fails
-
-
-    }
-
-    @Test
-    // But here, it doesn't
     public void testScheduleEventSearchJsonLenientChannel() throws Exception {
 
-
-        ObjectMapper
-            lenient = new
-
-            ObjectMapper();
-        lenient.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL);
-
-        ScheduleEventSearch search1 = lenient.readerFor(ScheduleEventSearch.class).readValue(new StringReader("{\"begin\": 0, \"channel\": \"x\"}"));
-        assertThat(search1).isEqualTo(FROM_EPOCH);
 
         ScheduleEventSearch search = Jackson2Mapper.getLenientInstance().readerFor(ScheduleEventSearch.class).readValue(new StringReader("{'begin': 0, 'channel': 'x'}"));
         assertThat(search).isEqualTo(FROM_EPOCH);
