@@ -45,7 +45,8 @@ public class Filter extends AbstractFilter<Page> {
             @XmlElement(name = "broadcaster", type = BroadcasterConstraint.class),
             @XmlElement(name = "type", type = PageTypeConstraint.class),
             @XmlElement(name = "portal", type = PortalConstraint.class),
-            @XmlElement(name = "section", type = SectionConstraint.class)
+            @XmlElement(name = "section", type = SectionConstraint.class),
+            @XmlElement(name = "genre", type = GenreConstraint.class),
     })
     public void setConstraint(Constraint<Page> constraint) {
         super.setConstraint(constraint);

@@ -54,7 +54,8 @@ public class Or extends AbstractOr<MediaObject> {
         @XmlElement(name = "ageRating", type = AgeRatingConstraint.class),
         @XmlElement(name = "hasAgeRating", type = HasAgeRatingConstraint.class),
         @XmlElement(name = "contentRating", type = ContentRatingConstraint.class),
-        @XmlElement(name = "hasContentRating", type = HasContentRatingConstraint.class)
+        @XmlElement(name = "hasContentRating", type = HasContentRatingConstraint.class),
+        @XmlElement(name = "genre", type = GenreConstraint.class),
     })
     public List<Constraint<MediaObject>> getConstraints() {
         return constraints;

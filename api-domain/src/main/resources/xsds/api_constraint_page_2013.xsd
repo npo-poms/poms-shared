@@ -12,6 +12,7 @@
         <xs:element name="type" type="tns:pageTypeConstraintType"/>
         <xs:element name="portal" type="tns:pagePortalConstraintType"/>
         <xs:element name="section" type="tns:pageSectionConstraintType"/>
+        <xs:element name="genre" type="tns:pageGenreConstraintType"/>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -25,6 +26,7 @@
         <xs:element name="type" type="tns:pageTypeConstraintType"/>
         <xs:element name="portal" type="tns:pagePortalConstraintType"/>
         <xs:element name="section" type="tns:pageSectionConstraintType"/>
+        <xs:element name="genre" type="tns:pageGenreConstraintType"/>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -38,6 +40,7 @@
         <xs:element name="type" type="tns:pageTypeConstraintType"/>
         <xs:element name="portal" type="tns:pagePortalConstraintType"/>
         <xs:element name="section" type="tns:pageSectionConstraintType"/>
+        <xs:element name="genre" type="tns:pageGenreConstraintType"/>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -55,6 +58,10 @@
   </xs:simpleType>
 
   <xs:simpleType name="pageSectionConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  
+  <xs:simpleType name="pageGenreConstraintType">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
 </xs:schema>
