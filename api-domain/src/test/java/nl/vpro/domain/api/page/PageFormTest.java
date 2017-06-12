@@ -13,7 +13,7 @@ import org.xmlunit.diff.Diff;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 
-import nl.vpro.api.util.Mappings;
+import nl.vpro.api.util.ApiMappings;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.Match;
@@ -143,7 +143,7 @@ public class PageFormTest {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         JAXB.marshal(form, out);
         System.out.println(out.toString());
-        Mappings mappings = new Mappings(null);
+        ApiMappings mappings = new ApiMappings(null);
         PageForm validated = (PageForm) mappings.getUnmarshaller(true, Xmlns.API_NAMESPACE).get().unmarshal(new StreamSource(new ByteArrayInputStream(out.toByteArray())));
     }
 
