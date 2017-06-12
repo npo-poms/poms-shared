@@ -33,8 +33,8 @@ public class Or extends AbstractOr<Page> {
             @XmlElement(name = "broadcaster", type = BroadcasterConstraint.class),
             @XmlElement(name = "type", type = PageTypeConstraint.class),
             @XmlElement(name = "portal", type = PortalConstraint.class),
-            @XmlElement(name = "section", type = SectionConstraint.class)
-
+            @XmlElement(name = "section", type = SectionConstraint.class),
+            @XmlElement(name = "genre", type = GenreConstraint.class),
     })
     public List<Constraint<Page>> getConstraints() {
         return constraints;

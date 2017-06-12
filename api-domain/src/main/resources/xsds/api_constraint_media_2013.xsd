@@ -2,7 +2,6 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:constraint:media:2013" xmlns:tns="urn:vpro:api:constraint:media:2013" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:m="urn:vpro:media:2009">
 
   <xs:import namespace="urn:vpro:media:2009" schemaLocation="https://poms.omroep.nl/schema/vproMedia.xsd"/>
-
   <xs:import namespace="urn:vpro:api:constraint:2014" schemaLocation="api_constraint_2014.xsd"/>
 
   <xs:element name="filter" type="tns:filter"/>
@@ -35,6 +34,7 @@
         <xs:element name="hasAgeRating" type="tns:hasAgeRatingConstraintType"/>
         <xs:element name="contentRating" type="tns:contentRatingConstraintType"/>
         <xs:element name="hasContentRating" type="tns:hasContentRatingConstraintType"/>
+        <xs:element name="genre" type="tns:genreConstraintType"/>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -67,6 +67,7 @@
         <xs:element name="hasAgeRating" type="tns:hasAgeRatingConstraintType"/>
         <xs:element name="contentRating" type="tns:contentRatingConstraintType"/>
         <xs:element name="hasContentRating" type="tns:hasContentRatingConstraintType"/>
+        <xs:element name="genre" type="tns:genreConstraintType"/>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -99,6 +100,7 @@
         <xs:element name="hasAgeRating" type="tns:hasAgeRatingConstraintType"/>
         <xs:element name="contentRating" type="tns:contentRatingConstraintType"/>
         <xs:element name="hasContentRating" type="tns:hasContentRatingConstraintType"/>
+        <xs:element name="genre" type="tns:genreConstraintType"/>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -131,6 +133,7 @@
         <xs:element name="hasAgeRating" type="tns:hasAgeRatingConstraintType"/>
         <xs:element name="contentRating" type="tns:contentRatingConstraintType"/>
         <xs:element name="hasContentRating" type="tns:hasContentRatingConstraintType"/>
+        <xs:element name="genre" type="tns:genreConstraintType"/>
       </xs:choice>
     </xs:sequence>
   </xs:complexType>
@@ -230,5 +233,10 @@
   <xs:complexType name="hasContentRatingConstraintType">
     <xs:sequence/>
   </xs:complexType>
+  
+  <xs:simpleType name="genreConstraintType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  
 </xs:schema>
 

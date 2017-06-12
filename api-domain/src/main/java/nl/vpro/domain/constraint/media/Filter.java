@@ -62,9 +62,8 @@ public class Filter extends AbstractFilter<MediaObject> {
         @XmlElement(name = "ageRating", type = AgeRatingConstraint.class),
         @XmlElement(name = "hasAgeRating", type = HasAgeRatingConstraint.class),
         @XmlElement(name = "contentRating", type = ContentRatingConstraint.class),
-        @XmlElement(name = "hasContentRating", type = HasContentRatingConstraint.class)
-
-
+        @XmlElement(name = "hasContentRating", type = HasContentRatingConstraint.class),
+        @XmlElement(name = "genre", type = GenreConstraint.class)
     })
     @Override
     public void setConstraint(Constraint<MediaObject> constraint) {

@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import nl.vpro.domain.constraint.PredicateTestResult;
 import nl.vpro.domain.constraint.media.AgeRatingConstraint;
 import nl.vpro.domain.constraint.media.Filter;
+import nl.vpro.domain.constraint.media.GenreConstraint;
 import nl.vpro.domain.constraint.media.HasImageConstraint;
 import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.MediaObject;
@@ -94,6 +95,22 @@ public class ProfileTest {
             "        </media:filter>\n" +
             "    </mediaProfile>\n" +
             "</profile>");
+        assertNotNull(out.getMediaProfile());
+        assertThat((Predicate<MediaObject>) out.getMediaProfile()).isInstanceOf(ProfileDefinition.class);
+    }
+    
+    @Test
+    public void testGenreProfile() throws Exception {
+        Profile in = new Profile("genre", null, new ProfileDefinition<>(new Filter(new GenreConstraint("Jeugd"))));
+        in.setTimestamp(Instant.EPOCH);
+        Profile out = JAXBTestUtil.roundTripAndSimilar(in,
+                "<profile timestamp=\"1970-01-01T01:00:00+01:00\" name=\"genre\" xmlns=\"urn:vpro:api:profile:2013\" xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:page=\"urn:vpro:api:constraint:page:2013\">\n" +
+                        "    <mediaProfile>\n" +
+                        "        <media:filter>\n" +
+                        "            <media:genre>Jeugd</media:genre>\n" +
+                        "        </media:filter>\n" +
+                        "    </mediaProfile>\n" +
+                "</profile>");
         assertNotNull(out.getMediaProfile());
         assertThat((Predicate<MediaObject>) out.getMediaProfile()).isInstanceOf(ProfileDefinition.class);
     }
