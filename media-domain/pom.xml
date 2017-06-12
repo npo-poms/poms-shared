@@ -10,7 +10,6 @@
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-domain</artifactId>
-  <version>5.4-SNAPSHOT</version>
   <name>media-domain</name>
 
   <dependencies>
