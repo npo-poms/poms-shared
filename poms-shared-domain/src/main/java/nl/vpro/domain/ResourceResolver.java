@@ -18,8 +18,6 @@ import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 
-import nl.vpro.domain.Xmlns;
-
 /**
  * This is an {@link LSResourceResolver} (which makes it useable in schema validation) which can resolve the
  * namespaces used in the media project to their xsd schema's.

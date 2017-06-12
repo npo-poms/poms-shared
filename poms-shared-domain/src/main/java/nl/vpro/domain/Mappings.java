@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
@@ -32,7 +33,7 @@ import org.xml.sax.SAXException;
  * @since 5.4
  */
 @Slf4j
-public abstract class Mappings {
+public abstract class Mappings implements Function<String, File> {
     protected final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
@@ -192,6 +193,15 @@ public abstract class Mappings {
         return tempDir.toFile();
     }
 
+
+
+    @Override
+    public File apply(String namespace) {
+        return getFile(namespace);
+    }
+
+
+
     public File getFile(String namespace) {
         init();
         String fileName = namespace.substring("urn:vpro:".length()).replace(':', '_') + ".xsd";
@@ -203,5 +213,4 @@ public abstract class Mappings {
         }
         return file;
     }
-
 }
