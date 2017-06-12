@@ -32,6 +32,7 @@ import static nl.vpro.domain.Xmlns.*;
 @Slf4j
 public class ApiMappings extends Mappings {
 
+
     String pomsLocation = null;
 
     @Inject

@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.function.Function;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,11 +23,13 @@ import org.apache.commons.lang3.time.DateUtils;
  * @since 3.4
  */
 @Slf4j
-public abstract class AbstractSchemaController {
+public abstract class AbstractSchemaController<M extends Function<String, File>> {
 
+    protected M mappings;
 
-
-    protected abstract File getFileForNamespace(String namespace);
+    protected File getFileForNamespace(String namespace) {
+        return mappings.apply(namespace);
+    }
 
     protected void el(XMLStreamWriter w, String name, String chars) throws XMLStreamException {
         w.writeStartElement(name);
