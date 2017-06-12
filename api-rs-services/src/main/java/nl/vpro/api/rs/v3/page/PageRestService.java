@@ -4,12 +4,19 @@
  */
 package nl.vpro.api.rs.v3.page;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import nl.vpro.domain.api.Constants;
 import nl.vpro.domain.api.IdList;
 import nl.vpro.domain.api.MultiplePageResult;
 import nl.vpro.domain.api.SuggestResult;
@@ -86,4 +93,19 @@ public interface PageRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
     );
+
+
+    @POST
+    @Path("/iterate/")
+    @Deprecated
+        //"This targets sitemaps, we'll make a sitemap feature on the page rest service"
+    InputStream iterate(
+        @Valid PageForm form,
+        @QueryParam(PROFILE) String profile,
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @Context HttpServletRequest request,
+        @Context HttpServletResponse response
+    ) throws IOException;
 }

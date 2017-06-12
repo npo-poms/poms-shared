@@ -37,7 +37,7 @@ public interface MediaService extends MediaProvider {
 
     MediaResult list(Order order, Long offset, Integer max);
 
-    Iterator<MediaObject> iterate(String profile, MediaForm form, Long offet, Integer max, FilteringIterator.KeepAlive keepAlive) throws ProfileNotFoundException;
+    Iterator<MediaObject> iterate(String profile, MediaForm form, Long offset, Integer max, FilteringIterator.KeepAlive keepAlive) throws ProfileNotFoundException;
 
     MediaSearchResult find(String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
