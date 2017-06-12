@@ -27,9 +27,9 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  * @since 5.3
  */
 @Slf4j
-public class MappingsTest {
+public class ApiMappingsTest {
 
-    Mappings mappings = new Mappings(null);
+    ApiMappings mappings = new ApiMappings(null);
 
 
 
