@@ -46,8 +46,8 @@ public class Not extends AbstractNot<MediaObject> {
         @XmlElement(name = "ageRating", type = AgeRatingConstraint.class),
         @XmlElement(name = "hasAgeRating", type = HasAgeRatingConstraint.class),
         @XmlElement(name = "contentRating", type = ContentRatingConstraint.class),
-        @XmlElement(name = "hasContentRating", type = HasContentRatingConstraint.class)
-
+        @XmlElement(name = "hasContentRating", type = HasContentRatingConstraint.class),
+        @XmlElement(name = "genre", type = GenreConstraint.class),
     })
     public Constraint<MediaObject> getConstraint() {
         return constraint;

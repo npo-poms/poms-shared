@@ -73,7 +73,7 @@ public abstract class TextConstraint<T> implements FieldConstraint<T> {
             return false;
         }
 
-        TextConstraint that = (TextConstraint)o;
+        TextConstraint<?> that = (TextConstraint<?>)o;
 
         return value != null ? value.equals(that.value) : that.value == null;
     }

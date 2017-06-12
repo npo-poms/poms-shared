@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -116,7 +117,10 @@ public class MappingsTest {
             .build();
         diff.getDifferences();
 
-        assertThat(diff.hasDifferences()).withFailMessage("Not identical " + file + " " + getClass().getResource("/xsds/" + file.getName())).isFalse();
+        URL resource = getClass().getResource("/xsds/" + file.getName());
+        log.info("Checking workspace file " + resource);
+        log.info("And classpath file " + file);
+        assertThat(diff.hasDifferences()).withFailMessage("Not identical " + file + " " + resource).isFalse();
         log.info("Identical {} {}", file, getClass().getResource("/xsds/" + file.getName()));
 
 
