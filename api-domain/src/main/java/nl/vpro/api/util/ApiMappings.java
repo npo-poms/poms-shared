@@ -53,7 +53,7 @@ import static nl.vpro.domain.Xmlns.*;
  * @since 5.3
  */
 @Slf4j
-public class Mappings {
+public class ApiMappings {
 
     private final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
@@ -64,7 +64,7 @@ public class Mappings {
     String pomsLocation = null;
 
     @Inject
-    public Mappings(@Named("${poms.location}") String pomsLocation) {
+    public ApiMappings(@Named("${poms.location}") String pomsLocation) {
         this.pomsLocation = pomsLocation == null ? "https://poms.omroep.nl/" : pomsLocation;
 
         SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("https://www.w3.org/2009/01/xml.xsd"));
