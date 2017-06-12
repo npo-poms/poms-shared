@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.support;
+package nl.vpro.domain;
 
 import lombok.extern.slf4j.Slf4j;
 
