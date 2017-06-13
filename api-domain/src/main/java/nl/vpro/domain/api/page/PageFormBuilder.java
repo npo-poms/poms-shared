@@ -1,5 +1,6 @@
 package nl.vpro.domain.api.page;
 
+import java.time.Instant;
 import java.util.*;
 
 import nl.vpro.domain.api.*;
@@ -61,11 +62,11 @@ public class PageFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    public PageFormBuilder sortDate(Date from, Date to) {
+    public PageFormBuilder sortDate(Instant from, Instant to) {
         return sortDate(from, to, false);
     }
 
-    public PageFormBuilder sortDate(Date from, Date to, Boolean inclusiveEnd) {
+    public PageFormBuilder sortDate(Instant  from, Instant to, Boolean inclusiveEnd) {
         DateRangeMatcherList list = search().getSortDates();
         if (list == null) {
             list = new DateRangeMatcherList();
