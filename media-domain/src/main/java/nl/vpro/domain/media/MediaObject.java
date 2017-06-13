@@ -518,6 +518,14 @@ public abstract class MediaObject extends PublishableObject
     @Setter
     private List<AvailableSubtitles> availableSubtitles = null;
 
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    @XmlTransient
+    @Setter(AccessLevel.PACKAGE)
+    @Getter(AccessLevel.PACKAGE)
+    private StreamingStatus streamingPlatformStatus = StreamingStatus.NOT_AVAILABLE;
+
     public MediaObject() {
     }
 
