@@ -4,16 +4,17 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import org.apache.commons.lang.StringUtils;
-
-import static org.apache.commons.lang.StringUtils.removeEnd;
-import static org.apache.commons.lang.StringUtils.endsWith;
+import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.constraint.TextConstraint;
 import nl.vpro.domain.page.Page;
 
+import static org.apache.commons.lang3.StringUtils.endsWith;
+import static org.apache.commons.lang3.StringUtils.removeEnd;
+
 /**
- * @author machiel since 5.4
+ * @author machiel
+ * @since 5.4
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pageGenreConstraintType")
