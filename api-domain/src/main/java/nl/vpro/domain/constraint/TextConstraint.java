@@ -4,12 +4,13 @@
  */
 package nl.vpro.domain.constraint;
 
-import javax.el.ELContext;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlValue;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import javax.el.ELContext;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlValue;
 
 import com.google.common.collect.Lists;
 
@@ -26,9 +27,6 @@ public abstract class TextConstraint<T> implements FieldConstraint<T> {
     @XmlTransient
     protected CaseHandling caseHandling = CaseHandling.LOWER;
 
-    @XmlTransient
-    protected boolean exact = true;
-
     @XmlValue
     protected String value;
 
@@ -44,7 +42,16 @@ public abstract class TextConstraint<T> implements FieldConstraint<T> {
     }
 
     public boolean isExact() {
-        return exact;
+        return true;
+    }
+
+    /**
+     * The value used in wildcard queries. On default this implicetely adds stars, which will trigger an actual wildcard query.
+     * If no stars a
+     * @since 5.4
+     */
+    public String getWildcardValue() {
+        return "*" + getValue() + "*";
     }
 
     public String getValue() {

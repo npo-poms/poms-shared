@@ -1,10 +1,8 @@
 /*
- * Copyright (C) 2013 All rights reserved
+ * Copyright (C) 2017 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.domain.constraint.page;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -18,12 +16,14 @@ import nl.vpro.domain.page.PageBuilder;
 import nl.vpro.domain.page.PageType;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
- * @author Roelof Jan Koekoek
- * @since 2.0
+ * @author Machiel
+ * @since 5.4
  */
 public class GenreConstraintTest {
-    
+
     private static CachedURLClassificationServiceImpl cs;
 
     @BeforeClass
@@ -31,7 +31,7 @@ public class GenreConstraintTest {
         URL url = GenreConstraintTest.class.getResource("/nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
         cs = new CachedURLClassificationServiceImpl(url.toURI());
     }
-    
+
     @Test
     public void testGetValue() throws Exception {
         GenreConstraint in = new GenreConstraint("jeugd");
@@ -58,7 +58,7 @@ public class GenreConstraintTest {
         assertThat(new GenreConstraint("3.0.1.1").test(article)).isFalse();
         assertThat(new GenreConstraint("3.0.3").test(article)).isFalse();
     }
-    
+
     @Test
     public void testSubPath() throws Exception {
         GenreConstraint genreConstraint = new GenreConstraint("3.0.1.*");
