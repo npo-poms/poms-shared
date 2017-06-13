@@ -1,9 +1,5 @@
 package nl.vpro.domain.media;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.*;
 
 import javax.persistence.*;
@@ -20,7 +16,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.support.StreamingStatus;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Broadcaster;
@@ -103,12 +98,7 @@ public class Program extends MediaObject {
 
     private Set<Segment> segments;
 
-    @Enumerated(EnumType.STRING)
-    @Column
-    @XmlTransient
-    @Setter(AccessLevel.PACKAGE)
-    @Getter(AccessLevel.PACKAGE)
-    private StreamingStatus streamingPlatformStatus = StreamingStatus.NOT_AVAILABLE;
+
 
     public Program() {
         this(null, null);
