@@ -21,6 +21,8 @@ import nl.vpro.domain.media.MediaObject;
 @XmlType(name = "programUrlConstraintType")
 public class ProgramUrlConstraint extends TextConstraint<MediaObject>  {
 
+    private boolean exact;
+
     public ProgramUrlConstraint() {
         caseHandling = CaseHandling.ASIS;
         exact = true;
