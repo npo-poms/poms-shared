@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.api.page;
 
+import java.time.Instant;
 import java.util.Date;
 
 import org.junit.Test;
@@ -29,7 +30,7 @@ public class PageFormBuilderTest {
     public void testForm() throws Exception {
         PageForm form = PageFormBuilder.form()
             .text(Match.SHOULD, "text")
-            .sortDate(new Date(0), new Date(1000))
+            .sortDate(Instant.EPOCH, Instant.ofEpochMilli(1000))
             .sortDateFacet(new DateRangeFacetItem(), DateRangePreset.TODAY, DateRangePreset.LAST_WEEK)
             .types(PageType.ARTICLE)
             .typeFacet()
