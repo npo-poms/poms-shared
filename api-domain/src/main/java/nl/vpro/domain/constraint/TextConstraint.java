@@ -47,7 +47,7 @@ public abstract class TextConstraint<T> implements FieldConstraint<T> {
 
     /**
      * The value used in wildcard queries. On default this implicetely adds stars, which will trigger an actual wildcard query.
-     * If no stars a
+     * If no stars are found, a prefix query is supposed.
      * @since 5.4
      */
     public String getWildcardValue() {
