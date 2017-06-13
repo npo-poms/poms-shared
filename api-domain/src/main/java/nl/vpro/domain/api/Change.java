@@ -84,7 +84,7 @@ public class Change {
 
     public static Change update(long sequence, Long revision, MediaObject media) {
         Change change = new Change(sequence, revision, media.getMid(), media, false);
-        change.setPublishDate(DateUtils.toInstant(media.getLastPublished()));
+        change.setPublishDate(media.getLastPublishedInstant());
         return change;
     }
 
@@ -94,13 +94,13 @@ public class Change {
 
     public static Change delete(long sequence, Long revision, MediaObject media) {
         Change change = new Change(sequence, revision, media.getMid(), media, true);
-        change.setPublishDate(DateUtils.toInstant(media.getLastPublished()));
+        change.setPublishDate(media.getLastPublishedInstant());
         return change;
     }
 
     public static Change merged(long sequence, Long revision, MediaObject media, String mergedTo) {
         Change change = new Change(sequence, revision, media.getMid(), media, true);
-        change.setPublishDate(DateUtils.toInstant(media.getLastPublished()));
+        change.setPublishDate(media.getLastPublishedInstant());
         change.setMergedTo(mergedTo);
         return change;
     }
@@ -127,7 +127,7 @@ public class Change {
     public static Change of(MediaObject media, Long revision) {
 
         Change change;
-        final Instant lastPublished = DateUtils.toInstant(media.getLastPublished());
+        final Instant lastPublished = media.getLastPublishedInstant();
         if (media.getWorkflow() == null) {
             log.warn("Invalid workflow for {} : {}", media.getMid(), media.getWorkflow());
             return null;

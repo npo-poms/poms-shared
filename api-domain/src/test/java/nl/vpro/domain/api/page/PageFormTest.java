@@ -1,6 +1,7 @@
 package nl.vpro.domain.api.page;
 
 import java.io.*;
+import java.time.LocalDateTime;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBException;
@@ -19,6 +20,7 @@ import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.SimpleTextMatcher;
+import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.page.LinkType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -56,12 +58,14 @@ public class PageFormTest {
     @Test
     public void testMarshalWithSort() throws IOException {
 
-        PageFormBuilder builder = PageFormBuilder.form().addSortField("lastModified", Order.DESC);
+        PageFormBuilder builder = PageFormBuilder.form()
+            .addSortField("lastModified", Order.DESC)
+            .sortDate(null, LocalDateTime.of(2017, 6, 12, 15, 0).atZone(Schedule.ZONE_ID).toInstant());
         StringWriter writer = new StringWriter();
         Jackson2Mapper.getInstance().writeValue(writer, builder.build());
         System.out.println(writer.toString());
         assertThatJson(writer.toString())
-            .isEqualTo("{\"sort\":{\"lastModified\":\"DESC\"},\"highlight\":false}");
+            .isEqualTo("{\"searches\":{\"sortDates\":[{\"end\":1497272400000,\"inclusiveEnd\":false}]},\"sort\":{\"lastModified\":\"DESC\"},\"highlight\":false}");
     }
 
     @Test

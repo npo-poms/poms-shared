@@ -51,6 +51,7 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
     @Valid
     private ExtendedTextMatcherList keywords;
 
+    @Valid
     private DateRangeMatcherList sortDates;
 
     @Valid
