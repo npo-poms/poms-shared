@@ -1,8 +1,5 @@
 package nl.vpro.domain.constraint.media;
 
-import static org.apache.commons.lang.StringUtils.endsWith;
-import static org.apache.commons.lang.StringUtils.removeEnd;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -10,11 +7,14 @@ import javax.xml.bind.annotation.XmlType;
 import org.apache.commons.lang.StringUtils;
 
 import nl.vpro.domain.constraint.TextConstraint;
-import nl.vpro.domain.constraint.TextConstraint.CaseHandling;
 import nl.vpro.domain.media.MediaObject;
 
+import static org.apache.commons.lang3.StringUtils.*;
+
+
 /**
- * @author machiel since 5.4
+ * @author machiel
+ * @since 5.4
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "genreConstraintType")
