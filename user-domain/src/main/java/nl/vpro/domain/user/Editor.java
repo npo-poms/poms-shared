@@ -201,7 +201,7 @@ public class Editor extends AbstractUser {
                 return;
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("No broadcaster " + broadcaster + " found in " + broadcasters);
     }
 
     void addBroadcaster(Broadcaster broadcaster) {
