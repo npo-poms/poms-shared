@@ -31,8 +31,9 @@ import nl.vpro.domain.page.Page;
     })
 public class PageForm implements SortableForm, Predicate<Page> {
 
-    @XmlTransient
-    private Boolean highlighted = false;
+    @JsonProperty("highlight")
+    @XmlAttribute(name = "highlight")
+    private Boolean highlighted = null;
 
     @XmlElement
     @Valid
@@ -106,14 +107,12 @@ public class PageForm implements SortableForm, Predicate<Page> {
 
 
     @Override
-    @JsonProperty("highlight")
-    @XmlAttribute(name = "highlight")
     public boolean isHighlight() {
         return highlighted != null ? highlighted : false;
     }
 
     public void setHighlight(boolean highlight) {
-        this.highlighted = highlight;
+        this.highlighted = highlight ? true : null;
     }
 
     public PageSearch getSearches() {
