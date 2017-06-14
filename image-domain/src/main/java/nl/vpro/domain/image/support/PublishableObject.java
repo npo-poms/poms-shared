@@ -25,7 +25,7 @@ import nl.vpro.domain.user.Editor;
 @Inheritance(strategy = InheritanceType.JOINED)
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "publishableType", namespace = Xmlns.IMAGE_NAMESPACE)
-public abstract class PublishableObject<T extends PublishableObject> extends AbstractDomainObject<T> implements Modifiable<T> {
+public abstract class PublishableObject<T extends PublishableObject<T>> extends AbstractDomainObject<T> implements Modifiable<T> {
 
     @ManyToOne(optional = false)
     @XmlTransient
