@@ -67,13 +67,42 @@ public class PageFormBuilder extends AbstractFormBuilder {
     }
 
     public PageFormBuilder sortDate(Instant  from, Instant to, Boolean inclusiveEnd) {
-        DateRangeMatcherList list = search().getSortDates();
+        search().setSortDates(dateRange(search().getSortDates(), from, to, inclusiveEnd));
+        return this;
+    }
+
+    public PageFormBuilder creationDate(Instant from, Instant to) {
+        return creationDate(from, to, false);
+    }
+
+    public PageFormBuilder creationDate(Instant from, Instant to, Boolean inclusiveEnd) {
+        search().setCreationDates(dateRange(search().getCreationDates(), from, to, inclusiveEnd));
+        return this;
+    }
+
+    public PageFormBuilder lastModified(Instant from, Instant to) {
+        return lastModified(from, to, false);
+    }
+
+    public PageFormBuilder lastModified(Instant from, Instant to, Boolean inclusiveEnd) {
+        search().setLastModifiedDates(dateRange(search().getLastModifiedDates(), from, to, inclusiveEnd));
+        return this;
+    }
+
+    public PageFormBuilder lastPublished(Instant from, Instant to) {
+        return lastPublished(from, to, false);
+    }
+
+    public PageFormBuilder lastPublished(Instant from, Instant to, Boolean inclusiveEnd) {
+        search().setLastPublishedDates(dateRange(search().getLastPublishedDates(), from, to, inclusiveEnd));
+        return this;
+    }
+    protected DateRangeMatcherList dateRange(DateRangeMatcherList list, Instant from, Instant to, Boolean inclusiveEnd) {
         if (list == null) {
             list = new DateRangeMatcherList();
-            search().setSortDates(list);
         }
         list.asList().add(new DateRangeMatcher(from, to, inclusiveEnd));
-        return this;
+        return list;
     }
 
     public PageFormBuilder portals(String... portalUrls) {
