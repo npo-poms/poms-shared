@@ -7,6 +7,8 @@ import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 import com.joestelmach.natty.Parser;
 
 import nl.vpro.util.DateUtils;
@@ -21,6 +23,7 @@ public abstract class DateConstraint<T> implements FieldConstraint<T> {
     private static final Parser PARSER = new Parser();
 
     @XmlAttribute
+    @XmlDocumentation("A timestamp spec. This is parsed by the natty parser. Try out with http://natty.joestelmach.com/try.jsp")
     private String date;
 
     @XmlAttribute

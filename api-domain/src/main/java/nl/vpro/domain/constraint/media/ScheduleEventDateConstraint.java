@@ -8,6 +8,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 import nl.vpro.domain.constraint.DateConstraint;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.ScheduleEvent;
@@ -18,6 +20,7 @@ import nl.vpro.domain.media.ScheduleEvent;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventType")
+@XmlDocumentation("documentation for schedule event date")
 public class ScheduleEventDateConstraint extends DateConstraint<MediaObject> {
 
     public ScheduleEventDateConstraint() {
