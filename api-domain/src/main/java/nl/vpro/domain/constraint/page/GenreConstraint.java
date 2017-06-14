@@ -1,53 +1,33 @@
 package nl.vpro.domain.constraint.page;
 
+import java.util.stream.Stream;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import org.apache.commons.lang3.StringUtils;
-
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.AbstractGenreConstraint;
+import nl.vpro.domain.page.Genre;
 import nl.vpro.domain.page.Page;
-
-import static org.apache.commons.lang3.StringUtils.*;
 /**
  * @author machiel
  * @since 5.4
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pageGenreConstraintType")
-public class GenreConstraint extends TextConstraint<Page> {
+public class GenreConstraint extends AbstractGenreConstraint<Page> {
 
     public GenreConstraint() {
-        caseHandling = CaseHandling.ASIS;
+
     }
 
     public GenreConstraint(String value) {
         super(value);
-        caseHandling = CaseHandling.ASIS;
     }
 
     @Override
-    public String getESPath() {
-        return "genres.id";
-    }
+    protected Stream<String> getTermIds(Page p) {
+        return p.getGenres().stream().map(Genre::getTermId);
 
-    @Override
-    public boolean isExact() {
-        return value == null || !endsWith(value, "*");
-    }
-
-    @Override
-    public String getWildcardValue() {
-        return removeEnd(value, "*");
-    }
-
-    @Override
-    public boolean test(Page t) {
-        if (isExact()) {
-            return t.getGenres().stream().anyMatch(g -> StringUtils.equals(value, g.getTermId()));
-        } else {
-            return t.getGenres().stream().anyMatch(g -> startsWith(g.getTermId(), getWildcardValue()));
-        }
     }
 }
