@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class URLClassificationServiceImplTest {
 
-    public static URI publicURL = URI.create("http://publish.pages.omroep.nl/schema/classification");
+    public static URI publicURL = URI.create("https://publish.pages.omroep.nl/schema/classification");
     //URL url = new URL("http://localhost:8060/schema/classification");
 
     @Test
