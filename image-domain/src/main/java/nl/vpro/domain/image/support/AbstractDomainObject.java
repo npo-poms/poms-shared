@@ -21,11 +21,10 @@ import nl.vpro.domain.Xmlns;
  * @author roekoe
 
  */
-@SuppressWarnings("serial")
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "domainType", namespace = Xmlns.IMAGE_NAMESPACE)
-public abstract class AbstractDomainObject<T extends AbstractDomainObject> implements DomainObject<T> {
+public abstract class AbstractDomainObject<T extends AbstractDomainObject<?>> implements DomainObject<T> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,7 +52,7 @@ public abstract class AbstractDomainObject<T extends AbstractDomainObject> imple
     @Override
     public T setId(Long id) {
         this.id = id;
-        return (T)this;
+        return (T) this;
     }
 
     /**
@@ -81,7 +80,7 @@ public abstract class AbstractDomainObject<T extends AbstractDomainObject> imple
             return false;
         }
 
-        DomainObject domainObject = (DomainObject)object;
+        DomainObject<?> domainObject = (DomainObject<?>)object;
 
         if(this.getId() != null && domainObject.getId() != null) {
             return this.getId().equals(domainObject.getId());
