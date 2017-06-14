@@ -27,6 +27,8 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
+
+import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -52,7 +54,7 @@ public class PageFormTest {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.getInstance().writeValue(writer, builder.build());
         assertThatJson(writer.toString())
-            .isSimilarTo("{\"searches\":{\"portals\":\"WETENSCHAP24\"},\"facets\":{\"sections\":{\"sort\":\"COUNT_DESC\",\"max\":24}},\"highlight\":false}");
+            .isSimilarTo("{\"searches\":{\"portals\":\"WETENSCHAP24\"},\"facets\":{\"sections\":{\"sort\":\"COUNT_DESC\",\"max\":24}}}");
     }
 
     @Test
@@ -65,9 +67,33 @@ public class PageFormTest {
         Jackson2Mapper.getInstance().writeValue(writer, builder.build());
         System.out.println(writer.toString());
         assertThatJson(writer.toString())
-            .isEqualTo("{\"searches\":{\"sortDates\":[{\"end\":1497272400000,\"inclusiveEnd\":false}]},\"sort\":{\"lastModified\":\"DESC\"},\"highlight\":false}");
+            .isEqualTo("{\"searches\":{\"sortDates\":[{\"end\":1497272400000,\"inclusiveEnd\":false}]},\"sort\":{\"lastModified\":\"DESC\"}}");
     }
 
+
+    @Test
+    public void testMarshalWithSortXml() throws IOException {
+
+        PageFormBuilder builder = PageFormBuilder.form()
+            .addSortField("lastModified", Order.DESC)
+            .sortDate(null, LocalDateTime.of(2017, 6, 12, 15, 0).atZone(Schedule.ZONE_ID).toInstant());
+        StringWriter writer = new StringWriter();
+        JAXB.marshal(builder.build(), writer);
+        System.out.println(writer.toString());
+        assertThatXml(writer.toString())
+            .isSimilarTo("<api:pagesForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <api:searches>\n" +
+                "        <api:sortDates match=\"MUST\">\n" +
+                "            <api:matcher inclusiveEnd=\"false\">\n" +
+                "                <api:end>2017-06-12T15:00:00+02:00</api:end>\n" +
+                "            </api:matcher>\n" +
+                "        </api:sortDates>\n" +
+                "    </api:searches>\n" +
+                "    <api:sortFields>\n" +
+                "        <api:sort order=\"DESC\">lastModified</api:sort>\n" +
+                "    </api:sortFields>\n" +
+                "</api:pagesForm>");
+    }
     @Test
     public void unmarshal() throws IOException {
         String string = "{\n" +
@@ -120,7 +146,7 @@ public class PageFormTest {
         JAXB.marshal(form, out);
         String expected =
             "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<api:pagesForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" highlight=\"false\">\n" +
+                "<api:pagesForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <api:searches/>\n" +
                 "    <api:sortFields>\n" +
                 "        <api:sort order=\"ASC\">sortDate</api:sort>\n" +
@@ -154,7 +180,7 @@ public class PageFormTest {
     @Test
     public void testReferralsJson() throws Exception {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY)).build();
-        String json = "{\"searches\":{\"referrals\":{\"types\":\"TOP_STORY\"}},\"highlight\":false}";
+        String json = "{\"searches\":{\"referrals\":{\"types\":\"TOP_STORY\"}}}";
 
         PageForm rounded = Jackson2TestUtil.roundTripAndSimilar(form, json);
 
@@ -165,7 +191,7 @@ public class PageFormTest {
     @Test
     public void testReferralsJsonShould() throws Exception {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY, Match.SHOULD)).build();
-        String json = "{\"searches\":{\"referrals\":{\"match\":\"SHOULD\",\"types\":\"TOP_STORY\"}},\"highlight\":false}";
+        String json = "{\"searches\":{\"referrals\":{\"match\":\"SHOULD\",\"types\":\"TOP_STORY\"}}}";
 
         PageForm rounded = Jackson2TestUtil.roundTripAndSimilar(form, json);
 
@@ -176,7 +202,7 @@ public class PageFormTest {
     @Test
     public void testReferralsXml() throws Exception {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY)).build();
-        String xml = "<api:pagesForm highlight=\"false\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        String xml = "<api:pagesForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:referrals>\n" +
             "            <api:search>\n" +
@@ -195,8 +221,8 @@ public class PageFormTest {
 
     @Test
     public void getLinksJson() throws Exception {
-        PageForm form = PageFormBuilder.form().links(AssociationSearch.of(LinkType.TOP_STORY)).build();
-        String json = "{\"searches\":{\"links\":{\"types\":\"TOP_STORY\"}},\"highlight\":false}";
+        PageForm form = PageFormBuilder.form().links(AssociationSearch.of(LinkType.TOP_STORY)).highlight(true).build();
+        String json = "{\"searches\":{\"links\":{\"types\":\"TOP_STORY\"}},  \"highlight\" : true}";
 
         PageForm rounded = Jackson2TestUtil.roundTripAndSimilar(form, json);
 
