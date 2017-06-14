@@ -48,12 +48,9 @@ public abstract class Mappings implements Function<String, File> {
             KNOWN_LOCATIONS.putAll(SYSTEM_MAPPING);
 
             fillMappings();
-            Set<Class> classes = new LinkedHashSet<>();
-            for (Class[] c : MAPPING.values()) {
-                classes.addAll(Arrays.asList(c));
-            }
+
             try {
-                generateXSDs(new ArrayList<>(classes).toArray(new Class[classes.size()]));
+                generateXSDs();
             } catch (JAXBException | IOException e) {
                 log.error(e.getMessage(), e);
             }
@@ -75,7 +72,16 @@ public abstract class Mappings implements Function<String, File> {
 
     protected abstract void fillMappings();
 
-    protected void generateXSDs(Class... classes) throws IOException, JAXBException {
+    protected Class<?>[] getClasses() {
+        Set<Class<?>> classes = new LinkedHashSet<>();
+        for (Class<?>[] c : MAPPING.values()) {
+            classes.addAll(Arrays.asList(c));
+        }
+        return new ArrayList<>(classes).toArray(new Class[classes.size()]);
+    }
+
+    protected void generateXSDs() throws IOException, JAXBException {
+        Class<?>[] classes = getClasses();
         log.info("Generating xsds in {}", Arrays.asList(classes), getTempDir());
         JAXBContext context = JAXBContext.newInstance(classes);
         context.generateSchema(new SchemaOutputResolver() {
@@ -131,11 +137,8 @@ public abstract class Mappings implements Function<String, File> {
 
 
     private ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, Class<?>... classes) {
-
         return ThreadLocal.withInitial(() -> {
             try {
-
-
                 Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
                 if (validate) {
                     result.setSchema(getSchema(classes));
