@@ -32,7 +32,7 @@
       <xs:element name="facets" type="pagesFacetsType" minOccurs="0"/>
       <xs:element ref="mediaForm" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="highlight" type="xs:boolean" use="required"/>
+    <xs:attribute name="highlight" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="pagesSearchType">
@@ -46,6 +46,9 @@
       <xs:element name="tags" type="extendedTextMatcherListType" minOccurs="0"/>
       <xs:element name="keywords" type="extendedTextMatcherListType" minOccurs="0"/>
       <xs:element name="sortDates" type="dateRangeMatcherListType" minOccurs="0"/>
+      <xs:element name="lastModifiedDates" type="dateRangeMatcherListType" minOccurs="0"/>
+      <xs:element name="creationDates" type="dateRangeMatcherListType" minOccurs="0"/>
+      <xs:element name="lastPublishedDates" type="dateRangeMatcherListType" minOccurs="0"/>
       <xs:element name="relations" type="pageRelationSearchListType" minOccurs="0"/>
       <xs:element name="links" type="pageAssociationSearchListType" minOccurs="0"/>
       <xs:element name="referrals" type="pageAssociationSearchListType" minOccurs="0"/>
