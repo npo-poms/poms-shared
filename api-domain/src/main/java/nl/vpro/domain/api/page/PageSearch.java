@@ -29,7 +29,7 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlType(name = "pagesSearchType",
     propOrder = {
         // Intellij warnings are incorrect since parent class is @XmlTransient
-        "text", "broadcasters", "types", "portals", "sections", "genres", "tags", "keywords", "sortDates", "lastModifiedDates", "creationDates",  "relations", "links", "referrals"
+        "text", "broadcasters", "types", "portals", "sections", "genres", "tags", "keywords", "sortDates", "lastModifiedDates", "creationDates",  "lastPublishedDates", "relations", "links", "referrals"
     })
 @Getter
 @Setter
