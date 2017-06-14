@@ -1,20 +1,25 @@
 package nl.vpro.domain.api.page;
 
-import com.fasterxml.jackson.annotation.JsonSetter;
 import lombok.Getter;
 import lombok.Setter;
-import nl.vpro.domain.api.*;
-import nl.vpro.domain.page.*;
-import nl.vpro.domain.user.Broadcaster;
+import lombok.ToString;
+
+import java.sql.Date;
+import java.time.Instant;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import java.sql.Date;
-import java.time.Instant;
-import java.util.function.Predicate;
+
+import com.fasterxml.jackson.annotation.JsonSetter;
+
+import nl.vpro.domain.api.*;
+import nl.vpro.domain.page.*;
+import nl.vpro.domain.user.Broadcaster;
 
 /**
  * @author Michiel Meeuwissen
@@ -24,10 +29,11 @@ import java.util.function.Predicate;
 @XmlType(name = "pagesSearchType",
     propOrder = {
         // Intellij warnings are incorrect since parent class is @XmlTransient
-        "text", "broadcasters", "types", "portals", "sections", "genres", "tags", "keywords", "sortDates", "relations", "links", "referrals"
+        "text", "broadcasters", "types", "portals", "sections", "genres", "tags", "keywords", "sortDates", "lastModifiedDates", "creationDates",  "relations", "links", "referrals"
     })
 @Getter
 @Setter
+@ToString
 public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
 
     @Valid
@@ -55,6 +61,15 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
     private DateRangeMatcherList sortDates;
 
     @Valid
+    private DateRangeMatcherList creationDates;
+
+    @Valid
+    private DateRangeMatcherList lastModifiedDates;
+
+    @Valid
+    private DateRangeMatcherList lastPublishedDates;
+
+    @Valid
     private RelationSearchList relations;
 
     @Valid
@@ -75,6 +90,9 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
     public boolean hasSearches() {
         return text != null
             || sortDates != null && !sortDates.isEmpty()
+            || lastModifiedDates != null && !lastModifiedDates.isEmpty()
+            || creationDates != null && !creationDates.isEmpty()
+            || lastPublishedDates != null && !lastPublishedDates.isEmpty()
             || types != null && !types.isEmpty()
             || broadcasters != null && !broadcasters.isEmpty()
             || portals != null && !portals.isEmpty()
@@ -99,6 +117,9 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
             && applyKeywords(input)
             && applyTypes(input)
             && applySortDates(input)
+            && applyLastModifiedDates(input)
+            && applyCreationDates(input)
+            && applyPublishDate(input)
             && applyRelations(input)
             && applyLinks(input)
             && applyReferrals(input)
@@ -203,12 +224,29 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
     }
 
     protected boolean applySortDates(Page input) {
-        if(sortDates == null) {
+        return applyDateRange(input, sortDates, Page::getSortDate);
+    }
+
+    protected boolean applyLastModifiedDates(Page input) {
+        return applyDateRange(input, lastModifiedDates, Page::getLastModified);
+    }
+
+    protected boolean applyCreationDates(Page input) {
+        return applyDateRange(input, creationDates, Page::getCreationDate);
+    }
+
+    protected boolean applyPublishDate(Page input) {
+        return applyDateRange(input, lastPublishedDates, Page::getLastPublished);
+    }
+
+    protected boolean applyDateRange(Page input, DateRangeMatcherList range, Function<Page, Instant> inputDateGetter) {
+        if (range == null) {
             return true;
         }
-        Instant inputDate = input.getSortDate();
-        return inputDate != null && sortDates.test(Date.from(inputDate));
+        Instant inputDate = inputDateGetter.apply(input);
+        return inputDate != null && range.test(Date.from(inputDate));
     }
+
 
     protected boolean applyRelations(Page input) {
         if (relations == null) {
@@ -249,18 +287,5 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "PageSearch{" +
-            "broadcasters=" + broadcasters +
-            ", types=" + types +
-            ", portals=" + portals +
-            ", sections=" + sections +
-            ", genres=" + genres +
-            ", tags=" + tags +
-            ", keywords=" + keywords +
-            ", sortDates=" + sortDates +
-            ", relations=" + relations +
-            '}';
-    }
+
 }
