@@ -79,8 +79,7 @@ public class PageFormBuilderTest {
                 "      \"sort\" : \"COUNT_DESC\",\n" +
                 "      \"max\" : 24\n" +
                 "    }\n" +
-                "  },\n" +
-                "  \"highlight\" : false\n" +
+                "  }\n" +
                 "}");
         System.out.println(result);
 
