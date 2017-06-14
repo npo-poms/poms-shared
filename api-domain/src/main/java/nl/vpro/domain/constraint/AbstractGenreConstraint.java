@@ -18,13 +18,15 @@ import static org.apache.commons.lang3.StringUtils.*;
 @XmlTransient
 public abstract class AbstractGenreConstraint<T> extends TextConstraint<T> {
 
-    public AbstractGenreConstraint() {
+    {
         caseHandling = CaseHandling.ASIS;
+    }
+    public AbstractGenreConstraint() {
+
     }
 
     public AbstractGenreConstraint(String value) {
         super(value);
-        caseHandling = CaseHandling.ASIS;
     }
 
     @Override
