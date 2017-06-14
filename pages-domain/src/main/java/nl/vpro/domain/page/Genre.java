@@ -1,14 +1,16 @@
 package nl.vpro.domain.page;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -24,11 +26,10 @@ import nl.vpro.domain.classification.TermId;
 @XmlType(name = "genreType")
 @XmlRootElement(name = "genre")
 @JsonPropertyOrder({"id", "terms", "displayName"})
+@Slf4j
 public class Genre implements Comparable<Genre>, Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    protected static final Logger LOG = LoggerFactory.getLogger(Genre.class);
 
 
     private String termId;
@@ -136,7 +137,7 @@ public class Genre implements Comparable<Genre>, Serializable {
                     parent = parent.getParent();
                 }
             } catch (IllegalArgumentException iae) {
-                LOG.warn(iae.getMessage());
+                log.warn(iae.getMessage());
             }
         }
         return result;
