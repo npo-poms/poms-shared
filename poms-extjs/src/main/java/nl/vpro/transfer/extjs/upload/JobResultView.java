@@ -61,7 +61,7 @@ public class JobResultView extends ExtRecord {
         simpleJob.title = job.getTitle();
         simpleJob.success = "" + job.getState();
         if(result.getProfile() != null) {
-            simpleJob.profile = result.getProfile().name();
+            simpleJob.profile = result.getProfile();
         }
         simpleJob.state = "" + result.getState();
         simpleJob.broadcaster = job.getBroadcaster();

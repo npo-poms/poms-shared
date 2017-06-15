@@ -4,21 +4,23 @@
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-
 import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.transfer.extjs.ExtRecord;
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
@@ -75,9 +77,9 @@ public class SegmentView extends ExtRecord {
         String title = fullSegment.getMainTitle();
         String description = fullSegment.getMainDescription();
 
-        Date start = fullSegment.getStart();
-        Date duration = (fullSegment.getDurationAsDate() != null) ? fullSegment.getDurationAsDate() : new Date(0);
-        Date stop = new Date(start.getTime() + duration.getTime());
+        Duration start = fullSegment.getStart();
+        Duration duration = fullSegment.getDuration().get();
+        Duration stop = start.plus(duration);
 
         List<ImageView> images = new ArrayList<ImageView>();
         int index = 0;
@@ -86,10 +88,11 @@ public class SegmentView extends ExtRecord {
             index++;
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return new SegmentView(id, fullSegment.getMid(), fullSegment.getWorkflow(), title, description, getDurationString(start), getDurationString(duration), getDurationString(stop), images);
+    }
 
-        return new SegmentView(id, fullSegment.getMid(), fullSegment.getWorkflow(), title, description, sdf.format(start), sdf.format(duration), sdf.format(stop), images);
+    private static String getDurationString(Duration duration) {
+        return DurationFormatUtils.formatDuration(duration.toMillis(), TIME_FORMAT);
     }
 
     public Long getId() {

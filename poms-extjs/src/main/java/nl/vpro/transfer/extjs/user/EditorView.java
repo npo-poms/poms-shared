@@ -4,12 +4,13 @@
  */
 package nl.vpro.transfer.extjs.user;
 
+import nl.vpro.domain.user.Editor;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.user.Editor;
 
 @XmlRootElement(name = "editor")
 @XmlAccessorType(XmlAccessType.FIELD)
