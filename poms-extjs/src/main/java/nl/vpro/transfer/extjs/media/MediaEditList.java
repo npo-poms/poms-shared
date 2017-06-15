@@ -4,15 +4,14 @@
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.util.Collection;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.spring.security.acl.MediaPermissionEvaluator;
 import nl.vpro.transfer.extjs.TransferList;
+
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Collection;
 
 @XmlRootElement(name = "media")
 public class MediaEditList extends TransferList<MediaEditView> {

@@ -4,14 +4,6 @@
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.MemberRef;
@@ -19,6 +11,14 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.spring.security.acl.MediaPermissionEvaluator;
 import nl.vpro.transfer.extjs.ExtRecord;
 import nl.vpro.transfer.extjs.media.support.MediaTypeView;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
@@ -52,7 +52,7 @@ public class MemberRefView extends ExtRecord {
 
     private Integer number;
 
-    private Date added;
+    private Instant added;
 
     private Boolean highlighted;
 
@@ -162,11 +162,11 @@ public class MemberRefView extends ExtRecord {
         this.number = number;
     }
 
-    public Date getAdded() {
+    public Instant getAdded() {
         return added;
     }
 
-    public void setAdded(Date added) {
+    public void setAdded(Instant added) {
         this.added = added;
     }
 

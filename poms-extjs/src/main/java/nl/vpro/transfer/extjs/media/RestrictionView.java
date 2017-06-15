@@ -1,14 +1,17 @@
 package nl.vpro.transfer.extjs.media;
 
-import java.util.Date;
+import nl.vpro.domain.media.GeoRestriction;
+import nl.vpro.domain.media.PortalRestriction;
+import nl.vpro.domain.media.Region;
+import nl.vpro.domain.media.Restriction;
+import nl.vpro.domain.user.Portal;
+import nl.vpro.transfer.extjs.ExtRecord;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-
-import nl.vpro.domain.media.*;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.transfer.extjs.ExtRecord;
+import java.time.Instant;
+import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
@@ -51,6 +54,21 @@ public class RestrictionView extends ExtRecord {
         this.stop = stop;
     }
 
+    private RestrictionView(Long id, String portalId, String portal, Instant start, Instant stop) {
+        this.id = id;
+        this.portalId = portalId;
+        this.portal = portal;
+        this.start = Date.from(start);
+        this.stop = Date.from(stop);
+    }
+
+    private RestrictionView(Long id, String region, Instant start, Instant stop) {
+        this.id = id;
+        this.region = region;
+        this.start = Date.from(start);
+        this.stop = Date.from(stop);
+    }
+
     public static <T extends Restriction> RestrictionView create(T restriction) {
         if(restriction instanceof PortalRestriction) {
             return createPortalRestriction((PortalRestriction)restriction);
@@ -83,9 +101,9 @@ public class RestrictionView extends ExtRecord {
     @SuppressWarnings("unchecked")
     public <T extends Restriction> T toRestriction(Class<T> clazz) {
         if(clazz.equals(PortalRestriction.class)) {
-            return (T) new PortalRestriction(this.id, new Portal(portalId, portal), start, stop);
+            return (T) new PortalRestriction(this.id, new Portal(portalId, portal), start.toInstant(), stop.toInstant());
         } else if(clazz.equals(GeoRestriction.class)) {
-            return (T) new GeoRestriction(this.id, Region.valueOf(region), start, stop);
+            return (T) new GeoRestriction(this.id, Region.valueOf(region), start.toInstant(), stop.toInstant());
         }
 
         throw new UnsupportedOperationException("No support for " + clazz.getSimpleName());
@@ -100,8 +118,8 @@ public class RestrictionView extends ExtRecord {
             throw new UnsupportedOperationException("No support for " + restriction.getClass().getSimpleName());
         }
 
-        restriction.setStart(this.start);
-        restriction.setStop(this.stop);
+        restriction.setStart(this.start.toInstant());
+        restriction.setStop(this.stop.toInstant());
     }
 
     public Long getId() {

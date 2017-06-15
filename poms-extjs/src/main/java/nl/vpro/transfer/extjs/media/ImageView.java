@@ -4,19 +4,18 @@
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.util.Date;
+import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.Image;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.transfer.extjs.ExtRecord;
+import nl.vpro.util.DateUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-
-import org.apache.commons.lang3.StringUtils;
-
-import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.transfer.extjs.ExtRecord;
+import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
@@ -111,8 +110,8 @@ public class ImageView extends ExtRecord {
             .setHeight(height)
             .setWidth(width)
             .setHighlighted(highlighted)
-            .setPublishStart(publishStart)
-            .setPublishStop(publishStop)
+            .setPublishStartInstant(DateUtils.toInstant(publishStart))
+            .setPublishStopInstant(DateUtils.toInstant(publishStop))
             .setCredits(credits)
             .setSource(source)
             .setDate(date)

@@ -4,14 +4,13 @@
  */
 package nl.vpro.transfer.extjs.media.support;
 
-import java.util.ArrayList;
-import java.util.List;
+import nl.vpro.domain.media.MediaType;
+import nl.vpro.spring.security.acl.MediaPermissionEvaluator;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-
-import nl.vpro.domain.media.MediaType;
-import nl.vpro.spring.security.acl.MediaPermissionEvaluator;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -72,6 +71,7 @@ public class MediaTypeView {
 
         return simpleType;
     }
+
 
 
 

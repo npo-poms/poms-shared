@@ -91,7 +91,7 @@ public class ScheduleEventView {
             }
         }
 
-        simpleEvent.duration = fullEvent.getDurationTime() == null ? null : new Date(fullEvent.getDurationTime().toMillis());
+        simpleEvent.duration = fullEvent.getDuration() == null ? null : new Date(fullEvent.getDuration().toMillis());
         simpleEvent.setRerunEvent(fullEvent);
 
 
@@ -111,7 +111,7 @@ public class ScheduleEventView {
             fullEvent.getStart()
         );
 
-        simpleEvent.duration = fullEvent.getDurationTime() == null ? null : new Date(fullEvent.getDurationTime().toMillis());
+        simpleEvent.duration = fullEvent.getDuration() == null ? null : new Date(fullEvent.getDuration().toMillis());
         simpleEvent.setRerunEvent(fullEvent);
 
         List<Broadcaster> bc = fullEvent.getMediaObject() == null ? null : fullEvent.getMediaObject().getBroadcasters();
