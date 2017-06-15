@@ -4,13 +4,6 @@
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.SortedSet;
-
-import javax.xml.bind.annotation.*;
-
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.ScheduleEvent;
 import nl.vpro.domain.media.search.MediaListItem;
@@ -19,6 +12,13 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.spring.security.acl.MediaPermissionEvaluator;
 import nl.vpro.transfer.extjs.ExtRecord;
 import nl.vpro.transfer.extjs.media.support.MediaTypeView;
+
+import javax.xml.bind.annotation.*;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.SortedSet;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
@@ -67,11 +67,11 @@ public class MembersView extends ExtRecord {
 
     private Integer number;
 
-    private Date added;
+    private Instant added;
 
-    private Date publishStart;
+    private Instant publishStart;
 
-    private Date publishStop;
+    private Instant publishStop;
 
     private Date creationDate;
 
@@ -108,8 +108,8 @@ public class MembersView extends ExtRecord {
             this.lastModified = member.getLastModified();
             this.mediaType = MediaTypeView.create(permissionEvaluator, member.getType());
             this.creationDate = member.getCreationDate();
-            this.publishStart = member.getPublishStart();
-            this.publishStop = member.getPublishStop();
+            this.publishStart = member.getPublishStartInstant();
+            this.publishStop = member.getPublishStopInstant();
             this.sortDate = member.getSortDate();
             this.broadcasters = new ArrayList<>();
             for (Broadcaster b : member.getBroadcasters()) {
@@ -172,11 +172,11 @@ public class MembersView extends ExtRecord {
         this.number = number;
     }
 
-    public Date getAdded() {
+    public Instant getAdded() {
         return added;
     }
 
-    public void setAdded(Date added) {
+    public void setAdded(Instant added) {
         this.added = added;
     }
 
@@ -244,19 +244,19 @@ public class MembersView extends ExtRecord {
         this.broadcasters = broadcasters;
     }
 
-    public Date getPublishStart() {
+    public Instant getPublishStart() {
         return publishStart;
     }
 
-    public void setPublishStart(Date publishStart) {
+    public void setPublishStart(Instant publishStart) {
         this.publishStart = publishStart;
     }
 
-    public Date getPublishStop() {
+    public Instant getPublishStop() {
         return publishStop;
     }
 
-    public void setPublishStop(Date publishStop) {
+    public void setPublishStop(Instant publishStop) {
         this.publishStop = publishStop;
     }
 

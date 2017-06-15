@@ -4,13 +4,6 @@
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
-import javax.xml.bind.annotation.*;
-
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.Platform;
@@ -18,6 +11,13 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.transfer.extjs.ExtRecord;
 import nl.vpro.util.Helper;
+
+import javax.xml.bind.annotation.*;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.TimeZone;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder =
@@ -30,7 +30,7 @@ import nl.vpro.util.Helper;
         "workflow",
         "ceresPlatform",
         "ceresAuthority"
-})
+    })
 public class LocationView extends ExtRecord {
     public static final String TIME_FORMAT = "mm:ss.SSS";
 
@@ -42,7 +42,7 @@ public class LocationView extends ExtRecord {
 
     private String format;
 
-    private Date offset;
+    private Duration offset;
 
     @XmlAttribute
     private Date creationDate;
@@ -86,10 +86,10 @@ public class LocationView extends ExtRecord {
             (fullLocation.getAvAttributes() != null) ? fullLocation.getAvAttributes().getAvFileFormat().toString() : null,
             fullLocation.getWorkflow(),
             fullLocation.getPlatform(),
-            fullLocation.ceresHasAuthority()
+            fullLocation.isAuthorityUpdate()
         );
 
-        simpleLocation.offset = fullLocation.getOffset() == null ? null : new Date(fullLocation.getOffset().toMillis());
+        simpleLocation.offset = fullLocation.getOffset() == null ? null : fullLocation.getOffset();
         simpleLocation.creationDate = fullLocation.getCreationDate();
         simpleLocation.lastModified = fullLocation.getLastModified();
         simpleLocation.publishStart = fullLocation.getPublishStart();
@@ -112,8 +112,8 @@ public class LocationView extends ExtRecord {
             .setAvFileFormat(AVFileFormat.valueOf(this.format))
             .setBitrate(this.bitrate)
             .setOffset(this.offset)
-            .setPublishStart(this.publishStart)
-            .setPublishStop(this.publishStop);
+            .setPublishStartInstant(this.publishStart.toInstant())
+            .setPublishStopInstant(this.publishStop.toInstant());
 
         fullLocation.setOwner(OwnerType.BROADCASTER);
 
@@ -137,14 +137,14 @@ public class LocationView extends ExtRecord {
     }
 
     public String getBitrate() {
-        if(bitrate == null) {
+        if (bitrate == null) {
             return null;
         }
         return bitrate.toString();
     }
 
     public void setBitrate(String bitrate) {
-        if(Helper.isEmpty(bitrate)) {
+        if (Helper.isEmpty(bitrate)) {
             this.bitrate = null;
             return;
         }
@@ -161,7 +161,7 @@ public class LocationView extends ExtRecord {
     }
 
     public String getOffset() {
-        if(this.offset == null) {
+        if (this.offset == null) {
             return null;
         }
 
@@ -172,21 +172,15 @@ public class LocationView extends ExtRecord {
     }
 
     public void setOffset(String offset) {
-        if(Helper.isEmpty(offset)) {
+        if (Helper.isEmpty(offset)) {
             this.offset = null;
             return;
         }
 
-        SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-
-        Date date;
-        try {
-            date = sdf.parse(offset);
-        } catch(ParseException e) {
-            throw new RuntimeException("Error parsing date string.", e.getCause());
-        }
-        this.offset = date;
+        this.offset = Duration.between(
+            LocalTime.MIN,
+            LocalTime.parse(offset)
+        );
     }
 
     public Date getCreationDate() {

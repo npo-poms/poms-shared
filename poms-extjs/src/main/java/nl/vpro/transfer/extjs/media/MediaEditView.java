@@ -1,20 +1,11 @@
 /**
- /**
+ * /**
  * Copyright (C) 2009 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.LocationAuthorityRecord;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
@@ -22,6 +13,13 @@ import nl.vpro.spring.security.acl.MediaPermissionEvaluator;
 import nl.vpro.transfer.extjs.media.support.AVTypeView;
 import nl.vpro.transfer.extjs.media.support.MediaTypeView;
 import nl.vpro.transfer.extjs.media.support.OwnerTypeView;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
@@ -170,6 +168,7 @@ public abstract class MediaEditView extends MediaView {
     protected MediaEditView() {
     }
 
+
     public static MediaEditView create(
         MediaPermissionEvaluator permissionEvaluator,
         MediaObject fullMedia,
@@ -180,12 +179,12 @@ public abstract class MediaEditView extends MediaView {
         Collection<Portal> allowedPortals,
         boolean mayEditGenre) {
         MediaEditView mediaEditView;
-        if(fullMedia instanceof Program) {
-            mediaEditView = ProgramEditView.create((Program)fullMedia);
-        } else if(fullMedia instanceof Group) {
-            mediaEditView = GroupEditView.create((Group)fullMedia, episodeCount);
-        } else if(fullMedia instanceof Segment) {
-            mediaEditView = SegmentEditView.create((Segment)fullMedia);
+        if (fullMedia instanceof Program) {
+            mediaEditView = ProgramEditView.create((Program) fullMedia);
+        } else if (fullMedia instanceof Group) {
+            mediaEditView = GroupEditView.create((Group) fullMedia, episodeCount);
+        } else if (fullMedia instanceof Segment) {
+            mediaEditView = SegmentEditView.create((Segment) fullMedia);
         } else {
             throw new UnsupportedOperationException(fullMedia.getClass().getSimpleName() + " is not supported.");
         }
@@ -202,17 +201,17 @@ public abstract class MediaEditView extends MediaView {
             List<Broadcaster> activeBroadcasters = fullMedia.getBroadcasters();
 
             // remove the active ones as they need to be on top
-            for(Broadcaster currBroadcaster : activeBroadcasters) {
+            for (Broadcaster currBroadcaster : activeBroadcasters) {
                 allBroadcasters.remove(currBroadcaster);
             }
 
             // add the active broadcasters in correct order
-            for(Broadcaster broadcaster : activeBroadcasters) {
+            for (Broadcaster broadcaster : activeBroadcasters) {
                 mediaEditView.broadcasters.add(OrganizationView.create(broadcaster, true));
             }
 
             // add the non selected broadcasters
-            for(Broadcaster broadcaster : allBroadcasters) {
+            for (Broadcaster broadcaster : allBroadcasters) {
                 mediaEditView.broadcasters.add(OrganizationView.create(broadcaster, false));
             }
         }
@@ -222,10 +221,10 @@ public abstract class MediaEditView extends MediaView {
             SortedSet<Portal> allPortals = activePortals == null ?
                 new TreeSet<>() :
                 new TreeSet<>(activePortals);
-            if(allowedPortals != null) {
+            if (allowedPortals != null) {
                 allPortals.addAll(allowedPortals);
             }
-            for(Portal portal : allPortals) {
+            for (Portal portal : allPortals) {
                 mediaEditView.portals.add(OrganizationView.create(portal,
                     activePortals != null &&
                         activePortals.contains(portal)
@@ -234,14 +233,14 @@ public abstract class MediaEditView extends MediaView {
         }
 
         {
-            for(PortalRestriction restriction : fullMedia.getPortalRestrictions()) {
+            for (PortalRestriction restriction : fullMedia.getPortalRestrictions()) {
                 RestrictionView view = RestrictionView.create(restriction);
                 mediaEditView.getPortalRestrictions().add(view);
             }
         }
 
         {
-            for(GeoRestriction restriction : fullMedia.getGeoRestrictions()) {
+            for (GeoRestriction restriction : fullMedia.getGeoRestrictions()) {
                 RestrictionView view = RestrictionView.create(restriction);
                 mediaEditView.getGeoRestrictions().add(view);
             }
@@ -251,18 +250,18 @@ public abstract class MediaEditView extends MediaView {
         mediaEditView.avType = AVTypeView.create(fullMedia.getAVType());
         mediaEditView.ownerTypes = OwnerTypeView.create(MediaObjects.findOwnersForTextFields(fullMedia));
 
-        for(Genre genre : fullMedia.getGenres()) {
+        for (Genre genre : fullMedia.getGenres()) {
             mediaEditView.genres.add(genre.getTermId());
         }
         mediaEditView.allowEditGenre = mayEditGenre;
 
-        for(Tag tag : fullMedia.getTags()) {
+        for (Tag tag : fullMedia.getTags()) {
             mediaEditView.tags.add(tag.getText());
         }
 
         mediaEditView.authorizedDuration = fullMedia.hasAuthorizedDuration();
 
-        if(fullMedia.getDurationAsDate() != null) {
+        if (fullMedia.getDurationAsDate() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
             sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
             mediaEditView.duration = sdf.format(fullMedia.getDurationAsDate());
@@ -271,11 +270,11 @@ public abstract class MediaEditView extends MediaView {
         mediaEditView.releaseYear = fullMedia.getReleaseYear();
         mediaEditView.ageRating = fullMedia.getAgeRating();
 
-        for(ContentRating contentRating : fullMedia.getContentRatings()) {
+        for (ContentRating contentRating : fullMedia.getContentRatings()) {
             mediaEditView.contentRatings.add(contentRating);
         }
 
-        if(!fullMedia.getScheduleEvents().isEmpty()) {
+        if (!fullMedia.getScheduleEvents().isEmpty()) {
             mediaEditView.firstShowing = ScheduleEventView.createMediaEvent(fullMedia.getScheduleEvents().first());
         }
 
@@ -285,16 +284,16 @@ public abstract class MediaEditView extends MediaView {
         mediaEditView.images = fullMedia.getImages().size();
 
         mediaEditView.persons = fullMedia.getPersons().size();
-        if(mediaEditView.persons > 0) {
+        if (mediaEditView.persons > 0) {
             Person p = fullMedia.getPersons().get(0);
             mediaEditView.person = p.getGivenName() + " " + p.getFamilyName();
         }
 
         mediaEditView.websites = fullMedia.getWebsites().size();
         mediaEditView.relations = fullMedia.getRelations().size();
-        for(Website website : fullMedia.getWebsites()) {
+        for (Website website : fullMedia.getWebsites()) {
             // Tmp fix for MSE-2189
-            if(website != null) {
+            if (website != null) {
                 mediaEditView.website = website.getUrl();
                 break;
             }
@@ -318,13 +317,11 @@ public abstract class MediaEditView extends MediaView {
 
         mediaEditView.sortDate = fullMedia.getSortDate();
 
-        LocationAuthorityRecord locationAuthorityRecord = fullMedia.getLocationAuthorityRecord(Platform.INTERNETVOD);
 
-        mediaEditView.allowEditNLRestrictionOnly = locationAuthorityRecord != null; // if we have a record, only edit of NL is allowed
-        mediaEditView.allowEditGeoRestrictions = true;
+
         SortedSet<ScheduleEvent> scheduleEvents = fullMedia.getScheduleEvents();
-        for(ScheduleEvent scheduleEvent : scheduleEvents) {
-            if(Channel.NED1.equals(scheduleEvent.getChannel()) ||
+        for (ScheduleEvent scheduleEvent : scheduleEvents) {
+            if (Channel.NED1.equals(scheduleEvent.getChannel()) ||
                 Channel.NED2.equals(scheduleEvent.getChannel()) ||
                 Channel.NED3.equals(scheduleEvent.getChannel())) {
                 mediaEditView.allowEditGeoRestrictions = false; // ned1-3 isn't allowed to be editted
@@ -332,11 +329,16 @@ public abstract class MediaEditView extends MediaView {
             }
         }
 
-        mediaEditView.ceresAuthority = locationAuthorityRecord != null && locationAuthorityRecord.hasAuthority();
-        mediaEditView.ceresRecord = locationAuthorityRecord != null;
+        // TODO This has changed and is broken now.
+        Authority locationAuthorityRecord = fullMedia.getAuthority(Platform.INTERNETVOD);
+        mediaEditView.allowEditNLRestrictionOnly = locationAuthorityRecord == Authority.USER; // if we have a record, only edit of NL is allowed
+        mediaEditView.allowEditGeoRestrictions = true;
+        mediaEditView.ceresAuthority = false;
+        mediaEditView.ceresRecord = false;
 
         return mediaEditView;
     }
+
 
     public Long getId() {
         return id;

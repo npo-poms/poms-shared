@@ -4,17 +4,7 @@
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.xml.bind.annotation.*;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.GroupType;
 import nl.vpro.domain.media.Location;
@@ -25,6 +15,16 @@ import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.spring.security.acl.MediaPermissionEvaluator;
 import nl.vpro.transfer.extjs.media.support.MediaTypeView;
+
+import javax.xml.bind.annotation.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @XmlRootElement(name = "media")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -107,25 +107,26 @@ public class MediaResultView {
         this.mediaType = mediaType;
     }
 
+
     public static MediaResultView create(MediaPermissionEvaluator permissionEvaluator, MediaListItem listItem) {
         MediaResultView simpleMedia = new MediaResultView(
-                listItem.getId(),
-                listItem.getMid(),
-                listItem.getWorkflow(),
-                listItem.getTitle(),
-                listItem.getSubTitle(),
-                listItem.getDescription(),
-                MediaTypeView.create(permissionEvaluator, listItem.getType())
+            listItem.getId(),
+            listItem.getMid(),
+            listItem.getWorkflow(),
+            listItem.getTitle(),
+            listItem.getSubTitle(),
+            listItem.getDescription(),
+            MediaTypeView.create(permissionEvaluator, listItem.getType())
         );
 
         simpleMedia.urn = listItem.getUrn();
 
         StringBuilder sb = new StringBuilder();
-        for(Broadcaster broadcaster : listItem.getBroadcasters()) {
+        for (Broadcaster broadcaster : listItem.getBroadcasters()) {
             sb.append(broadcaster.getDisplayName()).append(", ");
         }
         int length = sb.length();
-        if(length > 2) {
+        if (length > 2) {
             simpleMedia.broadcasters = sb.substring(0, length - 2);
         }
 
@@ -135,8 +136,8 @@ public class MediaResultView {
         simpleMedia.createdBy = listItem.getCreatedBy() == null ? null : listItem.getCreatedBy().getDisplayName();
         simpleMedia.lastModifiedBy = listItem.getLastModifiedBy() == null ? null : listItem.getLastModifiedBy().getDisplayName();
 
-        simpleMedia.publishStart = getDate(listItem.getPublishStart());
-        simpleMedia.publishStop  = getDate(listItem.getPublishStop());
+        simpleMedia.publishStart = getDate(listItem.getPublishStartInstant());
+        simpleMedia.publishStop = getDate(listItem.getPublishStopInstant());
 
 
         if (listItem.getLocations() != null) {
@@ -159,6 +160,13 @@ public class MediaResultView {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         return df.format(date);
     }
+
+    private static String getDate(Instant date) {
+        if (date == null) return null;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        return df.format(date);
+    }
+
 
     public Long getId() {
         return id;
@@ -241,15 +249,15 @@ public class MediaResultView {
     }
 
     private static boolean isSeriesOrSeason(MediaObject media) {
-        if(!(media instanceof Group)) {
+        if (!(media instanceof Group)) {
             return false;
         }
 
-        if(((Group)media).getType() == GroupType.SERIES) {
+        if (((Group) media).getType() == GroupType.SERIES) {
             return true;
         }
 
-        if(((Group)media).getType() == GroupType.SEASON) {
+        if (((Group) media).getType() == GroupType.SEASON) {
             return true;
         }
         return false;

@@ -12,6 +12,7 @@
 
   <properties>
     <poms.shared.version>${project.version}</poms.shared.version>
+    <poms.shared.media.version>5.4-SNAPSHOT</poms.shared.media.version>
   </properties>
 
 
