@@ -17,6 +17,7 @@ import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.transfer.extjs.ExtRecord;
 import nl.vpro.util.Helper;
 import nl.vpro.xml.bind.DurationXmlAdapter;
+import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -49,11 +50,7 @@ public class LocationView extends ExtRecord {
 
     private String format;
 
-    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
-    @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
-    private Duration offset;
+    private String offset;
 
     @XmlAttribute
     private Date creationDate;
@@ -100,7 +97,10 @@ public class LocationView extends ExtRecord {
             fullLocation.isAuthorityUpdate()
         );
 
-        simpleLocation.offset = fullLocation.getOffset() == null ? null : fullLocation.getOffset();
+        if (fullLocation.getOffset()!= null) {
+            final long durationMillis = fullLocation.getOffset().toMillis();
+            simpleLocation.offset = DurationFormatUtils.formatDuration(durationMillis, TIME_FORMAT);
+        }
         simpleLocation.creationDate = fullLocation.getCreationDate();
         simpleLocation.lastModified = fullLocation.getLastModified();
         simpleLocation.publishStart = fullLocation.getPublishStart();
@@ -118,11 +118,16 @@ public class LocationView extends ExtRecord {
     }
 
     public Location updateTo(Location fullLocation) {
+
+        Duration offsetDuration = Duration.between(
+            LocalTime.MIN,
+            LocalTime.parse(this.offset)
+        );
         fullLocation
             .setProgramUrl(this.url)
             .setAvFileFormat(AVFileFormat.valueOf(this.format))
             .setBitrate(this.bitrate)
-            .setOffset(this.offset)
+            .setOffset(offsetDuration)
             .setPublishStartInstant(this.publishStart.toInstant())
             .setPublishStopInstant(this.publishStop.toInstant());
 
@@ -172,26 +177,11 @@ public class LocationView extends ExtRecord {
     }
 
     public String getOffset() {
-        if (this.offset == null) {
-            return null;
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-
-        return sdf.format(offset);
+        return offset;
     }
 
     public void setOffset(String offset) {
-        if (Helper.isEmpty(offset)) {
-            this.offset = null;
-            return;
-        }
-
-        this.offset = Duration.between(
-            LocalTime.MIN,
-            LocalTime.parse(offset)
-        );
+        this.offset = offset;
     }
 
     public Date getCreationDate() {
