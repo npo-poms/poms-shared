@@ -4,15 +4,22 @@
  */
 package nl.vpro.transfer.extjs.media;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.Platform;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.jackson2.DurationToJsonTimestamp;
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.transfer.extjs.ExtRecord;
 import nl.vpro.util.Helper;
+import nl.vpro.xml.bind.DurationXmlAdapter;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalTime;
@@ -42,6 +49,10 @@ public class LocationView extends ExtRecord {
 
     private String format;
 
+    @XmlJavaTypeAdapter(DurationXmlAdapter.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = DurationToJsonTimestamp.Deserializer.class)
     private Duration offset;
 
     @XmlAttribute
