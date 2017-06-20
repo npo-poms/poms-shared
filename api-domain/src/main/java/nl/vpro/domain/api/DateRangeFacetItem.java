@@ -4,11 +4,20 @@
  */
 package nl.vpro.domain.api;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -16,18 +25,28 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "dateRangeFacetItemType")
-public class DateRangeFacetItem implements RangeFacetItem<Date> {
+public class DateRangeFacetItem implements RangeFacetItem<Instant> {
 
     private String name;
 
-    private Date begin;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Instant begin;
 
-    private Date end;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Instant end;
 
     public DateRangeFacetItem() {
     }
 
-    public DateRangeFacetItem(String name, Date begin, Date end) {
+    public DateRangeFacetItem(String name, Instant begin, Instant end) {
         this.name = name;
         this.begin = begin;
         this.end = end;
@@ -43,20 +62,20 @@ public class DateRangeFacetItem implements RangeFacetItem<Date> {
     }
 
     @Override
-    public Date getBegin() {
+    public Instant getBegin() {
         return begin;
     }
 
-    public void setBegin(Date begin) {
+    public void setBegin(Instant begin) {
         this.begin = begin;
     }
 
     @Override
-    public Date getEnd() {
+    public Instant getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(Instant end) {
         this.end = end;
     }
 
@@ -98,7 +117,7 @@ public class DateRangeFacetItem implements RangeFacetItem<Date> {
     }
 
     @Override
-    public boolean matches(Date begin, Date end) {
+    public boolean matches(Instant begin, Instant end) {
         return (this.begin == null || this.begin.equals(begin))
             &&
             (this.end == null || this.end.equals(end));

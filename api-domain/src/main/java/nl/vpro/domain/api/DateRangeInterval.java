@@ -4,20 +4,11 @@
  */
 package nl.vpro.domain.api;
 
-import javax.validation.constraints.Pattern;
+import java.time.Instant;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
-import java.time.*;
-import java.time.temporal.ChronoField;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.WeekFields;
-import java.util.Date;
-
-import nl.vpro.i18n.Locales;
-
-import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
 /**
  * @author Roelof Jan Koekoek
@@ -26,7 +17,7 @@ import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 @XmlType(name = "dateRangeIntervalType", propOrder = {
 })
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DateRangeInterval extends AbstractTemporalRangeInterval<Date> {
+public class DateRangeInterval extends AbstractTemporalRangeInterval<Instant> {
 
 
     public DateRangeInterval() {
@@ -37,10 +28,10 @@ public class DateRangeInterval extends AbstractTemporalRangeInterval<Date> {
     }
 
     @Override
-    public boolean matches(Date begin, Date end) {
+    public boolean matches(Instant begin, Instant end) {
         Interval parsed = parsed();
-        return parsed.isBucketBegin(begin.toInstant())
-                && parsed.getBucketEnd(begin.toInstant()).equals(end.toInstant());
+        return parsed.isBucketBegin(begin)
+                && parsed.getBucketEnd(begin).equals(end);
     }
 
 }

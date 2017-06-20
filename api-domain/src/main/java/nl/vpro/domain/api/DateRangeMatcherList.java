@@ -1,8 +1,8 @@
 package nl.vpro.domain.api;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -26,7 +26,7 @@ import nl.vpro.domain.api.jackson.DateRangeMatcherListJson;
 @XmlType(name = "dateRangeMatcherListType")
 @JsonSerialize(using = DateRangeMatcherListJson.Serializer.class)
 @JsonDeserialize(using = DateRangeMatcherListJson.Deserializer.class)
-public class DateRangeMatcherList extends MatcherList<DateRangeMatcher> implements Predicate<Date> {
+public class DateRangeMatcherList extends MatcherList<DateRangeMatcher> implements Predicate<Instant> {
 
     @XmlElement(name = "matcher")
     @Valid
@@ -58,7 +58,7 @@ public class DateRangeMatcherList extends MatcherList<DateRangeMatcher> implemen
 
 
     @Override
-    public boolean test(@Nullable Date input) {
+    public boolean test(@Nullable Instant input) {
         if (input == null) return true;
 
         switch (match) {

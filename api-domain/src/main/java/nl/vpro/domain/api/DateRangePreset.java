@@ -4,9 +4,9 @@
  */
 package nl.vpro.domain.api;
 
+import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
@@ -19,7 +19,7 @@ import nl.vpro.domain.media.Schedule;
  */
 @XmlEnum
 @XmlType(name = "dateRangePresetTypeEnum")
-public enum DateRangePreset implements RangeFacetItem<Date> {
+public enum DateRangePreset implements RangeFacetItem<Instant> {
     BEFORE_LAST_YEAR {
         @Override
         public String getName() {
@@ -27,12 +27,12 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
         }
 
         @Override
-        public Date getBegin() {
-            return new Date(Long.MIN_VALUE);
+        public Instant getBegin() {
+            return Instant.ofEpochMilli(Long.MIN_VALUE);
         }
 
         @Override
-        public Date getEnd() {
+        public Instant getEnd() {
             return LAST_YEAR.getBegin();
         }
     },
@@ -44,8 +44,8 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
         }
 
         @Override
-        public Date getBegin() {
-            return Date.from(today().minusYears(1).toInstant());
+        public Instant getBegin() {
+            return today().minusYears(1).toInstant();
         }
     },
 
@@ -56,8 +56,8 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
         }
 
         @Override
-        public Date getBegin() {
-            return Date.from(today().minusMonths(1).toInstant());
+        public Instant getBegin() {
+            return today().minusMonths(1).toInstant();
         }
     },
 
@@ -68,8 +68,8 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
         }
 
         @Override
-        public Date getBegin() {
-            return Date.from(today().minusWeeks(1).toInstant());
+        public Instant getBegin() {
+            return today().minusWeeks(1).toInstant();
         }
     },
 
@@ -80,8 +80,8 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
         }
 
         @Override
-        public Date getBegin() {
-            return Date.from(today().minusDays(1).toInstant());
+        public Instant getBegin() {
+            return today().minusDays(1).toInstant();
         }
     },
 
@@ -92,8 +92,8 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
         }
 
         @Override
-        public Date getEnd() {
-            return Date.from(today().plusDays(1).toInstant());
+        public Instant getEnd() {
+            return today().plusDays(1).toInstant();
         }
     },
 
@@ -104,8 +104,8 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
         }
 
         @Override
-        public Date getEnd() {
-            return Date.from(today().plusWeeks(1).toInstant());
+        public Instant getEnd() {
+            return today().plusWeeks(1).toInstant();
         }
     },
 
@@ -116,25 +116,25 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
         }
 
         @Override
-        public Date getBegin() {
-            return Date.from(today().plusDays(1).toInstant());
+        public Instant getBegin() {
+            return today().plusDays(1).toInstant();
         }
 
         @Override
-        public Date getEnd() {
-            return Date.from(today().plusDays(2).toInstant());
+        public Instant getEnd() {
+            return today().plusDays(2).toInstant();
         }
 
     };
 
     @Override
-    public Date getBegin() {
-        return Date.from(today().toInstant());
+    public Instant getBegin() {
+        return today().toInstant();
     }
 
     @Override
-    public Date getEnd() {
-        return Date.from(today().toInstant());
+    public Instant getEnd() {
+        return today().toInstant();
     }
 
     ZonedDateTime today() {
@@ -142,7 +142,7 @@ public enum DateRangePreset implements RangeFacetItem<Date> {
     }
 
     @Override
-    public boolean matches(Date begin, Date end) {
+    public boolean matches(Instant begin, Instant end) {
         return getBegin().equals(begin)
             &&
             getEnd().equals(end);

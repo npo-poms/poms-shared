@@ -4,14 +4,15 @@
  */
 package nl.vpro.domain.api.page;
 
+import java.io.Reader;
+import java.io.StringReader;
+import java.time.Instant;
+
+import org.junit.Test;
+
 import nl.vpro.domain.api.DateRangeFacetItem;
 import nl.vpro.domain.api.DateRangePreset;
 import nl.vpro.jackson2.Jackson2Mapper;
-import org.junit.Test;
-
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,7 +33,7 @@ public class PageFacetsTest {
     public void testDateRangeCustomWhenNoArray() throws Exception {
         Reader reader = new StringReader("{\"sortDates\" : {\"name\":\"My range\",\"begin\":100,\"end\":200}}");
         PageFacets facets = Jackson2Mapper.INSTANCE.readValue(reader, PageFacets.class);
-        assertThat(facets.getSortDates().getRanges()).containsOnly(new DateRangeFacetItem("My range", new Date(100), new Date(200)));
+        assertThat(facets.getSortDates().getRanges()).containsOnly(new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
     }
 
 

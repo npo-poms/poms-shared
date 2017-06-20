@@ -1,10 +1,11 @@
 package nl.vpro.domain.api;
 
-import nl.vpro.domain.media.Schedule;
-import org.junit.Test;
-
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+
+import org.junit.Test;
+
+import nl.vpro.domain.media.Schedule;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,15 +28,15 @@ public class DateRangePresetTest {
     @Test
     public void beforeLastYear() {
         long lastYear = ZonedDateTime.now(Schedule.ZONE_ID).truncatedTo(ChronoUnit.DAYS).minusYears(1).toEpochSecond() * 1000;
-        assertThat(DateRangePreset.BEFORE_LAST_YEAR.getBegin().getTime()).isEqualTo(-9223372036854775808L);
-        assertThat(DateRangePreset.BEFORE_LAST_YEAR.getEnd().getTime()).isEqualTo(lastYear);
+        assertThat(DateRangePreset.BEFORE_LAST_YEAR.getBegin().toEpochMilli()).isEqualTo(-9223372036854775808L);
+        assertThat(DateRangePreset.BEFORE_LAST_YEAR.getEnd().toEpochMilli()).isEqualTo(lastYear);
     }
     @Test
     public void lastYear() {
         long lastYear = ZonedDateTime.now(Schedule.ZONE_ID).truncatedTo(ChronoUnit.DAYS).minusYears(1).toEpochSecond() * 1000;
         long today = ZonedDateTime.now(Schedule.ZONE_ID).truncatedTo(ChronoUnit.DAYS).toEpochSecond() * 1000;
-        assertThat(DateRangePreset.LAST_YEAR.getBegin().getTime()).isEqualTo(lastYear);
-        assertThat(DateRangePreset.LAST_YEAR.getEnd().getTime()).isEqualTo(today);
+        assertThat(DateRangePreset.LAST_YEAR.getBegin().toEpochMilli()).isEqualTo(lastYear);
+        assertThat(DateRangePreset.LAST_YEAR.getEnd().toEpochMilli()).isEqualTo(today);
     }
 
 

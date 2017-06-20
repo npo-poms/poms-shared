@@ -7,7 +7,6 @@ package nl.vpro.domain.api.media;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Date;
 import java.time.Instant;
 import java.util.List;
 import java.util.function.Function;
@@ -253,7 +252,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             return true;
         }
         Instant inputDate = inputDateGetter.apply(input);
-        return inputDate != null && range.test(Date.from(inputDate));
+        return inputDate != null && range.test(inputDate);
     }
 
     protected boolean applyBroadcasters(MediaObject input) {

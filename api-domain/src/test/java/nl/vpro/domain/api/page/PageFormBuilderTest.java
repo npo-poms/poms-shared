@@ -5,7 +5,6 @@
 package nl.vpro.domain.api.page;
 
 import java.time.Instant;
-import java.util.Date;
 
 import org.junit.Test;
 
@@ -91,7 +90,7 @@ public class PageFormBuilderTest {
             .mediaFacet(MediaFacetsBuilder.facets()
                 .titles()
                 .types()
-                .sortDates(new DateRangeFacetItem("Mijn tijd range", new Date(), new Date()), DateRangePreset.TODAY, DateRangePreset.LAST_WEEK)
+                .sortDates(new DateRangeFacetItem("Mijn tijd range", Instant.now(), Instant.now()), DateRangePreset.TODAY, DateRangePreset.LAST_WEEK)
                 .broadcasters()
                 .genres()
                 .tags()

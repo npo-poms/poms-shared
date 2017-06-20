@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.api;
 
+import java.time.Instant;
 import java.util.Date;
 
 import org.junit.Test;
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class DateRangeMatcherTest extends RangeMatcherTest<Date, DateRangeMatcher> {
+public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMatcher> {
 
     @Test
     public void testGetInclusiveEnd() throws Exception {
@@ -34,18 +35,18 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Date, DateRangeMatche
     }
 
     @Override
-    Date getValue() {
-        return new Date(150);
+    Instant getValue() {
+        return Instant.ofEpochMilli(150);
     }
 
     @Override
     public void testHashCode() {
-        assertEquals(3300, getInstance().hashCode());
+        assertEquals(796275456, getInstance().hashCode());
     }
 
     @Test
     public void testGetBeginXml() throws Exception {
-        Date begin = new Date(0);
+        Instant begin = Instant.EPOCH;
         DateRangeMatcher in = new DateRangeMatcher(begin, null);
         DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
             "<api:begin>1970-01-01T01:00:00+01:00</api:begin>");
@@ -54,7 +55,7 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Date, DateRangeMatche
 
     @Test
     public void testGetEndXml() throws Exception {
-        Date end = new Date(0);
+        Instant end = Instant.EPOCH;
         DateRangeMatcher in = new DateRangeMatcher(null, end);
         DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
             "<api:end>1970-01-01T01:00:00+01:00</api:end>");
@@ -64,11 +65,11 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Date, DateRangeMatche
     @Test
     public void testApply() {
         DateRangeMatcher instance = getInstance();
-        assertTrue(instance.test(new Date(100)));
-        assertTrue(instance.test(new Date(150)));
-        assertFalse(instance.test(new Date(200)));
-        assertFalse(instance.test(new Date(400)));
-        assertFalse(instance.test(new Date(-1)));
+        assertTrue(instance.test(Instant.ofEpochMilli(100)));
+        assertTrue(instance.test(Instant.ofEpochMilli(150)));
+        assertFalse(instance.test(Instant.ofEpochMilli(200)));
+        assertFalse(instance.test(Instant.ofEpochMilli(400)));
+        assertFalse(instance.test(Instant.ofEpochMilli(-1)));
     }
 
 }

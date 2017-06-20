@@ -12,48 +12,68 @@ import java.util.Date;
 import java.util.function.Predicate;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
 @XmlType(name = "dateRangeMatcherType", propOrder = {"begin", "end"})
-public class DateRangeMatcher extends RangeMatcher<Date> implements Predicate<Date> {
+public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate<Instant> {
 
     @XmlElement
     @Getter
     @Setter
-    private Date begin;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Instant begin;
     @XmlElement
     @Getter
     @Setter
-    private Date end;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Instant end;
 
 
     public DateRangeMatcher() {
     }
 
-    public DateRangeMatcher(Date begin, Date end) {
+    public DateRangeMatcher(Instant begin, Instant end) {
         super(begin, end);
     }
 
-    public DateRangeMatcher(Date begin, Date end, Boolean inclusiveEnd) {
+    public DateRangeMatcher(Instant begin, Instant end, Boolean inclusiveEnd) {
         super(begin, end, inclusiveEnd);
     }
 
-    public DateRangeMatcher(Instant begin, Instant end, Boolean inclusiveEnd) {
-        super(DateUtils.toDate(begin), DateUtils.toDate(end), inclusiveEnd);
+    @Deprecated
+    public DateRangeMatcher(Date begin, Date end, Boolean inclusiveEnd) {
+        super(DateUtils.toInstant(begin), DateUtils.toInstant(end), inclusiveEnd);
     }
 
-    public DateRangeMatcher(Instant begin, Instant end) {
-        super(DateUtils.toDate(begin), DateUtils.toDate(end));
+    @Deprecated
+    public DateRangeMatcher(Date begin, Date end) {
+        super(DateUtils.toInstant(begin), DateUtils.toInstant(end));
     }
 
 
-    public DateRangeMatcher(Date begin, Date end, Boolean inclusiveEnd, Match match) {
+    public DateRangeMatcher(Instant begin, Instant end, Boolean inclusiveEnd, Match match) {
         super(begin, end, inclusiveEnd, match);
     }
 
@@ -64,7 +84,7 @@ public class DateRangeMatcher extends RangeMatcher<Date> implements Predicate<Da
     }
 
     @Override
-    public boolean test(Date date) {
+    public boolean test(Instant date) {
         return super.testComparable(date);
 
     }

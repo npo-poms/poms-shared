@@ -4,17 +4,19 @@
  */
 package nl.vpro.domain.api;
 
-import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
-
-import javax.xml.bind.JAXB;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
+
+import javax.xml.bind.JAXB;
+
+import org.junit.Test;
+
+import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,13 +43,13 @@ public class DateRangeFacetsTest {
     public void testMixedJsonArrayPreset() throws Exception {
         Reader reader = new StringReader("[\"LAST_YEAR\",\"LAST_WEEK\",{\"name\":\"My range\",\"begin\":100,\"end\":200}]");
         DateRangeFacets<AbstractSearch> facet = (DateRangeFacets<AbstractSearch>) Jackson2Mapper.INSTANCE.readValue(reader, DateRangeFacets.class);
-        assertThat(facet.getRanges()).containsOnly(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK, new DateRangeFacetItem("My range", new Date(100), new Date(200)));
+        assertThat(facet.getRanges()).containsOnly(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK, new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
     }
 
     @Test
     public void testJsonOutWithPreset() throws Exception {
         DateRangeFacets<AbstractSearch> in = new DateRangeFacets<>();
-        in.setRanges(Arrays.asList(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK, new DateRangeFacetItem("My range", new Date(100), new Date(200))));
+        in.setRanges(Arrays.asList(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK, new DateRangeFacetItem("My range", Instant.ofEpochMilli(100), Instant.ofEpochMilli(200))));
         Writer writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, in);
         assertThat(writer.toString()).isEqualTo("[\"LAST_YEAR\",\"LAST_WEEK\",{\"name\":\"My range\",\"begin\":100,\"end\":200}]");
