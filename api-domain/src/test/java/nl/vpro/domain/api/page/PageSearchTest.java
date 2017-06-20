@@ -229,7 +229,7 @@ public class PageSearchTest {
     @Test
     public void testApplySortDateNot() throws Exception {
         PageSearch in = new PageSearch();
-        in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(new Date(100), new Date(200), false, Match.NOT)));
+        in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), false, Match.NOT)));
 
         Page object = new Page(PageType.ARTICLE);
         assertThat(in.test(object)).isFalse();

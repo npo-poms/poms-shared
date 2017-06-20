@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.api.media;
 
-import java.util.Date;
+import java.time.Instant;
 
 import nl.vpro.domain.api.DateRangeFacets;
 import nl.vpro.domain.api.FacetOrder;
@@ -57,7 +57,7 @@ public class MediaFacetsBuilder {
         return this;
     }
 
-    public MediaFacetsBuilder sortDates(RangeFacet<Date>... facetItems) {
+    public MediaFacetsBuilder sortDates(RangeFacet<Instant>... facetItems) {
         facets.setSortDates(new DateRangeFacets(facetItems));
         return this;
     }

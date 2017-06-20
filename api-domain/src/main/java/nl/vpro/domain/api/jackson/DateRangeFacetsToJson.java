@@ -5,7 +5,7 @@
 package nl.vpro.domain.api.jackson;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.Instant;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -31,7 +31,7 @@ public class DateRangeFacetsToJson {
         @Override
         public void serialize(DateRangeFacets<?> value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
             jgen.writeStartArray();
-            for(RangeFacet<Date> item : value.getRanges()) {
+            for(RangeFacet<Instant> item : value.getRanges()) {
                 if(item instanceof DateRangeInterval) {
                     jgen.writeObject(((DateRangeInterval)item).getInterval());
                 } else {

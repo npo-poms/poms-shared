@@ -1,7 +1,7 @@
 package nl.vpro.domain.api.media;
 
 import java.io.StringReader;
-import java.util.Date;
+import java.time.Instant;
 
 import javax.xml.bind.JAXB;
 
@@ -29,8 +29,8 @@ public class MediaFacetsTest {
             new DateRangeInterval("YEAR"),
             new DateRangeFacetItem(
                 "MyFacet",
-                new Date(0),
-                new Date(1000)
+                Instant.EPOCH,
+                Instant.ofEpochMilli(1000)
             )
         ));
 
@@ -60,8 +60,8 @@ public class MediaFacetsTest {
             new DateRangeInterval("YEAR"),
             new DateRangeFacetItem(
                 "MyFacet",
-                new Date(0),
-                new Date(1000)
+                Instant.EPOCH,
+                Instant.ofEpochMilli(1000)
             )
         ));
 

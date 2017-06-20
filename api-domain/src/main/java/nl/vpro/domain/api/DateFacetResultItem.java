@@ -1,17 +1,19 @@
 package nl.vpro.domain.api;
 
-import java.io.IOException;
-import java.util.Date;
+import java.time.Instant;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Michiel Meeuwissen
@@ -19,50 +21,42 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  */
 @XmlType(name = "dateFacetResultItemType")
 @XmlAccessorType(XmlAccessType.PROPERTY)
-public class DateFacetResultItem extends RangeFacetResultItem<Date> {
+public class DateFacetResultItem extends RangeFacetResultItem<Instant> {
 
     public DateFacetResultItem() {
     }
 
-    public DateFacetResultItem(String name, Date begin, Date end, long count) {
+    public DateFacetResultItem(String name, Instant begin, Instant end, long count) {
         super(name, begin, end, count);
     }
 
     @Override
-    @JsonSerialize(using = DateFacetResultItem.DateSerializer.class)
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Date getBegin() {
+    public Instant getBegin() {
         return begin;
     }
 
-    public void setBegin(Date date) {
+    public void setBegin(Instant date) {
         this.begin = date;
     }
 
     @Override
-    @JsonSerialize(using = DateFacetResultItem.DateSerializer.class)
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public Date getEnd() {
+    public Instant getEnd() {
         return end;
     }
 
-    public void setEnd(Date date) {
+    public void setEnd(Instant date) {
         this.end = date;
     }
-
-
-
-    // Work around
-    // https://jira.codehaus.org/browse/JACKSON-920
-    public static class DateSerializer extends JsonSerializer<Date> {
-        @Override
-        public void serialize(Date value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
-            jgen.writeNumber(value.getTime());
-
-        }
-    }
-
-
 
 }
 

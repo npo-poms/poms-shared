@@ -18,22 +18,22 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class DateRangeIntervalTest {
-    
+
     private String[][] exampleIntervals = {
         {"2 YEAR", "2016","P46Y"},
         {"3 YEAR", "2016", "P46Y"},
-        {"3 MONTH", "2016-05", "P556M" }, 
-        {"3 WEEK", "2016-W18", "P2418W"}, 
-        {"6 DAY", "2016-05-06", "P16927D"}, 
-        {"5 HOUR", "2016-05-06T14:21:00+02:00", "PT406260H"}, 
+        {"3 MONTH", "2016-05", "P556M" },
+        {"3 WEEK", "2016-W18", "P2418W"},
+        {"6 DAY", "2016-05-06", "P16927D"},
+        {"5 HOUR", "2016-05-06T14:21:00+02:00", "PT406260H"},
         {"6 MINUTE", "2016-05-06T14:21:00+02:00", "PT24375621M"}
     };
-    
+
     @Test(expected = IllegalArgumentException.class)
     public void testIllegal() {
         new DateRangeInterval("foo").parsed();
     }
-    
+
     @Test
     public void testParse() {
         Date date = Date.from(LocalDate.of(2016, 5, 6).atTime(14, 21).atZone(Schedule.ZONE_ID).toInstant());
@@ -61,9 +61,9 @@ public class DateRangeIntervalTest {
 
         ZonedDateTime end = begin.plusWeeks(2);
         System.out.println(begin + "-" + end);
-        assertTrue(interval.matches(Date.from(begin.toInstant()), Date.from(end.toInstant())));
+        assertTrue(interval.matches(begin.toInstant(), end.toInstant()));
     }
-    
+
 
     @Test
     @Ignore
@@ -77,10 +77,10 @@ public class DateRangeIntervalTest {
             .with(ChronoField.ALIGNED_WEEK_OF_YEAR, 10 % 2 + 1);
 
         ZonedDateTime end = begin.plusWeeks(2);
-        
+
         System.out.println(begin + "-" + end);
-        assertFalse(interval.matches(Date.from(begin.toInstant()), Date.from(end.toInstant())));
-        
+        assertFalse(interval.matches(begin.toInstant(), end.toInstant()));
+
     }
 
 
@@ -92,7 +92,7 @@ public class DateRangeIntervalTest {
             .truncatedTo(ChronoUnit.DAYS)
             .with(ChronoField.DAY_OF_YEAR, 1);
         ZonedDateTime end = begin.plusYears(1);
-        assertTrue(interval.matches(Date.from(begin.toInstant()), Date.from(end.toInstant())));
+        assertTrue(interval.matches(begin.toInstant(), end.toInstant()));
 
     }
 
@@ -104,7 +104,7 @@ public class DateRangeIntervalTest {
             .truncatedTo(ChronoUnit.DAYS)
             .with(ChronoField.DAY_OF_YEAR, 1);
         ZonedDateTime end = begin.plusYears(2);
-        assertFalse(interval.matches(Date.from(begin.toInstant()), Date.from(end.toInstant())));
+        assertFalse(interval.matches(begin.toInstant(), end.toInstant()));
 
     }
 }

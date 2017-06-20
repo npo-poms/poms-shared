@@ -244,7 +244,7 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
             return true;
         }
         Instant inputDate = inputDateGetter.apply(input);
-        return inputDate != null && range.test(Date.from(inputDate));
+        return inputDate != null && range.test(inputDate);
     }
 
 

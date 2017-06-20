@@ -1,6 +1,7 @@
 package nl.vpro.api.util;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -60,8 +61,8 @@ public class SearchResultsTest {
         searches.asList().add(new DateRangeMatcher(null, new Date(1000000)));
 
         List<DateFacetResultItem> facetResultItems = new ArrayList<>();
-        facetResultItems.add(new DateFacetResultItem("range1", new Date(0), new Date(100000), 100));
-        facetResultItems.add(new DateFacetResultItem("range2", new Date(100000), new Date(2000000), 50));
+        facetResultItems.add(new DateFacetResultItem("range1", Instant.EPOCH, Instant.ofEpochMilli(100000), 100));
+        facetResultItems.add(new DateFacetResultItem("range2", Instant.ofEpochMilli(100000), Instant.ofEpochMilli(2000000), 50));
 
         List<DateFacetResultItem> selected = new ArrayList<>();
 
