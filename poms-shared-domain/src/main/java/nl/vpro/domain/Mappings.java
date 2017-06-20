@@ -238,6 +238,7 @@ public abstract class Mappings implements Function<String, File> {
             DocumentationAdder transformer = new DocumentationAdder(MAPPING.get(namespace));
             try {
                 transformer.transform(new StreamSource(new FileInputStream(file)), new StreamResult(new FileOutputStream(fileWithDocumentation)));
+                log.info("Generated {} with {}", fileWithDocumentation, transformer);
             } catch (FileNotFoundException | TransformerException e) {
                 log.error(e.getMessage(), e);
                 try {
