@@ -76,7 +76,6 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     private DateRangeMatcherList lastModifiedDates;
 
 
-
     @Valid
     @Getter
     @Setter

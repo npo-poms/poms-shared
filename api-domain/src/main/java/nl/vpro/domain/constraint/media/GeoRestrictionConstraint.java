@@ -4,12 +4,14 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.EnumConstraint;
 import nl.vpro.domain.media.GeoRestriction;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Region;
@@ -20,15 +22,15 @@ import nl.vpro.domain.media.Region;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoRestrictionConstraintType")
-public class GeoRestrictionConstraint extends TextConstraint<MediaObject> {
+public class GeoRestrictionConstraint extends EnumConstraint<Region, MediaObject> {
 
     public GeoRestrictionConstraint() {
-        caseHandling = CaseHandling.ASIS;
+        super(Region.class);
     }
 
+
     public GeoRestrictionConstraint(Region region) {
-        super(region.name());
-        caseHandling = CaseHandling.ASIS;
+        super(Region.class, region);
     }
 
     @Override
@@ -37,13 +39,9 @@ public class GeoRestrictionConstraint extends TextConstraint<MediaObject> {
     }
 
     @Override
-    public boolean test(@Nullable MediaObject input) {
-        if (input == null) return false;
-        for (GeoRestriction e : input.getGeoRestrictions()) {
-            if (value.equals(e.getRegion().name())) {
-                return true;
-            }
-        }
-        return false;
+    protected Collection<Region> getEnumValues(MediaObject input) {
+        return input.getGeoRestrictions().stream().map(GeoRestriction::getRegion).collect(Collectors.toList());
+
     }
+
 }

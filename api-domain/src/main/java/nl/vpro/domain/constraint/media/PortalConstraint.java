@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.user.Portal;
 
@@ -19,7 +19,7 @@ import nl.vpro.domain.user.Portal;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "portalConstraintType")
-public class PortalConstraint extends TextConstraint<MediaObject> {
+public class PortalConstraint extends AbstractTextConstraint<MediaObject> {
 
     public PortalConstraint() {
         caseHandling = CaseHandling.ASIS;

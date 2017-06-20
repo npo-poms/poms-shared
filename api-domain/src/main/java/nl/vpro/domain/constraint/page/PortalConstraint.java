@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.page.Page;
 
 /**
@@ -17,7 +17,7 @@ import nl.vpro.domain.page.Page;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "pagePortalConstraintType")
-public class PortalConstraint extends TextConstraint<Page> {
+public class PortalConstraint extends AbstractTextConstraint<Page> {
 
     public PortalConstraint() {
         caseHandling = CaseHandling.ASIS;

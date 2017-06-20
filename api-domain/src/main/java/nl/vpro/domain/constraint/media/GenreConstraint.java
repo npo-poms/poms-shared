@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 import nl.vpro.domain.constraint.AbstractGenreConstraint;
 import nl.vpro.domain.media.Genre;
 import nl.vpro.domain.media.MediaObject;
@@ -17,6 +19,7 @@ import nl.vpro.domain.media.MediaObject;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "genreConstraintType")
+@XmlDocumentation("A constraint on the genre id. This may be postfixed with an asterix")
 public class GenreConstraint extends AbstractGenreConstraint<MediaObject> {
 
     public GenreConstraint() {
