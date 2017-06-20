@@ -39,6 +39,10 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
         this.enumClass = clazz;
     }
 
+    public S getEnumValue() {
+        return enumValue;
+    }
+
     @Override
     @XmlValue
     public final String getValue() {
@@ -83,18 +87,35 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
     }
 
     private S getByXmlValue(String v) {
+        S inexactMatch = null;
         for (S f : enumClass.getEnumConstants()) {
-
             try {
                 XmlEnumValue e = enumClass.getField(f.name()).getAnnotation(XmlEnumValue.class);
-                if (e.value().equals(v)) {
-                    return f;
+                if (e != null) {
+                    if (e.value().equals(v)) {
+                        return f;
+                    }
+                    if (inexactMatch == null && e.value().equalsIgnoreCase(v)) {
+                        inexactMatch = f;
+                    }
+                } else {
+                    if (f.name().equals(v)) {
+                        return f;
+                    }
+                    if (inexactMatch == null && f.name().equalsIgnoreCase(v)) {
+                        inexactMatch = f;
+                    }
+
                 }
-            } catch (NoSuchFieldException | NullPointerException ignored) {
+            } catch (NoSuchFieldException ignored) {
 
             }
         }
-        return Enum.valueOf(enumClass, v);
+        if (inexactMatch != null) {
+            return inexactMatch;
+        }
+        throw new IllegalArgumentException("no such enum value " + v);
+
     }
 
     @Override
