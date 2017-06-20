@@ -70,6 +70,9 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
     }
 
     private String getXmlValue() {
+        if (enumValue == null) {
+            return null;
+        }
         String name = enumValue.name();
         try {
             XmlEnumValue xmlValue = enumClass.getField(name).getAnnotation(XmlEnumValue.class);
