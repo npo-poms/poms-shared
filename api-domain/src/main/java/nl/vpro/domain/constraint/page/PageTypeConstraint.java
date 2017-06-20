@@ -26,8 +26,8 @@ public class PageTypeConstraint extends EnumConstraint<PageType, Page> {
         super(PageType.class);
     }
 
-    public PageTypeConstraint(String value) {
-        super(PageType.class, PageType.valueOf(value.toUpperCase()));
+    public PageTypeConstraint(PageType value) {
+        super(PageType.class, value);
     }
 
     @Override

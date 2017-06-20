@@ -6,7 +6,6 @@ package nl.vpro.domain.constraint.media;
 
 import java.util.Collection;
 
-import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -40,10 +39,5 @@ public class AgeRatingConstraint extends EnumConstraint<AgeRating, MediaObject> 
     protected Collection<AgeRating> getEnumValues(MediaObject input) {
         return asCollection(input.getAgeRating());
 
-    }
-
-    @Override
-    public boolean test(@Nullable MediaObject input) {
-        return input != null && input.getAgeRating() != null && enumValue == input.getAgeRating();
     }
 }

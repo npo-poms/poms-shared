@@ -4,16 +4,17 @@
  */
 package nl.vpro.domain.constraint.media;
 
+import java.util.Locale;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import nl.vpro.domain.constraint.Constraint;
 import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Program;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,7 +52,7 @@ public class AgeRatingConstraintTest {
         Constraint<MediaObject> _6 = new AgeRatingConstraint(AgeRating._6);
         Program program = MediaTestDataBuilder.program().mid("mid_1235").withAgeRating().build();
         assertThat(_6.test(program)).isFalse();
-        assertThat(_6.testWithReason(program).getReason()).isEqualTo("AgeRatingConstraint/ageRating/6");
         assertThat(_6.testWithReason(program).getDescription(Locale.US)).isEqualTo("The age rating of 'mid_1235' is not 6");
+        assertThat(_6.testWithReason(program).getReason()).isEqualTo("AgeRatingConstraint/ageRating/6");
     }
  }
