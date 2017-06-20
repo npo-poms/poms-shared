@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.api;
 
+import java.time.Instant;
 import java.util.*;
 
 import javax.xml.bind.annotation.*;
@@ -31,28 +32,28 @@ public class DateRangeFacets<T extends AbstractSearch> extends AbstractFacet<T> 
         @XmlElement(name = "range", type = DateRangeFacetItem.class)
     })
     @JsonIgnore
-    private List<RangeFacet<Date>> ranges;
+    private List<RangeFacet<Instant>> ranges;
 
     public DateRangeFacets() {
     }
 
     @SafeVarargs
-    public DateRangeFacets(RangeFacet<Date>... ranges) {
+    public DateRangeFacets(RangeFacet<Instant>... ranges) {
         if(ranges != null && ranges.length > 0) {
             this.ranges = Arrays.asList(ranges);
         }
     }
 
-    public List<RangeFacet<Date>> getRanges() {
+    public List<RangeFacet<Instant>> getRanges() {
         return ranges;
     }
 
-    public void setRanges(List<RangeFacet<Date>> ranges) {
+    public void setRanges(List<RangeFacet<Instant>> ranges) {
         this.ranges = ranges;
     }
 
     @SafeVarargs
-    public final void addRanges(RangeFacet<Date>... ranges) {
+    public final void addRanges(RangeFacet<Instant>... ranges) {
         if(this.ranges == null) {
             this.ranges = new ArrayList<>(ranges.length);
         }

@@ -1,7 +1,7 @@
 package nl.vpro.domain.api;
 
 import java.io.IOException;
-import java.util.Date;
+import java.time.Instant;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class DateFacetResultItemTest {
 
     @Test
     public void json() throws IOException {
-        DateFacetResultItem item = new DateFacetResultItem("test", new Date(0), null, 10);
+        DateFacetResultItem item = new DateFacetResultItem("test", Instant.EPOCH, null, 10);
 
         assertThatJson(item)
             .isSimilarTo("{\"value\":\"test\",\"begin\":0,\"count\":10,\"selected\":false}")

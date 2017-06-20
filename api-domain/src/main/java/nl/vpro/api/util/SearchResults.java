@@ -130,11 +130,11 @@ public class SearchResults {
 
         if (facetResultItems != null && searches != null) {
             for (DateFacetResultItem facetResultItem : facetResultItems) {
-                Date begin = facetResultItem.getBegin();
-                Date end = facetResultItem.getEnd();
+                Instant begin = facetResultItem.getBegin();
+                Instant end = facetResultItem.getEnd();
                 for (DateRangeMatcher matcher : searches) {
-                    Date matcherBegin = matcher.getBegin();
-                    Date matcherEnd = matcher.getEnd();
+                    Instant matcherBegin = matcher.getBegin();
+                    Instant matcherEnd = matcher.getEnd();
                     if (Objects.equals(matcherBegin, begin)  &&
                         Objects.equals(matcherEnd, end)) {
                         facetResultItem.setSelected(true);
@@ -160,7 +160,7 @@ public class SearchResults {
                             newItem.setCount(0);
                             newItem.setSelected(true);
                             if (dateRangeFacets != null && dateRangeFacets.getRanges() != null) {
-                                for (RangeFacet<Date> range : dateRangeFacets.getRanges()) {
+                                for (RangeFacet<Instant> range : dateRangeFacets.getRanges()) {
                                     final DateRangeFacetItem dateRangeFacetItem;
                                     if (range instanceof DateRangePreset) {
                                         dateRangeFacetItem = ((DateRangePreset) range).asDateRangeFacetItem();
@@ -169,7 +169,7 @@ public class SearchResults {
                                     } else {
                                         DateRangeInterval dateRangeInterval = (DateRangeInterval) range;
                                         if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
-                                            newItem.setValue(dateRangeInterval.parsed().print(DateUtils.toInstant(item.getBegin()), false));
+                                            newItem.setValue(dateRangeInterval.parsed().print(item.getBegin(), false));
                                             selected.add(newItem);
                                         }
                                         continue;

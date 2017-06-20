@@ -267,7 +267,7 @@ public class PageFormBuilder extends AbstractFormBuilder {
     }
 
     @SafeVarargs
-    public final PageFormBuilder sortDateFacet(RangeFacet<Date>... ranges) {
+    public final PageFormBuilder sortDateFacet(RangeFacet<Instant>... ranges) {
         DateRangeFacets dateRangeFacets = new DateRangeFacets();
         dateRangeFacets.setRanges(Arrays.asList(ranges));
         facets().setSortDates(dateRangeFacets);
