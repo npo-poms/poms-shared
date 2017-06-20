@@ -4,7 +4,9 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -24,12 +26,10 @@ public class ChannelConstraint extends EnumConstraint<Channel, MediaObject> {
 
     public ChannelConstraint() {
         super(Channel.class);
-        caseHandling = CaseHandling.ASIS;
     }
 
     public ChannelConstraint(Channel value) {
         super(Channel.class, value);
-        caseHandling = CaseHandling.ASIS;
     }
 
     @Override
@@ -38,13 +38,8 @@ public class ChannelConstraint extends EnumConstraint<Channel, MediaObject> {
     }
 
     @Override
-    public boolean test(@Nullable MediaObject input) {
-        if (input == null) return false;
-        for (ScheduleEvent e : input.getScheduleEvents()) {
-            if (value.equals(e.getChannel().name())) {
-                return true;
-            }
-        }
-        return false;
+    protected Collection<Channel> getEnumValues(MediaObject input) {
+        return input.getScheduleEvents().stream().map(ScheduleEvent::getChannel).collect(Collectors.toList());
+
     }
 }

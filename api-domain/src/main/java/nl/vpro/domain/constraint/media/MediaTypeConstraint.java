@@ -4,7 +4,8 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import javax.annotation.Nullable;
+import java.util.Collection;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -23,12 +24,10 @@ public class MediaTypeConstraint extends EnumConstraint<MediaType, MediaObject> 
 
     public MediaTypeConstraint() {
         super(MediaType.class);
-        caseHandling = CaseHandling.ASIS;
     }
 
     public MediaTypeConstraint(MediaType value) {
         super(MediaType.class, value);
-        caseHandling = CaseHandling.ASIS;
     }
 
     @Override
@@ -37,7 +36,8 @@ public class MediaTypeConstraint extends EnumConstraint<MediaType, MediaObject> 
     }
 
     @Override
-    public boolean test(@Nullable MediaObject input) {
-        return value == null || (input != null && input.getMediaType() != null && value.equals(input.getMediaType().name()));
+    protected Collection<MediaType> getEnumValues(MediaObject input) {
+        return asCollection(input.getMediaType());
+
     }
 }

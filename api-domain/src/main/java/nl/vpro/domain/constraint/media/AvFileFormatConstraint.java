@@ -4,11 +4,15 @@
  */
 package nl.vpro.domain.constraint.media;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.EnumConstraint;
+import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.MediaObject;
 
@@ -18,18 +22,16 @@ import nl.vpro.domain.media.MediaObject;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "avFileFormatConstraintType")
-public class AvFileFormatConstraint extends TextConstraint<MediaObject>  {
+public class AvFileFormatConstraint extends EnumConstraint<AVFileFormat, MediaObject> {
 
     public AvFileFormatConstraint() {
-        // Due to a mapping error our current format mapping is lower case and will become upper on next mapping update
-        caseHandling = CaseHandling.BOTH;
+        super(AVFileFormat.class);
     }
 
     public AvFileFormatConstraint(String value) {
-        super(value);
-        // Due to a mapping error our current format mapping is lower case and will become upper on next mapping update
-        caseHandling = CaseHandling.BOTH;
+        super(AVFileFormat.class, AVFileFormat.valueOf(value.toUpperCase()));
     }
+
 
     @Override
     public String getESPath() {
@@ -37,12 +39,8 @@ public class AvFileFormatConstraint extends TextConstraint<MediaObject>  {
     }
 
     @Override
-    public boolean test(MediaObject input) {
-        for(Location location : input.getLocations()) {
-            if(value.toUpperCase().equals(location.getAvFileFormat().name())) {
-                return true;
-            }
-        }
-        return false;
+    protected Collection<AVFileFormat> getEnumValues(MediaObject input) {
+        return input.getLocations().stream().map(Location::getAvFileFormat).collect(Collectors.toList());
     }
+
 }

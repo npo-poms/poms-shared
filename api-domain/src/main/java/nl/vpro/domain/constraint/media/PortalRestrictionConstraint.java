@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.PortalRestriction;
 import nl.vpro.domain.user.Portal;
@@ -20,7 +20,7 @@ import nl.vpro.domain.user.Portal;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "portalRestrictionConstraintType")
-public class PortalRestrictionConstraint extends TextConstraint<MediaObject> {
+public class PortalRestrictionConstraint extends AbstractTextConstraint<MediaObject> {
 
     public PortalRestrictionConstraint() {
         caseHandling = CaseHandling.ASIS;

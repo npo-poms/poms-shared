@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.MediaObject;
 
@@ -18,7 +18,7 @@ import nl.vpro.domain.media.MediaObject;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "avFileExtensionConstraintType")
-public class AVFileExtensionConstraint extends TextConstraint<MediaObject> {
+public class AVFileExtensionConstraint extends AbstractTextConstraint<MediaObject> {
 
     public AVFileExtensionConstraint() {
         caseHandling = CaseHandling.LOWER;

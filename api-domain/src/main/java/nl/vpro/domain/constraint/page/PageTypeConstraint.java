@@ -4,12 +4,15 @@
  */
 package nl.vpro.domain.constraint.page;
 
+import java.util.Collection;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.EnumConstraint;
 import nl.vpro.domain.page.Page;
+import nl.vpro.domain.page.PageType;
 
 /**
  * @author Roelof Jan Koekoek
@@ -17,15 +20,14 @@ import nl.vpro.domain.page.Page;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pageTypeConstraintType")
-public class PageTypeConstraint extends TextConstraint<Page> {
+public class PageTypeConstraint extends EnumConstraint<PageType, Page> {
 
     public PageTypeConstraint() {
-        caseHandling = CaseHandling.UPPER;
+        super(PageType.class);
     }
 
     public PageTypeConstraint(String value) {
-        super(value);
-        caseHandling = CaseHandling.UPPER;
+        super(PageType.class, PageType.valueOf(value.toUpperCase()));
     }
 
     @Override
@@ -34,7 +36,9 @@ public class PageTypeConstraint extends TextConstraint<Page> {
     }
 
     @Override
-    public boolean test(Page input) {
-        return value.toUpperCase().equals(input.getType().name());
+    protected Collection<PageType> getEnumValues(Page input) {
+        return asCollection(input.getType());
+
     }
+
 }

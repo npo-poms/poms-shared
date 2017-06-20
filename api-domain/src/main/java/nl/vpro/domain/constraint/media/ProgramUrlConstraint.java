@@ -4,12 +4,9 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.MediaObject;
 
@@ -19,7 +16,7 @@ import nl.vpro.domain.media.MediaObject;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "programUrlConstraintType")
-public class ProgramUrlConstraint extends TextConstraint<MediaObject>  {
+public class ProgramUrlConstraint extends AbstractTextConstraint<MediaObject> {
 
     private boolean exact;
 
@@ -33,6 +30,7 @@ public class ProgramUrlConstraint extends TextConstraint<MediaObject>  {
         caseHandling = CaseHandling.ASIS;
         exact = true;
     }
+
 
     @Override
     public String getESPath() {
