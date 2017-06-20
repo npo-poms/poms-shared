@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Locale;
 
 import javax.persistence.Cacheable;
@@ -26,7 +27,9 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @EqualsAndHashCode
 @ToString
 @Data
-public class AvailableSubtitles {
+public class AvailableSubtitles implements Serializable {
+
+    private static final long serialVersionUID = 0L;
 
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @XmlAttribute
