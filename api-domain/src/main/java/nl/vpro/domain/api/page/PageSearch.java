@@ -29,7 +29,7 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlType(name = "pagesSearchType",
     propOrder = {
         // Intellij warnings are incorrect since parent class is @XmlTransient
-        "text", "broadcasters", "types", "portals", "sections", "genres", "tags", "keywords", "sortDates", "lastModifiedDates", "creationDates",  "lastPublishedDates", "relations", "links", "referrals"
+        "text", "broadcasters", "types", "portals", "sections", "genres", "tags", "keywords", "sortDates", "lastModifiedDates", "creationDates", "publishDates", "relations", "links", "referrals"
     })
 @Getter
 @Setter
@@ -67,7 +67,7 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
     private DateRangeMatcherList lastModifiedDates;
 
     @Valid
-    private DateRangeMatcherList lastPublishedDates;
+    private DateRangeMatcherList publishDates;
 
     @Valid
     private RelationSearchList relations;
@@ -92,7 +92,7 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
             || sortDates != null && !sortDates.isEmpty()
             || lastModifiedDates != null && !lastModifiedDates.isEmpty()
             || creationDates != null && !creationDates.isEmpty()
-            || lastPublishedDates != null && !lastPublishedDates.isEmpty()
+            || publishDates != null && !publishDates.isEmpty()
             || types != null && !types.isEmpty()
             || broadcasters != null && !broadcasters.isEmpty()
             || portals != null && !portals.isEmpty()
@@ -108,21 +108,21 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
 
     @Override
     public boolean test(@Nullable Page input) {
-        return applyText(input)
-            && applyBroadcasters(input)
-            && applyPortals(input)
-            && applySections(input)
-            && applyGenres(input)
-            && applyTags(input)
-            && applyKeywords(input)
-            && applyTypes(input)
-            && applySortDates(input)
-            && applyLastModifiedDates(input)
-            && applyCreationDates(input)
-            && applyPublishDate(input)
-            && applyRelations(input)
-            && applyLinks(input)
-            && applyReferrals(input)
+        return applyText(input) &&
+            applyBroadcasters(input) &&
+            applyPortals(input) &&
+            applySections(input) &&
+            applyGenres(input) &&
+            applyTags(input) &&
+            applyKeywords(input) &&
+            applyTypes(input) &&
+            applySortDates(input) &&
+            applyLastModifiedDates(input) &&
+            applyCreationDates(input) &&
+            applyPublishDates(input) &&
+            applyRelations(input) &&
+            applyLinks(input) &&
+            applyReferrals(input)
             ;
     }
 
@@ -235,8 +235,8 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
         return applyDateRange(input, creationDates, Page::getCreationDate);
     }
 
-    protected boolean applyPublishDate(Page input) {
-        return applyDateRange(input, lastPublishedDates, Page::getLastPublished);
+    protected boolean applyPublishDates(Page input) {
+        return applyDateRange(input, publishDates, Page::getLastPublished);
     }
 
     protected boolean applyDateRange(Page input, DateRangeMatcherList range, Function<Page, Instant> inputDateGetter) {
