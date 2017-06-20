@@ -42,7 +42,7 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
     @Override
     @XmlValue
     public final String getValue() {
-        return getXmlValue(enumValue);
+        return getXmlValue();
     }
     @Override
     public final void setValue(String s) {
@@ -69,8 +69,8 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
         return false;
     }
 
-    private String getXmlValue(S value) {
-        String name = value.name();
+    private String getXmlValue() {
+        String name = enumValue.name();
         try {
             XmlEnumValue xmlValue = enumClass.getField(name).getAnnotation(XmlEnumValue.class);
             return xmlValue.value();
