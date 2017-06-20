@@ -16,7 +16,8 @@ public class EnumConstraintTest {
         a,
         B,
         ANDC,
-        AndD
+        AndD,
+        ANDD
     }
     public static class AnEnumConstraint extends EnumConstraint<AnEnum, AnEnum> {
 
@@ -47,6 +48,9 @@ public class EnumConstraintTest {
         anEnumConstraint.setValue("ANDC");
         assertThat(anEnumConstraint.getEnumValue()).isEqualTo(AnEnum.ANDC);
         assertThat(anEnumConstraint.getValue()).isEqualTo("ANDC");
+        anEnumConstraint.setValue("ANDD");
+        assertThat(anEnumConstraint.getEnumValue()).isEqualTo(AnEnum.ANDD);
+        assertThat(anEnumConstraint.getValue()).isEqualTo("ANDD");
 
     }
 

@@ -30,6 +30,10 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
     @XmlTransient
     protected S enumValue;
 
+
+    @XmlTransient
+    private String value;
+
     protected EnumConstraint(Class<S> clazz) {
         this.enumClass = clazz;
     }
@@ -51,6 +55,7 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
     @Override
     public final void setValue(String s) {
         this.enumValue = getByXmlValue(s);
+        this.value = null;
     }
 
     protected abstract Collection<S> getEnumValues(T input);
@@ -58,7 +63,6 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
 
     protected Collection<S> asCollection(S enumValue) {
         return enumValue == null ? Collections.emptyList() : Collections.singletonList(enumValue);
-
     }
 
     @Override
@@ -77,13 +81,17 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
         if (enumValue == null) {
             return null;
         }
-        String name = enumValue.name();
-        try {
-            XmlEnumValue xmlValue = enumClass.getField(name).getAnnotation(XmlEnumValue.class);
-            return xmlValue.value();
-        } catch (NoSuchFieldException | NullPointerException e) {
-            return name;
+        if (value == null) {
+            // caching
+            String name = enumValue.name();
+            try {
+                XmlEnumValue xmlValue = enumClass.getField(name).getAnnotation(XmlEnumValue.class);
+                value = xmlValue.value();
+            } catch (NoSuchFieldException | NullPointerException e) {
+                value = name;
+            }
         }
+        return value;
     }
 
     private S getByXmlValue(String v) {
