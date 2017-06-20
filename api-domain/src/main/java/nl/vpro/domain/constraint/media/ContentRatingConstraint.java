@@ -4,7 +4,8 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import javax.annotation.Nullable;
+import java.util.Collection;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -23,12 +24,10 @@ public class ContentRatingConstraint extends EnumConstraint<ContentRating, Media
 
     public ContentRatingConstraint() {
         super(ContentRating.class);
-        caseHandling = CaseHandling.ASIS;
     }
 
     public ContentRatingConstraint(ContentRating contentRating) {
         super(ContentRating.class, contentRating);
-        caseHandling = CaseHandling.ASIS;
     }
 
     @Override
@@ -37,14 +36,9 @@ public class ContentRatingConstraint extends EnumConstraint<ContentRating, Media
     }
 
     @Override
-    public boolean test(@Nullable MediaObject input) {
-        if (input != null) {
-            for (ContentRating cr: input.getContentRatings()) {
-                if (value.equals(cr.name())) {
-                    return true;
-                }
-            }
-        }
-        return false;
+    protected Collection<ContentRating> getEnumValues(MediaObject input) {
+        return input.getContentRatings();
+
     }
+
 }

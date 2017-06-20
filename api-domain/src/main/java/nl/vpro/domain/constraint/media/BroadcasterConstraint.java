@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.user.Broadcaster;
 
@@ -18,7 +18,7 @@ import nl.vpro.domain.user.Broadcaster;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "broadcasterConstraintType")
-public class BroadcasterConstraint extends TextConstraint<MediaObject> {
+public class BroadcasterConstraint extends AbstractTextConstraint<MediaObject> {
 
     public BroadcasterConstraint() {
         caseHandling = CaseHandling.ASIS;
@@ -28,6 +28,7 @@ public class BroadcasterConstraint extends TextConstraint<MediaObject> {
         super(value);
         caseHandling = CaseHandling.ASIS;
     }
+
 
     @Override
     public String getESPath() {

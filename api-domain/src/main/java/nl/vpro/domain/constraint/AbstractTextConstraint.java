@@ -20,44 +20,31 @@ import com.google.common.collect.Lists;
  * @since 2.0
  */
 @XmlTransient
-public abstract class TextConstraint<T> implements FieldConstraint<T> {
+public abstract class AbstractTextConstraint<T> implements WildTextConstraint<T> {
 
-    public enum CaseHandling {ASIS, LOWER, UPPER, BOTH}
 
     @XmlTransient
     protected CaseHandling caseHandling = CaseHandling.LOWER;
 
-    @XmlValue
+    @XmlTransient
     protected String value;
 
-    protected TextConstraint() {
+    protected AbstractTextConstraint() {
     }
 
-    protected TextConstraint(String value) {
+    protected AbstractTextConstraint(String value) {
         this.value = value;
     }
 
-    public CaseHandling getCaseHandling() {
-        return caseHandling;
-    }
 
-    public boolean isExact() {
-        return true;
-    }
 
-    /**
-     * The value used in wildcard queries. On default this implicetely adds stars, which will trigger an actual wildcard query.
-     * If no stars are found, a prefix query is supposed.
-     * @since 5.4
-     */
-    public String getWildcardValue() {
-        return "*" + getValue() + "*";
-    }
-
-    public String getValue() {
+    @Override
+    @XmlValue
+    public final String getValue() {
         return value;
     }
 
+    @Override
     public void setValue(String value) {
         this.value = value;
     }
@@ -80,7 +67,7 @@ public abstract class TextConstraint<T> implements FieldConstraint<T> {
             return false;
         }
 
-        TextConstraint<?> that = (TextConstraint<?>)o;
+        AbstractTextConstraint<?> that = (AbstractTextConstraint<?>)o;
 
         return value != null ? value.equals(that.value) : that.value == null;
     }
@@ -93,14 +80,14 @@ public abstract class TextConstraint<T> implements FieldConstraint<T> {
 
     @Override
     public void setELContext(ELContext ctx, T v, Locale locale, PredicateTestResult<T> result) {
-        FieldConstraint.super.setELContext(ctx, v, locale, result);
+        WildTextConstraint.super.setELContext(ctx, v, locale, result);
     }
 
     @Override
     public List<String> getDefaultBundleKey() {
         return Lists.asList(
             getClass().getSimpleName() + "/" + getESPath() + "/" + value,
-            FieldConstraint.super.getDefaultBundleKey().stream().toArray(String[]::new)
+            WildTextConstraint.super.getDefaultBundleKey().toArray(new String[0])
         );
     }
 

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.constraint.TextConstraint;
+import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.page.Page;
 
 /**
@@ -17,7 +17,7 @@ import nl.vpro.domain.page.Page;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "pageSectionConstraintType")
-public class SectionConstraint extends TextConstraint<Page> {
+public class SectionConstraint extends AbstractTextConstraint<Page> {
     public SectionConstraint() {
         caseHandling = CaseHandling.ASIS;
     }

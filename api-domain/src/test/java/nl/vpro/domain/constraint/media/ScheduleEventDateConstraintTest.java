@@ -1,6 +1,6 @@
 package nl.vpro.domain.constraint.media;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.xml.bind.JAXB;
 
@@ -24,7 +24,7 @@ public class ScheduleEventDateConstraintTest {
         constraint.setDate("tomorrow midnight");
         constraint.setOperator(Operator.LT);
         ScheduleEvent event = new ScheduleEvent();
-        event.setStart(new Date());
+        event.setStartInstant(Instant.now());
         Program program = MediaBuilder.program().scheduleEvents(event).build();
         assertTrue(constraint.test(program));
     }

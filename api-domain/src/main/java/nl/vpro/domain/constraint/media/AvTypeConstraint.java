@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.constraint.media;
 
+import java.util.Collection;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -22,12 +24,11 @@ public class AvTypeConstraint extends EnumConstraint<AVType, MediaObject> {
 
     public AvTypeConstraint() {
         super(AVType.class);
-        caseHandling = CaseHandling.ASIS;
     }
+
 
     public AvTypeConstraint(AVType value) {
         super(AVType.class, value);
-        caseHandling = CaseHandling.ASIS;
     }
 
     @Override
@@ -36,7 +37,9 @@ public class AvTypeConstraint extends EnumConstraint<AVType, MediaObject> {
     }
 
     @Override
-    public boolean test(MediaObject input) {
-        return value.toUpperCase().equals(input.getAVType().name());
+    protected Collection<AVType> getEnumValues(MediaObject input) {
+        return asCollection(input.getAVType());
+
     }
+
 }
