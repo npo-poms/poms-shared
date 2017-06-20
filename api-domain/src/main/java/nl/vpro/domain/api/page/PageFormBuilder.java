@@ -94,7 +94,7 @@ public class PageFormBuilder extends AbstractFormBuilder {
     }
 
     public PageFormBuilder lastPublished(Instant from, Instant to, Boolean inclusiveEnd) {
-        search().setLastPublishedDates(dateRange(search().getLastPublishedDates(), from, to, inclusiveEnd));
+        search().setPublishDates(dateRange(search().getPublishDates(), from, to, inclusiveEnd));
         return this;
     }
     protected DateRangeMatcherList dateRange(DateRangeMatcherList list, Instant from, Instant to, Boolean inclusiveEnd) {
