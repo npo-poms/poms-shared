@@ -38,6 +38,7 @@ public class ApiMappings extends Mappings {
     @Inject
     public ApiMappings(@Named("${poms.location}") String pomsLocation) {
         this.pomsLocation = pomsLocation == null ? "https://poms.omroep.nl/" : pomsLocation;
+        generateDocumentation = true;
     }
 
 
