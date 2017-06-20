@@ -1,13 +1,14 @@
 package nl.vpro.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
@@ -18,14 +19,19 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.Result;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.dom.DOMResult;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.lang3.StringUtils;
+import org.meeuw.jaxbdocumentation.DocumentationAdder;
 import org.xml.sax.SAXException;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 /**
@@ -40,6 +46,10 @@ public abstract class Mappings implements Function<String, File> {
     private final SchemaFactory SCHEMA_FACTORY = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
     private boolean inited = false;
+
+    @Getter
+    @Setter
+    protected boolean generateDocumentation = false;
 
     protected void init() {
         if (! inited) {
@@ -98,6 +108,7 @@ public abstract class Mappings implements Function<String, File> {
                 } else {
                     f = getFile(namespaceUri);
                 }
+                deleteIfOld(f);
                 if (!f.exists()) {
                     f.getParentFile().mkdirs();
                     log.info("Creating {} -> {}", namespaceUri, f);
@@ -200,7 +211,11 @@ public abstract class Mappings implements Function<String, File> {
 
     @Override
     public File apply(String namespace) {
-        return getFile(namespace);
+        if (generateDocumentation) {
+            return getFileWithDocumentation(namespace);
+        } else {
+            return getFile(namespace);
+        }
     }
 
 
@@ -209,11 +224,38 @@ public abstract class Mappings implements Function<String, File> {
         init();
         String fileName = namespace.substring("urn:vpro:".length()).replace(':', '_') + ".xsd";
         File file = new File(getTempDir(), fileName);
+        return file;
+    }
+
+
+    public File getFileWithDocumentation(String namespace) {
+        File file = getFile(namespace);
+        File fileWithDocumentation = new File(file.getParentFile(), "documented." + file.getName());
+        if (fileWithDocumentation.exists() && fileWithDocumentation.lastModified() < file.lastModified()) {
+            fileWithDocumentation.delete();
+        }
+        if (! fileWithDocumentation.exists()) {
+            DocumentationAdder transformer = new DocumentationAdder(MAPPING.get(namespace));
+            try {
+                transformer.transform(new StreamSource(new FileInputStream(file)), new StreamResult(new FileOutputStream(fileWithDocumentation)));
+            } catch (FileNotFoundException | TransformerException e) {
+                log.error(e.getMessage(), e);
+                try {
+                    Files.copy(Paths.get(file.toURI()), Paths.get(fileWithDocumentation.toURI()), REPLACE_EXISTING);
+                } catch (IOException e1) {
+                    throw new RuntimeException(e1);
+                }
+            }
+
+        }
+        return fileWithDocumentation;
+    }
+
+    private void deleteIfOld(File file) {
         // last modified on fs only granalur to seconds.
         if (file.exists() && TimeUnit.SECONDS.convert(file.lastModified(), TimeUnit.MILLISECONDS) < TimeUnit.SECONDS.convert(startTime, TimeUnit.MILLISECONDS)) {
             log.info("Deleting {}, it is old {} < {}", file, file.lastModified(), startTime);
             file.delete();
         }
-        return file;
     }
 }
