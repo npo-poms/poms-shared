@@ -54,7 +54,8 @@ public interface MediaRestService {
     String SORT = "sort";
     String SINCE = "since";
     String PUBLISHEDSINCE = "publishedSince";
-    String PROFILECHECK = "profile_check";
+    String CHECK_PROFILE = "checkProfile";
+    String SKIP_DELETES = "skipDeletes";
 
     @GET
     @Path("/suggest")
@@ -211,7 +212,8 @@ public interface MediaRestService {
         @QueryParam(PUBLISHEDSINCE) Instant publishedSince,
         @QueryParam(ORDER) @DefaultValue(ASC) String order,
         @QueryParam(MAX) Integer max,
-        @QueryParam(PROFILECHECK) Boolean profileCheck,
+        @QueryParam(CHECK_PROFILE) Boolean profileCheck,
+        @QueryParam(SKIP_DELETES) Boolean skipDeletes,
         @Context HttpServletRequest request,
         @Context HttpServletResponse response) throws IOException;
 

@@ -7,7 +7,10 @@ package nl.vpro.domain.api.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+import java.time.Instant;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
@@ -62,6 +65,18 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Getter
     @Setter
     private DateRangeMatcherList publishDates;
+
+    @Valid
+    @Getter
+    @Setter
+    private DateRangeMatcherList creationDates;
+
+    @Valid
+    @Getter
+    @Setter
+    private DateRangeMatcherList lastModifiedDates;
+
+
 
     @Valid
     @Getter
@@ -163,6 +178,9 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             applyAvTypes(input)) &&
             applyTypes(input) &&
             applySortDates(input) &&
+            applyLastModifiedDates(input) &&
+            applyCreationDates(input) &&
+            applyPublishDates(input) &&
             applyBroadcasters(input) &&
             applyLocations(input) &&
             applyTags(input) &&
@@ -213,8 +231,29 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         return Matchers.listPredicate(mediaIds).test(input.getMid());
     }
 
+
     protected boolean applySortDates(MediaObject input) {
-        return sortDates == null || sortDates.test(input.getSortDate());
+        return applyDateRange(input, sortDates, MediaObject::getSortInstant);
+    }
+
+    protected boolean applyLastModifiedDates(MediaObject input) {
+        return applyDateRange(input, lastModifiedDates, MediaObject::getLastModifiedInstant);
+    }
+
+    protected boolean applyCreationDates(MediaObject input) {
+        return applyDateRange(input, creationDates, MediaObject::getCreationInstant);
+    }
+
+    protected boolean applyPublishDates(MediaObject input) {
+        return applyDateRange(input, publishDates, MediaObject::getLastPublishedInstant);
+    }
+
+    protected boolean applyDateRange(MediaObject input, DateRangeMatcherList range, Function<MediaObject, Instant> inputDateGetter) {
+        if (range == null) {
+            return true;
+        }
+        Instant inputDate = inputDateGetter.apply(input);
+        return inputDate != null && range.test(Date.from(inputDate));
     }
 
     protected boolean applyBroadcasters(MediaObject input) {
