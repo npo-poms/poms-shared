@@ -4,10 +4,11 @@
  */
 package nl.vpro.domain.constraint.page;
 
+import org.junit.Test;
+
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.PageType;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,10 +20,10 @@ public class NotTest {
 
     @Test
     public void testGetConstraints() throws Exception {
-        Not in = new Not(new PageTypeConstraint("article"));
+        Not in = new Not(new PageTypeConstraint(PageType.ARTICLE));
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:not xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">\n" +
-                "    <page:type>article</page:type>\n" +
+                "    <page:type>ARTICLE</page:type>\n" +
                 "</local:not>");
 
         assertThat(out.getConstraint()).isInstanceOf(PageTypeConstraint.class);

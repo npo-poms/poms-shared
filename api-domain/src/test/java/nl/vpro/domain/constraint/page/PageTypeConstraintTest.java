@@ -4,11 +4,12 @@
  */
 package nl.vpro.domain.constraint.page;
 
+import org.junit.Test;
+
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.PageBuilder;
 import nl.vpro.domain.page.PageType;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,10 +21,10 @@ public class PageTypeConstraintTest {
 
     @Test
     public void testGetValue() throws Exception {
-        PageTypeConstraint in = new PageTypeConstraint("VPRO");
+        PageTypeConstraint in = new PageTypeConstraint(PageType.HOME);
         PageTypeConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<local:pageTypeConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">VPRO</local:pageTypeConstraint>");
-        assertThat(out.getValue()).isEqualTo("VPRO");
+            "<local:pageTypeConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">HOME</local:pageTypeConstraint>");
+        assertThat(out.getValue()).isEqualTo("HOME");
     }
 
     @Test
@@ -34,12 +35,12 @@ public class PageTypeConstraintTest {
     @Test
     public void testApplyWhenTrue() throws Exception {
         Page article = PageBuilder.page(PageType.ARTICLE).build();
-        assertThat(new PageTypeConstraint("Article").test(article)).isTrue();
+        assertThat(new PageTypeConstraint(PageType.ARTICLE).test(article)).isTrue();
     }
 
     @Test
     public void testApplyWhenFalse() throws Exception {
         Page article = PageBuilder.page(PageType.ARTICLE).build();
-        assertThat(new PageTypeConstraint("news").test(article)).isFalse();
+        assertThat(new PageTypeConstraint(PageType.SERIES).test(article)).isFalse();
     }
 }

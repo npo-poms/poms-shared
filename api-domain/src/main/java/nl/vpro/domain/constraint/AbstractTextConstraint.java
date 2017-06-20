@@ -4,15 +4,12 @@
  */
 package nl.vpro.domain.constraint;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 import javax.el.ELContext;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
-
-import com.google.common.collect.Lists;
 
 
 /**
@@ -81,14 +78,6 @@ public abstract class AbstractTextConstraint<T> implements WildTextConstraint<T>
     @Override
     public void setELContext(ELContext ctx, T v, Locale locale, PredicateTestResult<T> result) {
         WildTextConstraint.super.setELContext(ctx, v, locale, result);
-    }
-
-    @Override
-    public List<String> getDefaultBundleKey() {
-        return Lists.asList(
-            getClass().getSimpleName() + "/" + getESPath() + "/" + value,
-            WildTextConstraint.super.getDefaultBundleKey().toArray(new String[0])
-        );
     }
 
 
