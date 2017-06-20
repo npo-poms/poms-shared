@@ -30,6 +30,9 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class ApiMappingsTest {
 
     ApiMappings mappings = new ApiMappings(null);
+    {
+        mappings.setGenerateDocumentation(false);
+    }
 
 
 
