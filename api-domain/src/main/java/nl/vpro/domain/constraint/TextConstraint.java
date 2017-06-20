@@ -6,12 +6,7 @@ package nl.vpro.domain.constraint;
  */
 public interface TextConstraint<T> extends FieldConstraint<T> {
 
-
     String getValue();
 
     void setValue(String value);
-
-
-
-
 }
