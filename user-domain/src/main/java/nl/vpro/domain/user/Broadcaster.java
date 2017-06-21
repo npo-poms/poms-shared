@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import nl.vpro.domain.Xmlns;
 
@@ -104,19 +103,6 @@ public class Broadcaster extends Organization {
             return getId();
         }
         return misId;
-    }
-
-    @Override
-    public String toString() {
-        ToStringBuilder builder = new ToStringBuilder(this);
-        if(id == null && (whatsOnId != null || neboId != null)) {
-            builder.append("whatsOnid", whatsOnId);
-            builder.append("neboId", neboId);
-        } else {
-            builder.append("id", id);
-        }
-        return builder.append("displayName", displayName)
-            .toString();
     }
 
     @Override

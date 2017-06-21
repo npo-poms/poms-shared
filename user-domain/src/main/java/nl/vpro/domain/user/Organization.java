@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.ToString;
+
 import java.io.Serializable;
 
 import javax.persistence.Cacheable;
@@ -14,18 +16,17 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.Displayable;
 
 @MappedSuperclass
 @Cacheable(true)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "organizationType", namespace = Xmlns.MEDIA_NAMESPACE)
+@ToString
 public abstract class Organization implements Serializable, Identifiable<String>, Comparable<Organization>, Displayable {
 
     @Id
@@ -66,14 +67,6 @@ public abstract class Organization implements Serializable, Identifiable<String>
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName == null ? null : displayName.trim();
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-            .append("id", id)
-            .append("displayName", displayName)
-            .toString();
     }
 
     @Override
