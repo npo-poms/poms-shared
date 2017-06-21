@@ -420,11 +420,15 @@ public abstract class MediaObject extends PublishableObject
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Filter(name = PUBLICATION_FILTER, condition = "((platform is null and  (publishStart is null or publishStart <= now())  and (publishStop is null or publishStop > now())) "
-            + " or " + " ( not(platform is null)  " + "   and ( "
+    @Filter(name = PUBLICATION_FILTER, condition =
+        "workflow != 'DELETED' and ( "
+            + "(platform is null and  (publishStart is null or publishStart <= now())  and (publishStop is null or publishStop > now())) "
+            + " or "
+            + " ( not(platform is null)  " + "   and ( "
             + "        select count(*) from prediction c where c.platform = platform and c.mediaobject_id = mediaobject_id and "
             + "              (c.publishStart is null or c.publishStart <= now()) and (c.publishStop is null or c.publishStop > now()) "
-            + "       ) > 0)" + ")"
+            + "       ) > 0)"
+            + ")"
 
     )
     protected Set<Location> locations;
