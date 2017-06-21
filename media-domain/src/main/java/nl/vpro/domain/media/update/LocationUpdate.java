@@ -13,14 +13,18 @@ import java.util.Date;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.AVAttributes;
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.util.DateUtils;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.DurationXmlAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @XmlRootElement(name = "location")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -55,10 +59,18 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
     private Duration duration;
 
     @XmlAttribute
-    private Date publishStart;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant publishStart;
 
     @XmlAttribute
-    private Date publishStop;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant publishStop;
 
     @XmlAttribute
     private String urn;
@@ -193,25 +205,25 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
 
     @Override
     public Instant getPublishStartInstant() {
-        return DateUtils.toInstant(publishStart);
+        return publishStart;
 
     }
 
     @Override
     public LocationUpdate setPublishStartInstant(Instant publishStart) {
-        this.publishStart = DateUtils.toDate(publishStart);
+        this.publishStart = publishStart;
         return this;
     }
 
     @Override
     public Instant getPublishStopInstant() {
-        return DateUtils.toInstant(publishStop);
+        return publishStop;
 
     }
 
     @Override
     public LocationUpdate setPublishStopInstant(Instant publishStop) {
-        this.publishStop = DateUtils.toDate(publishStop);
+        this.publishStop = publishStop;
         return this;
 
     }
