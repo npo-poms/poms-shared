@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
@@ -15,8 +16,10 @@ import nl.vpro.domain.media.support.TextualType;
     propOrder = {"title"})
 public class TitleUpdate implements TypedText {
 
+    @NotNull
     private String title;
 
+    @NotNull
     private TextualType type;
 
     private MediaUpdate media;

@@ -30,6 +30,7 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.validation.ConstraintViolations;
 import nl.vpro.validation.WarningValidatorGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -71,6 +72,47 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setImages(Collections.singletonList(new ImageUpdate(ImageType.BACKGROUND, "Title", "Description", new ImageLocation(null))));
         Set<? extends ConstraintViolation<MediaUpdate<Program>>> errors = update.violations();
         assertThat(errors).hasSize(1);
+    }
+
+
+    @Test
+    public void testIsValidForLocations() throws Exception {
+        LocationUpdate location = LocationUpdate.builder()
+            .programUrl("http:invalide.url")
+            //.programUrl(null)
+            .build();
+        ProgramUpdate update = ProgramUpdate.create();
+        update.setType(ProgramType.CLIP);
+        update.setAVType(AVType.MIXED);
+        update.getLocations().add(location);
+        Set<? extends ConstraintViolation<MediaUpdate<Program>>> errors = update.violations();
+        log.info(ConstraintViolations.humanReadable(errors));
+
+        assertThat(errors).hasSize(1);
+    }
+
+
+    @Test
+    public void testIsValidForTitles() throws Exception {
+        ProgramUpdate update = ProgramUpdate.create();
+        update.setType(ProgramType.CLIP);
+        update.setAVType(AVType.MIXED);
+
+        Set<? extends ConstraintViolation<MediaUpdate<Program>>> errors = update.violations();
+        log.info(ConstraintViolations.humanReadable(errors));
+        assertThat(errors).hasSize(1);
+    }
+
+    @Test
+    public void testIsValidForTitles2() throws Exception {
+        ProgramUpdate update = ProgramUpdate.create();
+        update.setType(ProgramType.CLIP);
+        update.setAVType(AVType.MIXED);
+        update.addTitle("bla", null);
+
+        Set<? extends ConstraintViolation<MediaUpdate<Program>>> errors = update.violations();
+        log.info(ConstraintViolations.humanReadable(errors));
+        assertThat(errors).hasSize(2);
     }
 
     @Test

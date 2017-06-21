@@ -4,12 +4,11 @@
  */
 package nl.vpro.domain.media.update;
 
-import lombok.Builder;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -45,9 +44,12 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
     }
 
     @XmlElement(required = true)
+    @nl.vpro.validation.Location
+    @NotNull
     private String programUrl;
 
     @XmlElement(required = true)
+    @NotNull
     private AVAttributesUpdate avAttributes;
 
     @XmlElement
@@ -93,7 +95,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
         this.avAttributes = new AVAttributesUpdate(format, bitrate);
     }
 
-    @Builder
+    @lombok.Builder(builderClassName = "Builder")
     public LocationUpdate(String programUrl, Duration duration, Integer width, Integer height, Integer bitrate, AVFileFormat format) {
         this(programUrl, duration, bitrate, format);
         this.avAttributes.setVideoAttributes(new VideoAttributesUpdate(width, height));
