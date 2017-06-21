@@ -25,7 +25,7 @@ public class AVAttributesUpdate {
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
     private Integer bitrate;
 
-    @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE, required = true)
+    @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
     private AVFileFormat avFileFormat;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
