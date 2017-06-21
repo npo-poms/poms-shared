@@ -168,7 +168,7 @@
   <xs:complexType name="avAtributeUpdateType">
     <xs:sequence>
       <xs:element name="bitrate" type="xs:int" minOccurs="0"/>
-      <xs:element name="avFileFormat" type="media:avFileFormatEnum"/>
+      <xs:element name="avFileFormat" type="media:avFileFormatEnum"  minOccurs="0"/>
       <xs:element name="videoAttributes" type="videoAttributesUpdateType" minOccurs="0"/>
       <xs:element name="audioAttributes" type="audioAttributesUpdateType" minOccurs="0"/>
     </xs:sequence>
