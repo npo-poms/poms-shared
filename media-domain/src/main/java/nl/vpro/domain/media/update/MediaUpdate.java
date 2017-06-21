@@ -118,6 +118,8 @@ public abstract class MediaUpdate<M extends MediaObject>
     @Valid
     protected MediaBuilder<?, M>  builder;
 
+    private boolean fetched = false;
+
     @Valid
     protected List<ImageUpdate> images;
 
@@ -125,7 +127,9 @@ public abstract class MediaUpdate<M extends MediaObject>
     protected Asset asset;
 
     private List<String> broadcasters;
+
     private List<String> portals;
+
     private SortedSet<String> tags;
 
     @Valid
@@ -142,15 +146,20 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     @Valid
     private SortedSet<DescriptionUpdate> descriptions;
+
     private SortedSet<String> genres;
 
     @Valid
     private SortedSet<MemberRefUpdate> memberOf;
+
     private List<String> websites;
+
     @Valid
     private SortedSet<LocationUpdate> locations;
+
     @Valid
     private SortedSet<RelationUpdate> relations;
+
     @Valid
     private SortedSet<ScheduleEventUpdate> scheduleEvents;
 
@@ -183,14 +192,14 @@ public abstract class MediaUpdate<M extends MediaObject>
     }
 
     public Set<? extends ConstraintViolation<MediaUpdate<M>>> violations(Class<?>... groups) {
-        fetch();
-        if (groups.length == 0) {
-            groups = new Class<?>[] {
-                Default.class, PomsValidatorGroup.class
-            };
-        }
         if (VALIDATOR != null) {
-            return VALIDATOR.validate(this, groups);
+            if (groups.length == 0) {
+                groups = new Class<?>[]{
+                    Default.class, PomsValidatorGroup.class
+                };
+            }
+            Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
+            return result;
         } else {
             log.warn("Cannot validate since no validator available");
             return Collections.emptySet();
@@ -217,6 +226,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     public abstract MediaUpdateConfig getConfig();
 
     public M fetch() {
+        fetched = true;
         builder.creationDate((Instant) null);
         if (notTransforming(broadcasters)) {
             mediaObject().setBroadcasters(broadcasters.stream().map(Broadcaster::new).collect(Collectors.toList()));
@@ -424,7 +434,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "crid")
-    @StringList(pattern = "(?i)crid://.*/.*")
+    @StringList(pattern = "(?i)crid://.*/.*", maxLength = 255)
     public List<String> getCrids() {
         return mediaObject().getCrids();
     }

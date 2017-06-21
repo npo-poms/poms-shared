@@ -343,6 +343,7 @@ public abstract class MediaObject extends PublishableObject
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
     protected List<Person> persons;
 
     @ElementCollection
@@ -371,6 +372,7 @@ public abstract class MediaObject extends PublishableObject
                     + "or mediaobjec10_.publishstart is null " + "or mediaobjec10_.publishstart < now() "
                     + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec10_.id and o.broadcasters_id in (:broadcasters)))"),
             @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))") })
+    @Valid
     protected Set<MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
@@ -397,6 +399,7 @@ public abstract class MediaObject extends PublishableObject
     )
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
     protected List<Website> websites;
 
     @OneToMany(targetEntity = TwitterRef.class, orphanRemoval = true)
@@ -414,6 +417,7 @@ public abstract class MediaObject extends PublishableObject
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
+    @Valid
     protected Set<Prediction> predictions;
 
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = true)
@@ -431,12 +435,14 @@ public abstract class MediaObject extends PublishableObject
             + ")"
 
     )
+    @Valid
     protected Set<Location> locations;
 
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = false)
     @SortNatural
     @Cascade({ org.hibernate.annotations.CascadeType.MERGE })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
     protected Set<ScheduleEvent> scheduleEvents;
 
     @OneToMany(orphanRemoval = true)
