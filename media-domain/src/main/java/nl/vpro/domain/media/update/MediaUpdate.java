@@ -115,12 +115,12 @@ public abstract class MediaUpdate<M extends MediaObject>
         }
     }
 
-    @Valid
-    protected MediaBuilder<?, M>  builder;
-
-    private boolean fetched = false;
+    protected MediaBuilder<?, M> builder;
 
     @Valid
+    protected MediaObject mediaObjectToValidate;
+
+
     protected List<ImageUpdate> images;
 
     @Valid
@@ -132,36 +132,30 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     private SortedSet<String> tags;
 
-    @Valid
     private List<PersonUpdate> persons;
 
-    @Valid
     private List<PortalRestrictionUpdate> portalRestrictions;
 
-    @Valid
     private List<GeoRestrictionUpdate> geoRestrictions;
 
-    @Valid
     private SortedSet<TitleUpdate> titles;
 
-    @Valid
     private SortedSet<DescriptionUpdate> descriptions;
 
     private SortedSet<String> genres;
 
-    @Valid
     private SortedSet<MemberRefUpdate> memberOf;
 
     private List<String> websites;
 
-    @Valid
     private SortedSet<LocationUpdate> locations;
 
-    @Valid
     private SortedSet<RelationUpdate> relations;
 
-    @Valid
     private SortedSet<ScheduleEventUpdate> scheduleEvents;
+
+
+    private List<String> crids;
 
 
     private boolean imported = false;
@@ -198,7 +192,20 @@ public abstract class MediaUpdate<M extends MediaObject>
                     Default.class, PomsValidatorGroup.class
                 };
             }
+            mediaObject();
             Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
+            if (result.isEmpty()) {
+                mediaObjectToValidate = mediaObject();
+                try {
+                    result = VALIDATOR.validate(this, groups);
+                    if (result.isEmpty()) {
+                        log.debug("validates");
+                    }
+                } finally {
+                    mediaObjectToValidate = null;
+
+                }
+            }
             return result;
         } else {
             log.warn("Cannot validate since no validator available");
@@ -226,7 +233,6 @@ public abstract class MediaUpdate<M extends MediaObject>
     public abstract MediaUpdateConfig getConfig();
 
     public M fetch() {
-        fetched = true;
         builder.creationDate((Instant) null);
         if (notTransforming(broadcasters)) {
             mediaObject().setBroadcasters(broadcasters.stream().map(Broadcaster::new).collect(Collectors.toList()));
@@ -481,6 +487,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "exclusive")
+    @Valid
     public List<PortalRestrictionUpdate> getPortalRestrictions() {
         if (portalRestrictions == null) {
             portalRestrictions = new TransformingList<>(mediaObject().getPortalRestrictions(),
@@ -501,6 +508,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "region")
+    @Valid
     public List<GeoRestrictionUpdate> getGeoRestrictions() {
         if (geoRestrictions == null) {
             geoRestrictions = new TransformingList<>(mediaObject().getGeoRestrictions(),
@@ -517,6 +525,9 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     @Override
     @XmlElement(name = "title", required = true)
+    @Valid
+    @NotNull
+    @Size(min = 1)
     public SortedSet<TitleUpdate> getTitles() {
         if (titles == null) {
             titles =
@@ -538,6 +549,7 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     @Override
     @XmlElement(name = "description")
+    @Valid
     public SortedSet<DescriptionUpdate> getDescriptions() {
         if (descriptions == null) {
             descriptions = new TransformingSortedSet<DescriptionUpdate, Description>(
@@ -591,6 +603,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "genre")
+    @StringList(pattern = "3\\.([0-9]+\\.)*[0-9]+", maxLength = 255)
     public SortedSet<String> getGenres() {
         if (genres == null) {
             genres = new TransformingSortedSet<>(mediaObject().getGenres(),
@@ -649,6 +662,7 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     @XmlElementWrapper(name = "credits")
     @XmlElement(name = "person")
+    @Valid
     public List<PersonUpdate> getPersons() {
         if (persons == null && ! mediaObject().getPersons().isEmpty()) {
             persons = new TransformingList<>(mediaObject().getPersons(),
@@ -750,6 +764,7 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     @XmlElementWrapper(name = "locations")
     @XmlElement(name = "location")
+    @Valid
     public SortedSet<LocationUpdate> getLocations() {
         if (locations == null) {
             locations = new TransformingSortedSet<>(mediaObject().getLocations(),
@@ -801,6 +816,7 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     @XmlElementWrapper(name = "images")
     @XmlElement(name = "image")
+    @Valid
     public List<ImageUpdate> getImages() {
         if(images == null) {
             images = new ArrayList<>();

@@ -82,6 +82,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             //.programUrl(null)
             .build();
         ProgramUpdate update = ProgramUpdate.create();
+        update.setMainTitle("hoi");
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.MIXED);
         update.getLocations().add(location);
@@ -112,7 +113,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         Set<? extends ConstraintViolation<MediaUpdate<Program>>> errors = update.violations();
         log.info(ConstraintViolations.humanReadable(errors));
-        assertThat(errors).hasSize(2);
+        assertThat(errors).hasSize(1);
     }
 
     @Test

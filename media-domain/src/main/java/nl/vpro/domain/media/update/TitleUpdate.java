@@ -16,7 +16,6 @@ import nl.vpro.domain.media.support.TextualType;
     propOrder = {"title"})
 public class TitleUpdate implements TypedText {
 
-    @NotNull
     private String title;
 
     @NotNull

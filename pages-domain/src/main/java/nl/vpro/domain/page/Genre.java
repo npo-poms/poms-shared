@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -32,6 +33,7 @@ public class Genre implements Comparable<Genre>, Serializable {
     private static final long serialVersionUID = 1L;
 
 
+    @Pattern(regexp = "3\\.([0-9]+\\.)*[0-9]+")
     private String termId;
 
     @Transient
