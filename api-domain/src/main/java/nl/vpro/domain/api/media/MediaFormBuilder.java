@@ -325,7 +325,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    public MediaFormBuilder sortDateFacet(RangeFacet<Date>... ranges) {
+    public MediaFormBuilder sortDateFacet(RangeFacet<Instant>... ranges) {
         DateRangeFacets dateRangeFacets = new DateRangeFacets();
         dateRangeFacets.setRanges(Arrays.asList(ranges));
         facets().setSortDates(dateRangeFacets);
