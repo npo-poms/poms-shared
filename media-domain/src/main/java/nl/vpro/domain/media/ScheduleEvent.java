@@ -646,6 +646,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         if(mediaObject != null) {
             sb.append(", mediaObject=").append(mediaObject.getMid()); // it seems that the title may be lazy, so just show mid of media object.
         }
+        if (repeat != null && repeat.isRerun) {
+            sb.append(", RERUN");
+        }
         sb.append('}');
         return sb.toString();
     }
