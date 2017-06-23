@@ -18,6 +18,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.collect.UnmodifiableIterator;
 
+import nl.vpro.util.DateUtils;
+
 import static nl.vpro.domain.media.MediaObjects.deepCopy;
 import static nl.vpro.util.DateUtils.toDate;
 import static nl.vpro.util.DateUtils.toInstant;
@@ -171,6 +173,18 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
 
     public Schedule(Net net, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
         this(net, toDate(start), toDate(stop), scheduleEvents);
+    }
+
+    @lombok.Builder
+    private Schedule(Net net, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents, Boolean filtered) {
+        this.net = net;
+        this.start = DateUtils.toDate(start);
+        this.stop = DateUtils.toDate(stop);
+        if (scheduleEvents != null && scheduleEvents.size() > 0) {
+            this.scheduleEvents = new TreeSet<>(scheduleEvents);
+        }
+        this.filtered = filtered == null ? false : filtered;
+
     }
 
     @XmlElement(name = "scheduleEvent")
