@@ -416,6 +416,7 @@
     <xs:attribute name="net" type="net"/>
     <xs:attribute name="start" type="xs:dateTime"/>
     <xs:attribute name="releaseVersion" type="xs:int"/>
+    <xs:attribute name="reruns" type="xs:boolean"/>
     <xs:attribute name="stop" type="xs:dateTime"/>
   </xs:complexType>
 
