@@ -6,6 +6,8 @@ package nl.vpro.domain.constraint.media;
 
 import javax.xml.bind.annotation.*;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 import nl.vpro.domain.constraint.AbstractTextConstraint;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.MediaObject;
@@ -16,6 +18,7 @@ import nl.vpro.domain.media.MediaObject;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "programUrlConstraintType")
+@XmlDocumentation("Constraints on the program url field of locations")
 public class ProgramUrlConstraint extends AbstractTextConstraint<MediaObject> {
 
     private boolean exact;
