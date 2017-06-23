@@ -591,6 +591,9 @@
     <xs:attribute type="xs:string" name="net"/>
     <xs:attribute type="xs:date" name="date"/>
     <xs:attribute type="xs:short" name="releaseVersion"/>
+    <xs:attribute name="start" type="xs:dateTime"/>
+    <xs:attribute name="stop" type="xs:dateTime"/>
+    <xs:attribute name="reruns" type="xs:boolean"/>
   </xs:complexType>
 
   <xs:complexType name="scheduleEventsType">
