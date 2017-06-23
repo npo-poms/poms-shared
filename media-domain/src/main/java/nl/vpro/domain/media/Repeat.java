@@ -27,7 +27,7 @@ public class Repeat implements Serializable {
     @XmlAttribute(required = true)
     protected boolean isRerun;
 
-    public static Repeat repeat(String value) {
+    public static Repeat rerun(String value) {
         return new Repeat(true, value);
     }
 
@@ -35,7 +35,7 @@ public class Repeat implements Serializable {
         return new Repeat(false, value);
     }
 
-    public static Repeat repeat() {
+    public static Repeat rerun() {
         return new Repeat(true, "");
     }
 
@@ -52,6 +52,12 @@ public class Repeat implements Serializable {
 
         }
         return repeat;
+    }
+    public static boolean isRerun(Repeat repeat) {
+        return repeat != null && repeat.isRerun();
+    }
+    public static boolean isOriginal(Repeat repeat) {
+        return repeat == null || ! repeat.isRerun();
     }
 
     public Repeat(boolean isRerun, String value) {
