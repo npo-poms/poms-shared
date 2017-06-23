@@ -4,10 +4,13 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -47,6 +50,7 @@ import static org.junit.Assert.assertFalse;
  * This class verifies JAXB XML output format and wether this format complies to the vproMedia.xsd schema definitions.
  * It's located here so it can use the test data builder for more concise code.
  */
+@Slf4j
 public class MediaObjectXmlSchemaTest {
 
     private static JAXBContext jaxbContext;
@@ -55,7 +59,7 @@ public class MediaObjectXmlSchemaTest {
         try {
             jaxbContext = JAXBContext.newInstance("nl.vpro.domain.media");
         } catch(JAXBException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -468,12 +472,41 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testScheduleEvents() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00.100+01:00\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><credits/><locations/><scheduleEvents><scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1969-12-31+01:00</guideDay><start>1970-01-01T01:00:00.100+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent><scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-03+01:00</guideDay><start>1970-01-04T01:00:00.300+01:00</start><duration>P0DT0H0M0.050S</duration></scheduleEvent><scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-08+01:00</guideDay><start>1970-01-09T01:00:00.350+01:00</start><duration>P0DT0H0M0.250S</duration></scheduleEvent><scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-10+01:00</guideDay><start>1970-01-11T01:00:00.600+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent></scheduleEvents><images/><segments/></program>";
 
         Program program = program().id(100L).lean().withScheduleEvents().build();
         String actual = toXml(program);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00.100+01:00\"\n" +
+            "    urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <credits/>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents>\n" +
+            "        <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "            <guideDay>1969-12-31+01:00</guideDay>\n" +
+            "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.200S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "        <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "            <repeat isRerun=\"true\"/>\n" +
+            "            <guideDay>1970-01-03+01:00</guideDay>\n" +
+            "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.050S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "        <scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "            <guideDay>1970-01-08+01:00</guideDay>\n" +
+            "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.250S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "        <scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "            <guideDay>1970-01-10+01:00</guideDay>\n" +
+            "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.200S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "    </scheduleEvents>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>");
     }
 
 
@@ -571,7 +604,6 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testSchedule() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><schedule channel=\"NED1\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-11T01:00:00.800+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1969-12-31+01:00</guideDay><start>1970-01-01T01:00:00.100+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent><scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-03+01:00</guideDay><start>1970-01-04T01:00:00.300+01:00</start><duration>P0DT0H0M0.050S</duration></scheduleEvent><scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-08+01:00</guideDay><start>1970-01-09T01:00:00.350+01:00</start><duration>P0DT0H0M0.250S</duration></scheduleEvent><scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-10+01:00</guideDay><start>1970-01-11T01:00:00.600+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent></schedule>";
 
         Schedule schedule = new Schedule(Channel.NED1, new Date(0), new Date(350 + 8 * 24 * 3600 * 1000));
         Program program = program().id(100L).lean().withScheduleEvents().build();
@@ -579,7 +611,31 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(schedule);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<schedule channel=\"NED1\" start=\"1970-01-01T01:00:00+01:00\"\n" +
+            "    stop=\"1970-01-11T01:00:00.800+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <guideDay>1969-12-31+01:00</guideDay>\n" +
+            "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+            "        <duration>P0DT0H0M0.200S</duration>\n" +
+            "    </scheduleEvent>\n" +
+            "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <repeat isRerun=\"true\"/>\n" +
+            "        <guideDay>1970-01-03+01:00</guideDay>\n" +
+            "        <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+            "        <duration>P0DT0H0M0.050S</duration>\n" +
+            "    </scheduleEvent>\n" +
+            "    <scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <guideDay>1970-01-08+01:00</guideDay>\n" +
+            "        <start>1970-01-09T01:00:00.350+01:00</start>\n" +
+            "        <duration>P0DT0H0M0.250S</duration>\n" +
+            "    </scheduleEvent>\n" +
+            "    <scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <guideDay>1970-01-10+01:00</guideDay>\n" +
+            "        <start>1970-01-11T01:00:00.600+01:00</start>\n" +
+            "        <duration>P0DT0H0M0.200S</duration>\n" +
+            "    </scheduleEvent>\n" +
+            "</schedule>");
 
 
         Schedule unmarshalled = JAXB.unmarshal(new StringReader(actual), Schedule.class);
@@ -589,7 +645,6 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testScheduleWithFilter() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><schedule channel=\"NED3\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1969-12-31+01:00</guideDay><start>1970-01-01T01:00:00.100+01:00</start><duration>P0DT0H0M0.200S</duration></scheduleEvent><scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-03+01:00</guideDay><start>1970-01-04T01:00:00.300+01:00</start><duration>P0DT0H0M0.050S</duration></scheduleEvent></schedule>";
 
         Schedule schedule = new Schedule(Channel.NED3, new Date(0), new Date(350 + 8 * 24 * 3600 * 1000));
         schedule.setFiltered(true);
@@ -598,21 +653,48 @@ public class MediaObjectXmlSchemaTest {
 
         String actual = toXml(schedule);
 
-        assertThat(actual).isEqualTo(expected);
+        assertThat(actual).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<schedule channel=\"NED3\" start=\"1970-01-01T01:00:00+01:00\"\n" +
+            "    stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <scheduleEvent channel=\"NED3\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <guideDay>1969-12-31+01:00</guideDay>\n" +
+            "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+            "        <duration>P0DT0H0M0.200S</duration>\n" +
+            "    </scheduleEvent>\n" +
+            "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <repeat isRerun=\"true\"/>\n" +
+            "        <guideDay>1970-01-03+01:00</guideDay>\n" +
+            "        <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+            "        <duration>P0DT0H0M0.050S</duration>\n" +
+            "    </scheduleEvent>\n" +
+            "</schedule>\n" +
+            "");
     }
 
     @Test
     public void testScheduleWithNetFilter() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><schedule net=\"ZAPP\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"><scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\"><guideDay>1970-01-03+01:00</guideDay><start>1970-01-04T01:00:00.300+01:00</start><duration>P0DT0H0M0.050S</duration></scheduleEvent></schedule>";
 
-        Schedule schedule = new Schedule(new Net("ZAPP"), new Date(0), new Date(350 + 8 * 24 * 3600 * 1000));
-        schedule.setFiltered(true);
+
+        Schedule schedule = Schedule.builder()
+            .net(new Net("ZAPP"))
+            .start(Instant.EPOCH)
+            .stop(Instant.EPOCH.plus(Duration.ofDays(8).plusMillis(350)))
+            .filtered(true)
+            .build();
+
         Program program = program().id(100L).lean().withScheduleEvents().build();
         schedule.addScheduleEventsFromMedia(Arrays.asList(program));
 
-        String actual = toXml(schedule);
-
-        assertThat(actual).isEqualTo(expected);
+        assertThat(toXml(schedule)).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+            "<schedule net=\"ZAPP\" start=\"1970-01-01T01:00:00+01:00\"\n" +
+            "    stop=\"1970-01-09T01:00:00.350+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <scheduleEvent channel=\"NED3\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "        <repeat isRerun=\"true\"/>\n" +
+            "        <guideDay>1970-01-03+01:00</guideDay>\n" +
+            "        <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+            "        <duration>P0DT0H0M0.050S</duration>\n" +
+            "    </scheduleEvent>\n" +
+            "</schedule>");
     }
 
     @Test
