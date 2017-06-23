@@ -461,8 +461,8 @@ public interface MediaTestDataBuilder<
 
     default T withScheduleEvents() {
         return scheduleEvents(
-            new ScheduleEvent(Channel.NED3, Instant.ofEpochMilli(100), java.time.Duration.ofMillis(200)),
-            new ScheduleEvent(Channel.NED3, new Net("ZAPP"), Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000), java.time.Duration.ofMillis(50)),
+            ScheduleEvent.builder().channel(Channel.NED3).start(Instant.ofEpochMilli(100)).duration(java.time.Duration.ofMillis(200)).repeat(Repeat.original()).build(),
+            ScheduleEvent.builder().channel(Channel.NED3).net(new Net("ZAPP")).start(Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000)).duration(java.time.Duration.ofMillis(50)).repeat(Repeat.repeat()).build(),
             new ScheduleEvent(Channel.HOLL, Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000), java.time.Duration.ofMillis(250)),
             new ScheduleEvent(Channel.CONS, Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000), java.time.Duration.ofMillis(200))
         );
