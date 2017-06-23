@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -7,6 +9,7 @@ import java.io.Serializable;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.function.Predicate;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -26,7 +29,7 @@ import static nl.vpro.util.DateUtils.toInstant;
     "scheduleEvents"
 })
 @Slf4j
-public class Schedule implements Serializable, Iterable<ScheduleEvent> {
+public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicate<ScheduleEvent> {
 
     private static long serialVersionUID = 0L;
 
@@ -70,6 +73,12 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
 
     @XmlTransient
     protected boolean filtered = false;
+
+    @XmlAttribute
+    @Getter
+    @Setter
+    protected Boolean reruns;
+
 
     public Schedule() {
     }
@@ -360,14 +369,30 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
         this.filtered = filtered;
     }
 
-    public boolean inRange(ScheduleEvent event) {
+    @Override
+    public boolean test(ScheduleEvent event) {
         if (channel != null) {
-            return event.getChannel().equals(channel) && inTimeRange(event);
-        } else if (net != null) {
-            return event.getNet() != null && event.getNet().equals(net) && inTimeRange(event);
-        } else {
-            return inTimeRange(event);
+            if (!event.getChannel().equals(channel)) {
+                return false;
+            }
         }
+        if (net != null) {
+            if (event.getNet() != null && !event.getNet().equals(net)) {
+                return false;
+            }
+        }
+        if (reruns != null) {
+            if (!reruns) {
+                if (Repeat.isRerun(event.getRepeat())) {
+                    return false;
+                }
+            } else {
+                if (Repeat.isOriginal(event.getRepeat())) {
+                    return false;
+                }
+            }
+        }
+        return inTimeRange(event);
     }
 
     private boolean inTimeRange(ScheduleEvent event) {
@@ -433,7 +458,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
                         ScheduleEvent result;
                         while (it.hasNext()) {
                             result = it.next();
-                            if (inRange(result)) {
+                            if (test(result)) {
                                 next = result;
                                 break;
                             }
@@ -484,7 +509,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent> {
             SortedSet<ScheduleEvent> sortedUnfiltered = events;
             while (true) {
                 ScheduleEvent element = sortedUnfiltered.last();
-                if (inRange(element)) {
+                if (test(element)) {
                     return element;
                 }
                 sortedUnfiltered = sortedUnfiltered.headSet(element);
