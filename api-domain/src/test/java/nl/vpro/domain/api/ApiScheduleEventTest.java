@@ -65,6 +65,9 @@ public class ApiScheduleEventTest {
                 "      \"duration\" : 50,\n" +
                 "      \"midRef\" : \"VPROWON_12345\",\n" +
                 "      \"poProgID\" : \"VPROWON_12345\",\n" +
+                "      \"repeat\" : {\n" +
+                "        \"isRerun\" : true\n" +
+                "      },\n" +
                 "      \"net\" : \"ZAPP\"\n" +
                 "    }, {\n" +
                 "      \"channel\" : \"HOLL\",\n" +
@@ -110,6 +113,7 @@ public class ApiScheduleEventTest {
             "                <media:poProgID>VPROWON_12345</media:poProgID>\n" +
             "            </media:scheduleEvent>\n" +
             "            <media:scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345\" net=\"ZAPP\">\n" +
+            "                <media:repeat isRerun=\"true\"></media:repeat>\n" +
             "                <media:guideDay>1970-01-03+01:00</media:guideDay>\n" +
             "                <media:start>1970-01-04T01:00:00.300+01:00</media:start>\n" +
             "                <media:duration>P0DT0H0M0.050S</media:duration>\n" +

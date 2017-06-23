@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlValue;
 import javax.persistence.Embeddable;
 import javax.persistence.Column;
 
+import org.apache.commons.lang3.StringUtils;
+
 
 @Embeddable
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -24,6 +26,33 @@ public class Repeat implements Serializable {
     @Column(nullable = true)
     @XmlAttribute(required = true)
     protected boolean isRerun;
+
+    public static Repeat repeat(String value) {
+        return new Repeat(true, value);
+    }
+
+    public static Repeat original(String value) {
+        return new Repeat(false, value);
+    }
+
+    public static Repeat repeat() {
+        return new Repeat(true, "");
+    }
+
+    public static Repeat original() {
+        return new Repeat(false, "");
+    }
+
+    public static Repeat nullIfDefault(Repeat repeat) {
+        if (repeat == null) {
+            return repeat;
+        }
+        if (!repeat.isRerun && StringUtils.isBlank(repeat.value)) {
+            return null;
+
+        }
+        return repeat;
+    }
 
     public Repeat(boolean isRerun, String value) {
         this.isRerun = isRerun;

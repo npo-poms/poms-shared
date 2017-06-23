@@ -207,6 +207,18 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         setMediaObject(media);
     }
 
+    @lombok.Builder(builderClassName = "Builder")
+    private ScheduleEvent(Channel channel, Net net, LocalDate guideDay, Instant start, Duration duration, MediaObject media, Repeat repeat) {
+        this.channel = channel;
+        this.net = net;
+        this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;
+        this.start = start;
+        this.duration = duration;
+        this.repeat = Repeat.nullIfDefault(repeat);
+        setMediaObject(media);
+    }
+
+
     /**
      * @deprecated use constructor with types from java.time
      */
