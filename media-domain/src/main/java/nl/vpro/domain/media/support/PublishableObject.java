@@ -5,6 +5,9 @@
  */
 package nl.vpro.domain.media.support;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
@@ -87,6 +90,8 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     protected Workflow workflow = Workflow.FOR_PUBLICATION;
+
+
 
     @Column(nullable = true)
     private Long crc32;
@@ -413,7 +418,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
         return workflow;
     }
 
-    public void setWorkflow(Workflow workflow) {
+    protected void setWorkflow(Workflow workflow) {
         this.workflow = workflow;
     }
 
