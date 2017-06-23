@@ -480,10 +480,16 @@ public abstract class MediaObject extends PublishableObject
     @Column(name = "sortdate", nullable = true, unique = false)
     protected Instant sortDate;
 
-    // Used for monitoring publication delau. Not exposed via java.
+    // Used for monitoring publication delay. Not exposed via java.
     // Set its value in sql to now() when unmodified media is republished.
     @Column(name = "repubDate", nullable = true, unique = false)
     protected Instant repubDate;
+
+    @Column
+    @XmlTransient
+    @Getter(AccessLevel.PROTECTED)
+    @Setter(AccessLevel.PROTECTED)
+    protected String repubReason;
 
     @Column(nullable = false)
     @JsonIgnore // Oh Jackson2...
@@ -2274,7 +2280,7 @@ public abstract class MediaObject extends PublishableObject
     }
 
     @Override
-    public void setWorkflow(Workflow workflow) {
+    protected void setWorkflow(Workflow workflow) {
         if (workflow == Workflow.PUBLISHED && isMerged()) {
             throw new IllegalArgumentException(
                     "Merged media should obtain workflow  \"MERGED\" instead of \"PUBLISHED\"");
