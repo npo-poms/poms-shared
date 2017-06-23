@@ -195,6 +195,7 @@ public abstract class MediaUpdate<M extends MediaObject>
             mediaObject();
             Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
             if (result.isEmpty()) {
+                fetch();
                 mediaObjectToValidate = mediaObject();
                 try {
                     result = VALIDATOR.validate(this, groups);
