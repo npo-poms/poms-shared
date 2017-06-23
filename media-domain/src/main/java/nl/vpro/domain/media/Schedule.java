@@ -386,12 +386,12 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     @Override
     public boolean test(ScheduleEvent event) {
         if (channel != null) {
-            if (!event.getChannel().equals(channel)) {
+            if (! Objects.equals(event.getChannel(), channel)) {
                 return false;
             }
         }
         if (net != null) {
-            if (event.getNet() != null && !event.getNet().equals(net)) {
+            if (! Objects.equals(event.getNet(), net)) {
                 return false;
             }
         }
