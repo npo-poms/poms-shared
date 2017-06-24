@@ -13,7 +13,6 @@ public class BroadcasterEditor extends OrganizationEditor<Broadcaster> {
 
     private static final long serialVersionUID = 1L;
 
-
     @Id
     @ManyToOne(optional = false)
     @JoinColumn
