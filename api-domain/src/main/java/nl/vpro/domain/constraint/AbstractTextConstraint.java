@@ -93,4 +93,10 @@ public abstract class AbstractTextConstraint<T> implements WildTextConstraint<T>
                 return Objects.equals(value == null ? null : value.toUpperCase(), compareTo.toUpperCase());
         }
     }
+
+
+    @Override
+    public CaseHandling getCaseHandling() {
+        return caseHandling;
+    }
 }
