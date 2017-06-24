@@ -22,6 +22,7 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "principalid")
     protected String principalId;
 
     protected String givenName;
