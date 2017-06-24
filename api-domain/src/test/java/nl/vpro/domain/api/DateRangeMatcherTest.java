@@ -4,14 +4,20 @@
  */
 package nl.vpro.domain.api;
 
+import java.io.StringReader;
 import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import org.junit.Test;
 
+import nl.vpro.domain.media.Schedule;
+import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.within;
 import static org.junit.Assert.*;
 
 /**
@@ -23,7 +29,7 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMat
 
     @Test
     public void testGetInclusiveEnd() throws Exception {
-        DateRangeMatcher in = new DateRangeMatcher((Date) null, null, true);
+        DateRangeMatcher in = new DateRangeMatcher((Instant) null, null, true);
         DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
             "inclusiveEnd=\"true\"");
         assertThat(out.includeEnd()).isTrue();
@@ -31,7 +37,7 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMat
 
     @Override
     DateRangeMatcher getInstance() {
-        return new DateRangeMatcher(new Date(100), new Date(200));
+        return new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200));
     }
 
     @Override
@@ -60,6 +66,30 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMat
         DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
             "<api:end>1970-01-01T01:00:00+01:00</api:end>");
         assertThat(out.getEnd()).isEqualTo(end);
+    }
+
+
+    @Test
+    public void json() throws Exception {
+        DateRangeMatcher rangeMatcher = DateRangeMatcher.builder()
+            .begin(LocalDateTime.of(2017, 6, 24, 18, 0).atZone(Schedule.ZONE_ID).toInstant())
+            .end(LocalDateTime.of(2017, 7, 24, 18, 0).atZone(Schedule.ZONE_ID).toInstant())
+            .build();
+        Jackson2TestUtil.roundTripAndSimilar(rangeMatcher, "{\n" +
+            "  \"begin\" : 1498320000000,\n" +
+            "  \"end\" : 1500912000000\n" +
+            "}");
+
+    }
+
+    @Test
+    public void jsonNatty() throws Exception {
+        Instant now = Instant.now();
+        DateRangeMatcher in = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
+            "  \"begin\" : \"now\"\n" +
+            "}"), DateRangeMatcher.class);
+        assertThat(in.getBegin()).isCloseTo(now, within(10, ChronoUnit.SECONDS));
+
     }
 
     @Test

@@ -58,6 +58,7 @@ public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate
         super(begin, end);
     }
 
+    @lombok.Builder
     public DateRangeMatcher(Instant begin, Instant end, Boolean inclusiveEnd) {
         super(begin, end, inclusiveEnd);
     }
