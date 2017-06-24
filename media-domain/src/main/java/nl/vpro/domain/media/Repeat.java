@@ -110,4 +110,9 @@ public class Repeat implements Serializable {
         result = 31 * result + (isRerun ? 1 : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return isRerun ? "RERUN" : "ORIGNAL" + (value == null ? "" : " (" + value + ")");
+    }
 }
