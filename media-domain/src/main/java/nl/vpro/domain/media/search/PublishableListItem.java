@@ -5,7 +5,6 @@
 package nl.vpro.domain.media.search;
 
 import java.time.Instant;
-import java.util.Date;
 
 import javax.xml.bind.annotation.*;
 
@@ -13,7 +12,6 @@ import nl.vpro.domain.Embargo;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Editor;
-import nl.vpro.util.DateUtils;
 
 /**
  * @author Roelof Jan Koekoek
@@ -37,16 +35,15 @@ public abstract class PublishableListItem implements Embargo {
 
     protected Editor createdBy;
 
-    protected Date lastModified;
+    protected Instant lastModified;
 
-    protected Date creationDate;
+    protected Instant creationDate;
 
     protected Instant publishStart;
 
     protected Instant publishStop;
 
-
-    protected Date lastPublished;
+    protected Instant lastPublished;
 
 
     protected PublishableListItem() {
@@ -56,15 +53,15 @@ public abstract class PublishableListItem implements Embargo {
         this.id       = mediaObject.getId();
         this.workflow = mediaObject.getWorkflow();
 
-        this.lastModified = DateUtils.toDate(mediaObject.getLastModifiedInstant());
+        this.lastModified = mediaObject.getLastModifiedInstant();
         this.lastModifiedBy = mediaObject.getLastModifiedBy();
 
-        this.creationDate = DateUtils.toDate(mediaObject.getCreationInstant());
+        this.creationDate = mediaObject.getCreationInstant();
         this.createdBy = mediaObject.getCreatedBy();
 
         this.publishStart = mediaObject.getPublishStartInstant();
         this.publishStop = mediaObject.getPublishStopInstant();
-        this.lastPublished = mediaObject.getLastPublished();
+        this.lastPublished = mediaObject.getLastPublishedInstant();
 
     }
 
@@ -121,19 +118,19 @@ public abstract class PublishableListItem implements Embargo {
         this.createdBy = createdBy;
     }
 
-    public Date getLastModified() {
+    public Instant getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(Date lastModified) {
+    public void setLastModified(Instant lastModified) {
         this.lastModified = lastModified;
     }
 
-    public Date getCreationDate() {
+    public Instant getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -160,11 +157,11 @@ public abstract class PublishableListItem implements Embargo {
         return this;
     }
 
-    public Date getLastPublished() {
+    public Instant getLastPublished() {
         return lastPublished;
     }
 
-    public void setLastPublished(Date lastPublished) {
+    public void setLastPublished(Instant lastPublished) {
         this.lastPublished = lastPublished;
     }
 }

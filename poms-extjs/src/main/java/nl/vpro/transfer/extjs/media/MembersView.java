@@ -4,6 +4,13 @@
  */
 package nl.vpro.transfer.extjs.media;
 
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
+
+import javax.xml.bind.annotation.*;
+
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.ScheduleEvent;
 import nl.vpro.domain.media.search.MediaListItem;
@@ -12,13 +19,6 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.spring.security.acl.MediaPermissionEvaluator;
 import nl.vpro.transfer.extjs.ExtRecord;
 import nl.vpro.transfer.extjs.media.support.MediaTypeView;
-
-import javax.xml.bind.annotation.*;
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.SortedSet;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
@@ -61,7 +61,7 @@ public class MembersView extends ExtRecord {
 
     private ScheduleEventView firstShowing;
 
-    private Date lastModified;
+    private Instant lastModified;
 
     private MediaTypeView mediaType;
 
@@ -73,9 +73,9 @@ public class MembersView extends ExtRecord {
 
     private Instant publishStop;
 
-    private Date creationDate;
+    private Instant creationDate;
 
-    private Date sortDate;
+    private Instant sortDate;
 
     private Boolean highlighted;
 
@@ -212,11 +212,11 @@ public class MembersView extends ExtRecord {
         this.firstShowing = firstShowing;
     }
 
-    public Date getLastModified() {
+    public Instant getLastModified() {
         return lastModified;
     }
 
-    public void setLastModified(Date lastModified) {
+    public void setLastModified(Instant lastModified) {
         this.lastModified = lastModified;
     }
 
@@ -228,11 +228,11 @@ public class MembersView extends ExtRecord {
         this.mediaType = type;
     }
 
-    public Date getCreationDate() {
+    public Instant getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -260,7 +260,7 @@ public class MembersView extends ExtRecord {
         this.publishStop = publishStop;
     }
 
-    public Date getSortDate() {
+    public Instant getSortDate() {
         return sortDate;
     }
 }
