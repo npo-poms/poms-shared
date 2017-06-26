@@ -63,7 +63,11 @@ public class MediaListItem extends PublishableListItem {
     @XmlAttribute
     private AVType avType;
 
-    private Date lastPublished;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant lastPublished;
 
     @XmlAttribute
     private String mediaType;
@@ -98,7 +102,11 @@ public class MediaListItem extends PublishableListItem {
     @XmlTransient
     private List<ThirdParty> thirdParties;
 
-    private Date sortDate;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant sortDate;
 
     private MediaType type;
 
@@ -141,12 +149,12 @@ public class MediaListItem extends PublishableListItem {
             this.mediaType = getClass().getName();
         }
         this.type = media.getType().getMediaType();
-        this.sortDate = media.getSortDate();
+        this.sortDate = media.getSortInstant();
         this.locations = media.getLocations();
         this.numberOfLocations = media.getLocations().size();
         this.tags = media.getTags();
 
-        this.lastPublished = media.getLastPublished();
+        this.lastPublished = media.getLastPublishedInstant();
 
         if(media.getScheduleEvents().size() > 0) {
             this.firstScheduleEvent = media.getScheduleEvents().first();
@@ -175,12 +183,12 @@ public class MediaListItem extends PublishableListItem {
     }
 
     @Override
-    public Date getLastPublished() {
+    public Instant getLastPublished() {
         return lastPublished;
     }
 
     @Override
-    public void setLastPublished(Date lastPublished) {
+    public void setLastPublished(Instant lastPublished) {
         this.lastPublished = lastPublished;
     }
 
@@ -250,11 +258,11 @@ public class MediaListItem extends PublishableListItem {
         this.thirdParties = thirdParties;
     }
 
-    public Date getSortDate() {
+    public Instant getSortDate() {
         return sortDate;
     }
 
-    public void setSortDate(Date sortDate) {
+    public void setSortDate(Instant sortDate) {
         this.sortDate = sortDate;
     }
 
@@ -309,23 +317,23 @@ public class MediaListItem extends PublishableListItem {
 
     @Override
     @XmlElement
-    public Date getCreationDate() {
+    public Instant  getCreationDate() {
         return super.getCreationDate();
     }
 
     @Override
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Instant creationDate) {
         super.setCreationDate(creationDate);
     }
 
     @Override
     @XmlElement
-    public Date getLastModified() {
+    public Instant getLastModified() {
         return super.getLastModified();
     }
 
     @Override
-    public void setLastModified(Date lastModified) {
+    public void setLastModified(Instant lastModified) {
         super.setLastModified(lastModified);
     }
 
