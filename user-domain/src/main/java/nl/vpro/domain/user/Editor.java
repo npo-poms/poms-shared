@@ -124,20 +124,18 @@ public class Editor extends AbstractUser {
     void setEmployer(final Broadcaster broadcaster) {
         BroadcasterEditor toAdd = broadcaster == null ? null : new BroadcasterEditor(this, broadcaster, true);
 
+        boolean found = false;
         for(Iterator<BroadcasterEditor> iterator = broadcasters.iterator(); iterator.hasNext(); ) {
             BroadcasterEditor existing = iterator.next();
 
             if(toAdd != null && toAdd.equals(existing)) {
-                if(existing.isEmployee()) {
-                    return;
-                } else {
-                    iterator.remove();
-                }
-            } else if(existing.isEmployee()) {
-                iterator.remove();
+                found = true;
+                existing.setEmployee(true);
+            } else {
+                existing.setEmployee(false);
             }
         }
-        if (toAdd != null) {
+        if (! found && toAdd != null) {
             broadcasters.add(toAdd);
         }
         allowedBroadcasterCache = null;

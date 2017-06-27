@@ -10,6 +10,8 @@ public interface ImageImporter {
 
     Image save(ImageUpdate download) throws DownloadException;
 
+
+
     class DownloadException extends RuntimeException {
 
         private final boolean retryable;
