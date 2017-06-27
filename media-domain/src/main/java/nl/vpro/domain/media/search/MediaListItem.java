@@ -317,6 +317,10 @@ public class MediaListItem extends PublishableListItem {
 
     @Override
     @XmlElement
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant  getCreationDate() {
         return super.getCreationDate();
     }
@@ -328,6 +332,10 @@ public class MediaListItem extends PublishableListItem {
 
     @Override
     @XmlElement
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getLastModified() {
         return super.getLastModified();
     }
