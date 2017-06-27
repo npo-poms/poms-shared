@@ -1793,7 +1793,7 @@ public abstract class MediaObject extends PublishableObject
                             log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction,
                                     location.getProgramUrl(), MediaObject.this.mid);
                             prediction.setState(Prediction.State.REALIZED);
-                            MediaObjects.markForRepublication(MediaObject.this);
+                            MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
                             break;
                         }
                     }
