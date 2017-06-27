@@ -44,6 +44,7 @@ public interface MediaBackendRestService {
     String TYPE = "type";
     String VALIDATE_INPUT = "validateInput";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated against the XSD first";
+    String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
 
 
     @POST
