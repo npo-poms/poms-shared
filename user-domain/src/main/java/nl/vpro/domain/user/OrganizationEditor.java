@@ -41,8 +41,8 @@ public abstract class OrganizationEditor<T extends Organization>
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("BroadcasterEditor");
-        sb.append("{organization=").append(getOrganization());
-        sb.append(", editor=").append(getEditor());
+        sb.append("{organization=").append(getOrganization().getId());
+        sb.append(", editor=").append(getEditor().getPrincipalId());
         sb.append('}');
         return sb.toString();
     }
