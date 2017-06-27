@@ -456,9 +456,10 @@ public class MediaObjects {
         }
     }
 
-    public static void markForRepublication(MediaObject media) {
+    public static void markForRepublication(MediaObject media, String reason) {
         if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.isPublishable()) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
+            media.setRepubReason(reason);
         }
     }
 
