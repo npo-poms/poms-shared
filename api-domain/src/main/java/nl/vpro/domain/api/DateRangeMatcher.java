@@ -16,6 +16,8 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -39,7 +41,10 @@ public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @XmlDocumentation(("Json representation is millis since epoch, but supports natty parsing too"))
     private Instant begin;
+
+
     @XmlElement
     @Getter
     @Setter
@@ -48,6 +53,7 @@ public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @XmlDocumentation(("Json representation is millis since epoch, but supports natty parsing too"))
     private Instant end;
 
 
