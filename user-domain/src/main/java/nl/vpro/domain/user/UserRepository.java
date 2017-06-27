@@ -20,6 +20,8 @@ public interface UserRepository<T extends User> {
 
     void delete(T user);
 
+    void delete(OrganizationEditor<? extends Organization> join);
+
     List<? extends T> findUsers(String name, int max);
 
     void clear();

@@ -26,20 +26,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Slf4j
 public class Editor extends AbstractUser {
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
-    @JoinColumn(name = "editor_principalid")
     Set<BroadcasterEditor> broadcasters = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "editor_principalid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
     Set<PortalEditor> portals = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "editor_principalid")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")
@@ -210,12 +207,28 @@ public class Editor extends AbstractUser {
         }
     }
 
-    void removeBroadcaster(Broadcaster broadcaster) {
-        BroadcasterEditor toRemove = new BroadcasterEditor(this, broadcaster);
-        if (broadcasters.remove(toRemove)) {
+    BroadcasterEditor removeBroadcaster(Broadcaster broadcaster) {
+        BroadcasterEditor toRemove = remove(broadcasters, broadcaster);
+        if (toRemove != null) {
             activeBroadcasterCache = null;
             allowedBroadcasterCache = null;
         }
+        return toRemove;
+    }
+
+    private static <S extends Organization, T extends OrganizationEditor<S>> T remove(Collection<T> collection, S organization) {
+        T toRemove = null;
+        for (T e : collection) {
+            if (e.getOrganization().equals(organization)) {
+                toRemove = e;
+                break;
+            }
+        }
+
+        if (toRemove != null) {
+            collection.remove(toRemove);
+        }
+        return toRemove;
     }
 
     SortedSet<Portal> getAllowedPortals() {
@@ -263,7 +276,7 @@ public class Editor extends AbstractUser {
         for (PortalEditor be : portals) {
             if (portal.equals(be.getOrganization())) {
                 be.setActive(value);
-                activePortalCache= null;
+                activePortalCache = null;
                 return;
             }
         }
@@ -282,12 +295,13 @@ public class Editor extends AbstractUser {
         }
     }
 
-    void removePortal(Portal portal) {
-        PortalEditor toRemove = new PortalEditor(this, portal);
+    PortalEditor removePortal(Portal portal) {
+        PortalEditor toRemove = remove(portals, portal);
         if (portals.remove(toRemove)) {
             allowedPortalCache = null;
             activePortalCache = null;
         }
+        return toRemove;
     }
 
     SortedSet<ThirdParty> getAllowedThirdParties() {
@@ -315,12 +329,13 @@ public class Editor extends AbstractUser {
         }
     }
 
-    void removeThirdParty(ThirdParty thirdParty) {
-        ThirdPartyEditor toRemove = new ThirdPartyEditor(this, thirdParty);
-        if (thirdParties.remove(toRemove)) {
+    ThirdPartyEditor removeThirdParty(ThirdParty thirdParty) {
+        ThirdPartyEditor toRemove = remove(thirdParties, thirdParty);
+        if (toRemove != null) {
             allowedThirdPartyCache = null;
             activeThirdPartyCache = null;
         }
+        return toRemove;
     }
 
     Collection<Organization> getOrganizations() {
