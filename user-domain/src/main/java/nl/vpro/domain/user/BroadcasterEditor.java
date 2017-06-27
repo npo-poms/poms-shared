@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -16,21 +19,25 @@ public class BroadcasterEditor extends OrganizationEditor<Broadcaster> {
     @Id
     @ManyToOne(optional = false)
     @JoinColumn
+    @Getter
     protected Editor editor;
 
     @Id
     @ManyToOne(optional = false)
     @JoinColumn
+    @Getter
     protected Broadcaster organization;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="isActive")
     @NotNull
-    protected Boolean isActive = false;
+    @Setter
+    protected Boolean active = false;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="isEmployee")
     @NotNull
-    private Boolean isEmployee = false;
+    @Setter
+    private Boolean employee = false;
 
 
     protected BroadcasterEditor() {
@@ -43,34 +50,19 @@ public class BroadcasterEditor extends OrganizationEditor<Broadcaster> {
 
     public BroadcasterEditor(Editor editor, Broadcaster broadcaster, Boolean isEmployee) {
         this(editor, broadcaster);
-        this.isEmployee = isEmployee;
-        this.isActive   = isEmployee;
+        this.employee = isEmployee;
+        this.active = isEmployee;
     }
 
-    public Boolean isEmployee() {
-        return isEmployee;
-    }
-
-
-    @Override
-    public Broadcaster getOrganization() {
-        return organization;
-
-    }
-
-    @Override
-    public Editor getEditor() {
-        return editor;
-    }
 
     @Override
     public Boolean isActive() {
-        return isActive;
-    }
+        return active;
 
-    @Override
-    public void setActive(Boolean active) {
-        isActive = active;
+    }
+    public Boolean isEmployee() {
+        return employee;
+
     }
 
     @Override

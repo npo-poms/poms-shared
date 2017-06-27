@@ -2598,11 +2598,13 @@ public abstract class MediaObject extends PublishableObject
 
         toRemove.forEach(this::removeImage);
         List<Image> rest =
-            getImages().stream().filter(i -> !owner.equals(i.getOwner())).collect(Collectors.toList());
+            getImages().stream()
+                .filter(i -> !owner.equals(i.getOwner()))
+                .collect(Collectors.toList());
 
         getImages().clear();
-        images.addAll(firstImages);
-        images.addAll(rest);
+        addAllImages(firstImages);
+        addAllImages(rest);
 
     }
 
