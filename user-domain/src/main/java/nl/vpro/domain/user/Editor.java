@@ -297,7 +297,7 @@ public class Editor extends AbstractUser {
 
     PortalEditor removePortal(Portal portal) {
         PortalEditor toRemove = remove(portals, portal);
-        if (portals.remove(toRemove)) {
+        if (toRemove != null) {
             allowedPortalCache = null;
             activePortalCache = null;
         }
