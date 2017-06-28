@@ -1,17 +1,15 @@
-/**
+/*
  * Copyright (C) 2010 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.transfer.extjs.errors;
 
-import java.lang.reflect.UndeclaredThrowableException;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
+import nl.vpro.transfer.extjs.TransferList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import nl.vpro.transfer.extjs.TransferList;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.lang.reflect.UndeclaredThrowableException;
 
 @XmlRootElement(name = "errors")
 public class ErrorList extends TransferList<ErrorView> {
