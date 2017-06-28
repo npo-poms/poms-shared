@@ -1,14 +1,14 @@
-/**
+/*
  * Copyright (C) 2011 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.transfer.extjs;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
