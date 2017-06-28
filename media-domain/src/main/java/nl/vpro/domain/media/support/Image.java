@@ -352,8 +352,9 @@ public class Image extends PublishableObject implements Ownable {
         return offset;
     }
 
-    public void setOffset(java.time.Duration offset) {
+    public Image setOffset(java.time.Duration offset) {
         this.offset = offset;
+        return this;
     }
 
 
