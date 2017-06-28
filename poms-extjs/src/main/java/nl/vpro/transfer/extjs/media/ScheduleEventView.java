@@ -1,24 +1,22 @@
-/**
+/*
  * Copyright (C) 2009 All rights reserved
  * VPRO The Netherlands
  */
 package nl.vpro.transfer.extjs.media;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.xml.bind.annotation.*;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
 import nl.vpro.domain.media.bind.DateToJsonTimestamp;
 import nl.vpro.domain.user.Broadcaster;
+
+import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
