@@ -23,20 +23,5 @@
       <groupId>nl.vpro.user</groupId>
       <artifactId>user-domain</artifactId>
     </dependency>
-    <dependency>
-      <groupId>nl.vpro.encoder</groupId>
-      <artifactId>encoder-api</artifactId>
-      <version>${poms.shared.media.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>nl.vpro.media</groupId>
-      <artifactId>media-events</artifactId>
-      <version>${poms.shared.media.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>nl.vpro.media</groupId>
-      <artifactId>media-services</artifactId>
-      <version>${poms.shared.media.version}</version>
-    </dependency>
   </dependencies>
 </project>
