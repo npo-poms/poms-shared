@@ -50,6 +50,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.i18n.Locales;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.nicam.NicamRated;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ResortedSortedSet;
@@ -58,6 +59,7 @@ import nl.vpro.validation.Language;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.FalseToNullAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.TextualObjects.sorted;
 
@@ -2308,18 +2310,19 @@ public abstract class MediaObject extends PublishableObject
      *
      * @since 1.5
      */
-    @JsonProperty
-    // @JsonSerialize(using = DateToJsonTimestamp.Serializer.class, include =
-    // JsonSerialize.Inclusion.NON_NULL)
-    // @JsonDeserialize(using = DateToJsonTimestamp.Deserializer.class)
-    @XmlAttribute(name = "sortDate", required = true)
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+
     @Deprecated
     final public Date getSortDate() {
         return DateUtils.toDate(getSortInstant());
     }
 
-    @XmlTransient
+    @XmlAttribute(name = "sortDate", required = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("sortDate")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public final Instant getSortInstant() {
         if (!sortDateValid) {
             Instant date = MediaObjects.getSortInstant(this);
