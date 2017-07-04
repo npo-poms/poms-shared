@@ -7,6 +7,7 @@ package nl.vpro.domain.media.support;
 public enum StreamingStatus {
 
     NOT_AVAILABLE,
+    OFFLINE,
     AVAILABLE,
     AVAILABLE_WITH_DRM
     ;
