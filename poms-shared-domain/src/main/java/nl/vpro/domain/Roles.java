@@ -41,5 +41,10 @@ public class Roles {
     public static final String MIS_ROLE = "ROLE_MEDIA_MIS";
 
 
+    /**
+     * The system role is only assigned via {@link nl.vpro.domain.user.UserService#systemAuthenticate)}
+     */
+    public static final String SYSTEM_ROLE = "ROLE_SYSTEM";
+
 
 }
