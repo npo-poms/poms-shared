@@ -22,11 +22,11 @@ public class TransactionUUID {
         }
     }
 
-    private static ThreadLocal<UUID> threadLocal = ThreadLocal.withInitial(UUID::randomUUID);
+    private static ThreadLocal<UUID> threadLocal = ThreadLocal.withInitial(() -> null);
 
     public static UUID get() {
         UUID uuid = threadLocal.get();
-        consume(uuid.toString());
+
         return uuid;
     }
 
@@ -40,10 +40,24 @@ public class TransactionUUID {
         for (TransactionUUIDConsumer consumer : consumers) {
             consumer.accept(uuid);
         }
-
+    }
+    private static void consume() {
+        UUID uuid = get();
+        if (uuid != null) {
+            consume(uuid.toString());
+        }
     }
 
-    public static void reset() {
+
+    public static void newUUIDIfEmpty() {
+        if (threadLocal.get() == null) {
+            threadLocal.set(UUID.randomUUID());
+            log.info("Logging on transaction uuid {}", threadLocal.get());
+            consume();
+        }
+    }
+
+    public static void clear() {
         threadLocal.remove();
     }
 
