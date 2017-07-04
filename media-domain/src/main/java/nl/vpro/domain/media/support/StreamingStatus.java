@@ -6,8 +6,21 @@ package nl.vpro.domain.media.support;
  */
 public enum StreamingStatus {
 
+    /**
+     * Not notified by NEP
+     */
     NOT_AVAILABLE,
+    /**
+     * Explicitely notified by NEP to be offline
+     */
+    OFFLINE,
+    /**
+     * Explicitely notified by NEP to be online
+     */
     AVAILABLE,
+    /**
+     * Explicitely notified by NEP to be offline with DRM
+     */
     AVAILABLE_WITH_DRM
     ;
 
