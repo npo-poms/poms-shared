@@ -4,11 +4,13 @@
  */
 package nl.vpro.domain.constraint.media;
 
+import org.junit.Test;
+
 import nl.vpro.domain.media.MediaTestDataBuilder;
+import nl.vpro.domain.media.Platform;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.Region;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +22,7 @@ public class GeoRestrictionConstraintTest {
 
     @Test
     public void testGetStringValue() throws Exception {
-        GeoRestrictionConstraint in = new GeoRestrictionConstraint(Region.BENELUX);
+        GeoRestrictionConstraint in = new GeoRestrictionConstraint(null, Region.BENELUX);
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:geoRestrictionConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">BENELUX</local:geoRestrictionConstraint>");
     }
@@ -31,14 +33,20 @@ public class GeoRestrictionConstraintTest {
     }
 
     @Test
+    public void testGetESValue() throws Exception {
+        assertThat(new GeoRestrictionConstraint(Platform.INTERNETVOD, Region.NL).getValue()).isEqualTo("NL");
+        assertThat(new GeoRestrictionConstraint(Platform.PLUSVOD, Region.NL).getValue()).isEqualTo("PLUSVOD:NL");
+    }
+
+    @Test
     public void testApplyWhenTrue() throws Exception {
         Program program = MediaTestDataBuilder.program().withGeoRestrictions().build();
-        assertThat(new GeoRestrictionConstraint(Region.BENELUX));
+        assertThat(new GeoRestrictionConstraint(Platform.INTERNETVOD, Region.BENELUX).test(program)).isTrue();
     }
 
     @Test
     public void testApplyWhenFalse() throws Exception {
         Program program = MediaTestDataBuilder.program().build();
-        assertThat(new GeoRestrictionConstraint(Region.NL).test(program)).isFalse();
+        assertThat(new GeoRestrictionConstraint(Platform.INTERNETVOD, Region.NL).test(program)).isFalse();
     }
 }
