@@ -486,8 +486,8 @@
 
   <xs:simpleType name="region">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="BENELUX"/>
       <xs:enumeration value="NL"/>
+      <xs:enumeration value="BENELUX"/>
     </xs:restriction>
   </xs:simpleType>
 
