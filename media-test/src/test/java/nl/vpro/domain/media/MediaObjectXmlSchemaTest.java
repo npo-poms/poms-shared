@@ -249,13 +249,20 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testRegions() throws Exception {
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\"  xmlns:shared=\"urn:vpro:shared:2009\" xmlns=\"urn:vpro:media:2009\"><region regionId=\"NL\"/><region regionId=\"BENELUX\" stop=\"1970-01-01T01:01:40+01:00\" start=\"1970-01-01T01:00:00+01:00\"/><credits/><locations/><scheduleEvents/><images/><segments/></program>";
 
-        Program program = program().lean().withGeoRestrictions().build();
-        String actual = toXml(program);
 
-        Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
-        assertFalse(diff.toString() + " " + actual, diff.hasDifferences());
+        JAXBTestUtil.roundTripAndSimilar(program().lean().withGeoRestrictions().build(),
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <region regionId=\"NL\" platform=\"INTERNETVOD\"/>\n" +
+            "    <region regionId=\"BENELUX\" platform=\"INTERNETVOD\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
+            "    <region regionId=\"NL\" platform=\"TVVOD\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
+            "    <credits/>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>\n");
     }
 
     @Test
