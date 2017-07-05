@@ -7,16 +7,20 @@ package nl.vpro.domain.media;
 import javax.xml.bind.annotation.XmlEnum;
 
 import org.apache.commons.lang3.StringUtils;
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
 @XmlEnum
 public enum Region {
 
 
+    @XmlDocumentation("Means that this object can only be played in the Netherlands")
     NL,
+
     /**
      * @deprecated Not supported by VMV
      */
     @Deprecated
+    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not support by the NPO player)")
     BENELUX;
 
     public static Region valueOfOrNull(String v) {
