@@ -1,6 +1,12 @@
 package nl.vpro.domain.media;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.time.Instant;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +15,6 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -22,8 +25,10 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoRestrictionType")
 @SuppressWarnings("serial")
+@EqualsAndHashCode(callSuper = true)
+@ToString
+public class GeoRestriction extends Restriction implements Comparable<GeoRestriction> {
 
-public class GeoRestriction extends Restriction {
 
     public static class Builder extends RestrictionBuilder<Builder> {
 
@@ -32,10 +37,24 @@ public class GeoRestriction extends Restriction {
     @Column(nullable=false)
     @Enumerated(EnumType.STRING)
     @NotNull(message = "nl.vpro.constraints.NotNull")
+    @XmlAttribute(name = "regionId")
+    @Getter
+    @Setter
     protected Region region;
 
+    @Column(nullable=false)
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "nl.vpro.constraints.NotNull")
+    @Getter
+    @Setter
+    @XmlAttribute
+    protected Platform platform;
+
+
     @XmlTransient
-    private boolean authorityUpdate = false;
+    @Getter
+    @Setter
+    private boolean authoritative = false;
 
     public GeoRestriction() {
     }
@@ -52,20 +71,24 @@ public class GeoRestriction extends Restriction {
     public GeoRestriction(Region region, Instant start, Instant stop) {
         super(start, stop);
         this.region = region;
-        authorityUpdate = true;
+        authoritative = true;
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GeoRestriction(Long id, Region region, Instant start, Instant stop) {
+    private GeoRestriction(Long id, Region region, Instant start, Instant stop, Platform platform, boolean authoritative) {
         super(id, start, stop);
         this.region = region;
-        authorityUpdate = true;
+        this.authoritative = authoritative;
+        this.platform = platform == null ? Platform.INTERNETVOD : platform;
+
+
     }
 
     public GeoRestriction(GeoRestriction source) {
         super(source);
         this.region = source.region;
-        this.authorityUpdate = source.authorityUpdate;
+        this.authoritative = source.authoritative;
+        this.platform = source.platform;
     }
 
     public static GeoRestriction copy(GeoRestriction source){
@@ -76,54 +99,23 @@ public class GeoRestriction extends Restriction {
     }
 
 
-    @XmlAttribute(name = "regionId")
     @JsonValue
-    public Region getRegion() {
-        return region;
+    protected String getJsonValue() {
+        return (platform == null || platform == Platform.INTERNETVOD ? "" : (platform.name() + ":")) + region.toString();
     }
 
-    public void setRegion(Region region) {
-        if (region != this.region) {
-            authorityUpdate = true;
+    @Override
+    public int compareTo(GeoRestriction o) {
+        int result = platform.compareTo(o.platform);
+        if (result != 0) {
+            return result;
         }
-        this.region = region;
-    }
-
-    public boolean isAuthorityUpdate() {
-        return authorityUpdate;
-    }
-
-    public void setAuthorityUpdate(boolean ceresUpdate) {
-        this.authorityUpdate = ceresUpdate;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) { return false; }
-        if (obj == this) { return true; }
-        if (obj.getClass() != getClass()) {
-            return false;
+        result = region.compareTo(o.region);
+        if (result != 0) {
+            return result;
         }
-        GeoRestriction rhs = (GeoRestriction) obj;
-        return new EqualsBuilder()
-            .appendSuper(super.equals(obj))
-            .append(region, rhs.region)
-            .isEquals();
+        return Objects.compare(start, o.start, (o1, o2) -> o1 == null ? -1 : o1.compareTo(o2));
+
     }
 
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(39, 53)
-            .appendSuper(super.hashCode())
-            .append(region)
-            .toHashCode();
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-            .appendSuper(super.toString())
-            .append("region", region)
-            .toString();
-    }
 }

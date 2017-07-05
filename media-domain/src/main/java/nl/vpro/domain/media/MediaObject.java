@@ -264,7 +264,7 @@ public abstract class MediaObject extends PublishableObject
     @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
             + "and (stop is null or stop > now())")
     @Valid
-    protected List<GeoRestriction> geoRestrictions;
+    protected Set<GeoRestriction> geoRestrictions;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true)
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
@@ -892,14 +892,14 @@ public abstract class MediaObject extends PublishableObject
     @XmlElement(name = "region")
     @JsonProperty("regions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<GeoRestriction> getGeoRestrictions() {
+    public SortedSet<GeoRestriction> getGeoRestrictions() {
         if (geoRestrictions == null) {
-            geoRestrictions = new ArrayList<>();
+            geoRestrictions = new TreeSet<>();
         }
-        return geoRestrictions;
+        return sorted(geoRestrictions);
     }
 
-    public void setGeoRestrictions(List<GeoRestriction> geoRestrictions) {
+    public void setGeoRestrictions(Set<GeoRestriction> geoRestrictions) {
         this.geoRestrictions = geoRestrictions;
     }
 
@@ -915,24 +915,22 @@ public abstract class MediaObject extends PublishableObject
         return null;
     }
 
-    public void addGeoRestriction(GeoRestriction restriction) {
-        if (restriction == null) {
+    public void addGeoRestriction(GeoRestriction geoRestriction) {
+        if (geoRestriction == null) {
             throw new IllegalArgumentException("Null GeoRestriction argument not allowed");
         }
 
         if (geoRestrictions == null) {
-            geoRestrictions = new ArrayList<>();
+            geoRestrictions = new TreeSet<>();
         }
 
-        if (!geoRestrictions.contains(restriction)) {
-            geoRestrictions.add(restriction);
-            markCeresUpdate();
+        if (!geoRestrictions.contains(geoRestriction)) {
+            geoRestrictions.add(geoRestriction);
         }
     }
 
     public boolean removeGeoRestriction(GeoRestriction restriction) {
         if (this.geoRestrictions != null && this.geoRestrictions.remove(restriction)) {
-            markCeresUpdate();
             return true;
         }
         return false;
