@@ -136,7 +136,7 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     private List<PortalRestrictionUpdate> portalRestrictions;
 
-    private List<GeoRestrictionUpdate> geoRestrictions;
+    private Set<GeoRestrictionUpdate> geoRestrictions;
 
     private SortedSet<TitleUpdate> titles;
 
@@ -257,7 +257,7 @@ public abstract class MediaUpdate<M extends MediaObject>
             portalRestrictions = null;
         }
         if (notTransforming(geoRestrictions)) {
-            mediaObject().setGeoRestrictions(geoRestrictions.stream().map(GeoRestrictionUpdate::toGeoRestriction).collect(Collectors.toList()));
+            mediaObject().setGeoRestrictions(geoRestrictions.stream().map(GeoRestrictionUpdate::toGeoRestriction).collect(Collectors.toSet()));
             geoRestrictions = null;
         }
         if (notTransforming(titles)) {
@@ -510,9 +510,10 @@ public abstract class MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "region")
     @Valid
-    public List<GeoRestrictionUpdate> getGeoRestrictions() {
+    public Set<GeoRestrictionUpdate> getGeoRestrictions() {
         if (geoRestrictions == null) {
-            geoRestrictions = new TransformingList<>(mediaObject().getGeoRestrictions(),
+            geoRestrictions = new TransformingSortedSet<GeoRestrictionUpdate, GeoRestriction>(
+                mediaObject().getGeoRestrictions(),
                 GeoRestrictionUpdate::new,
                 GeoRestrictionUpdate::toGeoRestriction
             );
@@ -520,7 +521,7 @@ public abstract class MediaUpdate<M extends MediaObject>
         return geoRestrictions;
     }
 
-    public void setGeoRestrictions(List<GeoRestrictionUpdate> restrictions) {
+    public void setGeoRestrictions(Set<GeoRestrictionUpdate> restrictions) {
         this.geoRestrictions = restrictions;
     }
 

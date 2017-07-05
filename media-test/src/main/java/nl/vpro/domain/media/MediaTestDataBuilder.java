@@ -293,9 +293,13 @@ public interface MediaTestDataBuilder<
 
     default T withGeoRestrictions() {
         return geoRestrictions(
-            new GeoRestriction(Region.NL),
-            new GeoRestriction(Region.BENELUX, Instant.ofEpochMilli(0), Instant.ofEpochMilli(100000)));
+            GeoRestriction.builder().region(Region.NL).build(),
+            GeoRestriction.builder().region(Region.BENELUX).start(Instant.ofEpochMilli(0)).stop(Instant.ofEpochMilli(100000)).build(),
+            GeoRestriction.builder().region(Region.NL).start(Instant.ofEpochMilli(0)).stop(Instant.ofEpochMilli(100000)).platform(Platform.TVVOD).build()
+        );
     }
+
+
 
     default T withTitles() {
         return titles(

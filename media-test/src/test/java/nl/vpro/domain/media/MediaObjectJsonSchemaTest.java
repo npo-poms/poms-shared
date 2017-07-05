@@ -177,7 +177,7 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testRegions() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"regions\":[\"NL\",\"BENELUX\"],\"genres\":[],\"countries\":[],\"languages\":[]}";
+        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"regions\":[\"NL\",\"BENELUX\",\"TVVOD:NL\"],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withGeoRestrictions().build();
         String actual = toJson(program);

@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.8
  */
-public class GeoRestrictionTest extends ObjectTest<GeoRestriction> {
+public class GeoRestrictionTheoryTest extends ObjectTest<GeoRestriction> {
 
     @DataPoint
     public static GeoRestriction nullArgument = null;
