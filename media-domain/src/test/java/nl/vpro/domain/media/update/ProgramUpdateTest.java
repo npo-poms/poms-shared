@@ -220,8 +220,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <region platform=\"INTERNETVOD\">BENELUX</region>\n" +
             "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:16:40+01:00\" platform=\"INTERNETVOD\">NL</region>\n" +
+            "    <region platform=\"INTERNETVOD\">BENELUX</region>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
