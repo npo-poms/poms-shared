@@ -301,6 +301,7 @@
       <xs:extension base="xs:string">
         <xs:attribute type="geoRestrictionEnum" name="regionId"/>
         <xs:attributeGroup ref="restrictionAttributesGroup"/>
+        <xs:attribute type="platformTypeEnum" name="platform"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
