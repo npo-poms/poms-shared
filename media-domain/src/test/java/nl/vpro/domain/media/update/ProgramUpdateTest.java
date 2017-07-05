@@ -218,7 +218,15 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setGeoRestrictions(new TreeSet<>(Arrays.asList(
             new GeoRestrictionUpdate(new GeoRestriction(Region.BENELUX)), new GeoRestrictionUpdate(new GeoRestriction(Region.NL, Instant.ofEpochMilli(0), Instant.ofEpochMilli((1000000)))))));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><region>BENELUX</region><region stop=\"1970-01-01T01:16:40+01:00\" start=\"1970-01-01T01:00:00+01:00\">NL</region><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <region platform=\"INTERNETVOD\">BENELUX</region>\n" +
+            "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:16:40+01:00\" platform=\"INTERNETVOD\">NL</region>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
