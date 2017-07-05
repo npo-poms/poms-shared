@@ -172,6 +172,7 @@
       <xs:extension base="restriction">
         <xs:sequence/>
         <xs:attribute name="regionId" type="region"/>
+        <xs:attribute name="platform" type="platformTypeEnum"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -490,6 +491,15 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="platformTypeEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INTERNETVOD"/>
+      <xs:enumeration value="TVVOD"/>
+      <xs:enumeration value="PLUSVOD"/>
+      <xs:enumeration value="NPOPLUSVOD"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="textualTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="MAIN"/>
@@ -595,15 +605,6 @@
       <xs:enumeration value="ANNOUNCED"/>
       <xs:enumeration value="REALIZED"/>
       <xs:enumeration value="REVOKED"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="platformTypeEnum">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="INTERNETVOD"/>
-      <xs:enumeration value="TVVOD"/>
-      <xs:enumeration value="PLUSVOD"/>
-      <xs:enumeration value="NPOPLUSVOD"/>
     </xs:restriction>
   </xs:simpleType>
 
