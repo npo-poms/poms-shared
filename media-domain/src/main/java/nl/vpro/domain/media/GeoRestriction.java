@@ -101,7 +101,11 @@ public class GeoRestriction extends Restriction implements Comparable<GeoRestric
 
     @JsonValue
     protected String getJsonValue() {
-        return (platform == null || platform == Platform.INTERNETVOD ? "" : (platform.name() + ":")) + region.toString();
+        return getJsonValue(platform, region);
+    }
+
+    public static String getJsonValue(Platform platform, Region region) {
+        return (platform == null || platform == Platform.INTERNETVOD ? "" : (platform.name() + ":")) + region.name();
     }
 
     @Override

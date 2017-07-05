@@ -41,7 +41,6 @@ public abstract class AbstractTextConstraint<T> implements WildTextConstraint<T>
         return value;
     }
 
-    @Override
     public void setValue(String value) {
         this.value = value;
     }

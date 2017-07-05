@@ -52,7 +52,6 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
     public final String getValue() {
         return getXmlValue();
     }
-    @Override
     public final void setValue(String s) {
         this.enumValue = getByXmlValue(s);
         this.value = null;
