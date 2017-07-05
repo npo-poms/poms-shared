@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.zip.CRC32;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -573,6 +574,7 @@ public abstract class MediaObject extends PublishableObject
         source.getRelations().forEach(relation -> this.addRelation(Relation.copy(relation)));
         source.getImages().forEach(images -> this.addImage(Image.copy(images)));
         this.mergedTo = source.mergedTo;
+        this.streamingPlatformStatus = source.streamingPlatformStatus;
     }
 
     public static Long idFromUrn(String urn) {
@@ -2608,6 +2610,14 @@ public abstract class MediaObject extends PublishableObject
             addImage(img);
             return img;
         }
+    }
+
+    @Override
+    protected CRC32 calcCRC32() {
+        CRC32 result = super.calcCRC32();
+        // Some fields not appearing in XML, but which _are_ relevant changes
+        result.update(streamingPlatformStatus.ordinal());
+        return result;
     }
 
 }
