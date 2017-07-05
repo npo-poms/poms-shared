@@ -48,7 +48,7 @@ public class GeoRestriction extends Restriction implements Comparable<GeoRestric
     @Getter
     @Setter
     @XmlAttribute
-    protected Platform platform;
+    protected Platform platform = Platform.INTERNETVOD;
 
 
     @XmlTransient
@@ -110,7 +110,9 @@ public class GeoRestriction extends Restriction implements Comparable<GeoRestric
 
     @Override
     public int compareTo(GeoRestriction o) {
-        int result = platform.compareTo(o.platform);
+        Platform p1 = platform == null ? Platform.INTERNETVOD : platform;
+        Platform p2 = o.platform == null ? Platform.INTERNETVOD : o.platform;
+        int result = p1.compareTo(p2);
         if (result != 0) {
             return result;
         }
