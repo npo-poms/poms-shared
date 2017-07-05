@@ -31,7 +31,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 )
 @Getter
 @Setter
-public class GeoRestrictionUpdate {
+public class GeoRestrictionUpdate implements Comparable<GeoRestrictionUpdate> {
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -64,8 +64,18 @@ public class GeoRestrictionUpdate {
     }
 
     public GeoRestriction toGeoRestriction() {
-        return GeoRestriction.builder().region(region).start(start).stop(stop).platform(platform).build();
+        return GeoRestriction.builder()
+            .region(region)
+            .start(start)
+            .stop(stop)
+            .platform(platform)
+            .build();
     }
 
 
+    @Override
+    public int compareTo(GeoRestrictionUpdate o) {
+        return toGeoRestriction().compareTo(o.toGeoRestriction());
+
+    }
 }
