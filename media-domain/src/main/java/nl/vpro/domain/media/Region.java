@@ -10,12 +10,14 @@ import org.apache.commons.lang3.StringUtils;
 
 @XmlEnum
 public enum Region {
+
+
+    NL,
     /**
      * @deprecated Not supported by VMV
      */
     @Deprecated
-    BENELUX,
-    NL;
+    BENELUX;
 
     public static Region valueOfOrNull(String v) {
         if (StringUtils.isEmpty(v)) {
