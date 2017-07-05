@@ -121,7 +121,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
             return true; // we are always dirty if we don't have an id or crc
         }
 
-        currentState = calcCRC32();
+        currentState = calcCRC32().getValue();
 
         if(currentState != this.crc32) {
             // we are dirty
@@ -138,7 +138,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
      */
     @Override
     public void acceptChanges() {
-        this.crc32 = calcCRC32();
+        this.crc32 = calcCRC32().getValue();
     }
 
     public Long getHash() {
@@ -166,7 +166,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     }
 
 
-    protected long calcCRC32() {
+    protected CRC32 calcCRC32() {
         ByteArrayOutputStream baos = null;
         OutputStreamWriter writer = null;
 
@@ -184,7 +184,7 @@ public abstract class PublishableObject extends DomainObject implements Accounta
             if(log.isDebugEnabled()) {
                 log.debug(new String(serialized));
             }
-            return crc32Local.getValue();
+            return crc32Local;
 
         } finally {
 
