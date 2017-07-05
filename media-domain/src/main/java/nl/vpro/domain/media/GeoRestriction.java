@@ -120,7 +120,7 @@ public class GeoRestriction extends Restriction implements Comparable<GeoRestric
         if (result != 0) {
             return result;
         }
-        return Objects.compare(start, o.start, (o1, o2) -> o1 == null ? -1 : o1.compareTo(o2));
+        return Objects.compare(start, o.start, (o1, o2) -> o1 == null ? -1 : (o2 == null ? 1 : o1.compareTo(o2)));
 
     }
 
