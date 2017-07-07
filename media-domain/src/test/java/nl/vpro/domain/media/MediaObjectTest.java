@@ -392,8 +392,8 @@ public class MediaObjectTest {
             .creationInstant(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
             .scheduleEvents(
-                new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(13), java.time.Duration.ofMillis(10)),
-                new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(3), java.time.Duration.ofMillis(10))
+                ScheduleEvent.builder().channel(Channel.NED2).start(Instant.ofEpochMilli(13)).duration(java.time.Duration.ofMillis(10)).rerun(true).build(),
+                ScheduleEvent.builder().channel(Channel.NED1).start(Instant.ofEpochMilli(3)).duration(java.time.Duration.ofMillis(10)).build()
             )
             .build();
 
