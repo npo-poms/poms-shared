@@ -45,6 +45,7 @@
       <xsd:element name="findDeleted" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="excludedMid" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="descendantOf" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="streamingPlatformStatus" type="streamingStatus" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
     <xsd:attribute name="forOwner" type="shared:ownerTypeEnum"/>
   </xsd:complexType>
@@ -145,6 +146,7 @@
           <xsd:element name="numberOfLocations" type="xsd:int" minOccurs="0"/>
           <xsd:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="image" type="tns:imageListItem" minOccurs="0"/>
+          <xsd:element name="streamingPlatformStatus" type="streamingStatus" minOccurs="0"/>
         </xsd:sequence>
         <xsd:attribute name="mid" type="xsd:string"/>
         <xsd:attribute name="avType" type="avTypeEnum"/>
