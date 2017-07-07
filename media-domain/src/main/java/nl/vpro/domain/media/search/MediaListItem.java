@@ -55,7 +55,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "locations",
             "numberOfLocations",
             "tags",
-            "image"
+            "image",
+            "streamingPlatformStatus"
         }
 )
 public class MediaListItem extends PublishableListItem {
@@ -157,7 +158,7 @@ public class MediaListItem extends PublishableListItem {
 
     @Getter
     @Setter
-    private StreamingStatus streamingStatus;
+    private StreamingStatus streamingPlatformStatus;
 
     public MediaListItem() {
     }
