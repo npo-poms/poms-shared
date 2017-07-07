@@ -501,11 +501,13 @@ public class MediaObjectXmlSchemaTest {
             "            <duration>P0DT0H0M0.050S</duration>\n" +
             "        </scheduleEvent>\n" +
             "        <scheduleEvent channel=\"HOLL\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "            <repeat isRerun=\"true\"/>\n" +
             "            <guideDay>1970-01-08+01:00</guideDay>\n" +
             "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
             "            <duration>P0DT0H0M0.250S</duration>\n" +
             "        </scheduleEvent>\n" +
             "        <scheduleEvent channel=\"CONS\" urnRef=\"urn:vpro:media:program:100\">\n" +
+            "            <repeat isRerun=\"true\"/>\n" +
             "            <guideDay>1970-01-10+01:00</guideDay>\n" +
             "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
             "            <duration>P0DT0H0M0.200S</duration>\n" +
