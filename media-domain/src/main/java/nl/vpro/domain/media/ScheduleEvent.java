@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 import java.util.SortedSet;
@@ -776,5 +777,15 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public String getMainDescription() {
         return TextualObject.super.getMainDescription();
     }
+    public static class Builder {
 
+        public Builder localStart(int year, int month, int day, int hour, int minute) {
+            return start(LocalDateTime.of(year, month, day, hour, minute).atZone(Schedule.ZONE_ID).toInstant());
+        }
+
+        public Builder rerun(boolean b) {
+            return repeat(b ? Repeat.rerun() : Repeat.original());
+        }
+
+    }
 }
