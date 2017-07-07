@@ -26,7 +26,7 @@ import nl.vpro.domain.media.Region;
 public class GeoRestrictionConstraint implements TextConstraint<MediaObject> {
 
 
-    @XmlValue
+
     @Getter
     @Setter
     private Region region;
@@ -60,6 +60,12 @@ public class GeoRestrictionConstraint implements TextConstraint<MediaObject> {
             .stream()
             .anyMatch(g -> g.getRegion() == region && platform == null || Objects.equals(platform, g.getPlatform()));
 
+    }
+
+    @XmlValue
+    // @XmlValue directory on region gives JAXB mappings troubles ApiMappingsTest fails.
+    protected String getXmlValue() {
+        return region.name();
     }
 
     @Override

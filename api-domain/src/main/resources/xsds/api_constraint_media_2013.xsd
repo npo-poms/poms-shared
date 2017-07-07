@@ -2,6 +2,7 @@
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:constraint:media:2013" xmlns:tns="urn:vpro:api:constraint:media:2013" xmlns:constraint="urn:vpro:api:constraint:2014" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:m="urn:vpro:media:2009">
 
   <xs:import namespace="urn:vpro:media:2009" schemaLocation="https://poms.omroep.nl/schema/vproMedia.xsd"/>
+
   <xs:import namespace="urn:vpro:api:constraint:2014" schemaLocation="api_constraint_2014.xsd"/>
 
   <xs:element name="filter" type="tns:filter"/>
@@ -214,9 +215,13 @@
     <xs:sequence/>
   </xs:complexType>
 
-  <xs:simpleType name="geoRestrictionConstraintType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
+  <xs:complexType name="geoRestrictionConstraintType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="platform" type="m:platformTypeEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:simpleType name="ageRatingConstraintType">
     <xs:restriction base="xs:string"/>
@@ -233,10 +238,9 @@
   <xs:complexType name="hasContentRatingConstraintType">
     <xs:sequence/>
   </xs:complexType>
-  
+
   <xs:simpleType name="genreConstraintType">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
-  
 </xs:schema>
 
