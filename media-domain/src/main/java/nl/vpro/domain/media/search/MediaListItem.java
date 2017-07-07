@@ -1,8 +1,10 @@
 package nl.vpro.domain.media.search;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Instant;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.SortedSet;
 
@@ -15,6 +17,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.StreamingStatus;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
@@ -58,9 +61,13 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class MediaListItem extends PublishableListItem {
 
     @XmlAttribute
+    @Getter
+    @Setter
     private String mid;
 
     @XmlAttribute
+    @Getter
+    @Setter
     private AVType avType;
 
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -70,15 +77,25 @@ public class MediaListItem extends PublishableListItem {
     private Instant lastPublished;
 
     @XmlAttribute
+    @Getter
+    @Setter
     private String mediaType;
 
     @XmlAttribute
+    @Getter
+    @Setter
     private Boolean episodesLocked;
 
+    @Getter
+    @Setter
     private String description;
 
+    @Getter
+    @Setter
     private String title;
 
+    @Getter
+    @Setter
     private String subTitle;
 
     @XmlTransient
@@ -89,34 +106,58 @@ public class MediaListItem extends PublishableListItem {
 
 
     @XmlElement(name = "broadcaster")
+    @Getter
+    @Setter
     private List<Broadcaster> broadcasters;
 
     @XmlElement(name = "tag")
     @JsonProperty("tags")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @Getter
+    @Setter
     private SortedSet<Tag> tags;
 
     @XmlTransient
+    @Getter
+    @Setter
     private List<Portal> portals;
 
     @XmlTransient
+    @Getter
+    @Setter
     private List<ThirdParty> thirdParties;
 
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @Getter
+    @Setter
     private Instant sortDate;
 
+    @Getter
+    @Setter
     private MediaType type;
 
+    @Getter
+    @Setter
     private SortedSet<Location> locations;
 
+    @Getter
+    @Setter
     private Integer numberOfLocations;
 
+    @Getter
+    @Setter
     private ImageListItem image;
 
+    @Getter
+    @Setter
     private ScheduleEvent firstScheduleEvent;
+
+    @Getter
+    @Setter
+    private StreamingStatus streamingStatus;
 
     public MediaListItem() {
     }
@@ -166,21 +207,6 @@ public class MediaListItem extends PublishableListItem {
         return (type == null ? "null" : type.getSubType().getUrnPrefix()) + id;
     }
 
-    public String getMid() {
-        return mid;
-    }
-
-    public void setMid(String mid) {
-        this.mid = mid;
-    }
-
-    public AVType getAvType() {
-        return avType;
-    }
-
-    public void setAvType(AVType avType) {
-        this.avType = avType;
-    }
 
     @Override
     public Instant getLastPublished() {
@@ -194,117 +220,6 @@ public class MediaListItem extends PublishableListItem {
 
 
 
-    public String getMediaType() {
-        return mediaType;
-    }
-
-    public void setMediaType(String mediaType) {
-        this.mediaType = mediaType;
-    }
-
-    public Boolean getEpisodesLocked() {
-        return episodesLocked;
-    }
-
-    public void setEpisodesLocked(Boolean episodesLocked) {
-        this.episodesLocked = episodesLocked;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSubTitle() {
-        return subTitle;
-    }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
-
-    public List<Broadcaster> getBroadcasters() {
-        return broadcasters;
-    }
-
-    public void setBroadcasters(List<Broadcaster> broadcasters) {
-        this.broadcasters = broadcasters;
-    }
-
-    public List<Portal> getPortals() {
-        return portals;
-    }
-
-    public void setPortals(List<Portal> portals) {
-        this.portals = portals;
-    }
-
-    public List<ThirdParty> getThirdParties() {
-        return thirdParties;
-    }
-
-    public void setThirdParties(List<ThirdParty> thirdParties) {
-        this.thirdParties = thirdParties;
-    }
-
-    public Instant getSortDate() {
-        return sortDate;
-    }
-
-    public void setSortDate(Instant sortDate) {
-        this.sortDate = sortDate;
-    }
-
-    public MediaType getType() {
-        return type;
-    }
-
-    public void setType(MediaType type) {
-        this.type = type;
-    }
-
-    public SortedSet<Location> getLocations() {
-        return locations;
-    }
-
-    public void setLocations(SortedSet<Location> locations) {
-        this.locations = locations;
-    }
-
-    public SortedSet<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(SortedSet<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public ImageListItem getImage() {
-        return image;
-    }
-
-    public void setImage(ImageListItem image) {
-        this.image = image;
-    }
-
-    public ScheduleEvent getFirstScheduleEvent() {
-        return firstScheduleEvent;
-    }
-
-    public void setFirstScheduleEvent(ScheduleEvent firstScheduleEvent) {
-        this.firstScheduleEvent = firstScheduleEvent;
-    }
 
     @XmlElement(name = "createdBy")
     public String getCreatedByPrincipalId() {
@@ -387,13 +302,6 @@ public class MediaListItem extends PublishableListItem {
     }
 
 
-    public Integer getNumberOfLocations() {
-        return numberOfLocations;
-    }
-
-    public void setNumberOfLocations(Integer numberOfLocations) {
-        this.numberOfLocations = numberOfLocations;
-    }
 
     @Override
     public String toString() {
