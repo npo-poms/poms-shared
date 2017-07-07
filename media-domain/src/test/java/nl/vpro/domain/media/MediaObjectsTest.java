@@ -7,6 +7,7 @@ package nl.vpro.domain.media;
 import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,18 +67,25 @@ public class MediaObjectsTest {
         assertThat(MediaObjects.getSortInstant(segment)).isEqualTo(se.getStartInstant());
     }
 
+
+    /**
+     * MSE-3726 Sort date should be the most recent schedule event which is not a rerun
+     */
     @Test
     public void testSortDateWithScheduleEvents() throws Exception {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
             .scheduleEvents(
-                new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(13), Duration.ofMillis(10)),
-                new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(3), Duration.ofMillis(10))
+                ScheduleEvent.builder().channel(Channel.NED2).localStart(2015, 1, 1, 12, 30).duration(Duration.ofMinutes(10)).rerun(false).build(),
+                ScheduleEvent.builder().channel(Channel.NED2).localStart(2015, 1, 1, 17, 30).duration(Duration.ofMinutes(10)).rerun(true).build(),
+                ScheduleEvent.builder().channel(Channel.NED2).localStart(2017, 7, 7, 12, 30).duration(Duration.ofMinutes(10)).rerun(false).build(),
+                ScheduleEvent.builder().channel(Channel.NED2).localStart(2017, 7, 7, 17, 30).duration(Duration.ofMinutes(10)).rerun(true).build()
             )
             .build();
 
-        assertThat(MediaObjects.getSortInstant(program)).isEqualTo(Instant.ofEpochMilli(3));
+        assertThat(MediaObjects.getSortInstant(program).atZone(Schedule.ZONE_ID).toLocalDateTime())
+            .isEqualTo(LocalDateTime.of(2017, 7, 7, 12, 30));
     }
 
     @Test
