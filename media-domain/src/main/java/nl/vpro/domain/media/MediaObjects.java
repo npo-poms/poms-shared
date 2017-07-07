@@ -21,7 +21,6 @@ import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ObjectFilter;
 
-import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.support.Workflow.PUBLICATIONS;
 import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 
@@ -403,7 +402,9 @@ public class MediaObjects {
         }
         Instant date = null;
         if (mo.scheduleEvents != null && mo.scheduleEvents.size() > 0) {
-            date = sorted(mo.scheduleEvents).first().getStartInstant();
+            List<ScheduleEvent> list = new ArrayList<>(mo.scheduleEvents);
+            list.sort(Collections.reverseOrder());
+            date = list.stream().filter(se -> se.getRepeat() == null || !se.getRepeat().isRerun).findFirst().map(ScheduleEvent::getStartInstant).orElse(null);
         }
         if (date == null) {
             date = mo.getPublishStartInstant();
