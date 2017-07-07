@@ -1,5 +1,9 @@
 package nl.vpro.domain.media.support;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.1
@@ -29,6 +33,15 @@ public enum StreamingStatus {
     }
     public static StreamingStatus available(boolean drm) {
         return drm ? StreamingStatus.AVAILABLE_WITH_DRM : StreamingStatus.AVAILABLE;
+    }
+
+    public static Collection<StreamingStatus> availableStatuses() {
+        return Arrays.stream(values()).filter(StreamingStatus::isAvailable).collect(Collectors.toSet());
+    }
+
+
+    public static Collection<StreamingStatus> notAvailableStatuses() {
+        return Arrays.stream(values()).filter(s -> ! isAvailable(s)).collect(Collectors.toSet());
     }
 
     public boolean hasDrm() {

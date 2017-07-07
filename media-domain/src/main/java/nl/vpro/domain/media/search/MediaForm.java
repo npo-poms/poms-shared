@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.StreamingStatus;
 import nl.vpro.domain.user.Organization;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -205,6 +206,12 @@ public class MediaForm {
     @Getter
     @Setter
     private Collection<String> descendantOf;
+
+    @XmlElement(name = "streamingStatus")
+    @JsonProperty("streamingStatus")
+    @Getter
+    @Setter
+    private Collection<StreamingStatus> streamingStatuses;
 
 
     public MediaForm() {
