@@ -75,14 +75,20 @@ public class ApiScheduleEventTest {
                 "      \"guideDay\" : 601200000,\n" +
                 "      \"duration\" : 250,\n" +
                 "      \"midRef\" : \"VPROWON_12345\",\n" +
-                "      \"poProgID\" : \"VPROWON_12345\"\n" +
+                "      \"poProgID\" : \"VPROWON_12345\",\n" +
+                "      \"repeat\" : {\n" +
+                "        \"isRerun\" : true\n" +
+                "      }\n" +
                 "    }, {\n" +
                 "      \"channel\" : \"CONS\",\n" +
                 "      \"start\" : 864000600,\n" +
                 "      \"guideDay\" : 774000000,\n" +
                 "      \"duration\" : 200,\n" +
                 "      \"midRef\" : \"VPROWON_12345\",\n" +
-                "      \"poProgID\" : \"VPROWON_12345\"\n" +
+                "      \"poProgID\" : \"VPROWON_12345\",\n" +
+                "      \"repeat\" : {\n" +
+                "        \"isRerun\" : true\n" +
+                "      }\n" +
                 "    } ]\n" +
                 "  }\n" +
                 "}");
@@ -97,7 +103,7 @@ public class ApiScheduleEventTest {
         JAXB.marshal(scheduleEvent, writer);
         String xml = writer.toString();
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<api:scheduleItem channel=\"NED3\" midRef=\"VPROWON_12345\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "<api:scheduleItem channel=\"NED3\" midRef=\"VPROWON_12345\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <media:guideDay>1969-12-31+01:00</media:guideDay>\n" +
             "    <media:start>1970-01-01T01:00:00.100+01:00</media:start>\n" +
             "    <media:duration>P0DT0H0M0.200S</media:duration>\n" +
@@ -120,12 +126,14 @@ public class ApiScheduleEventTest {
             "                <media:poProgID>VPROWON_12345</media:poProgID>\n" +
             "            </media:scheduleEvent>\n" +
             "            <media:scheduleEvent channel=\"HOLL\" midRef=\"VPROWON_12345\">\n" +
+            "                <media:repeat isRerun=\"true\"></media:repeat>\n" +
             "                <media:guideDay>1970-01-08+01:00</media:guideDay>\n" +
             "                <media:start>1970-01-09T01:00:00.350+01:00</media:start>\n" +
             "                <media:duration>P0DT0H0M0.250S</media:duration>\n" +
             "                <media:poProgID>VPROWON_12345</media:poProgID>\n" +
             "            </media:scheduleEvent>\n" +
             "            <media:scheduleEvent channel=\"CONS\" midRef=\"VPROWON_12345\">\n" +
+            "                <media:repeat isRerun=\"true\"></media:repeat>\n" +
             "                <media:guideDay>1970-01-10+01:00</media:guideDay>\n" +
             "                <media:start>1970-01-11T01:00:00.600+01:00</media:start>\n" +
             "                <media:duration>P0DT0H0M0.200S</media:duration>\n" +
