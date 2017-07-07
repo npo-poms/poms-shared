@@ -60,7 +60,8 @@ import nl.vpro.domain.user.Organization;
     "imagesCount",
     "findDeleted",
     "excludedMids",
-    "descendantOf"
+    "descendantOf",
+    "streamingPlatformStatuses"
 
 })
 public class MediaForm {
