@@ -52,7 +52,7 @@ public class TransactionUUID {
     public static void newUUIDIfEmpty() {
         if (threadLocal.get() == null) {
             threadLocal.set(UUID.randomUUID());
-            log.info("Logging on transaction uuid {}", threadLocal.get());
+            log.debug("Logging on transaction uuid {}", threadLocal.get());
             consume();
         }
     }
