@@ -63,9 +63,13 @@ public class GeoRestrictionConstraint implements TextConstraint<MediaObject> {
     }
 
     @XmlValue
-    // @XmlValue directory on region gives JAXB mappings troubles ApiMappingsTest fails.
+    // @XmlValue directly on region gives JAXB mappings troubles ApiMappingsTest fails.
     protected String getXmlValue() {
-        return region.name();
+        return region == null ? null : region.name();
+    }
+
+    protected void setXmlValue(String s) {
+        this.region = Region.valueOf(s);
     }
 
     @Override
