@@ -2820,4 +2820,14 @@
 
     </xs:restriction>
   </xs:simpleType>
+
+
+  <xs:simpleType name="streamingStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NOT_AVAILABLE"/>
+      <xs:enumeration value="OFFLINE"/>
+      <xs:enumeration value="AVAILABLE"/>
+      <xs:enumeration value="AVAILABLE_WITH_DRM"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
