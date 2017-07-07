@@ -8,6 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -716,6 +717,7 @@ public enum MediaType {
     }
 
 
+    @NotNull
     public static MediaType getMediaType(MediaObject media) {
         SubMediaType type = media.getType();
         return type == null ? null : type.getMediaType();
