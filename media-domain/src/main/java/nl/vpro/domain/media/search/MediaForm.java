@@ -207,11 +207,11 @@ public class MediaForm {
     @Setter
     private Collection<String> descendantOf;
 
-    @XmlElement(name = "streamingStatus")
-    @JsonProperty("streamingStatus")
+    @XmlElement(name = "streamingPlatformStatus")
+    @JsonProperty("streamingPlatformStatus")
     @Getter
     @Setter
-    private Collection<StreamingStatus> streamingStatuses;
+    private Collection<StreamingStatus> streamingPlatformStatuses;
 
 
     public MediaForm() {
@@ -589,6 +589,11 @@ public class MediaForm {
     public boolean hasTags() {
         return tags != null && tags.size() > 0;
     }
+
+    public boolean hasStreamingPlatformStatuses() {
+        return streamingPlatformStatuses != null && streamingPlatformStatuses.size() > 0;
+    }
+
 
     public void setTags(Collection<String> tags) {
         this.tags = tags;
