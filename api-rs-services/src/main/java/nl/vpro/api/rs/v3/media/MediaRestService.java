@@ -6,7 +6,6 @@ package nl.vpro.api.rs.v3.media;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.Instant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,16 +28,16 @@ import nl.vpro.domain.media.MediaObject;
 import static nl.vpro.domain.api.Constants.*;
 
 /**
- * Endpoint which facilitates RPC like requests on media content. This API intents to capture meaningful and frequent
+ * <p>Endpoint which facilitates RPC like requests on media content. This API intents to capture meaningful and frequent
  * queries on media used when building a site or apps containing POMS media. This not a real REST API. It has no update
  * statements and it is mainly document oriented. Most calls will return a full media document and there are no separate
- * calls for sub-resources.
- * <p/>
+ * calls for sub-resources.</p>
+ * <p>
  * The API returns three media instance pageTypes: Programs, Groups and Segments. A Program result always includes it's
  * contained Segments, but it is possible to retrieve Segments on there own. This is useful when a Segment occurs
- * on a playlist for example.
- * <p/>
- * Media id's may be either a full urn or a mid. Retrieval by crid is not implemented at this moment.
+ * on a playlist for example. </p>
+ * <p>
+ * Media id's may be either a full urn or a mid. Retrieval by crid is not implemented at this moment.</p>
  *
  * @author Roelof Jan Koekoek
  * @since 2.0
@@ -55,7 +54,7 @@ public interface MediaRestService {
     String SINCE = "since";
     String PUBLISHEDSINCE = "publishedSince";
     String CHECK_PROFILE = "checkProfile";
-    String SKIP_DELETES = "skipDeletes";
+    String DELETES = "deletes";
 
     @GET
     @Path("/suggest")
@@ -209,11 +208,11 @@ public interface MediaRestService {
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SINCE) Long since,
-        @QueryParam(PUBLISHEDSINCE) Instant publishedSince,
+        @QueryParam(PUBLISHEDSINCE) String publishedSince,
         @QueryParam(ORDER) @DefaultValue(ASC) String order,
         @QueryParam(MAX) Integer max,
         @QueryParam(CHECK_PROFILE) Boolean profileCheck,
-        @QueryParam(SKIP_DELETES) Boolean skipDeletes,
+        @QueryParam(DELETES) Deletes skipDeletes,
         @Context HttpServletRequest request,
         @Context HttpServletResponse response) throws IOException;
 
@@ -230,4 +229,7 @@ public interface MediaRestService {
         @Context HttpServletRequest request,
         @Context HttpServletResponse response
     ) throws IOException;
+
+
+
 }
