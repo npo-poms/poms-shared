@@ -26,7 +26,7 @@ public interface MediaService extends MediaProvider {
 
     SuggestResult suggest(String input, String profile, Integer max);
 
-    Iterator<Change> changes(String profile, Instant since, Order order, Integer max, Long keepAlive, boolean withSequences) throws ProfileNotFoundException;
+    Iterator<Change> changes(String profile, boolean profileCheck, Instant since, String mid, Order order, Integer max, Long keepAlive, boolean withSequences) throws ProfileNotFoundException;
 
     @Override
     <T extends MediaObject> T findByMid(String mid);
