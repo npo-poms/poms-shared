@@ -1,4 +1,4 @@
-package nl.vpro.api.rs.v3.media;
+package nl.vpro.domain.api;
 
 /**
  * @author Michiel Meeuwissen

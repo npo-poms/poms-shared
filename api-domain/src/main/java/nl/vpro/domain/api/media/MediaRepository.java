@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.Iterator;
 
 import nl.vpro.domain.api.Change;
+import nl.vpro.domain.api.Deletes;
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.media.MediaObject;
@@ -30,7 +31,7 @@ public interface MediaRepository extends MediaLoader {
     @Deprecated
     Iterator<Change> changes(Long since, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);
 
-    Iterator<Change> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);
+    Iterator<Change> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive, Deletes deletes);
 
     Iterator<MediaObject> iterate(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
 
