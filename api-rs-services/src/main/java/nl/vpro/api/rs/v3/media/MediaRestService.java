@@ -18,10 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
-import nl.vpro.domain.api.Constants;
-import nl.vpro.domain.api.IdList;
-import nl.vpro.domain.api.MultipleMediaResult;
-import nl.vpro.domain.api.SuggestResult;
+import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.*;
 import nl.vpro.domain.media.MediaObject;
 
