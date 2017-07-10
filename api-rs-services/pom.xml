@@ -22,10 +22,10 @@
       <groupId>nl.vpro.api</groupId>
       <artifactId>api-domain</artifactId>
     </dependency>
-    <dependency>
+  <!--  <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-resteasy</artifactId>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>nl.vpro.media</groupId>
       <artifactId>media-domain</artifactId>

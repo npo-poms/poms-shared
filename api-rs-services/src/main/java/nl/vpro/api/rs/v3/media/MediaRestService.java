@@ -18,6 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.annotations.cache.NoCache;
+
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.*;
 import nl.vpro.domain.media.MediaObject;
@@ -201,6 +203,7 @@ public interface MediaRestService {
 
     @GET
     @Path("/changes/")
+    @NoCache
     InputStream changes(
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
@@ -209,7 +212,7 @@ public interface MediaRestService {
         @QueryParam(ORDER) @DefaultValue(ASC) String order,
         @QueryParam(MAX) Integer max,
         @QueryParam(CHECK_PROFILE) Boolean profileCheck,
-        @QueryParam(DELETES) Deletes skipDeletes,
+        @QueryParam(DELETES) Deletes deletes,
         @Context HttpServletRequest request,
         @Context HttpServletResponse response) throws IOException;
 
