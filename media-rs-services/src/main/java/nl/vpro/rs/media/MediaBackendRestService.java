@@ -39,7 +39,10 @@ public interface MediaBackendRestService {
     String FOLLOW = "followMerges";
     String ERRORS = "errors";
     String ID     = "id";
-    String MID    = "mid";
+    String MID = "mid";
+    String MAX = "max";
+    String OFFSET = "offset";
+    String ORDER = "order";
     String LANGUAGE = "language";
     String TYPE = "type";
     String VALIDATE_INPUT = "validateInput";
@@ -151,9 +154,9 @@ public interface MediaBackendRestService {
     MediaUpdateList<MemberUpdate> getGroupMembers(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam("offset") @DefaultValue("0") final Long offset,
-        @QueryParam("max") @DefaultValue("20") final Integer max,
-        @QueryParam("order") @DefaultValue("ASC") final String order,
+        @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
+        @QueryParam(MAX) @DefaultValue("20") final Integer max,
+        @QueryParam(ORDER) @DefaultValue("ASC") final String order,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
 
@@ -162,9 +165,9 @@ public interface MediaBackendRestService {
     MediaList<Member> getFullGroupMembers(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam("offset") @DefaultValue("0") final Long offset,
-        @QueryParam("max") @DefaultValue("20") final Integer max,
-        @QueryParam("order") @DefaultValue("ASC") final String order,
+        @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
+        @QueryParam(MAX) @DefaultValue("20") final Integer max,
+        @QueryParam(ORDER) @DefaultValue("ASC") final String order,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
 
@@ -217,9 +220,9 @@ public interface MediaBackendRestService {
     @Path("group/{id}/episodes")
     MediaUpdateList<MemberUpdate> getGroupEpisodes(
         @PathParam(ID) final String id,
-        @QueryParam("offset") @DefaultValue("0") final Long offset,
-        @QueryParam("max") @DefaultValue("10") final Integer max,
-        @QueryParam("order") @DefaultValue("ASC") final String order,
+        @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
+        @QueryParam(MAX) @DefaultValue("10") final Integer max,
+        @QueryParam(ORDER) @DefaultValue("ASC") final String order,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
 
@@ -228,9 +231,9 @@ public interface MediaBackendRestService {
     @Path("group/{id}/episodes/full")
     MediaList<Member> getFullGroupEpisodes(
         @PathParam(ID) final String id,
-        @QueryParam("offset") @DefaultValue("0") final Long offset,
-        @QueryParam("max") @DefaultValue("10") final Integer max,
-        @QueryParam("order") @DefaultValue("ASC") final String order,
+        @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
+        @QueryParam(MAX) @DefaultValue("10") final Integer max,
+        @QueryParam(ORDER) @DefaultValue("ASC") final String order,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
     ) throws IOException;
 
