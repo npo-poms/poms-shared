@@ -28,6 +28,10 @@ public class GeoRestrictionTheoryTest extends ObjectTest<GeoRestriction> {
     @DataPoint
     public static GeoRestriction nlNoTime = new GeoRestriction(Region.NL);
 
+
+    @DataPoint
+    public static GeoRestriction nlTvvod = GeoRestriction.builder().region(Region.NL).platform(Platform.TVVOD).build();
+
     @DataPoint
     public static GeoRestriction benelux = new GeoRestriction(Region.BENELUX, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
 
@@ -37,6 +41,7 @@ public class GeoRestrictionTheoryTest extends ObjectTest<GeoRestriction> {
     @Test
     public void testEquals() throws Exception {
         assertThat(new GeoRestriction(Region.BENELUX)).isEqualTo(new GeoRestriction(Region.BENELUX));
+        assertThat(GeoRestriction.builder().region(Region.BENELUX).platform(Platform.PLUSVOD).build()).isEqualTo(GeoRestriction.builder().region(Region.BENELUX).platform(Platform.PLUSVOD).build());
     }
 
     @Test
