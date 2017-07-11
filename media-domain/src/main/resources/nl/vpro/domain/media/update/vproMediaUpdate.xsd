@@ -182,6 +182,7 @@
     <xs:simpleContent>
       <xs:extension base="media:geoRestrictionEnum">
         <xs:attributeGroup ref="media:restrictionAttributesGroup"/>
+        <xs:attribute name="platform" type="media:platformTypeEnum"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
