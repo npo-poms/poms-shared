@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Locale;
 
 import org.junit.After;
@@ -180,9 +181,12 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"regions\":[\"NL\",\"BENELUX\",\"TVVOD:NL\"],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withGeoRestrictions().build();
-        String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        Program rounded = Jackson2TestUtil.roundTripAndSimilar(program, expected);
+        assertThat(rounded.getGeoRestrictions()).hasSize(3);
+        assertThat(rounded.getGeoRestrictions().first()).isEqualTo(program.getGeoRestrictions().first());
+        assertThat(rounded.getGeoRestrictions().contains(program.getGeoRestrictions().first())).isTrue();
+        assertThat(new ArrayList<>(rounded.getGeoRestrictions())).containsExactlyElementsOf(new ArrayList<>(program.getGeoRestrictions()));
     }
 
     @Test

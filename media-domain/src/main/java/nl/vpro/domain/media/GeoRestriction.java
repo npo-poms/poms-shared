@@ -61,7 +61,13 @@ public class GeoRestriction extends Restriction implements Comparable<GeoRestric
 
     public GeoRestriction(String region) {
         // When loading from JSON
-        this.region = Region.valueOf(region);
+        String[] split = region.split(":", 2);
+        if (split.length == 1) {
+            this.region = Region.valueOf(split[0]);
+        } else {
+            this.platform = Platform.valueOf(split[0]);
+            this.region = Region.valueOf(split[1]);
+        }
     }
 
     public GeoRestriction(Region region) {
@@ -108,6 +114,7 @@ public class GeoRestriction extends Restriction implements Comparable<GeoRestric
         return (platform == null || platform == Platform.INTERNETVOD ? "" : (platform.name() + ":")) + region.name();
     }
 
+
     @Override
     public int compareTo(GeoRestriction o) {
         Platform p1 = platform == null ? Platform.INTERNETVOD : platform;
@@ -123,5 +130,7 @@ public class GeoRestriction extends Restriction implements Comparable<GeoRestric
         return Objects.compare(start, o.start, (o1, o2) -> o1 == null ? -1 : (o2 == null ? 1 : o1.compareTo(o2)));
 
     }
+
+
 
 }
