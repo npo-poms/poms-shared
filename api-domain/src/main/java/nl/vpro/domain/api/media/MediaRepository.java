@@ -22,11 +22,11 @@ public interface MediaRepository extends MediaLoader {
 
     MediaResult list(Order order, long offset, Integer max);
 
-    MediaResult listMembers(MediaObject media, Order order, long offset, Integer max);
+    MediaResult listMembers(MediaObject media, ProfileDefinition<MediaObject> profile, Order order, long offset, Integer max);
 
-    MediaResult listDescendants(MediaObject media, Order order, long offset, Integer max);
+    MediaResult listDescendants(MediaObject media, ProfileDefinition<MediaObject> profile, Order order, long offset, Integer max);
 
-    ProgramResult listEpisodes(MediaObject media, Order order, long offset, Integer max);
+    ProgramResult listEpisodes(MediaObject media, ProfileDefinition<MediaObject> profile, Order order, long offset, Integer max);
 
     @Deprecated
     Iterator<Change> changes(Long since, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);

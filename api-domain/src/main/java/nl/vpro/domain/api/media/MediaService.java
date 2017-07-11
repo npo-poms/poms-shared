@@ -42,15 +42,15 @@ public interface MediaService extends MediaProvider {
 
     MediaSearchResult find(String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
-    MediaResult listMembers(MediaObject media, Order order, Long offset, Integer max);
+    MediaResult listMembers(MediaObject media, String profile, Order order, Long offset, Integer max);
 
     MediaSearchResult findMembers(MediaObject media, String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
-    ProgramResult listEpisodes(MediaObject media, Order order, Long offset, Integer max);
+    ProgramResult listEpisodes(MediaObject media, String profile, Order order, Long offset, Integer max);
 
     ProgramSearchResult findEpisodes(MediaObject media, String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
-    MediaResult listDescendants(MediaObject media, Order order, Long offset, Integer max);
+    MediaResult listDescendants(MediaObject media, String profile, Order order, Long offset, Integer max);
 
     MediaSearchResult findDescendants(MediaObject media, String profile, MediaForm form, Long offset, Integer max) throws ProfileNotFoundException;
 
