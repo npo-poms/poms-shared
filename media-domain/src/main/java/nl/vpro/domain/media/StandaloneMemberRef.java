@@ -42,7 +42,7 @@ public class StandaloneMemberRef {
 
     @XmlTransient
     public String getId() {
-        return midRef+ "/" + index;
+        return midRef+ "/" + index + "/" + childRef;
     }
 
     @XmlAttribute
