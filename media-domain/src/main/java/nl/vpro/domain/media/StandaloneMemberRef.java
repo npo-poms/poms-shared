@@ -48,11 +48,13 @@ public class StandaloneMemberRef {
 
     public static class Builder {
         public Builder memberRef(MemberRef ref) {
-            return added(ref.getAdded())
-                .highlighted(ref.isHighlighted())
-                .type(ref.getType())
-                .midRef(ref.getMidRef())
-                .index(ref.getNumber());
+            return
+                added(ref.getAdded())
+                    .highlighted(ref.isHighlighted())
+                    .type(ref.getType())
+                    .midRef(ref.getMidRef())
+                    .index(ref.getNumber())
+                ;
         }
     }
 
