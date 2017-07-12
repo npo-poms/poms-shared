@@ -2338,6 +2338,7 @@ public abstract class MediaObject extends PublishableObject
      * Method is needed for unmarshalling. It does nothing. It may do something
      * in overrides (as in {@link Group})
      */
+    @JsonIgnore
     final void setSortDate(Date date) {
         this.setSortInstant(DateUtils.toInstant(date));
     }
