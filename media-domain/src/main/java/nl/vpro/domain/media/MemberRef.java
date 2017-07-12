@@ -213,6 +213,12 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.owner = owner;
     }
 
+
+    /**
+     * Reference to the parent.
+     * The first non null of {@link #getMidRef}, {@link #getCridRef()}, {@link #getUrnRef}
+     * In the API this is equivalent to {@link #getMidRef}
+     */
     @XmlTransient
     public String getMediaRef() {
         String ref = getMidRef();
@@ -303,6 +309,10 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         cridRef = crid;
     }
 
+
+    /**
+     * The 'parent' of this relation
+     */
     @XmlAttribute
     public String getMidRef() {
         if(this.owner != null) {
