@@ -1,5 +1,9 @@
 package nl.vpro.domain.media;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
@@ -22,6 +26,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "index",
     "highlighted"
 })
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder(builderClassName = "Builder")
 public class StandaloneMemberRef {
 
     protected Instant added;
@@ -38,6 +44,16 @@ public class StandaloneMemberRef {
         type = ref.getType();
         midRef = ref.getMidRef();
         index = ref.getNumber();
+    }
+
+    public static class Builder {
+        public Builder memberRef(MemberRef ref) {
+            return added(ref.getAdded())
+                .highlighted(ref.isHighlighted())
+                .type(ref.getType())
+                .midRef(ref.getMidRef())
+                .index(ref.getNumber());
+        }
     }
 
     @XmlTransient
