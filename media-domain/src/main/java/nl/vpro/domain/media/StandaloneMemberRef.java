@@ -2,10 +2,7 @@ package nl.vpro.domain.media;
 
 import java.time.Instant;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -36,13 +33,16 @@ public class StandaloneMemberRef {
 
     public StandaloneMemberRef(String childRef, MemberRef ref) {
         this.childRef = childRef;
-
         added = ref.getAdded();
         highlighted = ref.isHighlighted();
         type = ref.getType();
         midRef = ref.getMidRef();
         index = ref.getNumber();
+    }
 
+    @XmlTransient
+    public String getId() {
+        return midRef+ "/" + index;
     }
 
     @XmlAttribute
