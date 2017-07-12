@@ -463,6 +463,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B memberOf(MemberRef... memberRef) throws CircularReferenceException {
+        for (MemberRef ref : memberRef) {
+            if (ref.getMember() == null) {
+                ref.setMember(mediaObject());
+            }
+        }
         mediaObject().getMemberOf().addAll(Arrays.asList(memberRef));
         return (B)this;
     }
@@ -778,6 +783,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         @SuppressWarnings("unchecked")
         public T episodeOf(MemberRef... memberRef) throws CircularReferenceException {
+            for(MemberRef ref : memberRef) {
+                if (ref.getMember() == null) {
+                    ref.setMember(mediaObject());
+                }
+            }
             mediaObject().getEpisodeOf().addAll(Arrays.asList(memberRef));
             return (T) this;
         }

@@ -150,6 +150,17 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.urnRef= source.urnRef;
     }
 
+
+    @lombok.Builder
+    private MemberRef(Long id, MediaObject member, MediaObject owner, Integer number, Instant added, String midRef) {
+        this.id = id;
+        this.member = member;
+        this.owner = owner;
+        this.number = number;
+        this.midRef = midRef;
+        this.added = added;
+    }
+
     public static MemberRef copy(MemberRef source){
         return copy(source, source.member);
     }
