@@ -2333,6 +2333,13 @@ public enum Channel {
         public String toString() {
             return "RTL Z";
         }
+    },
+    @XmlEnumValue("DVIC")
+    DVIC {
+        @Override
+        public String toString() {
+            return "Viceland";
+        }
     }
     ;
 
