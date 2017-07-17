@@ -867,6 +867,7 @@
       <xs:enumeration value="FLM1"/>
       <xs:enumeration value="ZGS1"/>
       <xs:enumeration value="BRTZ"/>
+      <xs:enumeration value="DVIC"/>
     </xs:restriction>
   </xs:simpleType>
 

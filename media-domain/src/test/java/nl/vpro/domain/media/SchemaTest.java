@@ -122,7 +122,8 @@ public class SchemaTest {
             .checkForIdentical()
             .build();
 
-        assertThat(diff.hasDifferences()).isFalse();
+        assertThat(diff.hasDifferences())
+            .withFailMessage("" + file + " should be equals to " + getClass().getResource("/schema/" + file.getName())).isFalse();
         return null;
     }
 
