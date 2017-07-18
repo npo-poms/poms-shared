@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.media.support.License;
+import nl.vpro.domain.image.support.License;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 /**

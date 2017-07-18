@@ -1,7 +1,7 @@
 package nl.vpro.domain.media.search;
 
 import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.License;
+import nl.vpro.domain.image.support.License;
 
 /**
  * @since 3.5
