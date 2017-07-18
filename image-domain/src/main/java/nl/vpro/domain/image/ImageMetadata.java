@@ -4,6 +4,10 @@
  */
 package nl.vpro.domain.image;
 
+import lombok.Data;
+import lombok.ToString;
+
+import java.io.Serializable;
 import java.net.URI;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,13 +15,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.image.support.License;
 
 /**
  * @author rico
  */
-@SuppressWarnings("serial")
-@XmlRootElement(name = "imageMetadata", namespace = Xmlns.IMAGE_NAMESPACE)
+@XmlRootElement(name = "imageMetadata")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(
     name = "imageMetadataType",
@@ -35,7 +38,12 @@ import nl.vpro.domain.Xmlns;
         "downloadUrl",
         "etag" }
 )
-public class ImageMetadata {
+@Data
+@ToString
+public class ImageMetadata implements Serializable {
+
+    private static final long serialVersionUID = 0L;
+
     private String urn;
 
     private ImageType imageType;
@@ -60,6 +68,11 @@ public class ImageMetadata {
 
     private String etag;
 
+    private License license;
+
+    private String source;
+
+    private String sourceName;
 
     public ImageMetadata() {
     }
@@ -78,6 +91,10 @@ public class ImageMetadata {
         metaData.size = image.getSize();
         metaData.downloadUrl = image.getDownloadUrl() == null ? null : URI.create(image.getDownloadUrl());
         metaData.etag = image.getEtag();
+        metaData.license = image.getLicense();
+        metaData.source = image.getSource();
+        metaData.sourceName = image.getSourceName();
+
         return metaData;
     }
 
@@ -94,120 +111,9 @@ public class ImageMetadata {
         image.setSize(size);
         image.setDownloadUrl(downloadUrl.toString());
         image.setEtag(etag);
+        image.setSource(source);
+        image.setSourceName(sourceName);
+        image.setLicense(license);
         return image;
-    }
-
-    public String getUrn() {
-        return urn;
-    }
-
-    public ImageType getImageType() {
-        return imageType;
-    }
-
-    public String getMimeType() {
-        return mimeType;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public Float getHeightInMm() {
-        return heightInMm;
-    }
-
-    public Float getWidthInMm() {
-        return widthInMm;
-    }
-
-    public Long getSize() {
-        return size;
-    }
-
-    public URI getDownloadUrl() {
-        return downloadUrl;
-    }
-
-    public String getEtag() {
-        return etag;
-    }
-
-    public void setUrn(String urn) {
-        this.urn = urn;
-    }
-
-    public void setImageType(ImageType imageType) {
-        this.imageType = imageType;
-    }
-
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public void setHeightInMm(Float heightInMm) {
-        this.heightInMm = heightInMm;
-    }
-
-    public void setWidthInMm(Float widthInMm) {
-        this.widthInMm = widthInMm;
-    }
-
-    public void setSize(Long size) {
-        this.size = size;
-    }
-
-    public void setDownloadUrl(URI downloadUrl) {
-        this.downloadUrl = downloadUrl;
-    }
-
-    public void setEtag(String etag) {
-        this.etag = etag;
-    }
-
-    @Override
-    public String toString() {
-        return "ImageMetaData{" +
-            "urn='" + urn + '\'' +
-            ", imageType=" + imageType +
-            ", mimeType='" + mimeType + '\'' +
-            ", title='" + title + '\'' +
-            ", description='" + description + '\'' +
-            ", height=" + height +
-            ", width=" + width +
-            ", heightInMm=" + heightInMm +
-            ", widthInMm=" + widthInMm +
-            ", size=" + size +
-            ", downloadUrl=" + downloadUrl +
-            ", etag='" + etag + '\'' +
-            '}';
     }
 }

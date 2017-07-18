@@ -5,6 +5,9 @@
 
 package nl.vpro.domain.image;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,15 +17,18 @@ import java.sql.SQLException;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.image.support.License;
 import nl.vpro.domain.image.support.PublishableObject;
+import nl.vpro.validation.WarningValidatorGroup;
 
 @Entity
-@XmlRootElement(name = "image", namespace = Xmlns.IMAGE_NAMESPACE)
+@XmlRootElement(name = "image")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(
     name = "imageType",
@@ -37,6 +43,7 @@ import nl.vpro.domain.image.support.PublishableObject;
         "size",
         "downloadUrl",
         "etag",
+        "license",
         "data"})
 public class Image extends PublishableObject<Image> implements Resource<Image>, Identifiable {
 
@@ -75,6 +82,20 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
 
     private byte[] hash;
 
+    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @Enumerated(EnumType.STRING)
+    @NotNull(groups = {WarningValidatorGroup.class})
+    @Getter@Setter
+    private License license;
+    @Getter
+    @Setter
+
+    private String source;
+    @Getter
+    @Setter
+
+    private String sourceName;
+
     @Lob
     private Blob data;
 
@@ -109,7 +130,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
     }
 
     @Override
-    @XmlElement(name = "title", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "title")
     public String getTitle() {
         return title;
     }
@@ -124,7 +145,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "description", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "description")
     public String getDescription() {
         return description;
     }
@@ -138,7 +159,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "mimeType", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "mimeType")
     public String getMimeType() {
         if(imageFormat == null) {
             return null;
@@ -151,7 +172,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "height", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "height")
     public Integer getHeight() {
         return height;
     }
@@ -161,7 +182,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "width", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "width")
     public Integer getWidth() {
         return width;
     }
@@ -171,7 +192,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "heightMm", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "heightMm")
     public Float getHeightInMm() {
         return heightInMm;
     }
@@ -181,7 +202,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "widthMm", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "widthMm")
     public Float getWidthInMm() {
         return widthInMm;
     }
@@ -191,7 +212,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "size", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "size")
     public Long getSize() {
         return size;
     }
@@ -233,7 +254,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "data", namespace = Xmlns.IMAGE_NAMESPACE)
+    @XmlElement(name = "data")
     @XmlMimeType("application/octet-stream")
     public DataHandler getData() {
         return new DataHandler(new DataSource() {
