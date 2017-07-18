@@ -16,6 +16,6 @@ public class SubtitlesMetadata {
 
     private SubtitlesId id;
     private Duration offset;
-    private int cueCount;
+    private Integer cueCount;
 
 }
