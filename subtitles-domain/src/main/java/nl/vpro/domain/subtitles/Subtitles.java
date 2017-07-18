@@ -286,6 +286,15 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         this.cueCount = cueCount;
     }
 
+    public SubtitlesMetadata getMetadata() {
+        return SubtitlesMetadata.builder()
+            .cueCount(getCueCount())
+            .offset(getOffset())
+            .id(getId())
+            .build()
+            ;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
