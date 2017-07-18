@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.support;
+package nl.vpro.domain.image.support;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;

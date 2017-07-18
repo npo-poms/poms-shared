@@ -35,7 +35,7 @@ import nl.vpro.domain.Embargos;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.media.support.License;
+import nl.vpro.domain.image.support.License;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;

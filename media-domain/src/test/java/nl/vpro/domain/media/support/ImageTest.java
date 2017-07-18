@@ -9,6 +9,7 @@ import javax.validation.Validator;
 
 import org.junit.Test;
 
+import nl.vpro.domain.image.support.License;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
