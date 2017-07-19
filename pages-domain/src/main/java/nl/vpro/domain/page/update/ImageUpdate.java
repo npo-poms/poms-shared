@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.image.support.License;
+import nl.vpro.domain.support.License;
 import nl.vpro.domain.page.Image;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.URI;

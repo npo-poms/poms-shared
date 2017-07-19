@@ -29,7 +29,7 @@ import nl.vpro.domain.Embargos;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.image.support.License;
+import nl.vpro.domain.support.License;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.secondscreen.Screen;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
