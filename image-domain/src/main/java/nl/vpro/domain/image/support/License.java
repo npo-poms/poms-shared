@@ -1,5 +1,9 @@
 package nl.vpro.domain.image.support;
 
+import lombok.Getter;
+
+import java.net.URI;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -16,20 +20,24 @@ import nl.vpro.domain.Xmlns;
 public enum License implements nl.vpro.domain.Displayable {
 
 
-    COPYRIGHTED("Copyrighted"),
-    PUBLIC_DOMAIN("Publiek domein"),
+    COPYRIGHTED("Copyrighted", null),
+    PUBLIC_DOMAIN("Publiek domein", null),
 
-    CC_BY("Naamsvermelding"),
-    CC_BY_SA("Naamsvermelding-GelijkDelen"),
-    CC_BY_ND("Naamsvermelding-GeenAfgeleideWerken"),
-    CC_BY_NC("Naamsvermelding-NietCommercieel"),
-    CC_BY_NC_SA("Naamsvermelding-NietCommercieel-GelijkDelen"),
-    CC_BY_NC_ND("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken");
+    CC_BY("Naamsvermelding", "https://creativecommons.org/licenses/by/3.0/"),
+    CC_BY_SA("Naamsvermelding-GelijkDelen", "https://creativecommons.org/licenses/by-sa/3.0/"),
+    CC_BY_ND("Naamsvermelding-GeenAfgeleideWerken", "https://creativecommons.org/licenses/by-nd/3.0/"),
+    CC_BY_NC("Naamsvermelding-NietCommercieel", "https://creativecommons.org/licenses/by-nc/3.0/"),
+    CC_BY_NC_SA("Naamsvermelding-NietCommercieel-GelijkDelen", "https://creativecommons.org/licenses/by-nc-sa/3.0/"),
+    CC_BY_NC_ND("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", "https://creativecommons.org/licenses/by-nc-nd/3.0/");
 
-    String displayName;
+    final String displayName;
+    @Getter
+    final URI url;
 
-    License(String displayName) {
+
+    License(String displayName, String url) {
         this.displayName = displayName;
+        this.url = URI.create(url);
     }
 
     @Override
