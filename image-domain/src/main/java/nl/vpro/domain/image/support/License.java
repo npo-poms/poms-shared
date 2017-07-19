@@ -23,7 +23,7 @@ public enum License implements nl.vpro.domain.Displayable {
     CC_BY_SA("Naamsvermelding-GelijkDelen"),
     CC_BY_ND("Naamsvermelding-GeenAfgeleideWerken"),
     CC_BY_NC("Naamsvermelding-NietCommercieel"),
-    CC_BY_NC_SA("Naamsvermelding-NietCommercieel"),
+    CC_BY_NC_SA("Naamsvermelding-NietCommercieel-GelijkDelen"),
     CC_BY_NC_ND("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken");
 
     String displayName;
