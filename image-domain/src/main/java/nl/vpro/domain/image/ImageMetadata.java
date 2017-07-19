@@ -36,7 +36,11 @@ import nl.vpro.domain.image.support.License;
         "mimeType",
         "size",
         "downloadUrl",
-        "etag" }
+        "etag",
+        "license",
+        "source",
+        "sourceName"
+    }
 )
 @Data
 @ToString
