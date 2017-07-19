@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.image.support.License;
+import nl.vpro.domain.support.License;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.URI;
 import nl.vpro.validation.WarningValidatorGroup;
