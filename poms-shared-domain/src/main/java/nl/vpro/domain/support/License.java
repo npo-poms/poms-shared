@@ -1,4 +1,4 @@
-package nl.vpro.domain.image.support;
+package nl.vpro.domain.support;
 
 import lombok.Getter;
 
@@ -37,7 +37,7 @@ public enum License implements nl.vpro.domain.Displayable {
 
     License(String displayName, String url) {
         this.displayName = displayName;
-        this.url = URI.create(url);
+        this.url = url == null ? null : URI.create(url);
     }
 
     @Override

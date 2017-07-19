@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.image.support.License;
+import nl.vpro.domain.support.License;
 import nl.vpro.domain.image.support.PublishableObject;
 import nl.vpro.validation.WarningValidatorGroup;
 
