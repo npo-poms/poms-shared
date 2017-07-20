@@ -123,7 +123,7 @@ public class SchemaTest {
             .build();
 
         assertThat(diff.hasDifferences())
-            .withFailMessage("" + file + " should be equals to " + getClass().getResource("/schema/" + file.getName())).isFalse();
+            .withFailMessage("" + file + " should be equal to " + getClass().getResource("/schema/" + file.getName())).isFalse();
         return null;
     }
 
