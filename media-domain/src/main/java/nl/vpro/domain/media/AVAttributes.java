@@ -18,11 +18,12 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "avAttributesType", propOrder = {
-        "bitrate",
-        "avFileFormat",
-        "videoAttributes",
-        "audioAttributes"
-        })
+    "bitrate",
+    "byteSize",
+    "avFileFormat",
+    "videoAttributes",
+    "audioAttributes"
+})
 public class AVAttributes implements Serializable {
     private static final long serialVersionUID = 1651506882422062995L;
 
