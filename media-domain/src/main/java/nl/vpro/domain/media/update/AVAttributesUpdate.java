@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.media.AVAttributes;
 import nl.vpro.domain.media.AVFileFormat;
-import nl.vpro.domain.Xmlns;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "avAtributeUpdateType", propOrder = {
@@ -22,16 +21,19 @@ import nl.vpro.domain.Xmlns;
         })
 public class AVAttributesUpdate {
 
-    @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
+    @XmlElement
     private Integer bitrate;
 
-    @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
+    @XmlElement
+    private Long byteSize;
+
+    @XmlElement
     private AVFileFormat avFileFormat;
 
-    @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
+    @XmlElement
     private AudioAttributesUpdate audioAttributes;
 
-    @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
+    @XmlElement
     private VideoAttributesUpdate videoAttributes;
 
     public static AVAttributesUpdate copy(AVAttributesUpdate from) {
@@ -40,6 +42,7 @@ public class AVAttributesUpdate {
         }
         AVAttributesUpdate result = new AVAttributesUpdate();
         result.bitrate = from.bitrate;
+        result.byteSize = from.byteSize;
         result.avFileFormat = from.avFileFormat;
         result.audioAttributes = AudioAttributesUpdate.copy(from.audioAttributes);
         result.videoAttributes = VideoAttributesUpdate.copy(from.videoAttributes);
@@ -75,7 +78,7 @@ public class AVAttributesUpdate {
 
     AVAttributes toAvAttributes() {
         AVAttributes result = new AVAttributes(bitrate, avFileFormat);
-
+        result.setByteSize(byteSize);
         if(audioAttributes != null) {
             result.setAudioAttributes(audioAttributes.toAudioAttributes());
         }
