@@ -81,6 +81,8 @@ public class ImageMetadata implements Serializable {
     public ImageMetadata() {
     }
 
+
+
     public static ImageMetadata of(Image image) {
         ImageMetadata metaData = new ImageMetadata();
         metaData.urn = image.getUrn();
@@ -120,4 +122,6 @@ public class ImageMetadata implements Serializable {
         image.setLicense(license);
         return image;
     }
+
+
 }
