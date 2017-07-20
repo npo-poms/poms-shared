@@ -403,6 +403,7 @@
   <xs:complexType name="avAttributesType">
     <xs:sequence>
       <xs:element type="xs:long" name="bitrate" minOccurs="0"/>
+      <xs:element name="byteSize" type="xs:long" minOccurs="0"/>
       <xs:element type="avFileFormatEnum" name="avFileFormat" minOccurs="0"/>
       <xs:element type="videoAttributesType" name="videoAttributes" minOccurs="0"/>
       <xs:element type="audioAttributesType" name="audioAttributes" minOccurs="0"/>
