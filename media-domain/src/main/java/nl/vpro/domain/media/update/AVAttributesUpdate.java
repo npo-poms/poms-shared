@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -25,6 +26,7 @@ public class AVAttributesUpdate {
     private Integer bitrate;
 
     @XmlElement
+    @Size(min = 0)
     private Long byteSize;
 
     @XmlElement
