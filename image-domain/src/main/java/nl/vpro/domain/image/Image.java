@@ -29,7 +29,7 @@ import nl.vpro.validation.WarningValidatorGroup;
 
 @Entity
 @XmlRootElement(name = "image")
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "imageType",
     propOrder = {
@@ -43,6 +43,8 @@ import nl.vpro.validation.WarningValidatorGroup;
         "size",
         "downloadUrl",
         "etag",
+        "source",
+        "sourceName",
         "license",
         "data"})
 public class Image extends PublishableObject<Image> implements Resource<Image>, Identifiable {
@@ -50,9 +52,11 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @XmlAttribute
     private ImageType imageType;
 
     @Enumerated(EnumType.STRING)
+    @XmlTransient
     private ImageFormat imageFormat;
 
     @Column(nullable = false)
@@ -69,8 +73,10 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
 
     private Integer width;
 
+    @XmlElement(name = "heightMm")
     private Float heightInMm;
 
+    @XmlElement(name = "widthMm")
     private Float widthInMm;
 
     private Long size;
@@ -80,26 +86,30 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
 
     private String etag;
 
+    @XmlTransient
     private byte[] hash;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @Enumerated(EnumType.STRING)
     @NotNull(groups = {WarningValidatorGroup.class})
-    @Getter@Setter
+    @Getter
+    @Setter
     private License license;
+
     @Getter
     @Setter
-
     private String source;
+
     @Getter
     @Setter
-
     private String sourceName;
 
     @Lob
+    @XmlTransient
     private Blob data;
 
     @Transient
+    @XmlTransient
     private InputStream cachedInputStream;
 
     public Image() {
@@ -109,7 +119,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         setTitle(title);
     }
 
-    @XmlAttribute
+
     public ImageType getImageType() {
         return imageType;
     }
@@ -119,7 +129,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlTransient
+
     public ImageFormat getImageFormat() {
         return imageFormat;
     }
@@ -130,7 +140,6 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
     }
 
     @Override
-    @XmlElement(name = "title")
     public String getTitle() {
         return title;
     }
@@ -145,7 +154,6 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "description")
     public String getDescription() {
         return description;
     }
@@ -159,7 +167,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "mimeType")
+    @XmlElement
     public String getMimeType() {
         if(imageFormat == null) {
             return null;
@@ -172,7 +180,6 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "height")
     public Integer getHeight() {
         return height;
     }
@@ -182,7 +189,6 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "width")
     public Integer getWidth() {
         return width;
     }
@@ -192,7 +198,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "heightMm")
+
     public Float getHeightInMm() {
         return heightInMm;
     }
@@ -202,7 +208,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlElement(name = "widthMm")
+
     public Float getWidthInMm() {
         return widthInMm;
     }
@@ -211,8 +217,6 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         this.widthInMm = widthInMm;
         return this;
     }
-
-    @XmlElement(name = "size")
     public Long getSize() {
         return size;
     }
@@ -222,7 +226,6 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @XmlTransient
     public String getSizeFormatted() {
         float result;
         String unit;
@@ -292,7 +295,7 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         });
     }
 
-    @XmlTransient
+
     void setCachedInputStream(InputStream cachedInputStream) {
         this.cachedInputStream = cachedInputStream;
     }
@@ -310,7 +313,6 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         this.downloadUrl = downloadUrl;
     }
 
-    @XmlTransient
     public byte[] getHash() {
         return hash;
     }
