@@ -15,11 +15,12 @@ import nl.vpro.domain.media.AVFileFormat;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "avAtributeUpdateType", propOrder = {
-        "bitrate",
-        "avFileFormat",
-        "videoAttributes",
-        "audioAttributes"
-        })
+    "bitrate",
+    "byteSize",
+    "avFileFormat",
+    "videoAttributes",
+    "audioAttributes"
+})
 public class AVAttributesUpdate {
 
     @XmlElement
