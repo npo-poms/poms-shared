@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -24,10 +24,11 @@ import nl.vpro.domain.media.AVFileFormat;
 public class AVAttributesUpdate {
 
     @XmlElement
+    @Min(0L)
     private Integer bitrate;
 
     @XmlElement
-    @Size(min = 0)
+    @Min(0L)
     private Long byteSize;
 
     @XmlElement
