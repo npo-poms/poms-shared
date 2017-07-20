@@ -1,10 +1,13 @@
 package nl.vpro.domain.media;
 
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -30,6 +33,11 @@ public class AVAttributes implements Serializable {
 
     @XmlElement
     private Integer bitrate;
+
+    @XmlElement
+    @Size(min = 0)
+    @Getter@Setter
+    private Long byteSize;
 
     @XmlElement
     @Enumerated(EnumType.STRING)
