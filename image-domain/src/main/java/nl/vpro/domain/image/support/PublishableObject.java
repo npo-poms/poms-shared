@@ -5,13 +5,22 @@
  */
 package nl.vpro.domain.image.support;
 
-import java.util.Date;
+import java.time.Instant;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.Accountable;
+import nl.vpro.domain.Embargo;
+import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.user.Editor;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * Publishable contains all items for Publishables.
@@ -23,9 +32,9 @@ import nl.vpro.domain.user.Editor;
 @SuppressWarnings("serial")
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publishableType", namespace = Xmlns.IMAGE_NAMESPACE)
-public abstract class PublishableObject<T extends PublishableObject<T>> extends AbstractDomainObject<T> implements Modifiable<T> {
+public abstract class PublishableObject<T extends PublishableObject<T>> extends AbstractDomainObject<T> implements Embargo, Accountable, Identifiable<Long> {
 
     @ManyToOne(optional = false)
     @XmlTransient
@@ -36,14 +45,34 @@ public abstract class PublishableObject<T extends PublishableObject<T>> extends 
     protected Editor lastModifiedBy;
 
     @Column(nullable = false)
-    protected Date creationDate = new Date();
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    protected Instant creationDate = Instant.now();
 
     @Column(nullable = false)
-    protected Date lastModified;
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    protected Instant lastModified;
 
-    protected Date publishStart = new Date();
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    protected Instant publishStart;
 
-    protected Date publishStop;
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    protected Instant publishStop;
 
     protected PublishableObject() {
     }
@@ -52,64 +81,88 @@ public abstract class PublishableObject<T extends PublishableObject<T>> extends 
         super(id);
     }
 
-    @XmlTransient
+    @Override
     public Editor getCreatedBy() {
         return createdBy;
     }
 
-    public T setCreatedBy(Editor createdBy0) {
+    @Override
+    public void setCreatedBy(Editor createdBy0) {
         this.createdBy = createdBy0;
-        return (T)this;
     }
 
-    @XmlTransient
+    @Override
     public Editor getLastModifiedBy() {
         return lastModifiedBy;
     }
 
-    public T setLastModifiedBy(Editor lastModifiedBy0) {
+    @Override
+    public void setLastModifiedBy(Editor lastModifiedBy0) {
         this.lastModifiedBy = lastModifiedBy0;
-        return (T)this;
     }
 
-    @XmlAttribute
-    public Date getLastModified() {
-        return lastModified;
+
+
+
+    @Override
+    public T setPublishStartInstant(Instant publishStart) {
+        this.publishStart = publishStart;
+        return (T) this;
+
     }
 
-    public T setLastModified(Date lastModified0) {
-        this.lastModified = lastModified0;
-        return (T)this;
+    @Override
+    public Embargo setPublishStopInstant(Instant publishStop) {
+        this.publishStop = publishStop;
+        return (T) this;
     }
 
-    @XmlAttribute
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public T setCreationDate(Date creationDate0) {
-        this.creationDate = creationDate0;
-        return (T)this;
-    }
-
-    @XmlAttribute
-    public Date getPublishStart() {
+    @Override
+    public Instant getPublishStartInstant() {
         return publishStart;
+
     }
 
-    public PublishableObject setPublishStart(Date publishStart0) {
-        this.publishStart = publishStart0;
-        return this;
-    }
-
-    @XmlAttribute
-    public Date getPublishStop() {
+    @Override
+    public Instant getPublishStopInstant() {
         return publishStop;
+
     }
 
-    public PublishableObject setPublishStop(Date publishStop0) {
-        this.publishStop = publishStop0;
-        return this;
+    @Override
+    public boolean hasChanges() {
+        return true;
+
+    }
+
+    @Override
+    public void acceptChanges() {
+
+    }
+
+    @Override
+
+    public Instant getLastModifiedInstant() {
+        return lastModified;
+
+    }
+
+    @Override
+    public void setLastModifiedInstant(Instant lastModified) {
+        this.lastModified = lastModified;
+
+    }
+
+    @Override
+    public Instant getCreationInstant() {
+        return creationDate;
+
+    }
+
+    @Override
+    public void setCreationInstant(Instant creationDate) {
+        this.creationDate = creationDate;
+
     }
 
     @XmlAttribute(name = "urn")

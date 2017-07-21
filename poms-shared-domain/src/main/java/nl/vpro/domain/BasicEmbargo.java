@@ -6,7 +6,7 @@ import java.time.Instant;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class BasicEmbargo implements Embargo {
+public class BasicEmbargo implements Embargo<BasicEmbargo> {
     private Instant publishStartInstant;
     private Instant publishStopInstant;
 

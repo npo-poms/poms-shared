@@ -5,9 +5,6 @@
  */
 package nl.vpro.domain.media.support;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
@@ -54,7 +51,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
-public abstract class PublishableObject extends DomainObject implements Accountable, EmbargoDeprecated {
+public abstract class PublishableObject<T extends PublishableObject<T>> extends DomainObject implements Accountable, EmbargoDeprecated<T> {
 
     public static final String DELETED_FILTER = "deletedFilter";
     public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
@@ -90,8 +87,6 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     protected Workflow workflow = Workflow.FOR_PUBLICATION;
-
-
 
     @Column(nullable = true)
     private Long crc32;
@@ -338,9 +333,9 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     }
 
     @Override
-    public PublishableObject setPublishStartInstant(Instant publishStart) {
+    public T setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
-        return this;
+        return (T) this;
     }
 
     @Override
@@ -355,9 +350,9 @@ public abstract class PublishableObject extends DomainObject implements Accounta
     }
 
     @Override
-    public PublishableObject setPublishStopInstant(Instant publishStop) {
+    public T setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
-        return this;
+        return (T) this;
     }
 
     protected abstract String getUrnPrefix();
