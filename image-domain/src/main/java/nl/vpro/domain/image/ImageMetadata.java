@@ -9,19 +9,25 @@ import lombok.ToString;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.time.Instant;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.Embargo;
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.support.License;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author rico
  */
 @XmlRootElement(name = "imageMetadata")
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "imageMetadataType",
     propOrder = {
@@ -39,12 +45,14 @@ import nl.vpro.domain.support.License;
         "etag",
         "license",
         "source",
-        "sourceName"
+        "sourceName",
+        "imageFormat"
+
     }
 )
 @Data
 @ToString
-public class ImageMetadata implements Serializable {
+public class ImageMetadata implements Serializable, Embargo<ImageMetadata> {
 
     private static final long serialVersionUID = 0L;
 
@@ -78,6 +86,23 @@ public class ImageMetadata implements Serializable {
 
     private String sourceName;
 
+    @XmlAttribute(name = "publishStart")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant publishStartInstant;
+
+    @XmlAttribute(name = "publishStop")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant publishStopInstant;
+
+    private ImageFormat imageFormat;
+
+
     public ImageMetadata() {
     }
 
@@ -100,7 +125,8 @@ public class ImageMetadata implements Serializable {
         metaData.license = image.getLicense();
         metaData.source = image.getSource();
         metaData.sourceName = image.getSourceName();
-
+        metaData.imageFormat = image.getImageFormat();
+        Embargos.copy(image, metaData);
         return metaData;
     }
 
@@ -120,8 +146,23 @@ public class ImageMetadata implements Serializable {
         image.setSource(source);
         image.setSourceName(sourceName);
         image.setLicense(license);
+        image.setImageFormat(imageFormat);
+        Embargos.copy(this, image);
         return image;
     }
 
 
+    @Override
+    public ImageMetadata setPublishStartInstant(Instant publishStart) {
+        this.publishStartInstant = publishStart;
+        return this;
+
+    }
+
+    @Override
+    public ImageMetadata setPublishStopInstant(Instant publishStop) {
+        this.publishStopInstant = publishStop;
+        return this;
+
+    }
 }
