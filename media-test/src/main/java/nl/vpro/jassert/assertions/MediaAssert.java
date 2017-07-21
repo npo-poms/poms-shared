@@ -22,9 +22,9 @@ import static nl.vpro.jassert.assertions.MediaAssertions.locationAssertThat;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
-public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObject> {
+public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObject<?>> {
 
-    protected MediaAssert(MediaObject actual) {
+    protected MediaAssert(MediaObject<?> actual) {
         super(actual, MediaAssert.class);
     }
 

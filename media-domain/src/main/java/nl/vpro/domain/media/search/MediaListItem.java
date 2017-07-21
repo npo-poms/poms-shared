@@ -163,7 +163,7 @@ public class MediaListItem extends PublishableListItem {
     public MediaListItem() {
     }
 
-    public MediaListItem(MediaObject media) {
+    public MediaListItem(MediaObject<?> media) {
         super(media);
 
         setUrn(media.getUrn());

@@ -1,6 +1,5 @@
 package nl.vpro.domain.media;
 
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -70,7 +69,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 
 })
 @Slf4j
-public class Location extends PublishableObject implements Ownable, Comparable<Location> {
+public class Location extends PublishableObject<Location> implements Ownable, Comparable<Location> {
     //TODO Validate URL, TYPE and Owner AVTYPE
 
     private static final long serialVersionUID = -140942203904508506L;
@@ -474,7 +473,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     }
 
     @Override
-    public PublishableObject setPublishStartInstant(Instant publishStart) {
+    public Location setPublishStartInstant(Instant publishStart) {
         if (! Objects.equals(this.publishStart, publishStart)) {
 
             super.setPublishStartInstant(publishStart);
@@ -509,7 +508,7 @@ public class Location extends PublishableObject implements Ownable, Comparable<L
     }
 
     @Override
-    public PublishableObject setPublishStopInstant(Instant publishStop) {
+    public Location setPublishStopInstant(Instant publishStop) {
         if (! Objects.equals(this.publishStop, publishStop)) {
 
             super.setPublishStopInstant(publishStop);

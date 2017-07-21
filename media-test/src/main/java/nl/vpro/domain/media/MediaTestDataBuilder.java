@@ -28,7 +28,7 @@ import nl.vpro.i18n.Locales;
 
 public interface MediaTestDataBuilder<
         T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>,
-        M extends MediaObject
+        M extends MediaObject<M>
         >
     extends MediaBuilder<T, M>, Cloneable {
 
