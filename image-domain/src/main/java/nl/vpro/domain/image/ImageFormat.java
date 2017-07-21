@@ -41,6 +41,9 @@ public enum ImageFormat {
     }
 
     public static ImageFormat forMimeType(String mimeType) throws UnsupportedImageFormatException {
+        if (mimeType == null) {
+            return null;
+        }
         for(ImageFormat type : ImageFormat.values()) {
             if(type.getMimeType().equals(mimeType.toLowerCase().trim())) {
                 return type;

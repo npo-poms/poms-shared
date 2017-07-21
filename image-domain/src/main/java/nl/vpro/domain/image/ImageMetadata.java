@@ -115,7 +115,7 @@ public class ImageMetadata implements Serializable {
         image.setHeightInMm(heightInMm);
         image.setWidthInMm(widthInMm);
         image.setSize(size);
-        image.setDownloadUrl(downloadUrl.toString());
+        image.setDownloadUrl(downloadUrl == null ? null : downloadUrl.toString());
         image.setEtag(etag);
         image.setSource(source);
         image.setSourceName(sourceName);
