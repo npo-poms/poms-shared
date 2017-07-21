@@ -80,10 +80,10 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     private Long id;
 
     @ManyToOne(optional = false)
-    protected MediaObject member;
+    protected MediaObject<?> member;
 
     @ManyToOne(optional = false)
-    protected MediaObject owner;
+    protected MediaObject<?> owner;
 
     @Transient
     protected String urnRef;
@@ -109,11 +109,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public MemberRef() {
     }
 
-    public MemberRef(MediaObject member, MediaObject owner, Integer number) {
+    public MemberRef(MediaObject<?> member, MediaObject<?> owner, Integer number) {
         this(null, member, owner, number);
     }
 
-    public MemberRef(Long id, MediaObject member, MediaObject owner, Integer number) {
+    public MemberRef(Long id, MediaObject<?> member, MediaObject<?> owner, Integer number) {
         if(member == null || owner == null) {
             throw new IllegalArgumentException(String.format("Must supply valid member and owner. Got member: %1$s and owner: %2$s", member, owner));
         }
@@ -504,7 +504,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     }
 
-    private boolean memberEqualsOnCrid(MediaObject thatMember) {
+    private boolean memberEqualsOnCrid(MediaObject<?> thatMember) {
         if(member.getCrids().isEmpty() || thatMember.getCrids().isEmpty()) {
             return false;
         }

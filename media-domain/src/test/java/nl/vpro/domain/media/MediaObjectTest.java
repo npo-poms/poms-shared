@@ -36,7 +36,7 @@ public class MediaObjectTest {
 
     @Test
     public void testAddCrid() {
-        MediaObject mediaObject = new Program();
+        MediaObject<?> mediaObject = new Program();
         mediaObject.addCrid(null);
         assertThat(mediaObject.getCrids()).isEmpty();
 
@@ -53,7 +53,7 @@ public class MediaObjectTest {
 
     @Test
     public void testAddTitle() {
-        MediaObject mediaObject = new Program();
+        Program mediaObject = new Program();
         mediaObject.addTitle(null);
         assertThat(mediaObject.getTitles()).isEmpty();
 
@@ -73,7 +73,7 @@ public class MediaObjectTest {
 
     @Test
     public void testAddDescription() {
-        MediaObject mediaObject = new Program();
+        Program mediaObject = new Program();
         mediaObject.addDescription(null);
         assertThat(mediaObject.getDescriptions()).isEmpty();
 

@@ -72,7 +72,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 })
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
-public abstract class MediaUpdate<M extends MediaObject>
+public abstract class MediaUpdate<M extends MediaObject<M>>
     implements
     EmbargoDeprecated,
     TextualObjectUpdate<TitleUpdate,DescriptionUpdate,  MediaUpdate<M>> {
@@ -95,7 +95,7 @@ public abstract class MediaUpdate<M extends MediaObject>
 
 
     @SuppressWarnings("unchecked")
-    public static <M extends MediaObject> MediaUpdate<M> create(M object) {
+    public static <M extends MediaObject<M>> MediaUpdate<M> create(M object) {
         if(object instanceof Program) {
             return (MediaUpdate<M>) ProgramUpdate.create((Program)object);
         } else if(object instanceof Group) {
@@ -105,7 +105,7 @@ public abstract class MediaUpdate<M extends MediaObject>
         }
     }
 
-    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object) {
+    public static <M extends MediaObject<M>, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object) {
         if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
             return (MediaUpdate<M>) SegmentUpdate.create((MediaBuilder.AbstractSegmentBuilder) object);
         } else if (object instanceof MediaBuilder.AbstractProgramBuilder) {

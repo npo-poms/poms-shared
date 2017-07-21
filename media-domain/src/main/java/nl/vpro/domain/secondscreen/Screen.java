@@ -47,7 +47,7 @@ import nl.vpro.validation.URI;
     "screenOf",
     "images"
 })
-public class Screen extends PublishableObject {
+public class Screen extends PublishableObject<Screen> {
 
     protected static final String SID_PREFIX = "SCREEN_";
 

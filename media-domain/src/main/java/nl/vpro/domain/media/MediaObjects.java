@@ -32,7 +32,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 public class MediaObjects {
 
 
-    public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
+    public static boolean equalsOnAnyId(MediaObject<?> first, MediaObject<?> second) {
         return first == second ||
             first.getId() != null && first.getId().equals(second.getId()) ||
             first.getUrn() != null && first.getUrn().equals(second.getUrn()) ||
@@ -40,7 +40,7 @@ public class MediaObjects {
             equalsOnCrid(first, second);
     }
 
-    public static boolean equalsOnCrid(MediaObject first, MediaObject second) {
+    public static boolean equalsOnCrid(MediaObject<?> first, MediaObject<?> second) {
         if (first.getCrids().isEmpty() || second.getCrids().isEmpty()) {
             return false;
         }
@@ -64,7 +64,7 @@ public class MediaObjects {
     /**
      * Sets the owner of all titles, descriptions, locations and images found in given MediaObject
      */
-    public static void forOwner(MediaObject media, OwnerType owner) {
+    public static void forOwner(MediaObject<?> media, OwnerType owner) {
         TextualObjects.forOwner(media, owner);
         for (Location location : media.getLocations()) {
             location.setOwner(owner);
@@ -207,7 +207,7 @@ public class MediaObjects {
         return hasChannel(media, Arrays.asList(channels));
     }
 
-    public static boolean hasChannel(MediaObject media, Collection<Channel> channels) {
+    public static boolean hasChannel(MediaObject<?> media, Collection<Channel> channels) {
         for (ScheduleEvent scheduleEvent : media.getScheduleEvents()) {
             if (channels.contains(scheduleEvent.getChannel())) {
                 return true;
@@ -216,7 +216,7 @@ public class MediaObjects {
         return false;
     }
 
-    public static ScheduleEvent findScheduleEventHonoringOffset(MediaObject media, ScheduleEvent source) {
+    public static ScheduleEvent findScheduleEventHonoringOffset(MediaObject<?> media, ScheduleEvent source) {
         for (ScheduleEvent existing : media.getScheduleEvents()) {
             if (ScheduleEvents.equalHonoringOffset(existing, source)) {
                 return existing;
@@ -257,7 +257,7 @@ public class MediaObjects {
         return result;
     }
 
-    public static Channel getChannel(MediaObject program) {
+    public static Channel getChannel(MediaObject<?> program) {
         for (ScheduleEvent se : program.getScheduleEvents()) {
             Repeat repeat = se.getRepeat();
             if (repeat == null || (!repeat.isRerun())) {
@@ -271,7 +271,7 @@ public class MediaObjects {
     /**
      * @since 2.2.3
      */
-    public static String getRelationText(MediaObject object, String relationType) {
+    public static String getRelationText(MediaObject<?> object, String relationType) {
         Relation rel = getRelation(object, relationType);
         return rel == null ? null : rel.getText();
     }
@@ -279,7 +279,7 @@ public class MediaObjects {
     /**
      * @since 3.3.0
      */
-    public static Relation getRelation(MediaObject object, String relationType) {
+    public static Relation getRelation(MediaObject<?> object, String relationType) {
         for (Relation relation : object.getRelations()) {
             if (relation.getType().equals(relationType)) {
                 return relation;
@@ -288,7 +288,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static TwitterRef getTwitterHash(MediaObject object) {
+    public static TwitterRef getTwitterHash(MediaObject<?> object) {
         for (TwitterRef ref : object.getTwitterRefs()) {
             if (ref.getType() == TwitterRef.Type.HASHTAG) {
                 return ref;
@@ -297,7 +297,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static TwitterRef getTwitterAccount(MediaObject object) {
+    public static TwitterRef getTwitterAccount(MediaObject<?> object) {
         for (TwitterRef ref : object.getTwitterRefs()) {
             if (ref.getType() == TwitterRef.Type.ACCOUNT) {
                 return ref;
@@ -306,7 +306,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static String getKijkwijzer(MediaObject media) {
+    public static String getKijkwijzer(MediaObject<?> media) {
         StringBuilder sb = new StringBuilder();
         if (media.getAgeRating() != null) {
             switch (media.getAgeRating()) {
@@ -335,7 +335,7 @@ public class MediaObjects {
     }
 
 
-    protected static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject, Set<MediaObject> handled) throws NotFoundException {
+    protected static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject<?> mediaObject, Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
@@ -369,7 +369,7 @@ public class MediaObjects {
         }
     }
 
-    public static void removeLocations(MediaObject mediaObject) {
+    public static void removeLocations(MediaObject<?> mediaObject) {
         while (mediaObject.getLocations().size() > 0) {
             mediaObject.removeLocation(mediaObject.getLocations().first());
         }
@@ -386,7 +386,7 @@ public class MediaObjects {
      * @since 2.1
      */
     @Deprecated
-    public static Date getSortDate(MediaObject mo) {
+    public static Date getSortDate(MediaObject<?> mo) {
         return DateUtils.toDate(getSortInstant(mo));
 
     }
@@ -464,7 +464,7 @@ public class MediaObjects {
         }
     }
 
-    public static boolean realizeAndExpirePredictions(MediaObject object) {
+    public static boolean realizeAndExpirePredictions(MediaObject<?> object) {
         boolean change = false;
         for (Prediction prediction : object.getPredictions()) {
             change |= realizeAndExpirePredictions(prediction.getPlatform(), object);
@@ -472,7 +472,7 @@ public class MediaObjects {
         return change;
     }
 
-    public static boolean realizeAndExpirePredictions(Platform platform, MediaObject object) {
+    public static boolean realizeAndExpirePredictions(Platform platform, MediaObject<?> object) {
         if (platform == null) {
             return false;
         }
@@ -519,13 +519,13 @@ public class MediaObjects {
     }
 
 
-    public static Prediction updatePrediction(MediaObject media, Platform platform, Prediction.State state) {
+    public static Prediction updatePrediction(MediaObject<?> media, Platform platform, Prediction.State state) {
         Prediction prediction = media.findOrCreatePrediction(platform);
         prediction.setState(state);
         return prediction;
     }
 
-    public static Prediction updatePrediction(MediaObject media, Platform platform, ReadonlyEmbargo embargo) {
+    public static Prediction updatePrediction(MediaObject<?> media, Platform platform, ReadonlyEmbargo embargo) {
         Prediction prediction = media.findOrCreatePrediction(platform);
         Embargos.copy(embargo, prediction);
         return prediction;
@@ -533,7 +533,7 @@ public class MediaObjects {
 
 
 
-    public static boolean subtitlesMayBePublished(MediaObject media) {
+    public static boolean subtitlesMayBePublished(MediaObject<?> media) {
         return media != null && PUBLICATIONS.contains(media.getWorkflow()) && media.getLocations().stream().anyMatch(l -> l.getWorkflow() == PUBLISHED);
     }
 
@@ -542,7 +542,7 @@ public class MediaObjects {
      *
      * TODO work in progress. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
      */
-    public static <T extends PublishableObject> T filterPublishable(T object) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T extends PublishableObject<T>> T filterPublishable(T object) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
                 return ((PublishableObject) o).isPublishable();
@@ -554,7 +554,8 @@ public class MediaObjects {
         log.debug("Filtered {} from {}", result.filterCount(), result.get());
         return result.get();
     }
-    public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+
+    public static <T extends PublishableObject<T>> T filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
                 return predicate.test(((PublishableObject) o).getWorkflow());
