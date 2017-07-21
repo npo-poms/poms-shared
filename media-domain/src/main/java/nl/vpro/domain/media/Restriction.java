@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Embargo;
 import nl.vpro.domain.EmbargoBuilder;
-import nl.vpro.domain.media.support.DomainObject;
+import nl.vpro.domain.DomainObject;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 

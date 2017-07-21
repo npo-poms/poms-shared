@@ -33,7 +33,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 
 /**
  * Contains the translations for the translatable fields of a {@link nl.vpro.domain.media.MediaObject}
- * 
+ *
  * @author Michiel Meeuwissen
  * @since 5.1
  */
@@ -41,9 +41,9 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @XmlRootElement(name = "media")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
-public class MediaObjectTranslation implements 
-    LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, TwitterRefTranslation, MediaObjectTranslation>, 
-    Identifiable<Long>, 
+public class MediaObjectTranslation implements
+    LocalizedObject<TitleTranslation, DescriptionTranslation, WebsiteTranslation, TwitterRefTranslation, MediaObjectTranslation>,
+    Identifiable<Long>,
     Accountable {
 
     @Id
@@ -239,17 +239,6 @@ public class MediaObjectTranslation implements
         this.twitterRefs = twitterRefs;
     }
 
-
-    @Override
-    public boolean hasChanges() {
-        return true;
-
-    }
-
-    @Override
-    public void acceptChanges() {
-
-    }
 
     @Override
     public String toString() {
