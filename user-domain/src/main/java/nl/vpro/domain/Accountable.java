@@ -11,14 +11,9 @@ import nl.vpro.domain.user.Editor;
  * @since 5.1
  */
 public interface Accountable {
-
-    boolean hasChanges();
-
-    /**
-     * Accept the mutations on this object. Saving an object directly after calling this, will not update last modified
-     */
-    void acceptChanges();
-
+    default boolean hasChanges() {
+        return true;
+    }
     Instant getLastModifiedInstant();
     void setLastModifiedInstant(Instant lastModified);
     Instant getCreationInstant();

@@ -7,16 +7,16 @@ package nl.vpro.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import nl.vpro.domain.media.support.PublishableObject;
+import nl.vpro.domain.Embargo;
 
-public class PublishableValidator implements ConstraintValidator<Publishable, PublishableObject> {
+public class PublishableValidator implements ConstraintValidator<Publishable, Embargo<?>> {
 
     @Override
     public void initialize(Publishable publishable) {
     }
 
     @Override
-    public boolean isValid(PublishableObject value, ConstraintValidatorContext constraintValidatorContext) {
+    public boolean isValid(Embargo<?> value, ConstraintValidatorContext constraintValidatorContext) {
         return value.getPublishStartInstant() == null
             || value.getPublishStopInstant() == null
             || value.getPublishStartInstant().toEpochMilli() <= value.getPublishStopInstant().toEpochMilli();

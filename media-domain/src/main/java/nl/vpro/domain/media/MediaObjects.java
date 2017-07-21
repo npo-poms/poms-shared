@@ -32,6 +32,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 public class MediaObjects {
 
 
+
     public static boolean equalsOnAnyId(MediaObject first, MediaObject second) {
         return first == second ||
             first.getId() != null && first.getId().equals(second.getId()) ||

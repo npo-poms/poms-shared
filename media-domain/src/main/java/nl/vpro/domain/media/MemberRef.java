@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -44,25 +43,25 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  */
 @Entity
 @FilterDefs({
-    @FilterDef(name = PublishableObject.INVERSE_PUBLICATION_FILTER),
-    @FilterDef(name = PublishableObject.INVERSE_EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")}),
-    @FilterDef(name = PublishableObject.INVERSE_DELETED_FILTER)
+    @FilterDef(name = MediaObject.INVERSE_PUBLICATION_FILTER),
+    @FilterDef(name = MediaObject.INVERSE_EMBARGO_FILTER, parameters = {@ParamDef(name = "broadcasters", type = "string")}),
+    @FilterDef(name = MediaObject.INVERSE_DELETED_FILTER)
 })
 @Filters({
-    @Filter(name =  PublishableObject.INVERSE_PUBLICATION_FILTER, condition = "((  " +
+    @Filter(name = MediaObject.INVERSE_PUBLICATION_FILTER, condition = "((  " +
         "       (select m.publishStart from mediaobject m where m.id = member_id) is null " +
         "       or now() > (select m.publishStart from mediaobject m where m.id = member_id)" +
         "    ) and (" +
         "       (select m.publishStop from mediaobject m where m.id = member_id) is null " +
         "       or now() < (select m.publishStop from mediaobject m where m.id = member_id)" +
         "    ))"),
-    @Filter(name = PublishableObject.INVERSE_EMBARGO_FILTER, condition = "(" +
+    @Filter(name = MediaObject.INVERSE_EMBARGO_FILTER, condition = "(" +
         "   (select m.publishStart from mediaobject m where m.id = member_id) is null " +
         "   or now() > (select m.publishStart from mediaobject m where m.id = member_id) " +
         "   or 'CLIP' != (select p.type from program p where p.id = member_id) " +
         "   or 0 < (select count(*) from mediaobject_broadcaster b where b.mediaobject_id = member_id and b.broadcasters_id in (:broadcasters))" +
         ")"),
-    @Filter(name = PublishableObject.INVERSE_DELETED_FILTER, condition = "(select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')")})
+    @Filter(name = MediaObject.INVERSE_DELETED_FILTER, condition = "(select m.workflow from mediaobject m where m.id = member_id and m.mergedTo_id is null) NOT IN ('MERGED', 'FOR_DELETION', 'DELETED')")})
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlType(name = "memberRefType")
