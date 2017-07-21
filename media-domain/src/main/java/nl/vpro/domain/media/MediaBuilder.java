@@ -35,7 +35,7 @@ import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toDate;
 
 @SuppressWarnings("ALL")
-public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObject> extends EmbargoBuilder<B> {
+public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObject<M>> extends EmbargoBuilder<B> {
 
     static ProgramBuilder program() {
         return new ProgramBuilder();
@@ -720,7 +720,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     @ToString
-    abstract class AbstractBuilder<T extends AbstractBuilder<T, M>, M extends MediaObject>  implements MediaBuilder<T, M>, Cloneable {
+    abstract class AbstractBuilder<T extends AbstractBuilder<T, M>, M extends MediaObject<M>>  implements MediaBuilder<T, M>, Cloneable {
 
         protected String mid;
 

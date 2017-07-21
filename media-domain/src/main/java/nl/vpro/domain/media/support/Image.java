@@ -87,7 +87,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "creationDate",
     "workflow"
 })
-public class Image extends PublishableObject implements Ownable {
+public class Image extends PublishableObject<Image> implements Ownable {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
     public static final String BASE_URN = "urn:vpro:media:image:";

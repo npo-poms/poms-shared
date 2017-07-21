@@ -2250,7 +2250,7 @@ public abstract class MediaObject<T extends MediaObject<T>> extends PublishableO
     }
 
     @Override
-    public PublishableObject setPublishStartInstant(Instant publishStart) {
+    public T setPublishStartInstant(Instant publishStart) {
         if (!Objects.equals(this.publishStart, publishStart)) {
             invalidateSortDate();
             if (hasInternetVodAuthority()) {
@@ -2261,7 +2261,7 @@ public abstract class MediaObject<T extends MediaObject<T>> extends PublishableO
     }
 
     @Override
-    public PublishableObject setPublishStopInstant(Instant publishStop) {
+    public T setPublishStopInstant(Instant publishStop) {
         if (!Objects.equals(this.publishStop, publishStop)) {
             invalidateSortDate();
             if (hasInternetVodAuthority()) {
