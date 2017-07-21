@@ -46,7 +46,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "license",
         "source",
         "sourceName",
-        "imageFormat"
+        "imageFormat",
+        "credits"
 
     }
 )
@@ -86,6 +87,8 @@ public class ImageMetadata implements Serializable, Embargo<ImageMetadata> {
 
     private String sourceName;
 
+    private String credits;
+
     @XmlAttribute(name = "publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
@@ -99,6 +102,13 @@ public class ImageMetadata implements Serializable, Embargo<ImageMetadata> {
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant publishStopInstant;
+
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant date;
 
     private ImageFormat imageFormat;
 
