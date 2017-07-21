@@ -23,7 +23,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.*;
-import nl.vpro.domain.image.support.PublishableObject;
 import nl.vpro.domain.support.License;
 import nl.vpro.validation.WarningValidatorGroup;
 
@@ -47,7 +46,7 @@ import nl.vpro.validation.WarningValidatorGroup;
         "sourceName",
         "license",
         "data"})
-public class Image extends PublishableObject<Image> {
+public class Image extends AbstractPublishableObject<Image> {
 
 
     @Enumerated(EnumType.STRING)
@@ -302,8 +301,8 @@ public class Image extends PublishableObject<Image> {
     }
 
     @Override
-    public String getUrn() {
-        return getId() == null ? null : "urn:vpro:image:" + getId();
+    protected String getUrnPrefix() {
+        return "urn:vpro:image:";
     }
 
     public String getDownloadUrl() {

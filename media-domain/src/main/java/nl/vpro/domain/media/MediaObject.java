@@ -63,6 +63,7 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.TextualObjects.sorted;
+import static nl.vpro.domain.media.MediaObject.*;
 
 /**
  * Base objects for programs and groups
@@ -178,10 +179,10 @@ import static nl.vpro.domain.TextualObjects.sorted;
         @ParamDef(name = "creationStop", type = "date") }),
     @FilterDef(name = "modifiedRange", parameters = { @ParamDef(name = "modifiedStart", type = "date"),
         @ParamDef(name = "modifiedStop", type = "date") }),
-    @FilterDef(name = PublishableObject.PUBLICATION_FILTER),
-    @FilterDef(name = PublishableObject.EMBARGO_FILTER, parameters = {
+    @FilterDef(name = PUBLICATION_FILTER),
+    @FilterDef(name = EMBARGO_FILTER, parameters = {
         @ParamDef(name = "broadcasters", type = "string") }),
-    @FilterDef(name = PublishableObject.DELETED_FILTER),
+    @FilterDef(name = DELETED_FILTER),
     @FilterDef(name = "relationFilter", parameters = { @ParamDef(name = "broadcasters", type = "string") }) })
 @Filters({
     @Filter(name = "titleFilter", condition = "0 < (select count(*) from title t where t.parent_id = id and lower(t.title) like :title)"),
@@ -203,16 +204,24 @@ import static nl.vpro.domain.TextualObjects.sorted;
         + ":eventStop >= (select min(e.start) from scheduleevent e where e.mediaobject_id = id)"),
     @Filter(name = "creationRange", condition = ":creationStart <= creationDate and :creationStop >= creationDate"),
     @Filter(name = "modifiedRange", condition = ":modifiedStart <= lastModified and :modifiedStop >= lastModified"),
-    @Filter(name = PublishableObject.PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
+    @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
         + "and (publishStop is null or publishStop > now())"),
-    @Filter(name = PublishableObject.EMBARGO_FILTER, condition = "(publishstart is null "
+    @Filter(name = EMBARGO_FILTER, condition = "(publishstart is null "
         + "or publishstart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
         + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))"),
-    @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)") })
+    @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)") })
 
 @Slf4j
 public abstract class MediaObject extends PublishableObject<MediaObject>
         implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject> {
+
+
+    public static final String DELETED_FILTER = "deletedFilter";
+    public static final String INVERSE_DELETED_FILTER = "inverseDeletedFilter";
+    public static final String PUBLICATION_FILTER = "publicationFilter";
+    public static final String INVERSE_PUBLICATION_FILTER = "inversePublicationFilter";
+    public static final String EMBARGO_FILTER = "embargoFilter";
+    public static final String INVERSE_EMBARGO_FILTER = "inverseEmbargoFilter";
 
     @Column(name = "mid", nullable = false, unique = true)
     @Size.List({ @Size(max = 255), @Size(min = 4) })

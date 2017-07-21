@@ -1,44 +1,42 @@
 /*
  * Copyright (C) 2007/2008 All rights reserved
- * VPRO Omroepvereniging, The Netherlands
- * Creation date 18 sep 2008
+ * VPRO, The Netherlands
  */
 
-package nl.vpro.domain.image.support;
+package nl.vpro.domain;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
+
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.Xmlns;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * @author roekoe
-
  */
 @MappedSuperclass
-@XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(name = "domainType", namespace = Xmlns.IMAGE_NAMESPACE)
-public abstract class AbstractDomainObject<T extends AbstractDomainObject<?>> implements DomainObject<T> {
+@XmlType(name = "domainObjectType", namespace = Xmlns.SHARED_NAMESPACE)
+@XmlAccessorType(XmlAccessType.FIELD)
+public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
+    @XmlTransient // Don't remove!
+    protected Long id;
 
-    protected AbstractDomainObject() {
+    public DomainObject() {
     }
 
-    protected AbstractDomainObject(Long id) {
+    protected DomainObject(Long id) {
         this.id = id;
     }
 
     @Override
-    @XmlTransient
     public Long getId() {
         return id;
     }
@@ -49,10 +47,9 @@ public abstract class AbstractDomainObject<T extends AbstractDomainObject<?>> im
      * While testing it sometimes comes in handy to be able to set an Id to simulate
      * a persisted object.
      */
-    @Override
-    public T setId(Long id) {
+    public DomainObject setId(Long id) {
         this.id = id;
-        return (T) this;
+        return this;
     }
 
     /**
@@ -76,21 +73,24 @@ public abstract class AbstractDomainObject<T extends AbstractDomainObject<?>> im
             return false;
         }
 
-        if(!(object instanceof AbstractDomainObject)) {
-            return false;
+        DomainObject that = (DomainObject)object;
+
+        if(this.getId() != null && that.getId() != null) {
+            return this.getId().equals(that.getId());
         }
 
-        DomainObject<?> domainObject = (DomainObject<?>)object;
-
-        if(this.getId() != null && domainObject.getId() != null) {
-            return this.getId().equals(domainObject.getId());
-        }
-
-        return this == domainObject;
+        return this == that;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return id != null ? id.hashCode() : super.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+            .append("id", id)
+            .toString();
     }
 }

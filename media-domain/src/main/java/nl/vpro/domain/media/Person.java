@@ -12,7 +12,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import nl.vpro.beeldengeluid.gtaa.GTAARecord;
-import nl.vpro.domain.media.support.DomainObject;
+import nl.vpro.domain.DomainObject;
 import nl.vpro.validation.NoHtml;
 
 @Entity
