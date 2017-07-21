@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.Instant;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -21,10 +22,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.support.License;
+import nl.vpro.domain.*;
 import nl.vpro.domain.image.support.PublishableObject;
+import nl.vpro.domain.support.License;
 import nl.vpro.validation.WarningValidatorGroup;
 
 @Entity
@@ -47,7 +47,7 @@ import nl.vpro.validation.WarningValidatorGroup;
         "sourceName",
         "license",
         "data"})
-public class Image extends PublishableObject<Image> implements Resource<Image>, Identifiable {
+public class Image extends PublishableObject<Image> {
 
 
     @Enumerated(EnumType.STRING)
@@ -139,12 +139,10 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
         return this;
     }
 
-    @Override
     public String getTitle() {
         return title;
     }
 
-    @Override
     public Image setTitle(String title) {
         if(title == null || title.length() < 255) {
             this.title = title;
@@ -227,6 +225,9 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
     }
 
     public String getSizeFormatted() {
+        if (size == null){
+            return null;
+        }
         float result;
         String unit;
 
@@ -328,4 +329,5 @@ public class Image extends PublishableObject<Image> implements Resource<Image>, 
     public void setEtag(String etag) {
         this.etag = etag;
     }
+
 }

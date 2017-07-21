@@ -211,8 +211,8 @@ import static nl.vpro.domain.TextualObjects.sorted;
     @Filter(name = PublishableObject.DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)") })
 
 @Slf4j
-public abstract class MediaObject extends PublishableObject
-        implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject> {
+public abstract class MediaObject<T extends MediaObject<T>> extends PublishableObject<T>
+        implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject<T>> {
 
     @Column(name = "mid", nullable = false, unique = true)
     @Size.List({ @Size(max = 255), @Size(min = 4) })
@@ -557,7 +557,7 @@ public abstract class MediaObject extends PublishableObject
         super(id);
     }
 
-    public MediaObject(MediaObject source) {
+    public MediaObject(MediaObject<?> source) {
         super(source);
         this.avType = source.avType;
         this.mid = source.mid;
@@ -2587,7 +2587,7 @@ public abstract class MediaObject extends PublishableObject
         return LocalizedObject.super.getShortDescription();
     }
 
-    public void mergeImages(MediaObject obj, OwnerType owner) {
+    public void mergeImages(MediaObject<?> obj, OwnerType owner) {
         List<Image> firstImages = new ArrayList<>();
         obj.getImages().forEach(i -> {
             if (Objects.equals(i.getOwner(), owner)) {

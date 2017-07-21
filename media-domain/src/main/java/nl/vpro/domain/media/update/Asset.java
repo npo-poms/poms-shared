@@ -28,7 +28,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "assetType", propOrder = {
     "source"
 })
-public class Asset implements Embargo {
+public class Asset implements Embargo<Asset> {
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)

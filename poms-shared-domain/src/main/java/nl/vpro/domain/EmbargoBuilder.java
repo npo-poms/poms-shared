@@ -2,10 +2,10 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-import nl.vpro.domain.media.Schedule;
 import nl.vpro.util.DateUtils;
 
 import static nl.vpro.util.DateUtils.toDate;
@@ -15,6 +15,9 @@ import static nl.vpro.util.DateUtils.toDate;
  * @since 5.3
  */
 public interface EmbargoBuilder<B extends EmbargoBuilder<B>> {
+
+    ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
+
 
     default B publishStart(Date date) {
         return publishStart(DateUtils.toInstant(date));
@@ -41,7 +44,7 @@ public interface EmbargoBuilder<B extends EmbargoBuilder<B>> {
     }
 
     static Date fromLocalDate(LocalDateTime date) {
-        return DateUtils.toDate(date, Schedule.ZONE_ID);
+        return DateUtils.toDate(date, ZONE_ID);
     }
 
 

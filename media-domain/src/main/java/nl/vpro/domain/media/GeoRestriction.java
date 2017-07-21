@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @SuppressWarnings("serial")
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class GeoRestriction extends Restriction implements Comparable<GeoRestriction> {
+public class GeoRestriction extends Restriction<GeoRestriction> implements Comparable<GeoRestriction> {
 
 
     public static class Builder extends RestrictionBuilder<Builder> {
