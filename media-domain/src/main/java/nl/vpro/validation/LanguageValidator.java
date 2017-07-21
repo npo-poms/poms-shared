@@ -19,7 +19,7 @@ import nl.vpro.domain.media.MediaObject;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class LanguageValidator implements ConstraintValidator<Language, MediaObject<?>> {
+public class LanguageValidator implements ConstraintValidator<Language, MediaObject> {
 
     // http://www-01.sil.org/iso639-3/documentation.asp?id=zxx
     private static final Set<String> VALID_ISO_LANGUAGES = new HashSet<>();
@@ -41,7 +41,7 @@ public class LanguageValidator implements ConstraintValidator<Language, MediaObj
     }
 
     @Override
-    public boolean isValid(MediaObject<?> value, ConstraintValidatorContext context) {
+    public boolean isValid(MediaObject value, ConstraintValidatorContext context) {
         for (Locale locale : value.getLanguages()) {
             if (! isValid(locale, context)) {
                 return false;
