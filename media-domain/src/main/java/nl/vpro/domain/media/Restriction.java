@@ -30,7 +30,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressWarnings("serial")
-abstract public class Restriction extends DomainObject implements Embargo {
+abstract public class Restriction<T extends Restriction<T>> extends DomainObject implements Embargo<T> {
 
 
     protected static abstract class RestrictionBuilder<B extends RestrictionBuilder<B>> implements EmbargoBuilder<B> {
@@ -148,9 +148,9 @@ abstract public class Restriction extends DomainObject implements Embargo {
     }
 
     @Override
-    public Restriction setPublishStartInstant(Instant publishStart) {
+    public T setPublishStartInstant(Instant publishStart) {
         setStart(publishStart);
-        return this;
+        return (T) this;
 
     }
 
@@ -161,9 +161,9 @@ abstract public class Restriction extends DomainObject implements Embargo {
     }
 
     @Override
-    public Restriction setPublishStopInstant(Instant publishStop) {
+    public T setPublishStopInstant(Instant publishStop) {
         setStop(publishStop);
-        return this;
+        return (T) this;
 
     }
 }

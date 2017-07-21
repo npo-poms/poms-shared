@@ -44,6 +44,8 @@ public class Roles {
 
 
     public static final String PUBLISHER_ROLE = "ROLE_MEDIA_PUBLISHER";
+
+    public static final String SCREEN_PUBLISHER_ROLE = "ROLE_SCREEN_PUBLISHER";
     /**
      * Support are people at NPO-helpdesk who can see everything, including deleted record, but edit nothing. (MSE-2015)
      */

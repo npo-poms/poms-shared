@@ -34,7 +34,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @JsonTypeName("segment")
 @SegmentValidation
-public class Segment extends MediaObject implements Comparable<Segment> {
+public class Segment extends MediaObject<Segment> implements Comparable<Segment> {
 
 
     private static final long serialVersionUID = -868293795041160925L;

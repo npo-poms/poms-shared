@@ -48,7 +48,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 
 })
 @JsonTypeName("program")
-public class Program extends MediaObject {
+public class Program extends MediaObject<Program> {
     private static final long serialVersionUID = 6174884273805175998L;
 
     // DRS I found that the 'hardcoded' mediaobject alias in the filter below changes when

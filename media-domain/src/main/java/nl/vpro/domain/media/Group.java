@@ -26,7 +26,7 @@ import nl.vpro.domain.media.exceptions.CircularReferenceException;
     "poSequenceInformation"
 })
 @JsonTypeName("group")
-public class Group extends MediaObject {
+public class Group extends MediaObject<Group> {
 
     private static final long serialVersionUID = 1L;
 

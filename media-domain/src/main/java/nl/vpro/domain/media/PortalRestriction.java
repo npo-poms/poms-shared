@@ -28,7 +28,7 @@ import nl.vpro.domain.user.Portal;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "portalRestrictionType")
 @SuppressWarnings("serial")
-public class PortalRestriction extends Restriction {
+public class PortalRestriction extends Restriction<PortalRestriction> {
 
     public static class Builder extends RestrictionBuilder<Builder> {
 
