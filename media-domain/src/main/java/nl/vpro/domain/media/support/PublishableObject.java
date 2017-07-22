@@ -289,9 +289,9 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
     @Override
     protected void beforeUnmarshal(Unmarshaller u, Object parent) {
-        // These things appear in XML, and if they don't, they are null (and not the default value in this class)
         super.beforeUnmarshal(u, parent);
-        creationDate = null;
+        // These things appear in XML, and if they don't, they are null (and not the default value in this class)
+        workflow = null;
     }
 
 
