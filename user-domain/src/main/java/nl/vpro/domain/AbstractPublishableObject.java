@@ -27,16 +27,14 @@ import nl.vpro.validation.Publishable;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
- * Publishable contains all items for Publishables, this is largely the abstract implemention of {@link Accountable} and {@link Embargo}.
+ * Abstract publishable object is an abstract implemention of {@link Accountable} and {@link Embargo}.
  *
- * @author arne
- * @author roekoe
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
 @Publishable(groups = {PomsValidatorGroup.class})
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
+@XmlType(name = "abstractPublishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
 public abstract class AbstractPublishableObject<T extends AbstractPublishableObject<T>>
