@@ -24,8 +24,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import nl.vpro.domain.*;
 import nl.vpro.util.DateUtils;
 import nl.vpro.validation.PomsValidatorGroup;
@@ -212,7 +210,6 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         return false;
     }
 
-    @XmlAttribute
     @Deprecated
     public Date getLastModified() {
         return DateUtils.toDate(lastModified);
@@ -239,8 +236,6 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         throw new IllegalArgumentException("The urn " + urn + " is not valid for objects with urns " + getUrnPrefix());
     }
 
-    @XmlAttribute(name = "publishDate")
-    @JsonProperty("publishDate")
     @Deprecated
     public Date getLastPublished() {
         return DateUtils.toDate(lastPublished);
