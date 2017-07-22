@@ -9,10 +9,10 @@ import javax.validation.ConstraintValidatorContext;
 
 import nl.vpro.domain.Embargo;
 
-public class PublishableValidator implements ConstraintValidator<Publishable, Embargo<?>> {
+public class PublishableValidator implements ConstraintValidator<EmbargoValidation, Embargo<?>> {
 
     @Override
-    public void initialize(Publishable publishable) {
+    public void initialize(EmbargoValidation publishable) {
     }
 
     @Override

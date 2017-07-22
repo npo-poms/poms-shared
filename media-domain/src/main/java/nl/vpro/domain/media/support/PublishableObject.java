@@ -28,7 +28,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import nl.vpro.domain.*;
 import nl.vpro.util.DateUtils;
 import nl.vpro.validation.PomsValidatorGroup;
-import nl.vpro.validation.Publishable;
+import nl.vpro.validation.EmbargoValidation;
 
 /**
  * A publishable object implements {@link Accountable} and {@link Embargo}, but furthermore also has {@link #workflow}.
@@ -38,7 +38,7 @@ import nl.vpro.validation.Publishable;
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-@Publishable(groups = {PomsValidatorGroup.class})
+@EmbargoValidation(groups = {PomsValidatorGroup.class})
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient

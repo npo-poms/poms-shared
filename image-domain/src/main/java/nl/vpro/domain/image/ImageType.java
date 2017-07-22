@@ -6,6 +6,9 @@ package nl.vpro.domain.image;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
+
+import org.apache.commons.lang3.StringUtils;
+
 import nl.vpro.domain.Xmlns;
 /**
  * @author rico
@@ -70,5 +73,13 @@ public enum ImageType {
 
     public String getDescription() {
         return description;
+    }
+
+    public static ImageType valueOfOrNull(String s) {
+        if (StringUtils.isBlank(s)) {
+            return null;
+        } else {
+            return valueOf(s);
+        }
     }
 }
