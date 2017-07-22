@@ -18,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Constraint(validatedBy = PublishableValidator.class)
 @Documented
-public @interface Publishable {
+public @interface EmbargoValidation {
     String message() default "{nl.vpro.constraints.publishable}";
 
     Class<?>[] groups() default {};

@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.PomsValidatorGroup;
-import nl.vpro.validation.Publishable;
+import nl.vpro.validation.EmbargoValidation;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -32,13 +32,13 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-@Publishable(groups = {PomsValidatorGroup.class})
+@EmbargoValidation(groups = {PomsValidatorGroup.class})
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "abstractPublishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
 public abstract class AbstractPublishableObject<T extends AbstractPublishableObject<T>>
-    extends DomainObject implements Accountable, Embargo<T> {
+    extends DomainObject implements Publishable<T> {
 
 
     @Column(nullable = false)
