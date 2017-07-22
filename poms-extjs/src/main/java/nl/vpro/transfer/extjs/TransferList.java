@@ -8,6 +8,8 @@ import java.util.*;
 
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
         "success",
@@ -26,6 +28,7 @@ public abstract class TransferList<T> implements Iterable<T> {
     protected Boolean writable = null;
 
     @XmlElement(name = "item")
+    @JsonProperty("list")
     protected List<T> list = new ArrayList<>();
 
     public TransferList<T> add(T transfer) {

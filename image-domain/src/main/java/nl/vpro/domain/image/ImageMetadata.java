@@ -14,6 +14,8 @@ import java.time.Instant;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -140,26 +142,57 @@ public class ImageMetadata implements Serializable, Embargo<ImageMetadata> {
         return metaData;
     }
 
-    public Image copyTo(Image image) {
+    public void copyToIfUnset(Image image) {
         // Can't do urn because it is a derivative field.
-        image.setImageType(imageType);
-        image.setMimeType(mimeType);
-        image.setTitle(title);
-        image.setDescription(description);
-        image.setHeight(height);
-        image.setWidth(width);
-        image.setHeightInMm(heightInMm);
-        image.setWidthInMm(widthInMm);
-        image.setSize(size);
-        image.setDownloadUrl(downloadUrl == null ? null : downloadUrl.toString());
-        image.setEtag(etag);
-        image.setSource(source);
-        image.setSourceName(sourceName);
-        image.setLicense(license);
-        image.setImageFormat(imageFormat);
-        Embargos.copy(this, image);
-        return image;
+        if (image.getImageType() == null) {
+            image.setImageType(imageType);
+        }
+        if (StringUtils.isEmpty(image.getMimeType())) {
+            image.setMimeType(mimeType);
+        }
+        if (StringUtils.isEmpty(image.getTitle())) {
+            image.setTitle(title);
+        }
+        if (StringUtils.isEmpty(image.getDescription())) {
+            image.setDescription(description);
+        }
+        if (image.getHeight() == null || image.getHeight() < 0) {
+            image.setHeight(height);
+        }
+        if (image.getWidth() == null || image.getWidth() < 0) {
+            image.setWidth(width);
+        }
+        if (image.getHeightInMm() == null || image.getHeightInMm() < 0f) {
+            image.setHeightInMm(heightInMm);
+        }
+        if (image.getWidthInMm() == null || image.getWidthInMm() < 0f) {
+            image.setWidthInMm(widthInMm);
+        }
+        if (image.getSize() == null || image.getSize() < 0) {
+            image.setSize(size);
+        }
+        if (image.getDownloadUrl() == null) {
+            image.setDownloadUrl(downloadUrl == null ? null : downloadUrl.toString());
+        }
+        if (image.getEtag() == null) {
+            image.setEtag(etag);
+        }
+        if (image.getSource() == null) {
+            image.setSource(source);
+        }
+        if (image.getSourceName() == null) {
+            image.setSourceName(sourceName);
+        }
+        if (image.getLicense() == null) {
+            image.setLicense(license);
+        }
+        if (image.getImageFormat() == null) {
+            image.setImageFormat(imageFormat);
+        }
+        Embargos.copyIfTargetUnset(this, image);
     }
+
+
 
 
     @Override
