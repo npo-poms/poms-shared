@@ -32,7 +32,7 @@ import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.Publishable;
 
 /**
- * Publishable contains all items for Publishables, this is largely the abstract implemention of {@link Accountable} and {@link Embargo}.
+ * A publishable object implements {@link Accountable} and {@link Embargo}, but furthermore also has {@link #workflow}.
  *
  * @author arne
  * @author roekoe
