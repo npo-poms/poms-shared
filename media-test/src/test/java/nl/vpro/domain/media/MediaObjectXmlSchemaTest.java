@@ -77,7 +77,7 @@ public class MediaObjectXmlSchemaTest {
 
     static {
         SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
-        Schema schema = null;
+        Schema schema;
         try {
             schema = factory.newSchema(new Source[]{
                 new StreamSource(factory.getClass().getResourceAsStream("/nl/vpro/domain/media/w3/xml.xsd")),
