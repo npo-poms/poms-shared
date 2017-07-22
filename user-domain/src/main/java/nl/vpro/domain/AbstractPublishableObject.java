@@ -88,6 +88,12 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
 
 
     @Override
+    @XmlAttribute(name = "lastModified")
+    @JsonProperty("lastModified")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getLastModifiedInstant() {
         return lastModified;
     }
@@ -201,6 +207,12 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     }
 
 
+    @XmlAttribute(name = "publishDate")
+    @JsonProperty("publishDate")
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getLastPublishedInstant() {
         return lastPublished;
     }
