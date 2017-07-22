@@ -2643,6 +2643,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
+    // overriden to give access to test
+    protected byte[] prepareForCRCCalc() {
+        return super.prepareForCRCCalc();
+    }
+
+    @Override
     protected CRC32 calcCRC32() {
         CRC32 result = super.calcCRC32();
         // Some fields not appearing in XML, but which _are_ relevant changes
