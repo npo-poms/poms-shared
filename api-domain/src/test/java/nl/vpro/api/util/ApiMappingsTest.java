@@ -20,7 +20,7 @@ import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.Xmlns;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
