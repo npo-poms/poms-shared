@@ -20,9 +20,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
-import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
-import static nl.vpro.domain.media.support.OwnerType.CERES;
-import static nl.vpro.domain.media.support.OwnerType.NEBO;
+import static nl.vpro.domain.media.support.OwnerType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.assertEquals;
@@ -470,7 +468,17 @@ public class MediaObjectTest {
             .id(1L)
             .build();
         program.acceptChanges();
-        assertThat(program.getHash()).isEqualTo(362556323L);
+        byte[] bytes = program.prepareForCRCCalc();
+        assertThat(new String(bytes)).isEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:10+01:00\"  creationDate=\"1970-01-01T01:00:10+01:00\" urn=\"urn:vpro:media:program:1\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+                "    <credits/>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>\n");
+
+        assertThat(program.getHash()).isEqualTo(2553230104L);
     }
 
 

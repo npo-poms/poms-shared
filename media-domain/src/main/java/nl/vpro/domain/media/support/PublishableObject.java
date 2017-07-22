@@ -8,6 +8,7 @@ package nl.vpro.domain.media.support;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.time.Instant;
@@ -117,42 +118,27 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         }
     }
 
+    protected byte[] prepareForCRCCalc() {
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
+             OutputStreamWriter writer = new OutputStreamWriter(baos)
+        ) {
+            JAXB.marshal(this, writer);
+            return prepareForCRCCalc(baos.toByteArray(), writer.getEncoding());
+        } catch (IOException ignored) {
+            return new byte[0];
+        }
+    }
+
 
     protected CRC32 calcCRC32() {
-        ByteArrayOutputStream baos = null;
-        OutputStreamWriter writer = null;
-
-        try {
-            byte[] serialized;
-            CRC32 crc32Local = new CRC32();
-            baos = new ByteArrayOutputStream();
-            writer = new OutputStreamWriter(baos);
-
-            JAXB.marshal(this, writer);
-            serialized = prepareForCRCCalc(baos.toByteArray(), writer.getEncoding());
-
-            crc32Local.reset();
-            crc32Local.update(serialized);
-            if(log.isDebugEnabled()) {
-                log.debug(new String(serialized));
-            }
-            return crc32Local;
-
-        } finally {
-
-            if(baos != null) {
-                try {
-                    baos.close();
-                } catch(Exception ignored) {
-                }
-            }
-            if(writer != null) {
-                try {
-                    writer.close();
-                } catch(Exception ignored) {
-                }
-            }
+        byte[] serialized = prepareForCRCCalc();
+        CRC32 crc32Local = new CRC32();
+        crc32Local.reset();
+        crc32Local.update(serialized);
+        if(log.isDebugEnabled()) {
+            log.debug(new String(serialized));
         }
+        return crc32Local;
     }
 
     public PublishableObject() {
