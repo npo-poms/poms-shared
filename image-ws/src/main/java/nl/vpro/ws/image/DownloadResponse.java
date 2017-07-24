@@ -6,7 +6,7 @@ package nl.vpro.ws.image;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.image.ImageMetadata;
+import nl.vpro.domain.image.BasicImageMetadata;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
@@ -21,7 +21,7 @@ public class DownloadResponse {
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private String urn;
 
-    private ImageMetadata imageMetadata;
+    private BasicImageMetadata imageMetadata;
 
 
     public DownloadResponse() {
@@ -31,7 +31,7 @@ public class DownloadResponse {
         this.urn = urn;
     }
 
-    public DownloadResponse(String urn, ImageMetadata imageMetadata) {
+    public DownloadResponse(String urn, BasicImageMetadata imageMetadata) {
         this.urn = urn;
         this.imageMetadata = imageMetadata;
     }
@@ -44,11 +44,11 @@ public class DownloadResponse {
         this.urn = urn;
     }
 
-    public ImageMetadata getImageMetadata() {
+    public BasicImageMetadata getImageMetadata() {
         return imageMetadata;
     }
 
-    public void setImageMetadata(ImageMetadata imageMetadata) {
+    public void setImageMetadata(BasicImageMetadata imageMetadata) {
         this.imageMetadata = imageMetadata;
     }
 

@@ -12,7 +12,7 @@ import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.Response;
 import javax.xml.ws.ResponseWrapper;
 
-import nl.vpro.domain.image.ImageMetadata;
+import nl.vpro.domain.image.BasicImageMetadata;
 import nl.vpro.domain.image.ImageType;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
@@ -40,7 +40,7 @@ public interface RunAsImageWebService {
     @ResponseWrapper(
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
-    ImageMetadata upload(
+    BasicImageMetadata upload(
     	@WebParam(name = "principalId", targetNamespace = "") String principalId,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
@@ -86,7 +86,7 @@ public interface RunAsImageWebService {
     @ResponseWrapper(
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
-    ImageMetadata download(
+    BasicImageMetadata download(
     	@WebParam(name = "principalId", targetNamespace = "") String principalId,
     	@WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
