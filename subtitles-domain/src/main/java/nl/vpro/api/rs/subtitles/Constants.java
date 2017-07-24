@@ -15,13 +15,13 @@ public class Constants {
 
 
     public static final String VTT = "text/vtt";
-    public static final MediaType VTT_TYPE = new MediaType("text", "vtt");
+    public static final MediaType VTT_TYPE = new MediaType("text", "vtt").withCharset("UTF-8");
 
     public static final String SRT = "text/srt";
-    public static final MediaType SRT_TYPE = new MediaType("text", "srt");
+    public static final MediaType SRT_TYPE = new MediaType("text", "srt").withCharset("cp1252");
 
     public static final String TT888 = "text/tt888";
-    public static final MediaType TT888_TYPE = new MediaType("text", "tt888");
+    public static final MediaType TT888_TYPE = new MediaType("text", "tt888").withCharset("ISO6937");
 
     public static final String EBU = "application/ebu-stl";
     public static final MediaType EBU_TYPE = new MediaType("application", "ebu-stl");
