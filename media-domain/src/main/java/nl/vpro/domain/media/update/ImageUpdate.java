@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -34,9 +35,10 @@ import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.image.Metadata;
 import nl.vpro.domain.media.support.Image;
-import nl.vpro.domain.support.License;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
@@ -66,30 +68,31 @@ import static nl.vpro.domain.media.update.MediaUpdate.VALIDATOR;
 })
 
 @Slf4j
-public class ImageUpdate implements Embargo {
+@Data
+public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> {
 
     @XmlAttribute(required = true)
     @NotNull
     private ImageType type;
 
     @XmlAttribute(name = "urn")
-    private String urnAttribute;
+    private String urn;
 
 
 
-    @XmlAttribute
+    @XmlAttribute(name = "publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    private Instant publishStart;
+    private Instant publishStartInstant;
 
-    @XmlAttribute
+    @XmlAttribute(name = "publishStop")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    private Instant publishStop;
+    private Instant publishStopInstant;
 
     @XmlAttribute(required = true)
     Boolean highlighted = false;
@@ -211,57 +214,37 @@ public class ImageUpdate implements Embargo {
         this.sourceName = sourceName;
         this.source = source;
         this.credits = credits;
-        this.publishStart = publishStart;
-        this.publishStop = publishStop;
+        this.publishStartInstant = publishStart;
+        this.publishStopInstant = publishStop;
     }
 
 
     public ImageUpdate(Image image) {
-        type = image.getType();
-        publishStart = image.getPublishStartInstant();
-        publishStop = image.getPublishStopInstant();
+        copyFrom(image);
         highlighted = image.isHighlighted();
-        title = image.getTitle();
-        description = image.getDescription();
         String imageUri = image.getImageUri();
         this.image = imageUri.startsWith("urn:") ?
             imageUri : new ImageLocation(image.getImageUri());
-        width = image.getWidth();
-        height = image.getHeight();
-        credits = image.getCredits();
-        source = image.getSource();
         date = image.getDate();
         offset = image.getOffset();
-        license = image.getLicense();
-        sourceName = image.getSourceName();
-        urnAttribute = image.getUrn();
+        urn = image.getUrn();
     }
 
     public Image toImage(String imageUri) {
         Image result = new Image(OwnerType.BROADCASTER, imageUri);
-        result.setType(type);
-        result.setTitle(title);
-        result.setDescription(description);
-        result.setPublishStartInstant(publishStart);
-        result.setPublishStopInstant(publishStop);
+        result.copyFrom(this);
         result.setHighlighted(highlighted);
-        result.setWidth(width);
-        result.setHeight(height);
-        result.setCredits(credits);
-        result.setSource(source);
-        result.setSourceName(sourceName);
-        result.setLicense(license);
         result.setDate(date);
         result.setOffset(offset);
-        result.setUrn(urnAttribute);
+        result.setUrn(urn);
         Embargos.copy(this, result);
         return result;
     }
 
-    public Image toImage(ImageMetadata metadata) {
+    public Image toImage(ImageMetadata<?> metadata) {
         Image result = toImage(metadata.getUrn());
-        if (metadata.getImageType() != null && type == null) {
-            result.setType(metadata.getImageType());
+        if (metadata.getType() != null && type == null) {
+            result.setType(metadata.getType());
         }
         if (StringUtils.isNotEmpty(metadata.getTitle()) && title == null) {
             result.setTitle(metadata.getTitle());
@@ -285,74 +268,33 @@ public class ImageUpdate implements Embargo {
         return result;
     }
 
-    public ImageType getType() {
-        return type;
-    }
 
-    public void setType(ImageType type) {
-        this.type = type;
-    }
-
-
-    public String getUrnAttribute() {
-        return urnAttribute;
-    }
-
-    public void setUrnAttribute(String s) {
-        this.urnAttribute = s;
-    }
 
     public Long getId() {
-        return Image.idFromUrn(urnAttribute);
+        return Image.idFromUrn(getUrn());
     }
 
 
     public void setId(Long id) {
-        urnAttribute = id == null ? null : Image.BASE_URN + id;
-    }
-
-    @Override
-    public Instant getPublishStartInstant() {
-        return publishStart;
+        urn = id == null ? null : Image.BASE_URN + id;
     }
 
     @Override
     public ImageUpdate setPublishStartInstant(Instant publishStart) {
-        this.publishStart = publishStart;
+        this.publishStartInstant = publishStart;
         return this;
     }
 
     @Override
     public Instant getPublishStopInstant() {
-        return publishStop;
+        return publishStopInstant;
     }
 
     @Override
     public ImageUpdate setPublishStopInstant(Instant publishStop) {
-        this.publishStop = publishStop;
+        this.publishStopInstant = publishStop;
         return this;
     }
-
-    @Deprecated
-    public Instant getPublishStart() {
-        return getPublishStartInstant();
-    }
-
-    @Deprecated
-    public ImageUpdate setPublishStart(Instant publishStart) {
-        return setPublishStartInstant(publishStart);
-    }
-
-    @Deprecated
-    public Instant getPublishStop() {
-        return getPublishStopInstant();
-    }
-
-    @Deprecated
-    public ImageUpdate setPublishStop(Instant publishStop) {
-        return setPublishStopInstant(publishStop);
-    }
-
 
     public Boolean isHighlighted() {
         return highlighted;
@@ -362,100 +304,12 @@ public class ImageUpdate implements Embargo {
         this.highlighted = highlighted;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public String getCredits() {
-        return credits;
-    }
-
-    public void setCredits(String credits) {
-        this.credits = credits;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
-
-
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
-
-    public License getLicense() {
-        return license;
-    }
-
-    public void setLicense(License license) {
-        this.license = license;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public java.time.Duration getOffset() {
-        return offset;
-    }
-
-    public void setOffset(java.time.Duration offset) {
-        this.offset = offset;
-    }
-
-    public Object getImage() {
-        return image;
-    }
 
     public void setImage(ImageData image) {
         this.image = image;
     }
 
     public void setImage(ImageLocation image) {
-        this.image = image;
-    }
-
-    public void setImage(Image image) {
         this.image = image;
     }
 
