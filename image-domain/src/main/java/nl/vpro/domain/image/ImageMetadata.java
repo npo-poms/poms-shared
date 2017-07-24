@@ -56,11 +56,11 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
     }
 
     @Override
-    default void copyFromIfUnset(Metadata<?> metadata) {
-        Metadata.super.copyFromIfUnset(metadata);
+    default void copyFromIfTargetUnset(Metadata<?> source) {
+        Metadata.super.copyFromIfTargetUnset(source);
 
-        if (metadata instanceof ImageMetadata) {
-            ImageMetadata<?> image = (ImageMetadata<?>) metadata;
+        if (source instanceof ImageMetadata) {
+            ImageMetadata<?> image = (ImageMetadata<?>) source;
             if (getHeightInMm() == null || getHeightInMm() < 0f) {
                 setHeightInMm(image.getHeightInMm());
             }
@@ -73,11 +73,39 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
             if (getDownloadUrl() == null) {
                 setDownloadUrl(image.getDownloadUrl());
             }
-            if (StringUtils.isEmpty(image.getEtag())) {
+            if (StringUtils.isEmpty(getEtag())) {
                 setEtag(image.getEtag());
             }
             if (getImageFormat() == null) {
                 setImageFormat(image.getImageFormat());
+            }
+        }
+    }
+
+
+    @Override
+    default void copyFromIfSourceSet(Metadata<?> metadata) {
+        Metadata.super.copyFromIfSourceSet(metadata);
+
+        if (metadata instanceof ImageMetadata) {
+            ImageMetadata<?> source = (ImageMetadata<?>) metadata;
+            if (source.getHeightInMm() != null && source.getHeightInMm() >= 0f) {
+                setHeightInMm(source.getHeightInMm());
+            }
+            if (source.getWidthInMm() != null && source.getWidthInMm() >= 0f) {
+                setWidthInMm(source.getWidthInMm());
+            }
+            if (source.getSize() != null && source.getSize() >= 0L) {
+                setSize(source.getSize());
+            }
+            if (source.getDownloadUrl() != null) {
+                setDownloadUrl(source.getDownloadUrl());
+            }
+            if (StringUtils.isNotEmpty(source.getEtag())) {
+                setEtag(source.getEtag());
+            }
+            if (source.getImageFormat() != null) {
+                setImageFormat(source.getImageFormat());
             }
         }
     }

@@ -10,6 +10,7 @@ import lombok.ToString;
 import java.io.Serializable;
 import java.net.URI;
 import java.time.Instant;
+import java.util.UUID;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -46,8 +47,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "source",
         "sourceName",
         "imageFormat",
-        "credits"
-
+        "credits",
+        "uploadId"
     }
 )
 @Data
@@ -106,6 +107,8 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
 
     private ImageFormat imageFormat;
 
+    private UUID uploadId;
+
 
     public BasicImageMetadata() {
     }
@@ -119,14 +122,6 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
         Embargos.copy(image, metaData);
         return metaData;
     }
-
-    public void copyToIfUnset(Image image) {
-        // Can't do urn because it is a derivative field.
-        image.copyFromIfUnset(this);
-        Embargos.copyIfTargetUnset(this, image);
-    }
-
-
 
 
     @Override
