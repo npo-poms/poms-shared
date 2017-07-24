@@ -2285,9 +2285,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
-    public void setCreationInstant(Instant publishStart) {
+    public void setCreationInstant(Instant creationInstant) {
         invalidateSortDate();
-        super.setCreationInstant(publishStart);
+        super.setCreationInstant(creationInstant);
     }
 
     @Override
