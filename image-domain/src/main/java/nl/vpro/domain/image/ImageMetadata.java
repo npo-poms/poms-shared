@@ -57,7 +57,8 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
         }
     }
 
-    default void copyFormIfUnset(Metadata<?> metadata) {
+    @Override
+    default void copyFromIfUnset(Metadata<?> metadata) {
         Metadata.super.copyFromIfUnset(metadata);
 
         if (metadata instanceof ImageMetadata) {
