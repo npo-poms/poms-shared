@@ -10,8 +10,6 @@ import org.apache.commons.lang3.StringUtils;
  */
 public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> {
 
-
-
     Float getHeightInMm();
 
     Float getWidthInMm();
