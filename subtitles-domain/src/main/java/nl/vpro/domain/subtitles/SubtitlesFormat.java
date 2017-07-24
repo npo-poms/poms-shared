@@ -24,9 +24,7 @@ public enum SubtitlesFormat {
     TT888("txt", Constants.TT888, ISO6937CharsetProvider.ISO6937),
     EBU("stl", Constants.EBU, null),
     SRT("srt", Constants.SRT, Charset.forName("cp1252"))
-
     ;
-
 
     @Getter
     private final String extension;

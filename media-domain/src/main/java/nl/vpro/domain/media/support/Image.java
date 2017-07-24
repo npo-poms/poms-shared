@@ -403,9 +403,9 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
         return credits;
     }
 
-    public Image setCredits(String credits) {
+    @Override
+    public void setCredits(String credits) {
         this.credits = !StringUtils.isBlank(credits) ? credits : null;
-        return this;
     }
 
     @Override

@@ -42,11 +42,12 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
     void setDescription(String description);
     void setSource(String source);
     void setSourceName(String sourceName);
+
     void setLicense(License license);
+
+    void setCredits(String credits);
     void setHeight(Integer height);
-
     void setWidth(Integer width);
-
     void setDate(String date);
 
     default void setDate(Instant instant) {
@@ -67,7 +68,7 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
         setLicense(image.getLicense());
         setSource(image.getSource());
         setSourceName(image.getSourceName());
-
+        setCredits(image.getCredits());
     }
 
 
@@ -96,6 +97,9 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
         }
         if (getLicense() == null) {
             setLicense(metadata.getLicense());
+        }
+        if (StringUtils.isEmpty(getCredits())) {
+            setCredits(metadata.getCredits());
         }
     }
 
