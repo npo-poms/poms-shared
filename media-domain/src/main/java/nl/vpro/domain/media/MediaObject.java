@@ -104,6 +104,7 @@ import static nl.vpro.domain.media.MediaObject.*;
         "websites",
         "twitterRefs",
         "teletext",
+        "isDubbed",
         "predictions",
         "locations",
         "scheduleEvents",
@@ -154,6 +155,7 @@ import static nl.vpro.domain.media.MediaObject.*;
     "websites",
     "twitter",
     "teletext",
+    "isDubbed",
     "predictions",
     "locations",
     "scheduleEvents",
@@ -426,6 +428,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected List<TwitterRef> twitterRefs;
 
     protected Short teletext;
+
+    @XmlElement
+    @Getter
+    @Setter
+    protected Boolean isDubbed;
 
     @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
@@ -1690,6 +1697,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     public void setTeletext(Short teletext) {
         this.teletext = teletext;
     }
+
+
 
     @XmlAttribute
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
