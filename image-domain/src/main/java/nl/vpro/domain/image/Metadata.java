@@ -69,38 +69,78 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
         setSource(image.getSource());
         setSourceName(image.getSourceName());
         setCredits(image.getCredits());
+        setDate(image.getDate());
     }
 
 
-    default void copyFromIfUnset(Metadata<?> metadata) {
+    default void copyFromIfTargetUnset(Metadata<?> source) {
 
         if (getType() == null) {
-            setType(metadata.getType());
+            setType(source.getType());
         }
         if (StringUtils.isEmpty(getTitle())) {
-            setTitle(metadata.getTitle());
+            setTitle(source.getTitle());
         }
         if (StringUtils.isEmpty(getDescription())) {
-            setDescription(metadata.getDescription());
+            setDescription(source.getDescription());
         }
         if (getHeight() == null || getHeight() < 0) {
-            setHeight(metadata.getHeight());
+            setHeight(source.getHeight());
         }
         if (getWidth() == null || getWidth() < 0) {
-            setWidth(metadata.getWidth());
+            setWidth(source.getWidth());
         }
         if (StringUtils.isEmpty(getSource())) {
-            setSource(metadata.getSource());
+            setSource(source.getSource());
         }
         if (StringUtils.isEmpty(getSourceName())) {
-            setSourceName(metadata.getSourceName());
+            setSourceName(source.getSourceName());
         }
         if (getLicense() == null) {
-            setLicense(metadata.getLicense());
+            setLicense(source.getLicense());
         }
         if (StringUtils.isEmpty(getCredits())) {
-            setCredits(metadata.getCredits());
+            setCredits(source.getCredits());
         }
+
+        if (StringUtils.isEmpty(getDate())) {
+            setDate(source.getDate());
+        }
+    }
+
+    default void copyFromIfSourceSet(Metadata<?> source) {
+
+        if (source.getType() != null) {
+            setType(source.getType());
+        }
+        if (StringUtils.isNotEmpty(source.getTitle())) {
+            setTitle(source.getTitle());
+        }
+        if (StringUtils.isNotEmpty(source.getDescription())) {
+            setDescription(source.getDescription());
+        }
+        if (source.getHeight() != null && source.getHeight() >= 0) {
+            setHeight(source.getHeight());
+        }
+        if (source.getWidth() != null && source.getWidth() >= 0) {
+            setWidth(source.getWidth());
+        }
+        if (StringUtils.isNotEmpty(source.getSource())) {
+            setSource(source.getSource());
+        }
+        if (StringUtils.isNotEmpty(source.getSourceName())) {
+            setSourceName(source.getSourceName());
+        }
+        if (source.getLicense() != null) {
+            setLicense(source.getLicense());
+        }
+        if (StringUtils.isNotEmpty(source.getCredits())) {
+            setCredits(source.getCredits());
+        }
+        if (StringUtils.isNotEmpty(source.getDate())) {
+            setDate(source.getDate());
+        }
+
     }
 
 }
