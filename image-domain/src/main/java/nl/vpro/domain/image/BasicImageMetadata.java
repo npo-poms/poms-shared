@@ -122,7 +122,7 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
 
     public void copyToIfUnset(Image image) {
         // Can't do urn because it is a derivative field.
-        image.copyFormIfUnset(image);
+        image.copyFromIfUnset(image);
         Embargos.copyIfTargetUnset(this, image);
     }
 
