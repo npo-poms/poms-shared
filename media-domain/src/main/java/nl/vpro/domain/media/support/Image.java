@@ -29,9 +29,10 @@ import nl.vpro.domain.Embargos;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.support.License;
+import nl.vpro.domain.image.Metadata;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.secondscreen.Screen;
+import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -87,7 +88,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "creationDate",
     "workflow"
 })
-public class Image extends PublishableObject<Image> implements Ownable {
+public class Image extends PublishableObject<Image> implements Metadata<Image>, Ownable {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
     public static final String BASE_URN = "urn:vpro:media:image:";
@@ -199,7 +200,7 @@ public class Image extends PublishableObject<Image> implements Ownable {
 
     }
 
-    @lombok.Builder(builderClassName = "Builder")
+    @lombok.Builder(builderClassName = "Builder", toBuilder = true)
     protected Image(
         OwnerType owner,
         ImageType type,
@@ -305,39 +306,42 @@ public class Image extends PublishableObject<Image> implements Ownable {
         this.owner = owner;
     }
 
+    @Override
     public ImageType getType() {
         return type;
     }
 
-    public Image setType(ImageType type) {
+    @Override
+    public void setType(ImageType type) {
         this.type = type;
-        return this;
     }
 
+    @Override
     public String getTitle() {
         return title;
     }
 
-    public Image setTitle(String title) {
+    @Override
+    public void setTitle(String title) {
         if(title != null && title.length() > 255) {
             title = title.substring(0, 254);
         }
 
         this.title = title;
-        return this;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public Image setDescription(String description) {
+    @Override
+    public void setDescription(String description) {
         if(description != null && description.length() > 255) {
             description = description.substring(0, 254);
         }
 
         this.description = description;
-        return this;
     }
 
     public String getImageUri() {
@@ -359,6 +363,7 @@ public class Image extends PublishableObject<Image> implements Ownable {
     }
 
 
+    @Override
     public Integer getWidth() {
         return width;
     }
@@ -366,11 +371,12 @@ public class Image extends PublishableObject<Image> implements Ownable {
     /**
      * @param width The width to set.
      */
-    public Image setWidth(Integer width) {
+    @Override
+    public void setWidth(Integer width) {
         this.width = width;
-        return this;
     }
 
+    @Override
     public Integer getHeight() {
         return height;
     }
@@ -378,9 +384,9 @@ public class Image extends PublishableObject<Image> implements Ownable {
     /**
      * @param height The height to set.
      */
-    public Image setHeight(Integer height) {
+    @Override
+    public void setHeight(Integer height) {
         this.height = height;
-        return this;
     }
 
     public Boolean isHighlighted() {
@@ -392,6 +398,7 @@ public class Image extends PublishableObject<Image> implements Ownable {
         return this;
     }
 
+    @Override
     public String getCredits() {
         return credits;
     }
@@ -401,31 +408,34 @@ public class Image extends PublishableObject<Image> implements Ownable {
         return this;
     }
 
+    @Override
     public String getSource() {
         return source;
     }
 
-    public Image setSource(String creditURL) {
+    @Override
+    public void setSource(String creditURL) {
         this.source = creditURL;
-        return this;
     }
 
+    @Override
     public String getSourceName() {
         return sourceName;
     }
 
-    public Image setSourceName(String sourceName) {
+    @Override
+    public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
-        return this;
     }
 
+    @Override
     public String getDate() {
         return date;
     }
 
-    public Image setDate(String date) {
+    @Override
+    public void setDate(String date) {
         this.date = !StringUtils.isBlank(date) ? date : null;
-        return this;
     }
 
     @Override
@@ -440,13 +450,14 @@ public class Image extends PublishableObject<Image> implements Ownable {
         return this;
     }
 
+    @Override
     public License getLicense() {
         return license;
     }
 
-    public Image setLicense(License license) {
+    @Override
+    public void setLicense(License license) {
         this.license = license;
-        return this;
     }
 
 
@@ -516,10 +527,10 @@ public class Image extends PublishableObject<Image> implements Ownable {
         ;
     }
 
-    public static Image of(ImageMetadata metaData) {
+    public static Image of(ImageMetadata<?> metaData) {
         Image image = new Image();
         image.setImageUri(metaData.getUrn());
-        image.setType(metaData.getImageType());
+        image.setType(metaData.getType());
         image.setTitle(metaData.getTitle());
         image.setDescription(metaData.getDescription());
         image.setHeight(metaData.getHeight());
@@ -527,9 +538,9 @@ public class Image extends PublishableObject<Image> implements Ownable {
         return image;
     }
 
-    public Image copyFrom(ImageMetadata metaData) {
+    public Image copyFrom(ImageMetadata<?> metaData) {
         setImageUri(metaData.getUrn());
-        setType(metaData.getImageType());
+        setType(metaData.getType());
         setTitle(metaData.getTitle());
         setDescription(metaData.getDescription());
         setHeight(metaData.getHeight());
