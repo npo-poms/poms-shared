@@ -105,6 +105,15 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @Setter
     private String sourceName;
 
+    @Getter
+    @Setter
+    private String date;
+
+
+    @Getter
+    @Setter
+    private String credits;
+
     @Lob
     @XmlTransient
     private Blob data;
@@ -200,13 +209,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     public void setWidth(Integer width) {
         this.width = width;
     }
-
-    @Override
-    public void setDate(String date) {
-        System.out.println("--");
-
-    }
-
 
     @Override
     public Float getHeightInMm() {
@@ -346,19 +348,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     public String getEtag() {
         return etag;
     }
-
-    @Override
-    public String getCredits() {
-        return null;
-
-    }
-
-    @Override
-    public String getDate() {
-        return null;
-    }
-
-
 
     @Override
     public Image setEtag(String etag) {
