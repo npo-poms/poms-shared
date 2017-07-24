@@ -253,6 +253,7 @@
       <xs:element type="xs:string" name="source" minOccurs="0"/>
       <xs:element type="countryType" name="country" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="languageType" name="language" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="isDubbed" type="xs:boolean" minOccurs="0"/>
       <xs:element name="availableSubtitles" type="availableSubtitleType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="avAttributesType" name="avAttributes" minOccurs="0"/>
       <xs:element type="xs:short" name="releaseYear" minOccurs="0"/>
