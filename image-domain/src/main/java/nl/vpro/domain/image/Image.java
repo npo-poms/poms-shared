@@ -45,8 +45,11 @@ import nl.vpro.validation.WarningValidatorGroup;
         "etag",
         "source",
         "sourceName",
+        "date",
+        "credits",
         "license",
-        "data"}
+        "data"
+    }
         )
 public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image> {
 
@@ -108,7 +111,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @Getter
     @Setter
     private String date;
-
 
     @Getter
     @Setter
