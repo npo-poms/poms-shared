@@ -1,6 +1,7 @@
 package nl.vpro.openarchives.oai;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
