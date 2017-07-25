@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:2013" xmlns="urn:vpro:api:2013" xmlns:pages="urn:vpro:pages:2013" xmlns:tns="urn:vpro:api:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:2013" xmlns="urn:vpro:api:2013" xmlns:pages="urn:vpro:pages:2013" xmlns:tns="urn:vpro:api:2013" xmlns:api="urn:vpro:api:2013" xmlns:media="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:vpro:shared:2009">
 
   <xs:import namespace="urn:vpro:media:2009" schemaLocation="https://poms.omroep.nl/schema/vproMedia.xsd"/>
+
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="https://poms.omroep.nl/schema/vproShared.xsd"/>
 
   <xs:import namespace="urn:vpro:pages:2013" schemaLocation="pages_2013.xsd"/>
 
@@ -406,22 +408,34 @@
   <xs:complexType name="mediaFormType">
     <xs:sequence>
       <xs:element name="searches" type="mediaSearchType" minOccurs="0"/>
-      <xs:element name="sortFields" type="mediaSortListType" minOccurs="0"/>
+      <xs:element name="sortFields" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element name="sort" type="mediaSortType"/>
+              <xs:element name="titleSort" type="titleSortOrderType"/>
+            </xs:choice>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="facets" type="mediaFacetsType" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="highlight" type="xs:boolean"/>
-  </xs:complexType>
-
-  <xs:complexType name="mediaSortListType">
-    <xs:sequence>
-      <xs:element name="sort" type="mediaSortType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-    </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="mediaSortType">
     <xs:simpleContent>
       <xs:extension base="mediaSortTypeEnum">
         <xs:attribute name="order" type="orderTypeEnum"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="titleSortOrderType">
+    <xs:simpleContent>
+      <xs:extension base="mediaSortType">
+        <xs:attribute name="textualType" type="media:textualTypeEnum"/>
+        <xs:attribute name="ownerType" type="ns1:ownerTypeEnum"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>

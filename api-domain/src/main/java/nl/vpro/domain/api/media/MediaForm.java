@@ -4,17 +4,23 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.function.Predicate;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.api.SortableForm;
+import nl.vpro.domain.api.media.bind.MediaSortOrderListJson;
 import nl.vpro.domain.media.MediaObject;
 
 /**
@@ -30,6 +36,8 @@ import nl.vpro.domain.media.MediaObject;
         "searches",
         "sortFields",
         "facets"})
+@ToString
+@EqualsAndHashCode(callSuper = true)
 public class MediaForm extends AbstractMediaForm implements SortableForm, Predicate<MediaObject> {
 
 
@@ -37,11 +45,15 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
         return MediaFormBuilder.form();
     }
 
-    @XmlElement
     @Valid
-    @Getter
+
     @Setter
-    @JsonProperty("sort")
+    @XmlElements({
+        @XmlElement(name = "sort", type = MediaSortOrder.class),
+        @XmlElement(name = "titleSort", type = TitleSortOrder.class)
+    })
+    @XmlElementWrapper(name = "sortFields")
+    @JsonIgnore
     private MediaSortOrderList sortFields;
 
     @XmlElement
@@ -62,6 +74,10 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
         this.facets = facets;
     }
 
+    @JsonProperty("sort")
+    public MediaSortOrderList getSortFields() {
+        return sortFields;
+    }
 
     @Override
     public boolean isSorted() {
