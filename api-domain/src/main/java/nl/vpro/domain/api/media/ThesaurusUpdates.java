@@ -15,8 +15,8 @@ import nl.vpro.domain.media.gtaa.GTAAPerson;
 @XmlType(name = "thesaurusResultType")
 public class ThesaurusUpdates extends Result<ThesaurusUpdate> {
 
-	public ThesaurusUpdates(List<ThesaurusUpdate> asList, long l, Integer max, long m) {
-		super(asList, l, max, m);
+	public ThesaurusUpdates(List<ThesaurusUpdate> asList, long offset) {
+		super(asList, offset, null, null);
 	}
 
 	public static class ThesaurusUpdate {
