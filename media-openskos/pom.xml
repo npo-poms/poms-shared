@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>nl.publiekeomroep</groupId>
+    <artifactId>poms-shared-parent</artifactId>
+    <version>5.5-SNAPSHOT</version>
+  </parent>
+  <artifactId>media-openskos</artifactId>
+  <dependencies>
+     <dependency>
+        <groupId>nl.vpro.shared</groupId>
+        <artifactId>vpro-shared-util</artifactId>
+     </dependency>
+     <dependency>
+        <groupId>nl.vpro.media</groupId>
+        <artifactId>media-domain</artifactId>
+     </dependency>
+     <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+     </dependency>
+     <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-web</artifactId>
+     </dependency>
+     <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-oxm</artifactId>
+     </dependency>
+     <dependency>
+        <groupId>com.github.tomakehurst</groupId>
+        <artifactId>wiremock</artifactId>
+        <version>2.6.0</version>
+     </dependency>
+  </dependencies>
+</project>

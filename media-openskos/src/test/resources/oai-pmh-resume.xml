@@ -1,0 +1,3016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd"
+	     xmlns:dc="http://dublincore.org/documents/dcmi-namespace/"
+	     xmlns:dcterms="http://purl.org/dc/terms/"
+	     >
+ <responseDate>2015-06-05T11:23:57Z</responseDate>
+ <request
+ 	 	verb="ListRecords"
+ 	 	metadataPrefix="oai_rdf"
+ 	 	from="2015-01-31T23:00:00Z"
+ 	 	set="beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352"
+ 	>http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/oai-pmh</request> 
+ <ListRecords>
+<record>
+		<header >
+		<identifier>0000c091-6f3b-ebc9-b564-49ed7dfbb53c</identifier>
+		<datestamp>2015-04-16T10:31:47Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/121444">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>121444</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T05:01:15Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T05:01:15Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">erevoorz. Kath. Genootschap van Leraren</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Koster, E.J.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">E.J. Koster</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:47:19.993Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000122cd-d8b3-e414-419d-f9c48c43bf20</identifier>
+		<datestamp>2015-04-17T04:56:55Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/226919">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>226919</skos:notation>
+  <dcterms:dateAccepted>2011-02-24T11:59:28Z</dcterms:dateAccepted>
+  <dcterms:creator>Dick van Vulpen</dcterms:creator>
+  <dcterms:dateSubmitted>2011-02-14T09:15:17Z</dcterms:dateSubmitted>
+  <dcterms:modified>2013-01-24T16:28:54Z</dcterms:modified>
+  <skos:scopeNote xml:lang="nl">vertaler</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Elzinga, Maarten</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Maarten Elzinga</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Anneke Kroon</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000126f3-e4ca-61af-ce40-88b65609ed02</identifier>
+		<datestamp>2015-04-16T10:48:58Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/134562">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>134562</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T07:56:12Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T07:56:12Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Mou'ammar, Yakoub</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Yakoub Mou'ammar</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:53:26.48Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0002d5dd-d6b1-0d1e-970c-4bb2c8a42b1d</identifier>
+		<datestamp>2015-04-16T20:23:36Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/163697">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>163697</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T15:54:53Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T15:54:53Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">actrice/kunstenares</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Veen, Ine</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ine Veen</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:07:00.556Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00046c58-7def-0fc1-e12c-cad1d2558a10</identifier>
+		<datestamp>2015-04-16T09:42:57Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/125516">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>125516</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T05:52:38Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T05:52:38Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">Jodrell Bank sterrenwacht</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Lovell, Bernard</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Bernard Lovell</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:49:03.033Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000523ea-6a9f-bf76-73d5-8f37cf0e47c9</identifier>
+		<datestamp>2015-04-16T08:23:19Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/154091">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>154091</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T13:03:42Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T13:03:42Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">beeldend kunstenaar</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Sierhuis, Jan</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Jan Sierhuis</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:02:09.097Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00053498-e4c9-aa63-1cff-5a5077b5ef90</identifier>
+		<datestamp>2015-04-16T15:37:44Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/114262">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>114262</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T03:33:23Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T03:33:23Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">dominee vrijzinnige geloofsgemeenschap NPB Velp</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Jong, Ivo de</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ivo de Jong</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:44:05.064Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0005660f-6184-e272-52b6-23218057128b</identifier>
+		<datestamp>2015-04-16T18:52:04Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/166321">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>166321</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T16:44:09Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T16:44:09Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">uitbater jazz-café Laren</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Vollebregt, Nick</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Nick Vollebregt</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:07:52.889Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000706b9-6dee-5383-3434-a6dafe35f791</identifier>
+		<datestamp>2015-04-16T15:25:43Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/77362">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>77362</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T22:14:26Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T22:14:26Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">motorcoureur</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Anderson, Hugh</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Hugh Anderson</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:28:20.044Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00072011-792c-a8cc-82c6-7c696c99929d</identifier>
+		<datestamp>2015-04-16T17:07:46Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/77744">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>77744</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T22:16:35Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T22:16:35Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">dir. TROS TV</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Baay, Cees J.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Cees J. Baay</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:28:20.044Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000781c8-5f67-306e-0b18-8c8a1bfad18e</identifier>
+		<datestamp>2015-04-16T19:37:05Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/169303">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>169303</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T17:41:24Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T17:41:24Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">West, Charles</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Charles West</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:09:11.663Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0007fc16-640c-afca-db83-a29f3142ab61</identifier>
+		<datestamp>2015-04-16T16:33:43Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/96783">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>96783</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T00:31:43Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T00:31:43Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">El-Sayed Anwar El-Sadate</skos:prefLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:36:36.207Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00080dae-98ea-2033-364b-04cfacee568d</identifier>
+		<datestamp>2015-04-16T15:21:55Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/95593">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>95593</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T00:21:35Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T00:21:35Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Dykhuis, W.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">W. Dykhuis</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:36:08.189Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00083e88-859a-4e16-cf7e-d7cdb481b287</identifier>
+		<datestamp>2015-04-20T12:52:24Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/355024">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>355024</skos:notation>
+  <dcterms:creator>Irma van Kampen</dcterms:creator>
+  <dcterms:dateAccepted>2008-10-08T16:25:43Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2008-09-04T18:28:46Z</dcterms:dateSubmitted>
+  <dcterms:modified>2013-01-24T16:40:09Z</dcterms:modified>
+  <skos:prefLabel xml:lang="nl">Huiberts, Sander</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Sander Huiberts</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Gewijzigd door: Alma Wolthuis</skos:historyNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Alma Wolthuis</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/211708, 2014-12-03T17:06:37.947000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00084b61-575a-54b1-a342-db83b5fc45d9</identifier>
+		<datestamp>2015-04-20T19:17:26Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/358782">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>358782</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T18:09:14Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T18:09:14Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Rooijen, Marcel van</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Marcel van Rooijen</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/195118, 2014-12-03T18:36:06.299000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T17:36:06.487Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0008ed92-65db-e1d3-7679-43cb6f76fb2e</identifier>
+		<datestamp>2015-04-20T18:44:36Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/357582">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>357582</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T19:01:25Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T19:01:25Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Verbrugge, Elbert</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Elbert Verbrugge</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/198197, 2014-12-03T18:11:46.332000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T17:11:46.671Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000a1e40-97fb-b0e0-ae77-3717b5de954a</identifier>
+		<datestamp>2015-04-20T12:03:15Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/351586">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>351586</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T19:03:22Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T19:03:22Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Verlinde, Peter</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Peter Verlinde</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/198312, 2014-12-03T15:40:28.195000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T14:40:28.38Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000ad6d0-005f-47f6-c3fb-3514dcf943c7</identifier>
+		<datestamp>2015-04-16T09:02:07Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/162113">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>162113</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T15:25:41Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T15:25:41Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Tsjombe, Ruth</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ruth Tsjombe</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:05:56.324Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000b3cb7-6dc2-d45e-0a6b-730c97691aa3</identifier>
+		<datestamp>2015-04-17T05:33:32Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/233967">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>candidate</openskos:status>
+  <skos:notation>233967</skos:notation>
+  <dcterms:creator>Gerard van de Lustgraaf</dcterms:creator>
+  <dcterms:dateSubmitted>2012-11-28T15:55:00Z</dcterms:dateSubmitted>
+  <dcterms:modified>2013-01-24T18:05:04Z</dcterms:modified>
+  <skos:scopeNote xml:lang="nl">kinderarts</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Chegary, Malika</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Malika Chegary</skos:hiddenLabel>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000b4ced-1278-6010-4278-85618b3fd41e</identifier>
+		<datestamp>2015-04-16T17:16:05Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/92280">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>92280</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T23:54:43Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T23:54:43Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Dubois, J.J.W.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">J.J.W. Dubois</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:34:25.105Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000c971f-6093-b048-12dd-9b563b41034b</identifier>
+		<datestamp>2015-04-16T14:13:12Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/116419">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>116419</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T04:01:10Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T04:01:10Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">politicus Verenigde Arabische Republiek</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Kaissouny, Abdel Moneim El</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Abdel Moneim El Kaissouny</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:44:56.716Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000cdf38-3c76-fadc-c209-1ac3c6c6e792</identifier>
+		<datestamp>2015-04-16T18:13:05Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/86156">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>86156</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T23:09:31Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T23:09:31Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">wielrenner</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Brinkman, Manus</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Manus Brinkman</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:31:50.662Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000d2098-48c4-e77c-d269-1be6a2edfbda</identifier>
+		<datestamp>2015-04-20T12:39:06Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/354133">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>354133</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T19:02:58Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T19:02:58Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Verhoeven, Sophie</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Sophie Verhoeven</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/198288, 2014-12-03T16:47:24.289000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T15:47:24.49Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000f0925-0d46-2f96-6551-9e9275739dcb</identifier>
+		<datestamp>2015-04-16T17:16:29Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/92328">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>92328</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T23:55:06Z</dcterms:dateAccepted>
+  <dcterms:modified>2007-11-24T19:19:29Z</dcterms:modified>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T23:55:06Z</dcterms:dateSubmitted>
+  <skos:altLabel xml:lang="nl">Souza, Anderson Luis de</skos:altLabel>
+  <skos:hiddenLabel xml:lang="nl">Anderson Luis de Souza</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">voetballer</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Deco (voetballer)</skos:prefLabel>
+  <skos:historyNote xml:lang="nl">Gewijzigd door: NAA</skos:historyNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000f4afd-0d65-5ae3-55db-79cda479b7cb</identifier>
+		<datestamp>2015-04-16T10:38:58Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/132355">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>132355</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T07:24:54Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T07:24:54Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">Politiebond</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Meulen, Leen vd</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Leen vd Meulen</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:52:23.836Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000f5a0a-4c82-53c7-9f7c-cf865c5ac9be</identifier>
+		<datestamp>2015-04-16T10:53:40Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/144752">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>144752</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T10:29:38Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T10:29:38Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">voorzitter Zian-Vitesse, waterpoloteam</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Rau, Eric</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Eric Rau</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:58:15.571Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>000fa63d-8f6c-8049-f21b-e0109248440c</identifier>
+		<datestamp>2015-04-16T10:09:31Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/119893">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>119893</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T04:42:25Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T04:42:25Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">stadsarchivaris Deventer</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Koch, A.F.C.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">A.F.C. Koch</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:46:55.405Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00103f4a-6566-1b42-2c01-535b763b80a8</identifier>
+		<datestamp>2015-04-16T19:56:41Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/170620">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>170620</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T18:07:14Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T18:07:14Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">politicus Australië min. financiën</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Willis, Ralph</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ralph Willis</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:09:36.529Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00106fc9-121e-bce4-ec82-626046e69915</identifier>
+		<datestamp>2015-04-20T13:11:20Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/96727">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>96727</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T00:31:14Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T00:31:14Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Elissar, Eliahu Ben</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Eliahu Ben Elissar</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <skos:scopeNote xml:lang="nl">lid Knesseth Likoed, ambassadeur van Israël in Egypte</skos:scopeNote>
+  <dcterms:modified>2015-04-14T09:53:43.904Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00107072-e9e1-ffea-866d-b491051cdc87</identifier>
+		<datestamp>2015-04-17T04:50:14Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/223639">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>223639</skos:notation>
+  <dcterms:dateAccepted>2010-08-17T11:59:38Z</dcterms:dateAccepted>
+  <dcterms:modified>2013-01-24T16:10:35Z</dcterms:modified>
+  <dcterms:creator>Dick van Vulpen</dcterms:creator>
+  <dcterms:dateSubmitted>2010-07-14T10:01:22Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">schrijfster</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Woltz, Anna</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Anna Woltz</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Gewijzigd door: Jojanneke Goossens</skos:historyNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Jojanneke Goossens</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0011b647-9953-9ac1-f532-c381508b04e7</identifier>
+		<datestamp>2015-04-20T18:35:53Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/356342">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>356342</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T17:06:14Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T17:06:14Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Libosan, Mieke</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Mieke Libosan</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/191304, 2014-12-03T17:45:34.730000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T16:45:34.921Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0012573a-0a00-3611-e5c2-3ff423cbf7da</identifier>
+		<datestamp>2015-04-16T17:32:08Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/84940">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>84940</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T23:01:11Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T23:01:11Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">dirigent</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Bots, Ton</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ton Bots</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:31:24.987Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0013b78d-b14b-bf01-2e6a-e1a8279820e2</identifier>
+		<datestamp>2015-04-16T13:41:45Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/126834">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>126834</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T06:09:48Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T06:09:48Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Lockhart, Roberta</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Roberta Lockhart</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:49:28.572Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0014fb6b-6e28-5414-4dbf-cabc9c92d381</identifier>
+		<datestamp>2015-04-17T05:41:08Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/233180">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>233180</skos:notation>
+  <dcterms:dateAccepted>2012-11-12T08:33:13Z</dcterms:dateAccepted>
+  <dcterms:modified>2013-01-24T18:28:06Z</dcterms:modified>
+  <dcterms:creator>Gerard van de Lustgraaf</dcterms:creator>
+  <dcterms:dateSubmitted>2012-09-14T11:07:46Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">politicus, schrijver</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Sarazzin, Thilo</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Thilo Sarazzin</skos:hiddenLabel>
+  <skos:note xml:lang="nl">Duitsland achter schrijver verwijderd (BL)</skos:note>
+  <skos:historyNote xml:lang="nl">Gewijzigd door: Betty Ligtermoet</skos:historyNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Betty Ligtermoet</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001530f9-b0af-9a2b-f738-35ecff68cccc</identifier>
+		<datestamp>2015-04-16T12:18:06Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/155327">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>155327</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T13:24:53Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T13:24:53Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">biochemicus USSR</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Smirnov, Vitali</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Vitali Smirnov</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:02:39.416Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00166127-1f3f-9fd4-eb0f-969246e274b3</identifier>
+		<datestamp>2015-04-16T17:22:08Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/118733">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>118733</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T04:28:37Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T04:28:37Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">kinderboekenschrijver</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Kieviet, C. Joh.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">C. Joh. Kieviet</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:45:50.497Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0016f4d7-3fff-1361-de1c-c9252aa4c5b4</identifier>
+		<datestamp>2015-04-20T13:12:35Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/150925">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>150925</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T12:09:58Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T12:09:58Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Scheffer, Gerrit</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Gerrit Scheffer</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <skos:scopeNote xml:lang="nl">veldrijder</skos:scopeNote>
+  <dcterms:modified>2015-04-14T09:54:57.977Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00170b18-adc7-ea15-dc0f-8da159436a01</identifier>
+		<datestamp>2015-04-16T18:56:01Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/233041">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>233041</skos:notation>
+  <dcterms:dateAccepted>2012-10-01T09:57:41Z</dcterms:dateAccepted>
+  <dcterms:creator>Marijke Luiken</dcterms:creator>
+  <dcterms:dateSubmitted>2012-08-28T10:14:15Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">VVD-fractievoorzitter Provinciale Staten in Noord-Holland</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Loggen, Cees</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Cees Loggen</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Betty Ligtermoet</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:15:44.101Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0018a139-f01d-f94b-866f-0baf91e2ef06</identifier>
+		<datestamp>2015-04-16T16:04:33Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/107125">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>107125</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T02:09:10Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T02:09:10Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">diplomaat Nigeria, VN</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Harriman, Leslie</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Leslie Harriman</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:40:59.726Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0018dbea-c9f6-ac08-06ca-70b57eae21e7</identifier>
+		<datestamp>2015-04-20T19:49:38Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/361363">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>361363</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T17:11:12Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T17:11:12Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Louwerens, Marco</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Marco Louwerens</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/191609, 2014-12-03T19:31:30.176000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T18:31:30.392Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001a2e99-fc7b-f048-0f17-9c0304d99c0d</identifier>
+		<datestamp>2015-04-16T12:33:08Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/120509">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>120509</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T04:49:48Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T04:49:48Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Koonings, Jan</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Jan Koonings</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:46:55.405Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001ab972-3233-c31d-e6b8-b480b489c8bb</identifier>
+		<datestamp>2015-04-17T04:40:42Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/221342">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>221342</skos:notation>
+  <dcterms:dateAccepted>2010-04-08T16:11:23Z</dcterms:dateAccepted>
+  <dcterms:modified>2013-01-24T15:36:07Z</dcterms:modified>
+  <dcterms:creator>Dick van Vulpen</dcterms:creator>
+  <dcterms:dateSubmitted>2010-02-17T19:48:01Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">hoogleraar Middelnederlandse letterkunde</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Fraeters, Veerle</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Veerle Fraeters</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Gewijzigd door: Jojanneke Goossens</skos:historyNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Jojanneke Goossens</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001b2ebf-5006-c3f0-51fc-7f97e2a2e441</identifier>
+		<datestamp>2015-04-16T18:26:30Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/116602">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>116602</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T04:03:38Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T04:03:38Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">medewerker NTS</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Kamer, H.C.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">H.C. Kamer</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:44:56.716Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001c4d4f-bc2f-66b7-bece-9f485fa67a2a</identifier>
+		<datestamp>2015-04-16T12:29:16Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/150373">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>150373</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T12:00:40Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T12:00:40Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">politicus CDA</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Schakel, Maarten</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Maarten Schakel</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:00:25.898Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001d754e-be75-817b-8ea6-55254fbb5415</identifier>
+		<datestamp>2015-04-16T10:17:48Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/154921">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>154921</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T13:17:56Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T13:17:56Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Sokoine, Edward</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Edward Sokoine</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:02:39.416Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001da4a9-380d-ff87-d044-0d2284eee845</identifier>
+		<datestamp>2015-04-20T20:02:48Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/362169">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>362169</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T16:38:36Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T16:38:36Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Keet, Paul</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Paul Keet</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/189575, 2014-12-03T19:48:38.547000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T18:48:38.805Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001db03c-7232-e53a-b833-ec23c234c82c</identifier>
+		<datestamp>2015-04-16T18:34:24Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/115555">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>115555</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T03:49:37Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T03:49:37Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Jongsma, T.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">T. Jongsma</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:44:30.9Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001db895-130e-e126-ba11-ffc6fdcf23f3</identifier>
+		<datestamp>2015-04-16T09:10:43Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/124198">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>124198</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T05:35:43Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T05:35:43Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">springruiter</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Lansink, Jos</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Jos Lansink</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:48:36.909Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001e4ace-0a8f-130e-3ebd-647cca68c08d</identifier>
+		<datestamp>2015-04-20T19:40:36Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/360739">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>360739</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T17:40:01Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T17:40:01Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Olivat, Chaja d'</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Chaja d' Olivat</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/193363, 2014-12-03T19:18:01.333000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T18:18:01.58Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001f085f-06d5-946d-0e38-83e62fc3b617</identifier>
+		<datestamp>2015-04-16T19:53:27Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/168035">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>168035</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T17:16:55Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T17:16:55Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Warnier, Sjef</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Sjef Warnier</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:08:44.827Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001f4333-ffc4-98c8-ab5f-3c5d7bbd6483</identifier>
+		<datestamp>2015-04-17T05:33:58Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/232654">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>232654</skos:notation>
+  <dcterms:dateAccepted>2012-08-06T11:57:46Z</dcterms:dateAccepted>
+  <dcterms:creator>Annet van Essen</dcterms:creator>
+  <dcterms:dateSubmitted>2012-07-06T11:15:51Z</dcterms:dateSubmitted>
+  <dcterms:modified>2013-01-24T18:06:46Z</dcterms:modified>
+  <skos:scopeNote xml:lang="nl">advocaat Suriname</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Lachman, Clive</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Clive Lachman</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Betty Ligtermoet</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001f8380-e26f-5cd4-c617-fe1b6383c350</identifier>
+		<datestamp>2015-04-16T17:52:06Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/106305">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>106305</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T02:00:17Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T02:00:17Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">ijshockeyer/keeper VS</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Hall, Glenn</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Glenn Hall</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:40:35.024Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001f9ef5-e8b0-e7ec-213e-d14ff5ecae2e</identifier>
+		<datestamp>2015-04-16T20:07:51Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/165370">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>165370</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T16:26:09Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T16:26:09Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Viala, Ernst</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ernst Viala</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:07:26.259Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>001fa0c2-d043-cb16-2e83-201fd4de40ed</identifier>
+		<datestamp>2015-04-16T09:26:23Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/147695">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>147695</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T11:16:38Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T11:16:38Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Rooke, Wilfred</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Wilfred Rooke</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:59:31.136Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00202994-068f-8e2e-6418-df4c8c6b6aad</identifier>
+		<datestamp>2015-04-16T16:19:42Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/101168">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>101168</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T01:10:44Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T01:10:44Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Garty, Glen</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Glen Garty</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:38:19.36Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002066f9-5128-fa0d-0ef4-ca291541e938</identifier>
+		<datestamp>2015-04-16T19:37:34Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/169382">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>169382</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T17:42:56Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T17:42:57Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">voetbaltrainer</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Westerhof, Hans</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Hans Westerhof</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:09:11.663Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0020dcb5-c99e-9159-bd0a-3f38cf5784a5</identifier>
+		<datestamp>2015-04-20T20:28:32Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/364001">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>364001</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T18:13:33Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T18:13:33Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Russ, Andy</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Andy Russ</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/195373, 2014-12-03T20:26:37.380000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T19:26:37.549Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0020f772-aad3-8364-e420-e02754823c75</identifier>
+		<datestamp>2015-04-16T19:23:53Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/167216">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>167216</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T17:01:15Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T17:01:15Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">musicus</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Vrijma, Ferdinand</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ferdinand Vrijma</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:08:18.398Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002166f7-0a90-b443-4521-1e96a10e561b</identifier>
+		<datestamp>2015-04-16T15:39:21Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/114526">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>114526</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T03:36:44Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T03:36:44Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">politicus Frankrijk</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Jacquinot, Louis</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Louis Jacquinot</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:44:05.064Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00220d6f-3ec3-5636-13f3-660e9a5618ca</identifier>
+		<datestamp>2015-04-20T20:32:11Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/364268">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>364268</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T16:46:14Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T16:46:14Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Kock, Hanneke</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Hanneke Kock</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/190056, 2014-12-03T20:32:13.165000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T19:32:13.374Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00221040-bc72-b770-9152-87c973920f2f</identifier>
+		<datestamp>2015-04-16T13:41:54Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/126855">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>126855</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T06:10:05Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T06:10:05Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Loddy, John</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">John Loddy</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:49:28.572Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002223e3-b55c-ad67-9a12-bdea6d0d58d0</identifier>
+		<datestamp>2015-04-20T13:05:40Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/113294">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>113294</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T03:21:14Z</dcterms:dateAccepted>
+  <dcterms:modified>2007-11-24T19:21:58Z</dcterms:modified>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T03:21:14Z</dcterms:dateSubmitted>
+  <skos:altLabel xml:lang="nl">Schotanus a Steringa Idzerda, H.H.</skos:altLabel>
+  <skos:hiddenLabel xml:lang="nl">H.H. Schotanus a Steringa Idzerda</skos:hiddenLabel>
+  <skos:hiddenLabel xml:lang="nl">H.H.S. Idzerda</skos:hiddenLabel>
+  <skos:prefLabel xml:lang="nl">Idzerda, H.H.S.</skos:prefLabel>
+  <skos:historyNote xml:lang="nl">Gewijzigd door: NAA</skos:historyNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <skos:scopeNote xml:lang="nl">pionier van het Nederlandse radiobestel</skos:scopeNote>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0022ba8b-0522-9525-3e83-b020f60a1b76</identifier>
+		<datestamp>2015-04-16T12:53:47Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/127856">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>127856</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T06:23:18Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T06:23:18Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Mechelen, J.B. van</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">J.B. van Mechelen</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:49:55.416Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00236e01-46d2-bfe5-543c-39f519b0db19</identifier>
+		<datestamp>2015-04-16T14:57:17Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/90484">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>90484</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T23:40:55Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T23:40:55Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Cornelis, H.A.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">H.A. Cornelis</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:33:59.236Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00237a1b-2e83-4301-bd20-1eda24025317</identifier>
+		<datestamp>2015-04-17T04:44:35Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/224236">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>224236</skos:notation>
+  <dcterms:dateAccepted>2010-09-23T09:28:30Z</dcterms:dateAccepted>
+  <dcterms:creator>Dick Vulpen</dcterms:creator>
+  <dcterms:dateSubmitted>2010-09-09T09:56:19Z</dcterms:dateSubmitted>
+  <dcterms:modified>2013-01-24T15:48:42Z</dcterms:modified>
+  <skos:scopeNote xml:lang="nl">dominee</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Marfo, Tom</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Tom Marfo</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Christel van der Pijl</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0023ac5d-1859-1e03-b4ba-0019baca4610</identifier>
+		<datestamp>2015-04-16T11:41:33Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/137036">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>137036</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T08:32:08Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T08:32:08Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">leider HOS Kroatië Joegoslavië</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Paraga, Dobroslav</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Dobroslav Paraga</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:54:26.591Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0024d9da-139d-4d08-fe5a-942f610d0f12</identifier>
+		<datestamp>2015-04-16T20:18:23Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/172805">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>172805</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T18:50:20Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T18:50:20Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">atleet</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Zelst, Ben van</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ben van Zelst</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:10:26.557Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002542a2-2b4c-210b-5c17-4e77428b8cd3</identifier>
+		<datestamp>2015-04-16T11:05:24Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/140946">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>140946</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T09:30:43Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T09:30:43Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Pelletimu, F.B.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">F.B. Pelletimu</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:56:32.874Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0025cddc-8a92-c816-c307-0ff33091f0e8</identifier>
+		<datestamp>2015-04-20T19:08:55Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/357571">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>357571</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T18:43:04Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T18:43:04Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Strick, Philip</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Philip Strick</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/197112, 2014-12-03T18:11:33.729000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T17:11:34.105Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00265de7-3200-a3bb-d937-8dede9c71135</identifier>
+		<datestamp>2015-04-16T13:26:09Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/159333">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>159333</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T14:35:21Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T14:35:21Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">chansonnière</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Sylvestre, Anne</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Anne Sylvestre</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:04:29.135Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002667e9-6ef5-091b-bb87-c544c3c94daf</identifier>
+		<datestamp>2015-04-16T08:56:13Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/150867">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>150867</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T12:08:59Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T12:08:59Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">burgemeester Schoonebeek</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Schneemann, M.L.C.M.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">M.L.C.M. Schneemann</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:00:52.777Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0026ed0a-0079-8d15-6524-8eda2bd1c440</identifier>
+		<datestamp>2015-04-16T11:50:22Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/134684">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>134684</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T07:57:57Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T07:57:57Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Mrkla, Mitar</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Mitar Mrkla</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:53:26.48Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002719f2-1cde-9529-f487-1ef5a3c620c7</identifier>
+		<datestamp>2015-04-17T04:41:34Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/221075">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>221075</skos:notation>
+  <dcterms:dateAccepted>2010-03-04T09:57:34Z</dcterms:dateAccepted>
+  <dcterms:modified>2013-01-24T15:39:15Z</dcterms:modified>
+  <dcterms:creator>Ben Zandringa</dcterms:creator>
+  <dcterms:dateSubmitted>2010-02-01T15:38:09Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">(licht)kunstenares</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Ex, Titia</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Titia Ex</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Gewijzigd door: Christel van der Pijl</skos:historyNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: Christel van der Pijl</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0027827c-69c4-2818-2fb6-ac28a1858477</identifier>
+		<datestamp>2015-04-20T11:44:58Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/350226">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>350226</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T18:11:11Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T18:11:11Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Rossetto, Louis</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Louis Rossetto</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/195235, 2014-12-03T15:06:26.590000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T14:06:26.98Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00286f97-afec-0073-fe2e-cccf696df789</identifier>
+		<datestamp>2015-04-16T18:44:14Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/92392">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>92392</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T23:55:36Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T23:55:36Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Dees, J.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">J. Dees</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:34:49.008Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0029d351-1f46-f765-2c10-06131e396788</identifier>
+		<datestamp>2015-04-16T08:18:22Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/129698">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>129698</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T06:48:10Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T06:48:10Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">voetballer Kameroen</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Milla, Roger</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Roger Milla</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:50:51.698Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002a13d4-4551-cb9a-d8af-00f9bcbbfeab</identifier>
+		<datestamp>2015-04-20T19:07:50Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/357365">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>357365</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T16:32:07Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T16:32:07Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Jong, Etienne de</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Etienne de Jong</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/189164, 2014-12-03T18:07:15.447000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T17:07:15.626Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002a30fa-22dc-7d89-bff0-3c0b879bdf81</identifier>
+		<datestamp>2015-04-16T10:17:01Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/154818">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>154818</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T13:16:09Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T13:16:09Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Soenveld, A.</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">A. Soenveld</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T15:02:39.416Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002a6ec0-5980-3f52-7946-7db73b12dbad</identifier>
+		<datestamp>2015-04-16T16:22:13Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/103595">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>103595</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T01:33:38Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T01:33:38Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Gonzalez, Parejo</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Parejo Gonzalez</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:39:39.786Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002ac089-4518-7294-d1db-15ce712bf3ca</identifier>
+		<datestamp>2015-04-20T12:45:46Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/354666">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>354666</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T16:36:01Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T16:36:01Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Kamermans, Mercy</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Mercy Kamermans</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/189412, 2014-12-03T16:59:13.665000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T15:59:13.856Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002ac0bf-9db6-12d0-741e-316b6969fac1</identifier>
+		<datestamp>2015-04-16T10:12:08Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/120191">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>120191</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T04:45:57Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T04:45:57Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">echtgenote Helmut Kohl kanselier</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Kohl, Hannelore</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Hannelore Kohl</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:46:55.405Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002b04eb-d4d4-8fff-b96c-0cc85ac9ba67</identifier>
+		<datestamp>2015-04-20T20:00:50Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/362111">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>362111</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T15:53:44Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T15:53:44Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Gonzales, Edgar</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Edgar Gonzales</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/186721, 2014-12-03T19:47:22.528000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T18:47:22.699Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002b2bd2-4ea8-f016-9b71-7e7bd195d2fc</identifier>
+		<datestamp>2015-04-16T09:59:08Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/126616">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>126616</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T06:06:57Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T06:06:57Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Lipponen, Mika</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Mika Lipponen</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:49:28.572Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002b91f9-7584-8794-c01b-dc0f47f8d74b</identifier>
+		<datestamp>2015-04-16T14:16:06Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/76441">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>76441</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T22:09:20Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T22:09:20Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">ambassadeur Irak VN</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Al Anbari, Abdul Amir</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Abdul Amir Al Anbari</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:27:54.987Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002bea2e-eddc-7a95-1960-1a51641fa29c</identifier>
+		<datestamp>2015-04-20T12:03:57Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/351687">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>351687</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T16:24:06Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T16:24:06Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Huijbregts, Annett</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Annett Huijbregts</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/188656, 2014-12-03T15:44:03.813000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T14:44:04.031Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002c3e51-7c76-e4b2-12ad-15b079aac2f1</identifier>
+		<datestamp>2015-04-16T09:46:07Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/131364">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>131364</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T07:11:07Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T07:11:07Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Meijdam-Slappendel, Marianne</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Marianne Meijdam-Slappendel</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:51:50.193Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002ceb5d-61af-823d-f6a2-5b03739d92f5</identifier>
+		<datestamp>2015-04-16T11:41:24Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/137017">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>137017</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T08:31:51Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T08:31:51Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Niyoma, Sam</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Sam Niyoma</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:54:26.591Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002db888-ff4a-36c9-885e-c4171df7a4b6</identifier>
+		<datestamp>2015-04-20T12:56:24Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/355255">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>355255</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T15:14:38Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T15:14:38Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Clercq, Pierre de</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Pierre de Clercq</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/184162, 2014-12-03T17:12:42.540000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T16:12:42.725Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002e676a-7cf4-46ae-5454-99385047ec7f</identifier>
+		<datestamp>2015-04-16T13:49:16Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/138516">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>138516</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T08:54:01Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T08:54:01Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Oostendorp, Jan van</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Jan van Oostendorp</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:55:27.704Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002e7194-7be5-fc6d-7d5c-ff258353a32f</identifier>
+		<datestamp>2015-04-20T20:05:09Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/124842">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>124842</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T05:43:54Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T05:43:54Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">motorcrosser</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Leeuwen, Paul van</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Paul van Leeuwen</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <skos:changeNote xml:lang="nl">Samengevoegd met: Maker, http://data.beeldengeluid.nl/gtaa/191139, 2014-12-03T19:53:28.707000</skos:changeNote>
+  <dcterms:modified>2014-12-03T18:53:28.916Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002ea8b0-6333-4fbf-0d3f-ecc3142524b9</identifier>
+		<datestamp>2015-04-16T12:47:17Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/125798">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>125798</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T05:56:14Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T05:56:14Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">schilder</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Leusden, Willem van</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Willem van Leusden</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:49:03.033Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002f157b-8a2d-e2fb-733d-d1869d32fb66</identifier>
+		<datestamp>2015-04-16T15:48:41Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/86936">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>86936</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T23:14:57Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T23:14:57Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Brunetti, Gian Franco</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Gian Franco Brunetti</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:32:15.747Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>002f1aa8-b81a-902a-015e-c04eebafb5b5</identifier>
+		<datestamp>2015-04-16T15:51:55Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/97125">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>97125</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T00:34:40Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T00:34:40Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Engelbregt, Martijn</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Martijn Engelbregt</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:36:36.207Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00306219-447c-7e34-7a6d-c02e45178f8b</identifier>
+		<datestamp>2015-04-16T17:32:57Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/85085">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>85085</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T23:02:10Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T23:02:10Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Bouman, Rika</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Rika Bouman</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:31:24.987Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0031124a-6fd0-0f21-c018-a92f30f432dd</identifier>
+		<datestamp>2015-04-16T09:24:03Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/147411">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>147411</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T11:12:04Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T11:12:04Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Roth, David Lee</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">David Lee Roth</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:59:31.136Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>003133d5-8a55-c1cf-da28-75eb5c4b709c</identifier>
+		<datestamp>2015-04-20T20:06:33Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/362455">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>362455</skos:notation>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateAccepted>2007-11-25T16:31:06Z</dcterms:dateAccepted>
+  <dcterms:dateSubmitted>2007-11-25T16:31:06Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Jeronimus, Jan</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Jan Jeronimus</skos:hiddenLabel>
+  <skos:scopeNote xml:lang="nl">programmamaker</skos:scopeNote>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:changeNote xml:lang="nl">Afkomstig uit: Maker, http://data.beeldengeluid.nl/gtaa/189099, 2014-12-03T19:54:22.295000</skos:changeNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2014-12-03T18:54:22.47Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00316790-eeeb-0b24-2cc8-30ee90cd6d42</identifier>
+		<datestamp>2015-04-16T14:18:14Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/76708">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>76708</skos:notation>
+  <dcterms:dateAccepted>2007-11-23T22:10:49Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-23T22:10:49Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">bokser</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Aldridge, George</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">George Aldridge</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:27:54.987Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00323199-dcdd-4ace-6441-3efd260a0974</identifier>
+		<datestamp>2015-04-16T17:26:59Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/99230">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>99230</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T00:53:06Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T00:53:06Z</dcterms:dateSubmitted>
+  <skos:scopeNote xml:lang="nl">uitgever van De Piraat</skos:scopeNote>
+  <skos:prefLabel xml:lang="nl">Geerlings, Ronald</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Ronald Geerlings</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:37:27.115Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>00326215-7e00-9061-f5cf-a47bb9adafc7</identifier>
+		<datestamp>2015-04-16T11:06:37Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/141105">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>141105</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T09:33:09Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T09:33:09Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Pera, Freek</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">Freek Pera</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:56:32.874Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<record>
+		<header >
+		<identifier>0033fa38-1f43-fe09-d4b9-5b9d0a6ccbb0</identifier>
+		<datestamp>2015-04-16T15:07:57Z</datestamp>
+				<setSpec>beng</setSpec>
+    				<setSpec>beng:gtaa</setSpec>
+        		    	    	    		<setSpec>beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352</setSpec>
+    		            		    		    	    	</header>
+		<metadata>
+						<rdf:RDF
+			xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+                                             xmlns:openskos="http://openskos.org/xmlns#" 
+                            		>
+		<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" rdf:about="http://data.beeldengeluid.nl/gtaa/98512">
+  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+  <openskos:status>approved</openskos:status>
+  <skos:notation>98512</skos:notation>
+  <dcterms:dateAccepted>2007-11-24T00:46:42Z</dcterms:dateAccepted>
+  <dcterms:creator>NAA</dcterms:creator>
+  <dcterms:dateSubmitted>2007-11-24T00:46:42Z</dcterms:dateSubmitted>
+  <skos:prefLabel xml:lang="nl">Fejti, György</skos:prefLabel>
+  <skos:hiddenLabel xml:lang="nl">György Fejti</skos:hiddenLabel>
+  <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+  <dcterms:modified>2013-01-11T14:37:27.115Z</dcterms:modified>
+</rdf:Description>		</rdf:RDF>
+			</metadata>
+	</record>
+<resumptionToken  
+      completeListSize="122486" 
+      cursor="0">YTo1OntzOjQ6InZlcmIiO3M6MTE6Ikxpc3RSZWNvcmRzIjtzOjE0OiJtZXRhZGF0YVByZWZpeCI7czo3OiJvYWlfcmRmIjtzOjM6InNldCI7czo0NjoiYmVuZzpndGFhOjhmY2IxYzRmLTY2M2QtMDBkMy05NWIyLWNjY2Q1YWJkYTM1MiI7czo0OiJmcm9tIjtzOjI1OiIyMDE1LTAxLTMxVDIzOjAwOjAwKzAwOjAwIjtzOjQ6InBhZ2UiO2k6Mjt9</resumptionToken>
+</ListRecords>
+</OAI-PMH>      

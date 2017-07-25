@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+  <responseDate>2017-04-21T07:16:18Z</responseDate>
+  <request verb="ListRecords" metadataPrefix="oai_rdf" set="beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2" from="2017-04-19T22:00:00Z" until="2017-04-20T22:00:00Z">http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/oai-pmh</request>
+  <ListRecords xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>9a85ccc1-24ce-463c-b173-568d7900ca58</identifier>
+        <datestamp>2017-04-20T10:56:17Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672177">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <skos:prefLabel xml:lang="nl">Hof, Vincent</skos:prefLabel>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T10:56:17+00:00</dcterms:modified>
+            <openskos:uuid>9a85ccc1-24ce-463c-b173-568d7900ca58</openskos:uuid>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <skos:notation>1672177</skos:notation>
+            <dc:creator>POMS</dc:creator>
+            <openskos:status>candidate</openskos:status>
+            <openskos:tenant>beng</openskos:tenant>
+            <dcterms:dateSubmitted>2017-04-20T12:56:17.025+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+      <header>
+        <identifier>1e7899be-a41d-46fd-bd25-e080eb9fc50f</identifier>
+        <datestamp>2017-04-20T11:13:01Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672178">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:acceptedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <skos:prefLabel xml:lang="nl">Hof, Diederikje</skos:prefLabel>
+            <dc:creator>POMS</dc:creator>
+            <dcterms:dateSubmitted>2017-04-20T13:06:07.013+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <skos:notation>1672178</skos:notation>
+            <openskos:uuid>1e7899be-a41d-46fd-bd25-e080eb9fc50f</openskos:uuid>
+            <openskos:status>approved</openskos:status>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:13:01+00:00</dcterms:modified>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <skos:hiddenLabel xml:lang="nl">Diederikje Hof</skos:hiddenLabel>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:13:01+00:00</dcterms:dateAccepted>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>cc124e0a-d079-478c-8753-c5ff124da7cf</identifier>
+        <datestamp>2017-04-20T11:15:19Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672179">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <skos:notation>1672179</skos:notation>
+            <dcterms:dateSubmitted>2017-04-20T13:06:43.004+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <openskos:status>redirected</openskos:status>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <skos:prefLabel xml:lang="nl">Hof, Jeroen</skos:prefLabel>
+            <dc:creator>POMS</dc:creator>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:15:19+00:00</dcterms:modified>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <skos:changeNote xml:lang="nl">Forward: http://data.beeldengeluid.nl/gtaa/77992</skos:changeNote>
+            <openskos:uuid>cc124e0a-d079-478c-8753-c5ff124da7cf</openskos:uuid>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+      <header>
+        <identifier>5c63cc92-0101-42b3-928f-1bd3e653cf88</identifier>
+        <datestamp>2017-04-20T11:16:04Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672180">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:status>redirected</openskos:status>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <skos:prefLabel xml:lang="nl">Hof, Lodewijk</skos:prefLabel>
+            <openskos:tenant>beng</openskos:tenant>
+            <skos:notation>1672180</skos:notation>
+            <dc:creator>POMS</dc:creator>
+            <skos:changeNote xml:lang="nl">Forward: http://data.beeldengeluid.nl/gtaa/140794</skos:changeNote>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <openskos:uuid>5c63cc92-0101-42b3-928f-1bd3e653cf88</openskos:uuid>
+            <dcterms:dateSubmitted>2017-04-20T13:07:17.512+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:16:04+00:00</dcterms:modified>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>a8ec15b3-c7dd-4f21-803a-70a0907d47d0</identifier>
+        <datestamp>2017-04-20T11:17:18Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672181">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:17:18+00:00</dcterms:modified>
+            <skos:notation>1672181</skos:notation>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <dc:creator>POMS</dc:creator>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:prefLabel xml:lang="nl">Hof, Peter</skos:prefLabel>
+            <openskos:status>obsolete</openskos:status>
+            <dcterms:dateSubmitted>2017-04-20T13:07:56.152+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <openskos:uuid>a8ec15b3-c7dd-4f21-803a-70a0907d47d0</openskos:uuid>
+            <skos:changeNote xml:lang="nl">Forward: http://data.beeldengeluid.nl/gtaa/140794</skos:changeNote>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+      <header>
+        <identifier>39250d11-f4b1-42f5-b90e-cf2a942e5969</identifier>
+        <datestamp>2017-04-20T11:17:44Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672182">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <skos:notation>1672182</skos:notation>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <openskos:uuid>39250d11-f4b1-42f5-b90e-cf2a942e5969</openskos:uuid>
+            <dc:creator>POMS</dc:creator>
+            <skos:prefLabel xml:lang="nl">Hof, Willem</skos:prefLabel>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <dcterms:dateSubmitted>2017-04-20T13:08:33.018+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:17:44+00:00</dcterms:modified>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <openskos:status>not_compliant</openskos:status>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>57302c65-f39e-4d4c-aaa9-5b3032f50e88</identifier>
+        <datestamp>2017-04-20T11:18:20Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672183">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:status>rejected</openskos:status>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <skos:prefLabel xml:lang="nl">Hof, Wijnand</skos:prefLabel>
+            <openskos:tenant>beng</openskos:tenant>
+            <skos:notation>1672183</skos:notation>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:18:20+00:00</dcterms:modified>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <dcterms:dateSubmitted>2017-04-20T13:09:20.067+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <openskos:uuid>57302c65-f39e-4d4c-aaa9-5b3032f50e88</openskos:uuid>
+            <dc:creator>POMS</dc:creator>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>81b2f5de-6023-423c-81d4-f26793c26397</identifier>
+        <datestamp>2017-04-20T11:32:56Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672184">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <skos:prefLabel xml:lang="nl">Nijsen, Ronald</skos:prefLabel>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <openskos:uuid>81b2f5de-6023-423c-81d4-f26793c26397</openskos:uuid>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <dcterms:dateSubmitted>2017-04-20T13:32:56.126+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <skos:notation>1672184</skos:notation>
+            <openskos:status>candidate</openskos:status>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:32:56+00:00</dcterms:modified>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <dc:creator>POMS</dc:creator>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record>
+      <header status="deleted">
+        <identifier>f34b4ed9-8105-44cd-b8c5-d05c52169de1</identifier>
+        <datestamp>2017-04-20T11:58:27Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>b94be319-a0ea-4e93-babd-6b2d65f61796</identifier>
+        <datestamp>2017-04-20T12:15:55Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672186">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <skos:scopeNote xml:lang="nl">scope note Vincent Hunink</skos:scopeNote>
+            <openskos:status>redirected</openskos:status>
+            <skos:prefLabel xml:lang="nl">Hunink., Vincent</skos:prefLabel>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <skos:changeNote xml:lang="nl">Forward: http://data.beeldengeluid.nl/gtaa/1299454</skos:changeNote>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <dc:creator>POMS</dc:creator>
+            <openskos:uuid>b94be319-a0ea-4e93-babd-6b2d65f61796</openskos:uuid>
+            <dcterms:dateSubmitted>2017-04-20T13:56:35.544+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T12:15:55+00:00</dcterms:modified>
+            <skos:notation>1672186</skos:notation>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>5ccfccf5-1c2a-44ad-828b-767f1c283c8c</identifier>
+        <datestamp>2017-04-20T12:09:22Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672187">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T12:09:22+00:00</dcterms:modified>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: VPWON_1184655</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <skos:prefLabel xml:lang="nl">Ra, Guon.</skos:prefLabel>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <dc:creator>POMS</dc:creator>
+            <skos:changeNote xml:lang="nl">Forward: http://data.beeldengeluid.nl/gtaa/1407046</skos:changeNote>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:notation>1672187</skos:notation>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <openskos:status>redirected</openskos:status>
+            <dcterms:dateSubmitted>2017-04-20T14:07:50.114+02:00[Europe/Amsterdam]</dcterms:dateSubmitted>
+            <openskos:uuid>5ccfccf5-1c2a-44ad-828b-767f1c283c8c</openskos:uuid>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>29bf2139-ef4e-4855-99d6-96fe16d791c9</identifier>
+        <datestamp>2017-04-20T12:21:59Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa/1672188">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T12:21:59+00:00</dcterms:modified>
+            <skos:notation>1672188</skos:notation>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <openskos:status>candidate</openskos:status>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <openskos:uuid>29bf2139-ef4e-4855-99d6-96fe16d791c9</openskos:uuid>
+            <skos:editorialNote xml:lang="nl">vanuit POMS voor: POMS_BOS_475426</skos:editorialNote>
+            <skos:editorialNote xml:lang="nl">test overgebleven issues OpenSKOS</skos:editorialNote>
+            <dcterms:creator rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+            <dc:creator>POMS</dc:creator>
+            <dcterms:dateSubmitted>2017-04-20T14:21:58.907+02:00</dcterms:dateSubmitted>
+            <skos:prefLabel xml:lang="nl">Hof, Penelope</skos:prefLabel>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+      <header>
+        <identifier>0864ba0e-2987-c049-537c-930ba09ff40f</identifier>
+        <datestamp>2017-04-20T12:16:37Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+          <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1299454">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <skos:hiddenLabel xml:lang="nl">Hunink., Vincent</skos:hiddenLabel>
+            <skos:notation>1299454</skos:notation>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <dc:creator>IMMIX_NON_MATCH</dc:creator>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T12:16:37+00:00</dcterms:modified>
+            <openskos:acceptedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-11T22:08:59+00:00</dcterms:dateSubmitted>
+            <skos:prefLabel xml:lang="nl">Hunink, Vincent</skos:prefLabel>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <openskos:status>approved</openskos:status>
+            <skos:scopeNote xml:lang="nl">scope note Vincent Hunink</skos:scopeNote>
+            <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T11:59:38+00:00</dcterms:dateAccepted>
+            <openskos:tenant>beng</openskos:tenant>
+            <openskos:uuid>0864ba0e-2987-c049-537c-930ba09ff40f</openskos:uuid>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+      <header>
+        <identifier>ee5a2153-af35-789e-a4ef-62f10ee491fe</identifier>
+        <datestamp>2017-04-20T12:14:17Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+          <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1407046">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:uuid>ee5a2153-af35-789e-a4ef-62f10ee491fe</openskos:uuid>
+            <skos:scopeNote xml:lang="nl">scope note Guon Ra</skos:scopeNote>
+            <dc:creator>IMMIX_NON_MATCH</dc:creator>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <openskos:acceptedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <skos:prefLabel xml:lang="nl">Ra, Guon</skos:prefLabel>
+            <skos:notation>1407046</skos:notation>
+            <openskos:status>approved</openskos:status>
+            <skos:altLabel xml:lang="nl">Ra, Guon.</skos:altLabel>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T12:14:17+00:00</dcterms:modified>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T12:08:31+00:00</dcterms:dateAccepted>
+            <openskos:tenant>beng</openskos:tenant>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-07-13T15:57:15+00:00</dcterms:dateSubmitted>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+      <header>
+        <identifier>e332799d-6fde-c3f3-fdf4-c04b8f894ca4</identifier>
+        <datestamp>2017-04-20T12:12:41Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/">
+          <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/140794">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <openskos:tenant>beng</openskos:tenant>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <openskos:uuid>e332799d-6fde-c3f3-fdf4-c04b8f894ca4</openskos:uuid>
+            <skos:prefLabel xml:lang="nl">Peer, Edgar</skos:prefLabel>
+            <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <skos:notation>140794</skos:notation>
+            <dc:creator>NAA</dc:creator>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <skos:scopeNote xml:lang="nl">wethouder Amsterdam VVD</skos:scopeNote>
+            <skos:hiddenLabel xml:lang="nl">Edgar Peer</skos:hiddenLabel>
+            <skos:hiddenLabel xml:lang="nl">Hof, Lodewijk</skos:hiddenLabel>
+            <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T09:28:26+00:00</dcterms:dateAccepted>
+            <openskos:status>approved</openskos:status>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T12:12:41+00:00</dcterms:modified>
+            <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-24T09:28:26+00:00</dcterms:dateSubmitted>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <header>
+        <identifier>fc8fd1d0-bbce-8e1b-8af0-bd38a301a45a</identifier>
+        <datestamp>2017-04-20T12:13:25Z</datestamp>
+        <setSpec>beng</setSpec>
+        <setSpec>beng:gtaa</setSpec>
+        <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+      </header>
+      <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+          <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/77992">
+            <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+            <skos:scopeNote xml:lang="nl">schrijver van misdaadverhalen</skos:scopeNote>
+            <skos:prefLabel xml:lang="nl">Appel, René</skos:prefLabel>
+            <openskos:status>approved</openskos:status>
+            <openskos:toBeChecked>0</openskos:toBeChecked>
+            <skos:altLabel xml:lang="nl">Hof, Jeroen</skos:altLabel>
+            <skos:notation>77992</skos:notation>
+            <openskos:set rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/collections/beng:gtaa"/>
+            <openskos:uuid>fc8fd1d0-bbce-8e1b-8af0-bd38a301a45a</openskos:uuid>
+            <skos:hiddenLabel xml:lang="nl">René Appel</skos:hiddenLabel>
+            <skos:historyNote xml:lang="nl">Goedgekeurd door: NAA</skos:historyNote>
+            <skos:changeNote xml:lang="nl">Samengevoegd met: Maker, http://data.beeldengeluid.nl/gtaa/181441, 2014-12-22T02:39:43.668000</skos:changeNote>
+            <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/4a69c770-1a4d-452a-a320-7b12e8d2cf60"/>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-04-20T12:13:25+00:00</dcterms:modified>
+            <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+            <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T22:18:00+00:00</dcterms:dateSubmitted>
+            <openskos:tenant>beng</openskos:tenant>
+            <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2007-11-23T22:18:00+00:00</dcterms:dateAccepted>
+            <dc:creator>NAA</dc:creator>
+          </rdf:Description>
+        </rdf:RDF>
+      </metadata>
+    </record>
+    <resumptionToken completeListSize="16" cursor="0"/>
+  </ListRecords>
+</OAI-PMH>
