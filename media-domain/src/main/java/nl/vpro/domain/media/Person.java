@@ -11,8 +11,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import nl.vpro.beeldengeluid.gtaa.GTAARecord;
 import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.validation.NoHtml;
 
 @Entity
