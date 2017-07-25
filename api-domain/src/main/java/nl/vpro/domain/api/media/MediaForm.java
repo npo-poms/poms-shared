@@ -12,6 +12,8 @@ import java.util.function.Predicate;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import nl.vpro.domain.api.SortableForm;
 import nl.vpro.domain.media.MediaObject;
 
@@ -39,6 +41,7 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     @Valid
     @Getter
     @Setter
+    @JsonProperty("sort")
     private MediaSortOrderList sortFields;
 
     @XmlElement
