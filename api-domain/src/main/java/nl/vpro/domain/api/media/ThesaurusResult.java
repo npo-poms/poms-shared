@@ -13,15 +13,12 @@ import nl.vpro.domain.media.gtaa.GTAAPerson;
 public class ThesaurusResult extends Result<GTAAPerson>{
 
 	public ThesaurusResult() {
-		
-	}
-	
-	public ThesaurusResult(List<GTAAPerson> asList, Long offset, Integer max, Long total) {
-		super(asList, offset, max, total);
+
 	}
 
-	public ThesaurusResult(List<GTAAPerson> list, long offset, Integer max, int size) {
-		super(list, offset, max, Long.valueOf(size));
+	public ThesaurusResult(List<GTAAPerson> asList, Long offset, Integer max) {
+		super(asList, offset, max, null);
 	}
+
 
 }
