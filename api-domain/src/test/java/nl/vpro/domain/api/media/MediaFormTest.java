@@ -17,11 +17,13 @@ import org.xml.sax.SAXException;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.support.Tag;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.DateUtils;
 
+import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 
@@ -37,6 +39,7 @@ public class MediaFormTest {
         MediaSortOrderList list = new MediaSortOrderList();
         list.put(MediaSortField.sortDate, Order.DESC);
         list.put(MediaSortField.title, null);
+        list.add(TitleSortOrder.builder().textualType(TextualType.LEXICO).build());
         in.setHighlight(true);
 
         in.setSortFields(list);
@@ -45,11 +48,24 @@ public class MediaFormTest {
                 "    <api:sortFields>\n" +
                 "        <api:sort order=\"DESC\">sortDate</api:sort>\n" +
                 "        <api:sort order=\"ASC\">title</api:sort>\n" +
+                "        <api:sort xsi:type=\"api:titleSortOrderType\" textualType=\"LEXICO\" order=\"ASC\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">title</api:sort>\n"+ // TODO: UGLY
                 "    </api:sortFields>\n" +
                 "</api:mediaForm>"
         );
-        assertThat(out.getSortFields()).hasSize(2);
-        assertThat(Jackson2Mapper.INSTANCE.writeValueAsString(out)).isEqualTo("{\"sort\":{\"sortDate\":\"DESC\",\"title\":\"ASC\"},\"highlight\":true}");
+        assertThat(out.getSortFields()).hasSize(3);
+        assertThatJson(Jackson2Mapper.INSTANCE.writeValueAsString(out)).isSimilarTo("{\n" +
+            "  \"sort\" : {\n" +
+            "    \"sortDate\" : \"DESC\",\n" +
+            "    \"title\" : \"ASC\",\n" +
+            "    \"title\" : {\n" +
+            "      \"value\" : \"title\",\n" +
+            "      \"order\" : \"ASC\",\n" +
+            "      \"textualType\" : \"LEXICO\",\n" +
+            "      \"sortField\" : \"title\"\n" +
+            "    }\n" +
+            "  },\n" +
+            "  \"highlight\" : true\n" +
+            "}");
     }
 
     @Test
@@ -176,7 +192,7 @@ public class MediaFormTest {
             "        }\n" +
             "    }\n" +
             "}\n";
-        MediaForm form = Jackson2TestUtil.assertThatJson(MediaForm.class, example).isSimilarTo(example).get();
+        MediaForm form = assertThatJson(MediaForm.class, example).isSimilarTo(example).get();
         assertThat(form.getFacets()).isNotNull();
         assertThat(form.getFacets().getRelations()).isNotNull();
         assertNotNull(form.getFacets().getRelations().getSubSearch());
