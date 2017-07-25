@@ -145,6 +145,11 @@ public class Description extends AbstractGTAAObject {
     }
 
 
+    public Description(String prefLabel) {
+        this.prefLabel = new Label(prefLabel);
+    }
+
+
     public static class Builder extends AbstractBuilder {
 
         public Builder type(String type) {
