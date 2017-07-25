@@ -4,21 +4,15 @@
  */
 package nl.vpro.domain.api.media;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.function.Predicate;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import nl.vpro.domain.api.ExtendedTextMatcher;
-import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.SortableForm;
-import nl.vpro.domain.api.media.bind.MediaSortTypeAdapter;
 import nl.vpro.domain.media.MediaObject;
 
 /**
@@ -42,10 +36,10 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     }
 
     @XmlElement
-    @XmlJavaTypeAdapter(MediaSortTypeAdapter.class)
-    @JsonIgnore
     @Valid
-    private LinkedHashMap<MediaSortField, Order> sortFields;
+    @Getter
+    @Setter
+    private MediaSortOrderList sortFields;
 
     @XmlElement
     @Valid
@@ -71,23 +65,12 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
         return sortFields != null && !sortFields.isEmpty();
     }
 
-    @JsonProperty("sort")
-    public Map<MediaSortField, Order> getSortFields() {
-        return sortFields;
-    }
-
-    public void setSortFields(Map<MediaSortField, Order> sortFields) {
-        if(sortFields != null) {
-            this.sortFields = new LinkedHashMap<>(sortFields);
-        }
-    }
-
     public void addSortField(MediaSortOrder order) {
         if(sortFields == null) {
-            sortFields = new LinkedHashMap<>(3);
+            sortFields = new MediaSortOrderList();
         }
 
-        sortFields.put(order.getSortField(), order.getOrder());
+        sortFields.add(order);
     }
 
 }
