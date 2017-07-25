@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:dcterms="http://purl.org/dc/terms/" 
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+  xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" 
+  xmlns:openskos="http://openskos.org/xmlns#" openskos:numFound="9" openskos:rows="100" openskos:start="0">
+  <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1672221">
+    <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept"/>
+    <openskos:tenant>beng</openskos:tenant>
+    <skos:editorialNote xml:lang="nl">test</skos:editorialNote>
+    <skos:editorialNote xml:lang="nl">vanuit POMS GTAA Connector</skos:editorialNote>
+    <skos:prefLabel xml:lang="nl">test2, test.</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen"/>
+    <dc:creator>demo-cms:gtaa-user</dc:creator>
+    <dcterms:dateSubmitted>2017-06-27T14:09:53.788+02:00</dcterms:dateSubmitted>
+    <openskos:set rdf:resource="http://data.beeldengeluid.nl/gtaa"/>
+    <openskos:uuid>3f91c2e4-f99f-4737-90bf-afc880456e50</openskos:uuid>
+    <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-06-27T12:09:53+00:00</dcterms:modified>
+    <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a"/>
+    <openskos:status>candidate</openskos:status>
+    <skos:notation>1672221</skos:notation>
+  </rdf:Description>
+</rdf:RDF>
