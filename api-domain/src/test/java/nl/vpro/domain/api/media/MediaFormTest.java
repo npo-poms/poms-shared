@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
-import java.util.LinkedHashMap;
 
 import javax.xml.bind.JAXB;
 
@@ -35,12 +34,12 @@ public class MediaFormTest {
     @Test
     public void testGetSort() throws Exception {
         MediaForm in = new MediaForm();
-        LinkedHashMap<MediaSortField, Order> sort = new LinkedHashMap<>();
-        sort.put(MediaSortField.sortDate, Order.DESC);
-        sort.put(MediaSortField.title, null);
+        MediaSortOrderList list = new MediaSortOrderList();
+        list.put(MediaSortField.sortDate, Order.DESC);
+        list.put(MediaSortField.title, null);
         in.setHighlight(true);
 
-        in.setSortFields(sort);
+        in.setSortFields(list);
         MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
             "<api:mediaForm highlight=\"true\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <api:sortFields>\n" +
@@ -49,7 +48,7 @@ public class MediaFormTest {
                 "    </api:sortFields>\n" +
                 "</api:mediaForm>"
         );
-        assertThat(out.getSortFields().keySet()).hasSize(2);
+        assertThat(out.getSortFields()).hasSize(2);
         assertThat(Jackson2Mapper.INSTANCE.writeValueAsString(out)).isEqualTo("{\"sort\":{\"sortDate\":\"DESC\",\"title\":\"ASC\"},\"highlight\":true}");
     }
 

@@ -14,25 +14,25 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.media.MediaSortField;
 import nl.vpro.domain.api.media.MediaSortType;
-import nl.vpro.domain.api.media.MediaSortTypeList;
+import nl.vpro.domain.api.media.MediaSortOrderList;
 
 /**
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class MediaSortTypeAdapter extends XmlAdapter<MediaSortTypeList, LinkedHashMap<MediaSortField, Order>> {
+public class MediaSortOrderAdapter extends XmlAdapter<MediaSortOrderList, LinkedHashMap<MediaSortField, Order>> {
 
     @Override
-    public LinkedHashMap<MediaSortField, Order> unmarshal(MediaSortTypeList v) throws Exception {
+    public LinkedHashMap<MediaSortField, Order> unmarshal(MediaSortOrderList v) throws Exception {
         LinkedHashMap<MediaSortField, Order> answer = new LinkedHashMap<>(v.getSort().size());
-        for(MediaSortType sortType : v.getSort()) {
+       /* for(MediaSortType sortType : v.getSort()) {
             answer.put(sortType.getField(), sortType.getOrder());
-        }
+        }*/
         return answer;
     }
 
     @Override
-    public MediaSortTypeList marshal(LinkedHashMap<MediaSortField, Order> v) throws Exception {
+    public MediaSortOrderList marshal(LinkedHashMap<MediaSortField, Order> v) throws Exception {
         if(v == null) {
             return null;
         }
@@ -41,7 +41,7 @@ public class MediaSortTypeAdapter extends XmlAdapter<MediaSortTypeList, LinkedHa
         for(Map.Entry<MediaSortField, Order> entry : v.entrySet()) {
             answer.add(new MediaSortType(entry.getKey(), entry.getValue()));
         }
-        return new MediaSortTypeList(answer);
+        return new MediaSortOrderList();
     }
 
 }

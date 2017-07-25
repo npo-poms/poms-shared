@@ -306,6 +306,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
+    default B lexicoTitle(String title) {
+        return titles(new Title(title, OwnerType.BROADCASTER, TextualType.LEXICO));
+    }
+
 
     @SuppressWarnings("unchecked")
     default B descriptions(Description... descriptions) {
