@@ -1,12 +1,10 @@
 package nl.vpro.domain.api.media;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.xml.bind.annotation.*;
+import java.util.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -18,17 +16,13 @@ import nl.vpro.domain.api.media.bind.MediaSortOrderListJson;
 * @author Michiel Meeuwissen
 * @since 3.3
 */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "mediaSortListType")
 @JsonSerialize(using = MediaSortOrderListJson.Serializer.class)
 @JsonDeserialize(using = MediaSortOrderListJson.Deserializer.class)
 @Data
-@XmlSeeAlso({MediaSortOrder.class, TitleSortOrder.class})
-public class MediaSortOrderList
-   // extends AbstractCollection<MediaSortOrder> { // confuses Jaxb
-    implements Iterable<MediaSortOrder> {
+@EqualsAndHashCode(callSuper = false)
+@ToString
+public class MediaSortOrderList extends AbstractCollection<MediaSortOrder> implements Iterable<MediaSortOrder> {
 
-    @XmlElement
     private List<MediaSortOrder> sort;
 
     public MediaSortOrderList() {
@@ -40,18 +34,21 @@ public class MediaSortOrderList
 
     @Override
     public Iterator<MediaSortOrder> iterator() {
-        return sort.iterator();
+        return sort == null ? Collections.<MediaSortOrder>emptyList().iterator() : sort.iterator();
 
     }
 
+    @Override
     public int size() {
         return sort == null ? 0 : sort.size();
     }
 
+    @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
+    @Override
     public boolean add(MediaSortOrder sortOrder) {
         if (sort == null) {
             sort = new ArrayList<>();
