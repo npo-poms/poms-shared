@@ -69,6 +69,17 @@ public class MediaFormTest {
     }
 
     @Test
+    public void parseWithEmptySort() throws Exception {
+        String example = "{\n" +
+            "  \"sort\" : {\n" +
+            "  }\n" +
+            "}\n";
+        MediaForm form = Jackson2Mapper.getInstance().readValue(new StringReader(example), MediaForm.class);
+        assertThat(form.getSortFields()).isEmpty();
+        Jackson2TestUtil.roundTripAndSimilar(form, example);
+    }
+
+    @Test
     public void testGetTags() throws Exception {
         MediaForm in = MediaFormBuilder.form().tags(Match.SHOULD, new Tag("XML")).build();
         MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
