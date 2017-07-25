@@ -27,21 +27,20 @@ public class MediaSortOrderListJson {
 
         @Override
         public void serialize(MediaSortOrderList mediaSortOrders, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-            if (mediaSortOrders.size() == 0) {
-                return ;
-            }
             jgen.writeStartObject();
-            for (MediaSortOrder so : mediaSortOrders) {
-                jgen.writeFieldName(so.getSortField().name());
-                if (so instanceof TitleSortOrder) {
-                    TitleSortOrder titleSortOrder = (TitleSortOrder) so;
-                    if (titleSortOrder.getTextualType() != null || titleSortOrder.getOwnerType() != null) {
-                        jgen.writeObject(titleSortOrder);
-                        continue;
+            if (mediaSortOrders != null) {
+                for (MediaSortOrder so : mediaSortOrders) {
+                    jgen.writeFieldName(so.getSortField().name());
+                    if (so instanceof TitleSortOrder) {
+                        TitleSortOrder titleSortOrder = (TitleSortOrder) so;
+                        if (titleSortOrder.getTextualType() != null || titleSortOrder.getOwnerType() != null) {
+                            jgen.writeObject(titleSortOrder);
+                            continue;
+                        }
                     }
-                }
-                jgen.writeObject(so.getOrder());
+                    jgen.writeObject(so.getOrder());
 
+                }
             }
             jgen.writeEndObject();
         }
