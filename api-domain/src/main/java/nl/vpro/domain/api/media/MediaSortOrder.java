@@ -1,6 +1,8 @@
 package nl.vpro.domain.api.media;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
@@ -12,6 +14,8 @@ import nl.vpro.domain.api.Order;
  * @author Michiel Meeuwissen
  */
 @XmlType(name = "mediaSortType")
+@ToString
+@EqualsAndHashCode
 public class MediaSortOrder {
 
     @XmlValue

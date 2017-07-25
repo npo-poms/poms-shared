@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +38,7 @@ import nl.vpro.domain.user.Broadcaster;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaSearchType")
+@EqualsAndHashCode(callSuper = true)
 public class MediaSearch extends AbstractTextSearch implements Predicate<MediaObject> {
 
 

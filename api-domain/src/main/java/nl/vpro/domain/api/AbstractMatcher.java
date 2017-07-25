@@ -1,5 +1,7 @@
 package nl.vpro.domain.api;
 
+import lombok.EqualsAndHashCode;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -11,6 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
+@EqualsAndHashCode
 public abstract class AbstractMatcher implements Matcher {
 
     @XmlTransient
