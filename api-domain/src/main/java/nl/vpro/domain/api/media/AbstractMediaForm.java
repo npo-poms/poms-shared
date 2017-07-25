@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
@@ -25,6 +28,8 @@ import nl.vpro.domain.media.MediaObject;
  */
 
 @XmlTransient
+@EqualsAndHashCode
+@ToString
 public abstract class AbstractMediaForm implements Form, Predicate<MediaObject> {
 
     @JsonProperty("highlight")
