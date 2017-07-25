@@ -29,7 +29,7 @@
      </dependency>
      <dependency>
         <groupId>com.github.tomakehurst</groupId>
-        <artifactId>wiremock</artifactId>
+        <artifactId>wiremock-standalone</artifactId>
      </dependency>
   </dependencies>
 </project>
