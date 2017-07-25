@@ -489,23 +489,27 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetImages() throws Exception {
-        Image image = new Image(null, "urn:vpro.image:12345");
-        Image.Builder builder = image.toBuilder();
-        builder.type(ImageType.ICON)
+
+        Image image  = Image.builder()
+            .imageUri("urn:vpro.image:12345")
+            .type(ImageType.ICON)
             .title("Titel")
             .description("Beschrijving")
             .width(500)
             .height(200)
-            .owner(OwnerType.BROADCASTER);
+            .owner(OwnerType.BROADCASTER)
+            .build();
 
-        Image image2 = new Image(null, "urn:vpro.image:12346");
-        Image.Builder builder2 = image2.toBuilder();
-        builder2.type(ImageType.ICON)
+
+        Image image2 = Image.builder()
+            .imageUri("urn:vpro.image:12346")
+            .type(ImageType.ICON)
             .title("Nebo Titel")
             .description("Nebo Beschrijving")
             .width(500)
             .height(200)
-            .owner(OwnerType.NEBO);
+            .owner(OwnerType.NEBO)
+            .build();
 
         Program program = MediaBuilder.program().images(image, image2).build();
         ProgramUpdate update = ProgramUpdate.create(program);
