@@ -48,12 +48,12 @@ public class MediaFormTest {
                 "    <api:sortFields>\n" +
                 "        <api:sort order=\"DESC\">sortDate</api:sort>\n" +
                 "        <api:sort order=\"ASC\">title</api:sort>\n" +
-                "        <api:sort xsi:type=\"api:titleSortOrderType\" textualType=\"LEXICO\" order=\"ASC\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">title</api:sort>\n"+ // TODO: UGLY
+                "        <api:titleSort textualType=\"LEXICO\" order=\"ASC\">title</api:titleSort>\n"+
                 "    </api:sortFields>\n" +
                 "</api:mediaForm>"
         );
         assertThat(out.getSortFields()).hasSize(3);
-        assertThatJson(Jackson2Mapper.INSTANCE.writeValueAsString(out)).isSimilarTo("{\n" +
+        Jackson2TestUtil.roundTripAndSimilarAndEquals(out, "{\n" +
             "  \"sort\" : {\n" +
             "    \"sortDate\" : \"DESC\",\n" +
             "    \"title\" : \"ASC\",\n" +
