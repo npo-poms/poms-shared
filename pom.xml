@@ -51,6 +51,8 @@
     <module>api-rs-services</module>
     <module>api-spring</module>
     <module>poms-extjs</module>
+    <module>media-openskos</module>
+
   </modules>
 
   <repositories>
@@ -93,4 +95,58 @@
     </plugins>
   </build>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>nl.vpro.media</groupId>
+        <artifactId>media-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.vpro.api</groupId>
+        <artifactId>pages-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.vpro.subtitles</groupId>
+        <artifactId>subtitles-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.vpro.media</groupId>
+        <artifactId>media-test</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.publiekeomroep</groupId>
+        <artifactId>poms-shared-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.vpro.image</groupId>
+        <artifactId>image-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.vpro.user</groupId>
+        <artifactId>user-domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.vpro.user</groupId>
+        <artifactId>user-test</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.vpro.media</groupId>
+        <artifactId>media-classification</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>nl.publiekeomroep</groupId>
+        <artifactId>poms-shared-test</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
