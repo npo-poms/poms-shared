@@ -5,6 +5,7 @@
 package nl.vpro.w3.rdf;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import nl.vpro.domain.media.gtaa.Namespaces;
 
 import java.util.ArrayList;
@@ -19,7 +20,13 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "RDF")
 @Data
+@NoArgsConstructor
 public class RDF {
+
+    public RDF(Description desc) {
+        this.descriptions = new ArrayList<>();
+        this.descriptions.add(desc);
+    }
 
     @XmlAttribute(namespace = Namespaces.OPEN_SKOS)
     private Long start;
