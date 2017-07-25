@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+   <responseDate>2017-07-07T12:08:34Z</responseDate>
+   <request verb="ListRecords" metadataPrefix="oai_rdf" set="beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2" from="2017-07-07T11:08:34Z"
+      until="2017-07-07T12:08:34Z">http://openskos.beeldengeluid.nl/oai-pmh</request>
+   <ListRecords xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+      xmlns:openskos="http://openskos.org/xmlns#">
+      <record xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+         xmlns:openskos="http://openskos.org/xmlns#">
+         <header>
+            <identifier>9f004140-c09d-443c-84dc-8a4f8ac875fa</identifier>
+            <datestamp>2017-07-07T11:43:27Z</datestamp>
+            <setSpec>beng</setSpec>
+            <setSpec>beng:gtaa</setSpec>
+            <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
+         </header>
+         <metadata xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+            xmlns:openskos="http://openskos.org/xmlns#">
+            <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+               xmlns:openskos="http://openskos.org/xmlns#">
+
+               <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1672723">
+                  <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+                  <dcterms:dateAccepted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-07-07T11:43:27+00:00</dcterms:dateAccepted>
+                  <skos:scopeNote xml:lang="nl">pianist, componist</skos:scopeNote>
+                  <openskos:tenant>beng</openskos:tenant>
+                  <skos:hiddenLabel xml:lang="nl">André Benoist</skos:hiddenLabel>
+                  <dcterms:dateSubmitted rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-07-06T11:35:36+00:00</dcterms:dateSubmitted>
+                  <openskos:modifiedBy rdf:resource="http://openskos.beeldengeluid.nl/api/users/4a152528-07f7-4b22-be67-59f971294390" />
+                  <openskos:status>approved</openskos:status>
+                  <openskos:set rdf:resource="http://data.beeldengeluid.nl/gtaa" />
+                  <openskos:acceptedBy rdf:resource="http://openskos.beeldengeluid.nl/api/users/4a152528-07f7-4b22-be67-59f971294390" />
+                  <skos:notation>1672723</skos:notation>
+                  <skos:prefLabel xml:lang="nl">Benoist, André</skos:prefLabel>
+                  <skos:editorialNote xml:lang="nl">proactief</skos:editorialNote>
+                  <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-07-07T11:43:27+00:00</dcterms:modified>
+                  <dcterms:creator rdf:resource="http://openskos.beeldengeluid.nl/api/users/ece41d3c-3742-4a54-b449-d03b68daac3a" />
+                  <openskos:uuid>9f004140-c09d-443c-84dc-8a4f8ac875fa</openskos:uuid>
+                  <openskos:toBeChecked>0</openskos:toBeChecked>
+                  <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen" />
+               </rdf:Description>
+
+            </rdf:RDF>
+         </metadata>
+      </record>
+      <resumptionToken completeListSize="1" cursor="0"></resumptionToken>
+   </ListRecords>
+</OAI-PMH>
