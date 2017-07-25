@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.EqualsAndHashCode;
+
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,6 +24,7 @@ import nl.vpro.domain.api.page.PageSearch;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlSeeAlso({MediaSearch.class, PageSearch.class})
 @XmlTransient
+@EqualsAndHashCode(callSuper = true)
 public abstract class AbstractTextSearch extends AbstractSearch {
 
 
