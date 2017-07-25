@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rdf:RDF xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:openskos="http://openskos.org/xmlns#" xmlns:dcterms="http://purl.org/dc/terms/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#"
+   xmlns:ns7="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <rdf:Description>
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+      <skos:editorialNote xml:lang="nl">Note123</skos:editorialNote>
+      <skosxl:prefLabel>
+         <rdf:Description>
+            <rdf:type rdf:resource="http://www.w3.org/2008/05/skos-xl#Label" />
+            <skosxl:literalForm xml:lang="nl">Testlabel1</skosxl:literalForm>
+         </rdf:Description>
+      </skosxl:prefLabel>
+      <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen" />
+      <ns7:creator>testCreatorX</ns7:creator>
+      <dcterms:dateSubmitted>2017-07-07T13:02:44.900+02:00</dcterms:dateSubmitted>
+   </rdf:Description>
+</rdf:RDF>

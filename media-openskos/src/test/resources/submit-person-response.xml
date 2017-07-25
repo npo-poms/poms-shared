@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:openskos="http://openskos.org/xmlns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+   xmlns:dcterms="http://purl.org/dc/terms/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#">
+
+   <rdf:Description rdf:about="http://data.beeldengeluid.nl/gtaa/1672261">
+      <rdf:type rdf:resource="http://www.w3.org/2004/02/skos/core#Concept" />
+      <openskos:tenant>beng</openskos:tenant>
+      <skos:notation>1672261</skos:notation>
+      <skos:editorialNote xml:lang="nl">Note123</skos:editorialNote>
+      <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-07-07T11:02:45+00:00</dcterms:modified>
+      <openskos:uuid>ec88f123-8acb-440c-8fff-092fb2d78a1f</openskos:uuid>
+      <openskos:modifiedBy rdf:resource="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/users/027fb835-47c2-4a2d-8e4e-5257cc9b609a" />
+      <skos:inScheme rdf:resource="http://data.beeldengeluid.nl/gtaa/Persoonsnamen" />
+      <dc:creator>testCreatorX</dc:creator>
+      <dcterms:dateSubmitted>2017-07-07T13:02:44.900+02:00</dcterms:dateSubmitted>
+      <openskos:status>candidate</openskos:status>
+      <openskos:set rdf:resource="http://data.beeldengeluid.nl/gtaa" />
+      <skosxl:prefLabel>
+         <rdf:Description rdf:about="http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/api/labels/70e16256-bce0-4ae9-ad62-b18dd243e1f3">
+            <rdf:type rdf:resource="http://www.w3.org/2008/05/skos-xl#Label" />
+            <skosxl:literalForm xml:lang="nl">Testlabel1</skosxl:literalForm>
+            <openskos:tenant>beng</openskos:tenant>
+            <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2017-07-07T11:02:52+00:00</dcterms:modified>
+         </rdf:Description>
+      </skosxl:prefLabel>
+
+   </rdf:Description>
+
+</rdf:RDF>
