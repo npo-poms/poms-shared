@@ -174,7 +174,7 @@ public class MediaObjectsTest {
     public void hasSubtitles_NoSubs() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         final Program program = MediaBuilder.program()
             .build();
-        assertFalse(program.isHasSubtitles());
+        assertFalse(program.hasSubtitles());
     }
 
     @Test
@@ -184,7 +184,7 @@ public class MediaObjectsTest {
     			.build();
     	program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.TRANSLATION));
-    	assertFalse(program.isHasSubtitles());
+    	assertFalse(program.hasSubtitles());
     }
 
     @Test
@@ -193,6 +193,6 @@ public class MediaObjectsTest {
             .build();
         program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
             SubtitlesType.CAPTION));
-        assertTrue(program.isHasSubtitles());
+        assertTrue(program.hasSubtitles());
     }
 }
