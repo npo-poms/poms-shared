@@ -24,7 +24,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
  */
 public class DateRangeFacetsToJson {
 
-    private static final ObjectMapper mapper = Jackson2Mapper.getInstance();
+    private static final ObjectMapper mapper = Jackson2Mapper.getLenientInstance();
 
     public static class Serializer extends JsonSerializer<DateRangeFacets<?>> {
 
@@ -48,7 +48,7 @@ public class DateRangeFacetsToJson {
         public DateRangeFacets deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
             DateRangeFacets result = new DateRangeFacets();
 
-            TreeNode treeNode = mapper.readTree(jp);
+            TreeNode treeNode = jp.getCodec().readTree(jp);
             if(treeNode instanceof ArrayNode) {
                 ArrayNode arrayNode = (ArrayNode)treeNode;
                 for(JsonNode jsonNode : arrayNode) {
