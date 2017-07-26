@@ -36,6 +36,23 @@ public enum TextualType {
     WORK,
     ABBREVIATION;
 
+    private final boolean isDeprecated;
+
+    TextualType() {
+        boolean dep;
+        try {
+            dep = OwnerType.class.getField(name()).isAnnotationPresent(Deprecated.class);
+        } catch (Exception e) {
+            dep = false;
+        }
+        isDeprecated = dep;
+    }
+
+    public boolean isDeprecated() {
+        return isDeprecated;
+    }
+
+
     public String value() {
         return name();
     }

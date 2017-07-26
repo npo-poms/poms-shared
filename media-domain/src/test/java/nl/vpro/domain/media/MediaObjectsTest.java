@@ -18,7 +18,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 
-import static nl.vpro.domain.TextualObjects.findOwnersForTextFields;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -28,28 +28,6 @@ import static org.junit.Assert.assertTrue;
  * @since 1.4
  */
 public class MediaObjectsTest {
-
-    @Test
-    public void testFindOwnersForTextFieldsOnOrdering() throws Exception {
-        final Program program = MediaBuilder.program()
-            .titles(new Title("1", OwnerType.CERES, TextualType.MAIN))
-            .descriptions(new Description("1", OwnerType.BROADCASTER, TextualType.EPISODE))
-            .build();
-
-        assertThat(findOwnersForTextFields(program).length).isEqualTo(2);
-        assertThat(findOwnersForTextFields(program)[0]).isEqualTo(OwnerType.BROADCASTER);
-    }
-
-    @Test
-    public void testFindOwnersForTextFieldsOnDuplicates() throws Exception {
-        final Program program = MediaBuilder.program().titles(
-            new Title("1", OwnerType.CERES, TextualType.MAIN),
-            new Title("1", OwnerType.CERES, TextualType.EPISODE)
-        ).build();
-
-        assertThat(findOwnersForTextFields(program).length).isEqualTo(1);
-    }
-
 
     @Test
     public void sortDate() {
