@@ -52,8 +52,8 @@ public class TextualObjectsTest {
         object.addTitle("c", OwnerType.BEELDENGELUID, TextualType.MAIN);
 
 
-        assertThat(TextualObjects.get(object.getTitles(), TextualType.MAIN).get().get()).isEqualTo("a");
-        assertThat(TextualObjects.get(object.getTitles(), TextualType.MAIN, OwnerType.MIS).get().get()).isEqualTo("b");
+        assertThat(TextualObjects.expand(object.getTitles(), TextualType.MAIN).get().get()).isEqualTo("a");
+        assertThat(TextualObjects.expand(object.getTitles(), TextualType.MAIN, OwnerType.MIS).get().get()).isEqualTo("b");
 
     }
 
@@ -65,8 +65,8 @@ public class TextualObjectsTest {
         object.addTitle("c", OwnerType.BEELDENGELUID, TextualType.MAIN);
 
 
-        assertThat(TextualObjects.get(object.getTitles(), TextualType.LEXICO).get().get()).isEqualTo("a");
-        assertThat(TextualObjects.get(object.getTitles(), TextualType.LEXICO, OwnerType.MIS).get().get()).isEqualTo("b");
+        assertThat(TextualObjects.expand(object.getTitles(), TextualType.LEXICO).get().get()).isEqualTo("a");
+        assertThat(TextualObjects.expand(object.getTitles(), TextualType.LEXICO, OwnerType.MIS).get().get()).isEqualTo("b");
     }
 
 
