@@ -1,10 +1,13 @@
 package nl.vpro.domain;
 
 
+import java.util.function.BiFunction;
+
 import javax.annotation.Nonnull;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.util.TriFunction;
 
 /**
  * Represents an object having owned and typed titles and descriptions.
@@ -20,7 +23,17 @@ public interface TextualObject<
 
     OwnerType DEFAULT_OWNER = OwnerType.BROADCASTER;
 
-    TO addTitle(String title, @Nonnull OwnerType owner, @Nonnull TextualType type);
+    TriFunction<String, OwnerType, TextualType, T> getOwnedTitleCreator();
+
+    default BiFunction<String, TextualType, T> getTitleCreator() {
+        return (s, t) -> getOwnedTitleCreator().apply(s, DEFAULT_OWNER, t);
+    }
+
+    default TO addTitle(String title, @Nonnull  OwnerType owner, @Nonnull  TextualType type) {
+        T t = getOwnedTitleCreator().apply(title, owner, type);
+        getTitles().add(t);
+        return self();
+    }
 
     @Override
     default TO addTitle(String title, TextualType type) {
@@ -59,8 +72,18 @@ public interface TextualObject<
         return null;
     }
 
-    TO addDescription(String description, @Nonnull OwnerType owner, @Nonnull TextualType type);
 
+    default BiFunction<String, TextualType, D> getDescriptionCreator() {
+        return (s, t) -> getOwnedDescriptionCreator().apply(s, DEFAULT_OWNER, t);
+    }
+
+    TriFunction<String, OwnerType, TextualType, D> getOwnedDescriptionCreator();
+
+    default TO addDescription(String description, OwnerType owner, TextualType type) {
+        D d = getOwnedDescriptionCreator().apply(description, owner, type);
+        getDescriptions().add(d);
+        return self();
+    }
 
     @Override
     default TO addDescription(String title, @Nonnull TextualType type) {

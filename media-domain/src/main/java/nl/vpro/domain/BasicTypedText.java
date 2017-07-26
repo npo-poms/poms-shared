@@ -20,7 +20,7 @@ public class BasicTypedText implements TypedText, Comparable<TypedText> {
 
     }
 
-    public BasicTypedText(TextualType type, String text) {
+    public BasicTypedText(String text, TextualType type) {
         this.type = type;
         this.text = text;
     }
@@ -35,6 +35,10 @@ public class BasicTypedText implements TypedText, Comparable<TypedText> {
     public String get() {
         return text;
 
+    }
+    @Override
+    public String toString() {
+        return type + ":" + text;
     }
 
 }

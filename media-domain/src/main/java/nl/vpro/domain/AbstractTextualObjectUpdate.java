@@ -10,7 +10,8 @@ import java.util.TreeSet;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public abstract class AbstractTextualObjectUpdate<T extends TypedText, D extends TypedText, TO extends AbstractTextualObjectUpdate<T, D, TO>> implements TextualObjectUpdate<T, D, TO> {
+public abstract class AbstractTextualObjectUpdate<T extends TypedText, D extends TypedText, TO extends AbstractTextualObjectUpdate<T, D, TO>>
+    implements TextualObjectUpdate<T, D, TO> {
 
 
     @Getter
