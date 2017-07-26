@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.BiFunction;
 
+import javax.annotation.Nonnull;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -157,17 +159,25 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.titles = titles;
     }
 
+
+
     public void setTitles(TitleUpdate... titles) {
         this.titles = new TreeSet<>(Arrays.asList(titles));
     }
 
 
     @Override
+    public BiFunction<String, TextualType, TitleUpdate> getTitleCreator() {
+        return TitleUpdate::new;
+
+    }
+
+    @Override
     public ScheduleEventUpdate addTitle(String title, TextualType type) {
         if (titles == null) {
             titles = new TreeSet<>();
         }
-        getTitles().add(new TitleUpdate(title, type));
+        getTitles().add(getTitleCreator().apply(title, type));
         return this;
     }
 
@@ -187,13 +197,18 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
 
+    @Override
+    public BiFunction<String, TextualType, DescriptionUpdate> getDescriptionCreator() {
+        return DescriptionUpdate::new;
+
+    }
 
     @Override
-    public ScheduleEventUpdate addDescription(String description, TextualType type) {
+    public ScheduleEventUpdate addDescription(String description, @Nonnull TextualType type) {
         if (descriptions == null) {
             descriptions  = new TreeSet<>();
         }
-        getDescriptions().add(new DescriptionUpdate(description, type));
+        getDescriptions().add(getDescriptionCreator().apply(description, type));
         return this;
     }
 

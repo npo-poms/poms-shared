@@ -61,4 +61,51 @@ public enum TextualType {
         return TextualType.valueOf(v);
     }
 
+    /*
+    mediadb=> select  type, count(*) from title group by type;
+     type     |  count
+--------------+---------
+ ORIGINAL     |   75431
+ WORK         |   29746
+ ABBREVIATION |    1274
+ MAIN         | 1618743
+ SUB          |  348369
+ SHORT        |   75888
+ EPISODE      |   14142
+ LEXICO       |   15203
+(8 rows)
+
+mediadb=> select  type, count(*) from description  group by type;
+  type   | count
+---------+--------
+ MAIN    | 932845
+ SHORT   | 496172
+ EPISODE | 122727
+ KICKER  |  97617
+ SUB     |  65905
+(5 rows)
+
+     */
+    public static TextualType[] TITLES = new TextualType[] {
+        MAIN,
+        SHORT,
+        SUB,
+        EPISODE,
+        ORIGINAL,
+        LEXICO,
+        WORK,
+        ABBREVIATION
+    };
+
+
+    public static TextualType[] DESCRIPTIONS = new TextualType[]{
+        MAIN,
+        SHORT,
+        EPISODE,
+        KICKER,
+        SUB
+    };
+
+
+
 }

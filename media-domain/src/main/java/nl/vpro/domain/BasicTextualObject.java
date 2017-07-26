@@ -2,6 +2,7 @@ package nl.vpro.domain;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.util.TriFunction;
 
 /**
  * @author Michiel Meeuwissen
@@ -10,16 +11,13 @@ import nl.vpro.domain.media.support.TextualType;
 public class BasicTextualObject extends AbstractTextualObject<BasicOwnedText, BasicOwnedText, BasicTextualObject> {
 
     @Override
-    public BasicTextualObject addTitle(String title, OwnerType owner, TextualType type) {
-        getTitles().add(new BasicOwnedText(owner, type, title));
-        return self();
-
+    public TriFunction<String, OwnerType, TextualType, BasicOwnedText> getOwnedTitleCreator() {
+        return BasicOwnedText::new;
     }
 
     @Override
-    public BasicTextualObject addDescription(String description, OwnerType owner, TextualType type) {
-        getDescriptions().add(new BasicOwnedText(owner, type, description));
-        return self();
+    public TriFunction<String, OwnerType, TextualType, BasicOwnedText> getOwnedDescriptionCreator() {
+        return BasicOwnedText::new;
     }
 
 }
