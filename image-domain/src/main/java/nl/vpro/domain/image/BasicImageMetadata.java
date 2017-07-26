@@ -107,12 +107,17 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
 
     private ImageFormat imageFormat;
 
-    private UUID uploadId;
+    private final UUID uploadId;
 
 
     public BasicImageMetadata() {
+        this.uploadId = null;
     }
 
+
+    public BasicImageMetadata(UUID uploadId) {
+        this.uploadId = uploadId;
+    }
 
 
     public static BasicImageMetadata of(ImageMetadata<?> image) {
