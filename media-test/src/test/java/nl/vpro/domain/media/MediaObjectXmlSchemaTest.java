@@ -153,7 +153,7 @@ public class MediaObjectXmlSchemaTest {
 
         Program rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
 
-        assertThat(rounded.isHasSubtitles()).isTrue();
+        assertThat(rounded.hasSubtitles()).isTrue();
 
     }
 
