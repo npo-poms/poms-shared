@@ -34,7 +34,7 @@ public class MediaSortOrderListJsonTest {
 
         MediaForm form = Jackson2Mapper.getLenientInstance().readValue(example, MediaForm.class);
         assertThat(form.getSortFields()).hasSize(2);
-        assertThat(form.getSortFields().get(0).getSortField()).isEqualTo(MediaSortField.title);
+        assertThat(form.getSortFields().get(0).getField()).isEqualTo(MediaSortField.title);
     }
 
 
@@ -62,7 +62,7 @@ public class MediaSortOrderListJsonTest {
 
         MediaForm form = Jackson2Mapper.getLenientInstance().readValue(example, MediaForm.class);
         assertThat(form.getSortFields()).hasSize(3);
-        assertThat(form.getSortFields().get(0).getSortField()).isEqualTo(MediaSortField.title);
+        assertThat(form.getSortFields().get(0).getField()).isEqualTo(MediaSortField.title);
     }
 
 }
