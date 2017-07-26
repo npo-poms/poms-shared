@@ -1,6 +1,6 @@
 package nl.vpro.domain;
 
-import javax.annotation.Nonnull;
+import java.util.function.BiFunction;
 
 import nl.vpro.domain.media.support.TextualType;
 
@@ -11,15 +11,12 @@ import nl.vpro.domain.media.support.TextualType;
 public class BasicTextualUpdate extends AbstractTextualObjectUpdate<BasicTypedText, BasicTypedText, BasicTextualUpdate> {
 
     @Override
-    public BasicTextualUpdate addTitle(String title, @Nonnull TextualType type) {
-        getTitles().add(new BasicTypedText(type, title));
-        return self();
-
+    public BiFunction<String, TextualType, BasicTypedText> getTitleCreator() {
+        return BasicTypedText::new;
     }
 
     @Override
-    public BasicTextualUpdate addDescription(String description, @Nonnull TextualType type) {
-        getDescriptions().add(new BasicTypedText(type, description));
-        return self();
+    public BiFunction<String, TextualType, BasicTypedText> getDescriptionCreator() {
+        return BasicTypedText::new;
     }
 }

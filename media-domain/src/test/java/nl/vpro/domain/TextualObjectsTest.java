@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.junit.Test;
 
 import nl.vpro.domain.media.MediaBuilder;
@@ -16,6 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
+@SuppressWarnings("ConstantConditions")
+@Slf4j
 public class TextualObjectsTest {
 
 
@@ -45,8 +49,39 @@ public class TextualObjectsTest {
         BasicTextualObject object = new BasicTextualObject();
         object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
         object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
+        object.addTitle("c", OwnerType.BEELDENGELUID, TextualType.MAIN);
 
-        //TextualObjects.get(object.getTitles(), Arrays.asList())
+
+        assertThat(TextualObjects.get(object.getTitles(), TextualType.MAIN).get().get()).isEqualTo("a");
+        assertThat(TextualObjects.get(object.getTitles(), TextualType.MAIN, OwnerType.MIS).get().get()).isEqualTo("b");
+
+    }
+
+    @Test
+    public void getLexicoTitle() {
+        BasicTextualObject object = new BasicTextualObject();
+        object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
+        object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
+        object.addTitle("c", OwnerType.BEELDENGELUID, TextualType.MAIN);
+
+
+        assertThat(TextualObjects.get(object.getTitles(), TextualType.LEXICO).get().get()).isEqualTo("a");
+        assertThat(TextualObjects.get(object.getTitles(), TextualType.LEXICO, OwnerType.MIS).get().get()).isEqualTo("b");
+    }
+
+
+    @Test
+    public void expand() {
+        BasicTextualObject object = new BasicTextualObject();
+        object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
+        object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
+        object.addTitle("c", OwnerType.BEELDENGELUID, TextualType.MAIN);
+
+        object.addTitle("b", OwnerType.MIS, TextualType.SUB);
+
+
+        log.info("{}", TextualObjects.expandTitles(object.getTitles(), object.getOwnedTitleCreator()));
+
 
 
     }

@@ -7,6 +7,7 @@ import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.util.ResortedSortedSet;
+import nl.vpro.util.TriFunction;
 
 /**
  * Utilities related to {@link TextualObject}s
@@ -34,19 +35,33 @@ public class TextualObjects {
     }
 
 
-    public static <OT extends OwnedText> SortedSet<OT> expand(Collection<OT> texts, List<TextualType> types, List<OwnerType> owners) {
+    public static <OT extends OwnedText> SortedSet<OT> expand(
+        Collection<OT> texts,
+        TriFunction<String, OwnerType, TextualType, OT> creator,
+        List<TextualType> types,
+        List<OwnerType> owners) {
         SortedSet<OT> result = new TreeSet<>();
         result.addAll(texts);
         for(TextualType textualType : types) {
             for (OwnerType ownerType : owners) {
-                if (ownerType.isDeprecated()) {
-                    continue;
-                }
+                get(texts, textualType, ownerType).ifPresent(ot -> {
+                    if (ot.getType() != textualType || ot.getOwner() != ownerType) {
+                        result.add(creator.apply(ot.get(), ownerType, textualType));
+                    }
+                    }
+                );
             }
         }
         return result;
     }
 
+    public static <OT extends OwnedText> SortedSet<OT> expandTitles(
+        Collection<OT> texts,
+        TriFunction<String, OwnerType, TextualType, OT> creator) {
+        return expand(texts,
+            creator,
+            Arrays.asList(TextualType.TITLES), Arrays.asList(OwnerType.ENTRIES));
+    }
 
     public static <OT extends OwnedText> Optional<String> getOptional(Collection<OT> titles, OwnerType owner, TextualType type) {
         for (OT title : titles) {
@@ -198,20 +213,20 @@ public class TextualObjects {
      * @param <OT>
      * @return
      */
-    public static <OT extends OwnedText> Optional<OT> get(Collection<OT> titles, TextualType textualType, OwnerType ownerType) {
+    public static <OT extends OwnedText> Optional<OT> get(Collection<OT> titles, TextualType textualType, final OwnerType ownerType) {
         for (OT t : titles) {
             if (t.getType() == textualType && t.getOwner() == ownerType) {
                 return Optional.of(t);
             }
         }
-        ownerType = ownerType == OwnerType.first() ? OwnerType.down(OwnerType.first()) : OwnerType.first();
-        while(ownerType != OwnerType.last()) {
+        OwnerType runningOwnerType = ownerType == OwnerType.first() ? OwnerType.down(OwnerType.first()) : OwnerType.first();
+        while(runningOwnerType != OwnerType.last()) {
             for (OT t : titles) {
-                if (t.getType() == textualType && t.getOwner() == ownerType) {
+                if (t.getType() == textualType && t.getOwner() == runningOwnerType) {
                     return Optional.of(t);
                 }
             }
-            ownerType = OwnerType.down(ownerType);
+            runningOwnerType = OwnerType.down(runningOwnerType);
         }
         if (textualType == TextualType.LEXICO) {
             return get(titles, TextualType.MAIN, ownerType);
@@ -219,6 +234,9 @@ public class TextualObjects {
         return Optional.empty();
     }
 
+    public static <OT extends OwnedText> Optional<OT> get(Collection<OT> titles, TextualType textualType) {
+        return get(titles, textualType, OwnerType.first());
+    }
 
     /**
      * Give a collection, find the first object which equals the object we want to be in it.
