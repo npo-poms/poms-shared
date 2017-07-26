@@ -434,8 +434,8 @@
   <xs:complexType name="titleSortOrderType">
     <xs:simpleContent>
       <xs:extension base="mediaSortType">
-        <xs:attribute name="textualType" type="media:textualTypeEnum"/>
-        <xs:attribute name="ownerType" type="ns1:ownerTypeEnum"/>
+        <xs:attribute name="type" type="media:textualTypeEnum"/>
+        <xs:attribute name="owner" type="ns1:ownerTypeEnum"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
