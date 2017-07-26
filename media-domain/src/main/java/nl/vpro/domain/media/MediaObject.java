@@ -431,7 +431,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected Short teletext;
 
     @XmlElement
-    @Getter
     @Setter
     protected Boolean isDubbed;
 
@@ -1701,15 +1700,24 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
 
 
-    @XmlAttribute
+    public Boolean hasSubtitles() {
+        return isHasSubtitles();
+    }
+
+    public Boolean isDubbed() {
+        return isDubbed;
+    }
+
+
+    @XmlAttribute(name = "hasSubtitles")
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
-    public Boolean isHasSubtitles() {
+    protected Boolean isHasSubtitles() {
         return getAvailableSubtitles().stream().anyMatch(
             sub -> Locales.DUTCH.equals(sub.getLanguage()) &&
                 SubtitlesType.CAPTION == sub.getType());
     }
 
-    public void setHasSubtitles(Boolean hasSubtitles) {
+    protected void setHasSubtitles(Boolean hasSubtitles) {
         // only to satisfy jaxb
         // it will set 'available subtitles' too.
     }
