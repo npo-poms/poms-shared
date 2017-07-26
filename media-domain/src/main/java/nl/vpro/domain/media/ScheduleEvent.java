@@ -33,6 +33,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.util.DateUtils;
+import nl.vpro.util.TriFunction;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 import static nl.vpro.domain.TextualObjects.sorted;
@@ -720,8 +721,15 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @Override
-    public ScheduleEvent addTitle(String title, OwnerType owner, TextualType type) {
-        return addTitle(new ScheduleEventTitle(title, owner, type));
+    public TriFunction<String, OwnerType, TextualType, ScheduleEventTitle> getOwnedTitleCreator() {
+        return ScheduleEventTitle::new;
+
+    }
+
+    @Override
+    public TriFunction<String, OwnerType, TextualType, ScheduleEventDescription> getOwnedDescriptionCreator() {
+        return ScheduleEventDescription::new;
+
     }
 
 
@@ -741,12 +749,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public void setDescriptions(SortedSet<ScheduleEventDescription> descriptions) {
         this.descriptions = descriptions;
     }
-
-    @Override
-    public ScheduleEvent addDescription(String description, OwnerType owner, TextualType type) {
-        return addDescription(new ScheduleEventDescription(description, owner, type));
-    }
-
 
     @Override
     public ScheduleEvent addDescription(ScheduleEventDescription description) {

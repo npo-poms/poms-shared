@@ -74,7 +74,6 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable {
     protected MediaObject parent;
 
 
-
     /**
      * Creates a new <code>Title</code> with a length of 256 characters.
      */

@@ -1,19 +1,21 @@
 package nl.vpro.domain;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
 
 /**
- * An object that has titles and descriptions, which are typed, but not necessary owned (unlike {@link TextualObject}). 
+ * An object that has titles and descriptions, which are typed, but not necessary owned (unlike {@link TextualObject}).
  * This means that the object generally is used to update 'TextualObjects', since the user updating is associated with only one {@link nl.vpro.domain.media.support.OwnerType}.
- * 
+ *
  * @param <T> The type of 'titles' in this object.
  * @param <D> The type of 'descriptions'.
  * @param <TO> The type of {@link #self()} which is returned by several setters, so they can easily be chained
@@ -29,7 +31,12 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return Locales.DUTCH;
     }
 
-    TO addTitle(String title, @Nonnull TextualType type);
+    BiFunction<String, TextualType, T> getTitleCreator();
+
+    default TO addTitle(String title, @Nonnull TextualType type) {
+        getTitles().add(getTitleCreator().apply(title, type));
+        return self();
+    }
 
     default void setTitle(String title, @Nonnull TextualType type) {
         if (getTitles() != null) {
@@ -168,8 +175,12 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return self();
     }
 
+    BiFunction<String, TextualType, D> getDescriptionCreator();
 
-    TO addDescription(String description, @Nonnull TextualType type);
+    default TO addDescription(String description, @Nonnull TextualType type) {
+        getDescriptions().add(getDescriptionCreator().apply(description, type));
+        return self();
+    }
 
 
     SortedSet<D> getDescriptions();
