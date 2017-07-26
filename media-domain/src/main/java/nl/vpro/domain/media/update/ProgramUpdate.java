@@ -11,9 +11,11 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.MediaBuilder;
+import nl.vpro.domain.media.Program;
+import nl.vpro.domain.media.ProgramType;
+import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.util.TransformingSortedSet;
 
 
@@ -176,5 +178,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
             .append('}');
         return sb.toString();
     }
+
 
 }

@@ -20,9 +20,14 @@ public class BasicOwnedText extends BasicTypedText implements OwnedText {
 
     }
 
-    public BasicOwnedText(OwnerType owner, TextualType type, String text) {
-        super(type, text);
+    public BasicOwnedText(String text, OwnerType owner, TextualType type) {
+        super(text, type);
         this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return getType() + ":" + owner + ":" + get();
     }
 
 }

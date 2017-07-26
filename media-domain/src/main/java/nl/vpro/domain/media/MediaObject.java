@@ -57,6 +57,7 @@ import nl.vpro.nicam.NicamRated;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ResortedSortedSet;
 import nl.vpro.util.SortedSetSameElementWrapper;
+import nl.vpro.util.TriFunction;
 import nl.vpro.validation.Language;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -978,7 +979,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<Title> getExpandedTitles() {
         // TODO
-        return TextualObjects.expand(getTitles(), Arrays.asList(), Arrays.asList());
+        return TextualObjects.expandTitles(getTitles(), getOwnedTitleCreator());
     }
 
 
@@ -1006,13 +1007,17 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
+    public TriFunction<String, OwnerType, TextualType, Title> getOwnedTitleCreator() {
+        return Title::new;
+    }
+
+    @Override
     public MediaObject addTitle(String title, OwnerType owner, TextualType type) {
         final Title existingTitle = findTitle(owner, type);
-
         if (existingTitle != null) {
             existingTitle.setTitle(title);
         } else {
-            this.addTitle(new Title(title, owner, type));
+            this.addTitle(getOwnedTitleCreator().apply(title, owner, type));
         }
 
         return this;
@@ -1047,6 +1052,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
     }
 
+
     @Override
     public MediaObject addDescription(Description description) {
         if (description != null) {
@@ -1071,13 +1077,18 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
+    public TriFunction<String, OwnerType, TextualType, Description> getOwnedDescriptionCreator() {
+        return Description::new;
+    }
+
+    @Override
     public MediaObject addDescription(String description, OwnerType owner, TextualType type) {
         final Description existingDescription = findDescription(owner, type);
 
         if (existingDescription != null) {
             existingDescription.set(description);
         } else {
-            this.addDescription(new Description(description, owner, type));
+            this.addDescription(getOwnedDescriptionCreator().apply(description, owner, type));
         }
 
         return this;
