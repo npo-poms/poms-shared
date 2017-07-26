@@ -41,31 +41,43 @@ public class MediaFormTest {
         list.put(MediaSortField.title, null);
         list.add(TitleSortOrder.builder().textualType(TextualType.LEXICO).build());
         in.setHighlight(true);
-
         in.setSortFields(list);
         MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
             "<api:mediaForm highlight=\"true\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <api:sortFields>\n" +
                 "        <api:sort order=\"DESC\">sortDate</api:sort>\n" +
                 "        <api:sort order=\"ASC\">title</api:sort>\n" +
-                "        <api:titleSort textualType=\"LEXICO\" order=\"ASC\" />\n"+
+                "        <api:titleSort type=\"LEXICO\" order=\"ASC\" />\n" +
                 "    </api:sortFields>\n" +
                 "</api:mediaForm>"
         );
         assertThat(out.getSortFields()).hasSize(3);
-        MediaForm result = Jackson2TestUtil.roundTripAndSimilarAndEquals(out, "{\n" +
-            "  \"sort\" : {\n" +
-            "    \"sortDate\" : \"DESC\",\n" +
-            "    \"title\" : \"ASC\",\n" +
-            "    \"title:0\" : {\n" +
-            "      \"order\" : \"ASC\",\n" +
-            "      \"textualType\" : \"LEXICO\",\n" +
-            "      \"sortField\" : \"title\"\n" +
-            "    }\n" +
-            "  },\n" +
+    }
+
+    @Test
+    public void testGetSortJson() throws Exception {
+        MediaForm in = new MediaForm();
+        MediaSortOrderList list = new MediaSortOrderList();
+        list.put(MediaSortField.sortDate, Order.DESC);
+        list.put(MediaSortField.title, null);
+        list.add(TitleSortOrder.builder().textualType(TextualType.LEXICO).build());
+        in.setHighlight(true);
+        in.setSortFields(list);
+        MediaForm result = Jackson2TestUtil.roundTripAndSimilarAndEquals(in, "{\n" +
+            "  \"sort\" : [ {\n" +
+            "    \"order\" : \"DESC\",\n" +
+            "    \"field\" : \"sortDate\"\n" +
+            "  }, \"title\", {\n" +
+            "    \"order\" : \"ASC\",\n" +
+            "    \"type\" : \"LEXICO\",\n" +
+            "    \"field\" : \"title\"\n" +
+            "  } ],\n" +
             "  \"highlight\" : true\n" +
             "}");
         assertThat(result.getSortFields()).hasSize(3);
+        assertThat(result.getSortFields().get(0).getField()).isEqualTo(MediaSortField.sortDate);
+        assertThat(result).isEqualTo(in);
+
     }
 
 
