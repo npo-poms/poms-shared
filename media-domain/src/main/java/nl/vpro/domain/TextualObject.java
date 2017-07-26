@@ -23,8 +23,12 @@ public interface TextualObject<
 
     OwnerType DEFAULT_OWNER = OwnerType.BROADCASTER;
 
+    /**
+     * @since 5.5
+     */
     TriFunction<String, OwnerType, TextualType, T> getOwnedTitleCreator();
 
+    @Override
     default BiFunction<String, TextualType, T> getTitleCreator() {
         return (s, t) -> getOwnedTitleCreator().apply(s, DEFAULT_OWNER, t);
     }
@@ -73,10 +77,14 @@ public interface TextualObject<
     }
 
 
+    @Override
     default BiFunction<String, TextualType, D> getDescriptionCreator() {
         return (s, t) -> getOwnedDescriptionCreator().apply(s, DEFAULT_OWNER, t);
     }
 
+    /**
+     * @since 5.5
+     */
     TriFunction<String, OwnerType, TextualType, D> getOwnedDescriptionCreator();
 
     default TO addDescription(String description, OwnerType owner, TextualType type) {

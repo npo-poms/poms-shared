@@ -31,6 +31,9 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return Locales.DUTCH;
     }
 
+    /**
+     * @since 5.5
+     */
     BiFunction<String, TextualType, T> getTitleCreator();
 
     default TO addTitle(String title, @Nonnull TextualType type) {
@@ -175,6 +178,9 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return self();
     }
 
+    /**
+     * @since 5.5
+     */
     BiFunction<String, TextualType, D> getDescriptionCreator();
 
     default TO addDescription(String description, @Nonnull TextualType type) {
