@@ -125,15 +125,28 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
     BEELDENGELUID("Beeld & Geluid")
 
     ;
-    private String displayName;
+    private final String displayName;
+
+    private final boolean isDeprecated;
 
     OwnerType(String displayName) {
         this.displayName = displayName;
+        boolean dep;
+        try {
+            dep = OwnerType.class.getField(name()).isAnnotationPresent(Deprecated.class);
+        } catch (Exception e) {
+            dep = false;
+        }
+        isDeprecated = dep;
     }
 
     @Override
     public String getDisplayName() {
         return displayName;
+    }
+
+    public boolean isDeprecated() {
+        return isDeprecated;
     }
 
     public static Comparator<OwnerType> comparator(OwnerType... order) {
@@ -156,4 +169,16 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
     public static OwnerType[] after(OwnerType ownerType) {
         return Arrays.stream(OwnerType.values()).filter(ot -> ot.ordinal() >= ownerType.ordinal()).toArray(OwnerType[]::new);
     }
+    public static OwnerType last() {
+        return OwnerType.values()[OwnerType.values().length - 1];
+    }
+
+    public static OwnerType first() {
+        return OwnerType.values()[0];
+    }
+
+    public static OwnerType down(OwnerType ot) {
+        return OwnerType.values()[ot.ordinal() + 1];
+    }
+
 }
