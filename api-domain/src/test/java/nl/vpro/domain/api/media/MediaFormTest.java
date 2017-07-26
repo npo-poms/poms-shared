@@ -89,7 +89,6 @@ public class MediaFormTest {
             "}\n";
         MediaForm form = Jackson2Mapper.getInstance().readValue(new StringReader(example), MediaForm.class);
         assertThat(form.getSortFields()).isEmpty();
-        Jackson2TestUtil.roundTripAndSimilar(form, example);
     }
 
     @Test
