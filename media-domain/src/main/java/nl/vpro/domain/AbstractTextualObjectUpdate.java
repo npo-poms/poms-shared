@@ -5,6 +5,9 @@ import lombok.Setter;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.BiFunction;
+
+import nl.vpro.domain.media.support.TextualType;
 
 /**
  * @author Michiel Meeuwissen
@@ -12,6 +15,11 @@ import java.util.TreeSet;
  */
 public abstract class AbstractTextualObjectUpdate<T extends TypedText, D extends TypedText, TO extends AbstractTextualObjectUpdate<T, D, TO>>
     implements TextualObjectUpdate<T, D, TO> {
+
+    @Getter
+    private final BiFunction<String, TextualType, T> titleCreator;
+    @Getter
+    private final BiFunction<String, TextualType, D> descriptionCreator;
 
 
     @Getter
@@ -22,4 +30,10 @@ public abstract class AbstractTextualObjectUpdate<T extends TypedText, D extends
     @Getter
     @Setter
     private SortedSet<D> descriptions = new TreeSet<>();
+
+    protected AbstractTextualObjectUpdate(BiFunction<String, TextualType, T> titleCreator,
+                                          BiFunction<String, TextualType, D> descriptionCreator) {
+        this.titleCreator = titleCreator;
+        this.descriptionCreator = descriptionCreator;
+    }
 }
