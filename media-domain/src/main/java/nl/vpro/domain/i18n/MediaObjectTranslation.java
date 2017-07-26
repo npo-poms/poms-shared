@@ -26,6 +26,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.persistence.InstantToTimestampConverter;
+import nl.vpro.util.TriFunction;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
 
@@ -157,18 +158,30 @@ public class MediaObjectTranslation implements
     }
 
     @Override
+    public TriFunction<String, OwnerType, TextualType, TitleTranslation> getOwnedTitleCreator() {
+        return TitleTranslation::new;
+
+    }
+
+    @Override
     public MediaObjectTranslation addTitle(String title, OwnerType owner, TextualType type) {
         final TitleTranslation existingTitle = findTitle(owner, type);
 
         if (existingTitle != null) {
             existingTitle.set(title);
         } else {
-            TitleTranslation newObject = new TitleTranslation(title, owner, type);
+            TitleTranslation newObject = getOwnedTitleCreator().apply(title, owner, type);
             newObject.setParent(this);
             this.addTitle(newObject);
         }
 
         return this;
+    }
+
+    @Override
+    public TriFunction<String, OwnerType, TextualType, DescriptionTranslation> getOwnedDescriptionCreator() {
+        return DescriptionTranslation::new;
+
     }
 
 
@@ -194,7 +207,7 @@ public class MediaObjectTranslation implements
         if (existingDescription != null) {
             existingDescription.set(description);
         } else {
-            DescriptionTranslation newObject = new DescriptionTranslation(description, owner, type);
+            DescriptionTranslation newObject = getOwnedDescriptionCreator().apply(description, owner, type);
             newObject.setParent(this);
             this.addDescription(newObject);
         }

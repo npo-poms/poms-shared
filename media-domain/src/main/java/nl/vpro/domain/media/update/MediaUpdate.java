@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -572,17 +573,17 @@ public abstract class MediaUpdate<M extends MediaObject>
     }
 
 
+
     @Override
-    public MediaUpdate<M>  addDescription(String description, TextualType type) {
-        getDescriptions().add(new DescriptionUpdate(description, type));
-        return this;
+    public BiFunction<String, TextualType, TitleUpdate> getTitleCreator() {
+        return TitleUpdate::new;
+
     }
 
-
     @Override
-    public MediaUpdate<M> addTitle(String title, TextualType type) {
-        getTitles().add(new TitleUpdate(title, type));
-        return this;
+    public BiFunction<String, TextualType, DescriptionUpdate> getDescriptionCreator() {
+        return DescriptionUpdate::new;
+
     }
 
     @XmlElement(name = "tag")

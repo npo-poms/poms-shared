@@ -181,4 +181,6 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
         return OwnerType.values()[ot.ordinal() + 1];
     }
 
+    public static OwnerType[] ENTRIES = new OwnerType[] {BROADCASTER, NPO};
+
 }

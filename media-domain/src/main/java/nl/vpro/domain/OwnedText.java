@@ -11,7 +11,7 @@ import nl.vpro.domain.media.support.TextualType;
 public interface OwnedText extends Ownable, TypedText, Comparable<TypedText> {
 
     static OwnedText of(TypedText t, OwnerType ownerType) {
-        return new BasicOwnedText(ownerType, t.getType(), t.get());
+        return new BasicOwnedText(t.get(), ownerType, t.getType());
     }
 
     @Override
