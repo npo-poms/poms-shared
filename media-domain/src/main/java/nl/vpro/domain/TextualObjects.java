@@ -44,7 +44,7 @@ public class TextualObjects {
         result.addAll(texts);
         for(TextualType textualType : types) {
             for (OwnerType ownerType : owners) {
-                get(texts, textualType, ownerType).ifPresent(ot -> {
+                expand(texts, textualType, ownerType).ifPresent(ot -> {
                     if (ot.getType() != textualType || ot.getOwner() != ownerType) {
                         result.add(creator.apply(ot.get(), ownerType, textualType));
                     }
@@ -206,14 +206,8 @@ public class TextualObjects {
      * It takes the first value with matching owner and type. If none found, it will fall back to the highest OwnerType ({@link OwnerType#BROADCASTER} and degrades until one is found.
      *
      * Furthermore if no 'LEXICO' typed values if found, the value for 'MAIN' will be returned.
-     *
-     * @param titles
-     * @param textualType
-     * @param ownerType
-     * @param <OT>
-     * @return
      */
-    public static <OT extends OwnedText> Optional<OT> get(Collection<OT> titles, TextualType textualType, final OwnerType ownerType) {
+    public static <OT extends OwnedText> Optional<OT> expand(Collection<OT> titles, TextualType textualType, final OwnerType ownerType) {
         for (OT t : titles) {
             if (t.getType() == textualType && t.getOwner() == ownerType) {
                 return Optional.of(t);
@@ -229,13 +223,13 @@ public class TextualObjects {
             runningOwnerType = OwnerType.down(runningOwnerType);
         }
         if (textualType == TextualType.LEXICO) {
-            return get(titles, TextualType.MAIN, ownerType);
+            return expand(titles, TextualType.MAIN, ownerType);
         }
         return Optional.empty();
     }
 
-    public static <OT extends OwnedText> Optional<OT> get(Collection<OT> titles, TextualType textualType) {
-        return get(titles, textualType, OwnerType.first());
+    public static <OT extends OwnedText> Optional<OT> expand(Collection<OT> titles, TextualType textualType) {
+        return expand(titles, textualType, OwnerType.first());
     }
 
     /**
