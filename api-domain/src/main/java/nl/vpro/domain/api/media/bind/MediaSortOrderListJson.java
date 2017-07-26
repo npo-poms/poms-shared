@@ -26,24 +26,17 @@ public class MediaSortOrderListJson {
         @Override
         public void serialize(MediaSortOrderList mediaSortOrders, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
             int titleCount = 0;
-            jgen.writeStartObject();
+            jgen.writeStartArray();
             if (mediaSortOrders != null) {
                 for (MediaSortOrder so : mediaSortOrders) {
-                    if (so instanceof TitleSortOrder) {
-                        jgen.writeFieldName(so.getSortField().name() + ":" + titleCount++);
-                        TitleSortOrder titleSortOrder = (TitleSortOrder) so;
-                        if (titleSortOrder.getTextualType() != null || titleSortOrder.getOwnerType() != null) {
-                            jgen.writeObject(titleSortOrder);
-                            continue;
-                        }
+                    if ((so.getOrder() == null || so.getOrder() == Order.ASC) && (! (so instanceof TitleSortOrder)) )  {
+                        jgen.writeString(so.getField().name());
                     } else {
-                        jgen.writeFieldName(so.getSortField().name());
+                        jgen.writeObject(so);
                     }
-                    jgen.writeObject(so.getOrder());
-
                 }
             }
-            jgen.writeEndObject();
+            jgen.writeEndArray();
         }
     }
     public static class Deserializer extends JsonDeserializer<MediaSortOrderList> {

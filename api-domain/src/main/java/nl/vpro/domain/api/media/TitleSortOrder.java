@@ -7,6 +7,8 @@ import lombok.ToString;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
@@ -21,16 +23,16 @@ public class TitleSortOrder extends MediaSortOrder {
 
     @Getter
     @XmlAttribute
-    private TextualType textualType;
+    private TextualType type;
     @Getter
     @XmlAttribute
-    private OwnerType ownerType;
+    private OwnerType owner;
 
     @lombok.Builder(builderClassName = "Builder")
     public TitleSortOrder(TextualType textualType, OwnerType ownerType, Order order) {
         super(null, order);
-        this.textualType = textualType;
-        this.ownerType = ownerType;
+        this.type = textualType;
+        this.owner = ownerType;
     }
 
     protected TitleSortOrder() {
@@ -39,7 +41,8 @@ public class TitleSortOrder extends MediaSortOrder {
     }
 
     @Override
-    public MediaSortField getSortField() {
+    @JsonProperty("field")
+    public MediaSortField getField() {
         return MediaSortField.title;
     }
 }
