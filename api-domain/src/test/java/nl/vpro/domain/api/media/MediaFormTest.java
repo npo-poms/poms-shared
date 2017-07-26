@@ -48,17 +48,16 @@ public class MediaFormTest {
                 "    <api:sortFields>\n" +
                 "        <api:sort order=\"DESC\">sortDate</api:sort>\n" +
                 "        <api:sort order=\"ASC\">title</api:sort>\n" +
-                "        <api:titleSort textualType=\"LEXICO\" order=\"ASC\">title</api:titleSort>\n"+
+                "        <api:titleSort textualType=\"LEXICO\" order=\"ASC\" />\n"+
                 "    </api:sortFields>\n" +
                 "</api:mediaForm>"
         );
         assertThat(out.getSortFields()).hasSize(3);
-        Jackson2TestUtil.roundTripAndSimilarAndEquals(out, "{\n" +
+        MediaForm result = Jackson2TestUtil.roundTripAndSimilarAndEquals(out, "{\n" +
             "  \"sort\" : {\n" +
             "    \"sortDate\" : \"DESC\",\n" +
             "    \"title\" : \"ASC\",\n" +
-            "    \"title\" : {\n" +
-            "      \"value\" : \"title\",\n" +
+            "    \"title:0\" : {\n" +
             "      \"order\" : \"ASC\",\n" +
             "      \"textualType\" : \"LEXICO\",\n" +
             "      \"sortField\" : \"title\"\n" +
@@ -66,7 +65,9 @@ public class MediaFormTest {
             "  },\n" +
             "  \"highlight\" : true\n" +
             "}");
+        assertThat(result.getSortFields()).hasSize(3);
     }
+
 
     @Test
     public void parseWithEmptySort() throws Exception {

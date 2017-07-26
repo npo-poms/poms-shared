@@ -28,12 +28,18 @@ public class TitleSortOrder extends MediaSortOrder {
 
     @lombok.Builder(builderClassName = "Builder")
     public TitleSortOrder(TextualType textualType, OwnerType ownerType, Order order) {
-        super(MediaSortField.title, order);
+        super(null, order);
         this.textualType = textualType;
         this.ownerType = ownerType;
     }
 
     protected TitleSortOrder() {
+        super(null);
         // jaxb
+    }
+
+    @Override
+    public MediaSortField getSortField() {
+        return MediaSortField.title;
     }
 }
