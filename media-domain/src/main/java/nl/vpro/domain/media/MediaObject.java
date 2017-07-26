@@ -38,6 +38,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.LocalizedObject;
+import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
@@ -962,7 +963,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (titles == null) {
             titles = new TreeSet<>();
         }
-
         return sorted(titles);
     }
 
@@ -973,6 +973,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             t.setParent(this);
         }
     }
+
+    @JsonProperty("expandedTitles")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    public SortedSet<Title> getExpandedTitles() {
+        // TODO
+        return TextualObjects.expand(getTitles(), Arrays.asList(), Arrays.asList());
+    }
+
 
     @Override
     public MediaObject addTitle(Title title) {

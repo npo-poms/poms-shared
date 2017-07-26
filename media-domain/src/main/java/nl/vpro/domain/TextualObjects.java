@@ -33,6 +33,21 @@ public class TextualObjects {
         return title == null ? defaultValue : title.get();
     }
 
+
+    public static <OT extends OwnedText> SortedSet<OT> expand(Collection<OT> texts, List<TextualType> types, List<OwnerType> owners) {
+        SortedSet<OT> result = new TreeSet<>();
+        result.addAll(texts);
+        for(TextualType textualType : types) {
+            for (OwnerType ownerType : owners) {
+                if (ownerType.isDeprecated()) {
+                    continue;
+                }
+            }
+        }
+        return result;
+    }
+
+
     public static <OT extends OwnedText> Optional<String> getOptional(Collection<OT> titles, OwnerType owner, TextualType type) {
         for (OT title : titles) {
             if (title.getOwner() == owner && title.getType() == type) {
@@ -167,7 +182,41 @@ public class TextualObjects {
 
 
     public static <OT extends TypedText> String get(Collection<OT> titles, TextualType... work) {
-        return getOptional(titles, work).orElse(null);
+        return getOptional(titles, work)
+            .orElse(null);
+    }
+
+    /**
+     * Returns the value for a certain {@link TextualType} and {@link OwnerType}. This implements a fall back mechanism.
+     * It takes the first value with matching owner and type. If none found, it will fall back to the highest OwnerType ({@link OwnerType#BROADCASTER} and degrades until one is found.
+     *
+     * Furthermore if no 'LEXICO' typed values if found, the value for 'MAIN' will be returned.
+     *
+     * @param titles
+     * @param textualType
+     * @param ownerType
+     * @param <OT>
+     * @return
+     */
+    public static <OT extends OwnedText> Optional<OT> get(Collection<OT> titles, TextualType textualType, OwnerType ownerType) {
+        for (OT t : titles) {
+            if (t.getType() == textualType && t.getOwner() == ownerType) {
+                return Optional.of(t);
+            }
+        }
+        ownerType = ownerType == OwnerType.first() ? OwnerType.down(OwnerType.first()) : OwnerType.first();
+        while(ownerType != OwnerType.last()) {
+            for (OT t : titles) {
+                if (t.getType() == textualType && t.getOwner() == ownerType) {
+                    return Optional.of(t);
+                }
+            }
+            ownerType = OwnerType.down(ownerType);
+        }
+        if (textualType == TextualType.LEXICO) {
+            return get(titles, TextualType.MAIN, ownerType);
+        }
+        return Optional.empty();
     }
 
 
