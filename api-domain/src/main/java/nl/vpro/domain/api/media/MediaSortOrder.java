@@ -4,9 +4,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.api.Order;
 
@@ -14,13 +14,15 @@ import nl.vpro.domain.api.Order;
  * @author Michiel Meeuwissen
  */
 @XmlType(name = "mediaSortType")
+@XmlAccessorType(XmlAccessType.NONE)
 @ToString
 @EqualsAndHashCode
 public class MediaSortOrder {
 
     @XmlValue
+    @JsonProperty("field")
     @Getter
-    private MediaSortField sortField;
+    private MediaSortField field;
 
     @XmlAttribute
     @Getter
@@ -35,13 +37,13 @@ public class MediaSortOrder {
         return new MediaSortOrder(field, Order.DESC);
     }
 
-    public MediaSortOrder(MediaSortField sortField, Order order) {
-        this.sortField = sortField;
+    public MediaSortOrder(MediaSortField field, Order order) {
+        this.field = field;
         this.order = order == null ? Order.ASC : order;
     }
 
-    public MediaSortOrder(MediaSortField sortField) {
-        this(sortField, Order.ASC);
+    public MediaSortOrder(MediaSortField field) {
+        this(field, Order.ASC);
     }
     protected MediaSortOrder() {
 
