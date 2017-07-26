@@ -21,7 +21,7 @@ import nl.vpro.domain.api.media.bind.MediaSortOrderListJson;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @ToString
-public class MediaSortOrderList extends AbstractCollection<MediaSortOrder> implements Iterable<MediaSortOrder> {
+public class MediaSortOrderList extends AbstractList<MediaSortOrder> implements Iterable<MediaSortOrder> {
 
     private List<MediaSortOrder> sort;
 
@@ -54,6 +54,12 @@ public class MediaSortOrderList extends AbstractCollection<MediaSortOrder> imple
             sort = new ArrayList<>();
         }
         return sort.add(sortOrder);
+    }
+
+    @Override
+    public MediaSortOrder get(int index) {
+        return sort.get(index);
+
     }
 
     public void put(MediaSortField field, Order order) {

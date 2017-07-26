@@ -46,7 +46,6 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
     }
 
     @Valid
-
     @Setter
     @XmlElements({
         @XmlElement(name = "sort", type = MediaSortOrder.class),
