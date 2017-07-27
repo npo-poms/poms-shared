@@ -63,6 +63,10 @@ public class TextualObjects {
             Arrays.asList(TextualType.TITLES), Arrays.asList(OwnerType.ENTRIES));
     }
 
+    public static <T extends OwnedText> SortedSet<T> expandTitles(TextualObject<T, ?, ?> textualObject) {
+        return expandTitles(textualObject.getTitles(), textualObject.getOwnedTitleCreator());
+    }
+
     public static <OT extends OwnedText> Optional<String> getOptional(Collection<OT> titles, OwnerType owner, TextualType type) {
         for (OT title : titles) {
             if (title.getOwner() == owner && title.getType() == type) {

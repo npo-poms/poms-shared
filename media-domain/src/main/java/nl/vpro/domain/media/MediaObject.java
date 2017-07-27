@@ -979,7 +979,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<Title> getExpandedTitles() {
         // TODO
-        return TextualObjects.expandTitles(getTitles(), getOwnedTitleCreator());
+        return TextualObjects.expandTitles(this);
     }
 
 
