@@ -67,6 +67,19 @@ public class TextualObjects {
         return expandTitles(textualObject.getTitles(), textualObject.getOwnedTitleCreator());
     }
 
+    public static <OT extends OwnedText> SortedSet<OT> expandDescriptions(
+        Collection<OT> texts,
+        TriFunction<String, OwnerType, TextualType, OT> creator) {
+        return expand(texts,
+            creator,
+            Arrays.asList(TextualType.DESCRIPTIONS), Arrays.asList(OwnerType.ENTRIES));
+    }
+
+    public static <D extends OwnedText> SortedSet<D> expandDescriptions(TextualObject<?, D, ?> textualObject) {
+        return expandDescriptions(textualObject.getDescriptions(), textualObject.getOwnedDescriptionCreator());
+    }
+
+
     public static <OT extends OwnedText> Optional<String> getOptional(Collection<OT> titles, OwnerType owner, TextualType type) {
         for (OT title : titles) {
             if (title.getOwner() == owner && title.getType() == type) {
