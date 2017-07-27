@@ -77,10 +77,10 @@ public class TextualObjectsTest {
         object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
         object.addTitle("c", OwnerType.BEELDENGELUID, TextualType.MAIN);
 
-        object.addTitle("b", OwnerType.MIS, TextualType.SUB);
+        object.addTitle("d", OwnerType.MIS, TextualType.SUB);
 
 
-        log.info("{}", TextualObjects.expandTitles(object.getTitles(), object.getOwnedTitleCreator()));
+        log.info("{}", TextualObjects.expandTitles(object));
 
 
 
