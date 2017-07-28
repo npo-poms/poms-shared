@@ -1,5 +1,6 @@
 package nl.vpro.api.util;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.net.URI;
@@ -34,7 +35,7 @@ import static nl.vpro.domain.Xmlns.*;
 @Slf4j
 public class ApiMappings extends Mappings {
 
-
+    @Getter
     final URI pomsLocation;
 
     @Inject
