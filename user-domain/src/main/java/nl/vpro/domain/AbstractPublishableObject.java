@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.EmbargoValidation;
+import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
