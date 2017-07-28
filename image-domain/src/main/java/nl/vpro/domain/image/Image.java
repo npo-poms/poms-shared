@@ -5,6 +5,7 @@
 
 package nl.vpro.domain.image;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,9 +23,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
+import com.google.common.base.MoreObjects;
+
 import nl.vpro.domain.AbstractPublishableObject;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.support.License;
+import nl.vpro.domain.user.Editor;
 import nl.vpro.validation.WarningValidatorGroup;
 
 @Entity
@@ -50,8 +54,31 @@ import nl.vpro.validation.WarningValidatorGroup;
         "license",
         "data"
     }
-        )
+)
+@AllArgsConstructor
+@lombok.Builder(builderClassName = "Builder", buildMethodName= "_build")
 public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image> {
+
+    public static class Builder {
+        private Editor createdBy;
+        private Editor lastModifiedBy;
+
+        public Builder createdBy(Editor editor) {
+            this.createdBy = editor;
+            return this;
+        }
+
+        public Builder lastModifiedBy(Editor editor) {
+            this.lastModifiedBy = editor;
+            return this;
+        }
+        public Image build()  {
+            Image image =_build();
+            image.setCreatedBy(createdBy);
+            image.setLastModifiedBy(lastModifiedBy);
+            return image;
+        }
+    }
 
 
     @Enumerated(EnumType.STRING)
