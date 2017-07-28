@@ -89,5 +89,5 @@ public class Roles {
      */
     public static final String SYSTEM_ROLE = "ROLE_SYSTEM";
 
-
-}
+    public static final String API_USER = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CLIENT','ROLE_API_USER','ROLE_API_SUPERUSER','ROLE_API_SUPERCLIENT')";
+    public static final String API_CHANGES_USER = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CHANGES_CLIENT', 'ROLE_API_CHANGES_SUPERCLIENT', 'ROLE_API_USER', 'ROLE_API_SUPERUSER')";
