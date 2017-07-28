@@ -6,24 +6,25 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class Wijzigen  {
-	  @Test
-	  public void f() {
-	  }
-	  @BeforeMethod
-	  public void beforeMethod() {
-	  }
+public class Wijzigen {
+    @Test
+    public void f() {
+    }
 
-	  @AfterMethod
-	  public void afterMethod() {
-	  }
+    @BeforeMethod
+    public void beforeMethod() {
+    }
 
-	  @BeforeTest
-	  public void beforeTest() {
-	  }
+    @AfterMethod
+    public void afterMethod() {
+    }
 
-	  @AfterTest
-	  public void afterTest() {
-	  }
+    @BeforeTest
+    public void beforeTest() {
+    }
 
-	}
+    @AfterTest
+    public void afterTest() {
+    }
+
+}
