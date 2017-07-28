@@ -405,7 +405,12 @@ public class MediaObjects {
         if (mo.scheduleEvents != null && mo.scheduleEvents.size() > 0) {
             List<ScheduleEvent> list = new ArrayList<>(mo.scheduleEvents);
             list.sort(Collections.reverseOrder());
-            date = list.stream().filter(se -> se.getRepeat() == null || !se.getRepeat().isRerun).findFirst().map(ScheduleEvent::getStartInstant).orElse(null);
+            date = list.stream()
+                .filter(se -> se.getRepeat() == null || !se.getRepeat().isRerun).findFirst()
+                // TODO for groups we also filter before now. Shouldn't we do that for programs too?
+                // .filter(se -> se.getStartInstant().isBefore(Instant.now))
+                .map(ScheduleEvent::getStartInstant)
+                .orElse(null);
         }
         if (date == null) {
             date = mo.getPublishStartInstant();
