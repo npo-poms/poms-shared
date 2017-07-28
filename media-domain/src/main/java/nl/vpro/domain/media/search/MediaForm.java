@@ -224,11 +224,11 @@ public class MediaForm {
     }
 
     public MediaForm(MediaPager pager, String text) {
-        this(pager, null, null, text, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(pager, null, null, text, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     public MediaForm(MediaPager pager, Collection<MediaType> types) {
-        this(pager, null, null, null, types, null, null, null, null, null, null, null, null, null, null, null, null);
+        this(pager, null, null, null, types, null, null, null, null, null, null, null, null, null, null, null, null, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -246,6 +246,7 @@ public class MediaForm {
         DateRange creationRange,
         String lastModifiedBy,
         DateRange lastModifiedRange,
+        IntegerRange locationsCount,
         Boolean notAnEpisode,
         Boolean noMembers,
         Boolean noCredits,
@@ -269,11 +270,13 @@ public class MediaForm {
         this.creationRange = creationRange;
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedRange = lastModifiedRange;
+        this.locationsCount = locationsCount;
         this.notAnEpisode = notAnEpisode;
         this.findDeleted = null; // backwards compatiblity
         this.noMembers = noMembers;
         this.noCredits = noCredits;
         this.forOwner = forOwner;
+
     }
 
     public static class Builder {
