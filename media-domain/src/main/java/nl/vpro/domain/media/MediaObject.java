@@ -975,11 +975,15 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
     }
 
+    /**
+     * Experimental. For NPA-403, to provide ES the needed mapping.
+     */
     @JsonProperty("expandedTitles")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<Title> getExpandedTitles() {
-        // TODO
-        return TextualObjects.expandTitles(this);
+        // TODO NPA-403
+        //return TextualObjects.expandTitles(this);
+        return new TreeSet<Title>(); // temporary disable until feature finished.
     }
 
 
