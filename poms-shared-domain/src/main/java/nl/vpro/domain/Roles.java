@@ -72,7 +72,6 @@ public class Roles {
     public static final String UPLOAD_ROLE = "ROLE_MEDIA_UPLOAD";
 
 
-
     public static final String MERGE_SERIES_ROLE = "ROLE_MEDIA_MERGESERIES";
     public static final String MERGE_EPISODE_ROLE = "ROLE_MEDIA_MERGEEPISODE";
     public static final String MERGE_ALL_ROLE = "ROLE_MEDIA_MERGEALL";
@@ -91,3 +90,5 @@ public class Roles {
 
     public static final String API_USER = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CLIENT','ROLE_API_USER','ROLE_API_SUPERUSER','ROLE_API_SUPERCLIENT')";
     public static final String API_CHANGES_USER = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CHANGES_CLIENT', 'ROLE_API_CHANGES_SUPERCLIENT', 'ROLE_API_USER', 'ROLE_API_SUPERUSER')";
+
+}
