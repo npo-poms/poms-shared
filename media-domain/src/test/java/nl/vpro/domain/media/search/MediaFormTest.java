@@ -7,8 +7,6 @@ import org.xml.sax.SAXException;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * @author Michiel Meeuwissen
  * @since 5.0
@@ -33,8 +31,9 @@ public class MediaFormTest {
     }
 
     @Test
-    public void builder() {
-        MediaForm form = MediaForm.builder().broadcasters(null).broadcaster("vpro").build();
-        assertThat(form.getBroadcasters()).containsExactly("vpro");
+    public void builder() throws IOException, SAXException {
+        MediaForm form = MediaForm.builder()
+            .locationsCount(IntegerRange.builder().start(0L).stop(0L, true).build()).build();
+        JAXBTestUtil.roundTripAndSimilar(form, "<a />");
     }
 }
