@@ -2,6 +2,8 @@ package nl.vpro.api.util;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.net.URI;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -33,12 +35,14 @@ import static nl.vpro.domain.Xmlns.*;
 public class ApiMappings extends Mappings {
 
 
-    String pomsLocation = null;
+    final URI pomsLocation;
 
     @Inject
     public ApiMappings(@Named("${poms.location}") String pomsLocation) {
-        this.pomsLocation = pomsLocation == null ? "https://poms.omroep.nl/" : pomsLocation;
+        this.pomsLocation = pomsLocation == null ? URI.create("https://poms.omroep.nl/") : URI.create(pomsLocation);
+        String scheme = this.pomsLocation.getScheme();
         generateDocumentation = true;
+        log.info("Using poms location {}", this.pomsLocation);
     }
 
 
@@ -54,7 +58,7 @@ public class ApiMappings extends Mappings {
         MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class});
         MAPPING.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class, SubtitlesType.class});
 
-        Xmlns.fillLocationsAtPoms(KNOWN_LOCATIONS, pomsLocation);
+        Xmlns.fillLocationsAtPoms(KNOWN_LOCATIONS, pomsLocation.toString());
     }
 
 
