@@ -41,9 +41,27 @@
       <xsd:element name="relation"    type="relationFormType" minOccurs="0" />
       <xsd:element name="noBroadcast" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="scheduleEventsCount" type="integerRangeType" minOccurs="0"/>
-      <xsd:element name="hasLocations" type="xsd:boolean" minOccurs="0"/>
-      <xsd:element name="locationsCount" type="integerRangeType" minOccurs="0"/>
-      <xsd:element name="noPlaylist" type="xsd:boolean" minOccurs="0"/>
+      <xsd:element name="hasLocations" type="xsd:boolean" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>Whether it should only return media object which does have location. Note that the same can be accomplished with 'locationsCount', and this element is considered deprecated.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="locationsCount" type="integerRangeType" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+            Constraint the number of locations.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="noPlaylist" type="xsd:boolean" minOccurs="0">
+        <xsd:annotation>
+          <xsd:documentation>
+            Whether it should only return media object which are not a a member of any other object.
+            Note that the same can be accomplished with 'memberOfCount', and this element is considered deprecated.
+          </xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
       <xsd:element name="memberOfCount" type="integerRangeType" minOccurs="0"/>
       <xsd:element name="sortRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="eventRange" type="dateRangeType" minOccurs="0"/>
