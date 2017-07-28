@@ -33,18 +33,17 @@ public class DownloadRequest {
 
 
     public DownloadRequest() {
-    	// nothing
+        // nothing
     }
 
-	public DownloadRequest(String title, String description, ImageType type,
-			String url) {
-		this.title = title;
-		this.description = description;
-		this.type = type;
-		this.url = url;
-	}
+    public DownloadRequest(String title, String description, ImageType type, String url) {
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.url = url;
+    }
 
-	public String getTitle() {
+    public String getTitle() {
         return title;
     }
 

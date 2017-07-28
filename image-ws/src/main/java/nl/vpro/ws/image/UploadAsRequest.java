@@ -12,28 +12,27 @@ import nl.vpro.domain.image.ImageType;
 
 @XmlRootElement(name = "uploadAsRequest", namespace = Xmlns.IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "uploadAsRequestType", propOrder = {
-		"principalId"})
+@XmlType(name = "uploadAsRequestType", propOrder = { "principalId" })
 public class UploadAsRequest extends UploadRequest {
 
-	@XmlElement(namespace = Xmlns.IMAGE_WS_NAMESPACE, required = true)
+    @XmlElement(namespace = Xmlns.IMAGE_WS_NAMESPACE, required = true)
     private String principalId;
 
     public UploadAsRequest() {
-    	// nothing
+        // nothing
     }
 
     public UploadAsRequest(String principalId, String title, String description, ImageType type, DataHandler data) {
-    	super(title, description, type, data);
-    	this.principalId = principalId;
+        super(title, description, type, data);
+        this.principalId = principalId;
     }
 
     public String getPrincipalId() {
-		return principalId;
-	}
+        return principalId;
+    }
 
-	public void setPrincipalId(String principalId) {
-		this.principalId = principalId;
-	}
+    public void setPrincipalId(String principalId) {
+        this.principalId = principalId;
+    }
 
 }
