@@ -41,10 +41,8 @@ public class ImageUpdate {
     private ImageType type;
 
     @XmlElement
-	@Size.List({
-			@Size(max = 512, message = "image title contains too many (> {max}) characters"),
-			@Size(min = 1, message = "image title contains no characters"),
-	})
+    @Size.List({ @Size(max = 512, message = "image title contains too many (> {max}) characters"),
+            @Size(min = 1, message = "image title contains no characters"), })
     @NoHtml
     private String title;
 
