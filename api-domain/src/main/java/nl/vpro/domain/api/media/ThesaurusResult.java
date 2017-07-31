@@ -10,15 +10,14 @@ import nl.vpro.domain.media.gtaa.GTAAPerson;
 
 @XmlRootElement(name = "thesaurusResult")
 @XmlType(name = "thesaurusResultType")
-public class ThesaurusResult extends Result<GTAAPerson>{
+public class ThesaurusResult extends Result<GTAAPerson> {
 
-	public ThesaurusResult() {
+    public ThesaurusResult() {
 
-	}
+    }
 
-	public ThesaurusResult(List<GTAAPerson> asList, Long offset, Integer max) {
-		super(asList, offset, max, null);
-	}
-
+    public ThesaurusResult(List<GTAAPerson> asList, Long offset, Integer max) {
+        super(asList, offset, max, null);
+    }
 
 }
