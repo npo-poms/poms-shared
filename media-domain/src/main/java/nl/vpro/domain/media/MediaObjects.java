@@ -117,14 +117,6 @@ public class MediaObjects {
     }
 
     /**
-     * @deprecated Use {@link TextualObjects#getObjects}
-     */
-    @Deprecated
-    public static Collection<Title> getTitles(Collection<Title> titles, TextualType... types) {
-        return TextualObjects.getObjects(titles, types);
-    }
-
-    /**
      * @deprecated Use {@link TextualObjects#getDescription(TextualObject, OwnerType, TextualType)}
      */
     @Deprecated
