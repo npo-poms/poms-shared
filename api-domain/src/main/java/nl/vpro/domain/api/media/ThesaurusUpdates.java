@@ -17,20 +17,20 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "thesaurusResultType")
 public class ThesaurusUpdates extends Result<ThesaurusUpdate> {
 
-	public ThesaurusUpdates(List<ThesaurusUpdate> asList, long offset) {
-		super(asList, offset, null, null);
-	}
+    public ThesaurusUpdates(List<ThesaurusUpdate> asList, long offset) {
+        super(asList, offset, null, null);
+    }
 
-	public static class ThesaurusUpdate {
-		@XmlAttribute
-		private GTAAPerson person;
-		@XmlAttribute
-		@XmlJavaTypeAdapter(InstantXmlAdapter.class)
-		private Instant updatedAt;
+    public static class ThesaurusUpdate {
+        @XmlAttribute
+        private GTAAPerson person;
+        @XmlAttribute
+        @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+        private Instant updatedAt;
 
-		public ThesaurusUpdate(GTAAPerson person, Instant updatedAt) {
-			this.person = person;
-			this.updatedAt = updatedAt;
-		}
-	}
+        public ThesaurusUpdate(GTAAPerson person, Instant updatedAt) {
+            this.person = person;
+            this.updatedAt = updatedAt;
+        }
+    }
 }
