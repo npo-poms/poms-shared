@@ -43,10 +43,10 @@ public class AvailableSubtitles implements Serializable {
 
     }
 
-	@lombok.Builder
-	public AvailableSubtitles(Locale language, SubtitlesType type) {
-		this.language = language;
-		this.type = type;
+    @lombok.Builder
+    public AvailableSubtitles(Locale language, SubtitlesType type) {
+        this.language = language;
+        this.type = type;
 
-	}
+    }
 }
