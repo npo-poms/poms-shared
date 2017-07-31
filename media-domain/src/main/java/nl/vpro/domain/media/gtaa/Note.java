@@ -20,14 +20,15 @@ import javax.xml.bind.annotation.XmlValue;
 @Data
 public class Note {
 
-	public Note() {
-		
-	}
-    public Note(String value) {
-		this.value = value;
-	}
+    public Note() {
 
-	@XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI, required = true)
+    }
+
+    public Note(String value) {
+        this.value = value;
+    }
+
+    @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI, required = true)
     private String lang = "nl";
 
     @XmlValue
