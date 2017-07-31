@@ -10,9 +10,9 @@ import nl.vpro.domain.subtitles.SubtitlesType;
 
 public class AvailableSubtitleTest {
 
-	@Test
-	public void test() {
-		JAXB.marshal(new AvailableSubtitles(Locale.ENGLISH, SubtitlesType.TRANSLATION), System.out);
-	}
+    @Test
+    public void test() {
+        JAXB.marshal(new AvailableSubtitles(Locale.ENGLISH, SubtitlesType.TRANSLATION), System.out);
+    }
 
 }
