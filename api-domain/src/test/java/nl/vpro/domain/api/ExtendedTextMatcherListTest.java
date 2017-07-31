@@ -21,17 +21,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ExtendedTextMatcherListTest {
 
     @Test
-   	public void marshal() throws IOException, SAXException {
-   		final ExtendedTextMatcherList textMatcherList = new ExtendedTextMatcherList(Arrays.asList(new ExtendedTextMatcher("a", Match.SHOULD, ExtendedMatchType.TEXT, false), new ExtendedTextMatcher("b", Match.SHOULD)), Match.MUST);
-   		ExtendedTextMatcherList result = JAXBTestUtil.roundTripAndSimilar(textMatcherList,
-   			"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<local:extendedTextMatcherList match=\"MUST\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-                "    <api:matcher caseSensitive=\"false\" match=\"SHOULD\">a</api:matcher>\n" +
-                "    <api:matcher match=\"SHOULD\">b</api:matcher>\n" +
-                "</local:extendedTextMatcherList>");
+    public void marshal() throws IOException, SAXException {
+        final ExtendedTextMatcherList textMatcherList = new ExtendedTextMatcherList(
+                Arrays.asList(new ExtendedTextMatcher("a", Match.SHOULD, ExtendedMatchType.TEXT, false),
+                        new ExtendedTextMatcher("b", Match.SHOULD)),
+                Match.MUST);
+        ExtendedTextMatcherList result = JAXBTestUtil.roundTripAndSimilar(textMatcherList,
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
+                        + "<local:extendedTextMatcherList match=\"MUST\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n"
+                        + "    <api:matcher caseSensitive=\"false\" match=\"SHOULD\">a</api:matcher>\n"
+                        + "    <api:matcher match=\"SHOULD\">b</api:matcher>\n" + "</local:extendedTextMatcherList>");
 
-   		assertThat(result.asList().get(0).getMatch()).isEqualTo(Match.SHOULD);
-		assertThat(result.asList().get(0).getMatchType()).isEqualTo(ExtendedMatchType.TEXT);
-		assertThat(result.asList().get(0).isCaseSensitive()).isEqualTo(Boolean.FALSE);
-   	}
+        assertThat(result.asList().get(0).getMatch()).isEqualTo(Match.SHOULD);
+        assertThat(result.asList().get(0).getMatchType()).isEqualTo(ExtendedMatchType.TEXT);
+        assertThat(result.asList().get(0).isCaseSensitive()).isEqualTo(Boolean.FALSE);
+    }
 }
