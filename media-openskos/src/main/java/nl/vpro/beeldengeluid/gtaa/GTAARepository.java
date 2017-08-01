@@ -25,6 +25,6 @@ public interface GTAARepository {
 
     List<Description> findPersons(String input, Integer max);
 
-	GTAAPerson submit(GTAAPerson person, String creator);
+    GTAAPerson submit(GTAAPerson person, String creator);
 
 }
