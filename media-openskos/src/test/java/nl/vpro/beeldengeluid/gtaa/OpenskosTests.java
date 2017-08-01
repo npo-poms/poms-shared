@@ -146,10 +146,8 @@ public class OpenskosTests {
         // "1dX1nJHX5GNeT8O7", template);
 
         // Test
-        // OpenskosRepository impl = new
-        // OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/",
-        // "1dX1nJHX5GNeT8O7", template);
-        OpenskosRepository impl = new OpenskosRepository("http://localhost:8080", "1dX1nJHX5GNeT8O7", template);
+         OpenskosRepository impl = new
+         OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
         impl.setUseXLLabels(true);
         // productie
         // GTAARepositoryImpl impl = new
