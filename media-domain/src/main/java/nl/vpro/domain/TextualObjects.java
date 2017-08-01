@@ -107,7 +107,7 @@ public class TextualObjects {
     }
 
 
-    public static <OT extends OwnedText> Collection<OT> getObjects(Collection<? extends OT> titles, TextualType... types) {
+    public static Collection<? extends OwnedText> getObjects(Collection<? extends OwnedText> titles, TextualType... types) {
         Comparator<OwnerType> comparator = Comparator.naturalOrder();
         return getObjects(titles, comparator, types);
     }
@@ -124,7 +124,7 @@ public class TextualObjects {
         };
     }
 
-    public static <OT extends OwnedText> Collection<OT> getObjects(
+    public static <OT extends OwnedText> Collection<? extends OwnedText> getObjects(
         Collection<? extends OT> titles,
         Comparator<OwnerType> ownerTypeComparator,
         TextualType... types) {
