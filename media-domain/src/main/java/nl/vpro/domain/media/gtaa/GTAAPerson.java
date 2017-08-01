@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.media.Person;
 import nl.vpro.domain.media.gtaa.Label;
@@ -24,7 +25,10 @@ import nl.vpro.w3.rdf.Description;
  * @since 3.7
  */
 @Slf4j
+@XmlType
 public class GTAAPerson extends Person {
+
+    private static final long serialVersionUID = 1L;
 
     @Getter
     private List<Label> notes;
@@ -35,14 +39,14 @@ public class GTAAPerson extends Person {
     public static GTAAPerson create(Description description) {
         return create(description, null);
     }
-    
+
     @XmlElement
     public Status getStatus() {
-    		return this.gtaaRecord != null ? this.gtaaRecord.getStatus() : null;
+        return this.gtaaRecord != null ? this.gtaaRecord.getStatus() : null;
     }
 
     public static GTAAPerson create(Description description, String submittedPrefLabel) {
-        if(description == null) {
+        if (description == null) {
             log.info("Description is null");
             return null;
         }
@@ -68,14 +72,11 @@ public class GTAAPerson extends Person {
 
         answer.notes = description.getScopeNote();
 
-        if(description.getAltLabels() != null && !description.getAltLabels().isEmpty()) {
-            final List<Names> altNames = description
-                .getAltLabels()
-                .stream()
-                .map(Names::of)
-                .collect(Collectors.toList());
+        if (description.getAltLabels() != null && !description.getAltLabels().isEmpty()) {
+            final List<Names> altNames = description.getAltLabels().stream().map(Names::of)
+                    .collect(Collectors.toList());
 
-            if(answer.knownAs == null) {
+            if (answer.knownAs == null) {
                 answer.knownAs = altNames;
             } else {
                 answer.knownAs.addAll(altNames);
@@ -86,7 +87,6 @@ public class GTAAPerson extends Person {
 
         return answer;
     }
-
 
     @AllArgsConstructor
     @Data
@@ -103,7 +103,6 @@ public class GTAAPerson extends Person {
             return of(label.getValue());
         }
 
-
         private static Names of(String label) {
             if (label == null) {
                 return null;
@@ -111,11 +110,11 @@ public class GTAAPerson extends Person {
             Names.NamesBuilder names = Names.builder();
             int splitIndex = label.indexOf(", ");
 
-            if(splitIndex > 0) {
+            if (splitIndex > 0) {
                 names.givenName(label.substring(splitIndex + 2));
                 names.familyName(label.substring(0, splitIndex));
             } else {
-                names.familyName (label);
+                names.familyName(label);
             }
             return names.build();
         }
