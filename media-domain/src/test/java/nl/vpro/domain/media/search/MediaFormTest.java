@@ -2,6 +2,7 @@ package nl.vpro.domain.media.search;
 
 import java.io.IOException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
@@ -31,8 +32,9 @@ public class MediaFormTest {
     }
 
     @Test
+    @Ignore
     public void builder() throws IOException, SAXException {
-        MediaForm form = MediaForm.builder()
+        MediaForm form = MediaForm.builder().broadcasters(null)
             .locationsCount(IntegerRange.builder().start(0L).stop(0L, true).build()).build();
         JAXBTestUtil.roundTripAndSimilar(form, "<a />");
     }

@@ -25,8 +25,4 @@ public interface ThesaurusRestService {
     @Path("/people/updates")
     ThesaurusUpdates updates(@QueryParam("from") String from, @QueryParam("to") String to) throws Exception;
 
-    @POST
-    @Path("/person")
-    GTAAPerson submitSigned(String jwt);
-
 }
