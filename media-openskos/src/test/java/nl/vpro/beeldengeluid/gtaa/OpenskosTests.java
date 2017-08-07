@@ -27,6 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 //@Ignore("This are not junit tests")
 @Slf4j
+@Ignore
 public class OpenskosTests {
     @Ignore
     @Test
@@ -59,7 +60,7 @@ public class OpenskosTests {
     @Ignore("This is not a junit test")
     public void testFindPerson() {
         GTAARepository impl = getRealInstance();
-        List<Description> persons = impl.findPersons("johan c", 100);
+        List<Description> persons = impl.findPersons("pietje", 100);
         assertThat(persons).isNotEmpty();
         System.out.println(persons);
         assertThat(persons.get(0).getStatus()).isNotNull();
@@ -71,7 +72,7 @@ public class OpenskosTests {
     public void testChanges() {
         GTAARepository impl = getRealInstance();
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
-        Instant stop = LocalDate.of(2017, 7, 21).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
+        Instant stop = LocalDate.now().atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
 
         CountedIterator<Record> updates = impl.getUpdates(start, stop);
         long count = 0;
@@ -96,6 +97,7 @@ public class OpenskosTests {
     }
 
     @Test
+    @Ignore
     public void testChangesRecent() {
         GTAARepository impl = getRealInstance();
         Instant start = Instant.now().minusSeconds(3600000);
