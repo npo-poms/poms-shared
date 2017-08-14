@@ -4,9 +4,7 @@
  */
 package nl.vpro.beeldengeluid.gtaa;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
+import static org.springframework.http.HttpStatus.CREATED;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -36,8 +34,9 @@ import org.springframework.util.Assert;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import nl.vpro.beeldengeluid.gtaa.Schemes;
-import nl.vpro.beeldengeluid.gtaa.Types;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.domain.media.Person;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.gtaa.GTAAConflict;
@@ -51,8 +50,6 @@ import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.w3.rdf.RDF;
-
-import static org.springframework.http.HttpStatus.CREATED;
 
 /**
  * See http://editor.openskos.org/apidoc/index.html ?
@@ -124,7 +121,17 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     @Override
-    public CountedIterator<Record> getUpdates(Instant from, Instant until) {
+    public CountedIterator<Record> getPersonUpdates(Instant from, Instant until) {
+        return getUpdates(from, until, "personSpec");
+    }
+    
+    @Override
+    public CountedIterator<Record> getAllUpdates(Instant from, Instant until) {
+        return getUpdates(from, until, null);
+    }
+    
+    @SuppressWarnings("unchecked")
+    private CountedIterator<Record> getUpdates(Instant from, Instant until, String spec) {
 
         final AtomicLong totalSize = new AtomicLong(-1L);
         Supplier<Iterator<Record>> getter = new Supplier<Iterator<Record>>() {
@@ -133,7 +140,7 @@ public class OpenskosRepository implements GTAARepository {
             @Override
             public Iterator<Record> get() {
                 if (listRecord == null) {
-                    listRecord = getListRecord(from, until);
+                    listRecord = getListRecord(from, until, spec);
                     if (listRecord == null) {
                         log.debug("Found no listrecord for {} - {}", from, until);
                         if (totalSize.get() < 0) {
@@ -174,8 +181,12 @@ public class OpenskosRepository implements GTAARepository {
         return CountedIterator.of(totalSize, iterator);
     }
 
-    ListRecord getListRecord(Instant from, Instant until) {
-        String path = "oai-pmh?verb=ListRecords&metadataPrefix=oai_rdf&set=" + personsSpec + "&from="
+    ListRecord getListRecord(Instant from, Instant until, String type) {
+        String set = "";
+        if(type != null) {
+            set = "&set=" + type; 
+        }
+        String path = String.format("oai-pmh?verb=ListRecords&metadataPrefix=oai_rdf%s", set) + "&from=" 
                 + isoInstant.format(from.truncatedTo(ChronoUnit.SECONDS)) + "&until="
                 + isoInstant.format(until.truncatedTo(ChronoUnit.SECONDS));
 
@@ -292,11 +303,10 @@ public class OpenskosRepository implements GTAARepository {
             max = 50;
         }
         // String fields = "&fl=uuid,uri,prefLabel,altLabel,hiddenLabel,status";
-        String fields = "";
         input = input.replaceAll("[\\-\\.,]+", " ");
         String query = "(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" AND ("
                 + input + "*)";
-        String url = "api/find-concepts?tenant=beng&collection=gtaa&q=" + query + fields + "&rows=" + max;
+        String url = "api/find-concepts?tenant=beng&collection=gtaa&q=" + query + "&rows=" + max;
         final RDF rdf = getForUrl(url, RDF.class);
 
         if (rdf == null || rdf.getDescriptions() == null) {
@@ -341,6 +351,23 @@ public class OpenskosRepository implements GTAARepository {
         RestTemplate template = new RestTemplate();
         template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
         return template;
+    }
+
+    @Override
+    public List<Description> findAnything(String input, Integer max) {
+        if (max == null) {
+            max = 50;
+        }
+        input = input.replaceAll("[\\-\\.,]+", " ");
+        String query = String.format("(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) AND ( %s*)", input);
+        String url = String.format("api/find-concepts?tenant=beng&collection=gtaa&q=%s&rows=%s", query, max);
+        final RDF rdf = getForUrl(url, RDF.class);
+
+        if (rdf == null || rdf.getDescriptions() == null) {
+            return Collections.emptyList();
+        }
+
+        return rdf.getDescriptions();
     }
 
 }
