@@ -60,7 +60,7 @@ public class OpenskosRepositoryTest {
     public void updatesNoResults() throws Exception {
         wireMockRule.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("no-updates.xml"))));
 
-        try (CountedIterator<Record> updates = repo.getUpdates(Instant.EPOCH, Instant.now())) {
+        try (CountedIterator<Record> updates = repo.getPersonUpdates(Instant.EPOCH, Instant.now())) {
             assertThat(updates.hasNext()).isFalse();
         }
     }
@@ -68,7 +68,7 @@ public class OpenskosRepositoryTest {
     @Test
     public void updates() throws Exception {
         wireMockRule.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("updates.xml"))));
-        try (CountedIterator<Record> updates = repo.getUpdates(Instant.EPOCH, Instant.now())) {
+        try (CountedIterator<Record> updates = repo.getPersonUpdates(Instant.EPOCH, Instant.now())) {
             Record next = updates.next();
             assertThat(next).isNotNull();
             assertThat(next.getHeader().getDatestamp()).isNotNull();
