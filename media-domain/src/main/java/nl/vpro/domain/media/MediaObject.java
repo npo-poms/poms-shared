@@ -234,6 +234,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
     protected String mid;
 
+    //@Version
+    @Getter
+    protected Integer version;
+
     @ElementCollection
     @Column(name = "crids", nullable = false, unique = true)
     @OrderColumn(name = "list_index", nullable = false)
