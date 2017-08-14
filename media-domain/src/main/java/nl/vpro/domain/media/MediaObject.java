@@ -235,6 +235,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected String mid;
 
     //@Version
+    @Transient // Remove for MSE-3753
     @Getter
     protected Integer version;
 
