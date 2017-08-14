@@ -1,6 +1,6 @@
 package nl.vpro.beeldengeluid.gtaa;
 
-import lombok.extern.slf4j.Slf4j;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -14,8 +14,7 @@ import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
-import nl.vpro.beeldengeluid.gtaa.GTAARepository;
-import nl.vpro.beeldengeluid.gtaa.OpenskosRepository;
+import lombok.extern.slf4j.Slf4j;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.gtaa.GTAAConflict;
 import nl.vpro.domain.media.gtaa.GTAAPerson;
@@ -23,9 +22,6 @@ import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-//@Ignore("This are not junit tests")
 @Slf4j
 @Ignore
 public class OpenskosTests {
@@ -57,14 +53,23 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore("This is not a junit test")
+    @Ignore
     public void testFindPerson() {
         GTAARepository impl = getRealInstance();
         List<Description> persons = impl.findPersons("pietje", 100);
         assertThat(persons).isNotEmpty();
         System.out.println(persons);
         assertThat(persons.get(0).getStatus()).isNotNull();
+    }
 
+    @Test
+    @Ignore
+    public void testFindAnything() {
+        GTAARepository impl = getRealInstance();
+        List<Description> items = impl.findAnything("hilversum", 100);
+        assertThat(items).isNotEmpty();
+        System.out.println(items);
+        assertThat(items.get(0).getStatus()).isNotNull();
     }
 
     @Test
@@ -74,7 +79,7 @@ public class OpenskosTests {
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
         Instant stop = LocalDate.now().atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
 
-        CountedIterator<Record> updates = impl.getUpdates(start, stop);
+        CountedIterator<Record> updates = impl.getPersonUpdates(start, stop);
         long count = 0;
         while (updates.hasNext()) {
             Record record = updates.next();
@@ -103,7 +108,7 @@ public class OpenskosTests {
         Instant start = Instant.now().minusSeconds(3600000);
         Instant stop = Instant.now();
 
-        CountedIterator<Record> updates = impl.getUpdates(start, stop);
+        CountedIterator<Record> updates = impl.getPersonUpdates(start, stop);
         long count = 0;
         while (updates.hasNext()) {
             Record record = updates.next();
@@ -137,9 +142,9 @@ public class OpenskosTests {
         // "8il3Ut09weJ4h1GQ", template);
 
         // Acceptatie
-        // GTAARepositoryImpl impl = new
-        // GTAARepositoryImpl("http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/",
-        // "***REMOVED***", template);
+        OpenskosRepository impl = new OpenskosRepository("http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/",
+                "***REMOVED***", template);
+        impl.setUseXLLabels(true);
 
         // impl.setUseXLLabels(true);
         // Acceptatie
@@ -148,9 +153,9 @@ public class OpenskosTests {
         // "***REMOVED***", template);
 
         // Test
-         OpenskosRepository impl = new
-         OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
-        impl.setUseXLLabels(true);
+        // OpenskosRepository impl = new
+        // OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/",
+        // "***REMOVED***", template);
         // productie
         // GTAARepositoryImpl impl = new
         // GTAARepositoryImpl("http://openskos.beeldengeluid.nl/", "***REMOVED***",
