@@ -19,12 +19,16 @@ import nl.vpro.w3.rdf.Description;
  */
 public interface GTAARepository {
 
-    CountedIterator<Record> getUpdates(Instant from, Instant until);
+    CountedIterator<Record> getPersonUpdates(Instant from, Instant until);
+    
+    CountedIterator<Record> getAllUpdates(Instant from, Instant until);
 
     Description submit(String prefLabel, List<Label> notes, String creator);
 
     List<Description> findPersons(String input, Integer max);
 
     GTAAPerson submit(GTAAPerson person, String creator);
+
+    List<Description> findAnything(String input, Integer max);
 
 }
