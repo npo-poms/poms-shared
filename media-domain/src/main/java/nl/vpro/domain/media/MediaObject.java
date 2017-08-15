@@ -36,10 +36,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
-import nl.vpro.domain.Embargos;
-import nl.vpro.domain.LocalizedObject;
-import nl.vpro.domain.TextualObjects;
-import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.media.bind.CountryCodeAdapter;
@@ -984,7 +981,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     /**
      * Experimental. For NPA-403, to provide to ES the needed mapping.
      */
-    @JsonView({Views.Publisher.class, })
+    @JsonView({Views.Publisher.class})
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Title> getExpandedTitles() {
         return TextualObjects.expandTitles(this);
     }
