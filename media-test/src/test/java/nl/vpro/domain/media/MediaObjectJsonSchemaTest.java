@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sf.json.test.JSONAssert;
 
 import java.io.IOException;
@@ -18,7 +19,6 @@ import java.util.Locale;
 
 import org.junit.After;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -47,6 +47,7 @@ import static org.junit.Assert.assertEquals;
  * @author Roelof Jan Koekoek
  * @since 1.7
  */
+@Slf4j
 public class MediaObjectJsonSchemaTest {
 
     @After
@@ -772,7 +773,6 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    @Ignore("todo")
     public void segmentWithEverything() throws Exception {
         StringWriter segment = new StringWriter();
         org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/segment-with-everything.json"), segment, "UTF-8");
@@ -784,7 +784,6 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    @Ignore("todo")
     public void programWithEverything() throws Exception {
         StringWriter program = new StringWriter();
         org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), program, "UTF-8");
@@ -793,6 +792,14 @@ public class MediaObjectJsonSchemaTest {
                 .withEverything()
                 .build(),
             program.toString());
+    }
+
+    @Test
+    public void publisherView() throws JsonProcessingException {
+        String s = Jackson2Mapper.getInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+
+        String s2 = Jackson2Mapper.getPublisherInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+        log.info("{}\n{}", s, s2);
     }
 
     private String toJson(MediaObject program) throws IOException {
