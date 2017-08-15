@@ -470,7 +470,7 @@ public class MediaObjectTest {
             .id(1L)
             .build();
         program.acceptChanges();
-        assertThat(program.getHash()).isEqualTo(362556323L);
+        assertThat(program.getHash()).isEqualTo(2647163380L);
     }
 
 
