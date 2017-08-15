@@ -478,7 +478,8 @@ public class MediaObjectTest {
                 "    <segments/>\n" +
                 "</program>\n");
 
-        assertThat(program.getHash()).isEqualTo(2553230104L);
+
+        assertThat(program.getHash()).isEqualTo(3254147304L);
     }
 
 
