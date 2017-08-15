@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.AbstractOwnedText;
+import nl.vpro.domain.Child;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.validation.NoHtml;
@@ -50,7 +51,7 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "titleType", namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
 @ToString(exclude = "parent")
-public class Title extends AbstractOwnedText<Title> implements  Serializable {
+public class Title extends AbstractOwnedText<Title> implements  Serializable, Child<MediaObject> {
 
     private static final long serialVersionUID = 1L;
 
@@ -191,11 +192,13 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable {
 
 
 
+    @Override
     @XmlTransient
     public MediaObject getParent() {
         return parent;
     }
 
+    @Override
     public void setParent(MediaObject parent) {
         this.parent = parent;
     }
