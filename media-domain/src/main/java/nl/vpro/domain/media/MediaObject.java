@@ -53,6 +53,7 @@ import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.nicam.NicamRated;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.ResortedSortedSet;
@@ -981,14 +982,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     /**
-     * Experimental. For NPA-403, to provide ES the needed mapping.
+     * Experimental. For NPA-403, to provide to ES the needed mapping.
      */
-    @JsonProperty("expandedTitles")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonView({Views.Publisher.class, })
     public SortedSet<Title> getExpandedTitles() {
-        // TODO NPA-403
-        //return TextualObjects.expandTitles(this);
-        return new TreeSet<Title>(); // temporary disable until feature finished.
+        return TextualObjects.expandTitles(this);
     }
 
 
