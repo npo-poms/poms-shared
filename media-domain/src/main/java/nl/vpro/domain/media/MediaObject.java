@@ -990,15 +990,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject addTitle(Title title) {
-        if (title != null) {
-            title.setParent(this);
-            if (titles == null) {
-                titles = new TreeSet<>();
-            } else {
-                titles.remove(title);
-            }
-            titles.add(title);
-        }
+        this.titles = addTo(titles, title);
         return this;
     }
 
@@ -1060,16 +1052,21 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public MediaObject addDescription(Description description) {
-        if (description != null) {
-            description.setParent(this);
-            if (descriptions == null) {
-                descriptions = new TreeSet<>();
-            } else {
-                descriptions.remove(description);
-            }
-            descriptions.add(description);
-        }
+        this.descriptions = addTo(descriptions, description);
         return this;
+    }
+
+    private <T extends Child<MediaObject>> Set<T> addTo(Set<T> co, T ot) {
+        if (ot != null) {
+            ot.setParent(this);
+            if (co == null) {
+                co = new TreeSet<>();
+            } else {
+                co.remove(ot);
+            }
+            co.add(ot);
+        }
+        return co;
     }
 
     @Override
