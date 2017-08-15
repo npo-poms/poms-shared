@@ -73,6 +73,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     M mediaObject();
 
+
     @SuppressWarnings("unchecked")
     default B id(Long id) {
         mediaObject().setId(id);
@@ -305,13 +306,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return mainTitle(title, OwnerType.BROADCASTER);
     }
 
-
-    default B lexicoTitle(String title) {
-        return titles(new Title(title, OwnerType.BROADCASTER, TextualType.LEXICO));
+    default B lexicoTitle(String title, OwnerType owner) {
+        return titles(new Title(title, owner, TextualType.LEXICO));
     }
 
+    default B lexicoTitle(String title) {
+        return lexicoTitle(title, OwnerType.BROADCASTER);
+    }
 
-    @SuppressWarnings("unchecked")
     default B descriptions(Description... descriptions) {
         for(Description description : descriptions) {
             mediaObject().addDescription(description);

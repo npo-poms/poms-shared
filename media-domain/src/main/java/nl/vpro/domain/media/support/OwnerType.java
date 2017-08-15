@@ -181,6 +181,9 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
         return OwnerType.values()[ot.ordinal() + 1];
     }
 
+    /**
+     * the owner types that are relevant to {TextualObjects#}
+     */
     public static OwnerType[] ENTRIES = new OwnerType[] {BROADCASTER, NPO};
 
 }
