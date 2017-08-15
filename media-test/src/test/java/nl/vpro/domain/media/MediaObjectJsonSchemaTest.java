@@ -795,11 +795,14 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void publisherView() throws JsonProcessingException {
-        String s = Jackson2Mapper.getInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+    public void publisherView() throws IOException {
+        String normalString = Jackson2Mapper.getInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
 
-        String s2 = Jackson2Mapper.getPublisherInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
-        log.info("{}\n{}", s, s2);
+        String publisherString = Jackson2Mapper.getPublisherInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+        log.info("{}\n{}", normalString, publisherString);
+
+        Program p = Jackson2Mapper.getLenientInstance().readValue(publisherString, Program.class);
+        assertThat(p.getMainTitle()).isEqualTo("Main title");
     }
 
     private String toJson(MediaObject program) throws IOException {

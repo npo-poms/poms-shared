@@ -60,11 +60,24 @@ public class TextualObjects {
         TriFunction<String, OwnerType, TextualType, OT> creator) {
         return expand(texts,
             creator,
-            Arrays.asList(TextualType.TITLES), Arrays.asList(OwnerType.ENTRIES));
+            Arrays.asList(TextualType.TITLES),
+            Arrays.asList(OwnerType.ENTRIES)
+        );
     }
 
     public static <T extends OwnedText> SortedSet<T> expandTitles(TextualObject<T, ?, ?> textualObject) {
         return expandTitles(textualObject.getTitles(), textualObject.getOwnedTitleCreator());
+    }
+
+
+    public static <T extends OwnedText> Map<OwnerType, SortedSet<BasicTypedText>> expandTitlesAsMap(TextualObject<T, ?, ?> textualObject) {
+        Map<OwnerType, SortedSet<BasicTypedText>> result = new HashMap<>();
+
+        for (OwnedText ot : expandTitles(textualObject.getTitles(), textualObject.getOwnedTitleCreator())) {
+            SortedSet<BasicTypedText> set = result.computeIfAbsent(ot.getOwner(), o -> new TreeSet<>());
+            set.add(new BasicTypedText(ot));
+        }
+        return result;
     }
 
     public static <OT extends OwnedText> SortedSet<OT> expandDescriptions(
