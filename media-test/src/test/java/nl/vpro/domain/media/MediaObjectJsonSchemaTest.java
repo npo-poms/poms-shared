@@ -807,7 +807,7 @@ public class MediaObjectJsonSchemaTest {
         });
         assertThat(map.get("expandedTitles")).isNotNull();
         assertThat(((List) map.get("expandedTitles")).get(0)).isNotNull();
-        assertThat(((Map<String, Object>)(((List) map.get("expandedTitles")).get(0))).get("value")).isEqualTo("Mainx title");
+        assertThat(((Map<String, Object>)(((List) map.get("expandedTitles")).get(0))).get("value")).isEqualTo("Main title");
 
         log.info("{}\n{}", normalString, publisherString);
 
