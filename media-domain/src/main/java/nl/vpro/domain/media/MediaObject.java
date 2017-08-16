@@ -1995,7 +1995,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             existing.setOffset(location.getOffset());
         } else {
             locations.add(location);
-            location.setMediaObject(this);
+            location.setParent(this);
             if (location.hasPlatform()) {
                 realizePrediction(location);
             }
@@ -2209,7 +2209,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             throw new IllegalArgumentException();
         }
         getImages().add(index, image);
-        image.setMediaObject(this);
+        image.setParent(this);
         return this;
     }
 
@@ -2256,7 +2256,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     public boolean removeImage(Image image) {
         if (images != null) {
-            image.setMediaObject(null);
+            image.setParent(null);
             return images.remove(image);
         }
         return false;
@@ -2661,12 +2661,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public void addAllImages(List<Image> imgs) {
-        imgs.forEach(img -> img.setMediaObject(this));
+        imgs.forEach(img -> img.setParent(this));
         getImages().addAll(imgs);
     }
 
     public void removeImages() {
-        getImages().forEach(img -> img.setMediaObject(null));
+        getImages().forEach(img -> img.setParent(null));
         images.clear();
     }
 
