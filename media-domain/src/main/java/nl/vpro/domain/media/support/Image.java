@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.Xmlns;
@@ -88,7 +89,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "creationDate",
     "workflow"
 })
-public class Image extends PublishableObject<Image> implements Metadata<Image>, Ownable {
+public class Image extends PublishableObject<Image> implements Metadata<Image>, Ownable, MediaObjectChild {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
     public static final String BASE_URN = "urn:vpro:media:image:";
@@ -461,11 +462,13 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
     }
 
 
-    public MediaObject getMediaObject() {
+    @Override
+    public MediaObject getParent() {
         return mediaObject;
     }
 
-    public void setMediaObject(MediaObject mediaObject) {
+    @Override
+    public void setParent(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
     }
 
