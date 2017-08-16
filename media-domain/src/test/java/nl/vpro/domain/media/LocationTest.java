@@ -86,7 +86,7 @@ public class LocationTest extends ObjectTest<Location> {
         Program program = new Program(1L);
         Prediction pred = program.findOrCreatePrediction(Platform.INTERNETVOD);
         Location location = new Location();
-        location.setMediaObject(program);
+        location.setParent(program);
         location.setPlatform(Platform.INTERNETVOD);
 
         assertThat(location.getAuthorityRecord()).isSameAs(pred);

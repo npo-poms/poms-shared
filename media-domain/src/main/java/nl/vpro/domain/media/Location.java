@@ -25,12 +25,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
-import nl.vpro.domain.media.support.Ownable;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.PublishableObject;
-import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.util.TimeUtils;
@@ -69,7 +67,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 
 })
 @Slf4j
-public class Location extends PublishableObject<Location> implements Ownable, Comparable<Location> {
+public class Location extends PublishableObject<Location> implements Ownable, Comparable<Location>, MediaObjectChild {
     //TODO Validate URL, TYPE and Owner AVTYPE
 
     private static final long serialVersionUID = -140942203904508506L;
@@ -335,17 +333,18 @@ public class Location extends PublishableObject<Location> implements Ownable, Co
         return this;
     }
 
-    public MediaObject getMediaObject() {
+    @Override
+    public MediaObject getParent() {
         return mediaObject;
     }
 
-    Location setMediaObject(MediaObject mediaObject) {
+    @Override
+    public void setParent(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
         if (this.platform != null) {
             // triggers resetting of publishStop/publishStart
             this.setPlatform(this.platform);
         }
-        return this;
     }
 
     @Override
