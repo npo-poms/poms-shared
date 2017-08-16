@@ -385,17 +385,22 @@ public interface MediaTestDataBuilder<
     }
 
     default T withMemberOf()  {
-        Group series = group().constrained().id(100L).type(GroupType.SERIES).build();
+        return withMemberOf(midBase);
+    }
 
-        Group season = group().constrained().id(200L).type(GroupType.SEASON).build();
+    default T withMemberOf(AtomicLong mids) {
+        Group series = group().constrained().withMid(mids).id(100L).type(GroupType.SERIES).build();
+
+        Group season = group().constrained().withMid(mids).id(200L).type(GroupType.SEASON).build();
         try {
             season.createMemberOf(series, 1);
-        } catch(CircularReferenceException e) {
+        } catch (CircularReferenceException e) {
             throw new RuntimeException(e);
         }
 
         return memberOf(season, 1);
     }
+
 
     default T withAgeRating() {
         return ageRating(AgeRating._12);
@@ -604,8 +609,13 @@ public interface MediaTestDataBuilder<
     }
 
     default T withEverything() {
+        return withEverything(new AtomicLong(1), new AtomicLong(20000L));
+    }
+
+    default T withEverything(AtomicLong ids, AtomicLong mids) {
         return
-            withAgeRating()
+            withMids(mids)
+                .withAgeRating()
                 .withAspectRatio()
                 .withAuthorityRecord()
                 .withAvAttributes()
@@ -626,7 +636,7 @@ public interface MediaTestDataBuilder<
                 .withLanguages()
                 .withLastModifiedBy()
                 .withLocations()
-                .withMemberOf()
+                .withMemberOf(mids)
                 .withPersons()
                 .withPortalRestrictions()
                 .withPortals()
@@ -645,8 +655,8 @@ public interface MediaTestDataBuilder<
                 .withTwitterRefs()
                 .withWebsites()
                 .withWorkflow()
-                .withFixedIds()
-                .withFixedMids()
+                .withIds(ids)
+
         ;
     }
 
@@ -671,13 +681,14 @@ public interface MediaTestDataBuilder<
 
         @Override
         public ProgramTestDataBuilder withEverything() {
+            AtomicLong mids = new AtomicLong(30000L);
             return MediaTestDataBuilder.super.withEverything()
                 .withType()
-                .withEpisodeOf()
+                .withEpisodeOf(null, null, mids)
                 .withPoProgType()
                 .withPredictions()
                 .withSegmentsWithEveryting()
-                .withFixedSegmentMids(new AtomicLong(30000L));
+                .withFixedSegmentMids(mids);
 
         }
         @Override
@@ -708,9 +719,23 @@ public interface MediaTestDataBuilder<
             return this;
         }
 
-        public ProgramTestDataBuilder withEpisodeOf(Long seriesId, Long seasonId)  {
-            Group series = MediaTestDataBuilder.group().constrained().type(GroupType.SERIES).id(seriesId).build();
-            Group season = MediaTestDataBuilder.group().constrained().type(GroupType.SEASON).id(seasonId).build();
+        public ProgramTestDataBuilder withEpisodeOf(Long seriesId, Long seasonId) {
+            return withEpisodeOf(seriesId, seasonId, midBase);
+        }
+
+        public ProgramTestDataBuilder withEpisodeOf(Long seriesId, Long seasonId, AtomicLong midId)  {
+            Group series = MediaTestDataBuilder.group()
+                .constrained()
+                .type(GroupType.SERIES)
+                .id(seriesId)
+                .withMid(midId)
+                .build();
+            Group season = MediaTestDataBuilder.group()
+                .constrained()
+                .type(GroupType.SEASON)
+                .id(seasonId)
+                .withMid(midId)
+                .build();
             try {
                 season.createMemberOf(series, 1);
             } catch(CircularReferenceException e) {
@@ -731,7 +756,10 @@ public interface MediaTestDataBuilder<
             return
                 segments(
                     MediaTestDataBuilder.segment().parent(mediaObject())
-                        .withEverything().mid("VPROWON_12345_1").start(java.time.Duration.ZERO).duration(java.time.Duration.ofMillis(100000)).build(),
+                        .withEverything()
+                        .mid("VPROWON_12345_1")
+                        .start(java.time.Duration.ZERO)
+                        .duration(java.time.Duration.ofMillis(100000)).build(),
                     MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(java.time.Duration.ofMillis(100000)).duration(java.time.Duration.ofMillis(100000)).build())
                     ;
 
