@@ -37,7 +37,8 @@
   ],
   "regions": [
     "NL",
-    "BENELUX"
+    "BENELUX",
+    "TVVOD:NL"
   ],
   "titles": [
     {
@@ -126,6 +127,12 @@
       "value": "Frans"
     }
   ],
+  "availableSubtitles": [
+    {
+      "language": "nl",
+      "type": "CAPTION"
+    }
+  ],
   "avAttributes": {
     "bitrate": 1000000,
     "avFileFormat": "M4V"
@@ -162,19 +169,19 @@
   ],
   "descendantOf": [
     {
-      "midRef": "VPROWON_DG_20002",
+      "midRef": "VPROWON_20002",
       "urnRef": "urn:vpro:media:group:100",
       "type": "SERIES"
     },
     {
-      "midRef": "VPROWON_DG_20003",
+      "midRef": "VPROWON_20003",
       "urnRef": "urn:vpro:media:group:200",
       "type": "SEASON"
     }
   ],
   "memberOf": [
     {
-      "midRef": "VPROWON_12347",
+      "midRef": "VPROWON_20003",
       "urnRef": "urn:vpro:media:group:200",
       "type": "SEASON",
       "index": 1,
@@ -299,6 +306,9 @@
       "duration": 50,
       "midRef": "VPROWON_20001",
       "poProgID": "VPROWON_20001",
+      "repeat": {
+        "isRerun": true
+      },
       "net": "ZAPP",
       "urnRef": "urn:vpro:media:segment:12"
     },
@@ -309,6 +319,9 @@
       "duration": 250,
       "midRef": "VPROWON_20001",
       "poProgID": "VPROWON_20001",
+      "repeat": {
+        "isRerun": true
+      },
       "urnRef": "urn:vpro:media:segment:12"
     },
     {
@@ -318,6 +331,9 @@
       "duration": 200,
       "midRef": "VPROWON_20001",
       "poProgID": "VPROWON_20001",
+      "repeat": {
+        "isRerun": true
+      },
       "urnRef": "urn:vpro:media:segment:12"
     }
   ],
@@ -392,12 +408,6 @@
       "urn": "urn:vpro:media:image:5"
     }
   ],
-  "availableSubtitles": [
-    {
-      "language": "nl",
-      "type": "CAPTION"
-    }
-  ],
-  "publishDate": 1425603600000,
-  "start": 120000
+  "start": 120000,
+  "publishDate": 1425603600000
 }
