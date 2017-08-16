@@ -15,13 +15,16 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -798,7 +801,14 @@ public class MediaObjectJsonSchemaTest {
     public void publisherView() throws IOException {
         String normalString = Jackson2Mapper.getInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
 
-        String publisherString = Jackson2Mapper.getPublisherInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+        String publisherString = Jackson2Mapper.getPublisherInstance()
+            .writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+        Map<String, Object> map = Jackson2Mapper.getInstance().readValue(publisherString, new TypeReference<Map<String, Object>>() {
+        });
+        assertThat(map.get("expandedTitles")).isNotNull();
+        assertThat(((List) map.get("expandedTitles")).get(0)).isNotNull();
+        assertThat(((Map<String, Object>)(((List) map.get("expandedTitles")).get(0))).get("value")).isEqualTo("Mainx title");
+
         log.info("{}\n{}", normalString, publisherString);
 
         Program p = Jackson2Mapper.getLenientInstance().readValue(publisherString, Program.class);
