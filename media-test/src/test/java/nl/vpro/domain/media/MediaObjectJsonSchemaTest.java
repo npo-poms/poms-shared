@@ -799,7 +799,6 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void publisherView() throws IOException {
-        String normalString = Jackson2Mapper.getInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
 
         String publisherString = Jackson2Mapper.getPublisherInstance()
             .writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
@@ -809,9 +808,24 @@ public class MediaObjectJsonSchemaTest {
         assertThat(((List) map.get("expandedTitles")).get(0)).isNotNull();
         assertThat(((Map<String, Object>)(((List) map.get("expandedTitles")).get(0))).get("value")).isEqualTo("Main title");
 
-        log.info("{}\n{}", normalString, publisherString);
+        log.info("{}", publisherString);
 
         Program p = Jackson2Mapper.getLenientInstance().readValue(publisherString, Program.class);
+        assertThat(p.getMainTitle()).isEqualTo("Main title");
+    }
+
+
+    @Test
+    public void normalView() throws IOException {
+        String normalString = Jackson2Mapper.getInstance().writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+
+        Map<String, Object> map = Jackson2Mapper.getInstance().readValue(normalString, new TypeReference<Map<String, Object>>() {
+        });
+        assertThat(map.get("expandedTitles")).isNull();
+
+        log.info("{}", normalString);
+
+        Program p = Jackson2Mapper.getLenientInstance().readValue(normalString, Program.class);
         assertThat(p.getMainTitle()).isEqualTo("Main title");
     }
 
