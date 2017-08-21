@@ -78,10 +78,7 @@ public class SubtitlesSearch extends AbstractTextSearch implements Predicate<Sta
 
     @Override
     public boolean hasSearches() {
-        return mids!= null && !mids.isEmpty()
-            || types != null && !types.isEmpty()
-            || languages != null && !languages.isEmpty()
-            ;
+        return text != null || atLeastOneHasSearches(mids, types, languages);
 
     }
 

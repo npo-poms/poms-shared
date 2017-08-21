@@ -27,4 +27,22 @@ public abstract class AbstractSearch extends AbstractMatcher {
 
     public abstract boolean hasSearches();
 
+
+    protected boolean atLeastOneHasSearches(Iterable<?>... collections) {
+        for (Iterable<?> col : collections) {
+            if (col != null) {
+                if (col instanceof MatcherList<?>) {
+                    if (!((MatcherList) col).isEmpty()) {
+                        return true;
+                    }
+                } else {
+                    if (!col.iterator().hasNext()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 }
