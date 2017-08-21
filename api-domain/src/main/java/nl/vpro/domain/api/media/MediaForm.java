@@ -5,7 +5,6 @@
 package nl.vpro.domain.api.media;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -16,11 +15,8 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.api.SortableForm;
-import nl.vpro.domain.api.media.bind.MediaSortOrderListJson;
 import nl.vpro.domain.media.MediaObject;
 
 /**
