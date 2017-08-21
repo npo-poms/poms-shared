@@ -1,14 +1,15 @@
 package nl.vpro.domain.api.page;
 
-import nl.vpro.domain.api.*;
-import nl.vpro.domain.page.Association;
-import nl.vpro.domain.page.LinkType;
+import java.util.function.Predicate;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import java.util.function.Predicate;
+
+import nl.vpro.domain.api.*;
+import nl.vpro.domain.page.Association;
+import nl.vpro.domain.page.LinkType;
 
 /**
  * @author Michiel Meeuwissen
@@ -74,8 +75,6 @@ public class AssociationSearch extends AbstractSearch implements Predicate<Assoc
 
     @Override
     public boolean hasSearches() {
-        return types != null && !types.isEmpty()
-            || urls != null && !urls.isEmpty();
-
+        return atLeastOneHasSearches(types, urls);
     }
 }

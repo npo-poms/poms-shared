@@ -153,21 +153,8 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
 
     @Override
     public boolean hasSearches() {
-        return mediaIds != null && !mediaIds.isEmpty()
-            || sortDates != null && !sortDates.isEmpty()
-            || types != null && !types.isEmpty()
-            || avTypes != null && !avTypes.isEmpty()
-            || broadcasters != null && !broadcasters.isEmpty()
-            || locations != null && !locations.isEmpty()
-            || tags != null && !tags.isEmpty()
-            || durations != null && !durations.isEmpty()
-            || descendantOf != null && !descendantOf.isEmpty()
-            || episodeOf != null && !episodeOf.isEmpty()
-            || memberOf != null && !memberOf.isEmpty()
-            || relations != null && !relations.hasSearches()
-            || scheduleEvents != null && ! scheduleEvents.isEmpty()
-            || ageRatings != null && !ageRatings.isEmpty()
-            || contentRatings != null && !contentRatings.isEmpty();
+        return text != null ||
+            atLeastOneHasSearches(mediaIds, sortDates, types, avTypes, broadcasters, locations, tags, durations, descendantOf, episodeOf, memberOf, relations, scheduleEvents, ageRatings, contentRatings);
     }
 
     @Override
