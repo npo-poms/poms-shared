@@ -19,13 +19,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.*;
@@ -401,6 +399,21 @@ public class Location extends PublishableObject<Location> implements Ownable, Co
             avAttributes = new AVAttributes();
         }
         avAttributes.setBitrate(bitrate);
+        return this;
+    }
+
+    public Long getByteSize() {
+        if (avAttributes == null) {
+            return null;
+        }
+        return avAttributes.getByteSize();
+    }
+
+    public Location setByteSize(Long byteSize) {
+        if (avAttributes == null) {
+            avAttributes = new AVAttributes();
+        }
+        avAttributes.setByteSize(byteSize);
         return this;
     }
 
