@@ -580,10 +580,17 @@ public class MediaObjects {
             connection.setInstanceFollowRedirects(true);
             connection.setRequestMethod("HEAD");
             if (connection.getResponseCode() == 200) {
-                Long result = Long.parseLong(connection.getHeaderField("Content-Length"));
-                log.info("Byte size of {} is {} (determined by head request)", u, result);
-                return result;
+                String contentLength = connection.getHeaderField("Content-Length");
+                if (contentLength != null) {
+                    Long result = Long.parseLong(contentLength);
+                    log.info("Byte size of {} is {} (determined by head request)", u, result);
+                    return result;
+                } else {
+                    log.warn("No content length in {}" + u);
+                    return null;
+                }
             } else {
+                log.warn("Response code {} from {}", connection.getResponseCode(), u);
                 return null;
             }
         } catch (MalformedURLException mf) {
