@@ -35,31 +35,31 @@ public abstract class PublishableObjectAssert<S extends PublishableObjectAssert<
 
     public S hasPublishStart(Date start) {
         isNotNull();
-        assertThat(actual.getPublishStart()).isEqualTo(start);
+        assertThat(actual.getPublishStartInstant()).isEqualTo(DateUtils.toInstant(start));
         return myself;
     }
 
     public S hasPublishStop(Date stop) {
         isNotNull();
-        assertThat(actual.getPublishStop()).isEqualTo(stop);
+        assertThat(actual.getPublishStopInstant()).isEqualTo(DateUtils.toInstant(stop));
         return myself;
     }
 
     public S hasPublishStart(Instant start) {
         isNotNull();
-        assertThat(DateUtils.toInstant(actual.getPublishStart())).isEqualTo(start);
+        assertThat(actual.getPublishStartInstant()).isEqualTo(start);
         return myself;
     }
 
     public S hasPublishStop(Instant stop) {
         isNotNull();
-        assertThat(DateUtils.toInstant(actual.getPublishStop())).isEqualTo(stop);
+        assertThat(actual.getPublishStopInstant()).isEqualTo(stop);
         return myself;
     }
 
     public S hasPublicationWindow() {
         isNotNull();
-        if(actual.getPublishStart() != null || actual.getPublishStop() != null) {
+        if(actual.getPublishStartInstant() != null || actual.getPublishStopInstant() != null) {
             return myself;
         }
         Fail.fail("expected at least one of publishStart or publishStop not too be null");
