@@ -18,7 +18,7 @@ import nl.vpro.util.FilteringIterator;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public interface MediaRepository extends MediaLoader {
+public interface MediaRepository extends MediaLoader, Redirector {
 
     MediaResult list(Order order, long offset, Integer max);
 
@@ -35,6 +35,5 @@ public interface MediaRepository extends MediaLoader {
 
     Iterator<MediaObject> iterate(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
 
-    RedirectList redirects();
 
 }
