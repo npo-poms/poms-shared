@@ -247,7 +247,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected List<String> crids;
 
     @ManyToMany
-    @OrderColumn(name = "list_index", nullable = false)
+    @OrderColumn(name = "list_index",
+        nullable = false)
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor

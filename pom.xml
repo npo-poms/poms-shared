@@ -16,6 +16,7 @@
   </properties>
 
 
+
   <scm>
     <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/trunk</connection>
     <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/trunk</developerConnection>
