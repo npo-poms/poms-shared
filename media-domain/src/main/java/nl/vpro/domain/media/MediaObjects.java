@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -563,6 +566,33 @@ public class MediaObjects {
         ObjectFilter.Result<T> result = ObjectFilter.filter(object, p);
         log.debug("Filtered {} from {}", result.filterCount(), result.get());
         return result.get();
+    }
+
+
+    /**
+     * TODO in vpro api we find a HttpClient version of this, with connection pooling.
+     * I don't know if that is necessary for this.
+     */
+    public static Long getByteSize(String u) {
+        try {
+            URL url = new URL(u);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setInstanceFollowRedirects(true);
+            connection.setRequestMethod("HEAD");
+            if (connection.getResponseCode() == 200) {
+                Long result = Long.parseLong(connection.getHeaderField("Content-Length"));
+                log.info("Byte size of {} is {} (determined by head request)", u, result);
+                return result;
+            } else {
+                return null;
+            }
+        } catch (MalformedURLException mf) {
+            log.debug(mf.getMessage());
+            return null;
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+            return null;
+        }
     }
 
 }
