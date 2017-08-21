@@ -44,7 +44,6 @@ public class MemberRefSearch extends AbstractSearch {
 
     @Override
     public boolean hasSearches() {
-        return mediaIds != null && !mediaIds.isEmpty()
-            || types != null && !types.isEmpty();
+        return atLeastOneHasSearches(mediaIds, types);
     }
 }
