@@ -36,10 +36,7 @@ public abstract class AbstractRelationSearch extends AbstractSearch implements P
 
     @Override
     public boolean hasSearches() {
-        return types != null && !types.isEmpty()
-                || broadcasters != null && !broadcasters.isEmpty()
-                || values != null && !values.isEmpty()
-                || uriRefs != null && !uriRefs.isEmpty();
+        return atLeastOneHasSearches(types, broadcasters, values, uriRefs);
     }
 
     @Override
