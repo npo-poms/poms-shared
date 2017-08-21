@@ -66,8 +66,6 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @Slf4j
 public class Location extends PublishableObject<Location> implements Ownable, Comparable<Location>, MediaObjectChild {
-    //TODO Validate URL, TYPE and Owner AVTYPE
-
     private static final long serialVersionUID = -140942203904508506L;
 
     private static final String BASE_URN = "urn:vpro:media:location:";
