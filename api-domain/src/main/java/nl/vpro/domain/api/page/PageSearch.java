@@ -89,21 +89,7 @@ public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
     @Override
     public boolean hasSearches() {
         return text != null
-            || sortDates != null && !sortDates.isEmpty()
-            || lastModifiedDates != null && !lastModifiedDates.isEmpty()
-            || creationDates != null && !creationDates.isEmpty()
-            || publishDates != null && !publishDates.isEmpty()
-            || types != null && !types.isEmpty()
-            || broadcasters != null && !broadcasters.isEmpty()
-            || portals != null && !portals.isEmpty()
-            || sections != null && !sections.isEmpty()
-            || genres != null && !genres.isEmpty()
-            || tags != null && !tags.isEmpty()
-            || keywords != null && !keywords.isEmpty()
-            || relations != null && relations.size() > 0
-            || links != null && links.size() > 0
-            || referrals != null && referrals.size() > 0
-            ;
+            || atLeastOneHasSearches(sortDates, lastModifiedDates, creationDates, publishDates, types, broadcasters, portals, sections, genres, tags, keywords, relations, links, referrals);
     }
 
     @Override

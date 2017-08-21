@@ -37,6 +37,6 @@ public class TermSearch extends AbstractSearch {
 
     @Override
     public boolean hasSearches() {
-        return ids != null && !ids.isEmpty();
+        return atLeastOneHasSearches(ids);
     }
 }

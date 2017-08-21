@@ -376,4 +376,23 @@ public class MediaSearchTest {
         }
     }
 */
+
+    @Test
+    public void hasNoSearches() {
+        assertThat(new MediaSearch().hasSearches()).isFalse();
+    }
+
+    @Test
+    public void hasSearchesText() {
+        MediaSearch search = new MediaSearch();
+        search.setText(SimpleTextMatcher.should("bla"));
+        assertThat(search.hasSearches()).isTrue();
+    }
+
+    @Test
+    public void hasSearchesIds() {
+        MediaSearch search = new MediaSearch();
+        search.setMediaIds(TextMatcherList.must(TextMatcher.should("bla")));
+        assertThat(search.hasSearches()).isTrue();
+    }
 }
