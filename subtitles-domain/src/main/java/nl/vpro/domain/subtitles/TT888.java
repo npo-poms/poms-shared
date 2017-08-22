@@ -185,9 +185,12 @@ public class TT888 {
     static void format(Iterator<? extends Cue> cueIterator, Writer writer) throws IOException {
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
-            format(cueIterator.next(), builder);
-            writer.write(builder.toString());
-            builder.setLength(0);
+            Cue cue = cueIterator.next();
+            if (cue != null) {
+                format(cue, builder);
+                writer.write(builder.toString());
+                builder.setLength(0);
+            }
         }
     }
 
