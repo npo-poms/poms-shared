@@ -71,7 +71,7 @@ public class WEBVTTandSRT {
                 try {
                     return parseCue(parent, headLine, offset, timeLine, content.toString(), decimalSeparator);
                 } catch (IllegalArgumentException e) {
-                    log.error(e.getMessage(), e);
+                    log.warn("Error: {} while parsing\nheadline:{}\ntimeline:{}", e.getMessage(), headLine, timeLine);
                     return null;
                 }
 
@@ -142,9 +142,11 @@ public class WEBVTTandSRT {
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
             Cue cue = cueIterator.next();
-            formatCue(cue, builder, ",");
-            writer.write(builder.toString());
-            builder.setLength(0);
+            if (cue != null) {
+                formatCue(cue, builder, ",");
+                writer.write(builder.toString());
+                builder.setLength(0);
+            }
         }
         writer.flush();
     }
@@ -160,9 +162,12 @@ public class WEBVTTandSRT {
         writer.write("\n\n");
         StringBuilder builder = new StringBuilder();
         while (cueIterator.hasNext()) {
-            formatCue(cueIterator.next(), builder, ".");
-            writer.write(builder.toString());
-            builder.setLength(0);
+            Cue cue = cueIterator.next();
+            if (cue != null) {
+                formatCue(cue, builder, ".");
+                writer.write(builder.toString());
+                builder.setLength(0);
+            }
         }
     }
 
