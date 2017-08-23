@@ -20,27 +20,40 @@ import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
-* @author Michiel Meeuwissen
-* @since 4.8
-*/
+ * Just represent one cue in a series of subtitles.
+ * @author Michiel Meeuwissen
+ * @since 4.8
+ */
 @XmlRootElement(name = "cue")
 @ToString(of = {"parent", "sequence", "content"})
 @EqualsAndHashCode
 @Getter
 public class Cue {
 
+    /**
+     * The MID of the parent media object
+     */
     @XmlAttribute
     String parent;
 
+    /**
+     * A sequence number relative to other cues of the same parent.
+     */
     @XmlAttribute
     int sequence;
 
+    /**
+     * When the cue must be started to be displayed relative to the beginning of the stream
+     */
     @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     Duration start;
 
+    /**
+     * When the cue must be stopped to be displayed relative to the beginning of the stream
+     */
     @XmlAttribute
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
