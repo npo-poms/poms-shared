@@ -1,8 +1,8 @@
 package nl.vpro.domain.support;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.ToString;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -11,14 +11,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.persistence.Id;
-import javax.swing.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.Xmlns;
 
@@ -149,7 +148,9 @@ public class License implements nl.vpro.domain.Displayable {
     }
 
     public static License getLicenseById(String id) {
-
+        if (id == null) {
+            return null;
+        }
         return Arrays.stream(values()).filter(l -> l.getId().equals(id)).findFirst().orElse(new License(id));
     }
 
