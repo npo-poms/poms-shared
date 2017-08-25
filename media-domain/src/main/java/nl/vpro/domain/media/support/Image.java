@@ -160,9 +160,8 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
     private String sourceName;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
-    @Enumerated(EnumType.STRING)
     @NotNull(groups = {WarningValidatorGroup.class})
-    private License license;
+    private String license;
 
 
     @ReleaseDate()
@@ -210,7 +209,7 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
         String description,
         Long id,
         String credits,
-        License license,
+        String license,
         String source,
         Integer height,
         Integer width,
@@ -453,12 +452,12 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
 
     @Override
     public License getLicense() {
-        return license;
+        return License.getLicenseById(license);
     }
 
     @Override
     public void setLicense(License license) {
-        this.license = license;
+        this.license = license.getId();
     }
 
 

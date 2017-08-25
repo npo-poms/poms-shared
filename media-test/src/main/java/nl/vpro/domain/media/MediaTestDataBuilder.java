@@ -525,7 +525,7 @@ public interface MediaTestDataBuilder<
                 .imageUri("urn:vpro:image:11234")
                 .title("Eerste plaatje met credits")
                 .credits("CREDITS")
-                .license(License.PUBLIC_DOMAIN)
+                .license(License.PUBLIC_DOMAIN.getId())
                 .source("SOURCE")
                 .creationDate(fixedDate)
             ,
@@ -533,7 +533,7 @@ public interface MediaTestDataBuilder<
                 .imageUri("urn:vpro:image:15678")
                 .title("Tweede plaatje met credits")
                 .credits("CREDITS")
-                .license(License.PUBLIC_DOMAIN)
+                .license(License.PUBLIC_DOMAIN.getId())
                 .source("SOURCE")
                 .creationDate(fixedDate)
             ,
