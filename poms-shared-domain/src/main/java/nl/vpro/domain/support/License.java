@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URI;
@@ -18,7 +19,11 @@ import javax.xml.bind.annotation.XmlValue;
 
 import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.validation.LicenseId;
@@ -34,7 +39,7 @@ import nl.vpro.validation.LicenseId;
 @ToString
 @XmlType(name = "licenseEnum", namespace = Xmlns.SHARED_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
-@JsonPropertyOrder({"id", "name"})
+@JsonSerialize(using = License.Serializer.class)
 public class License implements nl.vpro.domain.Displayable {
 
     //region
@@ -176,5 +181,13 @@ public class License implements nl.vpro.domain.Displayable {
         return id.hashCode();
     }
 
+
+    static class Serializer extends JsonSerializer<License> {
+
+        @Override
+        public void serialize(License license, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
+            jsonGenerator.writeString(license.getId());
+        }
+    }
 
 }
