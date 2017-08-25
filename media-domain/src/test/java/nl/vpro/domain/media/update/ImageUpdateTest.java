@@ -52,4 +52,25 @@ public class ImageUpdateTest {
 
     }
 
+
+    @Test
+    public void xmlLicense() throws IOException, SAXException {
+        ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
+        update.setLicense(new License("blabla"));
+        update.setSourceName("placeholdit");
+        update.setCredits(getClass().getName());
+        JAXBTestUtil.roundTripAndSimilar(update, "\n" +
+            "<image type=\"PICTURE\" highlighted=\"false\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <title>title</title>\n" +
+            "    <sourceName>placeholdit</sourceName>\n" +
+            "   <license>blabla</license>\n" +
+            "    <credits>nl.vpro.domain.media.update.ImageUpdateTest</credits>\n" +
+            "    <imageLocation>\n" +
+            "        <url>http://placehold.it/150/7735a</url>\n" +
+            "    </imageLocation>\n" +
+            "</image>");
+
+    }
+
+
 }
