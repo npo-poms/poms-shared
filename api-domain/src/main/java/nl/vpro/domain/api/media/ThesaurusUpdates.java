@@ -12,6 +12,9 @@ import nl.vpro.domain.api.Result;
 @XmlType(name = "thesaurusUpdateType")
 public class ThesaurusUpdates extends Result<Map<String, String>> {
 
+    public ThesaurusUpdates() {
+        
+    }
     public ThesaurusUpdates(List<Map<String, String>> asList, long offset) {
         super(asList, offset, null, null);
     }

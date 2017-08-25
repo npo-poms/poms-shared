@@ -1,7 +1,11 @@
 package nl.vpro.beeldengeluid.gtaa;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.matchingXPath;
+import static com.github.tomakehurst.wiremock.client.WireMock.okXml;
+import static com.github.tomakehurst.wiremock.client.WireMock.post;
+import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +22,6 @@ import org.junit.Test;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
-import nl.vpro.beeldengeluid.gtaa.OpenskosRepository;
 import nl.vpro.domain.media.gtaa.Label;
 import nl.vpro.domain.media.gtaa.Status;
 import nl.vpro.openarchives.oai.Record;
@@ -46,14 +49,12 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void testAddPerson() throws IOException {
-        wireMockRule.stubFor(post(urlPathEqualTo("/api/concept"))
-                .willReturn(okXml(f("/submit-person-response.xml")).withStatus(201)));
+        wireMockRule.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(okXml(f("/submit-person-response.xml")).withStatus(201)));
 
         repo.setUseXLLabels(true);
         repo.submit("Testlabel1", Arrays.asList(new Label("Note123")), "testCreatorX");
-        wireMockRule.verify(postRequestedFor(urlPathEqualTo("/api/concept"))
-                .withRequestBody(matchingXPath("//skosxl:literalForm[text() = 'Testlabel1']")
-                        .withXPathNamespace("skosxl", "http://www.w3.org/2008/05/skos-xl#")));
+        wireMockRule.verify(postRequestedFor(urlPathEqualTo("/api/concept")).withRequestBody(
+                matchingXPath("//skosxl:literalForm[text() = 'Testlabel1']").withXPathNamespace("skosxl", "http://www.w3.org/2008/05/skos-xl#")));
     }
 
     @Test
@@ -72,14 +73,29 @@ public class OpenskosRepositoryTest {
             Record next = updates.next();
             assertThat(next).isNotNull();
             assertThat(next.getHeader().getDatestamp()).isNotNull();
-            assertThat(next.getMetaData().getRdf().getDescriptions().get(0).getPrefLabel().getValue())
-                    .isEqualTo("Benoist, André");
+            assertThat(next.getMetaData().getRdf().getDescriptions().get(0).getPrefLabel().getValue()).isEqualTo("Benoist, André");
+        }
+    }
+
+    @Test
+    public void anyUpdates() throws Exception {
+        wireMockRule.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("any-updates.xml"))));
+        try (CountedIterator<Record> updates = repo.getAllUpdates(Instant.EPOCH, Instant.now())) {
+            Record next = updates.next();
+            assertThat(next).isNotNull();
+            assertThat(next.getHeader().getDatestamp()).isNotNull();
+            assertThat(next.getMetaData().getRdf().getDescriptions().get(0).getPrefLabel().getValue()).isEqualTo("Giotakes, Nico");
+            for (int i = 0; i < 200; i++) {
+                next = updates.next();
+                if (next.getMetaData() == null) {
+                    assertThat(next.getHeader().getStatus()).isEqualTo("deleted");
+                }
+            }
         }
     }
 
     private String f(String file) throws IOException {
-        return IOUtils.toString(getClass().getResourceAsStream(StringUtils.prependIfMissing(file, "/")),
-                StandardCharsets.UTF_8);
+        return IOUtils.toString(getClass().getResourceAsStream(StringUtils.prependIfMissing(file, "/")), StandardCharsets.UTF_8);
     }
 
 }

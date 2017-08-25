@@ -122,7 +122,7 @@ public class OpenskosRepository implements GTAARepository {
 
     @Override
     public CountedIterator<Record> getPersonUpdates(Instant from, Instant until) {
-        return getUpdates(from, until, "personSpec");
+        return getUpdates(from, until, personsSpec);
     }
     
     @Override
