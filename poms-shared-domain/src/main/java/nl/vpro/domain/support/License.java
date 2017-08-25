@@ -131,6 +131,8 @@ public class License implements nl.vpro.domain.Displayable {
         return id;
     }
 
+    public void setId(String id) {this.id =id; }
+
 
     @Override
     public String getDisplayName() {
