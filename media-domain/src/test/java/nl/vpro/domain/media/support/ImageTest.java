@@ -46,7 +46,7 @@ public class ImageTest {
         image.setLicense(new License("CC_BY"));
 
 
-        Jackson2TestUtil.roundTripAndSimilar(image, "{\n" +
+        Image result = Jackson2TestUtil.roundTripAndSimilar(image, "{\n" +
             "  \"imageUri\" : \"urn:vpro:image:123\",\n" +
             "  \"offset\" : 100,\n" +
             "  \"license\" : \"CC_BY\",\n" +
@@ -56,6 +56,7 @@ public class ImageTest {
             "  \"creationDate\" : 1478646000000,\n" +
             "  \"workflow\" : \"FOR_PUBLICATION\"\n" +
             "}");
+        assertThat(result.getLicense()).isEqualTo(License.CC_BY);
     }
 
     @Test
