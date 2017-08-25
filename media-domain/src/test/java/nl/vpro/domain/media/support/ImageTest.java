@@ -28,7 +28,7 @@ public class ImageTest {
         Image image = new Image();
         image.setSource(null);
         image.setImageUri("urn:vpro:image:123");
-        image.setLicense(License.CC_BY);
+        image.setLicense(new License("CC_BY"));
 
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
@@ -43,7 +43,7 @@ public class ImageTest {
         image.setImageUri("urn:vpro:image:123");
         image.setCreationInstant(LocalDate.of(2016, 11, 9).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant());
         image.setOffset(java.time.Duration.ofMillis(100));
-        image.setLicense(License.CC_BY);
+        image.setLicense(new License("CC_BY"));
 
 
         Jackson2TestUtil.roundTripAndSimilar(image, "{\n" +
@@ -65,7 +65,7 @@ public class ImageTest {
         image.setImageUri("urn:vpro:image:123");
         image.setCreationInstant(LocalDate.of(2016, 11, 9).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant());
         image.setOffset(java.time.Duration.ofMillis(100));
-        image.setLicense(License.CC_BY);
+        image.setLicense(new License("CC_BY"));
 
 
         JAXBTestUtil.roundTripAndSimilar(image, "<local:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" creationDate=\"2016-11-09T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
