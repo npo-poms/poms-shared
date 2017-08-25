@@ -39,6 +39,7 @@
           </dependency>
         </dependencies>
       </plugin>
+      <!-- dit helpt blijkbaar eclipse om te begrijpen dat generated-sources/apt ook een source dir is? -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
