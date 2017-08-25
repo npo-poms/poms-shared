@@ -12,9 +12,11 @@ import lombok.Setter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 import java.net.URI;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -30,6 +32,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.validation.WarningValidatorGroup;
+import org.apache.commons.lang.ArrayUtils;
 
 @Entity
 @XmlRootElement(name = "image")
@@ -110,6 +113,8 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @XmlElement(name = "widthMm")
     private Float widthInMm;
 
+    private String mimeType;
+
     private Long size;
 
     @Column(columnDefinition = "TEXT", unique = true, length = 1024)
@@ -121,11 +126,8 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     private byte[] hash;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
-    @Enumerated(EnumType.STRING)
     @NotNull(groups = {WarningValidatorGroup.class})
-    @Getter
-    @Setter
-    private License license;
+    private String license;
 
     @Getter
     @Setter
@@ -157,6 +159,13 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     public Image(String title) {
         setTitle(title);
     }
+
+    @Override
+    public License getLicense() {
+        return License.getLicenseById(license);
+    }
+
+
 
 
     @Override
@@ -207,6 +216,11 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         } else {
             this.description = description.substring(255);
         }
+    }
+
+    @Override
+    public void setLicense(License license) {
+        this.license = license.getId();
     }
 
     @Override
