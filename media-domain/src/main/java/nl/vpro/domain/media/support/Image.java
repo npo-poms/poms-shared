@@ -18,13 +18,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.Xmlns;
@@ -457,7 +455,7 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
 
     @Override
     public void setLicense(License license) {
-        this.license = license.getId();
+        this.license = license == null ? null : license.getId();
     }
 
 

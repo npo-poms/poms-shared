@@ -514,7 +514,21 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Program program = MediaBuilder.program().images(image, image2).build();
         ProgramUpdate update = ProgramUpdate.create(program);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images><image highlighted=\"false\" type=\"ICON\"><title>Titel</title><description>Beschrijving</description><width>500</width><height>200</height><urn>urn:vpro.image:12345</urn></image></images><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
+            "  <locations/>\n" +
+            "  <scheduleEvents/>\n" +
+            "  <images>\n" +
+            "    <image highlighted=\"false\" type=\"ICON\">\n" +
+            "      <title>Titel</title>\n" +
+            "      <description>Beschrijving</description>\n" +
+            "      <width>500</width>\n" +
+            "      <height>200</height>\n" +
+            "      <urn>urn:vpro.image:12345</urn>\n" +
+            "    </image>\n" +
+            "  </images>\n" +
+            "  <segments/>\n" +
+            "</program>\n";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
