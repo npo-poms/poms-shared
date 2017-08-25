@@ -83,11 +83,36 @@ public class OpenskosTests {
         long count = 0;
         while (updates.hasNext()) {
             Record record = updates.next();
+            if (!record.isDeleted())
+                assertThat(record.getMetaData().getRdf().getDescriptions().get(0).isPerson()).isTrue();
             count++;
             log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
 
         }
         assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    @Ignore
+    public void testAllChanges() {
+        GTAARepository impl = getRealInstance();
+        Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
+        Instant stop = LocalDate.now().atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
+
+        CountedIterator<Record> updates = impl.getAllUpdates(start, stop);
+        long count = 0;
+        while (updates.hasNext()) {
+            Record record = updates.next();
+            if (record.getMetaData() == null) {
+                assertThat(record.getHeader().getStatus()).isEqualTo("deleted");
+            }
+            count++;
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+
+        }
+        // TODO check out why count doesn't match
+        // assertThat(count).isEqualTo(updates.getSize().get());
     }
 
     @Test
@@ -136,43 +161,24 @@ public class OpenskosTests {
         RestTemplate template = new RestTemplate();
         template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
 
-        // Nieuw
-        // GTAARepositoryImpl impl = new
-        // GTAARepositoryImpl("http://production-v2.openskos.beeldengeluid.nl.pictura-dp.nl/",
-        // "8il3Ut09weJ4h1GQ", template);
-
-        // Acceptatie
-        OpenskosRepository impl = new OpenskosRepository("http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/",
-                "1dX1nJHX5GNeT8O7", template);
-        impl.setUseXLLabels(true);
-
-        // impl.setUseXLLabels(true);
-        // Acceptatie
-        // GTAARepositoryImpl impl = new
-        // GTAARepositoryImpl("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/",
-        // "1dX1nJHX5GNeT8O7", template);
-
-        // Test
-        // OpenskosRepository impl = new
-        // OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/",
-        // "1dX1nJHX5GNeT8O7", template);
-        // productie
-        // GTAARepositoryImpl impl = new
-        // GTAARepositoryImpl("http://openskos.beeldengeluid.nl/", "1dX1nJHX5GNeT8O7",
-        // template);
-
-        // dev
-
-        // GTAARepositoryImpl impl = new
-        // GTAARepositoryImpl("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/",
-        // "1dX1nJHX5GNeT8O7", template);
+        // String host = "http://localhost:8080";
+        String host = "http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/";
+        // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
+        // String host = "http://test.openskos.beeldengeluid.nl.pictura-dp.nl/";
+        // String host = "http://openskos.beeldengeluid.nl/";
+        // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
+        // String host =
+        // "http://production-v2.openskos.beeldengeluid.nl.pictura-dp.nl/";
+        String code = "1dX1nJHX5GNeT8O7";
+        // String code = "8il3Ut09weJ4h1GQ";
+        String spec = "beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2";
+        // String spec = "beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352";
+        boolean useXL = true;
+        OpenskosRepository impl = new OpenskosRepository(host, code, template);
+        impl.setUseXLLabels(useXL);
 
         impl.init();
-        /* Acceptatie */
-        // impl.setPersonsSpec("beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352");
-        impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");
-        /* Productie */
-        // impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");
+        impl.setPersonsSpec(spec);
         return impl;
     }
 }
