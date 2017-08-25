@@ -12,11 +12,9 @@ import lombok.Setter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Method;
 import java.net.URI;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.Arrays;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -25,14 +23,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
-import com.google.common.base.MoreObjects;
-
 import nl.vpro.domain.AbstractPublishableObject;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.validation.WarningValidatorGroup;
-import org.apache.commons.lang.ArrayUtils;
 
 @Entity
 @XmlRootElement(name = "image")
@@ -113,6 +108,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @XmlElement(name = "widthMm")
     private Float widthInMm;
 
+    @XmlTransient
     private String mimeType;
 
     private Long size;
@@ -164,9 +160,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     public License getLicense() {
         return License.getLicenseById(license);
     }
-
-
-
 
     @Override
     public ImageType getType() {
