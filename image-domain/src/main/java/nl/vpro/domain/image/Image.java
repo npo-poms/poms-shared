@@ -29,6 +29,7 @@ import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.validation.WarningValidatorGroup;
 
+@SuppressWarnings("WSReferenceInspection")
 @Entity
 @XmlRootElement(name = "image")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -107,9 +108,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @XmlElement(name = "widthMm")
     private Float widthInMm;
-
-    @XmlTransient
-    private String mimeType;
 
     private Long size;
 
