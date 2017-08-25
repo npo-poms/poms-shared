@@ -31,7 +31,7 @@ import nl.vpro.domain.Xmlns;
  */
 
 @ToString
-@XmlType(name = "licenseType", namespace = Xmlns.SHARED_NAMESPACE)
+@XmlType(name = "licenseEnum", namespace = Xmlns.SHARED_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonPropertyOrder({"id", "name"})
 public class License implements nl.vpro.domain.Displayable {
@@ -65,11 +65,11 @@ public class License implements nl.vpro.domain.Displayable {
     public static License CC_BY_NC_SA_3_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_3.0", null, true);
     public static License CC_BY_NC_SA_4_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_4.0", null, true);
     public static License CC_BY_NC_ND = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", null, true);
-    public static License CC_BY_NC_ND_1_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_1.0", null, true);
-    public static License CC_BY_NC_ND_2_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_2.0", null, true);
-    public static License CC_BY_NC_ND_3_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_3.0", null, true);
-    public static License CC_BY_NC_ND_4_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_4.0", null, true);
-    public static License USA_GOV = new License("United States Government Work", null, true);
+    public static License CC_BY_NC_ND_1_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_1.0", "https://creativecommons.org/licenses/by-nc-nd/1.0/", true);
+    public static License CC_BY_NC_ND_2_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_2.0", "https://creativecommons.org/licenses/by-nc-nd/2.0/", true);
+    public static License CC_BY_NC_ND_3_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_3.0", "https://creativecommons.org/licenses/by-nc-nd/3.0/", true);
+    public static License CC_BY_NC_ND_4_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_4.0", "https://creativecommons.org/licenses/by-nc-nd/4.0/", true);
+    public static License USA_GOV = new License("United States Government Work", "http://www.usa.gov/copyright.shtml", true);
     //endregion
 
     private static final License[] ALL;
@@ -97,8 +97,8 @@ public class License implements nl.vpro.domain.Displayable {
 //    CC_BY_ND("Naamsvermelding-GeenAfgeleideWerken", "https://creativecommons.org/licenses/by-nd/4.0/", true),
 //    CC_BY_NC("Naamsvermelding-NietCommercieel", "https://creativecommons.org/licenses/by-nc/4.0/", true),
 //    CC_BY_NC_SA("Naamsvermelding-NietCommercieel-GelijkDelen", "https://creativecommons.org/licenses/by-nc-sa/4.0/", true),
-//    CC_BY_NC_ND("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", "https://creativecommons.org/licenses/by-nc-nd/4.0/", true),
-//    USA_GOV("United States Government Work", "http://www.usa.gov/copyright.shtml", false)
+//    CC_BY_NC_ND("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", , true),
+//    USA_GOV("United States Government Work",, false)
 
     @XmlValue
     private String id;
