@@ -4,9 +4,11 @@
  */
 package nl.vpro.w3.rdf;
 
-import lombok.*;
-
-import static nl.vpro.domain.media.gtaa.Namespaces.*;
+import static nl.vpro.domain.media.gtaa.Namespaces.DC_TERMS;
+import static nl.vpro.domain.media.gtaa.Namespaces.DC_TERMS_ELEMENTS;
+import static nl.vpro.domain.media.gtaa.Namespaces.OPEN_SKOS;
+import static nl.vpro.domain.media.gtaa.Namespaces.SKOS;
+import static nl.vpro.domain.media.gtaa.Namespaces.SKOS_XL;
 
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -18,7 +20,19 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.media.gtaa.*;
+import org.apache.commons.lang.StringUtils;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Singular;
+import lombok.ToString;
+import nl.vpro.domain.media.gtaa.AbstractGTAAObject;
+import nl.vpro.domain.media.gtaa.Label;
+import nl.vpro.domain.media.gtaa.Note;
+import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.domain.media.gtaa.XLLabel;
 import nl.vpro.dublincore.terms.Date;
 import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
 
@@ -144,12 +158,19 @@ public class Description extends AbstractGTAAObject {
     public Description() {
     }
 
-
     public Description(String prefLabel) {
         this.prefLabel = new Label(prefLabel);
     }
+    
+    public boolean isPerson() {
+        return getSimpleType().contains("Persoon");
+    }
 
+    public String getSimpleType() {
+        return StringUtils.substringAfterLast(getInScheme().getResource(), "/");
+    }
 
+    @SuppressWarnings("rawtypes")
     public static class Builder extends AbstractBuilder {
 
         public Builder type(String type) {
@@ -168,7 +189,6 @@ public class Description extends AbstractGTAAObject {
                 return prefLabel(new Label(label));
             }
         }
-
 
     }
 }
