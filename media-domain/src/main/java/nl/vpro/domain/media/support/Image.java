@@ -157,8 +157,8 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
     @NotNull(groups = {WarningValidatorGroup.class})
     private String sourceName;
 
-    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
+    @XmlTransient
     private String license;
 
 
@@ -449,6 +449,7 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
     }
 
     @Override
+    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     public License getLicense() {
         return License.getLicenseById(license);
     }
