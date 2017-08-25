@@ -178,4 +178,7 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
         this.imageFormat = imageFormat;
         return this;
     }
+
+
+
 }
