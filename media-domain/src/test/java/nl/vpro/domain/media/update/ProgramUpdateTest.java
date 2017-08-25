@@ -689,4 +689,13 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     }
+
+    @Test
+    public void testMid() throws Exception {
+        ProgramUpdate update = ProgramUpdate.create();
+        update.setMid("bla");
+        assertThat(update.mediaObject().getMid()).isNull();
+        assertThat(update.getMid()).isEqualTo("bla");
+        assertThat(update.build().getMid()).isEqualTo("bla");
+    }
 }

@@ -338,7 +338,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     @Size.List({@Size(max = 255), @Size(min = 4)})
     @Pattern(regexp = "^[ \\.a-zA-Z0-9_-]+$", flags = {Pattern.Flag.CASE_INSENSITIVE}, message = "{nl.vpro.constraints.mid}")
     public final String getMid() {
-        return mediaObject().getMid();
+        return builder.getMid();
     }
 
     /**

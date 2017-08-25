@@ -71,7 +71,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     M build();
 
+    /**
+     * Accesss to the underlying media object. Though this is public, this should normally not be used by user code.
+     * Use {@link #build()} in stead.
+     * @return
+     */
     M mediaObject();
+
 
     @SuppressWarnings("unchecked")
     default B id(Long id) {
@@ -747,6 +753,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         public M mediaObject() {
             return mediaObject;
         }
+        public String getMid() {
+            if (mid != null) {
+                return mid;
+            }
+            return mediaObject.getMid();
+        }
+
+
 
         @Override
         public T copy() {
