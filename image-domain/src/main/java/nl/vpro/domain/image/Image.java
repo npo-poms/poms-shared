@@ -121,7 +121,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @XmlTransient
     private byte[] hash;
 
-    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @XmlTransient
     @NotNull(groups = {WarningValidatorGroup.class})
     private String license;
 
@@ -157,6 +157,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     }
 
     @Override
+    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     public License getLicense() {
         return License.getLicenseById(license);
     }

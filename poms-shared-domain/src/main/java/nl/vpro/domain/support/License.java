@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.Xmlns;
+import nl.vpro.validation.LicenseId;
 
 /**
  * @author Michiel Meeuwissen
@@ -101,6 +102,7 @@ public class License implements nl.vpro.domain.Displayable {
 //    USA_GOV("United States Government Work",, false)
 
     @XmlValue
+    @LicenseId
     private String id;
 
     @NonNull
