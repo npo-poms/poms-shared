@@ -46,7 +46,7 @@ public class ImageTest {
         image.setLicense(new License("CC_BY"));
 
 
-        Image result = Jackson2TestUtil.roundTripAndSimilar(image, "{\n" +
+        Image result = Jackson2TestUtil.roundTripAndSimilarAndEquals(image, "{\n" +
             "  \"imageUri\" : \"urn:vpro:image:123\",\n" +
             "  \"offset\" : 100,\n" +
             "  \"license\" : \"CC_BY\",\n" +
