@@ -14,6 +14,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -99,7 +100,7 @@ public class License implements nl.vpro.domain.Displayable {
 //    CC_BY_NC_ND("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", "https://creativecommons.org/licenses/by-nc-nd/4.0/", true),
 //    USA_GOV("United States Government Work", "http://www.usa.gov/copyright.shtml", false)
 
-
+    @XmlValue
     private String id;
 
     @NonNull
