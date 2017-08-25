@@ -212,7 +212,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @Override
     public void setLicense(License license) {
-        this.license = license.getId();
+        this.license = license == null ? null : license.getId();
     }
 
     @Override
