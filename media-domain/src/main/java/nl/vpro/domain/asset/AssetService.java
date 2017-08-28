@@ -28,4 +28,6 @@ public interface AssetService {
 
     List<File> list();
 
+    boolean exists(String itemizedFile);
+
 }
