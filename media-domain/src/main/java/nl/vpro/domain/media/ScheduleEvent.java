@@ -21,7 +21,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
-
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -29,8 +28,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.media.bind.NetToString;
-import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.ScheduleEventDescription;
+import nl.vpro.domain.media.support.ScheduleEventTitle;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.TriFunction;
@@ -438,7 +441,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.start = DateUtils.toInstant(start);
     }
 
-    @XmlTransient
+    @JsonView({Views.Publisher.class}) // Because of other 'start' fields (e.g. in segment, it is mapped to _long_). This field is mapped to date in ES. In ES fields with same name must have same mapping.
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY, value="eventStart")
+
     public Instant getStartInstant() {
         return start;
     }
@@ -782,7 +787,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public static class Builder {
 
         public Builder localStart(int year, int month, int day, int hour, int minute) {
-            return start(LocalDateTime.of(year, month, day, hour, minute).atZone(Schedule.ZONE_ID).toInstant());
+            return localStart(LocalDateTime.of(year, month, day, hour, minute));
+        }
+
+        public Builder localStart(LocalDateTime localDateTime) {
+            return start(localDateTime.atZone(Schedule.ZONE_ID).toInstant());
         }
 
         public Builder rerun(boolean b) {
