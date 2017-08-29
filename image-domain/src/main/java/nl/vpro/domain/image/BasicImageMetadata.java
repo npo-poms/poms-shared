@@ -180,5 +180,4 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
     }
 
 
-
 }
