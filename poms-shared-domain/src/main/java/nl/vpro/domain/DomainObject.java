@@ -5,6 +5,8 @@
 
 package nl.vpro.domain;
 
+import lombok.ToString;
+
 import java.io.Serializable;
 
 import javax.persistence.*;
@@ -13,7 +15,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * @author roekoe
@@ -21,6 +22,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @MappedSuperclass
 @XmlType(name = "domainObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
+@ToString
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
     @Id
@@ -85,12 +87,5 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : super.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-            .append("id", id)
-            .toString();
     }
 }
