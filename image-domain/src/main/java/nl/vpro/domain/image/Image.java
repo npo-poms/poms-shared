@@ -8,12 +8,14 @@ package nl.vpro.domain.image;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -58,6 +60,7 @@ import nl.vpro.validation.WarningValidatorGroup;
 )
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder", buildMethodName= "_build")
+@Slf4j
 public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image>, Serializable {
     private static final long serialVersionUID = -140942203904508506L;
 
@@ -369,7 +372,12 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @Override
     public URI getDownloadUrl() {
-        return downloadUrl == null ? null : URI.create(downloadUrl);
+        try {
+            return downloadUrl == null ? null : URI.create(downloadUrl);
+        } catch (IllegalArgumentException use) {
+            log.warn("Invalid url found in database {}: {}", downloadUrl, use.getMessage());
+            return null;
+        }
     }
 
     @Override
