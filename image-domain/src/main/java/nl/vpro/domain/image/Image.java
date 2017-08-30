@@ -369,7 +369,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @Override
     public URI getDownloadUrl() {
-        return URI.create(downloadUrl);
+        return downloadUrl == null ? null : URI.create(downloadUrl);
     }
 
     @Override
