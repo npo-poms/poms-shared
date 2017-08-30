@@ -78,6 +78,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
      */
     M mediaObject();
 
+    String getMid();
 
     @SuppressWarnings("unchecked")
     default B id(Long id) {
@@ -729,6 +730,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     abstract class AbstractBuilder<T extends AbstractBuilder<T, M>, M extends MediaObject>  implements MediaBuilder<T, M>, Cloneable {
 
         protected String mid;
+        protected boolean midSet = false;
 
         protected AbstractBuilder(M m) {
             this.mediaObject = m;
@@ -738,6 +740,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         @Override
         public T mid(String m) {
             this.mid = m;
+            this.midSet = true;
             return (T) this;
         }
 
@@ -746,15 +749,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         @Override
         public M build() {
-            mediaObject.setMid(mid);
+            if (midSet) {
+                mediaObject.setMid(mid);
+            }
             return mediaObject;
         }
         @Override
         public M mediaObject() {
             return mediaObject;
         }
+        @Override
         public String getMid() {
-            if (mid != null) {
+            if (midSet) {
                 return mid;
             }
             return mediaObject.getMid();

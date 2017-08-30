@@ -874,6 +874,7 @@ public abstract class MediaUpdate<M extends MediaObject>
     }
 
     protected M mediaObject() {
+
         return builder.mediaObject();
     }
 }
