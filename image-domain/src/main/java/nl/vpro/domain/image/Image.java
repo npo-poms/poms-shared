@@ -12,6 +12,7 @@ import lombok.Setter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.URI;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -30,7 +31,8 @@ import nl.vpro.domain.user.Editor;
 import nl.vpro.validation.WarningValidatorGroup;
 
 @SuppressWarnings("WSReferenceInspection")
-@Entity
+@Entity(
+)
 @XmlRootElement(name = "image")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
@@ -56,7 +58,8 @@ import nl.vpro.validation.WarningValidatorGroup;
 )
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder", buildMethodName= "_build")
-public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image> {
+public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image>, Serializable {
+    private static final long serialVersionUID = -140942203904508506L;
 
     public static class Builder {
         private Editor createdBy;
@@ -70,6 +73,10 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         public Builder lastModifiedBy(Editor editor) {
             this.lastModifiedBy = editor;
             return this;
+        }
+
+        public Builder downloadUri(URI downloadUri) {
+            return downloadUrl(downloadUri.toString());
         }
         public Image build()  {
             Image image =_build();
@@ -111,8 +118,8 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     private Long size;
 
-    @Column(columnDefinition = "TEXT", unique = true, length = 1024)
-    private URI downloadUrl;
+    @Column(unique = true, length = 1024)
+    private String downloadUrl;
 
     private String etag;
 
@@ -362,12 +369,12 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @Override
     public URI getDownloadUrl() {
-        return downloadUrl;
+        return URI.create(downloadUrl);
     }
 
     @Override
     public Image setDownloadUrl(URI downloadUrl) {
-        this.downloadUrl = downloadUrl;
+        this.downloadUrl = downloadUrl == null ? null : downloadUrl.toString();
         return this;
     }
 
