@@ -42,7 +42,13 @@ public class GeoRestriction extends Restriction {
 
     public GeoRestriction(String region) {
         // When loading from JSON
-        this.region = Region.valueOf(region);
+        String[] split = region.split(":", 2);
+
+        if (split.length == 1) {
+            this.region = Region.valueOf(split[0]);
+        } else {
+            this.region = Region.valueOf(split[1]);
+        }
     }
 
     public GeoRestriction(Region region) {
