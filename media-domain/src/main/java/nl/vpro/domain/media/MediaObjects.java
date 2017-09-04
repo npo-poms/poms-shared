@@ -602,4 +602,7 @@ public class MediaObjects {
         }
     }
 
+    public static boolean isWebonly(MediaObject media) {
+        return media.getMediaType() == MediaType.CLIP;
+    }
 }
