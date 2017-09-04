@@ -1,6 +1,11 @@
 package nl.vpro.domain.media;
 
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonValue;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,14 +13,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.time.Instant;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -37,7 +35,13 @@ public class GeoRestriction extends Restriction {
 
     public GeoRestriction(String region) {
         // When loading from JSON
-        this.region = Region.valueOf(region);
+        String[] split = region.split(":", 2);
+
+        if (split.length == 1) {
+            this.region = Region.valueOf(split[0]);
+        } else {
+            this.region = Region.valueOf(split[1]);
+        }
     }
 
     public GeoRestriction(Region region) {
