@@ -170,6 +170,10 @@ public class Description extends AbstractGTAAObject {
         return StringUtils.substringAfterLast(getInScheme().getResource(), "/");
     }
 
+    public boolean hasRedirectedFrom() { return getChangeNote().contains("Forward");}
+
+    public String getRedirectedFrom() { return StringUtils.deleteWhitespace(getChangeNote()).substring(8);}
+
     @SuppressWarnings("rawtypes")
     public static class Builder extends AbstractBuilder {
 
