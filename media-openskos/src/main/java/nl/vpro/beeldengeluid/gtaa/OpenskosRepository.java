@@ -15,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 
@@ -31,6 +32,7 @@ import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
@@ -369,5 +371,24 @@ public class OpenskosRepository implements GTAARepository {
 
         return rdf.getDescriptions();
     }
+
+
+    @Override
+    public Optional<Description> retrieveItemStatus(String id) {
+        String url = "/api/find-concepts?id=" + id;
+        try {
+            RDF rdf = template.getForObject(gtaaUrl + url, RDF.class);
+            return Optional.of(rdf.getDescriptions().get(0));
+        } catch (HttpServerErrorException e) {
+            if(e.getResponseBodyAsString().contains("was not found")) {
+                return Optional.empty();
+            }
+            else {
+                log.error("Unexpected error doing call to openskos for item id " + id, e);
+                throw e;
+            }
+        }
+    }
+
 
 }
