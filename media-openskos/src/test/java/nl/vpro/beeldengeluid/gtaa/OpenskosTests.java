@@ -83,7 +83,7 @@ public class OpenskosTests {
         while (updates.hasNext()) {
             Record record = updates.next();
             if (!record.isDeleted())
-                assertThat(record.getMetaData().getRdf().getDescriptions().get(0).isPerson()).isTrue();
+                assertThat(record.getMetaData().getFirstDescription().isPerson()).isTrue();
             count++;
             log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
 
