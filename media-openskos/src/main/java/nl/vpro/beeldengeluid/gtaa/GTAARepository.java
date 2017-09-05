@@ -6,6 +6,7 @@ package nl.vpro.beeldengeluid.gtaa;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 import nl.vpro.domain.media.gtaa.GTAAPerson;
 import nl.vpro.domain.media.gtaa.Label;
@@ -31,4 +32,5 @@ public interface GTAARepository {
 
     List<Description> findAnything(String input, Integer max);
 
+    Optional<Description> retrieveItemStatus(String id);
 }

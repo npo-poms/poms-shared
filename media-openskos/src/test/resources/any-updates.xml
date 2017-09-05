@@ -802,7 +802,7 @@
               term (s verwijderd) om door te kunnen sturen
             </skos:changeNote>
             <skos:changeNote xml:lang="nl">Forward:
-              http://data.beeldengeluid.nl/gtaa/29654</skos:changeNote>
+            http://data.beeldengeluid.nl/gtaa/29654</skos:changeNote>
             <openskos:uuid>11b0258b-f668-f9bf-a55f-e47f8f612a8e
             </openskos:uuid>
             <openskos:status>redirected</openskos:status>

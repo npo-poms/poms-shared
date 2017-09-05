@@ -9,6 +9,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import nl.vpro.domain.api.media.ThesaurusResult;
 import nl.vpro.domain.api.media.ThesaurusUpdates;
@@ -36,5 +37,10 @@ public interface ThesaurusRestService {
     @GET
     @Path("/items/updates")
     ThesaurusUpdates itemUpdates(@QueryParam("from") String from, @QueryParam("to") String to) throws Exception;
+
+    @GET
+    @Path("/items/status")
+    Response itemStatus(@QueryParam("id") String id) throws Exception;
+
 
 }
