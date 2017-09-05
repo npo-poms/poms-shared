@@ -143,7 +143,8 @@
     {
       "givenName": "Bregtje",
       "familyName": "van der Haak",
-      "role": "DIRECTOR"
+      "role": "DIRECTOR",
+      "gtaaUri": "http://gtaa/1234"
     },
     {
       "givenName": "Hans",
