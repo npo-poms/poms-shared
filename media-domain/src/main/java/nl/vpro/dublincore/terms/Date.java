@@ -2,6 +2,7 @@ package nl.vpro.dublincore.terms;
 
 import lombok.Data;
 
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -27,4 +28,12 @@ public class Date {
     @XmlValue
     @XmlJavaTypeAdapter(ZonedDateTimeXmlAdapter.class)
     private ZonedDateTime value;
+
+    public Date() {
+
+    }
+
+    public Date(int year, int month, int day) {
+        this.value = ZonedDateTime.of(year, month, day, 0, 0, 0, 0, ZoneId.of("UTC"));
+    }
 }
