@@ -23,7 +23,6 @@ import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 
 @Slf4j
-@Ignore
 public class OpenskosTests {
     @Ignore
     @Test
@@ -145,6 +144,12 @@ public class OpenskosTests {
         assertThat(count).isEqualTo(updates.getSize().get());
     }
 
+    @Test
+    public void testStatus() {
+        GTAARepository impl = getRealInstance();
+        impl.retrieveItemStatus("bla");
+    }
+
     private GTAARepository getRealInstance() {
         MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
         Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
@@ -161,8 +166,8 @@ public class OpenskosTests {
         RestTemplate template = new RestTemplate();
         template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
 
-        // String host = "http://localhost:8080";
-        String host = "http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/";
+        String host = "http://localhost:8080";
+        //String host = "http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/";
         // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
         // String host = "http://test.openskos.beeldengeluid.nl.pictura-dp.nl/";
         // String host = "http://openskos.beeldengeluid.nl/";
