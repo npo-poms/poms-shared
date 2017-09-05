@@ -93,6 +93,14 @@ public class Person extends DomainObject {
     }
 
 
+    @lombok.Builder
+    private Person(Long id, String givenName, String familyName, RoleType role, MediaObject mediaObject, GTAARecord gtaaRecord) {
+        this(id, givenName, familyName, role);
+        this.mediaObject = mediaObject;
+        this.gtaaRecord = gtaaRecord;
+    }
+
+
     public String getGivenName() {
         return givenName;
     }
