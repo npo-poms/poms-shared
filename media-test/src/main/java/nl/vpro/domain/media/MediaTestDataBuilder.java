@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
+import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -370,7 +371,7 @@ public interface MediaTestDataBuilder<
             }
     default T withPersons() {
         return persons(
-            new Person("Bregtje", "van der Haak", RoleType.DIRECTOR),
+            Person.builder().givenName("Bregtje").familyName("van der Haak").role(RoleType.DIRECTOR).gtaaRecord(GTAARecord.builder().uri("http://gtaa/1234").build()).build(),
             new Person("Hans", "Goedkoop", RoleType.PRESENTER),
             new Person("Meta", "de Vries", RoleType.PRESENTER),
             new Person("Claire", "Holt", RoleType.ACTOR));

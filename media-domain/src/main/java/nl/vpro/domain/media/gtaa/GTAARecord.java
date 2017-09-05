@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
@@ -19,7 +21,7 @@ import javax.persistence.Enumerated;
  */
 @Embeddable
 @ToString
-public class GTAARecord {
+public class GTAARecord implements Serializable {
 
     @Column(nullable = true, name = "gtaa_uri")
     @Getter
@@ -42,6 +44,7 @@ public class GTAARecord {
         this.status = status;
     }
 
+    @lombok.Builder
     public GTAARecord(String uri, Status status, boolean knownAs) {
         this.uri = uri;
         this.status = status;
