@@ -749,7 +749,8 @@ public class MediaObjectJsonSchemaTest {
             "  \"credits\" : [ {\n" +
             "    \"givenName\" : \"Bregtje\",\n" +
             "    \"familyName\" : \"van der Haak\",\n" +
-            "    \"role\" : \"DIRECTOR\"\n" +
+            "    \"role\" : \"DIRECTOR\",\n" +
+            "    \"gtaaUri\" : \"http://gtaa/1234\"\n" +
             "  }, {\n" +
             "    \"givenName\" : \"Hans\",\n" +
             "    \"familyName\" : \"Goedkoop\",\n" +
