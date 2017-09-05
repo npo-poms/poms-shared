@@ -720,4 +720,19 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(update.getMid()).isEqualTo("bla");
         assertThat(update.build().getMid()).isEqualTo("bla");
     }
+
+    @Test
+    public void testCountriesAndLanguages() throws IOException, SAXException {
+        Program program = MediaBuilder.program().countries("NL").languages("nl").build();
+        ProgramUpdate update = ProgramUpdate.create(program);
+        JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>\n");
+
+
+    }
 }
