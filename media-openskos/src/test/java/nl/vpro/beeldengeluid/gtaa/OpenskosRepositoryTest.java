@@ -1,11 +1,6 @@
 package nl.vpro.beeldengeluid.gtaa;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.matchingXPath;
-import static com.github.tomakehurst.wiremock.client.WireMock.okXml;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
-import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -14,6 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +23,9 @@ import nl.vpro.domain.media.gtaa.Status;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
+import org.springframework.web.client.HttpServerErrorException;
+
+import javax.xml.ws.http.HTTPException;
 
 public class OpenskosRepositoryTest {
 
@@ -85,6 +84,7 @@ public class OpenskosRepositoryTest {
             assertThat(next).isNotNull();
             assertThat(next.getHeader().getDatestamp()).isNotNull();
             assertThat(next.getMetaData().getRdf().getDescriptions().get(0).getPrefLabel().getValue()).isEqualTo("Giotakes, Nico");
+            assertThat(StringUtils.deleteWhitespace(next.getMetaData().getRdf().getDescriptions().get(0).getChangeNote())).isEqualTo("Forward:http://data.beeldengeluid.nl/gtaa/1672578");
             for (int i = 0; i < 200; i++) {
                 next = updates.next();
                 if (next.getMetaData() == null) {
@@ -97,5 +97,32 @@ public class OpenskosRepositoryTest {
     private String f(String file) throws IOException {
         return IOUtils.toString(getClass().getResourceAsStream(StringUtils.prependIfMissing(file, "/")), StandardCharsets.UTF_8);
     }
+
+
+    @Test
+    public void testRetrieveItemStatus() throws Exception {
+        wireMockRule.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(okXml(f("retrieve-status.xml"))));
+        Optional<Description> description = repo.retrieveItemStatus("http://data.beeldengeluid.nl/gtaa/1672723");
+        assertThat(description.get().getStatus().toString()).isEqualTo("approved");
+    }
+
+    @Test
+    public void retrieveItemStatusShouldReturnIllegalArgumentEx() throws Exception {
+        wireMockRule.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody(f("retrieve-status-not-found.xml"))));
+        Optional<Description> desc = repo.retrieveItemStatus("blabla");
+        assertThat(desc.isPresent()).isFalse();
+    }
+
+    @Test (expected = HttpServerErrorException.class)
+    public void retrieveItemStatusShouldReturnUnexpectedError() throws Exception {
+        wireMockRule.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody("Random error")));
+        Optional<Description> desc = repo.retrieveItemStatus("http://data.beeldengeluid.nl/gtaa/1672723");
+    }
+
+
+
+
+
+
 
 }
