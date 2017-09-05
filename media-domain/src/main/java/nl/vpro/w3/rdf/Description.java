@@ -11,8 +11,10 @@ import static nl.vpro.domain.media.gtaa.Namespaces.SKOS;
 import static nl.vpro.domain.media.gtaa.Namespaces.SKOS_XL;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -41,38 +43,17 @@ import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
  * @since 3.7
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(propOrder = {
-    "type",
-    "editorialNote",
-    "creatorResource",
-    "modifiedBy",
-    "prefLabel",
-    "xlPrefLabel",
-    "modified",
-    "uuid",
-    "set",
-    "inScheme",
-    "notation",
-    "creator",
-    "status",
-    "tenant",
-    "acceptedBy",
-    "dateAccepted",
-    "dateSubmitted",
-    "hiddenLabels",
-    "xlHiddenLabels",
-    "historyNote",
-    "altLabels",
-    "xlAltLabels",
-    "scopeNote",
-    "changeNote"
-})
+@XmlType(propOrder = { "type", "editorialNote", "creatorResource", "modifiedBy", "prefLabel", "xlPrefLabel", "modified", "uuid", "set", "inScheme", "notation",
+        "creator", "status", "tenant", "acceptedBy", "dateAccepted", "dateSubmitted", "hiddenLabels", "xlHiddenLabels", "historyNote", "altLabels",
+        "xlAltLabels", "scopeNote", "changeNote" })
 @ToString
 @Data
 @EqualsAndHashCode(callSuper = true)
 @lombok.Builder(builderClassName = "Builder")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Description extends AbstractGTAAObject {
+
+    private static final String FORWARD = "Forward:";
 
     @XmlElement
     private ResourceElement type;
@@ -85,7 +66,6 @@ public class Description extends AbstractGTAAObject {
 
     @XmlElement(namespace = OPEN_SKOS)
     private ResourceElement modifiedBy;
-
 
     @XmlElement(namespace = OPEN_SKOS)
     private String acceptedBy;
@@ -100,8 +80,7 @@ public class Description extends AbstractGTAAObject {
     @XmlElement(namespace = DC_TERMS_ELEMENTS)
     private String creator;
 
-
-    @XmlElement(namespace = DC_TERMS, name="creator")
+    @XmlElement(namespace = DC_TERMS, name = "creator")
     private ResourceElement creatorResource;
 
     @XmlElement(namespace = DC_TERMS)
@@ -110,7 +89,6 @@ public class Description extends AbstractGTAAObject {
 
     @XmlElement(namespace = DC_TERMS)
     private Date modified;
-
 
     @XmlElement(namespace = OPEN_SKOS)
     private UUID uuid;
@@ -138,16 +116,15 @@ public class Description extends AbstractGTAAObject {
     @XmlElement(namespace = SKOS)
     private Note historyNote;
 
-    @XmlElement(namespace = SKOS, name="altLabel")
+    @XmlElement(namespace = SKOS, name = "altLabel")
     private List<Label> altLabels;
 
     @XmlElement(namespace = SKOS_XL, name = "altLabel")
     @Singular
     private List<XLLabel> xlAltLabels;
 
-
     @XmlElement(namespace = SKOS)
-    private String changeNote;
+    private List<String> changeNote;
 
     @XmlElement(namespace = SKOS)
     private List<Label> scopeNote;
@@ -161,7 +138,7 @@ public class Description extends AbstractGTAAObject {
     public Description(String prefLabel) {
         this.prefLabel = new Label(prefLabel);
     }
-    
+
     public boolean isPerson() {
         return getSimpleType().contains("Persoon");
     }
@@ -170,9 +147,17 @@ public class Description extends AbstractGTAAObject {
         return StringUtils.substringAfterLast(getInScheme().getResource(), "/");
     }
 
-    public boolean hasRedirectedFrom() { return getChangeNote().contains("Forward");}
+    public boolean hasRedirectedFrom() {
+        return getCleanChangeNote().anyMatch(note -> StringUtils.contains(note, FORWARD));
+    }
 
-    public String getRedirectedFrom() { return StringUtils.deleteWhitespace(getChangeNote()).substring(8);}
+    public String getRedirectedFrom() {
+        return getCleanChangeNote().filter(note -> StringUtils.contains(note, FORWARD)).map(note -> StringUtils.substringAfter(note, FORWARD)).findAny().orElse("");
+    }
+
+    private Stream<String> getCleanChangeNote() {
+        return getChangeNote().stream().map(StringUtils::deleteWhitespace);
+    }
 
     @SuppressWarnings("rawtypes")
     public static class Builder extends AbstractBuilder {
@@ -181,6 +166,7 @@ public class Description extends AbstractGTAAObject {
             this.type = ResourceElement.builder().resource(type).build();
             return this;
         }
+
         public Builder inScheme(String scheme) {
             this.inScheme = ResourceElement.builder().resource(scheme).build();
             return this;
@@ -194,5 +180,12 @@ public class Description extends AbstractGTAAObject {
             }
         }
 
+    }
+
+    public void addChangeNote(String note) {
+        if (changeNote == null) {
+            this.changeNote = new ArrayList<>();
+        }
+        this.changeNote.add(note);
     }
 }
