@@ -465,6 +465,11 @@ public class MediaObjects {
         }
     }
 
+    public static void markPublished(MediaObject media, Instant now, String reason) {
+        media.setLastPublishedInstant(now);
+        media.setRepubReason(reason);
+    }
+
     public static boolean realizeAndExpirePredictions(MediaObject object) {
         boolean change = false;
         for (Prediction prediction : object.getPredictions()) {
