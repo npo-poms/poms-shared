@@ -232,14 +232,6 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         this.lastPublished = DateUtils.toInstant(lastPublished);
     }
 
-    public Instant getLastPublishedInstant() {
-        return lastPublished;
-    }
-
-    public void setLastPublishedInstant(Instant lastPublished) {
-        this.lastPublished = lastPublished;
-    }
-
     @XmlAttribute
     public Workflow getWorkflow() {
         return workflow;
