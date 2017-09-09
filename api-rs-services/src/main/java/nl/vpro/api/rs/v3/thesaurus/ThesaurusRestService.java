@@ -1,18 +1,16 @@
 package nl.vpro.api.rs.v3.thesaurus;
 
-import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
-import static nl.vpro.domain.api.Constants.MAX;
+import java.time.Instant;
 
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import nl.vpro.domain.api.media.ThesaurusResult;
 import nl.vpro.domain.api.media.ThesaurusUpdates;
+
+import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
+import static nl.vpro.domain.api.Constants.MAX;
 
 @Path(ThesaurusRestService.PATH)
 @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -27,7 +25,7 @@ public interface ThesaurusRestService {
 
     @GET
     @Path("/people/updates")
-    ThesaurusUpdates peopleUpdates(@QueryParam("from") String from, @QueryParam("to") String to) throws Exception;
+    ThesaurusUpdates peopleUpdates(@QueryParam("from") Instant from, @QueryParam("to") Instant to) throws Exception;
 
     @GET
     @Path("/items")
@@ -36,7 +34,7 @@ public interface ThesaurusRestService {
 
     @GET
     @Path("/items/updates")
-    ThesaurusUpdates itemUpdates(@QueryParam("from") String from, @QueryParam("to") String to) throws Exception;
+    ThesaurusUpdates itemUpdates(@QueryParam("from") Instant from, @QueryParam("to") Instant to) throws Exception;
 
     @GET
     @Path("/items/status")
