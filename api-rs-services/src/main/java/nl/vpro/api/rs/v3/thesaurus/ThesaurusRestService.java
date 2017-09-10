@@ -6,6 +6,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.resteasy.annotations.cache.NoCache;
+
 import nl.vpro.domain.api.media.ThesaurusResult;
 import nl.vpro.domain.api.media.ThesaurusUpdates;
 
@@ -26,11 +28,11 @@ public interface ThesaurusRestService {
 
     /**
      * TODO too little similarity to {@link MediaRestService#changes}
-     * 1. @Path is different
-     * 2. Returned objects are different.
+     * Returned objects are different.
      */
     @GET
-    @Path("/people/updates")
+    @Path("/people/changes")
+    @NoCache
     ThesaurusUpdates peopleUpdates(
         @QueryParam("from") Instant from,
         @QueryParam("to") Instant to) throws Exception;
@@ -42,17 +44,18 @@ public interface ThesaurusRestService {
 
     /**
      * TODO too little similarity to {@link MediaRestService#changes}
-     * 1. @Path is different
-     * 2. Returned objects are different.
+     * Returned objects are different.
      */
     @GET
-    @Path("/items/updates")
+    @Path("/items/changes")
+    @NoCache
     ThesaurusUpdates itemUpdates(
         @QueryParam("from") Instant from,
         @QueryParam("to") Instant to) throws Exception;
 
     @GET
     @Path("/items/status")
+    // TODO I think the return type can be proper. A 404 can be accomplished with some kind of NotFoundException.
     Response itemStatus(@QueryParam("id") String id) throws Exception;
 
 
