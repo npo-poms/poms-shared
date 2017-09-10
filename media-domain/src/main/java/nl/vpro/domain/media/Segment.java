@@ -55,12 +55,12 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     public Segment() {
     }
 
-    public Segment(Program program, String mid, java.time.Duration start, AuthorizedDuration duration) {
+    public Segment(Program program, String midRef, java.time.Duration start, AuthorizedDuration duration) {
         this.start = start;
-        this.midRef = mid;
         this.duration = duration;
         avType = program.getAVType();
         program.addSegment(this);
+        this.midRef = midRef == null ? program.getMid() : midRef;
     }
 
     public Segment(Program program) {
@@ -73,6 +73,11 @@ public class Segment extends MediaObject implements Comparable<Segment> {
 
     public Segment(Program program, java.time.Duration start, AuthorizedDuration duration) {
         this(program, program.getMid(), start, duration);
+    }
+
+    public Segment(String mid, Program program, java.time.Duration start, AuthorizedDuration duration) {
+        this(program, program.getMid(), start, duration);
+        this.mid = mid;
     }
 
     public Segment(AVType avType) {
