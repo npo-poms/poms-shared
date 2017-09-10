@@ -23,18 +23,33 @@ public interface ThesaurusRestService {
     ThesaurusResult listPeople(@QueryParam("text") @DefaultValue("") String text,
             @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
 
+
+    /**
+     * TODO too little similarity to {@link MediaRestService#changes}
+     * 1. @Path is different
+     * 2. Returned objects are different.
+     */
     @GET
     @Path("/people/updates")
-    ThesaurusUpdates peopleUpdates(@QueryParam("from") Instant from, @QueryParam("to") Instant to) throws Exception;
+    ThesaurusUpdates peopleUpdates(
+        @QueryParam("from") Instant from,
+        @QueryParam("to") Instant to) throws Exception;
 
     @GET
     @Path("/items")
     ThesaurusResult listItems(@QueryParam("text") @DefaultValue("") String text,
             @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
 
+    /**
+     * TODO too little similarity to {@link MediaRestService#changes}
+     * 1. @Path is different
+     * 2. Returned objects are different.
+     */
     @GET
     @Path("/items/updates")
-    ThesaurusUpdates itemUpdates(@QueryParam("from") Instant from, @QueryParam("to") Instant to) throws Exception;
+    ThesaurusUpdates itemUpdates(
+        @QueryParam("from") Instant from,
+        @QueryParam("to") Instant to) throws Exception;
 
     @GET
     @Path("/items/status")
