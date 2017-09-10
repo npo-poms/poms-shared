@@ -10,6 +10,7 @@ import nl.vpro.domain.api.Result;
 
 /**
  * TODO Adapting Map makes no sense and whont' support XML at all.
+ * It should be a 'Change' like object anyway.
  */
 @XmlRootElement(name = "thesaurusUpdate")
 @XmlType(name = "thesaurusUpdateType")
