@@ -363,7 +363,7 @@ public interface MediaTestDataBuilder<
 
     @SuppressWarnings("unchecked")
     default T withDuration()  {
-        return duration(java.time.Duration.of(2, ChronoUnit.HOURS));
+        return duration(Duration.of(2, ChronoUnit.HOURS));
     }
 
     @SuppressWarnings("unchecked")
@@ -446,12 +446,12 @@ public interface MediaTestDataBuilder<
         l1.setCreationInstant(LocalDateTime.of(2016, 3, 4, 12, 45).atZone(Schedule.ZONE_ID).toInstant());
         Location l2 = new Location("http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf", OwnerType.BROADCASTER);
         l2.setCreationInstant(LocalDateTime.of(2016, 3, 4, 13, 45).atZone(Schedule.ZONE_ID).toInstant());
-        l2.setDuration(java.time.Duration.of(30L, ChronoUnit.MINUTES).plus(java.time.Duration.of(33, ChronoUnit.SECONDS)));
+        l2.setDuration(Duration.of(30L, ChronoUnit.MINUTES).plus(Duration.of(33, ChronoUnit.SECONDS)));
         Location l3 = new Location("http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf", OwnerType.BROADCASTER);
         l3.setCreationInstant(LocalDateTime.of(2016, 3, 4, 14, 45).atZone(Schedule.ZONE_ID).toInstant());
         Location l4 = new Location("http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v", OwnerType.BROADCASTER);
-        l4.setDuration(java.time.Duration.of(10L, ChronoUnit.MINUTES));
-        l4.setOffset(java.time.Duration.of(13L, ChronoUnit.MINUTES));
+        l4.setDuration(Duration.of(10L, ChronoUnit.MINUTES));
+        l4.setOffset(Duration.of(13L, ChronoUnit.MINUTES));
         l4.setCreationInstant(LocalDateTime.of(2016, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant());
 
         return locations(l1, l2, l3, l4);
@@ -463,8 +463,8 @@ public interface MediaTestDataBuilder<
         l1.setCreationInstant(LocalDateTime.of(2017, 2, 5, 11, 42).atZone(Schedule.ZONE_ID).toInstant());
         l1.setWorkflow(Workflow.PUBLISHED);
         Location l2 = new Location("http://www.npo.nl/location/1", OwnerType.NPO);
-        l2.setDuration(java.time.Duration.of(10L, ChronoUnit.MINUTES));
-        l2.setOffset(java.time.Duration.of(13L, ChronoUnit.MINUTES));
+        l2.setDuration(Duration.of(10L, ChronoUnit.MINUTES));
+        l2.setOffset(Duration.of(13L, ChronoUnit.MINUTES));
         l2.setCreationInstant(LocalDateTime.of(2017, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant());
 
         return locations(l1, l2);
@@ -473,19 +473,19 @@ public interface MediaTestDataBuilder<
 
     default T withScheduleEvents() {
         return scheduleEvents(
-            ScheduleEvent.builder().channel(Channel.NED3).start(Instant.ofEpochMilli(100)).duration(java.time.Duration.ofMillis(200)).repeat(Repeat.original()).build(),
-            ScheduleEvent.builder().channel(Channel.NED3).net(new Net("ZAPP")).start(Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000)).duration(java.time.Duration.ofMillis(50)).repeat(Repeat.rerun()).build(),
-            ScheduleEvent.builder().channel(Channel.HOLL).start(Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000)).duration(java.time.Duration.ofMillis(250)).rerun(true).build(),
-            ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000)).duration(java.time.Duration.ofMillis(200)).rerun(true).build()
+            ScheduleEvent.builder().channel(Channel.NED3).start(Instant.ofEpochMilli(100)).duration(Duration.ofMillis(200)).repeat(Repeat.original()).build(),
+            ScheduleEvent.builder().channel(Channel.NED3).net(new Net("ZAPP")).start(Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000)).duration(Duration.ofMillis(50)).repeat(Repeat.rerun()).build(),
+            ScheduleEvent.builder().channel(Channel.HOLL).start(Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000)).duration(Duration.ofMillis(250)).rerun(true).build(),
+            ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000)).duration(Duration.ofMillis(200)).rerun(true).build()
         );
     }
 
     default T withScheduleEvent(LocalDateTime localDateTime, Function<ScheduleEvent, ScheduleEvent> merger) {
-        return scheduleEvent(Channel.NED1, localDateTime, java.time.Duration.ofMinutes(30L), merger);
+        return scheduleEvent(Channel.NED1, localDateTime, Duration.ofMinutes(30L), merger);
     }
 
     default T withScheduleEvent(LocalDateTime localDateTime) {
-        return scheduleEvent(Channel.NED1, localDateTime, java.time.Duration.ofMinutes(30L));
+        return scheduleEvent(Channel.NED1, localDateTime, Duration.ofMinutes(30L));
     }
 
     default T withScheduleEvent(int year, int month, int day, int hour, int minutes, Function<ScheduleEvent, ScheduleEvent> merger) {
@@ -761,9 +761,9 @@ public interface MediaTestDataBuilder<
                     MediaTestDataBuilder.segment().parent(mediaObject())
                         .withEverything()
                         .mid("VPROWON_12345_1")
-                        .start(java.time.Duration.ZERO)
-                        .duration(java.time.Duration.ofMillis(100000)).build(),
-                    MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(java.time.Duration.ofMillis(100000)).duration(java.time.Duration.ofMillis(100000)).build())
+                        .start(Duration.ZERO)
+                        .duration(Duration.ofMillis(100000)).build(),
+                    MediaTestDataBuilder.segment().parent(mediaObject()).withEverything().mid("VPROWON_12345_2").start(Duration.ofMillis(100000)).duration(Duration.ofMillis(100000)).build())
                     ;
 
 
@@ -892,7 +892,7 @@ public interface MediaTestDataBuilder<
         }
 
         public SegmentTestDataBuilder withStart() {
-            return start(java.time.Duration.ofMinutes(2));
+            return start(Duration.ofMinutes(2));
         }
 
 
