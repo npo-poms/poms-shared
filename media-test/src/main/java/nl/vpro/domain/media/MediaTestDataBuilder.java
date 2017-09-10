@@ -7,6 +7,7 @@ package nl.vpro.domain.media;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,12 +17,12 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
-import nl.vpro.domain.media.gtaa.GTAARecord;
-import nl.vpro.domain.support.License;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
+import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.TestEditors;
@@ -747,9 +748,10 @@ public interface MediaTestDataBuilder<
         }
 
         public ProgramTestDataBuilder withSegments() {
-            new Segment(mediaObject(), "VPROWON_12345_1", java.time.Duration.ZERO, AuthorizedDuration.ofMillis(100000));
-            new Segment(mediaObject(), "VPROWON_12345_2", java.time.Duration.ofMillis(100000), AuthorizedDuration.ofMillis(100000));
-            new Segment(mediaObject(), "VPROWON_12345_3", java.time.Duration.ofMillis(1000000), AuthorizedDuration.ofMillis(300000));
+
+            new Segment(mediaObject.getMid() + "_1", mediaObject(), Duration.ZERO, AuthorizedDuration.ofMillis(100000));
+            new Segment(mediaObject.getMid() + "_2", mediaObject(), Duration.ofMillis(100000), AuthorizedDuration.ofMillis(100000));
+            new Segment(mediaObject.getMid() + "_3", mediaObject(), Duration.ofMillis(1000000), AuthorizedDuration.ofMillis(300000));
             return this;
         }
 
