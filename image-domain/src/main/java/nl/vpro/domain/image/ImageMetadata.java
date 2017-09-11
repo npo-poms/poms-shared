@@ -27,6 +27,12 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
         return format == null ? null : format.getMimeType();
     }
 
+    default void copyTitleToDescriptionIfEmpty() {
+        if (StringUtils.isBlank(getDescription())) {
+            setDescription(getTitle());
+        }
+    }
+
 
     T setHeightInMm(Float heightInMm);
     T setWidthInMm(Float widthInMm);
