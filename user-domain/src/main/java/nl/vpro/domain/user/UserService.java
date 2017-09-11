@@ -7,6 +7,8 @@ package nl.vpro.domain.user;
 import java.util.List;
 import java.util.concurrent.Callable;
 
+import nl.vpro.domain.Roles;
+
 public interface UserService<T extends User> {
 
     <S> S doAs(String principalId, Callable<S> handler) throws Exception;
@@ -39,5 +41,27 @@ public interface UserService<T extends User> {
     }
 
     void dropAuthentication();
+
+    default boolean isPrivilegedUser() {
+        return currentUserHasRole(
+            Roles.SUPERADMIN_ROLE,
+            Roles.SUPERPROCESS_ROLE,
+            Roles.PUBLISHER_ROLE,
+            Roles.SUPPORT_ROLE,
+            Roles.SYSTEM_ROLE
+        );
+    }
+
+    default boolean isProcessUser() {
+        return currentUserHasRole(
+            Roles.PROCESS_ROLE,
+            Roles.SUPERPROCESS_ROLE
+        );
+    }
+
+    default boolean isPublisher() {
+        return currentUserHasRole(Roles.PUBLISHER_ROLE);
+    }
+
 
 }
