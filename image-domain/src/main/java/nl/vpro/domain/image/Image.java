@@ -15,7 +15,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.sql.SQLException;
 
@@ -88,7 +87,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
             return image;
         }
     }
-
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, name="imageType")

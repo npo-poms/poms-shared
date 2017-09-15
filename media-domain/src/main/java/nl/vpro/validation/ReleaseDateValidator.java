@@ -17,7 +17,7 @@ public class ReleaseDateValidator implements ConstraintValidator<ReleaseDate, St
     }
 
     @Override
-    public boolean isValid(String date,ConstraintValidatorContext constraintValidatorContext){
+    public boolean isValid(String date, ConstraintValidatorContext constraintValidatorContext){
         return date == null || YEAR_ONLY.matcher(date).matches();
     }
 }
