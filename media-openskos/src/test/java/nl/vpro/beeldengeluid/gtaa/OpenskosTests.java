@@ -19,7 +19,7 @@ import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.gtaa.GTAAConflict;
 import nl.vpro.domain.media.gtaa.GTAAPerson;
 import nl.vpro.domain.media.gtaa.GTAARepository;
-import nl.vpro.oai.Record;
+import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 
