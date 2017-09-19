@@ -7,7 +7,7 @@ import org.mockito.Mockito;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import nl.vpro.domain.api.Change;
+import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.media.MediaObject;
 
@@ -25,7 +25,7 @@ public class ChangeIteratorTest {
 
     private final ProfileDefinition<MediaObject> previous = Mockito.mock(ProfileDefinition.class);
 
-    private List<Change> nodes;
+    private List<MediaChange> nodes;
 
     @Before
     public void setUp() throws Exception {

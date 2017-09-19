@@ -121,7 +121,7 @@ public class OpenskosTests {
         GTAAPerson p = new GTAAPerson();
         p.setFamilyName("asdasd");
         p.setGivenName("asdasd");
-        p.setListIndex(0);
+        //p.setListIndex(0);
         impl.submit(p, "demo-cms:gtaa-user");
     }
 
@@ -166,10 +166,10 @@ public class OpenskosTests {
         RestTemplate template = new RestTemplate();
         template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
 
-        String host = "http://localhost:8080";
+        //String host = "http://localhost:8080";
         //String host = "http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/";
         // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        // String host = "http://test.openskos.beeldengeluid.nl.pictura-dp.nl/";
+        String host = "http://test.openskos.beeldengeluid.nl.pictura-dp.nl/";
         // String host = "http://openskos.beeldengeluid.nl/";
         // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
         // String host =

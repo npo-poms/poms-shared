@@ -7,7 +7,7 @@ package nl.vpro.domain.api.media;
 import java.time.Instant;
 import java.util.Iterator;
 
-import nl.vpro.domain.api.Change;
+import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.Deletes;
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.profile.ProfileDefinition;
@@ -29,9 +29,9 @@ public interface MediaRepository extends MediaLoader, Redirector {
     ProgramResult listEpisodes(MediaObject media, ProfileDefinition<MediaObject> profile, Order order, long offset, Integer max);
 
     @Deprecated
-    Iterator<Change> changes(Long since, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);
+    Iterator<MediaChange> changes(Long since, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);
 
-    Iterator<Change> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive, Deletes deletes);
+    Iterator<MediaChange> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive, Deletes deletes);
 
     Iterator<MediaObject> iterate(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
 
