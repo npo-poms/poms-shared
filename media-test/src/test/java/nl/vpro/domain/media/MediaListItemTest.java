@@ -41,6 +41,12 @@ public class MediaListItemTest {
             "        <duration>P0DT0H0M0.200S</duration>\n" +
             "        <poProgID>VPROWON_20001</poProgID>\n" +
             "    </s:firstScheduleEvent>\n" +
+            "    <s:sortDateScheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
+            "        <guideDay>1969-12-31+01:00</guideDay>\n" +
+            "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+            "        <duration>P0DT0H0M0.200S</duration>\n" +
+            "        <poProgID>VPROWON_20001</poProgID>\n" +
+            "    </s:sortDateScheduleEvent>\n" +
             "    <s:locations owner=\"BROADCASTER\" creationDate=\"2016-03-04T15:45:00+01:00\" urn=\"urn:vpro:media:location:6\" workflow=\"FOR PUBLICATION\">\n" +
             "        <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
             "        <avAttributes>\n" +
