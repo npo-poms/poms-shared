@@ -36,17 +36,5 @@
        <artifactId>slf4j-simple</artifactId>
        <scope>test</scope>
      </dependency>
-    <dependency>
-      <groupId>nl.vpro.api</groupId>
-      <artifactId>api-domain</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>nl.vpro.media</groupId>
-      <artifactId>media-domain</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>nl.vpro.media</groupId>
-      <artifactId>media-domain</artifactId>
-    </dependency>
   </dependencies>
 </project>
