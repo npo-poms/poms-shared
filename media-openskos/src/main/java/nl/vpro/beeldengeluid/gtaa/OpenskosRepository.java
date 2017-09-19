@@ -44,7 +44,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.gtaa.GTAAConflict;
-import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.api.thesaurus.GTAAPerson;
 import nl.vpro.domain.media.gtaa.Label;
 import nl.vpro.openarchives.oai.ListRecord;
 import nl.vpro.openarchives.oai.OAI_PMH;
