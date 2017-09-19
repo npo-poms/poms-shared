@@ -52,6 +52,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "publishStopInstant",
             "lastPublished",
             "firstScheduleEvent",
+            "sortDateScheduleEvent",
             "locations",
             "numberOfLocations",
             "tags",
@@ -158,6 +159,10 @@ public class MediaListItem extends PublishableListItem {
 
     @Getter
     @Setter
+    private ScheduleEvent sortDateScheduleEvent;
+
+    @Getter
+    @Setter
     private StreamingStatus streamingPlatformStatus;
 
     public MediaListItem() {
@@ -200,6 +205,7 @@ public class MediaListItem extends PublishableListItem {
 
         if(media.getScheduleEvents().size() > 0) {
             this.firstScheduleEvent = media.getScheduleEvents().first();
+            this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(media.getScheduleEvents());
         }
     }
 
