@@ -1,4 +1,4 @@
-package nl.vpro.domain.api.thesaurus;
+package nl.vpro.domain.media.gtaa;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.Instant;
 import java.util.List;
 
-import nl.vpro.domain.media.gtaa.Label;
-import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.openarchives.oai.Label;
+import nl.vpro.openarchives.oai.Status;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
 @JsonSubTypes({ @JsonSubTypes.Type(value = GTAAPerson.class, name = "person"),

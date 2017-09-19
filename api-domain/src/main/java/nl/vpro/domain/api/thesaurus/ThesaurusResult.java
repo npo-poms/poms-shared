@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+
+import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
 import nl.vpro.domain.api.Result;
 
 @XmlRootElement(name = "thesaurusItems")

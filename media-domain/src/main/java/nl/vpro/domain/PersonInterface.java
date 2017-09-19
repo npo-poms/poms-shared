@@ -1,9 +1,6 @@
 package nl.vpro.domain;
 
 import nl.vpro.domain.media.gtaa.GTAARecord;
-import nl.vpro.validation.NoHtml;
-
-import javax.xml.bind.annotation.XmlElement;
 
 public interface PersonInterface {
 
