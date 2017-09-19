@@ -43,13 +43,9 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.GTAAConflict;
-import nl.vpro.domain.api.thesaurus.GTAAPerson;
-import nl.vpro.domain.media.gtaa.Label;
-import nl.vpro.openarchives.oai.ListRecord;
-import nl.vpro.openarchives.oai.OAI_PMH;
-import nl.vpro.openarchives.oai.Record;
-import nl.vpro.openarchives.oai.ResumptionToken;
+
+import nl.vpro.domain.media.gtaa.*;
+import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -125,7 +121,7 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     @Override
-    public CountedIterator<Record> getPersonUpdates(@Context Instant from,@Context Instant to) {
+    public CountedIterator<Record> getPersonUpdates(@Context Instant from, @Context Instant to) {
         return getUpdates(from, to, personsSpec);
     }
     

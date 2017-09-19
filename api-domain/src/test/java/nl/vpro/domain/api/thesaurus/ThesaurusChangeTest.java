@@ -1,9 +1,8 @@
 package nl.vpro.domain.api.thesaurus;
 
-import nl.vpro.domain.api.thesaurus.ThesaurusChange;
 import nl.vpro.domain.media.Person;
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.api.thesaurus.GTAAPerson;
+import nl.vpro.domain.media.gtaa.GTAAPerson;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import org.junit.Test;
