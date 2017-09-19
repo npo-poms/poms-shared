@@ -29,7 +29,5 @@ public class ResourceElement {
     @XmlValue
     private String value;
 
-    public ResourceElement() {
-    }
 
 }
