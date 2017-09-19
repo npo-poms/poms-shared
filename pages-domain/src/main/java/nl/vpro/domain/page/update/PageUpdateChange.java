@@ -26,4 +26,12 @@ public class PageUpdateChange extends AbstractChange<PageUpdate> {
     public PageUpdateChange(Instant publishDate, String id, Boolean deleted, Boolean tail, PageUpdate object) {
         super(publishDate, id, deleted, tail, object);
     }
+
+    @XmlElement
+    public PageUpdate getObject() {
+        return super.getObject();
+    }
+    public void setObject(PageUpdate p) {
+        super.setObject(p);
+    }
 }

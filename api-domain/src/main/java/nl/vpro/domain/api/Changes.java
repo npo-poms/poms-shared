@@ -21,13 +21,13 @@ public class Changes {
 
     @XmlElement(name = "change")
     @JsonProperty("changes")
-    private List<Change> changes;
+    private List<MediaChange> changes;
 
-    public List<Change> getChanges() {
+    public List<MediaChange> getChanges() {
         return changes;
     }
 
-    public void setChanges(List<Change> changes) {
+    public void setChanges(List<MediaChange> changes) {
         this.changes = changes;
     }
 }

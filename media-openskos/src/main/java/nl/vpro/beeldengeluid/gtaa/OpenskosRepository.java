@@ -20,8 +20,10 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 
 import javax.annotation.PostConstruct;
+import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXB;
 
+import nl.vpro.domain.PersonInterface;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,7 +41,7 @@ import org.springframework.web.client.RestTemplate;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.domain.media.Person;
+
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.gtaa.GTAAConflict;
 import nl.vpro.domain.media.gtaa.GTAAPerson;
@@ -108,7 +110,7 @@ public class OpenskosRepository implements GTAARepository {
         return GTAAPerson.create(description, prefLabel);
     }
 
-    private String getPrefLabel(Person person) {
+    private String getPrefLabel(PersonInterface person) {
         StringBuilder sb = new StringBuilder();
         if (StringUtils.isNotBlank(person.getFamilyName())) {
             sb.append(person.getFamilyName());
@@ -123,8 +125,8 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     @Override
-    public CountedIterator<Record> getPersonUpdates(Instant from, Instant until) {
-        return getUpdates(from, until, personsSpec);
+    public CountedIterator<Record> getPersonUpdates(@Context Instant from,@Context Instant to) {
+        return getUpdates(from, to, personsSpec);
     }
     
     @Override

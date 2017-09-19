@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
+import lombok.Getter;
+import nl.vpro.domain.PersonInterface;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -21,9 +23,10 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "personType",
     propOrder = {
         "givenName",
-        "familyName"
+        "familyName",
+        "prefLabel"
     })
-public class Person extends DomainObject {
+public class Person extends DomainObject implements PersonInterface {
 
 
     public static Person copy(Person source) {
@@ -45,6 +48,9 @@ public class Person extends DomainObject {
     @NoHtml
     @XmlElement
     protected String familyName;
+
+    @Getter
+    protected String prefLabel;
 
     @Column(nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
@@ -68,6 +74,11 @@ public class Person extends DomainObject {
     protected GTAARecord gtaaRecord;
 
     public Person() {
+    }
+
+    public Person(String givenName, String familyName) {
+        this.givenName = givenName;
+        this.familyName = familyName;
     }
 
     public Person(String givenName, String familyName, RoleType role) {
