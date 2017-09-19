@@ -6,9 +6,7 @@ import lombok.Setter;
 
 import java.time.Instant;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -25,6 +23,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Getter
 @Setter
 @AllArgsConstructor
+@XmlAccessorType(XmlAccessType.NONE)
 public abstract class AbstractChange<T>  {
 
 
@@ -43,16 +42,46 @@ public abstract class AbstractChange<T>  {
     @XmlAttribute
     private Boolean tail = null;
 
-
-    @XmlElement(name = "object")
+    //@XmlElement(name = "object")
     private T object;
 
     protected AbstractChange() {
 
     }
 
+    protected AbstractChange(String id, T object,  Boolean deleted) {
+        this.id = id;
+        this.object = object;
+        this.deleted = deleted;
+
+    }
+
 
     public boolean isDeleted() {
         return deleted != null ? deleted : false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractChange)) return false;
+
+        AbstractChange<?> that = (AbstractChange<?>) o;
+
+        if (publishDate != null ? !publishDate.equals(that.publishDate) : that.publishDate != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (deleted != null ? !deleted.equals(that.deleted) : that.deleted != null) return false;
+        if (tail != null ? !tail.equals(that.tail) : that.tail != null) return false;
+        return object != null ? object.equals(that.object) : that.object == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = publishDate != null ? publishDate.hashCode() : 0;
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        result = 31 * result + (deleted != null ? deleted.hashCode() : 0);
+        result = 31 * result + (tail != null ? tail.hashCode() : 0);
+        result = 31 * result + (object != null ? object.hashCode() : 0);
+        return result;
     }
 }
