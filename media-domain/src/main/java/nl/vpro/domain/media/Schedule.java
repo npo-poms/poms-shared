@@ -397,11 +397,11 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         }
         if (reruns != null) {
             if (!reruns) {
-                if (Repeat.isRerun(event.getRepeat())) {
+                if (ScheduleEvents.isRerun(event)) {
                     return false;
                 }
             } else {
-                if (Repeat.isOriginal(event.getRepeat())) {
+                if (ScheduleEvents.isOriginal(event)) {
                     return false;
                 }
             }

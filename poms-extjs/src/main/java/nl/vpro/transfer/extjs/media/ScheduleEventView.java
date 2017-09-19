@@ -4,19 +4,18 @@
  */
 package nl.vpro.transfer.extjs.media;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import nl.vpro.domain.media.Channel;
-import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.media.Net;
-import nl.vpro.domain.media.ScheduleEvent;
-import nl.vpro.domain.media.bind.DateToJsonTimestamp;
-import nl.vpro.domain.user.Broadcaster;
-
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.bind.DateToJsonTimestamp;
+import nl.vpro.domain.user.Broadcaster;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {
@@ -123,9 +122,7 @@ public class ScheduleEventView {
     }
 
     private void setRerunEvent(ScheduleEvent fullEvent) {
-        if(fullEvent.getRepeat() != null) {
-            this.isRerun = fullEvent.getRepeat().isRerun();
-        }
+        this.isRerun = ScheduleEvents.isRerun(fullEvent);
     }
 
     public String getChannel() {
