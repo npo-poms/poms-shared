@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import java.util.SortedSet;
+
 /**
  * @author Roelof Jan Koekoek
  * @since 1.7
@@ -68,5 +70,7 @@ public class ScheduleEvents {
         }
         return result;
     }
+
+
 
 }
