@@ -4,6 +4,9 @@ import java.io.StringReader;
 
 import org.junit.Test;
 
+import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.ThesaurusItem;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

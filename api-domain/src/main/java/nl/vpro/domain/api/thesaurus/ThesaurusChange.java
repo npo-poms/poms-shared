@@ -6,6 +6,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.ThesaurusItem;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
 import nl.vpro.domain.AbstractChange;
 import nl.vpro.domain.Xmlns;
 
