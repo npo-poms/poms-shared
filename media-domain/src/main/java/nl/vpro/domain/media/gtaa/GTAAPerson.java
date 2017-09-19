@@ -19,8 +19,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Person;
-import nl.vpro.openarchives.oai.Label;
-import nl.vpro.openarchives.oai.Status;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;

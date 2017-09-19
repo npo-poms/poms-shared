@@ -2,9 +2,6 @@ package nl.vpro.domain.media.gtaa;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import nl.vpro.openarchives.oai.Label;
-import nl.vpro.openarchives.oai.Status;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.w3.rdf.Description;
 
