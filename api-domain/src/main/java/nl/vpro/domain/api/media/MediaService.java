@@ -9,8 +9,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import nl.vpro.domain.api.Change;
+import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.Deletes;
+import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.SuggestResult;
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
@@ -27,7 +28,7 @@ public interface MediaService extends MediaProvider {
 
     SuggestResult suggest(String input, String profile, Integer max);
 
-    Iterator<Change> changes(String profile, boolean profileCheck, Instant since, String mid, Order order, Integer max, Long keepAlive, boolean withSequences, Deletes deletes) throws ProfileNotFoundException;
+    Iterator<MediaChange> changes(String profile, boolean profileCheck, Instant since, String mid, Order order, Integer max, Long keepAlive, boolean withSequences, Deletes deletes) throws ProfileNotFoundException;
 
     @Override
     <T extends MediaObject> T findByMid(String mid);
