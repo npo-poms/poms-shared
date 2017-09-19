@@ -12,8 +12,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
-import nl.vpro.openarchives.oai.Namespaces;
-
 /**
  * @author Roelof Jan Koekoek
  * @since 3.7

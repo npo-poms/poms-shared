@@ -6,8 +6,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.Instant;
 import java.util.List;
 
-import nl.vpro.openarchives.oai.Label;
-import nl.vpro.openarchives.oai.Status;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
 @JsonSubTypes({ @JsonSubTypes.Type(value = GTAAPerson.class, name = "person"),
