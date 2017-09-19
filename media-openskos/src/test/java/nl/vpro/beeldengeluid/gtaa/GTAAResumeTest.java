@@ -4,8 +4,9 @@ import javax.xml.bind.JAXB;
 
 import org.junit.Test;
 
-import nl.vpro.oai.ListRecord;
-import nl.vpro.oai.ResumptionToken;
+
+import nl.vpro.openarchives.oai.ListRecord;
+import nl.vpro.openarchives.oai.ResumptionToken;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
