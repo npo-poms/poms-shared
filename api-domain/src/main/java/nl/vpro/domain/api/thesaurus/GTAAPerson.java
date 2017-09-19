@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Person;
 import nl.vpro.domain.media.gtaa.Label;
 import nl.vpro.domain.media.gtaa.Status;
