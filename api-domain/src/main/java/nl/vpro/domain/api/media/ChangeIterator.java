@@ -8,7 +8,7 @@ import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import nl.vpro.domain.api.Change;
+import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.media.MediaObject;
@@ -18,13 +18,13 @@ import nl.vpro.util.FilteringIterator;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
-public class ChangeIterator implements Iterator<Change> {
+public class ChangeIterator implements Iterator<MediaChange> {
 
     protected static final Logger LOG = LoggerFactory.getLogger(ChangeIterator.class);
 
     private static final int LOG_BATCH = 50000;
 
-    private final Iterator<Change> wrapped;
+    private final Iterator<MediaChange> wrapped;
 
     private final ProfileDefinition<MediaObject> current;
 
@@ -33,8 +33,8 @@ public class ChangeIterator implements Iterator<Change> {
     private final Instant sinceDate;
     private final Long since;
 
-    private Change next;
-    private Change nextnext;
+    private MediaChange next;
+    private MediaChange nextnext;
 
     private boolean needsFindNext = true;
     private Boolean hasNext = null; // not known yet
@@ -58,7 +58,7 @@ public class ChangeIterator implements Iterator<Change> {
      *                      This null can be used to send something to the client to keep the connection alive.
      */
 
-    public ChangeIterator(Iterator<Change> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, long keepAliveNull) {
+    public ChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, long keepAliveNull) {
         this.wrapped = new FilteringIterator<>(iterator, Objects::nonNull);
         this.sinceDate = since;
         this.since = null;
@@ -67,11 +67,11 @@ public class ChangeIterator implements Iterator<Change> {
         this.keepAliveNulls = keepAliveNull;
     }
 
-    public ChangeIterator(Iterator<Change> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous) {
+    public ChangeIterator(Iterator<MediaChange> iterator, Instant since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous) {
         this(iterator, since, current, previous, Long.MAX_VALUE);
     }
 
-    public ChangeIterator(Iterator<Change> iterator, Long since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, long keepAliveNull) {
+    public ChangeIterator(Iterator<MediaChange> iterator, Long since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous, long keepAliveNull) {
         this.wrapped = new FilteringIterator<>(iterator, Objects::nonNull);
         this.since = since;
         this.sinceDate = null;
@@ -80,7 +80,7 @@ public class ChangeIterator implements Iterator<Change> {
         this.keepAliveNulls = keepAliveNull;
     }
 
-    public ChangeIterator(Iterator<Change> iterator, Long since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous) {
+    public ChangeIterator(Iterator<MediaChange> iterator, Long since, final ProfileDefinition<MediaObject> current, final ProfileDefinition<MediaObject> previous) {
         this(iterator, since, current, previous, Long.MAX_VALUE);
     }
 
@@ -92,7 +92,7 @@ public class ChangeIterator implements Iterator<Change> {
     }
 
     @Override
-    public Change next() {
+    public MediaChange next() {
         findNext();
         if (!hasNext) {
             throw new NoSuchElementException();
@@ -102,7 +102,7 @@ public class ChangeIterator implements Iterator<Change> {
             currentSkipCount = 0;
             return null;
         }
-        Change result = next;
+        MediaChange result = next;
         next = null;
         return result;
     }
@@ -120,7 +120,7 @@ public class ChangeIterator implements Iterator<Change> {
         // See NPA-105
         if (needsFindNext) {
             while (wrapped.hasNext()) {
-                Change n = wrapped.next();
+                MediaChange n = wrapped.next();
                 count++;
                 sequence = n.getSequence();
                 publishDate = n.getPublishDate();
@@ -168,7 +168,7 @@ public class ChangeIterator implements Iterator<Change> {
         }
     }
 
-    protected boolean needsOutputAndAdapt(Change input) {
+    protected boolean needsOutputAndAdapt(MediaChange input) {
         if (input.isDeleted()) {
             return deleteNeedsOutput(input);
         } else {
@@ -176,7 +176,7 @@ public class ChangeIterator implements Iterator<Change> {
         }
     }
 
-    protected boolean deleteNeedsOutput(Change input) {
+    protected boolean deleteNeedsOutput(MediaChange input) {
         if (! (input.getMedia() == null || previous.test(input.getMedia()))) {
             return false;
         }
@@ -191,7 +191,7 @@ public class ChangeIterator implements Iterator<Change> {
     }
 
 
-    protected boolean updateNeedsOutput(Change input) {
+    protected boolean updateNeedsOutput(MediaChange input) {
         final boolean inCurrent = current.test(input.getMedia());
         final boolean inPrevious = previous.test(input.getMedia());
 
@@ -211,7 +211,7 @@ public class ChangeIterator implements Iterator<Change> {
     }
 
 
-    protected boolean sendAfterSince(Change input) {
+    protected boolean sendAfterSince(MediaChange input) {
         if (! hasSince()) {
             return true;
         }
@@ -222,7 +222,7 @@ public class ChangeIterator implements Iterator<Change> {
         }
     }
 
-    protected boolean sendBeforeSince(Change input) {
+    protected boolean sendBeforeSince(MediaChange input) {
         if (! hasSince()) {
             return false;
         }

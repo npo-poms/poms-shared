@@ -77,10 +77,14 @@
       <groupId>org.xmlunit</groupId>
       <artifactId>xmlunit-core</artifactId>
     </dependency>
- <!--   <dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-core</artifactId>
-    </dependency>-->
+      <dependency>
+          <groupId>nl.publiekeomroep</groupId>
+          <artifactId>media-openskos</artifactId>
+      </dependency>
+      <!--   <dependency>
+           <groupId>org.springframework.security</groupId>
+           <artifactId>spring-security-core</artifactId>
+         </dependency>-->
   </dependencies>
   <build>
     <plugins>

@@ -26,8 +26,8 @@ public class PageUpdateChangeTest {
                 .build();
 
         JAXBTestUtil.assertThatXml(change).isSimilarTo("<pageUpdate:pageUpdateChange publishDate=\"2017-01-30T11:41:00+01:00\" id=\"http://www.vpro.nl/pagina/1\" deleted=\"false\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:page=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
-            "    <pageUpdate:object xsi:type=\"pageUpdate:pageUpdateType\" type=\"ARTICLE\" url=\"http://www.vpro.nl/pagina/1\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>\n" +
-            "</pageUpdate:pageUpdateChange>");
+                "    <pageUpdate:object type=\"ARTICLE\" url=\"http://www.vpro.nl/pagina/1\"/>\n" +
+                "</pageUpdate:pageUpdateChange>\n");
     }
 
 
