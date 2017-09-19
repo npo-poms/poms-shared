@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import lombok.EqualsAndHashCode;
 import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.Segment;
@@ -31,6 +32,7 @@ import nl.vpro.domain.page.Page;
 @XmlType(name = "resultType", propOrder = {"items"})
 @XmlSeeAlso({Page.class, Program.class, Group.class, Segment.class, ApiScheduleEvent.class, Suggestion.class})
 @JsonPropertyOrder({"total", "offset", "max", "items"})
+@EqualsAndHashCode
 public class Result<T> implements Iterable<T> {
 
     @XmlAttribute

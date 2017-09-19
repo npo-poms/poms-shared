@@ -2,23 +2,28 @@
  * Copyright (C) 2015 All rights reserved
  * VPRO The Netherlands
  */
-package nl.vpro.domain.media.gtaa;
+package nl.vpro.domain.api.thesaurus;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import nl.vpro.domain.media.Person;
 import nl.vpro.domain.media.gtaa.Label;
+import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -26,24 +31,84 @@ import nl.vpro.w3.rdf.Description;
  */
 @Slf4j
 @XmlType
-public class GTAAPerson extends Person {
+@XmlAccessorType(XmlAccessType.FIELD)
+@EqualsAndHashCode
+@ToString
+@AllArgsConstructor
+@Builder
+public class GTAAPerson implements ThesaurusObject, PersonInterface {
 
     private static final long serialVersionUID = 1L;
 
+    @NoHtml
+    @XmlElement
     @Getter
+    @Setter
+    protected String givenName;
+
+    @NoHtml
+    @XmlElement
+    @Getter
+    @Setter
+    protected String familyName;
+
+    @Getter
+    @Setter
     private List<Label> notes;
 
     @Getter
+    @Setter
     private List<Names> knownAs;
+
+    @Getter
+    @Setter
+    @XmlElement
+    private Status status;
+
+    @Getter
+    @Setter
+    private String redirectedFrom;
+
+    @Getter
+    @Setter
+    @XmlAttribute
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    private Instant lastModified;
+
+    @Getter
+    @Setter
+    @XmlElement
+    private String gtaaUri;
+
+    public GTAAPerson() {
+
+    }
+
+    public GTAAPerson(Person person) {
+    this.givenName = person.getGivenName();
+    this.familyName = person.getFamilyName();
+    status = person.getGtaaRecord() == null ? null : person.getGtaaRecord().getStatus();
+    }
 
     public static GTAAPerson create(Description description) {
         return create(description, null);
     }
 
-    @XmlElement
-    public Status getStatus() {
-        return this.gtaaRecord != null ? this.gtaaRecord.getStatus() : null;
+    public String getValue() {
+        return givenName + " " + familyName;
     }
+
+    public String getId() {
+        return gtaaUri;
+    }
+
+    @Override
+    public String getType() {
+        return null;
+    }
+
 
     public static GTAAPerson create(Description description, String submittedPrefLabel) {
         if (description == null) {
@@ -71,6 +136,7 @@ public class GTAAPerson extends Person {
         }
 
         answer.notes = description.getScopeNote();
+        answer.lastModified = description.getModified() == null ? null : description.getModified().getValue().toInstant();
 
         if (description.getAltLabels() != null && !description.getAltLabels().isEmpty()) {
             final List<Names> altNames = description.getAltLabels().stream().map(Names::of)
@@ -83,9 +149,15 @@ public class GTAAPerson extends Person {
             }
         }
 
-        answer.setGtaaRecord(new GTAARecord(description.getAbout(), description.getStatus()));
+        answer.setStatus(description.getStatus());
+        answer.setGtaaUri(description.getAbout());
 
         return answer;
+    }
+
+    @Override
+    public String getPrefLabel() {
+        return familyName + (givenName != null ? ", " + givenName  : "");
     }
 
     @AllArgsConstructor
