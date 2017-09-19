@@ -8,7 +8,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
-import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.api.thesaurus.GTAAPerson;
 import nl.vpro.domain.media.gtaa.Label;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
