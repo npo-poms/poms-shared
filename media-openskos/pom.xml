@@ -36,5 +36,9 @@
        <artifactId>slf4j-simple</artifactId>
        <scope>test</scope>
      </dependency>
+    <dependency>
+      <groupId>nl.vpro.api</groupId>
+      <artifactId>api-domain</artifactId>
+    </dependency>
   </dependencies>
 </project>
