@@ -1,5 +1,6 @@
 package nl.vpro.domain.api.thesaurus;
 
+import nl.vpro.domain.media.gtaa.GTAAPerson;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import org.junit.Test;
 

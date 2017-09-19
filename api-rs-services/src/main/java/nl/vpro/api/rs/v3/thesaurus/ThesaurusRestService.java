@@ -10,7 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.api.Constants;
-import nl.vpro.domain.api.thesaurus.ThesaurusObject;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import nl.vpro.domain.api.thesaurus.ThesaurusResult;
