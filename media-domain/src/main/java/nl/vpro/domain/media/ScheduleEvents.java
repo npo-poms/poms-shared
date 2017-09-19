@@ -49,4 +49,24 @@ public class ScheduleEvents {
         return userFriendlyToString(object.getScheduleEvents());
     }
 
+
+    public static boolean isRerun(ScheduleEvent scheduleEevent) {
+        return Repeat.isRerun(scheduleEevent.getRepeat());
+    }
+    public static boolean isOriginal(ScheduleEvent scheduleEevent) {
+        return Repeat.isOriginal(scheduleEevent.getRepeat());
+    }
+
+    public static ScheduleEvent sortDateEventForProgram(Iterable<ScheduleEvent> scheduleEvents) {
+        ScheduleEvent result = null;
+        if (scheduleEvents != null) {
+            for (ScheduleEvent s : scheduleEvents) {
+                if (ScheduleEvents.isOriginal(s) && (result == null || s.getStartInstant().isAfter(result.getStartInstant()))) {
+                    result = s;
+                }
+            }
+        }
+        return result;
+    }
+
 }
