@@ -1,10 +1,10 @@
-package nl.vpro.domain.api.thesaurus;
+package nl.vpro.domain.media.gtaa;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import nl.vpro.domain.media.gtaa.Label;
-import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.openarchives.oai.Label;
+import nl.vpro.openarchives.oai.Status;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.w3.rdf.Description;
 

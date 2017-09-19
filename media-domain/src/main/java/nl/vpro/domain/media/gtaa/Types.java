@@ -1,4 +1,4 @@
-package nl.vpro.beeldengeluid.gtaa;
+package nl.vpro.domain.media.gtaa;
 
 /**
  * @author Michiel Meeuwissen
