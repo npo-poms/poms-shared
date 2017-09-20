@@ -1,23 +1,24 @@
 package nl.vpro.domain.api.thesaurus;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import nl.vpro.domain.media.gtaa.GTAAPerson;
-import nl.vpro.domain.media.gtaa.ThesaurusItem;
-import nl.vpro.domain.media.gtaa.ThesaurusObject;
-import nl.vpro.domain.AbstractChange;
-import nl.vpro.domain.Xmlns;
+import java.time.Instant;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 
-import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import nl.vpro.domain.AbstractChange;
+import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.ThesaurusItem;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
 
 @ToString
 @EqualsAndHashCode
@@ -41,6 +42,7 @@ public class ThesaurusChange<T extends ThesaurusObject> extends AbstractChange<T
     }
 
 
+    @Override
     @XmlElements({
             @XmlElement(name = "person", namespace = Xmlns.MEDIA_NAMESPACE, type = GTAAPerson.class),
             @XmlElement(name = "item", type = ThesaurusItem.class)
@@ -50,6 +52,7 @@ public class ThesaurusChange<T extends ThesaurusObject> extends AbstractChange<T
         return super.getObject();
     }
 
+    @Override
     public void setObject(T p) {
         super.setObject(p);
     }

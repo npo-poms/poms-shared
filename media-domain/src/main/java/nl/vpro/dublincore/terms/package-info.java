@@ -15,6 +15,6 @@
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlNsForm;
 
-import nl.vpro.domain.media.gtaa.Namespaces;
+import nl.vpro.openarchives.oai.Namespaces;
 
 

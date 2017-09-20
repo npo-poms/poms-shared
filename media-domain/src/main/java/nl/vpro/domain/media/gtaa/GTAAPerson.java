@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Person;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.openarchives.oai.Label;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -35,6 +36,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @ToString
 @AllArgsConstructor
 @Builder
+@XmlRootElement(name = "person")
 public class GTAAPerson implements ThesaurusObject, PersonInterface {
 
     private static final long serialVersionUID = 1L;
@@ -61,7 +63,7 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface {
 
     @Getter
     @Setter
-    @XmlElement
+    @XmlAttribute
     private Status status;
 
     @Getter
@@ -96,8 +98,9 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface {
     }
 
     @Override
+    @XmlElement
     public String getValue() {
-        return givenName + " " + familyName;
+        return familyName + (givenName == null ? "":  ", " + givenName);
     }
 
     @Override
@@ -154,36 +157,4 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface {
         return familyName + (givenName != null ? ", " + givenName  : "");
     }
 
-    @AllArgsConstructor
-    @Data
-    @Builder
-    public static class Names {
-
-        protected final String givenName;
-        protected final String familyName;
-
-        private static Names of(Label label) {
-            if (label == null) {
-                return null;
-            }
-            return of(label.getValue());
-        }
-
-        private static Names of(String label) {
-            if (label == null) {
-                return null;
-            }
-            Names.NamesBuilder names = Names.builder();
-            int splitIndex = label.indexOf(", ");
-
-            if (splitIndex > 0) {
-                names.givenName(label.substring(splitIndex + 2));
-                names.familyName(label.substring(0, splitIndex));
-            } else {
-                names.familyName(label);
-            }
-            return names.build();
-        }
-
-    }
 }

@@ -4,11 +4,11 @@
  */
 package nl.vpro.w3.rdf;
 
-import static nl.vpro.domain.media.gtaa.Namespaces.DC_TERMS;
-import static nl.vpro.domain.media.gtaa.Namespaces.DC_TERMS_ELEMENTS;
-import static nl.vpro.domain.media.gtaa.Namespaces.OPEN_SKOS;
-import static nl.vpro.domain.media.gtaa.Namespaces.SKOS;
-import static nl.vpro.domain.media.gtaa.Namespaces.SKOS_XL;
+import static nl.vpro.openarchives.oai.Namespaces.DC_TERMS;
+import static nl.vpro.openarchives.oai.Namespaces.DC_TERMS_ELEMENTS;
+import static nl.vpro.openarchives.oai.Namespaces.OPEN_SKOS;
+import static nl.vpro.openarchives.oai.Namespaces.SKOS;
+import static nl.vpro.openarchives.oai.Namespaces.SKOS_XL;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -31,8 +31,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Singular;
 import lombok.ToString;
 import nl.vpro.domain.media.gtaa.AbstractGTAAObject;
-import nl.vpro.domain.media.gtaa.Label;
-import nl.vpro.domain.media.gtaa.Note;
+import nl.vpro.openarchives.oai.Label;
+import nl.vpro.openarchives.oai.Note;
 import nl.vpro.domain.media.gtaa.Status;
 import nl.vpro.domain.media.gtaa.XLLabel;
 import nl.vpro.dublincore.terms.Date;

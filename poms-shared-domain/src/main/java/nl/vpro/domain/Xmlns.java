@@ -72,6 +72,8 @@ public final class Xmlns {
 
     public static final String NEP_NOTIFY_NAMESPACE = "urn:vpro:media:notify:2017";
 
+    public static final String GTAA_NAMESPACE = "urn:vpro:gtaa:2017";
+
 
     public static final URL XML_XSD = Xmlns.class.getResource("/nl/vpro/domain/media/w3/xml.xsd");
 
