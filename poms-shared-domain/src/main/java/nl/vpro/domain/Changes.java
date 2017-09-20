@@ -17,19 +17,19 @@ import nl.vpro.util.CloseableIterator;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Changes<T> implements AutoCloseable, Iterable<AbstractChange<T>> {
+public class Changes<T> implements AutoCloseable, Iterable<Change<T>> {
 
     private final Instant until;
     private final Long count;
-    private final CloseableIterator<? extends AbstractChange<T>> iterator;
+    private final CloseableIterator<? extends Change<T>> iterator;
 
     @Override
     public void close() throws Exception {
         iterator.close();
     }
     @Override
-    public Iterator<AbstractChange<T>> iterator() {
-        return (Iterator<AbstractChange<T>>) iterator;
+    public Iterator<Change<T>> iterator() {
+        return (Iterator<Change<T>>) iterator;
 
     }
 }

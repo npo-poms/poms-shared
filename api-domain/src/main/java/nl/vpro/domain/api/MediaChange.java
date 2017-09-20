@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.AbstractChange;
+import nl.vpro.domain.Change;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.util.DateUtils;
 
@@ -34,7 +34,7 @@ import nl.vpro.util.DateUtils;
 @XmlAccessorType(XmlAccessType.NONE)
 @Slf4j
 @XmlRootElement(name = "change")
-public class MediaChange extends AbstractChange<MediaObject> {
+public class MediaChange extends Change<MediaObject> {
 
     @XmlAttribute
     private Long sequence;

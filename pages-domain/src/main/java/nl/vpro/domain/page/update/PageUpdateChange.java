@@ -6,7 +6,7 @@ import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.AbstractChange;
+import nl.vpro.domain.Change;
 
 /**
  * @author Michiel Meeuwissen
@@ -16,7 +16,7 @@ import nl.vpro.domain.AbstractChange;
 @XmlType(name = "changeType")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso(PageUpdate.class)
-public class PageUpdateChange extends AbstractChange<PageUpdate> {
+public class PageUpdateChange extends Change<PageUpdate> {
 
     public PageUpdateChange() {
         super();
