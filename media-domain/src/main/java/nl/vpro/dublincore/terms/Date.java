@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.domain.media.gtaa.Namespaces;
+import nl.vpro.openarchives.oai.Namespaces;
 import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
 
 /**

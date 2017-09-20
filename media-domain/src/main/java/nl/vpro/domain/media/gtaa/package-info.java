@@ -1,4 +1,4 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = Namespaces.OAI,
+@javax.xml.bind.annotation.XmlSchema(namespace = Xmlns.GTAA_NAMESPACE,
     xmlns = {
         @XmlNs(prefix = "rdf", namespaceURI = Namespaces.RDF),
         @XmlNs(prefix = "skos", namespaceURI = Namespaces.SKOS),
@@ -6,7 +6,7 @@
         @XmlNs(prefix = "openskos", namespaceURI = Namespaces.OPEN_SKOS),
         @XmlNs(prefix = "dcterms", namespaceURI = Namespaces.DC_TERMS),
         @XmlNs(prefix = "dc", namespaceURI = Namespaces.DC_TERMS_ELEMENTS),
-        @XmlNs(prefix = "", namespaceURI = Namespaces.OAI),
+        @XmlNs(prefix = "gtaa", namespaceURI = Xmlns.GTAA_NAMESPACE),
 
 
     },
@@ -16,5 +16,8 @@
 
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlNsForm;
+
+import nl.vpro.domain.Xmlns;
+import nl.vpro.openarchives.oai.Namespaces;
 
 // See https://docs.google.com/document/d/16L_Gp2awzwa3GHOPNIcK-9LNB0iMZgif-JUfFCMOkkg/edit?pref=2&pli=1

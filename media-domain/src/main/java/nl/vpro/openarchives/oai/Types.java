@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.gtaa;
+package nl.vpro.openarchives.oai;
 
 /**
  * @author Michiel Meeuwissen

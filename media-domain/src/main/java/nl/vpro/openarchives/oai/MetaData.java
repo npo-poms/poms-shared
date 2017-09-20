@@ -1,6 +1,6 @@
 package nl.vpro.openarchives.oai;
 
-import static nl.vpro.domain.media.gtaa.Namespaces.RDF;
+import static nl.vpro.openarchives.oai.Namespaces.RDF;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
