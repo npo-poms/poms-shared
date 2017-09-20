@@ -10,17 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.AbstractChange;
 import nl.vpro.domain.media.MediaObject;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
-import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -38,6 +33,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 })
 @XmlAccessorType(XmlAccessType.NONE)
 @Slf4j
+@XmlRootElement(name = "change")
 public class MediaChange extends AbstractChange<MediaObject> {
 
     @XmlAttribute
