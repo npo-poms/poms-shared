@@ -7,6 +7,7 @@ package nl.vpro.domain.media.gtaa;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,14 +31,22 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @since 3.7
  */
 @Slf4j
-@XmlType
+@XmlType(propOrder = {
+    "value",
+    "givenName",
+    "familyName",
+    "notes",
+    "knownAs",
+    "redirectedFrom"
+
+})
 @XmlAccessorType(XmlAccessType.FIELD)
 @EqualsAndHashCode
 @ToString
 @AllArgsConstructor
 @Builder
 @XmlRootElement(name = "person")
-public class GTAAPerson implements ThesaurusObject, PersonInterface {
+public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -80,7 +89,7 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface {
 
     @Getter
     @Setter
-    @XmlElement
+    @XmlAttribute
     private String gtaaUri;
 
     public GTAAPerson() {
@@ -104,6 +113,7 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface {
     }
 
     @Override
+    @XmlAttribute
     public String getId() {
         return gtaaUri;
     }
