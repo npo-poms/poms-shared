@@ -2,8 +2,8 @@ package nl.vpro.w3.rdf;
 
 import lombok.*;
 import nl.vpro.domain.media.gtaa.AbstractGTAAObject;
-import nl.vpro.domain.media.gtaa.Label;
-import nl.vpro.domain.media.gtaa.Namespaces;
+import nl.vpro.openarchives.oai.Label;
+import nl.vpro.openarchives.oai.Namespaces;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

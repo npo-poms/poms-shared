@@ -26,7 +26,7 @@ import org.springframework.web.client.HttpServerErrorException;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 
-import nl.vpro.domain.media.gtaa.Label;
+import nl.vpro.openarchives.oai.Label;
 import nl.vpro.domain.media.gtaa.Status;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
