@@ -27,10 +27,12 @@ public class PageUpdateChange extends Change<PageUpdate> {
         super(publishDate, id, deleted, tail, object);
     }
 
+    @Override
     @XmlElement
     public PageUpdate getObject() {
         return super.getObject();
     }
+    @Override
     public void setObject(PageUpdate p) {
         super.setObject(p);
     }
