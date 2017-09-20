@@ -29,5 +29,10 @@ public class ResourceElement {
     @XmlValue
     private String value;
 
+    // Noargs constructor for jaxb.
+    public ResourceElement() {
+
+    }
+
 
 }

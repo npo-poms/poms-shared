@@ -18,6 +18,7 @@ public class ThesaurusObjects {
                 return GTAAPerson.create(d);
             case "GeogragrafischeNaam":
                 return GTAATopic.create(d);
+                // TODO:
             default:
                 return ThesaurusItem.create(d);
         }
