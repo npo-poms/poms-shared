@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import nl.vpro.domain.AbstractChange;
+import nl.vpro.domain.Change;
 import nl.vpro.domain.media.gtaa.GTAAPerson;
 import nl.vpro.domain.media.gtaa.GTAATopic;
 import nl.vpro.domain.media.gtaa.ThesaurusItem;
@@ -24,7 +24,7 @@ import nl.vpro.domain.media.gtaa.ThesaurusObject;
 @ToString
 @EqualsAndHashCode
 @XmlRootElement
-public class ThesaurusChange<T extends ThesaurusObject> extends AbstractChange<T> {
+public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
 
     @XmlAttribute
     private Long sequence;
