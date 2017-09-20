@@ -9,13 +9,15 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import nl.vpro.domain.api.Constants;
-import nl.vpro.domain.media.gtaa.ThesaurusObject;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
+import nl.vpro.domain.api.Constants;
+import nl.vpro.domain.api.thesaurus.PersonResult;
 import nl.vpro.domain.api.thesaurus.ThesaurusResult;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
 
-import static nl.vpro.domain.api.Constants.*;
+import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
+import static nl.vpro.domain.api.Constants.MAX;
 
 @SuppressWarnings("RestParamTypeInspection")
 @Path(ThesaurusRestService.PATH)
@@ -34,7 +36,7 @@ public interface ThesaurusRestService {
 
     @GET
     @Path("/people")
-    ThesaurusResult.PersonList findPersons(
+    PersonResult findPersons(
             @QueryParam("text") @DefaultValue("") String text,
             @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max);
 

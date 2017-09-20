@@ -6,7 +6,7 @@ package nl.vpro.w3.rdf;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nl.vpro.domain.media.gtaa.Namespaces;
+import nl.vpro.openarchives.oai.Namespaces;
 
 import java.util.ArrayList;
 import java.util.List;
