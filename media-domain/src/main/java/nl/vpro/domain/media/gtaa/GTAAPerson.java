@@ -4,9 +4,6 @@
  */
 package nl.vpro.domain.media.gtaa;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,6 +13,9 @@ import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Person;
@@ -86,28 +86,24 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface {
     }
 
     public GTAAPerson(Person person) {
-    this.givenName = person.getGivenName();
-    this.familyName = person.getFamilyName();
-    status = person.getGtaaRecord() == null ? null : person.getGtaaRecord().getStatus();
+        this.givenName = person.getGivenName();
+        this.familyName = person.getFamilyName();
+        status = person.getGtaaRecord() == null ? null : person.getGtaaRecord().getStatus();
     }
 
     public static GTAAPerson create(Description description) {
         return create(description, null);
     }
 
+    @Override
     public String getValue() {
         return givenName + " " + familyName;
     }
 
+    @Override
     public String getId() {
         return gtaaUri;
     }
-
-    @Override
-    public String getType() {
-        return null;
-    }
-
 
     public static GTAAPerson create(Description description, String submittedPrefLabel) {
         if (description == null) {
@@ -154,7 +150,6 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface {
         return answer;
     }
 
-    @Override
     public String getPrefLabel() {
         return familyName + (givenName != null ? ", " + givenName  : "");
     }
