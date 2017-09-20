@@ -9,19 +9,21 @@ import java.time.Instant;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import nl.vpro.domain.AbstractChange;
-import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.GTAATopic;
 import nl.vpro.domain.media.gtaa.ThesaurusItem;
 import nl.vpro.domain.media.gtaa.ThesaurusObject;
 
 @ToString
 @EqualsAndHashCode
+@XmlRootElement
 public class ThesaurusChange<T extends ThesaurusObject> extends AbstractChange<T> {
 
     @XmlAttribute
@@ -44,8 +46,9 @@ public class ThesaurusChange<T extends ThesaurusObject> extends AbstractChange<T
 
     @Override
     @XmlElements({
-            @XmlElement(name = "person", namespace = Xmlns.MEDIA_NAMESPACE, type = GTAAPerson.class),
-            @XmlElement(name = "item", type = ThesaurusItem.class)
+        @XmlElement(name = "person", type = GTAAPerson.class),
+        @XmlElement(name = "topic", type = GTAATopic.class),
+        @XmlElement(name = "item", type = ThesaurusItem.class)
     })
 
     public T getObject() {
