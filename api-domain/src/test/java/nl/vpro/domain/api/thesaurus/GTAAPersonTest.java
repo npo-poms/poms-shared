@@ -1,7 +1,9 @@
 package nl.vpro.domain.api.thesaurus;
 
+import java.io.IOException;
 import java.io.StringReader;
 
+import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 
 import nl.vpro.domain.media.gtaa.GTAAPerson;
@@ -24,6 +26,16 @@ public class GTAAPersonTest {
             "  \"familyName\" : \"puk\",\n" +
             "}");
 
+    }
+
+
+    @Test
+    public void json2() throws IOException {
+        String example = "{ \"objectType\" : \"person\", \"familyName\":\"Puk\",\"givenName\":\"Pietje\",\"notes\":[null,\"vanuit POMS voor: POW_00700386\"]}\n" +
+            "Name\n";
+        GTAAPerson person = Jackson2Mapper.getLenientInstance().readValue(new StringReader(example), GTAAPerson.class);
+        Java6Assertions.assertThat(person.getFamilyName()).isEqualTo("Puk");
+        Java6Assertions.assertThat(person.getGivenName()).isEqualTo("Pietje");
     }
 
     @Test
