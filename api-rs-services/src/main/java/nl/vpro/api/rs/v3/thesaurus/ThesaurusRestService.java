@@ -25,13 +25,6 @@ import static nl.vpro.domain.api.Constants.MAX;
 public interface ThesaurusRestService {
     String TAG = "thesaurus";
     String PATH = "/" + TAG;
-    String ID = "mid";
-    String SORT = "sort";
-    String SINCE = "since";
-    String PUBLISHEDSINCE = "publishedSince";
-    String CHECK_PROFILE = "checkProfile";
-    String DELETES = "deletes";
-
 
 
     @GET
@@ -57,8 +50,9 @@ public interface ThesaurusRestService {
 
     @GET
     @Path("/items")
-    ThesaurusResult<ThesaurusObject> listItems(@QueryParam("text") @DefaultValue("") String text,
-                                               @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
+    ThesaurusResult<ThesaurusObject> listItems(
+        @QueryParam("text") @DefaultValue("") String text,
+        @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
 
 
     @GET
