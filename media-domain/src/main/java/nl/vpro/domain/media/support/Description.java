@@ -85,6 +85,10 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return source == null ? null : new Description(source, parent);
     }
 
+    public static Description main(String main, OwnerType type) {
+        return new Description(main, type, TextualType.MAIN);
+    }
+
     public String getDescription() {
         return description;
     }
