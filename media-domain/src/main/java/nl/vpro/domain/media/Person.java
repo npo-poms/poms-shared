@@ -7,13 +7,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import lombok.Getter;
-import nl.vpro.domain.PersonInterface;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.validation.NoHtml;
 
@@ -23,8 +22,7 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "personType",
     propOrder = {
         "givenName",
-        "familyName",
-        "prefLabel"
+        "familyName"
     })
 public class Person extends DomainObject implements PersonInterface {
 
@@ -49,8 +47,6 @@ public class Person extends DomainObject implements PersonInterface {
     @XmlElement
     protected String familyName;
 
-    @Getter
-    protected String prefLabel;
 
     @Column(nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
@@ -112,6 +108,7 @@ public class Person extends DomainObject implements PersonInterface {
     }
 
 
+    @Override
     public String getGivenName() {
         return givenName;
     }
@@ -120,6 +117,7 @@ public class Person extends DomainObject implements PersonInterface {
         this.givenName = value;
     }
 
+    @Override
     public String getFamilyName() {
         return familyName;
     }
@@ -187,6 +185,7 @@ public class Person extends DomainObject implements PersonInterface {
         this.gtaaRecord = gtaaRecord;
     }
 
+    @Override
     @XmlAttribute
     public String getGtaaUri() {
         return Optional.ofNullable(gtaaRecord)
