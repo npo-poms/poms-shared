@@ -13,7 +13,7 @@ public class ThesaurusItem extends AbstractThesaurusItem {
 
     public static ThesaurusItem create(Description description) {
         final ThesaurusItem answer = new ThesaurusItem();
-        answer.type = description.getType().getResource();
+        answer.type = description.getType() == null ? null : description.getType().getResource();
         fill(description, answer);
         return answer;
     }
