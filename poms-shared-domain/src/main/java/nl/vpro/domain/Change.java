@@ -24,7 +24,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Setter
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.NONE)
-public abstract class AbstractChange<T>  {
+public abstract class Change<T>  {
 
 
     @XmlAttribute
@@ -45,11 +45,11 @@ public abstract class AbstractChange<T>  {
     //@XmlElement(name = "object")
     private T object;
 
-    protected AbstractChange() {
+    protected Change() {
 
     }
 
-    protected AbstractChange(String id, T object,  Boolean deleted) {
+    protected Change(String id, T object, Boolean deleted) {
         this.id = id;
         this.object = object;
         this.deleted = deleted;
@@ -64,9 +64,9 @@ public abstract class AbstractChange<T>  {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AbstractChange)) return false;
+        if (!(o instanceof Change)) return false;
 
-        AbstractChange<?> that = (AbstractChange<?>) o;
+        Change<?> that = (Change<?>) o;
 
         if (publishDate != null ? !publishDate.equals(that.publishDate) : that.publishDate != null) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
