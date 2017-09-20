@@ -1,9 +1,6 @@
 package nl.vpro.domain.media.gtaa;
 
-import org.apache.commons.lang3.StringUtils;
-
 import nl.vpro.w3.rdf.Description;
-import nl.vpro.w3.rdf.ResourceElement;
 
 /**
  * @author Michiel Meeuwissen
@@ -13,19 +10,15 @@ public class ThesaurusObjects {
 
 
     public static ThesaurusObject toThesaurusObject(Description d) {
-        switch(toType(d.getInScheme())) {
-            case "Persoon":
+        switch(d.getInScheme().getResource()) {
+            case Schemes.PERSOONSNAMEN:
                 return GTAAPerson.create(d);
-            case "GeogragrafischeNaam":
+            case Schemes.ONDERWERPEN:
                 return GTAATopic.create(d);
                 // TODO:
             default:
                 return ThesaurusItem.create(d);
         }
-    }
-
-    private static String toType(ResourceElement inScheme) {
-        return StringUtils.substringAfterLast(inScheme.getResource(), "/");
     }
 
 

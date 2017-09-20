@@ -7,6 +7,8 @@ package nl.vpro.domain.media.gtaa;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+
+import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -18,7 +20,7 @@ import nl.vpro.w3.rdf.Description;
 public interface GTAARepository {
 
     CountedIterator<Record> getPersonUpdates(Instant from, Instant until);
-    
+
     CountedIterator<Record> getAllUpdates(Instant from, Instant until);
 
     Description submit(String prefLabel, List<Label> notes, String creator);

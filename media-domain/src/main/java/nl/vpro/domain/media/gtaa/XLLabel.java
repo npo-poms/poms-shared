@@ -7,14 +7,16 @@ package nl.vpro.domain.media.gtaa;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import static nl.vpro.domain.media.gtaa.Namespaces.SKOS_XL_LABEL;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
+import nl.vpro.openarchives.oai.Label;
+import nl.vpro.openarchives.oai.Namespaces;
 import nl.vpro.w3.rdf.LabelDescription;
 import nl.vpro.w3.rdf.ResourceElement;
+
+import static nl.vpro.openarchives.oai.Namespaces.SKOS_XL_LABEL;
 
 /**
  * @author Roelof Jan Koekoek

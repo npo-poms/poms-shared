@@ -2,14 +2,16 @@ package nl.vpro.domain.api.thesaurus;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 
-import nl.vpro.domain.media.gtaa.GTAAPerson;
-import nl.vpro.domain.media.gtaa.ThesaurusItem;
-import nl.vpro.domain.media.gtaa.ThesaurusObject;
+import nl.vpro.domain.media.Schedule;
+import nl.vpro.domain.media.gtaa.*;
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -68,9 +70,22 @@ public class GTAAPersonTest {
 
     @Test
     public void xml() throws Exception {
-        GTAAPerson person = GTAAPerson.builder().familyName("puk").build();
+        GTAAPerson person = GTAAPerson.builder()
+            .notes(Arrays.asList(Label.builder().value("bla").lang("nl").build()))
+            .knownAs(Arrays.asList(Names.builder().familyName("pietje").build()))
+            .familyName("puk")
+            .status(Status.approved)
+            .lastModified(LocalDateTime.of(2017, 9, 20, 10, 43, 0).atZone(Schedule.ZONE_ID).toInstant())
+            .build();
 
-        JAXBTestUtil.roundTripAndSimilarAndEquals(person, "<a />");
+        JAXBTestUtil.roundTripAndSimilarAndEquals(person, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<gtaa:person gtaa:status=\"approved\" gtaa:lastModified=\"2017-09-20T10:43:00+02:00\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:oai=\"http://www.openarchives.org/OAI/2.0/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:gtaa=\"urn:vpro:gtaa:2017\" xmlns:openskos=\"http://openskos.org/xmlns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n" +
+            "    <gtaa:familyName>puk</gtaa:familyName>\n" +
+            "    <gtaa:notes xml:lang=\"nl\">bla</gtaa:notes>\n" +
+            "    <gtaa:knownAs>\n" +
+            "        <gtaa:familyName>pietje</gtaa:familyName>\n" +
+            "    </gtaa:knownAs>\n" +
+            "</gtaa:person>");
 
     }
 }
