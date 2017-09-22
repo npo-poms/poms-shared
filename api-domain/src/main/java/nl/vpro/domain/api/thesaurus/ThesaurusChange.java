@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import nl.vpro.domain.Change;
 import nl.vpro.domain.media.gtaa.GTAAPerson;
-import nl.vpro.domain.media.gtaa.GTAASubject;
+import nl.vpro.domain.media.gtaa.GTAATopic;
 import nl.vpro.domain.media.gtaa.ThesaurusItem;
 import nl.vpro.domain.media.gtaa.ThesaurusObject;
 
@@ -47,7 +47,7 @@ public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
     @Override
     @XmlElements({
         @XmlElement(name = "person", type = GTAAPerson.class),
-        @XmlElement(name = "topic", type = GTAASubject.class),
+        @XmlElement(name = "topic", type = GTAATopic.class),
         @XmlElement(name = "item", type = ThesaurusItem.class)
     })
 
