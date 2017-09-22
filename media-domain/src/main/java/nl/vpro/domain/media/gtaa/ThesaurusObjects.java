@@ -14,12 +14,17 @@ public class ThesaurusObjects {
             case Schemes.PERSOONSNAMEN:
                 return GTAAPerson.create(d);
             case Schemes.ONDERWERPEN:
-                return GTAATopic.create(d);
-                // TODO:
+                return GTAASubject.create(d);
+            case Schemes.GENRE:
+                return GTAASubject.create(d);
+            case Schemes.NAMEN:
+                return GTAAName.create(d);
+            case Schemes.GEOGRAFISCHENAMEN:
+                return GTAAGeographicName.create(d);
+            case Schemes.MAKER:
+                return GTAAMaker.create(d);
             default:
                 return ThesaurusItem.create(d);
         }
     }
-
-
 }
