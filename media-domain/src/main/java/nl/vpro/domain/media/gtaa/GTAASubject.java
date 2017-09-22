@@ -6,11 +6,11 @@ import nl.vpro.w3.rdf.Description;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public class GTAATopic extends AbstractThesaurusItem {
+public class GTAASubject extends AbstractThesaurusItem {
 
 
-    public static GTAATopic create(Description description) {
-        final GTAATopic answer = new GTAATopic();
+    public static GTAASubject create(Description description) {
+        final GTAASubject answer = new GTAASubject();
         fill(description, answer);
         return answer;
     }
