@@ -4,7 +4,6 @@
  */
 package nl.vpro.domain.api;
 
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -22,11 +21,11 @@ import nl.vpro.util.DateUtils;
  */
 @XmlType(name = "changeType")
 @JsonPropertyOrder({
-        "sequence",
-     "publishDate",
+    "sequence",
+    "publishDate",
     "revision",
     "id",
-        "mid",
+    "mid",
     "deleted",
     "mergedTo",
     "media",
@@ -44,10 +43,11 @@ public class MediaChange extends Change<MediaObject> {
 
     @XmlAttribute
     private String mergedTo;
+
     public MediaChange() {
     }
 
-    @Builder
+    @lombok.Builder
     private MediaChange(Instant publishDate, Long revision, String mid, MediaObject media, Boolean deleted) {
         this(DateUtils.toLong(publishDate), revision, mid, media, deleted);
         setPublishDate(publishDate);
