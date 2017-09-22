@@ -20,7 +20,7 @@ public interface AssetService {
      */
     void store(String fileName, Asset asset);
 
-    String store(String fileName, InputStream stream);
+    String store(String fileName, InputStream stream, Runnable... callbacks);
 
     String append(String fileName, InputStream stream);
 
