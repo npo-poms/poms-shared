@@ -55,7 +55,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
     @SuppressWarnings("unchecked")
     private final PB self = (PB) this;
 
-    private PageBuilder(P page) {
+    PageBuilder(P page) {
         this.page = page;
     }
 
