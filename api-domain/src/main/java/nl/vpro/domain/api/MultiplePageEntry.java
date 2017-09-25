@@ -13,15 +13,8 @@ import nl.vpro.domain.page.Page;
  * @since 3.3
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "multiplePageEntryType", propOrder =
-    {
-
-    }
-)
-@JsonPropertyOrder(
-    {
-
-    })
+@XmlType(name = "multiplePageEntryType", propOrder = {})
+@JsonPropertyOrder({})
 public class MultiplePageEntry extends  MultipleEntry<Page> {
 
     public MultiplePageEntry() {
