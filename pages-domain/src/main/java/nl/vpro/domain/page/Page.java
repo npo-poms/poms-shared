@@ -83,6 +83,11 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @EqualsAndHashCode
 public class Page implements Embargo {
 
+
+    public static PageBuilder builder() {
+        return new PageBuilder(new Page());
+    }
+
     @NotNull
     private PageType type;
 
