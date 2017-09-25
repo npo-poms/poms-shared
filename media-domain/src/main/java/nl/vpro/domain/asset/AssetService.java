@@ -7,12 +7,21 @@ package nl.vpro.domain.asset;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 import nl.vpro.domain.media.update.Asset;
 
 public interface AssetService {
 
-    File get(String fileName);
+    default Optional<File> get(String fileName) {
+        File file = getFile(fileName);
+        if (file.exists() && file.isFile() && file.canRead()) {
+            return Optional.of(file);
+        }
+        return Optional.empty();
+    }
+
+    File getFile(String fileName);
 
     /**
      * Stores the given assets inputstream in the local asset store and replaces the wrapped asset with a new asset
