@@ -17,12 +17,14 @@ public class MultiplePageResultTest {
 
     @Test
     public void testJson() throws Exception {
-        MultiplePageResult list = new MultiplePageResult(Arrays.asList("http://vpro.nl/bla", "http://vpro.nl/foo"), Arrays.asList(new Page(PageType.PLAYER), null), null);
+        MultiplePageResult list = new MultiplePageResult(
+            Arrays.asList("http://vpro.nl/bla", "http://vpro.nl/foo"),
+            Arrays.asList(new Page(PageType.PLAYER), null), null
+        );
         assertThat(Jackson2Mapper.getInstance().writeValueAsString(list)).isEqualTo("{\"total\":2,\"items\":[{\"id\":\"http://vpro.nl/bla\",\"result\":{\"objectType\":\"page\",\"type\":\"PLAYER\"}},{\"id\":\"http://vpro.nl/foo\",\"error\":\"Not found http://vpro.nl/foo\"}]}");
 
     }
     @Test
-    //@Ignore("Fails for https://java.net/jira/browse/JAXB-1069")
     public void testXml() throws IOException, SAXException {
         MultiplePageResult list = new MultiplePageResult(Arrays.asList("http://vpro.nl/bla", "http://vpro.nl/foo"), Arrays.asList(new Page(PageType.PLAYER), null), null);
         JAXBTestUtil.roundTripAndSimilar(list, "<api:multiplePageResult total=\"2\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
