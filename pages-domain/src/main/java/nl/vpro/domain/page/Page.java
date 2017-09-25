@@ -84,8 +84,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class Page implements Embargo {
 
 
-    public static PageBuilder builder() {
-        return new PageBuilder(new Page());
+    public static <T extends PageBuilder<T, Page>> PageBuilder<T, Page> builder() {
+        return new PageBuilder<>(new Page());
     }
 
     @NotNull
