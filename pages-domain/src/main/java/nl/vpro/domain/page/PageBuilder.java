@@ -64,6 +64,11 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         return self;
     }
 
+    public PB type(PageType pt) {
+        page.setType(pt);
+        return self;
+    }
+
     public PB crids(String... crids) {
         List<Crid> list = new ArrayList<>(crids.length);
         for(String crid : crids) {
