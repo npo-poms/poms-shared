@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -29,6 +30,7 @@ import nl.vpro.xml.bind.DefaultDurationXmlAdapter;
  * @since 5.3
  */
 @XmlType(name = "durationRangeMatcherType", propOrder = {"begin", "end"})
+@JsonPropertyOrder({"begin", "end", "inclusiveEnd", "match"})
 public class DurationRangeMatcher extends RangeMatcher<Duration> implements Predicate<Duration> {
 
     @XmlElement
