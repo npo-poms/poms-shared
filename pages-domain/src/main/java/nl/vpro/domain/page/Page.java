@@ -1,6 +1,8 @@
 package nl.vpro.domain.page;
 
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 
 import java.time.Instant;
@@ -81,6 +83,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "lastModified"
     })
 @EqualsAndHashCode
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@lombok.Builder
 public class Page implements Embargo {
 
     @NotNull
