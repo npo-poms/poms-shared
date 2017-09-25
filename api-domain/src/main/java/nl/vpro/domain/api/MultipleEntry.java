@@ -1,7 +1,13 @@
 package nl.vpro.domain.api;
 
+import lombok.Data;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.constraint.PredicateTestResult;
 
@@ -9,15 +15,22 @@ import nl.vpro.domain.constraint.PredicateTestResult;
  * @author Michiel Meeuwissen
  * @since 3.3
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
+@Data
+@XmlType(propOrder = {"id", "result", "error", "reason"})
+@JsonPropertyOrder({"id", "result", "error", "reason"})
 public class MultipleEntry<T> {
 
+    @XmlElement
     private String id;
 
+    @XmlElement
     private T result;
 
+    @XmlElement
     private String error;
 
+    @XmlElement
     private PredicateTestResult<T> reason;
 
     public MultipleEntry(String id, T object) {
@@ -29,35 +42,4 @@ public class MultipleEntry<T> {
     public MultipleEntry() {
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public T getResult() {
-        return result;
-    }
-
-    public void setResult(T result) {
-        this.result = result;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public PredicateTestResult<T> getReason() {
-        return reason;
-    }
-
-    public void setReason(PredicateTestResult<T> reason) {
-        this.reason = reason;
-    }
 }
