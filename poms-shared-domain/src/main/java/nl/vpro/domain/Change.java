@@ -53,12 +53,15 @@ public abstract class Change<T>  {
         this.id = id;
         this.object = object;
         this.deleted = deleted;
-
     }
 
 
     public boolean isDeleted() {
         return deleted != null ? deleted : false;
+    }
+
+    public boolean isTail() {
+        return tail != null ? tail : false;
     }
 
     @Override
