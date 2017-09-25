@@ -27,11 +27,28 @@ public interface AssetService {
 
     File getFile(String fileName);
 
+    default String getMimeType(String fileName) {
+        fileName = getNormalFileName(fileName);
+        if (fileName.endsWith(".mp4")) {
+            return "video/mp4";
+        } else {
+            return "application/octet-stream";
+        }
+    }
+
+    default String getNormalFileName(String fileName) {
+        if (fileName.endsWith(".asset")) {
+            fileName = fileName.substring(0, fileName.length() - ".asset".length());
+        }
+        return fileName;
+    }
+
+
     /**
      * Stores the given assets inputstream in the local asset store and replaces the wrapped asset with a new asset
      * source referencing the filename in the local store.
      */
-    void store(String fileName, Asset asset);
+    String store(String fileName, Asset asset);
 
     String store(String fileName, InputStream stream, Runnable... callbacks);
 
