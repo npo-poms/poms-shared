@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -31,6 +32,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @since 2.0
  */
 @XmlType(name = "dateRangeMatcherType", propOrder = {"begin", "end"})
+@JsonPropertyOrder({"begin", "end", "inclusiveEnd", "match"})
 public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate<Instant> {
 
     @XmlElement
