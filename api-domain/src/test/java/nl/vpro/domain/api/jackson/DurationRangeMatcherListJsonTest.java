@@ -28,7 +28,7 @@ public class DurationRangeMatcherListJsonTest {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, list);
 
-        assertThat(writer.toString()).isEqualTo("[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}]");
+        assertThat(writer.toString()).isEqualTo("[{\"begin\":0,\"end\":3600000,\"inclusiveEnd\":false,\"match\":\"NOT\"}]");
 
         DurationRangeMatcherList out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), DurationRangeMatcherList.class);
         assertThat(out.asList()).containsExactly(new DurationRangeMatcher(Duration.ZERO, Duration.ofHours(1), false, Match.NOT));
@@ -61,7 +61,7 @@ public class DurationRangeMatcherListJsonTest {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, list);
 
-        assertThat(writer.toString()).isEqualTo("{\"value\":[{\"begin\":0,\"end\":3600000,\"match\":\"NOT\",\"inclusiveEnd\":false}],\"match\":\"not\"}");
+        assertThat(writer.toString()).isEqualTo("{\"value\":[{\"begin\":0,\"end\":3600000,\"inclusiveEnd\":false,\"match\":\"NOT\"}],\"match\":\"NOT\"}");
 
         DurationRangeMatcherList out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), DurationRangeMatcherList.class);
         assertThat(out.asList()).containsExactly(new DurationRangeMatcher(Duration.ZERO, Duration.ofHours(1), false, Match.NOT));
