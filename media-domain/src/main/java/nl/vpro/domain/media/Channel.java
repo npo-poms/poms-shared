@@ -11,13 +11,14 @@ import javax.xml.bind.annotation.XmlType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Displayable;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 @XmlEnum
 @XmlType(name = "channelEnum")
 @JsonSerialize(using = BackwardsCompatibleJsonEnum.Serializer.class)
 @JsonDeserialize(using = Channel.Deserializer.class)
-public enum Channel {
+public enum Channel implements Displayable {
     @XmlEnumValue("NED1")
     NED1 {
         @Override
@@ -2350,6 +2351,11 @@ public enum Channel {
 
     public String pdId() {
         return name();
+    }
+
+    @Override
+    public String getDisplayName() {
+        return toString();
     }
 
     //@JsonValue (would fix ignored test case, but not backwards compatible)
