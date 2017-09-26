@@ -3,13 +3,14 @@ package nl.vpro.domain.api.media;
 import java.util.List;
 
 import org.junit.Before;
-import org.mockito.Mockito;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.media.MediaObject;
+
+import static org.mockito.Mockito.mock;
 
 /**
  * TODO Currently tested in api-backend-media with nl.vpro.domain.api.media.ChangeIteratorWithCouchdbTest
@@ -21,9 +22,11 @@ public class ChangeIteratorTest {
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    private final ProfileDefinition<MediaObject> current = Mockito.mock(ProfileDefinition.class);
+    @SuppressWarnings("unchecked")
+    private final ProfileDefinition<MediaObject> current = mock(ProfileDefinition.class);
 
-    private final ProfileDefinition<MediaObject> previous = Mockito.mock(ProfileDefinition.class);
+    @SuppressWarnings("unchecked")
+    private final ProfileDefinition<MediaObject> previous = mock(ProfileDefinition.class);
 
     private List<MediaChange> nodes;
 
