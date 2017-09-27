@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -50,7 +51,7 @@ public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
         @XmlElement(name = "topic", type = GTAASubject.class),
         @XmlElement(name = "item", type = ThesaurusItem.class)
     })
-
+    @JsonIgnore
     public T getObject() {
         return super.getObject();
     }
@@ -69,7 +70,11 @@ public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
             @JsonSubTypes.Type(value = ThesaurusItem.class, name = "item")}
     )
     protected T getJsonObject() {
-        return super.getObject();
+        return getObject();
+    }
+
+    protected void setJsonObject(T o) {
+        setObject(o);
     }
 
 
