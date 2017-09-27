@@ -1,12 +1,11 @@
 package nl.vpro.domain.api.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.profile.ProfileDefinition;
@@ -18,9 +17,8 @@ import nl.vpro.util.FilteringIterator;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
+@Slf4j
 public class ChangeIterator implements Iterator<MediaChange> {
-
-    protected static final Logger LOG = LoggerFactory.getLogger(ChangeIterator.class);
 
     private static final int LOG_BATCH = 50000;
 
@@ -150,7 +148,7 @@ public class ChangeIterator implements Iterator<MediaChange> {
                     }
                 }
                 if (count % LOG_BATCH == 0) {
-                    LOG.info("{}: sequence: {} count: {}  skipped: updates: {}, deletes: {}", current.getName(), sequence, count, updatesSkipped, deletedsSkipped);
+                    log.info("{}: sequence: {} count: {}  skipped: updates: {}, deletes: {}", current.getName(), sequence, count, updatesSkipped, deletedsSkipped);
                 }
             }
             // handle last one
@@ -160,7 +158,7 @@ public class ChangeIterator implements Iterator<MediaChange> {
                 next.setPublishDate(publishDate);
                 nextnext = null;
                 if (count > LOG_BATCH) {
-                    LOG.info("{}: sequence: {} count: {}  skipped: updates: {}, deletes: {}. Ready.", current.getName(), sequence, count, updatesSkipped, deletedsSkipped);
+                    log.info("{}: sequence: {} count: {}  skipped: updates: {}, deletes: {}. Ready.", current.getName(), sequence, count, updatesSkipped, deletedsSkipped);
                 }
             }
             needsFindNext = false;

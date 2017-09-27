@@ -22,7 +22,7 @@ import nl.vpro.domain.media.gtaa.ThesaurusItem;
 import nl.vpro.domain.media.gtaa.ThesaurusObject;
 
 @ToString
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @XmlRootElement
 public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
 
