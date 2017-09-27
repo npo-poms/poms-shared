@@ -6,6 +6,8 @@ package nl.vpro.domain.user;
 
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 import nl.vpro.domain.Roles;
 
@@ -36,12 +38,15 @@ public interface UserService<T extends User> {
 
     void authenticate(String principalId);
 
+
+    Object getAuthentication();
+
+    void restoreAuthentication(Object authentication);
+
     default AutoCloseable systemAuthenticate(String principalId, String... roles) {
         authenticate(principalId);
         return this::dropAuthentication;
     }
-
-
 
     void dropAuthentication();
 
@@ -66,5 +71,19 @@ public interface UserService<T extends User> {
         return currentUserHasRole(Roles.PUBLISHER_ROLE);
     }
 
+    /**
+     * Submits callable in the given {@link ExecutorService}, but makes sure that it is executed as the current user
+     */
+    default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable) {
+        Object onBehalfOf = getAuthentication();
+        return executorService.submit(() -> {
+            try {
+                restoreAuthentication(onBehalfOf);
+                return callable.call();
+            } finally {
+                dropAuthentication();
+            }
+        });
+    }
 
 }
