@@ -28,8 +28,6 @@ public class PageJsonSchemaTest {
 
     private PageBuilder builder;
 
-
-
     @Before
     public void setUp() {
         builder = PageBuilder.page(PageType.ARTICLE);
