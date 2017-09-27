@@ -12,7 +12,8 @@ import org.apache.lucene.document.DateTools;
 import org.apache.lucene.search.NumericRangeQuery;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class LuceneHelperTest {
 
