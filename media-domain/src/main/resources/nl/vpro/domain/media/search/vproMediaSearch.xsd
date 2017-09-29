@@ -66,11 +66,13 @@
       <xsd:element name="sortRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="eventRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="scheduleEventRange" type="dateRangeType" minOccurs="0"/>
-      <xsd:element name="channel" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="channel" type="media:channelEnum" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="net" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="createdBy" type="xsd:string" minOccurs="0"/>
       <xsd:element name="creationRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="lastModifiedBy" type="xsd:string" minOccurs="0"/>
       <xsd:element name="lastModifiedRange" type="dateRangeType" minOccurs="0"/>
+      <xsd:element name="lastPublishedRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="tag" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="avType" type="media:avTypeEnum" minOccurs="0" />
       <xsd:element name="notAnEpisode" type="xsd:boolean" minOccurs="0"/>
@@ -81,6 +83,7 @@
       <xsd:element name="imagesCount" type="integerRangeType" minOccurs="0"/>
       <xsd:element name="findDeleted" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="excludedMid" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="ids" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="descendantOf" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="streamingPlatformStatus" type="media:streamingStatus" minOccurs="0" maxOccurs="unbounded"/>
 

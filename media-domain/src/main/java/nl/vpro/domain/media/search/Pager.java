@@ -20,11 +20,11 @@ public abstract class Pager<S extends SortField> {
         DESC
     }
 
-    @XmlElement
+    @XmlElement(required = false)
     @NotNull
     private Long offset = 0L;
 
-    @XmlElement(required = true)
+    @XmlElement(required = false)
     @NotNull
     private Integer max = null;
 
