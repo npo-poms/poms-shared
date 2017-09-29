@@ -15,11 +15,11 @@ import nl.vpro.openarchives.oai.Label;
 @JsonSubTypes(
     {
         @JsonSubTypes.Type(value = GTAAPerson.class, name = "person"),
-        @JsonSubTypes.Type(value = GTAATopic.class, name = "subject"),
+        @JsonSubTypes.Type(value = GTAASubject.class, name = "subject"),
         @JsonSubTypes.Type(value = GTAAGenre.class, name = "genre"),
         @JsonSubTypes.Type(value = ThesaurusItem.class, name = "item"),
     })
-@XmlSeeAlso({GTAAPerson.class, GTAATopic.class, GTAAGenre.class, ThesaurusItem.class})
+@XmlSeeAlso({GTAAPerson.class, GTAASubject.class, GTAAGenre.class, ThesaurusItem.class})
 public interface ThesaurusObject {
 
     String getId();
