@@ -11,7 +11,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import nl.vpro.openarchives.oai.Label;
 
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "objectType"
+)
 @JsonSubTypes(
     {
         @JsonSubTypes.Type(value = GTAAPerson.class, name = "person"),
@@ -22,7 +26,15 @@ import nl.vpro.openarchives.oai.Label;
         @JsonSubTypes.Type(value = GTAAName.class, name = "name"),
         @JsonSubTypes.Type(value = ThesaurusItem.class, name = "item")
     })
-@XmlSeeAlso({GTAAPerson.class, GTAASubject.class, GTAAGenre.class, GTAAGeographicName.class, GTAAMaker.class, GTAAName.class, ThesaurusItem.class})
+@XmlSeeAlso({
+    GTAAPerson.class,
+    GTAASubject.class,
+    GTAAGenre.class,
+    GTAAGeographicName.class,
+    GTAAMaker.class,
+    GTAAName.class,
+    ThesaurusItem.class
+})
 public interface ThesaurusObject {
 
     String getId();
