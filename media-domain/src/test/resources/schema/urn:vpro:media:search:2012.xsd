@@ -29,11 +29,13 @@
       <xsd:element name="sortRange" type="tns:dateRangeType" minOccurs="0"/>
       <xsd:element name="eventRange" type="tns:dateRangeType" minOccurs="0"/>
       <xsd:element name="scheduleEventRange" type="tns:dateRangeType" minOccurs="0"/>
-      <xsd:element name="channel" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="channel" type="channelEnum" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="net" type="net" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="createdBy" type="xsd:string" minOccurs="0"/>
       <xsd:element name="creationRange" type="tns:dateRangeType" minOccurs="0"/>
       <xsd:element name="lastModifiedBy" type="xsd:string" minOccurs="0"/>
       <xsd:element name="lastModifiedRange" type="tns:dateRangeType" minOccurs="0"/>
+      <xsd:element name="lastPublishedRange" type="tns:dateRangeType" minOccurs="0"/>
       <xsd:element name="tag" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="avType" type="avTypeEnum" minOccurs="0"/>
       <xsd:element name="notAnEpisode" type="xsd:boolean" minOccurs="0"/>
@@ -44,6 +46,7 @@
       <xsd:element name="imagesCount" type="tns:integerRangeType" minOccurs="0"/>
       <xsd:element name="findDeleted" type="xsd:boolean" minOccurs="0"/>
       <xsd:element name="excludedMid" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="ids" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="descendantOf" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="streamingPlatformStatus" type="streamingStatus" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
@@ -52,8 +55,8 @@
 
   <xsd:complexType name="mediaPagerType">
     <xsd:sequence>
-      <xsd:element name="offset" type="xsd:long"/>
-      <xsd:element name="max" type="xsd:int"/>
+      <xsd:element name="offset" type="xsd:long" minOccurs="0"/>
+      <xsd:element name="max" type="xsd:int" minOccurs="0"/>
       <xsd:element name="sort" type="tns:mediaSortField" minOccurs="0"/>
       <xsd:element name="order" type="tns:direction" minOccurs="0"/>
     </xsd:sequence>
