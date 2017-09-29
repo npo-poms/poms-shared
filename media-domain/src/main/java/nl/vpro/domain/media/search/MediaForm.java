@@ -19,7 +19,9 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.AVType;
+import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.MediaType;
+import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.StreamingStatus;
 import nl.vpro.domain.user.Organization;
@@ -46,10 +48,12 @@ import nl.vpro.domain.user.Organization;
     "eventRange",
     "scheduleEventRange",
     "channels",
+    "nets",
     "createdBy",
     "creationRange",
     "lastModifiedBy",
     "lastModifiedRange",
+    "lastPublishedRange",
     "tags",
     "avType",
     "notAnEpisode",
@@ -60,6 +64,7 @@ import nl.vpro.domain.user.Organization;
     "imagesCount",
     "findDeleted",
     "excludedMids",
+    "ids",
     "descendantOf",
     "streamingPlatformStatuses"
 
@@ -68,7 +73,7 @@ public class MediaForm {
 
     @XmlElement(required = true)
     @Valid
-    private MediaPager pager;
+    private MediaPager pager = new MediaPager();
 
     @XmlElement(name = "broadcaster")
     @JsonProperty("broadcasters")
@@ -136,7 +141,15 @@ public class MediaForm {
 
     @XmlElement(name = "channel")
     @JsonProperty("channels")
-    private Collection<String> channels;
+    @Getter
+    @Setter
+    private Collection<Channel> channels;
+
+    @XmlElement(name = "net")
+    @JsonProperty("nets")
+    @Getter
+    @Setter
+    private Collection<Net> nets;
 
     @XmlElement
     private String createdBy;
@@ -152,6 +165,11 @@ public class MediaForm {
 
     @XmlElement
     private DateRange scheduleEventRange;
+
+    @XmlElement
+    @Getter
+    @Setter
+    private DateRange lastPublishedRange;
 
     @XmlElement(name = "tag")
     @JsonProperty("tags")
@@ -197,6 +215,12 @@ public class MediaForm {
     @JsonProperty("excludedMids")
     private Collection<String> excludedMids;
 
+    @XmlElement(name = "ids")
+    @JsonProperty("ids")
+    @Getter
+    @Setter
+    private Collection<String> ids;
+
     @XmlAttribute
     @Getter
     @Setter
@@ -214,21 +238,12 @@ public class MediaForm {
     @Setter
     private Collection<StreamingStatus> streamingPlatformStatuses;
 
-
     public MediaForm() {
-        this(new MediaPager());
+        // for jaxb
     }
 
     public MediaForm(MediaPager pager) {
-        this(pager, (String) null);
-    }
-
-    public MediaForm(MediaPager pager, String text) {
-        this(pager, null, null, text, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-    }
-
-    public MediaForm(MediaPager pager, Collection<MediaType> types) {
-        this(pager, null, null, null, types, null, null, null, null, null, null, null, null, null, null, null, null, null);
+        this.pager = pager;
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -246,11 +261,13 @@ public class MediaForm {
         DateRange creationRange,
         String lastModifiedBy,
         DateRange lastModifiedRange,
+        DateRange lastPublishedRange,
         IntegerRange locationsCount,
         Boolean notAnEpisode,
         Boolean noMembers,
         Boolean noCredits,
-        OwnerType forOwner
+        OwnerType forOwner,
+        Collection<String> ids
         ) {
 
         if(pager == null) {
@@ -270,12 +287,14 @@ public class MediaForm {
         this.creationRange = creationRange;
         this.lastModifiedBy = lastModifiedBy;
         this.lastModifiedRange = lastModifiedRange;
+        this.lastPublishedRange = lastPublishedRange;
         this.locationsCount = locationsCount;
         this.notAnEpisode = notAnEpisode;
         this.findDeleted = null; // backwards compatiblity
         this.noMembers = noMembers;
         this.noCredits = noCredits;
         this.forOwner = forOwner;
+        this.ids = ids;
 
     }
 
@@ -318,7 +337,7 @@ public class MediaForm {
     }
 
     public boolean hasBroadcasters() {
-        return !isEmpty(broadcasters);
+        return has(broadcasters);
     }
 
     public Collection<String> getPortals() {
@@ -330,7 +349,7 @@ public class MediaForm {
     }
 
     public boolean hasPortals() {
-        return !isEmpty(portals);
+        return has(portals);
     }
 
     public String getText() {
@@ -359,7 +378,7 @@ public class MediaForm {
     }
 
     public boolean hasTitles() {
-        return !isEmpty(titles);
+        return has(titles);
     }
 
     public Collection<MediaType> getTypes() {
@@ -499,16 +518,13 @@ public class MediaForm {
         return eventRange != null && eventRange.hasValues();
     }
 
-    public Collection<String> getChannels() {
-        return channels;
-    }
-
-    public void setChannels(Collection<String> channels) {
-        this.channels = channels;
-    }
 
     public boolean hasChannels() {
-        return !isEmpty(channels);
+        return has(channels);
+    }
+
+    public boolean hasNets() {
+        return has(nets);
     }
 
     public String getCreatedBy() {
@@ -638,11 +654,19 @@ public class MediaForm {
     }
 
     public boolean hasExcludedMids() {
-        return ! isEmpty(excludedMids);
+        return has(excludedMids);
+    }
+
+    public boolean hasIds() {
+        return has(ids);
     }
 
     private static boolean isEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();
+    }
+
+    private static boolean has(Collection<?> collection) {
+        return ! isEmpty(collection);
     }
 
     private <T> Collection<T> collection(Collection<T> col) {
