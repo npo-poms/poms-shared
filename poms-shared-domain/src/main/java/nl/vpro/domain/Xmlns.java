@@ -75,6 +75,9 @@ public final class Xmlns {
     public static final String GTAA_NAMESPACE = "urn:vpro:gtaa:2017";
 
 
+    public static final String ADMIN_NAMESPACE = "urn:vpro:media:admin:2017";
+
+
     public static final URL XML_XSD = Xmlns.class.getResource("/nl/vpro/domain/media/w3/xml.xsd");
 
     public static final Schema SCHEMA;

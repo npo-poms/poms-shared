@@ -17,7 +17,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.util.DateUtils;
 import nl.vpro.util.TimeUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -62,9 +61,9 @@ public class DateRange implements Range<Instant, DateRange.Value> {
         @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
         @XmlSchemaType(name = "dateTime")
         Instant value;
-        
+
         public Value() {
-            
+
         }
         public Value(String value) {
             this.value = TimeUtils.parse(value).orElse(null);
@@ -75,7 +74,7 @@ public class DateRange implements Range<Instant, DateRange.Value> {
         }
 
 
-    @Builder
+        @lombok.Builder
         public Value(Boolean inclusive, Instant value) {
             super(inclusive);
             this.value = value;
