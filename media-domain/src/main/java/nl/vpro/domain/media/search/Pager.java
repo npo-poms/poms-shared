@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.search;
 
+import lombok.Data;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
@@ -11,6 +12,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlTransient
 @ToString
+@Data
 public abstract class Pager<S extends SortField> {
 
     public enum Direction {
@@ -20,7 +22,7 @@ public abstract class Pager<S extends SortField> {
 
     @XmlElement
     @NotNull
-    private long offset = 0;
+    private Long offset = 0L;
 
     @XmlElement(required = true)
     @NotNull
@@ -47,28 +49,9 @@ public abstract class Pager<S extends SortField> {
 
     }
 
-    public Long getOffset() {
-        return offset;
-    }
-
-    public Integer getMax() {
-        return max;
-    }
-
-    public S getSort() {
-        return sort;
-    }
-
-    public void setSort(S sort) {
-        this.sort = sort;
-    }
 
     public String getSortField() {
         return getSort().name();
-    }
-
-    public Direction getOrder() {
-        return order;
     }
 
 }
