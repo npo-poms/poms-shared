@@ -17,9 +17,12 @@ import nl.vpro.openarchives.oai.Label;
         @JsonSubTypes.Type(value = GTAAPerson.class, name = "person"),
         @JsonSubTypes.Type(value = GTAASubject.class, name = "subject"),
         @JsonSubTypes.Type(value = GTAAGenre.class, name = "genre"),
-        @JsonSubTypes.Type(value = ThesaurusItem.class, name = "item"),
+        @JsonSubTypes.Type(value = GTAAGeographicName.class, name = "geographicname"),
+        @JsonSubTypes.Type(value = GTAAMaker.class, name = "maker"),
+        @JsonSubTypes.Type(value = GTAAName.class, name = "name"),
+        @JsonSubTypes.Type(value = ThesaurusItem.class, name = "item")
     })
-@XmlSeeAlso({GTAAPerson.class, GTAASubject.class, GTAAGenre.class, ThesaurusItem.class})
+@XmlSeeAlso({GTAAPerson.class, GTAASubject.class, GTAAGenre.class, GTAAGeographicName.class, GTAAMaker.class, GTAAName.class, ThesaurusItem.class})
 public interface ThesaurusObject {
 
     String getId();
