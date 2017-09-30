@@ -516,6 +516,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter(AccessLevel.PROTECTED)
     protected String repubReason;
 
+    @Column
+    @XmlTransient
+    @Getter(AccessLevel.PROTECTED)
+    @Setter(AccessLevel.PROTECTED)
+    protected String repubDestinations;
+
     @Column(nullable = false)
     @JsonIgnore // Oh Jackson2...
     private Boolean locationAuthorityUpdate = false;
