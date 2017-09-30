@@ -461,12 +461,15 @@ public class MediaObjects {
         if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.isPublishable()) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             media.setRepubReason(reason);
+            media.setRepubDestinations(null);
+
         }
     }
 
     public static void markPublished(MediaObject media, Instant now, String reason) {
         media.setLastPublishedInstant(now);
         media.setRepubReason(reason);
+        media.setRepubDestinations(null);
     }
 
     public static boolean realizeAndExpirePredictions(MediaObject object) {
