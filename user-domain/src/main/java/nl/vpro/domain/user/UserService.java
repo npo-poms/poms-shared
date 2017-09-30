@@ -43,7 +43,7 @@ public interface UserService<T extends User> {
 
     void restoreAuthentication(Object authentication);
 
-    default AutoCloseable systemAuthenticate(String principalId, String... roles) {
+    default Logout systemAuthenticate(String principalId, String... roles) {
         authenticate(principalId);
         return this::dropAuthentication;
     }
@@ -85,5 +85,9 @@ public interface UserService<T extends User> {
             }
         });
     }
+    interface  Logout extends AutoCloseable {
+        @Override
+        void close();
 
+    }
 }
