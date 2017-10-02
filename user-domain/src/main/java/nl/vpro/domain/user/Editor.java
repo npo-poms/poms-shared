@@ -60,14 +60,15 @@ public class Editor extends AbstractUser {
     private SortedSet<ThirdParty> activeThirdPartyCache;
 
     @Transient
-    private Set<String> roles = new TreeSet<>();
+    private Set<String> roles = null;
 
     public Editor(Editor editor) {
         super(editor);
         this.broadcasters.addAll(editor.broadcasters);
         this.portals.addAll(editor.portals);
         this.thirdParties.addAll(editor.thirdParties);
-       this.roles.addAll(editor.getRoles());
+        this.roles = new TreeSet<>();
+        this.roles.addAll(editor.getRoles());
     }
 
     protected Editor() {
@@ -117,6 +118,9 @@ public class Editor extends AbstractUser {
 
 
     public void setRoles(Set<String> roles) {
+        if (roles == null && this.roles != null) {
+            log.warn("Setting roles to null!");
+        }
         this.roles = roles;
     }
 
