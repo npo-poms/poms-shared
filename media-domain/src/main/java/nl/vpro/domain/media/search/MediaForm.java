@@ -302,6 +302,8 @@ public class MediaForm {
 
     public static class Builder {
         Collection<String> broadcasters = new ArrayList<>();
+        MediaPager pager = new MediaPager();
+
         public Builder broadcasters(Collection<String> b) {
             if (b != null) {
                 this.broadcasters.addAll(b);
@@ -318,10 +320,21 @@ public class MediaForm {
             return text('"' + text + '"');
         }
 
-        public Builder sortOrder(MediaSortField field) {
-            MediaPager p = new MediaPager();
-            p.setSort(field);
-            return pager(p);
+        public Builder asc(MediaSortField field) {
+            pager.setSort(field);
+            pager.setOrder(Pager.Direction.ASC);
+            return this;
+        }
+
+        public Builder desc(MediaSortField field) {
+            pager.setSort(field);
+            pager.setOrder(Pager.Direction.DESC);
+            return this;
+        }
+
+        public Builder max(Integer max) {
+            pager.setMax(max);
+            return this;
         }
     }
 
