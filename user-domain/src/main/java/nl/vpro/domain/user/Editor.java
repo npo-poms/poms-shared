@@ -4,7 +4,6 @@
  */
 package nl.vpro.domain.user;
 
-import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -61,7 +60,15 @@ public class Editor extends AbstractUser {
     private SortedSet<ThirdParty> activeThirdPartyCache;
 
     @Transient
-    private Set<String> roles;
+    private Set<String> roles = new TreeSet<>();
+
+    public Editor(Editor editor) {
+        super(editor);
+        this.broadcasters.addAll(editor.broadcasters);
+        this.portals.addAll(editor.portals);
+        this.thirdParties.addAll(editor.thirdParties);
+       this.roles.addAll(editor.getRoles());
+    }
 
     protected Editor() {
     }
@@ -74,8 +81,17 @@ public class Editor extends AbstractUser {
         this(principalId, displayName, givenName, familyName, email, broadcaster, Collections.emptySet(), lastLogin);
     }
 
-    @Builder
-    Editor(String principalId, String displayName, String givenName, String familiyName, String email, Broadcaster broadcaster, Set<String> roles, Instant lastLogin) {
+    @lombok.Builder
+    Editor(
+        String principalId,
+        String displayName,
+        String givenName,
+        String familiyName,
+        String email,
+        Broadcaster broadcaster,
+        Set<String> roles,
+        Instant lastLogin
+    ) {
         super(principalId, displayName, email);
         if (broadcaster != null) {
             broadcasters.add(new BroadcasterEditor(this, broadcaster, true));
