@@ -45,6 +45,16 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
     protected AbstractUser() {
     }
 
+
+    protected AbstractUser(AbstractUser user) {
+        this.principalId = user.principalId;
+        this.givenName = user.givenName;
+        this.familyName = user.familyName;
+        this.displayName = user.displayName;
+        this.email = user.email;
+        this.lastLogin = user.lastLogin;
+    }
+
     public AbstractUser(String principalId, String displayName, String email) {
         if (principalId == null) {
             principalId = email;
