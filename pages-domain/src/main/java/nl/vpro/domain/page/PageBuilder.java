@@ -52,6 +52,11 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
     }
 
 
+    public static PageBuilder home(String url) {
+        return home().url(url);
+    }
+
+
     @SuppressWarnings("unchecked")
     private final PB self = (PB) this;
 
