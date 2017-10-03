@@ -223,7 +223,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         copyFrom(image);
         highlighted = image.isHighlighted();
         String imageUri = image.getImageUri();
-        this.image = imageUri.startsWith("urn:") ?
+        this.image = imageUri != null && imageUri.startsWith("urn:") ?
             imageUri : new ImageLocation(image.getImageUri());
         date = image.getDate();
         offset = image.getOffset();
