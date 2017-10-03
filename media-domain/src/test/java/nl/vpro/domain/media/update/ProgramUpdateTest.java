@@ -33,6 +33,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.validation.ConstraintViolations;
 import nl.vpro.validation.WarningValidatorGroup;
 
+import static nl.vpro.domain.media.MediaBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
@@ -172,6 +173,27 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
+
+    @Test
+    public void testGetPublishStopFromMediaObject() throws Exception {
+        ProgramUpdate update = ProgramUpdate.create(
+            program().images(Image.builder().publishStop(Instant.ofEpochMilli(5444)).build()
+        ));
+
+        String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images>\n" +
+            "        <image type=\"PICTURE\" publishStop=\"1970-01-01T01:00:05.444+01:00\" highlighted=\"false\">\n" +
+            "            <imageLocation/>\n" +
+            "        </image>\n" +
+            "    </images>\n" +
+            "    <segments/>\n" +
+            "</program>";
+
+        JAXBTestUtil.roundTripAndSimilar(update, expected);
+    }
+
     @Test
     public void testGetCrids() throws Exception {
         ProgramUpdate update = ProgramUpdate.create();
@@ -255,7 +277,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetTitlesWitOwner() throws Exception {
-        ProgramUpdate program = ProgramUpdate.create(MediaBuilder.program().titles(
+        ProgramUpdate program = ProgramUpdate.create(program().titles(
             new Title("hoofdtitel omroep", OwnerType.BROADCASTER, TextualType.MAIN),
             new Title("hoofdtitel mis", OwnerType.MIS, TextualType.MAIN)).build());
 
@@ -511,7 +533,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             .owner(OwnerType.NEBO)
             .build();
 
-        Program program = MediaBuilder.program().images(image, image2).build();
+        Program program = program().images(image, image2).build();
         ProgramUpdate update = ProgramUpdate.create(program);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -647,7 +669,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void updateRelations() {
-        Program program = MediaBuilder.program().relations(Relation.ofText(RelationDefinition.of("A", "VPRO"), "aa")).build();
+        Program program = program().relations(Relation.ofText(RelationDefinition.of("A", "VPRO"), "aa")).build();
         ProgramUpdate update = ProgramUpdate.create(program);
         update.getRelations().first().setText("bbb");
 
@@ -684,7 +706,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         ProgramUpdate clip = ProgramUpdate
             .create(
-                MediaBuilder.program(ProgramType.CLIP)
+                program(ProgramType.CLIP)
                     .clearBroadcasters()
                     .broadcasters("VPRO")
                     .locations(
@@ -723,7 +745,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testCountriesAndLanguages() throws IOException, SAXException {
-        Program program = MediaBuilder.program().countries("NL").languages("nl").build();
+        Program program = program().countries("NL").languages("nl").build();
         ProgramUpdate update = ProgramUpdate.create(program);
         JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
