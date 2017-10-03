@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.URI;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,6 +30,8 @@ import javax.xml.validation.SchemaFactory;
 
 import org.apache.commons.lang3.StringUtils;
 import org.meeuw.jaxbdocumentation.DocumentationAdder;
+import org.w3c.dom.ls.LSInput;
+import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.SAXException;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
@@ -39,7 +42,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  * @since 5.4
  */
 @Slf4j
-public abstract class Mappings implements Function<String, File> {
+public abstract class Mappings implements Function<String, File>, LSResourceResolver {
     protected final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
@@ -215,6 +218,24 @@ public abstract class Mappings implements Function<String, File> {
             return getFileWithDocumentation(namespace);
         } else {
             return getFile(namespace);
+        }
+    }
+
+
+    @Override
+    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
+        URL url = ResourceResolver.resolveToURL(namespaceURI);
+        if (url != null) {
+            return ResourceResolver.resolveNamespaceToLS(namespaceURI);
+        }
+
+        try {
+            InputStream resource = new FileInputStream(apply(namespaceURI));
+            LSInput lsinput = ResourceResolver.DOM.createLSInput();
+            lsinput.setCharacterStream(new InputStreamReader(resource));
+            return lsinput;
+        } catch (FileNotFoundException fne) {
+            throw new RuntimeException(fne);
         }
     }
 

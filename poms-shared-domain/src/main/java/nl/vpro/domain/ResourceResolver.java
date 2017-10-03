@@ -28,7 +28,7 @@ import org.w3c.dom.ls.LSResourceResolver;
 public class ResourceResolver implements LSResourceResolver {
 
 
-    private static DOMImplementationLS DOM;
+    public static DOMImplementationLS DOM;
     static {
         try {
             DOMImplementation impl  = DOMImplementationRegistry.newInstance().getDOMImplementation("XML 3.0");
@@ -77,8 +77,7 @@ public class ResourceResolver implements LSResourceResolver {
         }
     }
 
-    @Override
-    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
+    public static LSInput resolveNamespaceToLS(String namespaceURI) {
 
         InputStream resource = resolve(namespaceURI);
         if (resource != null) {
@@ -88,6 +87,11 @@ public class ResourceResolver implements LSResourceResolver {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
+        return resolveNamespaceToLS(namespaceURI);
     }
 
 }
