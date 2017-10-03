@@ -1,10 +1,9 @@
 package nl.vpro.domain.media.bind;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.util.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -24,10 +23,8 @@ import nl.vpro.jackson2.Jackson2Mapper;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
+@Slf4j
 public class BackwardsCompatibility {
-
-    private final static Logger LOG = LoggerFactory.getLogger(BackwardsCompatibility.class);
-
 
     private static final ThreadLocal<Boolean> v1Compatibility = ThreadLocal.withInitial(() -> false);
 
@@ -104,14 +101,14 @@ public class BackwardsCompatibility {
             protected void serializeValue(CountryCode value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
                 if (v1Compatibility.get()) {
                     if (value == null || value.getAlpha2() == null) {
-                        LOG.warn("country code {} is null", value);
+                        log.warn("country code {} is null", value);
                         jgen.writeNull();
                     } else {
                         jgen.writeString(value.getAlpha2());
                     }
                 } else {
                     if (value == null) {
-                        LOG.warn("country code is null");
+                        log.warn("country code is null");
                         jgen.writeNull();
                     } else {
                         jgen.writeObject(new CountryWrapper(value));
