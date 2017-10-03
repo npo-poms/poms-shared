@@ -52,7 +52,7 @@ public abstract class Change<T>  {
     protected Change(String id, T object, Boolean deleted) {
         this.id = id;
         this.object = object;
-        this.deleted = deleted;
+        this.deleted = deleted == null || ! deleted ? null : true;
     }
 
 
