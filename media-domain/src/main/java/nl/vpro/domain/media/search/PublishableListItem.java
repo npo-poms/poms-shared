@@ -9,6 +9,7 @@ import java.time.Instant;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Embargo;
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Editor;
@@ -59,8 +60,8 @@ public abstract class PublishableListItem implements Embargo {
         this.creationDate = mediaObject.getCreationInstant();
         this.createdBy = mediaObject.getCreatedBy();
 
-        this.publishStart = mediaObject.getPublishStartInstant();
-        this.publishStop = mediaObject.getPublishStopInstant();
+        Embargos.copy(mediaObject, this);
+
         this.lastPublished = mediaObject.getLastPublishedInstant();
 
     }
