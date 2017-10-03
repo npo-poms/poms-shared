@@ -27,7 +27,7 @@ public class MediaFormTest {
                 "    <s:pager>\n" +
                 "        <s:offset>0</s:offset>\n" +
                 "        <s:max>1000</s:max>\n" +
-                "        <s:sort>creationDate</s:sort>\n" +
+                "        <s:sort>lastModified</s:sort>\n" +
                 "        <s:order>ASC</s:order>\n" +
                 "    </s:pager>\n" +
                 "</s:mediaForm>\n"
