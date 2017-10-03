@@ -1,11 +1,17 @@
 package nl.vpro.domain.media.search;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import nl.vpro.domain.media.support.Image;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.support.License;
 
 /**
  * @since 3.5
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class ImageListItem extends PublishableListItem {
     private String title;
 
@@ -16,6 +22,8 @@ public class ImageListItem extends PublishableListItem {
     private License license;
 
     private String sourceName;
+
+    private OwnerType owner;
 
     public ImageListItem() {
     }
@@ -28,47 +36,7 @@ public class ImageListItem extends PublishableListItem {
         this.imageUri = image.getImageUri();
         this.license = image.getLicense();
         this.sourceName = image.getSourceName();
-
-
+        this.owner = image.getOwner();
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getImageUri() {
-        return imageUri;
-    }
-
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
-    }
-
-    public License getLicense() {
-        return license;
-    }
-
-    public void setLicense(License license) {
-        this.license = license;
-    }
-
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
 }
