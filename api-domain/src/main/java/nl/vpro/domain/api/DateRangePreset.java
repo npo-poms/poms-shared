@@ -11,6 +11,7 @@ import java.time.temporal.ChronoUnit;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+import nl.vpro.domain.Displayable;
 import nl.vpro.domain.media.Schedule;
 
 /**
@@ -19,10 +20,10 @@ import nl.vpro.domain.media.Schedule;
  */
 @XmlEnum
 @XmlType(name = "dateRangePresetTypeEnum")
-public enum DateRangePreset implements RangeFacetItem<Instant> {
+public enum DateRangePreset implements RangeFacetItem<Instant>, Displayable {
     BEFORE_LAST_YEAR {
         @Override
-        public String getName() {
+        public String getDisplayName() {
             return "Voor vorig jaar";
         }
 
@@ -39,7 +40,7 @@ public enum DateRangePreset implements RangeFacetItem<Instant> {
 
     LAST_YEAR {
         @Override
-        public String getName() {
+        public String getDisplayName() {
             return "Vorig jaar";
         }
 
@@ -51,7 +52,7 @@ public enum DateRangePreset implements RangeFacetItem<Instant> {
 
     LAST_MONTH {
         @Override
-        public String getName() {
+        public String getDisplayName() {
             return "Vorige maand";
         }
 
@@ -63,7 +64,7 @@ public enum DateRangePreset implements RangeFacetItem<Instant> {
 
     LAST_WEEK {
         @Override
-        public String getName() {
+        public String getDisplayName() {
             return "Vorige week";
         }
 
@@ -75,7 +76,7 @@ public enum DateRangePreset implements RangeFacetItem<Instant> {
 
     YESTERDAY {
         @Override
-        public String getName() {
+        public String getDisplayName() {
             return "Gisteren";
         }
 
@@ -87,7 +88,7 @@ public enum DateRangePreset implements RangeFacetItem<Instant> {
 
     TODAY {
         @Override
-        public String getName() {
+        public String getDisplayName() {
             return "Vandaag";
         }
 
@@ -99,7 +100,7 @@ public enum DateRangePreset implements RangeFacetItem<Instant> {
 
     THIS_WEEK {
         @Override
-        public String getName() {
+        public String getDisplayName() {
             return "Deze week";
         }
 
@@ -111,7 +112,7 @@ public enum DateRangePreset implements RangeFacetItem<Instant> {
 
     TOMORROW {
         @Override
-        public String getName() {
+        public String getDisplayName() {
             return "Morgen";
         }
 
@@ -139,6 +140,11 @@ public enum DateRangePreset implements RangeFacetItem<Instant> {
 
     ZonedDateTime today() {
         return ZonedDateTime.now(Schedule.ZONE_ID).truncatedTo(ChronoUnit.DAYS);
+    }
+
+    @Override
+    public String getName() {
+        return name();
     }
 
     @Override
