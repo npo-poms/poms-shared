@@ -5,6 +5,7 @@ import java.time.Instant;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.Embargo;
+import nl.vpro.domain.Embargos;
 import nl.vpro.domain.support.License;
 import nl.vpro.util.TimeUtils;
 
@@ -70,6 +71,7 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
         setSourceName(image.getSourceName());
         setCredits(image.getCredits());
         setDate(image.getDate());
+        Embargos.copy(image, this);
     }
 
 
