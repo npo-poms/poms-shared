@@ -37,7 +37,7 @@ import nl.vpro.domain.media.MediaObject;
 public class MediaForm extends AbstractMediaForm implements SortableForm, Predicate<MediaObject> {
 
 
-    public static MediaFormBuilder  builder() {
+    public static MediaFormBuilder builder() {
         return MediaFormBuilder.form();
     }
 

@@ -56,7 +56,6 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-
     public MediaFormBuilder mediaIds(String... mediaIds) {
         search().setMediaIds(textMatchers(Match.SHOULD, mediaIds));
         return this;
