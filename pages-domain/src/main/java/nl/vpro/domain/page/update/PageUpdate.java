@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -24,6 +25,7 @@ import nl.vpro.domain.page.util.Urls;
 import nl.vpro.domain.page.validation.ValidBroadcaster;
 import nl.vpro.domain.page.validation.ValidGenre;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.NoHtmlList;
 import nl.vpro.validation.URI;
@@ -363,6 +365,7 @@ public class PageUpdate {
     }
 
     @JsonProperty("_rev")
+    @JsonView(Views.Publisher.class)
     public String getRevision() {
         return rev;
     }
@@ -423,7 +426,6 @@ public class PageUpdate {
         if (statRefs != null ? !statRefs.equals(that.statRefs) : that.statRefs != null) return false;
         if (images != null ? !images.equals(that.images) : that.images != null) return false;
         if (relations != null ? !relations.equals(that.relations) : that.relations != null) return false;
-        if (rev != null ? !rev.equals(that.rev) : that.rev != null) return false;
         if (lastPublished != null ? !lastPublished.equals(that.lastPublished) : that.lastPublished != null)
             return false;
         if (creationDate != null ? !creationDate.equals(that.creationDate) : that.creationDate != null) return false;
@@ -451,7 +453,6 @@ public class PageUpdate {
         result = 31 * result + (statRefs != null ? statRefs.hashCode() : 0);
         result = 31 * result + (images != null ? images.hashCode() : 0);
         result = 31 * result + (relations != null ? relations.hashCode() : 0);
-        result = 31 * result + (rev != null ? rev.hashCode() : 0);
         result = 31 * result + (lastPublished != null ? lastPublished.hashCode() : 0);
         result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
         result = 31 * result + (lastModified != null ? lastModified.hashCode() : 0);
