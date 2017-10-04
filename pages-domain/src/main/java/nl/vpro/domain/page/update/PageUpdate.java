@@ -391,16 +391,6 @@ public class PageUpdate {
         this.lastPublished = lastPublished;
     }
 
-    @JsonProperty("_id")
-    public String getId() {
-        return getUrl();
-    }
-
-    public void setId(String u) {
-        setUrl(u);
-    }
-
-
     @Override
     public String toString() {
         return url + (crids != null ? (" " + crids) : "") + " " + getTitle();
