@@ -47,8 +47,7 @@ public class PageUpdateChangeTest {
             "  \"deleted\" : false,\n" +
             "  \"object\" : {\n" +
             "    \"type\" : \"ARTICLE\",\n" +
-            "    \"url\" : \"http://www.vpro.nl/pagina/1\",\n" +
-            "    \"_id\" : \"http://www.vpro.nl/pagina/1\"\n" +
+            "    \"url\" : \"http://www.vpro.nl/pagina/1\"\n" +
             "  }\n" +
             "}");
 

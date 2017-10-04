@@ -40,7 +40,6 @@ public class MediaChangeTest {
                 "  \"publishDate\" : 1469014680000,\n" +
                 "  \"id\" : \"MID_123\",\n" +
                 "  \"mid\" : \"MID_123\",\n" +
-                "  \"deleted\" : false,\n" +
                 "  \"media\" : {\n" +
                 "    \"objectType\" : \"program\",\n" +
                 "    \"embeddable\" : true,\n" +
@@ -63,7 +62,7 @@ public class MediaChangeTest {
         ;
 
         JAXBTestUtil.assertThatXml(change).isSimilarTo("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<api:change publishDate=\"2016-07-20T13:38:00+02:00\" id=\"MID_123\" deleted=\"false\" sequence=\"1469014680000\" mid=\"MID_123\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "<api:change publishDate=\"2016-07-20T13:38:00+02:00\" id=\"MID_123\" sequence=\"1469014680000\" mid=\"MID_123\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:media xsi:type=\"media:programType\" embeddable=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "        <media:credits/>\n" +
             "        <media:locations/>\n" +
