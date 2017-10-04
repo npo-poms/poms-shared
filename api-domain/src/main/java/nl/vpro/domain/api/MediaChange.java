@@ -48,9 +48,9 @@ public class MediaChange extends Change<MediaObject> {
     }
 
     @lombok.Builder
-    private MediaChange(Instant publishDate, Long revision, String mid, MediaObject media, Boolean deleted) {
-        this(DateUtils.toLong(publishDate), revision, mid, media, deleted);
-        setPublishDate(publishDate);
+    private MediaChange(Instant publishDate, Long revision, String mid, MediaObject media, Boolean deleted, MediaSince since) {
+        this(DateUtils.toLong(MediaSince.instant(publishDate, since)), revision, MediaSince.mid(mid, since), media, deleted);
+        setPublishDate(MediaSince.instant(publishDate, since));
     }
 
     private MediaChange(Long sequence, Long revision, String mid, MediaObject media, Boolean deleted) {
@@ -92,7 +92,7 @@ public class MediaChange extends Change<MediaObject> {
 
 
     public static MediaChange tail(Instant publishDate, Long sequence) {
-        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null);
+        MediaChange tail = new MediaChange(publishDate, sequence, null, null, null, null);
         tail.setTail(true);
         return tail;
     }
@@ -112,15 +112,15 @@ public class MediaChange extends Change<MediaObject> {
         switch (media.getWorkflow()) {
             case DELETED:
             case REVOKED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, true);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null);
                 break;
 
             case PUBLISHED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, false);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, false, null);
                 break;
 
             case MERGED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, true);
+                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null);
                 change.setMergedTo(media.getMergedToRef());
                 break;
 
