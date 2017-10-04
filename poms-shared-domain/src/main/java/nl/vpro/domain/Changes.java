@@ -10,7 +10,6 @@ import java.util.Iterator;
 import nl.vpro.util.CloseableIterator;
 
 /**
- * Represents a collection os {@link }
  * @author Michiel Meeuwissen
  * @since 5.1
  */
