@@ -174,7 +174,13 @@ public class PageUpdateBuilderTest {
             .creationDate(TEST_INSTANT.minus(1, ChronoUnit.DAYS))
             .lastPublished(TEST_INSTANT.plus(1, ChronoUnit.DAYS))
             .build();
-        String test = "{\"type\":\"ARTICLE\",\"url\":\"http://www/vpro.nl\",\"publishStart\":1460973600000,\"lastPublished\":1461060000000,\"creationDate\":1460887200000,\"_id\":\"http://www/vpro.nl\"}";
+        String test = "{\n" +
+            "  \"type\" : \"ARTICLE\",\n" +
+            "  \"url\" : \"http://www/vpro.nl\",\n" +
+            "  \"publishStart\" : 1460973600000,\n" +
+            "  \"lastPublished\" : 1461060000000,\n" +
+            "  \"creationDate\" : 1460887200000\n" +
+            "}";
         PageUpdate result = Jackson2TestUtil.roundTripAndSimilar(page, test);
         assertThat(result.getPublishStart()).isEqualTo(TEST_INSTANT);
         assertThat(result.getCreationDate()).isEqualTo(TEST_INSTANT.minus(1, ChronoUnit.DAYS));
