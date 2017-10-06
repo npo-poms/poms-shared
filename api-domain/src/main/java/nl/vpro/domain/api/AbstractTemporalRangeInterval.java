@@ -104,7 +104,6 @@ public abstract class AbstractTemporalRangeInterval<T extends Comparable<T>> imp
         static Interval parse(String input) {
             java.util.regex.Matcher matcher = PATTERN.matcher(input.toUpperCase());
 
-
             if (!matcher.matches()) {
                 throw new IllegalArgumentException(input);
             }
