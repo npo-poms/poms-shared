@@ -46,6 +46,7 @@ public class DateRangeFacetItem implements RangeFacetItem<Instant> {
     public DateRangeFacetItem() {
     }
 
+    @lombok.Builder
     public DateRangeFacetItem(String name, Instant begin, Instant end) {
         this.name = name;
         this.begin = begin;
