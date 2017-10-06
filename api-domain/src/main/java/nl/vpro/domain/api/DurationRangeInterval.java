@@ -5,7 +5,6 @@
 package nl.vpro.domain.api;
 
 import java.time.Duration;
-import java.time.Instant;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -18,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "durationRangeIntervalType", propOrder = {
 })
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DurationRangeInterval extends AbstractTemporalRangeInterval<Duration> {
+public class DurationRangeInterval extends AbstractTemporalAmountRangeInterval<Duration> {
 
 
     public DurationRangeInterval() {
@@ -29,12 +28,10 @@ public class DurationRangeInterval extends AbstractTemporalRangeInterval<Duratio
     }
 
     @Override
-    public boolean matches(Duration begin, Duration end) {
-        Interval parsed = parsed();
-        return parsed.isBucketBegin(Instant.ofEpochMilli(begin.toMillis()))
-            && parsed.getBucketEnd(Instant.ofEpochMilli(begin.toMillis())).equals(Instant.ofEpochMilli(end.toMillis()))
-            ;
+    public Interval parsed() {
+        return new Interval(1, Unit.HOUR);
     }
+
 
 }
 

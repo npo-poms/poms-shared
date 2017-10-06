@@ -46,6 +46,7 @@ public class DurationRangeFacetItem implements RangeFacetItem<Duration> {
     public DurationRangeFacetItem() {
     }
 
+    @lombok.Builder
     public DurationRangeFacetItem(String name, Duration begin, Duration end) {
         this.name = name;
         this.begin = begin;

@@ -4,7 +4,10 @@
  */
 package nl.vpro.domain.api;
 
-import java.time.temporal.Temporal;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.temporal.TemporalAmount;
 
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -19,36 +22,31 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlType(name = "abstractRangeIntervalType", propOrder = {
     "interval"})
 @XmlAccessorType(XmlAccessType.FIELD)
-public abstract class AbstractTemporalRangeInterval<T extends Comparable<T> & Temporal> implements RangeFacet<T> {
+public abstract class AbstractTemporalAmountRangeInterval<T extends TemporalAmount & Comparable<T>> implements RangeFacet<T> {
 
-    public static final String TEMPORAL_AMOUNT_INTERVAL = AbstractTemporalAmountRangeInterval.TEMPORAL_AMOUNT_INTERVAL;
+    public static final String TEMPORAL_AMOUNT_INTERVAL = "(\\d+)?\\s*(YEAR|MONTH|WEEK|DAY|HOUR|MINUTE)S?";
 
 
     @XmlValue
     @Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
+    @Getter
+    @Setter
     private String interval;
 
-    public AbstractTemporalRangeInterval() {
+    public AbstractTemporalAmountRangeInterval() {
     }
 
-    public AbstractTemporalRangeInterval(String interval) {
-        this.interval = interval;
-    }
-
-    public String getInterval() {
-        return interval;
-    }
-
-    public void setInterval(String interval) {
+    public AbstractTemporalAmountRangeInterval(String interval) {
         this.interval = interval;
     }
 
     public abstract Interval parsed();
 
-
     @Override
     public boolean matches(T begin, T end) {
-        return parsed().isBucketBegin(begin) && parsed().isBucketEnd(end);
+        Interval parsed = parsed();
+        return parsed.isBucketBegin(begin)
+            && parsed.isBucketEnd(end);
     }
 
 
@@ -60,7 +58,7 @@ public abstract class AbstractTemporalRangeInterval<T extends Comparable<T> & Te
 
         @Override
         public boolean isBucketBegin(T begin) {
-            begin.get(getUnit().getChronoField());
+            //return begin != null && begin.get(getUnit().getChronoField().getRangeUnit());
             return false;
 
         }
