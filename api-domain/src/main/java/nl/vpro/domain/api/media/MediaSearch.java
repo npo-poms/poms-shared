@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.jackson.media.ScheduleEventSearchListJson;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.search.TitleForm;
 import nl.vpro.domain.media.support.AuthorizedDuration;
 import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.Tag;
@@ -141,6 +142,11 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Setter
     private TextMatcherList contentRatings;
 
+    @Valid
+    @Getter
+    @Setter
+    private List<TitleSearch> titles;
+
 
     /**
      * @deprecated For json backwards compatibility
@@ -154,15 +160,15 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Override
     public boolean hasSearches() {
         return text != null ||
-            atLeastOneHasSearches(mediaIds, sortDates, types, avTypes, broadcasters, locations, tags, durations, descendantOf, episodeOf, memberOf, relations, scheduleEvents, ageRatings, contentRatings);
+            atLeastOneHasSearches(mediaIds, sortDates, types, avTypes, broadcasters, locations, tags, durations, descendantOf, episodeOf, memberOf, relations, scheduleEvents, ageRatings, contentRatings, titles);
     }
 
     @Override
     public boolean test(@Nullable MediaObject input) {
         return input != null && (
             applyText(input) &&
-            applyMediaIds(input) &&
-            applyAvTypes(input)) &&
+                applyMediaIds(input) &&
+                applyAvTypes(input)) &&
             applyTypes(input) &&
             applySortDates(input) &&
             applyLastModifiedDates(input) &&
@@ -175,13 +181,14 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             applyDescendantOf(input) &&
             applyEpisodeOf(input) &&
             applyMemberOf(input) &&
-            applyRelations(input)&&
-            applySchedule(input);
+            applyRelations(input) &&
+            applySchedule(input) &&
+            applyTitles(input);
     }
 
     protected boolean applyAvTypes(MediaObject input) {
         AVType avType = input.getAVType();
-        if(avType == null) {
+        if (avType == null) {
             return avTypes == null;
         }
         return Matchers.listPredicate(avTypes).test(input.getAVType().name());
@@ -190,23 +197,23 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
 
     protected boolean applyTypes(MediaObject input) {
         MediaType mediaType = MediaType.getMediaType(input);
-        if(mediaType == null) {
+        if (mediaType == null) {
             return types == null;
         }
         return Matchers.listPredicate(types).test(mediaType.name());
     }
 
     protected boolean applyText(MediaObject input) {
-        if(text == null) {
+        if (text == null) {
             return true;
         }
-        for(Title title : input.getTitles()) {
-            if(Matchers.tokenizedPredicate(text).test(title.getTitle())) {
+        for (Title title : input.getTitles()) {
+            if (Matchers.tokenizedPredicate(text).test(title.getTitle())) {
                 return true;
             }
         }
-        for(Description description : input.getDescriptions()) {
-            if(Matchers.tokenizedPredicate(text).test(description.getDescription())) {
+        for (Description description : input.getDescriptions()) {
+            if (Matchers.tokenizedPredicate(text).test(description.getDescription())) {
                 return true;
             }
         }
@@ -264,10 +271,10 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected boolean applyEpisodeOf(MediaObject input) {
-        if(!(input instanceof Program)) {
+        if (!(input instanceof Program)) {
             return false;
         }
-        Program program = (Program)input;
+        Program program = (Program) input;
         return Matchers.toPredicate(episodeOf, MemberRef::getMidRef).test(program.getEpisodeOf());
     }
 
@@ -276,12 +283,12 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected boolean applyRelations(MediaObject input) {
-        if(relations == null) {
+        if (relations == null) {
             return true;
         }
 
-        for(Relation relation : input.getRelations()) {
-            if(relations.test(relation)) {
+        for (Relation relation : input.getRelations()) {
+            if (relations.test(relation)) {
                 return true;
             }
         }
@@ -289,17 +296,32 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     }
 
     protected boolean applySchedule(MediaObject input) {
-        if(scheduleEvents == null) {
+        if (scheduleEvents == null) {
             return true;
         }
 
-        for(ScheduleEvent event : input.getScheduleEvents()) {
+        for (ScheduleEvent event : input.getScheduleEvents()) {
             for (ScheduleEventSearch search : scheduleEvents) {
-                if(search.test(event)) {
+                if (search.test(event)) {
                     return true;
                 }
             }
         }
         return false;
     }
+
+    protected boolean applyTitles(MediaObject input) {
+        if (titles == null) {
+            return true;
+        }
+
+        for (Title title : input.getTitles()) {
+            for (TitleSearch search : titles) {
+                if (search.test(title)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+        }
 }
