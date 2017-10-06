@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.TreeSet;
 
+import javax.xml.soap.Text;
+
 import org.junit.Test;
 
 import nl.vpro.domain.api.*;
@@ -54,6 +56,7 @@ public class MediaSearchTest {
         assertThat(out.getBroadcasters().asList()).containsExactly(new TextMatcher("VPRO"), new TextMatcher("TROS"));
     }
 
+
     @Test
     public void testGetLocations() throws Exception {
         MediaSearch in = new MediaSearch();
@@ -97,6 +100,24 @@ public class MediaSearchTest {
         assertThat(out.getTypes().asList()).containsExactly(new TextMatcher("A"), new TextMatcher("B", Match.SHOULD));
 
     }
+
+    private static final TitleSearch TESTRESULT = TitleSearch.builder().owner(OwnerType.PLUTO).type(TextualType.LEXICO).value(new ExtendedTextMatcher("A")).build();
+
+    @Test
+    public void testTitleSearchJson() throws Exception {
+        MediaSearch in = new MediaSearch();
+        in.setTitles(Arrays.asList(TESTRESULT));
+        MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
+            "  \"titles\" : [ {\n" +
+            "    \"value\" : \"A\",\n" +
+            "    \"ownerType\" : \"PLUTO\",\n" +
+            "    \"textualType\" :\"LEXICO\"\n" +
+            "  } ]\n" +
+            "}");
+        assertThat(out.getTitles()).containsExactly(TESTRESULT);
+
+    }
+
 
     @Test
     public void testApplyText() {
