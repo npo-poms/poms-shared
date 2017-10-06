@@ -28,11 +28,11 @@ public class DateRangeInterval extends AbstractTemporalRangeInterval<Instant> {
     }
 
     @Override
-    public boolean matches(Instant begin, Instant end) {
-        Interval parsed = parsed();
-        return parsed.isBucketBegin(begin)
-                && parsed.getBucketEnd(begin).equals(end);
+    public Interval parsed() {
+        return null;
+
     }
+
 
 }
 

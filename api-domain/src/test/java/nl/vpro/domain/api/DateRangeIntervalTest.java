@@ -39,8 +39,8 @@ public class DateRangeIntervalTest {
         Date date = Date.from(LocalDate.of(2016, 5, 6).atTime(14, 21).atZone(Schedule.ZONE_ID).toInstant());
         for (String[] i : exampleIntervals) {
             DateRangeInterval interval = new DateRangeInterval(i[0]);
-            String printAsTime = interval.parsed().print(date.toInstant(), false);
-            String printAsDuration = interval.parsed().print(date.toInstant(), true);
+            String printAsTime = interval.parsed().print(date.toInstant());
+            String printAsDuration = interval.parsed().print(date.toInstant());
             boolean begin = interval.parsed().isBucketBegin(date.toInstant());
             System.out.println(i[0] + ":" + printAsTime + ":" + printAsDuration + ":" + begin);
             assertThat(printAsTime).isEqualTo(i[1]);

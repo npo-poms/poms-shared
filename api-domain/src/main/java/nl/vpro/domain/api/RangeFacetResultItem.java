@@ -62,4 +62,9 @@ public abstract class RangeFacetResultItem<T extends Comparable<T>> extends Face
         result = 31 * result + (end != null ? end.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return value + " " + getBegin() + " - " + getEnd() + " : " + getCount();
+    }
 }
