@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import org.apache.commons.lang.StringUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.AVType;
@@ -154,13 +155,17 @@ public class MediaForm {
     private Collection<Net> nets;
 
     @XmlElement
-    private String createdBy;
+    @Getter
+    @Setter
+    private EditorSearch createdBy;
 
     @XmlElement
     private DateRange creationRange;
 
     @XmlElement
-    private String lastModifiedBy;
+    @Getter
+    @Setter
+    private EditorSearch lastModifiedBy;
 
     @XmlElement
     private DateRange lastModifiedRange;
@@ -260,8 +265,10 @@ public class MediaForm {
         Boolean noPlaylist,
         DateRange eventRange,
         String createdBy,
+        String createdById,
         DateRange creationRange,
         String lastModifiedBy,
+        String lastModifiedById,
         DateRange lastModifiedRange,
         DateRange lastPublishedRange,
         IntegerRange locationsCount,
@@ -285,9 +292,9 @@ public class MediaForm {
         this.eventRange = eventRange;
         this.noBroadcast = noBroadcast;
         this.hasLocations = hasLocations;
-        this.createdBy = createdBy;
+        this.createdBy = createdById != null ? EditorSearch.id(createdById) : EditorSearch.name(createdBy);
         this.creationRange = creationRange;
-        this.lastModifiedBy = lastModifiedBy;
+        this.lastModifiedBy = lastModifiedById != null ? EditorSearch.id(lastModifiedById) : EditorSearch.name(lastModifiedBy);
         this.lastModifiedRange = lastModifiedRange;
         this.lastPublishedRange = lastPublishedRange;
         this.locationsCount = locationsCount;
@@ -542,16 +549,8 @@ public class MediaForm {
         return has(nets);
     }
 
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public boolean hasCreatedBy() {
-        return createdBy != null && createdBy.length() > 0;
+        return createdBy != null && StringUtils.isNotBlank(createdBy.getText());
     }
 
     public DateRange getCreationRange() {
@@ -566,16 +565,8 @@ public class MediaForm {
         this.creationRange = creationRange;
     }
 
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
     public boolean hasLastModifiedBy() {
-        return lastModifiedBy != null && lastModifiedBy.length() > 0;
+        return lastModifiedBy != null && StringUtils.isNotBlank(lastModifiedBy.getText());
     }
 
     public DateRange getLastModifiedRange() {
