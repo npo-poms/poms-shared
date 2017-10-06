@@ -68,9 +68,9 @@
       <xsd:element name="scheduleEventRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="channel" type="media:channelEnum" minOccurs="0" maxOccurs="unbounded"/>
       <xsd:element name="net" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xsd:element name="createdBy" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="createdBy" type="editorSearch" minOccurs="0"/>
       <xsd:element name="creationRange" type="dateRangeType" minOccurs="0"/>
-      <xsd:element name="lastModifiedBy" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="lastModifiedBy" type="editorSearch" minOccurs="0"/>
       <xsd:element name="lastModifiedRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="lastPublishedRange" type="dateRangeType" minOccurs="0"/>
       <xsd:element name="tag" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -252,5 +252,12 @@
     </xsd:complexContent>
   </xsd:complexType>
 
+  <xsd:complexType name="editorSearch">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="principalId" type="xsd:boolean"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
 
 </xsd:schema>
