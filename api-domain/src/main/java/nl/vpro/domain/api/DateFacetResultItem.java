@@ -26,6 +26,7 @@ public class DateFacetResultItem extends RangeFacetResultItem<Instant> {
     public DateFacetResultItem() {
     }
 
+    @lombok.Builder
     public DateFacetResultItem(String name, Instant begin, Instant end, long count) {
         super(name, begin, end, count);
     }
