@@ -17,7 +17,6 @@ import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.media.DurationRangeMatcher;
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.classification.Term;
-import nl.vpro.util.DateUtils;
 
 /**
  * @author Roelof Jan Koekoek
@@ -169,7 +168,7 @@ public class SearchResults {
                                     } else {
                                         DateRangeInterval dateRangeInterval = (DateRangeInterval) range;
                                         if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
-                                            newItem.setValue(dateRangeInterval.parsed().print(item.getBegin(), false));
+                                            newItem.setValue(dateRangeInterval.parsed().print(item.getBegin()));
                                             selected.add(newItem);
                                         }
                                         continue;
@@ -234,7 +233,7 @@ public class SearchResults {
                                     } else {
                                         DurationRangeInterval dateRangeInterval = (DurationRangeInterval) range;
                                         if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
-                                            newItem.setValue(dateRangeInterval.parsed().print(Instant.ofEpochMilli(item.getBegin().toMillis()), false));
+                                            newItem.setValue(dateRangeInterval.parsed().print(item.getBegin()));
                                             selected.add(newItem);
                                         }
                                         continue;

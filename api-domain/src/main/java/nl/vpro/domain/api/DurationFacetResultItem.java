@@ -26,6 +26,7 @@ public class DurationFacetResultItem extends RangeFacetResultItem<Duration> {
     public DurationFacetResultItem() {
     }
 
+    @lombok.Builder
     public DurationFacetResultItem(String name, Duration begin, Duration end, long count) {
         super(name, begin, end, count);
     }
