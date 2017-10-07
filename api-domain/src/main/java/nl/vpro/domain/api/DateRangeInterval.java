@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import nl.vpro.domain.media.Schedule;
+
 /**
  * @author Roelof Jan Koekoek
  * @since 3.1
@@ -51,7 +53,7 @@ public class DateRangeInterval implements RangeFacet<Instant> {
 
         @Override
         public boolean isBucketBegin(Instant begin) {
-            begin.get(getUnit().getChronoField());
+            begin.atZone(Schedule.ZONE_ID).get(getUnit().getChronoField());
             return false;
 
         }
