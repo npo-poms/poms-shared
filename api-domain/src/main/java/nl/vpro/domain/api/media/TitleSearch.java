@@ -6,6 +6,8 @@ import lombok.Setter;
 import java.util.function.Predicate;
 
 import javax.annotation.Nullable;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -18,6 +20,7 @@ import nl.vpro.domain.media.support.Title;
  * @author lies
  */
 @XmlType(name = "TitleSearchType", propOrder = {"owner", "type", "value"})
+@XmlAccessorType(XmlAccessType.NONE)
 public class TitleSearch implements Predicate<Title> {
     @XmlElement
     @Getter
@@ -53,6 +56,7 @@ public class TitleSearch implements Predicate<Title> {
     }
 
 
+    @Override
     public boolean test(@Nullable Title input) {
         throw new UnsupportedOperationException("not used");
     }
