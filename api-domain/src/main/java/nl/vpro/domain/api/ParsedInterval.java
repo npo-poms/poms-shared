@@ -57,7 +57,7 @@ abstract class ParsedInterval<T extends Comparable<T>> {
 
     @XmlValue
     public String getValue() {
-        return (amount != 1 ? amount + " " : "") + unit;
+        return (amount != 1 ? amount + " " : "") + unit + (amount != 1 ? "S" : "");
     }
 
     public abstract String print(T value);

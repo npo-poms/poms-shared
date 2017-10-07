@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +23,7 @@ import static nl.vpro.domain.api.ParsedInterval.TEMPORAL_AMOUNT_INTERVAL;
 @XmlType(name = "durationRangeIntervalType", propOrder = {
 })
 @XmlAccessorType(XmlAccessType.NONE)
+@EqualsAndHashCode
 public class DurationRangeInterval implements RangeFacet<Duration> {
 
 
@@ -56,6 +58,11 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
     @javax.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
     protected void setIntervalString(String value) {
         this.interval = new Interval(ParsedInterval.parse(value));
+    }
+
+    @Override
+    public String toString() {
+        return getIntervalString();
     }
 
 
