@@ -2,6 +2,7 @@ package nl.vpro.domain.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.time.Duration;
@@ -14,6 +15,7 @@ import javax.xml.bind.annotation.XmlValue;
  * @since 5.5
  */
 @Getter
+@EqualsAndHashCode
 abstract class ParsedInterval<T extends Comparable<T>> {
 
     static final String TEMPORAL_AMOUNT_INTERVAL = "(\\d+)?\\s*(YEAR|MONTH|WEEK|DAY|HOUR|MINUTE)S?";
