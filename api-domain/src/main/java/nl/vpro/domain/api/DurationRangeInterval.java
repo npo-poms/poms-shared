@@ -39,7 +39,9 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
     @Override
     public boolean matches(Duration begin, Duration end) {
         Interval parsed = getInterval();
-        return parsed.isBucketBegin(begin)
+        return
+            end.toMillis() - begin.toMillis() == parsed.getDuration().toMillis()
+            && parsed.isBucketBegin(begin)
             && parsed.isBucketEnd(end);
     }
 
@@ -54,14 +56,12 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
 
         @Override
         public boolean isBucketBegin(Duration begin) {
-            //return begin != null && begin.get(getUnit().getChronoField().getRangeUnit());
-            return false;
-
+            return begin.toMillis() % getDuration().toMillis()  == 0;
         }
 
         @Override
         public boolean isBucketEnd(Duration end) {
-            return false;
+            return end.toMillis()  % getDuration().toMillis() == 0;
 
         }
     }
