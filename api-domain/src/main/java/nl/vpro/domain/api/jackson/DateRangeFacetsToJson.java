@@ -32,11 +32,7 @@ public class DateRangeFacetsToJson {
         public void serialize(DateRangeFacets<?> value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
             jgen.writeStartArray();
             for(RangeFacet<Instant> item : value.getRanges()) {
-                if(item instanceof DateRangeInterval) {
-                    jgen.writeObject(((DateRangeInterval)item).getInterval());
-                } else {
-                    jgen.writeObject(item);
-                }
+                jgen.writeObject(item);
             }
             jgen.writeEndArray();
         }
