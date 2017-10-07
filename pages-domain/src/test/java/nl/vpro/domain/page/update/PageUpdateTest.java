@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import nl.vpro.domain.page.PageType;
 import nl.vpro.domain.page.Section;
 import nl.vpro.domain.user.*;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -83,7 +84,7 @@ public class PageUpdateTest {
                 .url("http://3voor12-beta-test.vpro.nl/")
                 .section(Section.builder().displayName("display").path("/bla").build()).build())
             .build();
-        PageUpdate rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(page, "{\n" +
+        PageUpdate rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(Jackson2Mapper.getPublisherInstance(), page, "{\n" +
             "  \"type\" : \"ARTICLE\",\n" +
             "  \"url\" : \"http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html\",\n" +
             "  \"portal\" : {\n" +
@@ -94,7 +95,6 @@ public class PageUpdateTest {
             "    \"id\" : \"3voor12\",\n" +
             "    \"url\" : \"http://3voor12-beta-test.vpro.nl/\"\n" +
             "  },\n" +
-            "  \"_id\" : \"http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html\"\n" +
             "}");
 
         assertThat(rounded.getPortal().getSection().getDisplayName()).isEqualTo("display");
