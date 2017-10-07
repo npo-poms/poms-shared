@@ -12,7 +12,6 @@ import java.time.Duration;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlValue;
 
 /**
  * @author Michiel Meeuwissen
@@ -24,7 +23,6 @@ import javax.xml.bind.annotation.XmlValue;
 public class DurationRangeInterval implements RangeFacet<Duration> {
 
 
-    @XmlValue
     @Getter
     @Setter
     private Interval interval;
@@ -45,6 +43,9 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
             && parsed.isBucketEnd(end);
     }
 
+
+    @XmlType(name = "temporalAmountIntervalType", propOrder = {
+    })
     public static class Interval extends ParsedInterval<Duration> {
 
         public Interval(ParseResult pair) {
