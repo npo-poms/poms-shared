@@ -20,13 +20,13 @@ import static org.junit.Assert.assertTrue;
 public class DateRangeIntervalTest {
 
     private String[][] exampleIntervals = {
-        {"2 YEAR", "2016","P46Y"},
-        {"3 YEAR", "2016", "P46Y"},
-        {"3 MONTH", "2016-05", "P556M" },
-        {"3 WEEK", "2016-W18", "P2418W"},
-        {"6 DAY", "2016-05-06", "P16927D"},
-        {"5 HOUR", "2016-05-06T14:21:00+02:00", "PT406260H"},
-        {"6 MINUTE", "2016-05-06T14:21:00+02:00", "PT24375621M"}
+        {"2 YEAR", "2016"},
+        {"3 YEAR", "2016"},
+        {"3 MONTH", "2016-05"},
+        {"3 WEEK", "2016-W18"},
+        {"6 DAY", "2016-05-06"},
+        {"5 HOUR", "2016-05-06T14:21:00+02:00"},
+        {"6 MINUTE", "2016-05-06T14:21:00+02:00"}
     };
 
     @Test(expected = IllegalArgumentException.class)
@@ -40,12 +40,9 @@ public class DateRangeIntervalTest {
         for (String[] i : exampleIntervals) {
             DateRangeInterval interval = new DateRangeInterval(i[0]);
             String printAsTime = interval.getInterval().print(date.toInstant());
-            String printAsDuration = interval.getInterval().print(date.toInstant());
             boolean begin = interval.getInterval().isBucketBegin(date.toInstant());
-            System.out.println(i[0] + ":" + printAsTime + ":" + printAsDuration + ":" + begin);
+            System.out.println(i[0] + ":" + printAsTime + ":" + begin);
             assertThat(printAsTime).isEqualTo(i[1]);
-            assertThat(printAsDuration).isEqualTo(i[2]);
-
         }
     }
 
