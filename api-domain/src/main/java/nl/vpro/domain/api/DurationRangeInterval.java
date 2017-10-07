@@ -64,6 +64,12 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
             return end.toMillis()  % getDuration().toMillis() == 0;
 
         }
+
+        @Override
+        public String print(Duration value) {
+            return value.toString();
+
+        }
     }
 
 }
