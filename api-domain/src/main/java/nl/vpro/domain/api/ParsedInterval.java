@@ -65,7 +65,7 @@ abstract class ParsedInterval<T extends Comparable<T>> {
 
 
     Duration getDuration() {
-        return unit.getChronoField().getBaseUnit().getDuration();
+        return unit.getChronoField().getBaseUnit().getDuration().multipliedBy(amount);
     }
 
     @AllArgsConstructor
