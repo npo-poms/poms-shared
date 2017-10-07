@@ -66,11 +66,16 @@ public class MediaFacetsTest {
         ));
 
         String json = Jackson2Mapper.getInstance().writeValueAsString(in);
-        assertThat(json).isEqualTo("{\"sortDates\":[\"THIS_WEEK\",\"YEAR\",{\"name\":\"MyFacet\",\"begin\":0,\"end\":1000}]}");
+        String example = "{\"sortDates\":[\"THIS_WEEK\",\"YEAR\",{\"name\":\"MyFacet\",\"begin\":0,\"end\":1000}]}";
+        assertThat(json).isEqualTo(example);
 
         MediaFacets out = Jackson2Mapper.getInstance().readValue(json, MediaFacets.class);
 
         assertThat(out.getSortDates().getRanges()).hasSize(3);
+        Jackson2TestUtil.roundTripAndSimilar(in,example);
+        assertThat(out.getSortDates().getRanges().get(0)).isEqualTo(DateRangePreset.THIS_WEEK);
+        assertThat(out.getSortDates().getRanges().get(1)).isEqualTo(new DateRangeInterval("1YEAR"));
+
     }
 
     @Test
