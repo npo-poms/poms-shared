@@ -100,7 +100,11 @@ public class MediaSearchTest {
     }
 
     private static final TitleSearch TESTRESULT =
-        TitleSearch.builder().owner(OwnerType.PLUTO).type(TextualType.LEXICO).value(new ExtendedTextMatcher("A")).build();
+        TitleSearch.builder()
+            .owner(OwnerType.PLUTO)
+            .type(TextualType.LEXICO)
+            .value(new ExtendedTextMatcher("A"))
+            .build();
 
     @Test
     public void testTitleSearchJson() throws Exception {
