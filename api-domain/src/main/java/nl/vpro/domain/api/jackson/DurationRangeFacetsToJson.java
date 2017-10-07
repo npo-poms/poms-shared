@@ -32,11 +32,7 @@ public class DurationRangeFacetsToJson {
         public void serialize(DurationRangeFacets<?> value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
             jgen.writeStartArray();
             for(RangeFacet<Duration> item : value.getRanges()) {
-                if(item instanceof DurationRangeInterval) {
-                    jgen.writeObject(((DurationRangeInterval)item).getInterval());
-                } else {
-                    jgen.writeObject(item);
-                }
+                jgen.writeObject(item);
             }
             jgen.writeEndArray();
         }
