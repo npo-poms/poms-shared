@@ -27,11 +27,5 @@ public class DurationRangeInterval extends AbstractTemporalAmountRangeInterval<D
         super(interval);
     }
 
-    @Override
-    public Interval parsed() {
-        return new Interval(1, Unit.HOUR);
-    }
-
-
 }
 
