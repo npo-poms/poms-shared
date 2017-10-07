@@ -41,6 +41,8 @@ public class DateRangeInterval implements RangeFacet<Instant> {
     }
 
 
+    @XmlType(name = "temporalIntervalType", propOrder = {
+    })
     public static class Interval extends ParsedInterval<Instant> {
 
         public Interval(ParseResult pair) {
