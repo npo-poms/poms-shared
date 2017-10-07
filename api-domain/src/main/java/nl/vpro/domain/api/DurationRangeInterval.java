@@ -9,9 +9,11 @@ import lombok.Setter;
 
 import java.time.Duration;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonValue;
+
+import static nl.vpro.domain.api.ParsedInterval.TEMPORAL_AMOUNT_INTERVAL;
 
 /**
  * @author Michiel Meeuwissen
@@ -19,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlType(name = "durationRangeIntervalType", propOrder = {
 })
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 public class DurationRangeInterval implements RangeFacet<Duration> {
 
 
@@ -45,9 +47,19 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
             && parsed.isBucketEnd(end);
     }
 
+    @XmlValue
+    @JsonValue
+    protected String getIntervalString() {
+        return interval.getValue();
+    }
 
-    @XmlType(name = "temporalAmountIntervalType", propOrder = {
-    })
+    @javax.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
+    protected void setIntervalString(String value) {
+        this.interval = new Interval(ParsedInterval.parse(value));
+    }
+
+
+
     public static class Interval extends ParsedInterval<Duration> {
 
         public Interval(ParseResult pair) {
