@@ -1,6 +1,7 @@
 package nl.vpro.domain.api.media;
 
 import java.io.StringReader;
+import java.time.Duration;
 import java.time.Instant;
 
 import javax.xml.bind.JAXB;
@@ -75,6 +76,38 @@ public class MediaFacetsTest {
         Jackson2TestUtil.roundTripAndSimilar(in,example);
         assertThat(out.getSortDates().getRanges().get(0)).isEqualTo(DateRangePreset.THIS_WEEK);
         assertThat(out.getSortDates().getRanges().get(1)).isEqualTo(new DateRangeInterval("1YEAR"));
+
+    }
+
+
+    @Test
+    public void testGetDurationJson() throws Exception {
+        MediaFacets in = new MediaFacets();
+        in.setDurations(
+            new DurationRangeFacets(
+                new DurationRangeInterval("2 minutes"),
+                new DurationRangeFacetItem(
+                    "MyFacet",
+                    Duration.ofMillis(0),
+                    Duration.ofMillis(1000)
+                )
+            )
+        );
+
+        String json = Jackson2Mapper.getInstance().writeValueAsString(in);
+        String example = "{\"durations\":[\"2 MINUTES\",{\"name\":\"MyFacet\",\"begin\":0,\"end\":1000}]}";
+        assertThat(json).isEqualTo(example);
+
+        MediaFacets out = Jackson2Mapper.getInstance().readValue(json, MediaFacets.class);
+
+        assertThat(out.getDurations().getRanges()).hasSize(2);
+        Jackson2TestUtil.roundTripAndSimilar(in, example);
+        assertThat(out.getDurations().getRanges().get(0)).isEqualTo(new DurationRangeInterval("2 minute"));
+        assertThat(out.getDurations().getRanges().get(1)).isEqualTo(new DurationRangeFacetItem(
+            "MyFacet",
+            Duration.ofMillis(0),
+            Duration.ofMillis(1000)
+        ));
 
     }
 
