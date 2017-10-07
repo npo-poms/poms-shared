@@ -9,11 +9,12 @@ import lombok.Setter;
 
 import java.time.temporal.TemporalAmount;
 
-import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
+
+import nl.vpro.util.Pair;
 
 /**
  * @author Michiel Meeuwissen
@@ -24,27 +25,23 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class AbstractTemporalAmountRangeInterval<T extends TemporalAmount & Comparable<T>> implements RangeFacet<T> {
 
-    public static final String TEMPORAL_AMOUNT_INTERVAL = "(\\d+)?\\s*(YEAR|MONTH|WEEK|DAY|HOUR|MINUTE)S?";
-
 
     @XmlValue
-    @Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
     @Getter
     @Setter
-    private String interval;
+    private Interval interval;
 
     public AbstractTemporalAmountRangeInterval() {
     }
 
     public AbstractTemporalAmountRangeInterval(String interval) {
-        this.interval = interval;
+        this.interval = new Interval(ParsedInterval.parse(interval));
     }
 
-    public abstract Interval parsed();
 
     @Override
     public boolean matches(T begin, T end) {
-        Interval parsed = parsed();
+        Interval parsed = getInterval();
         return parsed.isBucketBegin(begin)
             && parsed.isBucketEnd(end);
     }
@@ -52,8 +49,8 @@ public abstract class AbstractTemporalAmountRangeInterval<T extends TemporalAmou
 
     public class Interval extends ParsedInterval<T> {
 
-        public Interval(int amount, Unit unit) {
-            super(amount, unit);
+        public Interval(ParseResult pair) {
+            super(pair);
         }
 
         @Override

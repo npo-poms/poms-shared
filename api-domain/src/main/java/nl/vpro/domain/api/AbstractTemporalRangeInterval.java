@@ -4,9 +4,11 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.temporal.Temporal;
 
-import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -21,26 +23,18 @@ import javax.xml.bind.annotation.XmlValue;
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class AbstractTemporalRangeInterval<T extends Comparable<T> & Temporal> implements RangeFacet<T> {
 
-    public static final String TEMPORAL_AMOUNT_INTERVAL = AbstractTemporalAmountRangeInterval.TEMPORAL_AMOUNT_INTERVAL;
 
 
     @XmlValue
-    @Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
-    private String interval;
+    @Getter
+    @Setter
+    private Interval interval;
 
     public AbstractTemporalRangeInterval() {
     }
 
     public AbstractTemporalRangeInterval(String interval) {
-        this.interval = interval;
-    }
-
-    public String getInterval() {
-        return interval;
-    }
-
-    public void setInterval(String interval) {
-        this.interval = interval;
+        this.interval = new Interval(ParsedInterval.parse(interval));
     }
 
     public abstract Interval parsed();
@@ -54,8 +48,8 @@ public abstract class AbstractTemporalRangeInterval<T extends Comparable<T> & Te
 
     public class Interval extends ParsedInterval<T> {
 
-        public Interval(int amount, Unit unit) {
-            super(amount, unit);
+        public Interval(ParseResult pair) {
+            super(pair);
         }
 
         @Override
