@@ -14,14 +14,15 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.WeekFields;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.i18n.Locales;
 
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+import static nl.vpro.domain.api.ParsedInterval.TEMPORAL_AMOUNT_INTERVAL;
 
 /**
  * @author Roelof Jan Koekoek
@@ -29,7 +30,7 @@ import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
  */
 @XmlType(name = "dateRangeIntervalType", propOrder = {
 })
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 public class DateRangeInterval implements RangeFacet<Instant> {
 
 
@@ -61,9 +62,20 @@ public class DateRangeInterval implements RangeFacet<Instant> {
                 && interval.isBucketEnd(end);
     }
 
+    @XmlValue
+    @JsonValue
 
-    @XmlType(name = "temporalIntervalType", propOrder = {
-    })
+    protected String getIntervalString() {
+        return interval.getValue();
+    }
+
+    @javax.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
+    protected void setIntervalString(String value) {
+        this.interval = new Interval(ParsedInterval.parse(value));
+    }
+
+
+
     public static class Interval extends ParsedInterval<Instant> {
 
 
