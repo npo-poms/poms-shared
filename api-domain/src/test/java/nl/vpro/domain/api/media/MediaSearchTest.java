@@ -8,8 +8,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.TreeSet;
 
-import javax.xml.soap.Text;
-
 import org.junit.Test;
 
 import nl.vpro.domain.api.*;
@@ -101,7 +99,8 @@ public class MediaSearchTest {
 
     }
 
-    private static final TitleSearch TESTRESULT = TitleSearch.builder().owner(OwnerType.PLUTO).type(TextualType.LEXICO).value(new ExtendedTextMatcher("A")).build();
+    private static final TitleSearch TESTRESULT =
+        TitleSearch.builder().owner(OwnerType.PLUTO).type(TextualType.LEXICO).value(new ExtendedTextMatcher("A")).build();
 
     @Test
     public void testTitleSearchJson() throws Exception {
@@ -110,8 +109,8 @@ public class MediaSearchTest {
         MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
             "  \"titles\" : [ {\n" +
             "    \"value\" : \"A\",\n" +
-            "    \"ownerType\" : \"PLUTO\",\n" +
-            "    \"textualType\" :\"LEXICO\"\n" +
+            "    \"owner\" : \"PLUTO\",\n" +
+            "    \"type\" :\"LEXICO\"\n" +
             "  } ]\n" +
             "}");
         assertThat(out.getTitles()).containsExactly(TESTRESULT);
