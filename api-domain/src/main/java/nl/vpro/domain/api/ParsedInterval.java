@@ -54,7 +54,6 @@ abstract class ParsedInterval<T extends Comparable<T>> {
     public abstract boolean isBucketEnd(T end);
 
     @XmlValue
-    @javax.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
     public String getValue() {
         return (amount != 1 ? amount + " " : "") + unit;
     }
@@ -66,8 +65,9 @@ abstract class ParsedInterval<T extends Comparable<T>> {
         return unit.getChronoField().getBaseUnit().getDuration().multipliedBy(amount);
     }
 
+    @Override
     public String toString() {
-        return "" + amount + unit;
+        return getValue();
     }
 
     @AllArgsConstructor
