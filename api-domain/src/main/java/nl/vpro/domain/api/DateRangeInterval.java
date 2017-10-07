@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,10 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoField;
 import java.time.temporal.WeekFields;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
@@ -31,6 +35,7 @@ import static nl.vpro.domain.api.ParsedInterval.TEMPORAL_AMOUNT_INTERVAL;
 @XmlType(name = "dateRangeIntervalType", propOrder = {
 })
 @XmlAccessorType(XmlAccessType.NONE)
+@EqualsAndHashCode
 public class DateRangeInterval implements RangeFacet<Instant> {
 
 
@@ -64,7 +69,6 @@ public class DateRangeInterval implements RangeFacet<Instant> {
 
     @XmlValue
     @JsonValue
-
     protected String getIntervalString() {
         return interval.getValue();
     }
@@ -72,6 +76,11 @@ public class DateRangeInterval implements RangeFacet<Instant> {
     @javax.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
     protected void setIntervalString(String value) {
         this.interval = new Interval(ParsedInterval.parse(value));
+    }
+
+    @Override
+    public String toString() {
+        return getIntervalString();
     }
 
 
