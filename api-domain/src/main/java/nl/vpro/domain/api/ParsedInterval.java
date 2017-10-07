@@ -35,9 +35,9 @@ abstract class ParsedInterval<T extends Comparable<T>> {
     }
 
 
-    private final IntervalUnit unit;
+    protected final IntervalUnit unit;
 
-    private final int amount;
+    protected final int amount;
 
     protected ParsedInterval(ParseResult pair) {
         this(pair.getAmount(), pair.getUnit());
@@ -59,13 +59,15 @@ abstract class ParsedInterval<T extends Comparable<T>> {
         return (amount != 1 ? amount + " " : "") + unit;
     }
 
-    public String print(T value) {
-        return "";
-    }
+    public abstract String print(T value);
 
 
     Duration getDuration() {
         return unit.getChronoField().getBaseUnit().getDuration().multipliedBy(amount);
+    }
+
+    public String toString() {
+        return "" + amount + unit;
     }
 
     @AllArgsConstructor
