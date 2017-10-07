@@ -168,7 +168,7 @@ public class SearchResults {
                                     } else {
                                         DateRangeInterval dateRangeInterval = (DateRangeInterval) range;
                                         if (dateRangeInterval.matches(item.getBegin(), item.getEnd())) {
-                                            newItem.setValue(dateRangeInterval.parsed().print(item.getBegin()));
+                                            newItem.setValue(dateRangeInterval.getInterval().print(item.getBegin()));
                                             selected.add(newItem);
                                         }
                                         continue;
