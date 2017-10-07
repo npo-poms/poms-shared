@@ -1,5 +1,6 @@
 package nl.vpro.domain.api.media;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,7 @@ import nl.vpro.domain.media.support.Title;
  */
 @XmlType(name = "TitleSearchType", propOrder = {"owner", "type", "value"})
 @XmlAccessorType(XmlAccessType.NONE)
+@EqualsAndHashCode
 public class TitleSearch implements Predicate<Title> {
     @XmlElement
     @Getter
