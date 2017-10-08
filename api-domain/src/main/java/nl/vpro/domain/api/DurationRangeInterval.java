@@ -44,9 +44,11 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
     public boolean matches(Duration begin, Duration end) {
         Interval parsed = getInterval();
         return
-            end.toMillis() - begin.toMillis() == parsed.getDuration().toMillis()
-            && parsed.isBucketBegin(begin)
-            && parsed.isBucketEnd(end);
+            begin != null
+                && end != null
+                && end.toMillis() - begin.toMillis() == parsed.getDuration().toMillis()
+                && parsed.isBucketBegin(begin)
+                && parsed.isBucketEnd(end);
     }
 
     @XmlValue
