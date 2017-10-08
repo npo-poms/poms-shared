@@ -1,14 +1,12 @@
 package nl.vpro.domain.api;
 
-import lombok.Getter;
-
 import java.time.temporal.ChronoField;
 
 /**
 * @author Michiel Meeuwissen
 * @since 5.5
 */
-enum IntervalUnit {
+public enum IntervalUnit {
 
     YEAR(ChronoField.YEAR),
     MONTH(ChronoField.MONTH_OF_YEAR),
@@ -17,7 +15,6 @@ enum IntervalUnit {
     HOUR(ChronoField.HOUR_OF_DAY),
     MINUTE(ChronoField.MINUTE_OF_DAY);
 
-    @Getter
     private final ChronoField chronoField;
 
     IntervalUnit(ChronoField chronoField) {
@@ -25,4 +22,7 @@ enum IntervalUnit {
     }
 
 
+    public ChronoField getChronoField() {
+        return chronoField;
+    }
 }
