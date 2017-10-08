@@ -57,6 +57,10 @@ public class DateRangeInterval implements RangeFacet<Instant> {
         this.interval = new Interval(ParsedInterval.parse(interval));
     }
 
+    public DateRangeInterval(int amount, IntervalUnit unit) {
+        this.interval = new Interval(amount, unit);
+    }
+
 
     @Override
     public boolean matches(Instant begin, Instant end) {
@@ -88,6 +92,9 @@ public class DateRangeInterval implements RangeFacet<Instant> {
     public static class Interval extends ParsedInterval<Instant> {
 
 
+        public Interval(int amount, IntervalUnit unit) {
+            super(amount, unit);
+        }
         public Interval(ParseResult pair) {
             super(pair);
         }
