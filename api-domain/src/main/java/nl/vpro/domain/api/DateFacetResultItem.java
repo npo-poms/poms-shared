@@ -1,5 +1,8 @@
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Instant;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -23,12 +26,24 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class DateFacetResultItem extends RangeFacetResultItem<Instant> {
 
+
+    @Getter
+    @Setter
+    private String name;
+
     public DateFacetResultItem() {
     }
 
+
+    @Deprecated
+    public DateFacetResultItem(String value, Instant begin, Instant end, long count) {
+        super(value, begin, end, count);
+    }
+
     @lombok.Builder
-    public DateFacetResultItem(String name, Instant begin, Instant end, long count) {
-        super(name, begin, end, count);
+    private DateFacetResultItem(String value, String name, Instant begin, Instant end, long count) {
+        super(value, begin, end, count);
+        this.name = name;
     }
 
     @Override
