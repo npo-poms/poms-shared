@@ -163,7 +163,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     public SortedSet<SegmentUpdate> getSegments() {
         if(this.segments == null) {
             this.segments = new TransformingSortedSet<>(build().getSegments(),
-                SegmentUpdate::create,
+                s -> SegmentUpdate.create(s, null),
                 MediaUpdate::fetch);
         }
         return this.segments;

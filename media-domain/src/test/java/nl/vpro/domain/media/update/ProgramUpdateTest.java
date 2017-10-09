@@ -108,7 +108,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testIsValidForTitles2() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.MIXED);
         update.addTitle("bla", null);
@@ -136,7 +136,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetAVType() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setAVType(AVType.MIXED);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" avType=\"MIXED\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
@@ -146,7 +146,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetEmbeddable() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setEmbeddable(false);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"false\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
@@ -156,7 +156,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetPublishStart() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setPublishStartInstant(Instant.ofEpochMilli(4444));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program publishStart=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
@@ -166,7 +166,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetPublishStop() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setPublishStopInstant(Instant.ofEpochMilli(4444));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program publishStop=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
@@ -180,6 +180,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = ProgramUpdate.create(
             program().images(Image.builder().publishStop(Instant.ofEpochMilli(5444)).build()
         ));
+        update.setVersion(null);
 
         String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <locations/>\n" +
@@ -197,7 +198,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetCrids() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setCrids(Collections.singletonList("crid://bds.tv/23678459"));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><crid>crid://bds.tv/23678459</crid><locations/><scheduleEvents/><images/><segments/></program>";
@@ -207,7 +208,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetBroadcasters() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setBroadcasters(Collections.singletonList("MAX"));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><broadcaster>MAX</broadcaster><locations/><scheduleEvents/><images/><segments/></program>";
@@ -226,7 +227,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetPortalRestrictions() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setPortalRestrictions(Arrays.asList(new PortalRestrictionUpdate(new PortalRestriction(new Portal("3VOOR12_GRONINGEN", "3voor12 Groningen"))),
             new PortalRestrictionUpdate(new PortalRestriction(new Portal("STERREN24", "Sterren24"), Instant.ofEpochMilli(0), Instant.ofEpochMilli(1000000)))));
 
@@ -237,7 +238,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetGeoRestrictions() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setGeoRestrictions(new TreeSet<>(Arrays.asList(
             new GeoRestrictionUpdate(new GeoRestriction(Region.BENELUX)), new GeoRestrictionUpdate(new GeoRestriction(Region.NL, Instant.ofEpochMilli(0), Instant.ofEpochMilli((1000000)))))));
 
@@ -264,7 +265,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetTitles() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("Hoofdtitel", TextualType.MAIN))));
 
          String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><title type=\"MAIN\">Hoofdtitel</title><locations/><scheduleEvents/><images/><segments/></program>";
@@ -282,6 +283,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             new Title("hoofdtitel omroep", OwnerType.BROADCASTER, TextualType.MAIN),
             new Title("hoofdtitel mis", OwnerType.MIS, TextualType.MAIN)).build());
 
+        program.setVersion(null);
+
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><title type=\"MAIN\">hoofdtitel omroep</title><locations/><scheduleEvents/><images/><segments/></program>";
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
         assertThat(rounded.getTitles()).hasSize(1);
@@ -292,7 +295,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetDescriptions() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setDescriptions(new TreeSet<>(Collections.singletonList(new DescriptionUpdate("Beschrijving", TextualType.MAIN))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><description type=\"MAIN\">Beschrijving</description><locations/><scheduleEvents/><images/><segments/></program>";
@@ -301,7 +304,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetAVAttributes() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setAvAttributes(avAttributes());
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -327,7 +330,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetDuration() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setDuration(Duration.ofMillis(656565));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><duration>P0DT0H10M56.565S</duration><locations/><scheduleEvents/><images/><segments/></program>";
@@ -337,7 +340,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetDuration2() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setDuration(Duration.ofSeconds(3 * 3600 + 46 * 60));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><duration>P0DT3H46M0.000S</duration><locations/><scheduleEvents/><images/><segments/></program>";
@@ -346,7 +349,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetMemberOf() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setMemberOf(new TreeSet<>(Collections.singletonList(new MemberRefUpdate(20, "urn:vpro:media:group:864"))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><memberOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</memberOf><locations/><scheduleEvents/><images/><segments/></program>";
@@ -369,7 +372,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetEmail() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setEmail(Collections.singletonList("info@vpro.nl"));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><email>info@vpro.nl</email><locations/><scheduleEvents/><images/><segments/></program>";
@@ -379,7 +382,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetWebsites() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setWebsiteObjects(Collections.singletonList(new Website("www.vpro.nl")));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><website>www.vpro.nl</website><locations/><scheduleEvents/><images/><segments/></program>";
@@ -394,7 +397,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetLocations() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setLocations(new TreeSet<>(Collections.singletonList(
             new LocationUpdate("rtsp:someurl",
                 Duration.ofSeconds(100),
@@ -425,7 +428,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetPerson() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setPersons(Collections.singletonList(new PersonUpdate("Pietje", "Puk", RoleType.DIRECTOR)));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><credits><person role='DIRECTOR'><givenName>Pietje</givenName><familyName>Puk</familyName></person></credits><locations /><scheduleEvents/><images/><segments/></program>";
@@ -440,7 +443,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetScheduleEvent() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setScheduleEvent(new ScheduleEventUpdate(
             Channel.RAD5,
             Instant.ofEpochMilli(97779),
@@ -464,7 +467,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetScheduleEventWithTexts() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         ScheduleEventUpdate se = new ScheduleEventUpdate(
             Channel.RAD5,
             Instant.ofEpochMilli(97779),
@@ -497,7 +500,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetRelations() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setRelations(new TreeSet<>(Collections.singletonList(new RelationUpdate(
             "ARTIST",
             "VPRO",
@@ -536,6 +539,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         Program program = program().images(image, image2).build();
         ProgramUpdate update = ProgramUpdate.create(program);
+        update.setVersion(null);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
@@ -558,7 +562,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetEpisodeOf() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setEpisodeOf(new TreeSet<>(Collections.singletonList(new MemberRefUpdate(20, "urn:vpro:media:group:864"))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><episodeOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</episodeOf><segments/></program>";
@@ -575,9 +579,12 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetSegments() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
-        update.setSegments(new TreeSet<>(Collections.singletonList(SegmentUpdate.create(
-            new Segment(update.fetch(), Duration.ofMillis(5555), AuthorizedDuration.ofMillis(100))))));
+        ProgramUpdate update = programUpdate();
+        update.setSegments(new TreeSet<>(Collections.singletonList(
+            SegmentUpdate.create(
+                new Segment(update.fetch(), Duration.ofMillis(5555), AuthorizedDuration.ofMillis(100)),
+                null
+            ))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments><segment embeddable=\"true\"><duration>P0DT0H0M0.100S</duration><locations/><scheduleEvents/><images/><start>P0DT0H0M5.555S</start></segment></segments></program>";
 
@@ -587,7 +594,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testPortal() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setPortals(Collections.singletonList("STERREN24"));
 
 
