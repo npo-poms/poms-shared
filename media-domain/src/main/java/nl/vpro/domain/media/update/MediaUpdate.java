@@ -103,13 +103,13 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
     @SuppressWarnings("unchecked")
-    public static <M extends MediaObject> MediaUpdate<M> create(M object) {
+    public static <M extends MediaObject> MediaUpdate<M> create(M object, Float version) {
         if(object instanceof Program) {
-            return (MediaUpdate<M>) ProgramUpdate.create((Program)object);
+            return (MediaUpdate<M>) ProgramUpdate.create((Program)object, version);
         } else if(object instanceof Group) {
-            return (MediaUpdate<M>) GroupUpdate.create((Group)object);
+            return (MediaUpdate<M>) GroupUpdate.create((Group)object, version);
         } else {
-            return (MediaUpdate<M>) SegmentUpdate.create((Segment)object);
+            return (MediaUpdate<M>) SegmentUpdate.create((Segment)object, version);
         }
     }
 
