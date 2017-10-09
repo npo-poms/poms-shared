@@ -24,8 +24,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -33,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.Embargo;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
+import nl.vpro.domain.image.BasicImageMetadata;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.image.Metadata;
@@ -242,29 +241,10 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     }
 
     public Image toImage(ImageMetadata<?> metadata) {
+        BasicImageMetadata basic = BasicImageMetadata.of(metadata);
+        basic.copyFromIfSourceSet(this);
         Image result = toImage(metadata.getUrn());
-        if (metadata.getType() != null && type == null) {
-            result.setType(metadata.getType());
-        }
-        if (StringUtils.isNotEmpty(metadata.getTitle()) && title == null) {
-            result.setTitle(metadata.getTitle());
-        }
-        if (StringUtils.isNotEmpty(metadata.getDescription()) && description == null) {
-            result.setDescription(metadata.getDescription());
-        }
-        if (metadata.getWidth() != null) {
-            if (width != null && !metadata.getWidth().equals(width)) {
-                log.warn("Width was set {} but it is actually {}, so ignoring", width, metadata.getWidth());
-            }
-            result.setWidth(metadata.getWidth());
-        }
-        if (metadata.getHeight() != null) {
-            if (height != null && !metadata.getHeight().equals(height)) {
-                log.warn("Height was set {} but it is actually {}, so ignoring", height, metadata.getHeight());
-
-            }
-            result.setHeight(metadata.getHeight());
-        }
+        result.copyFrom(basic);
         return result;
     }
 

@@ -335,7 +335,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     M fetch(ImageImporter importer, OwnerType owner) {
         if(!imported && images != null) {
             for(ImageUpdate imageUpdate : images) {
-                Image image = importer.save(imageUpdate);
+                Image image = importer.save(imageUpdate, true);
                 if (image == null) {
                     log.warn("Cannot add null as image to {}", builder);
                 } else {
