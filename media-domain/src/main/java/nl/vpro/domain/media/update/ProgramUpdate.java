@@ -71,6 +71,10 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         return new ProgramUpdate(program);
     }
 
+
+    public static ProgramUpdate create(Program program, Float version) {
+        return new ProgramUpdate(program, version);
+    }
     public static ProgramUpdate create(ProgramType type) {
         ProgramUpdate result = create();
         result.setType(type);
