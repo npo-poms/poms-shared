@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.VersionService;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Segment;
@@ -29,15 +30,24 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
     private SegmentUpdateConfig updateConfig = new SegmentUpdateConfig();
 
     private SegmentUpdate() {
-        this(MediaBuilder.segment());
+        this(MediaBuilder.segment(), null);
     }
 
+    private SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder, Float version) {
+        super(builder, version);
+    }
+
+
     private SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder) {
-        super(builder);
+        this(builder, VersionService.floatVersion());
+    }
+
+    private SegmentUpdate(Segment segment, Float version) {
+        super(MediaBuilder.segment(segment), version);
     }
 
     private SegmentUpdate(Segment segment) {
-        super(MediaBuilder.segment(segment));
+        this(MediaBuilder.segment(segment), VersionService.floatVersion());
     }
 
 

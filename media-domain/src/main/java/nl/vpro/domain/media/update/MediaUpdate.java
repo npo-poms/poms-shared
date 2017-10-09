@@ -27,7 +27,6 @@ import nl.vpro.VersionService;
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
-import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -184,13 +183,17 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder) {
-        this(builder, OwnerType.BROADCASTER);
+        this(builder, OwnerType.BROADCASTER, VersionService.floatVersion());
     }
 
-    protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, OwnerType type) {
+    protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, Float version) {
+        this(builder, OwnerType.BROADCASTER, version);
+    }
+
+    protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, OwnerType type, Float version) {
         this.builder = builder;
         this.owner = type;
-        this.version = VersionService.floatVersion();
+        this.version = version;
     }
 
     @XmlAttribute
@@ -625,8 +628,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.tags = new TreeSet<>(Arrays.asList(tags));
     }
 
-    @XmlElement(name = "country", namespace = Xmlns.UPDATE_NAMESPACE)
-    @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
+    @XmlElement(name = "country")
+    @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
     public List<CountryCode> getCountries() {
         return mediaObject().getCountries();
     }
