@@ -69,7 +69,7 @@ public class MediaUpdateListTest {
 
 
     @Test
-    public void mediaUdateList() throws IOException, SAXException {
+    public void mediaUpdateList() throws IOException, SAXException {
         Program program = MediaBuilder
             .program()
             .  urn("urn:vpro:media:program:123")
@@ -87,7 +87,8 @@ public class MediaUpdateListTest {
             ).build();
 
         assertThat(program.getMid()).isEqualTo("POMS_1234");
-        MediaUpdateList<ProgramUpdate> list = new MediaUpdateList<>(ProgramUpdate.create(program));
+        MediaUpdateList<ProgramUpdate> list = new MediaUpdateList<>(
+            ProgramUpdate.create(program, null));
         StringWriter writer = new StringWriter();
         JAXB.marshal(list, writer);
 
