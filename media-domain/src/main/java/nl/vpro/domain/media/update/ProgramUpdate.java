@@ -119,15 +119,15 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     }
 
     @Override
-    Program fetch(ImageImporter importer, OwnerType owner) {
+    Program fetch(ImageImporter importer, Assemblage assemblage) {
         if (segments != null) {
             for (SegmentUpdate update : segments) {
-                Segment segment = update.fetch(importer, owner);
+                Segment segment = update.fetch(importer, assemblage);
                 getBuilder().segments(segment);
             }
             segments = null;
         }
-        return super.fetch(importer, owner); // super checks on download once!
+        return super.fetch(importer, assemblage); // super checks on download once!
     }
 
     @XmlAttribute
