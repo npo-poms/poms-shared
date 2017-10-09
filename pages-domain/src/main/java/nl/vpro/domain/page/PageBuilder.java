@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.URISyntaxException;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.classification.TermNotFoundException;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.page.update.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
@@ -283,13 +285,28 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         return self;
     }
 
+    public PB publishStart(LocalDateTime date) {
+        page.setPublishStartInstant(date.atZone(Schedule.ZONE_ID).toInstant());
+        return self;
+    }
+
     public PB lastModified(Instant date) {
         page.setLastModified(date);
         return self;
     }
 
+    public PB lastModified(LocalDateTime date) {
+        page.setLastModified(date.atZone(Schedule.ZONE_ID).toInstant());
+        return self;
+    }
+
     public PB creationDate(Instant date) {
         page.setCreationDate(date);
+        return self;
+    }
+
+    public PB creationDate(LocalDateTime date) {
+        page.setCreationDate(date.atZone(Schedule.ZONE_ID).toInstant());
         return self;
     }
 
