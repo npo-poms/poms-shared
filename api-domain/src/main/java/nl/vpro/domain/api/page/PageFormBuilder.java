@@ -342,6 +342,15 @@ public class PageFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
+    public PageFormBuilder asc(PageSortField field) {
+        return addSortField(field, Order.ASC);
+    }
+
+    public PageFormBuilder desc(PageSortField field) {
+        return addSortField(field, Order.DESC);
+    }
+
+
     public PageFormBuilder mediaFacet(MediaFacets facet) {
         getMediaForm().setFacets(facet);
         return this;
