@@ -45,6 +45,12 @@ public final class GroupUpdate extends MediaUpdate<Group> {
         return new GroupUpdate(group, VersionService.floatVersion());
     }
 
+
+    public static GroupUpdate create(Group group, Float version) {
+        return new GroupUpdate(group, version);
+    }
+
+
     @Override
     public MediaBuilder.GroupBuilder getBuilder() {
         return (MediaBuilder.GroupBuilder) super.getBuilder();
