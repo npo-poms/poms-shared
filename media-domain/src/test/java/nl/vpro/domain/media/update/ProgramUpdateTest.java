@@ -25,6 +25,7 @@ import javax.xml.validation.Validator;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import nl.vpro.VersionService;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
@@ -598,20 +599,26 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testAgeRating() throws JAXBException, IOException, SAXException {
         ProgramUpdate update  = ProgramUpdate.create();
+        update.setVersion(VersionService.floatVersion());
         update.setAgeRating(AgeRating._6);
 
         assertThat(update.getAgeRating()).isEqualTo(AgeRating._6);
         assertThat(update.fetch().getAgeRating()).isEqualTo(AgeRating._6);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><ageRating>6</ageRating><locations/><scheduleEvents/><images/><segments/></program>";
-
-        JAXBTestUtil.roundTripAndSimilar(update, expected);
+        JAXBTestUtil.roundTripAndSimilar(update,
+            "<program version=\"5.5\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <ageRating>6</ageRating>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>");
     }
 
 
     @Test
     public void testContentRating() throws JAXBException, IOException, SAXException {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setContentRatings(Arrays.asList(ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL));
 
         assertThat(update.getContentRatings()).containsExactly(ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL);
@@ -624,7 +631,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testGetTags() throws Exception {
-        ProgramUpdate update = ProgramUpdate.create();
+        ProgramUpdate update = programUpdate();
         update.setId(10L);
         update.setTags(new TreeSet<>(Arrays.asList("foo", "bar")));
 
@@ -749,12 +756,20 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = ProgramUpdate.create(program);
         JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "     <country>NL</country>\n" +
+            "    <language>nl</language>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
             "    <segments/>\n" +
             "</program>\n");
 
-
     }
+    protected ProgramUpdate programUpdate() {
+        ProgramUpdate update = ProgramUpdate.create();
+        update.setVersion(null);
+        return update;
+    }
+
+
 }
