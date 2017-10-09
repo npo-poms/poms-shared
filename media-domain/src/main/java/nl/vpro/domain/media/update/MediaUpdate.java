@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -919,5 +920,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected M mediaObject() {
 
         return builder.mediaObject();
+    }
+
+    void afterUnmarshal(Unmarshaller u, Object parent) {
+        if (parent != null) {
+            version = null;
+        }
     }
 }
