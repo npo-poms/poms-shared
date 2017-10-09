@@ -332,10 +332,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
     /**
      * Please use MediaUpdateService#fetch in stead.
      */
-    M fetch(ImageImporter importer, OwnerType owner) {
+    M fetch(ImageImporter importer, Assemblage assemblage) {
         if(!imported && images != null) {
             for(ImageUpdate imageUpdate : images) {
-                Image image = importer.save(imageUpdate, true);
+                Image image = importer.save(imageUpdate, assemblage.isImageMetaData());
                 if (image == null) {
                     log.warn("Cannot add null as image to {}", builder);
                 } else {
