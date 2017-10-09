@@ -63,6 +63,11 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
         return new SegmentUpdate(segment);
     }
 
+
+    public static SegmentUpdate create(Segment segment, Float version) {
+        return new SegmentUpdate(segment, version);
+    }
+
     @Override
     public MediaBuilder.SegmentBuilder getBuilder() {
         return (MediaBuilder.SegmentBuilder) super.getBuilder();
