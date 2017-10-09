@@ -38,6 +38,9 @@ public class MediaUpdateList<T> implements Iterable<T> {
     @XmlAttribute
     protected String order;
 
+    @XmlAttribute
+    protected Float version;
+
 
     public MediaUpdateList() {
         super();
