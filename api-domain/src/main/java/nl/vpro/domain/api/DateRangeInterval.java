@@ -66,7 +66,8 @@ public class DateRangeInterval implements RangeFacet<Instant> {
     public boolean matches(Instant begin, Instant end) {
 
         return
-            Duration.between(begin, end).equals(interval.getDuration())
+            begin != null && end != null
+                && Duration.between(begin, end).equals(interval.getDuration())
                 && interval.isBucketBegin(begin)
                 && interval.isBucketEnd(end);
     }
