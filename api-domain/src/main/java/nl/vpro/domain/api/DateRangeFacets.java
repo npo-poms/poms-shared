@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Instant;
 import java.util.*;
 
@@ -32,6 +35,8 @@ public class DateRangeFacets<T extends AbstractSearch> extends AbstractFacet<T> 
         @XmlElement(name = "range", type = DateRangeFacetItem.class)
     })
     @JsonIgnore
+    @Getter
+    @Setter
     private List<RangeFacet<Instant>> ranges;
 
     public DateRangeFacets() {
@@ -42,14 +47,6 @@ public class DateRangeFacets<T extends AbstractSearch> extends AbstractFacet<T> 
         if(ranges != null && ranges.length > 0) {
             this.ranges = Arrays.asList(ranges);
         }
-    }
-
-    public List<RangeFacet<Instant>> getRanges() {
-        return ranges;
-    }
-
-    public void setRanges(List<RangeFacet<Instant>> ranges) {
-        this.ranges = ranges;
     }
 
     @SafeVarargs
