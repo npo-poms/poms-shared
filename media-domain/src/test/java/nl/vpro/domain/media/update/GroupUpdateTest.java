@@ -56,6 +56,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetType() throws Exception {
         GroupUpdate update = GroupUpdate.create();
+        update.setVersion(null);
         update.setType(GroupType.SEASON);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><group type=\"SEASON\"  ordered=\"true\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/></group>";
@@ -66,6 +67,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPoSeriesID() throws Exception {
         GroupUpdate update = GroupUpdate.create();
+        update.setVersion(null);
         update.setPoSeriesID("VPWON_333");
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
