@@ -32,11 +32,15 @@ public interface RunAsImageWebService {
     @WebResult(name = "imageMetadata", targetNamespace = "")
     @RequestWrapper(localName = "upload", className = "nl.vpro.ws.image.UploadAsRequest")
     @ResponseWrapper(localName = "uploadResponse", className = "nl.vpro.ws.image.UploadResponse")
-    BasicImageMetadata upload(@WebParam(name = "principalId", targetNamespace = "") String principalId,
-            @WebParam(name = "title", targetNamespace = "") String title,
-            @WebParam(name = "description", targetNamespace = "") String description,
-            @WebParam(name = "type", targetNamespace = "") ImageType type,
-            @WebParam(name = "data", targetNamespace = "") DataHandler data);
+    BasicImageMetadata upload(
+        @WebParam(name = "principalId", targetNamespace = "") String principalId,
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "data", targetNamespace = "") DataHandler data,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata
+
+    );
 
     @WebMethod(operationName = "upload")
     @RequestWrapper(localName = "upload", className = "nl.vpro.ws.image.UploadAsRequest")

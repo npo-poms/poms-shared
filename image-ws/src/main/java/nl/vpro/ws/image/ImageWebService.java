@@ -41,7 +41,10 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "data", targetNamespace = "") DataHandler data);
+        @WebParam(name = "data", targetNamespace = "") DataHandler data,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata
+
+    );
 
     @WebMethod(operationName = "upload")
     @RequestWrapper(
