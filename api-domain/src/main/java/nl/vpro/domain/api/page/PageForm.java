@@ -31,6 +31,12 @@ import nl.vpro.domain.page.Page;
     })
 public class PageForm implements SortableForm, Predicate<Page> {
 
+
+    public static PageFormBuilder builder() {
+        return PageFormBuilder.form();
+    }
+
+
     @JsonProperty("highlight")
     @XmlAttribute(name = "highlight")
     private Boolean highlighted = null;
