@@ -20,7 +20,7 @@ import nl.vpro.domain.media.support.Title;
 /**
  * @author lies
  */
-@XmlType(name = "TitleSearchType", propOrder = {"owner", "type", "value"})
+@XmlType(name = "titleSearchType", propOrder = {"owner", "type", "value"})
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode
 public class TitleSearch implements Predicate<Title> {
