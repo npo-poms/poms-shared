@@ -8,7 +8,7 @@ import nl.vpro.domain.media.support.Image;
 
 public interface ImageImporter {
 
-    Image save(ImageUpdate download) throws DownloadException;
+    Image save(ImageUpdate download, boolean metadata) throws DownloadException;
 
 
 

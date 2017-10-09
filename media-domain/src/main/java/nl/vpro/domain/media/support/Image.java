@@ -539,36 +539,10 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
         return image;
     }
 
-    public Image copyFrom(ImageMetadata<?> metaData) {
-        setImageUri(metaData.getUrn());
-        setType(metaData.getType());
-        setTitle(metaData.getTitle());
-        setDescription(metaData.getDescription());
-        setHeight(metaData.getHeight());
-        setWidth(metaData.getWidth());
-        return this;
-    }
-
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : (imageUri == null ? 0 : imageUri.hashCode());
     }
 
-    public void updateImageProperties(Image imageToUpdate) {
-        imageToUpdate.setTitle(getTitle());
-        imageToUpdate.setDescription(getDescription());
-        imageToUpdate.setType(getType());
-        imageToUpdate.setHeight(getHeight());
-        imageToUpdate.setWidth(getWidth());
-        imageToUpdate.setType(getType());
-        imageToUpdate.setImageUri(getImageUri());
-        imageToUpdate.setHighlighted(isHighlighted());
-        imageToUpdate.setCredits(getCredits());
-        imageToUpdate.setSource(getSource());
-        imageToUpdate.setSourceName(getSourceName());
-        imageToUpdate.setDate(getDate());
-        imageToUpdate.setLicense(getLicense());
 
-        Embargos.copy(this, imageToUpdate);
-    }
 }
