@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
+import nl.vpro.VersionService;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ProgramType;
@@ -38,20 +39,24 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     private ProgramUpdateConfig updateConfig = new ProgramUpdateConfig();
 
     public ProgramUpdate() {
-        super(MediaBuilder.program());
+        super(MediaBuilder.program(), null);
     }
 
     private ProgramUpdate(MediaBuilder.AbstractProgramBuilder builder) {
         super(builder);
     }
 
+    private ProgramUpdate(Program program, Float version) {
+        this(program, OwnerType.BROADCASTER, version);
+    }
+
     private ProgramUpdate(Program program) {
-        this(program, OwnerType.BROADCASTER);
+        this(program, OwnerType.BROADCASTER, VersionService.floatVersion());
     }
 
 
-    private ProgramUpdate(Program program, OwnerType type) {
-        super(MediaBuilder.program(program), type);
+    private ProgramUpdate(Program program, OwnerType type, Float version) {
+        super(MediaBuilder.program(program), type, version);
     }
 
     public static ProgramUpdate create() {
@@ -74,7 +79,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
 
     public static ProgramUpdate forOwner(Program program, OwnerType type) {
-        return new ProgramUpdate(program, type);
+        return new ProgramUpdate(program, type, VersionService.floatVersion());
     }
 
     public static ProgramUpdate forAllOwners(Program program) {
