@@ -23,9 +23,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.VersionService;
+import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
+import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
@@ -42,34 +46,37 @@ import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+import nl.vpro.xml.bind.LocaleAdapter;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(
     name = "mediaUpdateType",
     propOrder = {
-    "crids",
-    "broadcasters",
-    "portals",
-    "portalRestrictions",
-    "geoRestrictions",
-    "titles",
-    "descriptions",
-    "tags",
-    "genres",
-    "avAttributes",
-    "releaseYear",
-    "duration",
-    "persons",
-    "memberOf",
-    "ageRating",
-    "contentRatings",
-    "email",
-    "websites",
-    "locations",
-    "scheduleEvents",
-    "relations",
-    "images",
-    "asset"
+        "crids",
+        "broadcasters",
+        "portals",
+        "portalRestrictions",
+        "geoRestrictions",
+        "titles",
+        "descriptions",
+        "tags",
+        "countries",
+        "languages",
+        "genres",
+        "avAttributes",
+        "releaseYear",
+        "duration",
+        "persons",
+        "memberOf",
+        "ageRating",
+        "contentRatings",
+        "email",
+        "websites",
+        "locations",
+        "scheduleEvents",
+        "relations",
+        "images",
+        "asset",
 })
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
@@ -115,6 +122,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
             return (MediaUpdate<M>) GroupUpdate.create((MediaBuilder.AbstractGroupBuilder) object);
         }
     }
+
+    protected Float version;
+
 
     protected MediaBuilder<?, M> builder;
 
@@ -180,6 +190,16 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, OwnerType type) {
         this.builder = builder;
         this.owner = type;
+        this.version = VersionService.floatVersion();
+    }
+
+    @XmlAttribute
+    public Float getVersion() {
+        return version;
+    }
+
+    public void setVersion(Float version) {
+        this.version = version;
     }
 
     public boolean isValid() {
@@ -603,6 +623,25 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     public void setTags(String... tags) {
         this.tags = new TreeSet<>(Arrays.asList(tags));
+    }
+
+    @XmlElement(name = "country", namespace = Xmlns.UPDATE_NAMESPACE)
+    @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
+    public List<CountryCode> getCountries() {
+        return mediaObject().getCountries();
+    }
+
+    public void setCountries(List<CountryCode> countries) {
+        mediaObject().setCountries(countries);
+    }
+
+    @XmlElement(name = "language")
+    @XmlJavaTypeAdapter(value = LocaleAdapter.class)
+    public List<Locale> getLanguages() {
+        return mediaObject().getLanguages();
+    }
+    public void setLanguages(List<Locale> languages) {
+        mediaObject().setLanguages(languages);
     }
 
     @XmlElement(name = "genre")
