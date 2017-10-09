@@ -754,15 +754,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testCountriesAndLanguages() throws IOException, SAXException {
         Program program = program().countries("NL").languages("nl").build();
         ProgramUpdate update = ProgramUpdate.create(program);
-        JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "     <country>NL</country>\n" +
+        JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <country>NL</country>\n" +
             "    <language>nl</language>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
             "    <segments/>\n" +
-            "</program>\n");
+            "</program>");
 
     }
     protected ProgramUpdate programUpdate() {

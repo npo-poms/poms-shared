@@ -6,6 +6,7 @@ package nl.vpro.domain.media.update;
 
 import javax.xml.bind.annotation.*;
 
+import nl.vpro.VersionService;
 import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.GroupType;
 import nl.vpro.domain.media.MediaBuilder;
@@ -21,27 +22,27 @@ public final class GroupUpdate extends MediaUpdate<Group> {
     private GroupUpdateConfig updateConfig = new GroupUpdateConfig();
 
     private GroupUpdate() {
-        this(MediaBuilder.group());
+        this(MediaBuilder.group(), null);
     }
 
-    private GroupUpdate(MediaBuilder.GroupBuilder builder) {
-        super(builder);
+    private GroupUpdate(MediaBuilder.GroupBuilder builder, Float version) {
+        super(builder, version);
     }
 
-    private GroupUpdate(Group group) {
-        super(MediaBuilder.group(group));
+    private GroupUpdate(Group group, Float version) {
+        super(MediaBuilder.group(group), version);
     }
 
     public static GroupUpdate create() {
-        return new GroupUpdate(MediaBuilder.group());
+        return new GroupUpdate(MediaBuilder.group(), VersionService.floatVersion());
     }
 
     public static GroupUpdate create(MediaBuilder.AbstractGroupBuilder<?> builder) {
-        return new GroupUpdate(builder.build());
+        return new GroupUpdate(builder.build(), VersionService.floatVersion());
     }
 
     public static GroupUpdate create(Group group) {
-        return new GroupUpdate(group);
+        return new GroupUpdate(group, VersionService.floatVersion());
     }
 
     @Override
