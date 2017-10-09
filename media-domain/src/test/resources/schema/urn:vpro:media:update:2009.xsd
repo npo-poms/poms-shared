@@ -62,6 +62,8 @@
       <xs:element name="title" type="titleUpdateType" maxOccurs="unbounded"/>
       <xs:element name="description" type="descriptionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tag" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="country" type="media:countryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="avAttributes" type="avAtributeUpdateType" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
@@ -109,6 +111,7 @@
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="urn" type="xs:string"/>
+    <xs:attribute name="version" type="xs:float"/>
   </xs:complexType>
 
   <xs:complexType name="memberRefUpdateType">

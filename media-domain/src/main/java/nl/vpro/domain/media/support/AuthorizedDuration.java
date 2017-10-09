@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAmount;
@@ -68,7 +69,6 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
         return new AuthorizedDuration(java.time.Duration.ofMillis(amount));
     }
 
-
     public static AuthorizedDuration of(java.time.Duration duration) {
         if (duration == null) {
             return null;
@@ -76,6 +76,13 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
         return new AuthorizedDuration(duration);
     }
 
+
+    public static Duration duration(AuthorizedDuration duration) {
+        if (duration == null) {
+            return null;
+        }
+        return duration.get();
+    }
 
     /*public static Duration ofTemporalAmount(TemporalAmount duration) {
         if (duration == null) {
