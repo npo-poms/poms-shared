@@ -48,6 +48,7 @@ public interface MediaBackendRestService {
     String VALIDATE_INPUT = "validateInput";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated against the XSD first";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
+    String IMAGE_METADATA = "imageMetadata";
 
 
     @POST
@@ -93,7 +94,8 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam("lookupcrid") @DefaultValue("true") Boolean lookupcrid,
-        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
+        @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata
     ) throws IOException;
 
     @POST
@@ -136,7 +138,9 @@ public interface MediaBackendRestService {
         @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
-        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
+        @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
+        @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata
+
     );
 
 
