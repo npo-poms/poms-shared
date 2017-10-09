@@ -19,7 +19,7 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
 /**
  * 'Run as' Wrapper for ImageWebService
- * 
+ *
  * @author Danny Sedney
  *
  */
@@ -60,11 +60,14 @@ public interface RunAsImageWebService {
     @WebResult(name = "imageMetadata", targetNamespace = "")
     @RequestWrapper(localName = "download", className = "nl.vpro.ws.image.DownloadAsRequest")
     @ResponseWrapper(localName = "downloadResponse", className = "nl.vpro.ws.image.DownloadResponse")
-    BasicImageMetadata download(@WebParam(name = "principalId", targetNamespace = "") String principalId,
-            @WebParam(name = "title", targetNamespace = "") String title,
-            @WebParam(name = "description", targetNamespace = "") String description,
-            @WebParam(name = "type", targetNamespace = "") ImageType type,
-            @WebParam(name = "url", targetNamespace = "") String url) throws DownloadFault;
+    BasicImageMetadata download(
+        @WebParam(name = "principalId", targetNamespace = "") String principalId,
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "url", targetNamespace = "") String url,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata
+    ) throws DownloadFault;
 
     @WebMethod(operationName = "download")
     @RequestWrapper(localName = "download", className = "nl.vpro.ws.image.DownloadAsRequest")
