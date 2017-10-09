@@ -110,6 +110,8 @@
       <xs:element name="title" type="titleUpdateType" form="qualified" maxOccurs="unbounded"/>
       <xs:element name="description" type="descriptionUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tag" type="tagUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="country" type="media:countryType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="language" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genre" type="genreUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="avAttributes" type="avAtributeUpdateType" form="qualified" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" form="qualified" minOccurs="0"/>
@@ -154,6 +156,7 @@
     <xs:attribute name="mid" type="media:midType"/>
     <xs:attribute name="urn" type="xs:anyURI"/>
     <xs:attribute name="ordered" type="xs:boolean"/>
+    <xs:attribute name="version" type="xs:float"/>
   </xs:complexType>
 
   <xs:complexType name="bulkUpdateType">
