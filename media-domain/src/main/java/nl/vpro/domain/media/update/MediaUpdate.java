@@ -113,6 +113,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
         }
     }
 
+
+    public static <M extends MediaObject> MediaUpdate<M> create(M object) {
+        return create(object, null);
+    }
+
     public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object) {
         if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
             return (MediaUpdate<M>) SegmentUpdate.create((MediaBuilder.AbstractSegmentBuilder) object);
