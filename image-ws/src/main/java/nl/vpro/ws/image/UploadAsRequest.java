@@ -4,6 +4,9 @@
  */
 package nl.vpro.ws.image;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.activation.DataHandler;
 import javax.xml.bind.annotation.*;
 
@@ -13,6 +16,8 @@ import nl.vpro.domain.image.ImageType;
 @XmlRootElement(name = "uploadAsRequest", namespace = Xmlns.IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "uploadAsRequestType", propOrder = { "principalId" })
+@Getter
+@Setter
 public class UploadAsRequest extends UploadRequest {
 
     @XmlElement(namespace = Xmlns.IMAGE_WS_NAMESPACE, required = true)
@@ -24,14 +29,6 @@ public class UploadAsRequest extends UploadRequest {
 
     public UploadAsRequest(String principalId, String title, String description, ImageType type, DataHandler data) {
         super(title, description, type, data);
-        this.principalId = principalId;
-    }
-
-    public String getPrincipalId() {
-        return principalId;
-    }
-
-    public void setPrincipalId(String principalId) {
         this.principalId = principalId;
     }
 

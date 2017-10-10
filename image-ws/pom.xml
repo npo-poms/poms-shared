@@ -20,5 +20,9 @@
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-ws</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
   </dependencies>
 </project>

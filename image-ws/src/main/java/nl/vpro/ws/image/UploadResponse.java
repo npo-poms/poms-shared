@@ -4,6 +4,10 @@
  */
 package nl.vpro.ws.image;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.BasicImageMetadata;
@@ -11,16 +15,20 @@ import nl.vpro.domain.image.BasicImageMetadata;
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
 @XmlRootElement(name = "uploadResponse", namespace = IMAGE_WS_NAMESPACE)
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "uploadResponseType", propOrder = {
     "urn",
     "imageMetadata"
 })
+@Getter
+@Setter
+@ToString
 public class UploadResponse {
 
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private String urn;
 
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private BasicImageMetadata imageMetadata;
 
     public UploadResponse() {
@@ -35,25 +43,5 @@ public class UploadResponse {
         this.imageMetadata = imageMetadata;
     }
 
-    public String getUrn() {
-        return urn;
-    }
 
-    public void setUrn(String urn) {
-        this.urn = urn;
-    }
-
-    public BasicImageMetadata getImageMetadata() {
-        return imageMetadata;
-    }
-
-    public void setImageMetadata(BasicImageMetadata imageMetadata) {
-        this.imageMetadata = imageMetadata;
-    }
-
-    @Override
-    public String toString() {
-        return "UploadResponse{" +
-            "urn='" + urn + "\', imageMetadata='" + imageMetadata.toString() + "\'" + '}';
-    }
 }

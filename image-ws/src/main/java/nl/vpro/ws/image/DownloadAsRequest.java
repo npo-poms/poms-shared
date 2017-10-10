@@ -4,6 +4,9 @@
  */
 package nl.vpro.ws.image;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Xmlns;
@@ -12,6 +15,8 @@ import nl.vpro.domain.image.ImageType;
 @XmlRootElement(name = "downloadAsRequest", namespace = Xmlns.IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "downloadAsRequestType", propOrder = { "principalId" })
+@Getter
+@Setter
 public class DownloadAsRequest extends DownloadRequest {
 
     @XmlElement(namespace = Xmlns.IMAGE_WS_NAMESPACE, required = true)
@@ -23,14 +28,6 @@ public class DownloadAsRequest extends DownloadRequest {
 
     public DownloadAsRequest(String principalId, String title, String description, ImageType type, String url) {
         super(title, description, type, url);
-        this.principalId = principalId;
-    }
-
-    public String getPrincipalId() {
-        return principalId;
-    }
-
-    public void setPrincipalId(String principalId) {
         this.principalId = principalId;
     }
 

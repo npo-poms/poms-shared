@@ -4,6 +4,9 @@
  */
 package nl.vpro.ws.image;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
@@ -13,10 +16,15 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 @XmlRootElement(name = "downloadRequest", namespace = IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "downloadRequestType", propOrder = {
-        "title",
-        "description",
-        "type",
-        "url"})
+    "title",
+    "description",
+    "type",
+    "url",
+    "imageMetadata"
+})
+
+@Setter
+@Getter
 public class DownloadRequest {
 
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
@@ -32,6 +40,10 @@ public class DownloadRequest {
     private String url;
 
 
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private Boolean imageMetadata;
+
+
     public DownloadRequest() {
         // nothing
     }
@@ -43,35 +55,5 @@ public class DownloadRequest {
         this.url = url;
     }
 
-    public String getTitle() {
-        return title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public ImageType getType() {
-        return type;
-    }
-
-    public void setType(ImageType type) {
-        this.type = type;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 }

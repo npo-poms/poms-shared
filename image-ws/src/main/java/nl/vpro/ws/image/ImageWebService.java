@@ -88,7 +88,7 @@ public interface ImageWebService {
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
         @WebParam(name = "url", targetNamespace = "") String url,
-        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata
     ) throws DownloadFault;
 
     @WebMethod(operationName = "download")
