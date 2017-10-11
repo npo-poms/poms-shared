@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
-import nl.vpro.domain.api.AbstractFacet;
+
 import nl.vpro.domain.api.SearchableFacet;
 
 /**
@@ -16,9 +16,11 @@ import nl.vpro.domain.api.SearchableFacet;
  * @since 5.5
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "mediaTitleFacetListType", propOrder = {"filter", "subSearch", "facets"})
+@XmlType(name = "mediaTitleFacetListType", propOrder = {"filter", "subSearch",   "facets"})
 
-public class TitleFacetList extends AbstractFacet<MediaSearch> implements SearchableFacet<TitleSearch>, Iterable<TitleFacet> {
+public class TitleFacetList
+    extends MediaFacet /* extending MediaFacet is mainly done for backwards compatibility */
+    implements SearchableFacet<TitleSearch>, Iterable<TitleFacet> {
 
     @Valid
     private MediaSearch filter;
@@ -26,11 +28,13 @@ public class TitleFacetList extends AbstractFacet<MediaSearch> implements Search
     @Valid
     private TitleSearch subSearch;
 
-    @XmlElement(name = "facet")
+
     @Valid
+    @XmlElement(name = "title")
     protected List<TitleFacet> facets;
 
     public TitleFacetList() {
+        super(null, null, null);
     }
 
     public TitleFacetList(List<TitleFacet> facets) {
@@ -76,6 +80,8 @@ public class TitleFacetList extends AbstractFacet<MediaSearch> implements Search
     public int size() {
         return facets == null ? 0 : facets.size();
     }
+
+
 
     @Override
     public boolean hasSubSearch() {

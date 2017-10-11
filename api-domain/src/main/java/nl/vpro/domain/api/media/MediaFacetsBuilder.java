@@ -23,12 +23,15 @@ public class MediaFacetsBuilder {
     }
 
     public MediaFacetsBuilder titles() {
-        facets.setTitles(new MediaFacet());
+        facets.setTitles(new TitleFacetList());
         return this;
     }
 
     public MediaFacetsBuilder titles(Integer threshold, FacetOrder sort, Integer max) {
-        facets.setTitles(new MediaFacet(threshold, sort, max));
+        TitleFacetList titleFacets  = new TitleFacetList();
+        titleFacets.setThreshold(threshold);
+        titleFacets.setSort(sort);
+        titleFacets.setMax(max);
         return this;
     }
 

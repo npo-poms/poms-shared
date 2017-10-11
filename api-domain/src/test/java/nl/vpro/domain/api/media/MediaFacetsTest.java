@@ -228,4 +228,44 @@ public class MediaFacetsTest {
         assertThat(out.getFilter().getText().getValue()).isEqualTo("find me");
     }
 
+
+    @Test
+    public void testGetMediaSearchFromFacetTitlesBackwardsCompatibleJson() throws Exception {
+
+        String example = "{\n" +
+            "  \"facets\" : {\n" +
+            "    \"titles\" : {\n" +
+            "      \"sort\" : \"VALUE_ASC\",\n" +
+            "      \"max\" : 23\n" +
+            "    }\n" +
+            "  }\n" +
+            "}";
+
+        MediaForm form = Jackson2Mapper.getLenientInstance().readValue(example, MediaForm.class);
+
+        assertThat(form.getFacets().getTitles()).isNotNull();
+        assertThat(form.getFacets().getTitles().getMax()).isEqualTo(23);
+
+    }
+
+
+    @Test
+    public void testGetMediaSearchFromFacetTitlesBackwardsCompatibleXml() throws Exception {
+
+        String example = "<mediaForm xmlns=\"urn:vpro:api:2013\">\n" +
+            "  <facets>\n" +
+            "    <titles sort=\"COUNT_DESC\">\n" +
+            "      <max>25</max>\n" +
+            "    </titles>\n" +
+            "  </facets>\n" +
+            "</mediaForm>";
+
+        MediaForm form = JAXB.unmarshal(new StringReader(example), MediaForm.class);
+
+        assertThat(form.getFacets().getTitles()).isNotNull();
+        assertThat(form.getFacets().getTitles().getMax()).isEqualTo(25);
+        assertThat(form.getFacets().getTitles().getSort()).isEqualTo(FacetOrder.COUNT_DESC);
+
+    }
+
 }
