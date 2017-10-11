@@ -5,7 +5,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.TreeSet;
 
 import org.junit.Test;
@@ -165,7 +164,7 @@ public class MediaSearchTest {
 
     @Test
     public void testApplyIncludeSortDates() {
-        DateRangeMatcher range = new DateRangeMatcher(new Date(0), new Date(10));
+        DateRangeMatcher range = new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(10));
 
         MediaSearch search = new MediaSearch();
         search.setSortDates(new DateRangeMatcherList(range));
@@ -183,7 +182,7 @@ public class MediaSearchTest {
 
     @Test
     public void testApplyExcludeSortDates() {
-        DateRangeMatcher range = new DateRangeMatcher(new Date(0), new Date(10));
+        DateRangeMatcher range = new DateRangeMatcher(Instant.EPOCH, Instant.ofEpochMilli(10));
         range.setMatch(Match.NOT);
 
         MediaSearch search = new MediaSearch();
