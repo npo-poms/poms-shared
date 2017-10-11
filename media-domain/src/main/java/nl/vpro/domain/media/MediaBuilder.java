@@ -313,6 +313,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return mainTitle(title, OwnerType.BROADCASTER);
     }
 
+
+    default B subTitle(String title, OwnerType owner) {
+        return titles(new Title(title, owner, TextualType.SUB));
+    }
+
+    default B subTitle(String title) {
+        return subTitle(title, OwnerType.BROADCASTER);
+    }
+
+
     default B lexicoTitle(String title, OwnerType owner) {
         return titles(new Title(title, owner, TextualType.LEXICO));
     }
