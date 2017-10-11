@@ -55,6 +55,15 @@ public class TextualObjects {
         return result;
     }
 
+    /**
+     * Creates a new sorted set of titles where:
+     * <ul>
+     *  <li>All Textual Types from {@link TextualType#TITLES} are filled according to the business logic of POMs.
+     *    This means mainly that the value for LEXICO is filled with MAIN if empty otherwise</li>
+     *  <li><For all those fields it is assured that values with owner types {@link OwnerType#ENTRIES} are added if there are not present yet,
+     *    according to the business logic of POMS. This means that if there is title of a certain type, than at least it is present for owners BROADCASTER and NPO too.</li>
+     *  </ul>
+     */
     public static <OT extends OwnedText> SortedSet<OT> expandTitles(
         Collection<OT> texts,
         TriFunction<String, OwnerType, TextualType, OT> creator) {
