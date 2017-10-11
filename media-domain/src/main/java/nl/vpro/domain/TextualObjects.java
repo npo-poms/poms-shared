@@ -60,8 +60,8 @@ public class TextualObjects {
         TriFunction<String, OwnerType, TextualType, OT> creator) {
         return expand(texts,
             creator,
-            Arrays.asList(TextualType.TITLES),
-            Arrays.asList(OwnerType.ENTRIES)
+            TextualType.TITLES,
+            OwnerType.ENTRIES
         );
     }
 
@@ -85,7 +85,8 @@ public class TextualObjects {
         TriFunction<String, OwnerType, TextualType, OT> creator) {
         return expand(texts,
             creator,
-            Arrays.asList(TextualType.DESCRIPTIONS), Arrays.asList(OwnerType.ENTRIES));
+            TextualType.DESCRIPTIONS,
+            OwnerType.ENTRIES);
     }
 
     public static <D extends OwnedText> SortedSet<D> expandDescriptions(TextualObject<?, D, ?> textualObject) {

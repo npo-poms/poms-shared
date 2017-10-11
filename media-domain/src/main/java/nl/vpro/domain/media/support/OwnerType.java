@@ -1,6 +1,7 @@
 package nl.vpro.domain.media.support;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -184,6 +185,6 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
     /**
      * the owner types that are relevant to {TextualObjects#}
      */
-    public static OwnerType[] ENTRIES = new OwnerType[] {BROADCASTER, NPO};
+    public static final List<OwnerType> ENTRIES = Collections.unmodifiableList(Arrays.asList(BROADCASTER, NPO));
 
 }
