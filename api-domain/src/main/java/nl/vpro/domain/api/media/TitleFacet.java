@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.NameableSearchableFacet;
 
 
@@ -16,9 +15,9 @@ import nl.vpro.domain.api.NameableSearchableFacet;
 
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(name = "mediaRelationFacetType", propOrder = {"name", "subSearch"})
-@JsonPropertyOrder({"threshold", "sort", "offset", "max", "name", "subSearch"})
-public class TitleFacet extends ExtendedMediaFacet implements NameableSearchableFacet<TitleSearch> {
+@XmlType(name = "mediaTitleFacetType", propOrder = {"name", "subSearch"})
+@JsonPropertyOrder({"name", "subSearch"})
+public class TitleFacet implements NameableSearchableFacet<TitleSearch> {
 
     private String name;
 
@@ -27,10 +26,7 @@ public class TitleFacet extends ExtendedMediaFacet implements NameableSearchable
 
     public TitleFacet() {
     }
-
-    public TitleFacet(Integer threshold, FacetOrder sort, Integer max) {
-        super(threshold, sort, max);
-    }
+ 
 
     @Override
     public boolean hasSubSearch() {
