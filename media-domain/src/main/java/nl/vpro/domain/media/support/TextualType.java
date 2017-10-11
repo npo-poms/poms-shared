@@ -8,6 +8,10 @@
 
 package nl.vpro.domain.media.support;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -86,7 +90,7 @@ mediadb=> select  type, count(*) from description  group by type;
 (5 rows)
 
      */
-    public static TextualType[] TITLES = new TextualType[] {
+    public static final List<TextualType> TITLES = Collections.unmodifiableList(Arrays.asList(
         MAIN,
         SHORT,
         SUB,
@@ -95,16 +99,16 @@ mediadb=> select  type, count(*) from description  group by type;
         LEXICO,
         WORK,
         ABBREVIATION
-    };
+    ));
 
 
-    public static TextualType[] DESCRIPTIONS = new TextualType[]{
+    public static final List<TextualType> DESCRIPTIONS = Collections.unmodifiableList(Arrays.asList(
         MAIN,
         SHORT,
         EPISODE,
         KICKER,
         SUB
-    };
+    ));
 
 
 
