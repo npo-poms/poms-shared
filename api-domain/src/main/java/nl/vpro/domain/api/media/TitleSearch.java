@@ -22,7 +22,7 @@ import nl.vpro.domain.media.support.Title;
  */
 @XmlType(name = "titleSearchType", propOrder = {"owner", "type", "value"})
 @XmlAccessorType(XmlAccessType.NONE)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class TitleSearch extends AbstractSearch implements Predicate<Title> {
     @XmlElement
     @Getter
@@ -53,6 +53,7 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title> {
     }
 
 
+    @Override
     public boolean hasSearches() {
         return owner != null || type != null || value != null;
     }
@@ -64,6 +65,7 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title> {
     }
 
 
+    @Override
     public Match getMatch() {
         return match == null ? Match.MUST : match;
     }

@@ -42,16 +42,16 @@ public abstract class AbstractTextMatcherJson<T extends AbstractTextMatcher<S>, 
             jgen.writeStartObject();
             jgen.writeStringField(VALUE, value.getValue());
             if (value.getMatch() != TextMatcher.DEFAULT_MATCH) {
-                jgen.writeStringField(MATCH, value.getMatch().name().toLowerCase());
+                jgen.writeStringField(MATCH, value.getMatch().name());
             }
             if (!value.getMatchType().getName().equals(TextMatcher.DEFAULT_MATCHTYPE.getName())) {
-                jgen.writeStringField(MATCH_TYPE, value.getMatchType().getName().toLowerCase());
+                jgen.writeStringField(MATCH_TYPE, value.getMatchType().getName());
             }
             if (! value.isCaseSensitive()) {
                 jgen.writeBooleanField(CASE_SENSITIVE, false);
             }
             if (value.getFuzziness() != null) {
-                jgen.writeStringField(FUZZINESS, value.getFuzziness().toLowerCase());
+                jgen.writeStringField(FUZZINESS, value.getFuzziness());
             }
             jgen.writeEndObject();
         } else {
