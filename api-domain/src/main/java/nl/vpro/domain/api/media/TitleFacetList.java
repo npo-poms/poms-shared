@@ -37,6 +37,10 @@ public class TitleFacetList
         super(null, null, null);
     }
 
+    public boolean asMediaFacet() {
+        return getThreshold() != null || getMax() != null || getSort() != null || filter != null || subSearch != null || facets == null;
+    }
+
     public TitleFacetList(List<TitleFacet> facets) {
         this.facets = facets;
     }
