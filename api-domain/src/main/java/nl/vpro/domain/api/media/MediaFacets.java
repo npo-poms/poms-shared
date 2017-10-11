@@ -21,7 +21,7 @@ import nl.vpro.domain.api.DurationRangeFacets;
 public class MediaFacets {
 
     @XmlElement
-    private MediaFacet titles;
+    private TitleFacetList titles;
 
     @XmlElement
     private MediaFacet types;
@@ -84,11 +84,11 @@ public class MediaFacets {
             || contentRatings != null;
     }
 
-    public MediaFacet getTitles() {
+    public TitleFacetList getTitles() {
         return titles;
     }
 
-    public void setTitles(MediaFacet titles) {
+    public void setTitles(TitleFacetList titles) {
         this.titles = titles;
     }
 
