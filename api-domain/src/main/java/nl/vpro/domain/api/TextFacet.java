@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
 import javax.xml.bind.annotation.*;
@@ -14,6 +17,8 @@ import javax.xml.bind.annotation.*;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "textFacetType")
+@Setter
+@Getter
 public class TextFacet<T extends AbstractSearch> extends AbstractFacet<T> implements Facet<T> {
 
     @XmlElement
@@ -46,30 +51,6 @@ public class TextFacet<T extends AbstractSearch> extends AbstractFacet<T> implem
         }
     }
 
-    public Integer getMax() {
-        return max;
-    }
-
-    public Integer getThreshold() {
-        return threshold;
-    }
-
-    public void setThreshold(Integer threshold) {
-        this.threshold = threshold;
-    }
-
-    public void setMax(Integer max) {
-        this.max = max;
-    }
-
-    public FacetOrder getSort() {
-        return sort;
-    }
-
-    public void setSort(FacetOrder sort) {
-        this.sort = sort;
-    }
-
     @Override
     public T getFilter() {
         return this.filter;
@@ -78,22 +59,6 @@ public class TextFacet<T extends AbstractSearch> extends AbstractFacet<T> implem
     @Override
     public void setFilter(T filter) {
         this.filter = filter;
-    }
-
-    public void setInclude(String regexp) {
-        this.include = regexp;
-    }
-
-    public String getInclude() {
-        return this.include;
-    }
-
-    public void setScript(String script) {
-        this.script = script;
-    }
-
-    public String getScript() {
-        return this.script;
     }
 
     @Override
