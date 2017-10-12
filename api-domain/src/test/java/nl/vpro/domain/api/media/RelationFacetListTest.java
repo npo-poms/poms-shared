@@ -137,6 +137,7 @@ public class RelationFacetListTest {
         facet.setSubSearch(subSearch);
         RelationFacet rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(facet, example);
     }
+
     @Test
     public void testJsonBindingListWithSubSearch() throws Exception {
         RelationSearch subSearch = new RelationSearch();
