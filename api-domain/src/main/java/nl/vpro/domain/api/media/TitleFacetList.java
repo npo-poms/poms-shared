@@ -16,7 +16,7 @@ import nl.vpro.domain.api.SearchableFacet;
  * @since 5.5
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "mediaTitleFacetListType", propOrder = {"filter", "subSearch",   "facets"})
+@XmlType(name = "mediaTitleFacetListType", propOrder = {"filter", "subSearch", "facets"})
 
 public class TitleFacetList
     extends MediaFacet /* extending MediaFacet is mainly done for backwards compatibility */
@@ -38,7 +38,7 @@ public class TitleFacetList
     }
 
     public boolean asMediaFacet() {
-        return getThreshold() != null || getMax() != null || getSort() != null || filter != null || subSearch != null || facets == null;
+        return !(filter != null || subSearch != null || facets != null);
     }
 
     public TitleFacetList(List<TitleFacet> facets) {
@@ -86,7 +86,6 @@ public class TitleFacetList
     }
 
 
-
     @Override
     public boolean hasSubSearch() {
         return subSearch != null && subSearch.hasSearches();
@@ -105,7 +104,7 @@ public class TitleFacetList
             @Override
             public TitleFacet next() {
                 TitleFacet titleFacet = facets.get(index++);
-                if(titleFacet.getName() == null) {
+                if (titleFacet.getName() == null) {
                     titleFacet.setName("titles" + index);
                 }
                 return titleFacet;
