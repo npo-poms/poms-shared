@@ -43,6 +43,8 @@ public class WEBVTTandSRT {
         return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? SRT_CHARSET : charset), ",");
     }
 
+    private static final Pattern INTEGER = Pattern.compile("\\d+");
+
     static Stream<Cue> parse(String parent, Duration offset,  Reader reader, String decimalSeparator) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines().iterator();
@@ -50,7 +52,7 @@ public class WEBVTTandSRT {
         Iterator<Cue> cues = new Iterator<Cue>() {
 
             boolean needsFindNext = true;
-            String headLine= null;
+            Integer cueNumber;
             String timeLine = null;
             StringBuilder content = new StringBuilder();
             boolean readIntro = false;
@@ -64,14 +66,14 @@ public class WEBVTTandSRT {
             @Override
             public Cue next() {
                 findNext();
-                if (timeLine == null || headLine == null) {
+                if (timeLine == null) {
                     throw new NoSuchElementException();
                 }
                 needsFindNext = true;
                 try {
-                    return parseCue(parent, headLine, offset, timeLine, content.toString(), decimalSeparator);
+                    return parseCue(parent, cueNumber, offset, timeLine, content.toString(), decimalSeparator);
                 } catch (IllegalArgumentException e) {
-                    log.warn("Error: {} while parsing\nheadline:{}\ntimeline:{}", e.getMessage(), headLine, timeLine);
+                    log.warn("Error: {} while parsing\nheadline:{}\ntimeline:{}", e.getMessage(), cueNumber, timeLine);
                     return null;
                 }
 
@@ -79,9 +81,11 @@ public class WEBVTTandSRT {
 
             protected void findNext() {
                 if (needsFindNext) {
-                    headLine = null;
+                    cueNumber= null;
                     timeLine = null;
                     content.setLength(0);
+
+                    String headLine = null;
                     while (stream.hasNext()) {
                         String l = stream.next();
                         if (StringUtils.isNotBlank(l)) {
@@ -91,14 +95,35 @@ public class WEBVTTandSRT {
                                     continue;
                                 }
                             }
-                            headLine = l.trim();
                             readIntro = true;
+
+                            if (l.startsWith("NOTE")) {
+                                while (stream.hasNext()) {
+                                    if (StringUtils.isBlank(l)) {
+                                        break;
+                                    }
+                                }
+                                while (StringUtils.isBlank(l)) {
+                                    l = stream.next();
+                                }
+                            }
+                            headLine = l.trim();
                             break;
                         }
                     }
-                    if (stream.hasNext()) {
-                        timeLine = stream.next();
+                    if (headLine != null) {
+                        if (INTEGER.matcher(headLine).matches()) {
+                            cueNumber = Integer.parseInt(headLine);
+                            if (stream.hasNext()) {
+                                timeLine = stream.next();
+                            }
+                        } else {
+                            timeLine = headLine;
+                        }
                     }
+
+                    // now read conent
+
                     while (stream.hasNext()) {
                         String l = stream.next();
                         if (StringUtils.isBlank(l)) {
@@ -118,7 +143,7 @@ public class WEBVTTandSRT {
     }
 
 
-    static Cue parseCue(String parent, String headLine, Duration offset, String timeLine, String content, String decimalSeparator) {
+    static Cue parseCue(String parent, Integer cueNumber, Duration offset, String timeLine, String content, String decimalSeparator) {
         String[] split = timeLine.split("\\s+");
         try {
             if (offset == null) {
@@ -126,13 +151,13 @@ public class WEBVTTandSRT {
             }
             return new Cue(
                 parent,
-                Integer.parseInt(headLine),
+                cueNumber,
                 parseDuration(split[0], decimalSeparator).minus(offset),
                 parseDuration(split[2], decimalSeparator).minus(offset),
                 content
             );
         } catch(NumberFormatException nfe) {
-            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Headline: " + headLine + ". Expected content: " + content + ".  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
+            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Headline: " + cueNumber + ". Expected content: " + content + ".  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
         }
 
     }
