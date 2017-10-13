@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -133,6 +134,19 @@ public class SubtitlesUtil {
 
     }
 
+    public static Stream<Cue> fillCueNumber(Stream<Cue> cues) {
+        final AtomicInteger cueNumber = new AtomicInteger(0);
+        return cues
+            .map((cue) -> {
+                if (cue.getSequence() == null) {
+                    cue.sequence = cueNumber.incrementAndGet();
+                } else {
+                    cueNumber.set(cue.getSequence());
+                }
+                return cue;
+                }
+            );
 
+    }
 
 }
