@@ -53,7 +53,11 @@ public class Util {
                 SubtitlesId id = ((StandaloneCue) head).getSubtitlesId();
                 headers(id, httpHeaders, extension);
             } else {
-                httpHeaders.putSingle("Content-Disposition", "inline; filename=" + head.getParent() + "." + "." + extension);
+                if (head != null) {
+                    httpHeaders.putSingle("Content-Disposition", "inline; filename=" + head.getParent() + "." + "." + extension);
+                } else {
+
+                }
             }
         }
         return peeking;
