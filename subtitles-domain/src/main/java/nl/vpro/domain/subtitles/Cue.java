@@ -40,7 +40,7 @@ public class Cue {
      * A sequence number relative to other cues of the same parent.
      */
     @XmlAttribute
-    int sequence;
+    Integer sequence;
 
     /**
      * When the cue must be started to be displayed relative to the beginning of the stream
@@ -66,7 +66,7 @@ public class Cue {
 
     @Builder
     public Cue(String parent,
-        int sequence,
+        Integer sequence,
         Duration start,
         Duration end,
         String content) {

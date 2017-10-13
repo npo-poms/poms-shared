@@ -166,6 +166,22 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     }
 
 
+    public static Subtitles from(SubtitlesId sid, Iterator<Cue> cues) {
+        StringWriter writer = new StringWriter();
+        try {
+            WEBVTTandSRT.formatWEBVTT(cues, writer);
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
+        }
+        return builder()
+            .mid(sid.getMid())
+            .language(sid.getLanguage())
+            .type(sid.getType())
+            .format(SubtitlesFormat.WEBVTT)
+            .content(writer.toString())
+            .build();
+    }
+
     public Subtitles() {}
 
     @lombok.Builder(builderClassName = "Builder")
