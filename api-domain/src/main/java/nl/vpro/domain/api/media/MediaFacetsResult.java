@@ -11,10 +11,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.api.DateFacetResultItem;
-import nl.vpro.domain.api.DurationFacetResultItem;
-import nl.vpro.domain.api.MultipleFacetsResult;
-import nl.vpro.domain.api.TermFacetResultItem;
+import nl.vpro.domain.api.*;
 
 /**
  * @author Roelof Jan Koekoek
@@ -40,7 +37,7 @@ import nl.vpro.domain.api.TermFacetResultItem;
 })
 public class MediaFacetsResult {
 
-    private List<TermFacetResultItem> titles;
+    private List<FacetResultItem> titles;
 
     private List<TermFacetResultItem> types;
 
@@ -68,11 +65,11 @@ public class MediaFacetsResult {
 
     private List<TermFacetResultItem> contentRatings;
 
-    public List<TermFacetResultItem> getTitles() {
+    public List<FacetResultItem> getTitles() {
         return titles;
     }
 
-    public void setTitles(List<TermFacetResultItem> titles) {
+    public void setTitles(List<FacetResultItem> titles) {
         this.titles = titles;
     }
 
