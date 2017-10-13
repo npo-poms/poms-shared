@@ -90,7 +90,7 @@ public class WEBVTTTest {
     public void parseTimeLine() throws ParseException {
         String timeLine = "2:02.200 --> 2:04.150";
 
-        Cue cue = WEBVTTandSRT.parseCue("parent", "1", Duration.ofMinutes(2), timeLine, "bla bla", ".");
+        Cue cue = WEBVTTandSRT.parseCue("parent", 1, Duration.ofMinutes(2), timeLine, "bla bla", ".");
 
         assertThat(cue.getStart()).isEqualTo(Duration.parse("PT0M2.2S"));
     }
