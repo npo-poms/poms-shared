@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Michiel Meeuwissen
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "filtFacetResultItemType")
+@XmlType(name = "filterFacetResultItemType")
 public class FilterFacetResultItem extends FacetResultItem {
 
     @Getter
