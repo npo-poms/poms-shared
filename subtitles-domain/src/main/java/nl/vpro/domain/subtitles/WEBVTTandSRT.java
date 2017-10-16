@@ -99,9 +99,11 @@ public class WEBVTTandSRT {
 
                             if (l.startsWith("NOTE")) {
                                 while (stream.hasNext()) {
+                                    l = stream.next();
                                     if (StringUtils.isBlank(l)) {
                                         break;
                                     }
+
                                 }
                                 while (StringUtils.isBlank(l)) {
                                     l = stream.next();
