@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 /**
+ * TODO same as TermFacetResultItem without id?
  * @since 5.5
  * @author Michiel Meeuwissen
  */
