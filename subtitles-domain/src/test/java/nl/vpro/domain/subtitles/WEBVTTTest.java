@@ -35,7 +35,7 @@ public class WEBVTTTest {
     @Test
     public void toWEBVTT() throws IOException {
         StringWriter writer = new StringWriter();
-        WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitles(), false).limit(3).collect(Collectors.toList()).iterator(), writer);
+        WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitles(), false, false).limit(3).collect(Collectors.toList()).iterator(), writer);
         assertThat(writer.toString()).isEqualTo(
             "WEBVTT\n" +
                 "\n" +
