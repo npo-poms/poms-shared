@@ -96,10 +96,13 @@ public class SubtitlesUtil {
         return iterator(subtitles, false);
     }
 
-    public static CountedIterator<StandaloneCue> standaloneIterator(Subtitles subtitles, boolean guessOffset) {
+    public static CountedIterator<StandaloneCue> standaloneIterator(Subtitles subtitles, boolean guessOffset, boolean fillCueNumbers) {
+        Stream<Cue> stream  = parse(subtitles, guessOffset);
+        if (fillCueNumbers) {
+            stream = fillCueNumber(stream);
+        }
         return new BasicWrappedIterator<>(
-            (long) subtitles.getCueCount(),
-            parse(subtitles, guessOffset)
+            (long) subtitles.getCueCount(), stream
                 .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType()))
                 .iterator());
     }
