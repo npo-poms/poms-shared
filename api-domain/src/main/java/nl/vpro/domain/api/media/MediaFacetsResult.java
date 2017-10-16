@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +38,12 @@ import nl.vpro.domain.api.*;
     "contentRatings",
 
 })
+@Getter
+@Setter
 public class MediaFacetsResult {
 
 
-    private List<FacetResultItem> titles;
+    private List<TermFacetResultItem> titles;
 
     private List<TermFacetResultItem> types;
 
@@ -66,89 +71,11 @@ public class MediaFacetsResult {
 
     private List<TermFacetResultItem> contentRatings;
 
-    public List<FacetResultItem> getTitles() {
-        return titles;
-    }
-
-    public void setTitles(List<FacetResultItem> titles) {
-        this.titles = titles;
-    }
-
-    public List<TermFacetResultItem> getTypes() {
-        return types;
-    }
-
-    public void setTypes(List<TermFacetResultItem> types) {
-        this.types = types;
-    }
-
-    public List<TermFacetResultItem> getAvTypes() {
-        return avTypes;
-    }
-
-    public void setAvTypes(List<TermFacetResultItem> avTypes) {
-        this.avTypes = avTypes;
-    }
-
-    public List<DateFacetResultItem> getSortDates() {
-        return sortDates;
-    }
 
     public void setSortDates(List<DateFacetResultItem> sortDates) {
         this.sortDates = sortDates;
     }
 
-    public List<TermFacetResultItem> getBroadcasters() {
-        return broadcasters;
-    }
-
-    public void setBroadcasters(List<TermFacetResultItem> broadcasters) {
-        this.broadcasters = broadcasters;
-    }
-
-    public List<GenreFacetResultItem> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<GenreFacetResultItem> genres) {
-        this.genres = genres;
-    }
-
-    public List<TermFacetResultItem> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<TermFacetResultItem> tags) {
-        this.tags = tags;
-    }
-
-    public List<DurationFacetResultItem> getDurations() {
-        return durations;
-    }
-
-    public void setDurations(List<DurationFacetResultItem> durations) {
-        this.durations = durations;
-    }
-
-    public List<MemberRefFacetResultItem> getDescendantOf() {
-        return descendantOf;
-    }
-
-    public void setDescendantOf(List<MemberRefFacetResultItem> descendantOf) {
-        this.descendantOf = descendantOf;
-    }
-
-    public List<MemberRefFacetResultItem> getEpisodeOf() {
-        return episodeOf;
-    }
-
-    public void setEpisodeOf(List<MemberRefFacetResultItem> episodeOf) {
-        this.episodeOf = episodeOf;
-    }
-
-    public List<MemberRefFacetResultItem> getMemberOf() {
-        return memberOf;
-    }
 
     public List<MemberRefFacetResultItem> getMemberOf(MediaSearch search) {
         if (search != null && search.getMemberOf() != null && memberOf == null) {
@@ -157,33 +84,6 @@ public class MediaFacetsResult {
         return memberOf;
     }
 
-    public void setMemberOf(List<MemberRefFacetResultItem> memberOf) {
-        this.memberOf = memberOf;
-    }
-
-    public List<MultipleFacetsResult> getRelations() {
-        return relations;
-    }
-
-    public void setRelations(List<MultipleFacetsResult> relations) {
-        this.relations = relations;
-    }
-
-    public List<TermFacetResultItem> getAgeRatings() {
-        return ageRatings;
-    }
-
-    public void setAgeRatings(List<TermFacetResultItem> ageRatings) {
-        this.ageRatings = ageRatings;
-    }
-
-    public List<TermFacetResultItem> getContentRatings() {
-        return contentRatings;
-    }
-
-    public void setContentRatings(List<TermFacetResultItem> contentRatings) {
-        this.contentRatings = contentRatings;
-    }
 
     List<TermFacetResultItem> getTypes(MediaSearch search) {
         if (search != null && search.getTypes() != null && types == null) {
