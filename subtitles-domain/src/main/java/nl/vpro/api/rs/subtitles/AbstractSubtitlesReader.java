@@ -2,8 +2,6 @@ package nl.vpro.api.rs.subtitles;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.nio.charset.Charset;
@@ -12,8 +10,6 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyReader;
-
-import org.apache.commons.io.IOUtils;
 
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesFormat;
@@ -42,10 +38,8 @@ abstract class AbstractSubtitlesReader implements MessageBodyReader<Subtitles> {
 
     @Override
     public Subtitles readFrom(Class<Subtitles> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
-        StringWriter writer = new StringWriter();
-        IOUtils.copy(new InputStreamReader(entityStream, charset), writer);
         return Subtitles.builder()
-            .content(writer.toString())
+            .value(entityStream)
             .format(format)
             .build();
     }
