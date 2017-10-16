@@ -53,7 +53,7 @@ public class SubtitlesContent implements Serializable {
     private SubtitlesContent(SubtitlesFormat format, byte[] content, Charset charset) {
         this.format = format;
         this.value = content;
-        this.charset = charset.name();
+        this.charset = charset == null ? format.getCharset().toString() : charset.name();
     }
 
     public InputStream asStream() {
