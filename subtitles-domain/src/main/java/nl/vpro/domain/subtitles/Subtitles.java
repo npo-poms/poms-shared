@@ -2,9 +2,7 @@ package nl.vpro.domain.subtitles;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.io.StringWriter;
+import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
@@ -16,6 +14,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.apache.commons.io.IOUtils;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -191,11 +190,12 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         Locale language,
         SubtitlesFormat format,
         String content,
+        InputStream value,
         Iterator<Cue> cues,
         SubtitlesType type) {
         this.mid = mid;
         this.offset = offset;
-        if (content == null && format == null && cues != null) {
+        if (content == null && value == null && format == null && cues != null) {
             StringWriter writer = new StringWriter();
             try {
                 WEBVTTandSRT.formatWEBVTT(cues, writer);
@@ -203,10 +203,19 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
                 log.error(e.getMessage(), e);
             }
             this.content = new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString());
-        } else if (content != null && format != null && cues == null) {
+        } else if (content != null && format != null && cues == null && value == null) {
             this.content = new SubtitlesContent(format, content);
+        } else  if (value != null && format != null && cues == null && content == null){
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            try {
+                int copy = IOUtils.copy(value, bytes);
+                log.info("Copied {} bytes", copy);
+                this.content = SubtitlesContent.builder().content(bytes.toByteArray()).format(format).build();
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
         } else {
-            throw new IllegalArgumentException("Should either give iterator of cues, or content and format");
+            throw new IllegalArgumentException("Should either give iterator of cues, or content and format, or value and format");
         }
         this.language = language;
         this.cueCount = null;

@@ -1,6 +1,7 @@
 package nl.vpro.domain.subtitles;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.text.ParseException;
@@ -105,6 +106,17 @@ public class WEBVTTTest {
     public void parseDurationWithComma() {
         Duration duration = WEBVTTandSRT.parseDuration("00:00:20,000", ",");
         assertThat(duration).isEqualTo(Duration.ofSeconds(20));
+    }
+
+    @Test
+    public void parseWithoutCuesWithComments() {
+        InputStream example = getClass().getResourceAsStream("/POMS_VPRO_4981202.vtt");
+        List<Cue> cues = SubtitlesUtil.fillCueNumber(WEBVTTandSRT.parseWEBVTT("bla", example)).collect(Collectors.toList());
+
+        assertThat(cues).hasSize(430);
+        for (Cue cue : cues) {
+            assertThat(cue.getSequence()).isNotNull();
+        }
     }
 
 }
