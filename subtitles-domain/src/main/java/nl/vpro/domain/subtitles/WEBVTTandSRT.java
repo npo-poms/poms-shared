@@ -237,7 +237,9 @@ public class WEBVTTandSRT {
     }
 
     static StringBuilder formatCue(Cue cue, StringBuilder builder, String decimalSeparator) {
-        builder.append(cue.getSequence());
+        if (cue.getSequence() != null) {
+            builder.append(cue.getSequence());
+        };
         Duration offset = Duration.ZERO;
         builder.append("\n");
         if (cue.getStart() != null) {
