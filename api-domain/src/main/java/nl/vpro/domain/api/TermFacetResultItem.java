@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -14,6 +17,8 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "termFacetResultItemType")
+@Getter
+@Setter
 public class TermFacetResultItem extends FacetResultItem {
 
     private String id;
@@ -23,29 +28,14 @@ public class TermFacetResultItem extends FacetResultItem {
     public TermFacetResultItem() {
     }
 
+    @lombok.Builder
     public TermFacetResultItem(String value, String id, long count) {
         super(count);
         this.id = id;
         this.value = value;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getValue() {
-        return value;
-    }
-
-    @Override
-    public void setValue(String value) {
-        this.value = value;
-    }
 
     @Override
     public String toString() {
