@@ -74,11 +74,15 @@ public class SubtitlesUtil {
         return Charset.forName(c);
     }
 
-    public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles, boolean guessOffset) {
+    public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles, boolean guessOffset, boolean fillCueNumbers) {
         if (subtitles == null) {
             return Stream.empty();
         }
-        return parse(subtitles, guessOffset)
+        Stream<Cue> stream = parse(subtitles, guessOffset);
+        if (fillCueNumbers) {
+            stream = fillCueNumber(stream);
+        }
+        return stream
             .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType())
             );
     }
@@ -97,14 +101,8 @@ public class SubtitlesUtil {
     }
 
     public static CountedIterator<StandaloneCue> standaloneIterator(Subtitles subtitles, boolean guessOffset, boolean fillCueNumbers) {
-        Stream<Cue> stream  = parse(subtitles, guessOffset);
-        if (fillCueNumbers) {
-            stream = fillCueNumber(stream);
-        }
-        return new BasicWrappedIterator<>(
-            (long) subtitles.getCueCount(), stream
-                .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType()))
-                .iterator());
+        return new BasicWrappedIterator<>((long) subtitles.getCueCount(), standaloneStream(subtitles, guessOffset, fillCueNumbers).iterator());
+
     }
     public static void stream(Iterator<? extends Cue> cueIterator, SubtitlesFormat format, OutputStream output) throws IOException {
         switch(format) {
