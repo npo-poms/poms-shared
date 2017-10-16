@@ -37,7 +37,7 @@ import nl.vpro.domain.api.*;
 })
 public class MediaFacetsResult {
 
-    // TODO Test XML/JSON binding of titles:
+
     private List<FacetResultItem> titles;
 
     private List<TermFacetResultItem> types;
