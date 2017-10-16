@@ -2,7 +2,6 @@ package nl.vpro.rs.media;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,7 +22,10 @@ import nl.vpro.domain.media.search.MediaListItem;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
-import nl.vpro.domain.subtitles.*;
+import nl.vpro.domain.subtitles.StandaloneCue;
+import nl.vpro.domain.subtitles.Subtitles;
+import nl.vpro.domain.subtitles.SubtitlesId;
+import nl.vpro.domain.subtitles.SubtitlesType;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
 
@@ -45,6 +47,7 @@ public interface MediaBackendRestService {
     String ORDER = "order";
     String LANGUAGE = "language";
     String TYPE = "type";
+
     String VALIDATE_INPUT = "validateInput";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated against the XSD first";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
@@ -331,10 +334,10 @@ public interface MediaBackendRestService {
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
-        @QueryParam("offset") @DefaultValue("0") Duration offset,
+        @QueryParam(OFFSET) @DefaultValue("0") Duration offset,
         @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
         @QueryParam(ERRORS) String errors,
-        Iterator<Cue> cues);
+        Subtitles subtitles);
 
     @POST
     @Path("subtitles/{mid}/{language}/{type}/{offset}")
