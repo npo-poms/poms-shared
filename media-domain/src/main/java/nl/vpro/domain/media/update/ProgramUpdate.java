@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.VersionService;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ProgramType;
@@ -46,6 +45,10 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         super(builder);
     }
 
+    private ProgramUpdate(MediaBuilder.AbstractProgramBuilder builder, OwnerType ownerType) {
+        super(builder, ownerType);
+    }
+
     private ProgramUpdate(Program program) {
         this(program, OwnerType.BROADCASTER);
     }
@@ -61,6 +64,10 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
     public static ProgramUpdate create(MediaBuilder.AbstractProgramBuilder builder) {
         return new ProgramUpdate(builder);
+    }
+
+    public static ProgramUpdate create(MediaBuilder.AbstractProgramBuilder builder, OwnerType ownerType) {
+        return new ProgramUpdate(builder, ownerType);
     }
 
     public static ProgramUpdate create(Program program) {
@@ -159,8 +166,9 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     public SortedSet<SegmentUpdate> getSegments() {
         if(this.segments == null) {
             this.segments = new TransformingSortedSet<>(build().getSegments(),
-                s -> SegmentUpdate.create(s, null),
-                MediaUpdate::fetch);
+                SegmentUpdate::create,
+                MediaUpdate::fetch
+            );
         }
         return this.segments;
 
