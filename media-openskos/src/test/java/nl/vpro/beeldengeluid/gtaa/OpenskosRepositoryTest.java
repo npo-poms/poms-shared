@@ -75,7 +75,8 @@ public class OpenskosRepositoryTest {
 
     @Test
     public void anyUpdates() throws Exception {
-        wireMockRule.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("any-updates.xml"))));
+        wireMockRule.stubFor(get(urlPathEqualTo("/oai-pmh"))
+            .willReturn(okXml(f("any-updates.xml"))));
         try (CountedIterator<Record> updates = repo.getAllUpdates(Instant.EPOCH, Instant.now())) {
             int count = 0;
             Record next = updates.next(); // update 1
