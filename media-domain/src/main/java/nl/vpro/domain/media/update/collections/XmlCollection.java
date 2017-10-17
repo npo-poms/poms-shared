@@ -1,15 +1,17 @@
 package nl.vpro.domain.media.update.collections;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.stream.Stream;
 
-import javax.xml.bind.annotation.XmlAnyElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
 
+import nl.vpro.domain.VersionSpecific;
 import nl.vpro.domain.media.update.*;
 
 /**
@@ -27,7 +29,14 @@ import nl.vpro.domain.media.update.*;
     LocationUpdate.class,
     String.class
 })
-public class XmlCollection<T> implements Iterable<T>  {
+@XmlAccessorType(XmlAccessType.NONE)
+public class XmlCollection<T> implements Iterable<T> , VersionSpecific {
+
+
+    @XmlAttribute
+    @Getter
+    @Setter
+    protected Float version;
 
     @XmlAnyElement(lax = true)
     Collection<T> list;
@@ -38,7 +47,12 @@ public class XmlCollection<T> implements Iterable<T>  {
 
 
     public XmlCollection(Collection<T> l) {
+        this(l, null);
+    }
+
+    public XmlCollection(Collection<T> l, Float version) {
         this.list = l;
+        this.version = version;
 
     }
     public int size() {
@@ -52,5 +66,14 @@ public class XmlCollection<T> implements Iterable<T>  {
 
     public Stream<T> stream() {
         return list == null ? Stream.empty() : list.stream();
+    }
+
+
+    void afterUnmarshal(Unmarshaller u, Object parent) {
+        if (parent != null) {
+            if (parent instanceof VersionSpecific) {
+                version = ((VersionSpecific) parent).getVersion();
+            }
+        }
     }
 }

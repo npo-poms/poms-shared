@@ -1,12 +1,18 @@
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+
+import nl.vpro.domain.VersionSpecific;
 
 /**
  * @author Michiel Meeuwissen
@@ -22,7 +28,13 @@ import javax.xml.bind.annotation.*;
     LocationUpdate.class,
     String.class
 })
-public class MediaUpdateList<T> implements Iterable<T> {
+@XmlAccessorType(XmlAccessType.NONE)
+public class MediaUpdateList<T> implements Iterable<T>, VersionSpecific {
+
+    @XmlAttribute
+    @Getter
+    @Setter
+    protected Float version;
 
     protected List<T> list;
 
@@ -38,20 +50,18 @@ public class MediaUpdateList<T> implements Iterable<T> {
     @XmlAttribute
     protected String order;
 
-    @XmlAttribute
-    protected Float version;
-
 
     public MediaUpdateList() {
         super();
     }
 
-    public MediaUpdateList(final List<T> list, long totalCount, long offset, Integer max, String order) {
+    public MediaUpdateList(final List<T> list, long totalCount, long offset, Integer max, String order, Float version) {
         this.list = Collections.unmodifiableList(list);
         this.offset = offset;
         this.totalCount =  totalCount;
         this.max = max;
         this.order = order;
+        this.version = version;
     }
 
 
@@ -95,5 +105,14 @@ public class MediaUpdateList<T> implements Iterable<T> {
 
     public Stream<T> stream() {
         return list == null ? Stream.empty() : list.stream();
+    }
+
+
+    void afterUnmarshal(Unmarshaller u, Object parent) {
+        if (parent != null) {
+            if (parent instanceof VersionSpecific) {
+                version = ((VersionSpecific) parent).getVersion();
+            }
+        }
     }
 }
