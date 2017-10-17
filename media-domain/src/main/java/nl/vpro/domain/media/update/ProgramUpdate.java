@@ -39,24 +39,20 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     private ProgramUpdateConfig updateConfig = new ProgramUpdateConfig();
 
     public ProgramUpdate() {
-        super(MediaBuilder.program(), null);
+        super(MediaBuilder.program());
     }
 
     private ProgramUpdate(MediaBuilder.AbstractProgramBuilder builder) {
         super(builder);
     }
 
-    private ProgramUpdate(Program program, Float version) {
-        this(program, OwnerType.BROADCASTER, version);
-    }
-
     private ProgramUpdate(Program program) {
-        this(program, OwnerType.BROADCASTER, VersionService.floatVersion());
+        this(program, OwnerType.BROADCASTER);
     }
 
 
-    private ProgramUpdate(Program program, OwnerType type, Float version) {
-        super(MediaBuilder.program(program), type, version);
+    private ProgramUpdate(Program program, OwnerType type) {
+        super(MediaBuilder.program(program), type);
     }
 
     public static ProgramUpdate create() {
@@ -71,10 +67,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         return new ProgramUpdate(program);
     }
 
-
-    public static ProgramUpdate create(Program program, Float version) {
-        return new ProgramUpdate(program, version);
-    }
     public static ProgramUpdate create(ProgramType type) {
         ProgramUpdate result = create();
         result.setType(type);
@@ -83,7 +75,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
 
     public static ProgramUpdate forOwner(Program program, OwnerType type) {
-        return new ProgramUpdate(program, type, VersionService.floatVersion());
+        return new ProgramUpdate(program, type);
     }
 
     public static ProgramUpdate forAllOwners(Program program) {
