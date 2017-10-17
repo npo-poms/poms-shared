@@ -7,6 +7,7 @@
     <xs:sequence>
       <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
+    <xs:attribute name="version" type="xs:float"/>
   </xs:complexType>
 </xs:schema>
 
