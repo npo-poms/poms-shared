@@ -26,8 +26,8 @@ public class DownloadAsRequest extends DownloadRequest {
         // nothing
     }
 
-    public DownloadAsRequest(String principalId, String title, String description, ImageType type, String url) {
-        super(title, description, type, url);
+    public DownloadAsRequest(String principalId, String title, String description, ImageType type, Boolean imageMetaData, String url) {
+        super(title, description, type, imageMetaData, url);
         this.principalId = principalId;
     }
 

@@ -27,8 +27,8 @@ public class UploadAsRequest extends UploadRequest {
         // nothing
     }
 
-    public UploadAsRequest(String principalId, String title, String description, ImageType type, DataHandler data) {
-        super(title, description, type, data);
+    public UploadAsRequest(String principalId, String title, String description, ImageType type, Boolean imageMetaData, DataHandler data) {
+        super(title, description, type, imageMetaData, data);
         this.principalId = principalId;
     }
 

@@ -36,22 +36,24 @@ public class DownloadRequest {
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private ImageType type;
 
-    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
-    private String url;
-
 
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private Boolean imageMetadata;
+
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private String url;
+
 
 
     public DownloadRequest() {
         // nothing
     }
 
-    public DownloadRequest(String title, String description, ImageType type, String url) {
+    public DownloadRequest(String title, String description, ImageType type, Boolean imageMetadata, String url) {
         this.title = title;
         this.description = description;
         this.type = type;
+        this.imageMetadata = imageMetadata;
         this.url = url;
     }
 

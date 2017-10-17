@@ -17,10 +17,11 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 @XmlRootElement(name = "uploadRequest", namespace = IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "uploadRequestType", propOrder = {
-        "title",
-        "description",
-        "type",
-        "data"})
+    "title",
+    "description",
+    "type",
+    "imageMetadata",
+    "data"})
 @Setter
 @Getter
 public class UploadRequest {
@@ -34,17 +35,23 @@ public class UploadRequest {
     @XmlElement(name = "type", namespace = IMAGE_WS_NAMESPACE, required = true)
     private ImageType type;
 
+    @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
+    private Boolean imageMetadata;
+
     @XmlElement(name = "data", namespace = IMAGE_WS_NAMESPACE, required = true)
     @XmlMimeType("application/octet-stream")
     private DataHandler data;
 
+
+
     public UploadRequest() {
     }
 
-    public UploadRequest(String title, String description, ImageType type, DataHandler data) {
+    public UploadRequest(String title, String description, ImageType type, Boolean imageMetaData, DataHandler data) {
         this.title = title;
         this.description = description;
         this.type = type;
+        this.imageMetadata = imageMetaData;
         this.data = data;
     }
 

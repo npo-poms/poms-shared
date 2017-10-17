@@ -7,6 +7,8 @@ package nl.vpro.ws.image;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,7 +21,8 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 @XmlType(name = "imageNotFoundType", propOrder = {"message"})
 @Getter
 @Setter
-public class ImageNotFound {
+public class ImageNotFound  implements Serializable {
+    private static final long serialVersionUID = 0L;
 
 
     private String message;

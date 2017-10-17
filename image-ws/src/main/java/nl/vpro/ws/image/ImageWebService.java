@@ -41,9 +41,8 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "data", targetNamespace = "") DataHandler data,
-        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata
-
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
+        @WebParam(name = "data", targetNamespace = "") DataHandler data
     );
 
     @WebMethod(operationName = "upload")
@@ -57,6 +56,7 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
         @WebParam(name = "data", targetNamespace = "") DataHandler data,
         AsyncHandler<UploadResponse> handler);
 
@@ -71,6 +71,7 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
         @WebParam(name = "data", targetNamespace = "") DataHandler data);
 
     @WebMethod
@@ -87,8 +88,8 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "url", targetNamespace = "") String url,
-        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
+        @WebParam(name = "url", targetNamespace = "") String url
     ) throws DownloadFault;
 
     @WebMethod(operationName = "download")
@@ -102,6 +103,7 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
         @WebParam(name = "url", targetNamespace = "") String url,
         AsyncHandler<DownloadResponse> handler);
 
@@ -116,5 +118,7 @@ public interface ImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "url", targetNamespace = "") String url);
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
+        @WebParam(name = "url", targetNamespace = "") String url
+        );
 }

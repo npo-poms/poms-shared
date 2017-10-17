@@ -37,28 +37,31 @@ public interface RunAsImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "data", targetNamespace = "") DataHandler data,
-        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata
-
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
+        @WebParam(name = "data", targetNamespace = "") DataHandler data
     );
 
     @WebMethod(operationName = "upload")
     @RequestWrapper(localName = "upload", className = "nl.vpro.ws.image.UploadAsRequest")
     @ResponseWrapper(localName = "uploadResponse", className = "nl.vpro.ws.image.UploadResponse")
-    Future<?> uploadAsync(@WebParam(name = "principalId", targetNamespace = "") String principalId,
-            @WebParam(name = "title", targetNamespace = "") String title,
-            @WebParam(name = "description", targetNamespace = "") String description,
-            @WebParam(name = "type", targetNamespace = "") ImageType type,
-            @WebParam(name = "data", targetNamespace = "") DataHandler data, AsyncHandler<UploadResponse> handler);
+    Future<?> uploadAsync(
+        @WebParam(name = "principalId", targetNamespace = "") String principalId,
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
+        @WebParam(name = "data", targetNamespace = "") DataHandler data, AsyncHandler<UploadResponse> handler);
 
     @WebMethod(operationName = "upload")
     @RequestWrapper(localName = "upload", className = "nl.vpro.ws.image.UploadAsRequest")
     @ResponseWrapper(localName = "uploadResponse", className = "nl.vpro.ws.image.UploadResponse")
-    Response<UploadResponse> uploadAsync(@WebParam(name = "principalId", targetNamespace = "") String principalId,
-            @WebParam(name = "title", targetNamespace = "") String title,
-            @WebParam(name = "description", targetNamespace = "") String description,
-            @WebParam(name = "type", targetNamespace = "") ImageType type,
-            @WebParam(name = "data", targetNamespace = "") DataHandler data);
+    Response<UploadResponse> uploadAsync(
+        @WebParam(name = "principalId", targetNamespace = "") String principalId,
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetadata,
+        @WebParam(name = "data", targetNamespace = "") DataHandler data);
 
     @WebMethod
     @WebResult(name = "imageMetadata", targetNamespace = "")
@@ -69,26 +72,31 @@ public interface RunAsImageWebService {
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
-        @WebParam(name = "url", targetNamespace = "") String url,
-        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata,
+        @WebParam(name = "url", targetNamespace = "") String url
     ) throws DownloadFault;
 
     @WebMethod(operationName = "download")
     @RequestWrapper(localName = "download", className = "nl.vpro.ws.image.DownloadAsRequest")
     @ResponseWrapper(localName = "downloadResponse", className = "nl.vpro.ws.image.DownloadResponse")
-    Future<?> downloadAsync(@WebParam(name = "principalId", targetNamespace = "") String principalId,
-            @WebParam(name = "title", targetNamespace = "") String title,
-            @WebParam(name = "description", targetNamespace = "") String description,
-            @WebParam(name = "type", targetNamespace = "") ImageType type,
-            @WebParam(name = "url", targetNamespace = "") String url, AsyncHandler<DownloadResponse> handler);
+    Future<?> downloadAsync(
+        @WebParam(name = "principalId", targetNamespace = "") String principalId,
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata,
+        @WebParam(name = "url", targetNamespace = "") String url,
+        AsyncHandler<DownloadResponse> handler);
 
     @WebMethod(operationName = "download")
     @RequestWrapper(localName = "download", className = "nl.vpro.ws.image.DownloadAsRequest")
     @ResponseWrapper(localName = "downloadResponse", className = "nl.vpro.ws.image.DownloadResponse")
-    Response<DownloadResponse> downloadAsync(@WebParam(name = "principalId", targetNamespace = "") String principalId,
-            @WebParam(name = "title", targetNamespace = "") String title,
-            @WebParam(name = "description", targetNamespace = "") String description,
-            @WebParam(name = "type", targetNamespace = "") ImageType type,
-            @WebParam(name = "url", targetNamespace = "") String url);
+    Response<DownloadResponse> downloadAsync(
+        @WebParam(name = "principalId", targetNamespace = "") String principalId,
+        @WebParam(name = "title", targetNamespace = "") String title,
+        @WebParam(name = "description", targetNamespace = "") String description,
+        @WebParam(name = "type", targetNamespace = "") ImageType type,
+        @WebParam(name = "imageMetadata", targetNamespace = "") Boolean imageMetdata,
+        @WebParam(name = "url", targetNamespace = "") String url);
 
 }
