@@ -12,11 +12,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.VersionService;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.SegmentType;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
@@ -33,12 +33,17 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
         this(MediaBuilder.segment());
     }
 
-    private SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder) {
-        this(builder, null);
+    private  SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder) {
+        super(builder);
     }
 
+    private SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder, OwnerType ownerType) {
+        super(builder, ownerType);
+    }
+
+
     private SegmentUpdate(Segment segment) {
-        this(MediaBuilder.segment(segment), VersionService.);
+        super(MediaBuilder.segment(segment));
     }
 
 
@@ -46,8 +51,12 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
         return new SegmentUpdate(MediaBuilder.segment());
     }
 
-    public static SegmentUpdate create(MediaBuilder.AbstractSegmentBuilder builder) {
+    public static <T extends MediaBuilder.AbstractSegmentBuilder<T>> SegmentUpdate create(MediaBuilder.AbstractSegmentBuilder<T> builder) {
         return new SegmentUpdate(builder);
+    }
+
+    public static <T extends MediaBuilder.AbstractSegmentBuilder<T>> SegmentUpdate create(MediaBuilder.AbstractSegmentBuilder<T> builder, OwnerType ownerType) {
+        return new SegmentUpdate(builder, ownerType);
     }
 
     public static SegmentUpdate create(Segment segment) {
