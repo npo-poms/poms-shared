@@ -1,15 +1,5 @@
 package nl.vpro.beeldengeluid.gtaa;
 
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.matchingXPath;
-import static com.github.tomakehurst.wiremock.client.WireMock.okXml;
-import static com.github.tomakehurst.wiremock.client.WireMock.post;
-import static com.github.tomakehurst.wiremock.client.WireMock.postRequestedFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.status;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlPathEqualTo;
-import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
@@ -22,15 +12,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.web.client.HttpServerErrorException;
-
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
-
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
+
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OpenskosRepositoryTest {
 
@@ -85,13 +77,16 @@ public class OpenskosRepositoryTest {
     public void anyUpdates() throws Exception {
         wireMockRule.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("any-updates.xml"))));
         try (CountedIterator<Record> updates = repo.getAllUpdates(Instant.EPOCH, Instant.now())) {
-            Record next = updates.next();
+            int count = 0;
+            Record next = updates.next(); // update 1
+            count++;
             assertThat(next).isNotNull();
             assertThat(next.getHeader().getDatestamp()).isNotNull();
             assertThat(next.getMetaData().getFirstDescription().getPrefLabel().getValue()).isEqualTo("Giotakes, Nico");
             assertThat(StringUtils.deleteWhitespace(next.getMetaData().getFirstDescription().getChangeNote().get(0)))
                     .isEqualTo("Forward:http://data.beeldengeluid.nl/gtaa/1672578");
-            for (int i = 0; i < 200; i++) {
+            while(updates.hasNext()) {
+                count++;
                 next = updates.next();
                 try {
                     if (next.getMetaData().getFirstDescription().getAbout().equals("http://data.beeldengeluid.nl/gtaa/1011506")) {
@@ -105,6 +100,7 @@ public class OpenskosRepositoryTest {
                     assertThat(next.getHeader().getStatus()).isEqualTo("deleted");
                 }
             }
+            assertThat(count).isEqualTo(200);
         }
     }
 
