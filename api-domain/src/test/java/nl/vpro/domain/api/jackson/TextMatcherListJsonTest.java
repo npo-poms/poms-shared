@@ -27,7 +27,7 @@ public class TextMatcherListJsonTest {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, list);
 
-        assertThat(writer.toString()).isEqualTo("{\"value\":\"title\",\"match\":\"not\"}");
+        assertThat(writer.toString()).isEqualTo("{\"value\":\"title\",\"match\":\"NOT\"}");
 
         TextMatcherList out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), TextMatcherList.class);
         assertThat(out.asList()).containsExactly(new TextMatcher("title", Match.NOT));
@@ -50,7 +50,7 @@ public class TextMatcherListJsonTest {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, list);
 
-        assertThat(writer.toString()).isEqualTo("{\"value\":[{\"value\":\"title\",\"match\":\"not\"}],\"match\":\"not\"}");
+        assertThat(writer.toString()).isEqualTo("{\"value\":[{\"value\":\"title\",\"match\":\"NOT\"}],\"match\":\"NOT\"}");
 
         TextMatcherList out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), TextMatcherList.class);
         assertThat(out.asList()).containsExactly(new TextMatcher("title", Match.NOT));
