@@ -204,7 +204,7 @@ public interface MediaBackendRestService {
         MemberRefUpdate memberRefUpdate,
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     ) throws IOException;
