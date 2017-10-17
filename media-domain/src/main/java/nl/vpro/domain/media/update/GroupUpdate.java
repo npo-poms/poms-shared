@@ -6,10 +6,10 @@ package nl.vpro.domain.media.update;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.VersionService;
 import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.GroupType;
 import nl.vpro.domain.media.MediaBuilder;
+import nl.vpro.domain.media.support.OwnerType;
 
 @XmlRootElement(name = "group")
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -22,34 +22,41 @@ public final class GroupUpdate extends MediaUpdate<Group> {
     private GroupUpdateConfig updateConfig = new GroupUpdateConfig();
 
     private GroupUpdate() {
-        this(MediaBuilder.group(), null);
+        this(MediaBuilder.group());
     }
 
-    private GroupUpdate(MediaBuilder.GroupBuilder builder, Float version) {
-        super(builder, version);
+    private GroupUpdate(MediaBuilder.GroupBuilder builder) {
+        super(builder);
     }
 
-    private GroupUpdate(Group group, Float version) {
-        super(MediaBuilder.group(group), version);
+    private GroupUpdate(MediaBuilder.GroupBuilder builder, OwnerType ownerType) {
+        super(builder, ownerType);
     }
+
+    private GroupUpdate(Group group) {
+        super(MediaBuilder.group(group));
+    }
+
+    private GroupUpdate(Group group, OwnerType ownerType) {
+        super(MediaBuilder.group(group), ownerType);
+    }
+
 
     public static GroupUpdate create() {
-        return new GroupUpdate(MediaBuilder.group(), VersionService.floatVersion());
+        return new GroupUpdate(MediaBuilder.group());
     }
 
     public static GroupUpdate create(MediaBuilder.AbstractGroupBuilder<?> builder) {
-        return new GroupUpdate(builder.build(), VersionService.floatVersion());
+        return new GroupUpdate(builder.build());
+    }
+
+    public static GroupUpdate create(MediaBuilder.AbstractGroupBuilder<?> builder, OwnerType ownerType) {
+        return new GroupUpdate(builder.build(), ownerType);
     }
 
     public static GroupUpdate create(Group group) {
-        return new GroupUpdate(group, VersionService.floatVersion());
+        return new GroupUpdate(group);
     }
-
-
-    public static GroupUpdate create(Group group, Float version) {
-        return new GroupUpdate(group, version);
-    }
-
 
     @Override
     public MediaBuilder.GroupBuilder getBuilder() {
