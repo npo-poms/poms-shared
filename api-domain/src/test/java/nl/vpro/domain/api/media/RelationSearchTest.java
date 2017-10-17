@@ -20,7 +20,7 @@ public class RelationSearchTest {
         Jackson2TestUtil.roundTripAndSimilarAndEquals(search, "{\n" +
             "  \"broadcasters\" : {\n" +
             "    \"value\" : \"VPRO\",\n" +
-            "    \"match\" : \"not\"\n" +
+            "    \"match\" : \"NOT\"\n" +
             "  }\n" +
             "}");
     }
