@@ -134,6 +134,7 @@ public class OpenskosRepositoryITest {
         // test
         OpenskosRepository impl = new OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
         impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");
+        //impl.setPersonsSpec("beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352");
 
         impl.setUseXLLabels(true);
         // Acceptatie
