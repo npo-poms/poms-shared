@@ -1,12 +1,13 @@
 package nl.vpro.domain.api.jackson;
 
+import java.io.StringReader;
+import java.io.StringWriter;
+
+import org.junit.Test;
+
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.TextMatcher;
 import nl.vpro.jackson2.Jackson2Mapper;
-import org.junit.Test;
-
-import java.io.StringReader;
-import java.io.StringWriter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -40,7 +41,7 @@ public class TextMatcherJsonTest {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, in);
 
-        assertThat(writer.toString()).isEqualTo("{\"value\":\"title\",\"match\":\"not\"}");
+        assertThat(writer.toString()).isEqualTo("{\"value\":\"title\",\"match\":\"NOT\"}");
         TextMatcher out = Jackson2Mapper.INSTANCE.readValue(new StringReader(writer.toString()), TextMatcher.class);
         assertThat(out.getValue()).isEqualTo("title");
         assertThat(out.getMatch()).isEqualTo(Match.NOT);
@@ -48,7 +49,7 @@ public class TextMatcherJsonTest {
 
     @Test
     public void testGetValueFromJsonInverse() throws Exception {
-        TextMatcher matcher = Jackson2Mapper.INSTANCE.readValue("{\"value\":\"title\",\"match\":\"not\"}", TextMatcher.class);
+        TextMatcher matcher = Jackson2Mapper.INSTANCE.readValue("{\"value\":\"title\",\"match\":\"not\"}", TextMatcher.class); // lowercase 'not' is working too!
 
         assertThat(matcher).isEqualTo(new TextMatcher("title", Match.NOT));
     }
