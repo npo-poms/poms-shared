@@ -102,24 +102,25 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
 
-
     @SuppressWarnings("unchecked")
-    public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType ownerType) {
-        if(object instanceof Program) {
-            return (MediaUpdate<M>) ProgramUpdate.create((Program)object, ownerType);
-        } else if(object instanceof Group) {
-            return (MediaUpdate<M>) GroupUpdate.create((Group)object, ownerType);
+    public static <M extends MediaObject> MediaUpdate<M> create(M object) {
+        if (object instanceof Program) {
+            return (MediaUpdate<M>) ProgramUpdate.create((Program) object);
+        } else if (object instanceof Group) {
+            return (MediaUpdate<M>) GroupUpdate.create((Group) object);
         } else {
-            return (MediaUpdate<M>) SegmentUpdate.create((Segment)object, ownerType);
+            return (MediaUpdate<M>) SegmentUpdate.create((Segment) object);
         }
     }
 
-
-    public static <M extends MediaObject> MediaUpdate<M> create(M object) {
-        return create(object, null);
+    public static <M extends MediaObject> MediaUpdate<M> create(M object, Float version) {
+        MediaUpdate<M> update = create(object);
+        update.setVersion(version);
+        return update;
     }
 
-    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object, OwnerType owner) {
+    @SuppressWarnings("unchecked")
+    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object) {
         if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
             return (MediaUpdate<M>) SegmentUpdate.create((MediaBuilder.AbstractSegmentBuilder) object);
         } else if (object instanceof MediaBuilder.AbstractProgramBuilder) {
@@ -128,6 +129,19 @@ public abstract class  MediaUpdate<M extends MediaObject>
             return (MediaUpdate<M>) GroupUpdate.create((MediaBuilder.AbstractGroupBuilder) object);
         }
     }
+
+
+    @SuppressWarnings("unchecked")
+    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object, OwnerType ownerType) {
+        if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
+            return (MediaUpdate<M>) SegmentUpdate.create((MediaBuilder.AbstractSegmentBuilder) object, ownerType);
+        } else if (object instanceof MediaBuilder.AbstractProgramBuilder) {
+            return (MediaUpdate<M>) ProgramUpdate.create((MediaBuilder.AbstractProgramBuilder) object, ownerType);
+        } else {
+            return (MediaUpdate<M>) GroupUpdate.create((MediaBuilder.AbstractGroupBuilder) object, ownerType);
+        }
+    }
+
 
     protected Float version;
 
