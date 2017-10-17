@@ -24,7 +24,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.VersionService;
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
@@ -105,13 +104,13 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
     @SuppressWarnings("unchecked")
-    public static <M extends MediaObject> MediaUpdate<M> create(M object, Float version) {
+    public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType ownerType) {
         if(object instanceof Program) {
-            return (MediaUpdate<M>) ProgramUpdate.create((Program)object, version);
+            return (MediaUpdate<M>) ProgramUpdate.create((Program)object, ownerType);
         } else if(object instanceof Group) {
-            return (MediaUpdate<M>) GroupUpdate.create((Group)object, version);
+            return (MediaUpdate<M>) GroupUpdate.create((Group)object, ownerType);
         } else {
-            return (MediaUpdate<M>) SegmentUpdate.create((Segment)object, version);
+            return (MediaUpdate<M>) SegmentUpdate.create((Segment)object, ownerType);
         }
     }
 
@@ -120,7 +119,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return create(object, null);
     }
 
-    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object) {
+    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object, OwnerType owner) {
         if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
             return (MediaUpdate<M>) SegmentUpdate.create((MediaBuilder.AbstractSegmentBuilder) object);
         } else if (object instanceof MediaBuilder.AbstractProgramBuilder) {
@@ -131,7 +130,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     protected Float version;
-
 
     protected MediaBuilder<?, M> builder;
 
@@ -191,24 +189,21 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder) {
-        this(builder, OwnerType.BROADCASTER, VersionService.floatVersion());
+        this(builder, OwnerType.BROADCASTER);
     }
 
-    protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, Float version) {
-        this(builder, OwnerType.BROADCASTER, version);
-    }
-
-    protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, OwnerType type, Float version) {
+    protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, OwnerType type) {
         this.builder = builder;
         this.owner = type;
-        this.version = version;
     }
 
+    @Override
     @XmlAttribute
     public Float getVersion() {
         return version;
     }
 
+    @Override
     public void setVersion(Float version) {
         this.version = version;
     }
