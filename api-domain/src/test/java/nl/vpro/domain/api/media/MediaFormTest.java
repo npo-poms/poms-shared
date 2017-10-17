@@ -242,8 +242,8 @@ public class MediaFormTest {
             "  \"searches\" : {\n" +
             "    \"text\" : {\n" +
             "      \"value\" : \"bla\",\n" +
-            "      \"match\" : \"should\",\n" +
-            "      \"fuzziness\" : \"auto\"\n" +
+            "      \"match\" : \"SHOULD\",\n" +
+            "      \"fuzziness\" : \"AUTO\"\n" +
             "    }\n" +
             "  }\n" +
             "}");
@@ -268,8 +268,8 @@ public class MediaFormTest {
             "  \"searches\" : {\n" +
             "    \"text\" : {\n" +
             "      \"value\" : \"bla\",\n" +
-            "      \"match\" : \"should\",\n" +
-            "      \"fuzziness\" : \"auto\"\n" +
+            "      \"match\" : \"SHOULD\",\n" +
+            "      \"fuzziness\" : \"AUTO\"\n" +
             "    }\n" +
             "  }\n" +
             "}");
