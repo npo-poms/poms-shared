@@ -30,24 +30,15 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
     private SegmentUpdateConfig updateConfig = new SegmentUpdateConfig();
 
     private SegmentUpdate() {
-        this(MediaBuilder.segment(), null);
+        this(MediaBuilder.segment());
     }
-
-    private SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder, Float version) {
-        super(builder, version);
-    }
-
 
     private SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder) {
-        this(builder, VersionService.floatVersion());
-    }
-
-    private SegmentUpdate(Segment segment, Float version) {
-        super(MediaBuilder.segment(segment), version);
+        this(builder, null);
     }
 
     private SegmentUpdate(Segment segment) {
-        this(MediaBuilder.segment(segment), VersionService.floatVersion());
+        this(MediaBuilder.segment(segment), VersionService.);
     }
 
 
@@ -61,11 +52,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
 
     public static SegmentUpdate create(Segment segment) {
         return new SegmentUpdate(segment);
-    }
-
-
-    public static SegmentUpdate create(Segment segment, Float version) {
-        return new SegmentUpdate(segment, version);
     }
 
     @Override
