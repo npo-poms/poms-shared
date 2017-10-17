@@ -16,14 +16,11 @@ import nl.vpro.domain.api.SearchableFacet;
  * @since 5.5
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "mediaTitleFacetListType", propOrder = {"filter", "subSearch", "facets"})
+@XmlType(name = "mediaTitleFacetListType", propOrder = {"subSearch", "facets"})
 
 public class TitleFacetList
     extends MediaFacet /* extending MediaFacet is mainly done for backwards compatibility */
     implements SearchableFacet<TitleSearch>, Iterable<TitleFacet> {
-
-    @Valid
-    private MediaSearch filter;
 
     @Valid
     private TitleSearch subSearch;
@@ -43,16 +40,6 @@ public class TitleFacetList
 
     public TitleFacetList(List<TitleFacet> facets) {
         this.facets = facets;
-    }
-
-    @Override
-    public MediaSearch getFilter() {
-        return filter;
-    }
-
-    @Override
-    public void setFilter(MediaSearch filter) {
-        this.filter = filter;
     }
 
     @Override
