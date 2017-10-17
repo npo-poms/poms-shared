@@ -71,13 +71,7 @@ public class MediaFacetsResult {
 
     private List<TermFacetResultItem> contentRatings;
 
-
-    public void setSortDates(List<DateFacetResultItem> sortDates) {
-        this.sortDates = sortDates;
-    }
-
-
-    public List<MemberRefFacetResultItem> getMemberOf(MediaSearch search) {
+    List<MemberRefFacetResultItem> getMemberOf(MediaSearch search) {
         if (search != null && search.getMemberOf() != null && memberOf == null) {
             memberOf = new ArrayList<>();
         }
