@@ -43,12 +43,12 @@ public class PageFormBuilderTest {
                 "  \"searches\" : {\n" +
                 "    \"text\" : {\n" +
                 "      \"value\" : \"text\",\n" +
-                "      \"match\" : \"should\"\n" +
+                "      \"match\" : \"SHOULD\"\n" +
                 "    },\n" +
                 "    \"broadcasters\" : \"VPRO\",\n" +
                 "    \"types\" : {\n" +
                 "      \"value\" : \"ARTICLE\",\n" +
-                "      \"match\" : \"should\"\n" +
+                "      \"match\" : \"SHOULD\"\n" +
                 "    },\n" +
                 "    \"sortDates\" : [ {\n" +
                 "      \"begin\" : 0,\n" +
@@ -64,7 +64,7 @@ public class PageFormBuilderTest {
                 "      \"broadcasters\" : \"VPRO\",\n" +
                 "      \"values\" : {\n" +
                 "        \"value\" : \"Quintin Tarentino\",\n" +
-                "        \"match\" : \"not\"\n" +
+                "        \"match\" : \"NOT\"\n" +
                 "      }\n" +
                 "    } ]\n" +
                 "  },\n" +

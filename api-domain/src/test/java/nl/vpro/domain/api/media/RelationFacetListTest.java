@@ -119,7 +119,7 @@ public class RelationFacetListTest {
 
     @Test
     public void testSubSearch() throws Exception {
-        String example = "{\"broadcasters\":[\"VPRO\",{\"value\":\"EO\",\"match\":\"not\"}]}";
+        String example = "{\"broadcasters\":[\"VPRO\",{\"value\":\"EO\",\"match\":\"NOT\"}]}";
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("EO", Match.NOT)));
         RelationSearch search = Jackson2TestUtil.roundTripAndSimilarAndEquals(subSearch, example);
@@ -128,7 +128,7 @@ public class RelationFacetListTest {
 
     @Test
     public void testRelationFacet() throws Exception {
-        String example = "{\"threshold\":0,\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation\",\"subSearch\":{\"broadcasters\":[\"VPRO\",{\"value\":\"EO\",\"match\":\"not\"}]}}";
+        String example = "{\"threshold\":0,\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation\",\"subSearch\":{\"broadcasters\":[\"VPRO\",{\"value\":\"EO\",\"match\":\"NOT\"}]}}";
         RelationFacet facet  = new RelationFacet();
         facet.setThreshold(0);
         facet.setName("myrelation");
@@ -162,17 +162,17 @@ public class RelationFacetListTest {
             "    \"subSearch\" : {\n" +
             "      \"broadcasters\" : [ \"VPRO\", {\n" +
             "        \"value\" : \"EO\",\n" +
-            "        \"match\" : \"not\"\n" +
+            "        \"match\" : \"NOT\"\n" +
             "      } ]\n" +
             "    }\n" +
             "  },\n" +
             "  \"subSearch\" : {\n" +
             "    \"broadcasters\" : [ {\n" +
             "      \"value\" : \"VPRO\",\n" +
-            "      \"match\" : \"should\"\n" +
+            "      \"match\" : \"SHOULD\"\n" +
             "    }, {\n" +
             "      \"value\" : \"EO\",\n" +
-            "      \"match\" : \"not\"\n" +
+            "      \"match\" : \"NOT\"\n" +
             "    } ]\n" +
             "  }\n" +
             "}";
