@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -50,5 +51,18 @@ public class VersionService {
             }
         }
         return floatVersion;
+    }
+
+    /**
+     * E.g. in test cases in may be usefull to fix version.
+     */
+    public static void setVersion(Float version) {
+        if (! Objects.equals(VersionService.floatVersion(), version)) {
+            log.info("Setting version {} -> {}", VersionService.version, version);
+            VersionService.floatVersion = version;
+            VersionService.version = String.valueOf(version);
+        }
+
+
     }
 }

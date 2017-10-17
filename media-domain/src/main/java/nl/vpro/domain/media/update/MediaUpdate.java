@@ -28,6 +28,7 @@ import nl.vpro.VersionService;
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
+import nl.vpro.domain.VersionSpecific;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -83,7 +84,8 @@ import nl.vpro.xml.bind.LocaleAdapter;
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
     EmbargoDeprecated,
-    TextualObjectUpdate<TitleUpdate,DescriptionUpdate,  MediaUpdate<M>> {
+    TextualObjectUpdate<TitleUpdate,DescriptionUpdate,  MediaUpdate<M>>,
+    VersionSpecific {
 
     static final Validator VALIDATOR;
 
@@ -929,7 +931,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (parent != null) {
-            version = null;
+            if (parent instanceof VersionSpecific) {
+                version = ((VersionSpecific) parent).getVersion();
+            }
         }
     }
 }

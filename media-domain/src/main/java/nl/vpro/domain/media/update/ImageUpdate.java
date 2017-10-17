@@ -77,8 +77,6 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     @XmlAttribute(name = "urn")
     private String urn;
 
-
-
     @XmlAttribute(name = "publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
