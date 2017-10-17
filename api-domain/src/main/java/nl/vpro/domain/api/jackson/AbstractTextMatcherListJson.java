@@ -44,7 +44,7 @@ public abstract class AbstractTextMatcherListJson<L extends AbstractTextMatcherL
                 jgen.writeObject(matcher);
             }
             jgen.writeEndArray();
-            jgen.writeStringField("match", value.getMatch().name().toLowerCase());
+            jgen.writeStringField("match", value.getMatch().name());
             jgen.writeEndObject();
         } else {
             if (value.size() == 1) {
