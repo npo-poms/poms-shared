@@ -2680,7 +2680,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     private Image addOrUpdate(Image img) {
         Image existing = this.getImage(img);
         if (existing != null) {
-            img.copyFrom(existing);
+            existing.copyFrom(img);
             return existing;
         } else {
             addImage(img);
