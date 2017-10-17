@@ -4,7 +4,9 @@
  */
 package nl.vpro.beeldengeluid.gtaa;
 
-import static org.springframework.http.HttpStatus.CREATED;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -23,7 +25,6 @@ import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXB;
 
-import nl.vpro.domain.PersonInterface;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,22 +39,23 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.extern.slf4j.Slf4j;
-
+import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Schedule;
-
-import nl.vpro.domain.media.gtaa.*;
+import nl.vpro.domain.media.gtaa.GTAAConflict;
+import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.GTAARepository;
+import nl.vpro.domain.media.gtaa.Schemes;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.w3.rdf.RDF;
 
+import static org.springframework.http.HttpStatus.CREATED;
+
 /**
  * See http://editor.openskos.org/apidoc/index.html ?
- * 
+ *
  * @author Roelof Jan Koekoek
  * @since 3.7
  */
@@ -96,7 +98,7 @@ public class OpenskosRepository implements GTAARepository {
 
     @PostConstruct
     public void init() {
-        log.info("Communicating with {}", gtaaUrl);
+        log.info("Communicating with {} (personSpec: {}), useXLLabels: {})", gtaaUrl, personsSpec, useXLLabels);
     }
 
     @Override
@@ -124,12 +126,12 @@ public class OpenskosRepository implements GTAARepository {
     public CountedIterator<Record> getPersonUpdates(@Context Instant from, @Context Instant to) {
         return getUpdates(from, to, personsSpec);
     }
-    
+
     @Override
     public CountedIterator<Record> getAllUpdates(Instant from, Instant until) {
         return getUpdates(from, until, null);
     }
-    
+
     @SuppressWarnings("unchecked")
     private CountedIterator<Record> getUpdates(Instant from, Instant until, String spec) {
 
@@ -184,9 +186,9 @@ public class OpenskosRepository implements GTAARepository {
     ListRecord getListRecord(Instant from, Instant until, String type) {
         String set = "";
         if(type != null) {
-            set = "&set=" + type; 
+            set = "&set=" + type;
         }
-        String path = String.format("oai-pmh?verb=ListRecords&metadataPrefix=oai_rdf%s", set) + "&from=" 
+        String path = String.format("oai-pmh?verb=ListRecords&metadataPrefix=oai_rdf%s", set) + "&from="
                 + isoInstant.format(from.truncatedTo(ChronoUnit.SECONDS)) + "&until="
                 + isoInstant.format(until.truncatedTo(ChronoUnit.SECONDS));
 
