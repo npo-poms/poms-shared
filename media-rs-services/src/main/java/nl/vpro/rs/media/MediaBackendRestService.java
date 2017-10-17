@@ -67,7 +67,7 @@ public interface MediaBackendRestService {
     MediaUpdate<?> getMedia(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @DELETE
@@ -76,7 +76,7 @@ public interface MediaBackendRestService {
     Response deleteMedia(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
@@ -85,7 +85,7 @@ public interface MediaBackendRestService {
     MediaObject getFullMediaObject(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @POST
@@ -94,7 +94,7 @@ public interface MediaBackendRestService {
     Response update(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @XopWithMultipartRelated MediaUpdate<?> update,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam("lookupcrid") @DefaultValue("true") Boolean lookupcrid,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
@@ -108,7 +108,7 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         LocationUpdate location,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     );
@@ -120,7 +120,7 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
         @PathParam("locationId") final String locationId,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
     );
 
@@ -129,7 +129,7 @@ public interface MediaBackendRestService {
     XmlCollection<LocationUpdate> getLocations(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @POST
@@ -139,7 +139,7 @@ public interface MediaBackendRestService {
         ImageUpdate imageUpdate,
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
         @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata
@@ -152,7 +152,7 @@ public interface MediaBackendRestService {
     XmlCollection<ImageUpdate> getImages(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
 
@@ -164,7 +164,7 @@ public interface MediaBackendRestService {
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("20") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @GET
@@ -175,7 +175,7 @@ public interface MediaBackendRestService {
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("20") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @PUT
@@ -185,7 +185,7 @@ public interface MediaBackendRestService {
         MoveAction move,
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
@@ -194,7 +194,7 @@ public interface MediaBackendRestService {
     MediaUpdateList<MemberRefUpdate> getMemberOfs(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @POST
@@ -218,7 +218,7 @@ public interface MediaBackendRestService {
         @PathParam(ID) final String id,
         @PathParam("owner") final String owner,
         @QueryParam("number") final Integer number,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
@@ -230,7 +230,7 @@ public interface MediaBackendRestService {
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("10") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
 
@@ -241,7 +241,7 @@ public interface MediaBackendRestService {
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("10") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @PUT
@@ -251,7 +251,7 @@ public interface MediaBackendRestService {
         MoveAction move,
         @PathParam(ENTITY) @DefaultValue("group") final String entity,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
@@ -259,7 +259,7 @@ public interface MediaBackendRestService {
     @Path("program/{id}/episodeOfs")
     MediaUpdateList<MemberRefUpdate> getEpisodeOfs(
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @POST
@@ -268,7 +268,7 @@ public interface MediaBackendRestService {
     Response addEpisodeOf(
         MemberRefUpdate memberRefUpdate,
         @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
     ) throws IOException;
@@ -281,7 +281,7 @@ public interface MediaBackendRestService {
         @PathParam(ID) final String id,
         @PathParam("owner") final String owner,
         @QueryParam("number") final Integer number,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
@@ -292,7 +292,7 @@ public interface MediaBackendRestService {
     Response removeSegment(
         @PathParam(ID) final String id,
         @PathParam("segmentId") final String segment,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
     ) throws IOException;
 
@@ -304,7 +304,7 @@ public interface MediaBackendRestService {
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     );
 
 
@@ -315,8 +315,8 @@ public interface MediaBackendRestService {
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @PathParam("seq") Integer seq,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
-        @QueryParam("guessOffset") @DefaultValue("false") boolean guessOffset
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam("guessOffset") @DefaultValue("false") Boolean guessOffset
     );
 
     @GET
@@ -324,7 +324,7 @@ public interface MediaBackendRestService {
     @Wrapped(element = "subtitles", namespace = Xmlns.MEDIA_SUBTITLES_NAMESPACE)
     List<SubtitlesId> getAllSubtitles(
         @PathParam(MID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @POST
@@ -335,7 +335,7 @@ public interface MediaBackendRestService {
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @QueryParam(OFFSET) @DefaultValue("0") Duration offset,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         Subtitles subtitles);
 
@@ -346,7 +346,7 @@ public interface MediaBackendRestService {
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
         @QueryParam("offset") @DefaultValue("0") Duration offset,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors);
 
 
@@ -356,7 +356,7 @@ public interface MediaBackendRestService {
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
-        @QueryParam(FOLLOW) @DefaultValue("true") boolean followMerges,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors);
 
 }
