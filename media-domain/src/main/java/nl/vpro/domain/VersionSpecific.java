@@ -8,6 +8,9 @@ package nl.vpro.domain;
 public interface VersionSpecific {
 
 
+    /**
+     * For which version this object is supposed to be filled.
+     *      */
     Float getVersion();
 
     void setVersion(Float version);
