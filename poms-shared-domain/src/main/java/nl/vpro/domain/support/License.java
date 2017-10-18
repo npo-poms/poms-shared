@@ -43,7 +43,7 @@ import nl.vpro.validation.LicenseId;
 public class License implements nl.vpro.domain.Displayable { // Not an enum, because that is hard for older clients!
 
     public static License COPYRIGHTED = new License("Copyrighted", null);
-    public static License PUBLIC_DOMAIN = new License("Publiek domein", null);
+    public static License PUBLIC_DOMAIN = new License("Publiek domein", "https://creativecommons.org/share-your-work/public-domain/cc0/");
     public static License CC_BY = new License("Naamsvermelding", null);
     public static License CC_BY_1_0 = new License("Naamsvermelding_1.0", null);
     public static License CC_BY_2_0 = new License("Naamsvermelding_2.0", null);
@@ -117,9 +117,10 @@ public class License implements nl.vpro.domain.Displayable { // Not an enum, bec
     @Transient
     private URI url;
 
-    public License (){}
+    private License (){}
 
-    public License(String id) {
+
+    private License(String id) {
         this.id = id;
     }
 
