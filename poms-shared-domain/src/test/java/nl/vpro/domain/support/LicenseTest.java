@@ -9,16 +9,12 @@ import javax.validation.ValidatorFactory;
 
 import org.junit.Test;
 
+import nl.vpro.jackson2.Jackson2Mapper;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LicenseTest {
 
-
-    @Test
-    public void getId() throws Exception {
-        License testLicense = new License("testid");
-        assertThat(testLicense.getId()).isEqualTo("testid");
-    }
 
 
     @Test
@@ -29,17 +25,13 @@ public class LicenseTest {
 
     @Test
     public void allsShouldReturnLicenseId() throws Exception {
-
-        License testLicense = new License();
-        assertThat(testLicense.values()[0].getId()).isEqualTo("COPYRIGHTED");
+        assertThat(License.values()[0].getId()).isEqualTo("COPYRIGHTED");
 
     }
 
     @Test
     public void getLicenseById() throws Exception {
-
-        License testLicense = new License();
-        assertThat(testLicense.getLicenseById("COPYRIGHTED")).isEqualTo(License.COPYRIGHTED);
+        assertThat(License.valueOf("COPYRIGHTED")).isEqualTo(License.COPYRIGHTED);
     }
 
 
@@ -47,7 +39,7 @@ public class LicenseTest {
     public void getLicenseInvalidId() throws Exception {
         ValidatorFactory config = Validation.buildDefaultValidatorFactory();
         Validator validator = config.getValidator();
-        License testLicense = new License("bla");
+        License testLicense = License("bla");
         Set<ConstraintViolation<License>> validate = validator.validate(testLicense);
         assertThat(validate).isNotEmpty();
 
