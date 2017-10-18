@@ -6,13 +6,16 @@ import lombok.Data;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
+ * This look a lot like {@link MediaUpdateConfig}
+ *
+ * TODO: MediaUpdate needs heavy refactoring, and we should about this kind of stuff then too.
  * @author Michiel Meeuwissen
  * @since 5.5
  */
 @AllArgsConstructor
 @lombok.Builder
 @Data
-public class Assemblage {
+public class AssemblageConfig {
     @lombok.Builder.Default
     OwnerType ownerType = OwnerType.BROADCASTER;
     final boolean copyWorkflow;
