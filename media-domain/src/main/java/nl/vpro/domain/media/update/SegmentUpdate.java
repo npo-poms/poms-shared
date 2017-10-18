@@ -107,7 +107,9 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
         return builder.build().compareTo(segmentUpdate.builder.build());
     }
 
+    @Override
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+        super.afterUnmarshal(unmarshaller, parent);
         if(parent != null && parent instanceof ProgramUpdate) {
             ((MediaBuilder.SegmentBuilder)builder).parent((ProgramUpdate) parent);
         }

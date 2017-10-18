@@ -8,6 +8,6 @@ package nl.vpro.domain.media.update;
  * @author Roelof Jan Koekoek
  * @since 2.3
  */
-public class SegmentUpdateConfig extends MediaUpdateConfig{
+public class SegmentUpdateConfig extends MediaUpdateConfig {
 
 }
