@@ -15,7 +15,7 @@ import nl.vpro.util.TimeUtils;
  */
 public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
 
-    String getUrn();
+    String getImageUri();
 
     ImageType getType();
 
