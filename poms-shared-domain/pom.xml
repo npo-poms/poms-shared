@@ -118,5 +118,9 @@
       <artifactId>org.restlet</artifactId>
       <version>RELEASE</version>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-test</artifactId>
+    </dependency>
   </dependencies>
 </project>
