@@ -160,8 +160,8 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
     private String sourceName;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
-    @Enumerated(EnumType.STRING)
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Embedded
     private License license;
 
     @ReleaseDate()

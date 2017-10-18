@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -40,6 +43,7 @@ import nl.vpro.validation.LicenseId;
 @XmlType(name = "licenseEnum", namespace = Xmlns.SHARED_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonSerialize(using = License.Serializer.class)
+@Embeddable
 public class License implements nl.vpro.domain.Displayable {
 
     public static License COPYRIGHTED = new License("Copyrighted", null);
@@ -106,12 +110,15 @@ public class License implements nl.vpro.domain.Displayable {
 
     @XmlValue
     @LicenseId
+    @Column(name = "license")
     private String id;
 
     @NonNull
+    @Transient
     private String displayName;
 
     @Getter
+    @Transient
     private URI url;
 
     public License (){}
