@@ -8,9 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -576,38 +573,6 @@ public class MediaObjects {
     }
 
 
-    /**
-     * TODO in vpro api we find a HttpClient version of this, with connection pooling.
-     * I don't know if that is necessary for this.
-     */
-    public static Long getByteSize(String u) {
-        try {
-            URL url = new URL(u);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setInstanceFollowRedirects(true);
-            connection.setRequestMethod("HEAD");
-            if (connection.getResponseCode() == 200) {
-                String contentLength = connection.getHeaderField("Content-Length");
-                if (contentLength != null) {
-                    Long result = Long.parseLong(contentLength);
-                    log.info("Byte size of {} is {} (determined by head request)", u, result);
-                    return result;
-                } else {
-                    log.warn("No content length in {}" + u);
-                    return null;
-                }
-            } else {
-                log.warn("Response code {} from {}", connection.getResponseCode(), u);
-                return null;
-            }
-        } catch (MalformedURLException mf) {
-            log.debug(mf.getMessage());
-            return null;
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-            return null;
-        }
-    }
 
     public static boolean isWebonly(MediaObject media) {
         return media.getMediaType() == MediaType.CLIP;
