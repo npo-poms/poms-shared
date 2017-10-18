@@ -35,6 +35,7 @@ import nl.vpro.validation.LicenseId;
  * @since 5.0
  */
 
+@SuppressWarnings("ValidExternallyBoundObject")
 @ToString
 @XmlType(name = "licenseEnum", namespace = Xmlns.SHARED_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
