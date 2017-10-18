@@ -57,7 +57,7 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
 
     private static final long serialVersionUID = 0L;
 
-    private String urn;
+    private String imageUri;
 
     private ImageType type;
 
@@ -123,7 +123,7 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
     public static BasicImageMetadata of(ImageMetadata<?> image) {
         BasicImageMetadata metaData = new BasicImageMetadata();
         metaData.copyFrom(image);
-        metaData.urn = image.getUrn();
+        metaData.imageUri= image.getImageUri();
         Embargos.copy(image, metaData);
         return metaData;
     }
