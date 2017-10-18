@@ -20,7 +20,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
-import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -34,9 +33,6 @@ import nl.vpro.validation.LicenseId;
 /**
  * @author Michiel Meeuwissen
  * @since 5.0
- * @TODO Licenses have no support for versions. I now suggested 4.0 for the the CC-licenses, but other version may occur too!
- *       Perhaps License should not be enum, or have many more values.
- *       The trouble with enum is any way that java clients are hard to keep in sync.
  */
 
 @ToString
@@ -44,7 +40,7 @@ import nl.vpro.validation.LicenseId;
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonSerialize(using = License.Serializer.class)
 @Embeddable
-public class License implements nl.vpro.domain.Displayable {
+public class License implements nl.vpro.domain.Displayable { // Not an enum, because that is hard for older clients!
 
     public static License COPYRIGHTED = new License("Copyrighted", null);
     public static License PUBLIC_DOMAIN = new License("Publiek domein", null);
@@ -147,12 +143,7 @@ public class License implements nl.vpro.domain.Displayable {
     }
 
     public static License valueOfOrNull(String id) {
-        if (StringUtils.isEmpty(id)) {
-            return null;
-        } else {
-            return new License(id);
-        }
-
+        return Arrays.stream(values()).filter(l -> l.getId().equals(id)).findFirst().orElse(null);
     }
 
     public static License getLicenseById(String id) {

@@ -129,7 +129,11 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     @XmlTransient
     @NotNull(groups = {WarningValidatorGroup.class})
-    private String license;
+    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @Embedded
+    @Getter
+    @Setter
+    private License license;
 
     @Getter
     @Setter
@@ -162,11 +166,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         setTitle(title);
     }
 
-    @Override
-    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
-    public License getLicense() {
-        return License.getLicenseById(license);
-    }
 
     @Override
     public ImageType getType() {
@@ -216,11 +215,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         } else {
             this.description = description.substring(255);
         }
-    }
-
-    @Override
-    public void setLicense(License license) {
-        this.license = license == null ? null : license.getId();
     }
 
     @Override
