@@ -1,15 +1,23 @@
 package nl.vpro.domain.support;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+import java.io.StringReader;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import javax.xml.bind.JAXB;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.junit.Test;
 
 import nl.vpro.jackson2.Jackson2Mapper;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,15 +44,57 @@ public class LicenseTest {
 
 
     @Test
-    public void getLicenseInvalidId() throws Exception {
-        ValidatorFactory config = Validation.buildDefaultValidatorFactory();
-        Validator validator = config.getValidator();
-        License testLicense = License("bla");
-        Set<ConstraintViolation<License>> validate = validator.validate(testLicense);
-        assertThat(validate).isNotEmpty();
-
-        assertThat(validator.validate(License.PUBLIC_DOMAIN)).isEmpty();
-
+    public void json() throws Exception {
+        Jackson2TestUtil.roundTripAndSimilar(new A(License.CC_BY), "{\n" +
+            "  \"license\" : \"CC_BY\"\n" +
+            "}");
     }
 
+    @Test
+    public void xml() throws Exception {
+        JAXBTestUtil.roundTripAndSimilar(new A(License.CC_BY), "<a>\n" +
+            "    <license>CC_BY</license>\n" +
+            "</a>\n");
+    }
+
+    ValidatorFactory config = Validation.buildDefaultValidatorFactory();
+    Validator validator = config.getValidator();
+
+    @Test
+    public void validator() throws Exception {
+        assertThat(validator.validate(License.PUBLIC_DOMAIN)).isEmpty();
+    }
+
+    @Test
+    public void futureIdsCanBeUnmarshalledXml() throws Exception {
+        A a = JAXB.unmarshal(new StringReader("<a>\n" +
+            "    <license>FUTURE_LICENSE</license>\n" +
+            "</a>"), A.class);
+        License testLicense = a.getLicense();
+        assertThat(testLicense.getId()).isEqualTo("FUTURE_LICENSE");
+
+        Set<ConstraintViolation<License>> validate = validator.validate(testLicense);
+        assertThat(validate).isNotEmpty();
+    }
+
+
+    @Test
+    public void futureIdsCanBeUnmarshalledJson() throws Exception {
+        A a = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
+            "  \"license\" : \"FUTURE_LICENSE\"\n" +
+            "}"), A.class);
+        License testLicense = a.getLicense();
+        assertThat(testLicense.getId()).isEqualTo("FUTURE_LICENSE");
+    }
+
+
+    @Data
+    @AllArgsConstructor
+    @XmlRootElement
+    public static class A {
+        License license;
+        protected A() {
+
+        }
+    }
 }
