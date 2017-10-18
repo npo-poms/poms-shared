@@ -122,7 +122,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     }
 
     @Override
-    Program fetch(ImageImporter importer, Assemblage assemblage) {
+    Program fetch(ImageImporter importer, AssemblageConfig assemblage) {
         if (segments != null) {
             for (SegmentUpdate update : segments) {
                 Segment segment = update.fetch(importer, assemblage);
