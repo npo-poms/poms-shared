@@ -170,6 +170,16 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         this.image = image;
     }
 
+    /**
+     * This cannot be updated. Don't return it.
+     * @return
+     */
+    @Override
+    public String getImageUri() {
+        return null;
+
+    }
+
     public static class Builder implements EmbargoBuilder<Builder> {
 
         public Builder imageUrl(String imageLocation) {
@@ -241,7 +251,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     public Image toImage(ImageMetadata<?> metadata) {
         BasicImageMetadata basic = BasicImageMetadata.of(metadata);
         basic.copyFromIfSourceSet(this);
-        Image result = toImage(metadata.getUrn());
+        Image result = toImage(metadata.getImageUri());
         result.copyFrom(basic);
         return result;
     }
