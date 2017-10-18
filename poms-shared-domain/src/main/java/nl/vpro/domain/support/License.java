@@ -43,39 +43,39 @@ import nl.vpro.validation.LicenseId;
 public class License implements nl.vpro.domain.Displayable {
 
     //region
-    public static License COPYRIGHTED = new License("Copyrighted", null, true);
-    public static License PUBLIC_DOMAIN = new License("Publiek domein", null, true);
-    public static License CC_BY = new License("Naamsvermelding", null, true);
-    public static License CC_BY_1_0 = new License("Naamsvermelding_1.0", null, true);
-    public static License CC_BY_2_0 = new License("Naamsvermelding_2.0", null, true);
-    public static License CC_BY_3_0 = new License("Naamsvermelding_3.0", null, true);
-    public static License CC_BY_4_0 = new License("Naamsvermelding_4.0", null, true);
-    public static License CC_BY_SA = new License("Naamsvermelding-GelijkDelen", null, true);
-    public static License CC_BY_SA_1_0 = new License("Naamsvermelding-GelijkDelen_1.0", null, true);
-    public static License CC_BY_SA_2_0 = new License("Naamsvermelding-GelijkDelen_2.0", null, true);
-    public static License CC_BY_SA_3_0 = new License("Naamsvermelding-GelijkDelen_3.0", null, true);
-    public static License CC_BY_SA_4_0 = new License("Naamsvermelding-GelijkDelen_4.0", null, true);
-    public static License CC_BY_ND = new License("Naamsvermelding-GeenAfgeleideWerken", null, true);
-    public static License CC_BY_ND_1_0 = new License("Naamsvermelding-GeenAfgeleideWerken_1.0", null, true);
-    public static License CC_BY_ND_2_0 = new License("Naamsvermelding-GeenAfgeleideWerken_2.0", null, true);
-    public static License CC_BY_ND_3_0 = new License("Naamsvermelding-GeenAfgeleideWerken_3.0", null, true);
-    public static License CC_BY_ND_4_0 = new License("Naamsvermelding-GeenAfgeleideWerken_4.0", null, true);
-    public static License CC_BY_NC = new License("Naamsvermelding-NietCommercieel", null, true);
-    public static License CC_BY_NC_1_0 = new License("Naamsvermelding-NietCommercieel_1.0", null, true);
-    public static License CC_BY_NC_2_0 = new License("Naamsvermelding-NietCommercieel_2.0", null, true);
-    public static License CC_BY_NC_3_0 = new License("Naamsvermelding-NietCommercieel_3.0", null, true);
-    public static License CC_BY_NC_4_0 = new License("Naamsvermelding-NietCommercieel_4.0", null, true);
-    public static License CC_BY_NC_SA = new License("Naamsvermelding-NietCommercieel-GelijkDelen", null, true);
-    public static License CC_BY_NC_SA_1_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_1.0", null, true);
-    public static License CC_BY_NC_SA_2_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_2.0", null, true);
-    public static License CC_BY_NC_SA_3_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_3.0", null, true);
-    public static License CC_BY_NC_SA_4_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_4.0", null, true);
-    public static License CC_BY_NC_ND = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", null, true);
-    public static License CC_BY_NC_ND_1_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_1.0", "https://creativecommons.org/licenses/by-nc-nd/1.0/", true);
-    public static License CC_BY_NC_ND_2_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_2.0", "https://creativecommons.org/licenses/by-nc-nd/2.0/", true);
-    public static License CC_BY_NC_ND_3_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_3.0", "https://creativecommons.org/licenses/by-nc-nd/3.0/", true);
-    public static License CC_BY_NC_ND_4_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_4.0", "https://creativecommons.org/licenses/by-nc-nd/4.0/", true);
-    public static License USA_GOV = new License("United States Government Work", "http://www.usa.gov/copyright.shtml", true);
+    public static License COPYRIGHTED = new License("Copyrighted", null);
+    public static License PUBLIC_DOMAIN = new License("Publiek domein", null);
+    public static License CC_BY = new License("Naamsvermelding", null);
+    public static License CC_BY_1_0 = new License("Naamsvermelding_1.0", null);
+    public static License CC_BY_2_0 = new License("Naamsvermelding_2.0", null);
+    public static License CC_BY_3_0 = new License("Naamsvermelding_3.0", null);
+    public static License CC_BY_4_0 = new License("Naamsvermelding_4.0", "https://creativecommons.org/licenses/by/4.0/");
+    public static License CC_BY_SA = new License("Naamsvermelding-GelijkDelen", null);
+    public static License CC_BY_SA_1_0 = new License("Naamsvermelding-GelijkDelen_1.0", null);
+    public static License CC_BY_SA_2_0 = new License("Naamsvermelding-GelijkDelen_2.0", null);
+    public static License CC_BY_SA_3_0 = new License("Naamsvermelding-GelijkDelen_3.0", null);
+    public static License CC_BY_SA_4_0 = new License("Naamsvermelding-GelijkDelen_4.0", "https://creativecommons.org/licenses/by-sa/4.0/");
+    public static License CC_BY_ND = new License("Naamsvermelding-GeenAfgeleideWerken", null);
+    public static License CC_BY_ND_1_0 = new License("Naamsvermelding-GeenAfgeleideWerken_1.0", null);
+    public static License CC_BY_ND_2_0 = new License("Naamsvermelding-GeenAfgeleideWerken_2.0", null);
+    public static License CC_BY_ND_3_0 = new License("Naamsvermelding-GeenAfgeleideWerken_3.0", null);
+    public static License CC_BY_ND_4_0 = new License("Naamsvermelding-GeenAfgeleideWerken_4.0", "https://creativecommons.org/licenses/by-nd/4.0/");
+    public static License CC_BY_NC = new License("Naamsvermelding-NietCommercieel", null);
+    public static License CC_BY_NC_1_0 = new License("Naamsvermelding-NietCommercieel_1.0", null);
+    public static License CC_BY_NC_2_0 = new License("Naamsvermelding-NietCommercieel_2.0", null);
+    public static License CC_BY_NC_3_0 = new License("Naamsvermelding-NietCommercieel_3.0", null);
+    public static License CC_BY_NC_4_0 = new License("Naamsvermelding-NietCommercieel_4.0", "https://creativecommons.org/licenses/by-nc/4.0/");
+    public static License CC_BY_NC_SA = new License("Naamsvermelding-NietCommercieel-GelijkDelen", null);
+    public static License CC_BY_NC_SA_1_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_1.0", null);
+    public static License CC_BY_NC_SA_2_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_2.0", null);
+    public static License CC_BY_NC_SA_3_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_3.0", null);
+    public static License CC_BY_NC_SA_4_0 = new License("Naamsvermelding-NietCommercieel-GelijkDelen_4.0", "https://creativecommons.org/licenses/by-nc-sa/4.0/");
+    public static License CC_BY_NC_ND = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", null);
+    public static License CC_BY_NC_ND_1_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_1.0", "https://creativecommons.org/licenses/by-nc-nd/1.0/");
+    public static License CC_BY_NC_ND_2_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_2.0", "https://creativecommons.org/licenses/by-nc-nd/2.0/");
+    public static License CC_BY_NC_ND_3_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_3.0", "https://creativecommons.org/licenses/by-nc-nd/3.0/");
+    public static License CC_BY_NC_ND_4_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_4.0", "https://creativecommons.org/licenses/by-nc-nd/4.0/");
+    public static License USA_GOV = new License("United States Government Work", "http://www.usa.gov/copyright.shtml");
     //endregion
 
     private static final License[] ALL;
@@ -98,12 +98,12 @@ public class License implements nl.vpro.domain.Displayable {
 
 
 //
-//    CC_BY("Naamsvermelding", "https://creativecommons.org/licenses/by/4.0/", true),
-//    CC_BY_SA("Naamsvermelding-GelijkDelen", "https://creativecommons.org/licenses/by-sa/4.0/", true),
-//    CC_BY_ND("Naamsvermelding-GeenAfgeleideWerken", "https://creativecommons.org/licenses/by-nd/4.0/", true),
-//    CC_BY_NC("Naamsvermelding-NietCommercieel", "https://creativecommons.org/licenses/by-nc/4.0/", true),
-//    CC_BY_NC_SA("Naamsvermelding-NietCommercieel-GelijkDelen", "https://creativecommons.org/licenses/by-nc-sa/4.0/", true),
-//    CC_BY_NC_ND("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", , true),
+//    CC_BY("Naamsvermelding", "https://creativecommons.org/licenses/by/4.0/"),
+//    CC_BY_SA("Naamsvermelding-GelijkDelen", "https://creativecommons.org/licenses/by-sa/4.0/"),
+//    CC_BY_ND("Naamsvermelding-GeenAfgeleideWerken", "https://creativecommons.org/licenses/by-nd/4.0/"),
+//    CC_BY_NC("Naamsvermelding-NietCommercieel", "https://creativecommons.org/licenses/by-nc/4.0/"),
+//    CC_BY_NC_SA("Naamsvermelding-NietCommercieel-GelijkDelen", "https://creativecommons.org/licenses/by-nc-sa/4.0/"),
+//    CC_BY_NC_ND("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken", ),
 //    USA_GOV("United States Government Work",, false)
 
     @XmlValue
@@ -116,9 +116,6 @@ public class License implements nl.vpro.domain.Displayable {
     @Getter
     private URI url;
 
-    @Getter
-    private boolean listed;
-
     public License (){}
 
     public License(String id) {
@@ -126,11 +123,9 @@ public class License implements nl.vpro.domain.Displayable {
     }
 
 
-    License(String displayName, String url, boolean listed) {
-
+    License(String displayName, String url) {
         this.displayName = displayName;
         this.url = url == null ? null : URI.create(url);
-        this.listed = listed;
     }
 
     @JsonProperty("id")
