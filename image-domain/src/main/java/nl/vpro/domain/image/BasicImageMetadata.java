@@ -32,7 +32,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(
     name = "imageMetadataType",
     propOrder = {
-        "urn",
+        "imageUri",
         "title",
         "description",
         "height",
@@ -57,10 +57,16 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
 
     private static final long serialVersionUID = 0L;
 
+    /**
+     * The public 'urn' of the image, which can be used to construct URLs. This is actually the urn of the image on the image-server.
+     * The media server wraps it with its own image object with its own urn, and stores the reference to the image-server in 'imageUri'.
+     *
+     * So imageUri is an identifier for the actual image itself, the rest is metadata which may vary between different object which
+     * still have the same imageUri.
+     */
     private String imageUri;
 
     private ImageType type;
-
 
     private String title;
 
