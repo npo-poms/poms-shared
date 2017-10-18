@@ -6,6 +6,8 @@
 
 package nl.vpro.domain.media.support;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -86,6 +88,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "creationDate",
     "workflow"
 })
+@Slf4j
 public class Image extends PublishableObject<Image> implements Metadata<Image>, Ownable, MediaObjectChild {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
@@ -536,7 +539,11 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
     @Override
     public void copyFrom(Metadata<?> metadata) {
         Metadata.super.copyFrom(metadata);
-        setImageUri(metadata.getUrn());
+        if (imageUri == null) {
+            setImageUri(metadata.getImageUri());
+        } else if (! Objects.equals(imageUri, metadata.getImageUri())) {
+            log.warn("Can't update imageUri of {} (from {})", this, metadata);
+        }
     }
 
     @Override
