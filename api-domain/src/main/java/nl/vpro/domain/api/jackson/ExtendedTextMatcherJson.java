@@ -41,5 +41,16 @@ public class ExtendedTextMatcherJson extends AbstractTextMatcherJson<ExtendedTex
         }
     }
 
+    @Override
+    protected boolean isCaseSensitive(ExtendedTextMatcher value) {
+        return value.isCaseSensitive();
+    }
+
+    @Override
+    protected void setCaseSensitive(ExtendedTextMatcher value, boolean isCaseSensitive) {
+        value.setCaseSensitive(isCaseSensitive);
+    }
+
+
 
 }
