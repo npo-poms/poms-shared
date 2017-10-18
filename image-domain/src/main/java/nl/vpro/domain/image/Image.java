@@ -384,6 +384,11 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         return this;
     }
 
+    @Override
+    public String getImageUri() {
+        return getUrn();
+    }
+
     public byte[] getHash() {
         return hash;
     }
