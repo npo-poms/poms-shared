@@ -38,11 +38,14 @@ public interface UserService<T extends User> {
 
     void authenticate(String principalId);
 
-
     Object getAuthentication();
 
     void restoreAuthentication(Object authentication);
 
+
+    /**
+     * Default implemention without consideration of the roles. This can be overridden.
+     */
     default Logout systemAuthenticate(String principalId, String... roles) {
         authenticate(principalId);
         return this::dropAuthentication;
