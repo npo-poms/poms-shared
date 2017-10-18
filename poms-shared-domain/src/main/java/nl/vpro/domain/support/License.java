@@ -42,7 +42,6 @@ import nl.vpro.validation.LicenseId;
 @JsonSerialize(using = License.Serializer.class)
 public class License implements nl.vpro.domain.Displayable {
 
-    //region
     public static License COPYRIGHTED = new License("Copyrighted", null);
     public static License PUBLIC_DOMAIN = new License("Publiek domein", null);
     public static License CC_BY = new License("Naamsvermelding", null);
@@ -76,7 +75,6 @@ public class License implements nl.vpro.domain.Displayable {
     public static License CC_BY_NC_ND_3_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_3.0", "https://creativecommons.org/licenses/by-nc-nd/3.0/");
     public static License CC_BY_NC_ND_4_0 = new License("Naamsvermelding-NietCommercieel-GeenAfgeleideWerken_4.0", "https://creativecommons.org/licenses/by-nc-nd/4.0/");
     public static License USA_GOV = new License("United States Government Work", "http://www.usa.gov/copyright.shtml");
-    //endregion
 
     private static final License[] ALL;
 
