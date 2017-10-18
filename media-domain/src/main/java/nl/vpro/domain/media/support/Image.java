@@ -531,10 +531,12 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
     @Override
     public void copyFrom(Metadata<?> metadata) {
         Metadata.super.copyFrom(metadata);
-        if (imageUri == null) {
-            setImageUri(metadata.getImageUri());
-        } else if (! Objects.equals(imageUri, metadata.getImageUri())) {
-            log.warn("Can't update imageUri of {} (from {})", this, metadata);
+        if (metadata.getImageUri() != null) {
+            if (imageUri == null) {
+                setImageUri(metadata.getImageUri());
+            } else if (!Objects.equals(imageUri, metadata.getImageUri())) {
+                log.warn("Can't update imageUri of {} (from {})", this, metadata);
+            }
         }
     }
 
