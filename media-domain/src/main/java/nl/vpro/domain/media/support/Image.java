@@ -24,7 +24,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.EmbargoBuilder;
-import nl.vpro.domain.Embargos;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
@@ -530,13 +529,14 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
 
     public static Image of(ImageMetadata<?> metaData) {
         Image image = new Image();
-        image.setImageUri(metaData.getUrn());
-        image.setType(metaData.getType());
-        image.setTitle(metaData.getTitle());
-        image.setDescription(metaData.getDescription());
-        image.setHeight(metaData.getHeight());
-        image.setWidth(metaData.getWidth());
+        image.copyFrom(metaData);
         return image;
+    }
+
+    @Override
+    public void copyFrom(Metadata<?> metadata) {
+        Metadata.super.copyFrom(metadata);
+        setImageUri(metadata.getUrn());
     }
 
     @Override
