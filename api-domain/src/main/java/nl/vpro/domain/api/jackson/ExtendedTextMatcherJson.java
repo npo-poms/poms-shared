@@ -26,7 +26,7 @@ public class ExtendedTextMatcherJson extends AbstractTextMatcherJson<ExtendedTex
     public ExtendedTextMatcherJson() {
         super(ExtendedTextMatcher::new, ExtendedMatchType::valueOf);
     }
-    
+
     public static class Serializer extends JsonSerializer<ExtendedTextMatcher> {
         @Override
         public void serialize(ExtendedTextMatcher value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
@@ -40,7 +40,7 @@ public class ExtendedTextMatcherJson extends AbstractTextMatcherJson<ExtendedTex
             return SERIALIZER.deserialize(p, ctxt);
         }
     }
-
+/*
     @Override
     protected boolean isCaseSensitive(ExtendedTextMatcher value) {
         return value.isCaseSensitive();
@@ -49,7 +49,7 @@ public class ExtendedTextMatcherJson extends AbstractTextMatcherJson<ExtendedTex
     @Override
     protected void setCaseSensitive(ExtendedTextMatcher value, boolean isCaseSensitive) {
         value.setCaseSensitive(isCaseSensitive);
-    }
+    }*/
 
 
 
