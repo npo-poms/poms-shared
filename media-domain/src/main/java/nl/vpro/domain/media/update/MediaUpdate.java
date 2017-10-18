@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.validation.groups.Default;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -215,6 +216,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @Override
+    @XmlTransient
     public Float getVersion() {
         return version;
     }
@@ -962,4 +964,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
             }
         }
     }
+
+    void beforeMarshal(Marshaller marshaller) {
+        log.debug("Before");
+    }
+
 }
