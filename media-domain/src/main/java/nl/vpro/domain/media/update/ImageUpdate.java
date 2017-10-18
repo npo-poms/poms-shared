@@ -130,6 +130,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
 
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Valid
     private License license;
 
     @ReleaseDate()
