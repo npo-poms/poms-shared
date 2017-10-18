@@ -145,6 +145,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected Float version;
 
+    protected boolean xmlVersion = true;
+
+
     protected MediaBuilder<?, M> builder;
 
     @Valid
@@ -212,7 +215,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @Override
-    @XmlAttribute
     public Float getVersion() {
         return version;
     }
@@ -221,6 +223,19 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setVersion(Float version) {
         this.version = version;
     }
+
+    @XmlAttribute(name = "version")
+    protected Float getVersionAttribute() {
+        if (xmlVersion) {
+            return getVersion();
+        } else {
+            return null;
+        }
+    }
+    protected void setVersionAttribute(Float version) {
+        setVersion(version);
+    }
+
 
     public boolean isValid() {
         return violations().isEmpty();
@@ -941,7 +956,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (parent != null) {
             if (parent instanceof VersionSpecific) {
-                version = ((VersionSpecific) parent).getVersion();
+                if ( Objects.equals( ((VersionSpecific)parent).getVersion(), getVersion())) {
+                    xmlVersion = false;
+                }
             }
         }
     }
