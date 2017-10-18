@@ -6,6 +6,8 @@
 
 package nl.vpro.domain.media.support;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -162,6 +164,8 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
     @Embedded
+    @Getter
+    @Setter
     private License license;
 
     @ReleaseDate()
@@ -449,18 +453,6 @@ public class Image extends PublishableObject<Image> implements Metadata<Image>, 
         super.setPublishStartInstant(publishStart);
         return this;
     }
-
-    @Override
-    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
-    public License getLicense() {
-        return license;
-    }
-
-    @Override
-    public void setLicense(License license) {
-        this.license = license;
-    }
-
 
     @Override
     public MediaObject getParent() {
