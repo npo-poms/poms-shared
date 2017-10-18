@@ -144,14 +144,17 @@ public class License implements nl.vpro.domain.Displayable { // Not an enum, bec
     }
 
     public static License valueOfOrNull(String id) {
-        return Arrays.stream(values()).filter(l -> l.getId().equals(id)).findFirst().orElse(null);
+        return Arrays.stream(values())
+            .filter(l -> l.getId().equals(id))
+            .findFirst()
+            .orElse(null);
     }
 
-    public static License getLicenseById(String id) {
-        if (id == null) {
-            return null;
-        }
-        return Arrays.stream(values()).filter(l -> l.getId().equals(id)).findFirst().orElse(new License(id));
+    public static License valueOf(String id) {
+        return Arrays.stream(values())
+            .filter(l -> l.getId().equals(id))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("No such license " + id));
     }
 
     public static License[] values() {
