@@ -580,12 +580,27 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetSegments() throws Exception {
         ProgramUpdate update = programUpdate();
+        update.setVersion(5.5f);
         update.setSegments(new TreeSet<>(Collections.singletonList(
             SegmentUpdate.create(
                 new Segment(update.fetch(), Duration.ofMillis(5555), AuthorizedDuration.ofMillis(100))
             ))));
+        //update.getSegments().first().setVersion(5.5f);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments><segment embeddable=\"true\"><duration>P0DT0H0M0.100S</duration><locations/><scheduleEvents/><images/><start>P0DT0H0M5.555S</start></segment></segments></program>";
+        String expected = "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments>\n" +
+            "        <segment embeddable=\"true\">\n" +
+            "            <duration>P0DT0H0M0.100S</duration>\n" +
+            "            <locations/>\n" +
+            "            <scheduleEvents/>\n" +
+            "            <images/>\n" +
+            "            <start>P0DT0H0M5.555S</start>\n" +
+            "        </segment>\n" +
+            "    </segments>\n" +
+            "</program>";
 
         ProgramUpdate unmarshal = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertEquals(1, unmarshal.getSegments().size());
