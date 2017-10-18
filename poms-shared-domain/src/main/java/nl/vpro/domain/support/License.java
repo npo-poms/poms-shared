@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URI;
@@ -41,7 +42,9 @@ import nl.vpro.validation.LicenseId;
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonSerialize(using = License.Serializer.class)
 @Embeddable
-public class License implements nl.vpro.domain.Displayable { // Not an enum, because that is hard for older clients!
+public class License implements nl.vpro.domain.Displayable, Serializable { // Not an enum, because that is hard for older clients!
+
+    private static final long serialVersionUID = 0L;
 
     public static License COPYRIGHTED = new License("Copyrighted", null);
     public static License PUBLIC_DOMAIN = new License("Publiek domein", "https://creativecommons.org/share-your-work/public-domain/cc0/");
