@@ -49,6 +49,14 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
 
+
+/**
+ * TODO: Needs refactoring.
+ * builder members need to go. This is too complicated.
+ * The owner field has no place too. This object should be totall agnostic about owner.
+ *
+ */
+
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(
     name = "mediaUpdateType",
@@ -366,7 +374,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     /**
      * Please use MediaUpdateService#fetch in stead.
      */
-    M fetch(ImageImporter importer, Assemblage assemblage) {
+    M fetch(ImageImporter importer, AssemblageConfig assemblage) {
         if(!imported && images != null) {
             for(ImageUpdate imageUpdate : images) {
                 Image image = importer.save(imageUpdate, assemblage.isImageMetaData());
