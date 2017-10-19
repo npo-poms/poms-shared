@@ -4,17 +4,27 @@ import nl.vpro.domain.Child;
 import nl.vpro.domain.media.MediaObject;
 
 /**
- * Temporary class, to unify all 'childs' of mediaobject (some had 'parent', some had 'mediaobject' property)
+ * Temporary interface, to unify all 'childs' of mediaobject (some had 'parent', some had 'mediaobject' property)
+ * It just add deprecated default methods to make 'get/setMediaobject' available.
  * @author Michiel Meeuwissen
  * @since 5.5
+ *
  */
+@Deprecated
 public interface MediaObjectChild extends Child<MediaObject> {
 
+
+    /**
+     * @deprecated use {@link #getParent()}
+     */
     @Deprecated
     default MediaObject getMediaObject() {
         return getParent();
     }
 
+    /**
+     * @deprecated use {@link #setParent(Object)}
+     */
     @Deprecated
     default void setMediaObject(MediaObject parent) {
         setParent(parent);
