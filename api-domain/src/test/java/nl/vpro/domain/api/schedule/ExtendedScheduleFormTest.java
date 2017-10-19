@@ -48,7 +48,7 @@ public class ExtendedScheduleFormTest {
     public void applyDescendantOf() throws Exception {
 
         ScheduleEvent event = new ScheduleEvent();
-        event.setMediaObject(MediaBuilder.program().descendantOf("mid123").build());
+        event.setParent(MediaBuilder.program().descendantOf("mid123").build());
 
 
         ExtendedScheduleForm form = new ExtendedScheduleForm(new SchedulePager(), (LocalDate) null);

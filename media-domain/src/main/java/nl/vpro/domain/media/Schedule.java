@@ -279,7 +279,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
                             log.debug("No poprogid for {}", scheduleEvent);
                             if (program.getMid() == null || (scheduleEventPoProgID != null && scheduleEventPoProgID.equals(program.getMid()))) {
                                 program.setMid(scheduleEventPoProgID);
-                                scheduleEvent.setMediaObject(program);
+                                scheduleEvent.setParent(program);
                             } else {
                                 log.debug("Cloning a MIS duplicate");
                                 // Create a clone for the second poProgId and it's event
@@ -291,7 +291,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
                                     clone.setMid(null);
                                     clone.setMid(scheduleEventPoProgID);
                                 }
-                                scheduleEvent.setMediaObject(clone);
+                                scheduleEvent.setParent(clone);
                             }
                             break;
                         }
