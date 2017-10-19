@@ -604,7 +604,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B scheduleEvents(ScheduleEvent... scheduleEvents) {
         for(ScheduleEvent event : scheduleEvents) {
-            event.setMediaObject(mediaObject());
+            event.setParent(mediaObject());
         }
         return (B)this;
     }
@@ -620,7 +620,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger, ScheduleEventTitle... titles) {
         ScheduleEvent event = new ScheduleEvent(c, time, duration);
-        event.setMediaObject(mediaObject());
+        event.setParent(mediaObject());
         for (ScheduleEventTitle title : titles) {
             event.addTitle(title);
         }

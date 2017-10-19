@@ -21,17 +21,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.media.bind.NetToString;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.ScheduleEventDescription;
-import nl.vpro.domain.media.support.ScheduleEventTitle;
-import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.persistence.LocalDateToDateConverter;
@@ -90,7 +89,8 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @SuppressWarnings("serial")
 public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventIdentifier>,
     Comparable<ScheduleEvent>,
-    TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent> {
+    TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent>,
+    MediaObjectChild, Child<MediaObject> {
 
     @Id
     @Enumerated(EnumType.STRING)
@@ -209,7 +209,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.guideDay = guideDay;
         this.start = start;
         this.duration = duration;
-        setMediaObject(media);
+        setParent(media);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -220,7 +220,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.start = start;
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
-        setMediaObject(media);
+        setParent(media);
     }
 
 
@@ -564,12 +564,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.midRef = midRef;
     }
 
+    @Override
     @XmlTransient
-    public MediaObject getMediaObject() {
+    public MediaObject getParent() {
         return mediaObject;
     }
 
-    public void setMediaObject(MediaObject mediaObject) {
+    @Override
+    public void setParent(MediaObject mediaObject) {
         if(this.mediaObject != null) {
             this.mediaObject.removeScheduleEvent(this);
         }
