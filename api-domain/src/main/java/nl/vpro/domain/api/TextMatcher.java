@@ -60,8 +60,6 @@ public class TextMatcher extends AbstractTextMatcher<StandardMatchType> {
     @XmlAttribute
     private StandardMatchType matchType;
 
-    private boolean isCaseSensitive;
-
     public TextMatcher() {
         this(null);
     }
