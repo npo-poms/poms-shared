@@ -60,7 +60,7 @@ public class TextualObjects {
      * <ul>
      *  <li>All Textual Types from {@link TextualType#TITLES} are filled according to the business logic of POMs.
      *    This means mainly that the value for LEXICO is filled with MAIN if empty otherwise</li>
-     *  <li><For all those fields it is assured that values with owner types {@link OwnerType#ENTRIES} are added if there are not present yet,
+     *  <li>For all those fields it is assured that values with owner types {@link OwnerType#ENTRIES} are added if they are not present yet,
      *    according to the business logic of POMS. This means that if there is title of a certain type, than at least it is present for owners BROADCASTER and NPO too.</li>
      *  </ul>
      */
@@ -76,6 +76,12 @@ public class TextualObjects {
 
     public static <T extends OwnedText> SortedSet<T> expandTitles(TextualObject<T, ?, ?> textualObject) {
         return expandTitles(textualObject.getTitles(), textualObject.getOwnedTitleCreator());
+    }
+
+    public static <T extends OwnedText> SortedSet<T> expandTitlesMajorOwnerTypes(TextualObject<T, ?, ?> textualObject) {
+        SortedSet<T> result = expandTitles(textualObject.getTitles(), textualObject.getOwnedTitleCreator());
+        result.removeIf(t -> ! OwnerType.ENTRIES.contains(t.getOwner()));
+        return result;
     }
 
 
@@ -245,7 +251,7 @@ public class TextualObjects {
      * Returns the value for a certain {@link TextualType} and {@link OwnerType}. This implements a fall back mechanism.
      * It takes the first value with matching owner and type. If none found, it will fall back to the highest OwnerType ({@link OwnerType#BROADCASTER} and degrades until one is found.
      *
-     * Furthermore if no 'LEXICO' typed values if found, the value for 'MAIN' will be returned.
+     * Furthermore if no 'LEXICO' typed values if found, the value for 'MAIN' will be used.
      */
     public static <OT extends OwnedText> Optional<OT> expand(Collection<OT> titles, TextualType textualType, final OwnerType ownerType) {
         for (OT t : titles) {
@@ -390,7 +396,7 @@ public class TextualObjects {
 
     /**
      * Copy all texts from one collection of {@link TextualObjectUpdate} to another.
-     * If the target collection is a {@link TextualObject} you want to use {@link #copy(TextualObjectUpdate, TextualObject, OwnerType)}
+     * If the target collection is a {@link TextualObject} then you want to use {@link #copy(TextualObjectUpdate, TextualObject, OwnerType)}
      * @since 5.3
      */
     public static <
