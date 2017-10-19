@@ -321,8 +321,13 @@ public class OpenskosRepository implements GTAARepository {
     protected <T> T getForUrl(final String path, final Class<T> tClass) {
         String url = gtaaUrl + path;
         log.debug("Calling gtaa {}", url);
-        ResponseEntity<T> entity = template.getForEntity(url, tClass);
-        return isOk(entity) ? entity.getBody() : null;
+        try {
+            ResponseEntity<T> entity = template.getForEntity(url, tClass);
+            return isOk(entity) ? entity.getBody() : null;
+        } catch (RuntimeException rt) {
+            log.error("For GET {}: {}", url, rt.getMessage());
+            throw rt;
+        }
     }
 
     String getPersonsSpec() {
@@ -390,5 +395,10 @@ public class OpenskosRepository implements GTAARepository {
         }
     }
 
+
+    @Override
+    public String toString() {
+        return super.toString() + " " + gtaaUrl;
+    }
 
 }
