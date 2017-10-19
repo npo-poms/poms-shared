@@ -2,6 +2,8 @@ package nl.vpro.domain;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.SortedSet;
+
 import org.junit.Test;
 
 import nl.vpro.domain.media.MediaBuilder;
@@ -79,11 +81,28 @@ public class TextualObjectsTest {
 
         object.addTitle("d", OwnerType.MIS, TextualType.SUB);
 
+        SortedSet<BasicOwnedText> basicOwnedTexts = TextualObjects.expandTitles(object);
 
-        log.info("{}", TextualObjects.expandTitles(object));
+        assertThat(basicOwnedTexts.toString()).isEqualTo("[MAIN:BROADCASTER:a, MAIN:NPO:a, MAIN:MIS:b, MAIN:BEELDENGELUID:c, SUB:BROADCASTER:d, SUB:NPO:d, SUB:MIS:d, LEXICO:BROADCASTER:a, LEXICO:NPO:a]");
+        basicOwnedTexts.forEach(bo -> log.info("{}", bo));
 
 
 
+    }
+
+    @Test
+    public void expandMajor() {
+        BasicTextualObject object = new BasicTextualObject();
+        object.addTitle("a", OwnerType.BROADCASTER, TextualType.MAIN);
+        object.addTitle("b", OwnerType.MIS, TextualType.MAIN);
+        object.addTitle("c", OwnerType.BEELDENGELUID, TextualType.MAIN);
+
+        object.addTitle("d", OwnerType.MIS, TextualType.SUB);
+
+        SortedSet<BasicOwnedText> basicOwnedTexts = TextualObjects.expandTitlesMajorOwnerTypes(object);
+        assertThat(basicOwnedTexts).hasSize(6);
+        assertThat(basicOwnedTexts.toString()).isEqualTo("[MAIN:BROADCASTER:a, MAIN:NPO:a, SUB:BROADCASTER:d, SUB:NPO:d, LEXICO:BROADCASTER:a, LEXICO:NPO:a]");
+        basicOwnedTexts.forEach(bo -> log.info("{}", bo));
     }
 
 

@@ -596,8 +596,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getPortalRestrictions()
                 .forEach(restriction -> this.addPortalRestriction(PortalRestriction.copy(restriction)));
         source.getGeoRestrictions().forEach(restriction -> this.addGeoRestriction(GeoRestriction.copy(restriction)));
-        source.getTitles().forEach(title -> this.addTitle(Title.copy(title, this)));
-        source.getDescriptions().forEach(description -> this.addDescription(Description.copy(description, this)));
+        TextualObjects.copy(source, this);
         source.getGenres().forEach(this::addGenre);
         source.getTags().forEach(this::addTag);
         this.source = source.source;
@@ -991,7 +990,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Title> getExpandedTitles() {
-        return TextualObjects.expandTitles(this);
+        return TextualObjects.expandTitlesMajorOwnerTypes(this);
     }
 
 

@@ -72,8 +72,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         this.createdBy = source.createdBy;
         this.lastModified = source.lastModified;
         this.lastModifiedBy = source.lastModifiedBy;
-        this.publishStart = source.publishStart;
-        this.publishStop = source.publishStop;
+        Embargos.copy(source, this);
         this.lastPublished = source.lastPublished;
     }
 
