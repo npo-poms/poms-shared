@@ -383,7 +383,7 @@ public class MediaObjectJsonSchemaTest {
 
 
         Program unmarshalled = Jackson2TestUtil.assertThatJson(program).isSimilarTo(expected).get();
-        assertThat(unmarshalled.getScheduleEvents().first().getMediaObject()).isNotNull();
+        assertThat(unmarshalled.getScheduleEvents().first().getParent()).isNotNull();
     }
 
     @Test

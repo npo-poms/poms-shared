@@ -44,20 +44,20 @@ public class ApiScheduleEvent extends ScheduleEvent {
         @XmlElement(name = "segment", namespace = Xmlns.MEDIA_NAMESPACE, type = Segment.class)
     })
     @Override
-    public MediaObject getMediaObject() {
-        return super.getMediaObject();
+    public MediaObject getParent() {
+        return super.getParent();
     }
     @Override
-    public void setMediaObject(MediaObject o) {
+    public void setParent(MediaObject o) {
         this.mediaObject = o;
     }
 
     @JsonProperty("media")
     public MediaObject getMediaJSON() {
-        return getMediaObject();
+        return this.getParent();
     }
 
     public void setMediaJSON(MediaObject media) {
-        setMediaObject(media);
+        this.setParent(media);
     }
 }

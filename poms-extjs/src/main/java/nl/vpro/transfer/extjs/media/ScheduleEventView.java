@@ -71,7 +71,7 @@ public class ScheduleEventView {
     }
 
     public static ScheduleEventView createScheduleEvent(ScheduleEvent fullEvent) {
-        MediaObject media = fullEvent.getMediaObject();
+        MediaObject media = fullEvent.getParent();
 
         ScheduleEventView simpleEvent = new ScheduleEventView(
             fullEvent.getChannel(), fullEvent.getNet(),
@@ -92,7 +92,7 @@ public class ScheduleEventView {
         simpleEvent.setRerunEvent(fullEvent);
 
 
-        for(Broadcaster broadcaster : fullEvent.getMediaObject().getBroadcasters()) {
+        for(Broadcaster broadcaster : fullEvent.getParent().getBroadcasters()) {
             simpleEvent.broadcasters.add(broadcaster.getDisplayName());
         }
 
@@ -111,7 +111,7 @@ public class ScheduleEventView {
         simpleEvent.duration = fullEvent.getDuration() == null ? null : new Date(fullEvent.getDuration().toMillis());
         simpleEvent.setRerunEvent(fullEvent);
 
-        List<Broadcaster> bc = fullEvent.getMediaObject() == null ? null : fullEvent.getMediaObject().getBroadcasters();
+        List<Broadcaster> bc = fullEvent.getParent() == null ? null : fullEvent.getParent().getBroadcasters();
         if(bc != null) {
             for(Broadcaster broadcaster : bc) {
                 simpleEvent.broadcasters.add(broadcaster.getDisplayName());
