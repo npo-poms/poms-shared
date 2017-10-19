@@ -22,11 +22,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.image.ImageMetadata;
@@ -40,13 +42,14 @@ import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
+ * <p>
  * A {@link MediaObject} can have more than one images which should differ in URL and
  * owner.
- * <p/>
+ * </p><p>
  * The image owner describes an origin of the image. Several media suppliers provide
  * there own images. To prevent conflicts while updating for incoming data, images
  * for those suppliers are kept in parallel.
- * <p/>
+ * </p>
  *
  * @author Roelof Jan Koekoek
  * @see nl.vpro.domain.media.support.OwnerType
@@ -91,7 +94,8 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "workflow"
 })
 @Slf4j
-public class Image extends PublishableObject<Image> implements Metadata<Image>, Ownable, MediaObjectChild {
+public class Image extends PublishableObject<Image>
+    implements Metadata<Image>, Ownable, MediaObjectChild, Child<MediaObject> {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
     public static final String BASE_URN = "urn:vpro:media:image:";

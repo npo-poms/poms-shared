@@ -19,11 +19,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.*;
@@ -65,7 +67,8 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 
 })
 @Slf4j
-public class Location extends PublishableObject<Location> implements Ownable, Comparable<Location>, MediaObjectChild {
+public class Location extends PublishableObject<Location>
+    implements Ownable, Comparable<Location>, MediaObjectChild, Child<MediaObject> {
     private static final long serialVersionUID = -140942203904508506L;
 
     private static final String BASE_URN = "urn:vpro:media:location:";

@@ -26,7 +26,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.AbstractPublishableObject;
-import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -128,7 +127,7 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     private byte[] hash;
 
     @NotNull(groups = {WarningValidatorGroup.class})
-    @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @XmlElement
     @Embedded
     @Getter
     @Setter
