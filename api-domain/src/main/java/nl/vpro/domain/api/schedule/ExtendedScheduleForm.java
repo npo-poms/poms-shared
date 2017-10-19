@@ -49,12 +49,12 @@ class ExtendedScheduleForm extends ScheduleForm {
     @Override
     public boolean test(ScheduleEvent e) {
         return super.test(e)
-            && (broadcaster == null || e.getMediaObject().getBroadcasters().contains(new Broadcaster(broadcaster)))
+            && (broadcaster == null || e.getParent().getBroadcasters().contains(new Broadcaster(broadcaster)))
             && (guideDay == null || (e.getGuideDate() != null && e.getGuideDate().equals(guideDay)))
             && (net == null || (e.getNet() != null && e.getNet().equals(new Net(net))))
-            && (mediaType == null || (e.getMediaObject().getMediaType() == mediaType))
+            && (mediaType == null || (e.getParent().getMediaType() == mediaType))
             && (descendantOf == null || descendantOf.isEmpty() ||
-            e.getMediaObject().getDescendantOf().stream().map(DescendantRef::getMidRef).filter(descendantOf::contains).findFirst().isPresent());
+            e.getParent().getDescendantOf().stream().map(DescendantRef::getMidRef).filter(descendantOf::contains).findFirst().isPresent());
 
     }
 
