@@ -127,7 +127,6 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     @XmlTransient
     private byte[] hash;
 
-    @XmlTransient
     @NotNull(groups = {WarningValidatorGroup.class})
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @Embedded
