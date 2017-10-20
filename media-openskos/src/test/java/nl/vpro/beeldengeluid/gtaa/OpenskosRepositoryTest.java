@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.web.client.HttpServerErrorException;
@@ -27,9 +28,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OpenskosRepositoryTest {
 
     @Rule
-    public WireMockRule wireMockRule = new WireMockRule(options().port(9999));
+    public WireMockRule wireMockRule = new WireMockRule(options().dynamicPort());
 
-    private final OpenskosRepository repo = new OpenskosRepository("http://localhost:9999", "");
+    private OpenskosRepository repo;
+    @Before
+    public void createRepo() {
+        repo = new OpenskosRepository("http://localhost:" + wireMockRule.port(), "");
+    }
 
     @Test
     public void test() throws IOException {
