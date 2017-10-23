@@ -65,6 +65,7 @@ public class LicenseTest {
         assertThat(validator.validate(License.PUBLIC_DOMAIN)).isEmpty();
     }
 
+
     @Test
     public void futureIdsCanBeUnmarshalledXml() throws Exception {
         A a = JAXB.unmarshal(new StringReader("<a>\n" +
@@ -87,6 +88,17 @@ public class LicenseTest {
         assertThat(testLicense.getId()).isEqualTo("FUTURE_LICENSE");
     }
 
+
+    @Test
+    public void futureIdsAreInvalidThough() throws Exception {
+        A a = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
+            "  \"license\" : \"FUTURE_LICENSE\"\n" +
+            "}"), A.class);
+        License testLicense = a.getLicense();
+
+
+        assertThat(validator.validate(testLicense)).hasSize(1);
+    }
 
     @Data
     @AllArgsConstructor
