@@ -67,11 +67,19 @@ public class DateRangeInterval implements RangeFacet<Instant> {
 
         return
             begin != null && end != null
-                //values do not match exactly but approximately. Implement fuzzyequals?
-                // && Duration.between(begin, end).equals(interval.getDuration())
+                //values do not match exactly but approximately. So .equals() method replaced by .approximatelyEquals() with a 1 percent treshold
+                && approximatelyEquals(Duration.between(begin, end).toMillis(), interval.getDuration().toMillis(), 1L)
                 && interval.isBucketBegin(begin)
                 && interval.isBucketEnd(end);
     }
+
+
+    public boolean approximatelyEquals(Long desiredValue, Long actualValue, Long tolerancePercentage) {
+        Long diff = Math.abs(desiredValue - actualValue);
+        double tolerance = (tolerancePercentage * 0.01) * desiredValue;
+        return diff < tolerance;
+    }
+
 
     @XmlValue
     @JsonValue
