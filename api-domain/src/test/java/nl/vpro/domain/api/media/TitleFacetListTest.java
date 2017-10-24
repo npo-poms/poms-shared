@@ -45,22 +45,20 @@ public class TitleFacetListTest {
             "{\n" +
                 "  \"title\" : [ {\n" +
                 "    \"name\" : \"titlesWithA\",\n" +
-                "    \"sort\" : \"VALUE_ASC\",\n" +
-                "    \"max\" : 24,\n" +
                 "    \"subSearch\" : {\n" +
                 "      \"value\" : {\n" +
                 "        \"value\" : \"a*\",\n" +
-                "        \"matchType\" : \"WILDCARD\"\n" +
+                "        \"matchType\" : \"WILDCARD\"\n,"+
+                "        \"caseSensitive\" : false\n" +
                 "      }\n" +
                 "    }\n" +
                 "  }, {\n" +
                 "    \"name\" : \"titlesWithB\",\n" +
-                "    \"sort\" : \"VALUE_ASC\",\n" +
-                "    \"max\" : 24,\n" +
                 "    \"subSearch\" : {\n" +
                 "      \"value\" : {\n" +
                 "        \"value\" : \"b*\",\n" +
-                "        \"matchType\" : \"WILDCARD\"\n" +
+                "        \"matchType\" : \"WILDCARD\",\n" +
+                "        \"caseSensitive\" : false\n" +
                 "      }\n" +
                 "    }\n" +
                 "  } ],\n" +
@@ -79,22 +77,20 @@ public class TitleFacetListTest {
 
 
 
-        list = JAXBTestUtil.roundTripAndSimilar(list, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+        list = JAXBTestUtil.roundTripAndSimilar(list,
             "<local:titleFacetList sort=\"COUNT_DESC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
             "    <api:max>11</api:max>\n" +
-            "    <api:title name=\"titlesWithA\" sort=\"VALUE_ASC\">\n" +
-            "        <api:max>24</api:max>\n" +
+            "    <api:title name=\"titlesWithA\">\n" +
             "        <api:subSearch>\n" +
             "            <api:value matchType=\"WILDCARD\" caseSensitive=\"false\">a*</api:value>\n" +
             "        </api:subSearch>\n" +
             "    </api:title>\n" +
-            "    <api:title name=\"titlesWithB\" sort=\"VALUE_ASC\">\n" +
-            "        <api:max>24</api:max>\n" +
+            "    <api:title name=\"titlesWithB\">\n" +
             "        <api:subSearch>\n" +
             "            <api:value matchType=\"WILDCARD\" caseSensitive=\"false\">b*</api:value>\n" +
             "        </api:subSearch>\n" +
             "    </api:title>\n" +
-            "</local:titleFacetList>\n");
+            "</local:titleFacetList>");
         assertThat(list.facets).hasSize(2);
         assertThat(list.facets.get(0).getSubSearch()).isNotNull();
         assertThat(list.facets.get(1).getSubSearch()).isNotNull();
