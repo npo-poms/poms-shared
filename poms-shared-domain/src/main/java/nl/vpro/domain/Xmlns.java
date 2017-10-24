@@ -74,7 +74,6 @@ public final class Xmlns {
 
     public static final String GTAA_NAMESPACE = "urn:vpro:gtaa:2017";
 
-
     public static final String ADMIN_NAMESPACE = "urn:vpro:media:admin:2017";
 
 
