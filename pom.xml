@@ -39,6 +39,7 @@
     <module>subtitles-domain</module>
     <module>media-odi</module>
     <module>media-rs-services</module>
+    <module>pages-rs-services</module>
 
     <module>media-test</module>
     <module>user-test</module>
