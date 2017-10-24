@@ -45,7 +45,7 @@ public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
     @Override
     @XmlElements({
         @XmlElement(name = "person", type = GTAAPerson.class),
-        @XmlElement(name = "subject", type = GTAASubject.class),
+        @XmlElement(name = "topic", type = GTAATopic.class),
         @XmlElement(name = "genre", type = GTAAGenre.class),
         @XmlElement(name = "geographicname", type = GTAAGeographicName.class),
         @XmlElement(name = "maker", type = GTAAMaker.class),
