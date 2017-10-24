@@ -17,25 +17,22 @@
     <dependency>
       <groupId>nl.vpro.pages</groupId>
       <artifactId>pages-domain</artifactId>
-      <exclusions>
-        <exclusion>
-          <artifactId>hibernate-search-analyzers</artifactId>
-          <groupId>org.hibernate</groupId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>javax.ws.rs</groupId>
       <artifactId>javax.ws.rs-api</artifactId>
     </dependency>
-      <dependency>
-          <groupId>org.projectlombok</groupId>
-          <artifactId>lombok</artifactId>
-          <scope>compile</scope>
-      </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
     <dependency>
       <groupId>nl.vpro.api</groupId>
       <artifactId>api-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-test</artifactId>
     </dependency>
   </dependencies>
 </project>
