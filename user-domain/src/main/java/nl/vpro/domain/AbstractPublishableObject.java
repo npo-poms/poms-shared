@@ -148,6 +148,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         return publishStart;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public T setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
@@ -165,6 +166,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         return publishStop;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public T setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
