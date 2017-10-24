@@ -14,9 +14,9 @@ public class ThesaurusObjects {
             case Schemes.PERSOONSNAMEN:
                 return GTAAPerson.create(d);
             case Schemes.ONDERWERPEN:
-                return GTAASubject.create(d);
+                return GTAATopic.create(d);
             case Schemes.GENRE:
-                return GTAASubject.create(d);
+                return GTAAGenre.create(d);
             case Schemes.NAMEN:
                 return GTAAName.create(d);
             case Schemes.GEOGRAFISCHENAMEN:

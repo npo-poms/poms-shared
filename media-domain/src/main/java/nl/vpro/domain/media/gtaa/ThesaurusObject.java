@@ -19,7 +19,7 @@ import nl.vpro.openarchives.oai.Label;
 @JsonSubTypes(
     {
         @JsonSubTypes.Type(value = GTAAPerson.class, name = "person"),
-        @JsonSubTypes.Type(value = GTAASubject.class, name = "subject"),
+        @JsonSubTypes.Type(value = GTAATopic.class, name = "topic"),
         @JsonSubTypes.Type(value = GTAAGenre.class, name = "genre"),
         @JsonSubTypes.Type(value = GTAAGeographicName.class, name = "geographicname"),
         @JsonSubTypes.Type(value = GTAAMaker.class, name = "maker"),
@@ -28,7 +28,7 @@ import nl.vpro.openarchives.oai.Label;
     })
 @XmlSeeAlso({
     GTAAPerson.class,
-    GTAASubject.class,
+    GTAATopic.class,
     GTAAGenre.class,
     GTAAGeographicName.class,
     GTAAMaker.class,
