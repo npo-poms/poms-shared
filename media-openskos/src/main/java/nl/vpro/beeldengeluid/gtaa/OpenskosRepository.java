@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXB;
@@ -34,7 +35,6 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
@@ -82,13 +82,12 @@ public class OpenskosRepository implements GTAARepository {
     @Setter
     private String tenant;
 
-    public OpenskosRepository(String gtaaUrl, String gtaaKey, RestTemplate template) {
-        Assert.notNull(gtaaUrl, "gtaaUrl is null");
-        Assert.doesNotContain(gtaaUrl, "${", "GtaaUrl is not valid " + gtaaUrl );
-        Assert.notNull(gtaaKey, "gtaaKey is null");
-        Assert.doesNotContain(gtaaKey, "${", "gtaaKey is not valid " + gtaaUrl );
-        this.gtaaUrl = gtaaUrl;
-        this.gtaaKey = gtaaKey;
+    public OpenskosRepository(
+        @Nonnull String gtaaUrl,
+        @Nonnull String gtaaKey,
+        @Nonnull RestTemplate template) {
+        this.gtaaUrl = gtaaUrl.trim();
+        this.gtaaKey = gtaaKey.trim();
         this.template = template;
     }
 
