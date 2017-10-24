@@ -45,7 +45,7 @@ public class LicenseTest {
 
     @Test
     public void json() throws Exception {
-        Jackson2TestUtil.roundTripAndSimilar(new A(License.CC_BY), "{\n" +
+        Jackson2TestUtil.roundTripAndSimilar(License.CC_BY, "{\n" +
             "  \"license\" : \"CC_BY\"\n" +
             "}");
     }
