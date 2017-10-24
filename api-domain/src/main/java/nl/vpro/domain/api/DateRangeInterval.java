@@ -67,7 +67,8 @@ public class DateRangeInterval implements RangeFacet<Instant> {
 
         return
             begin != null && end != null
-                && Duration.between(begin, end).equals(interval.getDuration())
+                //values do not match exactly but approximately. Implement fuzzyequals?
+                // && Duration.between(begin, end).equals(interval.getDuration())
                 && interval.isBucketBegin(begin)
                 && interval.isBucketEnd(end);
     }
