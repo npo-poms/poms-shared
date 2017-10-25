@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.jackson.media.ScheduleEventSearchListJson;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.search.TitleForm;
 import nl.vpro.domain.media.support.AuthorizedDuration;
 import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.Tag;
@@ -145,7 +144,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Valid
     @Getter
     @Setter
-    private List<TitleSearch> titles;
+    private List<TitleMatcher> titles;
 
 
     /**
@@ -316,7 +315,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         }
 
         for (Title title : input.getTitles()) {
-            for (TitleSearch search : titles) {
+            for (TitleMatcher search : titles) {
                 if (search.test(title)) {
                     return true;
                 }

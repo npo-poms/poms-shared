@@ -17,12 +17,12 @@ import nl.vpro.domain.api.NameableSearchableFacet;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "mediaTitleFacetType", propOrder = {"name", "subSearch"})
 @JsonPropertyOrder({"name","subSearch"})
-public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
+public class TitleFacet implements NameableSearchableFacet<TitleMatcher>  {
 
     private String name;
 
     @Valid
-    private TitleSearch subSearch;
+    private TitleMatcher subSearch;
 
     public TitleFacet() {
     }
@@ -35,12 +35,12 @@ public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
 
     @Override
     @XmlElement
-    public TitleSearch getSubSearch() {
+    public TitleMatcher getSubSearch() {
         return subSearch;
     }
 
     @Override
-    public void setSubSearch(TitleSearch subSearch) {
+    public void setSubSearch(TitleMatcher subSearch) {
         this.subSearch = subSearch;
     }
 

@@ -18,16 +18,24 @@ public class TitleFacetListTest {
     {
         TitleFacet facet1 = new TitleFacet();
         {
-            TitleSearch subSearch = new TitleSearch();
-            subSearch.setValue(new ExtendedTextMatcher("a*", Match.MUST, ExtendedMatchType.WILDCARD, false));
+            TitleMatcher subSearch = TitleMatcher.builder()
+                .value("a*")
+                .match(Match.MUST)
+                .matchType(ExtendedMatchType.WILDCARD)
+                .caseSensitive(false)
+                .build();
 
             facet1.setName("titlesWithA");
             facet1.setSubSearch(subSearch);
         }
         TitleFacet facet2 = new TitleFacet();
         {
-            TitleSearch subSearch = new TitleSearch();
-            subSearch.setValue(new ExtendedTextMatcher("b*", Match.MUST, ExtendedMatchType.WILDCARD, false));
+            TitleMatcher subSearch = TitleMatcher.builder()
+                .value("b*")
+                .match(Match.MUST)
+                .matchType(ExtendedMatchType.WILDCARD)
+                .caseSensitive(false)
+                .build();
 
             facet2.setName("titlesWithB");
             facet2.setSubSearch(subSearch);
@@ -93,18 +101,14 @@ public class TitleFacetListTest {
 
         list = JAXBTestUtil.roundTripAndSimilar(list,
             "<local:titleFacetList sort=\"COUNT_DESC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
-            "    <api:max>11</api:max>\n" +
-            "    <api:title name=\"titlesWithA\">\n" +
-            "        <api:subSearch>\n" +
-            "            <api:value matchType=\"WILDCARD\" caseSensitive=\"false\">a*</api:value>\n" +
-            "        </api:subSearch>\n" +
-            "    </api:title>\n" +
-            "    <api:title name=\"titlesWithB\">\n" +
-            "        <api:subSearch>\n" +
-            "            <api:value matchType=\"WILDCARD\" caseSensitive=\"false\">b*</api:value>\n" +
-            "        </api:subSearch>\n" +
-            "    </api:title>\n" +
-            "</local:titleFacetList>");
+                "    <api:max>11</api:max>\n" +
+                "    <api:title name=\"titlesWithA\">\n" +
+                "        <api:subSearch matchType=\"WILDCARD\" caseSensitive=\"false\">a*</api:subSearch>\n" +
+                "    </api:title>\n" +
+                "    <api:title name=\"titlesWithB\">\n" +
+                "        <api:subSearch matchType=\"WILDCARD\" caseSensitive=\"false\">b*</api:subSearch>\n" +
+                "    </api:title>\n" +
+                "</local:titleFacetList>\n");
         assertThat(list.facets).hasSize(2);
         assertThat(list.facets.get(0).getSubSearch()).isNotNull();
         assertThat(list.facets.get(1).getSubSearch()).isNotNull();
@@ -114,10 +118,12 @@ public class TitleFacetListTest {
 
     @Test
     public void testSubSearch() throws Exception {
-        String example = "{\"value\":\"a*\"}";
-        TitleSearch subSearch = new TitleSearch();
-        subSearch.setValue(new ExtendedTextMatcher("a*"));
-        TitleSearch search = Jackson2TestUtil.roundTripAndSimilarAndEquals(subSearch, example);
+        String example = "{\n" +
+            "  \"value\" : \"a*\",\n" +
+            "  \"match\" : \"MUST\"\n" +
+            "}";
+        TitleMatcher subSearch = TitleMatcher.builder().value("a*").build();
+        TitleMatcher search = Jackson2TestUtil.roundTripAndSimilarAndEquals(subSearch, example);
     }
 
 
