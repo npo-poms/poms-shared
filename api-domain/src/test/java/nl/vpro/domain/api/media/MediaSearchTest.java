@@ -98,11 +98,11 @@ public class MediaSearchTest {
 
     }
 
-    private static final TitleSearch TESTRESULT =
-        TitleSearch.builder()
+    private static final TitleMatcher TESTRESULT =
+        TitleMatcher.builder()
             .owner(OwnerType.PLUTO)
             .type(TextualType.LEXICO)
-            .value(new ExtendedTextMatcher("A"))
+            .value("A")
             .build();
 
     @Test

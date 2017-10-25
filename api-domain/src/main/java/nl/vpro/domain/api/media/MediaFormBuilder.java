@@ -281,7 +281,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    public MediaFormBuilder titles(TitleSearch... titleSearch) {
+    public MediaFormBuilder titles(TitleMatcher... titleSearch) {
         search().setTitles(Arrays.asList(titleSearch));
         return this;
     }
