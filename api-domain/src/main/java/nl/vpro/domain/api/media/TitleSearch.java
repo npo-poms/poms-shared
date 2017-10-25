@@ -39,8 +39,6 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title> {
     @Setter
     private ExtendedTextMatcher value;
 
-    protected Match match;
-
     public TitleSearch() {
     }
 
@@ -58,16 +56,9 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title> {
         return owner != null || type != null || value != null;
     }
 
-
     @Override
     public boolean test(@Nullable Title input) {
         throw new UnsupportedOperationException("not used");
-    }
-
-
-    @Override
-    public Match getMatch() {
-        return match == null ? Match.MUST : match;
     }
 
     @Override
