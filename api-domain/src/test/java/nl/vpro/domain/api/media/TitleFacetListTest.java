@@ -38,44 +38,58 @@ public class TitleFacetListTest {
     }
 
 
-    @Test
+       @Test
     public void testJsonBinding() throws Exception {
 
         list = Jackson2TestUtil.roundTripAndSimilar(list,
-            "{\n" +
-                "  \"title\" : [ {\n" +
-                "    \"name\" : \"titlesWithA\",\n" +
-                "    \"subSearch\" : {\n" +
-                "      \"value\" : {\n" +
-                "        \"value\" : \"a*\",\n" +
-                "        \"matchType\" : \"WILDCARD\"\n,"+
-                "        \"caseSensitive\" : false\n" +
-                "      }\n" +
+            "[ {\n" +
+                "  \"max\" : 11,\n" +
+                "  \"sort\" : \"COUNT_DESC\"\n" +
+                "}, {\n" +
+                "  \"name\" : \"titlesWithA\",\n" +
+                "  \"subSearch\" : {\n" +
+                "    \"value\" : {\n" +
+                "      \"value\" : \"a*\",\n" +
+                "      \"matchType\" : \"WILDCARD\",\n" +
+                "      \"caseSensitive\" : false\n" +
                 "    }\n" +
-                "  }, {\n" +
-                "    \"name\" : \"titlesWithB\",\n" +
-                "    \"subSearch\" : {\n" +
-                "      \"value\" : {\n" +
-                "        \"value\" : \"b*\",\n" +
-                "        \"matchType\" : \"WILDCARD\",\n" +
-                "        \"caseSensitive\" : false\n" +
-                "      }\n" +
+                "  }\n" +
+                "}, {\n" +
+                "  \"name\" : \"titlesWithB\",\n" +
+                "  \"subSearch\" : {\n" +
+                "    \"value\" : {\n" +
+                "      \"value\" : \"b*\",\n" +
+                "      \"matchType\" : \"WILDCARD\",\n" +
+                "      \"caseSensitive\" : false\n" +
                 "    }\n" +
-                "  } ],\n" +
-                "  \"sort\" : \"COUNT_DESC\",\n" +
-                "  \"max\" : 11\n" +
-                "}");
+                "  }\n" +
+                "} ]");
 
 
         assertThat(list.facets).hasSize(2);
+        assertThat(list.getMax()).isEqualTo(11);
         assertTrue(list.facets.get(0).getSubSearch() != null);
+    }
+
+    @Test
+    public void testJsonBindingBackwards() throws Exception {
+        TitleFacetList backwards = new TitleFacetList();
+        backwards.setMax(11);
+        backwards.setSort(FacetOrder.COUNT_DESC);
+        backwards = Jackson2TestUtil.roundTripAndSimilar(backwards,
+            "{\n" +
+                "  \"max\" : 11,\n" +
+                "  \"sort\" : \"COUNT_DESC\"\n" +
+                "}");
+
+
+        assertThat(backwards.facets).isNull();
+        assertThat(backwards.getMax()).isEqualTo(11);
     }
 
 
     @Test
     public void testXmlBinding() throws Exception {
-
-
 
         list = JAXBTestUtil.roundTripAndSimilar(list,
             "<local:titleFacetList sort=\"COUNT_DESC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
