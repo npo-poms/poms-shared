@@ -9,7 +9,11 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import nl.vpro.domain.api.SearchableFacet;
+import nl.vpro.domain.api.jackson.media.TitleFacetListJson;
 
 /**
  * @author lies
@@ -17,13 +21,14 @@ import nl.vpro.domain.api.SearchableFacet;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaTitleFacetListType", propOrder = {"subSearch", "facets"})
+@JsonSerialize(using = TitleFacetListJson.Serializer.class)
+@JsonDeserialize(using = TitleFacetListJson.Deserializer.class)
 public class TitleFacetList
     extends MediaFacet /* extending MediaFacet is mainly done for backwards compatibility */
     implements SearchableFacet<TitleSearch>, Iterable<TitleFacet> {
 
     @Valid
     private TitleSearch subSearch;
-
 
     @Valid
     @XmlElement(name = "title")
