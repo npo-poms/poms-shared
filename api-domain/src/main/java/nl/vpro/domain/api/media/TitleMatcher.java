@@ -43,23 +43,19 @@ public class TitleMatcher extends AbstractSearch implements Predicate<Title>  {
     @Getter
     private ExtendedMatchType matchType;
 
-    @XmlAttribute
-    @Setter
-    @Getter
     private Boolean caseSensitive;
 
 
     public TitleMatcher() {
+
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private TitleMatcher(OwnerType owner, TextualType type, String value, Match match, ExtendedMatchType matchType, boolean caseSensitive) {
-        this.match = match;
+    private TitleMatcher(OwnerType owner, TextualType type, String value, Match match, ExtendedMatchType matchType, Boolean caseSensitive) {
+        this.match = match == null ? Match.MUST : match;
         this.value = value;
-        this.match = match;
         this.matchType = matchType;
         this.caseSensitive = caseSensitive;
-
         this.owner = owner;
         this.type = type;
     }
@@ -86,7 +82,27 @@ public class TitleMatcher extends AbstractSearch implements Predicate<Title>  {
 
     @Override
     public boolean hasSearches() {
-        return false;
-
+        return true;
     }
+
+    @XmlAttribute
+    public void setCaseSensitive(Boolean caseSensitive) {
+        this.caseSensitive = caseSensitive ? null : caseSensitive;
+    }
+
+    public boolean isCaseSensitive() {
+        return caseSensitive == null ? true : caseSensitive;
+    }
+
+    @Override
+    @XmlAttribute
+    public Match getMatch() {
+        return super.getMatch();
+    }
+
+    @Override
+    public void setMatch(Match match) {
+        super.setMatch(match);
+    }
+
 }
