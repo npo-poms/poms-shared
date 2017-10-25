@@ -476,12 +476,18 @@
   </xs:complexType>
 
   <xs:complexType name="mediaTitleFacetType">
+    <xs:sequence>
+      <xs:element name="subSearch" type="titleSearchType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="mediaSearchableTermFacetType">
     <xs:complexContent>
-      <xs:extension base="extendedMediaFacetType">
+      <xs:extension base="mediaFacetType">
         <xs:sequence>
-          <xs:element name="subSearch" type="titleSearchType" minOccurs="0"/>
+          <xs:element name="subSearch" type="termSearchType" minOccurs="0"/>
         </xs:sequence>
-        <xs:attribute name="name" type="xs:string"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -493,16 +499,6 @@
           <xs:element name="filter" type="mediaSearchType" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="caseSensitive" type="xs:boolean"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-
-  <xs:complexType name="mediaSearchableTermFacetType">
-    <xs:complexContent>
-      <xs:extension base="mediaFacetType">
-        <xs:sequence>
-          <xs:element name="subSearch" type="termSearchType" minOccurs="0"/>
-        </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
