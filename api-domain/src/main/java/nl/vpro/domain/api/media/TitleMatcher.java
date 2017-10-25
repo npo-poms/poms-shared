@@ -34,12 +34,18 @@ public class TitleMatcher extends AbstractSearch implements Predicate<Title>  {
 
 
     @XmlValue
+    @Setter
+    @Getter
     protected String value;
 
     @XmlAttribute
+    @Setter
+    @Getter
     private ExtendedMatchType matchType;
 
     @XmlAttribute
+    @Setter
+    @Getter
     private Boolean caseSensitive;
 
 
@@ -75,7 +81,7 @@ public class TitleMatcher extends AbstractSearch implements Predicate<Title>  {
 
 
     public ExtendedTextMatcher asExtendedTextMatcher() {
-        return new ExtendedTextMatcher(value, match, matchType, caseSensitive);
+        return new ExtendedTextMatcher(value, match, matchType, caseSensitive == null ? false : caseSensitive);
     }
 
     @Override
