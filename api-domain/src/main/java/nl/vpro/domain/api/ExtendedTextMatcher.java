@@ -106,6 +106,8 @@ public class ExtendedTextMatcher extends AbstractTextMatcher<ExtendedMatchType> 
         this.caseSensitive = caseSensitive ? null : Boolean.FALSE;
     }
 
+
+
     public ExtendedTextMatcher(String value, ExtendedMatchType matchType) {
         this(value, matchType, true);
     }

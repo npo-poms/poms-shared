@@ -43,6 +43,7 @@ public abstract class AbstractTextMatcher<MT extends MatchType> extends Abstract
 
     }
 
+
     @Override
     public boolean test(@Nullable String input) {
         boolean result = getMatchType().eval(getValue(), input, isCaseSensitive());
