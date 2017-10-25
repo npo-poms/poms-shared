@@ -14,7 +14,7 @@ import nl.vpro.domain.api.NameableSearchableFacet;
  */
 
 
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "mediaTitleFacetType", propOrder = {"name", "subSearch"})
 @JsonPropertyOrder({"name","subSearch"})
 public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
