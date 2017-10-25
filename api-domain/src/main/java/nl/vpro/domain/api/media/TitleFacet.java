@@ -21,10 +21,6 @@ public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
 
     private String name;
 
-    @XmlAttribute
-    private Boolean caseSensitive;
-
-
     @Valid
     private TitleSearch subSearch;
 
@@ -60,16 +56,5 @@ public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
     }
 
 
-    public Boolean getCaseSensitive() {
-        return caseSensitive;
-    }
-    public void setCaseSensitive(Boolean caseSensitive) {
-        this.caseSensitive = caseSensitive;
-    }
-
-    @XmlTransient
-    public boolean isCaseSensitive() {
-        return caseSensitive == null || caseSensitive;
-    }
 
 }
