@@ -56,20 +56,16 @@ public class TitleFacetListTest {
                 "}, {\n" +
                 "  \"name\" : \"titlesWithA\",\n" +
                 "  \"subSearch\" : {\n" +
-                "    \"value\" : {\n" +
-                "      \"value\" : \"a*\",\n" +
-                "      \"matchType\" : \"WILDCARD\",\n" +
-                "      \"caseSensitive\" : false\n" +
-                "    }\n" +
+                "    \"value\" : \"a*\",\n" +
+                "    \"matchType\" : \"WILDCARD\",\n" +
+                "    \"match\" : \"MUST\"\n" +
                 "  }\n" +
                 "}, {\n" +
                 "  \"name\" : \"titlesWithB\",\n" +
                 "  \"subSearch\" : {\n" +
-                "    \"value\" : {\n" +
-                "      \"value\" : \"b*\",\n" +
-                "      \"matchType\" : \"WILDCARD\",\n" +
-                "      \"caseSensitive\" : false\n" +
-                "    }\n" +
+                "    \"value\" : \"b*\",\n" +
+                "    \"matchType\" : \"WILDCARD\",\n" +
+                "    \"match\" : \"MUST\"\n" +
                 "  }\n" +
                 "} ]");
 
@@ -103,10 +99,10 @@ public class TitleFacetListTest {
             "<local:titleFacetList sort=\"COUNT_DESC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
                 "    <api:max>11</api:max>\n" +
                 "    <api:title name=\"titlesWithA\">\n" +
-                "        <api:subSearch matchType=\"WILDCARD\" caseSensitive=\"false\">a*</api:subSearch>\n" +
+                "        <api:subSearch matchType=\"WILDCARD\" match=\"MUST\">a*</api:subSearch>\n" +
                 "    </api:title>\n" +
                 "    <api:title name=\"titlesWithB\">\n" +
-                "        <api:subSearch matchType=\"WILDCARD\" caseSensitive=\"false\">b*</api:subSearch>\n" +
+                "        <api:subSearch matchType=\"WILDCARD\" match=\"MUST\">b*</api:subSearch>\n" +
                 "    </api:title>\n" +
                 "</local:titleFacetList>\n");
         assertThat(list.facets).hasSize(2);
