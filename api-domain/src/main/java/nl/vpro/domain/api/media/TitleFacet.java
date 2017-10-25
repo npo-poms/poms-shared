@@ -16,17 +16,21 @@ import nl.vpro.domain.api.NameableSearchableFacet;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "mediaTitleFacetType", propOrder = {"name", "subSearch"})
-@JsonPropertyOrder({"name", "sort", "max","subSearch"})
-public class TitleFacet extends ExtendedMediaFacet implements NameableSearchableFacet<TitleSearch> {
+@JsonPropertyOrder({"name","subSearch"})
+public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
 
     private String name;
+
+    @XmlAttribute
+    private Boolean caseSensitive;
+
 
     @Valid
     private TitleSearch subSearch;
 
     public TitleFacet() {
     }
- 
+
 
     @Override
     public boolean hasSubSearch() {
@@ -54,4 +58,18 @@ public class TitleFacet extends ExtendedMediaFacet implements NameableSearchable
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public Boolean getCaseSensitive() {
+        return caseSensitive;
+    }
+    public void setCaseSensitive(Boolean caseSensitive) {
+        this.caseSensitive = caseSensitive;
+    }
+
+    @XmlTransient
+    public boolean isCaseSensitive() {
+        return caseSensitive == null || caseSensitive;
+    }
+
 }
