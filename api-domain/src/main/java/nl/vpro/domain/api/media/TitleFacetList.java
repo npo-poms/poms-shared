@@ -17,7 +17,6 @@ import nl.vpro.domain.api.SearchableFacet;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaTitleFacetListType", propOrder = {"subSearch", "facets"})
-
 public class TitleFacetList
     extends MediaFacet /* extending MediaFacet is mainly done for backwards compatibility */
     implements SearchableFacet<TitleSearch>, Iterable<TitleFacet> {
