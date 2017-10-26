@@ -300,6 +300,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     }
 
 
+    @Override
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if(parent instanceof Program) {
             this.parent = (Program)parent;
