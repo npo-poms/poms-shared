@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.publiekeomroep</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.5.0</version>
+    <version>5.5.1-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.user</groupId>
   <artifactId>user-test</artifactId>
-  <version>5.5.0</version>
+  <version>5.5.1-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
