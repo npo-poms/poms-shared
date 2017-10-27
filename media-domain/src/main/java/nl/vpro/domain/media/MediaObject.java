@@ -501,7 +501,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected boolean isEmbeddable = true;
 
     // The sortDate field is actually calculatable, but it can be a bit
-    // expensive, so we cache it's value in a persistent field.
+    // expensive, so we cache its value in a persistent field.
     @Column(name = "sortdate", nullable = true, unique = false)
     protected Instant sortDate;
 
