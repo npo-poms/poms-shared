@@ -32,7 +32,7 @@ public class VersionService {
                     version = properties.getProperty("media.version");
                 } else {
                     log.warn("Could not find /maven.properties");
-                    return FALLBACK;
+                    version = FALLBACK;
                 }
             } catch (IOException e) {
                 log.error(e.getMessage(), e);
