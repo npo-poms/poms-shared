@@ -251,12 +251,14 @@
   </xs:complexType>
 
   <xs:complexType name="titleSearchType">
-    <xs:sequence>
-      <xs:element name="owner" type="shared:ownerTypeEnum" minOccurs="0"/>
-      <xs:element name="type" type="media:textualTypeEnum" minOccurs="0"/>
-      <xs:element name="value" type="extendedMatcherType" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute name="match" type="match"/>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+        <xs:attribute name="type" type="media:textualTypeEnum"/>
+        <xs:attribute name="matchType" type="extendedMatchType"/>
+        <xs:attribute name="match" type="match"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
   <xs:complexType name="pageAssociationSearchListType">
