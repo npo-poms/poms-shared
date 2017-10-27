@@ -144,7 +144,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Valid
     @Getter
     @Setter
-    private List<TitleMatcher> titles;
+    private List<TitleSearch> titles;
 
 
     /**
@@ -315,7 +315,7 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
         }
 
         for (Title title : input.getTitles()) {
-            for (TitleMatcher search : titles) {
+            for (TitleSearch search : titles) {
                 if (search.test(title)) {
                     return true;
                 }

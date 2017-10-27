@@ -17,11 +17,13 @@ import nl.vpro.domain.media.support.Title;
 
 /**
  * @author lies
+ *
+ * TODO I doubt if this should extends AbstractSearch. What is the point?
  */
 @XmlType(name = "titleSearchType", propOrder = {})
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode(callSuper = true)
-public class TitleMatcher extends AbstractSearch implements Predicate<Title>  {
+public class TitleSearch extends AbstractSearch implements Predicate<Title>  {
     @XmlAttribute
     @Getter
     @Setter
@@ -31,7 +33,6 @@ public class TitleMatcher extends AbstractSearch implements Predicate<Title>  {
     @Getter
     @Setter
     private TextualType type;
-
 
     @XmlValue
     @Setter
@@ -46,12 +47,12 @@ public class TitleMatcher extends AbstractSearch implements Predicate<Title>  {
     private Boolean caseSensitive;
 
 
-    public TitleMatcher() {
+    public TitleSearch() {
 
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private TitleMatcher(OwnerType owner, TextualType type, String value, Match match, ExtendedMatchType matchType, Boolean caseSensitive) {
+    private TitleSearch(OwnerType owner, TextualType type, String value, Match match, ExtendedMatchType matchType, Boolean caseSensitive) {
         this.match = match == null ? Match.MUST : match;
         this.value = value;
         this.matchType = matchType;
@@ -94,15 +95,5 @@ public class TitleMatcher extends AbstractSearch implements Predicate<Title>  {
         return caseSensitive == null ? true : caseSensitive;
     }
 
-    @Override
-    @XmlAttribute
-    public Match getMatch() {
-        return super.getMatch();
-    }
-
-    @Override
-    public void setMatch(Match match) {
-        super.setMatch(match);
-    }
 
 }
