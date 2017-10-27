@@ -18,7 +18,7 @@ public class TitleFacetListTest {
     {
         TitleFacet facet1 = new TitleFacet();
         {
-            TitleMatcher subSearch = TitleMatcher.builder()
+            TitleSearch subSearch = TitleSearch.builder()
                 .value("a*")
                 .match(Match.MUST)
                 .matchType(ExtendedMatchType.WILDCARD)
@@ -30,7 +30,7 @@ public class TitleFacetListTest {
         }
         TitleFacet facet2 = new TitleFacet();
         {
-            TitleMatcher subSearch = TitleMatcher.builder()
+            TitleSearch subSearch = TitleSearch.builder()
                 .value("b*")
                 .match(Match.MUST)
                 .matchType(ExtendedMatchType.WILDCARD)
@@ -118,8 +118,8 @@ public class TitleFacetListTest {
             "  \"value\" : \"a*\",\n" +
             "  \"match\" : \"MUST\"\n" +
             "}";
-        TitleMatcher subSearch = TitleMatcher.builder().value("a*").build();
-        TitleMatcher search = Jackson2TestUtil.roundTripAndSimilarAndEquals(subSearch, example);
+        TitleSearch subSearch = TitleSearch.builder().value("a*").build();
+        TitleSearch search = Jackson2TestUtil.roundTripAndSimilarAndEquals(subSearch, example);
     }
 
 
