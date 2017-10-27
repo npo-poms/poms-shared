@@ -78,10 +78,12 @@ public class SegmentTest {
 
     @Test
     public void sortDate() throws Exception {
-        Program program = MediaBuilder.program()
+        Program program = MediaBuilder.program(ProgramType.BROADCAST)
+            .mid("parentMid")
             .creationDate(LocalDateTime.of(2017, 10, 24, 0, 0))
             .build();
         Segment segment = MediaBuilder.segment()
+            .mid("segmentMid")
             .creationDate(LocalDateTime.of(2017, 10, 25, 0, 0))
             .mainTitle("bla")
             .duration(Duration.ofSeconds(123))
@@ -91,11 +93,11 @@ public class SegmentTest {
         assertThat(segment.getSortInstant()).isEqualTo(program.getCreationInstant());
 
         assertThat(
-            JAXBTestUtil.roundTripAndSimilar(segment, "<segment type=\"SEGMENT\" embeddable=\"true\" sortDate=\"2017-10-24T00:00:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2017-10-25T00:00:00+02:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            JAXBTestUtil.roundTripAndSimilar(segment, "<segment midRef=\"parentMid\" type=\"SEGMENT\" embeddable=\"true\" mid=\"segmentMid\" sortDate=\"2017-10-24T00:00:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2017-10-25T00:00:00+02:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
                 "    <title owner=\"BROADCASTER\" type=\"MAIN\">bla</title>\n" +
                 "    <duration>P0DT0H2M3.000S</duration>\n" +
                 "    <credits/>\n" +
-                "    <descendantOf/>\n" +
+                "    <descendantOf midRef=\"parentMid\" type=\"BROADCAST\"/>\n" +
                 "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
@@ -105,6 +107,7 @@ public class SegmentTest {
         assertThat(
             Jackson2TestUtil.roundTripAndSimilar(segment, "{\n" +
                 "  \"objectType\" : \"segment\",\n" +
+                "  \"mid\" : \"segmentMid\",\n" +
                 "  \"type\" : \"SEGMENT\",\n" +
                 "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
                 "  \"sortDate\" : 1508796000000,\n" +
@@ -120,8 +123,12 @@ public class SegmentTest {
                 "  \"countries\" : [ ],\n" +
                 "  \"languages\" : [ ],\n" +
                 "  \"duration\" : 123000,\n" +
-                "  \"descendantOf\" : [ { } ]\n" +
-                "}").getSortInstant()
+                "  \"descendantOf\" : [ {\n" +
+                "    \"midRef\" : \"parentMid\",\n" +
+                "    \"type\" : \"BROADCAST\"\n" +
+                "  } ],\n" +
+                "  \"midRef\" : \"parentMid\"\n" +
+                "}\n").getSortInstant()
         ).isEqualTo(program.getCreationInstant());
     }
 
