@@ -1,5 +1,7 @@
 package nl.vpro.domain.api;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -17,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+@Slf4j
 public class DateRangeIntervalTest {
 
     private String[][] exampleIntervals = {
@@ -41,7 +44,7 @@ public class DateRangeIntervalTest {
             DateRangeInterval interval = new DateRangeInterval(i[0]);
             String printAsTime = interval.getInterval().print(date.toInstant());
             boolean begin = interval.getInterval().isBucketBegin(date.toInstant());
-            System.out.println(i[0] + ":" + printAsTime + ":" + begin);
+            log.info(i[0] + ":" + printAsTime + ":" + begin);
             assertThat(printAsTime).isEqualTo(i[1]);
         }
     }
