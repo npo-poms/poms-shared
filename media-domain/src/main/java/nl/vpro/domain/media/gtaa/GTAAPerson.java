@@ -22,6 +22,7 @@ import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Person;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.openarchives.oai.Label;
+import nl.vpro.openarchives.oai.MetaData;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -102,7 +103,16 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializabl
         status = person.getGtaaRecord() == null ? null : person.getGtaaRecord().getStatus();
     }
 
+
+    public static GTAAPerson create(MetaData metaData) {
+        if (metaData == null) {
+            log.info("No metadata");
+            return null;
+        }
+        return create(metaData.getFirstDescription());
+    }
     public static GTAAPerson create(Description description) {
+
         return create(description, null);
     }
 
