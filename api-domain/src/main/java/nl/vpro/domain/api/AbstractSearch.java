@@ -17,6 +17,8 @@ import nl.vpro.domain.api.page.PageSearch;
 /**
  * A Search interface but JAXB won't handle interfaces
  *
+ * This is a {@link Matcher} that also has a method {@link #hasSearches}. So in other words the matching is
+ *
  * @author Roelof Jan Koekoek
  * @since 3.3
  */
