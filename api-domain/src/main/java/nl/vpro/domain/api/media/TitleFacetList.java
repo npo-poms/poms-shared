@@ -25,10 +25,10 @@ import nl.vpro.domain.api.jackson.media.TitleFacetListJson;
 @JsonDeserialize(using = TitleFacetListJson.Deserializer.class)
 public class TitleFacetList
     extends MediaFacet /* extending MediaFacet is mainly done for backwards compatibility */
-    implements SearchableFacet<TitleMatcher>, Iterable<TitleFacet> {
+    implements SearchableFacet<TitleSearch>, Iterable<TitleFacet> {
 
     @Valid
-    private TitleMatcher subSearch;
+    private TitleSearch subSearch;
 
     @Valid
     @XmlElement(name = "title")
@@ -47,12 +47,12 @@ public class TitleFacetList
     }
 
     @Override
-    public TitleMatcher getSubSearch() {
+    public TitleSearch getSubSearch() {
         return subSearch;
     }
 
     @Override
-    public void setSubSearch(TitleMatcher subSearch) {
+    public void setSubSearch(TitleSearch subSearch) {
         this.subSearch = subSearch;
     }
 

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.*;
 import nl.vpro.domain.api.media.MediaSearch;
 import nl.vpro.domain.api.media.TitleFacet;
 import nl.vpro.domain.api.media.TitleFacetList;
-import nl.vpro.domain.api.media.TitleMatcher;
+import nl.vpro.domain.api.media.TitleSearch;
 
 /**
  * @author Michiel Meeuwissen
@@ -86,7 +86,7 @@ public class TitleFacetListJson {
         }
         JsonNode subSearch = jsonNode.get("subSearch");
         if (subSearch != null) {
-            TitleMatcher object = jp.getCodec().readValue(subSearch.traverse(jp.getCodec()), TitleMatcher.class);
+            TitleSearch object = jp.getCodec().readValue(subSearch.traverse(jp.getCodec()), TitleSearch.class);
             result.setSubSearch(object);
         }
         JsonNode max = jsonNode.get("max");

@@ -98,8 +98,8 @@ public class MediaSearchTest {
 
     }
 
-    private static final TitleMatcher TESTRESULT =
-        TitleMatcher.builder()
+    private static final TitleSearch TESTRESULT =
+        TitleSearch.builder()
             .owner(OwnerType.PLUTO)
             .type(TextualType.LEXICO)
             .value("A")
