@@ -65,7 +65,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @XmlType(name = "memberRefType")
-@XmlRootElement("memberRef")
+@XmlRootElement(name = "memberRef")
 @JsonPropertyOrder({
     "midRef",
     "urnRef",
