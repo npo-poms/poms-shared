@@ -20,7 +20,7 @@ public class MemberRefTest {
     public void xml() throws IOException, SAXException {
         MemberRef ref = new MemberRef();
         ref.setAdded(Instant.EPOCH);
-        JAXBTestUtil.roundTripAndSimilar(ref, "<local:memberRef added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\"/>");
+        JAXBTestUtil.roundTripAndSimilar(ref, "<memberRef added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>");
     }
 
     @Test
