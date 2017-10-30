@@ -136,7 +136,18 @@
   ],
   "avAttributes": {
     "bitrate": 1000000,
-    "avFileFormat": "M4V"
+    "byteSize": 2000000,
+    "avFileFormat": "M4V",
+    "videoAttributes": {
+      "videoCoding": "VCODEC",
+      "width": 640,
+      "heigth": 320
+    },
+    "audioAttributes": {
+      "numberOfChannels": 2,
+      "audioCoding": "ACODEC",
+      "language": "nl-NL"
+    }
   },
   "releaseYear": 2004,
   "duration": 7200000,
@@ -177,6 +188,14 @@
     {
       "midRef": "VPROWON_DG_20003",
       "urnRef": "urn:vpro:media:group:200",
+      "type": "SEASON"
+    },
+    {
+      "midRef": "VPROWON_30001",
+      "type": "SERIES"
+    },
+    {
+      "midRef": "VPROWON_30002",
       "type": "SEASON"
     }
   ],
@@ -542,7 +561,18 @@
       ],
       "avAttributes": {
         "bitrate": 1000000,
-        "avFileFormat": "M4V"
+        "byteSize": 2000000,
+        "avFileFormat": "M4V",
+        "videoAttributes": {
+          "videoCoding": "VCODEC",
+          "width": 640,
+          "heigth": 320
+        },
+        "audioAttributes": {
+          "numberOfChannels": 2,
+          "audioCoding": "ACODEC",
+          "language": "nl-NL"
+        }
       },
       "releaseYear": 2004,
       "duration": 100000,

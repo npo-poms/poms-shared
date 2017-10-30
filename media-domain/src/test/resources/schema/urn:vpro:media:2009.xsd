@@ -9,6 +9,8 @@
 
   <xs:element name="mediaInformation" type="mediaTableType"/>
 
+  <xs:element name="memberRef" type="memberRefType"/>
+
   <xs:element name="program" type="programType"/>
 
   <xs:element name="schedule" type="scheduleType"/>
