@@ -17,7 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import nl.vpro.domain.media.bind.LocaleAdapter;
+import nl.vpro.domain.media.bind.LocaleCodeAdapter;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -43,7 +43,7 @@ public class AudioAttributes implements Serializable {
     protected Integer numberOfChannels;
 
     @XmlElement
-    @XmlJavaTypeAdapter(value = LocaleAdapter.class)
+    @XmlJavaTypeAdapter(value = LocaleCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     protected Locale language;
 
