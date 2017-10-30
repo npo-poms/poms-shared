@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -181,14 +182,15 @@ public class MediaObjectsTest {
     public void getPath() {
         Group g1 = MediaBuilder.group().mid("g1").build();
         Group g2 = MediaBuilder.group().mid("g2").memberOf(g1).build();
-        Group g3 = MediaBuilder.group().mid("g3").memberOf(g1).build();
+        Group g3 = MediaBuilder.group().mid("g3").build();
+        Group g4 = MediaBuilder.group().mid("g4").memberOf(g1).build();
         Program p = MediaBuilder.program().mid("p1").memberOf(g2).memberOf(g3).build();
         List<MediaObject> descendants = Arrays.asList(g2, p);
 
-        Optional<List<MediaObject>> path = MediaObjects.getPath(g1, p, descendants);
+        Optional<List<MemberRef>> path = MediaObjects.getPath(g1, p, descendants);
 
         log.info("{}", path);
-        assertThat(path.get()).containsExactly(g2, g1);
+        assertThat(path.get().stream().map(MemberRef::getOwner).collect(Collectors.toList())).containsExactly(g2, g1);
 
 
 
