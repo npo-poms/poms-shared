@@ -573,7 +573,8 @@ public class MediaObjects {
 
     public static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, List<? extends MediaObject> descendants) {
         return getPath(parent, child,
-            descendants.stream().collect(Collectors.toMap(MediaObject::getMid, d -> d))
+            descendants.stream().distinct().collect(Collectors.toMap(MediaObject::getMid, d -> d)
+            )
         );
     }
 
