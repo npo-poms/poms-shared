@@ -581,34 +581,37 @@ public class MediaObjects {
     }
 
 
-    public static Optional<List<MediaObject>> getPath(MediaObject parent, MediaObject child, List<MediaObject> descendants) {
+    public static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, List<? extends MediaObject> descendants) {
         return getPath(parent, child,
             descendants.stream().collect(Collectors.toMap(MediaObject::getMid, d -> d))
         );
     }
 
-    protected static Optional<List<MediaObject>> getPath(MediaObject parent, MediaObject child, Map<String, MediaObject> descendants) {
+    protected static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, Map<String, MediaObject> descendants) {
         for (MemberRef ref : getMemberRefs(child)) {
             if (ref.getMidRef().equals(parent.getMid())) {
                 // hit!
-                return Optional.of(Collections.singletonList(parent));
+                return Optional.of(Collections.singletonList(ref));
             }
         }
         // Not directly found, so it is indirect
+        List<MemberRef> proposal = null; // we want the shortest
         for (MemberRef ref : getMemberRefs(child)) {
             MediaObject c = descendants.get(ref.getMidRef());
             if (c != null) {
-                Optional<List<MediaObject>> path = getPath(parent, c, descendants);
+                Optional<List<MemberRef>> path = getPath(parent, c, descendants);
                 if (path.isPresent()) {
-                    List<MediaObject> result = new ArrayList<>();
-                    result.add(c);
+                    List<MemberRef> result = new ArrayList<>();
+                    result.add(ref);
                     result.addAll(path.get());
-                    return Optional.of(result);
+                    if (proposal == null || (result.size() < proposal.size())) {
+                        proposal = result;
+                    }
                 }
             }
         }
 
-        return Optional.empty();
+        return Optional.ofNullable(proposal);
     }
 
     protected static Iterable<MemberRef> getMemberRefs(MediaObject o) {
