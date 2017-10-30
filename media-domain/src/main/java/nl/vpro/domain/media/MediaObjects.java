@@ -14,6 +14,8 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.google.common.collect.Iterables;
+
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
@@ -576,5 +578,45 @@ public class MediaObjects {
 
     public static boolean isWebonly(MediaObject media) {
         return media.getMediaType() == MediaType.CLIP;
+    }
+
+
+    public static Optional<List<MediaObject>> getPath(MediaObject parent, MediaObject child, List<MediaObject> descendants) {
+        return getPath(parent, child,
+            descendants.stream().collect(Collectors.toMap(MediaObject::getMid, d -> d))
+        );
+    }
+
+    protected static Optional<List<MediaObject>> getPath(MediaObject parent, MediaObject child, Map<String, MediaObject> descendants) {
+        for (MemberRef ref : getMemberRefs(child)) {
+            if (ref.getMidRef().equals(parent.getMid())) {
+                // hit!
+                return Optional.of(Collections.singletonList(parent));
+            }
+        }
+        // Not directly found, so it is indirect
+        for (MemberRef ref : getMemberRefs(child)) {
+            MediaObject c = descendants.get(ref.getMidRef());
+            if (c != null) {
+                Optional<List<MediaObject>> path = getPath(parent, c, descendants);
+                if (path.isPresent()) {
+                    List<MediaObject> result = new ArrayList<>();
+                    result.add(c);
+                    result.addAll(path.get());
+                    return Optional.of(result);
+                }
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    protected static Iterable<MemberRef> getMemberRefs(MediaObject o) {
+        Iterable<MemberRef> memberOf = o.getMemberOf();
+        if (o instanceof Program) {
+            return Iterables.concat(memberOf, ((Program) o).getEpisodeOf());
+        } else {
+            return memberOf;
+        }
     }
 }
