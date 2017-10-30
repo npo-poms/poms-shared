@@ -1,5 +1,7 @@
 package nl.vpro.i18n;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -13,9 +15,6 @@ import javax.xml.bind.annotation.XmlValue;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.com.neovisionaries.i18n.LanguageCode;
@@ -25,9 +24,8 @@ import nl.vpro.com.neovisionaries.i18n.LanguageCode;
  * @since 3.2
  */
 @XmlAccessorType(XmlAccessType.NONE)
-public class LocalizedString  { //implements javax.xml.registry.infomodel.LocalizedString {
-
-    private static final Logger LOG = LoggerFactory.getLogger(LocalizedString.class);
+@Slf4j
+public class LocalizedString { //implements javax.xml.registry.infomodel.LocalizedString {
 
     private static final Map<String, String> MAP_TO_ISO = new HashMap<>();
 
@@ -161,7 +159,7 @@ public class LocalizedString  { //implements javax.xml.registry.infomodel.Locali
         String[] split = v.split("[_-]", 3);
         String replace = MAP_TO_ISO.get(split[0].toLowerCase());
         if (replace != null) {
-            LOG.warn("Found unknown iso language code {}, replaced with {}", split[0], replace);
+            log.warn("Found unknown iso language code {}, replaced with {}", split[0], replace);
             split[0] = replace;
         }
         LanguageCode languageCode = LanguageCode.getByCode(split[0], false);
