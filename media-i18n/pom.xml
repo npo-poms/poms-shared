@@ -29,16 +29,12 @@
       <artifactId>junit</artifactId>
     </dependency>
     <dependency>
-      <!-- contains javax.validation -->
-      <groupId>javax</groupId>
-      <artifactId>javaee-api</artifactId>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <groupId>com.sun.mail</groupId>
-          <artifactId>javax.mail</artifactId>
-        </exclusion>
-      </exclusions>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>

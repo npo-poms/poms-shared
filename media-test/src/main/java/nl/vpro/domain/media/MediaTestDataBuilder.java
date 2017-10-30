@@ -28,6 +28,7 @@ import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.TestEditors;
 import nl.vpro.i18n.Locales;
 
+@SuppressWarnings({"unchecked", "deprecation"})
 public interface MediaTestDataBuilder<
         T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>,
         M extends MediaObject
@@ -598,12 +599,12 @@ public interface MediaTestDataBuilder<
                 location.setId(id.incrementAndGet());
             }
         }
-        for (MemberRef ref : mediaObject().getMemberOf()) {
+      /*  for (MemberRef ref : mediaObject().getMemberOf()) {
 
         }
         for (DescendantRef ref : mediaObject().getDescendantOf()) {
 
-        }
+        }*/
         if (mediaObject().getId() == null) {
             id(id.incrementAndGet());
         }
