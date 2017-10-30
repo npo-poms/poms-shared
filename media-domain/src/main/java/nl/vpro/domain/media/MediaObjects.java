@@ -14,6 +14,8 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.google.common.collect.Iterables;
+
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
@@ -567,4 +569,47 @@ public class MediaObjects {
         return result.get();
     }
 
+
+
+    public static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, List<? extends MediaObject> descendants) {
+        return getPath(parent, child,
+            descendants.stream().collect(Collectors.toMap(MediaObject::getMid, d -> d))
+        );
+    }
+
+    protected static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, Map<String, MediaObject> descendants) {
+        for (MemberRef ref : getMemberRefs(child)) {
+            if (ref.getMidRef().equals(parent.getMid())) {
+                // hit!
+                return Optional.of(Collections.singletonList(ref));
+            }
+        }
+        // Not directly found, so it is indirect
+        List<MemberRef> proposal = null; // we want the shortest
+        for (MemberRef ref : getMemberRefs(child)) {
+            MediaObject c = descendants.get(ref.getMidRef());
+            if (c != null) {
+                Optional<List<MemberRef>> path = getPath(parent, c, descendants);
+                if (path.isPresent()) {
+                    List<MemberRef> result = new ArrayList<>();
+                    result.add(ref);
+                    result.addAll(path.get());
+                    if (proposal == null || (result.size() < proposal.size())) {
+                        proposal = result;
+                    }
+                }
+            }
+        }
+
+        return Optional.ofNullable(proposal);
+    }
+
+    protected static Iterable<MemberRef> getMemberRefs(MediaObject o) {
+        Iterable<MemberRef> memberOf = o.getMemberOf();
+        if (o instanceof Program) {
+            return Iterables.concat(memberOf, ((Program) o).getEpisodeOf());
+        } else {
+            return memberOf;
+        }
+    }
 }
