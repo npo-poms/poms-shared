@@ -32,10 +32,15 @@ public enum MediaSortField implements SortField {
             return "locationCount";
         }
     },
+
     memberofCount(Type.LONG),
     episodeofCount(Type.LONG),
-    scheduleEventsCount(Type.LONG)
+    scheduleEventsCount(Type.LONG),
 
+    firstShowing(Type.LONG),
+    firstShowingNoRepeat(Type.LONG),
+    lastShowing(Type.LONG),
+    lastShowingNoRepeat(Type.LONG)
 
 
     ;
