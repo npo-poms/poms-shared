@@ -613,13 +613,24 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration, merger, titles);
     }
 
+    default B scheduleEventRerun(Channel c, LocalDateTime time, java.time.Duration duration, ScheduleEventTitle... titles) {
+        return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration,
+            e -> {e.setRepeat(Repeat.rerun());return e;},
+            titles);
+    }
+
+
     @SuppressWarnings("unchecked")
     default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, ScheduleEventTitle... titles) {
         return scheduleEvent(c, time, duration, e -> e, titles);
     }
 
     default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger, ScheduleEventTitle... titles) {
-        ScheduleEvent event = new ScheduleEvent(c, time, duration);
+        ScheduleEvent event = ScheduleEvent.builder()
+            .channel(c)
+            .start(time)
+            .duration(duration)
+            .build();
         event.setParent(mediaObject());
         for (ScheduleEventTitle title : titles) {
             event.addTitle(title);
