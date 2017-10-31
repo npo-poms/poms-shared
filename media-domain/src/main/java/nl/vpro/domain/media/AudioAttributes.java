@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,10 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import nl.vpro.domain.media.bind.LocaleCodeAdapter;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -37,7 +42,9 @@ public class AudioAttributes implements Serializable {
     protected Integer numberOfChannels;
 
     @XmlElement
-    protected String language;
+    @XmlJavaTypeAdapter(value = LocaleCodeAdapter.class)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    protected Locale language;
 
     public AudioAttributes() {
     }
@@ -113,11 +120,11 @@ public class AudioAttributes implements Serializable {
         this.numberOfChannels = numberOfChannels;
     }
 
-    public String getLanguage() {
+    public Locale getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
+    public void setLanguage(Locale language) {
         this.language = language;
     }
 
