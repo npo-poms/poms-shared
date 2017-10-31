@@ -153,6 +153,9 @@
           <xsd:element name="publishStop" type="xsd:dateTime" minOccurs="0"/>
           <xsd:element name="lastPublished" type="xsd:dateTime" minOccurs="0"/>
           <xsd:element name="firstScheduleEvent" type="scheduleEventType" minOccurs="0"/>
+          <xsd:element name="firstScheduleEventNoRerun" type="scheduleEventType" minOccurs="0"/>
+          <xsd:element name="lastScheduleEvent" type="scheduleEventType" minOccurs="0"/>
+          <xsd:element name="lastScheduleEventNoRerun" type="scheduleEventType" minOccurs="0"/>
           <xsd:element name="sortDateScheduleEvent" type="scheduleEventType" minOccurs="0"/>
           <xsd:element name="locations" type="locationType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
           <xsd:element name="numberOfLocations" type="xsd:int" minOccurs="0"/>
@@ -203,6 +206,10 @@
       <xsd:enumeration value="memberofCount"/>
       <xsd:enumeration value="episodeofCount"/>
       <xsd:enumeration value="scheduleEventsCount"/>
+      <xsd:enumeration value="firstScheduleEvent"/>
+      <xsd:enumeration value="firstScheduleEventNoRerun"/>
+      <xsd:enumeration value="lastScheduleEvent"/>
+      <xsd:enumeration value="lastScheduleEventNoRerun"/>
     </xsd:restriction>
   </xsd:simpleType>
 

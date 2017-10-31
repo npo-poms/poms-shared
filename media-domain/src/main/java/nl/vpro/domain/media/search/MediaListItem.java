@@ -51,10 +51,10 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "publishStartInstant",
             "publishStopInstant",
             "lastPublished",
-            "firstShowing",
-            "firstShowingNoRerun",
-            "lastShowing",
-            "lastShowingNoRerun",
+            "firstScheduleEvent",
+            "firstScheduleEventNoRerun",
+            "lastScheduleEvent",
+            "lastScheduleEventNoRerun",
             "sortDateScheduleEvent",
             "locations",
             "numberOfLocations",
@@ -158,20 +158,20 @@ public class MediaListItem extends PublishableListItem {
 
     @Getter
     @Setter
-    private ScheduleEvent firstShowing;
+    private ScheduleEvent firstScheduleEvent;
 
     @Getter
     @Setter
-    private ScheduleEvent firstShowingNoRerun;
+    private ScheduleEvent firstScheduleEventNoRerun;
 
     @Getter
     @Setter
-    private ScheduleEvent lastShowing;
+    private ScheduleEvent lastScheduleEvent;
 
 
     @Getter
     @Setter
-    private ScheduleEvent lastShowingNoRerun;
+    private ScheduleEvent lastScheduleEventNoRerun;
 
     @Getter
     @Setter
@@ -220,10 +220,10 @@ public class MediaListItem extends PublishableListItem {
         this.lastPublished = media.getLastPublishedInstant();
 
         if(media.getScheduleEvents().size() > 0) {
-            this.firstShowing = ScheduleEvents.getFirstScheduleEvent(media.getScheduleEvents(), false).orElse(null);
-            this.firstShowingNoRerun = ScheduleEvents.getFirstScheduleEvent(media.getScheduleEvents(), true).orElse(null);
-            this.lastShowing = ScheduleEvents.getLastScheduleEvent(media.getScheduleEvents(), false).orElse(null);
-            this.lastShowingNoRerun = ScheduleEvents.getLastScheduleEvent(media.getScheduleEvents(), true).orElse(null);
+            this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(media.getScheduleEvents(), false).orElse(null);
+            this.firstScheduleEventNoRerun = ScheduleEvents.getFirstScheduleEvent(media.getScheduleEvents(), true).orElse(null);
+            this.lastScheduleEvent= ScheduleEvents.getLastScheduleEvent(media.getScheduleEvents(), false).orElse(null);
+            this.lastScheduleEventNoRerun = ScheduleEvents.getLastScheduleEvent(media.getScheduleEvents(), true).orElse(null);
             this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(media.getScheduleEvents()).orElse(null);
         }
     }
