@@ -178,8 +178,26 @@ public class MediaObjectsTest {
         assertTrue(program.hasSubtitles());
     }
 
+
     @Test
-    public void getPath() {
+    public void getPathShallow() {
+        Group g1 = MediaBuilder.group().mid("g1").build();
+        Group g2 = MediaBuilder.group().mid("g2").memberOf(g1).build();
+        Group g3 = MediaBuilder.group().mid("g3").build();
+        Group g4 = MediaBuilder.group().mid("g4").memberOf(g1).build();
+        Program p = MediaBuilder.program().mid("p1").memberOf(g2).memberOf(g3).build();
+        List<MediaObject> descendants = Arrays.asList(g2, p);
+
+        Optional<List<MemberRef>> path = MediaObjects.getPath(g2, p, descendants);
+
+        assertThat(path.get()).hasSize(1);
+        assertThat(path.get().get(0).getMediaRef()).isEqualTo("g2");
+        assertThat(path.get().get(0).getMember().getMid()).isEqualTo("p1");
+    }
+
+
+    @Test
+    public void getPathDeeper() {
         Group g1 = MediaBuilder.group().mid("g1").build();
         Group g2 = MediaBuilder.group().mid("g2").memberOf(g1).build();
         Group g3 = MediaBuilder.group().mid("g3").build();
@@ -191,7 +209,6 @@ public class MediaObjectsTest {
 
         log.info("{}", path);
         assertThat(path.get().stream().map(MemberRef::getOwner).collect(Collectors.toList())).containsExactly(g2, g1);
-
 
 
     }
