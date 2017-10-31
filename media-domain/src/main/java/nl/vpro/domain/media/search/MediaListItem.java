@@ -52,6 +52,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "publishStopInstant",
             "lastPublished",
             "firstScheduleEvent",
+            "lastScheduleEvent",
+            "lastScheduleEventNoRerun",
             "sortDateScheduleEvent",
             "locations",
             "numberOfLocations",
@@ -224,9 +226,6 @@ public class MediaListItem extends PublishableListItem {
     public void setLastPublished(Instant lastPublished) {
         this.lastPublished = lastPublished;
     }
-
-
-
 
     @XmlElement(name = "createdBy")
     public String getCreatedByPrincipalId() {
