@@ -34,31 +34,31 @@ public class MediaListItemTest {
             "    <s:publishStart>1970-01-01T01:00:00+01:00</s:publishStart>\n" +
             "    <s:publishStop>2500-01-01T00:00:00+01:00</s:publishStop>\n" +
             "    <s:lastPublished>2015-03-06T02:00:00+01:00</s:lastPublished>\n" +
-            "    <s:firstShowing channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
+            "    <s:firstScheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "        <guideDay>1969-12-31+01:00</guideDay>\n" +
             "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "        <duration>P0DT0H0M0.200S</duration>\n" +
             "        <poProgID>VPROWON_20001</poProgID>\n" +
-            "    </s:firstShowing>\n" +
-            "    <s:firstShowingNoRerun channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
+            "    </s:firstScheduleEvent>\n" +
+            "    <s:firstScheduleEventNoRerun channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "        <guideDay>1969-12-31+01:00</guideDay>\n" +
             "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "        <duration>P0DT0H0M0.200S</duration>\n" +
             "        <poProgID>VPROWON_20001</poProgID>\n" +
-            "    </s:firstShowingNoRerun>\n" +
-            "    <s:lastShowing channel=\"CONS\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
+            "    </s:firstScheduleEventNoRerun>\n" +
+            "    <s:lastScheduleEvent channel=\"CONS\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "        <repeat isRerun=\"true\"></repeat>\n" +
             "        <guideDay>1970-01-10+01:00</guideDay>\n" +
             "        <start>1970-01-11T01:00:00.600+01:00</start>\n" +
             "        <duration>P0DT0H0M0.200S</duration>\n" +
             "        <poProgID>VPROWON_20001</poProgID>\n" +
-            "    </s:lastShowing>\n" +
-            "    <s:lastShowingNoRerun channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
+            "    </s:lastScheduleEvent>\n" +
+            "    <s:lastScheduleEventNoRerun channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "        <guideDay>1969-12-31+01:00</guideDay>\n" +
             "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "        <duration>P0DT0H0M0.200S</duration>\n" +
             "        <poProgID>VPROWON_20001</poProgID>\n" +
-            "    </s:lastShowingNoRerun>\n" +
+            "    </s:lastScheduleEventNoRerun>\n" +
             "    <s:sortDateScheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "        <guideDay>1969-12-31+01:00</guideDay>\n" +
             "        <start>1970-01-01T01:00:00.100+01:00</start>\n" +
