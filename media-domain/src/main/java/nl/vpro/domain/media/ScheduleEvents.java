@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import java.util.SortedSet;
+import java.util.Optional;
 
 /**
  * @author Roelof Jan Koekoek
@@ -59,7 +59,7 @@ public class ScheduleEvents {
         return Repeat.isOriginal(scheduleEevent.getRepeat());
     }
 
-    public static ScheduleEvent sortDateEventForProgram(Iterable<ScheduleEvent> scheduleEvents) {
+    public static Optional<ScheduleEvent> sortDateEventForProgram(Iterable<ScheduleEvent> scheduleEvents) {
         ScheduleEvent result = null;
         if (scheduleEvents != null) {
             for (ScheduleEvent s : scheduleEvents) {
@@ -68,9 +68,31 @@ public class ScheduleEvents {
                 }
             }
         }
-        return result;
+        return Optional.ofNullable(result);
     }
 
+    public static Optional<ScheduleEvent> getFirstScheduleEvent(Iterable<ScheduleEvent> scheduleEvents, boolean ignoreReruns) {
+        if (scheduleEvents != null) {
+            for (ScheduleEvent s : scheduleEvents) {
+                if (! ignoreReruns || ScheduleEvents.isOriginal(s)) {
+                    return Optional.of(s);
+                }
+            }
+        }
+        return Optional.empty();
 
+    }
+
+    public static Optional<ScheduleEvent> getLastScheduleEvent(Iterable<ScheduleEvent> scheduleEvents, boolean ignoreReruns) {
+        ScheduleEvent result = null;
+        if (scheduleEvents != null) {
+            for (ScheduleEvent s : scheduleEvents) {
+                if (!ignoreReruns || ScheduleEvents.isOriginal(s)) {
+                    result = s;
+                }
+            }
+        }
+        return Optional.ofNullable(result);
+    }
 
 }
