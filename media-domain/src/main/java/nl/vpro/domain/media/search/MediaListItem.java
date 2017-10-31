@@ -161,7 +161,7 @@ public class MediaListItem extends PublishableListItem {
 
     @Getter
     @Setter
-    private ScheduleEvent firstShowing;
+    private ScheduleEvent firstScheduleEvent;
 
     @Getter
     @Setter
