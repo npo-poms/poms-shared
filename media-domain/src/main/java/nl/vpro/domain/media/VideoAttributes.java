@@ -58,6 +58,8 @@ public class VideoAttributes implements Serializable {
         aspectRatio = AspectRatio.fromDimension(horizontalSize, verticalSize);
     }
 
+
+    @lombok.Builder
     public VideoAttributes(String videoCoding, Integer horizontalSize, Integer verticalSize) {
         this(horizontalSize, verticalSize);
         this.videoCoding = videoCoding;

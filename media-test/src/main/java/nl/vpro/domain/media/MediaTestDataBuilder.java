@@ -350,8 +350,30 @@ public interface MediaTestDataBuilder<
     }
 
 
+
     default T withAvAttributes() {
-        return avAttributes(new AVAttributes(1000000, AVFileFormat.M4V));
+        return avAttributes(
+            AVAttributes.builder()
+                .bitrate(1000000)
+                .byteSize(2000000L)
+                .avFileFormat(AVFileFormat.M4V)
+                .videoAttributes(
+                    VideoAttributes.builder()
+                        .videoCoding("VCODEC")
+                        .horizontalSize(640)
+                        .verticalSize(320)
+                        .build()
+                )
+                .audioAttributes(
+                    AudioAttributes.builder()
+                        .audioCoding("ACODEC")
+                        .language(Locales.NETHERLANDISH)
+                        .numberOfChannels(2)
+                        .build()
+                )
+                .build()
+        );
+
     }
 
     default T withAVType() {
