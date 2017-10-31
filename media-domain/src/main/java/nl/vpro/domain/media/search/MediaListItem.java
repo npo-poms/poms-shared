@@ -51,7 +51,10 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "publishStartInstant",
             "publishStopInstant",
             "lastPublished",
-            "firstScheduleEvent",
+            "firstShowing",
+            "firstShowingNoRerun",
+            "lastShowing",
+            "lastShowingNoRerun",
             "sortDateScheduleEvent",
             "locations",
             "numberOfLocations",
@@ -155,7 +158,20 @@ public class MediaListItem extends PublishableListItem {
 
     @Getter
     @Setter
-    private ScheduleEvent firstScheduleEvent;
+    private ScheduleEvent firstShowing;
+
+    @Getter
+    @Setter
+    private ScheduleEvent firstShowingNoRerun;
+
+    @Getter
+    @Setter
+    private ScheduleEvent lastShowing;
+
+
+    @Getter
+    @Setter
+    private ScheduleEvent lastShowingNoRerun;
 
     @Getter
     @Setter
@@ -204,8 +220,11 @@ public class MediaListItem extends PublishableListItem {
         this.lastPublished = media.getLastPublishedInstant();
 
         if(media.getScheduleEvents().size() > 0) {
-            this.firstScheduleEvent = media.getScheduleEvents().first();
-            this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(media.getScheduleEvents());
+            this.firstShowing = ScheduleEvents.getFirstScheduleEvent(media.getScheduleEvents(), false).orElse(null);
+            this.firstShowingNoRerun = ScheduleEvents.getFirstScheduleEvent(media.getScheduleEvents(), true).orElse(null);
+            this.lastShowing = ScheduleEvents.getLastScheduleEvent(media.getScheduleEvents(), false).orElse(null);
+            this.lastShowingNoRerun = ScheduleEvents.getLastScheduleEvent(media.getScheduleEvents(), true).orElse(null);
+            this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(media.getScheduleEvents()).orElse(null);
         }
     }
 
@@ -224,9 +243,6 @@ public class MediaListItem extends PublishableListItem {
     public void setLastPublished(Instant lastPublished) {
         this.lastPublished = lastPublished;
     }
-
-
-
 
     @XmlElement(name = "createdBy")
     public String getCreatedByPrincipalId() {

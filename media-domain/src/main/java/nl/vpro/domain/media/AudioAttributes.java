@@ -68,10 +68,16 @@ public class AudioAttributes implements Serializable {
         this.numberOfChannels = numberOfChannels;
     }
 
-    public AudioAttributes(String audioCoding, Integer numberOfChannels, String language) {
+    @lombok.Builder
+    private AudioAttributes(String audioCoding, Integer numberOfChannels, Locale language) {
         this.audioCoding = audioCoding;
         this.numberOfChannels = numberOfChannels;
         this.language = language;
+    }
+
+    @Deprecated
+    public AudioAttributes(String audioCoding, Integer numberOfChannels, String language) {
+        this(audioCoding, numberOfChannels, new Locale(language));
     }
 
     public static AudioAttributes update(AudioAttributes from, AudioAttributes to) {
