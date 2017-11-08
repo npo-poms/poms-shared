@@ -5,7 +5,7 @@ package nl.vpro.nep;
  * @since 5.5
  */
 @lombok.Data
-class StreamUrlRequest  {
+public class StreamUrlRequest  {
 
     private Data data;
 
