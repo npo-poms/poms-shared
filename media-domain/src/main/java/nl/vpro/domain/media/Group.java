@@ -190,10 +190,14 @@ public class Group extends MediaObject {
 
     @Override
     public String toString() {
-        return "Group" +
-            "{mid=" + mid +
-            ", type=" + type +
-            ", title=" + getMainTitle() +
-            '}';
+        String mainTitle;
+        try {
+                String mt = getMainTitle();
+            mainTitle = mt == null ? "null" : ('"' + mt + '"');
+        } catch (RuntimeException le) {
+            mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
+        }
+        return String.format("Group{%1$s mid=\"%2$s\", title=%3$s}", type == null ? "" : type + " ", this.getMid(), mainTitle);
+
     }
 }
