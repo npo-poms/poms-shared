@@ -466,7 +466,7 @@ public class Program extends MediaObject {
         } catch(RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
-        return String.format("Program{%1$s mid=\"%2$s\", title=%3$s}", type == null ? "": type + " ", this.getMid(), mainTitle);
+        return String.format("Program{%1$smid=\"%2$s\", title=%3$s}", type == null ? "": type + " ", this.getMid(), mainTitle);
     }
 
     private String findPoSeriesID() {

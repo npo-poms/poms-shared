@@ -197,7 +197,7 @@ public class Group extends MediaObject {
         } catch (RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
-        return String.format("Group{%1$s mid=\"%2$s\", title=%3$s}", type == null ? "" : type + " ", this.getMid(), mainTitle);
+        return String.format("Group{%1$smid=\"%2$s\", title=%3$s}", type == null ? "" : type + " ", this.getMid(), mainTitle);
 
     }
 }
