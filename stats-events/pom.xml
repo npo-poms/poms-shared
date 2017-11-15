@@ -6,12 +6,12 @@
   <parent>
     <groupId>nl.publiekeomroep</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.5.4</version>
+    <version>5.5.5-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.stats</groupId>
   <artifactId>stats-events</artifactId>
-  <version>5.5.4</version>
+  <version>5.5.5-SNAPSHOT</version>
 
   <properties>
     <avro.version>1.7.6</avro.version>
