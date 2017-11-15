@@ -182,7 +182,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("ProgramUpdate")
-            .append("{ program=")
+            .append("{program=")
             .append(builder.build())
             .append('}');
         return sb.toString();
