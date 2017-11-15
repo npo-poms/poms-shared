@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
@@ -44,7 +45,7 @@ import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 @XmlType(name = "workflowEnumType", namespace = Xmlns.SHARED_NAMESPACE)
 @JsonSerialize(using = BackwardsCompatibleJsonEnum.Serializer.class)
 @JsonDeserialize(using = Workflow.Deserializer.class)
-public enum Workflow {
+public enum Workflow implements Displayable {
 
     @Deprecated // not used
     DRAFT("Voorstel"),
@@ -127,6 +128,11 @@ public enum Workflow {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public String getDisplayName() {
+        return getDescription();
     }
 
     public static class Deserializer extends BackwardsCompatibleJsonEnum.Deserializer<Workflow> {
