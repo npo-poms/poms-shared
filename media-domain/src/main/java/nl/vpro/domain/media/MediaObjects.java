@@ -194,6 +194,22 @@ public class MediaObjects {
     }
 
 
+    public static void copy(MediaObject from, MediaObject to) {
+        Embargos.copy(from, to);
+        TextualObjects.copy(from, to);
+        to.setCountries(from.getCountries());
+        to.setLanguages(from.getLanguages());
+        to.setDuration(from.getDuration());
+        to.setAgeRating(from.getAgeRating());
+        to.setContentRatings(from.getContentRatings());
+        to.setWebsites(from.getWebsites());
+        to.setEmail(from.getEmail());
+        to.setGenres(from.getGenres());
+        // TODO: more fields
+
+    }
+
+
     public static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject) throws NotFoundException {
         matchBroadcasters(broadcasterService, mediaObject, null);
     }

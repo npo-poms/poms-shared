@@ -28,7 +28,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @ToString
 @Data
 @AllArgsConstructor
-@Builder
+@lombok.Builder(builderClassName = "Builder")
 public class DateRange implements Range<Instant, DateRange.Value> {
 
     @XmlElement
@@ -46,8 +46,18 @@ public class DateRange implements Range<Instant, DateRange.Value> {
     }
 
     public DateRange(Instant start, Instant stop) {
-        this.start = start == null ? null : Value.of(start);
-        this.stop = stop == null ? null : Value.of(stop);
+        this.start = Value.of(start);
+        this.stop = Value.of(stop);
+    }
+
+    public static class Builder {
+        public Builder startInstance(Instant start) {
+            return start(Value.of(start));
+        }
+
+        public Builder stopInstance(Instant stop) {
+            return stop(Value.of(stop));
+        }
     }
 
     @Data
@@ -80,6 +90,9 @@ public class DateRange implements Range<Instant, DateRange.Value> {
             this.value = value;
         }
         public static Value of(Instant instant) {
+            if (instant == null) {
+                return null;
+            }
             return builder().value(instant).build();
         }
     }
