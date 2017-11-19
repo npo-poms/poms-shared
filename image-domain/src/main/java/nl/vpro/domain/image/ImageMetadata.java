@@ -1,6 +1,7 @@
 package nl.vpro.domain.image;
 
 import java.net.URI;
+import java.time.Instant;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,6 +20,8 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
     URI getDownloadUrl();
 
     String getEtag();
+
+    Instant getUrlLastModified();
 
     ImageFormat getImageFormat();
 
@@ -39,6 +42,7 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
     T setSize(Long size);
     T setDownloadUrl(URI downloadUrl);
     T setEtag(String etag);
+    T setUrlLastModified(Instant lastModified);
     T setImageFormat(ImageFormat imageFormat);
 
     default T setMimeType(String mimeType) throws UnsupportedImageFormatException {
@@ -56,6 +60,7 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
             setSize(image.getSize());
             setDownloadUrl(image.getDownloadUrl());
             setEtag(image.getEtag());
+            setUrlLastModified(image.getUrlLastModified());
             setImageFormat(image.getImageFormat());
         }
     }
@@ -80,6 +85,9 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
             }
             if (StringUtils.isEmpty(getEtag())) {
                 setEtag(image.getEtag());
+            }
+            if (getUrlLastModified() == null) {
+                setUrlLastModified(image.getUrlLastModified());
             }
             if (getImageFormat() == null) {
                 setImageFormat(image.getImageFormat());
@@ -108,6 +116,9 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
             }
             if (StringUtils.isNotEmpty(source.getEtag())) {
                 setEtag(source.getEtag());
+            }
+            if (source.getUrlLastModified() != null) {
+                setUrlLastModified(source.getUrlLastModified());
             }
             if (source.getImageFormat() != null) {
                 setImageFormat(source.getImageFormat());
