@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.time.Instant;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -24,11 +25,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.AbstractPublishableObject;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.Editor;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @SuppressWarnings("WSReferenceInspection")
 @Entity(
@@ -48,6 +55,7 @@ import nl.vpro.validation.WarningValidatorGroup;
         "size",
         "downloadUrl",
         "etag",
+        "urlLastModified",
         "source",
         "sourceName",
         "date",
@@ -123,8 +131,17 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
 
     private String etag;
 
+    @Column
+    @Getter
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant urlLastModified;
+
     @XmlTransient
     private byte[] hash;
+
 
     @NotNull(groups = {WarningValidatorGroup.class})
     @XmlElement
@@ -398,6 +415,13 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     public Image setEtag(String etag) {
         this.etag = etag;
         return this;
+    }
+
+    @Override
+    public Image setUrlLastModified(Instant lastModified) {
+        this.urlLastModified = lastModified;
+        return this;
+
     }
 
 }
