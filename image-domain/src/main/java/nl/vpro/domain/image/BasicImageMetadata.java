@@ -43,6 +43,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "size",
         "downloadUrl",
         "etag",
+        "urlLastModified",
         "license",
         "source",
         "sourceName",
@@ -85,6 +86,13 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
     private URI downloadUrl;
 
     private String etag;
+
+
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    private Instant urlLastModified;
 
     private License license;
 
@@ -176,6 +184,12 @@ public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetad
     @Override
     public BasicImageMetadata setEtag(String etag) {
         this.etag = etag;
+        return this;
+    }
+
+    @Override
+    public BasicImageMetadata setUrlLastModified(Instant urlLastModified) {
+        this.urlLastModified = urlLastModified;
         return this;
     }
 
