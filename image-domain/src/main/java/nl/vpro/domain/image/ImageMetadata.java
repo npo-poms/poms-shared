@@ -54,14 +54,14 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
         Metadata.super.copyFrom(metadata);
 
         if (metadata instanceof ImageMetadata) {
-            ImageMetadata<?> image = (ImageMetadata<?>) metadata;
-            setHeightInMm(image.getHeightInMm());
-            setWidthInMm(image.getWidthInMm());
-            setSize(image.getSize());
-            setDownloadUrl(image.getDownloadUrl());
-            setEtag(image.getEtag());
-            setUrlLastModified(image.getUrlLastModified());
-            setImageFormat(image.getImageFormat());
+            ImageMetadata<?> imageMetadata = (ImageMetadata<?>) metadata;
+            setHeightInMm(imageMetadata.getHeightInMm());
+            setWidthInMm(imageMetadata.getWidthInMm());
+            setSize(imageMetadata.getSize());
+            setDownloadUrl(imageMetadata.getDownloadUrl());
+            setEtag(imageMetadata.getEtag());
+            setUrlLastModified(imageMetadata.getUrlLastModified());
+            setImageFormat(imageMetadata.getImageFormat());
         }
     }
 
