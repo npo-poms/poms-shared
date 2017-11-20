@@ -85,7 +85,7 @@ public class MediaUpdateList<T> implements Iterable<T>, VersionSpecific {
 
     //@Override
     public int size() {
-        return list.size();
+        return list == null ? 0 : list.size();
     }
 
     @XmlAttribute
