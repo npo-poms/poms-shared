@@ -47,8 +47,6 @@
     <module>media-i18n</module>
     <module>media-classification</module>
     <module>media-organizations</module>
-    <module>stats-services</module>
-    <module>stats-events</module>
 
     <module>api-domain</module>
     <module>api-rs-services</module>
