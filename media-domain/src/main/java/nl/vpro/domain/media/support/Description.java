@@ -52,7 +52,11 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     @NoHtml
     @XmlValue
     @JsonProperty("value")
-    @Size(min = 1)
+
+    @Size.List({
+        @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
+        @Size(max = 64000, message = "{nl.vpro.constraints.text.Size.max}")
+    })
     protected String description;
 
     @XmlTransient
