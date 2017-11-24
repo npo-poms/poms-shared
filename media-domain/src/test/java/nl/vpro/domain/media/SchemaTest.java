@@ -52,6 +52,7 @@ public class SchemaTest {
         generate(
             // media
             Program.class,
+            Segment.class,
             Schedule.class,
             Group.class,
             MediaTable.class,
@@ -64,6 +65,7 @@ public class SchemaTest {
             MidAndType.class,
             ProgramUpdate.class,
             GroupUpdate.class,
+            SegmentUpdate.class,
             MoveAction.class,
             BulkUpdate.class,
             ImageUpdate.class,
