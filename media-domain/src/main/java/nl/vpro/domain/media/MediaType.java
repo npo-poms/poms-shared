@@ -400,16 +400,16 @@ public enum MediaType {
         }
     },
 
-    VISUALSEGMENT(Segment.class) {
+    VISUALRADIOSEGMENT(Segment.class) {
         @Override
         public String toString () {
-            return "Visual radio";
+            return "Visual radio segment";
         }
 
 
         @Override
         public SegmentType getSubType () {
-            return SegmentType.VISUALRADIO;
+            return SegmentType.VISUALRADIOSEGMENT;
 
         }
     },

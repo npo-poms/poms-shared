@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 public enum SegmentType implements SubMediaType {
 
     SEGMENT(MediaType.SEGMENT),
-    VISUALRADIO(MediaType.VISUALSEGMENT);
+    VISUALRADIOSEGMENT(MediaType.VISUALRADIOSEGMENT);
 
 
     public static String URN_PREFIX = "urn:vpro:media:segment:";
