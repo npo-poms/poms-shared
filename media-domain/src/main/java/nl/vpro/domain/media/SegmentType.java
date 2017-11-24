@@ -21,6 +21,9 @@ public enum SegmentType implements SubMediaType {
 
     SegmentType(MediaType mediaType) {
         this.mediaType = mediaType;
+        if (mediaType == null) {
+            throw new IllegalStateException();
+        }
     }
 
     public String value() {

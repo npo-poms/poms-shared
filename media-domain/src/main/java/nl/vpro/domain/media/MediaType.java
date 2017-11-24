@@ -458,7 +458,7 @@ public enum MediaType {
 
     final Class<? extends MediaObject> clazz;
     final Constructor<?> constructor;
-    final Method setType;
+    private Optional<Method> setType;
 
     MediaType(Class<? extends MediaObject> clazz)  {
         this.clazz = clazz;
@@ -471,17 +471,25 @@ public enum MediaType {
                 throw new RuntimeException(nsme);
             }
         }
-        Method st;
-        if (this.getSubType() != null) {
-            try {
-                st = clazz.getMethod("setType", this.getSubType().getClass());
-            } catch (NoSuchMethodException nsme) {
+    }
+
+    protected void setType(MediaObject o) throws InvocationTargetException, IllegalAccessException {
+        if (this.setType == null){
+            Method st;
+            if (this.getSubType() != null) {
+                try {
+                    st = clazz.getMethod("setType", this.getSubType().getClass());
+                } catch (NoSuchMethodException nsme) {
+                    st = null;
+                }
+            } else {
                 st = null;
             }
-        } else {
-            st = null;
+            this.setType = Optional.ofNullable(st);
         }
-        this.setType = st;
+        if (this.setType.isPresent()) {
+            this.setType.get().invoke(o, getSubType());
+        }
     }
 
 
@@ -491,9 +499,7 @@ public enum MediaType {
                 throw new RuntimeException("Not possible to make instances of " + this);
             }
             MediaObject o = (MediaObject) constructor.newInstance();
-            if (setType != null) {
-                setType.invoke(o, getSubType());
-            }
+            setType(o);
             return o;
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
             throw new RuntimeException("For " + this + " ", e);

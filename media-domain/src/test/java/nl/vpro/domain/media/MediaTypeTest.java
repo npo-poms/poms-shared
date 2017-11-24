@@ -105,7 +105,7 @@ public class MediaTypeTest {
             log.info("{}",Arrays.asList(type.preferredMemberOfTypes()));
             log.info("{}",Arrays.asList(type.preferredMemberTypes()));
             for (MediaType t : MediaType.values()) {
-                log.info("{}",type.compareTo(t));
+                log.info("{} ct {}: {}", type, t, type.compareTo(t));
             }
             try {
                 MediaObject instance = type.getMediaInstance();
@@ -113,7 +113,9 @@ public class MediaTypeTest {
             } catch (RuntimeException e) {
                 assertThat(e.getMessage()).startsWith("Not possible");
                 log.info("Ok, not posible to instantiate {}", type);
-
+            }
+            if (type.getSubType() != null) {
+                assertThat(type.getSubType().getMediaType()).withFailMessage("" + type).isNotNull();
             }
         }
     }

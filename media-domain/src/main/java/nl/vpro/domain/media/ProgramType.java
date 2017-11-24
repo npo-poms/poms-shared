@@ -46,6 +46,9 @@ public enum ProgramType implements SubMediaType {
     ProgramType(MediaType mediaType, boolean hasEpisodeOf) {
         this.mediaType = mediaType;
         this.hasEpisodeOf = hasEpisodeOf;
+        if (mediaType == null){
+            throw new IllegalStateException();
+        }
     }
 
     ProgramType(MediaType mediaType) {
