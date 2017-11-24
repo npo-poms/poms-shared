@@ -4,6 +4,10 @@
  */
 package nl.vpro.domain.media;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,22 +25,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 @XmlType(name = "mediaTypeEnum")
 public enum MediaType {
-    MEDIA {
+    MEDIA(MediaObject.class) {
         @Override
         public String toString() {
             return "Alle media";
         }
 
-        @Override
-        public MediaObject getMediaInstance() {
-            throw new RuntimeException("Not possible to make instances of " + this);
-
-        }
-
-        @Override
-        public Class<MediaObject> getMediaObjectClass() {
-            return MediaObject.class;
-        }
 
         @Override
         public SubMediaType getSubType() {
@@ -59,16 +53,10 @@ public enum MediaType {
 
     },
 
-    PROGRAM {
+    PROGRAM(Program.class) {
         @Override
         public String toString() {
             return "Programma";
-        }
-
-        @Override
-        public Program getMediaInstance() {
-            Program p = new Program();
-            return p;
         }
 
         @Override
@@ -89,17 +77,10 @@ public enum MediaType {
     },
 
 
-    BROADCAST {
+    BROADCAST(Program.class) {
         @Override
         public String toString() {
             return "Uitzending";
-        }
-
-        @Override
-        public Program getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
         }
 
         @Override
@@ -114,17 +95,10 @@ public enum MediaType {
 
 
     },
-    CLIP {
+    CLIP(Program.class) {
         @Override
         public String toString() {
             return "Clip";
-        }
-
-        @Override
-        public Program getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
         }
 
         @Override
@@ -139,18 +113,12 @@ public enum MediaType {
 
 
     },
-    STRAND {
+    STRAND(Program.class) {
         @Override
         public String toString() {
             return "Koepelprogramma";
         }
 
-        @Override
-        public Program getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
-        }
 
         @Override
         public ProgramType getSubType() {
@@ -158,17 +126,10 @@ public enum MediaType {
 
         }
     },
-    TRAILER {
+    TRAILER(Program.class) {
         @Override
         public String toString() {
             return "Trailer";
-        }
-
-        @Override
-        public Program getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
         }
 
         @Override
@@ -184,18 +145,12 @@ public enum MediaType {
 
 
     },
-    MOVIE {
+    MOVIE(Program.class) {
         @Override
         public String toString() {
             return "Film";
         }
 
-        @Override
-        public Program getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
-        }
 
         @Override
         public boolean hasSegments() {
@@ -210,22 +165,12 @@ public enum MediaType {
     },
 
 
-    GROUP {
+    GROUP(Group.class) {
         @Override
         public String toString() {
             return "Groep";
         }
 
-        @Override
-        public Group getMediaInstance() {
-            Group g = new Group();
-            return g;
-        }
-
-        @Override
-        public Class<Group> getMediaObjectClass() {
-            return Group.class;
-        }
 
 
         @Override
@@ -239,22 +184,10 @@ public enum MediaType {
         }
     },
 
-    SERIES {
+    SERIES(Group.class) {
         @Override
         public String toString() {
             return "Serie";
-        }
-
-        @Override
-        public Group getMediaInstance() {
-            Group g = new Group();
-            g.setType(getSubType());
-            return g;
-        }
-
-        @Override
-        public Class<Group> getMediaObjectClass() {
-            return Group.class;
         }
 
         @Override
@@ -267,24 +200,11 @@ public enum MediaType {
             return true;
         }
     },
-    SEASON {
+    SEASON(Group.class) {
         @Override
         public String toString() {
             return "Seizoen";
         }
-
-        @Override
-        public Group getMediaInstance() {
-            Group g = new Group();
-            g.setType(getSubType());
-            return g;
-        }
-
-        @Override
-        public Class<Group> getMediaObjectClass() {
-            return Group.class;
-        }
-
 
         @Override
         public boolean hasOrdering() {
@@ -296,23 +216,12 @@ public enum MediaType {
             return GroupType.SEASON;
         }
     },
-    UMBRELLA {
+    UMBRELLA(Group.class) {
         @Override
         public String toString() {
             return "Paraplu";
         }
 
-        @Override
-        public Group getMediaInstance() {
-            Group g = new Group();
-            g.setType(getSubType());
-            return g;
-        }
-
-        @Override
-        public Class<Group> getMediaObjectClass() {
-            return Group.class;
-        }
 
         @Override
         public boolean hasOrdering() {
@@ -326,43 +235,23 @@ public enum MediaType {
     },
     // MSE-1453
     @Deprecated
-    ARCHIVE {
+    ARCHIVE(Group.class) {
         @Override
         public String toString() {
             return "Archief";
         }
 
         @Override
-        public Group getMediaInstance() {
-            return new Group(getSubType(), false);
-        }
-
-        @Override
-        public Class<Group> getMediaObjectClass() {
-            return Group.class;
-        }
-
-
-        @Override
         public GroupType getSubType() {
             return GroupType.ARCHIVE;
         }
     },
-    COLLECTION {
+    COLLECTION(Group.class) {
         @Override
         public String toString() {
             return "Collectie";
         }
 
-        @Override
-        public Group getMediaInstance() {
-            return new Group(getSubType(), false);
-        }
-
-        @Override
-        public Class<Group> getMediaObjectClass() {
-            return Group.class;
-        }
 
         @Override
         public GroupType getSubType() {
@@ -370,22 +259,10 @@ public enum MediaType {
 
         }
     },
-    PLAYLIST {
+    PLAYLIST(Group.class) {
         @Override
         public String toString() {
             return "Speellijst";
-        }
-
-        @Override
-        public Group getMediaInstance() {
-            Group g = new Group();
-            g.setType(GroupType.valueOf(this.name()));
-            return g;
-        }
-
-        @Override
-        public Class<Group> getMediaObjectClass() {
-            return Group.class;
         }
 
 
@@ -400,22 +277,10 @@ public enum MediaType {
 
         }
     },
-    ALBUM {
+    ALBUM(Group.class) {
         @Override
         public String toString() {
             return "Album";
-        }
-
-        @Override
-        public Group getMediaInstance() {
-            Group g = new Group();
-            g.setType(GroupType.valueOf(this.name()));
-            return g;
-        }
-
-        @Override
-        public Class<Group> getMediaObjectClass() {
-            return Group.class;
         }
 
 
@@ -430,22 +295,12 @@ public enum MediaType {
 
         }
     },
-    SEGMENT {
+    SEGMENT(Segment.class) {
         @Override
         public String toString() {
             return "Segment";
         }
 
-        @Override
-        public Segment getMediaInstance() {
-            Segment s = new Segment();
-            return s;
-        }
-
-        @Override
-        public Class<Segment> getMediaObjectClass() {
-            return Segment.class;
-        }
 
         @Override
         public SegmentType getSubType() {
@@ -503,17 +358,10 @@ public enum MediaType {
     },
     */
 
-    TRACK {
+    TRACK(Program.class) {
         @Override
         public String toString() {
             return "Track";
-        }
-
-        @Override
-        public MediaObject getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
         }
 
         @Override
@@ -533,18 +381,12 @@ public enum MediaType {
         }
 
     },
-    VISUALRADIO {
+    VISUALRADIO(Program.class) {
         @Override
         public String toString() {
             return "Visual radio";
         }
 
-        @Override
-        public MediaObject getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
-        }
 
         @Override
         public boolean hasSegments() {
@@ -556,18 +398,25 @@ public enum MediaType {
             return ProgramType.VISUALRADIO;
 
         }
+    },
 
+    VISUALSEGMENT(Segment.class) {
+        @Override
+        public String toString () {
+            return "Visual radio";
+        }
+
+
+        @Override
+        public SegmentType getSubType () {
+            return SegmentType.VISUALRADIO;
+
+        }
     },
     /**
      * @since 2.1
      */
-    RECORDING {
-        @Override
-        public MediaObject getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
-        }
+    RECORDING(Program.class) {
 
         @Override
         public String toString() {
@@ -585,7 +434,7 @@ public enum MediaType {
 
         }
     },
-    PROMO {
+    PROMO(Program.class) {
         @Override
         public String toString() {
             return "Promo";
@@ -596,12 +445,7 @@ public enum MediaType {
             return false;
         }
 
-        @Override
-        public MediaObject getMediaInstance() {
-            Program p = new Program();
-            p.setType(getSubType());
-            return p;
-        }
+
 
         @Override
         public ProgramType getSubType() {
@@ -612,7 +456,49 @@ public enum MediaType {
     };
 
 
-    public abstract MediaObject getMediaInstance();
+    final Class<? extends MediaObject> clazz;
+    final Constructor<?> constructor;
+    final Method setType;
+
+    MediaType(Class<? extends MediaObject> clazz)  {
+        this.clazz = clazz;
+        if (Modifier.isAbstract(this.clazz.getModifiers())) {
+            this.constructor = null;
+        } else {
+            try {
+                this.constructor = clazz.getConstructor();
+            } catch (NoSuchMethodException nsme) {
+                throw new RuntimeException(nsme);
+            }
+        }
+        Method st;
+        if (this.getSubType() != null) {
+            try {
+                st = clazz.getMethod("setType", this.getSubType().getClass());
+            } catch (NoSuchMethodException nsme) {
+                st = null;
+            }
+        } else {
+            st = null;
+        }
+        this.setType = st;
+    }
+
+
+    public final MediaObject getMediaInstance() {
+        try {
+            if (constructor == null) {
+                throw new RuntimeException("Not possible to make instances of " + this);
+            }
+            MediaObject o = (MediaObject) constructor.newInstance();
+            if (setType != null) {
+                setType.invoke(o, getSubType());
+            }
+            return o;
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            throw new RuntimeException("For " + this + " ", e);
+        }
+    }
 
 
 
@@ -620,8 +506,8 @@ public enum MediaType {
         return getMediaObjectClass().getSimpleName();
     }
 
-    public Class<? extends MediaObject> getMediaObjectClass() {
-        return Program.class;
+    public final Class<? extends MediaObject> getMediaObjectClass() {
+        return clazz;
     }
 
 
