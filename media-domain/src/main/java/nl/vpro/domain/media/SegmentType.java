@@ -11,7 +11,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "segmentTypeEnum")
 public enum SegmentType implements SubMediaType {
 
-    SEGMENT(MediaType.SEGMENT);
+    SEGMENT(MediaType.SEGMENT),
+    VISUALRADIO(MediaType.VISUALSEGMENT);
+
 
     public static String URN_PREFIX = "urn:vpro:media:segment:";
 

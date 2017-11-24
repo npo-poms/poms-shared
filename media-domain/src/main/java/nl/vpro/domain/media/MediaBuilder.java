@@ -969,6 +969,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             mediaObject().setMidRef(midRef);
             return (T) this;
         }
+
+        public T type(SegmentType segmentType) {
+            mediaObject().setType(segmentType);
+            return (T) this;
+        }
     }
 
     class SegmentBuilder extends AbstractSegmentBuilder<SegmentBuilder> {
