@@ -76,11 +76,19 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
     @XmlAttribute
     @Override
     public SegmentType getType() {
-        return builder.build().getType();
+        SegmentType type = builder.build().getType();
+        if (type == SegmentType.SEGMENT) {
+            return null;
+        }
+        return type;
+
     }
 
 
     public void setType(SegmentType type) {
+        if (type == null) {
+            type = SegmentType.SEGMENT;
+        }
         getBuilder().type(type);
     }
 
