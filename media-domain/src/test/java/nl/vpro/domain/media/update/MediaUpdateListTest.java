@@ -18,6 +18,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.AVType;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Program;
+import nl.vpro.domain.media.SegmentType;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
@@ -81,6 +82,7 @@ public class MediaUpdateListTest {
                 MediaBuilder.segment()
                     .broadcasters("VPRO")
                     .avType(AVType.VIDEO)
+                    .type(SegmentType.VISUALRADIOSEGMENT)
                     .titles(new Title("segmenttitel", OwnerType.BROADCASTER, TextualType.MAIN))
                     .start(Duration.ZERO)
                     .build()
@@ -101,7 +103,7 @@ public class MediaUpdateListTest {
             "        <scheduleEvents/>\n" +
             "        <images/>\n" +
             "        <segments>\n" +
-            "            <segment midRef=\"POMS_1234\" avType=\"VIDEO\" embeddable=\"true\">\n" +
+            "            <segment type=\"VISUALRADIOSEGMENT\" midRef=\"POMS_1234\" avType=\"VIDEO\" embeddable=\"true\">\n" +
             "                <broadcaster>VPRO</broadcaster>\n" +
             "                <title type=\"MAIN\">segmenttitel</title>\n" +
             "                <locations/>\n" +
