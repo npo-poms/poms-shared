@@ -2484,6 +2484,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     public abstract SubMediaType getType();
 
+
     /**
      * @since 3.2
      */
