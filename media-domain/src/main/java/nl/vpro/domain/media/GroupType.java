@@ -29,12 +29,6 @@ public enum GroupType implements SubMediaType {
     COLLECTION(MediaType.COLLECTION),
     PLAYLIST(MediaType.PLAYLIST),
     ALBUM(MediaType.ALBUM),
-    /*
-    SHOW(MediaType.SHOW),
-    COLLECTION(MediaType.COLLECTION),
-    COMPILATION(MediaType.COMPILATION),
-    CONCEPT(MediaType.CONCEPT),
-    */
     STRAND(MediaType.STRAND);
 
     public static String URN_PREFIX = "urn:vpro:media:group:";
@@ -50,6 +44,9 @@ public enum GroupType implements SubMediaType {
     GroupType(MediaType mediaType, boolean canContainEpisodes) {
         this.mediaType = mediaType;
         this.canContainEpisodes = canContainEpisodes;
+        if (mediaType == null) {
+            throw new IllegalStateException();
+        }
     }
 
     public String value() {
