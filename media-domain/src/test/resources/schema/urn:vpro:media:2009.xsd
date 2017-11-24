@@ -477,6 +477,7 @@
       <xs:enumeration value="SEGMENT"/>
       <xs:enumeration value="TRACK"/>
       <xs:enumeration value="VISUALRADIO"/>
+      <xs:enumeration value="VISUALRADIOSEGMENT"/>
       <xs:enumeration value="RECORDING"/>
       <xs:enumeration value="PROMO"/>
     </xs:restriction>
@@ -485,6 +486,7 @@
   <xs:simpleType name="segmentTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="SEGMENT"/>
+      <xs:enumeration value="VISUALRADIOSEGMENT"/>
     </xs:restriction>
   </xs:simpleType>
 
