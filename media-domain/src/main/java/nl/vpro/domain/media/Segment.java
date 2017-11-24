@@ -3,10 +3,7 @@ package nl.vpro.domain.media;
 import java.util.List;
 import java.util.SortedSet;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -51,6 +48,12 @@ public class Segment extends MediaObject implements Comparable<Segment> {
 
     @Transient
     protected String midRef;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @NotNull(message = "no segment type given")
+    protected SegmentType type = SegmentType.SEGMENT;
+
 
     public Segment() {
     }
@@ -289,14 +292,14 @@ public class Segment extends MediaObject implements Comparable<Segment> {
     @XmlAttribute(required = true)
     @Override
     public SegmentType getType() {
-        return SegmentType.SEGMENT;
+        return type;
     }
-
 
     public void setType(SegmentType segmentType) {
         if(segmentType == null) {
             throw new IllegalArgumentException("Setting null segment type is not allowed");
         }
+        this.type = segmentType;
     }
 
 
@@ -310,6 +313,13 @@ public class Segment extends MediaObject implements Comparable<Segment> {
 
     @Override
     public String toString() {
-        return String.format("Segment{%s, title=\"%2$s\"} for %3$s}", this.mid, this.getMainTitle(), parent);
+        String mainTitle;
+        try {
+            String mt = getMainTitle();
+            mainTitle = mt == null ? "null" : ('"' + mt + '"');
+        } catch (RuntimeException le) {
+            mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
+        }
+        return String.format("Segment{%1$smid=\"%2$s\", title=%3$s}", type == null ? "" : type + " ", this.getMid(), mainTitle);
     }
 }
