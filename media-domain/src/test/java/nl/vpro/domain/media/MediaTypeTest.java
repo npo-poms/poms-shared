@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -11,6 +13,7 @@ import org.junit.Test;
 import static nl.vpro.domain.media.MediaType.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 public class MediaTypeTest {
 
     @Test
@@ -77,32 +80,40 @@ public class MediaTypeTest {
     @Test
     public void noErrors() {
         for (MediaType type : MediaType.values()) {
-            System.out.println("\n\n" + type.name() + " " + type.toString());
-            System.out.println(Arrays.asList(type.allowedEpisodeOfTypes()));
-            System.out.println(Arrays.asList(type.allowedEpisodeTypes()));
-            System.out.println(Arrays.asList(type.allowedMemberOfTypes()));
-            System.out.println(Arrays.asList(type.allowedMemberTypes()));
-            System.out.println(type.getMediaClass());
+            log.info("\n\n" + type.name() + " " + type.toString());
+            log.info("{}", Arrays.asList(type.allowedEpisodeOfTypes()));
+            log.info("{}",Arrays.asList(type.allowedEpisodeTypes()));
+            log.info("{}",Arrays.asList(type.allowedMemberOfTypes()));
+            log.info("{}",Arrays.asList(type.allowedMemberTypes()));
+            log.info("{}",type.getMediaClass());
             try {
-                System.out.println(type.getMediaInstance());
+                log.info("{}",type.getMediaInstance());
             } catch (RuntimeException rte) {
                 assertThat(type).isEqualTo(MediaType.MEDIA);
             }
-            System.out.println(type.getMediaObjectClass());
-            System.out.println(type.getSubType());
-            System.out.println(type.getSubTypes());
-            System.out.println(type.hasEpisodeOf());
-            System.out.println(type.hasEpisodes());
-            System.out.println(type.hasMemberOf());
-            System.out.println(type.hasMembers());
-            System.out.println(type.hasOrdering());
-            System.out.println(type.hasSegments());
-            System.out.println(Arrays.asList(type.preferredEpisodeOfTypes()));
-            System.out.println(Arrays.asList(type.preferredEpisodeTypes()));
-            System.out.println(Arrays.asList(type.preferredMemberOfTypes()));
-            System.out.println(Arrays.asList(type.preferredMemberTypes()));
+            log.info("{}",type.getMediaObjectClass());
+            log.info("{}",type.getSubType());
+            log.info("{}",type.getSubTypes());
+            log.info("{}",type.hasEpisodeOf());
+            log.info("{}",type.hasEpisodes());
+            log.info("{}",type.hasMemberOf());
+            log.info("{}",type.hasMembers());
+            log.info("{}",type.hasOrdering());
+            log.info("{}",type.hasSegments());
+            log.info("{}",Arrays.asList(type.preferredEpisodeOfTypes()));
+            log.info("{}",Arrays.asList(type.preferredEpisodeTypes()));
+            log.info("{}",Arrays.asList(type.preferredMemberOfTypes()));
+            log.info("{}",Arrays.asList(type.preferredMemberTypes()));
             for (MediaType t : MediaType.values()) {
-                System.out.print(type.compareTo(t));
+                log.info("{}",type.compareTo(t));
+            }
+            try {
+                MediaObject instance = type.getMediaInstance();
+                log.info("{} -> {}", type, instance);
+            } catch (RuntimeException e) {
+                assertThat(e.getMessage()).startsWith("Not possible");
+                log.info("Ok, not posible to instantiate {}", type);
+
             }
         }
     }
