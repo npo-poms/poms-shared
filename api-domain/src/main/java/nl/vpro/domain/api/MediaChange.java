@@ -175,6 +175,11 @@ public class MediaChange extends Change<MediaObject> {
     }
 
 
+    @Override
+    public String toString() {
+        return super.toString() + ":" + revision + (mergedTo != null  ? (":merged to " + mergedTo) : "");
+    }
+
 
 
 }
