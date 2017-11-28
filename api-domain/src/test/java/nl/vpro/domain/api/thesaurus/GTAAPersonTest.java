@@ -5,7 +5,6 @@ import java.io.StringReader;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-import org.assertj.core.api.Java6Assertions;
 import org.junit.Test;
 
 import nl.vpro.domain.media.Schedule;
@@ -15,7 +14,7 @@ import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GTAAPersonTest {
     @Test
@@ -37,8 +36,8 @@ public class GTAAPersonTest {
         String example = "{ \"objectType\" : \"person\", \"familyName\":\"Puk\",\"givenName\":\"Pietje\",\"notes\":[null,\"vanuit POMS voor: POW_00700386\"]}\n" +
             "Name\n";
         GTAAPerson person = Jackson2Mapper.getLenientInstance().readValue(new StringReader(example), GTAAPerson.class);
-        Java6Assertions.assertThat(person.getFamilyName()).isEqualTo("Puk");
-        Java6Assertions.assertThat(person.getGivenName()).isEqualTo("Pietje");
+        assertThat(person.getFamilyName()).isEqualTo("Puk");
+        assertThat(person.getGivenName()).isEqualTo("Pietje");
     }
 
     @Test
