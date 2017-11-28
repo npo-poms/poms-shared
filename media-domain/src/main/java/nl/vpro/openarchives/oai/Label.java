@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * @author Roelof Jan Koekoek
  * @since 3.7
@@ -30,9 +32,6 @@ public class Label {
     @XmlValue()
     private String value;
 
-    Label() {
-    }
-
     public static Label forValue(String value) {
         if(value == null) {
             return null;
@@ -41,7 +40,13 @@ public class Label {
         return new Label(value);
     }
 
+    @JsonCreator
     public Label(String value) {
         this.value = value;
     }
+
+
+    Label() {
+    }
+
 }
