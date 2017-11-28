@@ -6,7 +6,10 @@ import lombok.Setter;
 
 import java.time.Instant;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -87,4 +90,11 @@ public abstract class Change<T>  {
         result = 31 * result + (object != null ? object.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return (isTail() ? "TAIL:" : "" ) + (publishDate + ":" + id + ":" + object + (isDeleted() ? ":DELETED" : ""));
+
+    }
+
 }
