@@ -1,18 +1,17 @@
 package nl.vpro.domain.api.media;
 
-import java.time.Instant;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import nl.vpro.domain.api.Change;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.util.FilteringIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.time.Instant;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 /**
  * @author Roelof Jan Koekoek
@@ -184,7 +183,7 @@ public class ChangeIterator implements Iterator<Change> {
             return true;
         }
         if (since == null) {
-            return input.getPublishDate().isAfter(sinceDate);
+            return input.getPublishDate() == null || input.getPublishDate().isAfter(sinceDate);
         } else {
             return input.getSequence() > since;
         }
@@ -218,7 +217,7 @@ public class ChangeIterator implements Iterator<Change> {
         if (since != null) {
             return input.getSequence() >= since;
         } else {
-            return input.getPublishDate().isAfter(sinceDate);
+            return input.getPublishDate() == null || input.getPublishDate().isAfter(sinceDate);
         }
     }
 
@@ -227,7 +226,7 @@ public class ChangeIterator implements Iterator<Change> {
             return false;
         }
         if (since == null) {
-            return input.getPublishDate().isBefore(sinceDate);
+            return input.getPublishDate() == null || input.getPublishDate().isBefore(sinceDate);
         } else {
             return input.getSequence() < since;
         }
