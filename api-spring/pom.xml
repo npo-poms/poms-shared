@@ -6,12 +6,12 @@
   <parent>
     <groupId>nl.publiekeomroep</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.5.7</version>
+    <version>5.5.8-SNAPSHOT</version>
   </parent>
 
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-spring</artifactId>
-  <version>5.5.7</version>
+  <version>5.5.8-SNAPSHOT</version>
 
   <dependencies>
     <dependency>
