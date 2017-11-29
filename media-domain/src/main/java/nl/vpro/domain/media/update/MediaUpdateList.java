@@ -39,15 +39,19 @@ public class MediaUpdateList<T> implements Iterable<T>, VersionSpecific {
     protected List<T> list;
 
     @XmlAttribute
+    @Getter
     protected long offset;
 
     @XmlAttribute
+    @Getter
     protected long totalCount;
 
     @XmlAttribute
+    @Getter
     protected Integer max;
 
     @XmlAttribute
+    @Getter
     protected String order;
 
 
