@@ -297,7 +297,7 @@ public class Segment extends MediaObject implements Comparable<Segment> {
 
     public void setType(SegmentType segmentType) {
         if(segmentType == null) {
-            throw new IllegalArgumentException("Setting null segment type is not allowed");
+            segmentType = SegmentType.SEGMENT;
         }
         this.type = segmentType;
     }
