@@ -442,6 +442,13 @@
       <xs:element type="aspectRatioEnum" name="aspectRatio" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute type="xs:short" name="height"/>
+    <xs:attribute type="xs:short" name="heigth">
+      <xs:annotation>
+      <xs:documentation>
+        This obviously is a typo.
+      </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
     <xs:attribute type="xs:short" name="width"/>
   </xs:complexType>
 
