@@ -83,9 +83,9 @@ public interface MediaRestService {
 
     @GET
     //@Path("/{mid : (?:(changes|multiple|redirects|iterate).+|(?!(changes|multiple|redirects|iterate)).*)}")
-    @Path("/{mid}")
+    @Path("/{mid:.*}")
     MediaObject load(
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(PROFILE) String profileName
     );
@@ -114,7 +114,7 @@ public interface MediaRestService {
     @GET
     @Path("/{mid}/members")
     MediaResult listMembers(
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
@@ -126,7 +126,7 @@ public interface MediaRestService {
     @Path("/{mid}/members")
     MediaSearchResult findMembers(
         @Valid MediaForm form,
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
@@ -139,7 +139,7 @@ public interface MediaRestService {
     @GET
     @Path("/{mid}/episodes")
     ProgramResult listEpisodes(
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
@@ -154,7 +154,7 @@ public interface MediaRestService {
     @Path("/{mid}/episodes")
     ProgramSearchResult findEpisodes(
         @Valid MediaForm form,
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
@@ -164,7 +164,7 @@ public interface MediaRestService {
     @GET
     @Path("/{mid}/descendants")
     MediaResult listDescendants(
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
@@ -176,7 +176,7 @@ public interface MediaRestService {
     @Path("/{mid}/descendants")
     MediaSearchResult findDescendants(
         @Valid MediaForm form,
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
@@ -186,7 +186,7 @@ public interface MediaRestService {
     @GET
     @Path("/{mid}/related")
     MediaResult listRelated(
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
     );
@@ -195,7 +195,7 @@ public interface MediaRestService {
     @Path("/{mid}/related")
     MediaSearchResult findRelated(
         @Valid MediaForm form,
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
