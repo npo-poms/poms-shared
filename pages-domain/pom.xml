@@ -10,7 +10,6 @@
 
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-domain</artifactId>
-
   <name>pages-domain</name>
 
   <dependencies>
