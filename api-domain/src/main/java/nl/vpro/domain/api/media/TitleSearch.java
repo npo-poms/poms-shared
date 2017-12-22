@@ -73,7 +73,7 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title>  {
 
     @Override
     public String toString() {
-        return "TitleMatcher{ownertype=" + owner + ", textualtype=" + type + ", value=" + value + "}";
+        return "TitleSearch{ownertype=" + owner + ", textualtype=" + type + ", value=" + value + "}";
     }
 
 

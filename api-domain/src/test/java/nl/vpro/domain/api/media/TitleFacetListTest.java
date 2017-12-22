@@ -1,10 +1,14 @@
 package nl.vpro.domain.api.media;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import org.junit.Test;
 
-import nl.vpro.domain.api.*;
+import nl.vpro.domain.api.ExtendedMatchType;
+import nl.vpro.domain.api.FacetOrder;
+import nl.vpro.domain.api.Match;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -45,8 +49,7 @@ public class TitleFacetListTest {
         list.setSort(FacetOrder.COUNT_DESC);
     }
 
-
-       @Test
+    @Test
     public void testJsonBinding() throws Exception {
 
         list = Jackson2TestUtil.roundTripAndSimilar(list,
@@ -90,7 +93,6 @@ public class TitleFacetListTest {
         assertThat(backwards.getMax()).isEqualTo(11);
     }
 
-
     @Test
     public void testXmlBinding() throws Exception {
 
@@ -110,7 +112,6 @@ public class TitleFacetListTest {
 
     }
 
-
     @Test
     public void testSubSearch() throws Exception {
         String example = "{\n" +
@@ -118,6 +119,26 @@ public class TitleFacetListTest {
             "}";
         TitleSearch subSearch = TitleSearch.builder().value("a*").build();
         TitleSearch search = Jackson2TestUtil.roundTripAndSimilarAndEquals(subSearch, example);
+    }
+
+    @Test
+    public void testDeserializeJson() throws IOException {
+        String example = " [\n" +
+            "            {\n" +
+            "                \"name\": \"test\",\n" +
+            "                \"subSearch\": {\n" +
+            "                    \"type\": \"MAIN\",\n" +
+            "                    \"value\": \"x*\",\n" +
+            "                    \"matchType\": \"WILDCARD\"\n" +
+            "                }\n" +
+            "            }\n" +
+            "        ]";
+
+        TitleFacetList actual = Jackson2Mapper.getInstance().readValue(example, TitleFacetList.class);
+
+        assertThat(actual.getFacets().get(0).getSubSearch()).isNotNull();
+        assertThat(actual.getSubSearch()).isNull();
+
     }
 
 
