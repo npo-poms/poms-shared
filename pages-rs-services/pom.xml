@@ -10,7 +10,6 @@
 
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-rs-services</artifactId>
-  <version>5.5.8-SNAPSHOT</version>
   <name>pages-rs-services</name>
 
   <dependencies>

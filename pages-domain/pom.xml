@@ -10,8 +10,6 @@
 
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-domain</artifactId>
-  <version>5.5.8-SNAPSHOT</version>
-
   <name>pages-domain</name>
 
   <dependencies>

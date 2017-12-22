@@ -8,7 +8,6 @@
   </parent>
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-organizations</artifactId>
-  <version>5.5.8-SNAPSHOT</version>
   <name>media-organizations</name>
   <description>Provides access to the POMS organization interfaces</description>
 

@@ -10,8 +10,6 @@
 
   <groupId>nl.vpro.image</groupId>
   <artifactId>image-domain</artifactId>
-  <version>5.5.8-SNAPSHOT</version>
-
   <name>image-domain</name>
   <description>Interfaces and domain classes without an interface.</description>
 

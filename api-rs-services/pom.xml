@@ -10,7 +10,6 @@
 
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-rs-services</artifactId>
-  <version>5.5.8-SNAPSHOT</version>
   <name>api-rs-services</name>
 
   <dependencies>

@@ -10,8 +10,6 @@
 
   <groupId>nl.vpro.user</groupId>
   <artifactId>user-test</artifactId>
-  <version>5.5.8-SNAPSHOT</version>
-
   <dependencies>
     <dependency>
       <groupId>nl.vpro.user</groupId>

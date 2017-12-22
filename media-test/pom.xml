@@ -10,8 +10,6 @@
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-test</artifactId>
-  <version>5.5.8-SNAPSHOT</version>
-
   <name>media-test</name>
   <description>Shared test utilities and dependencies.</description>
 
