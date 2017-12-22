@@ -10,7 +10,6 @@
 
   <groupId>nl.vpro.user</groupId>
   <artifactId>user-test</artifactId>
-
   <dependencies>
     <dependency>
       <groupId>nl.vpro.user</groupId>
