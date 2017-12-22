@@ -29,6 +29,11 @@ public class Changes<T> implements AutoCloseable, Iterable<Change<T>> {
     @Override
     public Iterator<Change<T>> iterator() {
         return (Iterator<Change<T>>) iterator;
+    }
+
+    @Override
+    public String toString() {
+        return "Changes until " + until + ", count:" + count + ", iterator: " + iterator;
 
     }
 }
