@@ -1,7 +1,5 @@
 package nl.vpro.domain.page.update;
 
-import lombok.Builder;
-
 import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
@@ -22,9 +20,17 @@ public class PageUpdateChange extends Change<PageUpdate> {
         super();
     }
 
-    @Builder
+    @lombok.Builder(builderClassName = "Builder")
     public PageUpdateChange(Instant publishDate, String id, Boolean deleted, Boolean tail, PageUpdate object) {
         super(publishDate, id, deleted, tail, object);
+    }
+
+
+    public static PageUpdateChange tail(Instant publishDate) {
+        return PageUpdateChange.builder()
+            .tail(true)
+            .publishDate(publishDate)
+            .build();
     }
 
     @Override
