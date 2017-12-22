@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.page.validation;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -15,6 +17,7 @@ import nl.vpro.domain.user.ServiceLocator;
  * @author rico
  * @since 3.0
  */
+@Slf4j
 public class BroadcasterValidator implements ConstraintValidator<ValidBroadcaster, Iterable<String>> {
     @Override
     public void initialize(ValidBroadcaster constraintAnnotation) {
@@ -26,11 +29,16 @@ public class BroadcasterValidator implements ConstraintValidator<ValidBroadcaste
         BroadcasterService broadcasterService = ServiceLocator.getBroadcasterService();
 
         if (values != null && broadcasterService != null) {
-            for(String value : values) {
-                if (broadcasterService.find(value) == null) {
-                    return false;
+            if (broadcasterService.findAll().size() > 0) {
+                for (String value : values) {
+                    if (broadcasterService.find(value) == null) {
+                        return false;
+                    }
                 }
+            } else {
+                log.warn("No values found in {}", broadcasterService);
             }
+
         }
         return true;
     }

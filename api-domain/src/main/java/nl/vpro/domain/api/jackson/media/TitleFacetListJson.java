@@ -60,12 +60,15 @@ public class TitleFacetListJson {
                 List<TitleFacet> list = new ArrayList<>();
                 jp.clearCurrentToken();
                 Iterator<JsonNode> i = jp.readValuesAs(JsonNode.class);
-                Integer max = null;
                 while(i.hasNext()) {
                     JsonNode n = i.next();
-                    if (! readBackwards(result, jp, n)) {
+                    JsonNode max = n.get("max");
+                    if (max != null) {
+                        readBackwards(result, jp, n);
+                    } else {
                         list.add(jp.getCodec().readValue(n.traverse(jp.getCodec()), TitleFacet.class));
                     }
+
                 }
                 if (!list.isEmpty()) {
                     result.setFacets(list);
