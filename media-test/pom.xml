@@ -10,7 +10,6 @@
 
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-test</artifactId>
-
   <name>media-test</name>
   <description>Shared test utilities and dependencies.</description>
 
