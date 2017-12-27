@@ -6,6 +6,7 @@ package nl.vpro.domain.page.update;
 
 import java.time.Instant;
 import java.util.concurrent.Future;
+import java.util.function.Function;
 
 import nl.vpro.domain.Changes;
 
@@ -23,7 +24,7 @@ public interface PageUpdateRepository extends SectionRepository {
 
     Future<?> delete(String pageRef);
 
-    Future<?> deleteAll(String url, int max);
+    Future<?> deleteAll(String url, int max, Function<PageUpdate, Boolean> permissionEvaluator);
 
     Changes<PageUpdate> getChanges(Instant since);
 
