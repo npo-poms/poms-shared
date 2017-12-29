@@ -1,5 +1,7 @@
 package nl.vpro.nicam;
 
+import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import nl.vpro.domain.media.ContentRating;
  * @author Michiel Meeuwissen
  * @since 4.2
  */
+@Data
 public class Kijkwijzer implements NicamRated {
 
     private AgeRating ageRating;
@@ -78,21 +81,61 @@ public class Kijkwijzer implements NicamRated {
         this.contentRatings = contentRatings;
     }
 
-    @Override
-    public AgeRating getAgeRating() {
-        return ageRating;
+    public String toDonnaCode() {
+        StringBuilder result = new StringBuilder();
+
+        if (ageRating != null) {
+            switch(ageRating) {
+                case ALL:
+                    result.append('1');
+                    break;
+                case _6:
+                    result.append('2');
+                    break;
+                case _9:
+                    result.append('5');
+                    break;
+                case _12:
+                    result.append('3');
+                    break;
+                case _16:
+                    result.append('4');
+                    break;
+
+            }
+        }
+
+        for (ContentRating rating : contentRatings) {
+            result.append(rating.toChar());
+        }
+
+        return result.toString();
     }
 
-    public void setAgeRating(AgeRating ageRating) {
-        this.ageRating = ageRating;
-    }
+    public String toCode() {
+        StringBuilder result = new StringBuilder();
 
-    @Override
-    public List<ContentRating> getContentRatings() {
-        return contentRatings;
-    }
+        if (ageRating != null) {
+            switch (ageRating) {
+                case _6:
+                    result.append('2');
+                    break;
+                case _9:
+                    result.append('3');
+                    break;
+                case _12:
+                    result.append('4');
+                    break;
+                case _16:
+                    result.append('5');
+                    break;
+            }
+        }
 
-    public void setContentRatings(List<ContentRating> contentRatings) {
-        this.contentRatings = contentRatings;
+        for (ContentRating rating : contentRatings) {
+            result.append(rating.toChar());
+        }
+
+        return result.toString();
     }
 }
