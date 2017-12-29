@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.page.validation;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.Before;
@@ -25,11 +26,11 @@ public class BroadcasterValidatorTest {
     BroadcasterService broadcasterService = mock(BroadcasterService.class);
 
 
-
     private BroadcasterValidator validator = new BroadcasterValidator();
 
     @Before
     public void init() {
+        when(broadcasterService.findAll()).thenReturn(Arrays.asList(Broadcaster.of("VPRO"), Broadcaster.of("EO")));
         Broadcaster vpro = new Broadcaster("VPRO", "VPRO");
         when(broadcasterService.find("VPRO")).thenReturn(vpro);
         validator.initialize(null);
