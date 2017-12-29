@@ -25,7 +25,12 @@ public enum AgeRating implements Displayable {
     @XmlEnumValue("16")
     _16("16"),
 
-    ALL("Alle leeftijden");
+    ALL("Alle leeftijden") {
+        @Override
+        public String getDescription() {
+            return getDisplayName();
+        }
+    };
 
     private String displayName;
 
@@ -62,5 +67,9 @@ public enum AgeRating implements Displayable {
     @Override
     public String getDisplayName() {
         return displayName;
+    }
+
+    public String getDescription() {
+        return "Vanaf " + displayName + " jaar";
     }
 }

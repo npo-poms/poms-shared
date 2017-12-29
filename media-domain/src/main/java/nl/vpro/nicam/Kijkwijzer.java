@@ -9,6 +9,7 @@ import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.ContentRating;
 
 /**
+ * http://www.kijkwijzer.nl/about-kijkwijzer
  * @author Michiel Meeuwissen
  * @since 4.2
  */
