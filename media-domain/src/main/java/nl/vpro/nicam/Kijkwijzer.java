@@ -88,26 +88,9 @@ public class Kijkwijzer implements NicamRated {
 
     public String toDonnaCode() {
         StringBuilder result = new StringBuilder();
-
-        if (ageRating != null) {
-            switch(ageRating) {
-                case ALL:
-                    result.append('1');
-                    break;
-                case _6:
-                    result.append('2');
-                    break;
-                case _9:
-                    result.append('5');
-                    break;
-                case _12:
-                    result.append('3');
-                    break;
-                case _16:
-                    result.append('4');
-                    break;
-
-            }
+        Character ageRatingCode = toDonnaCode(ageRating);
+        if (ageRatingCode != null) {
+            result.append(ageRatingCode);
         }
 
         for (ContentRating rating : contentRatings) {
@@ -119,22 +102,9 @@ public class Kijkwijzer implements NicamRated {
 
     public String toCode() {
         StringBuilder result = new StringBuilder();
-
-        if (ageRating != null) {
-            switch (ageRating) {
-                case _6:
-                    result.append('2');
-                    break;
-                case _9:
-                    result.append('3');
-                    break;
-                case _12:
-                    result.append('4');
-                    break;
-                case _16:
-                    result.append('5');
-                    break;
-            }
+        Character ageRatingCode = toCode(ageRating);
+        if (ageRatingCode != null) {
+            result.append(ageRatingCode);
         }
 
         for (ContentRating rating : contentRatings) {
@@ -142,5 +112,40 @@ public class Kijkwijzer implements NicamRated {
         }
 
         return result.toString();
+    }
+
+    public static Character toCode(AgeRating ageRating) {
+        if (ageRating == null) {
+            return null;
+        }
+        switch (ageRating) {
+
+            case _6:
+                return '2';
+            case _9:
+                return '3';
+            case _12:
+                return '4';
+            case _16:
+                return '5';
+            default:
+            case ALL:
+                return null;
+        }
+    }
+    public static Character toDonnaCode(AgeRating ageRating) {
+        if (ageRating == null) {
+            return null;
+        }
+        switch (ageRating) {
+
+            case _6: return '2';
+            case _9: return '5';
+            case _12: return '3';
+            case _16: return '4';
+            default:
+            case ALL:
+                return '1';
+        }
     }
 }
