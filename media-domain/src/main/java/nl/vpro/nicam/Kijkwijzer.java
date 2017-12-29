@@ -81,6 +81,11 @@ public class Kijkwijzer implements NicamRated {
         this.contentRatings = contentRatings;
     }
 
+    public Kijkwijzer() {
+        this.ageRating = null;
+        this.contentRatings = new ArrayList<>();
+    }
+
     public String toDonnaCode() {
         StringBuilder result = new StringBuilder();
 
