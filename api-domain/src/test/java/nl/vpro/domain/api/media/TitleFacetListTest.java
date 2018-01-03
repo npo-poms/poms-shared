@@ -8,6 +8,7 @@ import org.junit.Test;
 import nl.vpro.domain.api.ExtendedMatchType;
 import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.Match;
+import nl.vpro.domain.api.page.PageForm;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -16,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class TitleFacetListTest {
-
     TitleFacetList list;
 
     {
@@ -52,7 +52,7 @@ public class TitleFacetListTest {
     @Test
     public void testJsonBinding() throws Exception {
 
-        list = Jackson2TestUtil.roundTripAndSimilar(list,
+        TitleFacetList rounded = Jackson2TestUtil.roundTripAndSimilar(list,
             "[ {\n" +
                 "  \"max\" : 11,\n" +
                 "  \"sort\" : \"COUNT_DESC\"\n" +
@@ -72,10 +72,85 @@ public class TitleFacetListTest {
                 "} ]");
 
 
-        assertThat(list.facets).hasSize(2);
-        assertThat(list.getMax()).isEqualTo(11);
-        assertTrue(list.facets.get(0).getSubSearch() != null);
+        assertThat(rounded.facets).hasSize(2);
+        assertThat(rounded.getMax()).isEqualTo(11);
+        assertTrue(rounded.facets.get(0).getSubSearch() != null);
     }
+
+
+    @Test
+    public void testJsonBindingInForm() throws IOException {
+        PageForm form = Jackson2Mapper.getLenientInstance().readValue("{\n" +
+            "  \"highlight\" : true,\n" +
+            "  \"searches\" : {\n" +
+            "    \"text\" : \"woord\",\n" +
+            "    \"sortDates\" : [ ]\n" +
+            "  },\n" +
+            "  \"mediaForm\" : {\n" +
+            "    \"highlight\" : false,\n" +
+            "    \"facets\" : {\n" +
+            "      \"avTypes\" : {\n" +
+            "        \"sort\" : \"COUNT\"\n" +
+            "      },\n" +
+            "      \"durations\" : [ {\n" +
+            "        \"name\" : \"0-5m\",\n" +
+            "        \"begin\" : 1,\n" +
+            "        \"end\" : 300000,\n" +
+            "        \"inclusiveEnd\" : true\n" +
+            "      }, {\n" +
+            "        \"name\" : \"5-10m\",\n" +
+            "        \"begin\" : 300001,\n" +
+            "        \"end\" : 600000,\n" +
+            "        \"inclusiveEnd\" : true\n" +
+            "      }, {\n" +
+            "        \"name\" : \"10m-30m\",\n" +
+            "        \"begin\" : 600001,\n" +
+            "        \"end\" : 1800000,\n" +
+            "        \"inclusiveEnd\" : true\n" +
+            "      }, {\n" +
+            "        \"name\" : \"30m-60m\",\n" +
+            "        \"begin\" : 1800001,\n" +
+            "        \"end\" : 3600000,\n" +
+            "        \"inclusiveEnd\" : true\n" +
+            "      }, {\n" +
+            "        \"name\" : \"60m-∞\",\n" +
+            "        \"begin\" : 3600001,\n" +
+            "        \"end\" : 14400000,\n" +
+            "        \"inclusiveEnd\" : true\n" +
+            "      } ],\n" +
+            "      \"descendantOf\" : {\n" +
+            "        \"sort\" : \"COUNT\",\n" +
+            "        \"subSearch\" : {\n" +
+            "          \"types\" : [ \"SERIES\" ],\n" +
+            "          \"match\" : \"MUST\"\n" +
+            "        }\n" +
+            "      },\n" +
+            "      \"tags\" : {\n" +
+            "        \"sort\" : \"COUNT\",\n" +
+            "        \"dynamic\" : true\n" +
+            "      },\n" +
+            "      \"titles\" : {\n" +
+            "        \"sort\" : \"COUNT\"\n" +
+            "      },\n" +
+            "      \"types\" : {\n" +
+            "        \"sort\" : \"COUNT\"\n" +
+            "      }\n" +
+            "    }\n" +
+            "  },\n" +
+            "  \"facets\" : {\n" +
+            "    \"sortDates\" : [ \"YEAR\" ],\n" +
+            "    \"broadcasters\" : {\n" +
+            "      \"sort\" : \"COUNT\"\n" +
+            "    },\n" +
+            "    \"genres\" : {\n" +
+            "      \"sort\" : \"COUNT\"\n" +
+            "    }\n" +
+            "  }\n" +
+            "}\n", PageForm.class);
+        TitleFacetList list = form.getMediaForm().getFacets().getTitles();
+        assertThat(list.getFacets()).isNull();
+    }
+
 
     @Test
     public void testJsonBindingBackwards() throws Exception {
@@ -96,7 +171,7 @@ public class TitleFacetListTest {
     @Test
     public void testXmlBinding() throws Exception {
 
-        list = JAXBTestUtil.roundTripAndSimilar(list,
+        TitleFacetList rounded = JAXBTestUtil.roundTripAndSimilar(list,
             "<local:titleFacetList sort=\"COUNT_DESC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
                 "    <api:max>11</api:max>\n" +
                 "    <api:title name=\"titlesWithA\">\n" +
@@ -106,9 +181,9 @@ public class TitleFacetListTest {
                 "        <api:subSearch matchType=\"WILDCARD\">b*</api:subSearch>\n" +
                 "    </api:title>\n" +
                 "</local:titleFacetList>");
-        assertThat(list.facets).hasSize(2);
-        assertThat(list.facets.get(0).getSubSearch()).isNotNull();
-        assertThat(list.facets.get(1).getSubSearch()).isNotNull();
+        assertThat(rounded.facets).hasSize(2);
+        assertThat(rounded.facets.get(0).getSubSearch()).isNotNull();
+        assertThat(rounded.facets.get(1).getSubSearch()).isNotNull();
 
     }
 
