@@ -57,5 +57,10 @@ public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
     }
 
 
+    @Override
+    public String toString() {
+        return name + ":" + subSearch;
+
+    }
 
 }
