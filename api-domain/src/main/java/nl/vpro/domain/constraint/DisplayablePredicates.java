@@ -52,7 +52,7 @@ class DisplayablePredicates {
             applies &= t.applies();
         }
         if (applies) {
-            return new AndPredicateTestResult<>(constraint, value, true, Collections.emptyList());
+            return new AndPredicateTestResult<>(constraint, value, true, results);
         } else {
             return new AndPredicateTestResult<>(constraint, value, false, results);
         }
