@@ -57,4 +57,9 @@ public class Not extends AbstractNot<MediaObject> {
     public void setConstraint(Constraint<MediaObject> constraint) {
         this.constraint = constraint;
     }
+
+    @Override
+    public String toString() {
+        return "NOT (" + constraint + ")";
+    }
 }
