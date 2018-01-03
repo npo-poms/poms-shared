@@ -1,5 +1,7 @@
 package nl.vpro.domain.api.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -16,6 +18,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
+@Slf4j
 public class TitleFacetListTest {
     TitleFacetList list;
 
@@ -149,7 +152,7 @@ public class TitleFacetListTest {
             "}\n", PageForm.class);
         TitleFacetList list = form.getMediaForm().getFacets().getTitles();
         assertThat(list.getFacets()).isNull();
-    }
+        }
 
 
     @Test
@@ -166,6 +169,13 @@ public class TitleFacetListTest {
 
         assertThat(backwards.facets).isNull();
         assertThat(backwards.getMax()).isEqualTo(11);
+
+        TitleFacetList rounded = JAXBTestUtil.roundTripAndSimilar(backwards, "<local:titleFacetList sort=\"COUNT_DESC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+            "    <api:max>11</api:max>\n" +
+            "</local:titleFacetList>");
+
+        assertThat(rounded.getFacets()).isNull();
+
     }
 
     @Test
