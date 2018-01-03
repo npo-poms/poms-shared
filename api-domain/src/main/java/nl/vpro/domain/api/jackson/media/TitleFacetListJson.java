@@ -9,6 +9,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import nl.vpro.domain.api.media.MediaSearch;
 import nl.vpro.domain.api.media.TitleFacet;
@@ -17,7 +18,7 @@ import nl.vpro.domain.api.media.TitleSearch;
 
 /**
  * @author Michiel Meeuwissen
- * @since 3.0
+ * @since 5.5
  */
 public class TitleFacetListJson {
 
@@ -26,17 +27,11 @@ public class TitleFacetListJson {
         public void serialize(TitleFacetList facets, JsonGenerator jgen, SerializerProvider provider) throws IOException {
             if (facets.getFacets() == null)  {
                 // backwards compatible
-                jgen.writeStartObject();
-                jgen.writeObjectField("max", facets.getMax());
-                jgen.writeObjectField("sort", facets.getSort());
-                jgen.writeEndObject();
+                writeBackwards(jgen, facets);
             } else {
                 jgen.writeStartArray();
                 if (facets.getMax() != null) {
-                    jgen.writeStartObject();
-                    jgen.writeObjectField("max", facets.getMax());
-                    jgen.writeObjectField("sort", facets.getSort());
-                    jgen.writeEndObject();
+                    writeBackwards(jgen, facets);
                 }
                 for (TitleFacet facet : facets.getFacets()) {
                     jgen.writeObject(facet);
@@ -62,8 +57,7 @@ public class TitleFacetListJson {
                 Iterator<JsonNode> i = jp.readValuesAs(JsonNode.class);
                 while(i.hasNext()) {
                     JsonNode n = i.next();
-                    JsonNode max = n.get("max");
-                    if (max != null) {
+                    if (isBackwards(n)) {
                         readBackwards(result, jp, n);
                     } else {
                         list.add(jp.getCodec().readValue(n.traverse(jp.getCodec()), TitleFacet.class));
@@ -78,6 +72,29 @@ public class TitleFacetListJson {
             }
             return result;
         }
+    }
+
+    protected static void writeBackwards(JsonGenerator jgen, TitleFacetList facets) throws IOException {
+        jgen.writeStartObject();
+        jgen.writeObjectField("max", facets.getMax());
+        jgen.writeObjectField("sort", facets.getSort());
+        jgen.writeEndObject();
+    }
+
+    protected static boolean isBackwards(JsonNode n) {
+        if (n.isObject()) {
+            ObjectNode node = (ObjectNode) n;
+            JsonNode max = node.get("max");
+            JsonNode sort = node.get("sort");
+            if (max != null || sort != null) {
+                return true;
+            }
+            if (node.size() == 0) {
+                return true;
+            }
+
+        }
+        return false;
     }
 
     protected static boolean readBackwards(TitleFacetList result, JsonParser jp, JsonNode jsonNode) throws IOException {
