@@ -4,12 +4,13 @@
  */
 package nl.vpro.domain.constraint.media;
 
-import nl.vpro.domain.media.Channel;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import java.util.Locale;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Locale;
+import nl.vpro.domain.media.Channel;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -135,4 +136,7 @@ public class OrTest {
         );
         assertThat(constraint.test(null)).isTrue();
     }
+
+
+
 }
