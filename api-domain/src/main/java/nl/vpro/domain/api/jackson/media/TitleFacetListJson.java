@@ -11,6 +11,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.media.MediaSearch;
 import nl.vpro.domain.api.media.TitleFacet;
 import nl.vpro.domain.api.media.TitleFacetList;
@@ -112,6 +113,11 @@ public class TitleFacetListJson {
         JsonNode max = jsonNode.get("max");
         if (max != null) {
             result.setMax(max.intValue());
+            readbackwards = true;
+        }
+        JsonNode sort  = jsonNode.get("sort");
+        if (sort != null) {
+            result.setSort(FacetOrder.backwardCompatibleValueOf(sort.textValue()));
             readbackwards = true;
         }
         return readbackwards;
