@@ -38,7 +38,6 @@ import static nl.vpro.domain.api.ParsedInterval.TEMPORAL_AMOUNT_INTERVAL;
 @EqualsAndHashCode
 public class DateRangeInterval implements RangeFacet<Instant> {
 
-
     public static final String TIMEZONE = "CET";
 
     public static final ZoneId ZONE = ZoneId.of(TIMEZONE);
