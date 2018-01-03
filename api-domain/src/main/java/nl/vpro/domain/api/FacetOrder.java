@@ -99,6 +99,13 @@ public enum FacetOrder {
     }
 
 
+    public static FacetOrder backwardCompatibleValueOf(String v) {
+        if (v == null) {
+            return null;
+        }
+        return backwardCompatibleValueOf(FacetOrder.FacetOrderBackwards.valueOf(v));
+    }
+
 }
 
 // not needed, jackson seems to use the XmlAdapter
