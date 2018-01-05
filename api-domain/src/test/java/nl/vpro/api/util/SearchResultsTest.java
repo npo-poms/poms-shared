@@ -3,7 +3,6 @@ package nl.vpro.api.util;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.xml.bind.JAXB;
@@ -29,7 +28,7 @@ public class SearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedTermFacet() throws Exception {
+    public void testSetSelectedTermFacet() {
 
         TextMatcherList searches = new TextMatcherList();
         searches.asList().add(new TextMatcher("ID"));
@@ -55,15 +54,14 @@ public class SearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedDateFacet() throws Exception {
+    public void testSetSelectedDateFacet() {
         DateRangeMatcherList searches = new DateRangeMatcherList();
-        searches.asList().add(new DateRangeMatcher(new Date(0), new Date(100000)));
-        searches.asList().add(new DateRangeMatcher(null, new Date(1000000)));
+        searches.asList().add(new DateRangeMatcher(Instant.ofEpochMilli(0), Instant.ofEpochMilli(100000)));
+        searches.asList().add(new DateRangeMatcher(null, Instant.ofEpochMilli(1000000)));
 
         List<DateFacetResultItem> facetResultItems = new ArrayList<>();
-        facetResultItems.add(new DateFacetResultItem("range1", Instant.EPOCH, Instant.ofEpochMilli(100000), 100));
-        facetResultItems.add(new DateFacetResultItem("range2", Instant.ofEpochMilli(100000), Instant.ofEpochMilli(2000000), 50));
-
+        facetResultItems.add(DateFacetResultItem.builder().value("range1").begin(Instant.EPOCH).end(Instant.ofEpochMilli(100000)).count(100).build());
+        facetResultItems.add(DateFacetResultItem.builder().value("range2").begin(Instant.ofEpochMilli(100000)).end(Instant.ofEpochMilli(2000000)).count(50).build());
         List<DateFacetResultItem> selected = new ArrayList<>();
 
         SearchResults.setSelected(searches, new DateRangeFacets(), facetResultItems, selected, DateFacetResultItem::new);
@@ -82,7 +80,7 @@ public class SearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedRelationFacet() throws Exception {
+    public void testSetSelectedRelationFacet() {
 
         RelationSearchList searches = new RelationSearchList();
         RelationSearch search1 = new RelationSearch();
@@ -156,7 +154,7 @@ public class SearchResultsTest {
     }
 
     @Test
-    public void unmarshalXml() throws IOException {
+    public void unmarshalXml() {
         MediaSearchResult result = JAXB.unmarshal(getClass().getResource("/related.xml"), MediaSearchResult.class);
         MediaObject o = result.asList().get(0);
         assertThat(o.getDescendantOf().iterator().next().getMidRef()).isEqualTo("VPRO_1154287");
