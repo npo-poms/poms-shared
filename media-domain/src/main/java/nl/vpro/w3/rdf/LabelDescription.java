@@ -1,14 +1,15 @@
 package nl.vpro.w3.rdf;
 
 import lombok.*;
-import nl.vpro.domain.media.gtaa.AbstractGTAAObject;
-import nl.vpro.openarchives.oai.Label;
-import nl.vpro.openarchives.oai.Namespaces;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import nl.vpro.domain.media.gtaa.AbstractGTAAObject;
+import nl.vpro.openarchives.oai.Label;
+import nl.vpro.openarchives.oai.Namespaces;
 
 /**
  * @author Michiel Meeuwissen
@@ -24,6 +25,7 @@ import javax.xml.bind.annotation.XmlType;
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
+@EqualsAndHashCode(callSuper = true)
 public class LabelDescription extends AbstractGTAAObject {
 
     public LabelDescription() {

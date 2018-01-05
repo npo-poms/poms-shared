@@ -3,12 +3,10 @@ package nl.vpro.domain.api;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.time.Instant;
-import java.util.Date;
 
 import javax.xml.bind.JAXB;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
@@ -96,8 +94,8 @@ public class ApiScheduleEventTest {
 
     @Test
     //@Ignore("Fails for https://java.net/jira/browse/JAXB-1069")
-    public void xml() throws IOException, SAXException {
-        Program program = MediaTestDataBuilder.program().mid("VPROWON_12345").withScheduleEvents().creationDate(new Date(1409733642642L)).build();
+    public void xml() {
+        Program program = MediaTestDataBuilder.program().mid("VPROWON_12345").withScheduleEvents().creationDate(Instant.ofEpochMilli(1409733642642L)).build();
         ApiScheduleEvent scheduleEvent = new ApiScheduleEvent(program.getScheduleEvents().first(), program);
         StringWriter writer = new StringWriter();
         JAXB.marshal(scheduleEvent, writer);

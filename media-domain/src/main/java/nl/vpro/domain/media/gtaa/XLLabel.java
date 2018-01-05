@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.gtaa;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,6 +26,7 @@ import static nl.vpro.openarchives.oai.Namespaces.SKOS_XL_LABEL;
 @XmlAccessorType(XmlAccessType.NONE)
 @Slf4j
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class XLLabel extends AbstractGTAAObject {
 
     @XmlElement(name ="Description", namespace = Namespaces.RDF)
