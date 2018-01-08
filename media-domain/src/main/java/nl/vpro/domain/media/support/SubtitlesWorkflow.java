@@ -43,7 +43,7 @@ public enum SubtitlesWorkflow {
 
 
     /**
-     * All subtitles for this object are revoked
+     * All subtitles for this object are revoked, but the mediaobject itself needs publishing.
      */
     REVOKED_MEDIA(REVOKED),
 
