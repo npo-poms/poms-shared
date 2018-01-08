@@ -12,13 +12,6 @@ import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.util.FilteringIterator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.time.Instant;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
 
 /**
  * @author Roelof Jan Koekoek
@@ -185,14 +178,7 @@ public class ChangeIterator implements Iterator<MediaChange> {
         if (! (input.getMedia() == null || previous.test(input.getMedia()))) {
             return false;
         }
-        if (! hasSince()) {
-            return true;
-        }
-        if (since == null) {
-            return input.getPublishDate() == null || input.getPublishDate().isAfter(sinceDate);
-        } else {
-            return input.getSequence() > since;
-        }
+        return appliesToSince(input);
     }
 
 
@@ -217,13 +203,17 @@ public class ChangeIterator implements Iterator<MediaChange> {
 
 
     protected boolean sendAfterSince(MediaChange input) {
+        return appliesToSince(input);
+    }
+
+    protected boolean appliesToSince(MediaChange input) {
         if (! hasSince()) {
             return true;
         }
-        if (since != null) {
-            return input.getSequence() >= since;
+        if (since == null) {
+            return sinceDate == null || input.getPublishDate() == null || !input.getPublishDate().isBefore(sinceDate);
         } else {
-            return input.getPublishDate() == null || input.getPublishDate().isAfter(sinceDate);
+            return input.getSequence() >= since;
         }
     }
 
