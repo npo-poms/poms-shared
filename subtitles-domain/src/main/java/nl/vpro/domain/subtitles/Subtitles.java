@@ -209,7 +209,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             try {
                 int copy = IOUtils.copy(value, bytes);
-                log.info("Copied {} bytes", copy);
+                log.debug("Copied {} bytes", copy);
                 this.content = SubtitlesContent.builder().content(bytes.toByteArray()).format(format).build();
             } catch (IOException e) {
                 log.error(e.getMessage(), e);
