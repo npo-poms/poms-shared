@@ -31,7 +31,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.Embargo;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
-import nl.vpro.domain.image.BasicImageMetadata;
 import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.image.Metadata;
@@ -254,9 +253,8 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
      * @param metadata Incoming metadata from the image server
      */
     public Image toImage(ImageMetadata<?> metadata) {
-        BasicImageMetadata basic = BasicImageMetadata.of(metadata);
-        basic.copyFromIfSourceSet(this);
         Image result = toImage(metadata.getImageUri());
+        result.copyFromIfSourceSet(this);
         return result;
     }
 
