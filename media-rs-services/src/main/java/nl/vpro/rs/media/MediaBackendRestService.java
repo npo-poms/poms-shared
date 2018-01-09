@@ -345,7 +345,7 @@ public interface MediaBackendRestService {
         @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
         @PathParam(TYPE) SubtitlesType type,
-        @QueryParam("offset") @DefaultValue("0") Duration offset,
+        @PathParam("offset") @DefaultValue("0") Duration offset,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors);
 
