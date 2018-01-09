@@ -1,11 +1,14 @@
 package nl.vpro.rs.media;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -16,6 +19,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Member;
+import nl.vpro.domain.media.StreamingPlatformStatus;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaList;
 import nl.vpro.domain.media.search.MediaListItem;
@@ -359,6 +363,14 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors);
 
+
+    @GET
+    @Path("streamingstatus/{mid}")
+    StreamingPlatformStatus getStreamingstatus(
+        @PathParam(MID) String mid,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @Context HttpServletRequest request
+    ) throws IOException, URISyntaxException;
 }
 
 
