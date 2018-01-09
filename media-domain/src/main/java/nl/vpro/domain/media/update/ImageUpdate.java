@@ -249,11 +249,15 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         return result;
     }
 
+    /**
+     *
+     * @param metadata Incoming metadata from the image server
+     */
     public Image toImage(ImageMetadata<?> metadata) {
         BasicImageMetadata basic = BasicImageMetadata.of(metadata);
         basic.copyFromIfSourceSet(this);
         Image result = toImage(metadata.getImageUri());
-        result.copyFrom(basic);
+        result.copyFromIfTargetUnset(basic);
         return result;
     }
 
