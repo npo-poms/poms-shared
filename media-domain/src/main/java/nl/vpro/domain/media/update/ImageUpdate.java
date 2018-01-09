@@ -257,7 +257,6 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         BasicImageMetadata basic = BasicImageMetadata.of(metadata);
         basic.copyFromIfSourceSet(this);
         Image result = toImage(metadata.getImageUri());
-        result.copyFromIfTargetUnset(basic);
         return result;
     }
 
