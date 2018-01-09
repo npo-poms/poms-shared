@@ -368,7 +368,6 @@ public interface MediaBackendRestService {
     @Path("streamingstatus/{mid}")
     StreamingPlatformStatus getStreamingstatus(
         @PathParam(MID) String mid,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @Context HttpServletRequest request
     ) throws IOException, URISyntaxException;
 }
