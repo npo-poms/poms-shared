@@ -23,6 +23,15 @@ public class Embargos {
         }
     }
 
+    public static void copyIfSourceSet(ReadonlyEmbargo from, Embargo to) {
+        if (from.getPublishStartInstant() != null) {
+            to.setPublishStartInstant(from.getPublishStartInstant());
+        }
+        if (from.getPublishStopInstant() != null) {
+            to.setPublishStopInstant(from.getPublishStopInstant());
+        }
+    }
+
     public static void copyIfMoreRestricted(ReadonlyEmbargo from, Embargo to) {
         if (from.getPublishStartInstant() != null &&
             (to.getPublishStartInstant() == null || to.getPublishStartInstant().isBefore(from.getPublishStartInstant()))
