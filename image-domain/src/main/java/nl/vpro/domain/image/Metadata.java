@@ -108,6 +108,7 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
         if (StringUtils.isEmpty(getDate())) {
             setDate(source.getDate());
         }
+        Embargos.copyIfTargetUnset(source, this);
     }
 
     default void copyFromIfSourceSet(Metadata<?> source) {
