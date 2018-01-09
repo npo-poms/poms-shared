@@ -352,6 +352,7 @@ public class Image extends PublishableObject<Image>
         this.description = description;
     }
 
+    @Override
     public String getImageUri() {
         return imageUri;
     }
