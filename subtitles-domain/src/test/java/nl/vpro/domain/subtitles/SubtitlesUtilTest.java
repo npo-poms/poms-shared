@@ -9,7 +9,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 import static nl.vpro.i18n.Locales.DUTCH;
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen

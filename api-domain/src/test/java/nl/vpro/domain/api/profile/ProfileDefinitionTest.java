@@ -4,6 +4,11 @@
  */
 package nl.vpro.domain.api.profile;
 
+import java.util.Locale;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import nl.vpro.domain.constraint.AbstractFilter;
 import nl.vpro.domain.constraint.PredicateTestResult;
 import nl.vpro.domain.constraint.media.Filter;
@@ -11,11 +16,6 @@ import nl.vpro.domain.constraint.media.MediaConstraints;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.assertj.core.api.Java6Assertions;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -56,8 +56,8 @@ public class ProfileDefinitionTest {
 
         PredicateTestResult r = in.testWithReason(MediaTestDataBuilder.broadcast().build());
 
-        Java6Assertions.assertThat(r.applies()).isFalse();
-        Java6Assertions.assertThat(r.getDescription().getValue()).isEqualTo("Never matches");
-        Java6Assertions.assertThat(r.getReason()).isEqualTo("AlwaysFalse");
+        assertThat(r.applies()).isFalse();
+        assertThat(r.getDescription().getValue()).isEqualTo("Never matches");
+        assertThat(r.getReason()).isEqualTo("AlwaysFalse");
     }
 }
