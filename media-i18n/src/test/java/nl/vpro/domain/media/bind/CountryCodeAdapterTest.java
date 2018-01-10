@@ -11,7 +11,7 @@ import org.junit.Test;
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.i18n.Locales;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CountryCodeAdapterTest {
 
