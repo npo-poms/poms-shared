@@ -13,7 +13,7 @@ import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ScheduleEvent;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class ScheduleEventDateConstraintTest {
