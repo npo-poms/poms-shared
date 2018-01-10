@@ -24,7 +24,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Broadcaster;
 
-import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
