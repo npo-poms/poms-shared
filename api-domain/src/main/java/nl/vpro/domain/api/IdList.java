@@ -1,5 +1,6 @@
 package nl.vpro.domain.api;
 
+import java.io.Serializable;
 import java.util.*;
 
 import javax.xml.bind.annotation.*;
@@ -12,8 +13,9 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "idList")
 @XmlType(name = "idListType")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class IdList extends AbstractList<String> {
+public class IdList extends AbstractList<String> implements Serializable {
 
+    private static final long serialVersionUID = 0L;
 
 
     public static IdList of(String... ids) {
