@@ -20,6 +20,11 @@ public interface PageUpdateRepository extends SectionRepository {
 
     PageUpdate loadByCrid(String crid);
 
+
+    PageUpdate loadFirstByUrlPrefix(String url);
+
+    PageUpdate loadFirstByCridPrefix(String crid);
+
     Future<?> save(PageUpdate update);
 
     Future<?> delete(String pageRef);
