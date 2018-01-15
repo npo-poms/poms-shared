@@ -339,7 +339,7 @@ public class MediaObjectXmlSchemaTest {
     public void testGenres() throws Exception {
         Program program = program().withGenres().build();
 
-        Program result = JAXBTestUtil.roundTripAndSimilar(program, "<genre id=\"3.0.1.7.21\">\n" +
+        Program result = JAXBTestUtil.roundTrip(program, "<genre id=\"3.0.1.7.21\">\n" +
             "        <term>Informatief</term>\n" +
             "        <term>Nieuws/actualiteiten</term>\n" +
             "    </genre>\n" +
@@ -361,7 +361,7 @@ public class MediaObjectXmlSchemaTest {
     public void testAgeRating() throws Exception {
         Program program = program().withAgeRating().build();
 
-        Program result = JAXBTestUtil.roundTripAndSimilar(program, "<ageRating>12</ageRating>");
+        Program result = JAXBTestUtil.roundTrip(program, "<ageRating>12</ageRating>");
 
         assertThat(result.getAgeRating()).isNotNull();
     }
