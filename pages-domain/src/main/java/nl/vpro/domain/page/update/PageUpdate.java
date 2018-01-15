@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.page.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,6 +163,11 @@ public class PageUpdate {
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     private Instant lastModified;
+
+    @XmlTransient
+    @Getter
+    @Setter
+    private boolean deleted = false;
 
     public PageUpdate() {
     }
