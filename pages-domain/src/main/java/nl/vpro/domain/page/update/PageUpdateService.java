@@ -26,6 +26,8 @@ public interface PageUpdateService {
 
     boolean delete(PageUpdate update);
 
+    boolean delete(String url);
+
     boolean deleteAll(PageUpdate first, String url, int max);
 
 }
