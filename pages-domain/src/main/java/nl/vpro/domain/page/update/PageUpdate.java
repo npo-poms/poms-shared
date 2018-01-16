@@ -42,6 +42,15 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlRootElement(name = "page")
 public class PageUpdate {
 
+
+    public static PageUpdateBuilder builder() {
+        return PageUpdateBuilder.page(null, null);
+    }
+
+    public static PageUpdateBuilder builder(PageType pt, String url) {
+        return PageUpdateBuilder.page(pt, url);
+    }
+
     @NotNull
     @XmlAttribute(required = true)
     protected PageType type;
