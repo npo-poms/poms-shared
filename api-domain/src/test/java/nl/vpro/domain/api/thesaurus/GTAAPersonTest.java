@@ -20,13 +20,17 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class GTAAPersonTest {
     @Test
     public void json() throws Exception {
-        GTAAPerson person = GTAAPerson.builder().givenName("Pietje").familyName("puk").build();
+        GTAAPerson person = GTAAPerson.builder()
+            .givenName("Pietje").familyName("puk")
+            .lastModified(LocalDateTime.of(2018, 1, 16, 19, 44).atZone(Schedule.ZONE_ID).toInstant())
+            .build();
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(person, "{\n" +
             "  \"objectType\" : \"person\",\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"puk\",\n" +
-            "  \"value\" : \"puk, Pietje\"\n" +
+            "  \"value\" : \"puk, Pietje\",\n" +
+            "  \"lastModified\" : 1516128240000\n" +
             "}");
 
     }
