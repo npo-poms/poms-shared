@@ -1,7 +1,12 @@
 package nl.vpro.rs.thesaurus.update;
 
+import lombok.extern.slf4j.Slf4j;
+
+import javax.xml.bind.JAXB;
+
 import org.junit.Test;
 
+import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -9,6 +14,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
+@Slf4j
 public class NewPersonRequestTest {
 
 
@@ -46,6 +52,8 @@ public class NewPersonRequestTest {
             "        <gtaa:note>test</gtaa:note>\n" +
             "    </gtaa:person>\n" +
             "</gtaa:newPersonRequest>");
+
+        JAXB.marshal(person, LoggerOutputStream.info(log));
 
     }
 
