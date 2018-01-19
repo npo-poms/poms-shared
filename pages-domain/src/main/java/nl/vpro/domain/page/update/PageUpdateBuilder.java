@@ -217,6 +217,10 @@ public class PageUpdateBuilder<PB extends PageUpdateBuilder<PB, P>, P extends Pa
         return lastModified(date.atZone(Schedule.ZONE_ID).toInstant());
     }
 
+    public PB withNow() {
+        Instant now = Instant.now();
+        return creationDate(now).lastModified(now);
+    }
 
     Instant fromDate(Date date) {
         return date == null ? null : date.toInstant();
