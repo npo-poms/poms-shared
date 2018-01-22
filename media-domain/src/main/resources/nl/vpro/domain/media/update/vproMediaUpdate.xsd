@@ -107,11 +107,36 @@
       <xs:element name="exclusive" type="portalRestrictionUpdateType" form="qualified" minOccurs="0"
                   maxOccurs="unbounded"/>
       <xs:element name="region" type="geoRestrictionUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="title" type="titleUpdateType" form="qualified" maxOccurs="unbounded"/>
-      <xs:element name="description" type="descriptionUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="title" type="titleUpdateType" form="qualified" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Titles in dutch
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="description" type="descriptionUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Descriptions in dutch
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name="tag" type="tagUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="country" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="language" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="country" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Countries somehow associated with this item. This does not refer to the used language in the meta fields of
+            this object. Only supported if version &gt;= 5.0.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="language" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Languages somehow associated with this item. This does not refer to the used language in the meta fields of this object. They should be in dutch. Only supported if version &gt;= 5.0.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name="genre" type="genreUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="avAttributes" type="avAtributeUpdateType" form="qualified" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" form="qualified" minOccurs="0"/>
