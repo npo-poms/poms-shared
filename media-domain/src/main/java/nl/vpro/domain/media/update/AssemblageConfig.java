@@ -2,6 +2,7 @@ package nl.vpro.domain.media.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import nl.vpro.domain.media.support.OwnerType;
 
@@ -15,6 +16,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @AllArgsConstructor
 @lombok.Builder
 @Data
+@ToString
 public class AssemblageConfig {
     @lombok.Builder.Default
     OwnerType ownerType = OwnerType.BROADCASTER;
