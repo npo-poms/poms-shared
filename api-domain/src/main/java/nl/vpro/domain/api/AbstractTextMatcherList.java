@@ -18,7 +18,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @since 4.6
  */
 @XmlTransient
-public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, S extends MatchType> extends MatcherList<T> implements Predicate<String> {
+public abstract class AbstractTextMatcherList<T extends AbstractTextMatcher<S>, S extends MatchType>
+    extends MatcherList<T>
+    implements Predicate<String> {
     @Valid
     protected List<T> matchers = new ArrayList<>();
 
