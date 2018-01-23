@@ -22,7 +22,7 @@ public class TextMatcherJson extends AbstractTextMatcherJson<TextMatcher, Standa
     public TextMatcherJson() {
         super(TextMatcher::new, StandardMatchType::valueOf);
     }
-    
+
     public static class Serializer extends JsonSerializer<TextMatcher> {
         @Override
         public void serialize(TextMatcher value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
