@@ -173,6 +173,7 @@ public interface ScheduleRestService {
     );
 
     @POST
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     ScheduleSearchResult find(
         @Valid ScheduleForm form,
         @QueryParam(PROFILE) String profile,
