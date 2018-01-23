@@ -21,7 +21,8 @@ import nl.vpro.domain.media.Relation;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
-public abstract class AbstractRelationSearch extends AbstractSearch implements Predicate<Relation>, Iterable<AbstractTextMatcher> {
+public abstract class AbstractRelationSearch extends AbstractSearch
+    implements Predicate<Relation>, Iterable<AbstractTextMatcher<?>> {
     @Valid
     private TextMatcherList types;
 
@@ -89,11 +90,12 @@ public abstract class AbstractRelationSearch extends AbstractSearch implements P
     }
 
     @Override
-    public Iterator<AbstractTextMatcher> iterator() {
+    public Iterator<AbstractTextMatcher<?>> iterator() {
         return Iterators.concat(iterator(types), iterator(broadcasters), iterator(values), iterator(uriRefs));
     }
 
-    private Iterator<AbstractTextMatcher> iterator(AbstractTextMatcherList list) {
+    private <T extends AbstractTextMatcher<S>, S extends MatchType> Iterator<T> iterator(
+        AbstractTextMatcherList<T, S> list) {
         if (list == null) {
             return Collections.emptyIterator();
         } else {

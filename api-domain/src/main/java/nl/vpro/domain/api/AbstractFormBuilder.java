@@ -41,7 +41,7 @@ public class AbstractFormBuilder {
     }
 
     protected TextMatcherList textMatchers(Match match, AVType... avTypes) {
-        List<nl.vpro.domain.api.TextMatcher> query = new ArrayList<>(avTypes.length);
+        List<TextMatcher> query = new ArrayList<>(avTypes.length);
         for (AVType avType : avTypes) {
             query.add(textMatcher(avType.name(), match));
         }
@@ -50,7 +50,7 @@ public class AbstractFormBuilder {
 
 
     protected TextMatcherList textMatchers(Match match, MediaType... types) {
-        List<nl.vpro.domain.api.TextMatcher> query = new ArrayList<>(types.length);
+        List<TextMatcher> query = new ArrayList<>(types.length);
         for (MediaType type : types) {
             query.add(textMatcher(type.name(), match));
         }
@@ -58,7 +58,7 @@ public class AbstractFormBuilder {
     }
 
     protected TextMatcherList textMatchers(Match match, AgeRating... ageRatings) {
-        List<nl.vpro.domain.api.TextMatcher> query = new ArrayList<>(ageRatings.length);
+        List<TextMatcher> query = new ArrayList<>(ageRatings.length);
         for (AgeRating ageRating : ageRatings) {
             /* AgeRating._6 is stored as "6" */
             query.add(textMatcher(ageRating.getXmlValue(), match));
@@ -67,7 +67,7 @@ public class AbstractFormBuilder {
     }
 
     protected TextMatcherList textMatchers(Match match, ContentRating... contentRatings) {
-        List<nl.vpro.domain.api.TextMatcher> query = new ArrayList<>(contentRatings.length);
+        List<TextMatcher> query = new ArrayList<>(contentRatings.length);
         for (ContentRating type : contentRatings) {
             /* ContentRating.ANGST is stored as "ANGST" */
             query.add(textMatcher(type.name(), match));
