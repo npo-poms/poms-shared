@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.sql.Date;
 import java.time.Instant;
 import java.util.function.Function;
 import java.util.function.Predicate;
