@@ -34,7 +34,7 @@ public class Matchers {
     static final MatchType REGEX = new MatchType() {
 
         @Override
-        public boolean eval (String value, String input,boolean caseSensitive){
+        public boolean eval (String value, String input,boolean caseSensitive) {
             return value == null ? input == null : input != null && Pattern.compile(value, (caseSensitive ? 0 : Pattern.CASE_INSENSITIVE)).matcher(input).matches();
         }
 
