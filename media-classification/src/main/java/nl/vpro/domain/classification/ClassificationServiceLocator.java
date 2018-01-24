@@ -53,7 +53,7 @@ public class ClassificationServiceLocator  {
             throw new IllegalStateException();
         }
         if (classificationService != null) {
-            log.info("Using classification service {}", classificationService);
+            log.info("Using classification service {} with {} terms", classificationService, classificationService.getClassificationScheme().getTerms().size());
         }
         singleton.classificationService = () -> classificationService;
         warned = false;
