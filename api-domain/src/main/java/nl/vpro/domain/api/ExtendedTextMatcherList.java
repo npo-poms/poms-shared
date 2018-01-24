@@ -27,7 +27,7 @@ import nl.vpro.domain.api.jackson.ExtendedTextMatcherListJson;
 @XmlType(name = "extendedTextMatcherListType")
 @JsonSerialize(using = ExtendedTextMatcherListJson.Serializer.class)
 @JsonDeserialize(using = ExtendedTextMatcherListJson.Deserializer.class)
-public class ExtendedTextMatcherList extends AbstractTextMatcherList<ExtendedTextMatcher, ExtendedMatchType> {
+public class ExtendedTextMatcherList extends AbstractTextMatcherList<ExtendedTextMatcher, StandardMatchType> {
 
     public ExtendedTextMatcherList() {
         super();

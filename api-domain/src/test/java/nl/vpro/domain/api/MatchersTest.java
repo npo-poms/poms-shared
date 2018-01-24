@@ -68,7 +68,7 @@ public class MatchersTest {
 
     @Test
     public void testUntokenizedLowercasePredicate() throws Exception {
-        ExtendedTextMatcher matcher = new ExtendedTextMatcher("foo", Match.MUST, ExtendedMatchType.TEXT, false);
+        ExtendedTextMatcher matcher = new ExtendedTextMatcher("foo", Match.MUST, StandardMatchType.TEXT, false);
         assertThat(matcher.test("foo")).isTrue();
         assertThat(matcher.test("Foo")).isTrue();
     }

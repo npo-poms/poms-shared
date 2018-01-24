@@ -42,7 +42,7 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title>  {
     @XmlAttribute
     @Setter
     @Getter
-    private ExtendedMatchType matchType;
+    private StandardMatchType matchType;
 
     private Boolean caseSensitive;
 
@@ -52,7 +52,7 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title>  {
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private TitleSearch(OwnerType owner, TextualType type, String value, Match match, ExtendedMatchType matchType, Boolean caseSensitive) {
+    private TitleSearch(OwnerType owner, TextualType type, String value, Match match, StandardMatchType matchType, Boolean caseSensitive) {
         this.match = match == null ? Match.MUST : match;
         this.value = value;
         this.matchType = matchType;
