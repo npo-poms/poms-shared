@@ -4,8 +4,6 @@
  */
 package nl.vpro.domain.classification;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -21,6 +19,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -28,8 +28,9 @@ import org.xml.sax.InputSource;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
-@Slf4j
 public abstract class AbstractClassificationServiceImpl implements ClassificationService {
+
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
     protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
@@ -93,7 +94,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
     }
 
     @PreDestroy
-    public void cleanUp() throws Exception {
+    public void cleanUp() {
         executorService.shutdownNow();
     }
 
@@ -108,7 +109,7 @@ public abstract class AbstractClassificationServiceImpl implements Classificatio
                             if (sources != null) {
                                 terms = readTerms(sources);
                             } else {
-
+                                log.debug("No sources");
                             }
                         } catch (Exception e) {
                             log.error(e.getMessage(), e);
