@@ -28,14 +28,14 @@ import nl.vpro.domain.api.validation.ValidTextMatcher;
 @JsonSerialize(using = ExtendedTextMatcherJson.Serializer.class)
 @JsonDeserialize(using = ExtendedTextMatcherJson.Deserializer.class)
 @ValidTextMatcher
-public class ExtendedTextMatcher extends AbstractTextMatcher<ExtendedMatchType> {
+public class ExtendedTextMatcher extends AbstractTextMatcher<StandardMatchType> {
     @XmlAttribute
     @Pattern(regexp = "^AUTO|$")
     @Getter
     @Setter
     protected String fuzziness;
 
-    public static final ExtendedMatchType DEFAULT_MATCHTYPE = ExtendedMatchType.TEXT;
+    public static final StandardMatchType DEFAULT_MATCHTYPE = StandardMatchType.TEXT;
 
     public static ExtendedTextMatcher must(String value) {
         return must(value, DEFAULT_MATCHTYPE);
@@ -55,34 +55,34 @@ public class ExtendedTextMatcher extends AbstractTextMatcher<ExtendedMatchType> 
     }
 
 
-    public static ExtendedTextMatcher must(String value, ExtendedMatchType type) {
+    public static ExtendedTextMatcher must(String value, StandardMatchType type) {
         return must(value, type, true);
     }
 
-    public static ExtendedTextMatcher must(String value, ExtendedMatchType type, boolean caseSensitive) {
+    public static ExtendedTextMatcher must(String value, StandardMatchType type, boolean caseSensitive) {
         return value == null ? null : new ExtendedTextMatcher(value, Match.MUST, type, caseSensitive);
     }
 
 
-    public static ExtendedTextMatcher should(String value, ExtendedMatchType type) {
+    public static ExtendedTextMatcher should(String value, StandardMatchType type) {
         return should(value, type, true);
     }
 
-    public static ExtendedTextMatcher should(String value, ExtendedMatchType type, boolean caseSensitive) {
+    public static ExtendedTextMatcher should(String value, StandardMatchType type, boolean caseSensitive) {
         return value == null ? null : new ExtendedTextMatcher(value, Match.SHOULD, type, caseSensitive);
     }
 
-    public static ExtendedTextMatcher not(String value, ExtendedMatchType type) {
+    public static ExtendedTextMatcher not(String value, StandardMatchType type) {
         return not(value, type, true);
     }
 
-    public static ExtendedTextMatcher not(String value, ExtendedMatchType type, boolean caseSensitive) {
+    public static ExtendedTextMatcher not(String value, StandardMatchType type, boolean caseSensitive) {
         return value == null ? null : new ExtendedTextMatcher(value, Match.NOT, type, caseSensitive);
     }
 
 
     @XmlAttribute
-    private ExtendedMatchType matchType;
+    private StandardMatchType matchType;
 
     @XmlAttribute
     private Boolean caseSensitive;
@@ -99,21 +99,21 @@ public class ExtendedTextMatcher extends AbstractTextMatcher<ExtendedMatchType> 
         this(value, match, null, true);
     }
 
-    public ExtendedTextMatcher(String value, Match match, ExtendedMatchType matchType, boolean caseSensitive) {
+    public ExtendedTextMatcher(String value, Match match, StandardMatchType matchType, boolean caseSensitive) {
         super(value);
         this.match = match == DEFAULT_MATCH ? null : match;
-        this.matchType = matchType == ExtendedMatchType.TEXT ? null : matchType;
+        this.matchType = matchType == StandardMatchType.TEXT ? null : matchType;
         this.caseSensitive = caseSensitive ? null : Boolean.FALSE;
     }
 
 
 
-    public ExtendedTextMatcher(String value, ExtendedMatchType matchType) {
+    public ExtendedTextMatcher(String value, StandardMatchType matchType) {
         this(value, matchType, true);
     }
 
 
-    public ExtendedTextMatcher(String value, ExtendedMatchType matchType, boolean caseSensitive) {
+    public ExtendedTextMatcher(String value, StandardMatchType matchType, boolean caseSensitive) {
         this(value, null, matchType, caseSensitive);
     }
 
@@ -122,12 +122,12 @@ public class ExtendedTextMatcher extends AbstractTextMatcher<ExtendedMatchType> 
     }
 
     @Override
-    public ExtendedMatchType getMatchType() {
+    public StandardMatchType getMatchType() {
         return matchType == null ? DEFAULT_MATCHTYPE : matchType;
     }
 
     @Override
-    public void setMatchType(ExtendedMatchType matchType) {
+    public void setMatchType(StandardMatchType matchType) {
         this.matchType = matchType;
     }
 
