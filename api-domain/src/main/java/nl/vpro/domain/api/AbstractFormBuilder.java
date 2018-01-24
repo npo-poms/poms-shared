@@ -24,7 +24,7 @@ public class AbstractFormBuilder {
     }
 
 
-    protected TextMatcherList textMatchers(Match match, TextMatcher[] matchers) {
+    protected TextMatcherList textMatchers(Match match, TextMatcher... matchers) {
         return new TextMatcherList(match, matchers);
     }
 
@@ -107,11 +107,11 @@ public class AbstractFormBuilder {
         return extendedTextMatchers(match, true, text);
     }
 
-    protected ExtendedTextMatcher extendedTextMatcher(Match match, ExtendedMatchType matchType, boolean caseSensitive, String text) {
+    protected ExtendedTextMatcher extendedTextMatcher(Match match, StandardMatchType matchType, boolean caseSensitive, String text) {
         return new ExtendedTextMatcher(text, match, matchType, caseSensitive);
     }
 
-    protected ExtendedTextMatcherList extendedTextMatchers(Match match, ExtendedMatchType matchType, boolean caseSensitive, String... text) {
+    protected ExtendedTextMatcherList extendedTextMatchers(Match match, StandardMatchType matchType, boolean caseSensitive, String... text) {
         List<ExtendedTextMatcher> matchers = new ArrayList<>();
         for (String t : text) {
             matchers.add(extendedTextMatcher(match, matchType, caseSensitive, t));

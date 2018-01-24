@@ -160,11 +160,11 @@ public class PageFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    public PageFormBuilder keywords(ExtendedMatchType matchType, String... keywords) {
+    public PageFormBuilder keywords(StandardMatchType matchType, String... keywords) {
         return keywords(matchType, false, keywords);
     }
 
-    public PageFormBuilder keywords(ExtendedMatchType matchType, boolean caseSensitive, String... keywords) {
+    public PageFormBuilder keywords(StandardMatchType matchType, boolean caseSensitive, String... keywords) {
         search().setKeywords(extendedTextMatchers(Match.MUST, matchType, caseSensitive, keywords));
         return this;
     }

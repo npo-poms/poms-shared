@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static nl.vpro.domain.api.StandardMatchType.REGEX;
+import static nl.vpro.domain.api.StandardMatchType.WILDCARD;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -34,7 +36,7 @@ public class ExtendedTextMatcherTest {
 
     @Test
     public void testApplyRegexp() {
-        ExtendedTextMatcher in = new ExtendedTextMatcher("a.a.*", ExtendedMatchType.REGEX);
+        ExtendedTextMatcher in = new ExtendedTextMatcher("a.a.*", REGEX);
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isFalse();
         assertThat(in.test("aba")).isTrue();
@@ -43,7 +45,7 @@ public class ExtendedTextMatcherTest {
 
     @Test
     public void testApplyRegexpIgnoreCase() {
-        ExtendedTextMatcher in = new ExtendedTextMatcher("a.a.*", ExtendedMatchType.REGEX, false);
+        ExtendedTextMatcher in = new ExtendedTextMatcher("a.a.*", REGEX, false);
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isTrue();
         assertThat(in.test("aba")).isTrue();
@@ -52,7 +54,7 @@ public class ExtendedTextMatcherTest {
 
     @Test
     public void testApplyWildcard() {
-        ExtendedTextMatcher in = new ExtendedTextMatcher("aa*bb", ExtendedMatchType.WILDCARD);
+        ExtendedTextMatcher in = new ExtendedTextMatcher("aa*bb", WILDCARD);
         assertThat(in.test("aaxxxbb")).isTrue();
         assertThat(in.test("AAxxxBB")).isFalse();
         assertThat(in.test("aba")).isFalse();
@@ -62,7 +64,7 @@ public class ExtendedTextMatcherTest {
 
     @Test
     public void testApplyWildcardIgnoreCase() {
-        ExtendedTextMatcher in = new ExtendedTextMatcher("aa*bb", ExtendedMatchType.WILDCARD, false);
+        ExtendedTextMatcher in = new ExtendedTextMatcher("aa*bb", WILDCARD, false);
         assertThat(in.test("aaxxxbb")).isTrue();
         assertThat(in.test("AAxxxBB")).isTrue();
         assertThat(in.test("aba")).isFalse();
@@ -78,7 +80,7 @@ public class ExtendedTextMatcherTest {
 
     @Test
     public void testApplyIgnoreCase() {
-        ExtendedTextMatcher in = new ExtendedTextMatcher("aaa", Match.MUST, ExtendedMatchType.TEXT, false);
+        ExtendedTextMatcher in = new ExtendedTextMatcher("aaa", Match.MUST, StandardMatchType.TEXT, false);
         assertThat(in.test("aaa")).isTrue();
         assertThat(in.test("AAA")).isTrue();
         assertThat(in.test("aaaa")).isFalse();
