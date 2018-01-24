@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.*;
@@ -263,6 +264,13 @@ public class MediaFormBuilder extends AbstractFormBuilder {
 
     public MediaFormBuilder ageRating(AgeRating... ageRatings) {
         search().setAgeRatings(textMatchers(Match.SHOULD, ageRatings));
+        return this;
+    }
+
+    public MediaFormBuilder ageRating(Pattern ageRatings) {
+        TextMatcherList list = new TextMatcherList();
+        list.getMatchers().add(new TextMatcher(ageRatings.toString(), Match.MUST, StandardMatchType.REGEX));
+        search().setAgeRatings(list);
         return this;
     }
 

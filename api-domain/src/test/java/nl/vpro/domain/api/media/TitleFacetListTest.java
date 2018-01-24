@@ -7,9 +7,9 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import nl.vpro.domain.api.ExtendedMatchType;
 import nl.vpro.domain.api.FacetOrder;
 import nl.vpro.domain.api.Match;
+import nl.vpro.domain.api.StandardMatchType;
 import nl.vpro.domain.api.page.PageForm;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -28,7 +28,7 @@ public class TitleFacetListTest {
             TitleSearch subSearch = TitleSearch.builder()
                 .value("a*")
                 .match(Match.SHOULD)
-                .matchType(ExtendedMatchType.WILDCARD)
+                .matchType(StandardMatchType.WILDCARD)
                 .caseSensitive(false)
                 .build();
 
@@ -40,7 +40,7 @@ public class TitleFacetListTest {
             TitleSearch subSearch = TitleSearch.builder()
                 .value("b*")
                 .match(Match.MUST)
-                .matchType(ExtendedMatchType.WILDCARD)
+                .matchType(StandardMatchType.WILDCARD)
                 .caseSensitive(false)
                 .build();
 
