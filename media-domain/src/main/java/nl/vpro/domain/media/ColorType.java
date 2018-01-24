@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.XmlValued;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 
@@ -29,7 +30,7 @@ import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 @XmlEnum
 @JsonSerialize(using = BackwardsCompatibleJsonEnum.Serializer.class)
 @JsonDeserialize(using = ColorType.Deserializer.class)
-public enum ColorType {
+public enum ColorType implements XmlValued {
 
     @XmlEnumValue("BLACK AND WHITE")
     BLACK_AND_WHITE("BLACK AND WHITE"),

@@ -12,13 +12,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Displayable;
+import nl.vpro.domain.XmlValued;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 @XmlEnum
 @XmlType(name = "channelEnum")
 @JsonSerialize(using = BackwardsCompatibleJsonEnum.Serializer.class)
 @JsonDeserialize(using = Channel.Deserializer.class)
-public enum Channel implements Displayable {
+public enum Channel implements Displayable, XmlValued {
     @XmlEnumValue("NED1")
     NED1 {
         @Override
