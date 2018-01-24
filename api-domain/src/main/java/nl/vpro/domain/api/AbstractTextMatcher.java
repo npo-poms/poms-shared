@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlValue;
 
 /**
+ * A text matcher matches strings (rather then e.g. dates or numbers)
+ *
  * @author rico
  * @since 4.6
  */

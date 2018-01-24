@@ -68,7 +68,7 @@ public class MatchersTest {
 
     @Test
     public void testUntokenizedLowercasePredicate() throws Exception {
-        ExtendedTextMatcher matcher = new ExtendedTextMatcher("foo", Match.MUST, ExtendedMatchType.TEXT, false);
+        ExtendedTextMatcher matcher = new ExtendedTextMatcher("foo", Match.MUST, StandardMatchType.TEXT, false);
         assertThat(matcher.test("foo")).isTrue();
         assertThat(matcher.test("Foo")).isTrue();
     }
@@ -84,7 +84,7 @@ public class MatchersTest {
 
     @Test
     public void testListPredicateWithShould() {
-        TextMatcherList  textMatchers = new TextMatcherList(Match.SHOULD, new TextMatcher("SEASON"), new TextMatcher("SERIES"));
+        TextMatcherList textMatchers = new TextMatcherList(Match.SHOULD, new TextMatcher("SEASON"), new TextMatcher("SERIES"));
         assertThat(Matchers.listPredicate(textMatchers).test("SEASON")).isTrue();
         assertThat(Matchers.listPredicate(textMatchers).test("SERIES")).isTrue();
         assertThat(Matchers.listPredicate(textMatchers).test("ALBUM")).isFalse();
@@ -92,7 +92,7 @@ public class MatchersTest {
 
     @Test
     public void testListPredicateWithNots() {
-        TextMatcherList  textMatchers = new TextMatcherList(new TextMatcher("SEASON", Match.NOT), new TextMatcher("SERIES", Match.NOT));
+        TextMatcherList textMatchers = new TextMatcherList(new TextMatcher("SEASON", Match.NOT), new TextMatcher("SERIES", Match.NOT));
         assertThat(Matchers.listPredicate(textMatchers).test("SEASON")).isFalse();
         assertThat(Matchers.listPredicate(textMatchers).test("SERIES")).isFalse();
         assertThat(Matchers.listPredicate(textMatchers).test("ALBUM")).isTrue();

@@ -13,15 +13,15 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
-import nl.vpro.domain.api.ExtendedMatchType;
 import nl.vpro.domain.api.ExtendedTextMatcher;
 import nl.vpro.domain.api.ExtendedTextMatcherList;
+import nl.vpro.domain.api.StandardMatchType;
 
 /**
  * @author rico
  * @since 4.6
  */
-public class ExtendedTextMatcherListJson extends AbstractTextMatcherListJson<ExtendedTextMatcherList, ExtendedTextMatcher, ExtendedMatchType> {
+public class ExtendedTextMatcherListJson extends AbstractTextMatcherListJson<ExtendedTextMatcherList, ExtendedTextMatcher, StandardMatchType> {
     private static final ExtendedTextMatcherJson SERIALIZER = new ExtendedTextMatcherJson();
     private static final ExtendedTextMatcherListJson LIST_SERIALIZER = new ExtendedTextMatcherListJson();
 
@@ -43,7 +43,7 @@ public class ExtendedTextMatcherListJson extends AbstractTextMatcherListJson<Ext
         }
     }
 
-    
+
 }
 
 

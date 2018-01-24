@@ -38,5 +38,5 @@ public class TextMatcherListJson extends AbstractTextMatcherListJson<TextMatcher
             return LIST_SERIALIZER.deserialize(p, ctxt);
         }
     }
-   
+
 }

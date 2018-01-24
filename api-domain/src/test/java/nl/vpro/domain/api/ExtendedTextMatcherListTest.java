@@ -23,7 +23,7 @@ public class ExtendedTextMatcherListTest {
     @Test
     public void marshal() throws IOException, SAXException {
         final ExtendedTextMatcherList textMatcherList = new ExtendedTextMatcherList(
-                Arrays.asList(new ExtendedTextMatcher("a", Match.SHOULD, ExtendedMatchType.TEXT, false),
+                Arrays.asList(new ExtendedTextMatcher("a", Match.SHOULD, StandardMatchType.TEXT, false),
                         new ExtendedTextMatcher("b", Match.SHOULD)),
                 Match.MUST);
         ExtendedTextMatcherList result = JAXBTestUtil.roundTripAndSimilar(textMatcherList,
@@ -33,7 +33,7 @@ public class ExtendedTextMatcherListTest {
                         + "    <api:matcher match=\"SHOULD\">b</api:matcher>\n" + "</local:extendedTextMatcherList>");
 
         assertThat(result.asList().get(0).getMatch()).isEqualTo(Match.SHOULD);
-        assertThat(result.asList().get(0).getMatchType()).isEqualTo(ExtendedMatchType.TEXT);
+        assertThat(result.asList().get(0).getMatchType()).isEqualTo(StandardMatchType.TEXT);
         assertThat(result.asList().get(0).isCaseSensitive()).isEqualTo(Boolean.FALSE);
     }
 }

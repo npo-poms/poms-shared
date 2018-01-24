@@ -5,11 +5,12 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.media.bind.AspectRatioToString;
 
 @JsonSerialize(using = AspectRatioToString.Serializer.class)
 @JsonDeserialize(using = AspectRatioToString.Deserializer.class)
-public enum AspectRatio {
+public enum AspectRatio implements XmlValued {
 
     @XmlEnumValue("4:3")
     _4x3(4, 3),

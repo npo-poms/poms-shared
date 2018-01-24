@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.XmlValued;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.Displayable;
 
@@ -14,7 +15,7 @@ import nl.vpro.domain.Displayable;
  */
 @JsonSerialize(using = BackwardsCompatibility.AgeRatingToString.Serializer.class)
 @JsonDeserialize(using = BackwardsCompatibility.AgeRatingToString.Deserializer.class)
-public enum AgeRating implements Displayable {
+public enum AgeRating implements Displayable, XmlValued {
 
     @XmlEnumValue("6")
     _6("6"),
@@ -51,6 +52,7 @@ public enum AgeRating implements Displayable {
         }
     }
 
+    @Override
     public String getXmlValue() {
         String n = name();
         return n.startsWith("_") ? n.substring(1) : n;
