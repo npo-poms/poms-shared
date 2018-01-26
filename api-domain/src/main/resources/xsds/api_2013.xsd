@@ -106,7 +106,7 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute name="fuzziness" type="xs:string"/>
-        <xs:attribute name="matchType" type="extendedMatchType"/>
+        <xs:attribute name="matchType" type="standardMatchType"/>
         <xs:attribute name="caseSensitive" type="xs:boolean"/>
         <xs:attribute name="match" type="match"/>
       </xs:extension>
@@ -255,7 +255,7 @@
       <xs:extension base="xs:string">
         <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
         <xs:attribute name="type" type="media:textualTypeEnum"/>
-        <xs:attribute name="matchType" type="extendedMatchType"/>
+        <xs:attribute name="matchType" type="standardMatchType"/>
         <xs:attribute name="match" type="match"/>
       </xs:extension>
     </xs:simpleContent>
@@ -831,14 +831,6 @@
   </xs:simpleType>
 
   <xs:simpleType name="standardMatchType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="TEXT"/>
-      <xs:enumeration value="REGEX"/>
-      <xs:enumeration value="WILDCARD"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="extendedMatchType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="TEXT"/>
       <xs:enumeration value="REGEX"/>
