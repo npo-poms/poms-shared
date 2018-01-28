@@ -4,13 +4,12 @@
  */
 package nl.vpro.media.broadcaster;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.net.URI;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
@@ -20,9 +19,8 @@ import nl.vpro.util.URLResource;
  * @author rico
  * @since 3.0
  */
+@Slf4j
 public class BroadcasterServiceImpl implements BroadcasterService {
-
-    private static final Logger LOG = LoggerFactory.getLogger(BroadcasterServiceImpl.class);
 
 
     private Map<String, Broadcaster> broadcasterMap = new HashMap<>();
@@ -48,13 +46,13 @@ public class BroadcasterServiceImpl implements BroadcasterService {
     }
 
     public void setMisResource(String configFile) {
-        LOG.info("Using {} for mis ids", configFile);
+        log.info("Using {} for mis ids", configFile);
         this.misResource = getURLResource(configFile, displayNameResource.isAsync());
     }
 
 
     public void setWhatsonResource(String configFile) {
-        LOG.info("Using {} for what'son ids", configFile);
+        log.info("Using {} for what'son ids", configFile);
         this.whatsonResource = getURLResource(configFile, displayNameResource.isAsync());
     }
 
