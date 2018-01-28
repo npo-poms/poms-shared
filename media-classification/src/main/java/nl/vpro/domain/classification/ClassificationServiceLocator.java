@@ -2,7 +2,9 @@ package nl.vpro.domain.classification;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
 import java.util.ServiceLoader;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
@@ -18,6 +20,8 @@ public class ClassificationServiceLocator  {
     private static ClassificationServiceLocator singleton;
 
     private static boolean warned = false;
+
+    private static List<String> terms;
 
     @Inject
     private Provider<ClassificationService> classificationService = () -> EmptyClassificationService.INSTANCE;
@@ -57,6 +61,18 @@ public class ClassificationServiceLocator  {
         }
         singleton.classificationService = () -> classificationService;
         warned = false;
+    }
+
+    public static List<String> getTerms() {
+        if (terms == null) {
+            terms = getInstance()
+                .values()
+                .stream()
+                .map(Term::getTermId)
+                .collect(Collectors.toList());
+        }
+        return terms;
+
     }
 
 
