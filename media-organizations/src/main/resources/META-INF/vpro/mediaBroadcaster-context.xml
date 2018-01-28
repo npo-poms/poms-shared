@@ -7,5 +7,6 @@
     <constructor-arg index="0" value="${broadcasters.repository.location}"/>
   </bean>
 
+  <bean class="nl.vpro.media.broadcaster.BroadcasterServiceLocator" />
 
 </beans>
