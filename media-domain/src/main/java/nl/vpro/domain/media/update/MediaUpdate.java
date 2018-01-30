@@ -85,10 +85,11 @@ import nl.vpro.xml.bind.LocaleAdapter;
         "scheduleEvents",
         "relations",
         "images",
-        "asset",
+        "asset"
 })
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
+
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
     EmbargoDeprecated,
