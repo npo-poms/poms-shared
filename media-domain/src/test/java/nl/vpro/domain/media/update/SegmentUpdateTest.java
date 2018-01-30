@@ -7,9 +7,11 @@ package nl.vpro.domain.media.update;
 import java.io.StringReader;
 import java.time.Duration;
 
+import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -37,5 +39,25 @@ public class SegmentUpdateTest extends MediaUpdateTest {
         MediaUpdate segment = (MediaUpdate) jc.createUnmarshaller().unmarshal(new StringReader(xml));
         assertThat(segment).isInstanceOf(SegmentUpdate.class);
 
+    }
+
+
+    /**
+     * Naar aanleiding van slack-communicatie met de VARA.
+     */
+    @Test
+    @Ignore("TODO: Fails")
+    public void testNamespaces() {
+        String example = "<?xml version=\"1.0\"?>\n" +
+            "<ns0:segment xmlns:ns0=\"urn:vpro:media:update:2009\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_BV_12672829\" midRef=\"BV_101386500\"   sortDate=\"3333-01-24T10:12:00+00:00\" urn=\"urn:vpro:media:segment:102562422\">\n" +
+            "  <ns0:title type=\"MAIN\">Test poms export</ns0:title>\n" +
+            "  <ns0:broadcaster>BNN</ns0:broadcaster>\n" +
+            "  <broadcaster>BNVA</broadcaster>\n" +
+            "  <broadcaster xmlns='urn:completelydifferent'>XXX</broadcaster>\n" +
+            "</ns0:segment>";
+
+        SegmentUpdate update = JAXB.unmarshal(new StringReader(example), SegmentUpdate.class);
+
+        assertThat(update.getBroadcasters()).containsExactly("BNN"); // FAILS, it will also read BNVA
     }
 }
