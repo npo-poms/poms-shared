@@ -313,6 +313,11 @@
       <xs:element name="date" type="xs:string" form="qualified" minOccurs="0"/>
       <xs:element name="offset" type="xs:duration" form="qualified" minOccurs="0"/>
       <xs:choice>
+        <xs:annotation>
+          <xs:documentation>
+            Every image contain a presentation of the image itself.
+          </xs:documentation>
+        </xs:annotation>
         <xs:element name="imageData" type="imageDataType" form="qualified">
           <xs:annotation>
             <xs:documentation>
@@ -334,11 +339,6 @@
             </xs:documentation>
           </xs:annotation>
         </xs:element>
-        <xs:annotation>
-          <xs:documentation>
-            Every image contain a presentation of the image itself.
-          </xs:documentation>
-        </xs:annotation>
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="type" type="shared:imageTypeEnum" use="required"/>
