@@ -292,8 +292,20 @@
     <xs:sequence>
       <xs:element name="title" type="media:baseTextType" form="qualified"/>
       <xs:element name="description" type="xs:string" form="qualified" minOccurs="0"/>
-      <xs:element name="source" type="xs:string" form="qualified"  minOccurs="0"/>
-      <xs:element name="sourceName" type="xs:string" form="qualified"  minOccurs="0"/>
+      <xs:element name="source" type="xs:string" form="qualified"  minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            The source of the image. This is only metadata. It may be URL from where the image was originally acquired.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sourceName" type="xs:string" form="qualified"  minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>
+            A simple string representing the source of the image. E.g. 'flickr'.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name="license" type="shared:licenseEnum" form="qualified"  minOccurs="0"/>
       <xs:element name="width" type="xs:int" form="qualified" minOccurs="0"/>
       <xs:element name="height" type="xs:int" form="qualified" minOccurs="0"/>
@@ -301,9 +313,32 @@
       <xs:element name="date" type="xs:string" form="qualified" minOccurs="0"/>
       <xs:element name="offset" type="xs:duration" form="qualified" minOccurs="0"/>
       <xs:choice>
-        <xs:element name="imageData" type="imageDataType" form="qualified"/>
-        <xs:element name="imageLocation" type="imageLocationType" form="qualified"/>
-        <xs:element name="urn" type="imageUrnType" form="qualified"/>
+        <xs:element name="imageData" type="imageDataType" form="qualified">
+          <xs:annotation>
+            <xs:documentation>
+              The image as a base-64 encoded blob.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="imageLocation" type="imageLocationType" form="qualified">
+          <xs:annotation>
+            <xs:documentation>
+              An URL from where the image can be downloaded from.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="urn" type="imageUrnType" form="qualified">
+          <xs:annotation>
+            <xs:documentation>
+              The URN of an already existing image inside the POMS image server.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:annotation>
+          <xs:documentation>
+            Every image contain a presentation of the image itself.
+          </xs:documentation>
+        </xs:annotation>
       </xs:choice>
     </xs:sequence>
     <xs:attribute name="type" type="shared:imageTypeEnum" use="required"/>
