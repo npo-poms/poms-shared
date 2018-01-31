@@ -193,7 +193,7 @@ public class Person extends DomainObject implements PersonInterface {
                 .orElse(null);
     }
     public void setGtaaUri(String uri) {
-        this.gtaaRecord= new GTAARecord(uri, null);
+        this.gtaaRecord = new GTAARecord(uri, null);
     }
 
     @Override
