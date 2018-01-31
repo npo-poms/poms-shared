@@ -276,6 +276,33 @@ public class MediaFormTest {
 
 
     }
+
+
+    @Test
+    public void testTitleSearch2() throws Exception {
+        MediaForm form = MediaForm
+            .builder()
+            .titles(TitleSearch.builder().type(TextualType.MAIN).value("Flikken").build())
+            .build();
+        JAXBTestUtil.roundTripAndSimilar(form, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<api:mediaForm xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <api:searches>\n" +
+            "        <api:titles type=\"MAIN\">Flikken</api:titles>\n" +
+            "    </api:searches>\n" +
+            "</api:mediaForm>");
+
+        Jackson2TestUtil.roundTripAndSimilar(form, "{\n" +
+            "  \"searches\" : {\n" +
+            "    \"titles\" : [ {\n" +
+            "      \"type\" : \"MAIN\",\n" +
+            "      \"value\" : \"Flikken\"\n" +
+            "    } ]\n" +
+            "  }\n" +
+            "}");
+
+
+    }
+
     private static String LUNATIC_BACKWARD_COMPATIBLE = "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
         "    <api:searches>\n" +
         "        <api:durations match=\"MUST\">\n" +
@@ -445,4 +472,18 @@ public class MediaFormTest {
         assertThat(form.getFacets().getTitles().getFacets()).hasSize(2);
 
     }
+
+    @Test
+    public void facetBroadcasters() throws Exception {
+        MediaForm builder = MediaForm.builder().broadcasterFacet(new MediaFacet()).build();
+        Jackson2TestUtil.roundTripAndSimilar(builder, "{\n" +
+            "  \"facets\" : {\n" +
+            "    \"broadcasters\" : {\n" +
+            "      \"sort\" : \"VALUE_ASC\",\n" +
+            "      \"max\" : 24\n" +
+            "    }\n" +
+            "  }\n" +
+            "}");
+    }
+
 }
