@@ -139,11 +139,19 @@ public class License implements nl.vpro.domain.Displayable, Serializable { // No
         return id;
     }
 
-    public void setId(String id) {this.id =id; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
 
     @Override
     public String getDisplayName() {
+        if (displayName == null && id != null) {
+            License constant = valueOfOrNull(id);
+            if (constant != null) {
+                displayName = constant.getDisplayName();
+            }
+        }
         return displayName;
     }
 
