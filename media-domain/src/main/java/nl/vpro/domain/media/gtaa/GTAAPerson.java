@@ -145,8 +145,9 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializabl
             }
             prefName = Names.of(label);
         } else {
-            log.warn("Description has no prefLabel {}", description);
             prefName = Names.of(submittedPrefLabel);
+            log.warn("Description has no prefLabel {}. Taking it {}", description, prefName);
+
         }
         if (prefName != null) {
             answer.givenName = prefName.getGivenName();
