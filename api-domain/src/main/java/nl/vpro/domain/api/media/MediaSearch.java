@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.meeuw.xml.bind.annotation.XmlDocumentation;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -39,17 +40,20 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaSearchType")
 @EqualsAndHashCode(callSuper = true)
+@XmlDocumentation("Limits the search result to media with certain properties")
 public class MediaSearch extends AbstractTextSearch implements Predicate<MediaObject> {
 
 
     @Valid
     @Getter
     @Setter
+    @XmlDocumentation("The MID must match one of the mediaIds")
     private TextMatcherList mediaIds;
 
     @Valid
     @Getter
     @Setter
+    @XmlDocumentation("The media type must match one of these.")
     private TextMatcherList types;
 
     @Valid
@@ -164,10 +168,10 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
 
     @Override
     public boolean test(@Nullable MediaObject input) {
-        return input != null && (
+        return input != null &&
             applyText(input) &&
-                applyMediaIds(input) &&
-                applyAvTypes(input)) &&
+            applyMediaIds(input) &&
+            applyAvTypes(input) &&
             applyTypes(input) &&
             applySortDates(input) &&
             applyLastModifiedDates(input) &&
