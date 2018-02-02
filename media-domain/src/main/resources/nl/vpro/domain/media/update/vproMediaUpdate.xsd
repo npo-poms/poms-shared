@@ -181,7 +181,13 @@
     <xs:attribute name="mid" type="media:midType"/>
     <xs:attribute name="urn" type="xs:anyURI"/>
     <xs:attribute name="ordered" type="xs:boolean"/>
-    <xs:attribute name="version" type="xs:float"/>
+    <xs:attribute name="version" type="xs:float">
+      <xs:annotation>
+        <xs:documentation>
+          The POMS version this XML applies too.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
   </xs:complexType>
 
   <xs:complexType name="bulkUpdateType">
