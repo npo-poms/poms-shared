@@ -21,7 +21,14 @@ public enum Region {
      */
     @Deprecated
     @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not support by the NPO player)")
-    BENELUX;
+    BENELUX,
+
+    /**
+     * @since 5.6
+     */
+    @XmlDocumentation("Means that this object can only be played in Europe")
+    EUROPE
+    ;
 
     public static Region valueOfOrNull(String v) {
         if (StringUtils.isEmpty(v)) {
