@@ -67,6 +67,13 @@ public class AVAttributesUpdate {
         this.videoAttributes = videoAttributes;
     }
 
+    public static AVAttributesUpdate of(AVAttributes attributes) {
+        if (attributes == null) {
+            return null;
+        }
+        return new AVAttributesUpdate(attributes);
+    }
+
     public AVAttributesUpdate(AVAttributes attributes) {
         bitrate = attributes.getBitrate();
         avFileFormat = attributes.getAvFileFormat();
