@@ -41,8 +41,14 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlType(name = "mediaSearchType")
 @EqualsAndHashCode(callSuper = true)
 @XmlDocumentation("Limits the search result to media with certain properties")
+@lombok.AllArgsConstructor
+@lombok.Builder
 public class MediaSearch extends AbstractTextSearch implements Predicate<MediaObject> {
 
+
+    public MediaSearch() {
+        super();
+    }
 
     @Valid
     @Getter

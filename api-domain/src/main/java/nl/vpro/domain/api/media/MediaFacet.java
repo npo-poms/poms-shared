@@ -25,6 +25,11 @@ public class MediaFacet extends TextFacet<MediaSearch> {
     public MediaFacet(Integer threshold, FacetOrder sort, Integer max) {
         super(threshold, sort, max);
     }
+    @lombok.Builder
+    private MediaFacet(Integer threshold, FacetOrder sort, Integer max, MediaSearch filter) {
+        this(threshold, sort, max);
+        this.filter = filter;
+    }
 
     @XmlElement
     @Override
