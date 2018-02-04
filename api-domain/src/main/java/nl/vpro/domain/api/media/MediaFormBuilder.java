@@ -556,7 +556,13 @@ public class MediaFormBuilder extends AbstractFormBuilder {
                 )
                 .build())
             .sortDateFacet(DateRangePreset.LAST_WEEK, DateRangePreset.THIS_WEEK)
-            .durationFacet(new DurationRangeInterval())
+            .durationFacet(
+                new DurationRangeInterval("2 minutes"),
+                DurationRangeFacetItem
+                    .builder()
+                    .begin(Duration.ofMinutes(5))
+                    .end(Duration.ofMinutes(10))
+                    .build())
             .episodeOfFacet()
             .memberOfFacet()
             .descendantOfFacet()
