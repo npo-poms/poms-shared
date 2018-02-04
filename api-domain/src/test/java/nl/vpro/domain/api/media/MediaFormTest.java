@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.SimpleDateFormat;
@@ -31,6 +33,7 @@ import static org.junit.Assert.assertNotNull;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
+@Slf4j
 public class MediaFormTest {
 
     @Test
@@ -132,7 +135,7 @@ public class MediaFormTest {
     }
 
     @Test
-    public void testGetFacetsBackwards() throws Exception {
+    public void testGetFacetsBackwards() {
         MediaForm out = JAXB.unmarshal(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<mediaForm xmlns=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" highlight=\"false\">\n" +
             "    <searches>\n" +
@@ -187,7 +190,7 @@ public class MediaFormTest {
     }
 
     @Test
-    public void testSubSearch() throws IOException {
+    public void testSubSearch() {
         String example = "{\n" +
             "    \"facets\": {\n" +
             "        \"relations\":  {\n" +
@@ -472,18 +475,17 @@ public class MediaFormTest {
         assertThat(form.getFacets().getTitles().getFacets()).hasSize(2);
 
     }
+    @Test
+    public void withEverythingJson() throws IOException {
+        Jackson2Mapper.getPrettyInstance()
+            .writeValue(System.out, MediaForm.builder().withEverything().build());
+    }
+
 
     @Test
-    public void facetBroadcasters() throws Exception {
-        MediaForm builder = MediaForm.builder().broadcasterFacet(new MediaFacet()).build();
-        Jackson2TestUtil.roundTripAndSimilar(builder, "{\n" +
-            "  \"facets\" : {\n" +
-            "    \"broadcasters\" : {\n" +
-            "      \"sort\" : \"VALUE_ASC\",\n" +
-            "      \"max\" : 24\n" +
-            "    }\n" +
-            "  }\n" +
-            "}");
+    public void withEverythingXml() {
+        JAXB.marshal(MediaForm.builder().withEverything().build(), System.out);
     }
+
 
 }
