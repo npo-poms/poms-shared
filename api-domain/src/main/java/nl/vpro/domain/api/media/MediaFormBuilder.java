@@ -6,6 +6,7 @@ package nl.vpro.domain.api.media;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.regex.Pattern;
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.Tag;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.util.DateUtils;
 
 /**
@@ -262,6 +264,13 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
+
+    public MediaFormBuilder memberOfs(Match match, TextMatcher... matchers) {
+        search().setMemberOf(textMatchers(match, matchers));
+        return this;
+    }
+
+
     public MediaFormBuilder ageRating(AgeRating... ageRatings) {
         search().setAgeRatings(textMatchers(Match.SHOULD, ageRatings));
         return this;
@@ -275,12 +284,11 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     }
 
     public MediaFormBuilder contentRatings(ContentRating... contentRatings) {
-        search().setContentRatings(textMatchers(Match.SHOULD, contentRatings));
-        return this;
+        return contentRatings(Match.SHOULD, contentRatings);
     }
 
-    public MediaFormBuilder memberOfs(Match match, TextMatcher... matchers) {
-        search().setMemberOf(textMatchers(match, matchers));
+    public MediaFormBuilder contentRatings(Match match, ContentRating... contentRatings) {
+        search().setContentRatings(textMatchers(match, contentRatings));
         return this;
     }
 
@@ -293,6 +301,45 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         search().setTitles(Arrays.asList(titleSearch));
         return this;
     }
+
+
+    public MediaFormBuilder relationText(RelationDefinition definition, ExtendedTextMatcher text) {
+        return relation(definition, text, null);
+    }
+
+    public MediaFormBuilder relationUri(RelationDefinition definition, String uri) {
+        return relation(definition, null, uri);
+    }
+
+    public MediaFormBuilder relationText(RelationDefinition definition, String text) {
+        return relation(definition, text, null);
+    }
+
+
+    public MediaFormBuilder relation(RelationDefinition definition, String text, String uri) {
+        return relation(definition, ExtendedTextMatcher.must(text), TextMatcher.must(uri));
+    }
+
+    public MediaFormBuilder relation(RelationDefinition definition, ExtendedTextMatcher text, TextMatcher uri) {
+        RelationSearch relationSearch = new RelationSearch();
+        RelationSearchList search = search().getRelations();
+        if (text != null) {
+            relationSearch.setValues(ExtendedTextMatcherList.must(text));
+        }
+        if (uri != null) {
+            relationSearch.setUriRefs(TextMatcherList.must(uri));
+        }
+        relationSearch.setBroadcasters(TextMatcherList.must(TextMatcher.must(definition.getBroadcaster())));
+        relationSearch.setTypes(TextMatcherList.must(TextMatcher.must(definition.getType())));
+        if (search == null) {
+            search = new RelationSearchList();
+            search().setRelations(search);
+        }
+        search.asList().add(relationSearch);
+
+        return this;
+    }
+
 
     public MediaFormBuilder highlight(boolean b) {
         form.setHighlight(b);
@@ -333,7 +380,11 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     }
 
     public MediaFormBuilder avTypeFacet() {
-        facets().setAvTypes(new MediaFacet());
+        return avTypeFacet(new MediaFacet());
+    }
+
+    public MediaFormBuilder avTypeFacet(MediaFacet facet) {
+        facets().setAvTypes(facet);
         return this;
     }
 
@@ -378,42 +429,6 @@ public class MediaFormBuilder extends AbstractFormBuilder {
 
     public MediaFormBuilder descendantOfFacet(MemberRefFacet facet) {
         facets().setDescendantOf(facet);
-        return this;
-    }
-
-    public MediaFormBuilder relationText(RelationDefinition definition, ExtendedTextMatcher text) {
-        return relation(definition, text, null);
-    }
-
-    public MediaFormBuilder relationUri(RelationDefinition definition, String uri) {
-        return relation(definition, null, uri);
-    }
-
-    public MediaFormBuilder relationText(RelationDefinition definition, String text) {
-        return relation(definition, text, null);
-    }
-
-
-    public MediaFormBuilder relation(RelationDefinition definition, String text, String uri) {
-        return relation(definition, ExtendedTextMatcher.must(text), TextMatcher.must(uri));
-    }
-    public MediaFormBuilder relation(RelationDefinition definition, ExtendedTextMatcher text, TextMatcher uri) {
-        RelationSearch relationSearch = new RelationSearch();
-        RelationSearchList search = search().getRelations();
-        if (text != null) {
-            relationSearch.setValues(ExtendedTextMatcherList.must(text));
-        }
-        if (uri != null) {
-            relationSearch.setUriRefs(TextMatcherList.must(uri));
-        }
-        relationSearch.setBroadcasters(TextMatcherList.must(TextMatcher.must(definition.getBroadcaster())));
-        relationSearch.setTypes(TextMatcherList.must(TextMatcher.must(definition.getType())));
-        if (search == null) {
-            search = new RelationSearchList();
-            search().setRelations(search);
-        }
-        search.asList().add(relationSearch);
-
         return this;
     }
 
@@ -467,6 +482,104 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         facets().setContentRatings(new MediaFacet());
         return this;
     }
+
+    public MediaFormBuilder withAllSearches() {
+
+        return  fuzzyText("text")
+            .mediaIds(Match.SHOULD, "MID_123", "MID_234")
+            .sortDate(
+                LocalDateTime.of(2018, 1, 1, 10, 0).atZone(Schedule.ZONE_ID).toInstant(),
+                LocalDateTime.of(2018, 3, 1, 17, 0).atZone(Schedule.ZONE_ID).toInstant()
+            )
+            .publishDate(
+                LocalDateTime.of(2018, 1, 1, 10, 0).atZone(Schedule.ZONE_ID).toInstant(),
+                LocalDateTime.of(2018, 3, 1, 17, 0).atZone(Schedule.ZONE_ID).toInstant(),
+                true
+            )
+            .broadcasters(
+                Match.MUST,
+                TextMatcher.must("VPR*", StandardMatchType.WILDCARD),
+                TextMatcher.must("EO", StandardMatchType.TEXT)
+            )
+            .locations(
+                "https://download.omroep.nl/test.mp4",
+                "mp3"
+            )
+            .tags(false, "foo", "bar")
+            .genres(Match.MUST,
+                TextMatcher.must("3.1.6.1.*", StandardMatchType.WILDCARD)
+            )
+            .types(Match.NOT, MediaType.VISUALRADIOSEGMENT)
+            .avTypes(AVType.VIDEO)
+            .duration(Duration.ofMinutes(1), Duration.ofMinutes(15))
+            .episodeOfs(Match.SHOULD, "MID_456")
+            .descendantOfs(Match.SHOULD, "MID_789")
+            .memberOfs(Match.SHOULD, "MID_01230")
+            .ageRating(AgeRating.ALL)
+            .contentRatings(Match.NOT, ContentRating.SEKS)
+            .scheduleEvents(
+                ScheduleEventSearch.builder()
+                    .channel(Channel.NED1)
+                    .rerun(false)
+                    .end(
+                        LocalDateTime.of(2018, 4, 1, 10, 0).atZone(Schedule.ZONE_ID).toInstant()
+                    )
+                    .build()
+            )
+            .titles(
+                TitleSearch.builder()
+                    .type(TextualType.MAIN)
+                    .value("Tegenlicht*")
+                    .matchType(StandardMatchType.WILDCARD)
+                    .build()
+            )
+            .relation(
+                RelationDefinition.of("ALBUM", "VPRO"),
+                "FOO",
+                null
+            )
+            .highlight(true);
+    }
+
+    public MediaFormBuilder withAllFacets() {
+        return broadcasterFacet()
+            .genreFacet()
+            .tagFacet(false)
+            .typeFacet()
+            .avTypeFacet(MediaFacet.builder()
+                .filter(
+                    MediaSearch
+                        .builder()
+                        .contentRatings(
+                            TextMatcherList.must(TextMatcher.must(ContentRating.ANGST.name())))
+                        .build()
+                )
+                .build())
+            .sortDateFacet(DateRangePreset.LAST_WEEK, DateRangePreset.THIS_WEEK)
+            .durationFacet(
+                new DurationRangeInterval("2 minutes"),
+                DurationRangeFacetItem
+                    .builder()
+                    .begin(Duration.ofMinutes(5))
+                    .end(Duration.ofMinutes(10))
+                    .build())
+            .episodeOfFacet()
+            .memberOfFacet()
+            .descendantOfFacet()
+            .relationsFacet("test")
+            .ageRatingFacet()
+            .contentRatingsFacet()
+            ;
+    }
+    public MediaFormBuilder withEverything() {
+        return
+            withAllSearches()
+            .withAllFacets()
+            .sortOrder(MediaSortOrder.asc(MediaSortField.creationDate), MediaSortOrder.desc(MediaSortField.title))
+            ;
+
+    }
+
 
     private MediaSearch search() {
         if(form.getSearches() == null) {

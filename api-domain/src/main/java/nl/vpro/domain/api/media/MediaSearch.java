@@ -39,8 +39,14 @@ import nl.vpro.domain.user.Broadcaster;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaSearchType")
 @EqualsAndHashCode(callSuper = true)
+@lombok.AllArgsConstructor
+@lombok.Builder
 public class MediaSearch extends AbstractTextSearch implements Predicate<MediaObject> {
 
+
+    public MediaSearch() {
+        super();
+    }
 
     @Valid
     @Getter
