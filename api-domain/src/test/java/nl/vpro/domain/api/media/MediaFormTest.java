@@ -379,5 +379,14 @@ public class MediaFormTest {
         JAXB.marshal(MediaForm.builder().withEverything().build(), System.out);
     }
 
+    @Test
+    public void withSort() throws Exception {
+        Jackson2TestUtil.roundTripAndSimilar(MediaForm.builder().sortOrder(MediaSortOrder.desc(MediaSortField.sortDate)).build(), "{\n" +
+            "  \"sort\" : {\n" +
+            "    \"sortDate\" : \"DESC\"\n" +
+            "  }\n" +
+            "}");
+    }
+
 
 }
