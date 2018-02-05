@@ -488,4 +488,24 @@ public class MediaFormTest {
     }
 
 
+    @Test
+    public void withSort() throws Exception {
+
+        String sortBackwards = "{\n" +
+            "  \"sort\" : {\n" +
+            "    \"sortDate\" : \"DESC\"\n" +
+            "  }\n" +
+            "}";
+
+        MediaForm form = Jackson2Mapper.getLenientInstance().readValue(sortBackwards, MediaForm.class);
+        assertThat(form.getSortFields()).containsExactly(MediaSortOrder.desc(MediaSortField.sortDate));
+
+        Jackson2TestUtil.roundTripAndSimilar(MediaForm.builder().sortOrder(MediaSortOrder.desc(MediaSortField.sortDate)).build(), "{\n" +
+            "  \"sort\" : {\n" +
+            "    \"sortDate\" : \"DESC\"\n" +
+            "  }\n" +
+            "}");
+    }
+
+
 }
