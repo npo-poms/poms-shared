@@ -494,6 +494,7 @@
     <xs:restriction base="xs:string">
       <xs:enumeration value="NL"/>
       <xs:enumeration value="BENELUX"/>
+      <xs:enumeration value="EUROPE"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -924,6 +925,7 @@
       <xs:enumeration value="OFFLINE"/>
       <xs:enumeration value="AVAILABLE"/>
       <xs:enumeration value="AVAILABLE_WITH_DRM"/>
+      <xs:enumeration value="AVAILABLE_WITH_AES_DRM"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
