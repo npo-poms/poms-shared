@@ -48,7 +48,7 @@ public class SchemaTest {
     private final static File DIR = Files.createTempDir();
 
     @BeforeClass
-    public static void generateXSDs() throws JAXBException, IOException, SAXException {
+    public static void generateXSDs() throws JAXBException, IOException {
         generate(
             // media
             Program.class,
@@ -111,7 +111,7 @@ public class SchemaTest {
         return new File(DIR, filename + ".xsd");
     }
 
-    private  Schema testNamespace(String namespace) throws IOException, SAXException {
+    private  Schema testNamespace(String namespace) throws IOException {
         File file = getFile(namespace);
         InputStream control = getClass().getResourceAsStream("/schema/" + file.getName());
         if (control == null) {
