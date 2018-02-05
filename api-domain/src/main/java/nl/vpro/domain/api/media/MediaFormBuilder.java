@@ -467,16 +467,21 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     }
 
     public MediaFormBuilder ageRatingFacet() {
-        return ageRatingFacet(null);
+        return ageRatingFacet((Integer) null);
     }
 
 
     public MediaFormBuilder ageRatingFacet(Integer threshold) {
         MediaFacet facet = new MediaFacet();
         facet.setThreshold(threshold);
+        return ageRatingFacet(facet);
+    }
+
+    public MediaFormBuilder ageRatingFacet(MediaFacet facet) {
         facets().setAgeRatings(facet);
         return this;
     }
+
 
     public MediaFormBuilder contentRatingsFacet() {
         facets().setContentRatings(new MediaFacet());
