@@ -24,25 +24,45 @@ public class MediaSortOrderListJson {
     public static class Serializer extends JsonSerializer<MediaSortOrderList> {
 
         @Override
-        public void serialize(MediaSortOrderList mediaSortOrders, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-            int titleCount = 0;
-            jgen.writeStartArray();
+        public void serialize(MediaSortOrderList mediaSortOrders, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
+
             if (mediaSortOrders != null) {
-                for (MediaSortOrder so : mediaSortOrders) {
-                    if ((so.getOrder() == null || so.getOrder() == Order.ASC) && (! (so instanceof TitleSortOrder)) )  {
-                        jgen.writeString(so.getField().name());
-                    } else {
-                        jgen.writeObject(so);
+                boolean backwards = true; // mediaSortOrders.size() <= 1;
+                if (backwards) {
+                    for (MediaSortOrder so : mediaSortOrders) {
+                        if (so instanceof TitleSortOrder) {
+                            backwards = false;
+                        }
                     }
                 }
+                if (backwards) {
+                    jgen.writeStartObject();
+                    for (MediaSortOrder so : mediaSortOrders) {
+                        jgen.writeStringField(so.getField().name(), so.getOrder().name());
+                    }
+                    jgen.writeEndObject();
+
+                } else {
+                    jgen.writeStartArray();
+                    for (MediaSortOrder so : mediaSortOrders) {
+                        if ((so.getOrder() == null || so.getOrder() == Order.ASC) && (!(so instanceof TitleSortOrder))) {
+                            jgen.writeString(so.getField().name());
+                        } else {
+                            jgen.writeObject(so);
+                        }
+                    }
+                    jgen.writeEndArray();
+                }
+            } else {
+                jgen.writeNull();
+
             }
-            jgen.writeEndArray();
         }
     }
     public static class Deserializer extends JsonDeserializer<MediaSortOrderList> {
 
         @Override
-        public MediaSortOrderList deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+        public MediaSortOrderList deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
             MediaSortOrderList list = new MediaSortOrderList();
             JsonToken token = jsonParser.currentToken();
             switch (token) {
