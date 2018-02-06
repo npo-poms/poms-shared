@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.util.DateUtils;
@@ -580,7 +581,14 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return
             withAllSearches()
             .withAllFacets()
-            .sortOrder(MediaSortOrder.asc(MediaSortField.creationDate), MediaSortOrder.desc(MediaSortField.title))
+            .sortOrder(
+                MediaSortOrder.asc(MediaSortField.creationDate),
+                MediaSortOrder.desc(MediaSortField.title),
+                TitleSortOrder.builder()
+                    .ownerType(OwnerType.NPO)
+                    .textualType(TextualType.MAIN)
+                    .build()
+            )
             ;
 
     }
