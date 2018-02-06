@@ -572,7 +572,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
             .episodeOfFacet()
             .memberOfFacet()
             .descendantOfFacet(MemberRefFacet
-                .builder()
+                .refBuilder()
                 .subSearch(
                     MemberRefSearch.builder()
                         .types(TextMatcherList.must(TextMatcher.not("SERIES")))
