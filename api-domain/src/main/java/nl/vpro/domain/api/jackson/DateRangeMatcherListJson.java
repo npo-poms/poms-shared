@@ -31,7 +31,9 @@ public class DateRangeMatcherListJson {
                     jgen.writeObject(matcher);
                 }
                 jgen.writeEndArray();
-                jgen.writeStringField("match", value.getMatch().name());
+                if (value.getMatch() != null) {
+                    jgen.writeStringField("match", value.getMatch().name());
+                }
                 jgen.writeEndObject();
             } else {
                 jgen.writeStartArray();
