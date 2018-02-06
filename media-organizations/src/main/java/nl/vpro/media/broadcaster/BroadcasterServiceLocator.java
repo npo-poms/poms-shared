@@ -30,13 +30,25 @@ public class BroadcasterServiceLocator {
         singleton = broadcasterServiceProvider.get();
     }
 
+    public static void setInstance(BroadcasterService service) {
+        singleton = service;
+    }
+
 
     public static BroadcasterService getInstance() {
+        if (singleton == null) {
+            singleton = new BroadcasterServiceImpl("https://poms.omroep.nl/broadcasters/");
+            log.warn("No broadcaster service configured, taking {} implicitely", singleton);
+        }
         return singleton;
     }
 
     public static List<String> getIds() {
-        return getInstance().findAll().stream().map(Broadcaster::getId).collect(Collectors.toList());
+        return getInstance()
+            .findAll()
+            .stream()
+            .map(Broadcaster::getId)
+            .collect(Collectors.toList());
     }
 
 }
