@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.function.Predicate;
 
@@ -23,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.media.Schedule;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -66,7 +68,7 @@ public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate
         super(begin, end);
     }
 
-    @lombok.Builder
+    @lombok.Builder(builderClassName = "Builder")
     public DateRangeMatcher(Instant begin, Instant end, Boolean inclusiveEnd) {
         super(begin, end, inclusiveEnd);
     }
@@ -96,5 +98,11 @@ public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate
     public boolean test(Instant date) {
         return super.testComparable(date);
 
+    }
+
+    public static class Builder {
+        public Builder localBegin(LocalDateTime localDateTime) {
+            return begin(localDateTime.atZone(Schedule.ZONE_ID).toInstant());
+        }
     }
 }
