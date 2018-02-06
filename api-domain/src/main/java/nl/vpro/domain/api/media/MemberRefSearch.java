@@ -18,6 +18,7 @@ import nl.vpro.domain.api.TextMatcherList;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberRefSearchType")
+@lombok.Builder
 public class MemberRefSearch extends AbstractSearch {
 
     @Valid
@@ -26,6 +27,9 @@ public class MemberRefSearch extends AbstractSearch {
     @Valid
     private TextMatcherList types;
 
+    public MemberRefSearch() {
+
+    }
     public TextMatcherList getMediaIds() {
         return mediaIds;
     }

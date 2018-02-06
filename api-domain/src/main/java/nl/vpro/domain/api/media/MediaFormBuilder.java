@@ -571,7 +571,16 @@ public class MediaFormBuilder extends AbstractFormBuilder {
                     .build())
             .episodeOfFacet()
             .memberOfFacet()
-            .descendantOfFacet()
+            .descendantOfFacet(MemberRefFacet
+                .builder()
+                .subSearch(
+                    MemberRefSearch.builder()
+                        .types(TextMatcherList.must(TextMatcher.not("SERIES")))
+                        .build()
+                )
+                .threshold(10)
+                .build()
+            )
             .relationsFacet("test")
             .ageRatingFacet()
             .contentRatingsFacet()
