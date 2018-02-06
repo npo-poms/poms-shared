@@ -33,6 +33,13 @@ public class RelationFacet extends ExtendedMediaFacet implements NameableSearcha
         super(threshold, sort, max);
     }
 
+    @lombok.Builder
+    private RelationFacet(Integer threshold, FacetOrder sort, Integer max, RelationSearch subSearch, String name) {
+        super(threshold, sort, max);
+        this.subSearch = subSearch;
+        this.name = name;
+    }
+
     @Override
     public boolean hasSubSearch() {
         return subSearch != null && subSearch.hasSearches();
