@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.AbstractSearch;
+import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.TextMatcherList;
 
 /**
@@ -18,7 +19,6 @@ import nl.vpro.domain.api.TextMatcherList;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberRefSearchType")
-@lombok.Builder
 public class MemberRefSearch extends AbstractSearch {
 
     @Valid
@@ -30,6 +30,15 @@ public class MemberRefSearch extends AbstractSearch {
     public MemberRefSearch() {
 
     }
+    @lombok.Builder
+    private MemberRefSearch(Match match, TextMatcherList mediaIds, TextMatcherList types) {
+        super(match);
+        this.mediaIds = mediaIds;
+        this.types = types;
+
+    }
+
+
     public TextMatcherList getMediaIds() {
         return mediaIds;
     }

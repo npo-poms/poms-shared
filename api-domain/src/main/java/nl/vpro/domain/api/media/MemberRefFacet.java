@@ -31,7 +31,7 @@ public class MemberRefFacet extends MediaFacet implements SearchableFacet<Member
         super(threshold, sort, max);
     }
 
-    @lombok.Builder
+    @lombok.Builder(builderMethodName = "refBuilder")
     private MemberRefFacet(Integer threshold, FacetOrder sort, Integer max, MemberRefSearch subSearch) {
         super(threshold, sort, max);
         this.subSearch = subSearch;
