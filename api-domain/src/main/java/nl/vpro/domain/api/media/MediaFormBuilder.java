@@ -489,6 +489,11 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
+    public MediaFormBuilder facetFilter(MediaSearch search) {
+        facets().setFilter(search);
+        return this;
+    }
+
     public MediaFormBuilder withAllSearches() {
 
         return  fuzzyText("text")
@@ -584,6 +589,18 @@ public class MediaFormBuilder extends AbstractFormBuilder {
             .relationsFacet("test")
             .ageRatingFacet()
             .contentRatingsFacet()
+            .facetFilter(
+                MediaSearch.builder()
+                    .creationDates(
+                        DateRangeMatcherList.builder().value(
+                            DateRangeMatcher.builder()
+                            .begin(LocalDateTime.of(2010, 1, 1, 12, 0)
+                                .atZone(Schedule.ZONE_ID).toInstant())
+                            .build()
+                        ).build()
+                    )
+                    .build()
+            )
             ;
     }
     public MediaFormBuilder withEverything() {
