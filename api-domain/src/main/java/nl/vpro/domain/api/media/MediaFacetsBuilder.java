@@ -100,8 +100,8 @@ public class MediaFacetsBuilder {
         return this;
     }
 
-    public MediaFacetsBuilder memberOf(Integer threshold, FacetOrder sort, Integer offset, Integer max) {
-        facets.setMemberOf(new MemberRefFacet(threshold, sort, offset, max));
+    public MediaFacetsBuilder memberOf(Integer threshold, FacetOrder sort, Integer max) {
+        facets.setMemberOf(new MemberRefFacet(threshold, sort, max));
         return this;
     }
 
@@ -115,8 +115,8 @@ public class MediaFacetsBuilder {
         return this;
     }
 
-    public MediaFacetsBuilder episodeOf(Integer threshold, FacetOrder sort, Integer offset, Integer max) {
-        facets.setEpisodeOf(new MemberRefFacet(threshold, sort, offset, max));
+    public MediaFacetsBuilder episodeOf(Integer threshold, FacetOrder sort, Integer max) {
+        facets.setEpisodeOf(new MemberRefFacet(threshold, sort, max));
         return this;
     }
 
