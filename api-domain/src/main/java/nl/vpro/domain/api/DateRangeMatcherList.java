@@ -1,5 +1,7 @@
 package nl.vpro.domain.api;
 
+import lombok.Singular;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +37,8 @@ public class DateRangeMatcherList extends MatcherList<DateRangeMatcher> implemen
     public DateRangeMatcherList() {
     }
 
-    public DateRangeMatcherList(List<DateRangeMatcher> values, Match match) {
+    @lombok.Builder
+    public DateRangeMatcherList(@Singular  List<DateRangeMatcher> values, Match match) {
         super(match);
         this.matchers = values;
     }
