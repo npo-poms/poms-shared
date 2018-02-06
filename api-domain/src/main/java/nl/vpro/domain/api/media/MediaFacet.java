@@ -26,7 +26,7 @@ public class MediaFacet extends TextFacet<MediaSearch> {
         super(threshold, sort, max);
     }
     @lombok.Builder
-    private MediaFacet(Integer threshold, FacetOrder sort, Integer max, MediaSearch filter, MediaSearch subSearch) {
+    private MediaFacet(Integer threshold, FacetOrder sort, Integer max, MediaSearch filter) {
         this(threshold, sort, max);
         this.filter = filter;
     }

@@ -29,6 +29,14 @@ public abstract class AbstractSearch extends AbstractMatcher {
 
     public abstract boolean hasSearches();
 
+    protected AbstractSearch() {
+
+    }
+
+    protected AbstractSearch(Match match) {
+        super(match);
+    }
+
 
     protected boolean atLeastOneHasSearches(Iterable<?>... collections) {
         for (Iterable<?> col : collections) {
