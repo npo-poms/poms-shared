@@ -54,7 +54,7 @@ public class DurationRangeInterval implements RangeFacet<Duration> {
     @XmlValue
     @JsonValue
     protected String getIntervalString() {
-        return interval.getValue();
+        return interval == null ? null : interval.getValue();
     }
 
     @javax.validation.constraints.Pattern(regexp = TEMPORAL_AMOUNT_INTERVAL)
