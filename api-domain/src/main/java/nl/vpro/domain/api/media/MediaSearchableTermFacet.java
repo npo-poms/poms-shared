@@ -31,6 +31,11 @@ public class MediaSearchableTermFacet extends MediaFacet implements SearchableFa
     public MediaSearchableTermFacet(Integer threshold, FacetOrder sort, Integer max) {
         super(threshold, sort, max);
     }
+    @lombok.Builder(builderMethodName = "searchableBuilder")
+    private MediaSearchableTermFacet(Integer threshold, FacetOrder sort, Integer max, TermSearch termSearch) {
+        super(threshold, sort, max);
+        this.subSearch = termSearch;
+    }
 
     @Override
     public boolean hasSubSearch() {
