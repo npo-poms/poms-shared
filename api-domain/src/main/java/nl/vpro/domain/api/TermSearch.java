@@ -27,6 +27,13 @@ public class TermSearch extends AbstractSearch {
         this.ids = ids;
     }
 
+
+    @lombok.Builder
+    private TermSearch(Match match, TextMatcherList ids) {
+        super(match);
+        this.ids = ids;
+    }
+
     public TextMatcherList getIds() {
         return ids;
     }

@@ -35,6 +35,7 @@ public abstract class AbstractRelationSearch extends AbstractSearch
     @Valid
     private TextMatcherList uriRefs;
 
+
     @Override
     public boolean hasSearches() {
         return atLeastOneHasSearches(types, broadcasters, values, uriRefs);
