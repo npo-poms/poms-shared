@@ -21,9 +21,11 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
+
 @Data
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "predictionUpdateType")
+@XmlRootElement(name = "prediction")
 @lombok.Builder
 @lombok.AllArgsConstructor
 public class PredictionUpdate implements Comparable<PredictionUpdate> {

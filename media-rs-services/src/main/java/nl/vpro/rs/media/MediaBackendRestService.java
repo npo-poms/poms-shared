@@ -19,6 +19,7 @@ import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Member;
+import nl.vpro.domain.media.Platform;
 import nl.vpro.domain.media.StreamingPlatformStatus;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaList;
@@ -370,6 +371,50 @@ public interface MediaBackendRestService {
         @PathParam(MID) String mid,
         @Context HttpServletRequest request
     ) throws IOException, URISyntaxException;
+
+
+    @GET
+    @Path("{entity:(media|program|group|segment)}/{id}/predictions")
+    XmlCollection<PredictionUpdate> getPredictions(
+        @PathParam(ENTITY) @DefaultValue("media") final String entity,
+        @PathParam(ID) final String id,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+    ) throws IOException;
+
+
+    @GET
+    @Path("{entity:(media|program|group|segment)}/{id}/predictions/{platform}")
+    PredictionUpdate getPrediction(
+        @PathParam(ENTITY) @DefaultValue("media") final String entity,
+        @PathParam(ID) final String id,
+        @PathParam("platform") final Platform platform,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+    ) throws IOException;
+
+
+    @POST
+    @Path("{entity:(media|program|group|segment)}/{id}/predictions")
+    Response setPredictions(
+        @PathParam(ENTITY) @DefaultValue("media") final String entity,
+        @PathParam(ID) final String id,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(ERRORS) String errors,
+        XmlCollection<PredictionUpdate> collection
+    ) throws IOException;
+
+
+    @POST
+    @Path("{entity:(media|program|group|segment)}/{id}/predictions/{platform}")
+    Response setPrediction(
+        @PathParam(ENTITY) @DefaultValue("media") final String entity,
+        @PathParam(ID) final String id,
+        @PathParam("platform") final Platform platform,
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(ERRORS) String errors,
+        PredictionUpdate prediction
+    ) throws IOException;
+
+
 }
 
 
