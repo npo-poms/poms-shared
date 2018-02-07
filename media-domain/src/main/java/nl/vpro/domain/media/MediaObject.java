@@ -1880,7 +1880,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     protected void setPredictionsForXml(List<Prediction> predictions) {
-        this.predictionsForXml =  predictions;
+        // called by jackson
+        this.predictions =  new TreeSet<>(predictions);
+        this.predictionsForXml = null;
     }
 
     public Prediction getPrediction(Platform platform) {
