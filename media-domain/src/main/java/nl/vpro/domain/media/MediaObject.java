@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -960,8 +961,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public boolean removeGeoRestriction(GeoRestriction restriction) {
-        if (this.geoRestrictions != null && this.geoRestrictions.remove(restriction)) {
-            return true;
+        if (this.geoRestrictions != null) {
+            return this.geoRestrictions.remove(restriction);
         }
         return false;
     }
@@ -1016,7 +1017,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
-    public MediaObject addTitle(String title, OwnerType owner, TextualType type) {
+    public MediaObject addTitle(String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
         final Title existingTitle = findTitle(owner, type);
         if (existingTitle != null) {
             existingTitle.setTitle(title);
@@ -2663,17 +2664,19 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return LocalizedObject.super.getShortDescription();
     }
 
-    public void mergeImages(MediaObject obj, OwnerType owner) {
+    public void mergeImages(MediaObject incoming, OwnerType owner) {
         List<Image> firstImages = new ArrayList<>();
-        obj.getImages().forEach(i -> {
+        incoming.getImages().forEach(i -> {
             if (Objects.equals(i.getOwner(), owner)) {
                 firstImages.add(addOrUpdate(i));
+            } else {
+                log.debug("A bit odd, incoming with different owner");
             }
         });
         List<Image> toRemove = getImages()
             .stream()
             .filter(i -> Objects.equals(i.getOwner(), owner))
-            .filter(i -> ! obj.getImages().contains(i))
+            .filter(i -> ! incoming.getImages().contains(i))
             .collect(Collectors.toList());
 
         toRemove.forEach(this::removeImage);
@@ -2701,6 +2704,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     private Image addOrUpdate(Image img) {
         Image existing = this.getImage(img);
         if (existing != null) {
+            if (existing.getOwner() != img.getOwner()) {
+                log.info("Copying from different owner {} <- {}", existing, img);
+            }
             existing.copyFrom(img);
             return existing;
         } else {
