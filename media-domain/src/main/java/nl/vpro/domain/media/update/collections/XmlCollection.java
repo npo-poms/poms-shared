@@ -27,6 +27,7 @@ import nl.vpro.domain.media.update.*;
     MemberUpdate.class,
     MemberRefUpdate.class,
     LocationUpdate.class,
+    PredictionUpdate.class,
     String.class
 })
 @XmlAccessorType(XmlAccessType.NONE)
