@@ -700,7 +700,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testWithPredictions2() throws IOException, SAXException {
+    public void testWithPredictionsViaBuilder() throws IOException, SAXException {
         ProgramUpdate update = ProgramUpdate.create(MediaBuilder.program()
             .predictions(
                 Prediction.builder().platform(Platform.INTERNETVOD).available(true).build(),
