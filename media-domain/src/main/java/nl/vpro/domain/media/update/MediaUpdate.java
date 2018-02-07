@@ -115,13 +115,20 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @SuppressWarnings("unchecked")
     public static <M extends MediaObject> MediaUpdate<M> create(M object) {
+        MediaUpdate<M> created;
         if (object instanceof Program) {
-            return (MediaUpdate<M>) ProgramUpdate.create((Program) object);
+            created = (MediaUpdate<M>) ProgramUpdate.create((Program) object);
         } else if (object instanceof Group) {
-            return (MediaUpdate<M>) GroupUpdate.create((Group) object);
+            created = (MediaUpdate<M>) GroupUpdate.create((Group) object);
         } else {
-            return (MediaUpdate<M>) SegmentUpdate.create((Segment) object);
+            created = (MediaUpdate<M>) SegmentUpdate.create((Segment) object);
         }
+        created.predictions = object.getPredictions()
+            .stream()
+            .filter(Prediction::isAvailable)
+            .map(PredictionUpdate::of)
+            .collect(Collectors.toSet());
+        return created;
     }
 
     public static <M extends MediaObject> MediaUpdate<M> create(M object, Float version) {
@@ -219,6 +226,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder) {
         this(builder, OwnerType.BROADCASTER);
+        predictions = builder.build().getPredictions().stream().filter(Prediction::isAvailable).map(PredictionUpdate::of).collect(Collectors.toSet());
+
     }
 
     protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, OwnerType type) {
@@ -350,7 +359,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
             memberOf = null;
         }
         if (notTransforming(locations)) {
-            mediaObject().setLocations(locations.stream().map(LocationUpdate::toLocation).collect(Collectors.toCollection(TreeSet::new)));
+            mediaObject()
+                .setLocations(locations.stream().map(LocationUpdate::toLocation).collect(Collectors.toCollection(TreeSet::new)));
             locations = null;
         }
         if (notTransforming(relations)) {
@@ -361,12 +371,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
             mediaObject().setScheduleEvents(scheduleEvents.stream().map(e -> e.toScheduleEvent(owner)).collect(Collectors.toCollection(TreeSet::new)));
             scheduleEvents = null;
         }
-
-        if (notTransforming(predictions)) {
-            mediaObject().setPredictions(predictions.stream().map(PredictionUpdate::toPrediction).collect(Collectors.toCollection(TreeSet::new)));
-            predictions = null;
-        }
-
 
         return build();
     }
@@ -862,15 +866,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "prediction")
     @Valid
     public Set<PredictionUpdate> getPredictions() {
-        if (predictions == null) {
-            predictions = new TransformingSortedSet<>(
-                mediaObject().getPredictions(),
-                PredictionUpdate::of,
-                PredictionUpdate::toPrediction)
-            .filter(Prediction::isAvailable)
-
-            ;
-        }
         return predictions;
     }
 

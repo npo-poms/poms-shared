@@ -437,20 +437,29 @@ public class Location extends PublishableObject<Location>
         return platform != null;
     }
 
-    Prediction getAuthorityRecord() {
+    Prediction getAuthorityRecord(boolean create) {
         if (hasPlatform()) {
             if (mediaObject == null) {
                 throw new IllegalStateException("Location does not have a parent mediaobject");
             }
             Prediction existing = mediaObject.getPrediction(platform);
-            Prediction rec = mediaObject.findOrCreatePrediction(platform);
-            if (existing == null) {
-                Embargos.copy(Embargos.of(publishStart, publishStop), rec);
+            if (create) {
+                Prediction rec = mediaObject.findOrCreatePrediction(platform);
+                if (existing == null) {
+                    log.info("Implicitely created prediction record for {}", platform);
+                    Embargos.copy(Embargos.of(publishStart, publishStop), rec);
+                }
+                return rec;
+            } else {
+                return existing;
             }
-            return rec;
         } else {
             return null;
         }
+    }
+
+    Prediction getAuthorityRecord() {
+        return getAuthorityRecord(true);
     }
 
     public boolean hasVideoSizing() {
@@ -475,8 +484,10 @@ public class Location extends PublishableObject<Location>
     public Instant getPublishStartInstant() {
         if(hasPlatform() && mediaObject != null) {
             try {
-                Prediction record = getAuthorityRecord();
-                return record.getPublishStartInstant();
+                Prediction record = getAuthorityRecord(false);
+                if (record != null) {
+                    return record.getPublishStartInstant();
+                }
             } catch (IllegalAuthorativeRecord iea) {
                 log.debug(iea.getMessage());
             }
@@ -597,8 +608,7 @@ public class Location extends PublishableObject<Location>
             this.mediaObject = (MediaObject) parent;
         }
         try {
-            Prediction locationAuthorityRecord = getAuthorityRecord();
-
+            Prediction locationAuthorityRecord = getAuthorityRecord(false);
             if (locationAuthorityRecord != null) {
                 locationAuthorityRecord.setPublishStartInstant(publishStart);
                 locationAuthorityRecord.setPublishStopInstant(publishStop);
@@ -664,7 +674,7 @@ public class Location extends PublishableObject<Location>
             // unknown
             return false;
         }
-        Prediction record = getAuthorityRecord();
+        Prediction record = getAuthorityRecord(false);
         return record != null && record.getAuthority() == Authority.SYSTEM;
     }
 
