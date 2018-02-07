@@ -445,7 +445,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<Prediction> predictions;
 
-    protected List<Prediction> predictionsForXml;
+    @Transient
+    private List<Prediction> predictionsForXml;
 
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = true)
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
