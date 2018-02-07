@@ -1828,6 +1828,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return set;
     }
 
+
+    @XmlTransient
     public SortedSet<Prediction> getPredictions() {
         if (predictions == null) {
             predictions = new TreeSet<>();
@@ -1837,7 +1839,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return new SortedSetSameElementWrapper<Prediction>(sorted(predictions)) {
             @Override
             protected Prediction adapt(Prediction prediction) {
-                prediction.setMediaObject(MediaObject.this);
+                prediction.setParent(MediaObject.this);
                 if (prediction.getState() == Prediction.State.ANNOUNCED) {
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform()
@@ -1870,7 +1872,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             .filter(Prediction::isAvailable)
             .collect(Collectors.toList());
     }
-
+    protected void setPredictionsForXml(List<Prediction> predictions) {
+        this.predictions = new TreeSet<>(predictions);
+    }
 
     public Prediction getPrediction(Platform platform) {
         return MediaObjects.getPrediction(platform, getPredictions());
