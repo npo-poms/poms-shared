@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.xml.bind.DateToDuration;
@@ -27,7 +28,7 @@ import nl.vpro.xml.bind.DateToDuration;
  * @author Michiel Meeuwissen
  * @since 3.5
  */
-public abstract class AbstractScheduleEvent {
+public abstract class AbstractScheduleEvent implements Child<MediaObject> {
 
     AbstractScheduleEvent() {
 
@@ -39,7 +40,7 @@ public abstract class AbstractScheduleEvent {
         this.guideDay = guideDay;
         this.start = start;
         this.duration = duration;
-        setMediaObject(media);
+        setParent(media);
     }
 
 
@@ -259,13 +260,29 @@ public abstract class AbstractScheduleEvent {
     }
 
     @XmlTransient
+    @Deprecated
     public MediaObject getMediaObject() {
         return mediaObject;
     }
 
+    @Deprecated
     public void setMediaObject(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
     }
+
+
+    @XmlTransient
+    @Deprecated
+    @Override
+    public MediaObject getParent() {
+        return mediaObject;
+    }
+
+    @Override
+    public void setParent(MediaObject mediaObject) {
+        this.mediaObject = mediaObject;
+    }
+
 
     @XmlAttribute
     public ScheduleEventType getType() {

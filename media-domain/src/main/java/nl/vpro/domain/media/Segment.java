@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.media.support.AuthorizedDuration;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.SegmentValidation;
@@ -31,7 +32,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @JsonTypeName("segment")
 @SegmentValidation
-public class Segment extends MediaObject implements Comparable<Segment> {
+public class Segment extends MediaObject implements Comparable<Segment>, Child<Program> {
 
 
     private static final long serialVersionUID = -868293795041160925L;
@@ -150,11 +151,13 @@ public class Segment extends MediaObject implements Comparable<Segment> {
         return (parent != null && parent.isMerged()) || super.isMerged();
     }
 
+    @Override
     public Program getParent() {
         return parent;
     }
 
-    void setParent(Program parent) {
+    @Override
+    public void setParent(Program parent) {
         if(parent == null) {
             throw new IllegalArgumentException();
         }
