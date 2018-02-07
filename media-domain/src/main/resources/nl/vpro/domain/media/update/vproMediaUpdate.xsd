@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema
   version="1.0"
+  elementFormDefault="qualified"
   targetNamespace="urn:vpro:media:update:2009"
   xmlns="urn:vpro:media:update:2009"
   xmlns:media="urn:vpro:media:2009"
@@ -148,6 +149,17 @@
                   form="qualified"/>
       <xs:element name="email" type="media:baseTextType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
       <xs:element name="website" type="media:websiteType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element name="prediction" type="predictionUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            With predictions it can be indicated for which platforms locations will be available.
+            If there is a prediction for a certain platform, but the mediaobject is not yet available on the streaming platform, then
+            there will be no associated location for that certain platform.
+
+            If the streaming platform status changes, then according to these 'prediction' records the locations will be changed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element form="qualified" name="locations" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
@@ -493,6 +505,15 @@
       <xs:element name="from" type="xs:int" minOccurs="1" form="qualified"/>
       <xs:element name="to" type="xs:int" minOccurs="1" form="qualified"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="predictionUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="media:platformTypeEnum">
+        <xs:attribute name="publishStart" type="xs:dateTime"/>
+        <xs:attribute name="publishStop" type="xs:dateTime"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
 </xs:schema>
