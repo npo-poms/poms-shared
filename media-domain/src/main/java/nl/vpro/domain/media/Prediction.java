@@ -14,11 +14,11 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.Embargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -41,9 +41,10 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Table(
     uniqueConstraints = {@UniqueConstraint(columnNames = {"mediaobject_id", "platform"})}
 )
-public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, Embargo {
+public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, Embargo, Child<MediaObject> {
 
     private static final long serialVersionUID = 0L;
+
 
     @XmlEnum
     @XmlType(name = "predictionStateEnum")
@@ -97,7 +98,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @Column
     @XmlTransient
-    @Setter @Getter
+    @Setter
+    @Getter
     private boolean available = true;
 
 
@@ -170,12 +172,28 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.platform = platform;
     }
 
+
+    @Deprecated
     public MediaObject getMediaObject() {
         return mediaObject;
     }
 
+    @Deprecated
     public void setMediaObject(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
+    }
+
+
+    @Override
+    public void setParent(MediaObject mo) {
+        this.mediaObject = mo;
+
+    }
+
+    @Override
+    public MediaObject getParent() {
+        return this.mediaObject;
+
     }
 
     public Instant getIssueDate() {
@@ -263,10 +281,10 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-
         if (parent instanceof MediaObject) {
-            MediaObject mediaObject = (MediaObject) parent;
+            this.mediaObject = (MediaObject) parent;
         }
+        this.available = true;
     }
 
 
