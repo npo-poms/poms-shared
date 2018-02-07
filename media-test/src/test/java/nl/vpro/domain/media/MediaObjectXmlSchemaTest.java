@@ -840,7 +840,165 @@ public class MediaObjectXmlSchemaTest {
 
     }
 
+    @Test
+    public void unmarshal() throws IOException, SAXException {
+        String example =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPWON_1199058\" sortDate=\"2013-04-09T15:25:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2013-03-17T06:48:59.719+01:00\" lastModified=\"2018-02-07T11:58:43.578+01:00\" publishDate=\"2015-01-08T17:42:19.202+01:00\" urn=\"urn:vpro:media:program:23197206\">\n" +
+                "  <crid>crid://tmp.program.omroep.nl/15466778</crid>\n" +
+                "  <broadcaster id=\"VPRO\">VPRO</broadcaster>\n" +
+                "  <title owner=\"BROADCASTER\" type=\"MAIN\">Polleke</title>\n" +
+                "  <title owner=\"NEBO\" type=\"MAIN\">Polleke</title>\n" +
+                "  <title owner=\"MIS\" type=\"MAIN\">Polleke</title>\n" +
+                "  <title owner=\"WHATS_ON\" type=\"MAIN\">Polleke</title>\n" +
+                "  <title owner=\"BROADCASTER\" type=\"ORIGINAL\">Polleke</title>\n" +
+                "  <title owner=\"WHATS_ON\" type=\"ORIGINAL\">Polleke</title>\n" +
+                "  <description owner=\"BROADCASTER\" type=\"MAIN\">\n" +
+                "De 11-jarige Polleke groeit op in de grote stad bij haar excentrieke moeder. Ondertussen moet ze ook een beetje zorgen voor haar vader. Behalve vader is hij ook dichter en junkie! Polleke komt achter de waarde van echte vriendschap en beleeft alle ups en downs die bij een eerste echte grote liefde horen. Ze is smoorverliefd op Mimoen, met wie ze echter niet mag omgaan. Maar zijn ogen zo zwart als Afrika blijven haar achtervolgen.\n" +
+                "</description>\n" +
+                "  <description owner=\"MIS\" type=\"MAIN\">De 11-jarige Polleke groeit op in de grote stad bij haar excentrieke moeder. Ondertussen moet ze ook een beetje zorgen voor haar vader. Behalve vader is hij ook dichter en junkie! Polleke komt achter de waarde van echte vriendschap en beleeft alle ups en downs die bij een eerste echte grote liefde horen. Ze is smoorverliefd op Mimoen, met wie ze echter niet mag omgaan. Maar zijn ogen zo zwart als Afrika blijven haar achtervolgen.</description>\n" +
+                "  <description owner=\"WHATS_ON\" type=\"MAIN\">Dramaserie naar het boek 'Polleke¿ van Guus Kuijer. De 11-jarige Polleke groeit op in de grote stad bij haar excentrieke moeder. Ondertussen moet ze ook een beetje zorgen voor haar vader. Behalve vader is hij ook dichter en junkie!  Polleke komt achter de waarde van echte vriendschap en beleeft alle ups en downs die bij een eerste echte grote liefde horen. Ze is smoorverliefd op Mimoen, met wie ze echter niet mag omgaan. Maar zijn ogen zo zwart als Afrika blijven haar achtervolgen.  Regie: Ineke Houtman, Productie: Egmond Film&amp;TV, Scenario: Maarten Lebens en Rob Arends.</description>\n" +
+                "  <genre id=\"3.0.1.1\">\n" +
+                "    <term>Jeugd</term>\n" +
+                "  </genre>\n" +
+                "  <genre id=\"3.0.1.3\">\n" +
+                "    <term>Serie</term>\n" +
+                "  </genre>\n" +
+                "  <country code=\"NL\">Nederland</country>\n" +
+                "  <language code=\"nl\">Nederlands</language>\n" +
+                "  <avAttributes>\n" +
+                "    <avFileFormat>UNKNOWN</avFileFormat>\n" +
+                "    <videoAttributes/>\n" +
+                "    <audioAttributes/>\n" +
+                "  </avAttributes>\n" +
+                "  <duration>P0DT0H25M0.000S</duration>\n" +
+                "  <credits>\n" +
+                "    <person role=\"SCRIPTWRITER\">\n" +
+                "      <givenName>Maarten</givenName>\n" +
+                "      <familyName>Lebens</familyName>\n" +
+                "    </person>\n" +
+                "    <person role=\"SCRIPTWRITER\">\n" +
+                "      <givenName>Rob</givenName>\n" +
+                "      <familyName>Arends</familyName>\n" +
+                "    </person>\n" +
+                "  </credits>\n" +
+                "  <descendantOf urnRef=\"urn:vpro:media:group:23197210\" midRef=\"VPWON_1199053\" type=\"SEASON\"/>\n" +
+                "  <descendantOf urnRef=\"urn:vpro:media:group:43970822\" midRef=\"POMS_S_VPRO_596635\" type=\"PLAYLIST\"/>\n" +
+                "  <descendantOf urnRef=\"urn:vpro:media:group:4446589\" midRef=\"POMS_S_VPRO_113225\" type=\"SERIES\"/>\n" +
+                "  <descendantOf urnRef=\"urn:vpro:media:group:45760423\" midRef=\"POMS_S_VPRO_652484\" type=\"COLLECTION\"/>\n" +
+                "  <descendantOf urnRef=\"urn:vpro:media:group:45760505\" midRef=\"POMS_S_VPRO_652517\" type=\"COLLECTION\"/>\n" +
+                "  <prediction state=\"ANNOUNCED\" publishStop=\"2020-01-02T14:54:44+01:00\">TVVOD</prediction>\n" +
+                "  <locations>\n" +
+                "    <location owner=\"CERES\" platform=\"INTERNETVOD\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T16:11:11.810+02:00\" lastModified=\"2013-04-09T16:11:11.968+02:00\" publishStart=\"2013-04-09T15:54:44+02:00\" publishStop=\"2023-04-09T15:54:44+02:00\" urn=\"urn:vpro:media:location:24221530\">\n" +
+                "      <programUrl>odip+http://odi.omroep.nl/video/adaptive/VPWON_1199058</programUrl>\n" +
+                "      <avAttributes>\n" +
+                "        <avFileFormat>HASP</avFileFormat>\n" +
+                "      </avAttributes>\n" +
+                "    </location>\n" +
+                "    <location owner=\"NEBO\" platform=\"INTERNETVOD\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T20:46:48.361+02:00\" lastModified=\"2013-04-09T20:46:48.450+02:00\" publishStart=\"2013-04-09T15:54:44+02:00\" publishStop=\"2023-04-09T15:54:44+02:00\" urn=\"urn:vpro:media:location:24227210\">\n" +
+                "      <programUrl>odi+http://odi.omroep.nl/video/h264_sb/VPWON_1199058</programUrl>\n" +
+                "      <avAttributes>\n" +
+                "        <bitrate>204800</bitrate>\n" +
+                "        <avFileFormat>MP4</avFileFormat>\n" +
+                "        <videoAttributes>\n" +
+                "          <videoCoding>MP4</videoCoding>\n" +
+                "          <aspectRatio>16:9</aspectRatio>\n" +
+                "        </videoAttributes>\n" +
+                "      </avAttributes>\n" +
+                "    </location>\n" +
+                "    <location owner=\"NEBO\" platform=\"INTERNETVOD\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T20:46:48.363+02:00\" lastModified=\"2013-04-09T20:46:48.452+02:00\" publishStart=\"2013-04-09T15:54:44+02:00\" publishStop=\"2023-04-09T15:54:44+02:00\" urn=\"urn:vpro:media:location:24227213\">\n" +
+                "      <programUrl>odi+http://odi.omroep.nl/video/h264_bb/VPWON_1199058</programUrl>\n" +
+                "      <avAttributes>\n" +
+                "        <bitrate>512000</bitrate>\n" +
+                "        <avFileFormat>MP4</avFileFormat>\n" +
+                "        <videoAttributes>\n" +
+                "          <videoCoding>MP4</videoCoding>\n" +
+                "          <aspectRatio>16:9</aspectRatio>\n" +
+                "        </videoAttributes>\n" +
+                "      </avAttributes>\n" +
+                "    </location>\n" +
+                "    <location owner=\"NEBO\" platform=\"INTERNETVOD\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T20:46:48.361+02:00\" lastModified=\"2013-04-09T20:46:48.453+02:00\" publishStart=\"2013-04-09T15:54:44+02:00\" publishStop=\"2023-04-09T15:54:44+02:00\" urn=\"urn:vpro:media:location:24227216\">\n" +
+                "      <programUrl>odi+http://odi.omroep.nl/video/h264_std/VPWON_1199058</programUrl>\n" +
+                "      <avAttributes>\n" +
+                "        <bitrate>1024000</bitrate>\n" +
+                "        <avFileFormat>MP4</avFileFormat>\n" +
+                "        <videoAttributes>\n" +
+                "          <videoCoding>MP4</videoCoding>\n" +
+                "          <aspectRatio>16:9</aspectRatio>\n" +
+                "        </videoAttributes>\n" +
+                "      </avAttributes>\n" +
+                "    </location>\n" +
+                "    <location owner=\"NEBO\" platform=\"INTERNETVOD\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T20:46:48.362+02:00\" lastModified=\"2013-04-09T20:46:48.455+02:00\" publishStart=\"2013-04-09T15:54:44+02:00\" publishStop=\"2023-04-09T15:54:44+02:00\" urn=\"urn:vpro:media:location:24227219\">\n" +
+                "      <programUrl>odi+http://odi.omroep.nl/video/wvc1_std/VPWON_1199058</programUrl>\n" +
+                "      <avAttributes>\n" +
+                "        <bitrate>1024000</bitrate>\n" +
+                "        <avFileFormat>WVC1</avFileFormat>\n" +
+                "        <videoAttributes>\n" +
+                "          <videoCoding>MP4</videoCoding>\n" +
+                "          <aspectRatio>16:9</aspectRatio>\n" +
+                "        </videoAttributes>\n" +
+                "      </avAttributes>\n" +
+                "    </location>\n" +
+                "    <location owner=\"NEBO\" platform=\"INTERNETVOD\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T20:46:48.361+02:00\" lastModified=\"2013-04-09T20:46:48.456+02:00\" publishStart=\"2013-04-09T15:54:44+02:00\" publishStop=\"2023-04-09T15:54:44+02:00\" urn=\"urn:vpro:media:location:24227222\">\n" +
+                "      <programUrl>odi+http://odi.omroep.nl/video/wmv_sb/VPWON_1199058</programUrl>\n" +
+                "      <avAttributes>\n" +
+                "        <bitrate>204800</bitrate>\n" +
+                "        <avFileFormat>WM</avFileFormat>\n" +
+                "        <videoAttributes>\n" +
+                "          <videoCoding>MP4</videoCoding>\n" +
+                "          <aspectRatio>16:9</aspectRatio>\n" +
+                "        </videoAttributes>\n" +
+                "      </avAttributes>\n" +
+                "    </location>\n" +
+                "    <location owner=\"NEBO\" platform=\"INTERNETVOD\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T20:46:48.362+02:00\" lastModified=\"2013-04-09T20:46:48.457+02:00\" publishStart=\"2013-04-09T15:54:44+02:00\" publishStop=\"2023-04-09T15:54:44+02:00\" urn=\"urn:vpro:media:location:24227225\">\n" +
+                "      <programUrl>odi+http://odi.omroep.nl/video/wmv_bb/VPWON_1199058</programUrl>\n" +
+                "      <avAttributes>\n" +
+                "        <bitrate>512000</bitrate>\n" +
+                "        <avFileFormat>WM</avFileFormat>\n" +
+                "        <videoAttributes>\n" +
+                "          <videoCoding>MP4</videoCoding>\n" +
+                "          <aspectRatio>16:9</aspectRatio>\n" +
+                "        </videoAttributes>\n" +
+                "      </avAttributes>\n" +
+                "    </location>\n" +
+                "  </locations>\n" +
+                "  <scheduleEvents>\n" +
+                "    <scheduleEvent channel=\"NED3\" imi=\"imi:18999\" midRef=\"VPWON_1199058\" net=\"ZAPP\" urnRef=\"urn:vpro:media:program:23197206\">\n" +
+                "      <memberOf>crid://bds.tv/17410479</memberOf>\n" +
+                "      <avAttributes>\n" +
+                "        <videoAttributes>\n" +
+                "          <aspectRatio>16:9</aspectRatio>\n" +
+                "        </videoAttributes>\n" +
+                "      </avAttributes>\n" +
+                "      <textSubtitles>Teletekst ondertitels</textSubtitles>\n" +
+                "      <guideDay>2013-04-09+02:00</guideDay>\n" +
+                "      <start>2013-04-09T15:25:00+02:00</start>\n" +
+                "      <offset>P0DT0H2M16.000S</offset>\n" +
+                "      <duration>P0DT0H25M0.000S</duration>\n" +
+                "      <poProgID>VPWON_1199058</poProgID>\n" +
+                "    </scheduleEvent>\n" +
+                "  </scheduleEvents>\n" +
+                "  <images>\n" +
+                "    <shared:image owner=\"NEBO\" type=\"STILL\" highlighted=\"false\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T16:00:03.775+02:00\" lastModified=\"2013-04-09T16:00:10.720+02:00\" urn=\"urn:vpro:media:image:24220022\">\n" +
+                "      <shared:title>Polleke</shared:title>\n" +
+                "      <shared:imageUri>urn:vpro:image:169053</shared:imageUri>\n" +
+                "    </shared:image>\n" +
+                "    <shared:image owner=\"NEBO\" type=\"STILL\" highlighted=\"false\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T16:00:07.345+02:00\" lastModified=\"2013-04-09T16:00:10.720+02:00\" urn=\"urn:vpro:media:image:24220023\">\n" +
+                "      <shared:title>Polleke</shared:title>\n" +
+                "      <shared:imageUri>urn:vpro:image:169054</shared:imageUri>\n" +
+                "    </shared:image>\n" +
+                "    <shared:image owner=\"NEBO\" type=\"STILL\" highlighted=\"false\" workflow=\"PUBLISHED\" creationDate=\"2013-04-09T16:00:10.556+02:00\" lastModified=\"2013-04-09T16:00:10.721+02:00\" urn=\"urn:vpro:media:image:24220024\">\n" +
+                "      <shared:title>Polleke</shared:title>\n" +
+                "      <shared:imageUri>urn:vpro:image:169055</shared:imageUri>\n" +
+                "    </shared:image>\n" +
+                "  </images>\n" +
+                "  <episodeOf added=\"2013-03-17T06:48:59.805+01:00\" highlighted=\"false\" midRef=\"VPWON_1199053\" index=\"5\" type=\"SEASON\" urnRef=\"urn:vpro:media:group:23197210\"/>\n" +
+                "  <segments/>\n" +
+                "</program>\n";
+        JAXBTestUtil.roundTripAndSimilar(example, Program.class);
 
+
+    }
 
 
 
