@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -91,6 +94,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Enumerated(EnumType.STRING)
     @XmlTransient
     private Authority authority = Authority.USER;
+
+    @Column
+    @XmlTransient
+    @Setter @Getter
+    private boolean available = true;
 
 
     @ManyToOne

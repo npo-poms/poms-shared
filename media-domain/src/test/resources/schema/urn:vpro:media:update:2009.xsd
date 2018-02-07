@@ -80,6 +80,7 @@
       <xs:element name="contentRating" type="media:contentRatingEnum" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="website" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="prediction" type="predictionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="locations" minOccurs="0">
         <xs:complexType>
           <xs:sequence>
@@ -203,6 +204,15 @@
       <xs:element name="familyName" type="xs:string" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="role" type="media:roleType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="predictionUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="media:platformTypeEnum">
+        <xs:attribute name="publishStart" type="xs:dateTime"/>
+        <xs:attribute name="publishStop" type="xs:dateTime"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
   <xs:complexType name="locationUpdateType">

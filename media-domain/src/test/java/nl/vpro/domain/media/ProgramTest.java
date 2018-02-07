@@ -36,7 +36,7 @@ public class ProgramTest {
     }
 
     @Test(expected = CircularReferenceException.class)
-    public void testCreateMemberOfWHenCircular() throws Exception {
+    public void testCreateMemberOfWHenCircular() {
         Program program = new Program(1);
         program.setType(ProgramType.BROADCAST);
         Group group = new Group(2);
