@@ -81,6 +81,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
         "contentRatings",
         "email",
         "websites",
+        "predictions",
         "locations",
         "scheduleEvents",
         "relations",
@@ -197,6 +198,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private SortedSet<ScheduleEventUpdate> scheduleEvents;
 
+    protected Set<PredictionUpdate> predictions;
 
     private List<String> crids;
 
@@ -359,6 +361,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
             mediaObject().setScheduleEvents(scheduleEvents.stream().map(e -> e.toScheduleEvent(owner)).collect(Collectors.toCollection(TreeSet::new)));
             scheduleEvents = null;
         }
+
+        if (notTransforming(predictions)) {
+            mediaObject().setPredictions(predictions.stream().map(PredictionUpdate::toPrediction).collect(Collectors.toCollection(TreeSet::new)));
+            predictions = null;
+        }
+
 
         return build();
     }
@@ -848,6 +856,25 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setWebsiteObjects(List<Website> websites) {
         mediaObject().setWebsites(websites);
         this.websites = null;
+    }
+
+
+    @XmlElement(name = "prediction")
+    @Valid
+    public Set<PredictionUpdate> getPredictions() {
+        if (predictions == null) {
+            predictions = new TransformingSortedSet<>(
+                mediaObject().getPredictions(),
+                PredictionUpdate::of,
+                PredictionUpdate::toPrediction)
+
+            ;
+        }
+        return predictions;
+    }
+
+    public void setPredictions(Set<PredictionUpdate> predictions) {
+        this.predictions = predictions;
     }
 
     @XmlElementWrapper(name = "locations")

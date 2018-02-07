@@ -105,7 +105,7 @@ import static nl.vpro.domain.media.MediaObject.*;
         "websites",
         "twitterRefs",
         "teletext",
-        "predictions",
+        "predictionsForXml",
         "locations",
         "scheduleEvents",
         "relations",
@@ -156,8 +156,7 @@ import static nl.vpro.domain.media.MediaObject.*;
     "websites",
     "twitter",
     "teletext",
-
-    "predictions",
+    "predictionsForXml",
     "locations",
     "scheduleEvents",
     "relations",
@@ -1829,9 +1828,6 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return set;
     }
 
-    @XmlElement(name = "prediction")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JsonProperty("predictions")
     public SortedSet<Prediction> getPredictions() {
         if (predictions == null) {
             predictions = new TreeSet<>();
@@ -1841,6 +1837,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return new SortedSetSameElementWrapper<Prediction>(sorted(predictions)) {
             @Override
             protected Prediction adapt(Prediction prediction) {
+                prediction.setMediaObject(MediaObject.this);
                 if (prediction.getState() == Prediction.State.ANNOUNCED) {
                     for (Location location : MediaObject.this.getLocations()) {
                         if (location.getPlatform() == prediction.getPlatform()
@@ -1863,6 +1860,17 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     public void setPredictions(Collection<Prediction> predictions) {
         this.predictions = updateSortedSet(this.predictions, predictions);
     }
+
+
+    @XmlElement(name = "prediction")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonProperty("predictions")
+    protected List<Prediction> getPredictionsForXml() {
+        return getPredictions().stream()
+            .filter(Prediction::isAvailable)
+            .collect(Collectors.toList());
+    }
+
 
     public Prediction getPrediction(Platform platform) {
         return MediaObjects.getPrediction(platform, getPredictions());
