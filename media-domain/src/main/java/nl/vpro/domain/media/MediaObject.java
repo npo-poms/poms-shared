@@ -1868,9 +1868,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("predictions")
     protected List<Prediction> getPredictionsForXml() {
-        return getPredictions().stream()
+        List<Prediction> result = getPredictions().stream()
             .filter(Prediction::isAvailable)
             .collect(Collectors.toList());
+        return result;
     }
     protected void setPredictionsForXml(List<Prediction> predictions) {
         this.predictions = new TreeSet<>(predictions);
@@ -1919,7 +1920,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         Prediction prediction = getPrediction(platform);
         if (prediction == null) {
             prediction = new Prediction(platform);
-            prediction.setMediaObject(this);
+            prediction.setParent(this);
             if (predictions == null) {
                 predictions = new TreeSet<>();
             }
