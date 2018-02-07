@@ -867,6 +867,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 mediaObject().getPredictions(),
                 PredictionUpdate::of,
                 PredictionUpdate::toPrediction)
+            .filter(Prediction::isAvailable)
 
             ;
         }
