@@ -217,7 +217,11 @@ public class MediaObjectJsonSchemaTest {
     public void testBackwardsCompatibleUnmarshalPredictions() throws IOException {
         String backwards = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"predictions\":[\"INTERNETVOD\"]}";
         Program program = Jackson2Mapper.INSTANCE.readValue(new StringReader(backwards), Program.class);
-        assertThat(program.getPredictions().iterator().next().getPlatform()).isEqualTo(Platform.INTERNETVOD);
+        assertThat(program.getPredictions()
+            .iterator()
+            .next()
+            .getPlatform())
+            .isEqualTo(Platform.INTERNETVOD);
 
 
     }
@@ -352,7 +356,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testScheduleEvent() throws Exception {
+    public void testScheduleEvent() {
         String expected = "{\n" +
             "  \"objectType\" : \"program\",\n" +
             "  \"sortDate\" : 0,\n" +
