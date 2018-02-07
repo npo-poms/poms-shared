@@ -1328,7 +1328,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     public void setPersons(List<Person> persons) {
         for (Person person : persons) {
-            person.setMediaObject(this);
+            person.setParent(this);
         }
         this.persons = updateList(this.persons, persons);
     }
@@ -1361,7 +1361,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
         if (!persons.contains(person)) {
             if (person != null) {
-                person.setMediaObject(this);
+                person.setParent(this);
                 person.setListIndex(persons.size());
                 persons.add(person);
             }
