@@ -698,6 +698,25 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(rounded.getPredictions()).hasSize(1);
     }
 
+
+    @Test
+    public void testWithPredictions2() throws IOException, SAXException {
+        ProgramUpdate update = ProgramUpdate.create(MediaBuilder.program()
+            .predictions(
+                Prediction.builder().platform(Platform.INTERNETVOD).available(true).build(),
+                Prediction.builder().platform(Platform.TVVOD).available(false).build()
+            ));
+
+        ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <prediction>INTERNETVOD</prediction>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>");
+        assertThat(rounded.getPredictions()).hasSize(1);
+    }
+
     @Test
     public void testXSD() throws Exception {
         Source xmlFile = new StreamSource(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program avType=\"VIDEO\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><broadcaster>VPRO</broadcaster><portal>STERREN24</portal><title type=\"MAIN\">bla</title><credits><person role='DIRECTOR'><givenName>Pietje</givenName><familyName>Puk</familyName></person></credits><locations/><scheduleEvents/><images/><segments/></program>"));

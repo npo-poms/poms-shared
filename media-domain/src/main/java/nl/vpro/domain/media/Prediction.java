@@ -130,6 +130,15 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.publishStop = publishStop;
     }
 
+
+    @lombok.Builder
+    private Prediction(Platform platform, Instant publishStart, Instant publishStop, boolean available) {
+        this.platform = platform;
+        this.publishStart = publishStart;
+        this.publishStop = publishStop;
+        this.available = available;
+    }
+
     public Prediction(Prediction source) {
         this(source, source.mediaObject);
     }
