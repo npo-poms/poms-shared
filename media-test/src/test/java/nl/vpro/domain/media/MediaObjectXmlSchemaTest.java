@@ -846,6 +846,7 @@ public class MediaObjectXmlSchemaTest {
             "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPWON_1199058\" sortDate=\"2013-04-09T15:25:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2013-03-17T06:48:59.719+01:00\" lastModified=\"2018-02-07T11:58:43.578+01:00\" publishDate=\"2015-01-08T17:42:19.202+01:00\" urn=\"urn:vpro:media:program:23197206\">\n" +
                 "  <broadcaster id=\"VPRO\">VPRO</broadcaster>\n" +
                 "  <credits/>\n" +
+                "  <prediction state=\"ANNOUNCED\" publishStop=\"2020-01-02T14:54:44+01:00\">INTERNETVOD</prediction>\n" +
                 "  <prediction state=\"ANNOUNCED\" publishStop=\"2020-01-02T14:54:44+01:00\">TVVOD</prediction>\n" +
                 "  <locations />\n" +
                 "  <scheduleEvents/>\n" +
