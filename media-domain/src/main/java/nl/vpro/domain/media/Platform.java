@@ -13,14 +13,17 @@ public enum Platform {
      * Visible on internet
      */
     INTERNETVOD,
+
     /**
      *
      */
     TVVOD,
+
     /**
      * NLZiet,platform "extra" in cooperation with dutch commercial broadcasters
      */
     PLUSVOD,
+
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
      */

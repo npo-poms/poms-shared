@@ -15,7 +15,6 @@ import java.util.*;
 import javax.validation.ConstraintViolation;
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
@@ -42,20 +41,20 @@ import static org.junit.Assert.assertEquals;
 public class ProgramUpdateTest extends MediaUpdateTest {
 
     @Test
-    public void testIsValidWhenInvalid() throws Exception {
+    public void testIsValidWhenInvalid() {
         ProgramUpdate update = ProgramUpdate.create();
         assertThat(update.isValid()).isFalse();
     }
 
     @Test
-    public void testErrorsWhenInvalid() throws Exception {
+    public void testErrorsWhenInvalid() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
         assertThat(update.violations()).hasSize(2);
     }
 
     @Test
-    public void testCridValidation() throws Exception {
+    public void testCridValidation() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
         update.setAVType(AVType.AUDIO);
@@ -66,7 +65,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testIsValidForImages() throws Exception {
+    public void testIsValidForImages() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
         update.setType(ProgramType.CLIP);
@@ -78,7 +77,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testIsValidForLocations() throws Exception {
+    public void testIsValidForLocations() {
         LocationUpdate location = LocationUpdate.builder()
             .programUrl("http:invalide.url")
             //.programUrl(null)
@@ -96,7 +95,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testIsValidForTitles() throws Exception {
+    public void testIsValidForTitles() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.MIXED);
@@ -107,7 +106,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testIsValidForTitles2() throws Exception {
+    public void testIsValidForTitles2() {
         ProgramUpdate update = programUpdate();
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.MIXED);
@@ -119,7 +118,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testFetchForOwner() throws Exception {
+    public void testFetchForOwner() {
         SegmentUpdate segment = SegmentUpdate.create();
         segment.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
 
@@ -256,7 +255,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetGeoRestrictionsReverse() throws Exception {
+    public void testGetGeoRestrictionsReverse() {
         String input = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><region>BENELUX</region><region stop=\"1970-01-01T01:16:40+01:00\" start=\"1970-01-01T01:00:00+01:00\">NL</region><locations/><scheduleEvents/><images/><segments/></program>";
         ProgramUpdate update = JAXB.unmarshal(new StringReader(input), ProgramUpdate.class);
 
@@ -618,7 +617,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testAgeRating() throws JAXBException, IOException, SAXException {
+    public void testAgeRating() throws IOException, SAXException {
         ProgramUpdate update  = ProgramUpdate.create();
         update.setVersion(VersionService.floatVersion());
         update.setAgeRating(AgeRating._6);
@@ -638,7 +637,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testContentRating() throws JAXBException, IOException, SAXException {
+    public void testContentRating() throws IOException, SAXException {
         ProgramUpdate update = programUpdate();
         update.setContentRatings(Arrays.asList(ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL));
 
@@ -680,6 +679,23 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Set<? extends ConstraintViolation<MediaUpdate<Program>>> violations = update.violations(WarningValidatorGroup.class);
         System.out.println(violations);
         assertThat(violations).isNotEmpty();
+    }
+
+
+    @Test
+    public void testWithPredictions() throws IOException, SAXException {
+        ProgramUpdate update = ProgramUpdate.create();
+        update.setPredictions(new HashSet<>(Arrays.asList(PredictionUpdate.builder().platform(Platform.INTERNETVOD).build())));
+
+        ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <prediction>INTERNETVOD</prediction>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>");
+        assertThat(rounded.getPredictions()).hasSize(1);
     }
 
     @Test
@@ -763,7 +779,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testMid() throws Exception {
+    public void testMid() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setMid("bla");
         assertThat(update.mediaObject().getMid()).isNull();

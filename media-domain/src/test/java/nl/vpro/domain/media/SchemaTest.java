@@ -14,10 +14,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
-
 import com.google.common.io.Files;
 
 import nl.vpro.domain.Xmlns;
@@ -78,28 +76,28 @@ public class SchemaTest {
 
     }
     @Test
-    public void testMedia() throws IOException, SAXException {
+    public void testMedia() throws IOException {
         testNamespace(Xmlns.MEDIA_NAMESPACE);
 
     }
 
     @Test
-    public void testMediaSearch() throws IOException, SAXException {
+    public void testMediaSearch() throws IOException {
         testNamespace(Xmlns.SEARCH_NAMESPACE);
     }
 
     @Test
-    public void testShared() throws IOException, SAXException {
+    public void testShared() throws IOException {
         testNamespace(Xmlns.SHARED_NAMESPACE);
     }
 
     @Test
-    public void testUpdate() throws IOException, SAXException {
+    public void testUpdate() throws IOException {
         testNamespace(Xmlns.UPDATE_NAMESPACE);
     }
 
     @Test
-    public void testAbsent() throws IOException, SAXException {
+    public void testAbsent() throws IOException {
         testNamespace("");
     }
 
