@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -150,6 +151,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.issueDate = source.issueDate;
         this.state = source.state;
         this.mediaObject = parent;
+        this.available = source.available;
     }
 
     public static Prediction copy(Prediction source){
@@ -251,7 +253,12 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         if (!(o instanceof Prediction)) {
             return false;
         }
-        return platform == ((Prediction) o).platform;
+        Prediction other = (Prediction) o;
+        if (platform == null || other.platform == null) {
+            return other == this;
+        }
+        return Objects.equals(platform, other.platform);
+
     }
 
     @Override
