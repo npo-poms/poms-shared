@@ -31,7 +31,7 @@ public class PersonTest {
 
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaRecord(new GTAARecord("http://data.beeldengeluid.nl/gtaa/1869521", Status.approved));
         JAXBTestUtil.assertThatXml(person).isSimilarTo(

@@ -50,7 +50,7 @@ public class ProgramTest {
     }
 
     @Test(expected = CircularReferenceException.class)
-    public void testCreateEpisodeOfWhenCircular() throws Exception {
+    public void testCreateEpisodeOfWhenCircular() {
         Program program = new Program(1);
         program.setType(ProgramType.BROADCAST);
         Group group = new Group(2);
