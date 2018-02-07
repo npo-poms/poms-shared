@@ -444,6 +444,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<Prediction> predictions;
 
+    protected List<Prediction> predictionsForXml;
+
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = true)
     @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @SortNatural
@@ -1868,13 +1870,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JsonProperty("predictions")
     protected List<Prediction> getPredictionsForXml() {
-        List<Prediction> result = getPredictions().stream()
-            .filter(Prediction::isAvailable)
-            .collect(Collectors.toList());
-        return result;
+        if (predictionsForXml == null) {
+            predictionsForXml = getPredictions().stream()
+                .filter(Prediction::isAvailable)
+                .collect(Collectors.toList());
+        }
+        return predictionsForXml;
     }
+
     protected void setPredictionsForXml(List<Prediction> predictions) {
-        this.predictions = new TreeSet<>(predictions);
+        this.predictionsForXml =  predictions;
     }
 
     public Prediction getPrediction(Platform platform) {
@@ -2526,7 +2531,10 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-
+        if (predictionsForXml != null) {
+            this.predictions = new TreeSet<>(predictionsForXml);
+            this.predictionsForXml = null;
+        }
     }
 
     @Override
