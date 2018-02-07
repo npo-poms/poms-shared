@@ -696,6 +696,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "    <segments/>\n" +
             "</program>");
         assertThat(rounded.getPredictions()).hasSize(1);
+        assertThat(rounded.getPredictions()).hasSize(1);
     }
 
 
@@ -703,12 +704,12 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testWithPredictionsViaBuilder() throws IOException, SAXException {
         ProgramUpdate update = ProgramUpdate.create(MediaBuilder.program()
             .predictions(
-                Prediction.builder().platform(Platform.INTERNETVOD).available(true).build(),
-                Prediction.builder().platform(Platform.TVVOD).available(false).build()
+                Prediction.builder().platform(Platform.INTERNETVOD).available(false).build(),
+                Prediction.builder().platform(Platform.TVVOD).available(true).build()
             ));
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <prediction>INTERNETVOD</prediction>\n" +
+            "    <prediction>TVVOD</prediction>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
