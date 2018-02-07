@@ -73,15 +73,10 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
         return updateConfig;
     }
 
-    @XmlAttribute
     @Override
+    @XmlTransient
     public SegmentType getType() {
-        SegmentType type = builder.build().getType();
-        if (type == SegmentType.SEGMENT) {
-            return null;
-        }
-        return type;
-
+        return builder.build().getType();
     }
 
 
@@ -90,6 +85,22 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
             type = SegmentType.SEGMENT;
         }
         getBuilder().type(type);
+    }
+
+
+    @XmlAttribute(name = "type")
+    protected SegmentType getTypeAttribute() {
+        SegmentType type = getType();
+        if (type == SegmentType.SEGMENT) {
+            return null;
+        }
+        return type;
+
+    }
+
+
+    protected void setTypeAttribute(SegmentType type) {
+        this.setType(type);
     }
 
 
