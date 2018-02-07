@@ -296,7 +296,14 @@ public class MediaObjectXmlSchemaTest {
         prediction.setState(Prediction.State.REVOKED);
         prediction.setIssueDate(Instant.EPOCH);
 
+        Prediction unavailable = new Prediction(Platform.TVVOD);
+        unavailable.setState(Prediction.State.REVOKED);
+        unavailable.setIssueDate(Instant.EPOCH);
+        unavailable.setAvailable(false);
+
         program.getPredictions().add(prediction);
+        program.getPredictions().add(unavailable);
+
         String actual = toXml(program);
 
         Diff diff = DiffBuilder.compare(expected).withTest(actual).build();
@@ -814,7 +821,7 @@ public class MediaObjectXmlSchemaTest {
         assertThat(program.getLocations().first().getOwner()).isNull();
     }
 
-        @Test
+    @Test
     public void testWithDescendantOf() throws IOException, SAXException {
 
         Program program = program().lean().withDescendantOf().build();
