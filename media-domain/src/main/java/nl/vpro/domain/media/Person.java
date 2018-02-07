@@ -11,6 +11,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.GTAARecord;
@@ -24,7 +25,7 @@ import nl.vpro.validation.NoHtml;
         "givenName",
         "familyName"
     })
-public class Person extends DomainObject implements PersonInterface {
+public class Person extends DomainObject implements PersonInterface, Child<MediaObject> {
 
 
     public static Person copy(Person source) {
@@ -161,10 +162,12 @@ public class Person extends DomainObject implements PersonInterface {
         this.role = value;
     }
 
+    @Deprecated
     public MediaObject getMediaObject() {
         return mediaObject;
     }
 
+    @Deprecated
     public void setMediaObject(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
     }
@@ -239,5 +242,15 @@ public class Person extends DomainObject implements PersonInterface {
             .append("role", role)
             .append("gtaa_uri", getGtaaUri())
             .toString();
+    }
+
+    @Override
+    public void setParent(MediaObject mo) {
+        this.mediaObject = mo;
+    }
+
+    @Override
+    public MediaObject getParent() {
+        return this.mediaObject;
     }
 }
