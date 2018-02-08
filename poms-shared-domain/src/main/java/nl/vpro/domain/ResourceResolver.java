@@ -57,6 +57,9 @@ public class ResourceResolver implements LSResourceResolver {
     }
 
     public static URL resolveToURL(String namespaceURI) {
+        if (namespaceURI == null) {
+            return Xmlns.ABSENT_XSD;
+        }
         return MAP.get(namespaceURI);
     }
     /**
@@ -78,11 +81,17 @@ public class ResourceResolver implements LSResourceResolver {
     }
 
     public static LSInput resolveNamespaceToLS(String namespaceURI) {
+        URL url = resolveToURL(namespaceURI);
 
-        InputStream resource = resolve(namespaceURI);
-        if (resource != null) {
+        if (url != null) {
             LSInput lsinput = DOM.createLSInput();
-            lsinput.setCharacterStream(new InputStreamReader(resource));
+            try {
+                lsinput.setCharacterStream(new InputStreamReader(url.openStream()));
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+            lsinput.setSystemId(url.toString());
+            //lsinput.setPublicId(namespaceURI);
             return lsinput;
         } else {
             return null;
@@ -90,8 +99,15 @@ public class ResourceResolver implements LSResourceResolver {
     }
 
     @Override
-    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
-        return resolveNamespaceToLS(namespaceURI);
+    public LSInput resolveResource(
+        String type,
+        String namespaceURI, String publicId, String systemId, String baseURI) {
+        LSInput result = resolveNamespaceToLS(namespaceURI);
+        if (result == null) {
+            log.debug("{} / {}", systemId, baseURI);
+
+        }
+        return result;
     }
 
 }
