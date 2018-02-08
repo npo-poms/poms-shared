@@ -31,6 +31,7 @@ public final class Xmlns {
     public static final String UPDATE_NAMESPACE = "urn:vpro:media:update:2009";
     public static final URL    UPDATE_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd");
 
+
     public static final String SEARCH_NAMESPACE = "urn:vpro:media:search:2012";
     public static final URL    SEARCH_XSD        = Xmlns.class.getResource("/nl/vpro/domain/media/search/vproMediaSearch.xsd");
 
@@ -59,6 +60,8 @@ public final class Xmlns {
 
     public static final String CONSTRAINT_NAMESPACE = "urn:vpro:api:constraint:2014";
     public static final URL CONSTRAINT_XSD = Xmlns.class.getResource("/xsds/api_constraint_2014.xsd");
+
+    public static final URL ABSENT_XSD = Xmlns.class.getResource("/nl/vpro/domain/media/absentnamespace.xsd");
 
 
     public static final String MEDIA_WS_NAMESPACE = "urn:vpro:ws:media:2009";
