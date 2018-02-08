@@ -3,6 +3,7 @@ package nl.vpro.domain.media.update.collections;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -49,6 +50,11 @@ public class XmlCollection<T> implements Iterable<T> , VersionSpecific {
 
     public XmlCollection(Collection<T> l) {
         this(l, null);
+    }
+
+    @SafeVarargs
+    public XmlCollection(T... l) {
+        this(Arrays.asList(l), null);
     }
 
     public XmlCollection(Collection<T> l, Float version) {
