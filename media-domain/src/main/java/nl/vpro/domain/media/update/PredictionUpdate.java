@@ -62,8 +62,15 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
             .build();
     }
 
+    public Prediction toPrediction(Prediction prediction) {
+        prediction.setPlatform(platform);
+        prediction.setPublishStartInstant(publishStart);
+        prediction.setPublishStopInstant(publishStop);
+        return prediction;
+    }
+
     public Prediction toPrediction() {
-        return new Prediction(platform, publishStart, publishStop);
+        return toPrediction(new Prediction());
     }
 
     @Override
