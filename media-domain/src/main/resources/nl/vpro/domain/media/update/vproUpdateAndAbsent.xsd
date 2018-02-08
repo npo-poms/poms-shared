@@ -1,0 +1,6 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+>
+  <xs:include schemaLocation="../absentnamespace.xsd"/>
+  <xs:import namespace="urn:vpro:media:update:2009" schemaLocation="vproMediaUpdate.xsd"/>
+</xs:schema>
