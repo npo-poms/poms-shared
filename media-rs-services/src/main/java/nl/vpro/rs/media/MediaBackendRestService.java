@@ -1,21 +1,5 @@
 package nl.vpro.rs.media;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.time.Duration;
-import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
-import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
-import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
-
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Member;
@@ -31,6 +15,20 @@ import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesId;
 import nl.vpro.domain.subtitles.SubtitlesType;
+import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
+import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.time.Duration;
+import java.util.List;
+import java.util.Locale;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
 
@@ -58,6 +56,9 @@ public interface MediaBackendRestService {
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
     String IMAGE_METADATA = "imageMetadata";
 
+    String ENCRYPTION = "encryption";
+    String PRIOTRITY = "priority";
+    String FILE_NAME = "fileName";
 
     @POST
     @Path("find")
@@ -413,6 +414,14 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors,
         PredictionUpdate prediction
     ) throws IOException;
+
+    @POST
+    @Path("transcode}")
+    Response transcode(
+            @QueryParam(MID) String mid,
+            @QueryParam(FILE_NAME) String fileName,
+            @QueryParam(ENCRYPTION) String encryption,
+            @QueryParam(PRIOTRITY) String priority);
 
 
 }
