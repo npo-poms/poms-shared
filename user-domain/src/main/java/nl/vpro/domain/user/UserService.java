@@ -9,6 +9,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
+import org.slf4j.LoggerFactory;
+
 import nl.vpro.domain.Roles;
 
 public interface UserService<T extends User> {
@@ -78,10 +80,23 @@ public interface UserService<T extends User> {
      * Submits callable in the given {@link ExecutorService}, but makes sure that it is executed as the current user
      */
     default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable) {
-        Object onBehalfOf = getAuthentication();
+         Object authentication;
+        try {
+            authentication = getAuthentication();
+        } catch(Exception e) {
+            LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
+            authentication = null;
+        }
+        final Object onBehalfOf = authentication;
         return executorService.submit(() -> {
             try {
-                restoreAuthentication(onBehalfOf);
+                if (onBehalfOf != null) {
+                    try {
+                        restoreAuthentication(onBehalfOf);
+                    } catch (Exception e) {
+                        LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
+                    }
+                }
                 return callable.call();
             } finally {
                 dropAuthentication();
