@@ -1,4 +1,4 @@
-package nl.vpro.nep;
+package nl.vpro.nep.domain;
 
 /**
  * @author Michiel Meeuwissen
