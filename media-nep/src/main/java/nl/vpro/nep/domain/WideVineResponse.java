@@ -1,4 +1,4 @@
-package nl.vpro.nep;
+package nl.vpro.nep.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class PlayreadyResponse {
+public class WideVineResponse {
     private boolean success;
     private String token;
 }
