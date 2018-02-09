@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "transcode")
 public class TranscodeRequest {
 
-    private TranscodeRequest() {
+    public TranscodeRequest() {
 
     }
 
