@@ -69,8 +69,9 @@ public class SchemaTest {
             ImageUpdate.class,
             LocationUpdate.class,
             // no namespace
-            XmlCollection.class
+            XmlCollection.class,
             //
+            TranscodeRequest.class
 
         );
 

@@ -33,6 +33,11 @@
 
   <xs:element name="move" type="moveActionType"/>
 
+  <xs:element name="transcode" type="transcodeType"/>
+
+
+
+
   <xs:complexType name="avAtributeUpdateType">
     <xs:sequence>
       <xs:element name="bitrate" type="xs:int" form="qualified" minOccurs="0"/>
@@ -516,6 +521,15 @@
         <xs:attribute name="publishStop" type="xs:dateTime"/>
       </xs:extension>
     </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="transcodeType">
+    <xs:sequence>
+      <xs:element name="mid" type="xs:string"  form="qualified"  minOccurs="0"/>
+      <xs:element name="fileName" type="xs:string"  form="qualified" minOccurs="0"/>
+      <xs:element name="encryption" type="xs:string"  form="qualified" minOccurs="0"/>
+      <xs:element name="priority" type="xs:string"  form="qualified" minOccurs="0"/>
+    </xs:sequence>
   </xs:complexType>
 
 </xs:schema>
