@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -12,20 +14,29 @@ public enum Platform {
     /**
      * Visible on internet
      */
-    INTERNETVOD,
+    INTERNETVOD(true),
 
     /**
      *
      */
-    TVVOD,
+    TVVOD(true),
 
     /**
      * NLZiet,platform "extra" in cooperation with dutch commercial broadcasters
      */
-    PLUSVOD,
+    PLUSVOD(true),
 
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
      */
-    NPOPLUSVOD
+    NPOPLUSVOD(false);
+
+
+    @Getter
+    private final boolean streamingPlatform;
+
+
+    Platform(boolean streamingPlatform) {
+        this.streamingPlatform = streamingPlatform;
+    }
 }
