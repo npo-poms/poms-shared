@@ -1,9 +1,11 @@
 package nl.vpro.nep.service;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import nl.vpro.nep.domain.workflow.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScope;
@@ -14,18 +16,18 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.List;
+import nl.vpro.nep.domain.workflow.*;
 
-public class WorkflowExecutionService {
+public class WorkflowExecutionServiceImpl implements NEPService {
 
     private String URL = "http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl/api/workflows/";
     private String USERNAME = "user";
     private String PASSWORD = "***REMOVED***";
 
-    public WorkflowExecutionResponse execute(String mid, String type, List<String> platforms, String fileName, String encryption, String priority) throws Exception{
+    public WorkflowExecutionResponse execute(String mid, String type, List<String> platforms, String fileName, String encryption, String priority) throws IOException {
 
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
                 .mid(mid)
