@@ -3,6 +3,7 @@ package nl.vpro.domain.media.update;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,12 +21,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "transcode")
 public class TranscodeRequest {
 
+
+    @NotNull
+    private String mid;
+    @NotNull
+    private String fileName;
+    @NotNull
+    private String encryption;
+    @NotNull
+    private String priority;
+
+
     public TranscodeRequest() {
 
     }
-
-    String mid;
-    String fileName;
-    String encryption;
-    String priority;
 }
