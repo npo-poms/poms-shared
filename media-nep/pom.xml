@@ -42,5 +42,9 @@
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
         </dependency>
+        <dependency>
+            <groupId>nl.vpro.shared</groupId>
+            <artifactId>vpro-shared-test</artifactId>
+        </dependency>
     </dependencies>
 </project>
