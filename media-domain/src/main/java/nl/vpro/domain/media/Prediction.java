@@ -118,6 +118,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.platform = Platform.valueOf(platform);
     }
 
+
     public Prediction(Platform platform) {
         this.platform = platform;
     }
@@ -164,6 +165,13 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         }
 
         return new Prediction(source, parent);
+    }
+
+    public static Prediction unavailable(Platform platform) {
+        return Prediction.builder()
+            .available(false)
+            .platform(platform)
+            .build();
     }
 
     public Platform getPlatform() {
