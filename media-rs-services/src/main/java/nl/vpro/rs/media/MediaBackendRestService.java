@@ -426,7 +426,7 @@ public interface MediaBackendRestService {
             @QueryParam(PRIOTRITY) String priority);
 
 
-    @POST
+    @GET
     @Path("{entity:(media|program|group|segment)}/{id}/transcodingstatus")
     List<TranscodeStatus> getTranscodeStatus(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
