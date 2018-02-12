@@ -1,5 +1,23 @@
 package nl.vpro.rs.media;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.time.Duration;
+import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
+import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Member;
@@ -15,20 +33,6 @@ import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesId;
 import nl.vpro.domain.subtitles.SubtitlesType;
-import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
-import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
-import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.time.Duration;
-import java.util.List;
-import java.util.Locale;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
 
@@ -422,6 +426,14 @@ public interface MediaBackendRestService {
             @QueryParam(FILE_NAME) String fileName,
             @QueryParam(ENCRYPTION) String encryption,
             @QueryParam(PRIOTRITY) String priority);
+
+
+    @POST
+    @Path("{entity:(media|program|group|segment)}/{id}/transcodingstatus")
+    List<JsonNode> getTranscodeStatus(
+        @PathParam(ENTITY) @DefaultValue("media") final String entity,
+        @PathParam(ID) final String id
+    ) throws IOException;
 
 
 }
