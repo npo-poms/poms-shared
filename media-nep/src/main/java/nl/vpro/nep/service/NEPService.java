@@ -1,6 +1,7 @@
 package nl.vpro.nep.service;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 import nl.vpro.nep.domain.workflow.*;
@@ -17,5 +18,5 @@ public interface NEPService {
         List<String> platforms, String fileName, EncryptionType encryption, PriorityType priority) throws IOException;
 
 
-    List<WorkflowExecution> getStatus(String mid);
+    Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Long limit);
 }
