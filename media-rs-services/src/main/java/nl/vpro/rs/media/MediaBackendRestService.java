@@ -430,7 +430,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|group|segment)}/{id}/transcodingstatus")
     List<TranscodeStatus> getTranscodeStatus(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
-        @PathParam(ID) final String id
+        @PathParam(ID) final String mid
     );
 
 
