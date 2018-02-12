@@ -8,7 +8,7 @@ import nl.vpro.nep.service.WorkflowExecutionServiceImpl;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.6
  */
 public class WorkflowListTest {
 

@@ -1,13 +1,13 @@
 package nl.vpro.nep.domain.workflow;
 
-import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import org.junit.Test;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import nl.vpro.util.DateUtils;
 
 public class WorkflowExecutionResponseTest {
 
@@ -21,11 +21,11 @@ public class WorkflowExecutionResponseTest {
                 .statusMessage("Packaging failed")
                 .workflowType("npo_webonly_drm")
                 .customerMetadata(new CustomerMetadata("VPWON_1267474"))
-                .startTime(formatter.parse("2018-02-08T12:43:57Z"))
-                .updateTime(formatter.parse("2018-02-08T12:45:27Z"))
-                .endTime(formatter.parse("2018-02-08T12:45:27Z")).build();
+                .startTime(DateUtils.toInstant(formatter.parse("2018-02-08T12:43:57Z")))
+                .updateTime(DateUtils.toInstant(formatter.parse("2018-02-08T12:45:27Z")))
+                .endTime(DateUtils.toInstant(formatter.parse("2018-02-08T12:45:27Z"))).build();
 
-        List<WorkflowExecution> workflowExecutions = new ArrayList<WorkflowExecution>();
+        List<WorkflowExecution> workflowExecutions = new ArrayList<>();
         workflowExecutions.add(workflowExecution);
 
         WorkflowExecutionResponse workflowExecutionResponse = WorkflowExecutionResponse.builder()
