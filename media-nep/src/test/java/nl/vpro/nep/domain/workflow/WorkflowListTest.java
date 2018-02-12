@@ -19,5 +19,8 @@ public class WorkflowListTest {
     public void unmarshall() throws IOException {
         WorkflowList list = WorkflowExecutionServiceImpl.MAPPER.readValue(getClass().getResourceAsStream("/example.json"), WorkflowList.class);
         assertThat(list.getWorkflowExecutions()).hasSize(20);
+        assertThat(list.getTotalResults()).isEqualTo(26);
+        assertThat(list.getNext().getHref()).isEqualTo("http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl/api/workflows?page=1&size=20");
+
     }
 }
