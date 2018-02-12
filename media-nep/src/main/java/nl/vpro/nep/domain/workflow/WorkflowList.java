@@ -1,8 +1,10 @@
 package nl.vpro.nep.domain.workflow;
 
+import io.openapitools.jackson.dataformat.hal.HALLink;
 import io.openapitools.jackson.dataformat.hal.annotation.EmbeddedResource;
 import io.openapitools.jackson.dataformat.hal.annotation.Link;
 import io.openapitools.jackson.dataformat.hal.annotation.Resource;
+import lombok.Data;
 import lombok.Getter;
 
 import java.util.List;
@@ -12,17 +14,22 @@ import java.util.List;
  * @since 5.6
  */
 @Resource
+@Data
 public class WorkflowList {
 
     @EmbeddedResource("wf:workflowExecution")
     @Getter
     List<WorkflowExecution> workflowExecutions;
 
-    @Link
-    String self;
+    Long totalResults;
 
     @Link
-    String next;
+    HALLink self;
+
+    @Link
+    HALLink next;
+
+
 
 
 }
