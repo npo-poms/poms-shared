@@ -4,6 +4,7 @@ package nl.vpro.nep.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -16,6 +17,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -27,14 +29,15 @@ public class WorkflowExecutionServiceImpl implements NEPService {
     private String USERNAME = "user";
     private String PASSWORD = "secret";
 
-    public WorkflowExecutionResponse execute(String mid, String type, List<String> platforms, String fileName, String encryption, String priority) throws IOException {
+    @Override
+    public WorkflowExecutionResponse execute(String mid, Type type, List<String> platforms, String fileName, EncryptionType encryption, PriorityType priority) throws IOException {
 
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
                 .mid(mid)
                 .fileName(fileName)
-                .encryption(EncryptionType.valueOf(encryption.toUpperCase()))
-                .priority((PriorityType.valueOf(priority.toUpperCase())))
-                .type(Type.valueOf(type.toUpperCase()))
+                .encryption(encryption)
+                .priority(priority)
+                .type(type)
                 .platforms(platforms)
                 .build();
 
@@ -59,6 +62,13 @@ public class WorkflowExecutionServiceImpl implements NEPService {
         } catch (JsonProcessingException e) {
             throw e;
         }
+    }
+
+    @Override
+    public List<WorkflowExecution> getStatus(String mid) {
+        // TODO
+        return new ArrayList<>();
+
     }
 
     private CloseableHttpClient getHttpClient() {
