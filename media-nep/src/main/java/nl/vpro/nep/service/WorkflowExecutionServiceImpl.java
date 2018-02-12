@@ -35,7 +35,7 @@ import nl.vpro.util.BatchedReceiver;
 @Slf4j
 public class WorkflowExecutionServiceImpl implements NEPService {
 
-    private static final HALMapper MAPPER = new HALMapper();
+    public static final HALMapper MAPPER = new HALMapper();
     static {
         MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
