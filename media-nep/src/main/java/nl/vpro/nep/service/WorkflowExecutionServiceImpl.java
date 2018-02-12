@@ -28,6 +28,7 @@ import org.apache.http.impl.client.HttpClients;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import nl.vpro.nep.domain.workflow.*;
 import nl.vpro.util.BatchedReceiver;
@@ -38,6 +39,7 @@ public class WorkflowExecutionServiceImpl implements NEPService {
     public static final HALMapper MAPPER = new HALMapper();
     static {
         MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        MAPPER.registerModule(new JavaTimeModule());
 
     }
 

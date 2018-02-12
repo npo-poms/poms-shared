@@ -6,21 +6,29 @@ import io.openapitools.jackson.dataformat.hal.annotation.Resource;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.Date;
+import java.time.Instant;
 
 @Builder
-@Getter
+//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @Resource
 public class WorkflowExecution {
-    String workflowId;
-    StatusType status;
-    String statusMessage;
-    String workflowType;
-    CustomerMetadata customerMetadata;
-    Date startTime;
-    Date updateTime;
-    Date endTime;
 
     @Link
     HALLink self;
+    @Getter
+    String workflowId;
+    @Getter
+    StatusType status;
+    @Getter
+    String statusMessage;
+    @Getter
+    String workflowType;
+    CustomerMetadata customerMetadata;
+    @Getter
+    Instant startTime;
+    @Getter
+    Instant updateTime;
+    @Getter
+    Instant endTime;
+
 }
