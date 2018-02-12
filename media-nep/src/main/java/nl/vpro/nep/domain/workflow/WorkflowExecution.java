@@ -1,13 +1,16 @@
 package nl.vpro.nep.domain.workflow;
 
+import io.openapitools.jackson.dataformat.hal.HALLink;
+import io.openapitools.jackson.dataformat.hal.annotation.Link;
+import io.openapitools.jackson.dataformat.hal.annotation.Resource;
 import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Date;
-import java.util.List;
 
 @Builder
 @Getter
+@Resource
 public class WorkflowExecution {
     String workflowId;
     StatusType status;
@@ -17,5 +20,7 @@ public class WorkflowExecution {
     Date startTime;
     Date updateTime;
     Date endTime;
-    List<Link> _links;
+
+    @Link
+    HALLink self;
 }

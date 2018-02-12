@@ -16,8 +16,6 @@ import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Member;
@@ -430,10 +428,10 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id}/transcodingstatus")
-    List<JsonNode> getTranscodeStatus(
+    List<TranscodeStatus> getTranscodeStatus(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String id
-    ) throws IOException;
+    );
 
 
 }
