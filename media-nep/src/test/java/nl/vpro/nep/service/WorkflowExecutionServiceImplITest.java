@@ -18,7 +18,8 @@ public class WorkflowExecutionServiceImplITest {
 
     @Test
     public void getStatuses() {
-        NEPService nepService = new WorkflowExecutionServiceImpl();
+        WorkflowExecutionServiceImpl nepService = new WorkflowExecutionServiceImpl();
+        nepService.init();
         Iterator<WorkflowExecution> statuses = nepService.getStatuses(null, null, 100L);
 
         while(statuses.hasNext()) {

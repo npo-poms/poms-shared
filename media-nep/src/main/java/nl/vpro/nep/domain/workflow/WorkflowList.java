@@ -27,6 +27,7 @@ public class WorkflowList {
     HALLink self;
 
     @Link
+    @Getter
     HALLink next;
 
 
