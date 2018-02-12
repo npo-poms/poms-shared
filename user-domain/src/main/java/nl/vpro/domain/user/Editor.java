@@ -204,28 +204,43 @@ public class Editor extends AbstractUser {
         return false;
     }
 
-    void setActiveBroadcaster(String broadcasterId, boolean value) {
-        setActive(new Broadcaster(broadcasterId, broadcasterId), value);
+    boolean setActiveBroadcaster(String broadcasterId, boolean value) {
+        return setActive(new Broadcaster(broadcasterId, broadcasterId), value);
     }
 
-    void setActive(Broadcaster broadcaster, boolean value) {
+    boolean setActive(Broadcaster broadcaster, boolean value) {
         for (BroadcasterEditor be : broadcasters) {
             if (broadcaster.equals(be.getOrganization())) {
-                be.setActive(value);
-                activeBroadcasterCache = null;
-                return;
+                if (be.active != value) {
+                    be.setActive(value);
+                    activeBroadcasterCache = null;
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
-        throw new IllegalArgumentException("No broadcaster " + broadcaster + " found in " + broadcasters);
+        if (value) {
+            throw new IllegalArgumentException("No broadcaster " + broadcaster + " found in " + broadcasters);
+        } else {
+            // nothing to do
+            return false;
+        }
+
     }
 
-    void addBroadcaster(Broadcaster broadcaster) {
+
+    boolean addBroadcaster(Broadcaster broadcaster) {
         BroadcasterEditor toAdd = new BroadcasterEditor(this, broadcaster);
         if (broadcasters.add(toAdd)) {
             allowedBroadcasterCache = null;
             activeBroadcasterCache = null;
+            return true;
+        } else {
+            return false;
         }
     }
+
 
     BroadcasterEditor removeBroadcaster(Broadcaster broadcaster) {
         BroadcasterEditor toRemove = remove(broadcasters, broadcaster);
