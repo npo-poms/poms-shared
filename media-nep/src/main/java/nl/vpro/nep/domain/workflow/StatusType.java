@@ -1,5 +1,9 @@
 package nl.vpro.nep.domain.workflow;
 
+
+import lombok.Getter;
+
+@Getter
 public enum StatusType {
     RUNNING("De ​workflow ​is ​gestart ​en ​in ​verwerking", false),
     COMPLETED("De ​workflow ​is ​succesvol ​afgerond ​en ​de ​streams ​zijn ​afgemeld bij ​POMS", true),
