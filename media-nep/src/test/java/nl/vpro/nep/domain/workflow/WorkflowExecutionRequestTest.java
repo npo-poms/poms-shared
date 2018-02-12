@@ -1,12 +1,12 @@
 package nl.vpro.nep.domain.workflow;
 
-import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import org.junit.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+
 
 public class WorkflowExecutionRequestTest {
 
