@@ -20,7 +20,7 @@ public class WorkflowExecutionResponseTest {
                 .status(StatusType.FAILED)
                 .statusMessage("Packaging failed")
                 .workflowType("npo_webonly_drm")
-                .customerMetadata(new CustomerMetadata("VPWON_1267474"))
+                .customerMetadata(CustomerMetadata.builder().mid("VPWON_1267474").broadcaster("VPRO").build())
                 .startTime(DateUtils.toInstant(formatter.parse("2018-02-08T12:43:57Z")))
                 .updateTime(DateUtils.toInstant(formatter.parse("2018-02-08T12:45:27Z")))
                 .endTime(DateUtils.toInstant(formatter.parse("2018-02-08T12:45:27Z"))).build();
@@ -40,7 +40,8 @@ public class WorkflowExecutionResponseTest {
                         "    \"statusMessage\" : \"Packaging failed\",\n" +
                         "    \"workflowType\" : \"npo_webonly_drm\",\n" +
                         "    \"customerMetadata\" : {\n" +
-                        "      \"mid\" : \"VPWON_1267474\"\n" +
+                        "      \"mid\" : \"VPWON_1267474\",\n" +
+                        "      \"broadcaster\" : \"VPRO\"\n" +
                         "    },\n" +
                         "    \"startTime\" : 1518090237000,\n" +
                         "    \"updateTime\" : 1518090327000,\n" +
