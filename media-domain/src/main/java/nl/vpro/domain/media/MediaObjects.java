@@ -614,6 +614,102 @@ public class MediaObjects {
         );
     }
 
+     public static <T extends MediaObject> void updateLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner) {
+        for(Location incomingLocation : incomingMedia.getLocations()) {
+
+            if(incomingLocation.getOwner().equals(owner)) {
+
+                Location locationToUpdate = mediaToUpdate.findLocation(incomingLocation.getProgramUrl(), owner);
+
+                if(locationToUpdate == null) {
+
+                    mediaToUpdate.addLocation(incomingLocation);
+
+                } else {
+                    locationToUpdate.setDuration(incomingLocation.getDuration());
+                    locationToUpdate.setOffset(incomingLocation.getOffset());
+                    locationToUpdate.setSubtitles(incomingLocation.getSubtitles());
+                    Embargos.copy(incomingLocation, locationToUpdate);
+
+                    mergeAvAttributes(incomingLocation, locationToUpdate);
+                }
+            }
+        }
+
+        mediaToUpdate.getLocations().removeIf(
+            location ->
+                location.getOwner().equals(owner) &&
+                incomingMedia.findLocation(location.getProgramUrl(), owner) == null
+        );
+    }
+     public static void mergeAvAttributes(Location incomingLocation, Location locationToUpdate) {
+        AVAttributes incomingAttributes = incomingLocation.getAvAttributes();
+        AVAttributes attributesToUpdate = locationToUpdate.getAvAttributes();
+
+        if(incomingAttributes != null && attributesToUpdate != null) {
+            attributesToUpdate.setAvFileFormat(incomingAttributes.getAvFileFormat());
+            attributesToUpdate.setBitrate(incomingAttributes.getBitrate());
+
+            mergeAudioAttributes(incomingAttributes, attributesToUpdate);
+            mergeVideoAttributes(incomingAttributes, attributesToUpdate);
+
+        } else if(incomingAttributes != null && attributesToUpdate == null) {
+
+            locationToUpdate.setAvAttributes(incomingAttributes);
+
+        } else if(incomingAttributes == null && attributesToUpdate != null) {
+
+            locationToUpdate.setAvAttributes(null);
+
+        }
+    }
+
+
+
+    public static void mergeAudioAttributes(AVAttributes incomingAttributes, AVAttributes attributesToUpdate) {
+        AudioAttributes incomingAudio = incomingAttributes.getAudioAttributes();
+        AudioAttributes audioToUpdate = attributesToUpdate.getAudioAttributes();
+
+        if(incomingAudio != null && audioToUpdate != null) {
+
+            audioToUpdate.setAudioCoding(incomingAudio.getAudioCoding());
+            audioToUpdate.setLanguage(incomingAudio.getLanguage());
+            audioToUpdate.setNumberOfChannels(incomingAudio.getNumberOfChannels());
+
+        } else if(incomingAudio != null && audioToUpdate == null) {
+
+            attributesToUpdate.setAudioAttributes(incomingAudio);
+
+        } else if(incomingAudio == null && audioToUpdate != null) {
+
+            attributesToUpdate.setAudioAttributes(null);
+
+        }
+    }
+
+
+    public static void mergeVideoAttributes(AVAttributes incomingAttributes, AVAttributes attributesToUpdate) {
+        VideoAttributes incomingVideo = incomingAttributes.getVideoAttributes();
+        VideoAttributes videoToUpdate = attributesToUpdate.getVideoAttributes();
+
+        if(incomingVideo != null && videoToUpdate != null) {
+
+            videoToUpdate.setAspectRatio(incomingVideo.getAspectRatio());
+            videoToUpdate.setHorizontalSize(incomingVideo.getHorizontalSize());
+            videoToUpdate.setVerticalSize(incomingVideo.getVerticalSize());
+            videoToUpdate.setVideoCoding(incomingVideo.getVideoCoding());
+
+        } else if(incomingVideo != null && videoToUpdate == null) {
+
+            attributesToUpdate.setVideoAttributes(incomingVideo);
+
+        } else if(incomingVideo == null && videoToUpdate != null) {
+
+            attributesToUpdate.setVideoAttributes(null);
+
+        }
+    }
+
     protected static Optional<List<MemberRef>> getPath(MediaObject parent, MediaObject child, Map<String, MediaObject> descendants) {
         for (MemberRef ref : getMemberRefs(child)) {
             if (ref.getMidRef().equals(parent.getMid())) {
