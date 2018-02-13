@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import nl.vpro.domain.media.support.*;
@@ -211,5 +212,105 @@ public class MediaObjectsTest {
         assertThat(path.get().stream().map(MemberRef::getOwner).collect(Collectors.toList())).containsExactly(g2, g1);
 
 
+    }
+
+      @Test
+    public void testUpdateLocationsForOwner() {
+        Location e1 = new Location("aaa", OwnerType.NEBO);
+        Location e2 = new Location("bbb", OwnerType.NEBO);
+        Location e3 = new Location("ccc", OwnerType.BROADCASTER);
+        Program existing = new Program();
+        existing.addLocation(e1);
+        existing.addLocation(e2);
+        existing.addLocation(e3);
+
+        java.time.Duration duration = java.time.Duration.ofMillis(10L);
+        Location n1 = new Location("aaa", OwnerType.NEBO);
+        n1.setDuration(duration);
+        Location n2 = new Location("ddd", OwnerType.NEBO);
+        Location n3 = new Location("eee", OwnerType.BROADCASTER);
+        Program incoming = new Program();
+        incoming.addLocation(n1);
+        incoming.addLocation(n2);
+        incoming.addLocation(n3);
+
+        MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO);
+
+        assertThat(existing.findLocation("bbb"))
+            .withFailMessage("Removing deleted location failed").isNull();
+        Assert.assertThat("Update failed for duration", existing.findLocation("aaa").getDuration(), equalTo(duration));
+        Assert.assertThat("Removed location for wrong owner", existing.findLocation("ccc"), notNullValue());
+        Assert.assertThat("Added location for wrong owner", existing.findLocation("eee"), nullValue());
+        Assert.assertThat("Number of locations does not match", existing.getLocations().size(), equalTo(3));
+    }
+
+    @Test
+    public void testUpdateLocationsForOwnerWithAvAttributes() {
+        Location e1 = new Location("aaa", OwnerType.NEBO);
+        Location e2 = new Location("bbb", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes(1111, AVFileFormat.FLV));
+        Location e3 = new Location("ccc", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes(2222, AVFileFormat.FLV));
+
+
+        Location n1 = new Location("aaa", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes(3333, AVFileFormat.MP3));
+        Location n2 = new Location("bbb", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes(4444, AVFileFormat.MP3));
+        Location n3 = new Location("ccc", OwnerType.NEBO);
+
+        Program existing = new Program();
+        Program incoming = new Program();
+
+        existing.addLocation(e1);
+        existing.addLocation(e2);
+        existing.addLocation(e3);
+        incoming.addLocation(n1);
+        incoming.addLocation(n2);
+        incoming.addLocation(n3);
+
+        MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO);
+
+        assertThat(existing.findLocation("aaa").getAvAttributes()).isNotNull();
+        assertThat(existing.findLocation("bbb").getAvAttributes().getBitrate()).isEqualTo(4444));
+        assertThat(existing.findLocation("ccc").getAvAttributes().getBitrate()).isNull();
+    }
+
+    @Test
+    public void testUpdateLocationsForOwnerWithVidioAttributes() {
+        Location e1 = new Location("aaa", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes());
+        Location e2 = new Location("bbb", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes()
+                .setVideoAttributes(new VideoAttributes(100, 100)));
+        Location e3 = new Location("ccc", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes()
+                .setVideoAttributes(new VideoAttributes(100, 100)));
+
+
+        Location n1 = new Location("aaa", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes()
+                .setVideoAttributes(new VideoAttributes(100, 100)));
+        Location n2 = new Location("bbb", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes()
+                .setVideoAttributes(new VideoAttributes(200, 200)));
+        Location n3 = new Location("ccc", OwnerType.NEBO)
+            .setAvAttributes(new AVAttributes());
+
+        Program existing = new Program();
+        Program incoming = new Program();
+
+        existing.addLocation(e1);
+        existing.addLocation(e2);
+        existing.addLocation(e3);
+        incoming.addLocation(n1);
+        incoming.addLocation(n2);
+        incoming.addLocation(n3);
+
+        MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO);
+
+        Assert.assertThat("Adding new VideoAttributes failed", existing.findLocation("aaa").getAvAttributes().getVideoAttributes(), notNullValue());
+        Assert.assertThat("Updating VideoAttributes failed", existing.findLocation("bbb").getAvAttributes().getVideoAttributes().getHorizontalSize(), equalTo(200));
+        Assert.assertThat("Removing deleted VideoAttributes failed", existing.findLocation("ccc").getAvAttributes().getVideoAttributes(), nullValue());
     }
 }

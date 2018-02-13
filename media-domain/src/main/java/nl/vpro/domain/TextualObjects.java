@@ -85,7 +85,8 @@ public class TextualObjects {
     }
 
 
-    public static <T extends OwnedText> Map<OwnerType, SortedSet<BasicTypedText>> expandTitlesAsMap(TextualObject<T, ?, ?> textualObject) {
+    public static <T extends OwnedText> Map<OwnerType, SortedSet<BasicTypedText>>
+    expandTitlesAsMap(TextualObject<T, ?, ?> textualObject) {
         Map<OwnerType, SortedSet<BasicTypedText>> result = new HashMap<>();
 
         for (OwnedText ot : expandTitles(textualObject.getTitles(), textualObject.getOwnedTitleCreator())) {
@@ -316,6 +317,67 @@ public class TextualObjects {
         if (from.getDescriptions() != null) {
             for (D1 description : from.getDescriptions()) {
                 to.addDescription(description.get(), description.getOwner(), description.getType());
+            }
+        }
+    }
+
+    /**
+     * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
+     * @since 5.6
+     */
+     public static
+     <T extends  AbstractOwnedText<T>, D1 extends AbstractOwnedText<D1>,
+         TO1 extends TextualObject<T, D1, TO1>,
+         D2 extends AbstractOwnedText<D2>,
+         TO2 extends TextualObject<T, D2, TO2>
+         >
+     void updateTitlesForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner) {
+         for(TextualType type : TextualType.values()) {
+            T incomingTitle = incomingMedia.findTitle(owner, type);
+            T titleToUpdate = mediaToUpdate.findTitle(owner, type);
+
+            if(incomingTitle != null && titleToUpdate != null) {
+
+                titleToUpdate.set(incomingTitle.get());
+
+            } else if(incomingTitle != null && titleToUpdate == null) {
+
+                mediaToUpdate.addTitle(incomingTitle.get(), owner, type);
+
+            } else if(incomingTitle == null && titleToUpdate != null) {
+
+                mediaToUpdate.removeTitle(titleToUpdate);
+
+            }
+        }
+    }
+     /**
+     * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
+     * @since 5.6
+     */
+    public static
+     <T1 extends  AbstractOwnedText<T1>, D extends AbstractOwnedText<D>,
+         TO1 extends TextualObject<T1, D, TO1>,
+         T2 extends AbstractOwnedText<T2>,
+         TO2 extends TextualObject<T2, D, TO2>
+         >
+    void updateDescriptionsForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner) {
+        for(TextualType type : TextualType.values()) {
+            D incomingDescription = incomingMedia.findDescription(owner, type);
+            D descriptionToUpdate = mediaToUpdate.findDescription(owner, type);
+
+            if(incomingDescription != null && descriptionToUpdate != null) {
+
+                descriptionToUpdate.set(incomingDescription.get());
+
+            } else if(incomingDescription != null && descriptionToUpdate == null) {
+
+                mediaToUpdate.addDescription(incomingDescription.get(), owner, type);
+
+            } else if(incomingDescription == null && descriptionToUpdate != null) {
+
+                mediaToUpdate.removeDescription(descriptionToUpdate);
+
             }
         }
     }
