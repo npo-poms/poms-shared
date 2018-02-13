@@ -418,7 +418,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("transcode}")
+    @Path("program/transcode}")
     Response transcode(
             @QueryParam(MID) String mid,
             @QueryParam(FILE_NAME) String fileName,
@@ -432,6 +432,11 @@ public interface MediaBackendRestService {
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(ID) final String mid
     );
+
+
+    @GET
+    @Path("transcodingstatuses")
+    XmlCollection<TranscodeStatus> getTranscodeStatusForBroadcaster();
 
 
 }
