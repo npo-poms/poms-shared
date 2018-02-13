@@ -1,10 +1,14 @@
 package nl.vpro.nep.domain.workflow;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
 @AllArgsConstructor
-@Getter
+@Data
 public class CustomerMetadata {
+
+    public CustomerMetadata() {
+
+    }
     String mid;
 }
