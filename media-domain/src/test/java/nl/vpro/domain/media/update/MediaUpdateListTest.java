@@ -35,7 +35,7 @@ public class MediaUpdateListTest {
 
 
     @Test
-    public void marshalStrings() throws IOException, SAXException {
+    public void marshalStrings() {
         MediaUpdateList<String> xmlList = new MediaUpdateList<>("a", "b");
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<list  offset='0' size='2' totalCount='2' xmlns:media=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"  xmlns=\"urn:vpro:media:update:2009\">\n" +
