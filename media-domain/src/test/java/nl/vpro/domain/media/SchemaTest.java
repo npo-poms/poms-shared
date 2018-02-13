@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 
 import javax.xml.XMLConstants;
@@ -41,6 +43,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 3.4
  */
+@Slf4j
 public class SchemaTest {
 
     private final static File DIR = Files.createTempDir();
@@ -68,10 +71,14 @@ public class SchemaTest {
             BulkUpdate.class,
             ImageUpdate.class,
             LocationUpdate.class,
-            // no namespace
-            XmlCollection.class,
             //
-            TranscodeRequest.class
+            TranscodeRequest.class,
+            TranscodeStatus.class,
+            // no namespace
+            XmlCollection.class
+            //
+
+
 
         );
 
@@ -140,7 +147,7 @@ public class SchemaTest {
                 if (f.exists()) {
                     f = File.createTempFile(namespaceUri, "");
                 }
-                System.out.println(namespaceUri + " -> " + f);
+                log.info(namespaceUri + " -> " + f);
 
                 StreamResult result = new StreamResult(f);
                 result.setSystemId(f);
