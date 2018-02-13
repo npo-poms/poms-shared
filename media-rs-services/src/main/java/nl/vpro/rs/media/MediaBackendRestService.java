@@ -418,7 +418,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("program/transcode}")
+    @Path("program/transcode")
     Response transcode(
             @QueryParam(MID) String mid,
             @QueryParam(FILE_NAME) String fileName,
