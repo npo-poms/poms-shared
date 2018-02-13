@@ -8,8 +8,10 @@ import lombok.ToString;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+
 @lombok.Builder(builderClassName = "Builder")
-//@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @Resource
 @ToString
 public class WorkflowExecution {
