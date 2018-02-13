@@ -6,10 +6,10 @@ import lombok.Data;
 import java.time.Instant;
 
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Michiel Meeuwissen
@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
 @lombok.Builder(builderClassName = "Builder")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "transcodeType")
-@XmlRootElement(name = "transcode")
+@XmlRootElement(name = "transcodeStatus")
 public class TranscodeStatus {
 
 
@@ -30,8 +30,14 @@ public class TranscodeStatus {
     String status;
     String statusMessage;
     String workflowType;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     Instant startTime;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     Instant updateTime;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
     Instant endTime;
     String fileName;
 
