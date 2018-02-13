@@ -866,6 +866,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "prediction")
     @Valid
     public Set<PredictionUpdate> getPredictions() {
+        if (predictions == null) {
+            predictions = new HashSet<>();
+        }
         return predictions;
     }
 
