@@ -20,7 +20,7 @@ public class TextualObjects {
     // some methods working on collections of 'OwnedText' objects (think of titles and descriptions)
 
     /**
-     * Finds the first text in a collection of {@link TypedText}s with one of the given types. Wrapped in an optional, so never returns <code>null</code>
+     * Finds the first text in a collection of {@link TypedText}s with one of the given types. Wrapped in an optional, so never returns {@code null}
      */
     public static <OT extends TypedText> Optional<String> getOptional(Collection<OT> titles, TextualType... types) {
         return Optional.ofNullable(
@@ -40,8 +40,7 @@ public class TextualObjects {
         TriFunction<String, OwnerType, TextualType, OT> creator,
         List<TextualType> types,
         List<OwnerType> owners) {
-        SortedSet<OT> result = new TreeSet<>();
-        result.addAll(texts);
+        SortedSet<OT> result = new TreeSet<>(texts);
         for(TextualType textualType : types) {
             for (OwnerType ownerType : owners) {
                 expand(texts, textualType, ownerType).ifPresent(ot -> {
@@ -169,8 +168,7 @@ public class TextualObjects {
         if (titles instanceof List) {
             list = (List<OT>) titles;
         } else {
-            list = new ArrayList<>();
-            list.addAll(titles);
+            list = new ArrayList<>(titles);
         }
         list.sort(comparator);
         for (OT title : list) {
@@ -432,6 +430,7 @@ public class TextualObjects {
      * @param toRetain The collection of texts which are to be retained in collection
      * @since 5.3
      */
+    @SuppressWarnings("SuspiciousMethodCalls")
     public static <TO extends TypedText, TO2 extends OwnedText> void retainAll(
         Collection<TO2> collection,
         Collection<TO> toRetain,
