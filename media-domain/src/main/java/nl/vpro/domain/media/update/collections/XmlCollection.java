@@ -16,6 +16,7 @@ import nl.vpro.domain.VersionSpecific;
 import nl.vpro.domain.media.update.*;
 
 /**
+ *  XmlCollection does the same as JAXB would do for lists. We use this package info just to define the prefixes for the other namespaces.
  * @author Michiel Meeuwissen
  * @since 3.4
  */
@@ -29,6 +30,7 @@ import nl.vpro.domain.media.update.*;
     MemberRefUpdate.class,
     LocationUpdate.class,
     PredictionUpdate.class,
+    TranscodeStatus.class,
     String.class
 })
 @XmlAccessorType(XmlAccessType.NONE)

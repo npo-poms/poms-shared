@@ -3,13 +3,12 @@ package nl.vpro.nep.domain.workflow;
 import io.openapitools.jackson.dataformat.hal.HALLink;
 import io.openapitools.jackson.dataformat.hal.annotation.Link;
 import io.openapitools.jackson.dataformat.hal.annotation.Resource;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.time.Instant;
 
-@Builder
+@lombok.Builder(builderClassName = "Builder")
 //@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @Resource
 @ToString
@@ -34,4 +33,23 @@ public class WorkflowExecution {
     @Getter
     Instant endTime;
 
+    public static class Builder {
+
+        public Builder mid(String mid) {
+            if (customerMetadata == null) {
+                customerMetadata = new CustomerMetadata();
+            }
+            customerMetadata.setMid(mid);
+            return this;
+        }
+    }
+
+
+    public String getMid() {
+        if (customerMetadata != null) {
+            return customerMetadata.getMid();
+        } else {
+            return null;
+        }
+    }
 }

@@ -4,7 +4,9 @@
         {
             @XmlNs(prefix = "",      namespaceURI = Xmlns.UPDATE_NAMESPACE),
             @XmlNs(prefix = "media", namespaceURI = Xmlns.MEDIA_NAMESPACE),
-            @XmlNs(prefix = "shared",namespaceURI = Xmlns.SHARED_NAMESPACE)
+            @XmlNs(prefix = "shared",namespaceURI = Xmlns.SHARED_NAMESPACE),
+            @XmlNs(prefix = "def",   namespaceURI = "")
+
 
         },
     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED
