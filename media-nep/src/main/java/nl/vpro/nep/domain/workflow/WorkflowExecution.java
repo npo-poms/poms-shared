@@ -8,10 +8,9 @@ import lombok.ToString;
 
 import java.time.Instant;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @lombok.Builder(builderClassName = "Builder")
-@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY, getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE)
 @Resource
 @ToString
 public class WorkflowExecution {
@@ -46,7 +45,7 @@ public class WorkflowExecution {
         }
     }
 
-
+    @JsonIgnore
     public String getMid() {
         if (customerMetadata != null) {
             return customerMetadata.getMid();
