@@ -17,7 +17,8 @@ import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlSchema;
 
 import nl.vpro.domain.Xmlns;
-/**
+/*
  * XmlCollection does the same as JAXB would do for lists. We use this package info just to define the prefixes for the other namespaces.
  * (MSE-2612)
  */
+
