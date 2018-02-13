@@ -1274,6 +1274,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         this.duration = duration;
     }
 
+
+    /**
+     * Use {@link AuthorizedDuration#duration} in combination with {@link #getDuration} to get the java.time.Duration
+     * @param
+     * @throws ModificationException
+     */
     @JsonIgnore
     @XmlTransient
     public void setDuration(java.time.Duration duration) throws ModificationException {
