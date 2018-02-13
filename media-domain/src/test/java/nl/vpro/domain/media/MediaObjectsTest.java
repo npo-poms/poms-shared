@@ -16,13 +16,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
-
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -238,10 +237,12 @@ public class MediaObjectsTest {
 
         assertThat(existing.findLocation("bbb"))
             .withFailMessage("Removing deleted location failed").isNull();
-        Assert.assertThat("Update failed for duration", existing.findLocation("aaa").getDuration(), equalTo(duration));
-        Assert.assertThat("Removed location for wrong owner", existing.findLocation("ccc"), notNullValue());
-        Assert.assertThat("Added location for wrong owner", existing.findLocation("eee"), nullValue());
-        Assert.assertThat("Number of locations does not match", existing.getLocations().size(), equalTo(3));
+        assertThat(existing.findLocation("aaa").getDuration())
+            .withFailMessage("Update failed for duration").isEqualTo(duration);
+        assertThat(existing.findLocation("ccc")).withFailMessage("Removed location for wrong owner").isNotNull();
+        assertThat(existing.findLocation("eee")).withFailMessage("Added location for wrong owner")
+            .isNull();
+        assertThat(existing.getLocations().size()).withFailMessage("Number of locations does not match").isEqualTo(3);
     }
 
     @Test
@@ -272,7 +273,7 @@ public class MediaObjectsTest {
         MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO);
 
         assertThat(existing.findLocation("aaa").getAvAttributes()).isNotNull();
-        assertThat(existing.findLocation("bbb").getAvAttributes().getBitrate()).isEqualTo(4444));
+        assertThat(existing.findLocation("bbb").getAvAttributes().getBitrate()).isEqualTo(4444);
         assertThat(existing.findLocation("ccc").getAvAttributes().getBitrate()).isNull();
     }
 
@@ -309,8 +310,8 @@ public class MediaObjectsTest {
 
         MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO);
 
-        Assert.assertThat("Adding new VideoAttributes failed", existing.findLocation("aaa").getAvAttributes().getVideoAttributes(), notNullValue());
-        Assert.assertThat("Updating VideoAttributes failed", existing.findLocation("bbb").getAvAttributes().getVideoAttributes().getHorizontalSize(), equalTo(200));
-        Assert.assertThat("Removing deleted VideoAttributes failed", existing.findLocation("ccc").getAvAttributes().getVideoAttributes(), nullValue());
+        assertThat(existing.findLocation("aaa").getAvAttributes().getVideoAttributes()).withFailMessage("Adding new VideoAttributes failed").isNotNull();
+        assertThat( existing.findLocation("bbb").getAvAttributes().getVideoAttributes().getHorizontalSize()).withFailMessage("Updating VideoAttributes failed").isEqualTo(200);
+        assertThat( existing.findLocation("ccc").getAvAttributes().getVideoAttributes()).withFailMessage("Removing deleted VideoAttributes failed").isNull();
     }
 }
