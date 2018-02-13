@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @AllArgsConstructor
+@lombok.Builder
 @Data
 public class CustomerMetadata {
 
@@ -11,4 +12,7 @@ public class CustomerMetadata {
 
     }
     String mid;
+
+    String broadcaster;
+
 }
