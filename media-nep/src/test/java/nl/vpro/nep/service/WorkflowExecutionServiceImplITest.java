@@ -15,11 +15,22 @@ import nl.vpro.nep.domain.workflow.WorkflowExecution;
 @Slf4j
 public class WorkflowExecutionServiceImplITest {
 
+     WorkflowExecutionServiceImpl nepService = new WorkflowExecutionServiceImpl();
+
+    {
+        nepService.init();
+    }
+
+    @Test
+    public void transcode() {
+        // TODO
+        //nepService.execute()
+    }
+
 
     @Test
     public void getStatuses() {
-        WorkflowExecutionServiceImpl nepService = new WorkflowExecutionServiceImpl();
-        nepService.init();
+
         Iterator<WorkflowExecution> statuses = nepService.getStatuses(null, null, 100L);
 
         while(statuses.hasNext()) {
