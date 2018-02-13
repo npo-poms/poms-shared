@@ -303,31 +303,41 @@ public class Editor extends AbstractUser {
         return false;
     }
 
-    void setActivePortal(String portalId, boolean value) {
-        setActive(new Portal(portalId, null), value);
+    boolean setActivePortal(String portalId, boolean value) {
+        return setActive(new Portal(portalId, null), value);
     }
 
-    void setActive(Portal portal, boolean value) {
+    boolean setActive(Portal portal, boolean value) {
         for (PortalEditor be : portals) {
             if (portal.equals(be.getOrganization())) {
-                be.setActive(value);
-                activePortalCache = null;
-                return;
+                if (be.isActive() != value) {
+                    be.setActive(value);
+                    activePortalCache = null;
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
-        throw new IllegalArgumentException();
+        if (value) {
+            throw new IllegalArgumentException();
+        } else {
+            return false;
+        }
     }
 
-    void addPortal(Portal portal) {
+    boolean addPortal(Portal portal) {
         if (portal == null) {
             log.warn("Cannot add null to {}", this);
-            return;
+            return false;
         }
         PortalEditor toAdd = new PortalEditor(this, portal);
         if(portals.add(toAdd)) {
             allowedPortalCache = null;
             activePortalCache = null;
+            return true;
         }
+        return false;
     }
 
     PortalEditor removePortal(Portal portal) {
@@ -351,16 +361,19 @@ public class Editor extends AbstractUser {
         return allowedThirdPartyCache;
     }
 
-    void addThirdParty(ThirdParty thirdParty) {
+    boolean addThirdParty(ThirdParty thirdParty) {
         if (thirdParty == null) {
             log.warn("Cannot add null to {}", this);
-            return;
+            return false;
         }
         ThirdPartyEditor toAdd = new ThirdPartyEditor(this, thirdParty);
         toAdd.setActive(true);
         if(thirdParties.add(toAdd)) {
             allowedThirdPartyCache = null;
             activeThirdPartyCache = null;
+            return true;
+        } else {
+            return false;
         }
     }
 
