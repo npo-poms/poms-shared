@@ -124,7 +124,7 @@ public class WorkflowExecutionServiceImpl implements NEPService {
             if (status != null) {
                 builder.setParameter("status", status.name());
             }
-            builder.addParameter("size", String.valueOf(20));
+            builder.addParameter("size", String.valueOf(batchSize));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
@@ -160,9 +160,9 @@ public class WorkflowExecutionServiceImpl implements NEPService {
         };
         BatchedReceiver<WorkflowExecution> br = BatchedReceiver.<WorkflowExecution>builder()
             .batchGetter(getter)
-            .batchSize(20)
+            .batchSize(batchSize)
             .build();
-        return new MaxOffsetIterator<WorkflowExecution>(
+        return new MaxOffsetIterator<>(
             FilteringIterator.<WorkflowExecution>builder()
                 .filter(o -> mid == null || Objects.equals(o.getCustomerMetadata().getMid(), mid))
                 .wrapped(br)
