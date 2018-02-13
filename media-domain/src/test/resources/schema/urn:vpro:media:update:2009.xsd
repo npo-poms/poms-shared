@@ -30,6 +30,8 @@
 
   <xs:element name="transcode" type="transcodeType"/>
 
+  <xs:element name="transcodeStatus" type="transcodeStatusType"/>
+
   <xs:complexType name="midAndTypeType">
     <xs:sequence>
       <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -352,14 +354,6 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="memberUpdateType">
-    <xs:sequence>
-      <xs:element name="mediaUpdate" type="mediaUpdateType" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute name="position" type="xs:int"/>
-    <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
-  </xs:complexType>
-
   <xs:complexType name="transcodeType">
     <xs:sequence>
       <xs:element name="mid" type="xs:string" minOccurs="0"/>
@@ -367,6 +361,27 @@
       <xs:element name="encryption" type="xs:string" minOccurs="0"/>
       <xs:element name="priority" type="xs:string" minOccurs="0"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="transcodeStatusType">
+    <xs:sequence>
+      <xs:element name="mid" type="xs:string" minOccurs="0"/>
+      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="statusMessage" type="xs:string" minOccurs="0"/>
+      <xs:element name="workflowType" type="xs:string" minOccurs="0"/>
+      <xs:element name="startTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="updateTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="endTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="fileName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="memberUpdateType">
+    <xs:sequence>
+      <xs:element name="mediaUpdate" type="mediaUpdateType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="position" type="xs:int"/>
+    <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
   </xs:complexType>
 </xs:schema>
 

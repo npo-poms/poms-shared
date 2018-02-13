@@ -35,7 +35,7 @@
 
   <xs:element name="transcode" type="transcodeType"/>
 
-
+  <xs:element name="transcodeStatus" type="transcodeStatusType"/>
 
 
   <xs:complexType name="avAtributeUpdateType">
@@ -529,6 +529,19 @@
       <xs:element name="fileName" type="xs:string"  form="qualified" minOccurs="0"/>
       <xs:element name="encryption" type="xs:string"  form="qualified" minOccurs="0"/>
       <xs:element name="priority" type="xs:string"  form="qualified" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+   <xs:complexType name="transcodeStatusType">
+    <xs:sequence>
+      <xs:element name="mid" type="xs:string" form="qualified"  minOccurs="0"/>
+      <xs:element name="status" type="xs:string" form="qualified"  minOccurs="0"/>
+      <xs:element name="statusMessage" type="xs:string" form="qualified"   minOccurs="0"/>
+      <xs:element name="workflowType" type="xs:string" form="qualified"  minOccurs="0"/>
+      <xs:element name="startTime" type="xs:dateTime" form="qualified"  minOccurs="0"/>
+      <xs:element name="updateTime" type="xs:dateTime" form="qualified"  minOccurs="0"/>
+      <xs:element name="endTime" type="xs:dateTime" form="qualified" minOccurs="0"/>
+      <xs:element name="fileName" type="xs:string"  form="qualified" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
