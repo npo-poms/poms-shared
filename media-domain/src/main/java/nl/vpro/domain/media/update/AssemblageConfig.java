@@ -23,4 +23,5 @@ public class AssemblageConfig {
     final boolean copyWorkflow;
     final boolean copyLanguageAndCountry;
     final boolean imageMetaData;
+    final boolean copyPredictions;
 }
