@@ -19,7 +19,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "transcodeType")
+@XmlType(name = "transcodeStatusType")
 @XmlRootElement(name = "transcodeStatus")
 public class TranscodeStatus {
 
