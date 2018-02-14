@@ -1,0 +1,34 @@
+package nl.vpro.domain.media.update;
+
+import java.io.IOException;
+
+import org.junit.Test;
+import org.xml.sax.SAXException;
+
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+
+/**
+ * @author Michiel Meeuwissen
+ * @since 5.6
+ */
+public class TranscodeRequestTest {
+
+
+    @Test
+    public void xml() throws IOException, SAXException {
+        TranscodeRequest request = TranscodeRequest.builder()
+            .mid("MID_123")
+            .encryption("DRM")
+            .priority("NORMAL")
+            .fileName("vpro/test.m4v")
+            .build();
+        JAXBTestUtil.roundTripAndSimilar(request, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<transcode xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <mid>MID_123</mid>\n" +
+            "    <fileName>vpro/test.m4v</fileName>\n" +
+            "    <encryption>DRM</encryption>\n" +
+            "    <priority>NORMAL</priority>\n" +
+            "</transcode>");
+    }
+
+}
