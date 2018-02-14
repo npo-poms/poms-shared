@@ -3,6 +3,7 @@ package nl.vpro.rs.media;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 import java.util.Locale;
 
@@ -410,7 +411,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|group|segment)}/{id}/predictions/{platform}")
     Response setPrediction(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
-        @PathParam(ID) final String id,
+        @PathParam(MID) final String mid,
         @PathParam("platform") final Platform platform,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
@@ -418,12 +419,19 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("program/transcode")
+    @Path("program/{mid}/transcode")
     Response transcode(
-            @QueryParam(MID) String mid,
-            @QueryParam(FILE_NAME) String fileName,
-            @QueryParam(ENCRYPTION) String encryption,
-            @QueryParam(PRIOTRITY) String priority);
+        @PathParam(MID) final String mid,
+        @QueryParam(ERRORS) String errors,
+        TranscodeRequest transcodeRequest);
+
+
+    @POST
+    @Path("transcode")
+    Response transcode(
+        @QueryParam(ERRORS) String errors,
+        TranscodeRequest transcodeRequest);
+
 
 
     @GET
@@ -436,7 +444,13 @@ public interface MediaBackendRestService {
 
     @GET
     @Path("transcodingstatuses")
-    XmlCollection<TranscodeStatus> getTranscodeStatusForBroadcaster();
+    XmlCollection<TranscodeStatus> getTranscodeStatusForBroadcaster(
+        @QueryParam("from") final Instant maxAge,
+        @QueryParam("status") @DefaultValue("RUNNING") final String status,
+        @QueryParam(MAX) @DefaultValue("20") final Integer max
+
+
+    );
 
 
 }
