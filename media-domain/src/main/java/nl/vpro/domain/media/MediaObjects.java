@@ -537,20 +537,19 @@ public class MediaObjects {
         for(Location incomingLocation : incomingMedia.getLocations()) {
 
             if(incomingLocation.getOwner().equals(owner)) {
-
-                Location locationToUpdate = mediaToUpdate.findLocation(incomingLocation.getProgramUrl(), owner);
-
+                Location locationToUpdate = mediaToUpdate.findLocation(incomingLocation.getProgramUrl());
                 if(locationToUpdate == null) {
-
                     mediaToUpdate.addLocation(incomingLocation);
-
                 } else {
-                    locationToUpdate.setDuration(incomingLocation.getDuration());
-                    locationToUpdate.setOffset(incomingLocation.getOffset());
-                    locationToUpdate.setSubtitles(incomingLocation.getSubtitles());
-                    Embargos.copy(incomingLocation, locationToUpdate);
-
-                    mergeAvAttributes(incomingLocation, locationToUpdate);
+                    if (locationToUpdate.getOwner() != owner) {
+                        log.warn("Cannot update location {} since it not from {}", locationToUpdate, owner);
+                    } else {
+                        locationToUpdate.setDuration(incomingLocation.getDuration());
+                        locationToUpdate.setOffset(incomingLocation.getOffset());
+                        locationToUpdate.setSubtitles(incomingLocation.getSubtitles());
+                        Embargos.copy(incomingLocation, locationToUpdate);
+                        mergeAvAttributes(incomingLocation, locationToUpdate);
+                    }
                 }
             }
         }
