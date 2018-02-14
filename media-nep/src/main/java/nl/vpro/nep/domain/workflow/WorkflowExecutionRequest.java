@@ -10,6 +10,7 @@ import java.util.List;
 @Getter
 public class WorkflowExecutionRequest implements Serializable {
     String mid;
+    String broadcaster;
     String fileName;
     EncryptionType encryption;
     PriorityType priority;
