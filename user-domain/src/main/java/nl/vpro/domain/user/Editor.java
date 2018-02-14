@@ -158,7 +158,7 @@ public class Editor extends AbstractUser {
         allowedBroadcasterCache = null;
     }
 
-    SortedSet<Broadcaster> getAllowedBroadcasters() {
+    public SortedSet<Broadcaster> getAllowedBroadcasters() {
         if(allowedBroadcasterCache == null) {
             allowedBroadcasterCache = new TreeSet<>();
 
