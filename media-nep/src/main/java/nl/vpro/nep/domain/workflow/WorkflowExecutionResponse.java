@@ -9,5 +9,6 @@ import java.util.List;
 @Getter
 @Builder
 public class WorkflowExecutionResponse implements Serializable {
+
     List<WorkflowExecution> workflowExecutions;
 }

@@ -18,7 +18,7 @@ public class WorkflowExecutionRequestTest {
 
         WorkflowExecutionRequest workflowExecutionRequest = WorkflowExecutionRequest.builder()
                 .mid("AB_123132")
-                .fileName("bla.mp3")
+                .filename("bla.mp3")
                 .encryption(EncryptionType.DRM)
                 .priority(PriorityType.NORMAL)
                 .type(Type.VIDEO)

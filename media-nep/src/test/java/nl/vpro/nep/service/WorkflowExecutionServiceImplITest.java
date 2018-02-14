@@ -2,13 +2,17 @@ package nl.vpro.nep.service;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
 
 import org.junit.Test;
 
+import nl.vpro.nep.domain.workflow.EncryptionType;
+import nl.vpro.nep.domain.workflow.PriorityType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
+import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 
 /**
  * @author Michiel Meeuwissen
@@ -25,8 +29,21 @@ public class WorkflowExecutionServiceImplITest {
 
     @Test
     public void transcode() {
-        // TODO
-        //nepService.execute()
+
+          WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
+              .mid("VPWON_1265965")
+              .broadcaster("VPRO")
+              .encryption(EncryptionType.NONE)
+              .priority(PriorityType.LOW)
+              .filename("/VPWON_1265965__000000000-000004299.mp4")
+              .build()
+              ;
+            try {
+                WorkflowExecution result = nepService.execute(request);
+                log.info("Result {}", result);
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
     }
 
 
