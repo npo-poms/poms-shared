@@ -233,7 +233,7 @@ public class MediaObjectsTest {
         incoming.addLocation(n2);
         incoming.addLocation(n3);
 
-        MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO);
+        MediaObjects.updateAndRemoveLocationsForOwner(incoming, existing, OwnerType.NEBO);
 
         assertThat(existing.findLocation("bbb"))
             .withFailMessage("Removing deleted location failed").isNull();
