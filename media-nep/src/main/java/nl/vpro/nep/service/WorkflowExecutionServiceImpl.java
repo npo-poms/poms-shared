@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.Instant;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 
@@ -80,16 +82,8 @@ public class WorkflowExecutionServiceImpl implements NEPService {
     }
 
     @Override
-    public WorkflowExecutionResponse execute(String mid, Type type, List<String> platforms, String fileName, EncryptionType encryption, PriorityType priority) throws IOException {
+    public WorkflowExecutionResponse execute(WorkflowExecutionRequest request) throws IOException {
 
-        WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
-                .mid(mid)
-                .fileName(fileName)
-                .encryption(encryption)
-                .priority(priority)
-                .type(type)
-                .platforms(platforms)
-                .build();
 
         CloseableHttpClient client = getHttpClient();
 
@@ -116,7 +110,7 @@ public class WorkflowExecutionServiceImpl implements NEPService {
 
 
     @Override
-    public Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Long limit) {
+    public Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Instant from, Long limit) {
         int batchSize = 20;
         URIBuilder builder;
         try {
@@ -140,13 +134,16 @@ public class WorkflowExecutionServiceImpl implements NEPService {
                     try (CloseableHttpResponse execute = executeGet(next)) {
                         if (execute.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                             WorkflowList list = MAPPER.readValue(execute.getEntity().getContent(), WorkflowList.class);
+                            List<WorkflowExecution> workflowExecutions = list.getWorkflowExecutions().stream()
+                                .filter((we) -> from == null || we.getStartTime().isAfter(from))
+                                .collect(Collectors.toList());
                             totalSize.set(list.getTotalResults());
-                            if (list.getNext() != null) {
+                            if (list.getNext() != null && workflowExecutions.size() == list.getWorkflowExecutions().size()) {
                                 next = list.getNext().getHref();
                             } else {
                                 next = null;
                             }
-                            return list.getWorkflowExecutions().iterator();
+                            return workflowExecutions.iterator();
                         } else {
                             throw new RuntimeException(execute.getStatusLine().toString());
                         }
