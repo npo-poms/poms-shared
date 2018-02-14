@@ -5,6 +5,7 @@ import io.openapitools.jackson.dataformat.hal.HALMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
@@ -40,10 +41,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
-import nl.vpro.nep.domain.workflow.*;
+import nl.vpro.nep.domain.workflow.StatusType;
+import nl.vpro.nep.domain.workflow.WorkflowExecution;
+import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
+import nl.vpro.nep.domain.workflow.WorkflowList;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.FilteringIterator;
 import nl.vpro.util.MaxOffsetIterator;
@@ -82,26 +85,31 @@ public class WorkflowExecutionServiceImpl implements NEPService {
     }
 
     @Override
-    public WorkflowExecutionResponse execute(WorkflowExecutionRequest request) throws IOException {
+    public WorkflowExecution execute(WorkflowExecutionRequest request) throws IOException {
 
 
         CloseableHttpClient client = getHttpClient();
 
-        ObjectMapper mapper = new ObjectMapper();
         try {
-            StringEntity entity = new StringEntity(mapper.writeValueAsString(request), ContentType.APPLICATION_FORM_URLENCODED);
+            String json = MAPPER.writeValueAsString(request);
+            StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             HttpPost httpPost = new HttpPost(URL);
             httpPost.setEntity(entity);
+
             HttpResponse response = client.execute(httpPost, clientContext);
 
-            if (response.getStatusLine().getStatusCode() != 200) {
-                throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode());
+            if (response.getStatusLine().getStatusCode() >= 300) {
+
+                ByteArrayOutputStream body = new ByteArrayOutputStream();
+                IOUtils.copy(response.getEntity().getContent(), body);
+
+                throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
             }
 
             BufferedReader br = new BufferedReader(
                     new InputStreamReader((response.getEntity().getContent())));
 
-            return mapper.readValue(IOUtils.toString(br), WorkflowExecutionResponse.class);
+            return MAPPER.readValue(IOUtils.toString(br), WorkflowExecution.class);
 
         } catch (JsonProcessingException e) {
             throw e;
