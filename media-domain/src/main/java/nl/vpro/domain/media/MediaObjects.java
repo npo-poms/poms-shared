@@ -532,7 +532,8 @@ public class MediaObjects {
         );
     }
 
-     public static <T extends MediaObject> void updateLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner) {
+
+    public static <T extends MediaObject>  void  updateLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner) {
         for(Location incomingLocation : incomingMedia.getLocations()) {
 
             if(incomingLocation.getOwner().equals(owner)) {
@@ -553,14 +554,21 @@ public class MediaObjects {
                 }
             }
         }
+    }
 
+
+     public static <T extends MediaObject>  List<Location>  updateAndRemoveLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner) {
+        updateLocationsForOwner(incomingMedia, mediaToUpdate, owner);
+        List<Location> locationsToRemove = new ArrayList<>();
         mediaToUpdate.getLocations().removeIf(
             location ->
                 location.getOwner().equals(owner) &&
                 incomingMedia.findLocation(location.getProgramUrl(), owner) == null
         );
+        return locationsToRemove;
     }
-     public static void mergeAvAttributes(Location incomingLocation, Location locationToUpdate) {
+
+    public static void mergeAvAttributes(Location incomingLocation, Location locationToUpdate) {
         AVAttributes incomingAttributes = incomingLocation.getAvAttributes();
         AVAttributes attributesToUpdate = locationToUpdate.getAvAttributes();
 

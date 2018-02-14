@@ -1,10 +1,13 @@
 package nl.vpro.nep.service;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Iterator;
-import java.util.List;
 
-import nl.vpro.nep.domain.workflow.*;
+import nl.vpro.nep.domain.workflow.StatusType;
+import nl.vpro.nep.domain.workflow.WorkflowExecution;
+import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
+import nl.vpro.nep.domain.workflow.WorkflowExecutionResponse;
 
 /**
  * @author Michiel Meeuwissen
@@ -12,11 +15,7 @@ import nl.vpro.nep.domain.workflow.*;
  */
 public interface NEPService {
 
-    WorkflowExecutionResponse execute(
-        String mid,
-        Type type,
-        List<String> platforms, String fileName, EncryptionType encryption, PriorityType priority) throws IOException;
+    WorkflowExecutionResponse execute(WorkflowExecutionRequest request) throws IOException;
 
-
-    Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Long limit);
+    Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Instant from, Long limit);
 }
