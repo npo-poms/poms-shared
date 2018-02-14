@@ -8,15 +8,22 @@ import nl.vpro.domain.media.Website;
 import nl.vpro.domain.media.support.Tag;
 
 /**
- * An object that can be translated. The is valid for the fields of {@link TextualObject}, but also for tags, websites, and twitter references.
+ * An object that can be translated. The is valid for the fields of {@link TextualObject}, but also for {@link Tag}, {@link Website}, and {@link nl.vpro.domain.media.TwitterRef} references.
  *
  * @author Michiel Meeuwissen
  * @since 5.1
+ * @param <T> The type of one title
+ * @param <D> The type of one description
+ * @param <WS> The type of one website object
+ * @param <TR> The type of one twitter reference
+ * @param <TO> This type itself
  */
 public interface LocalizedObject<
     T extends OwnedText,
     D extends OwnedText,
-    WS extends Supplier<String> & UpdatableIdentifiable, TR extends Supplier<String>, TO extends LocalizedObject<T, D, WS, TR, TO>>
+    WS extends Supplier<String> & UpdatableIdentifiable,
+    TR extends Supplier<String>,
+    TO extends LocalizedObject<T, D, WS, TR, TO>>
     extends TextualObject<T, D, TO> {
 
 
@@ -48,7 +55,7 @@ public interface LocalizedObject<
         return null;
     }
 
-    default WS findWebsite(Website website) {
+    default WS findWebsite(WS website) {
         List<WS > websites = getWebsites();
         int index = websites.indexOf(website);
         if (index >= 0) {
@@ -57,7 +64,7 @@ public interface LocalizedObject<
         return null;
     }
 
-    default WS getWebsite(final Website website) {
+    default WS getWebsite(final WS website) {
         for (WS existing : getWebsites()) {
             if (existing.equals(website)) {
                 return existing;
