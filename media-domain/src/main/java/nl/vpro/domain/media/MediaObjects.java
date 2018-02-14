@@ -7,7 +7,6 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -29,6 +28,9 @@ import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 
 
 /**
+ * Various methods related to dealing with {@link MediaObject}s, like copying and filling.
+ *
+ * See {@link TextualObjects}, and {@link Embargos} for methods like this (because media objects are {@link TextualObject} and {@link Embargo}
  * @since 1.5
  */
 @Slf4j
@@ -61,9 +63,6 @@ public class MediaObjects {
 
     }
 
-    public static Collection<String> filterCrids(Collection<String> crids, final String contains) {
-        return crids.stream().filter(crid -> crid != null && crid.contains(contains)).collect(Collectors.toList());
-    }
 
     /**
      * Sets the owner of all titles, descriptions, locations and images found in given MediaObject
@@ -76,87 +75,6 @@ public class MediaObjects {
         for (Image image : media.getImages()) {
             image.setOwner(owner);
         }
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#filter}
-     */
-    @Deprecated
-    public static <T extends Ownable> List<T> filter(Collection<T> ownables, OwnerType owner) {
-        return TextualObjects.filter(ownables, owner);
-    }
-
-
-    /**
-     * @deprecated Use {@link TextualObjects#get}
-     */
-    @Deprecated
-    public static String getTitle(MediaObject media, OwnerType owner, TextualType type) {
-        return TextualObjects.getTitle(media, owner, type);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#get}
-     */
-    @Deprecated
-    public static String getTitle(Collection<Title> titles, TextualType... types) {
-        return TextualObjects.get(titles, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#get}
-     */
-    @Deprecated
-    public static String getTitle(Collection<Title> titles, String defaultValue, TextualType... types) {
-        return TextualObjects.get(titles, defaultValue, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#getObject}
-     */
-    @Deprecated
-    public static Title getTitleObject(Collection<Title> titles, TextualType... types) {
-        return TextualObjects.getObject(titles, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#getDescription(TextualObject, OwnerType, TextualType)}
-     */
-    @Deprecated
-    public static String getDescription(MediaObject media, OwnerType owner, TextualType type) {
-        return TextualObjects.getDescription(media, owner, type);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#getDescription(TextualObject, TextualType...)}
-     */
-    @Deprecated
-    public static String getDescription(MediaObject media, TextualType... types) {
-        return TextualObjects.getDescription(media, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#get(Collection, TextualType...)}
-     */
-    @Deprecated
-    public static String getDescription(Collection<Description> descriptions, TextualType... types) {
-        return TextualObjects.get(descriptions, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#get(Collection, String, TextualType...)}
-     */
-    @Deprecated
-    public static String getDescription(Collection<Description> descriptions, String defaultValue, TextualType... types) {
-        return TextualObjects.get(descriptions, defaultValue, types);
-    }
-
-    /**
-     * @deprecated Use {@link TextualObjects#findOwnersForTextFields(TextualObject)}
-     */
-    @Deprecated
-    public static OwnerType[] findOwnersForTextFields(MediaObject media) {
-        return TextualObjects.findOwnersForTextFields(media);
     }
 
     @SuppressWarnings("unchecked")
@@ -254,6 +172,9 @@ public class MediaObjects {
         }
         return null;
     }
+
+
+
     public static SortedSet<ScheduleEvent> filterScheduleEvents(Collection<ScheduleEvent> events, Channel... channels) {
         return filterScheduleEvents(events, Arrays.asList(channels));
 
@@ -269,6 +190,10 @@ public class MediaObjects {
         return result;
     }
 
+
+    /**
+     * Returns the channel associated with this program. That is the channel of the earliest schedule event that is not a rerun.
+     */
     public static Channel getChannel(MediaObject program) {
         for (ScheduleEvent se : program.getScheduleEvents()) {
             if (! ScheduleEvents.isRerun(se)) {
@@ -346,7 +271,7 @@ public class MediaObjects {
     }
 
 
-    protected static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject, Set<MediaObject> handled) throws NotFoundException {
+    private static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject, Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
@@ -393,14 +318,6 @@ public class MediaObjects {
     }
 
 
-    /**
-     * @since 2.1
-     */
-    @Deprecated
-    public static Date getSortDate(MediaObject mo) {
-        return DateUtils.toDate(getSortInstant(mo));
-
-    }
 
     public static Instant getSortInstant(MediaObject mo) {
         if (mo instanceof Group) {
@@ -508,6 +425,7 @@ public class MediaObjects {
             for (Location location : object.getLocations()) {
                 Platform locationPlatform = location.getPlatform();
                 if (locationPlatform == null) {
+                    log.debug("Location has no explicit platform");
                     // this might be a good idea?
                     //log.debug("Location has no explicit platform. Taking it {} implicitely", Platform.INTERNETVOD);
                     //locationPlatform = Platform.INTERNETVOD;
@@ -575,7 +493,7 @@ public class MediaObjects {
      *
      * TODO work in progress. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
      */
-    public static <T extends PublishableObject> T filterPublishable(T object) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T extends PublishableObject> T filterPublishable(T object) {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
                 return ((PublishableObject) o).isPublishable();
@@ -587,7 +505,7 @@ public class MediaObjects {
         log.debug("Filtered {} from {}", result.filterCount(), result.get());
         return result.get();
     }
-    public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
                 return predicate.test(((PublishableObject) o).getWorkflow());
@@ -653,11 +571,11 @@ public class MediaObjects {
             mergeAudioAttributes(incomingAttributes, attributesToUpdate);
             mergeVideoAttributes(incomingAttributes, attributesToUpdate);
 
-        } else if(incomingAttributes != null && attributesToUpdate == null) {
+        } else if(incomingAttributes != null) {
 
             locationToUpdate.setAvAttributes(incomingAttributes);
 
-        } else if(incomingAttributes == null && attributesToUpdate != null) {
+        } else if(attributesToUpdate != null) {
 
             locationToUpdate.setAvAttributes(null);
 
@@ -671,17 +589,12 @@ public class MediaObjects {
         AudioAttributes audioToUpdate = attributesToUpdate.getAudioAttributes();
 
         if(incomingAudio != null && audioToUpdate != null) {
-
             audioToUpdate.setAudioCoding(incomingAudio.getAudioCoding());
             audioToUpdate.setLanguage(incomingAudio.getLanguage());
             audioToUpdate.setNumberOfChannels(incomingAudio.getNumberOfChannels());
-
-        } else if(incomingAudio != null && audioToUpdate == null) {
-
+        } else if(incomingAudio != null) {
             attributesToUpdate.setAudioAttributes(incomingAudio);
-
-        } else if(incomingAudio == null && audioToUpdate != null) {
-
+        } else if(audioToUpdate != null) {
             attributesToUpdate.setAudioAttributes(null);
 
         }
@@ -699,11 +612,11 @@ public class MediaObjects {
             videoToUpdate.setVerticalSize(incomingVideo.getVerticalSize());
             videoToUpdate.setVideoCoding(incomingVideo.getVideoCoding());
 
-        } else if(incomingVideo != null && videoToUpdate == null) {
+        } else if(incomingVideo != null) {
 
             attributesToUpdate.setVideoAttributes(incomingVideo);
 
-        } else if(incomingVideo == null && videoToUpdate != null) {
+        } else if(videoToUpdate != null) {
 
             attributesToUpdate.setVideoAttributes(null);
 
@@ -745,4 +658,103 @@ public class MediaObjects {
             return memberOf;
         }
     }
+
+
+
+
+
+
+    // DEPRECATED methods
+
+
+    /**
+     * @since 2.1
+     */
+    @Deprecated
+    public static Date getSortDate(MediaObject mo) {
+        return DateUtils.toDate(getSortInstant(mo));
+
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#filter}
+     */
+    @Deprecated
+    public static <T extends Ownable> List<T> filter(Collection<T> ownables, OwnerType owner) {
+        return TextualObjects.filter(ownables, owner);
+    }
+
+
+    /**
+     * @deprecated Use {@link TextualObjects#get}
+     */
+    @Deprecated
+    public static String getTitle(MediaObject media, OwnerType owner, TextualType type) {
+        return TextualObjects.getTitle(media, owner, type);
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#get}
+     */
+    @Deprecated
+    public static String getTitle(Collection<Title> titles, TextualType... types) {
+        return TextualObjects.get(titles, types);
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#get}
+     */
+    @Deprecated
+    public static String getTitle(Collection<Title> titles, String defaultValue, TextualType... types) {
+        return TextualObjects.get(titles, defaultValue, types);
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#getObject}
+     */
+    @Deprecated
+    public static Title getTitleObject(Collection<Title> titles, TextualType... types) {
+        return TextualObjects.getObject(titles, types);
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#getDescription(TextualObject, OwnerType, TextualType)}
+     */
+    @Deprecated
+    public static String getDescription(MediaObject media, OwnerType owner, TextualType type) {
+        return TextualObjects.getDescription(media, owner, type);
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#getDescription(TextualObject, TextualType...)}
+     */
+    @Deprecated
+    public static String getDescription(MediaObject media, TextualType... types) {
+        return TextualObjects.getDescription(media, types);
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#get(Collection, TextualType...)}
+     */
+    @Deprecated
+    public static String getDescription(Collection<Description> descriptions, TextualType... types) {
+        return TextualObjects.get(descriptions, types);
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#get(Collection, String, TextualType...)}
+     */
+    @Deprecated
+    public static String getDescription(Collection<Description> descriptions, String defaultValue, TextualType... types) {
+        return TextualObjects.get(descriptions, defaultValue, types);
+    }
+
+    /**
+     * @deprecated Use {@link TextualObjects#findOwnersForTextFields(TextualObject)}
+     */
+    @Deprecated
+    public static OwnerType[] findOwnersForTextFields(MediaObject media) {
+        return TextualObjects.findOwnersForTextFields(media);
+    }
+
 }
