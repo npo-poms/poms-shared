@@ -166,6 +166,7 @@ public class TextualObjects {
         Comparator<OT> comparator = getComparator(ownerTypeComparator);
         List<OT> list;
         if (titles instanceof List) {
+            //noinspection unchecked
             list = (List<OT>) titles;
         } else {
             list = new ArrayList<>(titles);
@@ -338,11 +339,11 @@ public class TextualObjects {
 
                 titleToUpdate.set(incomingTitle.get());
 
-            } else if(incomingTitle != null && titleToUpdate == null) {
+            } else if(incomingTitle != null) {
 
                 mediaToUpdate.addTitle(incomingTitle.get(), owner, type);
 
-            } else if(incomingTitle == null && titleToUpdate != null) {
+            } else if(titleToUpdate != null) {
 
                 mediaToUpdate.removeTitle(titleToUpdate);
 
@@ -364,15 +365,15 @@ public class TextualObjects {
             D incomingDescription = incomingMedia.findDescription(owner, type);
             D descriptionToUpdate = mediaToUpdate.findDescription(owner, type);
 
-            if(incomingDescription != null && descriptionToUpdate != null) {
+            if (incomingDescription != null && descriptionToUpdate != null) {
 
                 descriptionToUpdate.set(incomingDescription.get());
 
-            } else if(incomingDescription != null && descriptionToUpdate == null) {
+            } else if (incomingDescription != null) {
 
                 mediaToUpdate.addDescription(incomingDescription.get(), owner, type);
 
-            } else if(incomingDescription == null && descriptionToUpdate != null) {
+            } else if (descriptionToUpdate != null) {
 
                 mediaToUpdate.removeDescription(descriptionToUpdate);
 
@@ -415,7 +416,8 @@ public class TextualObjects {
     public static <
         T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
         T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>
-        > void copyAndRemove(
+        >
+    void copyAndRemove(
         TO1 from,
         TO2 to,
         OwnerType owner) {
@@ -446,6 +448,7 @@ public class TextualObjects {
      * @since 5.3
      */
     @SuppressWarnings("SuspiciousMethodCalls")
+
     public static <TO extends TypedText, TO2 extends TypedText> void retainAll(
         Collection<TO2> collection,
         Collection<TO> toRetain) {
