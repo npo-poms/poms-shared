@@ -28,7 +28,7 @@ public class WorkflowExecutionRequestTest {
         WorkflowExecutionRequest rounded = Jackson2TestUtil.roundTripAndSimilar(workflowExecutionRequest,
                 "{\n" +
                         "  \"mid\" : \"AB_123132\",\n" +
-                        "  \"fileName\" : \"bla.mp3\",\n" +
+                        "  \"filename\" : \"bla.mp3\",\n" +
                         "  \"encryption\" : \"DRM\",\n" +
                         "  \"priority\" : \"NORMAL\",\n" +
                         "  \"type\" : \"VIDEO\",\n" +
