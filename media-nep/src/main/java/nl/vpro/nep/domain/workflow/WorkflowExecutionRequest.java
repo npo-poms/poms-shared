@@ -1,19 +1,24 @@
 package nl.vpro.nep.domain.workflow;
 
-import lombok.Builder;
 import lombok.Getter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-@Builder
+@lombok.Builder(builderClassName = "Builder")
 @Getter
 public class WorkflowExecutionRequest implements Serializable {
     String mid;
     String broadcaster;
-    String fileName;
+    String filename;
     EncryptionType encryption;
     PriorityType priority;
-    Type type;
-    List<String> platforms;
+    @lombok.Builder.Default
+    Type type = Type.VIDEO;
+    @lombok.Builder.Default
+    List<String> platforms = new ArrayList<>();
+
+
+
 }
