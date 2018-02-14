@@ -321,6 +321,8 @@ public class TextualObjects {
     }
 
     /**
+     * Copies all titles from one object to another.
+     *
      * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
      * @since 5.6
      */
@@ -350,7 +352,9 @@ public class TextualObjects {
             }
         }
     }
-     /**
+    /**
+     * Copies all descriptions from one object to another.
+     *
      * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
      * @since 5.6
      */
