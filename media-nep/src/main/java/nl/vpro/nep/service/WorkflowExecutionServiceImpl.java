@@ -58,12 +58,11 @@ public class WorkflowExecutionServiceImpl implements NEPService {
     static {
         MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         MAPPER.registerModule(new JavaTimeModule());
-
     }
 
-    private String URL = "http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl/api/workflows/";
-    private String USERNAME = "user";
-    private String PASSWORD = "***REMOVED***";
+    private static final String URL = "http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl/api/workflows/";
+    private static final String USERNAME = "user";
+    private static final String PASSWORD = "***REMOVED***";
 
     private HttpClientContext clientContext;
 

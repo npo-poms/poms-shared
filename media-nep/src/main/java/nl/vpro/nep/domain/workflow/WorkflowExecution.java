@@ -16,26 +16,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class WorkflowExecution {
 
     @Link
-    HALLink self;
+    private HALLink self;
     @Getter
-    String workflowId;
+    private String workflowId;
     @Getter
-    StatusType status;
+    private StatusType status;
     @Getter
-    String statusMessage;
+    private String statusMessage;
     @Getter
-    String workflowType;
+    private String workflowType;
     @Getter
-    CustomerMetadata customerMetadata;
+    private CustomerMetadata customerMetadata;
     @Getter
-    Instant startTime;
+    private Instant startTime;
     @Getter
-    Instant updateTime;
+    private Instant updateTime;
     @Getter
-    Instant endTime;
+    private Instant endTime;
 
     public static class Builder {
-
         public Builder mid(String mid) {
             if (customerMetadata == null) {
                 customerMetadata = new CustomerMetadata();
