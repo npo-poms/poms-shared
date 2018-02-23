@@ -23,26 +23,29 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlRootElement(name = "transcodeStatus")
 public class TranscodeStatus {
 
-
-    @NotNull
-    private String mid;
-
+    String fileName;
     String status;
     String statusMessage;
     String workflowType;
+
+    @NotNull
+    String mid;
+
+    @NotNull
+    String workflowId;
+
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     Instant startTime;
+
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     Instant updateTime;
+
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     Instant endTime;
-    String fileName;
-
 
     public TranscodeStatus() {
-
     }
 }
