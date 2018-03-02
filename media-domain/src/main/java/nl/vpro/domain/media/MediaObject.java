@@ -1936,11 +1936,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (prediction == null) {
             prediction = new Prediction(platform);
             prediction.setParent(this);
+            prediction.setAuthority(Authority.USER);
             if (predictions == null) {
                 predictions = new TreeSet<>();
             }
             this.predictions.add(prediction);
-
         }
         return prediction;
     }

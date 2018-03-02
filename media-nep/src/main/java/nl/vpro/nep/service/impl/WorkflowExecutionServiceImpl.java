@@ -1,4 +1,4 @@
-package nl.vpro.nep.service;
+package nl.vpro.nep.service.impl;
 
 
 import io.openapitools.jackson.dataformat.hal.HALMapper;
@@ -39,6 +39,9 @@ import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -47,61 +50,61 @@ import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 import nl.vpro.nep.domain.workflow.WorkflowList;
+import nl.vpro.nep.service.NEPService;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.FilteringIterator;
 import nl.vpro.util.MaxOffsetIterator;
 
 @Slf4j
+@Service
 public class WorkflowExecutionServiceImpl implements NEPService {
 
     public static final HALMapper MAPPER = new HALMapper();
+
     static {
         MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         MAPPER.registerModule(new JavaTimeModule());
     }
 
-    private static final String URL = "http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl/api/workflows/";
-    private static final String USERNAME = "user";
-    private static final String PASSWORD = "secret";
+    @Value("${nep.workflows.url}")
+    private String url;
+    @Value("${nep.workflows.authorisation.username}")
+    private String userName;
+    @Value("${nep.workflows.authorisation.password}")
+    private String password;
 
     private HttpClientContext clientContext;
 
     @PostConstruct
-
     public void init() {
-        URI uri = URI.create(URL);
+        URI uri = URI.create(url);
         HttpHost host = new HttpHost(uri.getHost());
         BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(USERNAME, PASSWORD));
+        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userName, password));
 
-        // preemptive authentication
+        // basic authentication
         AuthCache authCache = new BasicAuthCache();
         authCache.put(host, new BasicScheme());
         clientContext = HttpClientContext.create();
         clientContext.setCredentialsProvider(credentialsProvider);
         clientContext.setAuthCache(authCache);
-
     }
 
     @Override
     public WorkflowExecution execute(WorkflowExecutionRequest request) throws IOException {
-
-
         CloseableHttpClient client = getHttpClient();
 
         try {
             String json = MAPPER.writeValueAsString(request);
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
-            HttpPost httpPost = new HttpPost(URL);
+            HttpPost httpPost = new HttpPost(url);
             httpPost.setEntity(entity);
 
             HttpResponse response = client.execute(httpPost, clientContext);
 
             if (response.getStatusLine().getStatusCode() >= 300) {
-
                 ByteArrayOutputStream body = new ByteArrayOutputStream();
                 IOUtils.copy(response.getEntity().getContent(), body);
-
                 throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
             }
 
@@ -115,13 +118,12 @@ public class WorkflowExecutionServiceImpl implements NEPService {
         }
     }
 
-
     @Override
     public Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Instant from, Long limit) {
         int batchSize = 20;
         URIBuilder builder;
         try {
-            builder = new URIBuilder(URL);
+            builder = new URIBuilder(url);
             if (status != null) {
                 builder.setParameter("status", status.name());
             }
@@ -180,7 +182,6 @@ public class WorkflowExecutionServiceImpl implements NEPService {
         return getHttpClient().execute(new HttpGet(url), clientContext);
     }
     private CloseableHttpClient getHttpClient() {
-
         return HttpClients.custom()
             .build();
     }
