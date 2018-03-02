@@ -413,16 +413,16 @@ public class MediaObjects {
         return change;
     }
 
-    public static boolean realizeAndExpirePredictions(Platform platform, MediaObject object) {
+    public static boolean realizeAndExpirePredictions(Platform platform, MediaObject mediaObject) {
         if (platform == null) {
             return false;
         }
         boolean changes = false;
-        Prediction prediction = getPrediction(platform, object.getPredictions());
+        Prediction prediction = getPrediction(platform, mediaObject.getPredictions());
         if (prediction != null) {
             Prediction.State requiredState = Prediction.State.ANNOUNCED;
 
-            for (Location location : object.getLocations()) {
+            for (Location location : mediaObject.getLocations()) {
                 Platform locationPlatform = location.getPlatform();
                 if (locationPlatform == null) {
                     log.debug("Location has no explicit platform");
@@ -441,7 +441,7 @@ public class MediaObjects {
                 }
             }
             if (prediction.getState() != requiredState) {
-                log.info("Set state of {} {} {} -> {}", object.getMid(), prediction, prediction.getState(), requiredState);
+                log.info("Set state of {} {} {} -> {}", mediaObject.getMid(), prediction, prediction.getState(), requiredState);
                 prediction.setState(requiredState);
                 changes = true;
             }
