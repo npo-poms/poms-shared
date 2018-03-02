@@ -6,7 +6,7 @@ import java.time.ZoneId;
 
 import org.junit.Test;
 
-import nl.vpro.nep.service.WorkflowExecutionServiceImpl;
+import nl.vpro.nep.service.impl.WorkflowExecutionServiceImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

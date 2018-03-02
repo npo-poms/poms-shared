@@ -8,9 +8,9 @@ import java.util.List;
 
 @lombok.Builder(builderClassName = "Builder")
 @Getter
+
 public class WorkflowExecutionRequest implements Serializable {
     String mid;
-    String broadcaster;
     String filename;
     EncryptionType encryption;
     PriorityType priority;
@@ -18,7 +18,4 @@ public class WorkflowExecutionRequest implements Serializable {
     Type type = Type.VIDEO;
     @lombok.Builder.Default
     List<String> platforms = new ArrayList<>();
-
-
-
 }
