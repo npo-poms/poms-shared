@@ -460,7 +460,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static List<String> getAvaliablePlatformNamesInLowerCase(Collection<Prediction> preds) {
+    public static List<String> getAvailablePlatformNamesInLowerCase(Collection<Prediction> preds) {
         if (preds != null) {
             return preds.stream()
                 .filter(Prediction::isAvailable)
