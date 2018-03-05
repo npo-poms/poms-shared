@@ -289,6 +289,22 @@ public class MediaObjectsTest {
     }
 
     @Test
+    public void testGetPlatformNamesInLowerCaseNotAvailable() {
+        Prediction p1 = new Prediction(Platform.PLUSVOD);
+        p1.setAvailable(false);
+        Prediction p2 = new Prediction(Platform.INTERNETVOD);
+        p2.setAvailable(false);
+        Prediction p3 = new Prediction(Platform.NPOPLUSVOD);
+        Collection<Prediction> predictions = new ArrayList<>();
+        predictions.add(p1);
+        predictions.add(p2);
+        predictions.add(p3);
+
+        List<String> result = MediaObjects.getAvaliablePlatformNamesInLowerCase(predictions);
+        assertThat(result).containsExactlyInAnyOrder("npoplusvod");
+    }
+
+    @Test
     public void testGetPlatformNamesInLowerCaseEmptyList() {
         Collection<Prediction> predictions = new ArrayList<>();
         List<String> result = MediaObjects.getAvaliablePlatformNamesInLowerCase(predictions);
