@@ -460,6 +460,19 @@ public class MediaObjects {
         return null;
     }
 
+    public static List<String> getAvaliablePlatformNamesInLowerCase(Collection<Prediction> preds) {
+        if (preds != null) {
+            return preds.stream()
+                .filter(Prediction::isAvailable)
+                .map(Prediction::getPlatform)
+                .map(Platform::name)
+                .map(String::toLowerCase)
+                .collect(Collectors.toList());
+        }
+        return null;
+    }
+
+
     public static Prediction getPredictionOrNew(Platform platform, Collection<Prediction> preds, Function<Platform, Prediction> constructor) {
         Prediction p = getPrediction(platform, preds);
         if (p == null){
