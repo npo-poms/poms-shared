@@ -10,10 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
@@ -276,6 +273,28 @@ public class MediaObjectsTest {
         assertThat(existing.findLocation("bbb").getAvAttributes().getBitrate()).isEqualTo(4444);
         assertThat(existing.findLocation("ccc").getAvAttributes().getBitrate()).isNull();
     }
+
+    @Test
+    public void testGetPlatformNamesInLowerCase() {
+        Prediction p1 = new Prediction(Platform.PLUSVOD);
+        Prediction p2 = new Prediction(Platform.INTERNETVOD);
+        Prediction p3 = new Prediction(Platform.NPOPLUSVOD);
+        Collection<Prediction> predictions = new ArrayList<>();
+        predictions.add(p1);
+        predictions.add(p2);
+        predictions.add(p3);
+
+        List<String> result = MediaObjects.getAvaliablePlatformNamesInLowerCase(predictions);
+        assertThat(result).containsExactlyInAnyOrder("plusvod", "internetvod", "npoplusvod");
+    }
+
+    @Test
+    public void testGetPlatformNamesInLowerCaseEmptyList() {
+        Collection<Prediction> predictions = new ArrayList<>();
+        List<String> result = MediaObjects.getAvaliablePlatformNamesInLowerCase(predictions);
+        assertThat(result).isEmpty();
+    }
+
 
     @Test
     public void testUpdateLocationsForOwnerWithVidioAttributes() {
