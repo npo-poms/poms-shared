@@ -458,7 +458,36 @@ public enum MediaType {
             return Arrays.asList(SegmentType.values());
         }
     },
-/*
+    VISUALRADIOSEGMENT {
+        @Override
+        public String toString() {
+            return "Visual radio segment";
+        }
+
+        @Override
+        public Segment getMediaInstance() {
+            Segment s = new Segment();
+            return s;
+        }
+
+        @Override
+        public Class<Segment> getMediaObjectClass() {
+            return Segment.class;
+        }
+
+        @Override
+        public SegmentType getSubType() {
+            return SegmentType.VISUALRADIOSEGMENT;
+
+        }
+
+        @Override
+        public List<SubMediaType> getSubTypes() {
+            return Arrays.asList(SegmentType.values());
+        }
+    },
+
+    /*
     COLLECTION {
         @Override
         public String toString() {
