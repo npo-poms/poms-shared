@@ -9,6 +9,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import nl.vpro.domain.Roles;
@@ -80,7 +81,17 @@ public interface UserService<T extends User> {
      * Submits callable in the given {@link ExecutorService}, but makes sure that it is executed as the current user
      */
     default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable) {
-         Object authentication;
+        return submit(executorService, callable, null);
+    }
+
+
+    /**
+     * Submits callable in the given {@link ExecutorService}, but makes sure that it is executed as the current user
+     * @param logger If not <code>null</code> catch exceptions and log as error.
+     * @since 5.6
+     */
+    default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable, Logger logger) {
+        Object authentication;
         try {
             authentication = getAuthentication();
         } catch(Exception e) {
@@ -98,6 +109,13 @@ public interface UserService<T extends User> {
                     }
                 }
                 return callable.call();
+            } catch (Exception e) {
+                if (logger != null) {
+                    logger.error(e.getMessage(), e);
+                    return null;
+                } else {
+                    throw e;
+                }
             } finally {
                 dropAuthentication();
             }
