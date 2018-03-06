@@ -327,6 +327,14 @@ public class Location extends PublishableObject<Location>
     }
 
     public Location setAvAttributes(AVAttributes avAttributes) {
+        if (avAttributes != null && avAttributes.getId() != null) {
+            if (Objects.equals(this.avAttributes, avAttributes)) {
+                log.debug("Nothing to do");
+                return this;
+            }
+            log.info("Making copy of {}", avAttributes);
+            avAttributes = new AVAttributes(avAttributes);
+        }
         tryToSetAvFileFormatBasedOnProgramUrl(avAttributes);
         this.avAttributes = avAttributes;
         return this;
