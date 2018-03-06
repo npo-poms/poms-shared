@@ -85,12 +85,16 @@ public class AVAttributes implements Serializable {
         this.byteSize = byteSize;
     }
 
+    /**
+     * Copy constructor
+     */
     public AVAttributes(AVAttributes source) {
         this(
             source.bitrate,
             source.byteSize,
             source.avFileFormat,
-            AudioAttributes.copy(source.audioAttributes), VideoAttributes.copy(source.videoAttributes));
+            AudioAttributes.copy(source.audioAttributes),
+            VideoAttributes.copy(source.videoAttributes));
     }
 
     public static AVAttributes copy(AVAttributes source){
@@ -168,6 +172,7 @@ public class AVAttributes implements Serializable {
         return videoAttributes != null;
 
     }
+
 
     @Override
     public String toString() {
