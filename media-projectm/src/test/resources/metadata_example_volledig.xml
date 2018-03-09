@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aflevering timestamp="2011-03-23T14:32:05">
+  <prid>10act0608natvr</prid>
+  <pridexport>10act0608natvr</pridexport>
+  <titel>NOS Verkiezingsdebat</titel>
+  <lexico_titel>Verkiezingsdebat</lexico_titel>
+  <icon>http://images.poms.omroep.nl/image/s720/407608.jpg</icon>
+  <inhk>De 'confrontatie' tussen Marianne Thieme, Kees van der Staaij en Rita Verdonk. Daarnaast meerdere onderdelen waarbij o.a. wordt teruggeblikt op de afgelopen campagneperiode.</inhk>
+  <kykw>2gt</kykw>
+  <orti>Election debates</orti>
+  <prem>2013</prem>
+  <inh1>De 'confrontatie' tussen Marianne Thieme (PvdD), Kees van der Staaij (SGP) en Rita Verdonk (Trots op Nederland). Daarnaast meerdere onderdelen waarbij o.a. wordt teruggeblikt op de afgelopen campagneperiode: Wat waren de thema's en wat waren de hypes? Presentatie: Joost Karhof, Ron Fresen.</inh1>
+  <aflnr>33</aflnr>
+  <afltitel>De Confrontatie</afltitel>
+  <mail>politiek@nos.nl</mail>
+  <webs>http://www.nos.nl</webs>
+  <twitteraccount>@NOSPOLITIEK</twitteraccount><!-- Bestaat nog niet in POMS 20/02/2014 -->
+  <twitterhashtag>#NOSDEBAT</twitterhashtag><!-- Bestaat nog niet in POMS 20/02/2014 -->
+  <genre>Informatief</genre>
+  <subgenre>nieuws/actualiteiten</subgenre><!-- Bestaat nog niet in POMS 20/02/2014 -->
+  <omroepen>
+    <omroep>NOS</omroep>
+	<omroep>NTR</omroep>
+  </omroepen>
+  <personen>
+    <persoon>
+      <rol id="4">Presentator</rol>
+      <voornaam>Ron</voornaam>
+	    <achternaam>Fresen</achternaam>
+    </persoon>
+    <persoon>
+      <rol id="4">Presentator</rol>
+      <voornaam>Matthijs</voornaam>
+	    <achternaam>van Nieuwkerk</achternaam>
+    </persoon>
+  </personen>
+  <serie>
+    <srid>NOS_101342448</srid><!-- POMS seizoen ID == Whatson Serie ID -->
+	  <titel>NOS Verkiezingsdebat</titel>
+	  <seizoen>3</seizoen>
+	  <lexico_titel>Verkiezingsdebat</lexico_titel>
+	  <icon>http://images.poms.omroep.nl/image/s720/407609.jpg</icon>
+	  <start_jaar>2012</start_jaar>
+	  <orti>Election debates</orti>
+	  <inh1>Actualiteiten programma rondom de politiek van vandaag.</inh1>
+	  <mail>politiek@nos.nl</mail>
+	  <webs>http://www.nos.nl</webs>
+	  <twitteraccount>@NOSPOLITIEK</twitteraccount><!-- Bestaat nog niet in POMS 20/02/2014 -->
+	  <twitterhashtag>#NOSDEBAT</twitterhashtag><!-- Bestaat nog niet in POMS 20/02/2014 -->
+	  <genre>Informatief</genre>
+	  <subgenre>nieuws/actualiteiten</subgenre><!-- Bestaat nog niet in POMS 20/02/2014 -->
+	  <omroepen>
+		  <omroep>NOS</omroep>
+		  <omroep>NTR</omroep>
+		  <omroep>TROS</omroep>
+	  </omroepen>
+  </serie>
+  <parentserie> <!-- POMS Serie ID == Whatson Moeder/Parentserie ID -->
+	  <psrid>POMS_NOS_009342348</psrid>
+	  <titel>NOS Verkiezingsdebat</titel>
+  </parentserie>
+</aflevering>
