@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:annotation>
+    <xs:documentation>
+    NPO Metadata XSD 3.2
+    Copyright 2016 NPO
+    </xs:documentation>
+  </xs:annotation>
+
+  <!-- twitter account -->
+  <xs:simpleType name="twitter_account">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="@[^ ]+" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- twitter hashtag -->
+  <xs:simpleType name="twitter_hashtag">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="#[^ ]+" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- global (aflevering/serie) element(s) -->
+  <xs:element name="titel" type="xs:string" />
+  <xs:element name="lexico_titel" type="xs:string" />
+  <xs:element name="bron" type="xs:string" />
+  <xs:element name="orti" type="xs:string" />
+  <xs:element name="lcod" type="xs:string" />
+  <xs:element name="icon" type="xs:anyURI" />
+  <xs:element name="inhl" type="xs:string" />
+  <xs:element name="genre" type="xs:string" />
+  <xs:element name="subgenre" type="xs:string" />
+  <xs:element name="psrt" type="xs:string" />
+  <xs:element name="mail" type="xs:string" />
+  <xs:element name="webs" type="xs:anyURI" />
+  <xs:element name="twitteraccount" type="twitter_account" />
+  <xs:element name="twitterhashtag" type="twitter_hashtag" />
+
+  <!-- persoon container -->
+  <xs:element name="persoon">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="rol" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="naam" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- personen container -->
+  <xs:element name="personen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="persoon" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- omroepen container -->
+  <xs:element name="omroepen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="omroep" type="xs:string" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- zender container -->
+  <xs:element name="zender">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="code" type="xs:string" />
+        <xs:element name="naam" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- uitzending type -->
+  <xs:simpleType name="uitzending_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="P" />
+      <xs:enumeration value="K" />
+      <xs:enumeration value="O" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- uitzending container -->
+  <xs:element name="uitzending">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="gids_datum" type="xs:date" />
+        <xs:element ref="zender" />
+        <xs:element name="starttijd" type="xs:dateTime" />
+        <xs:element name="eindtijd" type="xs:dateTime" />
+        <xs:element name="herh" type="xs:date" minOccurs="0" />
+        <xs:element name="intt" type="xs:string" fixed="T" minOccurs="0" />
+        <xs:element name="inhh" type="xs:string" fixed="HH" minOccurs="0" />
+        <xs:element name="type" type="uitzending_type" minOccurs="0" />
+        <xs:element name="volgnummer" type="xs:nonNegativeInteger" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- uitzendingen container -->
+  <xs:element name="uitzendingen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="uitzending" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+    <!-- serie container -->
+  <xs:element name="serie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="srid" type="xs:string" />
+        <xs:element ref="titel" />
+        <xs:element ref="lexico_titel" minOccurs="0" />
+        <xs:element ref="bron" minOccurs="0" />
+        <xs:element ref="orti" minOccurs="0" />
+        <xs:element name="start_jaar" type="xs:gYear" minOccurs="0" />
+        <xs:element name="seizoen" type="xs:string" minOccurs="0" />
+        <xs:element ref="lcod" minOccurs="0" />
+        <xs:element ref="icon" minOccurs="0" />
+        <xs:element ref="inhl" minOccurs="0" />
+        <xs:element ref="genre" minOccurs="0" />
+        <xs:element ref="subgenre" minOccurs="0" />
+        <xs:element ref="psrt" minOccurs="0" />
+        <xs:element ref="mail" minOccurs="0" />
+        <xs:element ref="webs" minOccurs="0" />
+        <xs:element ref="twitteraccount" minOccurs="0" />
+        <xs:element ref="twitterhashtag" minOccurs="0" />
+        <xs:element ref="omroepen" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- parentserie container -->
+  <xs:element name="parentserie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="psrid" type="xs:string" />
+        <xs:element ref="titel" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- promo container -->
+  <xs:element name="promo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="promotedprid" type="xs:string" minOccurs="0" />
+        <xs:element name="type" type="promo_type" />
+		<xs:element name="frames" type="xs:nonNegativeInteger" />
+		<xs:element name="starttijd" type="xs:dateTime" />
+        <xs:element name="eindtijd" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <!-- promo type -->
+  <xs:simpleType name="promo_type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="P" />
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <!-- aflevering / main container -->
+  <xs:element name="aflevering">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="prid" type="xs:string" />
+        <xs:element name="pridexport" type="xs:string" />
+        <xs:element ref="titel" />
+        <xs:element ref="lexico_titel" minOccurs="0" />
+        <xs:element name="aflnr" type="xs:string" minOccurs="0" />
+        <xs:element name="afltitel" type="xs:string" minOccurs="0" />
+        <xs:element ref="bron" minOccurs="0" />
+        <xs:element ref="orti" minOccurs="0" />
+        <xs:element name="prem" type="xs:gYear" minOccurs="0" />
+        <xs:element ref="lcod" minOccurs="0" />
+        <xs:element ref="icon" minOccurs="0" />
+        <xs:element name="kykw" type="xs:string" minOccurs="0" />
+        <xs:element name="inhr" type="xs:string" minOccurs="0" />
+        <xs:element name="inhk" type="xs:string" minOccurs="0" />
+        <xs:element ref="inhl" minOccurs="0" />
+        <xs:element ref="genre" minOccurs="0" />
+        <xs:element ref="subgenre" minOccurs="0" />
+        <xs:element ref="psrt" minOccurs="0" />
+        <xs:element ref="mail" minOccurs="0" />
+        <xs:element ref="webs" minOccurs="0" />
+        <xs:element ref="twitteraccount" minOccurs="0" />
+        <xs:element ref="twitterhashtag" minOccurs="0" />
+        <xs:element ref="personen" minOccurs="0" />
+        <xs:element ref="omroepen" />
+        <xs:element ref="uitzendingen" minOccurs="0" />
+        <xs:element ref="serie" minOccurs="0" />
+        <xs:element ref="parentserie" minOccurs="0" />
+		<xs:element ref="promo" minOccurs="0" />
+      </xs:sequence>
+      <xs:attribute name="timestamp" type="xs:dateTime" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
