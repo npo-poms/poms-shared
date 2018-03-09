@@ -54,6 +54,8 @@
     <module>poms-extjs</module>
     <module>media-openskos</module>
     <module>media-nep</module>
+    <module>media-projectm</module>
+    <module>media-nebo</module>
   </modules>
 
   <dependencies>
