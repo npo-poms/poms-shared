@@ -9,12 +9,12 @@ import nl.vpro.domain.user.Broadcaster;
  * @since 4.2
  */
 public interface RelationDefinitionService {
-    
-    
+
+
     // TODO
     static RelationDefinitionService getInstance() {
         try {
-            return (RelationDefinitionService) Class.forName("nl.vpro.domain.page.RelationDefinitionServiceImpl").getMethod("getInstance").invoke(null);
+            return (RelationDefinitionService) Class.forName("nl.vpro.services.page.RelationDefinitionServiceImpl").getMethod("getInstance").invoke(null);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             throw new IllegalArgumentException(e);
         }
