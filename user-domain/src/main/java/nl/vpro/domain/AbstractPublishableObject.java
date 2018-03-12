@@ -208,6 +208,9 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     }
 
 
+    /**
+     * When this object was last published to the frontends
+     */
     @XmlAttribute(name = "publishDate")
     @JsonProperty("publishDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
