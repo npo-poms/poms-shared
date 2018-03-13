@@ -10,10 +10,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import nl.vpro.domain.api.Order;
-import nl.vpro.domain.api.media.MediaSortField;
-import nl.vpro.domain.api.media.MediaSortOrder;
-import nl.vpro.domain.api.media.MediaSortOrderList;
-import nl.vpro.domain.api.media.TitleSortOrder;
+import nl.vpro.domain.api.media.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -28,7 +25,7 @@ public class MediaSortOrderListJson {
 
             if (mediaSortOrders != null) {
                 boolean backwards = true; // mediaSortOrders.size() <= 1;
-                if (backwards) {
+                if (! (Compatibility.compatibleBefore(5.5f))) {
                     for (MediaSortOrder so : mediaSortOrders) {
                         if (so instanceof TitleSortOrder) {
                             backwards = false;
@@ -62,7 +59,7 @@ public class MediaSortOrderListJson {
     public static class Deserializer extends JsonDeserializer<MediaSortOrderList> {
 
         @Override
-        public MediaSortOrderList deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+        public MediaSortOrderList deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
             MediaSortOrderList list = new MediaSortOrderList();
             JsonToken token = jsonParser.currentToken();
             switch (token) {
