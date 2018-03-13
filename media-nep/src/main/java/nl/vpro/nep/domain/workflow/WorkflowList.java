@@ -7,6 +7,7 @@ import io.openapitools.jackson.dataformat.hal.annotation.Resource;
 import lombok.Data;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class WorkflowList {
 
     @EmbeddedResource("wf:workflowExecution")
     @Getter
-    List<WorkflowExecution> workflowExecutions;
+    List<WorkflowExecution> workflowExecutions = new ArrayList<>();
 
     Long totalResults;
 

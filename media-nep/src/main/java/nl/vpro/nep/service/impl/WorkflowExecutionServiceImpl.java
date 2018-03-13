@@ -77,17 +77,17 @@ public class WorkflowExecutionServiceImpl implements NEPService {
 
     @PostConstruct
     public void init() {
-        URI uri = URI.create(url + "/api/workflows/");
-        HttpHost host = new HttpHost(uri.getHost());
         BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userName, password));
 
         // basic authentication
         AuthCache authCache = new BasicAuthCache();
-        authCache.put(host, new BasicScheme());
+        authCache.put(getHttpHost(), new BasicScheme());
         clientContext = HttpClientContext.create();
         clientContext.setCredentialsProvider(credentialsProvider);
         clientContext.setAuthCache(authCache);
+
+        log.info("Created {}", this);
     }
 
     @Override
@@ -97,7 +97,7 @@ public class WorkflowExecutionServiceImpl implements NEPService {
         try {
             String json = MAPPER.writeValueAsString(request);
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
-            HttpPost httpPost = new HttpPost(url);
+            HttpPost httpPost = new HttpPost(getWorkflowsEndPoint());
             httpPost.setEntity(entity);
 
             HttpResponse response = client.execute(httpPost, clientContext);
@@ -123,7 +123,7 @@ public class WorkflowExecutionServiceImpl implements NEPService {
         int batchSize = 20;
         URIBuilder builder;
         try {
-            builder = new URIBuilder(url);
+            builder = new URIBuilder(getWorkflowsEndPoint());
             if (status != null) {
                 builder.setParameter("status", status.name());
             }
@@ -175,14 +175,28 @@ public class WorkflowExecutionServiceImpl implements NEPService {
                 .build(), limit, 0L);
     }
 
-    CloseableHttpResponse executeGet(String url) throws IOException {
+    private HttpHost getHttpHost() {
+        URI uri = URI.create(getWorkflowsEndPoint());
+        return new HttpHost(uri.getHost());
+    }
+
+    private String getWorkflowsEndPoint() {
+        return url + "/api/workflows/";
+    }
+
+    private CloseableHttpResponse executeGet(String u) throws IOException {
         if (clientContext == null) {
             throw new IllegalStateException("Not initialized");
         }
-        return getHttpClient().execute(new HttpGet(url), clientContext);
+        return getHttpClient().execute(new HttpGet(u), clientContext);
     }
     private CloseableHttpClient getHttpClient() {
         return HttpClients.custom()
             .build();
+    }
+
+    @Override
+    public String toString() {
+        return WorkflowExecutionServiceImpl.class.getName() + " " + userName + "@" + getWorkflowsEndPoint();
     }
 }
