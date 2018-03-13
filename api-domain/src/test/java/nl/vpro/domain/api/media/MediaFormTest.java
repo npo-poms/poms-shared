@@ -85,6 +85,30 @@ public class MediaFormTest {
 
 
     @Test
+    public void testGetSortJsonBackward() throws Exception {
+        Compatibility.setCompatibility(5.4f);
+        MediaForm in = new MediaForm();
+        MediaSortOrderList list = new MediaSortOrderList();
+        list.put(MediaSortField.sortDate, Order.DESC);
+        list.put(MediaSortField.creationDate, Order.DESC);
+        in.setHighlight(true);
+        in.setSortFields(list);
+        MediaForm result = Jackson2TestUtil.roundTripAndSimilarAndEquals(in, "{\n" +
+            "  \"sort\" : {\n" +
+            "    \"sortDate\" : \"DESC\",\n" +
+            "    \"creationDate\" : \"DESC\"\n" +
+            "  },\n" +
+            "  \"highlight\" : true\n" +
+            "}");
+        assertThat(result.getSortFields()).hasSize(2);
+        assertThat(result.getSortFields().get(0).getField()).isEqualTo(MediaSortField.sortDate);
+        assertThat(result).isEqualTo(in);
+        Compatibility.clearCompatibility();
+
+    }
+
+
+    @Test
     public void parseWithEmptySort() throws Exception {
         String example = "{\n" +
             "  \"sort\" : {\n" +
