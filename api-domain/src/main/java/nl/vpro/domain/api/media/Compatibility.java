@@ -24,4 +24,11 @@ public class Compatibility {
         }
         return version < compatibility.get();
     }
+
+    public static boolean versionBefore(float version) {
+        if (compatibility.get() == null) {
+            return false;
+        }
+        return compatibility.get() < version;
+    }
 }
