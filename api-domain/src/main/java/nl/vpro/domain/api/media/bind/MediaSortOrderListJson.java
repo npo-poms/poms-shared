@@ -24,7 +24,7 @@ public class MediaSortOrderListJson {
         public void serialize(MediaSortOrderList mediaSortOrders, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
 
             if (mediaSortOrders != null) {
-                boolean backwards = Compatibility.versionBefore(5.5f);
+                boolean backwards = Compatibility.versionBefore(5.5f) || mediaSortOrders.size() <= 1;
                 if(backwards) {
                     for (MediaSortOrder so : mediaSortOrders) {
                         if (so instanceof TitleSortOrder) {
