@@ -39,9 +39,9 @@ import org.apache.http.impl.client.BasicAuthCache;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -66,18 +66,18 @@ public class WorkflowExecutionServiceImpl implements NEPService {
         MAPPER.registerModule(new JavaTimeModule());
     }
 
-    @Value("${nep.workflows.url}")
+    @Value("${nep.api.baseUrl}")
     private String url;
-    @Value("${nep.workflows.authorisation.username}")
+    @Value("${nep.api.authorization.username}")
     private String userName;
-    @Value("${nep.workflows.authorisation.password}")
+    @Value("${nep.api.authorization.password}")
     private String password;
 
     private HttpClientContext clientContext;
 
     @PostConstruct
     public void init() {
-        URI uri = URI.create(url);
+        URI uri = URI.create(url + "/api/workflows/");
         HttpHost host = new HttpHost(uri.getHost());
         BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
         credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(userName, password));
