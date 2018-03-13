@@ -86,6 +86,11 @@ public interface UserService<T extends User> {
         return submit(executorService, callable, null);
     }
 
+     /**
+     * Submits callable in the CompletableFuture#supplyAsync
+     * @param logger If not <code>null</code> catch exceptions and log as error.
+     * @since 5.6
+     */
 
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
         Supplier<R> supplier  = () -> {
@@ -104,7 +109,6 @@ public interface UserService<T extends User> {
      * @since 5.6
      */
     default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable, Logger logger) {
-
         return executorService.submit(wrap(callable, logger));
     }
     default <R> Callable<R> wrap(Callable<R> callable,  Logger logger) {
