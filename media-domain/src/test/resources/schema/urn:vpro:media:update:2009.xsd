@@ -365,14 +365,15 @@
 
   <xs:complexType name="transcodeStatusType">
     <xs:sequence>
-      <xs:element name="mid" type="xs:string" minOccurs="0"/>
+      <xs:element name="fileName" type="xs:string" minOccurs="0"/>
       <xs:element name="status" type="xs:string" minOccurs="0"/>
       <xs:element name="statusMessage" type="xs:string" minOccurs="0"/>
       <xs:element name="workflowType" type="xs:string" minOccurs="0"/>
+      <xs:element name="mid" type="xs:string" minOccurs="0"/>
+      <xs:element name="workflowId" type="xs:string" minOccurs="0"/>
       <xs:element name="startTime" type="xs:dateTime" minOccurs="0"/>
       <xs:element name="updateTime" type="xs:dateTime" minOccurs="0"/>
       <xs:element name="endTime" type="xs:dateTime" minOccurs="0"/>
-      <xs:element name="fileName" type="xs:string" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
