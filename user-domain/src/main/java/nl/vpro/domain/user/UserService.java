@@ -6,8 +6,10 @@ package nl.vpro.domain.user;
 
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
+import java.util.function.Supplier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,13 +87,28 @@ public interface UserService<T extends User> {
     }
 
 
+    default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
+        Supplier<R> supplier  = () -> {
+            try {
+                return wrap(callable, logger).call();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        };
+        return CompletableFuture.supplyAsync(supplier);
+    }
+
     /**
      * Submits callable in the given {@link ExecutorService}, but makes sure that it is executed as the current user
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
      */
     default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable, Logger logger) {
-        Object authentication;
+
+        return executorService.submit(wrap(callable, logger));
+    }
+    default <R> Callable<R> wrap(Callable<R> callable,  Logger logger) {
+         Object authentication;
         try {
             authentication = getAuthentication();
         } catch(Exception e) {
@@ -99,7 +116,8 @@ public interface UserService<T extends User> {
             authentication = null;
         }
         final Object onBehalfOf = authentication;
-        return executorService.submit(() -> {
+
+        return () -> {
             try {
                 if (onBehalfOf != null) {
                     try {
@@ -119,7 +137,7 @@ public interface UserService<T extends User> {
             } finally {
                 dropAuthentication();
             }
-        });
+        };
     }
     interface  Logout extends AutoCloseable {
         @Override
