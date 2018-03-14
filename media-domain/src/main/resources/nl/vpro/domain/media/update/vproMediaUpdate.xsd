@@ -527,8 +527,8 @@
     <xs:sequence>
       <xs:element name="mid" type="xs:string"  form="qualified"  minOccurs="0"/>
       <xs:element name="fileName" type="xs:string"  form="qualified" minOccurs="0"/>
-      <xs:element name="encryption" type="xs:string"  form="qualified" minOccurs="0"/>
-      <xs:element name="priority" type="xs:string"  form="qualified" minOccurs="0"/>
+      <xs:element name="encryption" type="encryptionType"  form="qualified" minOccurs="0"/>
+      <xs:element name="priority" type="priorityType"  form="qualified" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -545,5 +545,21 @@
       <xs:element name="endTime" type="xs:dateTime" form="qualified"  minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
+
+    <xs:simpleType name="encryptionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DRM"/>
+      <xs:enumeration value="NONE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="priorityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LOW"/>
+      <xs:enumeration value="NORMAL"/>
+      <xs:enumeration value="HIGH"/>
+      <xs:enumeration value="URGENT"/>
+    </xs:restriction>
+  </xs:simpleType>
 
 </xs:schema>
