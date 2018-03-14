@@ -18,8 +18,8 @@ public class TranscodeRequestTest {
     public void xml() throws IOException, SAXException {
         TranscodeRequest request = TranscodeRequest.builder()
             .mid("MID_123")
-            .encryption("DRM")
-            .priority("NORMAL")
+            .encryption(TranscodeRequest.Encryption.DRM)
+            .priority(TranscodeRequest.Priority.NORMAL)
             .fileName("vpro/test.m4v")
             .build();
         JAXBTestUtil.roundTripAndSimilar(request, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
