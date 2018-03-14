@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +20,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHost;
@@ -66,14 +68,24 @@ public class WorkflowExecutionServiceImpl implements NEPService {
         MAPPER.registerModule(new JavaTimeModule());
     }
 
-    @Value("${nep.api.baseUrl}")
-    private String url;
-    @Value("${nep.api.authorization.username}")
-    private String userName;
-    @Value("${nep.api.authorization.password}")
-    private String password;
+
+    private final String url;
+
+    private final String userName;
+
+    private final String password;
 
     private HttpClientContext clientContext;
+
+    @Inject
+    public WorkflowExecutionServiceImpl(
+         @Value("${nep.api.baseUrl}") String url,
+         @Value("${nep.api.authorization.username}") String userName,
+         @Value("${nep.api.authorization.password}") String password) {
+        this.url = url;
+        this.userName = userName;
+        this.password = password;
+    }
 
     @PostConstruct
     public void init() {
@@ -140,6 +152,9 @@ public class WorkflowExecutionServiceImpl implements NEPService {
             @Override
             public Iterator<WorkflowExecution> get() {
                 try {
+                    if (next == null) {
+                        return Collections.emptyIterator();
+                    }
                     try (CloseableHttpResponse execute = executeGet(next)) {
                         if (execute.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                             WorkflowList list = MAPPER.readValue(execute.getEntity().getContent(), WorkflowList.class);
