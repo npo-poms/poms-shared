@@ -358,8 +358,8 @@
     <xs:sequence>
       <xs:element name="mid" type="xs:string" minOccurs="0"/>
       <xs:element name="fileName" type="xs:string" minOccurs="0"/>
-      <xs:element name="encryption" type="xs:string" minOccurs="0"/>
-      <xs:element name="priority" type="xs:string" minOccurs="0"/>
+      <xs:element name="encryption" type="encryptionType" minOccurs="0"/>
+      <xs:element name="priority" type="priorityType" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -384,5 +384,21 @@
     <xs:attribute name="position" type="xs:int"/>
     <xs:attribute name="highlighted" type="xs:boolean" use="required"/>
   </xs:complexType>
+
+  <xs:simpleType name="encryptionType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="DRM"/>
+      <xs:enumeration value="NONE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="priorityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="LOW"/>
+      <xs:enumeration value="NORMAL"/>
+      <xs:enumeration value="HIGH"/>
+      <xs:enumeration value="URGENT"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>
 

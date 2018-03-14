@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -27,12 +24,23 @@ public class TranscodeRequest {
     @NotNull
     private String fileName;
     @NotNull
-    private String encryption;
+    private Encryption encryption;
     @NotNull
-    private String priority;
+    private Priority priority;
 
 
     public TranscodeRequest() {
+
+    }
+
+    @XmlType(name = "encryptionType")
+    public enum Encryption {
+        DRM, NONE;
+
+    }
+    @XmlType(name = "priorityType")
+    public enum Priority {
+        LOW, NORMAL, HIGH, URGENT;
 
     }
 }
