@@ -95,7 +95,7 @@ public interface UserService<T extends User> {
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
         Supplier<R> supplier  = () -> {
             try {
-                return wrap(callable, logger).call();
+                return wrap(callable, logger, true).call();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -109,10 +109,12 @@ public interface UserService<T extends User> {
      * @since 5.6
      */
     default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable, Logger logger) {
-        return executorService.submit(wrap(callable, logger));
+        return executorService.submit(wrap(callable, logger, null));
     }
-    default <R> Callable<R> wrap(Callable<R> callable,  Logger logger) {
-         Object authentication;
+    default <R> Callable<R> wrap(Callable<R> callable,  Logger logger, Boolean throwExceptions) {
+
+        final boolean throwExceptionsBoolean = throwExceptions == null ? logger == null : throwExceptions;
+        Object authentication;
         try {
             authentication = getAuthentication();
         } catch(Exception e) {
@@ -134,9 +136,11 @@ public interface UserService<T extends User> {
             } catch (Exception e) {
                 if (logger != null) {
                     logger.error(e.getMessage(), e);
-                    return null;
-                } else {
+                }
+                if (throwExceptionsBoolean) {
                     throw e;
+                } else {
+                    return null;
                 }
             } finally {
                 dropAuthentication();
