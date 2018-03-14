@@ -136,11 +136,12 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
 
     @lombok.Builder
-    private Prediction(Platform platform, Instant publishStart, Instant publishStop, boolean available) {
+    private Prediction(Platform platform, Instant publishStart, Instant publishStop, boolean available, Authority authority) {
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
         this.available = available;
+        this.authority = authority == null ? Authority.USER : authority;
     }
 
     public Prediction(Prediction source) {
@@ -167,10 +168,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         return new Prediction(source, parent);
     }
 
-    public static Prediction unavailable(Platform platform) {
+    public static Prediction unavailable(Platform platform, Authority authority) {
         return Prediction.builder()
             .available(false)
             .platform(platform)
+            .authority(authority)
             .build();
     }
 
