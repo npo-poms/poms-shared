@@ -22,7 +22,7 @@ public interface AssetService {
     }
 
     default String getFilePath(String fileName) {
-        return String.format("/ext-api/assets/asset/%s.asset", fileName);
+        return String.format("/assets/asset/%s.asset", fileName);
     }
 
     File getFile(String fileName);
