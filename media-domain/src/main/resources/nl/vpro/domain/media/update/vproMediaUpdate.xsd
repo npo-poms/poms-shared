@@ -203,7 +203,7 @@
     <xs:attribute name="version" type="xs:float">
       <xs:annotation>
         <xs:documentation>
-          The POMS version this XML applies too.
+          The POMS version this XML applies too. This is optional, though some feature will only be supported if you explicitely specify a version which is big enough (To ensure backward compatiblity).
         </xs:documentation>
       </xs:annotation>
     </xs:attribute>
