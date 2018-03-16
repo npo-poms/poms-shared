@@ -22,7 +22,12 @@ import nl.vpro.nep.service.impl.WorkflowExecutionServiceImpl;
  */
 @Slf4j
 public class WorkflowExecutionServiceImplITest {
-    WorkflowExecutionServiceImpl nepService = new WorkflowExecutionServiceImpl("http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl", "user", "secret");
+    //WorkflowExecutionServiceImpl nepService =
+//        new WorkflowExecutionServiceImpl("http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl", "user", "secret");
+
+
+    WorkflowExecutionServiceImpl nepService =
+        new WorkflowExecutionServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl/", "user", "secret");
 
     @Before
     public void setup(){
