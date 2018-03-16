@@ -93,9 +93,10 @@ public interface UserService<T extends User> {
      */
 
     default <R> CompletableFuture<R> async(Callable<R> callable, Logger logger) {
+        Callable<R> wrapped =  wrap(callable, logger, true);
         Supplier<R> supplier  = () -> {
             try {
-                return wrap(callable, logger, true).call();
+                return wrapped.call();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
