@@ -14,7 +14,7 @@ import nl.vpro.nep.domain.workflow.EncryptionType;
 import nl.vpro.nep.domain.workflow.PriorityType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
-import nl.vpro.nep.service.impl.WorkflowExecutionServiceImpl;
+import nl.vpro.nep.service.impl.NEPServiceImpl;
 
 /**
  * @author Michiel Meeuwissen
@@ -26,8 +26,8 @@ public class WorkflowExecutionServiceImplITest {
 //        new WorkflowExecutionServiceImpl("http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl", "user", "***REMOVED***");
 
 
-    WorkflowExecutionServiceImpl nepService =
-        new WorkflowExecutionServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl/", "user", "***REMOVED***");
+    NEPServiceImpl nepService =
+        new NEPServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl/", "user", "***REMOVED***");
 
     @Before
     public void setup(){
