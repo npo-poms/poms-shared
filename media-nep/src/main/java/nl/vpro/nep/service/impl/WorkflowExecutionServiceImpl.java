@@ -43,7 +43,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -52,14 +51,14 @@ import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 import nl.vpro.nep.domain.workflow.WorkflowList;
-import nl.vpro.nep.service.NEPService;
+import nl.vpro.nep.service.WorkflowExecutionService;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.FilteringIterator;
 import nl.vpro.util.MaxOffsetIterator;
 
 @Slf4j
 @Service
-public class WorkflowExecutionServiceImpl implements NEPService {
+public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
 
     public static final HALMapper MAPPER = new HALMapper();
 
