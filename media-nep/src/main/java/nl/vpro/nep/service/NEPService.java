@@ -1,20 +1,13 @@
 package nl.vpro.nep.service;
 
-import java.io.IOException;
-import java.time.Instant;
-import java.util.Iterator;
-
-import nl.vpro.nep.domain.workflow.StatusType;
-import nl.vpro.nep.domain.workflow.WorkflowExecution;
-import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
+import nl.vpro.nep.domain.ItemizeRequest;
+import nl.vpro.nep.domain.ItemizeResponse;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public interface NEPService {
+public interface NEPService extends WorkflowExecutionService {
 
-    WorkflowExecution execute(WorkflowExecutionRequest request) throws IOException;
-
-    Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Instant from, Long limit);
+    ItemizeResponse itemize(ItemizeRequest request);
 }
