@@ -4,10 +4,8 @@ package nl.vpro.nep.service.impl;
 import io.openapitools.jackson.dataformat.hal.HALMapper;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
@@ -43,6 +41,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -119,10 +118,7 @@ public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
                 throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
             }
 
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader((response.getEntity().getContent())));
-
-            return MAPPER.readValue(IOUtils.toString(br), WorkflowExecution.class);
+            return MAPPER.readValue(response.getEntity().getContent(), WorkflowExecution.class);
 
         } catch (JsonProcessingException e) {
             throw e;
