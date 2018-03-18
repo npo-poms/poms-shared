@@ -38,7 +38,7 @@ public class MediaList<T> implements Iterable<T> {
     protected String order;
 
     public MediaList() {
-        this(new ArrayList<>());
+        super();
     }
 
     public MediaList(final List<T> list) {
