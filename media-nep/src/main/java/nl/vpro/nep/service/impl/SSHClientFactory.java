@@ -14,7 +14,7 @@ public final class SSHClientFactory {
     private SSHClientFactory(){
     }
 
-    private static final Duration sshTimeout  = Duration.ofSeconds(3);
+    private static final Duration sshTimeout  = Duration.ofSeconds(300);
     private static final Duration sshConnectionTimeout  = Duration.ofSeconds(5);
 
     public static SSHClient create(String hostKey, String host, String username, String password) throws IOException {
