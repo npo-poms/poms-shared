@@ -28,8 +28,6 @@ import nl.vpro.nep.service.ItemizeService;
  */
 @Service("ItemizeService")
 public class ItemizeServiceImpl implements ItemizeService {
-
-
     private final String itemizeKey;
     private final String itemizeUrl;
 
