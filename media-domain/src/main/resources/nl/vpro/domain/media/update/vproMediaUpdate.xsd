@@ -580,13 +580,14 @@
   </xs:simpleType>
 
 
-  <xs:complexType name="itemizeType">
+   <xs:complexType name="itemizeType">
     <xs:sequence>
-      <xs:element name="mid" type="xs:string" minOccurs="0"  form="qualified" />
       <xs:element name="start" type="xs:duration" minOccurs="0"  form="qualified" />
       <xs:element name="stop" type="xs:duration"  form="qualified" />
     </xs:sequence>
+    <xs:attribute name="mid" type="xs:string"/>
   </xs:complexType>
+
 
   <xs:complexType name="itemizeResponseType">
     <xs:sequence>

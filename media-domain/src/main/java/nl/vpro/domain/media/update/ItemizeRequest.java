@@ -30,6 +30,7 @@ public class ItemizeRequest {
 
 
     @NotNull
+    @XmlAttribute
     private String mid;
 
     @XmlElement(required = false)
