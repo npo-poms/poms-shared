@@ -12,9 +12,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @lombok.Builder
-public class ItemizeRequest  {
+public class NEPItemizeRequest {
 
     private String identifier;
+
+    /**
+     * Can be duration like (existing items) or absolute time (live knipper)
+     */
     private String starttime;
     private String endtime;
 
