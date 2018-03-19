@@ -3,11 +3,10 @@ package nl.vpro.nep.service;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Iterator;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.nep.domain.workflow.EncryptionType;
@@ -49,11 +48,11 @@ public class WorkflowExecutionServiceImplITest {
     }
 
     @Test
+    @Ignore
     public void getStatuses() {
-        Iterator<WorkflowExecution> statuses = nepService.getTranscodeStatuses(null, null, Instant.now().minus(Duration.ofDays(10)),  100L);
-        int count = 0;
-        while(statuses.hasNext()) {
-            log.info("{}: {}", count++, statuses.next());
-        }
+        AtomicLong count = new AtomicLong(0);
+        nepService.getTranscodeStatuses(null, null, null,  null).forEachRemaining((we)
+            -> log.info("{}: {}", count.incrementAndGet(), we)
+        );
     }
 }
