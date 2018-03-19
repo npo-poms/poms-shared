@@ -50,7 +50,7 @@ public class NEPFTPUploadServiceImpl implements NEPFTPUploadService {
         this.password = password;
         this.hostKey = hostKey;
 
-        log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
+        log.debug("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
     }
     @PreDestroy
     public void destroy() throws IOException {
