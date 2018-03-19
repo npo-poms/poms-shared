@@ -33,8 +33,8 @@ public class ItemizeServiceImpl implements ItemizeService {
 
     @Inject
     public ItemizeServiceImpl(
-        @Value("${nep.player.itemize.key}") String itemizeKey,
-        @Value("${nep.player.itemize.url}") String itemizeUrl) {
+        @Value("${nep.player.itemizer.key}") String itemizeKey,
+        @Value("${nep.player.itemizer.url}") String itemizeUrl) {
         this.itemizeKey = itemizeKey;
         this.itemizeUrl = itemizeUrl;
     }
