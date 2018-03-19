@@ -495,6 +495,9 @@
       <xs:enumeration value="NL"/>
       <xs:enumeration value="BENELUX"/>
       <xs:enumeration value="EUROPE"/>
+      <xs:enumeration value="NLBES"/>
+      <xs:enumeration value="NLALL"/>
+      <xs:enumeration value="EU"/>
     </xs:restriction>
   </xs:simpleType>
 

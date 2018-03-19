@@ -10,6 +10,10 @@
 
   <xs:element name="image" type="imageUpdateType"/>
 
+  <xs:element name="itemize" type="itemizeType"/>
+
+  <xs:element name="itemizeResponse" type="itemizeResponseType"/>
+
   <xs:element name="location" type="locationUpdateType"/>
 
   <xs:element name="memberRef" type="memberRefUpdateType"/>
@@ -366,7 +370,7 @@
   <xs:complexType name="transcodeStatusType">
     <xs:sequence>
       <xs:element name="fileName" type="xs:string" minOccurs="0"/>
-      <xs:element name="status" type="xs:string" minOccurs="0"/>
+      <xs:element name="status" type="transcodeStatusEnum" minOccurs="0"/>
       <xs:element name="statusMessage" type="xs:string" minOccurs="0"/>
       <xs:element name="workflowType" type="xs:string" minOccurs="0"/>
       <xs:element name="mid" type="xs:string" minOccurs="0"/>
@@ -375,6 +379,22 @@
       <xs:element name="updateTime" type="xs:dateTime" minOccurs="0"/>
       <xs:element name="endTime" type="xs:dateTime" minOccurs="0"/>
     </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemizeType">
+    <xs:sequence>
+      <xs:element name="mid" type="xs:string" minOccurs="0"/>
+      <xs:element name="start" type="xs:duration" minOccurs="0"/>
+      <xs:element name="stop" type="xs:duration"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemizeResponseType">
+    <xs:sequence>
+      <xs:element name="request" type="itemizeType" minOccurs="0"/>
+      <xs:element name="result" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="success" type="xs:boolean" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="memberUpdateType">
@@ -398,6 +418,17 @@
       <xs:enumeration value="NORMAL"/>
       <xs:enumeration value="HIGH"/>
       <xs:enumeration value="URGENT"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="transcodeStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RUNNING"/>
+      <xs:enumeration value="COMPLETED"/>
+      <xs:enumeration value="FAILED"/>
+      <xs:enumeration value="TIMED_OUT"/>
+      <xs:enumeration value="TERMINATED"/>
+      <xs:enumeration value="PAUSED"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
