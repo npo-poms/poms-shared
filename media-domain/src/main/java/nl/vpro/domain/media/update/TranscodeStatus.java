@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 
 import java.time.Instant;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -47,6 +48,11 @@ public class TranscodeStatus {
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     Instant endTime;
+
+
+    @XmlElementWrapper
+    @XmlElement(name = "broadcaster")
+    List<String> broadcasters;
 
     public TranscodeStatus() {
     }
