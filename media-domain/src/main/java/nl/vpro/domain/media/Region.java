@@ -27,8 +27,25 @@ public enum Region {
      * @since 5.6
      */
     @XmlDocumentation("Means that this object can only be played in Europe")
-    EUROPE
-    ;
+    EUROPE,
+
+    /**
+     * @since 5.6
+     */
+    @XmlDocumentation("Nederland plus BES gemeentes")
+    NLBES,
+
+     /**
+     * @since 5.6
+     */
+    @XmlDocumentation("Nederland plus BES gemeentes plus Curacao, St. Maarten en Aruba")
+    NLALL,
+
+    /**
+     * @since 5.6
+     */
+    @XmlDocumentation("incl. BES gemeentes, Curacao, St. Maarten en Aruba")
+    EU;
 
     public static Region valueOfOrNull(String v) {
         if (StringUtils.isEmpty(v)) {
