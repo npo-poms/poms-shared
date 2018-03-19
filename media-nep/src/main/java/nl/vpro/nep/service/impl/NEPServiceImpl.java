@@ -78,6 +78,13 @@ public class NEPServiceImpl implements NEPService {
 
     @Override
     public String toString() {
-        return itemizeService.toString();
+        StringBuilder builder = new StringBuilder();
+        builder.append("NEP: ");
+        try {
+            builder.append("itemizer: ").append(itemizeService.get().toString()).append(",");
+        } catch (Exception ignored) {
+
+        }
+        return builder.toString();
     }
 }
