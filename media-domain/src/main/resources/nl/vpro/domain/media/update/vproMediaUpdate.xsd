@@ -37,6 +37,11 @@
 
   <xs:element name="transcodeStatus" type="transcodeStatusType"/>
 
+  <xs:element name="itemize" type="itemizeType"/>
+
+  <xs:element name="itemizeResponse" type="itemizeResponseType"/>
+
+
 
   <xs:complexType name="avAtributeUpdateType">
     <xs:sequence>
@@ -535,7 +540,7 @@
    <xs:complexType name="transcodeStatusType">
     <xs:sequence>
       <xs:element name="fileName" type="xs:string" form="qualified" minOccurs="0"/>
-      <xs:element name="status" type="xs:string" form="qualified"  minOccurs="0"/>
+      <xs:element name="status" type="transcodeStatusEnum" form="qualified" minOccurs="0"/>
       <xs:element name="statusMessage" type="xs:string" form="qualified"  minOccurs="0"/>
       <xs:element name="workflowType" type="xs:string" form="qualified" minOccurs="0"/>
       <xs:element name="mid" type="xs:string" form="qualified" minOccurs="0"/>
@@ -561,5 +566,36 @@
       <xs:enumeration value="URGENT"/>
     </xs:restriction>
   </xs:simpleType>
+
+
+  <xs:simpleType name="transcodeStatusEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RUNNING"/>
+      <xs:enumeration value="COMPLETED"/>
+      <xs:enumeration value="FAILED"/>
+      <xs:enumeration value="TIMED_OUT"/>
+      <xs:enumeration value="TERMINATED"/>
+      <xs:enumeration value="PAUSED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:complexType name="itemizeType">
+    <xs:sequence>
+      <xs:element name="mid" type="xs:string" minOccurs="0"  form="qualified" />
+      <xs:element name="start" type="xs:duration" minOccurs="0"  form="qualified" />
+      <xs:element name="stop" type="xs:duration"  form="qualified" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemizeResponseType">
+    <xs:sequence>
+      <xs:element name="request" type="itemizeType" minOccurs="0"  form="qualified" />
+      <xs:element name="result" type="xs:string" minOccurs="0"  form="qualified" />
+    </xs:sequence>
+    <xs:attribute name="success" type="xs:boolean" use="required"/>
+  </xs:complexType>
+
+
 
 </xs:schema>

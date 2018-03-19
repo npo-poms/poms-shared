@@ -6,10 +6,7 @@ import lombok.Data;
 import java.net.URI;
 
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -27,6 +24,7 @@ public class ItemizeResponse {
     @NotNull
     private ItemizeRequest request;
 
+    @XmlAttribute
     private boolean success;
 
     private URI result;

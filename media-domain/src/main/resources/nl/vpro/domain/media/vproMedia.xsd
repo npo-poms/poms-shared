@@ -854,7 +854,28 @@
       <xs:enumeration value="EUROPE">
         <xs:annotation>
           <xs:documentation>
-            New in 5.6
+            New in 5.6. Europa in breedste zin van het woord
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NLBES">
+         <xs:annotation>
+          <xs:documentation>
+            New in 5.6.  Nederland plus BES gemeentes
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NLALL">
+         <xs:annotation>
+          <xs:documentation>
+            New in 5.6. Nederland plus BES gemeentes plus Curacao, St. Maarten en Aruba
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EU">
+         <xs:annotation>
+          <xs:documentation>
+            New in 5.6. EU (incl. BES gemeentes, Curacao, St. Maarten en Aruba)
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
