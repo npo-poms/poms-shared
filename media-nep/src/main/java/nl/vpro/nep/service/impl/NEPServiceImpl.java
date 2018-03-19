@@ -75,4 +75,9 @@ public class NEPServiceImpl implements NEPService {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream);
 
     }
+
+    @Override
+    public String toString() {
+        return itemizeService.toString();
+    }
 }
