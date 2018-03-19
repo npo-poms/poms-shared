@@ -16,6 +16,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.meeuw.jaxbdocumentation.DocumentationAdder;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 import com.google.common.io.Files;
@@ -74,6 +75,8 @@ public class SchemaTest {
             //
             TranscodeRequest.class,
             TranscodeStatus.class,
+            ItemizeRequest.class,
+            ItemizeResponse.class,
             // no namespace
             XmlCollection.class
             //
@@ -136,6 +139,8 @@ public class SchemaTest {
     }
 
     private static void generate(Class... classes) throws JAXBException, IOException {
+        DocumentationAdder collector = new DocumentationAdder(classes);
+
         JAXBContext context = JAXBContext.newInstance(classes);
         context.generateSchema(new SchemaOutputResolver() {
             @Override
@@ -153,9 +158,8 @@ public class SchemaTest {
                 result.setSystemId(f);
                 FileOutputStream fo = new FileOutputStream(f);
                 result.setOutputStream(fo);
+
                 return result;
-
-
             }
         });
     }
