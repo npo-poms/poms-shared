@@ -3,6 +3,8 @@ package nl.vpro.nep.domain.workflow;
 import io.openapitools.jackson.dataformat.hal.HALLink;
 import io.openapitools.jackson.dataformat.hal.annotation.Link;
 import io.openapitools.jackson.dataformat.hal.annotation.Resource;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -11,6 +13,7 @@ import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @lombok.Builder(builderClassName = "Builder")
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Resource
 @ToString
 public class WorkflowExecution {
@@ -42,6 +45,9 @@ public class WorkflowExecution {
             customerMetadata.setMid(mid);
             return this;
         }
+    }
+
+    public WorkflowExecution() {
     }
 
     @JsonIgnore

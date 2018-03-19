@@ -101,7 +101,7 @@ public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
     }
 
     @Override
-    public WorkflowExecution execute(WorkflowExecutionRequest request) throws IOException {
+    public WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException {
         CloseableHttpClient client = getHttpClient();
 
         try {
@@ -126,7 +126,7 @@ public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
     }
 
     @Override
-    public Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Instant from, Long limit) {
+    public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
         int batchSize = 20;
         URIBuilder builder;
         try {
