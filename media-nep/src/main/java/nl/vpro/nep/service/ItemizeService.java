@@ -1,7 +1,7 @@
 package nl.vpro.nep.service;
 
-import nl.vpro.nep.domain.ItemizeRequest;
-import nl.vpro.nep.domain.ItemizeResponse;
+import nl.vpro.nep.domain.NEPItemizeRequest;
+import nl.vpro.nep.domain.NEPItemizeResponse;
 
 /**
  * @author Michiel Meeuwissen
@@ -9,6 +9,6 @@ import nl.vpro.nep.domain.ItemizeResponse;
  */
 public interface  ItemizeService {
 
-    ItemizeResponse itemize(ItemizeRequest request);
+    NEPItemizeResponse itemize(NEPItemizeRequest request);
 
 }

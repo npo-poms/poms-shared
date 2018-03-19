@@ -13,8 +13,8 @@ import javax.inject.Provider;
 import org.springframework.stereotype.Service;
 
 import nl.vpro.logging.SimpleLogger;
-import nl.vpro.nep.domain.ItemizeRequest;
-import nl.vpro.nep.domain.ItemizeResponse;
+import nl.vpro.nep.domain.NEPItemizeRequest;
+import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
@@ -48,7 +48,7 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public ItemizeResponse itemize(ItemizeRequest request) {
+    public NEPItemizeResponse itemize(NEPItemizeRequest request) {
         return itemizeService.get().itemize(request);
     }
 
