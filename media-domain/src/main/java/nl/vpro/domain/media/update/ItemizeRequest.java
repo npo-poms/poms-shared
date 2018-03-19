@@ -33,7 +33,7 @@ public class ItemizeRequest {
     @XmlAttribute
     private String mid;
 
-    @XmlElement(required = false)
+    @XmlElement(required = true)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
