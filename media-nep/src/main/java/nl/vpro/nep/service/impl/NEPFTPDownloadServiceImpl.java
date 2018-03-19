@@ -81,6 +81,9 @@ public class NEPFTPDownloadServiceImpl implements NEPFTPDownloadService {
                     }
                     break;
                 } catch (SFTPException sftpe) {
+                    if (timeout == null || timeout.equals(Duration.ZERO)) {
+                        throw new IllegalStateException("File " + nepFile + " doesn't exist");
+                    }
                     if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
                         throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
                     }
