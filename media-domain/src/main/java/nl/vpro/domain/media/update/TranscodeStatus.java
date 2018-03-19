@@ -30,6 +30,7 @@ public class TranscodeStatus {
     String workflowType;
 
     @NotNull
+    @XmlAttribute
     String mid;
 
     @NotNull
