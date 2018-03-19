@@ -2,6 +2,7 @@ package nl.vpro.domain.media.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 import java.time.Instant;
 
@@ -24,7 +25,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class TranscodeStatus {
 
     String fileName;
-    String status;
+    Status status;
     String statusMessage;
     String workflowType;
 
@@ -47,5 +48,23 @@ public class TranscodeStatus {
     Instant endTime;
 
     public TranscodeStatus() {
+    }
+
+    @XmlType(name = "transcodeStatusEnum")
+    @Getter
+    public enum Status  {
+        RUNNING("De ​workflow ​is ​gestart ​en ​in ​verwerking", false),
+        COMPLETED("De ​workflow ​is ​succesvol ​afgerond ​en ​de ​streams ​zijn ​afgemeld bij ​POMS", true),
+        FAILED("De ​workflow ​kon ​niet ​worden ​voltooid", true),
+        TIMED_OUT("De ​workflow ​was ​niet ​binnen ​een ​redelijke ​tijd ​voltooid ​en ​is afgebroken", true),
+        TERMINATED("De ​workflow ​is ​handmatig ​afgebroken ​door ​een ​NEP ​medewerker", true),
+        PAUSED("De ​workflow ​is ​gepauzeerd ​door ​een ​NEP ​medewerker", false);
+        private final String description;
+        private final boolean endStatus;
+
+        Status(String description, boolean endStatus) {
+            this.description = description;
+            this.endStatus = endStatus;
+        }
     }
 }

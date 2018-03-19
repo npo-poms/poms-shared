@@ -58,6 +58,10 @@ public interface AssetService {
 
     List<File> list();
 
-    boolean exists(String itemizedFile);
+    default boolean exists(String fileName) {
+        File file = getFile(fileName);
+        return file.exists();
+    }
+
 
 }
