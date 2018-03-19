@@ -29,6 +29,9 @@ public class ItemizeResponse {
 
     private URI result;
 
+    private Integer id;
+
+
     public ItemizeResponse() {
 
     }

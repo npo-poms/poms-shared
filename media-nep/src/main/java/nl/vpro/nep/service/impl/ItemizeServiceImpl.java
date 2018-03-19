@@ -51,7 +51,7 @@ public class ItemizeServiceImpl implements ItemizeService {
             String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8")));
             HttpPost httpPost = new HttpPost(itemizeUrl);
-            httpPost.addHeader(new BasicHeader("Authentication", itemizeKey));
+            httpPost.addHeader(new BasicHeader("Authorization", itemizeKey));
             httpPost.addHeader(new BasicHeader("Accept", ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8")).toString()));
 
             httpPost.setEntity(entity);
