@@ -446,7 +446,7 @@ public interface MediaBackendRestService {
     @Path("transcodingstatuses")
     XmlCollection<TranscodeStatus> getTranscodeStatusForBroadcaster(
         @QueryParam("from") final Instant maxAge,
-        @QueryParam("status") @DefaultValue("RUNNING") final String status,
+        @QueryParam("status") @DefaultValue("RUNNING") final  TranscodeStatus.Status status,
         @QueryParam(MAX) @DefaultValue("20") final Integer max
 
 

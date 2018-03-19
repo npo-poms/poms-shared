@@ -1,8 +1,8 @@
 package nl.vpro.nep.service;
 
 import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
+import java.io.OutputStream;
 
 public interface NEPFTPDownloadService {
-    CompletableFuture<?> download(String nepFile) throws IOException;
+    void download(String nepFile, OutputStream outputStream) throws IOException;
 }

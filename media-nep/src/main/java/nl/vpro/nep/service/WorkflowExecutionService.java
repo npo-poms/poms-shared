@@ -14,7 +14,7 @@ import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
  */
 public interface WorkflowExecutionService {
 
-    WorkflowExecution execute(WorkflowExecutionRequest request) throws IOException;
+    WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException;
 
-    Iterator<WorkflowExecution> getStatuses(String mid, StatusType status, Instant from, Long limit);
+    Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit);
 }
