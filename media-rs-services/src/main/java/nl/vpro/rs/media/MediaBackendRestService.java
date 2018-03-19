@@ -420,8 +420,9 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("program/{mid}/transcode")
+    @Path("{entity:(media|program|group|segment)}/{mid}/transcode")
     Response transcode(
+        @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @PathParam(MID) final String mid,
         @QueryParam(ERRORS) String errors,
         TranscodeRequest transcodeRequest);
@@ -436,10 +437,10 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}/transcodingstatus")
+    @Path("{entity:(media|program|group|segment)}/{mid}/transcodingstatus")
     XmlCollection<TranscodeStatus> getTranscodeStatus(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
-        @PathParam(ID) final String mid
+        @PathParam(MID) final String mid
     );
 
 
@@ -455,13 +456,13 @@ public interface MediaBackendRestService {
 
 
     @Post
-    @Path("itemize/{mid}")
+    @Path("{entity:(media|program|group|segment)}/{mid}/itemize")
     ItemizeResponse itemize(
-        @PathParam(MID) final String mid,
-        @QueryParam(ERRORS) String errors,
-        @QueryParam("start") Duration start,
-        @QueryParam("stop") Duration stop
-        );
+        @PathParam(ENTITY) @DefaultValue("media") final String entity,
+        @PathParam(MID) String mid,
+        @Context HttpServletRequest request,
+        ItemizeRequest itemizeRequest
+    );
 
 
 }
