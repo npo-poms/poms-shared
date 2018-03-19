@@ -2,6 +2,7 @@ package nl.vpro.nep.service.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 import javax.inject.Inject;
 
@@ -33,8 +34,9 @@ public class ItemizeServiceImpl implements ItemizeService {
 
     @Inject
     public ItemizeServiceImpl(
-        @Value("${nep.player.itemizer.key}") String itemizeKey,
-        @Value("${nep.player.itemizer.url}") String itemizeUrl) {
+        @Value("${nep.player.itemizer.url}") String itemizeUrl,
+        @Value("${nep.player.itemizer.key}") String itemizeKey) {
+
         this.itemizeKey = itemizeKey;
         this.itemizeUrl = itemizeUrl;
     }
@@ -47,7 +49,7 @@ public class ItemizeServiceImpl implements ItemizeService {
 
         try {
             String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
-            StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
+            StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8")));
             HttpPost httpPost = new HttpPost(itemizeUrl);
             httpPost.addHeader(new BasicHeader("Authentication", itemizeKey));
             httpPost.setEntity(entity);
