@@ -24,7 +24,7 @@ import nl.vpro.nep.service.ItemizeService;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-@Service
+@Service("ItemizeService")
 public class ItemizeServiceImpl implements ItemizeService {
 
 

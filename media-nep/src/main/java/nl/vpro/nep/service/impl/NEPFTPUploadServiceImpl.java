@@ -24,7 +24,7 @@ import nl.vpro.logging.SimpleLogger;
 import nl.vpro.nep.service.NEPFTPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 
-@Service("NEPFTPUploadServiceImpl")
+@Service("NEPFTPUploadService")
 @Slf4j
 public class NEPFTPUploadServiceImpl implements NEPFTPUploadService {
 
@@ -92,5 +92,11 @@ public class NEPFTPUploadServiceImpl implements NEPFTPUploadService {
         handle.close();
         sftp.close();
         return numberofBytes;
+    }
+
+
+    @Override
+    public String toString() {
+        return username + "@" + sftpHost;
     }
 }
