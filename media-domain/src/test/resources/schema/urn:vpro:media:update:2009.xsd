@@ -377,13 +377,20 @@
       <xs:element name="startTime" type="xs:dateTime" minOccurs="0"/>
       <xs:element name="updateTime" type="xs:dateTime" minOccurs="0"/>
       <xs:element name="endTime" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="broadcasters" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="broadcaster" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
     </xs:sequence>
     <xs:attribute name="mid" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="itemizeType">
     <xs:sequence>
-      <xs:element name="start" type="xs:duration" minOccurs="0"/>
+      <xs:element name="start" type="xs:duration"/>
       <xs:element name="stop" type="xs:duration"/>
     </xs:sequence>
     <xs:attribute name="mid" type="xs:string"/>
@@ -393,6 +400,7 @@
     <xs:sequence>
       <xs:element name="request" type="itemizeType" minOccurs="0"/>
       <xs:element name="result" type="xs:string" minOccurs="0"/>
+      <xs:element name="id" type="xs:int" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="success" type="xs:boolean" use="required"/>
   </xs:complexType>
