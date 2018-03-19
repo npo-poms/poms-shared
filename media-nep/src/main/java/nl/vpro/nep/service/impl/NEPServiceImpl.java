@@ -35,10 +35,10 @@ public class NEPServiceImpl implements NEPService {
 
     @Inject
     public NEPServiceImpl(
-        @Named("workflowExecutionServiceImpl") Provider<WorkflowExecutionService> workflowExecutionService,
-        @Named("NEPFTPUploadServiceImpl") Provider<NEPFTPUploadService> nepftpUploadService,
-        @Named("NEPFTPDownloadServiceImpl") Provider<NEPFTPDownloadService> nepftpDownloadService,
-        @Named("ItemizeServiceImpl") Provider<ItemizeService> itemizeService
+        @Named("WorkflowExecutionService") Provider<WorkflowExecutionService> workflowExecutionService,
+        @Named("NEPFTPUploadService") Provider<NEPFTPUploadService> nepftpUploadService,
+        @Named("NEPFTPDownloadService") Provider<NEPFTPDownloadService> nepftpDownloadService,
+        @Named("ItemizeService") Provider<ItemizeService> itemizeService
 
         ) {
         this.workflowExecutionService = workflowExecutionService;
@@ -82,6 +82,22 @@ public class NEPServiceImpl implements NEPService {
         builder.append("NEP: ");
         try {
             builder.append("itemizer: ").append(itemizeService.get().toString()).append(",");
+        } catch (Exception ignored) {
+
+        }
+        try {
+            builder.append("workflows: ").append(workflowExecutionService.get().toString()).append(",");
+        } catch (Exception ignored) {
+
+        }
+
+        try {
+            builder.append("upload: ").append(nepftpUploadService.get().toString()).append(",");
+        } catch (Exception ignored) {
+
+        }
+        try {
+            builder.append("download: ").append(nepftpDownloadService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
