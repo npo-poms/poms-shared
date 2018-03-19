@@ -66,4 +66,9 @@ public class ItemizeServiceImpl implements ItemizeService {
         }
 
     }
+
+    @Override
+    public String toString() {
+        return itemizeUrl;
+    }
 }
