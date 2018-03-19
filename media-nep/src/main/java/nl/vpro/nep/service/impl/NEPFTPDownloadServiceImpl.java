@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 import nl.vpro.nep.service.NEPFTPDownloadService;
 
-@Service("NEPFTPDownloadServiceImpl")
+@Service("NEPFTPDownloadService")
 @Slf4j
 public class NEPFTPDownloadServiceImpl implements NEPFTPDownloadService {
 
@@ -98,4 +98,9 @@ public class NEPFTPDownloadServiceImpl implements NEPFTPDownloadService {
         }
     }
 
+
+    @Override
+    public String toString() {
+        return username + "@" + ftpHost;
+    }
 }

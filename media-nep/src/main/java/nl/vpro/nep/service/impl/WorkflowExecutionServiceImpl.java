@@ -56,7 +56,7 @@ import nl.vpro.util.FilteringIterator;
 import nl.vpro.util.MaxOffsetIterator;
 
 @Slf4j
-@Service
+@Service("WorkflowExecutionService")
 public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
 
     public static final HALMapper MAPPER = new HALMapper();
