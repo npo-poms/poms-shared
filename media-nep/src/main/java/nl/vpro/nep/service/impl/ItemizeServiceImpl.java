@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.nep.domain.ItemizeRequest;
-import nl.vpro.nep.domain.ItemizeResponse;
+import nl.vpro.nep.domain.NEPItemizeRequest;
+import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.service.ItemizeService;
 
 /**
@@ -39,7 +39,7 @@ public class ItemizeServiceImpl implements ItemizeService {
     }
 
     @Override
-    public ItemizeResponse itemize(ItemizeRequest request) {
+    public NEPItemizeResponse itemize(NEPItemizeRequest request) {
         CloseableHttpClient httpClient = HttpClients.custom()
             .build();
         HttpClientContext clientContext = HttpClientContext.create();
@@ -58,7 +58,7 @@ public class ItemizeServiceImpl implements ItemizeService {
                 throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
             }
 
-            return Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), ItemizeResponse.class);
+            return Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), NEPItemizeResponse.class);
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         } finally {
