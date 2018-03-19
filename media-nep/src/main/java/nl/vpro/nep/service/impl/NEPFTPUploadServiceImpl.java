@@ -15,7 +15,6 @@ import java.util.EnumSet;
 
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,8 +24,7 @@ import nl.vpro.logging.SimpleLogger;
 import nl.vpro.nep.service.NEPFTPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 
-@Service
-@Named("NEPFTPUploadServiceImpl")
+@Service("NEPFTPUploadServiceImpl")
 @Slf4j
 public class NEPFTPUploadServiceImpl implements NEPFTPUploadService {
 
@@ -90,7 +88,7 @@ public class NEPFTPUploadServiceImpl implements NEPFTPUploadService {
                 }
             }
         }
-            logger.info("Ready uploading {}/{} bytes (took {})", formatter.format(numberofBytes),  formatter.format(size), Duration.between(start, Instant.now()));
+        logger.info("Ready uploading {}/{} bytes (took {})", formatter.format(numberofBytes),  formatter.format(size), Duration.between(start, Instant.now()));
         handle.close();
         sftp.close();
         return numberofBytes;

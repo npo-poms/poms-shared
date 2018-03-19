@@ -15,7 +15,6 @@ import java.time.Instant;
 import java.util.EnumSet;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,9 +22,8 @@ import org.springframework.stereotype.Service;
 
 import nl.vpro.nep.service.NEPFTPDownloadService;
 
-@Service
+@Service("NEPFTPDownloadServiceImpl")
 @Slf4j
-@Named("NEPFTPDownloadServiceImpl")
 public class NEPFTPDownloadServiceImpl implements NEPFTPDownloadService {
 
     private static final Duration MAX_DURATION = Duration.ofMinutes(10);
