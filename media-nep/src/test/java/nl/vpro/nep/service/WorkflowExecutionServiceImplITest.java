@@ -41,7 +41,7 @@ public class WorkflowExecutionServiceImplITest {
             .build()
             ;
         try {
-            WorkflowExecution result = nepService.execute(request);
+            WorkflowExecution result = nepService.transcode(request);
             log.info("Result {}", result);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
@@ -50,7 +50,7 @@ public class WorkflowExecutionServiceImplITest {
 
     @Test
     public void getStatuses() {
-        Iterator<WorkflowExecution> statuses = nepService.getStatuses(null, null, Instant.now().minus(Duration.ofDays(10)),  100L);
+        Iterator<WorkflowExecution> statuses = nepService.getTranscodeStatuses(null, null, Instant.now().minus(Duration.ofDays(10)),  100L);
         int count = 0;
         while(statuses.hasNext()) {
             log.info("{}: {}", count++, statuses.next());
