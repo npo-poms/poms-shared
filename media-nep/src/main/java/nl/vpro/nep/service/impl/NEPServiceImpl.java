@@ -3,8 +3,10 @@ package nl.vpro.nep.service.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
+import java.util.function.Function;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -65,8 +67,8 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public void download(String nepFile, OutputStream outputStream) throws IOException {
-        nepftpDownloadService.get().download(nepFile, outputStream);
+    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) throws IOException {
+        nepftpDownloadService.get().download(nepFile, outputStream, timeout, descriptorConsumer);
 
     }
 
