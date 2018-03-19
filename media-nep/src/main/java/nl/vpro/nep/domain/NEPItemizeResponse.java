@@ -1,7 +1,6 @@
 package nl.vpro.nep.domain;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class ItemizeResponse {
+public class NEPItemizeResponse {
     private Boolean success;
     private Integer id;
     private String output_filename;
