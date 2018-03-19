@@ -20,11 +20,15 @@ public class TranscodeRequest {
 
 
     @NotNull
+    @XmlAttribute
     private String mid;
+
     @NotNull
     private String fileName;
+
     @NotNull
     private Encryption encryption;
+
     @NotNull
     private Priority priority;
 

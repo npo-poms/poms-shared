@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response;
 import org.jboss.resteasy.annotations.providers.jaxb.Wrapped;
 import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelated;
 import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
-import org.restlet.resource.Post;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
@@ -455,7 +454,7 @@ public interface MediaBackendRestService {
     );
 
 
-    @Post
+    @POST
     @Path("{entity:(media|program|group|segment)}/{mid}/itemize")
     ItemizeResponse itemize(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,

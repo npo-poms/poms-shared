@@ -3,6 +3,8 @@ package nl.vpro.nep.service.impl;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import javax.inject.Inject;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -31,6 +33,7 @@ public class ItemizeServiceImpl implements ItemizeService {
     private final String itemizeKey;
     private final String itemizeUrl;
 
+    @Inject
     public ItemizeServiceImpl(
         @Value("${nep.player.itemize.key}") String itemizeKey,
         @Value("${nep.player.itemize.url}") String itemizeUrl) {
