@@ -7,6 +7,7 @@ import java.nio.charset.Charset;
 import java.time.Duration;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -73,7 +74,7 @@ public class WEBVTTandSRT {
                 try {
                     return parseCue(parent, cueNumber, offset, timeLine, content.toString(), decimalSeparator);
                 } catch (IllegalArgumentException e) {
-                    log.warn("Error: {} while parsing\nheadline:{}\ntimeline:{}", e.getMessage(), cueNumber, timeLine);
+                    log.warn("Error: {} while parsing\nheadline:{}\ntimeline:{}", e.getMessage(), cueNumber, StringUtils.abbreviate(timeLine, 100));
                     return null;
                 }
 
@@ -159,7 +160,9 @@ public class WEBVTTandSRT {
                 content
             );
         } catch(NumberFormatException nfe) {
-            throw new IllegalArgumentException("For " + parent + " could not parse timeline " + StringUtils.abbreviate(timeLine, 100) + " (" + Arrays.asList(split) + "). Headline: " + cueNumber + ". Expected content: " + content + ".  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
+            throw new IllegalArgumentException("For " + parent + " could not parse timeline " + StringUtils.abbreviate(timeLine, 100) +
+                " (" + Arrays.stream(split).limit(20).map(s ->  StringUtils.abbreviate(s, 100)).collect(Collectors.joining(","))
+                + "). Headline: " + cueNumber + ". Expected content: " + StringUtils.abbreviate(content, 100) + ".  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
         }
 
     }

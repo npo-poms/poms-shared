@@ -82,6 +82,8 @@ public class WEBVTTTest {
                 "\n");
     }
 
+
+
     @Test
     public void parse() {
         String example = "WEBVTT\n" +
