@@ -159,7 +159,7 @@ public class WEBVTTandSRT {
                 content
             );
         } catch(NumberFormatException nfe) {
-            throw new IllegalArgumentException("For " + parent + " could not parse " + timeLine + " (" + Arrays.asList(split) + "). Headline: " + cueNumber + ". Expected content: " + content + ".  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
+            throw new IllegalArgumentException("For " + parent + " could not parse timeline " + StringUtils.abbreviate(timeLine, 100) + " (" + Arrays.asList(split) + "). Headline: " + cueNumber + ". Expected content: " + content + ".  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
         }
 
     }
