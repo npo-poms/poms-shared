@@ -2,9 +2,12 @@ package nl.vpro.domain.media.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
+
+import nl.vpro.domain.Displayable;
 
 /**
  * @author Michiel Meeuwissen
@@ -38,13 +41,27 @@ public class TranscodeRequest {
     }
 
     @XmlType(name = "encryptionType")
-    public enum Encryption {
-        DRM, NONE;
+    public enum Encryption implements  Displayable {
+        DRM("DRM"),
+        NONE("Geen");
+        @Getter
+        private final String displayName;
 
+
+        Encryption(String displayName) {
+            this.displayName = displayName;
+        }
     }
     @XmlType(name = "priorityType")
-    public enum Priority {
-        LOW, NORMAL, HIGH, URGENT;
+    public enum Priority implements Displayable {
+        LOW("Laag"),
+        NORMAL("Normaal"), HIGH("Hoog"), URGENT("Urgent");
 
+        @Getter
+        private final String displayName;
+
+        Priority(String displayName) {
+            this.displayName = displayName;
+        }
     }
 }

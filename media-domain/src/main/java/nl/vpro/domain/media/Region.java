@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+
 import javax.xml.bind.annotation.XmlEnum;
 
 import org.apache.commons.lang3.StringUtils;
@@ -49,15 +51,11 @@ public enum Region implements Displayable {
     @XmlDocumentation("European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba")
     EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba");
 
+    @Getter
     private final String displayName;
 
     Region(String displayName) {
         this.displayName = displayName;
-    }
-
-    @Override
-    public String getDisplayName() {
-        return displayName;
     }
 
     public static Region valueOfOrNull(String v) {
