@@ -35,4 +35,12 @@ public class NEPItemizeRequest {
         return Optional.of(DurationFormatUtils.formatDurationHMS(duration.toMillis()));
     }
 
+    public static String fromDuration(Duration duration, Duration defaultDuration) {
+         if (duration == null) {
+            duration = defaultDuration;
+        }
+        return DurationFormatUtils.formatDurationHMS(duration.toMillis());
+    }
+
+
 }
