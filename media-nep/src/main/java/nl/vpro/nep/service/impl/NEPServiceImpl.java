@@ -14,7 +14,7 @@ import javax.inject.Provider;
 
 import org.springframework.stereotype.Service;
 
-import nl.vpro.logging.SimpleLogger;
+import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.domain.NEPItemizeRequest;
 import nl.vpro.nep.domain.NEPItemizeResponse;
 import nl.vpro.nep.domain.workflow.StatusType;
