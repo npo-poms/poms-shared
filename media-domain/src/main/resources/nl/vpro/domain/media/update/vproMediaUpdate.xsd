@@ -590,7 +590,7 @@
 
    <xs:complexType name="itemizeType">
     <xs:sequence>
-      <xs:element name="start" type="xs:duration"  form="qualified" />
+      <xs:element name="start" type="xs:duration" minOccurs="0"/>
       <xs:element name="stop" type="xs:duration"  form="qualified" />
     </xs:sequence>
     <xs:attribute name="mid" type="xs:string"/>
