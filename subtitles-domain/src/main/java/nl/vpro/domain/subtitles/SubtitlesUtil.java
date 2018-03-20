@@ -29,6 +29,9 @@ public class SubtitlesUtil {
 
     public static Subtitles tt888(String parent, Duration offset, Locale locale, InputStream input) throws IOException {
         StringWriter w = new StringWriter();
+        if (input == null) {
+            throw new IllegalArgumentException("InputStream is null");
+        }
         IOUtils.copy(new InputStreamReader(input, ISO6937), w);
         return Subtitles.builder()
             .mid(parent)
@@ -38,6 +41,24 @@ public class SubtitlesUtil {
             .content(w.toString())
             .build();
     }
+
+
+
+    public static Subtitles vtt(String parent, Duration offset, Locale locale, InputStream input) throws IOException {
+        StringWriter w = new StringWriter();
+        if (input == null) {
+            throw new IllegalArgumentException("InputStream is null");
+        }
+        IOUtils.copy(new InputStreamReader(input, WEBVTTandSRT.VTT_CHARSET), w);
+        return Subtitles.builder()
+            .mid(parent)
+            .offset(offset)
+            .language(locale)
+            .format(SubtitlesFormat.WEBVTT)
+            .content(w.toString())
+            .build();
+    }
+
 
 
 
