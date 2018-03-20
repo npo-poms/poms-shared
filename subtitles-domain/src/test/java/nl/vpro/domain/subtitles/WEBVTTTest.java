@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import static nl.vpro.domain.subtitles.SubtitlesUtilTest.getSubtitles;
+import static nl.vpro.domain.subtitles.SubtitlesUtilTest.getSubtitlesAr;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -52,6 +53,28 @@ public class WEBVTTTest {
                 "*Dat wil ik doen in jouw mobiele bakkerij\n" +
                 "\n" +
                 "");
+    }
+
+
+    @Test
+    public void toWEBVTT2Ar() throws IOException {
+        StringWriter writer = new StringWriter();
+        WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitlesAr(), false, false).limit(3).collect(Collectors.toList()).iterator(), writer);
+        assertThat(writer.toString()).isEqualTo(
+            "WEBVTT\n" +
+                "\n" +
+                "\n" +
+                "-00:01:59.991 --> -00:01:57.770\n" +
+                "ترجمة: جانيت نمور\n" +
+                "\n" +
+                "\n" +
+                "-00:01:31.980 --> -00:01:27.980\n" +
+                "في عام 1993 هربنا من إيران، أمي وأخي وأنا\n" +
+                "\n" +
+                "\n" +
+                "-00:01:27.610 --> -00:01:25.197\n" +
+                "الآن نحن بطريقنا إلى الحي..\n" +
+                "\n");
     }
 
     @Test
