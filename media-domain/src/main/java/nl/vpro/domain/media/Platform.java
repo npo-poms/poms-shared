@@ -5,6 +5,8 @@ import lombok.Getter;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nl.vpro.domain.Displayable;
 
 /**
@@ -26,12 +28,14 @@ public enum Platform implements Displayable {
     /**
      * NLZiet,platform "extra" in cooperation with dutch commercial broadcasters
      */
-    PLUSVOD(true, "NLZiet"),
+    PLUSVOD(true, "Nlziet/NPO Start Plus"),
 
     /**
      *  NPOPlus, platform "plusx" is the NPO only offspring/splitoff from NLZiet
+     *  Zie https://jira.vpro.nl/browse/MSE-2742 Blijkbaar nooit gebruikt.
      */
-    NPOPLUSVOD(false, "NPOPlus");
+    @Deprecated
+    NPOPLUSVOD(false, "NPO Plus");
 
 
     @Getter
@@ -44,5 +48,12 @@ public enum Platform implements Displayable {
     Platform(boolean streamingPlatform, String displayName) {
         this.streamingPlatform = streamingPlatform;
         this.displayName = displayName;
+    }
+
+    public static Platform valueOfOrNull(String id) {
+        if (StringUtils.isEmpty(id)) {
+            return null;
+        }
+        return valueOf(id);
     }
 }
