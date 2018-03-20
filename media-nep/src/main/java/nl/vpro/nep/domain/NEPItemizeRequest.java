@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Duration;
+import java.util.Optional;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
@@ -27,11 +28,11 @@ public class NEPItemizeRequest {
     private String endtime;
 
 
-    public static String fromDuration(Duration duration) {
+    public static Optional<String> fromDuration(Duration duration) {
         if (duration == null) {
-            return null;
+            return Optional.empty();
         }
-        return DurationFormatUtils.formatDurationHMS(duration.toMillis());
+        return Optional.of(DurationFormatUtils.formatDurationHMS(duration.toMillis()));
     }
 
 }
