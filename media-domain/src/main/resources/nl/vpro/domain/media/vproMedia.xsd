@@ -840,6 +840,9 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="NLBES"/>
+      <xs:enumeration value="NLALL"/>
+      <xs:enumeration value="EU"/>
     </xs:restriction>
   </xs:simpleType>
 
