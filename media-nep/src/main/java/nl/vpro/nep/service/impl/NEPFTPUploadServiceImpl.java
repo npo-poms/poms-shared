@@ -20,7 +20,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import nl.vpro.logging.SimpleLogger;
+import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPFTPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 
