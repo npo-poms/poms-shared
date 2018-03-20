@@ -76,7 +76,7 @@ public class Roles {
     public static final String MERGE_EPISODE_ROLE = "ROLE_MEDIA_MERGEEPISODE";
     public static final String MERGE_ALL_ROLE = "ROLE_MEDIA_MERGEALL";
 
-    public static final String SUBTITLE_PUBLISHER_ROLE = "ROLE_MEDIA_SUBTITLE_PUBLISHER";
+    public static final String TRANSLATOR_ROLE = "ROLE_MEDIA_TRANSLATOR";
 
     /**
      * Role for users that are allowed to edit MIS owned fields, do note that they still need the regular permssions to actually do so.
