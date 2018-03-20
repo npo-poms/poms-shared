@@ -5,12 +5,12 @@
   <parent>
     <groupId>nl.publiekeomroep</groupId>
     <artifactId>poms-shared-parent</artifactId>
-    <version>5.4.8-SNAPSHOT</version>
+    <version>5.4.8</version>
   </parent>
 
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-rs-services</artifactId>
-  <version>5.4.8-SNAPSHOT</version>
+  <version>5.4.8</version>
   <name>api-rs-services</name>
 
   <dependencies>
