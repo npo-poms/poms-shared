@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
-import java.nio.charset.Charset;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -22,12 +21,10 @@ import nl.vpro.domain.subtitles.SubtitlesFormat;
 abstract class AbstractSubtitlesReader implements MessageBodyReader<Subtitles> {
 
     private final MediaType mediaType;
-    private final Charset charset;
     private final SubtitlesFormat format;
 
     public AbstractSubtitlesReader(SubtitlesFormat format) {
         this.mediaType = MediaType.valueOf(format.getMediaType());
-        this.charset = format.getCharset();
         this.format = format;
     }
 
@@ -38,7 +35,11 @@ abstract class AbstractSubtitlesReader implements MessageBodyReader<Subtitles> {
 
     @Override
     public Subtitles readFrom(Class<Subtitles> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
-        return Subtitles.builder()
+        return read(entityStream, format);
+    }
+
+    protected static Subtitles read(InputStream entityStream, SubtitlesFormat format) {
+         return Subtitles.builder()
             .value(entityStream)
             .format(format)
             .build();
