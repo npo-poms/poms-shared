@@ -160,10 +160,12 @@ public class SubtitlesUtil {
         final AtomicInteger cueNumber = new AtomicInteger(0);
         return cues
             .peek((cue) -> {
-                if (cue.getSequence() == null) {
-                    cue.sequence = cueNumber.incrementAndGet();
-                } else {
-                    cueNumber.set(cue.getSequence());
+                if (cue != null) {
+                    if (cue.getSequence() == null) {
+                        cue.sequence = cueNumber.incrementAndGet();
+                    } else {
+                        cueNumber.set(cue.getSequence());
+                    }
                 }
                 }
             );
