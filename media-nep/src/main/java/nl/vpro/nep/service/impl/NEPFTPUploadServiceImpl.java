@@ -81,7 +81,9 @@ public class NEPFTPUploadServiceImpl implements NEPFTPUploadService {
             out.write(buffer, 0, n);
             numberofBytes += n;
             if (numberofBytes % infoBatch == 0) {
-                logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+                // updating spans in ngToast doesn't work...
+                //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+                log.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
             } else {
                 if (log.isDebugEnabled()) {
                     log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
