@@ -9,43 +9,56 @@ import javax.xml.bind.annotation.XmlEnum;
 import org.apache.commons.lang3.StringUtils;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
+import nl.vpro.domain.Displayable;
+
 @XmlEnum
-public enum Region {
+public enum Region implements Displayable {
 
 
     @XmlDocumentation("Means that this object can only be played in the Netherlands")
-    NL,
+    NL("Nederland"),
 
     /**
      * @deprecated Not supported by VMV
      */
     @Deprecated
     @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not support by the NPO player)")
-    BENELUX,
+    BENELUX("Benelux"),
 
     /**
      * @since 5.6
      */
     @XmlDocumentation("Means that this object can only be played in Europe")
-    EUROPE,
+    EUROPE("Europa"),
 
     /**
      * @since 5.6
      */
     @XmlDocumentation("Nederland plus BES gemeentes")
-    NLBES,
+    NLBES("Nederland en de BES-gemeenten"),
 
      /**
      * @since 5.6
      */
-    @XmlDocumentation("Nederland plus BES gemeentes plus Curacao, St. Maarten en Aruba")
-    NLALL,
+    @XmlDocumentation("Nederland plus BES gemeentes plus Curaçao, St. Maarten en Aruba")
+    NLALL("Nederland, de BES-gemeenten, Curaçao, St. Maarten en Aruba"),
 
     /**
      * @since 5.6
      */
-    @XmlDocumentation("incl. BES gemeentes, Curacao, St. Maarten en Aruba")
-    EU;
+    @XmlDocumentation("European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba")
+    EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba");
+
+    private final String displayName;
+
+    Region(String displayName) {
+        this.displayName = displayName;
+    }
+
+    @Override
+    public String getDisplayName() {
+        return displayName;
+    }
 
     public static Region valueOfOrNull(String v) {
         if (StringUtils.isEmpty(v)) {
