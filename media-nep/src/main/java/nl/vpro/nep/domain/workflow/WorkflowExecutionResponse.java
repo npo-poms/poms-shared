@@ -1,14 +1,25 @@
 package nl.vpro.nep.domain.workflow;
 
-import lombok.Builder;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.List;
 
+
+/**
+ * @since 5.6
+ */
 @Getter
-@Builder
+@lombok.Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class WorkflowExecutionResponse implements Serializable {
 
-    List<WorkflowExecution> workflowExecutions;
+    private List<WorkflowExecution> workflowExecutions;
+
+
+    public WorkflowExecutionResponse() {
+
+    }
 }
