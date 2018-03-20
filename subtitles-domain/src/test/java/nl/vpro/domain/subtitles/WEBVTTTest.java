@@ -59,7 +59,12 @@ public class WEBVTTTest {
     @Test
     public void toWEBVTT2Ar() throws IOException {
         StringWriter writer = new StringWriter();
-        WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitlesAr(), false, false).limit(3).collect(Collectors.toList()).iterator(), writer);
+        Subtitles subtitlesAr = getSubtitlesAr();
+        assertThat(subtitlesAr.getCueCount()).isEqualTo(430);
+        WEBVTTandSRT.formatWEBVTT(SubtitlesUtil.standaloneStream(getSubtitlesAr(), false, false)
+            .limit(3)
+            .collect(Collectors.toList())
+            .iterator(), writer);
         assertThat(writer.toString()).isEqualTo(
             "WEBVTT\n" +
                 "\n" +
