@@ -3,6 +3,7 @@ package nl.vpro.domain.subtitles;
 import java.io.*;
 import java.time.Duration;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
@@ -33,6 +34,10 @@ public class SubtitlesUtilTest {
     protected static Subtitles getSubtitles() throws IOException {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/PRID_VPRO_1140017.txt");
         return SubtitlesUtil.tt888("VPRO_1140017", Duration.ofMinutes(2), DUTCH, example);
+    }
+    protected static Subtitles getSubtitlesAr() throws IOException {
+        InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POMS_VPRO_4981202.vtt");
+        return SubtitlesUtil.vtt("POMS_VPRO_4981202", Duration.ofMinutes(2), new Locale("ar"), example);
     }
 
     @Test
