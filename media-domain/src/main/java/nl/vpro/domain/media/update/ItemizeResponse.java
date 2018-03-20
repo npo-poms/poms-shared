@@ -2,8 +2,10 @@ package nl.vpro.domain.media.update;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Singular;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -27,7 +29,9 @@ public class ItemizeResponse {
     @XmlAttribute
     private boolean success;
 
-    private URI result;
+    @Singular
+    @XmlElement(name = "result")
+    private List<URI> results;
 
     private Integer id;
 
