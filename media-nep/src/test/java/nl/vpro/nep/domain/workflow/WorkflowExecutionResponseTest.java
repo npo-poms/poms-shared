@@ -12,7 +12,7 @@ import nl.vpro.util.DateUtils;
 public class WorkflowExecutionResponseTest {
 
     @Test
-    public void ingestJobToXml() throws Exception {
+    public void json() throws Exception {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
         WorkflowExecution workflowExecution = WorkflowExecution.builder()
