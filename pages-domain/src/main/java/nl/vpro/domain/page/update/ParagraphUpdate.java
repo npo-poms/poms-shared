@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.page.update;
 
+import java.io.Serializable;
+
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,7 +21,7 @@ import nl.vpro.validation.NoHtml;
  */
 @XmlType(name = "paragraphUpdateType", propOrder = {"title", "body", "image"})
 @XmlAccessorType(XmlAccessType.NONE)
-public class ParagraphUpdate {
+public class ParagraphUpdate implements Serializable {
 
     @NoHtml
     private String title;
