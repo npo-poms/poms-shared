@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.page.update;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,7 +18,7 @@ import nl.vpro.validation.URI;
 @XmlType(name = "imageLocationType", propOrder = {
     "url"
 })
-public final class ImageLocation {
+public final class ImageLocation implements Serializable{
 
     @XmlElement
     @NotNull(message = "provide image location")
