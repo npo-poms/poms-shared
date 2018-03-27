@@ -6,6 +6,8 @@ package nl.vpro.domain.page.update;
 
 import lombok.Builder;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,7 +22,7 @@ import nl.vpro.validation.NoHtml;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "embedUpdateType")
 @Builder
-public class EmbedUpdate {
+public class EmbedUpdate implements Serializable {
 
     @NotNull
     @XmlAttribute

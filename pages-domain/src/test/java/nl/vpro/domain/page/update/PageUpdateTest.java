@@ -1,5 +1,6 @@
 package nl.vpro.domain.page.update;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collections;
 
@@ -17,6 +18,7 @@ import nl.vpro.domain.page.Section;
 import nl.vpro.domain.user.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import nl.vpro.test.util.serialize.SerializeTestUtil;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.mockito.Mockito.when;
@@ -102,4 +104,19 @@ public class PageUpdateTest {
 
     }
 
+    @Test
+
+    public void serialize() throws IOException {
+         PageUpdate page = PageUpdateBuilder
+            .article("http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html")
+            .portal(PortalUpdate
+                .builder()
+                .id("3voor12")
+                .url("http://3voor12-beta-test.vpro.nl/")
+                .section(Section.builder().displayName("display").path("/bla").build()).build())
+             .links(LinkUpdate.of("http://www.vpro.nl"))
+             .images(ImageUpdate.builder().build())
+            .build();
+        SerializeTestUtil.roundTripAndEquals(page);
+    }
 }

@@ -7,6 +7,8 @@ package nl.vpro.domain.page.update;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -34,7 +36,7 @@ import nl.vpro.validation.WarningValidatorGroup;
 @lombok.Builder(builderClassName = "Builder")
 @AllArgsConstructor
 @Data
-public class ImageUpdate {
+public class ImageUpdate implements Serializable{
 
     @XmlAttribute(required = true)
     @NotNull
