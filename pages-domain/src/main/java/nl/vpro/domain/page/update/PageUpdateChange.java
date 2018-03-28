@@ -1,5 +1,6 @@
 package nl.vpro.domain.page.update;
 
+import java.io.Serializable;
 import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
@@ -14,7 +15,7 @@ import nl.vpro.domain.Change;
 @XmlType(name = "changeType")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso(PageUpdate.class)
-public class PageUpdateChange extends Change<PageUpdate> {
+public class PageUpdateChange extends Change<PageUpdate> implements Serializable {
 
     public PageUpdateChange() {
         super();

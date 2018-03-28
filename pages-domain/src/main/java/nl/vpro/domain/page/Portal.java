@@ -3,6 +3,8 @@ package nl.vpro.domain.page;
 
 import lombok.Builder;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
@@ -27,7 +29,7 @@ import nl.vpro.validation.URI;
         "section"
     }
 )
-public class Portal implements Displayable {
+public class Portal implements Displayable, Serializable {
 
     @NotNull
     @URI
