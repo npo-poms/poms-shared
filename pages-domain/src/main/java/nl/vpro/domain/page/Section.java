@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.Unmarshaller;
@@ -26,7 +28,7 @@ import nl.vpro.validation.PathSegment;
 @JsonPropertyOrder({"path", "id", "value"})
 @AllArgsConstructor
 @Builder
-public class Section implements Displayable {
+public class Section implements Displayable, Serializable {
 
     @NotNull
     @PathSegment
