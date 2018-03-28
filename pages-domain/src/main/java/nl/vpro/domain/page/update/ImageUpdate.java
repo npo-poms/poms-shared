@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -15,8 +16,8 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.support.License;
 import nl.vpro.domain.page.Image;
+import nl.vpro.domain.support.License;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.URI;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -139,11 +140,11 @@ public class ImageUpdate implements Serializable{
 
         ImageUpdate that = (ImageUpdate)o;
 
-        return image.equals(that.image);
+        return Objects.equals(image, that.image);
     }
 
     @Override
     public int hashCode() {
-        return image.hashCode();
+        return Objects.hashCode(image);
     }
 }
