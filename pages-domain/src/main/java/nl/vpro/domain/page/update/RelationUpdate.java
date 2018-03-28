@@ -1,5 +1,7 @@
 package nl.vpro.domain.page.update;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.page.Relation;
@@ -14,7 +16,7 @@ import nl.vpro.domain.user.Broadcaster;
         "text"
     })
 @ValidRelation
-public class RelationUpdate implements Comparable<RelationUpdate> {
+public class RelationUpdate implements Comparable<RelationUpdate>, Serializable {
 
     @XmlAttribute(required = true)
     private String type;

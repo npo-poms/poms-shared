@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.page.update;
 
+import java.io.Serializable;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -20,7 +22,7 @@ import nl.vpro.validation.URI;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "linkUpdateType")
-public class LinkUpdate {
+public class LinkUpdate implements Serializable{
 
     @NotNull
     @URI
