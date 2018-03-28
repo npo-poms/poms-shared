@@ -7,6 +7,7 @@ package nl.vpro.domain.page.update;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pageUpdateType")
 @XmlRootElement(name = "page")
-public class PageUpdate {
+public class PageUpdate implements Serializable {
 
 
     public static PageUpdateBuilder builder() {

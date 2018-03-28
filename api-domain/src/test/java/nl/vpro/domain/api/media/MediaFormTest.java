@@ -330,6 +330,17 @@ public class MediaFormTest {
 
     }
 
+    @Test
+    public void testForm() throws IOException {
+        MediaForm form = MediaForm.builder()
+            .types(Match.MUST, TextMatcher.not("BROADCAST"))
+            .fuzzyText("wie is de mol")
+            .build();
+
+        Jackson2Mapper.getPrettyInstance().writeValue(System.out, form);
+
+    }
+
     private static String LUNATIC_BACKWARD_COMPATIBLE = "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
         "    <api:searches>\n" +
         "        <api:durations match=\"MUST\">\n" +
