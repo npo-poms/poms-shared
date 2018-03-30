@@ -159,40 +159,44 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         }
 
         return Workflow.PUBLISHED == workflow && isRevocable();
-
     }
 
+    /**
+     * Wether this object should be  publicly visible in the API.
+     *
+     * This <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
+     * and otherwise it depends on {@link #inPublicationWindow(Instant)}
+     */
     public boolean isPublishable() {
-        if(Workflow.MERGED.equals(workflow)) {
-            return true;
+        if(isMerged() ||
+            Workflow.FOR_DELETION == workflow ||
+            Workflow.PARENT_REVOKED == workflow || // The parent is revoked so this object itself is not publishable either
+            Workflow.DELETED == workflow) {
+            // These kind of objects are explicely not publishable.
+            return false;
         }
 
         if(Workflow.FOR_PUBLICATION.equals(workflow)
             || Workflow.FOR_REPUBLICATION.equals(workflow)
             || Workflow.PUBLISHED.equals(workflow)
-            || Workflow.PARENT_REVOKED.equals(workflow)
             || Workflow.REVOKED.equals(workflow)) {
 
             return inPublicationWindow(Instant.now());
         }
 
+
         return false;
     }
 
     public boolean isRevocable() {
-        if(Workflow.FOR_DELETION == workflow
-            || Workflow.PARENT_REVOKED == workflow
-            || Workflow.DELETED == workflow
-            ) {
-            return true;
-        } else if(Workflow.PUBLISHED == workflow
-            || Workflow.FOR_REPUBLICATION == workflow
-            || Workflow.FOR_PUBLICATION == workflow
-            || Workflow.REVOKED == workflow) {
+        return ! isPublishable();
+    }
 
-            return !inPublicationWindow(Instant.now());
-        }
-
+    /**
+     * If the sub class supports being merged, this can be overriden.
+     *
+     */
+    public  boolean isMerged() {
         return false;
     }
 
