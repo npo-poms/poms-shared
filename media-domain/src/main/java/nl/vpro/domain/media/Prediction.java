@@ -51,6 +51,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlEnum
     @XmlType(name = "predictionStateEnum")
     public enum State implements Displayable {
+        VIRTUAL(""),
         ANNOUNCED("Aangekondigd"),
         REALIZED("Gerealiseerd"),
         REVOKED("Teruggetrokken");
@@ -149,12 +150,19 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
 
     @lombok.Builder
-    private Prediction(Platform platform, Instant publishStart, Instant publishStop, boolean plannedAvailability, Authority authority) {
+    private Prediction(
+        Platform platform,
+        Instant publishStart,
+        Instant publishStop,
+        boolean plannedAvailability,
+        Authority authority,
+        State state) {
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
         this.plannedAvailability = plannedAvailability;
         this.authority = authority == null ? Authority.USER : authority;
+        this.state = state == null ? State.ANNOUNCED : state;
     }
 
     public Prediction(Prediction source) {
@@ -186,6 +194,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             .plannedAvailability(false)
             .platform(platform)
             .authority(authority)
+            .build();
+    }
+    public static Prediction virtual(Platform platform, Authority authority) {
+        return Prediction.builder()
+            .plannedAvailability(false)
+            .platform(platform)
+            .authority(authority)
+            .state(State.VIRTUAL)
             .build();
     }
 
