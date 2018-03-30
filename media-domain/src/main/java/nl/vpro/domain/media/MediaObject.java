@@ -2442,6 +2442,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
     }
 
+    @Override
     public boolean isMerged() {
         return mergedTo != null || mergedToRef != null;
     }
