@@ -39,13 +39,13 @@ public class GeoRestrictionTheoryTest extends ObjectTest<GeoRestriction> {
     public static GeoRestriction nl = new GeoRestriction(Region.NL, Instant.ofEpochMilli(3), Instant.ofEpochMilli(3));
 
     @Test
-    public void testEquals() throws Exception {
+    public void testEquals() {
         assertThat(new GeoRestriction(Region.BENELUX)).isEqualTo(new GeoRestriction(Region.BENELUX));
         assertThat(GeoRestriction.builder().region(Region.BENELUX).platform(Platform.PLUSVOD).build()).isEqualTo(GeoRestriction.builder().region(Region.BENELUX).platform(Platform.PLUSVOD).build());
     }
 
     @Test
-    public void testEqualsOnTime() throws Exception {
+    public void testEqualsOnTime() {
         assertThat(new GeoRestriction(Region.BENELUX)).isNotEqualTo(new GeoRestriction(Region.BENELUX, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2)));
     }
 }
