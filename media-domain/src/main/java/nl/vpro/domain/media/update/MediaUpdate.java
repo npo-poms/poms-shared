@@ -125,7 +125,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         }
         created.predictions = object.getPredictions()
             .stream()
-            .filter(Prediction::isAvailable)
+            .filter(Prediction::isPlannedAvailability)
             .map(PredictionUpdate::of)
             .collect(Collectors.toSet());
         return created;
@@ -226,7 +226,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder) {
         this(builder, OwnerType.BROADCASTER);
-        predictions = builder.build().getPredictions().stream().filter(Prediction::isAvailable).map(PredictionUpdate::of).collect(Collectors.toSet());
+        predictions = builder.build().getPredictions().stream().filter(Prediction::isPlannedAvailability).map(PredictionUpdate::of).collect(Collectors.toSet());
 
     }
 
