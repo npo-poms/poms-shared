@@ -291,16 +291,16 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     @XmlAttribute
     public Integer getCueCount() {
         if (cueCount == null) {
+            int result = 0;
             try {
                 Iterator<Cue> cues = SubtitlesUtil.parse(this, false).iterator();
-                int result = 0;
                 while (cues.hasNext()) {
                     cues.next();
                     result++;
                 }
                 cueCount = result;
             } catch (Exception e) {
-                log.warn(e.getMessage());
+                log.warn("At cue {}: {}: {}", result, e.getClass(), e.getMessage());
                 cueCount = 0;
             }
         }
