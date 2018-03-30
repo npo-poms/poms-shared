@@ -299,7 +299,7 @@ public class MediaObjectXmlSchemaTest {
         Prediction unavailable = new Prediction(Platform.TVVOD);
         unavailable.setState(Prediction.State.REVOKED);
         unavailable.setIssueDate(Instant.EPOCH);
-        unavailable.setAvailable(false);
+        unavailable.setPlannedAvailability(false);
 
         program.getPredictions().add(prediction);
         program.getPredictions().add(unavailable);
