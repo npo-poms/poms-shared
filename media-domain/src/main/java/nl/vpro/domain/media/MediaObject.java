@@ -1880,7 +1880,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected List<Prediction> getPredictionsForXml() {
         if (predictionsForXml == null) {
             predictionsForXml = getPredictions().stream()
-                .filter(Prediction::isAvailable)
+                .filter(Prediction::isPlannedAvailability)
                 .collect(Collectors.toList());
         }
         return predictionsForXml;

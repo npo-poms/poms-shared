@@ -291,9 +291,9 @@ public class MediaObjectsTest {
     @Test
     public void testGetPlatformNamesInLowerCaseNotAvailable() {
         Prediction p1 = new Prediction(Platform.PLUSVOD);
-        p1.setAvailable(false);
+        p1.setPlannedAvailability(false);
         Prediction p2 = new Prediction(Platform.INTERNETVOD);
-        p2.setAvailable(false);
+        p2.setPlannedAvailability(false);
         Prediction p3 = new Prediction(Platform.NPOPLUSVOD);
         Collection<Prediction> predictions = new ArrayList<>();
         predictions.add(p1);
