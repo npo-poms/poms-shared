@@ -704,8 +704,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testWithPredictionsViaBuilder() throws IOException, SAXException {
         ProgramUpdate update = ProgramUpdate.create(MediaBuilder.program()
             .predictions(
-                Prediction.builder().platform(Platform.INTERNETVOD).available(false).build(),
-                Prediction.builder().platform(Platform.TVVOD).available(true).build()
+                Prediction.builder().platform(Platform.INTERNETVOD).plannedAvailability(false).build(),
+                Prediction.builder().platform(Platform.TVVOD).plannedAvailability(true).build()
             ));
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
