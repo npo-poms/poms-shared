@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Child;
+import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Embargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -49,10 +50,17 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @XmlEnum
     @XmlType(name = "predictionStateEnum")
-    public enum State {
-        ANNOUNCED,
-        REALIZED,
-        REVOKED
+    public enum State implements Displayable {
+        ANNOUNCED("Aangekondigd"),
+        REALIZED("Gerealiseerd"),
+        REVOKED("Teruggetrokken");
+
+        @Getter
+        private final String displayName;
+
+        State(String displayName) {
+            this.displayName = displayName;
+        }
     }
 
     @Id
