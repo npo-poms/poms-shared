@@ -123,7 +123,8 @@ public enum Workflow implements Displayable {
     public static final List<Workflow> REVOKES = asList(
         FOR_DELETION,
         DELETED,
-        REVOKED, MERGED
+        REVOKED,
+        MERGED
     );
 
     public static final List<Workflow> NEEDWORK = asList(
@@ -133,7 +134,8 @@ public enum Workflow implements Displayable {
     );
 
     public static final List<Workflow> DEPRECATED = asList(
-        DRAFT, REFUSED
+        DRAFT,
+        REFUSED
     );
 
     private final String description;
