@@ -162,9 +162,16 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
     }
 
+    /**
+     * Wether this object should be  publicly visible in the API.
+     *
+     * This <code>false</code> if the workflow explictely indicates that 'DELETED', 'MERGED',
+     * and otherwise it depends on {@link #inPublicationWindow(Instant)}
+     */
     public boolean isPublishable() {
-        if(Workflow.MERGED.equals(workflow)) {
-            return true;
+        if(Workflow.MERGED == workflow ||
+            Workflow.DELETED == workflow) {
+            return false;
         }
 
         if(Workflow.FOR_PUBLICATION.equals(workflow)
