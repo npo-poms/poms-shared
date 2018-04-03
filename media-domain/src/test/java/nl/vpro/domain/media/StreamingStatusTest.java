@@ -8,7 +8,6 @@ import javax.xml.bind.JAXB;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +18,7 @@ public class StreamingStatusTest {
     @Test
     public void unmarshal() {
         String xml =
-            "<streamingstatus status=\"NOT_AVAILABLE\"/>";
+            "<streamingstatus withDrm=\"ONLINE\"/>";
 
         StringReader reader = new StringReader(xml);
 
@@ -36,7 +35,7 @@ public class StreamingStatusTest {
         status.setWithDrm(StreamingStatus.Value.ONLINE);
 
         JAXBTestUtil.roundTripAndSimilar(status,
-            "<streamingstatus status=\"NOT_AVAILABLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");
+            "<streamingStatus withDrm=\"ONLINE\" withoutDrm=\"UNSET\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");
     }
 
 
