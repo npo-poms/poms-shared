@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.zip.CRC32;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -117,12 +118,7 @@ public class StreamingStatus implements Serializable, Displayable  {
         return withoutDrm == that.withoutDrm;
     }
 
-    @Override
-    public int hashCode() {
-        int result = withDrm != null ? withDrm.hashCode() : 0;
-        result = 31 * result + (withoutDrm != null ? withoutDrm.hashCode() : 0);
-        return result;
-    }
+
 
 
     @Override
@@ -150,6 +146,19 @@ public class StreamingStatus implements Serializable, Displayable  {
     @Override
     public String toString() {
         return withDrm + "_"+ withoutDrm;
+    }
 
+    protected void calcCRC32(CRC32 result) {
+         if (getWithDrm() != null) {
+             result.update(getWithDrm().ordinal());
+         } else {
+             result.update(0);
+
+         }
+        if (getWithoutDrm() != null) {
+            result.update(getWithoutDrm().ordinal());
+        } else {
+            result.update(0);
+        }
     }
 }
