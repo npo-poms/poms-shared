@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.support;
+package nl.vpro.domain.media;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import nl.vpro.domain.media.Encryption;
+import nl.vpro.domain.Displayable;
 
 /**
  * @author Michiel Meeuwissen
@@ -25,7 +25,7 @@ import nl.vpro.domain.media.Encryption;
 @Embeddable
 @XmlRootElement(name="streamingStatus")
 @XmlAccessorType(XmlAccessType.NONE)
-public class StreamingStatus implements Serializable{
+public class StreamingStatus implements Serializable, Displayable  {
 
 
     public enum Value {
@@ -36,15 +36,15 @@ public class StreamingStatus implements Serializable{
 
     @Getter @Setter
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column(name="streamingplatformstatus_withdrm")
     @XmlAttribute
-    Value withDrm;
+    Value withDrm = Value.UNSET;
 
     @Getter @Setter
     @Enumerated(EnumType.STRING)
-    @Column
+    @Column(name="streamingplatformstatus_withoutdrm")
     @XmlAttribute
-    Value withoutDrm;
+    Value withoutDrm = Value.UNSET;
 
     public StreamingStatus() {
     }
@@ -65,9 +65,14 @@ public class StreamingStatus implements Serializable{
         return new StreamingStatus(Value.OFFLINE, Value.OFFLINE);
     }
 
-     public static List<StreamingStatus> availableStatuses() {
+    public static List<StreamingStatus> availableStatuses() {
         return Arrays.asList(withDrm(), withoutDrm(), withAndWithoutDrm());
     }
+
+      public static List<StreamingStatus> notAvailableStatuses() {
+          return Arrays.asList(unset(), offline());
+    }
+
 
 
     public StreamingStatus(Value withDrm, Value withoutDrm) {
@@ -120,5 +125,18 @@ public class StreamingStatus implements Serializable{
         int result = withDrm != null ? withDrm.hashCode() : 0;
         result = 31 * result + (withoutDrm != null ? withoutDrm.hashCode() : 0);
         return result;
+    }
+
+
+    @Override
+    public String getDisplayName() {
+        return isAvailable() ? "Beschikbaar drm: " + withDrm + "without drm" + withoutDrm  : "Niet beschikbaar";
+
+    }
+
+    @Override
+    public String toString() {
+        return withDrm + "_"+ withoutDrm;
+
     }
 }
