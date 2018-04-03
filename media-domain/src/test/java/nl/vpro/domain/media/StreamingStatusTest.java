@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.support;
+package nl.vpro.domain.media;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -8,6 +8,7 @@ import javax.xml.bind.JAXB;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
