@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.StreamingStatus;
+import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;

@@ -25,7 +25,6 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaListItem;
 import nl.vpro.domain.media.search.MediaSearchResult;
-import nl.vpro.domain.media.support.StreamingStatus;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;

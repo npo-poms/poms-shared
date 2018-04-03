@@ -574,7 +574,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     private List<AvailableSubtitles> availableSubtitles = null;
 
 
-    @Embedded
+    @Embedded()
     @XmlTransient
     @Setter(AccessLevel.PACKAGE)
     @Getter(AccessLevel.PACKAGE)
