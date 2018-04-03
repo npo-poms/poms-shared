@@ -8,12 +8,12 @@ import javax.xml.bind.JAXB;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import nl.vpro.domain.media.StreamingPlatformStatus;
+import nl.vpro.domain.media.support.StreamingStatus;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StreamingPlatformStatusTest {
+public class StreamingStatusReportTest {
 
 
     @Test
@@ -23,17 +23,17 @@ public class StreamingPlatformStatusTest {
 
         StringReader reader = new StringReader(xml);
 
-        StreamingPlatformStatus status = JAXB.unmarshal(reader, StreamingPlatformStatus.class);
+        StreamingStatusReport status = JAXB.unmarshal(reader, StreamingStatusReport.class);
 
-        assertThat(status.getStatus()).isEqualTo("NOT_AVAILABLE");
+        assertThat(status.getStatus()).isEqualTo(StreamingStatus.NOT_AVAILABLE);
 
     }
 
 
     @Test
     public void testMarshalToXml() throws IOException, SAXException {
-        StreamingPlatformStatus status = new StreamingPlatformStatus();
-        status.setStatus("NOT_AVAILABLE");
+        StreamingStatusReport status = new StreamingStatusReport();
+        status.setStatus(StreamingStatus.NOT_AVAILABLE);
 
         JAXBTestUtil.roundTripAndSimilar(status,
             "<streamingstatus status=\"NOT_AVAILABLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");

@@ -17,6 +17,8 @@
 
   <xs:element name="segment" type="segmentType"/>
 
+  <xs:element name="streamingStatus" type="streamingStatusReport"/>
+
   <xs:complexType name="programType">
     <xs:complexContent>
       <xs:extension base="baseMediaType">
@@ -457,6 +459,11 @@
     </xs:sequence>
   </xs:complexType>
 
+  <xs:complexType name="streamingStatusReport">
+    <xs:sequence/>
+    <xs:attribute name="status" type="streamingStatus"/>
+  </xs:complexType>
+
   <xs:simpleType name="mediaTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="MEDIA"/>
@@ -612,6 +619,7 @@
 
   <xs:simpleType name="predictionStateEnum">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="VIRTUAL"/>
       <xs:enumeration value="ANNOUNCED"/>
       <xs:enumeration value="REALIZED"/>
       <xs:enumeration value="REVOKED"/>
@@ -928,6 +936,14 @@
       <xs:enumeration value="OFFLINE"/>
       <xs:enumeration value="AVAILABLE"/>
       <xs:enumeration value="AVAILABLE_WITH_DRM"/>
+      <xs:enumeration value="AVAILABLE_WITH_AND_WITHOUT_DRM"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="encryption">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NONE"/>
+      <xs:enumeration value="DRM"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
