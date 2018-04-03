@@ -33,7 +33,10 @@ public enum StreamingStatus implements Displayable {
     /**
      * Explicitely notified by NEP to be online with DRM
      */
-    AVAILABLE_WITH_DRM(true, true, "beschikbaar met DRM");
+    AVAILABLE_WITH_DRM(true, true, "beschikbaar met DRM"),
+
+    AVAILABLE_WITH_AND_WITHOUT_DRM(true, true, "beschikbaar met en zonder DRM");
+
 
 
     private final Boolean drm;
@@ -48,8 +51,29 @@ public enum StreamingStatus implements Displayable {
         this.displayName = displayName;
     }
 
-    public static StreamingStatus available(boolean drm) {
-        return drm ? StreamingStatus.AVAILABLE_WITH_DRM : StreamingStatus.AVAILABLE;
+    public static StreamingStatus available(boolean drm, StreamingStatus existing) {
+        if (drm) {
+            switch (existing) {
+                case OFFLINE:
+                case NOT_AVAILABLE:
+                case AVAILABLE_WITH_DRM:
+                    return AVAILABLE_WITH_DRM;
+                case AVAILABLE:
+                case AVAILABLE_WITH_AND_WITHOUT_DRM:
+                    return AVAILABLE_WITH_AND_WITHOUT_DRM;
+            }
+        } else {
+            switch (existing) {
+                case OFFLINE:
+                case NOT_AVAILABLE:
+                case AVAILABLE:
+                    return AVAILABLE;
+                case AVAILABLE_WITH_DRM:
+                case AVAILABLE_WITH_AND_WITHOUT_DRM:
+                    return AVAILABLE_WITH_AND_WITHOUT_DRM;
+            }
+        }
+        throw new IllegalStateException();
     }
 
     public static Collection<StreamingStatus> availableStatuses() {
