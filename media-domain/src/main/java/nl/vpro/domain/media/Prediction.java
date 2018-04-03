@@ -117,9 +117,10 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     protected MediaObject mediaObject;
 
-    //@Column
-    @Transient
+    @Column
     @XmlTransient
+    @Getter
+    @Setter
     protected Boolean drm;
 
     public Prediction() {
