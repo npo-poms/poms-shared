@@ -64,19 +64,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         }
     }
 
-    public enum Encryption implements  Displayable {
-        NONE("Geen"),
-        DRM("DRM"),
-        UNDETERMINED("Onbepaald");
-
-        @Getter
-        private final String displayName;
-
-        Encryption(String displayName) {
-            this.displayName = displayName;
-        }
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient
