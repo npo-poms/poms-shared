@@ -50,7 +50,7 @@
     </xs:annotation>
   </xs:element>
 
-  <xs:element name="streamingStatus" type="streamingStatusReport"/>
+    <xs:element name="streamingStatus" type="streamingStatus"/>
 
 
   <xs:complexType name="mediaTableType">
@@ -2863,22 +2863,20 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="streamingStatus">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NOT_AVAILABLE"/>
-      <xs:enumeration value="OFFLINE"/>
-      <xs:enumeration value="AVAILABLE"/>
-      <xs:enumeration value="AVAILABLE_WITH_DRM"/>
-      <xs:enumeration value="AVAILABLE_WITH_AND_WITHOUT_DRM"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-
-  <xs:complexType name="streamingStatusReport">
+   <xs:complexType name="streamingStatus">
     <xs:sequence/>
-    <xs:attribute name="status" type="streamingStatus"/>
+    <xs:attribute name="withDrm" type="streamingStatusValue"/>
+    <xs:attribute name="withoutDrm" type="streamingStatusValue"/>
   </xs:complexType>
 
+
+  <xs:simpleType name="streamingStatusValue">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OFFLINE"/>
+      <xs:enumeration value="ONLINE"/>
+      <xs:enumeration value="UNSET"/>
+    </xs:restriction>
+  </xs:simpleType>
 
   <xs:simpleType name="encryption">
     <xs:restriction base="xs:string">
