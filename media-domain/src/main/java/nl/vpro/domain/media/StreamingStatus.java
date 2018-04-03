@@ -127,7 +127,23 @@ public class StreamingStatus implements Serializable, Displayable  {
 
     @Override
     public String getDisplayName() {
-        return isAvailable() ? "Beschikbaar drm: " + withDrm + "without drm" + withoutDrm  : "Niet beschikbaar";
+        StringBuilder builder = new StringBuilder();
+        if (isAvailable()) {
+            String connector = " ";
+            builder.append("Beschikbaar");
+            if (hasDrm()) {
+                builder.append(connector).append("met DRM");
+                connector = " en ";
+            }
+             if (hasWithoutDrm()) {
+                builder.append(connector).append("zonder DRM");
+                connector = " en ";
+            }
+        } else {
+            builder.append("Niet beschikbaar");
+        }
+        return builder.toString();
+
 
     }
 
