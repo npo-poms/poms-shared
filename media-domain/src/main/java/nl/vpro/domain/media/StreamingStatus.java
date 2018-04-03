@@ -11,10 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Displayable;
 
@@ -27,7 +24,7 @@ import nl.vpro.domain.Displayable;
 @XmlAccessorType(XmlAccessType.NONE)
 public class StreamingStatus implements Serializable, Displayable  {
 
-
+    @XmlType(name = "streamingStatusValue")
     public enum Value {
         OFFLINE,
         ONLINE,
