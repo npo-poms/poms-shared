@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 import nl.vpro.domain.Displayable;
+import nl.vpro.domain.media.Encryption;
 
 /**
  * @author Michiel Meeuwissen
@@ -68,6 +69,12 @@ public enum StreamingStatus implements Displayable {
 
     public boolean isAvailable() {
         return available;
+    }
+
+    public boolean matches(Encryption encryption) {
+        return encryption == null ||
+            (encryption == Encryption.DRM && hasDrm()) ||
+            (encryption == Encryption.NONE && ! hasDrm());
     }
 
 }
