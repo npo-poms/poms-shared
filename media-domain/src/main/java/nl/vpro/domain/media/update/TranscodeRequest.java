@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Displayable;
+import nl.vpro.domain.media.Encryption;
 
 /**
  * @author Michiel Meeuwissen
@@ -40,18 +41,6 @@ public class TranscodeRequest {
 
     }
 
-    @XmlType(name = "encryptionType")
-    public enum Encryption implements  Displayable {
-        DRM("DRM"),
-        NONE("Geen");
-        @Getter
-        private final String displayName;
-
-
-        Encryption(String displayName) {
-            this.displayName = displayName;
-        }
-    }
     @XmlType(name = "priorityType")
     public enum Priority implements Displayable {
         LOW("Laag"),
