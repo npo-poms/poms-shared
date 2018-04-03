@@ -25,7 +25,7 @@ import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.StreamingStatus;
+import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.domain.user.Organization;
 
 @XmlAccessorType(XmlAccessType.FIELD)
