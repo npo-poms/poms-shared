@@ -1,104 +1,124 @@
 package nl.vpro.domain.media.support;
 
 import lombok.Getter;
+import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.List;
 
-import nl.vpro.domain.Displayable;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import nl.vpro.domain.media.Encryption;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public enum StreamingStatus implements Displayable {
-
-    /**
-     * Not notified by NEP
-     */
-    NOT_AVAILABLE(null, false, "niet beschikbaar"),
-
-    /**
-     * Explicitely notified by NEP to be offline
-     */
-    OFFLINE(null, false, "offline"),
-
-    /**
-     * Explicitely notified by NEP to be online
-     */
-    AVAILABLE(false, true, "beschikbaar"),
-
-    /**
-     * Explicitely notified by NEP to be online with DRM
-     */
-    AVAILABLE_WITH_DRM(true, true, "beschikbaar met DRM"),
-
-    AVAILABLE_WITH_AND_WITHOUT_DRM(true, true, "beschikbaar met en zonder DRM");
+@Embeddable
+@XmlRootElement(name="streamingStatus")
+@XmlAccessorType(XmlAccessType.NONE)
+public class StreamingStatus implements Serializable{
 
 
-
-    private final Boolean drm;
-    private final boolean available;
-    @Getter
-    private final String displayName;
-
-
-    StreamingStatus(Boolean drm, boolean available, String displayName) {
-        this.drm = drm;
-        this.available = available;
-        this.displayName = displayName;
+    public enum Value {
+        OFFLINE,
+        ONLINE,
+        UNSET
     }
 
-    public static StreamingStatus available(boolean drm, StreamingStatus existing) {
+    @Getter @Setter
+    @Enumerated(EnumType.STRING)
+    @Column
+    @XmlAttribute
+    Value withDrm;
+
+    @Getter @Setter
+    @Enumerated(EnumType.STRING)
+    @Column
+    @XmlAttribute
+    Value withoutDrm;
+
+    public StreamingStatus() {
+    }
+
+    public static StreamingStatus unset() {
+        return new StreamingStatus(Value.UNSET, Value.UNSET);
+    }
+    public static StreamingStatus withDrm() {
+        return new StreamingStatus(Value.ONLINE, Value.OFFLINE);
+    }
+    public static StreamingStatus withoutDrm() {
+        return new StreamingStatus(Value.OFFLINE, Value.ONLINE);
+    }
+    public static StreamingStatus withAndWithoutDrm() {
+        return new StreamingStatus(Value.ONLINE, Value.ONLINE);
+    }
+    public static StreamingStatus offline() {
+        return new StreamingStatus(Value.OFFLINE, Value.OFFLINE);
+    }
+
+     public static List<StreamingStatus> availableStatuses() {
+        return Arrays.asList(withDrm(), withoutDrm(), withAndWithoutDrm());
+    }
+
+
+    public StreamingStatus(Value withDrm, Value withoutDrm) {
+        this.withDrm = withDrm;
+        this.withoutDrm = withoutDrm;
+    }
+
+
+    public void set(boolean drm, Value value) {
         if (drm) {
-            switch (existing) {
-                case OFFLINE:
-                case NOT_AVAILABLE:
-                case AVAILABLE_WITH_DRM:
-                    return AVAILABLE_WITH_DRM;
-                case AVAILABLE:
-                case AVAILABLE_WITH_AND_WITHOUT_DRM:
-                    return AVAILABLE_WITH_AND_WITHOUT_DRM;
-            }
+            setWithDrm(value);
         } else {
-            switch (existing) {
-                case OFFLINE:
-                case NOT_AVAILABLE:
-                case AVAILABLE:
-                    return AVAILABLE;
-                case AVAILABLE_WITH_DRM:
-                case AVAILABLE_WITH_AND_WITHOUT_DRM:
-                    return AVAILABLE_WITH_AND_WITHOUT_DRM;
-            }
+            setWithoutDrm(value);
         }
-        throw new IllegalStateException();
     }
 
-    public static Collection<StreamingStatus> availableStatuses() {
-        return Arrays.stream(values())
-            .filter(StreamingStatus::isAvailable)
-            .collect(Collectors.toSet());
-    }
-
-
-    public static Collection<StreamingStatus> notAvailableStatuses() {
-        return Arrays.stream(values()).filter(s -> ! s.isAvailable()).collect(Collectors.toSet());
-    }
 
     public boolean hasDrm() {
-        return drm != null && drm;
+        return withoutDrm == Value.ONLINE;
+    }
+
+
+    public boolean hasWithoutDrm() {
+        return withoutDrm == Value.ONLINE;
     }
 
     public boolean isAvailable() {
-        return available;
+        return hasDrm() || hasWithoutDrm();
     }
 
     public boolean matches(Encryption encryption) {
         return encryption == null ||
             (encryption == Encryption.DRM && hasDrm()) ||
-            (encryption == Encryption.NONE && ! hasDrm());
+            (encryption == Encryption.NONE && hasWithoutDrm());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        StreamingStatus that = (StreamingStatus) o;
+
+        if (withDrm != that.withDrm) return false;
+        return withoutDrm == that.withoutDrm;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = withDrm != null ? withDrm.hashCode() : 0;
+        result = 31 * result + (withoutDrm != null ? withoutDrm.hashCode() : 0);
+        return result;
+    }
 }
