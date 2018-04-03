@@ -48,10 +48,18 @@ public abstract class AbstractSchemaController<M extends Function<String, File>>
         w.writeEndElement();
     }
 
-    protected void li_a(XMLStreamWriter w, String href, String chars) throws XMLStreamException {
+    protected void li_a(XMLStreamWriter w, String href, String chars, String after) throws XMLStreamException {
         w.writeStartElement("li");
         a(w, href, chars);
+        if (after != null) {
+            w.writeCharacters(after);
+        }
         w.writeEndElement();
+    }
+
+
+    protected void li_a(XMLStreamWriter w, String href, String chars) throws XMLStreamException {
+        li_a(w, href, chars, null);
     }
 
     protected void li(XMLStreamWriter w, String chars) throws XMLStreamException {
