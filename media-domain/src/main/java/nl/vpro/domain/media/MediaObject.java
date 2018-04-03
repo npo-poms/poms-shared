@@ -618,7 +618,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
-            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction, prediction.getDrm());
+            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction, prediction.getEncryption());
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getState());
         });
         source.getLocations().forEach(location -> this.addLocation(Location.copy(location, this)));

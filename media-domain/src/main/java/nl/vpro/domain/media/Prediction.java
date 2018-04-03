@@ -64,6 +64,19 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         }
     }
 
+    public enum Encryption implements  Displayable {
+        NONE("Geen"),
+        DRM("DRM"),
+        UNDETERMINED("Onbepaald");
+
+        @Getter
+        private final String displayName;
+
+        Encryption(String displayName) {
+            this.displayName = displayName;
+        }
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlTransient
@@ -121,7 +134,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     @Getter
     @Setter
-    protected Boolean drm;
+    protected Encryption encryption;
 
     public Prediction() {
     }
@@ -157,13 +170,16 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         Instant publishStop,
         boolean plannedAvailability,
         Authority authority,
-        State state) {
+        State state,
+        Encryption encryption) {
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
         this.plannedAvailability = plannedAvailability;
         this.authority = authority == null ? Authority.USER : authority;
         this.state = state == null ? State.ANNOUNCED : state;
+        this.encryption = encryption == null ? Encryption.UNDETERMINED : encryption;
+
     }
 
     public Prediction(Prediction source) {
@@ -176,6 +192,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.state = source.state;
         this.mediaObject = parent;
         this.plannedAvailability = source.plannedAvailability;
+        this.encryption = source.encryption;
     }
 
     public static Prediction copy(Prediction source){
