@@ -118,6 +118,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     protected MediaObject mediaObject;
 
     @Column
+    @Enumerated(EnumType.STRING)
     @XmlTransient
     @Getter
     @Setter
@@ -165,7 +166,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.plannedAvailability = plannedAvailability;
         this.authority = authority == null ? Authority.USER : authority;
         this.state = state == null ? State.ANNOUNCED : state;
-        this.encryption = encryption == null ? Encryption.UNDETERMINED : encryption;
+        this.encryption = encryption;
 
     }
 
