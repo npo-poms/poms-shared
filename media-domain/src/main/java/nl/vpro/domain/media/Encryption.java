@@ -6,21 +6,16 @@ import nl.vpro.domain.Displayable;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.6.1
  */
 public enum Encryption implements Displayable {
-    NONE("Geen", true),
-    DRM("DRM", true),
-    UNDETERMINED("Onbepaald", false);
+    NONE("Geen"),
+    DRM("DRM");
 
     @Getter
     private final String displayName;
 
-    @Getter
-    private final boolean inGui;
-
-    Encryption(String displayName, boolean inGui) {
+    Encryption(String displayName) {
         this.displayName = displayName;
-        this.inGui = inGui;
     }
 }
