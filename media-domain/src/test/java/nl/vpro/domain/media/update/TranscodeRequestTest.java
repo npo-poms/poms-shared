@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import nl.vpro.domain.media.Encryption;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 /**
@@ -18,7 +19,7 @@ public class TranscodeRequestTest {
     public void xml() throws IOException, SAXException {
         TranscodeRequest request = TranscodeRequest.builder()
             .mid("MID_123")
-            .encryption(TranscodeRequest.Encryption.DRM)
+            .encryption(Encryption.DRM)
             .priority(TranscodeRequest.Priority.NORMAL)
             .fileName("vpro/test.m4v")
             .build();
