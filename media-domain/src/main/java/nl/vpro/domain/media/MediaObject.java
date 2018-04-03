@@ -2735,7 +2735,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         CRC32 result = super.calcCRC32();
         // Some fields not appearing in XML, but which _are_ relevant changes
         if (streamingPlatformStatus != null) {
-            result.update(streamingPlatformStatus.hashCode());
+            streamingPlatformStatus.calcCRC32(result);
         }
         return result;
     }
