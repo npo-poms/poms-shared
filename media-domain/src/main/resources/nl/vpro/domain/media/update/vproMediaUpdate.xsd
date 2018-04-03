@@ -531,7 +531,7 @@
   <xs:complexType name="transcodeType">
     <xs:sequence>
       <xs:element name="fileName" type="xs:string"  form="qualified" minOccurs="0"/>
-      <xs:element name="encryption" type="encryptionType"  form="qualified" minOccurs="0"/>
+      <xs:element name="encryption" type="media:encryption"  form="qualified" minOccurs="0"/>
       <xs:element name="priority" type="priorityType"  form="qualified" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="mid" type="xs:string"/>
@@ -559,12 +559,6 @@
 
   </xs:complexType>
 
-    <xs:simpleType name="encryptionType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="DRM"/>
-      <xs:enumeration value="NONE"/>
-    </xs:restriction>
-  </xs:simpleType>
 
   <xs:simpleType name="priorityType">
     <xs:restriction base="xs:string">

@@ -72,6 +72,7 @@ public class SchemaTest {
             BulkUpdate.class,
             ImageUpdate.class,
             LocationUpdate.class,
+            StreamingStatusReport.class,
             //
             TranscodeRequest.class,
             TranscodeStatus.class,
