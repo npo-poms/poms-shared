@@ -489,9 +489,9 @@ public class MediaObjects {
         return prediction;
     }
 
-    public static Prediction updatePrediction(MediaObject media, Platform platform, ReadonlyEmbargo embargo, Boolean drm) {
+    public static Prediction updatePrediction(MediaObject media, Platform platform, ReadonlyEmbargo embargo, Prediction.Encryption drm) {
         Prediction prediction = media.findOrCreatePrediction(platform);
-        prediction.setDrm(drm);
+        prediction.setEncryption(drm);
         Embargos.copy(embargo, prediction);
         return prediction;
     }
