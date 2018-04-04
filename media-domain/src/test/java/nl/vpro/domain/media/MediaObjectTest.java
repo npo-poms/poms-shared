@@ -481,7 +481,7 @@ public class MediaObjectTest {
                 "</program>\n");
 
 
-        assertThat(program.getHash()).isEqualTo(3254147304L);
+        assertThat(program.getHash()).isEqualTo(2687135793L);
     }
 
 

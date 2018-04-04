@@ -117,6 +117,13 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     protected MediaObject mediaObject;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    @XmlTransient
+    @Getter
+    @Setter
+    protected Encryption encryption;
+
     public Prediction() {
     }
 
@@ -151,13 +158,16 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         Instant publishStop,
         boolean plannedAvailability,
         Authority authority,
-        State state) {
+        State state,
+        Encryption encryption) {
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
         this.available = available;
         this.authority = authority == null ? Authority.USER : authority;
         this.state = state == null ? State.ANNOUNCED : state;
+        this.encryption = encryption;
+
     }
 
     public Prediction(Prediction source) {
@@ -170,6 +180,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.state = source.state;
         this.mediaObject = parent;
         this.available = source.available;
+        this.encryption = source.encryption;
     }
 
     public static Prediction copy(Prediction source){

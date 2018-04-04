@@ -574,12 +574,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     private List<AvailableSubtitles> availableSubtitles = null;
 
 
-    @Enumerated(EnumType.STRING)
-    @Column
+    @Embedded()
     @XmlTransient
     @Setter(AccessLevel.PACKAGE)
     @Getter(AccessLevel.PACKAGE)
-    private StreamingStatus streamingPlatformStatus = StreamingStatus.NOT_AVAILABLE;
+    private StreamingStatus streamingPlatformStatus = StreamingStatus.unset();
 
     public MediaObject() {
     }
@@ -618,7 +617,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         source.getTwitterRefs().forEach(ref -> this.addTwitterRef(TwitterRef.copy(ref)));
         this.teletext = source.teletext;
         source.getPredictions().forEach(prediction -> {
-            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction);
+            MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction, prediction.getEncryption());
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getState());
         });
         source.getLocations().forEach(location -> this.addLocation(Location.copy(location, this)));
@@ -2736,7 +2735,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         CRC32 result = super.calcCRC32();
         // Some fields not appearing in XML, but which _are_ relevant changes
         if (streamingPlatformStatus != null) {
-            result.update(streamingPlatformStatus.ordinal());
+            streamingPlatformStatus.calcCRC32(result);
         }
         return result;
     }

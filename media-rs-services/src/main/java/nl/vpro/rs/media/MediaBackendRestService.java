@@ -21,10 +21,10 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Member;
 import nl.vpro.domain.media.Platform;
-import nl.vpro.domain.media.StreamingPlatformStatus;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaList;
 import nl.vpro.domain.media.search.MediaListItem;
+import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
@@ -371,7 +371,7 @@ public interface MediaBackendRestService {
 
     @GET
     @Path("streamingstatus/{mid}")
-    StreamingPlatformStatus getStreamingstatus(
+    StreamingStatus getStreamingstatus(
         @PathParam(MID) String mid,
         @Context HttpServletRequest request
     ) throws IOException, URISyntaxException;
