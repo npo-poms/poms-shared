@@ -628,14 +628,18 @@ public class Location extends PublishableObject<Location>
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
+        ToStringBuilder builder = new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
             .append("id", id)
             .append("format", avAttributes != null ? avAttributes.getAvFileFormat() : null)
             .append("programUrl", programUrl)
-            .append("owner", owner)
-            .append("start", publishStart)
-            .append("stop", publishStop)
-            .toString();
+            .append("owner", owner);
+        if (publishStart != null) {
+            builder.append("start", publishStart);
+        }
+        if (publishStop != null) {
+            builder.append("stop", publishStop);
+        }
+        return builder.toString();
     }
 
     @Override
