@@ -164,7 +164,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     /**
      * Wether this object should be  publicly visible in the API.
      *
-     * This <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
+     * This returns <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
      * and otherwise it depends on {@link #inPublicationWindow(Instant)}
      */
     public boolean isPublishable() {
