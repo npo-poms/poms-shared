@@ -50,11 +50,11 @@ public class StreamingStatus implements Serializable, Displayable  {
     public static StreamingStatus unset() {
         return new StreamingStatus(Value.UNSET, Value.UNSET);
     }
-    public static StreamingStatus withDrm() {
-        return new StreamingStatus(Value.ONLINE, Value.OFFLINE);
+     public static StreamingStatus withDrm(StreamingStatus existing) {
+        return new StreamingStatus(Value.ONLINE, existing.withoutDrm);
     }
-    public static StreamingStatus withoutDrm() {
-        return new StreamingStatus(Value.OFFLINE, Value.ONLINE);
+    public static StreamingStatus withoutDrm(StreamingStatus existing) {
+        return new StreamingStatus(existing.withDrm, Value.ONLINE);
     }
     public static StreamingStatus withAndWithoutDrm() {
         return new StreamingStatus(Value.ONLINE, Value.ONLINE);
@@ -62,9 +62,15 @@ public class StreamingStatus implements Serializable, Displayable  {
     public static StreamingStatus offline() {
         return new StreamingStatus(Value.OFFLINE, Value.OFFLINE);
     }
+     public static StreamingStatus offlineDrm(StreamingStatus existing) {
+        return new StreamingStatus(Value.OFFLINE, existing.withoutDrm);
+    }
+     public static StreamingStatus offlineWithoutDrm(StreamingStatus existing) {
+        return new StreamingStatus(existing.withDrm, Value.OFFLINE);
+    }
 
     public static List<StreamingStatus> availableStatuses() {
-        return Arrays.asList(withDrm(), withoutDrm(), withAndWithoutDrm());
+        return Arrays.asList(withDrm(offline()), withDrm(unset()), withoutDrm(offline()), withoutDrm(unset()), withAndWithoutDrm());
     }
 
       public static List<StreamingStatus> notAvailableStatuses() {
@@ -72,7 +78,7 @@ public class StreamingStatus implements Serializable, Displayable  {
     }
 
 
-
+    @lombok.Builder
     public StreamingStatus(Value withDrm, Value withoutDrm) {
         this.withDrm = withDrm;
         this.withoutDrm = withoutDrm;
@@ -89,7 +95,7 @@ public class StreamingStatus implements Serializable, Displayable  {
 
 
     public boolean hasDrm() {
-        return withoutDrm == Value.ONLINE;
+        return withDrm == Value.ONLINE;
     }
 
 
@@ -99,6 +105,16 @@ public class StreamingStatus implements Serializable, Displayable  {
 
     public boolean isAvailable() {
         return hasDrm() || hasWithoutDrm();
+    }
+
+    public static Encryption preferredEncryption(StreamingStatus streamingStatus) {
+        if (streamingStatus == null || streamingStatus.hasWithoutDrm()) {
+            return Encryption.NONE;
+        } else if (streamingStatus.hasDrm()) {
+            return Encryption.DRM;
+        } else {
+            return Encryption.NONE;
+        }
     }
 
     public boolean matches(Encryption encryption) {
