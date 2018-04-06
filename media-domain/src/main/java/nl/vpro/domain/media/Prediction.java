@@ -51,6 +51,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlEnum
     @XmlType(name = "predictionStateEnum")
     public enum State implements Displayable {
+        /**
+         * This state should only be used for non persistent Prediction objects (as they are used in the GUI)
+         */
         VIRTUAL(""),
         ANNOUNCED("Aangekondigd"),
         REALIZED("Gerealiseerd"),
@@ -257,6 +260,18 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     public void setState(State state) {
         this.state = state;
+    }
+
+    public void setOffline() {
+        if (this.state == State.REALIZED) {
+            if (willBePublished()) {
+                setState(State.ANNOUNCED);
+            } else {
+                setState(State.REVOKED);
+            }
+        } else {
+            setState(State.ANNOUNCED);
+        }
     }
 
     @Override
