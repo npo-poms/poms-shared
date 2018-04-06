@@ -120,10 +120,12 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     protected MediaObject mediaObject;
 
-    //@Column
-    @Transient
+    @Column
+    @Enumerated(EnumType.STRING)
     @XmlTransient
-    protected Boolean drm;
+    @Getter
+    @Setter
+    protected Encryption encryption;
 
     public Prediction() {
     }
@@ -153,7 +155,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
 
     @lombok.Builder
-    private Prediction(Platform platform, Instant publishStart, Instant publishStop, boolean plannedAvailability, Authority authority) {
+    private Prediction(
+        Platform platform,
+        Instant publishStart,
+        Instant publishStop,
+        boolean plannedAvailability,
+        Authority authority,
+        State state,
+        Encryption encryption) {
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
