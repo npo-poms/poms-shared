@@ -183,13 +183,9 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
 
             return inPublicationWindow(Instant.now());
         }
-
-
+        log.error("Unexpected state of {}. Workflow: {}. Supposing this is not publishable for now", this, workflow);
         return false;
-    }
 
-    public boolean isPublished() {
-        return isPublishable() && workflow == Workflow.REVOKED;
     }
 
     public boolean isRevocable() {
