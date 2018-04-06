@@ -144,13 +144,14 @@ public class StreamingStatus implements Serializable, Displayable  {
             String connector = " ";
             builder.append("Beschikbaar");
             if (hasDrm()) {
-                builder.append(connector).append("met DRM");
+                builder.append(connector).append("met");
                 connector = " en ";
             }
              if (hasWithoutDrm()) {
-                builder.append(connector).append("zonder DRM");
+                builder.append(connector).append("zonder");
                 connector = " en ";
             }
+            builder.append(" DRM");
         } else {
             builder.append("Niet beschikbaar");
         }
