@@ -5,7 +5,6 @@
  */
 package nl.vpro.domain.media.support;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlEnum;
@@ -18,6 +17,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
+
+import static java.util.Arrays.asList;
 
 /**
  * <p>The workflow status for publishable items.
@@ -93,32 +94,49 @@ public enum Workflow implements Displayable {
      */
     DELETED("Verwijderd");
 
-    public static final List<Workflow> WITH_MEDIA_ACTIVATION =
-        Arrays.asList(
-            Workflow.FOR_PUBLICATION,
-            Workflow.PARENT_REVOKED,
-            Workflow.REVOKED);
+    public static final List<Workflow> WITH_MEDIA_ACTIVATION = asList(
+        FOR_PUBLICATION,
+        PARENT_REVOKED,
+        REVOKED);
 
 
 
-    public static final List<Workflow> PUBLICATIONS =
-        Arrays.asList(Workflow.PUBLISHED, Workflow.FOR_PUBLICATION, Workflow.FOR_REPUBLICATION);
+    public static final List<Workflow> PUBLICATIONS = asList(
+        PUBLISHED,
+        FOR_PUBLICATION,
+        FOR_REPUBLICATION
+    );
 
-    public static final List<Workflow> DELETES =
-        Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED);
+    public static final List<Workflow> DELETES = asList(
+        FOR_DELETION,
+        DELETED
+    );
 
 
-    public static final List<Workflow> PUBLISHED_AS_DELETED =
-        Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED, Workflow.MERGED, Workflow.PARENT_REVOKED);
+    public static final List<Workflow> PUBLISHED_AS_DELETED = asList(
+        FOR_DELETION,
+        DELETED,
+        MERGED,
+        PARENT_REVOKED
+    );
 
-    public static final List<Workflow> REVOKES =
-        Arrays.asList(Workflow.FOR_DELETION, Workflow.DELETED, Workflow.REVOKED, Workflow.MERGED);
+    public static final List<Workflow> REVOKES = asList(
+        FOR_DELETION,
+        DELETED,
+        REVOKED,
+        MERGED
+    );
 
-    public static final List<Workflow> NEEDWORK =
-        Arrays.asList(Workflow.FOR_DELETION, Workflow.FOR_PUBLICATION, Workflow.FOR_REPUBLICATION);
+    public static final List<Workflow> NEEDWORK = asList(
+        FOR_DELETION,
+        FOR_PUBLICATION,
+        FOR_REPUBLICATION
+    );
 
-    public static final List<Workflow> DEPRECATED =
-        Arrays.asList(Workflow.DRAFT, Workflow.REFUSED);
+    public static final List<Workflow> DEPRECATED = asList(
+        DRAFT,
+        REFUSED
+    );
 
     private final String description;
 

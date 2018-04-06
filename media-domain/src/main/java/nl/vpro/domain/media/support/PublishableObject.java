@@ -162,17 +162,14 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     /**
-     * Wether this object could be  publicly visible in the API.
+     * Wether this object should be  publicly visible in the API.
      *
-     * This <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
+     * This returns <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
      * and otherwise it depends on {@link #inPublicationWindow(Instant)}
      */
     public boolean isPublishable() {
-        if(isMerged() ||
-            Workflow.FOR_DELETION == workflow ||
-            Workflow.PARENT_REVOKED == workflow || // The parent is revoked so this object itself is not publishable either
+        if(Workflow.MERGED == workflow ||
             Workflow.DELETED == workflow) {
-            // These kind of objects are explicely not publishable.
             return false;
         }
 
