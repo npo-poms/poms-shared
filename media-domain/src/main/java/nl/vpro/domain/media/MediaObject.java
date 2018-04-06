@@ -532,15 +532,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @OneToOne
     private MediaObject mergedTo;
 
+     // Holds the descendantOf value when unmarshalled from XML. Used by XML
+    // clients working in a detached environment.
+    @Transient
+    private String mergedToRef;
+
     // Holds the descendantOf value when unmarshalled from XML. Used by XML
     // clients working in a detached environment.
     @Transient
     Set<DescendantRef> descendantOf;
 
-    // Holds the descendantOf value when unmarshalled from XML. Used by XML
-    // clients working in a detached environment.
-    @Transient
-    private String mergedToRef;
 
     /**
      * If this is set to true, then that indicates that something is changed in
