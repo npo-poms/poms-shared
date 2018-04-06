@@ -18,7 +18,12 @@ public enum Platform implements Displayable {
     /**
      * Visible on internet
      */
-    INTERNETVOD(true, "Beschikbaar op internet"),
+    INTERNETVOD(true, "Beschikbaar op internet") {
+        @Override
+        public boolean matches(Platform platform) {
+            return platform == null || super.matches(platform);
+        }
+    },
 
     /**
      *
@@ -55,5 +60,12 @@ public enum Platform implements Displayable {
             return null;
         }
         return valueOf(id);
+    }
+
+    /**
+     * @since 5.6.2
+     */
+    public boolean matches(Platform platform) {
+        return this == platform;
     }
 }
