@@ -262,16 +262,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.state = state;
     }
 
-    public void setOffline() {
-        if (this.state == State.REALIZED) {
-            if (willBePublished()) {
-                setState(State.ANNOUNCED);
-            } else {
-                setState(State.REVOKED);
-            }
-        } else {
-            setState(State.ANNOUNCED);
-        }
+    public boolean isNew() {
+        return id == null;
     }
 
     @Override
