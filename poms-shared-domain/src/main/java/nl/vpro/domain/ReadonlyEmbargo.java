@@ -2,6 +2,11 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
+import com.google.common.collect.Range;
+
+import static com.google.common.collect.BoundType.CLOSED;
+import static com.google.common.collect.BoundType.OPEN;
+
 /**
  *  An object having or defining a publication embargo, meaning that it has publish start and stop instants.
  * @author Michiel Meeuwissen
@@ -12,6 +17,13 @@ public interface ReadonlyEmbargo {
     Instant getPublishStartInstant();
 
     Instant getPublishStopInstant();
+
+    default Range<Instant> asRange() {
+        return Range.range(
+            getPublishStartInstant(), CLOSED,
+            getPublishStopInstant(), OPEN);
+
+    }
 
     default boolean isUnderEmbargo(Instant now) {
         return !inPublicationWindow(now);
@@ -30,10 +42,13 @@ public interface ReadonlyEmbargo {
         Instant start = getPublishStartInstant();
         return start != null && start.isAfter(Instant.now());
     }
+    default boolean willBePublished() {
+        return isUnderEmbargo() && getPublishStopInstant().isAfter(Instant.now());
+    }
 
     default boolean inPublicationWindow(Instant now) {
         Instant stop = getPublishStopInstant();
-        if (stop != null && stop.isBefore(now)) {
+        if (stop != null && ! now.isBefore(stop)) {
             return false;
         }
         Instant start = getPublishStartInstant();
