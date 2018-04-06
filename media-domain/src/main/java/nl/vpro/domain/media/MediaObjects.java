@@ -463,7 +463,7 @@ public class MediaObjects {
     public static List<String> getAvailablePlatformNamesInLowerCase(Collection<Prediction> preds) {
         if (preds != null) {
             return preds.stream()
-                .filter(Prediction::isAvailable)
+                .filter(Prediction::isPlannedAvailability)
                 .map(Prediction::getPlatform)
                 .map(Platform::name)
                 .map(String::toLowerCase)

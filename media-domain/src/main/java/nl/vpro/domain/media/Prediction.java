@@ -113,19 +113,17 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     @Setter
     @Getter
-    private boolean available = true;
+    private boolean plannedAvailability = true;
 
 
     @ManyToOne
     @XmlTransient
     protected MediaObject mediaObject;
 
-    @Column
-    @Enumerated(EnumType.STRING)
+    //@Column
+    @Transient
     @XmlTransient
-    @Getter
-    @Setter
-    protected Encryption encryption;
+    protected Boolean drm;
 
     public Prediction() {
     }
@@ -155,18 +153,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
 
     @lombok.Builder
-    private Prediction(
-        Platform platform,
-        Instant publishStart,
-        Instant publishStop,
-        boolean plannedAvailability,
-        Authority authority,
-        State state,
-        Encryption encryption) {
+    private Prediction(Platform platform, Instant publishStart, Instant publishStop, boolean plannedAvailability, Authority authority) {
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
-        this.available = available;
+        this.plannedAvailability = plannedAvailability;
         this.authority = authority == null ? Authority.USER : authority;
         this.state = state == null ? State.ANNOUNCED : state;
         this.encryption = encryption;
@@ -182,7 +173,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.issueDate = source.issueDate;
         this.state = source.state;
         this.mediaObject = parent;
-        this.available = source.available;
+        this.plannedAvailability = source.plannedAvailability;
         this.encryption = source.encryption;
     }
 
@@ -200,7 +191,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     public static Prediction unavailable(Platform platform, Authority authority) {
         return Prediction.builder()
-            .available(false)
+            .plannedAvailability(false)
             .platform(platform)
             .authority(authority)
             .build();
@@ -351,7 +342,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         if (parent instanceof MediaObject) {
             this.mediaObject = (MediaObject) parent;
         }
-        this.available = true;
+        this.plannedAvailability = true;
     }
 
 
