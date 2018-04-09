@@ -114,6 +114,9 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     @Setter
     @Getter
+    /**
+     * TODO The state is 'ANNOUNCED', so shouldn't we name this field 'announcedAvailability'?
+     */
     private boolean plannedAvailability = true;
 
 
