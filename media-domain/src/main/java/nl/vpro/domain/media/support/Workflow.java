@@ -48,16 +48,6 @@ import static java.util.Arrays.asList;
 @JsonDeserialize(using = Workflow.Deserializer.class)
 public enum Workflow implements Displayable {
 
-    @Deprecated // not used
-    DRAFT("Voorstel"),
-
-    @XmlEnumValue("FOR APPROVAL")
-    @Deprecated // not used
-    FOR_APPROVAL("Wacht op goedkeuring"),
-
-    @Deprecated // not used
-    REFUSED("Afgewezen"),
-
     @XmlEnumValue("FOR PUBLICATION")
     FOR_PUBLICATION("Voor publicatie"),
 
@@ -131,11 +121,6 @@ public enum Workflow implements Displayable {
         FOR_DELETION,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    );
-
-    public static final List<Workflow> DEPRECATED = asList(
-        DRAFT,
-        REFUSED
     );
 
     private final String description;
