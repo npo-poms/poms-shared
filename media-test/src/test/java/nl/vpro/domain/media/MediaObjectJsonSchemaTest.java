@@ -207,6 +207,13 @@ public class MediaObjectJsonSchemaTest {
 
         program.getPredictions().add(prediction);
 
+        Prediction nonavailable = Prediction.builder()
+            .plannedAvailability(false)
+            .platform(Platform.INTERNETVOD)
+            .build();
+
+        program.getPredictions().add(nonavailable);
+
         String actual = toJson(program);
 
         JSONAssert.assertEquals(expected, actual);
