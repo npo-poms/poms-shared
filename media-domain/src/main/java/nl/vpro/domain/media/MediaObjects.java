@@ -420,7 +420,7 @@ public class MediaObjects {
         boolean changes = false;
         Prediction prediction = getPrediction(platform, mediaObject.getPredictions());
         if (prediction != null) {
-            Prediction.State requiredState = prediction.isPlannedAvailability() ? Prediction.State.NOT_ANNOUNCED : Prediction.State.ANNOUNCED;
+            Prediction.State requiredState = prediction.isPlannedAvailability() ? Prediction.State.ANNOUNCED : Prediction.State.NOT_ANNOUNCED;
 
             for (Location location : mediaObject.getLocations()) {
                 Platform locationPlatform = location.getPlatform();
