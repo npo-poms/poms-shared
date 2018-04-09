@@ -33,9 +33,6 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     public static PublishableObject withId2 = data(2L, null, null, null);
 
     @DataPoint
-    public static PublishableObject draft = data(1L, Workflow.DRAFT, null, null);
-
-    @DataPoint
     public static PublishableObject forPublication = data(2L, Workflow.FOR_PUBLICATION, null, null);
 
     @DataPoint
