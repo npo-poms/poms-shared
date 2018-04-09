@@ -621,6 +621,7 @@
   <xs:simpleType name="predictionStateEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="VIRTUAL"/>
+      <xs:enumeration value="NOT_ANNOUNCED"/>
       <xs:enumeration value="ANNOUNCED"/>
       <xs:enumeration value="REALIZED"/>
       <xs:enumeration value="REVOKED"/>
