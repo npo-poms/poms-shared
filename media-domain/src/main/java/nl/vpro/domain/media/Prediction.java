@@ -55,6 +55,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
          * This state should only be used for non persistent Prediction objects (as they are used in the GUI)
          */
         VIRTUAL(""),
+        NOT_ANNOUNCED(""),
         ANNOUNCED("Aangekondigd"),
         REALIZED("Gerealiseerd"),
         REVOKED("Teruggetrokken");
