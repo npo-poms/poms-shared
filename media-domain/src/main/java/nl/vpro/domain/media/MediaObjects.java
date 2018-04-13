@@ -14,6 +14,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.persistence.metamodel.SingularAttribute;
+
 import com.google.common.collect.Iterables;
 
 import nl.vpro.domain.*;
@@ -776,6 +778,11 @@ public class MediaObjects {
     @Deprecated
     public static OwnerType[] findOwnersForTextFields(MediaObject media) {
         return TextualObjects.findOwnersForTextFields(media);
+    }
+
+    public static String getJsonField(SingularAttribute<? super MediaObject, ?> field) {
+        field.getType();
+        return field.getName();
     }
 
 }
