@@ -21,7 +21,7 @@ public abstract class MatcherList<T> implements Iterable<T> {
     }
 
     protected MatcherList(Match m) {
-        this.match = m;
+        this.match = m == null ? this.match : m;
     }
 
     public Match getMatch() {
