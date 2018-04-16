@@ -350,10 +350,6 @@ public class MediaObjectsTest {
         assertThat( existing.findLocation("ccc").getAvAttributes().getVideoAttributes()).withFailMessage("Removing deleted VideoAttributes failed").isNull();
     }
 
-    @Test
-    public void getJsonField() {
-        assertThat(MediaObjects.getJsonField(MediaObject_.lastPublished)).isEqualTo("publishDate");
-    }
 }
 
 
