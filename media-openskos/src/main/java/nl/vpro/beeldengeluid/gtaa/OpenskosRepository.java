@@ -34,7 +34,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
@@ -60,7 +59,7 @@ import static org.springframework.http.HttpStatus.CREATED;
  * @since 3.7
  */
 @Slf4j
-@Component
+
 public class OpenskosRepository implements GTAARepository {
     private final DateTimeFormatter isoInstant = DateTimeFormatter.ISO_INSTANT;
 
