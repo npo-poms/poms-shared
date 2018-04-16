@@ -14,8 +14,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.persistence.metamodel.SingularAttribute;
-
 import com.google.common.collect.Iterables;
 
 import nl.vpro.domain.*;
@@ -407,15 +405,15 @@ public class MediaObjects {
         media.setRepubDestinations(null);
     }
 
-    public static boolean realizeAndExpirePredictions(MediaObject object) {
+    public static boolean updatePredictionStates(MediaObject object) {
         boolean change = false;
         for (Prediction prediction : object.getPredictions()) {
-            change |= realizeAndExpirePredictions(prediction.getPlatform(), object);
+            change |= updatePredictionStates(prediction.getPlatform(), object);
         }
         return change;
     }
 
-    public static boolean realizeAndExpirePredictions(Platform platform, MediaObject mediaObject) {
+    public static boolean updatePredictionStates(Platform platform, MediaObject mediaObject) {
         if (platform == null) {
             return false;
         }
@@ -778,11 +776,6 @@ public class MediaObjects {
     @Deprecated
     public static OwnerType[] findOwnersForTextFields(MediaObject media) {
         return TextualObjects.findOwnersForTextFields(media);
-    }
-
-    public static String getJsonField(SingularAttribute<? super MediaObject, ?> field) {
-        field.getType();
-        return field.getName();
     }
 
 }
