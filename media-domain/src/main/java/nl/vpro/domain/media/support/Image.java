@@ -206,6 +206,12 @@ public class Image extends PublishableObject<Image>
         private OwnerType owner = OwnerType.BROADCASTER;
         private ImageType type = ImageType.PICTURE;
 
+
+
+
+        public Builder creationDate(Instant instant) {
+            return creationInstant(instant);
+        }
     }
 
     @lombok.Builder(builderClassName = "Builder", toBuilder = true)
@@ -225,7 +231,7 @@ public class Image extends PublishableObject<Image>
         String date,
         Instant publishStart,
         Instant publishStop,
-        Instant creationDate,
+        Instant creationInstant,
         Instant lastModified
         ) {
         this(owner, type, imageUri);
@@ -241,7 +247,7 @@ public class Image extends PublishableObject<Image>
         this.date = date;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
-        this.creationDate = creationDate;
+        this.creationInstant = creationInstant;
         this.lastModified = lastModified;
 
     }
