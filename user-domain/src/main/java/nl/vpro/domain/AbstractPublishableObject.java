@@ -41,8 +41,8 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     extends DomainObject implements Publishable<T> {
 
 
-    @Column(nullable = false)
-    protected Instant creationDate = Instant.now();
+    @Column(nullable = false, name="creationDate")
+    protected Instant creationInstant = Instant.now();
 
     @Column(nullable = false)
     protected Instant lastModified;
@@ -68,7 +68,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
 
 
     protected AbstractPublishableObject(AbstractPublishableObject<T> source) {
-        this.creationDate = source.creationDate;
+        this.creationInstant= source.creationInstant;
         this.createdBy = source.createdBy;
         this.lastModified = source.lastModified;
         this.lastModifiedBy = source.lastModifiedBy;
@@ -109,12 +109,12 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getCreationInstant() {
-        return creationDate;
+        return creationInstant;
     }
 
     @Override
     public void setCreationInstant(Instant creationDate) {
-        this.creationDate = creationDate;
+        this.creationInstant = creationDate;
     }
 
     @Override
@@ -232,7 +232,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     public String toString() {
         return new ToStringBuilder(this)
             .appendSuper(super.toString())
-            .append("creationDate", creationDate)
+            .append("creationDate", creationInstant)
             .append("lastModified", lastModified)
             .append("createdBy", createdBy)
             .append("lastModifiedBy", lastModifiedBy)
@@ -247,7 +247,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
 
     protected void beforeUnmarshal(Unmarshaller u, Object parent) {
         // These things appear in XML, and if they don't, they are null (and not the default value in this class)
-        creationDate = null;
+        creationInstant = null;
     }
 
 
