@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.support.License;
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,6 +40,27 @@ public class ImageUpdateTest {
             "    </imageLocation>\n" +
             "</image>");
 
+    }
+
+    @Test
+    public void json() throws Exception {
+         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
+        update.setLicense(License.CC_BY);
+        update.setSourceName("placeholdit");
+        update.setCredits(getClass().getName());
+        Jackson2TestUtil.roundTripAndSimilar(update, "{\n" +
+            "  \"title\" : \"title\",\n" +
+            "  \"sourceName\" : \"placeholdit\",\n" +
+            "  \"license\" : \"CC_BY\",\n" +
+            "  \"credits\" : \"nl.vpro.domain.media.update.ImageUpdateTest\",\n" +
+            "  \"image\" : {\n" +
+            "    \"imageLocation\" : {\n" +
+            "      \"url\" : \"http://placehold.it/150/7735a\"\n" +
+            "    }\n" +
+            "  },\n" +
+            "  \"type\" : \"PICTURE\",\n" +
+            "  \"highlighted\" : false\n" +
+            "}");
     }
 
 
