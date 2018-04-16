@@ -37,7 +37,7 @@ public class Accountables {
 
         if(accountable.getCreationInstant() == null) {
             accountable.setCreationInstant(now);
-            setProperty(creationDate.getName(), accountable.getCreationInstant(), state, propertyNames);
+            setProperty(creationInstant.getName(), accountable.getCreationInstant(), state, propertyNames);
             updated = true;
         }
 
@@ -47,10 +47,12 @@ public class Accountables {
             updated = true;
         }
 
-        if(updateLastModified && accountable.hasChanges()) {
+        if(accountable.getLastModifiedInstant() == null || (updateLastModified && accountable.hasChanges())) {
             accountable.setLastModifiedInstant(now);
             setProperty(lastModified.getName(), accountable.getLastModifiedInstant(), state, propertyNames);
-
+            updated = true;
+        }
+        if(accountable.getLastModifiedBy() == null || (updateLastModified && accountable.hasChanges())) {
             accountable.setLastModifiedBy(user);
             setProperty(lastModifiedBy.getName(), accountable.getLastModifiedBy(), state, propertyNames);
             updated = true;

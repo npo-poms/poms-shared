@@ -45,7 +45,6 @@ public interface EmbargoBuilder<B extends EmbargoBuilder<B>> {
 
     static Date fromLocalDate(LocalDateTime date) {
         return DateUtils.toDate(date, ZONE_ID);
+
     }
-
-
 }

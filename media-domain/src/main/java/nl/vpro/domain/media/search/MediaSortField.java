@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.search;
 
+import nl.vpro.domain.AbstractPublishableObject_;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
@@ -17,7 +18,7 @@ public enum MediaSortField implements SortField {
 
     sortDate(Type.LONG),
     lastModified(Type.LONG),
-    creationDate(Type.LONG),
+    creationDate(Type.LONG, AbstractPublishableObject_.creationInstant.getName()),
     publishStop(Type.LONG),
     publishStart(Type.LONG),
     lastPublished(Type.LONG),
@@ -45,14 +46,28 @@ public enum MediaSortField implements SortField {
 
     ;
     private final Type t;
+    private final String field;
 
     MediaSortField(Type type) {
         this.t = type;
+        this.field = name();
+    }
+
+
+    MediaSortField(Type type, String field) {
+        this.t = type;
+        this.field = field;
     }
     @Override
     public Type type() {
         return t;
     }
+
+    @Override
+    public String field() {
+        return field;
+    }
+
 
     public static MediaSortField valueOfNullable(String string) {
         if (string == null) {
