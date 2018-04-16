@@ -4,6 +4,8 @@ import java.time.Instant;
 
 import nl.vpro.domain.user.Editor;
 
+import static nl.vpro.domain.AbstractPublishableObject_.*;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -18,6 +20,54 @@ public class Accountables {
         accountable.setLastModifiedBy(currentUser);
         if (accountable.getCreatedBy() == null) {
             accountable.setCreatedBy(currentUser);
+        }
+    }
+
+
+    /**
+     * Used by implementations of {@link org.hibernate.Interceptor}
+     */
+    public static boolean updateEntity(
+        Editor user,
+        boolean updateLastModified,
+        Accountable accountable, Object[] state, String[] propertyNames) {
+        boolean updated = false;
+
+        final Instant now = Instant.now();
+
+        if(accountable.getCreationInstant() == null) {
+            accountable.setCreationInstant(now);
+            setProperty(creationDate.getName(), accountable.getCreationInstant(), state, propertyNames);
+            updated = true;
+        }
+
+        if(accountable.getCreatedBy() == null) {
+            accountable.setCreatedBy(user);
+            setProperty(createdBy.getName(), accountable.getCreatedBy(), state, propertyNames);
+            updated = true;
+        }
+
+        if(updateLastModified && accountable.hasChanges()) {
+            accountable.setLastModifiedInstant(now);
+            setProperty(lastModified.getName(), accountable.getLastModifiedInstant(), state, propertyNames);
+
+            accountable.setLastModifiedBy(user);
+            setProperty(lastModifiedBy.getName(), accountable.getLastModifiedBy(), state, propertyNames);
+            updated = true;
+        }
+
+        return updated;
+    }
+
+    /**
+     * Used by implementations of {@link org.hibernate.Interceptor}
+     */
+    public static void setProperty(String propertyName, Object propertyValue, Object[] state, String[] propertyNames) {
+        for(int i = 0; i < propertyNames.length; i++) {
+            if(propertyNames[i].equals(propertyName)) {
+                state[i] = propertyValue;
+                break;
+            }
         }
     }
 }
