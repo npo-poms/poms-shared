@@ -506,7 +506,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // The sortDate field is actually calculatable, but it can be a bit
     // expensive, so we cache its value in a persistent field.
     @Column(name = "sortdate", nullable = true, unique = false)
-    protected Instant sortDate;
+    protected Instant sortInstant;
 
     // Used for monitoring publication delay. Not exposed via java.
     // Set its value in sql to now() when unmodified media is republished.
@@ -2405,15 +2405,15 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public final Instant getSortInstant() {
+    public Instant getSortInstant() {
         if (!sortDateValid) {
             Instant date = MediaObjects.getSortInstant(this);
             if (date != null) {
-                sortDate = date;
+                sortInstant = date;
             }
             sortDateValid = true;
         }
-        return sortDate;
+        return sortInstant;
     }
 
     /**
@@ -2430,7 +2430,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
      * in overrides (as in {@link Group})
      */
     void setSortInstant(Instant date) {
-        this.sortDate = date;
+        this.sortInstant = date;
         this.sortDateValid = true;
         this.sortDateInvalidatable = false;
 

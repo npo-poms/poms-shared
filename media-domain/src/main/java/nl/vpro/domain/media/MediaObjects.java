@@ -321,7 +321,7 @@ public class MediaObjects {
 
     public static Instant getSortInstant(MediaObject mo) {
         if (mo instanceof Group) {
-            return mo.sortDate;
+            return mo.sortInstant;
         } else if (mo instanceof Segment) {
             Segment segment = (Segment) mo;
             if (segment.parent != null) {
