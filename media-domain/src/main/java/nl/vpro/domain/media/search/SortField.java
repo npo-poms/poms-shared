@@ -15,6 +15,10 @@ public interface SortField {
         return name();
     }
 
+     default String sortField() {
+        return name();
+    }
+
     enum Type {
         STRING,
         LONG
