@@ -17,7 +17,7 @@ public enum MediaSortField implements SortField {
 
     sortDate(Type.LONG),
     lastModified(Type.LONG),
-    creationDate(Type.LONG, "creationInstant"),
+    creationDate(Type.LONG, "creationInstant", "creationDate"),
     publishStop(Type.LONG),
     publishStart(Type.LONG),
     lastPublished(Type.LONG),
@@ -26,7 +26,7 @@ public enum MediaSortField implements SortField {
     lastModifiedBy(Type.STRING),
     createdBy(Type.STRING),
 
-    locations(Type.LONG, "locationCount"),
+    locations(Type.LONG, "locations", "locationCount"),
 
     memberofCount(Type.LONG),
     episodeofCount(Type.LONG),
@@ -41,16 +41,19 @@ public enum MediaSortField implements SortField {
     ;
     private final Type t;
     private final String field;
+    private final String sortField;
 
     MediaSortField(Type type) {
-        this.t = type;
-        this.field = name();
+        t = type;
+        field = name();
+        sortField = name();
     }
 
 
-    MediaSortField(Type type, String field) {
+    MediaSortField(Type type, String field, String sortField) {
         this.t = type;
-        this.field = field;
+        this.field = field == null ? name() : field;
+        this.sortField = sortField == null ? name() : sortField;
     }
     @Override
     public Type type() {
@@ -60,6 +63,12 @@ public enum MediaSortField implements SortField {
     @Override
     public String field() {
         return field;
+    }
+
+
+    @Override
+    public String sortField() {
+        return sortField;
     }
 
 
