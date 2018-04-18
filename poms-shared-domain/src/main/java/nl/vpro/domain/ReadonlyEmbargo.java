@@ -8,7 +8,8 @@ import static com.google.common.collect.BoundType.CLOSED;
 import static com.google.common.collect.BoundType.OPEN;
 
 /**
- *  An object having or defining a publication embargo, meaning that it has publish start and stop instants.
+ * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
+ *
  * @author Michiel Meeuwissen
  * @since 5.3
  */
@@ -18,6 +19,9 @@ public interface ReadonlyEmbargo {
 
     Instant getPublishStopInstant();
 
+    /**
+     * Returns this embargo object as a guava {@link Range} object.
+     */
     default Range<Instant> asRange() {
         return Range.range(
             getPublishStartInstant(), CLOSED,
