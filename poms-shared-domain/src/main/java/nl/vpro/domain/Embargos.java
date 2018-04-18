@@ -66,6 +66,22 @@ public class Embargos {
             ) {
             to.setPublishStopInstant(from.getPublishStopInstant());
         }
+    }
+
+     /**
+     * Takes from both the start and stop of the two embargo's the least restrictive one and copies them to the second.
+     *
+     * Note that if the two embargos were not connected there will be times  (in between the two) which will be in de new embargo but, were in none.
+     *
+     * If they were connected, the result is the union.
+     */
+     public static void copyIfLessRestrictedOrTargetUnset(ReadonlyEmbargo from, Embargo to) {
+         if (from.getPublishStartInstant() == null || to.getPublishStartInstant() == null || to.getPublishStartInstant().isAfter(from.getPublishStartInstant())) {
+             to.setPublishStartInstant(from.getPublishStartInstant());
+         }
+         if (from.getPublishStopInstant() == null || to.getPublishStopInstant() == null || to.getPublishStopInstant().isBefore(from.getPublishStopInstant())) {
+            to.setPublishStopInstant(from.getPublishStopInstant());
+        }
 
     }
 

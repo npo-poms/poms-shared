@@ -261,7 +261,7 @@ public class Locations {
             prediction.setPlannedAvailability(true);
             prediction.setEncryption(null);
             for (Location l : existingWebonlyLocations) {
-                Embargos.copyIfLessRestricted(l, prediction);
+                Embargos.copyIfLessRestrictedOrTargetUnset(l, prediction);
             }
             return prediction;
         }
