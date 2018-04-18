@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -254,14 +255,19 @@ public class Locations {
         Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream()
             .filter(l -> l.getOwner() == OwnerType.BROADCASTER)
             .filter(l -> Platform.INTERNETVOD.matches(l.getPlatform()))
+            .filter(l -> ! l.isDeleted())
             .collect(Collectors.toSet());
         Prediction existingPrediction = mediaObject.getPrediction(Platform.INTERNETVOD);
         if (existingPrediction == null && ! existingWebonlyLocations.isEmpty()) {
             Prediction prediction = mediaObject.findOrCreatePrediction(Platform.INTERNETVOD);
             prediction.setPlannedAvailability(true);
             prediction.setEncryption(null);
-            for (Location l : existingWebonlyLocations) {
-                Embargos.copyIfLessRestrictedOrTargetUnset(l, prediction);
+
+            if (!existingWebonlyLocations.isEmpty()) {
+                Iterator<Location> i = existingWebonlyLocations.iterator();
+                Location first = i.next();
+                Embargos.copyIfLessRestrictedOrTargetUnset(first, prediction);
+                i.forEachRemaining((l) -> Embargos.copyIfLessRestricted(l, prediction));
             }
             return prediction;
         }
