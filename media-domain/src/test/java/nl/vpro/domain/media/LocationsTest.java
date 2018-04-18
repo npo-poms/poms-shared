@@ -1,14 +1,14 @@
 package nl.vpro.domain.media;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 
 import org.junit.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
 
-import static nl.vpro.domain.media.StreamingStatus.unset;
-import static nl.vpro.domain.media.StreamingStatus.withDrm;
-import static nl.vpro.domain.media.StreamingStatus.withoutDrm;
+import static nl.vpro.domain.media.StreamingStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -45,4 +45,43 @@ public class LocationsTest {
         assertThat(program.getPrediction(Platform.PLUSVOD).getState()).isEqualTo(Prediction.State.REALIZED);
     }
 
+
+    @Test
+    public void createWebOnlyPredictionIfNeeded() {
+        Program program = new Program();
+        program.setMid("mid_1234");
+        Instant stop1 = LocalDateTime.of(2018, 4, 19, 16, 42).atZone(Schedule.ZONE_ID).toInstant();
+        Instant stop2 = LocalDateTime.of(2017, 4, 19, 16, 42).atZone(Schedule.ZONE_ID).toInstant();
+        program.getLocations().add(Location.builder().owner(OwnerType.BROADCASTER).programUrl("http://www.vpro.nl/1").platform(Platform.INTERNETVOD).publishStop(stop2).build());
+        program.getLocations().add(Location.builder().owner(OwnerType.BROADCASTER).programUrl("http://www.vpro.nl/2").platform(null).publishStop(stop1).build());
+        program.getLocations().add(Location.builder().owner(OwnerType.BROADCASTER).programUrl("http://www.vpro.nl/3").platform(Platform.PLUSVOD).publishStop((Instant) null).build());
+
+        Locations.createWebOnlyPredictionIfNeeded(program);
+
+        Prediction prediction = program.getPrediction(Platform.INTERNETVOD);
+
+        assertThat(prediction).isNotNull();
+        assertThat(prediction.getPublishStartInstant()).isNull();
+        assertThat(prediction.getPublishStopInstant()).isEqualTo(stop1);
+    }
+
+
+    @Test
+    public void createWebOnlyPredictionIfNeeded2() {
+        Program program = new Program();
+        program.setMid("mid_1234");
+        Instant stop1 = LocalDateTime.of(2018, 4, 19, 16, 42).atZone(Schedule.ZONE_ID).toInstant();
+        Instant stop2 = LocalDateTime.of(2017, 4, 19, 16, 42).atZone(Schedule.ZONE_ID).toInstant();
+        program.addLocation(Location.builder().owner(OwnerType.BROADCASTER).programUrl("http://www.vpro.nl/1").platform(Platform.INTERNETVOD).publishStop(stop2).build());
+        program.addLocation(Location.builder().owner(OwnerType.BROADCASTER).programUrl("http://www.vpro.nl/2").platform(null).publishStop(stop1).build());
+        program.addLocation(Location.builder().owner(OwnerType.BROADCASTER).programUrl("http://www.vpro.nl/3").platform(Platform.PLUSVOD).publishStop((Instant) null).build());
+
+        Locations.createWebOnlyPredictionIfNeeded(program);
+
+        Prediction prediction = program.getPrediction(Platform.INTERNETVOD);
+
+        assertThat(prediction).isNotNull();
+        assertThat(prediction.getPublishStartInstant()).isNull();
+        assertThat(prediction.getPublishStopInstant()).isEqualTo(stop1);
+    }
 }
