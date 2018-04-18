@@ -41,10 +41,18 @@ public class TranscodeRequest {
 
     }
 
+    public static class Builder {
+        @lombok.Builder.Default
+        Priority priority = Priority.NORMAL;
+    }
+
     @XmlType(name = "priorityType")
     public enum Priority implements Displayable {
         LOW("Laag"),
-        NORMAL("Normaal"), HIGH("Hoog"), URGENT("Urgent");
+        NORMAL("Normaal"),
+        HIGH("Hoog"),
+        URGENT("Urgent")
+        ;
 
         @Getter
         private final String displayName;
