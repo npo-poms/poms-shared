@@ -10,6 +10,8 @@ import static com.google.common.collect.BoundType.OPEN;
 /**
  * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
  *
+ * Utilities are provided in {@link Embargos}
+ *
  * @author Michiel Meeuwissen
  * @since 5.3
  */
