@@ -45,7 +45,7 @@ public class Locations {
 
         if (platform == Platform.INTERNETVOD) {
             Prediction webonly = createWebOnlyPredictionIfNeeded(mediaObject);
-            log.info("Webonly : {}", webonly);
+            log.debug("Webonly : {}", webonly);
         }
         Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         Encryption encryption;
@@ -129,8 +129,8 @@ public class Locations {
     }
 
     public static void realizeAndRevokeLocationsIfNeeded(MediaObject media, Platform platform) {
-        Locations.realizeStreamingPlatformIfNeeded(media, platform);
         Locations.removeLocationForPlatformIfNeeded(media, platform);
+        Locations.realizeStreamingPlatformIfNeeded(media, platform);
         Locations.updatePredictionStates(media, platform);
     }
 
@@ -231,7 +231,7 @@ public class Locations {
                 mediaObject.removeLocation(existingPlatformLocation);
             } else if (! streamingPlatformStatus.matches(existingPredictionForPlatform.getEncryption())) {
                 mediaObject.removeLocation(existingPlatformLocation);
-            } else if ( existingPredictionForPlatform.getEncryption() == null) {
+            } else if ( existingPredictionForPlatform.getEncryption() == null && StreamingStatus.preferredEncryption(streamingPlatformStatus) != getEncryptionFromProgramUrl(existingPlatformLocation)) {
                 mediaObject.removeLocation(existingPlatformLocation);
             } else {
                 log.info("{} does not need to be removed", existingPlatformLocation);
@@ -240,6 +240,16 @@ public class Locations {
         }
         updatePredictionStates(mediaObject, platform);
     }
+
+    private static Encryption getEncryptionFromProgramUrl(Location location) {
+        String url = location.getProgramUrl();
+        if (url.startsWith("npo+drm")) {
+            return Encryption.DRM;
+        } else {
+            return Encryption.NONE;
+        }
+    }
+
     public static Prediction createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
         Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream()
             .filter(l -> l.getOwner() == OwnerType.BROADCASTER)
