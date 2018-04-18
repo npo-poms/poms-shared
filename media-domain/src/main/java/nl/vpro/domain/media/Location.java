@@ -605,7 +605,7 @@ public class Location extends PublishableObject<Location>
     public void setWorkflow(Workflow workflow) {
         super.setWorkflow(workflow);
         if (Workflow.REVOKES.contains(workflow) && platform != null && this.mediaObject != null) {
-            MediaObjects.realizeAndExpirePredictions(platform, this.mediaObject);
+            Locations.updatePredictionStates(this.mediaObject, platform);
         }
     }
 

@@ -405,49 +405,6 @@ public class MediaObjects {
         media.setRepubDestinations(null);
     }
 
-    public static boolean realizeAndExpirePredictions(MediaObject object) {
-        boolean change = false;
-        for (Prediction prediction : object.getPredictions()) {
-            change |= realizeAndExpirePredictions(prediction.getPlatform(), object);
-        }
-        return change;
-    }
-
-    public static boolean realizeAndExpirePredictions(Platform platform, MediaObject mediaObject) {
-        if (platform == null) {
-            return false;
-        }
-        boolean changes = false;
-        Prediction prediction = getPrediction(platform, mediaObject.getPredictions());
-        if (prediction != null) {
-            Prediction.State requiredState = prediction.isPlannedAvailability() ? Prediction.State.ANNOUNCED : Prediction.State.NOT_ANNOUNCED;
-
-            for (Location location : mediaObject.getLocations()) {
-                Platform locationPlatform = location.getPlatform();
-                if (locationPlatform == null) {
-                    log.debug("Location has no explicit platform");
-                    // this might be a good idea?
-                    //log.debug("Location has no explicit platform. Taking it {} implicitely", Platform.INTERNETVOD);
-                    //locationPlatform = Platform.INTERNETVOD;
-                }
-                if (locationPlatform == platform) {
-                    if (location.isPublishable()) {
-                        requiredState = Prediction.State.REALIZED;
-                        break;
-                    }
-                    if (location.wasUnderEmbargo()) {
-                        requiredState = Prediction.State.REVOKED;
-                    }
-                }
-            }
-            if (prediction.getState() != requiredState) {
-                log.info("Set state of {} {} {} -> {}", mediaObject.getMid(), prediction, prediction.getState(), requiredState);
-                prediction.setState(requiredState);
-                changes = true;
-            }
-        }
-        return changes;
-    }
 
     public static Prediction getPrediction(Platform platform, Collection<Prediction> preds) {
         if (preds != null) {
