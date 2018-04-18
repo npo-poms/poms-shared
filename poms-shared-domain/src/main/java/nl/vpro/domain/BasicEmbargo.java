@@ -36,4 +36,11 @@ public class BasicEmbargo implements Embargo<BasicEmbargo> {
         this.publishStopInstant = publishStopInstant;
         return this;
     }
+
+
+    @Override
+    public String toString() {
+        return Embargos.toString(this);
+
+    }
 }
