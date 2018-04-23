@@ -1,5 +1,8 @@
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
@@ -7,6 +10,7 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.MediaType;
+import nl.vpro.domain.media.MidAndType;
 import nl.vpro.validation.StringList;
 
 /**
@@ -16,59 +20,39 @@ import nl.vpro.validation.StringList;
 @XmlRootElement(name = "midAndType")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "midAndTypeType")
-public class MidAndType implements Serializable {
+public class MidAndTypeImpl implements Serializable, MidAndType {
 
     private static final long serialVersionUID = 0L;
 
     @XmlAttribute
+    @Getter
     private String mid;
 
-    @XmlAttribute
-    private MediaType type;
+    @XmlAttribute(name = "type")
+    @Getter
+    private MediaType mediaType;
 
     @XmlElement(name = "crid")
     @StringList(pattern = "(?i)crid://.*/.*")
+    @Getter
+    @Setter
     private List<String> crids;
 
-    public MidAndType() {
+    public MidAndTypeImpl() {
         // required by JAXB.
     }
 
-    public MidAndType(String mid, MediaType type, List<String> crids) {
+    public MidAndTypeImpl(String mid, MediaType type, List<String> crids) {
         this.mid = mid;
-        this.type = type;
+        this.mediaType = type;
         this.crids = Collections.unmodifiableList(crids);
     }
 
-    public String getMid() {
-        return mid;
-    }
 
-    public MediaType getType() {
-        return type;
-    }
-
-    public List<String> getCrids() {
-        return crids;
-    }
-
-    public void setCrids(List<String> crids) {
-        this.crids = crids;
-    }
-
-    public String getCorrelationId() {
-        if (mid != null) {
-            return mid;
-        } else if (crids != null && ! crids.isEmpty()) {
-            return crids.get(0);
-        } else {
-            return "" + hashCode();
-        }
-    }
 
     @Override
     public String toString() {
-        return type + " " + mid + crids;
+        return mediaType + " " + mid + crids;
     }
 
 }

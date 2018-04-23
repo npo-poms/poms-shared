@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Displayable;
 import nl.vpro.domain.media.Encryption;
+import nl.vpro.domain.media.MediaType;
+import nl.vpro.domain.media.MidAndType;
 
 /**
  * @author Michiel Meeuwissen
@@ -20,7 +24,7 @@ import nl.vpro.domain.media.Encryption;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "transcodeType")
 @XmlRootElement(name = "transcode")
-public class TranscodeRequest {
+public class TranscodeRequest implements MidAndType {
 
 
     @NotNull
@@ -38,6 +42,17 @@ public class TranscodeRequest {
 
 
     public TranscodeRequest() {
+
+    }
+
+    @Override
+    public MediaType getMediaType() {
+        return null;
+    }
+
+    @Override
+    public List<String> getCrids() {
+        return null;
 
     }
 
