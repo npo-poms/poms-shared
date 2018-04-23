@@ -216,7 +216,7 @@ import static nl.vpro.domain.media.MediaObject.*;
 
 @Slf4j
 public abstract class MediaObject extends PublishableObject<MediaObject>
-        implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject> {
+        implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject>, MidAndType {
 
 
     public static final String DELETED_FILTER = "deletedFilter";
@@ -686,6 +686,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @XmlAttribute(required = true)
+    @Override
     public String getMid() {
         return mid;
     }
@@ -710,6 +711,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
 
+    @Override
     @XmlElement(name = "crid")
     @JsonProperty("crids")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -2517,6 +2519,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     /**
      * @since 3.2
      */
+    @Override
     public final MediaType getMediaType() {
         SubMediaType subMediaType = getType();
         return subMediaType == null ? null : subMediaType.getMediaType();
