@@ -95,7 +95,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
     implements
     EmbargoDeprecated,
     TextualObjectUpdate<TitleUpdate,DescriptionUpdate,  MediaUpdate<M>>,
-    VersionSpecific {
+    VersionSpecific,
+    MidAndType {
 
     static final Validator VALIDATOR;
 
@@ -416,6 +417,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlAttribute
     @Size.List({@Size(max = 255), @Size(min = 4)})
     @Pattern(regexp = "^[ \\.a-zA-Z0-9_-]+$", flags = {Pattern.Flag.CASE_INSENSITIVE}, message = "{nl.vpro.constraints.mid}")
+    @Override
     public final String getMid() {
         return builder.getMid();
     }
@@ -431,6 +433,16 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public SubMediaType getType() {
         return mediaObject().getType();
     }
+
+    /**
+     * @since 5.6
+     */
+    @Override
+    public final MediaType getMediaType() {
+        SubMediaType subMediaType = getType();
+        return subMediaType == null ? null : subMediaType.getMediaType();
+    }
+
 
     @XmlAttribute
     public Boolean isDeleted() {
@@ -521,6 +533,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "crid")
     @StringList(pattern = "(?i)crid://.*/.*", maxLength = 255)
+    @Override
     public List<String> getCrids() {
         return mediaObject().getCrids();
     }
