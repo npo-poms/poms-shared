@@ -45,6 +45,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return program().type(type);
     }
 
+    static ProgramBuilder clip() {
+        return program().type(ProgramType.CLIP);
+    }
+
     static ProgramBuilder program(Program program) {
         return new ProgramBuilder(program);
     }
