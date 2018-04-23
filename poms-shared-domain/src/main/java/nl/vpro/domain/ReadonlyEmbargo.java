@@ -25,9 +25,19 @@ public interface ReadonlyEmbargo {
      * Returns this embargo object as a guava {@link Range} object.
      */
     default Range<Instant> asRange() {
-        return Range.range(
-            getPublishStartInstant(), CLOSED,
-            getPublishStopInstant(), OPEN);
+        if (getPublishStopInstant() == null) {
+            if (getPublishStopInstant() == null) {
+                return Range.all();
+            } else {
+                return Range.lessThan(getPublishStopInstant());
+            }
+        } else if (getPublishStopInstant() == null) {
+            return Range.atLeast(getPublishStartInstant());
+        } else {
+            return Range.range(
+                getPublishStartInstant(), CLOSED,
+                getPublishStopInstant(), OPEN);
+        }
 
     }
 
