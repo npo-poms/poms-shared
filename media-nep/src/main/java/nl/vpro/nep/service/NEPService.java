@@ -5,7 +5,7 @@ package nl.vpro.nep.service;
  * @since 5.6
  */
 public interface NEPService extends
-    WorkflowExecutionService,
+    TranscodeService,
     NEPFTPDownloadService,
     NEPFTPUploadService,
     ItemizeService{
