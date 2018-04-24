@@ -1,8 +1,16 @@
 package nl.vpro.validation;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,6 +24,7 @@ import static org.junit.Assert.assertTrue;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
+@Slf4j
 public class LanguageValidatorTest {
 
     LanguageValidator validator = new LanguageValidator();
@@ -54,6 +63,22 @@ public class LanguageValidatorTest {
     @Ignore("fails")
     public void achterhoeks() {
         assertTrue(validator.isValid(new Locale("act"), null));
+
+    }
+
+    public static class A {
+        @Language
+        String language;
+    }
+
+    @Test
+    public void testZZ() {
+        A a = new A();
+        a.language = "ZZ";
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<A>> validate = validator.validate(a);
+        log.info("{}", validate);
 
     }
 
