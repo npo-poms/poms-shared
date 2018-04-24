@@ -9,7 +9,7 @@ import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 
 /**
- * Actually this is the 'transcode service'
+ * This is an interface for the NEP 'transcode' API. This used to be WorkflowExecutionService.
  *
  * @author Michiel Meeuwissen
  * @since 5.6
