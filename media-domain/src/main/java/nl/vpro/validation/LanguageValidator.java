@@ -1,6 +1,7 @@
 package nl.vpro.validation;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -37,26 +38,32 @@ public class LanguageValidator implements ConstraintValidator<Language, Object> 
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+        List<Locale> invalids = new ArrayList<>();
         for (Locale locale : toCollectionOfLocales(value)) {
-            if (! isValid(locale, context)) {
-                //context.disableDefaultConstraintViolation();
-                //ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder = context.buildConstraintViolationWithTemplate("{nl.vpro.constraints.lanuage}");
-                //constraintViolationBuilder.addConstraintViolation();
-
-                return false;
+            if (!isValid(locale, context)) {
+                invalids.add(locale);
             }
         }
-        return true;
+        if (!invalids.isEmpty()) {
+            context.disableDefaultConstraintViolation();
+            String template = context.getDefaultConstraintMessageTemplate();
+            context.buildConstraintViolationWithTemplate(template + "" + invalids.stream().map(Locale::toString).collect(Collectors.joining(", "))).addConstraintViolation();
+            return false;
+        } else {
+            return true;
+        }
     }
 
     protected Collection<Locale> toCollectionOfLocales(Object o) {
         List<Locale> result = new ArrayList<>();
-        if (o instanceof Collection) {
-            for (Object s : (Collection) o) {
-                result.add(toLocale(s));
+        if (o != null) {
+            if (o instanceof Collection) {
+                for (Object s : (Collection) o) {
+                    result.add(toLocale(s));
+                }
+            } else {
+                result.add(toLocale(o));
             }
-        } else {
-            result.add(toLocale(o));
         }
         return result;
     }
