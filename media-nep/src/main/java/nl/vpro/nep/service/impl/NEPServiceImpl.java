@@ -28,7 +28,7 @@ import nl.vpro.nep.service.*;
  */
 @Service
 public class NEPServiceImpl implements NEPService {
-    private final Provider<WorkflowExecutionService> workflowExecutionService;
+    private final Provider<TranscodeService> transcodeService;
     private final Provider<NEPFTPUploadService> nepftpUploadService;
     private final Provider<NEPFTPDownloadService> nepftpDownloadService;
     private final Provider<ItemizeService> itemizeService;
@@ -37,13 +37,13 @@ public class NEPServiceImpl implements NEPService {
 
     @Inject
     public NEPServiceImpl(
-        @Named("WorkflowExecutionService") Provider<WorkflowExecutionService> workflowExecutionService,
+        @Named("TranscodeService") Provider<TranscodeService> transcodeService,
         @Named("NEPFTPUploadService") Provider<NEPFTPUploadService> nepftpUploadService,
         @Named("NEPFTPDownloadService") Provider<NEPFTPDownloadService> nepftpDownloadService,
         @Named("ItemizeService") Provider<ItemizeService> itemizeService
 
         ) {
-        this.workflowExecutionService = workflowExecutionService;
+        this.transcodeService = transcodeService;
         this.nepftpUploadService = nepftpUploadService;
         this.nepftpDownloadService = nepftpDownloadService;
         this.itemizeService = itemizeService;
@@ -56,13 +56,13 @@ public class NEPServiceImpl implements NEPService {
 
     @Override
     public WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException {
-        return workflowExecutionService.get().transcode(request);
+        return transcodeService.get().transcode(request);
 
     }
 
     @Override
     public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
-        return workflowExecutionService.get().getTranscodeStatuses(mid, status, from, limit);
+        return transcodeService.get().getTranscodeStatuses(mid, status, from, limit);
 
     }
 
@@ -88,7 +88,7 @@ public class NEPServiceImpl implements NEPService {
 
         }
         try {
-            builder.append("workflows: ").append(workflowExecutionService.get().toString()).append(",");
+            builder.append("workflows: ").append(transcodeService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
