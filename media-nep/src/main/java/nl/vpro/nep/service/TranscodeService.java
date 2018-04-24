@@ -9,10 +9,12 @@ import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 
 /**
+ * Actually this is the 'transcode service'
+ *
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public interface WorkflowExecutionService {
+public interface TranscodeService {
 
     WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException;
 
