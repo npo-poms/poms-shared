@@ -50,14 +50,14 @@ import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 import nl.vpro.nep.domain.workflow.WorkflowList;
-import nl.vpro.nep.service.WorkflowExecutionService;
+import nl.vpro.nep.service.TranscodeService;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.FilteringIterator;
 import nl.vpro.util.MaxOffsetIterator;
 
 @Slf4j
-@Service("WorkflowExecutionService")
-public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
+@Service("TranscodeService")
+public class TranscodeServiceImpl implements TranscodeService {
 
     public static final HALMapper MAPPER = new HALMapper();
 
@@ -76,7 +76,7 @@ public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
     private HttpClientContext clientContext;
 
     @Inject
-    public WorkflowExecutionServiceImpl(
+    public TranscodeServiceImpl(
          @Value("${nep.api.baseUrl}") String url,
          @Value("${nep.api.authorization.username}") String userName,
          @Value("${nep.api.authorization.password}") String password) {
@@ -207,6 +207,6 @@ public class WorkflowExecutionServiceImpl implements WorkflowExecutionService {
 
     @Override
     public String toString() {
-        return WorkflowExecutionServiceImpl.class.getName() + " " + userName + "@" + getWorkflowsEndPoint();
+        return TranscodeServiceImpl.class.getName() + " " + userName + "@" + getWorkflowsEndPoint();
     }
 }
