@@ -4,10 +4,7 @@
 package nl.vpro.domain.media;
 
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
+import java.util.*;
 
 import javax.validation.ConstraintViolation;
 
@@ -18,6 +15,7 @@ import org.junit.Test;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
@@ -214,6 +212,22 @@ public class MediaObjectTest {
         assertThat(constraintViolations.iterator().next().getMessageTemplate()).isEqualTo("{nl.vpro.constraints.mid}");
     }
 
+
+
+    @Test
+    public void testLanguageValidation() {
+        Program p = new Program();
+        p.setType(ProgramType.BROADCAST);
+        p.setAVType(AVType.MIXED);
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
+        p.setLanguages(Arrays.asList(new Locale("ZZ"), Locales.DUTCH));
+
+        Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
+        assertThat(constraintViolations).hasSize(1);
+        assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{nl.vpro.constraints.language}");
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("{nl.vpro.constraints.language}");
+
+    }
 
     @Test
     public void testRelationValidation() {
