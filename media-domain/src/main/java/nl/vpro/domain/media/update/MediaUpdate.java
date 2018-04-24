@@ -271,22 +271,29 @@ public abstract class  MediaUpdate<M extends MediaObject>
                     Default.class, PomsValidatorGroup.class
                 };
             }
-            mediaObject();
-            Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
-            if (result.isEmpty()) {
-                fetch();
-                mediaObjectToValidate = mediaObject();
-                try {
-                    result = VALIDATOR.validate(this, groups);
-                    if (result.isEmpty()) {
-                        log.debug("validates");
-                    }
-                } finally {
-                    mediaObjectToValidate = null;
+            try {
+                mediaObject();
+                Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
+                if (result.isEmpty()) {
+                    fetch();
+                    mediaObjectToValidate = mediaObject();
+                    try {
+                        result = VALIDATOR.validate(this, groups);
+                        if (result.isEmpty()) {
+                            log.debug("validates");
+                        }
+                    } catch (Throwable e) {
+                        log.error(e.getMessage(), e);
+                    } finally {
+                        mediaObjectToValidate = null;
 
+                    }
                 }
+                return result;
+            } catch (Throwable t) {
+                log.error(t.getMessage(), t);
+                return Collections.emptySet();
             }
-            return result;
         } else {
             log.warn("Cannot validate since no validator available");
             return Collections.emptySet();
