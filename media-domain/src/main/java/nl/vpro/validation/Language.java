@@ -7,7 +7,8 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
@@ -15,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @since 3.0
  */
 
-@Target({TYPE})
+@Target({FIELD, METHOD})
 @Retention(RUNTIME)
 @Constraint(validatedBy = LanguageValidator.class)
 @Documented
