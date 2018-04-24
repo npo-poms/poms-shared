@@ -73,7 +73,6 @@ import static nl.vpro.domain.media.MediaObject.*;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Language
 @Cacheable
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso({ Program.class, Group.class, Segment.class })
@@ -341,6 +340,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Language
     protected List<Locale> languages;
 
     @Enumerated(EnumType.STRING)

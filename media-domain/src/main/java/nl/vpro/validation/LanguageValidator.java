@@ -1,9 +1,6 @@
 package nl.vpro.validation;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -11,15 +8,13 @@ import javax.validation.ConstraintValidatorContext;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.com.neovisionaries.i18n.LanguageAlpha3Code;
-
 import nl.vpro.com.neovisionaries.i18n.LanguageCode;
-import nl.vpro.domain.media.MediaObject;
 
 /**
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-public class LanguageValidator implements ConstraintValidator<Language, MediaObject> {
+public class LanguageValidator implements ConstraintValidator<Language, Object> {
 
     // http://www-01.sil.org/iso639-3/documentation.asp?id=zxx
     private static final Set<String> VALID_ISO_LANGUAGES = new HashSet<>();
@@ -41,14 +36,37 @@ public class LanguageValidator implements ConstraintValidator<Language, MediaObj
     }
 
     @Override
-    public boolean isValid(MediaObject value, ConstraintValidatorContext context) {
-        for (Locale locale : value.getLanguages()) {
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        for (Locale locale : toCollectionOfLocales(value)) {
             if (! isValid(locale, context)) {
+                //context.disableDefaultConstraintViolation();
+                //ConstraintValidatorContext.ConstraintViolationBuilder constraintViolationBuilder = context.buildConstraintViolationWithTemplate("{nl.vpro.constraints.lanuage}");
+                //constraintViolationBuilder.addConstraintViolation();
+
                 return false;
             }
         }
         return true;
+    }
 
+    protected Collection<Locale> toCollectionOfLocales(Object o) {
+        List<Locale> result = new ArrayList<>();
+        if (o instanceof Collection) {
+            for (Object s : (Collection) o) {
+                result.add(toLocale(s));
+            }
+        } else {
+            result.add(toLocale(o));
+        }
+        return result;
+    }
+
+    protected Locale toLocale(Object o) {
+        if (o instanceof Locale) {
+            return (Locale) o;
+        } else {
+            return Locale.forLanguageTag(o.toString());
+        }
     }
 
 
