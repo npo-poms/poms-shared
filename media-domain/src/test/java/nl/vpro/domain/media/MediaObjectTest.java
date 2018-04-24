@@ -9,6 +9,7 @@ import java.util.*;
 import javax.validation.ConstraintViolation;
 
 import org.assertj.core.api.Assertions;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -26,6 +27,11 @@ import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("deprecation")
 public class MediaObjectTest {
+
+    @BeforeClass
+    public static void init() {
+        Locale.setDefault(Locale.US);
+    }
 
     @Test
     public void testIdFromUrn() {
@@ -225,7 +231,7 @@ public class MediaObjectTest {
         Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
         assertThat(constraintViolations).hasSize(1);
         assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{nl.vpro.constraints.language}");
-        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("{nl.vpro.constraints.language}");
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("[zz, nl] contains an invalid ISO 639 language code: zz");
 
     }
 
