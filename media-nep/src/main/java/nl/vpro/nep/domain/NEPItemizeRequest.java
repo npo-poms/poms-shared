@@ -27,6 +27,8 @@ public class NEPItemizeRequest {
     private String starttime;
     private String endtime;
 
+    private Integer max_bitrate;
+
 
     public static Optional<String> fromDuration(Duration duration) {
         if (duration == null) {
