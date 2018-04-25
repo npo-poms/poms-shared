@@ -13,18 +13,23 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.EnumSet;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 
-@Service("NEPUploadService")
+
+/**
+ *  This is a wrapper for ftp.nepworldwide.nl This is were we have to upload file for transcoding
+ */
+@Named("NEPUploadService")
 @Slf4j
 public class NEPFTPUploadServiceImpl implements NEPUploadService {
 
@@ -50,8 +55,14 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
         this.password = password;
         this.hostKey = hostKey;
 
-        log.debug("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
     }
+
+
+    @PostConstruct
+    public void init() {
+        log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, sftpHost, hostKey);
+    }
+
     @PreDestroy
     public void destroy() throws IOException {
         if (sshClient != null) {

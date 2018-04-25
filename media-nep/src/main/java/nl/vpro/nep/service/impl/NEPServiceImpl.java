@@ -12,8 +12,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
-import org.springframework.stereotype.Service;
-
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.domain.NEPItemizeRequest;
 import nl.vpro.nep.domain.NEPItemizeResponse;
@@ -26,7 +24,6 @@ import nl.vpro.nep.service.*;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-@Service
 public class NEPServiceImpl implements NEPService {
     private final Provider<NEPTranscodeService> transcodeService;
     private final Provider<NEPUploadService> nepftpUploadService;
