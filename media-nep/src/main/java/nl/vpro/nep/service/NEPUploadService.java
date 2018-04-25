@@ -5,6 +5,6 @@ import java.io.InputStream;
 
 import nl.vpro.logging.simple.SimpleLogger;
 
-public interface NEPFTPUploadService {
+public interface NEPUploadService {
     long upload(SimpleLogger logger, String nepFile, Long size, InputStream stream) throws IOException;
 }

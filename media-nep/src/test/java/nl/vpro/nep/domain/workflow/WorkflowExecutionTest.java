@@ -6,7 +6,7 @@ import java.time.ZoneId;
 
 import org.junit.Test;
 
-import nl.vpro.nep.service.impl.TranscodeServiceImpl;
+import nl.vpro.nep.service.impl.NEPTranscodeServiceImpl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +20,7 @@ public class WorkflowExecutionTest {
     @Test
     public void unmarshal() throws IOException {
         WorkflowExecution workflowExecution =
-        TranscodeServiceImpl.MAPPER.readValue("{\n" +
+        NEPTranscodeServiceImpl.MAPPER.readValue("{\n" +
             "      \"workflowId\" : \"01680e99-134d-43ee-af29-c514e6fc1f66\",\n" +
             "      \"status\" : \"FAILED\",\n" +
             "      \"statusMessage\" : \"Packaging failed.\",\n" +

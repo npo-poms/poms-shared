@@ -21,19 +21,19 @@ import org.springframework.stereotype.Service;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.nep.domain.NEPItemizeRequest;
 import nl.vpro.nep.domain.NEPItemizeResponse;
-import nl.vpro.nep.service.ItemizeService;
+import nl.vpro.nep.service.NEPItemizeService;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-@Service("ItemizeService")
-public class ItemizeServiceImpl implements ItemizeService {
+@Service("NEPItemizeService")
+public class NEPItemizeServiceImpl implements NEPItemizeService {
     private final String itemizeKey;
     private final String itemizeUrl;
 
     @Inject
-    public ItemizeServiceImpl(
+    public NEPItemizeServiceImpl(
         @Value("${nep.player.itemizer.url}") String itemizeUrl,
         @Value("${nep.player.itemizer.key}") String itemizeKey) {
 
