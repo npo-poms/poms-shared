@@ -14,7 +14,7 @@ import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public interface TranscodeService {
+public interface NEPTranscodeService {
 
     WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException;
 

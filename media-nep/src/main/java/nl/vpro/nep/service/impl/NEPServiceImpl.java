@@ -28,19 +28,19 @@ import nl.vpro.nep.service.*;
  */
 @Service
 public class NEPServiceImpl implements NEPService {
-    private final Provider<TranscodeService> transcodeService;
-    private final Provider<NEPFTPUploadService> nepftpUploadService;
-    private final Provider<NEPFTPDownloadService> nepftpDownloadService;
-    private final Provider<ItemizeService> itemizeService;
+    private final Provider<NEPTranscodeService> transcodeService;
+    private final Provider<NEPUploadService> nepftpUploadService;
+    private final Provider<NEPDownloadService> nepftpDownloadService;
+    private final Provider<NEPItemizeService> itemizeService;
 
 
 
     @Inject
     public NEPServiceImpl(
-        @Named("TranscodeService") Provider<TranscodeService> transcodeService,
-        @Named("NEPFTPUploadService") Provider<NEPFTPUploadService> nepftpUploadService,
-        @Named("NEPFTPDownloadService") Provider<NEPFTPDownloadService> nepftpDownloadService,
-        @Named("ItemizeService") Provider<ItemizeService> itemizeService
+        @Named("NEPTranscodeService") Provider<NEPTranscodeService> transcodeService,
+        @Named("NEPUploadService") Provider<NEPUploadService> nepftpUploadService,
+        @Named("NEPDownloadService") Provider<NEPDownloadService> nepftpDownloadService,
+        @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService
 
         ) {
         this.transcodeService = transcodeService;
