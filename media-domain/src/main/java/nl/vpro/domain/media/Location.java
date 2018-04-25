@@ -303,7 +303,9 @@ public class Location extends PublishableObject<Location>
                 Embargos.copy(record, this);
             }
             if (this.mediaObject.getLocations().contains(this)) {
-                this.mediaObject.realizePrediction(this);
+                if (isPublishable()) {
+                    this.mediaObject.realizePrediction(this);
+                }
             }
         }
     }
