@@ -35,5 +35,9 @@ public interface DoAsTransactionService extends TransactionService {
 
     <T> void executeInNewTransaction(String user, T argument, Consumer<T> consumer);
 
+    default TransactionService as(String user) {
+        return new WithUserTransactionServiceImpl(user, this);
+    }
+
 
 }
