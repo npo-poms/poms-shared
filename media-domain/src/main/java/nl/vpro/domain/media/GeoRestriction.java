@@ -132,5 +132,4 @@ public class GeoRestriction extends Restriction<GeoRestriction> implements Compa
     }
 
 
-
 }
