@@ -25,6 +25,15 @@ public class DomainObjects {
     }
 
     public static void appendCanonicalFilePath(Long i, StringBuilder builder) {
+        if (i == null) {
+            throw new IllegalArgumentException();
+        }
+        appendCanonicalFilePath(String.valueOf(i), builder);
+    }
+     public static void appendCanonicalFilePath(String i, StringBuilder builder) {
+        if (i == null) {
+            throw new IllegalArgumentException();
+        }
         String id = String.valueOf(i);
 
         CharacterIterator it = new StringCharacterIterator(id);
