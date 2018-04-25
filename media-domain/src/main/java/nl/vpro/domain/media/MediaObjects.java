@@ -7,6 +7,8 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.text.CharacterIterator;
+import java.text.StringCharacterIterator;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -636,6 +638,7 @@ public class MediaObjects {
             return memberOf;
         }
     }
+
 
 
 

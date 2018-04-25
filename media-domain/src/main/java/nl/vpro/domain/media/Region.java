@@ -13,6 +13,9 @@ import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
 import nl.vpro.domain.Displayable;
 
+/**
+ * The region as used in {@link GeoRestriction}. The order wants to be from more to less restrictive.
+ */
 @XmlEnum
 public enum Region implements Displayable {
 
@@ -27,13 +30,7 @@ public enum Region implements Displayable {
     @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not support by the NPO player)")
     BENELUX("Benelux"),
 
-    /**
-     * @since 5.6
-     */
-    @XmlDocumentation("Means that this object can only be played in Europe")
-    EUROPE("Europa"),
-
-    /**
+     /**
      * @since 5.6
      */
     @XmlDocumentation("Nederland plus BES gemeentes")
@@ -45,11 +42,21 @@ public enum Region implements Displayable {
     @XmlDocumentation("Nederland plus BES gemeentes plus Curaçao, St. Maarten en Aruba")
     NLALL("Nederland, de BES-gemeenten, Curaçao, St. Maarten en Aruba"),
 
-    /**
+
+     /**
      * @since 5.6
      */
     @XmlDocumentation("European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba")
-    EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba");
+    EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba"),
+
+    /**
+     * @since 5.6
+     */
+    @XmlDocumentation("Means that this object can only be played in Europe")
+    EUROPE("Europa");
+
+
+
 
     @Getter
     private final String displayName;
