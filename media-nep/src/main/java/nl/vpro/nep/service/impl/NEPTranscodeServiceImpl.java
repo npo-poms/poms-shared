@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHost;
@@ -40,8 +41,6 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -56,7 +55,7 @@ import nl.vpro.util.FilteringIterator;
 import nl.vpro.util.MaxOffsetIterator;
 
 @Slf4j
-@Service("NEPTranscodeService")
+@Named("NEPTranscodeService")
 public class NEPTranscodeServiceImpl implements NEPTranscodeService {
 
     public static final HALMapper MAPPER = new HALMapper();
