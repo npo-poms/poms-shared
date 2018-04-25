@@ -24,6 +24,7 @@ import nl.vpro.nep.service.*;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
+@Named("NEPService")
 public class NEPServiceImpl implements NEPService {
     private final Provider<NEPTranscodeService> transcodeService;
     private final Provider<NEPUploadService> nepftpUploadService;
