@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -16,7 +17,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.nep.domain.NEPItemizeRequest;
@@ -27,7 +27,7 @@ import nl.vpro.nep.service.NEPItemizeService;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-@Service("NEPItemizeService")
+@Named("NEPItemizeService")
 public class NEPItemizeServiceImpl implements NEPItemizeService {
     private final String itemizeKey;
     private final String itemizeUrl;
