@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.EnumSet;
 import java.util.function.Function;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,13 +20,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import nl.vpro.nep.service.FileDescriptor;
-import nl.vpro.nep.service.NEPFTPDownloadService;
+import nl.vpro.nep.service.NEPDownloadService;
 
 import static org.apache.commons.io.IOUtils.copy;
 
-@Service("NEPFTPDownloadService")
+@Service("NEPDownloadService")
 @Slf4j
-public class NEPFTPDownloadServiceImpl implements NEPFTPDownloadService {
+public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
 
 
     private final String ftpHost;
@@ -47,9 +48,14 @@ public class NEPFTPDownloadServiceImpl implements NEPFTPDownloadService {
         this.hostKey = hostKey;
     }
 
+    @PostConstruct
+    public void init() {
+        log.info("NEP download service for {}@{}", username, ftpHost);
+    }
+
     @Override
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
-        log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, ftpHost, hostKey);
+        log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, ftpHost, hostKey);
 
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
