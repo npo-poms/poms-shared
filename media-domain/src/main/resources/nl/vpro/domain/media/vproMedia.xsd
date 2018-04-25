@@ -859,13 +859,6 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="EUROPE">
-        <xs:annotation>
-          <xs:documentation>
-            New in 5.6. Europa in breedste zin van het woord
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
       <xs:enumeration value="NLBES">
          <xs:annotation>
           <xs:documentation>
@@ -884,6 +877,13 @@
          <xs:annotation>
           <xs:documentation>
             New in 5.6. EU (incl. BES gemeentes, Curacao, St. Maarten en Aruba)
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+       <xs:enumeration value="EUROPE">
+        <xs:annotation>
+          <xs:documentation>
+            New in 5.6. Europa in breedste zin van het woord
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
