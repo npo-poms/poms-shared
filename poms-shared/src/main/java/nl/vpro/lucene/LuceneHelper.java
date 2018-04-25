@@ -29,7 +29,7 @@ public class LuceneHelper {
 
     private static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
-    public static final Version VERSION = Version.LUCENE_5_3_1;
+    public static final Version VERSION = Version.LUCENE_5_5_5;
 
     // Disallowed input. Only allowing phrase and wildcard queries with: " , * and ?.
 
