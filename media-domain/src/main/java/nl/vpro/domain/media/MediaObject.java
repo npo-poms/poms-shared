@@ -2032,7 +2032,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         } else {
             locations.add(location);
             location.setParent(this);
-            if (location.hasPlatform()) {
+            if (location.hasPlatform() && location.isPublishable()) {
                 realizePrediction(location);
             }
         }
