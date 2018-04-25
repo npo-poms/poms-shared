@@ -21,12 +21,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.nep.service.NEPFTPUploadService;
+import nl.vpro.nep.service.NEPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 
-@Service("NEPFTPUploadService")
+@Service("NEPUploadService")
 @Slf4j
-public class NEPFTPUploadServiceImpl implements NEPFTPUploadService {
+public class NEPFTPUploadServiceImpl implements NEPUploadService {
 
     private final String sftpHost;
     private final String username;

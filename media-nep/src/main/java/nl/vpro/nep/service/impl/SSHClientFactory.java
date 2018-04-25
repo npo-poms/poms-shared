@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.time.Duration;
 
 @Slf4j
-public final class SSHClientFactory {
+final class SSHClientFactory {
 
     private SSHClientFactory(){
     }
@@ -17,7 +17,7 @@ public final class SSHClientFactory {
     private static final Duration sshTimeout  = Duration.ofSeconds(300);
     private static final Duration sshConnectionTimeout  = Duration.ofSeconds(5);
 
-    public static SSHClient create(String hostKey, String host, String username, String password) throws IOException {
+    static SSHClient create(String hostKey, String host, String username, String password) throws IOException {
 
         final DefaultConfig configuration = new DefaultConfig();
         configuration.setKeepAliveProvider(KeepAliveProvider.KEEP_ALIVE);
