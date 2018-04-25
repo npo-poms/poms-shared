@@ -13,16 +13,16 @@ import nl.vpro.nep.domain.workflow.EncryptionType;
 import nl.vpro.nep.domain.workflow.PriorityType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
-import nl.vpro.nep.service.impl.TranscodeServiceImpl;
+import nl.vpro.nep.service.impl.NEPTranscodeServiceImpl;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.6
  */
 @Slf4j
-public class WorkflowExecutionServiceImplITest {
-    TranscodeServiceImpl nepService =
-        new TranscodeServiceImpl("http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl", "user", "***REMOVED***");
+public class NEPTranscodeServiceImplITest {
+    NEPTranscodeServiceImpl nepService =
+        new NEPTranscodeServiceImpl("http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl", "user", "***REMOVED***");
 
 
     @Before
