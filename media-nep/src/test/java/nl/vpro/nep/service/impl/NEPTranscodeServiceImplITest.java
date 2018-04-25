@@ -1,4 +1,4 @@
-package nl.vpro.nep.service;
+package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,7 +13,6 @@ import nl.vpro.nep.domain.workflow.EncryptionType;
 import nl.vpro.nep.domain.workflow.PriorityType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
-import nl.vpro.nep.service.impl.NEPTranscodeServiceImpl;
 
 /**
  * @author Michiel Meeuwissen

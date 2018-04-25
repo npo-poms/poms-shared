@@ -14,17 +14,21 @@ import java.util.function.Function;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import nl.vpro.nep.service.FileDescriptor;
 import nl.vpro.nep.service.NEPDownloadService;
 
 import static org.apache.commons.io.IOUtils.copy;
 
-@Service("NEPDownloadService")
+
+/**
+ * This is a wrapper for sftp-itemizer.nepworldwide.nl This is were itemize results are placed by NEP
+ */
+@Named("NEPDownloadService")
 @Slf4j
 public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
 
@@ -56,7 +60,6 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
     @Override
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
         log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, ftpHost, hostKey);
-
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
         }
@@ -73,6 +76,7 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
                     FileDescriptor descriptor = FileDescriptor.builder()
                         .size(handle.length())
                         .lastModified(Instant.ofEpochMilli(attributes.getMtime()))
+                        .fileName(nepFile)
                         .build();
                     if (descriptorConsumer != null) {
                         try {
@@ -93,10 +97,11 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
                     if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
                         throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
                     }
+                    log.info("{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
                     Thread.sleep(Duration.ofSeconds(10).toMillis());
                 }
             }
-            log.info("File appeared {} in {}, now copying.", nepFile, Duration.between(start, Instant.now()));
+            log.info("File appeared {} in {}, now copying to {}.", nepFile, Duration.between(start, Instant.now()), outputStream);
 
             copy(in, outputStream);
 
