@@ -6,6 +6,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
+ * This is a  {@link TransactionService} that will do everything on behalf of one specified user, using
+ * a {@link DoAsTransactionService}.
+ *
  * @author Michiel Meeuwissen
  * @since 5.7
  */
