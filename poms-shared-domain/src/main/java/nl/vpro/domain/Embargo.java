@@ -22,4 +22,6 @@ public interface Embargo<T extends Embargo<T>> extends ReadonlyEmbargo {
         return (T) this;
     }
 
+
+
 }
