@@ -1,6 +1,7 @@
 package nl.vpro.domain;
 
 import java.time.Instant;
+import java.util.Objects;
 
 /**
  * Utilities related to {@link Embargo}
@@ -110,8 +111,24 @@ public class Embargos {
 
         };
     }
-    public static Embargo of(final Instant start, final Instant stop) {
+    public static Embargo<BasicEmbargo> of(final Instant start, final Instant stop) {
         return new BasicEmbargo(start, stop);
+    }
+
+    public static Embargo<BasicEmbargo> of(ReadonlyEmbargo readonlyEmbargo) {
+        return new BasicEmbargo(readonlyEmbargo.getPublishStartInstant(), readonlyEmbargo.getPublishStopInstant());
+    }
+
+    public static Embargo<BasicEmbargo> unrestrictedInstant() {
+        return new BasicEmbargo(null,  null);
+    }
+    public static Embargo<BasicEmbargo> restrictedInstant() {
+        return new BasicEmbargo(Instant.MAX, Instant.MIN);
+    }
+
+    public static boolean equals(ReadonlyEmbargo e1, ReadonlyEmbargo e2) {
+         return Objects.equals(e1.getPublishStartInstant(), e2.getPublishStartInstant()) &&
+             Objects.equals(e1.getPublishStopInstant(), e2.getPublishStopInstant());
     }
 
     public static String toString(ReadonlyEmbargo embargo) {
