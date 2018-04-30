@@ -883,6 +883,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
 
+    /**
+     * @since 5.6
+     */
     @XmlElement(name = "prediction")
     @Valid
     public Set<PredictionUpdate> getPredictions() {
@@ -892,6 +895,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return predictions;
     }
 
+
+    /**
+     * @since 5.6
+     */
     public void setPredictions(Set<PredictionUpdate> predictions) {
         this.predictions = predictions;
     }
