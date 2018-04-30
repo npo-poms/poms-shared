@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import nl.vpro.domain.page.Portal;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Roelof Jan Koekoek
@@ -17,7 +17,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class UrlsTest {
 
     @Test
-    public void testNormalizeEndingSlash() throws Exception {
+    public void testNormalizeEndingSlash() {
         String input = "http://www.vpro.nl/";
         String expected = "http://www.vpro.nl";
 
@@ -25,7 +25,7 @@ public class UrlsTest {
     }
 
     @Test
-    public void testNormalizeEndingSlashWithQuery() throws Exception {
+    public void testNormalizeEndingSlashWithQuery() {
         String input = "http://www.vpro.nl/folder/?a";
         String expected = "http://www.vpro.nl/folder?a";
 
@@ -33,7 +33,7 @@ public class UrlsTest {
     }
 
     @Test
-    public void testNormalizeEndingSlashWithHashTag() throws Exception {
+    public void testNormalizeEndingSlashWithHashTag() {
         String input = "http://www.vpro.nl/folder/#/hashtag";
         String expected = "http://www.vpro.nl/folder#/hashtag";
 
@@ -41,7 +41,7 @@ public class UrlsTest {
     }
 
     @Test
-    public void testNormalizeEncode() throws Exception {
+    public void testNormalizeEncode() {
         String input = "http://www.vpro.nl/file with whitespace.html";
         String expected = "http://www.vpro.nl/file%20with%20whitespace.html";
 
@@ -49,7 +49,7 @@ public class UrlsTest {
     }
 
     @Test
-    public void testNormalizeDoubleEncode() throws Exception {
+    public void testNormalizeDoubleEncode() {
         String input = "http://www.vpro.nl/file%20with%20whitespace.html";
         String expected = "http://www.vpro.nl/file%20with%20whitespace.html";
 
@@ -57,7 +57,7 @@ public class UrlsTest {
     }
 
     @Test
-    public void testNormalizeQuery() throws Exception {
+    public void testNormalizeQuery() {
         String input = "http://www.vpro.nl/file.html?c=2&b=1&a";
         String expected = "http://www.vpro.nl/file.html?a&b=1&c=2";
 
@@ -65,7 +65,7 @@ public class UrlsTest {
     }
 
     @Test
-    public void testNormalizeQueryWithHashTag() throws Exception {
+    public void testNormalizeQueryWithHashTag() {
         String input = "http://www.vpro.nl/file.html?c=2&b=1&a#anchor";
         String expected = "http://www.vpro.nl/file.html?a&b=1&c=2#anchor";
 
@@ -73,7 +73,7 @@ public class UrlsTest {
     }
 
     @Test
-    public void testNormalizePort80() throws Exception {
+    public void testNormalizePort80() {
         String input = "http://www.vpro.nl:80/file.html";
         String expected = "http://www.vpro.nl/file.html";
 
@@ -81,7 +81,7 @@ public class UrlsTest {
     }
 
     @Test
-    public void testNormalizePort443() throws Exception {
+    public void testNormalizePort443() {
         String input = "https://www.vpro.nl:443/file.html";
         String expected = "https://www.vpro.nl/file.html";
 
@@ -102,35 +102,35 @@ public class UrlsTest {
     }
 
     @Test
-    public void testPortalFrom() throws Exception {
+    public void testPortalFrom() {
         Portal portal = Urls.portalFrom("VPRONL", "https://www.vpro.nl/");
         assertThat(portal.getUrl()).isEqualTo("https://www.vpro.nl");
         assertThat(portal.getSection()).isNull();
     }
 
     @Test
-    public void testPortalFromWithDoubleSlash() throws Exception {
+    public void testPortalFromWithDoubleSlash() {
         Portal portal = Urls.portalFrom("VPRONL", "https://www.vpro.nl//");
         assertThat(portal.getUrl()).isEqualTo("https://www.vpro.nl");
         assertThat(portal.getSection()).isNull();
     }
 
     @Test
-    public void testPortalFromWithFileExtension() throws Exception {
+    public void testPortalFromWithFileExtension() {
         Portal portal = Urls.portalFrom("VPRONL", "https://www.vpro.nl/article.html");
         assertThat(portal.getUrl()).isEqualTo("https://www.vpro.nl");
         assertThat(portal.getSection()).isNull();
     }
 
     @Test
-    public void testPortalFromWithSection() throws Exception {
+    public void testPortalFromWithSection() {
         Portal portal = Urls.portalFrom("VPRONL", "https://www.vpro.nl/news/article.html");
         assertThat(portal.getUrl()).isEqualTo("https://www.vpro.nl");
         assertThat(portal.getSection().getPath()).isEqualTo("/news");
     }
 
     @Test
-    public void testNormalizeCrid() throws Exception {
+    public void testNormalizeCrid() {
         String crid = "crid://cinema/Movies/123";
         String normalized = Urls.normalize(crid);
         assertThat(normalized).isEqualTo(crid);
