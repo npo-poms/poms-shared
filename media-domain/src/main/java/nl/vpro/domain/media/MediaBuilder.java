@@ -45,11 +45,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return program().type(type);
     }
 
+      static ProgramBuilder broadcast() {
+          return program()
+            .type(ProgramType.BROADCAST)
+              .audioOrVideo();
+    }
+
     static ProgramBuilder clip() {
         return program()
             .type(ProgramType.CLIP)
-            .ageRating(AgeRating.ALL)
-            .avType(AVType.VIDEO);
+            .audioOrVideo();
     }
 
     static ProgramBuilder program(Program program) {
@@ -531,6 +536,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         mediaObject().setAgeRating(ageRating);
         return (B)this;
     }
+    default B ageRatingAllIfUnset() {
+        if (mediaObject().getAgeRating() == null) {
+            mediaObject().setAgeRating(AgeRating.ALL);
+        }
+        return (B) this;
+    }
+
 
     @SuppressWarnings("unchecked")
     default B contentRatings(ContentRating... contentRatings) {
@@ -748,6 +760,25 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
         mediaObject().setMergedTo(null);
         return (B) this;
+    }
+
+    default B video() {
+        return
+            ageRatingAllIfUnset()
+                .avType(AVType.VIDEO);
+    }
+
+    default B audio() {
+        return
+            ageRatingAllIfUnset()
+                .avType(AVType.AUDIO);
+    }
+
+
+     default B audioOrVideo() {
+        return
+            ageRatingAllIfUnset()
+                .avType(AVType.MIXED);
     }
     /**
      * Makes a (deep) copy of this builder. This returns a new instance on which you can make changes without affecting the original one.
