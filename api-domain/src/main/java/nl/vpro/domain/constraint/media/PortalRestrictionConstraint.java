@@ -38,7 +38,9 @@ public class PortalRestrictionConstraint extends AbstractTextConstraint<MediaObj
 
     @Override
     public boolean test(@Nullable MediaObject input) {
-        if (input == null) return false;
+        if (input == null) {
+            return false;
+        }
         for (PortalRestriction e : input.getPortalRestrictions()) {
             if (value.equals(e.getPortalId())) {
                 return true;
