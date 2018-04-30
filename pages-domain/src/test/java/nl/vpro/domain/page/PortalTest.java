@@ -9,7 +9,8 @@ import org.junit.Test;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 /**
  * @author Roelof Jan Koekoek
