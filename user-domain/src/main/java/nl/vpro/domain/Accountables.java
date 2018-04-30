@@ -10,6 +10,7 @@ import static nl.vpro.domain.AbstractPublishableObject_.*;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
+@SuppressWarnings("JavadocReference")
 public class Accountables {
 
     public static void fillFor(Accountable accountable, Instant now, Editor currentUser) {
