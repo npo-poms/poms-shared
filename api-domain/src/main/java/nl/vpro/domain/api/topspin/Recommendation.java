@@ -13,5 +13,9 @@ public class Recommendation {
     @NonNull
     private String midRef;
 
+    public Recommendation(String m) {
+        this.midRef = m;
+    }
+
 
 }
