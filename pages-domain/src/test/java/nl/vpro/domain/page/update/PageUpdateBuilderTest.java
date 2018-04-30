@@ -23,7 +23,8 @@ import nl.vpro.domain.page.PageType;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 /**
  * @author Roelof Jan Koekoek
@@ -35,7 +36,7 @@ public class PageUpdateBuilderTest {
     public void testPage() throws Exception {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page, "<pageUpdate:page type=\"ARTICLE\" url=\"http://www.vpro.nl\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\"/>");
-        assertThat(result.getType());
+        assertThat(result.getType()).isEqualTo(PageType.ARTICLE);
     }
 
     @Test

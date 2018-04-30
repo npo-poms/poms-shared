@@ -9,7 +9,8 @@ import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.media.MediaClassificationService;
 import nl.vpro.jackson2.Jackson2Mapper;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class GenreTest {
 
