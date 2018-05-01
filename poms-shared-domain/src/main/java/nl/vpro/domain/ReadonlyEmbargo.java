@@ -26,7 +26,7 @@ public interface ReadonlyEmbargo {
      */
     default Range<Instant> asRange() {
         if (getPublishStopInstant() == null) {
-            if (getPublishStopInstant() == null) {
+            if (getPublishStartInstant() == null) {
                 return Range.all();
             } else {
                 return Range.lessThan(getPublishStopInstant());
