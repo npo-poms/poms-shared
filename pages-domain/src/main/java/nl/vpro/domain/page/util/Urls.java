@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.page.util;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -17,6 +19,7 @@ import nl.vpro.domain.page.Section;
 /**
  * See http://stackoverflow.com/questions/2993649/how-to-normalize-a-url-in-java with some additions
  */
+@Slf4j
 public class Urls {
 
     public static String normalize(final String taintedURI) {
@@ -110,7 +113,8 @@ public class Urls {
                 try {
                     tokens[j] = URLDecoder.decode(tokens[j], "UTF-8");
                 } catch(UnsupportedEncodingException ex) {
-                    ex.printStackTrace();
+                    // shouldnt happen
+                    log.error(ex.getMessage(), ex);
                 }
             }
             switch(tokens.length) {
