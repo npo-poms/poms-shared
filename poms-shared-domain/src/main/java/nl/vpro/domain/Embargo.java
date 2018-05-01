@@ -2,6 +2,8 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Range;
 
 /**
@@ -12,13 +14,23 @@ import com.google.common.collect.Range;
  */
 public interface Embargo<T extends Embargo<T>> extends ReadonlyEmbargo {
 
-    T setPublishStartInstant(Instant publishStart);
+    @Nullable
+    T setPublishStartInstant(@Nullable Instant publishStart);
 
-    T setPublishStopInstant(Instant publishStop);
+    @Nullable
+    T setPublishStopInstant(@Nullable Instant publishStop);
 
     default T set(Range<Instant> range) {
-        setPublishStartInstant(range.lowerEndpoint());
-        setPublishStopInstant(range.upperEndpoint());
+        if (range.hasLowerBound()) {
+            setPublishStartInstant(range.lowerEndpoint());
+        } else {
+            setPublishStartInstant(null);
+        }
+        if (range.hasUpperBound()) {
+            setPublishStopInstant(range.upperEndpoint());
+        } else {
+            setPublishStopInstant(null);
+        }
         return (T) this;
     }
 
