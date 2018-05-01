@@ -7,8 +7,6 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.text.CharacterIterator;
-import java.text.StringCharacterIterator;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -419,7 +417,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static List<String> getAvailablePlatformNamesInLowerCase(Collection<Prediction> preds) {
+    public static List<String> getPlannedPlatformNamesInLowerCase(Collection<Prediction> preds) {
         if (preds != null) {
             return preds.stream()
                 .filter(Prediction::isPlannedAvailability)
