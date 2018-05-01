@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 /**
  * This is a  {@link TransactionService} that will do everything on behalf of one specified user, using
  * a {@link DoAsTransactionService}.
@@ -23,55 +25,55 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public <T> T executeInNewTransaction(Callable<T> callable) throws Exception {
+    public <T> T executeInNewTransaction(@Nonnull Callable<T> callable) throws Exception {
         return doAsTransactionService.executeInNewTransaction(user, callable);
     }
 
     @Override
-    public <T> T getInNewTransaction(Supplier<T> supplier) {
+    public <T> T getInNewTransaction(@Nonnull  Supplier<T> supplier) {
         return doAsTransactionService.getInNewTransaction(user, supplier);
 
     }
 
     @Override
-    public void executeInNewTransaction(Runnable runnable) {
+    public void executeInNewTransaction(@Nonnull  Runnable runnable) {
         doAsTransactionService.executeInNewTransaction(user, runnable);
     }
 
     @Override
-    public <T, S> T executeInNewTransaction(S argument, Function<S, T> function) {
+    public <T, S> T executeInNewTransaction(S argument, @Nonnull Function<S, T> function) {
         return doAsTransactionService.executeInNewTransaction(user, argument, function);
     }
 
     @Override
-    public <T> void executeInNewTransaction(T argument, Consumer<T> consumer) {
+    public <T> void executeInNewTransaction(T argument, @Nonnull Consumer<T> consumer) {
         doAsTransactionService.executeInNewTransaction(user, argument, consumer);
 
     }
 
     @Override
-    public <T> T executeInReadonlyTransaction(Callable<T> callable) throws Exception {
+    public <T> T executeInReadonlyTransaction(@Nonnull Callable<T> callable) throws Exception {
         return doAsTransactionService.executeInReadonlyTransaction(user, callable);
     }
 
     @Override
-    public <T> T getInReadonlyTransaction(Supplier<T> supplier) {
+    public <T> T getInReadonlyTransaction(@Nonnull Supplier<T> supplier) {
         return doAsTransactionService.getInReadonlyTransaction(user, supplier);
 
     }
 
     @Override
-    public void executeInReadonlyTransaction(Runnable runnable) {
+    public void executeInReadonlyTransaction(@Nonnull Runnable runnable) {
         doAsTransactionService.executeInReadonlyTransaction(user, runnable);
     }
 
     @Override
-    public <T, S> T executeInReadonlyTransaction(S argument, Function<S, T> function) {
+    public <T, S> T executeInReadonlyTransaction(S argument, @Nonnull Function<S, T> function) {
         return doAsTransactionService.executeInReadonlyTransaction(user, argument, function);
     }
 
     @Override
-    public <T> void executeInReadonlyTransaction(T argument, Consumer<T> consumer) {
+    public <T> void executeInReadonlyTransaction(T argument, @Nonnull Consumer<T> consumer) {
         doAsTransactionService.executeInReadonlyTransaction(user, argument, consumer);
 
     }
