@@ -19,7 +19,7 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     private final DoAsTransactionService doAsTransactionService;
     private final String user;
 
-    public WithUserTransactionServiceImpl(String user, DoAsTransactionService doAsTransactionService) {
+    public WithUserTransactionServiceImpl(@Nonnull String user, @Nonnull DoAsTransactionService doAsTransactionService) {
         this.doAsTransactionService = doAsTransactionService;
         this.user = user;
     }
