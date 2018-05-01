@@ -28,6 +28,7 @@ import static org.junit.Assert.assertTrue;
  * @author Roelof Jan Koekoek
  * @since 1.4
  */
+@SuppressWarnings("deprecation")
 @Slf4j
 public class MediaObjectsTest {
 
@@ -284,7 +285,7 @@ public class MediaObjectsTest {
         predictions.add(p2);
         predictions.add(p3);
 
-        List<String> result = MediaObjects.getAvailablePlatformNamesInLowerCase(predictions);
+        List<String> result = MediaObjects.getPlannedPlatformNamesInLowerCase(predictions);
         assertThat(result).containsExactlyInAnyOrder("plusvod", "internetvod", "npoplusvod");
     }
 
@@ -300,14 +301,14 @@ public class MediaObjectsTest {
         predictions.add(p2);
         predictions.add(p3);
 
-        List<String> result = MediaObjects.getAvailablePlatformNamesInLowerCase(predictions);
+        List<String> result = MediaObjects.getPlannedPlatformNamesInLowerCase(predictions);
         assertThat(result).containsExactlyInAnyOrder("npoplusvod");
     }
 
     @Test
     public void testGetPlatformNamesInLowerCaseEmptyList() {
         Collection<Prediction> predictions = new ArrayList<>();
-        List<String> result = MediaObjects.getAvailablePlatformNamesInLowerCase(predictions);
+        List<String> result = MediaObjects.getPlannedPlatformNamesInLowerCase(predictions);
         assertThat(result).isEmpty();
     }
 
