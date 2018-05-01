@@ -35,6 +35,13 @@ public interface DoAsTransactionService extends TransactionService {
 
     <T> void executeInNewTransaction(String user, T argument, Consumer<T> consumer);
 
+    /**
+     * Makes a {@link TransactionService} which does everything implicit as a certain given user.
+     * @see WithUserTransactionServiceImpl
+     * @param user principalid
+     * @param doAsTransactionService The DoAsTransactionService doing the 'do as' functionality
+     * @since 5.7
+     */
     static TransactionService as(String user, DoAsTransactionService doAsTransactionService) {
         return new WithUserTransactionServiceImpl(user, doAsTransactionService);
     }
