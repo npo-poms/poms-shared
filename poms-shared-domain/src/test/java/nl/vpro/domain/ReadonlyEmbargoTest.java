@@ -54,9 +54,8 @@ public class ReadonlyEmbargoTest {
         assertThat(embargo.inPublicationWindow(start)).isTrue();
         assertThat(embargo.inPublicationWindow(stop)).isFalse();
 
-
-
     }
+
 
 
 }
