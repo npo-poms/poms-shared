@@ -6,6 +6,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Typable;
 
 /**
+ * A String with a type ({@link TypedText})
  * @author Michiel Meeuwissen
  * @since 5.3
  */

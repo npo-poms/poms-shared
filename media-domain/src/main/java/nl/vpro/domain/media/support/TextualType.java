@@ -19,6 +19,10 @@ import nl.vpro.domain.Xmlns;
 
 
 /**
+ * Some textual values can have multiple types, and are stored in the same collection.
+ *
+ * E.g. main titles, sub titles.
+ *
  * The ordering of the enum values is relevant for its users
  *
  */
