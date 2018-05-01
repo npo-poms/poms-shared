@@ -7,6 +7,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
 /**
+ * {@inheritDoc}
  * @author Michiel Meeuwissen
  * @since 5.3
  */
