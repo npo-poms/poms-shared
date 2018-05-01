@@ -5,6 +5,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 /**
  * Please note that transactions are only rolled back in case of a runtime exception
  * @author Danny Sedney
@@ -16,26 +18,26 @@ public interface TransactionService {
      * @return The result of the callable
      * @throws Exception The exception thrown by the callable
      */
-    <T> T executeInNewTransaction(Callable<T> callable) throws Exception;
+    <T> T executeInNewTransaction(@Nonnull Callable<T> callable) throws Exception;
 
-    <T> T getInNewTransaction(Supplier<T> supplier);
+    <T> T getInNewTransaction(@Nonnull Supplier<T> supplier);
 
-    void executeInNewTransaction(Runnable runnable);
+    void executeInNewTransaction(@Nonnull Runnable runnable);
 
-    <T, S> T executeInNewTransaction(S argument, Function<S, T> function);
+    <T, S> T executeInNewTransaction(S argument, @Nonnull Function<S, T> function);
 
-    <T> void executeInNewTransaction(T argument, Consumer<T> consumer);
+    <T> void executeInNewTransaction(T argument,@Nonnull  Consumer<T> consumer);
 
 
-    <T> T executeInReadonlyTransaction(Callable<T> callable) throws Exception;
+    <T> T executeInReadonlyTransaction(@Nonnull Callable<T> callable) throws Exception;
 
-    <T> T getInReadonlyTransaction(Supplier<T> supplier);
+    <T> T getInReadonlyTransaction(@Nonnull Supplier<T> supplier);
 
-    void executeInReadonlyTransaction(Runnable runnable);
+    void executeInReadonlyTransaction(@Nonnull Runnable runnable);
 
-    <T, S> T executeInReadonlyTransaction(S argument, Function<S, T> function);
+    <T, S> T executeInReadonlyTransaction(S argument, @Nonnull Function<S, T> function);
 
-    <T> void executeInReadonlyTransaction(T argument, Consumer<T> consumer);
+    <T> void executeInReadonlyTransaction(T argument, @Nonnull Consumer<T> consumer);
 
 
 }
