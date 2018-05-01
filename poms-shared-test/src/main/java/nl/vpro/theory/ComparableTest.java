@@ -2,8 +2,7 @@ package nl.vpro.theory;
 
 import org.junit.experimental.theories.Theory;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeNotNull;
 
@@ -14,10 +13,10 @@ import static org.junit.Assume.assumeNotNull;
 public abstract class ComparableTest<S extends Comparable<S>> extends ObjectTest<S> {
 
     @Theory
-    public final void equalsConstistentWithComparable(Comparable x, Comparable y) {
+    public final void equalsConsistentWithComparable(Comparable x, Comparable y) {
         assumeNotNull(x);
         assumeNotNull(y);
-        assertThat(x.compareTo(y) == 0, is(x.equals(y)));
+        assertThat(x.compareTo(y) == 0).isEqualTo(x.equals(y));
     }
 
     @Theory
