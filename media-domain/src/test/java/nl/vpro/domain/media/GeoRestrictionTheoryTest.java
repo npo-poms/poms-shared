@@ -23,7 +23,7 @@ public class GeoRestrictionTheoryTest extends ObjectTest<GeoRestriction> {
     public static GeoRestriction nullArgument = null;
 
     @DataPoint
-    public static GeoRestriction beneluxNoTime = new GeoRestriction(Region.BENELUX);
+    public static GeoRestriction europeNoTime = new GeoRestriction(Region.EUROPE);
 
     @DataPoint
     public static GeoRestriction nlNoTime = new GeoRestriction(Region.NL);
@@ -33,19 +33,19 @@ public class GeoRestrictionTheoryTest extends ObjectTest<GeoRestriction> {
     public static GeoRestriction nlTvvod = GeoRestriction.builder().region(Region.NL).platform(Platform.TVVOD).build();
 
     @DataPoint
-    public static GeoRestriction benelux = new GeoRestriction(Region.BENELUX, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
+    public static GeoRestriction europe = new GeoRestriction(Region.EUROPE, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
 
     @DataPoint
     public static GeoRestriction nl = new GeoRestriction(Region.NL, Instant.ofEpochMilli(3), Instant.ofEpochMilli(3));
 
     @Test
     public void testEquals() {
-        assertThat(new GeoRestriction(Region.BENELUX)).isEqualTo(new GeoRestriction(Region.BENELUX));
-        assertThat(GeoRestriction.builder().region(Region.BENELUX).platform(Platform.PLUSVOD).build()).isEqualTo(GeoRestriction.builder().region(Region.BENELUX).platform(Platform.PLUSVOD).build());
+        assertThat(new GeoRestriction(Region.EUROPE)).isEqualTo(new GeoRestriction(Region.EUROPE));
+        assertThat(GeoRestriction.builder().region(Region.EUROPE).platform(Platform.PLUSVOD).build()).isEqualTo(GeoRestriction.builder().region(Region.EUROPE).platform(Platform.PLUSVOD).build());
     }
 
     @Test
     public void testEqualsOnTime() {
-        assertThat(new GeoRestriction(Region.BENELUX)).isNotEqualTo(new GeoRestriction(Region.BENELUX, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2)));
+        assertThat(new GeoRestriction(Region.EUROPE)).isNotEqualTo(new GeoRestriction(Region.EUROPE, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2)));
     }
 }
