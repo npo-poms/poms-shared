@@ -4,6 +4,10 @@
  */
 package nl.vpro.domain.media.support;
 
+/**
+ * @see TextualType
+ * @param <S>
+ */
 public interface Typable<S> {
 
     S getType();
