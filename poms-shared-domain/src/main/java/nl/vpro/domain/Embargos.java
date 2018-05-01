@@ -3,6 +3,8 @@ package nl.vpro.domain;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.google.common.collect.Range;
+
 /**
  * Utilities related to {@link Embargo}
  * @author Michiel Meeuwissen
@@ -113,6 +115,12 @@ public class Embargos {
     }
     public static Embargo<BasicEmbargo> of(final Instant start, final Instant stop) {
         return new BasicEmbargo(start, stop);
+    }
+
+     public static Embargo<BasicEmbargo> of(Range<Instant> range) {
+        BasicEmbargo result = new BasicEmbargo(null, null);
+        result.set(range);
+        return result;
     }
 
     public static Embargo<BasicEmbargo> of(ReadonlyEmbargo readonlyEmbargo) {
