@@ -268,7 +268,7 @@ public class MediaObjectsTest {
         incoming.addLocation(n2);
         incoming.addLocation(n3);
 
-        MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO);
+        MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO, false);
 
         assertThat(existing.findLocation("aaa").getAvAttributes()).isNotNull();
         assertThat(existing.findLocation("bbb").getAvAttributes().getBitrate()).isEqualTo(4444);
@@ -344,7 +344,7 @@ public class MediaObjectsTest {
         incoming.addLocation(n2);
         incoming.addLocation(n3);
 
-        MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO);
+        MediaObjects.updateLocationsForOwner(incoming, existing, OwnerType.NEBO, false);
 
         assertThat(existing.findLocation("aaa").getAvAttributes().getVideoAttributes()).withFailMessage("Adding new VideoAttributes failed").isNotNull();
         assertThat( existing.findLocation("bbb").getAvAttributes().getVideoAttributes().getHorizontalSize()).withFailMessage("Updating VideoAttributes failed").isEqualTo(200);
