@@ -79,12 +79,16 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlTransient
     @Column(nullable = false)
     @NotNull
+    @Getter
+    @Setter
     protected Instant issueDate = Instant.now();
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @XmlAttribute
     @NotNull
+    @Getter
+    @Setter
     protected State state = State.ANNOUNCED;
 
     @XmlAttribute
@@ -106,11 +110,15 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Column(length = 16)
     @XmlValue
     @JsonProperty("platform")
+    @Getter
+    @Setter
     protected Platform platform;
 
     @Column
     @Enumerated(EnumType.STRING)
     @XmlTransient
+    @Getter
+    @Setter
     private Authority authority = Authority.USER;
 
     @Column
@@ -125,6 +133,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @ManyToOne
     @XmlTransient
+    @Setter
+    @Getter
     protected MediaObject mediaObject;
 
     @Column
@@ -221,25 +231,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
             .build();
     }
 
-    public Platform getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(Platform platform) {
-        this.platform = platform;
-    }
-
-
-    @Deprecated
-    public MediaObject getMediaObject() {
-        return mediaObject;
-    }
-
-    @Deprecated
-    public void setMediaObject(MediaObject mediaObject) {
-        this.mediaObject = mediaObject;
-    }
-
 
     @Override
     public void setParent(MediaObject mo) {
@@ -251,22 +242,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     public MediaObject getParent() {
         return this.mediaObject;
 
-    }
-
-    public Instant getIssueDate() {
-        return issueDate;
-    }
-
-    public void setIssueDate(Instant issueDate) {
-        this.issueDate = issueDate;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
     }
 
     public boolean isNew() {
@@ -330,12 +305,11 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         state = from.state;
     }
 
-    public Authority getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(Authority authority) {
-        this.authority = authority;
+    /**
+     * // See MSE-3992
+     */
+    public boolean isDRM() {
+        return encryption == Encryption.DRM;
     }
 
 
