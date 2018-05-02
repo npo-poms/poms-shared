@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -48,7 +45,7 @@ public class Locations {
             Prediction webonly = createWebOnlyPredictionIfNeeded(mediaObject);
             log.debug("Webonly : {}", webonly);
         }
-        Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
+        final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         Encryption encryption;
         if (existingPredictionForPlatform != null) {
             if (!existingPredictionForPlatform.isPlannedAvailability()) {
@@ -78,20 +75,51 @@ public class Locations {
                 .needed(false)
                 .program(mediaObject)
                 .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform + "  in " + mediaObject)
-                 .build();
+                .build();
         }
-        String locationUrl = getLocationUrl(mediaObject, platform, encryption, "nep");
-        if (locationUrl == null) {
-            // I think this cannot happen any more because of line #90
+
+        List<Location> authorityLocations = new ArrayList<>();
+        Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption);
+        if (authorityLocation != null) {
+            authorityLocations.add(authorityLocation);
+            updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
+        }
+
+        if (encryption == Encryption.DRM) {
+            //
+            Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.NONE);
+            if (authorityLocation2 != null) {
+                authorityLocations.add(authorityLocation2);
+                updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
+            }
+        }
+
+        if (authorityLocations.isEmpty()) {
             return Locations.RealizeResult.builder()
                 .needed(false)
                 .program(mediaObject)
-                .reason("NEP status is " + streamingPlatformStatus + " but no prediction found for platform " + platform + "  in " + mediaObject)
+                .reason("NEP status is " + streamingPlatformStatus + " but no existing locations or predictions matched")
                 .build();
+        }
+
+        return Locations.RealizeResult.builder()
+            .needed(true)
+            .locations(authorityLocations)
+            .program(mediaObject)
+            .build();
+    }
+
+    private static Location getAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption) {
+        String locationUrl = getLocationUrl(mediaObject, platform, encryption, "nep");
+        if (locationUrl == null) {
+            return null;
+            // I think this cannot happen
         }
 
         // Checks if this exaction url is available already with correct owne?
         Location authorityLocation = mediaObject.findLocation(locationUrl, OwnerType.AUTHORITY);
+        final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
+
         if (authorityLocation == null) {
             // no, just check platform then.
             authorityLocation = getAuthorityLocationForPlatform(mediaObject, platform);
@@ -100,11 +128,7 @@ public class Locations {
             authorityLocation = createLocation(mediaObject, existingPredictionForPlatform, locationUrl);
             if (authorityLocation == null) {
                 log.debug("Not created new streaming platform location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
-                 return Locations.RealizeResult.builder()
-                     .needed(false)
-                     .program(mediaObject)
-                     .reason("NEP status is " + streamingPlatformStatus + " but no existing locations or predictions matched")
-                     .build();
+                return null;
             } else {
                 log.info("creating new streaming platform location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
                 Embargos.copy(existingPredictionForPlatform, authorityLocation);
@@ -118,16 +142,10 @@ public class Locations {
             }
             authorityLocation.setPlatform(platform);
         }
+        return authorityLocation;
 
-        updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
-
-
-        return Locations.RealizeResult.builder()
-            .needed(true)
-            .location(authorityLocation)
-            .program(mediaObject)
-            .build();
     }
+
 
     public static void realizeAndRevokeLocationsIfNeeded(MediaObject media, Platform platform) {
         Locations.removeLocationForPlatformIfNeeded(media, platform);
@@ -377,6 +395,6 @@ public class Locations {
         final MediaObject program;
         final boolean needed;
         final String reason;
-        final Location location;
+        final List<Location> locations;
     }
 }
