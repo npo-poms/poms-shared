@@ -1,21 +1,28 @@
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.net.URI;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.logging.simple.StringBuilderSimpleLogger;
 
 import static nl.vpro.domain.media.StreamingStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since
  */
+@Slf4j
 public class LocationsTest {
 
 
@@ -85,5 +92,57 @@ public class LocationsTest {
         assertThat(prediction).isNotNull();
         assertThat(prediction.getPublishStartInstant()).isNull();
         assertThat(prediction.getPublishStopInstant()).isEqualTo(stop1);
+    }
+
+    @Test
+    public void realizeStreamingPlatformIfNeeded() {
+        // Try all permutations
+
+        StreamingStatus.Value[] streamStatusesWithDrm  = {Value.OFFLINE, Value.ONLINE};
+        StreamingStatus.Value[] streamStatusesWithoutDrm  = {Value.OFFLINE, Value.ONLINE};// StreamingStatus.Value.values(); UNSET is no different from OFFLINE
+
+        Encryption[] predictionEncryptions = {Encryption.DRM, Encryption.NONE, null};
+        StringBuilderSimpleLogger logger = StringBuilderSimpleLogger.builder()
+            .prefix(l -> "")
+            .build();
+        for (StreamingStatus.Value streamStatusWithDrm : streamStatusesWithDrm) {
+             for (StreamingStatus.Value streamStatusWithoutDrm : streamStatusesWithoutDrm) {
+                 for (Encryption predictionEncryption : predictionEncryptions) {
+                     StreamingStatus streamingStatus = StreamingStatus.builder()
+                         .withDrm(streamStatusWithDrm)
+                         .withoutDrm(streamStatusWithoutDrm)
+                         .build();
+                     Prediction prediction = Prediction.builder()
+                         .plannedAvailability(true)
+                         .encryption(predictionEncryption)
+                         .platform(Platform.INTERNETVOD)
+                         .build();
+                     Program program = new Program();
+                     program.setStreamingPlatformStatus(streamingStatus);
+                     program.setPredictions(Arrays.asList(prediction));
+                     Locations.realizeAndRevokeLocationsIfNeeded(program, Platform.INTERNETVOD);
+
+                     logger.info("{}\t{}\t{}\t{}", streamingStatus.withDrm, streamingStatus.withoutDrm, prediction.getEncryption(),
+                         program.getLocations().stream().map(l -> URI.create(l.getProgramUrl()).getScheme()).collect(Collectors.joining(",")));
+                 }
+             }
+        }
+        log.info(logger.getStringBuilder().toString());
+        assertThat(logger.getStringBuilder().toString()).isEqualTo(
+            // TODO
+            "OFFLINE\tOFFLINE\tDRM\t\n" +
+                "OFFLINE\tOFFLINE\tNONE\t\n" +
+                "OFFLINE\tOFFLINE\tnull\t\n" +
+                "OFFLINE\tONLINE\tDRM\t\n" +
+                "OFFLINE\tONLINE\tNONE\tnpo\n" +
+                "OFFLINE\tONLINE\tnull\tnpo\n" +
+                "ONLINE\tOFFLINE\tDRM\tnpo\n" +
+                "ONLINE\tOFFLINE\tNONE\tnpo\n" +
+                "ONLINE\tOFFLINE\tnull\tnpo\n" +
+                "ONLINE\tONLINE\tDRM\tnpo\n" +
+                "ONLINE\tONLINE\tNONE\tnpo\n" +
+                "ONLINE\tONLINE\tnull\tnpo"
+        );
+
     }
 }
