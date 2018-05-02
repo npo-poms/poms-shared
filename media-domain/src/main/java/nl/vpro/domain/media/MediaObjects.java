@@ -504,7 +504,7 @@ public class MediaObjects {
     }
 
 
-    public static <T extends MediaObject>  void  updateLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner) {
+    public static <T extends MediaObject>  void  updateLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner, boolean steal) {
         for(Location incomingLocation : incomingMedia.getLocations()) {
 
             if(incomingLocation.getOwner().equals(owner)) {
@@ -512,9 +512,18 @@ public class MediaObjects {
                 if(locationToUpdate == null) {
                     mediaToUpdate.addLocation(incomingLocation);
                 } else {
+                    boolean update = true;
                     if (locationToUpdate.getOwner() != owner) {
-                        log.warn("Cannot update location {} since it not from {}", locationToUpdate, owner);
-                    } else {
+                        if (steal) {
+                            log.warn("Updating ownership of location {} -> {}", locationToUpdate, owner);
+                            locationToUpdate.setOwner(owner);
+
+                        } else {
+                            update = false;
+                            log.warn("Cannot update location {} since it not from {}", locationToUpdate, owner);
+                        }
+                    }
+                    if (update) {
                         locationToUpdate.setDuration(incomingLocation.getDuration());
                         locationToUpdate.setOffset(incomingLocation.getOffset());
                         locationToUpdate.setSubtitles(incomingLocation.getSubtitles());
@@ -527,8 +536,8 @@ public class MediaObjects {
     }
 
 
-     public static <T extends MediaObject>  List<Location>  updateAndRemoveLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner) {
-        updateLocationsForOwner(incomingMedia, mediaToUpdate, owner);
+    public static <T extends MediaObject>  List<Location>  updateAndRemoveLocationsForOwner(T incomingMedia, T mediaToUpdate, OwnerType owner) {
+        updateLocationsForOwner(incomingMedia, mediaToUpdate, owner, false);
         List<Location> locationsToRemove = new ArrayList<>();
         mediaToUpdate.getLocations().removeIf(
             location ->
