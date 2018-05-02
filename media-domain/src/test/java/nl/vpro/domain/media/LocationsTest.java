@@ -105,8 +105,8 @@ public class LocationsTest {
         StringBuilderSimpleLogger logger = StringBuilderSimpleLogger.builder()
             .prefix(l -> "")
             .build();
-        for (StreamingStatus.Value streamStatusWithDrm : streamStatusesWithDrm) {
-             for (StreamingStatus.Value streamStatusWithoutDrm : streamStatusesWithoutDrm) {
+        for (StreamingStatus.Value streamStatusWithoutDrm : streamStatusesWithoutDrm) {
+             for (StreamingStatus.Value streamStatusWithDrm : streamStatusesWithDrm) {
                  for (Encryption predictionEncryption : predictionEncryptions) {
                      StreamingStatus streamingStatus = StreamingStatus.builder()
                          .withDrm(streamStatusWithDrm)
@@ -129,13 +129,15 @@ public class LocationsTest {
         }
         log.info(logger.getStringBuilder().toString());
         assertThat(logger.getStringBuilder().toString()).isEqualTo(
-            // TODO
+            // TODO, seet http://wiki.publiekeomroep.nl/display/poms/Locations+and+predictions#Locationsandpredictions-Locations,streamingplatformandpredictions
             "OFFLINE\tOFFLINE\tDRM\t\n" +
                 "OFFLINE\tOFFLINE\tNONE\t\n" +
                 "OFFLINE\tOFFLINE\tnull\t\n" +
-                "OFFLINE\tONLINE\tDRM\t\n" +
-                "OFFLINE\tONLINE\tNONE\tnpo\n" +
-                "OFFLINE\tONLINE\tnull\tnpo\n" +
+
+                "ONLINE\tOFFLINE\tDRM\tnpo+drm\n" +
+                "ONLINE\tOFFLINE\tNONE\tnpo,npo+drm\n" +
+                "ONLINE\tOFFLINE\tnull\tnpo,npo+drm" +
+
                 "ONLINE\tOFFLINE\tDRM\tnpo\n" +
                 "ONLINE\tOFFLINE\tNONE\tnpo\n" +
                 "ONLINE\tOFFLINE\tnull\tnpo\n" +
