@@ -117,10 +117,24 @@ public class StreamingStatus implements Serializable, Displayable  {
         }
     }
 
+    /**
+     * Matches with an encryption.
+     */
     public boolean matches(Encryption encryption) {
-        return (encryption == null && (hasDrm() || hasWithoutDrm())) ||
+        return hasDrm() || // if there is DRM, this implys that i
+            (encryption == null && (hasDrm() || hasWithoutDrm())) ||
             (encryption == Encryption.DRM && hasDrm()) ||
             (encryption == Encryption.NONE && hasWithoutDrm());
+    }
+
+    /**
+     *
+     */
+    public boolean matches(Prediction prediction) {
+        return prediction != null && (
+            hasDrm() || // MSE-3992
+                matches(prediction.getEncryption())
+        );
     }
 
     @Override

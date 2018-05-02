@@ -42,7 +42,7 @@ public class Locations {
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         if (platform == Platform.INTERNETVOD) {
-            Prediction webonly = createWebOnlyPredictionIfNeeded(mediaObject);
+            Optional<Prediction> webonly = createWebOnlyPredictionIfNeeded(mediaObject);
             log.debug("Webonly : {}", webonly);
         }
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
@@ -86,7 +86,6 @@ public class Locations {
         }
 
         if (encryption == Encryption.DRM) {
-            //
             Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.NONE);
             if (authorityLocation2 != null) {
                 authorityLocations.add(authorityLocation2);
@@ -122,7 +121,7 @@ public class Locations {
 
         if (authorityLocation == null) {
             // no, just check platform then.
-            authorityLocation = getAuthorityLocationForPlatform(mediaObject, platform);
+            authorityLocation = getAuthorityLocationsForPlatform(mediaObject, platform).stream().findFirst().orElse(null);
         }
         if (authorityLocation == null) {
             authorityLocation = createLocation(mediaObject, existingPredictionForPlatform, locationUrl);
@@ -242,20 +241,19 @@ public class Locations {
 
 
     public static void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform){
-        Location existingPlatformLocation = getAuthorityLocationForPlatform(mediaObject, platform);
+        List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
         Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
-        if(existingPlatformLocation != null) {
-            if (! existingPredictionForPlatform.isPlannedAvailability()) {
+        for (Location existingPlatformLocation : existingPlatformLocations) {
+            if (!existingPredictionForPlatform.isPlannedAvailability()) {
                 mediaObject.removeLocation(existingPlatformLocation);
-            } else if (! streamingPlatformStatus.matches(existingPredictionForPlatform.getEncryption())) {
+            } else if (!streamingPlatformStatus.matches(existingPredictionForPlatform)) {
                 mediaObject.removeLocation(existingPlatformLocation);
-            } else if ( existingPredictionForPlatform.getEncryption() == null && StreamingStatus.preferredEncryption(streamingPlatformStatus) != getEncryptionFromProgramUrl(existingPlatformLocation)) {
+            } else if (existingPredictionForPlatform.getEncryption() == null && StreamingStatus.preferredEncryption(streamingPlatformStatus) != getEncryptionFromProgramUrl(existingPlatformLocation)) {
                 mediaObject.removeLocation(existingPlatformLocation);
             } else {
                 log.info("{} does not need to be removed", existingPlatformLocation);
             }
-
         }
         updatePredictionStates(mediaObject, platform);
     }
@@ -269,7 +267,13 @@ public class Locations {
         }
     }
 
-    public static Prediction createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
+    /**
+     * If a mediaobject has BROADCASTER INTERNETVOD locations (which are not deleted)
+     * then we need to have INTERNETVOD predictoin which can be set to 'REALIZED'.
+     *
+     * This is not always the case, this method can correct that.
+     */
+    public static Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
         Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream()
             .filter(l -> l.getOwner() == OwnerType.BROADCASTER)
             .filter(l -> Platform.INTERNETVOD.matches(l.getPlatform()))
@@ -277,27 +281,26 @@ public class Locations {
             .collect(Collectors.toSet());
         Prediction existingPrediction = mediaObject.getPrediction(Platform.INTERNETVOD);
         if (existingPrediction == null && ! existingWebonlyLocations.isEmpty()) {
+            // yes, no prediction found, but one is expected because there are matching locations
             Prediction prediction = mediaObject.findOrCreatePrediction(Platform.INTERNETVOD);
             prediction.setPlannedAvailability(true);
             prediction.setEncryption(null);
 
-            if (!existingWebonlyLocations.isEmpty()) {
-                Iterator<Location> i = existingWebonlyLocations.iterator();
-                Location first = i.next();
-                Embargos.copyIfLessRestrictedOrTargetUnset(first, prediction);
-                i.forEachRemaining((l) -> Embargos.copyIfLessRestricted(l, prediction));
-            }
-            return prediction;
-        }
-        return null;
+            Iterator<Location> i = existingWebonlyLocations.iterator();
+            Location first = i.next();
+            Embargos.copyIfLessRestrictedOrTargetUnset(first, prediction);
+            i.forEachRemaining((l) -> Embargos.copyIfLessRestricted(l, prediction));
 
+            return Optional.of(prediction);
+        } else {
+            return Optional.ofNullable(existingPrediction);
+        }
     }
 
-    private static Location getAuthorityLocationForPlatform(MediaObject mediaObject, Platform platform){
+    private static List<Location> getAuthorityLocationsForPlatform(MediaObject mediaObject, Platform platform){
         return mediaObject.getLocations().stream()
             .filter(l -> l.getOwner() == OwnerType.AUTHORITY && l.getPlatform() == platform)
-            .findFirst()
-            .orElse(null);
+            .collect(Collectors.toList());
     }
 
 
