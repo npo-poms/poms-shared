@@ -22,7 +22,6 @@ import nl.vpro.util.DateUtils;
 
 import static nl.vpro.domain.media.MediaObjects.deepCopy;
 import static nl.vpro.util.DateUtils.toDate;
-import static nl.vpro.util.DateUtils.toInstant;
 
 
 @XmlRootElement(name = "schedule")
@@ -54,6 +53,16 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     public static LocalDate guideDay() {
         return guideDay(Instant.now());
     }
+
+    public static Instant toInstant(LocalDateTime time) {
+        return time.atZone(ZONE_ID).toInstant();
+    }
+
+
+    protected static Instant toInstant(Date time) {
+        return DateUtils.toInstant(time);
+    }
+
 
     @XmlTransient // See property
     protected SortedSet<ScheduleEvent> scheduleEvents;
