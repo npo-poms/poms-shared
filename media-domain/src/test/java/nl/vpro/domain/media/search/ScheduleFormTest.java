@@ -2,7 +2,6 @@ package nl.vpro.domain.media.search;
 
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.Date;
 
 import org.junit.Test;
 
@@ -29,7 +28,7 @@ public class ScheduleFormTest {
 
     private ScheduleEvent ev(Channel c, long start) {
         ScheduleEvent e = new ScheduleEvent();
-        e.setStart(new Date(start));
+        e.setStartInstant(Instant.ofEpochMilli(start));
         e.setChannel(c);
         return e;
 

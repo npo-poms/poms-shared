@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.AllArgsConstructor;
+
 import java.util.*;
 
 import javax.xml.bind.annotation.*;
@@ -15,7 +17,13 @@ import com.google.common.collect.Iterators;
                       "groupTable",
                       "locationTable",
                       "schedule"})
+@lombok.Builder
+@AllArgsConstructor
 public class MediaTable implements Iterable<MediaObject> {
+
+    public MediaTable() {
+
+    }
 
     @XmlElementWrapper(name = "programTable")
     @XmlElement(name = "program")
