@@ -101,6 +101,17 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+
+
+    // komt uit prepr
+    @XmlEnumValue("R2SJ")
+    R2SJ {
+        @Override
+        public String toString() {
+            return "Radio 2 Soul & Jazz";
+        }
+    },
+
     @XmlEnumValue("RAD3")
     RAD3 {
         @Override
@@ -111,6 +122,16 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String pdId() {
             return "RAD3";
+        }
+    },
+
+
+    // komt uit prepr
+    @XmlEnumValue("R3KX")
+    R3KX {
+        @Override
+        public String toString() {
+            return "Radio 3 KX";
         }
     },
 
@@ -127,6 +148,16 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+
+    // komt uit prepr
+    @XmlEnumValue("R4CO")
+    R4CO {
+        @Override
+        public String toString() {
+            return "NPO Radio 4 Concerten";
+        }
+    },
+
     @XmlEnumValue("RAD5")
     RAD5 {
         @Override
@@ -134,9 +165,14 @@ public enum Channel implements Displayable, XmlValued {
             return "Radio 5";
         }
 
+    },
+
+    // komt uit prepr
+    @XmlEnumValue("R5ST")
+    R5ST {
         @Override
-        public String pdId() {
-            return "RAD5";
+        public String toString() {
+            return "NPO Radio 5 Sterren NL";
         }
     },
 
