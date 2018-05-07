@@ -103,29 +103,29 @@ public class LocationsTest {
 
         Encryption[] predictionEncryptions = {Encryption.DRM, Encryption.NONE, null};
         StringBuilderSimpleLogger logger = StringBuilderSimpleLogger.builder()
-            .prefix(l -> "")
+            .prefix(l -> Instant.now() + " " + l)
             .build();
         for (StreamingStatus.Value streamStatusWithoutDrm : streamStatusesWithoutDrm) {
-             for (StreamingStatus.Value streamStatusWithDrm : streamStatusesWithDrm) {
-                 for (Encryption predictionEncryption : predictionEncryptions) {
-                     StreamingStatus streamingStatus = StreamingStatus.builder()
-                         .withDrm(streamStatusWithDrm)
-                         .withoutDrm(streamStatusWithoutDrm)
-                         .build();
-                     Prediction prediction = Prediction.builder()
-                         .plannedAvailability(true)
-                         .encryption(predictionEncryption)
-                         .platform(Platform.INTERNETVOD)
-                         .build();
-                     Program program = new Program();
-                     program.setStreamingPlatformStatus(streamingStatus);
-                     program.setPredictions(Arrays.asList(prediction));
-                     Locations.realizeAndRevokeLocationsIfNeeded(program, Platform.INTERNETVOD);
+            for (StreamingStatus.Value streamStatusWithDrm : streamStatusesWithDrm) {
+                for (Encryption predictionEncryption : predictionEncryptions) {
+                    StreamingStatus streamingStatus = StreamingStatus.builder()
+                        .withDrm(streamStatusWithDrm)
+                        .withoutDrm(streamStatusWithoutDrm)
+                        .build();
+                    Prediction prediction = Prediction.builder()
+                        .plannedAvailability(true)
+                        .encryption(predictionEncryption)
+                        .platform(Platform.INTERNETVOD)
+                        .build();
+                    Program program = new Program();
+                    program.setStreamingPlatformStatus(streamingStatus);
+                    program.setPredictions(Arrays.asList(prediction));
+                    Locations.realizeAndRevokeLocationsIfNeeded(program, Platform.INTERNETVOD);
 
-                     logger.info("{}\t{}\t{}\t{}", streamingStatus.withDrm, streamingStatus.withoutDrm, prediction.getEncryption(),
-                         program.getLocations().stream().map(l -> URI.create(l.getProgramUrl()).getScheme()).collect(Collectors.joining(",")));
-                 }
-             }
+                    logger.info("{}\t{}\t{}\t{}", streamingStatus.withDrm, streamingStatus.withoutDrm, prediction.getEncryption(),
+                        program.getLocations().stream().map(l -> URI.create(l.getProgramUrl()).getScheme()).collect(Collectors.joining(",")));
+                }
+            }
         }
         log.info(logger.getStringBuilder().toString());
         assertThat(logger.getStringBuilder().toString()).isEqualTo(

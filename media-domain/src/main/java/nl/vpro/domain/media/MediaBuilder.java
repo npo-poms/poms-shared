@@ -217,8 +217,12 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
-    @SuppressWarnings("unchecked")
     default B broadcasters(Broadcaster... broadcasters) {
+        return broadcasters(Arrays.asList(broadcasters));
+    }
+
+    @SuppressWarnings("unchecked")
+    default B broadcasters(Collection<Broadcaster> broadcasters) {
         for(Broadcaster broadcaster : broadcasters) {
             mediaObject().addBroadcaster(broadcaster);
         }
@@ -482,6 +486,12 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B persons(Person... persons) {
+        return persons(Arrays.asList(persons));
+    }
+
+
+    @SuppressWarnings("unchecked")
+    default B persons(Collection<Person> persons) {
         for(Person person : persons) {
             mediaObject().addPerson(person);
         }
@@ -658,6 +668,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
+     default B scheduleEvent(ScheduleEvent event) {
+        event.setParent(mediaObject());
+        return (B) this;
+    }
 
     default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, ScheduleEventTitle... titles) {
         return scheduleEvent(c, time, duration, e->e, titles);

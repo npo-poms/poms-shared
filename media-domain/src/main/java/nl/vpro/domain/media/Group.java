@@ -31,6 +31,10 @@ public class Group extends MediaObject {
     private static final long serialVersionUID = 1L;
 
 
+    public static MediaBuilder.GroupBuilder builder() {
+        return MediaBuilder.group();
+    }
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull
