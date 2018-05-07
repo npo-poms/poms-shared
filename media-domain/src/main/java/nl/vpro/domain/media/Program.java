@@ -51,6 +51,10 @@ import static nl.vpro.domain.TextualObjects.sorted;
 public class Program extends MediaObject {
     private static final long serialVersionUID = 6174884273805175998L;
 
+    public static MediaBuilder.ProgramBuilder builder() {
+        return MediaBuilder.program();
+    }
+
     // DRS I found that the 'hardcoded' mediaobject alias in the filter below changes when
     // relational fields are added; I had to change the alias from mediaobjec_9 to mediaobjec_11
     // when I added field publicationRule below. Needs to be fixed, not sure how...
