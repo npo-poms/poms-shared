@@ -121,7 +121,7 @@ public class StreamingStatus implements Serializable, Displayable  {
      * Matches with an encryption.
      */
     public boolean matches(Encryption encryption) {
-        return hasDrm() || // if there is DRM, this implys that i
+        return
             (encryption == null && (hasDrm() || hasWithoutDrm())) ||
             (encryption == Encryption.DRM && hasDrm()) ||
             (encryption == Encryption.NONE && hasWithoutDrm());
