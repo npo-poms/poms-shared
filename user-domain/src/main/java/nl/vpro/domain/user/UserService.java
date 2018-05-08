@@ -107,13 +107,18 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Submits callable in the given {@link ExecutorService}, but makes sure that it is executed as the current user
+     * Submits callable in the given {@link ExecutorService}, but makes sure that it is executed as the current user and current {@link MDC}
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
      */
     default <R> Future<R> submit(ExecutorService executorService, Callable<R> callable, Logger logger) {
         return executorService.submit(wrap(callable, logger, null));
     }
+
+    /**
+     * Wraps a callable for use by e.g. {@link #submit(ExecutorService, Callable, Logger)}
+     * @since 5.6
+     */
     default <R> Callable<R> wrap(Callable<R> callable,  Logger logger, Boolean throwExceptions) {
 
         final boolean throwExceptionsBoolean = throwExceptions == null ? logger == null : throwExceptions;
@@ -152,6 +157,7 @@ public interface UserService<T extends User> {
             }
         };
     }
+
     interface  Logout extends AutoCloseable {
         @Override
         void close();
