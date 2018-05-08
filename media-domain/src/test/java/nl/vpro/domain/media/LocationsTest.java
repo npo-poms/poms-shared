@@ -131,7 +131,7 @@ public class LocationsTest {
     }
 
     @Test
-    public void realizeStreamingPlatformIfNeeded() {
+    public void realizeStrea5mingPlatformIfNeeded() {
         // Try all permutations
 
         StreamingStatus.Value[] streamStatusesWithDrm = {Value.OFFLINE, Value.ONLINE};
