@@ -1467,38 +1467,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public boolean isMemberOf(MediaObject owner) {
-        if (!isMember()) {
-            return false;
-        }
-
-        for (MemberRef memberRef : memberOf) {
-            if (memberRef.getMidRef() != null && memberRef.getMidRef().equals(owner.getMid())) {
-                return true;
-            }
-            if (memberRef.getOwner().equals(owner)) {
-                return true;
-            }
-        }
-
-        return false;
+        return MemberRefs.isOf(memberOf, owner);
     }
 
     public boolean isMemberOf(MediaObject owner, Integer number) {
-        if (!isMember()) {
-            return false;
-        }
-
-        if (number == null) {
-            return isMemberOf(owner);
-        }
-
-        for (MemberRef memberRef : memberOf) {
-            if (memberRef.getOwner().equals(owner) && memberRef.getNumber().equals(number)) {
-                return true;
-            }
-        }
-
-        return false;
+        return MemberRefs.isOf(memberOf, owner, number);
     }
 
     public boolean hasMember(MediaObject member) {

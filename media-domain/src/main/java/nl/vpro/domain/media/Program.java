@@ -186,25 +186,11 @@ public class Program extends MediaObject {
     }
 
     public MemberRef findEpisodeOfRef(MediaObject owner) {
-        for(MemberRef memberRef : episodeOf) {
-            if(memberRef.getOwner().equals(owner)) {
-                return memberRef;
-            }
-        }
-        return null;
+        return MemberRefs.findRef(episodeOf, owner).orElse(null);
     }
 
     public MemberRef findEpisodeOfRef(MediaObject owner, Integer number) {
-        if(number == null) {
-            return findEpisodeOfRef(owner);
-        }
-
-        for(MemberRef memberRef : episodeOf) {
-            if(owner.equals(memberRef.getOwner()) && number.equals(memberRef.getNumber())) {
-                return memberRef;
-            }
-        }
-        return null;
+        return MemberRefs.findRef(episodeOf, owner, number).orElse(null);
     }
 
     public MemberRef findEpisodeOf(Long episodeRefId) {
@@ -221,19 +207,7 @@ public class Program extends MediaObject {
     }
 
     public boolean isEpisodeOf(MediaObject owner) {
-        if(episodeOf == null) {
-            return false;
-        }
-
-        for(MemberRef memberRef : episodeOf) {
-            if (memberRef.getMidRef() != null && memberRef.getMidRef().equals(owner.getMid())) {
-                return true;
-            }
-            if(memberRef.getOwner().equals(owner)) {
-                return true;
-            }
-        }
-        return false;
+        return MemberRefs.isOf(episodeOf, owner);
     }
 
     @Override
