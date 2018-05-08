@@ -1,6 +1,9 @@
 package nl.vpro.domain.api.page;
 
+import java.io.IOException;
+
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 import nl.vpro.domain.api.Match;
 import nl.vpro.domain.api.SimpleTextMatcher;
@@ -13,18 +16,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PageFacetTest {
 
     @Test
-    public void testGetPageSearchFromFacetXml() throws Exception {
+    public void testGetPageSearchFromFacetXml() throws IOException, SAXException {
         PageSearch search = new PageSearch();
         search.setText(new SimpleTextMatcher("find me"));
 
         PageFacet facet = new PageFacet();
         facet.setFilter(search);
 
-        PageFacet out = JAXBTestUtil.roundTrip(facet,
-            "<api:filter>\n" +
-                "        <api:text>find me</api:text>\n" +
-                "    </api:filter>"
-        );
+        PageFacet out = JAXBTestUtil.roundTripAndSimilar(facet, "<local:pageFacet sort=\"VALUE_ASC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+            "    <api:max>24</api:max>\n" +
+            "    <api:filter>\n" +
+            "        <api:text>find me</api:text>\n" +
+            "    </api:filter>\n" +
+            "</local:pageFacet>");
+
         assertThat(out.getFilter()).isNotNull();
     }
 
