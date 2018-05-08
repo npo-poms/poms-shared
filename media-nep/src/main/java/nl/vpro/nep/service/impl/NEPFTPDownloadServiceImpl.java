@@ -17,8 +17,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Value;
 
+import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.nep.service.FileDescriptor;
 import nl.vpro.nep.service.NEPDownloadService;
 
@@ -68,7 +70,9 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
             final SFTPClient sftp = sessionFactory.newSFTPClient();
             Instant start = Instant.now();
             InputStream in;
+            long count = 0;
             while (true) {
+                count++;
                 try {
                     final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
                     in = handle.new ReadAheadRemoteFileInputStream(16);
@@ -97,7 +101,7 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
                     if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
                         throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
                     }
-                    log.info("{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
+                    Slf4jHelper.log(log, count < 6 ? Level.DEBUG :  Level.INFO,"{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
                     Thread.sleep(Duration.ofSeconds(10).toMillis());
                 }
             }
