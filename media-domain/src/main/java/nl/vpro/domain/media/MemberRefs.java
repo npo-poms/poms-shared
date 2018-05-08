@@ -9,8 +9,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.html.Option;
-
 /**
  * @author Roelof Jan Koekoek
  * @since 3.3
@@ -63,7 +61,7 @@ public class MemberRefs {
                 return Optional.of(memberRef);
             }
         }
-        return Optional.empty();;
+        return Optional.empty();
     }
 
      /**
