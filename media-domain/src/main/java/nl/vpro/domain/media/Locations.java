@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -400,12 +400,14 @@ public class Locations {
     }
 
     @AllArgsConstructor
-    @Builder
+    @lombok.Builder
     @Data
     public static class RealizeResult {
         final MediaObject program;
         final boolean needed;
         final String reason;
         final List<Location> locations;
+        @lombok.Builder.Default
+        CompletableFuture<?> extraTasks = CompletableFuture.completedFuture(null);
     }
 }
