@@ -1750,6 +1750,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
                 return true;
             }
         }
+        for (DescendantRef descendantRef : descendantOf) {
+            if (descendantRef.getMidRef() != null && descendantRef.getMidRef().equals(ancestor.getMid())) {
+                return true;
+            }
+        }
 
         return false;
     }
