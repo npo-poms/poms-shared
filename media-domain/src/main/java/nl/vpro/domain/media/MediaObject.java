@@ -1472,6 +1472,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
 
         for (MemberRef memberRef : memberOf) {
+            if (memberRef.getMidRef() != null && memberRef.getMidRef().equals(owner.getMid())) {
+                return true;
+            }
             if (memberRef.getOwner().equals(owner)) {
                 return true;
             }
