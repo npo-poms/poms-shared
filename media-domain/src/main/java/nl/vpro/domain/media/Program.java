@@ -226,6 +226,9 @@ public class Program extends MediaObject {
         }
 
         for(MemberRef memberRef : episodeOf) {
+            if (memberRef.getMidRef() != null && memberRef.getMidRef().equals(owner.getMid())) {
+                return true;
+            }
             if(memberRef.getOwner().equals(owner)) {
                 return true;
             }
