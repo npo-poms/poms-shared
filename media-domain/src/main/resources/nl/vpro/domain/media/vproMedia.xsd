@@ -2532,6 +2532,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="R2SJ"/>
       <xs:enumeration value="RAD3">
         <xs:annotation>
           <xs:documentation>
@@ -2539,6 +2540,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="R3KX"/>
       <xs:enumeration value="RAD4">
         <xs:annotation>
           <xs:documentation>
@@ -2546,6 +2548,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="R4CO"/>
       <xs:enumeration value="RAD5">
         <xs:annotation>
           <xs:documentation>
@@ -2553,6 +2556,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="R5ST"/>
       <xs:enumeration value="RAD6">
         <xs:annotation>
           <xs:documentation>
@@ -2560,6 +2564,10 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+
+
+
+
       <xs:enumeration value="REGR">
         <xs:annotation>
           <xs:documentation>
