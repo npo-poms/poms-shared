@@ -88,8 +88,9 @@ public interface UserService<T extends User> {
         return submit(executorService, callable, null);
     }
 
-     /**
-     * Submits callable in the CompletableFuture#supplyAsync
+    /**
+     * Submits callable (wrapped by {@link #wrap(Callable, Logger, Boolean)}) in CompletableFuture#supplyAsync
+     *
      * @param logger If not <code>null</code> catch exceptions and log as error.
      * @since 5.6
      */
@@ -116,7 +117,8 @@ public interface UserService<T extends User> {
     }
 
     /**
-     * Wraps a callable for use by e.g. {@link #submit(ExecutorService, Callable, Logger)}
+     * Wraps a callable for use by e.g. {@link #submit(ExecutorService, Callable, Logger)} and {@link #async(Callable, Logger)}. This means that current user and {@link MDC} will be restored
+     * before {@link Callable#call()}
      * @since 5.6
      */
     default <R> Callable<R> wrap(Callable<R> callable,  Logger logger, Boolean throwExceptions) {
