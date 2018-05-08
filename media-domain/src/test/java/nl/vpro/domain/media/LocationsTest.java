@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since
  */
 @Slf4j
 public class LocationsTest {
@@ -98,15 +97,15 @@ public class LocationsTest {
     public void realizeStreamingPlatformIfNeeded() {
         // Try all permutations
 
-        StreamingStatus.Value[] streamStatusesWithDrm  = {Value.OFFLINE, Value.ONLINE};
+        StreamingStatus.Value[] streamStatusesWithDrm     = {Value.OFFLINE, Value.ONLINE};
         StreamingStatus.Value[] streamStatusesWithoutDrm  = {Value.OFFLINE, Value.ONLINE};// StreamingStatus.Value.values(); UNSET is no different from OFFLINE
 
         Encryption[] predictionEncryptions = {Encryption.DRM, Encryption.NONE, null};
         StringBuilderSimpleLogger logger = StringBuilderSimpleLogger.builder()
-            .prefix(l -> Instant.now() + " " + l)
+            .prefix(l -> "")
             .build();
-        for (StreamingStatus.Value streamStatusWithoutDrm : streamStatusesWithoutDrm) {
-            for (StreamingStatus.Value streamStatusWithDrm : streamStatusesWithDrm) {
+        for (StreamingStatus.Value streamStatusWithDrm : streamStatusesWithDrm) {
+            for (StreamingStatus.Value streamStatusWithoutDrm : streamStatusesWithoutDrm) {
                 for (Encryption predictionEncryption : predictionEncryptions) {
                     StreamingStatus streamingStatus = StreamingStatus.builder()
                         .withDrm(streamStatusWithDrm)
@@ -129,22 +128,64 @@ public class LocationsTest {
         }
         log.info(logger.getStringBuilder().toString());
         assertThat(logger.getStringBuilder().toString()).isEqualTo(
-            // TODO, seet http://wiki.publiekeomroep.nl/display/poms/Locations+and+predictions#Locationsandpredictions-Locations,streamingplatformandpredictions
+            // TODO, see http://wiki.publiekeomroep.nl/display/poms/Locations+and+predictions#Locationsandpredictions-Locations,streamingplatformandpredictions
             "OFFLINE\tOFFLINE\tDRM\t\n" +
                 "OFFLINE\tOFFLINE\tNONE\t\n" +
                 "OFFLINE\tOFFLINE\tnull\t\n" +
 
-                "ONLINE\tOFFLINE\tDRM\tnpo+drm\n" +
-                "ONLINE\tOFFLINE\tNONE\tnpo,npo+drm\n" +
-                "ONLINE\tOFFLINE\tnull\tnpo,npo+drm" +
+                "OFFLINE\tONLINE\tDRM\t\n" +
+                "OFFLINE\tONLINE\tNONE\tnpo\n" +
+                "OFFLINE\tONLINE\tnull\tnpo\n" +
 
-                "ONLINE\tOFFLINE\tDRM\tnpo\n" +
-                "ONLINE\tOFFLINE\tNONE\tnpo\n" +
-                "ONLINE\tOFFLINE\tnull\tnpo\n" +
-                "ONLINE\tONLINE\tDRM\tnpo\n" +
-                "ONLINE\tONLINE\tNONE\tnpo\n" +
-                "ONLINE\tONLINE\tnull\tnpo"
+                "ONLINE\tOFFLINE\tDRM\tnpo+drm\n" +
+                "ONLINE\tOFFLINE\tNONE\t\n" +
+                "ONLINE\tOFFLINE\tnull\tnpo+drm\n" +
+
+                "ONLINE\tONLINE\tDRM\tnpo+drm\n" +
+                "ONLINE\tONLINE\tNONE\tnpo+drm,npo\n" +
+                "ONLINE\tONLINE\tnull\tnpo+drm,npo"
         );
 
     }
+
+    @Test
+    public void realizeStreamingPlatformIfNeededDrm() {
+         StreamingStatus streamingStatus = StreamingStatus.builder()
+             .withDrm(Value.ONLINE)
+             .withoutDrm(Value.ONLINE)
+             .build();
+        Prediction prediction = Prediction.builder()
+            .plannedAvailability(true)
+            .encryption(Encryption.NONE)
+            .platform(Platform.INTERNETVOD)
+            .build();
+        Program program = new Program();
+        program.setStreamingPlatformStatus(streamingStatus);
+        program.setPredictions(Arrays.asList(prediction));
+        Locations.realizeAndRevokeLocationsIfNeeded(program, Platform.INTERNETVOD);
+
+        log.info("{}", program.getLocations());
+        assertThat(program.getLocations()).hasSize(2);
+        assertThat(program.getLocations().first().getProgramUrl()).startsWith("npo+drm:");
+    }
+
+     @Test
+    public void realizeStreamingPlatformIfNeededWithDrmButWithoutPredicted() {
+         StreamingStatus streamingStatus = StreamingStatus.builder()
+             .withDrm(Value.ONLINE)
+             .withoutDrm(Value.OFFLINE)
+             .build();
+        Prediction prediction = Prediction.builder()
+            .plannedAvailability(true)
+            .encryption(Encryption.NONE)
+            .platform(Platform.INTERNETVOD)
+            .build();
+        Program program = new Program();
+        program.setStreamingPlatformStatus(streamingStatus);
+        program.setPredictions(Arrays.asList(prediction));
+        Locations.realizeAndRevokeLocationsIfNeeded(program, Platform.INTERNETVOD);
+
+        assertThat(program.getLocations()).isEmpty();
+    }
+
 }

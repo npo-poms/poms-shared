@@ -79,14 +79,16 @@ public class Locations {
         }
 
         List<Location> authorityLocations = new ArrayList<>();
-        Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption);
+        Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption, "For " + encryption);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
             updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
         }
 
-        if (encryption == Encryption.DRM) {
-            Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.NONE);
+        //MSE-3992
+        if (encryption != Encryption.DRM) {
+
+            Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too");
             if (authorityLocation2 != null) {
                 authorityLocations.add(authorityLocation2);
                 updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
@@ -108,8 +110,8 @@ public class Locations {
             .build();
     }
 
-    private static Location getAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption) {
-        String locationUrl = getLocationUrl(mediaObject, platform, encryption, "nep");
+    private static Location getAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption, String reason) {
+        String locationUrl = createLocationUrl(mediaObject, platform, encryption, "nep");
         if (locationUrl == null) {
             return null;
             // I think this cannot happen
@@ -121,7 +123,10 @@ public class Locations {
 
         if (authorityLocation == null) {
             // no, just check platform then.
-            authorityLocation = getAuthorityLocationsForPlatform(mediaObject, platform).stream().findFirst().orElse(null);
+            authorityLocation = getAuthorityLocationsForPlatform(mediaObject, platform).stream()
+                .filter(l -> getEncryptionFromProgramUrl(l) == encryption)
+                .findFirst().
+                orElse(null);
         }
         if (authorityLocation == null) {
             authorityLocation = createLocation(mediaObject, existingPredictionForPlatform, locationUrl);
@@ -129,7 +134,7 @@ public class Locations {
                 log.debug("Not created new streaming platform location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
                 return null;
             } else {
-                log.info("creating new streaming platform location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
+                log.info("creating new streaming platform location {} {} for mediaObject {} because {}", locationUrl, platform, mediaObject.getMid(), reason);
                 Embargos.copy(existingPredictionForPlatform, authorityLocation);
             }
         } else {
@@ -165,7 +170,7 @@ public class Locations {
 
 
     private static Program addLocation(Program program, Platform platform, Encryption encryption, String pubOptie, OwnerType owner, Set<OwnerType> replaces) {
-        String locationUrl = getLocationUrl(program, platform, encryption, pubOptie);
+        String locationUrl = createLocationUrl(program, platform, encryption, pubOptie);
         if (locationUrl == null) {
             return program;
         }
@@ -186,7 +191,10 @@ public class Locations {
         updatePredictionStates(program, platform);
     }
 
-    private static String getLocationUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
+    /**
+     * Create a new location url. Doesn't change the mediaobject.
+     */
+    private static String createLocationUrl(MediaObject program, Platform platform, Encryption encryption, String pubOptie) {
         String baseUrl = getBaseUrl(platform, encryption, pubOptie, program.getStreamingPlatformStatus());
         if (baseUrl == null) {
             return null;
