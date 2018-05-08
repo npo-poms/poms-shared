@@ -13,9 +13,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * @author roekoe
- * @version $Id$
- * @see nl.vpro.domain.media.MediaObject#memberOf
- * @see nl.vpro.domain.media.Program#episodeOf
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "descendantRefType")
