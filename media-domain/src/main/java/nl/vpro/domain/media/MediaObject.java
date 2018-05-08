@@ -1744,13 +1744,12 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (!isMember()) {
             return false;
         }
-
         for (MemberRef memberRef : memberOf) {
-            if (memberRef.getOwner().equals(ancestor) || memberRef.getOwner().hasAncestor(ancestor)) {
+            if (memberRef.getOwner().equals(ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getOwner().hasAncestor(ancestor)) {
                 return true;
             }
         }
-        for (DescendantRef descendantRef : descendantOf) {
+        for (DescendantRef descendantRef : getDescendantOf()) {
             if (descendantRef.getMidRef() != null && descendantRef.getMidRef().equals(ancestor.getMid())) {
                 return true;
             }
