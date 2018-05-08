@@ -5,6 +5,7 @@
 package nl.vpro.domain.user;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -13,6 +14,7 @@ import java.util.function.Supplier;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 import nl.vpro.domain.Roles;
 
@@ -123,6 +125,7 @@ public interface UserService<T extends User> {
             authentication = null;
         }
         final Object onBehalfOf = authentication;
+        Map<String, String> copy =  MDC.getCopyOfContextMap();
 
         return () -> {
             try {
@@ -133,6 +136,7 @@ public interface UserService<T extends User> {
                         LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
                     }
                 }
+                copy.forEach(MDC::put);
                 return callable.call();
             } catch (Exception e) {
                 if (logger != null) {
