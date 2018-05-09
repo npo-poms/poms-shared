@@ -24,7 +24,13 @@ public class ItemizeResponse {
 
 
     @NotNull
-    private ItemizeRequest request;
+    @XmlElements(value = {
+        @XmlElement(name="request",
+            type=ItemizeRequest.class),
+        @XmlElement(name="liverequest",
+            type=LiveItemizeRequest.class)
+    })
+    private Object request;
 
     @XmlAttribute
     private boolean success;
