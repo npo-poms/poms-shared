@@ -3,6 +3,7 @@ package nl.vpro.nep.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -20,6 +21,7 @@ import org.apache.commons.lang3.time.DurationFormatUtils;
 @NoArgsConstructor
 @AllArgsConstructor
 @lombok.Builder
+@ToString
 public class NEPItemizeRequest {
 
     private String identifier;
