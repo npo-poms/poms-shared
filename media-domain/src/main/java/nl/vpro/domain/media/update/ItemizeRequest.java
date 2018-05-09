@@ -35,15 +35,15 @@ public class ItemizeRequest {
 
     @XmlElement(required = false)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     private Duration start;
 
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
-    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonSerialize(using = XMLDurationToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     private Duration stop;
 
