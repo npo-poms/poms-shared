@@ -77,6 +77,7 @@ public class SchemaTest {
             TranscodeRequest.class,
             TranscodeStatus.class,
             ItemizeRequest.class,
+            LiveItemizeRequest.class,
             ItemizeResponse.class,
             // no namespace
             XmlCollection.class

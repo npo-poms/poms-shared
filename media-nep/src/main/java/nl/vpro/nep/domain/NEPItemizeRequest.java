@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
 
 import org.apache.commons.lang3.time.DurationFormatUtils;
@@ -42,6 +45,15 @@ public class NEPItemizeRequest {
             duration = defaultDuration;
         }
         return DurationFormatUtils.formatDurationHMS(duration.toMillis());
+    }
+
+
+    public static Optional<String> fromInstant(Instant instant) {
+        if (instant== null) {
+            return Optional.empty();
+        }
+        LocalDateTime localDateTime = instant.atZone(ZoneId.of("Europe/Amsterdam")).toLocalDateTime();
+        return Optional.of(localDateTime.toString());
     }
 
 
