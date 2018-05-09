@@ -107,11 +107,6 @@
       <artifactId>flyway-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.restlet.jee</groupId>
-      <artifactId>org.restlet</artifactId>
-      <version>RELEASE</version>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-test</artifactId>
     </dependency>
