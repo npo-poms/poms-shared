@@ -1,5 +1,7 @@
 package nl.vpro.nep.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -28,6 +30,7 @@ import nl.vpro.nep.service.NEPItemizeService;
  * @since 5.6
  */
 @Named("NEPItemizeService")
+@Slf4j
 public class NEPItemizeServiceImpl implements NEPItemizeService {
     private final String itemizeKey;
     private final String itemizeUrl;
@@ -45,6 +48,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     public NEPItemizeResponse itemize(NEPItemizeRequest request) {
         try(CloseableHttpClient httpClient = HttpClients.custom()
             .build()) {
+            log.info("Itemizing {}", request);
             HttpClientContext clientContext = HttpClientContext.create();
             String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8")));
