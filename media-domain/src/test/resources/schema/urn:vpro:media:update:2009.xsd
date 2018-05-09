@@ -14,6 +14,8 @@
 
   <xs:element name="itemizeResponse" type="itemizeResponseType"/>
 
+  <xs:element name="liveitemize" type="liveItemize"/>
+
   <xs:element name="location" type="locationUpdateType"/>
 
   <xs:element name="memberRef" type="memberRefUpdateType"/>
@@ -396,9 +398,20 @@
     <xs:attribute name="mid" type="xs:string"/>
   </xs:complexType>
 
+  <xs:complexType name="liveItemize">
+    <xs:sequence>
+      <xs:element name="start" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="stop" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="stream" type="xs:string"/>
+  </xs:complexType>
+
   <xs:complexType name="itemizeResponseType">
     <xs:sequence>
-      <xs:element name="request" type="itemizeType" minOccurs="0"/>
+      <xs:choice minOccurs="0">
+        <xs:element name="request" type="itemizeType"/>
+        <xs:element name="liverequest" type="liveItemize"/>
+      </xs:choice>
       <xs:element name="result" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="id" type="xs:int" minOccurs="0"/>
     </xs:sequence>
