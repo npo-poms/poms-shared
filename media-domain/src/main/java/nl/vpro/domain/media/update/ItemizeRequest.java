@@ -47,6 +47,9 @@ public class ItemizeRequest {
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     private Duration stop;
 
+
+
+
     public ItemizeRequest() {
 
     }
