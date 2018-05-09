@@ -71,13 +71,14 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
             Instant start = Instant.now();
             InputStream in;
             long count = 0;
+            FileDescriptor descriptor;
             while (true) {
                 count++;
                 try {
                     final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
                     in = handle.new ReadAheadRemoteFileInputStream(16);
                     FileAttributes attributes = handle.fetchAttributes();
-                    FileDescriptor descriptor = FileDescriptor.builder()
+                    descriptor = FileDescriptor.builder()
                         .size(handle.length())
                         .lastModified(Instant.ofEpochMilli(attributes.getMtime()))
                         .fileName(nepFile)
@@ -105,7 +106,7 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
                     Thread.sleep(Duration.ofSeconds(10).toMillis());
                 }
             }
-            log.info("File appeared {} in {}, now copying to {}.", nepFile, Duration.between(start, Instant.now()), outputStream);
+            log.info("File {} ({} bytes) appeared in {}, now copying to {}.", nepFile,  descriptor == null ? "?" : descriptor.getSize(), Duration.between(start, Instant.now()), outputStream);
 
             copy(in, outputStream);
 
