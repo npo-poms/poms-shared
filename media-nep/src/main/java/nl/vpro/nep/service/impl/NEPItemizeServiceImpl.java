@@ -43,11 +43,9 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Override
     public NEPItemizeResponse itemize(NEPItemizeRequest request) {
-        CloseableHttpClient httpClient = HttpClients.custom()
-            .build();
-        HttpClientContext clientContext = HttpClientContext.create();
-
-        try {
+        try(CloseableHttpClient httpClient = HttpClients.custom()
+            .build()) {
+            HttpClientContext clientContext = HttpClientContext.create();
             String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8")));
             HttpPost httpPost = new HttpPost(itemizeUrl);
@@ -66,8 +64,6 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             return Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), NEPItemizeResponse.class);
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
-        } finally {
-            IOUtils.closeQuietly(httpClient);
         }
 
     }
