@@ -653,7 +653,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         sb.append("{channel=").append(channel);
         sb.append(", start=").append(start);
         if(mediaObject != null) {
-            sb.append(", mediaObject=").append(mediaObject.getMid()); // it seems that the title may be lazy, so just show mid of media object.
+            sb.append(", mediaObject=").append(mediaObject.getMid() == null ? "(no mid)" : mediaObject.getMid()); // it seems that the title may be lazy, so just show mid of media object.
         }
         if (repeat != null && repeat.isRerun) {
             sb.append(", RERUN");
