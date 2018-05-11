@@ -343,7 +343,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testGenres() throws Exception {
+    public void testGenres() {
         Program program = program().withGenres().build();
 
         Program result = JAXBTestUtil.roundTrip(program, "<genre id=\"3.0.1.7.21\">\n" +
@@ -365,7 +365,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testAgeRating() throws Exception {
+    public void testAgeRating() {
         Program program = program().withAgeRating().build();
 
         Program result = JAXBTestUtil.roundTrip(program, "<ageRating>12</ageRating>");
@@ -379,7 +379,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testContentRating() throws Exception {
+    public void testContentRating() {
         Program program = program().withContentRating().build();
 
         Program result = JAXBTestUtil.roundTrip(program, "<contentRating>ANGST</contentRating>\n" +
@@ -716,7 +716,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testCountries() throws Exception {
+    public void testCountries() {
         Program program = program().withCountries().build();
 
         Program result = JAXBTestUtil.roundTrip(program, "<country code=\"GB\">Verenigd Koninkrijk</country>");
@@ -731,7 +731,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testLanguages() throws Exception {
+    public void testLanguages() {
         Program program = program().withLanguages().build();
 
         Program result = JAXBTestUtil.roundTrip(program, "<language code=\"nl\">Nederlands</language>");
@@ -801,7 +801,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testWithLocationWithUnknownOwner() throws Exception {
+    public void testWithLocationWithUnknownOwner() {
         String example = "<program embeddable=\"true\" hasSubtitles=\"false\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <locations>\n" +
             "        <location owner=\"UNKNOWN\" creationDate=\"2016-03-04T15:45:00+01:00\" workflow=\"FOR PUBLICATION\">\n" +
