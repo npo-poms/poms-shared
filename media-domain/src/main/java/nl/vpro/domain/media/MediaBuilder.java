@@ -735,7 +735,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B images(Image... images) {
         for(Image image : images) {
-            mediaObject().addImage(image);
+            if (image != null) {
+                mediaObject().addImage(image);
+            }
         }
         return (B)this;
     }
