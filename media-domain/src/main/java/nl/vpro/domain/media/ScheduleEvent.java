@@ -105,7 +105,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Valid
     protected Net net;
 
-    @Column(nullable = false, name="guideDay")
+    @Column(nullable = false, name = "guideDay")
     @NotNull
     @Convert(converter = LocalDateToDateConverter.class)
     protected LocalDate guideDay;
@@ -183,7 +183,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this(channel, null, guideLocalDate(start), start, duration, null);
     }
 
-    public ScheduleEvent(Channel channel, Net net, Instant  start, Duration  duration) {
+    public ScheduleEvent(Channel channel, Net net, Instant start, Duration duration) {
         this(channel, net, guideLocalDate(start), start, duration, null);
     }
 
@@ -316,7 +316,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public static ScheduleEvent copy(ScheduleEvent source, MediaObject parent) {
-        if(source == null) {
+        if (source == null) {
             return null;
         }
 
@@ -441,8 +441,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.start = DateUtils.toInstant(start);
     }
 
-    @JsonView({Views.Publisher.class}) // Because of other 'start' fields (e.g. in segment, it is mapped to _long_). This field is mapped to date in ES. In ES fields with same name must have same mapping.
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY, value="eventStart")
+    @JsonView({Views.Publisher.class})
+    // Because of other 'start' fields (e.g. in segment, it is mapped to _long_). This field is mapped to date in ES. In ES fields with same name must have same mapping.
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY, value = "eventStart")
 
     public Instant getStartInstant() {
         return start;
@@ -456,11 +457,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlTransient
     @Deprecated
     public Date getRealStart() {
-        if(start == null) {
+        if (start == null) {
             return null;
         }
 
-        if(offset == null) {
+        if (offset == null) {
             return Date.from(start);
         }
 
@@ -494,7 +495,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
 
     /**
-     *
      * @since 4.3
      */
     @XmlElement(name = "duration")
@@ -514,7 +514,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public void setChannel(Channel channel) {
-        if(this.channel != null) {
+        if (this.channel != null) {
             throw new IllegalStateException();
         }
         this.channel = channel;
@@ -542,7 +542,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @XmlAttribute(required = true)
     public String getUrnRef() {
-        if(urnRef == null && mediaObject != null) {
+        if (urnRef == null && mediaObject != null) {
             return mediaObject.getUrn();
         }
         return urnRef;
@@ -554,7 +554,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @XmlAttribute(required = true)
     public String getMidRef() {
-        if(this.midRef == null && mediaObject != null) {
+        if (this.midRef == null && mediaObject != null) {
             return mediaObject.getMid();
         }
         return midRef;
@@ -572,11 +572,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     public void setParent(MediaObject mediaObject) {
-        if(this.mediaObject != null) {
+        if (this.mediaObject != null) {
             this.mediaObject.removeScheduleEvent(this);
         }
         this.mediaObject = mediaObject;
-        if(mediaObject != null) {
+        if (mediaObject != null) {
             mediaObject.addScheduleEvent(this);
         }
     }
@@ -624,7 +624,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public void clearMediaObject() {
-        if(this.mediaObject != null) {
+        if (this.mediaObject != null) {
             this.mediaObject.removeScheduleEvent(this);
             this.mediaObject = null;
         }
@@ -652,7 +652,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         sb.append("ScheduleEvent");
         sb.append("{channel=").append(channel);
         sb.append(", start=").append(start);
-        if(mediaObject != null) {
+        if (mediaObject != null) {
             sb.append(", mediaObject=").append(mediaObject.getMid() == null ? "(no mid)" : mediaObject.getMid()); // it seems that the title may be lazy, so just show mid of media object.
         }
         if (repeat != null && repeat.isRerun) {
@@ -665,7 +665,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Override
     public int compareTo(ScheduleEvent o) {
         Instant otherStart = o.start;
-        if(start != null
+        if (start != null
             && otherStart != null
             && (!start.equals(otherStart))) {
 
@@ -673,7 +673,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
 
         Channel otherChannel = o.getChannel();
-        if(getChannel() != null && otherChannel != null) {
+        if (getChannel() != null && otherChannel != null) {
             return getChannel().ordinal() - otherChannel.ordinal();
         } else {
             return hashCode() - o.hashCode();
@@ -682,21 +682,21 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) {
+        if (this == o) {
             return true;
         }
-        if(o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        ScheduleEvent that = (ScheduleEvent)o;
+        ScheduleEvent that = (ScheduleEvent) o;
 
         return getId() != null && getId().equals(that.getId());
     }
 
     @Override
     public int hashCode() {
-        if(getId() != null) {
+        if (getId() != null) {
             return getId().hashCode();
         } else {
             return System.identityHashCode(this);
@@ -704,11 +704,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-        if(parent instanceof MediaObject) {
-            this.mediaObject = (MediaObject)parent;
+        if (parent instanceof MediaObject) {
+            this.mediaObject = (MediaObject) parent;
         }
 
-        if(guideDay == null && start != null) {
+        if (guideDay == null && start != null) {
             guideDay = guideLocalDate(start);
         }
     }
@@ -786,6 +786,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public String getMainDescription() {
         return TextualObject.super.getMainDescription();
     }
+
     public static class Builder {
 
         public Builder localStart(int year, int month, int day, int hour, int minute) {

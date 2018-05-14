@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Singular;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -13,12 +14,17 @@ import java.util.function.Predicate;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
-
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Range;
 import com.google.common.collect.UnmodifiableIterator;
 
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.DateUtils;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static nl.vpro.domain.media.MediaObjects.deepCopy;
 import static nl.vpro.util.DateUtils.toDate;
@@ -74,10 +80,14 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     protected Net net;
 
     @XmlAttribute(name = "start")
-    protected Date start;
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    protected Instant start;
 
     @XmlTransient // See property
-    protected Date stop;
+    protected Instant stop;
 
     @XmlAttribute
     protected Integer releaseVersion;
@@ -150,7 +160,12 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this(net, start, stop, null);
     }
 
+    @Deprecated
     public Schedule(Channel channel, Date start, Date stop, Collection<ScheduleEvent> scheduleEvents) {
+        this(channel, DateUtils.toInstant(start), DateUtils.toInstant(stop), scheduleEvents);
+    }
+
+    public Schedule(Channel channel, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
         this.channel = channel;
         this.start = start;
         this.stop = stop;
@@ -159,21 +174,13 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         }
     }
 
-    public Schedule(Channel channel, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
-        this(channel, toDate(start), toDate(stop), scheduleEvents);
-    }
-
     public Schedule(Channel channel, Instant start, Instant stop) {
-        this(channel, toDate(start), toDate(stop), null);
+        this(channel, start, stop, null);
     }
 
+    @Deprecated
     public Schedule(Net net, Date start, Date stop, Collection<ScheduleEvent> scheduleEvents) {
-        this.net = net;
-        this.start = start;
-        this.stop = stop;
-        if (scheduleEvents != null && scheduleEvents.size() > 0) {
-            this.scheduleEvents = new TreeSet<>(scheduleEvents);
-        }
+
     }
 
     public Schedule(Net net, Instant start, Instant stop) {
@@ -184,16 +191,53 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this(net, toDate(start), toDate(stop), scheduleEvents);
     }
 
-    @lombok.Builder
-    private Schedule(Net net, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents, Boolean filtered) {
+    @lombok.Builder(builderClassName = "Builder")
+    private Schedule(
+        Channel channel,
+        Net net,
+        Instant start,
+        Instant stop,
+        LocalDateTime localStart,
+        LocalDateTime localStop,
+        LocalDate startDay,
+        LocalDate stopDay,
+        @Singular
+        Collection<ScheduleEvent> scheduleEvents,
+        Boolean filtered) {
         this.net = net;
-        this.start = DateUtils.toDate(start);
-        this.stop = DateUtils.toDate(stop);
+        this.channel = channel;
+        this.start = of(start, localStart, startDay);
+        this.stop = of(stop, localStop, stopDay);
         if (scheduleEvents != null && scheduleEvents.size() > 0) {
             this.scheduleEvents = new TreeSet<>(scheduleEvents);
+            for (ScheduleEvent e : this.scheduleEvents) {
+                if (e.getChannel() == null) {
+                    e.setChannel(channel);
+                }
+                if (e.getNet() == null) {
+                    e.setNet(net);
+                }
+            }
         }
         this.filtered = filtered == null ? false : filtered;
 
+    }
+
+
+    public static Instant of(Instant instant, LocalDateTime localDateTime, LocalDate localDate) {
+        if (instant != null) {
+            assert  localDateTime == null;
+            assert  localDate == null;
+            return instant;
+        }
+        if (localDateTime != null) {
+            assert  localDate == null;
+            return localDateTime.atZone(ZONE_ID).toInstant();
+        }
+        if (localDate != null) {
+            return localDate.atTime(START_OF_SCHEDULE).atZone(ZONE_ID).toInstant();
+        }
+        return null;
     }
 
     @XmlElement(name = "scheduleEvent")
@@ -222,14 +266,19 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         return scheduleEvents.remove(scheduleEvent);
     }
 
-    public ScheduleEvent findScheduleEvent(final ScheduleEvent event) {
+    /**
+     * Finds in the current schedule the excact event (by database id)
+     */
+    public Optional<ScheduleEvent> findScheduleEvent(final ScheduleEvent event) {
         for (ScheduleEvent e : scheduleEvents) {
             if (e.equals(event)) {
-                return e;
+                return Optional.of(e);
             }
         }
-        return null;
+        return Optional.empty();
     }
+
+
 
     public void addScheduleEventsFromMedia(Collection<? extends MediaObject> mediaObjects) {
         if (scheduleEvents == null) {
@@ -331,33 +380,34 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         return clone;
     }
 
-    public Date getStart() {
+    public Instant getStart() {
         return start;
     }
-    public Instant getStartInstant() {
-        return toInstant(start);
-    }
 
-    public void setStart(Date start) {
+    public void setStart(Instant start) {
         this.start = start;
     }
 
     public void setGuideDate(LocalDate start) {
-        this.start = start == null ? null : Date.from(start.atTime(START_OF_SCHEDULE).atZone(ZONE_ID).toInstant());
+        this.start = start == null ? null : start.atTime(START_OF_SCHEDULE).atZone(ZONE_ID).toInstant();
     }
 
     /* Need a getter with the above setter, otherwise Hibernate fails */
     public LocalDate getGuideDate() {
-        return LocalDate.from(getStartInstant());
+        return LocalDate.from(getStart());
     }
 
     public void setStart(LocalDateTime start) {
-        this.start = start == null ? null : Date.from(start.atZone(ZONE_ID).toInstant());
+        this.start = start == null ? null : start.atZone(ZONE_ID).toInstant();
     }
 
 
     @XmlAttribute(name = "stop")
-    public Date getStop() {
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    public Instant getStop() {
         if (filtered || scheduleEvents == null || scheduleEvents.size() == 0 || scheduleEvents.last().getStartInstant() == null) {
             return stop;
         }
@@ -368,20 +418,16 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
             collectionEnd = lastEvent.getStartInstant().plus(lastEvent.getDuration());
         }
 
-        return stop.getTime() >= collectionEnd.toEpochMilli() ? stop : Date.from(collectionEnd);
+        return stop.isAfter(collectionEnd) ? stop : collectionEnd;
 
     }
 
-    public void setStop(Date stop) {
+    public void setStop(Instant stop) {
         this.stop = stop;
     }
 
-    public Instant getStopInstant() {
-        return toInstant(getStop());
-    }
-
     public void setStop(LocalDateTime stop) {
-        this.stop = stop == null ? null : Date.from(stop.atZone(ZONE_ID).toInstant());
+        this.stop = stop == null ? null : stop.atZone(ZONE_ID).toInstant();
     }
 
     public boolean isFiltered() {
@@ -419,8 +465,8 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     }
 
     private boolean inTimeRange(ScheduleEvent event) {
-        return (start == null || event.getStartInstant().compareTo(getStartInstant()) >= 0) &&
-                (stop == null || event.getStartInstant().compareTo(getStopInstant()) <= 0);
+        return (start == null || event.getStartInstant().compareTo(getStart()) >= 0) &&
+                (stop == null || event.getStartInstant().compareTo(getStop()) <= 0);
     }
 
     @Override
@@ -443,6 +489,13 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     @Override
     public Iterator<ScheduleEvent> iterator() {
         return getScheduleEvents().iterator();
+    }
+
+    public Range<ZonedDateTime> asRange() {
+        return Range.openClosed(
+            getStart().atZone(Schedule.ZONE_ID),
+            getStop().atZone(Schedule.ZONE_ID)
+        );
     }
 
 
