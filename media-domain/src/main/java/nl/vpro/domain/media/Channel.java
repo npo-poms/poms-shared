@@ -15,13 +15,16 @@ import nl.vpro.domain.Displayable;
 import nl.vpro.domain.XmlValued;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
+import static nl.vpro.domain.media.AVType.AUDIO;
+import static nl.vpro.domain.media.AVType.VIDEO;
+
 @XmlEnum
 @XmlType(name = "channelEnum")
 @JsonSerialize(using = BackwardsCompatibleJsonEnum.Serializer.class)
 @JsonDeserialize(using = Channel.Deserializer.class)
 public enum Channel implements Displayable, XmlValued {
     @XmlEnumValue("NED1")
-    NED1 {
+    NED1(VIDEO) {
         @Override
         public String toString() {
             return "Nederland 1";
@@ -40,7 +43,7 @@ public enum Channel implements Displayable, XmlValued {
 
 
     @XmlEnumValue("NED2")
-    NED2 {
+    NED2(VIDEO) {
         @Override
         public String toString() {
             return "Nederland 2";
@@ -58,7 +61,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("NED3")
-    NED3 {
+    NED3(VIDEO) {
         @Override
         public String toString() {
             return "Nederland 3 & Zapp";
@@ -76,7 +79,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RAD1")
-    RAD1 {
+    RAD1(AUDIO) {
         @Override
         public String toString() {
             return "Radio 1";
@@ -89,7 +92,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RAD2")
-    RAD2 {
+    RAD2(AUDIO) {
         @Override
         public String toString() {
             return "Radio 2";
@@ -105,7 +108,7 @@ public enum Channel implements Displayable, XmlValued {
 
     // komt uit prepr
     @XmlEnumValue("R2SJ")
-    R2SJ {
+    R2SJ(AUDIO) {
         @Override
         public String toString() {
             return "Radio 2 Soul & Jazz";
@@ -113,7 +116,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RAD3")
-    RAD3 {
+    RAD3(AUDIO) {
         @Override
         public String toString() {
             return "3FM";
@@ -128,7 +131,7 @@ public enum Channel implements Displayable, XmlValued {
 
     // komt uit prepr
     @XmlEnumValue("R3KX")
-    R3KX {
+    R3KX(AUDIO) {
         @Override
         public String toString() {
             return "Radio 3 KX";
@@ -136,7 +139,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RAD4")
-    RAD4 {
+    RAD4(AUDIO) {
         @Override
         public String toString() {
             return "Radio 4";
@@ -151,7 +154,7 @@ public enum Channel implements Displayable, XmlValued {
 
     // komt uit prepr
     @XmlEnumValue("R4CO")
-    R4CO {
+    R4CO(AUDIO) {
         @Override
         public String toString() {
             return "NPO Radio 4 Concerten";
@@ -159,7 +162,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RAD5")
-    RAD5 {
+    RAD5(AUDIO) {
         @Override
         public String toString() {
             return "Radio 5";
@@ -169,7 +172,7 @@ public enum Channel implements Displayable, XmlValued {
 
     // komt uit prepr
     @XmlEnumValue("R5ST")
-    R5ST {
+    R5ST(AUDIO) {
         @Override
         public String toString() {
             return "NPO Radio 5 Sterren NL";
@@ -177,7 +180,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RAD6")
-    RAD6 {
+    RAD6(AUDIO) {
         @Override
         public String toString() {
             return "Radio 6";
@@ -190,7 +193,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RTL4")
-    RTL4 {
+    RTL4(VIDEO) {
         @Override
         public String toString() {
             return "RTL 4";
@@ -198,7 +201,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RTL5")
-    RTL5 {
+    RTL5(VIDEO) {
         @Override
         public String toString() {
             return "RTL 5";
@@ -206,7 +209,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("SBS6")
-    SBS6 {
+    SBS6(VIDEO) {
         @Override
         public String toString() {
             return "SBS 6";
@@ -214,7 +217,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RTL7")
-    RTL7 {
+    RTL7(VIDEO) {
         @Override
         public String toString() {
             return "RTL 7";
@@ -222,7 +225,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("VERO")
-    VERO {
+    VERO(VIDEO) {
         @Override
         public String toString() {
             return "Veronica/Jetix";
@@ -230,7 +233,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("NET5")
-    NET5 {
+    NET5(VIDEO) {
         @Override
         public String toString() {
             return "Net 5";
@@ -238,7 +241,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("RTL8")
-    RTL8 {
+    RTL8(VIDEO) {
         @Override
         public String toString() {
             return "RTL 8";
@@ -527,7 +530,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("ARD_")
-    ARD_ {
+    ARD_(VIDEO) {
         @Override
         public String toString() {
             return "ARD";
@@ -535,7 +538,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("ZDF_")
-    ZDF_ {
+    ZDF_(VIDEO) {
         @Override
         public String toString() {
             return "ZDF";
@@ -543,7 +546,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("WDR_")
-    WDR_ {
+    WDR_(VIDEO) {
         @Override
         public String toString() {
             return "WDR Fernsehen";
@@ -2181,7 +2184,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("KLAR")
-    KLAR {
+    KLAR(AUDIO) {
         @Override
         public String toString() {
             return "Klara";
@@ -2189,7 +2192,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR1")
-    BBR1 {
+    BBR1(AUDIO) {
         @Override
         public String toString() {
             return "BBC Radio 1";
@@ -2197,7 +2200,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR2")
-    BBR2 {
+    BBR2(AUDIO) {
         @Override
         public String toString() {
             return "BBC Radio 2";
@@ -2205,7 +2208,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR3")
-    BBR3 {
+    BBR3(AUDIO) {
         @Override
         public String toString() {
             return "BBC Radio 3";
@@ -2213,7 +2216,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBR4")
-    BBR4 {
+    BBR4(AUDIO) {
         @Override
         public String toString() {
             return "BBC Radio 4";
@@ -2221,7 +2224,7 @@ public enum Channel implements Displayable, XmlValued {
     },
 
     @XmlEnumValue("BBWS")
-    BBWS {
+    BBWS(AUDIO) {
         @Override
         public String toString() {
             return "BBC Worldservice";
@@ -2380,6 +2383,15 @@ public enum Channel implements Displayable, XmlValued {
         }
     }
     ;
+    private AVType avType;
+
+    Channel(AVType avType) {
+        this.avType = avType;
+    }
+    Channel() {
+        this(null);
+    }
+
 
 
     public String misId() {
@@ -2388,6 +2400,10 @@ public enum Channel implements Displayable, XmlValued {
 
     public String pdId() {
         return name();
+    }
+
+    public AVType getAVType() {
+        return avType;
     }
 
     @Override
