@@ -6,14 +6,17 @@ import java.util.List;
 * @author Michiel Meeuwissen
 * @since 5.6
 */
-public interface MidAndType {
-
+public interface MediaReferrable {
 
     String getMid();
 
-    MediaType getMediaType();
+    default Long getId() {
+        return null;
+    }
 
     List<String> getCrids();
+
+    MediaType getMediaType();
 
     default String getCorrelationId() {
         String mid = getMid();
