@@ -64,7 +64,7 @@ public class SchemaTest {
             MediaSearchResult.class,
             MediaListItem.class,
             // update
-            MidAndTypeImpl.class,
+            MediaReferrableImpl.class,
             ProgramUpdate.class,
             GroupUpdate.class,
             SegmentUpdate.class,

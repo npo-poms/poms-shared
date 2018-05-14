@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
@@ -14,13 +17,16 @@ import java.util.function.BiFunction;
 
 import javax.annotation.Nonnull;
 import javax.validation.Valid;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Net;
+import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ScheduleEvent;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.ScheduleEventDescription;
@@ -37,7 +43,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "titles",
         "descriptions"
         })
-public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, TextualObjectUpdate<TitleUpdate, DescriptionUpdate, ScheduleEventUpdate> {
+public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, TextualObjectUpdate<TitleUpdate, DescriptionUpdate, ScheduleEventUpdate>, Child<ProgramUpdate> {
 
     @XmlAttribute(required = true)
     private Channel channel;
@@ -60,13 +66,21 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @Valid
     private SortedSet<DescriptionUpdate> descriptions;
 
-    private ScheduleEventUpdate() {
+
+    @XmlTransient
+    @Getter
+    @Setter
+    ProgramUpdate parent;
+
+    public ScheduleEventUpdate() {
     }
+
     @Deprecated
     public ScheduleEventUpdate(Channel channel, Date start, Date duration) {
         this(channel, instant(start), duration(duration));
     }
 
+    @lombok.Builder
     public ScheduleEventUpdate(Channel channel, Instant start, Duration  duration) {
         this.channel = channel;
         this.start = start;
@@ -113,14 +127,12 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.net = net;
     }
 
-    @Deprecated
-    public Date getStart() {
-        return start == null ? null : Date.from(start);
+    public Instant getStart() {
+        return start;
     }
 
-    @Deprecated
-    public void setStart(Date start) {
-        this.start = instant(start);
+    public void setStart(Instant start) {
+        this.start = start;
     }
 
     public Instant getStartInstant() {
@@ -236,4 +248,13 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     public int compareTo(ScheduleEventUpdate o) {
         return toScheduleEvent(OwnerType.BROADCASTER).compareTo(o.toScheduleEvent(OwnerType.BROADCASTER));
     }
+
+
+
+    void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
+        if (parent instanceof Program) {
+            this.parent = (ProgramUpdate) parent;
+        }
+    }
+
 }
