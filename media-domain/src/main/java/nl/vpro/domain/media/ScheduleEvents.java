@@ -4,7 +4,9 @@
  */
 package nl.vpro.domain.media;
 
-import java.util.Optional;
+import java.time.Duration;
+import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * @author Roelof Jan Koekoek
@@ -28,6 +30,7 @@ public class ScheduleEvents {
      * comparing events from a source that uses guide times rounded to the minute for example
      *
      * @return true wen equal
+     * @Deprecated {@link #findScheduleEventsCloseTo} is better
      */
     public static boolean differWithinMargin(ScheduleEvent event1, ScheduleEvent event2, long marginInMillis) {
         return
@@ -93,6 +96,41 @@ public class ScheduleEvents {
             }
         }
         return Optional.ofNullable(result);
+    }
+
+
+    /**
+     * Finds in the current schedule the event with the same channel and start instant.
+     */
+     public static Optional<ScheduleEvent> findScheduleEventWithCompareTo(final Iterable<ScheduleEvent> scheduleEvents, ScheduleEvent event) {
+        for (ScheduleEvent e : scheduleEvents) {
+            if (e.compareTo(event) == 0) {
+                return Optional.of(e);
+            }
+        }
+        return Optional.empty();
+    }
+
+
+     /**
+     * Finds in the current schedule the event with the same channel and start instant.
+     */
+     public static  List<ScheduleEvent> findScheduleEventsCloseTo(final Iterable<ScheduleEvent> scheduleEvents, ScheduleEvent event, Duration margin) {
+         BiFunction<ScheduleEvent, ScheduleEvent, Duration> distance =
+             (e1, e2) -> Duration.between(e1.getRealStartInstant(), e2.getRealStartInstant()).abs();
+
+
+         List<ScheduleEvent> result = new ArrayList<>();
+         for (ScheduleEvent e : scheduleEvents) {
+             if (!Objects.equals(e.getChannel(), event.getChannel())) {
+                 continue;
+             }
+             if (distance.apply(e, event).compareTo(margin) < 0) {
+                 result.add(e);
+             }
+         }
+         result.sort(Comparator.comparing(o -> distance.apply(event, o)));
+         return result;
     }
 
 }
