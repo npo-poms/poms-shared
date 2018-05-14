@@ -12,6 +12,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -487,6 +488,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     }
 
     @Override
+    @Nonnull
     public Iterator<ScheduleEvent> iterator() {
         return getScheduleEvents().iterator();
     }
