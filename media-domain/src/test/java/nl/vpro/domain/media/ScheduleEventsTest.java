@@ -7,6 +7,7 @@ package nl.vpro.domain.media;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
@@ -20,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ScheduleEventsTest {
 
     @Test
-    public void testEqualsHonoringOffset() throws Exception {
+    public void testEqualsHonoringOffset() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(10), null);
 
@@ -31,7 +32,7 @@ public class ScheduleEventsTest {
 
 
     @Test
-    public void testDifferWithinMarginWhenWithin() throws Exception {
+    public void testDifferWithinMarginWhenWithin() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(10), null);
 
@@ -39,7 +40,7 @@ public class ScheduleEventsTest {
     }
 
     @Test
-    public void testDifferWithinMarginWhenOutside() throws Exception {
+    public void testDifferWithinMarginWhenOutside() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(10), null);
 
@@ -47,7 +48,7 @@ public class ScheduleEventsTest {
     }
 
     @Test
-    public void testDifferWithinMarginOnChannel() throws Exception {
+    public void testDifferWithinMarginOnChannel() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(0), null);
 
@@ -55,8 +56,8 @@ public class ScheduleEventsTest {
     }
 
     @Test
-    public void testEventsWithoutfilter() throws Exception {
-        ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, new Net("A", "aa"), 
+    public void testEventsWithoutfilter() {
+        ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, new Net("A", "aa"),
             Instant.ofEpochMilli(100), Duration.ofMillis(1000));
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, new Net("B", "bb"), Instant.ofEpochMilli(200), Duration.ofMillis(1000));
         ScheduleEvent event3 = new ScheduleEvent(Channel.NED1, new Net("B", "bb"), Instant.ofEpochMilli(300), Duration.ofMillis(1000));
@@ -72,7 +73,7 @@ public class ScheduleEventsTest {
     }
 
     @Test
-    public void testEventsWithfilter() throws Exception {
+    public void testEventsWithfilter() {
         ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, new Net("A", "aa"), Instant.ofEpochMilli(100), Duration.ofMillis(1000));
         ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, new Net("B", "bb"), Instant.ofEpochMilli(200), Duration.ofMillis(1000));
         ScheduleEvent event3 = new ScheduleEvent(Channel.NED1, new Net("B", "bb"), Instant.ofEpochMilli(300), Duration.ofMillis(1000));
@@ -86,5 +87,17 @@ public class ScheduleEventsTest {
         schedule.setFiltered(true);
 
         assertThat(schedule.getScheduleEvents().size()).isEqualTo(3);
+    }
+
+
+    @Test
+    public void findEventsCloseTo() {
+        ScheduleEvent event1 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(0), null);
+        ScheduleEvent event2 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(1), null);
+        ScheduleEvent event3 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(3), null);
+        ScheduleEvent event4 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(10), null);
+        ScheduleEvent event5 = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(11), null);
+
+        assertThat(ScheduleEvents.findScheduleEventsCloseTo(Arrays.asList(event1, event2, event3, event4, event5), event2, Duration.ofMillis(10))).containsExactly(event2, event1, event3, event4);
     }
 }
