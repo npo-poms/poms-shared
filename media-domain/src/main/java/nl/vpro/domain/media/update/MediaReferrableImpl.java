@@ -10,7 +10,7 @@ import java.util.List;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.MediaType;
-import nl.vpro.domain.media.MidAndType;
+import nl.vpro.domain.media.MediaReferrable;
 import nl.vpro.validation.StringList;
 
 /**
@@ -20,13 +20,18 @@ import nl.vpro.validation.StringList;
 @XmlRootElement(name = "midAndType")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "midAndTypeType")
-public class MidAndTypeImpl implements Serializable, MidAndType {
+public class MediaReferrableImpl implements Serializable, MediaReferrable {
 
     private static final long serialVersionUID = 0L;
 
     @XmlAttribute
     @Getter
     private String mid;
+
+
+    @XmlAttribute
+    @Getter
+    private Long  id;
 
     @XmlAttribute(name = "type")
     @Getter
@@ -38,11 +43,11 @@ public class MidAndTypeImpl implements Serializable, MidAndType {
     @Setter
     private List<String> crids;
 
-    public MidAndTypeImpl() {
+    public MediaReferrableImpl() {
         // required by JAXB.
     }
 
-    public MidAndTypeImpl(String mid, MediaType type, List<String> crids) {
+    public MediaReferrableImpl(String mid, MediaType type, List<String> crids) {
         this.mid = mid;
         this.mediaType = type;
         this.crids = Collections.unmodifiableList(crids);
