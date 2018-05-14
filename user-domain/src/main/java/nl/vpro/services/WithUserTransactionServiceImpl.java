@@ -7,6 +7,8 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 
+import nl.vpro.domain.user.Trusted;
+
 /**
  * This is a  {@link TransactionService} that will do everything on behalf of one specified user, using
  * a {@link DoAsTransactionService}.
@@ -17,9 +19,9 @@ import javax.annotation.Nonnull;
 public class WithUserTransactionServiceImpl implements TransactionService {
 
     private final DoAsTransactionService doAsTransactionService;
-    private final String user;
+    private final Trusted user;
 
-    public WithUserTransactionServiceImpl(@Nonnull String user, @Nonnull DoAsTransactionService doAsTransactionService) {
+    public WithUserTransactionServiceImpl(@Nonnull Trusted user, @Nonnull DoAsTransactionService doAsTransactionService) {
         this.doAsTransactionService = doAsTransactionService;
         this.user = user;
     }
