@@ -2,6 +2,7 @@ package nl.vpro.domain.media.update;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,9 +13,9 @@ import java.util.List;
 public class MediaUpdateTable {
 
 
-    ScheduleUpdate schedule;
+    ScheduleUpdate schedule = null;
 
-    List<ProgramUpdate> programs;
+    List<ProgramUpdate> programs = new ArrayList<>();
 
-    List<ProgramUpdate> groups;
+    List<GroupUpdate> groups = new ArrayList<>();
 }
