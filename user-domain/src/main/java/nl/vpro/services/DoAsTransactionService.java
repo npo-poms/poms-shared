@@ -7,6 +7,8 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 
+import nl.vpro.domain.user.Trusted;
+
 /**
  * @author Michiel Meeuwissen
  * @since 3.6
@@ -14,28 +16,28 @@ import javax.annotation.Nonnull;
 public interface DoAsTransactionService extends TransactionService {
 
 
-    <T> T executeInNewTransaction(@Nonnull String user, @Nonnull Callable<T> callable) throws Exception;
+    <T> T executeInNewTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable) throws Exception;
 
-    <T, S> T executeInNewTransaction(@Nonnull String user, S argument, @Nonnull  Function<S, T> function);
+    <T, S> T executeInNewTransaction(@Nonnull Trusted user, S argument, @Nonnull  Function<S, T> function);
 
-    void executeInNewTransaction(@Nonnull String user,  @Nonnull  Runnable runnable);
+    void executeInNewTransaction(@Nonnull Trusted user, @Nonnull  Runnable runnable);
 
-    <T> T executeInReadonlyTransaction(@Nonnull String user, @Nonnull  Callable<T> callable) throws Exception;
+    <T> T executeInReadonlyTransaction(@Nonnull Trusted user, @Nonnull  Callable<T> callable) throws Exception;
 
-    <T, S> T executeInReadonlyTransaction(@Nonnull String user, S argument, @Nonnull  Function<S, T> function);
-
-
-    void executeInReadonlyTransaction(@Nonnull String user, @Nonnull  Runnable runnable);
-
-    <T> void executeInReadonlyTransaction(@Nonnull String user, T argument, @Nonnull  Consumer<T> consumer);
+    <T, S> T executeInReadonlyTransaction(@Nonnull Trusted user, S argument, @Nonnull  Function<S, T> function);
 
 
-    <T> T getInNewTransaction(@Nonnull String user, @Nonnull Supplier<T> supplier);
+    void executeInReadonlyTransaction(@Nonnull Trusted user, @Nonnull  Runnable runnable);
 
-    <T> T getInReadonlyTransaction(@Nonnull String user, @Nonnull  Supplier<T> supplier);
+    <T> void executeInReadonlyTransaction(@Nonnull Trusted user, T argument, @Nonnull  Consumer<T> consumer);
 
 
-    <T> void executeInNewTransaction(@Nonnull String user, T argument, @Nonnull  Consumer<T> consumer);
+    <T> T getInNewTransaction(@Nonnull Trusted user, @Nonnull Supplier<T> supplier);
+
+    <T> T getInReadonlyTransaction(@Nonnull Trusted user, @Nonnull  Supplier<T> supplier);
+
+
+    <T> void executeInNewTransaction(@Nonnull Trusted user, T argument, @Nonnull  Consumer<T> consumer);
 
     /**
      * Makes a {@link TransactionService} which does everything implicit as a certain given user.
@@ -46,7 +48,7 @@ public interface DoAsTransactionService extends TransactionService {
      */
     @Nonnull
     static TransactionService as(
-        @Nonnull String user,
+        @Nonnull Trusted user,
         @Nonnull DoAsTransactionService doAsTransactionService) {
         return new WithUserTransactionServiceImpl(user, doAsTransactionService);
     }

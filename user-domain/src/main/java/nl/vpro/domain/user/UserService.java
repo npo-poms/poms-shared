@@ -53,8 +53,8 @@ public interface UserService<T extends User> {
     /**
      * Default implemention without consideration of the roles. This can be overridden.
      */
-    default Logout systemAuthenticate(String principalId, String... roles) {
-        authenticate(principalId);
+    default Logout systemAuthenticate(Trusted trustedSourceToken) {
+        authenticate(trustedSourceToken.getPrincipal());
         return this::dropAuthentication;
     }
 
@@ -163,6 +163,6 @@ public interface UserService<T extends User> {
     interface  Logout extends AutoCloseable {
         @Override
         void close();
-
     }
+
 }
