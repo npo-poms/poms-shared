@@ -90,13 +90,12 @@ import nl.vpro.xml.bind.LocaleAdapter;
 })
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
-
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
     EmbargoDeprecated,
     TextualObjectUpdate<TitleUpdate,DescriptionUpdate,  MediaUpdate<M>>,
     VersionSpecific,
-    MidAndType {
+    MediaReferrable {
 
     static final Validator VALIDATOR;
 
