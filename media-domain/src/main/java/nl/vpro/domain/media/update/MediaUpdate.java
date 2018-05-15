@@ -107,7 +107,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
     EmbargoDeprecated,
-    TextualObjectUpdate<TitleUpdate,DescriptionUpdate,  MediaUpdate<M>>,
+    TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,
     VersionSpecific,
     MediaIdentifiable {
 
