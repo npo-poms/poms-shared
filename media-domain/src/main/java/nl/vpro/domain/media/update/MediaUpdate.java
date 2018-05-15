@@ -855,7 +855,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElementWrapper(name = "scheduleEvents")
     @XmlElement(name = "scheduleEvent")
-    public Set<ScheduleEventUpdate> getScheduleEvents() {
+    public SortedSet<ScheduleEventUpdate> getScheduleEvents() {
         return scheduleEvents;
     }
 
