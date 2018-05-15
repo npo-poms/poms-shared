@@ -213,7 +213,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private ScheduleEvent(Channel channel, Net net, LocalDate guideDay, Instant start, Duration duration, MediaObject media, Repeat repeat) {
+    private ScheduleEvent(
+        Channel channel,
+        Net net,
+        LocalDate guideDay,
+        Instant start,
+        Duration duration,
+        MediaObject media,
+        Repeat repeat) {
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;

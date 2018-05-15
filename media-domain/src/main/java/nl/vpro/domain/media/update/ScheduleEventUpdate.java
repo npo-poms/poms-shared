@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.SortedSet;
@@ -24,10 +25,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.TextualObjects;
-import nl.vpro.domain.media.Channel;
-import nl.vpro.domain.media.Net;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.ScheduleEvent;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.ScheduleEventDescription;
 import nl.vpro.domain.media.support.ScheduleEventTitle;
@@ -75,16 +73,19 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     public ScheduleEventUpdate() {
     }
 
-    @Deprecated
-    public ScheduleEventUpdate(Channel channel, Date start, Date duration) {
-        this(channel, instant(start), duration(duration));
-    }
-
-    @lombok.Builder
     public ScheduleEventUpdate(Channel channel, Instant start, Duration  duration) {
         this.channel = channel;
         this.start = start;
         this.duration = duration;
+    }
+
+
+    @lombok.Builder(builderClassName = "Builder")
+    private ScheduleEventUpdate(Channel channel, Instant start, Duration  duration, ProgramUpdate media) {
+        this.channel = channel;
+        this.start = start;
+        this.duration = duration;
+        this.parent = media;
     }
 
     public ScheduleEventUpdate(ScheduleEvent event) {
@@ -255,6 +256,19 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         if (parent instanceof Program) {
             this.parent = (ProgramUpdate) parent;
         }
+    }
+
+
+    public static class Builder {
+
+        public Builder localStart(int year, int month, int day, int hour, int minute) {
+            return localStart(LocalDateTime.of(year, month, day, hour, minute));
+        }
+
+        public Builder localStart(LocalDateTime localDateTime) {
+            return start(localDateTime.atZone(Schedule.ZONE_ID).toInstant());
+        }
+
     }
 
 }
