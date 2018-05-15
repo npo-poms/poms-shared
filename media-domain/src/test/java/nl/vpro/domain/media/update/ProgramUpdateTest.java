@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
@@ -106,11 +107,15 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testIsValidForTitles2() {
+    public void testIsValidForTitles2() throws NoSuchFieldException, IllegalAccessException {
         ProgramUpdate update = programUpdate();
         update.setType(ProgramType.CLIP);
         update.setAVType(AVType.MIXED);
-        update.addTitle("bla", null);
+        update.addTitle("bla", TextualType.MAIN);
+        TitleUpdate main = update.getTitles().first();
+        Field field = TitleUpdate.class.getDeclaredField("type");
+        field.setAccessible(true);
+        field.set(main, null);
 
         Set<? extends ConstraintViolation<MediaUpdate<Program>>> errors = update.violations();
         log.info(ConstraintViolations.humanReadable(errors));
@@ -284,7 +289,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         program.setVersion(null);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><title type=\"MAIN\">hoofdtitel omroep</title><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
+            "  <title type=\"MAIN\">hoofdtitel omroep</title>\n" +
+            "  <locations/>\n" +
+            "  <scheduleEvents/>\n" +
+            "  <images/>\n" +
+            "  <segments/>\n" +
+            "</program>\n";
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
         assertThat(rounded.getTitles()).hasSize(1);
         assertThat(rounded.fetch().getTitles()).hasSize(1);
@@ -739,9 +751,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         assertThat(update.getRelations().first().getText()).isEqualTo("bbb");
 
-
-        assertThat(update.build().getRelations().first().getText()).isEqualTo("bbb");
-
     }
 
     @Test
@@ -786,8 +795,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         ProgramUpdate rounded = JAXBTestUtil.roundTrip(clip);
 
-        expiredLocation = rounded.getLocations().first().toLocation();
-        publishedLocation = rounded.getLocations().last().toLocation();
+        expiredLocation = rounded.getLocations().first().toLocation(OwnerType.BROADCASTER);
+        publishedLocation = rounded.getLocations().last().toLocation(OwnerType.BROADCASTER);
 
         assertThat(expiredLocation.getPublishStopInstant()).isNotNull(); //Used to fail
         assertThat(expiredLocation.getPublishStopInstant()).isBefore(Instant.now());
@@ -802,9 +811,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testMid() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setMid("bla");
-        assertThat(update.mediaObject().getMid()).isNull();
         assertThat(update.getMid()).isEqualTo("bla");
-        assertThat(update.build().getMid()).isEqualTo("bla");
     }
 
     @Test

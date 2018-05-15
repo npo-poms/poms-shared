@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -26,22 +28,16 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
-import nl.vpro.domain.EmbargoDeprecated;
-import nl.vpro.domain.TextualObjectUpdate;
-import nl.vpro.domain.VersionSpecific;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.Organization;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.TimeUtils;
-import nl.vpro.util.TransformingCollection;
-import nl.vpro.util.TransformingList;
-import nl.vpro.util.TransformingSortedSet;
 import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -51,9 +47,6 @@ import nl.vpro.xml.bind.LocaleAdapter;
 
 
 /**
- * TODO: Needs refactoring.
- * builder members need to go. This is too complicated.
- * The owner field has no place too. This object should be totall agnostic about owner.
  *
  */
 
@@ -123,11 +116,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         } else {
             created = (MediaUpdate<M>) SegmentUpdate.create((Segment) object);
         }
-        created.predictions = object.getPredictions()
-            .stream()
-            .filter(Prediction::isPlannedAvailability)
-            .map(PredictionUpdate::of)
-            .collect(Collectors.toSet());
+
         return created;
     }
 
@@ -138,25 +127,14 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @SuppressWarnings("unchecked")
-    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object) {
+    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M>
+    createUpdate(MB object, OwnerType ownerType) {
         if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
-            return (MediaUpdate<M>) SegmentUpdate.create((MediaBuilder.AbstractSegmentBuilder) object);
+            return (MediaUpdate<M>) SegmentUpdate.create((Segment) object.build(), ownerType);
         } else if (object instanceof MediaBuilder.AbstractProgramBuilder) {
-            return (MediaUpdate<M>) ProgramUpdate.create((MediaBuilder.AbstractProgramBuilder) object);
+            return (MediaUpdate<M>) ProgramUpdate.create((Program) object.build(), ownerType);
         } else {
-            return (MediaUpdate<M>) GroupUpdate.create((MediaBuilder.AbstractGroupBuilder) object);
-        }
-    }
-
-
-    @SuppressWarnings("unchecked")
-    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object, OwnerType ownerType) {
-        if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
-            return (MediaUpdate<M>) SegmentUpdate.create((MediaBuilder.AbstractSegmentBuilder) object, ownerType);
-        } else if (object instanceof MediaBuilder.AbstractProgramBuilder) {
-            return (MediaUpdate<M>) ProgramUpdate.create((MediaBuilder.AbstractProgramBuilder) object, ownerType);
-        } else {
-            return (MediaUpdate<M>) GroupUpdate.create((MediaBuilder.AbstractGroupBuilder) object, ownerType);
+            return (MediaUpdate<M>) GroupUpdate.create((Group)object.build(), ownerType);
         }
     }
 
@@ -165,12 +143,43 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected boolean xmlVersion = true;
 
-
-    protected MediaBuilder<?, M> builder;
-
     @Valid
     protected MediaObject mediaObjectToValidate;
 
+    protected Long id;
+
+    protected String mid;
+
+    protected String urn;
+
+    protected AVType avType;
+
+    protected Boolean embeddable;
+
+    protected SubMediaType type;
+
+    Boolean isDeleted;
+
+    List<CountryCode> countries;
+
+    List<Locale> languages;
+
+
+    AVAttributesUpdate avAttributes;
+
+    Instant publishStart;
+
+    Instant publishStop;
+
+    java.time.Duration duration;
+
+    Short releaseYear;
+
+    AgeRating ageRating;
+
+    List<ContentRating> contentRatings;
+
+    List<String> email;
 
     protected List<ImageUpdate> images;
 
@@ -203,6 +212,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private SortedSet<RelationUpdate> relations;
 
+
     private SortedSet<ScheduleEventUpdate> scheduleEvents;
 
     protected Set<PredictionUpdate> predictions;
@@ -212,28 +222,42 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private boolean imported = false;
 
-    private final OwnerType owner;
 
     protected MediaUpdate() {
-        this(OwnerType.BROADCASTER);
+        fillFromMedia(newMedia(), OwnerType.BROADCASTER);
     }
 
 
-    protected MediaUpdate(OwnerType type) {
-        this.builder = null;
-        this.owner = type;
+    protected MediaUpdate(M mediaobject, OwnerType ownerType) {
+        fillFromMedia(mediaobject, ownerType);
+        fillFrom(mediaobject, ownerType);
     }
 
-    protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder) {
-        this(builder, OwnerType.BROADCASTER);
-        predictions = builder.build().getPredictions().stream().filter(Prediction::isPlannedAvailability).map(PredictionUpdate::of).collect(Collectors.toSet());
+    protected final void fillFromMedia(M mediaobject, OwnerType ownerType) {
+        this.mid = mediaobject.getMid();
+        this.type = mediaobject.getType();
+        this.isDeleted = mediaobject.isDeleted();
+        this.urn = mediaobject.getUrn();
+        this.crids = mediaobject.getCrids();
 
+        TextualObjects.copyToUpdate(mediaobject, this);
+        Embargos.copy(mediaobject, this);
+        this.avType = mediaobject.getAVType();
+        this.embeddable = mediaobject.isEmbeddable();
+        this.countries = mediaobject.getCountries();
+        this.languages = mediaobject.getLanguages();
+        this.avAttributes = AVAttributesUpdate.of(mediaobject.getAvAttributes());
+        this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability,PredictionUpdate::of);
+        this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == ownerType, LocationUpdate::new);
+        this.images = toList(mediaobject.getImages(), (i) -> i.getOwner() == ownerType, ImageUpdate::new);
+        this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), ScheduleEventUpdate::new);
+        this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
+        this.broadcasters = toList(mediaobject.getBroadcasters(), Broadcaster::getId);
+        this.duration = AuthorizedDuration.duration(mediaobject.getDuration());
     }
 
-    protected <T extends MediaBuilder<T, M>> MediaUpdate(T builder, OwnerType type) {
-        this.builder = builder;
-        this.owner = type;
-    }
+    protected abstract void fillFrom(M mediaObject, OwnerType ownerType);
+
 
     @Override
     @XmlTransient
@@ -270,29 +294,22 @@ public abstract class  MediaUpdate<M extends MediaObject>
                     Default.class, PomsValidatorGroup.class
                 };
             }
-            try {
-                mediaObject();
-                Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
-                if (result.isEmpty()) {
-                    fetch();
-                    mediaObjectToValidate = mediaObject();
-                    try {
-                        result = VALIDATOR.validate(this, groups);
-                        if (result.isEmpty()) {
-                            log.debug("validates");
-                        }
-                    } catch (Throwable e) {
-                        log.error(e.getMessage(), e);
-                    } finally {
-                        mediaObjectToValidate = null;
-
+            Set<? extends ConstraintViolation<MediaUpdate<M>>> result = VALIDATOR.validate(this, groups);
+            if (result.isEmpty()) {
+                fetch(OwnerType.BROADCASTER);
+                mediaObjectToValidate = fetch(OwnerType.BROADCASTER);
+                try {
+                    result = VALIDATOR.validate(this, groups);
+                    if (result.isEmpty()) {
+                        log.debug("validates");
                     }
+                    return result;
+                } catch (Throwable t) {
+                    log.error(t.getMessage(), t);
+                    return Collections.emptySet();
                 }
-                return result;
-            } catch (Throwable t) {
-                log.error(t.getMessage(), t);
-                return Collections.emptySet();
             }
+            return result;
         } else {
             log.warn("Cannot validate since no validator available");
             return Collections.emptySet();
@@ -318,78 +335,77 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlTransient
     public abstract MediaUpdateConfig getConfig();
 
-    public M fetch() {
-        builder.creationDate((Instant) null);
-        if (notTransforming(broadcasters)) {
-            mediaObject().setBroadcasters(broadcasters.stream().map(Broadcaster::new).collect(Collectors.toList()));
-            broadcasters = null;
-        }
-        if (notTransforming(portals)) {
-            mediaObject().setPortals(portals.stream().map(p -> new Portal(p, p)).collect(Collectors.toList()));
-            portals = null;
-        }
-        if (notTransforming(tags)) {
-            mediaObject().setTags(tags.stream().map(Tag::new).collect(Collectors.toCollection(TreeSet::new)));
-            tags = null;
-        }
-        if (notTransforming(persons)) {
-            mediaObject().setPersons(persons.stream().map(PersonUpdate::toPerson).collect(Collectors.toList()));
-            persons = null;
+    protected abstract M newMedia();
 
-        }
-        if (notTransforming(portalRestrictions)) {
-            mediaObject().setPortalRestrictions(portalRestrictions.stream().map(PortalRestrictionUpdate::toPortalRestriction).collect(Collectors.toList()));
-            portalRestrictions = null;
-        }
-        if (notTransforming(geoRestrictions)) {
-            mediaObject().setGeoRestrictions(geoRestrictions.stream().map(GeoRestrictionUpdate::toGeoRestriction).collect(Collectors.toSet()));
-            geoRestrictions = null;
-        }
-        if (notTransforming(titles)) {
-            mediaObject().setTitles(titles.stream().map(t -> new Title(t.getTitle(), owner, t.getType())).collect(Collectors.toCollection(TreeSet::new)));
-            titles = null;
-        }
-        if (notTransforming(descriptions)) {
-            mediaObject().setDescriptions(descriptions.stream().map(d -> new Description(d.getDescription(), owner, d.getType())).collect(Collectors.toCollection(TreeSet::new)));
-            descriptions = null;
-        }
-        if (notTransforming(websites)) {
-            mediaObject().setWebsites(websites.stream().map(Website::new).collect(Collectors.toList()));
-            websites = null;
-        }
-        if (notTransforming(genres)) {
-            mediaObject().setWebsites(websites.stream().map(Website::new).collect(Collectors.toList()));
-            websites = null;
-        }
-        if (notTransforming(memberOf)) {
-            mediaObject().setMemberOf(memberOf.stream().map(this::toMemberRef).collect(Collectors.toCollection(TreeSet::new)));
-            memberOf = null;
-        }
-        if (notTransforming(locations)) {
-            mediaObject()
-                .setLocations(locations.stream().map(LocationUpdate::toLocation).collect(Collectors.toCollection(TreeSet::new)));
-            locations = null;
-        }
-        if (notTransforming(relations)) {
-            mediaObject().setRelations(relations.stream().map(RelationUpdate::toRelation).collect(Collectors.toCollection(TreeSet::new)));
-            relations = null;
-        }
-        if (notTransforming(scheduleEvents)) {
-            mediaObject().setScheduleEvents(scheduleEvents.stream().map(e -> e.toScheduleEvent(owner)).collect(Collectors.toCollection(TreeSet::new)));
-            scheduleEvents = null;
+    private final M fetchOwnerless() {
+        M media = newMedia();
+        Embargos.copy(this, media);
+        media.setMid(mid);
+        media.setBroadcasters(toList(broadcasters, Broadcaster::new));
+        media.setPortals(toList(portals, Portal::new));
+        media.setTags(toSet(tags, Tag::new));
+        media.setPersons(toList(persons, PersonUpdate::toPerson));
+        media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
+        media.setGeoRestrictions(toSet(geoRestrictions, GeoRestrictionUpdate::toGeoRestriction));
+        media.setWebsites(toList(websites, Website::new));
+        media.setGenres(toSet(genres, Genre::new));
+        media.setMemberOf(toSet(memberOf, this::toMemberRef));
+        media.setRelations(toSet(relations, RelationUpdate::toRelation));
+        media.setAgeRating(ageRating);
+        media.setContentRatings(contentRatings);
+        media.setAVType(avType);
+        try {
+            media.setDuration(duration);
+        } catch(ModificationException mfe) {
+            log.error(mfe.getMessage());
         }
 
-        return build();
-    }
-    boolean notTransforming(Collection<?> col) {
-        return col != null && !(col instanceof TransformingCollection);
+        return media;
     }
 
-    M fetch(OwnerType owner) {
-        M returnObject = fetch();
-        MediaObjects.forOwner(returnObject, owner);
+    public M fetch(OwnerType owner) {
+        M returnObject = fetchOwnerless();
+        TextualObjects.copy(this, returnObject, owner);
+        returnObject.setLocations(toSet(locations, l -> l.toLocation(owner)));
+        returnObject.setImages(toList(images, i -> i.toImage(owner, null)));
         return returnObject;
     }
+
+
+    public M fetch() {
+        return fetch(OwnerType.BROADCASTER);
+    }
+
+
+    protected <T, U> List<T> toList(List<U> list, Predicate<U> filter, Function<U, T> mapper) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        return list.stream().filter(filter).map(mapper).collect(Collectors.toList());
+    }
+    protected <T, U> List<T> toList(List<U> list, Function<U, T> mapper) {
+        return toList(list, (u) -> true, mapper);
+    }
+
+
+
+    protected <T, U> TreeSet<T> toSet(Set<U> list, Predicate<U> filter, Function<U, T> mapper) {
+        if (list == null) {
+            list = new TreeSet<>();
+        }
+        return list
+            .stream()
+            .filter(filter)
+            .map(mapper)
+            .collect(Collectors.toCollection(TreeSet::new));
+    }
+     protected <T, U> TreeSet<T> toSet(Set<U> list, Function<U, T> mapper) {
+         return toSet(list, (u) -> true, mapper);
+     }
+
+
+
+
 
     /**
      * Please use MediaUpdateService#fetch in stead.
@@ -399,24 +415,19 @@ public abstract class  MediaUpdate<M extends MediaObject>
             for(ImageUpdate imageUpdate : images) {
                 Image image = importer.save(imageUpdate, assemblage.isImageMetaData());
                 if (image == null) {
-                    log.warn("Cannot add null as image to {}", builder);
+                    log.warn("Cannot add null as image to {}");
                 } else {
-                    if (builder != null) {
-                        builder.images(image);
-                    } else {
-                        throw new RuntimeException("Both builder and media are NULL; therefore cannot add image");
-                    }
+
                 }
             }
         }
 
         imported = true;
-        return fetch(owner);
+        return fetch(assemblage.getOwnerType());
     }
 
 
     /**
-     * We will eventually support 'mid' id's. So this would be convenient.
      *
      * @since 1.5
      */
@@ -425,19 +436,20 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @Pattern(regexp = "^[ \\.a-zA-Z0-9_-]+$", flags = {Pattern.Flag.CASE_INSENSITIVE}, message = "{nl.vpro.constraints.mid}")
     @Override
     public final String getMid() {
-        return builder.getMid();
+        return mid;
     }
 
     /**
      * @since 1.8
      */
     public void setMid(String mid) {
-        builder.mid(mid);
+        this.mid = mid;
     }
 
 
+
     public SubMediaType getType() {
-        return mediaObject().getType();
+        return type;
     }
 
     /**
@@ -452,57 +464,56 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlAttribute
     public Boolean isDeleted() {
-        if (mediaObject().isDeleted()) {
-            return Boolean.TRUE;
-        }
-        return null;
+        return isDeleted ? true : null;
     }
 
     public void setDeleted(Boolean deleted) {
-        if (deleted != null && deleted) {
-            builder.workflow(Workflow.FOR_DELETION);
-        }
+        isDeleted = deleted;
     }
 
     @XmlAttribute
     public String getUrn() {
-        if(mediaObject().getId() == null) {
-            return null;
-        }
-        return mediaObject().getUrn();
+        return urn;
     }
 
 
     public void setUrn(String s) {
-        builder.urn(s);
+        this.urn = s;
     }
 
     @XmlTransient
+    @Override
     public Long getId() {
-        return mediaObject().getId();
+        String urn = getUrn();
+        if (urn == null) {
+            return null;
+        }
+        return Long.valueOf(urn.substring(getUrnPrefix().length() + 1));
     }
 
-
-    public void setId(Long id) {
-        builder.id(id);
+    void setId(Long id) {
+        setUrn(getUrnPrefix() + id);
     }
+
+    protected abstract String getUrnPrefix();
+
 
     @XmlAttribute(name = "avType")
     public AVType getAVType() {
-        return mediaObject().getAVType();
+        return avType;
     }
 
     public void setAVType(AVType avType) {
-        builder.avType(avType);
+        this.avType = avType;
     }
 
     @XmlAttribute
     public Boolean getEmbeddable() {
-        return mediaObject().isEmbeddable();
+        return embeddable;
     }
 
     public void setEmbeddable(Boolean isEmbeddable) {
-        builder.embeddable(isEmbeddable);
+        this.embeddable = isEmbeddable;
     }
 
     @Override
@@ -512,12 +523,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStartInstant() {
-        return mediaObject().getPublishStartInstant();
+        return publishStart;
     }
 
     @Override
     public MediaUpdate<M> setPublishStartInstant(Instant publishStart) {
-        builder.publishStart(publishStart);
+        this.publishStart = publishStart;
         return this;
     }
 
@@ -528,12 +539,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getPublishStopInstant() {
-        return mediaObject().getPublishStopInstant();
+        return publishStop;
     }
 
     @Override
     public MediaUpdate<M> setPublishStopInstant(Instant publishStop) {
-        builder.publishStop(publishStop);
+        this.publishStop = publishStop;
         return this;
     }
 
@@ -541,21 +552,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @StringList(pattern = "(?i)crid://.*/.*", maxLength = 255)
     @Override
     public List<String> getCrids() {
-        return mediaObject().getCrids();
+        return crids;
     }
 
     public void setCrids(List<String> crids) {
-        mediaObject().setCrids(crids);
+        this.crids = crids;
     }
 
     @XmlElement(name = "broadcaster", required = true)
     public List<String> getBroadcasters() {
-        if (broadcasters == null) {
-            broadcasters = new TransformingList<>(mediaObject().getBroadcasters(),
-                Organization::getId,
-                Broadcaster::new
-            );
-        }
         return broadcasters;
     }
 
@@ -569,12 +574,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "portal", required = false)
     public List<String> getPortals() {
-        if (portals == null) {
-            portals  = new TransformingList<>(mediaObject().getPortals(),
-                Organization::getId,
-                p -> new Portal(p, p)
-            );
-        }
         return portals;
     }
 
@@ -588,12 +587,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "exclusive")
     @Valid
     public List<PortalRestrictionUpdate> getPortalRestrictions() {
-        if (portalRestrictions == null) {
-            portalRestrictions = new TransformingList<>(mediaObject().getPortalRestrictions(),
-                PortalRestrictionUpdate::new,
-                PortalRestrictionUpdate::toPortalRestriction
-            );
-        }
         return portalRestrictions;
     }
 
@@ -609,13 +602,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "region")
     @Valid
     public Set<GeoRestrictionUpdate> getGeoRestrictions() {
-        if (geoRestrictions == null) {
-            geoRestrictions = new TransformingSortedSet<GeoRestrictionUpdate, GeoRestriction>(
-                mediaObject().getGeoRestrictions(),
-                GeoRestrictionUpdate::new,
-                GeoRestrictionUpdate::toGeoRestriction
-            );
-        }
         return geoRestrictions;
     }
 
@@ -629,14 +615,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @NotNull
     @Size(min = 1)
     public SortedSet<TitleUpdate> getTitles() {
-        if (titles == null) {
-            titles =
-                new TransformingSortedSet<TitleUpdate, Title>(
-                    mediaObject().getTitles(),
-                    t -> new TitleUpdate(t.getTitle(), t.getType(), MediaUpdate.this),
-                    t -> new Title(t.getTitle(), owner, t.getType())
-                ).filter(); // update object filter titles with same type different owner
-        }
         return titles;
     }
     @Override
@@ -651,13 +629,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "description")
     @Valid
     public SortedSet<DescriptionUpdate> getDescriptions() {
-        if (descriptions == null) {
-            descriptions = new TransformingSortedSet<DescriptionUpdate, Description>(
-                mediaObject().getDescriptions(),
-                d -> new DescriptionUpdate(d.getDescription(), d.getType(), MediaUpdate.this),
-                d -> new Description(d.getDescription(), owner, d.getType())
-            ).filter();
-        }
         return descriptions;
     }
 
@@ -669,28 +640,18 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.descriptions = new TreeSet<>(Arrays.asList(descriptions));
     }
 
-
-
     @Override
     public BiFunction<String, TextualType, TitleUpdate> getTitleCreator() {
         return TitleUpdate::new;
-
     }
 
     @Override
     public BiFunction<String, TextualType, DescriptionUpdate> getDescriptionCreator() {
         return DescriptionUpdate::new;
-
     }
 
     @XmlElement(name = "tag")
     public SortedSet<String> getTags() {
-        if (tags == null) {
-            tags = new TransformingSortedSet<>(mediaObject().getTags(),
-                Tag::getText,
-                Tag::new
-            );
-        }
         return tags;
     }
 
@@ -705,30 +666,25 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "country")
     @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
     public List<CountryCode> getCountries() {
-        return mediaObject().getCountries();
+        return countries;
     }
 
     public void setCountries(List<CountryCode> countries) {
-        mediaObject().setCountries(countries);
+        this.countries = countries;
     }
 
     @XmlElement(name = "language")
     @XmlJavaTypeAdapter(value = LocaleAdapter.class)
     public List<Locale> getLanguages() {
-        return mediaObject().getLanguages();
+        return languages;
     }
     public void setLanguages(List<Locale> languages) {
-        mediaObject().setLanguages(languages);
+        this.languages = languages;
     }
 
     @XmlElement(name = "genre")
     @StringList(pattern = "3\\.([0-9]+\\.)*[0-9]+", maxLength = 255)
     public SortedSet<String> getGenres() {
-        if (genres == null) {
-            genres = new TransformingSortedSet<>(mediaObject().getGenres(),
-                Genre::getTermId,
-                Genre::new);
-        }
         return genres;
     }
 
@@ -743,51 +699,42 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "avAttributes")
     public AVAttributesUpdate getAvAttributes() {
-        if(mediaObject().getAvAttributes() == null) {
-            return null;
-        }
-        return new AVAttributesUpdate(mediaObject().getAvAttributes());
+        return avAttributes;
     }
 
     public void setAvAttributes(AVAttributesUpdate avAttributes) {
-        builder.avAttributes(avAttributes == null ? null : avAttributes.toAvAttributes());
+        this.avAttributes = avAttributes;
     }
 
 
     @XmlElement
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     public java.time.Duration getDuration() {
-        AuthorizedDuration dur = mediaObject().getDuration();
-        return dur == null ? null : dur.get();
+        return duration;
     }
 
     @Deprecated
-    public void setDuration(Date duration) throws ModificationException {
-        builder.duration(TimeUtils.durationOf(duration).orElse(null));
+    public void setDuration(Date duration) {
+        this.duration = TimeUtils.durationOf(duration).orElse(null);
     }
 
-    public void setDuration(java.time.Duration duration) throws ModificationException {
-        builder.duration(duration);
+    public void setDuration(java.time.Duration duration) {
+        this.duration = duration;
     }
 
     @XmlElement
     public Short getReleaseYear() {
-        return mediaObject().getReleaseYear();
+        return releaseYear;
     }
 
     public void setReleaseYear(Short releaseYear) {
-        builder.releaseYear(releaseYear);
+        this.releaseYear = releaseYear;
     }
 
     @XmlElementWrapper(name = "credits")
     @XmlElement(name = "person")
     @Valid
     public List<PersonUpdate> getPersons() {
-        if (persons == null && ! mediaObject().getPersons().isEmpty()) {
-            persons = new TransformingList<>(mediaObject().getPersons(),
-                PersonUpdate::new,
-                PersonUpdate::toPerson);
-        }
         return persons;
     }
 
@@ -800,17 +747,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement
     public SortedSet<MemberRefUpdate> getMemberOf() {
-        if (memberOf == null) {
-            memberOf = new TransformingSortedSet<>(mediaObject().getMemberOf(),
-                MemberRefUpdate::create,
-                this::toMemberRef
-            );
-        }
         return memberOf;
     }
+
     protected MemberRef toMemberRef(MemberRefUpdate m) {
         MemberRef ref = new MemberRef();
-        ref.setMember(mediaObject());
+        //ref.setMember(fetch(OwnerType.BROADCASTER));
         ref.setMediaRef(m.getMediaRef());
         ref.setNumber(m.getPosition());
         ref.setHighlighted(m.isHighlighted());
@@ -826,45 +768,39 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class })
     public AgeRating getAgeRating() {
-        return mediaObject().getAgeRating();
+        return ageRating;
     }
 
     public void setAgeRating(AgeRating ageRating) {
-        builder.ageRating(ageRating);
+        this.ageRating = ageRating;
     }
 
 
     @XmlElement(name = "contentRating")
     public List<ContentRating> getContentRatings() {
-        return mediaObject().getContentRatings();
+        return contentRatings;
     }
 
-    public void setContentRatings(List<ContentRating> list) {
-        builder.contentRatings(list.toArray(new ContentRating[list.size()]));
+    public void setContentRatings(List<ContentRating> contentRatings) {
+        this.contentRatings = contentRatings;
     }
 
 
     @XmlElement
     public List<String> getEmail() {
-        return mediaObject().getEmail();
+        return email;
     }
 
     public void setEmail(List<String> emails) {
-        builder.emails(emails.toArray(new String[emails.size()]));
+        this.email = emails;
     }
 
     public void setEmail(String... emails) {
-        builder.emails(emails);
+        this.email = new ArrayList<>(Arrays.asList(emails));
     }
 
     @XmlElement(name = "website")
     public List<String> getWebsites() {
-        if (websites == null) {
-            websites = new TransformingList<>(mediaObject().getWebsites(),
-                Website::getUrl,
-                Website::new
-            );
-        }
         return websites;
     }
 
@@ -877,8 +813,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     public void setWebsiteObjects(List<Website> websites) {
-        mediaObject().setWebsites(websites);
-        this.websites = null;
+        this.websites = websites.stream()
+            .map(Website::getUrl)
+            .collect(Collectors.toList());
     }
 
 
@@ -906,13 +843,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "location")
     @Valid
     public SortedSet<LocationUpdate> getLocations() {
-        if (locations == null) {
-            locations = new TransformingSortedSet<>(mediaObject().getLocations(),
-                LocationUpdate::new,
-                LocationUpdate::toLocation)
-                .filter(l -> l.getOwner() == MediaUpdate.this.owner)  // MSE-2261
-            ;
-        }
         return locations;
     }
 
@@ -926,12 +856,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElementWrapper(name = "scheduleEvents")
     @XmlElement(name = "scheduleEvent")
     public Set<ScheduleEventUpdate> getScheduleEvents() {
-        if (scheduleEvents == null) {
-            scheduleEvents = new TransformingSortedSet<>(mediaObject().getScheduleEvents(),
-                ScheduleEventUpdate::new,
-                e -> e.toScheduleEvent(owner)
-            );
-        }
         return scheduleEvents;
     }
 
@@ -941,12 +865,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "relation")
     public SortedSet<RelationUpdate> getRelations() {
-        if (relations == null) {
-            relations = new TransformingSortedSet<>(mediaObject().getRelations(),
-                RelationUpdate::new,
-                RelationUpdate::toRelation
-            );
-        }
         return relations;
     }
 
@@ -958,14 +876,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "image")
     @Valid
     public List<ImageUpdate> getImages() {
-        if(images == null) {
-            images = new ArrayList<>();
-            for(Image image : mediaObject().getImages()) {
-                if(this.owner == null || image.getOwner() == this.owner) { // MSE-2261
-                    images.add(new ImageUpdate(image));
-                }
-            }
-        }
         return images;
     }
 
@@ -992,36 +902,18 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.asset = asset;
     }
 
-    @XmlTransient
-    public MediaBuilder<?, M> getBuilder() {
-        return builder;
-    }
-
     @Override
     public String toString() {
-        return "update[" + builder + "]";
+        return "update[" + mid + "]";
     }
 
-    protected M build() {
 
-        M result = builder.build();
-        if (relations != null) {
-            result.setRelations(relations.stream().map(RelationUpdate::toRelation).collect(Collectors.toCollection(TreeSet::new)));
-        }
-        return result;
-    }
-
-    protected M mediaObject() {
-
-        return builder.mediaObject();
-    }
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (parent != null) {
             if (parent instanceof VersionSpecific) {
-                if ( Objects.equals( ((VersionSpecific)parent).getVersion(), getVersion())) {
-                    xmlVersion = false;
-                }
+                version = ((VersionSpecific) parent).getVersion();
+                xmlVersion = false;
             }
         }
     }

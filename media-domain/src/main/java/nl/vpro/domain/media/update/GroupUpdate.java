@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.Group;
 import nl.vpro.domain.media.GroupType;
-import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.support.OwnerType;
 
 @XmlRootElement(name = "group")
@@ -21,46 +20,47 @@ public final class GroupUpdate extends MediaUpdate<Group> {
 
     private GroupUpdateConfig updateConfig = new GroupUpdateConfig();
 
+    private GroupType groupType;
+
+    private Boolean ordered = true;
+
+
     private GroupUpdate() {
-        this(MediaBuilder.group());
+        super();
     }
 
-    private GroupUpdate(MediaBuilder.GroupBuilder builder) {
-        super(builder);
-    }
-
-    private GroupUpdate(MediaBuilder.GroupBuilder builder, OwnerType ownerType) {
-        super(builder, ownerType);
-    }
-
-    private GroupUpdate(Group group) {
-        super(MediaBuilder.group(group));
-    }
 
     private GroupUpdate(Group group, OwnerType ownerType) {
-        super(MediaBuilder.group(group), ownerType);
+        super(group, ownerType);
+    }
+
+    public static GroupUpdate create(Group group, OwnerType ownerType) {
+        return new GroupUpdate(group, ownerType);
+    }
+
+    public static GroupUpdate create(Group group) {
+        return create(group, OwnerType.BROADCASTER);
     }
 
 
     public static GroupUpdate create() {
-        return new GroupUpdate(MediaBuilder.group());
-    }
-
-    public static GroupUpdate create(MediaBuilder.AbstractGroupBuilder<?> builder) {
-        return new GroupUpdate(builder.build());
-    }
-
-    public static GroupUpdate create(MediaBuilder.AbstractGroupBuilder<?> builder, OwnerType ownerType) {
-        return new GroupUpdate(builder.build(), ownerType);
-    }
-
-    public static GroupUpdate create(Group group) {
-        return new GroupUpdate(group);
+        return new GroupUpdate();
     }
 
     @Override
-    public MediaBuilder.GroupBuilder getBuilder() {
-        return (MediaBuilder.GroupBuilder) super.getBuilder();
+    protected void fillFrom(Group mediaObject, OwnerType ownerType) {
+        this.groupType = mediaObject.getType();
+        this.ordered = mediaObject.isOrdered();
+    }
+
+
+    @Override
+    public Group fetch(OwnerType ownerType) {
+        Group group = super.fetch(ownerType);
+        group.setType(groupType);
+        group.setOrdered(ordered);
+        return group;
+
     }
 
     @Override
@@ -68,32 +68,44 @@ public final class GroupUpdate extends MediaUpdate<Group> {
         return updateConfig;
     }
 
+    @Override
+    protected Group newMedia() {
+        return new Group();
+
+    }
+
     @XmlAttribute
     @Override
     public GroupType getType() {
-        return builder.build().getType();
+        return groupType;
+    }
+
+    @Override
+    protected String getUrnPrefix() {
+        return GroupType.URN_PREFIX;
+
     }
 
     public void setType(GroupType type) {
-        getBuilder().type(type);
+        this.groupType = type;
     }
 
     @XmlAttribute
     public Boolean isOrdered() {
-        return builder.build().isOrdered();
+        return ordered;
     }
 
     public void setOrdered(Boolean ordered) {
-        getBuilder().ordered(ordered);
+        this.ordered = ordered;
     }
 
 
     @XmlElement
     public String getPoSeriesID() {
-        return builder.build().getMid();
+        return getMid();
     }
 
     public void setPoSeriesID(String poSeriesID) {
-        getBuilder().poSeriesID(poSeriesID);
+        setMid(poSeriesID);
     }
 }
