@@ -809,7 +809,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public void setPortals(List<Portal> portals) {
-        this.portals = updateList(this.portals, portals.stream().distinct().collect(Collectors.toList()));
+        this.portals = portals == null ? null : updateList(this.portals, portals.stream().distinct().collect(Collectors.toList()));
     }
 
     public MediaObject addPortal(Portal portal) {
@@ -1334,7 +1334,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return persons;
     }
 
-    public void setPersons(List<Person> persons) {
+    public void setPersons(@Nonnull  List<Person> persons) {
         for (Person person : persons) {
             person.setParent(this);
         }
