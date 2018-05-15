@@ -238,7 +238,11 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     }
 
     public Image toImage(String imageUri) {
-        Image result = new Image(OwnerType.BROADCASTER, imageUri);
+        return toImage(OwnerType.BROADCASTER, imageUri);
+    }
+
+     public Image toImage(OwnerType owner, String imageUri) {
+        Image result = new Image(owner, imageUri);
         result.copyFrom(this);
         result.setHighlighted(highlighted);
         result.setDate(date);
