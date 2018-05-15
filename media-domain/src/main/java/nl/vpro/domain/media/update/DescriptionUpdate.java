@@ -9,8 +9,13 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.TypedText;
+import nl.vpro.domain.media.support.Description;
+import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.TextualType;
 
+/**
+ * A description of a {@link MediaUpdate}. Like a non {@link Ownable} {@link Description}
+ */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "descriptionUpdateType",
     propOrder = {"description"})
