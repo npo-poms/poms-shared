@@ -31,7 +31,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
     private ProgramType programType;
 
-    private ProgramUpdateConfig updateConfig = new ProgramUpdateConfig();
 
     public ProgramUpdate() {
         super();
@@ -64,11 +63,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         this.programType = mediaobject.getType();
         this.segments = toSet(mediaobject.getSegments(), s -> SegmentUpdate.createForParent(this, s, ownerType));
         this.episodeOf = toSet(mediaobject.getEpisodeOf(), MemberRefUpdate::create);
-    }
-
-    @Override
-    public ProgramUpdateConfig getConfig() {
-        return updateConfig;
     }
 
     @Override
