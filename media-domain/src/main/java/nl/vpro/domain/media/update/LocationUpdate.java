@@ -123,10 +123,10 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
         urn = location.getUrn();
     }
 
-    public Location toLocation() {
+    public Location toLocation(OwnerType ownerType) {
         Location result = new Location(
             programUrl,
-            OwnerType.BROADCASTER, avAttributes == null ? null : avAttributes.toAvAttributes());
+            ownerType, avAttributes == null ? null : avAttributes.toAvAttributes());
         Embargos.copy(this, result);
         result.setDuration(duration);
         result.setOffset(offset);
@@ -189,7 +189,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
 
     @Override
     public int compareTo(LocationUpdate locationUpdate) {
-        return toLocation().compareTo(locationUpdate.toLocation());
+        return toLocation(OwnerType.BROADCASTER).compareTo(locationUpdate.toLocation(OwnerType.BROADCASTER));
     }
 
     @Override

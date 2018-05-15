@@ -187,6 +187,9 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     BiFunction<String, TextualType, D> getDescriptionCreator();
 
     default TO addDescription(String description, @Nonnull TextualType type) {
+        if (getDescriptions() == null) {
+            setDescriptions(new TreeSet<>());
+        }
         getDescriptions().add(getDescriptionCreator().apply(description, type));
         return self();
     }

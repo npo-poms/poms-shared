@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Child;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Segment;
@@ -25,48 +26,75 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 @XmlType(name = "segmentUpdateType", propOrder = {
         "start"
         })
-public final class SegmentUpdate extends MediaUpdate<Segment> implements Comparable<SegmentUpdate> {
+public final class SegmentUpdate extends MediaUpdate<Segment>
+    implements Comparable<SegmentUpdate>, Child<ProgramUpdate> {
 
     private SegmentUpdateConfig updateConfig = new SegmentUpdateConfig();
 
+    private SegmentType segmentType;
+    private java.time.Duration start;
+    private String midRef;
+    private ProgramUpdate parent;
+
     private SegmentUpdate() {
-        this(MediaBuilder.segment());
+
     }
 
-    private  SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder) {
-        super(builder);
+    private SegmentUpdate(Segment segment, OwnerType ownerType) {
+        super(segment, ownerType);
     }
 
-    private SegmentUpdate(MediaBuilder.AbstractSegmentBuilder builder, OwnerType ownerType) {
-        super(builder, ownerType);
+    @Override
+    protected void fillFrom(Segment mediaObject, OwnerType ownerType) {
+        fillFromFor(mediaObject.getParent() == null ? null : new ProgramUpdate(mediaObject.getParent(), ownerType), mediaObject, ownerType);
     }
 
 
-    private SegmentUpdate(Segment segment) {
-        super(MediaBuilder.segment(segment));
+
+    protected void fillFromFor(ProgramUpdate parent, Segment mediaObject, OwnerType ownerType) {
+        this.parent = parent;
+        this.segmentType = mediaObject.getType();
+        this.start = mediaObject.getStart();
+        this.midRef = mediaObject.getMidRef();
+    }
+
+
+    @Override
+    public Segment fetch(OwnerType ownerType) {
+        Segment p  = super.fetch(ownerType);
+        p.setStart(start);
+        p.setType(segmentType);
+        return p;
     }
 
 
     public static SegmentUpdate create() {
-        return new SegmentUpdate(MediaBuilder.segment());
+        return new SegmentUpdate();
+    }
+
+     public static SegmentUpdate createForParent(ProgramUpdate parent, Segment segment, OwnerType ownerType) {
+        SegmentUpdate segmentUpdate = new SegmentUpdate();
+        segmentUpdate.fillFromMedia(segment, ownerType);
+        segmentUpdate.fillFromFor(parent, segment, ownerType);
+        return segmentUpdate;
     }
 
     public static <T extends MediaBuilder.AbstractSegmentBuilder<T>> SegmentUpdate create(MediaBuilder.AbstractSegmentBuilder<T> builder) {
-        return new SegmentUpdate(builder);
+        return new SegmentUpdate(builder.build(), OwnerType.BROADCASTER);
     }
 
-    public static <T extends MediaBuilder.AbstractSegmentBuilder<T>> SegmentUpdate create(MediaBuilder.AbstractSegmentBuilder<T> builder, OwnerType ownerType) {
-        return new SegmentUpdate(builder, ownerType);
+    public static SegmentUpdate create(Segment segment, OwnerType ownerType) {
+        return new SegmentUpdate(segment, ownerType);
     }
+
+    public static SegmentUpdate createForProgram(Segment segment, OwnerType ownerType) {
+        return new SegmentUpdate(segment, ownerType);
+     }
+
 
     public static SegmentUpdate create(Segment segment) {
-        return new SegmentUpdate(segment);
-    }
-
-    @Override
-    public MediaBuilder.SegmentBuilder getBuilder() {
-        return (MediaBuilder.SegmentBuilder) super.getBuilder();
-    }
+        return create(segment, OwnerType.BROADCASTER);
+     }
 
     @Override
     public SegmentUpdateConfig getConfig() {
@@ -74,9 +102,20 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
     }
 
     @Override
+    protected Segment newMedia() {
+        return new Segment();
+
+    }
+
+    @Override
     @XmlTransient
     public SegmentType getType() {
-        return builder.build().getType();
+        return segmentType;
+    }
+
+    @Override
+    protected String getUrnPrefix() {
+        return SegmentType.URN_PREFIX;
     }
 
 
@@ -84,7 +123,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
         if (type == null) {
             type = SegmentType.SEGMENT;
         }
-        getBuilder().type(type);
+        this.segmentType = type;
     }
 
 
@@ -110,34 +149,46 @@ public final class SegmentUpdate extends MediaUpdate<Segment> implements Compara
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonDeserialize(using = XMLDurationToJsonTimestamp.DeserializerJavaDuration.class)
     public java.time.Duration getStart() {
-        return builder.build().getStart();
+        return start;
     }
 
     public void setStart(java.time.Duration start) {
-        getBuilder().start(start);
+        this.start = start;
     }
     @XmlAttribute
     public void setMidRef(String string) {
-        getBuilder().midRef(string);
+        this.midRef = string;
     }
     public String getMidRef() {
-        Segment built = builder.build();
-        return built == null ? null : built.getMidRef();
+        return midRef;
     }
 
 
     @Override
     public int compareTo(SegmentUpdate segmentUpdate) {
-        return builder.build().compareTo(segmentUpdate.builder.build());
+        //return builder.build().compareTo(segmentUpdate.builder.build());
+        return 0;
     }
 
     @Override
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         super.afterUnmarshal(unmarshaller, parent);
-        if(parent != null && parent instanceof ProgramUpdate) {
-            ((MediaBuilder.SegmentBuilder)builder).parent((ProgramUpdate) parent);
+        if(parent instanceof ProgramUpdate) {
+            this.parent = (ProgramUpdate) parent;
         }
     }
 
 
+    @Override
+    @XmlTransient
+    public void setParent(ProgramUpdate mo) {
+        this.parent = mo;
+
+    }
+
+    @Override
+    public ProgramUpdate getParent() {
+        return parent;
+
+    }
 }
