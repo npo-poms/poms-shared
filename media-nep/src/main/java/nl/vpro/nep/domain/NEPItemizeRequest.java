@@ -52,7 +52,7 @@ public class NEPItemizeRequest {
         if (instant== null) {
             return Optional.empty();
         }
-        LocalDateTime localDateTime = instant.atZone(ZoneId.of("Europe/Amsterdam")).toLocalDateTime();
+        LocalDateTime localDateTime = instant.atZone(ZoneId.of("UTC")).toLocalDateTime();
         return Optional.of(localDateTime.toString());
     }
 
