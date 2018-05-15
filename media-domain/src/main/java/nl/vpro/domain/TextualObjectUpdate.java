@@ -37,6 +37,9 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     BiFunction<String, TextualType, T> getTitleCreator();
 
     default TO addTitle(String title, @Nonnull TextualType type) {
+        if (getTitles() == null) {
+            setTitles(new TreeSet<>());
+        }
         getTitles().add(getTitleCreator().apply(title, type));
         return self();
     }
