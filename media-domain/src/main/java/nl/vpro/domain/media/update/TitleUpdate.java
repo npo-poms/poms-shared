@@ -10,8 +10,13 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.TypedText;
+import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.domain.media.support.Title;
 
+/**
+ * A title of a {@link MediaUpdate}. Like a non {@link Ownable} {@link Title}
+ */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "titleUpdateType",
     propOrder = {"title"})
