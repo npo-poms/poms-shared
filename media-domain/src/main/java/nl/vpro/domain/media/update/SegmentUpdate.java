@@ -29,7 +29,6 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 public final class SegmentUpdate extends MediaUpdate<Segment>
     implements Comparable<SegmentUpdate>, Child<ProgramUpdate> {
 
-    private SegmentUpdateConfig updateConfig = new SegmentUpdateConfig();
 
     private SegmentType segmentType;
     private java.time.Duration start;
@@ -95,11 +94,6 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     public static SegmentUpdate create(Segment segment) {
         return create(segment, OwnerType.BROADCASTER);
      }
-
-    @Override
-    public SegmentUpdateConfig getConfig() {
-        return updateConfig;
-    }
 
     @Override
     protected Segment newMedia() {

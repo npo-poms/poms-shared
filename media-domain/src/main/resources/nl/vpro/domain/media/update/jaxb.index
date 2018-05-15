@@ -2,7 +2,7 @@ GroupUpdate
 ProgramUpdate
 MemberUpdate
 SegmentUpdate
-MidAndTypeImpl
+MediaReferrableImpl
 MediaUpdateList
 TranscodeRequest
 TranscodeStatus
