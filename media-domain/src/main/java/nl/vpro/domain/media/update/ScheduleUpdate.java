@@ -2,11 +2,16 @@ package nl.vpro.domain.media.update;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Singular;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -65,10 +70,25 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
 
 
 
-    public ScheduleUpdate(Channel channel, Instant start, Instant stop) {
+    @lombok.Builder
+    private ScheduleUpdate(
+        Channel channel,
+        Instant start,
+        Instant stop,
+        LocalDateTime localStart,
+        LocalDateTime localStop,
+        LocalDate startDay,
+        LocalDate stopDay,
+        @Singular
+        Collection<ScheduleEventUpdate> scheduleEvents
+        ) {
         this.channel = channel;
-        this.start = start;
-        this.stop = stop;
+        this.start = Schedule.of(start, localStart, startDay);
+        this.stop = Schedule.of(stop, localStop, stopDay);
+        this.scheduleEvents = new TreeSet<>();
+        if (scheduleEvents != null) {
+            this.scheduleEvents.addAll(scheduleEvents);
+        }
 
     }
 
@@ -84,7 +104,6 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
     @Nonnull
     public Iterator<ScheduleEventUpdate> iterator() {
         return getScheduleEvents().iterator();
-
     }
 
 
