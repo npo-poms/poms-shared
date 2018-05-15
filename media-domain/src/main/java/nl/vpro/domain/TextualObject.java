@@ -40,7 +40,7 @@ public interface TextualObject<
     }
 
     @Override
-    default TO addTitle(String title, TextualType type) {
+    default TO addTitle(String title,  @Nonnull TextualType type) {
         return addTitle(title, DEFAULT_OWNER, type);
     }
 

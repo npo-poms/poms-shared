@@ -474,14 +474,25 @@ public class TextualObjects {
         TO1 from,
         TO2 to) {
         if (from.getTitles() != null) {
+            TextualType type = null;
             for (T1 title : from.getTitles()) {
+                if (Objects.equals(type, title.getType())) {
+                    continue;
+                }
+                type = title.getType();
                 to.setTitle(title.get(), title.getType());
             }
         } else {
             to.setTitles(null);
         }
         if (from.getDescriptions() != null) {
+            TextualType type = null;
             for (D1 description : from.getDescriptions()) {
+                 if (Objects.equals(type, description.getType())) {
+                    continue;
+                }
+                type = description.getType();
+
                 to.setDescription(description.get(), description.getType());
             }
         } else {
