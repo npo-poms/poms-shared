@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.time.Instant;
 import java.util.*;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -164,7 +165,7 @@ public class MediaObjectTranslation implements
     }
 
     @Override
-    public MediaObjectTranslation addTitle(String title, OwnerType owner, TextualType type) {
+    public MediaObjectTranslation addTitle(String title, @Nonnull OwnerType owner,  @Nonnull TextualType type) {
         final TitleTranslation existingTitle = findTitle(owner, type);
 
         if (existingTitle != null) {

@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import javax.annotation.Nonnull;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -30,12 +31,12 @@ public class TitleUpdate implements TypedText {
         return new TitleUpdate(title, TextualType.MAIN);
     }
 
-    public TitleUpdate(String title, TextualType type) {
+    public TitleUpdate(String title, @Nonnull TextualType type) {
         this.title = title;
         this.type = type;
     }
 
-    TitleUpdate(String title, TextualType type, MediaUpdate media) {
+    TitleUpdate(String title,  @Nonnull TextualType type, MediaUpdate media) {
         this(title, type);
         this.media = media;
     }

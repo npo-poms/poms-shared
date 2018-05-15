@@ -4,6 +4,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -78,7 +79,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
     /**
      * Creates a new <code>Title</code> with a length of 256 characters.
      */
-    public Title(String title, OwnerType owner, TextualType type) {
+    public Title(String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
         this(title, owner, type, true);
     }
 
@@ -86,7 +87,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
      * Optional constructor to bypass cropping the title to a length of 256
      * characters which is the default.
      */
-    public Title(String title, OwnerType owner, TextualType type, boolean crop) {
+    public Title(String title, @Nonnull OwnerType owner, @Nonnull TextualType type, boolean crop) {
         super(owner, type);
         this.title = strip(title);
         if (crop) {
