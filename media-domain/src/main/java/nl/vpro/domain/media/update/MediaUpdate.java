@@ -332,9 +332,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return sb.toString();
     }
 
-    @XmlTransient
-    public abstract MediaUpdateConfig getConfig();
-
     protected abstract M newMedia();
 
     private final M fetchOwnerless() {
@@ -414,10 +411,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if(!imported && images != null) {
             for(ImageUpdate imageUpdate : images) {
                 Image image = importer.save(imageUpdate, assemblage.isImageMetaData());
+
                 if (image == null) {
                     log.warn("Cannot add null as image to {}");
                 } else {
-
+                    imageUpdate.setImage(new ImageLocation(image.getImageUri()));
                 }
             }
         }

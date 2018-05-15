@@ -23,11 +23,7 @@ public class NeboConverters {
         Program program = enrichment.getAflevering().getProgram();
         ProgramUpdate update = ProgramUpdate.create(program);
         // This legacy Nebo format has no series support
-        update.getConfig().setEpisodeOfUpdate(false);
-        update.getConfig().setMemberOfUpdate(false);
 
-        // nor ratings
-        update.getConfig().setRatingsUpdate(false);
         return update;
     }
 
