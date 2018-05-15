@@ -43,6 +43,7 @@
       <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="mid" type="xs:string"/>
+    <xs:attribute name="id" type="xs:long"/>
     <xs:attribute name="type" type="media:mediaTypeEnum"/>
   </xs:complexType>
 

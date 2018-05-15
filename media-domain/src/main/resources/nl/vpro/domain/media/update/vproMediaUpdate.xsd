@@ -229,6 +229,7 @@
       <xs:element name="crid" type="media:cridType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="mid" type="xs:string"/>
+    <xs:attribute name="id" type="xs:long"/>
     <xs:attribute name="type" type="media:mediaTypeEnum"/>
   </xs:complexType>
 
