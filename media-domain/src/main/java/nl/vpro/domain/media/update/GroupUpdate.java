@@ -18,7 +18,6 @@ import nl.vpro.domain.media.support.OwnerType;
         })
 public final class GroupUpdate extends MediaUpdate<Group> {
 
-    private GroupUpdateConfig updateConfig = new GroupUpdateConfig();
 
     private GroupType groupType;
 
@@ -61,11 +60,6 @@ public final class GroupUpdate extends MediaUpdate<Group> {
         group.setOrdered(ordered);
         return group;
 
-    }
-
-    @Override
-    public GroupUpdateConfig getConfig() {
-        return updateConfig;
     }
 
     @Override
