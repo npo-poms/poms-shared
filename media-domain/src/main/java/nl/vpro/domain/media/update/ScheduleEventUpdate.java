@@ -185,7 +185,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     }
 
     @Override
-    public ScheduleEventUpdate addTitle(String title, TextualType type) {
+    public ScheduleEventUpdate addTitle(String title, @Nonnull TextualType type) {
         if (titles == null) {
             titles = new TreeSet<>();
         }

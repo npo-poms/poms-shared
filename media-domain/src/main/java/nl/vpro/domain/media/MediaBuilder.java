@@ -22,7 +22,6 @@ import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.domain.user.Portal;
@@ -1008,12 +1007,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
             mediaObject().setStart(start);
             return (T) this;
         }
-
-        public T parent(ProgramUpdate parent) {
-            mediaObject().setParent(parent.fetch());
-            return (T) this;
-        }
-
         public T parent(Program parent) {
             mediaObject().setParent(parent);
             return (T) this;
