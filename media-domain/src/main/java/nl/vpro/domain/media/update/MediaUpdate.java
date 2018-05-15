@@ -47,6 +47,25 @@ import nl.vpro.xml.bind.LocaleAdapter;
 
 
 /**
+ * A MediaUpdate is meant for communicating updates. It is not meant as a complete representation of the object.
+ *
+ * A MediaUpdate is like a {@link MediaObject} but
+ * <ul>
+ *  <li>It does not have {@link Ownable} objects. When converting between a MediaUpdate and a MediaObject one need to indicate for which owner type this must happen.
+ *  If you are updating you are always associated with a certain owner (normally {@link OwnerType#BROADCASTER}), so there is no case for updating fields of other owners.
+ * </li>
+ * <li>It contains fewer implicit fields. E.g. a Broadcaster is just an id, and it does not contain a better string representation.
+ *  These kind of fields are non modifiable, or are implicitely calculated. So there is no case in updating them.
+ * </li>
+ * <li>It may contain a 'version'
+ * Some code may check this version to know whether certains fields ought to be ignored or not. This is to arrange forward and backwards compatibility.
+ * It may e.g. happen that a newer version of POMS has a new field. If you are not aware of this, sending an update XML without the field may result in the value to be emptied.
+ * To indicate that you <em>are</em> aware, you should sometimes supply a sufficiently high version.
+ * </li>
+ * </ul>
+ *
+
+ * As {@link MediaObject} it has three extenstions {@link ProgramUpdate}, {@link GroupUpdate} and {@link SegmentUpdate}
  *
  */
 
