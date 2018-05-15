@@ -215,7 +215,7 @@ import static nl.vpro.domain.media.MediaObject.*;
 
 @Slf4j
 public abstract class MediaObject extends PublishableObject<MediaObject>
-        implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject>, MediaReferrable {
+        implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject>, MediaIdentifiable {
 
 
     public static final String DELETED_FILTER = "deletedFilter";
