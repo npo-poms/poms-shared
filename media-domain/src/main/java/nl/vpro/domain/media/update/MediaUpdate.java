@@ -67,6 +67,8 @@ import nl.vpro.xml.bind.LocaleAdapter;
 
  * As {@link MediaObject} it has three extenstions {@link ProgramUpdate}, {@link GroupUpdate} and {@link SegmentUpdate}
  *
+ * @param <M>  The {@link MediaObject} extension this is for.
+ *
  */
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
@@ -107,7 +109,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     EmbargoDeprecated,
     TextualObjectUpdate<TitleUpdate,DescriptionUpdate,  MediaUpdate<M>>,
     VersionSpecific,
-    MediaReferrable {
+    MediaIdentifiable {
 
     static final Validator VALIDATOR;
 
