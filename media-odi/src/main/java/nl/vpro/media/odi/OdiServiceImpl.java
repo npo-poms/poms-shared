@@ -36,8 +36,7 @@ public class OdiServiceImpl implements OdiService {
         return
             handleLocations(media, request, pubOptions)
                 .stream()
-                .sorted(sorter(pubOptions))
-                .findFirst()
+                .min(sorter(pubOptions))
                 .orElse(null);
     }
 
@@ -46,8 +45,7 @@ public class OdiServiceImpl implements OdiService {
         return
             handleLocation(location, request, pubOptions)
                 .stream()
-                .sorted(sorter(pubOptions))
-                .findFirst()
+                .min(sorter(pubOptions))
                 .orElse(null);
     }
 
