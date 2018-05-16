@@ -107,4 +107,8 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
     }
 
 
+    @Override
+    public String toString() {
+        return getScheduleEvents().size() + " events in " + asRange();
+    }
 }
