@@ -1,6 +1,7 @@
 package nl.vpro.domain;
 
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import nl.vpro.domain.media.support.Ownable;
@@ -473,30 +474,26 @@ public class TextualObjects {
         > void copyToUpdate(
         TO1 from,
         TO2 to) {
-        if (from.getTitles() != null) {
+        forUpdate(from.getTitles(), (t) -> to.setTitle(t.get(), t.getType()), () -> to.setTitles(null));
+        forUpdate(from.getDescriptions(), (t) -> to.setDescription(t.get(), t.getType()), () -> to.setDescriptions(null));
+    }
+
+
+    /**
+     * @since 5.8
+     */
+    protected static <T extends TypedText> void forUpdate(Collection<T> collection, Consumer<T> consumer, Runnable ifNull) {
+        if (collection != null) {
             TextualType type = null;
-            for (T1 title : from.getTitles()) {
+            for (T title : collection) {
                 if (Objects.equals(type, title.getType())) {
                     continue;
                 }
                 type = title.getType();
-                to.setTitle(title.get(), title.getType());
+                consumer.accept(title);
             }
         } else {
-            to.setTitles(null);
-        }
-        if (from.getDescriptions() != null) {
-            TextualType type = null;
-            for (D1 description : from.getDescriptions()) {
-                 if (Objects.equals(type, description.getType())) {
-                    continue;
-                }
-                type = description.getType();
-
-                to.setDescription(description.get(), description.getType());
-            }
-        } else {
-            to.setDescriptions(null);
+            ifNull.run();
         }
     }
 }
