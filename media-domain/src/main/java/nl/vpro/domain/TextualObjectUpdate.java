@@ -9,12 +9,13 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
 
 /**
  * An object that has titles and descriptions, which are typed, but not necessary owned (unlike {@link TextualObject}).
- * This means that the object generally is used to update 'TextualObjects', since the user updating is associated with only one {@link nl.vpro.domain.media.support.OwnerType}.
+ * This means that the object generally is used to update 'TextualObjects', since the user updating is associated with only one {@link OwnerType}.
  *
  * @param <T> The type of 'titles' in this object.
  * @param <D> The type of 'descriptions'.
@@ -32,6 +33,8 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
     /**
+     * How to create an instance of a title. This makes a lot of default methods possible.
+     *
      * @since 5.5
      */
     BiFunction<String, TextualType, T> getTitleCreator();
