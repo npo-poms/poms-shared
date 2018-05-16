@@ -386,7 +386,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return col != null && !(col instanceof TransformingCollection);
     }
 
-    M fetch(OwnerType owner) {
+    public M fetch(OwnerType owner) {
         M returnObject = fetch();
         MediaObjects.forOwner(returnObject, owner);
         return returnObject;

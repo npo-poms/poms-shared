@@ -113,7 +113,7 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     }
 
     @Override
-    Program fetch(OwnerType owner) {
+    public Program fetch(OwnerType owner) {
         if (segments != null) {
             build().setSegments(segments.stream().map(s -> s.fetch(owner)).collect(Collectors.toCollection(TreeSet::new)));
             segments = null;
