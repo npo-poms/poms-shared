@@ -72,7 +72,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id:(.+)?}")
+    @Path("{entity:(media|program|group|segment)}/{id}")
     MediaUpdate<?> getMedia(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
