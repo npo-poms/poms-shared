@@ -40,4 +40,7 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean ratingsUpdate = true;
 
+    @lombok.Builder.Default
+    boolean createScheduleEvents = false;
+
 }
