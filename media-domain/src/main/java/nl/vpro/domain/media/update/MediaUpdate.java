@@ -215,8 +215,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     private SortedSet<String> tags;
 
 
+    // jaxb annotations are here, because if on property, the credits wrapper will be marshalled always.
+    // This arguably better, but for now we want to be backwards compatible.
     @XmlElementWrapper(name = "credits")
     @XmlElement(name = "person")
+
     private List<PersonUpdate> persons;
 
     private List<PortalRestrictionUpdate> portalRestrictions;
