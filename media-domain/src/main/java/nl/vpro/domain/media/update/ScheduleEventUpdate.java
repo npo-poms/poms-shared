@@ -41,7 +41,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "titles",
         "descriptions"
         })
-public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, TextualObjectUpdate<TitleUpdate, DescriptionUpdate, ScheduleEventUpdate>, Child<ProgramUpdate> {
+public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, TextualObjectUpdate<TitleUpdate, DescriptionUpdate, ScheduleEventUpdate>, Child<MediaUpdate<?>> {
 
     @XmlAttribute(required = true)
     private Channel channel;
@@ -68,7 +68,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @XmlTransient
     @Getter
     @Setter
-    ProgramUpdate parent;
+    MediaUpdate<?>  parent;
 
     public ScheduleEventUpdate() {
     }
@@ -88,7 +88,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         this.parent = media;
     }
 
-    public ScheduleEventUpdate(ScheduleEvent event) {
+    public ScheduleEventUpdate(MediaUpdate<?> media, ScheduleEvent event) {
         this(event.getChannel(), event.getStartInstant(), event.getDuration());
 
         TextualObjects.copyToUpdate(event, this);
@@ -104,6 +104,11 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
                 descriptionSet.add(DescriptionUpdate.of(et));
             }
         }
+        this.parent = media;
+    }
+
+    public ScheduleEventUpdate(ScheduleEvent event) {
+        this(null, event);
     }
 
     public ScheduleEvent toScheduleEvent(OwnerType ownerType) {

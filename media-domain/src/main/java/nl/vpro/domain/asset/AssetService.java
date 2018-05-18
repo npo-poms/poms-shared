@@ -5,7 +5,6 @@
 package nl.vpro.domain.asset;
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,9 +49,6 @@ public interface AssetService {
      */
     String store(String fileName, Asset asset);
 
-    String store(String fileName, InputStream stream, Runnable... callbacks);
-
-    String append(String fileName, InputStream stream);
 
     boolean remove(String fileName);
 
