@@ -270,6 +270,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         TextualObjects.copyToUpdate(mediaobject, this);
         Embargos.copy(mediaobject, this);
+
         this.avType = mediaobject.getAVType();
         this.embeddable = mediaobject.isEmbeddable();
         this.countries = mediaobject.getCountries();
@@ -365,6 +366,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     private final M fetchOwnerless() {
         M media = newMedia();
         Embargos.copy(this, media);
+        media.setCreationInstant(null); //   not supported by update format. will be set by persistence layer
         media.setMid(mid);
         media.setBroadcasters(toList(broadcasters, Broadcaster::new));
         media.setPortals(toList(portals, Portal::new));

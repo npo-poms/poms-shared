@@ -13,10 +13,14 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class MediaUpdateTest {
 
     @Test
+
     public void withEverything() throws Exception {
+
+        // TODO. Still orienting, it may be that the xml is not yet absolutely correct.
         Program withEverything = MediaTestDataBuilder
             .program()
             .withEverything()
+            .withFixedDates()
             .build();
 
         ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
@@ -217,7 +221,7 @@ public class MediaUpdateTest {
             "</program>\n");
 
         JAXBTestUtil.roundTripAndSimilar(rounded.fetch(OwnerType.BROADCASTER), "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-01T01:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2018-05-15T15:51:39.974+02:00\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-01T01:00:00+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "    <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "    <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
@@ -263,13 +267,13 @@ public class MediaUpdateTest {
             "    <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
             "    <relation uriRef=\"http://www.bluenote.com/\" broadcaster=\"VPRO\" type=\"LABEL\">Blue Note</relation>\n" +
             "    <images>\n" +
-            "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" creationDate=\"2018-05-15T15:51:39.985+02:00\" urn=\"urn:vpro:media:image:2\">\n" +
+            "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:2\">\n" +
             "            <shared:title>Eerste plaatje met credits</shared:title>\n" +
             "            <shared:credits>CREDITS</shared:credits>\n" +
             "            <shared:source>SOURCE</shared:source>\n" +
             "            <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
             "        </shared:image>\n" +
-            "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" creationDate=\"2018-05-15T15:51:39.985+02:00\" urn=\"urn:vpro:media:image:3\">\n" +
+            "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:3\">\n" +
             "            <shared:title>Tweede plaatje met credits</shared:title>\n" +
             "            <shared:credits>CREDITS</shared:credits>\n" +
             "            <shared:source>SOURCE</shared:source>\n" +
@@ -277,7 +281,7 @@ public class MediaUpdateTest {
             "        </shared:image>\n" +
             "    </images>\n" +
             "    <segments>\n" +
-            "        <segment type=\"SEGMENT\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-01T01:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2018-05-15T15:51:39.985+02:00\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\">\n" +
+            "        <segment type=\"SEGMENT\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-01T01:00:00+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\">\n" +
             "            <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "            <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "            <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
@@ -323,13 +327,13 @@ public class MediaUpdateTest {
             "            <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
             "            <relation uriRef=\"http://www.bluenote.com/\" broadcaster=\"VPRO\" type=\"LABEL\">Blue Note</relation>\n" +
             "            <images>\n" +
-            "                <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" creationDate=\"2018-05-15T15:51:39.986+02:00\" urn=\"urn:vpro:media:image:2\">\n" +
+            "                <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:2\">\n" +
             "                    <shared:title>Eerste plaatje met credits</shared:title>\n" +
             "                    <shared:credits>CREDITS</shared:credits>\n" +
             "                    <shared:source>SOURCE</shared:source>\n" +
             "                    <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
             "                </shared:image>\n" +
-            "                <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" creationDate=\"2018-05-15T15:51:39.986+02:00\" urn=\"urn:vpro:media:image:3\">\n" +
+            "                <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:3\">\n" +
             "                    <shared:title>Tweede plaatje met credits</shared:title>\n" +
             "                    <shared:credits>CREDITS</shared:credits>\n" +
             "                    <shared:source>SOURCE</shared:source>\n" +
