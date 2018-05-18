@@ -5,10 +5,7 @@
 package nl.vpro.api.rs.v3.tvvod;
 
 import javax.validation.constraints.Size;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.media.MediaTable;
@@ -25,7 +22,7 @@ public interface TVVodRestService {
     @GET
     @Path("/{mid}")
     MediaTable get(
-        @PathParam("mid") @Size(min = 1) String mid
+        @Encoded  @PathParam("mid") @Size(min = 1) String mid
     );
 
 }
