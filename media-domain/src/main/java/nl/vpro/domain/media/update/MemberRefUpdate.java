@@ -36,6 +36,7 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
         this.mediaRef = mediaRef;
     }
 
+    @lombok.Builder
     public MemberRefUpdate(Integer position, String mediaRef, boolean highlighted) {
         this(position, mediaRef);
         this.highlighted = highlighted;

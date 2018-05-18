@@ -61,11 +61,11 @@ public class Asset implements Embargo<Asset> {
     }
 
     public boolean isLocationAsset() {
-        return source != null && source instanceof AssetLocation;
+        return source instanceof AssetLocation;
     }
 
     public boolean isDataAsset() {
-        return source != null && source instanceof AssetData;
+        return source instanceof AssetData;
     }
 
     public void resolve(String parent) throws URISyntaxException {

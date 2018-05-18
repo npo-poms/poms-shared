@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import java.util.List;
+import java.util.Optional;
 
 import nl.vpro.domain.Identifiable;
 
@@ -22,15 +23,19 @@ public interface MediaIdentifiable extends Identifiable<Long> {
 
     MediaType getMediaType();
 
-    default String getCorrelationId() {
+    default Optional<String> getMainIdentifier() {
         String mid = getMid();
         if (mid != null) {
-            return mid;
+            return Optional.of(mid);
         }
         List<String> crids = getCrids();
         if (crids != null && !crids.isEmpty()) {
-            return crids.get(0);
+            return Optional.of(crids.get(0));
         }
-        return "" + hashCode();
-      }
+        return Optional.empty();
+    }
+
+    default String getCorrelationId() {
+        return getMainIdentifier().orElseGet(() -> "" + hashCode());
+    }
 }
