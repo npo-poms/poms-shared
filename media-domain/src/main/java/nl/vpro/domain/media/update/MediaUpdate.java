@@ -280,7 +280,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == ownerType, LocationUpdate::new);
         this.images = toList(mediaobject.getImages(), (i) -> i.getOwner() == ownerType, ImageUpdate::new);
         this.tags = toSet(mediaobject.getTags(), Tag::getText);
-        this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), ScheduleEventUpdate::new);
+        this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.broadcasters = toList(mediaobject.getBroadcasters(), Broadcaster::getId);
         this.duration = AuthorizedDuration.duration(mediaobject.getDuration());
@@ -382,6 +382,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setAgeRating(ageRating);
         media.setContentRatings(contentRatings);
         media.setAVType(avType);
+        media.setCrids(crids);
         try {
             media.setDuration(duration);
         } catch(ModificationException mfe) {
