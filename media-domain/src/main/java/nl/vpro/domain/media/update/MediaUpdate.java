@@ -214,6 +214,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private SortedSet<String> tags;
 
+
+    @XmlElementWrapper(name = "credits")
+    @XmlElement(name = "person")
     private List<PersonUpdate> persons;
 
     private List<PortalRestrictionUpdate> portalRestrictions;
@@ -791,10 +794,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.releaseYear = releaseYear;
     }
 
-    @XmlElementWrapper(name = "credits")
-    @XmlElement(name = "person")
     @Valid
     @Nonnull
+    @XmlTransient
     public List<PersonUpdate> getPersons() {
         if (persons == null) {
             persons = new ArrayList<>();
