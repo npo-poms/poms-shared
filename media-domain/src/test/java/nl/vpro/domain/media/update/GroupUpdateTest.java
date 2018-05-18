@@ -61,7 +61,6 @@ public class GroupUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<group xmlns=\"urn:vpro:media:update:2009\" type=\"SEASON\" ordered=\"true\" embeddable=\"true\">\n" +
-            "  <credits/>\n" +
             "  <locations/>\n" +
             "  <scheduleEvents/>\n" +
             "  <images/>\n" +
@@ -78,7 +77,6 @@ public class GroupUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<group xmlns=\"urn:vpro:media:update:2009\" ordered=\"true\" embeddable=\"true\" mid=\"VPWON_333\">\n" +
-            "  <credits/>\n" +
             "  <locations/>\n" +
             "  <scheduleEvents/>\n" +
             "  <images/>\n" +
