@@ -35,7 +35,7 @@ public interface SubtitlesRestService {
     @GET
     @Path("/{mid}/{language}/{type}")
     Subtitles get(
-        @PathParam(MID) String mid,
+        @Encoded @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale locale,
         @PathParam(TYPE) SubtitlesType type
     );
@@ -43,14 +43,14 @@ public interface SubtitlesRestService {
     @GET
     @Path("/{mid}/{language}")
     Subtitles get(
-        @PathParam(MID) String mid,
+        @Encoded @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale locale);
 
 
     @GET
     @Path("/{mid}")
     Subtitles get(
-        @PathParam(MID) String mid);
+        @Encoded @PathParam(MID) String mid);
 
     @POST
     @Path("/")
