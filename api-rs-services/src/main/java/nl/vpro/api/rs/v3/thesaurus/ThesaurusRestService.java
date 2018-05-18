@@ -30,8 +30,8 @@ public interface ThesaurusRestService {
     @GET
     @Path("/people")
     PersonResult findPersons(
-            @QueryParam("text") @DefaultValue("") String text,
-            @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max);
+        @QueryParam("text") @DefaultValue("") String text,
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max);
 
 
 
