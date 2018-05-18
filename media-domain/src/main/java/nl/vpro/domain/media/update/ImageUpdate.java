@@ -243,6 +243,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
 
      public Image toImage(OwnerType owner, String imageUri) {
         Image result = new Image(owner, imageUri);
+        result.setCreationInstant(null); // not supported by update format. will be set by persistence layer
         result.copyFrom(this);
         result.setHighlighted(highlighted);
         result.setDate(date);

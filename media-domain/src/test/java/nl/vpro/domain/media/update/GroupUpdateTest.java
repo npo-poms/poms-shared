@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.TreeSet;
 
 import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBException;
 
 import org.junit.Test;
 
@@ -26,7 +25,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
 
 
     @Test
-    public void testGetSetOnConsistency() throws Exception {
+    public void testGetSetOnConsistency() {
         GroupUpdate groupUpdate = GroupUpdate.create(new Group(GroupType.ALBUM));
 
         groupUpdate.setType(GroupType.PLAYLIST);
@@ -35,7 +34,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testFetchOnDefaultOwner() throws Exception {
+    public void testFetchOnDefaultOwner() {
         GroupUpdate group = GroupUpdate.create();
         group.setTitles(new TreeSet<>(Arrays.asList(new TitleUpdate("title", TextualType.MAIN))));
 
@@ -86,7 +85,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
-    protected GroupUpdate toUpdate(String xml) throws JAXBException {
+    protected GroupUpdate toUpdate(String xml) {
         Reader reader = new StringReader(xml);
         return JAXB.unmarshal(reader, GroupUpdate.class);
     }
