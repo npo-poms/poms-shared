@@ -29,6 +29,10 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     @Valid
     protected SortedSet<MemberRefUpdate> episodeOf;
 
+    @Valid
+    protected SortedSet<ScheduleEventUpdate> scheduleEvents;
+
+
     private ProgramType programType;
 
 
@@ -121,6 +125,8 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     public void setSegments(SortedSet<SegmentUpdate> segments) {
         this.segments = segments;
     }
+
+
 
     @Override
     public String toString() {
