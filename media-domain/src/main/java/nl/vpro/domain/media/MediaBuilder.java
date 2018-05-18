@@ -32,6 +32,7 @@ import nl.vpro.util.TimeUtils;
 
 import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
 import static nl.vpro.util.DateUtils.toDate;
+import static nl.vpro.util.DateUtils.toInstant;
 
 @SuppressWarnings("ALL")
 public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObject> extends EmbargoBuilder<B> {
@@ -130,15 +131,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-    @SuppressWarnings("unchecked")
     @Deprecated
     default B creationDate(Date date) {
-        mediaObject().setCreationInstant(DateUtils.toInstant(date));
-        return (B)this;
+        return creationDate(toInstant(date));
     }
-
+    @SuppressWarnings("unchecked")
     default B creationDate(Instant date) {
-        return creationDate(toDate(date));
+        mediaObject().setCreationInstant(date);
+        return (B)this;
     }
 
     default B creationDate(ZonedDateTime date) {
