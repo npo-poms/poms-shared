@@ -63,57 +63,57 @@ public interface ScheduleRestService {
     @GET
     @Path("/ancestor/{ancestor}")
     ScheduleResult listForAncestor(
-            @PathParam(ANCESTOR) String mediaId,
-            @QueryParam(GUIDE_DAY) LocalDate guideDay,
-            @QueryParam(START) Instant start,
-            @QueryParam(STOP) Instant stop,
-            @QueryParam(PROPERTIES) String properties,
-            @QueryParam(SORT) @DefaultValue(ASC) String sort,
-            @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) long offset,
-            @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
+        @Encoded @PathParam(ANCESTOR) String mediaId,
+        @QueryParam(GUIDE_DAY) LocalDate guideDay,
+        @QueryParam(START) Instant start,
+        @QueryParam(STOP) Instant stop,
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(SORT) @DefaultValue(ASC) String sort,
+        @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) long offset,
+        @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
     );
 
 
     @GET
     @Path("/ancestor/{ancestor}/now")
     ApiScheduleEvent nowForAncestor(
-            @PathParam(ANCESTOR) String mediaId,
-            @QueryParam(PROPERTIES) String properties
+        @Encoded @PathParam(ANCESTOR) String mediaId,
+        @QueryParam(PROPERTIES) String properties
     );
 
     @GET
     @Path("/ancestor/{ancestor}/next")
     ApiScheduleEvent nextForAncestor(
-            @PathParam(ANCESTOR) String mediaId,
-            @QueryParam(PROPERTIES) String properties
+        @Encoded @PathParam(ANCESTOR) String mediaId,
+        @QueryParam(PROPERTIES) String properties
     );
 
     @GET
     @Path("/broadcaster/{broadcaster}")
     ScheduleResult listBroadcaster(
-            @PathParam(BROADCASTER) String broadcaster,
-            @QueryParam(GUIDE_DAY) LocalDate guideDay,
-            @QueryParam(START) Instant start,
-            @QueryParam(STOP) Instant stop,
-            @QueryParam(PROPERTIES) String properties,
-            @QueryParam(SORT) @DefaultValue(ASC) String sort,
-            @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) long offset,
-            @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
+        @PathParam(BROADCASTER) String broadcaster,
+        @QueryParam(GUIDE_DAY) LocalDate guideDay,
+        @QueryParam(START) Instant start,
+        @QueryParam(STOP) Instant stop,
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(SORT) @DefaultValue(ASC) String sort,
+        @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) long offset,
+        @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max
     );
 
 
     @GET
     @Path("/broadcaster/{broadcaster}/now")
     ApiScheduleEvent nowForBroadcaster(
-            @PathParam(BROADCASTER) String broadcaster,
-            @QueryParam(PROPERTIES) String properties
+        @PathParam(BROADCASTER) String broadcaster,
+        @QueryParam(PROPERTIES) String properties
     );
 
     @GET
     @Path("/broadcaster/{broadcaster}/next")
     ApiScheduleEvent nextForBroadcaster(
-            @PathParam(BROADCASTER) String broadcaster,
-            @QueryParam(PROPERTIES) String properties
+        @PathParam(BROADCASTER) String broadcaster,
+        @QueryParam(PROPERTIES) String properties
     );
 
     @GET
@@ -147,7 +147,7 @@ public interface ScheduleRestService {
     @GET
     @Path("/net/{net}")
     ScheduleResult listNet(
-        @PathParam(NET) String net,
+        @Encoded @PathParam(NET) String net,
         @QueryParam(GUIDE_DAY) LocalDate guideDay,
         @QueryParam(START) Instant start,
         @QueryParam(STOP) Instant stop,
@@ -161,14 +161,14 @@ public interface ScheduleRestService {
     @GET
     @Path("/net/{net}/now")
     ApiScheduleEvent nowForNet(
-        @PathParam(NET) String net,
+        @Encoded @PathParam(NET) String net,
         @QueryParam(PROPERTIES) String properties
     );
 
     @GET
     @Path("/net/{net}/next")
     ApiScheduleEvent nextForNet(
-        @PathParam(NET) String net,
+        @Encoded @PathParam(NET) String net,
         @QueryParam(PROPERTIES) String properties
     );
 
