@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
 import javax.validation.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -570,7 +571,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "crid")
     @StringList(pattern = "(?i)crid://.*/.*", maxLength = 255)
     @Override
+    @Nonnull
     public List<String> getCrids() {
+        if (crids == null) {
+            crids = new ArrayList<>();
+        }
         return crids;
     }
 
@@ -579,7 +584,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "broadcaster", required = true)
+    @Nonnull
     public List<String> getBroadcasters() {
+        if (broadcasters == null) {
+            broadcasters = new ArrayList<>();
+        }
         return broadcasters;
     }
 
@@ -592,7 +601,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "portal", required = false)
+    @Nonnull
     public List<String> getPortals() {
+        if (portals == null) {
+            portals = new ArrayList<>();
+        }
         return portals;
     }
 
@@ -606,6 +619,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "exclusive")
     @Valid
     public List<PortalRestrictionUpdate> getPortalRestrictions() {
+        if (portalRestrictions == null) {
+            portalRestrictions = new ArrayList<>();
+        }
         return portalRestrictions;
     }
 
@@ -620,7 +636,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "region")
     @Valid
+    @Nonnull
     public Set<GeoRestrictionUpdate> getGeoRestrictions() {
+         if (geoRestrictions == null) {
+             geoRestrictions = new HashSet<>();
+         }
         return geoRestrictions;
     }
 
@@ -632,8 +652,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "title", required = true)
     @Valid
     @NotNull
+    @Nonnull
     @Size(min = 1)
     public SortedSet<TitleUpdate> getTitles() {
+        if (titles == null) {
+            titles = new TreeSet<>();
+        }
         return titles;
     }
     @Override
@@ -647,7 +671,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @Override
     @XmlElement(name = "description")
     @Valid
+    @Nonnull
     public SortedSet<DescriptionUpdate> getDescriptions() {
+        if (descriptions == null) {
+            descriptions = new TreeSet<>();
+         }
         return descriptions;
     }
 
@@ -671,6 +699,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "tag")
     public SortedSet<String> getTags() {
+        if (tags == null) {
+            tags = new TreeSet<>();
+        }
         return tags;
     }
 
@@ -685,6 +716,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "country")
     @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
     public List<CountryCode> getCountries() {
+         if (countries == null) {
+            countries = new ArrayList<>();
+         }
         return countries;
     }
 
@@ -695,6 +729,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "language")
     @XmlJavaTypeAdapter(value = LocaleAdapter.class)
     public List<Locale> getLanguages() {
+         if (languages == null) {
+            languages = new ArrayList<>();
+         }
         return languages;
     }
     public void setLanguages(List<Locale> languages) {
@@ -703,7 +740,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "genre")
     @StringList(pattern = "3\\.([0-9]+\\.)*[0-9]+", maxLength = 255)
+    @Nonnull
     public SortedSet<String> getGenres() {
+        if (genres == null) {
+            genres = new TreeSet<>();
+        }
         return genres;
     }
 
@@ -753,7 +794,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElementWrapper(name = "credits")
     @XmlElement(name = "person")
     @Valid
+    @Nonnull
     public List<PersonUpdate> getPersons() {
+        if (persons == null) {
+            persons = new ArrayList<>();
+        }
         return persons;
     }
 
@@ -765,7 +810,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement
+    @Nonnull
     public SortedSet<MemberRefUpdate> getMemberOf() {
+        if (memberOf == null) {
+            memberOf = new TreeSet<>();
+        }
         return memberOf;
     }
 
@@ -797,6 +846,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "contentRating")
     public List<ContentRating> getContentRatings() {
+        if (contentRatings == null) {
+            contentRatings = new ArrayList<>();
+        }
         return contentRatings;
     }
 
@@ -807,6 +859,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement
     public List<String> getEmail() {
+        if (email == null) {
+             email = new ArrayList<>();
+        }
         return email;
     }
 
@@ -820,6 +875,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "website")
     public List<String> getWebsites() {
+        if (websites == null) {
+             websites = new ArrayList<>();
+        }
         return websites;
     }
 
@@ -862,6 +920,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "location")
     @Valid
     public SortedSet<LocationUpdate> getLocations() {
+        if (locations == null) {
+            locations = new TreeSet<>();
+        }
         return locations;
     }
 
@@ -875,6 +936,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElementWrapper(name = "scheduleEvents")
     @XmlElement(name = "scheduleEvent")
     public SortedSet<ScheduleEventUpdate> getScheduleEvents() {
+        if (scheduleEvents == null) {
+            scheduleEvents = new TreeSet<>();
+        }
         return scheduleEvents;
     }
 
@@ -884,6 +948,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "relation")
     public SortedSet<RelationUpdate> getRelations() {
+        if (relations == null) {
+            relations = new TreeSet<>();
+        }
         return relations;
     }
 
@@ -895,6 +962,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "image")
     @Valid
     public List<ImageUpdate> getImages() {
+        if (images == null) {
+            images = new ArrayList<>();
+        }
         return images;
     }
 
