@@ -65,9 +65,9 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
         }
-        try {
-            final SSHClient sessionFactory = SSHClientFactory.create(hostKey, ftpHost, username, password);
-            final SFTPClient sftp = sessionFactory.newSFTPClient();
+        try (
+            final SSHClient sessionFactory = createClient();
+            final SFTPClient sftp = sessionFactory.newSFTPClient()) {
             Instant start = Instant.now();
             InputStream in;
             long count = 0;
@@ -108,21 +108,20 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
             }
             log.info("File {} ({} bytes) appeared in {}, now copying to {}.", nepFile,  descriptor == null ? "?" : descriptor.getSize(), Duration.between(start, Instant.now()), outputStream);
 
-            copy(in, outputStream);
+            long copy = copy(in, outputStream, 1024 * 10);
+            in.close();
 
-            try {
-                sftp.close();
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-            }
-            try {
-                sessionFactory.close();
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-            }
+            log.info("Copied {} bytes", copy);
+        } catch (SFTPException sfte) {
+            log.error(sfte.getMessage());
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    protected SSHClient createClient() throws IOException {
+        return SSHClientFactory
+                .create(hostKey, ftpHost, username, password);
     }
 
 
