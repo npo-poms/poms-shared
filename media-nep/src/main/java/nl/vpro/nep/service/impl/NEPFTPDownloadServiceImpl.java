@@ -14,7 +14,6 @@ import java.util.function.Function;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.event.Level;
@@ -30,7 +29,7 @@ import static org.apache.commons.io.IOUtils.copy;
 /**
  * This is a wrapper for sftp-itemizer.nepworldwide.nl This is were itemize results are placed by NEP
  */
-@Named("NEPDownloadService")
+//@Named("NEPDownloadService") // It doesn't *** work
 @Slf4j
 public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
 
