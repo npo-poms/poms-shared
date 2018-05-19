@@ -12,7 +12,7 @@ import java.time.Instant;
  */
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@lombok.Builder
+@lombok.Builder(builderClassName = "Builder")
 public class FileDescriptor {
 
     private final Long size;
