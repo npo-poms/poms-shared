@@ -9,6 +9,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.function.Function;
 
+import javax.inject.Named;
+
 import org.apache.http.client.utils.DateUtils;
 import org.slf4j.ext.LoggerWrapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +26,7 @@ import nl.vpro.util.CommandExecutorImpl;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
+@Named("NEPDownloadService")
 @Slf4j
 public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
 
