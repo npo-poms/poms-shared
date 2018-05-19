@@ -12,7 +12,6 @@ import java.util.function.Function;
 import javax.inject.Named;
 
 import org.apache.http.client.utils.DateUtils;
-import org.slf4j.ext.LoggerWrapper;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.nep.service.FileDescriptor;
@@ -33,16 +32,7 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
 
     private final String ftpHost;
     private final String user;
-    private final String password;
-    private final CommandExecutor CURL = CommandExecutorImpl.builder()
-        .executable(new File("/usr/bin/curl"))
-        .logger(new LoggerWrapper(log, log.getName()) {
-            @Override
-            public void info(String message) {
-                super.info(message.replaceAll(password, "??????"));
-            }
-        })
-        .build();
+    private final CommandExecutor curl;
 
     public NEPCurlFTPDownloadServiceImpl(
         @Value("${nep.sftp.host}") String ftpHost,
@@ -51,13 +41,16 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
     ) {
         this.ftpHost = ftpHost;
         this.user = username + ":" + password;
-        this.password = password;
+        curl = CommandExecutorImpl.builder()
+        .executable(new File("/usr/bin/curl"))
+        .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
+        .build();
     }
 
     @Override
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
         checkAvailability(nepFile, timeout, descriptorConsumer);
-        CURL.execute(outputStream, "-s", "-u", user , "ftp://" + ftpHost + "/" + nepFile);
+        curl.execute(outputStream, "-s", "-u", user , "ftp://" + ftpHost + "/" + nepFile);
 
 
     }
@@ -67,7 +60,7 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
 
         while(true) {
             StringWriter writer = new StringWriter();
-            CURL.execute(writer, "-I", "-s", "-u", user , "ftp://" + ftpHost + "/" + nepFile);
+            curl.execute(writer, "-I", "-s", "-u", user , "ftp://" + ftpHost + "/" + nepFile);
             FileDescriptor.Builder descriptorBuilder = FileDescriptor.builder().fileName(nepFile);
             for (String l : writer.toString().split("\\n")) {
                 String[] split = l.split(":", 2);
@@ -81,7 +74,7 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
             FileDescriptor descriptor = descriptorBuilder.build();
             if (descriptor.getSize() == null) {
                  if (timeout == null || timeout.equals(Duration.ZERO)) {
-                        throw new IllegalStateException("File " + nepFile + " doesn't exist");
+                     throw new IllegalStateException("File " + nepFile + " doesn't exist");
                  }
                 if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
                     throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
