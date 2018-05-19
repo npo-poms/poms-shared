@@ -12,7 +12,7 @@ import nl.vpro.nep.service.NEPDownloadService;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.8
  */
 @Slf4j
 public class NEPCurlFTPDownloadServiceImplTest {
