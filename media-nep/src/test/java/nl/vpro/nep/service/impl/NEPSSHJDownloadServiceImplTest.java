@@ -28,17 +28,19 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
  */
 @Slf4j
 @Ignore("This actually does something")
-public class NEPFTPDownloadServiceImplTest {
+public class NEPSSHJDownloadServiceImplTest {
 
-    private NEPFTPDownloadServiceImpl impl;
+    private NEPSSJDownloadServiceImpl impl;
 
     static String fileName = "KN_1689705__000001927-002511602.mp4";
     //static String fileName = "AT_2100854__000000000-005329000.mp4";
     //String fileName = "VPWON_1265965__000414370-000917470.mp4";
 
+    static String testDest = "/tmp/test.mp4";
+
     @Before
     public void setup() {
-        impl = new NEPFTPDownloadServiceImpl(
+        impl = new NEPSSJDownloadServiceImpl(
             "sftp-itemizer.nepworldwide.nl",
             "npo",
             "***REMOVED***",
@@ -49,7 +51,7 @@ public class NEPFTPDownloadServiceImplTest {
     public void createFile() throws Exception {
         Instant start = Instant.now();
 
-        File dest = File.createTempFile("test", ".mp4");
+        File dest = new File(testDest);
         impl.download(fileName, new FileOutputStream(dest), (fc) -> true);
 
         Duration duration = Duration.between(start, Instant.now());
@@ -90,14 +92,14 @@ public class NEPFTPDownloadServiceImplTest {
 
             final RemoteFile handle = sftp.open(fileName, EnumSet.of(OpenMode.READ));
             InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
-            FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
+            FileOutputStream outputStream = new FileOutputStream(testDest);
             long size = IOUtils.copy(in, outputStream, 1024 * 10);
             log.info("Ready with {} bytes", size);
             in.close();
             outputStream.close();
             handle.close();
         } else {
-            sftp.get(fileName, new FileSystemFile(new File("/tmp/test.mp4")));
+            sftp.get(fileName, new FileSystemFile(new File(testDest )));
         }
         sftp.close();
         client.close();

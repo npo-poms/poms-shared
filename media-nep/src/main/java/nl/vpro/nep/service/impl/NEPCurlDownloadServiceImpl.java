@@ -1,6 +1,7 @@
 package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import net.schmizz.sshj.sftp.RemoteFile;
 
 import java.io.*;
 import java.time.Duration;
@@ -28,13 +29,15 @@ import nl.vpro.util.CommandExecutorImpl;
  */
 @Named("NEPDownloadService")
 @Slf4j
-public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
+public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
 
 
     private final String ftpHost;
     private final CommandExecutor curl;
+    private final NEPSSJDownloadServiceImpl sshj;
 
-    public NEPCurlFTPDownloadServiceImpl(
+
+    public NEPCurlDownloadServiceImpl(
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
         @Value("${nep.sftp.password}") String password,
@@ -42,19 +45,13 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
     ) {
         this.ftpHost = ftpHost;
         String user = username + ":" + password;
-        // TODO avoid --insecure
-        /*File pemFile = File.createTempFile(ftpHost, ".pem");
-        PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(pemFile)));
-        writer.println("-----BEGIN CERTIFICATE-----");
-        writer.println(hostkey);
-        writer.println("-----END CERTIFICATE-----");
-        writer.close();
-*/
+
         curl = CommandExecutorImpl.builder()
             .executablesPaths("/usr/local/opt/curl/bin/curl", "/usr/bin/curl")
             .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
             .commonArgs(Arrays.<String>asList("-s", "-u", user, "--insecure"))
             .build();
+        sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
     }
 
     @Override
@@ -76,7 +73,20 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
         return "sftp://" + ftpHost + "/" + nepFile;
     }
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws InterruptedException {
+
+    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) {
+        try(
+            RemoteFile handle = sshj.checkAvailability(nepFile, timeout, descriptorConsumer);
+            ) {
+        } catch (InterruptedException | IOException e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * What the fuck, doesn't work with sftp
+     */
+    protected void checkAvailabilityWithCurl(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws InterruptedException {
           Instant start = Instant.now();
 
         while(true) {
