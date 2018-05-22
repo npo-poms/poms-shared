@@ -82,7 +82,8 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
         }
     }
 
-    protected void checkAvailabilityAndConsume(String nepFile, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer, Consumer<RemoteFile> remoteFileConsumer) throws IOException  {
+    protected void checkAvailabilityAndConsume(
+        String nepFile, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer, Consumer<RemoteFile> remoteFileConsumer) throws IOException  {
         try(final SSHClient sessionFactory = createClient();
             final SFTPClient sftp = sessionFactory.newSFTPClient()) {
             Instant start = Instant.now();
