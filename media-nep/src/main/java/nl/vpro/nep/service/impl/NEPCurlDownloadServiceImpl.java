@@ -1,9 +1,10 @@
 package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import net.schmizz.sshj.sftp.RemoteFile;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
@@ -64,7 +65,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
                 log.error(e.getMessage(), e);
                 return -1;
             }).get();
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException | ExecutionException | IOException e) {
             log.error(e.getMessage(), e);
         }
 
@@ -75,13 +76,9 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     }
 
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) {
-        try(
-            RemoteFile handle = sshj.checkAvailability(nepFile, timeout, descriptorConsumer);
-            ) {
-        } catch (InterruptedException | IOException e) {
-            log.error(e.getMessage(), e);
-        }
+    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws IOException {
+        sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
+
     }
 
     /**
