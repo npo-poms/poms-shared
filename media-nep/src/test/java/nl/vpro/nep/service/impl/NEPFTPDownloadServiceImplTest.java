@@ -5,6 +5,7 @@ import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.OpenMode;
 import net.schmizz.sshj.sftp.RemoteFile;
 import net.schmizz.sshj.sftp.SFTPClient;
+import net.schmizz.sshj.xfer.FileSystemFile;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,9 +20,6 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import nl.vpro.util.CommandExecutor;
-import nl.vpro.util.CommandExecutorImpl;
-
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 /**
@@ -34,27 +32,31 @@ public class NEPFTPDownloadServiceImplTest {
 
     private NEPFTPDownloadServiceImpl impl;
 
+    static String fileName = "KN_1689705__000001927-002511602.mp4";
+    //static String fileName = "AT_2100854__000000000-005329000.mp4";
+    //String fileName = "VPWON_1265965__000414370-000917470.mp4";
+
     @Before
     public void setup() {
         impl = new NEPFTPDownloadServiceImpl(
             "sftp-itemizer.nepworldwide.nl",
             "npo",
             "***REMOVED***",
-            "94:06:26:d5:e4:f5:18:b5:52:a9:19:b1:97:db:94:9e");
+            "AAAAB3NzaC1yc2EAAAADAQABAAABAQCV4gmmgKyPVyOyZv1jdVpu/KzS9w2v4/vxDeKbuXvl0tldvDAmMi/QY1XvLueuZJy8PmilpGj6po1JuU0V2RGX/Js18b9lyCAQptdaeUk45lYvM8bpGfkzB509i3+CaM6U1onEIftFs4vzDLMwHrZQ6kdlRGGs6bLYy1vpqs7h6mO/XGDeLLVpjLPZbz/TrWt98kinn+Rg/TwYV0VNyqac5DkpWtFEUucIrq6zZs1q3Pw8YHMo02BWlWXFR/yi41ODb+RH1dTlZEs3vrMgwFvVD5c+4EKy1hZ65SJ6xVXwaMyN4w1LaHLwwe3K8rNDS+m5gyaswhdeZthqDiXysFwj");
     }
 
     @Test
     public void createFile() throws Exception {
         Instant start = Instant.now();
-        String fileName = "VPWON_1265965__000414370-000917470.mp4";
+
         File dest = File.createTempFile("test", ".mp4");
         impl.download(fileName, new FileOutputStream(dest), (fc) -> true);
 
         Duration duration = Duration.between(start, Instant.now());
         assertThat(dest.length()).isEqualTo(221400200L);
     }
-
- /*   @Test
+/*
+    @Test
     public void testJsch() throws IOException, JSchException, SftpException {
         JSch sshClient = new JSch();
         HostKey hostKey = new HostKey ( "sftp-itemizer.nepworldwide.nl",  Base64.getDecoder().decode ("AAAAB3NzaC1yc2EAAAADAQABAAABAQCV4gmmgKyPVyOyZv1jdVpu/KzS9w2v4/vxDeKbuXvl0tldvDAmMi/QY1XvLueuZJy8PmilpGj6po1JuU0V2RGX/Js18b9lyCAQptdaeUk45lYvM8bpGfkzB509i3+CaM6U1onEIftFs4vzDLMwHrZQ6kdlRGGs6bLYy1vpqs7h6mO/XGDeLLVpjLPZbz/TrWt98kinn+Rg/TwYV0VNyqac5DkpWtFEUucIrq6zZs1q3Pw8YHMo02BWlWXFR/yi41ODb+RH1dTlZEs3vrMgwFvVD5c+4EKy1hZ65SJ6xVXwaMyN4w1LaHLwwe3K8rNDS+m5gyaswhdeZthqDiXysFwj"));
@@ -78,31 +80,33 @@ public class NEPFTPDownloadServiceImplTest {
     }*/
     @Test
     public void testSshj() throws IOException {
+
+        boolean simple = true;
+        Instant start = Instant.now();
         SSHClient client = impl.createClient();
         final SFTPClient sftp = client.newSFTPClient();
-        //final RemoteFile handle = sftp.open("AT_2100854__000000000-005329000.mp4", EnumSet.of(OpenMode.READ));
-        final RemoteFile handle = sftp.open("KN_1689705__000001927-002511602.mp4", EnumSet.of(OpenMode.READ));
+
+        if (! simple) {
+
+            final RemoteFile handle = sftp.open(fileName, EnumSet.of(OpenMode.READ));
+            InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
+            FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
+            long size = IOUtils.copy(in, outputStream, 1024 * 10);
+            log.info("Ready with {} bytes", size);
+            in.close();
+            outputStream.close();
+            handle.close();
+        } else {
+            sftp.get(fileName, new FileSystemFile(new File("/tmp/test.mp4")));
+        }
+        sftp.close();
+        client.close();
+
+        log.info("Duration {}", Duration.between(start, Instant.now()));
 
 
-        //        sftp.get("AT_2081412__000000000-010000000.mp4", new FileSystemFile(new File("/tmp/test.mp4")));
 
-        InputStream in = handle.new ReadAheadRemoteFileInputStream(0);
-
-        FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
-        IOUtils.copy(in, outputStream, 1024 * 10);
-        log.info("Ready");
-        in.close();
-        outputStream.close();
-        handle.close();
 
     }
 
-    @Test
-    public void testCommandExecutor() throws IOException {
-        CommandExecutor wget = new CommandExecutorImpl("/opt/local/bin/wget");
-        FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
-
-        wget.execute(outputStream, "-q", "-O-", "ftp://npo:***REMOVED***@sftp-itemizer.nepworldwide.nl/AT_2100854__000000000-005329000.mp4");
-
-    }
 }
