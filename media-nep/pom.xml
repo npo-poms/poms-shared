@@ -51,12 +51,19 @@
       <groupId>com.hierynomus</groupId>
       <artifactId>sshj</artifactId>
     </dependency>
+<!--
     <dependency>
-      <!-- highly recommended by sshj -->
+      <groupId>com.jcraft</groupId>
+      <artifactId>jsch</artifactId>
+      <version>0.1.54</version>
+    </dependency>
+    <dependency>
+      &lt;!&ndash; highly recommended by sshj &ndash;&gt;
       <groupId>com.jcraft</groupId>
       <artifactId>jzlib</artifactId>
       <scope>runtime</scope>
     </dependency>
+-->
     <dependency>
       <groupId>org.bouncycastle</groupId>
       <artifactId>bcpkix-jdk15on</artifactId>
@@ -73,6 +80,11 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
