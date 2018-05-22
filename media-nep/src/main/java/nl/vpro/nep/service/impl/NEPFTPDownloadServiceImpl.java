@@ -50,7 +50,7 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
         this.ftpHost = ftpHost;
         this.username = username;
         this.password = password;
-        this.hostKey = hostKey;
+        this.hostKey = "SHA256:" + hostKey;
     }
 
     @PostConstruct
