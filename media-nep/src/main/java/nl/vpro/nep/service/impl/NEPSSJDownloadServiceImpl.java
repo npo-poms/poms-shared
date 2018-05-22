@@ -31,7 +31,7 @@ import static org.apache.commons.io.IOUtils.copy;
  */
 //@Named("NEPDownloadService") // It doesn't *** work
 @Slf4j
-public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
+public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
 
 
     private final String ftpHost;
@@ -40,7 +40,7 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
     private final String hostKey;
 
     @Inject
-    public NEPFTPDownloadServiceImpl(
+    public NEPSSJDownloadServiceImpl(
 
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
@@ -65,57 +65,59 @@ public class NEPFTPDownloadServiceImpl implements NEPDownloadService {
             throw new IllegalArgumentException();
         }
         try (
-            final SSHClient sessionFactory = createClient();
-            final SFTPClient sftp = sessionFactory.newSFTPClient()) {
-            Instant start = Instant.now();
-            InputStream in;
-            long count = 0;
-            FileDescriptor descriptor;
-            while (true) {
-                count++;
-                try {
-                    final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
-                    in = handle.new ReadAheadRemoteFileInputStream(16);
-                    FileAttributes attributes = handle.fetchAttributes();
-                    descriptor = FileDescriptor.builder()
-                        .size(handle.length())
-                        .lastModified(Instant.ofEpochMilli(attributes.getMtime()))
-                        .fileName(nepFile)
-                        .build();
-                    if (descriptorConsumer != null) {
-                        try {
-                            boolean proceeed = descriptorConsumer.apply(descriptor);
-                            if (! proceeed) {
-                                return;
-                            }
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }
-
-                    }
-                    break;
-                } catch (SFTPException sftpe) {
-                    if (timeout == null || timeout.equals(Duration.ZERO)) {
-                        throw new IllegalStateException("File " + nepFile + " doesn't exist");
-                    }
-                    if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
-                        throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
-                    }
-                    Slf4jHelper.log(log, count < 6 ? Level.DEBUG :  Level.INFO,"{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
-                    Thread.sleep(Duration.ofSeconds(10).toMillis());
-                }
-            }
-            log.info("File {} ({} bytes) appeared in {}, now copying to {}.", nepFile,  descriptor == null ? "?" : descriptor.getSize(), Duration.between(start, Instant.now()), outputStream);
-
+            RemoteFile handle = checkAvailability(nepFile, timeout, descriptorConsumer);
+            InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
+        ) {
             long copy = copy(in, outputStream, 1024 * 10);
-            in.close();
-
             log.info("Copied {} bytes", copy);
         } catch (SFTPException sfte) {
             log.error(sfte.getMessage());
         } catch (InterruptedException | IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    protected RemoteFile checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws InterruptedException, IOException {
+        final SSHClient sessionFactory = createClient();
+        final SFTPClient sftp = sessionFactory.newSFTPClient();
+        Instant start = Instant.now();
+        long count = 0;
+        RemoteFile handle = null;
+        while (true) {
+            count++;
+            try {
+                handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
+                handle.fetchAttributes();
+                FileAttributes attributes = handle.fetchAttributes();
+                FileDescriptor descriptor = FileDescriptor.builder()
+                    .size(handle.length())
+                    .lastModified(Instant.ofEpochMilli(attributes.getMtime()))
+                    .fileName(nepFile)
+                    .build();
+                if (descriptorConsumer != null) {
+                    try {
+                        boolean proceed = descriptorConsumer.apply(descriptor);
+                        if (! proceed) {
+                            return handle;
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+
+                }
+                break;
+            } catch (SFTPException sftpe) {
+                if (timeout == null || timeout.equals(Duration.ZERO)) {
+                    throw new IllegalStateException("File " + nepFile + " doesn't exist");
+                }
+                if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
+                    throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
+                }
+                Slf4jHelper.log(log, count < 6 ? Level.DEBUG :  Level.INFO,"{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
+                Thread.sleep(Duration.ofSeconds(10).toMillis());
+            }
+        }
+        return handle;
     }
 
     protected SSHClient createClient() throws IOException {
