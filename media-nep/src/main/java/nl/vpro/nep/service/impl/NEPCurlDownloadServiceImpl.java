@@ -25,6 +25,8 @@ import nl.vpro.util.CommandExecutorImpl;
 /**
  * See MSE-4032. It's kind of a disgrace that we have to fall back to external commands...
  *
+ * osx: sudo port install curl +sftp_scp (or use brew)
+ *
  * @author Michiel Meeuwissen
  * @since 5.8
  */
@@ -48,9 +50,13 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
         String user = username + ":" + password;
 
         curl = CommandExecutorImpl.builder()
-            .executablesPaths("/usr/local/opt/curl/bin/curl", "/usr/bin/curl")
+            .executablesPaths(
+                "/usr/local/opt/curl/bin/curl", // brew
+                "/opt/local/bin/curl", // macports
+                "/usr/bin/curl" // linux
+            )
             .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
-            .commonArgs(Arrays.<String>asList("-s", "-u", user, "--insecure"))
+            .commonArgs(Arrays.asList("-s", "-u", user, "--insecure"))
             .build();
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
