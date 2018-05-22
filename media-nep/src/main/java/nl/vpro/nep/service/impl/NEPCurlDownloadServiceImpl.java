@@ -8,8 +8,6 @@ import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 
 import javax.inject.Named;
@@ -66,13 +64,15 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
-            CompletableFuture<Integer> submitted = curl.submit(outputStream, getUrl(nepFile));
-            submitted.exceptionally((e) -> {
-                log.error(e.getMessage(), e);
-                return -1;
-            }).get();
-        } catch (InterruptedException | ExecutionException | IOException e) {
+            Integer result = curl.execute(outputStream, getUrl(nepFile));
+        } catch (IOException e) {
             log.error(e.getMessage(), e);
+        } catch (CommandExecutor.BrokenPipe bp) {
+            log.debug(bp.getMessage());
+            throw bp;
+        } catch (RuntimeException rte) {
+            log.error(rte.getMessage(), rte);
+            throw rte;
         }
 
     }
