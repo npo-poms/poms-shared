@@ -39,7 +39,7 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
         @Value("${nep.sftp.username}") String username,
         @Value("${nep.sftp.password}") String password,
         @Value("${nep.sftp.hostkey}") String hostkey
-    ) throws IOException {
+    ) {
         this.ftpHost = ftpHost;
         String user = username + ":" + password;
         // TODO avoid --insecure
