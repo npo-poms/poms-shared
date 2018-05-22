@@ -20,6 +20,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import nl.vpro.util.FileSizeFormatter;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 /**
@@ -94,7 +96,7 @@ public class NEPSSHJDownloadServiceImplTest {
             InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
             FileOutputStream outputStream = new FileOutputStream(testDest);
             long size = IOUtils.copy(in, outputStream, 1024 * 10);
-            log.info("Ready with {} bytes", size);
+            log.info("Ready with {} bytes ({})", size,FileSizeFormatter.DEFAULT.formatSpeed(size, start));
             in.close();
             outputStream.close();
             handle.close();
@@ -104,7 +106,7 @@ public class NEPSSHJDownloadServiceImplTest {
         sftp.close();
         client.close();
 
-        log.info("Duration {}", Duration.between(start, Instant.now()));
+        log.info("Duration {} {}", Duration.between(start, Instant.now()));
 
 
 
