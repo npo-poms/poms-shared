@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.EnumSet;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import javax.annotation.PostConstruct;
@@ -64,60 +65,73 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
         }
-        try (
-            RemoteFile handle = checkAvailability(nepFile, timeout, descriptorConsumer);
-            InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
-        ) {
-            long copy = copy(in, outputStream, 1024 * 10);
-            log.info("Copied {} bytes", copy);
-        } catch (SFTPException sfte) {
-            log.error(sfte.getMessage());
-        } catch (InterruptedException | IOException e) {
-            throw new RuntimeException(e);
+        try {
+            checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {
+                try (InputStream in = handle.new ReadAheadRemoteFileInputStream(32)) {
+
+                    long copy = copy(in, outputStream, 1024 * 10);
+                    log.info("Copied {} bytes", copy);
+                } catch (SFTPException sfte) {
+                    log.error(sfte.getMessage());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } catch (IOException ioe) {
+            log.error(ioe.getMessage(), ioe);
         }
     }
 
-    protected RemoteFile checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws InterruptedException, IOException {
-        final SSHClient sessionFactory = createClient();
-        final SFTPClient sftp = sessionFactory.newSFTPClient();
-        Instant start = Instant.now();
-        long count = 0;
-        RemoteFile handle = null;
-        while (true) {
-            count++;
-            try {
-                handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
-                handle.fetchAttributes();
-                FileAttributes attributes = handle.fetchAttributes();
-                FileDescriptor descriptor = FileDescriptor.builder()
-                    .size(handle.length())
-                    .lastModified(Instant.ofEpochMilli(attributes.getMtime()))
-                    .fileName(nepFile)
-                    .build();
-                if (descriptorConsumer != null) {
-                    try {
-                        boolean proceed = descriptorConsumer.apply(descriptor);
-                        if (! proceed) {
-                            return handle;
+    protected void checkAvailabilityAndConsume(String nepFile, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer, Consumer<RemoteFile> remoteFileConsumer) throws IOException  {
+        try(final SSHClient sessionFactory = createClient();
+            final SFTPClient sftp = sessionFactory.newSFTPClient()) {
+            Instant start = Instant.now();
+            long count = 0;
+            RemoteFile handle = null;
+            while (true) {
+                count++;
+                try {
+                    handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
+                    FileAttributes attributes = handle.fetchAttributes();
+                    FileDescriptor descriptor = FileDescriptor.builder()
+                        .size(handle.length())
+                        .lastModified(Instant.ofEpochMilli(attributes.getMtime()))
+                        .fileName(nepFile)
+                        .build();
+                    if (descriptorConsumer != null) {
+                        try {
+                            boolean proceed = descriptorConsumer.apply(descriptor);
+                            if (!proceed) {
+                                break;
+                            }
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
                         }
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
 
+                    }
+                    break;
+                } catch (SFTPException sftpe) {
+                    if (timeout == null || timeout.equals(Duration.ZERO)) {
+                        throw new IllegalStateException("File " + nepFile + " doesn't exist");
+                    }
+                    if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
+                        throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
+                    }
+                    Slf4jHelper.log(log, count < 6 ? Level.DEBUG : Level.INFO, "{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
+                    try {
+                        Thread.sleep(Duration.ofSeconds(10).toMillis());
+                    } catch (InterruptedException ignored) {
+                        break;
+
+                    }
                 }
-                break;
-            } catch (SFTPException sftpe) {
-                if (timeout == null || timeout.equals(Duration.ZERO)) {
-                    throw new IllegalStateException("File " + nepFile + " doesn't exist");
-                }
-                if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
-                    throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
-                }
-                Slf4jHelper.log(log, count < 6 ? Level.DEBUG :  Level.INFO,"{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
-                Thread.sleep(Duration.ofSeconds(10).toMillis());
+            }
+            if (handle != null) {
+                remoteFileConsumer.accept(handle);
+                handle.close();
             }
         }
-        return handle;
+
     }
 
     protected SSHClient createClient() throws IOException {
