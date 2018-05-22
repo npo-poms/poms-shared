@@ -51,6 +51,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
             .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
             .commonArgs(Arrays.<String>asList("-s", "-u", user, "--insecure"))
             .build();
+        // just used for the checkAvailability call (actually for the descriptorConsumer callback)
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
     }
 
@@ -87,7 +88,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
      * What the fuck, doesn't work with sftp
      */
     protected void checkAvailabilityWithCurl(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws InterruptedException {
-          Instant start = Instant.now();
+        Instant start = Instant.now();
 
         while(true) {
             StringWriter writer = new StringWriter();
