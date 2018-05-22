@@ -2,11 +2,12 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.File;
-import java.io.OutputStream;
-import java.io.StringWriter;
+import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.function.Function;
 
 import javax.inject.Named;
@@ -31,26 +32,43 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
 
 
     private final String ftpHost;
-    private final String user;
     private final CommandExecutor curl;
 
     public NEPCurlFTPDownloadServiceImpl(
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
-        @Value("${nep.sftp.password}") String password
-    ) {
+        @Value("${nep.sftp.password}") String password,
+        @Value("${nep.sftp.hostkey}") String hostkey
+    ) throws IOException {
         this.ftpHost = ftpHost;
-        this.user = username + ":" + password;
+        String user = username + ":" + password;
+        // TODO avoid --insecure
+        /*File pemFile = File.createTempFile(ftpHost, ".pem");
+        PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(pemFile)));
+        writer.println("-----BEGIN CERTIFICATE-----");
+        writer.println(hostkey);
+        writer.println("-----END CERTIFICATE-----");
+        writer.close();
+*/
         curl = CommandExecutorImpl.builder()
-        .executable(new File("/usr/bin/curl"))
-        .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
-        .build();
+            .executablesPaths("/usr/local/opt/curl/bin/curl", "/usr/bin/curl")
+            .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
+            .commonArgs(Arrays.<String>asList("-s", "-u", user, "--insecure"))
+            .build();
     }
 
     @Override
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
         checkAvailability(nepFile, timeout, descriptorConsumer);
-        curl.execute(outputStream, "-s", "-u", user , "ftp://" + ftpHost + "/" + nepFile);
+        try {
+            CompletableFuture<Integer> submitted = curl.submit(outputStream, "sftp://" + ftpHost + "/" + nepFile);
+            submitted.exceptionally((e) -> {
+                log.error(e.getMessage(), e);
+                return -1;
+            }).get();
+        } catch (InterruptedException | ExecutionException e) {
+            log.error(e.getMessage(), e);
+        }
 
 
     }
@@ -60,7 +78,7 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
 
         while(true) {
             StringWriter writer = new StringWriter();
-            curl.execute(writer, "-I", "-s", "-u", user , "ftp://" + ftpHost + "/" + nepFile);
+            curl.execute(writer, "-I", "sftp://" + ftpHost + "/" + nepFile);
             FileDescriptor.Builder descriptorBuilder = FileDescriptor.builder().fileName(nepFile);
             for (String l : writer.toString().split("\\n")) {
                 String[] split = l.split(":", 2);
