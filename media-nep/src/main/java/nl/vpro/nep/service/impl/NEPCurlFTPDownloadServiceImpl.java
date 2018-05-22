@@ -59,9 +59,9 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
-        checkAvailability(nepFile, timeout, descriptorConsumer);
         try {
-            CompletableFuture<Integer> submitted = curl.submit(outputStream, "sftp://" + ftpHost + "/" + nepFile);
+            checkAvailability(nepFile, timeout, descriptorConsumer);
+            CompletableFuture<Integer> submitted = curl.submit(outputStream, getUrl(nepFile));
             submitted.exceptionally((e) -> {
                 log.error(e.getMessage(), e);
                 return -1;
@@ -70,38 +70,44 @@ public class NEPCurlFTPDownloadServiceImpl implements NEPDownloadService {
             log.error(e.getMessage(), e);
         }
 
-
     }
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) {
+    protected String getUrl(String nepFile) {
+        return "sftp://" + ftpHost + "/" + nepFile;
+    }
+
+    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws InterruptedException {
           Instant start = Instant.now();
 
         while(true) {
             StringWriter writer = new StringWriter();
-            curl.execute(writer, "-I", "sftp://" + ftpHost + "/" + nepFile);
-            FileDescriptor.Builder descriptorBuilder = FileDescriptor.builder().fileName(nepFile);
-            for (String l : writer.toString().split("\\n")) {
-                String[] split = l.split(":", 2);
-                if (split[0].equalsIgnoreCase("Last-Modified")) {
-                    descriptorBuilder.lastModified(nl.vpro.util.DateUtils.toInstant(DateUtils.parseDate(split[1].trim())));
+            int result = curl.execute(writer, "-I", getUrl(nepFile));
+            log.info("Result {}", result);
+            if (result == 0) {
+                FileDescriptor.Builder descriptorBuilder = FileDescriptor.builder().fileName(nepFile);
+                for (String l : writer.toString().split("\\n")) {
+                    String[] split = l.split(":", 2);
+                    if (split[0].equalsIgnoreCase("Last-Modified")) {
+                        descriptorBuilder.lastModified(nl.vpro.util.DateUtils.toInstant(DateUtils.parseDate(split[1].trim())));
+                    }
+                    if (split[0].equalsIgnoreCase("Content-Length")) {
+                        descriptorBuilder.size(Long.parseLong(split[1].trim()));
+                    }
                 }
-                if (split[0].equalsIgnoreCase("Content-Length")) {
-                    descriptorBuilder.size(Long.parseLong(split[1].trim()));
+                FileDescriptor descriptor = descriptorBuilder.build();
+                if (descriptor.getSize() == null) {
+                    log.warn("No size found in output of curl -I, for {}", getUrl(nepFile));
                 }
-            }
-            FileDescriptor descriptor = descriptorBuilder.build();
-            if (descriptor.getSize() == null) {
-                 if (timeout == null || timeout.equals(Duration.ZERO)) {
-                     throw new IllegalStateException("File " + nepFile + " doesn't exist");
-                 }
-                if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
-                    throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
-                }
-            } else {
                 if (descriptorConsumer != null) {
                     descriptorConsumer.apply(descriptor);
                 }
                 break;
+            } else {
+                if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
+                    throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
+                }
+                Thread.sleep(10000L);
+
             }
         }
     }
