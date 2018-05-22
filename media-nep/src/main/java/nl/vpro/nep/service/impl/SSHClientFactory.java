@@ -23,7 +23,11 @@ final class SSHClientFactory {
         configuration.setKeepAliveProvider(KeepAliveProvider.KEEP_ALIVE);
         final SSHClient ssh = new SSHClient(configuration);
         ssh.useCompression();
-        ssh.addHostKeyVerifier(hostKey);
+        if (hostKey.indexOf(':') > 0) {
+            ssh.addHostKeyVerifier(hostKey);
+        } else {
+            ssh.addHostKeyVerifier("SHA256:" + hostKey);
+        }
         try {
             ssh.loadKnownHosts();
         } catch (Throwable t) {
