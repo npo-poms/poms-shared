@@ -85,7 +85,7 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
 
         OutputStream out = handle.new RemoteFileOutputStream();
         byte[] buffer= new byte[1014 * 1024];
-        long infoBatch = buffer.length * 10;
+        long infoBatch = buffer.length * 100;
         long numberofBytes = 0;
         int n;
         while (IOUtils.EOF != (n = stream.read(buffer))) {
