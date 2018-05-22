@@ -10,6 +10,7 @@ import java.time.Instant;
 import org.junit.Test;
 
 import nl.vpro.nep.service.NEPDownloadService;
+import nl.vpro.util.FileSizeFormatter;
 
 /**
  * @author Michiel Meeuwissen
@@ -30,12 +31,14 @@ public class NEPCurlDownloadServiceImplTest {
             //"94:06:26:d5:e4:f5:18:b5:52:a9:19:b1:97:db:94:9e"
             );
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
+        final long size[] = {-1L};
         impl.download(NEPSSHJDownloadServiceImplTest.fileName, outputStream, Duration.ofSeconds(10), (fd) -> {
             log.info("{}", fd);
+            size[0] = fd.getSize();
             return true;}
             );
 
-        log.info("Duration {}", Duration.between(start, Instant.now()));
+        log.info("Duration {} ({})", Duration.between(start, Instant.now()), FileSizeFormatter.DEFAULT.formatSpeed(size[0], start));
 
 
     }
