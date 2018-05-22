@@ -80,12 +80,13 @@ public class NEPFTPDownloadServiceImplTest {
     public void testSshj() throws IOException {
         SSHClient client = impl.createClient();
         final SFTPClient sftp = client.newSFTPClient();
-        final RemoteFile handle = sftp.open("AT_2100854__000000000-005329000.mp4", EnumSet.of(OpenMode.READ));
+        //final RemoteFile handle = sftp.open("AT_2100854__000000000-005329000.mp4", EnumSet.of(OpenMode.READ));
+        final RemoteFile handle = sftp.open("KN_1689705__000001927-002511602.mp4", EnumSet.of(OpenMode.READ));
 
 
         //        sftp.get("AT_2081412__000000000-010000000.mp4", new FileSystemFile(new File("/tmp/test.mp4")));
 
-        InputStream in = handle.new ReadAheadRemoteFileInputStream(16);
+        InputStream in = handle.new ReadAheadRemoteFileInputStream(0);
 
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
         IOUtils.copy(in, outputStream, 1024 * 10);
