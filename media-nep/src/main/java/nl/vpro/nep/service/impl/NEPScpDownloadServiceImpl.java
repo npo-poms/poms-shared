@@ -104,7 +104,11 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     protected void checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws IOException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
+    }
 
+    @Override
+    public String toString () {
+        return scp + " " + url ;
     }
 
 }
