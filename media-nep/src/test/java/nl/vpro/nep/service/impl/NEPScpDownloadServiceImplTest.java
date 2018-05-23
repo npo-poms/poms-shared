@@ -7,21 +7,21 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.FileSizeFormatter;
-
-import static org.junit.Assert.*;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.8
  */
 @Slf4j
+@Ignore("Download huge files")
 public class NEPScpDownloadServiceImplTest {
 
-     @Test
+    @Test
     public void test() throws IOException {
 
         Instant start = Instant.now();
