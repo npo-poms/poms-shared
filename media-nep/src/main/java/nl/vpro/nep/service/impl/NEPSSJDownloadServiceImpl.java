@@ -95,7 +95,7 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
                     FileAttributes attributes = handle.fetchAttributes();
                     FileDescriptor descriptor = FileDescriptor.builder()
                         .size(handle.length())
-                        .lastModified(Instant.ofEpochMilli(attributes.getMtime()))
+                        .lastModified(Instant.ofEpochMilli(attributes.getMtime() * 1000))
                         .fileName(nepFile)
                         .build();
                     if (descriptorConsumer != null) {
