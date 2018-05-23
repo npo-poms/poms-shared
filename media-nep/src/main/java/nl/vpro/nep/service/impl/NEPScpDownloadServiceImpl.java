@@ -16,7 +16,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import nl.vpro.util.FileMetaData;
+import nl.vpro.util.FileMetadata;
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.CommandExecutor;
 import nl.vpro.util.CommandExecutorImpl;
@@ -82,7 +82,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
 
     @Override
-    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetaData, Boolean> descriptorConsumer) {
+    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             if (outputStream != null) {
@@ -105,7 +105,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     }
 
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetaData, Boolean> descriptorConsumer) throws IOException {
+    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
     }
 
