@@ -21,7 +21,7 @@ import nl.vpro.util.CommandExecutorImpl;
 /**
  * See MSE-4032. It's kind of a disgrace that we have to fall back to external commands...
  *
- * osx: sudo port install curl +sftp_scp (or use brew)
+ * I first tried curl, to no avail either.
  *
  * @author Michiel Meeuwissen
  * @since 5.8
@@ -44,14 +44,21 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     ) {
         this.url = username + "@" + ftpHost;
         File scpcommand = CommandExecutorImpl.getExecutable("/usr/bin/scp").orElseThrow(IllegalArgumentException::new);
-        scp = CommandExecutorImpl.builder()
-            .executablesPaths("/usr/bin/sshpass", "/opt/local/bin/sshpass")
-            .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
-            //.useFileCache(true)
-            .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath()))
-            .build();
-        // just used for the checkAvailability call (actually for the descriptorConsumer callback)
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
+        CommandExecutor scptry = null;
+        try {
+            scptry = CommandExecutorImpl.builder()
+                .executablesPaths("/usr/bin/sshpass", "/opt/local/bin/sshpass")
+                .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
+                //.useFileCache(true)
+                .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-o", "StrictHostKeyChecking=no"))
+                .build();
+            // just used for the checkAvailability call (actually for the descriptorConsumer callback)
+
+        } catch (RuntimeException rte) {
+            log.error(rte.getMessage(), rte);
+        }
+        scp = scptry;
     }
 
     @Override
