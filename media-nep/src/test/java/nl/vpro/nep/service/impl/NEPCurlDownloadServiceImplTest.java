@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.nep.service.NEPDownloadService;
@@ -17,6 +18,7 @@ import nl.vpro.util.FileSizeFormatter;
  * @since 5.8
  */
 @Slf4j
+@Ignore
 public class NEPCurlDownloadServiceImplTest {
 
     @Test
