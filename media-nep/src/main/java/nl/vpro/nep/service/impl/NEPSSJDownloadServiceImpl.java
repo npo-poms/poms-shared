@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.Slf4jHelper;
-import nl.vpro.util.FileDescriptor;
+import nl.vpro.util.FileMetaData;
 import nl.vpro.nep.service.NEPDownloadService;
 
 import static org.apache.commons.io.IOUtils.copy;
@@ -59,7 +59,7 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
+    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetaData, Boolean> descriptorConsumer) {
         log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, ftpHost, hostKey);
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
@@ -84,7 +84,7 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
     }
 
     protected void checkAvailabilityAndConsume(
-        String nepFile, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer, Consumer<RemoteFile> remoteFileConsumer) throws IOException  {
+        String nepFile, Duration timeout, Function<FileMetaData, Boolean> descriptorConsumer, Consumer<RemoteFile> remoteFileConsumer) throws IOException  {
         try(final SSHClient sessionFactory = createClient();
             final SFTPClient sftp = sessionFactory.newSFTPClient()) {
             Instant start = Instant.now();
@@ -95,7 +95,7 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
                 try {
                     handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
                     FileAttributes attributes = handle.fetchAttributes();
-                    FileDescriptor descriptor = FileDescriptor.builder()
+                    FileMetaData descriptor = FileMetaData.builder()
                         .size(handle.length())
                         .lastModified(Instant.ofEpochMilli(attributes.getMtime() * 1000))
                         .fileName(nepFile)
