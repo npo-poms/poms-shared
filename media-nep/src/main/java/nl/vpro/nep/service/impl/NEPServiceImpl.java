@@ -19,7 +19,7 @@ import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 import nl.vpro.nep.service.*;
-import nl.vpro.util.FileDescriptor;
+import nl.vpro.util.FileMetaData;
 
 /**
  * @author Michiel Meeuwissen
@@ -66,7 +66,7 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) throws IOException {
+    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetaData, Boolean> descriptorConsumer) throws IOException {
         nepftpDownloadService.get().download(nepFile, outputStream, timeout, descriptorConsumer);
 
     }
