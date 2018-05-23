@@ -69,7 +69,7 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
             sshClient.close();
         }
     }
-    private final FileSizeFormatter formatter = FileSizeFormatter.builder().build();
+    private final FileSizeFormatter formatter = FileSizeFormatter.DEFAULT;
     @Override
     public long upload(SimpleLogger logger, String nepFile, Long size, InputStream stream) throws IOException {
         Instant start = Instant.now();
@@ -79,32 +79,41 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
             sshClient.setTimeout((int) socketTimeout.toMillis());
             sshClient.setConnectTimeout((int) connectTimeOut.toMillis());
         }
-
-        final SFTPClient sftp = sshClient.newSFTPClient();
-        final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
-
-        OutputStream out = handle.new RemoteFileOutputStream();
-        byte[] buffer= new byte[1014 * 1024];
-        long infoBatch = buffer.length * 10;
-        long numberofBytes = 0;
-        int n;
-        while (IOUtils.EOF != (n = stream.read(buffer))) {
-            out.write(buffer, 0, n);
-            numberofBytes += n;
-            if (numberofBytes % infoBatch == 0) {
-                // updating spans in ngToast doesn't work...
-                //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
-                log.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
-            } else {
-                if (log.isDebugEnabled()) {
-                    log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+        try(
+            final SFTPClient sftp = sshClient.newSFTPClient();
+            final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
+            OutputStream out = handle.new RemoteFileOutputStream();
+        ) {
+            byte[] buffer = new byte[1014 * 1024];
+            long infoBatch = buffer.length * 100;
+            long numberofBytes = 0;
+            int n;
+            long timesZero = 0;
+            while (IOUtils.EOF != (n = stream.read(buffer))) {
+                out.write(buffer, 0, n);
+                numberofBytes += n;
+                if (n == 0) {
+                    timesZero++;
+                } else {
+                    timesZero = 0;
+                }
+                if (numberofBytes == size && timesZero > 5) {
+                    log.info("Number of bytes reached, breaking (though we didn't see EOF yet)");
+                    break;
+                }
+                if (numberofBytes % infoBatch == 0) {
+                    // updating spans in ngToast doesn't work...
+                    //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+                    logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+                } else {
+                    if (log.isDebugEnabled()) {
+                        log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+                    }
                 }
             }
+            logger.info("Ready uploading {}/{} bytes (took {})", formatter.format(numberofBytes), formatter.format(size), Duration.between(start, Instant.now()));
+            return numberofBytes;
         }
-        logger.info("Ready uploading {}/{} bytes (took {})", formatter.format(numberofBytes),  formatter.format(size), Duration.between(start, Instant.now()));
-        handle.close();
-        sftp.close();
-        return numberofBytes;
     }
 
 
