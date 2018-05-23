@@ -559,7 +559,7 @@
       </xs:element>
     </xs:sequence>
      <xs:attribute name="mid" type="xs:string"/>
-
+     <xs:attribute name="missingMedia" type="xs:boolean"/>
   </xs:complexType>
 
 
