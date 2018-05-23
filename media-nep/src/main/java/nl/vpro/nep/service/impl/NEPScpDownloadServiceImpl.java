@@ -53,19 +53,11 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
         CommandExecutor scptry = null;
         try {
-            File tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> {
-                    try {
-                        File f = File.createTempFile("known_hosts", "tmp");
-                        try (PrintWriter writer = new PrintWriter(f)) {
-                            writer.println(ftpHost + " ssh-rsa " + hostkey);
-                        }
-                        f.deleteOnExit();
-                        return f;
-                    } catch (IOException ioe) {
-                        throw new RuntimeException(ioe);
-                    }
-                }
-            );
+            File tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
+            if (! tempFile.exists()) {
+                knownHosts.remove(hostkey);
+                tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
+            }
             scptry = CommandExecutorImpl.builder()
                 .executablesPaths("/usr/bin/sshpass", "/opt/local/bin/sshpass")
                 .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
@@ -80,6 +72,18 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         scp = scptry;
     }
 
+    protected File knowHosts(String ftpHost, String hostkey) {
+        try {
+            File f = File.createTempFile("known_hosts", "tmp");
+            try (PrintWriter writer = new PrintWriter(f)) {
+                writer.println(ftpHost + " ssh-rsa " + hostkey);
+            }
+            f.deleteOnExit();
+            return f;
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
 
     @Override
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
