@@ -2,6 +2,7 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.nep.domain.NEPItemizeRequest;
@@ -11,6 +12,7 @@ import nl.vpro.nep.domain.NEPItemizeRequest;
  * @since 5.6
  */
 @Slf4j
+@Ignore
 public class NEPItemizeServiceImplITest {
 
     @Test
