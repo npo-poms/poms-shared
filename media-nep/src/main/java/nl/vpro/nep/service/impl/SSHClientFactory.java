@@ -4,8 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import net.schmizz.keepalive.KeepAliveProvider;
 import net.schmizz.sshj.DefaultConfig;
 import net.schmizz.sshj.SSHClient;
+import net.schmizz.sshj.common.Base64;
+import net.schmizz.sshj.common.Buffer;
+import net.schmizz.sshj.common.SecurityUtils;
 
 import java.io.IOException;
+import java.security.PublicKey;
 import java.time.Duration;
 
 @Slf4j
@@ -23,17 +27,17 @@ final class SSHClientFactory {
         configuration.setKeepAliveProvider(KeepAliveProvider.KEEP_ALIVE);
         final SSHClient ssh = new SSHClient(configuration);
         ssh.useCompression();
-        ssh.loadKnownHosts();
+        //ssh.loadKnownHosts();
+
+
         if (hostKey.indexOf(':') > 0) {
             ssh.addHostKeyVerifier(hostKey);
         } else {
-            ssh.addHostKeyVerifier("SHA256:" + hostKey);
+             byte[] keyBytes = Base64.decode(hostKey);
+            PublicKey key = new Buffer.PlainBuffer(keyBytes).readPublicKey();
+            ssh.addHostKeyVerifier(SecurityUtils.getFingerprint(key));
         }
-      /*  try {
-            ///ssh.loadKnownHosts();
-        } catch (Throwable t) {
-            log.error(t.getMessage(), t);
-        }*/
+
         ssh.setTimeout((int) sshTimeout.toMillis());
         ssh.setConnectTimeout((int) sshConnectionTimeout.toMillis());
 
