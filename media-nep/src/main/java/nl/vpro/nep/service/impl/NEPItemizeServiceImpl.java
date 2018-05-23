@@ -35,6 +35,8 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     private final String itemizeKey;
     private final String itemizeUrl;
 
+    private final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8"));
+
     @Inject
     public NEPItemizeServiceImpl(
         @Value("${nep.player.itemizer.url}") String itemizeUrl,
@@ -51,10 +53,10 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             log.info("Itemizing {}", request);
             HttpClientContext clientContext = HttpClientContext.create();
             String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
-            StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8")));
+            StringEntity entity = new StringEntity(json, JSON);
             HttpPost httpPost = new HttpPost(itemizeUrl);
             httpPost.addHeader(new BasicHeader("Authorization", itemizeKey));
-            httpPost.addHeader(new BasicHeader("Accept", ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8")).toString()));
+            httpPost.addHeader(new BasicHeader("Accept", JSON.toString()));
 
             httpPost.setEntity(entity);
             HttpResponse response = httpClient.execute(httpPost, clientContext);

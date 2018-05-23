@@ -113,4 +113,19 @@ public class NEPSSHJDownloadServiceImplTest {
 
     }
 
+    @Test
+    public void testSshjAvailability() throws IOException {
+
+        impl.checkAvailabilityAndConsume(fileName, Duration.ofSeconds(10),
+            (fd) -> {
+                log.info("found {}", fd);
+                return true;
+
+            }, (handle) -> {});
+
+
+
+    }
+
+
 }

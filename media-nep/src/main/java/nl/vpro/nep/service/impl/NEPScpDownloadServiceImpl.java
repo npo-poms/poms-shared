@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.function.Function;
@@ -47,19 +48,26 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
         CommandExecutor scptry = null;
         try {
+            File tempFile = File.createTempFile("known_hosts", "tmp");
+            try (PrintWriter writer = new PrintWriter(tempFile)) {
+                writer.println(ftpHost + " ssh-rsa " + hostkey);
+            }
             scptry = CommandExecutorImpl.builder()
                 .executablesPaths("/usr/bin/sshpass", "/opt/local/bin/sshpass")
                 .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
                 //.useFileCache(true)
-                .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-o", "StrictHostKeyChecking=no"))
+                .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-q", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile))
                 .build();
             // just used for the checkAvailability call (actually for the descriptorConsumer callback)
 
         } catch (RuntimeException rte) {
             log.error(rte.getMessage(), rte);
+        } catch (IOException ioe) {
+
         }
         scp = scptry;
     }
+
 
     @Override
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
