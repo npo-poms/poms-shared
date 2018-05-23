@@ -88,11 +88,17 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
             long infoBatch = buffer.length * 100;
             long numberofBytes = 0;
             int n;
+            long timesZero = 0;
             while (IOUtils.EOF != (n = stream.read(buffer))) {
                 out.write(buffer, 0, n);
                 numberofBytes += n;
-                if (numberofBytes == size) {
-                    log.info("Number of bytes reached, breaking (though we din't see EOF yet)");
+                if (n == 0) {
+                    timesZero++;
+                } else {
+                    timesZero = 0;
+                }
+                if (numberofBytes == size && timesZero > 5) {
+                    log.info("Number of bytes reached, breaking (though we didn't see EOF yet)");
                     break;
                 }
                 if (numberofBytes % infoBatch == 0) {
