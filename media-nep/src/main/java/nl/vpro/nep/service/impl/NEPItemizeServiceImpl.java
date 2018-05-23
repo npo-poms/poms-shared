@@ -1,5 +1,7 @@
 package nl.vpro.nep.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -28,6 +30,7 @@ import nl.vpro.nep.service.NEPItemizeService;
  * @since 5.6
  */
 @Named("NEPItemizeService")
+@Slf4j
 public class NEPItemizeServiceImpl implements NEPItemizeService {
     private final String itemizeKey;
     private final String itemizeUrl;
@@ -54,6 +57,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             httpPost.addHeader(new BasicHeader("Authorization", itemizeKey));
             httpPost.addHeader(new BasicHeader("Accept", JSON.toString()));
 
+            log.info("Itemizing {}", json);
             httpPost.setEntity(entity);
             HttpResponse response = httpClient.execute(httpPost, clientContext);
 
