@@ -33,11 +33,14 @@ final class SSHClientFactory {
 
         if (hostKey.startsWith("MD5:") || hostKey.startsWith("SHA256:") || hostKey.startsWith("SHA1:")) {
             // This is a fingerprint already
+            log.info("Validating {} with fingerprint {}", host, hostKey);
             ssh.addHostKeyVerifier(hostKey);
         } else {
             byte[] keyBytes = Base64.decode(hostKey);
             PublicKey key = new Buffer.PlainBuffer(keyBytes).readPublicKey();
-            ssh.addHostKeyVerifier(SecurityUtils.getFingerprint(key));
+            String fingerPrint = SecurityUtils.getFingerprint(key);
+            log.info("Validating {} with fingerprint {}", host, fingerPrint);
+            ssh.addHostKeyVerifier(fingerPrint);
         }
 
         ssh.setTimeout((int) sshTimeout.toMillis());
