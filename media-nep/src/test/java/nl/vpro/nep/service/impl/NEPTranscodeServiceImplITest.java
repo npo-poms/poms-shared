@@ -51,7 +51,11 @@ public class NEPTranscodeServiceImplITest {
     public void getStatuses() {
         AtomicLong count = new AtomicLong(0);
         nepService.getTranscodeStatuses(null, null, null,  null).forEachRemaining((we)
-            -> log.info("{}: {}", count.incrementAndGet(), we)
+            -> {
+            if (we.getMid() != null && we.getMid().equals("WO_NPO_3262544")) {
+                log.info("{}: {}", count.incrementAndGet(), we);
+            }
+            }
         );
     }
 }
