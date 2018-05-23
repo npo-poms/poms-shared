@@ -17,7 +17,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.event.Level;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.Slf4jHelper;
@@ -118,7 +117,7 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
                     if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
                         throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
                     }
-                    Slf4jHelper.log(log, count < 6 ? Level.DEBUG : Level.INFO, "{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
+                    Slf4jHelper.debugOrInfo(log, count >  6, "{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
                     try {
                         Thread.sleep(Duration.ofSeconds(10).toMillis());
                     } catch (InterruptedException ignored) {
