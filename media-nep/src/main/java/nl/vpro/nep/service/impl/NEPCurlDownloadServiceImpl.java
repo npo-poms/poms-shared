@@ -10,8 +10,6 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.function.Function;
 
-import javax.inject.Named;
-
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -28,7 +26,7 @@ import nl.vpro.util.CommandExecutorImpl;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
-@Named("NEPDownloadService")
+//@Named("NEPDownloadService")
 @Slf4j
 public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
 
@@ -54,6 +52,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
                 "/usr/bin/curl" // linux
             )
             .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
+            .useFileCache(true)
             .commonArgs(Arrays.asList("-s", "-u", user, "--insecure"))
             .build();
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
@@ -64,6 +63,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
+
             Integer result = curl.execute(outputStream, getUrl(nepFile));
         } catch (IOException e) {
             log.error(e.getMessage(), e);
