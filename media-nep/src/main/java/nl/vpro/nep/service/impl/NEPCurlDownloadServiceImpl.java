@@ -13,7 +13,7 @@ import java.util.function.Function;
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
 
-import nl.vpro.util.FileMetaData;
+import nl.vpro.util.FileMetadata;
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.CommandExecutor;
 import nl.vpro.util.CommandExecutorImpl;
@@ -60,7 +60,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetaData, Boolean> descriptorConsumer) {
+    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             if (outputStream != null) {
@@ -83,7 +83,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     }
 
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetaData, Boolean> descriptorConsumer) throws IOException {
+    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
 
     }
@@ -91,7 +91,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     /**
      * What the fuck, doesn't work with sftp
      */
-    protected void checkAvailabilityWithCurl(String nepFile, Duration timeout,  Function<FileMetaData, Boolean> descriptorConsumer) throws InterruptedException {
+    protected void checkAvailabilityWithCurl(String nepFile, Duration timeout,  Function<FileMetadata, Boolean> descriptorConsumer) throws InterruptedException {
         Instant start = Instant.now();
 
         while(true) {
@@ -99,7 +99,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
             int result = curl.execute(writer, "-I", getUrl(nepFile));
             log.info("Result {}", result);
             if (result == 0) {
-                FileMetaData.Builder descriptorBuilder = FileMetaData.builder().fileName(nepFile);
+                FileMetadata.Builder descriptorBuilder = FileMetadata.builder().fileName(nepFile);
                 for (String l : writer.toString().split("\\n")) {
                     String[] split = l.split(":", 2);
                     if (split[0].equalsIgnoreCase("Last-Modified")) {
@@ -109,7 +109,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
                         descriptorBuilder.size(Long.parseLong(split[1].trim()));
                     }
                 }
-                FileMetaData descriptor = descriptorBuilder.build();
+                FileMetadata descriptor = descriptorBuilder.build();
                 if (descriptor.getSize() == null) {
                     log.warn("No size found in output of curl -I, for {}", getUrl(nepFile));
                 }
