@@ -20,7 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.Slf4jHelper;
-import nl.vpro.nep.service.FileDescriptor;
+import nl.vpro.util.FileDescriptor;
 import nl.vpro.nep.service.NEPDownloadService;
 
 import static org.apache.commons.io.IOUtils.copy;

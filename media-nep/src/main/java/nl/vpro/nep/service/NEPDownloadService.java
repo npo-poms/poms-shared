@@ -5,6 +5,8 @@ import java.io.OutputStream;
 import java.time.Duration;
 import java.util.function.Function;
 
+import nl.vpro.util.FileDescriptor;
+
 public interface NEPDownloadService {
     void download(
         String nepFile,
