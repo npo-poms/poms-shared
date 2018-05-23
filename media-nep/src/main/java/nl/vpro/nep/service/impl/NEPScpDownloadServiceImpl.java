@@ -68,7 +68,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             scptry = CommandExecutorImpl.builder()
                 .executablesPaths("/usr/bin/sshpass", "/opt/local/bin/sshpass")
                 .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
-                //.useFileCache(true)
+                .useFileCache(true)
                 .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-q", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile))
                 .build();
             // just used for the checkAvailability call (actually for the descriptorConsumer callback)
@@ -84,7 +84,9 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
-            scp.execute(outputStream, getUrl(nepFile), "/dev/stdout");
+            if (outputStream != null) {
+                scp.execute(outputStream, getUrl(nepFile), "/dev/stdout");
+            }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         } catch (CommandExecutor.BrokenPipe bp) {
