@@ -16,7 +16,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import nl.vpro.nep.service.FileDescriptor;
+import nl.vpro.util.FileDescriptor;
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.CommandExecutor;
 import nl.vpro.util.CommandExecutorImpl;

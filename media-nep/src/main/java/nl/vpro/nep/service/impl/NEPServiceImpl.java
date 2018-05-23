@@ -19,6 +19,7 @@ import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 import nl.vpro.nep.service.*;
+import nl.vpro.util.FileDescriptor;
 
 /**
  * @author Michiel Meeuwissen
