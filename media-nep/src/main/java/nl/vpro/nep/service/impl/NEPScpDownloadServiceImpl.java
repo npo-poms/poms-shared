@@ -16,7 +16,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import nl.vpro.util.FileDescriptor;
+import nl.vpro.util.FileMetaData;
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.CommandExecutor;
 import nl.vpro.util.CommandExecutorImpl;
@@ -49,6 +49,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     ) {
         this.url = username + "@" + ftpHost;
         File scpcommand = CommandExecutorImpl.getExecutable("/usr/bin/scp").orElseThrow(IllegalArgumentException::new);
+        // just used for the checkAvailability call (actually for the descriptorConsumer callback)
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
         CommandExecutor scptry = null;
         try {
@@ -71,7 +72,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 .useFileCache(true)
                 .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-q", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile))
                 .build();
-            // just used for the checkAvailability call (actually for the descriptorConsumer callback)
+
 
         } catch (RuntimeException rte) {
             log.error(rte.getMessage(), rte);
@@ -81,7 +82,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
 
     @Override
-    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
+    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetaData, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             if (outputStream != null) {
@@ -104,7 +105,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     }
 
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileDescriptor, Boolean> descriptorConsumer) throws IOException {
+    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetaData, Boolean> descriptorConsumer) throws IOException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
     }
 
