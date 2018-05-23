@@ -8,6 +8,8 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 import javax.inject.Named;
@@ -36,6 +38,8 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final CommandExecutor scp;
     private final NEPSSJDownloadServiceImpl sshj;
 
+    private final static Map<String, File> knownHosts = new HashMap<>();
+
 
     public NEPScpDownloadServiceImpl(
         @Value("${nep.sftp.host}") String ftpHost,
@@ -48,10 +52,19 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
         CommandExecutor scptry = null;
         try {
-            File tempFile = File.createTempFile("known_hosts", "tmp");
-            try (PrintWriter writer = new PrintWriter(tempFile)) {
-                writer.println(ftpHost + " ssh-rsa " + hostkey);
-            }
+            File tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> {
+                    try {
+                        File f = File.createTempFile("known_hosts", "tmp");
+                        try (PrintWriter writer = new PrintWriter(f)) {
+                            writer.println(ftpHost + " ssh-rsa " + hostkey);
+                        }
+                        f.deleteOnExit();
+                        return f;
+                    } catch (IOException ioe) {
+                        throw new RuntimeException(ioe);
+                    }
+                }
+            );
             scptry = CommandExecutorImpl.builder()
                 .executablesPaths("/usr/bin/sshpass", "/opt/local/bin/sshpass")
                 .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
@@ -62,8 +75,6 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
         } catch (RuntimeException rte) {
             log.error(rte.getMessage(), rte);
-        } catch (IOException ioe) {
-
         }
         scp = scptry;
     }
