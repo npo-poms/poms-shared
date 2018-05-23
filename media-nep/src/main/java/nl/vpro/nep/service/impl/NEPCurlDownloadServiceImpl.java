@@ -63,8 +63,9 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileDescriptor, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
-
-            Integer result = curl.execute(outputStream, getUrl(nepFile));
+            if (outputStream != null) {
+                curl.execute(outputStream, getUrl(nepFile));
+            }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         } catch (CommandExecutor.BrokenPipe bp) {
