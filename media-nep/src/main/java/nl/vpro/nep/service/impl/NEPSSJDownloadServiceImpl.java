@@ -66,14 +66,16 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
         }
         try {
             checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {
-                try (InputStream in = handle.new ReadAheadRemoteFileInputStream(32)) {
+                if (outputStream != null) {
+                    try (InputStream in = handle.new ReadAheadRemoteFileInputStream(32)) {
 
-                    long copy = copy(in, outputStream, 1024 * 10);
-                    log.info("Copied {} bytes", copy);
-                } catch (SFTPException sfte) {
-                    log.error(sfte.getMessage());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                        long copy = copy(in, outputStream, 1024 * 10);
+                        log.info("Copied {} bytes", copy);
+                    } catch (SFTPException sfte) {
+                        log.error(sfte.getMessage());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
         } catch (IOException ioe) {
