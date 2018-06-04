@@ -13,8 +13,11 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.page.RelationDefinition;
 import nl.vpro.domain.page.Section;
+import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -76,6 +79,8 @@ public class PageUpdateTest {
         assertThat(update.getTitle()).isEqualTo("Hoi2");
     }
 
+    private static RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
+
     @Test
     public void json() throws Exception {
         PageUpdate page = PageUpdateBuilder
@@ -85,6 +90,29 @@ public class PageUpdateTest {
                 .id("3voor12")
                 .url("http://3voor12-beta-test.vpro.nl/")
                 .section(Section.builder().displayName("display").path("/bla").build()).build())
+            .relations(RelationUpdate.text(DEF, "bla"))
+            .images(ImageUpdate
+                .builder()
+                .source("source")
+                .sourceName("vpro")
+                .description("description")
+                .license(License.CC_BY)
+                .title("title")
+                .type(ImageType.ICON)
+                .imageUrl("https://www.vpro.nl/plaatje")
+                .credits("page image credits")
+                .build())
+            .paragraphs(
+                ParagraphUpdate.builder()
+                    .title("title")
+                    .body("body")
+                    .image(ImageUpdate
+                        .builder()
+                        .credits("paragraph image credits")
+                        .build()
+                    )
+                .build()
+            )
             .build();
         PageUpdate rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(Jackson2Mapper.getPublisherInstance(), page, "{\n" +
             "  \"type\" : \"ARTICLE\",\n" +
@@ -97,6 +125,32 @@ public class PageUpdateTest {
             "    \"id\" : \"3voor12\",\n" +
             "    \"url\" : \"http://3voor12-beta-test.vpro.nl/\"\n" +
             "  },\n" +
+            "  \"paragraphs\" : [ {\n" +
+            "    \"title\" : \"title\",\n" +
+            "    \"body\" : \"body\",\n" +
+            "    \"image\" : {\n" +
+            "      \"credits\" : \"paragraph image credits\"\n" +
+            "    }\n" +
+            "  } ],\n" +
+            "  \"images\" : [ {\n" +
+            "    \"title\" : \"title\",\n" +
+            "    \"description\" : \"description\",\n" +
+            "    \"source\" : \"source\",\n" +
+            "    \"sourceName\" : \"vpro\",\n" +
+            "    \"license\" : \"CC_BY\",\n" +
+            "    \"credits\" : \"page image credits\",\n" +
+            "    \"image\" : {\n" +
+            "      \"imageLocation\" : {\n" +
+            "        \"url\" : \"https://www.vpro.nl/plaatje\"\n" +
+            "      }\n" +
+            "    },\n" +
+            "    \"type\" : \"ICON\"\n" +
+            "  } ],\n" +
+            "  \"relations\" : [ {\n" +
+            "    \"type\" : \"FOO\",\n" +
+            "    \"broadcaster\" : \"VPRO\",\n" +
+            "    \"value\" : \"bla\"\n" +
+            "  } ]\n" +
             "}");
 
         assertThat(rounded.getPortal().getSection().getDisplayName()).isEqualTo("display");

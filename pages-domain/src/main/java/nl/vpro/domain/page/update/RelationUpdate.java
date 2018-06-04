@@ -141,4 +141,26 @@ public class RelationUpdate implements Comparable<RelationUpdate>, Serializable 
 
         return hashCode() - relationUpdate.hashCode();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RelationUpdate that = (RelationUpdate) o;
+
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (broadcaster != null ? !broadcaster.equals(that.broadcaster) : that.broadcaster != null) return false;
+        if (uriRef != null ? !uriRef.equals(that.uriRef) : that.uriRef != null) return false;
+        return text != null ? text.equals(that.text) : that.text == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (broadcaster != null ? broadcaster.hashCode() : 0);
+        result = 31 * result + (uriRef != null ? uriRef.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        return result;
+    }
 }
