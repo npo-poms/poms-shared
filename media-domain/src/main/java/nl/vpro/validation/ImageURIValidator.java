@@ -20,7 +20,7 @@ public class ImageURIValidator implements ConstraintValidator<ImageURI, String> 
     @Override
     public boolean isValid(String imageUri, ConstraintValidatorContext constraintValidatorContext) {
         if(imageUri == null) {
-            return false;
+            return true;
         }
 
         Matcher matcher = Image.SERVER_URI_PATTERN.matcher(imageUri);
