@@ -147,4 +147,13 @@ public class ImageUpdate implements Serializable{
     public int hashCode() {
         return Objects.hashCode(image);
     }
+
+
+    public static class Builder {
+
+        public Builder imageUrl(String imageLocation) {
+            return image(new ImageLocation(imageLocation));
+        }
+
+    }
 }
