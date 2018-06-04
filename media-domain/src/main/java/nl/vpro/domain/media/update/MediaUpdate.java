@@ -383,6 +383,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setContentRatings(contentRatings);
         media.setAVType(avType);
         media.setCrids(crids);
+
         try {
             media.setDuration(duration);
         } catch(ModificationException mfe) {
@@ -397,6 +398,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         TextualObjects.copy(this, returnObject, owner);
         returnObject.setLocations(toSet(locations, l -> l.toLocation(owner)));
         returnObject.setImages(toList(images, i -> i.toImage(owner, null)));
+        returnObject.setScheduleEvents(toSet(scheduleEvents, s -> s.toScheduleEvent(owner)));
         return returnObject;
     }
 
