@@ -48,6 +48,7 @@ public class ParagraphUpdate implements Serializable {
     public ParagraphUpdate() {
     }
 
+    @lombok.Builder
     public ParagraphUpdate(String title, String body, ImageUpdate image) {
         this.title = title;
         this.body = body;
