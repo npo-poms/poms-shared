@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -127,6 +128,7 @@ public class Image extends PublishableObject<Image>
 
     @Column(name = "imageurl")
     @ImageURI
+    @NotNull(groups = {PrePersistValidatorGroup.class})
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE, required = true)
     private String imageUri;
 
