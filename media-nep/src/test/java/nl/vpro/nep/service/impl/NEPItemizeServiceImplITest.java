@@ -22,7 +22,7 @@ public class NEPItemizeServiceImplITest {
         NEPItemizeRequest request = new NEPItemizeRequest();
         request.setIdentifier("AT_2073522");
         request.setStarttime("00:00:00.000");
-        request.setEndtime("00:02:21.150");
+        request.setEndtime("00:02:21.151");
         log.info("response: {}", itemizer.itemize(request));
 
     }
