@@ -47,6 +47,7 @@ public class Locations {
         }
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         Encryption encryption;
+        final List<Location> authorityLocations = new ArrayList<>();
         if (existingPredictionForPlatform != null) {
             if (!existingPredictionForPlatform.isPlannedAvailability()) {
                 log.debug("Can't realize {} for {} because no availability planned", mediaObject, platform);
@@ -59,11 +60,31 @@ public class Locations {
             }
             if (!streamingPlatformStatus.matches(existingPredictionForPlatform.getEncryption())) {
                 log.debug("Can't realize {} for {} because incorrect encryption", mediaObject, platform);
-                return Locations.RealizeResult.builder()
-                    .needed(false)
-                    .program(mediaObject)
-                    .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
-                    .build();
+                if (existingPredictionForPlatform.getEncryption() != Encryption.NONE) {
+                    return Locations.RealizeResult.builder()
+                        .needed(false)
+                        .program(mediaObject)
+                        .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
+                        .build();
+                } else {
+                    if (existingPredictionForPlatform.getEncryption() != Encryption.DRM) {
+                        createDrmImplicitely(mediaObject, platform, authorityLocations);
+                        if (authorityLocations.isEmpty()) {
+                            return Locations.RealizeResult.builder()
+                                .needed(false)
+                                .program(mediaObject)
+                                .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
+                                .build();
+                        } else {
+                             return Locations.RealizeResult.builder()
+                                .needed(true)
+                                .program(mediaObject)
+                                .reason("NEP status is " + streamingPlatformStatus + " but request encryption is " + existingPredictionForPlatform.getEncryption())
+                                .build();
+                        }
+                    }
+
+                }
             }
             encryption = existingPredictionForPlatform.getEncryption();
             if (encryption == null) {
@@ -78,7 +99,7 @@ public class Locations {
                 .build();
         }
 
-        List<Location> authorityLocations = new ArrayList<>();
+
         Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption, "For " + encryption);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
@@ -87,12 +108,7 @@ public class Locations {
 
         //MSE-3992
         if (encryption != Encryption.DRM) {
-
-            Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too");
-            if (authorityLocation2 != null) {
-                authorityLocations.add(authorityLocation2);
-                updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
-            }
+            createDrmImplicitely(mediaObject, platform, authorityLocations);
         }
 
         if (authorityLocations.isEmpty()) {
@@ -108,6 +124,14 @@ public class Locations {
             .locations(authorityLocations)
             .program(mediaObject)
             .build();
+    }
+
+    private static void createDrmImplicitely(MediaObject mediaObject, Platform platform, List<Location> authorityLocations) {
+            Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too");
+            if (authorityLocation2 != null) {
+                authorityLocations.add(authorityLocation2);
+                updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
+            }
     }
 
     private static Location getAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption, String reason) {
