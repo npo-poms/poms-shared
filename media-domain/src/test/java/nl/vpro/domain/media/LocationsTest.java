@@ -158,7 +158,9 @@ public class LocationsTest {
                     program.setPredictions(Arrays.asList(prediction));
                     Locations.realizeAndRevokeLocationsIfNeeded(program, Platform.INTERNETVOD);
 
-                    assertThat(asExpected(program.getLocations())).isEqualTo(getExpected(streamStatusWithDrm, streamStatusWithoutDrm, predictionEncryption));
+                    String expected = getExpected(streamStatusWithDrm, streamStatusWithoutDrm, predictionEncryption);
+                    String result = asExpected(program.getLocations());
+                    assertThat(result).withFailMessage(streamingStatus + "," + predictionEncryption + " !-> " + expected + " but " + result).isEqualTo(expected);
                     logger.info("{}\t{}\t{}\t{}", streamingStatus.withDrm, streamingStatus.withoutDrm, prediction.getEncryption(),
                         program.getLocations().stream().map(l -> URI.create(l.getProgramUrl()).getScheme()).collect(Collectors.joining(",")));
 
