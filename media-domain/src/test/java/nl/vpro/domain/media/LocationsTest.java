@@ -107,7 +107,7 @@ public class LocationsTest {
         {Value.OFFLINE, Value.ONLINE, null, "npo"},
 
         {Value.ONLINE, Value.OFFLINE, Encryption.DRM, "npo+drm"},
-        {Value.ONLINE, Value.OFFLINE, Encryption.NONE, ""},
+        {Value.ONLINE, Value.OFFLINE, Encryption.NONE, "npo+drm"}, // /MSE-4048
         {Value.ONLINE, Value.OFFLINE, null, "npo+drm"},
 
         {Value.ONLINE, Value.ONLINE, Encryption.DRM, "npo+drm"},
