@@ -12,7 +12,4 @@ public class NEPItemizeResponse {
     private Boolean success;
     private Integer id;
     private String output_filename;
-
-
-
 }
