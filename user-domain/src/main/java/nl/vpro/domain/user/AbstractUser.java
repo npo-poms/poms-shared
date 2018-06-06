@@ -4,12 +4,16 @@
  */
 package nl.vpro.domain.user;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -19,28 +23,47 @@ import nl.vpro.domain.Identifiable;
 
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.FIELD)
-public abstract class AbstractUser implements Serializable, Identifiable<String>, User {
+public abstract class AbstractUser implements Serializable, Identifiable<String>, User  {
     private static final long serialVersionUID = 1L;
+
+    @Transient
+    private boolean persisted = false;
 
     @Id
     @Column(name = "principalid")
+    @Getter
     protected String principalId;
 
+    @Getter
+    @Setter
     protected String givenName;
 
+    @Getter
+    @Setter
     protected String familyName;
 
     @Column(nullable = false)
+    @Getter
+    @Setter
     protected String displayName;
 
     @Column(nullable = false)
     @Pattern(regexp = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])",
         flags = {Pattern.Flag.CASE_INSENSITIVE}
     )
+    @Getter
+    @Setter
     protected String email;
 
     @Column
+    @Getter
+    @Setter
     protected Instant lastLogin;
+
+    @Column(name = "creationDate")
+    @Getter
+    @Setter
+    protected Instant creationInstant;
 
     protected AbstractUser() {
     }
@@ -80,59 +103,14 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         return getPrincipalId();
     }
 
-    @Override
-    public String getPrincipalId() {
-        return principalId;
-    }
-
     public void setPrincipalId(String principalId) {
         this.principalId = principalId.toLowerCase();
     }
 
-    @Override
-    public String getGivenName() {
-        return givenName;
+    public boolean isNew() {
+        return ! persisted;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
-    }
-
-    @Override
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-    @Override
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    public void setDisplayName(String displayName) {
-        this.displayName = displayName;
-    }
-
-    @Override
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public Instant getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(Instant lastLogin) {
-        this.lastLogin = lastLogin;
-    }
 
     @Override
     public String toString() {
@@ -144,5 +122,6 @@ public abstract class AbstractUser implements Serializable, Identifiable<String>
         sb.append('}');
         return sb.toString();
     }
+
 
 }
