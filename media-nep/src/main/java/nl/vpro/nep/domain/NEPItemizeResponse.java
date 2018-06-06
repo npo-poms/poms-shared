@@ -13,6 +13,7 @@ public class NEPItemizeResponse {
     private Integer id;
     private String output_filename;
 
-
-
+    public boolean isSuccess() {
+        return success != null && success;
+    }
 }
