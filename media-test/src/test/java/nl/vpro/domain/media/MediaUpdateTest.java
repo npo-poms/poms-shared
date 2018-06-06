@@ -35,6 +35,9 @@ public class MediaUpdateTest {
             "    <description type=\"MAIN\">Main description</description>\n" +
             "    <description type=\"SHORT\">Short description</description>\n" +
             "    <description type=\"EPISODE\">Episode description MIS</description>\n" +
+            "    <tag>tag1</tag>\n" +
+            "    <tag>tag2</tag>\n" +
+            "    <tag>tag3</tag>\n" +
             "    <country>GB</country>\n" +
             "    <country>US</country>\n" +
             "    <language>nl</language>\n" +
@@ -131,6 +134,9 @@ public class MediaUpdateTest {
             "            <description type=\"MAIN\">Main description</description>\n" +
             "            <description type=\"SHORT\">Short description</description>\n" +
             "            <description type=\"EPISODE\">Episode description MIS</description>\n" +
+            "            <tag>tag1</tag>\n" +
+            "            <tag>tag2</tag>\n" +
+            "            <tag>tag3</tag>\n" +
             "            <country>GB</country>\n" +
             "            <country>US</country>\n" +
             "            <language>nl</language>\n" +
@@ -230,6 +236,9 @@ public class MediaUpdateTest {
             "    <description owner=\"BROADCASTER\" type=\"MAIN\">Main description</description>\n" +
             "    <description owner=\"BROADCASTER\" type=\"SHORT\">Short description</description>\n" +
             "    <description owner=\"BROADCASTER\" type=\"EPISODE\">Episode description MIS</description>\n" +
+            "     <tag>tag1</tag>\n" +
+            "    <tag>tag2</tag>\n" +
+            "    <tag>tag3</tag>\n" +
             "    <duration>P0DT2H0M0.000S</duration>\n" +
             "    <credits/>\n" +
             "    <locations>\n" +
@@ -261,7 +270,28 @@ public class MediaUpdateTest {
             "            </avAttributes>\n" +
             "        </location>\n" +
             "    </locations>\n" +
-            "    <scheduleEvents/>\n" +
+            "     <scheduleEvents>\n" +
+            "        <scheduleEvent channel=\"NED3\">\n" +
+            "            <guideDay>1969-12-31+01:00</guideDay>\n" +
+            "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.200S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "        <scheduleEvent channel=\"NED3\">\n" +
+            "            <guideDay>1970-01-03+01:00</guideDay>\n" +
+            "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.050S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "        <scheduleEvent channel=\"HOLL\">\n" +
+            "            <guideDay>1970-01-08+01:00</guideDay>\n" +
+            "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.250S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "        <scheduleEvent channel=\"CONS\">\n" +
+            "            <guideDay>1970-01-10+01:00</guideDay>\n" +
+            "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
+            "            <duration>P0DT0H0M0.200S</duration>\n" +
+            "        </scheduleEvent>\n" +
+            "    </scheduleEvents>\n" +
             "    <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +
             "    <relation broadcaster=\"EO\" type=\"KOOR\">Ulfts Mannenkoor</relation>\n" +
             "    <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
