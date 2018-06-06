@@ -50,7 +50,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     public NEPItemizeResponse itemize(NEPItemizeRequest request) {
         try(CloseableHttpClient httpClient = HttpClients.custom()
             .build()) {
-            log.info("Itemizing {}", request);
+            log.info("Itemizing {} @ {}", request, itemizeUrl);
             HttpClientContext clientContext = HttpClientContext.create();
             String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
             StringEntity entity = new StringEntity(json, JSON);
