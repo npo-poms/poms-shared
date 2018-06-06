@@ -25,6 +25,8 @@ import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.nep.service.NEPUploadService;
 import nl.vpro.util.FileSizeFormatter;
 
+import static nl.vpro.util.MultiLanguageString.en;
+
 
 /**
  *  This is a wrapper for ftp.nepworldwide.nl This is were we have to upload file for transcoding
@@ -104,14 +106,23 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
                 if (numberofBytes % infoBatch == 0) {
                     // updating spans in ngToast doesn't work...
                     //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
-                    logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+                    logger.info(
+                        en("Uploaded {}/{} bytes to NEP")
+                            .nl("Geüpload {}/{} bytes naar NEP")
+                            .slf4jArgs(formatter.format(numberofBytes), formatter.format(size))
+                            .build()
+                    );
                 } else {
                     if (log.isDebugEnabled()) {
                         log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
                     }
                 }
             }
-            logger.info("Ready uploading {}/{} bytes (took {})", formatter.format(numberofBytes), formatter.format(size), Duration.between(start, Instant.now()));
+            logger.info(
+                en("Ready uploading {}/{} bytes (took {})")
+                    .nl("Klaar met uploaden van {}/{} bytes (kostte: {})")
+                    .slf4jArgs(formatter.format(numberofBytes), formatter.format(size), Duration.between(start, Instant.now()))
+                    .build());
             return numberofBytes;
         }
     }
