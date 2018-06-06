@@ -51,7 +51,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
                 "/opt/local/bin/curl", // macports
                 "/usr/bin/curl" // linux
             )
-            .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
+            .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
             .useFileCache(true)
             .commonArgs(Arrays.asList("-s", "-u", user, "--insecure"))
             .build();
