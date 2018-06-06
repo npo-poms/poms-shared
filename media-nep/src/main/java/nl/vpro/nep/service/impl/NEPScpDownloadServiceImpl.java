@@ -60,7 +60,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             }
             scptry = CommandExecutorImpl.builder()
                 .executablesPaths("/usr/bin/sshpass", "/opt/local/bin/sshpass")
-                .wrapLogInfo((message) -> message.replaceAll(password, "??????"))
+                .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
                 .useFileCache(true)
                 .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-q", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile))
                 .build();
