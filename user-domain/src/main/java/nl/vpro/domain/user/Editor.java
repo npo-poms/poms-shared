@@ -393,4 +393,6 @@ public class Editor extends AbstractUser {
     String getOrganization() {
         return getEmployer().getId();
     }
+
+
 }
