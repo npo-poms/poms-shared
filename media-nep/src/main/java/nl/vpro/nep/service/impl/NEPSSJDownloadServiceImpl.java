@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -59,7 +60,7 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(String nepFile, Supplier<OutputStream> outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+    public void download(@Nonnull String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
         log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, ftpHost, hostKey);
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
