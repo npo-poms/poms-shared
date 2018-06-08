@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
@@ -67,7 +68,7 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public void download(String nepFile, Supplier<OutputStream> outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
+    public void download(@Nonnull String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
         nepftpDownloadService.get()
             .download(nepFile, outputStream, timeout, descriptorConsumer);
 
