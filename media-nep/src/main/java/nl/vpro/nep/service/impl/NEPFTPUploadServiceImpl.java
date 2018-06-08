@@ -13,6 +13,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.EnumSet;
 
+import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
@@ -73,7 +74,7 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
     }
     private final FileSizeFormatter formatter = FileSizeFormatter.DEFAULT;
     @Override
-    public long upload(SimpleLogger logger, String nepFile, Long size, InputStream stream) throws IOException {
+    public long upload(@Nonnull SimpleLogger logger, @Nonnull String nepFile, @Nonnull Long size, @Nonnull InputStream stream) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
         if (sshClient == null || ! sshClient.isConnected()) {
@@ -84,7 +85,7 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
         try(
             final SFTPClient sftp = sshClient.newSFTPClient();
             final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
-            OutputStream out = handle.new RemoteFileOutputStream();
+            OutputStream out = handle.new RemoteFileOutputStream()
         ) {
             byte[] buffer = new byte[1014 * 1024];
             long infoBatch = buffer.length * 100;
