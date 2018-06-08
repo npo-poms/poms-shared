@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Iterator;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
@@ -16,7 +19,9 @@ import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
  */
 public interface NEPTranscodeService {
 
-    WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException;
+    @Nonnull
+    WorkflowExecution transcode(@Nonnull WorkflowExecutionRequest request) throws IOException;
 
-    Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit);
+    @Nonnull
+    Iterator<WorkflowExecution> getTranscodeStatuses(@Nullable String mid, @Nullable StatusType status, @Nullable Instant from, @Nullable  Long limit);
 }
