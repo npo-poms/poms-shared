@@ -128,15 +128,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
 
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("ProgramUpdate")
-            .append("{program=")
-            .append(fetch())
-            .append('}');
-        return sb.toString();
-    }
 
 
 }
