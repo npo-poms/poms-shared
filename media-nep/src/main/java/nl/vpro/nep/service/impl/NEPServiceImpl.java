@@ -7,6 +7,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -66,7 +67,7 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
+    public void download(String nepFile, Supplier<OutputStream> outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
         nepftpDownloadService.get()
             .download(nepFile, outputStream, timeout, descriptorConsumer);
 
