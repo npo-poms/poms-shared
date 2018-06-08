@@ -1004,7 +1004,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @Override
     public String toString() {
-        return "update[" + mid + "]";
+        return getClass().getSimpleName() + "[" + mid + ":" + getMainTitle() + "]";
     }
 
 
