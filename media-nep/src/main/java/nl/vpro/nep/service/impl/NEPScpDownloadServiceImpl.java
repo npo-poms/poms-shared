@@ -88,10 +88,12 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public void download(String nepFile, Supplier<OutputStream> outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
-        try (OutputStream out = outputStream.get()){
+        try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
-            if (out != null) {
-                scp.execute(out, getUrl(nepFile), "/dev/stdout");
+            try (OutputStream out = outputStream.get()){
+                if (out != null) {
+                    scp.execute(out, getUrl(nepFile), "/dev/stdout");
+                }
             }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
