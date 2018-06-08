@@ -11,6 +11,8 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -61,7 +63,8 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(String nepFile, Supplier<OutputStream> outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+    public void download(
+        @Nonnull  String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             if (outputStream != null) {
