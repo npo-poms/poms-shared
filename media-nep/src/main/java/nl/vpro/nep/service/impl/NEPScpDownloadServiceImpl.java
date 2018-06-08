@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -87,7 +88,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(String nepFile, Supplier<OutputStream> outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+    public void download(@Nonnull String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             try (OutputStream out = outputStream.get()){
