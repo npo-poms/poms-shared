@@ -55,12 +55,14 @@ public class NEPServiceImpl implements NEPService {
         return itemizeService.get().itemize(request);
     }
 
+    @Nonnull
     @Override
     public WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException {
         return transcodeService.get().transcode(request);
 
     }
 
+    @Nonnull
     @Override
     public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
         return transcodeService.get().getTranscodeStatuses(mid, status, from, limit);
@@ -75,7 +77,7 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public long upload(SimpleLogger logger, String nepFile, Long size, InputStream stream) throws IOException {
+    public long upload(@Nonnull SimpleLogger logger, @Nonnull String nepFile, @Nonnull Long size, @Nonnull InputStream stream) throws IOException {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream);
 
     }
