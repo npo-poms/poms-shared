@@ -17,6 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -99,6 +100,7 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         log.info("Created {}", this);
     }
 
+    @Nonnull
     @Override
     public WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException {
         CloseableHttpClient client = getHttpClient();
@@ -124,6 +126,7 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         }
     }
 
+    @Nonnull
     @Override
     public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
         int batchSize = 20;
