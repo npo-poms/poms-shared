@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import nl.vpro.util.FileSizeFormatter;
 
+import static nl.vpro.util.ExceptionUtils.wrapException;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 /**
@@ -54,7 +55,7 @@ public class NEPSSHJDownloadServiceImplTest {
         Instant start = Instant.now();
 
         File dest = new File(testDest);
-        impl.download(fileName, new FileOutputStream(dest), (fc) -> true);
+        impl.download(fileName, wrapException(() -> new FileOutputStream(dest)), (fc) -> true);
 
         Duration duration = Duration.between(start, Instant.now());
         assertThat(dest.length()).isEqualTo(221400200L);
