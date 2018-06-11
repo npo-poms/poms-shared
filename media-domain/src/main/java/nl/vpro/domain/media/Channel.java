@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -2466,6 +2467,18 @@ public enum Channel implements Displayable, XmlValued {
             result.add(Channel.valueOf(value));
         }
         return result.toArray(new Channel[result.size()]);
+    }
+
+    public static Channel valueOfIgnoreCase(String channel) {
+        if (StringUtils.isBlank(channel)) {
+            return null;
+        }
+        try {
+            return valueOf(channel);
+        } catch (IllegalArgumentException ignore) {
+            return valueOf(channel.toUpperCase());
+        }
+
     }
 
     public static class Deserializer extends BackwardsCompatibleJsonEnum.Deserializer<Channel> {
