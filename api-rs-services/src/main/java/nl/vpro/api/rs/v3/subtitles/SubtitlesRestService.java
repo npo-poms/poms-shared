@@ -22,7 +22,7 @@ import static nl.vpro.domain.api.Constants.*;
  * @since 4.8
  */
 @Path(SubtitlesRestService.PATH)
-@Produces({VTT, TT888, SRT})// APPLICATION_JSON, APPLICATION_XML})
+@Produces({VTT, TT888, SRT, EBU})// APPLICATION_JSON, APPLICATION_XML})
 public interface SubtitlesRestService {
 
     String MID = "mid";
