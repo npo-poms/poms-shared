@@ -30,7 +30,7 @@ public interface ProfileRestService {
 
 
     /**
-     * Returns a site profile by it's key
+     * Returns a site profile by its key
      *
      * @param name an profile identifier
      * @return an existing profile or an error when no profile is found
@@ -44,7 +44,10 @@ public interface ProfileRestService {
 
     @GET
     @Path("/list")
-    ProfileResult list(@QueryParam("pattern") String pattern, @QueryParam("max") Integer max);
+    ProfileResult list(
+        @QueryParam("pattern") String pattern,
+        @QueryParam("max") Integer max
+    );
 
 
 
