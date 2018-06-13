@@ -38,24 +38,139 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 /**
+ * Maintains a mapping between XML-namespaces and their XSD's, it therefore also is an {@link LSResourceResolver}
+ * and it provides {@link #getUnmarshaller(boolean, String)}
+ *
  * @author Michiel Meeuwissen
  * @since 5.4
  */
 @Slf4j
 public abstract class Mappings implements Function<String, File>, LSResourceResolver {
+
+    protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
+
+    protected static final long startTime = System.currentTimeMillis();
+
+    protected static Path tempDir;
+
     protected final Map<String, Class[]> MAPPING = new LinkedHashMap<>();
+
     private final Map<String, URI> SYSTEM_MAPPING = new LinkedHashMap<>();
 
     private final SchemaFactory SCHEMA_FACTORY = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-    private boolean inited = false;
 
     @Getter
     @Setter
     protected boolean generateDocumentation = false;
 
+    private boolean inited = false;
+
+    public static File getTempDir() {
+        if (tempDir == null) {
+            try {
+                tempDir = Files.createTempDirectory("schemas");
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+                throw new RuntimeException(e);
+            }
+        }
+        return tempDir.toFile();
+    }
+
+    public Collection<String> knownNamespaces() {
+        init();
+        return MAPPING.keySet();
+    }
+
+    public Map<String, URI> systemNamespaces() {
+        init();
+        return Collections.unmodifiableMap(SYSTEM_MAPPING);
+    }
+
+    public ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, String namespace) {
+        init();
+        return ThreadLocal.withInitial(() -> {
+            try {
+                Class[] classes = MAPPING.get(namespace);
+                if (classes == null) {
+                    throw new IllegalArgumentException("No mapping found for " + namespace);
+                }
+                Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
+                if (validate) {
+                    File xsd = getFile(namespace);
+                    if (xsd.exists()) {
+                        Schema schema = SCHEMA_FACTORY.newSchema(xsd);
+                        result.setSchema(schema);
+                    } else {
+                        log.warn("Not found for {}: {}", namespace, xsd);
+                    }
+                }
+                return result;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    @Override
+    public File apply(String namespace) {
+        if (generateDocumentation) {
+            return getFileWithDocumentation(namespace);
+        } else {
+            return getFile(namespace);
+        }
+    }
+
+    @Override
+    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
+        URL url = ResourceResolver.resolveToURL(namespaceURI);
+        if (url != null) {
+            return ResourceResolver.resolveNamespaceToLS(namespaceURI);
+        }
+
+        try {
+            InputStream resource = new FileInputStream(apply(namespaceURI));
+            LSInput lsinput = ResourceResolver.DOM.createLSInput();
+            lsinput.setCharacterStream(new InputStreamReader(resource));
+            return lsinput;
+        } catch (FileNotFoundException fne) {
+            throw new RuntimeException(fne);
+        }
+    }
+
+    public File getFile(String namespace) {
+        init();
+        String fileName = namespace.substring("urn:vpro:".length()).replace(':', '_') + ".xsd";
+        return new File(getTempDir(), fileName);
+    }
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
+    public File getFileWithDocumentation(String namespace) {
+        File file = getFile(namespace);
+        File fileWithDocumentation = new File(file.getParentFile(), "documented." + file.getName());
+        if (fileWithDocumentation.exists() && fileWithDocumentation.lastModified() < file.lastModified()) {
+            fileWithDocumentation.delete();
+        }
+        if (!fileWithDocumentation.exists()) {
+            DocumentationAdder transformer = new DocumentationAdder(MAPPING.get(namespace));
+            try {
+                transformer.transform(new StreamSource(new FileInputStream(file)), new StreamResult(new FileOutputStream(fileWithDocumentation)));
+                log.info("Generated {} with {}", fileWithDocumentation, transformer);
+            } catch (FileNotFoundException | TransformerException e) {
+                log.error(e.getMessage(), e);
+                try {
+                    Files.copy(Paths.get(file.toURI()), Paths.get(fileWithDocumentation.toURI()), REPLACE_EXISTING);
+                } catch (IOException e1) {
+                    throw new RuntimeException(e1);
+                }
+            }
+
+        }
+        return fileWithDocumentation;
+    }
+
     protected void init() {
-        if (! inited) {
+        if (!inited) {
             inited = true;
             SYSTEM_MAPPING.put(XMLConstants.XML_NS_URI, URI.create("https://www.w3.org/2009/01/xml.xsd"));
             KNOWN_LOCATIONS.putAll(SYSTEM_MAPPING);
@@ -70,18 +185,6 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
             SCHEMA_FACTORY.setResourceResolver(new ResourceResolver());
         }
     }
-
-    public Collection<String> knownNamespaces() {
-        init();
-        return MAPPING.keySet();
-    }
-
-    public Map<String, URI> systemNamespaces() {
-        init();
-        return Collections.unmodifiableMap(SYSTEM_MAPPING);
-    }
-
-    protected final static Map<String, URI> KNOWN_LOCATIONS = new HashMap<>();
 
     protected abstract void fillMappings();
 
@@ -98,6 +201,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         log.info("Generating xsds in {}", Arrays.asList(classes), getTempDir());
         JAXBContext context = JAXBContext.newInstance(classes);
         context.generateSchema(new SchemaOutputResolver() {
+            @SuppressWarnings("ResultOfMethodCallIgnored")
             @Override
             public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
                 if (KNOWN_LOCATIONS.containsKey(namespaceUri)) {
@@ -134,22 +238,6 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
 
     }
 
-    private Schema getSchema(Class<?>... classesToRead) throws JAXBException, IOException, SAXException {
-        JAXBContext context = JAXBContext.newInstance(classesToRead);
-        final List<DOMResult> result = new ArrayList<>();
-        context.generateSchema(new SchemaOutputResolver() {
-            @Override
-            public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-                DOMResult dom = new DOMResult();
-                dom.setSystemId(namespaceUri);
-                result.add(dom);
-                return dom;
-            }
-        });
-        return SCHEMA_FACTORY.newSchema(new DOMSource(result.get(0).getNode()));
-    }
-
-
     private ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, Class<?>... classes) {
         return ThreadLocal.withInitial(() -> {
             try {
@@ -164,115 +252,22 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         });
     }
 
-    ;
-
-    public ThreadLocal<Unmarshaller> getUnmarshaller(boolean validate, String namespace) {
-        init();
-        return ThreadLocal.withInitial(() -> {
-            try {
-                Class[] classes = MAPPING.get(namespace);
-                if (classes == null) {
-                    throw new IllegalArgumentException("No mapping found for " + namespace);
-                }
-                Unmarshaller result = JAXBContext.newInstance(classes).createUnmarshaller();
-                if (validate) {
-                    File xsd = getFile(namespace);
-                    if (xsd.exists()) {
-                        Schema schema = SCHEMA_FACTORY.newSchema(xsd);
-                        result.setSchema(schema);
-                    } else {
-                        log.warn("Not found for {}: {}", namespace, xsd);
-                    }
-                }
-                return result;
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+    private Schema getSchema(Class<?>... classesToRead) throws JAXBException, IOException, SAXException {
+        JAXBContext context = JAXBContext.newInstance(classesToRead);
+        final List<DOMResult> result = new ArrayList<>();
+        context.generateSchema(new SchemaOutputResolver() {
+            @Override
+            public Result createOutput(String namespaceUri, String suggestedFileName) {
+                DOMResult dom = new DOMResult();
+                dom.setSystemId(namespaceUri);
+                result.add(dom);
+                return dom;
             }
         });
+        return SCHEMA_FACTORY.newSchema(new DOMSource(result.get(0).getNode()));
     }
 
-    ;
-
-    protected static final long startTime = System.currentTimeMillis();
-
-
-    protected static Path tempDir;
-
-    public static File getTempDir() {
-        if (tempDir == null) {
-            try {
-                tempDir = Files.createTempDirectory("schemas");
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-                throw new RuntimeException(e);
-            }
-        }
-        return tempDir.toFile();
-    }
-
-
-
-    @Override
-    public File apply(String namespace) {
-        if (generateDocumentation) {
-            return getFileWithDocumentation(namespace);
-        } else {
-            return getFile(namespace);
-        }
-    }
-
-
-    @Override
-    public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
-        URL url = ResourceResolver.resolveToURL(namespaceURI);
-        if (url != null) {
-            return ResourceResolver.resolveNamespaceToLS(namespaceURI);
-        }
-
-        try {
-            InputStream resource = new FileInputStream(apply(namespaceURI));
-            LSInput lsinput = ResourceResolver.DOM.createLSInput();
-            lsinput.setCharacterStream(new InputStreamReader(resource));
-            return lsinput;
-        } catch (FileNotFoundException fne) {
-            throw new RuntimeException(fne);
-        }
-    }
-
-
-
-    public File getFile(String namespace) {
-        init();
-        String fileName = namespace.substring("urn:vpro:".length()).replace(':', '_') + ".xsd";
-        File file = new File(getTempDir(), fileName);
-        return file;
-    }
-
-
-    public File getFileWithDocumentation(String namespace) {
-        File file = getFile(namespace);
-        File fileWithDocumentation = new File(file.getParentFile(), "documented." + file.getName());
-        if (fileWithDocumentation.exists() && fileWithDocumentation.lastModified() < file.lastModified()) {
-            fileWithDocumentation.delete();
-        }
-        if (! fileWithDocumentation.exists()) {
-            DocumentationAdder transformer = new DocumentationAdder(MAPPING.get(namespace));
-            try {
-                transformer.transform(new StreamSource(new FileInputStream(file)), new StreamResult(new FileOutputStream(fileWithDocumentation)));
-                log.info("Generated {} with {}", fileWithDocumentation, transformer);
-            } catch (FileNotFoundException | TransformerException e) {
-                log.error(e.getMessage(), e);
-                try {
-                    Files.copy(Paths.get(file.toURI()), Paths.get(fileWithDocumentation.toURI()), REPLACE_EXISTING);
-                } catch (IOException e1) {
-                    throw new RuntimeException(e1);
-                }
-            }
-
-        }
-        return fileWithDocumentation;
-    }
-
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private void deleteIfOld(File file) {
         // last modified on fs only granalur to seconds.
         if (file.exists() && TimeUnit.SECONDS.convert(file.lastModified(), TimeUnit.MILLISECONDS) < TimeUnit.SECONDS.convert(startTime, TimeUnit.MILLISECONDS)) {
