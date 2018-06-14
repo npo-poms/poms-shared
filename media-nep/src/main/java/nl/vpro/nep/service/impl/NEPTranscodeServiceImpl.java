@@ -189,7 +189,7 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
 
     private HttpHost getHttpHost() {
         URI uri = URI.create(getWorkflowsEndPoint());
-        return new HttpHost(uri.getHost());
+        return new HttpHost(uri.getHost(), uri.getPort(), uri.getScheme());
     }
 
     private String getWorkflowsEndPoint() {
