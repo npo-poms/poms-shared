@@ -82,7 +82,7 @@ public class Editor extends AbstractUser {
         this(principalId, displayName, givenName, familyName, email, broadcaster, Collections.emptySet(), lastLogin);
     }
 
-    @lombok.Builder
+    @lombok.Builder(builderClassName = "Builder")
     Editor(
         String principalId,
         String displayName,
@@ -98,7 +98,7 @@ public class Editor extends AbstractUser {
             broadcasters.add(new BroadcasterEditor(this, broadcaster, true));
         }
         if (roles == null) {
-            log.warn("No roles for {}", principalId);
+            log.warn("No roles for {}", this.principalId);
         }
         this.roles = roles == null ? Collections.emptySet() : Collections.unmodifiableSet(roles);
         this.givenName = givenName;
