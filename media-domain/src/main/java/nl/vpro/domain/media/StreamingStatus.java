@@ -107,6 +107,10 @@ public class StreamingStatus implements Serializable, Displayable  {
         return hasDrm() || hasWithoutDrm();
     }
 
+    public StreamingStatus copy() {
+        return new StreamingStatus(withDrm, withoutDrm);
+    }
+
     public static Encryption preferredEncryption(StreamingStatus streamingStatus) {
         if (streamingStatus == null || streamingStatus.hasWithoutDrm()) {
             return Encryption.NONE;
