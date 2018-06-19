@@ -383,6 +383,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setContentRatings(contentRatings);
         media.setAVType(avType);
         media.setCrids(crids);
+        media.setLanguages(languages);
+        media.setCountries(countries);
 
         try {
             media.setDuration(duration);
