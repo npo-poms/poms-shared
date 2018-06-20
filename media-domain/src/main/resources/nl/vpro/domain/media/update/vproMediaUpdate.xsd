@@ -346,7 +346,7 @@
       <xs:element name="credits" type="xs:string" form="qualified" minOccurs="0"/>
       <xs:element name="date" type="xs:string" form="qualified" minOccurs="0"/>
       <xs:element name="offset" type="xs:duration" form="qualified" minOccurs="0"/>
-      <xs:choice>
+      <xs:choice minOccurs="0">
         <xs:annotation>
           <xs:documentation>
             Every image contain a presentation of the image itself.
