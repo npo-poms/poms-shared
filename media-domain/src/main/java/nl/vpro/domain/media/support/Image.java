@@ -497,6 +497,11 @@ public class Image extends PublishableObject<Image>
         this.secondscreen = mediaObject;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * For images in the media database it is "urn:vpro:media:image:"
+     */
     @Override
     public String getUrnPrefix() {
         return "urn:vpro:media:image:";

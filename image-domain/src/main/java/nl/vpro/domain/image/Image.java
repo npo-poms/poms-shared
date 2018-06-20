@@ -372,6 +372,11 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
         this.cachedInputStream = cachedInputStream;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * For images (in the image database) it is "urn:vpro:image:"
+     *      */
     @Override
     protected String getUrnPrefix() {
         return "urn:vpro:image:";

@@ -74,6 +74,9 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     @NotNull
     private ImageType type;
 
+    /**
+     * The URN of the image object in the media object. This is basicly the id prefixed with {@link Image#getUrnPrefix()}
+     */
     @XmlAttribute(name = "urn")
     private String urn;
 
@@ -240,7 +243,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     public ImageUpdate(Image image) {
         copyFrom(image);
         highlighted = image.isHighlighted();
-        String imageUri = image.getImageUri();
+        this.image = image.getImageUri();
         date = image.getDate();
         offset = image.getOffset();
         urn = image.getUrn();
