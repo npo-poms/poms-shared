@@ -455,12 +455,14 @@ public class Image extends PublishableObject<Image>
         this.date = !StringUtils.isBlank(date) ? date : null;
     }
 
+    @Nonnull
     @Override
     public Image setPublishStopInstant(Instant publishStop) {
         super.setPublishStopInstant(publishStop);
         return this;
     }
 
+    @Nonnull
     @Override
     public Image setPublishStartInstant(Instant publishStart) {
         super.setPublishStartInstant(publishStart);

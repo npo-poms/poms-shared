@@ -2,6 +2,8 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.3
@@ -20,6 +22,7 @@ public class BasicEmbargo implements Embargo<BasicEmbargo> {
         return publishStartInstant;
     }
 
+    @Nonnull
     @Override
     public BasicEmbargo setPublishStartInstant(Instant publishStartInstant) {
         this.publishStartInstant = publishStartInstant;
@@ -31,6 +34,7 @@ public class BasicEmbargo implements Embargo<BasicEmbargo> {
         return publishStopInstant;
     }
 
+    @Nonnull
     @Override
     public BasicEmbargo setPublishStopInstant(Instant publishStopInstant) {
         this.publishStopInstant = publishStopInstant;
