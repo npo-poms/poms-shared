@@ -145,6 +145,16 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     protected java.time.Duration offset;
 
+
+    /**
+     * <p>
+     * Description of the image. If this describes an existing {@link Image} then the type of this
+     * is a {@link String} for {@link Image#getUrn()}.
+     * </p>
+     * <p>
+     * It can also be an {@link ImageData} or an {@link ImageLocation} in which case this object describes a <em>new</em> image.
+     * </p>
+     */
     @XmlElements(value = {
         @XmlElement(name = "imageData", type = ImageData.class),
         @XmlElement(name = "imageLocation", type = ImageLocation.class),
@@ -154,6 +164,10 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     @Valid
     private Object image;
 
+
+    /**
+     * This may during conversion to actual images contain the image uri. This is not modifiable, and therefore is not contained in the XML
+     */
     @XmlTransient
     protected String imageUri;
 
@@ -255,6 +269,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         Embargos.copy(this, result);
         return result;
     }
+
 
     /**
      *

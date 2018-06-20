@@ -360,6 +360,16 @@ public class Image extends PublishableObject<Image>
         this.description = description;
     }
 
+
+    /**
+     * The 'uri' of the image on the image server
+     * This means a string of the form urn:vpro:image:&lt;id&gt;
+     * where id is the database id of the image in the image database.
+     *
+     * Several image may share this image uri, if they represent the exact same image
+     * (but may vary in meta data)
+     *
+     */
     @Override
     public String getImageUri() {
         return imageUri;

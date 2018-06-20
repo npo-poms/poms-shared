@@ -248,7 +248,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     private List<String> crids;
 
 
-    private boolean imported = false;
+    boolean imported = false;
 
 
     protected MediaUpdate() {
@@ -399,7 +399,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         M returnObject = fetchOwnerless();
         TextualObjects.copy(this, returnObject, owner);
         returnObject.setLocations(toSet(locations, l -> l.toLocation(owner)));
-        returnObject.setImages(toList(images, i -> i.toImage(owner, null)));
+        returnObject.setImages(toList(images, i -> i.toImage(owner)));
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> s.toScheduleEvent(owner)));
         return returnObject;
     }
@@ -439,26 +439,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
 
-
-    /**
-     * Please use MediaUpdateService#fetch in stead.
-     */
-    M fetch(ImageImporter importer, AssemblageConfig assemblage) {
-        if(!imported && images != null) {
-            for(ImageUpdate imageUpdate : images) {
-                Image image = importer.save(imageUpdate, assemblage.isImageMetaData());
-
-                if (image == null) {
-                    log.warn("Cannot add null as image to {}");
-                } else {
-                    imageUpdate.setImage(new ImageLocation(image.getImageUri()));
-                }
-            }
-        }
-
-        imported = true;
-        return fetch(assemblage.getOwnerType());
-    }
 
 
     /**
@@ -560,6 +540,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return publishStart;
     }
 
+    @Nonnull
     @Override
     public MediaUpdate<M> setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
@@ -576,6 +557,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return publishStop;
     }
 
+    @Nonnull
     @Override
     public MediaUpdate<M> setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
