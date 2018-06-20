@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import java.time.Instant;
 
+import javax.annotation.Nonnull;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -147,6 +148,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
 
     }
 
+    @Nonnull
     @Override
     public T setPublishStartInstant(Instant publishStart) {
         setStart(publishStart);
@@ -160,6 +162,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
 
     }
 
+    @Nonnull
     @Override
     public T setPublishStopInstant(Instant publishStop) {
         setStop(publishStop);

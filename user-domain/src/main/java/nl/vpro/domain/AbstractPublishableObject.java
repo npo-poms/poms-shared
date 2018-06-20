@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -148,6 +149,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         return publishStart;
     }
 
+    @Nonnull
     @SuppressWarnings("unchecked")
     @Override
     public T setPublishStartInstant(Instant publishStart) {
@@ -166,6 +168,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         return publishStop;
     }
 
+    @Nonnull
     @SuppressWarnings("unchecked")
     @Override
     public T setPublishStopInstant(Instant publishStop) {

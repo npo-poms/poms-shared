@@ -6,6 +6,7 @@ package nl.vpro.domain.media.search;
 
 import java.time.Instant;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Embargo;
@@ -140,6 +141,7 @@ public abstract class PublishableListItem implements Embargo {
         return publishStart;
     }
 
+    @Nonnull
     @Override
     public PublishableListItem setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
@@ -152,6 +154,7 @@ public abstract class PublishableListItem implements Embargo {
         return publishStop;
     }
 
+    @Nonnull
     @Override
     public PublishableListItem setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
