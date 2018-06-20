@@ -278,7 +278,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.avAttributes = AVAttributesUpdate.of(mediaobject.getAvAttributes());
         this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability,PredictionUpdate::of);
         this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == ownerType, LocationUpdate::new);
-        this.images = toList(mediaobject.getImages(), (i) -> i.getOwner() == ownerType, ImageUpdate::new);
+        this.images = toList(
+            mediaobject.getImages(),
+            (i) -> i.getOwner() == ownerType,
+            ImageUpdate::new)
+        ;
         this.tags = toSet(mediaobject.getTags(), Tag::getText);
         this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
