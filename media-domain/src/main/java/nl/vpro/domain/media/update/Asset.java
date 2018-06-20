@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.time.Instant;
 
+import javax.annotation.Nonnull;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -79,6 +80,7 @@ public class Asset implements Embargo<Asset> {
         return publishStart;
     }
 
+    @Nonnull
     @Override
     public Asset setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
@@ -90,6 +92,7 @@ public class Asset implements Embargo<Asset> {
         return publishStop;
     }
 
+    @Nonnull
     @Override
     public Asset setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;

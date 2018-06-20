@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
@@ -254,6 +255,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
 
+    @Nonnull
     @Override
     public Prediction setPublishStartInstant(Instant start) {
         this.publishStart = start;
@@ -266,6 +268,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         return publishStop;
     }
 
+    @Nonnull
     @Override
     public Prediction setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
