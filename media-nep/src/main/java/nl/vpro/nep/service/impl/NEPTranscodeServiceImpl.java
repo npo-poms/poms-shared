@@ -2,12 +2,12 @@ package nl.vpro.nep.service.impl;
 
 
 import io.openapitools.jackson.dataformat.hal.HALMapper;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.Iterator;
@@ -42,7 +42,7 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -104,42 +104,32 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
     @Override
     public WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException {
         CloseableHttpClient client = getHttpClient();
+        String json = MAPPER.writeValueAsString(request);
+        StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
+        HttpPost httpPost = new HttpPost(getWorkflowsEndPoint());
+        httpPost.setEntity(entity);
 
-        try {
-            String json = MAPPER.writeValueAsString(request);
-            StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
-            HttpPost httpPost = new HttpPost(getWorkflowsEndPoint());
-            httpPost.setEntity(entity);
+        HttpResponse response = client.execute(httpPost, clientContext);
 
-            HttpResponse response = client.execute(httpPost, clientContext);
-
-            if (response.getStatusLine().getStatusCode() >= 300) {
-                ByteArrayOutputStream body = new ByteArrayOutputStream();
-                IOUtils.copy(response.getEntity().getContent(), body);
-                throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
-            }
-
-            return MAPPER.readValue(response.getEntity().getContent(), WorkflowExecution.class);
-
-        } catch (JsonProcessingException e) {
-            throw e;
+        if (response.getStatusLine().getStatusCode() >= 300) {
+            ByteArrayOutputStream body = new ByteArrayOutputStream();
+            IOUtils.copy(response.getEntity().getContent(), body);
+            throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
         }
+
+        return MAPPER.readValue(response.getEntity().getContent(), WorkflowExecution.class);
     }
 
     @Nonnull
     @Override
+    @SneakyThrows
     public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
         int batchSize = 20;
-        URIBuilder builder;
-        try {
-            builder = new URIBuilder(getWorkflowsEndPoint());
-            if (status != null) {
-                builder.setParameter("status", status.name());
-            }
-            builder.addParameter("size", String.valueOf(batchSize));
-        } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+        URIBuilder builder = new URIBuilder(getWorkflowsEndPoint());
+        if (status != null) {
+            builder.setParameter("status", status.name());
         }
+        builder.addParameter("size", String.valueOf(batchSize));
 
         AtomicLong totalSize = new AtomicLong(-1);
 
