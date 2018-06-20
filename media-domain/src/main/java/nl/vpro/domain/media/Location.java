@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -506,6 +507,7 @@ public class Location extends PublishableObject<Location>
         return super.getPublishStartInstant();
     }
 
+    @Nonnull
     @Override
     public Location setPublishStartInstant(Instant publishStart) {
         if (! Objects.equals(this.publishStart, publishStart)) {
@@ -541,6 +543,7 @@ public class Location extends PublishableObject<Location>
         return super.getPublishStopInstant();
     }
 
+    @Nonnull
     @Override
     public Location setPublishStopInstant(Instant publishStop) {
         if (! Objects.equals(this.publishStop, publishStop)) {

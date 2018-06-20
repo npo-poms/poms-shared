@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import javax.activation.DataHandler;
+import javax.annotation.Nonnull;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.ConstraintViolation;
@@ -153,6 +154,9 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     @Valid
     private Object image;
 
+    @XmlTransient
+    protected String imageUri;
+
     public ImageUpdate() {
     }
 
@@ -230,25 +234,24 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         copyFrom(image);
         highlighted = image.isHighlighted();
         String imageUri = image.getImageUri();
-        this.image = imageUri != null && imageUri.startsWith("urn:") ?
-            imageUri : new ImageLocation(image.getImageUri());
         date = image.getDate();
         offset = image.getOffset();
         urn = image.getUrn();
     }
 
-    public Image toImage(String imageUri) {
-        return toImage(OwnerType.BROADCASTER, imageUri);
+    public Image toImage() {
+        return toImage(OwnerType.BROADCASTER);
     }
 
-     public Image toImage(OwnerType owner, String imageUri) {
-        Image result = new Image(owner, imageUri);
+    public Image toImage(OwnerType owner) {
+        Image result = new Image(owner);
         result.setCreationInstant(null); // not supported by update format. will be set by persistence layer
         result.copyFrom(this);
         result.setHighlighted(highlighted);
         result.setDate(date);
         result.setOffset(offset);
         result.setUrn(urn);
+        result.setImageUri(imageUri);
         Embargos.copy(this, result);
         return result;
     }
@@ -258,7 +261,8 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
      * @param metadata Incoming metadata from the image server
      */
     public Image toImage(ImageMetadata<?> metadata) {
-        Image result = toImage(metadata.getImageUri());
+        Image result = toImage();
+        result.setImageUri(metadata.getImageUri());
         result.copyFromIfSourceSet(this);
         return result;
     }
@@ -274,6 +278,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         urn = id == null ? null : Image.BASE_URN + id;
     }
 
+    @Nonnull
     @Override
     public ImageUpdate setPublishStartInstant(Instant publishStart) {
         this.publishStartInstant = publishStart;
@@ -285,6 +290,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         return publishStopInstant;
     }
 
+    @Nonnull
     @Override
     public ImageUpdate setPublishStopInstant(Instant publishStop) {
         this.publishStopInstant = publishStop;
