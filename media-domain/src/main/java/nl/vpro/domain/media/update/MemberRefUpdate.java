@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -74,15 +75,18 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     }
 
     @Override
-    public int compareTo(MemberRefUpdate memberRefUpdate) {
-        if(getPosition() == null) {
-            return -1;
-        } else if (memberRefUpdate.getPosition() == null) {
+    public int compareTo(@Nonnull MemberRefUpdate memberRefUpdate) {
+        if (position != null && memberRefUpdate.getPosition() != null) {
+            int diff = getPosition() - memberRefUpdate.getPosition();
+            if (diff != 0) {
+                return diff;
+            }
+        }
+        if (position == null) {
             return 1;
         }
-        int diff = memberRefUpdate.getPosition() - getPosition();
-        if (diff != 0) {
-            return diff;
+        if (memberRefUpdate.getPosition() == null) {
+            return -1;
         }
         return ObjectUtils.compare(memberRefUpdate.getMediaRef(), getMediaRef());
     }
