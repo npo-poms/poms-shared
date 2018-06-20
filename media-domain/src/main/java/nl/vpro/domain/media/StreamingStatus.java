@@ -73,7 +73,7 @@ public class StreamingStatus implements Serializable, Displayable  {
         return Arrays.asList(withDrm(offline()), withDrm(unset()), withoutDrm(offline()), withoutDrm(unset()), withAndWithoutDrm());
     }
 
-      public static List<StreamingStatus> notAvailableStatuses() {
+    public static List<StreamingStatus> notAvailableStatuses() {
           return Arrays.asList(unset(), offline());
     }
 
@@ -82,6 +82,10 @@ public class StreamingStatus implements Serializable, Displayable  {
     public StreamingStatus(Value withDrm, Value withoutDrm) {
         this.withDrm = withDrm;
         this.withoutDrm = withoutDrm;
+    }
+
+    public StreamingStatus copy() {
+        return new StreamingStatus(withDrm, withoutDrm);
     }
 
 
