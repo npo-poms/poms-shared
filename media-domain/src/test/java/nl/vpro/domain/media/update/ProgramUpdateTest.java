@@ -182,8 +182,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetPublishStopFromMediaObject() throws Exception {
         ProgramUpdate update = ProgramUpdate.create(
-            program().images(Image.builder().publishStop(Instant.ofEpochMilli(5444)).build()
-        ));
+            program()
+                .images(
+                    Image.builder()
+                        .publishStop(Instant.ofEpochMilli(5444))
+                        .imageUri("urn:image:123")
+                        .build()
+                )
+        );
         update.setVersion(null);
 
         String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
@@ -191,7 +197,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "    <scheduleEvents/>\n" +
             "    <images>\n" +
             "        <image type=\"PICTURE\" publishStop=\"1970-01-01T01:00:05.444+01:00\" highlighted=\"false\">\n" +
-            "            <imageLocation/>\n" +
+            "            <urn>urn:image:123</urn>\n" +
             "        </image>\n" +
             "    </images>\n" +
             "    <segments/>\n" +
@@ -361,6 +367,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetMemberOf() throws Exception {
         ProgramUpdate update = programUpdate();
+        assertThat(update.getMid()).isNull();
         update.setMemberOf(new TreeSet<>(Collections.singletonList(new MemberRefUpdate(20, "urn:vpro:media:group:864"))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><memberOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</memberOf><locations/><scheduleEvents/><images/><segments/></program>";
@@ -371,10 +378,15 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         rounded.getMemberOf().add(new MemberRefUpdate(2, "MID_123"));
         assertThat(rounded.fetch().getMemberOf()).hasSize(2);
 
+        // 2 < 20, so the first one is by mid.
+
         MemberRefUpdate first = rounded.getMemberOf().first();
+        assertThat(first.getMediaRef()).isEqualTo("MID_123");
         rounded.getMemberOf().remove(first);
+        // So, if we remove first, that the second remains.
         assertThat(rounded.fetch().getMemberOf()).hasSize(1);
         assertThat(rounded.fetch().getMemberOf().first().getMediaRef()).isEqualTo("urn:vpro:media:group:864");
+
         rounded.setMemberOf(new TreeSet<>(Arrays.asList(new MemberRefUpdate(3, "MID_12356"))));
         assertThat(rounded.fetch().getMemberOf().first().getMediaRef()).isEqualTo("MID_12356");
 
