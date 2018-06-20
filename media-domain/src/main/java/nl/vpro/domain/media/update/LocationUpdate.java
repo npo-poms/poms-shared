@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 
+import javax.annotation.Nonnull;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -211,6 +212,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
 
     }
 
+    @Nonnull
     @Override
     public LocationUpdate setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
@@ -223,6 +225,7 @@ public class LocationUpdate implements Comparable<LocationUpdate>, EmbargoDeprec
 
     }
 
+    @Nonnull
     @Override
     public LocationUpdate setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
