@@ -160,16 +160,9 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         @XmlElement(name = "imageLocation", type = ImageLocation.class),
         @XmlElement(name = "urn", type = String.class)
     })
-    @NotNull
     @Valid
     private Object image;
 
-
-    /**
-     * This may during conversion to actual images contain the image uri. This is not modifiable, and therefore is not contained in the XML
-     */
-    @XmlTransient
-    protected String imageUri;
 
     public ImageUpdate() {
     }
@@ -265,7 +258,9 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         result.setDate(date);
         result.setOffset(offset);
         result.setUrn(urn);
-        result.setImageUri(imageUri);
+        if (image instanceof String) {
+            result.setImageUri((String) image);
+        }
         Embargos.copy(this, result);
         return result;
     }
