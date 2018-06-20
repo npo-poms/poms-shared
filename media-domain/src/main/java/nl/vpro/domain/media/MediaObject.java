@@ -2313,6 +2313,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         this.locationAuthorityUpdate = ceresUpdate;
     }
 
+    @Nonnull
     @Override
     public MediaObject setPublishStartInstant(Instant publishStart) {
         if (!Objects.equals(this.publishStart, publishStart)) {
@@ -2324,6 +2325,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return super.setPublishStartInstant(publishStart);
     }
 
+    @Nonnull
     @Override
     public MediaObject setPublishStopInstant(Instant publishStop) {
         if (!Objects.equals(this.publishStop, publishStop)) {
