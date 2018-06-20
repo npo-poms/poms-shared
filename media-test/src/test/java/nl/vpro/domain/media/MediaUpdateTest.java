@@ -227,7 +227,7 @@ public class MediaUpdateTest {
             "</program>\n");
 
         JAXBTestUtil.roundTripAndSimilar(rounded.fetch(OwnerType.BROADCASTER), "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-01T01:00:00+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "    <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "    <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
@@ -236,9 +236,13 @@ public class MediaUpdateTest {
             "    <description owner=\"BROADCASTER\" type=\"MAIN\">Main description</description>\n" +
             "    <description owner=\"BROADCASTER\" type=\"SHORT\">Short description</description>\n" +
             "    <description owner=\"BROADCASTER\" type=\"EPISODE\">Episode description MIS</description>\n" +
-            "     <tag>tag1</tag>\n" +
+            "    <tag>tag1</tag>\n" +
             "    <tag>tag2</tag>\n" +
             "    <tag>tag3</tag>\n" +
+            "    <country code=\"GB\">United Kingdom</country>\n" +
+            "    <country code=\"US\">United States</country>\n" +
+            "    <language code=\"nl\">Nederlands</language>\n" +
+            "    <language code=\"fr\">Frans</language>\n" +
             "    <duration>P0DT2H0M0.000S</duration>\n" +
             "    <credits/>\n" +
             "    <locations>\n" +
@@ -270,7 +274,7 @@ public class MediaUpdateTest {
             "            </avAttributes>\n" +
             "        </location>\n" +
             "    </locations>\n" +
-            "     <scheduleEvents>\n" +
+            "    <scheduleEvents>\n" +
             "        <scheduleEvent channel=\"NED3\">\n" +
             "            <guideDay>1969-12-31+01:00</guideDay>\n" +
             "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
@@ -299,19 +303,21 @@ public class MediaUpdateTest {
             "    <images>\n" +
             "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:2\">\n" +
             "            <shared:title>Eerste plaatje met credits</shared:title>\n" +
+            "            <shared:imageUri>urn:vpro:image:11234</shared:imageUri>\n" +
             "            <shared:credits>CREDITS</shared:credits>\n" +
             "            <shared:source>SOURCE</shared:source>\n" +
             "            <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
             "        </shared:image>\n" +
             "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:3\">\n" +
             "            <shared:title>Tweede plaatje met credits</shared:title>\n" +
+            "            <shared:imageUri>urn:vpro:image:15678</shared:imageUri>\n" +
             "            <shared:credits>CREDITS</shared:credits>\n" +
             "            <shared:source>SOURCE</shared:source>\n" +
             "            <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
             "        </shared:image>\n" +
             "    </images>\n" +
             "    <segments>\n" +
-            "        <segment type=\"SEGMENT\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-01T01:00:00+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\">\n" +
+            "        <segment type=\"SEGMENT\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\">\n" +
             "            <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "            <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "            <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
@@ -320,6 +326,13 @@ public class MediaUpdateTest {
             "            <description owner=\"BROADCASTER\" type=\"MAIN\">Main description</description>\n" +
             "            <description owner=\"BROADCASTER\" type=\"SHORT\">Short description</description>\n" +
             "            <description owner=\"BROADCASTER\" type=\"EPISODE\">Episode description MIS</description>\n" +
+            "            <tag>tag1</tag>\n" +
+            "            <tag>tag2</tag>\n" +
+            "            <tag>tag3</tag>\n" +
+            "            <country code=\"GB\">United Kingdom</country>\n" +
+            "            <country code=\"US\">United States</country>\n" +
+            "            <language code=\"nl\">Nederlands</language>\n" +
+            "            <language code=\"fr\">Frans</language>\n" +
             "            <duration>P0DT0H1M40.000S</duration>\n" +
             "            <credits/>\n" +
             "            <locations>\n" +
@@ -351,7 +364,28 @@ public class MediaUpdateTest {
             "                    </avAttributes>\n" +
             "                </location>\n" +
             "            </locations>\n" +
-            "            <scheduleEvents/>\n" +
+            "            <scheduleEvents>\n" +
+            "                <scheduleEvent channel=\"NED3\">\n" +
+            "                    <guideDay>1969-12-31+01:00</guideDay>\n" +
+            "                    <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+            "                    <duration>P0DT0H0M0.200S</duration>\n" +
+            "                </scheduleEvent>\n" +
+            "                <scheduleEvent channel=\"NED3\">\n" +
+            "                    <guideDay>1970-01-03+01:00</guideDay>\n" +
+            "                    <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+            "                    <duration>P0DT0H0M0.050S</duration>\n" +
+            "                </scheduleEvent>\n" +
+            "                <scheduleEvent channel=\"HOLL\">\n" +
+            "                    <guideDay>1970-01-08+01:00</guideDay>\n" +
+            "                    <start>1970-01-09T01:00:00.350+01:00</start>\n" +
+            "                    <duration>P0DT0H0M0.250S</duration>\n" +
+            "                </scheduleEvent>\n" +
+            "                <scheduleEvent channel=\"CONS\">\n" +
+            "                    <guideDay>1970-01-10+01:00</guideDay>\n" +
+            "                    <start>1970-01-11T01:00:00.600+01:00</start>\n" +
+            "                    <duration>P0DT0H0M0.200S</duration>\n" +
+            "                </scheduleEvent>\n" +
+            "            </scheduleEvents>\n" +
             "            <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +
             "            <relation broadcaster=\"EO\" type=\"KOOR\">Ulfts Mannenkoor</relation>\n" +
             "            <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
@@ -359,12 +393,14 @@ public class MediaUpdateTest {
             "            <images>\n" +
             "                <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:2\">\n" +
             "                    <shared:title>Eerste plaatje met credits</shared:title>\n" +
+            "                    <shared:imageUri>urn:vpro:image:11234</shared:imageUri>\n" +
             "                    <shared:credits>CREDITS</shared:credits>\n" +
             "                    <shared:source>SOURCE</shared:source>\n" +
             "                    <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
             "                </shared:image>\n" +
             "                <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:3\">\n" +
             "                    <shared:title>Tweede plaatje met credits</shared:title>\n" +
+            "                    <shared:imageUri>urn:vpro:image:15678</shared:imageUri>\n" +
             "                    <shared:credits>CREDITS</shared:credits>\n" +
             "                    <shared:source>SOURCE</shared:source>\n" +
             "                    <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
