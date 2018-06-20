@@ -176,6 +176,9 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
         return (T) this;
     }
 
+    /**
+     * <p>Publishable objects have a link {@link #getUrn()} which is basicly the (database) id ({@link #getId()}} prefixed with the 'urn prefix.</p>
+     */
     protected abstract String getUrnPrefix();
 
     // can be resolved if indeed no need to override any more
