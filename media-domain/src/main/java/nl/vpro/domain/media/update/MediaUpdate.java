@@ -371,6 +371,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 .setLocations(locations.stream().map(LocationUpdate::toLocation).collect(Collectors.toCollection(TreeSet::new)));
             locations = null;
         }
+
+         if (notTransforming(predictions)) {
+             mediaObject()
+                 .setPredictions(predictions.stream().map(PredictionUpdate::toPrediction).collect(Collectors.toCollection(TreeSet::new)));
+            predictions = null;
+        }
         if (notTransforming(relations)) {
             mediaObject().setRelations(relations.stream().map(RelationUpdate::toRelation).collect(Collectors.toCollection(TreeSet::new)));
             relations = null;
