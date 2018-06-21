@@ -389,6 +389,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setCrids(crids);
         media.setLanguages(languages);
         media.setCountries(countries);
+        media.setPredictions(toSet(predictions, PredictionUpdate::toPrediction));
 
         try {
             media.setDuration(duration);
