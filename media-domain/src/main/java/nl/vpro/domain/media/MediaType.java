@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.SneakyThrows;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -613,6 +615,29 @@ public enum MediaType {
     public static MediaType getMediaType(MediaObject media) {
         SubMediaType type = media.getType();
         return type == null ? null : type.getMediaType();
+    }
+
+    @SneakyThrows
+    public MediaObject createInstance() {
+
+        Class<? extends MediaObject> clazz = getMediaObjectClass();
+
+        if (Program.class.isAssignableFrom(getMediaObjectClass())) {
+            Program o = (Program) clazz.newInstance();
+            o.setType((ProgramType) getSubType());
+            return o;
+        }
+        if (Group.class.isAssignableFrom(getMediaObjectClass())) {
+            Group o = (Group) clazz.newInstance();
+            o.setType((GroupType) getSubType());
+            return o;
+        }
+        if (Segment.class.isAssignableFrom(getMediaObjectClass())) {
+            Segment o = (Segment) clazz.newInstance();
+            o.setType((SegmentType) getSubType());
+            return o;
+        }
+        throw new IllegalStateException();
     }
 
     /**
