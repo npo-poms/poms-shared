@@ -1,5 +1,6 @@
 package nl.vpro.nep.service.impl;
 
+import lombok.Lombok;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.OpenMode;
@@ -14,6 +15,8 @@ import java.io.InputStream;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.EnumSet;
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
@@ -22,7 +25,6 @@ import org.junit.Test;
 
 import nl.vpro.util.FileSizeFormatter;
 
-import static nl.vpro.util.ExceptionUtils.wrapException;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 /**
@@ -127,6 +129,29 @@ public class NEPSSHJDownloadServiceImplTest {
 
 
     }
+
+
+    /**
+     * Wraps a {@link Callable} in a {@link Supplier}.
+     *
+     * You may need a supplier, but have code that throws an exception. Like this:
+     *
+     * {@code
+     *   service.download(file, ExceptionUtils.wrapException(() -> new FileOutputStream(destFile)))
+     * }
+     *
+     * The point is that otherwise this nice lambda gets ugly because of the try/catch block.
+     */
+    public static <T> Supplier<T> wrapException(Callable<T> b) {
+        return () -> {
+            try {
+                return b.call();
+            } catch (Throwable t) {
+                throw Lombok.sneakyThrow(t);
+            }
+        };
+    }
+
 
 
 }
