@@ -20,8 +20,15 @@ import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 public interface NEPTranscodeService {
 
     @Nonnull
-    WorkflowExecution transcode(@Nonnull WorkflowExecutionRequest request) throws IOException;
+    WorkflowExecution transcode(
+        @Nonnull WorkflowExecutionRequest request
+    ) throws IOException;
 
     @Nonnull
-    Iterator<WorkflowExecution> getTranscodeStatuses(@Nullable String mid, @Nullable StatusType status, @Nullable Instant from, @Nullable  Long limit);
+    Iterator<WorkflowExecution> getTranscodeStatuses(
+        @Nullable String mid,
+        @Nullable StatusType status,
+        @Nullable Instant from,
+        @Nullable  Long limit
+    );
 }
