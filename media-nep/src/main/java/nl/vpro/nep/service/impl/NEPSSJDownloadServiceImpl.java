@@ -12,18 +12,19 @@ import java.time.Instant;
 import java.util.EnumSet;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.Slf4jHelper;
-import nl.vpro.util.FileMetadata;
 import nl.vpro.nep.service.NEPDownloadService;
-
-import static org.apache.commons.io.IOUtils.copy;
+import nl.vpro.util.FileMetadata;
 
 
 /**
@@ -59,17 +60,18 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+    public void download(@Nonnull String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
         log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, ftpHost, hostKey);
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
         }
-        try {
+        try (OutputStream out = outputStream.get()) {
             checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {
-                if (outputStream != null) {
-                    try (InputStream in = handle.new ReadAheadRemoteFileInputStream(32)) {
+                if (out  != null) {
+                    try (InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
+                    ) {
 
-                        long copy = copy(in, outputStream, 1024 * 10);
+                        long copy = IOUtils.copy(in, out, 1024 * 10);
                         log.info("Copied {} bytes", copy);
                     } catch (SFTPException sfte) {
                         log.error(sfte.getMessage());

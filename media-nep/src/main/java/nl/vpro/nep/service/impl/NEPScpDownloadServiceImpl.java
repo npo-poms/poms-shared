@@ -11,15 +11,17 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Value;
 
-import nl.vpro.util.FileMetadata;
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.CommandExecutor;
 import nl.vpro.util.CommandExecutorImpl;
+import nl.vpro.util.FileMetadata;
 
 /**
  * See MSE-4032. It's kind of a disgrace that we have to fall back to external commands...
@@ -86,11 +88,13 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(String nepFile, OutputStream outputStream, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+    public void download(@Nonnull String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
-            if (outputStream != null) {
-                scp.execute(outputStream, getUrl(nepFile), "/dev/stdout");
+            try (OutputStream out = outputStream.get()){
+                if (out != null) {
+                    scp.execute(out, getUrl(nepFile), "/dev/stdout");
+                }
             }
         } catch (IOException e) {
             log.error(e.getMessage(), e);
