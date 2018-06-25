@@ -474,6 +474,7 @@ public enum MediaType {
 
     final Class<? extends MediaObject> clazz;
     final Constructor<?> constructor;
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private Optional<Method> setType;
 
     MediaType(Class<? extends MediaObject> clazz)  {
@@ -672,7 +673,7 @@ public enum MediaType {
             for(MediaType type : types) {
                 c.add(type.getMediaObjectClass());
             }
-            return c.toArray(new Class<?>[c.size()]);
+            return c.toArray(new Class<?>[0]);
         }
     }
 
