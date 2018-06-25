@@ -309,11 +309,6 @@ public enum MediaType {
             return SegmentType.SEGMENT;
 
         }
-
-        @Override
-        public List<SubMediaType> getSubTypes() {
-            return Arrays.asList(SegmentType.values());
-        }
     },
 /*
     COLLECTION {
@@ -415,6 +410,25 @@ public enum MediaType {
 
         }
     },
+     SEGMENTTYPE(Segment.class) {
+        @Override
+        public String toString() {
+            return "Segments";
+        }
+
+
+        @Override
+        public SegmentType getSubType() {
+            return null;
+
+        }
+
+        @Override
+        public List<SubMediaType> getSubTypes() {
+            return Arrays.asList(SegmentType.values());
+        }
+    },
+
     /**
      * @since 2.1
      */
@@ -638,6 +652,13 @@ public enum MediaType {
             return o;
         }
         throw new IllegalStateException();
+    }
+
+    /**
+     * @since 5.8
+     */
+    public static MediaType[] leafValues() {
+        return Arrays.stream(values()).filter(f -> f.getSubType() != null).toArray(MediaType[]::new);
     }
 
     /**
