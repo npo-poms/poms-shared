@@ -656,6 +656,7 @@ public enum MediaType {
     }
 
     /**
+     * Returns all 'leaf' mediaTypes. That are all non abstract instances, that actually have a certain {@link #getSubType()}.
      * @since 5.8
      */
     public static MediaType[] leafValues() {
