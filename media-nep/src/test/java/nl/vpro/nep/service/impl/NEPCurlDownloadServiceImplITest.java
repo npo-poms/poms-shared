@@ -17,7 +17,7 @@ import nl.vpro.util.FileSizeFormatter;
  * @since 5.8
  */
 @Slf4j
-public class NEPCurlDownloadServiceImplTest {
+public class NEPCurlDownloadServiceImplITest {
 
     @Test
     public void test() throws IOException {
