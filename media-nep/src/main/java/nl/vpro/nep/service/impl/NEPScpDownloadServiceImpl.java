@@ -50,7 +50,12 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Value("${nep.sftp.hostkey}") String hostkey
     ) {
         this.url = username + "@" + ftpHost;
-        File scpcommand = CommandExecutorImpl.getExecutable("/usr/bin/scp").orElseThrow(IllegalArgumentException::new);
+
+        // Dick Snippe [11:55 AM]
+        //Juf, juf, ik weet het juf (denk ik). Het is afhankelijk van de scp client die je gebruikt. Ik denk dat de server na +/- 2Gb een "re-key" doet en oudere scp clients ondersteunen dat niet. Probeer op ons platform eens het verschil tussen /usr/bin/scp (oude client, gaat fout) en /local/bin/scp (nieuwe client, gaat goed)
+        File scpcommand = CommandExecutorImpl.getExecutable(
+            "/local/bin/scp", // We need newer version, because server does 'rekey'
+            "/usr/bin/scp").orElseThrow(IllegalArgumentException::new);
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
         CommandExecutor scptry = null;
