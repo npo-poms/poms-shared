@@ -115,7 +115,34 @@
 
   <xs:simpleType name="mediaTypeEnum">
     <xs:restriction base="xs:string">
-      <xs:enumeration value="MEDIA"/>
+      <xs:enumeration value="MEDIA">
+        <xs:annotation>
+          <xs:documentation>
+          The abstract type denoting every possible media type
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+       <xs:enumeration value="GROUP">
+        <xs:annotation>
+          <xs:documentation>
+          The abstract type denoting every possible group type
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+       <xs:enumeration value="PROGRAM">
+         <xs:annotation>
+          <xs:documentation>
+          The abstract type denoting every possible program type
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SEGMENTTYPE">
+        <xs:annotation>
+          <xs:documentation>
+          The abstract type denoting every possible segment type
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="STRAND"/>
       <xs:enumeration value="ALBUM"/>
       <xs:enumeration value="PLAYLIST"/>
@@ -133,6 +160,7 @@
       <xs:enumeration value="SEGMENT"/>
       <xs:enumeration value="VISUALRADIO"/>
       <xs:enumeration value="VISUALRADIOSEGMENT"/>
+
       <xs:enumeration value="PROMO"/>
       <xs:enumeration value="RECORDING"/>
       <xs:enumeration value="COLLECTION"/>
