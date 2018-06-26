@@ -8,6 +8,7 @@ import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -43,17 +44,14 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
         @Value("${nep.sftp.password}") String password,
-        @Value("${nep.sftp.hostkey}") String hostkey
+        @Value("${nep.sftp.hostkey}") String hostkey,
+        @Value("${executables.curl}") List<String> executables
     ) {
         this.ftpHost = ftpHost;
         String user = username + ":" + password;
 
         curl = CommandExecutorImpl.builder()
-            .executablesPaths(
-                "/usr/local/opt/curl/bin/curl", // brew
-                "/opt/local/bin/curl", // macports
-                "/usr/bin/curl" // linux
-            )
+            .executablesPaths(executables)
             .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
             .useFileCache(true)
             .commonArgs(Arrays.asList("-s", "-u", user, "--insecure"))
