@@ -15,6 +15,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -86,7 +87,10 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
     }
 
     protected void checkAvailabilityAndConsume(
-        String nepFile, Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer, Consumer<RemoteFile> remoteFileConsumer) throws IOException  {
+        @Nonnull String nepFile,
+        @Nullable Duration timeout,
+        @Nullable Function<FileMetadata, Boolean> descriptorConsumer,
+        @Nonnull  Consumer<RemoteFile> remoteFileConsumer) throws IOException  {
         try(final SSHClient sessionFactory = createClient();
             final SFTPClient sftp = sessionFactory.newSFTPClient()) {
             Instant start = Instant.now();
