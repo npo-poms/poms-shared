@@ -83,6 +83,7 @@ public interface MediaBackendRestService {
 
     @GET
     @Path("/exists/{mid:.*}")
+    @Produces(MediaType.TEXT_PLAIN)
     boolean exists(
         @Encoded @PathParam(MID) String mid,
         @Context HttpServletRequest request,
