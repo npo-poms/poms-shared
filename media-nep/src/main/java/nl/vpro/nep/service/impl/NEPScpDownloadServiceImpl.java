@@ -54,8 +54,6 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     ) {
         this.url = username + "@" + ftpHost;
 
-        // Dick Snippe [11:55 AM]
-        //Juf, juf, ik weet het juf (denk ik). Het is afhankelijk van de scp client die je gebruikt. Ik denk dat de server na +/- 2Gb een "re-key" doet en oudere scp clients ondersteunen dat niet. Probeer op ons platform eens het verschil tussen /usr/bin/scp (oude client, gaat fout) en /local/bin/scp (nieuwe client, gaat goed)
         File scpcommand = CommandExecutorImpl
             .getExecutableFromStrings(scpExecutables)
             .orElseThrow(IllegalArgumentException::new);
