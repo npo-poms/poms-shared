@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -78,6 +79,16 @@ public interface MediaBackendRestService {
         @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
+
+
+    @GET
+    @Path("/exists/{mid:.*}")
+    boolean exists(
+        @Encoded @PathParam(MID) String mid,
+        @Context HttpServletRequest request,
+        @Context HttpServletResponse response
+    );
+
 
     @DELETE
     @Path("{entity:(media|program|group|segment)}/{id}")
