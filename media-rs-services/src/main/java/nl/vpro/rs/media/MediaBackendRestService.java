@@ -79,6 +79,15 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
+
+    @GET
+    @Path("/exists/{mid:.*}")
+    boolean exists(
+        @Encoded @PathParam(MID) String mid,
+        @Context HttpServletRequest request
+    );
+
+
     @DELETE
     @Path("{entity:(media|program|group|segment)}/{id}")
     @Produces(MediaType.WILDCARD)
