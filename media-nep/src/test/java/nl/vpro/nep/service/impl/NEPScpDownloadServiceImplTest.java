@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -26,11 +27,16 @@ public class NEPScpDownloadServiceImplTest {
 
         Instant start = Instant.now();
 
-        NEPDownloadService impl = new NEPScpDownloadServiceImpl( "sftp-itemizer.nepworldwide.nl",
+        NEPDownloadService impl = new NEPScpDownloadServiceImpl(
+            "sftp-itemizer.nepworldwide.nl",
             "npo",
             "***REMOVED***",
-            "AAAAB3NzaC1yc2EAAAADAQABAAABAQCV4gmmgKyPVyOyZv1jdVpu/KzS9w2v4/vxDeKbuXvl0tldvDAmMi/QY1XvLueuZJy8PmilpGj6po1JuU0V2RGX/Js18b9lyCAQptdaeUk45lYvM8bpGfkzB509i3+CaM6U1onEIftFs4vzDLMwHrZQ6kdlRGGs6bLYy1vpqs7h6mO/XGDeLLVpjLPZbz/TrWt98kinn+Rg/TwYV0VNyqac5DkpWtFEUucIrq6zZs1q3Pw8YHMo02BWlWXFR/yi41ODb+RH1dTlZEs3vrMgwFvVD5c+4EKy1hZ65SJ6xVXwaMyN4w1LaHLwwe3K8rNDS+m5gyaswhdeZthqDiXysFwj"
+            "AAAAB3NzaC1yc2EAAAADAQABAAABAQCV4gmmgKyPVyOyZv1jdVpu/KzS9w2v4/vxDeKbuXvl0tldvDAmMi/QY1XvLueuZJy8PmilpGj6po1JuU0V2RGX/Js18b9lyCAQptdaeUk45lYvM8bpGfkzB509i3+CaM6U1onEIftFs4vzDLMwHrZQ6kdlRGGs6bLYy1vpqs7h6mO/XGDeLLVpjLPZbz/TrWt98kinn+Rg/TwYV0VNyqac5DkpWtFEUucIrq6zZs1q3Pw8YHMo02BWlWXFR/yi41ODb+RH1dTlZEs3vrMgwFvVD5c+4EKy1hZ65SJ6xVXwaMyN4w1LaHLwwe3K8rNDS+m5gyaswhdeZthqDiXysFwj",
             //"94:06:26:d5:e4:f5:18:b5:52:a9:19:b1:97:db:94:9e"
+            Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
+            Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass")
+
+
             );
         log.info("using {}", impl);
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
