@@ -9,11 +9,13 @@ import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -39,7 +41,6 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final String url;
     private final CommandExecutor scp;
     private final NEPSSJDownloadServiceImpl sshj;
-
     private final static Map<String, File> knownHosts = new HashMap<>();
 
 
@@ -47,15 +48,17 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
         @Value("${nep.sftp.password}") String password,
-        @Value("${nep.sftp.hostkey}") String hostkey
+        @Value("${nep.sftp.hostkey}") String hostkey,
+        @Value("${executables.scp}") List<String> scpExecutables,
+        @Value("${executables.sshpass}") List<String> sshpassExecutables
     ) {
         this.url = username + "@" + ftpHost;
 
         // Dick Snippe [11:55 AM]
         //Juf, juf, ik weet het juf (denk ik). Het is afhankelijk van de scp client die je gebruikt. Ik denk dat de server na +/- 2Gb een "re-key" doet en oudere scp clients ondersteunen dat niet. Probeer op ons platform eens het verschil tussen /usr/bin/scp (oude client, gaat fout) en /local/bin/scp (nieuwe client, gaat goed)
-        File scpcommand = CommandExecutorImpl.getExecutable(
-            "/local/bin/scp", // We need newer version, because server does 'rekey'
-            "/usr/bin/scp").orElseThrow(IllegalArgumentException::new);
+        File scpcommand = CommandExecutorImpl
+            .getExecutableFromStrings(scpExecutables)
+            .orElseThrow(IllegalArgumentException::new);
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
         sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
         CommandExecutor scptry = null;
@@ -66,7 +69,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
             }
             scptry = CommandExecutorImpl.builder()
-                .executablesPaths("/usr/bin/sshpass", "/opt/local/bin/sshpass")
+                .executablesPaths(sshpassExecutables)
                 .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
                 .useFileCache(true)
                 .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-q", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile))
@@ -93,7 +96,11 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(@Nonnull String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+    public void download(
+        @Nonnull String nepFile,
+        @Nonnull Supplier<OutputStream> outputStream,
+        @Nonnull Duration timeout,
+        Function<FileMetadata, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             try (OutputStream out = outputStream.get()){
@@ -118,7 +125,10 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     }
 
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
+    protected void checkAvailability(
+        @Nonnull String nepFile,
+        @Nullable Duration timeout,
+        @Nonnull Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
     }
 
