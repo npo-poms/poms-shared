@@ -27,6 +27,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 @XmlType(name = "mediaTypeEnum")
 public enum MediaType {
+
+    /**
+     * The abstract type denoting every possible media type
+     */
     MEDIA(MediaObject.class) {
         @Override
         public String toString() {
@@ -47,7 +51,8 @@ public enum MediaType {
                     Stream.concat(
                         Arrays.stream(ProgramType.values()),
                         Arrays.stream(GroupType.values())),
-                    Arrays.stream(SegmentType.values())
+                    Arrays.stream(SegmentType.values()
+                    )
                 ).collect(Collectors.toList());
 
         }
@@ -55,6 +60,9 @@ public enum MediaType {
 
     },
 
+     /**
+     * The abstract type denoting every type of a {@link Program}
+     */
     PROGRAM(Program.class) {
         @Override
         public String toString() {
@@ -166,6 +174,10 @@ public enum MediaType {
         }
     },
 
+
+    /**
+     * The abstract type denoting every type of a {@link Group}
+     */
 
     GROUP(Group.class) {
         @Override
@@ -410,6 +422,9 @@ public enum MediaType {
 
         }
     },
+    /**
+     * The abstract type denoting every type of a {@link Segment}
+     */
      SEGMENTTYPE(Segment.class) {
         @Override
         public String toString() {
