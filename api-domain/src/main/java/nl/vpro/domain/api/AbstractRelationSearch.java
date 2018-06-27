@@ -1,5 +1,9 @@
 package nl.vpro.domain.api;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.function.Predicate;
@@ -21,6 +25,8 @@ import nl.vpro.domain.media.Relation;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlTransient
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public abstract class AbstractRelationSearch extends AbstractSearch
     implements Predicate<Relation>, Iterable<AbstractTextMatcher<?>> {
     @Valid
