@@ -2383,6 +2383,14 @@ public enum Channel implements Displayable, XmlValued {
             return "Viceland";
         }
     }
+    ,
+    @XmlEnumValue("ONL1")
+    ONL1(VIDEO) {
+        @Override
+        public String toString() {
+            return "NPO Online 1";
+        }
+    }
     ;
     private AVType avType;
 
