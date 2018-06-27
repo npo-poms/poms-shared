@@ -93,7 +93,11 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(@Nonnull String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+    public void download(
+        @Nonnull String nepFile,
+        @Nonnull Supplier<OutputStream> outputStream,
+        @Nonnull Duration timeout,
+        Function<FileMetadata, Boolean> descriptorConsumer) {
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             try (OutputStream out = outputStream.get()){
