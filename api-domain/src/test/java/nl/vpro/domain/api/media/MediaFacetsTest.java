@@ -1,5 +1,6 @@
 package nl.vpro.domain.api.media;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.time.Duration;
 import java.time.Instant;
@@ -7,6 +8,7 @@ import java.time.Instant;
 import javax.xml.bind.JAXB;
 
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -151,7 +153,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetGenreBackwards() throws Exception {
+    public void testGetGenreBackwards() {
         String backwards = "<local:mediaFacets xmlns=\"urn:vpro:api:2013\" xmlns:local=\"uri:local\" >\n" +
             "    <genres sort=\"COUNT\">\n" +
             "        <threshold>0</threshold>\n" +
@@ -164,21 +166,23 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetTag() throws Exception {
+    public void testGetTag() throws IOException, SAXException {
         MediaFacets in = new MediaFacets();
         in.setTags(new ExtendedMediaFacet());
 
         assertThat(in.isFaceted()).isTrue();
 
-        MediaFacets out = JAXBTestUtil.roundTrip(in,
-            "<api:tags sort=\"VALUE_ASC\">\n" +
+        MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:mediaFacets xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:tags sort=\"VALUE_ASC\">\n" +
                 "        <api:max>24</api:max>\n" +
-                "    </api:tags>");
+                "    </api:tags>\n" +
+                "</local:mediaFacets>");
         assertThat(out.getTags()).isEqualTo(new MediaFacet());
     }
 
     @Test
-    public void testGetDurations() throws Exception {
+    public void testGetDurations() throws IOException, SAXException {
         MediaFacets in = new MediaFacets();
         in.setDurations(new DurationRangeFacets(
             new DurationRangeInterval("YEAR")
@@ -186,10 +190,12 @@ public class MediaFacetsTest {
 
         assertThat(in.isFaceted()).isTrue();
 
-        MediaFacets out = JAXBTestUtil.roundTrip(in,
-            "<api:durations>\n" +
+        MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:mediaFacets xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:durations>\n" +
                 "        <api:interval>YEAR</api:interval>\n" +
-                "    </api:durations>");
+                "    </api:durations>\n" +
+                "</local:mediaFacets>");
         assertThat(out.getDurations().getRanges()).hasSize(1);
     }
 
@@ -250,7 +256,7 @@ public class MediaFacetsTest {
 
 
     @Test
-    public void testGetMediaSearchFromFacetTitlesBackwardsCompatibleXml() throws Exception {
+    public void testGetMediaSearchFromFacetTitlesBackwardsCompatibleXml() {
 
         String example = "<mediaForm xmlns=\"urn:vpro:api:2013\">\n" +
             "  <facets>\n" +
