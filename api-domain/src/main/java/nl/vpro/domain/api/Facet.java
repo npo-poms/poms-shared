@@ -18,6 +18,7 @@ public interface Facet<T extends AbstractSearch> {
      * This may be implicit ('profiles'), but it can also be done explicitely
      *
      * E.g. apply facets only on all object of type 'ALBUM'.
+     * See also {@link SearchableFacet} for limiting the number of facet values you're interested in.
      */
     T getFilter();
 

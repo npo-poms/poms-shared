@@ -9,6 +9,11 @@ package nl.vpro.domain.api;
  * selection of it.
  *
  * See e.g. http://wiki.publiekeomroep.nl/display/npoapi/Media-+and+Schedule-API#Media-andSchedule-API-relations
+ *
+ * Another example are genres, you may be interested in just the genres starting with 3.0.1 or so.
+ *
+ * In other words this has no influence on the number of documents the faceting is applied, this in contraction to filtering {@link Facet#getFilter()}
+ *
  * @author Roelof Jan Koekoek
  * @since 3.3
  */
