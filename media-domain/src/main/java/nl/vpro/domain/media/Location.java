@@ -573,7 +573,7 @@ public class Location extends PublishableObject<Location>
 
 
     @Override
-    public int compareTo(Location that) {
+    public int compareTo(@Nonnull Location that) {
         int result = 0;
         if (programUrl != null) {
             result = programUrl.compareTo(that.programUrl == null ? "" : that.programUrl);
