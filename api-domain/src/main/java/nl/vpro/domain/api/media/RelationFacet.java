@@ -66,4 +66,9 @@ public class RelationFacet extends ExtendedMediaFacet implements NameableSearcha
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "relation facet '" + name + "'" + subSearch;
+    }
 }
