@@ -1,6 +1,5 @@
 package nl.vpro.domain.classification;
 
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.time.Duration;
 import java.time.Instant;
@@ -26,7 +25,7 @@ public class CachedURLClassificationServiceImpl extends URLClassificationService
 
     @Inject
     public CachedURLClassificationServiceImpl(
-        @Named("npo-pageupdate-api.baseUrl") String url) throws MalformedURLException {
+        @Named("npo-pageupdate-api.baseUrl") String url) {
         this(URI.create(url + (url.endsWith("/") ? "": "/") + "schema/classification/"));
     }
 
