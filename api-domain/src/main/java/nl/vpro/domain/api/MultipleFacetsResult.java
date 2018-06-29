@@ -60,8 +60,12 @@ public class MultipleFacetsResult implements Nameable, Iterable<TermFacetResultI
     public Iterator<TermFacetResultItem> iterator() {
         if (facets == null) {
             return Collections.emptyIterator();
-        } else {
-            return facets.iterator();
+        } else {            return facets.iterator();
         }
+    }
+
+    @Override
+    public String toString () {
+        return "facet result '" + name + "' " + facets;
     }
 }
