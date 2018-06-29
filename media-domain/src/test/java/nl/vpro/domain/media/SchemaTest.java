@@ -1,22 +1,32 @@
 package nl.vpro.domain.media;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
+import java.util.Iterator;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.validation.Schema;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.meeuw.jaxbdocumentation.DocumentationAdder;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 import com.google.common.io.Files;
@@ -49,9 +59,11 @@ public class SchemaTest {
 
     private final static File DIR = Files.createTempDir();
 
+    private static JAXBContext context;
+
     @BeforeClass
     public static void generateXSDs() throws JAXBException, IOException {
-        generate(
+        context = generate(
             // media
             Program.class,
             Segment.class,
@@ -114,6 +126,47 @@ public class SchemaTest {
         testNamespace("");
     }
 
+    @Test
+    @SneakyThrows
+    @Ignore("TODO")
+    public void testChannels() {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document document = dBuilder.parse(getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"));
+
+
+
+
+        XPath xPath = XPathFactory.newInstance().newXPath();
+        xPath.setNamespaceContext(
+            new NamespaceContext() {
+                @Override
+                public String getNamespaceURI(String prefix) {
+                    if ("xs".equals(prefix)) return XMLConstants.W3C_XML_SCHEMA_NS_URI;
+                    return null;
+                }
+                // This method isn't necessary for XPath processing.
+                @Override
+                public String getPrefix(String uri) {
+                    throw new UnsupportedOperationException();
+                }
+
+                // This method isn't necessary for XPath processing either.
+                @Override
+                public Iterator getPrefixes(String uri) {
+                    throw new UnsupportedOperationException();
+                }
+            });
+
+        NodeList nodes = (NodeList)xPath.evaluate("/xs:schema", document, XPathConstants.NODESET);
+
+
+        //NodeList nodes = (NodeList)xPath.evaluate("/xs:schema/xs:simpleType[@name = 'channelEnum']/xs:restriction/xs:enumeration", document, XPathConstants.NODESET);
+
+        assertThat(nodes.getLength()).isEqualTo(Channel.values().length);
+        log.info("schema" + document);
+    }
+
     private static File getFile(final String namespace) {
         String filename = namespace;
         if (StringUtils.isEmpty(namespace)) {
@@ -122,7 +175,7 @@ public class SchemaTest {
         return new File(DIR, filename + ".xsd");
     }
 
-    private  Schema testNamespace(String namespace) throws IOException {
+    private  void testNamespace(String namespace) throws IOException {
         File file = getFile(namespace);
         InputStream control = getClass().getResourceAsStream("/schema/" + file.getName());
         if (control == null) {
@@ -137,10 +190,9 @@ public class SchemaTest {
 
         assertThat(diff.hasDifferences())
             .withFailMessage("" + file + " should be equal to " + getClass().getResource("/schema/" + file.getName())).isFalse();
-        return null;
     }
 
-    private static void generate(Class... classes) throws JAXBException, IOException {
+    private static JAXBContext generate(Class... classes) throws JAXBException, IOException {
         DocumentationAdder collector = new DocumentationAdder(classes);
 
         JAXBContext context = JAXBContext.newInstance(classes);
@@ -164,5 +216,6 @@ public class SchemaTest {
                 return result;
             }
         });
+        return context;
     }
 }
