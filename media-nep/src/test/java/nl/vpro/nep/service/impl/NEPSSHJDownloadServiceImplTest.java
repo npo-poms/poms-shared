@@ -1,5 +1,6 @@
 package nl.vpro.nep.service.impl;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.OpenMode;
@@ -13,7 +14,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.List;
+import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.ForkJoinTask;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
@@ -33,7 +38,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 @Ignore("This actually does something")
 public class NEPSSHJDownloadServiceImplTest {
 
-    private NEPSSJDownloadServiceImpl impl;
+    private NEPSSHJDownloadServiceImpl impl;
 
     //static String fileName = "KN_1689705__000001927-002511602.mp4";
     static String fileName = "AT_2100854__000000000-005329000.mp4";
@@ -43,7 +48,7 @@ public class NEPSSHJDownloadServiceImplTest {
 
     @Before
     public void setup() {
-        impl = new NEPSSJDownloadServiceImpl(
+        impl = new NEPSSHJDownloadServiceImpl(
             "sftp-itemizer.nepworldwide.nl",
             "npo",
             "V5pJULnIqxoBWnT",
@@ -124,8 +129,41 @@ public class NEPSSHJDownloadServiceImplTest {
 
             }, (handle) -> {});
 
+    }
 
 
+    @Test
+    @Ignore("This actually does something")
+    @SneakyThrows
+    public void async() {
+        List<ForkJoinTask> tasks = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            tasks.add(ForkJoinPool.commonPool().submit(checkAvailability("bestaatniet." + i)));
+
+        }
+        for (ForkJoinTask task : tasks) {
+            task.get();
+        }
+        tasks.clear();
+        for (int i = 0; i < 10; i++) {
+            tasks.add(ForkJoinPool.commonPool().submit(checkAvailability("bestaatniet." + i)));
+        }
+        for (ForkJoinTask t : tasks) {
+            t.get();
+        }
+    }
+
+
+    public Runnable checkAvailability(String file) {
+        return () -> {
+            Instant start = Instant.now();
+            try {
+                impl.checkAvailabilityAndConsume(file, Duration.ofMinutes(2), (dc) -> true, (rf) -> {});
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+            log.info("Took {}", Duration.between(start, Instant.now()));
+        };
     }
 
 
