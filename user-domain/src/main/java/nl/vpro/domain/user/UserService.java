@@ -12,6 +12,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -121,7 +124,10 @@ public interface UserService<T extends User> {
      * before {@link Callable#call()}
      * @since 5.6
      */
-    default <R> Callable<R> wrap(Callable<R> callable,  Logger logger, Boolean throwExceptions) {
+    default <R> Callable<R> wrap(
+        @Nonnull  Callable<R> callable,
+        @Nullable Logger logger,
+        @Nullable Boolean throwExceptions) {
 
         final boolean throwExceptionsBoolean = throwExceptions == null ? logger == null : throwExceptions;
         Object authentication;
@@ -133,6 +139,9 @@ public interface UserService<T extends User> {
         }
         final Object onBehalfOf = authentication;
         Map<String, String> copy =  MDC.getCopyOfContextMap();
+        if (logger != null) {
+            logger.info("Executing on behalf of {}", onBehalfOf);
+        }
 
         return () -> {
             try {
@@ -140,6 +149,9 @@ public interface UserService<T extends User> {
                     try {
                         restoreAuthentication(onBehalfOf);
                     } catch (Exception e) {
+                        if (logger != null) {
+                            logger.error(e.getMessage());
+                        }
                         LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
                     }
                 }
