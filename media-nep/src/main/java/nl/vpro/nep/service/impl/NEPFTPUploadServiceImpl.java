@@ -88,7 +88,6 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
     public long upload(@Nonnull SimpleLogger logger, @Nonnull String nepFile, @Nonnull Long size, @Nonnull InputStream stream) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
-        createClient();
         try(
             final SFTPClient sftp = getClient().newSFTPClient();
             final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
