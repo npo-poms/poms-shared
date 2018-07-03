@@ -57,7 +57,7 @@ public class NEPFTPUploadServiceImplTest {
 
 
     @Test
-    //@Ignore("This actually does something")
+    @Ignore("This actually does something")
     public void uploadHuge() throws Exception {
         Instant start = Instant.now();
         File file = new File(file1);
@@ -67,7 +67,7 @@ public class NEPFTPUploadServiceImplTest {
     }
 
     @Test
-
+    @Ignore
     public void async() {
         List<ForkJoinTask> tasks = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
