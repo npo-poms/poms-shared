@@ -55,8 +55,14 @@ public interface ReadonlyEmbargo {
     }
 
     default boolean willBeUnderEmbargo() {
+        return willBeUnderEmbargo(Instant.now());
+    }
+
+
+    default boolean willBeUnderEmbargo(Instant now) {
         Instant start = getPublishStartInstant();
-        return start != null && start.isAfter(Instant.now());
+        Instant stop = getPublishStopInstant();
+        return (start != null && start.isAfter(now)) || (stop != null && stop.isAfter(now));
     }
     default boolean willBePublished() {
         return isUnderEmbargo() && getPublishStopInstant().isAfter(Instant.now());
