@@ -66,7 +66,7 @@ public class NEPFTPUploadServiceImplTest {
     }
 
     @Test
-    //@Ignore("This actually does something")
+    @Ignore("This actually does something")
     @SneakyThrows
     public void async() {
         List<ForkJoinTask> tasks = new ArrayList<>();
