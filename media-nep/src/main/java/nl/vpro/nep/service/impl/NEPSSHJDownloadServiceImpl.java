@@ -33,7 +33,7 @@ import nl.vpro.util.FileMetadata;
  */
 //@Named("NEPDownloadService") // It doesn't *** work
 @Slf4j
-public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
+public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
 
     private final String ftpHost;
@@ -42,7 +42,7 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
     private final String hostKey;
 
     @Inject
-    public NEPSSJDownloadServiceImpl(
+    public NEPSSHJDownloadServiceImpl(
 
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
@@ -99,6 +99,7 @@ public class NEPSSJDownloadServiceImpl implements NEPDownloadService {
             while (true) {
                 count++;
                 try {
+                    log.debug("Checking for read {}", nepFile);
                     handle = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
                     FileAttributes attributes = handle.fetchAttributes();
                     FileMetadata descriptor = FileMetadata.builder()
