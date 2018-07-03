@@ -143,7 +143,9 @@ public interface UserService<T extends User> {
                         LoggerFactory.getLogger(getClass()).error(e.getMessage(), e);
                     }
                 }
-                copy.forEach(MDC::put);
+                if (copy != null) {
+                    copy.forEach(MDC::put);
+                }
                 return callable.call();
             } catch (Exception e) {
                 if (logger != null) {
