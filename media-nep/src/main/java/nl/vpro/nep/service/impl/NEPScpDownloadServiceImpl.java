@@ -40,7 +40,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     private final String url;
     private final CommandExecutor scp;
-    private final NEPSSJDownloadServiceImpl sshj;
+    private final NEPSSHJDownloadServiceImpl sshj;
     private final static Map<String, File> knownHosts = new HashMap<>();
 
 
@@ -58,7 +58,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             .getExecutableFromStrings(scpExecutables)
             .orElseThrow(IllegalArgumentException::new);
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
-        sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
+        sshj = new NEPSSHJDownloadServiceImpl(ftpHost, username, password, hostkey);
         CommandExecutor scptry = null;
         try {
             File tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
