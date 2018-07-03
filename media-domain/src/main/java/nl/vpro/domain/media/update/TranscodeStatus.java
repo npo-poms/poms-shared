@@ -35,7 +35,7 @@ public class TranscodeStatus {
     String mid;
 
     @XmlAttribute
-    Boolean missingMedia = null;
+    Boolean missingMedia;
 
     @NotNull
     String workflowId;
