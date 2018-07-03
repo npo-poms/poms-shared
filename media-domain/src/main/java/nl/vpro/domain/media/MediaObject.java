@@ -30,8 +30,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
-
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -63,6 +61,7 @@ import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
+import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObject.*;
 
@@ -266,26 +265,23 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<ThirdParty> thirdParties;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
             + "and (stop is null or stop > now())")
     @Valid
     protected List<PortalRestriction> portalRestrictions;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "mediaobject_id")
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
             + "and (stop is null or stop > now())")
     @Valid
     protected Set<GeoRestriction> geoRestrictions;
 
-    @OneToMany(mappedBy = "parent", orphanRemoval = true)
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
+    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = {ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // @NotNull(message = "titles: {nl.vpro.constraints.NotNull}") // Somewhy
     // hibernates on merge first merges an object without titles.
@@ -293,34 +289,19 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<Title> titles;
 
-    @OneToMany(mappedBy = "parent", orphanRemoval = true)
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
+    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade=ALL)
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<Description> descriptions;
 
-    @ManyToMany
-    @Cascade({
-        CascadeType.MERGE,
-        CascadeType.REFRESH,
-        CascadeType.REPLICATE,
-        CascadeType.SAVE_UPDATE,
-        CascadeType.PERSIST
-    })
+    @ManyToMany(cascade = {ALL})
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<Genre> genres;
 
-    @ManyToMany
-    @Cascade({
-        CascadeType.MERGE,
-        CascadeType.REFRESH,
-        CascadeType.REPLICATE,
-        CascadeType.SAVE_UPDATE,
-        CascadeType.PERSIST
-    })
+    @ManyToMany(cascade = {ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
@@ -348,8 +329,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
     protected AVType avType;
 
-    @OneToOne(orphanRemoval = true)
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
+    @OneToOne(orphanRemoval = true, cascade = {ALL})
     protected AVAttributes avAttributes;
 
     @Column(name = "releaseDate")
@@ -359,9 +339,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected AuthorizedDuration duration;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "mediaobject_id")
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
@@ -374,10 +353,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<String> awards;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinTable(name = "mediaobject_memberof", inverseJoinColumns = @JoinColumn(name = "id"))
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
-    @SortNatural
+    //@SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
     // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
@@ -412,24 +390,22 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @StringList(maxLength = 255)
     protected List<String> email;
 
-    @OneToMany(targetEntity = Website.class, orphanRemoval = true)
+    @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
     @OrderColumn(name = "list_index",
         nullable = true // Did I mention that hibernate sucks?
     )
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected List<Website> websites;
 
-    @OneToMany(targetEntity = TwitterRef.class, orphanRemoval = true)
+    @OneToMany(cascade = ALL, targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
     // not nullable media/index blocks ordering updates on the collection
     @OrderColumn(name = "list_index",
         nullable = true // hibernate sucks
     )
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected List<TwitterRef> twitterRefs;
@@ -440,16 +416,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Setter
     protected Boolean isDubbed;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "mediaObject")
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
+    @OneToMany(orphanRemoval = true, mappedBy = "mediaObject", cascade={ALL})
     @Valid
     protected Set<Prediction> predictions;
 
     @Transient
     private List<Prediction> predictionsForXml;
 
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = true)
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
+    @OneToMany(cascade = ALL, mappedBy = "mediaObject", orphanRemoval = true)
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition =
@@ -466,30 +440,28 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<Location> locations;
 
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = false)
+    @OneToMany(mappedBy = "mediaObject", orphanRemoval = false, cascade={ALL})
     @SortNatural
-    @Cascade({ org.hibernate.annotations.CascadeType.MERGE })
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<ScheduleEvent> scheduleEvents;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, cascade= {ALL})
     @JoinColumn(name = "mediaobject_id", updatable = false, nullable = false)
     @Valid
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected Set<Relation> relations;
 
     @OneToMany(
         orphanRemoval = true,
-        mappedBy = "mediaObject"
+            mappedBy = "mediaObject",
+            cascade = {ALL}
     )
     @OrderColumn(
         name = "list_index",
         nullable = true // hibernate sucks
     )
-    @Cascade({ org.hibernate.annotations.CascadeType.ALL })
     @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Filter(name = PUBLICATION_FILTER, condition = "(publishStart is null or publishStart <= now()) "
