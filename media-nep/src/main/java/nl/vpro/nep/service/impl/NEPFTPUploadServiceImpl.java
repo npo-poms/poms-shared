@@ -1,5 +1,7 @@
 package nl.vpro.nep.service.impl;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
 import net.schmizz.sshj.sftp.OpenMode;
@@ -12,6 +14,8 @@ import java.io.OutputStream;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -38,10 +42,17 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
     private final String password;
     private final String hostKey;
 
-    private final Duration connectTimeOut = Duration.ofSeconds(10L);
-    private final Duration socketTimeout = Duration.ofSeconds(10L);
+    @Getter
+    @Setter
+    private Duration connectTimeOut = Duration.ofSeconds(10L);
 
-    private SSHClient sshClient;
+    @Getter
+    @Setter
+    private Duration socketTimeout = Duration.ofSeconds(10L);
+
+    ThreadLocal<SSHClient> sshClient = new ThreadLocal<>();
+
+    Set<SSHClient> created = new HashSet<>();
 
     @Inject
     public NEPFTPUploadServiceImpl(
@@ -54,9 +65,7 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
         this.username = username;
         this.password = password;
         this.hostKey = hostKey;
-
     }
-
 
     @PostConstruct
     public void init() {
@@ -65,22 +74,20 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
 
     @PreDestroy
     public void destroy() throws IOException {
-        if (sshClient != null) {
-            sshClient.close();
+        for (SSHClient client : created) {
+            log.info("Closing {}", client);
+            client.close();
         }
     }
+
     private final FileSizeFormatter formatter = FileSizeFormatter.DEFAULT;
     @Override
     public long upload(SimpleLogger logger, String nepFile, Long size, InputStream stream) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
-        if (sshClient == null || ! sshClient.isConnected()) {
-            sshClient = SSHClientFactory.create(hostKey, sftpHost, username, password);
-            sshClient.setTimeout((int) socketTimeout.toMillis());
-            sshClient.setConnectTimeout((int) connectTimeOut.toMillis());
-        }
+        createClient();
         try(
-            final SFTPClient sftp = sshClient.newSFTPClient();
+            final SFTPClient sftp = getClient().newSFTPClient();
             final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
             OutputStream out = handle.new RemoteFileOutputStream();
         ) {
@@ -121,4 +128,27 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
     public String toString() {
         return username + "@" + sftpHost;
     }
+
+    SSHClient getClient() throws IOException {
+        SSHClient client = sshClient.get();
+        if (client == null || ! client.isConnected()) {
+            if (client != null) {
+                created.remove(client);
+            }
+            client = createClient();
+            sshClient.set(client);
+        }
+        return client;
+    }
+
+    protected synchronized  SSHClient createClient() throws IOException {
+        SSHClient client = SSHClientFactory.create(hostKey, sftpHost, username, password);
+        client.setTimeout((int) socketTimeout.toMillis());
+        client.setConnectTimeout((int) connectTimeOut.toMillis());
+        log.info("Created client {}", client);
+        created.add(client);
+        return client;
+
+    }
+
 }
