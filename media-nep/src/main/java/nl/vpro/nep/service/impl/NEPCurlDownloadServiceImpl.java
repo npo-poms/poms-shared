@@ -37,7 +37,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
 
     private final String ftpHost;
     private final CommandExecutor curl;
-    private final NEPSSJDownloadServiceImpl sshj;
+    private final NEPSSHJDownloadServiceImpl sshj;
 
 
     public NEPCurlDownloadServiceImpl(
@@ -57,7 +57,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
             .commonArgs(Arrays.asList("-s", "-u", user, "--insecure"))
             .build();
         // just used for the checkAvailability call (actually for the descriptorConsumer callback)
-        sshj = new NEPSSJDownloadServiceImpl(ftpHost, username, password, hostkey);
+        sshj = new NEPSSHJDownloadServiceImpl(ftpHost, username, password, hostkey);
     }
 
     @Override
