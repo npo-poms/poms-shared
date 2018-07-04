@@ -62,6 +62,7 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObject.*;
 
@@ -440,7 +441,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Valid
     protected Set<Location> locations;
 
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = false, cascade={ALL})
+    @OneToMany(mappedBy = "mediaObject", orphanRemoval = false, cascade={MERGE})
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
