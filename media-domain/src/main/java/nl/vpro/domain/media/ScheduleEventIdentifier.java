@@ -83,7 +83,7 @@ public class ScheduleEventIdentifier implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + ":" + channel + ":" + start;
+        return channel + ":" + start;
     }
 
     public String asString() {
