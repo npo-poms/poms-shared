@@ -10,7 +10,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.Valid;
@@ -37,6 +36,7 @@ import nl.vpro.util.DateUtils;
 import nl.vpro.util.TriFunction;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
+import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 
 @Entity
@@ -114,10 +114,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     protected String memberOf;
 
-    @OneToOne(orphanRemoval = true)
-    @org.hibernate.annotations.Cascade({
-        org.hibernate.annotations.CascadeType.ALL
-    })
+    @OneToOne(orphanRemoval = true, cascade = ALL)
     protected AVAttributes avAttributes;
 
     protected String textSubtitles;
@@ -162,14 +159,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     protected String poSeriesID;
 
-    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
     @Valid
     @XmlElement(name = "title")
     @JsonProperty("titles")
     protected Set<ScheduleEventTitle> titles = new TreeSet<>();
 
 
-    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = ALL)
     @Valid
     @XmlElement(name = "description")
     @JsonProperty("descriptions")
