@@ -178,8 +178,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected Boolean embeddable;
 
-    protected SubMediaType type;
-
     Boolean isDeleted;
 
     List<CountryCode> countries;
@@ -263,7 +261,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected final void fillFromMedia(M mediaobject, OwnerType ownerType) {
         this.mid = mediaobject.getMid();
-        this.type = mediaobject.getType();
         this.isDeleted = mediaobject.isDeleted();
         this.urn = mediaobject.getUrn();
         this.crids = mediaobject.getCrids();
@@ -468,9 +465,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
 
-    public SubMediaType getType() {
-        return type;
-    }
+    public abstract SubMediaType getType();
 
     /**
      * @since 5.6

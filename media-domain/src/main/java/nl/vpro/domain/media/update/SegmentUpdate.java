@@ -161,7 +161,43 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     @Override
     public int compareTo(SegmentUpdate segmentUpdate) {
         //return builder.build().compareTo(segmentUpdate.builder.build());
-        return 0;
+         if(super.equals(segmentUpdate)) {
+            return 0;
+        }
+
+        if(this.start != null && segmentUpdate.start != null) {
+            int compare = this.start.compareTo(segmentUpdate.getStart());
+            if (compare != 0) {
+                return compare;
+            }
+        }
+        if(this.segmentType != null && segmentUpdate.segmentType  != null) {
+            int compare = this.segmentType.compareTo(segmentUpdate.getType());
+            if (compare != 0) {
+                return compare;
+            }
+        }
+        {
+            int compare = this.getMainTitle().compareTo(segmentUpdate.getMainTitle());
+            if (compare != 0) {
+                return compare;
+            }
+
+        }
+
+        if (this.getMid() != null && segmentUpdate.getMid() != null) {
+            int compare = this.getMid().compareTo(segmentUpdate.getMid());
+            if (compare != 0) {
+                return compare;
+            }
+        }
+        if (this.getId() != null && segmentUpdate.getId() != null) {
+            int compare = this.getId().compareTo(segmentUpdate.getId());
+            if (compare != 0) {
+                return compare;
+            }
+        }
+        return segmentUpdate.hashCode() - hashCode();
     }
 
     @Override
