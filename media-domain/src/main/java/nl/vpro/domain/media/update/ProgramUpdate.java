@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.update;
 
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
@@ -106,6 +107,9 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
     @XmlElement
     public SortedSet<MemberRefUpdate> getEpisodeOf() {
+        if (episodeOf == null) {
+            episodeOf = new TreeSet<>();
+        }
         return episodeOf;
     }
 
@@ -118,6 +122,9 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     @XmlElementWrapper(name = "segments")
     @XmlElement(name = "segment")
     public SortedSet<SegmentUpdate> getSegments() {
+        if (segments == null) {
+            segments = new TreeSet<>();
+        }
         return this.segments;
 
     }
