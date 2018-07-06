@@ -217,7 +217,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     // This arguably better, but for now we want to be backwards compatible.
     @XmlElementWrapper(name = "credits")
     @XmlElement(name = "person")
-
     private List<PersonUpdate> persons;
 
     private List<PortalRestrictionUpdate> portalRestrictions;
@@ -278,14 +277,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.images = toList(
             mediaobject.getImages(),
             (i) -> i.getOwner() == ownerType,
-            ImageUpdate::new)
+            ImageUpdate::new,
+            false)
         ;
         this.tags = toSet(mediaobject.getTags(), Tag::getText);
         this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.broadcasters = toList(mediaobject.getBroadcasters(), Broadcaster::getId);
         this.duration = AuthorizedDuration.duration(mediaobject.getDuration());
-        this.persons = toList(mediaobject.getPersons(), PersonUpdate::new);
+        this.persons = toList(MediaObjects.getPersons(mediaobject), PersonUpdate::new, true);
     }
 
     protected abstract void fillFrom(M mediaObject, OwnerType ownerType);
@@ -374,7 +374,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setBroadcasters(toList(broadcasters, Broadcaster::new));
         media.setPortals(toList(portals, Portal::new));
         media.setTags(toSet(tags, Tag::new));
-        media.setPersons(toList(persons, PersonUpdate::toPerson));
+        media.setPersons(toList(persons, PersonUpdate::toPerson, true));
         media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
         media.setGeoRestrictions(toSet(geoRestrictions, GeoRestrictionUpdate::toGeoRestriction));
         media.setWebsites(toList(websites, Website::new));
@@ -413,15 +413,28 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
 
-    protected <T, U> List<T> toList(List<U> list, Predicate<U> filter, Function<U, T> mapper) {
+    protected <T, U> List<T> toList(List<U> list, Predicate<U> filter, Function<U, T> mapper, boolean nullToNull) {
         if (list == null) {
+            if (nullToNull) {
+                return null;
+            }
             list = new ArrayList<>();
         }
-        return list.stream().filter(filter).map(mapper).collect(Collectors.toList());
+        return list
+            .stream()
+            .filter(filter)
+            .map(mapper)
+            .collect(Collectors.toList());
     }
+    protected <T, U> List<T> toList(List<U> list, Function<U, T> mapper, boolean nullToNull) {
+        return toList(list, (u) -> true, mapper, nullToNull);
+    }
+
     protected <T, U> List<T> toList(List<U> list, Function<U, T> mapper) {
-        return toList(list, (u) -> true, mapper);
+        return toList(list, (u) -> true, mapper, false);
     }
+
+
 
 
 
