@@ -288,6 +288,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.broadcasters = toList(mediaobject.getBroadcasters(), Broadcaster::getId);
         this.duration = AuthorizedDuration.duration(mediaobject.getDuration());
+        this.persons = toList(mediaobject.getPersons(), PersonUpdate::new);
     }
 
     protected abstract void fillFrom(M mediaObject, OwnerType ownerType);
