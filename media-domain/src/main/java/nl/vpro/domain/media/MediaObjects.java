@@ -652,8 +652,10 @@ public class MediaObjects {
 
 
 
+    public static List<Person> getPersons(MediaObject o) {
+        return o.persons;
 
-
+    }
 
 
     // DEPRECATED methods
@@ -748,5 +750,7 @@ public class MediaObjects {
     public static OwnerType[] findOwnersForTextFields(MediaObject media) {
         return TextualObjects.findOwnersForTextFields(media);
     }
+
+
 
 }

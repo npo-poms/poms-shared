@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -30,6 +31,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -1307,9 +1309,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return persons;
     }
 
-    public void setPersons(@Nonnull  List<Person> persons) {
-        for (Person person : persons) {
-            person.setParent(this);
+    public void setPersons(@Nullable List<Person> persons) {
+        if (persons != null) {
+            for (Person person : persons) {
+                person.setParent(this);
+            }
         }
         this.persons = updateList(this.persons, persons);
     }
