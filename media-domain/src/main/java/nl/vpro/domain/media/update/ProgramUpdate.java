@@ -122,8 +122,8 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     @XmlElementWrapper(name = "segments")
     @XmlElement(name = "segment")
     public SortedSet<SegmentUpdate> getSegments() {
-        if (segments == null) {
-            segments = new TreeSet<>();
+        if (this.segments == null) {
+            this.segments = new TreeSet<>();
         }
         return this.segments;
 
