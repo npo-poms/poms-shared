@@ -270,6 +270,12 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
                 return compare;
             }
         }
+        if(this.type != null && o.type != null) {
+            int compare = this.type.compareTo(o.getType());
+            if (compare != 0) {
+                return compare;
+            }
+        }
         {
             int compare = this.getMainTitle().compareTo(o.getMainTitle());
             if (compare != 0) {
