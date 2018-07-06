@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public class Label {
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI, required = true)
-    @Builder.Default
+    //@Builder.Default()
     private String lang = "nl";
 
     @XmlValue()
