@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import java.util.Optional;
+
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -36,6 +38,17 @@ public enum AVFileFormat {
     HTML,  // HTML embeddable player
     UNKNOWN;
 
+    public static Optional<AVFileFormat> forMimeType(String mimetype) {
+        if (mimetype == null) {
+            return Optional.empty();
+        }
+        try {
+            String[] split = mimetype.split("/", 2);
+            return Optional.of(AVFileFormat.valueOf(split[1].toUpperCase()));
+        } catch (IllegalArgumentException iae) {
+            return Optional.empty();
+        }
+    }
 
     public static AVFileFormat forProgramUrl(final String url) {
         if (url == null) return UNKNOWN;
