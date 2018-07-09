@@ -31,11 +31,9 @@ public interface DoAsTransactionService extends TransactionService {
 
     <T> void executeInReadonlyTransaction(@Nonnull Trusted user, T argument, @Nonnull  Consumer<T> consumer);
 
-
     <T> T getInNewTransaction(@Nonnull Trusted user, @Nonnull Supplier<T> supplier);
 
     <T> T getInReadonlyTransaction(@Nonnull Trusted user, @Nonnull  Supplier<T> supplier);
-
 
     <T> void executeInNewTransaction(@Nonnull Trusted user, T argument, @Nonnull  Consumer<T> consumer);
 
