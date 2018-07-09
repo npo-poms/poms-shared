@@ -16,7 +16,7 @@ import org.aspectj.lang.annotation.Aspect;
  * @since 5.8
  */
 @Aspect
-public class MediaLockerAspect  {
+public class MediaObjectLockerAspect {
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
@@ -24,7 +24,7 @@ public class MediaLockerAspect  {
         String mid = getMid(media);
         String reason = annotation.reason();
         if (StringUtils.isEmpty(reason)) {
-            reason = joinPoint.getSignature().getName() + " " + mid;
+            reason = joinPoint.getSignature().getDeclaringType().getSimpleName() + "#" + joinPoint.getSignature().getName();
         }
 
         return MediaObjectLocker.runAlone(mid, reason, () -> {
