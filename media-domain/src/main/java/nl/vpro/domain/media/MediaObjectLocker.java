@@ -33,6 +33,18 @@ public class MediaObjectLocker {
 
     private static ThreadLocal<Map<String, AtomicInteger>> mids = ThreadLocal.withInitial(HashMap::new);
 
+
+    /**
+     * Adding this annotation of a method with a string or mediaidentifiable object will 'lock' the identifier, and will make sure
+     * that not other code doing the same will run simultaneously.
+     *
+     * Much code like this will be get a miediaobject using this mid, change it and then commit the mediaobject.
+     *
+     * If another thread is changing the mediaobject in between those event, those changes will be lost.
+     *
+     * This can therefore be avoided using this annotations (or equivalently by using {@link #runAlone(String, String, Callable)}
+
+     */
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Mid {
         int argNumber() default 0;
