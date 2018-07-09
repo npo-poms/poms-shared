@@ -55,9 +55,10 @@ public class MediaObjectLocker {
     @SneakyThrows
     public static <T> T runAlone(String mid, String reason, Callable<T> callable) {
         Long nanoStart = System.nanoTime();
-        AtomicInteger integer = mids.get().computeIfPresent(mid, (mi, a) -> { return  new AtomicInteger(0); });
+        AtomicInteger integer = mids.get().computeIfAbsent(mid, (m) -> new AtomicInteger(0));
+        boolean outer = integer.incrementAndGet() == 1;
         try {
-            if (integer.incrementAndGet() == 1) {
+            if (outer) {
                 Semaphore semaphore = get(mid);
                 try {
                     if (semaphore.hasQueuedThreads()) {
@@ -79,6 +80,9 @@ public class MediaObjectLocker {
             }
         } finally {
             int get = integer.decrementAndGet();
+            if (outer) {
+                assert get == 0;
+            }
             if (get == 0) {
                 mids.get().remove(mid);
             }
