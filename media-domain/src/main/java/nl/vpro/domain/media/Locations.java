@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -176,7 +177,7 @@ public class Locations {
 
 
     public static void realizeAndRevokeLocationsIfNeeded(MediaObject media, Platform platform) {
-        Locations.removeLocationForPlatformIfNeeded(media, platform);
+        Locations.removeLocationForPlatformIfNeeded(media, platform, (ot) -> true);
         Locations.realizeStreamingPlatformIfNeeded(media, platform);
         Locations.updatePredictionStates(media, platform);
     }
@@ -272,11 +273,14 @@ public class Locations {
 
 
 
-    public static void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform){
+    public static void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<OwnerType> ownerType){
         List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
         Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
         for (Location existingPlatformLocation : existingPlatformLocations) {
+            if (! ownerType.test(existingPlatformLocation.getOwner())) {
+                continue;
+            }
             if (!existingPredictionForPlatform.isPlannedAvailability()) {
                 mediaObject.removeLocation(existingPlatformLocation);
             } else if (!streamingPlatformStatus.matches(existingPredictionForPlatform)) {
