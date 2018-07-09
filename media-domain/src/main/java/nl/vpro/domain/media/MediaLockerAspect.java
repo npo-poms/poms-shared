@@ -5,7 +5,6 @@ import lombok.Lombok;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.reflect.MethodSignature;
 
 /**
  * This is an idea to make locking on mid easier.
@@ -20,14 +19,11 @@ import org.aspectj.lang.reflect.MethodSignature;
 @Aspect
 public class MediaLockerAspect {
 
-    @Around("@annotation(nl.vpro.domain.media.MediaObjectLocker.Mid)")
-    public Object lockMid(ProceedingJoinPoint joinPoint) {
-
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        MediaObjectLocker.Mid midLock = signature.getMethod().getAnnotation(MediaObjectLocker.Mid.class);
-        Object media = joinPoint.getArgs()[midLock.argNumber()];
+    @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
+    public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
+        Object media = joinPoint.getArgs()[annotation.argNumber()];
         String mid = getMid(media);
-        String reason = midLock.reason();
+        String reason = annotation.reason();
 
         return MediaObjectLocker.runAlone(mid, reason, () -> {
             try {
