@@ -79,7 +79,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
 
     /**
-     * Adding this annotation of a method with a string or mediaidentifiable object will 'lock' the identifier, and will make sure
+     * Adding this annotation of a method with a {@link String} or {@link MediaIdentifiable} object will 'lock' the identifier, and will make sure
      * that not other code doing the same will run simultaneously.
      *
      * Much code like this will be get a mediaobject using this mid, change it and then commit the mediaobject.
