@@ -54,6 +54,24 @@ public class MediaUpdateTest {
             "        </audioAttributes>\n" +
             "    </avAttributes>\n" +
             "    <duration>P0DT2H0M0.000S</duration>\n" +
+            "    <credits>\n" +
+            "        <person role=\"DIRECTOR\">\n" +
+            "            <givenName>Bregtje</givenName>\n" +
+            "            <familyName>van der Haak</familyName>\n" +
+            "        </person>\n" +
+            "        <person role=\"PRESENTER\">\n" +
+            "            <givenName>Hans</givenName>\n" +
+            "            <familyName>Goedkoop</familyName>\n" +
+            "        </person>\n" +
+            "        <person role=\"PRESENTER\">\n" +
+            "            <givenName>Meta</givenName>\n" +
+            "            <familyName>de Vries</familyName>\n" +
+            "        </person>\n" +
+            "        <person role=\"ACTOR\">\n" +
+            "            <givenName>Claire</givenName>\n" +
+            "            <familyName>Holt</familyName>\n" +
+            "        </person>\n" +
+            "    </credits>\n" +
             "    <prediction>INTERNETVOD</prediction>\n" +
             "    <prediction>TVVOD</prediction>\n" +
             "    <locations>\n" +
@@ -153,6 +171,24 @@ public class MediaUpdateTest {
             "                </audioAttributes>\n" +
             "            </avAttributes>\n" +
             "            <duration>P0DT0H1M40.000S</duration>\n" +
+            "            <credits>\n" +
+            "                <person role=\"DIRECTOR\">\n" +
+            "                    <givenName>Bregtje</givenName>\n" +
+            "                    <familyName>van der Haak</familyName>\n" +
+            "                </person>\n" +
+            "                <person role=\"PRESENTER\">\n" +
+            "                    <givenName>Hans</givenName>\n" +
+            "                    <familyName>Goedkoop</familyName>\n" +
+            "                </person>\n" +
+            "                <person role=\"PRESENTER\">\n" +
+            "                    <givenName>Meta</givenName>\n" +
+            "                    <familyName>de Vries</familyName>\n" +
+            "                </person>\n" +
+            "                <person role=\"ACTOR\">\n" +
+            "                    <givenName>Claire</givenName>\n" +
+            "                    <familyName>Holt</familyName>\n" +
+            "                </person>\n" +
+            "            </credits>\n" +
             "            <prediction>INTERNETVOD</prediction>\n" +
             "            <locations>\n" +
             "                <location urn=\"urn:vpro:media:location:6\">\n" +
@@ -224,10 +260,9 @@ public class MediaUpdateTest {
             "            <start>P0DT0H0M0.000S</start>\n" +
             "        </segment>\n" +
             "    </segments>\n" +
-            "</program>\n");
+            "</program>");
 
-        JAXBTestUtil.roundTripAndSimilar(rounded.fetch(OwnerType.BROADCASTER), "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+        JAXBTestUtil.roundTripAndSimilar(rounded.fetch(OwnerType.BROADCASTER), "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "    <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "    <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
@@ -244,7 +279,26 @@ public class MediaUpdateTest {
             "    <language code=\"nl\">Nederlands</language>\n" +
             "    <language code=\"fr\">Frans</language>\n" +
             "    <duration>P0DT2H0M0.000S</duration>\n" +
-            "    <credits/>\n" +
+            "    <credits>\n" +
+            "        <person role=\"DIRECTOR\">\n" +
+            "            <givenName>Bregtje</givenName>\n" +
+            "            <familyName>van der Haak</familyName>\n" +
+            "        </person>\n" +
+            "        <person role=\"PRESENTER\">\n" +
+            "            <givenName>Hans</givenName>\n" +
+            "            <familyName>Goedkoop</familyName>\n" +
+            "        </person>\n" +
+            "        <person role=\"PRESENTER\">\n" +
+            "            <givenName>Meta</givenName>\n" +
+            "            <familyName>de Vries</familyName>\n" +
+            "        </person>\n" +
+            "        <person role=\"ACTOR\">\n" +
+            "            <givenName>Claire</givenName>\n" +
+            "            <familyName>Holt</familyName>\n" +
+            "        </person>\n" +
+            "    </credits>\n" +
+            "    <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
+            "    <prediction state=\"ANNOUNCED\">TVVOD</prediction>\n" +
             "    <locations>\n" +
             "        <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:location:6\">\n" +
             "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
@@ -334,7 +388,25 @@ public class MediaUpdateTest {
             "            <language code=\"nl\">Nederlands</language>\n" +
             "            <language code=\"fr\">Frans</language>\n" +
             "            <duration>P0DT0H1M40.000S</duration>\n" +
-            "            <credits/>\n" +
+            "            <credits>\n" +
+            "                <person role=\"DIRECTOR\">\n" +
+            "                    <givenName>Bregtje</givenName>\n" +
+            "                    <familyName>van der Haak</familyName>\n" +
+            "                </person>\n" +
+            "                <person role=\"PRESENTER\">\n" +
+            "                    <givenName>Hans</givenName>\n" +
+            "                    <familyName>Goedkoop</familyName>\n" +
+            "                </person>\n" +
+            "                <person role=\"PRESENTER\">\n" +
+            "                    <givenName>Meta</givenName>\n" +
+            "                    <familyName>de Vries</familyName>\n" +
+            "                </person>\n" +
+            "                <person role=\"ACTOR\">\n" +
+            "                    <givenName>Claire</givenName>\n" +
+            "                    <familyName>Holt</familyName>\n" +
+            "                </person>\n" +
+            "            </credits>\n" +
+            "            <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
             "            <locations>\n" +
             "                <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:location:6\">\n" +
             "                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
@@ -409,6 +481,6 @@ public class MediaUpdateTest {
             "            <start>P0DT0H0M0.000S</start>\n" +
             "        </segment>\n" +
             "    </segments>\n" +
-            "</program>\n");
+            "</program>");
     }
 }
