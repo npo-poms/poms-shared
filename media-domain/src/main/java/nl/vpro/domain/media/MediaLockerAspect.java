@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import lombok.Lombok;
 
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,19 +12,20 @@ import org.aspectj.lang.annotation.Aspect;
  *
  * Just annotate your method with {@link MediaObjectLocker.Mid} and it should automaticly lock the mid if it isn't yet.
  *
- *
- * TODO: This is as yet purely experimental, and I've not yet checked in any methods using this annotation
- * @author Michiel Meeuwissen
+ ** @author Michiel Meeuwissen
  * @since 5.8
  */
 @Aspect
-public class MediaLockerAspect {
+public class MediaLockerAspect  {
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
         Object media = joinPoint.getArgs()[annotation.argNumber()];
         String mid = getMid(media);
         String reason = annotation.reason();
+        if (StringUtils.isEmpty(reason)) {
+            reason = joinPoint.getSignature().getName() + " " + mid;
+        }
 
         return MediaObjectLocker.runAlone(mid, reason, () -> {
             try {
