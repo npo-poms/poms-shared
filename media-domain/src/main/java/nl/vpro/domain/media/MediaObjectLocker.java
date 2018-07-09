@@ -6,9 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 
 import com.google.common.cache.CacheBuilder;
@@ -27,6 +30,8 @@ import nl.vpro.services.TransactionService;
  */
 @Slf4j
 public class MediaObjectLocker {
+
+    private static ThreadLocal<Map<String, AtomicInteger>> mids = ThreadLocal.withInitial(HashMap::new);
 
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Mid {
@@ -50,20 +55,33 @@ public class MediaObjectLocker {
     @SneakyThrows
     public static <T> T runAlone(String mid, String reason, Callable<T> callable) {
         Long nanoStart = System.nanoTime();
-        Semaphore semaphore = get(mid);
+        AtomicInteger integer = mids.get().computeIfPresent(mid, (mi, a) -> { return  new AtomicInteger(0); });
         try {
-            if (semaphore.hasQueuedThreads()) {
-                log.info("There are already threads for {}, waiting", mid);
+            if (integer.incrementAndGet() == 1) {
+                Semaphore semaphore = get(mid);
+                try {
+                    if (semaphore.hasQueuedThreads()) {
+                        log.info("There are already threads for {}, waiting", mid);
+                    }
+                    semaphore.acquire();
+
+                    Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
+                    log.debug("Acquired lock for {}  ({}) in {}", mid, reason, aquireTime);
+
+                    return callable.call();
+                } finally {
+                    release(semaphore, mid);
+                    log.debug("Released lock for {} ({}) in {}", mid, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
+
+                }
+            } else {
+                return callable.call();
             }
-            semaphore.acquire();
-            Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
-            log.debug("Acquired lock for {}  ({}) in {}", mid, reason, aquireTime);
-
-            return callable.call();
         } finally {
-            release(semaphore, mid);
-            log.debug("Released lock for {} ({}) in {}", mid, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
-
+            int get = integer.decrementAndGet();
+            if (get == 0) {
+                mids.get().remove(mid);
+            }
         }
     }
 
