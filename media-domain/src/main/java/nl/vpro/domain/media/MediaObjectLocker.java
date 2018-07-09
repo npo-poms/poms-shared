@@ -17,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
@@ -53,14 +54,12 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
     private static final MediaObjectLocker instance = new MediaObjectLocker();
 
-    @Getter
-    private int lockCount = 0;
-    @Getter
-    private int currentCount = 0;
+    private Map<String, AtomicInteger> lockCount = new HashMap<>();
+    private Map<String, AtomicInteger>  currentCount = new HashMap<>();
     @Getter
     private int maxConcurrency = 0;
     @Getter
-    private int currentConcurrency = 0;
+    private int maxDepth = 0;
 
 
     static {
@@ -75,6 +74,31 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     @Override
     public Set<String> getLocks() {
         return LOCKED_MEDIA.asMap().keySet();
+    }
+
+    @Override
+    public int getLockCount() {
+        return lockCount.values().stream().mapToInt(AtomicInteger::intValue).sum();
+
+    }
+
+    @Override
+    public Map<String, Integer> getLockCounts() {
+        return lockCount.entrySet().stream().collect(
+            Collectors.toMap(Map.Entry::getKey, e -> e.getValue().intValue()));
+
+    }
+
+    @Override
+    public int getCurrentCount() {
+        return currentCount.values().stream().mapToInt(AtomicInteger::intValue).sum();
+    }
+
+    @Override
+    public Map<String, Integer> getCurrentCounts() {
+        return currentCount.entrySet().stream().collect(
+            Collectors.toMap(Map.Entry::getKey, e -> e.getValue().intValue()));
+
     }
 
 
@@ -113,12 +137,13 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
         Long nanoStart = System.nanoTime();
         AtomicInteger integer = MIDS.get().computeIfAbsent(mid, (m) -> new AtomicInteger(0));
         boolean outer = integer.incrementAndGet() == 1;
-        instance.maxConcurrency = Math.max(integer.intValue(), instance.maxConcurrency);
+        instance.maxDepth = Math.max(integer.intValue(), instance.maxDepth);
         try {
             if (outer) {
-                instance.lockCount++;
-                instance.currentCount++;
+                instance.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
+                instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
                 Semaphore semaphore = get(mid);
+                instance.maxConcurrency = Math.max(semaphore.getQueueLength(), instance.maxConcurrency);
                 try {
                     if (semaphore.hasQueuedThreads()) {
                         log.info("There are already threads for {}, waiting", mid);
@@ -143,7 +168,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
                 assert get == 0;
             }
             if (get == 0) {
-                instance.currentCount--;
+                instance.currentCount.get(reason).decrementAndGet();
                 MIDS.get().remove(mid);
             }
         }
