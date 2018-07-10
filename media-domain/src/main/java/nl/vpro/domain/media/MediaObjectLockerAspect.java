@@ -16,7 +16,9 @@ import org.aspectj.lang.annotation.Aspect;
  * @since 5.8
  */
 @Aspect
-public class MediaObjectLockerAspect {
+//@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
+@Order
+public class MediaObjectLockerAspect  {
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
