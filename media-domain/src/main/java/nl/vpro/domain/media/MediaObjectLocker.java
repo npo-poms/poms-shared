@@ -13,18 +13,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
-
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 
 import nl.vpro.services.TransactionService;
 
@@ -39,18 +35,9 @@ import nl.vpro.services.TransactionService;
 @Slf4j
 public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
-    private static ThreadLocal<Map<String, AtomicInteger>> MIDS = ThreadLocal.withInitial(HashMap::new);
 
+    private static Map<String, ReentrantLock> LOCKED_MEDIA = new ConcurrentHashMap<>();
 
-    private static LoadingCache<String, Semaphore> LOCKED_MEDIA = CacheBuilder.newBuilder()
-        .build(
-            new CacheLoader<String, Semaphore>() {
-                @Override
-                public Semaphore load(String mid) {
-                    return new Semaphore(1);
-                }
-            }
-        );
 
     private static final MediaObjectLocker instance = new MediaObjectLocker();
 
@@ -73,7 +60,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
     @Override
     public Set<String> getLocks() {
-        return LOCKED_MEDIA.asMap().keySet();
+        return LOCKED_MEDIA.keySet();
     }
 
     @Override
@@ -135,65 +122,36 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     @SneakyThrows
     public static <T> T runAlone(String mid, String reason, Callable<T> callable) {
         Long nanoStart = System.nanoTime();
-        AtomicInteger integer = MIDS.get().computeIfAbsent(mid, (m) -> new AtomicInteger(0));
-        boolean outer = integer.incrementAndGet() == 1;
-        instance.maxDepth = Math.max(integer.intValue(), instance.maxDepth);
+        ReentrantLock lock = LOCKED_MEDIA.computeIfAbsent(mid, (m) -> new ReentrantLock());
         try {
-            if (outer) {
+            if (lock.hasQueuedThreads()) {
+                log.info("There are already threads for {}, waiting", mid);
+                instance.maxConcurrency = Math.max(lock.getQueueLength(), instance.maxConcurrency);
+            }
+
+            lock.lock();
+            instance.maxDepth = Math.max(instance.maxDepth, lock.getHoldCount());
+            if (lock.getHoldCount() == 1) {
                 instance.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
                 instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
-                Semaphore semaphore = get(mid);
-                instance.maxConcurrency = Math.max(semaphore.getQueueLength(), instance.maxConcurrency);
-                try {
-                    if (semaphore.hasQueuedThreads()) {
-                        log.info("There are already threads for {}, waiting", mid);
-                    }
-                    semaphore.acquire();
-
-                    Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
-                    log.debug("Acquired lock for {}  ({}) in {}", mid, reason, aquireTime);
-
-                    return callable.call();
-                } finally {
-                    release(semaphore, mid);
-                    log.debug("Released lock for {} ({}) in {}", mid, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
-
-                }
-            } else {
-                return callable.call();
             }
+
+
+            Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
+            log.debug("Acquired lock for {}  ({}) in {}", mid, reason, aquireTime);
+
+            return callable.call();
         } finally {
-            int get = integer.decrementAndGet();
-            if (outer) {
-                assert get == 0;
+            lock.unlock();
+            if (lock.getHoldCount() == 0) {
+                LOCKED_MEDIA.remove(mid);
+                instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
+                log.debug("Released lock for {} ({}) in {}", mid, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
             }
-            if (get == 0) {
-                instance.currentCount.get(reason).decrementAndGet();
-                MIDS.get().remove(mid);
-            }
+
         }
     }
 
 
-
-
-    private static Semaphore get(String mid) {
-        if (mid == null) {
-            log.warn("Called with mid null!");
-            return new Semaphore(1);
-        }
-        try {
-            return LOCKED_MEDIA.get(mid);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private static void release(Semaphore semaphore, String mid) {
-        if (mid != null) {
-            LOCKED_MEDIA.invalidate(mid);
-        }
-        semaphore.release();
-
-    }
 
 }
