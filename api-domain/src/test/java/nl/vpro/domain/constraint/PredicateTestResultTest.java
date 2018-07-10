@@ -1,5 +1,7 @@
 package nl.vpro.domain.constraint;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.util.Locale;
 
@@ -9,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -18,15 +21,17 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
+@Slf4j
 public class PredicateTestResultTest {
+
 
     @Before
     public void setup() {
-        Locale.setDefault(Locale.US);
+        Locales.setDefault(Locale.US);
     }
 
     @Test
-    public void and() throws Exception {
+    public void and() {
         AbstractAnd<String> constraint = new AbstractAnd<String>(Constraints.alwaysTrue(), Constraints.alwaysFalse(), Constraints.alwaysFalse()) {
         };
         AndPredicateTestResult<String> result = constraint.testWithReason("foobar");
@@ -40,7 +45,7 @@ public class PredicateTestResultTest {
     }
 
     @Test
-    public void or() throws Exception {
+    public void or() {
         Constraint<String> constraint = new AbstractOr<String>(
             Constraints.alwaysFalse(),
             Constraints.alwaysFalse()
@@ -66,7 +71,12 @@ public class PredicateTestResultTest {
 
     @Test
     public void json() throws Exception {
-        PredicateTestResult<String> result = Constraints.<String>alwaysFalse().testWithReason("bla");
+        log.info("{}", Locale.getDefault());
+
+        PredicateTestResult<String> result = Constraints.<String>alwaysFalse()
+            .testWithReason("bla");
+
+        log.info("{}", Locale.getDefault());
 
         Jackson2TestUtil.roundTripAndSimilar(result, "{\n" +
             "  \"reason\" : \"AlwaysFalse\",\n" +
