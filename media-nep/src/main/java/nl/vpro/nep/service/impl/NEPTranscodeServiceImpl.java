@@ -18,6 +18,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -102,7 +103,8 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
 
     @Nonnull
     @Override
-    public WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException {
+    public WorkflowExecution transcode(
+        @Nonnull  WorkflowExecutionRequest request) throws IOException {
         CloseableHttpClient client = getHttpClient();
         String json = MAPPER.writeValueAsString(request);
         StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
@@ -123,7 +125,11 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
     @Nonnull
     @Override
     @SneakyThrows
-    public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
+    public Iterator<WorkflowExecution> getTranscodeStatuses(
+        @Nullable String mid,
+        @Nullable StatusType status,
+        @Nullable Instant from,
+        @Nullable Long limit) {
         int batchSize = 20;
         URIBuilder builder = new URIBuilder(getWorkflowsEndPoint());
         if (status != null) {
