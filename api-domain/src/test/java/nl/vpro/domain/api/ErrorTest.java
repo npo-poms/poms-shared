@@ -1,14 +1,16 @@
 package nl.vpro.domain.api;
 
-import nl.vpro.domain.constraint.Constraints;
-import nl.vpro.domain.constraint.media.And;
-import nl.vpro.domain.media.Program;
-import nl.vpro.jackson2.Jackson2Mapper;
+import java.io.IOException;
+import java.util.Locale;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
-import java.util.Locale;
+import nl.vpro.domain.constraint.Constraints;
+import nl.vpro.domain.constraint.media.And;
+import nl.vpro.domain.media.Program;
+import nl.vpro.i18n.Locales;
+import nl.vpro.jackson2.Jackson2Mapper;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.assertThatXml;
@@ -18,7 +20,7 @@ public class ErrorTest {
 
     @Before
     public void setup() {
-        Locale.setDefault(Locale.US);
+        Locales.setDefault(Locale.US);
     }
 
     @Test
