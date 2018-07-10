@@ -995,7 +995,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
-    public MediaObject addTitle(String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+    public MediaObject addTitle(@Nonnull String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
         final Title existingTitle = findTitle(owner, type);
         if (existingTitle != null) {
             existingTitle.setTitle(title);

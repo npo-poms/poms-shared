@@ -165,7 +165,7 @@ public class MediaObjectTranslation implements
     }
 
     @Override
-    public MediaObjectTranslation addTitle(String title, @Nonnull OwnerType owner,  @Nonnull TextualType type) {
+    public MediaObjectTranslation addTitle(@Nonnull String title, @Nonnull OwnerType owner,  @Nonnull TextualType type) {
         final TitleTranslation existingTitle = findTitle(owner, type);
 
         if (existingTitle != null) {
@@ -202,7 +202,8 @@ public class MediaObjectTranslation implements
     }
 
     @Override
-    public MediaObjectTranslation addDescription(String description, OwnerType owner, TextualType type) {
+    public MediaObjectTranslation addDescription(
+        @Nonnull String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
         final DescriptionTranslation existingDescription = findDescription(owner, type);
 
         if (existingDescription != null) {
