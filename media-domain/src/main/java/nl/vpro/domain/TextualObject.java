@@ -33,14 +33,14 @@ public interface TextualObject<
         return (s, t) -> getOwnedTitleCreator().apply(s, DEFAULT_OWNER, t);
     }
 
-    default TO addTitle(String title, @Nonnull  OwnerType owner, @Nonnull  TextualType type) {
+    default TO addTitle(@Nonnull String title, @Nonnull  OwnerType owner, @Nonnull  TextualType type) {
         T t = getOwnedTitleCreator().apply(title, owner, type);
         getTitles().add(t);
         return self();
     }
 
     @Override
-    default TO addTitle(String title,  @Nonnull TextualType type) {
+    default TO addTitle(@Nonnull String title,  @Nonnull TextualType type) {
         return addTitle(title, DEFAULT_OWNER, type);
     }
 
@@ -87,14 +87,14 @@ public interface TextualObject<
      */
     TriFunction<String, OwnerType, TextualType, D> getOwnedDescriptionCreator();
 
-    default TO addDescription(String description, OwnerType owner, TextualType type) {
+    default TO addDescription(@Nonnull String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
         D d = getOwnedDescriptionCreator().apply(description, owner, type);
         getDescriptions().add(d);
         return self();
     }
 
     @Override
-    default TO addDescription(String title, @Nonnull TextualType type) {
+    default TO addDescription(@Nonnull String title, @Nonnull TextualType type) {
         return addDescription(title, DEFAULT_OWNER, type);
     }
 
