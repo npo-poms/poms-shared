@@ -122,6 +122,10 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     @SneakyThrows
     public static <T> T runAlone(String mid, String reason, Callable<T> callable) {
         Long nanoStart = System.nanoTime();
+        if (mid == null) {
+            log.warn("Calling with null mid: {}", reason);
+            return callable.call();
+        }
         ReentrantLock lock = LOCKED_MEDIA.computeIfAbsent(mid, (m) -> new ReentrantLock());
         try {
             if (lock.hasQueuedThreads()) {
