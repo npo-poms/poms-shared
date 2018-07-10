@@ -249,8 +249,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetGeoRestrictions() throws Exception {
         ProgramUpdate update = programUpdate();
-        update.setGeoRestrictions(new TreeSet<>(Arrays.asList(
-            new GeoRestrictionUpdate(new GeoRestriction(Region.BENELUX)), new GeoRestrictionUpdate(new GeoRestriction(Region.NL, Instant.ofEpochMilli(0), Instant.ofEpochMilli((1000000)))))));
+        update.setGeoRestrictions(
+            new TreeSet<>(Arrays.asList(
+                new GeoRestrictionUpdate(new GeoRestriction(Region.BENELUX)), new GeoRestrictionUpdate(new GeoRestriction(Region.NL, Instant.ofEpochMilli(0), Instant.ofEpochMilli((1000000)))))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
@@ -709,7 +710,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testWithPredictions() throws IOException, SAXException {
         ProgramUpdate update = ProgramUpdate.create();
-        update.setPredictions(new HashSet<>(Arrays.asList(PredictionUpdate.builder().platform(Platform.INTERNETVOD).build())));
+        update.setPredictions(new TreeSet<>(Arrays.asList(PredictionUpdate.builder().platform(Platform.INTERNETVOD).build())));
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
