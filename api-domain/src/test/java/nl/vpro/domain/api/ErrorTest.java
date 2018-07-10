@@ -29,7 +29,7 @@ public class ErrorTest {
     }
 
     @Test
-    public void jsonWithPredicate() throws IOException {
+    public void jsonWithPredicate() {
         Error error = new Error(404, "bla");
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
         assertThatJson(error).isSimilarTo("{\n" +
@@ -62,7 +62,7 @@ public class ErrorTest {
     }
 
     @Test
-    public void xmlWithPredicate() throws IOException {
+    public void xmlWithPredicate() {
         Error error = new Error(404, "bla");
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
         assertThatXml(error).isSimilarTo("<api:error status=\"404\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
