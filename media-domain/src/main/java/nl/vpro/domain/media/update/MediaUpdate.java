@@ -221,7 +221,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private List<PortalRestrictionUpdate> portalRestrictions;
 
-    private Set<GeoRestrictionUpdate> geoRestrictions;
+    private SortedSet<GeoRestrictionUpdate> geoRestrictions;
 
     private SortedSet<TitleUpdate> titles;
 
@@ -240,7 +240,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private SortedSet<ScheduleEventUpdate> scheduleEvents;
 
-    protected Set<PredictionUpdate> predictions;
+    protected SortedSet<PredictionUpdate> predictions;
 
     private List<String> crids;
 
@@ -647,14 +647,14 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "region")
     @Valid
     @Nonnull
-    public Set<GeoRestrictionUpdate> getGeoRestrictions() {
+    public SortedSet<GeoRestrictionUpdate> getGeoRestrictions() {
          if (geoRestrictions == null) {
-             geoRestrictions = new HashSet<>();
+             geoRestrictions = new TreeSet<>();
          }
         return geoRestrictions;
     }
 
-    public void setGeoRestrictions(Set<GeoRestrictionUpdate> restrictions) {
+    public void setGeoRestrictions(SortedSet<GeoRestrictionUpdate> restrictions) {
         this.geoRestrictions = restrictions;
     }
 
@@ -910,9 +910,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
      */
     @XmlElement(name = "prediction")
     @Valid
-    public Set<PredictionUpdate> getPredictions() {
+    public SortedSet<PredictionUpdate> getPredictions() {
         if (predictions == null) {
-            predictions = new HashSet<>();
+            predictions = new TreeSet<>();
         }
         return predictions;
     }
@@ -921,7 +921,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     /**
      * @since 5.6
      */
-    public void setPredictions(Set<PredictionUpdate> predictions) {
+    public void setPredictions(SortedSet<PredictionUpdate> predictions) {
         this.predictions = predictions;
     }
 
