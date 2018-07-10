@@ -12,13 +12,13 @@ import org.aspectj.lang.annotation.Aspect;
  *
  * Just annotate your method with {@link MediaObjectLocker.Mid} and it should automaticly lock the mid if it isn't yet.
  *
+ *
  ** @author Michiel Meeuwissen
  * @since 5.8
  */
 @Aspect
 //@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
-@Order
-public class MediaObjectLockerAspect  {
+public abstract class MediaObjectLockerAspect  {
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
