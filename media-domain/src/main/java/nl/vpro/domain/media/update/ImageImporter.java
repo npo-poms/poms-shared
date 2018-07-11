@@ -4,11 +4,14 @@
  */
 package nl.vpro.domain.media.update;
 
+import javax.annotation.Nonnull;
+
 import nl.vpro.domain.media.support.Image;
 
 public interface ImageImporter {
 
-    Image save(ImageUpdate download, boolean metadata) throws DownloadException;
+    Image save(
+        @Nonnull ImageUpdate download, boolean metadata) throws DownloadException;
 
     class DownloadException extends RuntimeException {
 
