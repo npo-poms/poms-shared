@@ -96,6 +96,28 @@ public enum RoleType {
             return "Scenario";
         }
     },
+    /**
+     * For radio shows this seems usefull
+     * @since 5.8
+     */
+    DJ {
+        @Override
+        public String toString() {
+            return "DJ";
+        }
+
+    },
+    /**
+     * For radio shows this seems usefull
+     * @since 5.8
+     */
+    NEWS_PRESENTER {
+        @Override
+        public String toString() {
+            return "Nieuwslezer";
+        }
+
+    },
     UNDEFINED {
         @Override
         public String toString() {
