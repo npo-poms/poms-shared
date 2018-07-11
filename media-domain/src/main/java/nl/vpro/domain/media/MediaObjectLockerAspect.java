@@ -29,7 +29,7 @@ public abstract class MediaObjectLockerAspect  {
             reason = joinPoint.getSignature().getDeclaringType().getSimpleName() + "#" + joinPoint.getSignature().getName();
         }
 
-        return MediaObjectLocker.runAlone(mid, reason, () -> {
+        return MediaObjectLocker.withMidLock(mid, reason, () -> {
             try {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {
