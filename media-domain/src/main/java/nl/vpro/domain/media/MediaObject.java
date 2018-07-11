@@ -933,9 +933,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             geoRestrictions = new TreeSet<>();
         }
 
-        if (!geoRestrictions.contains(geoRestriction)) {
-            geoRestrictions.add(geoRestriction);
-        }
+        geoRestrictions.add(geoRestriction);
     }
 
     public boolean removeGeoRestriction(GeoRestriction restriction) {
@@ -1070,15 +1068,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     @Override
-    public MediaObject addDescription(String description, OwnerType owner, TextualType type) {
-        final Description existingDescription = findDescription(owner, type);
+    public MediaObject addDescription(@Nullable String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+        if (description != null) {
+            final Description existingDescription = findDescription(owner, type);
 
-        if (existingDescription != null) {
-            existingDescription.set(description);
-        } else {
-            this.addDescription(getOwnedDescriptionCreator().apply(description, owner, type));
+            if (existingDescription != null) {
+                existingDescription.set(description);
+            } else {
+                this.addDescription(getOwnedDescriptionCreator().apply(description, owner, type));
+            }
         }
-
         return this;
     }
 
@@ -1254,8 +1253,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     /**
      * Use {@link AuthorizedDuration#duration} in combination with {@link #getDuration} to get the java.time.Duration
-     * @param
-     * @throws ModificationException
+     * @throws ModificationException If you may not set the duration
      */
     @JsonIgnore
     @XmlTransient
@@ -1492,7 +1490,9 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return null;
     }
 
-    MemberRef createMember(MediaObject member, Integer number) throws CircularReferenceException {
+    MemberRef createMember(
+        @Nonnull MediaObject member,
+        @Nullable Integer number) throws CircularReferenceException {
         if (number == null) {
             throw new IllegalArgumentException("Must supply an ordering number.");
         }
@@ -1511,7 +1511,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return memberRef;
     }
 
-    MemberRef createMemberOf(MediaObject owner, Integer number) throws CircularReferenceException {
+    MemberRef createMemberOf(
+        @Nonnull MediaObject owner, Integer number) throws CircularReferenceException {
         return owner.createMember(this, number);
     }
 
@@ -2492,7 +2493,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     @Override
     public boolean equals(Object o) {
-        if (o != null && o instanceof MediaObject) {
+        if (o instanceof MediaObject) {
             return super.equals(o) || equalsOnMid((MediaObject) o);
         } else {
             return super.equals(o);
@@ -2503,6 +2504,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return mid != null && mid.equals(o.getMid());
     }
 
+    @SuppressWarnings("unused")
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if (predictionsForXml != null) {
             this.predictions = new TreeSet<>(predictionsForXml);

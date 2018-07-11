@@ -7,6 +7,7 @@ package nl.vpro.domain.media;
 import lombok.ToString;
 
 import java.io.StringWriter;
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
@@ -475,6 +476,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     }
 
+    /**
+     * @deprecated Use {@link #duration(Duration)}
+     */
     @SuppressWarnings("unchecked")
     @Deprecated
     default B duration(Date duration) {
@@ -537,7 +541,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
-    default B memberOf(MediaObject media, Integer number) throws CircularReferenceException {
+    default B memberOf(@Nonnull MediaObject media, Integer number) throws CircularReferenceException {
         mediaObject().createMemberOf(media, number);
         return (B) this;
     }
