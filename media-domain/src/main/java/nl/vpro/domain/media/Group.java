@@ -114,7 +114,9 @@ public class Group extends MediaObject {
     }
 
     @Override
-    MemberRef createMember(MediaObject member, Integer number) throws CircularReferenceException {
+    MemberRef createMember(
+        @Nonnull MediaObject member,
+        Integer number) throws CircularReferenceException {
         if(number == null) {
             return createMember(member);
         }
