@@ -97,7 +97,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
      *
      * If another thread is changing the mediaobject in between those event, those changes will be lost.
      *
-     * This can therefore be avoided using this annotations (or equivalently by using {@link #runAlone(String, String, Callable)}
+     * This can therefore be avoided using this annotations (or equivalently by using {@link #withMidLock(String, String, Callable)}
 
      */
     @Retention(RetentionPolicy.RUNTIME)
@@ -106,21 +106,21 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
         String reason() default "";
     }
 
-    public static <T> T runAlone(TransactionService transactionService, String mid, String reason, Callable<T> callable) {
-        return runAlone(
+    public static <T> T withMidLock(TransactionService transactionService, String mid, String reason, Callable<T> callable) {
+        return withMidLock(
             mid,
             reason,
             () -> transactionService.executeInNewTransaction(callable));
     }
 
 
-    public static <T> T getAlone(String mid, String reason, Supplier<T> callable) {
-        return runAlone(mid, reason, callable::get);
+    public static <T> T getWithMidLock(String mid, String reason, Supplier<T> callable) {
+        return withMidLock(mid, reason, callable::get);
     }
 
 
     @SneakyThrows
-    public static <T> T runAlone(String mid, String reason, Callable<T> callable) {
+    public static <T> T withMidLock(String mid, String reason, Callable<T> callable) {
         Long nanoStart = System.nanoTime();
         if (mid == null) {
             log.warn("Calling with null mid: {}", reason);
