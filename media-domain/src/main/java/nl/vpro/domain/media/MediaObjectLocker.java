@@ -19,6 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
@@ -106,7 +107,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
         String reason() default "";
     }
 
-    public static <T> T withMidLock(TransactionService transactionService, String mid, String reason, Callable<T> callable) {
+    public static <T> T withMidLock(@Nonnull TransactionService transactionService, String mid, @Nonnull String reason, @Nonnull Callable<T> callable) {
         return withMidLock(
             mid,
             reason,
@@ -114,13 +115,13 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     }
 
 
-    public static <T> T getWithMidLock(String mid, String reason, Supplier<T> callable) {
+    public static <T> T getWithMidLock(String mid, @Nonnull String reason, @Nonnull Supplier<T> callable) {
         return withMidLock(mid, reason, callable::get);
     }
 
 
     @SneakyThrows
-    public static <T> T withMidLock(String mid, String reason, Callable<T> callable) {
+    public static <T> T withMidLock(String mid, @Nonnull String reason, @Nonnull Callable<T> callable) {
         Long nanoStart = System.nanoTime();
         if (mid == null) {
             //log.warn("Calling with null mid: {}", reason, new Exception());
