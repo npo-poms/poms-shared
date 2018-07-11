@@ -9,6 +9,8 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.i18n.Locales;
@@ -189,11 +191,13 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      */
     BiFunction<String, TextualType, D> getDescriptionCreator();
 
-    default TO addDescription(String description, @Nonnull TextualType type) {
-        if (getDescriptions() == null) {
-            setDescriptions(new TreeSet<>());
+    default TO addDescription(@Nullable String description, @Nonnull TextualType type) {
+        if (StringUtils.isNotEmpty(description)) {
+            if (getDescriptions() == null) {
+                setDescriptions(new TreeSet<>());
+            }
+            getDescriptions().add(getDescriptionCreator().apply(description, type));
         }
-        getDescriptions().add(getDescriptionCreator().apply(description, type));
         return self();
     }
 
