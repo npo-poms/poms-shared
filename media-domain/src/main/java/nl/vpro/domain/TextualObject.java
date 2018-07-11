@@ -4,6 +4,9 @@ package nl.vpro.domain;
 import java.util.function.BiFunction;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
@@ -87,15 +90,17 @@ public interface TextualObject<
      */
     TriFunction<String, OwnerType, TextualType, D> getOwnedDescriptionCreator();
 
-    default TO addDescription(@Nonnull String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
-        D d = getOwnedDescriptionCreator().apply(description, owner, type);
-        getDescriptions().add(d);
+    default TO addDescription(@Nullable String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+        if (StringUtils.isNotEmpty(description)) {
+            D d = getOwnedDescriptionCreator().apply(description, owner, type);
+            getDescriptions().add(d);
+        }
         return self();
     }
 
     @Override
-    default TO addDescription(@Nonnull String title, @Nonnull TextualType type) {
-        return addDescription(title, DEFAULT_OWNER, type);
+    default TO addDescription(@Nullable String description, @Nonnull TextualType type) {
+        return addDescription(description, DEFAULT_OWNER, type);
     }
 
     default boolean removeDescription(@Nonnull OwnerType owner, @Nonnull TextualType type) {

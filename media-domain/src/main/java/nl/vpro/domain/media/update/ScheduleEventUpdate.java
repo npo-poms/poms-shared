@@ -17,10 +17,13 @@ import java.util.TreeSet;
 import java.util.function.BiFunction;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.TextualObjectUpdate;
@@ -222,11 +225,14 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     }
 
     @Override
-    public ScheduleEventUpdate addDescription(String description, @Nonnull TextualType type) {
-        if (descriptions == null) {
-            descriptions  = new TreeSet<>();
+    public ScheduleEventUpdate addDescription(
+        @Nullable String description, @Nonnull TextualType type) {
+        if (StringUtils.isNotEmpty(description)) {
+            if (descriptions == null) {
+                descriptions  = new TreeSet<>();
+            }
+            getDescriptions().add(getDescriptionCreator().apply(description, type));
         }
-        getDescriptions().add(getDescriptionCreator().apply(description, type));
         return this;
     }
 
