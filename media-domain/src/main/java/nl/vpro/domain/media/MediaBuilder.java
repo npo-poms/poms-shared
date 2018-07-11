@@ -14,8 +14,11 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
 import javax.validation.Valid;
 import javax.xml.bind.JAXB;
+
+import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.classification.Term;
@@ -320,17 +323,21 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B mainTitle(String title, OwnerType owner) {
+    default B mainTitle(@Nonnull String title, @Nonnull OwnerType owner) {
         return titles(new Title(title, owner, TextualType.MAIN));
     }
 
-    default B mainTitle(String title) {
+    default B mainTitle(@Nonnull String title) {
         return mainTitle(title, OwnerType.BROADCASTER);
     }
 
 
-    default B subTitle(String title, OwnerType owner) {
-        return titles(new Title(title, owner, TextualType.SUB));
+    default B subTitle(String title, @Nonnull OwnerType owner) {
+        if (StringUtils.isNotEmpty(title)) {
+            return titles(new Title(title, owner, TextualType.SUB));
+        } else {
+            return (B) this;
+        }
     }
 
     default B subTitle(String title) {
@@ -338,12 +345,21 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
-    default B lexicoTitle(String title, OwnerType owner) {
-        return titles(new Title(title, owner, TextualType.LEXICO));
+    default B lexicoTitle(String title, @Nonnull OwnerType owner) {
+        if (StringUtils.isNotEmpty(title)) {
+            return titles(new Title(title, owner, TextualType.LEXICO));
+        } else {
+            return (B) this;
+        }
     }
 
     default B lexicoTitle(String title) {
-        return lexicoTitle(title, OwnerType.BROADCASTER);
+        if (StringUtils.isNotEmpty(title)) {
+
+            return lexicoTitle(title, OwnerType.BROADCASTER);
+        } else {
+            return (B) this;
+        }
     }
 
     default B descriptions(Description... descriptions) {
@@ -353,8 +369,12 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B mainDescription(String description, OwnerType owner) {
-        return descriptions(new Description(description, owner, TextualType.MAIN));
+    default B mainDescription(String description, @Nonnull OwnerType owner) {
+        if (StringUtils.isNotEmpty(description)) {
+            return descriptions(new Description(description, owner, TextualType.MAIN));
+        } else {
+            return (B) this;
+        }
     }
 
     default B mainDescription(String description) {
