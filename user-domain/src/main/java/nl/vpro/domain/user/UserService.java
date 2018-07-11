@@ -61,6 +61,7 @@ public interface UserService<T extends User> {
         return this::dropAuthentication;
     }
 
+
     void dropAuthentication();
 
     default boolean isPrivilegedUser() {
@@ -171,6 +172,23 @@ public interface UserService<T extends User> {
             } finally {
                 dropAuthentication();
             }
+        };
+    }
+
+
+    default Logout restoringAutoClosable() {
+        Object onBehalfOf = getAuthentication();
+        if (onBehalfOf != null) {
+            try {
+                String principal = (String) onBehalfOf.getClass().getMethod("getPrincipal").invoke(onBehalfOf);
+                MDC.put("onBehalfOf", ":" + principal);
+            } catch (Exception e) {
+                MDC.put("onBehalfOf", ":" + onBehalfOf.toString());
+            }
+        }
+        return () -> {
+            restoreAuthentication(onBehalfOf);
+            MDC.remove("onBehalfOf");
         };
     }
 
