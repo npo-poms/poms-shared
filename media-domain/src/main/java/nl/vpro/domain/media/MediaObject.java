@@ -640,7 +640,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
                 toUpdate.retainAll(values);
                 for (T v : values) {
                     for (T toUpdateValue : toUpdate) {
-                        if (toUpdateValue != null && toUpdateValue instanceof Updatable && toUpdateValue.equals(v)) {
+                        if (toUpdateValue instanceof Updatable && toUpdateValue.equals(v)) {
                             // noinspection unchecked
                             ((Updatable) toUpdateValue).update(v);
                         }
@@ -1104,9 +1104,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             genres = new TreeSet<>();
         }
 
-        if (!genres.contains(genre)) {
-            genres.add(genre);
-        }
+        genres.add(genre);
 
         return this;
     }
