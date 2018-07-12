@@ -9,6 +9,7 @@ package nl.vpro.domain.media;
 import java.time.Instant;
 import java.util.TreeSet;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
