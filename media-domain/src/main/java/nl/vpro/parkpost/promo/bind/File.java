@@ -63,6 +63,7 @@ public class File {
         this.format = format;
         this.width = width;
         this.height = height;
+        this.bitrate = bitrate;
     }
 
     public AVFileFormat getFormat() {
