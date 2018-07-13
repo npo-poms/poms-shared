@@ -38,20 +38,20 @@ public class RelationTest extends ComparableTest<Relation> {
     }
 
     @Test
-    public void testGetUrnOnNull() throws Exception {
+    public void testGetUrnOnNull() {
         Relation relation = new Relation();
         assertThat(relation.getUrn()).isNull();
     }
 
     @Test
-    public void testGetUrnFormat() throws Exception {
+    public void testGetUrnFormat() {
         Relation relation = new Relation();
         relation.setId(1L);
         assertThat(relation.getUrn()).isEqualTo("urn:vpro:media:relation:1");
     }
 
     @Test
-    public void testSetUrn() throws Exception {
+    public void testSetUrn() {
         Relation relation = new Relation();
         relation.setUrn("urn:vpro:media:relation:79");
 
@@ -59,13 +59,13 @@ public class RelationTest extends ComparableTest<Relation> {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSetUrnWithoutAnId() throws Exception {
+    public void testSetUrnWithoutAnId() {
         Relation relation = new Relation();
         relation.setUrn("urn:vpro:media:relation:");
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSetUrnFormat() throws Exception {
+    public void testSetUrnFormat() {
         Relation relation = new Relation();
         relation.setUrn("vpro:media:relation:79");
     }
@@ -88,14 +88,14 @@ public class RelationTest extends ComparableTest<Relation> {
     }
 
     @Test(expected = UnsupportedOperationException.class)
-    public void testUpdateOnDifferentDefinitions() throws Exception {
+    public void testUpdateOnDifferentDefinitions() {
         Relation to = new Relation(new RelationDefinition());
         Relation from = new Relation(new RelationDefinition("GIDS", "BNN"));
         Relation.update(from, to);
     }
 
     @Test
-    public void testUpdateOnFieldsCopied() throws Exception {
+    public void testUpdateOnFieldsCopied() {
         Relation to = new Relation(new RelationDefinition("LABEL", "VPRO"));
         Relation from = new Relation(new RelationDefinition("LABEL", "VPRO"));
         from.setId(1L);
@@ -110,7 +110,7 @@ public class RelationTest extends ComparableTest<Relation> {
     }
 
     @Test
-    public void testUpdateOnFieldsNullArgs() throws Exception {
+    public void testUpdateOnFieldsNullArgs() {
         Relation to = null;
         Relation from = new Relation(new RelationDefinition());
         to = Relation.update(from, to);
