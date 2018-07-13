@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Builder;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -211,7 +212,15 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
 
         Relation relation = (Relation)o;
 
-        return id != null && id.equals(relation.getId());
+        if (id != null && relation.getId() != null) {
+
+            return id.equals(relation.getId());
+        } else {
+            return Objects.equals(definition, relation.definition) &&
+                Objects.equals(uriRef, relation.uriRef) &&
+                Objects.equals(text, relation.text);
+
+        }
 
     }
 
