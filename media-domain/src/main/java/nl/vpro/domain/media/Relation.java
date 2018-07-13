@@ -213,7 +213,6 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
         Relation relation = (Relation)o;
 
         if (id != null && relation.getId() != null) {
-
             return id.equals(relation.getId());
         } else {
             return Objects.equals(definition, relation.definition) &&
@@ -226,7 +225,10 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : super.hashCode();
+        int result  = (definition != null ? definition.hashCode() : 0);
+        result = 31 * result + (uriRef != null ? uriRef.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -251,7 +253,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
             return id.compareTo(r.id);
         }
 
-        return hashCode() - r.hashCode();
+        return 0;
     }
 
     @Override
