@@ -66,24 +66,37 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
         }
-        try (OutputStream out = outputStream.get()) {
+        try {
             checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {
-                if (out  != null) {
-                    try (InputStream in = handle.new ReadAheadRemoteFileInputStream(32);
-                    ) {
-
-                        long copy = IOUtils.copy(in, out, 1024 * 10);
-                        log.info("Copied {} bytes", copy);
-                    } catch (SFTPException sfte) {
-                        log.error(sfte.getMessage());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
+                OutputStream out = null;
+                try {
+                    out = outputStream.get();
+                    if (out != null) {
+                        try (InputStream in = handle.new ReadAheadRemoteFileInputStream(32)) {
+                            long copy = IOUtils.copy(in, out, 1024 * 10);
+                            log.info("Copied {} bytes", copy);
+                        } catch (SFTPException sfte) {
+                            log.error(sfte.getMessage());
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
+                } finally {
+                    if (out != null) {
+                        try {
+                            out.close();
+                        } catch (IOException ioe) {
+                            log.warn("ioe.");
+                        }
+                    }
+
                 }
-            });
-        } catch (IOException ioe) {
-            log.error(ioe.getMessage(), ioe);
+                }
+            );
+        } catch (IOException e) {
+            log.error(e.getMessage(), e);
         }
+
     }
 
     protected void checkAvailabilityAndConsume(
