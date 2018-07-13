@@ -59,4 +59,8 @@ public class NEPItemizeRequest {
     }
 
 
+    public String guessOutput_filename() {
+        return identifier + "_" + starttime.replaceAll("[.:]", "") + "-" + endtime.replaceAll("[.:]", "") + ".mp4";
+    }
+
 }
