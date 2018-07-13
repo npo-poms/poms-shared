@@ -4,6 +4,9 @@
  */
 package nl.vpro.parkpost.promo.bind;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -22,10 +25,14 @@ import nl.vpro.domain.media.AVFileFormat;
 public class File {
 
     @XmlValue
+    @Getter
+    @Setter
     private String url;
 
 
     @XmlAttribute(name = "Filename")
+    @Getter
+    @Setter
     private String fileName;
 
 
@@ -33,39 +40,29 @@ public class File {
     private AVFileFormat format;
 
     @XmlAttribute(name = "height")
+    @Getter
+    @Setter
     private Integer height;
 
     @XmlAttribute(name = "width")
+    @Getter
+    @Setter
     private Integer width;
 
     @XmlAttribute(name = "bitrate")
+    @Getter
+    @Setter
     private Integer bitrate;
 
     public File() {
     }
 
     @lombok.Builder
-    public File(String fileName, AVFileFormat format, int width, int height) {
+    private File(String fileName, AVFileFormat format, Integer width, Integer height, Integer bitrate) {
         this.fileName = fileName;
         this.format = format;
         this.width = width;
         this.height = height;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
     }
 
     public AVFileFormat getFormat() {
@@ -74,30 +71,6 @@ public class File {
 
     public void setFormat(AVFileFormat format) {
         this.format = format;
-    }
-
-    public Integer getHeight() {
-        return height;
-    }
-
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
-    public Integer getWidth() {
-        return width;
-    }
-
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    public Integer getBitrate() {
-        return bitrate;
-    }
-
-    public void setBitrate(Integer bitrate) {
-        this.bitrate = bitrate;
     }
 
     public String getExtension() {
