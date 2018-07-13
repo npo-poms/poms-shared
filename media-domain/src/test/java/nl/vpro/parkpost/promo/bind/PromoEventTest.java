@@ -64,7 +64,7 @@ public class PromoEventTest {
 
     @Test
     public void testFiles() {
-        PromoEvent event = JAXB.unmarshal(getClass().getResourceAsStream("/BP0702VD_2_HOLLANDS.xml"), PromoEvent.class);
+        PromoEvent event = JAXB.unmarshal(getClass().getResourceAsStream("/parkpost/BP0702VD_2_HOLLANDS.xml"), PromoEvent.class);
 
         assertThat(event.getFiles()).hasSize(2);
         System.out.println(event.getFiles().get(0).getUrl());
@@ -73,7 +73,7 @@ public class PromoEventTest {
 
     @Test
     public void testFiles2() {
-        PromoEvent event = JAXB.unmarshal(getClass().getResourceAsStream("/parkpost.xml"), PromoEvent.class);
+        PromoEvent event = JAXB.unmarshal(getClass().getResourceAsStream("/parkpost/parkpost.xml"), PromoEvent.class);
         assertThat(event.getFiles()).hasSize(6);
         assertThat(event.getFiles().get(0).getFileName()).isEqualTo("1P0203MO_JOCHEMMY.ismc");
     }
