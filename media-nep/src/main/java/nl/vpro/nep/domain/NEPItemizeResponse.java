@@ -1,5 +1,6 @@
 package nl.vpro.nep.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@lombok.Builder
 public class NEPItemizeResponse {
     private Boolean success;
     private Integer id;
