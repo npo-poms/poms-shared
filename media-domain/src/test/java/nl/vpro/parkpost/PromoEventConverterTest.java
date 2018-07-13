@@ -15,10 +15,10 @@ import nl.vpro.domain.media.Relation;
 import nl.vpro.domain.media.RelationDefinition;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.update.ProgramUpdate;
-import nl.vpro.jassert.assertions.MediaAssertions;
 import nl.vpro.parkpost.promo.bind.PromoEvent;
 
-import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -64,14 +64,14 @@ public class PromoEventConverterTest {
     public void testConvertForProductCodeRelation() throws Exception {
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
-        MediaAssertions.mediaAssertThat(update).hasRelation(new Relation(new RelationDefinition("PROMO_PRODUCTCODE", "NPO"), null, event.getProductCode()));
+        assertThat(update.getRelations()).contains(new Relation(new RelationDefinition("PROMO_PRODUCTCODE", "NPO"), null, event.getProductCode()));
     }
 
     @Test
     public void testConvertForPromoVersionRelation() throws Exception {
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
-        MediaAssertions.mediaAssertThat(update).hasRelation(new Relation(new RelationDefinition("PROMO_VERSION", "NPO"), null, "AK"));
+        assertThat(update.getRelations()).contains(new Relation(new RelationDefinition("PROMO_VERSION", "NPO"), null, "AK"));
     }
 
     @Test
@@ -79,7 +79,7 @@ public class PromoEventConverterTest {
         event.setNet("NED1");
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
-        MediaAssertions.mediaAssertThat(update).hasRelation(new Relation(new RelationDefinition("PROMO_CHANNEL", "NPO"), null, "NED1"));
+        assertThat(update.getRelations()).contains(new Relation(new RelationDefinition("PROMO_CHANNEL", "NPO"), null, "NED1"));
     }
 
     @Test
@@ -87,7 +87,7 @@ public class PromoEventConverterTest {
         event.setReferrer("Morgen");
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
-        MediaAssertions.mediaAssertThat(update).hasRelation(new Relation(new RelationDefinition("PROMO_REFERRER", "NPO"), null, "Morgen"));
+        assertThat(update.getRelations()).contains(new Relation(new RelationDefinition("PROMO_REFERRER", "NPO"), null, "Morgen"));
     }
 
     @Test
@@ -97,7 +97,7 @@ public class PromoEventConverterTest {
 
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
-        MediaAssertions.mediaAssertThat(update).hasPublishStart(start);
+        assertThat(update.getPublishStartInstant()).isEqualTo(start);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class PromoEventConverterTest {
 
         Program update = PromoEventConverter.convert(event, locationBaseUrl).fetch();
 
-        MediaAssertions.mediaAssertThat(update).hasPublishStop(end);
+        assertThat(update.getPublishStopInstant()).isEqualTo(end);
     }
 
     @Test
