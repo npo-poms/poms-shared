@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<NPO_gfxwrp>
+  <ProductCode>1P1302AK_BOEKEN4</ProductCode>
+  <OrderCode>1P110213_VPR_BOEKEN______</OrderCode>
+  <PromotedProgramProductCode>VPWON_1172108</PromotedProgramProductCode>
+  <Referrer>Vanavond</Referrer>
+  <MXF_Name>MXF11239095</MXF_Name>
+  <ProgramTitle/>
+  <EpisodeTitle>Hollands welvaren</EpisodeTitle>
+  <Net>1</Net>
+  <PromoType>P</PromoType>
+  <TrailerTitle/>
+  <SerieTitle>Hollands welvaren</SerieTitle>
+  <FrameCount>886</FrameCount>
+  <VideoFormat>HD</VideoFormat>
+  <PlacingWindowStart>2013-01-03T00:00:00+01:00</PlacingWindowStart>
+  <PlacingWindowEnd>2013-01-03T22:26:00+01:00</PlacingWindowEnd>
+  <FirstTransmissionDate>2013-01-03T22:26:30+01:00</FirstTransmissionDate>
+  <Files>
+    <File height="162" width="288" format="HASP">http://adaptive.npostreaming.nl/u/npo/promo/1P1302AK_BOEKEN4/1P1302AK_BOEKEN4.ism</File>
+    <File height="162" width="288" format="MP4" bitrate="1000000">http://www.npo.nl/npo/promo/1P1302AK_BOEKEN4/1P1302AK_BOEKEN4.mp4</File>
+  </Files>
+</NPO_gfxwrp>
