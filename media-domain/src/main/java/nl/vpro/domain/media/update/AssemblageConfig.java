@@ -13,7 +13,7 @@ import nl.vpro.domain.media.support.OwnerType;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@lombok.Builder
+@lombok.Builder(builderClassName = "Builder")
 @Data
 @ToString
 public class AssemblageConfig {
@@ -42,5 +42,22 @@ public class AssemblageConfig {
 
     @lombok.Builder.Default
     boolean createScheduleEvents = false;
+
+    @lombok.Builder.Default
+    boolean locationsUpdate = false;
+
+    public static Builder withAllTrue() {
+        return builder()
+            .copyWorkflow(true)
+            .copyLanguageAndCountry(true)
+            .copyPredictions(true)
+            .episodeOfUpdate(true)
+            .memberOfUpdate(true)
+            .ratingsUpdate(true)
+            .imageMetaData(true)
+            .createScheduleEvents(true)
+            .locationsUpdate(true);
+
+    }
 
 }
