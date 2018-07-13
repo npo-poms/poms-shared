@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import lombok.Lombok;
+import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,6 +18,7 @@ import org.aspectj.lang.annotation.Aspect;
  * @since 5.8
  */
 @Aspect
+@Slf4j
 //@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
 public abstract class MediaObjectLockerAspect  {
 
@@ -44,7 +46,12 @@ public abstract class MediaObjectLockerAspect  {
             return object.toString();
         }
         if (object instanceof MediaIdentifiable) {
-            return ((MediaIdentifiable) object).getMid();
+            String mid = ((MediaIdentifiable) object).getMid();
+            if (mid == null) {
+                log.warn("Object {} has no mid", object);
+            }
+
+            return mid;
         }
         throw new IllegalStateException();
     }
