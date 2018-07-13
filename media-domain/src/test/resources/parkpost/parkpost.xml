@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<NPO_gfxwrp>
+  <ProductCode>1P0203MO_JOCHEMMY</ProductCode>
+  <OrderCode>1P130302_VARA_JOCHEM_M____</OrderCode>
+  <Broadcaster>VPRO</Broadcaster>
+  <PromotedProgramProductCode>WO_VPRO_047757BESTAATNIET</PromotedProgramProductCode>
+  <Referrer>Morgen</Referrer>
+  <MXF_Name>MXF31240697</MXF_Name>
+  <ProgramTitle/>
+  <EpisodeTitle>JOCHEM MYJER</EpisodeTitle>
+  <Net>1</Net>
+  <PromoType>P</PromoType>
+  <TrailerTitle/>
+  <SerieTitle/>
+  <FrameCount>731</FrameCount>
+  <VideoFormat>HD</VideoFormat>
+  <Files>
+    <File Filename="1P0203MO_JOCHEMMY.ismc"/>
+    <File Filename="1P0203MO_JOCHEMMY_L1.ismv"/>
+    <File Filename="1P0203MO_JOCHEMMY_L2.ismv"/>
+    <File Filename="1P0203MO_JOCHEMMY_L3.ismv"/>
+    <File Filename="1P0203MO_JOCHEMMY_L4.ismv"/>
+    <File Filename="1P0203MO_JOCHEMMY.ism"/>
+  </Files>
+  <PlacingWindowStart>2013-03-01T00:00:00+01:00</PlacingWindowStart>
+  <PlacingWindowEnd>2013-03-01T23:59:59+01:00</PlacingWindowEnd>
+  <FirstTransmissionDate>2013-03-02T20:28:00+01:00</FirstTransmissionDate>
+</NPO_gfxwrp>
