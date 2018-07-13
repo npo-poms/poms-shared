@@ -28,7 +28,7 @@
             <phase>generate-sources</phase>
             <configuration>
               <processors>
-                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
+                <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
               </processors>
             </configuration>
           </execution>
