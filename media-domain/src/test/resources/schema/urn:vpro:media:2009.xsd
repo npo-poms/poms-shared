@@ -587,6 +587,8 @@
       <xs:enumeration value="COMMENTATOR"/>
       <xs:enumeration value="COMPOSER"/>
       <xs:enumeration value="SCRIPTWRITER"/>
+      <xs:enumeration value="DJ"/>
+      <xs:enumeration value="NEWS_PRESENTER"/>
       <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>
