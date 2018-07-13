@@ -203,13 +203,14 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
      */
     public void setMidRef(String midRef) {
         if(parent != null) {
-            if (parent.getMid().equals(midRef)) {
-                return;
-            } else {
-                throw new IllegalStateException("This segments program holds the midRef for this segment");
+            if (midRef != null) {
+                if (parent.getMid().equals(midRef)) {
+                    return;
+                } else {
+                    throw new IllegalStateException("This segments program holds the midRef for this segment");
+                }
             }
         }
-
         this.midRef = midRef;
     }
 
@@ -320,6 +321,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         if(parent instanceof Program) {
             this.parent = (Program)parent;
             this.urnRef = null;
+            this.midRef = null;
         }
     }
 
