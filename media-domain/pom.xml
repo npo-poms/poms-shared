@@ -28,6 +28,7 @@
             <phase>generate-sources</phase>
             <configuration>
               <processors>
+                <!-- https://stackoverflow.com/questions/31805327/how-to-cohexist-lombok-and-jpametalmodel-processors-with-maven -->
                 <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor,lombok.launch.AnnotationProcessorHider$AnnotationProcessor</processor>
               </processors>
             </configuration>
