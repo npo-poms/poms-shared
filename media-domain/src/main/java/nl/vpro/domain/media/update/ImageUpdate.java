@@ -5,6 +5,8 @@
 package nl.vpro.domain.media.update;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -95,6 +97,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     private Instant publishStopInstant;
 
     @XmlAttribute(required = true)
+    @Getter @Setter
     Boolean highlighted = false;
 
     @XmlElement(required = true)
@@ -225,10 +228,10 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         this.title = title;
         this.type = type;
         Stream.of(imageLocation, imageData, imageUrn).filter(Objects::nonNull).forEach(o -> {
-                if (this.image != null) {
-                    throw new IllegalStateException("Can specify only on of imageLocation, imageData or imageUrn");
-                }
-                this.image = o;
+            if (this.image != null) {
+                throw new IllegalStateException("Can specify only on of imageLocation, imageData or imageUrn");
+            }
+            this.image = o;
             }
         );
         this.license = license;
@@ -263,7 +266,10 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         result.setUrn(urn);
         if (image instanceof String) {
             result.setImageUri((String) image);
+        } else if (image instanceof ImageLocation) {
+            //result.setImageUri(((ImageLocation) image).getUrl());
         }
+
         Embargos.copy(this, result);
         return result;
     }
@@ -310,21 +316,29 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         return this;
     }
 
-    public Boolean isHighlighted() {
-        return highlighted;
-    }
-
-    public void setHighlighted(Boolean highlighted) {
-        this.highlighted = highlighted;
-    }
-
-
+    /**
+     * Sets the image as an {@link ImageData} object. I.e. the actual blob
+     */
     public void setImage(ImageData image) {
         this.image = image;
     }
 
+
+    /**
+     * Sets the image as an {@link ImageLocation} object. I.e. a reference to some remote url.
+     */
     public void setImage(ImageLocation image) {
         this.image = image;
+    }
+
+
+    /**
+     * Sets the image as an urn, i.e. a reference to the image database
+     */
+    public void setImage(String urn) {
+        if (this.image == null) {
+            this.image = urn;
+        }
     }
 
     @Override

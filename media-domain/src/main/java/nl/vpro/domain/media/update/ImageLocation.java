@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,6 +24,8 @@ public class ImageLocation {
     @XmlElement
     @NotNull(message = "provide image location")
     @URI(message = "provide a valid url to image location")
+    @Getter
+    @Setter
     private String url;
 
     private ImageLocation() {
@@ -31,13 +36,6 @@ public class ImageLocation {
         this.url = url;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     @Override
     public String toString() {
