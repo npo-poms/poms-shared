@@ -39,7 +39,7 @@ public class Locations {
         return addLocation(program, platform, encryption, pubOptie, owner, replaces);
     }
 
-    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(MediaObject mediaObject, Platform platform) {
+    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate) {
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         if (platform == Platform.INTERNETVOD) {
@@ -69,7 +69,7 @@ public class Locations {
                         .build();
                 } else {
                     if (existingPredictionForPlatform.getEncryption() != Encryption.DRM) {
-                        createDrmImplicitely(mediaObject, platform, authorityLocations);
+                        createDrmImplicitely(mediaObject, platform, authorityLocations, locationPredicate);
                         if (authorityLocations.isEmpty()) {
                             return Locations.RealizeResult.builder()
                                 .needed(false)
@@ -101,7 +101,7 @@ public class Locations {
         }
 
 
-        Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption, "For " + encryption);
+        Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
             updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
@@ -109,7 +109,7 @@ public class Locations {
 
         //MSE-3992
         if (encryption != Encryption.DRM) {
-            createDrmImplicitely(mediaObject, platform, authorityLocations);
+            createDrmImplicitely(mediaObject, platform, authorityLocations, locationPredicate);
         }
 
         if (authorityLocations.isEmpty()) {
@@ -127,22 +127,22 @@ public class Locations {
             .build();
     }
 
-    private static void createDrmImplicitely(MediaObject mediaObject, Platform platform, List<Location> authorityLocations) {
-            Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too");
+    private static void createDrmImplicitely(MediaObject mediaObject, Platform platform, List<Location> authorityLocations, Predicate<Location> locationPredicate) {
+            Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
             if (authorityLocation2 != null) {
                 authorityLocations.add(authorityLocation2);
                 updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
             }
     }
 
-    private static Location getAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption, String reason) {
+    private static Location getAuthorityLocation(MediaObject mediaObject, Platform platform, Encryption encryption, String reason, Predicate<Location> locationPredicate) {
         String locationUrl = createLocationUrl(mediaObject, platform, encryption, "nep");
         if (locationUrl == null) {
             return null;
             // I think this cannot happen
         }
 
-        // Checks if this exaction url is available already with correct owne?
+        // Checks if this exaction url is available already with correct owner?
         Location authorityLocation = mediaObject.findLocation(locationUrl, OwnerType.AUTHORITY);
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
 
@@ -150,6 +150,7 @@ public class Locations {
             // no, just check platform then.
             authorityLocation = getAuthorityLocationsForPlatform(mediaObject, platform).stream()
                 .filter(l -> getEncryptionFromProgramUrl(l) == encryption)
+                .filter(locationPredicate::test)
                 .findFirst().
                 orElse(null);
         }
@@ -176,9 +177,12 @@ public class Locations {
     }
 
 
-    public static void realizeAndRevokeLocationsIfNeeded(MediaObject media, Platform platform) {
-        Locations.removeLocationForPlatformIfNeeded(media, platform, (ot) -> true);
-        Locations.realizeStreamingPlatformIfNeeded(media, platform);
+    /**
+     * @deprecated Use  nl.vpro.camel.media.services.AuthorityLocationsService
+     */
+    static void realizeAndRevokeLocationsIfNeeded(MediaObject media, Platform platform) {
+        Locations.removeLocationForPlatformIfNeeded(media, platform, (l) -> true);
+        Locations.realizeStreamingPlatformIfNeeded(media, platform, (l) -> true);
         Locations.updatePredictionStates(media, platform);
     }
 
