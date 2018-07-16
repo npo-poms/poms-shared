@@ -273,12 +273,12 @@ public class Locations {
 
 
 
-    public static void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<OwnerType> ownerType){
+    public static void removeLocationForPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate){
         List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
         Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
         for (Location existingPlatformLocation : existingPlatformLocations) {
-            if (! ownerType.test(existingPlatformLocation.getOwner())) {
+            if (! locationPredicate.test(existingPlatformLocation)) {
                 continue;
             }
             if (!existingPredictionForPlatform.isPlannedAvailability()) {
