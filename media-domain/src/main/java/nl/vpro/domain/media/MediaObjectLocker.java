@@ -120,6 +120,13 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     }
 
 
+     public static void withMidLock(String mid, @Nonnull String reason, @Nonnull Runnable runnable) {
+        withMidLock(mid, reason, () -> {
+            runnable.run();
+            return null;
+        });
+
+     }
     @SneakyThrows
     public static <T> T withMidLock(String mid, @Nonnull String reason, @Nonnull Callable<T> callable) {
         Long nanoStart = System.nanoTime();
