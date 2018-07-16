@@ -18,12 +18,31 @@ import nl.vpro.domain.media.support.OwnerType;
 @Data
 @ToString
 public class AssemblageConfig {
-    @lombok.Builder.Default
+   @lombok.Builder.Default
     OwnerType ownerType = OwnerType.BROADCASTER;
-    final boolean copyWorkflow;
-    final boolean copyLanguageAndCountry;
-    final boolean imageMetaData;
-    final boolean copyPredictions;
+
+    @lombok.Builder.Default
+    boolean copyWorkflow = false;
+
+    @lombok.Builder.Default
+    boolean copyLanguageAndCountry = false;
+
+    @lombok.Builder.Default
+    boolean imageMetaData = false;
+
+    @lombok.Builder.Default
+    boolean copyPredictions = false;
+
+    @lombok.Builder.Default
+    boolean episodeOfUpdate = true;
+    @lombok.Builder.Default
+    boolean memberOfUpdate = true;
+    @lombok.Builder.Default
+    boolean ratingsUpdate = true;
+
+    @lombok.Builder.Default
+    boolean createScheduleEvents = false;
+
     @lombok.Builder.Default
     boolean locationsUpdate = false;
 
