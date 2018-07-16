@@ -65,13 +65,7 @@ public interface UserService<T extends User> {
     void dropAuthentication();
 
     default boolean isPrivilegedUser() {
-        return currentUserHasRole(
-            Roles.SUPERADMIN_ROLE,
-            Roles.SUPERPROCESS_ROLE,
-            Roles.PUBLISHER_ROLE,
-            Roles.SUPPORT_ROLE,
-            Roles.SYSTEM_ROLE
-        );
+        return currentUserHasRole(Roles.PRIVILEGED);
     }
 
     default boolean isProcessUser() {
