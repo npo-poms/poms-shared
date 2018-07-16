@@ -1,5 +1,10 @@
 package nl.vpro.domain;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.4
@@ -101,4 +106,18 @@ public class Roles {
     public static final String PAGES_SUPERPROCESS = "ROLE_PAGES_SUPERPROCESS";
 
 
+
+    public static final String[] PRIVILEGED = {
+        SUPERADMIN_ROLE,
+        SUPERPROCESS_ROLE,
+        PUBLISHER_ROLE,
+        SUPPORT_ROLE,
+        SYSTEM_ROLE
+    };
+
+    public static final String[] CAN_CHOOSE_OWNER_TYPE = {
+        MIS_ROLE,
+        SUPERADMIN_ROLE
+    };
 }
+
