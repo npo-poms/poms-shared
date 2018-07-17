@@ -523,7 +523,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public void setChannel(Channel channel) {
-        if (this.channel != null && channel != this.channel) {
+        if (this.channel != null && channel != null && channel != this.channel) {
             throw new IllegalStateException();
         }
         this.channel = channel;
