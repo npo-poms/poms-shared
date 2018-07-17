@@ -45,7 +45,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     @XmlTransient
     private Long id;
 
-    @Column(name = "description", nullable = false)
+    @Column(nullable = false)
     @Lob
     @Type(type = "org.hibernate.type.StringType")
     @NotNull(message = "description not set")
@@ -57,7 +57,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 64000, message = "{nl.vpro.constraints.text.Size.max}")
     })
-    protected String description;
+    protected String value;
 
     @XmlTransient
     @ManyToOne(targetEntity = MediaObject.class)
@@ -68,7 +68,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
 
     public Description(String description, OwnerType owner, TextualType type) {
         super(owner, type);
-        this.description = description;
+        this.value = description;
     }
 
     public Description(Description source) {
@@ -93,21 +93,23 @@ public class Description extends AbstractOwnedText<Description> implements Seria
         return new Description(main, type, TextualType.MAIN);
     }
 
+    @Deprecated
     public String getDescription() {
-        return description;
+        return value;
     }
 
+    @Deprecated
     public void setDescription(String description) {
-        this.description = strip(description);
+        this.value = strip(description);
     }
 
     @Override
     public String get() {
-        return getDescription();
+        return value;
     }
     @Override
     public void set(String s) {
-        setDescription(s);
+        this.value = strip(s);
     }
 
     protected static String strip(String s) {
