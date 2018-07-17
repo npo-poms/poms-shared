@@ -19,7 +19,7 @@ import nl.vpro.domain.media.support.Title;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "titleUpdateType",
-    propOrder = {"title"})
+    propOrder = {})
 public class TitleUpdate implements TypedText {
 
     @XmlValue
@@ -53,6 +53,7 @@ public class TitleUpdate implements TypedText {
 
 
     @Deprecated
+    @XmlTransient
     public String getTitle() {
         return get();
     }
