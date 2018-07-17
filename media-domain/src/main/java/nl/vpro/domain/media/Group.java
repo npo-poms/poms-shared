@@ -147,6 +147,12 @@ public class Group extends MediaObject {
         return type;
     }
 
+    @Override
+    public void setMediaType(MediaType type) {
+        setType((GroupType) type.getSubType());
+
+    }
+
     public void setType(GroupType type) {
         this.type = type;
     }
