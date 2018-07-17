@@ -996,7 +996,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     public MediaObject addTitle(@Nonnull String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
         final Title existingTitle = findTitle(owner, type);
         if (existingTitle != null) {
-            existingTitle.setTitle(title);
+            existingTitle.set(title);
         } else {
             this.addTitle(getOwnedTitleCreator().apply(title, owner, type));
         }

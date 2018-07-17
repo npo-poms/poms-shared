@@ -22,7 +22,8 @@ import nl.vpro.domain.media.support.Title;
     propOrder = {"title"})
 public class TitleUpdate implements TypedText {
 
-    private String title;
+    @XmlValue
+    private String value;
 
     @NotNull
     private TextualType type;
@@ -37,7 +38,7 @@ public class TitleUpdate implements TypedText {
     }
 
     public TitleUpdate(String title, @Nonnull TextualType type) {
-        this.title = title;
+        this.value  = title;
         this.type = type;
     }
 
@@ -51,13 +52,14 @@ public class TitleUpdate implements TypedText {
     }
 
 
-    @XmlValue
+    @Deprecated
     public String getTitle() {
-        return title;
+        return get();
     }
 
+    @Deprecated
     public void setTitle(String title) {
-        this.title = title;
+        set(title);
     }
 
     @Override
@@ -115,7 +117,7 @@ public class TitleUpdate implements TypedText {
     @Override
     public String toString() {
         return "TitleUpdate{" +
-            "title='" + title + '\'' +
+            "title='" + value + '\'' +
             ", type=" + type +
             ", media=" + (media == null ? null : media.getMid()) +
             '}';
@@ -123,11 +125,11 @@ public class TitleUpdate implements TypedText {
 
     @Override
     public void set(String s) {
-        setTitle(s);
+        this.value = s;
     }
 
     @Override
     public String get() {
-        return getTitle();
+        return value;
     }
 }
