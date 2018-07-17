@@ -18,7 +18,7 @@ import nl.vpro.domain.media.support.TextualType;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "descriptionUpdateType",
-    propOrder = {"description"})
+    propOrder = {})
 public class DescriptionUpdate implements TypedText {
 
     @XmlValue
@@ -48,6 +48,7 @@ public class DescriptionUpdate implements TypedText {
     }
 
     @Deprecated
+    @XmlTransient
     public String getDescription() {
         return get();
     }
