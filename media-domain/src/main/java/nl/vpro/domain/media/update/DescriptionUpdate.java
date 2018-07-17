@@ -21,7 +21,8 @@ import nl.vpro.domain.media.support.TextualType;
     propOrder = {"description"})
 public class DescriptionUpdate implements TypedText {
 
-    private String description;
+    @XmlValue
+    private String value;
 
     @NotNull
     private TextualType type;
@@ -32,7 +33,7 @@ public class DescriptionUpdate implements TypedText {
     }
 
     public DescriptionUpdate(String description, TextualType type) {
-        this.description = description;
+        this.value = description;
         this.type = type;
     }
 
@@ -46,13 +47,14 @@ public class DescriptionUpdate implements TypedText {
         return new DescriptionUpdate(to.get(), to.getType());
     }
 
-    @XmlValue
+    @Deprecated
     public String getDescription() {
-        return description;
+        return get();
     }
 
+    @Deprecated
     public void setDescription(String description) {
-        this.description = description;
+        set(description);
     }
 
     @Override
@@ -113,11 +115,11 @@ public class DescriptionUpdate implements TypedText {
 
     @Override
     public void set(String s) {
-        setDescription(s);
+        this.value = s;
     }
 
     @Override
     public String get() {
-        return getDescription();
+        return value;
     }
 }
