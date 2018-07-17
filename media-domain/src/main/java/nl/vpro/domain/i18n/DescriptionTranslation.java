@@ -13,8 +13,8 @@ import nl.vpro.domain.media.support.TextualType;
 @Entity
 public class DescriptionTranslation extends AbstractOwnedTextEntity<DescriptionTranslation, MediaObjectTranslation> {
 
-    public DescriptionTranslation(String title, OwnerType owner, TextualType type) {
-        super(title, owner, type);
+    public DescriptionTranslation(MediaObjectTranslation parent, String title, OwnerType owner, TextualType type) {
+        super(parent, title, owner, type);
     }
 
 

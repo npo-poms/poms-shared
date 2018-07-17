@@ -4,6 +4,10 @@ import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+
+import org.apache.commons.lang3.StringUtils;
+
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
@@ -42,7 +46,7 @@ public class TextualObjects {
         List<TextualType> types,
         List<OwnerType> owners) {
         SortedSet<OT> result = new TreeSet<>(texts);
-        for(TextualType textualType : types) {
+        for (TextualType textualType : types) {
             for (OwnerType ownerType : owners) {
                 expand(texts, textualType, ownerType).ifPresent(ot -> {
                     if (ot.getType() != textualType || ot.getOwner() != ownerType) {
@@ -58,11 +62,11 @@ public class TextualObjects {
     /**
      * Creates a new sorted set of titles where:
      * <ul>
-     *  <li>All Textual Types from {@link TextualType#TITLES} are filled according to the business logic of POMs.
-     *    This means mainly that the value for LEXICO is filled with MAIN if empty otherwise</li>
-     *  <li>For all those fields it is assured that values with owner types {@link OwnerType#ENTRIES} are added if they are not present yet,
-     *    according to the business logic of POMS. This means that if there is title of a certain type, than at least it is present for owners BROADCASTER and NPO too.</li>
-     *  </ul>
+     * <li>All Textual Types from {@link TextualType#TITLES} are filled according to the business logic of POMs.
+     * This means mainly that the value for LEXICO is filled with MAIN if empty otherwise</li>
+     * <li>For all those fields it is assured that values with owner types {@link OwnerType#ENTRIES} are added if they are not present yet,
+     * according to the business logic of POMS. This means that if there is title of a certain type, than at least it is present for owners BROADCASTER and NPO too.</li>
+     * </ul>
      */
     public static <OT extends OwnedText> SortedSet<OT> expandTitles(
         Collection<OT> texts,
@@ -80,7 +84,7 @@ public class TextualObjects {
 
     public static <T extends OwnedText> SortedSet<T> expandTitlesMajorOwnerTypes(TextualObject<T, ?, ?> textualObject) {
         SortedSet<T> result = expandTitles(textualObject.getTitles(), textualObject.getOwnedTitleCreator());
-        result.removeIf(t -> ! OwnerType.ENTRIES.contains(t.getOwner()));
+        result.removeIf(t -> !OwnerType.ENTRIES.contains(t.getOwner()));
         return result;
     }
 
@@ -161,7 +165,7 @@ public class TextualObjects {
 
 
         List<OT> returnValue = new ArrayList<>();
-        if (titles == null){
+        if (titles == null) {
             return returnValue;
         }
         Comparator<OT> comparator = getComparator(ownerTypeComparator);
@@ -185,7 +189,7 @@ public class TextualObjects {
 
     // some methods working TextualObjects themselves.
 
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>>  OwnerType[] findOwnersForTextFields(TO media) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> OwnerType[] findOwnersForTextFields(TO media) {
         SortedSet<OwnerType> result = new TreeSet<>();
         for (T title : media.getTitles()) {
             result.add(title.getOwner());
@@ -197,17 +201,25 @@ public class TextualObjects {
     }
 
 
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getTitle(TO media, OwnerType owner, TextualType type) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getTitle(
+        @Nonnull TO media,
+        @Nonnull OwnerType owner,
+        @Nonnull TextualType type) {
         Optional<String> opt = getOptional(media.getTitles(), owner, type);
         return opt.orElse("");
     }
 
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, OwnerType owner, TextualType type) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(
+        @Nonnull TO media,
+        @Nonnull OwnerType owner,
+        @Nonnull TextualType type) {
         Optional<String> opt = getOptional(media.getDescriptions(), owner, type);
         return opt.orElse("");
     }
 
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(TO media, TextualType... types) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> String getDescription(
+        @Nonnull TO media,
+        @Nonnull TextualType... types) {
         Optional<String> opt = getOptional(media.getDescriptions(), types);
         return opt.orElse("");
     }
@@ -216,7 +228,9 @@ public class TextualObjects {
     /**
      * Sets the owner of all titles, descriptions, locations and images found in given MediaObject
      */
-    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> void forOwner(TO media, OwnerType owner) {
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> void forOwner(
+        @Nonnull TO media,
+        @Nonnull OwnerType owner) {
         for (T title : media.getTitles()) {
             title.setOwner(owner);
         }
@@ -254,14 +268,17 @@ public class TextualObjects {
      *
      * Furthermore if no 'LEXICO' typed values if found, the value for 'MAIN' will be used.
      */
-    public static <OT extends OwnedText> Optional<OT> expand(Collection<OT> titles, TextualType textualType, final OwnerType ownerType) {
+    public static <OT extends OwnedText> Optional<OT> expand(
+        @Nonnull Collection<OT> titles,
+        @Nonnull TextualType textualType,
+        @Nonnull final OwnerType ownerType) {
         for (OT t : titles) {
             if (t.getType() == textualType && t.getOwner() == ownerType) {
                 return Optional.of(t);
             }
         }
         OwnerType runningOwnerType = ownerType == OwnerType.first() ? OwnerType.down(OwnerType.first()) : OwnerType.first();
-        while(runningOwnerType != OwnerType.last()) {
+        while (runningOwnerType != OwnerType.last()) {
             for (OT t : titles) {
                 if (t.getType() == textualType && t.getOwner() == runningOwnerType) {
                     return Optional.of(t);
@@ -287,7 +304,7 @@ public class TextualObjects {
      * TypedText's are commonly stored in SortedSet's, where equals matches only owner and type, not the value itself.
      *
      * @param titles Collection
-     * @param add the object to add or update.
+     * @param add    the object to add or update.
      */
     public static <OT extends TypedText> boolean addOrUpdate(Collection<OT> titles, OT add) {
         Optional<OT> existing = titles.stream().filter(d -> d.equals(add)).findFirst();
@@ -299,16 +316,18 @@ public class TextualObjects {
             return true;
         }
     }
+
     /**
      * Copies all titles and descriptions from one {@link TextualObject} to another.
+     *
      * @since 5.3
      */
     public static <
         T1 extends OwnedText, D1 extends OwnedText, TO1 extends TextualObject<T1, D1, TO1>,
-        T2 extends OwnedText,D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>
+        T2 extends OwnedText, D2 extends OwnedText, TO2 extends TextualObject<T2, D2, TO2>
         > void copy(
-            TO1 from,
-            TO2 to) {
+        TO1 from,
+        TO2 to) {
         if (from.getTitles() != null) {
             for (T1 title : from.getTitles()) {
                 to.addTitle(title.get(), title.getOwner(), title.getType());
@@ -325,48 +344,49 @@ public class TextualObjects {
      * Copies all titles from one object to another.
      *
      * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
+     *
      * @since 5.6
      */
-     public static
-     <T extends  AbstractOwnedText<T>, D1 extends AbstractOwnedText<D1>,
-         TO1 extends TextualObject<T, D1, TO1>,
-         D2 extends AbstractOwnedText<D2>,
-         TO2 extends TextualObject<T, D2, TO2>
-         >
-     void updateTitlesForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner) {
-         for(TextualType type : TextualType.values()) {
+    public static <T extends AbstractOwnedText<T>, D1 extends AbstractOwnedText<D1>,
+        TO1 extends TextualObject<T, D1, TO1>,
+        D2 extends AbstractOwnedText<D2>,
+        TO2 extends TextualObject<T, D2, TO2>
+        >
+    void updateTitlesForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner) {
+        for (TextualType type : TextualType.values()) {
             T incomingTitle = incomingMedia.findTitle(owner, type);
             T titleToUpdate = mediaToUpdate.findTitle(owner, type);
 
-            if(incomingTitle != null && titleToUpdate != null) {
+            if (incomingTitle != null && titleToUpdate != null) {
 
                 titleToUpdate.set(incomingTitle.get());
 
-            } else if(incomingTitle != null) {
+            } else if (incomingTitle != null) {
 
                 mediaToUpdate.addTitle(incomingTitle.get(), owner, type);
 
-            } else if(titleToUpdate != null) {
+            } else if (titleToUpdate != null) {
 
                 mediaToUpdate.removeTitle(titleToUpdate);
 
             }
         }
     }
+
     /**
      * Copies all descriptions from one object to another.
      *
      * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
+     *
      * @since 5.6
      */
-    public static
-     <T1 extends  AbstractOwnedText<T1>, D extends AbstractOwnedText<D>,
-         TO1 extends TextualObject<T1, D, TO1>,
-         T2 extends AbstractOwnedText<T2>,
-         TO2 extends TextualObject<T2, D, TO2>
-         >
+    public static <T1 extends AbstractOwnedText<T1>, D extends AbstractOwnedText<D>,
+        TO1 extends TextualObject<T1, D, TO1>,
+        T2 extends AbstractOwnedText<T2>,
+        TO2 extends TextualObject<T2, D, TO2>
+        >
     void updateDescriptionsForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner) {
-        for(TextualType type : TextualType.values()) {
+        for (TextualType type : TextualType.values()) {
             D incomingDescription = incomingMedia.findDescription(owner, type);
             D descriptionToUpdate = mediaToUpdate.findDescription(owner, type);
 
@@ -388,6 +408,7 @@ public class TextualObjects {
 
     /**
      * Copies all titles and descriptions from one {@link TextualObjectUpdate} to a {@link TextualObject}.
+     *
      * @param owner The owner of the fields in the destination
      * @since 5.3
      */
@@ -433,8 +454,9 @@ public class TextualObjects {
 
     /**
      * From a collection of {@link OwnedText}'s remove all all elements with certain owner, which are not in the source collection of {@link TypedText}'s.
+     *
      * @param collection The collection to remove objects from
-     * @param toRetain The collection of texts which are to be retained in collection
+     * @param toRetain   The collection of texts which are to be retained in collection
      * @since 5.3
      */
     @SuppressWarnings("SuspiciousMethodCalls")
@@ -449,7 +471,7 @@ public class TextualObjects {
 
     /**
      * @param collection The collection to remove objects from
-     * @param toRetain The collection of texts which are to be retained in collection
+     * @param toRetain   The collection of texts which are to be retained in collection
      * @since 5.3
      */
     @SuppressWarnings("SuspiciousMethodCalls")
@@ -466,14 +488,15 @@ public class TextualObjects {
     /**
      * Copy all texts from one collection of {@link TextualObjectUpdate} to another.
      * If the target collection is a {@link TextualObject} then you want to use {@link #copy(TextualObjectUpdate, TextualObject, OwnerType)}
+     *
      * @since 5.3
      */
     public static <
         T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
         T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>
         > void copyToUpdate(
-        TO1 from,
-        TO2 to) {
+        @Nonnull TO1 from,
+        @Nonnull TO2 to) {
         forUpdate(from.getTitles(), (t) -> to.setTitle(t.get(), t.getType()), () -> to.setTitles(null));
         forUpdate(from.getDescriptions(), (t) -> to.setDescription(t.get(), t.getType()), () -> to.setDescriptions(null));
     }
@@ -482,7 +505,10 @@ public class TextualObjects {
     /**
      * @since 5.8
      */
-    protected static <T extends TypedText> void forUpdate(Collection<T> collection, Consumer<T> consumer, Runnable ifNull) {
+    protected static <T extends TypedText> void forUpdate(
+        Collection<T> collection,
+        Consumer<T> consumer,
+        Runnable ifNull) {
         if (collection != null) {
             TextualType type = null;
             for (T title : collection) {
@@ -496,4 +522,33 @@ public class TextualObjects {
             ifNull.run();
         }
     }
+
+    public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> void removeEmptyValues(
+        @Nonnull TO textualObject) {
+        {
+            Collection<T> toRemove = new ArrayList<>();
+            for (T t : textualObject.getTitles()) {
+                if (StringUtils.isEmpty(t.get())) {
+                    toRemove.add(t);
+                }
+            }
+            for (T t : toRemove) {
+                textualObject.removeTitle(t);
+            }
+
+        }
+        {
+            Collection<D> toRemove = new ArrayList<>();
+            for (D d : textualObject.getDescriptions()) {
+                if (StringUtils.isEmpty(d.get())) {
+                    toRemove.add(d);
+                }
+            }
+            for (D d : toRemove) {
+                textualObject.removeDescription(d);
+            }
+
+        }
+    }
+
 }
