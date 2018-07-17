@@ -677,6 +677,12 @@ public enum MediaType {
     public static MediaType[] leafValues() {
         return Arrays.stream(values()).filter(f -> f.getSubType() != null).toArray(MediaType[]::new);
     }
+    /**
+     * @since 5.8
+     */
+    public static MediaType[] leafValues(Class<? extends MediaObject> clazz) {
+        return Arrays.stream(values()).filter(f -> f.getSubType() != null).filter(t -> clazz.isAssignableFrom(t.getMediaObjectClass())).toArray(MediaType[]::new);
+    }
 
     /**
      * @since 2.1

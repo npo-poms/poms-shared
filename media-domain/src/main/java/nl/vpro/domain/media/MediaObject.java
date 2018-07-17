@@ -2475,6 +2475,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
 
     /**
+     * @since 5.8
+     */
+    public abstract void setMediaType(MediaType type);
+
+    /**
      * @since 3.2
      */
     @Override
@@ -2482,6 +2487,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         SubMediaType subMediaType = getType();
         return subMediaType == null ? null : subMediaType.getMediaType();
     }
+
+
 
     private void nullCheck(Object o, String type) {
         if (o == null) {

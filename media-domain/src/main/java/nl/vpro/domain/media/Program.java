@@ -357,6 +357,11 @@ public class Program extends MediaObject {
         return type;
     }
 
+    @Override
+    public void setMediaType(MediaType type) {
+        setType((ProgramType) type.getSubType());
+    }
+
     public void setType(ProgramType type) {
         this.type = type;
     }
