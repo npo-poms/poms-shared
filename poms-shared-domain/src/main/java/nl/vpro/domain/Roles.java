@@ -1,11 +1,7 @@
 package nl.vpro.domain;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
 /**
+ * See http://wiki.publiekeomroep.nl/display/poms/Gebruikersbeheer#Gebruikersbeheer-Rollen
  * @author Michiel Meeuwissen
  * @since 5.4
  */
@@ -70,6 +66,11 @@ public class Roles {
      * Has more rights on schedule event data
      */
     public static final String ARCHIVIST_ROLE = "ROLE_MEDIA_ARCHIVIST";
+
+    /**
+     * https://jira.vpro.nl/browse/MSE-3999
+     */
+    public static final String SCHEDULE_ROLE = "ROLE_MEDIA_SCHEDULE";
 
     /**
      * Have the right to upload files as locations.

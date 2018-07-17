@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.3
  */
 public class AbstractOwnedTextEntityTest {
-    
+
     class OwnedTextEntity extends AbstractOwnedTextEntity<OwnedTextEntity, Object> {
         public OwnedTextEntity(String value, OwnerType owner, TextualType type) {
-            super(value, owner, type);
+            super(null, value, owner, type);
         }
     }
     @Test
