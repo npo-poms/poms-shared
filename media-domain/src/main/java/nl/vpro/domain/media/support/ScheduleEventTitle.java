@@ -24,11 +24,10 @@ import nl.vpro.domain.media.ScheduleEvent;
 @JsonPropertyOrder({"value", "owner", "type"})
 public class ScheduleEventTitle extends AbstractOwnedTextEntity<ScheduleEventTitle, ScheduleEvent> {
 
-    public ScheduleEventTitle(String title, OwnerType owner, TextualType type) {
-        super(title, owner, type);
+    public ScheduleEventTitle(ScheduleEvent parent, String title, OwnerType owner, TextualType type) {
+        super(parent, title, owner, type);
     }
 
     public ScheduleEventTitle() {
     }
-
 }
