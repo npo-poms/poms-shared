@@ -308,6 +308,11 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         return type;
     }
 
+    @Override
+    public void setMediaType(MediaType type) {
+        setType((SegmentType) type.getSubType());
+    }
+
     public void setType(SegmentType segmentType) {
         if(segmentType == null) {
             segmentType = SegmentType.SEGMENT;
