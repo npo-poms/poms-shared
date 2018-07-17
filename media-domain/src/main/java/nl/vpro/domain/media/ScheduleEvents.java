@@ -62,6 +62,10 @@ public class ScheduleEvents {
         return Repeat.isOriginal(scheduleEevent.getRepeat());
     }
 
+    public static String getRerunText(ScheduleEvent scheduleEvent) {
+        return scheduleEvent.repeat == null ? null : scheduleEvent.repeat.getValue();
+    }
+
     public static Optional<ScheduleEvent> sortDateEventForProgram(Iterable<ScheduleEvent> scheduleEvents) {
         ScheduleEvent result = null;
         if (scheduleEvents != null) {
