@@ -30,4 +30,9 @@ public class ScheduleEventTitle extends AbstractOwnedTextEntity<ScheduleEventTit
 
     public ScheduleEventTitle() {
     }
+
+    @Override
+    public boolean mayContainNewLines() {
+        return false;
+    }
 }
