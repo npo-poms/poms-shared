@@ -5,6 +5,7 @@ import lombok.Lombok;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.management.ManagementFactory;
@@ -38,6 +39,8 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
 
     private static Map<String, ReentrantLock> LOCKED_MEDIA = new ConcurrentHashMap<>();
+    private static Map<Serializable, ReentrantLock> LOCKED_OBJECTS= new ConcurrentHashMap<>();
+
 
 
     private static final MediaObjectLocker instance = new MediaObjectLocker();
@@ -107,6 +110,13 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
         String reason() default "";
     }
 
+
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface Sid {
+        int argNumber() default 0;
+        String reason() default "";
+    }
+
     public static <T> T withMidLock(@Nonnull TransactionService transactionService, String mid, @Nonnull String reason, @Nonnull Callable<T> callable) {
         return withMidLock(
             mid,
@@ -127,18 +137,28 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
         });
 
      }
-    @SneakyThrows
+
     public static <T> T withMidLock(String mid, @Nonnull String reason, @Nonnull Callable<T> callable) {
+        return withObjectLock(mid, reason, callable, LOCKED_MEDIA);
+    }
+
+
+    public static <T> T withKeyLock(Serializable id, @Nonnull String reason, @Nonnull Callable<T> callable) {
+        return withObjectLock(id, reason, callable, LOCKED_OBJECTS);
+    }
+
+    @SneakyThrows
+    private static <T, K extends Serializable> T withObjectLock(K key, @Nonnull String reason, @Nonnull Callable<T> callable, Map<K, ReentrantLock> locks) {
         Long nanoStart = System.nanoTime();
-        if (mid == null) {
+        if (key == null) {
             //log.warn("Calling with null mid: {}", reason, new Exception());
-            log.warn("Calling with null mid: {}", reason);
+            log.warn("Calling with null key: {}", reason);
             return callable.call();
         }
-        ReentrantLock lock = LOCKED_MEDIA.computeIfAbsent(mid, (m) -> new ReentrantLock());
+        ReentrantLock lock = locks.computeIfAbsent(key, (m) -> new ReentrantLock());
         try {
             if (lock.hasQueuedThreads()) {
-                log.info("There are already threads for {}, waiting", mid);
+                log.info("There are already threads for {}, waiting", key);
                 instance.maxConcurrency = Math.max(lock.getQueueLength(), instance.maxConcurrency);
             }
 
@@ -151,18 +171,19 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
 
             Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
-            log.debug("Acquired lock for {}  ({}) in {}", mid, reason, aquireTime);
+            log.debug("Acquired lock for {}  ({}) in {}", key, reason, aquireTime);
 
             return callable.call();
         } finally {
             lock.unlock();
             if (lock.getHoldCount() == 0) {
-                LOCKED_MEDIA.remove(mid);
+                locks.remove(key);
                 instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
-                log.debug("Released lock for {} ({}) in {}", mid, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
+                log.debug("Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
             }
 
         }
+
     }
 
 

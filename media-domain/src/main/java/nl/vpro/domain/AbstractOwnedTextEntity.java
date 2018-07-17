@@ -40,11 +40,13 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity,
     private Long id;
 
     @ManyToOne
+    @NotNull
     private P parent;
 
-    public AbstractOwnedTextEntity(String value, OwnerType owner, TextualType type) {
+    protected AbstractOwnedTextEntity(P parent, String value, OwnerType owner, TextualType type) {
         super(owner, type);
         this.value = value;
+        this.parent = parent;
     }
 
     protected AbstractOwnedTextEntity() {

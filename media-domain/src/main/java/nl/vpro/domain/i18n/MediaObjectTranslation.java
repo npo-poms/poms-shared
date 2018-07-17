@@ -160,8 +160,7 @@ public class MediaObjectTranslation implements
 
     @Override
     public TriFunction<String, OwnerType, TextualType, TitleTranslation> getOwnedTitleCreator() {
-        return TitleTranslation::new;
-
+        return (value, ownerType, textualType) -> new TitleTranslation(MediaObjectTranslation.this, value, ownerType, textualType);
     }
 
     @Override
@@ -181,8 +180,7 @@ public class MediaObjectTranslation implements
 
     @Override
     public TriFunction<String, OwnerType, TextualType, DescriptionTranslation> getOwnedDescriptionCreator() {
-        return DescriptionTranslation::new;
-
+        return (value, ownerType, textualType) -> new DescriptionTranslation(MediaObjectTranslation.this, value, ownerType, textualType);
     }
 
 

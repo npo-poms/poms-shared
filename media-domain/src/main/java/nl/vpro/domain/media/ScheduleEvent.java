@@ -517,7 +517,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public void setChannel(Channel channel) {
-        if (this.channel != null) {
+        if (this.channel != null && channel != this.channel) {
             throw new IllegalStateException();
         }
         this.channel = channel;
@@ -732,14 +732,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     public TriFunction<String, OwnerType, TextualType, ScheduleEventTitle> getOwnedTitleCreator() {
-        return ScheduleEventTitle::new;
-
+        return (value, ownerType, textualType) -> new ScheduleEventTitle(ScheduleEvent.this, value, ownerType, textualType);
     }
 
     @Override
     public TriFunction<String, OwnerType, TextualType, ScheduleEventDescription> getOwnedDescriptionCreator() {
-        return ScheduleEventDescription::new;
-
+        return (value, ownerType, textualType) -> new ScheduleEventDescription(ScheduleEvent.this, value, ownerType, textualType);
     }
 
 

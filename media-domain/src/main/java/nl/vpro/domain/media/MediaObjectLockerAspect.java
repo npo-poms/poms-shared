@@ -41,6 +41,29 @@ public abstract class MediaObjectLockerAspect  {
         });
 
     }
+
+
+    @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
+    public Object lockSid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Sid annotation) {
+        Object scheduleEvent = joinPoint.getArgs()[annotation.argNumber()];
+        ScheduleEventIdentifier sid = getSid(scheduleEvent);
+        String reason = annotation.reason();
+        if (StringUtils.isEmpty(reason)) {
+            reason = joinPoint.getSignature().getDeclaringType().getSimpleName() + "#" + joinPoint.getSignature().getName();
+        }
+
+        return MediaObjectLocker.withKeyLock(sid, reason, () -> {
+            try {
+                return joinPoint.proceed(joinPoint.getArgs());
+            } catch(Throwable t) {
+                throw Lombok.sneakyThrow(t);
+            }
+
+        });
+
+    }
+
+
     public static String getMid(Object object) {
         if (object instanceof CharSequence) {
             return object.toString();
@@ -52,6 +75,20 @@ public abstract class MediaObjectLockerAspect  {
             }
 
             return mid;
+        }
+        throw new IllegalStateException();
+    }
+
+
+    public static ScheduleEventIdentifier getSid(Object object) {
+        if (object instanceof CharSequence) {
+            return ScheduleEventIdentifier.parse(object.toString());
+        }
+        if (object instanceof ScheduleEventIdentifier) {
+            return (ScheduleEventIdentifier) object;
+        }
+        if (object instanceof ScheduleEvent) {
+            return ((ScheduleEvent) object).getId();
         }
         throw new IllegalStateException();
     }
