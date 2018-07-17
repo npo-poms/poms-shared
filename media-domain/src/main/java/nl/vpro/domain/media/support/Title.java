@@ -70,7 +70,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
     @NoHtml
     @JsonProperty("value")
     @XmlValue
-    protected String title;
+    protected String value;
 
     @ManyToOne
     protected MediaObject parent;
@@ -89,7 +89,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
      */
     public Title(String title, @Nonnull OwnerType owner, @Nonnull TextualType type, boolean crop) {
         super(owner, type);
-        this.title = strip(title);
+        this.value = strip(title);
         if (crop) {
             this.crop();
         }
@@ -147,40 +147,42 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
     }
 
     public void crop(int start, int stop) {
-        if (title == null) {
+        if (value == null) {
             return;
         }
         if (start < 0) {
             start = 0;
         }
 
-        if (title.length() < stop) {
-            stop = title.length();
+        if (value.length() < stop) {
+            stop = value.length();
         }
 
-        title = title.substring(start, stop);
+        value = value.substring(start, stop);
     }
 
     public Long getId() {
         return id;
     }
 
+    @Deprecated
     public String getTitle() {
-        return title;
+        return value;
     }
 
+    @Deprecated
     public void setTitle(String title) {
-        this.title = strip(title);
-        crop();
+        set(title);
     }
 
     @Override
     public String get() {
-        return getTitle();
+        return value;
     }
     @Override
     public void set(String s) {
-        setTitle(s);
+        this.value = strip(s);
+        crop();
     }
 
 
