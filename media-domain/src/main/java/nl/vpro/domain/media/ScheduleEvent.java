@@ -447,7 +447,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @JsonView({Views.Publisher.class})
     // Because of other 'start' fields (e.g. in segment, it is mapped to _long_). This field is mapped to date in ES. In ES fields with same name must have same mapping.
     @JsonProperty(access = JsonProperty.Access.READ_ONLY, value = "eventStart")
-
     public Instant getStartInstant() {
         return start;
     }
@@ -456,6 +455,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public void setStartInstant(Instant start) {
         this.start = start;
     }
+
+    public Instant getStopInstant() {
+        return start.plus(getDuration());
+    }
+     public void setStopInstant(Instant stop) {
+        this.duration = Duration.between(start, stop);
+     }
 
     @XmlTransient
     @Deprecated
