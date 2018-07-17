@@ -18,6 +18,10 @@ public interface TypedText extends Typable<TextualType>, Supplier<String>, Compa
     @Override
     String get();
 
+    default boolean mayContainNewLines() {
+        return true;
+    }
+
     @Override
     default int compareTo(TypedText title) {
         if (title == null) {

@@ -227,4 +227,9 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         this.parent = (MediaObject) parent;
     }
+
+    @Override
+    public boolean mayContainNewLines() {
+        return false;
+    }
 }

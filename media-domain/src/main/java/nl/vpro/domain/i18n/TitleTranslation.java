@@ -19,4 +19,10 @@ public class TitleTranslation extends AbstractOwnedTextEntity<TitleTranslation, 
 
     public TitleTranslation() {
     }
+
+
+    @Override
+    public boolean mayContainNewLines() {
+        return false;
+    }
 }
