@@ -49,4 +49,8 @@ public interface TypedText extends Typable<TextualType>, Supplier<String>, Compa
         return get().subSequence(start, end);
     }
 
+    default String fullString() {
+        return getType() + ":" + get();
+    }
+
 }
