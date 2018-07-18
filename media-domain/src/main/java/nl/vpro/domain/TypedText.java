@@ -10,7 +10,7 @@ import nl.vpro.domain.media.support.Typable;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public interface TypedText extends Typable<TextualType>, Supplier<String>, Comparable<TypedText> {
+public interface TypedText extends Typable<TextualType>, Supplier<String>, Comparable<TypedText>, CharSequence {
 
 
     void set(String s);
@@ -32,6 +32,21 @@ public interface TypedText extends Typable<TextualType>, Supplier<String>, Compa
             -1 : getType().ordinal()) - (
                 title.getType() == null ? -1 : title.getType().ordinal()
         );
+    }
+    @Override
+    default int length() {
+        return get().length();
+    }
+
+    @Override
+    default char charAt(int index) {
+        return get().charAt(index);
+
+    }
+
+    @Override
+    default CharSequence subSequence(int start, int end) {
+        return get().subSequence(start, end);
     }
 
 }
