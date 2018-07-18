@@ -57,12 +57,32 @@ public class MediaObjectsTest {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
+            .predictions(
+                Prediction.builder()
+                    .publishStart(Instant.ofEpochMilli(3)).build())
             .scheduleEvents(
                 ScheduleEvent.builder().channel(Channel.NED2).localStart(2015, 1, 1, 12, 30).duration(Duration.ofMinutes(10)).rerun(false).build(),
                 ScheduleEvent.builder().channel(Channel.NED2).localStart(2015, 1, 1, 17, 30).duration(Duration.ofMinutes(10)).rerun(true).build(),
                 ScheduleEvent.builder().channel(Channel.NED2).localStart(2017, 7, 7, 12, 30).duration(Duration.ofMinutes(10)).rerun(false).build(),
                 ScheduleEvent.builder().channel(Channel.NED2).localStart(2017, 7, 7, 17, 30).duration(Duration.ofMinutes(10)).rerun(true).build()
             )
+            .build();
+
+        assertThat(MediaObjects.getSortInstant(program).atZone(Schedule.ZONE_ID).toLocalDateTime())
+            .isEqualTo(LocalDateTime.of(2017, 7, 7, 12, 30));
+    }
+
+     /**
+     * MSE-4094
+     */
+    @Test
+    public void testSortDateWithPredictions() throws Exception {
+        final Program program = MediaBuilder.program()
+            .creationDate(Instant.ofEpochMilli(1))
+            .publishStart(Instant.ofEpochMilli(2))
+            .predictions(
+                Prediction.builder()
+                    .publishStart(LocalDateTime.of(2017, 7, 7, 12, 30).atZone(Schedule.ZONE_ID).toInstant()).build())
             .build();
 
         assertThat(MediaObjects.getSortInstant(program).atZone(Schedule.ZONE_ID).toLocalDateTime())
