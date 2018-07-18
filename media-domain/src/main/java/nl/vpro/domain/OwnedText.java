@@ -31,4 +31,9 @@ public interface OwnedText extends Ownable, TypedText, Comparable<TypedText> {
     }
 
 
+    @Override
+    default String fullString() {
+        return getType() + ":" + getOwner() + ":" + get();
+    }
+
 }

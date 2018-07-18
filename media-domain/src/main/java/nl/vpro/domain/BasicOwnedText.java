@@ -26,4 +26,6 @@ public class BasicOwnedText extends BasicTypedText implements OwnedText {
         this.owner = owner;
     }
 
+
+
 }
