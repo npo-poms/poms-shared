@@ -180,7 +180,8 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         boolean plannedAvailability,
         Authority authority,
         State state,
-        Encryption encryption) {
+        Encryption encryption,
+        MediaObject parent) {
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
@@ -188,6 +189,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.authority = authority == null ? Authority.USER : authority;
         this.state = state == null ? State.ANNOUNCED : state;
         this.encryption = encryption;
+        this.mediaObject = parent;
 
     }
 
@@ -216,19 +218,21 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         return new Prediction(source, parent);
     }
 
-    public static Prediction unavailable(Platform platform, Authority authority) {
+    public static Prediction unavailable(MediaObject parent, Platform platform, Authority authority) {
         return Prediction.builder()
             .plannedAvailability(false)
             .platform(platform)
             .authority(authority)
+            .parent(parent)
             .build();
     }
-    public static Prediction virtual(Platform platform, Authority authority) {
+    public static Prediction virtual(MediaObject parent, Platform platform, Authority authority) {
         return Prediction.builder()
             .plannedAvailability(false)
             .platform(platform)
             .authority(authority)
             .state(State.VIRTUAL)
+            .parent(parent)
             .build();
     }
 
