@@ -108,6 +108,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     public @interface Mid {
         int argNumber() default 0;
         String reason() default "";
+        String method() default "";
     }
 
 
