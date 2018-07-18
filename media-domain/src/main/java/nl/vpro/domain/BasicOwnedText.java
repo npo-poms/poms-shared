@@ -26,9 +26,4 @@ public class BasicOwnedText extends BasicTypedText implements OwnedText {
         this.owner = owner;
     }
 
-    @Override
-    public String toString() {
-        return getType() + ":" + owner + ":" + get();
-    }
-
 }
