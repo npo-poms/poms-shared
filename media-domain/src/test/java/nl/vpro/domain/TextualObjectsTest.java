@@ -85,7 +85,8 @@ public class TextualObjectsTest {
 
         SortedSet<BasicOwnedText> basicOwnedTexts = TextualObjects.expandTitles(object);
 
-        assertThat(basicOwnedTexts.toString()).isEqualTo("[MAIN:BROADCASTER:a, MAIN:NPO:a, MAIN:MIS:b, MAIN:BEELDENGELUID:c, SUB:BROADCASTER:d, SUB:NPO:d, SUB:MIS:d, LEXICO:BROADCASTER:a, LEXICO:NPO:a]");
+        assertThat(basicOwnedTexts.stream().sequential().map(OwnedText::fullString)).containsExactly(
+            "MAIN:BROADCASTER:a", "MAIN:NPO:a", "MAIN:MIS:b", "MAIN:BEELDENGELUID:c", "SUB:BROADCASTER:d", "SUB:NPO:d", "SUB:MIS:d", "LEXICO:BROADCASTER:a", "LEXICO:NPO:a");
         basicOwnedTexts.forEach(bo -> log.info("{}", bo));
 
 
@@ -103,7 +104,8 @@ public class TextualObjectsTest {
 
         SortedSet<BasicOwnedText> basicOwnedTexts = TextualObjects.expandTitlesMajorOwnerTypes(object);
         assertThat(basicOwnedTexts).hasSize(6);
-        assertThat(basicOwnedTexts.toString()).isEqualTo("[MAIN:BROADCASTER:a, MAIN:NPO:a, SUB:BROADCASTER:d, SUB:NPO:d, LEXICO:BROADCASTER:a, LEXICO:NPO:a]");
+        assertThat(basicOwnedTexts.stream().sequential().map(OwnedText::fullString)).containsExactly(
+            "MAIN:BROADCASTER:a", "MAIN:NPO:a", "SUB:BROADCASTER:d", "SUB:NPO:d", "LEXICO:BROADCASTER:a", "LEXICO:NPO:a");
         basicOwnedTexts.forEach(bo -> log.info("{}", bo));
     }
 
