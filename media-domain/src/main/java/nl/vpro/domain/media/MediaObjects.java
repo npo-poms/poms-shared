@@ -339,6 +339,13 @@ public class MediaObjects {
                 .map(ScheduleEvent::getStartInstant)
                 .orElse(null);
         }
+        if (mo.predictions != null && mo.predictions.size() > 0) {
+            for (Prediction p : mo.predictions) {
+                if (p.getPublishStartInstant() != null && (date == null || p.getPublishStartInstant().isBefore(date))) {
+                    date = p.getPublishStartInstant();
+                }
+            }
+        }
         if (date == null) {
             date = mo.getPublishStartInstant();
         }
