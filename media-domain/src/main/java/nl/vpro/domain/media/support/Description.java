@@ -35,8 +35,6 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "descriptionType",
     namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
-
-@ToString(exclude = "parent")
 public class Description extends AbstractOwnedText<Description> implements Serializable, Child<MediaObject> {
     private static final long serialVersionUID = 1L;
 
