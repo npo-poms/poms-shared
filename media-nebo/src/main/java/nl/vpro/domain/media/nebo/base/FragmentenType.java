@@ -233,7 +233,9 @@ public class FragmentenType {
 
 
         public void setTitel(String value) {
-            segment.addTitle(value, AfleveringType.OWNER, TextualType.MAIN);
+            if (value != null) {
+                segment.addTitle(value, AfleveringType.OWNER, TextualType.MAIN);
+            }
         }
 
         @XmlElement(required = true)
