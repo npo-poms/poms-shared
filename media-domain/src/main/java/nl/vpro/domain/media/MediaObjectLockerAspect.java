@@ -3,6 +3,9 @@ package nl.vpro.domain.media;
 import lombok.Lombok;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -25,8 +28,10 @@ public abstract class MediaObjectLockerAspect  {
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
         Object media = joinPoint.getArgs()[annotation.argNumber()];
-        String mid = getMid(media);
+        String method = annotation.method();
+        String mid = getMid(method, media);
         String reason = annotation.reason();
+
         if (StringUtils.isEmpty(reason)) {
             reason = joinPoint.getSignature().getDeclaringType().getSimpleName() + "#" + joinPoint.getSignature().getName();
         }
@@ -64,19 +69,29 @@ public abstract class MediaObjectLockerAspect  {
     }
 
 
-    public static String getMid(Object object) {
-        if (object instanceof CharSequence) {
-            return object.toString();
-        }
-        if (object instanceof MediaIdentifiable) {
-            String mid = ((MediaIdentifiable) object).getMid();
-            if (mid == null) {
-                log.warn("Object {} has no mid", object);
+    public static String getMid(String method, Object object) {
+        if (StringUtils.isNotBlank(method)) {
+            try {
+                Method m = object.getClass().getMethod(method);
+                return (String) m.invoke(object);
+            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+                log.error(e.getMessage(), e);
+                throw new IllegalStateException();
             }
+        } else {
+            if (object instanceof CharSequence) {
+                return object.toString();
+            }
+            if (object instanceof MediaIdentifiable) {
+                String mid = ((MediaIdentifiable) object).getMid();
+                if (mid == null) {
+                    log.warn("Object {} has no mid", object);
+                }
 
-            return mid;
+                return mid;
+            }
+            throw new IllegalStateException();
         }
-        throw new IllegalStateException();
     }
 
 
