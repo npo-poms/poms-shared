@@ -21,7 +21,7 @@ public class ConstraintViolationsTest {
         Title title = new Title("<h1>bla</h1", OwnerType.BROADCASTER, TextualType.MAIN);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Collection<ConstraintViolation<Title>> violations = factory.getValidator().validate(title);
-        assertThat(ConstraintViolations.humanReadable(violations)).isEqualTo("\"title\" contains HTML");
+        assertThat(ConstraintViolations.humanReadable(violations)).isEqualTo("\"value\" contains HTML");
 
 
 
