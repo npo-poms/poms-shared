@@ -4,6 +4,8 @@ import java.io.File;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.7
@@ -12,7 +14,7 @@ public class DomainObjects {
 
 
 
-    public static String getCanonicalFilePath(DomainObject domain) {
+    public static String getCanonicalFilePath(@Nonnull DomainObject domain) {
         String id = String.valueOf(domain.getId());
         StringBuilder path = new StringBuilder(id.length() * 2);
         appendCanonicalFilePath(domain, path);
@@ -20,17 +22,17 @@ public class DomainObjects {
     }
 
 
-    public static void appendCanonicalFilePath(DomainObject domain, StringBuilder builder) {
+    public static void appendCanonicalFilePath(@Nonnull DomainObject domain, @Nonnull StringBuilder builder) {
         appendCanonicalFilePath(domain.getId(), builder);
     }
 
-    public static void appendCanonicalFilePath(Long i, StringBuilder builder) {
+    public static void appendCanonicalFilePath(@Nonnull Long i, @Nonnull StringBuilder builder) {
         if (i == null) {
             throw new IllegalArgumentException();
         }
         appendCanonicalFilePath(String.valueOf(i), builder);
     }
-     public static void appendCanonicalFilePath(String i, StringBuilder builder) {
+     public static void appendCanonicalFilePath(@Nonnull String i, @Nonnull StringBuilder builder) {
         if (i == null) {
             throw new IllegalArgumentException();
         }
