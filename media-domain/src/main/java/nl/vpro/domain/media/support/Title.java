@@ -51,7 +51,6 @@ import nl.vpro.validation.NoHtml;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "titleType", namespace = Xmlns.MEDIA_NAMESPACE)
 @JsonPropertyOrder({"value", "owner", "type"})
-@ToString(exclude = "parent")
 public class Title extends AbstractOwnedText<Title> implements  Serializable, Child<MediaObject> {
 
     private static final long serialVersionUID = 1L;
