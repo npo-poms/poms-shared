@@ -20,25 +20,25 @@ public class AbstractOwnedTextEntityTest {
         }
     }
     @Test
-    public void equals() throws Exception {
+    public void equals() {
         OwnedTextEntity a = new OwnedTextEntity("a", OwnerType.BROADCASTER, TextualType.MAIN);
         OwnedTextEntity b = new OwnedTextEntity("b", OwnerType.BROADCASTER, TextualType.MAIN);
 
-        assertThat(a).isEqualTo(b);
+        assertThat((CharSequence) a).isEqualTo(b);
         a.setParent("x");
         b.setParent("y");
-        assertThat(a).isNotEqualTo(b);
+        assertThat((CharSequence) a).isNotEqualTo(b);
         b.set("a");
-        assertThat(a).isEqualTo(b);
+        assertThat((CharSequence) a).isEqualTo(b);
         b.set("b");
         b.setParent("x");
-        assertThat(a).isEqualTo(b);
+        assertThat((CharSequence) a).isEqualTo(b);
         b.setOwner(OwnerType.CERES);
-        assertThat(a).isNotEqualTo(b);
+        assertThat((CharSequence) a).isNotEqualTo(b);
         b.setOwner(OwnerType.BROADCASTER);
-        assertThat(a).isEqualTo(b);
+        assertThat((CharSequence) a).isEqualTo(b);
         b.setType(TextualType.ABBREVIATION);
-        assertThat(a).isNotEqualTo(b);
+        assertThat((CharSequence) a).isNotEqualTo(b);
 
 
     }
