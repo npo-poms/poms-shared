@@ -3,6 +3,8 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.annotation.Nonnull;
+
 import nl.vpro.domain.media.support.TextualType;
 
 /**
@@ -41,9 +43,10 @@ public class BasicTypedText implements TypedText, Comparable<TypedText> {
         return text;
 
     }
+    @Nonnull
     @Override
-    public String toString() {
-        return type + ":" + text;
+    public final String toString() {
+        return get();
     }
 
 }

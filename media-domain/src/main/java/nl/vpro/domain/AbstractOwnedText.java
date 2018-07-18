@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -61,6 +62,11 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
     @Override
     public boolean equals(Object o) {
         throw new UnsupportedOperationException("Please implement equals!");
+    }
+    @Override
+    @Nonnull
+    public final String toString() {
+        return get();
     }
 
 
