@@ -359,7 +359,7 @@ public class MediaObjects {
     }
 
 
-        public static boolean trim(Collection<?> collection) {
+    public static boolean trim(Collection<?> collection) {
         boolean trimmed = false;
         for (java.util.Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
             Object next = iterator.next();
