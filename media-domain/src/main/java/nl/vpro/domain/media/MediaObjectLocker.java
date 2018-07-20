@@ -118,7 +118,11 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
         String reason() default "";
     }
 
-    public static <T> T withMidLock(@Nonnull TransactionService transactionService, String mid, @Nonnull String reason, @Nonnull Callable<T> callable) {
+    public static <T> T withMidLock(
+        @Nonnull TransactionService transactionService,
+        String mid,
+        @Nonnull String reason,
+        @Nonnull Callable<T> callable) {
         return withMidLock(
             mid,
             reason,
@@ -126,12 +130,18 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     }
 
 
-    public static <T> T getWithMidLock(String mid, @Nonnull String reason, @Nonnull Supplier<T> callable) {
+    public static <T> T getWithMidLock(
+        String mid,
+        @Nonnull String reason,
+        @Nonnull Supplier<T> callable) {
         return withMidLock(mid, reason, callable::get);
     }
 
 
-     public static void withMidLock(String mid, @Nonnull String reason, @Nonnull Runnable runnable) {
+     public static void withMidLock(
+         String mid,
+         @Nonnull String reason,
+         @Nonnull Runnable runnable) {
         withMidLock(mid, reason, () -> {
             runnable.run();
             return null;
@@ -139,17 +149,27 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
      }
 
-    public static <T> T withMidLock(String mid, @Nonnull String reason, @Nonnull Callable<T> callable) {
+    public static <T> T withMidLock(
+        String mid,
+        @Nonnull String reason,
+        @Nonnull Callable<T> callable) {
         return withObjectLock(mid, reason, callable, LOCKED_MEDIA);
     }
 
 
-    public static <T> T withKeyLock(Serializable id, @Nonnull String reason, @Nonnull Callable<T> callable) {
+    public static <T> T withKeyLock(
+        Serializable id,
+        @Nonnull String reason,
+        @Nonnull Callable<T> callable) {
         return withObjectLock(id, reason, callable, LOCKED_OBJECTS);
     }
 
     @SneakyThrows
-    private static <T, K extends Serializable> T withObjectLock(K key, @Nonnull String reason, @Nonnull Callable<T> callable, Map<K, ReentrantLock> locks) {
+    private static <T, K extends Serializable> T withObjectLock(
+        K key,
+        @Nonnull String reason,
+        @Nonnull Callable<T> callable,
+        @Nonnull Map<K, ReentrantLock> locks) {
         Long nanoStart = System.nanoTime();
         if (key == null) {
             //log.warn("Calling with null mid: {}", reason, new Exception());
