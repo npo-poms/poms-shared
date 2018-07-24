@@ -336,9 +336,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
      * Sets the image as an urn, i.e. a reference to the image database
      */
     public void setImage(String urn) {
-        if (this.image == null) {
-            this.image = urn;
-        }
+        this.image = urn;
     }
 
     @Override
