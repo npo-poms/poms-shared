@@ -13,6 +13,7 @@ import javax.xml.validation.Schema;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
@@ -43,6 +44,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 3.4
  */
+@Ignore
 public class SchemaTest {
 
     private final static File DIR = Files.createTempDir();
