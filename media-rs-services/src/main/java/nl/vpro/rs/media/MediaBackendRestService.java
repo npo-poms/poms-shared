@@ -22,10 +22,10 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Member;
 import nl.vpro.domain.media.Platform;
+import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaList;
 import nl.vpro.domain.media.search.MediaListItem;
-import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
@@ -444,6 +444,16 @@ public interface MediaBackendRestService {
     Response transcode(
         @QueryParam(ERRORS) String errors,
         TranscodeRequest transcodeRequest);
+
+
+
+    @POST
+    @Path("upload/{mid}")
+    @Consumes({MediaType.WILDCARD})
+    TranscodeRequest upload(
+        @Encoded @PathParam(MID) final String mid,
+        HttpServletRequest inputStream) throws IOException;
+
 
 
 
