@@ -34,6 +34,8 @@ public class TranscodeRequest implements MediaIdentifiable {
     @NotNull
     private String fileName;
 
+
+
     @NotNull
     private Encryption encryption;
 
