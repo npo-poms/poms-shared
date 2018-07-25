@@ -72,7 +72,7 @@ public class MemberRefs {
             return findRef(collection, owner);
         }
         for (MemberRef memberRef : collection) {
-            if (memberRef.getNumber().equals(number)) {
+            if (memberRef.getNumber() != null && memberRef.getNumber().equals(number)) {
                 if (memberRef.getMidRef() != null && memberRef.getMidRef().equals(owner.getMid())) {
                     return Optional.of(memberRef);
                 }
