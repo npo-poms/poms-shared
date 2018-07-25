@@ -35,6 +35,8 @@ import static nl.vpro.util.MultiLanguageString.en;
 
 /**
  *  This is a wrapper for ftp.nepworldwide.nl This is were we have to upload file for transcoding
+ *
+ *  TODO: For the download service we had severe troubles with 'rekeying' (at the end worked around by calling command line scp). Would this not be an issue for upload?
  */
 @Named("NEPUploadService")
 @Slf4j
