@@ -31,4 +31,17 @@ public final class Broadcasters {
     }
 
 
+    public static Optional<Broadcaster> getByAnyId(BroadcasterService broadcasterService, String id) {
+        Broadcaster byId = broadcasterService.find(id);
+        if (byId != null ) {
+            return Optional.of(byId);
+        }
+        return broadcasterService.findAll()
+            .stream()
+            .filter(b -> b.getWhatsOnId().equals(id) || b.getNeboId().equals(id) || b.getMisId().equals(id)
+            )
+            .findFirst();
+    }
+
+
 }
