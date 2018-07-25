@@ -30,6 +30,8 @@ import nl.vpro.util.FileMetadata;
  *
  * I first tried curl, to no avail either.
  *
+ * Older scp clients would give troubles too. In the end Dick realized that, and pointed to a more up to date client on the poms server.
+ *
  * @author Michiel Meeuwissen
  * @since 5.8
  */
