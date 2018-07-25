@@ -85,52 +85,67 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
 
     private final FileSizeFormatter formatter = FileSizeFormatter.DEFAULT;
     @Override
-    public long upload(@Nonnull SimpleLogger logger, @Nonnull String nepFile, @Nonnull Long size, @Nonnull InputStream stream) throws IOException {
+    public long upload(
+        @Nonnull SimpleLogger logger,
+        @Nonnull String nepFile,
+        @Nonnull Long size,
+        @Nonnull InputStream stream) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
+
+
         try(
             final SFTPClient sftp = getClient().newSFTPClient();
-            final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
-            OutputStream out = handle.new RemoteFileOutputStream()
+
         ) {
-            byte[] buffer = new byte[1014 * 1024];
-            long infoBatch = buffer.length * 100;
-            long numberofBytes = 0;
-            int n;
-            long timesZero = 0;
-            while (IOUtils.EOF != (n = stream.read(buffer))) {
-                out.write(buffer, 0, n);
-                numberofBytes += n;
-                if (n == 0) {
-                    timesZero++;
-                } else {
-                    timesZero = 0;
-                }
-                if (numberofBytes == size && timesZero > 5) {
-                    log.info("Number of bytes reached, breaking (though we didn't see EOF yet)");
-                    break;
-                }
-                if (numberofBytes % infoBatch == 0) {
-                    // updating spans in ngToast doesn't work...
-                    //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
-                    logger.info(
-                        en("Uploaded {}/{} bytes to NEP")
-                            .nl("Geüpload {}/{} bytes naar NEP")
-                            .slf4jArgs(formatter.format(numberofBytes), formatter.format(size))
-                            .build()
-                    );
-                } else {
-                    if (log.isDebugEnabled()) {
-                        log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+            int split  = nepFile.lastIndexOf("/");
+            if (split > 0) {
+                sftp.mkdirs(nepFile.substring(0, split));
+            }
+            try (
+                final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));
+                OutputStream out = handle.new RemoteFileOutputStream()
+            ) {
+
+                byte[] buffer = new byte[1014 * 1024];
+                long infoBatch = buffer.length * 100;
+                long numberofBytes = 0;
+                int n;
+                long timesZero = 0;
+                while (IOUtils.EOF != (n = stream.read(buffer))) {
+                    out.write(buffer, 0, n);
+                    numberofBytes += n;
+                    if (n == 0) {
+                        timesZero++;
+                    } else {
+                        timesZero = 0;
+                    }
+                    if (numberofBytes == size && timesZero > 5) {
+                        log.info("Number of bytes reached, breaking (though we didn't see EOF yet)");
+                        break;
+                    }
+                    if (numberofBytes % infoBatch == 0) {
+                        // updating spans in ngToast doesn't work...
+                        //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+                        logger.info(
+                            en("Uploaded {}/{} bytes to NEP")
+                                .nl("Geüpload {}/{} bytes naar NEP")
+                                .slf4jArgs(formatter.format(numberofBytes), formatter.format(size))
+                                .build()
+                        );
+                    } else {
+                        if (log.isDebugEnabled()) {
+                            log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
+                        }
                     }
                 }
+                logger.info(
+                    en("Ready uploading {}/{} bytes (took {})")
+                        .nl("Klaar met uploaden van {}/{} bytes (kostte: {})")
+                        .slf4jArgs(formatter.format(numberofBytes), formatter.format(size), Duration.between(start, Instant.now()))
+                        .build());
+                return numberofBytes;
             }
-            logger.info(
-                en("Ready uploading {}/{} bytes (took {})")
-                    .nl("Klaar met uploaden van {}/{} bytes (kostte: {})")
-                    .slf4jArgs(formatter.format(numberofBytes), formatter.format(size), Duration.between(start, Instant.now()))
-                    .build());
-            return numberofBytes;
         }
     }
 
