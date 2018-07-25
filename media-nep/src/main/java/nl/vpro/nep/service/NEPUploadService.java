@@ -8,5 +8,9 @@ import javax.annotation.Nonnull;
 import nl.vpro.logging.simple.SimpleLogger;
 
 public interface NEPUploadService {
-    long upload(@Nonnull  SimpleLogger logger, @Nonnull  String nepFile, @Nonnull Long size, @Nonnull InputStream stream) throws IOException;
+    long upload(
+        @Nonnull SimpleLogger logger,
+        @Nonnull String nepFile,
+        @Nonnull Long size,
+        @Nonnull InputStream stream) throws IOException;
 }
