@@ -1,6 +1,8 @@
 package nl.vpro.domain.media;
 
 import java.io.Serializable;
+import java.util.Comparator;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +14,7 @@ import nl.vpro.domain.Displayable;
 
 @Entity
 @SuppressWarnings("serial")
-public class Net implements Displayable, Serializable {
+public class Net implements Displayable, Serializable, Comparable<Net> {
 
     @Id
     @NotNull(message = "type is required")
@@ -64,5 +66,11 @@ public class Net implements Displayable, Serializable {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    @Override
+    public int compareTo(Net o) {
+        return Objects.compare(this.id, o.id, Comparator.naturalOrder());
+
     }
 }
