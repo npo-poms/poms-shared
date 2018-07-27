@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
 import nl.vpro.domain.media.MediaBuilder;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ProgramType;
+import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.support.OwnerType;
 
 
@@ -83,7 +84,13 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     public Program fetch(OwnerType ownerType) {
         Program p  = super.fetch(ownerType);
         p.setType(programType);
-        p.setSegments(toSet(segments, s -> s.fetch(ownerType)));
+        p.setSegments(toSet(segments, (s) -> {
+                Segment result = s.fetch(ownerType);
+                result.setMidRef(null);
+                result.setParent(p);
+                return result;
+            })
+        );
         return p;
     }
 
