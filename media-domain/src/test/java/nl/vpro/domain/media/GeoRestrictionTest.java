@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.8
  */
 public class GeoRestrictionTest {
     @Test
@@ -24,7 +24,7 @@ public class GeoRestrictionTest {
     public void xmlEuropa() {
 
         GeoRestriction restriction = JAXBTestUtil.unmarshal("<local:geoRestriction regionId=\"EUROPA\" platform=\"INTERNETVOD\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\" />", GeoRestriction.class);
-        assertThat(restriction.getRegion()).isEqualTo(Region.EUROPE);
+        assertThat(restriction.getRegion()).isNull();
     }
 
 }
