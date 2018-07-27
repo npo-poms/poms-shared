@@ -179,8 +179,13 @@ public interface UserService<T extends User> {
         Object onBehalfOf = getAuthentication();
         if (onBehalfOf != null) {
             try {
-                String principal = String.valueOf(onBehalfOf.getClass().getMethod("getPrincipal").invoke(onBehalfOf));
-                MDC.put(ONBEHALFOF, ":" + principal);
+                Object principal = onBehalfOf.getClass().getMethod("getPrincipal").invoke(onBehalfOf);
+                try {
+                    principal = principal.getClass().getMethod("getUsername").invoke(principal);
+                } catch(Exception ignored) {
+
+                }
+                MDC.put(ONBEHALFOF, ":" + String.valueOf(principal));
             } catch (Exception e) {
                 MDC.put(ONBEHALFOF, ":" + onBehalfOf.toString());
             }
