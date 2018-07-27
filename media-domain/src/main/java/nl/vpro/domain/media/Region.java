@@ -69,16 +69,21 @@ public enum Region implements Displayable {
     }
 
     public static Region valueOfOrNull(String v) {
+        try {
+            return valueOfOrNullOrIllegalArgument(v);
+        } catch (IllegalArgumentException iae) {
+            return null;
+        }
+    }
+
+    public static Region valueOfOrNullOrIllegalArgument(String v) {
         if (StringUtils.isEmpty(v)) {
             return null;
         }
         if (v.toUpperCase().equals("EUROPA")) {
             return EUROPE;
         }
-        try {
-            return valueOf(v);
-        } catch (IllegalArgumentException iae) {
-            return null;
-        }
-    }
+        return valueOf(v);
+
+     }
 }
