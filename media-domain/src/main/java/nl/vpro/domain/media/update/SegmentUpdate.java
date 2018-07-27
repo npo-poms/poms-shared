@@ -152,11 +152,24 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
     public void setStart(java.time.Duration start) {
         this.start = start;
     }
-    @XmlAttribute
+
+    @XmlTransient
     public void setMidRef(String string) {
         this.midRef = string;
     }
     public String getMidRef() {
+        return midRef;
+    }
+
+    @XmlAttribute(name = "midRef")
+    public void setMidRefAttribute(String string) {
+        setMidRef(string);
+    }
+
+    public String getMidRefAttribute() {
+        if (parent != null) {
+            return parent.getMid();
+        }
         return midRef;
     }
 
