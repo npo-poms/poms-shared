@@ -22,6 +22,8 @@ import org.slf4j.MDC;
 
 import nl.vpro.domain.Roles;
 
+import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
+
 public interface UserService<T extends User> {
 
     <S> S doAs(String principalId, Callable<S> handler) throws Exception;
@@ -177,15 +179,15 @@ public interface UserService<T extends User> {
         Object onBehalfOf = getAuthentication();
         if (onBehalfOf != null) {
             try {
-                String principal = (String) onBehalfOf.getClass().getMethod("getPrincipal").invoke(onBehalfOf);
-                MDC.put("onBehalfOf", ":" + principal);
+                String principal = String.valueOf(onBehalfOf.getClass().getMethod("getPrincipal").invoke(onBehalfOf));
+                MDC.put(ONBEHALFOF, ":" + principal);
             } catch (Exception e) {
-                MDC.put("onBehalfOf", ":" + onBehalfOf.toString());
+                MDC.put(ONBEHALFOF, ":" + onBehalfOf.toString());
             }
         }
         return () -> {
             restoreAuthentication(onBehalfOf);
-            MDC.remove("onBehalfOf");
+            MDC.remove(ONBEHALFOF);
         };
     }
 
