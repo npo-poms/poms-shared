@@ -176,37 +176,52 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
             log.warn("Calling with null key: {}", reason);
             return callable.call();
         }
-        ReentrantLock lock = locks.computeIfAbsent(key, (m) -> new ReentrantLock());
+        ReentrantLock lock = null;
+
         try {
-            if (lock.hasQueuedThreads()) {
-                log.info("There are already threads for {}, waiting", key);
-                instance.maxConcurrency = Math.max(lock.getQueueLength(), instance.maxConcurrency);
+            synchronized (locks) {
+                lock = locks.computeIfAbsent(key, (m) -> {
+                    log.trace("New lock for " + m);
+                    return new ReentrantLock();
+                    }
+                );
+                if (lock.isLocked() && ! lock.isHeldByCurrentThread()) {
+                    log.info("There are already threads for {}, waiting", key);
+                    instance.maxConcurrency = Math.max(lock.getQueueLength(), instance.maxConcurrency);
+                }
             }
 
             lock.lock();
+
             instance.maxDepth = Math.max(instance.maxDepth, lock.getHoldCount());
-
+            log.trace("{} holdcount {}", Thread.currentThread().hashCode(), lock.getHoldCount());
             if (lock.getHoldCount() == 1) {
-                log.debug("Aquired lock for ", key);
-
                 instance.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
                 instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
+                Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
+                log.debug("Acquired lock for {}  ({}) in {}", key, reason, aquireTime);
             }
 
 
-            Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
-            log.debug("Acquired lock for {}  ({}) in {}", key, reason, aquireTime);
 
             return callable.call();
         } finally {
-            lock.unlock();
-            if (lock.getHoldCount() == 0) {
-                locks.remove(key);
-                log.debug("Released lock for ", key);
-                instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
-                log.debug("Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
-            }
+            if (lock != null) {
+                synchronized (locks) {
 
+                    if (lock.getHoldCount() == 1) {
+                        if (!lock.hasQueuedThreads()) {
+                            log.trace("Removed " + key);
+                            locks.remove(key);
+                        }
+                        instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
+                        log.debug("Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
+                    }
+                    locks.notifyAll();
+
+                }
+            }
+            lock.unlock();
         }
 
     }
