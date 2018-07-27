@@ -7,19 +7,19 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 
 import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.StringUtils;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
 import nl.vpro.domain.Displayable;
-import nl.vpro.domain.media.bind.RegionAdapter;
 
 /**
  * The region as used in {@link GeoRestriction}. The order wants to be from more to less restrictive.
  */
 @XmlEnum
-@XmlJavaTypeAdapter(value = RegionAdapter.class)
+//@XmlJavaTypeAdapter(value = RegionAdapter.class)
+@XmlType(name = "regionEnum")
 public enum Region implements Displayable {
 
 
