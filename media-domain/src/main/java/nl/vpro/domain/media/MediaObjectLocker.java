@@ -185,7 +185,10 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
             lock.lock();
             instance.maxDepth = Math.max(instance.maxDepth, lock.getHoldCount());
+
             if (lock.getHoldCount() == 1) {
+                log.debug("Aquired lock for ", key);
+
                 instance.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
                 instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
             }
@@ -199,6 +202,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
             lock.unlock();
             if (lock.getHoldCount() == 0) {
                 locks.remove(key);
+                log.debug("Released lock for ", key);
                 instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
                 log.debug("Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
             }
