@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
 import org.junit.FixMethodOrder;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
@@ -17,7 +16,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 public class MediaUpdateTest {
 
-    ProgramUpdate rounded;
+    static ProgramUpdate rounded;
 
     @Test
 
@@ -272,11 +271,11 @@ public class MediaUpdateTest {
     }
 
     @Test
-    @Ignore("Fails")
+    //@Ignore("Fails")
     // TODO
     public void withEverything2() throws Exception {
-
-        JAXBTestUtil.roundTripAndSimilar(rounded.fetch(OwnerType.BROADCASTER), "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+        MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);
+        JAXBTestUtil.roundTripAndSimilar(fetched, "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "    <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "    <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
@@ -343,25 +342,29 @@ public class MediaUpdateTest {
             "        </location>\n" +
             "    </locations>\n" +
             "    <scheduleEvents>\n" +
-            "        <scheduleEvent channel=\"NED3\">\n" +
+            "        <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\">\n" +
             "            <guideDay>1969-12-31+01:00</guideDay>\n" +
             "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "            <duration>P0DT0H0M0.200S</duration>\n" +
+            "            <poProgID>VPROWON_20001</poProgID>\n" +
             "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"NED3\">\n" +
+            "        <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\">\n" +
             "            <guideDay>1970-01-03+01:00</guideDay>\n" +
             "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
             "            <duration>P0DT0H0M0.050S</duration>\n" +
+            "            <poProgID>VPROWON_20001</poProgID>\n" +
             "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"HOLL\">\n" +
+            "        <scheduleEvent channel=\"HOLL\" midRef=\"VPROWON_20001\">\n" +
             "            <guideDay>1970-01-08+01:00</guideDay>\n" +
             "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
             "            <duration>P0DT0H0M0.250S</duration>\n" +
+            "            <poProgID>VPROWON_20001</poProgID>\n" +
             "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"CONS\">\n" +
+            "        <scheduleEvent channel=\"CONS\" midRef=\"VPROWON_20001\">\n" +
             "            <guideDay>1970-01-10+01:00</guideDay>\n" +
             "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
             "            <duration>P0DT0H0M0.200S</duration>\n" +
+            "            <poProgID>VPROWON_20001</poProgID>\n" +
             "        </scheduleEvent>\n" +
             "    </scheduleEvents>\n" +
             "    <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +
@@ -385,7 +388,7 @@ public class MediaUpdateTest {
             "        </shared:image>\n" +
             "    </images>\n" +
             "    <segments>\n" +
-            "        <segment type=\"SEGMENT\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\">\n" +
+            "        <segment midRef=\"VPROWON_20001\" type=\"SEGMENT\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\">\n" +
             "            <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "            <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "            <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
@@ -420,6 +423,7 @@ public class MediaUpdateTest {
             "                    <familyName>Holt</familyName>\n" +
             "                </person>\n" +
             "            </credits>\n" +
+            "            <descendantOf midRef=\"VPROWON_20001\" type=\"BROADCAST\"/>\n" +
             "            <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
             "            <locations>\n" +
             "                <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:location:6\">\n" +
@@ -451,25 +455,29 @@ public class MediaUpdateTest {
             "                </location>\n" +
             "            </locations>\n" +
             "            <scheduleEvents>\n" +
-            "                <scheduleEvent channel=\"NED3\">\n" +
+            "                <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345_1\">\n" +
             "                    <guideDay>1969-12-31+01:00</guideDay>\n" +
             "                    <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "                    <duration>P0DT0H0M0.200S</duration>\n" +
+            "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
             "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"NED3\">\n" +
+            "                <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345_1\">\n" +
             "                    <guideDay>1970-01-03+01:00</guideDay>\n" +
             "                    <start>1970-01-04T01:00:00.300+01:00</start>\n" +
             "                    <duration>P0DT0H0M0.050S</duration>\n" +
+            "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
             "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"HOLL\">\n" +
+            "                <scheduleEvent channel=\"HOLL\" midRef=\"VPROWON_12345_1\">\n" +
             "                    <guideDay>1970-01-08+01:00</guideDay>\n" +
             "                    <start>1970-01-09T01:00:00.350+01:00</start>\n" +
             "                    <duration>P0DT0H0M0.250S</duration>\n" +
+            "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
             "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"CONS\">\n" +
+            "                <scheduleEvent channel=\"CONS\" midRef=\"VPROWON_12345_1\">\n" +
             "                    <guideDay>1970-01-10+01:00</guideDay>\n" +
             "                    <start>1970-01-11T01:00:00.600+01:00</start>\n" +
             "                    <duration>P0DT0H0M0.200S</duration>\n" +
+            "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
             "                </scheduleEvent>\n" +
             "            </scheduleEvents>\n" +
             "            <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +

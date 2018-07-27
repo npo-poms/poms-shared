@@ -117,7 +117,10 @@ public class MediaUpdateListTest {
         //System.out.println(writer.toString());
         Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
         MediaUpdateList<ProgramUpdate> list2 = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);
-        assertFalse(diff.toString() + " " + writer.toString(), diff.hasDifferences());
+        if (diff.hasDifferences()) {
+            assertThat(writer.toString()).isEqualTo(expected);
+        }
+
         //JAXB.marshal(list2, System.out);
 
         assertEquals(1, list2.getList().get(0).getSegments().size());
