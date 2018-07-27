@@ -12,6 +12,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.Embargos;
@@ -39,7 +41,10 @@ public class Locations {
         return addLocation(program, platform, encryption, pubOptie, owner, replaces);
     }
 
-    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(MediaObject mediaObject, Platform platform, Predicate<Location> locationPredicate) {
+    public static Locations.RealizeResult realizeStreamingPlatformIfNeeded(
+        @Nonnull MediaObject mediaObject,
+        @Nonnull Platform platform,
+        @Nonnull Predicate<Location> locationPredicate) {
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
 
         if (platform == Platform.INTERNETVOD) {
@@ -150,9 +155,10 @@ public class Locations {
             // no, just check platform then.
             authorityLocation = getAuthorityLocationsForPlatform(mediaObject, platform).stream()
                 .filter(l -> getEncryptionFromProgramUrl(l) == encryption)
-                .filter(locationPredicate::test)
+                .filter(locationPredicate)
                 .findFirst().
                 orElse(null);
+            log.info("Found authority location for {} {} -> {}", platform, encryption, authorityLocation);
         }
         if (authorityLocation == null) {
             authorityLocation = createLocation(mediaObject, existingPredictionForPlatform, locationUrl);
@@ -165,7 +171,8 @@ public class Locations {
             }
         } else {
             if (!locationUrl.equals(authorityLocation.getProgramUrl())) {
-                log.info("Updating location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
+                log.info("Updating location {} -> {} {} for mediaObject {}", authorityLocation.getProgramUrl(),
+                    locationUrl, platform, mediaObject.getMid());
                 authorityLocation.setProgramUrl(locationUrl);
             } else {
                 log.info("Location {} {} for mediaObject {} already exists", locationUrl, platform, mediaObject.getMid());
