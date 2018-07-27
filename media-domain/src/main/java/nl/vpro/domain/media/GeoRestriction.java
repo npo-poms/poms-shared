@@ -115,6 +115,7 @@ public class GeoRestriction extends Restriction<GeoRestriction> implements Compa
     }
 
 
+
     @Override
     public int compareTo(GeoRestriction o) {
         Platform p1 = platform == null ? Platform.INTERNETVOD : platform;
