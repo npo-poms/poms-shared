@@ -19,10 +19,7 @@ import org.jboss.resteasy.annotations.providers.multipart.XopWithMultipartRelate
 import org.jboss.resteasy.plugins.providers.multipart.MultipartConstants;
 
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.media.Member;
-import nl.vpro.domain.media.Platform;
-import nl.vpro.domain.media.StreamingStatus;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaList;
 import nl.vpro.domain.media.search.MediaListItem;
@@ -452,7 +449,21 @@ public interface MediaBackendRestService {
     @Consumes({MediaType.WILDCARD})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
-        HttpServletRequest inputStream) throws IOException;
+        HttpServletRequest request) throws IOException;
+
+
+
+    @POST
+    @Path("upload/{mid}/{encryption}/{priority}")
+    @Consumes({MediaType.WILDCARD})
+    TranscodeRequest upload(
+        @Encoded @PathParam(MID) final String mid,
+        @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
+        @Encoded @PathParam(PRIOTRITY) final TranscodeRequest.Priority priority,
+        @QueryParam(ERRORS) String errors,
+        HttpServletRequest request) throws IOException;
+
+
 
 
 
