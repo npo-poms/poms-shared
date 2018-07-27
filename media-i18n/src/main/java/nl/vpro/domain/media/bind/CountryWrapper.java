@@ -40,7 +40,9 @@ public class CountryWrapper {
     @XmlValue
     @JsonProperty("value")
     public String getName() {
-        return Locales.getCountryName(code, Locale.getDefault(Locale.Category.DISPLAY));
+        return Locales.getCountryName(code,
+            Locales.NETHERLANDISH
+        );
     }
 
     public void setName(String name) {
