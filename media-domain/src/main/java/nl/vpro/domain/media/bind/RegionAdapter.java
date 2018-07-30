@@ -15,9 +15,5 @@ public class RegionAdapter extends EnumAdapter<Region>  {
         super(Region.class);
     }
 
-    @Override
-    protected  Region valueOf(String s) {
-        return Region.valueOfOrNull(s);
-    }
 
 }
