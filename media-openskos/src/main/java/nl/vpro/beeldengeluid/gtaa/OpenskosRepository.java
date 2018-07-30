@@ -359,7 +359,7 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     @Override
-    public List<Description> findAnything(String input, Integer max) {
+    public List<Description> findAnything(@Nonnull String input, Integer max) {
         if (max == null) {
             max = 50;
         }
