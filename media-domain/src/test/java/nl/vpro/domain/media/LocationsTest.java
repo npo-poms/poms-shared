@@ -1,12 +1,12 @@
 package nl.vpro.domain.media;
 
+import nl.vpro.domain.media.support.OwnerType;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-
-import org.junit.Test;
-
-import nl.vpro.domain.media.support.OwnerType;
 
 import static nl.vpro.domain.media.StreamingStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,6 +67,7 @@ public class LocationsTest {
 
 
     @Test
+    @Ignore
     public void createWebOnlyPredictionIfNeeded2() {
         Program program = new Program();
         program.setMid("mid_1234");
