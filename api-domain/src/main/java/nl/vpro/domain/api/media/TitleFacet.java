@@ -22,17 +22,11 @@ public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
     private String name;
 
     @Valid
-    // TODO 'subSearch'?
     private TitleSearch subSearch;
 
     public TitleFacet() {
     }
 
-
-    @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
-    }
 
     @Override
     @XmlElement
