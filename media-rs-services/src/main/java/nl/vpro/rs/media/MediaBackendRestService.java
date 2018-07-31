@@ -449,7 +449,9 @@ public interface MediaBackendRestService {
     @Consumes({MediaType.WILDCARD})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
-        HttpServletRequest request) throws IOException;
+        @QueryParam("log") Boolean log,
+        @Context HttpServletRequest request,
+        @Context HttpServletResponse response) throws IOException;
 
 
 
@@ -460,8 +462,10 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
         @Encoded @PathParam(PRIOTRITY) final TranscodeRequest.Priority priority,
+        @QueryParam("log") Boolean log,
         @QueryParam(ERRORS) String errors,
-        HttpServletRequest request) throws IOException;
+        @Context HttpServletRequest request,
+        @Context HttpServletResponse response) throws IOException;
 
 
 
