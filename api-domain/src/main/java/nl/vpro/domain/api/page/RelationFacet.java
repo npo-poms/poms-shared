@@ -36,11 +36,6 @@ public class RelationFacet extends ExtendedPageFacet implements NameableSearchab
     }
 
     @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
-    }
-
-    @Override
     @XmlElement
     public RelationSearch getSubSearch() {
         return subSearch;
