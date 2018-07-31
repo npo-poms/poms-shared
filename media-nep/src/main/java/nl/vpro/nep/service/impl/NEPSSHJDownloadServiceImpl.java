@@ -160,7 +160,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
     protected SSHClient createClient() throws IOException {
         return SSHClientFactory
-                .create(hostKey, ftpHost, username, password);
+                .create(hostKey, ftpHost, username, password).get();
     }
 
 
