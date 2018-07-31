@@ -102,7 +102,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
 
         try(
-            final SFTPClient sftp = getClient().newSFTPClient();
+            final SSHClient client = createClient().get();
+            final SFTPClient sftp = client.newSFTPClient();
 
         ) {
             int split  = nepFile.lastIndexOf("/");
@@ -171,6 +172,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                 created.remove(client);
             }
             client = createClient();
+            created.add(client);
             sshClient.set(client);
         }
         return client.get();
@@ -185,9 +187,11 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
 
         log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport().getHeartbeatInterval());
-        created.add(client);
+
         return client;
 
     }
+
+
 
 }
