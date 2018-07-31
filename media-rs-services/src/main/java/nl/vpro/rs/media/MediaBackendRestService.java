@@ -58,7 +58,8 @@ public interface MediaBackendRestService {
     String IMAGE_METADATA = "imageMetadata";
 
     String ENCRYPTION = "encryption";
-    String PRIOTRITY = "priority";
+    String PRIORITY   = "priority";
+    String LOG        = "log";
     String FILE_NAME = "fileName";
 
     @POST
@@ -461,7 +462,7 @@ public interface MediaBackendRestService {
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
-        @Encoded @PathParam(PRIOTRITY) final TranscodeRequest.Priority priority,
+        @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
         @QueryParam("log") Boolean log,
         @QueryParam(ERRORS) String errors,
         @Context HttpServletRequest request,
