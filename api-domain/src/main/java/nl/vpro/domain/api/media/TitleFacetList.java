@@ -76,12 +76,6 @@ public class TitleFacetList
         return facets == null ? 0 : facets.size();
     }
 
-
-    @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
-    }
-
     @Override
     public Iterator<TitleFacet> iterator() {
         return new Iterator<TitleFacet>() {
