@@ -186,7 +186,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         client.get().setConnectTimeout((int) connectTimeOut.toMillis());
 
 
-        log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport().getHeartbeatInterval());
+        log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport());
 
         return client;
 
