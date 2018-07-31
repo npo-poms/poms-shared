@@ -130,8 +130,8 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
                         // updating spans in ngToast doesn't work...
                         //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
                         logger.info(
-                            en("Uploaded {}/{} bytes to NEP")
-                                .nl("Geüpload {}/{} bytes naar NEP")
+                            en("Uploaded {}/{} to NEP")
+                                .nl("Geüpload {}/{} naar NEP")
                                 .slf4jArgs(formatter.format(numberofBytes), formatter.format(size))
                                 .build()
                         );
