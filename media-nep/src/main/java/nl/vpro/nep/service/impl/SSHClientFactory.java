@@ -1,5 +1,7 @@
 package nl.vpro.nep.service.impl;
 
+import lombok.Getter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.keepalive.KeepAliveProvider;
 import net.schmizz.sshj.DefaultConfig;
@@ -11,8 +13,10 @@ import net.schmizz.sshj.common.SecurityUtils;
 import java.io.IOException;
 import java.security.PublicKey;
 import java.time.Duration;
+import java.time.Instant;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 @Slf4j
 final class SSHClientFactory {
@@ -28,7 +32,7 @@ final class SSHClientFactory {
     /**
      * @param hostKey the RSA host key or if containing a semicolon one of the fingerprints supported by sshj.
      */
-    static SSHClient create(final String hostKey, final String host, String username, String password) throws IOException {
+    static ClientHolder create(final String hostKey, final String host, String username, String password) throws IOException {
 
         final DefaultConfig configuration = new DefaultConfig();
         configuration.setKeepAliveProvider(KeepAliveProvider.KEEP_ALIVE);
@@ -61,6 +65,25 @@ final class SSHClientFactory {
         ssh.connect(host);
         ssh.authPassword(username, password);
 
-        return ssh;
+        return new ClientHolder(ssh);
+    }
+
+
+    @ToString
+    static class ClientHolder implements Supplier<SSHClient> {
+        final SSHClient client;
+        @Getter
+        final Instant creationTime;
+
+        ClientHolder(SSHClient client) {
+            this.client = client;
+            this.creationTime = Instant.now();
+        }
+
+        @Override
+        public SSHClient get() {
+            return client;
+
+        }
     }
 }
