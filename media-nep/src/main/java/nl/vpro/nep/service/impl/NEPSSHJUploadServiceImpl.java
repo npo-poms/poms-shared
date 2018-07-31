@@ -146,8 +146,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                     }
                 }
                 logger.info(
-                    en("Ready uploading {}/{} bytes (took {})")
-                        .nl("Klaar met uploaden van {}/{} bytes (kostte: {})")
+                    en("Ready uploading {}/{} (took {})")
+                        .nl("Klaar met uploaden van {}/{} (kostte: {})")
                         .slf4jArgs(formatter.format(numberOfBytes), formatter.format(size), Duration.between(start, Instant.now()))
                         .build());
                 return numberOfBytes;
