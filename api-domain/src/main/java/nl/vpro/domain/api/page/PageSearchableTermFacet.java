@@ -32,10 +32,6 @@ public class PageSearchableTermFacet extends PageFacet implements SearchableFace
         super(threshold, sort, max);
     }
 
-    @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
-    }
 
     @Override
     @XmlElement
