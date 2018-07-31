@@ -37,10 +37,6 @@ public class MemberRefFacet extends MediaFacet implements SearchableFacet<Member
         this.subSearch = subSearch;
     }
 
-    @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
-    }
 
     @Override
     @XmlElement

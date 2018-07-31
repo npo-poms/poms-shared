@@ -88,11 +88,6 @@ public class RelationFacetList extends AbstractFacet<PageSearch> implements Sear
     }
 
     @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
-    }
-
-    @Override
     public Iterator<RelationFacet> iterator() {
         return new Iterator<RelationFacet>() {
             private int index = 0;

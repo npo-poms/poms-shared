@@ -40,10 +40,6 @@ public class RelationFacet extends ExtendedMediaFacet implements NameableSearcha
         this.name = name;
     }
 
-    @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
-    }
 
     @Override
     @XmlElement

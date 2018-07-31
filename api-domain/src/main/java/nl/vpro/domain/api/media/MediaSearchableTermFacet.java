@@ -38,11 +38,6 @@ public class MediaSearchableTermFacet extends MediaFacet implements SearchableFa
     }
 
     @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
-    }
-
-    @Override
     @XmlElement
     public TermSearch getSubSearch() {
         return subSearch;
