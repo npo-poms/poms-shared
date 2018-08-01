@@ -446,8 +446,9 @@ public interface MediaBackendRestService {
 
 
     @POST
+    @PUT
     @Path("upload/{mid}")
-    @Consumes({MediaType.WILDCARD})
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
         @QueryParam("log") Boolean log,
@@ -458,7 +459,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("upload/{mid}/{encryption}/{priority}")
-    @Consumes({MediaType.WILDCARD})
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
