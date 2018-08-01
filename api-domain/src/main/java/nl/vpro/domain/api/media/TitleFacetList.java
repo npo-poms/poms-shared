@@ -25,7 +25,7 @@ import nl.vpro.domain.api.jackson.media.TitleFacetListJson;
 @JsonDeserialize(using = TitleFacetListJson.Deserializer.class)
 public class TitleFacetList
     extends MediaFacet /* extending MediaFacet is mainly done for backwards compatibility */
-    implements SearchableFacet<TitleSearch>, Iterable<TitleFacet> {
+    implements SearchableFacet<MediaSearch, TitleSearch>, Iterable<TitleFacet> {
 
     @Valid
     private TitleSearch subSearch;
