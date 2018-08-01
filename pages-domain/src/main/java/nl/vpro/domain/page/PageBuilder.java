@@ -207,6 +207,18 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         return self;
     }
 
+     public PB genres(String ... t) {
+        SortedSet<Genre> genres = page.getGenres();
+        if (genres == null) {
+            genres = new TreeSet<>();
+        }
+        for (String term : t) {
+            genres.add(new Genre(new Term(term)));
+        }
+        page.setGenres(genres);
+        return self;
+    }
+
     public PB broadcasters(Broadcaster... broadcasters) {
         return broadcasters(Arrays.asList(broadcasters));
     }
