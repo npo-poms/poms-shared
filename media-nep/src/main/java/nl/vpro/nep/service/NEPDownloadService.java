@@ -15,6 +15,8 @@ public interface NEPDownloadService {
      * Wait until the given file is available on the NEP download ftp server, then copy it to the given outputStream.
      *
      * Before that, you the descriptorConsumer will be called. It if return false, the copying will not happen
+     *
+     * @throws IllegalStateException If the file didn't appear in time
      */
     void download(
         @Nonnull String nepFile,
