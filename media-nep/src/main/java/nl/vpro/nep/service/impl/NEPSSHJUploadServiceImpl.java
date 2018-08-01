@@ -40,7 +40,7 @@ import static nl.vpro.util.MultiLanguageString.en;
  */
 @Named("NEPUploadService")
 @Slf4j
-public class NEPFTPUploadServiceImpl implements NEPUploadService {
+public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     private final String sftpHost;
     private final String username;
@@ -55,12 +55,18 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
     @Setter
     private Duration socketTimeout = Duration.ofSeconds(10L);
 
-    ThreadLocal<SSHClient> sshClient = new ThreadLocal<>();
 
-    Set<SSHClient> created = new HashSet<>();
+    @Getter
+    @Setter
+    private Duration maxaliveClient = Duration.ofMinutes(3);
+
+
+    ThreadLocal<SSHClientFactory.ClientHolder> sshClient = new ThreadLocal<>();
+
+    Set<SSHClientFactory.ClientHolder> created = new HashSet<>();
 
     @Inject
-    public NEPFTPUploadServiceImpl(
+    public NEPSSHJUploadServiceImpl(
         @Value("${nep.transcode.sftp.host}") String sftpHost,
         @Value("${nep.transcode.sftp.username}") String username,
         @Value("${nep.transcode.sftp.password}") String password,
@@ -79,9 +85,9 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
 
     @PreDestroy
     public void destroy() throws IOException {
-        for (SSHClient client : created) {
+        for (SSHClientFactory.ClientHolder client : created) {
             log.info("Closing {}", client);
-            client.close();
+            client.get().disconnect();
         }
     }
 
@@ -94,10 +100,13 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
         @Nonnull InputStream stream) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
-
-
+        logger.info( en("Uploading to {}:{}")
+            .nl("Uploaden naar {}:{}")
+            .slf4jArgs(sftpHost, nepFile)
+            .build());
         try(
-            final SFTPClient sftp = getClient().newSFTPClient();
+            final SSHClient client = createClient().get();
+            final SFTPClient sftp = client.newSFTPClient();
 
         ) {
             int split  = nepFile.lastIndexOf("/");
@@ -111,42 +120,40 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
 
                 byte[] buffer = new byte[1014 * 1024];
                 long infoBatch = buffer.length * 100;
-                long numberofBytes = 0;
+                long numberOfBytes = 0;
                 int n;
                 long timesZero = 0;
                 while (IOUtils.EOF != (n = stream.read(buffer))) {
                     out.write(buffer, 0, n);
-                    numberofBytes += n;
+                    numberOfBytes += n;
                     if (n == 0) {
                         timesZero++;
                     } else {
                         timesZero = 0;
                     }
-                    if (numberofBytes == size && timesZero > 5) {
+                    if (numberOfBytes == size && timesZero > 5) {
                         log.info("Number of bytes reached, breaking (though we didn't see EOF yet)");
                         break;
                     }
-                    if (numberofBytes % infoBatch == 0) {
+                    if (numberOfBytes % infoBatch == 0) {
                         // updating spans in ngToast doesn't work...
                         //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
                         logger.info(
-                            en("Uploaded {}/{} to NEP")
-                                .nl("Geüpload {}/{} naar NEP")
-                                .slf4jArgs(formatter.format(numberofBytes), formatter.format(size))
+                            en("Uploaded {}/{} to {}:{}")
+                                .nl("Geüpload {}/{} naar {}:{}")
+                                .slf4jArgs(formatter.format(numberOfBytes), formatter.format(size), sftpHost, nepFile)
                                 .build()
                         );
                     } else {
-                        if (log.isDebugEnabled()) {
-                            log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
-                        }
+                        log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberOfBytes), formatter.format(size));
                     }
                 }
                 logger.info(
-                    en("Ready uploading {}/{} bytes (took {})")
-                        .nl("Klaar met uploaden van {}/{} bytes (kostte: {})")
-                        .slf4jArgs(formatter.format(numberofBytes), formatter.format(size), Duration.between(start, Instant.now()))
+                    en("Ready uploading {}/{} (took {})")
+                        .nl("Klaar met uploaden van {}/{} (kostte: {})")
+                        .slf4jArgs(formatter.format(numberOfBytes), formatter.format(size), Duration.between(start, Instant.now()))
                         .build());
-                return numberofBytes;
+                return numberOfBytes;
             }
         }
     }
@@ -159,25 +166,35 @@ public class NEPFTPUploadServiceImpl implements NEPUploadService {
     }
 
     SSHClient getClient() throws IOException {
-        SSHClient client = sshClient.get();
-        if (client == null || ! client.isConnected()) {
+        SSHClientFactory.ClientHolder client = sshClient.get();
+        if (client == null || ! client.get().isConnected() || Duration.between(client.getCreationTime(), Instant.now()).compareTo(maxaliveClient) > 0) {
             if (client != null) {
+                if (client.get().isConnected()) {
+                    client.get().disconnect();
+                }
                 created.remove(client);
             }
             client = createClient();
+            created.add(client);
             sshClient.set(client);
         }
-        return client;
+        return client.get();
     }
 
-    protected synchronized  SSHClient createClient() throws IOException {
-        SSHClient client = SSHClientFactory.create(hostKey, sftpHost, username, password);
-        client.setTimeout((int) socketTimeout.toMillis());
-        client.setConnectTimeout((int) connectTimeOut.toMillis());
-        log.info("Created client {}", client);
-        created.add(client);
+    protected synchronized SSHClientFactory.ClientHolder createClient() throws IOException {
+
+        SSHClientFactory.ClientHolder client = SSHClientFactory.create(hostKey, sftpHost, username, password);
+
+        client.get().setTimeout((int) socketTimeout.toMillis());
+        client.get().setConnectTimeout((int) connectTimeOut.toMillis());
+
+
+        log.info("Created client {} with connection {}", client, client.get().getConnection().getTransport());
+
         return client;
 
     }
+
+
 
 }

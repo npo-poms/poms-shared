@@ -28,9 +28,9 @@ import nl.vpro.logging.simple.Slf4jSimpleLogger;
  */
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
-public class NEPFTPUploadServiceImplTest {
+public class NEPSSHJUploadServiceImplTest {
 
-    private NEPFTPUploadServiceImpl impl;
+    private NEPSSHJUploadServiceImpl impl;
 
     private String[] files = new String[] {"/Users/michiel/npo/media/huge1.mp4", "/Users/michiel/npo/media/huge2.mp4"};
 
@@ -38,7 +38,7 @@ public class NEPFTPUploadServiceImplTest {
     @Before
     public void init() {
 
-        impl = new NEPFTPUploadServiceImpl(
+        impl = new NEPSSHJUploadServiceImpl(
             "ftp.nepworldwide.nl",
             "npoweb-vpro",
             "May8xGLHUumFAZo",
@@ -56,7 +56,7 @@ public class NEPFTPUploadServiceImplTest {
 
 
     @Test
-    @Ignore("This actually does something")
+    //@Ignore("This actually does something")
     public void uploadHuge() throws Exception {
         Instant start = Instant.now();
         File file = new File(files[0]);

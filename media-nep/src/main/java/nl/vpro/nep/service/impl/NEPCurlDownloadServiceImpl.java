@@ -27,7 +27,7 @@ import nl.vpro.util.FileMetadata;
  *
  * osx: sudo port install curl +sftp_scp (or use brew)
  *
- * Doesn't work either because of 'rekeying'? See {@link NEPFTPUploadServiceImpl}.
+ * Doesn't work either because of 'rekeying'? See {@link NEPSSHJUploadServiceImpl}.
  *
  * @author Michiel Meeuwissen
  * @since 5.8
