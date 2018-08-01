@@ -136,9 +136,9 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                         // updating spans in ngToast doesn't work...
                         //logger.info("Uploaded {}/{} bytes to NEP", formatter.format(numberofBytes), formatter.format(size));
                         logger.info(
-                            en("Uploaded {}/{} to NEP")
-                                .nl("Geüpload {}/{} naar NEP")
-                                .slf4jArgs(formatter.format(numberOfBytes), formatter.format(size))
+                            en("Uploaded {}/{} to {}:{}")
+                                .nl("Geüpload {}/{} naar {}:{}")
+                                .slf4jArgs(formatter.format(numberOfBytes), formatter.format(size), sftpHost, nepFile)
                                 .build()
                         );
                     } else {
