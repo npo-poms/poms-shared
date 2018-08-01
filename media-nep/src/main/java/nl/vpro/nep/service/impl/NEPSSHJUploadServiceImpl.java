@@ -100,7 +100,10 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         @Nonnull InputStream stream) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
-
+        logger.info( en("Uploading to {}:{}")
+            .nl("Uploaden naar {}:{}")
+            .slf4jArgs(sftpHost, nepFile)
+            .build());
         try(
             final SSHClient client = createClient().get();
             final SFTPClient sftp = client.newSFTPClient();
