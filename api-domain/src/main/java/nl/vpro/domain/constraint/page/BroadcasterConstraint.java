@@ -25,6 +25,7 @@ public class BroadcasterConstraint extends AbstractTextConstraint<Page> {
         caseHandling = CaseHandling.ASIS;
     }
 
+    @lombok.Builder
     public BroadcasterConstraint(String value) {
         super(value);
         caseHandling = CaseHandling.ASIS;
