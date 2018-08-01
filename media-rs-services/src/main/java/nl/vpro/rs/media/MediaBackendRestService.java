@@ -58,7 +58,8 @@ public interface MediaBackendRestService {
     String IMAGE_METADATA = "imageMetadata";
 
     String ENCRYPTION = "encryption";
-    String PRIOTRITY = "priority";
+    String PRIORITY   = "priority";
+    String LOG        = "log";
     String FILE_NAME = "fileName";
 
     @POST
@@ -445,23 +446,28 @@ public interface MediaBackendRestService {
 
 
     @POST
+    @PUT
     @Path("upload/{mid}")
-    @Consumes({MediaType.WILDCARD})
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
-        HttpServletRequest request) throws IOException;
+        @QueryParam("log") Boolean log,
+        @Context HttpServletRequest request,
+        @Context HttpServletResponse response) throws IOException;
 
 
 
     @POST
     @Path("upload/{mid}/{encryption}/{priority}")
-    @Consumes({MediaType.WILDCARD})
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
-        @Encoded @PathParam(PRIOTRITY) final TranscodeRequest.Priority priority,
+        @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
+        @QueryParam("log") Boolean log,
         @QueryParam(ERRORS) String errors,
-        HttpServletRequest request) throws IOException;
+        @Context HttpServletRequest request,
+        @Context HttpServletResponse response) throws IOException;
 
 
 
