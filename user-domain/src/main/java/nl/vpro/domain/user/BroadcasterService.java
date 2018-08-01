@@ -4,11 +4,9 @@
  */
 package nl.vpro.domain.user;
 
-import nl.vpro.domain.NotFoundException;
-
 public interface BroadcasterService extends OrganizationService<Broadcaster> {
 
-    default Broadcaster findForMisId(String id) throws NotFoundException {
+    default Broadcaster findForMisId(String id) {
         for (Broadcaster b : findAll()) {
             if (b.misId == null) {
                 throw new UnsupportedOperationException();
@@ -20,7 +18,7 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
         return null;
     }
 
-    default Broadcaster findForWhatsOnId(String id) throws NotFoundException {
+    default Broadcaster findForWhatsOnId(String id) {
         for (Broadcaster b : findAll()) {
             if (b.whatsOnId == null) {
                 throw new UnsupportedOperationException();
@@ -32,7 +30,7 @@ public interface BroadcasterService extends OrganizationService<Broadcaster> {
         return null;
     }
 
-    default Broadcaster findForNeboId(String id) throws NotFoundException {
+    default Broadcaster findForNeboId(String id) {
         for (Broadcaster b : findAll()) {
             if (b.neboId == null) {
                 throw new UnsupportedOperationException();
