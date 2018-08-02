@@ -257,6 +257,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         }
         if (! fileWithDocumentation.exists()) {
             DocumentationAdder transformer = new DocumentationAdder(MAPPING.get(namespace));
+            //transformer.setXmlStyleSheet("../xs3p/xs3p.xsl");
             try {
                 transformer.transform(new StreamSource(new FileInputStream(file)), new StreamResult(new FileOutputStream(fileWithDocumentation)));
                 log.info("Generated {} with {}", fileWithDocumentation, transformer);
