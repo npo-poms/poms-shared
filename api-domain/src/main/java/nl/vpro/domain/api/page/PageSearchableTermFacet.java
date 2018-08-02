@@ -20,7 +20,7 @@ import nl.vpro.domain.api.TermSearch;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "pageSearchableTermFacetType")
-public class PageSearchableTermFacet extends PageFacet implements SearchableFacet<TermSearch> {
+public class PageSearchableTermFacet extends PageFacet implements SearchableFacet<PageSearch, TermSearch> {
 
     @Valid
     TermSearch subSearch;
@@ -32,10 +32,13 @@ public class PageSearchableTermFacet extends PageFacet implements SearchableFace
         super(threshold, sort, max);
     }
 
-    @Override
-    public boolean hasSubSearch() {
-        return subSearch != null && subSearch.hasSearches();
+    @lombok.Builder
+    private PageSearchableTermFacet(Integer threshold, FacetOrder order, Integer max, PageSearch filter, TermSearch subSearch) {
+        this(threshold, order, max);
+        setFilter(filter);
+        setSubSearch(subSearch);
     }
+
 
     @Override
     @XmlElement
