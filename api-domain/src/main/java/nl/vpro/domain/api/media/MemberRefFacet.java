@@ -19,7 +19,7 @@ import nl.vpro.domain.api.SearchableFacet;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "memberRefFacetType")
-public class MemberRefFacet extends MediaFacet implements SearchableFacet<MemberRefSearch> {
+public class MemberRefFacet extends MediaFacet implements SearchableFacet<MediaSearch, MemberRefSearch> {
 
     @Valid
     MemberRefSearch subSearch;
