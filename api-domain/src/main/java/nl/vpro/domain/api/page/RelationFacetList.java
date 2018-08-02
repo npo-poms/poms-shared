@@ -28,7 +28,7 @@ import nl.vpro.domain.api.jackson.page.RelationFacetListJson;
 @XmlType(name = "pageRelationFacetListType", propOrder = {"filter", "subSearch", "facets"})
 @JsonSerialize(using = RelationFacetListJson.Serializer.class)
 @JsonDeserialize(using = RelationFacetListJson.Deserializer.class)
-public class RelationFacetList extends AbstractFacet<PageSearch> implements SearchableFacet<PageSearch, RelationSearch>, Iterable<RelationFacet> {
+public class RelationFacetList extends AbstractFacet<PageSearch> implements SearchableFacet<RelationSearch>, Iterable<RelationFacet> {
 
     @Valid
     private PageSearch filter;

@@ -19,7 +19,7 @@ import nl.vpro.domain.api.NameableSearchableFacet;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "pageRelationFacetType", propOrder = {"name", "subSearch"})
 @JsonPropertyOrder({"threshold", "sort", "offset", "max", "name", "subSearch"})
-public class RelationFacet extends ExtendedPageFacet implements NameableSearchableFacet<PageSearch, RelationSearch>  {
+public class RelationFacet extends ExtendedPageFacet implements NameableSearchableFacet<RelationSearch>  {
 
     private String name;
 

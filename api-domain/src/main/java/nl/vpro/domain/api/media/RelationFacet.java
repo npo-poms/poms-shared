@@ -19,7 +19,7 @@ import nl.vpro.domain.api.NameableSearchableFacet;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "mediaRelationFacetType", propOrder = {"name", "subSearch"})
 @JsonPropertyOrder({"threshold", "sort", "offset", "max", "name", "subSearch"})
-public class RelationFacet extends ExtendedMediaFacet implements NameableSearchableFacet<MediaSearch, RelationSearch> {
+public class RelationFacet extends ExtendedMediaFacet implements NameableSearchableFacet<RelationSearch> {
 
     private String name;
 

@@ -17,10 +17,10 @@ package nl.vpro.domain.api;
  * @author Roelof Jan Koekoek
  * @since 3.3
  */
-public interface SearchableFacet<T extends AbstractSearch, S extends AbstractSearch> extends Facet<T> {
+public interface SearchableFacet<T extends AbstractSearch> { //},  F extends AbstractSearch>  extends Facet<F> {
     boolean hasSubSearch();
 
-    S getSubSearch();
+    T getSubSearch();
 
-    void setSubSearch(S  filter);
+    void setSubSearch(T filter);
 }

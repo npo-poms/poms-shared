@@ -21,14 +21,13 @@ import nl.vpro.domain.page.Page;
 public class Filter extends AbstractFilter<Page> {
 
 
-    @lombok.Builder
     public Filter(Constraint<Page> constraint) {
         super(constraint);
     }
 
     public Filter() {
     }
-
+    
 
 
     @JsonSerialize(using = AbstractFilter.Serializer.class)

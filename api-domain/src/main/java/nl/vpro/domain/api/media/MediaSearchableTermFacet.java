@@ -20,7 +20,7 @@ import nl.vpro.domain.api.TermSearch;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "mediaSearchableTermFacetType")
-public class MediaSearchableTermFacet extends MediaFacet implements SearchableFacet<MediaSearch, TermSearch> {
+public class MediaSearchableTermFacet extends MediaFacet implements SearchableFacet<TermSearch> {
 
     @Valid
     TermSearch subSearch;

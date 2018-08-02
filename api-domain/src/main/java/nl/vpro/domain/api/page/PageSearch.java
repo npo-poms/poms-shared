@@ -1,6 +1,8 @@
 package nl.vpro.domain.api.page;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.Instant;
 import java.util.function.Function;
@@ -31,9 +33,6 @@ import nl.vpro.domain.user.Broadcaster;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@lombok.Builder
 public class PageSearch extends AbstractTextSearch implements Predicate<Page> {
 
     @Valid

@@ -50,10 +50,6 @@ public class ProfileDefinition<T> implements DelegatingDisplayablePredicate<T>, 
         this.sinceDate = since;
     }
 
-    public static <S> ProfileDefinition<S> of(AbstractFilter<S> filter) {
-        return new ProfileDefinition<>(filter);
-    }
-
     public boolean hasConstraint() {
         return filter != null && filter.getConstraint() != null;
     }

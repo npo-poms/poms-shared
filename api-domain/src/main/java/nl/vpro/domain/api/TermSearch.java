@@ -4,8 +4,6 @@
  */
 package nl.vpro.domain.api;
 
-import java.util.Arrays;
-
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -30,12 +28,10 @@ public class TermSearch extends AbstractSearch {
     }
 
 
-    @lombok.Builder(builderClassName = "Builder")
-    private TermSearch(
-        Match match,
-        TextMatcherList _ids) {
+    @lombok.Builder
+    private TermSearch(Match match, TextMatcherList ids) {
         super(match);
-        this.ids = _ids;
+        this.ids = ids;
     }
 
     public TextMatcherList getIds() {
@@ -49,23 +45,5 @@ public class TermSearch extends AbstractSearch {
     @Override
     public boolean hasSearches() {
         return atLeastOneHasSearches(ids);
-    }
-    public static class Builder {
-
-        public Builder ids(TextMatcherList ids) {
-            return _ids(ids);
-        }
-        public Builder must(TextMatcher... ids) {
-            return _ids(TextMatcherList.must(ids));
-        }
-        public Builder regexps(String ... ids) {
-            TextMatcher[] array = Arrays.stream(ids).map(i -> TextMatcher.must(i, StandardMatchType.REGEX)).toArray(TextMatcher[]::new);
-            return must(array);
-        }
-        public Builder wildcards(String ... ids) {
-            TextMatcher[] array = Arrays.stream(ids).map(i -> TextMatcher.must(i, StandardMatchType.WILDCARD)).toArray(TextMatcher[]::new);
-            return must(array);
-        }
-
     }
 }

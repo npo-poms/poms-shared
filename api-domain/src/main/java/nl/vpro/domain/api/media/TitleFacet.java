@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.api.NameableSearchableFacet;
-import nl.vpro.domain.api.TextFacet;
 
 
 /**
@@ -18,7 +17,7 @@ import nl.vpro.domain.api.TextFacet;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "mediaTitleFacetType", propOrder = {"name", "subSearch"})
 @JsonPropertyOrder({"name","subSearch"})
-public class TitleFacet extends TextFacet<MediaSearch> implements NameableSearchableFacet<MediaSearch, TitleSearch>  {
+public class TitleFacet implements NameableSearchableFacet<TitleSearch>  {
 
     private String name;
 
