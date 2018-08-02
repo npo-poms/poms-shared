@@ -1,8 +1,6 @@
 package nl.vpro.domain.page;
 
 
-import lombok.Builder;
-
 import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
@@ -53,13 +51,14 @@ public class Portal implements Displayable, Serializable {
         setUrl(url);
     }
 
-    @Builder
+    @lombok.Builder
     public Portal(String id, String url, String displayName, Section section) {
         this.id = id;
         this.displayName = displayName;
         setUrl(url);
         this.section = section;
     }
+
     @XmlAttribute(required = true)
     public String getUrl() {
         return url;

@@ -1,5 +1,9 @@
 package nl.vpro.domain.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -28,16 +32,19 @@ public class ServiceLocator  {
         serviceLocator = this;
     }
 
+    @Nonnull
     public static BroadcasterService getBroadcasterService() {
-        return serviceLocator == null ? null : serviceLocator.broadcasterService.get();
+        return serviceLocator == null ? new BroadcasterServiceImpl() : serviceLocator.broadcasterService.get();
     }
 
+    @Nonnull
     public static PortalService getPortalService() {
-        return serviceLocator == null ? null : serviceLocator.portalService.get();
+        return serviceLocator == null ? new PortalServiceImpl() : serviceLocator.portalService.get();
     }
 
+    @Nonnull
     public static ThirdPartyService getThirdPartyService() {
-        return serviceLocator == null ? null : serviceLocator.thirdPartyService.get();
+        return serviceLocator == null ? new ThirdPartyServiceImpl() : serviceLocator.thirdPartyService.get();
     }
 
     public static EditorService getEditorService() {
@@ -71,6 +78,46 @@ public class ServiceLocator  {
             new ServiceLocator();
         }
         serviceLocator.editorService = () -> editorService;
+    }
+
+
+    protected static abstract  class AbstractOrganizationService<T extends Organization> implements OrganizationService<T> {
+
+        private final List<T> repository = new ArrayList<>();
+
+        @Override
+        public T find(@Nonnull String id) {
+            return repository.stream().filter(o -> o.getId().equals(id)).findFirst().orElse(null);
+
+        }
+
+        @Override
+        public List<T> findAll() {
+            return repository;
+
+        }
+
+        @Override
+        public T update(T organization) {
+            repository.remove(find(organization.getId()));
+            repository.add(organization);
+            return organization;
+
+        }
+
+        @Override
+        public void delete(T organization) {
+            repository.remove(find(organization.getId()));
+        }
+    }
+    public static class BroadcasterServiceImpl extends AbstractOrganizationService<Broadcaster> implements BroadcasterService  {
+
+    }
+    public static class PortalServiceImpl extends AbstractOrganizationService<Portal> implements PortalService  {
+
+    }
+     public static class ThirdPartyServiceImpl extends AbstractOrganizationService<ThirdParty> implements ThirdPartyService  {
+
     }
 
 }

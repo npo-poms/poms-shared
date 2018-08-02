@@ -259,7 +259,7 @@ public class SearchResults {
     }
 
 
-    public static void setSelected(NameableSearchableFacet<? extends AbstractRelationSearch> facet, Iterable<? extends AbstractRelationSearch> searches, List<MultipleFacetsResult> facetResultItems, List<MultipleFacetsResult> selected) {
+    public static void setSelected(NameableSearchableFacet<?, ? extends AbstractRelationSearch>  facet, Iterable<? extends AbstractRelationSearch> searches, List<MultipleFacetsResult> facetResultItems, List<MultipleFacetsResult> selected) {
 
         // A relation is selected if the search applies to the subsearch and the search.
         for (MultipleFacetsResult multipleFacetsResult : facetResultItems) {
