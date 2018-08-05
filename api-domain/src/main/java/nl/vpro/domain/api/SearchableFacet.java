@@ -18,7 +18,11 @@ package nl.vpro.domain.api;
  * @since 3.3
  */
 public interface SearchableFacet<T extends AbstractSearch, S extends AbstractSearch> extends Facet<T> {
-    boolean hasSubSearch();
+
+
+    default boolean hasSubSearch() {
+        return getSubSearch() != null && getSubSearch().hasSearches();
+    }
 
     S getSubSearch();
 
