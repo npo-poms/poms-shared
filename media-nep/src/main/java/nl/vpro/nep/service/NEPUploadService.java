@@ -12,5 +12,7 @@ public interface NEPUploadService {
         @Nonnull SimpleLogger logger,
         @Nonnull String nepFile,
         @Nonnull Long size,
-        @Nonnull InputStream stream) throws IOException;
+        @Nonnull InputStream stream,
+        boolean replaces
+        ) throws IOException;
 }
