@@ -11,7 +11,6 @@ import java.util.List;
 @lombok.Builder(builderClassName = "Builder")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-
 public class WorkflowExecutionRequest implements Serializable {
     private String mid;
     private String filename;
@@ -25,6 +24,17 @@ public class WorkflowExecutionRequest implements Serializable {
 
     public WorkflowExecutionRequest() {
 
+    }
+
+    public static class Builder {
+
+        public Builder file(String ftpUsername, String fileName) {
+            if (fileName.startsWith("/")) {
+                return filename(ftpUsername + fileName);
+            } else {
+                return filename(ftpUsername + "/" + fileName);
+            }
+        }
     }
 
 }
