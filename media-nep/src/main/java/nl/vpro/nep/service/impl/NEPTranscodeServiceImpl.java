@@ -74,16 +74,20 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
 
     private final String password;
 
+    private final String ftpUserName;
+
     private HttpClientContext clientContext;
 
     @Inject
     public NEPTranscodeServiceImpl(
          @Value("${nep.api.baseUrl}") String url,
          @Value("${nep.api.authorization.username}") String userName,
-         @Value("${nep.api.authorization.password}") String password) {
+         @Value("${nep.api.authorization.password}") String password,
+         @Value("${nep.transcode.sftp.username}") String ftpUserName) {
         this.url = url;
         this.userName = userName;
         this.password = password;
+        this.ftpUserName = ftpUserName;
     }
 
     @PostConstruct
@@ -111,6 +115,9 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         HttpPost httpPost = new HttpPost(getWorkflowsEndPoint());
         httpPost.setEntity(entity);
 
+        if (!request.getFilename().startsWith(ftpUserName)) {
+            log.warn("The file given in {} does not start with ftp user name {}", request, ftpUserName);
+        }
         HttpResponse response = client.execute(httpPost, clientContext);
 
         if (response.getStatusLine().getStatusCode() >= 300) {
