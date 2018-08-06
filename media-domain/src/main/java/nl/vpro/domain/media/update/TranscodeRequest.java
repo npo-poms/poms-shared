@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -31,16 +32,19 @@ public class TranscodeRequest implements MediaIdentifiable {
     @XmlAttribute
     private String mid;
 
+    /**
+     * File name (not prefixed by ftp account)
+     */
     @NotNull
     private String fileName;
-
 
 
     @NotNull
     private Encryption encryption;
 
     @NotNull
-    private Priority priority;
+    @lombok.Builder.Default
+    private Priority priority = Priority.NORMAL;
 
 
     public TranscodeRequest() {
@@ -49,18 +53,17 @@ public class TranscodeRequest implements MediaIdentifiable {
 
     @Override
     public MediaType getMediaType() {
-        return null;
+        return MediaType.MEDIA;
     }
 
     @Override
     public List<String> getCrids() {
-        return null;
+        return Arrays.asList();
 
     }
 
     public static class Builder {
-        @lombok.Builder.Default
-        Priority priority = Priority.NORMAL;
+
     }
 
     @XmlType(name = "priorityType")
