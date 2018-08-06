@@ -4,9 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import net.schmizz.sshj.SSHClient;
-import net.schmizz.sshj.sftp.OpenMode;
-import net.schmizz.sshj.sftp.RemoteFile;
-import net.schmizz.sshj.sftp.SFTPClient;
+import net.schmizz.sshj.sftp.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -97,7 +95,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         @Nonnull SimpleLogger logger,
         @Nonnull String nepFile,
         @Nonnull Long size,
-        @Nonnull InputStream stream) throws IOException {
+        @Nonnull InputStream stream,
+        boolean replaces) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);
         logger.info( en("Uploading to {}:{}")
@@ -112,6 +111,22 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             int split  = nepFile.lastIndexOf("/");
             if (split > 0) {
                 sftp.mkdirs(nepFile.substring(0, split));
+            }
+            if (! replaces) {
+                try (
+                    final RemoteFile handleToCheck = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
+
+                ) {
+                    FileAttributes attributes = handleToCheck.fetchAttributes();
+                    if (attributes.getSize() != size) {
+                        logger.warn("Found existing, but size is not equal {} {} != {}", nepFile, attributes.getSize(), size);
+                    } else {
+                        logger.info("Found existing {}", attributes);
+                    }
+                    return -1L;
+                } catch (SFTPException ignore) {
+
+                }
             }
             try (
                 final RemoteFile handle = sftp.open(nepFile, EnumSet.of(OpenMode.CREAT, OpenMode.WRITE));

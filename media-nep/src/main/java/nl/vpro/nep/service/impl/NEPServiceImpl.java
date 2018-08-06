@@ -77,8 +77,8 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public long upload(@Nonnull SimpleLogger logger, @Nonnull String nepFile, @Nonnull Long size, @Nonnull InputStream stream) throws IOException {
-        return nepftpUploadService.get().upload(logger, nepFile, size, stream);
+    public long upload(@Nonnull SimpleLogger logger, @Nonnull String nepFile, @Nonnull Long size, @Nonnull InputStream stream, boolean replaces) throws IOException {
+        return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
 
     }
 

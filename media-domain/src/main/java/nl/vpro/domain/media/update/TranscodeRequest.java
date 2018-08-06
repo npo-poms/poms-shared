@@ -32,7 +32,6 @@ public class TranscodeRequest implements MediaIdentifiable {
     @XmlAttribute
     private String mid;
 
-
     /**
      * File name (not prefixed by ftp account)
      */
