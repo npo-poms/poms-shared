@@ -51,7 +51,7 @@ public class NEPSSHJUploadServiceImplTest {
     public void upload() throws Exception {
         byte[] example = new byte[]{1, 2, 3, 4};
         String filename = "npoweb-vpro/test.1235";
-        impl.upload(new Slf4jSimpleLogger(log), filename, (long) example.length, new ByteArrayInputStream(example));
+        impl.upload(new Slf4jSimpleLogger(log), filename, (long) example.length, new ByteArrayInputStream(example), true);
     }
 
 
@@ -61,7 +61,7 @@ public class NEPSSHJUploadServiceImplTest {
         Instant start = Instant.now();
         File file = new File(files[0]);
         String filename = "test.1235";
-        impl.upload(new Slf4jSimpleLogger(log), filename, file.length(), new FileInputStream(file));
+        impl.upload(new Slf4jSimpleLogger(log), filename, file.length(), new FileInputStream(file), true);
         log.info("Took {}", Duration.between(start, Instant.now()));
     }
 
@@ -93,7 +93,7 @@ public class NEPSSHJUploadServiceImplTest {
             File file = from;
             String filename = to;
             try {
-                impl.upload(new Slf4jSimpleLogger(log), filename, file.length(), new FileInputStream(file));
+                impl.upload(new Slf4jSimpleLogger(log), filename, file.length(), new FileInputStream(file), true);
             } catch (IOException e) {
                 log.error(e.getMessage(), e);
             }
