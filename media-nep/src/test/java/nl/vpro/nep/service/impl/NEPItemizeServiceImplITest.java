@@ -24,6 +24,5 @@ public class NEPItemizeServiceImplITest {
         request.setStarttime("00:00:00.000");
         request.setEndtime("00:02:21.151");
         log.info("response: {}", itemizer.itemize(request));
-
     }
 }
