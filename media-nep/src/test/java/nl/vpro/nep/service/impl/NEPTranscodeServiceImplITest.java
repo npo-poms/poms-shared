@@ -3,6 +3,7 @@ package nl.vpro.nep.service.impl;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Before;
@@ -20,8 +21,11 @@ import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
  */
 @Slf4j
 public class NEPTranscodeServiceImplITest {
+
+    private String apiUser = "user";
+    private String ftpUser = "npoweb-vpro";
     NEPTranscodeServiceImpl nepService =
-        new NEPTranscodeServiceImpl("http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl", "user", "***REMOVED***");
+        new NEPTranscodeServiceImpl("http://npo-gatekeeper-acc.cdn1.usvc.nepworldwide.nl", apiUser, "***REMOVED***", ftpUser);
 
 
     @Before
@@ -32,10 +36,11 @@ public class NEPTranscodeServiceImplITest {
     @Test
     public void transcode() {
         WorkflowExecutionRequest request = WorkflowExecutionRequest.builder()
-            .mid("VPWON_1265965")
+            .mid("WO_VPRO_3272104")
             .encryption(EncryptionType.NONE)
             .priority(PriorityType.LOW)
-            .filename("/VPWON_1265965__000000000-000004299.mp4")
+            .platforms(Arrays.asList("internetvod"))
+            .file(ftpUser, "test.mp4")
             .build()
             ;
         try {
@@ -52,7 +57,7 @@ public class NEPTranscodeServiceImplITest {
         AtomicLong count = new AtomicLong(0);
         nepService.getTranscodeStatuses(null, null, null,  null).forEachRemaining((we)
             -> {
-            if (we.getMid() != null && we.getMid().equals("WO_NPO_3262544")) {
+            if (we.getMid() != null && we.getMid().equals("WO_VPRO_3272104")) {
                 log.info("{}: {}", count.incrementAndGet(), we);
             }
             }
