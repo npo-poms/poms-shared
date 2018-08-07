@@ -392,32 +392,52 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private final M fetchOwnerless() {
         M media = newMedia();
-        Embargos.copy(this, media);
-        media.setCreationInstant(null); //   not supported by update format. will be set by persistence layer
         media.setMid(mid);
-        media.setBroadcasters(toList(broadcasters, Broadcaster::new));
-        media.setPortals(toList(portals, Portal::new));
-        media.setTags(toSet(tags, Tag::new));
-        media.setPersons(toList(persons, PersonUpdate::toPerson, true));
-        media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
-        media.setGeoRestrictions(toSet(geoRestrictions, GeoRestrictionUpdate::toGeoRestriction));
-        media.setWebsites(toList(websites, Website::new));
-        media.setGenres(toSet(genres, Genre::new));
-        media.setMemberOf(toSet(memberOf, this::toMemberRef));
-        media.setRelations(toSet(relations, RelationUpdate::toRelation));
-        media.setAgeRating(ageRating);
-        media.setContentRatings(contentRatings);
-        media.setAVType(avType);
+        media.setCreationInstant(null); //   not supported by update format. will be set by persistence layer
         media.setCrids(crids);
-        media.setLanguages(languages);
+        media.setAVType(avType);
+        media.setEmbeddable(embeddable);
         media.setCountries(countries);
-        media.setPredictions(toSet(predictions, PredictionUpdate::toPrediction));
+        media.setLanguages(languages);
+
+        media.setAvAttributes(AVAttributesUpdate.toAvAttributes(avAttributes));
+
+        Embargos.copy(this, media);
 
         try {
             media.setDuration(duration);
         } catch(ModificationException mfe) {
             log.error(mfe.getMessage());
         }
+        media.setReleaseYear(releaseYear);
+        media.setAgeRating(ageRating);
+        media.setContentRatings(contentRatings);
+        media.setEmail(email);
+
+        // images have owner
+
+        media.setBroadcasters(toList(broadcasters, Broadcaster::new));
+
+        media.setPortals(toList(portals, Portal::new));
+        media.setTags(toSet(tags, Tag::new));
+        media.setPersons(toList(persons, PersonUpdate::toPerson, true));
+        media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
+        media.setGeoRestrictions(toSet(geoRestrictions, GeoRestrictionUpdate::toGeoRestriction));
+
+        // titles have owner,
+
+        media.setGenres(toSet(genres, Genre::new));
+        media.setMemberOf(toSet(memberOf, this::toMemberRef));
+        media.setWebsites(toList(websites, Website::new));
+
+        // locations are owned
+
+        media.setRelations(toSet(relations, RelationUpdate::toRelation));
+
+        // scheduleevents are owned
+
+        media.setPredictions(toSet(predictions, PredictionUpdate::toPrediction));
+
 
         return media;
     }
