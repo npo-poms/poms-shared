@@ -174,6 +174,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected String urn;
 
+    private List<String> crids;
+
     protected AVType avType;
 
     protected Boolean embeddable;
@@ -242,7 +244,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected SortedSet<PredictionUpdate> predictions;
 
-    private List<String> crids;
+
 
 
     boolean imported = false;
@@ -260,32 +262,54 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected final void fillFromMedia(M mediaobject, OwnerType ownerType) {
         this.mid = mediaobject.getMid();
-        this.isDeleted = mediaobject.isDeleted();
         this.urn = mediaobject.getUrn();
         this.crids = mediaobject.getCrids();
 
-        TextualObjects.copyToUpdate(mediaobject, this);
-        Embargos.copy(mediaobject, this);
-
         this.avType = mediaobject.getAVType();
         this.embeddable = mediaobject.isEmbeddable();
+        this.isDeleted = mediaobject.isDeleted();
+
         this.countries = mediaobject.getCountries();
         this.languages = mediaobject.getLanguages();
+
         this.avAttributes = AVAttributesUpdate.of(mediaobject.getAvAttributes());
-        this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability,PredictionUpdate::of);
-        this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == ownerType, LocationUpdate::new);
+
+        Embargos.copy(mediaobject, this);
+
+        this.duration = AuthorizedDuration.duration(mediaobject.getDuration());
+
+        this.releaseYear = mediaobject.getReleaseYear();
+        this.ageRating = mediaobject.getAgeRating();
+        this.contentRatings = mediaobject.getContentRatings();
+        this.email = mediaobject.getEmail();
+
         this.images = toList(
             mediaobject.getImages(),
             (i) -> i.getOwner() == ownerType,
             ImageUpdate::new,
             false)
         ;
-        this.tags = toSet(mediaobject.getTags(), Tag::getText);
-        this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
-        this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
+        // asset?
+
         this.broadcasters = toList(mediaobject.getBroadcasters(), Broadcaster::getId);
-        this.duration = AuthorizedDuration.duration(mediaobject.getDuration());
+        this.portals = toList(mediaobject.getPortals(), Portal::getId);
+
+        this.tags = toSet(mediaobject.getTags(), Tag::getText);
         this.persons = toList(MediaObjects.getPersons(mediaobject), PersonUpdate::new, true);
+
+        this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
+        this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
+
+        TextualObjects.copyToUpdate(mediaobject, this);
+
+        this.genres = toSet(mediaobject.getGenres(), Genre::getTermId);
+        this.memberOf = toSet(mediaobject.getMemberOf(), MemberRefUpdate::create);
+        this.websites = toList(mediaobject.getWebsites(), Website::get);
+        this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == ownerType, LocationUpdate::new);
+        this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
+        this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
+        this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability,PredictionUpdate::of);
+
     }
 
     protected abstract void fillFrom(M mediaObject, OwnerType ownerType);
