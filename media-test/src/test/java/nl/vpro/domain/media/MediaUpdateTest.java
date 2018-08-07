@@ -31,10 +31,16 @@ public class MediaUpdateTest {
 
         ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
 
-        rounded = JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        rounded = JAXBTestUtil.roundTripAndSimilar(update, "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <broadcaster>BNN</broadcaster>\n" +
             "    <broadcaster>AVRO</broadcaster>\n" +
+            "    <portal>3VOOR12_GRONINGEN</portal>\n" +
+            "    <portal>STERREN24</portal>\n" +
+            "    <exclusive>STERREN24</exclusive>\n" +
+            "    <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\">3VOOR12_GRONINGEN</exclusive>\n" +
+            "    <region platform=\"INTERNETVOD\">NL</region>\n" +
+            "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"INTERNETVOD\">BENELUX</region>\n" +
+            "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"TVVOD\">NL</region>\n" +
             "    <title type=\"MAIN\">Main title</title>\n" +
             "    <title type=\"SHORT\">Short title</title>\n" +
             "    <title type=\"SUB\">Episode title MIS</title>\n" +
@@ -48,6 +54,8 @@ public class MediaUpdateTest {
             "    <country>US</country>\n" +
             "    <language>nl</language>\n" +
             "    <language>fr</language>\n" +
+            "    <genre>3.0.1.7.21</genre>\n" +
+            "    <genre>3.0.1.8.25</genre>\n" +
             "    <avAttributes>\n" +
             "        <bitrate>1000000</bitrate>\n" +
             "        <avFileFormat>M4V</avFileFormat>\n" +
@@ -59,6 +67,7 @@ public class MediaUpdateTest {
             "            <coding>ACODEC</coding>\n" +
             "        </audioAttributes>\n" +
             "    </avAttributes>\n" +
+            "    <releaseYear>2004</releaseYear>\n" +
             "    <duration>P0DT2H0M0.000S</duration>\n" +
             "    <credits>\n" +
             "        <person role=\"DIRECTOR\">\n" +
@@ -78,6 +87,14 @@ public class MediaUpdateTest {
             "            <familyName>Holt</familyName>\n" +
             "        </person>\n" +
             "    </credits>\n" +
+            "    <memberOf position=\"1\" highlighted=\"false\">VPROWON_20003</memberOf>\n" +
+            "    <ageRating>12</ageRating>\n" +
+            "    <contentRating>ANGST</contentRating>\n" +
+            "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+            "    <email>info@npo.nl</email>\n" +
+            "    <email>programma@avro.nl</email>\n" +
+            "    <website>http://www.omroep.nl/programma/journaal</website>\n" +
+            "    <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
             "    <prediction>INTERNETVOD</prediction>\n" +
             "    <prediction>TVVOD</prediction>\n" +
             "    <locations>\n" +
@@ -152,6 +169,13 @@ public class MediaUpdateTest {
             "        <segment midRef=\"VPROWON_20001\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:segment:12\">\n" +
             "            <broadcaster>BNN</broadcaster>\n" +
             "            <broadcaster>AVRO</broadcaster>\n" +
+            "            <portal>3VOOR12_GRONINGEN</portal>\n" +
+            "            <portal>STERREN24</portal>\n" +
+            "            <exclusive>STERREN24</exclusive>\n" +
+            "            <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\">3VOOR12_GRONINGEN</exclusive>\n" +
+            "            <region platform=\"INTERNETVOD\">NL</region>\n" +
+            "            <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"INTERNETVOD\">BENELUX</region>\n" +
+            "            <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"TVVOD\">NL</region>\n" +
             "            <title type=\"MAIN\">Main title</title>\n" +
             "            <title type=\"SHORT\">Short title</title>\n" +
             "            <title type=\"SUB\">Episode title MIS</title>\n" +
@@ -165,6 +189,8 @@ public class MediaUpdateTest {
             "            <country>US</country>\n" +
             "            <language>nl</language>\n" +
             "            <language>fr</language>\n" +
+            "            <genre>3.0.1.7.21</genre>\n" +
+            "            <genre>3.0.1.8.25</genre>\n" +
             "            <avAttributes>\n" +
             "                <bitrate>1000000</bitrate>\n" +
             "                <avFileFormat>M4V</avFileFormat>\n" +
@@ -176,6 +202,7 @@ public class MediaUpdateTest {
             "                    <coding>ACODEC</coding>\n" +
             "                </audioAttributes>\n" +
             "            </avAttributes>\n" +
+            "            <releaseYear>2004</releaseYear>\n" +
             "            <duration>P0DT0H1M40.000S</duration>\n" +
             "            <credits>\n" +
             "                <person role=\"DIRECTOR\">\n" +
@@ -195,6 +222,14 @@ public class MediaUpdateTest {
             "                    <familyName>Holt</familyName>\n" +
             "                </person>\n" +
             "            </credits>\n" +
+            "            <memberOf position=\"1\" highlighted=\"false\">VPROWON_20008</memberOf>\n" +
+            "            <ageRating>12</ageRating>\n" +
+            "            <contentRating>ANGST</contentRating>\n" +
+            "            <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+            "            <email>info@npo.nl</email>\n" +
+            "            <email>programma@avro.nl</email>\n" +
+            "            <website>http://www.omroep.nl/programma/journaal</website>\n" +
+            "            <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
             "            <prediction>INTERNETVOD</prediction>\n" +
             "            <locations>\n" +
             "                <location urn=\"urn:vpro:media:location:6\">\n" +
@@ -278,12 +313,21 @@ public class MediaUpdateTest {
         JAXBTestUtil.roundTripAndSimilar(fetched, "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "    <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
+            "    <portal id=\"3VOOR12_GRONINGEN\"/>\n" +
+            "    <portal id=\"STERREN24\"/>\n" +
+            "    <exclusive portalId=\"STERREN24\"/>\n" +
+            "    <exclusive portalId=\"3VOOR12_GRONINGEN\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
+            "    <region regionId=\"NL\" platform=\"INTERNETVOD\"/>\n" +
+            "    <region regionId=\"BENELUX\" platform=\"INTERNETVOD\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
+            "    <region regionId=\"NL\" platform=\"TVVOD\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
             "    <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
             "    <title owner=\"BROADCASTER\" type=\"SHORT\">Short title</title>\n" +
             "    <title owner=\"BROADCASTER\" type=\"SUB\">Episode title MIS</title>\n" +
             "    <description owner=\"BROADCASTER\" type=\"MAIN\">Main description</description>\n" +
             "    <description owner=\"BROADCASTER\" type=\"SHORT\">Short description</description>\n" +
             "    <description owner=\"BROADCASTER\" type=\"EPISODE\">Episode description MIS</description>\n" +
+            "    <genre id=\"3.0.1.7.21\"/>\n" +
+            "    <genre id=\"3.0.1.8.25\"/>\n" +
             "    <tag>tag1</tag>\n" +
             "    <tag>tag2</tag>\n" +
             "    <tag>tag3</tag>\n" +
@@ -310,6 +354,12 @@ public class MediaUpdateTest {
             "            <familyName>Holt</familyName>\n" +
             "        </person>\n" +
             "    </credits>\n" +
+            "    <memberOf highlighted=\"false\" midRef=\"VPROWON_20003\" index=\"1\"/>\n" +
+            "    <ageRating>12</ageRating>\n" +
+            "    <contentRating>ANGST</contentRating>\n" +
+            "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+            "    <website>http://www.omroep.nl/programma/journaal</website>\n" +
+            "    <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
             "    <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
             "    <prediction state=\"ANNOUNCED\">TVVOD</prediction>\n" +
             "    <locations>\n" +
@@ -391,12 +441,21 @@ public class MediaUpdateTest {
             "        <segment midRef=\"VPROWON_20001\" type=\"SEGMENT\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\">\n" +
             "            <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "            <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
+            "            <portal id=\"3VOOR12_GRONINGEN\"/>\n" +
+            "            <portal id=\"STERREN24\"/>\n" +
+            "            <exclusive portalId=\"STERREN24\"/>\n" +
+            "            <exclusive portalId=\"3VOOR12_GRONINGEN\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
+            "            <region regionId=\"NL\" platform=\"INTERNETVOD\"/>\n" +
+            "            <region regionId=\"BENELUX\" platform=\"INTERNETVOD\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
+            "            <region regionId=\"NL\" platform=\"TVVOD\" start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\"/>\n" +
             "            <title owner=\"BROADCASTER\" type=\"MAIN\">Main title</title>\n" +
             "            <title owner=\"BROADCASTER\" type=\"SHORT\">Short title</title>\n" +
             "            <title owner=\"BROADCASTER\" type=\"SUB\">Episode title MIS</title>\n" +
             "            <description owner=\"BROADCASTER\" type=\"MAIN\">Main description</description>\n" +
             "            <description owner=\"BROADCASTER\" type=\"SHORT\">Short description</description>\n" +
             "            <description owner=\"BROADCASTER\" type=\"EPISODE\">Episode description MIS</description>\n" +
+            "            <genre id=\"3.0.1.7.21\"/>\n" +
+            "            <genre id=\"3.0.1.8.25\"/>\n" +
             "            <tag>tag1</tag>\n" +
             "            <tag>tag2</tag>\n" +
             "            <tag>tag3</tag>\n" +
@@ -424,6 +483,12 @@ public class MediaUpdateTest {
             "                </person>\n" +
             "            </credits>\n" +
             "            <descendantOf midRef=\"VPROWON_20001\" type=\"BROADCAST\"/>\n" +
+            "            <memberOf highlighted=\"false\" midRef=\"VPROWON_20008\" index=\"1\"/>\n" +
+            "            <ageRating>12</ageRating>\n" +
+            "            <contentRating>ANGST</contentRating>\n" +
+            "            <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+            "            <website>http://www.omroep.nl/programma/journaal</website>\n" +
+            "            <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
             "            <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
             "            <locations>\n" +
             "                <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:location:6\">\n" +
@@ -503,6 +568,6 @@ public class MediaUpdateTest {
             "            <start>P0DT0H0M0.000S</start>\n" +
             "        </segment>\n" +
             "    </segments>\n" +
-            "</program>\n");
+            "</program>");
     }
 }
