@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -22,9 +25,13 @@ import nl.vpro.domain.api.TextMatcherList;
 public class MemberRefSearch extends AbstractSearch {
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList mediaIds;
 
     @Valid
+    @Getter
+    @Setter
     private TextMatcherList types;
 
     public MemberRefSearch() {
@@ -39,21 +46,6 @@ public class MemberRefSearch extends AbstractSearch {
     }
 
 
-    public TextMatcherList getMediaIds() {
-        return mediaIds;
-    }
-
-    public void setMediaIds(TextMatcherList mediaIds) {
-        this.mediaIds = mediaIds;
-    }
-
-    public TextMatcherList getTypes() {
-        return types;
-    }
-
-    public void setTypes(TextMatcherList types) {
-        this.types = types;
-    }
 
     @Override
     public boolean hasSearches() {
