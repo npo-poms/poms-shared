@@ -335,6 +335,18 @@ public class MediaUpdateTest {
             "    <country code=\"US\">Verenigde Staten</country>\n" +
             "    <language code=\"nl\">Nederlands</language>\n" +
             "    <language code=\"fr\">Frans</language>\n" +
+            "    <avAttributes>\n" +
+            "        <bitrate>1000000</bitrate>\n" +
+            "        <avFileFormat>M4V</avFileFormat>\n" +
+            "        <videoAttributes width=\"640\" heigth=\"320\">\n" +
+            "            <videoCoding>VCODEC</videoCoding>\n" +
+            "        </videoAttributes>\n" +
+            "        <audioAttributes>\n" +
+            "            <numberOfChannels>2</numberOfChannels>\n" +
+            "            <audioCoding>ACODEC</audioCoding>\n" +
+            "        </audioAttributes>\n" +
+            "    </avAttributes>\n" +
+            "    <releaseYear>2004</releaseYear>\n" +
             "    <duration>P0DT2H0M0.000S</duration>\n" +
             "    <credits>\n" +
             "        <person role=\"DIRECTOR\">\n" +
@@ -358,6 +370,8 @@ public class MediaUpdateTest {
             "    <ageRating>12</ageRating>\n" +
             "    <contentRating>ANGST</contentRating>\n" +
             "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+            "    <email>info@npo.nl</email>\n" +
+            "    <email>programma@avro.nl</email>\n" +
             "    <website>http://www.omroep.nl/programma/journaal</website>\n" +
             "    <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
             "    <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
@@ -463,6 +477,18 @@ public class MediaUpdateTest {
             "            <country code=\"US\">Verenigde Staten</country>\n" +
             "            <language code=\"nl\">Nederlands</language>\n" +
             "            <language code=\"fr\">Frans</language>\n" +
+            "            <avAttributes>\n" +
+            "                <bitrate>1000000</bitrate>\n" +
+            "                <avFileFormat>M4V</avFileFormat>\n" +
+            "                <videoAttributes width=\"640\" heigth=\"320\">\n" +
+            "                    <videoCoding>VCODEC</videoCoding>\n" +
+            "                </videoAttributes>\n" +
+            "                <audioAttributes>\n" +
+            "                    <numberOfChannels>2</numberOfChannels>\n" +
+            "                    <audioCoding>ACODEC</audioCoding>\n" +
+            "                </audioAttributes>\n" +
+            "            </avAttributes>\n" +
+            "            <releaseYear>2004</releaseYear>\n" +
             "            <duration>P0DT0H1M40.000S</duration>\n" +
             "            <credits>\n" +
             "                <person role=\"DIRECTOR\">\n" +
@@ -487,6 +513,8 @@ public class MediaUpdateTest {
             "            <ageRating>12</ageRating>\n" +
             "            <contentRating>ANGST</contentRating>\n" +
             "            <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+            "            <email>info@npo.nl</email>\n" +
+            "            <email>programma@avro.nl</email>\n" +
             "            <website>http://www.omroep.nl/programma/journaal</website>\n" +
             "            <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
             "            <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
