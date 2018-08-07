@@ -99,6 +99,9 @@ public class AVAttributesUpdate {
 
         return result;
     }
+    public static AVAttributes toAvAttributes(AVAttributesUpdate avAttributesUpdate) {
+        return avAttributesUpdate == null ? null : avAttributesUpdate.toAvAttributes();
+    }
 
     public Integer getBitrate() {
         return bitrate;
