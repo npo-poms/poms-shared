@@ -19,10 +19,8 @@ public class MediaUpdateTest {
     static ProgramUpdate rounded;
 
     @Test
-
     public void withEverything1() throws Exception {
 
-        // TODO. Still orienting, it may be that the xml is not yet absolutely correct.
         Program withEverything = MediaTestDataBuilder
             .program()
             .withEverything()
@@ -306,8 +304,6 @@ public class MediaUpdateTest {
     }
 
     @Test
-    //@Ignore("Fails")
-    // TODO
     public void withEverything2() throws Exception {
         MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);
         JAXBTestUtil.roundTripAndSimilar(fetched, "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
