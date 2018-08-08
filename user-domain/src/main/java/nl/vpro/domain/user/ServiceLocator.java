@@ -1,6 +1,7 @@
 package nl.vpro.domain.user;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Nonnull;
@@ -34,7 +35,7 @@ public class ServiceLocator  {
 
     @Nonnull
     public static BroadcasterService getBroadcasterService() {
-        return serviceLocator == null ? new BroadcasterServiceImpl() : serviceLocator.broadcasterService.get();
+        return serviceLocator == null ? new BroadcasterServiceImpl(new Broadcaster[0]) : serviceLocator.broadcasterService.get();
     }
 
     @Nonnull
@@ -57,6 +58,10 @@ public class ServiceLocator  {
             new ServiceLocator();
         }
         serviceLocator.broadcasterService = () -> broadcasterService;
+    }
+
+     public static void setBroadcasterService(String... broadcasters) {
+        setBroadcasterService(new BroadcasterServiceImpl(broadcasters));
     }
 
     public static void setPortalService(final PortalService portalService) {
@@ -85,6 +90,11 @@ public class ServiceLocator  {
 
         private final List<T> repository = new ArrayList<>();
 
+        @SafeVarargs
+        protected AbstractOrganizationService(T... organizations) {
+            repository.addAll(Arrays.asList(organizations));
+        }
+
         @Override
         public T find(@Nonnull String id) {
             return repository.stream().filter(o -> o.getId().equals(id)).findFirst().orElse(null);
@@ -112,12 +122,27 @@ public class ServiceLocator  {
     }
     public static class BroadcasterServiceImpl extends AbstractOrganizationService<Broadcaster> implements BroadcasterService  {
 
+
+        public BroadcasterServiceImpl(Broadcaster... organizations) {
+            super(organizations);
+        }
+
+        public BroadcasterServiceImpl(String... organizations) {
+            super(Arrays.stream(organizations).map(Broadcaster::new).toArray(Broadcaster[]::new));
+        }
+
     }
     public static class PortalServiceImpl extends AbstractOrganizationService<Portal> implements PortalService  {
 
+        public PortalServiceImpl(Portal... organizations) {
+            super(organizations);
+        }
+
     }
      public static class ThirdPartyServiceImpl extends AbstractOrganizationService<ThirdParty> implements ThirdPartyService  {
-
+         public ThirdPartyServiceImpl(ThirdParty... organizations) {
+            super(organizations);
+        }
     }
 
 }
