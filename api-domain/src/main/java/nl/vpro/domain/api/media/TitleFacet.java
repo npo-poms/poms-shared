@@ -10,7 +10,7 @@ import nl.vpro.domain.api.TextFacet;
 
 
 /**
- * @author lies
+ * @author Lies Kombrink
  * @since 5.5
  */
 @XmlAccessorType(XmlAccessType.NONE)
