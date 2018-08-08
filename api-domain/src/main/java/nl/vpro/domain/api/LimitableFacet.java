@@ -4,7 +4,7 @@ package nl.vpro.domain.api;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
-public interface LimitableFacet<T extends AbstractSearch> extends Facet<T> {
+public interface LimitableFacet<F extends AbstractSearch> extends Facet<F> {
 
     Integer getThreshold();
 
