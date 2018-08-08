@@ -124,7 +124,7 @@ public class SearchResultsTest {
 
 
         List<MultipleFacetsResult> selected = new ArrayList<>();
-        MediaSearchResults.setSelected(searches, relationFacetList, facetResultItems, selected);
+        MediaSearchResults.setSelectedRelationFacets(searches, relationFacetList, facetResultItems, selected);
 
         assertThat(facetResultItems.size()).isEqualTo(1);
         assertThat(facetResultItems.get(0).getName()).isEqualTo("labels");
