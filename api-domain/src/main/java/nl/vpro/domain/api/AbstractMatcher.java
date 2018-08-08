@@ -19,7 +19,7 @@ public abstract class AbstractMatcher implements Matcher {
     @XmlTransient
     protected Match match;
 
-    AbstractMatcher() {
+    protected AbstractMatcher() {
     }
 
     protected AbstractMatcher(Match match) {
