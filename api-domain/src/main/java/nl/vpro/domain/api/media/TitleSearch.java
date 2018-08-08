@@ -16,7 +16,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 
 /**
- * @author lies
+ * @author Lies Kombrink
  */
 @XmlType(name = "titleSearchType", propOrder = {})
 @XmlAccessorType(XmlAccessType.NONE)
