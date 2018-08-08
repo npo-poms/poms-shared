@@ -478,10 +478,14 @@
   </xs:complexType>
 
   <xs:complexType name="mediaTitleFacetType">
-    <xs:sequence>
-      <xs:element name="subSearch" type="titleSearchType" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute name="name" type="xs:string"/>
+    <xs:complexContent>
+      <xs:extension base="textFacetType">
+        <xs:sequence>
+          <xs:element name="subSearch" type="titleSearchType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="mediaSearchableTermFacetType">

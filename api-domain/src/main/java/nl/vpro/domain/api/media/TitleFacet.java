@@ -13,8 +13,6 @@ import nl.vpro.domain.api.TextFacet;
  * @author lies
  * @since 5.5
  */
-
-
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "mediaTitleFacetType", propOrder = {"name", "subSearch"})
 @JsonPropertyOrder({"name","subSearch"})
