@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.FacetOrder;
-import nl.vpro.domain.api.SearchableFacet;
+import nl.vpro.domain.api.SearchableLimitableFacet;
 import nl.vpro.domain.api.TermSearch;
 
 /**
@@ -20,7 +20,7 @@ import nl.vpro.domain.api.TermSearch;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "pageSearchableTermFacetType")
-public class PageSearchableTermFacet extends PageFacet implements SearchableFacet<PageSearch, TermSearch> {
+public class PageSearchableTermFacet extends PageFacet implements SearchableLimitableFacet<PageSearch, TermSearch> {
 
     @Valid
     TermSearch subSearch;
