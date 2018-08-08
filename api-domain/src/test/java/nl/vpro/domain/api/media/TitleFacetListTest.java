@@ -16,7 +16,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 @Slf4j
 public class TitleFacetListTest {
@@ -55,6 +55,7 @@ public class TitleFacetListTest {
     @Test
     public void testJsonBinding() throws Exception {
 
+
         TitleFacetList rounded = Jackson2TestUtil.roundTripAndSimilar(list,
             "[ {\n" +
                 "  \"max\" : 11,\n" +
@@ -77,7 +78,7 @@ public class TitleFacetListTest {
 
         assertThat(rounded.facets).hasSize(2);
         assertThat(rounded.getMax()).isEqualTo(11);
-        assertTrue(rounded.facets.get(0).getSubSearch() != null);
+        assertNotNull(rounded.facets.get(0).getSubSearch());
     }
 
 
@@ -190,7 +191,7 @@ public class TitleFacetListTest {
                 "    <api:title name=\"titlesWithB\">\n" +
                 "        <api:subSearch matchType=\"WILDCARD\">b*</api:subSearch>\n" +
                 "    </api:title>\n" +
-                "</local:titleFacetList>");
+                "</local:titleFacetList>\n");
         assertThat(rounded.facets).hasSize(2);
         assertThat(rounded.facets.get(0).getSubSearch()).isNotNull();
         assertThat(rounded.facets.get(1).getSubSearch()).isNotNull();

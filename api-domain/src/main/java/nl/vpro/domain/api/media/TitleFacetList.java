@@ -16,7 +16,7 @@ import nl.vpro.domain.api.SearchableFacet;
 import nl.vpro.domain.api.jackson.media.TitleFacetListJson;
 
 /**
- * @author lies
+ * @author Lies Kombrink
  * @since 5.5
  */
 @XmlAccessorType(XmlAccessType.FIELD)

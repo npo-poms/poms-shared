@@ -16,14 +16,13 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 
 /**
- * @author lies
- *
- * TODO I doubt if this should extends AbstractSearch. What is the point?
+ * @author Lies Kombrink
  */
 @XmlType(name = "titleSearchType", propOrder = {})
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode(callSuper = true)
 public class TitleSearch extends AbstractSearch implements Predicate<Title>  {
+
     @XmlAttribute
     @Getter
     @Setter
