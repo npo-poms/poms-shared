@@ -34,7 +34,7 @@ public class MediaSearchResults {
         SearchResults.setSelected(search.getContentRatings(), facetResults.getContentRatings(), selected.getContentRatings(search), TermFacetResultItem::new, "media.contentrating");
 
         if (form.getFacets() != null) {
-            setSelected(search.getRelations(), form.getFacets().getRelations(), facetResults.getRelations(), selected.getRelations(search));
+            setSelectedRelationFacets(search.getRelations(), form.getFacets().getRelations(), facetResults.getRelations(), selected.getRelations(search));
         }
 
         SearchResults.setSelected(search.getSortDates(), form.getFacets().getSortDates(), facetResults.getSortDates(), selected.getSortDates(search), DateFacetResultItem::new);
@@ -74,12 +74,12 @@ public class MediaSearchResults {
     }
 
 
-    public static void setSelected(RelationSearchList searches, RelationFacetList facetList, List<MultipleFacetsResult> facetResultItems, List<MultipleFacetsResult> selected) {
+    public static void setSelectedRelationFacets(RelationSearchList searches, RelationFacetList facetList, List<MultipleFacetsResult> facetResultItems, List<MultipleFacetsResult> selected) {
         if (facetResultItems != null && searches != null) {
             facetList.getSubSearch(); // TODO
 
             for (RelationFacet facet : facetList) {
-                SearchResults.setSelected(facet, searches, facetResultItems, selected);
+                SearchResults.setSelectedRelations(facet, searches, facetResultItems, selected);
             }
         }
     }
