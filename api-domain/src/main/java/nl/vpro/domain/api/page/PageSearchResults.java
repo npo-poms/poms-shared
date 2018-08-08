@@ -68,7 +68,7 @@ public class PageSearchResults {
             facetList.getSubSearch(); // TODO
 
             for (RelationFacet facet : facetList) {
-                SearchResults.setSelected(facet, searches, facetResultItems, selected);
+                SearchResults.setSelectedRelations(facet, searches, facetResultItems, selected);
             }
         }
     }

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.api.FacetOrder;
-import nl.vpro.domain.api.NameableSearchableFacet;
+import nl.vpro.domain.api.NameableSearchableLimitableFacet;
 
 /**
  * @author Michiel Meeuwissen
@@ -19,7 +19,7 @@ import nl.vpro.domain.api.NameableSearchableFacet;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "pageRelationFacetType", propOrder = {"name", "subSearch"})
 @JsonPropertyOrder({"threshold", "sort", "offset", "max", "name", "subSearch"})
-public class RelationFacet extends ExtendedPageFacet implements NameableSearchableFacet<PageSearch, RelationSearch>  {
+public class RelationFacet extends ExtendedPageFacet implements NameableSearchableLimitableFacet<PageSearch, RelationSearch> {
 
     private String name;
 

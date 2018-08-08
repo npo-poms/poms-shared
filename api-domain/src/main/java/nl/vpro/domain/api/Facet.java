@@ -10,7 +10,7 @@ package nl.vpro.domain.api;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public interface Facet<T extends AbstractSearch> {
+public interface Facet<F extends AbstractSearch> {
 
     /**
      * The filter of facet defines on which parts of the complete index the facet must be applied.
@@ -20,7 +20,7 @@ public interface Facet<T extends AbstractSearch> {
      * E.g. apply facets only on all object of type 'ALBUM'.
      * See also {@link SearchableFacet} for limiting the number of facet values you're interested in.
      */
-    T getFilter();
+    F getFilter();
 
-    void setFilter(T search);
+    void setFilter(F search);
 }

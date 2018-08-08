@@ -25,8 +25,11 @@ public class TextFacetTest  {
     public void testGetThreshold() throws Exception {
         TextFacet in = new TextFacet();
         in.setThreshold(1111);
-        TextFacet out = JAXBTestUtil.roundTrip(in,
-            " <api:threshold>1111</api:threshold>");
+        TextFacet out = JAXBTestUtil.roundTripAndSimilar(in,
+            "<local:textFacet sort=\"VALUE_ASC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
+                "    <api:threshold>1111</api:threshold>\n" +
+                "    <api:max>24</api:max>\n" +
+                "</local:textFacet>");
         assertThat(out.getThreshold()).isEqualTo(1111);
     }
 
