@@ -16,7 +16,7 @@ import nl.vpro.domain.api.AbstractRelationSearch;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pageRelationSearchType", propOrder = {"types", "broadcasters", "values", "uriRefs"})
-public class RelationSearch extends AbstractRelationSearch {
+public class RelationSearch extends AbstractRelationSearch  {
 
 
 }

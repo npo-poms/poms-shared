@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.FacetOrder;
-import nl.vpro.domain.api.SearchableFacet;
+import nl.vpro.domain.api.SearchableLimitableFacet;
 
 /**
  * @author Roelof Jan Koekoek
@@ -19,7 +19,7 @@ import nl.vpro.domain.api.SearchableFacet;
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "memberRefFacetType")
-public class MemberRefFacet extends MediaFacet implements SearchableFacet<MediaSearch, MemberRefSearch> {
+public class MemberRefFacet extends MediaFacet implements SearchableLimitableFacet<MediaSearch, MemberRefSearch> {
 
     @Valid
     MemberRefSearch subSearch;
