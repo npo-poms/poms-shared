@@ -55,6 +55,7 @@ public class TitleFacetListTest {
     @Test
     public void testJsonBinding() throws Exception {
 
+
         TitleFacetList rounded = Jackson2TestUtil.roundTripAndSimilar(list,
             "[ {\n" +
                 "  \"max\" : 11,\n" +
@@ -65,17 +66,13 @@ public class TitleFacetListTest {
                 "    \"value\" : \"a*\",\n" +
                 "    \"matchType\" : \"WILDCARD\",\n" +
                 "    \"match\" : \"SHOULD\"\n" +
-                "  },\n" +
-                "  \"sort\" : \"VALUE_ASC\",\n" +
-                "  \"max\" : 24\n" +
+                "  }\n" +
                 "}, {\n" +
                 "  \"name\" : \"titlesWithB\",\n" +
                 "  \"subSearch\" : {\n" +
                 "    \"value\" : \"b*\",\n" +
                 "    \"matchType\" : \"WILDCARD\"\n" +
-                "  },\n" +
-                "  \"sort\" : \"VALUE_ASC\",\n" +
-                "  \"max\" : 24\n" +
+                "  }\n" +
                 "} ]");
 
 
@@ -188,15 +185,13 @@ public class TitleFacetListTest {
         TitleFacetList rounded = JAXBTestUtil.roundTripAndSimilar(list,
             "<local:titleFacetList sort=\"COUNT_DESC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
                 "    <api:max>11</api:max>\n" +
-                "    <api:title name=\"titlesWithA\" sort=\"VALUE_ASC\">\n" +
-                "        <api:max>24</api:max>\n" +
+                "    <api:title name=\"titlesWithA\">\n" +
                 "        <api:subSearch matchType=\"WILDCARD\" match=\"SHOULD\">a*</api:subSearch>\n" +
                 "    </api:title>\n" +
-                "    <api:title name=\"titlesWithB\" sort=\"VALUE_ASC\">\n" +
-                "        <api:max>24</api:max>\n" +
+                "    <api:title name=\"titlesWithB\">\n" +
                 "        <api:subSearch matchType=\"WILDCARD\">b*</api:subSearch>\n" +
                 "    </api:title>\n" +
-                "</local:titleFacetList>");
+                "</local:titleFacetList>\n");
         assertThat(rounded.facets).hasSize(2);
         assertThat(rounded.facets.get(0).getSubSearch()).isNotNull();
         assertThat(rounded.facets.get(1).getSubSearch()).isNotNull();
