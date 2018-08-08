@@ -24,6 +24,11 @@ public class TitleFacet extends TextFacet<MediaSearch> implements NameableSearch
     private TitleSearch subSearch;
 
     public TitleFacet() {
+        // These two fields are only present for backends compatibility. Them being filled would trigger backwards compatible
+        // 'title facetting', which would be, by the way, a bit silly.
+        // See
+        setMax(null);
+        setSort(null);
     }
 
 
