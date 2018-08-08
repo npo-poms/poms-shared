@@ -10,11 +10,9 @@ import nl.vpro.domain.api.TextFacet;
 
 
 /**
- * @author lies
+ * @author Lies Kombrink
  * @since 5.5
  */
-
-
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "mediaTitleFacetType", propOrder = {"name", "subSearch"})
 @JsonPropertyOrder({"name","subSearch"})
@@ -27,6 +25,11 @@ public class TitleFacet extends TextFacet<MediaSearch> implements NameableSearch
     private TitleSearch subSearch;
 
     public TitleFacet() {
+        // These two fields are only present for backends compatibility. Them being filled would trigger backwards compatible
+        // 'title facetting', which would be, by the way, a bit silly.
+        // See
+        setMax(null);
+        setSort(null);
     }
 
 

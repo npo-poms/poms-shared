@@ -38,7 +38,7 @@ public abstract class AbstractSearch extends AbstractMatcher {
     }
 
 
-    protected boolean atLeastOneHasSearches(Iterable<?>... collections) {
+    protected static boolean atLeastOneHasSearches(Iterable<?>... collections) {
         for (Iterable<?> col : collections) {
             if (col != null) {
                 if (col instanceof MatcherList<?>) {
