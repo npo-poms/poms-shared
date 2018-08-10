@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 @Slf4j
 public class VersionService {
 
-    private static final String FALLBACK = "5.5";
+    private static final String FALLBACK = "5.8";
 
     private static String version;
 
