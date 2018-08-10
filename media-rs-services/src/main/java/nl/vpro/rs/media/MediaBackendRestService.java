@@ -446,7 +446,6 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @PUT
     @Path("upload/{mid}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
     TranscodeRequest upload(
