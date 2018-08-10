@@ -644,7 +644,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testAgeRating() throws IOException, SAXException {
         ProgramUpdate update  = ProgramUpdate.create();
-        update.setVersion(VersionService.floatVersion());
+        update.setVersion(5.5f);
         update.setAgeRating(AgeRating._6);
 
         assertThat(update.getAgeRating()).isEqualTo(AgeRating._6);
