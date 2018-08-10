@@ -55,8 +55,9 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         this.parent = parent;
         this.segmentType = mediaObject.getType();
         this.start = mediaObject.getStart();
-        //this.midRef = mediaObject.getMidRef();
-        this.midRef = null;
+        if (parent == null) {
+            this.midRef = mediaObject.getMidRef();
+        }
     }
 
 
