@@ -446,6 +446,36 @@ public interface MediaBackendRestService {
 
 
 
+    @POST
+    @Path("upload/{mid}")
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
+    TranscodeRequest upload(
+        @Encoded @PathParam(MID) final String mid,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("replace") @DefaultValue("false") Boolean replace,
+        @Context HttpServletRequest request,
+        @Context HttpServletResponse response) throws IOException;
+
+
+
+    @POST
+    @Path("upload/{mid}/{encryption}/{priority}")
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
+    Response upload(
+        @Encoded @PathParam(MID) final String mid,
+        @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
+        @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("replace") @DefaultValue("false") Boolean replace,
+        @QueryParam(ERRORS) String errors,
+        @Context HttpServletRequest request,
+        @Context HttpServletResponse response) throws IOException;
+
+
+
+
+
+
     @GET
     @Path("{entity:(media|program|group|segment)}/{mid}/transcodingstatus")
     XmlCollection<TranscodeStatus> getTranscodeStatus(

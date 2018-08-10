@@ -115,7 +115,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     @NotNull(groups = {WarningValidatorGroup.class})
     private String credits;
 
-    @URI
+    @URI(mustHaveScheme = true, minHostParts = 2)
     @XmlElement
     @NotNull(groups = {WarningValidatorGroup.class})
     private String source;
