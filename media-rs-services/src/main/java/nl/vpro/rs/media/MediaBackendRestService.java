@@ -421,7 +421,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|group|segment)}/{id}/predictions/{platform}")
     Response setPrediction(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
-        @Encoded @PathParam(MID) final String mid,
+        @Encoded @PathParam(ID) final String id,
         @PathParam("platform") final Platform platform,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
