@@ -112,7 +112,7 @@ public interface MediaRestService {
     );
 
     @GET
-    @Path("/{mid}/members")
+    @Path("/{mid:.*}/members")
     MediaResult listMembers(
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
@@ -123,7 +123,7 @@ public interface MediaRestService {
     );
 
     @POST
-    @Path("/{mid}/members")
+    @Path("/{mid:.*}/members")
     MediaSearchResult findMembers(
         @Valid MediaForm form,
         @Encoded @PathParam(ID) String mid,
@@ -137,7 +137,7 @@ public interface MediaRestService {
      * @param mid existing urn or mid
      */
     @GET
-    @Path("/{mid}/episodes")
+    @Path("/{mid:.*}/episodes")
     ProgramResult listEpisodes(
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
@@ -151,7 +151,7 @@ public interface MediaRestService {
      * @param mid existing urn or mid
      */
     @POST
-    @Path("/{mid}/episodes")
+    @Path("/{mid:.*}/episodes")
     ProgramSearchResult findEpisodes(
         @Valid MediaForm form,
         @Encoded @PathParam(ID) String mid,
@@ -162,7 +162,7 @@ public interface MediaRestService {
     );
 
     @GET
-    @Path("/{mid}/descendants")
+    @Path("/{mid:.*}/descendants")
     MediaResult listDescendants(
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
@@ -173,7 +173,7 @@ public interface MediaRestService {
     );
 
     @POST
-    @Path("/{mid}/descendants")
+    @Path("/{mid:.*}/descendants")
     MediaSearchResult findDescendants(
         @Valid MediaForm form,
         @Encoded @PathParam(ID) String mid,
@@ -184,7 +184,7 @@ public interface MediaRestService {
     );
 
     @GET
-    @Path("/{mid}/related")
+    @Path("/{mid:.*}/related")
     MediaResult listRelated(
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROPERTIES) String properties,
@@ -192,7 +192,7 @@ public interface MediaRestService {
     );
 
     @POST
-    @Path("/{mid}/related")
+    @Path("/{mid:.*}/related")
     MediaSearchResult findRelated(
         @Valid MediaForm form,
         @Encoded @PathParam(ID) String mid,
