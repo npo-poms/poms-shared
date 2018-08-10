@@ -1,12 +1,11 @@
 package nl.vpro.domain.media.bind;
 
-import java.util.Locale;
-
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.i18n.Locales;
 
@@ -18,8 +17,6 @@ import nl.vpro.i18n.Locales;
 @XmlType(name = "countryType", propOrder = {"name"})
 @JsonPropertyOrder({"code", "value"})
 public class CountryWrapper {
-
-    private static Locale NL = new Locale("nl");
 
     @XmlAttribute
     @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
@@ -33,7 +30,9 @@ public class CountryWrapper {
     }
 
     public CountryWrapper(CountryCode code) {
-        if (code == null) throw new IllegalArgumentException();
+        if (code == null) {
+            throw new IllegalArgumentException();
+        }
         this.code = code;
     }
 
