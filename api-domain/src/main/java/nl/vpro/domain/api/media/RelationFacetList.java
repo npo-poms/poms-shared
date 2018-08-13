@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,9 +34,13 @@ import nl.vpro.domain.api.jackson.media.RelationFacetListJson;
 public class RelationFacetList extends AbstractFacet<MediaSearch> implements SearchableFacet<MediaSearch, RelationSearch>, Iterable<RelationFacet> {
 
     @Valid
+    @Getter
+    @Setter
     private MediaSearch filter;
 
     @Valid
+    @Getter
+    @Setter
     private RelationSearch subSearch;
 
     @XmlElement(name = "facet")
@@ -47,25 +54,18 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
         this.facets = facets;
     }
 
-    @Override
-    public MediaSearch getFilter() {
-        return filter;
-    }
 
-    @Override
-    public void setFilter(MediaSearch filter) {
+    @lombok.Builder
+    private RelationFacetList(
+        List<RelationFacet> facets,
+        RelationSearch subSearch,
+        MediaSearch filter
+        ) {
+        this.facets = facets;
         this.filter = filter;
-    }
-
-    @Override
-    public RelationSearch getSubSearch() {
-        return subSearch;
-    }
-
-    @Override
-    public void setSubSearch(RelationSearch subSearch) {
         this.subSearch = subSearch;
     }
+
 
     /**
      * Use iterator if you want to initialise the facet names. Clients may supply there own custom name, but

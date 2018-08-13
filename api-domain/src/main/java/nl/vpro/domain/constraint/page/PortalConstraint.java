@@ -23,6 +23,7 @@ public class PortalConstraint extends AbstractTextConstraint<Page> {
         caseHandling = CaseHandling.ASIS;
     }
 
+    @lombok.Builder
     public PortalConstraint(String value) {
         super(value);
         caseHandling = CaseHandling.ASIS;
