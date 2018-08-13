@@ -230,8 +230,8 @@ public class PageFormBuilder extends AbstractFormBuilder {
         return relationsFacet(rs);
     }
 
-    public PageFormBuilder relationsFacet(RelationFacet facet) {
-        facets().setRelations(new RelationFacetList(Collections.singletonList(facet)));
+    public PageFormBuilder relationsFacet(RelationFacet... facet) {
+        facets().setRelations(new RelationFacetList(Arrays.asList(facet)));
         return this;
     }
 
