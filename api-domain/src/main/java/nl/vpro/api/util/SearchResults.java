@@ -94,6 +94,7 @@ public class SearchResults {
                             T newItem = creator.call();
                             newItem.setId(item.getValue());
                             Optional<String> value = valueCache.get(item.getValue());
+                            //noinspection OptionalAssignedToNull
                             if (value == null) {
                                 value = valueCreator.apply(item.getValue());
                                 valueCache.put(item.getValue(), value);
@@ -341,20 +342,20 @@ public class SearchResults {
         FacetOrder sort = facet.getSort();
         if (sort == null) return;
         if (results != null) {
-            Collections.sort(results, FacetOrder.toComparator(sort));
+            results.sort(FacetOrder.toComparator(sort));
         }
         if (selected != null) {
-            Collections.sort(selected, FacetOrder.toComparator(sort));
+            selected.sort(FacetOrder.toComparator(sort));
         }
     }
 
     public static void sortWithCustomComparator(TextFacet<?> facet, List<? extends TermFacetResultItem> results, List<? extends TermFacetResultItem> selected, Comparator<TermFacetResultItem> comparator) {
         if (facet != null) {
             if (results != null) {
-                Collections.sort(results, comparator);
+                results.sort(comparator);
             }
             if (selected != null) {
-                Collections.sort(selected, comparator);
+                selected.sort(comparator);
             }
         }
     }

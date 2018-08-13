@@ -51,7 +51,11 @@ public class PortalRestriction extends Restriction<PortalRestriction> {
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public PortalRestriction(Long id, Portal portal, Instant start, Instant stop) {
+    public PortalRestriction(
+        Long id,
+        Portal portal,
+        Instant start,
+        Instant stop) {
         super(id, start, stop);
         this.portal = portal;
     }

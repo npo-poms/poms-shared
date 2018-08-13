@@ -4,6 +4,10 @@
  */
 package nl.vpro.domain.api.page;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.Singular;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,9 +34,13 @@ import nl.vpro.domain.api.jackson.page.RelationFacetListJson;
 @JsonDeserialize(using = RelationFacetListJson.Deserializer.class)
 public class RelationFacetList extends AbstractFacet<PageSearch> implements SearchableFacet<PageSearch, RelationSearch>, Iterable<RelationFacet> {
 
+    @Getter
+    @Setter
     @Valid
     private PageSearch filter;
 
+    @Getter
+    @Setter
     @Valid
     private RelationSearch subSearch;
 
@@ -47,25 +55,19 @@ public class RelationFacetList extends AbstractFacet<PageSearch> implements Sear
         this.facets = facets;
     }
 
-    @Override
-    public PageSearch getFilter() {
-        return filter;
-    }
 
-    @Override
-    public void setFilter(PageSearch filter) {
+
+    @lombok.Builder
+    private RelationFacetList(
+        @Singular  List<RelationFacet> facets,
+        RelationSearch subSearch,
+        PageSearch filter
+        ) {
+        this.facets = facets;
         this.filter = filter;
-    }
-
-    @Override
-    public RelationSearch getSubSearch() {
-        return subSearch;
-    }
-
-    @Override
-    public void setSubSearch(RelationSearch subSearch) {
         this.subSearch = subSearch;
     }
+
 
     /**
      * Use iterator if you want to initialise the facet names. Clients may supply there own custom name, but
