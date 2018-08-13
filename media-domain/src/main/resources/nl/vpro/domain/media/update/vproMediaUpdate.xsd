@@ -329,7 +329,7 @@
       <xs:element name="source" type="xs:string" form="qualified"  minOccurs="0">
         <xs:annotation>
           <xs:documentation>
-            The source of the image. This is only metadata. It may be URL from where the image was originally acquired.
+            The source of the image. This is only metadata. It must be URL from where the image was originally acquired.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
