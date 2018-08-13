@@ -118,6 +118,10 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         return self;
     }
 
+    public PB portal(String portal) {
+        return portal(Portal.builder().id(portal).build());
+    }
+
     public PB mainImage(Image mainImage) {
         page.setImages(Collections.singletonList(mainImage));
         return self;
