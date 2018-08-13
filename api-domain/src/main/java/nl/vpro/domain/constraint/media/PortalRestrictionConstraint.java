@@ -26,6 +26,7 @@ public class PortalRestrictionConstraint extends AbstractTextConstraint<MediaObj
         caseHandling = CaseHandling.ASIS;
     }
 
+    @lombok.Builder
     public PortalRestrictionConstraint(Portal value) {
         super(value.getId());
         caseHandling = CaseHandling.ASIS;
