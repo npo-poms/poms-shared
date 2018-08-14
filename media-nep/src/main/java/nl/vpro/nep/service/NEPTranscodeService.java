@@ -29,6 +29,6 @@ public interface NEPTranscodeService {
         @Nullable String mid,
         @Nullable StatusType status,
         @Nullable Instant from,
-        @Nullable  Long limit
+        @Nullable Long limit
     );
 }
