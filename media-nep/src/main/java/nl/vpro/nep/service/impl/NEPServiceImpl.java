@@ -57,7 +57,8 @@ public class NEPServiceImpl implements NEPService {
 
     @Nonnull
     @Override
-    public WorkflowExecution transcode(WorkflowExecutionRequest request) throws IOException {
+    public WorkflowExecution transcode(
+        @Nonnull WorkflowExecutionRequest request) throws IOException {
         return transcodeService.get().transcode(request);
 
     }
