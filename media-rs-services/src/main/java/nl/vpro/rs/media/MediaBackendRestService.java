@@ -71,7 +71,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}")
     MediaUpdate<?> getMedia(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -90,7 +90,7 @@ public interface MediaBackendRestService {
 
 
     @DELETE
-    @Path("{entity:(media|program|group|segment)}/{id}")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}")
     @Produces(MediaType.WILDCARD)
     Response deleteMedia(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
@@ -100,7 +100,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}/full")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/full")
     MediaObject getFullMediaObject(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -121,7 +121,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("{entity:(media|program|group|segment)}/{id}/location")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/location")
     @Produces(MediaType.WILDCARD)
     Response addLocation(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
@@ -133,7 +133,7 @@ public interface MediaBackendRestService {
     );
 
     @DELETE
-    @Path("{entity:(media|program|group|segment)}/{id}/location/{locationId}")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/location/{locationId}")
     @Produces(MediaType.WILDCARD)
     Response removeLocation(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
@@ -152,7 +152,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("{entity:(media|program|group|segment)}/{id}/image")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/image")
     @Produces(MediaType.WILDCARD)
     Response addImage(
         ImageUpdate imageUpdate,
@@ -167,7 +167,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}/images")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/images")
     XmlCollection<ImageUpdate> getImages(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -187,7 +187,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}/members/full")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/members/full")
     MediaList<Member> getFullGroupMembers(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -198,7 +198,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @PUT
-    @Path("{entity:(media|program|group|segment)}/{id}/members")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/members")
     @Produces(MediaType.WILDCARD)
     Response moveMembers(
         MoveAction move,
@@ -209,7 +209,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}/memberOfs")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOfs")
     MediaUpdateList<MemberRefUpdate> getMemberOfs(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -217,7 +217,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("{entity:(media|program|group|segment)}/{id}/memberOf")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOf")
     @Produces(MediaType.WILDCARD)
     Response addMemberOf(
         MemberRefUpdate memberRefUpdate,
@@ -230,7 +230,7 @@ public interface MediaBackendRestService {
 
 
     @DELETE
-    @Path("{entity:(media|program|group|segment)}/{id}/memberOf/{owner}")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOf/{owner:.*}")
     @Produces(MediaType.WILDCARD)
     Response removeMemberOf(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
@@ -243,7 +243,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("group/{id}/episodes")
+    @Path("group/{id:.*}/episodes")
     MediaUpdateList<MemberUpdate> getGroupEpisodes(
         @Encoded @PathParam(ID) final String id,
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
@@ -254,7 +254,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("group/{id}/episodes/full")
+    @Path("group/{id:.*}/episodes/full")
     MediaList<Member> getFullGroupEpisodes(
         @Encoded @PathParam(ID) final String id,
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
@@ -264,7 +264,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @PUT
-    @Path("{entity:(media|group)}/{id}/episodes")
+    @Path("{entity:(media|group)}/{id:.*}/episodes")
     @Produces(MediaType.WILDCARD)
     Response moveEpisodes(
         MoveAction move,
@@ -275,14 +275,14 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @GET
-    @Path("program/{id}/episodeOfs")
+    @Path("program/{id:.*}/episodeOfs")
     MediaUpdateList<MemberRefUpdate> getEpisodeOfs(
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
     @POST
-    @Path("program/{id}/episodeOf")
+    @Path("program/{id:.*}/episodeOf")
     @Produces(MediaType.WILDCARD)
     Response addEpisodeOf(
         MemberRefUpdate memberRefUpdate,
@@ -294,7 +294,7 @@ public interface MediaBackendRestService {
 
 
     @DELETE
-    @Path("program/{id}/episodeOf/{owner}")
+    @Path("program/{id:.*}/episodeOf/{owner}")
     @Produces(MediaType.WILDCARD)
     Response removeEpisodeOf(
         @Encoded @PathParam(ID) final String id,
@@ -306,7 +306,7 @@ public interface MediaBackendRestService {
 
 
     @DELETE
-    @Path("program/{id}/segment/{segmentId}")
+    @Path("program/{id:.*}/segment/{segmentId}")
     @Produces(MediaType.WILDCARD)
     Response removeSegment(
         @Encoded @PathParam(ID) final String id,
@@ -317,7 +317,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("subtitles/{mid}/{language}/{type}")
+    @Path("subtitles/{mid:.*}/{language}/{type}")
     @Produces({VTT, TT888, SRT})
     Subtitles getSubtitles(
         @Encoded @PathParam(MID) String mid,
@@ -328,7 +328,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("subtitles/{mid}/{language}/{type}/{seq}")
+    @Path("subtitles/{mid:.*}/{language}/{type}/{seq}")
     StandaloneCue getCue(
         @Encoded @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
@@ -339,7 +339,7 @@ public interface MediaBackendRestService {
     );
 
     @GET
-    @Path("subtitles/{mid}")
+    @Path("subtitles/{mid:.*}")
     @Wrapped(element = "subtitles", namespace = Xmlns.MEDIA_SUBTITLES_NAMESPACE)
     List<SubtitlesId> getAllSubtitles(
         @Encoded @PathParam(MID) final String id,
@@ -347,7 +347,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("subtitles/{mid}/{language}/{type}")
+    @Path("subtitles/{mid:.*}/{language}/{type}")
     @Consumes({VTT, EBU, TT888, SRT})
     Response setSubtitles(
         @Encoded @PathParam(MID) String mid,
@@ -359,7 +359,7 @@ public interface MediaBackendRestService {
         Subtitles subtitles);
 
     @POST
-    @Path("subtitles/{mid}/{language}/{type}/{offset}")
+    @Path("subtitles/{mid:.*}/{language}/{type}/{offset}")
     Response setSubtitlesOffset(
         @Encoded @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
@@ -370,7 +370,7 @@ public interface MediaBackendRestService {
 
 
     @DELETE
-    @Path("subtitles/{mid}/{language}/{type}")
+    @Path("subtitles/{mid:.*}/{language}/{type}")
     Response deleteSubtitles(
         @Encoded @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
@@ -380,7 +380,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("streamingstatus/{mid}")
+    @Path("streamingstatus/{mid:.*}")
     StreamingStatus getStreamingstatus(
         @Encoded @PathParam(MID) String mid,
         @Context HttpServletRequest request
@@ -388,7 +388,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}/predictions")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/predictions")
     XmlCollection<PredictionUpdate> getPredictions(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -397,7 +397,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{id}/predictions/{platform}")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/predictions/{platform}")
     PredictionUpdate getPrediction(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -407,7 +407,7 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("{entity:(media|program|group|segment)}/{id}/predictions")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/predictions")
     Response setPredictions(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -418,7 +418,7 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("{entity:(media|program|group|segment)}/{id}/predictions/{platform}")
+    @Path("{entity:(media|program|group|segment)}/{id:.*}/predictions/{platform}")
     Response setPrediction(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
@@ -429,7 +429,7 @@ public interface MediaBackendRestService {
     ) throws IOException;
 
     @POST
-    @Path("{entity:(media|program|group|segment)}/{mid}/transcode")
+    @Path("{entity:(media|program|group|segment)}/{mid:.*}/transcode")
     Response transcode(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(MID) final String mid,
@@ -446,7 +446,7 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("upload/{mid}")
+    @Path("upload/{mid:.*}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
@@ -458,7 +458,7 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("upload/{mid}/{encryption}/{priority}")
+    @Path("upload/{mid:.*}/{encryption}/{priority}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*"})
     Response upload(
         @Encoded @PathParam(MID) final String mid,
@@ -476,7 +476,7 @@ public interface MediaBackendRestService {
 
 
     @GET
-    @Path("{entity:(media|program|group|segment)}/{mid}/transcodingstatus")
+    @Path("{entity:(media|program|group|segment)}/{mid:.*}/transcodingstatus")
     XmlCollection<TranscodeStatus> getTranscodeStatus(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(MID) final String mid
@@ -487,7 +487,7 @@ public interface MediaBackendRestService {
     @Path("transcodingstatuses")
     XmlCollection<TranscodeStatus> getTranscodeStatusForBroadcaster(
         @QueryParam("from") final Instant maxAge,
-        @QueryParam("status") @DefaultValue("RUNNING") final  TranscodeStatus.Status status,
+        @QueryParam("status") @DefaultValue("RUNNING") final TranscodeStatus.Status status,
         @QueryParam(MAX) @DefaultValue("20") final Integer max
 
 
@@ -495,7 +495,7 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("{entity:(media|program|group|segment)}/{mid}/itemize")
+    @Path("{entity:(media|program|group|segment)}/{mid:.*}/itemize")
     ItemizeResponse itemize(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(MID) String mid,
