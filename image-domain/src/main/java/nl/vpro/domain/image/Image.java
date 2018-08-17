@@ -70,6 +70,9 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image>, Serializable {
     private static final long serialVersionUID = -140942203904508506L;
 
+    public static final String BASE_URN = "urn:vpro:image:";
+
+
     public static class Builder {
         private Editor createdBy;
         private Editor lastModifiedBy;
@@ -376,10 +379,10 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
      * {@inheritDoc}
      *
      * For images (in the image database) it is "urn:vpro:image:"
-     *      */
+     */
     @Override
     protected String getUrnPrefix() {
-        return "urn:vpro:image:";
+        return BASE_URN;
     }
 
     @Override
