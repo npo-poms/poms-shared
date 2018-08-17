@@ -5,11 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.xml.XMLConstants;
+import javax.xml.namespace.NamespaceContext;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -121,5 +120,36 @@ public final class Xmlns {
         map.put(UPDATE_NAMESPACE, URI.create(pomsLocation + "schema/update/vproMediaUpdate.xsd"));
 
     }
+
+
+
+    public static final NamespaceContext NAMESPACE_CONTEXT = new NamespaceContext() {
+        private Map<String, String> mapping = new HashMap<>();
+        {
+            mapping.put("update", UPDATE_NAMESPACE);
+            mapping.put("u", UPDATE_NAMESPACE);
+            mapping.put("media", MEDIA_NAMESPACE);
+            mapping.put("s", SEARCH_NAMESPACE);
+            mapping.put("shared", SHARED_NAMESPACE);
+            mapping.put("pageupdate", PAGEUPDATE_NAMESPACE);
+        }
+        @Override
+        public String getNamespaceURI(String prefix) {
+            return mapping.get(prefix);
+
+        }
+
+        @Override
+        public String getPrefix(String namespaceURI) {
+            return mapping.entrySet().stream().filter(e -> e.getValue().equals(namespaceURI)).findFirst().map(Map.Entry::getKey).orElse(null);
+        }
+
+        @Override
+        public Iterator getPrefixes(String namespaceURI) {
+            return mapping.entrySet().stream().filter(e -> e.getValue().equals(namespaceURI))
+                .map(Map.Entry::getKey).iterator();
+
+        }
+    };
 
 }
