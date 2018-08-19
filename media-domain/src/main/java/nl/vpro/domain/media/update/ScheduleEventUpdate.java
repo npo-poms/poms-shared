@@ -11,7 +11,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.function.BiFunction;
@@ -44,6 +43,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "titles",
         "descriptions"
         })
+@Getter
+@Setter
 public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, TextualObjectUpdate<TitleUpdate, DescriptionUpdate, ScheduleEventUpdate>, Child<MediaUpdate<?>> {
 
     @XmlAttribute(required = true)
@@ -51,6 +52,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     @XmlAttribute
     private String net;
+
 
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
@@ -120,53 +122,6 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         return event;
     }
 
-    public Channel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(Channel channel) {
-        this.channel = channel;
-    }
-
-    public String getNet() {
-        return net;
-    }
-
-    public void setNet(String net) {
-        this.net = net;
-    }
-
-    public Instant getStart() {
-        return start;
-    }
-
-    public void setStart(Instant start) {
-        this.start = start;
-    }
-
-    public Instant getStartInstant() {
-        return start;
-    }
-
-    public void setStartInstant(Instant start) {
-        this.start = start;
-    }
-
-    public Duration getDurationTime() {
-        return duration;
-    }
-
-    public Date getDuration() {
-        return duration == null ? null : new Date(duration.toMillis());
-    }
-
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
-
-    public void setDuration(Date duration) {
-        this.duration = duration == null ? null : Duration.ofMillis(duration.getTime());
-    }
 
     @Override
     @XmlElementWrapper(name = "titles", required = false)
@@ -241,20 +196,6 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
         return channel + " " + start;
     }
 
-
-    private static Duration duration(Date duration) {
-        if (duration == null) {
-            return null;
-        }
-        return Duration.ofMillis(duration.getTime());
-    }
-
-    private static Instant instant(Date instant) {
-        if (instant == null) {
-            return null;
-        }
-        return instant.toInstant();
-    }
 
     @Override
     public int compareTo(ScheduleEventUpdate o) {
