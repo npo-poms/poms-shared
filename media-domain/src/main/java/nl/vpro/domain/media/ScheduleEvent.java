@@ -104,7 +104,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Valid
     protected Net net;
 
-    @Column(nullable = false, name = "guideDay")
+    @Column(nullable = false, name = "guideDay", columnDefinition="Date")
     @NotNull
     @Convert(converter = LocalDateToDateConverter.class)
     protected LocalDate guideDay;
