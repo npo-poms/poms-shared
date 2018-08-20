@@ -247,12 +247,17 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         copyFrom(image);
         highlighted = image.isHighlighted();
         String uri = image.getImageUri();
-        if (uri != null && uri
-            .replace('.', ':') // See MSE-865
-            .startsWith(nl.vpro.domain.image.Image.BASE_URN)) {
-            this.image = uri;
-        } else {
-            this.image = new ImageLocation(uri);
+        if (uri != null) {
+            if (uri
+                .replace('.', ':') // See MSE-865
+                .startsWith(nl.vpro.domain.image.Image.BASE_URN)) {
+                this.image = uri;
+            } else if (uri.startsWith("urn:")) {
+                log.warn("Uri starts with a non image urn: {}. Not taking it as an url, because that won't work either", uri);
+                this.image = uri;
+            } else {
+                this.image = new ImageLocation(uri);
+            }
         }
 
         date = image.getDate();
