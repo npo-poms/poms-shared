@@ -48,7 +48,8 @@ public class WEBVTTandSRT {
 
     static Stream<Cue> parse(String parent, Duration offset,  Reader reader, String decimalSeparator) {
         final Iterator<String> stream = new BufferedReader(reader)
-            .lines().iterator();
+            .lines()
+            .iterator();
 
         Iterator<Cue> cues = new Iterator<Cue>() {
 
