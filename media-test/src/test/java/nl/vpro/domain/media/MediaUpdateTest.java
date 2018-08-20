@@ -316,7 +316,7 @@ public class MediaUpdateTest {
     public void withEverything2() throws Exception {
         MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);
         JAXBTestUtil.roundTripAndSimilar(fetched, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "    <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "    <portal id=\"3VOOR12_GRONINGEN\"/>\n" +
@@ -418,25 +418,25 @@ public class MediaUpdateTest {
             "        </location>\n" +
             "    </locations>\n" +
             "    <scheduleEvents>\n" +
-            "        <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\">\n" +
+            "        <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "            <guideDay>1969-12-31+01:00</guideDay>\n" +
             "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "            <duration>P0DT0H0M0.200S</duration>\n" +
             "            <poProgID>VPROWON_20001</poProgID>\n" +
             "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\">\n" +
+            "        <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "            <guideDay>1970-01-03+01:00</guideDay>\n" +
             "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
             "            <duration>P0DT0H0M0.050S</duration>\n" +
             "            <poProgID>VPROWON_20001</poProgID>\n" +
             "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"HOLL\" midRef=\"VPROWON_20001\">\n" +
+            "        <scheduleEvent channel=\"HOLL\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "            <guideDay>1970-01-08+01:00</guideDay>\n" +
             "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
             "            <duration>P0DT0H0M0.250S</duration>\n" +
             "            <poProgID>VPROWON_20001</poProgID>\n" +
             "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"CONS\" midRef=\"VPROWON_20001\">\n" +
+            "        <scheduleEvent channel=\"CONS\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "            <guideDay>1970-01-10+01:00</guideDay>\n" +
             "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
             "            <duration>P0DT0H0M0.200S</duration>\n" +
@@ -464,7 +464,7 @@ public class MediaUpdateTest {
             "        </shared:image>\n" +
             "    </images>\n" +
             "    <segments>\n" +
-            "        <segment midRef=\"VPROWON_20001\" type=\"SEGMENT\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\">\n" +
+            "        <segment midRef=\"VPROWON_20001\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:12\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:segment:12\">\n" +
             "            <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "            <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "            <portal id=\"3VOOR12_GRONINGEN\"/>\n" +
@@ -526,7 +526,7 @@ public class MediaUpdateTest {
             "                    <familyName>Holt</familyName>\n" +
             "                </person>\n" +
             "            </credits>\n" +
-            "            <descendantOf midRef=\"VPROWON_20001\" type=\"BROADCAST\"/>\n" +
+            "            <descendantOf urnRef=\"urn:vpro:media:program:12\" midRef=\"VPROWON_20001\" type=\"BROADCAST\"/>\n" +
             "            <memberOf highlighted=\"false\" midRef=\"VPROWON_20008\" index=\"1\"/>\n" +
             "            <ageRating>12</ageRating>\n" +
             "            <contentRating>ANGST</contentRating>\n" +
@@ -566,25 +566,25 @@ public class MediaUpdateTest {
             "                </location>\n" +
             "            </locations>\n" +
             "            <scheduleEvents>\n" +
-            "                <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345_1\">\n" +
+            "                <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345_1\" urnRef=\"urn:vpro:media:segment:12\">\n" +
             "                    <guideDay>1969-12-31+01:00</guideDay>\n" +
             "                    <start>1970-01-01T01:00:00.100+01:00</start>\n" +
             "                    <duration>P0DT0H0M0.200S</duration>\n" +
             "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
             "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345_1\">\n" +
+            "                <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345_1\" urnRef=\"urn:vpro:media:segment:12\">\n" +
             "                    <guideDay>1970-01-03+01:00</guideDay>\n" +
             "                    <start>1970-01-04T01:00:00.300+01:00</start>\n" +
             "                    <duration>P0DT0H0M0.050S</duration>\n" +
             "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
             "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"HOLL\" midRef=\"VPROWON_12345_1\">\n" +
+            "                <scheduleEvent channel=\"HOLL\" midRef=\"VPROWON_12345_1\" urnRef=\"urn:vpro:media:segment:12\">\n" +
             "                    <guideDay>1970-01-08+01:00</guideDay>\n" +
             "                    <start>1970-01-09T01:00:00.350+01:00</start>\n" +
             "                    <duration>P0DT0H0M0.250S</duration>\n" +
             "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
             "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"CONS\" midRef=\"VPROWON_12345_1\">\n" +
+            "                <scheduleEvent channel=\"CONS\" midRef=\"VPROWON_12345_1\" urnRef=\"urn:vpro:media:segment:12\">\n" +
             "                    <guideDay>1970-01-10+01:00</guideDay>\n" +
             "                    <start>1970-01-11T01:00:00.600+01:00</start>\n" +
             "                    <duration>P0DT0H0M0.200S</duration>\n" +
