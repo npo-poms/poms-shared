@@ -11,7 +11,10 @@ import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.validation.ConstraintViolation;
 import javax.xml.XMLConstants;
@@ -25,7 +28,6 @@ import javax.xml.validation.Validator;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import nl.vpro.VersionService;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
@@ -186,7 +188,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 .images(
                     Image.builder()
                         .publishStop(Instant.ofEpochMilli(5444))
-                        .imageUri("urn:image:123")
+                        .imageUri("urn:vpro:image:123")
                         .build()
                 )
         );
@@ -197,7 +199,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "    <scheduleEvents/>\n" +
             "    <images>\n" +
             "        <image type=\"PICTURE\" publishStop=\"1970-01-01T01:00:05.444+01:00\" highlighted=\"false\">\n" +
-            "            <urn>urn:image:123</urn>\n" +
+            "            <urn>urn:vpro:image:123</urn>\n" +
             "        </image>\n" +
             "    </images>\n" +
             "    <segments/>\n" +
