@@ -87,7 +87,7 @@ public abstract class MediaObjectLockerAspect  {
                 if (mid == null) {
                     log.warn("Object {} has no mid", object);
                 } else {
-                    log.debug("{} has id {}", mid);
+                    log.debug("{} has id {}", object, mid);
                 }
 
                 return mid;
