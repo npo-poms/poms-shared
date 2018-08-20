@@ -341,4 +341,10 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         }
         return String.format("Segment{%1$smid=\"%2$s\", title=%3$s}", type == null ? "" : type + " ", this.getMid(), mainTitle);
     }
+
+
+    @Override
+    public String getCorrelationId() {
+        return getMidRef();
+    }
 }

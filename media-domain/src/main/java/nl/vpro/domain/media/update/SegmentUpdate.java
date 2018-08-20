@@ -238,4 +238,9 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         return parent;
 
     }
+
+    @Override
+    public String getCorrelationId() {
+        return getMidRefAttribute();
+    }
 }
