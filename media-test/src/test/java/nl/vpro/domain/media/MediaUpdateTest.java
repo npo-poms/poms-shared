@@ -4,6 +4,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -17,6 +18,10 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class MediaUpdateTest {
 
     static ProgramUpdate rounded;
+
+    static {
+        ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
+    }
 
     @Test
     public void withEverything1() throws Exception {
@@ -306,7 +311,8 @@ public class MediaUpdateTest {
     @Test
     public void withEverything2() throws Exception {
         MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);
-        JAXBTestUtil.roundTripAndSimilar(fetched, "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+        JAXBTestUtil.roundTripAndSimilar(fetched, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
             "    <broadcaster id=\"AVRO\">AVRO</broadcaster>\n" +
             "    <portal id=\"3VOOR12_GRONINGEN\"/>\n" +
@@ -322,8 +328,14 @@ public class MediaUpdateTest {
             "    <description owner=\"BROADCASTER\" type=\"MAIN\">Main description</description>\n" +
             "    <description owner=\"BROADCASTER\" type=\"SHORT\">Short description</description>\n" +
             "    <description owner=\"BROADCASTER\" type=\"EPISODE\">Episode description MIS</description>\n" +
-            "    <genre id=\"3.0.1.7.21\"/>\n" +
-            "    <genre id=\"3.0.1.8.25\"/>\n" +
+            "    <genre id=\"3.0.1.7.21\">\n" +
+            "        <term>Informatief</term>\n" +
+            "        <term>Nieuws/actualiteiten</term>\n" +
+            "    </genre>\n" +
+            "    <genre id=\"3.0.1.8.25\">\n" +
+            "        <term>Documentaire</term>\n" +
+            "        <term>Natuur</term>\n" +
+            "    </genre>\n" +
             "    <tag>tag1</tag>\n" +
             "    <tag>tag2</tag>\n" +
             "    <tag>tag3</tag>\n" +
@@ -464,8 +476,14 @@ public class MediaUpdateTest {
             "            <description owner=\"BROADCASTER\" type=\"MAIN\">Main description</description>\n" +
             "            <description owner=\"BROADCASTER\" type=\"SHORT\">Short description</description>\n" +
             "            <description owner=\"BROADCASTER\" type=\"EPISODE\">Episode description MIS</description>\n" +
-            "            <genre id=\"3.0.1.7.21\"/>\n" +
-            "            <genre id=\"3.0.1.8.25\"/>\n" +
+            "            <genre id=\"3.0.1.7.21\">\n" +
+            "                <term>Informatief</term>\n" +
+            "                <term>Nieuws/actualiteiten</term>\n" +
+            "            </genre>\n" +
+            "            <genre id=\"3.0.1.8.25\">\n" +
+            "                <term>Documentaire</term>\n" +
+            "                <term>Natuur</term>\n" +
+            "            </genre>\n" +
             "            <tag>tag1</tag>\n" +
             "            <tag>tag2</tag>\n" +
             "            <tag>tag3</tag>\n" +
@@ -592,6 +610,6 @@ public class MediaUpdateTest {
             "            <start>P0DT0H0M0.000S</start>\n" +
             "        </segment>\n" +
             "    </segments>\n" +
-            "</program>");
+            "</program>\n");
     }
 }
