@@ -168,8 +168,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @Valid
     protected MediaObject mediaObjectToValidate;
 
-    protected Long id;
-
     protected String mid;
 
     protected String urn;
@@ -392,6 +390,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private final M fetchOwnerless() {
         M media = newMedia();
+        media.setUrn(urn);
         media.setMid(mid);
         media.setCreationInstant(null); //   not supported by update format. will be set by persistence layer
         media.setCrids(crids);
