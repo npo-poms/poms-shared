@@ -15,6 +15,7 @@ public enum SubtitlesWorkflow {
      * it is unknown wether any subtitles need publishing or revoking
      */
     UNDEFINED(null),
+
     /**
      * All subtitles for this object are published
      */
