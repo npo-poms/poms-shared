@@ -426,7 +426,7 @@ public class MediaObjects {
         return null;
     }
 
-    private static List<String> getPlannedPlatformNamesInLowerCase(Collection<Prediction> preds) {
+    static List<String> getPlannedPlatformNamesInLowerCase(Collection<Prediction> preds) {
         if (preds != null) {
             return preds.stream()
                 .filter(Prediction::isPlannedAvailability)
