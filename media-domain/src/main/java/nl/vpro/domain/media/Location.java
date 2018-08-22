@@ -619,15 +619,15 @@ public class Location extends PublishableObject<Location>
 
         if (parent instanceof MediaObject) {
             this.mediaObject = (MediaObject) parent;
-        }
-        try {
-            Prediction locationAuthorityRecord = getAuthorityRecord(false);
-            if (locationAuthorityRecord != null) {
-                locationAuthorityRecord.setPublishStartInstant(publishStart);
-                locationAuthorityRecord.setPublishStopInstant(publishStop);
+            try {
+                Prediction locationAuthorityRecord = getAuthorityRecord(false);
+                if (locationAuthorityRecord != null) {
+                    locationAuthorityRecord.setPublishStartInstant(publishStart);
+                    locationAuthorityRecord.setPublishStopInstant(publishStop);
+                }
+            } catch (Throwable t) {
+                log.error(t.getMessage());
             }
-        } catch (Throwable t) {
-            log.error(t.getMessage());
         }
     }
 
