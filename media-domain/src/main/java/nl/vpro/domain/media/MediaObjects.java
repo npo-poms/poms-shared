@@ -678,6 +678,37 @@ public class MediaObjects {
     }
 
 
+    public static <T extends PublishableObject> boolean revokeRelatedPublishables(MediaObject media, Collection<T> publishables, Instant now, Runnable callbackOnChange) {
+        boolean foundRevokedPublishable = false;
+        for(T publishable : publishables) {
+            if(Workflow.REVOKES.contains(publishable.getWorkflow())) {
+                continue;
+            }
+            if(!publishable.inPublicationWindow(now)) {
+                PublishableObjectAccess.setWorkflow(publishable, Workflow.REVOKED);
+                foundRevokedPublishable = true;
+            }
+
+        }
+
+        if(foundRevokedPublishable &&
+            media.getWorkflow() == Workflow.PUBLISHED &&
+            media.inPublicationWindow(now)) {
+            callbackOnChange.run();
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean revokeRelatedPublishables(MediaObject media, Instant now) {
+        boolean result = MediaObjects.revokeRelatedPublishables(media, media.getImages(), now, () -> {});
+        result &= MediaObjects.revokeRelatedPublishables(media, media.getLocations(), now, () -> Locations.updatePredictionStates(media));
+        return result;
+
+    }
+
+
+
     // DEPRECATED methods
 
 
