@@ -426,7 +426,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static List<String> getPlannedPlatformNamesInLowerCase(Collection<Prediction> preds) {
+    private static List<String> getPlannedPlatformNamesInLowerCase(Collection<Prediction> preds) {
         if (preds != null) {
             return preds.stream()
                 .filter(Prediction::isPlannedAvailability)
@@ -435,7 +435,18 @@ public class MediaObjects {
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
         }
-        return null;
+        return Arrays.asList();
+    }
+
+    public static List<String> getPlannedPlatformNamesInLowerCaseOrAll(MediaObject media) {
+        List<String> result = getPlannedPlatformNamesInLowerCase(media.getPredictions());
+        if (result == null || result.isEmpty()) {
+            if (result.isEmpty()) {
+                result = Arrays.stream(Platform.values()).map((p) -> p.name().toLowerCase()).collect(Collectors.toList());
+                log.info("No available platforms for {}, taking {}", media, result);
+            }
+        }
+        return result;
     }
 
 
