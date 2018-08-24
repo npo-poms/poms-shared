@@ -1,6 +1,7 @@
 package nl.vpro.domain.page.update;
 
 import lombok.Getter;
+import lombok.ToString;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlRootElement(name = "deleteresult")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
+@ToString(of = {"success", "count", "notallowedCount"})
 public class DeleteResult {
     @XmlTransient
     final CompletableFuture<?> future;
