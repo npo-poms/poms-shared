@@ -1,10 +1,10 @@
-package nl.vpro.rs.pages.update;
+package nl.vpro.domain.page.update;
 
 import lombok.Getter;
 
 import java.util.concurrent.CompletableFuture;
 
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,13 +13,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
+@XmlRootElement(name = "deleteresult")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Getter
 public class DeleteResult {
     @XmlTransient
     final CompletableFuture<?> future;
-    final int count;
-    final int notallowedCount;
-    final boolean success = true;
+    @XmlAttribute
+    private int count;
+    @XmlAttribute
+    private int notallowedCount;
+    @XmlAttribute
+    private boolean success = true;
+
+    private DeleteResult() {
+        this.future = CompletableFuture.completedFuture(null);
+        // just for silly jaxb
+    }
 
     @lombok.Builder
     public DeleteResult( CompletableFuture<?> future, Integer count, Integer notallowedCount) {
