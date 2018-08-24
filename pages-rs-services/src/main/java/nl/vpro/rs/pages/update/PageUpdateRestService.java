@@ -33,6 +33,7 @@ public interface PageUpdateRestService {
     );
 
     @DELETE
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("")
     @Produces({"application/json", "application/xml"})
     DeleteResult delete(
@@ -42,7 +43,7 @@ public interface PageUpdateRestService {
     );
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("")
     PageUpdate load(@QueryParam("url") @NotNull String url);
 
