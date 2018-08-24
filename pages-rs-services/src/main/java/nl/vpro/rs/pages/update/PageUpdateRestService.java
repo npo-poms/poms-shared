@@ -34,6 +34,7 @@ public interface PageUpdateRestService {
 
     @DELETE
     @Path("")
+    @Produces({"application/json", "application/xml"})
     DeleteResult delete(
         @QueryParam("url") @NotNull String url,
         @QueryParam("batch")  Boolean batch,
