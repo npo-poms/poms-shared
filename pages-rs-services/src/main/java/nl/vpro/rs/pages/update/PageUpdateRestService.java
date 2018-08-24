@@ -10,6 +10,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import nl.vpro.domain.page.update.DeleteResult;
 import nl.vpro.domain.page.update.PageUpdate;
 
 /**
@@ -33,7 +34,7 @@ public interface PageUpdateRestService {
 
     @DELETE
     @Path("")
-    Response delete(
+    DeleteResult delete(
         @QueryParam("url") @NotNull String url,
         @QueryParam("batch")  Boolean batch,
         @QueryParam("max") Integer max
