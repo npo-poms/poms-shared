@@ -4,9 +4,11 @@
  */
 package nl.vpro.rs.pages.update;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -38,8 +40,9 @@ public interface PageUpdateRestService {
     DeleteResult delete(
         @QueryParam("url") @NotNull String url,
         @QueryParam("batch")  Boolean batch,
-        @QueryParam("max") Integer max
-    );
+        @QueryParam("max") Integer max,
+        @Context HttpServletResponse response
+        );
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
