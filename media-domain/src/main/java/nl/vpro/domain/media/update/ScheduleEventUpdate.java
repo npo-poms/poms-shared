@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.SortedSet;
@@ -34,11 +35,13 @@ import nl.vpro.domain.media.support.ScheduleEventTitle;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+import nl.vpro.xml.bind.LocalDateXmlAdapter;
 
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "scheduleEventUpdateType",
     propOrder = {
         "start",
+        "guideDay",
         "duration",
         "titles",
         "descriptions"
@@ -63,6 +66,11 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     private Duration duration;
 
+    @XmlElement(required = false)
+    @XmlSchemaType(name = "guideDay")
+    @XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
+    private LocalDate guideDay;
+
     @Valid
     private SortedSet<TitleUpdate> titles;
 
@@ -86,15 +94,16 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
 
     @lombok.Builder(builderClassName = "Builder")
-    private ScheduleEventUpdate(Channel channel, Instant start, Duration  duration, ProgramUpdate media) {
+    private ScheduleEventUpdate(Channel channel, Instant start, LocalDate guideDay, Duration  duration, ProgramUpdate media) {
         this.channel = channel;
         this.start = start;
+        this.guideDay = guideDay;
         this.duration = duration;
         this.parent = media;
     }
 
     public ScheduleEventUpdate(MediaUpdate<?> media, ScheduleEvent event) {
-        this(event.getChannel(), event.getStartInstant(), event.getDuration());
+        this(event.getChannel(), event.getStartInstant(), event.getGuideDate(), event.getDuration(), null);
 
         TextualObjects.copyToUpdate(event, this);
         if (event.getTitles() != null) {
@@ -118,6 +127,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     public ScheduleEvent toScheduleEvent(OwnerType ownerType) {
         ScheduleEvent event = new ScheduleEvent(channel, net == null ? null : new Net(net), start, duration);
+        event.setGuideDate(this.guideDay);
         TextualObjects.copyAndRemove(this, event, ownerType);
         return event;
     }
