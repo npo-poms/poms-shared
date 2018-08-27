@@ -4,8 +4,6 @@
  */
 package nl.vpro.openarchives.oai;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 
 import javax.xml.XMLConstants;
@@ -14,6 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
+import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 /**
@@ -22,13 +21,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @Data
-@AllArgsConstructor
-@Builder
 public class Label {
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI, required = true)
-    //@Builder.Default()
-    private String lang = "nl";
+    private String lang;
 
     @XmlValue()
     private String value;
@@ -44,6 +40,13 @@ public class Label {
     @JsonCreator
     public Label(String value) {
         this.value = value;
+        this.lang = "nl";
+    }
+
+    @lombok.Builder
+    private Label(String value, String lang) {
+        this.value = value;
+        this.lang = StringUtils.isBlank(lang) ? "nl" : lang;
     }
 
 
