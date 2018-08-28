@@ -214,7 +214,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B crids(String... crids) {
         for(String crid : crids) {
-            mediaObject().addCrid(crid);
+            if (crid != null) {
+                mediaObject().addCrid(crid);
+            }
         }
         return (B)this;
     }
