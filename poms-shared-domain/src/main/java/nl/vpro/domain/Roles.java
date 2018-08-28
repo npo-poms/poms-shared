@@ -23,7 +23,6 @@ public class Roles {
      */
     public static final String SUPERPROCESS_ROLE = "ROLE_MEDIA_SUPERPROCESS";
 
-
     /**
      * A super-admin may do (nearly) everything
      */
@@ -47,6 +46,7 @@ public class Roles {
     public static final String PUBLISHER_ROLE = "ROLE_MEDIA_PUBLISHER";
 
     public static final String SCREEN_PUBLISHER_ROLE = "ROLE_SCREEN_PUBLISHER";
+
     /**
      * Support are people at NPO-helpdesk who can see everything, including deleted record, but edit nothing. (MSE-2015)
      */
@@ -88,7 +88,6 @@ public class Roles {
      * Role for users that are allowed to edit MIS owned fields, do note that they still need the regular permssions to actually do so.
      */
     public static final String MIS_ROLE = "ROLE_MEDIA_MIS";
-
 
     /**
      * The system role is only assigned via {@link nl.vpro.domain.user.UserService#systemAuthenticate)}
