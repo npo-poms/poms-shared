@@ -1703,7 +1703,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
     protected Boolean isHasSubtitles() {
         try {
-            List<AvailableSubtitles> copy = new ArrayList<>(getAvailableSubtitles());
+            List<AvailableSubtitles> copy = availableSubtitles == null ? new ArrayList<>() : new ArrayList<>(availableSubtitles);
             return copy
                 .stream()
                 .filter(sub -> {
