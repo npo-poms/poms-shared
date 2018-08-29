@@ -1702,9 +1702,24 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @XmlAttribute(name = "hasSubtitles")
     @XmlJavaTypeAdapter(FalseToNullAdapter.class)
     protected Boolean isHasSubtitles() {
-        return getAvailableSubtitles().stream().anyMatch(
-            sub -> Locales.DUTCH.equals(sub.getLanguage()) &&
-                SubtitlesType.CAPTION == sub.getType());
+        try {
+            List<AvailableSubtitles> copy = new ArrayList<>(getAvailableSubtitles());
+            return copy
+                .stream()
+                .filter(sub -> {
+                    if (sub == null ) {
+                        log.warn("{} has 'null' as subtitles", this);
+                    }
+                    return sub != null;
+                    }
+                )
+                .anyMatch(
+                    sub -> Locales.DUTCH.equals(sub.getLanguage()) &&
+                        SubtitlesType.CAPTION == sub.getType());
+        } catch (Exception e) {
+            log.warn(e.getMessage(), e);
+            return false;
+        }
     }
 
     protected void setHasSubtitles(Boolean hasSubtitles) {
