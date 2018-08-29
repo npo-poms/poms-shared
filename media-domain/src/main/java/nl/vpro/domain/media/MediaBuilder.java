@@ -642,6 +642,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
+    default B locations(Iterable<Location> locations) {
+        for(Location location : locations) {
+            mediaObject().addLocation(location);
+        }
+        return (B)this;
+    }
+
+    @SuppressWarnings("unchecked")
     default B locations(String... locations) {
         for (String location : locations) {
             mediaObject().addLocation(new Location(location, OwnerType.BROADCASTER));
