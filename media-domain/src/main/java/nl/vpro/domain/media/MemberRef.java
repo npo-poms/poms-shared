@@ -151,14 +151,24 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
 
-    @lombok.Builder
-    private MemberRef(Long id, MediaObject member, MediaObject owner, Integer number, Instant added, String midRef) {
+    @lombok.Builder(builderClassName = "Builder")
+    private MemberRef(
+        Long id,
+        MediaObject member,
+        MediaObject owner,
+        Integer number,
+        Instant added,
+        String midRef,
+        String cridRef,
+        Boolean highlighted) {
         this.id = id;
         this.member = member;
         this.owner = owner;
         this.number = number;
         this.midRef = midRef;
+        this.cridRef = cridRef;
         this.added = added;
+        this.highlighted = highlighted;
     }
 
     public static MemberRef copy(MemberRef source){
@@ -525,6 +535,19 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public void prePersist() {
         if (this.added == null) {
             this.added = Instant.now();
+        }
+    }
+
+    public static class Builder {
+        public Builder mediaRef(String ref) {
+            if (ref != null) {
+                if (ref.startsWith("crid:")) {
+                    return cridRef(ref);
+                } else {
+                    return midRef(ref);
+                }
+            }
+            return this;
         }
     }
 
