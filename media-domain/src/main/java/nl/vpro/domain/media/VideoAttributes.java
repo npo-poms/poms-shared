@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -22,7 +25,11 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "videoAttributesType", propOrder = {"color", "videoCoding", "aspectRatio"})
+@XmlType(name = "videoAttributesType", propOrder = {
+    "color",
+    "videoCoding",
+    "aspectRatio"
+})
 public class VideoAttributes implements Serializable {
     private static final long serialVersionUID = 5314003558805319340L;
 
@@ -49,6 +56,14 @@ public class VideoAttributes implements Serializable {
     @Enumerated(EnumType.STRING)
     private AspectRatio aspectRatio;
 
+    /**
+     * @since 5.9
+     */
+    @XmlTransient
+    @Getter
+    @Setter
+    private Float fps;
+
     public VideoAttributes() {
     }
 
@@ -58,10 +73,15 @@ public class VideoAttributes implements Serializable {
         aspectRatio = AspectRatio.fromDimension(horizontalSize, verticalSize);
     }
 
-    @lombok.Builder
     public VideoAttributes(String videoCoding, Integer horizontalSize, Integer verticalSize) {
+        this(videoCoding, horizontalSize, verticalSize, null);
+    }
+
+    @lombok.Builder
+    private VideoAttributes(String videoCoding, Integer horizontalSize, Integer verticalSize, Float fps) {
         this(horizontalSize, verticalSize);
         this.videoCoding = videoCoding;
+        this.fps = fps;
     }
 
     public VideoAttributes(VideoAttributes source) {
