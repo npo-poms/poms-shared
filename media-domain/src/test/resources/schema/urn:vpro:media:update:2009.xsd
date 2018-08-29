@@ -243,6 +243,7 @@
   <xs:complexType name="scheduleEventUpdateType">
     <xs:sequence>
       <xs:element name="start" type="xs:dateTime"/>
+      <xs:element name="guideDay" type="xs:date" minOccurs="0"/>
       <xs:element name="duration" type="xs:duration"/>
       <xs:element name="titles" minOccurs="0">
         <xs:complexType>
