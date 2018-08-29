@@ -46,6 +46,9 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean locationsUpdate = false;
 
+    @lombok.Builder.Default
+    boolean stealMids = false;
+
     public static Builder withAllTrue() {
         return builder()
             .copyWorkflow(true)
@@ -56,7 +59,9 @@ public class AssemblageConfig {
             .ratingsUpdate(true)
             .imageMetaData(true)
             .createScheduleEvents(true)
-            .locationsUpdate(true);
+            .locationsUpdate(true)
+            .stealMids(true)
+            ;
 
     }
 
