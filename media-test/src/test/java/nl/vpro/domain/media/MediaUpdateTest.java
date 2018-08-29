@@ -132,18 +132,22 @@ public class MediaUpdateTest {
             "    <scheduleEvents>\n" +
             "        <scheduleEvent channel=\"NED3\">\n" +
             "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+            "            <guideDay>1969-12-31</guideDay>\n" +
             "            <duration>P0DT0H0M0.200S</duration>\n" +
             "        </scheduleEvent>\n" +
             "        <scheduleEvent channel=\"NED3\">\n" +
             "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+            "            <guideDay>1970-01-03</guideDay>\n" +
             "            <duration>P0DT0H0M0.050S</duration>\n" +
             "        </scheduleEvent>\n" +
             "        <scheduleEvent channel=\"HOLL\">\n" +
             "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
+            "            <guideDay>1970-01-08</guideDay>\n" +
             "            <duration>P0DT0H0M0.250S</duration>\n" +
             "        </scheduleEvent>\n" +
             "        <scheduleEvent channel=\"CONS\">\n" +
             "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
+            "            <guideDay>1970-01-10</guideDay>\n" +
             "            <duration>P0DT0H0M0.200S</duration>\n" +
             "        </scheduleEvent>\n" +
             "    </scheduleEvents>\n" +
@@ -266,18 +270,22 @@ public class MediaUpdateTest {
             "            <scheduleEvents>\n" +
             "                <scheduleEvent channel=\"NED3\">\n" +
             "                    <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+            "                    <guideDay>1969-12-31</guideDay>\n" +
             "                    <duration>P0DT0H0M0.200S</duration>\n" +
             "                </scheduleEvent>\n" +
             "                <scheduleEvent channel=\"NED3\">\n" +
             "                    <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+            "                    <guideDay>1970-01-03</guideDay>\n" +
             "                    <duration>P0DT0H0M0.050S</duration>\n" +
             "                </scheduleEvent>\n" +
             "                <scheduleEvent channel=\"HOLL\">\n" +
             "                    <start>1970-01-09T01:00:00.350+01:00</start>\n" +
+            "                    <guideDay>1970-01-08</guideDay>\n" +
             "                    <duration>P0DT0H0M0.250S</duration>\n" +
             "                </scheduleEvent>\n" +
             "                <scheduleEvent channel=\"CONS\">\n" +
             "                    <start>1970-01-11T01:00:00.600+01:00</start>\n" +
+            "                    <guideDay>1970-01-10</guideDay>\n" +
             "                    <duration>P0DT0H0M0.200S</duration>\n" +
             "                </scheduleEvent>\n" +
             "            </scheduleEvents>\n" +
