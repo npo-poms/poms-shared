@@ -67,7 +67,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     private Duration duration;
 
     @XmlElement(required = false)
-    @XmlSchemaType(name = "guideDay")
+    @XmlSchemaType(name = "date")
     @XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
     private LocalDate guideDay;
 
