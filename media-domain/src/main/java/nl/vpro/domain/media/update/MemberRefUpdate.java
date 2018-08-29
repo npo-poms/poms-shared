@@ -68,10 +68,14 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     }
 
     public MemberRef toMemberRef() {
-        MemberRef mr = new MemberRef(mediaRef, position);
-        mr.setHighlighted(highlighted);
-        mr.setAdded(null);
-        return mr;
+        return
+            MemberRef.builder()
+                .number(position)
+                .highlighted(highlighted)
+                .added(null)
+                .mediaRef(mediaRef)
+                .build();
+
     }
 
     @Override
