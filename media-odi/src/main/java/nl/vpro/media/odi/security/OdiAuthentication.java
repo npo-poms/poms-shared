@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
@@ -66,10 +67,17 @@ public class OdiAuthentication {
     private final ExecutorService executorService =
         Executors.newSingleThreadExecutor(ThreadPools.createThreadFactory("OdiConfigMonitor", true, Thread.NORM_PRIORITY));
 
+    private boolean running = true;
+
     @PostConstruct
-    public void init() throws FileNotFoundException {
+    public void init() {
         loadAuthorizedClients();
         appendConfigWatcher();
+    }
+    @PreDestroy
+    public void shutdown() {
+        running = false;
+        executorService.shutdownNow();
     }
 
     @Before("target(nl.vpro.media.odi.OdiService) && execution(* *(..)) && args(media, request, ..)")
@@ -158,7 +166,7 @@ public class OdiAuthentication {
                     throw new RuntimeException(e);
                 }
 
-                while (true) {
+                while(running) {
                     try {
                         WatchKey key = watcher.take();
                         LOG.info("Reloading odi clients from {}", configFolder);
