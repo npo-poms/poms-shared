@@ -5,7 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import org.slf4j.Logger;
+
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.logging.simple.Slf4jSimpleLogger;
 
 /**
  * @author Michiel Meeuwissen
@@ -48,6 +52,42 @@ public class AssemblageConfig {
 
     @lombok.Builder.Default
     boolean stealMids = false;
+
+    SimpleLogger logger;
+
+    public SimpleLogger loggerFor(Logger log) {
+        if (logger == null) {
+            return Slf4jSimpleLogger.of(log);
+        } else {
+            return logger.chain(Slf4jSimpleLogger.of(log));
+        }
+    }
+    public AssemblageConfig copy() {
+        return new AssemblageConfig(
+            ownerType,
+            copyWorkflow,
+            copyLanguageAndCountry,
+            imageMetaData,
+            copyPredictions,
+            episodeOfUpdate,
+            memberOfUpdate,
+            ratingsUpdate,
+            createScheduleEvents,
+            locationsUpdate,
+            stealMids,
+            logger);
+    }
+    public AssemblageConfig withLogger(SimpleLogger logger) {
+        AssemblageConfig copy = copy();
+        copy.setLogger(logger);
+        return copy;
+    }
+    public AssemblageConfig withThreadLocalLogger() {
+        return withLogger(SimpleLogger.THREAD_LOCAL.get());
+    }
+
+
+
 
     public static Builder withAllTrue() {
         return builder()
