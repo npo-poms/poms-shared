@@ -539,6 +539,17 @@
       <xs:enumeration value="SCRIPTWRITER"/>
       <xs:enumeration value="COMPOSER"/>
       <xs:enumeration value="UNDEFINED"/>
+
+      <xs:enumeration value="SIDEKICK">
+        <xs:annotation>
+          <xs:documentation>Introduced for MediaConnect sync. This is experimental</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NEWS_PRESENTER">
+        <xs:annotation>
+          <xs:documentation>Introduced for MediaConnect sync. This is experimental</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 
