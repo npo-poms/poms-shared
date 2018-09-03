@@ -589,6 +589,7 @@
       <xs:enumeration value="SCRIPTWRITER"/>
       <xs:enumeration value="DJ"/>
       <xs:enumeration value="NEWS_PRESENTER"/>
+      <xs:enumeration value="SIDEKICK"/>
       <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>
