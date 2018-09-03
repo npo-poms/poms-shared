@@ -31,9 +31,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     @Valid
     protected SortedSet<MemberRefUpdate> episodeOf;
 
-    @Valid
-    protected SortedSet<ScheduleEventUpdate> scheduleEvents;
-
 
     private ProgramType programType;
 
