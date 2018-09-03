@@ -345,6 +345,14 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
     @Override
     public String getCorrelationId() {
-        return getMidRef();
+        if (parent != null) {
+            return parent.getCorrelationId();
+        }
+        String midRef = getMidRef();
+        if (midRef != null) {
+            return midRef;
+        } else {
+            return super.getCorrelationId();
+        }
     }
 }
