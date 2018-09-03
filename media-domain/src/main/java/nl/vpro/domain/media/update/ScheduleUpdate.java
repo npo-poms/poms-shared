@@ -94,7 +94,7 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
 
 
     public Range<ZonedDateTime> asRange() {
-        return Range.openClosed(
+        return Range.closedOpen(
             getStart().atZone(Schedule.ZONE_ID),
             getStop().atZone(Schedule.ZONE_ID)
         );
