@@ -105,15 +105,17 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     public Schedule() {
     }
 
+    @Deprecated
     public Schedule(Date start, Date stop) {
         this((Channel)null, start, stop, null);
     }
 
-
+    @Deprecated
     public Schedule(Instant  start, Instant stop) {
         this((Channel) null, toDate(start), toDate(stop), null);
     }
 
+    @Deprecated
     public Schedule(Channel channel, Date start) {
         this(channel, start, start);
     }
@@ -128,6 +130,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     }
 
 
+    @Deprecated
     public Schedule(Net net, Date start) {
         this(net, start, start);
     }
@@ -139,6 +142,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
             scheduleEvents);
     }
 
+    @Deprecated
     public Schedule(Channel channel, Date start, Collection<ScheduleEvent> scheduleEvents) {
         this(channel, start, start, scheduleEvents);
     }
@@ -148,15 +152,18 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this(channel, start, start, scheduleEvents);
     }
 
+    @Deprecated
     public Schedule(Net net, Date start, Collection<ScheduleEvent> scheduleEvents) {
         this(net, start, start, scheduleEvents);
     }
 
+    @Deprecated
     public Schedule(Channel channel, Date start, Date stop) {
         this(channel, start, stop, null);
     }
 
 
+    @Deprecated
     public Schedule(Net net, Date start, Date stop) {
         this(net, start, stop, null);
     }
@@ -181,15 +188,29 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
 
     @Deprecated
     public Schedule(Net net, Date start, Date stop, Collection<ScheduleEvent> scheduleEvents) {
-
+        this(net, DateUtils.toInstant(start), DateUtils.toInstant(stop), scheduleEvents);
     }
 
+    @Deprecated
     public Schedule(Net net, Instant start, Instant stop) {
         this(net, toDate(start), toDate(stop), null);
     }
 
     public Schedule(Net net, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
-        this(net, toDate(start), toDate(stop), scheduleEvents);
+        this.net = net;
+        this.start = start;
+        this.stop = stop;
+        if (scheduleEvents != null && scheduleEvents.size() > 0) {
+            this.scheduleEvents = new TreeSet<>(scheduleEvents);
+            for (ScheduleEvent e : this.scheduleEvents) {
+                if (e.getChannel() == null) {
+                    e.setChannel(channel);
+                }
+                if (e.getNet() == null) {
+                    e.setNet(net);
+                }
+            }
+        }
     }
 
     @lombok.Builder(builderClassName = "Builder")
