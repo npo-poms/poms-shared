@@ -85,7 +85,7 @@ public abstract class MediaObjectLockerAspect  {
             if (object instanceof MediaIdentifiable) {
                 String mid = ((MediaIdentifiable) object).getCorrelationId();
                 if (mid == null) {
-                    log.warn("Object {} has no mid", object);
+                    log.warn("Object {} has no correlation id", object);
                 } else {
                     log.debug("{} has id {}", object, mid);
                 }
