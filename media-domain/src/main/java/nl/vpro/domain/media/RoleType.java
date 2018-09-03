@@ -118,6 +118,17 @@ public enum RoleType {
         }
 
     },
+     /**
+     * For radio shows this seems usefull
+     * @since 5.9
+     */
+    SIDEKICK {
+        @Override
+        public String toString() {
+            return "Sidekick";
+        }
+
+    },
     UNDEFINED {
         @Override
         public String toString() {
