@@ -31,6 +31,10 @@ import static nl.vpro.domain.media.MediaObjects.deepCopy;
 import static nl.vpro.util.DateUtils.toDate;
 
 
+/**
+ * Representation of a time {@link #asRange()} containing a collections of {@link ScheduleEvent}s, for a certain {@link Channel}
+ */
+
 @XmlRootElement(name = "schedule")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "scheduleType", propOrder = {
@@ -514,6 +518,12 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         return getScheduleEvents().iterator();
     }
 
+    /**
+     * Returns the with this Schedule associated {@link #getStart()} and {@link #getStop()} instances as a {@link Range} of {@link ZonedDateTime}'s.
+     *
+     * I.e. an interval that is closed at the start, and open at the end. For now evertyhing is assiociated with the time zone {@link #ZONE_ID} (i.e. CEST), since we
+     * haven't accounted an use case for something else yet, but otherwize we may imagin also the time zone to be a member of this schedule object.
+     */
     public Range<ZonedDateTime> asRange() {
         return Range.closedOpen(
             getStart().atZone(Schedule.ZONE_ID),
