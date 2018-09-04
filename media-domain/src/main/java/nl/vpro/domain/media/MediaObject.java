@@ -544,10 +544,13 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     // Sometimes I wonder why we use hibernate/jpa. Just plain SQL is so much more powerfull and easier to understand...
     private SubtitlesWorkflow subtitlesWorkflow = SubtitlesWorkflow.UNDEFINED;
 
-    @ElementCollection(fetch = FetchType.LAZY)
+    @ElementCollection(fetch = FetchType.EAGER)
+    // it is needed for every persist and display (because of hasSubitltes), so lets fetch it eager
+    // also we got odd NPE's from PersistentBag otherwise.
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
     @Setter
-    private List<AvailableSubtitles> availableSubtitles = null;
+    private List<AvailableSubtitles> availableSubtitles;
+
 
 
     @Embedded()
@@ -2724,7 +2727,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     @Override
     protected CRC32 calcCRC32() {
         CRC32 result = super.calcCRC32();
-        // Some fields not appearing in XML, but which _are_ relevant changes
+        // Some fields not appearing in XML, but which _are_ relevant changess
         if (streamingPlatformStatus != null) {
             streamingPlatformStatus.calcCRC32(result);
         }
