@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.bind;
 
+import java.util.Locale;
+
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -39,9 +41,7 @@ public class CountryWrapper {
     @XmlValue
     @JsonProperty("value")
     public String getName() {
-        return Locales.getCountryName(code,
-            Locales.NETHERLANDISH
-        );
+        return Locales.getCountryName(code, Locale.getDefault(Locale.Category.DISPLAY));
     }
 
     public void setName(String name) {
