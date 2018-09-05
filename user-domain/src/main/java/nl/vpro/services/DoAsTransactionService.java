@@ -16,7 +16,7 @@ import nl.vpro.domain.user.Trusted;
 public interface DoAsTransactionService extends TransactionService {
 
 
-    <T> T executeInNewTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable) throws Exception;
+    <T> T executeInNewTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable);
 
     <T, S> T executeInNewTransaction(@Nonnull Trusted user, S argument, @Nonnull  Function<S, T> function);
 
@@ -26,7 +26,7 @@ public interface DoAsTransactionService extends TransactionService {
     void executeInNewTransaction(@Nonnull String user, @Nonnull Runnable runnable);
 
 
-    <T> T executeInReadonlyTransaction(@Nonnull Trusted user, @Nonnull  Callable<T> callable) throws Exception;
+    <T> T executeInReadonlyTransaction(@Nonnull Trusted user, @Nonnull  Callable<T> callable);
 
     <T, S> T executeInReadonlyTransaction(@Nonnull Trusted user, S argument, @Nonnull  Function<S, T> function);
 
