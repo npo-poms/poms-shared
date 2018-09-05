@@ -500,9 +500,26 @@ public interface MediaTestDataBuilder<
 
     default T withScheduleEvents() {
         return scheduleEvents(
-            ScheduleEvent.builder().channel(Channel.NED3).start(Instant.ofEpochMilli(100)).duration(Duration.ofMillis(200)).repeat(Repeat.original()).build(),
-            ScheduleEvent.builder().channel(Channel.NED3).net(new Net("ZAPP")).start(Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000)).duration(Duration.ofMillis(50)).repeat(Repeat.rerun()).build(),
-            ScheduleEvent.builder().channel(Channel.HOLL).start(Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000)).duration(Duration.ofMillis(250)).rerun(true).build(),
+            ScheduleEvent.builder()
+                .channel(Channel.NED3)
+                .start(Instant.ofEpochMilli(100))
+                .duration(Duration.ofMillis(200))
+                .guideDay(LocalDate.of(1969, 12, 31))
+                .repeat(Repeat.original())
+                .build(),
+            ScheduleEvent.builder()
+                .channel(Channel.NED3)
+                .net(new Net("ZAPP"))
+                .start(Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000))
+                .duration(Duration.ofMillis(50))
+                .repeat(Repeat.rerun())
+                .build(),
+            ScheduleEvent.builder()
+                .channel(Channel.HOLL)
+                .start(Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000))
+                .duration(Duration.ofMillis(250))
+                .rerun(true)
+                .build(),
             ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000)).duration(Duration.ofMillis(200)).rerun(true).build()
         );
     }
@@ -640,6 +657,15 @@ public interface MediaTestDataBuilder<
     default T withEverything() {
         return withEverything(new AtomicLong(1), new AtomicLong(20000L));
     }
+    default T withEverything(Float version) {
+        T result = withEverything();
+        if (version != null && version < 5.9) {
+            for (ScheduleEvent se :result.getMediaBuilder().build().getScheduleEvents()) {
+                se.setGuideDate(null);
+            }
+        }
+        return result;
+    }
 
     default T withEverything(AtomicLong ids, AtomicLong mids) {
         return
@@ -685,7 +711,6 @@ public interface MediaTestDataBuilder<
                 .withWebsites()
                 .withWorkflow()
                 .withIds(ids)
-
         ;
     }
 
@@ -719,6 +744,19 @@ public interface MediaTestDataBuilder<
                 .withSegmentsWithEveryting()
                 .withFixedSegmentMids(mids);
 
+        }
+
+        @Override
+        public ProgramTestDataBuilder withEverything(Float version) {
+            ProgramTestDataBuilder result = MediaTestDataBuilder.super.withEverything(version);
+            if (version != null && version < 5.9) {
+                for (Segment s : result.getMediaBuilder().build().getSegments()) {
+                    for (ScheduleEvent se : s.getScheduleEvents()) {
+                        se.setGuideDate(null);
+                    }
+                }
+            }
+            return result;
         }
         @Override
         public MediaBuilder<MediaBuilder.ProgramBuilder, Program> getMediaBuilder() {
@@ -892,6 +930,7 @@ public interface MediaTestDataBuilder<
                 ;
 
         }
+
 
 
 
