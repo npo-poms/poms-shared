@@ -1,5 +1,7 @@
 package nl.vpro.services;
 
+import lombok.SneakyThrows;
+
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -11,11 +13,11 @@ import nl.vpro.domain.user.Trusted;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
  */
 public class MockDoAsTransactionService extends MockTransactionService implements DoAsTransactionService {
     @Override
-    public <T> T executeInNewTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable) throws Exception {
+    @SneakyThrows
+    public <T> T executeInNewTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable) {
         return callable.call();
     }
 
@@ -35,7 +37,8 @@ public class MockDoAsTransactionService extends MockTransactionService implement
     }
 
     @Override
-    public <T> T executeInReadonlyTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable) throws Exception {
+    @SneakyThrows
+    public <T> T executeInReadonlyTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable) {
         return callable.call();
 
     }
