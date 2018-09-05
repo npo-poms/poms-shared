@@ -63,7 +63,10 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
     }
 
     @Override
-    public void download(@Nonnull String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+    public void download(
+        @Nonnull String nepFile,
+        @Nonnull Supplier<OutputStream> outputStream,
+        @Nonnull Duration timeout, Function<FileMetadata, Proceed> descriptorConsumer) {
         log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, ftpHost, hostKey);
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
@@ -95,22 +98,25 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                 }
                 }
             );
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException  e) {
             log.error(e.getMessage(), e);
         }
 
     }
 
-    protected void checkAvailabilityAndConsume(
+
+    protected void checkAvailabilityAndConsume   (
         @Nonnull String nepFile,
         @Nullable Duration timeout,
-        @Nullable Function<FileMetadata, Boolean> descriptorConsumer,
-        @Nonnull  Consumer<RemoteFile> remoteFileConsumer) throws IOException  {
+        @Nullable Function<FileMetadata, Proceed> descriptorConsumer,
+        @Nonnull  Consumer<RemoteFile> remoteFileConsumer) throws IOException, InterruptedException  {
+        Duration retry = Duration.ofSeconds(10);
         try(final SSHClient sessionFactory = createClient();
             final SFTPClient sftp = sessionFactory.newSFTPClient()) {
             Instant start = Instant.now();
             long count = 0;
             RemoteFile handle = null;
+            RETRY:
             while (true) {
                 count++;
                 try {
@@ -124,9 +130,17 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                         .build();
                     if (descriptorConsumer != null) {
                         try {
-                            boolean proceed = descriptorConsumer.apply(descriptor);
-                            if (!proceed) {
-                                break;
+                            Proceed proceed = descriptorConsumer.apply(descriptor);
+                            switch(proceed) {
+                                case TRUE:
+                                    break RETRY;
+                                case RETRY:
+                                    Slf4jHelper.debugOrInfo(log, count >  6, "{}: need retry. Waiting {}", nepFile, retry);
+                                    Thread.sleep(retry.toMillis());
+                                    continue  RETRY;
+                                case FALSE:
+                                    return;
+
                             }
                         } catch (Exception e) {
                             throw new RuntimeException(e);
@@ -141,13 +155,8 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                     if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
                         throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
                     }
-                    Slf4jHelper.debugOrInfo(log, count >  6, "{}: {}. Waiting for retry", nepFile, sftpe.getMessage());
-                    try {
-                        Thread.sleep(Duration.ofSeconds(10).toMillis());
-                    } catch (InterruptedException ignored) {
-                        break;
-
-                    }
+                    Slf4jHelper.debugOrInfo(log, count >  6, "{}: {}. Waiting {} for retry", nepFile, sftpe.getMessage(), retry);
+                    Thread.sleep(retry.toMillis());
                 }
             }
             if (handle != null) {
