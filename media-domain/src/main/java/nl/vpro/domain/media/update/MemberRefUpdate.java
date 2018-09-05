@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 
@@ -17,16 +20,23 @@ import nl.vpro.domain.media.MemberRef;
 public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
 
     @XmlAttribute
+    @Getter
+    @Setter
     private Integer position;
 
     @XmlAttribute(required = true)
     Boolean highlighted = false;
 
     @XmlValue
+    @Getter
+    @Setter
     private String mediaRef;
 
     public static MemberRefUpdate create(MemberRef m) {
-        return new MemberRefUpdate(m.getNumber(), m.getMediaRef(), m.isHighlighted());
+        return new MemberRefUpdate(
+            m.getNumber(),
+            m.getMediaRef(),
+            m.isHighlighted());
     }
 
     public MemberRefUpdate() {
@@ -38,26 +48,15 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     }
 
     @lombok.Builder
-    public MemberRefUpdate(Integer position, String mediaRef, boolean highlighted) {
+    public MemberRefUpdate(
+        Integer position,
+        String mediaRef,
+        Boolean highlighted) {
         this(position, mediaRef);
         this.highlighted = highlighted;
     }
 
-    public Integer getPosition() {
-        return position;
-    }
 
-    public void setPosition(Integer position) {
-        this.position = position;
-    }
-
-    public String getMediaRef() {
-        return mediaRef;
-    }
-
-    public void setMediaRef(String mediaRef) {
-        this.mediaRef = mediaRef;
-    }
 
     public Boolean isHighlighted() {
         return highlighted;

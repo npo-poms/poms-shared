@@ -66,6 +66,10 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     @XmlJavaTypeAdapter(DurationXmlAdapter.class)
     private Duration duration;
 
+
+    /**
+     * @since 5.9
+     */
     @XmlElement(required = false)
     @XmlSchemaType(name = "date")
     @XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
