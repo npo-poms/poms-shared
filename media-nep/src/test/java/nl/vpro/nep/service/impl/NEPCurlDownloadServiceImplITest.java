@@ -37,7 +37,7 @@ public class NEPCurlDownloadServiceImplITest {
         impl.download(NEPSSHJDownloadServiceImplTest.fileName, () -> outputStream, Duration.ofSeconds(10), (fd) -> {
             log.info("{}", fd);
             size[0] = fd.getSize();
-            return true;}
+            return NEPDownloadService.Proceed.TRUE;}
             );
 
         log.info("Duration {} ({})", Duration.between(start, Instant.now()), FileSizeFormatter.DEFAULT.formatSpeed(size[0], start));
