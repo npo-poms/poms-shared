@@ -100,15 +100,19 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Nonnull String nepFile,
         @Nonnull Supplier<OutputStream> outputStream,
         @Nonnull Duration timeout,
-        Function<FileMetadata, Boolean> descriptorConsumer) {
+        Function<FileMetadata, Proceed> descriptorConsumer) {
+        int exitCode = 0;
+        String url = getUrl(nepFile);
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             try (OutputStream out = outputStream.get()){
                 if (out != null) {
-                    scp.execute(out, getUrl(nepFile), "/dev/stdout");
+                    exitCode = scp.execute(out, url, "/dev/stdout");
+                } else {
+                    log.warn("Can't download from null stream to " + url);
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             log.error(e.getMessage(), e);
         } catch (CommandExecutor.BrokenPipe bp) {
             log.debug(bp.getMessage());
@@ -116,6 +120,9 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         } catch (RuntimeException rte) {
             log.error(rte.getMessage(), rte);
             throw rte;
+        }
+        if (exitCode != 0) {
+            throw new CommandExecutor.ExitCodeException("SCP command  from " + url + " failed", exitCode);
         }
 
     }
@@ -128,7 +135,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     protected void checkAvailability(
         @Nonnull String nepFile,
         @Nullable Duration timeout,
-        @Nonnull Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
+        @Nonnull Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
     }
 

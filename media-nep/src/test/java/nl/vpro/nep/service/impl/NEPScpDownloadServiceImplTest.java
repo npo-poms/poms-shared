@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -42,16 +43,22 @@ public class NEPScpDownloadServiceImplTest {
 
         log.info("using {}", impl);
         FileOutputStream outputStream = new FileOutputStream("/tmp/test.mp4");
-        final long size[] = {-1L};
+        final AtomicLong size  = new AtomicLong(-1);
+        final AtomicLong count = new AtomicLong(0);
         impl.download(NEPSSHJDownloadServiceImplTest.fileName,
             () -> outputStream,
             Duration.ofSeconds(10), (fd) -> {
             log.info("{}", fd);
-            size[0] = fd.getSize();
-            return true;}
-            );
-
-        log.info("Duration {} ({})", Duration.between(start, Instant.now()), FileSizeFormatter.DEFAULT.formatSpeed(size[0], start));
+            size.set(fd.getSize());
+            if (count.incrementAndGet() < 5) {
+                log.info("Testing retry feature a few times");
+                return NEPDownloadService.Proceed.RETRY;
+            } else {
+                return NEPDownloadService.Proceed.TRUE;
+            }
+        }
+        );
+        log.info("Duration {} ({})", Duration.between(start, Instant.now()), FileSizeFormatter.DEFAULT.formatSpeed(size.get(), start));
 
 
     }
@@ -69,8 +76,9 @@ public class NEPScpDownloadServiceImplTest {
             Duration.ofSeconds(1), (fd) -> {
             log.info("{}", fd);
             size[0] = fd.getSize();
-            return true;}
-            );
+            return NEPDownloadService.Proceed.TRUE;
+        }
+        );
 
         log.info("Duration {} ({})", Duration.between(start, Instant.now()), FileSizeFormatter.DEFAULT.formatSpeed(size[0], start));
 
