@@ -1,32 +1,36 @@
 package nl.vpro.domain.subtitles;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.PeekingIterator;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.domain.Identifiable;
-import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.persistence.InstantToTimestampConverter;
-import nl.vpro.xml.bind.DurationXmlAdapter;
-import nl.vpro.xml.bind.InstantXmlAdapter;
-import nl.vpro.xml.bind.LocaleAdapter;
-import org.apache.commons.io.IOUtils;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.NoSuchElementException;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.apache.commons.io.IOUtils;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.PeekingIterator;
+
+import nl.vpro.domain.Identifiable;
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.persistence.InstantToTimestampConverter;
+import nl.vpro.xml.bind.DurationXmlAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
+import nl.vpro.xml.bind.LocaleAdapter;
 
 import static nl.vpro.i18n.Locales.DUTCH;
 
@@ -102,7 +106,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     @NotNull
     @Getter
     @Setter
-    private SubtitlesOwnerType owner;
+    private SubtitlesOwnerType owner = SubtitlesOwnerType.BROADCASTER;
 
     public Subtitles() {
     }
@@ -142,7 +146,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         } else {
             throw new IllegalArgumentException("Should either give iterator of cues, or content and format, or value and format");
         }
-        this.owner = owner;
+        this.owner = owner == null ? SubtitlesOwnerType.BROADCASTER : owner;
         this.language = language;
         this.cueCount = null;
         this.type = type == null ? SubtitlesType.CAPTION : type;
