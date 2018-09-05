@@ -107,7 +107,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     protected Net net;
 
     @Column(nullable = false, name = "guideDay", columnDefinition="Date")
-    @NotNull
     @Convert(converter = LocalDateToDateConverter.class)
     protected LocalDate guideDay;
 
@@ -418,8 +417,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlSchemaType(name = "date")
     @Deprecated
     public Date getGuideDay() {
-        LocalDate dateToUse = guideDay == null ? LocalDate.now(Schedule.ZONE_ID) : guideDay;
-        return Date.from(dateToUse.atStartOfDay(Schedule.ZONE_ID).toInstant());
+        LocalDate dateToUse = guideDay == null ? guideLocalDate(start) : guideDay;
+        return dateToUse == null ? null : Date.from(dateToUse.atStartOfDay(Schedule.ZONE_ID).toInstant());
     }
 
     /**
