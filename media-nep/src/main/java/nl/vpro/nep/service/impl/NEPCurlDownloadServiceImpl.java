@@ -13,6 +13,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -64,15 +65,19 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public void download(
-        @Nonnull  String nepFile, @Nonnull Supplier<OutputStream> outputStream, @Nonnull Duration timeout, Function<FileMetadata, Boolean> descriptorConsumer) {
+        @Nonnull  String nepFile,
+        @Nonnull Supplier<OutputStream> outputStream,
+        @Nonnull Duration timeout,
+        @Nullable  Function<FileMetadata, Proceed> descriptorConsumer) {
+        int exitCode = 0;
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             if (outputStream != null) {
                 try (OutputStream out = outputStream.get()) {
-                    curl.execute(out, getUrl(nepFile));
+                    exitCode = curl.execute(out, getUrl(nepFile));
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             log.error(e.getMessage(), e);
         } catch (CommandExecutor.BrokenPipe bp) {
             log.debug(bp.getMessage());
@@ -80,6 +85,9 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
         } catch (RuntimeException rte) {
             log.error(rte.getMessage(), rte);
             throw rte;
+        }
+        if (exitCode != 0) {
+            throw new CommandExecutor.ExitCodeException("Curl call failed", exitCode);
         }
 
     }
@@ -89,7 +97,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     }
 
 
-    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetadata, Boolean> descriptorConsumer) throws IOException {
+    protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
 
     }
