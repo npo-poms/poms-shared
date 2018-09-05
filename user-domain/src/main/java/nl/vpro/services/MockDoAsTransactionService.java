@@ -32,6 +32,7 @@ public class MockDoAsTransactionService extends MockTransactionService implement
     }
 
     @Override
+    @Deprecated
     public void executeInNewTransaction(@Nonnull String user, @Nonnull Runnable runnable) {
         runnable.run();
     }
