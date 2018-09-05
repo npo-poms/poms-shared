@@ -219,7 +219,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         Repeat repeat) {
         this.channel = channel;
         this.net = net;
-        this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;
+        this.guideDay = guideDay;
         this.start = start;
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
@@ -410,7 +410,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlSchemaType(name = "date")
     @Deprecated
     public Date getGuideDay() {
-        return guideDay == null ? null : Date.from(guideDay.atStartOfDay(Schedule.ZONE_ID).toInstant());
+        LocalDate dateToUse = guideDay == null ? LocalDate.now(Schedule.ZONE_ID) : guideDay;
+        return Date.from(dateToUse.atStartOfDay(Schedule.ZONE_ID).toInstant());
     }
 
     /**
