@@ -1,7 +1,26 @@
 package nl.vpro.domain.subtitles;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.PeekingIterator;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import nl.vpro.domain.Identifiable;
+import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
+import nl.vpro.persistence.InstantToTimestampConverter;
+import nl.vpro.xml.bind.DurationXmlAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
+import nl.vpro.xml.bind.LocaleAdapter;
+import org.apache.commons.io.IOUtils;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.xml.XMLConstants;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
@@ -9,30 +28,11 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 
-import javax.persistence.*;
-import javax.xml.XMLConstants;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.io.IOUtils;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.PeekingIterator;
-
-import nl.vpro.domain.Identifiable;
-import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.persistence.InstantToTimestampConverter;
-import nl.vpro.xml.bind.DurationXmlAdapter;
-import nl.vpro.xml.bind.InstantXmlAdapter;
-import nl.vpro.xml.bind.LocaleAdapter;
-
 import static nl.vpro.i18n.Locales.DUTCH;
 
 /**
  * Closed captions (subtitles for hearing impaired). We could also store translation subtitles in this.
- *
+ * <p>
  * The subtitles cues are represented as one String. For parsing this use {@link SubtitlesUtil#parse(nl.vpro.domain.subtitles.Subtitles, boolean)}
  *
  * @author Michiel Meeuwissen
@@ -41,9 +41,9 @@ import static nl.vpro.i18n.Locales.DUTCH;
 @XmlRootElement(name = "subtitles")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "subtitlesType", propOrder = {
-    "mid",
-    "offset",
-    "content"
+        "mid",
+        "offset",
+        "content"
 })
 @Slf4j
 @IdClass(SubtitlesId.class)
@@ -96,34 +96,86 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     @Embedded
     private SubtitlesContent content;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @XmlTransient
+    @NotNull
+    @Getter
+    @Setter
+    private SubtitlesOwnerType owner;
+
+    public Subtitles() {
+    }
+
+    @lombok.Builder(builderClassName = "Builder")
+    protected Subtitles(
+            String mid,
+            Duration offset,
+            Locale language,
+            SubtitlesFormat format,
+            String content,
+            InputStream value,
+            Iterator<Cue> cues,
+            SubtitlesType type,
+            SubtitlesOwnerType owner) {
+        this.mid = mid;
+        this.offset = offset;
+        if (content == null && value == null && format == null && cues != null) {
+            StringWriter writer = new StringWriter();
+            try {
+                WEBVTTandSRT.formatWEBVTT(cues, writer);
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+            this.content = new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString());
+        } else if (content != null && format != null && cues == null && value == null) {
+            this.content = new SubtitlesContent(format, content);
+        } else if (value != null && format != null && cues == null && content == null) {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            try {
+                int copy = IOUtils.copy(value, bytes);
+                log.debug("Copied {} bytes", copy);
+                this.content = SubtitlesContent.builder().content(bytes.toByteArray()).format(format).build();
+            } catch (IOException e) {
+                log.error(e.getMessage(), e);
+            }
+        } else {
+            throw new IllegalArgumentException("Should either give iterator of cues, or content and format, or value and format");
+        }
+        this.owner = owner;
+        this.language = language;
+        this.cueCount = null;
+        this.type = type == null ? SubtitlesType.CAPTION : type;
+    }
+
     public static Subtitles tt888Caption(String mid, Duration offset, String content) {
         return builder()
-            .mid(mid)
-            .offset(offset)
-            .language(DUTCH)
-            .format(SubtitlesFormat.TT888)
-            .content(content)
-            .type(SubtitlesType.CAPTION)
-            .build();
+                .mid(mid)
+                .offset(offset)
+                .language(DUTCH)
+                .format(SubtitlesFormat.TT888)
+                .content(content)
+                .type(SubtitlesType.CAPTION)
+                .owner(SubtitlesOwnerType.AUTHORITY)
+                .build();
 
     }
 
     public static Subtitles webvtt(String mid, Duration offset, Locale language, String content) {
         return builder()
-            .mid(mid)
-            .offset(offset)
-            .language(language)
-            .format(SubtitlesFormat.WEBVTT)
-            .content(content)
-            .build();
+                .mid(mid)
+                .offset(offset)
+                .language(language)
+                .format(SubtitlesFormat.WEBVTT)
+                .content(content)
+                .build();
     }
 
     public static Subtitles webvttTranslation(String mid, Duration offset, Locale language, String content) {
-        Subtitles subtitles  = webvtt(mid, offset, language, content);
+        Subtitles subtitles = webvtt(mid, offset, language, content);
         subtitles.setType(SubtitlesType.TRANSLATION);
         return subtitles;
     }
-
 
     public static Subtitles from(Iterator<StandaloneCue> cueIterator) {
         PeekingIterator<StandaloneCue> peeking = Iterators.peekingIterator(cueIterator);
@@ -164,7 +216,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
             .build();
     }
 
-
     public static Subtitles from(SubtitlesId sid, Iterator<Cue> cues) {
         StringWriter writer = new StringWriter();
         try {
@@ -179,47 +230,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
             .format(SubtitlesFormat.WEBVTT)
             .content(writer.toString())
             .build();
-    }
-
-    public Subtitles() {}
-
-    @lombok.Builder(builderClassName = "Builder")
-    protected Subtitles(
-        String mid,
-        Duration offset,
-        Locale language,
-        SubtitlesFormat format,
-        String content,
-        InputStream value,
-        Iterator<Cue> cues,
-        SubtitlesType type) {
-        this.mid = mid;
-        this.offset = offset;
-        if (content == null && value == null && format == null && cues != null) {
-            StringWriter writer = new StringWriter();
-            try {
-                WEBVTTandSRT.formatWEBVTT(cues, writer);
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-            }
-            this.content = new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString());
-        } else if (content != null && format != null && cues == null && value == null) {
-            this.content = new SubtitlesContent(format, content);
-        } else  if (value != null && format != null && cues == null && content == null){
-            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-            try {
-                int copy = IOUtils.copy(value, bytes);
-                log.debug("Copied {} bytes", copy);
-                this.content = SubtitlesContent.builder().content(bytes.toByteArray()).format(format).build();
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-            }
-        } else {
-            throw new IllegalArgumentException("Should either give iterator of cues, or content and format, or value and format");
-        }
-        this.language = language;
-        this.cueCount = null;
-        this.type = type == null ? SubtitlesType.CAPTION : type;
     }
 
     public Instant getCreationDate() {
@@ -313,11 +323,11 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
 
     public SubtitlesMetadata getMetadata() {
         return SubtitlesMetadata.builder()
-            .cueCount(getCueCount())
-            .offset(getOffset())
-            .id(getId())
-            .build()
-            ;
+                .cueCount(getCueCount())
+                .offset(getOffset())
+                .id(getId())
+                .build()
+                ;
     }
 
     @Override
@@ -332,16 +342,16 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
 
     @Override
     public boolean equals(Object o) {
-        if(this == o) {
+        if (this == o) {
             return true;
         }
-        if(o == null || getClass() != o.getClass()) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
 
-        Subtitles subtitles = (Subtitles)o;
+        Subtitles subtitles = (Subtitles) o;
 
-        if(mid != null ? !mid.equals(subtitles.mid) : subtitles.mid != null) {
+        if (mid != null ? !mid.equals(subtitles.mid) : subtitles.mid != null) {
             return false;
         }
 
@@ -352,7 +362,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     public int hashCode() {
         return mid != null ? mid.hashCode() : 0;
     }
-
 
 
 }
