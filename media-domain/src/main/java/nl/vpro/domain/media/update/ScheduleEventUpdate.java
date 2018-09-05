@@ -98,7 +98,8 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
 
     @lombok.Builder(builderClassName = "Builder")
-    private ScheduleEventUpdate(Channel channel, Instant start, LocalDate guideDay, Duration  duration, ProgramUpdate media) {
+    private ScheduleEventUpdate(
+        Channel channel, Instant start, LocalDate guideDay, Duration  duration, ProgramUpdate media) {
         this.channel = channel;
         this.start = start;
         this.guideDay = guideDay;

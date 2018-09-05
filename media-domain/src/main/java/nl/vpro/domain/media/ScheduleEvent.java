@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.Valid;
@@ -199,7 +201,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this(channel, net, guideLocalDate(start), start, duration, media);
     }
 
-    public ScheduleEvent(Channel channel, Net net, LocalDate guideDay, Instant start, Duration duration, MediaObject media) {
+    public ScheduleEvent(
+        @Nonnull  Channel channel,
+        @Nullable  Net net,
+        @Nonnull  LocalDate guideDay,
+        @Nonnull  Instant start,
+        @Nonnull Duration duration,
+        @Nonnull  MediaObject media) {
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay;
@@ -219,7 +227,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         Repeat repeat) {
         this.channel = channel;
         this.net = net;
-        this.guideDay = guideDay;
+        this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;
         this.start = start;
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
