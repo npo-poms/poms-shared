@@ -15,7 +15,9 @@ import java.time.Duration;
 public class SubtitlesMetadata {
 
     private SubtitlesId id;
+    private SubtitlesOwnerType owner;
     private Duration offset;
     private Integer cueCount;
+
 
 }
