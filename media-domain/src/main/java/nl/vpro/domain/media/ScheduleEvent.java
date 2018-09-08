@@ -16,6 +16,7 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -202,28 +203,23 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     public ScheduleEvent(
         @Nonnull  Channel channel,
-        @Nullable  Net net,
-        @Nonnull  LocalDate guideDay,
+        @Nullable Net net,
+        @Nullable LocalDate guideDay,
         @Nonnull  Instant start,
-        @Nonnull Duration duration,
-        @Nonnull  MediaObject media) {
-        this.channel = channel;
-        this.net = net;
-        this.guideDay = guideDay;
-        this.start = start;
-        this.duration = duration;
-        setParent(media);
+        @Nonnull  Duration duration,
+        @Nullable MediaObject media) {
+        this(channel, net, guideDay, start, duration, media, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
     private ScheduleEvent(
-        Channel channel,
-        Net net,
-        LocalDate guideDay,
-        Instant start,
-        Duration duration,
-        MediaObject media,
-        Repeat repeat) {
+        @Nonnull Channel channel,
+        @Null  Net net,
+        @Nullable  LocalDate guideDay,
+        @Nonnull  Instant start,
+        @Nonnull  Duration duration,
+        @Nullable MediaObject media,
+        @Nullable  Repeat repeat) {
         this.channel = channel;
         this.net = net;
         this.guideDay = guideDay == null ? guideLocalDate(start) : guideDay;
