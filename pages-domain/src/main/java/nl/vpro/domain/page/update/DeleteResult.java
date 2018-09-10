@@ -1,8 +1,10 @@
 package nl.vpro.domain.page.update;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 import javax.xml.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlRootElement(name = "deleteresult")
 @XmlAccessorType(XmlAccessType.FIELD)
 @Getter
+@Slf4j
 public class DeleteResult {
     @XmlTransient
     final CompletableFuture<?> future;
@@ -46,6 +49,22 @@ public class DeleteResult {
         this.notallowedCount = notallowedCount;
         this.future = CompletableFuture.completedFuture(null);
 
+    }
+
+    public DeleteResult and(DeleteResult result) {
+
+        return DeleteResult.builder()
+            .count(this.count + result.getCount())
+            .notallowedCount(this.notallowedCount+ result.getNotallowedCount())
+            .future(this.future.thenApply((v) -> {
+                try {
+                    return result.getFuture().get();
+                } catch (ExecutionException | InterruptedException iae) {
+                    log.error(iae.getMessage());
+                    return null;
+                }
+            }))
+            .build();
     }
 }
 
