@@ -34,7 +34,10 @@ public class DeleteResult {
     }
 
     @lombok.Builder
-    public DeleteResult( CompletableFuture<?> future, Integer count, Integer notallowedCount) {
+    public DeleteResult(
+        CompletableFuture<?> future,
+        Integer count,
+        Integer notallowedCount) {
         this.future = future;
         this.count = count == null ? 1 : count;
         this.notallowedCount = notallowedCount == null ? 0 : notallowedCount;

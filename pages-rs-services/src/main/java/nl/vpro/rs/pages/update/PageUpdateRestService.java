@@ -32,16 +32,16 @@ public interface PageUpdateRestService {
     );
 
     @DELETE
+    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("")
-    @Produces({"application/json", "application/xml"})
     Response delete(
         @QueryParam("url") @NotNull String url,
         @QueryParam("batch")  Boolean batch,
         @QueryParam("max") Integer max
-        );
+    );
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("")
     PageUpdate load(@QueryParam("url") @NotNull String url);
 
