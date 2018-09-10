@@ -7,7 +7,9 @@ import java.util.concurrent.ExecutionException;
 
 import org.junit.Test;
 
+import nl.vpro.logging.simple.ChainedSimpleLogger;
 import nl.vpro.logging.simple.SimpleLogger;
+import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.logging.simple.StringBuilderSimpleLogger;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -49,7 +51,7 @@ public class DeleteResultTest {
     @Test
     public void and() throws ExecutionException, InterruptedException {
         StringBuilder sb = new StringBuilder();
-        SimpleLogger logger = StringBuilderSimpleLogger.builder().stringBuilder(sb).build().chain(SimpleLogger.slfj4(log));
+        SimpleLogger logger = new ChainedSimpleLogger(StringBuilderSimpleLogger.builder().stringBuilder(sb).build(), new Slf4jSimpleLogger(log));
         DeleteResult r1 = DeleteResult
             .builder()
             .future(CompletableFuture.supplyAsync(() -> {
