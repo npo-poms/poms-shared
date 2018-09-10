@@ -1,6 +1,7 @@
 package nl.vpro.rs.media;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.time.Duration;
 import java.time.Instant;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -448,22 +450,23 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("upload/{mid:.*?}{fileName: (/.*?\\.(mp4|mxf))?}")
+    @Path("upload/{mid:.*?}{fileName: (/.*?)?}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(FILE_NAME) final String fileName,
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
         @QueryParam("replace") @DefaultValue("false") Boolean replace,
-        @Context HttpServletRequest request,
+        InputStream inputStream,
+        @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
+        @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
         @Context HttpServletResponse response) throws IOException;
 
 
 
-
-
     @POST
-    @Path("upload/{mid:.*?}/{encryption}/{priority}{fileName: (/.*?\\.(mp4|mxf))?}")
+    @Path("upload/{mid:.*?}/{encryption}/{priority}{fileName: (/.*?)?}")
+
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
     Response upload(
         @Encoded @PathParam(MID) final String mid,
@@ -473,7 +476,9 @@ public interface MediaBackendRestService {
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
         @QueryParam("replace") @DefaultValue("false") Boolean replace,
         @QueryParam(ERRORS) String errors,
-        @Context HttpServletRequest request,
+        InputStream inputStream,
+        @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
+        @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
         @Context HttpServletResponse response) throws IOException;
 
 
