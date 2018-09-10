@@ -450,35 +450,35 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("upload/{mid:.*?}{fileName: (/.*?)?}")
+    @Path("upload/{mid:[^/]+?}{fileName: (/[^/]+?)?}")
+
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(FILE_NAME) final String fileName,
-        @QueryParam(LOG) @DefaultValue("false") Boolean log,
-        @QueryParam("replace") @DefaultValue("false") Boolean replace,
         InputStream inputStream,
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("replace") @DefaultValue("false") Boolean replace,
         @Context HttpServletResponse response) throws IOException;
 
 
 
     @POST
-    @Path("upload/{mid:.*?}/{encryption}/{priority}{fileName: (/.*?)?}")
-
+    @Path("upload/{mid:[^/]+?}/{encryption: ([A-Z]+?)}/{priority: ([A-Z]+?)}{fileName: (/.*?)?}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
-    Response upload(
+    Response uploadAndTranscode(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
         @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
         @Encoded @PathParam(FILE_NAME) final String fileName,
-        @QueryParam(LOG) @DefaultValue("false") Boolean log,
-        @QueryParam("replace") @DefaultValue("false") Boolean replace,
-        @QueryParam(ERRORS) String errors,
         InputStream inputStream,
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("replace") @DefaultValue("false") Boolean replace,
+        @QueryParam(ERRORS) String errors,
         @Context HttpServletResponse response) throws IOException;
 
 
