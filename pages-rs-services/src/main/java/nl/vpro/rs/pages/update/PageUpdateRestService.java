@@ -37,7 +37,8 @@ public interface PageUpdateRestService {
     Response delete(
         @QueryParam("url") @NotNull String url,
         @QueryParam("batch")  Boolean batch,
-        @QueryParam("max") Integer max
+        @QueryParam("max") Integer max,
+        @QueryParam("wait") Boolean wait
     );
 
     @GET
