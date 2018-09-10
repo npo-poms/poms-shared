@@ -450,8 +450,7 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("upload/{mid:[^/]+?}{fileName: (/[^/]+?)?}")
-
+    @Path("upload/{mid}/{fileName}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
@@ -466,9 +465,9 @@ public interface MediaBackendRestService {
 
 
     @POST
-    @Path("upload/{mid:[^/]+?}/{encryption: ([A-Z]+?)}/{priority: ([A-Z]+?)}{fileName: (/.*?)?}")
+    @Path("upload/{mid}/{encryption}/{priority}/{fileName}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
-    Response uploadAndTranscode(
+    Response suploadAndTranscode(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
         @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
