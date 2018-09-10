@@ -456,11 +456,11 @@ public interface MediaBackendRestService {
     TranscodeRequest upload(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(FILE_NAME) final String fileName,
-        @QueryParam(LOG) @DefaultValue("false") Boolean log,
-        @QueryParam("replace") @DefaultValue("false") Boolean replace,
         InputStream inputStream,
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("replace") @DefaultValue("false") Boolean replace,
         @Context HttpServletResponse response) throws IOException;
 
 
@@ -473,12 +473,12 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
         @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
         @Encoded @PathParam(FILE_NAME) final String fileName,
-        @QueryParam(LOG) @DefaultValue("false") Boolean log,
-        @QueryParam("replace") @DefaultValue("false") Boolean replace,
-        @QueryParam(ERRORS) String errors,
         InputStream inputStream,
         @HeaderParam(HttpHeaders.CONTENT_TYPE) String contentType,
         @HeaderParam(HttpHeaders.CONTENT_LENGTH) Long contentLength,
+        @QueryParam(LOG) @DefaultValue("false") Boolean log,
+        @QueryParam("replace") @DefaultValue("false") Boolean replace,
+        @QueryParam(ERRORS) String errors,
         @Context HttpServletResponse response) throws IOException;
 
 
