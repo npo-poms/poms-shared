@@ -467,7 +467,7 @@ public interface MediaBackendRestService {
     @POST
     @Path("upload/{mid}/{encryption}/{priority}/{fileName}")
     @Consumes({MediaType.APPLICATION_OCTET_STREAM, "video/*", "application/mxf"})
-    Response suploadAndTranscode(
+    Response uploadAndTranscode(
         @Encoded @PathParam(MID) final String mid,
         @Encoded @PathParam(ENCRYPTION) final Encryption  encryption,
         @Encoded @PathParam(PRIORITY) final TranscodeRequest.Priority priority,
