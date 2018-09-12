@@ -66,5 +66,10 @@ public class DeleteResult {
             }))
             .build();
     }
+
+    @Override
+    public String toString() {
+        return "deleted successfull: " + count + (notallowedCount > 0 ? ", not allowed" + notallowedCount : "");
+    }
 }
 
