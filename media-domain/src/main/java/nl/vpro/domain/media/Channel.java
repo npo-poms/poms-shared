@@ -1,20 +1,18 @@
 package nl.vpro.domain.media;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import nl.vpro.domain.Displayable;
+import nl.vpro.domain.XmlValued;
+import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
-
-import org.apache.commons.lang3.StringUtils;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import nl.vpro.domain.Displayable;
-import nl.vpro.domain.XmlValued;
-import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static nl.vpro.domain.media.AVType.AUDIO;
 import static nl.vpro.domain.media.AVType.VIDEO;
@@ -924,7 +922,7 @@ public enum Channel implements Displayable, XmlValued {
     CULT {
         @Override
         public String toString() {
-            return "NPO Cultura";
+            return "NPO 2 extra";
         }
 
         @Override
