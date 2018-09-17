@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -60,7 +61,7 @@ public class Changes<T> implements AutoCloseable, Iterable<Change<T>> {
     }
 
     public Optional<Instant> getETA() {
-        return Optional.ofNullable(this.eta.get());
+        return Optional.ofNullable(this.eta.get()).map((i) -> i.truncatedTo(ChronoUnit.MINUTES));
     }
 
     @Override
