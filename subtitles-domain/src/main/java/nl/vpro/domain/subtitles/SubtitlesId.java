@@ -1,5 +1,8 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -23,13 +26,19 @@ import static nl.vpro.i18n.Locales.DUTCH;
 public class SubtitlesId implements Serializable {
 
     @XmlAttribute
+    @Getter
+    @Setter
     private String mid;
 
     @XmlAttribute
+    @Getter
+    @Setter
     private SubtitlesType type = SubtitlesType.CAPTION;
 
     @XmlAttribute(name = "lang", namespace = XMLConstants.XML_NS_URI)
     @XmlJavaTypeAdapter(LocaleAdapter.class)
+    @Getter
+    @Setter
     private Locale language;
 
     public static SubtitlesId tt888Caption(String mid) {
@@ -47,30 +56,6 @@ public class SubtitlesId implements Serializable {
         if (type != null) {
             this.type = type;
         }
-    }
-
-    public String getMid() {
-        return mid;
-    }
-
-    public void setMid(String mid) {
-        this.mid = mid;
-    }
-
-    public SubtitlesType getType() {
-        return type;
-    }
-
-    public void setType(SubtitlesType type) {
-        this.type = type;
-    }
-
-    public Locale getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Locale language) {
-        this.language = language;
     }
 
     @Override
