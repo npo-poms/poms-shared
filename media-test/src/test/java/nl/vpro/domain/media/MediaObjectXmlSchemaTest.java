@@ -14,7 +14,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Locale;
 
 import javax.xml.bind.JAXB;
@@ -343,10 +342,11 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testGenres() {
-        Program program = program().withGenres().build();
+    public void testGenres() throws IOException, SAXException {
+        Program program = program().withGenres().withFixedDates().build();
 
-        Program result = JAXBTestUtil.roundTrip(program, "<genre id=\"3.0.1.7.21\">\n" +
+        Program result = JAXBTestUtil.roundTripAndSimilar(program, "<program embeddable=\"true\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+            "    <genre id=\"3.0.1.7.21\">\n" +
             "        <term>Informatief</term>\n" +
             "        <term>Nieuws/actualiteiten</term>\n" +
             "    </genre>\n" +
@@ -354,7 +354,12 @@ public class MediaObjectXmlSchemaTest {
             "        <term>Documentaire</term>\n" +
             "        <term>Natuur</term>\n" +
             "    </genre>\n" +
-            "    <credits/>");
+            "    <credits/>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>");
 
         assertThat(result.getGenres()).hasSize(2);
     }
@@ -621,7 +626,7 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testSchedule() throws Exception {
 
-        Schedule schedule = new Schedule(Channel.NED1, new Date(0), new Date(350 + 8 * 24 * 3600 * 1000));
+        Schedule schedule = new Schedule(Channel.NED1, Instant.ofEpochMilli(0), Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000));
         Program program = program().id(100L).lean().withScheduleEvents().build();
         schedule.addScheduleEventsFromMedia(Arrays.asList(program));
 
@@ -664,7 +669,7 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testScheduleWithFilter() throws Exception {
 
-        Schedule schedule = new Schedule(Channel.NED3, new Date(0), new Date(350 + 8 * 24 * 3600 * 1000));
+        Schedule schedule = new Schedule(Channel.NED3, Instant.ofEpochMilli(0), Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000));
         schedule.setFiltered(true);
         Program program = program().id(100L).lean().withScheduleEvents().build();
         schedule.addScheduleEventsFromMedia(Arrays.asList(program));
