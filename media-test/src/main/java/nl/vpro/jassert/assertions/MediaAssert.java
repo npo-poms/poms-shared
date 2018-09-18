@@ -168,7 +168,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
         Set<Pair<String, TextualType>> titles = new TreeSet<>();
         for(Title t : actual.getTitles()) {
-            titles.add(Pair.of(t.getTitle(), t.getType()));
+            titles.add(Pair.of(t.get(), t.getType()));
         }
 
         Pair<String, TextualType> expected = Pair.of(title, type);
@@ -189,7 +189,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
         Set<Pair<String, OwnerType>> titles = new TreeSet<>();
         for(Title t : actual.getTitles()) {
-            titles.add(Pair.of(t.getTitle(), t.getOwner()));
+            titles.add(Pair.of(t.get(), t.getOwner()));
         }
 
         Pair<String, OwnerType> expected = Pair.of(title, type);
@@ -264,7 +264,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
         Set<Pair<String, TextualType>> Descriptions = new TreeSet<>();
         for(Description t : actual.getDescriptions()) {
-            Descriptions.add(Pair.of(t.getDescription(), t.getType()));
+            Descriptions.add(Pair.of(t.get(), t.getType()));
         }
 
         Pair<String, TextualType> expected = Pair.of(Description, type);
@@ -284,7 +284,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
         Set<Pair<String, OwnerType>> Descriptions = new TreeSet<>();
         for(Description t : actual.getDescriptions()) {
-            Descriptions.add(Pair.of(t.getDescription(), t.getOwner()));
+            Descriptions.add(Pair.of(t.get(), t.getOwner()));
         }
 
         Pair<String, OwnerType> expected = Pair.of(Description, type);
