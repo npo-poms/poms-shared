@@ -126,12 +126,12 @@ public class MetaData_v3_2 {
     }
     protected static String getDescription(MediaObject media, TextualType type) {
         Description description = media.findDescription(type);
-        return description != null ? description.getDescription() : null;
+        return description != null ? description.get() : null;
     }
 
     protected static String getTitle(MediaObject media, TextualType type) {
         Title description = media.findTitle(type);
-        return description != null ? description.getTitle() : null;
+        return description != null ? description.get() : null;
     }
     protected static String firstOrNull(Collection<?> col) {
         if (col == null || col.isEmpty()) return null;
