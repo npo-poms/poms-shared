@@ -135,7 +135,7 @@ public class PromoEventConverterTest {
         assertEquals(1000 * 4, update.getDuration().toMillis());
 
         assertEquals("VPRO", update.getBroadcasters().get(0));
-        assertEquals("Trailer-titel", update.getTitles().first().getTitle());
+        assertEquals("Trailer-titel", update.getTitles().first().get());
         assertEquals(TextualType.MAIN, update.getTitles().first().getType());
 
         assertEquals("crid://parkpost/1P1302AK_BOEKEN4", update.getCrids().get(0));
