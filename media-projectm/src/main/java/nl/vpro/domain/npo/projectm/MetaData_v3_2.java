@@ -26,6 +26,7 @@ import nl.vpro.xml.util.XmlUtils;
  * @author Michiel Meeuwissen
  * @since 3.0
  */
+@SuppressWarnings("Duplicates")
 @Slf4j
 public class MetaData_v3_2 {
 
@@ -203,7 +204,7 @@ public class MetaData_v3_2 {
 
     }
 
-    protected static XMLGregorianCalendar getCalendar(Instant date) throws DatatypeConfigurationException {
+    protected static XMLGregorianCalendar getCalendar(Instant date) {
         return XmlUtils.toXml(Schedule.ZONE_ID, date);
     }
 
