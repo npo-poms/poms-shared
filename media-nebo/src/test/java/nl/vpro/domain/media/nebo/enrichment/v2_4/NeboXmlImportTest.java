@@ -30,6 +30,7 @@ import static org.junit.Assert.assertNotNull;
 /**
  * @author Michiel Meeuwissen
  */
+@SuppressWarnings("deprecation")
 public class NeboXmlImportTest {
 
 
@@ -132,8 +133,8 @@ public class NeboXmlImportTest {
             newProgram.getSegments().first().getStart()
         );
         assertEquals(
-            program.getSegments().first().getDurationAsDate(),
-            newProgram.getSegments().first().getDurationAsDate()
+            program.getSegments().first().getDuration().get(),
+            newProgram.getSegments().first().getDuration().get()
         );
         assertEquals(
             program.getSegments().first().getMainTitle(),
