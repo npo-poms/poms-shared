@@ -27,6 +27,7 @@ import nl.vpro.xml.util.XmlUtils;
  * @since 3.0
  */
 @Slf4j
+@SuppressWarnings("Duplicates")
 public class MetaData_v2_1 {
 
     protected static final String imageFormat = "s720";
@@ -126,12 +127,12 @@ public class MetaData_v2_1 {
     }
     protected static String getDescription(MediaObject media, TextualType type) {
         Description description = media.findDescription(type);
-        return description != null ? description.getDescription() : null;
+        return description != null ? description.get() : null;
     }
 
     protected static String getTitle(MediaObject media, TextualType type) {
         Title description = media.findTitle(type);
-        return description != null ? description.getTitle() : null;
+        return description != null ? description.get() : null;
     }
     protected static String firstOrNull(Collection<?> col) {
         if (col == null || col.isEmpty()) return null;
@@ -211,7 +212,7 @@ public class MetaData_v2_1 {
 
     }
 
-    protected static XMLGregorianCalendar getCalendar(Instant date) throws DatatypeConfigurationException {
+    protected static XMLGregorianCalendar getCalendar(Instant date) {
         return XmlUtils.toXml(Schedule.ZONE_ID, date);
     }
 
