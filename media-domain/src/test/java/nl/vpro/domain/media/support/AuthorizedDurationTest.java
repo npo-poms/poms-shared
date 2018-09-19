@@ -1,6 +1,7 @@
 package nl.vpro.domain.media.support;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
@@ -18,15 +19,23 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class AuthorizedDurationTest {
 
+    @SuppressWarnings("deprecation")
     @Test
-    public void testGetDuration() throws Exception {
+    public void testGetDurationDeprecated() {
         AuthorizedDuration duration = new AuthorizedDuration(new Date(100 * 1000));
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
 
     }
 
     @Test
-    public void testOf() throws Exception {
+    public void testGetDuration() {
+        AuthorizedDuration duration = new AuthorizedDuration(Duration.ofMillis(100 * 1000));
+        assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
+
+    }
+
+    @Test
+    public void testOf() {
         AuthorizedDuration duration = AuthorizedDuration.of(100, ChronoUnit.SECONDS);
         assertThat(duration.get().get(ChronoUnit.SECONDS)).isEqualTo(100);
     }
@@ -41,7 +50,7 @@ public class AuthorizedDurationTest {
 
 
     @Test
-    public void testUnits() throws Exception {
+    public void testUnits() {
         AuthorizedDuration duration = AuthorizedDuration.ofMillis(1000);
         assertThat(duration.getUnits()).containsExactly(ChronoUnit.SECONDS, ChronoUnit.NANOS);
     }
