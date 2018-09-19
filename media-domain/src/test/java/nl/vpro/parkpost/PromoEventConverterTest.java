@@ -9,7 +9,6 @@ import javax.xml.bind.JAXB;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.Relation;
 import nl.vpro.domain.media.RelationDefinition;
@@ -18,7 +17,6 @@ import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.parkpost.promo.bind.PromoEvent;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -30,8 +28,6 @@ public class PromoEventConverterTest {
     private PromoEvent event;
 
     private String locationBaseUrl = "http://adaptive.npostreaming.nl/u/npo/promo/";
-
-    private Location location;
 
     @Before
     public void setUp() {
