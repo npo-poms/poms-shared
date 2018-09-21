@@ -4,11 +4,11 @@
  */
 package nl.vpro.domain.media.support;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.regex.Matcher;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * See https://jira.vpro.nl/browse/MSE-1212
@@ -16,9 +16,9 @@ import org.slf4j.LoggerFactory;
  * @author Roelof Jan Koekoek
  * @since 1.6
  */
+@Slf4j
 public class Images {
-    private static final Logger LOG = LoggerFactory.getLogger(Images.class);
-
+    
     public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
 
     private static String imageHost;
@@ -44,7 +44,7 @@ public class Images {
     public static String getImageLocation(Image image, String fileExtension, String... conversions) {
         String imageHost = getImageHost();
         if (imageHost == null) {
-            LOG.warn("Property: {} not set. Can't determine a base url to an image host, producing data with empty image URLs", IMAGE_SERVER_BASE_URL_PROPERTY);
+            log.warn("Property: {} not set. Can't determine a base url to an image host, producing data with empty image URLs", IMAGE_SERVER_BASE_URL_PROPERTY);
             return null;
         }
 
