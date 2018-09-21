@@ -39,7 +39,7 @@ public class ApiMappings extends Mappings {
     final URI pomsLocation;
 
     @Inject
-    public ApiMappings(@Named("${poms.location}") String pomsLocation) {
+    public ApiMappings(@Named("${poms.baseUrl}") String pomsLocation) {
         this.pomsLocation = pomsLocation == null ? URI.create("https://poms.omroep.nl/") : URI.create(pomsLocation);
         String scheme = this.pomsLocation.getScheme();
         generateDocumentation = true;
