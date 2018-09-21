@@ -106,7 +106,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     @NotNull
     @Getter
     @Setter
-    @lombok.Builder.Default
     private SubtitlesOwnerType owner = SubtitlesOwnerType.BROADCASTER;
 
     public Subtitles() {
