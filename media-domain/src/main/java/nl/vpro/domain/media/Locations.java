@@ -146,6 +146,15 @@ public class Locations {
         Location authorityLocation = mediaObject.findLocation(locationUrl, OwnerType.AUTHORITY);
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
 
+        // What if only owner is wrong?
+        if (authorityLocation == null) {
+            authorityLocation = mediaObject.findLocation(locationUrl);
+            if (authorityLocation != null) {
+                log.warn("Location {} had wrong owner. Setting it to authority now", authorityLocation);
+                authorityLocation.setOwner(OwnerType.AUTHORITY);
+            }
+        }
+
         if (authorityLocation == null) {
             // no, just check platform then.
             authorityLocation = getAuthorityLocationsForPlatform(mediaObject, platform).stream()
@@ -160,7 +169,7 @@ public class Locations {
                 log.debug("Not created new streaming platform location {} {} for mediaObject {}", locationUrl, platform, mediaObject.getMid());
                 return null;
             } else {
-                log.info("creating new streaming platform location {} {} for mediaObject {} because {}", locationUrl, platform, mediaObject.getMid(), reason);
+                log.info("Creating new streaming platform location {} {} for mediaObject {} because {}", locationUrl, platform, mediaObject.getMid(), reason);
                 Embargos.copy(existingPredictionForPlatform, authorityLocation);
             }
         } else {
@@ -171,6 +180,7 @@ public class Locations {
                 log.info("Location {} {} for mediaObject {} already exists", locationUrl, platform, mediaObject.getMid());
             }
             authorityLocation.setPlatform(platform);
+            authorityLocation.setOwner(OwnerType.AUTHORITY);
         }
         return authorityLocation;
 
