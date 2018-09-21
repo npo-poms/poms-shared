@@ -24,7 +24,7 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     @Setter
     private Integer position;
 
-    @XmlAttribute(required = true)
+    @XmlAttribute(required = false)
     Boolean highlighted = false;
 
     @XmlValue
