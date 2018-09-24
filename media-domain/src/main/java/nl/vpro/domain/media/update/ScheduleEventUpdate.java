@@ -6,14 +6,13 @@ package nl.vpro.domain.media.update;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.function.BiFunction;
 
 import javax.annotation.Nonnull;
@@ -48,6 +47,7 @@ import nl.vpro.xml.bind.LocalDateXmlAdapter;
         })
 @Getter
 @Setter
+@Slf4j
 public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, TextualObjectUpdate<TitleUpdate, DescriptionUpdate, ScheduleEventUpdate>, Child<MediaUpdate<?>> {
 
     @XmlAttribute(required = true)
@@ -99,7 +99,11 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     @lombok.Builder(builderClassName = "Builder")
     private ScheduleEventUpdate(
-        Channel channel, Instant start, LocalDate guideDay, Duration  duration, ProgramUpdate media) {
+        @Nonnull Channel channel,
+        @Nonnull Instant start,
+        LocalDate guideDay,
+        Duration  duration,
+        ProgramUpdate media) {
         this.channel = channel;
         this.start = start;
         this.guideDay = guideDay;
@@ -136,6 +140,10 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     }
 
     public ScheduleEvent toScheduleEvent(OwnerType ownerType) {
+        if (channel == null) {
+            log.info("No channel in {}, cannot be converted to schedulevent", this);
+            return null;
+        }
         ScheduleEvent event = new ScheduleEvent(channel, net == null ? null : new Net(net), start, duration);
         event.setGuideDate(this.guideDay);
         TextualObjects.copyAndRemove(this, event, ownerType);
@@ -219,7 +227,8 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     @Override
     public int compareTo(ScheduleEventUpdate o) {
-        return toScheduleEvent(OwnerType.BROADCASTER).compareTo(o.toScheduleEvent(OwnerType.BROADCASTER));
+        return Objects.compare(toScheduleEvent(OwnerType.BROADCASTER), o.toScheduleEvent(OwnerType.BROADCASTER),
+            Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
 
