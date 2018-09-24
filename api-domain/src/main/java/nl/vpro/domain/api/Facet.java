@@ -23,4 +23,9 @@ public interface Facet<F extends AbstractSearch> {
     F getFilter();
 
     void setFilter(F search);
+
+
+    default boolean hasFilter() {
+        return this.getFilter() != null && this.getFilter().hasSearches();
+    }
 }
