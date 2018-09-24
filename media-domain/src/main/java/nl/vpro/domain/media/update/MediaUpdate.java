@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.validation.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -901,6 +902,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
     @XmlElement(name = "contentRating")
+    @Nonnull
     public List<ContentRating> getContentRatings() {
         if (contentRatings == null) {
             contentRatings = new ArrayList<>();
@@ -914,6 +916,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
     @XmlElement
+    @Nonnull
     public List<String> getEmail() {
         if (email == null) {
              email = new ArrayList<>();
@@ -930,6 +933,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "website")
+    @Nonnull
     public List<String> getWebsites() {
         if (websites == null) {
              websites = new ArrayList<>();
@@ -957,6 +961,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
      */
     @XmlElement(name = "prediction")
     @Valid
+    @Nonnull
     public SortedSet<PredictionUpdate> getPredictions() {
         if (predictions == null) {
             predictions = new TreeSet<>();
@@ -975,6 +980,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElementWrapper(name = "locations")
     @XmlElement(name = "location")
     @Valid
+    @Nonnull
     public SortedSet<LocationUpdate> getLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
@@ -991,6 +997,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElementWrapper(name = "scheduleEvents")
     @XmlElement(name = "scheduleEvent")
+    @Nonnull
     public SortedSet<ScheduleEventUpdate> getScheduleEvents() {
         if (scheduleEvents == null) {
             scheduleEvents = new TreeSet<>();
@@ -1003,6 +1010,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "relation")
+    @Nonnull
     public SortedSet<RelationUpdate> getRelations() {
         if (relations == null) {
             relations = new TreeSet<>();
@@ -1017,6 +1025,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElementWrapper(name = "images")
     @XmlElement(name = "image")
     @Valid
+    @Nonnull
     public List<ImageUpdate> getImages() {
         if (images == null) {
             images = new ArrayList<>();
@@ -1039,6 +1048,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * @since 2.1
      */
     @XmlElement(name = "asset")
+    @Nullable
     public Asset getAsset() {
         return asset;
     }
