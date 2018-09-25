@@ -1,6 +1,7 @@
 package nl.vpro.domain.media.gtaa;
 
-import nl.vpro.w3.rdf.Description;
+        import nl.vpro.openarchives.oai.Label;
+        import nl.vpro.w3.rdf.Description;
 
 /**
  * @author Michiel Meeuwissen
@@ -14,5 +15,6 @@ public class GTAATopic extends AbstractThesaurusItem {
         fill(description, answer);
         return answer;
     }
-
 }
+
+

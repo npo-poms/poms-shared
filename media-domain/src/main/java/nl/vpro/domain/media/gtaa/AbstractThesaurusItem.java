@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.time.Instant;
 import java.util.List;
 
+import javax.validation.constraints.Null;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -67,5 +68,24 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject {
         }
     }
 
+    protected void fill(String id,
+                        String value,
+                        List<Label> notes,
+                        Status status,
+                        String changeNote,
+                        Instant modified) {
+        this.setId(id);
+        this.setValue(value);
+        this.setNotes(notes);
+        this.setStatus(status);
+        if (changeNote != null) {
+            this.setRedirectedFrom(changeNote);
+        }
+        if (modified != null) {
+            this.setLastModified(modified);
 
+        }
+
+
+    }
 }
