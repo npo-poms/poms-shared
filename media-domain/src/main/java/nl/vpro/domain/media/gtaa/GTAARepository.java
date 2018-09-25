@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.gtaa;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,13 +24,13 @@ public interface GTAARepository {
 
     CountedIterator<Record> getAllUpdates(Instant from, Instant until);
 
-    Description submit(String prefLabel, List<Label> notes, String creator);
-
     List<Description> findPersons(String input, Integer max);
 
-    GTAAPerson submit(GTAAPerson person, String creator);
+    <T extends ThesaurusObject>  T  submit(T thesaurusObject, String creator);
 
     List<Description> findAnything(String input, Integer max);
+
+    List<Description> findOnAxis(String input, Integer max, List<String> axisList);
 
     Optional<Description> retrieveItemStatus(String id);
 }

@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.xml.bind.JAXB;
 
+import nl.vpro.domain.media.gtaa.GTAANewPerson;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.logging.LoggerOutputStream;
@@ -15,24 +17,22 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @since 5.5
  */
 @Slf4j
-public class NewPersonRequestTest {
+@Ignore("Person Request is deleted. So will this test..")
+public class GTAANewPersonRequestTest {
 
 
     @Test
     public void json() throws Exception {
 
-        NewPersonRequest person =
-            NewPersonRequest.builder()
-                .person(NewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build())
-                .jws("abc").build();
+        GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build();
+
 
         Jackson2TestUtil.roundTripAndSimilar(person, "{\n" +
             "  \"person\" : {\n" +
             "    \"givenName\" : \"Pietje\",\n" +
             "    \"familyName\" : \"Puk\",\n" +
             "    \"note\" : \"test\"\n" +
-            "  },\n" +
-            "  \"jws\" : \"abc\"\n" +
+            "  }\n" +
             "}");
 
     }
@@ -40,12 +40,10 @@ public class NewPersonRequestTest {
 
     @Test
     public void xml() throws Exception {
-        NewPersonRequest person =
-            NewPersonRequest.builder()
-                .person(NewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build())
-                .jws("abc").build();
+
+        GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build();
+
         JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newPersonRequest xmlns:gtaa=\"urn:vpro:gtaa:2017\">\n" +
-            "    <gtaa:jws>abc</gtaa:jws>\n" +
             "    <gtaa:person>\n" +
             "        <gtaa:familyName>Puk</gtaa:familyName>\n" +
             "        <gtaa:givenName>Pietje</gtaa:givenName>\n" +
