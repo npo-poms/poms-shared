@@ -322,16 +322,19 @@ public class Locations {
     }
 
     /**
-     * If a mediaobject has BROADCASTER INTERNETVOD locations (which are not deleted)
-     * then we need to have INTERNETVOD predictoin which can be set to 'REALIZED'.
+     * Creates a prediction because of a NEP notification.
+     *
+     * If a mediaobject has INTERNETVOD locations (which are not deleted) (which were not created because of NEP)
+     *
+     * then we need to have INTERNETVOD prediction which can be set to 'REALIZED'.
      *
      * This is not always the case, this method can correct that.
      */
     public static Optional<Prediction> createWebOnlyPredictionIfNeeded(MediaObject mediaObject) {
         Set<Location> existingWebonlyLocations = mediaObject.getLocations().stream()
-            .filter(l -> l.getOwner() == OwnerType.BROADCASTER)
-            .filter(l -> Platform.INTERNETVOD.matches(l.getPlatform()))
-            .filter(l -> ! l.isDeleted())
+            .filter(l -> Platform.INTERNETVOD.matches(l.getPlatform())) // l == null || l == internetvod
+            .filter(l -> ! l.getProgramUrl().startsWith("npo:")) // not created because of NEP itself.
+            .filter(l -> ! l.isDeleted())// ignore deleted of course
             .collect(Collectors.toSet());
         Prediction existingPrediction = mediaObject.getPrediction(Platform.INTERNETVOD);
         if (existingPrediction == null && ! existingWebonlyLocations.isEmpty()) {
