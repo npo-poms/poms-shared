@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import nl.vpro.domain.media.gtaa.GTAAName;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
@@ -49,11 +50,15 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
-    public void testAddPerson() throws IOException {
+    public void testAddItem() throws IOException {
         wireMockRule.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(okXml(f("/submit-person-response.xml")).withStatus(201)));
 
         repo.setUseXLLabels(true);
-        repo.submit("Testlabel1", Arrays.asList(new Label("Note123")), "testCreatorX");
+        GTAAName testNameX = GTAAName.builder()
+                .value("Testlabel1")
+                .notes(Arrays.asList(new Label("Note123"))).build();
+
+        repo.submit(testNameX, "testCreatorX");
         wireMockRule.verify(postRequestedFor(urlPathEqualTo("/api/concept")).withRequestBody(
                 matchingXPath("//skosxl:literalForm[text() = 'Testlabel1']").withXPathNamespace("skosxl", "http://www.w3.org/2008/05/skos-xl#")));
     }

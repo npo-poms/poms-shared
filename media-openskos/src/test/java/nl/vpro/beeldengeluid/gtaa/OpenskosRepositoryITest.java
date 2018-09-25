@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
+import nl.vpro.domain.media.gtaa.ThesaurusObjects;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
@@ -36,8 +38,12 @@ public class OpenskosRepositoryITest {
     @Test
     public void testPost1() {
         OpenskosRepository impl = getRealInstance();
-        String label = "Pietje, Puk" + System.currentTimeMillis();
-        impl.submit(label, new ArrayList<>(), "POMS2");
+        GTAAPerson pietjePuk = GTAAPerson.builder()
+                .givenName("Pietje")
+                .familyName("Puk"  + System.currentTimeMillis())
+                .notes(new ArrayList<>()).build();
+
+        impl.submit(pietjePuk, "POMS2");
     }
 
     @Test
@@ -45,18 +51,26 @@ public class OpenskosRepositoryITest {
     public void test409ConflictResolution() {
         OpenskosRepository impl = getRealInstance();
         String label = "Pietje, Puk" + System.currentTimeMillis();
-        impl.submit(label, new ArrayList<>(), "POMS");
-        impl.submit(label, new ArrayList<>(), "POMS");
+        GTAAPerson pietjePuk = GTAAPerson.builder()
+                .givenName("Pietje")
+                .familyName("Puk")
+                .notes(new ArrayList<>()).build();
+        impl.submit(pietjePuk, "POMS");
+        impl.submit(pietjePuk, "POMS");
     }
 
     @Test(expected = GTAAConflict.class)
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
         OpenskosRepository impl = getRealInstance();
-        String label = "Pietje, Puk" + System.currentTimeMillis();
-        impl.submit(label, new ArrayList<>(), "POMS");
-        impl.submit(label, new ArrayList<>(), "POMS");
-        impl.submit(label, new ArrayList<>(), "POMS");
+        GTAAPerson pietjePuk = GTAAPerson.builder()
+                .givenName("Pietje")
+                .familyName("Puk"  + System.currentTimeMillis())
+                .notes(new ArrayList<>()).build();
+
+        impl.submit(pietjePuk, "POMS");
+        impl.submit(pietjePuk, "POMS");
+        impl.submit(pietjePuk, "POMS");
     }
 
     @Test
