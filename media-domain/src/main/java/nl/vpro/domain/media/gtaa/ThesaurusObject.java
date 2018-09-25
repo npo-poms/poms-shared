@@ -49,4 +49,5 @@ public interface ThesaurusObject {
 
     String getRedirectedFrom();
 
+
 }

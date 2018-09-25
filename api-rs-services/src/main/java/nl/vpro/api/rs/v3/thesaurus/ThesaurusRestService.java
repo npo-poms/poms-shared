@@ -2,7 +2,10 @@ package nl.vpro.api.rs.v3.thesaurus;
 
 import java.io.InputStream;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
@@ -34,8 +37,6 @@ public interface ThesaurusRestService {
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max);
 
 
-
-
     @GET
     @Produces({ MediaType.APPLICATION_JSON})
     @Path("/people/updates")
@@ -52,8 +53,8 @@ public interface ThesaurusRestService {
     @Path("/items")
     ThesaurusResult<ThesaurusObject> listItems(
         @QueryParam("text") @DefaultValue("") String text,
+        @QueryParam("axes") @DefaultValue(("")) @Nonnull List<String> axisList,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
-
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON})

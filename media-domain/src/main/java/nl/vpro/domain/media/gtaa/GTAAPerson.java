@@ -4,11 +4,13 @@
  */
 package nl.vpro.domain.media.gtaa;
 
+import edu.emory.mathcs.backport.java.util.Collections;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,7 @@ import nl.vpro.openarchives.oai.MetaData;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Roelof Jan Koekoek
@@ -103,6 +106,13 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializabl
         status = person.getGtaaRecord() == null ? null : person.getGtaaRecord().getStatus();
     }
 
+    public GTAAPerson(GTAANewPerson newPerson) {
+    this(Person.builder().givenName(newPerson.getGivenName()).familyName(newPerson.getFamilyName()).build());
+        if(StringUtils.isNotBlank(newPerson.getNote())) {
+            this.setNotes(Arrays.asList(Label.forValue(newPerson.getNote())));
+        }
+
+    }
 
     public static GTAAPerson create(MetaData metaData) {
         if (metaData == null) {
@@ -172,10 +182,6 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializabl
         answer.setGtaaUri(description.getAbout());
 
         return answer;
-    }
-
-    public String getPrefLabel() {
-        return familyName + (givenName != null ? ", " + givenName  : "");
     }
 
 }
