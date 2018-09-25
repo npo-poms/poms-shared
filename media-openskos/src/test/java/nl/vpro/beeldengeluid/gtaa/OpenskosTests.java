@@ -29,27 +29,39 @@ public class OpenskosTests {
     @Test
     public void testPost1() {
         GTAARepository impl = getRealInstance();
-        String label = "Pietje, Puk" + System.currentTimeMillis();
-        impl.submit(label, new ArrayList<>(), "POMS2");
+
+        GTAAPerson pietjePuk = GTAAPerson.builder()
+                .givenName("Pietje")
+                .familyName("Puk"  + System.currentTimeMillis())
+                .notes(new ArrayList<>()).build();
+        impl.submit(pietjePuk, "POMS2");
     }
 
     @Test
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution() {
         GTAARepository impl = getRealInstance();
-        String label = "Pietje, Puk" + System.currentTimeMillis();
-        impl.submit(label, new ArrayList<>(), "POMS");
-        impl.submit(label, new ArrayList<>(), "POMS");
+        GTAAPerson pietjePuk = GTAAPerson.builder()
+                .givenName("Pietje")
+                .familyName("Puk"  + System.currentTimeMillis())
+                .notes(new ArrayList<>()).build();
+
+        impl.submit(pietjePuk, "POMS");
+        impl.submit(pietjePuk, "POMS");
     }
 
     @Test(expected = GTAAConflict.class)
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
         GTAARepository impl = getRealInstance();
-        String label = "Pietje, Puk" + System.currentTimeMillis();
-        impl.submit(label, new ArrayList<>(), "POMS");
-        impl.submit(label, new ArrayList<>(), "POMS");
-        impl.submit(label, new ArrayList<>(), "POMS");
+        GTAAPerson pietjePuk = GTAAPerson.builder()
+                .givenName("Pietje")
+                .familyName("Puk"  + System.currentTimeMillis())
+                .notes(new ArrayList<>()).build();
+
+        impl.submit(pietjePuk, "POMS");
+        impl.submit(pietjePuk, "POMS");
+        impl.submit(pietjePuk, "POMS");
     }
 
     @Test

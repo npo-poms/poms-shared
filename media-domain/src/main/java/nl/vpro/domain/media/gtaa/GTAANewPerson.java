@@ -1,4 +1,4 @@
-package nl.vpro.rs.thesaurus.update;
+package nl.vpro.domain.media.gtaa;
 
 
 import lombok.Data;
@@ -13,7 +13,7 @@ import nl.vpro.domain.PersonInterface;
 @Data
 @NoArgsConstructor
 @XmlRootElement
-public class NewPerson implements PersonInterface {
+public class GTAANewPerson implements PersonInterface {
 
     @Getter
     @Setter
@@ -28,7 +28,7 @@ public class NewPerson implements PersonInterface {
     private String note;
 
     @lombok.Builder
-    public NewPerson(String givenName, String familyName, String note) {
+    public GTAANewPerson(String givenName, String familyName, String note) {
         this.givenName = givenName;
         this.familyName = familyName;
         this.note = note;

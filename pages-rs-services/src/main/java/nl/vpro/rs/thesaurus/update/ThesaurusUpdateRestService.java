@@ -11,7 +11,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import nl.vpro.domain.media.gtaa.GTAANewPerson;
+import nl.vpro.domain.media.gtaa.GTAANewThesaurusObject;
 import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
 
 /**
  * @author Machiel Groeneveld
@@ -28,9 +31,11 @@ public interface ThesaurusUpdateRestService {
     @POST
     @Path("/person")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    GTAAPerson submitSigned(@NotNull NewPersonRequest request);
+    GTAAPerson submitSignedPerson(String jws, @NotNull GTAANewPerson person);
 
-
-
+    @POST
+    @Path("/item")
+    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    ThesaurusObject submitSignedConcept(String jws, @NotNull GTAANewThesaurusObject thesaurusObject);
 
 }

@@ -14,11 +14,9 @@ import java.nio.charset.Charset;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
@@ -26,6 +24,7 @@ import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXB;
 
+import nl.vpro.domain.media.gtaa.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,10 +39,6 @@ import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.GTAAConflict;
-import nl.vpro.domain.media.gtaa.GTAAPerson;
-import nl.vpro.domain.media.gtaa.GTAARepository;
-import nl.vpro.domain.media.gtaa.Schemes;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
@@ -99,11 +94,78 @@ public class OpenskosRepository implements GTAARepository {
         log.info("Communicating with {} (personSpec: {}), useXLLabels: {})", gtaaUrl, personsSpec, useXLLabels);
     }
 
+    private String generateQueryByAxis(List<String> axisList) {
+        Predicate<String> empty = s -> s.equals("");
+        if (axisList.stream().allMatch(empty)) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("AND (");
+
+        String operator = "";
+        for (String axis : axisList) {
+            sb.append(
+                    String.format(
+                            "%s %s inScheme:\"http://data.beeldengeluid.nl/gtaa/%s\" ",
+                            operator,
+                            axis.contains("!") ? "NOT" : "",
+                            axis)
+            );
+            operator = "OR";
+        }
+        sb.append(")");
+
+        return sb.toString();
+    }
+
+    private Description submit(String prefLabel, List<Label> notes, String creator, String scheme) {
+
+        ResponseEntity<RDF> response;
+        RuntimeException rte = null;
+        try {
+            response = postRDF(prefLabel, notes, creator, scheme);
+        } catch (GTAAConflict ex) {
+            try {
+                // Retry the submit by adding a "." after the label name when a 409 Conflict is
+                // returned
+                // See MSE-3366
+                log.warn("Retrying label on 409 Conflict: \"{}\"", prefLabel + ".");
+                response = postRDF(prefLabel + ".", notes, creator, scheme);
+            } catch (GTAAConflict ex2) {
+                /* The version with "." already exists too */
+                log.error("Duplicate label: {}", prefLabel);
+                throw ex2;
+            }
+        } catch (RuntimeException rt) {
+            log.error(rt.getClass().getName() + " " + rt.getMessage());
+            rte = rt;
+            response = null;
+        }
+
+        if (response != null && response.getBody().getDescriptions().size() > 0) {
+            if (response.getStatusCode() == CREATED) {
+                return response.getBody().getDescriptions().stream().findFirst().get();
+            } else {
+                throw new RuntimeException("Status " + response.getStatusCode() + " for prefLabel: " + prefLabel, rte);
+            }
+        } else {
+            throw new RuntimeException("For prefLabel: " + prefLabel, rte);
+        }
+
+    }
+
     @Override
-    public GTAAPerson submit(GTAAPerson person, String creator) {
-        String prefLabel = getPrefLabel(person);
-        final Description description = submit(prefLabel, person.getNotes(), creator);
-        return GTAAPerson.create(description, prefLabel);
+    public ThesaurusObject submit(ThesaurusObject thesaurusObject, String creator) {
+
+        final Description description = submit(thesaurusObject.getValue(),
+                thesaurusObject.getNotes(),
+                creator,
+                ThesaurusObjects.toScheme(thesaurusObject)
+        );
+        return ThesaurusObjects.toThesaurusObject(description);
+
     }
 
     private String getPrefLabel(PersonInterface person) {
@@ -215,12 +277,18 @@ public class OpenskosRepository implements GTAARepository {
         return oai_pmh.getListRecord();
     }
 
-    private ResponseEntity<RDF> postRDF(String prefLabel, List<Label> notes, String creator) {
+    private ResponseEntity<RDF> postRDF(String prefLabel, List<Label> notes, String creator, String scheme) {
         log.info("Submitting {} {} {} to {}", prefLabel, notes, creator, gtaaUrl);
         RDF rdf = new RDF();
-        rdf.setDescriptions(Collections.singletonList(Description.builder().type(Types.SKOS_CONCEPT).creator(creator)
-                .prefLabelOrXL(useXLLabels, prefLabel, tenant).editorialNote(notes)
-                .dateSubmitted(Instant.now().atZone(Schedule.ZONE_ID)).inScheme(Schemes.PERSOONSNAMEN).build()));
+        rdf.setDescriptions(
+                Collections.singletonList(
+                        Description.builder()
+                                .type(Types.SKOS_CONCEPT)
+                                .creator(creator)
+                                .prefLabelOrXL(useXLLabels, prefLabel, tenant)
+                                .editorialNote(notes)
+                                .dateSubmitted(Instant.now().atZone(Schedule.ZONE_ID))
+                                .inScheme(scheme).build()));
 
         template.setErrorHandler(new ResponseErrorHandler() {
             @Override
@@ -253,46 +321,10 @@ public class OpenskosRepository implements GTAARepository {
 
         // Beware parameter ordering is relevant
         return template.postForEntity(
-                gtaaUrl + "api/concept?tenant=beng&key=" + gtaaKey + "&collection=gtaa&autoGenerateIdentifiers=true",
+                gtaaUrl + "api/concept?key=" + gtaaKey + "&collection=gtaa&autoGenerateIdentifiers=true",
                 rdf, RDF.class);
     }
 
-    @Override
-    public Description submit(String prefLabel, List<Label> notes, String creator) {
-
-        ResponseEntity<RDF> response;
-        RuntimeException rte = null;
-        try {
-            response = postRDF(prefLabel, notes, creator);
-        } catch (GTAAConflict ex) {
-            try {
-                // Retry the submit by adding a "." after the label name when a 409 Conflict is
-                // returned
-                // See MSE-3366
-                log.warn("Retrying label on 409 Conflict: \"{}\"", prefLabel + ".");
-                response = postRDF(prefLabel + ".", notes, creator);
-            } catch (GTAAConflict ex2) {
-                /* The version with "." already exists too */
-                log.error("Duplicate label: {}", prefLabel);
-                throw ex2;
-            }
-        } catch (RuntimeException rt) {
-            log.error(rt.getClass().getName() + " " + rt.getMessage());
-            rte = rt;
-            response = null;
-        }
-
-        if (response != null) {
-            if (response.getStatusCode() == CREATED) {
-                return response.getBody().getDescriptions().get(0);
-            } else {
-                throw new RuntimeException("Status " + response.getStatusCode() + " for prefLabel: " + prefLabel, rte);
-            }
-        } else {
-            throw new RuntimeException("For prefLabel: " + prefLabel, rte);
-        }
-
-    }
 
     /**
      * http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/apidoc/index.html#api-FindConcept-FindConcepts
@@ -306,7 +338,7 @@ public class OpenskosRepository implements GTAARepository {
         input = input.replaceAll("[\\-\\.,]+", " ");
         String query = "(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" AND ("
                 + input + "*)";
-        String url = "api/find-concepts?tenant=beng&collection=gtaa&q=" + query + "&rows=" + max;
+        String url = "api/find-concepts?collection=gtaa&q=" + query + "&rows=" + max;
         final RDF rdf = getForUrl(url, RDF.class);
 
         if (rdf == null || rdf.getDescriptions() == null) {
@@ -364,8 +396,10 @@ public class OpenskosRepository implements GTAARepository {
             max = 50;
         }
         input = input.replaceAll("[\\-\\.,]+", " ");
-        String query = String.format("(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) AND ( %s*)", input);
-        String url = String.format("api/find-concepts?tenant=beng&collection=gtaa&q=%s&rows=%s", query, max);
+        String query = String.format("(status:(candidate OR approved) " +
+                "OR (status:not_compliant AND dc_creator:POMS)) " +
+                "AND ( %s*)", input);
+        String url = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
         final RDF rdf = getForUrl(url, RDF.class);
 
         if (rdf == null || rdf.getDescriptions() == null) {
@@ -375,6 +409,27 @@ public class OpenskosRepository implements GTAARepository {
         return rdf.getDescriptions();
     }
 
+    @Override
+    public List<Description> findOnAxis(String input, Integer max, List<String> axisList) {
+        if (max == null) {
+            max = 50;
+        }
+        input = input.replaceAll("[\\-\\.,]+", " ");
+
+        String query = String.format("(status:(candidate OR approved) " +
+                "OR (status:not_compliant AND dc_creator:POMS)) " +
+                 generateQueryByAxis(axisList) +
+                "AND ( %s*)", input);
+
+        String url = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
+        final RDF rdf = getForUrl(url, RDF.class);
+
+        if (rdf == null || rdf.getDescriptions() == null) {
+            return Collections.emptyList();
+        }
+
+        return rdf.getDescriptions();
+    }
 
     @Override
     public Optional<Description> retrieveItemStatus(String id) {
