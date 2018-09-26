@@ -1,9 +1,8 @@
 package nl.vpro.domain.media.support;
 
-import lombok.ToString;
-
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -50,7 +49,6 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     @NoHtml
     @XmlValue
     @JsonProperty("value")
-
     @Size.List({
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 64000, message = "{nl.vpro.constraints.text.Size.max}")
@@ -64,7 +62,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     public Description() {
     }
 
-    public Description(String description, OwnerType owner, TextualType type) {
+    public Description(@Nonnull String description, OwnerType owner, TextualType type) {
         super(owner, type);
         this.value = description;
     }
