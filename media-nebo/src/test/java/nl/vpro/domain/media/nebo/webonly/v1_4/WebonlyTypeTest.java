@@ -3,8 +3,8 @@ package nl.vpro.domain.media.nebo.webonly.v1_4;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
+import java.time.Duration;
 import java.util.Arrays;
-import java.util.Date;
 
 import javax.xml.bind.JAXB;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -25,8 +25,8 @@ import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
-import static org.junit.Assert.assertEquals;
 import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -65,7 +65,7 @@ public class WebonlyTypeTest {
             //.poSeriesID("WO_S_mijnposeriesid")
             .withBroadcasters()
             .genres(Genre.valueOfMis(MisGenreType.ENTERTAINMENT, MisGenreType.YOUTH))
-            .locations(new Location("http://location.nl/abcde1234.mp4", OwnerType.BROADCASTER, new AVAttributes(1000000, AVFileFormat.MP4), new Date(36000L)))
+            .locations(new Location("http://location.nl/abcde1234.mp4", OwnerType.BROADCASTER, new AVAttributes(1000000, AVFileFormat.MP4), Duration.ofMillis(36000L)))
             .segments(
                 MediaTestDataBuilder
                     .segment()
