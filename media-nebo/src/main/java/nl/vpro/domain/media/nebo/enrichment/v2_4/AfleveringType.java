@@ -107,7 +107,7 @@ public class AfleveringType {
     public String getTite() {
         for (Title title : program.getTitles()) {
             if (TextualType.MAIN == title.getType() && title.getOwner() == OWNER) {
-                return title.getTitle();
+                return title.get();
             }
         }
         return "";
@@ -122,7 +122,7 @@ public class AfleveringType {
     public String getInh1() {
         for (Description desc : program.getDescriptions()) {
             if (desc.getOwner() == OWNER) {
-                return desc.getDescription();
+                return desc.get();
             }
         }
         return null;
