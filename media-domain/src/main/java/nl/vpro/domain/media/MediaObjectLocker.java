@@ -10,9 +10,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.management.ManagementFactory;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -157,6 +155,25 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     }
 
 
+    public static <T> T withMidsLock(
+        Iterable<String> mids,
+        @Nonnull String reason,
+        @Nonnull Callable<T> callable) {
+        return withObjectsLock(mids, reason, callable, LOCKED_MEDIA);
+    }
+
+     public static void withMidsLock(
+         Iterable<String> mid,
+         @Nonnull String reason,
+         @Nonnull Runnable runnable) {
+         withMidsLock(mid, reason, () -> {
+            runnable.run();
+            return null;
+        });
+
+     }
+
+
     public static <T> T withKeyLock(
         Serializable id,
         @Nonnull String reason,
@@ -170,62 +187,93 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
         @Nonnull String reason,
         @Nonnull Callable<T> callable,
         @Nonnull Map<K, ReentrantLock> locks) {
-        Long nanoStart = System.nanoTime();
         if (key == null) {
             //log.warn("Calling with null mid: {}", reason, new Exception());
             log.warn("Calling with null key: {}", reason);
             return callable.call();
         }
-        ReentrantLock lock = null;
-
+        long nanoStart = System.nanoTime();
+        ReentrantLock lock = aquireLock(nanoStart, key, reason, locks);
         try {
-            synchronized (locks) {
-                lock = locks.computeIfAbsent(key, (m) -> {
-                    log.trace("New lock for " + m);
-                    return new ReentrantLock();
-                    }
-                );
-                if (lock.isLocked() && ! lock.isHeldByCurrentThread()) {
-                    log.info("There are already threads for {}, waiting", key);
-                    instance.maxConcurrency = Math.max(lock.getQueueLength(), instance.maxConcurrency);
-                }
-            }
-
-            lock.lock();
-
-            instance.maxDepth = Math.max(instance.maxDepth, lock.getHoldCount());
-            log.trace("{} holdcount {}", Thread.currentThread().hashCode(), lock.getHoldCount());
-            if (lock.getHoldCount() == 1) {
-                instance.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
-                instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
-                Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
-                log.debug("Acquired lock for {}  ({}) in {}", key, reason, aquireTime);
-            }
-
-
-
             return callable.call();
         } finally {
-            if (lock != null) {
-                synchronized (locks) {
-
-                    if (lock.getHoldCount() == 1) {
-                        if (!lock.hasQueuedThreads()) {
-                            log.trace("Removed " + key);
-                            locks.remove(key);
-                        }
-                        instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
-                        log.debug("Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
-                    }
-                    locks.notifyAll();
-
-                }
-            }
-            lock.unlock();
+            releaseLock(nanoStart, key, reason, locks, lock);
         }
-
     }
 
+    @SneakyThrows
+    private static <T, K extends Serializable> T withObjectsLock(
+        Iterable<K> keys,
+        @Nonnull String reason,
+        @Nonnull Callable<T> callable,
+        @Nonnull Map<K, ReentrantLock> locks) {
+
+        long nanoStart = System.nanoTime();
+
+        List<ReentrantLock> lockList = new ArrayList<>();
+        for (K key : keys) {
+            if (key != null) {
+                lockList.add(aquireLock(nanoStart, key, reason, locks));
+            }
+        }
+        try {
+            return callable.call();
+        } finally {
+            int i = 0;
+            for (K key : keys) {
+                if (key != null) {
+                    releaseLock(nanoStart, key, reason, locks, lockList.get(i++));
+                }
+            }
+        }
+    }
+
+    private static  <K extends Serializable> ReentrantLock aquireLock(long nanoStart, K key, @Nonnull  String reason,  final @Nonnull Map<K, ReentrantLock> locks) {
+        ReentrantLock lock;
+        boolean alreadyWaiting = false;
+        synchronized (locks) {
+            lock = locks.computeIfAbsent(key, (m) -> {
+                    log.trace("New lock for " + m);
+                    return new ReentrantLock();
+                }
+            );
+            if (lock.isLocked() && !lock.isHeldByCurrentThread()) {
+                log.info("There are already threads ({}) for {}, waiting", lock.getQueueLength(), key);
+                instance.maxConcurrency = Math.max(lock.getQueueLength(), instance.maxConcurrency);
+                alreadyWaiting = true;
+            }
+        }
+
+        lock.lock();
+        if (alreadyWaiting) {
+            log.info("Released and continuing {}", key);
+        }
+
+        instance.maxDepth = Math.max(instance.maxDepth, lock.getHoldCount());
+        log.trace("{} holdcount {}", Thread.currentThread().hashCode(), lock.getHoldCount());
+        if (lock.getHoldCount() == 1) {
+            instance.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
+            instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
+            Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
+            log.debug("Acquired lock for {}  ({}) in {}", key, reason, aquireTime);
+        }
+        return lock;
+    }
+    private static  <K extends Serializable> void releaseLock(long nanoStart, K key, @Nonnull  String reason,  final @Nonnull Map<K, ReentrantLock> locks, @Nonnull ReentrantLock lock) {
+        synchronized (locks) {
+
+            if (lock.getHoldCount() == 1) {
+                if (!lock.hasQueuedThreads()) {
+                    log.trace("Removed " + key);
+                    locks.remove(key);
+                }
+                instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
+                log.debug("Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
+            }
+            lock.unlock();
+            locks.notifyAll();
+        }
+    }
 
 
 }
