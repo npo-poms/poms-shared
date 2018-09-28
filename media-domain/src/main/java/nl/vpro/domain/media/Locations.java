@@ -311,14 +311,15 @@ public class Locations {
                 log.info("Skipped for consideration {}", existingPlatformLocation);
                 continue;
             }
+            Encryption preferredEncryption = StreamingStatus.preferredEncryption(streamingPlatformStatus);
             if (!existingPredictionForPlatform.isPlannedAvailability()) {
                 log.info("Removing {} because the platform {} is not announced", existingPlatformLocation, existingPredictionForPlatform);
                 mediaObject.removeLocation(existingPlatformLocation);
             } else if (!streamingPlatformStatus.matches(existingPredictionForPlatform)) {
                 log.info("Removing {} because the streaming platform {} does not match {}", existingPlatformLocation, streamingPlatformStatus, existingPredictionForPlatform);
                 mediaObject.removeLocation(existingPlatformLocation);
-            } else if (existingPredictionForPlatform.getEncryption() == null && StreamingStatus.preferredEncryption(streamingPlatformStatus) != getEncryptionFromProgramUrl(existingPlatformLocation)) {
-                log.info("Removing {} because the platform {} has no encryption, and the preferred encrryption {} does not match the url {} -> ", existingPlatformLocation, existingPredictionForPlatform, StreamingStatus.preferredEncryption(streamingPlatformStatus), existingPlatformLocation.getProgramUrl(), getEncryptionFromProgramUrl(existingPlatformLocation));
+            } else if (existingPredictionForPlatform.getEncryption() == null &&  preferredEncryption != getEncryptionFromProgramUrl(existingPlatformLocation)) {
+                log.info("Removing {} because the platform {} has no encryption, and the preferred encryption {} does not match the url {} -> ", existingPlatformLocation, existingPredictionForPlatform, preferredEncryption, existingPlatformLocation.getProgramUrl(), getEncryptionFromProgramUrl(existingPlatformLocation));
                 mediaObject.removeLocation(existingPlatformLocation);
             } else {
                 log.info("{} does not need to be removed", existingPlatformLocation);
