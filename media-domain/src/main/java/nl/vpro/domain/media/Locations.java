@@ -25,7 +25,11 @@ import nl.vpro.domain.media.support.OwnerType;
 public class Locations {
 
 
-    public static Program realize(Program program, Platform platform, String pubOptie, OwnerType owner, Set<OwnerType> replaces) {
+    public static Program realize(
+        @Nonnull Program program,
+        @Nonnull Platform platform,
+        @Nonnull String pubOptie, OwnerType owner,
+        @Nonnull Set<OwnerType> replaces) {
         Prediction prediction = program.getPrediction(platform);
         StreamingStatus streamingStatus = program.getStreamingPlatformStatus();
 
@@ -208,7 +212,12 @@ public class Locations {
     }
 
 
-    private static Program addLocation(Program program, Platform platform, Encryption encryption, String pubOptie, OwnerType owner, Set<OwnerType> replaces) {
+    private static Program addLocation(
+        @Nonnull Program program,
+        @Nonnull Platform platform,
+        @Nonnull Encryption encryption,
+        @Nonnull String pubOptie, OwnerType owner,
+        @Nonnull Set<OwnerType> replaces) {
         String locationUrl = createLocationUrl(program, platform, encryption, pubOptie);
         if (locationUrl == null) {
             return program;
@@ -266,7 +275,11 @@ public class Locations {
     }
 
 
-    private static Location createOrFindLocation(Program program, String locationUrl, OwnerType owner, Platform platform) {
+    private static Location createOrFindLocation(
+        @Nonnull Program program,
+        @Nonnull String locationUrl,
+        @Nonnull OwnerType owner,
+        @Nonnull Platform platform) {
         Location location = program.findLocation(locationUrl);
         if (location == null) {
             log.info("creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
