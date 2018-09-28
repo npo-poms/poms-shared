@@ -203,27 +203,26 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
     @SneakyThrows
     private static <T, K extends Serializable> T withObjectsLock(
-        Iterable<K> keys,
+        @Nonnull Iterable<K> keys,
         @Nonnull String reason,
         @Nonnull Callable<T> callable,
         @Nonnull Map<K, ReentrantLock> locks) {
 
-        long nanoStart = System.nanoTime();
-
-        List<ReentrantLock> lockList = new ArrayList<>();
+        final long nanoStart = System.nanoTime();
+        final List<ReentrantLock> lockList = new ArrayList<>();
+        final List<K> copyOfKeys = new ArrayList<>();
         for (K key : keys) {
             if (key != null) {
                 lockList.add(aquireLock(nanoStart, key, reason, locks));
+                copyOfKeys.add(key);
             }
         }
         try {
             return callable.call();
         } finally {
             int i = 0;
-            for (K key : keys) {
-                if (key != null) {
-                    releaseLock(nanoStart, key, reason, locks, lockList.get(i++));
-                }
+            for (K key : copyOfKeys) {
+                releaseLock(nanoStart, key, reason, locks, lockList.get(i++));
             }
         }
     }
@@ -238,7 +237,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
                 }
             );
             if (lock.isLocked() && !lock.isHeldByCurrentThread()) {
-                log.info("There are already threads ({}) for {}, waiting", lock.getQueueLength(), key);
+                log.debug("There are already threads ({}) for {}, waiting", lock.getQueueLength(), key);
                 instance.maxConcurrency = Math.max(lock.getQueueLength(), instance.maxConcurrency);
                 alreadyWaiting = true;
             }
@@ -246,7 +245,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
 
         lock.lock();
         if (alreadyWaiting) {
-            log.info("Released and continuing {}", key);
+            log.debug("Released and continuing {}", key);
         }
 
         instance.maxDepth = Math.max(instance.maxDepth, lock.getHoldCount());
@@ -261,7 +260,6 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
     }
     private static  <K extends Serializable> void releaseLock(long nanoStart, K key, @Nonnull  String reason,  final @Nonnull Map<K, ReentrantLock> locks, @Nonnull ReentrantLock lock) {
         synchronized (locks) {
-
             if (lock.getHoldCount() == 1) {
                 if (!lock.hasQueuedThreads()) {
                     log.trace("Removed " + key);
