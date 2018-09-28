@@ -1,6 +1,5 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
 import lombok.Lombok;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +15,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import javax.annotation.Nonnull;
 import javax.management.MBeanServer;
@@ -33,61 +31,32 @@ import nl.vpro.services.TransactionService;
  * @since 5.5
  */
 @Slf4j
-public class MediaObjectLocker implements MediaObjectLockerMXBean {
+public class MediaObjectLocker {
 
 
-    private static Map<String, ReentrantLock> LOCKED_MEDIA = new ConcurrentHashMap<>();
-    private static Map<Serializable, ReentrantLock> LOCKED_OBJECTS= new ConcurrentHashMap<>();
+    /**
+     * Map mid -> ReentrantLock
+     */
+    static Map<String, ReentrantLock>       LOCKED_MEDIA  = new ConcurrentHashMap<>();
 
 
+    /**
+     * Map key -> ReentrantLock
+     */
+    static Map<Serializable, ReentrantLock> LOCKED_OBJECTS= new ConcurrentHashMap<>();
 
-    private static final MediaObjectLocker instance = new MediaObjectLocker();
 
-    private Map<String, AtomicInteger> lockCount = new HashMap<>();
-    private Map<String, AtomicInteger>  currentCount = new HashMap<>();
-    @Getter
-    private int maxConcurrency = 0;
-    @Getter
-    private int maxDepth = 0;
+    private static final MediaObjectLockerAdmin JMX_INSTANCE = new MediaObjectLockerAdmin();
+
 
 
     static {
         try {
             MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-            mbs.registerMBean(instance, new ObjectName("nl.vpro.media:name=mediaobjectLocker"));
+            mbs.registerMBean(JMX_INSTANCE, new ObjectName("nl.vpro.media:name=objectLocker"));
         } catch (Throwable t) {
             throw Lombok.sneakyThrow(t);
         }
-    }
-
-    @Override
-    public Set<String> getLocks() {
-        return LOCKED_MEDIA.keySet();
-    }
-
-    @Override
-    public int getLockCount() {
-        return lockCount.values().stream().mapToInt(AtomicInteger::intValue).sum();
-
-    }
-
-    @Override
-    public Map<String, Integer> getLockCounts() {
-        return lockCount.entrySet().stream().collect(
-            Collectors.toMap(Map.Entry::getKey, e -> e.getValue().intValue()));
-
-    }
-
-    @Override
-    public int getCurrentCount() {
-        return currentCount.values().stream().mapToInt(AtomicInteger::intValue).sum();
-    }
-
-    @Override
-    public Map<String, Integer> getCurrentCounts() {
-        return currentCount.entrySet().stream().collect(
-            Collectors.toMap(Map.Entry::getKey, e -> e.getValue().intValue()));
-
     }
 
 
@@ -115,6 +84,8 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
         int argNumber() default 0;
         String reason() default "";
     }
+
+
 
     public static <T> T withMidLock(
         @Nonnull TransactionService transactionService,
@@ -238,7 +209,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
             );
             if (lock.isLocked() && !lock.isHeldByCurrentThread()) {
                 log.debug("There are already threads ({}) for {}, waiting", lock.getQueueLength(), key);
-                instance.maxConcurrency = Math.max(lock.getQueueLength(), instance.maxConcurrency);
+                JMX_INSTANCE.maxConcurrency = Math.max(lock.getQueueLength(), JMX_INSTANCE.maxConcurrency);
                 alreadyWaiting = true;
             }
         }
@@ -248,11 +219,11 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
             log.debug("Released and continuing {}", key);
         }
 
-        instance.maxDepth = Math.max(instance.maxDepth, lock.getHoldCount());
+        JMX_INSTANCE.maxDepth = Math.max(JMX_INSTANCE.maxDepth, lock.getHoldCount());
         log.trace("{} holdcount {}", Thread.currentThread().hashCode(), lock.getHoldCount());
         if (lock.getHoldCount() == 1) {
-            instance.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
-            instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
+            JMX_INSTANCE.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
+            JMX_INSTANCE.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
             Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
             log.debug("Acquired lock for {}  ({}) in {}", key, reason, aquireTime);
         }
@@ -265,7 +236,7 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
                     log.trace("Removed " + key);
                     locks.remove(key);
                 }
-                instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
+                JMX_INSTANCE.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
                 log.debug("Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
             }
             lock.unlock();
