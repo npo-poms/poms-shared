@@ -22,6 +22,9 @@ import javax.annotation.Nonnull;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
+import org.slf4j.event.Level;
+
+import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.services.TransactionService;
 
 /**
@@ -266,7 +269,9 @@ public class MediaObjectLocker implements MediaObjectLockerMXBean {
                     locks.remove(key);
                 }
                 instance.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
-                log.debug("Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
+                Duration duration = Duration.ofNanos(System.nanoTime() - nanoStart);
+                Slf4jHelper.log(log, duration.compareTo(Duration.ofSeconds(30))> 0 ? Level.WARN :  Level.DEBUG,
+                    "Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
             }
             lock.unlock();
             locks.notifyAll();
