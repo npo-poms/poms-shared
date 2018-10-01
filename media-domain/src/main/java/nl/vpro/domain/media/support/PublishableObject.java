@@ -179,7 +179,8 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         if(Workflow.FOR_PUBLICATION.equals(workflow)
             || Workflow.FOR_REPUBLICATION.equals(workflow)
             || Workflow.PUBLISHED.equals(workflow)
-            || Workflow.REVOKED.equals(workflow)) {
+            || Workflow.REVOKED.equals(workflow)
+            || Workflow.MERGED.equals(workflow)) {
 
             return inPublicationWindow(Instant.now());
         }
