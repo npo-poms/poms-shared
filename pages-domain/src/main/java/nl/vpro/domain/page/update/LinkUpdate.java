@@ -25,7 +25,7 @@ import nl.vpro.validation.URI;
 public class LinkUpdate implements Serializable{
 
     @NotNull
-    @URI
+    @URI(lenient = true, mustHaveScheme = true, minHostParts = 2)
     @XmlAttribute
     private String pageRef;
 
