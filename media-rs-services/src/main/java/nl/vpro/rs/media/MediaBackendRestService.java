@@ -434,6 +434,7 @@ public interface MediaBackendRestService {
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{mid:.*}/transcode")
+    @Produces(MediaType.TEXT_PLAIN)
     Response transcode(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(MID) final String mid,
