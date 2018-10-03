@@ -9,11 +9,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.management.ManagementFactory;
 import java.time.Duration;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
@@ -144,6 +149,14 @@ public class MediaObjectLocker {
             runnable.run();
             return null;
         });
+     }
+
+
+     public static void withMidsLockIfFree(
+         Iterable<String> mid,
+         @Nonnull String reason,
+         @Nonnull Consumer<Iterable<String>> consumer) {
+        withObjectsLockIfFree(mid, reason, (mids) -> {consumer.accept(mids); return null; }, LOCKED_MEDIA);
 
      }
 
@@ -200,8 +213,36 @@ public class MediaObjectLocker {
             }
         }
     }
+    @SneakyThrows
+    private static <T, K extends Serializable> T withObjectsLockIfFree(
+        @Nonnull Iterable<K> keys,
+        @Nonnull String reason,
+        @Nonnull Function<Iterable<K>, T> callable,
+        @Nonnull Map<K, ReentrantLock> locks) {
 
-    private static  <K extends Serializable> ReentrantLock aquireLock(long nanoStart, K key, @Nonnull  String reason,  final @Nonnull Map<K, ReentrantLock> locks) {
+        final long nanoStart = System.nanoTime();
+        final List<ReentrantLock> lockList = new ArrayList<>();
+        final List<K> copyOfKeys = new ArrayList<>();
+        for (K key : keys) {
+            if (key != null) {
+                Optional<ReentrantLock> reentrantLock = aquireLock(nanoStart, key, reason, locks, true);
+                if (reentrantLock.isPresent()) {
+                    lockList.add(reentrantLock.get());
+                    copyOfKeys.add(key);
+                }
+            }
+        }
+        try {
+            return callable.apply(copyOfKeys);
+        } finally {
+            int i = 0;
+            for (K key : copyOfKeys) {
+                releaseLock(nanoStart, key, reason, locks, lockList.get(i++));
+            }
+        }
+    }
+
+    private static  <K extends Serializable> Optional<ReentrantLock> aquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, ReentrantLock> locks, boolean onlyIfFree) {
         ReentrantLock lock;
         boolean alreadyWaiting = false;
         synchronized (locks) {
@@ -211,6 +252,9 @@ public class MediaObjectLocker {
                 }
             );
             if (lock.isLocked() && !lock.isHeldByCurrentThread()) {
+                if (onlyIfFree) {
+                    return Optional.empty();
+                }
                 log.debug("There are already threads ({}) for {}, waiting", lock.getQueueLength(), key);
                 JMX_INSTANCE.maxConcurrency = Math.max(lock.getQueueLength(), JMX_INSTANCE.maxConcurrency);
                 alreadyWaiting = true;
@@ -230,14 +274,23 @@ public class MediaObjectLocker {
             Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
             log.debug("Acquired lock for {}  ({}) in {}", key, reason, aquireTime);
         }
-        return lock;
+        return Optional.of(lock);
     }
+
+    private static  <K extends Serializable> ReentrantLock aquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, ReentrantLock> locks) {
+        return aquireLock(nanoStart, key, reason, locks, false).get();
+    }
+
+
     private static  <K extends Serializable> void releaseLock(long nanoStart, K key, @Nonnull  String reason,  final @Nonnull Map<K, ReentrantLock> locks, @Nonnull ReentrantLock lock) {
         synchronized (locks) {
             if (lock.getHoldCount() == 1) {
                 if (!lock.hasQueuedThreads()) {
                     log.trace("Removed " + key);
-                    locks.remove(key);
+                    ReentrantLock remove = locks.remove(key);
+                    if (remove != null) {
+
+                    }
                 }
                 JMX_INSTANCE.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).decrementAndGet();
                 Duration duration = Duration.ofNanos(System.nanoTime() - nanoStart);
