@@ -6,6 +6,7 @@ package nl.vpro.domain.page.update;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -51,7 +52,7 @@ public class LinkUpdate implements Serializable{
     public LinkUpdate() {
     }
 
-    public LinkUpdate(String pageRef) {
+    public LinkUpdate(@Nonnull String pageRef) {
         this.pageRef = pageRef;
     }
 
