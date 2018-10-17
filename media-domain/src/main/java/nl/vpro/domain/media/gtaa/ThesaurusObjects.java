@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @since 5.5
  */
 public class ThesaurusObjects {
-
+    private static final String SCHEME_URI = "http://data.beeldengeluid.nl/gtaa/";
 
     public static ThesaurusObject toThesaurusObject(Description d) {
         switch(d.getInScheme().getResource()) {
@@ -32,22 +32,15 @@ public class ThesaurusObjects {
     }
 
     public static ThesaurusObject toThesaurusObject(GTAANewThesaurusObject thesaurusObject) {
-        switch(thesaurusObject.getObjectType()) {
-            case "person":
-                return GTAAPerson.create(toDescription(thesaurusObject));
-            case "topic":
-                return GTAATopic.create(toDescription(thesaurusObject));
-            case "genre":
-                return GTAAGenre.create(toDescription(thesaurusObject));
-            case "name":
-                return GTAAName.create(toDescription(thesaurusObject));
-            case "geofraphicname":
-                return GTAAGeographicName.create(toDescription(thesaurusObject));
-            case "maker":
-                return GTAAMaker.create(toDescription(thesaurusObject));
-            default:
-                return ThesaurusItem.create(toDescription(thesaurusObject));
-        }
+        Description description = Description.builder()
+                .prefLabel(
+                        Label.builder()
+                                .value(thesaurusObject.getValue())
+                                .build()
+                ).scopeNote(Arrays.asList(Label.forValue(thesaurusObject.getNote())))
+                .inScheme(SCHEME_URI + thesaurusObject.getObjectType())
+                .build();
+        return toThesaurusObject(description);
     }
 
 
@@ -76,7 +69,8 @@ public class ThesaurusObjects {
                         Label.builder()
                                 .value(thesaurusObject.getValue())
                                 .build()
-                ).scopeNote(Arrays.asList(Label.forValue(thesaurusObject.getValue())))
+                ).scopeNote(Arrays.asList(Label.forValue(thesaurusObject.getNote())))
+                .inScheme(SCHEME_URI + thesaurusObject.getObjectType())
                 .build();
     }
 }
