@@ -4,7 +4,6 @@
  */
 package nl.vpro.domain.media.gtaa;
 
-import edu.emory.mathcs.backport.java.util.Collections;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
