@@ -284,6 +284,7 @@ public class OpenskosRepository implements GTAARepository {
                 Collections.singletonList(
                         Description.builder()
                                 .type(Types.SKOS_CONCEPT)
+                                .tenant(tenant)
                                 .creator(creator)
                                 .prefLabelOrXL(useXLLabels, prefLabel, tenant)
                                 .editorialNote(notes)
