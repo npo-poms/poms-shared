@@ -318,7 +318,11 @@ public class Locations {
             } else if (!streamingPlatformStatus.matches(existingPredictionForPlatform)) {
                 log.info("Removing {} because the streaming platform {} does not match {}", existingPlatformLocation, streamingPlatformStatus, existingPredictionForPlatform);
                 mediaObject.removeLocation(existingPlatformLocation);
-            } else if (existingPredictionForPlatform.getEncryption() == null &&  preferredEncryption != getEncryptionFromProgramUrl(existingPlatformLocation)) {
+            } else if ((existingPredictionForPlatform.getEncryption() == null ||
+                        existingPredictionForPlatform.getEncryption() == Encryption.NONE
+                        ) &&
+                    preferredEncryption != getEncryptionFromProgramUrl(existingPlatformLocation)
+                    ) {
                 log.info("Removing {} because the platform {} has no encryption, and the preferred encryption {} does not match the url {} -> ", existingPlatformLocation, existingPredictionForPlatform, preferredEncryption, existingPlatformLocation.getProgramUrl(), getEncryptionFromProgramUrl(existingPlatformLocation));
                 mediaObject.removeLocation(existingPlatformLocation);
             } else {
