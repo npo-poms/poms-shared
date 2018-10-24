@@ -303,6 +303,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
 
     @XmlAttribute(required = true)
+    @NotNull
     @Override
     public SegmentType getType() {
         return type;
