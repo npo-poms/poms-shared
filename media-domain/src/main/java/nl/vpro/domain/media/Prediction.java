@@ -177,7 +177,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         Platform platform,
         Instant publishStart,
         Instant publishStop,
-        boolean plannedAvailability,
+        Boolean plannedAvailability,
         Authority authority,
         State state,
         Encryption encryption,
@@ -185,7 +185,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
-        this.plannedAvailability = plannedAvailability;
+        this.plannedAvailability = plannedAvailability == null ? true : plannedAvailability;
         this.authority = authority == null ? Authority.USER : authority;
         this.state = state == null ? State.ANNOUNCED : state;
         this.encryption = encryption;
@@ -310,6 +310,13 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public void update(Prediction from) {
         state = from.state;
+        encryption = from.encryption;
+        plannedAvailability = from.plannedAvailability;
+        platform = from.platform;
+        authority = from.authority;
+        publishStart = from.publishStart;
+        publishStop = from.publishStop;
+        issueDate = from.issueDate;
     }
 
     /**
@@ -323,7 +330,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public String toString() {
         return
-            "Prediction{id=" + id + ",platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + "}";
+            "Prediction{id=" + id + ",platform=" + platform  + ", issueDate=" + issueDate + ", state=" + state + ", encryption=" + encryption + "}";
     }
 
 
