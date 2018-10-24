@@ -297,28 +297,19 @@ public class Locations {
         List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
         Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
+        List<Encryption> encryptions = streamingPlatformStatus.getEncryptionsForPrediction(existingPredictionForPlatform);
         for (Location existingPlatformLocation : existingPlatformLocations) {
             if (! locationPredicate.test(existingPlatformLocation)) {
                 log.info("Skipped for consideration {}", existingPlatformLocation);
                 continue;
             }
-            Encryption preferredEncryption = StreamingStatus.preferredEncryption(streamingPlatformStatus);
-            if (existingPredictionForPlatform == null || !existingPredictionForPlatform.isPlannedAvailability()) {
-                log.info("Removing {} because the platform {} is not announced", existingPlatformLocation, existingPredictionForPlatform);
-                mediaObject.removeLocation(existingPlatformLocation);
-            } else if (!streamingPlatformStatus.matches(existingPredictionForPlatform)) {
-                log.info("Removing {} because the streaming platform {} does not match {}", existingPlatformLocation, streamingPlatformStatus, existingPredictionForPlatform);
-                mediaObject.removeLocation(existingPlatformLocation);
-            } else if ((existingPredictionForPlatform.getEncryption() == null
-                || existingPredictionForPlatform.getEncryption() == Encryption.NONE
-                        ) &&
-                    preferredEncryption != getEncryptionFromProgramUrl(existingPlatformLocation)
-                    ) {
-                log.info("Removing {} because the platform {} has no encryption, and the preferred encryption {} does not match the url {} -> ", existingPlatformLocation, existingPredictionForPlatform, preferredEncryption, existingPlatformLocation.getProgramUrl(), getEncryptionFromProgramUrl(existingPlatformLocation));
-                mediaObject.removeLocation(existingPlatformLocation);
+             if (! encryptions.contains(getEncryptionFromProgramUrl(existingPlatformLocation))) {
+                 mediaObject.removeLocation(existingPlatformLocation);
+                 log.info("Removing {}", existingPlatformLocation);
             } else {
-                log.info("{} does not need to be removed", existingPlatformLocation);
-            }
+                 log.info("Letting {}", existingPlatformLocation);
+             }
+
         }
         updatePredictionStates(mediaObject, platform);
     }
