@@ -96,6 +96,7 @@ public class Locations {
             encryption = existingPredictionForPlatform.getEncryption();
             if (encryption == null) {
                 encryption = StreamingStatus.preferredEncryption(streamingPlatformStatus);
+                log.info("Existing prediction {} has no encyption, falling back to {} ", existingPredictionForPlatform, encryption);
             }
         } else {
             log.info("No prediction found for platform {} in {} ", platform, mediaObject);
@@ -190,16 +191,6 @@ public class Locations {
         }
         return authorityLocation;
 
-    }
-
-
-    /**
-     * @deprecated Use  nl.vpro.camel.media.services.AuthorityLocationsService
-     */
-    static void realizeAndRevokeLocationsIfNeeded(MediaObject media, Platform platform) {
-        Locations.removeLocationForPlatformIfNeeded(media, platform, (l) -> true);
-        Locations.realizeStreamingPlatformIfNeeded(media, platform, (l) -> true);
-        Locations.updatePredictionStates(media, platform);
     }
 
 
@@ -312,14 +303,14 @@ public class Locations {
                 continue;
             }
             Encryption preferredEncryption = StreamingStatus.preferredEncryption(streamingPlatformStatus);
-            if (!existingPredictionForPlatform.isPlannedAvailability()) {
+            if (existingPredictionForPlatform == null || !existingPredictionForPlatform.isPlannedAvailability()) {
                 log.info("Removing {} because the platform {} is not announced", existingPlatformLocation, existingPredictionForPlatform);
                 mediaObject.removeLocation(existingPlatformLocation);
             } else if (!streamingPlatformStatus.matches(existingPredictionForPlatform)) {
                 log.info("Removing {} because the streaming platform {} does not match {}", existingPlatformLocation, streamingPlatformStatus, existingPredictionForPlatform);
                 mediaObject.removeLocation(existingPlatformLocation);
-            } else if ((existingPredictionForPlatform.getEncryption() == null ||
-                        existingPredictionForPlatform.getEncryption() == Encryption.NONE
+            } else if ((existingPredictionForPlatform.getEncryption() == null
+                || existingPredictionForPlatform.getEncryption() == Encryption.NONE
                         ) &&
                     preferredEncryption != getEncryptionFromProgramUrl(existingPlatformLocation)
                     ) {
