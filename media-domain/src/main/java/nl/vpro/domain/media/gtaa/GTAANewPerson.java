@@ -12,7 +12,7 @@ import nl.vpro.domain.PersonInterface;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement
+@XmlRootElement(name = "newPerson")
 public class GTAANewPerson implements PersonInterface {
 
     @Getter
