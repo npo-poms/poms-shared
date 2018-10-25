@@ -95,6 +95,7 @@ public class Locations {
             encryption = existingPredictionForPlatform.getEncryption();
             if (encryption == null) {
                 encryption = StreamingStatus.preferredEncryption(streamingPlatformStatus);
+                log.info("Existing prediction {} has no encyption, falling back to {} ", existingPredictionForPlatform, encryption);
             }
         } else {
             log.info("No prediction found for platform {} in {} ", platform, mediaObject);
@@ -181,16 +182,6 @@ public class Locations {
         }
         return authorityLocation;
 
-    }
-
-
-    /**
-     * @deprecated Use  nl.vpro.camel.media.services.AuthorityLocationsService
-     */
-    static void realizeAndRevokeLocationsIfNeeded(MediaObject media, Platform platform) {
-        Locations.removeLocationForPlatformIfNeeded(media, platform, (l) -> true);
-        Locations.realizeStreamingPlatformIfNeeded(media, platform, (l) -> true);
-        Locations.updatePredictionStates(media, platform);
     }
 
 
@@ -288,23 +279,19 @@ public class Locations {
         List<Location> existingPlatformLocations = getAuthorityLocationsForPlatform(mediaObject, platform);
         Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         StreamingStatus streamingPlatformStatus = mediaObject.getStreamingPlatformStatus();
+        List<Encryption> encryptions = streamingPlatformStatus.getEncryptionsForPrediction(existingPredictionForPlatform);
         for (Location existingPlatformLocation : existingPlatformLocations) {
             if (! locationPredicate.test(existingPlatformLocation)) {
                 log.info("Skipped for consideration {}", existingPlatformLocation);
                 continue;
             }
-            if (!existingPredictionForPlatform.isPlannedAvailability()) {
-                log.info("Removing {} because the platform {} is not announced", existingPlatformLocation, existingPredictionForPlatform);
-                mediaObject.removeLocation(existingPlatformLocation);
-            } else if (!streamingPlatformStatus.matches(existingPredictionForPlatform)) {
-                log.info("Removing {} because the streaming platform {} does not match {}", existingPlatformLocation, streamingPlatformStatus, existingPredictionForPlatform);
-                mediaObject.removeLocation(existingPlatformLocation);
-            } else if (existingPredictionForPlatform.getEncryption() == null && StreamingStatus.preferredEncryption(streamingPlatformStatus) != getEncryptionFromProgramUrl(existingPlatformLocation)) {
-                log.info("Removing {} because the platform {} has no encryption, and the preferred encrryption {} does not match the url {} -> ", existingPlatformLocation, existingPredictionForPlatform, StreamingStatus.preferredEncryption(streamingPlatformStatus), existingPlatformLocation.getProgramUrl(), getEncryptionFromProgramUrl(existingPlatformLocation));
-                mediaObject.removeLocation(existingPlatformLocation);
+             if (! encryptions.contains(getEncryptionFromProgramUrl(existingPlatformLocation))) {
+                 mediaObject.removeLocation(existingPlatformLocation);
+                 log.info("Removing {}", existingPlatformLocation);
             } else {
-                log.info("{} does not need to be removed", existingPlatformLocation);
-            }
+                 log.info("Letting {}", existingPlatformLocation);
+             }
+
         }
         updatePredictionStates(mediaObject, platform);
     }

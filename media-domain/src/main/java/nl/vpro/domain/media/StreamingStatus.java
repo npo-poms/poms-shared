@@ -183,6 +183,62 @@ public class StreamingStatus implements Serializable, Displayable  {
         return withDrm + "_"+ withoutDrm;
     }
 
+    /**
+     * See <a href="http://wiki.publiekeomroep.nl/display/poms/Locations+and+predictions#Locationsandpredictions-Locations,streamingplatformandpredictions">wiki</a>
+     *
+     * Given a prediction shows what kind of locations must be created by the authority location service.
+     *
+     * @return A list of {@link Encryption}s.
+     */
+    public List<Encryption> getEncryptionsForPrediction(Prediction prediction) {
+
+        if (prediction == null || ! prediction.isPlannedAvailability()) {
+            return Arrays.asList();
+        }
+        Encryption e = prediction.getEncryption();
+        if (e == null) {
+            e = Encryption.NONE;
+        }
+
+        switch (withDrm) {
+            case OFFLINE:
+            case UNSET: {
+                switch (withoutDrm) {
+                    case OFFLINE:
+                    case UNSET:
+                        return Arrays.asList();
+                    case ONLINE:
+                        switch (e) {
+                            case DRM:
+                                return Arrays.asList();
+                            case NONE:
+                                return Arrays.asList(
+                                    Encryption.NONE);
+
+                        }
+                }
+            }
+            case ONLINE: {
+                switch (withoutDrm) {
+                    case OFFLINE:
+                    case UNSET:
+                        return Arrays.asList(Encryption.DRM);
+                    case ONLINE:
+                        switch (e) {
+                            case DRM:
+                                return Arrays.asList(Encryption.DRM);
+                            case NONE:
+                                return Arrays.asList(Encryption.DRM, Encryption.NONE);
+
+                        }
+                }
+            }
+
+        }
+        throw new IllegalStateException();
+
+    }
+
     protected void calcCRC32(CRC32 result) {
          if (getWithDrm() != null) {
              result.update(getWithDrm().ordinal());
