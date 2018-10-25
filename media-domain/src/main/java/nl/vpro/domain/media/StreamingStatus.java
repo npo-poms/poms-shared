@@ -192,7 +192,7 @@ public class StreamingStatus implements Serializable, Displayable  {
      */
     public List<Encryption> getEncryptionsForPrediction(Prediction prediction) {
 
-        if (! prediction.isPlannedAvailability()) {
+        if (prediction == null || ! prediction.isPlannedAvailability()) {
             return Arrays.asList();
         }
         Encryption e = prediction.getEncryption();
