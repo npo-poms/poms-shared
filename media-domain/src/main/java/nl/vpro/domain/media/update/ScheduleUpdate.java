@@ -24,6 +24,7 @@ import com.google.common.collect.Range;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -109,5 +110,17 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
     @Override
     public String toString() {
         return getScheduleEvents().size() + " events in " + asRange();
+    }
+
+    public Schedule fetch(OwnerType ownerType) {
+        Schedule schedule = Schedule.builder()
+            .start(start)
+            .start(stop)
+            .channel(channel)
+            .build();
+        for (ScheduleEventUpdate scheduleEventUpdate : scheduleEvents) {
+            schedule.addScheduleEvent(scheduleEventUpdate.toScheduleEvent(ownerType));
+        }
+        return schedule;
     }
 }

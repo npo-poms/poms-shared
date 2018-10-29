@@ -8,6 +8,9 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
+import nl.vpro.domain.media.MediaTable;
+import nl.vpro.domain.media.support.OwnerType;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.8
@@ -42,5 +45,19 @@ public class MediaUpdateTable {
 
     public void addPrograms(Collection<ProgramUpdate> values) {
         programTable.addAll(values);
+    }
+
+    public MediaTable fetch(OwnerType type) {
+        MediaTable result = new MediaTable();
+        for (ProgramUpdate update :  programTable) {
+            result.addProgram(update.fetch(type));
+        }
+        for (GroupUpdate update :  groupTable) {
+            result.addGroup(update.fetch(type));
+        }
+        if (schedule != null) {
+            result.setSchedule(schedule.fetch(type));
+        }
+        return result;
     }
 }
