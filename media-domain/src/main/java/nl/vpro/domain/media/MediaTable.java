@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
@@ -19,6 +20,7 @@ import com.google.common.collect.Iterators;
                       "schedule"})
 @lombok.Builder
 @AllArgsConstructor
+@Slf4j
 public class MediaTable implements Iterable<MediaObject> {
 
     public MediaTable() {
@@ -51,6 +53,21 @@ public class MediaTable implements Iterable<MediaObject> {
     @XmlAttribute
     protected String source;
 
+
+    /**
+     * @since 5.9
+     */
+    public MediaTable add(MediaObject mo) {
+        if (mo instanceof Program) {
+            return addProgram((Program) mo);
+        } else if (mo instanceof Group) {
+            return addGroup((Group) mo);
+        } else {
+            log.warn("Could not add {}", mo);
+            return this;
+        }
+    }
+
     public MediaTable addProgram(Program program) {
         if(programTable == null) {
             programTable = new ArrayList<>();
@@ -61,12 +78,19 @@ public class MediaTable implements Iterable<MediaObject> {
     }
 
     public <T extends MediaObject> T find(String mid) {
-        for (MediaObject p : Iterables.concat(programTable, groupTable)) {
+        for (MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
             if (Objects.equals(p.getMid(), mid)) {
                 return (T) p;
             }
         }
         return null;
+    }
+
+    /**
+     * @since 5.9
+     */
+    public boolean contains(String mid) {
+        return find(mid) != null;
     }
 
     public List<Program> getProgramTable() {
