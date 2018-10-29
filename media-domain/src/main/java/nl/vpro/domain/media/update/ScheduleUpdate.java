@@ -14,9 +14,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.annotation.Nonnull;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -33,6 +31,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * @author Michiel Meeuwissen
  * @since 5.8
  */
+@XmlAccessorType(XmlAccessType.NONE)
 public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
 
 

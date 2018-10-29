@@ -6,3 +6,4 @@ MediaIdentifiableImpl
 MediaUpdateList
 TranscodeRequest
 TranscodeStatus
+MediaUpdateTable
