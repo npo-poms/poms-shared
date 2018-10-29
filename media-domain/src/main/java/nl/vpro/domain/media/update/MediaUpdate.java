@@ -446,7 +446,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         M returnObject = fetchOwnerless();
         TextualObjects.copy(this, returnObject, owner);
         returnObject.setLocations(toSet(locations, l -> l.toLocation(owner)));
-        returnObject.setImages(toList(images, i -> i.toImage(owner)));
+        returnObject.setImages(toList(images, i -> i.toImage(owner)).stream().filter(i -> i.getImageUri() != null).collect(Collectors.toList()));
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
             ScheduleEvent e = s.toScheduleEvent(owner);
             e.setParent(returnObject);
