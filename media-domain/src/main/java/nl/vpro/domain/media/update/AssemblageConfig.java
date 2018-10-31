@@ -56,9 +56,17 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean stealMids = false;
 
+    /**
+     * Matching happens on crid. There is a possibility though that the found object is of the wrong type (e.g. a Program and not a Segment)
+     * If stealCrids is true, then in that situation the existing object is left, but the matching crid is removed.
+     */
     @lombok.Builder.Default
     boolean stealCrids= false;
 
+    /**
+     * If an incoming segment matches a segment of _different_ program, then disconnect it from that other program
+     * Otherwise consider this situation errorneous.
+     */
     @lombok.Builder.Default
     boolean stealSegments = false;
 
