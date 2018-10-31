@@ -119,7 +119,9 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
             .channel(channel)
             .build();
         for (ScheduleEventUpdate scheduleEventUpdate : scheduleEvents) {
-            schedule.addScheduleEvent(scheduleEventUpdate.toScheduleEvent(ownerType));
+            schedule.addScheduleEvent(
+                scheduleEventUpdate.toScheduleEvent(ownerType)
+            );
         }
         return schedule;
     }

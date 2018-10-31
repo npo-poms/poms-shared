@@ -145,6 +145,9 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
             return null;
         }
         ScheduleEvent event = new ScheduleEvent(channel, net == null ? null : new Net(net), start, duration);
+        if (parent != null) {
+            event.setMidRef(parent.getMid());
+        }
         event.setGuideDate(this.guideDay);
         TextualObjects.copyAndRemove(this, event, ownerType);
         return event;
