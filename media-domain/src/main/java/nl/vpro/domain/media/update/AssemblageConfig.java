@@ -54,6 +54,9 @@ public class AssemblageConfig {
     boolean stealMids = false;
 
     @lombok.Builder.Default
+    boolean stealCrids= false;
+
+    @lombok.Builder.Default
     boolean stealSegments = false;
 
     SimpleLogger logger;
@@ -78,6 +81,7 @@ public class AssemblageConfig {
             createScheduleEvents,
             locationsUpdate,
             stealMids,
+            stealCrids,
             stealSegments,
             logger);
     }
