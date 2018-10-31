@@ -8,8 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import nl.vpro.domain.media.gtaa.ThesaurusObject;
-import nl.vpro.domain.media.gtaa.ThesaurusObjects;
+import nl.vpro.domain.media.gtaa.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
@@ -17,8 +16,6 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.GTAAConflict;
-import nl.vpro.domain.media.gtaa.GTAAPerson;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -44,6 +41,48 @@ public class OpenskosRepositoryITest {
                 .notes(new ArrayList<>()).build();
 
         impl.submit(pietjePuk, "POMS2");
+    }
+
+    @Test
+    //@Ignore
+    public void testPostGeographicName() {
+        OpenskosRepository impl = getRealInstance();
+        impl.setTenant("beng");
+
+        GTAANewThesaurusObject geographicName = GTAANewThesaurusObject
+                .builder()
+                .value("Driedorp")
+                .note("Buurtschap binnen de gemeente Nijkerk")
+                .objectType("GeografischeNamen")
+                .build();
+
+        ;
+        impl.submit(ThesaurusObjects.toThesaurusObject(geographicName), "poms_test");
+
+
+        String result = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:openskos=\"http://openskos.org/xmlns#\" openskos:numFound=\"1\" openskos:rows=\"20\" openskos:start=\"0\">\n" +
+                "<rdf:Description rdf:about=\"http://data.beeldengeluid.nl/gtaa/1711531\">\n" +
+                "<rdf:type rdf:resource=\"http://www.w3.org/2004/02/skos/core#Concept\"/>\n" +
+                "<openskos:modifiedBy rdf:resource=\"http://openskos.beeldengeluid.nl/api/users/f43f43a7-1b02-4d5c-8bdc-e180c112a918\"/>\n" +
+                "<openskos:status>candidate</openskos:status>\n" +
+                "<openskos:tenant>beng</openskos:tenant>\n" +
+                "<dc:creator>poms_test</dc:creator>\n" +
+                "<dcterms:modified rdf:datatype=\"http://www.w3.org/2001/XMLSchema#dateTime\">2018-10-31T12:57:48+00:00</dcterms:modified>\n" +
+                "<openskos:set rdf:resource=\"http://data.beeldengeluid.nl/gtaa\"/>\n" +
+                "<skos:prefLabel xml:lang=\"nl\">Driedorp</skos:prefLabel>\n" +
+                "<skos:editorialNote xml:lang=\"nl\">Buurtschap binnen de gemeente Nijkerk</skos:editorialNote>\n" +
+                "<openskos:uuid>9e06b597-3bb8-4c4b-88a4-5c1dbf8f0741</openskos:uuid>\n" +
+                "<dcterms:publisher rdf:resource=\"http://tenant/9bebebb3-d50b-466b-8cd3-a42c39cc8ffc\"/>\n" +
+                "<skos:inScheme rdf:resource=\"http://data.beeldengeluid.nl/gtaa/GeografischeNamen\"/>\n" +
+                "<skos:notation>1711531</skos:notation>\n" +
+                "<dcterms:dateSubmitted>2018-10-31T13:57:47.331+01:00</dcterms:dateSubmitted>\n" +
+                "</rdf:Description>\n" +
+                "</rdf:RDF>";
+    }
+
+    @Test
+    public void testGeographicName() {
+
     }
 
     @Test
