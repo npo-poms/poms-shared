@@ -5,8 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.function.BiFunction;
+
 import org.slf4j.Logger;
 
+import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
@@ -59,6 +62,14 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean stealSegments = false;
 
+    /**
+     * On default it you merge a program, exsisting segments will not be removed
+     * This can be configured using this.
+     * See als {@link Builder#deleteSegmentsForOwner()}
+     */
+    @lombok.Builder.Default
+    BiFunction<Segment, AssemblageConfig, Boolean> segmentsForDeletion = (s, ac) -> false;
+
     SimpleLogger logger;
 
     public SimpleLogger loggerFor(Logger log) {
@@ -83,6 +94,7 @@ public class AssemblageConfig {
             stealMids,
             stealCrids,
             stealSegments,
+            segmentsForDeletion,
             logger);
     }
     public AssemblageConfig withLogger(SimpleLogger logger) {
@@ -109,9 +121,23 @@ public class AssemblageConfig {
             .createScheduleEvents(true)
             .locationsUpdate(true)
             .stealMids(true)
+            .stealCrids(true)
             .stealSegments(true)
             ;
+    }
 
+    public boolean considerForDeletion(Segment segment) {
+        return segmentsForDeletion.apply(segment, this);
+    }
+
+    public static class Builder {
+        /**
+         * Since POMS 5.9 a segment can have an owner.
+         * This sais that segments that have the configured owner, but are not present in the incoming program are to be deleted from the program to update.
+         */
+        public Builder deleteSegmentsForOwner() {
+            return segmentsForDeletion((s, a) -> s.getOwner() != null && s.getOwner() == a.getOwnerType());
+        }
     }
 
 }

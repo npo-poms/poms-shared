@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 import java.util.SortedSet;
 
@@ -16,6 +19,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.media.support.AuthorizedDuration;
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -32,7 +37,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @JsonTypeName("segment")
 @SegmentValidation
-public class Segment extends MediaObject implements Comparable<Segment>, Child<Program> {
+public class Segment extends MediaObject implements Comparable<Segment>, Child<Program>, Ownable {
 
 
     private static final long serialVersionUID = -868293795041160925L;
@@ -57,6 +62,11 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     @Column(nullable = false)
     @NotNull(message = "no segment type given")
     protected SegmentType type = SegmentType.SEGMENT;
+
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
+    private OwnerType owner;
 
 
     public Segment() {
