@@ -56,7 +56,9 @@ public class MediaUpdateTable {
             result.addGroup(update.fetch(type));
         }
         if (schedule != null) {
-            result.setSchedule(schedule.fetch(type));
+            result.setSchedule(
+                schedule.fetch(type)
+            );
         }
         return result;
     }
