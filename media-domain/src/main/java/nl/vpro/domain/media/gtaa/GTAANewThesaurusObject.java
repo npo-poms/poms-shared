@@ -1,10 +1,7 @@
 package nl.vpro.domain.media.gtaa;
 
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import nl.vpro.domain.PersonInterface;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 @NoArgsConstructor
 @XmlRootElement
+@Builder
 public class GTAANewThesaurusObject {
 
     @Getter

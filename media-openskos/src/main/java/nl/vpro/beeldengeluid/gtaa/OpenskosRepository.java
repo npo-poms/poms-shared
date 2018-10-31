@@ -322,7 +322,7 @@ public class OpenskosRepository implements GTAARepository {
 
         // Beware parameter ordering is relevant
         return template.postForEntity(
-                gtaaUrl + "api/concept?key=" + gtaaKey + "&collection=gtaa&autoGenerateIdentifiers=true",
+                gtaaUrl + "api/concept?key=" + gtaaKey + "&collection=gtaa&autoGenerateIdentifiers=true&tenant=" + tenant,
                 rdf, RDF.class);
     }
 
