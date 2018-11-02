@@ -47,6 +47,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
@@ -170,7 +171,8 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
                             }
                             return workflowExecutions.iterator();
                         } else {
-                            throw new RuntimeException(execute.getStatusLine().toString());
+                            execute.getEntity().writeTo(LoggerOutputStream.warn(log));
+                            log.error("While getting trancodestatuses for {} (from {}): {}", mid, builder.toString(), execute.getStatusLine().toString());
                         }
                     }
 
