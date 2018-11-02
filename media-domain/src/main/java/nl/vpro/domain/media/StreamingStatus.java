@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.zip.CRC32;
@@ -43,6 +44,16 @@ public class StreamingStatus implements Serializable, Displayable  {
     @Column(name="streamingplatformstatus_withoutdrm")
     @XmlAttribute
     Value withoutDrm = Value.UNSET;
+
+    @Getter @Setter
+    @Column(name="streamingplatformstatus_withdrm_offline")
+    Instant withDrmOffline = null;
+
+    @Getter @Setter
+    @Column(name="streamingplatformstatus_withoutdrm_offline")
+
+    Instant withoutDrmOffline = null;
+
 
     public StreamingStatus() {
     }
@@ -94,6 +105,14 @@ public class StreamingStatus implements Serializable, Displayable  {
             setWithDrm(value);
         } else {
             setWithoutDrm(value);
+        }
+    }
+
+    public void set(boolean drm, Instant offline) {
+        if (drm) {
+            setWithDrmOffline(offline);
+        } else {
+            setWithoutDrmOffline(offline);
         }
     }
 
