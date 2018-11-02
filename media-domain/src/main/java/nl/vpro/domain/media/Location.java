@@ -448,6 +448,13 @@ public class Location extends PublishableObject<Location>
         return platform != null;
     }
 
+    public boolean hasDrm() {
+        return getProgramUrl() != null && getProgramUrl().startsWith("npo+drm");
+    }
+    public boolean onStreaming() {
+        return getProgramUrl() != null && getProgramUrl().startsWith("npo");
+    }
+
     Prediction getAuthorityRecord(boolean create) {
         if (hasPlatform()) {
             if (mediaObject == null) {
@@ -533,8 +540,13 @@ public class Location extends PublishableObject<Location>
     @Override
     public Instant getPublishStopInstant() {
         if(hasPlatform() && mediaObject != null) {
+            Instant streamingOffline = onStreaming() ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;
             try {
-                return getAuthorityRecord().getPublishStopInstant();
+                Instant fromAuthorityRecord = getAuthorityRecord().getPublishStopInstant();
+                if (fromAuthorityRecord == null || (streamingOffline != null && fromAuthorityRecord.isAfter(streamingOffline))) {
+                    return streamingOffline;
+                }
+                return fromAuthorityRecord;
             } catch (IllegalAuthorativeRecord iea) {
                 log.debug(iea.getMessage());
             }
