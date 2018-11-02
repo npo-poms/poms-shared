@@ -4,19 +4,22 @@
  */
 package nl.vpro.transfer.extjs.media;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.util.Date;
+
+import javax.xml.bind.annotation.*;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DurationFormatUtils;
+
 import nl.vpro.domain.media.AVFileFormat;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.Platform;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.transfer.extjs.ExtRecord;
-import nl.vpro.util.Helper;
-import org.apache.commons.lang3.time.DurationFormatUtils;
-
-import javax.xml.bind.annotation.*;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.util.Date;
+import nl.vpro.util.DateUtils;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder =
@@ -92,10 +95,10 @@ public class LocationView extends ExtRecord {
             final long durationMillis = fullLocation.getOffset().toMillis();
             simpleLocation.offset = DurationFormatUtils.formatDuration(durationMillis, TIME_FORMAT);
         }
-        simpleLocation.creationDate = fullLocation.getCreationDate();
-        simpleLocation.lastModified = fullLocation.getLastModified();
-        simpleLocation.publishStart = fullLocation.getPublishStart();
-        simpleLocation.publishStop = fullLocation.getPublishStop();
+        simpleLocation.creationDate = DateUtils.toDate(fullLocation.getCreationInstant());
+        simpleLocation.lastModified = DateUtils.toDate(fullLocation.getLastModifiedInstant());
+        simpleLocation.publishStart = DateUtils.toDate(fullLocation.getPublishStartInstant());
+        simpleLocation.publishStop = DateUtils.toDate(fullLocation.getPublishStopInstant());
 
         return simpleLocation;
     }
@@ -151,7 +154,7 @@ public class LocationView extends ExtRecord {
     }
 
     public void setBitrate(String bitrate) {
-        if (Helper.isEmpty(bitrate)) {
+        if (StringUtils.isEmpty(bitrate)) {
             this.bitrate = null;
             return;
         }
