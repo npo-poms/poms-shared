@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
@@ -189,6 +190,7 @@ public class Locations {
             authorityLocation.setPlatform(platform);
             authorityLocation.setOwner(OwnerType.AUTHORITY);
         }
+        Instant streamingOffline =  mediaObject.getStreamingPlatformStatus().getOffline(authorityLocation.hasDrm());
         return authorityLocation;
 
     }

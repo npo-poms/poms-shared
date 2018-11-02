@@ -258,6 +258,14 @@ public class StreamingStatus implements Serializable, Displayable  {
 
     }
 
+    public Instant getOffline(boolean drm) {
+        if (drm) {
+            return getWithDrmOffline();
+        } else {
+            return getWithoutDrmOffline();
+        }
+    }
+
     protected void calcCRC32(CRC32 result) {
          if (getWithDrm() != null) {
              result.update(getWithDrm().ordinal());
