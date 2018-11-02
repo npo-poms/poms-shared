@@ -42,8 +42,13 @@ public class AssemblageConfig {
 
     @lombok.Builder.Default
     boolean episodeOfUpdate = true;
+
+    @lombok.Builder.Default
+    boolean guessEpisodePosition = false;
+
     @lombok.Builder.Default
     boolean memberOfUpdate = true;
+
     @lombok.Builder.Default
     boolean ratingsUpdate = true;
 
@@ -95,6 +100,7 @@ public class AssemblageConfig {
             imageMetaData,
             copyPredictions,
             episodeOfUpdate,
+            guessEpisodePosition,
             memberOfUpdate,
             ratingsUpdate,
             createScheduleEvents,
@@ -123,6 +129,7 @@ public class AssemblageConfig {
             .copyLanguageAndCountry(true)
             .copyPredictions(true)
             .episodeOfUpdate(true)
+            .guessEpisodePosition(true)
             .memberOfUpdate(true)
             .ratingsUpdate(true)
             .imageMetaData(true)
