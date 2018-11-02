@@ -4,6 +4,9 @@
  */
 package nl.vpro.transfer.extjs.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.Date;
@@ -36,35 +39,46 @@ import nl.vpro.util.DateUtils;
 public class LocationView extends ExtRecord {
     public static final String TIME_FORMAT = "mm:ss.SSS";
 
+    @Getter @Setter
     private Long id;
 
+    @Getter @Setter
     private String url;
 
     private Integer bitrate;
 
+    @Getter @Setter
     private String format;
 
+    @Getter @Setter
     private String offset;
 
     @XmlAttribute
+    @Getter @Setter
     private Date creationDate;
 
     @XmlAttribute
+    @Getter @Setter
     private Date lastModified;
 
     @XmlAttribute
+    @Getter @Setter
     private Date publishStart;
 
     @XmlAttribute
+    @Getter @Setter
     private Date publishStop;
 
     @XmlElement(required = false, nillable = false)
+    @Getter @Setter
     private Platform ceresPlatform;
 
     @XmlElement(required = true, nillable = false)
+    @Getter @Setter
     private Boolean ceresAuthority;
 
     @XmlAttribute
+    @Getter @Setter
     private Workflow workflow;
 
     protected LocationView() {
@@ -130,22 +144,6 @@ public class LocationView extends ExtRecord {
         return fullLocation;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getBitrate() {
         if (bitrate == null) {
             return null;
@@ -162,75 +160,4 @@ public class LocationView extends ExtRecord {
         this.bitrate = Integer.parseInt(bitrate);
     }
 
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
-    public String getOffset() {
-        return offset;
-    }
-
-    public void setOffset(String offset) {
-        this.offset = offset;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public Date getPublishStart() {
-        return publishStart;
-    }
-
-    public void setPublishStart(Date publishStart) {
-        this.publishStart = publishStart;
-    }
-
-    public Date getPublishStop() {
-        return publishStop;
-    }
-
-    public void setPublishStop(Date publishStop) {
-        this.publishStop = publishStop;
-    }
-
-    public Workflow getWorkflow() {
-        return workflow;
-    }
-
-    public void setWorkflow(Workflow workflow) {
-        this.workflow = workflow;
-    }
-
-    public Platform getCeresPlatform() {
-        return ceresPlatform;
-    }
-
-    public void setCeresLocation(Platform ceresPlatform) {
-        this.ceresPlatform = ceresPlatform;
-    }
-
-    public Boolean getCeresAuthority() {
-        return ceresAuthority;
-    }
-
-    public void setCeresAuthority(Boolean ceresAuthority) {
-        this.ceresAuthority = ceresAuthority;
-    }
 }
