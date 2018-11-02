@@ -285,7 +285,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertThat(rounded.getTitles()).hasSize(1);
         assertThat(rounded.fetch().getTitles()).hasSize(1);
-        assertThat(rounded.fetch().getTitles().first().getTitle()).isEqualTo("Hoofdtitel");
+        assertThat(rounded.fetch().getTitles().first().get()).isEqualTo("Hoofdtitel");
 
 
     }
@@ -309,7 +309,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
         assertThat(rounded.getTitles()).hasSize(1);
         assertThat(rounded.fetch().getTitles()).hasSize(1);
-        assertThat(rounded.fetch().getTitles().first().getTitle()).isEqualTo("hoofdtitel omroep");
+        assertThat(rounded.fetch().getTitles().first().get()).isEqualTo("hoofdtitel omroep");
 
     }
 
