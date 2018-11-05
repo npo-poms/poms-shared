@@ -61,9 +61,10 @@ public class StreamingStatus implements Serializable, Displayable  {
     public static StreamingStatus unset() {
         return new StreamingStatus(Value.UNSET, Value.UNSET);
     }
-     public static StreamingStatus withDrm(StreamingStatus existing) {
+    public static StreamingStatus withDrm(StreamingStatus existing) {
         return new StreamingStatus(Value.ONLINE, existing.withoutDrm);
     }
+
     public static StreamingStatus withoutDrm(StreamingStatus existing) {
         return new StreamingStatus(existing.withDrm, Value.ONLINE);
     }
@@ -89,10 +90,25 @@ public class StreamingStatus implements Serializable, Displayable  {
     }
 
 
-    @lombok.Builder
-    public StreamingStatus(Value withDrm, Value withoutDrm) {
+    public StreamingStatus(
+        Value withDrm,
+        Value withoutDrm
+    ) {
         this.withDrm = withDrm;
         this.withoutDrm = withoutDrm;
+    }
+
+    @lombok.Builder
+    private StreamingStatus(
+        Value withDrm,
+        Instant withDrmOffline,
+        Value withoutDrm,
+        Instant withoutDrmOffline
+    ) {
+        this.withDrm = withDrm;
+        this.withDrmOffline = withDrmOffline;
+        this.withoutDrm = withoutDrm;
+        this.withoutDrmOffline = withoutDrmOffline;
     }
 
     public StreamingStatus copy() {
