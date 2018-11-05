@@ -43,6 +43,15 @@ public class DescendantRef implements Comparable<DescendantRef>, Serializable {
         this.type = type;
     }
 
+
+    /**
+     * @since 5.9
+     */
+    public static DescendantRef of(MemberRef r) {
+        return new DescendantRef(r.midRef, r.urnRef, r.getType());
+    }
+
+
     public static DescendantRef forOwner(MediaObject media) {
         return new DescendantRef(media.getMid(), media.getUrn(), MediaType.getMediaType(media));
     }
