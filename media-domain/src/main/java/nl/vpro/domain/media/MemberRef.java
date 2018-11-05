@@ -407,6 +407,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     /**
      * The object is not serialized to the database, only {@link #getMediaRef()} and {@link #getMidRef()} are filled.
      */
+    @XmlTransient
     public boolean isVirtual() {
         return owner == null || member == null;
     }
