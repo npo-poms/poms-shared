@@ -154,13 +154,30 @@ public class Program extends MediaObject {
         super.addAncestors(set);
         if (isEpisode()) {
             for (MemberRef memberRef : episodeOf) {
-                final MediaObject reference = memberRef.getOwner();
-                if (reference != null && !set.contains(reference)) {
-                    set.add(reference);
-                    set.addAll(reference.getAncestors());
+                if (! memberRef.isVirtual()) {
+                    final MediaObject reference = memberRef.getOwner();
+                    if (!set.contains(reference)) {
+                        set.add(reference);
+                        set.addAll(reference.getAncestors());
+
+                    }
                 }
             }
         }
+    }
+
+    @Override
+    protected Set<MemberRef> getVirtualMemberRefs() {
+        Set<MemberRef> result = super.getVirtualMemberRefs();
+        if (episodeOf != null) {
+            for (MemberRef memberRef : episodeOf) {
+                if (memberRef.isVirtual()) {
+                    result.add(memberRef);
+                }
+
+            }
+        }
+        return result;
     }
 
     @XmlElement
