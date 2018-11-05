@@ -1414,6 +1414,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             for (MediaObject media : getAncestors()) {
                 descendantOf.add(DescendantRef.forOwner(media));
             }
+            descendantOf.addAll(getVirtualMemberRefs().stream()
+                .map(DescendantRef::of).collect(Collectors.toList()));
         }
         return sorted(descendantOf);
     }
@@ -1764,11 +1766,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     void addAncestors(SortedSet<MediaObject> set) {
         if (isMember()) {
             for (MemberRef memberRef : memberOf) {
-                final MediaObject reference = memberRef.getOwner();
-                if (reference != null) {
+                if (! memberRef.isVirtual()) {
+                    final MediaObject reference = memberRef.getOwner();
                     if (set.add(reference)) { // avoid stack overflow if object
-                                                // happens to be descendant of
-                                                // it self
+                        // happens to be descendant of
+                        // it self
                         reference.addAncestors(set);
                     }
                 }
@@ -1794,6 +1796,22 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         });
         addAncestors(set);
         return set;
+    }
+
+    /**
+     * @since 5.9
+     */
+    protected Set<MemberRef> getVirtualMemberRefs() {
+        Set<MemberRef> result = new TreeSet<>();
+        if (memberOf != null) {
+            for (MemberRef memberRef : memberOf) {
+                if (memberRef.isVirtual()) {
+                    result.add(memberRef);
+                }
+
+            }
+        }
+        return result;
     }
 
 

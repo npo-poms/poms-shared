@@ -160,6 +160,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         Instant added,
         String midRef,
         String cridRef,
+        MediaType type,
         Boolean highlighted) {
         this.id = id;
         this.member = member;
@@ -169,6 +170,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.cridRef = cridRef;
         this.added = added;
         this.highlighted = highlighted;
+        this.typeOfOwner = type;
     }
 
     public static MemberRef copy(MemberRef source){
@@ -400,6 +402,13 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public MemberRef setHighlighted(Boolean highlighted) {
         this.highlighted = highlighted != null ? highlighted : false;
         return this;
+    }
+
+    /**
+     * The object is not serialized to the database, only {@link #getMediaRef()} and {@link #getMidRef()} are filled.
+     */
+    public boolean isVirtual() {
+        return owner == null || member == null;
     }
 
     @Override

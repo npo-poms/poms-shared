@@ -736,11 +736,23 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
+    /**
+     * This adds descendantOf's explicitely. The use cases for this are limited, a mediaobject basicly has {@link #memberOf} or {@link ProgramBuilder#episodeOf(String)}
+     * If your mediaobject is not going to be serialized to the database (e.g. in test cases) you might want to fill descendantof explicitely.
+     *
+     */
     @SuppressWarnings("unchecked")
     default B descendantOf(DescendantRef... refs) throws CircularReferenceException {
         mediaObject().setDescendantOf(new TreeSet<>(Arrays.asList(refs)));
         return (B)this;
     }
+
+
+    /**
+     * @see {@link #descendantOf(DescendantRef...)}
+     *
+     */
+    @Deprecated
     default B descendantOf(String... mids) {
         List<DescendantRef> ref = Arrays.stream(mids).map(m -> DescendantRef.builder().midRef(m).build()).collect(Collectors.toList());
         return descendantOf(ref.toArray(new DescendantRef[ref.size()]));
