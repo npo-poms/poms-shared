@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MediaBuilderTest {
 
     @Test
-    public void testDescendantOf() throws Exception {
+    public void testDescendantOf() {
         Program program = MediaBuilder.program()
             .descendantOf(
                 new DescendantRef(null, "urn:vpro:media:program:1", MediaType.BROADCAST),
@@ -38,7 +38,7 @@ public class MediaBuilderTest {
 
     @SuppressWarnings("deprecation")
     @Test
-    public void testScheduleEvent() throws Exception {
+    public void testScheduleEvent() {
         Program program = MediaBuilder.program().scheduleEvents(
             new ScheduleEvent(Channel.NED3, new Date(100), new Date(200)),
             new ScheduleEvent(Channel.NED3, new Net("ZAPP"), new Date(300 + 3 * 24 * 3600 * 1000), new Date(50)),
@@ -94,7 +94,7 @@ public class MediaBuilderTest {
     }
 
     @Test
-    public void testLocations() throws Exception {
+    public void testLocations() {
         Program program = MediaBuilder.program()
             .locations(
                 Location.builder()
@@ -115,6 +115,23 @@ public class MediaBuilderTest {
         assertThat(update.getLocations()).hasSize(1);
         assertThat(update.getLocations().first().getProgramUrl()).isEqualTo("http://www.vpro.nl/1");
         assertThat(update.getLocations().first().getPublishStopInstant()).isEqualTo(LocalDate.of(2017, 4, 11).atStartOfDay(Schedule.ZONE_ID).toInstant());
+
+    }
+
+    @Test
+    public void  testEpisodeOf() {
+        Program program = MediaBuilder.program()
+            .episodeOf("bla_bla")
+            .build();
+
+        assertThat(program.getEpisodeOf()).hasSize(1);
+        assertThat(program.getEpisodeOf().first().getMidRef()).isEqualTo("bla_bla");
+
+
+        assertThat(program.getDescendantOf()).hasSize(1);
+        assertThat(program.getDescendantOf().first().getMidRef()).isEqualTo("bla_bla");
+
+
 
     }
 }
