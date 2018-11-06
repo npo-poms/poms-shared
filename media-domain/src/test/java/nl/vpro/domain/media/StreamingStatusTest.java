@@ -2,6 +2,7 @@ package nl.vpro.domain.media;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.time.LocalDate;
 
 import javax.xml.bind.JAXB;
 
@@ -36,6 +37,16 @@ public class StreamingStatusTest {
 
         JAXBTestUtil.roundTripAndSimilar(status,
             "<streamingStatus withDrm=\"ONLINE\" withoutDrm=\"UNSET\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");
+    }
+
+    @Test
+    public void displayName() {
+        StreamingStatus status = StreamingStatus.builder()
+            .withDrmOffline(LocalDate.of(2200, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant())
+            .withDrm(StreamingStatus.Value.ONLINE)
+            .build();
+
+        assertThat(status.getDisplayName()).isEqualTo("Beschikbaar in DVR window tot 1 januari 00:00");
     }
 
 
