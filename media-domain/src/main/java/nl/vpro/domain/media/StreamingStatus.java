@@ -238,8 +238,8 @@ public class StreamingStatus implements Serializable, Displayable  {
 
     @Override
     public String toString() {
-        return withDrm + (withDrmOffline != null ? ("" + withDrmOffline + ")") : "") +  "_" +
-            withoutDrm + (withoutDrmOffline != null ? ("" + withoutDrmOffline + ")") : "");
+        return withDrm + (withDrmOffline != null ? ("(-" + withDrmOffline + ")") : "") +  "_" +
+            withoutDrm + (withoutDrmOffline != null ? ("(-" + withoutDrmOffline + ")") : "");
     }
 
     /**
