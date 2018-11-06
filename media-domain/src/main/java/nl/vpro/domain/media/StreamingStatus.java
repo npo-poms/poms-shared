@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.zip.CRC32;
@@ -16,6 +17,7 @@ import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Locales;
 
 /**
  * @author Michiel Meeuwissen
@@ -137,13 +139,20 @@ public class StreamingStatus implements Serializable, Displayable  {
         return withDrm == Value.ONLINE;
     }
 
+    public boolean onDvrWithDrm() {
+        return hasDrm() && withDrmOffline != null && withDrmOffline.isAfter(Instant.now());
+    }
 
     public boolean hasWithoutDrm() {
         return withoutDrm == Value.ONLINE;
     }
 
     public boolean isAvailable() {
-        return hasDrm() || hasWithoutDrm();
+        return (hasDrm() && online(withDrmOffline)) || (hasWithoutDrm() && online(withoutDrmOffline));
+    }
+
+    private boolean online(Instant offline) {
+        return offline == null || offline.isAfter(Instant.now());
     }
 
     public static Encryption preferredEncryption(StreamingStatus streamingStatus) {
@@ -189,6 +198,12 @@ public class StreamingStatus implements Serializable, Displayable  {
 
 
 
+    private static final DateTimeFormatter FORMATTER;
+    static {
+        FORMATTER =
+            DateTimeFormatter.ofPattern("d MMMM HH:mm", Locales.DUTCH)
+                     .withZone(Schedule.ZONE_ID);
+    }
 
     @Override
     public String getDisplayName() {
@@ -196,15 +211,23 @@ public class StreamingStatus implements Serializable, Displayable  {
         if (isAvailable()) {
             String connector = " ";
             builder.append("Beschikbaar");
-            if (hasDrm()) {
+            String postFix = "";
+            if (onDvrWithDrm()) {
+                builder.append(connector)
+                    .append("in DVR window")
+                    .append(" tot ").append(FORMATTER.format(withDrmOffline));
+
+                connector = " en ";
+            } else if (hasDrm()) {
                 builder.append(connector).append("met");
                 connector = " en ";
+                postFix = " DRM";
             }
-             if (hasWithoutDrm()) {
+            if (hasWithoutDrm()) {
                 builder.append(connector).append("zonder");
-                connector = " en ";
+                postFix = " DRM";
             }
-            builder.append(" DRM");
+            builder.append(postFix);
         } else {
             builder.append("Niet beschikbaar");
         }
@@ -215,7 +238,8 @@ public class StreamingStatus implements Serializable, Displayable  {
 
     @Override
     public String toString() {
-        return withDrm + "_"+ withoutDrm;
+        return withDrm + (withDrmOffline != null ? ("" + withDrmOffline + ")") : "") +  "_" +
+            withoutDrm + (withoutDrmOffline != null ? ("" + withoutDrmOffline + ")") : "");
     }
 
     /**
@@ -285,12 +309,18 @@ public class StreamingStatus implements Serializable, Displayable  {
     protected void calcCRC32(CRC32 result) {
          if (getWithDrm() != null) {
              result.update(getWithDrm().ordinal());
+             if (withDrmOffline != null) {
+                 result.update(withDrmOffline.hashCode());
+             }
          } else {
              result.update(0);
 
          }
         if (getWithoutDrm() != null) {
             result.update(getWithoutDrm().ordinal());
+            if (withoutDrmOffline != null) {
+                result.update(withoutDrmOffline.hashCode());
+            }
         } else {
             result.update(0);
         }
