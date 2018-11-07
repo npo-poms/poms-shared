@@ -78,7 +78,7 @@ public class MemberRefItem {
         item.setAdded(ref.getAdded());
         item.setHighlighted(ref.isHighlighted());
         item.setMember(member);
-        item.setOwner(new MediaListItem(ref.getOwner()));
+        item.setOwner(new MediaListItem(ref.getGroup()));
         return item;
     }
 

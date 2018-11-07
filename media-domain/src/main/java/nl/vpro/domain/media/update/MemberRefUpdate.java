@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
 import org.apache.commons.lang3.ObjectUtils;
 
 import nl.vpro.domain.media.MemberRef;
+import nl.vpro.domain.media.support.OwnerType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "memberRefUpdateType")
@@ -66,13 +67,14 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
         this.highlighted = highlighted;
     }
 
-    public MemberRef toMemberRef() {
+    public MemberRef toMemberRef(OwnerType type) {
         return
             MemberRef.builder()
                 .number(position)
                 .highlighted(highlighted)
                 .added(null)
                 .mediaRef(mediaRef)
+                .owner(type)
                 .build();
 
     }
