@@ -7,7 +7,6 @@ import lombok.Singular;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.SortedSet;
@@ -93,10 +92,17 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
     }
 
 
-    public Range<ZonedDateTime> asRange() {
+    public Range<LocalDateTime> asLocalRange() {
         return Range.closedOpen(
-            getStart().atZone(Schedule.ZONE_ID),
-            getStop().atZone(Schedule.ZONE_ID)
+            getStart().atZone(Schedule.ZONE_ID).toLocalDateTime(),
+            getStop().atZone(Schedule.ZONE_ID).toLocalDateTime()
+        );
+    }
+
+    public Range<Instant> asRange() {
+        return Range.closedOpen(
+            getStart(),
+            getStop()
         );
     }
 
@@ -109,7 +115,7 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
 
     @Override
     public String toString() {
-        return getScheduleEvents().size() + " events in " + asRange();
+        return getScheduleEvents().size() + " events in " + asLocalRange();
     }
 
     public Schedule fetch(OwnerType ownerType) {
@@ -125,4 +131,5 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
         }
         return schedule;
     }
+
 }
