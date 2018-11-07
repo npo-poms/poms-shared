@@ -422,7 +422,7 @@ public interface MediaTestDataBuilder<
 
         Group season = group().constrained().withMid(mids).id(200L).type(GroupType.SEASON).build();
         try {
-            season.createMemberOf(series, 1);
+            season.createMemberOf(series, 1, OwnerType.BROADCASTER);
         } catch (CircularReferenceException e) {
             throw new RuntimeException(e);
         }
@@ -804,7 +804,7 @@ public interface MediaTestDataBuilder<
                 .withMid(midId)
                 .build();
             try {
-                season.createMemberOf(series, 1);
+                season.createMemberOf(series, 1, OwnerType.BROADCASTER);
             } catch(CircularReferenceException e) {
                 log.error(e.getMessage());
             }

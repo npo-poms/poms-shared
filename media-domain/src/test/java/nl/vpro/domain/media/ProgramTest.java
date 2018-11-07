@@ -25,10 +25,10 @@ public class ProgramTest {
         Group root = new Group(4);
         root.setType(GroupType.PLAYLIST);
 
-        program.createEpisodeOf(group1, 1);
-        program.createMemberOf(group2, 1);
-        group1.createMemberOf(root, 1);
-        group2.createMemberOf(root, 2);
+        program.createEpisodeOf(group1, 1, null);
+        program.createMemberOf(group2, 1, null);
+        group1.createMemberOf(root, 1, null);
+        group2.createMemberOf(root, 2, null);
 
         SortedSet<MediaObject> ancestors = program.getAncestors();
 
@@ -42,11 +42,11 @@ public class ProgramTest {
         Group group = new Group(2);
         group.setType(GroupType.SERIES);
 
-        program.createEpisodeOf(group, 1);
+        program.createEpisodeOf(group, 1, null);
 
         assertThat(program.getAncestors()).hasSize(1);
 
-        group.createMemberOf(program, 1);
+        group.createMemberOf(program, 1, null);
     }
 
     @Test(expected = CircularReferenceException.class)
@@ -56,10 +56,10 @@ public class ProgramTest {
         Group group = new Group(2);
         group.setType(GroupType.SERIES);
 
-        group.createMemberOf(program, 1);
+        group.createMemberOf(program, 1, null);
 
         assertThat(group.getAncestors()).hasSize(1);
 
-        program.createEpisodeOf(group, 1);
+        program.createEpisodeOf(group, 1, null);
     }
 }
