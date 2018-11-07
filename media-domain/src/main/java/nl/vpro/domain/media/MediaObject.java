@@ -588,7 +588,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         this.duration = AuthorizedDuration.copy(source.duration);
         source.getPersons().forEach(person -> this.addPerson(Person.copy(person, this)));
         source.getAwards().forEach(this::addAward);
-        source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getOwner(), ref.getNumber()));
+        source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber()));
         this.ageRating = source.ageRating;
         source.getContentRatings().forEach(this::addContentRating);
         source.getEmail().forEach(this::addEmail);
@@ -1467,7 +1467,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     public MemberRef findMemberOfRef(MediaObject owner) {
         for (MemberRef memberRef : memberOf) {
-            if (owner.equals(memberRef.getOwner())) {
+            if (owner.equals(memberRef.getGroup())) {
                 return memberRef;
             }
         }
@@ -1481,7 +1481,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
         for (MemberRef memberRef : memberOf) {
             if (memberRef != null) {
-                if (owner.equals(memberRef.getOwner())) {
+                if (owner.equals(memberRef.getGroup())) {
                     if (number == null && memberRef.getNumber() == null
                             || number != null && number.equals(memberRef.getNumber())) {
 
@@ -1527,7 +1527,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             while (it.hasNext()) {
                 MemberRef memberRef = it.next();
 
-                if (memberRef.getOwner().equals(reference)) {
+                if (memberRef.getGroup().equals(reference)) {
                     it.remove();
                     success = true;
                     descendantOf = null;
@@ -1746,7 +1746,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             return false;
         }
         for (MemberRef memberRef : memberOf) {
-            if (memberRef.getOwner().equals(ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getOwner().hasAncestor(ancestor)) {
+            if (memberRef.getGroup().equals(ancestor) || (memberRef.getMidRef() != null && memberRef.getMidRef().equals(ancestor.getMid())) || memberRef.getGroup().hasAncestor(ancestor)) {
                 return true;
             }
         }
@@ -1768,14 +1768,14 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected void findAncestry(MediaObject ancestor, List<MediaObject> ancestors) {
         if (isMember()) {
             for (MemberRef memberRef : memberOf) {
-                if (memberRef.getOwner().equals(ancestor)) {
+                if (memberRef.getGroup().equals(ancestor)) {
                     ancestors.add(ancestor);
                     return;
                 }
 
-                memberRef.getOwner().findAncestry(ancestor, ancestors);
+                memberRef.getGroup().findAncestry(ancestor, ancestors);
                 if (!ancestors.isEmpty()) {
-                    ancestors.add(memberRef.getOwner());
+                    ancestors.add(memberRef.getGroup());
                     return;
                 }
             }
@@ -1790,7 +1790,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         if (isMember()) {
             for (MemberRef memberRef : memberOf) {
                 if (! memberRef.isVirtual()) {
-                    final MediaObject reference = memberRef.getOwner();
+                    final MediaObject reference = memberRef.getGroup();
                     if (set.add(reference)) { // avoid stack overflow if object
                         // happens to be descendant of
                         // it self

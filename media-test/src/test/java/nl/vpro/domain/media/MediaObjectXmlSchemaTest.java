@@ -436,10 +436,10 @@ public class MediaObjectXmlSchemaTest {
 
         Program program = program().lean().withMemberOf().build();
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
-        program.getMemberOf().first().getOwner().setMid(null);
-        program.getMemberOf().first().getOwner().setMid("AVRO_7777777");
-        program.getMemberOf().first().getOwner().getMemberOf().first().getOwner().setMid(null);
-        program.getMemberOf().first().getOwner().getMemberOf().first().getOwner().setMid("AVRO_5555555");
+        program.getMemberOf().first().getGroup().setMid(null);
+        program.getMemberOf().first().getGroup().setMid("AVRO_7777777");
+        program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
+        program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
         program.getMemberOf().first().setAdded(Instant.EPOCH);
         String actual = toXml(program);
 
@@ -453,10 +453,10 @@ public class MediaObjectXmlSchemaTest {
         Program program = program().id(100L).lean().type(ProgramType.BROADCAST).withEpisodeOf(101L, 102L).build();
         program.getEpisodeOf().first().setAdded(Instant.EPOCH);
         /* Set MID to null first, then set it to the required MID; otherwise an IllegalArgumentException will be thrown setting the MID to another value */
-        program.getEpisodeOf().first().getOwner().setMid(null);
-        program.getEpisodeOf().first().getOwner().setMid("AVRO_7777777");
-        program.getEpisodeOf().first().getOwner().getMemberOf().first().getOwner().setMid(null);
-        program.getEpisodeOf().first().getOwner().getMemberOf().first().getOwner().setMid("AVRO_5555555");
+        program.getEpisodeOf().first().getGroup().setMid(null);
+        program.getEpisodeOf().first().getGroup().setMid("AVRO_7777777");
+        program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
+        program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
         String actual = toXml(program);
 
         assertThat(actual).isEqualTo(expected);
