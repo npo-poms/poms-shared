@@ -121,11 +121,12 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public MemberRef() {
     }
 
-    public MemberRef(MediaObject member, MediaObject group, Integer number) {
-        this(null, member, group, number);
+    public MemberRef(MediaObject member, MediaObject group, Integer number, OwnerType owner) {
+        this(null, member, group, number, owner);
+
     }
 
-    public MemberRef(Long id, MediaObject member, MediaObject group, Integer number) {
+    public MemberRef(Long id, MediaObject member, MediaObject group, Integer number, OwnerType owner) {
         if(member == null || group == null) {
             throw new IllegalArgumentException(String.format("Must supply valid member and group. Got member: %1$s and group: %2$s", member, group));
         }
@@ -134,6 +135,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.member = member;
         this.group = group;
         this.number = number;
+        this.owner = owner;
     }
 
     public MemberRef(String mid) {
@@ -149,11 +151,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public MemberRef(MemberRef source) {
-        this(source, source.member);
+        this(source, source.member, source.getOwner());
     }
 
-    public MemberRef(MemberRef source, MediaObject member) {
-        this(member, source.group, source.number);
+    public MemberRef(MemberRef source, MediaObject member, OwnerType owner) {
+        this(member, source.group, source.number, owner);
         this.added = source.added;
         this.highlighted = source.highlighted;
 
@@ -196,7 +198,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
             return null;
         }
 
-        MemberRef copy = new MemberRef(source, member);
+        MemberRef copy = new MemberRef(source, member, source.getOwner());
         copy.added = source.added;
         return copy;
     }

@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.support.OwnerType;
 
 @Entity
 @Table(name = "group_table")
@@ -96,7 +97,7 @@ public class Group extends MediaObject {
         return new Group(source);
     }
 
-    MemberRef createMember(MediaObject member) throws CircularReferenceException {
+    MemberRef createMember(MediaObject member, OwnerType owner) throws CircularReferenceException {
         if(this.isOrdered) {
             throw new IllegalArgumentException("Can not add a member to an ordered group without supplying an ordering number.");
         }
@@ -109,7 +110,7 @@ public class Group extends MediaObject {
             member.memberOf = new TreeSet<>();
         }
 
-        MemberRef memberRef = new MemberRef(member, this, null);
+        MemberRef memberRef = new MemberRef(member, this, null, owner);
         member.memberOf.add(memberRef);
         return memberRef;
     }
@@ -117,17 +118,18 @@ public class Group extends MediaObject {
     @Override
     MemberRef createMember(
         @Nonnull MediaObject member,
-        Integer number) throws CircularReferenceException {
+        Integer number,
+        OwnerType owner) throws CircularReferenceException {
         if(number == null) {
-            return createMember(member);
+            return createMember(member, owner);
         }
 
-        return super.createMember(member, number);
+        return super.createMember(member, number, owner);
     }
 
 
-    MemberRef createEpisode(Program episode, Integer episodeNumber) {
-        return episode.createEpisodeOf(this, episodeNumber);
+    MemberRef createEpisode(Program episode, Integer episodeNumber, OwnerType owner) {
+        return episode.createEpisodeOf(this, episodeNumber, owner);
     }
 
     @Override
