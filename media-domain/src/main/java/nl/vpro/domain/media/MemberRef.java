@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -13,13 +16,14 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.*;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Identifiable;
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -73,7 +77,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "index",
     "highlighted"
 })
-public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable {
+public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, Ownable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -83,7 +87,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     protected MediaObject member;
 
     @ManyToOne(optional = false)
-    protected MediaObject owner;
+    @JoinColumn(name="owner_id")
+    protected MediaObject group;
 
     @Transient
     protected String urnRef;
@@ -95,7 +100,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     protected String midRef;
 
     @Transient
-    protected MediaType typeOfOwner;
+    protected MediaType typeOfGroup;
 
     protected Integer number;
 
@@ -106,21 +111,28 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @NotNull(message = "nl.vpro.constraints.NotNull")
     protected Boolean highlighted = false;
 
+    @Getter
+    @Setter
+    @Enumerated(EnumType.STRING)
+    @XmlTransient
+    private OwnerType owner;
+
+
     public MemberRef() {
     }
 
-    public MemberRef(MediaObject member, MediaObject owner, Integer number) {
-        this(null, member, owner, number);
+    public MemberRef(MediaObject member, MediaObject group, Integer number) {
+        this(null, member, group, number);
     }
 
-    public MemberRef(Long id, MediaObject member, MediaObject owner, Integer number) {
-        if(member == null || owner == null) {
-            throw new IllegalArgumentException(String.format("Must supply valid member and owner. Got member: %1$s and owner: %2$s", member, owner));
+    public MemberRef(Long id, MediaObject member, MediaObject group, Integer number) {
+        if(member == null || group == null) {
+            throw new IllegalArgumentException(String.format("Must supply valid member and owner. Got member: %1$s and owner: %2$s", member, group));
         }
 
         this.id = id;
         this.member = member;
-        this.owner = owner;
+        this.group = group;
         this.number = number;
     }
 
@@ -141,7 +153,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public MemberRef(MemberRef source, MediaObject member) {
-        this(member, source.owner, source.number);
+        this(member, source.group, source.number);
         this.added = source.added;
         this.highlighted = source.highlighted;
 
@@ -155,22 +167,24 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     private MemberRef(
         Long id,
         MediaObject member,
-        MediaObject owner,
+        MediaObject group,
         Integer number,
         Instant added,
         String midRef,
         String cridRef,
         MediaType type,
-        Boolean highlighted) {
+        Boolean highlighted,
+        OwnerType owner) {
         this.id = id;
         this.member = member;
-        this.owner = owner;
+        this.group = group;
         this.number = number;
         this.midRef = midRef;
         this.cridRef = cridRef;
         this.added = added;
         this.highlighted = highlighted;
-        this.typeOfOwner = type;
+        this.typeOfGroup = type;
+        this.owner = owner;
     }
 
     public static MemberRef copy(MemberRef source){
@@ -188,21 +202,21 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public boolean ownerEqualsOnRef(MemberRef that) {
-        if(owner != null && that.getOwner() != null) {
-            return MediaObjects.equalsOnAnyId(owner, that.getOwner());
+        if(group != null && that.getGroup() != null) {
+            return MediaObjects.equalsOnAnyId(group, that.getGroup());
         }
 
-        if(owner == null && that.getOwner() != null) {
-            MediaObject thatOwner = that.getOwner();
+        if(group == null && that.getGroup() != null) {
+            MediaObject thatOwner = that.getGroup();
             return thatOwner.getUrn() != null && thatOwner.getUrn().equals(getUrnRef()) ||
                 thatOwner.getMid() != null && thatOwner.getMid().equals(getMidRef()) ||
                 thatOwner.getCrids().contains(getCridRef());
         }
 
-        if(owner != null && that.getOwner() == null) {
-            return owner.getUrn() != null && owner.getUrn().equals(that.getUrnRef()) ||
-                owner.getMid() != null && owner.getMid().equals(that.getMidRef()) ||
-                owner.getCrids().contains(getCridRef());
+        if(group != null && that.getGroup() == null) {
+            return group.getUrn() != null && group.getUrn().equals(that.getUrnRef()) ||
+                group.getMid() != null && group.getMid().equals(that.getMidRef()) ||
+                group.getCrids().contains(getCridRef());
         }
 
         return that.getUrnRef() != null && that.getUrnRef().equals(getUrnRef()) ||
@@ -226,14 +240,14 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @XmlTransient
-    public MediaObject getOwner() {
-        return owner;
+    public MediaObject getGroup() {
+        return group;
     }
 
-    public void setOwner(MediaObject owner) {
+    public void setGroup(MediaObject owner) {
         this.urnRef = null;
         this.cridRef = null;
-        this.owner = owner;
+        this.group = owner;
     }
 
 
@@ -284,8 +298,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      */
     @XmlAttribute
     public String getUrnRef() {
-        if(owner != null) {
-            return owner.getId() == null ? null : owner.getUrn();
+        if(group != null) {
+            return group.getId() == null ? null : group.getUrn();
         }
 
         return urnRef;
@@ -301,7 +315,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      * @param value a valid URN or CRID
      */
     public void setUrnRef(String value) {
-        if(owner != null) {
+        if(group != null) {
             throw new IllegalStateException();
         }
 
@@ -314,8 +328,8 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
             return null;
         }
 
-        if(owner != null && owner.getCrids().size() > 0) {
-            return owner.getCrids().get(0);
+        if(group != null && group.getCrids().size() > 0) {
+            return group.getCrids().get(0);
         }
 
         if(cridRef != null) {
@@ -325,7 +339,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public void setCridRef(String crid) {
-        if(owner != null || urnRef != null) {
+        if(group != null || urnRef != null) {
             throw new IllegalStateException(" ");
         }
 
@@ -338,14 +352,14 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      */
     @XmlAttribute
     public String getMidRef() {
-        if(this.owner != null) {
-            return owner.getMid();
+        if(this.group != null) {
+            return group.getMid();
         }
         return midRef;
     }
 
     public void setMidRef(String midRef) {
-        if(owner != null) {
+        if(group != null) {
             throw new IllegalStateException("Call set midRef on the enclosed owner, this is a JAXB only setter");
         }
 
@@ -354,22 +368,22 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     @XmlAttribute
     public MediaType getType() {
-        return owner != null ? MediaType.getMediaType(owner) : typeOfOwner;
+        return group != null ? MediaType.getMediaType(group) : typeOfGroup;
     }
 
     public void setType(MediaType type) {
-        if(owner != null && MediaType.getMediaType(owner) != type) {
-            throw new IllegalStateException("Supplied type " + type + " does not match owner type " + MediaType.getMediaType(owner));
+        if(group != null && MediaType.getMediaType(group) != type) {
+            throw new IllegalStateException("Supplied type " + type + " does not match owner type " + MediaType.getMediaType(group));
         }
-        typeOfOwner = type;
+        typeOfGroup = type;
     }
 
     @XmlTransient
     boolean isValid() {
         return member != null
-            && owner != null
-            && !(owner instanceof Group
-            && ((Group)owner).isOrdered() && (number == null || number < 1));
+            && group != null
+            && !(group instanceof Group
+            && ((Group) group).isOrdered() && (number == null || number < 1));
     }
 
     @XmlAttribute(name = "index")
@@ -409,7 +423,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
      */
     @XmlTransient
     public boolean isVirtual() {
-        return owner == null || member == null;
+        return group == null || member == null;
     }
 
     @Override

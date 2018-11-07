@@ -119,7 +119,7 @@ public class Program extends MediaObject {
 
     public Program(Program source) {
         super(source);
-        source.getEpisodeOf().forEach(ref -> this.createEpisodeOf((Group)ref.getOwner(), ref.getNumber()));
+        source.getEpisodeOf().forEach(ref -> this.createEpisodeOf((Group)ref.getGroup(), ref.getNumber()));
         source.getSegments().forEach(segment -> this.addSegment(Segment.copy(segment)));
         this.type = source.type;
         this.poProgType = source.poProgType;
@@ -139,7 +139,7 @@ public class Program extends MediaObject {
     public Boolean isEpisodeOfLocked() {
         if(episodeOf != null) {
             for(MemberRef memberRef : episodeOf) {
-                MediaObject owner = memberRef.getOwner();
+                MediaObject owner = memberRef.getGroup();
                 if(owner instanceof Group && ((Group)owner).isEpisodesLocked()) {
                     return true;
                 }
@@ -155,7 +155,7 @@ public class Program extends MediaObject {
         if (isEpisode()) {
             for (MemberRef memberRef : episodeOf) {
                 if (! memberRef.isVirtual()) {
-                    final MediaObject reference = memberRef.getOwner();
+                    final MediaObject reference = memberRef.getGroup();
                     if (!set.contains(reference)) {
                         set.add(reference);
                         set.addAll(reference.getAncestors());
@@ -238,7 +238,7 @@ public class Program extends MediaObject {
         }
 
         for(MemberRef memberRef : episodeOf) {
-            if(memberRef.getOwner().equals(ancestor) || memberRef.getOwner().hasAncestor(ancestor)) {
+            if(memberRef.getGroup().equals(ancestor) || memberRef.getGroup().hasAncestor(ancestor)) {
                 return true;
             }
         }
@@ -252,14 +252,14 @@ public class Program extends MediaObject {
 
         if(ancestors.isEmpty() && isEpisode()) {
             for(MemberRef memberRef : episodeOf) {
-                if(memberRef.getOwner().equals(ancestor)) {
+                if(memberRef.getGroup().equals(ancestor)) {
                     ancestors.add(ancestor);
                     return;
                 }
 
-                memberRef.getOwner().findAncestry(ancestor, ancestors);
+                memberRef.getGroup().findAncestry(ancestor, ancestors);
                 if(!ancestors.isEmpty()) {
-                    ancestors.add(memberRef.getOwner());
+                    ancestors.add(memberRef.getGroup());
                     return;
                 }
             }
@@ -304,7 +304,7 @@ public class Program extends MediaObject {
             while(it.hasNext()) {
                 MemberRef memberRef = it.next();
 
-                if(memberRef.getOwner().equals(owner)) {
+                if(memberRef.getGroup().equals(owner)) {
                     it.remove();
                     success = true;
                 }
