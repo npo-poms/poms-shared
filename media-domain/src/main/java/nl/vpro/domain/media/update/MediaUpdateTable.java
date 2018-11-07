@@ -5,6 +5,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.*;
 
@@ -46,6 +47,20 @@ public class MediaUpdateTable {
     public void addPrograms(Collection<ProgramUpdate> values) {
         programTable.addAll(values);
     }
+
+    public Optional<GroupUpdate> getGroup(String mid) {
+        return getGroupTable().stream().filter((g) -> mid.equals(g.getMid())).findFirst();
+    }
+
+
+    public Optional<ProgramUpdate> getProgram(String mid) {
+        return getProgramTable().stream().filter((p) -> mid.equals(p.getMid())).findFirst();
+    }
+
+    public Optional<ProgramUpdate> getProgramByCrid(String crid) {
+        return getProgramTable().stream().filter(p -> p.getCrids().contains(crid)).findFirst();
+    }
+
 
     public MediaTable fetch(OwnerType type) {
         MediaTable result = new MediaTable();
