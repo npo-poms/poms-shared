@@ -664,7 +664,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         final StringBuilder sb = new StringBuilder();
         sb.append("ScheduleEvent");
         sb.append("{channel=").append(channel);
-        sb.append(", start=").append(start);
+        if (start != null) {
+            sb.append(", start=").append(start.atZone(Schedule.ZONE_ID).toLocalDateTime());
+        }
         if (mediaObject != null) {
             sb.append(", mediaObject=").append(mediaObject.getMid() == null ? "(no mid)" : mediaObject.getMid()); // it seems that the title may be lazy, so just show mid of media object.
         }

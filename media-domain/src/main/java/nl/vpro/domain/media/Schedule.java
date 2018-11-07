@@ -502,10 +502,10 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         sb.append("{scheduleEvents=").append(scheduleEvents);
         sb.append(", channel=").append(channel);
         if (start != null) {
-            sb.append(", start=").append(start);
+            sb.append(", start=").append(start.atZone(Schedule.ZONE_ID).toLocalDateTime());
         }
         if (stop != null) {
-            sb.append(", stop=").append(stop);
+            sb.append(", stop=").append(stop.atZone(Schedule.ZONE_ID).toLocalDateTime());
         }
         sb.append(", releaseVersion=").append(releaseVersion);
         sb.append('}');
@@ -522,14 +522,21 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
      * Returns the with this Schedule associated {@link #getStart()} and {@link #getStop()} instances as a {@link Range} of {@link ZonedDateTime}'s.
      *
      * I.e. an interval that is closed at the start, and open at the end. For now evertyhing is assiociated with the time zone {@link #ZONE_ID} (i.e. CEST), since we
-     * haven't accounted an use case for something else yet, but otherwize we may imagin also the time zone to be a member of this schedule object.
+     * haven't accounted an use case for something else yet, but otherwise we may imagin also the time zone to be a member of this schedule object.
      */
-    public Range<ZonedDateTime> asRange() {
+    public Range<LocalDateTime> asLocalRange() {
         return Range.closedOpen(
-            getStart().atZone(Schedule.ZONE_ID),
-            getStop().atZone(Schedule.ZONE_ID)
+            getStart().atZone(Schedule.ZONE_ID).toLocalDateTime(),
+            getStop().atZone(Schedule.ZONE_ID).toLocalDateTime()
         );
     }
+    public Range<Instant> asRange() {
+        return Range.closedOpen(
+            getStart(),
+            getStop()
+        );
+    }
+
 
 
     private class ScheduleEventSet extends AbstractSet<ScheduleEvent> implements SortedSet<ScheduleEvent> {
