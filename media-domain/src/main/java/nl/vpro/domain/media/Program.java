@@ -9,13 +9,13 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.*;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Broadcaster;
@@ -119,7 +119,7 @@ public class Program extends MediaObject {
 
     public Program(Program source) {
         super(source);
-        source.getEpisodeOf().forEach(ref -> this.createEpisodeOf((Group)ref.getGroup(), ref.getNumber()));
+        source.getEpisodeOf().forEach(ref -> this.createEpisodeOf((Group)ref.getGroup(), ref.getNumber(), ref.getOwner()));
         source.getSegments().forEach(segment -> this.addSegment(Segment.copy(segment)));
         this.type = source.type;
         this.poProgType = source.poProgType;
@@ -268,24 +268,24 @@ public class Program extends MediaObject {
 
 
 
-    MemberRef createEpisodeOf(Group owner, Integer episodeNr) throws CircularReferenceException {
-        if(owner == null) {
+    MemberRef createEpisodeOf(Group group, Integer episodeNr, OwnerType owner) throws CircularReferenceException {
+        if(group == null) {
             throw new IllegalArgumentException("Must supply an owning group, not null.");
         }
 
         if(! ProgramType.EPISODES.contains(this.getType())) {
-            throw new IllegalArgumentException(String.format("%1$s of type %2$s can not become an episode of %3$s with type %4$s ", this, this.getType(), owner, owner.getType()));
+            throw new IllegalArgumentException(String.format("%1$s of type %2$s can not become an episode of %3$s with type %4$s ", this, this.getType(), group, group.getType()));
         }
 
-        if(! owner.getType().canContainEpisodes()) {
+        if(! group.getType().canContainEpisodes()) {
             throw new IllegalArgumentException("Must supply a group type " + GroupType.EPISODE_CONTAINERS + " when adding episodes.");
         }
 
-        if(owner.hasAncestor(this)) {
-            throw new CircularReferenceException(owner, owner.findAncestry(this));
+        if(group.hasAncestor(this)) {
+            throw new CircularReferenceException(group, group.findAncestry(this));
         }
 
-        MemberRef memberRef = new MemberRef(this, owner, episodeNr);
+        MemberRef memberRef = new MemberRef(this, group, episodeNr, owner);
 
         if(episodeOf == null) {
             episodeOf = new TreeSet<>();

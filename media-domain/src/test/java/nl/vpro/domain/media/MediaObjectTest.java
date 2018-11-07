@@ -104,9 +104,9 @@ public class MediaObjectTest {
         Group group2 = new Group(GroupType.PLAYLIST);
         Group root = new Group(GroupType.PLAYLIST);
 
-        program.createMemberOf(group1, 1);
-        group1.createMemberOf(group2, 1);
-        group2.createMemberOf(root, 1);
+        program.createMemberOf(group1, 1, null);
+        group1.createMemberOf(group2, 1, null);
+        group2.createMemberOf(root, 1, null);
 
         SortedSet<MediaObject> ancestors = program.getAncestors();
 
@@ -120,10 +120,10 @@ public class MediaObjectTest {
         Group group2 = new Group(GroupType.PLAYLIST);
         Group root = new Group(GroupType.PLAYLIST);
 
-        program.createMemberOf(group1, 1);
-        program.createMemberOf(group2, 2);
-        group1.createMemberOf(root, 1);
-        group2.createMemberOf(root, 2);
+        program.createMemberOf(group1, 1, null);
+        program.createMemberOf(group2, 2, null);
+        group1.createMemberOf(root, 1, null);
+        group2.createMemberOf(root, 2, null);
 
         SortedSet<MediaObject> ancestors = program.getAncestors();
 
@@ -140,10 +140,10 @@ public class MediaObjectTest {
         Group root = new Group(GroupType.PLAYLIST);
         root.setId(3L);
 
-        program.createMemberOf(group1, 1);
-        program.createMemberOf(group2, 2);
-        group1.createMemberOf(root, 1);
-        group2.createMemberOf(root, 2);
+        program.createMemberOf(group1, 1, null);
+        program.createMemberOf(group2, 2, null);
+        group1.createMemberOf(root, 1, null);
+        group2.createMemberOf(root, 2, null);
 
         SortedSet<MediaObject> ancestors = program.getAncestors();
 
@@ -154,7 +154,7 @@ public class MediaObjectTest {
     public void testCreateMemberOfForSelf() throws CircularReferenceException {
         Group g1 = new Group();
 
-        g1.createMemberOf(g1, 1);
+        g1.createMemberOf(g1, 1, null);
     }
 
     @Test(expected = CircularReferenceException.class)
@@ -164,10 +164,10 @@ public class MediaObjectTest {
         Group g3 = new Group(GroupType.PLAYLIST);
         Group g4 = new Group(GroupType.PLAYLIST);
 
-        g1.createMemberOf(g2, 1);
-        g2.createMemberOf(g3, 1);
-        g3.createMemberOf(g4, 1);
-        g4.createMemberOf(g1, 1);
+        g1.createMemberOf(g2, 1, null);
+        g2.createMemberOf(g3, 1, null);
+        g3.createMemberOf(g4, 1, null);
+        g4.createMemberOf(g1, 1, null);
 
         //assertThat(g1.getAncestors()).hasSize(4);
     }
@@ -184,7 +184,7 @@ public class MediaObjectTest {
         Group group = new Group();
         group.setUrn("urn:vpro:media:group:122");
         program.addBroadcaster(new Broadcaster("VPRO", "V.P.R.O"));
-        MemberRef ref = group.createMember(program, 1);
+        MemberRef ref = group.createMember(program, 1, null);
         ref.setHighlighted(true);
         ref.setAdded(Instant.EPOCH);
 

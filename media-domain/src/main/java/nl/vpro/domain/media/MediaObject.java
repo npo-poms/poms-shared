@@ -588,7 +588,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         this.duration = AuthorizedDuration.copy(source.duration);
         source.getPersons().forEach(person -> this.addPerson(Person.copy(person, this)));
         source.getAwards().forEach(this::addAward);
-        source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber()));
+        source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber(), ref.getOwner()));
         this.ageRating = source.ageRating;
         source.getContentRatings().forEach(this::addContentRating);
         source.getEmail().forEach(this::addEmail);
@@ -1495,7 +1495,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     MemberRef createMember(
         @Nonnull MediaObject member,
-        @Nullable Integer number) throws CircularReferenceException {
+        @Nullable Integer number,
+        OwnerType owner) throws CircularReferenceException {
         if (number == null) {
             throw new IllegalArgumentException("Must supply an ordering number.");
         }
@@ -1508,15 +1509,15 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             member.memberOf = new TreeSet<>();
         }
 
-        MemberRef memberRef = new MemberRef(member, this, number);
+        MemberRef memberRef = new MemberRef(member, this, number, owner);
         member.memberOf.add(memberRef);
         member.descendantOf = null;
         return memberRef;
     }
 
     MemberRef createMemberOf(
-        @Nonnull MediaObject owner, Integer number) throws CircularReferenceException {
-        return owner.createMember(this, number);
+        @Nonnull MediaObject group, Integer number, OwnerType owner) throws CircularReferenceException {
+        return group.createMember(this, number, owner);
     }
 
     boolean removeMemberOfRef(MediaObject reference) {

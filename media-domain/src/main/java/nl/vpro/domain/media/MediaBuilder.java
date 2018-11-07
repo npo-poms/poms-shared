@@ -544,7 +544,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B memberOf(@Nonnull MediaObject media, Integer number) throws CircularReferenceException {
-        mediaObject().createMemberOf(media, number);
+        mediaObject().createMemberOf(media, number, null);
         return (B) this;
     }
 
@@ -940,7 +940,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         @SuppressWarnings("unchecked")
         public T episodeOf(Group group, Integer number) throws CircularReferenceException {
-            mediaObject().createEpisodeOf(group, number);
+            mediaObject().createEpisodeOf(group, number, null);
             return (T) this;
         }
 
