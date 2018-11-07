@@ -19,7 +19,7 @@ public class MemberRefs {
         return new AbstractList<MediaObject>() {
             @Override
             public MediaObject get(int index) {
-                return  memberRefs.get(index).getOwner();
+                return  memberRefs.get(index).getGroup();
             }
 
             @Override
@@ -57,7 +57,7 @@ public class MemberRefs {
             if (memberRef.getMidRef() != null && memberRef.getMidRef().equals(owner.getMid())) {
                 return Optional.of(memberRef);
             }
-            if(memberRef.getOwner().equals(owner)) {
+            if(memberRef.getGroup().equals(owner)) {
                 return Optional.of(memberRef);
             }
         }
@@ -76,7 +76,7 @@ public class MemberRefs {
                 if (memberRef.getMidRef() != null && memberRef.getMidRef().equals(owner.getMid())) {
                     return Optional.of(memberRef);
                 }
-                if (memberRef.getOwner().equals(owner)) {
+                if (memberRef.getGroup().equals(owner)) {
                     return Optional.of(memberRef);
                 }
             }
