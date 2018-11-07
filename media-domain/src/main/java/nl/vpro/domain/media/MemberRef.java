@@ -1,8 +1,5 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.time.Instant;
 
@@ -111,10 +108,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     @NotNull(message = "nl.vpro.constraints.NotNull")
     protected Boolean highlighted = false;
 
-    @Getter
-    @Setter
     @Enumerated(EnumType.STRING)
-    @XmlTransient
     private OwnerType owner;
 
 
@@ -562,6 +556,18 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         if (this.added == null) {
             this.added = Instant.now();
         }
+    }
+
+    @Override
+    @XmlTransient
+    public OwnerType getOwner() {
+        return owner;
+
+    }
+
+    @Override
+    public void setOwner(OwnerType owner) {
+        this.owner = owner;
     }
 
     public static class Builder {
