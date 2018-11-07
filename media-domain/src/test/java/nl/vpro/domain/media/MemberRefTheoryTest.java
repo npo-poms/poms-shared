@@ -30,19 +30,19 @@ public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
     public static MemberRef cridReference = memberRefWithCrid();
 
     @DataPoint
-    public static MemberRef duplicateA = new MemberRef(member, owner, 1);
+    public static MemberRef duplicateA = new MemberRef(member, owner, 1, null);
 
     @DataPoint
-    public static MemberRef duplicateB = new MemberRef(member, owner, 1);
+    public static MemberRef duplicateB = new MemberRef(member, owner, 1, null);
 
     @DataPoint
-    public static MemberRef duplicateWithHigherPosition = new MemberRef(member, owner, 2);
+    public static MemberRef duplicateWithHigherPosition = new MemberRef(member, owner, 2, null);
 
     @DataPoint
-    public static MemberRef duplicateWithId10 = new MemberRef(10L, member, owner, 1);
+    public static MemberRef duplicateWithId10 = new MemberRef(10L, member, owner, 1, null);
 
     @DataPoint
-    public static MemberRef duplicateWithId20 = new MemberRef(20L, member, owner, 1);
+    public static MemberRef duplicateWithId20 = new MemberRef(20L, member, owner, 1, null);
 
     @Test
     public void testEqualsOnDuplicates() throws Exception {
