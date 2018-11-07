@@ -224,7 +224,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     @Override
     public String toString() {
-        return channel + " " + start;
+        return channel + " " + (start == null ? null : start.atZone(Schedule.ZONE_ID).toLocalDateTime());
     }
 
 
