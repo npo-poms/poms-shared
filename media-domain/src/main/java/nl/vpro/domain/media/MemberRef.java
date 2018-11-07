@@ -127,7 +127,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
 
     public MemberRef(Long id, MediaObject member, MediaObject group, Integer number) {
         if(member == null || group == null) {
-            throw new IllegalArgumentException(String.format("Must supply valid member and owner. Got member: %1$s and owner: %2$s", member, group));
+            throw new IllegalArgumentException(String.format("Must supply valid member and group. Got member: %1$s and group: %2$s", member, group));
         }
 
         this.id = id;
