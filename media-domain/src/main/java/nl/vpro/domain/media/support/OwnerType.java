@@ -42,12 +42,6 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
      */
     BROADCASTER("Omroep"),
 
-    /**
-     * Represents Ownable data from Radiobox. Radiobox delivers schedules and metadata for RAD1/2/3/4/5/6.
-     *
-     * @since 1.6
-     */
-    RADIOBOX("Radiobox 2"),
 
     /**
      * Represents Ownable data updated by NEBO batch updates. Before version 1.4 we did not distinguish between NEBO
@@ -116,9 +110,17 @@ public enum OwnerType implements nl.vpro.domain.Displayable {
 
 
     /**
+     * Represents ownable data from a otherwise unspecified authorative backend system. E.g. Prepr, NEP.
      * @since 5.2
      */
     AUTHORITY("Autoratieve bron"),
+
+    /**
+     * Represents Ownable data from Radiobox. Radiobox delivers schedules and metadata for RAD1/2/3/4/5/6/FUNX
+     *
+     * @since 1.6
+     */
+    RADIOBOX("Radiobox 2"),
 
     /**
      * @since 5.3
