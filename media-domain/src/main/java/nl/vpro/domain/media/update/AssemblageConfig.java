@@ -26,7 +26,6 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     OwnerType ownerType = OwnerType.BROADCASTER;
 
-    @lombok.Builder.Default
     @Singular
     List<OwnerType> similarOwnerTypes;
 
