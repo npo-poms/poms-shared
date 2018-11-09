@@ -8,10 +8,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.Date;
 
 import javax.xml.bind.JAXB;
 
@@ -40,7 +37,7 @@ public class ScheduleTest {
         event2.setUrnRef(program.getCrids().get(0));
         event2.setPoProgID("id2");
 
-        Schedule schedule = new Schedule(Channel.CONS, new Date(), Arrays.asList(event1, event2, event3));
+        Schedule schedule = new Schedule(Channel.CONS, Instant.now(), Arrays.asList(event1, event2, event3));
         table.setSchedule(schedule);
 
         final StringWriter writer = new StringWriter();
