@@ -24,10 +24,8 @@ public class MediaUpdateTest {
     }
 
     @Test
-
     public void withEverything1() throws Exception {
 
-        // TODO. Still orienting, it may be that the xml is not yet absolutely correct.
         Program withEverything = MediaTestDataBuilder
             .program()
             .withEverything()
@@ -311,8 +309,6 @@ public class MediaUpdateTest {
     }
 
     @Test
-    //@Ignore("Fails")
-    // TODO
     public void withEverything2() throws Exception {
         MediaObject fetched = rounded.fetch(OwnerType.BROADCASTER);
         JAXBTestUtil.roundTripAndSimilar(fetched, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -378,6 +374,7 @@ public class MediaUpdateTest {
             "            <familyName>Holt</familyName>\n" +
             "        </person>\n" +
             "    </credits>\n" +
+            "    <descendantOf midRef=\"VPROWON_20003\"/>\n" +
             "    <memberOf highlighted=\"false\" midRef=\"VPROWON_20003\" index=\"1\"/>\n" +
             "    <ageRating>12</ageRating>\n" +
             "    <contentRating>ANGST</contentRating>\n" +
@@ -527,6 +524,7 @@ public class MediaUpdateTest {
             "                </person>\n" +
             "            </credits>\n" +
             "            <descendantOf urnRef=\"urn:vpro:media:program:12\" midRef=\"VPROWON_20001\" type=\"BROADCAST\"/>\n" +
+            "            <descendantOf midRef=\"VPROWON_20008\"/>\n" +
             "            <memberOf highlighted=\"false\" midRef=\"VPROWON_20008\" index=\"1\"/>\n" +
             "            <ageRating>12</ageRating>\n" +
             "            <contentRating>ANGST</contentRating>\n" +
