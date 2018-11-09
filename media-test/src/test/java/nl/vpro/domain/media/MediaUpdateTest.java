@@ -532,6 +532,7 @@ public class MediaUpdateTest {
             "                </person>\n" +
             "            </credits>\n" +
             "            <descendantOf urnRef=\"urn:vpro:media:program:12\" midRef=\"VPROWON_20001\" type=\"BROADCAST\"/>\n" +
+            "            <descendantOf midRef=\"VPROWON_20008\"/>\n" +
             "            <memberOf highlighted=\"false\" midRef=\"VPROWON_20008\" index=\"1\"/>\n" +
             "            <ageRating>12</ageRating>\n" +
             "            <contentRating>ANGST</contentRating>\n" +
