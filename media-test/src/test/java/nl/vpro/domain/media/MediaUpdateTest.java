@@ -382,6 +382,7 @@ public class MediaUpdateTest {
             "            <familyName>Holt</familyName>\n" +
             "        </person>\n" +
             "    </credits>\n" +
+            "    <descendantOf midRef=\"VPROWON_20003\"/>\n" +
             "    <memberOf highlighted=\"false\" midRef=\"VPROWON_20003\" index=\"1\"/>\n" +
             "    <ageRating>12</ageRating>\n" +
             "    <contentRating>ANGST</contentRating>\n" +
