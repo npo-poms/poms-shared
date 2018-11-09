@@ -363,17 +363,16 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
 
     // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
 
-    // Before hiberante 5.2 we used Filter rather then FilterJointTable.
+    // Before hiberante 5.2 we used Filter rather then FilterJoinTable.
     // It doesn't really make much sense.
     @FilterJoinTables({
-            @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec10_.mergedTo_id is null) and " + // MSE-3526
-                                                                                                                // ?
-                    "(mediaobjec10_.publishstart is null or mediaobjec10_.publishstart < now()) and "
-                    + "(mediaobjec10_.publishstop is null or mediaobjec10_.publishstop > now())" + ")"),
-            @FilterJoinTable(name = EMBARGO_FILTER, condition = "(mediaobjec10_2_.type != 'CLIP' "
-                    + "or mediaobjec10_.publishstart is null " + "or mediaobjec10_.publishstart < now() "
-                    + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec10_.id and o.broadcasters_id in (:broadcasters)))"),
-            @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))") })
+            @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec2_.mergedTo_id is null) and " + // MSE-3526                 // ?
+                    "(mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now()) and "
+                    + "(mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now())" + ")"),
+            @FilterJoinTable(name = EMBARGO_FILTER, condition = "(mediaobjec2_2_.type != 'CLIP' "
+                    + "or mediaobjec2_.publishstart is null " + "or mediaobjec2_.publishstart < now() "
+                    + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
+            @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
     @Valid
     protected Set<MemberRef> memberOf;
 
