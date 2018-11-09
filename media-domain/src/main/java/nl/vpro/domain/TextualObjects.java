@@ -345,6 +345,9 @@ public class TextualObjects {
      *
      * Moved from ImportUtil, SecureUpdateImpl, MediaUpdaterImpl
      *
+     * @param owner The owner type of the titles to consider
+     * @param similarOwnerTypes If this array is given, a new title is not created if there is no title with the given owner, but there _is_ one with one of these owner types (and it has the same value)*
+     *
      * @since 5.6
      */
     public static <T extends AbstractOwnedText<T>, D1 extends AbstractOwnedText<D1>,
@@ -352,10 +355,22 @@ public class TextualObjects {
         D2 extends AbstractOwnedText<D2>,
         TO2 extends TextualObject<T, D2, TO2>
         >
-    void updateTitlesForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner) {
+    void updateTitlesForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner, OwnerType... similarOwnerTypes) {
         for (TextualType type : TextualType.values()) {
             T incomingTitle = incomingMedia.findTitle(owner, type);
             T titleToUpdate = mediaToUpdate.findTitle(owner, type);
+
+            if (titleToUpdate == null && incomingTitle != null && similarOwnerTypes.length > 0) {
+                for (OwnerType similar : similarOwnerTypes) {
+                    T otherTitle = mediaToUpdate.findTitle(similar, type);
+                    if (otherTitle != null) {
+                        if (Objects.equals(otherTitle.get(), incomingTitle.get())) {
+                            return;
+                        }
+                    }
+                }
+
+            }
 
             if (incomingTitle != null && titleToUpdate != null) {
 
@@ -385,10 +400,22 @@ public class TextualObjects {
         T2 extends AbstractOwnedText<T2>,
         TO2 extends TextualObject<T2, D, TO2>
         >
-    void updateDescriptionsForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner) {
+    void updateDescriptionsForOwner(TO1 incomingMedia, TO2 mediaToUpdate, OwnerType owner, OwnerType... similarOwnerTypes) {
         for (TextualType type : TextualType.values()) {
             D incomingDescription = incomingMedia.findDescription(owner, type);
             D descriptionToUpdate = mediaToUpdate.findDescription(owner, type);
+
+             if (descriptionToUpdate == null && incomingDescription != null && similarOwnerTypes.length > 0) {
+                for (OwnerType similar : similarOwnerTypes) {
+                    D otherDescription = mediaToUpdate.findDescription(similar, type);
+                    if (otherDescription != null) {
+                        if (Objects.equals(otherDescription.get(), incomingDescription.get())) {
+                            return;
+                        }
+                    }
+                }
+
+            }
 
             if (incomingDescription != null && descriptionToUpdate != null) {
 
