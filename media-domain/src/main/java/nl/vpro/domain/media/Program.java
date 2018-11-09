@@ -72,9 +72,9 @@ public class Program extends MediaObject {
     // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
     @FilterJoinTables({
         @FilterJoinTable(name = PUBLICATION_FILTER, condition =
-            "((mediaobjec10_.publishstart is null or mediaobjec10_.publishstart < now())" +
-                "and (mediaobjec10_.publishstop is null or mediaobjec10_.publishstop > now()))"),
-        @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec10_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec10_.mergedTo_id is null))")
+            "((mediaobjec2_.publishstart is null or mediaobjec2_.publishstart < now())" +
+                "and (mediaobjec2_.publishstop is null or mediaobjec2_.publishstop > now()))"),
+        @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))")
     })
     protected Set<MemberRef> episodeOf = new TreeSet<>();
 
