@@ -1,10 +1,8 @@
 package nl.vpro.domain.media.update;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+import java.util.List;
 import java.util.function.BiFunction;
 
 import org.slf4j.Logger;
@@ -27,6 +25,10 @@ public class AssemblageConfig {
 
     @lombok.Builder.Default
     OwnerType ownerType = OwnerType.BROADCASTER;
+
+    @lombok.Builder.Default
+    @Singular
+    List<OwnerType> similarOwnerTypes;
 
     @lombok.Builder.Default
     boolean copyWorkflow = false;
@@ -95,6 +97,7 @@ public class AssemblageConfig {
     public AssemblageConfig copy() {
         return new AssemblageConfig(
             ownerType,
+            similarOwnerTypes,
             copyWorkflow,
             copyLanguageAndCountry,
             imageMetaData,
