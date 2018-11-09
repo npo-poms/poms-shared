@@ -503,14 +503,17 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         if (id != null) {
             builder.append("id", id);
         }
-        if (urnRef != null) {
-            builder.append("urnRef", urnRef);
+        if (getUrnRef()  != null) {
+            builder.append("urnRef", getUrnRef());
         }
-        if (cridRef != null) {
-            builder.append("cridRef", cridRef);
+        if (getCridRef() != null) {
+            builder.append("cridRef", getCridRef());
         }
-        if (midRef != null) {
-            builder.append("midRef", midRef);
+        if (getMidRef() != null) {
+            builder.append("midRef", getMidRef());
+        }
+        if (getMediaRef() != null) {
+            builder.append("mediaRef", getMediaRef());
         }
         if (number != null) {
             builder.append("number", number);
