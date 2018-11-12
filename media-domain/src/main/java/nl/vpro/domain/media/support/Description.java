@@ -68,7 +68,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     }
 
 
-    public <S extends MediaObject> Description(Description source, MediaObject parent) {
+    public Description(Description source, MediaObject parent) {
         this(source.get(), source.getOwner(), source.getType());
         this.parent = parent;
     }
