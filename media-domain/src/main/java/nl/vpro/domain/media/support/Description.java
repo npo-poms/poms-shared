@@ -40,7 +40,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     @XmlTransient
     private Long id;
 
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false)
     @NotNull(message = "description not set")
     @NoHtml
     @XmlValue
