@@ -9,8 +9,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -42,9 +40,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     @XmlTransient
     private Long id;
 
-    @Column(nullable = false)
-    @Lob
-    @Type(type = "org.hibernate.type.StringType")
+    @Column(nullable = false, columnDefinition = "TEXT")
     @NotNull(message = "description not set")
     @NoHtml
     @XmlValue
