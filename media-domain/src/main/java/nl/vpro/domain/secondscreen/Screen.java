@@ -14,9 +14,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Cascade;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -80,19 +77,16 @@ public class Screen extends PublishableObject<Screen> {
     @XmlSchemaType(name = "anyURI")
     private String url;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "screen_id")
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @OrderColumn(name = "list_index", nullable = true)
     @XmlElement
     private List<MediaRef> screenOf;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true, cascade = CascadeType.ALL)
     @JoinColumn(name = "secondscreen_id")
     @OrderColumn(name = "list_index", nullable = true)
-    @Cascade({org.hibernate.annotations.CascadeType.ALL})
     @Valid
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @XmlElementWrapper(name = "images")
     @XmlElement(name = "image", namespace = Xmlns.SHARED_NAMESPACE)
     @JsonProperty("images")
