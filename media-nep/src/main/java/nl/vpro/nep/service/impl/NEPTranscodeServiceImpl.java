@@ -119,7 +119,7 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         if (!request.getFilename().startsWith(ftpUserName)) {
             log.warn("The file given in {} does not start with ftp user name {}", request, ftpUserName);
         }
-        log.info("Transcode request {}", request);
+        log.info("Transcode request {}", json);
         HttpResponse response = client.execute(httpPost, clientContext);
 
         if (response.getStatusLine().getStatusCode() >= 300) {
