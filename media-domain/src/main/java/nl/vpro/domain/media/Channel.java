@@ -1,18 +1,21 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import nl.vpro.domain.Displayable;
-import nl.vpro.domain.XmlValued;
-import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
-import org.apache.commons.lang3.StringUtils;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.bind.annotation.XmlType;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import nl.vpro.domain.Displayable;
+import nl.vpro.domain.XmlValued;
+import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 import static nl.vpro.domain.media.AVType.AUDIO;
 import static nl.vpro.domain.media.AVType.VIDEO;
@@ -2155,6 +2158,38 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String pdId() {
             return "FUNX";
+        }
+    },
+
+    @XmlEnumValue("FNXA")
+    FNXA {
+        @Override
+        public String toString() {
+            return "FunX Amsterdam";
+        }
+    },
+
+    @XmlEnumValue("FNXR")
+    FNXR {
+        @Override
+        public String toString() {
+            return "FunX Rotterdam";
+        }
+    },
+
+    @XmlEnumValue("FNXU")
+    FNXU {
+        @Override
+        public String toString() {
+            return "FunX Utrecht";
+        }
+    },
+
+    @XmlEnumValue("FNXD")
+    FNXD {
+        @Override
+        public String toString() {
+            return "FunX Den Haag";
         }
     },
 
