@@ -238,6 +238,7 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
     public String toString() {
         return new ToStringBuilder(this)
             .appendSuper(super.toString())
+            .append("id", id)
             .append("creationDate", creationInstant)
             .append("lastModified", lastModified)
             .append("createdBy", createdBy)
