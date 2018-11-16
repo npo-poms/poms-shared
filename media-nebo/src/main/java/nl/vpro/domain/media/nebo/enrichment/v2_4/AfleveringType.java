@@ -178,7 +178,7 @@ public class AfleveringType {
     public String getInhk() {
         for (Description desc : program.getDescriptions()) {
             if (desc.getType() == TextualType.SHORT && desc.getOwner() == OWNER) {
-                return desc.getDescription();
+                return desc.get();
             }
         }
         return null;
