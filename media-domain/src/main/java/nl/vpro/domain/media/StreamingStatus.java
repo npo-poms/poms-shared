@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.zip.CRC32;
@@ -17,7 +16,7 @@ import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Displayable;
-import nl.vpro.i18n.Locales;
+import nl.vpro.i18n.Dutch;
 
 /**
  * @author Michiel Meeuwissen
@@ -198,12 +197,6 @@ public class StreamingStatus implements Serializable, Displayable  {
 
 
 
-    private static final DateTimeFormatter FORMATTER;
-    static {
-        FORMATTER =
-            DateTimeFormatter.ofPattern("d MMMM HH:mm", Locales.DUTCH)
-                     .withZone(Schedule.ZONE_ID);
-    }
 
     @Override
     public String getDisplayName() {
@@ -213,10 +206,11 @@ public class StreamingStatus implements Serializable, Displayable  {
             builder.append("Beschikbaar");
             String postFix = "";
             if (onDvrWithDrm()) {
-                builder.append(connector)
-                    .append("in DVR window")
-                    .append(" tot ").append(FORMATTER.format(withDrmOffline));
 
+                builder.append(connector)
+                    .append("in DVR window");
+                builder.append(" tot ")
+                    .append(Dutch.formatInstantSmartly(withDrmOffline));
                 connector = " en ";
             } else if (hasDrm()) {
                 builder.append(connector).append("met");
