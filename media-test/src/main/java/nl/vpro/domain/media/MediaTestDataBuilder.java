@@ -738,7 +738,7 @@ public interface MediaTestDataBuilder<
             AtomicLong mids = new AtomicLong(30000L);
             return MediaTestDataBuilder.super.withEverything()
                 .withType()
-                .withEpisodeOf(null, null, mids)
+                .withEpisodeOfIfAllowed(null, null, mids)
                 .withPoProgType()
                 .withPredictions()
                 .withSegmentsWithEveryting()
@@ -811,6 +811,14 @@ public interface MediaTestDataBuilder<
 
             return episodeOf(season, 1);
         }
+        public ProgramTestDataBuilder withEpisodeOfIfAllowed(Long seriesId, Long seasonId, AtomicLong midId)  {
+            if (mediaObject().getType().hasEpisodeOf()) {
+                withEpisodeOf(seriesId, seasonId, midId);
+            }
+            return this;
+
+        }
+
 
         public ProgramTestDataBuilder withSegments() {
 
