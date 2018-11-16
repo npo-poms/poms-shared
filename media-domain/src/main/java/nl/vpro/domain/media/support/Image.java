@@ -105,6 +105,8 @@ public class Image extends PublishableObject<Image>
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
     @XmlAttribute(required = false)
     OwnerType owner = OwnerType.BROADCASTER;
 
@@ -112,6 +114,8 @@ public class Image extends PublishableObject<Image>
     @Enumerated(EnumType.STRING)
     @NotNull
     @XmlAttribute(required = true)
+    @Getter
+    @Setter
     ImageType type = ImageType.PICTURE;
 
     @XmlAttribute(required = true)
@@ -145,9 +149,13 @@ public class Image extends PublishableObject<Image>
     protected java.time.Duration offset;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @Getter
+    @Setter
     private Integer width;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
+    @Getter
+    @Setter
     private Integer height;
 
     @NoHtml
@@ -158,6 +166,8 @@ public class Image extends PublishableObject<Image>
     @URI()
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Getter
+    @Setter
     private String source;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
@@ -165,6 +175,8 @@ public class Image extends PublishableObject<Image>
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
     @NotNull(groups = {WarningValidatorGroup.class})
+    @Getter
+    @Setter
     private String sourceName;
 
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
@@ -313,26 +325,6 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public OwnerType getOwner() {
-        return owner;
-    }
-
-    @Override
-    public void setOwner(OwnerType owner) {
-        this.owner = owner;
-    }
-
-    @Override
-    public ImageType getType() {
-        return type;
-    }
-
-    @Override
-    public void setType(ImageType type) {
-        this.type = type;
-    }
-
-    @Override
     public String getTitle() {
         return title;
     }
@@ -389,33 +381,6 @@ public class Image extends PublishableObject<Image>
         return this;
     }
 
-
-    @Override
-    public Integer getWidth() {
-        return width;
-    }
-
-    /**
-     * @param width The width to set.
-     */
-    @Override
-    public void setWidth(Integer width) {
-        this.width = width;
-    }
-
-    @Override
-    public Integer getHeight() {
-        return height;
-    }
-
-    /**
-     * @param height The height to set.
-     */
-    @Override
-    public void setHeight(Integer height) {
-        this.height = height;
-    }
-
     public Boolean isHighlighted() {
         return highlighted;
     }
@@ -435,25 +400,6 @@ public class Image extends PublishableObject<Image>
         this.credits = !StringUtils.isBlank(credits) ? credits : null;
     }
 
-    @Override
-    public String getSource() {
-        return source;
-    }
-
-    @Override
-    public void setSource(String creditURL) {
-        this.source = creditURL;
-    }
-
-    @Override
-    public String getSourceName() {
-        return sourceName;
-    }
-
-    @Override
-    public void setSourceName(String sourceName) {
-        this.sourceName = sourceName;
-    }
 
     @Override
     public String getDate() {
@@ -552,14 +498,14 @@ public class Image extends PublishableObject<Image>
         ;
     }
 
-    public static Image of(ImageMetadata<?> metaData) {
+    public static Image of(@Nonnull ImageMetadata<?> metaData) {
         Image image = new Image();
         image.copyFrom(metaData);
         return image;
     }
 
     @Override
-    public void copyFrom(Metadata<?> metadata) {
+    public void copyFrom(@Nonnull Metadata<?> metadata) {
         Metadata.super.copyFrom(metadata);
         if (metadata.getImageUri() != null) {
             if (imageUri == null) {
