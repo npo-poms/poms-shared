@@ -39,7 +39,7 @@ public class ItemizeResponse {
     @XmlElement(name = "result")
     private List<URI> results;
 
-    private Integer id;
+    private String id;
 
 
     public ItemizeResponse() {
