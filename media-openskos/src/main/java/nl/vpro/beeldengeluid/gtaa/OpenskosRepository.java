@@ -322,7 +322,8 @@ public class OpenskosRepository implements GTAARepository {
 
         // Beware parameter ordering is relevant
         return template.postForEntity(
-                gtaaUrl + "api/concept?key=" + gtaaKey + "&collection=gtaa&autoGenerateIdentifiers=true&tenant=" + tenant,
+                String.format("%s/api/concept?key=%s&collection=gtaa&autoGenerateIdentifiers=true&tenant=%s",
+                        gtaaUrl ,gtaaKey, tenant),
                 rdf, RDF.class);
     }
 
@@ -337,8 +338,10 @@ public class OpenskosRepository implements GTAARepository {
         }
         // String fields = "&fl=uuid,uri,prefLabel,altLabel,hiddenLabel,status";
         input = input.replaceAll("[\\-\\.,]+", " ");
-        String query = "(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" AND ("
-                + input + "*)";
+        String query = "(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) " +
+                "AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" " +
+                "AND (" + input + "*)";
+
         String url = "api/find-concepts?collection=gtaa&q=" + query + "&rows=" + max;
         final RDF rdf = getForUrl(url, RDF.class);
 
