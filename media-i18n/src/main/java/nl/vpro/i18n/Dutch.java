@@ -8,7 +8,7 @@ import java.time.temporal.Temporal;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.9
  */
 public class Dutch {
 
@@ -32,7 +32,11 @@ public class Dutch {
                 .withZone(ZONE_ID);
     }
 
-    public static String formatInstantSmartly(Temporal now, Temporal instant) {
+
+    /**
+     * Like {@link #formatSmartly(Temporal)}, but with the option to specify 'now'. Mainly usefull for testing.
+     */
+    public static String formatSmartly(Temporal now, Temporal instant) {
 
         Duration distance = Duration.between(now, instant).abs();
         if (distance.compareTo(Duration.ofHours(24)) < 0) {
@@ -45,8 +49,16 @@ public class Dutch {
 
     }
 
-    public static String formatInstantSmartly(Temporal instant) {
-        return formatInstantSmartly(Instant.now(), instant);
+    /**
+     * Formats a date time smartly, I.e. it will use shorter representation if this temporal is closer to {@link Instant#now()}.
+     *<ul>
+     * <li>If it's closer than a day, then only a time will be displayed,</li>
+     * <li>If it's closer than a year, then a date and a time will be displayed (but without an year)</li>
+     * <li>Otherwise a full date time string will be returned.</li>
+     * </ul>
+     */
+    public static String formatSmartly(Temporal instant) {
+        return formatSmartly(Instant.now(), instant);
     }
 
 }
