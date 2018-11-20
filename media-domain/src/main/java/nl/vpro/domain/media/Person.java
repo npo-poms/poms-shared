@@ -78,6 +78,7 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
         this.familyName = familyName;
     }
 
+    @lombok.Builder
     public Person(String givenName, String familyName, RoleType role) {
         this.givenName = givenName;
         this.familyName = familyName;
