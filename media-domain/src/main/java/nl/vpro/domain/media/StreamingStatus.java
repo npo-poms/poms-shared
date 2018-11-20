@@ -210,7 +210,7 @@ public class StreamingStatus implements Serializable, Displayable  {
                 builder.append(connector)
                     .append("in DVR window");
                 builder.append(" tot ")
-                    .append(Dutch.formatInstantSmartly(withDrmOffline));
+                    .append(Dutch.formatSmartly(withDrmOffline));
                 connector = " en ";
             } else if (hasDrm()) {
                 builder.append(connector).append("met");
