@@ -39,21 +39,20 @@ public class Dutch {
     public static String formatSmartly(Temporal now, Temporal instant) {
 
         Duration distance = Duration.between(now, instant).abs();
-        if (distance.compareTo(Duration.ofHours(24)) < 0) {
+        if (distance.compareTo(Duration.ofHours(12)) < 0) {
             return FORMATTER_SHORT.format(instant);
-        } else if (distance.compareTo(Duration.ofDays(365)) < 0) {
+        } else if (distance.compareTo(Duration.ofDays(365).dividedBy(2)) < 0) {
             return FORMATTER_LONG.format(instant);
         } else {
             return FORMATTER_VERY_LONG.format(instant);
         }
-
     }
 
     /**
      * Formats a date time smartly, I.e. it will use shorter representation if this temporal is closer to {@link Instant#now()}.
      *<ul>
-     * <li>If it's closer than a day, then only a time will be displayed,</li>
-     * <li>If it's closer than a year, then a date and a time will be displayed (but without an year)</li>
+     * <li>If it's closer than 12 hour, then only a time will be displayed,</li>
+     * <li>If it's closer than half a year, then a date and a time will be displayed (but without an year)</li>
      * <li>Otherwise a full date time string will be returned.</li>
      * </ul>
      */
