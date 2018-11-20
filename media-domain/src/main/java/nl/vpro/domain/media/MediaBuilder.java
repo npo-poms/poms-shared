@@ -518,6 +518,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return persons(Arrays.asList(persons));
     }
 
+    default B person(RoleType role, String givenName, String familyName) {
+
+        mediaObject().addPerson(Person.builder()
+            .givenName(givenName)
+            .familyName(familyName)
+            .role(role)
+            .build());
+        return (B) this;
+    }
+
 
     @SuppressWarnings("unchecked")
     default B persons(Collection<Person> persons) {
