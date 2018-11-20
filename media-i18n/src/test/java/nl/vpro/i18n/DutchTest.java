@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.9
  */
 public class DutchTest {
 
@@ -19,11 +19,11 @@ public class DutchTest {
         ZonedDateTime now = LocalDateTime.of(2018, 11, 16, 10, 0).atZone(Dutch.ZONE_ID);
 
 
-        assertThat(Dutch.formatInstantSmartly(now, LocalDateTime.of(2018, 11, 16, 13, 0).atZone(Dutch.ZONE_ID))).isEqualTo("13:00");
+        assertThat(Dutch.formatSmartly(now, LocalDateTime.of(2018, 11, 16, 13, 0).atZone(Dutch.ZONE_ID))).isEqualTo("13:00");
 
-        assertThat(Dutch.formatInstantSmartly(now, LocalDateTime.of(2018, 12, 16, 13, 0).atZone(Dutch.ZONE_ID))).isEqualTo("16 december 13:00");
+        assertThat(Dutch.formatSmartly(now, LocalDateTime.of(2018, 12, 16, 13, 0).atZone(Dutch.ZONE_ID))).isEqualTo("16 december 13:00");
 
-        assertThat(Dutch.formatInstantSmartly(now, LocalDateTime.of(2019, 12, 16, 13, 0).atZone(Dutch.ZONE_ID))).isEqualTo("16 december 2019 13:00");
+        assertThat(Dutch.formatSmartly(now, LocalDateTime.of(2019, 12, 16, 13, 0).atZone(Dutch.ZONE_ID))).isEqualTo("16 december 2019 13:00");
 
 
     }
