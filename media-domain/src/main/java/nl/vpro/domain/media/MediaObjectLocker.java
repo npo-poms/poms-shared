@@ -31,7 +31,7 @@ import nl.vpro.logging.Slf4jHelper;
 import nl.vpro.services.TransactionService;
 
 /**
- * Tool to make sure that the 'authority' related dropboxes don't run at the same time for the same mid.
+ * Tool to make sure that the 'authority' related dropboxes and other services don't run at the same time for the same mid.
  *
  * It may be better to (also) introduce more decent hibernate locking (MSE-3751)
  *
@@ -45,16 +45,15 @@ public class MediaObjectLocker {
     /**
      * Map mid -> ReentrantLock
      */
-    static Map<String, ReentrantLock>       LOCKED_MEDIA  = new ConcurrentHashMap<>();
-
+    static final Map<String, ReentrantLock>       LOCKED_MEDIA   = new ConcurrentHashMap<>();
 
     /**
      * Map key -> ReentrantLock
      */
-    static Map<Serializable, ReentrantLock> LOCKED_OBJECTS= new ConcurrentHashMap<>();
+    private static final Map<Serializable, ReentrantLock> LOCKED_OBJECTS = new ConcurrentHashMap<>();
 
 
-    private static final MediaObjectLockerAdmin JMX_INSTANCE = new MediaObjectLockerAdmin();
+    private static final MediaObjectLockerAdmin          JMX_INSTANCE    = new MediaObjectLockerAdmin();
 
 
 
@@ -70,7 +69,7 @@ public class MediaObjectLocker {
 
     /**
      * Adding this annotation of a method with a {@link String} or {@link MediaIdentifiable} object will 'lock' the identifier, and will make sure
-     * that not other code doing the same will run simultaneously.
+     * that no other code doing the same will run simultaneously.
      *
      * Much code like this will be get a mediaobject using this mid, change it and then commit the mediaobject.
      *
@@ -86,6 +85,9 @@ public class MediaObjectLocker {
         String method() default "";
     }
 
+    /**
+     * Like {@link Mid}, but now for nl.vpro.domain.subtitles.SubtitlesId.
+     */
 
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Sid {
