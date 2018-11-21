@@ -16,14 +16,16 @@ import static nl.vpro.rs.media.MediaBackendRestService.ERRORS;
 @Path("/frames")
 public interface FrameCreatorRestService {
 
+
     @PUT
     @Path("/{mid}/{offset}")
     @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.APPLICATION_OCTET_STREAM)
+    @Consumes({MediaType.APPLICATION_OCTET_STREAM, "image/*"})
     Response createFrame(
         @PathParam("mid") String mid,
         @PathParam("offset") Duration duration,
         @QueryParam(ERRORS) String errors,
+        @HeaderParam("Content-Transfer-Encoding") String transferEncoding,
         InputStream stream
     );
 }
