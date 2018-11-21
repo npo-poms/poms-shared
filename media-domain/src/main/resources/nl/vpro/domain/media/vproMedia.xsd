@@ -2790,6 +2790,34 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="FNXA">
+        <xs:annotation>
+          <xs:documentation>
+            FunX Amsterdam.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FNXR">
+        <xs:annotation>
+          <xs:documentation>
+            FunX Rotterdam.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FNXU">
+        <xs:annotation>
+          <xs:documentation>
+            FunX Utrecht.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FNXD">
+        <xs:annotation>
+          <xs:documentation>
+            FunX Den Haag.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="CLAS">
         <xs:annotation>
           <xs:documentation>
