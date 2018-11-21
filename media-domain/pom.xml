@@ -126,10 +126,12 @@
       <artifactId>hibernate-validator</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- TODO: This dependency needs to be dropped -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
     </dependency>
+
     <dependency>
       <!-- contains javax.persistence -->
       <groupId>javax</groupId>
