@@ -97,7 +97,7 @@ public enum RoleType {
         }
     },
     /**
-     * For radio shows this seems usefull
+     * For radio shows this seems useful
      * @since 5.8
      */
     NEWS_PRESENTER {
@@ -108,7 +108,7 @@ public enum RoleType {
 
     },
      /**
-     * For radio shows this seems usefull
+     * For radio shows this seems useful
      * @since 5.9
      */
     SIDEKICK {
