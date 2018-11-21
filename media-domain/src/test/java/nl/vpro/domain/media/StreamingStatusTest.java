@@ -40,13 +40,17 @@ public class StreamingStatusTest {
     }
 
     @Test
+    /*  displayName
+     *  The DRM status offline date is in the far future, the long display notation is expected
+     */
     public void displayName() {
         StreamingStatus status = StreamingStatus.builder()
             .withDrmOffline(LocalDate.of(2200, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant())
             .withDrm(StreamingStatus.Value.ONLINE)
             .build();
 
-        assertThat(status.getDisplayName()).isEqualTo("Beschikbaar in DVR window tot 1 januari 00:00");
+        assertThat(status.getDisplayName()).isEqualTo("Beschikbaar in DVR window tot 1 januari 2200 00:00");
+
     }
 
 
