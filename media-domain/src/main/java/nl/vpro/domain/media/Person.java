@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 import java.util.Optional;
 
@@ -42,10 +45,14 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
 
     @NoHtml
     @XmlElement
+    @Getter
+    @Setter
     protected String givenName;
 
     @NoHtml
     @XmlElement
+    @Getter
+    @Setter
     protected String familyName;
 
 
@@ -53,6 +60,8 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @XmlAttribute(required = true)
     @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
     protected RoleType role;
 
     @Column(name = "list_index",
@@ -60,6 +69,8 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     )
     @XmlTransient
     @NotNull
+    @Getter
+    @Setter
     private Integer listIndex = 0;
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
@@ -68,6 +79,8 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
 
     @Embedded
     @XmlTransient
+    @Getter
+    @Setter
     protected GTAARecord gtaaRecord;
 
     public Person() {
@@ -101,7 +114,7 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     }
 
 
-    @lombok.Builder
+    @lombok.Builder(builderClassName = "Builder")
     private Person(Long id, String givenName, String familyName, RoleType role, MediaObject mediaObject, GTAARecord gtaaRecord) {
         this(id, givenName, familyName, role);
         this.mediaObject = mediaObject;
@@ -109,24 +122,6 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     }
 
 
-    @Override
-    public String getGivenName() {
-        return givenName;
-    }
-
-    public void setGivenName(String value) {
-        this.givenName = value;
-    }
-
-    @Override
-    public String getFamilyName() {
-        return familyName;
-    }
-
-
-    public void setFamilyName(String value) {
-        this.familyName = value;
-    }
 
     /**
      * Sets both the given name and the family name by splitting the String.
@@ -142,25 +137,7 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
         }
     }
 
-    /**
-     * Gets the value of the role property.
-     *
-     * @return possible object is
-     *         {@link RoleType }
-     */
-    public RoleType getRole() {
-        return role;
-    }
 
-    /**
-     * Sets the value of the role property.
-     *
-     * @param value allowed object is
-     *              {@link RoleType }
-     */
-    public void setRole(RoleType value) {
-        this.role = value;
-    }
 
     @Deprecated
     public MediaObject getMediaObject() {
@@ -172,21 +149,17 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
         this.mediaObject = mediaObject;
     }
 
-    public Integer getListIndex() {
-        return listIndex;
+    @Override
+    public void setParent(MediaObject mo) {
+        this.mediaObject = mo;
     }
 
-    public void setListIndex(Integer listIndex) {
-        this.listIndex = listIndex;
+    @Override
+    public MediaObject getParent() {
+        return this.mediaObject;
     }
 
-    public GTAARecord getGtaaRecord() {
-        return gtaaRecord;
-    }
 
-    public void setGtaaRecord(GTAARecord gtaaRecord) {
-        this.gtaaRecord = gtaaRecord;
-    }
 
     @Override
     @XmlAttribute
@@ -244,13 +217,13 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
             .toString();
     }
 
-    @Override
-    public void setParent(MediaObject mo) {
-        this.mediaObject = mo;
+
+    public static class Builder {
+        public Builder gtaaUri(String uri) {
+            return gtaaRecord(GTAARecord.builder().uri(uri).build());
+        }
     }
 
-    @Override
-    public MediaObject getParent() {
-        return this.mediaObject;
-    }
+
+
 }

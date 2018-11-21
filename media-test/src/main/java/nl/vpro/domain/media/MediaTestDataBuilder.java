@@ -399,7 +399,12 @@ public interface MediaTestDataBuilder<
             }
     default T withPersons() {
         return persons(
-            Person.builder().givenName("Bregtje").familyName("van der Haak").role(RoleType.DIRECTOR).gtaaRecord(GTAARecord.builder().uri("http://gtaa/1234").build()).build(),
+            Person.builder()
+                .givenName("Bregtje")
+                .familyName("van der Haak")
+                .role(RoleType.DIRECTOR)
+                .gtaaUri("http://gtaa/1234")
+                .build(),
             new Person("Hans", "Goedkoop", RoleType.PRESENTER),
             new Person("Meta", "de Vries", RoleType.PRESENTER),
             new Person("Claire", "Holt", RoleType.ACTOR));
