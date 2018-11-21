@@ -53,11 +53,17 @@ public interface MediaBackendRestService {
     String ORDER = "order";
     String LANGUAGE = "language";
     String TYPE = "type";
+    String LOOKUP_CRID = "lookupcrid";
+    String IMAGE_METADATA = "imageMetadata";
 
     String VALIDATE_INPUT = "validateInput";
+    String FOLLOW_DESCRIPTION = "validateInput";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated against the XSD first";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
-    String IMAGE_METADATA = "imageMetadata";
+    String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRID's in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed.";
+    String IMAGE_METADATA_DESCRIPTION = "When set to true, the image backend server will try to fill in missing image metata automaticly, using several external API's";
+
+
 
     String ENCRYPTION = "encryption";
     String PRIORITY   = "priority";
