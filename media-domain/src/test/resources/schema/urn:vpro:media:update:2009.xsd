@@ -416,7 +416,7 @@
         <xs:element name="liverequest" type="liveItemize"/>
       </xs:choice>
       <xs:element name="result" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="id" type="xs:int" minOccurs="0"/>
+      <xs:element name="id" type="xs:string" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="success" type="xs:boolean" use="required"/>
   </xs:complexType>
