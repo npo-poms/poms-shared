@@ -866,6 +866,10 @@
       <xs:enumeration value="GOLD"/>
       <xs:enumeration value="ARRO"/>
       <xs:enumeration value="FUNX"/>
+      <xs:enumeration value="FNXA"/>
+      <xs:enumeration value="FNXR"/>
+      <xs:enumeration value="FNXU"/>
+      <xs:enumeration value="FNXD"/>
       <xs:enumeration value="CLAS"/>
       <xs:enumeration value="BEL1"/>
       <xs:enumeration value="BEL2"/>
