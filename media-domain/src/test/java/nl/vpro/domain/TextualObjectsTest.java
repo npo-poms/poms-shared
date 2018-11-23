@@ -131,8 +131,8 @@ public class TextualObjectsTest {
 
         TextualObjects.updateDescriptionsForOwner(incoming, existing, OwnerType.BROADCASTER);
 
-        Assert.assertThat("Insertion or ordering of new descriptions failed", existing.getDescriptions().first().getDescription(), equalTo(n1.getDescription()));
-        Assert.assertThat("Deletion or ordering of obsolete descriptions failed", existing.getDescriptions().last().getDescription(), equalTo(n3.getDescription()));
+        Assert.assertThat("Insertion or ordering of new descriptions failed", existing.getDescriptions().first().get(), equalTo(n1.get()));
+        Assert.assertThat("Deletion or ordering of obsolete descriptions failed", existing.getDescriptions().last().get(), equalTo(n3.get()));
         Assert.assertThat("Number of descriptions does not match", existing.getDescriptions().size(), equalTo(3));
     }
 
