@@ -67,7 +67,7 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title>  {
         if (input == null) {
             return false;
         }
-        return asExtendedTextMatcher().test(input.getTitle()) && Objects.equals(input.getOwner(), owner) && Objects.equals(input.getType(), type);
+        return asExtendedTextMatcher().test(input.get()) && Objects.equals(input.getOwner(), owner) && Objects.equals(input.getType(), type);
     }
 
     @Override

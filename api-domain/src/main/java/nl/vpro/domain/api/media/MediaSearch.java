@@ -238,12 +238,12 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             return true;
         }
         for (Title title : input.getTitles()) {
-            if (Matchers.tokenizedPredicate(text).test(title.getTitle())) {
+            if (Matchers.tokenizedPredicate(text).test(title.get())) {
                 return true;
             }
         }
         for (Description description : input.getDescriptions()) {
-            if (Matchers.tokenizedPredicate(text).test(description.getDescription())) {
+            if (Matchers.tokenizedPredicate(text).test(description.get())) {
                 return true;
             }
         }
