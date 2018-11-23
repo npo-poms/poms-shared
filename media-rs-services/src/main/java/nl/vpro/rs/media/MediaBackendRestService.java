@@ -25,6 +25,7 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.search.MediaForm;
 import nl.vpro.domain.media.search.MediaList;
 import nl.vpro.domain.media.search.MediaListItem;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
@@ -53,11 +54,14 @@ public interface MediaBackendRestService {
     String ORDER = "order";
     String LANGUAGE = "language";
     String TYPE = "type";
+    String OWNER = "owner";
 
     String VALIDATE_INPUT = "validateInput";
     String VALIDATE_INPUT_DESCRIPTION = "If true, the body will be validated against the XSD first";
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
     String IMAGE_METADATA = "imageMetadata";
+    String OWNER_DESCRIPTION = "if your account has sufficient right, you may get and post with a differrent owner type than BROADCASTER";
+
 
     String ENCRYPTION = "encryption";
     String PRIORITY   = "priority";
@@ -79,7 +83,8 @@ public interface MediaBackendRestService {
     MediaUpdate<?> getMedia(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     ) throws IOException;
 
 
