@@ -130,35 +130,33 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
     @SuppressWarnings("unchecked")
-    public static <M extends MediaObject> MediaUpdate<M> create(M object) {
+    public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner) {
         MediaUpdate<M> created;
         if (object instanceof Program) {
-            created = (MediaUpdate<M>) ProgramUpdate.create((Program) object);
+            created = (MediaUpdate<M>) ProgramUpdate.create((Program) object, owner);
         } else if (object instanceof Group) {
-            created = (MediaUpdate<M>) GroupUpdate.create((Group) object);
+            created = (MediaUpdate<M>) GroupUpdate.create((Group) object, owner);
         } else {
-            created = (MediaUpdate<M>) SegmentUpdate.create((Segment) object);
+            created = (MediaUpdate<M>) SegmentUpdate.create((Segment) object, owner);
         }
 
         return created;
     }
 
-    public static <M extends MediaObject> MediaUpdate<M> create(M object, Float version) {
-        MediaUpdate<M> update = create(object);
+    public static <M extends MediaObject> MediaUpdate<M> create(M object) {
+        return create(object, OwnerType.BROADCASTER);
+    }
+
+
+    public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner, Float version) {
+        MediaUpdate<M> update = create(object, owner);
         update.setVersion(version);
         return update;
     }
 
     @SuppressWarnings("unchecked")
-    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M>
-    createUpdate(MB object, OwnerType ownerType) {
-        if (object instanceof MediaBuilder.AbstractSegmentBuilder) {
-            return (MediaUpdate<M>) SegmentUpdate.create((Segment) object.build(), ownerType);
-        } else if (object instanceof MediaBuilder.AbstractProgramBuilder) {
-            return (MediaUpdate<M>) ProgramUpdate.create((Program) object.build(), ownerType);
-        } else {
-            return (MediaUpdate<M>) GroupUpdate.create((Group)object.build(), ownerType);
-        }
+    public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object, OwnerType ownerType) {
+        return create(object.build(), ownerType);
     }
 
 
