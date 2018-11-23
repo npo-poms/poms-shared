@@ -66,15 +66,15 @@ public class MediaObjectTest {
         mediaObject.addTitle(new Title("Title 1", OwnerType.MIS, TextualType.MAIN));
         assertThat(mediaObject.getTitles().first().getParent()).isEqualTo(mediaObject);
         assertThat(mediaObject.getTitles()).hasSize(1);
-        assertThat(mediaObject.getTitles().last().getTitle()).isEqualTo("Title 1");
+        assertThat(mediaObject.getTitles().last().get()).isEqualTo("Title 1");
 
         mediaObject.addTitle(new Title("Title 2", OwnerType.MIS, TextualType.EPISODE));
         assertThat(mediaObject.getTitles()).hasSize(2);
-        assertThat(mediaObject.getTitles().last().getTitle()).isEqualTo("Title 2");
+        assertThat(mediaObject.getTitles().last().get()).isEqualTo("Title 2");
 
         mediaObject.addTitle(new Title("Title 3", OwnerType.MIS, TextualType.EPISODE));
         assertThat(mediaObject.getTitles()).hasSize(2);
-        assertThat(mediaObject.getTitles().last().getTitle()).isEqualTo("Title 3");
+        assertThat(mediaObject.getTitles().last().get()).isEqualTo("Title 3");
     }
 
     @Test
@@ -86,15 +86,15 @@ public class MediaObjectTest {
         mediaObject.addDescription(new Description("Des 1", OwnerType.MIS, TextualType.MAIN));
         assertThat(mediaObject.getDescriptions().first().getParent()).isEqualTo(mediaObject);
         assertThat(mediaObject.getDescriptions()).hasSize(1);
-        assertThat(mediaObject.getDescriptions().last().getDescription()).isEqualTo("Des 1");
+        assertThat(mediaObject.getDescriptions().last().get()).isEqualTo("Des 1");
 
         mediaObject.addDescription(new Description("Des 2", OwnerType.MIS, TextualType.EPISODE));
         assertThat(mediaObject.getDescriptions()).hasSize(2);
-        assertThat(mediaObject.getDescriptions().last().getDescription()).isEqualTo("Des 2");
+        assertThat(mediaObject.getDescriptions().last().get()).isEqualTo("Des 2");
 
         mediaObject.addDescription(new Description("Des 3", OwnerType.MIS, TextualType.EPISODE));
         assertThat(mediaObject.getDescriptions()).hasSize(2);
-        assertThat(mediaObject.getDescriptions().last().getDescription()).isEqualTo("Des 3");
+        assertThat(mediaObject.getDescriptions().last().get()).isEqualTo("Des 3");
     }
 
     @Test
