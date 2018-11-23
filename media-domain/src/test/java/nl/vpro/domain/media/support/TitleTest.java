@@ -6,8 +6,10 @@ package nl.vpro.domain.media.support;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
-import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TitleTest {
 
@@ -28,8 +30,8 @@ public class TitleTest {
         set.add(new Title("12", OwnerType.NEBO, TextualType.EPISODE));
         set.add(new Title("13", OwnerType.NEBO, TextualType.MAIN));
 
-        assertThat(set.first().getTitle()).isEqualTo("5");
-        assertThat(set.last().getTitle()).isEqualTo("3");
+        assertThat(set.first().get()).isEqualTo("5");
+        assertThat(set.last().get()).isEqualTo("3");
         assertThat(set).hasSize(10);
     }
 }
