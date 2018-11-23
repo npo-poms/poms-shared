@@ -125,7 +125,7 @@ public interface MediaBackendRestService {
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
-        @QueryParam("lookupcrid") @DefaultValue("true") Boolean lookupcrid,
+        @QueryParam(LOOKUP_CRID) @DefaultValue("true") Boolean lookupcrid,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
         @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata
     ) throws IOException;
