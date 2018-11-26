@@ -544,7 +544,7 @@ public class MediaObjects {
 
                         } else {
                             update = false;
-                            log.warn("Cannot update location {} since it not from {}", locationToUpdate, owner);
+                            log.warn("Cannot update location {} since it is not from {}", locationToUpdate, owner);
                         }
                     }
                     if (update) {
