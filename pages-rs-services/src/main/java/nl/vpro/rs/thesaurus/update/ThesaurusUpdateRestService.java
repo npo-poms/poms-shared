@@ -6,7 +6,6 @@ package nl.vpro.rs.thesaurus.update;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
-import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.media.gtaa.GTAANewPerson;
@@ -24,20 +23,17 @@ import nl.vpro.domain.media.gtaa.ThesaurusObject;
 public interface ThesaurusUpdateRestService {
 
     String AUTHENTICATION_SCHEME = "Bearer";
-
-
-
-    String PATH = "/thesaurus/";
     String TAG = "thesaurus";
+    String PATH = "/" + TAG;
 
     @POST
     @Path("/person")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    GTAAPerson submit(@HeaderParam(HttpHeaders.AUTHORIZATION) String jws, @NotNull GTAANewPerson person);
+    GTAAPerson submitSignedPerson(@HeaderParam("authentication") String jws, @NotNull GTAANewPerson person);
 
     @POST
     @Path("/item")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    ThesaurusObject submit(@HeaderParam(HttpHeaders.AUTHORIZATION) String jws, @NotNull GTAANewThesaurusObject thesaurusObject);
+    ThesaurusObject submitSignedConcept(@HeaderParam("authentication") String jws, @NotNull GTAANewThesaurusObject thesaurusObject);
 
 }
