@@ -23,6 +23,9 @@ import nl.vpro.domain.media.gtaa.ThesaurusObject;
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public interface ThesaurusUpdateRestService {
 
+    String AUTHENTICATION_SCHEME = "Bearer";
+
+
 
     String PATH = "/thesaurus/";
     String TAG = "thesaurus";
