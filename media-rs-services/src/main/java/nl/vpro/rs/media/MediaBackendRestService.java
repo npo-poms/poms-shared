@@ -165,7 +165,8 @@ public interface MediaBackendRestService {
     XmlCollection<LocationUpdate> getLocations(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     ) throws IOException;
 
     @POST
@@ -178,8 +179,8 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
-        @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata
-
+        @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata,
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     );
 
 
@@ -188,7 +189,9 @@ public interface MediaBackendRestService {
     XmlCollection<ImageUpdate> getImages(
         @PathParam(ENTITY) @DefaultValue("media") final String entity,
         @Encoded @PathParam(ID) final String id,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
+
     ) throws IOException;
 
 
@@ -200,7 +203,8 @@ public interface MediaBackendRestService {
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("20") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     ) throws IOException;
 
     @GET
@@ -266,7 +270,8 @@ public interface MediaBackendRestService {
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("10") final Integer max,
         @QueryParam(ORDER) @DefaultValue("ASC") final String order,
-        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
+        @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
+        @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
     ) throws IOException;
 
 
