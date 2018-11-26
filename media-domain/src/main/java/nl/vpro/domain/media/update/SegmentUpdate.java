@@ -67,6 +67,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
         p.setStart(start);
         p.setType(segmentType);
         p.setMidRef(midRef);
+        p.setOwner(ownerType);
         return p;
     }
 
