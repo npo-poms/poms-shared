@@ -48,4 +48,9 @@ public class MemberUpdate {
     public void setHighlighted(Boolean highlighted) {
         this.highlighted = highlighted;
     }
+
+    @Override
+    public String toString() {
+        return position + ":" + mediaUpdate;
+    }
 }
