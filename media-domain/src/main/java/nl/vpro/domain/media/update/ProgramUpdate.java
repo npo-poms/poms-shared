@@ -60,9 +60,13 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
 
     public static ProgramUpdate create(MediaBuilder.ProgramBuilder builder) {
-        return  create(builder.build());
+        return  create(builder, OwnerType.BROADCASTER);
     }
 
+
+    public static ProgramUpdate create(MediaBuilder.ProgramBuilder builder, OwnerType owner) {
+        return  create(builder.build(), owner);
+    }
 
     @Override
     protected void fillFrom(Program mediaobject, OwnerType ownerType) {
