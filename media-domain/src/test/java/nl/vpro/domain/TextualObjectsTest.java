@@ -137,4 +137,42 @@ public class TextualObjectsTest {
     }
 
 
+
+    @Test
+    public void copyToUpdate1() {
+        BasicTextualObject test = new BasicTextualObject();
+        test.addTitle("bla mis", OwnerType.MIS, TextualType.MAIN);
+        test.addTitle("bla bc", OwnerType.BROADCASTER, TextualType.MAIN);
+
+
+        BasicTextualUpdate dest = new BasicTextualUpdate();
+        TextualObjects.copyToUpdate(test, dest, OwnerType.BROADCASTER);
+        assertThat(dest.getMainTitle()).isEqualTo("bla bc");
+    }
+
+
+    @Test
+    public void copyToUpdate2() {
+        BasicTextualObject test = new BasicTextualObject();
+        test.addTitle("bla mis", OwnerType.MIS, TextualType.MAIN);
+
+
+        BasicTextualUpdate dest = new BasicTextualUpdate();
+        TextualObjects.copyToUpdate(test, dest, OwnerType.BROADCASTER);
+        assertThat(dest.getMainTitle()).isEqualTo("bla mis");
+    }
+
+      @Test
+    public void copyToUpdate3() {
+        BasicTextualObject test = new BasicTextualObject();
+        test.addTitle("bla mis", OwnerType.MIS, TextualType.MAIN);
+        test.addTitle("bla bc", OwnerType.BROADCASTER, TextualType.MAIN);
+
+
+        BasicTextualUpdate dest = new BasicTextualUpdate();
+        TextualObjects.copyToUpdate(test, dest, OwnerType.NPO);
+        assertThat(dest.getMainTitle()).isEqualTo("bla mis");
+    }
+
+
 }
