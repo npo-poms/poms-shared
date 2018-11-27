@@ -94,5 +94,13 @@ public class TitleSearch extends AbstractSearch implements Predicate<Title>  {
         return caseSensitive == null ? true : caseSensitive;
     }
 
+    public boolean searchEquals(TitleSearch other) {
+        return Objects.equals(owner, other.owner) &&
+            Objects.equals(type, other.type) &&
+            Objects.equals(value, other.value) &&
+            Objects.equals(matchType, other.matchType);
+
+    }
+
 
 }
