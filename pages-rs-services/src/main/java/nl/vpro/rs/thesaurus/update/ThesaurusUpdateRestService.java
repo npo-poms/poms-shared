@@ -30,11 +30,17 @@ public interface ThesaurusUpdateRestService {
     @POST
     @Path("/person")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    GTAAPerson submit(@HeaderParam(HttpHeaders.AUTHORIZATION) String jws, @NotNull GTAANewPerson person);
+    GTAAPerson submit(
+        @HeaderParam(HttpHeaders.AUTHORIZATION) String jws,
+        @NotNull GTAANewPerson person
+    );
 
     @POST
     @Path("/item")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    ThesaurusObject submit(@HeaderParam(HttpHeaders.AUTHORIZATION) String jws, @NotNull GTAANewThesaurusObject thesaurusObject);
+    ThesaurusObject submit(
+        @HeaderParam(HttpHeaders.AUTHORIZATION) String jws,
+        @NotNull GTAANewThesaurusObject thesaurusObject
+    );
 
 }
