@@ -126,7 +126,7 @@ public class SearchResults {
         }
     }
 
-    public static void setSelected(DateRangeMatcherList searches, DateRangeFacets<?> dateRangeFacets,  List<DateFacetResultItem> facetResultItems, List<DateFacetResultItem> selected, Callable<DateFacetResultItem> creator) {
+    public static void setSelectedDateFacets(DateRangeMatcherList searches, DateRangeFacets<?> dateRangeFacets, List<DateFacetResultItem> facetResultItems, List<DateFacetResultItem> selected, Callable<DateFacetResultItem> creator) {
 
         if (facetResultItems != null && searches != null) {
             for (DateFacetResultItem facetResultItem : facetResultItems) {
@@ -193,7 +193,7 @@ public class SearchResults {
         }
     }
 
-    public static void setSelected(DurationRangeMatcherList searches, DurationRangeFacets<?> durationRangeFacets, List<DurationFacetResultItem> facetResultItems, List<DurationFacetResultItem> selected, Callable<DurationFacetResultItem> creator) {
+    public static void setSelectedDurationsFacets(DurationRangeMatcherList searches, DurationRangeFacets<?> durationRangeFacets, List<DurationFacetResultItem> facetResultItems, List<DurationFacetResultItem> selected, Callable<DurationFacetResultItem> creator) {
 
         if (facetResultItems != null && searches != null) {
             for (DurationFacetResultItem facetResultItem : facetResultItems) {
