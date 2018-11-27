@@ -162,4 +162,11 @@ public class MediaFacetsResult {
         }
         return contentRatings;
     }
+
+     List<TermFacetResultItem> getTitles(MediaSearch search) {
+        if (search != null && search.getTitles() != null && titles == null) {
+            titles = new ArrayList<>();
+        }
+        return titles;
+    }
 }

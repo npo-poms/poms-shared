@@ -37,7 +37,7 @@ public class PageSearchResults {
 
         SearchResults.setSelected(search.getSections(), facetResults.getSections(), selected.getSections(form), TermFacetResultItem::new, "page.sections");
 
-        SearchResults.setSelected(search.getSortDates(), form.getFacets().getSortDates(), facetResults.getSortDates(), selected.getSortDates(form), DateFacetResultItem::new);
+        SearchResults.setSelectedDateFacets(search.getSortDates(), form.getFacets().getSortDates(), facetResults.getSortDates(), selected.getSortDates(form), DateFacetResultItem::new);
         if (form.getFacets() != null) {
             setSelected(search.getRelations(), form.getFacets().getRelations(), facetResults.getRelations(), selected.getRelations(form));
         }
