@@ -64,7 +64,7 @@ public class SearchResultsTest {
         facetResultItems.add(DateFacetResultItem.builder().value("range2").begin(Instant.ofEpochMilli(100000)).end(Instant.ofEpochMilli(2000000)).count(50).build());
         List<DateFacetResultItem> selected = new ArrayList<>();
 
-        SearchResults.setSelected(searches, new DateRangeFacets(), facetResultItems, selected, DateFacetResultItem::new);
+        SearchResults.setSelectedDateFacets(searches, new DateRangeFacets(), facetResultItems, selected, DateFacetResultItem::new);
 
         assertThat(facetResultItems).hasSize(2);
         assertThat(facetResultItems.get(0).isSelected()).isTrue();
