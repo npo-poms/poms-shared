@@ -39,8 +39,8 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         super();
     }
 
-    public ProgramUpdate(Program program, OwnerType ownerType) {
-        super(program, ownerType);
+    public ProgramUpdate(Program program, OwnerType owner) {
+        super(program, owner);
     }
 
 
@@ -54,8 +54,8 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         return create(program, OwnerType.BROADCASTER);
     }
 
-    public static ProgramUpdate create(Program program, OwnerType type) {
-        return new ProgramUpdate(program, type);
+    public static ProgramUpdate create(Program program, OwnerType owner) {
+        return new ProgramUpdate(program, owner);
     }
 
 
@@ -69,9 +69,9 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     }
 
     @Override
-    protected void fillFrom(Program mediaobject, OwnerType ownerType) {
+    protected void fillFrom(Program mediaobject, OwnerType owner) {
         this.programType = mediaobject.getType();
-        this.segments = toSet(mediaobject.getSegments(), s -> SegmentUpdate.createForParent(this, s, ownerType));
+        this.segments = toSet(mediaobject.getSegments(), s -> SegmentUpdate.createForParent(this, s, owner));
         this.episodeOf = toSet(mediaobject.getEpisodeOf(), MemberRefUpdate::create);
     }
 

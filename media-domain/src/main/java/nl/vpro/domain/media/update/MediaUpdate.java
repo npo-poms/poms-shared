@@ -257,7 +257,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         fillFrom(mediaobject, ownerType);
     }
 
-    protected final void fillFromMedia(M mediaobject, OwnerType ownerType) {
+    protected final void fillFromMedia(M mediaobject, OwnerType owner) {
         this.mid = mediaobject.getMid();
         this.urn = mediaobject.getUrn();
         this.crids = mediaobject.getCrids();
@@ -282,7 +282,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         this.images = toList(
             mediaobject.getImages(),
-            (i) -> i.getOwner() == ownerType,
+            (i) -> i.getOwner() == owner,
             ImageUpdate::new,
             false)
         ;
@@ -297,12 +297,17 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
         this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
 
-        TextualObjects.copyToUpdate(mediaobject, this);
+
+        if (owner == null || owner == OwnerType.BROADCASTER) {
+            TextualObjects.copyToUpdate(mediaobject, this);
+        } else {
+            TextualObjects.copyToUpdate(mediaobject, this, owner);
+        }
 
         this.genres = toSet(mediaobject.getGenres(), Genre::getTermId);
         this.memberOf = toSet(mediaobject.getMemberOf(), MemberRefUpdate::create);
         this.websites = toList(mediaobject.getWebsites(), Website::get);
-        this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == ownerType, LocationUpdate::new);
+        this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == owner, LocationUpdate::new);
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
         this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability,PredictionUpdate::of);
