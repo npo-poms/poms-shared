@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -42,7 +43,7 @@ import nl.vpro.domain.user.Broadcaster;
 @EqualsAndHashCode(callSuper = true)
 @XmlDocumentation("Limits the search result to media with certain properties")
 @lombok.AllArgsConstructor
-@lombok.Builder
+@lombok.Builder(builderClassName = "Builder")
 public class MediaSearch extends AbstractTextSearch implements Predicate<MediaObject> {
 
 
@@ -353,5 +354,17 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             }
         }
         return false;
+    }
+
+    public static class Builder {
+
+        public Builder title(TitleSearch title) {
+            if (titles == null) {
+                titles = new ArrayList<>();
+            }
+            titles.add(title);
+            return this;
         }
+
+    }
 }
