@@ -188,11 +188,12 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     }
 
     /**
-     * This cannot be updated. Don't return it.
-     * @return
      */
     @Override
     public String getImageUri() {
+        if (image instanceof String) {
+            return (String) image;
+        }
         return null;
 
     }
