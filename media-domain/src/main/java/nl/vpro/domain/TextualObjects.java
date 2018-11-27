@@ -529,6 +529,28 @@ public class TextualObjects {
     }
 
 
+
+    /**
+     * Copy all texts from  a  {@link TextualObject} to a  {@link TextualObjectUpdate}.
+     * You can to specify an owner. Preferred are then values with owners equals or lower then this given owner, or if there are none, it will fall back from the top again.
+     *
+     * In principal if the owner is {@link OwnerType#BROADCASTER} youu could also use {@link #copyToUpdate(TextualObjectUpdate, TextualObjectUpdate)}
+     *
+     * @since 5.9
+     */
+    public static <
+        OT1 extends OwnedText, OD1 extends OwnedText, TO1 extends TextualObject<OT1, OD1, TO1>,
+        T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>
+        > void copyToUpdate(
+        @Nonnull TO1 from,
+        @Nonnull TO2 to,
+        @Nonnull  OwnerType owner) {
+        forUpdate(from.getTitles(), (t) -> to.setTitle(t.get(), t.getType()), () -> to.setTitles(null), owner);
+        forUpdate(from.getDescriptions(), (t) -> to.setDescription(t.get(), t.getType()), () -> to.setDescriptions(null), owner);
+    }
+
+
+
     /**
      * @since 5.8
      */
@@ -549,6 +571,30 @@ public class TextualObjects {
             ifNull.run();
         }
     }
+
+      /**
+     * @since 5.9
+     */
+    protected static <T extends OwnedText> void forUpdate(
+        Collection<T> collection,
+        Consumer<T> consumer,
+        Runnable ifNull,
+        OwnerType owner) {
+        if (collection != null) {
+            Map<TextualType, T> titles = new HashMap<>();
+            for (T title : collection) {
+                T previous = titles.get(title.getType());
+
+                if (previous == null || previous.getOwner().ordinal() < owner.ordinal()) {
+                    titles.put(title.getType(), title);
+                }
+            }
+            titles.values().forEach(consumer);
+        } else {
+            ifNull.run();
+        }
+    }
+
 
     public static <T extends OwnedText, D extends OwnedText, TO extends TextualObject<T, D, TO>> void removeEmptyValues(
         @Nonnull TO textualObject) {
