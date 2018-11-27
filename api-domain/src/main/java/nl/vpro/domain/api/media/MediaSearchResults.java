@@ -101,7 +101,7 @@ public class MediaSearchResults {
                 for (TermFacetResultItem facetResultItem : facetResultItems) {
                     if (facetResultItem.getId().equals(facet.getName())) {
                         for (TitleSearch search : searches) {
-                            if (search.equals(facet.getSubSearch())) {
+                            if (search.searchEquals(facet.getSubSearch())) {
                                 facetResultItem.setSelected(true);
                                 selected.add(facetResultItem);
                             }
