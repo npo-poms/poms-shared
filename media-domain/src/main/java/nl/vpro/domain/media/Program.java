@@ -460,17 +460,6 @@ public class Program extends MediaObject {
 
 
 
-    @Override
-    public String toString() {
-        String mainTitle;
-        try {
-            String mt = getMainTitle();
-            mainTitle = mt == null ? "null" : ('"' + mt + '"');
-        } catch(RuntimeException le) {
-            mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
-        }
-        return String.format("%sProgram{%1$smid=\"%2$s\", title=%3$s}", (workflow != Workflow.PUBLISHED ? workflow + ":" : "" ), type == null ? "": type + " ", this.getMid(), mainTitle);
-    }
 
     private String findPoSeriesID() {
         String poSeriesID = findPoSeriesID(episodeOf);
