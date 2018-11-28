@@ -241,8 +241,6 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     public void setRange(Range<Instant> range) {
         this.start = range.lowerEndpoint();
         this.duration = Duration.between(range.lowerEndpoint(), range.upperEndpoint());
-
-
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
