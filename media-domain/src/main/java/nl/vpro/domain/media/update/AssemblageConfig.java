@@ -60,14 +60,14 @@ public class AssemblageConfig {
     boolean locationsUpdate = false;
 
     @lombok.Builder.Default
-    boolean stealMids = false;
+    Steal stealMids = Steal.NO;
 
     /**
      * Matching happens on crid. There is a possibility though that the found object is of the wrong type (e.g. a Program and not a Segment)
      * If stealCrids is true, then in that situation the existing object is left, but the matching crid is removed.
      */
     @lombok.Builder.Default
-    boolean stealCrids= false;
+    Steal stealCrids= Steal.NO;
 
     /**
      * If an incoming segment matches a segment of _different_ program, then disconnect it from that other program
@@ -137,8 +137,8 @@ public class AssemblageConfig {
             .imageMetaData(true)
             .createScheduleEvents(true)
             .locationsUpdate(true)
-            .stealMids(true)
-            .stealCrids(true)
+            .stealMids(Steal.YES)
+            .stealCrids(Steal.YES)
             .stealSegments(true)
             ;
     }
@@ -157,4 +157,9 @@ public class AssemblageConfig {
         }
     }
 
+    public enum Steal {
+        YES,
+        IF_DELETED,
+        NO
+    }
 }
