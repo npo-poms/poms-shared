@@ -21,6 +21,7 @@ import nl.vpro.domain.Child;
 import nl.vpro.domain.media.support.AuthorizedDuration;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -350,7 +351,9 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         } catch (RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
-        return String.format("Segment{%1$smid=\"%2$s\", title=%3$s}", type == null ? "" : type + " ", this.getMid(), mainTitle);
+        return String.format("%sSegment{%1$smid=\"%2$s\", title=%3$s}",
+            (workflow != Workflow.PUBLISHED ? workflow + ":" : "" ),
+            type == null ? "" : type + " ", this.getMid(), mainTitle);
     }
 
 

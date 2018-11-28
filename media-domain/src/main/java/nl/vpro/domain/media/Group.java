@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
 
 @Entity
 @Table(name = "group_table")
@@ -212,7 +213,10 @@ public class Group extends MediaObject {
         } catch (RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
-        return String.format("Group{%1$smid=\"%2$s\", title=%3$s}", type == null ? "" : type + " ", this.getMid(), mainTitle);
+        return String.format("%sGroup{%1$smid=\"%2$s\", title=%3$s}",
+            (workflow != Workflow.PUBLISHED ? workflow + ":" : "" ),
+
+            type == null ? "" : type + " ", this.getMid(), mainTitle);
 
     }
 }
