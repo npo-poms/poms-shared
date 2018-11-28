@@ -14,7 +14,10 @@ import java.nio.charset.Charset;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -24,7 +27,6 @@ import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXB;
 
-import nl.vpro.domain.media.gtaa.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,6 +41,10 @@ import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.domain.media.gtaa.GTAAConflict;
+import nl.vpro.domain.media.gtaa.GTAARepository;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
+import nl.vpro.domain.media.gtaa.ThesaurusObjects;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
@@ -75,6 +81,11 @@ public class OpenskosRepository implements GTAARepository {
     @Getter
     @Setter
     private String tenant;
+
+    @Value("${gtaa.retries}")
+    @Getter
+    @Setter
+    private int retries;
 
     public OpenskosRepository(
         @Nonnull String gtaaUrl,
@@ -120,24 +131,47 @@ public class OpenskosRepository implements GTAARepository {
         return sb.toString();
     }
 
+
+    @Override
+    public ThesaurusObject submit(ThesaurusObject thesaurusObject, String creator) {
+
+        final Description description = submit(thesaurusObject.getValue(),
+                thesaurusObject.getNotes(),
+                creator,
+                ThesaurusObjects.toScheme(thesaurusObject)
+        );
+        return ThesaurusObjects.toThesaurusObject(description);
+
+    }
+
+
     private Description submit(String prefLabel, List<Label> notes, String creator, String scheme) {
 
-        ResponseEntity<RDF> response;
+        ResponseEntity<RDF> response = null;
         RuntimeException rte = null;
         try {
             response = postRDF(prefLabel, notes, creator, scheme);
         } catch (GTAAConflict ex) {
-            try {
-                // Retry the submit by adding a "." after the label name when a 409 Conflict is
-                // returned
-                // See MSE-3366
-                log.warn("Retrying label on 409 Conflict: \"{}\"", prefLabel + ".");
-                response = postRDF(prefLabel + ".", notes, creator, scheme);
-            } catch (GTAAConflict ex2) {
-                /* The version with "." already exists too */
-                log.error("Duplicate label: {}", prefLabel);
-                throw ex2;
+            String postFix = ".";
+            while(postFix.length() <= retries) {
+                try {
+                    // Retry the submit by adding a "." after the label name when a 409 Conflict is
+                    // returned
+                    // See MSE-3366
+                    log.warn("Retrying label on 409 Conflict: \"{}\"", prefLabel + postFix);
+                    response = postRDF(prefLabel + postFix, notes, creator, scheme);
+                    break;
+                } catch (GTAAConflict ex2) {
+                    /* The version with "." already exists too */
+                    log.debug("Duplicate label: {}", prefLabel);
+                    ex = ex2;
+                }
+                postFix += ".";
             }
+            if (response == null) {
+                throw ex;
+            }
+
         } catch (RuntimeException rt) {
             log.error(rt.getClass().getName() + " " + rt.getMessage());
             rte = rt;
@@ -153,18 +187,6 @@ public class OpenskosRepository implements GTAARepository {
         } else {
             throw new RuntimeException("For prefLabel: " + prefLabel, rte);
         }
-
-    }
-
-    @Override
-    public ThesaurusObject submit(ThesaurusObject thesaurusObject, String creator) {
-
-        final Description description = submit(thesaurusObject.getValue(),
-                thesaurusObject.getNotes(),
-                creator,
-                ThesaurusObjects.toScheme(thesaurusObject)
-        );
-        return ThesaurusObjects.toThesaurusObject(description);
 
     }
 
