@@ -26,6 +26,7 @@ import org.hibernate.annotations.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Range;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.Identifiable;
@@ -798,6 +799,15 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @Override
     public String getMainDescription() {
         return TextualObject.super.getMainDescription();
+    }
+
+
+    public Range<Instant> asRange() {
+        return Range.closedOpen(start, start.plus(duration));
+    }
+    public void setRange(Range<Instant> range) {
+        this.start = range.lowerEndpoint();
+        this.duration = Duration.between(range.lowerEndpoint(), range.upperEndpoint());
     }
 
     public static class Builder {
