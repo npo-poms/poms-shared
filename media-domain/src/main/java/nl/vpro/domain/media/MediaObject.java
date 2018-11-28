@@ -2752,4 +2752,21 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         return result;
     }
 
+
+    @Override
+    public final String toString() {
+        String mainTitle;
+        try {
+            String mt = getMainTitle();
+            mainTitle = mt == null ? "null" : ('"' + mt + '"');
+        } catch(RuntimeException le) {
+            mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
+        }
+        return String.format(getClass().getSimpleName() + "{%1$s%2$smid=\"%3$s\", title=%4$s}",
+            (! Workflow.PUBLICATIONS.contains(workflow) ? workflow + ":" : "" ),
+            getType() == null ? "" : getType() + " ",
+            this.getMid(),
+            mainTitle);
+    }
+
 }
