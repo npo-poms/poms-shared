@@ -1062,7 +1062,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "[" + getType() + ":" + mid + ":" + getMainTitle() + "]";
+        return (isDeleted == Boolean.TRUE ? "DELETED:" : "") + getClass().getSimpleName() + "[" + getType() + ":" + mid + ":" + getMainTitle() + "]";
     }
 
 
