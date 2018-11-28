@@ -4,11 +4,13 @@ import lombok.*;
 
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 import org.slf4j.Logger;
 
 import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
 
@@ -158,8 +160,18 @@ public class AssemblageConfig {
     }
 
     public enum Steal {
-        YES,
-        IF_DELETED,
-        NO
+        YES((w) -> true),
+        IF_DELETED(Workflow.PUBLISHED_AS_DELETED::contains),
+        NO((w) -> true);
+
+        private final Function<Workflow, Boolean> is;
+
+        Steal(Function<Workflow, Boolean> is) {
+            this.is = is;
+        }
+
+        public boolean is(Workflow workflow) {
+            return is.apply(workflow);
+        }
     }
 }

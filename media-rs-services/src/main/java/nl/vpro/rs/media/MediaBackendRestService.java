@@ -67,7 +67,7 @@ public interface MediaBackendRestService {
     String ERRORS_DESCRIPTION = "An optional email address to which errors could be mailed if they occur asynchronously";
     String LOOKUP_CRID_DESCRIPTION = "When set to false, possible CRID's in the update will not be used to look up the media object. When set to true, a MID cannot be created beforehand, since this might not be needed. ";
 
-    String STEAL_CRIDs_DESCRIPTION = "When set to true, and you submit an object with both crid and mid (or you used lookupcrid=false, and generate a mid), and the crid existed already for a different mid, then this crid will be (if allowed) removed from the old object ";
+    String STEAL_CRIDS_DESCRIPTION = "When set to true, and you submit an object with both crid and mid (or you used lookupcrid=false, and generate a mid), and the crid existed already for a different mid, then this crid will be (if allowed) removed from the old object ";
     String IMAGE_METADATA_DESCRIPTION = "When set to true, the image backend server will try to fill in missing image metata automaticly, using several external API's";
     String OWNER_DESCRIPTION = "if your account has sufficient right, you may get and post with a differrent owner type than BROADCASTER";
 
@@ -136,7 +136,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam(LOOKUP_CRID) @DefaultValue("true") Boolean lookupcrid,
-        @QueryParam(STEAL_CRIDS) @DefaultValue("false") Boolean stealcrids,
+        @QueryParam(STEAL_CRIDS) @DefaultValue("false") AssemblageConfig.Steal stealcrids,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
         @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
