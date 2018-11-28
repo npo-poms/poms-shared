@@ -2,6 +2,7 @@ package nl.vpro.domain.media.update;
 
 import lombok.*;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -59,6 +60,9 @@ public class AssemblageConfig {
     boolean createScheduleEvents = false;
 
     @lombok.Builder.Default
+    Duration mergeScheduleEvents = Duration.ofMillis(-1);
+
+    @lombok.Builder.Default
     boolean locationsUpdate = false;
 
     @lombok.Builder.Default
@@ -108,6 +112,7 @@ public class AssemblageConfig {
             memberOfUpdate,
             ratingsUpdate,
             createScheduleEvents,
+            mergeScheduleEvents,
             locationsUpdate,
             stealMids,
             stealCrids,
