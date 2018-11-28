@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
+import com.google.common.collect.Range;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.TextualObjectUpdate;
@@ -234,7 +235,15 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
             Comparator.nullsFirst(Comparator.naturalOrder()));
     }
 
+    public Range<Instant> asRange() {
+        return Range.closedOpen(start, start.plus(duration));
+    }
+    public void setRange(Range<Instant> range) {
+        this.start = range.lowerEndpoint();
+        this.duration = Duration.between(range.lowerEndpoint(), range.upperEndpoint());
 
+
+    }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if (parent instanceof Program) {
