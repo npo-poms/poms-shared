@@ -45,6 +45,7 @@ import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.*;
 import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.StringList;
+import nl.vpro.validation.URI;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -209,9 +210,14 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @Valid
     protected Asset asset;
 
-    private List<String> broadcasters;
+    private List<
+        @Size(min = 2, max = 4, message = "2 < id < 5")
+        @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
+            String> broadcasters;
 
-    private List<String> portals;
+    private List<
+        String
+        > portals;
 
     private SortedSet<String> tags;
 
@@ -234,10 +240,17 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private SortedSet<MemberRefUpdate> memberOf;
 
-    private List<String> websites;
+    private List<
+        @URI(message = "{nl.vpro.constraints.URI}")
+        @Size.List({
+            @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
+            @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
+        })
+        String> websites;
 
-    @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,15}$")
-    private List<String> twitterrefs;
+
+    private List<@Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,15}$")
+        String> twitterrefs;
 
     private SortedSet<LocationUpdate> locations;
 
