@@ -12,7 +12,9 @@ import java.util.stream.Stream;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.VersionSpecific;
+import nl.vpro.util.IntegerVersion;
+import nl.vpro.util.IntegerVersionSpecific;
+
 
 /**
  * @author Michiel Meeuwissen
@@ -29,12 +31,12 @@ import nl.vpro.domain.VersionSpecific;
     String.class
 })
 @XmlAccessorType(XmlAccessType.NONE)
-public class MediaUpdateList<T> implements Iterable<T>, VersionSpecific {
+public class MediaUpdateList<T> implements Iterable<T>, IntegerVersionSpecific {
 
     @XmlAttribute
     @Getter
     @Setter
-    protected Float version;
+    protected IntegerVersion version;
 
     protected List<T> list;
 
@@ -59,7 +61,7 @@ public class MediaUpdateList<T> implements Iterable<T>, VersionSpecific {
         super();
     }
 
-    public MediaUpdateList(final List<T> list, long totalCount, long offset, Integer max, String order, Float version) {
+    public MediaUpdateList(final List<T> list, long totalCount, long offset, Integer max, String order, IntegerVersion version) {
         this.list = Collections.unmodifiableList(list);
         this.offset = offset;
         this.totalCount =  totalCount;
@@ -114,8 +116,8 @@ public class MediaUpdateList<T> implements Iterable<T>, VersionSpecific {
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (parent != null) {
-            if (parent instanceof VersionSpecific) {
-                version = ((VersionSpecific) parent).getVersion();
+            if (parent instanceof IntegerVersionSpecific) {
+                version = ((IntegerVersionSpecific) parent).getVersion();
             }
         }
     }

@@ -14,6 +14,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
+import nl.vpro.util.Version;
 
 /**
  * @author Michiel Meeuwissen
@@ -55,6 +56,9 @@ public class AssemblageConfig {
 
     @lombok.Builder.Default
     boolean ratingsUpdate = true;
+
+    @lombok.Builder.Default
+    boolean copyTwitterrefs = false;
 
     @lombok.Builder.Default
     boolean createScheduleEvents = false;
@@ -117,6 +121,7 @@ public class AssemblageConfig {
             guessEpisodePosition,
             memberOfUpdate,
             ratingsUpdate,
+            copyTwitterrefs,
             createScheduleEvents,
             mergeScheduleEvents,
             locationsUpdate,
@@ -147,6 +152,7 @@ public class AssemblageConfig {
             .guessEpisodePosition(true)
             .memberOfUpdate(true)
             .ratingsUpdate(true)
+            .copyTwitterrefs(true)
             .imageMetaData(true)
             .createScheduleEvents(true)
             .locationsUpdate(true)
@@ -158,6 +164,12 @@ public class AssemblageConfig {
 
     public boolean considerForDeletion(Segment segment) {
         return segmentsForDeletion.apply(segment, this);
+    }
+
+    public void backwardsCompatible(Version version) {
+        setCopyLanguageAndCountry(version != null && version.isNotBefore(5, 0));
+        setCopyPredictions(version != null && version.isNotBefore(5, 6));
+        setCopyTwitterrefs(version != null && version.isNotBefore(5, 10));
     }
 
     public static class Builder {
