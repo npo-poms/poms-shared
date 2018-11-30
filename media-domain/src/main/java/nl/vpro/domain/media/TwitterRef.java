@@ -60,17 +60,20 @@ public class TwitterRef implements Serializable, Supplier<String>, Ownable {
     }
 
     public TwitterRef(String v) {
+        this(v, OwnerType.BROADCASTER);
+    }
+    public TwitterRef(String v, OwnerType owner) {
         if(v.startsWith("@")) {
             type = Type.ACCOUNT;
         } else if(v.startsWith("#")) {
             type = Type.HASHTAG;
         }
         value = v;
+        this.owner = owner;
     }
 
     public TwitterRef(TwitterRef source) {
-        this(source.value);
-        this.owner = source.owner;
+        this(source.value, source.owner);
     }
 
     public static TwitterRef copy(TwitterRef source) {

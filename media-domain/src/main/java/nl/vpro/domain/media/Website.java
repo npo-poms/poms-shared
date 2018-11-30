@@ -53,9 +53,13 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         this.url = url;
     }
 
+    public Website(String url, OwnerType owner) {
+        this.url = url;
+        this.owner = owner;
+    }
+
     public Website(Website source) {
-        this(source.getUrl());
-        this.owner = source.owner;
+        this(source.getUrl(), source.owner);
 
     }
 
