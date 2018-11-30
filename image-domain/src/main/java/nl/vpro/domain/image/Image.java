@@ -63,7 +63,9 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "date",
         "credits",
         "license",
-        "data"
+        "data",
+        "broadcaster",
+        "owner"
     }
 )
 @AllArgsConstructor
