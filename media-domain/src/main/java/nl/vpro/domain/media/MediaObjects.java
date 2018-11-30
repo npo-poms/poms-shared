@@ -18,6 +18,8 @@ import com.google.common.collect.Iterables;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
