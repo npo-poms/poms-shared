@@ -232,6 +232,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private List<String> websites;
 
+    private List<String> twitterrefs;
+
     private SortedSet<LocationUpdate> locations;
 
     private SortedSet<RelationUpdate> relations;
@@ -307,6 +309,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.genres = toSet(mediaobject.getGenres(), Genre::getTermId);
         this.memberOf = toSet(mediaobject.getMemberOf(), MemberRefUpdate::create);
         this.websites = toList(mediaobject.getWebsites(), Website::get);
+        this.twitterrefs= toList(mediaobject.getTwitterRefs(), TwitterRef::get);
+
         this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == owner, LocationUpdate::new);
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
@@ -431,7 +435,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         media.setGenres(toSet(genres, Genre::new));
         media.setMemberOf(toSet(memberOf, this::toMemberRef));
-        media.setWebsites(toList(websites, Website::new));
 
         // locations are owned
 
@@ -450,6 +453,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
         TextualObjects.copy(this, returnObject, owner);
         returnObject.setLocations(toSet(locations, l -> l.toLocation(owner)));
         returnObject.setImages(toList(images, i -> i.toImage(owner)).stream().filter(i -> i.getImageUri() != null).collect(Collectors.toList()));
+        returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
+        returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
+
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
             ScheduleEvent e = s.toScheduleEvent(owner);
             e.setParent(returnObject);
@@ -957,6 +963,21 @@ public abstract class  MediaUpdate<M extends MediaObject>
             .map(Website::getUrl)
             .collect(Collectors.toList());
     }
+
+
+    @XmlElement(name = "twitterref")
+    @Nonnull
+    public List<String> getTwitterrefs() {
+        if (twitterrefs == null) {
+             twitterrefs = new ArrayList<>();
+        }
+        return twitterrefs;
+    }
+
+    public void setTwitterRefs(List<String> twitterRefs) {
+        this.twitterrefs = twitterRefs;
+    }
+
 
 
     /**
