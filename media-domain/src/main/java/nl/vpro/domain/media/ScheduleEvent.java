@@ -33,6 +33,7 @@ import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.persistence.LocalDateToDateConverter;

@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.AbstractOwnedTextEntity;
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.ScheduleEvent;
 
 /**

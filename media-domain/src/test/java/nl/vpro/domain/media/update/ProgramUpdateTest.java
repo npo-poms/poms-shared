@@ -31,6 +31,7 @@ import org.xml.sax.SAXException;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;

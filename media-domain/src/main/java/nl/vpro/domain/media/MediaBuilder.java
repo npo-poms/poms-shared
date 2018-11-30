@@ -26,6 +26,7 @@ import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.domain.user.Portal;

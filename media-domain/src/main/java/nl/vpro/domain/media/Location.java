@@ -30,6 +30,8 @@ import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.util.TimeUtils;
@@ -46,7 +48,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  * Note that this class confirms to a natural ordering not consistent with equals.
  *
  * @author Roelof Jan Koekoek
- * @see nl.vpro.domain.media.support.OwnerType
+ * @see OwnerType
  * @since 0.4
  */
 @Entity
