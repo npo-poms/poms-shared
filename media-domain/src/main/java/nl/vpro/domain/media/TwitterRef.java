@@ -40,6 +40,8 @@ public class TwitterRef implements Serializable, Supplier<String>, Ownable {
     @Column(length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     @XmlAttribute
+    @Getter
+    @Setter
     private Type type;
 
     @Column(nullable = false)
@@ -48,11 +50,14 @@ public class TwitterRef implements Serializable, Supplier<String>, Ownable {
     //    @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^(@|#)[A-Za-z0-9_]{1,15}$")
     @XmlValue
     @JsonProperty("value")
+    @Getter
+    @Setter
     private String value;
 
     @XmlTransient
     @Getter
     @Setter
+    @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
 
@@ -83,21 +88,6 @@ public class TwitterRef implements Serializable, Supplier<String>, Ownable {
         return new TwitterRef(source);
     }
 
-    public Type getType() {
-        return type;
-    }
-
-    public void setType(Type type) {
-        this.type = type;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 
     @Override
     public boolean equals(Object o) {
