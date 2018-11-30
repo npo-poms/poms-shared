@@ -47,7 +47,7 @@ public class TwitterRef implements Serializable, Supplier<String>, Ownable {
 
     @Column(nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
-    @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,15}$")
+    @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,139}$")
     @XmlValue
     @JsonProperty("value")
     @Getter
