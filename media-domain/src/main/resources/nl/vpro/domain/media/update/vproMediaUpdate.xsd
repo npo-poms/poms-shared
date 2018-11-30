@@ -164,7 +164,13 @@
                   form="qualified"/>
       <xs:element name="email" type="media:baseTextType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
       <xs:element name="website" type="media:websiteType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
-      <xs:element name="twitterref" type="media:twitterrefType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element name="twitterref" type="twitterrefType" form="qualified" maxOccurs="unbounded" minOccurs="0">
+         <xs:annotation>
+          <xs:documentation>
+            Only supported if version &gt;= 5.10.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
       <xs:element name="prediction" type="predictionUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
@@ -209,7 +215,7 @@
     <xs:attribute name="mid" type="media:midType"/>
     <xs:attribute name="urn" type="xs:anyURI"/>
     <xs:attribute name="ordered" type="xs:boolean"/>
-    <xs:attribute name="version" type="xs:float">
+    <xs:attribute name="version" type="versionType">
       <xs:annotation>
         <xs:documentation>
           The POMS version this XML applies too. This is optional, though some feature will only be supported if you explicitely specify a version which is big enough (To ensure backward compatiblity).
@@ -626,6 +632,12 @@
       <xs:pattern value="^[@#][A-Za-z0-9_]{1,15}$" />
       <xs:minLength value="2"/>
       <xs:maxLength value="16"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+   <xs:simpleType name="versionType">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^[0-9]+(\.[0-9]+(\.[0-9]+)?)?$" />
     </xs:restriction>
   </xs:simpleType>
 

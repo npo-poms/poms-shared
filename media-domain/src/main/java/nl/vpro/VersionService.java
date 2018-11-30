@@ -9,6 +9,8 @@ import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import nl.vpro.util.IntegerVersion;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -16,11 +18,13 @@ import java.util.regex.Pattern;
 @Slf4j
 public class VersionService {
 
-    private static final String FALLBACK = "5.8";
+    private static final String FALLBACK = "5.10.0";
 
     private static String version;
 
     private static Float floatVersion;
+
+    private static IntegerVersion integerVersion;
 
     public static String version() {
         if (version == null) {
@@ -42,6 +46,7 @@ public class VersionService {
         return version;
     }
 
+    @Deprecated
     public static Float floatVersion() {
         if (floatVersion == null) {
             String version = version();
@@ -51,6 +56,18 @@ public class VersionService {
             }
         }
         return floatVersion;
+    }
+
+
+    public static IntegerVersion integerVersion() {
+        if (integerVersion == null) {
+            String version = version();
+            Matcher matcher = Pattern.compile("([0-9]+(?:\\.[0-9]+(?:\\.[0-9]+)?)?).*").matcher(version);
+            if (matcher.matches()) {
+                integerVersion = new IntegerVersion(matcher.group(1));
+            }
+        }
+        return integerVersion;
     }
 
     /**
