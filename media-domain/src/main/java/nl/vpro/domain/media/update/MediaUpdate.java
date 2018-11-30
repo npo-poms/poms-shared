@@ -97,6 +97,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
         "contentRatings",
         "email",
         "websites",
+        "twitterrefs",
         "predictions",
         "locations",
         "scheduleEvents",
@@ -232,6 +233,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private List<String> websites;
 
+    @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,15}$")
     private List<String> twitterrefs;
 
     private SortedSet<LocationUpdate> locations;
