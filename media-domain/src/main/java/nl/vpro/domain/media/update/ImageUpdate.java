@@ -204,6 +204,10 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
             return imageLocation(new ImageLocation(imageLocation));
         }
 
+        public Builder imageUrl(String mimeType, String imageLocation) {
+            return imageLocation(ImageLocation.builder().mimeType(mimeType).url(imageLocation).build());
+        }
+
         public Builder imageDataHandler(DataHandler dataHandler) {
             return imageData(new ImageData(dataHandler));
         }

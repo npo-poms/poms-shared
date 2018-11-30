@@ -26,6 +26,8 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.PeekingIterator;
 
 import nl.vpro.domain.Identifiable;
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.InstantToTimestampConverter;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -51,7 +53,7 @@ import static nl.vpro.i18n.Locales.DUTCH;
 })
 @Slf4j
 @IdClass(SubtitlesId.class)
-public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
+public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Ownable {
 
     private static final long serialVersionUID = 0L;
 
@@ -106,7 +108,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
     @NotNull
     @Getter
     @Setter
-    private SubtitlesOwnerType owner = SubtitlesOwnerType.BROADCASTER;
+    private OwnerType owner = OwnerType.BROADCASTER;
 
     public Subtitles() {
     }
@@ -121,7 +123,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
             InputStream value,
             Iterator<Cue> cues,
             SubtitlesType type,
-            SubtitlesOwnerType owner) {
+            OwnerType owner) {
         this.mid = mid;
         this.offset = offset;
         if (content == null && value == null && format == null && cues != null) {
@@ -146,7 +148,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
         } else {
             throw new IllegalArgumentException("Should either give iterator of cues, or content and format, or value and format");
         }
-        this.owner = owner == null ? SubtitlesOwnerType.BROADCASTER : owner;
+        this.owner = owner == null ? OwnerType.BROADCASTER : owner;
         this.language = language;
         this.cueCount = null;
         this.type = type == null ? SubtitlesType.CAPTION : type;
@@ -160,7 +162,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId> {
                 .format(SubtitlesFormat.TT888)
                 .content(content)
                 .type(SubtitlesType.CAPTION)
-                .owner(SubtitlesOwnerType.AUTHORITY)
+                .owner(OwnerType.AUTHORITY)
                 .build();
 
     }

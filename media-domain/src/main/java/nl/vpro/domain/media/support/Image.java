@@ -53,7 +53,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  * </p>
  *
  * @author Roelof Jan Koekoek
- * @see nl.vpro.domain.media.support.OwnerType
+ * @see OwnerType
  * @since 0.4
  */
 @Entity

@@ -17,9 +17,16 @@ import nl.vpro.validation.URI;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "imageLocationType", propOrder = {
-        "url"
-        })
+    "mimeType",
+    "url"
+})
 public class ImageLocation {
+
+    @XmlElement
+    @Getter
+    @Setter
+    private String mimeType;
+
 
     @XmlElement
     @NotNull(message = "provide image location")
@@ -27,6 +34,7 @@ public class ImageLocation {
     @Getter
     @Setter
     private String url;
+
 
     private ImageLocation() {
 
@@ -36,6 +44,13 @@ public class ImageLocation {
         this.url = url;
     }
 
+
+
+    @lombok.Builder
+    private ImageLocation(String mimeType, String url) {
+        this.url = url;
+        this.mimeType = mimeType;
+    }
 
     @Override
     public String toString() {

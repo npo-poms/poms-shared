@@ -21,10 +21,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.support.License;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.TestEditors;
