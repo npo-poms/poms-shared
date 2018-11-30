@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.function.Supplier;
 
@@ -14,6 +17,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.URI;
 
 @SuppressWarnings("serial")
@@ -21,7 +26,7 @@ import nl.vpro.validation.URI;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "websiteType")
-public class Website implements UpdatableIdentifiable<Long, Website>, Serializable, Supplier<String> {
+public class Website implements UpdatableIdentifiable<Long, Website>, Serializable, Supplier<String>, Ownable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,6 +41,11 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
     })
     private String url;
 
+    @XmlTransient
+    @Getter
+    @Setter
+    private OwnerType owner;
+
     public Website() {
     }
 
@@ -45,6 +55,8 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
 
     public Website(Website source) {
         this(source.getUrl());
+        this.owner = source.owner;
+
     }
 
     public static Website copy(Website source) {
@@ -145,4 +157,6 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
             .append("url", url)
             .toString();
     }
+
+
 }
