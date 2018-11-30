@@ -623,7 +623,7 @@
   <xs:simpleType name="twitterrefType">
 
     <xs:restriction base="xs:string">
-      <xs:pattern value="^[@#][A-Za-z0-9_]{1,15}$"
+      <xs:pattern value="^[@#][A-Za-z0-9_]{1,15}$" />
       <xs:minLength value="2"/>
       <xs:maxLength value="16"/>
     </xs:restriction>
