@@ -59,6 +59,12 @@ public class AssemblageConfig {
     @lombok.Builder.Default
     boolean createScheduleEvents = false;
 
+    /**
+     * This is mainly targeted at PREPR which does not support programs spanning 0 o'clock.
+     * If this is set to >= 0, then schedule merging will merge adjacent scheduleevents if they are of the same MID
+     * The size of the duration defines the maximal gap between the events. (For PREPR there is never anything broadcasted in the second before midnight)
+     *
+     */
     @lombok.Builder.Default
     Duration mergeScheduleEvents = Duration.ofMillis(-1);
 
