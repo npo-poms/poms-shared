@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.time.Duration;
 
+import nl.vpro.domain.media.support.OwnerType;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -15,7 +17,7 @@ import java.time.Duration;
 public class SubtitlesMetadata {
 
     private SubtitlesId id;
-    private SubtitlesOwnerType owner;
+    private OwnerType owner;
     private Duration offset;
     private Integer cueCount;
 
