@@ -30,7 +30,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
-import nl.vpro.domain.*;
+import nl.vpro.domain.EmbargoDeprecated;
+import nl.vpro.domain.Embargos;
+import nl.vpro.domain.TextualObjectUpdate;
+import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -39,7 +42,7 @@ import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.util.TimeUtils;
+import nl.vpro.util.*;
 import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
@@ -111,7 +114,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     implements
     EmbargoDeprecated,
     TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,
-    VersionSpecific,
+    IntegerVersionSpecific,
     MediaIdentifiable {
 
     static final Validator VALIDATOR;
@@ -149,7 +152,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
 
-    public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner, Float version) {
+    public static <M extends MediaObject> MediaUpdate<M> create(M object, OwnerType owner, IntegerVersion version) {
         MediaUpdate<M> update = create(object, owner);
         update.setVersion(version);
         return update;
@@ -161,7 +164,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
 
-    protected Float version;
+    protected IntegerVersion version;
 
     protected boolean xmlVersion = true;
 
@@ -325,25 +328,24 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @Override
     @XmlTransient
-    public Float getVersion() {
+    public IntegerVersion getVersion() {
         return version;
     }
-
     @Override
-    public void setVersion(Float version) {
+    public void setVersion(IntegerVersion version) {
         this.version = version;
     }
 
     @XmlAttribute(name = "version")
-    protected Float getVersionAttribute() {
+    protected String getVersionAttribute() {
         if (xmlVersion) {
-            return getVersion();
+            return getVersion().toString();
         } else {
             return null;
         }
     }
-    protected void setVersionAttribute(Float version) {
-        setVersion(version);
+    protected void setVersionAttribute(String version) {
+        setVersion(Version.parseIntegers(version));
     }
 
 
@@ -1092,8 +1094,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (parent != null) {
-            if (parent instanceof VersionSpecific) {
-                version = ((VersionSpecific) parent).getVersion();
+            if (parent instanceof IntegerVersionSpecific) {
+                version = ((IntegerVersionSpecific) parent).getVersion();
                 xmlVersion = false;
             }
         }
