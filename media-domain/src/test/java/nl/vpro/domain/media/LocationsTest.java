@@ -2,19 +2,14 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.net.URI;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.stream.Collectors;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.logging.simple.StringBuilderSimpleLogger;
 
 import static nl.vpro.domain.media.StreamingStatus.*;
 import static org.assertj.core.api.Assertions.assertThat;
