@@ -6,10 +6,7 @@ import lombok.Setter;
 import java.io.Serializable;
 import java.util.function.Supplier;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
@@ -39,11 +36,14 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         @Size(min = 1, message = "{nl.vpro.constraints.text.Size.min}"),
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
     })
+    @Getter
+    @Setter
     private String url;
 
     @XmlTransient
     @Getter
     @Setter
+    @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
     public Website() {
@@ -87,17 +87,11 @@ public class Website implements UpdatableIdentifiable<Long, Website>, Serializab
         this.id = id;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     @Override
     public void update(Website from) {
         url = from.getUrl();
+        owner = from.owner;
     }
 
     /**
