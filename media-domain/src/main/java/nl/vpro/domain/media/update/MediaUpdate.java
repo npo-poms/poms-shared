@@ -354,7 +354,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlAttribute(name = "version")
     protected String getVersionAttribute() {
         if (xmlVersion) {
-            return getVersion().toString();
+            Version version = getVersion();
+            return version == null ? null : version.toString();
         } else {
             return null;
         }
