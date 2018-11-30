@@ -1,6 +1,12 @@
 package nl.vpro.domain.image;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum ImageFormat {
+
+
+
     BMP("image/bmp", "bmp"),
     GIF("image/gif", "gif"),
     IEF("image/ief", "ief"),
@@ -19,11 +25,16 @@ public enum ImageFormat {
     XBM("image/x-xbitmap", "xbm"),
     XPM("image/x-xpixmap", "xpm");
 
+    static final Map<String, String> MAPPING = new HashMap<>();
+    static {
+        MAPPING.put("image/pjpeg", "image/jpeg");
+    }
+
     private String mimeType;
 
     private String[] extensions;
 
-    private ImageFormat(String mimeType, String... extensions) {
+    ImageFormat(String mimeType, String... extensions) {
         this.mimeType = mimeType;
         this.extensions = extensions;
     }
@@ -40,12 +51,14 @@ public enum ImageFormat {
         throw new UnsupportedImageFormatException("No matching type for file extension: " + extension);
     }
 
-    public static ImageFormat forMimeType(String mimeType) throws UnsupportedImageFormatException {
+    public static ImageFormat forMimeType(final String mimeType) throws UnsupportedImageFormatException {
         if (mimeType == null) {
             return null;
         }
+        String cleaned = mimeType.trim().toLowerCase();
+        String mapped = MAPPING.getOrDefault(cleaned, cleaned);
         for(ImageFormat type : ImageFormat.values()) {
-            if(type.getMimeType().equals(mimeType.toLowerCase().trim())) {
+            if(type.getMimeType().equals(mapped) || type.getMimeType().equals(cleaned)) {
                 return type;
             }
         }
