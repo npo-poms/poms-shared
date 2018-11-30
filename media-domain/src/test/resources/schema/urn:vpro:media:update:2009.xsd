@@ -93,6 +93,7 @@
       <xs:element name="contentRating" type="media:contentRatingEnum" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="email" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="website" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="twitterref" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element ref="prediction" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="locations" minOccurs="0">
         <xs:complexType>
