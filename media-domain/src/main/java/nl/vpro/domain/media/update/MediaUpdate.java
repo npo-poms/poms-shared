@@ -251,7 +251,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         String> websites;
 
 
-    private List<@Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,15}$")
+    private List<@Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,139}$")
         String> twitterrefs;
 
     private SortedSet<LocationUpdate> locations;
