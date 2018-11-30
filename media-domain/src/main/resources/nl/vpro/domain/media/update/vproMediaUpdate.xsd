@@ -164,6 +164,7 @@
                   form="qualified"/>
       <xs:element name="email" type="media:baseTextType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
       <xs:element name="website" type="media:websiteType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element name="twitterref" type="media:twitterrefType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
       <xs:element name="prediction" type="predictionUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
@@ -619,6 +620,14 @@
     <xs:attribute name="success" type="xs:boolean" use="required"/>
   </xs:complexType>
 
+  <xs:simpleType name="twitterrefType">
+
+    <xs:restriction base="xs:string">
+      <xs:pattern value="^[@#][A-Za-z0-9_]{1,15}$"
+      <xs:minLength value="2"/>
+      <xs:maxLength value="16"/>
+    </xs:restriction>
+  </xs:simpleType>
 
 
 </xs:schema>
