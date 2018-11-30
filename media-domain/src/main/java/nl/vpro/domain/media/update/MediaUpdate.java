@@ -175,6 +175,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected String mid;
 
+    @Pattern(regexp = "^urn:vpro:media:(?:group|program|segment):[0-9]+$")
     protected String urn;
 
     private List<@CRID

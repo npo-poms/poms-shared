@@ -23,6 +23,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -80,6 +81,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
      * The URN of the image object in the media object. This is basicly the id prefixed with {@link Image#getUrnPrefix()}
      */
     @XmlAttribute(name = "urn")
+    @Pattern(regexp = "^urn:vpro:media:image:[0-9]+$")
     private String urn;
 
     @XmlAttribute(name = "publishStart")
