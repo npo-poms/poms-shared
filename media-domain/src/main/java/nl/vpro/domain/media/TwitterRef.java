@@ -7,11 +7,12 @@ import java.io.Serializable;
 import java.util.function.Supplier;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.media.support.Ownable;
@@ -45,9 +46,8 @@ public class TwitterRef implements Serializable, Supplier<String>, Ownable {
     private Type type;
 
     @Column(nullable = false)
-    // Validating here trigged an ValidatorImpl isReachable exception
-    //    @NotNull(message = "{nl.vpro.constraints.NotNull}")
-    //    @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^(@|#)[A-Za-z0-9_]{1,15}$")
+    @NotNull(message = "{nl.vpro.constraints.NotNull}")
+    @Pattern(message = "{nl.vpro.constraints.twitterRefs.Pattern}", regexp="^[@#][A-Za-z0-9_]{1,15}$")
     @XmlValue
     @JsonProperty("value")
     @Getter
