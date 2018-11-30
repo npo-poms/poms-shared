@@ -1,5 +1,8 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.function.Supplier;
 
@@ -11,6 +14,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
+
 /**
  * @author Michiel Meeuwissen
  * @since 3.0
@@ -20,10 +26,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @nl.vpro.validation.TwitterRef
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "twitterRefType")
-public class TwitterRef implements Serializable, Supplier<String> {
+public class TwitterRef implements Serializable, Supplier<String>, Ownable {
 
     public enum Type {
-        ACCOUNT, 
+        ACCOUNT,
         HASHTAG
     }
 
@@ -44,6 +50,12 @@ public class TwitterRef implements Serializable, Supplier<String> {
     @JsonProperty("value")
     private String value;
 
+    @XmlTransient
+    @Getter
+    @Setter
+    private OwnerType owner;
+
+
     public TwitterRef() {
     }
 
@@ -58,6 +70,7 @@ public class TwitterRef implements Serializable, Supplier<String> {
 
     public TwitterRef(TwitterRef source) {
         this(source.value);
+        this.owner = source.owner;
     }
 
     public static TwitterRef copy(TwitterRef source) {
