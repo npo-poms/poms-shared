@@ -12,6 +12,7 @@ import nl.vpro.domain.TypedText;
 import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.TextualType;
+import nl.vpro.validation.NoHtml;
 
 /**
  * A description of a {@link MediaUpdate}. Like a non {@link Ownable} {@link Description}
@@ -22,6 +23,7 @@ import nl.vpro.domain.media.support.TextualType;
 public class DescriptionUpdate implements TypedText {
 
     @XmlValue
+    @NoHtml
     private String value;
 
     @NotNull

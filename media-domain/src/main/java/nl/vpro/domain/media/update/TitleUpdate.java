@@ -13,6 +13,7 @@ import nl.vpro.domain.TypedText;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
+import nl.vpro.validation.NoHtml;
 
 /**
  * A title of a {@link MediaUpdate}. Like a non {@link Ownable} {@link Title}
@@ -23,6 +24,7 @@ import nl.vpro.domain.media.support.Title;
 public class TitleUpdate implements TypedText {
 
     @XmlValue
+    @NoHtml
     private String value;
 
     @NotNull
