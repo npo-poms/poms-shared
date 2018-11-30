@@ -26,10 +26,6 @@ import nl.vpro.domain.Xmlns;
  * related scenarios.
  *
  * @author roekoe
- * @see nl.vpro.domain.media.support.Title
- * @see nl.vpro.domain.media.support.Description
- * @see nl.vpro.domain.media.Location
- * @see nl.vpro.domain.media.support.Image
  * @since 0.4
  */
 @XmlEnum

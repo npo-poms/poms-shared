@@ -23,6 +23,7 @@ import nl.vpro.domain.media.nebo.shared.QualityResType;
 import nl.vpro.domain.media.nebo.shared.StreamType;
 import nl.vpro.domain.media.nebo.shared.StreamsType;
 import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
