@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.validation.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -35,6 +36,7 @@ import nl.vpro.domain.Embargos;
 import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.TwitterRef;
 import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -45,10 +47,7 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.*;
-import nl.vpro.validation.PomsValidatorGroup;
-import nl.vpro.validation.StringList;
-import nl.vpro.validation.URI;
-import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
@@ -178,7 +177,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected String urn;
 
-    private List<String> crids;
+    private List<@CRID
+        String> crids;
 
     protected AVType avType;
 
@@ -205,7 +205,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     List<ContentRating> contentRatings;
 
-    List<String> email;
+    List<@Email String> email;
 
     protected List<ImageUpdate> images;
 
@@ -213,15 +213,21 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected Asset asset;
 
     private List<
+        @NotNull
         @Size(min = 2, max = 4, message = "2 < id < 5")
         @javax.validation.constraints.Pattern(regexp = "[A-Z0-9_-]{2,4}", message = "Broadcaster id ${validatedValue} should match {regexp}")
             String> broadcasters;
 
     private List<
+        @NotNull
+
         String
         > portals;
 
-    private SortedSet<String> tags;
+    private SortedSet<
+        @NotNull
+        @Size(min = 1, max = 255)
+        String> tags;
 
 
     // jaxb annotations are here, because if on property, the credits wrapper will be marshalled always.
@@ -238,7 +244,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private SortedSet<DescriptionUpdate> descriptions;
 
-    private SortedSet<String> genres;
+    private SortedSet<
+        @NotNull
+        @Pattern(regexp = "3\\.([0-9]+\\.)*[0-9]+")
+        String> genres;
 
     private SortedSet<MemberRefUpdate> memberOf;
 
