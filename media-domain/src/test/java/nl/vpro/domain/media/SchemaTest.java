@@ -196,6 +196,7 @@ public class SchemaTest {
         DocumentationAdder collector = new DocumentationAdder(classes);
 
         JAXBContext context = JAXBContext.newInstance(classes);
+
         context.generateSchema(new SchemaOutputResolver() {
             @Override
             public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
