@@ -126,7 +126,7 @@
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="urn" type="xs:string"/>
-    <xs:attribute name="version" type="xs:float"/>
+    <xs:attribute name="version" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="memberRefUpdateType">

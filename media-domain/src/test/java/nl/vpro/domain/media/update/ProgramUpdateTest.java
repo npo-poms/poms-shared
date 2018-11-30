@@ -33,6 +33,7 @@ import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.Version;
 import nl.vpro.validation.ConstraintViolations;
 import nl.vpro.validation.WarningValidatorGroup;
 
@@ -606,7 +607,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetSegments() throws Exception {
         ProgramUpdate update = programUpdate();
-        update.setVersion(5.5f);
+        update.setVersion(Version.of(5, 5));
         update.setSegments(new TreeSet<>(Collections.singletonList(
             SegmentUpdate.create(
                 new Segment(update.fetch(), Duration.ofMillis(5555), AuthorizedDuration.ofMillis(100))
@@ -646,7 +647,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testAgeRating() throws IOException, SAXException {
         ProgramUpdate update  = ProgramUpdate.create();
-        update.setVersion(5.5f);
+        update.setVersion(Version.of(5, 5));
         update.setAgeRating(AgeRating._6);
 
         assertThat(update.getAgeRating()).isEqualTo(AgeRating._6);
@@ -833,7 +834,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testCountriesAndLanguages() throws IOException, SAXException {
         Program program = program().countries("NL").languages("nl").build();
         ProgramUpdate update = ProgramUpdate.create(program);
-        update.setVersion(5.5f);
+        update.setVersion(Version.of(5, 5));
         JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <country>NL</country>\n" +
             "    <language>nl</language>\n" +

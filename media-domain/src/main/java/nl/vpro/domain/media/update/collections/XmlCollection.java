@@ -12,8 +12,9 @@ import java.util.stream.Stream;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.VersionSpecific;
 import nl.vpro.domain.media.update.*;
+import nl.vpro.util.IntegerVersion;
+import nl.vpro.util.IntegerVersionSpecific;
 
 /**
  *  XmlCollection does the same as JAXB would do for lists. We use this package info just to define the prefixes for the other namespaces.
@@ -34,13 +35,13 @@ import nl.vpro.domain.media.update.*;
     String.class
 })
 @XmlAccessorType(XmlAccessType.NONE)
-public class XmlCollection<T> implements Iterable<T> , VersionSpecific {
+public class XmlCollection<T> implements Iterable<T> , IntegerVersionSpecific {
 
 
     @XmlAttribute
     @Getter
     @Setter
-    protected Float version;
+    protected IntegerVersion version;
 
     @XmlAnyElement(lax = true)
     Collection<T> list;
@@ -59,7 +60,7 @@ public class XmlCollection<T> implements Iterable<T> , VersionSpecific {
         this(Arrays.asList(l), null);
     }
 
-    public XmlCollection(Collection<T> l, Float version) {
+    public XmlCollection(Collection<T> l, IntegerVersion version) {
         this.list = l;
         this.version = version;
 
@@ -80,8 +81,8 @@ public class XmlCollection<T> implements Iterable<T> , VersionSpecific {
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (parent != null) {
-            if (parent instanceof VersionSpecific) {
-                version = ((VersionSpecific) parent).getVersion();
+            if (parent instanceof IntegerVersionSpecific) {
+                version = ((IntegerVersionSpecific) parent).getVersion();
             }
         }
     }
