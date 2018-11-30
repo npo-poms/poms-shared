@@ -34,7 +34,8 @@ public class MediaUpdateTest {
 
         ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
 
-        rounded = JAXBTestUtil.roundTripAndSimilar(update, "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        rounded = JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <broadcaster>BNN</broadcaster>\n" +
             "    <broadcaster>AVRO</broadcaster>\n" +
             "    <portal>3VOOR12_GRONINGEN</portal>\n" +
@@ -98,6 +99,8 @@ public class MediaUpdateTest {
             "    <email>programma@avro.nl</email>\n" +
             "    <website>http://www.omroep.nl/programma/journaal</website>\n" +
             "    <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
+            "    <twitterref>#vpro</twitterref>\n" +
+            "    <twitterref>@twitter</twitterref>\n" +
             "    <prediction>INTERNETVOD</prediction>\n" +
             "    <prediction>TVVOD</prediction>\n" +
             "    <locations>\n" +
@@ -237,6 +240,8 @@ public class MediaUpdateTest {
             "            <email>programma@avro.nl</email>\n" +
             "            <website>http://www.omroep.nl/programma/journaal</website>\n" +
             "            <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
+            "            <twitterref>#vpro</twitterref>\n" +
+            "            <twitterref>@twitter</twitterref>\n" +
             "            <prediction>INTERNETVOD</prediction>\n" +
             "            <locations>\n" +
             "                <location urn=\"urn:vpro:media:location:6\">\n" +
@@ -391,6 +396,8 @@ public class MediaUpdateTest {
             "    <email>programma@avro.nl</email>\n" +
             "    <website>http://www.omroep.nl/programma/journaal</website>\n" +
             "    <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
+            "    <twitter type=\"HASHTAG\">#vpro</twitter>\n" +
+            "    <twitter type=\"ACCOUNT\">@twitter</twitter>\n" +
             "    <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
             "    <prediction state=\"ANNOUNCED\">TVVOD</prediction>\n" +
             "    <locations>\n" +
@@ -541,6 +548,8 @@ public class MediaUpdateTest {
             "            <email>programma@avro.nl</email>\n" +
             "            <website>http://www.omroep.nl/programma/journaal</website>\n" +
             "            <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
+            "            <twitter type=\"HASHTAG\">#vpro</twitter>\n" +
+            "            <twitter type=\"ACCOUNT\">@twitter</twitter>\n" +
             "            <prediction state=\"ANNOUNCED\">INTERNETVOD</prediction>\n" +
             "            <locations>\n" +
             "                <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:location:6\">\n" +
