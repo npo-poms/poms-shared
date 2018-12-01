@@ -596,25 +596,25 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B contentRatings(ContentRating... contentRatings) {
-        mediaObject().setContentRatings(Arrays.asList(contentRatings));
+        mediaObject().getContentRatings().addAll(Arrays.asList(contentRatings));
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B emails(String... emails) {
-        mediaObject().setEmail(Arrays.asList(emails));
+        mediaObject().getEmail().addAll(Arrays.asList(emails));
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B websites(Website... websites) {
-        mediaObject().setWebsites(Arrays.asList(websites));
+        mediaObject().getWebsites().addAll(Arrays.asList(websites));
         return (B)this;
     }
 
     @SuppressWarnings("unchecked")
     default B websites(String... websites) {
-        mediaObject().setWebsites(Arrays.stream(websites).map(Website::new).collect(Collectors.toList()));
+        mediaObject().getWebsites().addAll(Arrays.stream(websites).map(Website::new).collect(Collectors.toList()));
         return (B) this;
     }
 
@@ -628,14 +628,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         for(String t : twitter) {
             reference.add(new TwitterRef(t));
         }
-        mediaObject().setTwitterRefs(reference);
+        mediaObject().getTwitterRefs().addAll(reference);
         return (B)this;
     }
 
     default B twitterRefs(TwitterRef... twitter) {
         List<TwitterRef> reference = new ArrayList<>();
         Arrays.stream(twitter).forEach(a -> reference.add(a));
-        mediaObject().setTwitterRefs(reference);
+        mediaObject().getTwitterRefs().addAll(reference);
         return (B) this;
     }
     default B clearTwitterRefs() {
