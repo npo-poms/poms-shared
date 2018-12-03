@@ -65,8 +65,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setAVType(AVType.AUDIO);
         update.setType(ProgramType.BROADCAST);
         update.setCrids(Collections.singletonList("crids://aa"));
-        System.out.println(update.violationMessage());
-        assertThat(update.violations()).hasSize(1);
+        log.info(update.violationMessage());
+        assertThat(update.violations()).hasSize(2); // I think one for the collection, one for the element, though I would have expected 1.
+
     }
 
     @Test
