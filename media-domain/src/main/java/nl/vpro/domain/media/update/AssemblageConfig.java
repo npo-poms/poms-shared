@@ -28,7 +28,7 @@ import nl.vpro.util.Version;
 public class AssemblageConfig {
 
     @lombok.Builder.Default
-    OwnerType ownerType = OwnerType.BROADCASTER;
+    OwnerType owner = OwnerType.BROADCASTER;
 
     @Singular
     List<OwnerType> similarOwnerTypes;
@@ -111,7 +111,7 @@ public class AssemblageConfig {
     }
     public AssemblageConfig copy() {
         return new AssemblageConfig(
-            ownerType,
+            owner,
             similarOwnerTypes,
             copyWorkflow,
             copyLanguageAndCountry,
@@ -178,7 +178,7 @@ public class AssemblageConfig {
          * This sais that segments that have the configured owner, but are not present in the incoming program are to be deleted from the program to update.
          */
         public Builder deleteSegmentsForOwner() {
-            return segmentsForDeletion((s, a) -> s.getOwner() != null && s.getOwner() == a.getOwnerType());
+            return segmentsForDeletion((s, a) -> s.getOwner() != null && s.getOwner() == a.getOwner());
         }
     }
 
