@@ -752,7 +752,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Source xmlFile = new StreamSource(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program avType=\"VIDEO\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><broadcaster>VPRO</broadcaster><portal>STERREN24</portal><title type=\"MAIN\">bla</title><credits><person role='DIRECTOR'><givenName>Pietje</givenName><familyName>Puk</familyName></person></credits><locations/><scheduleEvents/><images/><segments/></program>"));
         SchemaFactory schemaFactory = SchemaFactory
             .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        System.out.println(getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
+        log.info("{}", getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
         Schema schema = schemaFactory.newSchema(
             getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd")
         );
