@@ -10,12 +10,14 @@ import lombok.Setter;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.OwnerType;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
 @XmlRootElement(name = "downloadRequest", namespace = IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "downloadRequestType", propOrder = {
+    "owner",
     "title",
     "description",
     "type",
@@ -26,6 +28,10 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 @Setter
 @Getter
 public class DownloadRequest {
+
+    @XmlElement(name = "owner", namespace = IMAGE_WS_NAMESPACE, required = true)
+    private OwnerType owner;
+
 
     @XmlElement(namespace = IMAGE_WS_NAMESPACE, required = true)
     private String title;

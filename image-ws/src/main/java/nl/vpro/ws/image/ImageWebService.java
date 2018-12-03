@@ -18,6 +18,7 @@ import javax.xml.ws.ResponseWrapper;
 
 import nl.vpro.domain.image.BasicImageMetadata;
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.OwnerType;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
@@ -38,6 +39,7 @@ public interface ImageWebService {
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
     BasicImageMetadata upload(
+        @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
@@ -53,6 +55,7 @@ public interface ImageWebService {
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
     Future<?> uploadAsync(
+        @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
@@ -68,6 +71,7 @@ public interface ImageWebService {
         localName = "uploadResponse",
         className = "nl.vpro.ws.image.UploadResponse")
     Response<UploadResponse> uploadAsync(
+        @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
@@ -85,6 +89,7 @@ public interface ImageWebService {
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
     BasicImageMetadata download(
+        @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
@@ -100,6 +105,7 @@ public interface ImageWebService {
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
     Future<?> downloadAsync(
+        @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,
@@ -115,6 +121,7 @@ public interface ImageWebService {
         localName = "downloadResponse",
         className = "nl.vpro.ws.image.DownloadResponse")
     Response<DownloadResponse> downloadAsync(
+        @WebParam(name = "owner", targetNamespace = "") OwnerType owner,
         @WebParam(name = "title", targetNamespace = "") String title,
         @WebParam(name = "description", targetNamespace = "") String description,
         @WebParam(name = "type", targetNamespace = "") ImageType type,

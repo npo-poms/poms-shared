@@ -11,12 +11,14 @@ import javax.activation.DataHandler;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.support.OwnerType;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 
 @XmlRootElement(name = "uploadRequest", namespace = IMAGE_WS_NAMESPACE)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "uploadRequestType", propOrder = {
+    "owner",
     "title",
     "description",
     "type",
@@ -25,6 +27,10 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 @Setter
 @Getter
 public class UploadRequest {
+
+    @XmlElement(name = "owner", namespace = IMAGE_WS_NAMESPACE, required = true)
+    private OwnerType owner;
+
 
     @XmlElement(name = "title", namespace = IMAGE_WS_NAMESPACE, required = true)
     private String title;
