@@ -182,12 +182,20 @@ public class Image extends AbstractPublishableObject<Image> implements ImageMeta
     private InputStream cachedInputStream;
 
 
+    /**
+     * @since 5.10
+     */
     @Getter
     @Setter
     private String broadcaster;
 
+
+    /**
+     * @since 5.10
+     */
     @Getter
     @Setter
+    @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
     public Image() {
