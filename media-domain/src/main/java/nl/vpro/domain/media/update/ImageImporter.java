@@ -7,11 +7,12 @@ package nl.vpro.domain.media.update;
 import javax.annotation.Nonnull;
 
 import nl.vpro.domain.media.support.Image;
+import nl.vpro.domain.media.support.OwnerType;
 
 public interface ImageImporter {
 
     Image save(
-        @Nonnull ImageUpdate download, boolean metadata) throws DownloadException;
+        @Nonnull ImageUpdate download, boolean metadata, @Nonnull  OwnerType owne) throws DownloadException;
 
     class DownloadException extends RuntimeException {
 
