@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -275,7 +276,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
 
-
+    @Getter
     boolean imported = false;
 
 
@@ -482,7 +483,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
         M returnObject = fetchOwnerless();
         TextualObjects.copy(this, returnObject, owner);
         returnObject.setLocations(toSet(locations, l -> l.toLocation(owner)));
-        returnObject.setImages(toList(images, i -> i.toImage(owner)).stream().filter(i -> i.getImageUri() != null).collect(Collectors.toList()));
+        Predicate<Image> imageFilter = isImported() ? (i) -> i.getImageUri() != null : (i) -> true;
+        returnObject.setImages(toList(images, i -> i.toImage(owner)).stream()
+                .filter(imageFilter)
+                .collect(Collectors.toList()));
+
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
 
