@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
@@ -8,13 +10,14 @@ import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.Version;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.8
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-
+@Slf4j
 public class MediaUpdateTest {
 
     static ProgramUpdate rounded;
@@ -32,10 +35,14 @@ public class MediaUpdateTest {
             .withFixedDates()
             .build();
 
+        withEverything.getVersion();
         ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
+        update.setVersion(Version.of(5, 1));
+        log.info("{}", update.getVersion());
 
-        rounded = JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        rounded = JAXBTestUtil.roundTripAndValidateAndSimilar(update,
+            getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"), "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program version=\"5.1\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <broadcaster>BNN</broadcaster>\n" +
             "    <broadcaster>AVRO</broadcaster>\n" +
             "    <portal>3VOOR12_GRONINGEN</portal>\n" +
@@ -318,6 +325,7 @@ public class MediaUpdateTest {
             "        </segment>\n" +
             "    </segments>\n" +
             "</program>");
+
 
     }
 
