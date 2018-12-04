@@ -1,7 +1,5 @@
 package nl.vpro.rs.media;
 
-import lombok.Getter;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -37,7 +35,6 @@ import nl.vpro.domain.subtitles.SubtitlesId;
 import nl.vpro.domain.subtitles.SubtitlesType;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
-import static nl.vpro.domain.media.MediaType.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -82,71 +79,6 @@ public interface MediaBackendRestService {
     String LOG        = "log";
     String FILE_NAME = "fileName";
 
-    interface EntityType {
-        String name();
-        nl.vpro.domain.media.MediaType getMediaType();
-    }
-
-
-    enum AllMedia implements EntityType {
-        media(MEDIA),
-        program(PROGRAM),
-        group(GROUP),
-        segment(SEGMENT);
-
-        @Getter
-        private nl.vpro.domain.media.MediaType mediaType;
-
-        AllMedia(nl.vpro.domain.media.MediaType type) {
-            this.mediaType = type;
-
-        }
-    }
-    enum ProgramType implements EntityType {
-        media(MEDIA),
-        program(PROGRAM);
-        @Getter
-        private nl.vpro.domain.media.MediaType mediaType;
-
-        ProgramType(nl.vpro.domain.media.MediaType type) {
-            this.mediaType = type;
-
-        }
-    }
-    enum GroupType implements EntityType {
-        media(MEDIA),
-        group(GROUP);
-         @Getter
-        private nl.vpro.domain.media.MediaType mediaType;
-        GroupType(nl.vpro.domain.media.MediaType type) {
-            this.mediaType = type;
-
-        }
-    }
-    enum NoGroups implements EntityType {
-        media(MEDIA),
-        program(PROGRAM),
-        segment(SEGMENT);
-        @Getter
-        private nl.vpro.domain.media.MediaType mediaType;
-        NoGroups(nl.vpro.domain.media.MediaType type) {
-            this.mediaType = type;
-
-        }
-    }
-
-    enum NoSegments implements EntityType {
-        media(MEDIA),
-        program(PROGRAM),
-        group(GROUP);
-        @Getter
-        private nl.vpro.domain.media.MediaType mediaType;
-        NoSegments(nl.vpro.domain.media.MediaType type) {
-            this.mediaType = type;
-
-        }
-    }
-
 
     @POST
     @Path("find")
@@ -159,7 +91,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}")
     MediaUpdate<?> getMedia(
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
@@ -180,7 +112,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|group|segment)}/{id:.*}")
     @Produces(MediaType.WILDCARD)
     Response deleteMedia(
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
@@ -189,7 +121,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}/full")
     MediaObject getFullMediaObject(
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
@@ -198,7 +130,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|segment|program|group)}")
     @Produces(MediaType.WILDCARD)
     Response update(
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @XopWithMultipartRelated MediaUpdate<?> update,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
@@ -213,7 +145,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|segment)}/{id:.*}/location")
     @Produces(MediaType.WILDCARD)
     Response addLocation(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         LocationUpdate location,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
@@ -225,7 +157,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|segment)}/{id:.*}/location/{locationId}")
     @Produces(MediaType.WILDCARD)
     Response removeLocation(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(ID) final String id,
         @PathParam("locationId") final String locationId,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
@@ -235,7 +167,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|segment)}/{id}/locations")
     XmlCollection<LocationUpdate> getLocations(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
@@ -246,7 +178,7 @@ public interface MediaBackendRestService {
     @Produces(MediaType.WILDCARD)
     Response addImage(
         ImageUpdate imageUpdate,
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
@@ -259,7 +191,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}/images")
     XmlCollection<ImageUpdate> getImages(
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
@@ -270,7 +202,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|group|segment)}/{id}/members")
     MediaUpdateList<MemberUpdate> getGroupMembers(
-        @PathParam(ENTITY) @DefaultValue("media") final NoSegments entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoSegments entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("20") final Integer max,
@@ -282,7 +214,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}/members/full")
     MediaList<Member> getFullGroupMembers(
-        @PathParam(ENTITY) @DefaultValue("media") final NoSegments entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoSegments entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(OFFSET) @DefaultValue("0") final Long offset,
         @QueryParam(MAX) @DefaultValue("20") final Integer max,
@@ -295,7 +227,7 @@ public interface MediaBackendRestService {
     @Produces(MediaType.WILDCARD)
     Response moveMembers(
         MoveAction move,
-        @PathParam(ENTITY) @DefaultValue("media") final NoSegments entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoSegments entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
@@ -304,7 +236,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOfs")
     MediaUpdateList<MemberRefUpdate> getMemberOfs(
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
@@ -314,7 +246,7 @@ public interface MediaBackendRestService {
     @Produces(MediaType.WILDCARD)
     Response addMemberOf(
         MemberRefUpdate memberRefUpdate,
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
@@ -326,7 +258,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOf/{owner:.*}")
     @Produces(MediaType.WILDCARD)
     Response removeMemberOf(
-        @PathParam(ENTITY) @DefaultValue("media") final AllMedia entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.AllMedia entity,
         @Encoded @PathParam(ID) final String id,
         @PathParam("owner") final String owner,
         @QueryParam("number") final Integer number,
@@ -362,7 +294,7 @@ public interface MediaBackendRestService {
     @Produces(MediaType.WILDCARD)
     Response moveEpisodes(
         MoveAction move,
-        @PathParam(ENTITY) @DefaultValue("group") final GroupType entity,
+        @PathParam(ENTITY) @DefaultValue("group") final EntityType.Group entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
@@ -484,7 +416,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions")
     XmlCollection<PredictionUpdate> getPredictions(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
@@ -493,7 +425,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions/{platform}")
     PredictionUpdate getPrediction(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(ID) final String id,
         @PathParam("platform") final Platform platform,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
@@ -503,7 +435,7 @@ public interface MediaBackendRestService {
     @POST
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions")
     Response setPredictions(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
@@ -514,7 +446,7 @@ public interface MediaBackendRestService {
     @POST
     @Path("{entity:(media|program|group|segment)}/{id:.*}/predictions/{platform}")
     Response setPrediction(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(ID) final String id,
         @PathParam("platform") final Platform platform,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
@@ -526,7 +458,7 @@ public interface MediaBackendRestService {
     @Path("{entity:(media|program|segment)}/{mid:.*}/transcode")
     @Produces(MediaType.TEXT_PLAIN)
     Response transcode(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(MID) final String mid,
         @QueryParam(ERRORS) String errors,
         TranscodeRequest transcodeRequest);
@@ -579,7 +511,7 @@ public interface MediaBackendRestService {
     @GET
     @Path("{entity:(media|program|segment)}/{mid:.*}/transcodingstatus")
     XmlCollection<TranscodeStatus> getTranscodeStatus(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(MID) final String mid
     );
 
@@ -598,7 +530,7 @@ public interface MediaBackendRestService {
     @POST
     @Path("{entity:(media|program|group|segment)}/{mid:.*}/itemize")
     ItemizeResponse itemize(
-        @PathParam(ENTITY) @DefaultValue("media") final NoGroups entity,
+        @PathParam(ENTITY) @DefaultValue("media") final EntityType.NoGroups entity,
         @Encoded @PathParam(MID) String mid,
         @Context HttpServletRequest request,
         ItemizeRequest itemizeRequest
