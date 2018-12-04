@@ -1,5 +1,7 @@
 package nl.vpro.rs.media;
 
+import lombok.Getter;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
@@ -35,6 +37,7 @@ import nl.vpro.domain.subtitles.SubtitlesId;
 import nl.vpro.domain.subtitles.SubtitlesType;
 
 import static nl.vpro.api.rs.subtitles.Constants.*;
+import static nl.vpro.domain.media.MediaType.*;
 
 /**
  * @author Michiel Meeuwissen
@@ -81,33 +84,67 @@ public interface MediaBackendRestService {
 
     interface EntityType {
         String name();
+        nl.vpro.domain.media.MediaType getMediaType();
     }
 
 
     enum AllMedia implements EntityType {
-        media,
-        program,
-        group,
-        segment
+        media(MEDIA),
+        program(PROGRAM),
+        group(GROUP),
+        segment(SEGMENT);
+
+        @Getter
+        private nl.vpro.domain.media.MediaType mediaType;
+
+        AllMedia(nl.vpro.domain.media.MediaType type) {
+            this.mediaType = type;
+
+        }
     }
     enum ProgramType implements EntityType {
-        media,
-        program
+        media(MEDIA),
+        program(PROGRAM);
+        @Getter
+        private nl.vpro.domain.media.MediaType mediaType;
+
+        ProgramType(nl.vpro.domain.media.MediaType type) {
+            this.mediaType = type;
+
+        }
     }
     enum GroupType implements EntityType {
-        media,
-        group
+        media(MEDIA),
+        group(GROUP);
+         @Getter
+        private nl.vpro.domain.media.MediaType mediaType;
+        GroupType(nl.vpro.domain.media.MediaType type) {
+            this.mediaType = type;
+
+        }
     }
     enum NoGroups implements EntityType {
-        media,
-        program,
-        segment
+        media(MEDIA),
+        program(PROGRAM),
+        segment(SEGMENT);
+        @Getter
+        private nl.vpro.domain.media.MediaType mediaType;
+        NoGroups(nl.vpro.domain.media.MediaType type) {
+            this.mediaType = type;
+
+        }
     }
 
     enum NoSegments implements EntityType {
-        media,
-        program,
-        group
+        media(MEDIA),
+        program(PROGRAM),
+        group(GROUP);
+        @Getter
+        private nl.vpro.domain.media.MediaType mediaType;
+        NoSegments(nl.vpro.domain.media.MediaType type) {
+            this.mediaType = type;
+
+        }
     }
 
 
