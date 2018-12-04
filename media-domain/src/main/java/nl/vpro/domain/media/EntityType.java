@@ -1,8 +1,6 @@
-package nl.vpro.rs.media;
+package nl.vpro.domain.media;
 
 import lombok.Getter;
-
-import nl.vpro.domain.media.MediaType;
 
 import static nl.vpro.domain.media.MediaType.*;
 
@@ -10,8 +8,7 @@ import static nl.vpro.domain.media.MediaType.*;
  * @author Michiel Meeuwissen
  * @since 5.10
  */
-public
-interface EntityType {
+public interface EntityType {
     String name();
 
     MediaType getMediaType();
