@@ -11,6 +11,9 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.URLResource;
@@ -34,7 +37,10 @@ public class BroadcasterServiceImpl implements BroadcasterService {
     }
 
 
-    public BroadcasterServiceImpl(String configFile, boolean async) {
+    @Inject
+    public BroadcasterServiceImpl(
+        @Named("broadcasters.repository.location") String configFile,
+        @Named("broadcasters.repository.async") boolean async) {
         this.displayNameResource = getURLResource(configFile, async);
         URI uri = URI.create(configFile);
         if (uri.getScheme().startsWith("http")) {
