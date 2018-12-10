@@ -73,10 +73,10 @@ public class VersionService {
     /**
      * E.g. in test cases in may be usefull to fix version.
      */
-    public static void setVersion(Float version) {
-        if (! Objects.equals(VersionService.floatVersion(), version)) {
+    public static void setVersion(IntegerVersion version) {
+        if (! Objects.equals(VersionService.integerVersion(), version)) {
             log.info("Setting version {} -> {}", VersionService.version, version);
-            VersionService.floatVersion = version;
+            VersionService.integerVersion = version;
             VersionService.version = String.valueOf(version);
         }
 
