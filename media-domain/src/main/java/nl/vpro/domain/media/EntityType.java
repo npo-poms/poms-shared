@@ -2,6 +2,11 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 
+import nl.vpro.domain.media.update.GroupUpdate;
+import nl.vpro.domain.media.update.MediaUpdate;
+import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.domain.media.update.SegmentUpdate;
+
 import static nl.vpro.domain.media.MediaType.*;
 
 /**
@@ -26,6 +31,19 @@ public interface EntityType {
             this.mediaType = type;
 
         }
+
+        public static AllMedia valueOf(Class type) {
+            if (nl.vpro.domain.media.Program.class.isAssignableFrom(type)) return program;
+            if (ProgramUpdate.class.isAssignableFrom(type)) return program;
+            if (nl.vpro.domain.media.Group.class.isAssignableFrom(type)) return group;
+            if (GroupUpdate.class.isAssignableFrom(type)) return group;
+            if (Segment.class.isAssignableFrom(type)) return segment;
+            if (SegmentUpdate.class.isAssignableFrom(type)) return segment;
+            if (MediaObject.class.isAssignableFrom(type)) return media;
+            if (MediaUpdate.class.isAssignableFrom(type)) return media;
+            throw new IllegalArgumentException();
+        }
+
     }
 
     enum Program implements EntityType {
