@@ -21,6 +21,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
@@ -426,6 +427,8 @@ public class OpenskosRepository implements GTAARepository {
 
     }
 
+    private static final Pattern NOT_FOUND = Pattern.compile(".*The requested resource .* was not found.*", Pattern.DOTALL);
+
     @Override
     public Optional<Description> retrieveItemStatus(String id) {
         String url = gtaaUrl + "/api/find-concepts?id=" + id;
@@ -434,11 +437,15 @@ public class OpenskosRepository implements GTAARepository {
             List<Description> descriptions = descriptions(rdf);
             return descriptions.stream().findFirst();
         } catch (HttpServerErrorException e) {
-            if(e.getResponseBodyAsString().contains("was not found")) {
-                return Optional.empty();
-            } else {
-                log.error("Unexpected error doing call to openskos for item id {}: {}", id, url, e);
-                throw e;
+            switch(e.getStatusCode()) {
+                case INTERNAL_SERVER_ERROR:
+                    // It is idiotic that openskos issues an internal server error for what basicly is a 404
+                    if(NOT_FOUND.matcher(e.getResponseBodyAsString()).matches()) {
+                        return Optional.empty();
+                    }
+                default:
+                    log.error("Unexpected error doing call to openskos for item id {}: {}: {}", id, url, e.getResponseBodyAsString(), e);
+                    throw e;
             }
         }
     }
