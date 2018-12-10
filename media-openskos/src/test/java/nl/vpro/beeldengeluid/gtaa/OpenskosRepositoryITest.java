@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import nl.vpro.domain.media.gtaa.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
@@ -16,6 +15,10 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.domain.media.gtaa.GTAAConflict;
+import nl.vpro.domain.media.gtaa.GTAANewThesaurusObject;
+import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.ThesaurusObjects;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -186,6 +189,10 @@ public class OpenskosRepositoryITest {
 
         // test
         OpenskosRepository impl = new OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
+
+
+        // productie
+        //OpenskosRepository impl = new OpenskosRepository("http://openskos.beeldengeluid.nl/", "***REMOVED***", template);
         impl.setTenant("beng");
         impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");
         //impl.setPersonsSpec("beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352");
@@ -194,8 +201,6 @@ public class OpenskosRepositoryITest {
         // Acceptatie
         //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
 
-        // productie
-        //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://openskos.beeldengeluid.nl/", "***REMOVED***", template);
 
         // dev
 
