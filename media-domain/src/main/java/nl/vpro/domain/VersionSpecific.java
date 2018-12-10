@@ -1,5 +1,7 @@
 package nl.vpro.domain;
 
+import nl.vpro.util.IntegerVersion;
+
 /**
  * Classes which can behave differently according the specified version of the application can implement this.
  * @author Michiel Meeuwissen
@@ -10,8 +12,8 @@ public interface VersionSpecific {
 
     /**
      * For which version this object is supposed to be filled.
-     *      */
-    Float getVersion();
+     */
+    IntegerVersion getVersion();
 
-    void setVersion(Float version);
+    void setVersion(IntegerVersion version);
 }
