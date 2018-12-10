@@ -264,7 +264,7 @@ public class OpenskosRepository implements GTAARepository {
                 + isoInstant.format(from.truncatedTo(ChronoUnit.SECONDS)) + "&until="
                 + isoInstant.format(until.truncatedTo(ChronoUnit.SECONDS));
 
-        final OAI_PMH oai_pmh = getForUrl(path, OAI_PMH.class);
+        final OAI_PMH oai_pmh = getForPath(path, OAI_PMH.class);
         if (oai_pmh.getError() != null) {
             String code = oai_pmh.getError().getCode();
             if ("noRecordsMatch".equals(code)) {
@@ -280,7 +280,7 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     ListRecord getUpdates(ResumptionToken resumptionToken) {
-        final OAI_PMH oai_pmh = getForUrl("oai-pmh?verb=ListRecords&resumptionToken=" + resumptionToken.getValue(),
+        final OAI_PMH oai_pmh = getForPath("oai-pmh?verb=ListRecords&resumptionToken=" + resumptionToken.getValue(),
                 OAI_PMH.class);
         if (oai_pmh == null || oai_pmh.getListRecord() == null) {
             return ListRecord.empty();
@@ -354,11 +354,11 @@ public class OpenskosRepository implements GTAARepository {
                 "AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" " +
                 "AND (" + input + "*)";
 
-        String url = "api/find-concepts?collection=gtaa&q=" + query + "&rows=" + max;
-        return descriptions(getForUrl(url, RDF.class));
+        String path = "api/find-concepts?collection=gtaa&q=" + query + "&rows=" + max;
+        return descriptions(getForPath(path, RDF.class));
     }
 
-    protected <T> T getForUrl(final String path, final Class<T> tClass) {
+    protected <T> T getForPath(final String path, final Class<T> tClass) {
         String url = gtaaUrl + path;
         log.debug("Calling gtaa {}", url);
         try {
@@ -405,8 +405,8 @@ public class OpenskosRepository implements GTAARepository {
         String query = String.format("(status:(candidate OR approved) " +
                 "OR (status:not_compliant AND dc_creator:POMS)) " +
                 "AND ( %s*)", input);
-        String url = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
-        return descriptions(getForUrl(url, RDF.class));
+        String path = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
+        return descriptions(getForPath(path, RDF.class));
     }
 
     @Override
@@ -421,8 +421,8 @@ public class OpenskosRepository implements GTAARepository {
                  generateQueryByAxis(axisList) +
                 "AND ( %s*)", input);
 
-        String url = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
-        return descriptions(getForUrl(url, RDF.class));
+        String path = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
+        return descriptions(getForPath(path, RDF.class));
 
 
     }
