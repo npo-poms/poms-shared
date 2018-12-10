@@ -1,5 +1,7 @@
 package nl.vpro.domain.api.media;
 
+import nl.vpro.util.IntegerVersion;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -7,9 +9,9 @@ package nl.vpro.domain.api.media;
 public class Compatibility {
 
 
-    private static final ThreadLocal<Float> compatibility = ThreadLocal.withInitial(() -> null);
+    private static final ThreadLocal<IntegerVersion> compatibility = ThreadLocal.withInitial(() -> null);
 
-    public static void setCompatibility(float value) {
+    public static void setCompatibility(IntegerVersion value) {
         compatibility.set(value);
     }
 
@@ -18,17 +20,17 @@ public class Compatibility {
     }
 
 
-    public static boolean compatibleBefore(float version) {
+    public static boolean compatibleBefore(IntegerVersion version) {
         if (compatibility.get() == null) {
             return true;
         }
-        return version < compatibility.get();
+        return version.isBefore(compatibility.get());
     }
 
-    public static boolean versionBefore(float version) {
+    public static boolean versionBefore(IntegerVersion version) {
         if (compatibility.get() == null) {
             return false;
         }
-        return compatibility.get() < version;
+        return compatibility.get().isBefore(version);
     }
 }
