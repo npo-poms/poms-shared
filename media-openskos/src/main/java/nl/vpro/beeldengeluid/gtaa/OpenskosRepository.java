@@ -431,7 +431,7 @@ public class OpenskosRepository implements GTAARepository {
 
     @Override
     public Optional<Description> retrieveItemStatus(String id) {
-        String url = gtaaUrl + "/api/find-concepts?id=" + id;
+        String url = gtaaUrl + "api/find-concepts?id=" + id;
         try {
             RDF rdf = template.getForObject(url, RDF.class);
             List<Description> descriptions = descriptions(rdf);
