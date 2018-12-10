@@ -364,7 +364,7 @@ public class OpenskosRepository implements GTAARepository {
                 "AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" " +
                 "AND (" + input + "*)";
 
-        String url = "api/find-concepts?collection=gtaa&q=" + query + "&rows=" + max;
+        String url = "api/find-concepts?tenant=beng&collection=gtaa&q=" + query + "&rows=" + max;
         final RDF rdf = getForUrl(url, RDF.class);
 
         if (rdf == null || rdf.getDescriptions() == null) {
@@ -425,7 +425,7 @@ public class OpenskosRepository implements GTAARepository {
         String query = String.format("(status:(candidate OR approved) " +
                 "OR (status:not_compliant AND dc_creator:POMS)) " +
                 "AND ( %s*)", input);
-        String url = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
+        String url = String.format("api/find-concepts?tenant=%s&collection=gtaa&q=%s&rows=%s", tenant, query, max);
         final RDF rdf = getForUrl(url, RDF.class);
 
         if (rdf == null || rdf.getDescriptions() == null) {
