@@ -303,15 +303,15 @@ public class OpenskosRepository implements GTAARepository {
         log.info("Submitting {} {} {} to {}", prefLabel, notes, creator, gtaaUrl);
         RDF rdf = new RDF();
         rdf.setDescriptions(
-                Collections.singletonList(
-                        Description.builder()
-                                .type(Types.SKOS_CONCEPT)
-                                .tenant(tenant)
-                                .creator(creator)
-                                .prefLabelOrXL(useXLLabels, prefLabel, tenant)
-                                .editorialNote(notes)
-                                .dateSubmitted(Instant.now().atZone(Schedule.ZONE_ID))
-                                .inScheme(scheme).build()));
+            Collections.singletonList(
+                Description.builder()
+                    .type(Types.SKOS_CONCEPT)
+                    .tenant(tenant)
+                    .creator(creator)
+                    .prefLabelOrXL(useXLLabels, prefLabel, tenant)
+                    .editorialNote(notes)
+                    .dateSubmitted(Instant.now().atZone(Schedule.ZONE_ID))
+                    .inScheme(scheme).build()));
 
         template.setErrorHandler(new ResponseErrorHandler() {
             @Override
@@ -336,8 +336,8 @@ public class OpenskosRepository implements GTAARepository {
                     JAXB.marshal(rdf, writer);
                     writer.append("Response:\n");
                     writer.append(body.toString());
-                    throw new RuntimeException(
-                            "" + response.getStatusCode() + " " + response.getStatusText() + " " + writer.toString());
+                    throw new RuntimeException("For " + gtaaUrl + " " +
+                        response.getStatusCode() + " " + response.getStatusText() + " " + writer.toString());
                 }
             }
         });
