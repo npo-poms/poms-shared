@@ -122,8 +122,28 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance();
         List<Description> persons = impl.findPersons("johan c", 100);
         assertThat(persons).isNotEmpty();
-        System.out.println(persons);
         assertThat(persons.get(0).getStatus()).isNotNull();
+        for (Description person : persons)  {
+            log.info("{}", person);
+
+        }
+
+
+    }
+
+
+    @Test
+    @Ignore("This is not a junit test")
+    public void testFindAnyThing() {
+        OpenskosRepository impl = getRealInstance();
+        List<Description> persons = impl.findAnything("johan c", 100);
+        assertThat(persons).isNotEmpty();
+        assertThat(persons.get(0).getStatus()).isNotNull();
+        for (Description person : persons)  {
+            log.info("{}", person);
+
+        }
+
 
     }
 
@@ -208,13 +228,14 @@ public class OpenskosRepositoryITest {
         //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
 
         // productie
-        OpenskosRepository impl = new OpenskosRepository("http://openskos.beeldengeluid.nl/", "1dX1nJHX5GNeT8O7", template);
+        //OpenskosRepository impl = new OpenskosRepository("http://openskos.beeldengeluid.nl/", "1dX1nJHX5GNeT8O7", template);
 
-        impl.setUseXLLabels(true);
 
         // dev
 
-        //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
+        OpenskosRepository impl = new OpenskosRepository("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
+
+        impl.setUseXLLabels(true);
 
         impl.setTenant("beng");
         impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");

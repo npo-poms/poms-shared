@@ -31,7 +31,6 @@ import javax.xml.bind.JAXB;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
@@ -70,6 +69,8 @@ public class OpenskosRepository implements GTAARepository {
     private final String gtaaKey;
 
     @Value("${gtaa.spec.persons}")
+    @Getter
+    @Setter
     private String personsSpec;
 
     @Value("${gtaa.use-xllabels}")
@@ -103,32 +104,6 @@ public class OpenskosRepository implements GTAARepository {
     @PostConstruct
     public void init() {
         log.info("Communicating with {} (personSpec: {}), useXLLabels: {})", gtaaUrl, personsSpec, useXLLabels);
-    }
-
-    private String generateQueryByAxis(List<String> axisList) {
-        Predicate<String> empty = s -> s.equals("");
-        if (axisList.stream().allMatch(empty)) {
-            return "";
-        }
-
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("AND (");
-
-        String operator = "";
-        for (String axis : axisList) {
-            sb.append(
-                    String.format(
-                            "%s %s inScheme:\"http://data.beeldengeluid.nl/gtaa/%s\" ",
-                            operator,
-                            axis.contains("!") ? "NOT" : "",
-                            axis)
-            );
-            operator = "OR";
-        }
-        sb.append(")");
-
-        return sb.toString();
     }
 
 
@@ -193,6 +168,8 @@ public class OpenskosRepository implements GTAARepository {
         }
 
     }
+
+
 
 
     @Override
@@ -354,7 +331,7 @@ public class OpenskosRepository implements GTAARepository {
                 "AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" " +
                 "AND (" + input + "*)";
 
-        String path = "api/find-concepts?collection=gtaa&q=" + query + "&rows=" + max;
+        String path = "api/find-concepts?tenant=" + tenant + "&collection=gtaa&q=" + query + "&rows=" + max;
         return descriptions(getForPath(path, RDF.class));
     }
 
@@ -363,38 +340,13 @@ public class OpenskosRepository implements GTAARepository {
         log.debug("Calling gtaa {}", url);
         try {
             ResponseEntity<T> entity = template.getForEntity(url, tClass);
-            return isOk(entity) ? entity.getBody() : null;
+            return entity.getStatusCode().is2xxSuccessful() ? entity.getBody() : null;
         } catch (RuntimeException rt) {
             log.error("For GET {}: {}", url, rt.getMessage());
             throw rt;
         }
     }
 
-    void setPersonsSpec(String personsSpec) {
-        this.personsSpec = personsSpec;
-    }
-
-    private boolean isOk(ResponseEntity<?> entity) {
-        return entity.getStatusCode() == HttpStatus.OK;
-    }
-
-    private static RestTemplate createRestTemplate() {
-        MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
-        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("nl.vpro.beeldengeluid.gtaa", "nl.vpro.w3.rdf", "nl.vpro.openarchives.oai");
-
-        try {
-            jaxb2Marshaller.afterPropertiesSet();
-        } catch (Exception ex) {
-            /* Ignore */
-        }
-        marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-        marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
-
-        RestTemplate template = new RestTemplate();
-        template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
-        return template;
-    }
 
     @Override
     public List<Description> findAnything(String input, Integer max) {
@@ -405,7 +357,8 @@ public class OpenskosRepository implements GTAARepository {
         String query = String.format("(status:(candidate OR approved) " +
                 "OR (status:not_compliant AND dc_creator:POMS)) " +
                 "AND ( %s*)", input);
-        String path = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
+
+        String path = String.format("api/find-concepts?tenant=%s&collection=gtaa&q=%s&rows=%s", tenant, query, max);
         return descriptions(getForPath(path, RDF.class));
     }
 
@@ -450,6 +403,51 @@ public class OpenskosRepository implements GTAARepository {
         }
     }
 
+
+    private String generateQueryByAxis(List<String> axisList) {
+        Predicate<String> empty = s -> s.equals("");
+        if (axisList.stream().allMatch(empty)) {
+            return "";
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("AND (");
+
+        String operator = "";
+        for (String axis : axisList) {
+            sb.append(
+                    String.format(
+                            "%s %s inScheme:\"http://data.beeldengeluid.nl/gtaa/%s\" ",
+                            operator,
+                            axis.contains("!") ? "NOT" : "",
+                            axis)
+            );
+            operator = "OR";
+        }
+        sb.append(")");
+
+        return sb.toString();
+    }
+
+
+    private static RestTemplate createRestTemplate() {
+        MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
+        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
+        jaxb2Marshaller.setPackagesToScan("nl.vpro.beeldengeluid.gtaa", "nl.vpro.w3.rdf", "nl.vpro.openarchives.oai");
+
+        try {
+            jaxb2Marshaller.afterPropertiesSet();
+        } catch (Exception ex) {
+            /* Ignore */
+        }
+        marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
+        marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
+
+        RestTemplate template = new RestTemplate();
+        template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
+        return template;
+    }
 
     private List<Description> descriptions(RDF rdf) {
         if (rdf == null || rdf.getDescriptions() == null) {
