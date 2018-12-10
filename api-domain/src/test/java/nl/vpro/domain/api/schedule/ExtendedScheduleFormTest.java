@@ -20,7 +20,7 @@ public class ExtendedScheduleFormTest {
 
 
     @Test
-    public void applyNet() throws Exception {
+    public void applyNet() {
 
         ScheduleEvent eventWithNet = new ScheduleEvent();
         eventWithNet.setNet(new Net("ZAPP"));
@@ -45,7 +45,7 @@ public class ExtendedScheduleFormTest {
     }
 
     @Test
-    public void applyDescendantOf() throws Exception {
+    public void applyDescendantOf() {
 
         ScheduleEvent event = new ScheduleEvent();
         event.setParent(MediaBuilder.program().descendantOf("mid123").build());
