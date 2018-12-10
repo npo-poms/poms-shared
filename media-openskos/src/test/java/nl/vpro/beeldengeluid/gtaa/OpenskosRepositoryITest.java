@@ -201,21 +201,24 @@ public class OpenskosRepositoryITest {
         //OpenskosRepository impl = new OpenskosRepository("http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
 
         // test
-        OpenskosRepository impl = new OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
-        impl.setTenant("beng");
-        impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");
-        //impl.setPersonsSpec("beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352");
+//        OpenskosRepository impl = new OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
 
-        impl.setUseXLLabels(true);
+
         // Acceptatie
         //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
 
         // productie
-        //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://openskos.beeldengeluid.nl/", "***REMOVED***", template);
+        OpenskosRepository impl = new OpenskosRepository("http://openskos.beeldengeluid.nl/", "***REMOVED***", template);
+
+        impl.setUseXLLabels(true);
 
         // dev
 
         //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/", "***REMOVED***", template);
+
+        impl.setTenant("beng");
+        impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");
+        //impl.setPersonsSpec("beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352");
 
         impl.init();
         /* Acceptatie */
