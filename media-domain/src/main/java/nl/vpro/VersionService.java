@@ -82,4 +82,11 @@ public class VersionService {
 
 
     }
+
+     /**
+     * E.g. in test cases in may be usefull to fix version.
+     */
+    public static void setVersion(int ... version) {
+        setVersion(IntegerVersion.of(version));
+    }
 }
