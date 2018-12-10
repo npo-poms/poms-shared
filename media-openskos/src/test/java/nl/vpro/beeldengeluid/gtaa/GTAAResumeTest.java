@@ -14,7 +14,7 @@ public class GTAAResumeTest {
 
     private OpenskosRepository gtaaRepository = new OpenskosRepository("", "", null) {
         @Override
-        protected <T> T getForUrl(final String path, final Class<T> tClass) {
+        protected <T> T getForPath(final String path, final Class<T> tClass) {
             if (path.contains("resumptionToken")) {
                 return JAXB.unmarshal(getClass().getResourceAsStream("/oai-pmh-resume.xml"), tClass);
             } else {
