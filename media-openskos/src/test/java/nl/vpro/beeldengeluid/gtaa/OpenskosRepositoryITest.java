@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import nl.vpro.domain.media.gtaa.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
@@ -16,6 +16,10 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.media.Schedule;
+import nl.vpro.domain.media.gtaa.GTAAConflict;
+import nl.vpro.domain.media.gtaa.GTAANewThesaurusObject;
+import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.ThesaurusObjects;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -157,6 +161,18 @@ public class OpenskosRepositoryITest {
 
         }
         assertThat(count).isEqualTo(updates.getSize().get());
+    }
+
+
+
+
+
+    @Test
+    @Ignore
+    public void retrieveItemStatus() {
+        OpenskosRepository impl = getRealInstance();
+        Optional<Description> description = impl.retrieveItemStatus("http://data.beeldengeluid.nl/gtaa/1711640");
+        log.info("{} ", description.get());
     }
 
 
