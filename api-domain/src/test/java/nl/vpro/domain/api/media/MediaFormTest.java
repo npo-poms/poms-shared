@@ -24,6 +24,7 @@ import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.DateUtils;
+import nl.vpro.util.Version;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -86,7 +87,7 @@ public class MediaFormTest {
 
     @Test
     public void testGetSortJsonBackward() throws Exception {
-        Compatibility.setCompatibility(5.4f);
+        Compatibility.setCompatibility(Version.of(5, 4));
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
         list.put(MediaSortField.sortDate, Order.DESC);

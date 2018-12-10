@@ -11,6 +11,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import nl.vpro.domain.api.Order;
 import nl.vpro.domain.api.media.*;
+import nl.vpro.util.IntegerVersion;
+import nl.vpro.util.Version;
 
 /**
  * @author Michiel Meeuwissen
@@ -18,13 +20,15 @@ import nl.vpro.domain.api.media.*;
  */
 public class MediaSortOrderListJson {
 
+    private static final IntegerVersion V55 = Version.of(5, 5);
+
     public static class Serializer extends JsonSerializer<MediaSortOrderList> {
 
         @Override
         public void serialize(MediaSortOrderList mediaSortOrders, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
 
             if (mediaSortOrders != null) {
-                boolean backwards = Compatibility.versionBefore(5.5f) || mediaSortOrders.size() <= 1;
+                boolean backwards = Compatibility.versionBefore(V55) || mediaSortOrders.size() <= 1;
                 if(backwards) {
                     for (MediaSortOrder so : mediaSortOrders) {
                         if (so instanceof TitleSortOrder) {
