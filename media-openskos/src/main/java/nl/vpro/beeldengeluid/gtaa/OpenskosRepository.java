@@ -39,7 +39,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.gtaa.GTAAConflict;
 import nl.vpro.domain.media.gtaa.GTAARepository;
@@ -132,19 +131,20 @@ public class OpenskosRepository implements GTAARepository {
     }
 
 
+    @SuppressWarnings("unchecked")
     @Override
-    public ThesaurusObject submit(ThesaurusObject thesaurusObject, String creator) {
-
+    public <T extends ThesaurusObject> T submit(T thesaurusObject, String creator) {
         final Description description = submit(thesaurusObject.getValue(),
                 thesaurusObject.getNotes(),
                 creator,
                 ThesaurusObjects.toScheme(thesaurusObject)
         );
-        return ThesaurusObjects.toThesaurusObject(description);
+        return (T) ThesaurusObjects.toThesaurusObject(description);
 
     }
 
 
+    @SuppressWarnings("StringConcatenationInLoop")
     private Description submit(String prefLabel, List<Label> notes, String creator, String scheme) {
 
         ResponseEntity<RDF> response = null;
@@ -178,10 +178,13 @@ public class OpenskosRepository implements GTAARepository {
             response = null;
         }
 
-        if (response != null && response.getBody().getDescriptions().size() > 0) {
+        if (response != null
+            && response.getBody() != null
+            && response.getBody().getDescriptions() != null && ! response.getBody().getDescriptions().isEmpty()) {
             if (response.getStatusCode() == CREATED) {
-                return response.getBody().getDescriptions().stream().findFirst().get();
+                return response.getBody().getDescriptions().get(0);
             } else {
+                // Is this possible at all?
                 throw new RuntimeException("Status " + response.getStatusCode() + " for prefLabel: " + prefLabel, rte);
             }
         } else {
@@ -190,19 +193,6 @@ public class OpenskosRepository implements GTAARepository {
 
     }
 
-    private String getPrefLabel(PersonInterface person) {
-        StringBuilder sb = new StringBuilder();
-        if (StringUtils.isNotBlank(person.getFamilyName())) {
-            sb.append(person.getFamilyName());
-        }
-
-        if (StringUtils.isNotBlank(person.getGivenName())) {
-            sb.append(", ");
-            sb.append(person.getGivenName());
-        }
-
-        return sb.toString();
-    }
 
     @Override
     public CountedIterator<Record> getPersonUpdates(@Context Instant from, @Context Instant to) {
@@ -214,7 +204,6 @@ public class OpenskosRepository implements GTAARepository {
         return getUpdates(from, until, null);
     }
 
-    @SuppressWarnings("unchecked")
     private CountedIterator<Record> getUpdates(Instant from, Instant until, String spec) {
 
         final AtomicLong totalSize = new AtomicLong(-1L);
@@ -315,12 +304,12 @@ public class OpenskosRepository implements GTAARepository {
 
         template.setErrorHandler(new ResponseErrorHandler() {
             @Override
-            public boolean hasError(ClientHttpResponse response) throws IOException {
+            public boolean hasError(@Nonnull ClientHttpResponse response) throws IOException {
                 return !response.getStatusCode().is2xxSuccessful();
             }
 
             @Override
-            public void handleError(ClientHttpResponse response) throws IOException {
+            public void handleError(@Nonnull ClientHttpResponse response) throws IOException {
                 StringWriter body = new StringWriter();
                 IOUtils.copy(response.getBody(), body, Charset.forName("UTF-8"));
                 switch (response.getStatusCode()) {
@@ -359,19 +348,13 @@ public class OpenskosRepository implements GTAARepository {
             max = 50;
         }
         // String fields = "&fl=uuid,uri,prefLabel,altLabel,hiddenLabel,status";
-        input = input.replaceAll("[\\-\\.,]+", " ");
+        input = input.replaceAll("[\\-.,]+", " ");
         String query = "(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) " +
                 "AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" " +
                 "AND (" + input + "*)";
 
         String url = "api/find-concepts?collection=gtaa&q=" + query + "&rows=" + max;
-        final RDF rdf = getForUrl(url, RDF.class);
-
-        if (rdf == null || rdf.getDescriptions() == null) {
-            return Collections.emptyList();
-        }
-
-        return rdf.getDescriptions();
+        return descriptions(getForUrl(url, RDF.class));
     }
 
     protected <T> T getForUrl(final String path, final Class<T> tClass) {
@@ -384,10 +367,6 @@ public class OpenskosRepository implements GTAARepository {
             log.error("For GET {}: {}", url, rt.getMessage());
             throw rt;
         }
-    }
-
-    String getPersonsSpec() {
-        return personsSpec;
     }
 
     void setPersonsSpec(String personsSpec) {
@@ -421,18 +400,12 @@ public class OpenskosRepository implements GTAARepository {
         if (max == null) {
             max = 50;
         }
-        input = input.replaceAll("[\\-\\.,]+", " ");
+        input = input.replaceAll("[\\-.,]+", " ");
         String query = String.format("(status:(candidate OR approved) " +
                 "OR (status:not_compliant AND dc_creator:POMS)) " +
                 "AND ( %s*)", input);
         String url = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
-        final RDF rdf = getForUrl(url, RDF.class);
-
-        if (rdf == null || rdf.getDescriptions() == null) {
-            return Collections.emptyList();
-        }
-
-        return rdf.getDescriptions();
+        return descriptions(getForUrl(url, RDF.class));
     }
 
     @Override
@@ -440,7 +413,7 @@ public class OpenskosRepository implements GTAARepository {
         if (max == null) {
             max = 50;
         }
-        input = input.replaceAll("[\\-\\.,]+", " ");
+        input = input.replaceAll("[\\-.,]+", " ");
 
         String query = String.format("(status:(candidate OR approved) " +
                 "OR (status:not_compliant AND dc_creator:POMS)) " +
@@ -448,32 +421,36 @@ public class OpenskosRepository implements GTAARepository {
                 "AND ( %s*)", input);
 
         String url = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
-        final RDF rdf = getForUrl(url, RDF.class);
+        return descriptions(getForUrl(url, RDF.class));
 
+
+    }
+
+    @Override
+    public Optional<Description> retrieveItemStatus(String id) {
+        String url = gtaaUrl + "/api/find-concepts?id=" + id;
+        try {
+            RDF rdf = template.getForObject(url, RDF.class);
+            List<Description> descriptions = descriptions(rdf);
+            return descriptions.stream().findFirst();
+        } catch (HttpServerErrorException e) {
+            if(e.getResponseBodyAsString().contains("was not found")) {
+                return Optional.empty();
+            } else {
+                log.error("Unexpected error doing call to openskos for item id {}: {}", id, url, e);
+                throw e;
+            }
+        }
+    }
+
+
+    private List<Description> descriptions(RDF rdf) {
         if (rdf == null || rdf.getDescriptions() == null) {
             return Collections.emptyList();
         }
 
         return rdf.getDescriptions();
     }
-
-    @Override
-    public Optional<Description> retrieveItemStatus(String id) {
-        String url = "/api/find-concepts?id=" + id;
-        try {
-            RDF rdf = template.getForObject(gtaaUrl + url, RDF.class);
-            return Optional.of(rdf.getDescriptions().get(0));
-        } catch (HttpServerErrorException e) {
-            if(e.getResponseBodyAsString().contains("was not found")) {
-                return Optional.empty();
-            }
-            else {
-                log.error("Unexpected error doing call to openskos for item id " + id, e);
-                throw e;
-            }
-        }
-    }
-
 
     @Override
     public String toString() {
