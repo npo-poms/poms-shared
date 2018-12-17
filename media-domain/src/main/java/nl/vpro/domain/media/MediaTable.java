@@ -1,14 +1,23 @@
 package nl.vpro.domain.media;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.time.Instant;
 import java.util.*;
 
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
+
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 
 @XmlRootElement(name = "mediaInformation")
@@ -36,21 +45,37 @@ public class MediaTable implements Iterable<MediaObject> {
     protected List<Group> groupTable;
 
     @XmlElement
+    @Getter
+    @Setter
     protected LocationTable locationTable;
 
     @XmlElement
+    @Getter
+    @Setter
     protected Schedule schedule;
 
     @XmlAttribute
-    protected Date publicationTime;
+    @Getter
+    @Setter
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
+    @XmlSchemaType(name = "dateTime")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
+    protected Instant publicationTime;
 
     @XmlAttribute
+    @Getter
+    @Setter
     protected String publisher;
 
     @XmlAttribute
+    @Getter
+    @Setter
     protected Short version;
 
     @XmlAttribute
+    @Getter
+    @Setter
     protected String source;
 
 
@@ -124,53 +149,6 @@ public class MediaTable implements Iterable<MediaObject> {
         this.groupTable = groupTable;
     }
 
-    public LocationTable getLocationTable() {
-        return locationTable;
-    }
-
-    public void setLocationTable(LocationTable value) {
-        this.locationTable = value;
-    }
-
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule value) {
-        this.schedule = value;
-    }
-
-    public Date getPublicationTime() {
-        return publicationTime;
-    }
-
-    public void setPublicationTime(Date value) {
-        this.publicationTime = value;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String value) {
-        this.publisher = value;
-    }
-
-    public Short getVersion() {
-        return version;
-    }
-
-    public void setVersion(Short value) {
-        this.version = value;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
-    }
 
     @Override
     public String toString() {
