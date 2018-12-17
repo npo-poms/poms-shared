@@ -34,11 +34,22 @@ public class BroadcasterServiceLocator {
         singleton = service;
     }
 
-
     public static BroadcasterService getInstance() {
+        return getInstance(true, true);
+    }
+
+
+    public static BroadcasterService getInstance(boolean sync) {
+        return getInstance(sync, true);
+    }
+
+
+    public static BroadcasterService getInstance(boolean sync, boolean needsOtherIds) {
         if (singleton == null) {
-            singleton = new BroadcasterServiceImpl("https://poms.omroep.nl/broadcasters/");
-            log.warn("No broadcaster service configured, taking {} implicitely", singleton);
+            synchronized(BroadcasterService.class) {
+                singleton = new BroadcasterServiceImpl("https://poms.omroep.nl/broadcasters/", sync, needsOtherIds);
+                log.warn("No broadcaster service configured, taking {} implicitely", singleton);
+            }
         }
         return singleton;
     }
