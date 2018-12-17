@@ -30,14 +30,20 @@ public class BroadcasterServiceImpl implements BroadcasterService {
 
 
     public BroadcasterServiceImpl(String configFile) {
-        this(configFile, true);
+        this(configFile, true, true);
     }
 
 
-    public BroadcasterServiceImpl(String configFile, boolean async) {
+
+    @Inject
+    @lombok.Builder
+    public BroadcasterServiceImpl(
+        @Named("broadcasters.repository.location") String configFile,
+        @Named("broadcasters.repository.async") boolean async,
+        @Named("broadcasters.repository.needsOtherIDs") boolean needsOtherIds) {
         this.displayNameResource = getURLResource(configFile, async);
         URI uri = URI.create(configFile);
-        if (uri.getScheme().startsWith("http")) {
+        if (needsOtherIds && uri.getScheme().startsWith("http")) {
             setMisResource(configFile + "mis");
             setWhatsonResource(configFile + "whats_on");
         }
