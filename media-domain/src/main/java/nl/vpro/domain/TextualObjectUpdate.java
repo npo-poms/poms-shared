@@ -1,5 +1,6 @@
 package nl.vpro.domain;
 
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -225,6 +226,24 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
     default boolean removeDescription(D description) {
         return hasDescriptions() && getDescriptions().remove(description);
+    }
+
+
+
+    default boolean removeDescription(TextualType type) {
+        boolean result = false;
+        if (hasDescriptions()) {
+            Iterator<D> i = getDescriptions().iterator();
+            while (i.hasNext()) {
+                D d = i.next();
+                if (d.getType() == type) {
+                    i.remove();
+                    result = true;
+                }
+
+            }
+        }
+        return result;
     }
 
 
