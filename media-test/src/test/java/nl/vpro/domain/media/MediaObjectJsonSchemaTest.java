@@ -37,6 +37,7 @@ import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.domain.user.Editor;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -429,6 +430,7 @@ public class MediaObjectJsonSchemaTest {
 
         Image image = new Image(OwnerType.BROADCASTER, "http://images.poms.omroep.nl/plaatje");
         image.setCreationInstant(Instant.ofEpochMilli(1));
+        image.setLastModifiedBy(Editor.builder().email("bla@foo.bar").build());
         Program program = program().id(100L).lean().images(image).build();
 
         String actual = toJson(program);

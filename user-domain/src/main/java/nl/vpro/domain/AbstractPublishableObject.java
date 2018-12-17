@@ -50,11 +50,13 @@ public abstract class AbstractPublishableObject<T extends AbstractPublishableObj
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "createdby_principalid")
+    @XmlTransient
     protected Editor createdBy;
 
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "lastmodifiedby_principalid")
+    @XmlTransient
     protected Editor lastModifiedBy;
 
     @Column(nullable = true)
