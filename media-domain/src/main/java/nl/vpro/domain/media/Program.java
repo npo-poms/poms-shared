@@ -330,21 +330,6 @@ public class Program extends MediaObject {
         return false;
     }
 
-    Program addEpisodeOf(MemberRef memberRef) {
-        if(memberRef == null || !memberRef.isValid()) {
-            throw new IllegalArgumentException("Must supply a valid MemberRef. Got: " + (memberRef == null ? "NULL" : memberRef.toString()));
-        }
-
-        if(episodeOf == null) {
-            episodeOf = new TreeSet<>();
-        }
-
-        episodeOf.add(memberRef);
-        descendantOf = null;
-
-        return this;
-    }
-
     @Deprecated
     public String getEpisodeTitle() {
         return TextualObjects.get(titles, (String)null, TextualType.EPISODE);
@@ -457,29 +442,5 @@ public class Program extends MediaObject {
     protected String getUrnPrefix() {
         return ProgramType.URN_PREFIX;
     }
-
-
-
-
-    private String findPoSeriesID() {
-        String poSeriesID = findPoSeriesID(episodeOf);
-        return poSeriesID != null ? poSeriesID : findPoSeriesID(memberOf);
-    }
-
-    private String findPoSeriesID(Collection<MemberRef> memberRefs) {
-        if(memberRefs == null) {
-            return null;
-        }
-
-        for(MemberRef memberRef : memberRefs) {
-            if(memberRef.getType() == MediaType.SEASON || memberRef.getType() == MediaType.SERIES) {
-                return memberRef.getMidRef();
-            }
-        }
-
-        return null;
-    }
-
-
 }
 
