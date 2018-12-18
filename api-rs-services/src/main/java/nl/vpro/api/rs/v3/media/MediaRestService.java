@@ -216,10 +216,14 @@ public interface MediaRestService {
         @Context HttpServletRequest request,
         @Context HttpServletResponse response) throws IOException;
 
+
+    /**
+     * Returns all data of a certain profile
+     *
+     *  This can be used to make sitemaps, we might  make a sitemap feature on the page rest service too.
+     */
     @POST
     @Path("/iterate/")
-    @Deprecated
-        //"This targets sitemaps, we'll make a sitemap feature on the page rest service"
     InputStream iterate(
         @Valid MediaForm form,
         @QueryParam(PROFILE) String profile,
