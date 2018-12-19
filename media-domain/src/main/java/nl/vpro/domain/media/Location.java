@@ -327,7 +327,7 @@ public class Location extends PublishableObject<Location>
     }
 
     public AVAttributes getAvAttributes() {
-        tryToSetAvFileFormatBasedOnProgramUrl(avAttributes);
+        tryToSetAvFileFormatBasedOnProgramUrl();
         return avAttributes;
     }
 
@@ -340,8 +340,9 @@ public class Location extends PublishableObject<Location>
             log.info("Making copy of {}", avAttributes);
             avAttributes = new AVAttributes(avAttributes);
         }
-        tryToSetAvFileFormatBasedOnProgramUrl(avAttributes);
+
         this.avAttributes = avAttributes;
+        tryToSetAvFileFormatBasedOnProgramUrl();
         return this;
     }
 
@@ -607,11 +608,10 @@ public class Location extends PublishableObject<Location>
         return hashCode() - that.hashCode();
     }
 
-    private AVAttributes tryToSetAvFileFormatBasedOnProgramUrl(AVAttributes avAttributes) {
+    private void tryToSetAvFileFormatBasedOnProgramUrl() {
         if(avAttributes != null && (avAttributes.getAvFileFormat() == null || avAttributes.getAvFileFormat().equals(AVFileFormat.UNKNOWN))) {
             avAttributes.setAvFileFormat(AVFileFormat.forProgramUrl(programUrl));
         }
-        return avAttributes;
     }
 
     private void setDefaultAVAttributes() {
