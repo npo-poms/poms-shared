@@ -3,9 +3,18 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean id="broadcasterService" class="nl.vpro.media.broadcaster.BroadcasterServiceImpl">
-    <constructor-arg index="0" value="${broadcasters.repository.location}"/>
+
+  <bean id="broadcasters.repository.location" class="java.lang.String">
+    <constructor-arg value="${broadcasters.repository.location}" />
   </bean>
+  <bean id="broadcasters.repository.async" factory-method="valueOf" class="java.lang.Boolean" >
+    <constructor-arg value="${broadcasters.repository.async}" />
+  </bean>
+  <bean id="broadcasters.repository.needsOtherIDs" factory-method="valueOf" class="java.lang.Boolean">
+    <constructor-arg value="${broadcasters.repository.needsOtherIDs}" />
+  </bean>
+
+  <bean id="broadcasterService" class="nl.vpro.media.broadcaster.BroadcasterServiceImpl" autowire="constructor" />
 
   <bean class="nl.vpro.media.broadcaster.BroadcasterServiceLocator" />
 
