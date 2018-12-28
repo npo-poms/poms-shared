@@ -164,6 +164,12 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
         return (parent != null && parent.isMerged()) || super.isMerged();
     }
 
+    /**
+     * Returns the parent {@link Program} of this segment. Not that this does not work directly after a simple unmarshall of
+     * an individual segment because the full program object simply is not available then.
+     *
+     * Use {@link #getMidRef()} for the mid, and obtain it seperately.
+     */
     @Override
     public Program getParent() {
         return parent;
