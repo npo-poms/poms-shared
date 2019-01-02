@@ -198,7 +198,12 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     protected synchronized SSHClientFactory.ClientHolder createClient() throws IOException {
 
-        SSHClientFactory.ClientHolder client = SSHClientFactory.create(hostKey, sftpHost, username, password);
+        SSHClientFactory.ClientHolder client = SSHClientFactory.create(
+            hostKey,
+            sftpHost,
+            username,
+            password
+        );
 
         client.get().setTimeout((int) socketTimeout.toMillis());
         client.get().setConnectTimeout((int) connectTimeOut.toMillis());
