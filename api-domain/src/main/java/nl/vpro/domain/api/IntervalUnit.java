@@ -10,7 +10,7 @@ public enum IntervalUnit {
 
     YEAR(ChronoField.YEAR, "yyyy"),
     MONTH(ChronoField.MONTH_OF_YEAR, "yyyy-MM"),
-    WEEK(ChronoField.ALIGNED_WEEK_OF_YEAR, "yyyy-'W'w"),
+    WEEK(ChronoField.ALIGNED_WEEK_OF_YEAR, "xxxx-'W'w"),
     DAY(ChronoField.DAY_OF_YEAR, "yyyy-MM-dd"),
     HOUR(ChronoField.HOUR_OF_DAY, "yyyy-MM-dd'T'HH:mm:ss'Z'"),
     MINUTE(ChronoField.MINUTE_OF_DAY, "yyyy-MM-dd'T'HH:mm:ss'Z'");
