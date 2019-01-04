@@ -351,6 +351,7 @@ public class MediaObjectTest {
 
     @Test
     // MSE-2313
+    @Ignore
     public void testSilentlyFixStateOfPredictionIfLocationsAndOnlyAnnounced() {
         Location l1 = new Location("http://aaa.a/a", OwnerType.BROADCASTER);
         l1.setPlatform(Platform.INTERNETVOD);
