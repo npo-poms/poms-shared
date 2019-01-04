@@ -1831,10 +1831,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
                         if (location.getPlatform() == prediction.getPlatform()
                                 && Workflow.PUBLICATIONS.contains(location.getWorkflow())
                                 && prediction.inPublicationWindow(Instant.now())) {
-                            log.info("Silentely set state of {} to REALIZED (by {}) of object {}", prediction,
-                                    location.getProgramUrl(), MediaObject.this.mid);
-                            prediction.setState(Prediction.State.REALIZED);
-                            MediaObjects.markForRepublication(MediaObject.this, "realized prediction");
+                            log.warn("The state of {} could have been REALIZED (by {}) of object {}", prediction,
+                                location.getProgramUrl(), MediaObject.this.mid);
                             break;
                         }
                     }
