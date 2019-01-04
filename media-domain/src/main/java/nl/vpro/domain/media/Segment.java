@@ -143,7 +143,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
     @Override
     public boolean isPublishable() {
-        if(!parent.isPublishable()) {
+        if(parent != null && !parent.isPublishable()) {
             return false;
         }
 
