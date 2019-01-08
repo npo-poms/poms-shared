@@ -4,8 +4,6 @@
  */
 package nl.vpro.domain.media.search;
 
-import lombok.Builder;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,6 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 import static nl.vpro.domain.Xmlns.SEARCH_NAMESPACE;
 import static nl.vpro.domain.media.search.LocationSortField.lastModified;
 
+@SuppressWarnings("WSReferenceInspection")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "locationPagerType", namespace = SEARCH_NAMESPACE, propOrder = {
         "offset",
@@ -24,7 +23,7 @@ import static nl.vpro.domain.media.search.LocationSortField.lastModified;
 public class LocationPager extends Pager<LocationSortField> {
 
 
-    @Builder
+    @lombok.Builder
     public LocationPager(long offset, Integer max, LocationSortField sort, Direction order) {
         super(offset, max, sort, order);
     }
