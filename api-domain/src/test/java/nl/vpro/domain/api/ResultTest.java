@@ -12,7 +12,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class ResultTest {
     @Test
-    public void testGetList() throws Exception {
+    public void testGetList() {
         Result<String> result = new Result<>(Arrays.asList("a", "b"), 10l, 5, 20l);
         assertEquals(Arrays.asList("a", "b"), result.getItems());
         assertEquals(Long.valueOf(10), result.getOffset());
@@ -24,7 +24,7 @@ public class ResultTest {
 
 
     @Test
-    public void testIterator() throws Exception {
+    public void testIterator() {
         Result<String> result = new Result<>(Arrays.asList("a", "b"), 10l, 5, 20l);
         StringBuilder build = new StringBuilder();
         for(String s : result) {

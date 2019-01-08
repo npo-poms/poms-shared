@@ -29,7 +29,7 @@ public class TimeAdapter extends XmlAdapter<String, Date> {
     }
 
     @Override
-    public String marshal(Date date) throws Exception {
+    public String marshal(Date date) {
         if (date != null) {
             return getDateFormat().format(date);
         }

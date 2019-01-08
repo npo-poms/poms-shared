@@ -28,12 +28,12 @@ public class MediaTypeConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new MediaTypeConstraint().getESPath()).isEqualTo("type");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Program program = MediaTestDataBuilder.program().mid("mid_1234").withType().build();
         assertThat(new MediaTypeConstraint(MediaType.BROADCAST).test(program)).isTrue();
         assertThat(new MediaTypeConstraint(MediaType.BROADCAST).testWithReason(program)
@@ -41,7 +41,7 @@ public class MediaTypeConstraintTest {
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Program program = MediaTestDataBuilder.program().mid("mid_1234").withType().build();
         assertThat(new MediaTypeConstraint(MediaType.SEGMENT).test(program)).isFalse();
         assertThat(new MediaTypeConstraint(MediaType.SEGMENT).testWithReason(program)

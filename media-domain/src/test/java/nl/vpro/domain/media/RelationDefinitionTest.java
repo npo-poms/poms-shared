@@ -42,7 +42,7 @@ public class RelationDefinitionTest extends ObjectTest<RelationDefinition> {
     }
 
     @Test
-    public void testValid() throws Exception {
+    public void testValid() {
         RelationDefinition definition = new RelationDefinition("ABC1", "BROADCASTER", "Tekst");
 
         Set<ConstraintViolation<RelationDefinition>> constraintViolations =
@@ -52,7 +52,7 @@ public class RelationDefinitionTest extends ObjectTest<RelationDefinition> {
     }
 
     @Test
-    public void testSetTypeToShort() throws Exception {
+    public void testSetTypeToShort() {
         RelationDefinition definition = new RelationDefinition("ABC", "BROADCASTER", "Tekst");
 
         Set<ConstraintViolation<RelationDefinition>> constraintViolations =
@@ -62,7 +62,7 @@ public class RelationDefinitionTest extends ObjectTest<RelationDefinition> {
     }
 
     @Test
-    public void testSetTypeIllegalCharacter() throws Exception {
+    public void testSetTypeIllegalCharacter() {
         RelationDefinition definition = new RelationDefinition("ABC@D", "BROADCASTER", "Tekst");
 
         Set<ConstraintViolation<RelationDefinition>> constraintViolations =
@@ -72,7 +72,7 @@ public class RelationDefinitionTest extends ObjectTest<RelationDefinition> {
     }
 
     @Test
-    public void testSetBroadcasterWithEmptyValue() throws Exception {
+    public void testSetBroadcasterWithEmptyValue() {
         RelationDefinition definition = new RelationDefinition("ABC1", "", "Tekst");
 
         Set<ConstraintViolation<RelationDefinition>> constraintViolations = validator.validate(definition);

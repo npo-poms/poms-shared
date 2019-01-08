@@ -36,7 +36,7 @@ public class OdiServiceImplTest {
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         program = MediaTestDataBuilder.program().locations(
             new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER),
             new Location("odi+http://odi.omroep.nl/video/wvc1_std/EO_101197072", OwnerType.BROADCASTER, new AVAttributes(1000000, AVFileFormat.WVC1)),
@@ -60,21 +60,21 @@ public class OdiServiceImplTest {
     }
 
     @Test
-    public void testPlayMediaOnDefault() throws Exception {
+    public void testPlayMediaOnDefault() {
         target.playMedia(program, request);
 
         verify(handlerMock).produce(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));
     }
 
     @Test
-    public void testPlayMediaOnOutput() throws Exception {
+    public void testPlayMediaOnOutput() {
         target.playMedia(program, request);
 
         verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));
     }
 
     @Test
-    public void testPlayMediaOnAVFileFormat() throws Exception {
+    public void testPlayMediaOnAVFileFormat() {
         target.playMedia(program, request, "H264", "HASP");
 
         verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request), eq("H264"), eq("HASP"));
@@ -82,14 +82,14 @@ public class OdiServiceImplTest {
     }
 
     @Test
-    public void testPlayMediaOnPubOptions() throws Exception {
+    public void testPlayMediaOnPubOptions() {
         target.playMedia(program, request, "h264_sb", "h264_bb");
 
         verify(handlerMock).produceIfSupports(eq(new Location("odi+http://odi.omroep.nl/video/h264_sb/EO_101197072", OwnerType.BROADCASTER)), eq(request), eq("h264_sb"), eq("h264_bb"));
     }
 
     @Test
-    public void testPlayLocation() throws Exception {
+    public void testPlayLocation() {
 
         target.playLocation(program.getLocations().first(), request);
 
@@ -97,7 +97,7 @@ public class OdiServiceImplTest {
     }
 
     @Test
-    public void testPlayUrl() throws Exception {
+    public void testPlayUrl() {
         target.playUrl("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", request);
 
         verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));

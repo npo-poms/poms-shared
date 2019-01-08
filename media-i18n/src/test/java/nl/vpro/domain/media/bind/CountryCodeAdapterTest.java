@@ -44,13 +44,13 @@ public class CountryCodeAdapterTest {
     }
 
     @Test
-    public void finlandReserved() throws Exception {
+    public void finlandReserved() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
         assertThat(cca.marshal(CountryCode.SF).getName()).isEqualTo("Finland");
     }
 
     @Test
-    public void finland() throws Exception {
+    public void finland() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
         assertThat(cca.marshal(CountryCode.FI).getName()).isEqualTo("Finland");
     }

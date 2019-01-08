@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMatcher> {
 
     @Test
-    public void testGetInclusiveEnd() throws Exception {
+    public void testGetInclusiveEnd() {
         DateRangeMatcher in = new DateRangeMatcher((Instant) null, null, true);
         DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
             "inclusiveEnd=\"true\"");
@@ -51,7 +51,7 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMat
     }
 
     @Test
-    public void testGetBeginXml() throws Exception {
+    public void testGetBeginXml() {
         Instant begin = Instant.EPOCH;
         DateRangeMatcher in = new DateRangeMatcher(begin, null);
         DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
@@ -60,7 +60,7 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMat
     }
 
     @Test
-    public void testGetEndXml() throws Exception {
+    public void testGetEndXml() {
         Instant end = Instant.EPOCH;
         DateRangeMatcher in = new DateRangeMatcher(null, end);
         DateRangeMatcher out = JAXBTestUtil.roundTrip(in,

@@ -25,19 +25,19 @@ public class HasImageConstraintTest {
     }
 
     @Test
-    public void testApplyTrue() throws Exception {
+    public void testApplyTrue() {
         Program program = MediaTestDataBuilder.program().withImages().build();
         assertThat(new HasImageConstraint().test(program)).isTrue();
     }
 
     @Test
-    public void testApplyFalse() throws Exception {
+    public void testApplyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasImageConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new HasImageConstraint().getESPath()).isEqualTo("images.urn");
     }
 }

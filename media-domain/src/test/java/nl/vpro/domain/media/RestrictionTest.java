@@ -32,7 +32,7 @@ public class RestrictionTest extends ObjectTest<Restriction> {
     public static Restriction persistedWithStartUpdate = new TestRestriction(1L, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
 
     @Test
-    public void testEqualsWhenIncomingWithNullId() throws Exception {
+    public void testEqualsWhenIncomingWithNullId() {
         assertThat(withStartAndStop).isEqualTo(persistedWithStartAndStop);
     }
 

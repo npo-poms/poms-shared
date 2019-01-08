@@ -17,13 +17,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PredictionTest {
 
     @Test
-    public void testGetPublishStartStop() throws Exception {
+    public void testGetPublishStartStop() {
         Prediction target = new Prediction(null, Instant.ofEpochMilli(1), Instant.ofEpochMilli(2));
         assertThat(target.getPublishStartInstant()).isBefore(target.getPublishStopInstant());
     }
 
     @Test
-    public void testGetPlatform() throws Exception {
+    public void testGetPlatform() {
         Prediction target = new Prediction(Platform.INTERNETVOD);
         assertThat(target.getPlatform()).isEqualTo(Platform.INTERNETVOD);
     }

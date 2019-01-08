@@ -17,7 +17,7 @@ public class URLClassificationServiceImplTest {
     //URL url = new URL("http://localhost:8060/schema/classification");
 
     @Test
-    public void testResource() throws MalformedURLException, InterruptedException, URISyntaxException {
+    public void testResource() throws URISyntaxException {
         URL url = getClass().getResource("/nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
 
         CachedURLClassificationServiceImpl service = new CachedURLClassificationServiceImpl(url.toURI());
@@ -36,7 +36,7 @@ public class URLClassificationServiceImplTest {
 
 
     @Test
-    public void testCachingURL() throws MalformedURLException, InterruptedException, URISyntaxException {
+    public void testCachingURL() {
         CachedURLClassificationServiceImpl service = new CachedURLClassificationServiceImpl(publicURL);
         service.setCheckIntervalInSeconds(1);
 
@@ -52,7 +52,7 @@ public class URLClassificationServiceImplTest {
 
 
     @Test
-    public void testURL() throws MalformedURLException, InterruptedException, URISyntaxException {
+    public void testURL() {
         URLClassificationServiceImpl service = new URLClassificationServiceImpl(publicURL);
         service.getResource().setMinAge(Duration.ZERO);
 

@@ -31,13 +31,13 @@ public class ProfileDefinitionTest {
     }
 
     @Test
-    public void testGetNullValues() throws Exception {
+    public void testGetNullValues() {
         ProfileDefinition in = new ProfileDefinition();
         assertThat(in.getFilter()).isNull();
     }
 
     @Test
-    public void testGetFilter() throws Exception {
+    public void testGetFilter() {
         ProfileDefinition<MediaObject> in = new ProfileDefinition<>(new Filter(), null);
         ProfileDefinition out = JAXBTestUtil.roundTrip(in,
             "<media:filter/>");
@@ -47,7 +47,7 @@ public class ProfileDefinitionTest {
 
 
     @Test
-    public void testApply() throws Exception {
+    public void testApply() {
         Filter filter = new Filter();
         filter.setConstraint(MediaConstraints.alwaysFalse());
         ProfileDefinition<MediaObject> in = new ProfileDefinition<>(filter, null);

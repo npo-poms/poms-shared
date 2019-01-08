@@ -107,5 +107,5 @@ public interface PageRestService {
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
         @Context HttpServletRequest request,
         @Context HttpServletResponse response
-    ) throws IOException;
+    );
 }

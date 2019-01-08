@@ -34,7 +34,7 @@ abstract class AbstractSubtitlesReader implements MessageBodyReader<Subtitles> {
     }
 
     @Override
-    public Subtitles readFrom(Class<Subtitles> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
+    public Subtitles readFrom(Class<Subtitles> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws WebApplicationException {
         return read(entityStream, format);
     }
 

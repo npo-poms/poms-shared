@@ -122,7 +122,7 @@ public interface MediaTestDataBuilder<
         return constrained();
     }
 
-    default T validNew() throws ModificationException {
+    default T validNew() {
         return constrainedNew();
     }
 

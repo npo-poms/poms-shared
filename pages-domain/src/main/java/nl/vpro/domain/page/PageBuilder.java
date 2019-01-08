@@ -127,7 +127,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         return self;
     }
 
-    public PB image(String mainImage) throws URISyntaxException {
+    public PB image(String mainImage) {
         Image image = new Image();
         image.setUrl(mainImage);
         return mainImage(image);

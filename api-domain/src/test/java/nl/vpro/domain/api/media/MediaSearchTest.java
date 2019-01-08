@@ -260,7 +260,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyIncludeDurations() throws Exception{
+    public void testApplyIncludeDurations() {
         DurationRangeMatcher range = new DurationRangeMatcher(Duration.ofMillis(0), Duration.ofMillis(10));
 
         MediaSearch search = new MediaSearch();
@@ -278,7 +278,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testApplyExcludeDurations() throws Exception{
+    public void testApplyExcludeDurations() {
         DurationRangeMatcher range = new DurationRangeMatcher(Duration.ofMillis(0), Duration.ofMillis(10));
         range.setMatch(Match.NOT);
 
@@ -298,7 +298,7 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testApplyNotDescedantOf() throws Exception {
+    public void testApplyNotDescedantOf() {
         MediaSearch search = new MediaSearch();
         search.setDescendantOf(new TextMatcherList(new TextMatcher("MID", Match.NOT)));
         {
