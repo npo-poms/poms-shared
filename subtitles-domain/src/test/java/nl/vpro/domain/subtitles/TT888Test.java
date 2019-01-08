@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class TT888Test {
     @Test
-    public void parseTimeline() throws Exception {
+    public void parseTimeline() {
         String line = "0003 00:02:08:11 00:02:11:06";
         TimeLine timeLine = TT888.parseTimeline(line);
         assertThat(timeLine.getSequence()).isEqualTo(3);

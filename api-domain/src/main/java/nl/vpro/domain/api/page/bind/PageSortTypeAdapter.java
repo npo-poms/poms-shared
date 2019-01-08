@@ -20,7 +20,7 @@ import nl.vpro.domain.api.page.PageSortTypeList;
 public class PageSortTypeAdapter extends XmlAdapter<PageSortTypeList, Map<PageSortField, Order>> {
 
     @Override
-    public Map<PageSortField, Order> unmarshal(PageSortTypeList v) throws Exception {
+    public Map<PageSortField, Order> unmarshal(PageSortTypeList v) {
         LinkedHashMap<PageSortField, Order> answer = new LinkedHashMap<>(v.getSort().size());
         for (PageSortType sortType : v.getSort()) {
             answer.put(sortType.getField(), sortType.getOrder());
@@ -29,7 +29,7 @@ public class PageSortTypeAdapter extends XmlAdapter<PageSortTypeList, Map<PageSo
     }
 
     @Override
-    public PageSortTypeList marshal(Map<PageSortField, Order> v) throws Exception {
+    public PageSortTypeList marshal(Map<PageSortField, Order> v) {
         if (v == null) {
             return null;
         }

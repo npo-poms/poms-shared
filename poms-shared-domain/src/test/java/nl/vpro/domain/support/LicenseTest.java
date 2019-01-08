@@ -26,19 +26,19 @@ public class LicenseTest {
 
 
     @Test
-    public void getIdShouldReturnLicenseId() throws Exception {
+    public void getIdShouldReturnLicenseId() {
         License testLicence = License.CC_BY;
         assertThat(testLicence.getId()).isEqualTo("CC_BY");
     }
 
     @Test
-    public void allsShouldReturnLicenseId() throws Exception {
+    public void allsShouldReturnLicenseId() {
         assertThat(License.values()[0].getId()).isEqualTo("COPYRIGHTED");
 
     }
 
     @Test
-    public void getLicenseById() throws Exception {
+    public void getLicenseById() {
         assertThat(License.valueOf("COPYRIGHTED")).isEqualTo(License.COPYRIGHTED);
     }
 
@@ -61,13 +61,13 @@ public class LicenseTest {
     Validator validator = config.getValidator();
 
     @Test
-    public void validator() throws Exception {
+    public void validator() {
         assertThat(validator.validate(License.PUBLIC_DOMAIN)).isEmpty();
     }
 
 
     @Test
-    public void futureIdsCanBeUnmarshalledXml() throws Exception {
+    public void futureIdsCanBeUnmarshalledXml() {
         A a = JAXB.unmarshal(new StringReader("<a>\n" +
             "    <license>FUTURE_LICENSE</license>\n" +
             "</a>"), A.class);

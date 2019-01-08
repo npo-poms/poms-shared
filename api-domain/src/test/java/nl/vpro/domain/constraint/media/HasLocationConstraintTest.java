@@ -33,7 +33,7 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testApplyTrue() throws Exception {
+    public void testApplyTrue() {
         Program program = MediaTestDataBuilder.program().mid("mid_1234").withLocations().build();
         assertThat(new HasLocationConstraint().test(program)).isTrue();
         assertThat(new HasLocationConstraint().testWithReason(program).getDescription(Locales.DUTCH)).isEqualTo("mid_1234 heeft een bron");
@@ -87,18 +87,18 @@ public class HasLocationConstraintTest {
     }
 
     @Test
-    public void testApplyFalse() throws Exception {
+    public void testApplyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasLocationConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new HasLocationConstraint().getESPath()).isEqualTo("locations.urn");
     }
 
     @Test
-    public void testGetESPathPlatform() throws Exception {
+    public void testGetESPathPlatform() {
         HasLocationConstraint locationConstraint = new HasLocationConstraint();
         locationConstraint.setPlatform(Platform.INTERNETVOD.name());
         assertThat(locationConstraint.getESPath()).isEqualTo("locations.platform");

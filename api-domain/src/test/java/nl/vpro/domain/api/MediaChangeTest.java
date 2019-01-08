@@ -26,7 +26,7 @@ public class MediaChangeTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         MediaChange change = MediaChange.builder()
             .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
             .mid("MID_123")
@@ -51,7 +51,7 @@ public class MediaChangeTest {
     }
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         MediaChange change = MediaChange.builder()
             .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
             .mid("MID_123")
@@ -75,7 +75,7 @@ public class MediaChangeTest {
 
 
     @Test
-    public void jsonDelete() throws Exception {
+    public void jsonDelete() {
         MediaChange change = MediaChange.builder()
             .publishDate(LocalDate.of(2016, 7, 20).atTime(13, 38).atZone(Schedule.ZONE_ID).toInstant())
             .mid("MID_123")

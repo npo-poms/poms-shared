@@ -28,13 +28,13 @@ public class CountryCodeAdapter extends XmlAdapter<CountryWrapper, CountryCode> 
 
     public static class Code extends XmlAdapter<String, CountryCode> {
         @Override
-        public CountryCode unmarshal(String v) throws Exception {
+        public CountryCode unmarshal(String v) {
             return Optional.ofNullable(CountryCode.getByCode(v))
                     .orElseThrow(() -> new IllegalArgumentException("No such country " + v));
         }
 
         @Override
-        public String marshal(CountryCode countryCode) throws Exception {
+        public String marshal(CountryCode countryCode) {
             return Optional.ofNullable(countryCode)
                     .map(Enum::name)
                     .orElse(null);

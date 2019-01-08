@@ -35,7 +35,7 @@ public class ImageTheoriesTest extends ObjectTest<Image> {
     public static Image withOwnerTypeAndUri = new Image(OwnerType.BROADCASTER, ImageType.ICON, "urn:vpro:image:3456");
 
     @Test
-    public void testIsHighlightedOnXmlMarshaling() throws Exception {
+    public void testIsHighlightedOnXmlMarshaling() {
         Image image = new Image();
         Writer writer = new StringWriter();
         JAXB.marshal(image, writer);
@@ -45,7 +45,7 @@ public class ImageTheoriesTest extends ObjectTest<Image> {
     }
 
     @Test
-    public void testGetHighlightedWithXmlMarshaling() throws Exception {
+    public void testGetHighlightedWithXmlMarshaling() {
         Image image = new Image();
         Writer writer = new StringWriter();
         image.setHighlighted(true);
@@ -75,14 +75,14 @@ public class ImageTheoriesTest extends ObjectTest<Image> {
     }
 
     @Test
-    public void testSetHighlighted() throws Exception {
+    public void testSetHighlighted() {
         Image image = new Image();
         image.setHighlighted(true);
         assertThat(image.isHighlighted()).isTrue();
     }
 
     @Test
-    public void testSetHighlightedWithNull() throws Exception {
+    public void testSetHighlightedWithNull() {
         Image image = new Image();
         image.setHighlighted(null);
         assertThat(image.isHighlighted()).isFalse();

@@ -28,18 +28,18 @@ public class PortalConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new PortalConstraint().getESPath()).isEqualTo("portal.id");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Page article = PageBuilder.page(PageType.ARTICLE).portal(new Portal("VPRONL", "http://www.vpro.nl", "VproNL")).build();
         assertThat(new PortalConstraint("VPRONL").test(article)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Page article = PageBuilder.page(PageType.ARTICLE).portal(new Portal("VPRONL", "http://www.vpro.nl", "VproNL")).build();
         assertThat(new PortalConstraint("CULTURA24").test(article)).isFalse();
     }

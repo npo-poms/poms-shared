@@ -16,7 +16,7 @@ public class PersonTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaRecord(new GTAARecord("http://data.beeldengeluid.nl/gtaa/1869521", Status.approved));
         assertThatJson(person).isSimilarTo(

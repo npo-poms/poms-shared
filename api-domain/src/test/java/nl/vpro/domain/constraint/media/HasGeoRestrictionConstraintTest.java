@@ -25,19 +25,19 @@ public class HasGeoRestrictionConstraintTest {
     }
 
     @Test
-    public void testApplyTrue() throws Exception {
+    public void testApplyTrue() {
         Program program = MediaTestDataBuilder.program().withGeoRestrictions().build();
         assertThat(new HasGeoRestrictionConstraint().test(program)).isTrue();
     }
 
     @Test
-    public void testApplyFalse() throws Exception {
+    public void testApplyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasGeoRestrictionConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new HasGeoRestrictionConstraint().getESPath()).isEqualTo("regions");
     }
 }

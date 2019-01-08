@@ -23,19 +23,19 @@ public class ImageURIValidatorTest {
      * Legacy. Once there was a bug which distributed uri's like this
      */
     @Test
-    public void testIsValidWithDot() throws Exception {
+    public void testIsValidWithDot() {
         String uri = "urn:vpro.image:12345";
         assertThat(validator.isValid(uri, null)).isTrue();
     }
 
     @Test
-    public void testIsValidWithColon() throws Exception {
+    public void testIsValidWithColon() {
         String uri = "urn:vpro:image:12345";
         assertThat(validator.isValid(uri, null)).isTrue();
     }
 
     @Test
-    public void testIsValidWhenInvalid() throws Exception {
+    public void testIsValidWhenInvalid() {
         String uri = "urn:vpro:images:12345";
         assertThat(validator.isValid(uri, null)).isFalse();
     }

@@ -86,7 +86,7 @@ public interface MediaBackendRestService {
         MediaForm form,
         @QueryParam("writable") @DefaultValue("false") boolean writable,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
-    ) throws IOException;
+    );
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}")
@@ -139,7 +139,7 @@ public interface MediaBackendRestService {
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput,
         @QueryParam(IMAGE_METADATA) @DefaultValue("false") Boolean imageMetadata,
         @QueryParam(OWNER) @DefaultValue("BROADCASTER") OwnerType owner
-    ) throws IOException;
+    );
 
     @POST
     @Path("{entity:(media|program|segment)}/{id:.*}/location")
@@ -231,7 +231,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
-    ) throws IOException;
+    );
 
     @GET
     @Path("{entity:(media|program|group|segment)}/{id:.*}/memberOfs")
@@ -251,7 +251,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
-    ) throws IOException;
+    );
 
 
     @DELETE
@@ -264,7 +264,7 @@ public interface MediaBackendRestService {
         @QueryParam("number") final Integer number,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
-    ) throws IOException;
+    );
 
 
     @GET
@@ -298,7 +298,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
-    ) throws IOException;
+    );
 
     @GET
     @Path("program/{id:.*}/episodeOfs")
@@ -316,7 +316,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         @QueryParam(VALIDATE_INPUT) @DefaultValue("false") Boolean validateInput
-    ) throws IOException;
+    );
 
 
     @DELETE
@@ -328,7 +328,7 @@ public interface MediaBackendRestService {
         @QueryParam("number") final Integer number,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
-    ) throws IOException;
+    );
 
 
     @DELETE
@@ -339,7 +339,7 @@ public interface MediaBackendRestService {
         @Encoded @PathParam("segmentId") final String segment,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors
-    ) throws IOException;
+    );
 
 
     @GET
@@ -370,7 +370,7 @@ public interface MediaBackendRestService {
     List<SubtitlesId> getAllSubtitles(
         @Encoded @PathParam(MID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
-    ) throws IOException;
+    );
 
     @POST
     @Path("subtitles/{mid:.*}/{language}/{type}")
@@ -410,7 +410,7 @@ public interface MediaBackendRestService {
     StreamingStatus getStreamingstatus(
         @Encoded @PathParam(MID) String mid,
         @Context HttpServletRequest request
-    ) throws IOException, URISyntaxException;
+    );
 
 
     @GET
@@ -440,7 +440,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         XmlCollection<PredictionUpdate> collection
-    ) throws IOException;
+    );
 
 
     @POST
@@ -452,7 +452,7 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors,
         PredictionUpdate prediction
-    ) throws IOException;
+    );
 
     @POST
     @Path("{entity:(media|program|segment)}/{mid:.*}/transcode")

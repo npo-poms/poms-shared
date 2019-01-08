@@ -16,37 +16,37 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class MatchersTest {
     @Test
-    public void testTokenizedPredicate() throws Exception {
+    public void testTokenizedPredicate() {
         TextMatcher matcher = new TextMatcher("foo");
         assertThat(Matchers.tokenizedPredicate(matcher).test("foo")).isTrue();
     }
 
     @Test
-    public void testTokenizedPredicate2() throws Exception {
+    public void testTokenizedPredicate2() {
         TextMatcher matcher = new TextMatcher("foo");
         assertThat(Matchers.tokenizedPredicate(matcher).test("foo bar")).isTrue();
     }
 
     @Test
-    public void testTokenizedPredicate3() throws Exception {
+    public void testTokenizedPredicate3() {
         TextMatcher matcher = new TextMatcher("foo bar");
         assertThat(Matchers.tokenizedPredicate(matcher).test("foo")).isTrue();
     }
 
     @Test
-    public void testTokenizedPredicate4() throws Exception {
+    public void testTokenizedPredicate4() {
         TextMatcher matcher = new TextMatcher("foo bar");
         assertThat(Matchers.tokenizedPredicate(matcher).test("xxx")).isFalse();
     }
 
     @Test
-    public void testTokenizedPredicateNot() throws Exception {
+    public void testTokenizedPredicateNot() {
         TextMatcher matcher = new TextMatcher("foo", Match.NOT);
         assertThat(Matchers.tokenizedPredicate(matcher).test("foo")).isFalse();
     }
 
     @Test
-    public void testTokenizedPredicates() throws Exception {
+    public void testTokenizedPredicates() {
         TextMatcher matcher1 = new TextMatcher("foo");
         TextMatcher matcher2 = new TextMatcher("bar");
         assertThat(Matchers.tokenizedListPredicate(new TextMatcherList(Match.SHOULD, matcher1, matcher2)).test("foo")).isTrue();
@@ -54,27 +54,27 @@ public class MatchersTest {
     }
 
     @Test
-    public void testUntokenizedPredicate() throws Exception {
+    public void testUntokenizedPredicate() {
         TextMatcher matcher = new TextMatcher("foo");
         assertThat(matcher.test("foo")).isTrue();
         assertThat(matcher.test("Foo")).isFalse();
     }
 
     @Test
-    public void testUntokenizedPredicateNot() throws Exception {
+    public void testUntokenizedPredicateNot() {
         TextMatcher matcher = new TextMatcher("foo", Match.NOT);
         assertThat(matcher.test("foo")).isFalse();
     }
 
     @Test
-    public void testUntokenizedLowercasePredicate() throws Exception {
+    public void testUntokenizedLowercasePredicate() {
         ExtendedTextMatcher matcher = new ExtendedTextMatcher("foo", Match.MUST, StandardMatchType.TEXT, false);
         assertThat(matcher.test("foo")).isTrue();
         assertThat(matcher.test("Foo")).isTrue();
     }
 
     @Test
-    public void testUntokenizedPredicates() throws Exception {
+    public void testUntokenizedPredicates() {
         TextMatcher matcher1 = new TextMatcher("foo");
         TextMatcher matcher2 = new TextMatcher("bar");
         assertThat(matcher2.test("foo")).isFalse();

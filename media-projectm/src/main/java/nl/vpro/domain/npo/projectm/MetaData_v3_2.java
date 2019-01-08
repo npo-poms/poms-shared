@@ -33,7 +33,7 @@ public class MetaData_v3_2 {
     protected static final String imageFormat = "s720";
 
 
-    public static Aflevering createAflevering(Program program, MediaProvider provider) throws DatatypeConfigurationException {
+    public static Aflevering createAflevering(Program program, MediaProvider provider) {
         Aflevering aflevering = new Aflevering();
 
         aflevering.setPrid(program.getMid());

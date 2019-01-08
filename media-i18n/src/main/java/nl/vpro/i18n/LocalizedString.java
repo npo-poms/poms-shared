@@ -139,13 +139,13 @@ public class LocalizedString { //implements javax.xml.registry.infomodel.Localiz
     public static class XmlLangAdapter extends XmlAdapter<String, Locale> {
 
         @Override
-        public Locale unmarshal(String v) throws Exception {
+        public Locale unmarshal(String v) {
             return adapt(v);
 
         }
 
         @Override
-        public String marshal(Locale v) throws Exception {
+        public String marshal(Locale v) {
             return v == null ? null : v.toString();
 
         }

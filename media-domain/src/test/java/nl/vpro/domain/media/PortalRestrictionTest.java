@@ -22,7 +22,7 @@ public class PortalRestrictionTest {
     }
 
     @Test
-    public void testBuilder() throws Exception {
+    public void testBuilder() {
 
         PortalRestriction input = PortalRestriction
             .builder()

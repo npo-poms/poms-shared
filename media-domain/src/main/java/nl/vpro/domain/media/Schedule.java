@@ -389,7 +389,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         }
     }
 
-    private Program cloneMisDuplicate(Program program) throws ClassNotFoundException, IOException {
+    private Program cloneMisDuplicate(Program program) {
         Program clone = deepCopy(program);
 
         // Prevent constraint violation on duplicate crids

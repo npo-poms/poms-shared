@@ -26,18 +26,18 @@ public class ChannelConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new ChannelConstraint().getESPath()).isEqualTo("scheduleEvents.channel");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Program program = MediaTestDataBuilder.program().withScheduleEvents().build();
         assertThat(new ChannelConstraint(Channel.NED3).test(program)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Program program = MediaTestDataBuilder.program().withAuthorityRecord().build();
         assertThat(new ChannelConstraint(Channel.ASIA).test(program)).isFalse();
     }

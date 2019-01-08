@@ -63,17 +63,17 @@ public class GenreTest {
 
 
     @Test
-    public void testCompareToWhenSmaller() throws Exception {
+    public void testCompareToWhenSmaller() {
         assertThat(new Genre("3.0.1.7.27").compareTo(new Genre("3.0.100.7.27"))).isNegative();
     }
 
     @Test
-    public void testCompareToWhenGreater() throws Exception {
+    public void testCompareToWhenGreater() {
         assertThat(new Genre("3.0.100.7.27").compareTo(new Genre("3.0.1.7.27"))).isPositive();
     }
 
     @Test
-    public void testEquals() throws Exception {
+    public void testEquals() {
         assertThat(new Genre("3.0.1.7.27").equals(new Genre("3.0.1.7.27"))).isTrue();
     }
 }

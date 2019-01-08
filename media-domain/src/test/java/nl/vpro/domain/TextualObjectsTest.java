@@ -28,7 +28,7 @@ public class TextualObjectsTest {
 
 
     @Test
-    public void testFindOwnersForTextFieldsOnOrdering() throws Exception {
+    public void testFindOwnersForTextFieldsOnOrdering() {
         final Program program = MediaBuilder.program()
             .titles(new Title("1", OwnerType.CERES, TextualType.MAIN))
             .descriptions(new Description("1", OwnerType.BROADCASTER, TextualType.EPISODE))
@@ -39,7 +39,7 @@ public class TextualObjectsTest {
     }
 
     @Test
-    public void testFindOwnersForTextFieldsOnDuplicates() throws Exception {
+    public void testFindOwnersForTextFieldsOnDuplicates() {
         final Program program = MediaBuilder.program().titles(
             new Title("1", OwnerType.CERES, TextualType.MAIN),
             new Title("1", OwnerType.CERES, TextualType.EPISODE)

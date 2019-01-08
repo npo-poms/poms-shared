@@ -41,18 +41,18 @@ public class GenreConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new GenreConstraint().getESPath()).isEqualTo("genres.id");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Page article = PageBuilder.page(PageType.ARTICLE).genres(cs.getTerm("3.0.1.1")).build();
         assertThat(new GenreConstraint("3.0.1.1").test(article)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Page article = PageBuilder.page(PageType.ARTICLE).genres(cs.getTerm("3.0.1.1.7")).build();
         assertThat(new GenreConstraint("3.0.1.1.7").test(article)).isTrue();
         assertThat(new GenreConstraint("3.0.1.1").test(article)).isFalse();
@@ -60,7 +60,7 @@ public class GenreConstraintTest {
     }
 
     @Test
-    public void testSubPath() throws Exception {
+    public void testSubPath() {
         GenreConstraint genreConstraint = new GenreConstraint("3.0.1.*");
         assertThat(genreConstraint.test(article("3.0.1.1.7"))).isTrue();
         assertThat(genreConstraint.test(article("3.0.1.1"))).isTrue();

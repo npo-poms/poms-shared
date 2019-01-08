@@ -30,25 +30,25 @@ public class LanguageValidatorTest {
     LanguageValidator validator = new LanguageValidator();
 
     @Test
-    public void testIsValid() throws Exception {
+    public void testIsValid() {
         assertTrue(validator.isValid(new Locale("nl"), null));
 
     }
 
     @Test
-    public void testIsValidCz() throws Exception {
+    public void testIsValidCz() {
         assertFalse(validator.isValid(new Locale("cz"), null));
 
     }
 
     @Test
-    public void testIsValidZxx() throws Exception {
+    public void testIsValidZxx() {
         assertTrue(validator.isValid(new Locale("zxx"), null));
 
     }
 
     @Test
-    public void testIsValidJw() throws Exception {
+    public void testIsValidJw() {
         assertTrue(validator.isValid(new Locale("jw"), null));
 
     }

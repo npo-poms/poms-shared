@@ -57,7 +57,7 @@ public class WebonlyTypeTest {
         return new NeboXmlWebOnly(getTestProgram(), getTestGroup().getMid());
     }
 
-    protected static Program getTestProgram() throws ModificationException {
+    protected static Program getTestProgram() {
         Program program = MediaTestDataBuilder
             .program()
             .constrained()
