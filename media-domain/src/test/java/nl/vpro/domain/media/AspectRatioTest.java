@@ -12,7 +12,7 @@ import static org.junit.Assert.assertNull;
  */
 public class AspectRatioTest {
     @Test
-    public void fromDimension() throws Exception {
+    public void fromDimension() {
         assertEquals(AspectRatio._16x9, AspectRatio.fromDimension(16, 9));
         assertEquals(AspectRatio._16x9, AspectRatio.fromDimension(3 * 16, 3 * 9));
         assertEquals(AspectRatio._16x9, AspectRatio.fromDimension(3 * 13 * 16, 3 * 13 * 9));

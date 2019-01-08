@@ -25,19 +25,19 @@ public class HasPortalRestrictionConstraintTest {
     }
 
     @Test
-    public void testApplyTrue() throws Exception {
+    public void testApplyTrue() {
         Program program = MediaTestDataBuilder.program().withPortalRestrictions().build();
         assertThat(new HasPortalRestrictionConstraint().test(program)).isTrue();
     }
 
     @Test
-    public void testApplyFalse() throws Exception {
+    public void testApplyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasPortalRestrictionConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new HasPortalRestrictionConstraint().getESPath()).isEqualTo("exclusives");
     }
 }

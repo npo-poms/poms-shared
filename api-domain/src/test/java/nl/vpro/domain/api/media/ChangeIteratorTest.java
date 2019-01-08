@@ -31,7 +31,7 @@ public class ChangeIteratorTest {
     private List<MediaChange> nodes;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
     }
 /*

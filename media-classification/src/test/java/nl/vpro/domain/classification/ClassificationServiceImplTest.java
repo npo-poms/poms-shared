@@ -28,7 +28,7 @@ public class ClassificationServiceImplTest {
 
     private ClassificationService classificationService;
 
-    public ClassificationServiceImplTest() throws MalformedURLException {
+    public ClassificationServiceImplTest() {
         //classificationService = new ClassificationServiceImpl(new UrlResource("http://localhost:8060/schema/classification"));
         //classificationService = new ClassificationServiceImpl(new UrlResource("http://publish-dev.poms.omroep.nl/schema/classification"));
         classificationService = ClassificationServiceImpl.fromClassPath("nl/vpro/domain/media/classification/ebu_ContentGenreCS.xml");
@@ -37,28 +37,28 @@ public class ClassificationServiceImplTest {
 
 
     @Test
-    public void testGetTermByIdOnMainGenre() throws Exception {
+    public void testGetTermByIdOnMainGenre() {
         assertThat(classificationService.getTerm("3.0.1.5")).isNotNull();
     }
 
     @Test
-    public void getTermByReference() throws Exception {
+    public void getTermByReference() {
         assertThat(classificationService.getTermsByReference("urn:mis:genre:MOVIE")).isNotNull();
     }
     @Test
-    public void testGetTermByIdOnDoubleDigits() throws Exception {
+    public void testGetTermByIdOnDoubleDigits() {
         assertThat(classificationService.getTerm("3.0.1.2.10").getName()).isEqualTo("Spanning");
     }
 
 
     @Test
-    public void testGetNext() throws Exception {
+    public void testGetNext() {
         assertThat(new TermId("3.0.1").next()).isEqualTo(new TermId("3.0.2"));
 
     }
 
     @Test
-    public void testGetValues() throws Exception {
+    public void testGetValues() {
         assertThat(classificationService.valuesOf("3.0.1").iterator().next().getTermId()).isEqualTo("3.0.1.1");
         assertThat(classificationService.valuesOf("3.0.1").size()).isEqualTo(54);
        /* for (Term id : ClassificationService.valuesOf("3.0.1")) {
@@ -121,7 +121,7 @@ public class ClassificationServiceImplTest {
 
     @Test
     @Ignore
-    public void test() throws IOException, InterruptedException {
+    public void test() {
 
         ClassificationService classificationService = ClassificationServiceImpl.fromFiles(
             new File("/Users/michiel/npo/pages/data/terms")

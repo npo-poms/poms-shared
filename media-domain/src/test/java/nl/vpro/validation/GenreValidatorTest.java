@@ -21,7 +21,7 @@ public class GenreValidatorTest {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }
     @Test
-    public void testIsValid() throws Exception {
+    public void testIsValid() {
         GenreValidator validator = new GenreValidator();
         assertFalse(validator.isValid(new Genre("4.0.1"), null));
         assertTrue(validator.isValid(new Genre("3.0.1.1.11"), null));

@@ -30,7 +30,7 @@ public class ClassificationServiceWrapper implements ClassificationService {
     }
 
 
-    public ClassificationServiceWrapper(String url) throws MalformedURLException {
+    public ClassificationServiceWrapper(String url) {
         this.service = getService(url);
     }
 

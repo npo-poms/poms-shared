@@ -25,19 +25,19 @@ public class HasPortalConstraintTest {
     }
 
     @Test
-    public void testApplyTrue() throws Exception {
+    public void testApplyTrue() {
         Program program = MediaTestDataBuilder.program().withPortals().build();
         assertThat(new HasPortalConstraint().test(program)).isTrue();
     }
 
     @Test
-    public void testApplyFalse() throws Exception {
+    public void testApplyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasPortalConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new HasPortalConstraint().getESPath()).isEqualTo("portals.id");
     }
 }

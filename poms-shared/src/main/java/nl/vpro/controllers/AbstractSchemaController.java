@@ -71,7 +71,7 @@ public abstract class AbstractSchemaController<M extends Function<String, File>>
     protected void getXSD(
             final HttpServletRequest request,
             final HttpServletResponse response,
-            final String namespace) throws JAXBException, IOException {
+            final String namespace) throws IOException {
         File file = getFileForNamespace(namespace);
         serveXml(file, request, response);
     }

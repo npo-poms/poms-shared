@@ -81,7 +81,7 @@ public class OdiAuthentication {
     }
 
     @Before("target(nl.vpro.media.odi.OdiService) && execution(* *(..)) && args(media, request, ..)")
-    public void handleMedia(MediaObject media, HttpServletRequest request) throws IllegalAccessException {
+    public void handleMedia(MediaObject media, HttpServletRequest request) {
         request = patchIE89(request);
 
         hasRecentDateHeader(request);
@@ -90,7 +90,7 @@ public class OdiAuthentication {
     }
 
     @Before("target(nl.vpro.media.odi.OdiService) && execution(* *(..)) && args(location, request, ..)")
-    public void handleLocation(Location location, HttpServletRequest request) throws IllegalAccessException {
+    public void handleLocation(Location location, HttpServletRequest request) {
         request = patchIE89(request);
 
         hasRecentDateHeader(request);
@@ -100,7 +100,7 @@ public class OdiAuthentication {
     }
 
     @Before("target(nl.vpro.media.odi.OdiService) && execution(* *(..)) && args(url, request, ..)")
-    public void handleUrl(String url, HttpServletRequest request) throws IllegalAccessException {
+    public void handleUrl(String url, HttpServletRequest request) {
         request = patchIE89(request);
 
         hasRecentDateHeader(request);

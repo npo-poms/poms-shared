@@ -214,7 +214,7 @@ public interface MediaRestService {
         @QueryParam(CHECK_PROFILE) Boolean profileCheck,
         @QueryParam(DELETES) Deletes deletes,
         @Context HttpServletRequest request,
-        @Context HttpServletResponse response) throws IOException;
+        @Context HttpServletResponse response);
 
 
     /**
@@ -232,7 +232,7 @@ public interface MediaRestService {
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
         @Context HttpServletRequest request,
         @Context HttpServletResponse response
-    ) throws IOException;
+    );
 
 
 

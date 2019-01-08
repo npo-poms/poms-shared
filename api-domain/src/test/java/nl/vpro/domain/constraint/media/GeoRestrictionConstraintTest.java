@@ -28,24 +28,24 @@ public class GeoRestrictionConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new GeoRestrictionConstraint().getESPath()).isEqualTo("regions");
     }
 
     @Test
-    public void testGetESValue() throws Exception {
+    public void testGetESValue() {
         assertThat(new GeoRestrictionConstraint(Platform.INTERNETVOD, Region.NL).getValue()).isEqualTo("NL");
         assertThat(new GeoRestrictionConstraint(Platform.PLUSVOD, Region.NL).getValue()).isEqualTo("PLUSVOD:NL");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Program program = MediaTestDataBuilder.program().withGeoRestrictions().build();
         assertThat(new GeoRestrictionConstraint(Platform.INTERNETVOD, Region.BENELUX).test(program)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new GeoRestrictionConstraint(Platform.INTERNETVOD, Region.NL).test(program)).isFalse();
     }

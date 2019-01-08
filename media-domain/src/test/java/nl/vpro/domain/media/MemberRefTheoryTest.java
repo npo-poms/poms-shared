@@ -45,37 +45,37 @@ public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
     public static MemberRef duplicateWithId20 = new MemberRef(20L, member, owner, 1, null);
 
     @Test
-    public void testEqualsOnDuplicates() throws Exception {
+    public void testEqualsOnDuplicates() {
         assertThat(duplicateA).isEqualTo(duplicateB);
     }
 
     @Test
-    public void testCompareToOnDuplicates() throws Exception {
+    public void testCompareToOnDuplicates() {
         assertThat(duplicateA.compareTo(duplicateB)).isEqualTo(0);
     }
 
     @Test
-    public void testEqualsOnDuplicateWithOtherNumber() throws Exception {
+    public void testEqualsOnDuplicateWithOtherNumber() {
         assertThat(duplicateA).isNotEqualTo(duplicateWithHigherPosition);
     }
 
     @Test
-    public void testCompareToOnDuplicateWithOtherNumber() throws Exception {
+    public void testCompareToOnDuplicateWithOtherNumber() {
         assertThat(duplicateA.compareTo(duplicateWithHigherPosition)).isLessThan(0);
     }
 
     @Test
-    public void testEqualsIgnoreId() throws Exception {
+    public void testEqualsIgnoreId() {
         assertThat(duplicateWithId10).isEqualTo(duplicateWithId20);
     }
 
     @Test
-    public void testCompareToIgnoreId() throws Exception {
+    public void testCompareToIgnoreId() {
         assertThat(duplicateWithId10.compareTo(duplicateWithId20)).isEqualTo(0);
     }
 
     @Test
-    public void testTypeRoundTrip() throws Exception {
+    public void testTypeRoundTrip() {
         MemberRef memberRef = new MemberRef();
         memberRef.setType(MediaType.CLIP);
         MemberRef result = JAXBTestUtil.roundTrip(memberRef, "type=\"CLIP\"");

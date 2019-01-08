@@ -45,7 +45,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test
-    public void testWildcardOrigins() throws Exception {
+    public void testWildcardOrigins() {
         OdiClient client = new OdiClient("public", Arrays.asList("*.vpro.nl", "localhost:*"), "secret", false);
 
         Assert.assertTrue(client.matchesOrigin("www.vpro.nl"));
@@ -55,7 +55,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test
-    public void testExtractClientConfig() throws Exception {
+    public void testExtractClientConfig() {
         OdiAuthentication check = new OdiAuthentication();
         OdiClient lineClient = check.extractClientConfig("meda:privatekey:true:http://bla:8080   ,http://*.vpro.nl, http://vpro:* ");
         OdiClient client = new OdiClient("meda", Arrays.asList("http://bla:8080", "http://*.vpro.nl", "http://vpro:*"), "privatekey", true);

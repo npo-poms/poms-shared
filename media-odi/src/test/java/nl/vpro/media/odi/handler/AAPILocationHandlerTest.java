@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AAPILocationHandlerTest {
 
     @Test
-    public void testHandle() throws Exception {
+    public void testHandle() {
 
         AAPILocationHandler handler = new AAPILocationHandler();
         MockHttpServletRequest request = new MockHttpServletRequest("GET", "somepath");

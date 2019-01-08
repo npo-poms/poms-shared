@@ -49,7 +49,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
     public ClassificationServiceImpl(URI... resources) {
         this.resources = resources;
     }
-    public ClassificationServiceImpl(String resources) throws MalformedURLException, URISyntaxException {
+    public ClassificationServiceImpl(String resources) throws URISyntaxException {
         this(getResources(resources));
     }
 
@@ -57,7 +57,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         this.pollIntervalInMillis = pollIntervalInMillis;
     }
 
-    private static URI[] getResources(String resources) throws URISyntaxException {
+    private static URI[] getResources(String resources) {
         final List<URI> result = new ArrayList<>();
         for (String r : resources.split("\\s*,\\s*")) {
             if (r.startsWith("classpath:")) {
@@ -117,7 +117,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
         }
     }
 
-    private Instant lastModified(URI uri) throws MalformedURLException {
+    private Instant lastModified(URI uri) {
         try {
             return Instant.ofEpochMilli(new File(uri).lastModified());
         } catch (IllegalArgumentException ia) {
@@ -189,7 +189,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
 
 
     private long lastCheck = -1;
-    private void pollingWatchDirectory(final File directory) throws IOException {
+    private void pollingWatchDirectory(final File directory) {
         log.info("Watching " + directory + " (using polling, since NFS doesn't support more sane methods)");
         executorService.scheduleAtFixedRate((Runnable) () -> {
             if (directory.lastModified() > lastCheck) {

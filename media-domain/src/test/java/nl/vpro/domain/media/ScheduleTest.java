@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ScheduleTest {
 
     @Test
-    public void testUnmarshalForMISDuplicatesOnClearScheduleEvents() throws Exception {
+    public void testUnmarshalForMISDuplicatesOnClearScheduleEvents() {
         MediaTable table = new MediaTable();
 
         Program program = MediaBuilder.program().crids("crid://domain.com/12345").build();

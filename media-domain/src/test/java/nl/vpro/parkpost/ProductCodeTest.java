@@ -15,7 +15,7 @@ import org.junit.Test;
 public class ProductCodeTest {
 
     @Test
-    public void testParse() throws Exception {
+    public void testParse() {
         String[] valids = {
             "2P2702MO_DEBATOP2",
             "2P2702VD_DEBATOP2",

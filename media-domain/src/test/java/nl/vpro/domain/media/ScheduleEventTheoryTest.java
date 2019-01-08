@@ -44,7 +44,7 @@ public class ScheduleEventTheoryTest extends ObjectTest<ScheduleEvent> { // TODO
     public static ScheduleEvent nullDuration = new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(100), null);
 
     @Test
-    public void testGuideDayBeforeCutOff() throws Exception {
+    public void testGuideDayBeforeCutOff() {
         ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.EPOCH, Duration.ofMillis(10));
 
         //noinspection deprecation
@@ -54,7 +54,7 @@ public class ScheduleEventTheoryTest extends ObjectTest<ScheduleEvent> { // TODO
     }
 
     @Test
-    public void testGuideDayAfterCutOff() throws Exception {
+    public void testGuideDayAfterCutOff() {
         ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli((5 * 3600 + 58 * 60) * 1000), Duration.ofMillis(10));
 
         //noinspection deprecation
