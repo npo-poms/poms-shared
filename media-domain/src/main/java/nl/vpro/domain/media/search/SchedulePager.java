@@ -4,17 +4,14 @@
  */
 package nl.vpro.domain.media.search;
 
-import lombok.Builder;
-import lombok.ToString;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 import static nl.vpro.domain.Xmlns.SEARCH_NAMESPACE;
-import static nl.vpro.domain.media.search.MediaSortField.lastModified;
 
+@SuppressWarnings("WSReferenceInspection")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "schedulePagerType", namespace = SEARCH_NAMESPACE, propOrder = {
         "offset",
@@ -25,7 +22,7 @@ import static nl.vpro.domain.media.search.MediaSortField.lastModified;
 public class SchedulePager extends Pager<ScheduleSortField> {
 
 
-    @Builder
+    @lombok.Builder
     public SchedulePager(long offset, Integer max, ScheduleSortField sort, Direction order) {
         super(offset, max, sort, order);
     }
