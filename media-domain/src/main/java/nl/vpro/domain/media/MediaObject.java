@@ -216,8 +216,13 @@ import static nl.vpro.domain.media.MediaObject.*;
     @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)") })
 
 @Slf4j
-public abstract class MediaObject extends PublishableObject<MediaObject>
-        implements NicamRated, LocalizedObject<Title, Description, Website, TwitterRef, MediaObject>, MediaIdentifiable {
+public abstract class MediaObject
+    extends
+    PublishableObject<MediaObject>
+    implements
+    NicamRated,
+    LocalizedObject<Title, Description, Website, TwitterRef, MediaObject>,
+    MediaIdentifiable {
 
 
     public static final String DELETED_FILTER = "deletedFilter";
@@ -2250,6 +2255,8 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     public List<Image> findImages(OwnerType owner) {
         return getImages().stream().filter(i -> owner.equals(i.getOwner())).collect(Collectors.toList());
     }
+
+
 
     public Image findImage(ImageType type) {
         for (Image image : getImages()) {
