@@ -65,22 +65,22 @@ public class PageBuilderTest {
 
 
     @Test
-    public void testTitle() throws Exception {
+    public void testTitle() {
         assertEquals("title", PageBuilder.page(PageType.ARTICLE).title("title").build().getTitle());
     }
 
     @Test
-    public void testParagraph() throws Exception {
+    public void testParagraph() {
         assertEquals(Arrays.asList(new Paragraph(null, "body", null)), PageBuilder.page(PageType.ARTICLE).paragraphs(new Paragraph(null, "body", null)).build().getParagraphs());
     }
 
     @Test
-    public void testUrl() throws Exception {
+    public void testUrl() {
         assertThat(PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").build().getUrl()).isEqualTo("http://www.vpro.nl");
     }
 
     @Test
-    public void testPortal() throws Exception {
+    public void testPortal() {
         Portal portal = new Portal("VPRONL", "http://vpro.nl", "title");
         assertThat(PageBuilder.page(PageType.ARTICLE).portal(portal).build().getPortal()).isEqualTo(portal);
     }
@@ -91,12 +91,12 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testSummary() throws Exception {
+    public void testSummary() {
         assertEquals("summary", PageBuilder.page(PageType.ARTICLE).summary("summary").build().getSummary());
     }
 
     @Test
-    public void getBroadcasters() throws Exception {
+    public void getBroadcasters() {
         assertThat(PageBuilder.page(PageType.ARTICLE).broadcasters(new Broadcaster("VPRO"), new Broadcaster("KRO")).build().getBroadcasters()).containsExactly(new Broadcaster("VPRO"), new Broadcaster("KRO"));
     }
 
@@ -126,7 +126,7 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testGenresJson() throws IOException, SAXException {
+    public void testGenresJson() throws IOException {
         Page page = PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").genres(classificationService.getTerm("3.0.1.1.4")).build();
         String result = Jackson2Mapper.getInstance().writer().writeValueAsString(page);
         JSONAssert.assertJsonEquals("{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"url\":\"http://www.vpro.nl\",\"genres\":[{\"id\":\"3.0.1.1.4\",\"terms\":[\"Jeugd\",\"Sport\"],\"displayName\":\"Jeugd - Sport\"}]}", result);

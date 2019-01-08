@@ -41,7 +41,7 @@ public class EnumConstraintTest {
     AnEnumConstraint anEnumConstraint = new AnEnumConstraint();
 
     @Test
-    public void getValue() throws Exception {
+    public void getValue() {
         anEnumConstraint.setValue("A");
         assertThat(anEnumConstraint.getEnumValue()).isEqualTo(AnEnum.a);
         assertThat(anEnumConstraint.getValue()).isEqualTo("a");

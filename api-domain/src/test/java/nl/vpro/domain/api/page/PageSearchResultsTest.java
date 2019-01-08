@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PageSearchResultsTest {
 
     @Test
-    public void testSetSelectedFacetsGenresFalse() throws Exception {
+    public void testSetSelectedFacetsGenresFalse() {
         PageFacetsResult result = new PageFacetsResult();
         PageFacetsResult selected = new PageFacetsResult();
         GenreFacetResultItem tfr = new GenreFacetResultItem(Collections.emptyList(), "name", "foo", 100);
@@ -25,7 +25,7 @@ public class PageSearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedFacetsGenresTrue() throws Exception {
+    public void testSetSelectedFacetsGenresTrue() {
         PageFacetsResult result = new PageFacetsResult();
         PageFacetsResult selected = new PageFacetsResult();
         GenreFacetResultItem tfr = new GenreFacetResultItem(Collections.emptyList(), "Foo", "foo", 100);
@@ -36,7 +36,7 @@ public class PageSearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedFacetsBroadcastersFalse() throws Exception {
+    public void testSetSelectedFacetsBroadcastersFalse() {
         PageFacetsResult result = new PageFacetsResult();
         PageFacetsResult selected = new PageFacetsResult();
         TermFacetResultItem tfr = new TermFacetResultItem("name", "foo", 100);
@@ -47,7 +47,7 @@ public class PageSearchResultsTest {
     }
 
     @Test
-    public void testSetSelectedFacetsBroadcastersTrue() throws Exception {
+    public void testSetSelectedFacetsBroadcastersTrue() {
         PageFacetsResult result = new PageFacetsResult();
         PageFacetsResult selected = new PageFacetsResult();
         TermFacetResultItem tfr = new TermFacetResultItem("name", "foo", 100);

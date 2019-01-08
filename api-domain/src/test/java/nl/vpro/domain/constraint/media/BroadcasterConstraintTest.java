@@ -34,13 +34,13 @@ public class BroadcasterConstraintTest {
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Program program = MediaTestDataBuilder.program().withBroadcasters().build();
         assertThat(new BroadcasterConstraint("BNN").test(program)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Program program = MediaTestDataBuilder.program().mid("mid_123").withBroadcasters().build();
         assertThat(new BroadcasterConstraint("Bnn").test(program)).isFalse();
         assertThat(new BroadcasterConstraint("Bnn").testWithReason(program).applies()).isFalse();
@@ -49,7 +49,7 @@ public class BroadcasterConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new BroadcasterConstraint().getESPath()).isEqualTo("broadcasters.id");
     }
 }

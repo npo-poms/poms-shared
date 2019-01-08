@@ -12,16 +12,16 @@ public class LocaleAdapterTest {
 
 
     @Test
-    public void adaptXx() throws Exception {
+    public void adaptXx() {
         assertThat(LocalizedString.adapt("xx")).isEqualTo(new Locale("zxx"));
     }
     @Test
-    public void adaptCz() throws Exception {
+    public void adaptCz() {
         assertThat(LocalizedString.adapt("cz")).isEqualTo(new Locale("cs"));
     }
 
     @Test
-    public void adaptNl_NL() throws Exception {
+    public void adaptNl_NL() {
         assertThat(LocalizedString.adapt("nl_NL")).isEqualTo(new Locale("nl", "NL"));
     }
 }

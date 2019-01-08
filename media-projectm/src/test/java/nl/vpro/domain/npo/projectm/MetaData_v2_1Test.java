@@ -98,7 +98,7 @@ public class MetaData_v2_1Test {
 
     }
 
-    protected Program getTestProgram(MediaProvider provider) throws ParseException {
+    protected Program getTestProgram(MediaProvider provider) {
 
         Group series = MediaBuilder.group().mid("SERIES_MID").type(GroupType.SERIES).titles(new Title("series title", OwnerType.BROADCASTER, TextualType.MAIN)).build();
         when(provider.findByMid("SERIES_MID")).thenReturn(series);

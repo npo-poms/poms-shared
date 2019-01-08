@@ -82,7 +82,7 @@ public class LocationTest extends ObjectTest<Location> {
         assertThat(constraintViolations).isEmpty();
     }
     @Test
-    public void testAddCeresRecordWhenNew() throws Exception {
+    public void testAddCeresRecordWhenNew() {
         Program program = new Program(1L);
         Prediction pred = program.findOrCreatePrediction(Platform.INTERNETVOD);
         Location location = new Location();
@@ -93,7 +93,7 @@ public class LocationTest extends ObjectTest<Location> {
     }
 
     @Test
-    public void testEqualsNoIdDifferentURLSameOwner() throws Exception {
+    public void testEqualsNoIdDifferentURLSameOwner() {
         Location l1 = new Location("URL", OwnerType.BROADCASTER);
         Location l2 = new Location("OTHER_URL", OwnerType.BROADCASTER);
 
@@ -101,7 +101,7 @@ public class LocationTest extends ObjectTest<Location> {
     }
 
     @Test
-    public void testEqualsNoIdSameURLDifferentOwner() throws Exception {
+    public void testEqualsNoIdSameURLDifferentOwner() {
         Location l1 = new Location("URL", OwnerType.BROADCASTER);
         Location l2 = new Location("URL", OwnerType.MIS);
 
@@ -109,7 +109,7 @@ public class LocationTest extends ObjectTest<Location> {
     }
 
     @Test
-    public void testEqualsSameIdDifferentURLAndOwner() throws Exception {
+    public void testEqualsSameIdDifferentURLAndOwner() {
         Location l1 = new Location("URL", OwnerType.BROADCASTER);
         Location l2 = new Location("OTHER_URL", OwnerType.MIS);
 

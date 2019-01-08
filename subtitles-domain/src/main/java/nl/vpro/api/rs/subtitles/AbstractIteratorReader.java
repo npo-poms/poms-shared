@@ -35,7 +35,7 @@ abstract class AbstractIteratorReader implements MessageBodyReader<Iterator<Cue>
     }
 
     @Override
-    public Iterator<Cue> readFrom(Class<Iterator<Cue>> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
+    public Iterator<Cue> readFrom(Class<Iterator<Cue>> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws WebApplicationException {
         return read(entityStream);
     }
     abstract Iterator<Cue> read(InputStream entityStream);

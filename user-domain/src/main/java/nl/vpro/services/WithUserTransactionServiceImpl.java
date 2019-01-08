@@ -27,7 +27,7 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public <T> T executeInNewTransaction(@Nonnull Callable<T> callable) throws Exception {
+    public <T> T executeInNewTransaction(@Nonnull Callable<T> callable) {
         return doAsTransactionService.executeInNewTransaction(user, callable);
     }
 
@@ -54,7 +54,7 @@ public class WithUserTransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public <T> T executeInReadonlyTransaction(@Nonnull Callable<T> callable) throws Exception {
+    public <T> T executeInReadonlyTransaction(@Nonnull Callable<T> callable) {
         return doAsTransactionService.executeInReadonlyTransaction(user, callable);
     }
 
