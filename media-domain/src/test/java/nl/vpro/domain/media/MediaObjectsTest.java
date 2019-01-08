@@ -53,7 +53,7 @@ public class MediaObjectsTest {
      * MSE-3726 Sort date should be the most recent schedule event which is not a rerun
      */
     @Test
-    public void testSortDateWithScheduleEvents() throws Exception {
+    public void testSortDateWithScheduleEvents() {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
@@ -76,7 +76,7 @@ public class MediaObjectsTest {
      * MSE-4094
      */
     @Test
-    public void testSortDateWithPredictions() throws Exception {
+    public void testSortDateWithPredictions() {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
@@ -90,7 +90,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testSortDateWithPublishStart() throws Exception {
+    public void testSortDateWithPublishStart() {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .publishStart(Instant.ofEpochMilli(2))
@@ -100,7 +100,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testSortDateWithCreationDate() throws Exception {
+    public void testSortDateWithCreationDate() {
         final Program program = MediaBuilder.program()
             .creationDate(Instant.ofEpochMilli(1))
             .build();
@@ -109,7 +109,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testSync() throws Exception {
+    public void testSync() {
         Website a = new Website("a");
         a.setId(1L);
         Website b = new Website("b");
@@ -126,7 +126,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void testFindScheduleEventHonoringOffset() throws Exception {
+    public void testFindScheduleEventHonoringOffset() {
         final Program program = MediaBuilder.program()
             .scheduleEvents(new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli(100), Duration.ofMillis(100)))
             .build();
@@ -141,7 +141,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void filterOnWorkflow() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void filterOnWorkflow() {
         Location location1 = new Location("http://www.vpro.nl/1", OwnerType.BROADCASTER);
         Location location2 = new Location("http://www.vpro.nl/2", OwnerType.BROADCASTER);
         location2.setWorkflow(Workflow.DELETED);
@@ -157,7 +157,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void filterPublishable() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void filterPublishable() {
         Location location1 = new Location("http://www.vpro.nl/1", OwnerType.BROADCASTER);
         Location location2 = new Location("http://www.vpro.nl/2", OwnerType.BROADCASTER);
         location2.setWorkflow(Workflow.DELETED);
@@ -172,15 +172,14 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void hasSubtitles_NoSubs() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void hasSubtitles_NoSubs() {
         final Program program = MediaBuilder.program()
             .build();
         assertFalse(program.hasSubtitles());
     }
 
     @Test
-    public void hasSubtitles_Translation()
-            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void hasSubtitles_Translation() {
 
         final Program program = MediaBuilder.program().build();
         program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH, SubtitlesType.TRANSLATION));
@@ -188,7 +187,7 @@ public class MediaObjectsTest {
     }
 
     @Test
-    public void hasSubtitles_DutchCaption() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+    public void hasSubtitles_DutchCaption() {
         final Program program = MediaBuilder.program()
             .build();
         program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,

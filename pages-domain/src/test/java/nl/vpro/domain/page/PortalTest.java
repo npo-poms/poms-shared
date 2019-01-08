@@ -26,13 +26,13 @@ public class PortalTest {
     }
 
     @Test
-    public void testGetUrl() throws Exception {
+    public void testGetUrl() {
         target.setUrl("http://tegenlicht.vpro.nl/");
         assertThat(target.getUrl()).isEqualTo("http://tegenlicht.vpro.nl");
     }
 
     @Test
-    public void testGetDisplayName() throws Exception {
+    public void testGetDisplayName() {
         target.setDisplayName("Wetenschap24");
         assertThat(target.getDisplayName()).isEqualTo("Wetenschap24");
     }

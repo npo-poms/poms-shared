@@ -134,7 +134,7 @@ public class OpenskosRepositoryTest {
     }
 
     @Test(expected = HttpServerErrorException.class)
-    public void retrieveItemStatusShouldReturnUnexpectedError() throws Exception {
+    public void retrieveItemStatusShouldReturnUnexpectedError() {
         wireMockRule.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody("Random error")));
         Optional<Description> desc = repo.retrieveItemStatus("http://data.beeldengeluid.nl/gtaa/1672723");
     }

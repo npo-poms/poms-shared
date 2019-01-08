@@ -26,7 +26,7 @@ public class SearchFieldTest {
     }
 
     @Test
-    public void testBoostOnDefaultValue() throws Exception {
+    public void testBoostOnDefaultValue() {
         assertThat(new SearchField("name").getBoost()).isEqualTo(1f);
     }
 }

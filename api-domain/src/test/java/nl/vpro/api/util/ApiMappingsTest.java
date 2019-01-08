@@ -100,7 +100,7 @@ public class ApiMappingsTest {
     }
 
 
-    protected void testNamespace(String xmlns) throws IOException, JAXBException, SAXException {
+    protected void testNamespace(String xmlns) throws IOException {
 
         mappings.getUnmarshaller(true, xmlns).get();
 

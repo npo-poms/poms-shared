@@ -23,17 +23,17 @@ public class MediaClassificationServiceTest {
 
 
     @Test
-    public void testGetTermByEpgCodeOnRawCode() throws Exception {
+    public void testGetTermByEpgCodeOnRawCode() {
         assertThat(MediaClassificationService.getTermByEpgCode("0311")).isNotNull();
     }
 
     @Test
-    public void testGetTermByEpgCodeWhenNameSpaced() throws Exception {
+    public void testGetTermByEpgCodeWhenNameSpaced() {
         assertThat(MediaClassificationService.getTermByEpgCode("urn:tva:metadata:cs:2004:0725").getName()).isEqualTo("Natuur");
     }
 
     @Test
-    public void testGetTermByMisCode() throws Exception {
+    public void testGetTermByMisCode() {
         assertThat(MediaClassificationService.getTermsByMisGenreType("MUSIC")).hasSize(1);
     }
 
@@ -61,14 +61,14 @@ public class MediaClassificationServiceTest {
     }
 
     @Test
-    public void testGetTermByMisCodeOmitParent() throws Exception {
+    public void testGetTermByMisCodeOmitParent() {
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "MOVIE")).hasSize(1);
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "MOVIE").get(0).getName()).isEqualTo("Animatie");
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "MOVIE").get(0).getParent().getName()).isEqualTo("Film");
     }
 
     @Test
-    public void testGetTermByMisCodes() throws Exception {
+    public void testGetTermByMisCodes() {
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "YOUTH")).hasSize(1);
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "YOUTH").get(0).getName()).isEqualTo("Animatie");
         assertThat(MediaClassificationService.getTermsByMisGenreType("CARTOON", "YOUTH").get(0).getParent().getName()).isEqualTo("Jeugd");

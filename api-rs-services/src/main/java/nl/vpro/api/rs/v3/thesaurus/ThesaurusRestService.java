@@ -46,7 +46,7 @@ public interface ThesaurusRestService {
         @QueryParam("to") Instant to,
         @Context HttpServletRequest request,
         @Context HttpServletResponse response
-        ) throws Exception;
+        );
 
 
     @GET
@@ -65,14 +65,14 @@ public interface ThesaurusRestService {
         @QueryParam("to") Instant to,
         @Context HttpServletRequest request,
         @Context HttpServletResponse response
-    ) throws Exception;
+    );
 
     @GET
     @Path("/items/status")
     @NoCache
     ThesaurusObject itemStatus(
         @QueryParam("id") String id
-    ) throws Exception;
+    );
 
 
 }

@@ -72,7 +72,7 @@ public class NeboXmlImportTest {
     }
 
 
-    protected Program getTestProgram() throws ModificationException {
+    protected Program getTestProgram() {
         Image icon = new Image();
         icon.setImageUri("http://plaatjes/123.jpg");
         icon.setTitle("Icon titel");

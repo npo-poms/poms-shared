@@ -44,7 +44,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testUnMarshal() throws Exception {
+    public void testUnMarshal() {
         String input = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><group type=\"SEASON\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/></group>";
 
         GroupUpdate result = toUpdate(input);

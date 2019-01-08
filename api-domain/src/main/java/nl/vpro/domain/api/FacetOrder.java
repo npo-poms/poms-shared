@@ -119,12 +119,12 @@ class FacetDeserializer extends JsonDeserializer<FacetOrder> {
 class FacetAdapter extends XmlAdapter<FacetOrder.FacetOrderBackwards, FacetOrder>{
 
     @Override
-    public FacetOrder unmarshal(FacetOrder.FacetOrderBackwards v) throws Exception {
+    public FacetOrder unmarshal(FacetOrder.FacetOrderBackwards v) {
         return FacetOrder.backwardCompatibleValueOf(v);
     }
 
     @Override
-    public FacetOrder.FacetOrderBackwards marshal(FacetOrder v) throws Exception {
+    public FacetOrder.FacetOrderBackwards marshal(FacetOrder v) {
         if (v == null) {
             return null;
         }

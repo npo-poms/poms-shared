@@ -26,7 +26,7 @@ public class OdiOriginCheck {
     private List<String> origins;
 
     @Before("target(nl.vpro.media.odi.OdiService) && execution(* *(..)) && args(*, *, request, response, ..)")
-    public void handle(HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException {
+    public void handle(HttpServletRequest request, HttpServletResponse response) {
         String referrer = request.getHeader("origin");
         if(origins != null && !origins.contains(referrer)) {
             log.warn("Location access forbidden for referrer {}", referrer);

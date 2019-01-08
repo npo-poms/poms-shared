@@ -47,7 +47,7 @@ public class TextFacetTest  {
     }
 
     @Test
-    public void testGetSort() throws Exception {
+    public void testGetSort() {
         TextFacet in = new TextFacet();
         in.setSort(FacetOrder.VALUE_DESC);
         TextFacet out = JAXBTestUtil.roundTrip(in,

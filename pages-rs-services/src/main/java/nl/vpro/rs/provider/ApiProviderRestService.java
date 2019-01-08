@@ -25,7 +25,7 @@ public interface ApiProviderRestService {
     @GET
     @Path("/page")
     Page getPage(
-        @QueryParam("url") String url) throws IOException;
+        @QueryParam("url") String url);
 
     @GET
     @Path("/media")

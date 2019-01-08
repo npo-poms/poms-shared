@@ -41,7 +41,7 @@ import static org.junit.Assert.assertNull;
 public class ProfileTest {
 
     @Test
-    public void testGetNullValues() throws Exception {
+    public void testGetNullValues() {
         Profile in = new Profile(null);
         assertNull(in.getName());
         assertNull(in.getPageProfile());

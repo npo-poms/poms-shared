@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LuceneHelperTest {
 
     @Test
-    public void testEscape() throws Exception {
+    public void testEscape() {
         class Pair {
             String input;
 
@@ -47,7 +47,7 @@ public class LuceneHelperTest {
 
 
     @Test
-    public void testRangeQueryMinutes() throws Exception {
+    public void testRangeQueryMinutes() {
         Instant start = LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         Instant stop  = LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         NumericRangeQuery<Long> p = LuceneHelper.createRangeQuery("bla",
@@ -59,7 +59,7 @@ public class LuceneHelperTest {
     }
 
     @Test
-    public void testRangeQueryDays() throws Exception {
+    public void testRangeQueryDays() {
         Instant start = LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         Instant stop  = LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         NumericRangeQuery<Long> p = LuceneHelper.createRangeQuery("bla",
@@ -72,7 +72,7 @@ public class LuceneHelperTest {
 
 
     @Test
-    public void testRangeQueryYear() throws Exception {
+    public void testRangeQueryYear() {
         Instant start = LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         Instant stop  = LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         NumericRangeQuery<Long> p = LuceneHelper.createRangeQuery("bla",
@@ -84,7 +84,7 @@ public class LuceneHelperTest {
     }
 
     @Test
-    public void testRangeQueryMonth() throws Exception {
+    public void testRangeQueryMonth() {
         NumericRangeQuery<Long> p = LuceneHelper.createRangeQuery("bla",
             LocalDateTime.of(2016, 8, 23, 12, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),
             LocalDateTime.of(2016, 8, 23, 13, 30).atZone(ZoneId.of("Europe/Amsterdam")).toInstant(),

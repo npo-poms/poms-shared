@@ -40,7 +40,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testBroadcasters() throws Exception {
+    public void testBroadcasters() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").broadcasters("VPRO", "VARA").build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:broadcaster>VPRO</pageUpdate:broadcaster>\n" +
             "    <pageUpdate:broadcaster>VARA</pageUpdate:broadcaster>");
@@ -58,21 +58,21 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testTitle() throws Exception {
+    public void testTitle() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").title("Page title").build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:title>Page title</pageUpdate:title>");
         assertThat(result.getTitle()).isEqualTo("Page title");
     }
 
     @Test
-    public void testSubtitle() throws Exception {
+    public void testSubtitle() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").subtitle("Page subtitle").build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:subtitle>Page subtitle</pageUpdate:subtitle>");
         assertThat(result.getSubtitle()).isEqualTo("Page subtitle");
     }
 
     @Test
-    public void testKeywords() throws Exception {
+    public void testKeywords() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").keywords("key", "word").build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:keyword>key</pageUpdate:keyword>\n" +
             "    <pageUpdate:keyword>word</pageUpdate:keyword>");
@@ -80,14 +80,14 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testSummary() throws Exception {
+    public void testSummary() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").summary("summary").build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:summary>summary</pageUpdate:summary>");
         assertThat(result.getSummary()).isEqualTo("summary");
     }
 
     @Test
-    public void testParagraphs() throws Exception {
+    public void testParagraphs() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").paragraphs(new ParagraphUpdate(null, "body1", null), new ParagraphUpdate(null, "body2", null)).build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:paragraphs>\n" +
             "        <pageUpdate:paragraph>\n" +
@@ -101,7 +101,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testTags() throws Exception {
+    public void testTags() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").tags("tag1", "tag2").build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:tag>tag1</pageUpdate:tag>\n" +
             "    <pageUpdate:tag>tag2</pageUpdate:tag>");
@@ -109,7 +109,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testLinks() throws Exception {
+    public void testLinks() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").links(new LinkUpdate("http://www.vpro.nl", "Link text")).build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:link pageRef=\"http://www.vpro.nl\">\n" +
             "        <pageUpdate:text>Link text</pageUpdate:text>\n" +
@@ -118,7 +118,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testEmbeds() throws Exception {
+    public void testEmbeds() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").embeds(new EmbedUpdate("MID_1234", "Title", "Description")).build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:embeds>\n" +
             "        <pageUpdate:embed midRef=\"MID_1234\">\n" +
@@ -130,7 +130,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testImages() throws Exception {
+    public void testImages() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").images(new ImageUpdate(new Image("http://somewhere"))).build();
         PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:image>\n" +
             "        <pageUpdate:imageLocation>\n" +
@@ -194,7 +194,7 @@ public class PageUpdateBuilderTest {
 
     @Test
     @Ignore("Used for building test data")
-    public void testExample() throws Exception {
+    public void testExample() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl/article").example().build();
         Writer writer = new StringWriter();
         JAXB.marshal(page, writer);

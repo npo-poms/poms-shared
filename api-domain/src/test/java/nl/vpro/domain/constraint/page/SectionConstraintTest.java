@@ -24,12 +24,12 @@ public class SectionConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new SectionConstraint().getESPath()).isEqualTo("portal.section.path");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         final Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VproNL");
         final Section section = new Section("cinema", "Cinema NL");
         portal.setSection(section);
@@ -38,7 +38,7 @@ public class SectionConstraintTest {
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         final Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VproNL");
         final Section section = new Section("cinema", "Cinema NL");
         portal.setSection(section);

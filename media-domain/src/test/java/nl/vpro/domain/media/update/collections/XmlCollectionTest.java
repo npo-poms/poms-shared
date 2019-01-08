@@ -18,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 public class XmlCollectionTest {
 
     @Test
-    public void marshall() throws IOException, SAXException {
+    public void marshall() {
         XmlCollection<LocationUpdate> col = new XmlCollection<>(Arrays.asList(new LocationUpdate()));
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<collection xmlns:update=\"urn:vpro:media:update:2009\" xmlns:media=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +

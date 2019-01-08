@@ -42,13 +42,13 @@ public class SectionTest {
     }
 
     @Test
-    public void testGetPath() throws Exception {
+    public void testGetPath() {
         target.setPath("/tegenlicht");
         assertThat(target.getPath()).isEqualTo("/tegenlicht");
     }
 
     @Test
-    public void testId() throws Exception {
+    public void testId() {
         Portal portal = new Portal("VPRONL", "http://www.vpro.nl", "VPRO");
         target.setPortal(portal);
         target.setPath("/tegenlicht");
