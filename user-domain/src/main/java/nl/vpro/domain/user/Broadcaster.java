@@ -69,7 +69,13 @@ public class Broadcaster extends Organization {
      * @param whatsOnId   what's on broadcaster name
      * @param neboId      nebo broadcaster name
      */
-    public Broadcaster(String id, String displayName, String whatsOnId, String neboId, String misId) {
+    @lombok.Builder
+    public Broadcaster(
+        String id,
+        String displayName,
+        String whatsOnId,
+        String neboId,
+        String misId) {
         super(id, displayName);
         this.whatsOnId = whatsOnId;
         this.neboId = neboId;
