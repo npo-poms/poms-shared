@@ -60,7 +60,10 @@ public class ServiceLocator  {
         serviceLocator.broadcasterService = () -> broadcasterService;
     }
 
-     public static void setBroadcasterService(String... broadcasters) {
+    public static void setBroadcasterService(String... broadcasters) {
+        setBroadcasterService(new BroadcasterServiceImpl(broadcasters));
+    }
+    public static void setBroadcasterService(Broadcaster... broadcasters) {
         setBroadcasterService(new BroadcasterServiceImpl(broadcasters));
     }
 
