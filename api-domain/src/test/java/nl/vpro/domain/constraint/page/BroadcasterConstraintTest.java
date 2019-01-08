@@ -28,18 +28,18 @@ public class BroadcasterConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new BroadcasterConstraint().getESPath()).isEqualTo("broadcasters.id");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Page article = PageBuilder.page(PageType.ARTICLE).broadcasters(new Broadcaster("BNN", "BNN")).build();
         assertThat(new BroadcasterConstraint("BNN").test(article)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Page article = PageBuilder.page(PageType.ARTICLE).broadcasters(new Broadcaster("BNN", "BNN")).build();
         assertThat(new BroadcasterConstraint("Bnn").test(article)).isFalse();
     }

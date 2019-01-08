@@ -46,7 +46,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetBroadcasters() throws Exception {
+    public void testGetBroadcasters() {
         PageSearch in = new PageSearch();
         in.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("TROS")));
         PageSearch out = JAXBTestUtil.roundTrip(in,
@@ -69,7 +69,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetTypes() throws Exception {
+    public void testGetTypes() {
         PageSearch in = new PageSearch();
         in.setTypes(new TextMatcherList(new TextMatcher("ARTICLE"), new TextMatcher("PLAYER")));
         PageSearch out = JAXBTestUtil.roundTrip(in,
@@ -93,7 +93,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetPortals() throws Exception {
+    public void testGetPortals() {
         PageSearch in = new PageSearch();
         in.setPortals(new TextMatcherList(new TextMatcher("WETENSCHAP24")));
         PageSearch out = JAXBTestUtil.roundTrip(in,
@@ -131,7 +131,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetGenres() throws Exception {
+    public void testGetGenres() {
         PageSearch in = new PageSearch();
         in.setGenres(new TextMatcherList(new TextMatcher("3.0.1.1")));
         PageSearch out = JAXBTestUtil.roundTrip(in,
@@ -142,7 +142,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyGenres() throws Exception {
+    public void testApplyGenres() {
         PageSearch in = new PageSearch();
         in.setGenres(new TextMatcherList(new TextMatcher("3.0.1.2")));
 
@@ -181,7 +181,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplyKeywords() throws Exception {
+    public void testApplyKeywords() {
         PageSearch in = new PageSearch();
         in.setKeywords(new ExtendedTextMatcherList(new ExtendedTextMatcher("apen")));
 
@@ -193,7 +193,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetSortDate() throws Exception {
+    public void testGetSortDate() {
         PageSearch in = new PageSearch();
         in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(new Date(100), new Date(200), true)));
         PageSearch out = JAXBTestUtil.roundTrip(in,
@@ -207,7 +207,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplySortDate() throws Exception {
+    public void testApplySortDate() {
         PageSearch in = new PageSearch();
         in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(new Date(100), new Date(200), false)));
 
@@ -227,7 +227,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testApplySortDateNot() throws Exception {
+    public void testApplySortDateNot() {
         PageSearch in = new PageSearch();
         in.setSortDates(new DateRangeMatcherList(new DateRangeMatcher(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200), false, Match.NOT)));
 

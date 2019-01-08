@@ -25,19 +25,19 @@ public class HasPredictionConstraintTest {
     }
 
     @Test
-    public void testApplyTrue() throws Exception {
+    public void testApplyTrue() {
         Program program = MediaTestDataBuilder.program().withPredictions().build();
         assertThat(new HasPredictionConstraint().test(program)).isTrue();
     }
 
     @Test
-    public void testApplyFalse() throws Exception {
+    public void testApplyFalse() {
         Program program = MediaTestDataBuilder.program().build();
         assertThat(new HasPredictionConstraint().test(program)).isFalse();
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new HasPredictionConstraint().getESPath()).isEqualTo("predictions.platform");
     }
 }

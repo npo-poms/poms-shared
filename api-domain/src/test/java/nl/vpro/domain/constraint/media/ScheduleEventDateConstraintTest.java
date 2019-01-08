@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class ScheduleEventDateConstraintTest {
 
     @Test
-    public void testApply() throws Exception {
+    public void testApply() {
         ScheduleEventDateConstraint constraint = new ScheduleEventDateConstraint();
         constraint.setDate("tomorrow midnight");
         constraint.setOperator(Operator.LT);

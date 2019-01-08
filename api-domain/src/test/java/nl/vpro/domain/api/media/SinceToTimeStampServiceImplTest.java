@@ -18,11 +18,11 @@ public class SinceToTimeStampServiceImplTest {
 
     private SinceToTimeStampServiceImpl impl = new SinceToTimeStampServiceImpl();
 
-    public SinceToTimeStampServiceImplTest() throws IOException {
+    public SinceToTimeStampServiceImplTest() {
     }
 
     @Test
-    public void getInstance() throws Exception {
+    public void getInstance() {
         assertThat(impl.getInstance(0L)).isEqualTo(Instant.EPOCH);
 
         long now = System.currentTimeMillis();
@@ -30,7 +30,7 @@ public class SinceToTimeStampServiceImplTest {
     }
 
     @Test
-    public void getInstance2() throws Exception {
+    public void getInstance2() {
         assertThat(impl.getInstance(17019615L).truncatedTo(ChronoUnit.MINUTES)).isEqualTo(LocalDateTime.of(2015, 7 , 1, 15, 24, 0).atZone(Schedule.ZONE_ID).toInstant());
 
 
@@ -38,7 +38,7 @@ public class SinceToTimeStampServiceImplTest {
 
 
     @Test
-    public void getInstance3() throws Exception {
+    public void getInstance3() {
         assertThat(impl.getInstance(25387000L)
             .truncatedTo(ChronoUnit.MINUTES)).isEqualTo(LocalDateTime.of(2016, 11, 1, 12, 0, 0).atZone(Schedule.ZONE_ID).toInstant());
 
@@ -52,7 +52,7 @@ public class SinceToTimeStampServiceImplTest {
     }
 
     @Test
-    public void getSince() throws Exception {
+    public void getSince() {
 
     }
 

@@ -10,12 +10,12 @@ import nl.vpro.domain.media.TvaCountry;
  */
 public class TvaCountryAdapter extends XmlAdapter<String, TvaCountry> {
     @Override
-    public TvaCountry unmarshal(String v) throws Exception {
+    public TvaCountry unmarshal(String v) {
         return TvaCountry.find(v);
     }
 
     @Override
-    public String marshal(TvaCountry v) throws Exception {
+    public String marshal(TvaCountry v) {
         return v.name();
     }
 }

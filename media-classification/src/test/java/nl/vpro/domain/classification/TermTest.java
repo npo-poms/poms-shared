@@ -24,7 +24,7 @@ public class TermTest {
     }
 
     @Test
-    public void testIsTopTerm() throws Exception {
+    public void testIsTopTerm() {
 
 
         assertThat(classificationService.getTerm("3.0.1").isTopTerm()).isTrue();

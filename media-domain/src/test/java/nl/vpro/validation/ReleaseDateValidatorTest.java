@@ -12,7 +12,7 @@ public class ReleaseDateValidatorTest {
 
     ReleaseDateValidator validator = new ReleaseDateValidator();
     @Test
-    public void isValid() throws Exception {
+    public void isValid() {
 
         assertThat(validator.isValid("123", null)).isFalse();
         assertThat(validator.isValid("2016-11", null)).isFalse();

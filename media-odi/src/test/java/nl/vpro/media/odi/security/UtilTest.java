@@ -18,17 +18,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UtilTest {
 
     @Test
-    public void testSha256() throws Exception {
+    public void testSha256() {
         assertThat(Util.sha256("input")).isEqualTo("c96c6d5be8d08a12e7b5cdc1b207fa6b2430974c86803d8891675e76fd992c20");
     }
 
     @Test
-    public void testHmacSHA256() throws Exception {
+    public void testHmacSHA256() {
         assertThat(Util.hmacSHA256("key", "input")).isEqualTo("ngiewTr4gaisInpzbD58SQ6jtK/KDF+D3/Y5O2g6cuM=");
     }
 
     @Test
-    public void testConcatSecurityHeadersForMid() throws Exception {
+    public void testConcatSecurityHeadersForMid() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.addHeader("X-NPO-Mid", "POMS_S_VPRO_123456");
         request.addHeader("X-NPO-Date", Util.rfc822(new Date(0)));
@@ -38,7 +38,7 @@ public class UtilTest {
     }
 
     @Test
-    public void testConcatSecurityHeadersForUrl() throws Exception {
+    public void testConcatSecurityHeadersForUrl() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.addHeader("X-NPO-Url", "rtsp://somehost.com");
         request.addHeader("X-NPO-Date", Util.rfc822(new Date(0)));

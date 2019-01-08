@@ -66,7 +66,7 @@ public class ParsedIntervalTest {
     }
     */
     @Test
-    public void parse() throws Exception {
+    public void parse() {
     }
 
 }

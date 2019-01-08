@@ -26,18 +26,18 @@ public class PortalConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new PortalConstraint().getESPath()).isEqualTo("portals.id");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Program program = MediaTestDataBuilder.program().withPortals().build();
         assertThat(new PortalConstraint(new Portal("STERREN24", "Sterretjes")).test(program)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Program program = MediaTestDataBuilder.program().withPortals().build();
         assertThat(new PortalConstraint(new Portal("3voor12", "drie voor twaalf")).test(program)).isFalse();
     }

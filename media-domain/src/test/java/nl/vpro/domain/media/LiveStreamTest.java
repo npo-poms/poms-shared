@@ -10,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  */
 public class LiveStreamTest {
     @Test
-    public void values() throws Exception {
+    public void values() {
         assertThat(LiveStream.values().length).isGreaterThanOrEqualTo(3);
     }
 

@@ -12,13 +12,13 @@ public class BroadcasterServiceImplTest {
     BroadcasterService broadcasterService = new BroadcasterServiceImpl("classpath:/broadcasters.properties", false, true);
 
     @Test
-    public void testFind() throws Exception {
+    public void testFind() {
         assertThat(broadcasterService.find("VPRO").getDisplayName()).isEqualTo("VPRO");
 
     }
 
     @Test
-    public void testFindAll() throws Exception {
+    public void testFindAll() {
         assertThat(broadcasterService.findAll()).hasSize(63);
     }
 

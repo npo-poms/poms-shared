@@ -28,18 +28,18 @@ public class PageTypeConstraintTest {
     }
 
     @Test
-    public void testGetESPath() throws Exception {
+    public void testGetESPath() {
         assertThat(new PageTypeConstraint().getESPath()).isEqualTo("type");
     }
 
     @Test
-    public void testApplyWhenTrue() throws Exception {
+    public void testApplyWhenTrue() {
         Page article = PageBuilder.page(PageType.ARTICLE).build();
         assertThat(new PageTypeConstraint(PageType.ARTICLE).test(article)).isTrue();
     }
 
     @Test
-    public void testApplyWhenFalse() throws Exception {
+    public void testApplyWhenFalse() {
         Page article = PageBuilder.page(PageType.ARTICLE).build();
         assertThat(new PageTypeConstraint(PageType.SERIES).test(article)).isFalse();
     }
