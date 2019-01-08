@@ -2169,6 +2169,53 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+
+    @XmlEnumValue("FNXAR")
+    FNXAR {
+        @Override
+        public String toString() {
+            return "FunX Arab";
+        }
+    },
+
+
+    @XmlEnumValue("FNXDA")
+    FNXDA {
+        @Override
+        public String toString() {
+            return "FunX Dance";
+        }
+    },
+
+    @XmlEnumValue("FNXHH")
+    FNXHH {
+        @Override
+        public String toString() {
+            return "FunX HipHop";
+        }
+    },
+     @XmlEnumValue("FNXLA")
+    FNXLA {
+        @Override
+        public String toString() {
+            return "FunX Latin";
+        }
+    },
+    @XmlEnumValue("FNXRE")
+    FNXRE {
+        @Override
+        public String toString() {
+            return "FunX Raggae";
+        }
+    },
+    @XmlEnumValue("FNXSJ")
+    FNXSJ {
+        @Override
+        public String toString() {
+            return "FunX SlowJamz";
+        }
+    },
+
     @XmlEnumValue("FNXR")
     FNXR {
         @Override
