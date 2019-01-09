@@ -176,13 +176,8 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
 
     private void watch(final File directory) {
         synchronized (AbstractClassificationServiceImpl.class) {
-
-            try {
-                //watchOnADecentFileSystem(directory);
-                pollingWatchDirectory(directory);
-            } catch (IOException e) {
-                log.error(e.getMessage(), e);
-            }
+            //watchOnADecentFileSystem(directory);
+            pollingWatchDirectory(directory);
         }
         log.debug("Watching " + directory);
     }
@@ -224,7 +219,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
                     WatchKey key = watcher.take();
                     for (WatchEvent event : key.pollEvents()) {
                         if (String.valueOf(event.context()).endsWith(".xml")) {
-                            log.info(String.valueOf(event.kind() + " " + event.context()));
+                            log.info(event.kind() + " " + event.context());
                             List<InputSource> sources = getSources(false);
                             if (sources != null) {
                                 ClassificationServiceImpl.this.terms = readTerms(sources);
