@@ -1,6 +1,5 @@
 package nl.vpro.domain.classification;
 
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
@@ -40,7 +39,7 @@ public class ClassificationServiceWrapper implements ClassificationService {
         } else {
             try {
                 return new ClassificationServiceImpl(url);
-            } catch (MalformedURLException | URISyntaxException e) {
+            } catch (URISyntaxException e) {
                 throw new IllegalArgumentException(e);
             }
         }
