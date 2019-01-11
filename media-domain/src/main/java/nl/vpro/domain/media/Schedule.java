@@ -343,7 +343,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     }
 
 
-    void afterUnmarshal(Unmarshaller unmarshaller, Object parent) throws ClassNotFoundException, IOException {
+    void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if (parent instanceof MediaTable) {
             List<Program> programs = ((MediaTable) parent).getProgramTable();
             if (scheduleEvents != null) {
