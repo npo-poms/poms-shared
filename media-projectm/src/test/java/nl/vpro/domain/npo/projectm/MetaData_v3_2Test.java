@@ -40,7 +40,7 @@ public class MetaData_v3_2Test {
 
 
     @Test
-    public void testCreateAflevering() throws Exception {
+    public void testCreateAflevering() {
         Program program = getTestProgram(provider);
 
         Aflevering aflevering = MetaData_v3_2.createAflevering(program, provider);
@@ -84,7 +84,7 @@ public class MetaData_v3_2Test {
 
     // MSE-3088
     @Test
-    public void testGetGenre() throws ParseException, DatatypeConfigurationException {
+    public void testGetGenre() {
         Program program = getTestProgram(provider);
         SortedSet<Genre> genre = new TreeSet<>();
         genre.add(new Genre(ClassificationServiceLocator.getInstance().getTerm("3.0.1.7")));

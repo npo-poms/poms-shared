@@ -107,13 +107,13 @@ public class NeboXmlImportTest {
     }
 
     @Test
-    public void marshal() throws Exception {
+    public void marshal() {
         Program program = getTestProgram();
         JAXB.marshal(new NeboXmlImport(program), System.out);
     }
 
     @Test
-    public void unmarshal() throws Exception {
+    public void unmarshal() {
         Program program = getTestProgram();
         assertEquals(1, program.getSegments().first().getImages().size());
 

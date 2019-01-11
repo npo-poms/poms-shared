@@ -53,7 +53,7 @@ public class WebonlyTypeTest {
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
     }
 
-    public static NeboXmlWebOnly getTestWebonly() throws DatatypeConfigurationException, ModificationException {
+    public static NeboXmlWebOnly getTestWebonly() throws DatatypeConfigurationException {
         return new NeboXmlWebOnly(getTestProgram(), getTestGroup().getMid());
     }
 
