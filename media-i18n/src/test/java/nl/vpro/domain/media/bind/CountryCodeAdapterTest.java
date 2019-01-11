@@ -23,7 +23,7 @@ public class CountryCodeAdapterTest {
 
     @Test
     @Ignore
-    public void wiki() throws Exception {
+    public void wiki() {
         CountryCodeAdapter.Code cca = new CountryCodeAdapter.Code();
         Map<String, CountryCode> result = new TreeMap<>();
         for (CountryCode cc : CountryCode.values()) {

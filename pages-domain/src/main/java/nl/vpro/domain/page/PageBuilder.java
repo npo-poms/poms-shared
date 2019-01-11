@@ -437,7 +437,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
     }
 
     @SuppressWarnings("unchecked")
-    public PB example() throws URISyntaxException {
+    public PB example() {
         return
             title("Groot brein in klein dier")
                 .subtitle("De naakte molrat heeft ‘m")
