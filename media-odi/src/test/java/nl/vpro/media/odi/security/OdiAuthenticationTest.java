@@ -27,7 +27,7 @@ public class OdiAuthenticationTest {
     private Program data = MediaTestDataBuilder.program().withMid().build();
 
     @Test
-    public void testHandleOnMid() throws Exception {
+    public void testHandleOnMid() {
         String mid = data.getMid();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media/" + mid);
@@ -64,7 +64,7 @@ public class OdiAuthenticationTest {
 
 
     @Test
-    public void testHandleOnMidIE89() throws Exception {
+    public void testHandleOnMidIE89() {
         String mid = data.getMid();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media/" + mid);
@@ -91,7 +91,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test
-    public void testHandleOnMidWithXOrigin() throws Exception {
+    public void testHandleOnMidWithXOrigin() {
         String mid = data.getMid();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media/" + mid);
@@ -109,7 +109,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test(expected = OdiAuthentication.NoAccessException.class)
-    public void testHandleOnMidXOriginNotAllowedExplicitly() throws Exception {
+    public void testHandleOnMidXOriginNotAllowedExplicitly() {
         String mid = data.getMid();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media/" + mid);
@@ -127,7 +127,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test(expected = OdiAuthentication.NoAccessException.class)
-    public void testHandleOnMidXOriginNotAllowed() throws Exception {
+    public void testHandleOnMidXOriginNotAllowed() {
         String mid = data.getMid();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media/" + mid);
@@ -145,7 +145,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test(expected = OdiAuthentication.NoAccessException.class)
-    public void testHandleWrongMid() throws Exception {
+    public void testHandleWrongMid() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.addHeader("X-NPO-Date", Util.rfc822(new Date()));
         request.addHeader("X-NPO-Mid", "POMS_MISSING");
@@ -161,7 +161,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test(expected = OdiAuthentication.NoAccessException.class)
-    public void testHandleWhenExpiredTimestamp() throws Exception {
+    public void testHandleWhenExpiredTimestamp() {
         String mid = data.getMid();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media/" + mid);
@@ -180,7 +180,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test(expected = OdiAuthentication.NoAccessException.class)
-    public void testHandleWrongReferrer() throws Exception {
+    public void testHandleWrongReferrer() {
         String mid = data.getMid();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media/" + mid);
@@ -199,7 +199,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test(expected = OdiAuthentication.NoAccessException.class)
-    public void testHandleWrongSecret() throws Exception {
+    public void testHandleWrongSecret() {
         String mid = data.getMid();
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media/" + mid);
@@ -217,7 +217,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test
-    public void testHandleOnUrl() throws Exception {
+    public void testHandleOnUrl() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media");
         request.setMethod("POST");
@@ -236,7 +236,7 @@ public class OdiAuthenticationTest {
     }
 
     @Test
-    public void testHandleOnUrlIE89() throws Exception {
+    public void testHandleOnUrlIE89() {
         MockHttpServletRequest request = new MockHttpServletRequest();
         request.setServletPath("/path/media");
         request.setMethod("POST");

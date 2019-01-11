@@ -1,7 +1,6 @@
 package nl.vpro.domain.classification;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
@@ -37,11 +36,7 @@ public class ClassificationServiceWrapper implements ClassificationService {
         if (url.startsWith("http")) {
             return new CachedURLClassificationServiceImpl(URI.create(url));
         } else {
-            try {
-                return new ClassificationServiceImpl(url);
-            } catch (URISyntaxException e) {
-                throw new IllegalArgumentException(e);
-            }
+            return new ClassificationServiceImpl(url);
         }
 
     }
