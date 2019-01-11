@@ -49,7 +49,7 @@ public class ClassificationServiceImpl extends AbstractClassificationServiceImpl
     public ClassificationServiceImpl(URI... resources) {
         this.resources = resources;
     }
-    public ClassificationServiceImpl(String resources) throws URISyntaxException {
+    public ClassificationServiceImpl(String resources) {
         this(getResources(resources));
     }
 
