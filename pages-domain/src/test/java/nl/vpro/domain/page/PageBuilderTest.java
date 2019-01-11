@@ -86,7 +86,7 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testMainImage() throws Exception {
+    public void testMainImage() {
         assertThat(PageBuilder.page(PageType.ARTICLE).image("http://www.vpro.nl/eenofanderplaatje.png").build().getImages().get(0).getUrl()).isEqualTo("http://www.vpro.nl/eenofanderplaatje.png");
     }
 
