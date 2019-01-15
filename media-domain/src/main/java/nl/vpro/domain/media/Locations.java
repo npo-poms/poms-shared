@@ -220,10 +220,9 @@ public class Locations {
         Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
         if (avAttributes.isPresent()) {
             Location location = createOrFindLocation(program, locationUrl, owner, platform);
-
             updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces);
         } else {
-            log.warn("Puboption {} is explicely ignored, not adding location for {}", pubOptie, program);
+            log.warn("Puboption {} is explicitely ignored, not adding location for {}", pubOptie, program);
         }
         return program;
     }
@@ -282,7 +281,7 @@ public class Locations {
         @Nonnull Platform platform) {
         Location location = program.findLocation(locationUrl);
         if (location == null) {
-            log.info("creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
+            log.info("Creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());
             location = new Location(locationUrl, owner, platform);
             location.setPlatform(platform);
             program.addLocation(location);
