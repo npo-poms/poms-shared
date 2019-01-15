@@ -112,7 +112,7 @@ public class Locations {
         Location authorityLocation = getAuthorityLocation(mediaObject, platform, encryption, "For " + encryption, locationPredicate);
         if (authorityLocation != null) {
             authorityLocations.add(authorityLocation);
-            updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
+            updateLocationAndPredictions(authorityLocation, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>());
         }
 
         //MSE-3992
@@ -139,7 +139,7 @@ public class Locations {
             Location authorityLocation2 = getAuthorityLocation(mediaObject, platform, Encryption.DRM, "Encryption is not drm, so make one with DRM too", locationPredicate);
             if (authorityLocation2 != null) {
                 authorityLocations.add(authorityLocation2);
-                updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep"), OwnerType.AUTHORITY, new HashSet<>());
+                updateLocationAndPredictions(authorityLocation2, mediaObject, platform, getAVAttributes("nep").orElseThrow(() -> new RuntimeException("Not found nep puboptie")), OwnerType.AUTHORITY, new HashSet<>());
             }
     }
 
@@ -217,9 +217,14 @@ public class Locations {
         if (locationUrl == null) {
             return program;
         }
-        Location location = createOrFindLocation(program, locationUrl, owner, platform);
+        Optional<AVAttributes> avAttributes = getAVAttributes(pubOptie);
+        if (avAttributes.isPresent()) {
+            Location location = createOrFindLocation(program, locationUrl, owner, platform);
 
-        updateLocationAndPredictions(location, program, platform, getAVAttributes(pubOptie), owner, replaces);
+            updateLocationAndPredictions(location, program, platform, avAttributes.get(), owner, replaces);
+        } else {
+            log.warn("Puboption {} is explicely ignored, not adding location for {}", pubOptie, program);
+        }
         return program;
     }
 
@@ -412,12 +417,12 @@ public class Locations {
         return changes;
     }
 
-    private static AVAttributes getAVAttributes(String pubOption) {
+    private static Optional<AVAttributes> getAVAttributes(String pubOption) {
         return getAVAttributes(pubOption, "");
     }
 
 
-    private static AVAttributes getAVAttributes(String pubOption, String overrideFile) {
+    private static Optional<AVAttributes> getAVAttributes(String pubOption, String overrideFile) {
 
         Properties properties = new Properties();
         try {
@@ -445,11 +450,16 @@ public class Locations {
             }
             throw new IllegalArgumentException(message);
         }
-        String[] split = config.split(",", 2);
-        return AVAttributes.builder()
-            .avFileFormat(AVFileFormat.valueOf(split[0]))
-            .bitrate(split.length > 1 ? Integer.valueOf(split[1]) : null)
-            .build();
+        if (config.isEmpty()) {
+            return Optional.empty();
+        } else {
+            String[] split = config.split(",", 2);
+
+            return Optional.of(AVAttributes.builder()
+                .avFileFormat(AVFileFormat.valueOf(split[0]))
+                .bitrate(split.length > 1 ? Integer.valueOf(split[1]) : null)
+                .build());
+        }
     }
 
     @AllArgsConstructor
