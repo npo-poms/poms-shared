@@ -36,7 +36,6 @@ import nl.vpro.domain.image.ImageMetadata;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.image.Metadata;
 import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.secondscreen.Screen;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.*;
@@ -193,10 +192,6 @@ public class Image extends PublishableObject<Image>
     @ManyToOne
     @XmlTransient
     private MediaObject mediaObject;
-
-    @ManyToOne
-    @XmlTransient
-    private Screen secondscreen;
 
 
     public Image() {
@@ -435,14 +430,6 @@ public class Image extends PublishableObject<Image>
         this.mediaObject = mediaObject;
     }
 
-    public Screen getSecondscreen() {
-        return secondscreen;
-    }
-
-    public void setSecondscreen(Screen mediaObject) {
-        this.secondscreen = mediaObject;
-    }
-
     /**
      * {@inheritDoc}
      *
@@ -486,15 +473,12 @@ public class Image extends PublishableObject<Image>
         }
 
         Long moParent = mediaObject == null ? null : mediaObject.getId();
-        Long ssParent = secondscreen == null ? null : secondscreen.getId();
 
         Long otherMoParent = other.mediaObject == null ? null : other.mediaObject.getId();
-        Long otherSsParent = other.secondscreen == null ? null : other.secondscreen.getId();
 
         return Objects.equals(imageUri, other.imageUri)
             && Objects.equals(type, other.type)
             && (moParent == null || otherMoParent == null || Objects.equals(moParent, otherMoParent))
-            && (ssParent == null || otherSsParent == null || Objects.equals(ssParent, otherSsParent))
         ;
     }
 
