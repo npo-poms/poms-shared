@@ -22,7 +22,6 @@ import nl.vpro.domain.api.subtitles.SubtitlesForm;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.update.PageUpdate;
-import nl.vpro.domain.secondscreen.Screen;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesType;
 
@@ -53,7 +52,6 @@ public class ApiMappings extends Mappings {
         MAPPING.put(API_NAMESPACE, new Class[]{PageForm.class, ScheduleForm.class, SubtitlesForm.class, RedirectList.class, MediaSearchResults.class, PageSearchResults.class, MediaSearchResult.class, PageSearchResult.class});
         MAPPING.put(PAGE_NAMESPACE, new Class[]{Page.class});
         MAPPING.put(PAGEUPDATE_NAMESPACE, new Class[]{PageUpdate.class, ImageType.class});
-        MAPPING.put(SECOND_SCREEN_NAMESPACE, new Class[]{Screen.class});
         MAPPING.put(Xmlns.MEDIA_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.media.Filter.class});
         MAPPING.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
         MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class});
