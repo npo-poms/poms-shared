@@ -8,13 +8,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
@@ -76,12 +74,6 @@ public class ApiMappingsTest {
     @Test
     public void testSubtitlesSchema() throws Exception {
         testNamespace(Xmlns.MEDIA_SUBTITLES_NAMESPACE);
-    }
-
-
-    @Test
-    public void testSecondscreenSchema() throws Exception {
-        testNamespace(Xmlns.SECOND_SCREEN_NAMESPACE);
     }
 
     @Test
