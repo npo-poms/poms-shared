@@ -381,6 +381,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.memberOf = value;
     }
 
+    /**
+     * I think in principle some av-attributes (like the aspect ratio) may vary for different schedule events.
+     */
     @XmlElement
     public AVAttributes getAvAttributes() {
         return avAttributes;
