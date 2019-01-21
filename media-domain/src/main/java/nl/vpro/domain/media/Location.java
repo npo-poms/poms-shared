@@ -534,7 +534,10 @@ public class Location extends PublishableObject<Location>
     public Instant getPublishStopInstant() {
         if(hasPlatform() && mediaObject != null) {
             try {
-                return getAuthorityRecord().getPublishStopInstant();
+                Prediction record = getAuthorityRecord(false);
+                if (record != null) {
+                    return record.getPublishStopInstant();
+                }
             } catch (IllegalAuthorativeRecord iea) {
                 log.debug(iea.getMessage());
             }
