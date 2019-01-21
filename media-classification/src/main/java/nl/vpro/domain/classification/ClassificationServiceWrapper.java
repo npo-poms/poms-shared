@@ -5,17 +5,12 @@ import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Wraps another ClassifcationService. The goal is that this can implicitely use an {@link URLClassificationServiceImpl} (using cache headers), or a simple {@link ClassificationServiceImpl}.
  * @author Michiel Meeuwissen
  * @since 3.2
  */
 public class ClassificationServiceWrapper implements ClassificationService {
-
-    private static Logger LOG = LoggerFactory.getLogger(ClassificationServiceWrapper.class);
 
     private final ClassificationService service;
 
