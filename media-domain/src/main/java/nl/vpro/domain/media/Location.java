@@ -540,6 +540,13 @@ public class Location extends PublishableObject<Location>
         return this;
     }
 
+
+    /**
+     * The publish stop of a location is rather complicated:
+     * 1. It is the offline date of the corresponding streaming platformstatus it that is available.
+     * 2. It not, then it is the offline date of the corresponding authority record.
+     * 3. It that too is not available then it will fall back to it's own field publishstop
+     */
     @Override
     public Instant getPublishStopInstant() {
         if(hasPlatform() && mediaObject != null) {
