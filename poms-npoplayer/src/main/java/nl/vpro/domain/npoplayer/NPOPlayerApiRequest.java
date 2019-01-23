@@ -5,7 +5,6 @@
 package nl.vpro.domain.npoplayer;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement
 @Data
-@Builder
+@lombok.Builder(builderClassName = "Builder")
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlType(propOrder = {
@@ -54,5 +53,25 @@ public class NPOPlayerApiRequest {
     String pageUrl;
     NPOPlayerAtinternet smarttag;
     NPOPlayerTopSpin topspin;
+
+    public static class Builder {
+        public Builder from(PlayerRequest request) {
+            return
+                autoplay(request.getAutoplay())
+                    .startAt(request.getStartAt())
+                    .endAt(request.getEndAt())
+                    .id(request.getId())
+                    .noAds(request.getNoAds())
+                    .stylesheet(request.getStylesheet())
+                    .subtitleLanguage(request.getSubtitleLanguage())
+                    .sterReferralUrl(request.getSterReferralUrl())
+                    .sterSiteId(request.getSterSiteId())
+                    .sterIdentifier(request.getSterIdentifier())
+                    .hasAdConsent(request.getHasAdConsent())
+                    .pageUrl(request.getPageUrl())
+                    .smarttag(NPOPlayerAtinternet.builder().siteId(request.getAtInternetSiteId()).build())
+                ;
+        }
+    }
 }
 
