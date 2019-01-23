@@ -12,6 +12,7 @@ import nl.vpro.domain.npoplayer.NPOPlayerApiResponse;
 
 /**
  * @author r.jansen
+ * @since 5.10
  */
 @Path("/")
 @Consumes({MediaType.APPLICATION_JSON})

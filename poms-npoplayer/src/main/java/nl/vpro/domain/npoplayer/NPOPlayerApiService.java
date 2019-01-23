@@ -6,6 +6,7 @@ package nl.vpro.domain.npoplayer;
 
 /**
  * @author r.jansen
+ * @since 5.10
  */
 public interface NPOPlayerApiService {
 

@@ -5,6 +5,7 @@
 package nl.vpro.npoplayer.service;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import nl.vpro.domain.npoplayer.NPOPlayerApiRequest;
 import nl.vpro.domain.npoplayer.NPOPlayerApiResponse;
@@ -14,6 +15,7 @@ import nl.vpro.npoplayer.NPOPlayerApiClient;
 /**
  * @author r.jansen
  */
+@Named
 public class NPOPlayerApiServiceImpl implements NPOPlayerApiService {
     private final NPOPlayerApiClient client;
 
