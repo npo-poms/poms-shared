@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author r.jansen
+ * @since 5.10
  */
 @XmlRootElement
 @Data
