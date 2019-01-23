@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * @author r.jansen
+ * @since 5.10
  */
 @XmlRootElement
 @Data
