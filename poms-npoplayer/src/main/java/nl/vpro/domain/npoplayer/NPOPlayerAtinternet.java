@@ -15,6 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * @author e.kuijt
+ * @since 5.10
  */
 @Data
 @Builder
