@@ -53,6 +53,8 @@
     <module>api-rs-services</module>
     <module>api-spring</module>
     <module>poms-extjs</module>
+    <module>poms-npoplayer</module>
+
     <module>media-openskos</module>
     <module>media-nep</module>
     <module>media-projectm</module>
