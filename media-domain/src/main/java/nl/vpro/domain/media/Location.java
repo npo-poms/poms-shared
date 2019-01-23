@@ -193,7 +193,8 @@ public class Location extends PublishableObject<Location>
         VideoAttributes videoAttributes,
         Platform platform,
         Instant publishStart,
-        Instant publishStop
+        Instant publishStop,
+        Workflow workflow
     ) {
         this.programUrl = programUrl;
         this.owner = owner == null ? OwnerType.BROADCASTER : owner;
@@ -211,6 +212,9 @@ public class Location extends PublishableObject<Location>
         this.platform = platform;
         this.publishStart = publishStart;
         this.publishStop = publishStop;
+        if (workflow != null) {
+            this.workflow = workflow;
+        }
     }
 
     @Deprecated
@@ -298,12 +302,14 @@ public class Location extends PublishableObject<Location>
         this.platform = platform;
 
         if (platform != null && this.mediaObject != null) {
-            Prediction record = getAuthorityRecord();
-            // in sync so we can query this class its fields on publishables
-            if (record.getAuthority() == Authority.USER) {
-                Embargos.copyIfMoreRestricted(record, this);
-            } else {
-                Embargos.copy(record, this);
+            Prediction record = getAuthorityRecord(false);
+            if (record != null) {
+                // in sync so we can query this class its fields on publishables
+                if (record.getAuthority() == Authority.USER) {
+                    Embargos.copyIfMoreRestricted(record, this);
+                } else {
+                    Embargos.copy(record, this);
+                }
             }
             if (this.mediaObject.getLocations().contains(this)) {
                 if (isPublishable()) {
