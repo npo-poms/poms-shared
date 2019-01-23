@@ -27,6 +27,7 @@ import nl.vpro.util.Env;
  * }
  * </pre>
  * @author r.jansen
+ * @since 5.10
  */
 @Named
 public class NPOPlayerApiClient extends AbstractApiClient {
