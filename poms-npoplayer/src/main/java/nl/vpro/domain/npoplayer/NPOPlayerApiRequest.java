@@ -1,0 +1,58 @@
+/*
+ * Copyright (C) 2018 All rights reserved
+ * VPRO The Netherlands
+ */
+package nl.vpro.domain.npoplayer;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+/**
+ * @author r.jansen
+ */
+@XmlRootElement
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@XmlType(propOrder = {
+    "id",
+    "stylesheet",
+    "autoplay",
+    "startAt",
+    "endAt",
+    "noAds",
+    "subtitleLanguage"
+})
+public class NPOPlayerApiRequest {
+    String id;
+    String elementId;
+    String stylesheet;
+    NPOPlayerStyling styling;
+    String color;
+    Boolean autoplay;
+    String overlay;
+    Integer startAt;
+    Integer endAt;
+    NPOPlayerComscore comscore;
+    Integer progress;
+    Integer trackProgress;
+    Integer skipCatalog;
+    Boolean noAds;
+    String subtitleLanguage;
+    String shareUrl;
+    String placeholder;
+    String sterReferralUrl;
+    String sterSiteId;
+    String sterIdentifier;
+    Boolean hasAdConsent;
+    String pageUrl;
+    NPOPlayerAtinternet smarttag;
+    NPOPlayerTopSpin topspin;
+}
+
