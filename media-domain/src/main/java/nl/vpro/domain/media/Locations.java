@@ -55,6 +55,8 @@ public class Locations {
         }
         final Prediction existingPredictionForPlatform = mediaObject.getPrediction(platform);
         Encryption encryption;
+
+
         final List<Location> authorityLocations = new ArrayList<>();
         if (existingPredictionForPlatform != null) {
             if (!existingPredictionForPlatform.isPlannedAvailability()) {

@@ -1940,6 +1940,7 @@ public abstract class MediaObject
         if (prediction == null) {
             log.debug("Creating prediction object for {}: ", platform, this);
             prediction = new Prediction(platform);
+            prediction.setPlannedAvailability(false);
             prediction.setParent(this);
             prediction.setAuthority(Authority.USER);
             if (predictions == null) {
