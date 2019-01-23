@@ -4,15 +4,14 @@
  */
 package nl.vpro.media.odi.util;
 
-import sun.net.util.IPAddressUtil;
-
-import javax.servlet.http.HttpServletRequest;
 import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
+import com.google.common.net.InetAddresses;
 
 /**
  * User: rico
@@ -22,26 +21,16 @@ public class InetAddressUtil {
     private static final Pattern PRIVATE_IP_PATTERN = Pattern.compile("(^127\\.)|(^10\\.)|(^172\\.1[6-9]\\.)|(^172\\.2[0-9]\\.)|(^172\\.3[0-1]\\.)|(^192\\.168\\.)");
 
     public static boolean isValid(String addr) {
-        return (IPAddressUtil.isIPv4LiteralAddress(addr) || IPAddressUtil.isIPv6LiteralAddress(addr));
+        try {
+            InetAddresses.forUriString(addr);
+            return true;
+        } catch (IllegalArgumentException iae) {
+            return false;
+        }
     }
 
     public static InetAddress getAddress(String addr) {
-        InetAddress inetAddress = null;
-        if (IPAddressUtil.isIPv4LiteralAddress(addr)) {
-            try {
-                inetAddress = Inet4Address.getByAddress(IPAddressUtil.textToNumericFormatV4(addr));
-            } catch (UnknownHostException e) {
-            }
-        }
-
-        if (IPAddressUtil.isIPv6LiteralAddress(addr)) {
-            try {
-                inetAddress = InetAddress.getByAddress(IPAddressUtil.textToNumericFormatV6(addr));
-            } catch (UnknownHostException e) {
-            }
-        }
-
-        return inetAddress;
+        return InetAddresses.forUriString(addr);
     }
 
     public static boolean isPublic(String addr) {
