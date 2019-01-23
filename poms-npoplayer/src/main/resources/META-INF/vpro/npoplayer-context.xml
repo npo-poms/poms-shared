@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+  <bean class="java.lang.String" id="npoplayerapi-rs.url" >
+     <constructor-arg value="${npoplayerapi-rs.url}"/>
+  </bean>
+
+  <bean class="java.lang.String" id="npoplayerapi-rs.apikey">
+    <constructor-arg value="${npoplayerapi-rs.apikey}"/>
+  </bean>
+
+  <bean  id="npoPlayerApiClientBuilder" class="nl.vpro.npoplayer.NPOPlayerApiClient.Builder"  />
+  <bean class="nl.vpro.npoplayer.NPOPlayerApiClient" factory-bean="npoPlayerApiClientBuilder" factory-method="get" />
+
+  <bean class="nl.vpro.npoplayer.service.NPOPlayerApiServiceImpl" />
+
+</beans>
