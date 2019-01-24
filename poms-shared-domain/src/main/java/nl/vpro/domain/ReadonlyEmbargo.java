@@ -4,13 +4,10 @@ import java.time.Instant;
 
 import com.google.common.collect.Range;
 
-import static com.google.common.collect.BoundType.CLOSED;
-import static com.google.common.collect.BoundType.OPEN;
-
 /**
  * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
  *
- * Utilities are provided in {@link Embargos}
+ * Utilities are provided in {@link Embargos}.
  *
  * @author Michiel Meeuwissen
  * @since 5.3
@@ -34,9 +31,7 @@ public interface ReadonlyEmbargo {
         } else if (getPublishStopInstant() == null) {
             return Range.atLeast(getPublishStartInstant());
         } else {
-            return Range.range(
-                getPublishStartInstant(), CLOSED,
-                getPublishStopInstant(), OPEN);
+            return Range.closedOpen(getPublishStartInstant(), getPublishStopInstant());
         }
 
     }
