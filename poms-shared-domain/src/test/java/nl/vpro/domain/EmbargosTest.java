@@ -14,7 +14,7 @@ public class EmbargosTest {
 
     @Test
     public void unrestricted() {
-        Embargo<BasicEmbargo> unrestrictedInstant = Embargos.unrestrictedInstance();
+        Embargo<BasicEmbargo> unrestrictedInstant = Embargos.unrestrictedInstant();
 
         Embargo<BasicEmbargo> of = Embargos.of(unrestrictedInstant.asRange());
         assertThat(of.getPublishStartInstant()).isNull();
