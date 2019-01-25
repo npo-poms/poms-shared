@@ -476,11 +476,23 @@ public class MediaObjectTest {
             .id(1L)
             .build();
 
-        program.findOrCreatePrediction(Platform.INTERNETVOD).setState(Prediction.State.ANNOUNCED);
+        program.findOrCreatePrediction(Platform.INTERNETVOD)
+            .setState(Prediction.State.ANNOUNCED);
 
         Program result = JAXBTestUtil.roundTrip(program);
 
+        assertThat(result.getPrediction(Platform.INTERNETVOD)).isNull(); // it's not available.
+
+        program.findOrCreatePrediction(Platform.INTERNETVOD).setPlannedAvailability(true);
+
+        result = JAXBTestUtil.roundTrip(program);
+
+
         assertThat(result.getPrediction(Platform.INTERNETVOD)).isNotNull();
+        assertThat(result.getPrediction(Platform.INTERNETVOD).getState()).isEqualTo(Prediction.State.ANNOUNCED);
+        assertThat(result.getPrediction(Platform.INTERNETVOD).isPlannedAvailability()).isTrue();
+
+
     }
 
     @Test

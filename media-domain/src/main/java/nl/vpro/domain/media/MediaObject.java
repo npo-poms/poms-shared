@@ -422,7 +422,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     protected Set<Prediction> predictions;
 
     @Transient
-    private List<Prediction> predictionsForXml;
+    List<Prediction> predictionsForXml;
 
     @OneToMany(cascade = ALL, mappedBy = "mediaObject", orphanRemoval = true)
     @SortNatural
