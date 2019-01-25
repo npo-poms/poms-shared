@@ -1,10 +1,11 @@
 package nl.vpro.domain.subtitles;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.text.ParseException;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.7
  */
+@Slf4j
 public class WEBVTTTest {
 
 
@@ -149,4 +151,16 @@ public class WEBVTTTest {
         }
     }
 
+
+    @Test
+    public void parseWithCommentsAndNelines() {
+        InputStream example = getClass().getResourceAsStream("/WO_NPO_14933889.vtt");
+        List<Cue> cues = SubtitlesUtil.fillCueNumber(WEBVTTandSRT.parseWEBVTT("bla", example)).collect(Collectors.toList());
+
+        assertThat(cues).hasSize(10);
+        for (Cue cue : cues) {
+            log.info("{}:{}", cue, cue.asRange());
+            assertThat(cue.getSequence()).isNotNull();
+        }
+    }
 }
