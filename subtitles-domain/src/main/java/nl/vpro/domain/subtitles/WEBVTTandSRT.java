@@ -148,19 +148,20 @@ public class WEBVTTandSRT {
 
 
     static Cue parseCue(String parent, Integer cueNumber, Duration offset, String timeLine, String content, String decimalSeparator) {
-        String[] split = timeLine.split("\\s+", 3);
+        String[] split = timeLine.split("\\s+", 4);
         try {
             if (offset == null) {
                 offset = Duration.ZERO;
             }
             String start = split[0];
-            String end = split[1];
-            String settings = split.length > 2 ? split[2] :null;
+            String arrow = split[1];
+            String end = split[2];
+            String settings = split.length > 3 ? split[3] :null;
             return Cue.builder()
                 .mid(parent)
                 .sequence(cueNumber)
                 .start(parseDuration(start, decimalSeparator).minus(offset))
-                .end(parseDuration(split[2], decimalSeparator).minus(offset))
+                .end(parseDuration(end, decimalSeparator).minus(offset))
                 .settings(CueSettings.webvtt(settings))
                 .content(content)
                 .build();
