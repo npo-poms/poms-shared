@@ -20,7 +20,6 @@ import java.util.function.Function;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -620,6 +619,7 @@ public interface MediaTestDataBuilder<
         for (Platform platform : platforms) {
             Prediction prediction = mediaObject().findOrCreatePrediction(platform);
             prediction.setAuthority(Authority.SYSTEM);
+            prediction.setPlannedAvailability(true);
         }
         return (T)this;
     }
@@ -741,7 +741,8 @@ public interface MediaTestDataBuilder<
         @Override
         public ProgramTestDataBuilder withEverything() {
             AtomicLong mids = new AtomicLong(30000L);
-            return MediaTestDataBuilder.super.withEverything()
+            return MediaTestDataBuilder.super
+                .withEverything()
                 .withType()
                 .withEpisodeOfIfAllowed(null, null, mids)
                 .withPoProgType()

@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -792,7 +793,7 @@ public class MediaObjectJsonSchemaTest {
     @Test
     public void segmentWithEverything() throws Exception {
         StringWriter segment = new StringWriter();
-        org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/segment-with-everything.json"), segment, "UTF-8");
+        IOUtils.copy(getClass().getResourceAsStream("/segment-with-everything.json"), segment, "UTF-8");
         Jackson2TestUtil.roundTripAndSimilar(MediaTestDataBuilder
                 .segment()
                 .withEverything()
@@ -802,13 +803,13 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void programWithEverything() throws Exception {
-        StringWriter program = new StringWriter();
-        org.apache.commons.io.IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), program, "UTF-8");
-        Jackson2TestUtil.roundTripAndSimilar(MediaTestDataBuilder
+        StringWriter programJson = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, "UTF-8");
+        Program program =  MediaTestDataBuilder
                 .program()
                 .withEverything()
-                .build(),
-            program.toString());
+                .build();
+        Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
     }
 
     @Test
