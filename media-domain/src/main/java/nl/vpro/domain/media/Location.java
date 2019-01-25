@@ -515,7 +515,7 @@ public class Location extends PublishableObject<Location>
                 if (record != null) {
                     return record.getPublishStartInstant();
                 }
-            } catch (IllegalAuthorativeRecord iea) {
+            } catch (IllegalAuthorityRecord iea) {
                 log.debug(iea.getMessage());
             }
         }
@@ -549,9 +549,9 @@ public class Location extends PublishableObject<Location>
 
     /**
      * The publish stop of a location is rather complicated:
-     * 1. It is the offline date of the corresponding streaming platformstatus it that is available.
+     * 1. It is the offline date of the corresponding streaming platform status if that is available.
      * 2. It not, then it is the offline date of the corresponding authority record.
-     * 3. It that too is not available then it will fall back to it's own field publishstop
+     * 3. It that too is not available then it will fall back to it's own field {@link PublishableObject#getPublishStopInstant()}
      */
     @Override
     public Instant getPublishStopInstant() {
@@ -564,7 +564,7 @@ public class Location extends PublishableObject<Location>
                     return streamingOffline;
                 }
                 return fromAuthorityRecord;
-            } catch (IllegalAuthorativeRecord iea) {
+            } catch (IllegalAuthorityRecord iea) {
                 log.debug(iea.getMessage());
             }
         }
@@ -784,9 +784,9 @@ public class Location extends PublishableObject<Location>
         }
     }
 
-    public static class IllegalAuthorativeRecord extends IllegalStateException {
+    public static class IllegalAuthorityRecord extends IllegalStateException {
         private final String id;
-        public IllegalAuthorativeRecord(String id, String s) {
+        public IllegalAuthorityRecord(String id, String s) {
             super(s);
             this.id = id;
         }
