@@ -77,7 +77,8 @@ public class NPOPlayerApiClient extends AbstractApiClient {
         Jackson2Mapper objectMapper,
         String mbeanName,
         String apiKey,
-        ClassLoader classLoader) {
+        ClassLoader classLoader,
+        Boolean registerMBean) {
         super(
             baseUrl,
             connectionRequestTimeout,
@@ -98,7 +99,8 @@ public class NPOPlayerApiClient extends AbstractApiClient {
             objectMapper,
             mbeanName,
             classLoader,
-            NPOPlayerApiClient.class.getName()
+            NPOPlayerApiClient.class.getName(),
+            registerMBean
         );
         this.apiKey = apiKey;
     }
@@ -126,5 +128,9 @@ public class NPOPlayerApiClient extends AbstractApiClient {
     @Override
     protected void buildResteasy(ResteasyClientBuilder resteasyClientBuilder) {
         resteasyClientBuilder.register((ClientRequestFilter) requestContext -> requestContext.getHeaders().add(APIKEYHEADER, apiKey));
+    }
+
+    public static Builder builderWithoutMBean() {
+        return builder().registerMBean(false);
     }
 }
