@@ -291,6 +291,15 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     public void setPlannedAvailability(boolean plannedAvailability) {
         this.plannedAvailability = plannedAvailability;
+        if (this.plannedAvailability) {
+            if (this.state == State.NOT_ANNOUNCED) {
+                this.state = State.ANNOUNCED;
+            }
+        } else {
+            if (this.state == State.ANNOUNCED) {
+                this.state = State.NOT_ANNOUNCED;
+            }
+        }
         invalidateXml();
     }
 
