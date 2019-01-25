@@ -20,7 +20,6 @@ import java.util.function.Function;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.support.License;
@@ -121,7 +120,7 @@ public interface MediaTestDataBuilder<
         return constrained();
     }
 
-    default T validNew() throws ModificationException {
+    default T validNew() {
         return constrainedNew();
     }
 
