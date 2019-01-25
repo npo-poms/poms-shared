@@ -153,7 +153,7 @@ public class WEBVTTTest {
 
 
     @Test
-    public void parseWithCommentsAndNelines() {
+    public void parseWithCommentsAndNewlines() {
         InputStream example = getClass().getResourceAsStream("/WO_NPO_14933889.vtt");
         List<Cue> cues = SubtitlesUtil.fillCueNumber(WEBVTTandSRT.parseWEBVTT("bla", example)).collect(Collectors.toList());
 
