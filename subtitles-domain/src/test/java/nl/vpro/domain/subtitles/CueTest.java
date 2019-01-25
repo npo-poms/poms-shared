@@ -28,6 +28,7 @@ public class CueTest {
             "  \"sequence\" : 10,\n" +
             "  \"start\" : 20000,\n" +
             "  \"end\" : 30000,\n" +
+            "  \"settings\" : \"A:left\",\n" +
             "  \"content\" : \"bla bla bla\"\n" +
             "}");
     }
