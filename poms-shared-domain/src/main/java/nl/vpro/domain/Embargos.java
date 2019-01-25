@@ -134,6 +134,18 @@ public class Embargos {
         return new BasicEmbargo(Instant.MAX, Instant.MIN);
     }
 
+
+    @Deprecated
+    public static Embargo<BasicEmbargo> unrestrictedInstant() {
+        return unrestrictedInstance();
+    }
+
+    @Deprecated
+    public static Embargo<BasicEmbargo> restrictedInstant() {
+         return restrictedInstance();
+    }
+
+
     public static boolean equals(ReadonlyEmbargo e1, ReadonlyEmbargo e2) {
          return Objects.equals(e1.getPublishStartInstant(), e2.getPublishStartInstant()) &&
              Objects.equals(e1.getPublishStopInstant(), e2.getPublishStopInstant());
