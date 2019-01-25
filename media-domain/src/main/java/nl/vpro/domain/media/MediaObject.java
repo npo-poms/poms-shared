@@ -1875,6 +1875,7 @@ public abstract class MediaObject
 
     public void setPredictions(Collection<Prediction> predictions) {
         this.predictions = updateSortedSet(this.predictions, predictions);
+        this.predictionsForXml = null;
     }
 
 
