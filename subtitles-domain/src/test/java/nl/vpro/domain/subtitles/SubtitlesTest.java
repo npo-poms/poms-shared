@@ -90,8 +90,8 @@ public class SubtitlesTest {
     @Test
     public void from() throws Exception {
         Subtitles subtitles = Subtitles.from(Arrays.asList(
-                StandaloneCue.tt888(new Cue(
-                "mid", 1, Duration.ZERO, Duration.ofSeconds(64), "bla"))).iterator());
+                StandaloneCue.tt888(Cue.forMid(
+                "mid").sequence(1).start(Duration.ZERO).end(Duration.ofSeconds(64)).content("bla").build())).iterator());
         Jackson2TestUtil.roundTripAndSimilar(subtitles, "{" +
             "  \"mid\" : \"mid\",\n" +
             "  \"content\" : {\n" +
