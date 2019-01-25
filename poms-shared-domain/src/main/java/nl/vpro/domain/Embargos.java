@@ -127,10 +127,10 @@ public class Embargos {
         return new BasicEmbargo(readonlyEmbargo.getPublishStartInstant(), readonlyEmbargo.getPublishStopInstant());
     }
 
-    public static Embargo<BasicEmbargo> unrestrictedInstant() {
+    public static Embargo<BasicEmbargo> unrestrictedInstance() {
         return new BasicEmbargo(null,  null);
     }
-    public static Embargo<BasicEmbargo> restrictedInstant() {
+    public static Embargo<BasicEmbargo> restrictedInstance() {
         return new BasicEmbargo(Instant.MAX, Instant.MIN);
     }
 
