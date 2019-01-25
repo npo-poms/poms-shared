@@ -1,6 +1,7 @@
 package nl.vpro.domain.subtitles;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -14,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 @Data
 @XmlJavaTypeAdapter(CueSettings.Adapter.class)
+@EqualsAndHashCode
 public class CueSettings {
 
     /**
@@ -26,7 +28,7 @@ public class CueSettings {
     }
 
     public static CueSettings webvtt(String value) {
-        return new CueSettings(value);
+        return value == null ? null : new CueSettings(value);
     }
 
     public static CueSettings copy(CueSettings settings) {
