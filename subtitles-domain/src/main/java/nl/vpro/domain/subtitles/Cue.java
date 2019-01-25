@@ -1,6 +1,5 @@
 package nl.vpro.domain.subtitles;
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -15,6 +14,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.collect.Range;
 
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.xml.bind.DurationXmlAdapter;
@@ -64,17 +64,23 @@ public class Cue {
     @JsonProperty("content")
     String content;
 
-    @Builder
-    public Cue(String parent,
+    @XmlAttribute
+    CueSettings settings;
+
+    @lombok.Builder(builderClassName = "Builder")
+    public Cue(
+        String parent,
         Integer sequence,
         Duration start,
         Duration end,
-        String content) {
+        String content,
+        CueSettings settings) {
         this.parent = parent;
         this.sequence = sequence;
         this.start = start;
         this.end = end;
         this.content = content;
+        this.settings = settings;
     }
 
     Cue(Cue cue) {
@@ -83,10 +89,30 @@ public class Cue {
         this.start = cue.start;
         this.end = cue.end;
         this.content = cue.content;
+        this.settings = CueSettings.copy(cue.settings);
     }
 
     protected Cue() {
 
+    }
+
+    public Range<Duration> asRange() {
+        return Range.closedOpen(getStart(), getEnd());
+    }
+
+    public static Builder forMid(String mid) {
+        return builder()
+            .parent(mid)
+            .sequence(0);
+    }
+
+    public static class Builder {
+        public Builder mid(String mid) {
+            return parent(mid);
+        }
+        public Builder webvttSettings(String settings) {
+            return settings(CueSettings.webvtt(settings));
+        }
     }
 
 }
