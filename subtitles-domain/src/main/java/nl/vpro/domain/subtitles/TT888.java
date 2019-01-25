@@ -141,13 +141,13 @@ public class TT888 {
     }
 
     static Cue createCue(String parent, TimeLine timeLine, Duration offset, String content) {
-        return new Cue(
-            parent,
-            timeLine.sequence,
-            timeLine.start.minus(offset),
-            timeLine.end.minus(offset),
-            content
-        );
+        return Cue.builder()
+            .mid(parent)
+            .sequence(timeLine.sequence)
+            .start(timeLine.start.minus(offset))
+            .end(timeLine.end.minus(offset))
+            .content(content)
+            .build();
         }
 
     public static TimeLine parseTimeline(String timeLine) {

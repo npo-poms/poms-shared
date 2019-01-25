@@ -5,13 +5,15 @@ import java.time.Duration;
 /**
  * @author Michiel Meeuwissen
  * @since 4.8
+ * @deprecated Use {@link Cue#builder()}
  */
+@Deprecated
 public class CueBuilder {
 
 
     public static CueBuilder forMid(String mid) {
         CueBuilder builder = new CueBuilder();
-        builder.cue = new Cue(mid, 0, null, null, null);
+        builder.cue = new Cue(mid, 0, null, null, null, null);
         return builder;
     }
 
