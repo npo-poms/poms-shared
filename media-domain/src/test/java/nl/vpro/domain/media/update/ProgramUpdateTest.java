@@ -781,7 +781,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Location publishedLocation =
             Location.builder()
                 .avAttributes(AVAttributes.builder().avFileFormat(AVFileFormat.H264).build())
-                //.platform(Platform.INTERNETVOD) If you enable this, it will have the _same embargo_ ?? TODO?
                 .programUrl("https://www.vpro.nl/2")
                 .build();
         publishedLocation.setPublishStopInstant(Instant.now().plus(Duration.ofMinutes(10)));

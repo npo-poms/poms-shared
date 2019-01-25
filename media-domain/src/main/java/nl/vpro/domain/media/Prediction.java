@@ -112,19 +112,17 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @XmlValue
     @JsonProperty("platform")
     @Getter
-    @Setter
     protected Platform platform;
 
     @Column
     @Enumerated(EnumType.STRING)
     @XmlTransient
     @Getter
-    @Setter
     private Authority authority = Authority.USER;
+
 
     @Column
     @XmlTransient
-    @Setter
     @Getter
     /**
      * TODO The state is 'ANNOUNCED', so shouldn't we name this field 'announcedAvailability'?
@@ -142,7 +140,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Enumerated(EnumType.STRING)
     @XmlTransient
     @Getter
-    @Setter
     protected Encryption encryption;
 
     public Prediction() {
@@ -263,6 +260,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public Prediction setPublishStartInstant(Instant start) {
         this.publishStart = start;
+        invalidateXml();
         return this;
     }
 
@@ -276,9 +274,46 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Override
     public Prediction setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
+        invalidateXml();
         return this;
     }
 
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
+        invalidateXml();
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
+        invalidateXml();
+    }
+
+    public void setPlannedAvailability(boolean plannedAvailability) {
+        this.plannedAvailability = plannedAvailability;
+        if (this.plannedAvailability) {
+            if (this.state == State.NOT_ANNOUNCED) {
+                this.state = State.ANNOUNCED;
+            }
+        } else {
+            if (this.state == State.ANNOUNCED) {
+                this.state = State.NOT_ANNOUNCED;
+            }
+        }
+        invalidateXml();
+    }
+
+    public void setEncryption(Encryption encryption) {
+        this.encryption = encryption;
+        invalidateXml();
+    }
+
+    protected void invalidateXml() {
+        if (this.mediaObject != null) {
+            this.mediaObject.predictionsForXml = null;
+
+        }
+    }
 
     @Override
     public int compareTo(Prediction o) {
