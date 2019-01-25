@@ -28,7 +28,7 @@ public class WEBVTTTest {
     @Test
     public void toWEBVTTCue() throws IOException {
         assertThat(WEBVTTandSRT.formatCue(
-            SubtitlesUtil.parse(getSubtitles(), false).findFirst().get(), new StringBuilder(), ".").toString()).isEqualTo("1\n" +
+            SubtitlesUtil.parse(getSubtitles(), false).findFirst().get(), new StringBuilder(), ".", true).toString()).isEqualTo("1\n" +
             "00:00:02.200 --> 00:00:04.150\n" +
             "888\n" +
             "\n" +
@@ -71,7 +71,7 @@ public class WEBVTTTest {
             "WEBVTT\n" +
                 "\n" +
                 "\n" +
-                "-00:01:59.991 --> -00:01:57.770\n" +
+                "-00:01:59.991 --> -00:01:57.770 A:left\n" +
                 "ترجمة: جانيت نمور\n" +
                 "\n" +
                 "\n" +

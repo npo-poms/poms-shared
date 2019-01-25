@@ -179,7 +179,7 @@ public class WEBVTTandSRT {
         while (cueIterator.hasNext()) {
             Cue cue = cueIterator.next();
             if (cue != null) {
-                formatCue(cue, builder, ",");
+                formatCue(cue, builder, ",", false);
                 writer.write(builder.toString());
                 builder.setLength(0);
             }
@@ -200,7 +200,7 @@ public class WEBVTTandSRT {
         while (cueIterator.hasNext()) {
             Cue cue = cueIterator.next();
             if (cue != null) {
-                formatCue(cue, builder, ".");
+                formatCue(cue, builder, ".", true);
                 writer.write(builder.toString());
                 builder.setLength(0);
             }
@@ -245,7 +245,7 @@ public class WEBVTTandSRT {
         return Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
     }
 
-    static StringBuilder formatCue(Cue cue, StringBuilder builder, String decimalSeparator) {
+    static StringBuilder formatCue(Cue cue, StringBuilder builder, String decimalSeparator, boolean settings) {
         if (cue.getSequence() != null) {
             builder.append(cue.getSequence());
         };
@@ -257,6 +257,9 @@ public class WEBVTTandSRT {
         builder.append(" --> ");
         if (cue.getEnd() != null) {
             builder.append(formatDuration(cue.getEnd().minus(offset), decimalSeparator));
+        }
+        if (settings && cue.getSettings() != null && StringUtils.isNotBlank(cue.getSettings().getValue())) {
+            builder.append(" ").append(cue.getSettings().getValue());
         }
         builder.append("\n");
         if (cue.getContent() != null) {
