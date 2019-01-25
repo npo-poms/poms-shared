@@ -1917,7 +1917,11 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
             return;
         }
 
-        Prediction prediction = findOrCreatePrediction(platform);
+        Prediction prediction = getPrediction(platform);
+        if (prediction == null) {
+            prediction = findOrCreatePrediction(platform, location);
+            prediction.setPlannedAvailability(true);
+        }
         prediction.setState(Prediction.State.REALIZED);
 
     }
@@ -1931,10 +1935,15 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
     }
 
     public Prediction findOrCreatePrediction(Platform platform) {
-        Prediction prediction = getPrediction(platform);
+        return findOrCreatePrediction(platform, Embargos.unrestrictedInstance());
+    }
+
+    protected Prediction findOrCreatePrediction(Platform platform, ReadonlyEmbargo embargo) {
+         Prediction prediction = getPrediction(platform);
         if (prediction == null) {
             log.debug("Creating prediction object for {}: ", platform, this);
             prediction = new Prediction(platform);
+            Embargos.copy(embargo, prediction);
             prediction.setPlannedAvailability(false);
             prediction.setParent(this);
             prediction.setAuthority(Authority.USER);
@@ -1945,6 +1954,7 @@ public abstract class MediaObject extends PublishableObject<MediaObject>
         }
         return prediction;
     }
+
 
     @XmlElementWrapper(name = "locations")
     @XmlElement(name = "location")

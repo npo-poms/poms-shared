@@ -549,11 +549,13 @@ public class Location extends PublishableObject<Location>
             Instant streamingOffline = onStreaming() ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;
             try {
                 Prediction record = getAuthorityRecord(false);
-                Instant fromAuthorityRecord = record != null ? record.getPublishStopInstant() : null;
-                if (fromAuthorityRecord == null || (streamingOffline != null && fromAuthorityRecord.isAfter(streamingOffline))) {
-                    return streamingOffline;
+                if (record != null) {
+                    Instant fromAuthorityRecord = record.getPublishStopInstant();
+                    if (fromAuthorityRecord == null || (streamingOffline != null && fromAuthorityRecord.isAfter(streamingOffline))) {
+                        return streamingOffline;
+                    }
+                    return fromAuthorityRecord;
                 }
-                return fromAuthorityRecord;
             } catch (IllegalAuthorativeRecord iea) {
                 log.debug(iea.getMessage());
             }
