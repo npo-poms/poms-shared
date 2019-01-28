@@ -92,6 +92,11 @@ public class BroadcasterServiceImpl implements BroadcasterService {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "[" + displayNameResource.getUrl() + (misResource != null ? "(/mis,whatson)" : "") + "]";
+    }
+
     Map<String, Broadcaster> getRepository() {
         displayNameResource.get();
         if (misResource != null) {
