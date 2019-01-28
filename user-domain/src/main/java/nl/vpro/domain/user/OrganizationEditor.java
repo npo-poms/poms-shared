@@ -8,11 +8,9 @@ import java.io.Serializable;
 
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
 
 import nl.vpro.domain.Identifiable;
 
-@MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public abstract class OrganizationEditor<T extends Organization>
