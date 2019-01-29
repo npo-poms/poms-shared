@@ -1,7 +1,10 @@
 package nl.vpro.domain.npoplayer;
 
-import nl.vpro.test.util.jackson2.Jackson2TestUtil;
+import java.time.Duration;
+
 import org.junit.Test;
+
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 /**
  * @author r.jansen
@@ -14,7 +17,7 @@ public class PlayerDomainSerializeTest {
             .mid("MID")
             .id("324242jl222")
             .autoplay(true)
-            .startAt(10)
+            .startAt(Duration.ofSeconds(10))
             .stylesheet("https://www.vpro.nl/flistender.css")
             .subtitleLanguage("nl")
             .sterSiteId("324242-jongstleden-222")
