@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import nl.vpro.util.TimeUtils;
+
 /**
  * @author r.jansen
  * @since 5.10
@@ -59,8 +61,8 @@ public class NPOPlayerApiRequest {
         public Builder from(PlayerRequest request) {
             return
                 autoplay(request.getAutoplay())
-                    .startAt(request.getStartAt())
-                    .endAt(request.getEndAt())
+                    .startAt(TimeUtils.toSeconds(request.getStartAt()).orElse(null))
+                    .endAt(TimeUtils.toSeconds(request.getEndAt()).orElse(null))
                     .id(request.getId())
                     .noAds(request.getNoAds())
                     .stylesheet(request.getStylesheet())
