@@ -31,8 +31,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
  * Abstract publishable object is an abstract implemention of {@link Accountable} and {@link Embargo}.
  *
  */
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 @EmbargoValidation(groups = {PomsValidatorGroup.class})
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "abstractPublishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
