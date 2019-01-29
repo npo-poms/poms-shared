@@ -36,7 +36,7 @@ import nl.vpro.validation.EmbargoValidation;
  * @author arne
  * @author roekoe
  */
-@Inheritance(strategy = InheritanceType.JOINED)
+@MappedSuperclass
 @EmbargoValidation(groups = {PomsValidatorGroup.class})
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
