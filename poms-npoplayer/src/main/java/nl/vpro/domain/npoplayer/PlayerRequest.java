@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.jackson2.DurationToSecondsFloatTimestamp;
 
 /**
+ * This wraps {@link NPOPlayerApiRequest}. It is a bit simpler and support nicer java types.
  * @author r.jansen
  * @since 5.10
  */
