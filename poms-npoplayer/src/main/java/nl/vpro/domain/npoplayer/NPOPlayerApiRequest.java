@@ -41,6 +41,7 @@ public class NPOPlayerApiRequest {
     String overlay;
     Integer startAt;
     Integer endAt;
+    @Deprecated
     NPOPlayerComscore comscore;
     Integer progress;
     Integer trackProgress;
@@ -48,7 +49,15 @@ public class NPOPlayerApiRequest {
     Boolean noAds;
     String subtitleLanguage;
     String shareUrl;
+    Boolean share;
     String placeholder;
+    Boolean endscreen;
+    Boolean recommendations;
+    Boolean moreButton;
+    Boolean nextEpisode;
+    Boolean skipCountdown;
+    Boolean errorButton;
+    Boolean hasSettings;
     String sterReferralUrl;
     String sterSiteId;
     String sterIdentifier;
@@ -61,8 +70,8 @@ public class NPOPlayerApiRequest {
         public Builder from(PlayerRequest request) {
             return
                 autoplay(request.getAutoplay())
-                    .startAt(TimeUtils.toSeconds(request.getStartAt()).orElse(null))
-                    .endAt(TimeUtils.toSeconds(request.getEndAt()).orElse(null))
+                    .startAt(TimeUtils.toSecondsInteger(request.getStartAt()).orElse(null))
+                    .endAt(TimeUtils.toSecondsInteger(request.getEndAt()).orElse(null))
                     .id(request.getId())
                     .noAds(request.getNoAds())
                     .stylesheet(request.getStylesheet())
@@ -72,6 +81,7 @@ public class NPOPlayerApiRequest {
                     .sterIdentifier(request.getSterIdentifier())
                     .hasAdConsent(request.getHasAdConsent())
                     .pageUrl(request.getPageUrl())
+                    .share(request.getShare())
                     .smarttag(NPOPlayerAtinternet.builder().siteId(request.getAtInternetSiteId()).build())
                 ;
         }
