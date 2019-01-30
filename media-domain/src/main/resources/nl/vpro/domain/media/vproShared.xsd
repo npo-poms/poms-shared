@@ -2,7 +2,8 @@
 <xs:schema
   attributeFormDefault="unqualified"
   elementFormDefault="qualified"
-  targetNamespace="urn:vpro:shared:2009" xmlns="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  targetNamespace="urn:vpro:shared:2009" xmlns="urn:vpro:shared:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
   <xs:element type="imageType" name="image"/>
 
@@ -86,10 +87,27 @@
 
 
   <xs:simpleType name="subtitlesTypeEnum">
+    <xs:annotation>
+      <xsd:documentation>
+        The type of a subtitles object. TODO these descriptions are provisional?
+      </xsd:documentation>
+    </xs:annotation>
     <xs:restriction base="xs:string">
-      <xs:enumeration value="CAPTION"/>
-      <xs:enumeration value="TRANSLATION"/>
-      <xs:enumeration value="TRANSCRIPT"/>
+      <xs:enumeration value="CAPTION">
+        <xs:annotation>
+          <xs:documentation>The subtitles represent a textual version of what is spoken or wat is happening. They are expected to be in the same language as the video itself. Teletekst 888 subtitles are captions.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TRANSLATION">
+        <xs:annotation>
+          <xs:documentation>The subtitles represent a translation. They are expected to be in a different language than the main language that can be heard</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TRANSCRIPT">
+         <xs:annotation>
+           <xs:documentation>The subtitles represent a precise or automatic version of what is being said. </xs:documentation>
+         </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 
