@@ -23,7 +23,7 @@ public enum SubtitlesType {
      */
     TRANSLATION,
     /**
-     * The subtitles represent a precise or automatic version of what is being said
+     * The subtitles represent a precise or automatic version of what is being said. TT 889, 'spoken' subtitles.
      * TODO I think it is a bit unclear what this means. TT 889?
      */
     TRANSCRIPT
