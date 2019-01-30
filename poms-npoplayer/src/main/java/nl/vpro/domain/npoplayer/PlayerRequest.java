@@ -63,4 +63,5 @@ public class PlayerRequest {
     Boolean hasAdConsent;
     String pageUrl;
     String atInternetSiteId;
+    Boolean share;
 }
