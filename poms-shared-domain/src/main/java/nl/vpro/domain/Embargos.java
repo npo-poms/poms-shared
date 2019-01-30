@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.Objects;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.google.common.collect.Range;
 
@@ -149,7 +150,7 @@ public class Embargos {
 
 
     @Nonnull
-    public static Instant getPublishStop(ReadonlyEmbargo readonlyEmbargo) {
+    public static Instant getPublishStop(@Nullable ReadonlyEmbargo readonlyEmbargo) {
         if (readonlyEmbargo == null) {
             return Instant.MAX;
         }
@@ -160,7 +161,7 @@ public class Embargos {
         return result;
     }
     @Nonnull
-    public static Instant getPublishStart(ReadonlyEmbargo readonlyEmbargo) {
+    public static Instant getPublishStart(@Nullable ReadonlyEmbargo readonlyEmbargo) {
         if (readonlyEmbargo == null) {
             return Instant.MIN;
         }
