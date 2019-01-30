@@ -3,6 +3,8 @@ package nl.vpro.domain;
 import java.time.Instant;
 import java.util.Objects;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.Range;
 
 /**
@@ -143,6 +145,30 @@ public class Embargos {
         Instant start = embargo.getPublishStartInstant();
         Instant stop = embargo.getPublishStopInstant();
         return "[" + (start == null ? "" : start) + "-" + (stop == null ? "" : stop) + "]";
+    }
+
+
+    @Nonnull
+    public static Instant getPublishStop(ReadonlyEmbargo readonlyEmbargo) {
+        if (readonlyEmbargo == null) {
+            return Instant.MAX;
+        }
+        Instant result = readonlyEmbargo.getPublishStopInstant();
+        if (result == null) {
+            return Instant.MAX;
+        }
+        return result;
+    }
+    @Nonnull
+    public static Instant getPublishStart(ReadonlyEmbargo readonlyEmbargo) {
+        if (readonlyEmbargo == null) {
+            return Instant.MIN;
+        }
+        Instant result = readonlyEmbargo.getPublishStartInstant();
+        if (result == null) {
+            return Instant.MIN;
+        }
+        return result;
     }
 
 }
