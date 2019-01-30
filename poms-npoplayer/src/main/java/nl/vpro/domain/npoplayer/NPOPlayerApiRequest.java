@@ -66,6 +66,7 @@ public class NPOPlayerApiRequest {
     String pageUrl;
     NPOPlayerAtinternet smarttag;
     NPOPlayerTopSpin topspin;
+    Encryption encryption;
 
     public static class Builder {
         public Builder from(PlayerRequest request) {
@@ -83,6 +84,8 @@ public class NPOPlayerApiRequest {
                     .hasAdConsent(request.getHasAdConsent())
                     .pageUrl(request.getPageUrl())
                     .share(request.getShare())
+                    .hasSettings(hasSettings)
+                    .encryption(encryption)
                     .smarttag(NPOPlayerAtinternet.builder().siteId(request.getAtInternetSiteId()).build())
                 ;
         }
