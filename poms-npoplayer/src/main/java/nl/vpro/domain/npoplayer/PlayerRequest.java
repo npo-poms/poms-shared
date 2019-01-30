@@ -38,7 +38,9 @@ import nl.vpro.jackson2.DurationToSecondsFloatTimestamp;
     "startAt",
     "endAt",
     "noAds",
-    "subtitleLanguage"
+    "subtitleLanguage",
+    "atInternetSiteId",
+    "share"
 })
 @JsonTypeName("request")
 public class PlayerRequest {
@@ -65,4 +67,5 @@ public class PlayerRequest {
     String pageUrl;
     String atInternetSiteId;
     Boolean share;
+    Encryption encryption;
 }
