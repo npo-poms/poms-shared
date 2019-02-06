@@ -18,10 +18,8 @@ public class NEPItemizeServiceImplITest {
     @Test
     public void itemize() {
         Instant start = Instant.now();
-        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(
-            "https://itemizer1-npocdn-stg.twobridges.io/v1/api/itemizer/job",
-            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJdGVtaXplciBBUEkiLCJzdWIiOiJwb21zIiwicHJvdmlkZXIiOiJucG8iLCJwbGF0Zm9ybSI6Im5wb3BsdXMifQ.JHuJfi94jEyNDJRJRtqhT151C5KBaA8lduMhxytMUf8");
-
+        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl("https://itemizer-npocdn-stg.nepworldwide.nl/v1/api/itemizer/job",
+            "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJucG8iLCJwcm92aWRlciI6Im5wbyIsInBsYXRmb3JtIjoibnBvIn0.hK7fZmwlX-yBZBA9o1A3O2IK_hbWMLFaQs_QbRIMQj8");
         NEPItemizeRequest request = new NEPItemizeRequest();
         request.setIdentifier("AT_2073522");
         request.setStarttime("00:00:00.000");
