@@ -153,7 +153,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                         throw new IllegalStateException("File " + nepFile + " doesn't exist");
                     }
                     if (Duration.between(start, Instant.now()).compareTo(timeout) > 0) {
-                        throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
+                        throw new IllegalStateException("File '" + nepFile + "' didn't appear in " + timeout);
                     }
                     Slf4jHelper.debugOrInfo(log, count >  6, "{}: {}. Waiting {} for retry", nepFile, sftpe.getMessage(), retry);
                     Thread.sleep(retry.toMillis());
