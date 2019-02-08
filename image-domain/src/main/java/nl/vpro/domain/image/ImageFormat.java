@@ -3,6 +3,8 @@ package nl.vpro.domain.image;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 public enum ImageFormat {
 
 
@@ -40,6 +42,9 @@ public enum ImageFormat {
     }
 
     public static ImageFormat forFileExtension(String extension) throws UnsupportedImageFormatException {
+        if (StringUtils.isEmpty(extension)) {
+            return null;
+        }
         for(ImageFormat type : ImageFormat.values()) {
             for(String match : type.extensions) {
                 if(match.equals(extension.toLowerCase().trim())) {
