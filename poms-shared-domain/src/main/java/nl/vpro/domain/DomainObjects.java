@@ -32,11 +32,10 @@ public class DomainObjects {
         }
         appendCanonicalFilePath(String.valueOf(i), builder);
     }
-     public static void appendCanonicalFilePath(@Nonnull String i, @Nonnull StringBuilder builder) {
-        if (i == null) {
+     public static void appendCanonicalFilePath(@Nonnull final String id, @Nonnull StringBuilder builder) {
+        if (id == null) {
             throw new IllegalArgumentException();
         }
-        String id = String.valueOf(i);
 
         CharacterIterator it = new StringCharacterIterator(id);
         for(char c = it.first(); c != CharacterIterator.DONE; c = it.next()) {
