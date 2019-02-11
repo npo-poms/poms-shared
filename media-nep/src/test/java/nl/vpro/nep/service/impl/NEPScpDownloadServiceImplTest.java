@@ -28,7 +28,7 @@ public class NEPScpDownloadServiceImplTest {
     NEPDownloadService impl = new NEPScpDownloadServiceImpl(
         "sftp-itemizer.nepworldwide.nl",
         "npo",
-        "***REMOVED***",
+        "",
         "",
         //"94:06:26:d5:e4:f5:18:b5:52:a9:19:b1:97:db:94:9e"
         Arrays.asList("/local/bin/scp", "/usr/bin/scp"),

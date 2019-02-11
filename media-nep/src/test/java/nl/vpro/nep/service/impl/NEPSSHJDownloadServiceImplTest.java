@@ -77,8 +77,6 @@ public class NEPSSHJDownloadServiceImplTest {
         session.setConfig("StrictHostKeyChecking", "no");
 
 
-        session.setPassword("***REMOVED***");
-
         session.connect();
 
         ChannelSftp sftp = (ChannelSftp) session.openChannel("sftp");
