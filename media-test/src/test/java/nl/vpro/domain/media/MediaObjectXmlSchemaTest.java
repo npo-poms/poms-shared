@@ -15,6 +15,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
@@ -55,6 +56,7 @@ public class MediaObjectXmlSchemaTest {
     private static JAXBContext jaxbContext;
 
     static {
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tashkent"));
         try {
             jaxbContext = JAXBContext.newInstance("nl.vpro.domain.media");
         } catch(JAXBException e) {
