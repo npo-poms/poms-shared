@@ -28,7 +28,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 /**
  * @author rico
  */
-@XmlRootElement(name = "imageMetadata")
+@XmlRootElement(name = "metadata")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(
     name = "imageMetadataType",
