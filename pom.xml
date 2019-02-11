@@ -12,17 +12,19 @@
   <artifactId>poms-shared-parent</artifactId>
   <packaging>pom</packaging>
 
+  <description>Domain classes and utilities for NPO POMS projects.</description>
+
   <properties>
     <poms.shared.version>${project.version}</poms.shared.version>
   </properties>
 
 
-
-  <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/trunk</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/trunk</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/trunk</url>
+   <scm>
+    <connection>scm:git:git://git@github.com/npo-poms/poms-shared.git</connection>
+    <developerConnection>scm:git:git@github.com:npo-poms/poms-shared.git</developerConnection>
+    <url>https://github.com/npo-poms/poms-shared</url>
   </scm>
+
 
   <modules>
     <module>poms-shared-domain</module>
@@ -75,28 +77,14 @@
     </dependency>
   </dependencies>
 
-  <repositories>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
     <repository>
-      <id>vpro</id>
-      <url>https://nexus.vpro.nl/content/groups/public</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
+      <id>ossrh-release</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <id>vpro</id>
-      <url>https://nexus.vpro.nl/content/groups/public</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </pluginRepository>
-  </pluginRepositories>
+  </distributionManagement>
 </project>
