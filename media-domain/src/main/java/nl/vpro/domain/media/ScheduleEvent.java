@@ -461,6 +461,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.start = DateUtils.toInstant(start);
     }
     @XmlElement(name = "start")
+    @XmlSchemaType(name = "dateTime")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
