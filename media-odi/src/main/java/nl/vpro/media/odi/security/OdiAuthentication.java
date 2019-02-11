@@ -205,12 +205,12 @@ public class OdiAuthentication {
             }
         }
 
-        String ***REMOVED*** = matcher.group(2);
+        String secret = matcher.group(2);
         boolean allowXOrigin = matcher.group(3) != null && "true".equals(matcher.group(3));
         return new OdiClient(
             publicKey,
             origins,
-            ***REMOVED***,
+            secret,
             allowXOrigin
         );
     }
