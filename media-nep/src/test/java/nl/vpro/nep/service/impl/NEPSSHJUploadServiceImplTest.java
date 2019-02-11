@@ -41,7 +41,7 @@ public class NEPSSHJUploadServiceImplTest {
         impl = new NEPSSHJUploadServiceImpl(
             "ftp.nepworldwide.nl",
             "npoweb-vpro",
-            "May8xGLHUumFAZo",
+            "",
             "AAAAB3NzaC1yc2EAAAADAQABAAABAQD7KiM3N9PjVRUrssuKNOC5ylufcozH9DQgIkdKyUUIGVGvV9N7HqzlSRdFJEw3L3SCDxYYa0/yx9y5gD9A/m7ID6nz1pPbzKRnEuQJHMwRAFHqbleP8QPQ/sneFgNfGAwMTbdCay7T9CgK5ppqBN9kXo7OtlbIary47pcYcxHitbg1QnH3PDNtuHd19Qsc58Qf7/ZX9+9gGsX9w1W7EvfI7QMbIp8Hy0DzC9dSIoXgbGbHMI2DVYbzZPog1dM4O1m0RQiFVFd0kTAsAADozVzezxKGa5C/dyNZb9has7Bpqz0sQ39TlOyS60z+ElfhiqMyr4623140IzhCQ/oy3bQx,MD5:9b:b4:4c:54:d1:7a:aa:63:71:e0:ef:cb:78:22:73:83");
     }
 
