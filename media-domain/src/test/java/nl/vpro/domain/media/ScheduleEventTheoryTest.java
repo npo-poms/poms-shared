@@ -48,7 +48,7 @@ public class ScheduleEventTheoryTest extends ObjectTest<ScheduleEvent> { // TODO
         ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.EPOCH, Duration.ofMillis(10));
 
         //noinspection deprecation
-        assertThat(target.getGuideDay().toString()).isEqualTo("Wed Dec 31 00:00:00 CET 1969");
+        assertThat(target.getGuideDay().getTime()).isEqualTo(-90000000L);
         assertThat(target.getGuideDate().toString()).isEqualTo("1969-12-31");
 
     }
@@ -58,7 +58,7 @@ public class ScheduleEventTheoryTest extends ObjectTest<ScheduleEvent> { // TODO
         ScheduleEvent target = new ScheduleEvent(Channel.NED1, Instant.ofEpochMilli((5 * 3600 + 58 * 60) * 1000), Duration.ofMillis(10));
 
         //noinspection deprecation
-        assertThat(target.getGuideDay().toString()).isEqualTo("Thu Jan 01 00:00:00 CET 1970");
+        assertThat(target.getGuideDay().getTime()).isEqualTo(-3600000L);
         assertThat(target.getGuideDate().toString()).isEqualTo("1970-01-01");
     }
 }
