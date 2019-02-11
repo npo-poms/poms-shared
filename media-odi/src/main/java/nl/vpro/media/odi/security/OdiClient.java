@@ -8,14 +8,14 @@ public class OdiClient {
 
     private final List<String> origins;
 
-    private final String ***REMOVED***;
+    private final String secret;
 
     private final boolean allowXOrigin;
 
-    public OdiClient(String publicKey, List<String> origins, String ***REMOVED***, boolean allowXOrigin) {
+    public OdiClient(String publicKey, List<String> origins, String secret, boolean allowXOrigin) {
         this.publicKey = publicKey;
         this.origins = origins;
-        this.***REMOVED*** = ***REMOVED***;
+        this.secret = secret;
         this.allowXOrigin = allowXOrigin;
     }
 
@@ -50,7 +50,7 @@ public class OdiClient {
     }
 
     public String getSecret() {
-        return ***REMOVED***;
+        return secret;
     }
 
     public boolean isAllowXOrigin() {
@@ -77,7 +77,7 @@ public class OdiClient {
         if (allowXOrigin != odiClient.allowXOrigin) return false;
         if (origins != null ? !origins.equals(odiClient.origins) : odiClient.origins != null) return false;
         if (publicKey != null ? !publicKey.equals(odiClient.publicKey) : odiClient.publicKey != null) return false;
-        if (***REMOVED*** != null ? !***REMOVED***.equals(odiClient.***REMOVED***) : odiClient.***REMOVED*** != null) return false;
+        if (secret != null ? !secret.equals(odiClient.secret) : odiClient.secret != null) return false;
 
         return true;
     }
