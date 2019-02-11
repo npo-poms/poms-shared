@@ -28,6 +28,7 @@ import nl.vpro.logging.simple.Slf4jSimpleLogger;
  */
 @Slf4j
 @RunWith(MockitoJUnitRunner.class)
+@Ignore("Actuall uploading")
 public class NEPSSHJUploadServiceImplTest {
 
     private NEPSSHJUploadServiceImpl impl;
