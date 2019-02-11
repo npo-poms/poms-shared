@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
 import java.io.IOException;
+import java.time.Duration;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -39,12 +40,14 @@ public class ScheduleEventTest {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)
+            .duration(Duration.ofMinutes(10))
             .build();
 
         Jackson2TestUtil.roundTripAndSimilar(e, "{\n" +
             "  \"channel\" : \"NED1\",\n" +
             "  \"start\" : 1503928260000,\n" +
-            "  \"guideDay\" : 1503871200000\n" +
+            "  \"guideDay\" : 1503871200000\n," +
+            "  \"duration\" : 600000\n" +
             "}");
     }
 
@@ -53,12 +56,14 @@ public class ScheduleEventTest {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)
+            .duration(Duration.ofMinutes(10))
             .build();
 
         Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.PRETTY_PUBLISHER, e, "{\n" +
             "  \"channel\" : \"NED1\",\n" +
             "  \"start\" : 1503928260000,\n" +
             "  \"guideDay\" : 1503871200000,\n" +
+            "  \"duration\" : 600000,\n" +
             "  \"eventStart\" : 1503928260000\n" +
             "}");
     }
