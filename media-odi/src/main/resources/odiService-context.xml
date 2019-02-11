@@ -19,11 +19,11 @@
         <bean class="nl.vpro.media.odi.handler.OdiLocationHandler">
           <property name="odiBaseUrl" value="${odi.baseUrl}"/>
           <property name="odiApplication" value="${odi.aplication}"/>
-          <property name="odiSecret" value="${odi.***REMOVED***}"/>
+          <property name="odiSecret" value="${odi.secret}"/>
         </bean>
 
         <bean class="nl.vpro.media.odi.handler.DeeplinkProtectionLocationHandler">
-          <property name="streamAPISecret" value="${streamAPI.***REMOVED***}"/>
+          <property name="streamAPISecret" value="${streamAPI.secret}"/>
         </bean>
         <bean class="nl.vpro.media.odi.handler.AAPILocationHandler">
           <property name="AAPIServer" value="${aapi.server}"/>
