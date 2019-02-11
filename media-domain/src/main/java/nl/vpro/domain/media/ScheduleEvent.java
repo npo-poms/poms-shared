@@ -12,8 +12,8 @@ import java.util.TreeSet;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
@@ -33,13 +33,14 @@ import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.TriFunction;
 import nl.vpro.xml.bind.DurationXmlAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
+import nl.vpro.xml.bind.ZonedLocalDateXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
@@ -62,8 +63,8 @@ import static nl.vpro.domain.TextualObjects.sorted;
     "avAttributes",
     "textSubtitles",
     "textPage",
-    "guideDay",
-    "start",
+    "guideDate",
+    "startInstant",
     "offset",
     "duration",
     "poProgID",
@@ -75,8 +76,8 @@ import static nl.vpro.domain.TextualObjects.sorted;
     "titles",
     "descriptions",
     "channel",
-    "start",
-    "guideDay",
+    "startInstant",
+    "guideDate",
     "duration",
     "midRef",
     "poProgID",
@@ -414,13 +415,13 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     /**
      * @deprecated use {@link #getGuideDate}
      */
-    @XmlElement(name = "guideDay")
-    @XmlSchemaType(name = "date")
     @Deprecated
+    @XmlTransient
     public Date getGuideDay() {
         LocalDate dateToUse = guideDay == null ? guideLocalDate(start) : guideDay;
         return dateToUse == null ? null : Date.from(dateToUse.atStartOfDay(Schedule.ZONE_ID).toInstant());
     }
+
 
     /**
      * @deprecated A full date object is not stored in the database nor in xml. Use {@link #setGuideDate}
@@ -430,8 +431,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.guideDay = guideDay == null ? null : guideDay.toInstant().atZone(Schedule.ZONE_ID).toLocalDate();
     }
 
-    @XmlTransient
-    //@XmlJavaTypeAdapter(LocalDateXmlAdapter.class)
+
+
+    @XmlElement(name = "guideDay")
+    @XmlJavaTypeAdapter(ZonedLocalDateXmlAdapter.class)
+    @XmlSchemaType(name = "date")
     public LocalDate getGuideDate() {
         return guideDay;
     }
@@ -440,7 +444,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.guideDay = guideDate;
     }
 
-    @XmlElement
+    @XmlTransient
     @Deprecated
     public Date getStart() {
         return DateUtils.toDate(start);
@@ -454,7 +458,9 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @JsonView({Views.Publisher.class})
+    @XmlElement(name = "start")
     // Because of other 'start' fields (e.g. in segment, it is mapped to _long_). This field is mapped to date in ES. In ES fields with same name must have same mapping.
+    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY, value = "eventStart")
     public Instant getStartInstant() {
         return start;
