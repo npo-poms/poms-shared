@@ -34,6 +34,8 @@ import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.media.bind.NetToString;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.StringZonedLocalDateToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.persistence.LocalDateToDateConverter;
 import nl.vpro.util.DateUtils;
@@ -436,6 +438,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     @XmlElement(name = "guideDay")
     @XmlJavaTypeAdapter(ZonedLocalDateXmlAdapter.class)
     @XmlSchemaType(name = "date")
+    @JsonDeserialize(using = StringZonedLocalDateToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringZonedLocalDateToJsonTimestamp.Serializer.class)
     public LocalDate getGuideDate() {
         return guideDay;
     }
@@ -456,19 +460,23 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         // if (this.start != null) throw new IllegalStateException(); Used in test cases.
         this.start = DateUtils.toInstant(start);
     }
-
-    @JsonView({Views.Publisher.class})
     @XmlElement(name = "start")
-    // Because of other 'start' fields (e.g. in segment, it is mapped to _long_). This field is mapped to date in ES. In ES fields with same name must have same mapping.
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY, value = "eventStart")
+    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     public Instant getStartInstant() {
         return start;
     }
-
-
     public void setStartInstant(Instant start) {
         this.start = start;
+    }
+
+
+    @JsonView({Views.Publisher.class})
+    // Because of other 'start' fields (e.g. in segment, it is mapped to _long_). This field is mapped to date in ES. In ES fields with same name must have same mapping.
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY, value = "eventStart")
+    protected Instant getEventStart() {
+        return getStartInstant();
     }
 
     public Instant getStopInstant() {
