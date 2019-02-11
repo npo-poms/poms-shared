@@ -46,7 +46,7 @@ public class OdiAuthenticationTest {
 
     @Test
     public void testWildcardOrigins() {
-        OdiClient client = new OdiClient("public", Arrays.asList("*.vpro.nl", "localhost:*"), "***REMOVED***", false);
+        OdiClient client = new OdiClient("public", Arrays.asList("*.vpro.nl", "localhost:*"), "secret", false);
 
         Assert.assertTrue(client.matchesOrigin("www.vpro.nl"));
         Assert.assertTrue(client.matchesOrigin("localhost:8080"));
