@@ -25,6 +25,7 @@ public interface ImageMetadata<T extends ImageMetadata<T>>  extends Metadata<T> 
 
     ImageFormat getImageFormat();
 
+
     default String getMimeType() {
         ImageFormat format = getImageFormat();
         return format == null ? null : format.getMimeType();
