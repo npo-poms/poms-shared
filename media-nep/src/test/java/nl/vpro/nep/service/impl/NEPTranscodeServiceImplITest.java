@@ -27,7 +27,7 @@ public class NEPTranscodeServiceImplITest {
     private String apiUser = "webonly-user";
     private String ftpUser = "npoweb-vpro";
     NEPTranscodeServiceImpl nepService =
-        new NEPTranscodeServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl", apiUser, "***REMOVED***", ftpUser);
+        new NEPTranscodeServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl", apiUser, "", ftpUser);
 
     String mid = "WO_VPRO_783763";
 
