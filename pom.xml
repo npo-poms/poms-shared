@@ -9,7 +9,6 @@
   </parent>
 
   <version>5.10-SNAPSHOT</version>
-  <groupId>nl.publiekeomroep</groupId>
   <artifactId>poms-shared-parent</artifactId>
   <packaging>pom</packaging>
 
