@@ -121,13 +121,14 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     private Authority authority = Authority.USER;
 
 
-    @Column
-    @XmlTransient
-    @Getter
+
     /**
      * TODO The state is 'ANNOUNCED', so shouldn't we name this field 'announcedAvailability'?
      * @since 5.6
      */
+    @Column
+    @XmlTransient
+    @Getter
     private boolean plannedAvailability = true;
 
 
