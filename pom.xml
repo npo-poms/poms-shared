@@ -19,11 +19,13 @@
 
 
 
+
   <scm>
-    <connection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.9-SNAPSHOT</connection>
-    <developerConnection>scm:svn:https://subversion.vpro.nl/repo/nl/publiekeomroep/poms-shared/branches/REL-5.9-SNAPSHOT</developerConnection>
-    <url>https://subversion.vpro.nl/viewvc/nl/publiekomroep/poms-shared/branches/REL-5.9-SNAPSHOT</url>
+    <connection>scm:git:git://git@github.com/npo-poms/poms-shared.git</connection>
+    <developerConnection>scm:git:git@github.com:npo-poms/poms-shared.git</developerConnection>
+    <url>https://github.com/npo-poms/poms-shared</url>
   </scm>
+
 
   <modules>
     <module>poms-shared-domain</module>
