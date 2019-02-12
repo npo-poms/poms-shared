@@ -8,7 +8,7 @@
     <version>5.9.1</version>
   </parent>
 
-  <version>5.9.3-SNAPSHOT</version>
+  <version>5.9.3</version>
   <groupId>nl.publiekeomroep</groupId>
   <artifactId>poms-shared-parent</artifactId>
   <packaging>pom</packaging>
@@ -24,6 +24,7 @@
     <connection>scm:git:git://git@github.com/npo-poms/poms-shared.git</connection>
     <developerConnection>scm:git:git@github.com:npo-poms/poms-shared.git</developerConnection>
     <url>https://github.com/npo-poms/poms-shared</url>
+    <tag>REL-5.9.3</tag>
   </scm>
 
 
