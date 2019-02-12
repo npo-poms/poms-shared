@@ -2,15 +2,13 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
- * An 'updatable' object represent an entity that has {@link #getCreationInstant()}  and {@link #getLastModifiedInstant()}.
+ * An 'changeable' object represent an entity that has {@link #getCreationInstant()}  and {@link #getLastModifiedInstant()}.
  *
  * @author Michiel Meeuwissen
  * @since 5.10
  */
-public interface Updatable {
+public interface Changeable {
      default boolean hasChanges() {
         return true;
     }
