@@ -14,10 +14,7 @@ import static nl.vpro.domain.AbstractPublishableObject_.*;
 public class Accountables {
 
     public static void fillFor(Accountable accountable, Instant now, Editor currentUser) {
-        accountable.setLastModifiedInstant(now);
-        if (accountable.getCreationInstant() == null) {
-            accountable.setCreationInstant(now);
-        }
+        Updatables.fillFor(accountable, now);
         accountable.setLastModifiedBy(currentUser);
         if (accountable.getCreatedBy() == null) {
             accountable.setCreatedBy(currentUser);
