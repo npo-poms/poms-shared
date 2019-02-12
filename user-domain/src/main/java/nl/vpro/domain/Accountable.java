@@ -8,7 +8,7 @@ import nl.vpro.domain.user.Editor;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public interface Accountable extends Updatable {
+public interface Accountable extends Changeable {
 
     Editor getCreatedBy();
     void setCreatedBy(Editor createdBy);

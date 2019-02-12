@@ -7,21 +7,21 @@ import java.time.Instant;
  * @author Michiel Meeuwissen
  * @since 5.10
  */
-public class Updatables {
+public class Changeables {
 
-    public static void fillFor(Updatable accountable, Instant now) {
+    public static void fillFor(Changeable accountable, Instant now) {
         accountable.setLastModifiedInstant(now);
         if (accountable.getCreationInstant() == null) {
             accountable.setCreationInstant(now);
         }
     }
 
-     public static void copyFrom(Updatable source, Updatable target) {
+     public static void copyFrom(Changeable source, Changeable target) {
         target.setLastModifiedInstant(source.getLastModifiedInstant());
         target.setCreationInstant(source.getCreationInstant());
     }
 
-    public static  void copyFromIfTargetUnset(Updatable source, Updatable target) {
+    public static  void copyFromIfTargetUnset(Changeable source, Changeable target) {
 
         if (target.getLastModifiedInstant() == null) {
             target.setLastModifiedInstant(source.getLastModifiedInstant());
@@ -32,7 +32,7 @@ public class Updatables {
     }
 
 
-    public static void copyFromIfSourceSet(Updatable source, Updatable target) {
+    public static void copyFromIfSourceSet(Changeable source, Changeable target) {
         if (source.getLastModifiedInstant() != null) {
             target.setLastModifiedInstant(source.getLastModifiedInstant());
         }
