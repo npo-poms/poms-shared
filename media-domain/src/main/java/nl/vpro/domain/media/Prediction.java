@@ -126,6 +126,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     @Getter
     /**
      * TODO The state is 'ANNOUNCED', so shouldn't we name this field 'announcedAvailability'?
+     * @since 5.6
      */
     private boolean plannedAvailability = true;
 
