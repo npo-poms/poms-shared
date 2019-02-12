@@ -1,7 +1,5 @@
 package nl.vpro.domain;
 
-import java.time.Instant;
-
 import nl.vpro.domain.user.Editor;
 
 /**
@@ -10,14 +8,7 @@ import nl.vpro.domain.user.Editor;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public interface Accountable {
-    default boolean hasChanges() {
-        return true;
-    }
-    Instant getLastModifiedInstant();
-    void setLastModifiedInstant(Instant lastModified);
-    Instant getCreationInstant();
-    void setCreationInstant(Instant creationDate);
+public interface Accountable extends Updatable {
 
     Editor getCreatedBy();
     void setCreatedBy(Editor createdBy);
