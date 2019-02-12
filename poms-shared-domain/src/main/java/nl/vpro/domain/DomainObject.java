@@ -5,6 +5,7 @@
 
 package nl.vpro.domain;
 
+import lombok.Getter;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -17,6 +18,8 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
+ * A domain object is an {@link Identifiable} which serves a as a base class for the domain entities in the POMS universe that have their own id.
+ *
  * @author roekoe
  */
 @MappedSuperclass
@@ -29,6 +32,7 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize=1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
     @XmlTransient // Don't remove!
+    @Getter
     protected Long id;
 
     public DomainObject() {
@@ -37,12 +41,6 @@ public abstract class DomainObject implements Identifiable<Long>, Serializable {
     protected DomainObject(Long id) {
         this.id = id;
     }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
     /**
      * Under normal operation this should not be used!
      * <p/>
