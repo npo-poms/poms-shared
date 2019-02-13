@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.Properties;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -44,6 +45,10 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
         this.itemizeKey = itemizeKey;
         this.itemizeUrl = itemizeUrl;
+    }
+
+    protected NEPItemizeServiceImpl(Properties properties) {
+        this(properties.getProperty("nep.player.itemizer.url"), properties.getProperty("nep.player.itemizer.key"));
     }
 
     @Override

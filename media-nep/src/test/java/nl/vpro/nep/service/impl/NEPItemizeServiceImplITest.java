@@ -2,7 +2,11 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.Instant;
+import java.util.Properties;
 
 import org.junit.Test;
 
@@ -16,10 +20,11 @@ import nl.vpro.nep.domain.NEPItemizeRequest;
 public class NEPItemizeServiceImplITest {
 
     @Test
-    public void itemize() {
+    public void itemize() throws IOException {
         Instant start = Instant.now();
-        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl("https://itemizer-npocdn-stg.nepworldwide.nl/v1/api/itemizer/job",
-            "");
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(new File(System.getProperty("user.home"), "conf" + File.separator + "nep.properties")));
+        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(properties);
         NEPItemizeRequest request = new NEPItemizeRequest();
         request.setIdentifier("AT_2073522");
         request.setStarttime("00:00:00.000");
