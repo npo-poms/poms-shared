@@ -7,10 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -80,6 +77,17 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             log.error(rte.getMessage(), rte);
         }
         scp = scptry;
+    }
+
+    protected NEPScpDownloadServiceImpl(Properties properties) {
+        this(
+            properties.getProperty("nep.sftp.host"),
+            properties.getProperty("nep.sftp.username"),
+            properties.getProperty("nep.sftp.password"),
+            properties.getProperty("nep.sftp.hostkey"),
+            Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
+            Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass")
+        );
     }
 
     protected File knowHosts(String ftpHost, String hostkey) {

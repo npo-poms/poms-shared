@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Ignore;
@@ -25,17 +24,9 @@ public class NEPScpDownloadServiceImplTest {
 
 
 
-    NEPDownloadService impl = new NEPScpDownloadServiceImpl(
-        "sftp-itemizer.nepworldwide.nl",
-        "npo",
-        "",
-        "",
-        //"94:06:26:d5:e4:f5:18:b5:52:a9:19:b1:97:db:94:9e"
-        Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
-        Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass")
+    NEPDownloadService impl = new NEPScpDownloadServiceImpl(NEPTest.PROPERTIES);
 
 
-    );
     @Test
     public void test() throws IOException {
 
