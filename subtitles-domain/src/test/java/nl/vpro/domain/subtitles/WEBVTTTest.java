@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 
+import nl.vpro.util.CountedIterator;
+
 import static nl.vpro.domain.subtitles.SubtitlesUtilTest.getSubtitles;
 import static nl.vpro.domain.subtitles.SubtitlesUtilTest.getSubtitlesAr;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -149,6 +151,14 @@ public class WEBVTTTest {
         for (Cue cue : cues) {
             assertThat(cue.getSequence()).isNotNull();
         }
+    }
+
+    @Test
+    public void MSE4363() throws IOException {
+        InputStream example = getClass().getResourceAsStream("/WO_NTR_15099292.vtt");
+        CountedIterator<StandaloneCue> parsed = SubtitlesUtil.standaloneIterator(Subtitles.builder().value(example).format(SubtitlesFormat.SRT).build(), true, true);
+        SubtitlesUtil.toVTT(parsed, System.out);
+
     }
 
 
