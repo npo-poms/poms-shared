@@ -103,9 +103,7 @@ public class SubtitlesUtil {
         if (fillCueNumbers) {
             stream = fillCueNumber(stream);
         }
-        return stream
-            .map(c -> new StandaloneCue(c, subtitles.getLanguage(), subtitles.getType())
-            );
+        return stream.map(c -> StandaloneCue.of(c, subtitles.getLanguage(), subtitles.getType()));
     }
 
 
