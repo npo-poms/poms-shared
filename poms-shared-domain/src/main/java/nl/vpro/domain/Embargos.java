@@ -15,43 +15,67 @@ import com.google.common.collect.Range;
  */
 public class Embargos {
 
-    public static void copy(ReadonlyEmbargo from, Embargo to) {
-        to.setPublishStartInstant(from.getPublishStartInstant());
-        to.setPublishStopInstant(from.getPublishStopInstant());
+    private static final String PUBLISH_START = "publishstart";
+    private static final String PUBLISH_STOP = "publishstop";
+
+    public static ChangeReport copy(ReadonlyEmbargo from, Embargo to) {
+        ChangeReport change = new ChangeReport();
+
+        if (!Objects.equals(to.getPublishStartInstant(), to.getPublishStartInstant())) {
+            to.setPublishStartInstant(from.getPublishStartInstant());
+            change.change(PUBLISH_START);
+        }
+        if (!Objects.equals(to.getPublishStopInstant(), to.getPublishStopInstant())) {
+            to.setPublishStopInstant(from.getPublishStopInstant());
+            change.change(PUBLISH_STOP);
+        }
+        return change;
     }
 
-    public static void copyIfTargetUnset(ReadonlyEmbargo from, Embargo to) {
-        if (to.getPublishStartInstant() == null) {
+    public static ChangeReport copyIfTargetUnset(ReadonlyEmbargo from, Embargo to) {
+        ChangeReport change = new ChangeReport();
+        if (to.getPublishStartInstant() == null && !Objects.equals(to.getPublishStartInstant(), to.getPublishStartInstant())) {
             to.setPublishStartInstant(from.getPublishStartInstant());
+            change.change(PUBLISH_START);
         }
-        if (to.getPublishStopInstant() == null) {
+        if (to.getPublishStopInstant() == null && !Objects.equals(to.getPublishStopInstant(), to.getPublishStopInstant())) {
             to.setPublishStopInstant(from.getPublishStopInstant());
+            change.change(PUBLISH_STOP);
         }
+        return change;
     }
 
-    public static void copyIfSourceSet(ReadonlyEmbargo from, Embargo to) {
-        if (from.getPublishStartInstant() != null) {
+    public static ChangeReport copyIfSourceSet(ReadonlyEmbargo from, Embargo to) {
+        ChangeReport change = new ChangeReport();
+        if (from.getPublishStartInstant() != null && ! Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
             to.setPublishStartInstant(from.getPublishStartInstant());
+            change.change(PUBLISH_START);
         }
-        if (from.getPublishStopInstant() != null) {
+        if (from.getPublishStopInstant() != null && ! Objects.equals(to.getPublishStopInstant(), from.getPublishStopInstant())) {
             to.setPublishStopInstant(from.getPublishStopInstant());
+            change.change(PUBLISH_STOP);
         }
+        return change;
     }
 
     /**
      * Takes from both the start and stop of the two embargo's the least restrictive one and copies them to the second.
      */
-    public static void copyIfMoreRestricted(ReadonlyEmbargo from, Embargo to) {
+    public static ChangeReport copyIfMoreRestricted(ReadonlyEmbargo from, Embargo to) {
+        ChangeReport change = new ChangeReport();
         if (from.getPublishStartInstant() != null &&
             (to.getPublishStartInstant() == null || to.getPublishStartInstant().isBefore(from.getPublishStartInstant()))
             ) {
             to.setPublishStartInstant(from.getPublishStartInstant());
+            change.change(PUBLISH_START);
         }
         if (from.getPublishStopInstant() != null &&
             (to.getPublishStopInstant() == null || to.getPublishStopInstant().isAfter(from.getPublishStopInstant()))
             ) {
             to.setPublishStopInstant(from.getPublishStopInstant());
+            change.change(PUBLISH_STOP);
         }
+        return change;
     }
 
     /**
@@ -61,17 +85,23 @@ public class Embargos {
      *
      * If they were connected, the result is the union.
      */
-     public static void copyIfLessRestricted(ReadonlyEmbargo from, Embargo to) {
+     public static ChangeReport copyIfLessRestricted(ReadonlyEmbargo from, Embargo to) {
+         ChangeReport change = new ChangeReport();
+
          if (from.getPublishStartInstant() == null ||
             (to.getPublishStartInstant() != null && to.getPublishStartInstant().isAfter(from.getPublishStartInstant()))
             ) {
             to.setPublishStartInstant(from.getPublishStartInstant());
+             change.change(PUBLISH_START);
         }
         if (from.getPublishStopInstant() == null ||
             (to.getPublishStopInstant() != null && to.getPublishStopInstant().isBefore(from.getPublishStopInstant()))
             ) {
             to.setPublishStopInstant(from.getPublishStopInstant());
+            change.change(PUBLISH_STOP);
+
         }
+        return change;
     }
 
      /**
@@ -81,14 +111,17 @@ public class Embargos {
      *
      * If they were connected, the result is the union.
      */
-     public static void copyIfLessRestrictedOrTargetUnset(ReadonlyEmbargo from, Embargo to) {
+     public static ChangeReport copyIfLessRestrictedOrTargetUnset(ReadonlyEmbargo from, Embargo to) {
+         ChangeReport change = new ChangeReport();
          if (from.getPublishStartInstant() == null || to.getPublishStartInstant() == null || to.getPublishStartInstant().isAfter(from.getPublishStartInstant())) {
              to.setPublishStartInstant(from.getPublishStartInstant());
+             change.change(PUBLISH_START);
          }
          if (from.getPublishStopInstant() == null || to.getPublishStopInstant() == null || to.getPublishStopInstant().isBefore(from.getPublishStopInstant())) {
             to.setPublishStopInstant(from.getPublishStopInstant());
-        }
-
+             change.change(PUBLISH_STOP);
+         }
+         return change;
     }
 
     public static ReadonlyEmbargo readyOnly(final Embargo embargo) {
