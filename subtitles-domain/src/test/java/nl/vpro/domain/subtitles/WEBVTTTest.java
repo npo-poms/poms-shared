@@ -174,5 +174,7 @@ public class WEBVTTTest {
             log.info("{}:{}", cue, cue.asRange());
             assertThat(cue.getSequence()).isNotNull();
         }
+        assertThat(cues.get(6).getContent()).isEqualTo("De afgelopen vier jaar\n" +
+            "hebben we een aantal geliefde...");
     }
 }
