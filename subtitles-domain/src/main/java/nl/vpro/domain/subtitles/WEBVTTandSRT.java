@@ -153,6 +153,9 @@ public class WEBVTTandSRT {
             if (offset == null) {
                 offset = Duration.ZERO;
             }
+            if (split.length < 3) {
+                throw new IllegalArgumentException("Timeline could not be parsed " + timeLine);
+            }
             String start = split[0];
             String arrow = split[1];
             String end = split[2];
@@ -263,7 +266,7 @@ public class WEBVTTandSRT {
         }
         builder.append("\n");
         if (cue.getContent() != null) {
-            builder.append(cue.getContent().replaceAll("\\s+", " "));
+            builder.append(cue.getContent());//replaceAll("\\s+", " "));
         }
         builder.append("\n\n");
         return builder;

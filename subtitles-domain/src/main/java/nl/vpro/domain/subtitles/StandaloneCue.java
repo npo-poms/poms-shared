@@ -12,6 +12,7 @@ import lombok.ToString;
 import java.time.Duration;
 import java.util.Locale;
 
+import javax.annotation.Nonnull;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -50,14 +51,21 @@ public class StandaloneCue extends Cue {
     }
 
     public static StandaloneCue of(Cue cue, SubtitlesId subtitles) {
-        return new StandaloneCue(cue, subtitles.getLanguage(), subtitles.getType());
+        return of(cue, subtitles.getLanguage(), subtitles.getType());
+    }
+
+    public static StandaloneCue of(Cue cue, Locale language, SubtitlesType type) {
+        if (cue == null) {
+            return null;
+        }
+        return new StandaloneCue(cue, language, type);
     }
 
     protected StandaloneCue() {
 
     }
 
-    public StandaloneCue(Cue cue, Locale language, SubtitlesType type) {
+    public StandaloneCue(@Nonnull Cue cue, Locale language, SubtitlesType type) {
         super(cue);
         this.language = language;
         this.type = type;
