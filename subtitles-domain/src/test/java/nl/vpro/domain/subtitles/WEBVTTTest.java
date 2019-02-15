@@ -141,8 +141,11 @@ public class WEBVTTTest {
             log.info("{}:{}", cue, cue.asRange());
             assertThat(cue.getSequence()).isNotNull();
         }
+        assertThat(cues.get(1).getSettings().getValue()).isEqualTo("A:start ");
         assertThat(cues.get(6).getContent()).isEqualTo("De afgelopen vier jaar\n" +
             "hebben we een aantal geliefde...");
+
+
     }
 >>>>>>> 4397357a5... NPA-470 Test case.
 }
