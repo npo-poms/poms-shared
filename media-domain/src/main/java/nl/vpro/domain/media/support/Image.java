@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.ChangeReport;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Xmlns;
@@ -52,7 +53,6 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  * </p>
  *
  * @author Roelof Jan Koekoek
- * @see OwnerType
  * @since 0.4
  */
 @Entity
@@ -489,15 +489,17 @@ public class Image extends PublishableObject<Image>
     }
 
     @Override
-    public void copyFrom(@Nonnull Metadata<?> metadata) {
-        Metadata.super.copyFrom(metadata);
+    public ChangeReport copyFrom(@Nonnull Metadata<?> metadata) {
+        ChangeReport change = Metadata.super.copyFrom(metadata);
         if (metadata.getImageUri() != null) {
             if (imageUri == null) {
                 setImageUri(metadata.getImageUri());
+                change.change();;
             } else if (!Objects.equals(imageUri, metadata.getImageUri())) {
                 log.warn("Can't update imageUri of {} (from {})", this, metadata);
             }
         }
+        return change;
     }
 
     @Override
