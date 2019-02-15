@@ -107,4 +107,42 @@ public class WEBVTTTest {
         assertThat(duration).isEqualTo(Duration.ofSeconds(20));
     }
 
+<<<<<<< HEAD
+=======
+    @Test
+    public void parseWithoutCuesWithComments() {
+        InputStream example = getClass().getResourceAsStream("/POMS_VPRO_4981202.vtt");
+        List<Cue> cues = SubtitlesUtil.fillCueNumber(WEBVTTandSRT.parseWEBVTT("bla", example)).collect(Collectors.toList());
+
+        assertThat(cues).hasSize(430);
+        for (Cue cue : cues) {
+            assertThat(cue.getSequence()).isNotNull();
+        }
+    }
+
+    @Test
+    public void MSE4363() throws IOException {
+        InputStream example = getClass().getResourceAsStream("/WO_NTR_15099292.srt");
+        Subtitles subtitles = Subtitles.builder().value(example).format(SubtitlesFormat.SRT).build();
+        CountedIterator<StandaloneCue> parsed = SubtitlesUtil.standaloneIterator(subtitles, true, true);
+        SubtitlesUtil.stream(parsed, SubtitlesFormat.WEBVTT, System.out);
+
+
+    }
+
+
+    @Test
+    public void parseWithCommentsAndNewlines() {
+        InputStream example = getClass().getResourceAsStream("/WO_NPO_14933889.vtt");
+        List<Cue> cues = SubtitlesUtil.fillCueNumber(WEBVTTandSRT.parseWEBVTT("bla", example)).collect(Collectors.toList());
+
+        assertThat(cues).hasSize(10);
+        for (Cue cue : cues) {
+            log.info("{}:{}", cue, cue.asRange());
+            assertThat(cue.getSequence()).isNotNull();
+        }
+        assertThat(cues.get(6).getContent()).isEqualTo("De afgelopen vier jaar\n" +
+            "hebben we een aantal geliefde...");
+    }
+>>>>>>> 4397357a5... NPA-470 Test case.
 }
