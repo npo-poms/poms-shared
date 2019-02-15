@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -12,6 +13,8 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.apache.commons.lang3.StringUtils;
+
+import nl.vpro.util.SkipAtStartInputStream;
 
 /**
  * @author Michiel Meeuwissen
@@ -24,7 +27,7 @@ public class WEBVTTandSRT {
     static final String WEBVTT_INTRO = "WEBVTT";
 
     public static final Charset SRT_CHARSET = SubtitlesFormat.SRT.getCharset();
-    public static final Charset VTT_CHARSET = Charset.forName("UTF-8");
+    public static final Charset VTT_CHARSET = StandardCharsets.UTF_8;
 
 
     public static Stream<Cue> parseWEBVTT(String parent, InputStream inputStream) {
@@ -41,6 +44,9 @@ public class WEBVTTandSRT {
     }
 
     public static Stream<Cue> parseSRT(String parent, Duration offset, InputStream inputStream, Charset charset) {
+        if (! StandardCharsets.UTF_8.equals(charset)) {
+            inputStream = SkipAtStartInputStream.skipUnicodeByteOrderMarks(inputStream);
+        }
         return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? SRT_CHARSET : charset), ",");
     }
 
