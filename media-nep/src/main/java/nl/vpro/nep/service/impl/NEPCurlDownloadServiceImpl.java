@@ -14,6 +14,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 import org.apache.http.client.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,7 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
     private final NEPSSHJDownloadServiceImpl sshj;
 
 
+    @Inject
     public NEPCurlDownloadServiceImpl(
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
