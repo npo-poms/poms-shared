@@ -17,6 +17,9 @@ import org.apache.commons.lang3.StringUtils;
 import nl.vpro.util.SkipAtStartInputStream;
 
 /**
+ * https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_A
+ * TODO: we support only a subtet of WEBVTT.
+ *
  * @author Michiel Meeuwissen
  * @since 4.8
  */
@@ -50,7 +53,7 @@ public class WEBVTTandSRT {
         return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? SRT_CHARSET : charset), ",");
     }
 
-    private static final Pattern INTEGER = Pattern.compile("\\d+");
+    private static final Pattern IDENTIFIER = Pattern.compile("\\d+"); // TODO this may also not be integer, but any other strings.
 
     static Stream<Cue> parse(String parent, Duration offset,  Reader reader, String decimalSeparator) {
         final Iterator<String> stream = new BufferedReader(reader)
@@ -105,7 +108,7 @@ public class WEBVTTandSRT {
                             }
                             readIntro = true;
 
-                            if (l.startsWith("NOTE")) {
+                            if (l.startsWith("NOTE") || l.startsWith("STYLE")) {
                                 while (stream.hasNext()) {
                                     l = stream.next();
                                     if (StringUtils.isBlank(l)) {
@@ -122,7 +125,7 @@ public class WEBVTTandSRT {
                         }
                     }
                     if (headLine != null) {
-                        if (INTEGER.matcher(headLine).matches()) {
+                        if (IDENTIFIER.matcher(headLine).matches()) {
                             cueNumber = Integer.parseInt(headLine);
                             if (stream.hasNext()) {
                                 timeLine = stream.next();
