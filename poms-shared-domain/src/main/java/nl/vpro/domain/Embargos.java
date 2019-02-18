@@ -21,11 +21,11 @@ public class Embargos {
     public static ChangeReport copy(ReadonlyEmbargo from, Embargo to) {
         ChangeReport change = new ChangeReport();
 
-        if (!Objects.equals(to.getPublishStartInstant(), to.getPublishStartInstant())) {
+        if (!Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
             to.setPublishStartInstant(from.getPublishStartInstant());
             change.change(PUBLISH_START);
         }
-        if (!Objects.equals(to.getPublishStopInstant(), to.getPublishStopInstant())) {
+        if (!Objects.equals(to.getPublishStopInstant(), from.getPublishStopInstant())) {
             to.setPublishStopInstant(from.getPublishStopInstant());
             change.change(PUBLISH_STOP);
         }
@@ -34,11 +34,11 @@ public class Embargos {
 
     public static ChangeReport copyIfTargetUnset(ReadonlyEmbargo from, Embargo to) {
         ChangeReport change = new ChangeReport();
-        if (to.getPublishStartInstant() == null && !Objects.equals(to.getPublishStartInstant(), to.getPublishStartInstant())) {
+        if (to.getPublishStartInstant() == null && !Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
             to.setPublishStartInstant(from.getPublishStartInstant());
             change.change(PUBLISH_START);
         }
-        if (to.getPublishStopInstant() == null && !Objects.equals(to.getPublishStopInstant(), to.getPublishStopInstant())) {
+        if (to.getPublishStopInstant() == null && !Objects.equals(to.getPublishStopInstant(), from.getPublishStopInstant())) {
             to.setPublishStopInstant(from.getPublishStopInstant());
             change.change(PUBLISH_STOP);
         }
