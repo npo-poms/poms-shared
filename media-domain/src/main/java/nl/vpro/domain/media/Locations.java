@@ -212,7 +212,7 @@ public class Locations {
     private static Program addLocation(
         @Nonnull Program program,
         @Nonnull Platform platform,
-        @Nonnull Encryption encryption,
+        Encryption encryption,
         @Nonnull String pubOptie, OwnerType owner,
         @Nonnull Set<OwnerType> replaces) {
         String locationUrl = createLocationUrl(program, platform, encryption, pubOptie);
