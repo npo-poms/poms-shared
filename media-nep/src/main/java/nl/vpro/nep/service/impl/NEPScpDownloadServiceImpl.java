@@ -13,6 +13,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -43,6 +44,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final static Map<String, File> knownHosts = new HashMap<>();
 
 
+    @Inject
     public NEPScpDownloadServiceImpl(
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
