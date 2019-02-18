@@ -6,7 +6,6 @@ env:
 jdk:
 - oraclejdk8
 sudo: false
-script: mvn -fn clean test install
+script: mvn --fail-never -T 1C -Pdeploy,ossrh clean test deploy --settings .travis-settings.xml -Dgpg.skip=true
 after_success:
-- mvn -Pdeploy,ossrh deploy --settings .travis-settings.xml -DskipTests=true -Dgpg.skip=true  -B
 - bash <(curl -s https://codecov.io/bash)
