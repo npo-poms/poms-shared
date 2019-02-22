@@ -4,7 +4,6 @@
  */
 package nl.vpro.api.rs.v3.media;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -188,7 +187,9 @@ public interface MediaRestService {
     MediaResult listRelated(
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @QueryParam("partyId") String partyId
+
     );
 
     @POST
@@ -198,7 +199,8 @@ public interface MediaRestService {
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @QueryParam("partyId") String partyId
     );
 
     @GET
