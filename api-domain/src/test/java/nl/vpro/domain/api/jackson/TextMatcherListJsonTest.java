@@ -61,7 +61,11 @@ public class TextMatcherListJsonTest {
     public void testGetValueFromJsonInverse() throws Exception {
         TextMatcherList matcher = Jackson2Mapper.INSTANCE.readValue("{\"value\":[{\"value\":\"title\",\"match\":\"not\"}],\"match\":\"not\"}", TextMatcherList.class);
 
+<<<<<<< HEAD
         assertThat(matcher.iterator()).toIterable().hasSize(1);
+=======
+        assertThat(matcher.iterator()).asList().hasSize(1);
+>>>>>>> edaf1b8d4... Didnt' compile any more with new assertj.
         assertThat(matcher.iterator().next()).isEqualTo(new TextMatcher("title", Match.NOT));
     }
 }
