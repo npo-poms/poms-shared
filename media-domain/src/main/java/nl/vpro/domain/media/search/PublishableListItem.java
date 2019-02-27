@@ -89,6 +89,12 @@ public abstract class PublishableListItem implements Embargo {
     }
 
     public Long getId() {
+        if (id == null) {
+            if (urn != null) {
+                int colon = urn.lastIndexOf(':');
+                return Long.parseLong(urn.substring(colon + 1));
+            }
+        }
         return id;
     }
 
