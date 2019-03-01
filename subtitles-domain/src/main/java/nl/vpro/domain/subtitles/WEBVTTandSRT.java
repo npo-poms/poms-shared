@@ -222,7 +222,7 @@ public class WEBVTTandSRT {
         }
         builder.append("\n");
         if (cue.getContent() != null) {
-            builder.append(cue.getContent().replaceAll("\\s+", " "));
+            builder.append(cue.getContent());//replaceAll("\\s+", " "));
         }
         builder.append("\n\n");
         return builder;
