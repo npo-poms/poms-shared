@@ -183,22 +183,26 @@ public interface MediaRestService {
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
     );
 
+
     @GET
-    @Path("/{mid}/related")
+    @Path("/{mid:.*}/related")
     MediaResult listRelated(
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @QueryParam("partyId") String partyId
+
     );
 
     @POST
-    @Path("/{mid}/related")
+    @Path("/{mid:.*}/related")
     MediaSearchResult findRelated(
         @Valid MediaForm form,
-        @PathParam(ID) String mid,
+        @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @QueryParam("partyId") String partyId
     );
 
     @GET

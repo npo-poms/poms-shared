@@ -56,7 +56,8 @@ public interface MediaService extends MediaProvider {
 
     MediaSearchResult findRelated(MediaObject media, String profile, MediaForm form, Integer max) throws ProfileNotFoundException;
 
-    MediaSearchResult findRelatedInTopspin(MediaObject media, String profile, MediaForm form, Integer max) throws ProfileNotFoundException;
+
+    MediaSearchResult findRelatedInTopspin(MediaObject media, String profile, MediaForm form, Integer max, String partyId, String clazz) throws ProfileNotFoundException;
 
     MediaType getType(String id);
 
