@@ -1,4 +1,4 @@
-package nl.vpro.domain.support;
+package nl.vpro.domain.media.support;
 
 import lombok.Getter;
 import lombok.NonNull;
