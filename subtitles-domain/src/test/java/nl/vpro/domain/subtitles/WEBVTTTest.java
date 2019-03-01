@@ -44,13 +44,15 @@ public class WEBVTTTest {
                 "\n" +
                 "2\n" +
                 "00:00:04.200 --> 00:00:08.060\n" +
-                "*'k Heb een paar puntjes die ik met je wil bespreken\n" +
+                "*'k Heb een paar puntjes\n" +
+                "die ik met je wil bespreken\n" +
                 "\n" +
                 "3\n" +
                 "00:00:08.110 --> 00:00:11.060\n" +
-                "*Dat wil ik doen in jouw mobiele bakkerij\n" +
-                "\n" +
-                "");
+                "*Dat wil ik doen\n" +
+                "in jouw mobiele bakkerij\n\n"
+        );
+
     }
 
     @Test
