@@ -53,6 +53,10 @@
     </xs:complexContent>
   </xs:complexType>
 
+  <xs:simpleType name="licenseEnum">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+
   <xs:simpleType name="ownerTypeEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="BROADCASTER"/>
@@ -91,19 +95,6 @@
       <xs:enumeration value="REVOKED"/>
       <xs:enumeration value="FOR DELETION"/>
       <xs:enumeration value="DELETED"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="licenseEnum">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="COPYRIGHTED"/>
-      <xs:enumeration value="PUBLIC_DOMAIN"/>
-      <xs:enumeration value="CC_BY"/>
-      <xs:enumeration value="CC_BY_SA"/>
-      <xs:enumeration value="CC_BY_ND"/>
-      <xs:enumeration value="CC_BY_NC"/>
-      <xs:enumeration value="CC_BY_NC_SA"/>
-      <xs:enumeration value="CC_BY_NC_ND"/>
     </xs:restriction>
   </xs:simpleType>
 
