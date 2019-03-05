@@ -7,6 +7,16 @@ import lombok.NonNull;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Recommendation {
-    @NonNull 
+    @NonNull
     private String midRef;
+
+    private Float score;
+
+    private String recommender;
+
+    public Recommendation(String m) {
+        this.midRef = m;
+    }
+
+
 }

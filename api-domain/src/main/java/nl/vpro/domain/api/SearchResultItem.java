@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,9 +38,13 @@ public class SearchResultItem<T> {
         @JsonSubTypes.Type(value = Segment.class, name = "segment"),
         @JsonSubTypes.Type(value = Page.class, name = "page")
     })
+    @Getter
+    @Setter
     private T result;
 
     @XmlAttribute
+    @Getter
+    @Setter
     private Float score;
 
     @XmlElement(name = "highlight")
@@ -55,22 +62,6 @@ public class SearchResultItem<T> {
         this.result = result;
         this.score = score;
         this.highlights = highlights;
-    }
-
-    public T getResult() {
-        return result;
-    }
-
-    public void setResult(T result) {
-        this.result = result;
-    }
-
-    public Float getScore() {
-        return score;
-    }
-
-    public void setScore(Float score) {
-        this.score = score;
     }
 
     public List<HighLight> getHighlights() {

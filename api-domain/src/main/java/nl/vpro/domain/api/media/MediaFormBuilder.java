@@ -22,13 +22,21 @@ import nl.vpro.util.DateUtils;
  */
 public class MediaFormBuilder extends AbstractFormBuilder {
 
-    private final MediaForm form = new MediaForm();
+    private final MediaForm form;
 
-    private MediaFormBuilder() {
+    private MediaFormBuilder(MediaForm form) {
+        this.form = form;
     }
 
     public static MediaFormBuilder form() {
-        return new MediaFormBuilder();
+        return from(new MediaForm());
+    }
+
+    public static MediaFormBuilder from(MediaForm form) {
+        if (form == null) {
+            form = new MediaForm();
+        }
+        return new MediaFormBuilder(form);
     }
 
     public static MediaForm emptyForm() {
