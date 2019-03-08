@@ -13,6 +13,10 @@ public class Recommendation {
     @NonNull
     private String midRef;
 
+    private Float score;
+
+    private String recommender;
+
     public Recommendation(String m) {
         this.midRef = m;
     }
