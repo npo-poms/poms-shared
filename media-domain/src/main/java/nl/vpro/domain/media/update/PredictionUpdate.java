@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.media.Encryption;
 import nl.vpro.domain.media.Platform;
 import nl.vpro.domain.media.Prediction;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -48,6 +49,9 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
     @XmlValue
     @JsonProperty("platform")
     protected Platform platform;
+
+    @XmlAttribute
+    protected Encryption encryption;
 
     public PredictionUpdate() {
 
