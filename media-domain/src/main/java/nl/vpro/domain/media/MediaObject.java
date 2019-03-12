@@ -315,11 +315,16 @@ public abstract class MediaObject
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
     protected Set<Tag> tags;
 
+
+    @OneToMany(orphanRemoval = true, cascade=ALL)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @OrderColumn(name = "list_index", nullable = false)
+    protected List<Intention> intentions;
+
     protected String source;
 
     @ElementCollection
     @Enumerated(EnumType.STRING)
-
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
