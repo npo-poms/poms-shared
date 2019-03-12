@@ -9,32 +9,31 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 
-@EqualsAndHashCode(callSuper = true)
-@Entity
-@XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(name = "intention")
-@Data
-public class Intention extends DomainObject implements Serializable, Ownable, Child<MediaObject> {
 
+@Entity
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlType(name = "intentionType")
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class Intention extends DomainObject implements Serializable, Ownable, Child<MediaObject> {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
     private MediaObject parent;
 
     @Enumerated(EnumType.STRING)
+    @XmlAttribute
     private OwnerType owner;
 
     @Enumerated(EnumType.STRING)
+    @XmlAttribute(name = "type")
     private IntentionType value;
 
 
@@ -46,8 +45,6 @@ public class Intention extends DomainObject implements Serializable, Ownable, Ch
     @Getter
     @Setter
     private Integer listIndex = 0;
-
-
 
 
 }

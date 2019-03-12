@@ -51,6 +51,7 @@
           <xs:element name="description" type="descriptionType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="intention" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -217,6 +218,16 @@
         <xs:attribute ref="xml:lang"/>
       </xs:extension>
     </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="intentionType">
+    <xs:complexContent>
+      <xs:extension base="shared:domainObjectType">
+        <xs:sequence/>
+        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+        <xs:attribute name="type" type="intentionEnum"/>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
 
   <xs:complexType name="countryType">
@@ -530,6 +541,17 @@
       <xs:enumeration value="LEXICO"/>
       <xs:enumeration value="WORK"/>
       <xs:enumeration value="ABBREVIATION"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="intentionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INFORM_NEWS_AND_FACTS"/>
+      <xs:enumeration value="INFORM_INDEPTH"/>
+      <xs:enumeration value="INFORM_GENERAL"/>
+      <xs:enumeration value="ENTERTAINMENT_LEASURE"/>
+      <xs:enumeration value="ENTERTAINMENT_INFORMATIVE"/>
+      <xs:enumeration value="ACTIVATING"/>
     </xs:restriction>
   </xs:simpleType>
 

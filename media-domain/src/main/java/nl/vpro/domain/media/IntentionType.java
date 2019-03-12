@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlEnum
-@XmlType(name = "avTypeEnum")
+@XmlType(name = "intentionEnum")
 public enum IntentionType {
     INFORM_NEWS_AND_FACTS {
         @Override
