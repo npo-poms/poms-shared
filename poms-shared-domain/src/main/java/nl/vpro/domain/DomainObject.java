@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
     @Id
-    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize=1)
+    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
     @XmlTransient // Don't remove!
     @Getter

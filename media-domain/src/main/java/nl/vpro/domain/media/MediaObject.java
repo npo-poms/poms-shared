@@ -316,9 +316,13 @@ public abstract class MediaObject
     protected Set<Tag> tags;
 
 
-    @OneToMany(orphanRemoval = true, cascade=ALL)
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Getter
+    @Setter
+    @OneToMany(orphanRemoval = true, cascade = ALL)
+    @JoinColumn(name = "parent_id")
     @OrderColumn(name = "list_index", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
     protected List<Intention> intentions;
 
     protected String source;

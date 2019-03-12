@@ -1,31 +1,53 @@
 package nl.vpro.domain.media;
 
 import lombok.Data;
-import nl.vpro.domain.Xmlns;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+import nl.vpro.domain.Child;
+import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-import java.io.Serializable;
-
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(name = "intention", namespace = Xmlns.MEDIA_NAMESPACE)
+@XmlType(name = "intention")
 @Data
-public class Intention implements Serializable, Ownable {
+public class Intention extends DomainObject implements Serializable, Ownable, Child<MediaObject> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
-    @Enumerated(value=EnumType.STRING)
+    @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
+    @XmlTransient
+    private MediaObject parent;
+
+    @Enumerated(EnumType.STRING)
     private OwnerType owner;
 
-    @Enumerated(value=EnumType.STRING)
-    private IntentionType intentionValue;
+    @Enumerated(EnumType.STRING)
+    private IntentionType value;
+
+
+    @Column(name = "list_index", nullable = true
+        // hibernate sucks incredibly
+    )
+    @XmlTransient
+    @NotNull
+    @Getter
+    @Setter
+    private Integer listIndex = 0;
+
+
 
 
 }
