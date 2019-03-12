@@ -89,6 +89,7 @@ import static nl.vpro.domain.media.MediaObject.*;
         "descriptions",
         "genres",
         "tags",
+        "intentions",
         "source",
         "countries",
         "languages",
@@ -139,6 +140,7 @@ import static nl.vpro.domain.media.MediaObject.*;
     "descriptions",
     "genres",
     "tags",
+    "intentions",
     "source",
     "hasSubtitles",
     "countries",
@@ -323,6 +325,9 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
+    @XmlElement(name = "intention")
+    @JsonProperty("intentions")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     protected List<Intention> intentions;
 
     protected String source;
