@@ -574,23 +574,23 @@
 
   <xs:simpleType name="roleType">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="DIRECTOR"/>
+      <xs:enumeration value="CHIEF_EDITOR"/>
+      <xs:enumeration value="EDITOR"/>
+      <xs:enumeration value="PRESENTER"/>
+      <xs:enumeration value="INTERVIEWER"/>
+      <xs:enumeration value="PRODUCER"/>
+      <xs:enumeration value="RESEARCH"/>
+      <xs:enumeration value="GUEST"/>
+      <xs:enumeration value="REPORTER"/>
       <xs:enumeration value="ACTOR"/>
       <xs:enumeration value="COMMENTATOR"/>
       <xs:enumeration value="COMPOSER"/>
-      <xs:enumeration value="PARTICIPANT"/>
-      <xs:enumeration value="CHIEF_EDITOR"/>
-      <xs:enumeration value="GUEST"/>
-      <xs:enumeration value="INTERVIEWER"/>
-      <xs:enumeration value="NEWS_PRESENTER"/>
-      <xs:enumeration value="THEME"/>
-      <xs:enumeration value="PRESENTER"/>
-      <xs:enumeration value="PRODUCER"/>
-      <xs:enumeration value="EDITOR"/>
-      <xs:enumeration value="DIRECTOR"/>
-      <xs:enumeration value="RESEARCH"/>
       <xs:enumeration value="SCRIPTWRITER"/>
+      <xs:enumeration value="NEWS_PRESENTER"/>
       <xs:enumeration value="SIDEKICK"/>
-      <xs:enumeration value="REPORTER"/>
+      <xs:enumeration value="SUBJECT"/>
+      <xs:enumeration value="PARTICIPANT"/>
       <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>

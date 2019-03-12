@@ -2,14 +2,12 @@ package nl.vpro.domain.media.gtaa;
 
 
 import lombok.*;
-import nl.vpro.domain.PersonInterface;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @NoArgsConstructor
 @XmlRootElement
-@Builder
 public class GTAANewThesaurusObject {
 
     @Getter

@@ -62,7 +62,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             HttpPost httpPost = new HttpPost(itemizeUrl);
             httpPost.addHeader(new BasicHeader("Authorization", itemizeKey));
             httpPost.addHeader(new BasicHeader("Accept", JSON.toString()));
-
+            log.debug("curl -XPOST -H'Content-Type: application/json' -H'Authorization: {}' -H'Accept: {}' {} --data '{}'", itemizeKey, JSON.toString(), itemizeUrl, json);
             httpPost.setEntity(entity);
             HttpResponse response = httpClient.execute(httpPost, clientContext);
 
