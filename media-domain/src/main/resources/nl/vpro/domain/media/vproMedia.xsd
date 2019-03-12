@@ -538,7 +538,14 @@
       <xs:enumeration value="COMMENTATOR"/>
       <xs:enumeration value="SCRIPTWRITER"/>
       <xs:enumeration value="COMPOSER"/>
-      <xs:enumeration value="UNDEFINED"/>
+      <xs:enumeration value="SUBJECT">
+
+      </xs:enumeration>
+      <xs:enumeration value="PARTICIPANT">
+      </xs:enumeration>
+
+
+
 
       <xs:enumeration value="SIDEKICK">
         <xs:annotation>
@@ -550,6 +557,7 @@
           <xs:documentation>Introduced for MediaConnect sync. This is experimental</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+       <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>
 

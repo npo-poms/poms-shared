@@ -4,6 +4,70 @@ import javax.xml.bind.annotation.XmlEnum;
 
 @XmlEnum
 public enum RoleType {
+
+    DIRECTOR {
+
+        @Override
+        public String toString() {
+            return "Regisseur";
+        }
+    },
+    CHIEF_EDITOR {
+
+        @Override
+        public String toString() {
+            return "Eindredactie";
+        }
+    },
+    EDITOR {
+
+        @Override
+        public String toString() {
+            return "Redacteur";
+        }
+    },
+    PRESENTER {
+
+        @Override
+        public String toString() {
+            return "Presentator";
+        }
+    },
+    INTERVIEWER {
+
+        @Override
+        public String toString() {
+            return "Interviewer";
+        }
+    },
+    PRODUCER {
+
+        @Override
+        public String toString() {
+            return "Productie";
+        }
+    },
+    RESEARCH {
+
+        @Override
+        public String toString() {
+            return "Research";
+        }
+    },
+    GUEST {
+
+        @Override
+        public String toString() {
+            return "Gast";
+        }
+    },
+    REPORTER {
+
+        @Override
+        public String toString() {
+            return "Verslaggever";
+        }
+    },
     ACTOR {
 
         @Override
@@ -25,31 +89,11 @@ public enum RoleType {
             return "Componist";
         }
     },
-    PARTICIPANT {
-        @Override
-        public String toString() {
-            return "Deelnemer";
-        }
-    },
-    CHIEF_EDITOR {
+    SCRIPTWRITER {
 
         @Override
         public String toString() {
-            return "Eindredactie";
-        }
-    },
-    GUEST {
-
-        @Override
-        public String toString() {
-            return "Gast";
-        }
-    },
-    INTERVIEWER {
-
-        @Override
-        public String toString() {
-            return "Interviewer";
+            return "Scenario";
         }
     },
     /**
@@ -63,55 +107,7 @@ public enum RoleType {
         }
 
     },
-    THEME {
-        @Override
-        public String toString() {
-            return "Onderwerp";
-        }
-    },
-    PRESENTER {
-
-        @Override
-        public String toString() {
-            return "Presentator";
-        }
-    },
-    PRODUCER {
-
-        @Override
-        public String toString() {
-            return "Productie";
-        }
-    },
-    EDITOR {
-
-        @Override
-        public String toString() {
-            return "Redacteur";
-        }
-    },
-    DIRECTOR {
-        @Override
-        public String toString() {
-            return "Regisseur";
-        }
-    },
-
-    RESEARCH {
-
-        @Override
-        public String toString() {
-            return "Research";
-        }
-    },
-    SCRIPTWRITER {
-
-        @Override
-        public String toString() {
-            return "Scenario";
-        }
-    },
-    /**
+     /**
      * For radio shows this seems useful
      * @since 5.9
      */
@@ -122,11 +118,24 @@ public enum RoleType {
         }
 
     },
-    REPORTER {
-
+    /**
+     * https://jira.vpro.nl/browse/MSE-4371
+     * @since 5.11
+     */
+    SUBJECT {
         @Override
         public String toString() {
-            return "Verslaggever";
+            return "Onderwerp";
+        }
+    },
+    /**
+     * See https://jira.vpro.nl/browse/MSE-4371
+     * @since 5.11
+     */
+    PARTICIPANT {
+        @Override
+        public String toString() {
+            return "Deelnemer";
         }
     },
     UNDEFINED {
