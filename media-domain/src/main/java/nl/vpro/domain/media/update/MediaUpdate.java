@@ -211,6 +211,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected List<ImageUpdate> images;
 
+    protected List<IntentionType> intentions;
+
     @Valid
     protected Asset asset;
 
