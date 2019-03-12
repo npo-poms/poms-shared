@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.util.*;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -155,8 +156,12 @@ public class MediaTable implements Iterable<MediaObject> {
         return "MediaTable " + getGroupTable().size() + " groups " + getProgramTable().size() + " program " + getSchedule();
     }
 
+    @Nonnull
     @Override
     public Iterator<MediaObject> iterator() {
-        return Iterators.concat(getProgramTable().listIterator(), getGroupTable().listIterator());
+        return Iterators.concat(
+            getProgramTable().listIterator(),
+            getGroupTable().listIterator()
+        );
     }
 }
