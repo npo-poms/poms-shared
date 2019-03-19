@@ -644,7 +644,7 @@ public abstract class MediaObject
         return toUpdate;
     }
 
-    protected static <T extends Comparable<T>> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
+    protected static <T extends Comparable<?>> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
         if (toUpdate != null && toUpdate == values) {
             return toUpdate;
         }
@@ -1059,7 +1059,7 @@ public abstract class MediaObject
         return this;
     }
 
-    private <T extends Child<MediaObject>> Set<T> addTo(Set<T> co, T ot) {
+    private <T extends Child<MediaObject> & Comparable<?>> Set<T> addTo(Set<T> co, T ot) {
         if (ot != null) {
             ot.setParent(this);
             if (co == null) {
