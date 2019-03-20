@@ -18,6 +18,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Value;
 
+import nl.vpro.logging.LoggerOutputStream;
 import nl.vpro.nep.service.NEPDownloadService;
 import nl.vpro.util.CommandExecutor;
 import nl.vpro.util.CommandExecutorImpl;
@@ -44,12 +45,14 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final static Map<String, File> knownHosts = new HashMap<>();
 
 
+
     @Inject
     public NEPScpDownloadServiceImpl(
         @Value("${nep.sftp.host}") String ftpHost,
         @Value("${nep.sftp.username}") String username,
         @Value("${nep.sftp.password}") String password,
         @Value("${nep.sftp.hostkey}") String hostkey,
+        @Value("${nep.sftp.scp.useFileCache}") boolean useFileCache,
         @Value("${executables.scp}") List<String> scpExecutables,
         @Value("${executables.sshpass}") List<String> sshpassExecutables
     ) {
@@ -70,8 +73,8 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             scptry = CommandExecutorImpl.builder()
                 .executablesPaths(sshpassExecutables)
                 .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
-                .useFileCache(true)
-                .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-q", "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile))
+                .useFileCache(useFileCache)
+                .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile))
                 .build();
 
 
@@ -87,6 +90,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             properties.getProperty("nep.sftp.username"),
             properties.getProperty("nep.sftp.password"),
             properties.getProperty("nep.sftp.hostkey"),
+            true,
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
             Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass")
         );
@@ -117,7 +121,7 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             checkAvailability(nepFile, timeout, descriptorConsumer);
             try (OutputStream out = outputStream.get()){
                 if (out != null) {
-                    exitCode = scp.execute(out, url, "/dev/stdout");
+                    exitCode = scp.execute(out, LoggerOutputStream.error(log), url, "/dev/stdout");
                 } else {
                     log.warn("Can't download from null stream to " + url);
                 }
