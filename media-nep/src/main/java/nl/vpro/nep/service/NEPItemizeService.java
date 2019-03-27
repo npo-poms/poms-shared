@@ -23,6 +23,7 @@ public interface NEPItemizeService {
      * NEP provides one service for two basicly different things.
      *
      * This grabs a frame from a MID, on a certain offset
+     * @since 5.10
      */
     default void grabScreen(String mid, Duration offset, OutputStream outputStream) {
         String durationString = DurationFormatUtils.formatDuration(offset.toMillis(), "HH:mm:ss.SSS", true);
@@ -33,12 +34,17 @@ public interface NEPItemizeService {
      * NEP provides one service for two basicly different things.
      *
      * This grabs a frame from a live stream, on a certain instant in time
+     * @since 5.10
      */
     default void grabScreen(String channel, Instant instant, OutputStream outputStream) {
         grabScreen(channel, instant.atZone(ZoneId.of("UTC")).toLocalDateTime().toString(), outputStream);
 
     }
 
+    /**
+     * Please use either {@link #grabScreen(String, Duration, OutputStream)} or {@link #grabScreen(String, Instant, OutputStream)}
+     * @since 5.10
+     */
     void grabScreen(String identifier, String time, OutputStream outputStream);
 
 
