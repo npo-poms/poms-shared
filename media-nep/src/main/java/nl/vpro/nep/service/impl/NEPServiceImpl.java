@@ -56,6 +56,12 @@ public class NEPServiceImpl implements NEPService {
         return itemizeService.get().itemize(request);
     }
 
+    @Override
+    public void grabScreen(String identifier, String date, OutputStream outputStream) {
+        itemizeService.get().grabScreen(identifier, date, outputStream);
+
+    }
+
     @Nonnull
     @Override
     public WorkflowExecution transcode(
