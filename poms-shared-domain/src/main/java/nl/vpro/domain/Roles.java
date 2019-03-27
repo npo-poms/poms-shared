@@ -35,8 +35,6 @@ public class Roles {
     public static final String RUNAS_ROLE = "ROLE_RUNAS";
 
 
-    public static final String SCREEN_SUPERADMIN_ROLE = "ROLE_SCREEN_SUPERADMIN";
-
     /**
      * Used by junction only. Has the right to add locations to any object.
      */
@@ -44,8 +42,6 @@ public class Roles {
 
 
     public static final String PUBLISHER_ROLE = "ROLE_MEDIA_PUBLISHER";
-
-    public static final String SCREEN_PUBLISHER_ROLE = "ROLE_SCREEN_PUBLISHER";
 
     /**
      * Support are people at NPO-helpdesk who can see everything, including deleted record, but edit nothing. (MSE-2015)

@@ -74,4 +74,25 @@ public class NEPItemizeServiceImplITest {
 
 
     }
+
+    @Test
+    public void grabScreen() throws IOException {
+        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
+        File out = File.createTempFile("test", ".jpg");
+        itemizer.grabScreen("npo-1dvr", Instant.now().minus(Duration.ofMinutes(1)), new FileOutputStream(out));
+        log.info("Created {} bytes {}", out.length(), out);
+
+
+    }
+
+
+    @Test
+    public void grabScreenMid() throws IOException {
+        NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
+        File out = File.createTempFile("test", ".jpg");
+        itemizer.grabScreen("POW_00683426", Duration.ZERO, new FileOutputStream(out));
+        log.info("Created {} bytes {}", out.length(), out);
+
+
+    }
 }
