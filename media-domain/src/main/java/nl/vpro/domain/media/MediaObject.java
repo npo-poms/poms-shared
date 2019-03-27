@@ -318,8 +318,6 @@ public abstract class MediaObject
     protected Set<Tag> tags;
 
 
-    @Getter
-    @Setter
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
     @OrderColumn(name = "list_index", nullable = false)
@@ -646,7 +644,7 @@ public abstract class MediaObject
         return toUpdate;
     }
 
-    protected static <T> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
+    protected static <T extends Comparable<?>> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
         if (toUpdate != null && toUpdate == values) {
             return toUpdate;
         }
@@ -1061,7 +1059,7 @@ public abstract class MediaObject
         return this;
     }
 
-    private <T extends Child<MediaObject>> Set<T> addTo(Set<T> co, T ot) {
+    private <T extends Child<MediaObject> & Comparable<?>> Set<T> addTo(Set<T> co, T ot) {
         if (ot != null) {
             ot.setParent(this);
             if (co == null) {
@@ -1151,6 +1149,15 @@ public abstract class MediaObject
     @Override
     public void setTags(Set<Tag> tags) {
         this.tags = updateSortedSet(this.tags, tags);
+    }
+
+
+    public List<Intention> getIntentions() {
+        return intentions;
+    }
+
+    public void setIntentions(List<Intention> intentions) {
+        this.intentions = updateList(this.intentions, intentions);
     }
 
     @XmlElement
