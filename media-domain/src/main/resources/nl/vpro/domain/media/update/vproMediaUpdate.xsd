@@ -544,6 +544,7 @@
       <xs:extension base="media:platformTypeEnum">
         <xs:attribute name="publishStart" type="xs:dateTime"/>
         <xs:attribute name="publishStop" type="xs:dateTime"/>
+        <xs:attribute name="encryption" type="media:encryption"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
