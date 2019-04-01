@@ -1160,6 +1160,20 @@ public abstract class MediaObject
         this.intentions = updateList(this.intentions, intentions);
     }
 
+    public MediaObject addIntention(Intention intention) {
+        nullCheck(intention, "intention");
+
+        if (intentions == null) {
+            intentions = new ArrayList<>();
+        }
+
+        if (!intentions.contains(intention)) {
+            intention.setParent(this);
+            intentions.add(intention);
+        }
+        return this;
+    }
+
     @XmlElement
     public String getSource() {
         return source;
