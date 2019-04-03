@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<voorspellingen timestamp="2016-11-29T09:00:10+01:00" startdatum="2016-11-27" einddatum="2016-12-20">
+  <aflevering>
+    <prid>VPWON_1266972</prid>
+    <pridexport>VPWON_1266972</pridexport>
+    <platform>extra</platform>
+    <gestopt>0</gestopt>
+    <titel>Anja den Bok</titel>
+    <uitzendingen>
+      <uitzending>
+        <zender>NED2</zender>
+        <starttijd>2016-11-27T12:31:57+01:00</starttijd>
+        <eindtijd>2016-11-27T12:56:55+01:00</eindtijd>
+      </uitzending>
+    </uitzendingen>
+  </aflevering>
+  <aflevering>
+    <prid>POW_02988504</prid>
+    <pridexport>POW_02988504</pridexport>
+    <platform>extra</platform>
+    <gestopt>0</gestopt>
+    <titel>NOS Journaal</titel>
+    <uitzendingen>
+      <uitzending>
+        <zender>NED1</zender>
+        <starttijd>2016-11-27T12:00:00+01:00</starttijd>
+        <eindtijd>2016-11-27T12:05:00+01:00</eindtijd>
+      </uitzending>
+    </uitzendingen>
+  </aflevering>
+  <!-- actual file is much bigger ~ 1.2 Mb -->
+</voorspellingen>

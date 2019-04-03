@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>
+    NPO Notification XSD 3.2
+    Copyright 2014 NPO
+    </xs:documentation>
+  </xs:annotation>
+  <!-- omroepen container -->
+  <xs:element name="omroepen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="omroep" type="xs:string" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <!-- type container -->
+  <xs:simpleType name="type">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="linear"/>
+      <xs:enumeration value="standalone"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- notify / main container -->
+  <xs:element name="notify">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="guci" type="xs:string"/>
+        <xs:element name="prid" type="xs:string"/>
+        <xs:element name="pridexport" type="xs:string"/>
+        <xs:element name="titel" type="xs:string"/>
+        <xs:element name="wsrid" type="xs:string" minOccurs="0"/>
+        <xs:element name="type" type="type"/>
+        <xs:element name="platform" type="xs:string"/>
+        <xs:element name="puboptie" type="xs:string"/>
+        <xs:element name="videofile" type="xs:string"/>
+        <xs:element ref="omroepen"/>
+      </xs:sequence>
+      <xs:attribute name="timestamp" type="xs:dateTime" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
