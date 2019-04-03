@@ -2,11 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <artifactId>media-parent</artifactId>
-    <groupId>nl.vpro.media</groupId>
+    <groupId>nl.vpro.poms</groupId>
+    <artifactId>poms-shared-parent</artifactId>
     <version>5.11-SNAPSHOT</version>
   </parent>
 
+
+  <groupId>nl.vpro.media</groupId>
   <artifactId>media-npo</artifactId>
 
   <dependencies>
