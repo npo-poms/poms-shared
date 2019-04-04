@@ -408,32 +408,32 @@ public interface MediaTestDataBuilder<
                 .gtaaUri("http://gtaa/1234")
                 .build(),
             Person.builder()
-                    .givenName("Hans")
-                    .familyName("Goedkoop")
-                    .role(RoleType.PRESENTER)
-                    .build(),
+                .givenName("Hans")
+                .familyName("Goedkoop")
+                .role(RoleType.PRESENTER)
+                .build(),
             Person.builder()
-                    .givenName("Meta")
-                    .familyName("de Vries")
-                    .role(RoleType.PRESENTER)
-                    .build(),
+                .givenName("Meta")
+                .familyName("de Vries")
+                .role(RoleType.PRESENTER)
+                .build(),
             Person.builder()
-                    .givenName("Claire")
-                    .familyName("Holt")
-                    .role(RoleType.ACTOR)
-                    .build());
+                .givenName("Claire")
+                .familyName("Holt")
+                .role(RoleType.ACTOR)
+                .build());
     }
 
     default T withIntentions() {
         return intentions(
                 Intention.builder()
-                        .value(IntentionType.ACTIVATING)
-                        .owner(OwnerType.BROADCASTER)
-                        .build(),
+                    .value(IntentionType.ACTIVATING)
+                    .owner(OwnerType.BROADCASTER)
+                    .build(),
                 Intention.builder()
-                        .value(IntentionType.ENTERTAINMENT_INFORMATIVE)
-                        .owner(OwnerType.NPO)
-                        .build()
+                    .value(IntentionType.ENTERTAINMENT_INFORMATIVE)
+                    .owner(OwnerType.NPO)
+                    .build()
         );
     }
 

@@ -1169,6 +1169,7 @@ public abstract class MediaObject
 
         if (!intentions.contains(intention)) {
             intention.setParent(this);
+            intention.setListIndex(intentions.size());
             intentions.add(intention);
         }
         return this;
