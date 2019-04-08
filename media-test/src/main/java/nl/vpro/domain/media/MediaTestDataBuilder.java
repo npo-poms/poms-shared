@@ -111,7 +111,10 @@ public interface MediaTestDataBuilder<
     @Deprecated
     <TT extends MediaBuilder<TT, M>> MediaBuilder<TT, M> getMediaBuilder();
 
-
+    /**
+     * Made object smaller and more predictable
+     * (especially the creationDate we rather want a null)
+     */
     default T lean() {
         return creationDate((Instant) null).workflow(null);
     }
@@ -395,6 +398,7 @@ public interface MediaTestDataBuilder<
     default T withReleaseYear() {
         return releaseYear(Short.valueOf("2004"));
             }
+
     default T withPersons() {
         return persons(
             Person.builder()
@@ -403,9 +407,34 @@ public interface MediaTestDataBuilder<
                 .role(RoleType.DIRECTOR)
                 .gtaaUri("http://gtaa/1234")
                 .build(),
-            new Person("Hans", "Goedkoop", RoleType.PRESENTER),
-            new Person("Meta", "de Vries", RoleType.PRESENTER),
-            new Person("Claire", "Holt", RoleType.ACTOR));
+            Person.builder()
+                    .givenName("Hans")
+                    .familyName("Goedkoop")
+                    .role(RoleType.PRESENTER)
+                    .build(),
+            Person.builder()
+                    .givenName("Meta")
+                    .familyName("de Vries")
+                    .role(RoleType.PRESENTER)
+                    .build(),
+            Person.builder()
+                    .givenName("Claire")
+                    .familyName("Holt")
+                    .role(RoleType.ACTOR)
+                    .build());
+    }
+
+    default T withIntentions() {
+        return intentions(
+                Intention.builder()
+                        .value(IntentionType.ACTIVATING)
+                        .owner(OwnerType.BROADCASTER)
+                        .build(),
+                Intention.builder()
+                        .value(IntentionType.ENTERTAINMENT_INFORMATIVE)
+                        .owner(OwnerType.NPO)
+                        .build()
+        );
     }
 
     default T withAwards() {
