@@ -46,5 +46,9 @@ public class Intention extends DomainObject implements Serializable, Ownable, Ch
     @Setter
     private Integer listIndex = 0;
 
-
+    @lombok.Builder(builderClassName = "Builder")
+    private Intention(IntentionType value, OwnerType owner) {
+        this.value = value;
+        this.owner = owner;
+    }
 }

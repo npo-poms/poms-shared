@@ -121,8 +121,6 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
         this.gtaaRecord = gtaaRecord;
     }
 
-
-
     /**
      * Sets both the given name and the family name by splitting the String.
      */
