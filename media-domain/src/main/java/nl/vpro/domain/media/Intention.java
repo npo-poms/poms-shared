@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,8 +20,8 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionType")
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class Intention extends DomainObject implements Serializable, Ownable, Child<MediaObject> {
+
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
