@@ -326,7 +326,7 @@ public abstract class MediaObject
     @XmlElement(name = "intention")
     @JsonProperty("intentions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    protected List<Intention> intentions;
+    protected List<Intention> intentions = new ArrayList<>();
 
     protected String source;
 
@@ -1163,16 +1163,16 @@ public abstract class MediaObject
     public MediaObject addIntention(Intention intention) {
         nullCheck(intention, "intention");
 
-        if (intentions == null) {
-            intentions = new ArrayList<>();
-        }
-
         if (!intentions.contains(intention)) {
             intention.setParent(this);
             intention.setListIndex(intentions.size());
             intentions.add(intention);
         }
         return this;
+    }
+
+    public boolean removeIntention(Intention intention) {
+        return intentions.remove(intention);
     }
 
     @XmlElement

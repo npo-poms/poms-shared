@@ -693,4 +693,47 @@ public class MediaObjectTest {
 
     }
 
+    @Test
+    public void testAddIntention() {
+        //given a program with Intentions
+        Intention intention1 = Intention.builder().owner(BROADCASTER).value(IntentionType.ENTERTAINMENT_INFORMATIVE).build();
+        Intention intention2 = Intention.builder().owner(BROADCASTER).value(IntentionType.INFORM_INDEPTH).build();
+        Intention intention3 = Intention.builder().owner(NPO).value(IntentionType.INFORM_INDEPTH).build();
+        assertThat(intention1).isNotNull();
+        Program program = MediaBuilder.program().intentions(intention1).build();
+
+        //when I add intentions
+        System.out.println("test");
+        assertThat(program).isNotNull();
+        assertThat(intention1).isNotNull();
+
+        MediaObject newProgram = program.addIntention(intention1);
+        newProgram = program.addIntention(intention2);
+
+        //I expect to find them
+        assertThat(newProgram.getIntentions()).contains(intention1);
+        assertThat(newProgram.getIntentions()).contains(intention2);
+
+    }
+
+    @Test
+    public void testRemoveIntention() {
+        //given a program with Intentions
+        Intention intention1 = Intention.builder().owner(BROADCASTER).value(IntentionType.ENTERTAINMENT_INFORMATIVE).build();
+        Intention intention2 = Intention.builder().owner(BROADCASTER).value(IntentionType.INFORM_INDEPTH).build();
+        Intention intention3 = Intention.builder().owner(NPO).value(IntentionType.INFORM_INDEPTH).build();
+
+        Program program = MediaBuilder.program()
+                .intentions(intention1, intention2, intention3)
+                .build();
+
+        System.out.println("Program:" + program);
+
+        //when I remove an intention
+        program.removeIntention(intention1);
+
+        //I expect not to find it anymore
+        assertThat(program.intentions).doesNotContain(intention1);
+
+    }
 }
