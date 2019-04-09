@@ -14,6 +14,9 @@ public interface OwnedText extends Ownable, TypedText, Comparable<TypedText> {
         return new BasicOwnedText(t.get(), ownerType, t.getType());
     }
 
+    /**
+     * We want to sort first per Type then per Owner.
+     */
     @Override
     default int compareTo(TypedText o) {
         if (o == null) {

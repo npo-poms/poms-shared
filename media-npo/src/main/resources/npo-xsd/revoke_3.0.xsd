@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:annotation>
+    <xs:documentation>
+    NPO Revoke XSD 3.0
+    Copyright 2014 NPO
+    </xs:documentation>
+  </xs:annotation>
+
+  <!-- omroepen container -->
+  <xs:element name="omroepen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="omroep" type="xs:string" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- revoke / main container -->
+  <xs:element name="revoke">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="prid" type="xs:string" />
+        <xs:element name="pridexport" type="xs:string" />
+        <xs:element name="titel" type="xs:string" />
+        <xs:element name="platform" type="xs:string" />
+        <xs:element ref="omroepen" />
+      </xs:sequence>
+      <xs:attribute name="timestamp" type="xs:dateTime" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:annotation>
+    <xs:documentation>
+    NPO Internet VoD Notification XSD 3.0
+    Copyright 2014 NPO
+    </xs:documentation>
+  </xs:annotation>
+
+  <!-- omroepen container -->
+  <xs:element name="omroepen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="omroep" type="xs:string" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- notify / main container -->
+  <xs:element name="notify">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="guci" type="xs:string" />
+        <xs:element name="prid" type="xs:string" />
+        <xs:element name="pridexport" type="xs:string" />
+        <xs:element name="titel" type="xs:string" />
+        <xs:element name="wsrid" type="xs:string" minOccurs="0" />
+        <xs:element name="platform" type="xs:string" fixed="internetvod"/>
+        <xs:element name="puboptie" type="xs:string" />
+        <xs:element ref="omroepen" />
+      </xs:sequence>
+      <xs:attribute name="timestamp" type="xs:dateTime" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

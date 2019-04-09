@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,12 +17,11 @@ import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 
-
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionType")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class Intention extends DomainObject implements Serializable, Ownable, Child<MediaObject> {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
@@ -46,5 +46,25 @@ public class Intention extends DomainObject implements Serializable, Ownable, Ch
     @Setter
     private Integer listIndex = 0;
 
+    public Intention() {}
 
+    @lombok.Builder(builderClassName = "Builder")
+    private Intention(IntentionType value, OwnerType owner) {
+        this.value = value;
+        this.owner = owner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Intention intention = (Intention) o;
+        return owner == intention.owner &&
+                value == intention.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(owner, value);
+    }
 }

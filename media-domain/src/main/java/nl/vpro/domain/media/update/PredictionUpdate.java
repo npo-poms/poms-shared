@@ -59,17 +59,18 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
 
     public static PredictionUpdate of(Prediction prediction) {
         return PredictionUpdate.builder()
-            .platform(prediction.getPlatform())
-            .publishStart(prediction.getPublishStartInstant())
-            .publishStop(prediction.getPublishStopInstant())
-
-            .build();
+               .platform(prediction.getPlatform())
+               .publishStart(prediction.getPublishStartInstant())
+               .publishStop(prediction.getPublishStopInstant())
+               .encryption(prediction.getEncryption())
+               .build();
     }
 
     public Prediction toPrediction(Prediction prediction) {
         prediction.setPlatform(platform);
         prediction.setPublishStartInstant(publishStart);
         prediction.setPublishStopInstant(publishStop);
+        prediction.setEncryption(encryption);
         return prediction;
     }
 
