@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:annotation>
+    <xs:documentation>
+    NPO Forecast XSD 2.0
+    Copyright 2014 NPO
+    </xs:documentation>
+  </xs:annotation>
+
+  <!-- uitzending container -->
+  <xs:element name="uitzending">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="zender" type="xs:string" />
+        <xs:element name="starttijd" type="xs:dateTime" />
+        <xs:element name="eindtijd" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- uitzendingen container -->
+  <xs:element name="uitzendingen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="uitzending" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- aflevering container -->
+  <xs:element name="aflevering">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="prid" type="xs:string" />
+        <xs:element name="pridexport" type="xs:string" />
+        <xs:element name="platform" type="xs:string" />
+        <xs:element name="gestopt" type="xs:int" />
+        <xs:element name="titel" type="xs:string" />
+        <xs:element ref="uitzendingen" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- voorspellingen / main container -->
+  <xs:element name="voorspellingen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="aflevering" maxOccurs="unbounded" />
+      </xs:sequence>
+      <xs:attribute name="einddatum" type="xs:string" use="required" />
+      <xs:attribute name="startdatum" type="xs:string" use="required" />
+      <xs:attribute name="timestamp" type="xs:dateTime" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

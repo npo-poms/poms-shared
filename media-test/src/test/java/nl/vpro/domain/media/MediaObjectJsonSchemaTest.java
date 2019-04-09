@@ -708,6 +708,16 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
+    public void testWithIntentions() throws Exception {
+        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"intentions\":[{\"owner\":\"BROADCASTER\",\"type\":\"ACTIVATING\"},{\"owner\":\"NPO\",\"type\":\"ENTERTAINMENT_INFORMATIVE\"}],\"countries\":[],\"languages\":[]}";
+
+        Program program = program().lean().withIntentions().build();
+        String actual = toJson(program);
+
+        JSONAssert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void testAvailableSubtitles() throws Exception {
     	ObjectNode media = JsonNodeFactory.instance.objectNode();
     	media.put("objectType", "program");

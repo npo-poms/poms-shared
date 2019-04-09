@@ -162,12 +162,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
+    //TODO: This method is deprecated but all the other methods just point to this one?!?
     @SuppressWarnings("unchecked")
     @Deprecated
     default B lastModified(Date date) {
         mediaObject().setLastModifiedInstant(DateUtils.toInstant(date));
         return (B)this;
     }
+
     default B lastModified(Instant date) {
         return lastModified(toDate(date));
     }
@@ -421,7 +423,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-
     @SuppressWarnings("unchecked")
     default B tags(String... tags) {
         for (String tag : tags) {
@@ -520,7 +521,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B person(RoleType role, String givenName, String familyName) {
-
         mediaObject().addPerson(Person.builder()
             .givenName(givenName)
             .familyName(familyName)
@@ -532,9 +532,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
     @SuppressWarnings("unchecked")
     default B persons(Collection<Person> persons) {
-        for(Person person : persons) {
-            mediaObject().addPerson(person);
-        }
+        persons.forEach(person -> mediaObject().addPerson(person));
+        return (B)this;
+    }
+
+    default B intentions(Intention... intentions) {
+        return intentions(Arrays.asList(intentions));
+    }
+
+    default B intentions(Collection<Intention> intentions) {
+        intentions.forEach(intention -> mediaObject().addIntention(intention));
         return (B)this;
     }
 

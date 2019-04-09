@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<xs:schema
+  attributeFormDefault="unqualified"
+  elementFormDefault="qualified"
+  targetNamespace="urn:vpro:media:notify:2017"
+  xmlns="urn:vpro:media:notify:2017"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:annotation>
+    <xs:documentation>
+      The is the XML which is shipped by NEP to notify about the availability of on demand streams.
+
+      This does not include information about platforms. The streaming platform does not know this concept.
+
+      POMS will know which platforms are managed by NEP and arrange the availability of the 'locations' accordingly.
+
+      Created to facilitate NEP, which were requested to ship XML's to POMs. It was unclear how the XML's should look like, so we came up with this.
+
+      Currently these are dropped in the NEPDropBox.
+    </xs:documentation>
+  </xs:annotation>
+
+  <xs:element name="notify">
+    <xs:annotation>
+      <xs:documentation>
+
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attribute name="timestamp" type="xs:dateTime" use="required">
+        <xs:annotation>
+          <xs:documentation>A timestamp indicating when this notification is issued.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="mid" type="xs:string" use="required">
+        <xs:annotation>
+          <xs:documentation>Which POMS object this is about</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="type" type="notifyType" use="required">
+        <xs:annotation>
+          <xs:documentation>online/offline</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="drm" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Whether the underlying streams are subject to DRM</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="duration" type="xs:duration">
+        <xs:annotation>
+          <xs:documentation>The duration of the stream</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="offline" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>A timestamp indicating when URLs associated with stream should go offline again. New in POMS 5.9</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+
+
+  <xs:simpleType name="notifyType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ONLINE">
+        <xs:annotation>
+          <xs:documentation>The notification is meant to indicate that the streams are now online</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OFFLINE">
+        <xs:annotation>
+          <xs:documentation>The notification is meant to indicate that the streams are now offline</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
