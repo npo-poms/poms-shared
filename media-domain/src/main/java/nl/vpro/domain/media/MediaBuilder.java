@@ -162,12 +162,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
+    //TODO: This method is deprecated but all the other methods just point to this one?!?
     @SuppressWarnings("unchecked")
     @Deprecated
     default B lastModified(Date date) {
         mediaObject().setLastModifiedInstant(DateUtils.toInstant(date));
         return (B)this;
     }
+
     default B lastModified(Instant date) {
         return lastModified(toDate(date));
     }
@@ -420,7 +422,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         }
         return (B)this;
     }
-
 
     @SuppressWarnings("unchecked")
     default B tags(String... tags) {
