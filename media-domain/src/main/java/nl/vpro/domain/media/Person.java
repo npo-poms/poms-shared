@@ -65,7 +65,8 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     protected RoleType role;
 
     @Column(name = "list_index",
-        nullable = true // hibernate sucks incredibly
+        nullable = true
+        // hibernate sucks incredibly https://stackoverflow.com/questions/41194606/why-does-hibernate-require-the-list-index-to-be-nullable
     )
     @XmlTransient
     @NotNull
