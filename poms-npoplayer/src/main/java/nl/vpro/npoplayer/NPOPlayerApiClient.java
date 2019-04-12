@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.ClientRequestFilter;
@@ -58,7 +59,7 @@ public class NPOPlayerApiClient extends AbstractApiClient {
 
     @lombok.Builder(builderClassName = "Builder")
     protected NPOPlayerApiClient(
-        String baseUrl,
+        @Nonnull String baseUrl,
         Duration connectionRequestTimeout,
         Duration connectTimeout,
         Duration socketTimeout,
@@ -76,7 +77,7 @@ public class NPOPlayerApiClient extends AbstractApiClient {
         Boolean trustAll,
         Jackson2Mapper objectMapper,
         String mbeanName,
-        String apiKey,
+        @Nonnull String apiKey,
         ClassLoader classLoader,
         Boolean registerMBean) {
         super(
