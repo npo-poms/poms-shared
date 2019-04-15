@@ -57,6 +57,7 @@
     <module>media-nep</module>
     <module>media-projectm</module>
     <module>media-nebo</module>
+    <module>media-npo</module>
   </modules>
 
   <build>
