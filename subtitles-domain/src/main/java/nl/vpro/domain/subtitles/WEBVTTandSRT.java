@@ -33,7 +33,7 @@ public class WEBVTTandSRT {
     public static final Charset VTT_CHARSET = StandardCharsets.UTF_8;
 
 
-    public static Stream<Cue> parseWEBVTT(String parent, InputStream inputStream) {
+    public static ParseResult parseWEBVTT(String parent, InputStream inputStream) {
         return parseWEBVTT(parent, Duration.ZERO, inputStream, null);
     }
 
@@ -42,20 +42,37 @@ public class WEBVTTandSRT {
     }
 
 
-    public static Stream<Cue> parseWEBVTT(String parent, Duration offset, InputStream inputStream, Charset charset) {
-        return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? VTT_CHARSET : charset), ".");
+    public static ParseResult parseWEBVTT(String parent, Duration offset, InputStream inputStream, Charset charset) {
+        return parse(parent,
+            offset,
+            new InputStreamReader(inputStream, charset == null ? VTT_CHARSET : charset), ".");
     }
 
     public static Stream<Cue> parseSRT(String parent, Duration offset, InputStream inputStream, Charset charset) {
         if (! StandardCharsets.UTF_8.equals(charset)) {
             inputStream = SkipAtStartInputStream.skipUnicodeByteOrderMarks(inputStream);
         }
-        return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? SRT_CHARSET : charset), ",");
+        return parse(parent, offset, new InputStreamReader(inputStream, charset == null ? SRT_CHARSET : charset), ",").getCues();
     }
 
-    private static final Pattern IDENTIFIER = Pattern.compile("\\d+"); // TODO this may also not be integer, but any other strings.
+    /**
+     * A WebVTT timestamp consists of the following components, in the given order:
+     *
+     * Optionally (required if hours is non-zero):
+     * Two or more ASCII digits, representing the hours as a base ten integer.
+     * // REMARK: We accept 1 too.
+     * A U+003A COLON character (:)
+     * Two ASCII digits, representing the minutes as a base ten integer in the range 0 ≤ minutes ≤ 59.
+     * A U+003A COLON character (:)
+     * Two ASCII digits, representing the seconds as a base ten integer in the range 0 ≤ seconds ≤ 59.
+     * A U+002E FULL STOP character (.).
+     * Three ASCII digits, representing the thousandths of a second seconds-frac as a base ten integer.
+     */
+    static final String TIMESTAMP = "((?:\\d{1,}:\\d{1,2}:\\d{2}[.,]\\d{3})|(?:\\d{1,2}:\\d{2}[.,]\\d{3}))";
+    static final Pattern CUETIMING =
+        Pattern.compile(TIMESTAMP + "[ \\t]+-->[ \\t]+" + TIMESTAMP + ".*");
 
-    static Stream<Cue> parse(
+    static ParseResult parse(
         String parent,
         Duration offset,
         Reader reader,
@@ -67,7 +84,7 @@ public class WEBVTTandSRT {
         Iterator<Cue> cues = new Iterator<Cue>() {
 
             boolean needsFindNext = true;
-            Integer cueNumber;
+            String cueIdentifier;
             String timeLine = null;
             StringBuilder content = new StringBuilder();
             boolean readIntro = false;
@@ -86,9 +103,9 @@ public class WEBVTTandSRT {
                 }
                 needsFindNext = true;
                 try {
-                    return parseCue(parent, cueNumber, offset, timeLine, content.toString(), decimalSeparator);
+                    return parseCue(parent, cueIdentifier, offset, timeLine, content.toString(), decimalSeparator);
                 } catch (IllegalArgumentException e) {
-                    log.warn("Error: {} while parsing\nheadline:{}\ntimeline:{}", e.getMessage(), cueNumber, StringUtils.abbreviate(timeLine, 100));
+                    log.warn("Error: {} while parsing\nheadline:{}\ntimeline:{}", e.getMessage(), cueIdentifier, StringUtils.abbreviate(timeLine, 100));
                     return null;
                 }
 
@@ -96,7 +113,7 @@ public class WEBVTTandSRT {
 
             protected void findNext() {
                 if (needsFindNext) {
-                    cueNumber= null;
+                    cueIdentifier= null;
                     timeLine = null;
                     content.setLength(0);
 
@@ -112,7 +129,7 @@ public class WEBVTTandSRT {
                             }
                             readIntro = true;
 
-                            if (l.startsWith("NOTE") || l.startsWith("STYLE")) {
+                            while (l.startsWith("NOTE") || l.startsWith("STYLE") || l.startsWith("REGION")) {
                                 while (stream.hasNext()) {
                                     l = stream.next();
                                     if (StringUtils.isBlank(l)) {
@@ -129,8 +146,8 @@ public class WEBVTTandSRT {
                         }
                     }
                     if (headLine != null) {
-                        if (IDENTIFIER.matcher(headLine).matches()) {
-                            cueNumber = Integer.parseInt(headLine);
+                        if (! CUETIMING.matcher(headLine).matches()) {
+                            cueIdentifier = headLine;
                             if (stream.hasNext()) {
                                 timeLine = stream.next();
                             }
@@ -155,12 +172,12 @@ public class WEBVTTandSRT {
                 }
             }
         };
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(cues, Spliterator.ORDERED), false);
+        return ParseResult.of(StreamSupport.stream(Spliterators.spliteratorUnknownSize(cues, Spliterator.ORDERED), false));
 
     }
 
 
-    static Cue parseCue(String parent, Integer cueNumber, Duration offset, String timeLine, String content, String decimalSeparator) {
+    static Cue parseCue(String parent, String cueNumber, Duration offset, String timeLine, String content, String decimalSeparator) {
         String[] split = timeLine.split("\\s+", 4);
         try {
             if (offset == null) {
@@ -173,9 +190,16 @@ public class WEBVTTandSRT {
             String arrow = split[1];
             String end = split[2];
             String settings = split.length > 3 ? split[3] :null;
+            Integer sequence;
+            try {
+                sequence = Integer.parseInt(cueNumber);
+            } catch (NumberFormatException nfe) {
+                sequence = null;
+            }
             return Cue.builder()
                 .mid(parent)
-                .sequence(cueNumber)
+                .identifier(cueNumber)
+                .sequence(sequence)
                 .start(parseDuration(start, decimalSeparator).minus(offset))
                 .end(parseDuration(end, decimalSeparator).minus(offset))
                 .settings(CueSettings.webvtt(settings))
@@ -284,5 +308,6 @@ public class WEBVTTandSRT {
         builder.append("\n\n");
         return builder;
     }
+
 
 }
