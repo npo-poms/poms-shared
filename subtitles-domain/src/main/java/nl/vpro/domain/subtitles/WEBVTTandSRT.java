@@ -55,7 +55,11 @@ public class WEBVTTandSRT {
 
     private static final Pattern IDENTIFIER = Pattern.compile("\\d+"); // TODO this may also not be integer, but any other strings.
 
-    static Stream<Cue> parse(String parent, Duration offset,  Reader reader, String decimalSeparator) {
+    static Stream<Cue> parse(
+        String parent,
+        Duration offset,
+        Reader reader,
+        String decimalSeparator) {
         final Iterator<String> stream = new BufferedReader(reader)
             .lines()
             .iterator();
