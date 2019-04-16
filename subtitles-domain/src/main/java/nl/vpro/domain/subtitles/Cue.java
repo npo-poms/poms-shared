@@ -43,6 +43,12 @@ public class Cue {
     Integer sequence;
 
     /**
+     * Some formats support an identifier per cue
+     */
+    @XmlAttribute
+    String identifier;
+
+    /**
      * When the cue must be started to be displayed relative to the beginning of the stream
      */
     @XmlAttribute
@@ -67,25 +73,38 @@ public class Cue {
     @XmlAttribute
     CueSettings settings;
 
+    /**
+     * Sometimes the cue may contain specific formatting options for a certain subtitles format.
+     * We don't try to generalize this, but the knowledge may be usefull.
+     */
+    @XmlAttribute
+    SubtitlesFormat contentFormat;
+
     @lombok.Builder(builderClassName = "Builder")
-    public Cue(
+    Cue(
         String parent,
         Integer sequence,
+        String identifier,
         Duration start,
         Duration end,
         String content,
-        CueSettings settings) {
+        SubtitlesFormat contentFormat,
+        CueSettings settings
+        ) {
         this.parent = parent;
         this.sequence = sequence;
+        this.identifier = identifier;
         this.start = start;
         this.end = end;
         this.content = content;
+        this.contentFormat = contentFormat;
         this.settings = settings;
     }
 
     Cue(Cue cue) {
         this.parent = cue.parent;
         this.sequence = cue.sequence;
+        this.identifier = cue.identifier;
         this.start = cue.start;
         this.end = cue.end;
         this.content = cue.content;
