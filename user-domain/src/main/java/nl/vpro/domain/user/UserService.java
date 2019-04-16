@@ -185,14 +185,17 @@ public interface UserService<T extends User> {
                 } catch(Exception ignored) {
 
                 }
-                MDC.put(ONBEHALFOF, ":" + String.valueOf(principal));
+                MDC.put(ONBEHALFOF, ":" + principal);
             } catch (Exception e) {
                 MDC.put(ONBEHALFOF, ":" + onBehalfOf.toString());
             }
         }
         return () -> {
-            restoreAuthentication(onBehalfOf);
-            MDC.remove(ONBEHALFOF);
+            try {
+                restoreAuthentication(onBehalfOf);
+            } finally {
+                MDC.remove(ONBEHALFOF);
+            }
         };
     }
 
