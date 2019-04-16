@@ -25,7 +25,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
  * @since 4.8
  */
 @XmlRootElement(name = "cue")
-@ToString(of = {"parent", "sequence", "content"})
+@ToString(of = {"parent", "sequence", "identifier", "content"})
 @EqualsAndHashCode
 @Getter
 public class Cue {
@@ -93,7 +93,7 @@ public class Cue {
         ) {
         this.parent = parent;
         this.sequence = sequence;
-        this.identifier = identifier;
+        this.identifier = identifier == null && sequence != null ? "" + sequence : identifier;
         this.start = start;
         this.end = end;
         this.content = content;
