@@ -13,7 +13,7 @@ public class CueBuilder {
 
     public static CueBuilder forMid(String mid) {
         CueBuilder builder = new CueBuilder();
-        builder.cue = new Cue(mid, 0, null, null, null, null);
+        builder.cue = new Cue(mid, 0, null, null, null, null, null, null);
         return builder;
     }
 
