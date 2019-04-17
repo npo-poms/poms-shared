@@ -4,7 +4,6 @@
  */
 package nl.vpro.domain.media;
 
-import com.google.common.collect.Lists;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -64,7 +63,6 @@ import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
-import org.hibernate.annotations.Parameter;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
@@ -329,7 +327,8 @@ public abstract class MediaObject
     @XmlElement(name = "intentions")
     @JsonProperty("intentions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    protected SortedSet<Intention> intentions = new TreeSet<>();
+    @SortNatural
+    protected SortedSet<Intentions> intentions = new TreeSet<>();
 
     protected String source;
 
@@ -1155,13 +1154,13 @@ public abstract class MediaObject
     }
 
 
-    public SortedSet<Intention> getIntentions() {
+    public SortedSet<Intentions> getIntentions() {
 
         return intentions;
     }
 
 
-    public void setIntentions(SortedSet<Intention> newIntentions) {
+    public void setIntentions(SortedSet<Intentions> newIntentions) {
 
        if (containsDuplicateOwner(newIntentions))
            throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
@@ -1169,23 +1168,23 @@ public abstract class MediaObject
         this.intentions = (SortedSet)updateSortedSet(this.intentions, newIntentions);
     }
 
-    public MediaObject addIntention(Intention newIntention) {
-        nullCheck(newIntention, "newIntention");
-        if (!intentions.contains(newIntention) && !isDuplicateOwner(newIntention)) {
-            newIntention.setParent(this);
-            intentions.add(newIntention);
+    public MediaObject addIntention(Intentions newIntentions) {
+        nullCheck(newIntentions, "newIntentions");
+        if (!intentions.contains(newIntentions) && !isDuplicateOwner(newIntentions)) {
+            newIntentions.setParent(this);
+            intentions.add(newIntentions);
         }
         return this;
     }
 
-    private boolean isDuplicateOwner(Intention newIntention){
+    private boolean isDuplicateOwner(Intentions newIntentions){
         List owner = intentions.stream().map(in -> in.getOwner()).collect(Collectors.toList());
-        return owner.contains(newIntention.getOwner());
+        return owner.contains(newIntentions.getOwner());
     }
 
-    private boolean containsDuplicateOwner(Set<Intention> newIntentions){
+    private boolean containsDuplicateOwner(Set<Intentions> newIntentions){
 
-        Predicate<Intention> compareWithOtherOwners = i -> {
+        Predicate<Intentions> compareWithOtherOwners = i -> {
             List ownersInTheSet = newIntentions.stream()
                     .map(in -> in.getOwner())
                     .collect(Collectors.toList());
@@ -1196,8 +1195,8 @@ public abstract class MediaObject
                 .anyMatch(compareWithOtherOwners);
     }
 
-    public boolean removeIntention(Intention intention) {
-        return intentions.remove(intention);
+    public boolean removeIntention(Intentions intentions) {
+        return this.intentions.remove(intentions);
     }
 
     @XmlElement
