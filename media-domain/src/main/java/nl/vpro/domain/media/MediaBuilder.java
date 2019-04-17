@@ -536,11 +536,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B intentions(Intention... intentions) {
+    default B intentions(Intentions... intentions) {
         return intentions(Arrays.asList(intentions));
     }
 
-    default B intentions(Collection<Intention> intentions) {
+    default B intentions(Collection<Intentions> intentions) {
         intentions.forEach(intention -> mediaObject().addIntention(intention));
         return (B)this;
     }

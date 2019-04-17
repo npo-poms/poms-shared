@@ -6,6 +6,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 @XmlType(name = "intentionEnum")
 public enum IntentionType {
+    INFORM {
+        @Override
+        public String toString() {
+            return "Informeren";
+        }
+    },
     INFORM_NEWS_AND_FACTS {
         @Override
         public String toString() {
@@ -22,6 +28,12 @@ public enum IntentionType {
         @Override
         public String toString() {
             return "Informeren /verdiepen, licht informatief";
+        }
+    },
+    ENTERTAINMENT {
+        @Override
+        public String toString() {
+            return "Vermaken";
         }
     },
     ENTERTAINMENT_LEASURE {
