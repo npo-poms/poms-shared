@@ -15,7 +15,7 @@ import nl.vpro.domain.DomainObject;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionType")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = "parent")
 public class Intention extends DomainObject implements Serializable, Child<Intentions> {
 
 
