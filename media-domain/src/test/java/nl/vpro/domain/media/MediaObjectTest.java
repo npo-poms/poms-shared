@@ -25,6 +25,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static nl.vpro.domain.media.support.OwnerType.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
@@ -696,17 +697,15 @@ public class MediaObjectTest {
     @Test
     public void testAddIntention() {
         //given a program with Intentions
-        Intention intention1 = Intention.builder().owner(BROADCASTER).value(IntentionType.ENTERTAINMENT_INFORMATIVE).build();
-        Intention intention2 = Intention.builder().owner(BROADCASTER).value(IntentionType.INFORM_INDEPTH).build();
-        Intention intention3 = Intention.builder().owner(NPO).value(IntentionType.INFORM_INDEPTH).build();
-        assertThat(intention1).isNotNull();
+        Intention intention1 = Intention.builder().owner(BROADCASTER).values(new TreeSet(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE, IntentionType.INFORM_INDEPTH))).build();
+        Intention intention2 = Intention.builder().owner(NPO).values(new TreeSet(Arrays.asList(IntentionType.INFORM_INDEPTH))).build();
         Program program = MediaBuilder.program().intentions(intention1).build();
 
-        //when I add intentions
-        System.out.println("test");
         assertThat(program).isNotNull();
         assertThat(intention1).isNotNull();
+        assertThat(intention2).isNotNull();
 
+        //when I add intentions
         MediaObject newProgram = program.addIntention(intention1);
         newProgram = program.addIntention(intention2);
 
@@ -717,11 +716,55 @@ public class MediaObjectTest {
     }
 
     @Test
+    public void testAddDuplicateOwnerIntention() {
+        //given a program with no Intentions
+        Intention intention1 = Intention.builder().owner(BROADCASTER).values(new TreeSet(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
+        Intention intention2 = Intention.builder().owner(BROADCASTER).values(new TreeSet(Arrays.asList(IntentionType.INFORM_INDEPTH))).build();
+        Program program = MediaBuilder.program().intentions().build();
+
+        assertThat(program).isNotNull();
+        assertThat(intention1).isNotNull();
+        assertThat(intention2).isNotNull();
+
+        //when I add intentions with same owner
+        MediaObject newProgram = program.addIntention(intention1);
+        newProgram = newProgram.addIntention(intention2);
+
+        //I expect only one intention to be save
+        newProgram.getIntentions().contains(intention1);
+        assertThat(newProgram.getIntentions()).doesNotContain(intention2);
+
+    }
+
+    @Test
+    public void testAddSetWitDuplicateOwnerIntention() {
+        //given a program
+        Intention intention1 = Intention.builder().owner(BROADCASTER)
+                .values(new TreeSet<>(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
+
+        Intention intention2 = Intention.builder().owner(BROADCASTER)
+                .values(new TreeSet<>(Arrays.asList(IntentionType.INFORM_INDEPTH))).build();
+
+        Program program = MediaBuilder.program().build();
+
+        assertThat(program).isNotNull();
+        assertThat(intention1).isNotNull();
+        assertThat(intention2).isNotNull();
+
+        //when I set intentions with duplicate owner I expect an exception to be raise
+        SortedSet<Intention> newIntentions = new TreeSet<>(Arrays.asList(intention1, intention2));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            program.setIntentions(newIntentions);
+        });
+    }
+
+    @Test
     public void testRemoveIntention() {
         //given a program with Intentions
-        Intention intention1 = Intention.builder().owner(BROADCASTER).value(IntentionType.ENTERTAINMENT_INFORMATIVE).build();
-        Intention intention2 = Intention.builder().owner(BROADCASTER).value(IntentionType.INFORM_INDEPTH).build();
-        Intention intention3 = Intention.builder().owner(NPO).value(IntentionType.INFORM_INDEPTH).build();
+        Intention intention1 = Intention.builder().owner(BROADCASTER).values(new TreeSet<>(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
+        Intention intention2 = Intention.builder().owner(BROADCASTER).values(new TreeSet<>(Arrays.asList(IntentionType.INFORM_INDEPTH))).build();
+        Intention intention3 = Intention.builder().owner(NPO).values(new TreeSet<>(Arrays.asList(IntentionType.INFORM_INDEPTH))).build();
 
         Program program = MediaBuilder.program()
                 .intentions(intention1, intention2, intention3)

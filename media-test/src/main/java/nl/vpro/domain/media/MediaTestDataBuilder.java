@@ -12,8 +12,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
@@ -427,11 +426,11 @@ public interface MediaTestDataBuilder<
     default T withIntentions() {
         return intentions(
                 Intention.builder()
-                    .value(IntentionType.ACTIVATING)
+                    .values(new LinkedHashSet<>(Arrays.asList(IntentionType.ACTIVATING)))
                     .owner(OwnerType.BROADCASTER)
                     .build(),
                 Intention.builder()
-                    .value(IntentionType.ENTERTAINMENT_INFORMATIVE)
+                    .values(new LinkedHashSet<>(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE, IntentionType.INFORM)))
                     .owner(OwnerType.NPO)
                     .build()
         );

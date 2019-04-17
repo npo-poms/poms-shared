@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media;
 
+import com.google.common.collect.Lists;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
@@ -62,6 +64,7 @@ import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+import org.hibernate.annotations.Parameter;
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
@@ -323,10 +326,10 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    @XmlElement(name = "intention")
+    @XmlElement(name = "intentions")
     @JsonProperty("intentions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    protected List<Intention> intentions = new ArrayList<>();
+    protected SortedSet<Intention> intentions = new TreeSet<>();
 
     protected String source;
 
@@ -1152,23 +1155,45 @@ public abstract class MediaObject
     }
 
 
-    public List<Intention> getIntentions() {
+    public SortedSet<Intention> getIntentions() {
+
         return intentions;
     }
 
-    public void setIntentions(List<Intention> intentions) {
-        this.intentions = updateList(this.intentions, intentions);
+
+    public void setIntentions(SortedSet<Intention> newIntentions) {
+
+       if (containsDuplicateOwner(newIntentions))
+           throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
+
+        this.intentions = (SortedSet)updateSortedSet(this.intentions, newIntentions);
     }
 
-    public MediaObject addIntention(Intention intention) {
-        nullCheck(intention, "intention");
-
-        if (!intentions.contains(intention)) {
-            intention.setParent(this);
-            intention.setListIndex(intentions.size());
-            intentions.add(intention);
+    public MediaObject addIntention(Intention newIntention) {
+        nullCheck(newIntention, "newIntention");
+        if (!intentions.contains(newIntention) && !isDuplicateOwner(newIntention)) {
+            newIntention.setParent(this);
+            intentions.add(newIntention);
         }
         return this;
+    }
+
+    private boolean isDuplicateOwner(Intention newIntention){
+        List owner = intentions.stream().map(in -> in.getOwner()).collect(Collectors.toList());
+        return owner.contains(newIntention.getOwner());
+    }
+
+    private boolean containsDuplicateOwner(Set<Intention> newIntentions){
+
+        Predicate<Intention> compareWithOtherOwners = i -> {
+            List ownersInTheSet = newIntentions.stream()
+                    .map(in -> in.getOwner())
+                    .collect(Collectors.toList());
+            return ownersInTheSet.contains(i.getOwner());
+        };
+
+        return newIntentions.stream()
+                .anyMatch(compareWithOtherOwners);
     }
 
     public boolean removeIntention(Intention intention) {

@@ -284,6 +284,7 @@
       </xs:element>
       <xs:element type="genreType" name="genre" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="tagType" name="tag" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="intentionType" name="intentions" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="xs:string" name="source" minOccurs="0"/>
       <xs:element type="countryType" name="country" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="languageType" name="language" minOccurs="0" maxOccurs="unbounded"/>
@@ -396,6 +397,19 @@
       <xs:enumeration value="WORK"/>
       <xs:enumeration value="LEXICO"/>
       <xs:enumeration value="ABBREVIATION"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="intentionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INFORM"/>
+      <xs:enumeration value="INFORM_NEWS_AND_FACTS"/>
+      <xs:enumeration value="INFORM_INDEPTH"/>
+      <xs:enumeration value="INFORM_GENERAL"/>
+      <xs:enumeration value="ENTERTAINMENT"/>
+      <xs:enumeration value="ENTERTAINMENT_LEASURE"/>
+      <xs:enumeration value="ENTERTAINMENT_INFORMATIVE"/>
+      <xs:enumeration value="ACTIVATING"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -543,8 +557,6 @@
       </xs:enumeration>
       <xs:enumeration value="PARTICIPANT">
       </xs:enumeration>
-
-
 
 
       <xs:enumeration value="SIDEKICK">
@@ -892,6 +904,13 @@
       </xs:pattern>
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:complexType name="intentionType">
+    <xs:sequence>
+      <xs:element name="values" type="intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
 
   <xs:simpleType name="geoRestrictionEnum">
     <xs:restriction base="xs:string">

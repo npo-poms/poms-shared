@@ -1,12 +1,10 @@
 package nl.vpro.domain.media;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,12 +15,14 @@ import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 
+import static javax.persistence.CascadeType.ALL;
+
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionType")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Intention extends DomainObject implements Serializable, Ownable, Child<MediaObject> {
+public class Intention extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intention> {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
@@ -30,27 +30,20 @@ public class Intention extends DomainObject implements Serializable, Ownable, Ch
 
     @Enumerated(EnumType.STRING)
     @XmlAttribute
+    @Setter(AccessLevel.PRIVATE)
     private OwnerType owner;
 
-    @Enumerated(EnumType.STRING)
-    @XmlAttribute(name = "type")
-    private IntentionType value;
-
-
-    @Column(name = "list_index", nullable = true
-        // hibernate sucks incredibly
-    )
-    @XmlTransient
-    @NotNull
-    @Getter
-    @Setter
-    private Integer listIndex = 0;
+    @ManyToMany(cascade = {ALL})
+    @JsonProperty("values")
+    @Column(name = "list_index", nullable = true)
+    @XmlElement
+    private Set<IntentionType> values;
 
     public Intention() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    private Intention(IntentionType value, OwnerType owner) {
-        this.value = value;
+    private Intention(Set<IntentionType> values, OwnerType owner) {
+        this.values = values;
         this.owner = owner;
     }
 
@@ -60,11 +53,28 @@ public class Intention extends DomainObject implements Serializable, Ownable, Ch
         if (o == null || getClass() != o.getClass()) return false;
         Intention intention = (Intention) o;
         return owner == intention.owner &&
-                value == intention.value;
+                values == intention.values;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(owner, value);
+        return Objects.hash(owner, values);
     }
+
+    /**
+     *  Just ensuring the comparator match equality.
+     *  Once owner is ordered we don't really
+     *  care about values ordering.
+     *  Order of the value List should be enforced somewhere else
+     */
+    @Override
+    public int compareTo(Intention o) {
+        if (this.getOwner().equals(o.getOwner())){
+            if (!this.values.equals(o.values)) {
+                return -1;
+            }
+        }
+        return this.getOwner().compareTo(o.getOwner());
+    }
+
 }
