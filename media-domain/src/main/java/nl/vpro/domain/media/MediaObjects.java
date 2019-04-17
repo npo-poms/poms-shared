@@ -410,6 +410,15 @@ public class MediaObjects {
         }
     }
 
+
+     public static void markForDeletion(MediaObject media, String reason) {
+        if (! Workflow.DELETES.contains(media.getWorkflow())) {
+            media.setWorkflow(Workflow.FOR_DELETION);
+            media.setRepubReason(reason);
+            media.setRepubDestinations(null);
+        }
+    }
+
     public static void markPublished(MediaObject media, Instant now, String reason) {
         media.setLastPublishedInstant(now);
         media.setRepubReason(reason);

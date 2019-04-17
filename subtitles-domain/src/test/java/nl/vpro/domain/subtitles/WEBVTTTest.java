@@ -28,7 +28,9 @@ public class WEBVTTTest {
     @Test
     public void toWEBVTTCue() throws IOException {
         assertThat(WEBVTTandSRT.formatCue(
-            SubtitlesUtil.parse(getSubtitles(), false).findFirst().get(), new StringBuilder(), ".", true).toString()).isEqualTo("1\n" +
+            SubtitlesUtil.parse(getSubtitles(), false)
+                .getCues()
+                .findFirst().get(), new StringBuilder(), ".", true).toString()).isEqualTo("1\n" +
             "00:00:02.200 --> 00:00:04.150\n" +
             "888\n" +
             "\n" +
@@ -106,7 +108,7 @@ public class WEBVTTTest {
             "*Dat wil ik doen\n" +
             "in jouw mobiele bakkerij\n" +
             "\n";
-        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example), ".").collect(Collectors.toList());
+        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example), ".").getCues().collect(Collectors.toList());
         assertThat(cues).hasSize(3);
         assertThat(cues.get(0).getSequence()).isEqualTo(1);
         assertThat(cues.get(0).getContent()).isEqualTo("888");
@@ -117,15 +119,28 @@ public class WEBVTTTest {
     @Test
     public void parseEmpty() {
         String example = "WEBVTT\n\n";
-        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example), ".").collect(Collectors.toList());
+        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example), ".").getCues().collect(Collectors.toList());
         assertThat(cues).hasSize(0);
+    }
+
+    @Test
+    public void testRegexp() {
+        {
+            String timeLine = "2:02.200 --> 2:04.150";
+            assertThat(WEBVTTandSRT.CUETIMING.matcher(timeLine).matches()).isTrue();
+        }
+        {
+            String timeLine = "00:00:28.020 --> 00:00:32.020";
+            assertThat(WEBVTTandSRT.CUETIMING.matcher(timeLine).matches()).isTrue();
+
+        }
     }
 
     @Test
     public void parseTimeLine() {
         String timeLine = "2:02.200 --> 2:04.150";
 
-        Cue cue = WEBVTTandSRT.parseCue("parent", 1, Duration.ofMinutes(2), timeLine, "bla bla", ".");
+        Cue cue = WEBVTTandSRT.parseCue("parent", "1", Duration.ofMinutes(2), timeLine, "bla bla", ".");
 
         assertThat(cue.getStart()).isEqualTo(Duration.parse("PT0M2.2S"));
     }
@@ -145,7 +160,8 @@ public class WEBVTTTest {
     @Test
     public void parseWithoutCuesWithComments() {
         InputStream example = getClass().getResourceAsStream("/POMS_VPRO_4981202.vtt");
-        List<Cue> cues = SubtitlesUtil.fillCueNumber(WEBVTTandSRT.parseWEBVTT("bla", example)).collect(Collectors.toList());
+        List<Cue> cues = SubtitlesUtil.fillCueNumber(
+            WEBVTTandSRT.parseWEBVTT("bla", example).getCues()).collect(Collectors.toList());
 
         assertThat(cues).hasSize(430);
         for (Cue cue : cues) {
@@ -158,7 +174,9 @@ public class WEBVTTTest {
     @Test
     public void parseWithCommentsAndNewlines() {
         InputStream example = getClass().getResourceAsStream("/WO_NPO_14933889.vtt");
-        List<Cue> cues = SubtitlesUtil.fillCueNumber(WEBVTTandSRT.parseWEBVTT("bla", example)).collect(Collectors.toList());
+        List<Cue> cues = SubtitlesUtil.fillCueNumber(
+            WEBVTTandSRT.parseWEBVTT("bla", example).getCues())
+            .collect(Collectors.toList());
 
         assertThat(cues).hasSize(10);
         for (Cue cue : cues) {

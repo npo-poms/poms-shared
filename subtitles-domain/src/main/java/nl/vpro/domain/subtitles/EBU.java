@@ -171,6 +171,7 @@ public class EBU {
                                 log.debug("Unexpected subtitle number {} (expected {}) at TTI block {}  Parsing proceeds...", subtitleNumber, currentSubNumber, i);
                             }
                             toFill.sequence = subtitleNumber;
+                            toFill.identifier = "" + subtitleNumber;
 
                             //EBN : Extension Block Number 3
                             int ebn = ttiBlock[3];

@@ -9,7 +9,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * WEBVTT support settings per cue.
+ * WEBVTT support settings per cue. For now this simply wraps the WebVTT string.
+ *
  * @author Michiel Meeuwissen
  * @since 5.10
  */
@@ -37,6 +38,11 @@ public class CueSettings {
         }
         return new CueSettings(settings.value);
     }
+
+    /**
+     * The type of the value of the settings.
+     * @return Currently always {@link SubtitlesFormat#WEBVTT}
+     */
     public SubtitlesFormat getType() {
         return SubtitlesFormat.WEBVTT;
     }
