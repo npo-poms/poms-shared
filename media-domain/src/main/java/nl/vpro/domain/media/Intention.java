@@ -1,44 +1,31 @@
 package nl.vpro.domain.media;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import nl.vpro.domain.DomainObject;
 
-import java.io.Serializable;
-import java.util.Objects;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
-
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.Ownable;
-import nl.vpro.domain.media.support.OwnerType;
+import java.io.Serializable;
 
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionType")
 @Data
-public class Intention extends DomainObject implements Serializable, Ownable, Child<MediaObject> {
-
-
-    @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
-    @XmlTransient
-    private MediaObject parent;
-
-    @Enumerated(EnumType.STRING)
-    @XmlAttribute
-    private OwnerType owner;
+@EqualsAndHashCode(callSuper = true)
+public class Intention  extends DomainObject implements Serializable {
 
     @Enumerated(EnumType.STRING)
     @XmlAttribute(name = "type")
-    private IntentionType value;
+    public IntentionType value;
 
-
-    @Column(name = "list_index", nullable = true
-        // hibernate sucks incredibly
-    )
+    @Column(name = "list_index", nullable = true)
     @XmlTransient
     @NotNull
     @Getter
@@ -48,22 +35,8 @@ public class Intention extends DomainObject implements Serializable, Ownable, Ch
     public Intention() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    private Intention(IntentionType value, OwnerType owner) {
+    public Intention(IntentionType value) {
         this.value = value;
-        this.owner = owner;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Intention intention = (Intention) o;
-        return owner == intention.owner &&
-                value == intention.value;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(owner, value);
-    }
 }

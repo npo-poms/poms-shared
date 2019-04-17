@@ -25,6 +25,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
 import static nl.vpro.domain.media.support.OwnerType.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
@@ -696,44 +697,86 @@ public class MediaObjectTest {
     @Test
     public void testAddIntention() {
         //given a program with Intentions
-        Intention intention1 = Intention.builder().owner(BROADCASTER).value(IntentionType.ENTERTAINMENT_INFORMATIVE).build();
-        Intention intention2 = Intention.builder().owner(BROADCASTER).value(IntentionType.INFORM_INDEPTH).build();
-        Intention intention3 = Intention.builder().owner(NPO).value(IntentionType.INFORM_INDEPTH).build();
-        assertThat(intention1).isNotNull();
-        Program program = MediaBuilder.program().intentions(intention1).build();
+        Intentions intentions1 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE), new Intention(IntentionType.INFORM_INDEPTH))).build();
+        Intentions intentions2 = Intentions.builder().owner(NPO).values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
+        Program program = MediaBuilder.program().intentions(intentions1).build();
+
+        assertThat(program).isNotNull();
+        assertThat(intentions1).isNotNull();
+        assertThat(intentions2).isNotNull();
 
         //when I add intentions
-        System.out.println("test");
-        assertThat(program).isNotNull();
-        assertThat(intention1).isNotNull();
-
-        MediaObject newProgram = program.addIntention(intention1);
-        newProgram = program.addIntention(intention2);
+        MediaObject newProgram = program.addIntention(intentions1);
+        newProgram = program.addIntention(intentions2);
 
         //I expect to find them
-        assertThat(newProgram.getIntentions()).contains(intention1);
-        assertThat(newProgram.getIntentions()).contains(intention2);
+        assertThat(newProgram.getIntentions()).contains(intentions1);
+        assertThat(newProgram.getIntentions()).contains(intentions2);
 
+    }
+
+    @Test
+    public void testAddDuplicateOwnerIntention() {
+        //given a program with no Intentions
+        Intentions intentions1 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
+        Intentions intentions2 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
+        Program program = MediaBuilder.program().intentions().build();
+
+        assertThat(program).isNotNull();
+        assertThat(intentions1).isNotNull();
+        assertThat(intentions2).isNotNull();
+
+        //when I add intentions with same owner
+        MediaObject newProgram = program.addIntention(intentions1);
+        newProgram = newProgram.addIntention(intentions2);
+
+        //I expect only one intention to be save
+        newProgram.getIntentions().contains(intentions1);
+        assertThat(newProgram.getIntentions()).doesNotContain(intentions2);
+
+    }
+
+    @Test
+    public void testAddSetWitDuplicateOwnerIntention() {
+        //given a program
+        Intentions intentions1 = Intentions.builder().owner(BROADCASTER)
+                .values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
+
+        Intentions intentions2 = Intentions.builder().owner(BROADCASTER)
+                .values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
+
+        Program program = MediaBuilder.program().build();
+
+        assertThat(program).isNotNull();
+        assertThat(intentions1).isNotNull();
+        assertThat(intentions2).isNotNull();
+
+        //when I set intentions with duplicate owner I expect an exception to be raise
+        SortedSet<Intentions> newIntentions = new TreeSet<>(Arrays.asList(intentions1, intentions2));
+
+        assertThatIllegalArgumentException().isThrownBy(() -> {
+            program.setIntentions(newIntentions);
+        });
     }
 
     @Test
     public void testRemoveIntention() {
         //given a program with Intentions
-        Intention intention1 = Intention.builder().owner(BROADCASTER).value(IntentionType.ENTERTAINMENT_INFORMATIVE).build();
-        Intention intention2 = Intention.builder().owner(BROADCASTER).value(IntentionType.INFORM_INDEPTH).build();
-        Intention intention3 = Intention.builder().owner(NPO).value(IntentionType.INFORM_INDEPTH).build();
+        Intentions intentions1 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
+        Intentions intentions2 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
+        Intentions intentions3 = Intentions.builder().owner(NPO).values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
 
         Program program = MediaBuilder.program()
-                .intentions(intention1, intention2, intention3)
+                .intentions(intentions1, intentions2, intentions3)
                 .build();
 
         System.out.println("Program:" + program);
 
         //when I remove an intention
-        program.removeIntention(intention1);
+        program.removeIntention(intentions1);
 
         //I expect not to find it anymore
-        assertThat(program.intentions).doesNotContain(intention1);
+        assertThat(program.intentions).doesNotContain(intentions1);
 
     }
 }
