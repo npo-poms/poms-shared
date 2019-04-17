@@ -1,7 +1,11 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -37,13 +41,18 @@ public class RelationDefinition implements Serializable, Identifiable<RelationDe
     @Id
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
     @Pattern(regexp = "[A-Z0-9_-]{4,}", message = "{nl.vpro.constraints.relationDefinition.Pattern}")
+    @Getter
     private String type;
 
     @Id
     @NotNull(message = "{nl.vpro.constraints.NotEmpty}")
     @Size(min = 1)
+    @Getter
+    @Setter
     private String broadcaster;
 
+    @Getter
+    @Setter
     private String displayText;
 
     protected RelationDefinition() {
@@ -53,33 +62,15 @@ public class RelationDefinition implements Serializable, Identifiable<RelationDe
         this(type, broadcaster, null);
     }
 
-    public RelationDefinition(String type, String broadcaster, String text) {
+    @lombok.Builder
+    public RelationDefinition(String type, String broadcaster, String displayText) {
         setType(type);
         this.broadcaster = broadcaster;
-        this.displayText = text;
-    }
-
-    public String getBroadcaster() {
-        return broadcaster;
-    }
-
-    public void setBroadcaster(String broadcaster) {
-        this.broadcaster = broadcaster;
-    }
-
-    public String getDisplayText() {
-        return displayText;
-    }
-
-    public void setDisplayText(String displayText) {
         this.displayText = displayText;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
+    public void setType(@Nonnull String type) {
         if(type != null) {
             type = type.toUpperCase();
         }

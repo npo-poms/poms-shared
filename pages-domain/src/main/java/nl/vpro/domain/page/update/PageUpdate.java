@@ -54,11 +54,14 @@ public class PageUpdate implements Serializable {
 
     @NotNull
     @XmlAttribute(required = true)
+    @Getter
+    @Setter
     protected PageType type;
 
     @NotNull
     @URI
     @XmlAttribute(required = true)
+    @Getter
     protected String url;
 
     @XmlAttribute
@@ -66,16 +69,20 @@ public class PageUpdate implements Serializable {
     @XmlSchemaType(name = "dateTime")
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @Getter
+    @Setter
     protected Instant publishStart;
 
     @XmlElement(name = "crid")
     @JsonProperty("crids")
     @Valid
+    @Setter
     protected List<Crid> crids;
 
     @XmlElement(name = "alternativeUrl")
     @JsonProperty("alternativeUrls")
     @Valid
+    @Setter
     protected List<String> alternativeUrls;
 
     @NotNull
@@ -83,71 +90,90 @@ public class PageUpdate implements Serializable {
     @XmlElement(name = "broadcaster", required = true)
     @JsonProperty("broadcasters")
     @ValidBroadcaster
+    @Setter
     protected List<String> broadcasters;
 
     @Valid
+    @Getter
+    @Setter
     protected PortalUpdate portal;
 
     @NotNull
     @Size(min = 1)
     @XmlElement(required = true, nillable = false)
     @NoHtml
+    @Getter
+    @Setter
     protected String title;
 
     @NoHtml
+    @Getter
+    @Setter
     protected String subtitle;
 
     @XmlElement(name = "keyword")
     @JsonProperty("keywords")
     @NoHtmlList
+    @Setter
     protected List<String> keywords;
 
     @NoHtml
+    @Getter
+    @Setter
     protected String summary;
 
     @XmlElementWrapper(name = "paragraphs")
     @XmlElement(name = "paragraph")
     @JsonProperty("paragraphs")
     @Valid
+    @Setter
     protected List<ParagraphUpdate> paragraphs;
 
     @XmlElement(name = "tag")
     @JsonProperty("tags")
     //@Pattern("(?i)[a-z]")
     @NoHtmlList
+    @Setter
     protected List<String> tags;
 
 
     @XmlElement(name = "genre")
     @JsonProperty("genres")
     @ValidGenre
+    @Setter
     protected List<String> genres;
 
     @XmlElement(name = "link")
     @JsonProperty("links")
     @Valid
+    @Setter
     private List<LinkUpdate> links;
 
     @XmlElementWrapper(name = "embeds")
     @XmlElement(name = "embed")
     @JsonProperty("embeds")
     @Valid
+    @Setter
     private List<EmbedUpdate> embeds;
 
     @XmlElement(name = "statRef")
     @JsonProperty("statRefs")
     @NoHtmlList
+    @Getter
+    @Setter
     private List<String> statRefs;
 
     @XmlElement(name = "image")
     @JsonProperty("images")
     @Valid
+    @Setter
     protected List<ImageUpdate> images;
 
 
     @XmlElement(name = "relation")
     @JsonProperty("relations")
     @Valid
+    @Setter
     protected List<RelationUpdate> relations;
 
     @XmlTransient
@@ -158,6 +184,8 @@ public class PageUpdate implements Serializable {
     @XmlSchemaType(name = "dateTime")
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @Getter
+    @Setter
     private Instant lastPublished;
 
     @XmlAttribute
@@ -165,6 +193,8 @@ public class PageUpdate implements Serializable {
     @XmlSchemaType(name = "dateTime")
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @Getter
+    @Setter
     private Instant creationDate;
 
     @XmlAttribute
@@ -172,6 +202,8 @@ public class PageUpdate implements Serializable {
     @XmlSchemaType(name = "dateTime")
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
+    @Getter
+    @Setter
     private Instant lastModified;
 
     @XmlTransient
@@ -187,44 +219,9 @@ public class PageUpdate implements Serializable {
         setUrl(url);
     }
 
-    public PageType getType() {
-        return type;
-    }
-
-    public void setType(PageType type) {
-        this.type = type;
-    }
-
-    public String getUrl() {
-        return url;
-    }
 
     public void setUrl(String url) {
         this.url = url == null ? null : Urls.normalize(url);
-    }
-
-    public Instant getPublishStart() {
-        return publishStart;
-    }
-
-    public void setPublishStart(Instant publishStart) {
-        this.publishStart = publishStart;
-    }
-
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Instant getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
     }
 
     public List<Crid> getCrids() {
@@ -234,19 +231,11 @@ public class PageUpdate implements Serializable {
         return crids;
     }
 
-    public void setCrids(List<Crid> crids) {
-        this.crids = crids;
-    }
-
     public List<String> getAlternativeUrls() {
         if (alternativeUrls == null) {
             alternativeUrls = new ArrayList<>();
         }
         return alternativeUrls;
-    }
-
-    public void setAlternativeUrls(List<String> alternativeUrls) {
-        this.alternativeUrls = alternativeUrls;
     }
 
     public List<String> getBroadcasters() {
@@ -256,33 +245,7 @@ public class PageUpdate implements Serializable {
         return broadcasters;
     }
 
-    public void setBroadcasters(List<String> broadcasters) {
-        this.broadcasters = broadcasters;
-    }
 
-    public PortalUpdate getPortal() {
-        return portal;
-    }
-
-    public void setPortal(PortalUpdate portal) {
-        this.portal = portal;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSubtitle() {
-        return subtitle;
-    }
-
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
-    }
 
     public List<String> getKeywords() {
         if (keywords == null) {
@@ -291,17 +254,7 @@ public class PageUpdate implements Serializable {
         return keywords;
     }
 
-    public void setKeywords(List<String> keywords) {
-        this.keywords = keywords;
-    }
 
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
 
     public List<ParagraphUpdate> getParagraphs() {
         if (paragraphs == null) {
@@ -310,9 +263,7 @@ public class PageUpdate implements Serializable {
         return paragraphs;
     }
 
-    public void setParagraphs(List<ParagraphUpdate> paragraphs) {
-        this.paragraphs = paragraphs;
-    }
+
 
     public List<String> getTags() {
         if (tags == null) {
@@ -321,19 +272,12 @@ public class PageUpdate implements Serializable {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
 
     public List<LinkUpdate> getLinks() {
         if (links == null) {
             links = new ArrayList<>();
         }
         return links;
-    }
-
-    public void setLinks(List<LinkUpdate> links) {
-        this.links = links;
     }
 
     public List<EmbedUpdate> getEmbeds() {
@@ -343,20 +287,9 @@ public class PageUpdate implements Serializable {
         return embeds;
     }
 
-    public void setEmbeds(List<EmbedUpdate> embeds) {
-        this.embeds = embeds;
-    }
 
     public void embed(EmbedUpdate embedUpdate) {
         getEmbeds().add(embedUpdate);
-    }
-
-    public List<String> getStatRefs() {
-        return statRefs;
-    }
-
-    public void setStatRefs(List<String> statRefs) {
-        this.statRefs = statRefs;
     }
 
     public List<ImageUpdate> getImages() {
@@ -367,9 +300,6 @@ public class PageUpdate implements Serializable {
         return images;
     }
 
-    public void setImages(List<ImageUpdate> images) {
-        this.images = images;
-    }
 
     public List<RelationUpdate> getRelations() {
         if (relations == null) {
@@ -378,9 +308,6 @@ public class PageUpdate implements Serializable {
         return relations;
     }
 
-    public void setRelations(List<RelationUpdate> relations) {
-        this.relations = relations;
-    }
 
     @JsonProperty("_rev")
     @JsonView(Views.Publisher.class)
@@ -392,10 +319,6 @@ public class PageUpdate implements Serializable {
         this.rev = rev;
     }
 
-    public void setGenres(List<String> genres) {
-        this.genres = genres;
-    }
-
     public List<String> getGenres() {
         if (genres == null) {
             genres = new ArrayList<>();
@@ -404,13 +327,6 @@ public class PageUpdate implements Serializable {
         return genres;
     }
 
-    public Instant getLastPublished() {
-        return lastPublished;
-    }
-
-    public void setLastPublished(Instant lastPublished) {
-        this.lastPublished = lastPublished;
-    }
 
     @Override
     public String toString() {

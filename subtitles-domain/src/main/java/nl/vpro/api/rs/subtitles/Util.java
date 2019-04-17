@@ -44,8 +44,6 @@ public class Util {
     }
 
     static Iterator<Cue> headers(Iterator<Cue> cueIterator, MultivaluedMap<String, Object> httpHeaders, String extension) {
-
-
         PeekingIterator<Cue> peeking = Iterators.peekingIterator(cueIterator);
         if (peeking.hasNext()) {
             Cue head = peeking.peek();
@@ -54,7 +52,7 @@ public class Util {
                 headers(id, httpHeaders, extension);
             } else {
                 if (head != null) {
-                    httpHeaders.putSingle("Content-Disposition", "inline; filename=" + head.getParent() + "." + "." + extension);
+                    httpHeaders.putSingle("Content-Disposition", "attachment; filename=" + head.getParent() + "." + "." + extension);
                 } else {
 
                 }

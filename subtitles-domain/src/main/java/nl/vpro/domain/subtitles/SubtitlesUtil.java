@@ -11,6 +11,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.io.IOUtils;
 
 import nl.vpro.util.BasicWrappedIterator;
@@ -62,7 +64,8 @@ public class SubtitlesUtil {
 
 
 
-    public static Stream<Cue> parse(Subtitles subtitles, boolean guessOffset) {
+    @Nonnull
+    public static ParseResult parse(@Nonnull Subtitles subtitles, boolean guessOffset) {
 
         SubtitlesContent content = subtitles.getContent();
         String mid = subtitles.getMid();
@@ -72,13 +75,13 @@ public class SubtitlesUtil {
         Function<TimeLine, Duration> offsetGuesser = guessOffset ? new DefaultOffsetGuesser(subtitles.getCreationDate()) : timeLine -> Duration.ZERO;
         switch (content.getFormat()) {
             case TT888:
-                return TT888.parse(mid, offset, offsetGuesser, content.asStream(), getCharset(content.getCharset(),  TT888.CHARSET));
+                return ParseResult.of(TT888.parse(mid, offset, offsetGuesser, content.asStream(), getCharset(content.getCharset(),  TT888.CHARSET)));
             case WEBVTT:
                 return WEBVTTandSRT.parseWEBVTT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.VTT_CHARSET));
             case SRT:
-                return WEBVTTandSRT.parseSRT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.SRT_CHARSET));
+                return ParseResult.of(WEBVTTandSRT.parseSRT(mid, offset, content.asStream(), getCharset(content.getCharset(), WEBVTTandSRT.SRT_CHARSET)));
             case EBU:
-                return EBU.parse(mid, offset, offsetGuesser, content.asStream());
+                return ParseResult.of(EBU.parse(mid, offset, offsetGuesser, content.asStream()));
             default:
                 throw new IllegalArgumentException("Not supported format " + content.getFormat());
         }
@@ -99,7 +102,7 @@ public class SubtitlesUtil {
         if (subtitles == null) {
             return Stream.empty();
         }
-        Stream<Cue> stream = parse(subtitles, guessOffset);
+        Stream<Cue> stream = parse(subtitles, guessOffset).getCues();
         if (fillCueNumbers) {
             stream = fillCueNumber(stream);
         }
@@ -169,5 +172,6 @@ public class SubtitlesUtil {
             );
 
     }
+
 
 }
