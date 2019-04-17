@@ -23,6 +23,6 @@ public class VTTReader extends AbstractIteratorReader {
 
     @Override
     protected Iterator<Cue> read(InputStream entityStream) {
-        return WEBVTTandSRT.parseWEBVTT(null, entityStream).iterator();
+        return WEBVTTandSRT.parseWEBVTT(null, entityStream).getCues().iterator();
     }
 }

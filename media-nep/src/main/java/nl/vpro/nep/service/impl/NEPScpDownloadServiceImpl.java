@@ -98,11 +98,12 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     protected File knowHosts(String ftpHost, String hostkey) {
         try {
-            File f = File.createTempFile("known_hosts", "tmp");
+            File f = File.createTempFile("known_hosts", ".tmp");
             try (PrintWriter writer = new PrintWriter(f)) {
                 writer.println(ftpHost + " ssh-rsa " + hostkey);
             }
             f.deleteOnExit();
+            log.info("Created {}", f);
             return f;
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);

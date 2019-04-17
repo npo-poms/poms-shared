@@ -22,7 +22,7 @@ import static javax.persistence.CascadeType.ALL;
 @XmlType(name = "intentionType")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Intention extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intention> {
+public class Intention extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intention> 
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
