@@ -14,8 +14,6 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
@@ -29,7 +27,6 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.util.DateUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -857,9 +854,9 @@ public class MediaObjectXmlSchemaTest {
         String expected = segment.toString();
         log.info(expected);
 
-        Intention intention = Intention.builder()
+        Intentions intentions = Intentions.builder()
                 .owner(OwnerType.NPO)
-                .values(new LinkedHashSet<>(Arrays.asList(IntentionType.ACTIVATING, IntentionType.INFORM_INDEPTH)))
+                .values(Arrays.asList(new Intention(IntentionType.ACTIVATING), new Intention(IntentionType.INFORM_INDEPTH)))
                 .build();
         Program program = program().lean()
                 .mid("9").avType(AVType.AUDIO)
@@ -867,16 +864,16 @@ public class MediaObjectXmlSchemaTest {
                 .build();
 
         program.setSortInstant(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).toInstant());
-        program.addIntention(intention);
+        program.addIntention(intentions);
 
         String actual = toXml(program);
 
         assertThat(actual).isXmlEqualTo(segment.toString());
 
-        intention.setParent(null);
-        Intention intentionWithoutParent = intention;
+        intentions.setParent(null);
+        Intentions intentionsWithoutParent = intentions;
         Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);
-        assertThat(programExpected.getIntentions().iterator().next()).isEqualTo(intentionWithoutParent);
+        assertThat(programExpected.getIntentions().iterator().next()).isEqualTo(intentionsWithoutParent);
     }
 
     @Test
