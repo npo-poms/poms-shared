@@ -1160,7 +1160,7 @@ public abstract class MediaObject
     }
 
 
-    public void setIntentions(SortedSet<Intentions> newIntentions) {
+    public void setIntentions(@Nonnull SortedSet<Intentions> newIntentions) {
 
        if (containsDuplicateOwner(newIntentions))
            throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
@@ -1168,25 +1168,18 @@ public abstract class MediaObject
         this.intentions = (SortedSet)updateSortedSet(this.intentions, newIntentions);
     }
 
-    public MediaObject addIntention(Intentions newIntentions) {
-        nullCheck(newIntentions, "newIntentions");
-        if (!intentions.contains(newIntentions) && !isDuplicateOwner(newIntentions)) {
-            newIntentions.setParent(this);
-            intentions.add(newIntentions);
-        }
+    public MediaObject addIntention(@Nonnull Intentions newIntentions) {
+        this.intentions.removeIf(existing -> existing.getOwner() == newIntentions.getOwner());
+        newIntentions.setParent(this);
+        intentions.add(newIntentions);
         return this;
     }
 
-    private boolean isDuplicateOwner(Intentions newIntentions){
-        List owner = intentions.stream().map(in -> in.getOwner()).collect(Collectors.toList());
-        return owner.contains(newIntentions.getOwner());
-    }
-
-    private boolean containsDuplicateOwner(Set<Intentions> newIntentions){
+    private boolean containsDuplicateOwner(@Nonnull  Set<Intentions> newIntentions){
 
         Predicate<Intentions> compareWithOtherOwners = i -> {
             List ownersInTheSet = newIntentions.stream()
-                    .map(in -> in.getOwner())
+                    .map(Intentions::getOwner)
                     .collect(Collectors.toList());
             return ownersInTheSet.contains(i.getOwner());
         };

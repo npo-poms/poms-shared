@@ -1,21 +1,21 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.Setter;
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.OwnerType;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import nl.vpro.domain.Child;
+import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.support.OwnerType;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -23,7 +23,6 @@ import static javax.persistence.CascadeType.ALL;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionsType")
 @Data
-@EqualsAndHashCode(callSuper = false)
 public class Intentions extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intentions> {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
@@ -35,9 +34,10 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     @Setter(AccessLevel.PRIVATE)
     private OwnerType owner;
 
-    @ManyToMany(cascade = {ALL})
+    @OneToMany(cascade = {ALL})
+    @JoinColumn(name = "parent_id")
     @JsonProperty("values")
-    @Column(name = "list_index", nullable = true)
+    @OrderColumn(name = "list_index", nullable = true)
     @XmlElement
     private List<Intention> values;
 
@@ -50,18 +50,6 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     }
 
 
-    private boolean containsDuplicateOwner(List<Intentions> newIntentions){
-
-        Predicate<Intentions> compareWithOtherOwners = i -> {
-            List ownersInTheList = newIntentions.stream()
-                    .map(in -> in.getOwner())
-                    .collect(Collectors.toList());
-            return ownersInTheList.contains(i.getOwner());
-        };
-
-        return newIntentions.stream()
-                .anyMatch(compareWithOtherOwners);
-    }
 
     @Override
     public boolean equals(Object o) {
