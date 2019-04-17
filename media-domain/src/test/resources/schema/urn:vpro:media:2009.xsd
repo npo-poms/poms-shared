@@ -51,7 +51,7 @@
           <xs:element name="description" type="descriptionType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="intention" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="intentions" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -223,9 +223,10 @@
   <xs:complexType name="intentionType">
     <xs:complexContent>
       <xs:extension base="shared:domainObjectType">
-        <xs:sequence/>
+        <xs:sequence>
+          <xs:element name="values" type="intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
         <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
-        <xs:attribute name="type" type="intentionEnum"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -546,9 +547,11 @@
 
   <xs:simpleType name="intentionEnum">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="INFORM"/>
       <xs:enumeration value="INFORM_NEWS_AND_FACTS"/>
       <xs:enumeration value="INFORM_INDEPTH"/>
       <xs:enumeration value="INFORM_GENERAL"/>
+      <xs:enumeration value="ENTERTAINMENT"/>
       <xs:enumeration value="ENTERTAINMENT_LEASURE"/>
       <xs:enumeration value="ENTERTAINMENT_INFORMATIVE"/>
       <xs:enumeration value="ACTIVATING"/>

@@ -13,9 +13,9 @@ import java.io.Writer;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
@@ -28,6 +28,9 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.util.DateUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -845,6 +848,35 @@ public class MediaObjectXmlSchemaTest {
             "</program>");
 
 
+    }
+
+    @Test
+    public void testWithIntentions() throws IOException, JAXBException {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/intention-scenarios.xml"), segment, "UTF-8");
+        String expected = segment.toString();
+        log.info(expected);
+
+        Intention intention = Intention.builder()
+                .owner(OwnerType.NPO)
+                .values(new LinkedHashSet<>(Arrays.asList(IntentionType.ACTIVATING, IntentionType.INFORM_INDEPTH)))
+                .build();
+        Program program = program().lean()
+                .mid("9").avType(AVType.AUDIO)
+                .type(ProgramType.BROADCAST).embeddable(true)
+                .build();
+
+        program.setSortInstant(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).toInstant());
+        program.addIntention(intention);
+
+        String actual = toXml(program);
+
+        assertThat(actual).isXmlEqualTo(segment.toString());
+
+        intention.setParent(null);
+        Intention intentionWithoutParent = intention;
+        Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);
+        assertThat(programExpected.getIntentions().iterator().next()).isEqualTo(intentionWithoutParent);
     }
 
     @Test

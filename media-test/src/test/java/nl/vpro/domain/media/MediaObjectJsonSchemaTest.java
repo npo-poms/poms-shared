@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media;
 
+import com.jayway.jsonpath.JsonPath;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.test.JSONAssert;
 
@@ -709,10 +710,13 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testWithIntentions() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"intentions\":[{\"owner\":\"BROADCASTER\",\"type\":\"ACTIVATING\"},{\"owner\":\"NPO\",\"type\":\"ENTERTAINMENT_INFORMATIVE\"}],\"countries\":[],\"languages\":[]}";
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/intention-scenarios.json"), segment, "UTF-8");
+        Map expected = JsonPath.read(segment.toString(),"$.mediaWithTwoIntention");
+        log.info(expected.toString());
 
         Program program = program().lean().withIntentions().build();
-        String actual = toJson(program);
+        Map actual = JsonPath.read(toJson(program),"$");
 
         JSONAssert.assertEquals(expected, actual);
     }
