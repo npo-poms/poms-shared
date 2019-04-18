@@ -51,7 +51,7 @@
           <xs:element name="description" type="descriptionType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
-          <xs:element name="intentions" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="intentions" type="intentionsType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -220,13 +220,22 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:complexType name="intentionType">
+  <xs:complexType name="intentionsType">
     <xs:complexContent>
       <xs:extension base="shared:domainObjectType">
         <xs:sequence>
-          <xs:element name="values" type="intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="intention" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="intentionType">
+    <xs:complexContent>
+      <xs:extension base="shared:domainObjectType">
+        <xs:sequence/>
+        <xs:attribute name="type" type="intentionEnum"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>

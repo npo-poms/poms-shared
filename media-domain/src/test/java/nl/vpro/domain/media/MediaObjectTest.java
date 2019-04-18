@@ -730,9 +730,9 @@ public class MediaObjectTest {
         MediaObject newProgram = program.addIntention(intentions1);
         newProgram = newProgram.addIntention(intentions2);
 
-        //I expect only one intention to be save
-        newProgram.getIntentions().contains(intentions1);
-        assertThat(newProgram.getIntentions()).doesNotContain(intentions2);
+        //I expect the second intention to override the previous one
+        assertThat(newProgram.getIntentions()).doesNotContain(intentions1);
+        assertThat(newProgram.getIntentions()).contains(intentions2);
 
     }
 

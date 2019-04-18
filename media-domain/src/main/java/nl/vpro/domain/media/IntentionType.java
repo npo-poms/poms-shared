@@ -15,19 +15,19 @@ public enum IntentionType {
     INFORM_NEWS_AND_FACTS {
         @Override
         public String toString() {
-            return "Informeren /verdiepen, nieuws en actualiteiten";
+            return "Informeren / verdiepen - nieuws en actualiteiten";
         }
     },
     INFORM_INDEPTH {
         @Override
         public String toString() {
-            return "Informeren /verdiepen, zwaar informatief";
+            return "Informeren / verdiepen - zwaar informatief";
         }
     },
     INFORM_GENERAL {
         @Override
         public String toString() {
-            return "Informeren /verdiepen, licht informatief";
+            return "Informeren / verdiepen - licht informatief";
         }
     },
     ENTERTAINMENT {

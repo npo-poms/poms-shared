@@ -2,8 +2,8 @@
 <program avType="AUDIO" mid="9" sortDate="2015-03-06T00:00:00+01:00"
          xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" embeddable="true" type="BROADCAST">
     <intentions owner="NPO">
-        <values>ACTIVATING</values>
-        <values>INFORM_INDEPTH</values>
+        <intention>ACTIVATING</intention>
+        <intention>INFORM_INDEPTH</intention>
     </intentions>
     <credits/>
     <locations/>
