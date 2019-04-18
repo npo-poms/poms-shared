@@ -50,14 +50,13 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Intentions intentions = (Intentions) o;
         return owner == intentions.owner &&
-                values == intentions.values;
+                values.equals(intentions.values);
     }
 
     @Override
