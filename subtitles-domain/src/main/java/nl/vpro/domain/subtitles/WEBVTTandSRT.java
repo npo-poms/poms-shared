@@ -77,6 +77,8 @@ public class WEBVTTandSRT {
         Duration offset,
         Reader reader,
         String decimalSeparator) {
+
+        final List<Header> headers = new ArrayList<>();
         final Iterator<String> stream = new BufferedReader(reader)
             .lines()
             .iterator();
@@ -172,7 +174,10 @@ public class WEBVTTandSRT {
                 }
             }
         };
-        return ParseResult.of(StreamSupport.stream(Spliterators.spliteratorUnknownSize(cues, Spliterator.ORDERED), false));
+        return ParseResult.of(
+            StreamSupport.stream(Spliterators.spliteratorUnknownSize(cues, Spliterator.ORDERED), false),
+            headers);
+
 
     }
 
