@@ -6,8 +6,8 @@
     "genres":[],
     "intentions":
     [
-      {"owner":"BROADCASTER", "values":["ACTIVATING"]},
-      {"owner":"NPO", "values":["ENTERTAINMENT_INFORMATIVE","INFORM"]}
+      {"owner":"BROADCASTER", "values":[{"type":"ACTIVATING"}]},
+      {"owner":"NPO", "values":[{"type": "ENTERTAINMENT_INFORMATIVE"},{"type": "INFORM"}]}
     ],
     "countries":[],
     "languages":[]
