@@ -2,7 +2,6 @@ package nl.vpro.domain.subtitles;
 
 import java.util.Locale;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
@@ -11,7 +10,6 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
  * @author Michiel Meeuwissen
  * @since 4.8
  */
-@Ignore
 public class StandaloneCueTest {
 
     @Test
