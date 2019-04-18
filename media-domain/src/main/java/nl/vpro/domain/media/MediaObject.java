@@ -1154,6 +1154,8 @@ public abstract class MediaObject
     }
 
 
+    //region Intentions logic
+
     public SortedSet<Intentions> getIntentions() {
 
         return intentions;
@@ -1191,6 +1193,7 @@ public abstract class MediaObject
     public boolean removeIntention(Intentions intentions) {
         return this.intentions.remove(intentions);
     }
+    //endregion
 
     @XmlElement
     public String getSource() {

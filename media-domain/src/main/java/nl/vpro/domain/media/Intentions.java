@@ -38,7 +38,7 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     @JoinColumn(name = "parent_id")
     @JsonProperty("values")
     @OrderColumn(name = "list_index", nullable = true)
-    @XmlElement
+    @XmlElement(name="intention")
     private List<Intention> values;
 
     public Intentions() {}
