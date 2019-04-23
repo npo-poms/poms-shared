@@ -17,6 +17,13 @@ public class ImagesTest {
     @Before
     public void init() {
         System.clearProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY);
+        ImageBackendServiceHolder.setInstance(new ImageBackendService() {
+            @Override
+            public String getImageBaseUrl() {
+                return System.getProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY);
+
+            }
+        });
     }
 
     @Test
@@ -37,7 +44,7 @@ public class ImagesTest {
         Images.getImageLocation(new Image(), "jpg");
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testGetImageLocationOnNullExtension() {
         System.setProperty("image.server.baseUrl", "http://domain.com/");
         String location = Images.getImageLocation(new Image(OwnerType.BROADCASTER, "urn:vpro:image:12345"), null);

@@ -14,6 +14,7 @@ public interface ImageBackendService {
 
 
     default Long getId(@Nonnull Image image) {
+
         return getIdFromImageUri(image.getImageUri());
     }
 
