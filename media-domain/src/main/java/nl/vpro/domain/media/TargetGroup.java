@@ -8,6 +8,7 @@ import nl.vpro.domain.DomainObject;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
@@ -31,6 +32,19 @@ public class TargetGroup extends DomainObject implements Serializable, Child<Tar
     @lombok.Builder(builderClassName = "Builder")
     public TargetGroup(TargetGroupType value) {
         this.value = value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TargetGroup that = (TargetGroup) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), value);
     }
 
     @Override
