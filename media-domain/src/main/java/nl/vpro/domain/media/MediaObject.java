@@ -91,6 +91,7 @@ import static nl.vpro.domain.media.MediaObject.*;
         "genres",
         "tags",
         "intentions",
+        "targetGroups",
         "source",
         "countries",
         "languages",
@@ -142,6 +143,7 @@ import static nl.vpro.domain.media.MediaObject.*;
     "genres",
     "tags",
     "intentions",
+    "targetGroups",
     "source",
     "hasSubtitles",
     "countries",
@@ -329,6 +331,17 @@ public abstract class MediaObject
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
     protected SortedSet<Intentions> intentions = new TreeSet<>();
+
+    @OneToMany(orphanRemoval = true, cascade = ALL)
+    @JoinColumn(name = "parent_id")
+    @OrderColumn(name = "list_index", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
+    @XmlElement
+    @JsonProperty
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @SortNatural
+    protected SortedSet<TargetGroups> targetGroups = new TreeSet<>();
 
     protected String source;
 
@@ -1177,23 +1190,36 @@ public abstract class MediaObject
         return this;
     }
 
-    private boolean containsDuplicateOwner(@Nonnull  Set<Intentions> newIntentions){
+    public boolean removeIntention(Intentions intentions) {
+        return this.intentions.remove(intentions);
+    }
 
-        Predicate<Intentions> compareWithOtherOwners = i -> {
-            List ownersInTheSet = newIntentions.stream()
-                    .map(Intentions::getOwner)
+    //endregion
+
+    private <T extends OwnableR> boolean containsDuplicateOwner(@Nonnull  Set<T> newValues){
+
+        Predicate<T> compareWithOtherOwners = i -> {
+            List ownersInTheSet = newValues.stream()
+                    .map(T::getOwner)
                     .collect(Collectors.toList());
             return ownersInTheSet.contains(i.getOwner());
         };
 
-        return newIntentions.stream()
+        return newValues.stream()
                 .anyMatch(compareWithOtherOwners);
     }
 
-    public boolean removeIntention(Intentions intentions) {
-        return this.intentions.remove(intentions);
+    public SortedSet<TargetGroups> getTargetGroups() {
+
+        return targetGroups;
     }
-    //endregion
+
+    public MediaObject addTargetGroups(@Nonnull TargetGroups newTargetGroups) {
+        targetGroups.removeIf(existing -> existing.getOwner() == newTargetGroups.getOwner());
+        newTargetGroups.setParent(this);
+        targetGroups.add(newTargetGroups);
+        return this;
+    }
 
     @XmlElement
     public String getSource() {

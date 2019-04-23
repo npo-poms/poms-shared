@@ -1,30 +1,29 @@
 package nl.vpro.domain.media;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
+import nl.vpro.domain.Child;
+import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnableR;
+import nl.vpro.domain.media.support.OwnerType;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.OwnableR;
-import nl.vpro.domain.media.support.OwnerType;
+import java.io.Serializable;
+import java.lang.annotation.Target;
+import java.util.List;
+import java.util.Objects;
 
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "intentionsType")
+@XmlType(name = "targetGroupsType")
 @Data
-public class Intentions extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intentions>, OwnableR {
+public class TargetGroups extends DomainObject implements Serializable, Child<MediaObject>, Comparable<TargetGroups>, OwnableR {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
@@ -32,20 +31,18 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
 
     @Enumerated(EnumType.STRING)
     @XmlAttribute
-    @Setter(AccessLevel.PRIVATE)
     private OwnerType owner;
 
     @OneToMany(cascade = {ALL})
     @JoinColumn(name = "parent_id")
-    @JsonProperty("values")
     @OrderColumn(name = "list_index", nullable = true)
-    @XmlElement(name="intention")
-    private List<Intention> values;
+    @XmlElement
+    private List<TargetGroup> values;
 
-    public Intentions() {}
+    public TargetGroups() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    private Intentions(List<Intention> values, OwnerType owner) {
+    private TargetGroups(List<TargetGroup> values, OwnerType owner) {
         this.values = values;
         this.owner = owner;
     }
@@ -55,9 +52,9 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Intentions intentions = (Intentions) o;
-        return owner == intentions.owner &&
-                values.equals(intentions.values);
+        TargetGroups targetGroups = (TargetGroups) o;
+        return owner == targetGroups.owner &&
+               values == targetGroups.values;
     }
 
     @Override
@@ -72,7 +69,7 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
      *  Order of the value List should be enforced somewhere else
      */
     @Override
-    public int compareTo(Intentions o) {
+    public int compareTo(TargetGroups o) {
         if (this.getOwner().equals(o.getOwner())){
             if (!this.values.equals(o.values)) {
                 return -1;

@@ -545,6 +545,15 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
+    default B targetGroups(TargetGroups ...targetGroups) {
+        return targetGroups(Arrays.asList(targetGroups));
+    }
+
+    default B targetGroups(Collection<TargetGroups> targetGroups) {
+        targetGroups.forEach(targetGroup -> mediaObject().addTargetGroups(targetGroup));
+        return (B)this;
+    }
+
     @SuppressWarnings("unchecked")
     default B awards(String... awards) {
         for(String award : awards) {
