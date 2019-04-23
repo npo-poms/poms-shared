@@ -11,6 +11,7 @@ import nl.vpro.domain.media.gtaa.GTAAName;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.web.client.HttpServerErrorException;
@@ -26,6 +27,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore //This gives an Out of Memory error in test env.
 public class OpenskosRepositoryTest {
 
     @Rule

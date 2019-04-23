@@ -52,6 +52,7 @@
           <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="intentions" type="intentionsType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="targetGroups" type="targetGroupsType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -236,6 +237,26 @@
       <xs:extension base="shared:domainObjectType">
         <xs:sequence/>
         <xs:attribute name="type" type="intentionEnum"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="targetGroupsType">
+    <xs:complexContent>
+      <xs:extension base="shared:domainObjectType">
+        <xs:sequence>
+          <xs:element name="values" type="targetGroupType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="targetGroupType">
+    <xs:complexContent>
+      <xs:extension base="shared:domainObjectType">
+        <xs:sequence/>
+        <xs:attribute name="type" type="targetGroupEnum"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -564,6 +585,18 @@
       <xs:enumeration value="ENTERTAINMENT_LEASURE"/>
       <xs:enumeration value="ENTERTAINMENT_INFORMATIVE"/>
       <xs:enumeration value="ACTIVATING"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="targetGroupEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="KIDS_6"/>
+      <xs:enumeration value="KIDS_12"/>
+      <xs:enumeration value="YOUNG_ADULTS"/>
+      <xs:enumeration value="ADULTS"/>
+      <xs:enumeration value="ADULTS_WITH_KIDS_6"/>
+      <xs:enumeration value="ADULTS_WITH_KIDS_12"/>
+      <xs:enumeration value="EVERYONE"/>
     </xs:restriction>
   </xs:simpleType>
 
