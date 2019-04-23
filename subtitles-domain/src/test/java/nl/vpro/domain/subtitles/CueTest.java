@@ -46,7 +46,7 @@ public class CueTest {
             .content("bla bla bla")
             .webvttSettings("A:center")
             .build();
-        JAXBTestUtil.roundTripAndSimilar(cue, "<subtitles:cue parent=\"MID_1234\" sequence=\"10\" identifier=\"cue tien\" start=\"P0DT0H0M20.000S\" end=\"P0DT0H0M30.000S\" settings=\"A:center\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\">bla bla bla</subtitles:cue>");
+        JAXBTestUtil.roundTripAndSimilar(cue, "<subtitles:cue parent=\"MID_1234\" sequence=\"10\" identifier=\"cue 10\" start=\"P0DT0H0M20.000S\" end=\"P0DT0H0M30.000S\" settings=\"A:center\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\">bla bla bla</subtitles:cue>");
     }
 
 }
