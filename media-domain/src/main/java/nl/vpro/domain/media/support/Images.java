@@ -17,6 +17,8 @@ import lombok.extern.slf4j.Slf4j;
 @Deprecated
 public class Images {
 
+        public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
+
 
 
     /**

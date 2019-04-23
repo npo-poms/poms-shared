@@ -32,8 +32,18 @@ public interface ImageBackendService {
         return Long.parseLong(id);
     }
 
+    String getImageBaseUrl();
 
-    String getOriginalUrl(Long id);
+
+    default String getOriginalUrl(Long id) {
+        if (id == null) {
+            return null;
+        }
+        String imageServerBaseUrl = getImageBaseUrl();
+        StringBuilder result = new StringBuilder();
+        result.append(imageServerBaseUrl).append("api/images/").append(id);
+        return result.toString();
+    }
 
     /**
      * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
@@ -42,6 +52,19 @@ public interface ImageBackendService {
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
-    String getImageLocation(Long  id , String fileExtension, String... conversions);
+    default String getImageLocation(Long  id , String fileExtension, String... conversions) {
+        String imageServerBaseUrl = getImageBaseUrl();
+        StringBuilder builder = new StringBuilder(imageServerBaseUrl);
+        for (String conversion : conversions) {
+            builder.append(conversion);
+            builder.append('/');
+        }
+        builder.append(id);
+        if (fileExtension != null) {
+            builder.append('.').append(fileExtension);
+        }
+        return builder.toString();
+
+    }
 
 }
