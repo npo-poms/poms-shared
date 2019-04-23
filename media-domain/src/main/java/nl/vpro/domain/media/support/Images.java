@@ -4,35 +4,20 @@
  */
 package nl.vpro.domain.media.support;
 
-import java.util.regex.Matcher;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * See https://jira.vpro.nl/browse/MSE-1212
  *
  * @author Roelof Jan Koekoek
  * @since 1.6
+ * @deprecated Used {@link ImageBackendService}
  */
+@Slf4j
+@Deprecated
 public class Images {
-    private static final Logger LOG = LoggerFactory.getLogger(Images.class);
 
-    public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
 
-    private static String imageHost;
-
-    public static String getImageHost() {
-        String fromSystem = System.getProperty(IMAGE_SERVER_BASE_URL_PROPERTY);
-        if (fromSystem != null) {
-            return  fromSystem;
-        }
-        return imageHost;
-    }
-    public static void setImageHost(String host) {
-        imageHost = host;
-    }
 
     /**
      * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
@@ -42,33 +27,9 @@ public class Images {
      * @throws NullPointerException on null arguments or null imageUri
      */
     public static String getImageLocation(Image image, String fileExtension, String... conversions) {
-        String imageHost = getImageHost();
-        if (imageHost == null) {
-            LOG.warn("Property: {} not set. Can't determine a base url to an image host, producing data with empty image URLs", IMAGE_SERVER_BASE_URL_PROPERTY);
-            return null;
-        }
+        ImageBackendService instance = ImageBackendServiceHolder.getInstance();
+        return instance.getImageLocation(instance.getId(image), fileExtension, conversions);
 
 
-        if(fileExtension == null) {
-            throw new NullPointerException("Should provide a file extension, not null");
-        }
-
-        Matcher matcher = Image.SERVER_URI_PATTERN.matcher(image.getImageUri());
-        if(!matcher.find()) {
-            return null;
-        }
-
-        String id = matcher.group(1);
-
-        if(StringUtils.isEmpty(id)) {
-            return null;
-        }
-        StringBuilder builder = new StringBuilder(imageHost);
-        for (String conversion : conversions) {
-            builder.append(conversion);
-            builder.append('/');
-        }
-        builder.append(id).append('.').append(fileExtension);
-        return builder.toString();
     }
 }
