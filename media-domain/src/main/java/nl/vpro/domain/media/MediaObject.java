@@ -1214,16 +1214,12 @@ public abstract class MediaObject
         return targetGroups;
     }
 
-
-    public void setTargetGroups(@Nonnull SortedSet<TargetGroups> newTargetGroups) {
-
-        if (containsDuplicateOwner(newTargetGroups))
-            throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newTargetGroups);
-
-        this.targetGroups = (SortedSet)updateSortedSet(this.targetGroups, newTargetGroups);
+    public MediaObject addTargetGroups(@Nonnull TargetGroups newTargetGroups) {
+        targetGroups.removeIf(existing -> existing.getOwner() == newTargetGroups.getOwner());
+        newTargetGroups.setParent(this);
+        targetGroups.add(newTargetGroups);
+        return this;
     }
-
-
 
     @XmlElement
     public String getSource() {
