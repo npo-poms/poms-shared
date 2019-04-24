@@ -165,13 +165,9 @@
   </xs:complexType>
 
   <xs:complexType name="restriction" abstract="true">
-    <xs:complexContent>
-      <xs:extension base="shared:domainObjectType">
-        <xs:sequence/>
-        <xs:attribute name="start" type="xs:dateTime"/>
-        <xs:attribute name="stop" type="xs:dateTime"/>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence/>
+    <xs:attribute name="start" type="xs:dateTime"/>
+    <xs:attribute name="stop" type="xs:dateTime"/>
   </xs:complexType>
 
   <xs:complexType name="geoRestrictionType">
@@ -222,43 +218,26 @@
   </xs:complexType>
 
   <xs:complexType name="intentionsType">
-    <xs:complexContent>
-      <xs:extension base="shared:domainObjectType">
-        <xs:sequence>
-          <xs:element name="intention" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence>
+      <xs:element name="intention" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
   </xs:complexType>
 
-  <xs:complexType name="intentionType">
-    <xs:complexContent>
-      <xs:extension base="shared:domainObjectType">
-        <xs:sequence/>
-        <xs:attribute name="type" type="intentionEnum"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
+  <xs:simpleType name="intentionType">
+    <xs:restriction base="intentionEnum"/>
+  </xs:simpleType>
 
   <xs:complexType name="targetGroupsType">
-    <xs:complexContent>
-      <xs:extension base="shared:domainObjectType">
-        <xs:sequence>
-          <xs:element name="values" type="targetGroupType" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence>
+      <xs:element name="values" type="targetGroupType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
   </xs:complexType>
 
   <xs:complexType name="targetGroupType">
-    <xs:complexContent>
-      <xs:extension base="shared:domainObjectType">
-        <xs:sequence/>
-        <xs:attribute name="type" type="targetGroupEnum"/>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence/>
+    <xs:attribute name="type" type="targetGroupEnum"/>
   </xs:complexType>
 
   <xs:complexType name="countryType">
@@ -312,16 +291,12 @@
   </xs:complexType>
 
   <xs:complexType name="personType">
-    <xs:complexContent>
-      <xs:extension base="shared:domainObjectType">
-        <xs:sequence>
-          <xs:element name="givenName" type="xs:string" minOccurs="0"/>
-          <xs:element name="familyName" type="xs:string" minOccurs="0"/>
-        </xs:sequence>
-        <xs:attribute name="role" type="roleType" use="required"/>
-        <xs:attribute name="gtaaUri" type="xs:string"/>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence>
+      <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+      <xs:element name="familyName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="role" type="roleType" use="required"/>
+    <xs:attribute name="gtaaUri" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="descendantRefType">
