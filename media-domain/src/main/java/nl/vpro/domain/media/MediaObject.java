@@ -239,7 +239,9 @@ public abstract class MediaObject
 
     @Column(name = "mid", nullable = false, unique = true)
     @Size.List({ @Size(max = 255), @Size(min = 4) })
-    @Pattern(regexp = "^[a-zA-Z0-9][ \\.a-zA-Z0-9_-]*$", flags = {
+    @Pattern(
+        regexp = "^[a-zA-Z0-9][ \\.a-zA-Z0-9_-]*$",
+        flags = {
             Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
     protected String mid;
 

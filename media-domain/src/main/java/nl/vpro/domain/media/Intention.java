@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -25,7 +26,8 @@ import nl.vpro.domain.DomainObject;
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionType")
-@Data
+@Getter
+@Setter
 @JsonSerialize(using = Intention.Serializer.class)
 @JsonDeserialize(using = Intention.Deserializer.class)
 public class Intention extends DomainObject implements Serializable, Child<Intentions> {
