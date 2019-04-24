@@ -148,7 +148,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setAVType(AVType.MIXED);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" avType=\"MIXED\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program avType=\"MIXED\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <intentions/>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -332,6 +339,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <intentions/>\n" +
             "    <avAttributes>\n" +
             "        <bitrate>1000</bitrate>\n" +
             "        <avFileFormat>H264</avFileFormat>\n" +
@@ -657,12 +665,13 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         JAXBTestUtil.roundTripAndSimilar(update,
             "<program version=\"5.5\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <ageRating>6</ageRating>\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images/>\n" +
-            "    <segments/>\n" +
-            "</program>");
+                "   <intentions/>\n" +
+                "    <ageRating>6</ageRating>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>");
     }
 
 
@@ -674,7 +683,16 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(update.getContentRatings()).containsExactly(ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL);
         assertThat(update.fetch().getContentRatings()).containsExactly(ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><contentRating>ANGST</contentRating><contentRating>DRUGS_EN_ALCOHOL</contentRating><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <intentions/>\n" +
+            "    <contentRating>ANGST</contentRating>\n" +
+            "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -837,9 +855,11 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Program program = program().countries("NL").languages("nl").build();
         ProgramUpdate update = ProgramUpdate.create(program);
         update.setVersion(Version.of(5, 5));
-        JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <country>NL</country>\n" +
             "    <language>nl</language>\n" +
+            "    <intentions/>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
