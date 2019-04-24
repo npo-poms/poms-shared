@@ -26,7 +26,6 @@ import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.domain.user.Portal;
@@ -36,10 +35,9 @@ import nl.vpro.util.DateUtils;
 import nl.vpro.util.TimeUtils;
 
 import static nl.vpro.domain.EmbargoBuilder.fromLocalDate;
-import static nl.vpro.util.DateUtils.toDate;
 import static nl.vpro.util.DateUtils.toInstant;
 
-@SuppressWarnings("ALL")
+@SuppressWarnings("unchecked")
 public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObject> extends EmbargoBuilder<B> {
 
     static ProgramBuilder program() {
@@ -147,7 +145,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B creationDate(ZonedDateTime date) {
-        return creationDate(toDate(date));
+        return creationDate(toInstant(date));
     }
     default B creationDate(LocalDateTime date) {
         return creationDate(fromLocalDate(date));
@@ -162,20 +160,18 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-    //TODO: This method is deprecated but all the other methods just point to this one?!?
-    @SuppressWarnings("unchecked")
     @Deprecated
     default B lastModified(Date date) {
-        mediaObject().setLastModifiedInstant(DateUtils.toInstant(date));
-        return (B)this;
+        return lastModified(DateUtils.toInstant(date));
     }
 
     default B lastModified(Instant date) {
-        return lastModified(toDate(date));
+        mediaObject().setLastModifiedInstant(date);
+        return (B) this;
     }
 
     default B lastModified(ZonedDateTime date) {
-        return lastModified(toDate(date));
+        return lastModified(toInstant(date));
     }
 
     default B lastModified(LocalDateTime date) {
@@ -183,25 +179,27 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
+    @Override
     default B publishStart(Instant date) {
         mediaObject().setPublishStartInstant(date);
         return (B) this;
     }
 
+    @Override
     default B publishStop(Instant date) {
         mediaObject().setPublishStopInstant(date);
         return (B) this;
     }
 
-    @SuppressWarnings("unchecked")
     @Deprecated
     default B lastPublished(Date date) {
-        mediaObject().setLastPublished(date);
-        return (B) this;
+        return lastPublished(DateUtils.toInstant(date));
     }
 
+    @SuppressWarnings("unchecked")
     default B lastPublished(Instant date) {
-        return lastPublished(toDate(date));
+        mediaObject().setLastPublishedInstant(date);
+        return (B) this;
     }
 
     default B lastPublished(LocalDateTime date) {
@@ -515,7 +513,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    @SuppressWarnings("unchecked")
     default B persons(Person... persons) {
         return persons(Arrays.asList(persons));
     }
@@ -649,8 +646,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B twitterRefs(TwitterRef... twitter) {
-        List<TwitterRef> reference = new ArrayList<>();
-        Arrays.stream(twitter).forEach(a -> reference.add(a));
+        List<TwitterRef> reference = new ArrayList<>(Arrays.asList(twitter));
         mediaObject().getTwitterRefs().addAll(reference);
         return (B) this;
     }
@@ -713,7 +709,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
-    @SuppressWarnings("unchecked")
     default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, ScheduleEventTitle... titles) {
         return scheduleEvent(c, time, duration, e -> e, titles);
     }
@@ -728,7 +723,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         for (ScheduleEventTitle title : titles) {
             event.addTitle(title);
         }
-        event = merger.apply(event);
+        merger.apply(event);
         return (B) this;
     }
 
@@ -753,8 +748,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B scheduleEventTitles(Channel channel, LocalDateTime time, ScheduleEventTitle... titles) {
         ScheduleEvent scheduleEvent = MediaObjects.findScheduleEvent(channel, time, mediaObject().getScheduleEvents());
-        for (ScheduleEventTitle title : titles) {
-            scheduleEvent.addTitle(title);
+        if (scheduleEvent != null) {
+            for (ScheduleEventTitle title : titles) {
+                scheduleEvent.addTitle(title);
+            }
         }
         return (B) this;
     }
@@ -771,8 +768,10 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     @SuppressWarnings("unchecked")
     default B scheduleEventDescriptions(Channel channel, LocalDateTime time, ScheduleEventDescription... descriptions) {
         ScheduleEvent scheduleEvent = MediaObjects.findScheduleEvent(channel, time, mediaObject().getScheduleEvents());
-        for (ScheduleEventDescription description : descriptions) {
-            scheduleEvent.addDescription(description);
+        if (scheduleEvent != null) {
+            for (ScheduleEventDescription description : descriptions) {
+                scheduleEvent.addDescription(description);
+            }
         }
         return (B) this;
     }
@@ -790,13 +789,13 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
 
     /**
-     * @see {@link #descendantOf(DescendantRef...)}
+     * See {@link #descendantOf(DescendantRef...)}
      *
      */
     @Deprecated
     default B descendantOf(String... mids) {
-        List<DescendantRef> ref = Arrays.stream(mids).map(m -> DescendantRef.builder().midRef(m).build()).collect(Collectors.toList());
-        return descendantOf(ref.toArray(new DescendantRef[ref.size()]));
+        return descendantOf(Arrays.stream(mids).map(m -> DescendantRef.builder().midRef(m).build())
+            .toArray(DescendantRef[]::new));
 
     }
 

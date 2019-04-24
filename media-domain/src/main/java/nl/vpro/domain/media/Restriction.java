@@ -148,6 +148,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
 
     }
 
+    @SuppressWarnings("unchecked")
     @Nonnull
     @Override
     public T setPublishStartInstant(Instant publishStart) {
@@ -162,6 +163,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
 
     }
 
+    @SuppressWarnings("unchecked")
     @Nonnull
     @Override
     public T setPublishStopInstant(Instant publishStop) {

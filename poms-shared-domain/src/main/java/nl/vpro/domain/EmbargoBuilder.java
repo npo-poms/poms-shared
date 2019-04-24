@@ -43,8 +43,8 @@ public interface EmbargoBuilder<B extends EmbargoBuilder<B>> {
         return publishStop(fromLocalDate(date));
     }
 
-    static Date fromLocalDate(LocalDateTime date) {
-        return DateUtils.toDate(date, ZONE_ID);
+    static Instant fromLocalDate(LocalDateTime date) {
+        return DateUtils.toInstant(date, ZONE_ID);
 
     }
 }
