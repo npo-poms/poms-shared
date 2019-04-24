@@ -184,7 +184,6 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         };
         BatchedReceiver<WorkflowExecution> br = BatchedReceiver.<WorkflowExecution>builder()
             .batchGetter(getter)
-            .batchSize(batchSize)
             .build();
         return new MaxOffsetIterator<>(
             FilteringIterator.<WorkflowExecution>builder()
