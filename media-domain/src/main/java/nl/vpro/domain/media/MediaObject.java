@@ -244,7 +244,7 @@ public abstract class MediaObject
     protected Integer version;
 
     @ElementCollection
-    @Column(name = "crids", nullable = false, unique = true)
+    @Column(name = "crids", nullable = false, unique = true) // TODO, rename to 'crid'.
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // TODO cache configuration can be put in a hibernate-config.xml. See
