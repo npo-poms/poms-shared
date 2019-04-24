@@ -293,6 +293,7 @@
         <xs:element name="imageLocation" type="imageLocationType"/>
         <xs:element name="urn" type="xs:string"/>
       </xs:choice>
+      <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type" type="shared:imageTypeEnum" use="required"/>
     <xs:attribute name="urn" type="xs:string"/>

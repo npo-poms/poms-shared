@@ -53,6 +53,7 @@
           <xs:element name="sourceName" type="xs:string" form="qualified" minOccurs="0"/>
           <xs:element name="license" type="tns:licenseEnum" form="qualified" minOccurs="0"/>
           <xs:element name="date" type="xs:string" form="qualified" minOccurs="0"/>
+          <xs:element name="crid" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="owner" type="tns:ownerTypeEnum"/>
         <xs:attribute name="type" type="tns:imageTypeEnum" use="required"/>
