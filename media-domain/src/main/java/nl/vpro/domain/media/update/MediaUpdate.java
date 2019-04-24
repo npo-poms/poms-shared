@@ -94,6 +94,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
         "countries",
         "languages",
         "genres",
+        "intentions",
         "avAttributes",
         "releaseYear",
         "duration",
@@ -211,6 +212,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected List<ImageUpdate> images;
 
+    /**
+     * This represent the editable intentions
+     * Only display the intentions for the given owner
+     * (more intentions might be present in the metadata).
+     */
     protected List<IntentionType> intentions;
 
     @Valid
@@ -292,6 +298,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         fillFrom(mediaobject, ownerType);
     }
 
+    //Part of the process of creating a MediaUpdate from a MediaObject
     protected final void fillFromMedia(M mediaobject, OwnerType owner) {
         this.mid = mediaobject.getMid();
         this.urn = mediaobject.getUrn();
@@ -328,6 +335,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         this.tags = toSet(mediaobject.getTags(), Tag::getText);
         this.persons = toList(MediaObjects.getPersons(mediaobject), PersonUpdate::new, true);
+
+        this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
 
         this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
         this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
@@ -481,6 +490,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return media;
     }
 
+    /**
+     * Convert this MediaUpdate object to a MediaObject
+     * Clone all the fields of MediaUpdate into a new MediaObject
+     */
     public M fetch(OwnerType owner) {
         M returnObject = fetchOwnerless();
         TextualObjects.copy(this, returnObject, owner);
@@ -493,14 +506,42 @@ public abstract class  MediaUpdate<M extends MediaObject>
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
 
+
+        returnObject.addIntention(toIntentions(intentions, owner));
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
             ScheduleEvent e = s.toScheduleEvent(owner);
             e.setParent(returnObject);
             return e;
         }));
+
         return returnObject;
     }
 
+    /**
+     * From a SortedSet<Intentions> to a List<IntentionType>
+     * Returning only the values for the given owner.
+     * We decided to return an empty list if owner differ rather than raise an
+     * exception (this code will usually be executed behind a queue)
+     */
+    private List<IntentionType> toUpdateIntentions(SortedSet<Intentions> intentions, OwnerType owner){
+        for (Intentions intention : intentions) {
+            if (intention.getOwner() == owner) {
+                return intention.getValues().stream()
+                        .map(Intention::getValue)
+                        .collect(Collectors.toList());
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    private Intentions toIntentions(List<IntentionType> intentionValues, OwnerType owner){
+        return Intentions.builder()
+                .owner(owner)
+                .values(intentionValues.stream()
+                        .map(Intention::new)
+                        .collect(Collectors.toList()))
+                .build();
+    }
 
     public M fetch() {
         return fetch(OwnerType.BROADCASTER);
@@ -859,6 +900,24 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setGenres(String... genres) {
         this.genres = new TreeSet<>(Arrays.asList(genres));
     }
+
+
+
+    @XmlElementWrapper(name = "intentions")
+    @XmlElement(name = "intention")
+    @Nonnull
+    public List<IntentionType> getIntentions() {
+        if (intentions == null) {
+            intentions = new ArrayList<>();
+        }
+        return intentions;
+    }
+
+    public void setIntentions(List<IntentionType> intentions) {
+        this.intentions = intentions;
+    }
+
+
 
 
     @XmlElement(name = "avAttributes")

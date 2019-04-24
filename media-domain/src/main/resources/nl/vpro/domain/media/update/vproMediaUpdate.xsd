@@ -154,6 +154,13 @@
         </xs:annotation>
       </xs:element>
       <xs:element name="genre" type="genreUpdateType" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="intentions" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="intention" type="media:intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="avAttributes" type="avAtributeUpdateType" form="qualified" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" form="qualified" minOccurs="0"/>
       <xs:element name="duration" type="xs:duration" form="qualified" minOccurs="0"/>

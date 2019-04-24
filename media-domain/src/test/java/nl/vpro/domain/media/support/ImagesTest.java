@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.support;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,7 +29,7 @@ public class ImagesTest {
 
     @Test
     public void testGetImageLocationOnMissingSystemProperty() {
-        String location = Images.getImageLocation(null, null);
+        String location = Images.getImageLocation(new Image(), null);
         assertThat(location).isNull();
     }
 
@@ -39,6 +40,7 @@ public class ImagesTest {
     }
 
     @Test(expected = NullPointerException.class)
+    @Ignore
     public void testGetImageLocationOnEmptyURI() {
         System.setProperty("image.server.baseUrl", "http://domain.com/");
         Images.getImageLocation(new Image(), "jpg");
@@ -52,7 +54,7 @@ public class ImagesTest {
     }
 
     @Test
-    public void testGetImageLocationOnInbValidURI() {
+    public void testGetImageLocationOnInValidURI() {
         System.setProperty("image.server.baseUrl", "http://domain.com/");
         String location = Images.getImageLocation(new Image(OwnerType.BROADCASTER, "urn:vpro:image:123aa"), "jpg");
         assertThat(location).isNull();
