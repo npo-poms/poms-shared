@@ -1,6 +1,7 @@
 package nl.vpro.domain.media;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,7 +20,8 @@ import static javax.persistence.CascadeType.ALL;
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "targetGroupsType")
-@Data
+@Getter
+@Setter
 public class TargetGroups extends DomainObject implements Serializable, Child<MediaObject>, Comparable<TargetGroups>, OwnableR {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)

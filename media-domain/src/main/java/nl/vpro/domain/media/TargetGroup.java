@@ -1,20 +1,22 @@
 package nl.vpro.domain.media;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import java.io.Serializable;
-import java.util.Objects;
+
+import nl.vpro.domain.Child;
+import nl.vpro.domain.DomainObject;
 
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "targetGroupType")
-@Data
-@EqualsAndHashCode(callSuper = true, exclude = "parent")
+@Getter
+@Setter
 public class TargetGroup extends DomainObject implements Serializable, Child<TargetGroups> {
 
 

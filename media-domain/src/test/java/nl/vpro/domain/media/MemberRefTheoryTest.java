@@ -1,7 +1,10 @@
 package nl.vpro.domain.media;
 
+import java.io.IOException;
+
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
+import org.xml.sax.SAXException;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.theory.ComparableTest;
@@ -75,10 +78,10 @@ public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
     }
 
     @Test
-    public void testTypeRoundTrip() {
+    public void testTypeRoundTrip() throws IOException, SAXException {
         MemberRef memberRef = new MemberRef();
         memberRef.setType(MediaType.CLIP);
-        MemberRef result = JAXBTestUtil.roundTrip(memberRef, "type=\"CLIP\"");
+        MemberRef result = JAXBTestUtil.roundTripAndSimilar(memberRef, "<memberRef highlighted=\"false\" type=\"CLIP\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");
         assertThat(result.getType()).isEqualTo(MediaType.CLIP);
     }
 

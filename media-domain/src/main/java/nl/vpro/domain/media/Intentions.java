@@ -1,7 +1,7 @@
 package nl.vpro.domain.media;
 
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -23,7 +23,8 @@ import static javax.persistence.CascadeType.ALL;
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionsType")
-@Data
+@Getter
+@Setter
 public class Intentions extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intentions>, OwnableR {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
