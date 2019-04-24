@@ -241,7 +241,7 @@ public abstract class MediaObject
     @Column(name = "mid", nullable = false, unique = true)
     @Size.List({ @Size(max = 255), @Size(min = 4) })
     @Pattern(
-        regexp = "^[a-zA-Z0-9][ \\.a-zA-Z0-9_-]*$",
+        regexp = "^[a-zA-Z0-9][ .a-zA-Z0-9_-]*$",
         flags = {
             Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
     protected String mid;
@@ -412,6 +412,7 @@ public abstract class MediaObject
     @Valid
     protected Set<MemberRef> memberOf;
 
+    @SuppressWarnings("NullableProblems")
     @Enumerated(EnumType.STRING)
     @NotNull(groups = { WarningValidatorGroup.class })
     protected AgeRating ageRating;
@@ -663,6 +664,7 @@ public abstract class MediaObject
         return toUpdate;
     }
 
+    @SuppressWarnings("unchecked")
     protected static <T extends Comparable<?>> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
         if (toUpdate != null && toUpdate == values) {
             return toUpdate;
@@ -679,7 +681,6 @@ public abstract class MediaObject
                 for (T v : values) {
                     for (T toUpdateValue : toUpdate) {
                         if (toUpdateValue instanceof Updatable && toUpdateValue.equals(v)) {
-                            // noinspection unchecked
                             ((Updatable) toUpdateValue).update(v);
                         }
                     }
