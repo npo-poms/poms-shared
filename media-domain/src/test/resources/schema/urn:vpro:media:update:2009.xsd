@@ -78,6 +78,13 @@
       <xs:element name="country" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="intentions" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="intention" type="media:intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="avAttributes" type="avAtributeUpdateType" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
       <xs:element name="duration" type="xs:duration" minOccurs="0"/>

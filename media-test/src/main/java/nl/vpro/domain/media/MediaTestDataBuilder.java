@@ -425,14 +425,14 @@ public interface MediaTestDataBuilder<
 
     default T withIntentions() {
         return intentions(
-                Intentions.builder()
-                    .values(Arrays.asList(new Intention(IntentionType.ACTIVATING)))
-                    .owner(OwnerType.BROADCASTER)
-                    .build(),
-                Intentions.builder()
-                    .values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE), new Intention(IntentionType.INFORM)))
-                    .owner(OwnerType.NPO)
-                    .build()
+            Intentions.builder()
+                .values(Arrays.asList(new Intention(IntentionType.ACTIVATING), new Intention(IntentionType.INFORM_INDEPTH)))
+                .owner(OwnerType.BROADCASTER)
+                .build(),
+            Intentions.builder()
+                .values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE), new Intention(IntentionType.INFORM)))
+                .owner(OwnerType.NPO)
+                .build()
         );
     }
 
@@ -733,6 +733,8 @@ public interface MediaTestDataBuilder<
                 .withGenres()
                 .withGeoRestrictions()
                 .withImagesWithCredits()
+                .withIntentions()
+                .withTargetGroups()
                 .withLanguages()
                 .withLastModifiedBy()
                 .withLocations()

@@ -94,6 +94,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
         "countries",
         "languages",
         "genres",
+        "intentions",
         "avAttributes",
         "releaseYear",
         "duration",
@@ -899,6 +900,24 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setGenres(String... genres) {
         this.genres = new TreeSet<>(Arrays.asList(genres));
     }
+
+
+
+    @XmlElementWrapper(name = "intentions")
+    @XmlElement(name = "intention")
+    @Nonnull
+    public List<IntentionType> getIntentions() {
+        if (intentions == null) {
+            intentions = new ArrayList<>();
+        }
+        return intentions;
+    }
+
+    public void setIntentions(List<IntentionType> intentions) {
+        this.intentions = intentions;
+    }
+
+
 
 
     @XmlElement(name = "avAttributes")
