@@ -13,6 +13,12 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
 
 /**
+ *
+ * Created a program 'with everything' then makes an 'update' object of it. Checks the XML, and marshall it back to an update object.
+ *
+ * Then take that, make a simple mediaobject of it and check _its_ XML.
+ *
+ *
  * @author Michiel Meeuwissen
  * @since 5.8
  */
@@ -37,294 +43,302 @@ public class MediaUpdateTest {
 
         withEverything.getVersion();
         ProgramUpdate update = ProgramUpdate.create(withEverything, OwnerType.BROADCASTER);
-        update.setVersion(Version.of(5, 1));
+        update.setVersion(Version.of(5, 11));
         log.info("{}", update.getVersion());
 
         rounded = JAXBTestUtil.roundTripAndValidateAndSimilar(update,
             getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"), "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program version=\"5.1\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <broadcaster>BNN</broadcaster>\n" +
-            "    <broadcaster>AVRO</broadcaster>\n" +
-            "    <portal>3VOOR12_GRONINGEN</portal>\n" +
-            "    <portal>STERREN24</portal>\n" +
-            "    <exclusive>STERREN24</exclusive>\n" +
-            "    <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\">3VOOR12_GRONINGEN</exclusive>\n" +
-            "    <region platform=\"INTERNETVOD\">NL</region>\n" +
-            "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"INTERNETVOD\">BENELUX</region>\n" +
-            "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"TVVOD\">NL</region>\n" +
-            "    <title type=\"MAIN\">Main title</title>\n" +
-            "    <title type=\"SHORT\">Short title</title>\n" +
-            "    <title type=\"SUB\">Episode title MIS</title>\n" +
-            "    <description type=\"MAIN\">Main description</description>\n" +
-            "    <description type=\"SHORT\">Short description</description>\n" +
-            "    <description type=\"EPISODE\">Episode description MIS</description>\n" +
-            "    <tag>tag1</tag>\n" +
-            "    <tag>tag2</tag>\n" +
-            "    <tag>tag3</tag>\n" +
-            "    <country>GB</country>\n" +
-            "    <country>US</country>\n" +
-            "    <language>nl</language>\n" +
-            "    <language>fr</language>\n" +
-            "    <genre>3.0.1.7.21</genre>\n" +
-            "    <genre>3.0.1.8.25</genre>\n" +
-            "    <avAttributes>\n" +
-            "        <bitrate>1000000</bitrate>\n" +
-            "        <avFileFormat>M4V</avFileFormat>\n" +
-            "        <videoAttributes width=\"640\" height=\"320\">\n" +
-            "            <coding>VCODEC</coding>\n" +
-            "        </videoAttributes>\n" +
-            "        <audioAttributes>\n" +
-            "            <channels>2</channels>\n" +
-            "            <coding>ACODEC</coding>\n" +
-            "        </audioAttributes>\n" +
-            "    </avAttributes>\n" +
-            "    <releaseYear>2004</releaseYear>\n" +
-            "    <duration>P0DT2H0M0.000S</duration>\n" +
-            "    <credits>\n" +
-            "        <person role=\"DIRECTOR\">\n" +
-            "            <givenName>Bregtje</givenName>\n" +
-            "            <familyName>van der Haak</familyName>\n" +
-            "        </person>\n" +
-            "        <person role=\"PRESENTER\">\n" +
-            "            <givenName>Hans</givenName>\n" +
-            "            <familyName>Goedkoop</familyName>\n" +
-            "        </person>\n" +
-            "        <person role=\"PRESENTER\">\n" +
-            "            <givenName>Meta</givenName>\n" +
-            "            <familyName>de Vries</familyName>\n" +
-            "        </person>\n" +
-            "        <person role=\"ACTOR\">\n" +
-            "            <givenName>Claire</givenName>\n" +
-            "            <familyName>Holt</familyName>\n" +
-            "        </person>\n" +
-            "    </credits>\n" +
-            "    <memberOf position=\"1\" highlighted=\"false\">VPROWON_20003</memberOf>\n" +
-            "    <ageRating>12</ageRating>\n" +
-            "    <contentRating>ANGST</contentRating>\n" +
-            "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
-            "    <email>info@npo.nl</email>\n" +
-            "    <email>programma@avro.nl</email>\n" +
-            "    <website>http://www.omroep.nl/programma/journaal</website>\n" +
-            "    <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
-            "    <twitterref>#vpro</twitterref>\n" +
-            "    <twitterref>@twitter</twitterref>\n" +
-            "    <prediction>INTERNETVOD</prediction>\n" +
-            "    <prediction>TVVOD</prediction>\n" +
-            "    <locations>\n" +
-            "        <location urn=\"urn:vpro:media:location:6\">\n" +
-            "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <avFileFormat>MP4</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "            <offset>P0DT0H13M0.000S</offset>\n" +
-            "            <duration>P0DT0H10M0.000S</duration>\n" +
-            "        </location>\n" +
-            "        <location urn=\"urn:vpro:media:location:7\">\n" +
-            "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <avFileFormat>WM</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "        </location>\n" +
-            "        <location urn=\"urn:vpro:media:location:8\">\n" +
-            "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <avFileFormat>WM</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "            <duration>P0DT0H30M33.000S</duration>\n" +
-            "        </location>\n" +
-            "        <location urn=\"urn:vpro:media:location:11\">\n" +
-            "            <programUrl>http://www.vpro.nl/location/1</programUrl>\n" +
-            "            <avAttributes>\n" +
-            "                <avFileFormat>UNKNOWN</avFileFormat>\n" +
-            "            </avAttributes>\n" +
-            "        </location>\n" +
-            "    </locations>\n" +
-            "    <scheduleEvents>\n" +
-            "        <scheduleEvent channel=\"NED3\">\n" +
-            "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
-            "            <guideDay>1969-12-31</guideDay>\n" +
-            "            <duration>P0DT0H0M0.200S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"NED3\">\n" +
-            "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-            "            <guideDay>1970-01-03</guideDay>\n" +
-            "            <duration>P0DT0H0M0.050S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"HOLL\">\n" +
-            "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
-            "            <guideDay>1970-01-08</guideDay>\n" +
-            "            <duration>P0DT0H0M0.250S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "        <scheduleEvent channel=\"CONS\">\n" +
-            "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
-            "            <guideDay>1970-01-10</guideDay>\n" +
-            "            <duration>P0DT0H0M0.200S</duration>\n" +
-            "        </scheduleEvent>\n" +
-            "    </scheduleEvents>\n" +
-            "    <relation type=\"THESAURUS\" broadcaster=\"AVRO\">synoniem</relation>\n" +
-            "    <relation type=\"KOOR\" broadcaster=\"EO\">Ulfts Mannenkoor</relation>\n" +
-            "    <relation type=\"ARTIST\" broadcaster=\"VPRO\">Marco Borsato</relation>\n" +
-            "    <relation type=\"LABEL\" broadcaster=\"VPRO\" uriRef=\"http://www.bluenote.com/\">Blue Note</relation>\n" +
-            "    <images>\n" +
-            "        <image type=\"PICTURE\" urn=\"urn:vpro:media:image:2\" highlighted=\"false\">\n" +
-            "            <title>Eerste plaatje met credits</title>\n" +
-            "            <source>SOURCE</source>\n" +
-            "            <license>PUBLIC_DOMAIN</license>\n" +
-            "            <credits>CREDITS</credits>\n" +
-            "            <urn>urn:vpro:image:11234</urn>\n" +
-            "        </image>\n" +
-            "        <image type=\"PICTURE\" urn=\"urn:vpro:media:image:3\" highlighted=\"false\">\n" +
-            "            <title>Tweede plaatje met credits</title>\n" +
-            "            <source>SOURCE</source>\n" +
-            "            <license>PUBLIC_DOMAIN</license>\n" +
-            "            <credits>CREDITS</credits>\n" +
-            "            <urn>urn:vpro:image:15678</urn>\n" +
-            "        </image>\n" +
-            "    </images>\n" +
-            "    <episodeOf position=\"1\" highlighted=\"false\">VPROWON_30002</episodeOf>\n" +
-            "    <segments>\n" +
-            "        <segment midRef=\"VPROWON_20001\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:segment:12\">\n" +
-            "            <broadcaster>BNN</broadcaster>\n" +
-            "            <broadcaster>AVRO</broadcaster>\n" +
-            "            <portal>3VOOR12_GRONINGEN</portal>\n" +
-            "            <portal>STERREN24</portal>\n" +
-            "            <exclusive>STERREN24</exclusive>\n" +
-            "            <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\">3VOOR12_GRONINGEN</exclusive>\n" +
-            "            <region platform=\"INTERNETVOD\">NL</region>\n" +
-            "            <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"INTERNETVOD\">BENELUX</region>\n" +
-            "            <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"TVVOD\">NL</region>\n" +
-            "            <title type=\"MAIN\">Main title</title>\n" +
-            "            <title type=\"SHORT\">Short title</title>\n" +
-            "            <title type=\"SUB\">Episode title MIS</title>\n" +
-            "            <description type=\"MAIN\">Main description</description>\n" +
-            "            <description type=\"SHORT\">Short description</description>\n" +
-            "            <description type=\"EPISODE\">Episode description MIS</description>\n" +
-            "            <tag>tag1</tag>\n" +
-            "            <tag>tag2</tag>\n" +
-            "            <tag>tag3</tag>\n" +
-            "            <country>GB</country>\n" +
-            "            <country>US</country>\n" +
-            "            <language>nl</language>\n" +
-            "            <language>fr</language>\n" +
-            "            <genre>3.0.1.7.21</genre>\n" +
-            "            <genre>3.0.1.8.25</genre>\n" +
-            "            <avAttributes>\n" +
-            "                <bitrate>1000000</bitrate>\n" +
-            "                <avFileFormat>M4V</avFileFormat>\n" +
-            "                <videoAttributes width=\"640\" height=\"320\">\n" +
-            "                    <coding>VCODEC</coding>\n" +
-            "                </videoAttributes>\n" +
-            "                <audioAttributes>\n" +
-            "                    <channels>2</channels>\n" +
-            "                    <coding>ACODEC</coding>\n" +
-            "                </audioAttributes>\n" +
-            "            </avAttributes>\n" +
-            "            <releaseYear>2004</releaseYear>\n" +
-            "            <duration>P0DT0H1M40.000S</duration>\n" +
-            "            <credits>\n" +
-            "                <person role=\"DIRECTOR\">\n" +
-            "                    <givenName>Bregtje</givenName>\n" +
-            "                    <familyName>van der Haak</familyName>\n" +
-            "                </person>\n" +
-            "                <person role=\"PRESENTER\">\n" +
-            "                    <givenName>Hans</givenName>\n" +
-            "                    <familyName>Goedkoop</familyName>\n" +
-            "                </person>\n" +
-            "                <person role=\"PRESENTER\">\n" +
-            "                    <givenName>Meta</givenName>\n" +
-            "                    <familyName>de Vries</familyName>\n" +
-            "                </person>\n" +
-            "                <person role=\"ACTOR\">\n" +
-            "                    <givenName>Claire</givenName>\n" +
-            "                    <familyName>Holt</familyName>\n" +
-            "                </person>\n" +
-            "            </credits>\n" +
-            "            <memberOf position=\"1\" highlighted=\"false\">VPROWON_20008</memberOf>\n" +
-            "            <ageRating>12</ageRating>\n" +
-            "            <contentRating>ANGST</contentRating>\n" +
-            "            <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
-            "            <email>info@npo.nl</email>\n" +
-            "            <email>programma@avro.nl</email>\n" +
-            "            <website>http://www.omroep.nl/programma/journaal</website>\n" +
-            "            <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
-            "            <twitterref>#vpro</twitterref>\n" +
-            "            <twitterref>@twitter</twitterref>\n" +
-            "            <prediction>INTERNETVOD</prediction>\n" +
-            "            <locations>\n" +
-            "                <location urn=\"urn:vpro:media:location:6\">\n" +
-            "                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
-            "                    <avAttributes>\n" +
-            "                        <avFileFormat>MP4</avFileFormat>\n" +
-            "                    </avAttributes>\n" +
-            "                    <offset>P0DT0H13M0.000S</offset>\n" +
-            "                    <duration>P0DT0H10M0.000S</duration>\n" +
-            "                </location>\n" +
-            "                <location urn=\"urn:vpro:media:location:7\">\n" +
-            "                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>\n" +
-            "                    <avAttributes>\n" +
-            "                        <avFileFormat>WM</avFileFormat>\n" +
-            "                    </avAttributes>\n" +
-            "                </location>\n" +
-            "                <location urn=\"urn:vpro:media:location:8\">\n" +
-            "                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>\n" +
-            "                    <avAttributes>\n" +
-            "                        <avFileFormat>WM</avFileFormat>\n" +
-            "                    </avAttributes>\n" +
-            "                    <duration>P0DT0H30M33.000S</duration>\n" +
-            "                </location>\n" +
-            "                <location urn=\"urn:vpro:media:location:11\">\n" +
-            "                    <programUrl>http://www.vpro.nl/location/1</programUrl>\n" +
-            "                    <avAttributes>\n" +
-            "                        <avFileFormat>UNKNOWN</avFileFormat>\n" +
-            "                    </avAttributes>\n" +
-            "                </location>\n" +
-            "            </locations>\n" +
-            "            <scheduleEvents>\n" +
-            "                <scheduleEvent channel=\"NED3\">\n" +
-            "                    <start>1970-01-01T01:00:00.100+01:00</start>\n" +
-            "                    <guideDay>1969-12-31</guideDay>\n" +
-            "                    <duration>P0DT0H0M0.200S</duration>\n" +
-            "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"NED3\">\n" +
-            "                    <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-            "                    <guideDay>1970-01-03</guideDay>\n" +
-            "                    <duration>P0DT0H0M0.050S</duration>\n" +
-            "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"HOLL\">\n" +
-            "                    <start>1970-01-09T01:00:00.350+01:00</start>\n" +
-            "                    <guideDay>1970-01-08</guideDay>\n" +
-            "                    <duration>P0DT0H0M0.250S</duration>\n" +
-            "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"CONS\">\n" +
-            "                    <start>1970-01-11T01:00:00.600+01:00</start>\n" +
-            "                    <guideDay>1970-01-10</guideDay>\n" +
-            "                    <duration>P0DT0H0M0.200S</duration>\n" +
-            "                </scheduleEvent>\n" +
-            "            </scheduleEvents>\n" +
-            "            <relation type=\"THESAURUS\" broadcaster=\"AVRO\">synoniem</relation>\n" +
-            "            <relation type=\"KOOR\" broadcaster=\"EO\">Ulfts Mannenkoor</relation>\n" +
-            "            <relation type=\"ARTIST\" broadcaster=\"VPRO\">Marco Borsato</relation>\n" +
-            "            <relation type=\"LABEL\" broadcaster=\"VPRO\" uriRef=\"http://www.bluenote.com/\">Blue Note</relation>\n" +
-            "            <images>\n" +
-            "                <image type=\"PICTURE\" urn=\"urn:vpro:media:image:2\" highlighted=\"false\">\n" +
-            "                    <title>Eerste plaatje met credits</title>\n" +
-            "                    <source>SOURCE</source>\n" +
-            "                    <license>PUBLIC_DOMAIN</license>\n" +
-            "                    <credits>CREDITS</credits>\n" +
-            "                    <urn>urn:vpro:image:11234</urn>\n" +
-            "                </image>\n" +
-            "                <image type=\"PICTURE\" urn=\"urn:vpro:media:image:3\" highlighted=\"false\">\n" +
-            "                    <title>Tweede plaatje met credits</title>\n" +
-            "                    <source>SOURCE</source>\n" +
-            "                    <license>PUBLIC_DOMAIN</license>\n" +
-            "                    <credits>CREDITS</credits>\n" +
-            "                    <urn>urn:vpro:image:15678</urn>\n" +
-            "                </image>\n" +
-            "            </images>\n" +
-            "            <start>P0DT0H0M0.000S</start>\n" +
-            "        </segment>\n" +
-            "    </segments>\n" +
-            "</program>");
+                "<program type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_20001\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:program:12\" version=\"5.11\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <broadcaster>BNN</broadcaster>\n" +
+                "    <broadcaster>AVRO</broadcaster>\n" +
+                "    <portal>3VOOR12_GRONINGEN</portal>\n" +
+                "    <portal>STERREN24</portal>\n" +
+                "    <exclusive>STERREN24</exclusive>\n" +
+                "    <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\">3VOOR12_GRONINGEN</exclusive>\n" +
+                "    <region platform=\"INTERNETVOD\">NL</region>\n" +
+                "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"INTERNETVOD\">BENELUX</region>\n" +
+                "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"TVVOD\">NL</region>\n" +
+                "    <title type=\"MAIN\">Main title</title>\n" +
+                "    <title type=\"SHORT\">Short title</title>\n" +
+                "    <title type=\"SUB\">Episode title MIS</title>\n" +
+                "    <description type=\"MAIN\">Main description</description>\n" +
+                "    <description type=\"SHORT\">Short description</description>\n" +
+                "    <description type=\"EPISODE\">Episode description MIS</description>\n" +
+                "    <tag>tag1</tag>\n" +
+                "    <tag>tag2</tag>\n" +
+                "    <tag>tag3</tag>\n" +
+                "    <country>GB</country>\n" +
+                "    <country>US</country>\n" +
+                "    <language>nl</language>\n" +
+                "    <language>fr</language>\n" +
+                "    <genre>3.0.1.7.21</genre>\n" +
+                "    <genre>3.0.1.8.25</genre>\n" +
+                "    <intentions>\n" +
+                "        <intention>ACTIVATING</intention>\n" +
+                "        <intention>INFORM_INDEPTH</intention>\n" +
+                "    </intentions>\n" +
+                "    <avAttributes>\n" +
+                "        <bitrate>1000000</bitrate>\n" +
+                "        <avFileFormat>M4V</avFileFormat>\n" +
+                "        <videoAttributes width=\"640\" height=\"320\">\n" +
+                "            <coding>VCODEC</coding>\n" +
+                "        </videoAttributes>\n" +
+                "        <audioAttributes>\n" +
+                "            <channels>2</channels>\n" +
+                "            <coding>ACODEC</coding>\n" +
+                "        </audioAttributes>\n" +
+                "    </avAttributes>\n" +
+                "    <releaseYear>2004</releaseYear>\n" +
+                "    <duration>P0DT2H0M0.000S</duration>\n" +
+                "    <credits>\n" +
+                "        <person role=\"DIRECTOR\">\n" +
+                "            <givenName>Bregtje</givenName>\n" +
+                "            <familyName>van der Haak</familyName>\n" +
+                "        </person>\n" +
+                "        <person role=\"PRESENTER\">\n" +
+                "            <givenName>Hans</givenName>\n" +
+                "            <familyName>Goedkoop</familyName>\n" +
+                "        </person>\n" +
+                "        <person role=\"PRESENTER\">\n" +
+                "            <givenName>Meta</givenName>\n" +
+                "            <familyName>de Vries</familyName>\n" +
+                "        </person>\n" +
+                "        <person role=\"ACTOR\">\n" +
+                "            <givenName>Claire</givenName>\n" +
+                "            <familyName>Holt</familyName>\n" +
+                "        </person>\n" +
+                "    </credits>\n" +
+                "    <memberOf position=\"1\" highlighted=\"false\">VPROWON_20003</memberOf>\n" +
+                "    <ageRating>12</ageRating>\n" +
+                "    <contentRating>ANGST</contentRating>\n" +
+                "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+                "    <email>info@npo.nl</email>\n" +
+                "    <email>programma@avro.nl</email>\n" +
+                "    <website>http://www.omroep.nl/programma/journaal</website>\n" +
+                "    <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
+                "    <twitterref>#vpro</twitterref>\n" +
+                "    <twitterref>@twitter</twitterref>\n" +
+                "    <prediction>INTERNETVOD</prediction>\n" +
+                "    <prediction>TVVOD</prediction>\n" +
+                "    <locations>\n" +
+                "        <location urn=\"urn:vpro:media:location:6\">\n" +
+                "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
+                "            <avAttributes>\n" +
+                "                <avFileFormat>MP4</avFileFormat>\n" +
+                "            </avAttributes>\n" +
+                "            <offset>P0DT0H13M0.000S</offset>\n" +
+                "            <duration>P0DT0H10M0.000S</duration>\n" +
+                "        </location>\n" +
+                "        <location urn=\"urn:vpro:media:location:7\">\n" +
+                "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>\n" +
+                "            <avAttributes>\n" +
+                "                <avFileFormat>WM</avFileFormat>\n" +
+                "            </avAttributes>\n" +
+                "        </location>\n" +
+                "        <location urn=\"urn:vpro:media:location:8\">\n" +
+                "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>\n" +
+                "            <avAttributes>\n" +
+                "                <avFileFormat>WM</avFileFormat>\n" +
+                "            </avAttributes>\n" +
+                "            <duration>P0DT0H30M33.000S</duration>\n" +
+                "        </location>\n" +
+                "        <location urn=\"urn:vpro:media:location:11\">\n" +
+                "            <programUrl>http://www.vpro.nl/location/1</programUrl>\n" +
+                "            <avAttributes>\n" +
+                "                <avFileFormat>UNKNOWN</avFileFormat>\n" +
+                "            </avAttributes>\n" +
+                "        </location>\n" +
+                "    </locations>\n" +
+                "    <scheduleEvents>\n" +
+                "        <scheduleEvent channel=\"NED3\">\n" +
+                "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+                "            <guideDay>1969-12-31</guideDay>\n" +
+                "            <duration>P0DT0H0M0.200S</duration>\n" +
+                "        </scheduleEvent>\n" +
+                "        <scheduleEvent channel=\"NED3\">\n" +
+                "            <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+                "            <guideDay>1970-01-03</guideDay>\n" +
+                "            <duration>P0DT0H0M0.050S</duration>\n" +
+                "        </scheduleEvent>\n" +
+                "        <scheduleEvent channel=\"HOLL\">\n" +
+                "            <start>1970-01-09T01:00:00.350+01:00</start>\n" +
+                "            <guideDay>1970-01-08</guideDay>\n" +
+                "            <duration>P0DT0H0M0.250S</duration>\n" +
+                "        </scheduleEvent>\n" +
+                "        <scheduleEvent channel=\"CONS\">\n" +
+                "            <start>1970-01-11T01:00:00.600+01:00</start>\n" +
+                "            <guideDay>1970-01-10</guideDay>\n" +
+                "            <duration>P0DT0H0M0.200S</duration>\n" +
+                "        </scheduleEvent>\n" +
+                "    </scheduleEvents>\n" +
+                "    <relation type=\"THESAURUS\" broadcaster=\"AVRO\">synoniem</relation>\n" +
+                "    <relation type=\"KOOR\" broadcaster=\"EO\">Ulfts Mannenkoor</relation>\n" +
+                "    <relation type=\"ARTIST\" broadcaster=\"VPRO\">Marco Borsato</relation>\n" +
+                "    <relation type=\"LABEL\" broadcaster=\"VPRO\" uriRef=\"http://www.bluenote.com/\">Blue Note</relation>\n" +
+                "    <images>\n" +
+                "        <image type=\"PICTURE\" urn=\"urn:vpro:media:image:2\" highlighted=\"false\">\n" +
+                "            <title>Eerste plaatje met credits</title>\n" +
+                "            <source>SOURCE</source>\n" +
+                "            <license>PUBLIC_DOMAIN</license>\n" +
+                "            <credits>CREDITS</credits>\n" +
+                "            <urn>urn:vpro:image:11234</urn>\n" +
+                "        </image>\n" +
+                "        <image type=\"PICTURE\" urn=\"urn:vpro:media:image:3\" highlighted=\"false\">\n" +
+                "            <title>Tweede plaatje met credits</title>\n" +
+                "            <source>SOURCE</source>\n" +
+                "            <license>PUBLIC_DOMAIN</license>\n" +
+                "            <credits>CREDITS</credits>\n" +
+                "            <urn>urn:vpro:image:15678</urn>\n" +
+                "        </image>\n" +
+                "    </images>\n" +
+                "    <episodeOf position=\"1\" highlighted=\"false\">VPROWON_30002</episodeOf>\n" +
+                "    <segments>\n" +
+                "        <segment midRef=\"VPROWON_20001\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:segment:12\">\n" +
+                "            <broadcaster>BNN</broadcaster>\n" +
+                "            <broadcaster>AVRO</broadcaster>\n" +
+                "            <portal>3VOOR12_GRONINGEN</portal>\n" +
+                "            <portal>STERREN24</portal>\n" +
+                "            <exclusive>STERREN24</exclusive>\n" +
+                "            <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\">3VOOR12_GRONINGEN</exclusive>\n" +
+                "            <region platform=\"INTERNETVOD\">NL</region>\n" +
+                "            <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"INTERNETVOD\">BENELUX</region>\n" +
+                "            <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:01:40+01:00\" platform=\"TVVOD\">NL</region>\n" +
+                "            <title type=\"MAIN\">Main title</title>\n" +
+                "            <title type=\"SHORT\">Short title</title>\n" +
+                "            <title type=\"SUB\">Episode title MIS</title>\n" +
+                "            <description type=\"MAIN\">Main description</description>\n" +
+                "            <description type=\"SHORT\">Short description</description>\n" +
+                "            <description type=\"EPISODE\">Episode description MIS</description>\n" +
+                "            <tag>tag1</tag>\n" +
+                "            <tag>tag2</tag>\n" +
+                "            <tag>tag3</tag>\n" +
+                "            <country>GB</country>\n" +
+                "            <country>US</country>\n" +
+                "            <language>nl</language>\n" +
+                "            <language>fr</language>\n" +
+                "            <genre>3.0.1.7.21</genre>\n" +
+                "            <genre>3.0.1.8.25</genre>\n" +
+                "            <intentions>\n" +
+                "                <intention>ACTIVATING</intention>\n" +
+                "                <intention>INFORM_INDEPTH</intention>\n" +
+                "            </intentions>\n" +
+                "            <avAttributes>\n" +
+                "                <bitrate>1000000</bitrate>\n" +
+                "                <avFileFormat>M4V</avFileFormat>\n" +
+                "                <videoAttributes width=\"640\" height=\"320\">\n" +
+                "                    <coding>VCODEC</coding>\n" +
+                "                </videoAttributes>\n" +
+                "                <audioAttributes>\n" +
+                "                    <channels>2</channels>\n" +
+                "                    <coding>ACODEC</coding>\n" +
+                "                </audioAttributes>\n" +
+                "            </avAttributes>\n" +
+                "            <releaseYear>2004</releaseYear>\n" +
+                "            <duration>P0DT0H1M40.000S</duration>\n" +
+                "            <credits>\n" +
+                "                <person role=\"DIRECTOR\">\n" +
+                "                    <givenName>Bregtje</givenName>\n" +
+                "                    <familyName>van der Haak</familyName>\n" +
+                "                </person>\n" +
+                "                <person role=\"PRESENTER\">\n" +
+                "                    <givenName>Hans</givenName>\n" +
+                "                    <familyName>Goedkoop</familyName>\n" +
+                "                </person>\n" +
+                "                <person role=\"PRESENTER\">\n" +
+                "                    <givenName>Meta</givenName>\n" +
+                "                    <familyName>de Vries</familyName>\n" +
+                "                </person>\n" +
+                "                <person role=\"ACTOR\">\n" +
+                "                    <givenName>Claire</givenName>\n" +
+                "                    <familyName>Holt</familyName>\n" +
+                "                </person>\n" +
+                "            </credits>\n" +
+                "            <memberOf position=\"1\" highlighted=\"false\">VPROWON_20008</memberOf>\n" +
+                "            <ageRating>12</ageRating>\n" +
+                "            <contentRating>ANGST</contentRating>\n" +
+                "            <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+                "            <email>info@npo.nl</email>\n" +
+                "            <email>programma@avro.nl</email>\n" +
+                "            <website>http://www.omroep.nl/programma/journaal</website>\n" +
+                "            <website>http://tegenlicht.vpro.nl/afleveringen/222555</website>\n" +
+                "            <twitterref>#vpro</twitterref>\n" +
+                "            <twitterref>@twitter</twitterref>\n" +
+                "            <prediction>INTERNETVOD</prediction>\n" +
+                "            <locations>\n" +
+                "                <location urn=\"urn:vpro:media:location:6\">\n" +
+                "                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
+                "                    <avAttributes>\n" +
+                "                        <avFileFormat>MP4</avFileFormat>\n" +
+                "                    </avAttributes>\n" +
+                "                    <offset>P0DT0H13M0.000S</offset>\n" +
+                "                    <duration>P0DT0H10M0.000S</duration>\n" +
+                "                </location>\n" +
+                "                <location urn=\"urn:vpro:media:location:7\">\n" +
+                "                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>\n" +
+                "                    <avAttributes>\n" +
+                "                        <avFileFormat>WM</avFileFormat>\n" +
+                "                    </avAttributes>\n" +
+                "                </location>\n" +
+                "                <location urn=\"urn:vpro:media:location:8\">\n" +
+                "                    <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>\n" +
+                "                    <avAttributes>\n" +
+                "                        <avFileFormat>WM</avFileFormat>\n" +
+                "                    </avAttributes>\n" +
+                "                    <duration>P0DT0H30M33.000S</duration>\n" +
+                "                </location>\n" +
+                "                <location urn=\"urn:vpro:media:location:11\">\n" +
+                "                    <programUrl>http://www.vpro.nl/location/1</programUrl>\n" +
+                "                    <avAttributes>\n" +
+                "                        <avFileFormat>UNKNOWN</avFileFormat>\n" +
+                "                    </avAttributes>\n" +
+                "                </location>\n" +
+                "            </locations>\n" +
+                "            <scheduleEvents>\n" +
+                "                <scheduleEvent channel=\"NED3\">\n" +
+                "                    <start>1970-01-01T01:00:00.100+01:00</start>\n" +
+                "                    <guideDay>1969-12-31</guideDay>\n" +
+                "                    <duration>P0DT0H0M0.200S</duration>\n" +
+                "                </scheduleEvent>\n" +
+                "                <scheduleEvent channel=\"NED3\">\n" +
+                "                    <start>1970-01-04T01:00:00.300+01:00</start>\n" +
+                "                    <guideDay>1970-01-03</guideDay>\n" +
+                "                    <duration>P0DT0H0M0.050S</duration>\n" +
+                "                </scheduleEvent>\n" +
+                "                <scheduleEvent channel=\"HOLL\">\n" +
+                "                    <start>1970-01-09T01:00:00.350+01:00</start>\n" +
+                "                    <guideDay>1970-01-08</guideDay>\n" +
+                "                    <duration>P0DT0H0M0.250S</duration>\n" +
+                "                </scheduleEvent>\n" +
+                "                <scheduleEvent channel=\"CONS\">\n" +
+                "                    <start>1970-01-11T01:00:00.600+01:00</start>\n" +
+                "                    <guideDay>1970-01-10</guideDay>\n" +
+                "                    <duration>P0DT0H0M0.200S</duration>\n" +
+                "                </scheduleEvent>\n" +
+                "            </scheduleEvents>\n" +
+                "            <relation type=\"THESAURUS\" broadcaster=\"AVRO\">synoniem</relation>\n" +
+                "            <relation type=\"KOOR\" broadcaster=\"EO\">Ulfts Mannenkoor</relation>\n" +
+                "            <relation type=\"ARTIST\" broadcaster=\"VPRO\">Marco Borsato</relation>\n" +
+                "            <relation type=\"LABEL\" broadcaster=\"VPRO\" uriRef=\"http://www.bluenote.com/\">Blue Note</relation>\n" +
+                "            <images>\n" +
+                "                <image type=\"PICTURE\" urn=\"urn:vpro:media:image:2\" highlighted=\"false\">\n" +
+                "                    <title>Eerste plaatje met credits</title>\n" +
+                "                    <source>SOURCE</source>\n" +
+                "                    <license>PUBLIC_DOMAIN</license>\n" +
+                "                    <credits>CREDITS</credits>\n" +
+                "                    <urn>urn:vpro:image:11234</urn>\n" +
+                "                </image>\n" +
+                "                <image type=\"PICTURE\" urn=\"urn:vpro:media:image:3\" highlighted=\"false\">\n" +
+                "                    <title>Tweede plaatje met credits</title>\n" +
+                "                    <source>SOURCE</source>\n" +
+                "                    <license>PUBLIC_DOMAIN</license>\n" +
+                "                    <credits>CREDITS</credits>\n" +
+                "                    <urn>urn:vpro:image:15678</urn>\n" +
+                "                </image>\n" +
+                "            </images>\n" +
+                "            <start>P0DT0H0M0.000S</start>\n" +
+                "        </segment>\n" +
+                "    </segments>\n" +
+                "</program>\n");
 
 
     }
