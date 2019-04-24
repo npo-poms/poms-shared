@@ -374,6 +374,10 @@ public class MediaUpdateTest {
             "    <tag>tag1</tag>\n" +
             "    <tag>tag2</tag>\n" +
             "    <tag>tag3</tag>\n" +
+            "    <intentions owner=\"BROADCASTER\">\n" +
+            "        <intention>ACTIVATING</intention>\n" +
+            "        <intention>INFORM_INDEPTH</intention>\n" +
+            "    </intentions>\n" +
             "    <country code=\"GB\">Verenigd Koninkrijk</country>\n" +
             "    <country code=\"US\">Verenigde Staten</country>\n" +
             "    <language code=\"nl\">Nederlands</language>\n" +
@@ -525,6 +529,10 @@ public class MediaUpdateTest {
             "            <tag>tag1</tag>\n" +
             "            <tag>tag2</tag>\n" +
             "            <tag>tag3</tag>\n" +
+            "            <intentions owner=\"BROADCASTER\">\n" +
+            "                <intention>ACTIVATING</intention>\n" +
+            "                <intention>INFORM_INDEPTH</intention>\n" +
+            "            </intentions>\n" +
             "            <country code=\"GB\">Verenigd Koninkrijk</country>\n" +
             "            <country code=\"US\">Verenigde Staten</country>\n" +
             "            <language code=\"nl\">Nederlands</language>\n" +
@@ -651,6 +659,6 @@ public class MediaUpdateTest {
             "            <start>P0DT0H0M0.000S</start>\n" +
             "        </segment>\n" +
             "    </segments>\n" +
-            "</program>\n");
+            "</program>");
     }
 }

@@ -531,7 +531,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
                         .collect(Collectors.toList());
             }
         }
-        return Collections.emptyList();
+        return new ArrayList<>();
     }
 
     private Intentions toIntentions(List<IntentionType> intentionValues, OwnerType owner){
