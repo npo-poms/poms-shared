@@ -201,6 +201,7 @@ public class Image extends PublishableObject<Image>
     @StringList(maxLength = 255)
     @Getter
     @Setter
+    @XmlElement(name = "crid", namespace = Xmlns.SHARED_NAMESPACE)
     protected List<String> crids;
 
 
@@ -229,8 +230,6 @@ public class Image extends PublishableObject<Image>
     public static class Builder implements EmbargoBuilder<Builder> {
         private OwnerType owner = OwnerType.BROADCASTER;
         private ImageType type = ImageType.PICTURE;
-
-
 
 
         public Builder creationDate(Instant instant) {
