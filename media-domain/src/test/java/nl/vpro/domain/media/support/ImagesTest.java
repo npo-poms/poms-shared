@@ -14,17 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Roelof Jan Koekoek
  * @since 1.6
  */
+@Deprecated
 public class ImagesTest {
     @Before
     public void init() {
         System.clearProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY);
-        ImageBackendServiceHolder.setInstance(new ImageBackendService() {
-            @Override
-            public String getImageBaseUrl() {
-                return System.getProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY);
-
-            }
-        });
+        ImageBackendServiceHolder.setInstance(() -> System.getProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY));
     }
 
     @Test

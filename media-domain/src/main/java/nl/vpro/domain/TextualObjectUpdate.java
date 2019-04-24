@@ -98,6 +98,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return hasTitles() && getTitles().remove(title);
     }
 
+    @SuppressWarnings("unchecked")
     default TO self() {
         return (TO) this;
     }

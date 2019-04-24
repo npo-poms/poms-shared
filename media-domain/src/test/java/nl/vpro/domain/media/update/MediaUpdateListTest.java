@@ -34,6 +34,7 @@ import static org.junit.Assert.assertFalse;
 public class MediaUpdateListTest {
 
 
+    @SuppressWarnings("unchecked")
     @Test
     public void marshalStrings() {
         MediaUpdateList<String> xmlList = new MediaUpdateList<>("a", "b");
@@ -69,6 +70,7 @@ public class MediaUpdateListTest {
     }
 
 
+    @SuppressWarnings("unchecked")
     @Test
     public void mediaUpdateList() throws IOException, SAXException {
         Program program = MediaBuilder
