@@ -1,8 +1,5 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
@@ -20,6 +17,8 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import lombok.Getter;
+import lombok.Setter;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 
