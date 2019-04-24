@@ -158,6 +158,7 @@ public class TextualObjects {
         };
     }
 
+    @SuppressWarnings("unchecked")
     public static <OT extends OwnedText> Collection<? extends OwnedText> getObjects(
         Collection<? extends OT> titles,
         Comparator<OwnerType> ownerTypeComparator,
@@ -171,7 +172,6 @@ public class TextualObjects {
         Comparator<OT> comparator = getComparator(ownerTypeComparator);
         List<OT> list;
         if (titles instanceof List) {
-            //noinspection unchecked
             list = (List<OT>) titles;
         } else {
             list = new ArrayList<>(titles);
@@ -197,7 +197,7 @@ public class TextualObjects {
         for (D description : media.getDescriptions()) {
             result.add(description.getOwner());
         }
-        return result.toArray(new OwnerType[result.size()]);
+        return result.toArray(new OwnerType[0]);
     }
 
 
@@ -244,12 +244,12 @@ public class TextualObjects {
     }
 
 
+    @SuppressWarnings("unchecked")
     public static <S> SortedSet<S> sorted(Set<S> set) {
         if (set == null) {
             return null;
         }
         if (set instanceof SortedSet) {
-            //noinspection unchecked
             return (SortedSet) set;
         } else {
             return new ResortedSortedSet<>(set);

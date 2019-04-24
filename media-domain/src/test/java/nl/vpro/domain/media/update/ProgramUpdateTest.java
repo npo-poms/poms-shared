@@ -127,6 +127,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(errors).hasSize(1);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testFetchForOwner() {
         SegmentUpdate segment = SegmentUpdate.create();
@@ -258,6 +259,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testGetGeoRestrictions() throws Exception {
         ProgramUpdate update = programUpdate();
@@ -550,6 +552,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testGetImages() throws Exception {
 

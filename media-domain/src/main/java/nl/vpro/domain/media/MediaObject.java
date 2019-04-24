@@ -74,6 +74,7 @@ import static nl.vpro.domain.media.MediaObject.*;
  *
  * @author roekoe
  */
+@SuppressWarnings("WSReferenceInspection")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable
@@ -361,6 +362,7 @@ public abstract class MediaObject
     @Language
     protected List<Locale> languages;
 
+    @SuppressWarnings("NullableProblems")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
@@ -1177,6 +1179,7 @@ public abstract class MediaObject
     }
 
 
+    @SuppressWarnings("unchecked")
     public void setIntentions(@Nonnull SortedSet<Intentions> newIntentions) {
 
        if (containsDuplicateOwner(newIntentions))
@@ -1341,7 +1344,7 @@ public abstract class MediaObject
 
 
     /**
-     * Use {@link AuthorizedDuration#duration} in combination with {@link #getDuration} to get the java.time.Duration
+     * Use {@link AuthorizedDuration#get()} in combination with {@link #getDuration} to get the java.time.Duration
      * @throws ModificationException If you may not set the duration
      */
     @JsonIgnore
@@ -1667,6 +1670,7 @@ public abstract class MediaObject
         return ageRating;
     }
 
+    @SuppressWarnings("ConstantConditions")
     public void setAgeRating(AgeRating ageRating) {
         if (this.ageRating != ageRating) {
             this.locationAuthorityUpdate = true;
@@ -2031,7 +2035,7 @@ public abstract class MediaObject
     protected Prediction findOrCreatePrediction(Platform platform, ReadonlyEmbargo embargo) {
          Prediction prediction = getPrediction(platform);
         if (prediction == null) {
-            log.debug("Creating prediction object for {}: ", platform, this);
+            log.debug("Creating prediction object for {}: {}", platform, this);
             prediction = new Prediction(platform);
             Embargos.copy(embargo, prediction);
             prediction.setPlannedAvailability(false);
