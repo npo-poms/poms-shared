@@ -285,6 +285,7 @@
       <xs:element type="genreType" name="genre" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="tagType" name="tag" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="intentionType" name="intentions" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="targetGroupsType" name="targetGroups"  minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="xs:string" name="source" minOccurs="0"/>
       <xs:element type="countryType" name="country" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="languageType" name="language" minOccurs="0" maxOccurs="unbounded"/>
@@ -410,6 +411,18 @@
       <xs:enumeration value="ENTERTAINMENT_LEASURE"/>
       <xs:enumeration value="ENTERTAINMENT_INFORMATIVE"/>
       <xs:enumeration value="ACTIVATING"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="targetGroupEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="KIDS_6"/>
+      <xs:enumeration value="KIDS_12"/>
+      <xs:enumeration value="YOUNG_ADULTS"/>
+      <xs:enumeration value="ADULTS"/>
+      <xs:enumeration value="ADULTS_WITH_KIDS_6"/>
+      <xs:enumeration value="ADULTS_WITH_KIDS_12"/>
+      <xs:enumeration value="EVERYONE"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -907,10 +920,18 @@
 
   <xs:complexType name="intentionType">
     <xs:sequence>
-      <xs:element name="values" type="intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="intention" type="intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
   </xs:complexType>
+
+  <xs:complexType name="targetGroupsType">
+    <xs:sequence>
+      <xs:element name="values" type="targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
+
 
   <xs:simpleType name="geoRestrictionEnum">
     <xs:restriction base="xs:string">

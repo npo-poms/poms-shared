@@ -1,21 +1,18 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Setter;
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.Ownable;
-import nl.vpro.domain.media.support.OwnableR;
-import nl.vpro.domain.media.support.OwnerType;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-import java.io.Serializable;
-import java.lang.annotation.Target;
-import java.util.List;
-import java.util.Objects;
+
+import nl.vpro.domain.Child;
+import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.support.OwnableR;
+import nl.vpro.domain.media.support.OwnerType;
 
 import static javax.persistence.CascadeType.ALL;
 

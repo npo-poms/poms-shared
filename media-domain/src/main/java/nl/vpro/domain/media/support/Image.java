@@ -11,6 +11,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -23,6 +24,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -73,7 +75,8 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
         "source",
         "sourceName",
         "license",
-        "date"
+        "date",
+        "crids"
     })
 @JsonPropertyOrder({
     "title",
@@ -91,7 +94,8 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "type",
     "highlighted",
     "creationDate",
-    "workflow"
+    "workflow",
+    "crids"
 })
 @Slf4j
 public class Image extends PublishableObject<Image>
@@ -189,6 +193,18 @@ public class Image extends PublishableObject<Image>
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String date;
 
+
+    @ElementCollection
+    @Column(name = "crid", nullable = false, unique = true)
+    @OrderColumn(name = "list_index", nullable = false)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @StringList(maxLength = 255)
+    @Getter
+    @Setter
+    @XmlElement(name = "crid", namespace = Xmlns.SHARED_NAMESPACE)
+    protected List<String> crids;
+
+
     @ManyToOne
     @XmlTransient
     private MediaObject mediaObject;
@@ -214,8 +230,6 @@ public class Image extends PublishableObject<Image>
     public static class Builder implements EmbargoBuilder<Builder> {
         private OwnerType owner = OwnerType.BROADCASTER;
         private ImageType type = ImageType.PICTURE;
-
-
 
 
         public Builder creationDate(Instant instant) {

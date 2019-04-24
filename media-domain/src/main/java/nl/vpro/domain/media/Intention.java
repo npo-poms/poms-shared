@@ -1,13 +1,23 @@
 package nl.vpro.domain.media;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
@@ -16,7 +26,8 @@ import nl.vpro.domain.DomainObject;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionType")
 @Data
-@EqualsAndHashCode(callSuper = true, exclude = "parent")
+@JsonSerialize(using = Intention.Serializer.class)
+@JsonDeserialize(using = Intention.Deserializer.class)
 public class Intention extends DomainObject implements Serializable, Child<Intentions> {
 
 
@@ -25,7 +36,7 @@ public class Intention extends DomainObject implements Serializable, Child<Inten
     private Intentions parent;
 
     @Enumerated(EnumType.STRING)
-    @XmlAttribute(name = "type")
+    @XmlValue
     public IntentionType value;
 
 
@@ -52,5 +63,20 @@ public class Intention extends DomainObject implements Serializable, Child<Inten
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), value);
+    }
+
+    public static class Serializer extends JsonSerializer<Intention> {
+        @Override
+        public void serialize(Intention value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            gen.writeString(value.getValue().name());
+        }
+    }
+
+
+    public static class Deserializer extends JsonDeserializer<Intention> {
+        @Override
+        public Intention deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            return new Intention(IntentionType.valueOf(p.getValueAsString()));
+        }
     }
 }
