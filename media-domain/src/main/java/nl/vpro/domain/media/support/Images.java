@@ -6,6 +6,8 @@ package nl.vpro.domain.media.support;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.annotation.Nonnull;
+
 /**
  * See https://jira.vpro.nl/browse/MSE-1212
  *
@@ -28,9 +30,13 @@ public class Images {
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
-    public static String getImageLocation(Image image, String fileExtension, String... conversions) {
+    public static String getImageLocation(@Nonnull Image image, String fileExtension, String... conversions) {
         ImageBackendService instance = ImageBackendServiceHolder.getInstance();
-        return instance.getImageLocation(instance.getId(image), fileExtension, conversions);
+        Long id = instance.getId(image);
+        if (id == null) {
+            return null;
+        }
+        return instance.getImageLocation(id, fileExtension, conversions);
 
 
     }

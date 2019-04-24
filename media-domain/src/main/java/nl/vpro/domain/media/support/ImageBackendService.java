@@ -14,12 +14,14 @@ public interface ImageBackendService {
 
 
     default Long getId(@Nonnull Image image) {
-
         return getIdFromImageUri(image.getImageUri());
     }
 
     default Long getIdFromImageUri(@Nonnull String imageUri) {
 
+        if (imageUri == null) {
+            return null;
+        }
         Matcher matcher = Image.SERVER_URI_PATTERN.matcher(imageUri);
         if(!matcher.find()) {
             return null;
@@ -36,10 +38,7 @@ public interface ImageBackendService {
     String getImageBaseUrl();
 
 
-    default String getOriginalUrl(Long id) {
-        if (id == null) {
-            return null;
-        }
+    default String getOriginalUrl(@Nonnull Long id) {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder result = new StringBuilder();
         result.append(imageServerBaseUrl).append("api/images/").append(id);
@@ -53,7 +52,7 @@ public interface ImageBackendService {
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
-    default String getImageLocation(Long  id , String fileExtension, String... conversions) {
+    default String getImageLocation(@Nonnull Long  id , String fileExtension, String... conversions) {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder builder = new StringBuilder(imageServerBaseUrl);
         for (String conversion : conversions) {

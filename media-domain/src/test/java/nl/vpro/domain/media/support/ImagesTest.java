@@ -28,7 +28,7 @@ public class ImagesTest {
 
     @Test
     public void testGetImageLocationOnMissingSystemProperty() {
-        String location = Images.getImageLocation(null, null);
+        String location = Images.getImageLocation(new Image(), null);
         assertThat(location).isNull();
     }
 
@@ -52,7 +52,7 @@ public class ImagesTest {
     }
 
     @Test
-    public void testGetImageLocationOnInbValidURI() {
+    public void testGetImageLocationOnInValidURI() {
         System.setProperty("image.server.baseUrl", "http://domain.com/");
         String location = Images.getImageLocation(new Image(OwnerType.BROADCASTER, "urn:vpro:image:123aa"), "jpg");
         assertThat(location).isNull();
