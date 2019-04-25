@@ -85,6 +85,13 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="targetGroups" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="targetGroup" type="media:targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="avAttributes" type="avAtributeUpdateType" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
       <xs:element name="duration" type="xs:duration" minOccurs="0"/>

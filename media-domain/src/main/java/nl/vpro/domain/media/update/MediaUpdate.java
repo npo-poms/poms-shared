@@ -95,6 +95,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
         "languages",
         "genres",
         "intentions",
+        "targetGroups",
         "avAttributes",
         "releaseYear",
         "duration",
@@ -219,6 +220,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
      */
     protected List<IntentionType> intentions;
 
+    protected List<TargetGroupType> targetGroups;
+
     @Valid
     protected Asset asset;
 
@@ -337,6 +340,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.persons = toList(MediaObjects.getPersons(mediaobject), PersonUpdate::new, true);
 
         this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
+        this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
 
         this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
         this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
@@ -508,6 +512,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
         returnObject.addIntention(toIntentions(intentions, owner));
+        returnObject.addTargetGroups(toTargetGroups(targetGroups, owner));
+
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
             ScheduleEvent e = s.toScheduleEvent(owner);
             e.setParent(returnObject);
@@ -539,6 +545,26 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 .owner(owner)
                 .values(intentionValues.stream()
                         .map(Intention::new)
+                        .collect(Collectors.toList()))
+                .build();
+    }
+
+    private List<TargetGroupType> toUpdateTargetGroups(SortedSet<TargetGroups> targetGroups, OwnerType owner){
+        for (TargetGroups targetGroup : targetGroups) {
+            if (targetGroup.getOwner() == owner) {
+                return targetGroup.getValues().stream()
+                        .map(TargetGroup::getValue)
+                        .collect(Collectors.toList());
+            }
+        }
+        return new ArrayList<>();
+    }
+
+    private TargetGroups toTargetGroups(List<TargetGroupType> targetGroupValues, OwnerType owner){
+        return TargetGroups.builder()
+                .owner(owner)
+                .values(targetGroupValues.stream()
+                        .map(TargetGroup::new)
                         .collect(Collectors.toList()))
                 .build();
     }
@@ -915,6 +941,20 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     public void setIntentions(List<IntentionType> intentions) {
         this.intentions = intentions;
+    }
+
+    @XmlElementWrapper(name = "targetGroups")
+    @XmlElement(name = "targetGroup")
+    @Nonnull
+    public List<TargetGroupType> getTargetGroups() {
+        if (targetGroups == null) {
+            targetGroups = new ArrayList<>();
+        }
+        return targetGroups;
+    }
+
+    public void setTargetGroups(List<TargetGroupType> targetGroups) {
+        this.targetGroups = targetGroups;
     }
 
 

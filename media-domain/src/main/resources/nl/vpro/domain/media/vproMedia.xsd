@@ -927,7 +927,7 @@
 
   <xs:complexType name="targetGroupsType">
     <xs:sequence>
-      <xs:element name="values" type="targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="targetGroup" type="targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
   </xs:complexType>
