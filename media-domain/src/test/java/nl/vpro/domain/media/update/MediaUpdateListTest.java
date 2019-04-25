@@ -96,27 +96,32 @@ public class MediaUpdateListTest {
         StringWriter writer = new StringWriter();
         JAXB.marshal(list, writer);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<list size='1' offset='0' totalCount='1' xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <item xsi:type=\"programUpdateType\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_1234\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-            "        <broadcaster>VPRO</broadcaster>\n" +
-            "        <title type=\"MAIN\">hoi</title>\n" +
-            "        <locations/>\n" +
-            "        <scheduleEvents/>\n" +
-            "        <images/>\n" +
-            "        <segments>\n" +
-            "            <segment type=\"VISUALRADIOSEGMENT\" midRef=\"POMS_1234\" avType=\"VIDEO\" embeddable=\"true\">\n" +
-            "                <broadcaster>VPRO</broadcaster>\n" +
-            "                <title type=\"MAIN\">segmenttitel</title>\n" +
-            "                <locations/>\n" +
-            "                <scheduleEvents/>\n" +
-            "                <images/>\n" +
-            "                <start>P0DT0H0M0.000S</start>\n" +
-            "            </segment>\n" +
-            "        </segments>\n" +
-            "    </item>\n" +
-            "</list>\n";
-        //System.out.println(writer.toString());
+        String expected = "\"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<list offset=\"0\" totalCount=\"1\" size=\"1\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <item xsi:type=\"programUpdateType\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_1234\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
+                "        <broadcaster>VPRO</broadcaster>\n" +
+                "        <title type=\"MAIN\">hoi</title>\n" +
+                "        <intentions/>\n" +
+                "        <targetGroups/>\n" +
+                "        <locations/>\n" +
+                "        <scheduleEvents/>\n" +
+                "        <images/>\n" +
+                "        <segments>\n" +
+                "            <segment midRef=\"POMS_1234\" type=\"VISUALRADIOSEGMENT\" avType=\"VIDEO\" embeddable=\"true\">\n" +
+                "                <broadcaster>VPRO</broadcaster>\n" +
+                "                <title type=\"MAIN\">segmenttitel</title>\n" +
+                "                <intentions/>\n" +
+                "                <targetGroups/>\n" +
+                "                <locations/>\n" +
+                "                <scheduleEvents/>\n" +
+                "                <images/>\n" +
+                "                <start>P0DT0H0M0.000S</start>\n" +
+                "            </segment>\n" +
+                "        </segments>\n" +
+                "    </item>\n" +
+                "</list>\n" +
+                "\"";
+        System.out.println(writer.toString());
         Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
         MediaUpdateList<ProgramUpdate> list2 = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);
         if (diff.hasDifferences()) {

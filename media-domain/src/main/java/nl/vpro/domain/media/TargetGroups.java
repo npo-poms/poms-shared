@@ -10,6 +10,8 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.OwnableR;
@@ -34,8 +36,9 @@ public class TargetGroups extends DomainObject implements Serializable, Child<Me
 
     @OneToMany(cascade = {ALL})
     @JoinColumn(name = "parent_id")
+    @JsonProperty("values")
     @OrderColumn(name = "list_index", nullable = true)
-    @XmlElement
+    @XmlElement(name="targetGroup")
     private List<TargetGroup> values;
 
     public TargetGroups() {}
