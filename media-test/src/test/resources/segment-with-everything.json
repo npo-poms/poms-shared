@@ -105,6 +105,26 @@
     "tag2",
     "tag3"
   ],
+  "intentions": [
+    {
+      "owner": "BROADCASTER",
+      "values": [ "ACTIVATING", "INFORM_INDEPTH" ]
+    },
+    {
+      "owner": "NPO",
+      "values": [ "ENTERTAINMENT_INFORMATIVE", "INFORM" ]
+    }
+  ],
+  "targetGroups": [
+    {
+      "owner": "BROADCASTER",
+      "values": [ "ADULTS" ]
+    },
+    {
+      "owner": "NPO",
+      "values": [ "KIDS_6", "KIDS_12" ]
+    }
+  ],
   "source": "Naar het gelijknamige boek van W.F. Hermans",
   "hasSubtitles": true,
   "countries": [

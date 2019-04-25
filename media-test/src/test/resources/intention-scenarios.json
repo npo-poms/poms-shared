@@ -6,7 +6,7 @@
     "genres":[],
     "intentions":
     [
-      {"owner":"BROADCASTER", "values":["ACTIVATING"]},
+      {"owner":"BROADCASTER", "values":["ACTIVATING", "INFORM_INDEPTH"]},
       {"owner":"NPO", "values":["ENTERTAINMENT_INFORMATIVE", "INFORM"]}
     ],
     "countries":[],
