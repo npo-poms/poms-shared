@@ -59,11 +59,13 @@ public class GroupUpdateTest extends MediaUpdateTest {
         update.setType(GroupType.SEASON);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<group xmlns=\"urn:vpro:media:update:2009\" type=\"SEASON\" ordered=\"true\" embeddable=\"true\">\n" +
-            "  <locations/>\n" +
-            "  <scheduleEvents/>\n" +
-            "  <images/>\n" +
-            "</group>\n";
+                "<group ordered=\"true\" type=\"SEASON\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <intentions/>\n" +
+                "    <targetGroups/>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "</group>\n";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -75,12 +77,14 @@ public class GroupUpdateTest extends MediaUpdateTest {
         update.setPoSeriesID("VPWON_333");
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<group xmlns=\"urn:vpro:media:update:2009\" ordered=\"true\" embeddable=\"true\" mid=\"VPWON_333\">\n" +
-            "  <locations/>\n" +
-            "  <scheduleEvents/>\n" +
-            "  <images/>\n" +
-            "  <poSeriesID>VPWON_333</poSeriesID>\n" +
-            "</group>\n";
+                "<group ordered=\"true\" embeddable=\"true\" mid=\"VPWON_333\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <intentions/>\n" +
+                "    <targetGroups/>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <poSeriesID>VPWON_333</poSeriesID>\n" +
+                "</group>\n";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }

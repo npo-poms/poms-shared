@@ -1,17 +1,16 @@
 package nl.vpro.domain.media;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AccessLevel;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.OwnableR;
@@ -32,6 +31,7 @@ public class TargetGroups extends DomainObject implements Serializable, Child<Me
 
     @Enumerated(EnumType.STRING)
     @XmlAttribute
+    @Setter(AccessLevel.PRIVATE)
     private OwnerType owner;
 
     @OneToMany(cascade = {ALL})

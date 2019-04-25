@@ -96,7 +96,7 @@ public class MediaUpdateListTest {
         StringWriter writer = new StringWriter();
         JAXB.marshal(list, writer);
 
-        String expected = "\"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<list offset=\"0\" totalCount=\"1\" size=\"1\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <item xsi:type=\"programUpdateType\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_1234\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
                 "        <broadcaster>VPRO</broadcaster>\n" +
@@ -119,8 +119,7 @@ public class MediaUpdateListTest {
                 "            </segment>\n" +
                 "        </segments>\n" +
                 "    </item>\n" +
-                "</list>\n" +
-                "\"";
+                "</list>";
         System.out.println(writer.toString());
         Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
         MediaUpdateList<ProgramUpdate> list2 = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);

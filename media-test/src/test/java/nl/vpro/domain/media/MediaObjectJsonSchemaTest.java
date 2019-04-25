@@ -726,7 +726,7 @@ public class MediaObjectJsonSchemaTest {
             "  \"genres\" : [ ],\n" +
             "  \"intentions\" : [ {\n" +
             "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"values\" : [ \"ACTIVATING\" ]\n" +
+            "    \"values\" : [ \"ACTIVATING\", \"INFORM_INDEPTH\" ]\n" +
             "  }, {\n" +
             "    \"owner\" : \"NPO\",\n" +
             "    \"values\" : [ \"ENTERTAINMENT_INFORMATIVE\", \"INFORM\" ]\n" +
