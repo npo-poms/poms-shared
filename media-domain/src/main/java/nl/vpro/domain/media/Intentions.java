@@ -75,7 +75,7 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     @Override
     public int compareTo(Intentions o) {
         if (this.getOwner().equals(o.getOwner())){
-            if (!this.values.equals(o.values)) {
+            if (this.values != o.values && !this.values.equals(o.values)) {
                 return -1;
             }
         }

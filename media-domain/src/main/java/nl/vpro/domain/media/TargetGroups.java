@@ -73,7 +73,7 @@ public class TargetGroups extends DomainObject implements Serializable, Child<Me
     @Override
     public int compareTo(TargetGroups o) {
         if (this.getOwner().equals(o.getOwner())){
-            if (!this.values.equals(o.values)) {
+            if (this.values != o.values && !this.values.equals(o.values)) {
                 return -1;
             }
         }
