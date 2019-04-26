@@ -543,7 +543,7 @@ public class MediaUpdateTest {
             "                <intention>ACTIVATING</intention>\n" +
             "                <intention>INFORM_INDEPTH</intention>\n" +
             "            </intentions>\n" +
-            "            <targetGroups>\n" +
+            "            <targetGroups owner=\"BROADCASTER\">" +
             "                <targetGroup>ADULTS</targetGroup>\n" +
             "            </targetGroups>\n" +
             "            <country code=\"GB\">Verenigd Koninkrijk</country>\n" +
