@@ -74,21 +74,4 @@ public class TargetGroupsTest {
 
     }
 
-    /**
-     * This scenario occurr while parsing an empty xml placeholder
-     */
-    @Test
-    public void testCompareToWhenNull() {
-        TargetGroups targetGroups1 = TargetGroups.builder()
-                .owner(BROADCASTER)
-                .values(null)
-                .build();
-
-        TargetGroups targetGroups2 = TargetGroups.builder()
-                .owner(BROADCASTER)
-                .values(null)
-                .build();
-
-        assertThat(targetGroups1.compareTo(targetGroups2)).isZero();
-    }
 }
