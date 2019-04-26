@@ -108,21 +108,4 @@ public class IntentionsTest {
 
     }
 
-    /**
-     * This scenario occurr while parsing an empty xml intentions placeholder
-     */
-    @Test
-    public void testCompareToWhenNull() {
-        Intentions intentionsA = Intentions.builder()
-                .owner(BROADCASTER)
-                .values(null)
-                .build();
-
-        Intentions intentionsB = Intentions.builder()
-                .owner(BROADCASTER)
-                .values(null)
-                .build();
-
-        assertThat(intentionsA.compareTo(intentionsB)).isZero();
-    }
 }
