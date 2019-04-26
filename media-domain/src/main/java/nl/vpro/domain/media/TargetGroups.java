@@ -85,4 +85,10 @@ public class TargetGroups extends DomainObject implements Serializable, Child<Me
         return this.getOwner().compareTo(o.getOwner());
     }
 
+
+
+    @Override
+    public String toString() {
+        return "Target groups:" + owner + ":" + values;
+    }
 }

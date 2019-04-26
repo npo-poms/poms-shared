@@ -1,5 +1,10 @@
 package nl.vpro.domain.media;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +12,9 @@ import java.util.Objects;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NonNull;
-import lombok.AccessLevel;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.OwnableR;
@@ -83,4 +85,8 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
         return this.getOwner().compareTo(o.getOwner());
     }
 
+    @Override
+    public String toString() {
+        return "Intentions:" + owner + ":" + values;
+    }
 }
