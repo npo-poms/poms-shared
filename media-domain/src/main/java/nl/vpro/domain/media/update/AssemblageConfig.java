@@ -90,7 +90,7 @@ public class AssemblageConfig {
      * Otherwise consider this situation errorneous.
      */
     @lombok.Builder.Default
-    boolean stealSegments = false;
+    Steal stealSegments = Steal.NO;
 
     /**
      * On default it you merge a program, exsisting segments will not be removed
@@ -102,6 +102,9 @@ public class AssemblageConfig {
 
     @lombok.Builder.Default
     Function<String, Boolean> cridsForDelete = (c) -> false;
+
+    @lombok.Builder.Default
+    boolean updateType = false;
 
     SimpleLogger logger;
 
@@ -133,6 +136,7 @@ public class AssemblageConfig {
             stealSegments,
             segmentsForDeletion,
             cridsForDelete,
+            updateType,
             logger);
     }
     public AssemblageConfig withLogger(SimpleLogger logger) {
@@ -162,7 +166,8 @@ public class AssemblageConfig {
             .locationsUpdate(true)
             .stealMids(Steal.YES)
             .stealCrids(Steal.YES)
-            .stealSegments(true)
+            .stealSegments(Steal.YES)
+            .updateType(true)
             ;
     }
 
