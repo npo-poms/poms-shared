@@ -45,7 +45,7 @@ public enum TargetGroupType {
     EVERYONE {
         @Override
         public String toString() {
-            return "Idereen";
+            return "Iedereen";
         }
     }
 }
