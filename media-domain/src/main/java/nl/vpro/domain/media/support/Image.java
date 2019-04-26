@@ -27,6 +27,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -202,6 +203,7 @@ public class Image extends PublishableObject<Image>
     @Getter
     @Setter
     @XmlElement(name = "crid", namespace = Xmlns.SHARED_NAMESPACE)
+    @JsonProperty("crids")
     protected List<String> crids;
 
 
