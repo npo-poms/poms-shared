@@ -156,7 +156,6 @@ public class MediaObjects {
 
         // to.setHasSubtitles(from.hasSubtitles());
         to.setImages(from.getImages());
-        to.setIntentions(from.getIntentions());
         to.setIsDubbed(from.isDubbed());
 
         to.setLanguages(from.getLanguages());
