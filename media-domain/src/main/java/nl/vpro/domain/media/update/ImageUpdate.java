@@ -10,10 +10,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 import javax.activation.DataHandler;
@@ -255,7 +252,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         this.credits = credits;
         this.publishStartInstant = publishStart;
         this.publishStopInstant = publishStop;
-        this.crids = crids;
+        this.crids = new ArrayList<>(crids);
     }
 
 
