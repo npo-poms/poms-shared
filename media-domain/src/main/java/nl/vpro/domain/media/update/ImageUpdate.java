@@ -10,9 +10,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 import javax.activation.DataHandler;
@@ -43,10 +41,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
-import nl.vpro.validation.NoHtml;
-import nl.vpro.validation.ReleaseDate;
-import nl.vpro.validation.URI;
-import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -66,7 +61,8 @@ import static nl.vpro.domain.media.update.MediaUpdate.VALIDATOR;
     "credits",
     "date",
     "offset",
-    "image"
+    "image",
+    "crids"
 })
 
 @Slf4j
@@ -83,6 +79,9 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     @XmlAttribute(name = "urn")
     @Pattern(regexp = "^urn:vpro:media:image:[0-9]+$")
     private String urn;
+
+
+
 
     @XmlAttribute(name = "publishStart")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
@@ -154,6 +153,8 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     protected java.time.Duration offset;
 
 
+
+
     /**
      * <p>
      * Description of the image. If this describes an existing {@link Image} then the type of this
@@ -170,6 +171,9 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     })
     @Valid
     private Object image;
+
+    @XmlElement(name = "crid")
+    private List<@CRID String> crids;
 
 
     public ImageUpdate() {
@@ -217,7 +221,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public ImageUpdate(
+    private ImageUpdate(
         ImageType type,
         String title,
         String description,
@@ -229,7 +233,8 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         String sourceName,
         String credits,
         Instant publishStart,
-        Instant publishStop
+        Instant publishStop,
+        List<String> crids
         ) {
         this.description = description;
         this.title = title;
@@ -247,6 +252,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         this.credits = credits;
         this.publishStartInstant = publishStart;
         this.publishStopInstant = publishStop;
+        this.crids = new ArrayList<>(crids);
     }
 
 
@@ -270,6 +276,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         date = image.getDate();
         offset = image.getOffset();
         urn = image.getUrn();
+        crids = image.getCrids();
     }
 
     public Image toImage() {
@@ -289,7 +296,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         } else if (image instanceof ImageLocation) {
             //result.setImageUri(((ImageLocation) image).getUrl());
         }
-
+        result.setCrids(crids);
         Embargos.copy(this, result);
         return result;
     }

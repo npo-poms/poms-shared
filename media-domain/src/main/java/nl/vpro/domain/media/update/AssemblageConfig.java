@@ -14,7 +14,7 @@ import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
-import nl.vpro.util.Version;
+import nl.vpro.util.IntegerVersion;
 
 /**
  * @author Michiel Meeuwissen
@@ -90,7 +90,7 @@ public class AssemblageConfig {
      * Otherwise consider this situation errorneous.
      */
     @lombok.Builder.Default
-    boolean stealSegments = false;
+    Steal stealSegments = Steal.NO;
 
     /**
      * On default it you merge a program, exsisting segments will not be removed
@@ -99,6 +99,12 @@ public class AssemblageConfig {
      */
     @lombok.Builder.Default
     BiFunction<Segment, AssemblageConfig, Boolean> segmentsForDeletion = (s, ac) -> false;
+
+    @lombok.Builder.Default
+    Function<String, Boolean> cridsForDelete = (c) -> false;
+
+    @lombok.Builder.Default
+    boolean updateType = false;
 
     SimpleLogger logger;
 
@@ -129,6 +135,8 @@ public class AssemblageConfig {
             stealCrids,
             stealSegments,
             segmentsForDeletion,
+            cridsForDelete,
+            updateType,
             logger);
     }
     public AssemblageConfig withLogger(SimpleLogger logger) {
@@ -158,7 +166,8 @@ public class AssemblageConfig {
             .locationsUpdate(true)
             .stealMids(Steal.YES)
             .stealCrids(Steal.YES)
-            .stealSegments(true)
+            .stealSegments(Steal.YES)
+            .updateType(true)
             ;
     }
 
@@ -166,7 +175,7 @@ public class AssemblageConfig {
         return segmentsForDeletion.apply(segment, this);
     }
 
-    public void backwardsCompatible(Version version) {
+    public void backwardsCompatible(IntegerVersion version) {
         setCopyLanguageAndCountry(version != null && version.isNotBefore(5, 0));
         setCopyPredictions(version != null && version.isNotBefore(5, 6));
         setCopyTwitterrefs(version != null && version.isNotBefore(5, 10));

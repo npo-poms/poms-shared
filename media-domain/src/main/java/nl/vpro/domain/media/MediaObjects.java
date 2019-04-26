@@ -14,6 +14,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.Iterables;
 
 import nl.vpro.domain.*;
@@ -115,18 +117,69 @@ public class MediaObjects {
     }
 
 
-    public static void copy(MediaObject from, MediaObject to) {
+    /**
+     * Copies most field values from one media object to another.
+     *
+     * In principal this should be all fields of which the value logically can exist on more than one mediaobject the same time,
+     * so not unique fields like id and mid.
+     *
+     * Also membership of groups will not be automaticly filled. This would need write access on those objects.
+     *
+     * Scheduleevents, predictions, workflow, subtitles status are not copied too, since this this would not make sense.
+     *
+     *
+     *
+     */
+    public static void copy(@Nonnull MediaObject from, @Nonnull MediaObject to) {
         Embargos.copy(from, to);
         TextualObjects.copy(from, to);
-        to.setCountries(from.getCountries());
-        to.setLanguages(from.getLanguages());
-        to.setDuration(from.getDuration());
+
         to.setAgeRating(from.getAgeRating());
+        to.setAvAttributes(from.getAvAttributes());
+        to.setAVType(from.getAVType());
+        to.setAwards(from.getAwards());
+
+        to.setBroadcasters(from.getBroadcasters());
+
         to.setContentRatings(from.getContentRatings());
-        to.setWebsites(from.getWebsites());
+        to.setCountries(from.getCountries());
+
+        to.setDuration(from.getDuration());
+
+
+        //to.setDescendantOf();
         to.setEmail(from.getEmail());
+        to.setEmbeddable(from.isEmbeddable());
+
         to.setGenres(from.getGenres());
-        // TODO: more fields
+        to.setGeoRestrictions(from.getGeoRestrictions());
+
+        // to.setHasSubtitles(from.hasSubtitles());
+        to.setImages(from.getImages());
+        to.setIsDubbed(from.isDubbed());
+
+        to.setLanguages(from.getLanguages());
+        to.setLocations(from.getLocations());
+
+        //to.setMediaType(from.getMediaType());
+        //to.setMemberOf();
+
+        to.setPersons(from.getPersons());
+        to.setPortalRestrictions(from.getPortalRestrictions());
+        to.setPortals(from.getPortals());
+        //to.setPredictions();
+        to.setRelations(from.getRelations());
+        to.setReleaseYear(from.getReleaseYear());
+
+        //to.setScheduleEvents();
+        to.setSource(from.getSource());
+
+        to.setTags(from.getTags());
+        to.setTeletext(from.getTeletext());
+        to.setTwitterRefs(from.getTwitterRefs());
+        //to.setTargetGroups(from.getTargetGroups());
+
+        to.setWebsites(from.getWebsites());
 
     }
 
@@ -407,6 +460,15 @@ public class MediaObjects {
             media.setRepubReason(reason);
             media.setRepubDestinations(null);
 
+        }
+    }
+
+
+     public static void markForDeletion(MediaObject media, String reason) {
+        if (! Workflow.DELETES.contains(media.getWorkflow())) {
+            media.setWorkflow(Workflow.FOR_DELETION);
+            media.setRepubReason(reason);
+            media.setRepubDestinations(null);
         }
     }
 

@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.Deletes;
 import nl.vpro.domain.api.MediaChange;
 import nl.vpro.domain.api.Order;
@@ -57,7 +56,7 @@ public interface MediaService extends MediaProvider {
 
     MediaSearchResult findRelated(MediaObject media, String profile, MediaForm form, Integer max) throws ProfileNotFoundException;
 
-    MediaSearchResult findRelatedInTopspin(MediaObject media, String profile, MediaForm form, Integer max) throws ProfileNotFoundException;
+    MediaSearchResult findRelatedInTopspin(MediaObject media, String profile, MediaForm form, Integer max, String partyId, String clazz) throws ProfileNotFoundException;
 
     MediaType getType(String id);
 
