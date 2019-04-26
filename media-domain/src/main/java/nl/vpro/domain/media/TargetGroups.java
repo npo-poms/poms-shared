@@ -1,5 +1,10 @@
 package nl.vpro.domain.media;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,12 +12,9 @@ import java.util.Objects;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NonNull;
-import lombok.AccessLevel;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.OwnableR;
@@ -75,7 +77,8 @@ public class TargetGroups extends DomainObject implements Serializable, Child<Me
     @Override
     public int compareTo(TargetGroups o) {
         if (this.getOwner().equals(o.getOwner())){
-            if (!this.values.equals(o.values)) {
+             if (!Objects.equals(this.values, o.values)) {
+                // TODO: order is undefined!, I think compareTo(o1, o2) should be -1 * compareTo(o2, o1);
                 return -1;
             }
         }
