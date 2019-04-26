@@ -2,9 +2,11 @@ package nl.vpro.domain.media;
 
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,12 +43,12 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     @JsonProperty("values")
     @OrderColumn(name = "list_index", nullable = true)
     @XmlElement(name="intention")
-    private List<Intention> values;
+    private List<Intention> values = new ArrayList<>();
 
     public Intentions() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    private Intentions(List<Intention> values, OwnerType owner) {
+    private Intentions(@NonNull List<Intention> values, @NonNull OwnerType owner) {
         this.values = values;
         this.owner = owner;
     }
@@ -75,11 +77,16 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     @Override
     public int compareTo(Intentions o) {
         if (this.getOwner().equals(o.getOwner())){
-            if (!this.values.equals(o.values)) {
+            if (!Objects.equals(this.values, o.values)) {
+                // TODO: order is undefined!, I think compareTo(o1, o2) should be -1 * compareTo(o2, o1);
                 return -1;
             }
         }
         return this.getOwner().compareTo(o.getOwner());
     }
 
+    @Override
+    public String toString() {
+        return "Intentions:" + owner + ":" + values;
+    }
 }
