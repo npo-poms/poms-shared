@@ -13,7 +13,6 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
-import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
@@ -146,14 +145,8 @@ public class SchemaTest {
 
         assertThat(channelsInXSD)
             .isEqualTo(
-                Arrays.stream(Channel.values()).map(c -> {
-                    try {
-                        return Channel.class.getField(c.name()).getAnnotationsByType(XmlEnumValue.class)[0].value();
-                    } catch (Exception e) {
-                        return e.getMessage();
-                    }
-                    }
-                ).collect(Collectors.toCollection(TreeSet::new)));
+                Arrays.stream(Channel.values()).map(Channel::getXmlEnumValue)
+                    .collect(Collectors.toCollection(TreeSet::new)));
 
         log.info("schema" + document);
     }
