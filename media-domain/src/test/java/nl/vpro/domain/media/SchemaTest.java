@@ -4,13 +4,16 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.util.Iterator;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
-import javax.xml.namespace.NamespaceContext;
+import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Result;
@@ -22,13 +25,13 @@ import javax.xml.xpath.XPathFactory;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.meeuw.jaxbdocumentation.DocumentationAdder;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
+
 import com.google.common.io.Files;
 
 import nl.vpro.domain.Xmlns;
@@ -128,42 +131,30 @@ public class SchemaTest {
 
     @Test
     @SneakyThrows
-    @Ignore("TODO")
     public void testChannels() {
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document document = dBuilder.parse(getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"));
 
-
-
-
         XPath xPath = XPathFactory.newInstance().newXPath();
-        xPath.setNamespaceContext(
-            new NamespaceContext() {
-                @Override
-                public String getNamespaceURI(String prefix) {
-                    if ("xs".equals(prefix)) return XMLConstants.W3C_XML_SCHEMA_NS_URI;
-                    return null;
-                }
-                // This method isn't necessary for XPath processing.
-                @Override
-                public String getPrefix(String uri) {
-                    throw new UnsupportedOperationException();
-                }
+        NodeList nodes = (NodeList)xPath.evaluate("/schema/simpleType[@name='channelEnum']/restriction/enumeration", document, XPathConstants.NODESET);
 
-                // This method isn't necessary for XPath processing either.
-                @Override
-                public Iterator getPrefixes(String uri) {
-                    throw new UnsupportedOperationException();
-                }
-            });
+        Set<String> channelsInXSD = new TreeSet<>();
+        for (int i  = 0; i < nodes.getLength(); i++) {
+            channelsInXSD.add(nodes.item(i).getAttributes().getNamedItem("value").getTextContent());
+        }
 
-        NodeList nodes = (NodeList)xPath.evaluate("/xs:schema", document, XPathConstants.NODESET);
+        assertThat(channelsInXSD)
+            .isEqualTo(
+                Arrays.stream(Channel.values()).map(c -> {
+                    try {
+                        return Channel.class.getField(c.name()).getAnnotationsByType(XmlEnumValue.class)[0].value();
+                    } catch (Exception e) {
+                        return e.getMessage();
+                    }
+                    }
+                ).collect(Collectors.toCollection(TreeSet::new)));
 
-
-        //NodeList nodes = (NodeList)xPath.evaluate("/xs:schema/xs:simpleType[@name = 'channelEnum']/xs:restriction/xs:enumeration", document, XPathConstants.NODESET);
-
-        assertThat(nodes.getLength()).isEqualTo(Channel.values().length);
         log.info("schema" + document);
     }
 
