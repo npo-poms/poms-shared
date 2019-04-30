@@ -33,7 +33,7 @@ import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
  * @since 5.11
  */
 @Slf4j
-public class NEPItemizerAuthenticator implements Supplier<String> {
+public class NEPSAMAuthenticator implements Supplier<String> {
 
 
 
@@ -41,10 +41,10 @@ public class NEPItemizerAuthenticator implements Supplier<String> {
     LoginResponse loginResponse;
     private final String baseUrl;
 
-    public NEPItemizerAuthenticator(
-        @Value("${nep.itemizer.username}") String username,
-        @Value("${nep.itemizer.password}") String password,
-         @Value("${nep.itemizer.baseUrl}") String baseUrl
+    public NEPSAMAuthenticator(
+        @Value("${nep.sam.username}") String username,
+        @Value("${nep.sam.password}") String password,
+         @Value("${nep.sam.baseUrl}") String baseUrl
         ) {
         this.loginRequest = new LoginRequest(username, password);
         this.baseUrl = baseUrl;

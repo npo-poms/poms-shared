@@ -54,7 +54,7 @@ public class NEPItemizerAuthenticatorTest {
             ));
 
 
-        NEPItemizerAuthenticator authenticator = new NEPItemizerAuthenticator("username", "password", "http://localhost:" + wireMockRule.port());
+        NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator("username", "password", "http://localhost:" + wireMockRule.port());
 
         authenticator.get();
         log.info("{}", authenticator.loginResponse.getExpiration());
