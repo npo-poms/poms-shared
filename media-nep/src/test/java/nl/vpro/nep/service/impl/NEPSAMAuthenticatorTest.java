@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 5.11
  */
 @Slf4j
-public class NEPItemizerAuthenticatorTest {
+public class NEPSAMAuthenticatorTest {
 
 
     @Rule
