@@ -43,7 +43,7 @@ public class NEPSAMAuthenticatorTest {
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 
         String token = Jwts.builder()
-            .signWith(signatureAlgorithm, signingKey)
+            .signWith(signingKey, signatureAlgorithm)
             .setExpiration(DateUtils.toDate(Instant.now().plus(Duration.ofDays(14))))
             .compact();
 
