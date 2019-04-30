@@ -747,6 +747,13 @@ public enum Channel implements Displayable, XmlValued {
             return "Turkmax";
         }
     },
+    @XmlEnumValue("ATVT")
+    ATVT {
+        @Override
+        public String toString() {
+            return "ATV";
+        }
+    },
 
     @XmlEnumValue("RRTM")
     RRTM {
