@@ -111,7 +111,7 @@ public class NEPSSHJDownloadServiceImplTest {
         sftp.close();
         client.close();
 
-        log.info("Duration {} {}", Duration.between(start, Instant.now()));
+        log.info("Duration {}", Duration.between(start, Instant.now()));
 
 
 
