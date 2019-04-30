@@ -110,7 +110,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
         @JsonIgnore
         public Jws<Claims> getJws() {
             return Jwts.parser()
-                .setSigningKey("foobar")
+                .setSigningKey("foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobar")
                 .parseClaimsJws(token);
         }
 
