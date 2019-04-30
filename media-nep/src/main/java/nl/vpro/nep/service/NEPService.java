@@ -8,5 +8,6 @@ public interface NEPService extends
     NEPTranscodeService,
     NEPDownloadService,
     NEPUploadService,
-    NEPItemizeService {
+    NEPItemizeService,
+    NEPSAMService {
 }

@@ -16,8 +16,7 @@ import javax.inject.Named;
 import javax.inject.Provider;
 
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.nep.domain.NEPItemizeRequest;
-import nl.vpro.nep.domain.NEPItemizeResponse;
+import nl.vpro.nep.domain.*;
 import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
@@ -34,6 +33,8 @@ public class NEPServiceImpl implements NEPService {
     private final Provider<NEPUploadService> nepftpUploadService;
     private final Provider<NEPDownloadService> nepftpDownloadService;
     private final Provider<NEPItemizeService> itemizeService;
+    private final Provider<NEPSAMService> samService;
+
 
 
 
@@ -42,13 +43,16 @@ public class NEPServiceImpl implements NEPService {
         @Named("NEPTranscodeService") Provider<NEPTranscodeService> transcodeService,
         @Named("NEPUploadService") Provider<NEPUploadService> nepftpUploadService,
         @Named("NEPDownloadService") Provider<NEPDownloadService> nepftpDownloadService,
-        @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService
+        @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
+        @Named("NEPSAMService") Provider<NEPSAMService> samService
+
 
         ) {
         this.transcodeService = transcodeService;
         this.nepftpUploadService = nepftpUploadService;
         this.nepftpDownloadService = nepftpDownloadService;
         this.itemizeService = itemizeService;
+        this.samService = samService;
     }
 
     @Override
@@ -91,6 +95,18 @@ public class NEPServiceImpl implements NEPService {
     @Override
     public long upload(@Nonnull SimpleLogger logger, @Nonnull String nepFile, @Nonnull Long size, @Nonnull InputStream stream, boolean replaces) throws IOException {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
+    }
+
+
+    @Override
+    public WideVineResponse widevineToken(WideVineRequest request) {
+        return samService.get().widevineToken(request);
+
+    }
+
+    @Override
+    public PlayreadyResponse playreadyToken(PlayreadyRequest request) {
+        return samService.get().playreadyToken(request);
 
     }
 
@@ -121,4 +137,5 @@ public class NEPServiceImpl implements NEPService {
         }
         return builder.toString();
     }
+
 }

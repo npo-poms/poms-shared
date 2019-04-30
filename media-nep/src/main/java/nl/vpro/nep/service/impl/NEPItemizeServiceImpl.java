@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.Properties;
+import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
@@ -42,21 +43,21 @@ import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
 @Named("NEPItemizeService")
 @Slf4j
 public class NEPItemizeServiceImpl implements NEPItemizeService {
-    private final String itemizeKey;
+    private final Supplier<String> itemizeKey;
     private final String itemizeUrl;
 
-    private final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8"));
+    static final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8"));
 
     @Inject
     public NEPItemizeServiceImpl(
         @Value("${nep.itemizer.baseUrl}") @Nonnull String itemizeUrl,
-        @Value("${nep.itemizer.key}") @Nonnull String itemizeKey) {
+        @Named("NEPItemizeServiceAuthenticator") @Nonnull Supplier<String> itemizeKey) {
         this.itemizeKey = itemizeKey;
         this.itemizeUrl = itemizeUrl;
     }
 
     protected NEPItemizeServiceImpl(Properties properties) {
-        this(properties.getProperty("nep.itemizer.baseUrl"), properties.getProperty("nep.itemizer.key"));
+        this(properties.getProperty("nep.itemizer.baseUrl"), () -> properties.getProperty("nep.itemizer.key"));
     }
 
     @Override
@@ -112,7 +113,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     private void authenticate(HttpUriRequest request) {
-        request.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, itemizeKey));
+        request.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, itemizeKey.get()));
 
 
     }
