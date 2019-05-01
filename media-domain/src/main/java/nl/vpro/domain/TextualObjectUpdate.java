@@ -46,7 +46,8 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         if (getTitles() == null) {
             setTitles(new TreeSet<>());
         }
-        getTitles().add(getTitleCreator().apply(title, type));
+        T created = getTitleCreator().apply(title, type);
+        getTitles().add(created);
         return self();
     }
 
