@@ -36,4 +36,9 @@ public abstract class AbstractTextualObjectUpdate<T extends TypedText, D extends
         this.titleCreator = titleCreator;
         this.descriptionCreator = descriptionCreator;
     }
+
+    @Override
+    public String toString() {
+        return getMainTitle() + " " + getMainDescription();
+    }
 }

@@ -474,15 +474,16 @@ public class TextualObjects {
     ) {
         if (from.getTitles() != null) {
             for (T1 title : from.getTitles()) {
-                to.addTitle(title.get(), title.getType());
+                to.setTitle(title.get(), title.getType());
             }
         }
         if (from.getDescriptions() != null) {
             for (D1 description : from.getDescriptions()) {
-                to.addDescription(description.get(), description.getType());
+                to.setDescription(description.get(), description.getType());
             }
         }
     }
+
 
 
     /**
