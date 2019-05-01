@@ -7,6 +7,8 @@ package nl.vpro.nep.domain;
 @lombok.Data
 public class StreamUrlResponse {
 
+    String type;
+
     Data data;
 
     @lombok.Data
@@ -23,5 +25,8 @@ public class StreamUrlResponse {
         String cdnType;
         boolean drm;
         boolean legacy;
+
+        String token;
+
     }
 }
