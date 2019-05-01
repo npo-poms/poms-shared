@@ -6,13 +6,12 @@ import nl.vpro.nep.domain.WideVineRequest;
 import nl.vpro.nep.domain.WideVineResponse;
 
 /**
- * NEP 'Stream Access API'
+ * NEP 'Stream Access Management' API.
  *
  * @author Michiel Meeuwissen
  * @since 5.11
  */
 public interface NEPSAMService {
-
 
 
     WideVineResponse widevineToken(WideVineRequest request);
