@@ -1124,6 +1124,13 @@ public enum Channel implements Displayable, XmlValued {
             return "Comedy CentralNickelodeon";
         }
     },
+    @XmlEnumValue("COMF")
+    COMF {
+        @Override
+        public String toString() {
+            return "Comedy Family";
+        }
+    },
 
     @XmlEnumValue("TBN_")
     TBN_ {
@@ -2397,6 +2404,13 @@ public enum Channel implements Displayable, XmlValued {
             return "Brava NL";
         }
     },
+    @XmlEnumValue("BRHD")
+    BRHD {
+        @Override
+        public String toString() {
+            return "Brava HD";
+        }
+    },
     @XmlEnumValue("FOXL")
     FOXL{
         @Override
@@ -2469,8 +2483,42 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "Viceland";
         }
-    }
-    ,
+    },
+    @XmlEnumValue("DVB1")
+    DVB1 {
+        @Override
+        public String toString() {
+            return "PO DVB-H 1";
+        }
+    },
+    @XmlEnumValue("DVB2")
+    DVB2 {
+        @Override
+        public String toString() {
+            return "PO DVB-H 2";
+        }
+    },
+    @XmlEnumValue("DVB3")
+    DVB3 {
+        @Override
+        public String toString() {
+            return "PO DVB-H 3";
+        }
+    },
+    @XmlEnumValue("ZIZO")
+    ZIZO {
+        @Override
+        public String toString() {
+            return "PO Zizone TV";
+        }
+    },
+    @XmlEnumValue("FANT")
+    FANT {
+        @Override
+        public String toString() {
+            return "Fan TV";
+        }
+    },
     @XmlEnumValue("ONL1")
     ONL1(VIDEO) {
         @Override
