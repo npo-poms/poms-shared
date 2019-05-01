@@ -42,6 +42,22 @@ public interface TextualObject<
         return self();
     }
 
+    /**
+     * Sets title if already set, otherwise {@link #addTitle(String, OwnerType owner, TextualType)}
+     * @since 5.11
+     */
+    default void setTitle(String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+        if (getTitles() != null) {
+            for (T t : getTitles()) {
+                if (t.getType() == type && t.getOwner() == owner) {
+                    t.set(title);
+                    return;
+                }
+            }
+        }
+        addTitle(title, owner, type);
+    }
+
     @Override
     default TO addTitle(@Nonnull String title,  @Nonnull TextualType type) {
         return addTitle(title, DEFAULT_OWNER, type);
@@ -96,6 +112,22 @@ public interface TextualObject<
             getDescriptions().add(d);
         }
         return self();
+    }
+
+
+    /**
+     * @since 5.11
+     */
+    default void setDescription(String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+        if (getDescriptions() != null) {
+            for (D d : getDescriptions()) {
+                if (d.getType() == type && d.getOwner() == owner) {
+                    d.set(description);
+                    return;
+                }
+            }
+        }
+        addDescription(description, owner, type);
     }
 
     @Override
