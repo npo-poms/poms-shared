@@ -356,10 +356,6 @@ public class Image extends PublishableObject<Image>
 
     @Override
     public void setDescription(String description) {
-        if(description != null && description.length() > 255) {
-            description = description.substring(0, 254);
-        }
-
         this.description = description;
     }
 
