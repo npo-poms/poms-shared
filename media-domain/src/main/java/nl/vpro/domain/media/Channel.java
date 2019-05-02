@@ -1514,6 +1514,17 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("FOXT")
+    FOXT {
+        @Override
+        public String toString() {
+            return "Fox Türk";
+        }
+    },
+
     @XmlEnumValue("MTV_")
     MTV_ {
         @Override
@@ -1839,6 +1850,16 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "Hallmark";
+        }
+    },
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("HABN")
+    HABN {
+        @Override
+        public String toString() {
+            return "HaberTürk";
         }
     },
 
@@ -2524,6 +2545,47 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "NPO Online 1";
+        }
+    },
+
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("KNP1")
+    KPN1(VIDEO) {
+        @Override
+        public String toString() {
+            return "Eredivisie Live 1";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("KNP2")
+    KPN2(VIDEO) {
+        @Override
+        public String toString() {
+            return "Eredivisie Live 2";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("KNP3")
+    KPN3(VIDEO) {
+        @Override
+        public String toString() {
+            return "Eredivisie Live 3";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("KNP4")
+    KPN4(VIDEO) {
+        @Override
+        public String toString() {
+            return "Eredivisie Live 4";
         }
     }
     ;
