@@ -39,7 +39,7 @@ public enum IntentionType {
     ENTERTAINMENT_LEASURE {
         @Override
         public String toString() {
-            return "Vermaken, Puur vermaak";
+            return "Vermaken - Puur vermaak";
         }
     },
     ENTERTAINMENT_INFORMATIVE {
