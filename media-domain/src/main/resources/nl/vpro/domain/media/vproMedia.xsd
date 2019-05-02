@@ -2293,6 +2293,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+       <xs:enumeration value="FXNL">
+        <xs:annotation>
+          <xs:documentation>
+            Fox Nederland.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="MTV_">
         <xs:annotation>
           <xs:documentation>
