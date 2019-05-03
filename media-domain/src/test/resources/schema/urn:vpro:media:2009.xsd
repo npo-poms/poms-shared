@@ -748,6 +748,7 @@
       <xs:enumeration value="SHOW"/>
       <xs:enumeration value="LIGT"/>
       <xs:enumeration value="TURK"/>
+      <xs:enumeration value="ATVT"/>
       <xs:enumeration value="RRTM"/>
       <xs:enumeration value="RMBC"/>
       <xs:enumeration value="RART"/>
@@ -788,6 +789,7 @@
       <xs:enumeration value="ENTE"/>
       <xs:enumeration value="FASH"/>
       <xs:enumeration value="COMC"/>
+      <xs:enumeration value="COMF"/>
       <xs:enumeration value="TBN_"/>
       <xs:enumeration value="DISC"/>
       <xs:enumeration value="ZONE"/>
@@ -938,6 +940,7 @@
       <xs:enumeration value="SBS9"/>
       <xs:enumeration value="DIXD"/>
       <xs:enumeration value="BRNL"/>
+      <xs:enumeration value="BRHD"/>
       <xs:enumeration value="FOXL"/>
       <xs:enumeration value="TLC_"/>
       <xs:enumeration value="VRTC"/>
@@ -948,6 +951,11 @@
       <xs:enumeration value="ZGS1"/>
       <xs:enumeration value="BRTZ"/>
       <xs:enumeration value="DVIC"/>
+      <xs:enumeration value="DVB1"/>
+      <xs:enumeration value="DVB2"/>
+      <xs:enumeration value="DVB3"/>
+      <xs:enumeration value="ZIZO"/>
+      <xs:enumeration value="FANT"/>
       <xs:enumeration value="ONL1"/>
     </xs:restriction>
   </xs:simpleType>
