@@ -197,7 +197,7 @@ public class TextualObjects {
         for (D description : media.getDescriptions()) {
             result.add(description.getOwner());
         }
-        return result.toArray(new OwnerType[result.size()]);
+        return result.toArray(new OwnerType[0]);
     }
 
 
@@ -316,6 +316,9 @@ public class TextualObjects {
             return true;
         }
     }
+
+
+
 
     /**
      * Copies all titles and descriptions from one {@link TextualObject} to another.
