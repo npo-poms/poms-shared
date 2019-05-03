@@ -115,7 +115,7 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
             setType(source.getType());
             change.change();
         }
-        if (StringUtils.isEmpty(getTitle()) &&  ! Objects.equals(getType(), source.getType())) {
+        if (StringUtils.isEmpty(getTitle()) &&  ! Objects.equals(getTitle(), source.getTitle())) {
             setTitle(source.getTitle());
             change.change();
         }
@@ -123,6 +123,7 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
             setDescription(source.getDescription());
             change.change();
         }
+
         if ((getHeight() == null || getHeight() < 0) &&  ! Objects.equals(getHeight(), source.getHeight())) {
             setHeight(source.getHeight());
             change.change();
