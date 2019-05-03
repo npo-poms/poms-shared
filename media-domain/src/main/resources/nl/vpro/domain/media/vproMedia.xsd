@@ -1130,6 +1130,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+       <xs:enumeration value="NEDE">
+        <xs:annotation>
+          <xs:documentation>
+            Nederland-e.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="RTL4">
         <xs:annotation>
           <xs:documentation>
@@ -2083,6 +2090,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="DIER">
+        <xs:annotation>
+          <xs:documentation>
+            AVRO Dier en Natuur.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="POKE">
         <xs:annotation>
           <xs:documentation>
@@ -2143,6 +2157,13 @@
         <xs:annotation>
           <xs:documentation>
             PO Zizone TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DVIC">
+        <xs:annotation>
+          <xs:documentation>
+            Viceland.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2269,6 +2290,13 @@
         <xs:annotation>
           <xs:documentation>
             Fox News.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+       <xs:enumeration value="FXNL">
+        <xs:annotation>
+          <xs:documentation>
+            Fox Nederland.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>

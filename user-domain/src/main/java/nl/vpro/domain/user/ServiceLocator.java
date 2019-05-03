@@ -16,13 +16,13 @@ public class ServiceLocator  {
 
 
     @Inject
-    Provider<BroadcasterService> broadcasterService = () -> null;
+    Provider<BroadcasterService> broadcasterService = () -> new BroadcasterServiceImpl(new Broadcaster[0]);
 
     @Inject
-    Provider<PortalService> portalService = () -> null;
+    Provider<PortalService> portalService = PortalServiceImpl::new;
 
     @Inject
-    Provider<ThirdPartyService> thirdPartyService = () -> null;
+    Provider<ThirdPartyService> thirdPartyService = ThirdPartyServiceImpl::new;
 
     @Inject
     Provider<EditorService> editorService = () -> null;
@@ -35,6 +35,7 @@ public class ServiceLocator  {
 
     @Nonnull
     public static BroadcasterService getBroadcasterService() {
+
         return serviceLocator == null ? new BroadcasterServiceImpl(new Broadcaster[0]) : serviceLocator.broadcasterService.get();
     }
 
