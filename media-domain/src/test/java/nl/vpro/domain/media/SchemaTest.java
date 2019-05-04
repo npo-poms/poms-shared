@@ -136,27 +136,55 @@ public class SchemaTest {
      */
     @Test
     public void testChannels() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
-        testEnum("/nl/vpro/domain/media/vproMedia.xsd", "channelEnum", Channel.class);
+        testMediaEnum( "channelEnum", Channel.class);
     }
 
 
     @Test
     public void testProgramType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
-        testEnum("/nl/vpro/domain/media/vproMedia.xsd", "programTypeEnum", ProgramType.class);
+        testMediaEnum( "programTypeEnum", ProgramType.class);
     }
 
     @Test
     public void testGroupType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
-        testEnum("/nl/vpro/domain/media/vproMedia.xsd", "groupTypeEnum", GroupType.class);
+        testMediaEnum( "groupTypeEnum", GroupType.class);
     }
 
     @Test
     public void testSegmentType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
-        testEnum("/nl/vpro/domain/media/vproMedia.xsd", "segmentTypeEnum", SegmentType.class);
+        testMediaEnum( "segmentTypeEnum", SegmentType.class);
     }
     @Test
     public void testMediaType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
-        testEnum("/nl/vpro/domain/media/vproMedia.xsd", "mediaTypeEnum", MediaType.class);
+        testMediaEnum("mediaTypeEnum", MediaType.class);
+    }
+     @Test
+    public void testAgeRatingType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+        testMediaEnum("ageRatingType", AgeRating.class);
+    }
+
+      @Test
+    public void testContentRating() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+        testMediaEnum("contentRatingType", ContentRating.class);
+    }
+    @Test
+    public void testRoleType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+        testMediaEnum("roleType", RoleType.class);
+    }
+
+    @Test
+    public void testIntentionType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+        testMediaEnum("intentionEnum", IntentionType.class);
+    }
+
+    @Test
+    public void testTargetGroup() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+        testMediaEnum("targetGroupEnum", TargetGroupType.class);
+    }
+
+    protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass) throws SAXException, InvocationTargetException, IllegalAccessException, IOException, XPathExpressionException, ParserConfigurationException, NoSuchMethodException, NoSuchFieldException {
+        testEnum("/nl/vpro/domain/media/vproMedia.xsd", enumTypeName, enumClass);
+
     }
 
     protected <T extends Enum<T>> void testEnum(String resource, String enumTypeName, Class<T> enumClass) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
