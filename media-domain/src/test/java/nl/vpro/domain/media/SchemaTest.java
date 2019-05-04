@@ -1,10 +1,9 @@
 package nl.vpro.domain.media;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -15,12 +14,10 @@ import javax.xml.bind.SchemaOutputResolver;
 import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
@@ -30,7 +27,6 @@ import org.junit.Test;
 import org.meeuw.jaxbdocumentation.DocumentationAdder;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
@@ -135,59 +131,60 @@ public class SchemaTest {
      * Checks wether manual XSD contains the correct channels.
      */
     @Test
-    public void testChannels() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testChannels() {
         testMediaEnum( "channelEnum", Channel.class);
     }
 
 
     @Test
-    public void testProgramType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testProgramType() {
         testMediaEnum( "programTypeEnum", ProgramType.class);
     }
 
     @Test
-    public void testGroupType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testGroupType() {
         testMediaEnum( "groupTypeEnum", GroupType.class);
     }
 
     @Test
-    public void testSegmentType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testSegmentType() {
         testMediaEnum( "segmentTypeEnum", SegmentType.class);
     }
     @Test
-    public void testMediaType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testMediaType() {
         testMediaEnum("mediaTypeEnum", MediaType.class);
     }
      @Test
-    public void testAgeRatingType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testAgeRatingType() {
         testMediaEnum("ageRatingType", AgeRating.class);
     }
 
-      @Test
-    public void testContentRating() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    @Test
+    public void testContentRating() {
         testMediaEnum("contentRatingType", ContentRating.class);
     }
     @Test
-    public void testRoleType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testRoleType() {
         testMediaEnum("roleType", RoleType.class);
     }
 
     @Test
-    public void testIntentionType() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testIntentionType() {
         testMediaEnum("intentionEnum", IntentionType.class);
     }
 
     @Test
-    public void testTargetGroup() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+    public void testTargetGroup() {
         testMediaEnum("targetGroupEnum", TargetGroupType.class);
     }
 
-    protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass) throws SAXException, InvocationTargetException, IllegalAccessException, IOException, XPathExpressionException, ParserConfigurationException, NoSuchMethodException, NoSuchFieldException {
+    protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass)  {
         testEnum("/nl/vpro/domain/media/vproMedia.xsd", enumTypeName, enumClass);
 
     }
 
-    protected <T extends Enum<T>> void testEnum(String resource, String enumTypeName, Class<T> enumClass) throws ParserConfigurationException, IOException, SAXException, XPathExpressionException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
+    @SneakyThrows
+    protected <T extends Enum<T>> void testEnum(String resource, String enumTypeName, Class<T> enumClass) {
          DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document document = dBuilder.parse(getClass().getResourceAsStream(resource));
@@ -202,8 +199,7 @@ public class SchemaTest {
 
         Set<String> valuesInEnum = new TreeSet<>();
 
-        Method method = enumClass.getDeclaredMethod("values");
-        T[] values = (T[]) method.invoke(null);
+        T[] values = enumClass.getEnumConstants();
         for (T v : values) {
             XmlEnumValue xmlEnumValue = enumClass.getField(v.name()).getAnnotation(XmlEnumValue.class);
             valuesInEnum.add(xmlEnumValue != null ? xmlEnumValue.value() : v.name());
