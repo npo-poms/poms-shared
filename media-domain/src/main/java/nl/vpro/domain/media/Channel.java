@@ -2611,6 +2611,96 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "Eredivisie Live 4";
         }
+    },
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("ZONH")
+    ZONH(VIDEO) {
+        @Override
+        public String toString() {
+            return "Zone Horror";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("XM24")
+    XM24() {
+        @Override
+        public String toString() {
+            return "X-MO DI";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("MNET")
+    MNET() {
+        @Override
+        public String toString() {
+            return "Misdaadnet";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("OU24")
+    OU24() {
+        @Override
+        public String toString() {
+            return "PO Out TV";
+        }
+    },
+      /**
+     * @since 5.11
+     */
+    @XmlEnumValue("POKE")
+    POKE() {
+        @Override
+        public String toString() {
+            return "Poker Channel";
+        }
+    },
+      /**
+     * @since 5.11
+     */
+    @XmlEnumValue("RACW")
+    RACW() {
+        @Override
+        public String toString() {
+            return "Raceworld TV";
+        }
+    },
+      /**
+     * @since 5.11
+     */
+    @XmlEnumValue("STTV")
+    STTV() {
+        @Override
+        public String toString() {
+            return "Star TV";
+        }
+    },
+      /**
+     * @since 5.11
+     */
+    @XmlEnumValue("TVPO")
+    TVPO() {
+        @Override
+        public String toString() {
+            return "TV Polonia";
+        }
+    },
+       /**
+     * @since 5.11
+     */
+    @XmlEnumValue("VOOM")
+    VOOM() {
+        @Override
+        public String toString() {
+            return "Voom HD";
+        }
     }
     ;
     private AVType avType;
