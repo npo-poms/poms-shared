@@ -2505,6 +2505,10 @@ public enum Channel implements Displayable, XmlValued {
             return "Viceland";
         }
     },
+
+    /**
+     * @since 5.11
+     */
     @XmlEnumValue("DVB1")
     DVB1 {
         @Override
@@ -2512,6 +2516,10 @@ public enum Channel implements Displayable, XmlValued {
             return "PO DVB-H 1";
         }
     },
+
+    /**
+     * @since 5.11
+     */
     @XmlEnumValue("DVB2")
     DVB2 {
         @Override
@@ -2519,6 +2527,10 @@ public enum Channel implements Displayable, XmlValued {
             return "PO DVB-H 2";
         }
     },
+
+    /**
+     * @since 5.11
+     */
     @XmlEnumValue("DVB3")
     DVB3 {
         @Override
@@ -2526,6 +2538,10 @@ public enum Channel implements Displayable, XmlValued {
             return "PO DVB-H 3";
         }
     },
+
+    /**
+     * @since 5.11
+     */
     @XmlEnumValue("ZIZO")
     ZIZO {
         @Override
@@ -2533,6 +2549,10 @@ public enum Channel implements Displayable, XmlValued {
             return "PO Zizone TV";
         }
     },
+
+    /**
+     * @since 5.11
+     */
     @XmlEnumValue("FANT")
     FANT {
         @Override
@@ -2540,6 +2560,10 @@ public enum Channel implements Displayable, XmlValued {
             return "Fan TV";
         }
     },
+
+    /**
+     * @since 5.11
+     */
     @XmlEnumValue("ONL1")
     ONL1(VIDEO) {
         @Override
@@ -2551,7 +2575,7 @@ public enum Channel implements Displayable, XmlValued {
     /**
      * @since 5.11
      */
-    @XmlEnumValue("KNP1")
+    @XmlEnumValue("KPN1")
     KPN1(VIDEO) {
         @Override
         public String toString() {
@@ -2561,7 +2585,7 @@ public enum Channel implements Displayable, XmlValued {
      /**
      * @since 5.11
      */
-    @XmlEnumValue("KNP2")
+    @XmlEnumValue("KPN2")
     KPN2(VIDEO) {
         @Override
         public String toString() {
@@ -2571,7 +2595,7 @@ public enum Channel implements Displayable, XmlValued {
      /**
      * @since 5.11
      */
-    @XmlEnumValue("KNP3")
+    @XmlEnumValue("KPN3")
     KPN3(VIDEO) {
         @Override
         public String toString() {
@@ -2581,7 +2605,7 @@ public enum Channel implements Displayable, XmlValued {
      /**
      * @since 5.11
      */
-    @XmlEnumValue("KNP4")
+    @XmlEnumValue("KPN4")
     KPN4(VIDEO) {
         @Override
         public String toString() {

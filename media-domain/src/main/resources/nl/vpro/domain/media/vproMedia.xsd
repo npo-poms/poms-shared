@@ -148,7 +148,9 @@
       <xs:enumeration value="ALBUM"/>
       <xs:enumeration value="PLAYLIST"/>
       <xs:enumeration value="ARCHIVE"/>
+      <!--
       <xs:enumeration value="UG ARCHIVE"/>
+      -->
       <xs:enumeration value="SEASON"/>
       <xs:enumeration value="SERIES"/>
       <xs:enumeration value="UMBRELLA"/>
