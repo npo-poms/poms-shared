@@ -8,8 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.time.LocalDate;
 
 import javax.xml.bind.JAXB;
 
@@ -18,12 +18,12 @@ import org.xml.sax.SAXException;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.Channel;
+import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import nl.vpro.util.DateUtils;
 import nl.vpro.util.Version;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
@@ -138,9 +138,11 @@ public class MediaFormTest {
 
     @Test
     public void testGetFacets() throws Exception {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
-            new ScheduleEventSearch(Channel.NED3, DateUtils.toInstant(simpleDateFormat.parse("2015-01-26")), DateUtils.toInstant(simpleDateFormat.parse("2015-01-27")))).build();
+            new ScheduleEventSearch(Channel.NED3,
+                LocalDate.of(2015, 1, 26).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant(),
+                LocalDate.of(2015, 1, 27).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant())
+        ).build();
         MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
             "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <api:searches>\n" +
