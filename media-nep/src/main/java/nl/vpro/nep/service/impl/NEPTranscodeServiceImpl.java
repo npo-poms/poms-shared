@@ -238,7 +238,7 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         if (clientContext == null) {
             throw new IllegalStateException("Not initialized");
         }
-        log.info("Executing {}", u);
+        log.debug("Executing {}", u);
         return getHttpClient().execute(new HttpGet(u), clientContext);
     }
     private CloseableHttpClient getHttpClient() {
