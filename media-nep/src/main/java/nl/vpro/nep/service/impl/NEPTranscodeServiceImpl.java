@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.time.Duration;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.Iterator;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -30,6 +32,7 @@ import org.apache.http.HttpStatus;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -43,7 +46,6 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
-
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
@@ -56,7 +58,14 @@ import nl.vpro.nep.service.NEPTranscodeService;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.FilteringIterator;
 import nl.vpro.util.MaxOffsetIterator;
+import nl.vpro.util.TimeUtils;
 
+
+/**
+ * Wrapper for https://npo-webonly-gatekeeper.nepworldwide.nl
+ *
+ * TODO, where's the documentation of that?
+ */
 @Slf4j
 @Named("NEPTranscodeService")
 public class NEPTranscodeServiceImpl implements NEPTranscodeService {
@@ -79,15 +88,32 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
 
     private HttpClientContext clientContext;
 
+    private Duration connectTimeout;
+    private Duration connectionRequestTimeout;
+    private Duration socketTimeout;
+
+    private int pageSize = 200;
+
+    CloseableHttpClient httpClient = null;
+
     @Inject
     public NEPTranscodeServiceImpl(
          @Value("${nep.api.baseUrl}") String url,
          @Value("${nep.api.authorization.username}") String userName,
          @Value("${nep.api.authorization.password}") String password,
+         @Value("${nep.api.connectTimeout}") String connectTimeout,
+         @Value("${nep.api.connectionRequestTimeout}") String connectionRequestTimeout,
+         @Value("${nep.api.socketTimeout}") String socketTimeout,
+         @Value("${nep.api.pageSize}") int pageSize,
+
          @Value("${nep.transcode.sftp.username}") String ftpUserName) {
         this.url = url;
         this.userName = userName;
         this.password = password;
+        this.connectTimeout = TimeUtils.parseDuration(connectTimeout).orElse(Duration.ofSeconds(1));
+        this.connectionRequestTimeout = TimeUtils.parseDuration(connectionRequestTimeout).orElse(this.connectTimeout);
+        this.socketTimeout= TimeUtils.parseDuration(socketTimeout).orElse(this.connectTimeout);
+        this.pageSize = pageSize;
         this.ftpUserName = ftpUserName;
     }
 
@@ -104,6 +130,13 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         clientContext.setAuthCache(authCache);
 
         log.info("Created {}", this);
+    }
+
+    @PreDestroy
+    public void shutdown() throws IOException {
+        if (httpClient != null) {
+            httpClient.close();
+        }
     }
 
     @Nonnull
@@ -139,7 +172,7 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         @Nullable StatusType status,
         @Nullable Instant from,
         @Nullable Long limit) {
-        int batchSize = 20;
+        final int batchSize = pageSize;
         URIBuilder builder = new URIBuilder(getWorkflowsEndPoint());
         if (status != null) {
             builder.setParameter("status", status.name());
@@ -172,12 +205,12 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
                             return workflowExecutions.iterator();
                         } else {
                             execute.getEntity().writeTo(LoggerOutputStream.warn(log));
-                            log.error("While getting trancodestatuses for {} (from {}): {}", mid, builder.toString(), execute.getStatusLine().toString());
+                            log.error("While getting trancodestatuses for {} (from {}, {}): {}", mid, builder.toString(), next, execute.getStatusLine().toString());
                         }
-                    }
 
+                    }
                 } catch (IOException e) {
-                    log.error(e.getMessage(), e);
+                    log.error("For {}: {}", next, e.getMessage(), e);
                 }
                 return null;
             }
@@ -205,11 +238,21 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
         if (clientContext == null) {
             throw new IllegalStateException("Not initialized");
         }
+        log.info("Executing {}", u);
         return getHttpClient().execute(new HttpGet(u), clientContext);
     }
     private CloseableHttpClient getHttpClient() {
-        return HttpClients.custom()
-            .build();
+        if (httpClient == null) {
+            RequestConfig config = RequestConfig.custom()
+                .setConnectTimeout((int) connectTimeout.toMillis())
+                .setConnectionRequestTimeout((int) connectionRequestTimeout.toMillis())
+                .setSocketTimeout((int) socketTimeout.toMillis())
+                .build();
+            httpClient = HttpClients.custom()
+                .setDefaultRequestConfig(config)
+                .build();
+        }
+        return httpClient;
     }
 
     @Override
