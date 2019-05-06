@@ -13,7 +13,7 @@ public class WorkflowExecutionResponseTest {
 
     @Test
     public void json() throws Exception {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
 
         WorkflowExecution workflowExecution = WorkflowExecution.builder()
                 .workflowId("b337aa4e-bb95-401a-93e7-b9aea6ac327c")
@@ -34,20 +34,20 @@ public class WorkflowExecutionResponseTest {
 
         WorkflowExecutionResponse rounded = Jackson2TestUtil.roundTripAndSimilar(workflowExecutionResponse,
                 "{\n" +
-                        "  \"workflowExecutions\" : [ {\n" +
-                        "    \"workflowId\" : \"b337aa4e-bb95-401a-93e7-b9aea6ac327c\",\n" +
-                        "    \"status\" : \"FAILED\",\n" +
-                        "    \"statusMessage\" : \"Packaging failed\",\n" +
-                        "    \"workflowType\" : \"npo_webonly_drm\",\n" +
-                        "    \"customerMetadata\" : {\n" +
-                        "      \"mid\" : \"VPWON_1267474\",\n" +
-                        "      \"broadcaster\" : \"VPRO\"\n" +
-                        "    },\n" +
-                        "    \"startTime\" : 1518090237000,\n" +
-                        "    \"updateTime\" : 1518090327000,\n" +
-                        "    \"endTime\" : 1518090327000\n" +
-                        "  } ]\n" +
-                        "}");
+                    "  \"workflowExecutions\" : [ {\n" +
+                    "    \"workflowId\" : \"b337aa4e-bb95-401a-93e7-b9aea6ac327c\",\n" +
+                    "    \"status\" : \"FAILED\",\n" +
+                    "    \"statusMessage\" : \"Packaging failed\",\n" +
+                    "    \"workflowType\" : \"npo_webonly_drm\",\n" +
+                    "    \"customerMetadata\" : {\n" +
+                    "      \"mid\" : \"VPWON_1267474\",\n" +
+                    "      \"broadcaster\" : \"VPRO\"\n" +
+                    "    },\n" +
+                    "    \"startTime\" : 1518093837000,\n" +
+                    "    \"updateTime\" : 1518093927000,\n" +
+                    "    \"endTime\" : 1518093927000\n" +
+                    "  } ]\n" +
+                    "}");
 
     }
 }
