@@ -837,6 +837,7 @@
       <xs:enumeration value="PALJ"/>
       <xs:enumeration value="ALJA"/>
       <xs:enumeration value="FOXN"/>
+      <xs:enumeration value="FOXT"/>
       <xs:enumeration value="MTV_"/>
       <xs:enumeration value="MTV2"/>
       <xs:enumeration value="HITS"/>
@@ -878,6 +879,7 @@
       <xs:enumeration value="MGMM"/>
       <xs:enumeration value="TCM_"/>
       <xs:enumeration value="HALL"/>
+      <xs:enumeration value="HABN"/>
       <xs:enumeration value="ACNW"/>
       <xs:enumeration value="RHUS"/>
       <xs:enumeration value="PLAY"/>
@@ -957,6 +959,19 @@
       <xs:enumeration value="ZIZO"/>
       <xs:enumeration value="FANT"/>
       <xs:enumeration value="ONL1"/>
+      <xs:enumeration value="KPN1"/>
+      <xs:enumeration value="KPN2"/>
+      <xs:enumeration value="KPN3"/>
+      <xs:enumeration value="KPN4"/>
+      <xs:enumeration value="ZONH"/>
+      <xs:enumeration value="XM24"/>
+      <xs:enumeration value="MNET"/>
+      <xs:enumeration value="OU24"/>
+      <xs:enumeration value="POKE"/>
+      <xs:enumeration value="RACW"/>
+      <xs:enumeration value="STTV"/>
+      <xs:enumeration value="TVPO"/>
+      <xs:enumeration value="VOOM"/>
     </xs:restriction>
   </xs:simpleType>
 

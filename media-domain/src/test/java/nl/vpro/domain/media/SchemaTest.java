@@ -1,25 +1,23 @@
 package nl.vpro.domain.media;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.SchemaOutputResolver;
+import javax.xml.bind.annotation.XmlEnumValue;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
@@ -29,7 +27,6 @@ import org.junit.Test;
 import org.meeuw.jaxbdocumentation.DocumentationAdder;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
@@ -132,31 +129,84 @@ public class SchemaTest {
 
     /**
      * Checks wether manual XSD contains the correct channels.
-     * @throws ParserConfigurationException
-     * @throws IOException
-     * @throws SAXException
-     * @throws XPathExpressionException
      */
     @Test
-    public void testChannels() throws ParserConfigurationException, IOException, SAXException, XPathExpressionException {
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+    public void testChannels() {
+        testMediaEnum( "channelEnum", Channel.class);
+    }
+
+
+    @Test
+    public void testProgramType() {
+        testMediaEnum( "programTypeEnum", ProgramType.class);
+    }
+
+    @Test
+    public void testGroupType() {
+        testMediaEnum( "groupTypeEnum", GroupType.class);
+    }
+
+    @Test
+    public void testSegmentType() {
+        testMediaEnum( "segmentTypeEnum", SegmentType.class);
+    }
+    @Test
+    public void testMediaType() {
+        testMediaEnum("mediaTypeEnum", MediaType.class);
+    }
+     @Test
+    public void testAgeRatingType() {
+        testMediaEnum("ageRatingType", AgeRating.class);
+    }
+
+    @Test
+    public void testContentRating() {
+        testMediaEnum("contentRatingType", ContentRating.class);
+    }
+    @Test
+    public void testRoleType() {
+        testMediaEnum("roleType", RoleType.class);
+    }
+
+    @Test
+    public void testIntentionType() {
+        testMediaEnum("intentionEnum", IntentionType.class);
+    }
+
+    @Test
+    public void testTargetGroup() {
+        testMediaEnum("targetGroupEnum", TargetGroupType.class);
+    }
+
+    protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass)  {
+        testEnum("/nl/vpro/domain/media/vproMedia.xsd", enumTypeName, enumClass);
+
+    }
+
+    @SneakyThrows
+    protected <T extends Enum<T>> void testEnum(String resource, String enumTypeName, Class<T> enumClass) {
+         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document document = dBuilder.parse(getClass().getResourceAsStream("/nl/vpro/domain/media/vproMedia.xsd"));
+        Document document = dBuilder.parse(getClass().getResourceAsStream(resource));
 
         XPath xPath = XPathFactory.newInstance().newXPath();
-        NodeList nodes = (NodeList)xPath.evaluate("/schema/simpleType[@name='channelEnum']/restriction/enumeration", document, XPathConstants.NODESET);
+        NodeList nodes = (NodeList)xPath.evaluate("/schema/simpleType[@name='" + enumTypeName + "']/restriction/enumeration", document, XPathConstants.NODESET);
 
-        Set<String> channelsInXSD = new TreeSet<>();
+        Set<String> valuesInXsd = new TreeSet<>();
         for (int i  = 0; i < nodes.getLength(); i++) {
-            channelsInXSD.add(nodes.item(i).getAttributes().getNamedItem("value").getTextContent());
+            valuesInXsd.add(nodes.item(i).getAttributes().getNamedItem("value").getTextContent());
         }
 
-        assertThat(channelsInXSD)
-            .isEqualTo(
-                Arrays.stream(Channel.values()).map(Channel::getXmlEnumValue)
-                    .collect(Collectors.toCollection(TreeSet::new)));
+        Set<String> valuesInEnum = new TreeSet<>();
 
-        log.info("schema" + document);
+        T[] values = enumClass.getEnumConstants();
+        for (T v : values) {
+            XmlEnumValue xmlEnumValue = enumClass.getField(v.name()).getAnnotation(XmlEnumValue.class);
+            valuesInEnum.add(xmlEnumValue != null ? xmlEnumValue.value() : v.name());
+        }
+        assertThat(valuesInXsd)
+            .isEqualTo(
+                valuesInEnum);
     }
 
     private static File getFile(final String namespace) {
