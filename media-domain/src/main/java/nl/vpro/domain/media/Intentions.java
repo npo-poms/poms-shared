@@ -51,6 +51,9 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     private Intentions(@NonNull List<Intention> values, @NonNull OwnerType owner) {
         this.values = values;
         this.owner = owner;
+        //To help Hibernate understand the relationship we
+        //explicitly set the parent!
+        this.values.forEach(v -> v.setParent(this));
     }
 
 
