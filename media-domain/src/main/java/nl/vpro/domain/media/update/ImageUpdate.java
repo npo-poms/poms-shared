@@ -252,7 +252,7 @@ public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> 
         this.credits = credits;
         this.publishStartInstant = publishStart;
         this.publishStopInstant = publishStop;
-        this.crids = new ArrayList<>(crids);
+        this.crids = crids == null ? null: new ArrayList<>(crids);
     }
 
 
