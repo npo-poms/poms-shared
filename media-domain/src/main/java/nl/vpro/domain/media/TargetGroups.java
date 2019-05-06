@@ -51,6 +51,9 @@ public class TargetGroups extends DomainObject implements Serializable, Child<Me
     private TargetGroups(@NonNull List<TargetGroup> values, @NonNull OwnerType owner) {
         this.values = values;
         this.owner = owner;
+        //To help Hibernate understand the relationship we
+        //explicitly set the parent!
+        this.values.forEach(v -> v.setParent(this));
     }
 
 
