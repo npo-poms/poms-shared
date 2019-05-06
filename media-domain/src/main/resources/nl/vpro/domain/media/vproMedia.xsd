@@ -148,7 +148,9 @@
       <xs:enumeration value="ALBUM"/>
       <xs:enumeration value="PLAYLIST"/>
       <xs:enumeration value="ARCHIVE"/>
+      <!--
       <xs:enumeration value="UG ARCHIVE"/>
+      -->
       <xs:enumeration value="SEASON"/>
       <xs:enumeration value="SERIES"/>
       <xs:enumeration value="UMBRELLA"/>
@@ -3053,6 +3055,14 @@
         </xs:annotation>
       </xs:enumeration>
 
+       <xs:enumeration value="OMEG">
+         <xs:annotation>
+          <xs:documentation>
+            Omega TV
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
       <!-- missing channels -->
       <xs:enumeration value="D24K"/>
       <xs:enumeration value="H1NL"/>
@@ -3068,6 +3078,12 @@
       <xs:enumeration value="FLM1"/>
       <xs:enumeration value="ZGS1"/>
       <xs:enumeration value="BRTZ"/>
+
+      <xs:enumeration value="RTLF"/>
+      <xs:enumeration value="TVDR"/>
+      <xs:enumeration value="VRTC"/>
+
+
 
 
     </xs:restriction>
