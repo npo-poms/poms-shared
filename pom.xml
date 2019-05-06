@@ -120,17 +120,17 @@
 
   <distributionManagement>
     <snapshotRepository>
-      <id>ossrh</id>
+      <id>vpro-ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
     <repository>
-      <id>ossrh-release</id>
+      <id>vpro-ossrh-release</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
   <repositories>
      <repository>
-      <id>ossrh</id>
+      <id>vpro-ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
        <releases>
         <enabled>false</enabled>
