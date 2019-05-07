@@ -2,7 +2,7 @@ package nl.vpro.domain.media.gtaa;
 
 import nl.vpro.w3.rdf.Description;
 
-@GTAAScheme(Schemes.GEOGRAFISCHENAMEN)
+@GTAAScheme(Scheme.GEOGRAFISCHENAMEN)
 public class GTAAGeographicName extends AbstractThesaurusItem {
 
     public static GTAAGeographicName create(Description description) {
