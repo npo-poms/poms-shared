@@ -1,8 +1,8 @@
 package nl.vpro.rs.thesaurus.update;
 
-import nl.vpro.domain.media.gtaa.GTAANewPerson;
 import org.junit.Test;
 
+import nl.vpro.domain.media.gtaa.GTAANewPerson;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -19,9 +19,10 @@ public class GTAANewPersonTest {
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build();
 
         Jackson2TestUtil.roundTripAndSimilar(person, "{\n" +
+            "  \"objectType\" : \"person\",\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"Puk\",\n" +
-            "  \"note\" : \"test\"\n" +
+            "  \"notes\" : [ \"test\" ]\n" +
             "}");
 
     }
@@ -30,9 +31,9 @@ public class GTAANewPersonTest {
     @Test
     public void xml() throws Exception {
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build();
-        JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newPerson xmlns:gtaa=\"urn:vpro:gtaa:2017\">\n" +
-            "    <gtaa:familyName>Puk</gtaa:familyName>\n" +
+        JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newPerson   xmlns:gtaa=\"urn:vpro:gtaa:2017\" >\n" +
             "    <gtaa:givenName>Pietje</gtaa:givenName>\n" +
+            "    <gtaa:familyName>Puk</gtaa:familyName>\n" +
             "    <gtaa:note>test</gtaa:note>\n" +
             "</gtaa:newPerson>");
 

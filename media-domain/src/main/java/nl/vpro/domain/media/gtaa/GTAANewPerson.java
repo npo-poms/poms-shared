@@ -8,7 +8,12 @@ import lombok.Setter;
 
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.PersonInterface;
 
@@ -16,18 +21,24 @@ import nl.vpro.domain.PersonInterface;
 @NoArgsConstructor
 @XmlRootElement(name = "newPerson")
 @GTAAScheme(Schemes.PERSOONSNAMEN)
+@XmlAccessorType(XmlAccessType.NONE)
 public class GTAANewPerson implements PersonInterface, NewThesaurusObject<GTAAPerson> {
 
     @Getter
     @Setter
+    @XmlElement
     private String givenName;
 
     @Getter
     @Setter
+    @XmlElement
     private String familyName;
 
     @Getter
     @Setter
+    @XmlElement(name = "note")
+    @JsonProperty("notes")
+
     private List<String> notes;
 
     @lombok.Builder
