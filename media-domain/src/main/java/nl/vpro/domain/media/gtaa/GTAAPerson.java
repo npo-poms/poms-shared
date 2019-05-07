@@ -47,7 +47,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @AllArgsConstructor
 @Builder
 @XmlRootElement(name = "person")
-@GTAAScheme(Schemes.PERSOONSNAMEN)
+@GTAAScheme(Scheme.PERSOONSNAMEN)
 public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;

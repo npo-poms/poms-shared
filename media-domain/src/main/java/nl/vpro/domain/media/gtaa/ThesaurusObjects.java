@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.gtaa;
 
+import java.util.Optional;
+
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
@@ -11,21 +13,29 @@ public class ThesaurusObjects {
     private static final String SCHEME_URI = "http://data.beeldengeluid.nl/gtaa/";
 
     public static ThesaurusObject toThesaurusObject(Description d) {
-        switch(d.getInScheme().getResource()) {
-            case Schemes.PERSOONSNAMEN:
-                return GTAAPerson.create(d);
-            case Schemes.ONDERWERPEN:
-                return GTAATopic.create(d);
-            case Schemes.GENRE:
-                return GTAAGenre.create(d);
-            case Schemes.NAMEN:
-                return GTAAName.create(d);
-            case Schemes.GEOGRAFISCHENAMEN:
-                return GTAAGeographicName.create(d);
-            case Schemes.MAKER:
-                return GTAAMaker.create(d);
-            default:
-                return ThesaurusItem.create(d);
+        Optional<Scheme> scheme = Scheme.ofUrl(d.getInScheme().getResource());
+        if (scheme.isPresent()) {
+            switch(scheme.get()) {
+                case PERSOONSNAMEN:
+                    return GTAAPerson.create(d);
+                case ONDERWERPEN:
+                    return GTAATopic.create(d);
+                case GENRE:
+                    return GTAAGenre.create(d);
+                case NAMEN:
+                    return GTAAName.create(d);
+                case GEOGRAFISCHENAMEN:
+                    return GTAAGeographicName.create(d);
+                case MAKER:
+                    return GTAAMaker.create(d);
+                case CLASSIFICATIE:
+                case ONDERWERPENBENG:
+                default:
+                    return ThesaurusItem.create(d);
+
+            }
+        } else {
+            return ThesaurusItem.create(d);
         }
     }
 
@@ -42,14 +52,14 @@ public class ThesaurusObjects {
     }
 
 
-    public static String toScheme(ThesaurusObject d) {
+    public static Scheme toScheme(ThesaurusObject d) {
         return toScheme((Object) d);
     }
 
-    public static String toScheme(NewThesaurusObject<?> d) {
+    public static Scheme toScheme(NewThesaurusObject<?> d) {
         return toScheme((Object) d);
     }
-    private static String toScheme(Object d) {
+    private static Scheme toScheme(Object d) {
         return d.getClass().getAnnotation(GTAAScheme.class).value();
     }
 
