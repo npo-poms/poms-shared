@@ -1,8 +1,11 @@
 package nl.vpro.rs.thesaurus.update;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import nl.vpro.domain.media.gtaa.GTAANewPerson;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -27,6 +30,15 @@ public class GTAANewPersonTest {
 
     }
 
+    @Test
+    public void jsonWithoutType() throws IOException {
+        String json = "{\n" +
+            "  \"givenName\" : \"Pietje\",\n" +
+            "  \"familyName\" : \"Puk\",\n" +
+            "  \"notes\" : [ \"test\" ]\n" +
+            "}";
+        GTAANewPerson gtaaNewPerson = Jackson2Mapper.getLenientInstance().readValue(json, GTAANewPerson.class);
+    }
 
     @Test
     public void xml() throws Exception {
