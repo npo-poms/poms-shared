@@ -1,7 +1,6 @@
 package nl.vpro.domain.media.gtaa;
 
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,14 +13,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import nl.vpro.domain.PersonInterface;
 
-@Data
 @NoArgsConstructor
 @XmlRootElement(name = "newPerson")
 @GTAAScheme(Schemes.PERSOONSNAMEN)
 @XmlAccessorType(XmlAccessType.NONE)
+@JsonTypeName("person")
 public class GTAANewPerson implements PersonInterface, NewThesaurusObject<GTAAPerson> {
 
     @Getter
