@@ -5,11 +5,9 @@
 package nl.vpro.domain.media.gtaa;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
