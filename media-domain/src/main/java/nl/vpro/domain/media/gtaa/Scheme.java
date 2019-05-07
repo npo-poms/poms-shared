@@ -32,6 +32,7 @@ public enum Scheme {
     Scheme(String url) {
         this.url = url;
     }
+
     public static Optional<Scheme> ofUrl(String url) {
         for (Scheme s: values()) {
             if (s.getUrl().equals(url)) {
@@ -39,7 +40,6 @@ public enum Scheme {
             }
         }
         return Optional.empty();
-
     }
 }
 
