@@ -8,7 +8,7 @@
     <version>5.9.1</version>
   </parent>
 
-  <version>5.9.4</version>
+  <version>REL-5.9.5-SNAPSHOT</version>
   <groupId>nl.publiekeomroep</groupId>
   <artifactId>poms-shared-parent</artifactId>
   <packaging>pom</packaging>
