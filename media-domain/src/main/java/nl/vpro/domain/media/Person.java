@@ -116,7 +116,13 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
 
 
     @lombok.Builder(builderClassName = "Builder")
-    private Person(Long id, String givenName, String familyName, RoleType role, MediaObject mediaObject, GTAARecord gtaaRecord) {
+    private Person(
+        Long id,
+        String givenName,
+        String familyName,
+        RoleType role,
+        MediaObject mediaObject,
+        GTAARecord gtaaRecord) {
         this(id, givenName, familyName, role);
         this.mediaObject = mediaObject;
         this.gtaaRecord = gtaaRecord;
