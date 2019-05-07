@@ -2,14 +2,17 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.nep.domain.workflow.EncryptionType;
@@ -27,7 +30,9 @@ public class NEPTranscodeServiceImplITest {
     private String apiUser = "webonly-user";
     private String ftpUser = "npoweb-vpro";
     NEPTranscodeServiceImpl nepService =
-        new NEPTranscodeServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl", apiUser, "***REMOVED***", ftpUser);
+        new NEPTranscodeServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl", apiUser,
+            System.getProperty("password"),
+            Duration.ofMillis(100).toString(), "", "", 200,  ftpUser);
 
     String mid = "WO_VPRO_783763";
 
@@ -62,9 +67,8 @@ public class NEPTranscodeServiceImplITest {
     }
 
     @Test
-    @Ignore
     public void getStatuses() throws IOException {
-        File file =new File("/Users/michiel/npo/media/trunk/player7.404");
+        File file = new File("/Users/michiel/npo/media/trunk/player7.404");
         List<String> mids = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 
