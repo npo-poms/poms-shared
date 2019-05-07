@@ -84,6 +84,7 @@ public class NEPTranscodeServiceImplITest {
         AtomicLong count = new AtomicLong(0);
         nepService.getTranscodeStatuses(null, null, null,  null).forEachRemaining((we)
             -> {
+            log.info("{} {}", count.getAndIncrement(), we);
             if (mids.contains(we.getMid())) {
                 log.info("{}", we);
             }
