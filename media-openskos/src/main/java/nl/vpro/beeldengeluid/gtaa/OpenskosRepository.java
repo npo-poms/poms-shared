@@ -119,12 +119,12 @@ public class OpenskosRepository implements GTAARepository {
 
 
     @SuppressWarnings("StringConcatenationInLoop")
-    private Description submit(String prefLabel, List<Label> notes, String creator, String scheme) {
+    private Description submit(String prefLabel, List<Label> notes, String creator, Scheme scheme) {
 
         ResponseEntity<RDF> response = null;
         RuntimeException rte = null;
         try {
-            response = postRDF(prefLabel, notes, creator, scheme);
+            response = postRDF(prefLabel, notes, creator, scheme.getUrl());
         } catch (GTAAConflict ex) {
             String postFix = ".";
             while(postFix.length() <= retries) {
@@ -133,7 +133,7 @@ public class OpenskosRepository implements GTAARepository {
                     // returned
                     // See MSE-3366
                     log.warn("Retrying label on 409 Conflict: \"{}\"", prefLabel + postFix);
-                    response = postRDF(prefLabel + postFix, notes, creator, scheme);
+                    response = postRDF(prefLabel + postFix, notes, creator, scheme.getUrl());
                     break;
                 } catch (GTAAConflict ex2) {
                     /* The version with "." already exists too */
