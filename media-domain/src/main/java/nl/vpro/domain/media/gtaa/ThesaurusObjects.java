@@ -3,8 +3,6 @@ package nl.vpro.domain.media.gtaa;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
-import java.util.Arrays;
-
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -37,7 +35,7 @@ public class ThesaurusObjects {
                         Label.builder()
                                 .value(thesaurusObject.getValue())
                                 .build()
-                ).scopeNote(Arrays.asList(Label.forValue(thesaurusObject.getNote())))
+                ).scopeNote(thesaurusObject.getNotesAsLabel())
                 .inScheme(SCHEME_URI + thesaurusObject.getObjectType())
                 .build();
         return toThesaurusObject(description);
@@ -45,23 +43,16 @@ public class ThesaurusObjects {
 
 
     public static String toScheme(ThesaurusObject d) {
-        switch(d.getClass().getSimpleName()) {
-            case "GTAAPerson":
-                return Schemes.PERSOONSNAMEN;
-            case "GTAATopic":
-                return Schemes.ONDERWERPEN;
-            case "GTAAGenre":
-                return  Schemes.GENRE;
-            case "GTAAName":
-                return Schemes.NAMEN;
-            case "GTAAGeographicName":
-                return Schemes.GEOGRAFISCHENAMEN;
-            case "GTAAMaker":
-                return Schemes.MAKER;
-            default:
-                return "";
-        }
+        return toScheme((Object) d);
     }
+
+    public static String toScheme(NewThesaurusObject<?> d) {
+        return toScheme((Object) d);
+    }
+    private static String toScheme(Object d) {
+        return d.getClass().getAnnotation(GTAAScheme.class).value();
+    }
+
 
     private static Description toDescription(GTAANewThesaurusObject thesaurusObject) {
         return Description.builder()
@@ -69,7 +60,7 @@ public class ThesaurusObjects {
                         Label.builder()
                                 .value(thesaurusObject.getValue())
                                 .build()
-                ).scopeNote(Arrays.asList(Label.forValue(thesaurusObject.getNote())))
+                ).scopeNote(thesaurusObject.getNotesAsLabel())
                 .inScheme(SCHEME_URI + thesaurusObject.getObjectType())
                 .build();
     }

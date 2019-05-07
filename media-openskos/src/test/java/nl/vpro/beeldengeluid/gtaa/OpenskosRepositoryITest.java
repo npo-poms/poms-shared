@@ -16,10 +16,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.GTAAConflict;
-import nl.vpro.domain.media.gtaa.GTAANewThesaurusObject;
-import nl.vpro.domain.media.gtaa.GTAAPerson;
-import nl.vpro.domain.media.gtaa.ThesaurusObjects;
+import nl.vpro.domain.media.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -39,10 +36,11 @@ public class OpenskosRepositoryITest {
     @Test
     public void testPost1() {
         OpenskosRepository impl = getRealInstance();
-        GTAAPerson pietjePuk = GTAAPerson.builder()
-                .givenName("Pietje")
-                .familyName("Puk"  + System.currentTimeMillis())
-                .notes(new ArrayList<>()).build();
+        GTAANewPerson pietjePuk = GTAANewPerson.builder()
+            .givenName("Pietje")
+            .familyName("Puk"  + System.currentTimeMillis())
+            .notes(new ArrayList<>())
+            .build();
 
         impl.submit(pietjePuk, "POMS2");
     }
@@ -61,7 +59,7 @@ public class OpenskosRepositoryITest {
                 .build();
 
         ;
-        impl.submit(ThesaurusObjects.toThesaurusObject(geographicName), "poms_test");
+        impl.submit(geographicName, "poms_test");
 
 
         String result = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:openskos=\"http://openskos.org/xmlns#\" openskos:numFound=\"1\" openskos:rows=\"20\" openskos:start=\"0\">\n" +
@@ -94,7 +92,7 @@ public class OpenskosRepositoryITest {
     public void test409ConflictResolution() {
         OpenskosRepository impl = getRealInstance();
         String label = "Pietje, Puk" + System.currentTimeMillis();
-        GTAAPerson pietjePuk = GTAAPerson.builder()
+        GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
                 .familyName("Puk")
                 .notes(new ArrayList<>()).build();
@@ -106,7 +104,7 @@ public class OpenskosRepositoryITest {
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
         OpenskosRepository impl = getRealInstance();
-        GTAAPerson pietjePuk = GTAAPerson.builder()
+        GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
                 .familyName("Puk"  + System.currentTimeMillis())
                 .notes(new ArrayList<>()).build();

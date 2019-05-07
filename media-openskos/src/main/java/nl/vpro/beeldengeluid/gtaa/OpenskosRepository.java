@@ -40,10 +40,7 @@ import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.GTAAConflict;
-import nl.vpro.domain.media.gtaa.GTAARepository;
-import nl.vpro.domain.media.gtaa.ThesaurusObject;
-import nl.vpro.domain.media.gtaa.ThesaurusObjects;
+import nl.vpro.domain.media.gtaa.*;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;
@@ -109,11 +106,12 @@ public class OpenskosRepository implements GTAARepository {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends ThesaurusObject> T submit(T thesaurusObject, String creator) {
-        final Description description = submit(thesaurusObject.getValue(),
-                thesaurusObject.getNotes(),
-                creator,
-                ThesaurusObjects.toScheme(thesaurusObject)
+    public <T extends ThesaurusObject, S extends NewThesaurusObject<T>> T submit(S thesaurusObject, String creator) {
+        final Description description = submit(
+            thesaurusObject.getValue(),
+            thesaurusObject.getNotesAsLabel(),
+            creator,
+            ThesaurusObjects.toScheme(thesaurusObject)
         );
         return (T) ThesaurusObjects.toThesaurusObject(description);
 

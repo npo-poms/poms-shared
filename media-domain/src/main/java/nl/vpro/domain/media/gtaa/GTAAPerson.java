@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,7 +26,6 @@ import nl.vpro.openarchives.oai.MetaData;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.xml.bind.InstantXmlAdapter;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Roelof Jan Koekoek
@@ -49,6 +47,7 @@ import org.apache.commons.lang3.StringUtils;
 @AllArgsConstructor
 @Builder
 @XmlRootElement(name = "person")
+@GTAAScheme(Schemes.PERSOONSNAMEN)
 public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -106,11 +105,11 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializabl
     }
 
     public GTAAPerson(GTAANewPerson newPerson) {
-    this(Person.builder().givenName(newPerson.getGivenName()).familyName(newPerson.getFamilyName()).build());
-        if(StringUtils.isNotBlank(newPerson.getNote())) {
-            this.setNotes(Arrays.asList(Label.forValue(newPerson.getNote())));
-        }
-
+        this(Person.builder()
+            .givenName(newPerson.getGivenName())
+            .familyName(newPerson.getFamilyName())
+            .build());
+        this.setNotes(newPerson.getNotesAsLabel());
     }
 
     public static GTAAPerson create(MetaData metaData) {
