@@ -38,7 +38,6 @@ public class GTAANewPerson implements PersonInterface, NewThesaurusObject<GTAAPe
     @Setter
     @XmlElement(name = "note")
     @JsonProperty("notes")
-
     private List<String> notes;
 
     @lombok.Builder

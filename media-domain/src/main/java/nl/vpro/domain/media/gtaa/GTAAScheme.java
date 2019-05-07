@@ -1,7 +1,9 @@
 package nl.vpro.domain.media.gtaa;
 
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Associates a GTAA 'scheme' (see {@link Schemes}), to a java class.
@@ -9,6 +11,7 @@ import java.lang.annotation.RetentionPolicy;
  * @since 5.11
  */
 @Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.TYPE})
 public @interface GTAAScheme {
     String value();
 }
