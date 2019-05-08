@@ -9,6 +9,7 @@ import java.util.function.Function;
 
 import org.slf4j.Logger;
 
+import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
@@ -73,6 +74,10 @@ public class AssemblageConfig {
     Duration mergeScheduleEvents = Duration.ofMillis(-1);
 
     @lombok.Builder.Default
+    BiFunction<MediaObject, AssemblageConfig, Boolean> inferDurationFromScheduleEvents = (s, ac) -> false;
+
+
+    @lombok.Builder.Default
     boolean locationsUpdate = false;
 
     @lombok.Builder.Default
@@ -130,6 +135,7 @@ public class AssemblageConfig {
             copyTwitterrefs,
             createScheduleEvents,
             mergeScheduleEvents,
+            inferDurationFromScheduleEvents,
             locationsUpdate,
             stealMids,
             stealCrids,
