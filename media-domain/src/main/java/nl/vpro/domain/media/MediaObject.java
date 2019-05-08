@@ -2429,6 +2429,9 @@ public abstract class MediaObject
         return success;
     }
 
+    /**
+     * What does it mean to be 'embedddable'?
+     */
     @XmlAttribute(name = "embeddable")
     public boolean isEmbeddable() {
         return isEmbeddable;
