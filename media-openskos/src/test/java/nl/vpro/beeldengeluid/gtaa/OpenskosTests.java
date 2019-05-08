@@ -1,10 +1,9 @@
 package nl.vpro.beeldengeluid.gtaa;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -14,14 +13,15 @@ import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
-import lombok.extern.slf4j.Slf4j;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.media.gtaa.GTAAConflict;
-import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.media.gtaa.GTAANewPerson;
 import nl.vpro.domain.media.gtaa.GTAARepository;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 public class OpenskosTests {
@@ -30,10 +30,10 @@ public class OpenskosTests {
     public void testPost1() {
         GTAARepository impl = getRealInstance();
 
-        GTAAPerson pietjePuk = GTAAPerson.builder()
-                .givenName("Pietje")
-                .familyName("Puk"  + System.currentTimeMillis())
-                .notes(new ArrayList<>()).build();
+        GTAANewPerson pietjePuk = GTAANewPerson.builder()
+            .givenName("Pietje")
+            .familyName("Puk"  + System.currentTimeMillis())
+            .build();
         impl.submit(pietjePuk, "POMS2");
     }
 
@@ -41,10 +41,10 @@ public class OpenskosTests {
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution() {
         GTAARepository impl = getRealInstance();
-        GTAAPerson pietjePuk = GTAAPerson.builder()
+        GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
                 .familyName("Puk"  + System.currentTimeMillis())
-                .notes(new ArrayList<>()).build();
+                .build();
 
         impl.submit(pietjePuk, "POMS");
         impl.submit(pietjePuk, "POMS");
@@ -54,10 +54,10 @@ public class OpenskosTests {
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
         GTAARepository impl = getRealInstance();
-        GTAAPerson pietjePuk = GTAAPerson.builder()
-                .givenName("Pietje")
-                .familyName("Puk"  + System.currentTimeMillis())
-                .notes(new ArrayList<>()).build();
+        GTAANewPerson pietjePuk = GTAANewPerson.builder()
+            .givenName("Pietje")
+            .familyName("Puk"  + System.currentTimeMillis())
+            .build();
 
         impl.submit(pietjePuk, "POMS");
         impl.submit(pietjePuk, "POMS");
@@ -131,7 +131,7 @@ public class OpenskosTests {
     @Ignore
     public void addPerson() {
         GTAARepository impl = getRealInstance();
-        GTAAPerson p = new GTAAPerson();
+        GTAANewPerson p = new GTAANewPerson();
         p.setFamilyName("asdasd");
         p.setGivenName("asdasd");
         //p.setListIndex(0);
