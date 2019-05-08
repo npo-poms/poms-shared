@@ -479,6 +479,17 @@ public abstract class MediaObject
     @Valid
     protected Set<Location> locations;
 
+
+    /**
+     * TODO: This shoudl be moved to {@link Program}
+     * mediadb=> select  mediatype(mediaobject_id), count(*) from scheduleevent group by 1;
+     *  mediatype |  count
+     * -----------+---------
+     *  STRAND    |    3941
+     *  CLIP      |       2
+     *  BROADCAST | 1526381
+     *  MOVIE     |      20
+     */
     @OneToMany(mappedBy = "mediaObject", orphanRemoval = false, cascade={MERGE})
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -2418,6 +2429,9 @@ public abstract class MediaObject
         return success;
     }
 
+    /**
+     * What does it mean to be 'embedddable'?
+     */
     @XmlAttribute(name = "embeddable")
     public boolean isEmbeddable() {
         return isEmbeddable;
