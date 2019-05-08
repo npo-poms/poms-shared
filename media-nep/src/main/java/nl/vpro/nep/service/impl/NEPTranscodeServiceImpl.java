@@ -204,8 +204,9 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
                             }
                             return workflowExecutions.iterator();
                         } else {
+                            log.error("While getting trancodestatuses for {} (from {}): {}", mid, next, execute.getStatusLine().toString());
                             execute.getEntity().writeTo(LoggerOutputStream.warn(log));
-                            log.error("While getting trancodestatuses for {} (from {}, {}): {}", mid, builder.toString(), next, execute.getStatusLine().toString());
+
                         }
 
                     }
