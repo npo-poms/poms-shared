@@ -2,6 +2,7 @@ package nl.vpro.rs.thesaurus.update;
 
 import java.io.IOException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.domain.media.gtaa.GTAANewPerson;
@@ -31,6 +32,7 @@ public class GTAANewPersonTest {
     }
 
     @Test
+    @Ignore("Will not work. Rest service will support via nl.vpro.jackson2.rs.JsonIdAdderBodyReader")
     public void jsonWithoutType() throws IOException {
         String json = "{\n" +
             "  \"givenName\" : \"Pietje\",\n" +
