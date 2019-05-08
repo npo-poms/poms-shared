@@ -1,12 +1,14 @@
 package nl.vpro.domain.media.gtaa;
 
 import lombok.Builder;
-import nl.vpro.openarchives.oai.Label;
-import nl.vpro.w3.rdf.Description;
 
 import java.time.Instant;
 import java.util.List;
 
+import nl.vpro.openarchives.oai.Label;
+import nl.vpro.w3.rdf.Description;
+
+@GTAAScheme(Scheme.NAMEN)
 public class GTAAName extends AbstractThesaurusItem {
 
     @Builder

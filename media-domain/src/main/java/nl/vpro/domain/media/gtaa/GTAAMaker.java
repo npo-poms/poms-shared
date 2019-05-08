@@ -2,6 +2,7 @@ package nl.vpro.domain.media.gtaa;
 
 import nl.vpro.w3.rdf.Description;
 
+@GTAAScheme(Scheme.MAKER)
 public class GTAAMaker extends AbstractThesaurusItem {
 
     public static GTAAMaker create(Description description) {

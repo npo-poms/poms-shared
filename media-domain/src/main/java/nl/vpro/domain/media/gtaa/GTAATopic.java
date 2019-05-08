@@ -1,12 +1,12 @@
 package nl.vpro.domain.media.gtaa;
 
-        import nl.vpro.openarchives.oai.Label;
         import nl.vpro.w3.rdf.Description;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
  */
+@GTAAScheme(Scheme.ONDERWERPEN)
 public class GTAATopic extends AbstractThesaurusItem {
 
 
