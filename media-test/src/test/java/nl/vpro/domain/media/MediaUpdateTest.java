@@ -300,28 +300,7 @@ public class MediaUpdateTest {
                     "                    </avAttributes>\n" +
                     "                </location>\n" +
                     "            </locations>\n" +
-                    "            <scheduleEvents>\n" +
-                    "                <scheduleEvent channel=\"NED3\">\n" +
-                    "                    <start>1970-01-01T01:00:00.100+01:00</start>\n" +
-                    "                    <guideDay>1969-12-31</guideDay>\n" +
-                    "                    <duration>P0DT0H0M0.200S</duration>\n" +
-                    "                </scheduleEvent>\n" +
-                    "                <scheduleEvent channel=\"NED3\">\n" +
-                    "                    <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-                    "                    <guideDay>1970-01-03</guideDay>\n" +
-                    "                    <duration>P0DT0H0M0.050S</duration>\n" +
-                    "                </scheduleEvent>\n" +
-                    "                <scheduleEvent channel=\"HOLL\">\n" +
-                    "                    <start>1970-01-09T01:00:00.350+01:00</start>\n" +
-                    "                    <guideDay>1970-01-08</guideDay>\n" +
-                    "                    <duration>P0DT0H0M0.250S</duration>\n" +
-                    "                </scheduleEvent>\n" +
-                    "                <scheduleEvent channel=\"CONS\">\n" +
-                    "                    <start>1970-01-11T01:00:00.600+01:00</start>\n" +
-                    "                    <guideDay>1970-01-10</guideDay>\n" +
-                    "                    <duration>P0DT0H0M0.200S</duration>\n" +
-                    "                </scheduleEvent>\n" +
-                    "            </scheduleEvents>\n" +
+                    "            <scheduleEvents/>\n" +
                     "            <relation type=\"THESAURUS\" broadcaster=\"AVRO\">synoniem</relation>\n" +
                     "            <relation type=\"KOOR\" broadcaster=\"EO\">Ulfts Mannenkoor</relation>\n" +
                     "            <relation type=\"ARTIST\" broadcaster=\"VPRO\">Marco Borsato</relation>\n" +
@@ -623,32 +602,7 @@ public class MediaUpdateTest {
             "                    </avAttributes>\n" +
             "                </location>\n" +
             "            </locations>\n" +
-            "            <scheduleEvents>\n" +
-            "                <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345_1\" urnRef=\"urn:vpro:media:segment:12\">\n" +
-            "                    <guideDay>1969-12-31+01:00</guideDay>\n" +
-            "                    <start>1970-01-01T01:00:00.100+01:00</start>\n" +
-            "                    <duration>P0DT0H0M0.200S</duration>\n" +
-            "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
-            "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345_1\" urnRef=\"urn:vpro:media:segment:12\">\n" +
-            "                    <guideDay>1970-01-03+01:00</guideDay>\n" +
-            "                    <start>1970-01-04T01:00:00.300+01:00</start>\n" +
-            "                    <duration>P0DT0H0M0.050S</duration>\n" +
-            "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
-            "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"HOLL\" midRef=\"VPROWON_12345_1\" urnRef=\"urn:vpro:media:segment:12\">\n" +
-            "                    <guideDay>1970-01-08+01:00</guideDay>\n" +
-            "                    <start>1970-01-09T01:00:00.350+01:00</start>\n" +
-            "                    <duration>P0DT0H0M0.250S</duration>\n" +
-            "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
-            "                </scheduleEvent>\n" +
-            "                <scheduleEvent channel=\"CONS\" midRef=\"VPROWON_12345_1\" urnRef=\"urn:vpro:media:segment:12\">\n" +
-            "                    <guideDay>1970-01-10+01:00</guideDay>\n" +
-            "                    <start>1970-01-11T01:00:00.600+01:00</start>\n" +
-            "                    <duration>P0DT0H0M0.200S</duration>\n" +
-            "                    <poProgID>VPROWON_12345_1</poProgID>\n" +
-            "                </scheduleEvent>\n" +
-            "            </scheduleEvents>\n" +
+            "            <scheduleEvents/>\n" +
             "            <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +
             "            <relation broadcaster=\"EO\" type=\"KOOR\">Ulfts Mannenkoor</relation>\n" +
             "            <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
