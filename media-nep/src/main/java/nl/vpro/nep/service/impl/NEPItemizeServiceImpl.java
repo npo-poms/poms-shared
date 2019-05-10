@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.entity.ContentType;
@@ -62,17 +62,17 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
             HttpPost httpPost = new HttpPost(itemizeUrl);
             httpPost.addHeader(new BasicHeader("Authorization", itemizeKey));
             httpPost.addHeader(new BasicHeader("Accept", JSON.toString()));
-
             httpPost.setEntity(entity);
-            HttpResponse response = httpClient.execute(httpPost, clientContext);
+            try (CloseableHttpResponse response = httpClient.execute(httpPost, clientContext)) {
 
-            if (response.getStatusLine().getStatusCode() >= 300) {
-                ByteArrayOutputStream body = new ByteArrayOutputStream();
-                IOUtils.copy(response.getEntity().getContent(), body);
-                throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
+                if (response.getStatusLine().getStatusCode() >= 300) {
+                    ByteArrayOutputStream body = new ByteArrayOutputStream();
+                    IOUtils.copy(response.getEntity().getContent(), body);
+                    throw new RuntimeException("Failed : HTTP error code : " + response.getStatusLine().getStatusCode() + "\n" + json + "\n->\n" + body);
+                }
+
+                return Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), NEPItemizeResponse.class);
             }
-
-            return Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), NEPItemizeResponse.class);
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
