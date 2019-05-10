@@ -1,5 +1,6 @@
 package nl.vpro.nep.service.impl;
 
+import java.time.Duration;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
@@ -16,6 +17,7 @@ import nl.vpro.nep.domain.WideVineResponse;
 import nl.vpro.nep.service.NEPSAMService;
 
 /**
+ * https://jira.vpro.nl/browse/MSE-3754
  * @author Michiel Meeuwissen
  * @since 5.11
  */
@@ -45,6 +47,12 @@ public class NEPSAMServiceImpl implements NEPSAMService {
 
     @Override
     public PlayreadyResponse playreadyToken(PlayreadyRequest request) {
+        throw new NotImplementedException("Migrate from GUINEPController");
+
+    }
+
+    @Override
+    public String streamUrl(String mid, Duration duration) {
         throw new NotImplementedException("Migrate from GUINEPController");
     }
 }

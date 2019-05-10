@@ -111,6 +111,11 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
+    public String streamUrl(String mid, Duration duration) {
+        return samService.get().streamUrl(mid, duration);
+    }
+
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("NEP: ");
