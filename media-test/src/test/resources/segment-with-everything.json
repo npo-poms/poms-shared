@@ -4,7 +4,7 @@
   "type": "SEGMENT",
   "avType": "VIDEO",
   "workflow": "PUBLISHED",
-  "sortDate": 100,
+  "sortDate": 0,
   "creationDate": 1425596400000,
   "lastModified": 1425600000000,
   "publishStart": 0,
@@ -319,54 +319,6 @@
       "creationDate": 1486291320000,
       "workflow": "PUBLISHED",
       "urn": "urn:vpro:media:location:11"
-    }
-  ],
-  "scheduleEvents": [
-    {
-      "channel": "NED3",
-      "start": 100,
-      "guideDay": -90000000,
-      "duration": 200,
-      "midRef": "VPROWON_20001",
-      "poProgID": "VPROWON_20001",
-      "urnRef": "urn:vpro:media:segment:12"
-    },
-    {
-      "channel": "NED3",
-      "start": 259200300,
-      "guideDay": 169200000,
-      "duration": 50,
-      "midRef": "VPROWON_20001",
-      "poProgID": "VPROWON_20001",
-      "repeat": {
-        "isRerun": true
-      },
-      "net": "ZAPP",
-      "urnRef": "urn:vpro:media:segment:12"
-    },
-    {
-      "channel": "HOLL",
-      "start": 691200350,
-      "guideDay": 601200000,
-      "duration": 250,
-      "midRef": "VPROWON_20001",
-      "poProgID": "VPROWON_20001",
-      "repeat": {
-        "isRerun": true
-      },
-      "urnRef": "urn:vpro:media:segment:12"
-    },
-    {
-      "channel": "CONS",
-      "start": 864000600,
-      "guideDay": 774000000,
-      "duration": 200,
-      "midRef": "VPROWON_20001",
-      "poProgID": "VPROWON_20001",
-      "repeat": {
-        "isRerun": true
-      },
-      "urnRef": "urn:vpro:media:segment:12"
     }
   ],
   "relations": [
