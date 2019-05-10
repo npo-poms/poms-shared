@@ -1,14 +1,13 @@
 package nl.vpro.nep.service.impl;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.Instant;
+import java.util.Base64;
 import java.util.function.Supplier;
 
 import org.apache.commons.io.IOUtils;
@@ -22,13 +21,15 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.springframework.beans.factory.annotation.Value;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.util.DateUtils;
 
 import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
 
 /**
+ * See also https://jira.vpro.nl/browse/MSE-4435
  * @author Michiel Meeuwissen
  * @since 5.11
  */
@@ -36,6 +37,7 @@ import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
 public class NEPSAMAuthenticator implements Supplier<String> {
 
 
+    private static final Duration DEFAULT_EXPIRY = Duration.ofDays(7);
 
     private final LoginRequest loginRequest;
     LoginResponse loginResponse;
@@ -44,17 +46,18 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     public NEPSAMAuthenticator(
         @Value("${nep.sam.username}") String username,
         @Value("${nep.sam.password}") String password,
-         @Value("${nep.sam.baseUrl}") String baseUrl
-        ) {
+        @Value("${nep.sam.baseUrl}") String baseUrl
+    ) {
         this.loginRequest = new LoginRequest(username, password);
         this.baseUrl = baseUrl;
+
     }
 
 
     @Override
     @SneakyThrows
     public String get() {
-        if (loginResponse == null || loginResponse.needsRefresh()) {
+        if (needsRefresh()) {
             authenticate();
         }
         return "Bearer " + this.loginResponse.getToken();
@@ -84,6 +87,30 @@ public class NEPSAMAuthenticator implements Supplier<String> {
 
     }
 
+
+    @SneakyThrows
+    public Instant getExpiration() {
+        Base64.Decoder decoder = Base64.getUrlDecoder();
+        String[] parts = loginResponse.token.split("\\."); // Splitting header, payload and signature
+        JsonNode node = new ObjectMapper().readTree(decoder.decode(parts[1]));
+        return Instant.ofEpochSecond(node.get("exp").intValue());
+    }
+
+
+    /**
+     * Returns false if the key is not valid for at least one day.
+     */
+    public boolean needsRefresh() {
+        if (loginResponse == null) {
+            return true;
+        }
+        return getExpiration().isBefore(
+            Instant.now().plus(Duration.ofDays(1))
+        );
+
+    }
+
+
     @lombok.Value
     public static class LoginRequest {
 
@@ -104,25 +131,6 @@ public class NEPSAMAuthenticator implements Supplier<String> {
         @JsonIgnore
         private final Instant obtaintedAt = Instant.now();
 
-        public LoginResponse() {
-
-        }
-        @JsonIgnore
-        public Jws<Claims> getJws() {
-            return Jwts.parser()
-                .setSigningKey("foobarfoobarfoobarfoobarfoobarfoobarfoobarfoobar")
-                .parseClaimsJws(token);
-        }
-
-        public boolean needsRefresh() {
-            Instant expiration = DateUtils.toInstant(getJws().getBody().getExpiration());
-            return expiration.isBefore(Instant.now());
-
-        }
-        public Instant getExpiration() {
-            return DateUtils.toInstant(getJws().getBody().getExpiration());
-
-        }
 
     }
 }

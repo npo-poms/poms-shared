@@ -37,6 +37,7 @@ import nl.vpro.nep.service.NEPItemizeService;
 import static org.apache.http.entity.ContentType.APPLICATION_OCTET_STREAM;
 
 /**
+ * See also https://jira.vpro.nl/browse/MSE-4435
  * @author Michiel Meeuwissen
  * @since 5.6
  */
