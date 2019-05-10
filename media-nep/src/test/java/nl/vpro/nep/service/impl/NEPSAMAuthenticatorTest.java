@@ -57,8 +57,8 @@ public class NEPSAMAuthenticatorTest {
         NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator("username", "password", "http://localhost:" + wireMockRule.port());
 
         authenticator.get();
-        log.info("{}", authenticator.loginResponse.getExpiration());
-        assertThat(authenticator.loginResponse.needsRefresh()).isFalse();
+        log.info("{}", authenticator.getExpiration());
+        assertThat(authenticator.needsRefresh()).isFalse();
 
     }
 }

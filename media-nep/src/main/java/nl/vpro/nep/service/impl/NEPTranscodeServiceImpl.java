@@ -105,7 +105,6 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
          @Value("${nep.api.connectionRequestTimeout}") String connectionRequestTimeout,
          @Value("${nep.api.socketTimeout}") String socketTimeout,
          @Value("${nep.api.pageSize}") int pageSize,
-
          @Value("${nep.transcode.sftp.username}") String ftpUserName) {
         this.url = url;
         this.userName = userName;

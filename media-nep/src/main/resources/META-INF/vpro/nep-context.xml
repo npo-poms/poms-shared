@@ -12,9 +12,7 @@
  <context:component-scan base-package="nl.vpro.nep.service.impl"/>
 
  <bean id="NEPItemizeServiceAuthenticator" class="nl.vpro.nep.service.impl.NEPItemizerV1Authenticator" />
+ <bean id="NEPSAMAuthenticator" class="nl.vpro.nep.service.impl.NEPSAMAuthenticator" />
 
- <!-- v2
-  <bean id="NEPItemizeServiceAuthenticator" class="nl.vpro.nep.service.impl.NEPItemizerAuthenticator" />
--->
 
 </beans>
