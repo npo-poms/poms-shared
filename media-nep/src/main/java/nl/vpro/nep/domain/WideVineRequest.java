@@ -1,6 +1,5 @@
 package nl.vpro.nep.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,8 +9,11 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class WideVineRequest {
     private String client_ip;
     private String authorization_key;
+
+    public WideVineRequest(String client_ip) {
+        this.client_ip = client_ip;
+    }
 }

@@ -53,6 +53,35 @@ public class NEPSAMServiceImpl implements NEPSAMService {
 
     @Override
     public String streamUrl(String mid, Duration duration) {
-        throw new NotImplementedException("Migrate from GUINEPController");
+
+        /*URI uri = new UriTemplate(streamAccessUrl).expand(mid);
+        String ip = ip(request);
+        StreamUrlRequest body = new StreamUrlRequest(ip, duration.orElse((int) defaultDuration.getSeconds()));
+        RequestEntity<StreamUrlRequest> req = RequestEntity
+            .post(uri)
+            .contentType(MediaType.parseMediaType("application/vnd.api+json"))
+            .header(AUTHORIZATION, streamAccessKey)
+            .body(body);
+        try {
+            ResponseEntity<StreamUrlResponse> response = http.exchange(req, StreamUrlResponse.class);
+            if (response.getStatusCode().is2xxSuccessful()) {
+                StreamUrlResponse entity = response.getBody();
+                if (entity == null || entity.getData() == null) {
+                    throw new IllegalStateException("No data found in " + response);
+                }
+                return entity.getData().getAttributes().getUrl();
+            } else {
+                log.error("For {} {} -> {}", uri, req, response);
+                throw new IllegalStateException("Incorrect answer from " + uri + " " + response);
+            }
+        } catch (HttpClientErrorException httpClientErrorException) {
+            logCurl(body, uri, httpClientErrorException);
+            throw new IllegalStateException(httpClientErrorException.getResponseBodyAsString());
+        } catch (Exception e) {
+            String reqString = logCurl(body, uri, e);
+            throw new IllegalStateException("Exception from NEP backend for POST  " + uri + " " + reqString + "' " + e.getClass().getName() + ": " + e.getMessage());
+        }
+        throw new NotImplementedException("Migrate from GUINEPController");*/
+        return "";
     }
 }
