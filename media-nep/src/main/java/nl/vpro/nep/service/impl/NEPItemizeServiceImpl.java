@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
@@ -11,12 +12,12 @@ import java.util.Properties;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHeaders;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -49,6 +50,10 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     static final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8"));
 
+    CloseableHttpClient httpClient = HttpClients.custom()
+            .build();
+
+
     @Inject
     public NEPItemizeServiceImpl(
         @Value("${nep.itemizer.baseUrl}") @Nonnull String itemizeUrl,
@@ -61,23 +66,28 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
         this(properties.getProperty("nep.itemizer.baseUrl"), () -> properties.getProperty("nep.itemizer.key"));
     }
 
+
+    @PreDestroy
+    public void shutdown() throws IOException {
+        if (httpClient != null) {
+            httpClient.close();
+        }
+    }
+
     @Override
     @SneakyThrows
     public NEPItemizeResponse itemize(NEPItemizeRequest request) {
-        try(CloseableHttpClient httpClient = HttpClients.custom()
-            .build()) {
-            String playerUrl = itemizeUrl + "/api/itemizer/job";
-            log.info("Itemizing {} @ {}", request, playerUrl);
-            HttpClientContext clientContext = HttpClientContext.create();
-            String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
-            StringEntity entity = new StringEntity(json, JSON);
-            HttpPost httpPost = new HttpPost(playerUrl);
-            authenticate(httpPost);
-            httpPost.addHeader(new BasicHeader(HttpHeaders.ACCEPT, JSON.toString()));
-            log.debug("curl -XPOST -H'Content-Type: application/json' -H'Authorization: {}' -H'Accept: {}' {} --data '{}'", itemizeKey, JSON.toString(), itemizeUrl, json);
-            httpPost.setEntity(entity);
-            HttpResponse response = httpClient.execute(httpPost, clientContext);
-
+        String playerUrl = itemizeUrl + "/api/itemizer/job";
+        log.info("Itemizing {} @ {}", request, playerUrl);
+        HttpClientContext clientContext = HttpClientContext.create();
+        String json = Jackson2Mapper.getLenientInstance().writeValueAsString(request);
+        StringEntity entity = new StringEntity(json, JSON);
+        HttpPost httpPost = new HttpPost(playerUrl);
+        authenticate(httpPost);
+        httpPost.addHeader(new BasicHeader(HttpHeaders.ACCEPT, JSON.toString()));
+        log.debug("curl -XPOST -H'Content-Type: application/json' -H'Authorization: {}' -H'Accept: {}' {} --data '{}'", itemizeKey, JSON.toString(), itemizeUrl, json);
+        httpPost.setEntity(entity);
+        try (CloseableHttpResponse response = httpClient.execute(httpPost, clientContext)) {
             if (response.getStatusLine().getStatusCode() >= 300) {
                 ByteArrayOutputStream body = new ByteArrayOutputStream();
                 IOUtils.copy(response.getEntity().getContent(), body);
@@ -92,26 +102,24 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     @Override
     @SneakyThrows
     public void grabScreen(String identifier, String time, OutputStream outputStream) {
-        try(CloseableHttpClient httpClient = HttpClients.custom().build()) {
-
-            HttpClientContext clientContext = HttpClientContext.create();
-            String framegrabber = itemizeUrl + "/api/framegrabber?identifier=" + identifier + "&time=" + time;
-            HttpGet get = new HttpGet(framegrabber);
-            authenticate(get);
-            get.addHeader(new BasicHeader(HttpHeaders.ACCEPT, APPLICATION_OCTET_STREAM.toString()));
-            log.info("Getting {}", framegrabber);
-            try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
-                if (execute.getStatusLine().getStatusCode() == 200) {
-                    IOUtils.copy(execute.getEntity().getContent(), outputStream);
-                } else {
-                    StringWriter result = new StringWriter();
-                    IOUtils.copy(execute.getEntity().getContent(), result, Charset.defaultCharset());
-                    throw new RuntimeException(result.toString());
-                }
+        HttpClientContext clientContext = HttpClientContext.create();
+        String framegrabber = itemizeUrl + "/api/framegrabber?identifier=" + identifier + "&time=" + time;
+        HttpGet get = new HttpGet(framegrabber);
+        authenticate(get);
+        get.addHeader(new BasicHeader(HttpHeaders.ACCEPT, APPLICATION_OCTET_STREAM.toString()));
+        log.info("Getting {}", framegrabber);
+        try (CloseableHttpResponse execute = httpClient.execute(get, clientContext)) {
+            if (execute.getStatusLine().getStatusCode() == 200) {
+                IOUtils.copy(execute.getEntity().getContent(), outputStream);
+            } else {
+                StringWriter result = new StringWriter();
+                IOUtils.copy(execute.getEntity().getContent(), result, Charset.defaultCharset());
+                throw new RuntimeException(result.toString());
             }
-
         }
     }
+
+
 
     private void authenticate(HttpUriRequest request) {
         request.addHeader(new BasicHeader(HttpHeaders.AUTHORIZATION, itemizeKey.get()));
