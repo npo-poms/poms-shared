@@ -36,6 +36,8 @@ public interface MediaIdentifiable extends Identifiable<Long> {
     }
 
     default String getCorrelationId() {
-        return getMainIdentifier().orElseGet(() -> "" + hashCode());
+        return getMainIdentifier()
+            .orElseGet(() -> "" + hashCode()
+            );
     }
 }
