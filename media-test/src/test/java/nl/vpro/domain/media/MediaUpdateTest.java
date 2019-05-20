@@ -1,16 +1,23 @@
 package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
-
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
-
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+import javax.xml.XMLConstants;
+import javax.xml.bind.JAXB;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+import java.io.StringReader;
+import java.io.StringWriter;
 
 /**
  *
@@ -627,5 +634,28 @@ public class MediaUpdateTest {
             "        </segment>\n" +
             "    </segments>\n" +
             "</program>");
+    }
+
+
+
+    @Test
+    public void generateCompleteProgramUpdateXMLandVerifyAgainstXSD() throws Exception {
+        StringWriter writer = new StringWriter();
+
+        Program program = MediaTestDataBuilder.program().withEverything().build();
+        ProgramUpdate programUpdate = ProgramUpdate.create(program);
+        //JAXB.marshal(programUpdate, System.out); //log
+        JAXB.marshal(programUpdate, writer);
+
+        StreamSource xml = new StreamSource(new StringReader(writer.toString()));
+
+        SchemaFactory schemaFactory = SchemaFactory
+                .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        log.info("{}", getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
+        Schema schema = schemaFactory.newSchema(
+                getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd")
+        );
+        Validator validator = schema.newValidator();
+        validator.validate(xml);
     }
 }
