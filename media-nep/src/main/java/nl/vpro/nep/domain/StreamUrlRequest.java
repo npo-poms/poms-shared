@@ -1,5 +1,7 @@
 package nl.vpro.nep.domain;
 
+import java.time.Duration;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.5
@@ -9,7 +11,7 @@ public class StreamUrlRequest  {
 
     private Data data;
 
-    public StreamUrlRequest(String ip, Integer duration) {
+    public StreamUrlRequest(String ip, Duration duration) {
         data = new Data();
         data.attributes = new Attributes();
         data.attributes.ip = ip;
@@ -20,7 +22,7 @@ public class StreamUrlRequest  {
     static class Attributes {
         String viewer = "pomsgui";
         String ip;
-        Integer duration;
+        Duration duration;
     }
 
     @lombok.Data

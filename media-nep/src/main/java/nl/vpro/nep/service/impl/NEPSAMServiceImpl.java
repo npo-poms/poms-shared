@@ -1,6 +1,5 @@
 package nl.vpro.nep.service.impl;
 
-import java.time.Duration;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
@@ -10,10 +9,7 @@ import javax.inject.Named;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Value;
 
-import nl.vpro.nep.domain.PlayreadyRequest;
-import nl.vpro.nep.domain.PlayreadyResponse;
-import nl.vpro.nep.domain.WideVineRequest;
-import nl.vpro.nep.domain.WideVineResponse;
+import nl.vpro.nep.domain.*;
 import nl.vpro.nep.service.NEPSAMService;
 
 /**
@@ -41,22 +37,37 @@ public class NEPSAMServiceImpl implements NEPSAMService {
 
     @Override
     public WideVineResponse widevineToken(WideVineRequest request) {
+      /*  RequestEntity<WideVineRequest> req = RequestEntity
+            .post(URI.create(widevineUrl))
+            .contentType(APPLICATION_JSON_UTF8)
+            .body(body);
+        return http.exchange(req, WideVineResponse.class).getBody();*/
         throw new NotImplementedException("Migrate from GUINEPController");
 
     }
 
     @Override
     public PlayreadyResponse playreadyToken(PlayreadyRequest request) {
+      /*  PlayreadyRequest body = new PlayreadyRequest(ip(request), widevineKey);
+        RequestEntity<PlayreadyRequest> req = RequestEntity
+            .post(URI.create(playreadyUrl))
+            .contentType(APPLICATION_JSON_UTF8)
+            .body(body);
+        ResponseEntity<PlayreadyResponse> exchange = http.exchange(req, PlayreadyResponse.class);
+        if (exchange.getStatusCode().is2xxSuccessful()) {
+            return exchange.getBody();
+        } else {
+
+            throw new IllegalStateException(exchange.toString());
+        }*/
         throw new NotImplementedException("Migrate from GUINEPController");
 
     }
 
     @Override
-    public String streamUrl(String mid, Duration duration) {
-
-        /*URI uri = new UriTemplate(streamAccessUrl).expand(mid);
-        String ip = ip(request);
-        StreamUrlRequest body = new StreamUrlRequest(ip, duration.orElse((int) defaultDuration.getSeconds()));
+    public String streamUrl(StreamUrlRequest streamUrlRequest) {
+/*
+        StreamUrlRequest body = new StreamUrlRequest(ip, duration.getSeconds()));
         RequestEntity<StreamUrlRequest> req = RequestEntity
             .post(uri)
             .contentType(MediaType.parseMediaType("application/vnd.api+json"))
@@ -80,8 +91,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         } catch (Exception e) {
             String reqString = logCurl(body, uri, e);
             throw new IllegalStateException("Exception from NEP backend for POST  " + uri + " " + reqString + "' " + e.getClass().getName() + ": " + e.getMessage());
-        }
-        throw new NotImplementedException("Migrate from GUINEPController");*/
+        }*/
         return "";
     }
 }
