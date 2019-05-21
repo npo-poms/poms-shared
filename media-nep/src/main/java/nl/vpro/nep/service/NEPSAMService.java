@@ -1,11 +1,6 @@
 package nl.vpro.nep.service;
 
-import java.time.Duration;
-
-import nl.vpro.nep.domain.PlayreadyRequest;
-import nl.vpro.nep.domain.PlayreadyResponse;
-import nl.vpro.nep.domain.WideVineRequest;
-import nl.vpro.nep.domain.WideVineResponse;
+import nl.vpro.nep.domain.*;
 
 /**
  * NEP 'Stream Access Management' API.
@@ -20,7 +15,7 @@ public interface NEPSAMService {
 
     PlayreadyResponse playreadyToken(PlayreadyRequest request);
 
-    String streamUrl(String mid, Duration duration);
+    String streamUrl(StreamUrlRequest streamUrlRequest);
 
 
 }
