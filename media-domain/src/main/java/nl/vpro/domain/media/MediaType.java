@@ -50,9 +50,9 @@ public enum MediaType {
                 Stream.concat(
                     Stream.concat(
                         Arrays.stream(ProgramType.values()),
-                        Arrays.stream(GroupType.values())),
-                    Arrays.stream(SegmentType.values()
-                    )
+                        Arrays.stream(GroupType.values())
+                    ),
+                    Arrays.stream(SegmentType.values())
                 ).collect(Collectors.toList());
 
         }

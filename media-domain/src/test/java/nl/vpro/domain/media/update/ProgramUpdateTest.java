@@ -5,7 +5,19 @@
 package nl.vpro.domain.media.update;
 
 import lombok.extern.slf4j.Slf4j;
+import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.user.Portal;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.Version;
+import nl.vpro.validation.ConstraintViolations;
+import nl.vpro.validation.WarningValidatorGroup;
+import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.validation.ConstraintViolation;
+import javax.xml.bind.JAXB;
 import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.Field;
@@ -15,29 +27,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 import java.util.TreeSet;
-
-import javax.validation.ConstraintViolation;
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXB;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
-
-import org.junit.Ignore;
-import org.junit.Test;
-import org.xml.sax.SAXException;
-
-import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import nl.vpro.util.Version;
-import nl.vpro.validation.ConstraintViolations;
-import nl.vpro.validation.WarningValidatorGroup;
 
 import static nl.vpro.domain.media.MediaBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -908,36 +897,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "    <segments/>\n" +
             "</program>");
         assertThat(rounded.getPredictions()).hasSize(1);
-    }
-    //TODO: GIO Activate the test
-    @Ignore
-    @Test
-    public void testXSD() throws Exception {
-        Source xmlFile = new StreamSource(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
-                "<program avType=\"VIDEO\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">\n" +
-                "<broadcaster>VPRO</broadcaster>\n" +
-                "<portal>STERREN24</portal>\n" +
-                "<title type=\"MAIN\">bla</title>\n" +
-                "<credits>\n" +
-                "  <person role='DIRECTOR'>\n" +
-                "  <givenName>Pietje</givenName>\n" +
-                "  <familyName>Puk</familyName></person>\n" +
-                "</credits>\n" +
-                "<locations/>\n" +
-                "<intentions/>\n" +
-                "<targetGroups/>\n" +
-                "<scheduleEvents/>\n" +
-                "<images/>\n" +
-                "<segments/>\n" +
-                "</program>"));
-        SchemaFactory schemaFactory = SchemaFactory
-            .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        log.info("{}", getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
-        Schema schema = schemaFactory.newSchema(
-            getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd")
-        );
-        Validator validator = schema.newValidator();
-        validator.validate(xmlFile);
     }
 
     @Test
