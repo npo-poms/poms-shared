@@ -65,7 +65,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     }
 
     @Override
-    public String streamUrl(StreamUrlRequest streamUrlRequest) {
+    public String streamUrl(String mid, StreamUrlRequest streamUrlRequest) {
 /*
         StreamUrlRequest body = new StreamUrlRequest(ip, duration.getSeconds()));
         RequestEntity<StreamUrlRequest> req = RequestEntity

@@ -15,7 +15,7 @@ public interface NEPSAMService {
 
     PlayreadyResponse playreadyToken(PlayreadyRequest request);
 
-    String streamUrl(StreamUrlRequest streamUrlRequest);
+    String streamUrl(String mid, StreamUrlRequest streamUrlRequest);
 
 
 }
