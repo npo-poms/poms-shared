@@ -111,8 +111,8 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public String streamUrl(StreamUrlRequest streamUrlRequest) {
-        return samService.get().streamUrl(streamUrlRequest);
+    public String streamUrl(String mid, StreamUrlRequest streamUrlRequest) {
+        return samService.get().streamUrl(mid, streamUrlRequest);
     }
 
     @Override
