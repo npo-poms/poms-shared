@@ -11,15 +11,15 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
-import java.util.function.Predicate;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -32,6 +32,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -46,7 +47,6 @@ import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
-import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
@@ -1214,16 +1214,13 @@ public abstract class MediaObject
     //endregion
 
     private <T extends OwnableR> boolean containsDuplicateOwner(@Nonnull  Set<T> newValues){
-
-        Predicate<T> compareWithOtherOwners = i -> {
-            List ownersInTheSet = newValues.stream()
-                    .map(T::getOwner)
-                    .collect(Collectors.toList());
-            return ownersInTheSet.contains(i.getOwner());
-        };
-
-        return newValues.stream()
-                .anyMatch(compareWithOtherOwners);
+        Map<OwnableR, AtomicInteger> counts = new HashMap<>();
+        for (T v : newValues) {
+            if (counts.computeIfAbsent(v, (a) -> new AtomicInteger(0)).incrementAndGet() > 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public SortedSet<TargetGroups> getTargetGroups() {
