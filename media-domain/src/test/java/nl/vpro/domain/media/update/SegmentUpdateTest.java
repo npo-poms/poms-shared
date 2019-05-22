@@ -28,8 +28,6 @@ public class SegmentUpdateTest extends MediaUpdateTest {
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
                 "<segment embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
-                "<intentions/>\n" +
-                "<targetGroups/>\n" +
                 "<locations/><scheduleEvents/><images/><start>P0DT0H0M0.100S</start></segment>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
