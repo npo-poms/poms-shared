@@ -109,7 +109,7 @@ public class AssemblageConfig {
     Function<String, Boolean> cridsForDelete = (c) -> false;
 
     @lombok.Builder.Default
-    boolean updateType = false;
+    Steal updateType = Steal.NO;
 
     SimpleLogger logger;
 
@@ -173,7 +173,7 @@ public class AssemblageConfig {
             .stealMids(Steal.YES)
             .stealCrids(Steal.YES)
             .stealSegments(Steal.YES)
-            .updateType(true)
+            .updateType(Steal.YES)
             ;
     }
 
@@ -198,18 +198,26 @@ public class AssemblageConfig {
     }
 
     public enum Steal {
-        YES((w) -> true),
-        IF_DELETED(Workflow.PUBLISHED_AS_DELETED::contains),
-        NO((w) -> true);
+        YES((incoming, toUpdate) -> true),
+        IF_DELETED((incoming, toUpdate) ->  Workflow.PUBLISHED_AS_DELETED.contains(toUpdate.getWorkflow())),
+        NO((incoming, toUpdate) -> true),
 
-        private final Function<Workflow, Boolean> is;
+        /**
+         * Only if the incoming object is new. We matched on crid.
+         */
+        IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming.getMid() == null)
+        ;
 
-        Steal(Function<Workflow, Boolean> is) {
+        private final BiFunction<MediaObject, MediaObject, Boolean> is;
+
+        Steal(BiFunction<MediaObject, MediaObject, Boolean> is) {
             this.is = is;
         }
 
-        public boolean is(Workflow workflow) {
-            return is.apply(workflow);
+
+        public boolean is(MediaObject incoming, MediaObject toUpdate) {
+            return is.apply(incoming, toUpdate);
         }
+
     }
 }
