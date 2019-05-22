@@ -123,7 +123,7 @@ public class MediaObjects {
      * In principal this should be all fields of which the value logically can exist on more than one mediaobject the same time,
      * so not unique fields like id and mid.
      *
-     * Also membership of groups will not be automaticly filled. This would need write access on those objects.
+     * Also membership of groups will not be automatically filled. This would need write access on those objects.
      *
      * Scheduleevents, predictions, workflow, subtitles status are not copied too, since this this would not make sense.
      *
