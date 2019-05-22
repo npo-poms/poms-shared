@@ -514,9 +514,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
 
-
-        returnObject.addIntention(toIntentions(intentions, owner));
-        returnObject.addTargetGroups(toTargetGroups(targetGroups, owner));
+        if(intentions != null){
+            returnObject.addIntention(toIntentions(intentions, owner));
+        }
+        if(targetGroups != null){
+            returnObject.addTargetGroups(toTargetGroups(targetGroups, owner));
+        }
 
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
             ScheduleEvent e = s.toScheduleEvent(owner);
@@ -532,8 +535,12 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * Returning only the values for the given owner.
      * We decided to return an empty list if owner differ rather than raise an
      * exception (this code will usually be executed behind a queue)
+     *
+     * Given a null it will return null to keep the distinction between systems
+     * that are aware of this field (we use empty list to delete)
      */
     private List<IntentionType> toUpdateIntentions(SortedSet<Intentions> intentions, OwnerType owner){
+        if(intentions == null) return null;
         for (Intentions intention : intentions) {
             if (intention.getOwner() == owner) {
                 return intention.getValues().stream()
@@ -553,7 +560,17 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 .build();
     }
 
+    /**
+     * From a SortedSet<TargetGroups> to a List<TargetGroupType>
+     * Returning only the values for the given owner.
+     * We decided to return an empty list if owner differ rather than raise an
+     * exception (this code will usually be executed behind a queue)
+     *
+     * Given a null it will return null to keep the distinction between systems
+     * that are aware of this field (we use empty list to delete)
+     */
     private List<TargetGroupType> toUpdateTargetGroups(SortedSet<TargetGroups> targetGroups, OwnerType owner){
+        if(intentions == null) return null;
         for (TargetGroups targetGroup : targetGroups) {
             if (targetGroup.getOwner() == owner) {
                 return targetGroup.getValues().stream()
@@ -937,9 +954,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "intention")
     @Nonnull
     public List<IntentionType> getIntentions() {
-        if (intentions == null) {
-            intentions = new ArrayList<>();
-        }
         return intentions;
     }
 
@@ -951,9 +965,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlElement(name = "targetGroup")
     @Nonnull
     public List<TargetGroupType> getTargetGroups() {
-        if (targetGroups == null) {
-            targetGroups = new ArrayList<>();
-        }
         return targetGroups;
     }
 

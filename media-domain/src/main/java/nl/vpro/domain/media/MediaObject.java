@@ -333,7 +333,7 @@ public abstract class MediaObject
     @JsonProperty("intentions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<Intentions> intentions = new TreeSet<>();
+    protected SortedSet<Intentions> intentions;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
@@ -344,7 +344,7 @@ public abstract class MediaObject
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<TargetGroups> targetGroups = new TreeSet<>();
+    protected SortedSet<TargetGroups> targetGroups;
 
     protected String source;
 
@@ -1201,7 +1201,11 @@ public abstract class MediaObject
     }
 
     public MediaObject addIntention(@Nonnull Intentions newIntentions) {
-        this.intentions.removeIf(existing -> existing.getOwner() == newIntentions.getOwner());
+        if(this.intentions != null) {
+            this.intentions.removeIf(existing -> existing.getOwner() == newIntentions.getOwner());
+        } else {
+            this.intentions = new TreeSet<>();
+        }
         newIntentions.setParent(this);
         intentions.add(newIntentions);
         return this;
@@ -1232,7 +1236,11 @@ public abstract class MediaObject
     }
 
     public MediaObject addTargetGroups(@Nonnull TargetGroups newTargetGroups) {
-        targetGroups.removeIf(existing -> existing.getOwner() == newTargetGroups.getOwner());
+        if(this.targetGroups != null) {
+            targetGroups.removeIf(existing -> existing.getOwner() == newTargetGroups.getOwner());
+        } else {
+            this.targetGroups = new TreeSet<>();
+        }
         newTargetGroups.setParent(this);
         targetGroups.add(newTargetGroups);
         return this;

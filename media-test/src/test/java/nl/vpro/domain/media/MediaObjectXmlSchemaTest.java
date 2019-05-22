@@ -877,6 +877,28 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
+    public void testUnmarshalWithNullIntentions() throws IOException, JAXBException {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/intention-null-scenarios.xml"), segment, "UTF-8");
+        String xmlInput = segment.toString();
+        log.info(xmlInput);
+
+        Program programExpected = JAXBTestUtil.unmarshal(xmlInput, Program.class);
+        assertThat(programExpected.getIntentions()).isNull();
+    }
+
+    @Test
+    public void testUnmarshalWithEmptyIntentions() throws IOException, JAXBException {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/intention-empty-scenarios.xml"), segment, "UTF-8");
+        String xmlInput = segment.toString();
+        log.info(xmlInput);
+
+        Program programExpected = JAXBTestUtil.unmarshal(xmlInput, Program.class);
+        assertThat(programExpected.getIntentions().first().getOwner()).isEqualTo(OwnerType.NPO);
+    }
+
+    @Test
     public void roundTripWithPrediction() throws IOException, SAXException {
         String example =
             "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPWON_1199058\" sortDate=\"2013-04-09T15:25:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2013-03-17T06:48:59.719+01:00\" lastModified=\"2018-02-07T11:58:43.578+01:00\" publishDate=\"2015-01-08T17:42:19.202+01:00\" urn=\"urn:vpro:media:program:23197206\">\n" +
