@@ -45,6 +45,10 @@ public interface ImageUrlService {
         return result.toString();
     }
 
+    default String getOriginalUrlFromImageUri(@Nonnull  String imageUri) {
+        return getOriginalUrl(getIdFromImageUri(imageUri));
+    }
+
     /**
      * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
      * obtain a base url for an image host.
