@@ -83,6 +83,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
             }
 
             this.loginResponse = Jackson2Mapper.getLenientInstance().readValue(response.getEntity().getContent(), LoginResponse.class);
+            log.info("Acquired {}", this.loginResponse);
         }
 
     }
