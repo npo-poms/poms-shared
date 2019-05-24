@@ -17,7 +17,7 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
  * @since 5.1
  */
 @Provider
-@Produces(SRT)
+@Produces(SRT_WITH_CHARSET)
 public class SRTSubtitlesWriter extends AbstractSubtitlesWriter {
 
 
