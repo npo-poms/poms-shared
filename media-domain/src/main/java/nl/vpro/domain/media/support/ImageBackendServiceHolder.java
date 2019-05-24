@@ -21,7 +21,12 @@ public class ImageBackendServiceHolder {
         }
         return instance;
     }
-    public static void setInstance(ImageBackendService instance) {
+    public static void setInstance(@Nonnull ImageBackendService instance) {
+        if (ImageBackendServiceHolder.instance != null && ImageBackendServiceHolder.instance != instance) {
+            log.info("Replacing image backend service with {}", instance);
+        }  else {
+            log.info("Setting image backend service with {}", instance);
+        }
         ImageBackendServiceHolder.instance = instance;
     }
 
