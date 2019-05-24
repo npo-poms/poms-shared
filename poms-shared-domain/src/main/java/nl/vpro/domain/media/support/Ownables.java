@@ -2,7 +2,6 @@ package nl.vpro.domain.media.support;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Nonnull;
@@ -14,10 +13,10 @@ import javax.annotation.Nonnull;
 public class Ownables {
 
 
-    public static <T extends OwnableR> boolean containsDuplicateOwner(@Nonnull Set<T> newValues){
-        Map<OwnableR, AtomicInteger> counts = new HashMap<>();
+    public static <T extends OwnableR> boolean containsDuplicateOwner(@Nonnull Iterable<T> newValues){
+        Map<OwnerType, AtomicInteger> counts = new HashMap<>();
         for (T v : newValues) {
-            if (counts.computeIfAbsent(v, (a) -> new AtomicInteger(0)).incrementAndGet() > 1) {
+            if (counts.computeIfAbsent(v.getOwner(), (a) -> new AtomicInteger(0)).incrementAndGet() > 1) {
                 return true;
             }
         }
