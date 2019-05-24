@@ -68,6 +68,7 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObject.*;
+import static nl.vpro.domain.media.support.Ownables.containsDuplicateOwner;
 
 /**
  * Base objects for programs and groups
@@ -1217,15 +1218,6 @@ public abstract class MediaObject
 
     //endregion
 
-    private <T extends OwnableR> boolean containsDuplicateOwner(@Nonnull  Set<T> newValues){
-        Map<OwnableR, AtomicInteger> counts = new HashMap<>();
-        for (T v : newValues) {
-            if (counts.computeIfAbsent(v, (a) -> new AtomicInteger(0)).incrementAndGet() > 1) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public SortedSet<TargetGroups> getTargetGroups() {
 
