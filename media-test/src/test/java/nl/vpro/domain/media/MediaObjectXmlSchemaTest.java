@@ -13,7 +13,9 @@ import java.io.Writer;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
@@ -26,7 +28,6 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import nl.vpro.domain.media.support.OwnerType;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -36,6 +37,7 @@ import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -372,10 +374,10 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testAgeRating() {
+    public void testAgeRating() throws IOException, SAXException {
         Program program = program().withAgeRating().build();
 
-        Program result = JAXBTestUtil.roundTrip(program, "<ageRating>12</ageRating>");
+        Program result = JAXBTestUtil.roundTripAndSimilar(program, "<ageRating>12</ageRating>");
 
         assertThat(result.getAgeRating()).isNotNull();
     }
