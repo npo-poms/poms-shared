@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public interface ImageBackendService {
+public interface ImageUrlService {
 
 
     default Long getId(@Nonnull Image image) {
@@ -41,7 +41,7 @@ public interface ImageBackendService {
     default String getOriginalUrl(@Nonnull Long id) {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder result = new StringBuilder();
-        result.append(imageServerBaseUrl).append("api/images/").append(id);
+        result.append(imageServerBaseUrl).append(id);
         return result.toString();
     }
 

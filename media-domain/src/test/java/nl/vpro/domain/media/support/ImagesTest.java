@@ -19,7 +19,7 @@ public class ImagesTest {
     @Before
     public void init() {
         System.clearProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY);
-        ImageBackendServiceHolder.setInstance(() -> System.getProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY));
+        ImageUrlServiceHolder.setInstance(() -> System.getProperty(Images.IMAGE_SERVER_BASE_URL_PROPERTY));
     }
 
     @Test

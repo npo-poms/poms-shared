@@ -9,25 +9,25 @@ import javax.annotation.Nonnull;
  * @since 5.11
  */
 @Slf4j
-public class ImageBackendServiceHolder {
+public class ImageUrlServiceHolder {
 
 
-    private static ImageBackendService instance;
+    private static ImageUrlService instance;
 
     @Nonnull
-    public static ImageBackendService getInstance() {
+    public static ImageUrlService getInstance() {
         if (instance == null) {
             log.warn("No image backend service configured");
         }
         return instance;
     }
-    public static void setInstance(@Nonnull ImageBackendService instance) {
-        if (ImageBackendServiceHolder.instance != null && ImageBackendServiceHolder.instance != instance) {
+    public static void setInstance(@Nonnull ImageUrlService instance) {
+        if (ImageUrlServiceHolder.instance != null && ImageUrlServiceHolder.instance != instance) {
             log.info("Replacing image backend service with {}", instance);
         }  else {
             log.info("Setting image backend service with {}", instance);
         }
-        ImageBackendServiceHolder.instance = instance;
+        ImageUrlServiceHolder.instance = instance;
     }
 
 }

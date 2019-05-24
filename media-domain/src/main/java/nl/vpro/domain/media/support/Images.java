@@ -13,15 +13,13 @@ import javax.annotation.Nonnull;
  *
  * @author Roelof Jan Koekoek
  * @since 1.6
- * @deprecated Used {@link ImageBackendService}
+ * @deprecated Used {@link ImageUrlService}
  */
 @Slf4j
 @Deprecated
 public class Images {
 
-        public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
-
-
+    public static final String IMAGE_SERVER_BASE_URL_PROPERTY = "image.server.baseUrl";
 
     /**
      * Resolves an web location for images. Relies on a system property #IMAGE_SERVER_BASE_URL_PROPERTY to
@@ -31,7 +29,7 @@ public class Images {
      * @throws NullPointerException on null arguments or null imageUri
      */
     public static String getImageLocation(@Nonnull Image image, String fileExtension, String... conversions) {
-        ImageBackendService instance = ImageBackendServiceHolder.getInstance();
+        ImageUrlService instance = ImageUrlServiceHolder.getInstance();
         Long id = instance.getId(image);
         if (id == null) {
             return null;
