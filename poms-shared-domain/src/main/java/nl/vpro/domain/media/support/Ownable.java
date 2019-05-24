@@ -10,9 +10,7 @@ package nl.vpro.domain.media.support;
  * @see OwnerType
  */
 
-public interface Ownable {
-
-    OwnerType getOwner();
+public interface Ownable extends OwnableR {
 
     void setOwner(OwnerType owner);
 
