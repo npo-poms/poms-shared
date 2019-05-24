@@ -95,7 +95,7 @@ public class License implements nl.vpro.domain.Displayable, Serializable { // No
                 }
             }
         }
-        ALL =  alls.toArray(new License[alls.size()]);
+        ALL =  alls.toArray(new License[0]);
     }
 
 
