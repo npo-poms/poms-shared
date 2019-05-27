@@ -546,6 +546,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
             this.events = events;
         }
 
+        @Nonnull
         @Override
         public Iterator<ScheduleEvent> iterator() {
             return new UnmodifiableIterator<ScheduleEvent>() {
@@ -600,16 +601,19 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
             return events.comparator();
         }
 
+        @Nonnull
         @Override
         public SortedSet<ScheduleEvent> subSet(ScheduleEvent fromElement, ScheduleEvent toElement) {
             return events.subSet(fromElement, toElement);
         }
 
+        @Nonnull
         @Override
         public SortedSet<ScheduleEvent> headSet(ScheduleEvent toElement) {
             return events.headSet(toElement);
         }
 
+        @Nonnull
         @Override
         public SortedSet<ScheduleEvent> tailSet(ScheduleEvent fromElement) {
             return events.tailSet(fromElement);

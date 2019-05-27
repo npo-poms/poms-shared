@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -232,7 +233,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
     }
 
     @Override
-    public int compareTo(Relation r) {
+    public int compareTo(@Nonnull Relation r) {
         if(definition != null) {
             if(definition.getBroadcaster().compareTo(r.getBroadcaster()) != 0) {
                 return definition.getBroadcaster().compareTo(r.getBroadcaster());

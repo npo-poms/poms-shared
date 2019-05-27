@@ -43,7 +43,7 @@ import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -59,7 +59,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
  *
  * A MediaUpdate is like a {@link MediaObject} but
  * <ul>
- *  <li>It does not have {@link Ownable} objects. When converting between a MediaUpdate and a MediaObject one need to indicate for which owner type this must happen.
+ *  <li>It does not have {@link MutableOwnable} objects. When converting between a MediaUpdate and a MediaObject one need to indicate for which owner type this must happen.
  *  If you are updating you are always associated with a certain owner (normally {@link OwnerType#BROADCASTER}), so there is no case for updating fields of other owners.
  * </li>
  * <li>It contains fewer implicit fields. E.g. a Broadcaster is just an id, and it does not contain a better string representation.

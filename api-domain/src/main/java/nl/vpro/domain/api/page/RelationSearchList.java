@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -66,6 +67,7 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
         return false;
     }
 
+    @Nonnull
     @Override
     public Iterator<RelationSearch> iterator() {
         return asList().iterator();

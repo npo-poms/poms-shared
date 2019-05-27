@@ -6,6 +6,8 @@ import lombok.ToString;
 
 import java.util.*;
 
+import javax.annotation.Nonnull;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -32,6 +34,7 @@ public class MediaSortOrderList extends AbstractList<MediaSortOrder> implements 
         this.sort = sort;
     }
 
+    @Nonnull
     @Override
     public Iterator<MediaSortOrder> iterator() {
         return sort == null ? Collections.<MediaSortOrder>emptyList().iterator() : sort.iterator();

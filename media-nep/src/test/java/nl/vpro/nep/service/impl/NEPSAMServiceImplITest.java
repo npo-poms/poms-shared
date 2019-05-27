@@ -29,7 +29,7 @@ public class NEPSAMServiceImplITest {
 
     @Test
     public void widevine() {
-        WideVineResponse wideVineResponse = impl.widevineToken(new WideVineRequest("145.58.169.92"));
+        WideVineResponse wideVineResponse = impl.widevineToken(new WideVineRequest("145.58.169.92", null));
         log.info("{}", wideVineResponse);
 
     }

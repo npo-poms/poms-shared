@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -95,6 +96,7 @@ public class RedirectList implements Iterable<RedirectEntry> {
         return result;
     }
 
+    @Nonnull
     @Override
     public Iterator<RedirectEntry> iterator() {
         return getList().iterator();
