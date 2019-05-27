@@ -15,6 +15,7 @@ import javax.annotation.Nonnull;
 import nl.vpro.util.CloseableIterator;
 
 /**
+ * Represent an iterable of {@link Change}'s.
  * @author Michiel Meeuwissen
  * @since 5.1
  */
