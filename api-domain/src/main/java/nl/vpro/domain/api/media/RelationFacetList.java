@@ -10,6 +10,7 @@ import lombok.Setter;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -92,6 +93,7 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
         return subSearch != null && subSearch.hasSearches();
     }
 
+    @Nonnull
     @Override
     public Iterator<RelationFacet> iterator() {
         return new Iterator<RelationFacet>() {

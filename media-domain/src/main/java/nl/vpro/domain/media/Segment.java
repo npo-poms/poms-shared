@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.util.List;
 import java.util.SortedSet;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
@@ -276,7 +277,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     }
 
     @Override
-    public int compareTo(Segment o) {
+    public int compareTo(@Nonnull Segment o) {
         if(super.equals(o)) {
             return 0;
         }

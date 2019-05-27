@@ -2,6 +2,7 @@ package nl.vpro.domain.page;
 
 import lombok.EqualsAndHashCode;
 
+import javax.annotation.Nonnull;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -141,7 +142,7 @@ public class Relation implements Comparable<Relation> {
     }
 
     @Override
-    public int compareTo(Relation r) {
+    public int compareTo(@Nonnull Relation r) {
         if (definition != null) {
             if (definition.getBroadcaster().compareTo(r.getBroadcaster()) != 0) {
                 return definition.getBroadcaster().compareTo(r.getBroadcaster());

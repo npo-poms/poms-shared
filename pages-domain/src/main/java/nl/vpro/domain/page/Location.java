@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.page;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -54,7 +55,7 @@ public class Location implements Comparable<Location> {
     }
 
     @Override
-    public int compareTo(Location loc) {
+    public int compareTo(@Nonnull Location loc) {
 
         if (avFileFormat != null && loc.avFileFormat != null && avFileFormat != loc.avFileFormat) {
             return avFileFormat.ordinal() - loc.avFileFormat.ordinal();

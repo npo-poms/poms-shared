@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
+import javax.annotation.Nonnull;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -92,7 +93,7 @@ public abstract class Organization implements Serializable, Identifiable<String>
     }
 
     @Override
-    public int compareTo(Organization organization) {
+    public int compareTo(@Nonnull Organization organization) {
         return id == null ? (organization.getId() == null ? 0 : -1) :  id.toLowerCase().compareTo(organization.getId().toLowerCase());
     }
 
