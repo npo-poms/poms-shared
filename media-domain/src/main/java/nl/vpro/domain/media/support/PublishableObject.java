@@ -31,7 +31,7 @@ import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.EmbargoValidation;
 
 /**
- * A publishable object implements {@link Accountable} and {@link Embargo}, but furthermore also has {@link #workflow}.
+ * A publishable object implements {@link Accountable} and {@link MutableEmbargo}, but furthermore also has {@link #workflow}.
  *
  * @author arne
  * @author roekoe
@@ -44,7 +44,7 @@ import nl.vpro.validation.EmbargoValidation;
 @Slf4j
 public abstract class PublishableObject<T extends PublishableObject<T>>
     extends AbstractPublishableObject<T>
-    implements EmbargoDeprecated<T> {
+    implements MutableEmbargoDeprecated<T> {
 
 
     @Column(nullable = false)

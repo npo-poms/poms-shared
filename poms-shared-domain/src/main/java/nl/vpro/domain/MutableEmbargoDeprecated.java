@@ -10,7 +10,7 @@ import nl.vpro.util.DateUtils;
  * @author Michiel Meeuwissen
  * @since 5.2
  */
-public interface EmbargoDeprecated<T extends EmbargoDeprecated<T>> extends Embargo<T> {
+public interface MutableEmbargoDeprecated<T extends MutableEmbargoDeprecated<T>> extends MutableEmbargo<T> {
 
     @Deprecated
     default Date getPublishStart() {

@@ -28,7 +28,7 @@ import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
- * Abstract publishable object is an abstract implemention of {@link Accountable} and {@link Embargo}.
+ * Abstract publishable object is an abstract implemention of {@link Accountable} and {@link MutableEmbargo}.
  *
  */
 @MappedSuperclass

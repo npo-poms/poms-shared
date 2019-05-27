@@ -32,7 +32,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
-import nl.vpro.domain.EmbargoDeprecated;
+import nl.vpro.domain.MutableEmbargoDeprecated;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.TextualObjects;
@@ -117,7 +117,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @Slf4j
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
-    EmbargoDeprecated,
+    MutableEmbargoDeprecated,
     TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,
     IntegerVersionSpecific,
     MediaIdentifiable {

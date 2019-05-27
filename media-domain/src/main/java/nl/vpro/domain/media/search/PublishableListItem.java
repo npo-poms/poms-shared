@@ -9,7 +9,7 @@ import java.time.Instant;
 import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
@@ -23,7 +23,7 @@ import nl.vpro.domain.user.Editor;
 @XmlRootElement(name = "item")
 @XmlType(
     name = "publishableListItem")
-public abstract class PublishableListItem implements Embargo {
+public abstract class PublishableListItem implements MutableEmbargo {
     @XmlAttribute
     protected Long id;
 

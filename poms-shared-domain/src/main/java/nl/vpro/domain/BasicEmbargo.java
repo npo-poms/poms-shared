@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public class BasicEmbargo implements Embargo<BasicEmbargo> {
+public class BasicEmbargo implements MutableEmbargo<BasicEmbargo> {
     private Instant publishStartInstant;
     private Instant publishStopInstant;
 
