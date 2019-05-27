@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -55,7 +55,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 )
 @Data
 @ToString
-public class BasicImageMetadata implements Serializable, Embargo<BasicImageMetadata>, ImageMetadata<BasicImageMetadata> {
+public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicImageMetadata>, ImageMetadata<BasicImageMetadata> {
 
     private static final long serialVersionUID = 0L;
 

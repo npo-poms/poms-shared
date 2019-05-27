@@ -34,7 +34,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 /**
  * Various methods related to dealing with {@link MediaObject}s, like copying and filling.
  *
- * See {@link TextualObjects}, and {@link Embargos} for methods like this (because media objects are {@link TextualObject} and {@link Embargo}
+ * See {@link TextualObjects}, and {@link Embargos} for methods like this (because media objects are {@link TextualObject} and {@link MutableEmbargo}
  * @since 1.5
  */
 @Slf4j
@@ -531,7 +531,7 @@ public class MediaObjects {
         return prediction;
     }
 
-    public static Prediction updatePrediction(MediaObject media, Platform platform, ReadonlyEmbargo embargo, Encryption drm) {
+    public static Prediction updatePrediction(MediaObject media, Platform platform, Embargo embargo, Encryption drm) {
         Prediction prediction = media.findOrCreatePrediction(platform);
         prediction.setEncryption(drm);
         Embargos.copy(embargo, prediction);

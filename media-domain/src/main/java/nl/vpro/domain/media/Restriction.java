@@ -20,7 +20,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -31,7 +31,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
 @SuppressWarnings("serial")
-abstract public class Restriction<T extends Restriction<T>> extends DomainObject implements Embargo<T> {
+abstract public class Restriction<T extends Restriction<T>> extends DomainObject implements MutableEmbargo<T> {
 
 
     protected static abstract class RestrictionBuilder<B extends RestrictionBuilder<B>> implements EmbargoBuilder<B> {

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.validation.NoHtml;
@@ -82,7 +82,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
         "lastModified"
     })
 @EqualsAndHashCode
-public class Page implements Embargo {
+public class Page implements MutableEmbargo {
 
 
     public static <T extends PageBuilder<T, Page>> PageBuilder<T, Page> builder() {

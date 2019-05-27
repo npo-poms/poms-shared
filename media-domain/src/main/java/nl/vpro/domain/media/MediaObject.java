@@ -2039,7 +2039,7 @@ public abstract class MediaObject
         return findOrCreatePrediction(platform, Embargos.unrestrictedInstance());
     }
 
-    protected Prediction findOrCreatePrediction(Platform platform, ReadonlyEmbargo embargo) {
+    protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo) {
          Prediction prediction = getPrediction(platform);
         if (prediction == null) {
             log.debug("Creating prediction object for {}: {}", platform, this);

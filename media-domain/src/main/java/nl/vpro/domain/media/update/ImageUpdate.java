@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.image.ImageMetadata;
@@ -67,7 +67,7 @@ import static nl.vpro.domain.media.update.MediaUpdate.VALIDATOR;
 
 @Slf4j
 @Data
-public class ImageUpdate implements Embargo<ImageUpdate>, Metadata<ImageUpdate> {
+public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageUpdate> {
 
     @XmlAttribute(required = true)
     @NotNull

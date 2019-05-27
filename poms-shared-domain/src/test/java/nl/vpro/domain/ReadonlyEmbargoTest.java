@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ReadonlyEmbargoTest {
 
 
-    public static class ReadonlyEmbargoTestClass implements ReadonlyEmbargo {
+    public static class ReadonlyEmbargoTestClass implements Embargo {
         private final Instant start;
 
         private final Instant stop;
@@ -44,7 +44,7 @@ public class ReadonlyEmbargoTest {
         Instant stop = LocalDateTime.of(2018, 10, 20, 11, 55).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
         Instant between = LocalDateTime.of(2018, 4, 6, 11, 55).atZone(ZoneId.of("Europe/Amsterdam")).toInstant();
 
-        ReadonlyEmbargo embargo = new ReadonlyEmbargoTestClass(start, stop);
+        Embargo embargo = new ReadonlyEmbargoTestClass(start, stop);
 
         assertThat(embargo.asRange().contains(between)).isTrue();
         assertThat(embargo.asRange().contains(start)).isTrue();
