@@ -14,7 +14,7 @@ import org.assertj.core.api.Fail;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.user.Broadcaster;
 
 import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
@@ -553,10 +553,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         return myself;
     }
 
-    private <T extends Ownable> void hasOwners(Collection<T> ownables, OwnerType... owners) {
+    private <T extends MutableOwnable> void hasOwners(Collection<T> ownables, OwnerType... owners) {
         validateIsNotNull(owners);
         Set<OwnerType> set = new TreeSet<>();
-        for(Ownable ownable : ownables) {
+        for(MutableOwnable ownable : ownables) {
             set.add(ownable.getOwner());
         }
 
@@ -564,10 +564,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
     }
 
-    private <T extends Ownable> void hasOnlyOwners(Collection<T> ownables, OwnerType... owners) {
+    private <T extends MutableOwnable> void hasOnlyOwners(Collection<T> ownables, OwnerType... owners) {
         validateIsNotNull(owners);
         Set<OwnerType> set = new TreeSet<>();
-        for(Ownable ownable : ownables) {
+        for(MutableOwnable ownable : ownables) {
             set.add(ownable.getOwner());
         }
 

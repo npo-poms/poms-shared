@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
@@ -32,7 +31,6 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
-
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -1195,10 +1193,10 @@ public abstract class MediaObject
     @SuppressWarnings("unchecked")
     public void setIntentions(@Nonnull SortedSet<Intentions> newIntentions) {
 
-       if (containsDuplicateOwner(newIntentions))
+       if (containsDuplicateOwner(newIntentions)) {
            throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
-
-        this.intentions = (SortedSet)updateSortedSet(this.intentions, newIntentions);
+       }
+       this.intentions = (SortedSet)updateSortedSet(this.intentions, newIntentions);
     }
 
     public MediaObject addIntention(@Nonnull Intentions newIntentions) {

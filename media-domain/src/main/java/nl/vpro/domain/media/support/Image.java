@@ -100,7 +100,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @Slf4j
 public class Image extends PublishableObject<Image>
-    implements Metadata<Image>, Ownable, Child<MediaObject> {
+    implements Metadata<Image>, MutableOwnable, Child<MediaObject> {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
     public static final String BASE_URN = "urn:vpro:media:image:";

@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OwnablesTest {
 
 
-    public static class AOwnable implements OwnableR {
+    public static class AOwnable implements Ownable {
         private final OwnerType ownerType;
 
         public AOwnable(OwnerType ownerType) {

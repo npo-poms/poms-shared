@@ -1,6 +1,6 @@
 package nl.vpro.domain;
 
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 
@@ -8,7 +8,7 @@ import nl.vpro.domain.media.support.TextualType;
  * @author Michiel Meeuwissen
  * @since 5.1
  */
-public interface OwnedText extends Ownable, TypedText, Comparable<TypedText> {
+public interface OwnedText extends MutableOwnable, TypedText, Comparable<TypedText> {
 
     static OwnedText of(TypedText t, OwnerType ownerType) {
         return new BasicOwnedText(t.get(), ownerType, t.getType());
