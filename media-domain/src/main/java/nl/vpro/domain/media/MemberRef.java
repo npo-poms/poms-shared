@@ -513,8 +513,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         if (getMidRef() != null) {
             builder.append("midRef", getMidRef());
         }
-        if (getMediaRef() != null) {
+        if (getMidRef() == null && getMediaRef() != null) {
             builder.append("mediaRef", getMediaRef());
+        }
+        if (getMember() != null) {
+            builder.append("member", getMember().getCorrelationId());
         }
         if (number != null) {
             builder.append("number", number);
