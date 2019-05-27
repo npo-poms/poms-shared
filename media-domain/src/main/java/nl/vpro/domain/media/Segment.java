@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.media.support.AuthorizedDuration;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.validation.SegmentValidation;
@@ -37,7 +37,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @JsonTypeName("segment")
 @SegmentValidation
-public class Segment extends MediaObject implements Comparable<Segment>, Child<Program>, Ownable {
+public class Segment extends MediaObject implements Comparable<Segment>, Child<Program>, MutableOwnable {
 
 
     private static final long serialVersionUID = -868293795041160925L;

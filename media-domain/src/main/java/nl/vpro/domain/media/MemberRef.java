@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -74,7 +74,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "index",
     "highlighted"
 })
-public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, Ownable {
+public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

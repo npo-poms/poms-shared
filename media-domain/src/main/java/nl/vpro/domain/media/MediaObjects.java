@@ -21,7 +21,7 @@ import com.google.common.collect.Iterables;
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
@@ -790,7 +790,7 @@ public class MediaObjects {
      * @deprecated Use {@link TextualObjects#filter}
      */
     @Deprecated
-    public static <T extends Ownable> List<T> filter(Collection<T> ownables, OwnerType owner) {
+    public static <T extends MutableOwnable> List<T> filter(Collection<T> ownables, OwnerType owner) {
         return TextualObjects.filter(ownables, owner);
     }
 

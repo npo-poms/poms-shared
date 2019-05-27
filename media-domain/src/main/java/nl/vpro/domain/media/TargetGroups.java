@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.OwnableR;
+import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 
 import static javax.persistence.CascadeType.ALL;
@@ -27,7 +27,7 @@ import static javax.persistence.CascadeType.ALL;
 @XmlType(name = "targetGroupsType")
 @Getter
 @Setter
-public class TargetGroups extends DomainObject implements Serializable, Child<MediaObject>, Comparable<TargetGroups>, OwnableR {
+public class TargetGroups extends DomainObject implements Serializable, Child<MediaObject>, Comparable<TargetGroups>, Ownable {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient

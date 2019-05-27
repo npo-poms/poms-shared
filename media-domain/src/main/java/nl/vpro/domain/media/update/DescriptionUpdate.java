@@ -10,12 +10,12 @@ import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.TypedText;
 import nl.vpro.domain.media.support.Description;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.validation.NoHtml;
 
 /**
- * A description of a {@link MediaUpdate}. Like a non {@link Ownable} {@link Description}
+ * A description of a {@link MediaUpdate}. Like a non {@link MutableOwnable} {@link Description}
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "descriptionUpdateType",
