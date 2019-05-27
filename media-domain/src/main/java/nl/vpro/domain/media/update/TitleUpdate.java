@@ -117,6 +117,7 @@ public class TitleUpdate implements TypedText {
         return result;
     }
 
+    @Nonnull
     @Override
     public String toString() {
         return "TitleUpdate{" +

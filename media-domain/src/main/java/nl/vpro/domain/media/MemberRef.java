@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -461,7 +462,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @Override
-    public int compareTo(MemberRef memberRef) {
+    public int compareTo(@Nonnull MemberRef memberRef) {
         if(this.getUrnRef() != null
             && memberRef.getUrnRef() != null
             && this.getUrnRef().compareTo(memberRef.getUrnRef()) != 0) {
@@ -561,6 +562,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         }
     }
 
+    @Nonnull
     @Override
     @XmlTransient
     public OwnerType getOwner() {
@@ -569,7 +571,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @Override
-    public void setOwner(OwnerType owner) {
+    public void setOwner(@Nonnull OwnerType owner) {
         this.owner = owner;
     }
 

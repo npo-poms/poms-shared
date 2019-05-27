@@ -128,6 +128,7 @@ public class Location extends PublishableObject<Location>
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @XmlAttribute(required = true)
+    @Nonnull
     protected OwnerType owner = OwnerType.BROADCASTER;
 
     @Column(nullable = true)
@@ -398,13 +399,14 @@ public class Location extends PublishableObject<Location>
         this.duration = duration;
     }
 
+    @Nonnull
     @Override
     public OwnerType getOwner() {
         return owner;
     }
 
     @Override
-    public void setOwner(OwnerType owner) {
+    public void setOwner(@Nonnull OwnerType owner) {
         this.owner = owner;
     }
 
