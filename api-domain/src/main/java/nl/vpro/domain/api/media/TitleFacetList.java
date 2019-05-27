@@ -3,6 +3,7 @@ package nl.vpro.domain.api.media;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -82,6 +83,7 @@ public class TitleFacetList
         return subSearch != null && subSearch.hasSearches();
     }
 
+    @Nonnull
     @Override
     public Iterator<TitleFacet> iterator() {
         return new Iterator<TitleFacet>() {

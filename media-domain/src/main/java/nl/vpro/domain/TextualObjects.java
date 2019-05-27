@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.util.ResortedSortedSet;
@@ -239,7 +239,7 @@ public class TextualObjects {
         }
     }
 
-    public static <T extends Ownable> List<T> filter(Collection<T> ownables, OwnerType owner) {
+    public static <T extends MutableOwnable> List<T> filter(Collection<T> ownables, OwnerType owner) {
         return ownables.stream().filter(item -> item.getOwner() == owner).collect(Collectors.toList());
     }
 

@@ -26,7 +26,7 @@ import com.google.common.collect.Iterators;
 import com.google.common.collect.PeekingIterator;
 
 import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.InstantToTimestampConverter;
@@ -53,7 +53,7 @@ import static nl.vpro.i18n.Locales.DUTCH;
 })
 @Slf4j
 @IdClass(SubtitlesId.class)
-public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Ownable {
+public class Subtitles implements Serializable, Identifiable<SubtitlesId>, MutableOwnable {
 
     private static final long serialVersionUID = 0L;
 

@@ -3,6 +3,7 @@ package nl.vpro.domain.api;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
@@ -30,6 +31,7 @@ public abstract class MatcherList<T> implements Iterable<T> {
 
     public abstract List<T> asList();
 
+    @Nonnull
     @Override
     public Iterator<T> iterator() {
         return asList().iterator();

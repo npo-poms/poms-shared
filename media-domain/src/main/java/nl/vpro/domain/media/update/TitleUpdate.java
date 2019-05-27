@@ -10,13 +10,13 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.TypedText;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.validation.NoHtml;
 
 /**
- * A title of a {@link MediaUpdate}. Like a non {@link Ownable} {@link Title}
+ * A title of a {@link MediaUpdate}. Like a non {@link MutableOwnable} {@link Title}
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "titleUpdateType",
@@ -117,6 +117,7 @@ public class TitleUpdate implements TypedText {
         return result;
     }
 
+    @Nonnull
     @Override
     public String toString() {
         return "TitleUpdate{" +

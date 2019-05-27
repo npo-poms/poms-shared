@@ -5,6 +5,7 @@
 package nl.vpro.domain.media.update;
 
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.Relation;
@@ -125,7 +126,7 @@ public class RelationUpdate implements Comparable<RelationUpdate> {
     }
 
     @Override
-    public int compareTo(RelationUpdate relationUpdate) {
+    public int compareTo(@Nonnull RelationUpdate relationUpdate) {
         if(broadcaster != null && relationUpdate.broadcaster != null && broadcaster.compareTo(relationUpdate.broadcaster) != 0) {
             return broadcaster.compareTo(relationUpdate.broadcaster);
         }

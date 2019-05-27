@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.OwnableR;
+import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 
 import static javax.persistence.CascadeType.ALL;
@@ -27,7 +27,7 @@ import static javax.persistence.CascadeType.ALL;
 @XmlType(name = "intentionsType")
 @Getter
 @Setter
-public class Intentions extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intentions>, OwnableR {
+public class Intentions extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intentions>, Ownable {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient

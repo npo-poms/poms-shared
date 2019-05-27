@@ -15,7 +15,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
@@ -27,7 +27,7 @@ import nl.vpro.domain.media.support.OwnerType;
 @nl.vpro.validation.TwitterRef
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "twitterRefType")
-public class TwitterRef implements Serializable, Supplier<String>, Ownable {
+public class TwitterRef implements Serializable, Supplier<String>, MutableOwnable {
 
     public enum Type {
         ACCOUNT,

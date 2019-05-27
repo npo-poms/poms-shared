@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import nl.vpro.util.CloseableIterator;
 
 /**
@@ -55,6 +57,7 @@ public class Changes<T> implements AutoCloseable, Iterable<Change<T>> {
     public void close() throws Exception {
         iterator.close();
     }
+    @Nonnull
     @Override
     public Iterator<Change<T>> iterator() {
         return (Iterator<Change<T>>) iterator;

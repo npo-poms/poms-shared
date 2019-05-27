@@ -2,6 +2,8 @@ package nl.vpro.domain.classification;
 
 import java.util.Arrays;
 
+import javax.annotation.Nonnull;
+
 /**
  * @author Michiel Meeuwissen
  * @since 3.0
@@ -26,7 +28,7 @@ public class TermId implements Comparable<TermId> {
     }
 
     @Override
-    public int compareTo(TermId o) {
+    public int compareTo(@Nonnull TermId o) {
         if (o == null) return 1;
         for (int i = 0; i < Math.min(parts.length, o.parts.length); i++) {
             int diff = parts[i] - o.parts[i];

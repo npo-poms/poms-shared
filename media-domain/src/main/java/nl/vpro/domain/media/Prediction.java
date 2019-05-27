@@ -318,7 +318,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     @Override
-    public int compareTo(Prediction o) {
+    public int compareTo(@Nonnull Prediction o) {
         if (platform == null) {
             return o == null ? 0 : o.platform == null ? 0 : 1;
         } else {
