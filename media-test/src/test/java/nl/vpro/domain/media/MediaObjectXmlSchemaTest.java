@@ -374,10 +374,10 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testAgeRating() throws IOException, SAXException {
+    public void testAgeRating() {
         Program program = program().withAgeRating().build();
 
-        Program result = JAXBTestUtil.roundTripAndSimilar(program, "<ageRating>12</ageRating>");
+        Program result = JAXBTestUtil.roundTripContains(program, "<ageRating xmlns='urn:vpro:media:2009'>12</ageRating>");
 
         assertThat(result.getAgeRating()).isNotNull();
     }
