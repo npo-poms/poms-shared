@@ -42,8 +42,10 @@ public class PageUpdateBuilderTest {
     @Test
     public void testBroadcasters() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").broadcasters("VPRO", "VARA").build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:broadcaster>VPRO</pageUpdate:broadcaster>\n" +
-            "    <pageUpdate:broadcaster>VARA</pageUpdate:broadcaster>");
+        PageUpdate result = JAXBTestUtil.roundTripContains(page,
+            "<pageUpdate:broadcaster xmlns:pageUpdate='urn:vpro:pages:update:2013'>VPRO</pageUpdate:broadcaster>",
+            "<pageUpdate:broadcaster xmlns:pageUpdate='urn:vpro:pages:update:2013'>VARA</pageUpdate:broadcaster>"
+        );
         assertThat(result.getBroadcasters()).containsExactly("VPRO", "VARA");
     }
 
