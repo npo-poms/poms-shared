@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,19 +28,29 @@ public class AVAttributesUpdate {
 
     @XmlElement
     @Min(0L)
+    @Getter
+    @Setter
     private Integer bitrate;
 
     @XmlElement
     @Min(0L)
+    @Getter
+    @Setter
     private Long byteSize;
 
     @XmlElement
+    @Getter
+    @Setter
     private AVFileFormat avFileFormat;
 
     @XmlElement
+    @Getter
+    @Setter
     private AudioAttributesUpdate audioAttributes;
 
     @XmlElement
+    @Getter
+    @Setter
     private VideoAttributesUpdate videoAttributes;
 
     public static AVAttributesUpdate copy(AVAttributesUpdate from) {
@@ -103,35 +116,4 @@ public class AVAttributesUpdate {
         return avAttributesUpdate == null ? null : avAttributesUpdate.toAvAttributes();
     }
 
-    public Integer getBitrate() {
-        return bitrate;
     }
-
-    public void setBitrate(Integer bitrate) {
-        this.bitrate = bitrate;
-    }
-
-    public AVFileFormat getAvFileFormat() {
-        return avFileFormat;
-    }
-
-    public void setAvFileFormat(AVFileFormat avFileFormat) {
-        this.avFileFormat = avFileFormat;
-    }
-
-    public AudioAttributesUpdate getAudioAttributes() {
-        return audioAttributes;
-    }
-
-    public void setAudioAttributes(AudioAttributesUpdate audioAttributes) {
-        this.audioAttributes = audioAttributes;
-    }
-
-    public VideoAttributesUpdate getVideoAttributes() {
-        return videoAttributes;
-    }
-
-    public void setVideoAttributes(VideoAttributesUpdate videoAttributes) {
-        this.videoAttributes = videoAttributes;
-    }
-}
