@@ -575,7 +575,7 @@ public enum MediaType {
 
     public MediaType[] allowedEpisodeOfTypes() {
         if(!hasEpisodeOf()) {
-            return new MediaType[]{};
+            return new MediaType[0];
         }
 
         return new MediaType[]{MediaType.SERIES, MediaType.SEASON};
@@ -587,7 +587,7 @@ public enum MediaType {
 
     public MediaType[] preferredEpisodeTypes() {
         if(!canContainEpisodes()) {
-            return new MediaType[]{};
+            return new MediaType[0];
         }
 
         return new MediaType[]{MediaType.BROADCAST};
@@ -595,7 +595,7 @@ public enum MediaType {
 
     public MediaType[] allowedEpisodeTypes() {
         if(!canContainEpisodes()) {
-            return new MediaType[]{};
+            return new MediaType[0];
         }
 
         return new MediaType[]{MediaType.BROADCAST};
