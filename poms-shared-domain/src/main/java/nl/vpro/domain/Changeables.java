@@ -1,27 +1,33 @@
 package nl.vpro.domain;
 
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Nonnull;
 
 /**
- *
+ * Utilities related to {@link Changeable}
  * @author Michiel Meeuwissen
  * @since 5.10
  */
+@SuppressWarnings("JavadocReference")
 public class Changeables {
 
-    public static void fillFor(Changeable accountable, Instant now) {
+    public static void fillFor(@Nonnull Changeable accountable, @Nonnull Instant now) {
         accountable.setLastModifiedInstant(now);
         if (accountable.getCreationInstant() == null) {
             accountable.setCreationInstant(now);
         }
     }
 
-     public static void copyFrom(Changeable source, Changeable target) {
+     public static void copyFrom(@Nonnull Changeable source, @Nonnull Changeable target) {
         target.setLastModifiedInstant(source.getLastModifiedInstant());
         target.setCreationInstant(source.getCreationInstant());
     }
 
-    public static  void copyFromIfTargetUnset(Changeable source, Changeable target) {
+    public static  void copyFromIfTargetUnset(@Nonnull Changeable source, @Nonnull Changeable target) {
 
         if (target.getLastModifiedInstant() == null) {
             target.setLastModifiedInstant(source.getLastModifiedInstant());
@@ -32,7 +38,7 @@ public class Changeables {
     }
 
 
-    public static void copyFromIfSourceSet(Changeable source, Changeable target) {
+    public static void copyFromIfSourceSet(@Nonnull Changeable source,  @Nonnull Changeable target) {
         if (source.getLastModifiedInstant() != null) {
             target.setLastModifiedInstant(source.getLastModifiedInstant());
         }
@@ -47,12 +53,12 @@ public class Changeables {
      * @since 5.11
      */
     public static boolean updateEntity(
-        Changeable changeable,
+        @Nonnull Changeable changeable,
         boolean updateLastModified,
-        String creationInstantProperty,
-        String lastModifiedInstantProperty,
-        Object[] state,
-        String[] propertyNames) {
+        @Nonnull String creationInstantProperty,
+        @Nonnull String lastModifiedInstantProperty,
+        @Nonnull Object[] state,
+        @Nonnull String[] propertyNames) {
         boolean updated = false;
 
         final Instant now = Instant.now();
@@ -70,10 +76,10 @@ public class Changeables {
         return updated;
     }
 
-      /**
+    /**
      * Used by implementations of {@link org.hibernate.Interceptor}
      */
-    public static void setProperty(String propertyName, Object propertyValue, Object[] state, String[] propertyNames) {
+    public static void setProperty(@Nonnull String propertyName, @Nonnull Object propertyValue, @Nonnull Object[] state, @Nonnull String[] propertyNames) {
         for(int i = 0; i < propertyNames.length; i++) {
             if(propertyNames[i].equals(propertyName)) {
                 state[i] = propertyValue;
@@ -81,5 +87,15 @@ public class Changeables {
             }
         }
     }
+    public static void headers(Changeable changeable, Map<String, List<Object>> httpHeaders) {
+        httpHeaders.put("Last-Modified", Arrays.asList(changeable.getLastModifiedInstant()));
+        httpHeaders.put("X-Created", Arrays.asList(changeable.getCreationInstant()));
+    }
+
+    public static void fillFromHeaders(Changeable changeable, Map<String, ? extends List<?>> httpHeaders) {
+
+        // TODO
+    }
+
 
 }

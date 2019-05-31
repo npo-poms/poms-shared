@@ -2,6 +2,8 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
+import javax.annotation.Nonnull;
+
 import nl.vpro.domain.user.Editor;
 
 import static nl.vpro.domain.AbstractPublishableObject_.*;
@@ -14,7 +16,10 @@ import static nl.vpro.domain.Changeables.setProperty;
 @SuppressWarnings("JavadocReference")
 public class Accountables {
 
-    public static void fillFor(Accountable accountable, Instant now, Editor currentUser) {
+    public static void fillFor(
+        @Nonnull Accountable accountable,
+        @Nonnull Instant now,
+        @Nonnull Editor currentUser) {
         Changeables.fillFor(accountable, now);
         accountable.setLastModifiedBy(currentUser);
         if (accountable.getCreatedBy() == null) {
@@ -27,9 +32,11 @@ public class Accountables {
      * Used by implementations of {@link org.hibernate.Interceptor}
      */
     public static boolean updateEntity(
-        Editor user,
+        @Nonnull Editor user,
         boolean updateLastModified,
-        Accountable accountable, Object[] state, String[] propertyNames) {
+        @Nonnull Accountable accountable,
+        @Nonnull Object[] state,
+        @Nonnull String[] propertyNames) {
         boolean updated = false;
 
         Changeables.updateEntity(accountable, updateLastModified,  CREATION_INSTANT, LAST_MODIFIED, state, propertyNames);

@@ -59,7 +59,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     private static final long serialVersionUID = 0L;
 
     @Column(nullable = false, name="creationDate")
-    @XmlAttribute
+    @XmlAttribute(name = "creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @Convert(converter = InstantToTimestampConverter.class)
     @XmlSchemaType(name = "dateTime")
@@ -69,7 +69,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
 
 
     @Column(nullable = false, name = "lastModified")
-    @XmlAttribute
+    @XmlAttribute(name = "lastModified")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @Convert(converter = InstantToTimestampConverter.class)
     @XmlSchemaType(name = "dateTime")

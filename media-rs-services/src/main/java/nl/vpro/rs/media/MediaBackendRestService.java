@@ -34,6 +34,7 @@ import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesId;
 import nl.vpro.domain.subtitles.SubtitlesType;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_XML;
 import static nl.vpro.api.rs.subtitles.Constants.*;
 
 /**
@@ -344,7 +345,7 @@ public interface MediaBackendRestService {
 
     @GET
     @Path("subtitles/{mid:.*}/{language}/{type}")
-    @Produces({VTT, TT888, SRT})
+    @Produces({VTT, TT888, SRT, APPLICATION_XML})
     Subtitles getSubtitles(
         @Encoded @PathParam(MID) String mid,
         @PathParam(LANGUAGE) Locale language,
