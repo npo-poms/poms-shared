@@ -30,8 +30,8 @@ public class SubtitlesTest {
     @Test
     public void testMarshalToXml() throws IOException, SAXException {
         Subtitles subtitles = Subtitles.webvtt("VPRO_1234", Duration.ofMillis(2 * 60 * 1000), NETHERLANDISH,  "WEBVTT\n\n1\n00:00:00.000 --> 00:01:04.000\nbla\n\n");
-        subtitles.setCreationDate(Instant.ofEpochMilli(0));
-        subtitles.setLastModified(Instant.ofEpochMilli(0));
+        subtitles.setCreationInstant(Instant.ofEpochMilli(0));
+        subtitles.setLastModifiedInstant(Instant.ofEpochMilli(0));
 
 
         JAXBTestUtil.roundTripAndSimilar(subtitles,
@@ -67,8 +67,8 @@ public class SubtitlesTest {
                 "00:00:02.200 --> 00:00:04.150\n" +
                 "888\n" +
                 "\n");
-        subtitles.setCreationDate(Instant.ofEpochMilli(0));
-        subtitles.setLastModified(Instant.ofEpochMilli(0));
+        subtitles.setCreationInstant(Instant.ofEpochMilli(0));
+        subtitles.setLastModifiedInstant(Instant.ofEpochMilli(0));
         assertThat(subtitles.getCueCount()).isEqualTo(1);
 
         Jackson2TestUtil.roundTripAndSimilar(subtitles, "{\n" +
