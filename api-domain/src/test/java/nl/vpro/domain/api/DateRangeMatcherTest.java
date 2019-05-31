@@ -54,8 +54,8 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMat
     public void testGetBeginXml() {
         Instant begin = Instant.EPOCH;
         DateRangeMatcher in = new DateRangeMatcher(begin, null);
-        DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
-            "<api:begin>1970-01-01T01:00:00+01:00</api:begin>");
+        DateRangeMatcher out = JAXBTestUtil.roundTripContains(in,
+            "<api:begin xmlns:api=\"urn:vpro:api:2013\">1970-01-01T01:00:00+01:00</api:begin>");
         assertThat(out.getBegin()).isEqualTo(begin);
     }
 
@@ -63,8 +63,8 @@ public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMat
     public void testGetEndXml() {
         Instant end = Instant.EPOCH;
         DateRangeMatcher in = new DateRangeMatcher(null, end);
-        DateRangeMatcher out = JAXBTestUtil.roundTrip(in,
-            "<api:end>1970-01-01T01:00:00+01:00</api:end>");
+        DateRangeMatcher out = JAXBTestUtil.roundTripContains(in,
+            "<api:end xmlns:api=\"urn:vpro:api:2013\">1970-01-01T01:00:00+01:00</api:end>");
         assertThat(out.getEnd()).isEqualTo(end);
     }
 
