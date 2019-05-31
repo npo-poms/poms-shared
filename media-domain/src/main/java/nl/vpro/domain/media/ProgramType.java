@@ -79,5 +79,9 @@ public enum ProgramType implements SubMediaType {
         return hasEpisodeOf;
     }
 
-    public static Set<ProgramType> EPISODES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(ProgramType.BROADCAST, ProgramType.STRAND)));
+    public static Set<ProgramType> EPISODES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+        ProgramType.BROADCAST,
+        ProgramType.STRAND,
+        ProgramType.MOVIE
+    )));
 }
