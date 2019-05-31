@@ -11,6 +11,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyWriter;
 
+import nl.vpro.domain.Changeables;
 import nl.vpro.domain.subtitles.Cue;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesFormat;
@@ -47,6 +48,7 @@ abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
     @Override
     public void writeTo(Subtitles subtitles, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
         Util.headers(subtitles.getId(), httpHeaders, extension);
+        Changeables.headers(subtitles, httpHeaders);
         httpHeaders.putSingle(OFFSET_HEADER, subtitles.getOffset() == null ? "GUESSED" : subtitles.getOffset().toString());
         stream(subtitles, entityStream);
     }
