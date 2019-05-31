@@ -72,7 +72,7 @@ public class SubtitlesUtil {
         Duration offset = subtitles.getOffset();
 
 
-        Function<TimeLine, Duration> offsetGuesser = guessOffset ? new DefaultOffsetGuesser(subtitles.getCreationDate()) : timeLine -> Duration.ZERO;
+        Function<TimeLine, Duration> offsetGuesser = guessOffset ? new DefaultOffsetGuesser(subtitles.getCreationInstant()) : timeLine -> Duration.ZERO;
         switch (content.getFormat()) {
             case TT888:
                 return ParseResult.of(TT888.parse(mid, offset, offsetGuesser, content.asStream(), getCharset(content.getCharset(),  TT888.CHARSET)));
