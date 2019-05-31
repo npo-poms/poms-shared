@@ -553,6 +553,14 @@ public enum MediaType {
         return false;
     }
 
+    /**
+     * @since 5.11
+     */
+    public boolean canHaveScheduleEvents() {
+        return getSubType() != null && getSubType().canHaveScheduleEvents();
+    }
+
+
     public final boolean hasEpisodeOf() {
         return getSubType() != null && getSubType().hasEpisodeOf();
     }
@@ -573,12 +581,12 @@ public enum MediaType {
         return new MediaType[]{MediaType.SERIES, MediaType.SEASON};
     }
 
-    public final boolean hasEpisodes() {
+    public final boolean canContainEpisodes() {
         return getSubType() != null && getSubType().canContainEpisodes();
     }
 
     public MediaType[] preferredEpisodeTypes() {
-        if(!hasEpisodes()) {
+        if(!canContainEpisodes()) {
             return new MediaType[]{};
         }
 
@@ -586,7 +594,7 @@ public enum MediaType {
     }
 
     public MediaType[] allowedEpisodeTypes() {
-        if(!hasEpisodes()) {
+        if(!canContainEpisodes()) {
             return new MediaType[]{};
         }
 
