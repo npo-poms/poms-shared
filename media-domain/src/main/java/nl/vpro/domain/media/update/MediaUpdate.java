@@ -292,7 +292,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
     protected MediaUpdate() {
-        fillFromMedia(newMedia(), OwnerType.BROADCASTER);
+        //
     }
 
 
@@ -540,23 +540,13 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * that are aware of this field (we use empty list to delete)
      */
     private List<IntentionType> toUpdateIntentions(SortedSet<Intentions> intentions, OwnerType owner){
-        if(intentions == null) return null;
-        for (Intentions intention : intentions) {
-            if (intention.getOwner() == owner) {
-                return intention.getValues().stream()
-                        .map(Intention::getValue)
-                        .collect(Collectors.toList());
-            }
-        }
-        return new ArrayList<>();
+        return Ownables.filter(intentions, owner).map(Intentions::getValues).map(l -> l.stream().map(Intention::getValue).collect(Collectors.toList())).orElse(new ArrayList<>());
     }
 
     private Intentions toIntentions(List<IntentionType> intentionValues, OwnerType owner){
         return Intentions.builder()
                 .owner(owner)
-                .values(intentionValues.stream()
-                        .map(Intention::new)
-                        .collect(Collectors.toList()))
+                .values(intentionValues)
                 .build();
     }
 
@@ -570,15 +560,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * that are aware of this field (we use empty list to delete)
      */
     private List<TargetGroupType> toUpdateTargetGroups(SortedSet<TargetGroups> targetGroups, OwnerType owner){
-        if(intentions == null) return null;
-        for (TargetGroups targetGroup : targetGroups) {
-            if (targetGroup.getOwner() == owner) {
-                return targetGroup.getValues().stream()
-                        .map(TargetGroup::getValue)
-                        .collect(Collectors.toList());
-            }
-        }
-        return new ArrayList<>();
+        return Ownables.filter(targetGroups, owner).map(TargetGroups::getValues).map(l -> l.stream().map(TargetGroup::getValue).collect(Collectors.toList())).orElse(new ArrayList<>());
     }
 
     private TargetGroups toTargetGroups(List<TargetGroupType> targetGroupValues, OwnerType owner){
@@ -674,7 +656,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlAttribute
     public Boolean isDeleted() {
-        return isDeleted ? true : null;
+        return isDeleted != null && isDeleted ? true : null;
     }
 
     public void setDeleted(Boolean deleted) {
@@ -971,8 +953,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public void setTargetGroups(List<TargetGroupType> targetGroups) {
         this.targetGroups = targetGroups;
     }
-
-
 
 
     @XmlElement(name = "avAttributes")

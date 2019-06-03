@@ -1,14 +1,9 @@
 package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.domain.classification.ClassificationServiceLocator;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.update.ProgramUpdate;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import nl.vpro.util.Version;
-import org.junit.FixMethodOrder;
-import org.junit.Test;
-import org.junit.runners.MethodSorters;
+
+import java.io.StringReader;
+import java.io.StringWriter;
 
 import javax.xml.XMLConstants;
 import javax.xml.bind.JAXB;
@@ -16,8 +11,18 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import java.io.StringReader;
-import java.io.StringWriter;
+
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
+
+import nl.vpro.domain.classification.ClassificationServiceLocator;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.update.ProgramUpdate;
+import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.Version;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *
@@ -657,5 +662,71 @@ public class MediaUpdateTest {
         );
         Validator validator = schema.newValidator();
         validator.validate(xml);
+    }
+
+    @Test
+    public void testWithoutIntentions() {
+
+        String withoutIntentions = "<program xmlns=\"urn:vpro:media:update:2009\" xmlns:media=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" embeddable=\"true\">\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>";
+
+        ProgramUpdate update = JAXB.unmarshal(new StringReader(withoutIntentions), ProgramUpdate.class);
+
+        assertThat(update.getIntentions()).isNull();
+
+
+    }
+
+    @Test
+    public void testWithIntentions() {
+
+        String withoutIntentions = "<program xmlns=\"urn:vpro:media:update:2009\" xmlns:media=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" embeddable=\"true\">\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "    <intentions />\n" +
+            "</program>";
+
+        ProgramUpdate update = JAXB.unmarshal(new StringReader(withoutIntentions), ProgramUpdate.class);
+
+        assertThat(update.getIntentions()).isEmpty();
+
+
+    }
+
+
+    @Test
+    public void testWithIntentionsOfOtherOwner() {
+        ProgramUpdate update  = ProgramUpdate.create(
+            MediaBuilder.program().intentions(Intentions.builder().owner(OwnerType.MIS).value(IntentionType.INFORM_INDEPTH).build()).build(),
+            OwnerType.BROADCASTER
+        );
+
+        assertThat(update.getIntentions()).containsExactly(IntentionType.INFORM_INDEPTH);
+
+
+    }
+
+    @Test
+    public void testWithIntentionsOfOwner() {
+        ProgramUpdate update  = ProgramUpdate.create(
+            MediaBuilder.program().intentions(
+                Intentions.builder()
+                    .owner(OwnerType.MIS).value(IntentionType.INFORM_INDEPTH).build(),
+                 Intentions.builder()
+                    .owner(OwnerType.BROADCASTER).value(IntentionType.ENTERTAINMENT_INFORMATIVE).build()
+
+            ).build(),
+            OwnerType.MIS
+        );
+
+        assertThat(update.getIntentions()).containsExactly(IntentionType.INFORM_INDEPTH);
+
+
     }
 }

@@ -426,11 +426,11 @@ public interface MediaTestDataBuilder<
     default T withIntentions() {
         return intentions(
             Intentions.builder()
-                .values(Arrays.asList(new Intention(IntentionType.ACTIVATING), new Intention(IntentionType.INFORM_INDEPTH)))
+                .values(Arrays.asList(IntentionType.ACTIVATING, IntentionType.INFORM_INDEPTH))
                 .owner(OwnerType.BROADCASTER)
                 .build(),
             Intentions.builder()
-                .values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE), new Intention(IntentionType.INFORM)))
+                .values(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE, IntentionType.INFORM))
                 .owner(OwnerType.NPO)
                 .build()
         );
