@@ -2785,10 +2785,10 @@ public abstract class MediaObject
         } catch(RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
-        return String.format(getClass().getSimpleName() + "{%1$s%2$smid=\"%3$s\", title=%4$s}",
+        return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s}",
             (! Workflow.PUBLICATIONS.contains(workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
-            this.getMid(),
+            this.getMid() == null ? "null" : "\"" + this.getMid() + "\"",
             mainTitle);
     }
 
