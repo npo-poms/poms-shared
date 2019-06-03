@@ -186,7 +186,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected AVType avType;
 
-    protected Boolean embeddable;
+    protected Boolean embeddable = Boolean.TRUE;
 
     Boolean isDeleted;
 
@@ -449,7 +449,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setCreationInstant(null); //   not supported by update format. will be set by persistence layer
         media.setCrids(crids);
         media.setAVType(avType);
-        media.setEmbeddable(embeddable);
+        media.setEmbeddable(embeddable == null || embeddable);
         media.setCountries(countries);
         media.setLanguages(languages);
 

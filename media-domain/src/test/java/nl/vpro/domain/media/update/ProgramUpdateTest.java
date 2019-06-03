@@ -5,6 +5,20 @@
 package nl.vpro.domain.media.update;
 
 import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.lang.reflect.Field;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.*;
+
+import javax.validation.ConstraintViolation;
+import javax.xml.bind.JAXB;
+
+import org.junit.Test;
+import org.xml.sax.SAXException;
+
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
@@ -13,17 +27,6 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
 import nl.vpro.validation.ConstraintViolations;
 import nl.vpro.validation.WarningValidatorGroup;
-import org.junit.Test;
-import org.xml.sax.SAXException;
-
-import javax.validation.ConstraintViolation;
-import javax.xml.bind.JAXB;
-import java.io.IOException;
-import java.io.StringReader;
-import java.lang.reflect.Field;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.*;
 
 import static nl.vpro.domain.media.MediaBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -237,6 +240,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 )
         );
         update.setVersion(null);
+        update.setIntentions(null);
+        update.setTargetGroups(null);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
@@ -303,14 +308,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             new PortalRestrictionUpdate(new PortalRestriction(new Portal("STERREN24", "Sterren24"), Instant.ofEpochMilli(0), Instant.ofEpochMilli(1000000)))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <exclusive>3VOOR12_GRONINGEN</exclusive>\n" +
-                "    <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:16:40+01:00\">STERREN24</exclusive>\n" +
-                "    <locations/>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <exclusive>3VOOR12_GRONINGEN</exclusive>\n" +
+            "    <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:16:40+01:00\">STERREN24</exclusive>\n" +
+            "    <locations/>\n" +
                 "    <scheduleEvents/>\n" +
-                "    <images/>\n" +
+            "    <images/>\n" +
                 "    <segments/>\n" +
-                "</program>";
+            "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -378,6 +383,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
             "  <title type=\"MAIN\">hoofdtitel omroep</title>\n" +
+            " <intentions/>\n" +
+            " <targetGroups/>\n" +
             "  <locations/>\n" +
             "  <scheduleEvents/>\n" +
             "  <images/>\n" +
@@ -664,6 +671,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Program program = program().images(image, image2).build();
         ProgramUpdate update = ProgramUpdate.create(program);
         update.setVersion(null);
+        update.setIntentions(null);
+        update.setTargetGroups(null);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
@@ -721,6 +730,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <images/>\n" +
                 "    <segments>\n" +
                 "        <segment embeddable=\"true\">\n" +
+               "             <intentions/>\n" +
+               "             <targetGroups/>\n" +
                 "            <duration>P0DT0H0M0.100S</duration>\n" +
                 "            <locations/>\n" +
                 "            <scheduleEvents/>\n" +
@@ -757,6 +768,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update  = ProgramUpdate.create();
         update.setVersion(Version.of(5, 5));
         update.setAgeRating(AgeRating._6);
+        update.setIntentions(null);
+        update.setTargetGroups(null);
 
         assertThat(update.getAgeRating()).isEqualTo(AgeRating._6);
         assertThat(update.fetch().getAgeRating()).isEqualTo(AgeRating._6);
@@ -830,6 +843,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testWithPredictions() throws IOException, SAXException {
         ProgramUpdate update = ProgramUpdate.create();
+        update.setIntentions(null);
+        update.setTargetGroups(null);
         update.setPredictions(new TreeSet<>(Arrays.asList(PredictionUpdate.builder().platform(Platform.INTERNETVOD).build())));
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -852,6 +867,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 Prediction.builder().platform(Platform.INTERNETVOD).plannedAvailability(false).build(),
                 Prediction.builder().platform(Platform.TVVOD).plannedAvailability(true).build()
             ));
+        update.setIntentions(null);
+        update.setTargetGroups(null);
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <prediction>TVVOD</prediction>\n" +
@@ -938,6 +955,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testCountriesAndLanguages() throws IOException, SAXException {
         Program program = program().countries("NL").languages("nl").build();
         ProgramUpdate update = ProgramUpdate.create(program);
+        update.setIntentions(null);
+        update.setTargetGroups(null);
         update.setVersion(Version.of(5, 5));
         JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
@@ -954,6 +973,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     protected ProgramUpdate programUpdate() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setVersion(null);
+        update.setTargetGroups(null);
+        update.setIntentions(null);
         return update;
     }
 
