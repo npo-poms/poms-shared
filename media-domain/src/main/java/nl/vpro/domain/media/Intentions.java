@@ -1,14 +1,12 @@
 package nl.vpro.domain.media;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -48,8 +46,8 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     public Intentions() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    private Intentions(@NonNull List<Intention> values, @NonNull OwnerType owner) {
-        this.values = values;
+    private Intentions(@NonNull @Singular  List<IntentionType> values, @NonNull OwnerType owner) {
+        this.values = values.stream().map(Intention::new).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
         //explicitly set the parent!

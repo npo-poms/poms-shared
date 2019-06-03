@@ -858,7 +858,7 @@ public class MediaObjectXmlSchemaTest {
 
         Intentions intentions = Intentions.builder()
                 .owner(OwnerType.NPO)
-                .values(Arrays.asList(new Intention(IntentionType.ACTIVATING), new Intention(IntentionType.INFORM_INDEPTH)))
+                .values(Arrays.asList(IntentionType.ACTIVATING, IntentionType.INFORM_INDEPTH))
                 .build();
         Program program = program().lean()
                 .mid("9").avType(AVType.AUDIO)

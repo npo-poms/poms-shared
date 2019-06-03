@@ -1,11 +1,10 @@
 package nl.vpro.domain.media;
 
-import nl.vpro.domain.media.support.OwnerType;
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import org.junit.Test;
 
 import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.NPO;
@@ -20,12 +19,12 @@ public class IntentionsTest {
         //given a program with Intentions
         Intentions intentions1 = Intentions.builder()
                 .owner(BROADCASTER).values(Arrays.asList(
-                        new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE),
-                        new Intention(IntentionType.INFORM_INDEPTH)))
+                        IntentionType.ENTERTAINMENT_INFORMATIVE,
+                        IntentionType.INFORM_INDEPTH))
                 .build();
         Intentions intentions2 = Intentions.builder()
                 .owner(NPO).values(Arrays.asList(
-                        new Intention(IntentionType.INFORM_INDEPTH)))
+                        IntentionType.INFORM_INDEPTH))
                 .build();
         Program program = MediaBuilder.program().intentions(intentions1).build();
 
@@ -46,8 +45,8 @@ public class IntentionsTest {
     @Test
     public void testAddDuplicateOwnerIntention() {
         //given a program with no Intentions
-        Intentions intentions1 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
-        Intentions intentions2 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
+        Intentions intentions1 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE)).build();
+        Intentions intentions2 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(IntentionType.INFORM_INDEPTH)).build();
         Program program = MediaBuilder.program().intentions().build();
 
         assertThat(program).isNotNull();
@@ -68,10 +67,10 @@ public class IntentionsTest {
     public void testAddSetWitDuplicateOwnerIntention() {
         //given a program
         Intentions intentions1 = Intentions.builder().owner(BROADCASTER)
-                .values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
+                .values(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE)).build();
 
         Intentions intentions2 = Intentions.builder().owner(BROADCASTER)
-                .values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
+                .values(Arrays.asList(IntentionType.INFORM_INDEPTH)).build();
 
         Program program = MediaBuilder.program().build();
 
@@ -90,9 +89,9 @@ public class IntentionsTest {
     @Test
     public void testRemoveIntention() {
         //given a program with Intentions
-        Intentions intentions1 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.ENTERTAINMENT_INFORMATIVE))).build();
-        Intentions intentions2 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
-        Intentions intentions3 = Intentions.builder().owner(NPO).values(Arrays.asList(new Intention(IntentionType.INFORM_INDEPTH))).build();
+        Intentions intentions1 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE)).build();
+        Intentions intentions2 = Intentions.builder().owner(BROADCASTER).values(Arrays.asList(IntentionType.INFORM_INDEPTH)).build();
+        Intentions intentions3 = Intentions.builder().owner(NPO).values(Arrays.asList(IntentionType.INFORM_INDEPTH)).build();
 
         Program program = MediaBuilder.program()
                 .intentions(intentions1, intentions2, intentions3)

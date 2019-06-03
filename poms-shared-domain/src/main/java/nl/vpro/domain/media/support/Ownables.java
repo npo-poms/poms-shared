@@ -2,6 +2,8 @@ package nl.vpro.domain.media.support;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.SortedSet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Nonnull;
@@ -22,4 +24,14 @@ public class Ownables {
         }
         return false;
     }
+
+    public static <T extends Ownable> Optional<T>  filter(SortedSet<T> intentions, OwnerType owner){
+        if(intentions == null || intentions.isEmpty()) return Optional.empty();
+        for (T intention : intentions) {
+            if (intention.getOwner() == owner) {
+                return Optional.of(intention);
+            }
+        }
+        return Optional.of(intentions.first());
+    };
 }
