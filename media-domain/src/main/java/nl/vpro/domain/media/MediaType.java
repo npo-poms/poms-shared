@@ -644,7 +644,19 @@ public enum MediaType {
     @Nonnull
     public static MediaType getMediaType(MediaObject media) {
         SubMediaType type = media.getType();
-        return type == null ? MediaType.MEDIA : type.getMediaType();
+        if (type != null) {
+            return type.getMediaType();
+        }
+        if (media instanceof Program) {
+            return MediaType.PROGRAM;
+        }
+        if (media instanceof Group) {
+            return MediaType.GROUP;
+        }
+        if (media instanceof  Segment) {
+            return MediaType.SEGMENT;
+        }
+        return MediaType.MEDIA;
     }
 
     @SneakyThrows
@@ -652,22 +664,22 @@ public enum MediaType {
 
         Class<? extends MediaObject> clazz = getMediaObjectClass();
 
-        if (Program.class.isAssignableFrom(getMediaObjectClass())) {
+        if (Program.class.isAssignableFrom(clazz)) {
             Program o = (Program) clazz.newInstance();
             o.setType((ProgramType) getSubType());
             return o;
         }
-        if (Group.class.isAssignableFrom(getMediaObjectClass())) {
+        if (Group.class.isAssignableFrom(clazz)) {
             Group o = (Group) clazz.newInstance();
             o.setType((GroupType) getSubType());
             return o;
         }
-        if (Segment.class.isAssignableFrom(getMediaObjectClass())) {
+        if (Segment.class.isAssignableFrom(clazz)) {
             Segment o = (Segment) clazz.newInstance();
             o.setType((SegmentType) getSubType());
             return o;
         }
-        throw new IllegalStateException();
+        throw new IllegalStateException(clazz + " of " + this + " is not a program, group or segment");
     }
 
     /**
