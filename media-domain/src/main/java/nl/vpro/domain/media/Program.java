@@ -86,7 +86,7 @@ public class Program extends MediaObject {
     @NotNull(message = "no program type given")
     protected ProgramType type;
 
-    @OneToMany(mappedBy = "parent", orphanRemoval = true)
+    @OneToMany(mappedBy = "parent", orphanRemoval = false) // no implicit orphan removal, the segment my be subject to 'stealing'.
     @org.hibernate.annotations.Cascade({
         org.hibernate.annotations.CascadeType.ALL
     })
