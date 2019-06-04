@@ -34,10 +34,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.Embargos;
+import nl.vpro.domain.MutableEmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.TextualObjects;
-import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.TwitterRef;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
@@ -47,7 +49,10 @@ import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.util.*;
+import nl.vpro.util.IntegerVersion;
+import nl.vpro.util.IntegerVersionSpecific;
+import nl.vpro.util.TimeUtils;
+import nl.vpro.util.Version;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -486,7 +491,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
     public M fetch(OwnerType owner) {
         M returnObject = fetchOwnerless();
         TextualObjects.copy(this, returnObject, owner);
-        returnObject.setLocations(toSet(locations, l -> l.toLocation(owner)));
+        for (Location l : toSet(locations, l -> l.toLocation(owner))) {
+            returnObject.addLocation(l);
+        }
         Predicate<Image> imageFilter = isImported() ? (i) -> i.getImageUri() != null : (i) -> true;
         returnObject.setImages(toList(images, i -> i.toImage(owner)).stream()
                 .filter(imageFilter)

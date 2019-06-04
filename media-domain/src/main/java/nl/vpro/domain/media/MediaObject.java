@@ -1992,8 +1992,9 @@ public abstract class MediaObject
         } else {
            this.locations.clear();
         }
-        for (Location i : locations) {
-            addLocation(Location.copy(i, this));
+        for (Location l : locations) {
+            l = Location.copy(l, this);
+            addLocation(l);
         }
     }
 
