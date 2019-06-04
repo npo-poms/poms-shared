@@ -487,9 +487,17 @@ public class MediaObjects {
     }
 
 
-     public static void markForDeletion(MediaObject media, String reason) {
+    public static void markForDeletion(MediaObject media, String reason) {
         if (! Workflow.DELETES.contains(media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_DELETION);
+            media.setRepubReason(reason);
+            media.setRepubDestinations(null);
+        }
+    }
+
+    public static void markForUnDeletion(MediaObject media, String reason) {
+        if (Workflow.DELETES.contains(media.getWorkflow())) {
+            media.setWorkflow(Workflow.FOR_REPUBLICATION);
             media.setRepubReason(reason);
             media.setRepubDestinations(null);
         }
