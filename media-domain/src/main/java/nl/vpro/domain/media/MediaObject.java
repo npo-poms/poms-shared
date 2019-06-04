@@ -1185,7 +1185,6 @@ public abstract class MediaObject
     //region Intentions logic
 
     public SortedSet<Intentions> getIntentions() {
-
         return intentions;
     }
 
@@ -1193,10 +1192,17 @@ public abstract class MediaObject
     @SuppressWarnings("unchecked")
     public void setIntentions(@Nonnull SortedSet<Intentions> newIntentions) {
 
-       if (containsDuplicateOwner(newIntentions)) {
-           throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
-       }
-       this.intentions = (SortedSet)updateSortedSet(this.intentions, newIntentions);
+        if (containsDuplicateOwner(newIntentions)) {
+            throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
+        }
+        if (this.intentions == null) {
+            this.intentions = new TreeSet<>();
+        } else {
+           this.intentions.clear();
+        }
+        for (Intentions i : newIntentions) {
+            addIntention(i.copy());
+        }
     }
 
     public MediaObject addIntention(@Nonnull Intentions newIntentions) {
@@ -1224,10 +1230,17 @@ public abstract class MediaObject
     @SuppressWarnings("unchecked")
     public void setTargetGroups(@Nonnull SortedSet<TargetGroups> newTargetGroups) {
 
-       if (containsDuplicateOwner(newTargetGroups)) {
+        if (containsDuplicateOwner(newTargetGroups)) {
            throw new IllegalArgumentException("The targetgroup list you want to set has a duplicate owner: " + newTargetGroups);
-       }
-       this.targetGroups = (SortedSet)updateSortedSet(this.targetGroups, newTargetGroups);
+        }
+        if (this.targetGroups == null) {
+            this.targetGroups = new TreeSet<>();
+        } else {
+           this.targetGroups.clear();
+        }
+        for (TargetGroups i : newTargetGroups) {
+            addTargetGroups(i.copy());
+        }
     }
 
     public MediaObject addTargetGroups(@Nonnull TargetGroups newTargetGroups) {
