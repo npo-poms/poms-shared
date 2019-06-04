@@ -55,6 +55,10 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     }
 
 
+    public Intentions copy() {
+        return new Intentions(values.stream().map(Intention::getValue).collect(Collectors.toList()), owner);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

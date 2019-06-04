@@ -1,15 +1,12 @@
 package nl.vpro.domain.media;
 
-import org.junit.Test;
-
 import java.util.Arrays;
-import java.util.SortedSet;
-import java.util.TreeSet;
+
+import org.junit.Test;
 
 import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.NPO;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 public class TargetGroupsTest {
 
@@ -19,14 +16,11 @@ public class TargetGroupsTest {
         //given a program with no TargetGroups
         TargetGroups targetGroups1 = TargetGroups.builder()
                 .owner(BROADCASTER)
-                .values(Arrays.asList(
-                        new TargetGroup(TargetGroupType.KIDS_12),
-                        new TargetGroup(TargetGroupType.ADULTS)))
+                .values(Arrays.asList(TargetGroupType.KIDS_12, TargetGroupType.ADULTS))
                 .build();
         TargetGroups targetGroups2 = TargetGroups.builder()
                 .owner(NPO)
-                .values(Arrays.asList(
-                        new TargetGroup(TargetGroupType.ADULTS)))
+                .values(Arrays.asList(TargetGroupType.ADULTS))
                 .build();
         Program program = MediaBuilder.program().targetGroups().build();
 
@@ -49,14 +43,11 @@ public class TargetGroupsTest {
         //given a program with no TargetGroups
         TargetGroups targetGroups1 = TargetGroups.builder()
                 .owner(BROADCASTER)
-                .values(Arrays.asList(
-                        new TargetGroup(TargetGroupType.KIDS_12),
-                        new TargetGroup(TargetGroupType.ADULTS)))
+                .values(Arrays.asList(TargetGroupType.KIDS_12, TargetGroupType.ADULTS))
                 .build();
         TargetGroups targetGroups2 = TargetGroups.builder()
                 .owner(BROADCASTER)
-                .values(Arrays.asList(
-                        new TargetGroup(TargetGroupType.ADULTS)))
+                .values(Arrays.asList(TargetGroupType.ADULTS))
                 .build();
         Program program = MediaBuilder.program().targetGroups().build();
 

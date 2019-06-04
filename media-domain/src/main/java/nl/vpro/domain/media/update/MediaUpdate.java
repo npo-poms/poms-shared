@@ -566,9 +566,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     private TargetGroups toTargetGroups(List<TargetGroupType> targetGroupValues, OwnerType owner){
         return TargetGroups.builder()
                 .owner(owner)
-                .values(targetGroupValues.stream()
-                        .map(TargetGroup::new)
-                        .collect(Collectors.toList()))
+                .values(targetGroupValues)
                 .build();
     }
 

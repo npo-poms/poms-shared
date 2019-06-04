@@ -1,14 +1,12 @@
 package nl.vpro.domain.media;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -48,14 +46,18 @@ public class TargetGroups extends DomainObject implements Serializable, Child<Me
     public TargetGroups() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    private TargetGroups(@NonNull List<TargetGroup> values, @NonNull OwnerType owner) {
-        this.values = values;
+    private TargetGroups(@NonNull @Singular  List<TargetGroupType> values, @NonNull OwnerType owner) {
+        this.values = values.stream().map(TargetGroup::new).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
         //explicitly set the parent!
         this.values.forEach(v -> v.setParent(this));
     }
 
+
+    public TargetGroups copy() {
+        return new TargetGroups(values.stream().map(TargetGroup::getValue).collect(Collectors.toList()), owner);
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -439,11 +439,11 @@ public interface MediaTestDataBuilder<
     default T withTargetGroups(){
         return targetGroups(
                 TargetGroups.builder()
-                    .values(Arrays.asList(new TargetGroup(TargetGroupType.ADULTS)))
+                    .values(Arrays.asList(TargetGroupType.ADULTS))
                     .owner(OwnerType.BROADCASTER)
                     .build(),
                 TargetGroups.builder()
-                    .values(Arrays.asList(new TargetGroup(TargetGroupType.KIDS_6), new TargetGroup(TargetGroupType.KIDS_12)))
+                    .values(Arrays.asList(TargetGroupType.KIDS_6, TargetGroupType.KIDS_12))
                     .owner(OwnerType.NPO)
                     .build()
         );
