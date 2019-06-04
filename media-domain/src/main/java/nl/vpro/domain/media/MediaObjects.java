@@ -81,6 +81,9 @@ public class MediaObjects {
         }
     }
 
+    /**
+     * Perfomrs of deep copy of the media object, this is currently implemented by serializing/deserializing it.
+     */
     @SuppressWarnings("unchecked")
     public static <T extends MediaObject> T deepCopy(T media) {
         ObjectOutputStream objectOut = null;
@@ -157,6 +160,7 @@ public class MediaObjects {
         // to.setHasSubtitles(from.hasSubtitles());
         to.setImages(from.getImages());
         to.setIntentions(from.getIntentions());
+
         to.setIsDubbed(from.isDubbed());
 
         to.setLanguages(from.getLanguages());
@@ -178,11 +182,30 @@ public class MediaObjects {
         to.setTags(from.getTags());
         to.setTeletext(from.getTeletext());
         to.setTwitterRefs(from.getTwitterRefs());
-        //to.setTargetGroups(from.getTargetGroups());
+        to.setTargetGroups(from.getTargetGroups());
 
         to.setWebsites(from.getWebsites());
 
     }
+
+
+    /**
+     * A more full copy, also copying field that you could normally not copy, like MID.
+     *
+     * The assumption is that both objects are not yet persistent
+     */
+    public static void copyFull(@Nonnull MediaObject from, @Nonnull MediaObject to) {
+        copy(from, to);
+        to.setMid(from.getMid());
+        to.setScheduleEvents(from.getScheduleEvents());
+        if (to.getClass().isAssignableFrom(from.getClass())) {
+            to.setMediaType(from.getMediaType());
+        }
+        to.setMemberOf(from.getMemberOf());
+        to.setCrids(from.getCrids());
+
+    }
+
 
 
     public static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject) throws NotFoundException {
