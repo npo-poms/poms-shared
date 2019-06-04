@@ -1218,8 +1218,16 @@ public abstract class MediaObject
 
 
     public SortedSet<TargetGroups> getTargetGroups() {
-
         return targetGroups;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setTargetGroups(@Nonnull SortedSet<TargetGroups> newTargetGroups) {
+
+       if (containsDuplicateOwner(newTargetGroups)) {
+           throw new IllegalArgumentException("The targetgroup list you want to set has a duplicate owner: " + newTargetGroups);
+       }
+       this.targetGroups = (SortedSet)updateSortedSet(this.targetGroups, newTargetGroups);
     }
 
     public MediaObject addTargetGroups(@Nonnull TargetGroups newTargetGroups) {
