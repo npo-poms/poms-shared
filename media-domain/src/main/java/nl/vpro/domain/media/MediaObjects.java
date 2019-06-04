@@ -180,7 +180,6 @@ public class MediaObjects {
         to.setTags(from.getTags());
         to.setTeletext(from.getTeletext());
         to.setTwitterRefs(from.getTwitterRefs());
-        to.setTargetGroups(from.getTargetGroups());
 
         to.setWebsites(from.getWebsites());
 

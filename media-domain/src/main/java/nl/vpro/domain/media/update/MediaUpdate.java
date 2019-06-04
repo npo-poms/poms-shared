@@ -34,7 +34,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.Embargos;
-import nl.vpro.domain.MutableEmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.Location;
