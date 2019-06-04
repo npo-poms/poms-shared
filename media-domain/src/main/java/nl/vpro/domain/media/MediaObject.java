@@ -1556,7 +1556,16 @@ public abstract class MediaObject
     }
 
     public void setMemberOf(SortedSet<MemberRef> memberOf) {
-        this.memberOf = memberOf;
+        if (this.memberOf == null) {
+            this.memberOf = new TreeSet<>();
+        } else {
+            this.memberOf.clear();
+        }
+        if (memberOf != null) {
+            for (MemberRef ref : memberOf) {
+                this.memberOf.add(MemberRef.copy(ref, this));
+            }
+        }
     }
 
     public boolean isMember() {
@@ -1635,7 +1644,9 @@ public abstract class MediaObject
     }
 
     MemberRef createMemberOf(
-        @Nonnull MediaObject group, Integer number, OwnerType owner) throws CircularReferenceException {
+        @Nonnull MediaObject group,
+        Integer number,
+        OwnerType owner) throws CircularReferenceException {
         return group.createMember(this, number, owner);
     }
 
@@ -2090,7 +2101,15 @@ public abstract class MediaObject
     }
 
     public void setLocations(SortedSet<Location> locations) {
-        this.locations = locations;
+
+        if (this.locations == null) {
+            this.locations = new TreeSet<>();
+        } else {
+           this.locations.clear();
+        }
+        for (Location i : locations) {
+            addLocation(Location.copy(i, this));
+        }
     }
 
     public Location getLocation(Location location) {
@@ -2257,8 +2276,18 @@ public abstract class MediaObject
     }
 
     public void setRelations(SortedSet<Relation> relations) {
-        this.relations = relations;
+
+
+        if (this.relations == null) {
+            this.relations = new TreeSet<>();
+        } else {
+            this.relations.clear();
+        }
+        for (Relation i : relations) {
+            addRelation(Relation.copy(i));
+        }
     }
+
 
     public MediaObject addRelation(Relation relation) {
         nullCheck(relation, "relation");
