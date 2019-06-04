@@ -1139,6 +1139,7 @@ public abstract class MediaObject
         this.tags = updateSortedSet(this.tags, tags);
     }
 
+
     @XmlElement
     public String getSource() {
         return source;
