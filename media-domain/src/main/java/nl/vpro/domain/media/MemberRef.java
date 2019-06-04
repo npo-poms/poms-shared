@@ -149,13 +149,16 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public MemberRef(MemberRef source, MediaObject member, OwnerType owner) {
-        this(member, source.group, source.number, owner);
-        this.added = source.added;
+        this.member = member;
+        this.group = source.group;
+        this.number = source.number;
+        this.owner = owner;
+        this.added       = source.added;
         this.highlighted = source.highlighted;
 
         this.cridRef = source.cridRef;
-        this.midRef= source.midRef;
-        this.urnRef= source.urnRef;
+        this.midRef  = source.midRef;
+        this.urnRef  = source.urnRef;
     }
 
 

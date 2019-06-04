@@ -191,6 +191,7 @@ public class MediaObjects {
      * A more full copy, also copying field that you could normally not copy, like MID.
      *
      * The assumption is that both objects are not yet persistent
+     * @since 5.11
      */
     public static void copyFull(@Nonnull MediaObject from, @Nonnull MediaObject to) {
         copy(from, to);
