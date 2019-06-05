@@ -94,7 +94,7 @@ public class PageUpdateBuilderTest {
     @Test
     public void testParagraphs() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").paragraphs(new ParagraphUpdate(null, "body1", null), new ParagraphUpdate(null, "body2", null)).build();
-        PageUpdate result = roundTrip(page, "<pageUpdate:paragraphs>\n" +
+        PageUpdate result = roundTripContains(page, "<pageUpdate:paragraphs xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
             "        <pageUpdate:paragraph>\n" +
             "            <pageUpdate:body>body1</pageUpdate:body>\n" +
             "        </pageUpdate:paragraph>\n" +
