@@ -3,10 +3,11 @@ package nl.vpro.domain.media.bind;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.meeuw.i18n.Country;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.i18n.Locales;
 
 /**
@@ -20,16 +21,16 @@ public class CountryWrapper {
 
     @XmlAttribute
     @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
-    private  CountryCode code;
+    private Country code;
 
     public CountryWrapper() {
     }
 
     public CountryWrapper(String code) {
-        this.code = CountryCode.valueOf(code);
+        this.code = Country.getByCode(code).orElseThrow(() -> new IllegalArgumentException("no such country  + code"));
     }
 
-    public CountryWrapper(CountryCode code) {
+    public CountryWrapper(Country code) {
         if (code == null) {
             throw new IllegalArgumentException();
         }
@@ -46,7 +47,7 @@ public class CountryWrapper {
         // i hate jaxb
     }
 
-    public CountryCode getCode() {
+    public Country getCode() {
         return code;
     }
 
