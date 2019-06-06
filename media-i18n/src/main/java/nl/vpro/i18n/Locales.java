@@ -1,12 +1,14 @@
 package nl.vpro.i18n;
 
 import java.util.Locale;
-import java.util.MissingResourceException;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
-import nl.vpro.com.neovisionaries.i18n.LanguageCode;
+import org.meeuw.i18n.Country;
+import org.meeuw.i18n.CurrentCountry;
+import org.meeuw.i18n.FormerCountry;
+
+import com.neovisionaries.i18n.CountryCode;
+import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -45,15 +47,10 @@ public class Locales {
     }
 
 
-    public static String getCountryName(CountryCode code, Locale locale) {
-        if (code.getIso3166_2() != null) {
-            try {
-                ResourceBundle bundle = ResourceBundle.getBundle("CountryCode", locale);
-                return bundle.getString(code.getIso3166_2());
-            } catch(MissingResourceException mre) {
-                return code.getName();
-            }
-        }  else {
+    public static String getCountryName(Country country, Locale locale) {
+        if (country instanceof CurrentCountry)  {
+            CountryCode code = ((CurrentCountry) country).getCode();
+
             CountryCode byAlpha3 = null;
             if (code.getAssignment() != CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
                 if (code.getAlpha3() != null) {
@@ -66,9 +63,16 @@ public class Locales {
                 }
             }
             if (byAlpha3 != null && byAlpha3 != code) {
-                return getCountryName(byAlpha3, locale);
+                return null;
             }
+            //return getCountryName(byAlpha3, locale);
+        //}
             return code.toLocale().getDisplayCountry(locale);
+
+        } else if (country instanceof FormerCountry) {
+            return null;
+        } else {
+            return null;
         }
     }
 
