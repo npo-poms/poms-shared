@@ -39,7 +39,7 @@ import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.TwitterRef;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.bind.CountryCodeAdapter;
+import org.meeuw.i18n.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
