@@ -36,7 +36,7 @@ public class CountryCodeAdapter extends XmlAdapter<CountryWrapper, Country> {
         @Override
         public String marshal(Country countryCode) {
             return Optional.ofNullable(countryCode)
-                    .map(Country::getName)
+                    .map(Country::getISOCode)
                     .orElse(null);
         }
     }
