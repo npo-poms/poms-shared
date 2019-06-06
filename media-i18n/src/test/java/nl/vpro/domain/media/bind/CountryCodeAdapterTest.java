@@ -18,6 +18,7 @@ import com.neovisionaries.i18n.CountryCode;
 import nl.vpro.i18n.Locales;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.meeuw.i18n.Country.*;
 
 public class CountryCodeAdapterTest {
 
@@ -32,7 +33,7 @@ public class CountryCodeAdapterTest {
     public void wiki() {
         Code cca = new Code();
         Map<String, Region> result = new TreeMap<>();
-        Regions.values().filter(Country.CURRENT_AND_FORMER_AND_USER).forEach((c) -> {
+        Regions.values().filter(OFFICIAL.or(IS_FORMER).or(IS_USER)).forEach((c) -> {
             result.put(c.getCode(), cca.unmarshal(c.getCode()));
             if (c instanceof Country) {
                 Country cc = (Country) c;
@@ -58,12 +59,12 @@ public class CountryCodeAdapterTest {
     @Test
     public void finlandReserved() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
-        assertThat(cca.marshal(new CurrentCountry(CountryCode.SF)).getName()).isEqualTo("Finland");
+        assertThat(cca.marshal(of(CountryCode.SF)).getName()).isEqualTo("Finland");
     }
 
     @Test
     public void finland() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
-        assertThat(cca.marshal(new CurrentCountry(CountryCode.FI)).getName()).isEqualTo("Finland");
+        assertThat(cca.marshal(of(CountryCode.FI)).getName()).isEqualTo("Finland");
     }
 }

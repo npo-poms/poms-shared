@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.meeuw.i18n.Country;
 import org.meeuw.i18n.CountrySubDivision;
 import org.meeuw.i18n.CurrentCountry;
 
@@ -20,18 +21,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CountryWrapperTest {
     @Test
     public void getNameUKNL() {
-        CountryWrapper wrapper = new CountryWrapper(new CurrentCountry(CountryCode.GB));
+        CountryWrapper wrapper = new CountryWrapper(Country.of(CountryCode.GB));
         assertThat(wrapper.getName()).isEqualTo("Verenigd Koninkrijk");
 
     }
 
     @Test
     public void getNameGBNL() {
-        CountryWrapper wrapper = new CountryWrapper(
-            new CountrySubDivision(
-                SubdivisionFactory.getSubdivision(CountryCode.GB, "GBN")
-            )
-        );
+        CountryWrapper wrapper = new CountryWrapper(CountrySubDivision.of(CountryCode.GB, "GBN"));
         assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië");
 
     }
