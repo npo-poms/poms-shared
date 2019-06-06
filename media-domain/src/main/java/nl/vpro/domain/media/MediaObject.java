@@ -31,11 +31,12 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.meeuw.i18n.Country;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
@@ -352,7 +353,7 @@ public abstract class MediaObject
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<CountryCode> countries;
+    protected List<Country> countries;
 
     @ElementCollection
     @Column(length = 10)
@@ -1269,27 +1270,26 @@ public abstract class MediaObject
     @JsonDeserialize(using = BackwardsCompatibility.CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<CountryCode> getCountries() {
+    public List<Country> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();
         }
         return countries;
     }
 
-    public void setCountries(List<CountryCode> countries) {
+    public void setCountries(List<Country> countries) {
         this.countries = updateList(this.countries, countries);
     }
 
     public MediaObject addCountry(String code) {
-        CountryCode country = CountryCode.getByCode(code, false);
-        if (country == null) {
-            throw new IllegalArgumentException("Unknown country " + code);
-        }
+        Country country = Country.getByCode(code).orElseThrow(() ->
+            new IllegalArgumentException("Unknown country " + code));
+
         return addCountry(country);
 
     }
 
-    public MediaObject addCountry(CountryCode country) {
+    public MediaObject addCountry(Country country) {
         nullCheck(country, "country");
 
         if (countries == null) {
