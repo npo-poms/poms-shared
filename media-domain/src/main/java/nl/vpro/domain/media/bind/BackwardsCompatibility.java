@@ -101,11 +101,11 @@ public class BackwardsCompatibility {
             @Override
             protected void serializeValue(Country value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
                 if (v1Compatibility.get()) {
-                    if (value == null || value.getName() == null) {
+                    if (value == null || value.getISOCode() == null) {
                         log.warn("country code {} is null", value);
                         jgen.writeNull();
                     } else {
-                        jgen.writeString(value.getName());
+                        jgen.writeString(value.getISOCode());
                     }
                 } else {
                     if (value == null) {
