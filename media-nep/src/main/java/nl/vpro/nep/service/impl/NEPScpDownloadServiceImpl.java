@@ -48,11 +48,11 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     @Inject
     public NEPScpDownloadServiceImpl(
-        @Value("${nep.sftp.host}") String ftpHost,
-        @Value("${nep.sftp.username}") String username,
-        @Value("${nep.sftp.password}") String password,
-        @Value("${nep.sftp.hostkey}") String hostkey,
-        @Value("${nep.sftp.scp.useFileCache}") boolean useFileCache,
+        @Value("${nep.itemizer-download.host}") String ftpHost,
+        @Value("${nep.itemizer-download.username}") String username,
+        @Value("${nep.itemizer-download.password}") String password,
+        @Value("${nep.itemizer-download.hostkey}") String hostkey,
+        @Value("${nep.itemizer-download.scp.useFileCache}") boolean useFileCache,
         @Value("${executables.scp}") List<String> scpExecutables,
         @Value("${executables.sshpass}") List<String> sshpassExecutables
     ) {

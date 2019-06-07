@@ -1,0 +1,5856 @@
+---
+swagger: "2.0"
+info:
+  version: "1.${build.scmBranch}.${build.vcs.number}"
+  title: ""
+basePath: "/v1/api"
+tags:
+- name: "screens"
+- name: "media"
+- name: "subtitles"
+- name: "profiles"
+- name: "schedule"
+- name: "pages"
+paths:
+  /media:
+    get:
+      tags:
+      - "media"
+      summary: "Get all media"
+      description: "Get all media filtered on an optional profile"
+      operationId: "list"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaResult"
+    post:
+      tags:
+      - "media"
+      summary: "Find media"
+      description: "Find media object by posting a search form. Results are filtered\
+        \ on an optional profile"
+      operationId: "find"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: true
+        schema:
+          $ref: "#/definitions/MediaForm"
+        x-examples:
+          application/xml: "{\n    \"searches\" : {\n        \"text\" : {\n      \
+            \          \"value\" : \"Argos\"\n        }\n    }\n}"
+          application/json: "{\n    \"searches\" : {\n        \"text\" : {\n     \
+            \           \"value\" : \"Argos\"\n        }\n    }\n}"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaSearchResult"
+  /media/changes:
+    get:
+      tags:
+      - "media"
+      summary: "Retrieve changes"
+      description: "Retrieve all media changes since a certain update sequence.\n\
+        By submitting an optional profile argument only changes for this argument\
+        \ are emitted. For certain parameters this callcan take very long and/or return\
+        \ very much data. Be prepared to handle that gracefully."
+      operationId: "changes"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "since"
+        in: "query"
+        description: "Since which revision to stream. This parameter is ignored and\
+          \ set to 0 if at that point the profile did not exist. This parameter will\
+          \ be deprecated."
+        required: false
+        type: "integer"
+        format: "int64"
+        x-example: 17500000
+      - name: "order"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "max"
+        in: "query"
+        description: "Lookout with this value, if since is before the profile existed"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      - name: "publishedSince"
+        in: "query"
+        description: "Since which published date to stream. This parameter is ignored\
+          \ if at that point the profile did not exist"
+        required: false
+        type: "java.time.Instant"
+        x-example: "2016-03-14T10:15:30.00Z"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/InputStream"
+  /media/iterate:
+    post:
+      tags:
+      - "media"
+      summary: "Iterate media object"
+      description: "This is like the list call. It does however support filtering\
+        \ by a form (though it is not actually a search). There is no bound on the\
+        \ value of 'max'. It can only give back JSON. The target of this call is to\
+        \ facilitate use cases in which you need to fetch very, very much (as e.g.\
+        \ the generation of a site map)"
+      operationId: "iterate"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: true
+        schema:
+          $ref: "#/definitions/MediaForm"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 2147483647
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/InputStream"
+      deprecated: true
+  /media/multiple:
+    get:
+      tags:
+      - "media"
+      summary: "Load several entities"
+      description: ""
+      operationId: "loadMultiple"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "ids"
+        in: "query"
+        description: "Comma separated mids"
+        required: true
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "profile"
+        in: "query"
+        description: "Limit the results only to this profile"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MultipleMediaResult"
+    post:
+      tags:
+      - "media"
+      summary: "Load several entities"
+      description: ""
+      operationId: "loadMultiple"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "array"
+          items:
+            type: "string"
+        x-examples:
+          application/xml: "<api:idList xmlns:api=\"urn:vpro:api:2013\" >\n      \
+            \      \"    <api:id>AVRO_1656037</api:id>\\n\" +\n            \"    <api:id>NCRV_1413393</api:id>\\\
+            n\" +\n            \"</api:idList>"
+          application/json: "[\"AVRO_1656037\", \"NCRV_1413393\"]"
+      - name: "properties"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "profile"
+        in: "query"
+        description: "Limit the results only to this profile"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MultipleMediaResult"
+  /media/redirects:
+    get:
+      tags:
+      - "media"
+      summary: "Show all available redirects"
+      description: "Load "
+      operationId: "redirects"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters: []
+      responses:
+        default:
+          description: "successful operation"
+  /media/suggest:
+    get:
+      tags:
+      - "media"
+      summary: "Suggest a search text"
+      description: "Suggests a search text, filtered on an optional profile"
+      operationId: "suggest"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "input"
+        in: "query"
+        required: true
+        type: "string"
+        maxItems: 2147483647
+        minItems: 1
+      - name: "profile"
+        in: "query"
+        description: "Adding a profile limits results to user queries that ran under\
+          \ this profile"
+        required: false
+        type: "string"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuggestResult"
+  /media/{mid}:
+    get:
+      tags:
+      - "media"
+      summary: "Load entity"
+      description: "Load media by its mid"
+      operationId: "load"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+        pattern: "(?:(changes|multiple|redirects|iterate).+|(?!(changes|multiple|redirects|iterate))[^/]*)"
+        x-example: "AVRO_1656037"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "profile"
+        in: "query"
+        description: "Limit the results only to this profile"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaObject"
+  /media/{mid}/descendants:
+    get:
+      tags:
+      - "media"
+      summary: "List descendants"
+      description: "List all descendants of a certain media group. That means all\
+        \ its members and all the members of those and so on"
+      operationId: "listDescendants"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+        default: "14Jeugd0845geb"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaResult"
+    post:
+      tags:
+      - "media"
+      summary: "Filter descendants"
+      description: "Search in all descendants of a certain media group (note: filtering\
+        \ purges all duplicate elements)"
+      operationId: "findDescendants"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: true
+        schema:
+          $ref: "#/definitions/MediaForm"
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+        default: "14Jeugd0845geb"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaSearchResult"
+  /media/{mid}/episodes:
+    get:
+      tags:
+      - "media"
+      summary: "List episodes"
+      description: "List the episodes of a media group"
+      operationId: "listEpisodes"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+        default: "14Jnl0700n1"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ProgramResult"
+    post:
+      tags:
+      - "media"
+      summary: "Filter eposides"
+      description: "Search in the episodes of the media group (note: filtering purges\
+        \ all duplicate elements)"
+      operationId: "findEpisodes"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: true
+        schema:
+          $ref: "#/definitions/MediaForm"
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+        default: "14Jnl0700n1"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ProgramSearchResult"
+  /media/{mid}/members:
+    get:
+      tags:
+      - "media"
+      summary: "Load members"
+      description: "Load all members of a certain media object. Often the media object\
+        \ would be a group."
+      operationId: "listMembers"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+        x-example: "POMS_S_TVGELDERLAND_133433"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaResult"
+    post:
+      tags:
+      - "media"
+      summary: "Filter members"
+      description: "Search in the members of a media object (note: filtering purges\
+        \ all duplicate elements)"
+      operationId: "findMembers"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: true
+        schema:
+          $ref: "#/definitions/MediaForm"
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+        default: "POMS_S_TVGELDERLAND_133433"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaSearchResult"
+  /media/{mid}/related:
+    get:
+      tags:
+      - "media"
+      summary: "List related"
+      description: "List all media objects that are related to the document with supplied\
+        \ mid."
+      operationId: "listRelated"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaResult"
+    post:
+      tags:
+      - "media"
+      summary: "Filter related"
+      description: "Search in all media objects that are related to another one (note:\
+        \ filtering purges all duplicate elements)"
+      operationId: "findRelated"
+      consumes:
+      - "application/xml"
+      - "application/json"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: true
+        schema:
+          $ref: "#/definitions/MediaForm"
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+        default: "AVRO_1656037"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MediaSearchResult"
+  /pages:
+    get:
+      tags:
+      - "pages"
+      summary: "List all pages"
+      description: "Lists all pages filtered on an optional profile"
+      operationId: "list"
+      produces:
+      - "application/json; charset=utf-8"
+      - "application/xml; charset=utf-8"
+      parameters:
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PageResult"
+    post:
+      tags:
+      - "pages"
+      summary: "Find pages"
+      description: "Find pages by posting a search form. Results are filtered on an\
+        \ optional profile"
+      operationId: "find"
+      produces:
+      - "application/json; charset=utf-8"
+      - "application/xml; charset=utf-8"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: false
+        schema:
+          $ref: "#/definitions/PageForm"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PageSearchResult"
+  /pages/multiple:
+    get:
+      tags:
+      - "pages"
+      summary: "Load several pages"
+      description: "Loads several pages by their id. An id may be either an url or\
+        \ a crid"
+      operationId: "loadMultiple"
+      produces:
+      - "application/json; charset=utf-8"
+      - "application/xml; charset=utf-8"
+      parameters:
+      - name: "ids"
+        in: "query"
+        description: "Certain (comma separated) urls to get. "
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "profile"
+        in: "query"
+        description: "Limit the results only to this profile"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MultiplePageResult"
+    post:
+      tags:
+      - "pages"
+      summary: "Load several pages by their id"
+      description: "Loads several pages by their id. An id may be either an url or\
+        \ a crid"
+      operationId: "loadMultiple"
+      produces:
+      - "application/json; charset=utf-8"
+      - "application/xml; charset=utf-8"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Json array of urls to get"
+        required: false
+        schema:
+          type: "array"
+          items:
+            type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "profile"
+        in: "query"
+        description: "Limit the results only to this profile"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MultiplePageResult"
+  /pages/related:
+    get:
+      tags:
+      - "pages"
+      summary: "List related"
+      description: "List all pages that are similar to page with supplied url."
+      operationId: "listRelated"
+      produces:
+      - "application/json; charset=utf-8"
+      - "application/xml; charset=utf-8"
+      parameters:
+      - name: "url"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PageResult"
+    post:
+      tags:
+      - "pages"
+      summary: "Find related"
+      description: "Find all pages that are similar to page with supplied url results\
+        \ are filtered with an optional form and profile"
+      operationId: "findRelated"
+      produces:
+      - "application/json; charset=utf-8"
+      - "application/xml; charset=utf-8"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: false
+        schema:
+          $ref: "#/definitions/PageForm"
+      - name: "url"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/PageSearchResult"
+  /pages/suggest:
+    get:
+      tags:
+      - "pages"
+      summary: "Suggest a search text"
+      description: "Suggests a search text, filtered on an optional profile"
+      operationId: "suggest"
+      produces:
+      - "application/json; charset=utf-8"
+      - "application/xml; charset=utf-8"
+      parameters:
+      - name: "input"
+        in: "query"
+        required: true
+        type: "string"
+        maxItems: 2147483647
+        minItems: 1
+      - name: "profile"
+        in: "query"
+        description: "Adding a profile limits results to user queries that ran under\
+          \ this profile"
+        required: false
+        type: "string"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SuggestResult"
+  /profiles/list:
+    get:
+      tags:
+      - "profiles"
+      summary: "List profiles"
+      description: ""
+      operationId: "list"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "pattern"
+        in: "query"
+        required: false
+        type: "string"
+        default: ".*"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ProfileResult"
+  /profiles/{name}:
+    get:
+      tags:
+      - "profiles"
+      summary: "Load a profile"
+      description: "Retrieve a profile by its name and an optional point in time.\
+        \ Note: This call cannot return JSON, only XML. It therefore probably doesn't\
+        \ work in the swagger interface."
+      operationId: "load"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "time"
+        in: "query"
+        description: "Optional timestamp in millis from 1970"
+        required: false
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Profile"
+  /schedule:
+    get:
+      tags:
+      - "schedule"
+      summary: "List scheduled media"
+      description: ""
+      operationId: "list"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "guideDay"
+        in: "query"
+        description: "Guide day in simple ISO8601 format, e.g. 2014-02-27"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "start"
+        in: "query"
+        description: "Start time in full ISO8601 format, e.g. 2014-02-27T07:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "stop"
+        in: "query"
+        description: "Stop time in full ISO8601 format, e.g. 2014-02-28T22:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ScheduleResult"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+    post:
+      tags:
+      - "schedule"
+      summary: "Find scheduled media"
+      description: ""
+      operationId: "find"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: true
+        schema:
+          $ref: "#/definitions/ScheduleForm"
+      - name: "profile"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ScheduleSearchResult"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/ancestor/{ancestor}:
+    get:
+      tags:
+      - "schedule"
+      summary: "List scheduled media for an ancestor"
+      description: ""
+      operationId: "listForAncestor"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "ancestor"
+        in: "path"
+        description: "Media ID to list descendants for, e.g. 044411213"
+        required: true
+        type: "string"
+      - name: "guideDay"
+        in: "query"
+        description: "Guide day in simple ISO8601 format, e.g. 2014-02-27"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "start"
+        in: "query"
+        description: "Start time in full ISO8601 format, e.g. 2014-02-27T07:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "stop"
+        in: "query"
+        description: "Stop time in full ISO8601 format, e.g. 2014-02-28T22:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ScheduleResult"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/ancestor/{ancestor}/next:
+    get:
+      tags:
+      - "schedule"
+      summary: "Next item for an ancestor"
+      description: ""
+      operationId: "nextForAncestor"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "ancestor"
+        in: "path"
+        description: "Media ID to list descendants for, e.g. 044411213"
+        required: true
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiScheduleEvent"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/ancestor/{ancestor}/now:
+    get:
+      tags:
+      - "schedule"
+      summary: "Current item for an ancestor"
+      description: ""
+      operationId: "nowForAncestor"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "ancestor"
+        in: "path"
+        description: "Media ID to list descendants for, e.g. 044411213"
+        required: true
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiScheduleEvent"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/broadcaster/{broadcaster}:
+    get:
+      tags:
+      - "schedule"
+      summary: "List scheduled media for a broadcaster"
+      description: ""
+      operationId: "listBroadcaster"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "broadcaster"
+        in: "path"
+        description: "Broadcaster, e.g. NTR"
+        required: true
+        type: "string"
+      - name: "guideDay"
+        in: "query"
+        description: "Guide day in simple ISO8601 format, e.g. 2014-02-27"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "start"
+        in: "query"
+        description: "Start time in full ISO8601 format, e.g. 2014-02-27T07:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "stop"
+        in: "query"
+        description: "Stop time in full ISO8601 format, e.g. 2014-02-28T22:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ScheduleResult"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/broadcaster/{broadcaster}/next:
+    get:
+      tags:
+      - "schedule"
+      summary: "Next item for broadcaster"
+      description: ""
+      operationId: "nextForBroadcaster"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "broadcaster"
+        in: "path"
+        description: "Broadcaster, e.g. NTR"
+        required: true
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiScheduleEvent"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/broadcaster/{broadcaster}/now:
+    get:
+      tags:
+      - "schedule"
+      summary: "Current item for broadcaster"
+      description: ""
+      operationId: "nowForBroadcaster"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "broadcaster"
+        in: "path"
+        description: "Broadcaster, e.g. NTR"
+        required: true
+        type: "string"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiScheduleEvent"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/channel/{channel}:
+    get:
+      tags:
+      - "schedule"
+      summary: "List scheduled media for a channel"
+      description: ""
+      operationId: "listChannel"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "channel"
+        in: "path"
+        required: true
+        type: "string"
+        default: "NED1"
+      - name: "guideDay"
+        in: "query"
+        description: "Guide day in simple ISO8601 format, e.g. 2014-02-27"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "start"
+        in: "query"
+        description: "Start time in full ISO8601 format, e.g. 2014-02-27T07:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "stop"
+        in: "query"
+        description: "Stop time in full ISO8601 format, e.g. 2014-02-28T22:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ScheduleResult"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/channel/{channel}/next:
+    get:
+      tags:
+      - "schedule"
+      summary: "Next item on channel"
+      description: ""
+      operationId: "nextForChannel"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "channel"
+        in: "path"
+        required: true
+        type: "string"
+        default: "NED1"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiScheduleEvent"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/channel/{channel}/now:
+    get:
+      tags:
+      - "schedule"
+      summary: "Current item on channel"
+      description: ""
+      operationId: "nowForChannel"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "channel"
+        in: "path"
+        required: true
+        type: "string"
+        default: "NED1"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiScheduleEvent"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/net/{net}:
+    get:
+      tags:
+      - "schedule"
+      summary: "List scheduled media for a net"
+      description: ""
+      operationId: "listNet"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "net"
+        in: "path"
+        required: true
+        type: "string"
+        default: "ZAPP"
+      - name: "guideDay"
+        in: "query"
+        description: "Guide day in simple ISO8601 format, e.g. 2014-02-27"
+        required: false
+        type: "string"
+        format: "date"
+      - name: "start"
+        in: "query"
+        description: "Start time in full ISO8601 format, e.g. 2014-02-27T07:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "stop"
+        in: "query"
+        description: "Stop time in full ISO8601 format, e.g. 2014-02-28T22:06:00Z"
+        required: false
+        type: "integer"
+        format: "int64"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ScheduleResult"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/net/{net}/next:
+    get:
+      tags:
+      - "schedule"
+      summary: "Next item on net"
+      description: ""
+      operationId: "nextForNet"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "net"
+        in: "path"
+        required: true
+        type: "string"
+        default: "ZAPP"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiScheduleEvent"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /schedule/net/{net}/now:
+    get:
+      tags:
+      - "schedule"
+      summary: "Current item on net"
+      description: ""
+      operationId: "nowForNet"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "net"
+        in: "path"
+        required: true
+        type: "string"
+        default: "ZAPP"
+      - name: "properties"
+        in: "query"
+        description: "Optimize media result for these returned properties"
+        required: false
+        type: "string"
+        default: "none"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ApiScheduleEvent"
+        400:
+          description: "Client error"
+        500:
+          description: "Server error"
+        404:
+          description: "Not found"
+  /screens:
+    get:
+      tags:
+      - "screens"
+      summary: "Page all available screens"
+      description: ""
+      operationId: "list"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "sort"
+        in: "query"
+        required: false
+        type: "string"
+        default: "asc"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ScreenResult"
+  /screens/forMedia/{mid}:
+    get:
+      tags:
+      - "screens"
+      summary: "Get a screen for a media id"
+      description: "The server does a lookup and tries to obtain a screen for this\
+        \ media or one of its ancestors in a breadth first traversal."
+      operationId: "forMedia"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "mid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Screen"
+  /screens/{sid}:
+    get:
+      tags:
+      - "screens"
+      summary: "Get a screen by its screen id."
+      description: ""
+      operationId: "get"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "sid"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Screen"
+  /subtitles:
+    post:
+      tags:
+      - "subtitles"
+      summary: "Search"
+      description: ""
+      operationId: "search"
+      produces:
+      - "application/json"
+      - "application/xml"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Search form"
+        required: true
+        schema:
+          $ref: "#/definitions/SubtitlesForm"
+      - name: "offset"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 0
+        minimum: 0.0
+        format: "int64"
+      - name: "max"
+        in: "query"
+        required: false
+        type: "integer"
+        default: 10
+        format: "int32"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SubtitlesSearchResult"
+  /subtitles/{id}/{language}:
+    get:
+      tags:
+      - "subtitles"
+      summary: "Get subtitles (caption for dutch, translation for other locales)"
+      description: "Use accept header or extension (e.g. .vvt) to select subtitles\
+        \ format"
+      operationId: "get"
+      produces:
+      - "text/ebu-tt"
+      - "text/vtt"
+      - "text/srt"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The MID for the subtitles to get"
+        required: true
+        type: "string"
+      - name: "language"
+        in: "path"
+        description: "The language for which to get the subtitles"
+        required: true
+        type: "string"
+        default: "nl"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/IteratorStandaloneCue"
+  /subtitles/{id}/{language}/{type}:
+    get:
+      tags:
+      - "subtitles"
+      summary: "Get subtitles"
+      description: "Use accept header or extension (e.g. .vvt) to select subtitles\
+        \ format"
+      operationId: "get"
+      produces:
+      - "text/ebu-tt"
+      - "text/vtt"
+      - "text/srt"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The MID for the subtitles to get"
+        required: true
+        type: "string"
+      - name: "language"
+        in: "path"
+        description: "The language for which to get the subtitles"
+        required: true
+        type: "string"
+        default: "nl"
+      - name: "type"
+        in: "path"
+        description: "TRANSLATION (default) or CAPTION"
+        required: true
+        type: "string"
+        default: "TRANSLATION"
+        enum:
+        - "CAPTION"
+        - "TRANSLATION"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/IteratorStandaloneCue"
+definitions:
+  MediaRef:
+    type: "object"
+    properties:
+      midRef:
+        type: "string"
+        xml:
+          attribute: true
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "MEDIA"
+        - "PROGRAM"
+        - "BROADCAST"
+        - "CLIP"
+        - "STRAND"
+        - "TRAILER"
+        - "MOVIE"
+        - "GROUP"
+        - "SERIES"
+        - "SEASON"
+        - "UMBRELLA"
+        - "ARCHIVE"
+        - "COLLECTION"
+        - "PLAYLIST"
+        - "ALBUM"
+        - "SEGMENT"
+        - "TRACK"
+        - "VISUALRADIO"
+        - "RECORDING"
+        - "PROMO"
+      id:
+        type: "integer"
+        format: "int64"
+      media:
+        $ref: "#/definitions/MediaObject"
+  VideoAttributes:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      horizontalSize:
+        type: "integer"
+        format: "int32"
+        xml:
+          name: "width"
+          attribute: true
+      verticalSize:
+        type: "integer"
+        format: "int32"
+        xml:
+          name: "heigth"
+          attribute: true
+      color:
+        type: "string"
+        enum:
+        - "BLACK_AND_WHITE"
+        - "BLACK_AND_WHITE_AND_COLOR"
+        - "COLOR"
+        - "COLORIZED"
+      videoCoding:
+        type: "string"
+      aspectRatio:
+        type: "string"
+        enum:
+        - "_4x3"
+        - "_16x9"
+        - "_xCIF"
+  DateFacetResultItem:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int64"
+      selected:
+        type: "boolean"
+        default: false
+      value:
+        type: "string"
+        xml:
+          attribute: true
+      begin:
+        type: "string"
+        format: "date-time"
+      end:
+        type: "string"
+        format: "date-time"
+  Repeat:
+    type: "object"
+    properties:
+      value:
+        type: "string"
+      rerun:
+        type: "boolean"
+        default: false
+  TextMatcherList:
+    type: "object"
+    properties:
+      matchers:
+        type: "array"
+        xml:
+          name: "matcher"
+        items:
+          $ref: "#/definitions/TextMatcher"
+  MultipleMediaResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/MultipleEntryMediaObject"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "multipleMediaResult"
+  MemberRef:
+    type: "object"
+    required:
+    - "highlighted"
+    properties:
+      midRef:
+        type: "string"
+        xml:
+          attribute: true
+      urnRef:
+        type: "string"
+        xml:
+          attribute: true
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "MEDIA"
+        - "PROGRAM"
+        - "BROADCAST"
+        - "CLIP"
+        - "STRAND"
+        - "TRAILER"
+        - "MOVIE"
+        - "GROUP"
+        - "SERIES"
+        - "SEASON"
+        - "UMBRELLA"
+        - "ARCHIVE"
+        - "COLLECTION"
+        - "PLAYLIST"
+        - "ALBUM"
+        - "SEGMENT"
+        - "TRACK"
+        - "VISUALRADIO"
+        - "RECORDING"
+        - "PROMO"
+      highlighted:
+        type: "boolean"
+        xml:
+          attribute: true
+        default: false
+      id:
+        type: "integer"
+        format: "int64"
+      member:
+        $ref: "#/definitions/MediaObject"
+      owner:
+        $ref: "#/definitions/MediaObject"
+      cridRef:
+        type: "string"
+        xml:
+          attribute: true
+      number:
+        type: "integer"
+        format: "int32"
+        xml:
+          name: "index"
+          attribute: true
+      added:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      mediaRef:
+        type: "string"
+  Image:
+    type: "object"
+    required:
+    - "imageUri"
+    - "title"
+    - "type"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      creationDate:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      lastModified:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      createdBy:
+        $ref: "#/definitions/Editor"
+      lastModifiedBy:
+        $ref: "#/definitions/Editor"
+      workflow:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "DRAFT"
+        - "FOR_APPROVAL"
+        - "REFUSED"
+        - "FOR_PUBLICATION"
+        - "FOR_REPUBLICATION"
+        - "PUBLISHED"
+        - "MERGED"
+        - "PARENT_REVOKED"
+        - "REVOKED"
+        - "FOR_DELETION"
+        - "DELETED"
+      owner:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "BROADCASTER"
+        - "RADIOBOX"
+        - "NEBO"
+        - "NPO"
+        - "MIS"
+        - "CERES"
+        - "PLUTO"
+        - "PROJECTM"
+        - "WHATS_ON"
+        - "IMMIX"
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "PICTURE"
+        - "PORTRAIT"
+        - "STILL"
+        - "LOGO"
+        - "ICON"
+        - "PROMO_LANDSCAPE"
+        - "PROMO_PORTRAIT"
+        - "BACKGROUND"
+      highlighted:
+        type: "boolean"
+        xml:
+          attribute: true
+        default: false
+      title:
+        type: "string"
+        xml:
+          namespace: "urn:vpro:shared:2009"
+      imageUri:
+        type: "string"
+        xml:
+          namespace: "urn:vpro:shared:2009"
+      description:
+        type: "string"
+        xml:
+          namespace: "urn:vpro:shared:2009"
+      offset:
+        type: "string"
+        format: "date-time"
+      width:
+        type: "integer"
+        format: "int32"
+        xml:
+          namespace: "urn:vpro:shared:2009"
+      height:
+        type: "integer"
+        format: "int32"
+        xml:
+          namespace: "urn:vpro:shared:2009"
+      credits:
+        type: "string"
+        xml:
+          namespace: "urn:vpro:shared:2009"
+      source:
+        type: "string"
+        xml:
+          namespace: "urn:vpro:shared:2009"
+      date:
+        type: "string"
+        xml:
+          namespace: "urn:vpro:shared:2009"
+      mediaObject:
+        $ref: "#/definitions/MediaObject"
+      urnPrefix:
+        type: "string"
+      hash:
+        type: "integer"
+        format: "int64"
+      activation:
+        type: "boolean"
+        default: false
+      deactivation:
+        type: "boolean"
+        default: false
+      publishable:
+        type: "boolean"
+        default: false
+      revocable:
+        type: "boolean"
+        default: false
+      deleted:
+        type: "boolean"
+        default: false
+      inAllowedPublicationWindow:
+        type: "boolean"
+        default: false
+      publishStart:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      publishStop:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      publishDate:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      urn:
+        type: "string"
+        xml:
+          attribute: true
+  TwitterRef:
+    type: "object"
+  PageSearchableTermFacet:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/PageSearch"
+      threshold:
+        type: "integer"
+        format: "int32"
+      sort:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "VALUE_ASC"
+        - "VALUE_DESC"
+        - "COUNT_ASC"
+        - "COUNT_DESC"
+      max:
+        type: "integer"
+        format: "int32"
+      include:
+        type: "string"
+      script:
+        type: "string"
+      subSearch:
+        $ref: "#/definitions/TermSearch"
+  ScheduleEvent:
+    type: "object"
+    required:
+    - "channel"
+    - "guideDay"
+    - "start"
+    properties:
+      repeat:
+        $ref: "#/definitions/Repeat"
+      memberOf:
+        type: "string"
+      avAttributes:
+        $ref: "#/definitions/AVAttributes"
+      textSubtitles:
+        type: "string"
+      textPage:
+        type: "string"
+      guideDay:
+        type: "string"
+        format: "date-time"
+      start:
+        type: "string"
+        format: "date-time"
+      offset:
+        $ref: "#/definitions/Duration"
+      duration:
+        $ref: "#/definitions/Duration"
+      poProgID:
+        type: "string"
+      poSeriesIDLegacy:
+        type: "string"
+        xml:
+          name: "poSeriesID"
+      primaryLifestyle:
+        $ref: "#/definitions/Lifestyle"
+      secondaryLifestyle:
+        $ref: "#/definitions/SecondaryLifestyle"
+      channel:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "NED1"
+        - "NED2"
+        - "NED3"
+        - "RAD1"
+        - "RAD2"
+        - "RAD3"
+        - "RAD4"
+        - "RAD5"
+        - "RAD6"
+        - "RTL4"
+        - "RTL5"
+        - "SBS6"
+        - "RTL7"
+        - "VERO"
+        - "NET5"
+        - "RTL8"
+        - "REGI"
+        - "OFRY"
+        - "NOOR"
+        - "RTVD"
+        - "OOST"
+        - "GELD"
+        - "FLEV"
+        - "BRAB"
+        - "REGU"
+        - "NORH"
+        - "WEST"
+        - "RIJN"
+        - "L1TV"
+        - "OZEE"
+        - "TVDR"
+        - "AT5_"
+        - "RNN7"
+        - "BVNT"
+        - "EEN_"
+        - "KETN"
+        - "VTM_"
+        - "KA2_"
+        - "VT4_"
+        - "LUNE"
+        - "LDUE"
+        - "RTBF"
+        - "ARD_"
+        - "ZDF_"
+        - "WDR_"
+        - "N_3_"
+        - "SUDW"
+        - "SWF_"
+        - "RTL_"
+        - "SAT1"
+        - "PRO7"
+        - "_3SAT"
+        - "KABE"
+        - "ARTE"
+        - "T5ME"
+        - "FRA2"
+        - "FRA3"
+        - "BBC1"
+        - "BBC2"
+        - "BBTH"
+        - "BBTC"
+        - "BBCF"
+        - "BBFC"
+        - "BBCP"
+        - "TRTI"
+        - "SHOW"
+        - "LIGT"
+        - "TURK"
+        - "RRTM"
+        - "RMBC"
+        - "RART"
+        - "ARTM"
+        - "TVBS"
+        - "ASIA"
+        - "TIVI"
+        - "B4UM"
+        - "PCNE"
+        - "PATN"
+        - "ZEET"
+        - "ZEEC"
+        - "TVE_"
+        - "RAI_"
+        - "RAID"
+        - "RAIT"
+        - "TEVE"
+        - "ERTS"
+        - "STV_"
+        - "NTV_"
+        - "NOSJ"
+        - "CULT"
+        - "_101_"
+        - "PO24"
+        - "HILV"
+        - "HOLL"
+        - "GESC"
+        - "_3VCN"
+        - "_3VOS"
+        - "NEDE"
+        - "STER"
+        - "OMEG"
+        - "NCRV"
+        - "OPVO"
+        - "CONS"
+        - "HUMO"
+        - "DIER"
+        - "ENTE"
+        - "FASH"
+        - "COMC"
+        - "TBN_"
+        - "DISC"
+        - "ZONE"
+        - "ANPL"
+        - "CLUB"
+        - "NAGE"
+        - "TRAC"
+        - "NGHD"
+        - "WILD"
+        - "GARU"
+        - "ZAZA"
+        - "FAM7"
+        - "DTAL"
+        - "SCIE"
+        - "CIVI"
+        - "DIHD"
+        - "HIST"
+        - "TRAV"
+        - "HETG"
+        - "GOED"
+        - "BABY"
+        - "DH1_"
+        - "LITV"
+        - "LIVE"
+        - "STAR"
+        - "WEER"
+        - "REAL"
+        - "SCIF"
+        - "_13ST"
+        - "CARC"
+        - "NOSN"
+        - "HISH"
+        - "NICK"
+        - "NIJN"
+        - "NIKT"
+        - "NIKH"
+        - "CART"
+        - "BOOM"
+        - "CNN_"
+        - "BBCW"
+        - "EURN"
+        - "SKNE"
+        - "BLOO"
+        - "CNBC"
+        - "PALJ"
+        - "ALJA"
+        - "FOXN"
+        - "MTV_"
+        - "MTV2"
+        - "HITS"
+        - "BASE"
+        - "MTVB"
+        - "TMF_"
+        - "TMFN"
+        - "TMFP"
+        - "TMFY"
+        - "TVOR"
+        - "VH1E"
+        - "VH1C"
+        - "PERC"
+        - "MEZZ"
+        - "EURO"
+        - "EUR2"
+        - "EXTR"
+        - "MOTO"
+        - "SAIL"
+        - "ESPN"
+        - "NASE"
+        - "SP11"
+        - "SP12"
+        - "SP13"
+        - "SP14"
+        - "SP15"
+        - "SP16"
+        - "SP17"
+        - "SP18"
+        - "S1HD"
+        - "FIL1"
+        - "FIL2"
+        - "FIL3"
+        - "FL11"
+        - "FL1P"
+        - "FL12"
+        - "FL13"
+        - "FLHD"
+        - "MGMM"
+        - "TCM_"
+        - "HALL"
+        - "ACNW"
+        - "RHUS"
+        - "PLAY"
+        - "ADUL"
+        - "PSPI"
+        - "HUST"
+        - "OXMO"
+        - "REGR"
+        - "RFRY"
+        - "RNOO"
+        - "ROST"
+        - "RGEL"
+        - "RFLE"
+        - "RBRA"
+        - "RUTR"
+        - "RNOH"
+        - "RWST"
+        - "RRIJ"
+        - "LRAD"
+        - "RZEE"
+        - "COMM"
+        - "RVER"
+        - "SLAM"
+        - "SKYR"
+        - "RTLF"
+        - "BNRN"
+        - "KINK"
+        - "PCAZ"
+        - "QMUS"
+        - "R538"
+        - "GOLD"
+        - "ARRO"
+        - "FUNX"
+        - "CLAS"
+        - "BEL1"
+        - "BEL2"
+        - "KLAR"
+        - "BBR1"
+        - "BBR2"
+        - "BBR3"
+        - "BBR4"
+        - "BBWS"
+        - "BBCX"
+        - "NDR3"
+        - "WDR4"
+        - "WDR3"
+        - "D24K"
+        - "H1NL"
+        - "SYFY"
+        - "SBS9"
+        - "DIXD"
+        - "BRNL"
+        - "FOXL"
+        - "TLC_"
+        - "VRTC"
+        - "BCFS"
+        - "FXNL"
+        - "AMC_"
+        - "FLM1"
+      net:
+        $ref: "#/definitions/Net"
+      imi:
+        type: "string"
+        xml:
+          attribute: true
+      urnRef:
+        type: "string"
+        xml:
+          attribute: true
+      mediaObject:
+        $ref: "#/definitions/MediaObject"
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "STRAND"
+      midRef:
+        type: "string"
+        xml:
+          attribute: true
+      poSeriesID:
+        type: "string"
+      id:
+        $ref: "#/definitions/ScheduleEventIdentifier"
+      startInstant:
+        type: "integer"
+        format: "int64"
+      guideDate:
+        type: "string"
+        format: "date"
+      realStart:
+        type: "string"
+        format: "date-time"
+      realStartInstant:
+        type: "integer"
+        format: "int64"
+  Suggestion:
+    type: "object"
+    properties:
+      text:
+        type: "string"
+    xml:
+      name: "suggestion"
+  ScheduleForm:
+    type: "object"
+    properties:
+      searches:
+        $ref: "#/definitions/MediaSearch"
+      facets:
+        $ref: "#/definitions/MediaFacets"
+      text:
+        type: "string"
+      faceted:
+        type: "boolean"
+        default: false
+      highlight:
+        type: "boolean"
+        default: false
+    xml:
+      name: "scheduleForm"
+  ProfileResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/Profile"
+      size:
+        type: "integer"
+        format: "int32"
+  SubtitlesForm:
+    type: "object"
+    properties:
+      searches:
+        $ref: "#/definitions/SubtitlesSearch"
+      text:
+        type: "string"
+      faceted:
+        type: "boolean"
+        default: false
+      highlight:
+        type: "boolean"
+        default: false
+    xml:
+      name: "subtitlesForm"
+  Broadcaster:
+    type: "object"
+    required:
+    - "value"
+    properties:
+      id:
+        type: "string"
+        xml:
+          attribute: true
+        minLength: 2
+        maxLength: 4
+        pattern: "[A-Z0-9_-]{2,4}"
+      whatsOnId:
+        type: "string"
+      neboId:
+        type: "string"
+        minLength: 1
+        maxLength: 255
+      misId:
+        type: "string"
+      value:
+        type: "string"
+        minLength: 1
+        maxLength: 255
+  GenreFacetResultItem:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int64"
+      selected:
+        type: "boolean"
+        default: false
+      id:
+        type: "string"
+      value:
+        type: "string"
+      terms:
+        type: "array"
+        xml:
+          name: "term"
+        items:
+          $ref: "#/definitions/TermWrapper"
+  PageForm:
+    type: "object"
+    properties:
+      searches:
+        $ref: "#/definitions/PageSearch"
+      facets:
+        $ref: "#/definitions/PageFacets"
+      mediaForm:
+        $ref: "#/definitions/MediaForm"
+      text:
+        type: "string"
+      sorted:
+        type: "boolean"
+        default: false
+      faceted:
+        type: "boolean"
+        default: false
+      sort:
+        type: "object"
+        additionalProperties:
+          type: "string"
+          enum:
+          - "ASC"
+          - "DESC"
+      highlight:
+        type: "boolean"
+        xml:
+          attribute: true
+        default: false
+    xml:
+      name: "pagesForm"
+  DateRangeFacets:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/AbstractSearch"
+  PageSearchResult:
+    type: "object"
+    properties:
+      facets:
+        $ref: "#/definitions/PageFacetsResult"
+      selectedFacets:
+        $ref: "#/definitions/PageFacetsResult"
+      mediaFacets:
+        $ref: "#/definitions/MediaFacetsResult"
+      mediaSelectedFacets:
+        $ref: "#/definitions/MediaFacetsResult"
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      size:
+        type: "integer"
+        format: "int32"
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/SearchResultItemPage"
+    xml:
+      name: "pageSearchResult"
+  SimpleTextMatcher:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      value:
+        type: "string"
+      matchType:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "TEXT"
+      caseSensitive:
+        type: "boolean"
+        default: false
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  MultiplePageResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/MultipleEntryPage"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "multiplePageResult"
+  ScheduleEventSearch:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      begin:
+        type: "string"
+        format: "date-time"
+      end:
+        type: "string"
+        format: "date-time"
+      channel:
+        type: "string"
+      net:
+        type: "string"
+      rerun:
+        type: "boolean"
+        default: false
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  ExtendedTextMatcherList:
+    type: "object"
+    properties:
+      matchers:
+        type: "array"
+        xml:
+          name: "matcher"
+        items:
+          $ref: "#/definitions/ExtendedTextMatcher"
+  MediaSearchableTermFacet:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/MediaSearch"
+      threshold:
+        type: "integer"
+        format: "int32"
+      sort:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "VALUE_ASC"
+        - "VALUE_DESC"
+        - "COUNT_ASC"
+        - "COUNT_DESC"
+      max:
+        type: "integer"
+        format: "int32"
+      include:
+        type: "string"
+      script:
+        type: "string"
+      subSearch:
+        $ref: "#/definitions/TermSearch"
+  Person:
+    type: "object"
+    required:
+    - "role"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      givenName:
+        type: "string"
+      familyName:
+        type: "string"
+      role:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "DIRECTOR"
+        - "CHIEF_EDITOR"
+        - "EDITOR"
+        - "PRESENTER"
+        - "INTERVIEWER"
+        - "PRODUCER"
+        - "RESEARCH"
+        - "GUEST"
+        - "REPORTER"
+        - "ACTOR"
+        - "COMMENTATOR"
+        - "COMPOSER"
+        - "SCRIPTWRITER"
+        - "UNDEFINED"
+      mediaObject:
+        $ref: "#/definitions/MediaObject"
+      gtaaRecord:
+        $ref: "#/definitions/GTAARecord"
+      gtaaUri:
+        type: "string"
+        xml:
+          attribute: true
+  PredicateTestResultMediaObject:
+    type: "object"
+  Link:
+    type: "object"
+    required:
+    - "pageRef"
+    properties:
+      pageRef:
+        type: "string"
+        xml:
+          attribute: true
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "TOP_STORY"
+      text:
+        type: "string"
+  LocationAuthorityRecord:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      mediaObject:
+        $ref: "#/definitions/MediaObject"
+      platform:
+        type: "string"
+        enum:
+        - "INTERNETVOD"
+        - "TVVOD"
+        - "PLUSVOD"
+        - "NPOPLUSVOD"
+      restrictionStart:
+        type: "string"
+        format: "date-time"
+      restrictionStop:
+        type: "string"
+        format: "date-time"
+  Group:
+    allOf:
+    - $ref: "#/definitions/MediaObject"
+    - type: "object"
+      properties:
+        poSequenceInformation:
+          type: "string"
+      xml:
+        name: "group"
+  Description:
+    type: "object"
+    required:
+    - "description"
+    - "type"
+    properties:
+      description:
+        type: "string"
+        minLength: 1
+        maxLength: 2147483647
+      owner:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "BROADCASTER"
+        - "RADIOBOX"
+        - "NEBO"
+        - "NPO"
+        - "MIS"
+        - "CERES"
+        - "PLUTO"
+        - "PROJECTM"
+        - "WHATS_ON"
+        - "IMMIX"
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "MAIN"
+        - "SHORT"
+        - "SUB"
+        - "EPISODE"
+        - "ORIGINAL"
+        - "KICKER"
+        - "LEXICO"
+        - "WORK"
+        - "ABBREVIATION"
+      parent:
+        $ref: "#/definitions/MediaObject"
+  GeoRestriction:
+    type: "object"
+  AbstractFilterMediaObject:
+    type: "object"
+    properties:
+      constraint:
+        $ref: "#/definitions/ConstraintMediaObject"
+      predicate:
+        $ref: "#/definitions/ConstraintMediaObject"
+      defaultBundleKey:
+        type: "array"
+        items:
+          type: "string"
+      reason:
+        type: "string"
+  IteratorStandaloneCue:
+    type: "object"
+  ConstraintMediaObject:
+    type: "object"
+    properties:
+      reason:
+        type: "string"
+      defaultBundleKey:
+        type: "array"
+        items:
+          type: "string"
+  Embed:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      media:
+        $ref: "#/definitions/MediaObject"
+  PageFacetsResult:
+    type: "object"
+    properties:
+      sortDates:
+        type: "array"
+        items:
+          $ref: "#/definitions/DateFacetResultItem"
+      broadcasters:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      types:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      tags:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      keywords:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      genres:
+        type: "array"
+        items:
+          $ref: "#/definitions/GenreFacetResultItem"
+      portals:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      sections:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      relations:
+        type: "array"
+        items:
+          $ref: "#/definitions/MultipleFacetsResult"
+  Website:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      url:
+        type: "string"
+  MultipleEntryPage:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      result:
+        $ref: "#/definitions/Page"
+      error:
+        type: "string"
+      reason:
+        $ref: "#/definitions/PredicateTestResultPage"
+  RelationFacetList:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/MediaSearch"
+      subSearch:
+        $ref: "#/definitions/RelationSearch"
+      facets:
+        type: "array"
+        xml:
+          name: "facet"
+        items:
+          $ref: "#/definitions/RelationFacet"
+      empty:
+        type: "boolean"
+        default: false
+  Profile:
+    type: "object"
+    properties:
+      timestamp:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      name:
+        type: "string"
+        xml:
+          attribute: true
+      pageProfile:
+        $ref: "#/definitions/ProfileDefinitionPage"
+      mediaProfile:
+        $ref: "#/definitions/ProfileDefinitionMediaObject"
+    xml:
+      name: "profile"
+  SearchResultItemMediaObject:
+    type: "object"
+    properties:
+      score:
+        type: "number"
+        format: "float"
+        xml:
+          attribute: true
+      highlights:
+        type: "array"
+        xml:
+          name: "highlight"
+        items:
+          $ref: "#/definitions/HighLight"
+      result:
+        $ref: "#/definitions/MediaObject"
+  TextMatcher:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      value:
+        type: "string"
+      matchType:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "TEXT"
+        - "REGEX"
+        - "WILDCARD"
+      caseSensitive:
+        type: "boolean"
+        default: false
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  SearchResultItemApiScheduleEvent:
+    type: "object"
+    properties:
+      score:
+        type: "number"
+        format: "float"
+        xml:
+          attribute: true
+      highlights:
+        type: "array"
+        xml:
+          name: "highlight"
+        items:
+          $ref: "#/definitions/HighLight"
+      result:
+        $ref: "#/definitions/ApiScheduleEvent"
+  Lifestyle:
+    type: "object"
+  Portal:
+    type: "object"
+    required:
+    - "value"
+    properties:
+      id:
+        type: "string"
+        xml:
+          attribute: true
+        minLength: 1
+        maxLength: 255
+        pattern: "[A-Z0-9_-]{2,}"
+      value:
+        type: "string"
+        minLength: 1
+        maxLength: 255
+  SearchResultItemPage:
+    type: "object"
+    properties:
+      score:
+        type: "number"
+        format: "float"
+        xml:
+          attribute: true
+      highlights:
+        type: "array"
+        xml:
+          name: "highlight"
+        items:
+          $ref: "#/definitions/HighLight"
+      result:
+        $ref: "#/definitions/Page"
+  MediaFacet:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/MediaSearch"
+      threshold:
+        type: "integer"
+        format: "int32"
+      sort:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "VALUE_ASC"
+        - "VALUE_DESC"
+        - "COUNT_ASC"
+        - "COUNT_DESC"
+      max:
+        type: "integer"
+        format: "int32"
+      include:
+        type: "string"
+      script:
+        type: "string"
+  ApiScheduleEvent:
+    type: "object"
+    required:
+    - "guideDay"
+    - "start"
+    properties:
+      repeat:
+        $ref: "#/definitions/Repeat"
+      memberOf:
+        type: "string"
+      avAttributes:
+        $ref: "#/definitions/AVAttributes"
+      textSubtitles:
+        type: "string"
+      textPage:
+        type: "string"
+      guideDay:
+        type: "string"
+        format: "date-time"
+      start:
+        type: "string"
+        format: "date-time"
+      poSeriesIDLegacy:
+        type: "string"
+        xml:
+          name: "poSeriesID"
+    xml:
+      name: "scheduleItem"
+  AssociationSearchList:
+    type: "object"
+  MediaObject:
+    type: "object"
+    required:
+    - "broadcasters"
+    - "titles"
+    discriminator: "objectType"
+    properties:
+      crids:
+        type: "array"
+        xml:
+          name: "crid"
+        items:
+          type: "string"
+      broadcasters:
+        type: "array"
+        xml:
+          name: "broadcaster"
+        items:
+          $ref: "#/definitions/Broadcaster"
+        maxItems: 2147483647
+        minItems: 0
+      portals:
+        type: "array"
+        xml:
+          name: "portal"
+        items:
+          $ref: "#/definitions/Portal"
+      exclusives:
+        type: "array"
+        xml:
+          name: "exclusive"
+        items:
+          $ref: "#/definitions/PortalRestriction"
+      regions:
+        type: "array"
+        xml:
+          name: "region"
+        items:
+          $ref: "#/definitions/GeoRestriction"
+      titles:
+        type: "array"
+        xml:
+          name: "title"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Title"
+      descriptions:
+        type: "array"
+        xml:
+          name: "description"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Description"
+      genres:
+        type: "array"
+        xml:
+          name: "genre"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Genre"
+      tags:
+        type: "array"
+        xml:
+          name: "tag"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Tag"
+      source:
+        type: "string"
+      countries:
+        type: "array"
+        xml:
+          name: "country"
+        items:
+          type: "string"
+          enum:
+          - "AC"
+          - "AD"
+          - "AE"
+          - "AF"
+          - "AG"
+          - "AI"
+          - "AL"
+          - "AM"
+          - "AN"
+          - "AO"
+          - "AQ"
+          - "AR"
+          - "AS"
+          - "AT"
+          - "AU"
+          - "AW"
+          - "AX"
+          - "AZ"
+          - "BA"
+          - "BB"
+          - "BD"
+          - "BE"
+          - "BF"
+          - "BG"
+          - "BH"
+          - "BI"
+          - "BJ"
+          - "BL"
+          - "BM"
+          - "BN"
+          - "BO"
+          - "BQ"
+          - "BR"
+          - "BS"
+          - "BT"
+          - "BU"
+          - "BV"
+          - "BW"
+          - "BY"
+          - "BZ"
+          - "CA"
+          - "CC"
+          - "CD"
+          - "CF"
+          - "CG"
+          - "CH"
+          - "CI"
+          - "CK"
+          - "CL"
+          - "CM"
+          - "CN"
+          - "CO"
+          - "CP"
+          - "CR"
+          - "CS"
+          - "CU"
+          - "CV"
+          - "CW"
+          - "CX"
+          - "CY"
+          - "CZ"
+          - "DE"
+          - "DG"
+          - "DJ"
+          - "DK"
+          - "DM"
+          - "DO"
+          - "DZ"
+          - "EA"
+          - "EC"
+          - "EE"
+          - "EG"
+          - "EH"
+          - "ER"
+          - "ES"
+          - "ET"
+          - "EU"
+          - "FI"
+          - "FJ"
+          - "FK"
+          - "FM"
+          - "FO"
+          - "FR"
+          - "FX"
+          - "GA"
+          - "GB"
+          - "GB_GBN"
+          - "GB_EAW"
+          - "GB_ENG"
+          - "GB_NIR"
+          - "GB_SCT"
+          - "GB_WLS"
+          - "GD"
+          - "GE"
+          - "GF"
+          - "GG"
+          - "GH"
+          - "GI"
+          - "GL"
+          - "GM"
+          - "GN"
+          - "GP"
+          - "GQ"
+          - "GR"
+          - "GS"
+          - "GT"
+          - "GU"
+          - "GW"
+          - "GY"
+          - "HK"
+          - "HM"
+          - "HN"
+          - "HR"
+          - "HT"
+          - "HU"
+          - "IC"
+          - "ID"
+          - "IE"
+          - "IL"
+          - "IM"
+          - "IN"
+          - "IO"
+          - "IQ"
+          - "IR"
+          - "IS"
+          - "IT"
+          - "JE"
+          - "JM"
+          - "JO"
+          - "JP"
+          - "KE"
+          - "KG"
+          - "KH"
+          - "KI"
+          - "KM"
+          - "KN"
+          - "KP"
+          - "KR"
+          - "KW"
+          - "KY"
+          - "KZ"
+          - "LA"
+          - "LB"
+          - "LC"
+          - "LI"
+          - "LK"
+          - "LR"
+          - "LS"
+          - "LT"
+          - "LU"
+          - "LV"
+          - "LY"
+          - "MA"
+          - "MC"
+          - "MD"
+          - "ME"
+          - "MF"
+          - "MG"
+          - "MH"
+          - "MK"
+          - "ML"
+          - "MM"
+          - "MN"
+          - "MO"
+          - "MP"
+          - "MQ"
+          - "MR"
+          - "MS"
+          - "MT"
+          - "MU"
+          - "MV"
+          - "MW"
+          - "MX"
+          - "MY"
+          - "MZ"
+          - "NA"
+          - "NC"
+          - "NE"
+          - "NF"
+          - "NG"
+          - "NI"
+          - "NL"
+          - "NL_DR"
+          - "NL_FL"
+          - "NL_FR"
+          - "NL_GE"
+          - "NL_GR"
+          - "NL_LI"
+          - "NL_NB"
+          - "NL_NH"
+          - "NL_OV"
+          - "NL_UT"
+          - "NL_ZE"
+          - "NL_ZH"
+          - "NO"
+          - "NP"
+          - "NR"
+          - "NT"
+          - "NU"
+          - "NZ"
+          - "OM"
+          - "PA"
+          - "PE"
+          - "PF"
+          - "PG"
+          - "PH"
+          - "PK"
+          - "PL"
+          - "PM"
+          - "PN"
+          - "PR"
+          - "PS"
+          - "PT"
+          - "PW"
+          - "PY"
+          - "QA"
+          - "RE"
+          - "RO"
+          - "RS"
+          - "RU"
+          - "RW"
+          - "SA"
+          - "SB"
+          - "SC"
+          - "SD"
+          - "SE"
+          - "SF"
+          - "SG"
+          - "SH"
+          - "SI"
+          - "SJ"
+          - "SK"
+          - "SL"
+          - "SM"
+          - "SN"
+          - "SO"
+          - "SR"
+          - "SS"
+          - "ST"
+          - "SU"
+          - "SV"
+          - "SX"
+          - "SY"
+          - "SZ"
+          - "TA"
+          - "TC"
+          - "TD"
+          - "TF"
+          - "TG"
+          - "TH"
+          - "TJ"
+          - "TK"
+          - "TL"
+          - "TM"
+          - "TN"
+          - "TO"
+          - "TP"
+          - "TR"
+          - "TT"
+          - "TV"
+          - "TW"
+          - "TZ"
+          - "UA"
+          - "UG"
+          - "UK"
+          - "UM"
+          - "US"
+          - "UY"
+          - "UZ"
+          - "VA"
+          - "VC"
+          - "VE"
+          - "VG"
+          - "VI"
+          - "VN"
+          - "VU"
+          - "WF"
+          - "WS"
+          - "YE"
+          - "YT"
+          - "YU"
+          - "ZA"
+          - "ZM"
+          - "ZR"
+          - "ZW"
+          - "BQAQ"
+          - "CTKI"
+          - "CSHH"
+          - "NQAQ"
+          - "FXFR"
+          - "DDDE"
+          - "JTUM"
+          - "MIUM"
+          - "PCHH"
+          - "PZPA"
+          - "SKIN"
+          - "PUUM"
+          - "SUHH"
+          - "WKUM"
+          - "YDYE"
+          - "XZ"
+          - "QO"
+          - "QU"
+          - "ZZ"
+          - "XK"
+          - "XN"
+      languages:
+        type: "array"
+        xml:
+          name: "language"
+        items:
+          $ref: "#/definitions/Locale"
+      avAttributes:
+        $ref: "#/definitions/AVAttributes"
+      releaseYear:
+        type: "integer"
+        format: "int32"
+      credits:
+        type: "array"
+        xml:
+          name: "person"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Person"
+      awards:
+        type: "array"
+        xml:
+          name: "award"
+        items:
+          type: "string"
+      descendantOf:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/DescendantRef"
+      memberOf:
+        type: "array"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/MemberRef"
+      ageRating:
+        type: "string"
+        enum:
+        - "_6"
+        - "_9"
+        - "_12"
+        - "_16"
+        - "ALL"
+      contentRatings:
+        type: "array"
+        xml:
+          name: "contentRating"
+        items:
+          type: "string"
+          enum:
+          - "DISCRIMINATIE"
+          - "GROF_TAALGEBRUIK"
+          - "ANGST"
+          - "GEWELD"
+          - "SEKS"
+          - "DRUGS_EN_ALCOHOL"
+      email:
+        type: "array"
+        items:
+          type: "string"
+      websites:
+        type: "array"
+        xml:
+          name: "website"
+        items:
+          $ref: "#/definitions/Website"
+      twitter:
+        type: "array"
+        items:
+          $ref: "#/definitions/TwitterRef"
+      teletext:
+        type: "integer"
+        format: "int32"
+      predictions:
+        type: "array"
+        xml:
+          name: "prediction"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Prediction"
+      locations:
+        type: "array"
+        xml:
+          name: "location"
+          wrapped: true
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Location"
+      scheduleEvents:
+        type: "array"
+        xml:
+          name: "scheduleEvent"
+          wrapped: true
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/ScheduleEvent"
+      relations:
+        type: "array"
+        xml:
+          name: "relation"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Relation"
+      images:
+        type: "array"
+        xml:
+          name: "image"
+          namespace: "urn:vpro:shared:2009"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Image"
+  HighLight:
+    type: "object"
+    properties:
+      term:
+        type: "string"
+        xml:
+          attribute: true
+      body:
+        type: "array"
+        items:
+          type: "string"
+  GTAARecord:
+    type: "object"
+    properties:
+      uri:
+        type: "string"
+      status:
+        type: "string"
+        enum:
+        - "candidate"
+        - "approved"
+        - "redirected"
+        - "not_compliant"
+        - "rejected"
+        - "obsolete"
+        - "deleted"
+      knownAs:
+        type: "boolean"
+        default: false
+  PageFacets:
+    type: "object"
+    properties:
+      sortDates:
+        $ref: "#/definitions/DateRangeFacets"
+      broadcasters:
+        $ref: "#/definitions/PageFacet"
+      types:
+        $ref: "#/definitions/PageFacet"
+      tags:
+        $ref: "#/definitions/ExtendedPageFacet"
+      keywords:
+        $ref: "#/definitions/ExtendedPageFacet"
+      genres:
+        $ref: "#/definitions/PageSearchableTermFacet"
+      portals:
+        $ref: "#/definitions/PageFacet"
+      sections:
+        $ref: "#/definitions/PageFacet"
+      relations:
+        $ref: "#/definitions/RelationFacetList"
+      filter:
+        $ref: "#/definitions/PageSearch"
+      faceted:
+        type: "boolean"
+        default: false
+  TemporalUnit:
+    type: "object"
+    properties:
+      duration:
+        $ref: "#/definitions/Duration"
+      durationEstimated:
+        type: "boolean"
+        default: false
+      timeBased:
+        type: "boolean"
+        default: false
+      dateBased:
+        type: "boolean"
+        default: false
+  PredicateTestResultPage:
+    type: "object"
+  ExtendedPageFacet:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/PageSearch"
+      threshold:
+        type: "integer"
+        format: "int32"
+      max:
+        type: "integer"
+        format: "int32"
+      include:
+        type: "string"
+      script:
+        type: "string"
+  ExtendedTextMatcher:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      value:
+        type: "string"
+      matchType:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "TEXT"
+        - "REGEX"
+        - "WILDCARD"
+      caseSensitive:
+        type: "boolean"
+        xml:
+          attribute: true
+        default: false
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  Section:
+    type: "object"
+  MemberRefFacetResultItem:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int64"
+      selected:
+        type: "boolean"
+        default: false
+      id:
+        type: "string"
+      value:
+        type: "string"
+      type:
+        type: "string"
+        enum:
+        - "MEDIA"
+        - "PROGRAM"
+        - "BROADCAST"
+        - "CLIP"
+        - "STRAND"
+        - "TRAILER"
+        - "MOVIE"
+        - "GROUP"
+        - "SERIES"
+        - "SEASON"
+        - "UMBRELLA"
+        - "ARCHIVE"
+        - "COLLECTION"
+        - "PLAYLIST"
+        - "ALBUM"
+        - "SEGMENT"
+        - "TRACK"
+        - "VISUALRADIO"
+        - "RECORDING"
+        - "PROMO"
+  Referral:
+    type: "object"
+    required:
+    - "referrer"
+    properties:
+      referrer:
+        type: "string"
+        xml:
+          attribute: true
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "TOP_STORY"
+      text:
+        type: "string"
+      pageRef:
+        type: "string"
+      linkText:
+        type: "string"
+      title:
+        type: "string"
+  SearchResultItemProgram:
+    type: "object"
+    properties:
+      score:
+        type: "number"
+        format: "float"
+        xml:
+          attribute: true
+      highlights:
+        type: "array"
+        xml:
+          name: "highlight"
+        items:
+          $ref: "#/definitions/HighLight"
+      result:
+        $ref: "#/definitions/Program"
+  RelationSearch:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      types:
+        $ref: "#/definitions/TextMatcherList"
+      broadcasters:
+        $ref: "#/definitions/TextMatcherList"
+      values:
+        $ref: "#/definitions/ExtendedTextMatcherList"
+      uriRefs:
+        $ref: "#/definitions/TextMatcherList"
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  Genre:
+    type: "object"
+    properties:
+      terms:
+        type: "array"
+        xml:
+          name: "term"
+        readOnly: true
+        items:
+          $ref: "#/definitions/TermWrapper"
+  Tag:
+    type: "object"
+  Net:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        pattern: "[A-Z0-9_-]{2,12}"
+      displayName:
+        type: "string"
+  MediaFacetsResult:
+    type: "object"
+    properties:
+      titles:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      types:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      avTypes:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      sortDates:
+        type: "array"
+        items:
+          $ref: "#/definitions/DateFacetResultItem"
+      broadcasters:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      genres:
+        type: "array"
+        items:
+          $ref: "#/definitions/GenreFacetResultItem"
+      tags:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      durations:
+        type: "array"
+        items:
+          $ref: "#/definitions/DateFacetResultItem"
+      descendantOf:
+        type: "array"
+        items:
+          $ref: "#/definitions/MemberRefFacetResultItem"
+      episodeOf:
+        type: "array"
+        items:
+          $ref: "#/definitions/MemberRefFacetResultItem"
+      memberOf:
+        type: "array"
+        items:
+          $ref: "#/definitions/MemberRefFacetResultItem"
+      relations:
+        type: "array"
+        items:
+          $ref: "#/definitions/MultipleFacetsResult"
+      ageRatings:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+      contentRatings:
+        type: "array"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+  SubtitlesSearch:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      text:
+        $ref: "#/definitions/SimpleTextMatcher"
+      types:
+        $ref: "#/definitions/TextMatcherList"
+      languages:
+        $ref: "#/definitions/TextMatcherList"
+      mediaIds:
+        $ref: "#/definitions/TextMatcherList"
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  Locale:
+    type: "object"
+    properties:
+      language:
+        type: "string"
+      script:
+        type: "string"
+      country:
+        type: "string"
+      variant:
+        type: "string"
+      extensionKeys:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+      unicodeLocaleAttributes:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+      unicodeLocaleKeys:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+      iso3Language:
+        type: "string"
+      iso3Country:
+        type: "string"
+      displayLanguage:
+        type: "string"
+      displayScript:
+        type: "string"
+      displayCountry:
+        type: "string"
+      displayVariant:
+        type: "string"
+      displayName:
+        type: "string"
+  AVAttributes:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      bitrate:
+        type: "integer"
+        format: "int32"
+      avFileFormat:
+        type: "string"
+        enum:
+        - "HASP"
+        - "H264"
+        - "MP4"
+        - "M4A"
+        - "M4V"
+        - "MP3"
+        - "WVC1"
+        - "WM"
+        - "WMP"
+        - "FLV"
+        - "DGPP"
+        - "RM"
+        - "RAM"
+        - "RA"
+        - "MPEG2"
+        - "HTML"
+        - "UNKNOWN"
+      audioAttributes:
+        $ref: "#/definitions/AudioAttributes"
+      videoAttributes:
+        $ref: "#/definitions/VideoAttributes"
+  ConstraintPage:
+    type: "object"
+    properties:
+      reason:
+        type: "string"
+      defaultBundleKey:
+        type: "array"
+        items:
+          type: "string"
+  Page:
+    type: "object"
+    required:
+    - "broadcasters"
+    - "title"
+    properties:
+      crids:
+        type: "array"
+        xml:
+          name: "crid"
+        items:
+          $ref: "#/definitions/Crid"
+      alternativeUrls:
+        type: "array"
+        xml:
+          name: "alternativeUrl"
+        items:
+          type: "string"
+      broadcasters:
+        type: "array"
+        xml:
+          name: "broadcaster"
+        items:
+          $ref: "#/definitions/Broadcaster"
+      portal:
+        $ref: "#/definitions/Portal"
+      title:
+        type: "string"
+        minLength: 1
+        maxLength: 2147483647
+      subTitle:
+        type: "string"
+      keywords:
+        type: "array"
+        xml:
+          name: "keyword"
+        items:
+          type: "string"
+      genres:
+        type: "array"
+        xml:
+          name: "genre"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Genre"
+      summary:
+        type: "string"
+      paragraphs:
+        type: "array"
+        xml:
+          name: "paragraph"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Paragraph"
+      tags:
+        type: "array"
+        xml:
+          name: "tag"
+        items:
+          type: "string"
+      referrals:
+        type: "array"
+        xml:
+          name: "referral"
+        items:
+          $ref: "#/definitions/Referral"
+      links:
+        type: "array"
+        xml:
+          name: "link"
+        items:
+          $ref: "#/definitions/Link"
+      embeds:
+        type: "array"
+        xml:
+          name: "embed"
+        items:
+          $ref: "#/definitions/Embed"
+      statRefs:
+        type: "array"
+        xml:
+          name: "statRef"
+        items:
+          type: "string"
+      images:
+        type: "array"
+        xml:
+          name: "image"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Image"
+      relations:
+        type: "array"
+        xml:
+          name: "relation"
+        uniqueItems: true
+        items:
+          $ref: "#/definitions/Relation"
+  StandaloneCue:
+    type: "object"
+    properties:
+      parent:
+        type: "string"
+        xml:
+          attribute: true
+      sequence:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      start:
+        $ref: "#/definitions/Duration"
+      end:
+        $ref: "#/definitions/Duration"
+      locale:
+        $ref: "#/definitions/Locale"
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "CAPTION"
+        - "TRANSLATION"
+      offset:
+        $ref: "#/definitions/Duration"
+      id:
+        type: "string"
+      content:
+        type: "string"
+        readOnly: true
+    xml:
+      name: "standaloneCue"
+  MediaFacets:
+    type: "object"
+    properties:
+      titles:
+        $ref: "#/definitions/MediaFacet"
+      types:
+        $ref: "#/definitions/MediaFacet"
+      avTypes:
+        $ref: "#/definitions/MediaFacet"
+      sortDates:
+        $ref: "#/definitions/DateRangeFacets"
+      broadcasters:
+        $ref: "#/definitions/MediaFacet"
+      genres:
+        $ref: "#/definitions/MediaSearchableTermFacet"
+      tags:
+        $ref: "#/definitions/ExtendedMediaFacet"
+      durations:
+        $ref: "#/definitions/DateRangeFacets"
+      descendantOf:
+        $ref: "#/definitions/MemberRefFacet"
+      episodeOf:
+        $ref: "#/definitions/MemberRefFacet"
+      memberOf:
+        $ref: "#/definitions/MemberRefFacet"
+      relations:
+        $ref: "#/definitions/RelationFacetList"
+      ageRatings:
+        $ref: "#/definitions/MediaFacet"
+      contentRatings:
+        $ref: "#/definitions/MediaFacet"
+      filter:
+        $ref: "#/definitions/MediaSearch"
+      faceted:
+        type: "boolean"
+        default: false
+  TermSearch:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      ids:
+        $ref: "#/definitions/TextMatcherList"
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  DisplayablePredicateMediaObject:
+    type: "object"
+    properties:
+      reason:
+        type: "string"
+      defaultBundleKey:
+        type: "array"
+        items:
+          type: "string"
+  MemberRefSearch:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      mediaIds:
+        $ref: "#/definitions/TextMatcherList"
+      types:
+        $ref: "#/definitions/TextMatcherList"
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  PageSearch:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      text:
+        $ref: "#/definitions/SimpleTextMatcher"
+      broadcasters:
+        $ref: "#/definitions/TextMatcherList"
+      types:
+        $ref: "#/definitions/TextMatcherList"
+      portals:
+        $ref: "#/definitions/TextMatcherList"
+      sections:
+        $ref: "#/definitions/TextMatcherList"
+      genres:
+        $ref: "#/definitions/TextMatcherList"
+      tags:
+        $ref: "#/definitions/ExtendedTextMatcherList"
+      keywords:
+        $ref: "#/definitions/ExtendedTextMatcherList"
+      sortDates:
+        $ref: "#/definitions/DateRangeMatcherList"
+      relations:
+        $ref: "#/definitions/RelationSearchList"
+      links:
+        $ref: "#/definitions/AssociationSearchList"
+      referrals:
+        $ref: "#/definitions/AssociationSearchList"
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  DisplayablePredicatePage:
+    type: "object"
+    properties:
+      reason:
+        type: "string"
+      defaultBundleKey:
+        type: "array"
+        items:
+          type: "string"
+  Program:
+    allOf:
+    - $ref: "#/definitions/MediaObject"
+    - type: "object"
+      properties:
+        episodeOf:
+          type: "array"
+          uniqueItems: true
+          items:
+            $ref: "#/definitions/MemberRef"
+        poProgTypeLegacy:
+          type: "string"
+          xml:
+            name: "poProgType"
+        segments:
+          type: "array"
+          xml:
+            name: "segment"
+            wrapped: true
+          uniqueItems: true
+          items:
+            $ref: "#/definitions/Segment"
+      xml:
+        name: "program"
+  ProfileDefinitionMediaObject:
+    type: "object"
+    properties:
+      profile:
+        $ref: "#/definitions/Profile"
+      since:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      filter:
+        $ref: "#/definitions/AbstractFilterMediaObject"
+      name:
+        type: "string"
+      timeStamp:
+        type: "integer"
+        format: "int64"
+      predicate:
+        $ref: "#/definitions/DisplayablePredicateMediaObject"
+      defaultBundleKey:
+        type: "array"
+        items:
+          type: "string"
+      reason:
+        type: "string"
+  ScheduleSearchResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/SearchResultItemApiScheduleEvent"
+      facets:
+        $ref: "#/definitions/MediaFacetsResult"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "scheduleSearchResult"
+  RelationDefinitionIdentifier:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        pattern: "[A-Z0-9_-]{4,}"
+      broadcaster:
+        type: "string"
+  Prediction:
+    type: "object"
+    required:
+    - "issueDate"
+    - "platform"
+    - "state"
+    properties:
+      issueDate:
+        type: "string"
+        format: "date-time"
+      state:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "ANNOUNCED"
+        - "REALIZED"
+        - "REVOKED"
+      publishStart:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      publishStop:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      mediaObject:
+        $ref: "#/definitions/MediaObject"
+      platform:
+        type: "string"
+        enum:
+        - "INTERNETVOD"
+        - "TVVOD"
+        - "PLUSVOD"
+        - "NPOPLUSVOD"
+  MediaForm:
+    type: "object"
+    properties:
+      searches:
+        $ref: "#/definitions/MediaSearch"
+      facets:
+        $ref: "#/definitions/MediaFacets"
+      sorted:
+        type: "boolean"
+        default: false
+      text:
+        type: "string"
+      faceted:
+        type: "boolean"
+        default: false
+      highlight:
+        type: "boolean"
+        default: false
+      sort:
+        type: "object"
+        additionalProperties:
+          type: "string"
+          enum:
+          - "ASC"
+          - "DESC"
+    xml:
+      name: "mediaForm"
+  MemberRefFacet:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/MediaSearch"
+      threshold:
+        type: "integer"
+        format: "int32"
+      sort:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "VALUE_ASC"
+        - "VALUE_DESC"
+        - "COUNT_ASC"
+        - "COUNT_DESC"
+      max:
+        type: "integer"
+        format: "int32"
+      include:
+        type: "string"
+      script:
+        type: "string"
+      subSearch:
+        $ref: "#/definitions/MemberRefSearch"
+  Duration:
+    type: "object"
+    properties:
+      seconds:
+        type: "integer"
+        format: "int64"
+      units:
+        type: "array"
+        items:
+          $ref: "#/definitions/TemporalUnit"
+      negative:
+        type: "boolean"
+        default: false
+      zero:
+        type: "boolean"
+        default: false
+      nano:
+        type: "integer"
+        format: "int32"
+  PageResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/Page"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "pageResult"
+  MediaSearchResult:
+    type: "object"
+    properties:
+      facets:
+        $ref: "#/definitions/MediaFacetsResult"
+      selectedFacets:
+        $ref: "#/definitions/MediaFacetsResult"
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      size:
+        type: "integer"
+        format: "int32"
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/SearchResultItemMediaObject"
+    xml:
+      name: "mediaSearchResult"
+  ScheduleEventIdentifier:
+    type: "object"
+    properties:
+      channel:
+        type: "string"
+        enum:
+        - "NED1"
+        - "NED2"
+        - "NED3"
+        - "RAD1"
+        - "RAD2"
+        - "RAD3"
+        - "RAD4"
+        - "RAD5"
+        - "RAD6"
+        - "RTL4"
+        - "RTL5"
+        - "SBS6"
+        - "RTL7"
+        - "VERO"
+        - "NET5"
+        - "RTL8"
+        - "REGI"
+        - "OFRY"
+        - "NOOR"
+        - "RTVD"
+        - "OOST"
+        - "GELD"
+        - "FLEV"
+        - "BRAB"
+        - "REGU"
+        - "NORH"
+        - "WEST"
+        - "RIJN"
+        - "L1TV"
+        - "OZEE"
+        - "TVDR"
+        - "AT5_"
+        - "RNN7"
+        - "BVNT"
+        - "EEN_"
+        - "KETN"
+        - "VTM_"
+        - "KA2_"
+        - "VT4_"
+        - "LUNE"
+        - "LDUE"
+        - "RTBF"
+        - "ARD_"
+        - "ZDF_"
+        - "WDR_"
+        - "N_3_"
+        - "SUDW"
+        - "SWF_"
+        - "RTL_"
+        - "SAT1"
+        - "PRO7"
+        - "_3SAT"
+        - "KABE"
+        - "ARTE"
+        - "T5ME"
+        - "FRA2"
+        - "FRA3"
+        - "BBC1"
+        - "BBC2"
+        - "BBTH"
+        - "BBTC"
+        - "BBCF"
+        - "BBFC"
+        - "BBCP"
+        - "TRTI"
+        - "SHOW"
+        - "LIGT"
+        - "TURK"
+        - "RRTM"
+        - "RMBC"
+        - "RART"
+        - "ARTM"
+        - "TVBS"
+        - "ASIA"
+        - "TIVI"
+        - "B4UM"
+        - "PCNE"
+        - "PATN"
+        - "ZEET"
+        - "ZEEC"
+        - "TVE_"
+        - "RAI_"
+        - "RAID"
+        - "RAIT"
+        - "TEVE"
+        - "ERTS"
+        - "STV_"
+        - "NTV_"
+        - "NOSJ"
+        - "CULT"
+        - "_101_"
+        - "PO24"
+        - "HILV"
+        - "HOLL"
+        - "GESC"
+        - "_3VCN"
+        - "_3VOS"
+        - "NEDE"
+        - "STER"
+        - "OMEG"
+        - "NCRV"
+        - "OPVO"
+        - "CONS"
+        - "HUMO"
+        - "DIER"
+        - "ENTE"
+        - "FASH"
+        - "COMC"
+        - "TBN_"
+        - "DISC"
+        - "ZONE"
+        - "ANPL"
+        - "CLUB"
+        - "NAGE"
+        - "TRAC"
+        - "NGHD"
+        - "WILD"
+        - "GARU"
+        - "ZAZA"
+        - "FAM7"
+        - "DTAL"
+        - "SCIE"
+        - "CIVI"
+        - "DIHD"
+        - "HIST"
+        - "TRAV"
+        - "HETG"
+        - "GOED"
+        - "BABY"
+        - "DH1_"
+        - "LITV"
+        - "LIVE"
+        - "STAR"
+        - "WEER"
+        - "REAL"
+        - "SCIF"
+        - "_13ST"
+        - "CARC"
+        - "NOSN"
+        - "HISH"
+        - "NICK"
+        - "NIJN"
+        - "NIKT"
+        - "NIKH"
+        - "CART"
+        - "BOOM"
+        - "CNN_"
+        - "BBCW"
+        - "EURN"
+        - "SKNE"
+        - "BLOO"
+        - "CNBC"
+        - "PALJ"
+        - "ALJA"
+        - "FOXN"
+        - "MTV_"
+        - "MTV2"
+        - "HITS"
+        - "BASE"
+        - "MTVB"
+        - "TMF_"
+        - "TMFN"
+        - "TMFP"
+        - "TMFY"
+        - "TVOR"
+        - "VH1E"
+        - "VH1C"
+        - "PERC"
+        - "MEZZ"
+        - "EURO"
+        - "EUR2"
+        - "EXTR"
+        - "MOTO"
+        - "SAIL"
+        - "ESPN"
+        - "NASE"
+        - "SP11"
+        - "SP12"
+        - "SP13"
+        - "SP14"
+        - "SP15"
+        - "SP16"
+        - "SP17"
+        - "SP18"
+        - "S1HD"
+        - "FIL1"
+        - "FIL2"
+        - "FIL3"
+        - "FL11"
+        - "FL1P"
+        - "FL12"
+        - "FL13"
+        - "FLHD"
+        - "MGMM"
+        - "TCM_"
+        - "HALL"
+        - "ACNW"
+        - "RHUS"
+        - "PLAY"
+        - "ADUL"
+        - "PSPI"
+        - "HUST"
+        - "OXMO"
+        - "REGR"
+        - "RFRY"
+        - "RNOO"
+        - "ROST"
+        - "RGEL"
+        - "RFLE"
+        - "RBRA"
+        - "RUTR"
+        - "RNOH"
+        - "RWST"
+        - "RRIJ"
+        - "LRAD"
+        - "RZEE"
+        - "COMM"
+        - "RVER"
+        - "SLAM"
+        - "SKYR"
+        - "RTLF"
+        - "BNRN"
+        - "KINK"
+        - "PCAZ"
+        - "QMUS"
+        - "R538"
+        - "GOLD"
+        - "ARRO"
+        - "FUNX"
+        - "CLAS"
+        - "BEL1"
+        - "BEL2"
+        - "KLAR"
+        - "BBR1"
+        - "BBR2"
+        - "BBR3"
+        - "BBR4"
+        - "BBWS"
+        - "BBCX"
+        - "NDR3"
+        - "WDR4"
+        - "WDR3"
+        - "D24K"
+        - "H1NL"
+        - "SYFY"
+        - "SBS9"
+        - "DIXD"
+        - "BRNL"
+        - "FOXL"
+        - "TLC_"
+        - "VRTC"
+        - "BCFS"
+        - "FXNL"
+        - "AMC_"
+        - "FLM1"
+      start:
+        type: "string"
+        format: "date-time"
+      startInstant:
+        type: "integer"
+        format: "int64"
+  DescendantRef:
+    type: "object"
+    properties:
+      midRef:
+        type: "string"
+        xml:
+          attribute: true
+      urnRef:
+        type: "string"
+        xml:
+          attribute: true
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "MEDIA"
+        - "PROGRAM"
+        - "BROADCAST"
+        - "CLIP"
+        - "STRAND"
+        - "TRAILER"
+        - "MOVIE"
+        - "GROUP"
+        - "SERIES"
+        - "SEASON"
+        - "UMBRELLA"
+        - "ARCHIVE"
+        - "COLLECTION"
+        - "PLAYLIST"
+        - "ALBUM"
+        - "SEGMENT"
+        - "TRACK"
+        - "VISUALRADIO"
+        - "RECORDING"
+        - "PROMO"
+  RelationFacet:
+    type: "object"
+    properties:
+      threshold:
+        type: "integer"
+        format: "int32"
+      sort:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "VALUE_ASC"
+        - "VALUE_DESC"
+        - "COUNT_ASC"
+        - "COUNT_DESC"
+      max:
+        type: "integer"
+        format: "int32"
+      name:
+        type: "string"
+        xml:
+          attribute: true
+      subSearch:
+        $ref: "#/definitions/RelationSearch"
+      filter:
+        $ref: "#/definitions/MediaSearch"
+      include:
+        type: "string"
+      script:
+        type: "string"
+      caseSensitive:
+        type: "boolean"
+        xml:
+          attribute: true
+        default: false
+  RelationDefinition:
+    type: "object"
+    properties:
+      type:
+        type: "string"
+        pattern: "[A-Z0-9_-]{4,}"
+      broadcaster:
+        type: "string"
+      displayText:
+        type: "string"
+      id:
+        $ref: "#/definitions/RelationDefinitionIdentifier"
+  SecondaryLifestyle:
+    type: "object"
+  DateRangeMatcherList:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      empty:
+        type: "boolean"
+        default: false
+  SubtitlesSearchResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/SearchResultItemStandaloneCue"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "subtitlesSearchResult"
+  ScheduleResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/ApiScheduleEvent"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "scheduleResult"
+  AbstractSearch:
+    type: "object"
+  Screen:
+    type: "object"
+    required:
+    - "description"
+    - "title"
+    - "url"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      url:
+        type: "string"
+      screenOf:
+        type: "array"
+        items:
+          $ref: "#/definitions/MediaRef"
+      images:
+        type: "array"
+        xml:
+          name: "image"
+          namespace: "urn:vpro:shared:2009"
+          wrapped: true
+        items:
+          $ref: "#/definitions/Image"
+  MultipleFacetsResult:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        xml:
+          attribute: true
+      facets:
+        type: "array"
+        xml:
+          name: "facet"
+        items:
+          $ref: "#/definitions/TermFacetResultItem"
+  TermWrapper:
+    type: "object"
+  MediaResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/MediaObject"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "mediaResult"
+  SuggestResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/Suggestion"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "suggestResult"
+  Crid:
+    type: "object"
+    properties:
+      value:
+        type: "string"
+  RelationSearchList:
+    type: "object"
+  Segment:
+    allOf:
+    - $ref: "#/definitions/MediaObject"
+    - type: "object"
+      properties: {}
+      xml:
+        name: "segment"
+  Relation:
+    type: "object"
+    required:
+    - "definition"
+    properties:
+      definition:
+        $ref: "#/definitions/RelationDefinition"
+      uriRef:
+        type: "string"
+        xml:
+          attribute: true
+        minLength: 0
+        maxLength: 255
+      text:
+        type: "string"
+        minLength: 0
+        maxLength: 255
+      type:
+        type: "string"
+        xml:
+          attribute: true
+      broadcaster:
+        type: "string"
+        xml:
+          attribute: true
+  SearchResultItemStandaloneCue:
+    type: "object"
+    properties:
+      score:
+        type: "number"
+        format: "float"
+        xml:
+          attribute: true
+      highlights:
+        type: "array"
+        xml:
+          name: "highlight"
+        items:
+          $ref: "#/definitions/HighLight"
+      result:
+        $ref: "#/definitions/StandaloneCue"
+  PortalRestriction:
+    type: "object"
+  ProfileDefinitionPage:
+    type: "object"
+    properties:
+      profile:
+        $ref: "#/definitions/Profile"
+      since:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      filter:
+        $ref: "#/definitions/AbstractFilterPage"
+      name:
+        type: "string"
+      timeStamp:
+        type: "integer"
+        format: "int64"
+      predicate:
+        $ref: "#/definitions/DisplayablePredicatePage"
+      defaultBundleKey:
+        type: "array"
+        items:
+          type: "string"
+      reason:
+        type: "string"
+  TermFacetResultItem:
+    type: "object"
+    properties:
+      count:
+        type: "integer"
+        format: "int64"
+      selected:
+        type: "boolean"
+        default: false
+      id:
+        type: "string"
+      value:
+        type: "string"
+  InputStream:
+    type: "object"
+  ExtendedMediaFacet:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/MediaSearch"
+      threshold:
+        type: "integer"
+        format: "int32"
+      max:
+        type: "integer"
+        format: "int32"
+      include:
+        type: "string"
+      script:
+        type: "string"
+  ProgramResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/Program"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "programResult"
+  Title:
+    type: "object"
+    required:
+    - "type"
+    - "value"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      owner:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "BROADCASTER"
+        - "RADIOBOX"
+        - "NEBO"
+        - "NPO"
+        - "MIS"
+        - "CERES"
+        - "PLUTO"
+        - "PROJECTM"
+        - "WHATS_ON"
+        - "IMMIX"
+      type:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "MAIN"
+        - "SHORT"
+        - "SUB"
+        - "EPISODE"
+        - "ORIGINAL"
+        - "KICKER"
+        - "LEXICO"
+        - "WORK"
+        - "ABBREVIATION"
+      parent:
+        $ref: "#/definitions/MediaObject"
+      value:
+        type: "string"
+  AudioAttributes:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      audioCoding:
+        type: "string"
+      numberOfChannels:
+        type: "integer"
+        format: "int32"
+      language:
+        type: "string"
+  ProgramSearchResult:
+    type: "object"
+    properties:
+      facets:
+        $ref: "#/definitions/MediaFacetsResult"
+      selectedFacets:
+        $ref: "#/definitions/MediaFacetsResult"
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      size:
+        type: "integer"
+        format: "int32"
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/SearchResultItemProgram"
+    xml:
+      name: "programSearchResult"
+  Paragraph:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      body:
+        type: "string"
+      image:
+        $ref: "#/definitions/Image"
+  PageFacet:
+    type: "object"
+    properties:
+      filter:
+        $ref: "#/definitions/PageSearch"
+      threshold:
+        type: "integer"
+        format: "int32"
+      sort:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "VALUE_ASC"
+        - "VALUE_DESC"
+        - "COUNT_ASC"
+        - "COUNT_DESC"
+      max:
+        type: "integer"
+        format: "int32"
+      include:
+        type: "string"
+      script:
+        type: "string"
+  AbstractFilterPage:
+    type: "object"
+    properties:
+      constraint:
+        $ref: "#/definitions/ConstraintPage"
+      predicate:
+        $ref: "#/definitions/ConstraintPage"
+      defaultBundleKey:
+        type: "array"
+        items:
+          type: "string"
+      reason:
+        type: "string"
+  MediaSearch:
+    type: "object"
+    properties:
+      match:
+        type: "string"
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+      text:
+        $ref: "#/definitions/SimpleTextMatcher"
+      mediaIds:
+        $ref: "#/definitions/TextMatcherList"
+      types:
+        $ref: "#/definitions/TextMatcherList"
+      avTypes:
+        $ref: "#/definitions/TextMatcherList"
+      sortDates:
+        $ref: "#/definitions/DateRangeMatcherList"
+      publishDates:
+        $ref: "#/definitions/DateRangeMatcherList"
+      broadcasters:
+        $ref: "#/definitions/TextMatcherList"
+      locations:
+        $ref: "#/definitions/TextMatcherList"
+      tags:
+        $ref: "#/definitions/ExtendedTextMatcherList"
+      genres:
+        $ref: "#/definitions/TextMatcherList"
+      durations:
+        $ref: "#/definitions/DateRangeMatcherList"
+      descendantOf:
+        $ref: "#/definitions/TextMatcherList"
+      episodeOf:
+        $ref: "#/definitions/TextMatcherList"
+      memberOf:
+        $ref: "#/definitions/TextMatcherList"
+      relations:
+        $ref: "#/definitions/RelationSearchList"
+      scheduleEvents:
+        $ref: "#/definitions/ScheduleEventSearch"
+      ageRatings:
+        $ref: "#/definitions/TextMatcherList"
+      contentRatings:
+        $ref: "#/definitions/TextMatcherList"
+      matchAttribute:
+        type: "string"
+        xml:
+          name: "match"
+          attribute: true
+        enum:
+        - "MUST"
+        - "SHOULD"
+        - "NOT"
+  Editor:
+    type: "object"
+    properties:
+      principalId:
+        type: "string"
+      givenName:
+        type: "string"
+      familyName:
+        type: "string"
+      displayName:
+        type: "string"
+      email:
+        type: "string"
+      lastLogin:
+        type: "integer"
+        format: "int64"
+      roles:
+        type: "array"
+        uniqueItems: true
+        items:
+          type: "string"
+      employer:
+        $ref: "#/definitions/Broadcaster"
+      id:
+        type: "string"
+        xml:
+          attribute: true
+  ScreenResult:
+    type: "object"
+    properties:
+      total:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      offset:
+        type: "integer"
+        format: "int64"
+        xml:
+          attribute: true
+      max:
+        type: "integer"
+        format: "int32"
+        xml:
+          attribute: true
+      items:
+        type: "array"
+        xml:
+          name: "item"
+          wrapped: true
+        readOnly: true
+        items:
+          $ref: "#/definitions/Screen"
+      size:
+        type: "integer"
+        format: "int32"
+    xml:
+      name: "secondscreenResult"
+  MultipleEntryMediaObject:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      result:
+        $ref: "#/definitions/MediaObject"
+      error:
+        type: "string"
+      reason:
+        $ref: "#/definitions/PredicateTestResultMediaObject"
+  Location:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      creationDate:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      lastModified:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      createdBy:
+        $ref: "#/definitions/Editor"
+      lastModifiedBy:
+        $ref: "#/definitions/Editor"
+      workflow:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "DRAFT"
+        - "FOR_APPROVAL"
+        - "REFUSED"
+        - "FOR_PUBLICATION"
+        - "FOR_REPUBLICATION"
+        - "PUBLISHED"
+        - "MERGED"
+        - "PARENT_REVOKED"
+        - "REVOKED"
+        - "FOR_DELETION"
+        - "DELETED"
+      programUrl:
+        type: "string"
+      avAttributes:
+        $ref: "#/definitions/AVAttributes"
+      mediaObject:
+        $ref: "#/definitions/MediaObject"
+      subtitles:
+        type: "string"
+      offset:
+        $ref: "#/definitions/Duration"
+      duration:
+        $ref: "#/definitions/Duration"
+      owner:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "BROADCASTER"
+        - "RADIOBOX"
+        - "NEBO"
+        - "NPO"
+        - "MIS"
+        - "CERES"
+        - "PLUTO"
+        - "PROJECTM"
+        - "WHATS_ON"
+        - "IMMIX"
+      neboId:
+        type: "integer"
+        format: "int64"
+      platform:
+        type: "string"
+        xml:
+          attribute: true
+        enum:
+        - "INTERNETVOD"
+        - "TVVOD"
+        - "PLUSVOD"
+        - "NPOPLUSVOD"
+      authorityUpdate:
+        type: "boolean"
+        default: false
+      ceresLocation:
+        type: "boolean"
+        default: false
+      avFileFormat:
+        type: "string"
+        enum:
+        - "HASP"
+        - "H264"
+        - "MP4"
+        - "M4A"
+        - "M4V"
+        - "MP3"
+        - "WVC1"
+        - "WM"
+        - "WMP"
+        - "FLV"
+        - "DGPP"
+        - "RM"
+        - "RAM"
+        - "RA"
+        - "MPEG2"
+        - "HTML"
+        - "UNKNOWN"
+      bitrate:
+        type: "integer"
+        format: "int32"
+      authorityRecord:
+        $ref: "#/definitions/LocationAuthorityRecord"
+      hash:
+        type: "integer"
+        format: "int64"
+      activation:
+        type: "boolean"
+        default: false
+      deactivation:
+        type: "boolean"
+        default: false
+      publishable:
+        type: "boolean"
+        default: false
+      revocable:
+        type: "boolean"
+        default: false
+      deleted:
+        type: "boolean"
+        default: false
+      inAllowedPublicationWindow:
+        type: "boolean"
+        default: false
+      publishStart:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      publishStop:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      publishDate:
+        type: "string"
+        format: "date-time"
+        xml:
+          attribute: true
+      urn:
+        type: "string"
+        xml:
+          attribute: true

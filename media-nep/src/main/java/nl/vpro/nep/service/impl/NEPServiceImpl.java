@@ -20,6 +20,7 @@ import nl.vpro.nep.domain.*;
 import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
+import nl.vpro.nep.sam.model.StreamAccessItem;
 import nl.vpro.nep.service.*;
 import nl.vpro.util.FileMetadata;
 
@@ -34,6 +35,8 @@ public class NEPServiceImpl implements NEPService {
     private final Provider<NEPDownloadService> nepftpDownloadService;
     private final Provider<NEPItemizeService> itemizeService;
     private final Provider<NEPSAMService> samService;
+    private final Provider<NEPPlayerTokenService> tokenService;
+
 
 
 
@@ -44,8 +47,8 @@ public class NEPServiceImpl implements NEPService {
         @Named("NEPUploadService") Provider<NEPUploadService> nepftpUploadService,
         @Named("NEPDownloadService") Provider<NEPDownloadService> nepftpDownloadService,
         @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
-        @Named("NEPSAMService") Provider<NEPSAMService> samService
-
+        @Named("NEPSAMService") Provider<NEPSAMService> samService,
+        @Named("NEPTokenService") Provider<NEPPlayerTokenService> tokenService
 
         ) {
         this.transcodeService = transcodeService;
@@ -53,6 +56,8 @@ public class NEPServiceImpl implements NEPService {
         this.nepftpDownloadService = nepftpDownloadService;
         this.itemizeService = itemizeService;
         this.samService = samService;
+        this.tokenService = tokenService;
+
     }
 
     @Override
@@ -100,19 +105,19 @@ public class NEPServiceImpl implements NEPService {
 
     @Override
     public WideVineResponse widevineToken(WideVineRequest request) {
-        return samService.get().widevineToken(request);
+        return tokenService.get().widevineToken(request);
 
     }
 
     @Override
     public PlayreadyResponse playreadyToken(PlayreadyRequest request) {
-        return samService.get().playreadyToken(request);
+        return tokenService.get().playreadyToken(request);
 
     }
 
     @Override
-    public String streamUrl(String streamId, StreamUrlRequest streamUrlRequest) {
-        return samService.get().streamUrl(streamId, streamUrlRequest);
+    public String streamAccess(String streamId, StreamAccessItem streamUrlRequest) {
+        return samService.get().streamAccess(streamId, streamUrlRequest);
     }
 
     @Override

@@ -46,10 +46,10 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
     @Inject
     public NEPSSHJDownloadServiceImpl(
 
-        @Value("${nep.sftp.host}") String ftpHost,
-        @Value("${nep.sftp.username}") String username,
-        @Value("${nep.sftp.password}") String password,
-        @Value("${nep.sftp.hostkey}") String hostKey
+        @Value("${nep.itemizer-download.host}") String ftpHost,
+        @Value("${nep.itemizer-download.username}") String username,
+        @Value("${nep.itemizer-download.password}") String password,
+        @Value("${nep.itemizer-download.hostkey}") String hostKey
     ) {
         this.ftpHost = ftpHost;
         this.username = username;
