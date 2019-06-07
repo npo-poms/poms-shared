@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.com.neovisionaries.i18n.LanguageCode;
+import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * @author Michiel Meeuwissen
