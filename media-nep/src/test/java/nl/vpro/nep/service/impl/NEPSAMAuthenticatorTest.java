@@ -47,7 +47,7 @@ public class NEPSAMAuthenticatorTest {
             .setExpiration(DateUtils.toDate(Instant.now().plus(Duration.ofDays(14))))
             .compact();
 
-        stubFor(post(urlEqualTo("/token"))
+        stubFor(post(urlEqualTo("/v2/token"))
             .willReturn(
                 aResponse()
                     .withBody("{'token': '" + token + "'}")
