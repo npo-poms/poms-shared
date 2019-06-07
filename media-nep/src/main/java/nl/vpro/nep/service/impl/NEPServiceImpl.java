@@ -104,14 +104,14 @@ public class NEPServiceImpl implements NEPService {
 
 
     @Override
-    public WideVineResponse widevineToken(WideVineRequest request) {
-        return tokenService.get().widevineToken(request);
+    public WideVineResponse widevineToken(String ip) {
+        return tokenService.get().widevineToken(ip);
 
     }
 
     @Override
-    public PlayreadyResponse playreadyToken(PlayreadyRequest request) {
-        return tokenService.get().playreadyToken(request);
+    public PlayreadyResponse playreadyToken(String ip) {
+        return tokenService.get().playreadyToken(ip);
 
     }
 

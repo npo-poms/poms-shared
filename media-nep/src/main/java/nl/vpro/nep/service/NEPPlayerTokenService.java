@@ -1,8 +1,6 @@
 package nl.vpro.nep.service;
 
-import nl.vpro.nep.domain.PlayreadyRequest;
 import nl.vpro.nep.domain.PlayreadyResponse;
-import nl.vpro.nep.domain.WideVineRequest;
 import nl.vpro.nep.domain.WideVineResponse;
 
 /**
@@ -12,8 +10,8 @@ import nl.vpro.nep.domain.WideVineResponse;
 public interface NEPPlayerTokenService {
 
 
-    WideVineResponse widevineToken(WideVineRequest request);
+    WideVineResponse widevineToken(String ip);
 
-    PlayreadyResponse playreadyToken(PlayreadyRequest request);
+    PlayreadyResponse playreadyToken(String ip);
 
 }
