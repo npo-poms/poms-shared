@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.meeuw.i18n.Country;
+import org.meeuw.i18n.Region;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -21,7 +22,7 @@ public class CountryWrapper {
 
     @XmlAttribute
     @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
-    private Country code;
+    private Region code;
 
     public CountryWrapper() {
     }
@@ -30,7 +31,7 @@ public class CountryWrapper {
         this.code = Country.getByCode(code).orElseThrow(() -> new IllegalArgumentException("no such country  + code"));
     }
 
-    public CountryWrapper(Country code) {
+    public CountryWrapper(Region code) {
         if (code == null) {
             throw new IllegalArgumentException();
         }

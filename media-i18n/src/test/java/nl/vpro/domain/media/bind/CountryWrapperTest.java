@@ -1,11 +1,16 @@
 package nl.vpro.domain.media.bind;
 
+import be.olsson.i18n.subdivision.SubdivisionFactory;
+
 import java.util.Locale;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.meeuw.i18n.CurrentCountry;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
+import com.neovisionaries.i18n.CountryCode;
+
+import nl.vpro.util.CommandExecutor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,14 +21,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CountryWrapperTest {
     @Test
     public void getNameUKNL() {
-        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB);
+        CountryWrapper wrapper = new CountryWrapper(new CurrentCountry(CountryCode.GB));
         assertThat(wrapper.getName()).isEqualTo("Verenigd Koninkrijk");
 
     }
 
     @Test
     public void getNameGBNL() {
-        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB_GBN);
+        CountryWrapper wrapper = new CountryWrapper(SubdivisionFactory.getSubdivision(CountryCode.GB, "GBN"));
         assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië");
 
     }
