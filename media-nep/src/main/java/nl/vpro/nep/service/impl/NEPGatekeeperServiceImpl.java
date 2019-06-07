@@ -54,7 +54,7 @@ import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
 import nl.vpro.nep.domain.workflow.WorkflowList;
-import nl.vpro.nep.service.NEPTranscodeService;
+import nl.vpro.nep.service.NEPGatekeeperService;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.FilteringIterator;
 import nl.vpro.util.MaxOffsetIterator;
@@ -64,11 +64,19 @@ import nl.vpro.util.TimeUtils;
 /**
  * Wrapper for https://npo-webonly-gatekeeper.nepworldwide.nl
  *
+
+ *
  * TODO, where's the documentation of that?
+ *
+ *  * http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/swagger-ui.html
+ *
+ *  Swagger:   http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/swagger-ui.html
+ *
+ *  http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/v2/api-docs
  */
 @Slf4j
-@Named("NEPTranscodeService")
-public class NEPTranscodeServiceImpl implements NEPTranscodeService {
+@Named("NEPGatekeeperService")
+public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
 
     public static final HALMapper MAPPER = new HALMapper();
 
@@ -97,15 +105,15 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
     CloseableHttpClient httpClient = null;
 
     @Inject
-    public NEPTranscodeServiceImpl(
-         @Value("${nep.api.baseUrl}") String url,
-         @Value("${nep.api.authorization.username}") String userName,
-         @Value("${nep.api.authorization.password}") String password,
-         @Value("${nep.api.connectTimeout}") String connectTimeout,
-         @Value("${nep.api.connectionRequestTimeout}") String connectionRequestTimeout,
-         @Value("${nep.api.socketTimeout}") String socketTimeout,
-         @Value("${nep.api.pageSize}") int pageSize,
-         @Value("${nep.transcode.sftp.username}") String ftpUserName) {
+    public NEPGatekeeperServiceImpl(
+         @Value("${nep.gatekeeper-api.baseUrl}") String url,
+         @Value("${nep.gatekeeper-api.authorization.username}") String userName,
+         @Value("${nep.gatekeeper-api.authorization.password}") String password,
+         @Value("${nep.gatekeeper-api.connectTimeout}") String connectTimeout,
+         @Value("${nep.gatekeeper-api.connectionRequestTimeout}") String connectionRequestTimeout,
+         @Value("${nep.gatekeeper-api.socketTimeout}") String socketTimeout,
+         @Value("${nep.gatekeeper-api.pageSize}") int pageSize,
+         @Value("${nep.gatekeeper-api.upload.username}") String ftpUserName) {
         this.url = url;
         this.userName = userName;
         this.password = password;
@@ -257,6 +265,6 @@ public class NEPTranscodeServiceImpl implements NEPTranscodeService {
 
     @Override
     public String toString() {
-        return NEPTranscodeServiceImpl.class.getName() + " " + userName + "@" + getWorkflowsEndPoint();
+        return NEPGatekeeperServiceImpl.class.getName() + " " + userName + "@" + getWorkflowsEndPoint();
     }
 }

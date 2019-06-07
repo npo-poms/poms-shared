@@ -44,9 +44,9 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     private final String baseUrl;
 
     public NEPSAMAuthenticator(
-        @Value("${nep.sam.username}") String username,
-        @Value("${nep.sam.password}") String password,
-        @Value("${nep.sam.baseUrl}") String baseUrl
+        @Value("${nep.sam-api.username}") String username,
+        @Value("${nep.sam-api.password}") String password,
+        @Value("${nep.sam-api.baseUrl}") String baseUrl
     ) {
         this.loginRequest = new LoginRequest(username, password);
         this.baseUrl = baseUrl;
@@ -67,7 +67,7 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     protected void authenticate() throws IOException {
         try(CloseableHttpClient httpClient = HttpClients.custom()
             .build()) {
-            String playerUrl = baseUrl + "/token";
+            String playerUrl = baseUrl + "/v2/token";
             HttpClientContext clientContext = HttpClientContext.create();
 
             String json = Jackson2Mapper.getLenientInstance().writeValueAsString(loginRequest);
