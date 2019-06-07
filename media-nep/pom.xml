@@ -139,14 +139,14 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <inputSpec>${project.basedir}/src/main/resources/swagger_v2.yaml</inputSpec>
+              <inputSpec>${project.basedir}/src/main/resources/sam-api/swagger_v2.yaml</inputSpec>
               <generatorName>java</generatorName>
-              <strictSpec>true</strictSpec>
               <apiPackage>nl.vpro.nep.sam.api</apiPackage>
               <modelPackage>nl.vpro.nep.sam.model</modelPackage>
               <invokerPackage>nl.vpro.nep.sam.invoker</invokerPackage>
               <configHelp>false</configHelp>
               <configOptions>
+                <strictSpec>true</strictSpec>
                 <dateLibrary>java8</dateLibrary>
                 <java8>true</java8>
                 <library>resteasy</library>
