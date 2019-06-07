@@ -32,10 +32,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.i18n.Country;
+import org.meeuw.i18n.CurrentCountry;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
@@ -1288,7 +1290,9 @@ public abstract class MediaObject
         return addCountry(country);
 
     }
-
+    public MediaObject addCountry(CountryCode country) {
+        return addCountry(new CurrentCountry(country));
+    }
     public MediaObject addCountry(Country country) {
         nullCheck(country, "country");
 
