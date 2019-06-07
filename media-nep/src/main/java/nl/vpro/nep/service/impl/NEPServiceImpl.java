@@ -30,7 +30,7 @@ import nl.vpro.util.FileMetadata;
  */
 @Named("NEPService")
 public class NEPServiceImpl implements NEPService {
-    private final Provider<NEPTranscodeService> transcodeService;
+    private final Provider<NEPGatekeeperService> gatekeeperService;
     private final Provider<NEPUploadService> nepftpUploadService;
     private final Provider<NEPDownloadService> nepftpDownloadService;
     private final Provider<NEPItemizeService> itemizeService;
@@ -43,7 +43,7 @@ public class NEPServiceImpl implements NEPService {
 
     @Inject
     public NEPServiceImpl(
-        @Named("NEPTranscodeService") Provider<NEPTranscodeService> transcodeService,
+        @Named("NEPGatekeeperService") Provider<NEPGatekeeperService> gatekeeperService,
         @Named("NEPUploadService") Provider<NEPUploadService> nepftpUploadService,
         @Named("NEPDownloadService") Provider<NEPDownloadService> nepftpDownloadService,
         @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
@@ -51,7 +51,7 @@ public class NEPServiceImpl implements NEPService {
         @Named("NEPTokenService") Provider<NEPPlayerTokenService> tokenService
 
         ) {
-        this.transcodeService = transcodeService;
+        this.gatekeeperService = gatekeeperService;
         this.nepftpUploadService = nepftpUploadService;
         this.nepftpDownloadService = nepftpDownloadService;
         this.itemizeService = itemizeService;
@@ -75,14 +75,14 @@ public class NEPServiceImpl implements NEPService {
     @Override
     public WorkflowExecution transcode(
         @Nonnull WorkflowExecutionRequest request) throws IOException {
-        return transcodeService.get().transcode(request);
+        return gatekeeperService.get().transcode(request);
 
     }
 
     @Nonnull
     @Override
     public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
-        return transcodeService.get().getTranscodeStatuses(mid, status, from, limit);
+        return gatekeeperService.get().getTranscodeStatuses(mid, status, from, limit);
 
     }
 
@@ -130,7 +130,7 @@ public class NEPServiceImpl implements NEPService {
 
         }
         try {
-            builder.append("workflows: ").append(transcodeService.get().toString()).append(",");
+            builder.append("workflows: ").append(gatekeeperService.get().toString()).append(",");
         } catch (Exception ignored) {
 
         }
