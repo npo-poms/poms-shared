@@ -17,7 +17,7 @@ import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
  * @author Michiel Meeuwissen
  * @since 5.6
  */
-public interface NEPTranscodeService {
+public interface NEPGatekeeperService {
 
     @Nonnull
     WorkflowExecution transcode(

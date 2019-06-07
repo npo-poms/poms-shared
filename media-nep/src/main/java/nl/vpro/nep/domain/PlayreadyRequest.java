@@ -14,7 +14,8 @@ public class PlayreadyRequest {
     private String authorization_key;
 
 
-    public PlayreadyRequest(String client_ip) {
+    public PlayreadyRequest(String client_ip, String authorization_key) {
         this.client_ip = client_ip;
+        this.authorization_key = authorization_key;
     }
 }

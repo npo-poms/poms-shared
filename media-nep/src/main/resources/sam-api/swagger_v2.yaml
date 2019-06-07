@@ -1,0 +1,1009 @@
+openapi: 3.0.0
+
+info:
+  title: Stream Access Manager
+  description: Get access to a stream in order to view it
+  version: '4.0'
+
+servers:
+  - url: 'https://api-acc.samgcloud.nepworldwide.nl'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key
+
+  schemas:
+
+    Pagination:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: The total amount of items
+        limit:
+          type: integer
+          description: The number of items per page
+        page:
+          type: integer
+          description: The current page number
+        pageCount:
+          type: integer
+          description: The total number of pages
+
+    StreamAccessResponseItem:
+      type: object
+      properties:
+        data:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ApiObject'
+            - $ref: '#/components/schemas/StreamAccessResponseAttributes'
+
+    StreamAccessResponseAttributes:
+      type: object
+      required:
+        - attributes
+      properties:
+        attributes:
+          type: object
+          required:
+            - url
+            - type
+            - cdn
+            - cdnType
+            - options
+          properties:
+            url:
+              type: string
+              description: Url to the stream
+            type:
+              type: string
+              description: Type of the stream
+            cdn:
+              type: string
+              description: Identifier of the used CDN
+            cdnType:
+              $ref: '#/components/schemas/CdnTypeEnum'
+            drm:
+              type: boolean
+              description: 'Flags if the stream is drm encrypted or not, default: true'
+            legacy:
+              type: boolean
+              description: 'Flags if the stream has not been migrated to the new cdn yet, default: false'
+            options:
+              type: object
+              description: 'Extra options passed to the response. Ex. if DAI is enabled or not, default: {}'
+
+    StreamResponseCollection:
+      type: object
+      properties:
+        pagination:
+          $ref: '#/components/schemas/Pagination'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamResponseItem'
+
+    StreamResponseItem:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ApiObject'
+        - $ref: '#/components/schemas/Identity'
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/StreamFlat'
+
+    StreamProfileResponseCollection:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamProfileResponseItem'
+
+    StreamProfileResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/StreamProfileResponseItem'
+
+    StreamProfileResponseItem:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ApiObject'
+        - $ref: '#/components/schemas/Identity'
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/StreamProfileResponseItemAttributes'
+
+    StreamProfileResponseItemAttributes:
+      type: object
+      properties:
+        profile:
+          $ref: '#/components/schemas/ProfileTypeEnum'
+        version:
+          type: integer
+        protocol:
+          $ref: '#/components/schemas/ProtocolTypeEnum'
+        encryptionType:
+          $ref: '#/components/schemas/EncryptionTypeEnum'
+        technicalStatus:
+          $ref: '#/components/schemas/TechnicalStatusEnum'
+
+    StreamProfile:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/StreamProfileItem'
+
+    StreamProfileItem:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ApiObject'
+      properties:
+        attributes:
+          allOf:
+            - $ref: '#/components/schemas/StreamProfileItemAttributes'
+
+    StreamProfileItemAttributes:
+      type: object
+      required:
+        - profile
+      properties:
+        profile:
+          $ref: '#/components/schemas/ProfileTypeEnum'
+        version:
+          type: integer
+
+    StreamProfileItemResponseAttributes:
+      type: object
+      required:
+        - profile
+      properties:
+        profile:
+          $ref: '#/components/schemas/ProfileTypeEnum'
+        version:
+          type: integer
+        protocol:
+          $ref: '#/components/schemas/ProtocolTypeEnum'
+        encryptionType:
+          $ref: '#/components/schemas/EncryptionTypeEnum'
+        technicalStatus:
+          $ref: '#/components/schemas/TechnicalStatusEnum'
+
+    StreamAccessItem:
+      type: object
+      properties:
+        data:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ApiObject'
+            - $ref: '#/components/schemas/StreamAccess'
+
+    StreamAccess:
+      type: object
+      required:
+        - attributes
+      properties:
+        attributes:
+          type: object
+          required:
+            - viewer
+            - ip
+          properties:
+            viewer:
+              type: string
+              description: The viewer requesting the access
+            ip:
+              type: string
+              description: The ip address of the viewer
+            duration:
+              type: integer
+              description: The duration of the access given to the viewer (optional)
+            options:
+              type: string
+              enum:
+                - default
+                - startOver
+            metaInfo:
+              type: array
+              description: Extra information that can be provided to influence the cdn (optional)
+              items: {}
+    Identity:
+      type: object
+      properties:
+        id:
+          type: integer
+    ApiObject:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+        attributes:
+          type: object
+    StreamInputItem:
+      type: object
+      properties:
+        data:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - $ref: '#/components/schemas/ApiObject'
+            - $ref: '#/components/schemas/StreamWithRequiredProperties'
+    StreamOutputItem:
+      type: object
+      properties:
+        data:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/Identity'
+            - $ref: '#/components/schemas/ApiObject'
+            - $ref: '#/components/schemas/StreamOutputAttributes'
+    StreamOutputAttributes:
+      properties:
+        attributes:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/StreamFlat'
+            - $ref: '#/components/schemas/StreamFlatWithDrm'
+            - $ref: '#/components/schemas/StreamFlatReadOnlyProperties'
+            - $ref: '#/components/schemas/StreamWithProfilesResponse'
+    StreamPatchItem:
+      type: object
+      properties:
+        data:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/ApiObject'
+            - $ref: '#/components/schemas/StreamWithoutRequiredProperties'
+    StreamFlatReadOnlyProperties:
+      properties:
+        archivedAt:
+          type: string
+          description: Date at which the stream was archived
+          nullable: true
+        deleteAt:
+          type: string
+          description: Date at which the stream is to be deleted
+          nullable: true
+    StreamWithRequiredProperties:
+      properties:
+        attributes:
+          type: object
+          required:
+            - streamType
+          allOf:
+            - $ref: '#/components/schemas/StreamFlat'
+            - $ref: '#/components/schemas/StreamFlatWithDrm'
+            - $ref: '#/components/schemas/StreamWithProfiles'
+    StreamWithoutRequiredProperties:
+      properties:
+        attributes:
+          type: object
+          allOf:
+            - $ref: '#/components/schemas/StreamFlat'
+            - $ref: '#/components/schemas/StreamFlatWithDrm'
+            - $ref: '#/components/schemas/StreamWithProfiles'
+    StreamFlat:
+      type: object
+      properties:
+        streamType:
+          $ref: '#/components/schemas/StreamTypeEnum'
+        startTime:
+          type: string
+          format: '\d{4}-\d{1,2}-\d{1,2}T\d{1,2}:\d{1,2}:\d{1,2}(\.\d{1,3})?[\+-]\d{1,2}:\d{2}'
+          description: The start time of the stream
+        stopTime:
+          type: string
+          format: '\d{4}-\d{1,2}-\d{1,2}T\d{1,2}:\d{1,2}:\d{1,2}(\.\d{1,3})?[\+-]\d{1,2}:\d{2}'
+          description: The stop time of the stream
+        channel:
+          type: string
+          description: The stream id of the channel where this stream is broadcasted
+        status:
+          type: string
+          enum:
+            - offline
+            - online
+          description: The status of the stream (offline or online)
+        legacy:
+          type: boolean
+          default: false
+          description: 'Flags if the stream has not been migrated to the new cdn yet, default: false'
+        version:
+          type: integer
+    StreamWithProfiles:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamProfileItemAttributes'
+    StreamWithProfilesResponse:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items:
+            $ref: '#/components/schemas/StreamProfileItemResponseAttributes'
+    StreamWithDrm:
+      properties:
+        attributes:
+          type: object
+          properties:
+            drm:
+              type: boolean
+              default: true
+              description: 'Indicates if the stream has drm encryption or not, default: true'
+    StreamFlatWithDrm:
+      properties:
+        drm:
+          type: boolean
+          default: true
+          description: 'Indicates if the stream has drm encryption or not, default: true'
+    StreamTypeEnum:
+      type:  string
+      description: The requested stream type
+      enum:
+        - null
+        - vod
+        - dvr
+        - live
+        - channel
+        - aod
+    CdnTypeEnum:
+      type: string
+      description: "The type of the CDN"
+      enum:
+        - "live"
+        - "overflow"
+        - "maintenance"
+        - "maxcapacity"
+    ProfileTypeEnum:
+      type: string
+      description: "The available for a stream"
+      enum:
+        - 'dash'
+        - 'dash-cenc'
+        - 'hls'
+        - 'hls-aes'
+        - 'hls-fairplay'
+        - 'smooth'
+        - 'smooth-playready'
+    ProtocolTypeEnum:
+      type: string
+      description: "The available protocols for a profile"
+      enum:
+        - 'hls'
+        - 'dash'
+        - 'smooth'
+        - 'progressive'
+    EncryptionTypeEnum:
+      type: string
+      description: 'The available encryption methods for a profile'
+      enum:
+        - 'aes'
+        - 'playready'
+        - 'fairplay'
+        - 'CENC'
+    TechnicalStatusEnum:
+      type: string
+      enum: [online, offline]
+    Errors:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              status:
+                type: integer
+                format: int32
+              title:
+                type: string
+    TokenRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+
+paths:
+  /v2/token:
+    post:
+      summary: Get an authentication token
+      description: 'Get an authentication token with username/password to be used for access to secured endpoints.'
+      requestBody:
+        description: Username and password
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenRequest'
+      responses:
+        '200':
+          description: Access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      tags:
+        - Authentication
+
+  /v2/access/provider/{providerName}/platform/{platformName}/profile/{profileName}/stream/{streamId}:
+    post:
+      summary: Creates stream access
+      description: 'Creates stream access by generating the stream url, publishing the token and returning the stream access data'
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: providerName
+          in: path
+          description: Identifier of the Provider
+          required: true
+          schema:
+            type: string
+        - name: platformName
+          in: path
+          description: Identifier of the Platform
+          required: true
+          schema:
+            type: string
+        - name: profileName
+          in: path
+          description: The requested profile
+          required: true
+          schema:
+            type: string
+            enum:
+              - smooth
+              - smoothmobile
+              - hls
+              - hlsmobile
+              - dash
+              - dashmobile
+        - name: streamId
+          in: path
+          description: Identifier of the stream
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The values in the body of the stream access
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamAccessItem'
+      tags:
+        - Access
+      responses:
+        '200':
+          description: Stream access data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamAccessResponseItem'
+        '404':
+          description: 'Invalid provider, platform or stream provided'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+
+  /v2/streams:
+    get:
+      summary: Get streams
+      description: Returns a list of streams that are available to the current user
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: order
+          in: query
+          description: Comma-separated fields to order by. Prefix with "-" to reverse order.
+          required: false
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: Used to search by streamId
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Page number
+          required: false
+          schema:
+            minimum: 1
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          description: Amount of items per page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 30
+        - name: provider
+          in: query
+          description: Filter by provider (id)
+          required: false
+          schema:
+            type: integer
+        - name: streamType
+          in: query
+          description: Filter by stream type (name)
+          required: false
+          schema:
+            $ref: '#/components/schemas/StreamTypeEnum'
+        - name: status
+          in: query
+          description: Filter by status
+          required: false
+          schema:
+            type: string
+            enum:
+              - online
+              - offline
+        - name: technicalStatus
+          in: query
+          description: Filter by technical status
+          required: false
+          schema:
+            $ref: '#/components/schemas/TechnicalStatusEnum'
+        - name: edgePool
+          in: query
+          description: Filter by edge pool (id)
+          required: false
+          schema:
+            type: integer
+        - name: streamId
+          in: query
+          description: Filter by stream id
+          required: false
+          schema:
+            type: string
+        - name: archived
+          in: query
+          description: 'If 1, only archived streams are returned. If 0, only non-archived streams are returned. If empty, all streams are returned.'
+          required: false
+          schema:
+            type: integer
+      tags:
+        - Stream
+      responses:
+        '200':
+          description: A list of streams
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamResponseCollection'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+    post:
+      summary: Create a new stream
+      description: Create a new stream
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: stream
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamInputItem'
+      responses:
+        '200':
+          description: Stream was added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamOutputItem'
+        '400':
+          description: Validation of input has failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '409':
+          description: Stream with given Stream Id already exists
+      tags:
+        - Stream
+
+  /v2/streams/{streamId}:
+    get:
+      summary: A single stream
+      description: Returns a single stream
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+      tags:
+        - Stream
+      responses:
+        '200':
+          description: A single stream
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamOutputItem'
+        '404':
+          description: Stream with given Stream Id was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+    put:
+      summary: Update stream
+      description: Replaces all existing stream properties
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The stream object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPatchItem'
+      tags:
+        - Stream
+      responses:
+        '200':
+          description: Stream was updated successfully
+        '400':
+          description: Validation of input has failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '404':
+          description: Stream with given Stream Id was not found
+    patch:
+      summary: Partially update a stream
+      description: End point used internally to update the stream from poms (When creating a stream with ROLE_PROVIDER and type="channel" only startTime and stopTime can be updated).
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The stream object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamPatchItem'
+      tags:
+        - Stream
+      responses:
+        '200':
+          description: Stream was updated successfully
+        '400':
+          description: Validation of input has failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '404':
+          description: Stream with given Stream Id was not found
+    delete:
+      summary: Delete stream
+      description: End point used internally to delete the stream
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+        - name: forceDelete
+          in: query
+          description: Whether or not to force delete the stream
+          schema:
+            type: boolean
+      tags:
+        - Stream
+      responses:
+        '204':
+          description: Stream was deleted successfully
+        '404':
+          description: Stream with given stream id was not found
+        '403':
+          description: Insufficient rights to delete stream
+
+  /v2/streams/{streamId}/profiles:
+    get:
+      summary: Get profiles for a stream
+      description: Get profile info for a specific stream
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: A list of profiles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProfileResponseCollection'
+        '404':
+          description: Stream with given Stream Id was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+    post:
+      summary: Add new profile to a stream
+      description: Replace all profiles on a stream
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The profiles object
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamProfile'
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: Profile was updated succesfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProfileResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+
+  /v2/streams/{streamId}/profiles/{profile}:
+    get:
+      summary: Get info about profile
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+        - name: profile
+          in: path
+          description: The profile
+          required: true
+          schema:
+            type: string
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: Profile info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProfileResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+    post:
+      summary: Create new profile for a stream
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+        - name: profile
+          in: path
+          description: The profile
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The profile that should be added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamProfile'
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: The gorgeous profile you just created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProfileResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+    put:
+      summary: Update a profile for a stream (eg. bump version)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+        - name: profile
+          in: path
+          description: The profile
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The profile that should be updated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamProfile'
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: The gorgeous profile you just updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProfileResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+    patch:
+      summary: Partially update a profile for a stream (eg. bump version)
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+        - name: profile
+          in: path
+          description: The profile
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: The profile that should be updated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StreamProfile'
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: The gorgeous profile you just updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StreamProfileResponse'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+    delete:
+      summary: Delete a profile on a stream
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: streamId
+          in: path
+          description: The identifier of the stream
+          required: true
+          schema:
+            type: string
+        - name: profile
+          in: path
+          description: The profile
+          required: true
+          schema:
+            type: string
+      tags:
+        - Profiles
+      responses:
+        '200':
+          description: This profile is no more. It has ceased to be. THIS IS AN EX-PROFILE (for this stream at least).
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
