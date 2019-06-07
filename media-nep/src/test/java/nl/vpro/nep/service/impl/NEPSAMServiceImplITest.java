@@ -70,7 +70,7 @@ public class NEPSAMServiceImplITest {
 
     @Test
     public void streamUrlForLive() {
-        String streamUrl = impl.streamAccess("npo1-dvr", createStreamAccessItem("145.58.169.92", Duration.ofHours(24)));
+        String streamUrl = impl.streamAccess("npo1", createStreamAccessItem("145.58.169.92", Duration.ofHours(24)));
         log.info("{}", streamUrl);
 
     }
