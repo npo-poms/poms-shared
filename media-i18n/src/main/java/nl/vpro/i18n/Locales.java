@@ -3,9 +3,9 @@ package nl.vpro.i18n;
 import java.util.Locale;
 import java.util.Objects;
 
-import org.meeuw.i18n.Country;
 import org.meeuw.i18n.CurrentCountry;
 import org.meeuw.i18n.FormerCountry;
+import org.meeuw.i18n.Region;
 
 import com.neovisionaries.i18n.CountryCode;
 import com.neovisionaries.i18n.LanguageCode;
@@ -47,7 +47,7 @@ public class Locales {
     }
 
 
-    public static String getCountryName(Country country, Locale locale) {
+    public static String getCountryName(Region country, Locale locale) {
         if (country instanceof CurrentCountry)  {
             CountryCode code = ((CurrentCountry) country).getCode();
 
