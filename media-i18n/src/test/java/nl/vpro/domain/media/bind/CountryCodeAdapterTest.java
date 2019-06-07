@@ -1,5 +1,6 @@
 package nl.vpro.domain.media.bind;
 
+import java.util.Currency;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
@@ -7,8 +8,10 @@ import java.util.TreeMap;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.meeuw.i18n.Country;
+import org.meeuw.i18n.CurrentCountry;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
+import com.neovisionaries.i18n.CountryCode;
 import nl.vpro.i18n.Locales;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,7 +28,7 @@ public class CountryCodeAdapterTest {
     @Ignore
     public void wiki() {
         CountryCodeAdapter.Code cca = new CountryCodeAdapter.Code();
-        Map<String, CountryCode> result = new TreeMap<>();
+        Map<String, Country> result = new TreeMap<>();
         for (CountryCode cc : CountryCode.values()) {
             String a2 = cc.getAlpha2();
             String a3 = cc.getAlpha3();
@@ -38,7 +41,7 @@ public class CountryCodeAdapterTest {
         }
         // output sorted
         System.out.println("||code||name in english||assignment||");
-        for (Map.Entry<String, CountryCode> e : result.entrySet()) {
+        for (Map.Entry<String, Country> e : result.entrySet()) {
             System.out.println("|" + e.getKey() + "|" + e.getValue().getName() + "|" + e.getValue().getAssignment() + "|");
         }
     }
@@ -46,7 +49,7 @@ public class CountryCodeAdapterTest {
     @Test
     public void finlandReserved() {
         CountryCodeAdapter cca = new CountryCodeAdapter();
-        assertThat(cca.marshal(CountryCode.SF).getName()).isEqualTo("Finland");
+        assertThat(cca.marshal(new CurrentCountry(CountryCode.SF)).getName()).isEqualTo("Finland");
     }
 
     @Test
