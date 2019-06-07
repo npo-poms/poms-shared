@@ -18,7 +18,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nl.vpro.nep.domain.PlayreadyRequest;
@@ -47,23 +46,30 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService {
     private Duration connectionRequestTimeout =  Duration.ofMillis(1000);
     private Duration socketTimeout = Duration.ofMillis(1000);
 
+    private final String widevineKey;
+
+    private final String playreadyKey;
+
     public NEPPlayerTokenServiceImpl(
-        @Value("${nep.tokengenerator-api.baseUrl}") String baseUrl) {
+        @Value("${nep.tokengenerator-api.baseUrl}") String baseUrl,
+        @Value("${nep.tokengenerator-api.widevinekey}") String widevineKey,
+        @Value("${nep.tokengenerator-api.playreadykey}") String playreadyKey) {
         this.baseUrl = baseUrl;
+        this.widevineKey = widevineKey;
+        this.playreadyKey = playreadyKey;
     }
 
 
     @Override
     @SneakyThrows
-    public WideVineResponse widevineToken(WideVineRequest request) {
+    public WideVineResponse widevineToken(String ip) {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
-            String json = MAPPER.writeValueAsString(request);
+            String json = MAPPER.writeValueAsString(new WideVineRequest(ip, widevineKey));
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             HttpPost httpPost = new HttpPost(baseUrl + "/widevine/npo");
             httpPost.setEntity(entity);
-            //httpPost.addHeader(HttpHeaders.AUTHORIZATION, authenticator.get());
             HttpResponse response = client.execute(httpPost);
             IOUtils.copy(response.getEntity().getContent(), out);
             log.info("Response {}", new String(out.toByteArray()));
@@ -77,11 +83,11 @@ public class NEPPlayerTokenServiceImpl implements NEPPlayerTokenService {
 
     @Override
     @SneakyThrows
-    public PlayreadyResponse playreadyToken(PlayreadyRequest request) {
+    public PlayreadyResponse playreadyToken(String ip) {
         CloseableHttpClient client = getHttpClient();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
-            String json = MAPPER.writeValueAsString(request);
+            String json = MAPPER.writeValueAsString(new PlayreadyRequest(ip, playreadyKey));
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             HttpPost httpPost = new HttpPost(baseUrl + "/playready/npo");
             httpPost.setEntity(entity);
