@@ -1,6 +1,11 @@
 package nl.vpro.nep.service;
 
-import nl.vpro.nep.domain.*;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
+
+import nl.vpro.nep.sam.model.ApiObject;
+import nl.vpro.nep.sam.model.StreamAccessItem;
 
 /**
  * NEP 'Stream Access Management' API.
@@ -11,11 +16,17 @@ import nl.vpro.nep.domain.*;
 public interface NEPSAMService {
 
 
-    WideVineResponse widevineToken(WideVineRequest request);
 
-    PlayreadyResponse playreadyToken(PlayreadyRequest request);
-
-    String streamUrl(String streamId, StreamUrlRequest streamUrlRequest);
+    String streamAccess(String streamId, StreamAccessItem streamUrlRequest);
 
 
+    static StreamAccessItem createStreamAccessItem(String ip, Duration duration) {
+        StreamAccessItem item = new StreamAccessItem().data(new ApiObject().type("access"));
+        Map<String, Object> attributes = new HashMap<>();
+        attributes.put("viewer", "pomsgui");
+        attributes.put("ip", ip);
+        attributes.put("duration", duration);
+        item.getData().setAttributes(attributes);
+        return item;
+    }
 }

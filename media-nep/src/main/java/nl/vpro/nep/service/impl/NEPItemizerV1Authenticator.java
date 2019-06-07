@@ -19,7 +19,7 @@ public class NEPItemizerV1Authenticator implements Supplier<String> {
     private final String bearerToken;
 
     public NEPItemizerV1Authenticator(
-        @Value("${nep.itemizer.key}") String key
+        @Value("${nep.itemizer-api.key}") String key
         ) {
         this.bearerToken = key;
 

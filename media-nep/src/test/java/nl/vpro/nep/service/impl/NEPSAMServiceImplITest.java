@@ -2,11 +2,14 @@ package nl.vpro.nep.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.time.Duration;
+import java.util.Properties;
 
 import org.junit.Test;
 
-import nl.vpro.nep.domain.*;
+import static nl.vpro.nep.service.NEPSAMService.createStreamAccessItem;
 
 /**
  * @author Michiel Meeuwissen
@@ -15,19 +18,34 @@ import nl.vpro.nep.domain.*;
 @Slf4j
 public class NEPSAMServiceImplITest {
 
-    String url = "https://api.samgcloud.nepworldwide.nl/v2/";
+
+    Properties properties = new Properties();
+    {
+        File propFile = new File(new File(new File(System.getProperty("user.home")), "conf"), "sam.properties");
+        try (FileInputStream input = new FileInputStream(propFile)) {
+            properties.load(input);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    String url = properties.getProperty("url", "https://api.samgcloud.nepworldwide.nl/");
     NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator(
             "npo_poms",
-        System.getProperty("password"),
+        properties.getProperty("password"),
         url
 
     );
     NEPSAMServiceImpl impl = new NEPSAMServiceImpl(
         url,
+        null,
+        null,
+        null,
         authenticator
     );
 
-    @Test
+   /* @Test
     public void widevine() {
         WideVineResponse wideVineResponse = impl.widevineToken(new WideVineRequest("145.58.169.92", null));
         log.info("{}", wideVineResponse);
@@ -40,11 +58,11 @@ public class NEPSAMServiceImplITest {
         PlayreadyResponse wideVineResponse = impl.playreadyToken(new PlayreadyRequest("145.58.169.92"));
         log.info("{}", wideVineResponse);
 
-    }
+    }*/
 
     @Test
     public void streamUrlForMid() {
-        String streamUrl = impl.streamUrl("POW_04146689", new StreamUrlRequest("145.58.169.92", null));
+        String streamUrl = impl.streamAccess("POW_04146689", createStreamAccessItem("145.58.169.92", null));
         log.info("{}", streamUrl);
 
     }
@@ -52,7 +70,7 @@ public class NEPSAMServiceImplITest {
 
     @Test
     public void streamUrlForLive() {
-        String streamUrl = impl.streamUrl("npo1-dvr", new StreamUrlRequest("145.58.169.92", Duration.ofHours(24)));
+        String streamUrl = impl.streamAccess("npo1-dvr", createStreamAccessItem("145.58.169.92", Duration.ofHours(24)));
         log.info("{}", streamUrl);
 
     }
