@@ -29,7 +29,7 @@
       <artifactId>vpro-shared-test</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.meeuw</groupId>
+      <groupId>org.meeuw.i18n</groupId>
       <artifactId>i18n-regions</artifactId>
       <version>0.1-SNAPSHOT</version>
     </dependency>
