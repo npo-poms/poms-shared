@@ -49,7 +49,7 @@ public class Locales {
 
     public static String getCountryName(Region country, Locale locale) {
         if (country instanceof CurrentCountry)  {
-            CountryCode code = ((CurrentCountry) country).getCode();
+            CountryCode code = ((CurrentCountry) country).getCountryCode();
 
             CountryCode byAlpha3 = null;
             if (code.getAssignment() != CountryCode.Assignment.OFFICIALLY_ASSIGNED) {

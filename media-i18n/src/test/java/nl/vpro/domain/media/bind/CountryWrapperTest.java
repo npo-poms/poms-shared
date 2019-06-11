@@ -6,11 +6,10 @@ import java.util.Locale;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.meeuw.i18n.CountrySubDivision;
 import org.meeuw.i18n.CurrentCountry;
 
 import com.neovisionaries.i18n.CountryCode;
-
-import nl.vpro.util.CommandExecutor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,7 +27,11 @@ public class CountryWrapperTest {
 
     @Test
     public void getNameGBNL() {
-        CountryWrapper wrapper = new CountryWrapper(SubdivisionFactory.getSubdivision(CountryCode.GB, "GBN"));
+        CountryWrapper wrapper = new CountryWrapper(
+            new CountrySubDivision(
+                SubdivisionFactory.getSubdivision(CountryCode.GB, "GBN")
+            )
+        );
         assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië");
 
     }
@@ -37,7 +40,11 @@ public class CountryWrapperTest {
     @Ignore
     public void getNameGBUK() {
         Locale.setDefault(Locale.UK);
-        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB_GBN);
+        CountryWrapper wrapper = new CountryWrapper(
+              new CountrySubDivision(
+                SubdivisionFactory.getSubdivision(CountryCode.GB, "GBN")
+              )
+        );
         assertThat(wrapper.getName()).isEqualTo("Great Britain");
 
     }
@@ -46,7 +53,7 @@ public class CountryWrapperTest {
     @Ignore
     public void getNameUS() {
         Locale.setDefault(Locale.US);
-        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB);
+        CountryWrapper wrapper = new CountryWrapper(new CurrentCountry(CountryCode.GB));
         assertThat(wrapper.getName()).isEqualTo("United Kingdom");
 
     }
@@ -55,7 +62,11 @@ public class CountryWrapperTest {
     @Test
     public void getNameENGNL() {
         //Locale.setDefault(Locales.DUTCH);
-        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB_ENG);
+        CountryWrapper wrapper = new CountryWrapper(
+            new CountrySubDivision(
+                SubdivisionFactory.getSubdivision(CountryCode.GB, "ENG")
+            )
+        );
         assertThat(wrapper.getName()).isEqualTo("Engeland");
 
     }
@@ -64,7 +75,11 @@ public class CountryWrapperTest {
     @Ignore
     public void getNameENGUK() {
         Locale.setDefault(Locale.UK);
-        CountryWrapper wrapper = new CountryWrapper(CountryCode.GB_ENG);
+        CountryWrapper wrapper = new CountryWrapper(
+            new CountrySubDivision(
+                SubdivisionFactory.getSubdivision(CountryCode.GB, "ENG")
+            )
+        );
         assertThat(wrapper.getName()).isEqualTo("England");
 
     }
@@ -72,7 +87,11 @@ public class CountryWrapperTest {
     @Test
     public void getNameUTUK() {
         Locale.setDefault(Locale.UK);
-        CountryWrapper wrapper = new CountryWrapper(CountryCode.NL_UT);
+        CountryWrapper wrapper = new CountryWrapper(
+            new CountrySubDivision(
+                SubdivisionFactory.getSubdivision(CountryCode.NL, "UT")
+            )
+        );
         assertThat(wrapper.getName()).isEqualTo("Utrecht");
 
     }
