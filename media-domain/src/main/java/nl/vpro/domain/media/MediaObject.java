@@ -355,7 +355,7 @@ public abstract class MediaObject
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<Country> countries;
+    protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
     @Column(length = 10)
@@ -1272,14 +1272,14 @@ public abstract class MediaObject
     @JsonDeserialize(using = BackwardsCompatibility.CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<Country> getCountries() {
+    public List<org.meeuw.i18n.Region> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();
         }
         return countries;
     }
 
-    public void setCountries(List<Country> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = updateList(this.countries, countries);
     }
 
@@ -1293,7 +1293,7 @@ public abstract class MediaObject
     public MediaObject addCountry(CountryCode country) {
         return addCountry(new CurrentCountry(country));
     }
-    public MediaObject addCountry(Country country) {
+    public MediaObject addCountry(org.meeuw.i18n.Region country) {
         nullCheck(country, "country");
 
         if (countries == null) {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
+import org.meeuw.i18n.VehicleRegistrationCode;
 
 public class VehicleRegistrationCodeTest {
 

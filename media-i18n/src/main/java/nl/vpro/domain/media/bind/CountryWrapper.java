@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.meeuw.i18n.Country;
 import org.meeuw.i18n.Region;
+import org.meeuw.i18n.bind.jaxb.Code;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -21,7 +22,7 @@ import nl.vpro.i18n.Locales;
 public class CountryWrapper {
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
+    @XmlJavaTypeAdapter(Code.class)
     private Region code;
 
     public CountryWrapper() {
@@ -48,7 +49,7 @@ public class CountryWrapper {
         // i hate jaxb
     }
 
-    public Country getCode() {
+    public Region getCode() {
         return code;
     }
 
