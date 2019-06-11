@@ -7,10 +7,7 @@ import java.util.TreeMap;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.meeuw.i18n.Country;
-import org.meeuw.i18n.CurrentCountry;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.*;
 import org.meeuw.i18n.bind.jaxb.Code;
 
 import com.neovisionaries.i18n.CountryCode;
@@ -33,7 +30,12 @@ public class CountryCodeAdapterTest {
     public void wiki() {
         Code cca = new Code();
         Map<String, Region> result = new TreeMap<>();
-        Regions.values().filter(IS_OFFICIAL.or(IS_FORMER).or(IS_USER_ASSIGNED)).forEach((c) -> {
+        Regions.values().filter(
+            IS_OFFICIAL
+                .or(IS_FORMER)
+                .or(IS_USER_ASSIGNED)
+            .or((c) -> c instanceof UserAssignedCountrySubdivision)
+        ).forEach((c) -> {
             result.put(c.getCode(), cca.unmarshal(c.getCode()));
             if (c instanceof Country) {
                 Country cc = (Country) c;
