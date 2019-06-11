@@ -39,8 +39,8 @@ public class CountryCodeAdapterTest {
             result.put(c.getCode(), cca.unmarshal(c.getCode()));
             if (c instanceof Country) {
                 Country cc = (Country) c;
-                String a2 = cc.getAlpha2();
-                String a3 = cc.getAlpha3();
+                String a2 = cc.getCode();
+                String a3 = cc instanceof CurrentCountry ?  ((CurrentCountry) cc).getAlpha3() : null;
                 if (a2 != null) {
                     result.put(a2, cca.unmarshal(a2));
                 }
