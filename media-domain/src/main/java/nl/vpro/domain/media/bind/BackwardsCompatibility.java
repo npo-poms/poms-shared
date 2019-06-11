@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 import org.meeuw.i18n.Country;
+import org.meeuw.i18n.Region;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -101,11 +102,11 @@ public class BackwardsCompatibility {
             @Override
             protected void serializeValue(Country value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
                 if (v1Compatibility.get()) {
-                    if (value == null || value.getISOCode() == null) {
+                    if (value == null || value.getCode() == null) {
                         log.warn("country code {} is null", value);
                         jgen.writeNull();
                     } else {
-                        jgen.writeString(value.getISOCode());
+                        jgen.writeString(value.getCode());
                     }
                 } else {
                     if (value == null) {
@@ -119,10 +120,10 @@ public class BackwardsCompatibility {
             }
         }
 
-        public static class Deserializer extends AbstractList.Deserializer<Country> {
+        public static class Deserializer extends AbstractList.Deserializer<Region> {
 
             @Override
-            protected Country deserialize(JsonNode node, DeserializationContext ctxt) throws IOException {
+            protected Region deserialize(JsonNode node, DeserializationContext ctxt) throws IOException {
                 if (v1Compatibility.get()) {
                     try {
                         return Country.getByCode(node.textValue()).orElse(null);
