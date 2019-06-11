@@ -151,6 +151,7 @@
                 <java8>true</java8>
                 <library>resteasy</library>
                 <withXml>false</withXml>
+                <generateModelTests>false</generateModelTests>
               </configOptions>
             </configuration>
           </execution>
