@@ -32,8 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.i18n.Country;
-import org.meeuw.i18n.CurrentCountry;
-
+import org.meeuw.i18n.Regions;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -1284,15 +1283,16 @@ public abstract class MediaObject
     }
 
     public MediaObject addCountry(String code) {
-        Country country = Country.getByCode(code).orElseThrow(() ->
+        org.meeuw.i18n.Region country = Regions.getByCode(code).orElseThrow(() ->
             new IllegalArgumentException("Unknown country " + code));
 
         return addCountry(country);
 
     }
-    public MediaObject addCountry(CountryCode country) {
-        return addCountry(new CurrentCountry(country));
+    public MediaObject addCountry(@Nonnull CountryCode country) {
+        return addCountry(Country.of(country));
     }
+
     public MediaObject addCountry(org.meeuw.i18n.Region country) {
         nullCheck(country, "country");
 
