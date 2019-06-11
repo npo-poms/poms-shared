@@ -33,7 +33,7 @@ public class CountryCodeAdapterTest {
     public void wiki() {
         Code cca = new Code();
         Map<String, Region> result = new TreeMap<>();
-        Regions.values().filter(IS_OFFICIAL.or(IS_FORMER).or(IS_USER)).forEach((c) -> {
+        Regions.values().filter(IS_OFFICIAL.or(IS_FORMER).or(IS_USER_ASSIGNED)).forEach((c) -> {
             result.put(c.getCode(), cca.unmarshal(c.getCode()));
             if (c instanceof Country) {
                 Country cc = (Country) c;
