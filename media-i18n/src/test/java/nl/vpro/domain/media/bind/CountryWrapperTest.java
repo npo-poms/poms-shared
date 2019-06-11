@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.meeuw.i18n.CountrySubDivision;
+import org.meeuw.i18n.CountrySubdivision;
 import org.meeuw.i18n.CurrentCountry;
 
 import static com.neovisionaries.i18n.CountryCode.GB;
@@ -26,7 +26,7 @@ public class CountryWrapperTest {
 
     @Test
     public void getNameGBNL() {
-        CountryWrapper wrapper = new CountryWrapper(CountrySubDivision.of(GB, "GBN").get());
+        CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
         assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië");
 
     }
@@ -35,7 +35,7 @@ public class CountryWrapperTest {
     @Ignore
     public void getNameGBUK() {
         Locale.setDefault(Locale.UK);
-        CountryWrapper wrapper = new CountryWrapper(CountrySubDivision.of(GB, "GBN").get());
+        CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
         assertThat(wrapper.getName()).isEqualTo("Great Britain");
 
     }
@@ -53,7 +53,7 @@ public class CountryWrapperTest {
     @Test
     public void getNameENGNL() {
         //Locale.setDefault(Locales.DUTCH);
-        CountryWrapper wrapper = new CountryWrapper(CountrySubDivision.of(GB, "ENG").get());
+        CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
         assertThat(wrapper.getName()).isEqualTo("Engeland");
 
     }
@@ -62,7 +62,7 @@ public class CountryWrapperTest {
     @Ignore
     public void getNameENGUK() {
         Locale.setDefault(Locale.UK);
-        CountryWrapper wrapper = new CountryWrapper(CountrySubDivision.of(GB, "ENG").get());
+        CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
         assertThat(wrapper.getName()).isEqualTo("England");
 
     }
@@ -70,7 +70,7 @@ public class CountryWrapperTest {
     @Test
     public void getNameUTUK() {
         Locale.setDefault(Locale.UK);
-        CountryWrapper wrapper = new CountryWrapper(CountrySubDivision.of(NL, "UT").get());
+        CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(NL, "UT").get());
         assertThat(wrapper.getName()).isEqualTo("Utrecht");
 
     }
