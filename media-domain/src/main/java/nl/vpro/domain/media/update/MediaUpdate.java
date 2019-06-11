@@ -28,7 +28,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.meeuw.i18n.Region;
 import org.meeuw.i18n.bind.jaxb.Code;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -193,7 +192,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     Boolean isDeleted;
 
-    List<Region> countries;
+    List<org.meeuw.i18n.Region> countries;
 
     List<Locale> languages;
 
@@ -892,14 +891,14 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "country")
     @XmlJavaTypeAdapter(Code.class)
-    public List<Region> getCountries() {
+    public List<org.meeuw.i18n.Region> getCountries() {
          if (countries == null) {
             countries = new ArrayList<>();
          }
         return countries;
     }
 
-    public void setCountries(List<Region> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = countries;
     }
 
