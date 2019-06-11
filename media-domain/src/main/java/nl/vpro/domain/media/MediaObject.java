@@ -32,11 +32,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.i18n.Country;
-import org.meeuw.i18n.Region;
-
+import org.meeuw.i18n.Regions;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
@@ -354,7 +354,7 @@ public abstract class MediaObject
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<Region> countries;
+    protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
     @Column(length = 10)
@@ -1271,26 +1271,29 @@ public abstract class MediaObject
     @JsonDeserialize(using = BackwardsCompatibility.CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<Region> getCountries() {
+    public List<org.meeuw.i18n.Region> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();
         }
         return countries;
     }
 
-    public void setCountries(List<Region> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = updateList(this.countries, countries);
     }
 
     public MediaObject addCountry(String code) {
-        Country country = Country.getByCode(code).orElseThrow(() ->
+        org.meeuw.i18n.Region country = Regions.getByCode(code).orElseThrow(() ->
             new IllegalArgumentException("Unknown country " + code));
 
         return addCountry(country);
 
     }
+    public MediaObject addCountry(@Nonnull CountryCode country) {
+        return addCountry(Country.of(country));
+    }
 
-    public MediaObject addCountry(Region country) {
+    public MediaObject addCountry(org.meeuw.i18n.Region country) {
         nullCheck(country, "country");
 
         if (countries == null) {
