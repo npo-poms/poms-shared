@@ -41,7 +41,7 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
     }
 
     @lombok.Builder
-    private ScheduleForm(SchedulePager pager, InstantRange startRange, LocalDateRange guideDayRange, List<Channel> channels) {
+    protected ScheduleForm(SchedulePager pager, InstantRange startRange, LocalDateRange guideDayRange, List<Channel> channels) {
         if(pager == null) {
             throw new IllegalArgumentException("Must supply a pager, got: null");
         }

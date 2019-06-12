@@ -38,11 +38,11 @@ class ExtendedScheduleForm extends ScheduleForm {
 
 
     public ExtendedScheduleForm(SchedulePager pager, InstantRange dateRange) {
-        super(pager, dateRange);
+        super(pager, dateRange, null, null);
     }
 
     public ExtendedScheduleForm(SchedulePager pager, LocalDate guideDay) {
-        super(pager, null);
+        super(pager, null, null, null);
         this.guideDay = guideDay;
     }
 
