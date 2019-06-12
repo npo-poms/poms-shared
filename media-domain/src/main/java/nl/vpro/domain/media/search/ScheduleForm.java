@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.search;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
@@ -23,47 +25,39 @@ import nl.vpro.domain.media.ScheduleEvent;
     "channels"
 })
 @ToString
+@Getter
+@Setter
 public class ScheduleForm implements Predicate<ScheduleEvent> {
     private SchedulePager pager;
 
-    private DateRange dateRange;
+    private InstantRange startRange;
+
+    private LocalDateRange guideDayRange;
 
     private List<Channel> channels;
 
 
-    private ScheduleForm() {
+    public ScheduleForm() {
     }
 
-    public ScheduleForm(SchedulePager pager, DateRange dateRange) {
+    @lombok.Builder
+    private ScheduleForm(SchedulePager pager, InstantRange startRange, LocalDateRange guideDayRange, List<Channel> channels) {
         if(pager == null) {
             throw new IllegalArgumentException("Must supply a pager, got: null");
         }
         this.pager = pager;
-        this.dateRange = dateRange == null ? new DateRange() : dateRange;
-    }
-
-    public SchedulePager getPager() {
-        return pager;
-    }
-
-    public DateRange getDateRange() {
-        return dateRange;
-    }
-
-    public List<Channel> getChannels() {
-        return channels;
-    }
-
-    public void setChannels(List<Channel> channels) {
+        this.startRange = startRange == null ? new InstantRange() : startRange;
+        this.guideDayRange = guideDayRange == null ? new LocalDateRange(): guideDayRange;
         this.channels = channels;
     }
 
+
     public boolean hasStart() {
-        return dateRange != null && dateRange.getStartValue() != null;
+        return startRange != null && startRange.getStartValue() != null;
     }
 
     public boolean hasStop() {
-        return dateRange != null && dateRange.getStopValue() != null;
+        return startRange != null && startRange.getStopValue() != null;
     }
 
     public boolean hasChannels() {
@@ -72,7 +66,8 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
 
     @Override
     public boolean test(ScheduleEvent scheduleEvent) {
-        return (dateRange == null || dateRange.test(scheduleEvent.getStartInstant()))
+        return (startRange == null || startRange.test(scheduleEvent.getStartInstant()))
+            && (guideDayRange == null || guideDayRange.test(scheduleEvent.getGuideDate()))
             && (channels == null || channels.contains(scheduleEvent.getChannel()));
     }
 }

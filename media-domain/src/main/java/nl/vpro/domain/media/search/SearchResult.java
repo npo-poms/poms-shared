@@ -13,7 +13,7 @@ public interface SearchResult<T> extends Iterable<T> {
 
     List<T> getResult();
 
-    Integer getCount();
+    Long getCount();
 
     default int size() {
         return getResult().size();
