@@ -120,10 +120,10 @@ public class InstantRangeTest {
 
     @Test
     public void xml() throws Exception {
-        JAXBTestUtil.roundTripAndSimilar(new InstantRange(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)), "<local:dateRange xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:s=\"urn:vpro:media:search:2012\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:local=\"uri:local\">\n" +
+        JAXBTestUtil.roundTripAndSimilar(new InstantRange(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)), "<local:instantRange xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:s=\"urn:vpro:media:search:2012\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:local=\"uri:local\">\n" +
             "    <s:start>1970-01-01T01:00:00.100+01:00</s:start>\n" +
             "    <s:stop>1970-01-01T01:00:00.200+01:00</s:stop>\n" +
-            "</local:dateRange>");
+            "</local:instantRange>");
 
     }
 
