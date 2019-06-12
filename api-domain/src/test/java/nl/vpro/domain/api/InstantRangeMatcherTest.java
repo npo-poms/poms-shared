@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public class DateRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMatcher> {
+public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRangeMatcher> {
 
     @Test
     public void testGetInclusiveEnd() {

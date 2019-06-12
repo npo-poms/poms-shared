@@ -29,7 +29,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Data
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder")
-public class DateRange implements Range<Instant, DateRange.Value> {
+public class InstantRange implements Range<Instant, InstantRange.Value> {
 
     @XmlElement
     private Value start;
@@ -37,15 +37,15 @@ public class DateRange implements Range<Instant, DateRange.Value> {
     @XmlElement
     private Value stop;
 
-    public  DateRange() {
+    public InstantRange() {
     }
 
-    public DateRange(LocalDateTime start, LocalDateTime stop) {
+    public InstantRange(LocalDateTime start, LocalDateTime stop) {
         this.start = start == null ? null : Value.of(start.atZone(Schedule.ZONE_ID).toInstant());
         this.stop = stop == null ? null : Value.of(stop.atZone(Schedule.ZONE_ID).toInstant());
     }
 
-    public DateRange(Instant start, Instant stop) {
+    public InstantRange(Instant start, Instant stop) {
         this.start = Value.of(start);
         this.stop = Value.of(stop);
     }

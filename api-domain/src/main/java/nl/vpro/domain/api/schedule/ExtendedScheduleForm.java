@@ -11,7 +11,7 @@ import nl.vpro.domain.media.DescendantRef;
 import nl.vpro.domain.media.MediaType;
 import nl.vpro.domain.media.Net;
 import nl.vpro.domain.media.ScheduleEvent;
-import nl.vpro.domain.media.search.DateRange;
+import nl.vpro.domain.media.search.InstantRange;
 import nl.vpro.domain.media.search.ScheduleForm;
 import nl.vpro.domain.media.search.SchedulePager;
 import nl.vpro.domain.user.Broadcaster;
@@ -37,7 +37,7 @@ class ExtendedScheduleForm extends ScheduleForm {
     private Collection<String> descendantOf;
 
 
-    public ExtendedScheduleForm(SchedulePager pager, DateRange dateRange) {
+    public ExtendedScheduleForm(SchedulePager pager, InstantRange dateRange) {
         super(pager, dateRange);
     }
 

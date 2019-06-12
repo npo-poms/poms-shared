@@ -14,7 +14,7 @@ public class ScheduleFormTest {
 
     @Test
     public void testTest() {
-        ScheduleForm form = new ScheduleForm(new SchedulePager(), new DateRange(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
+        ScheduleForm form = new ScheduleForm(new SchedulePager(), new InstantRange(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)));
 
         assertThat(form.test(ev(null, 150))).isTrue();
         assertThat(form.test(ev(null, 80))).isFalse();

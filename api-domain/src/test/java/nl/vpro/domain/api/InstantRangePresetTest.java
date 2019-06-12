@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 4.3
  */
-public class DateRangePresetTest {
+public class InstantRangePresetTest {
 
 
     @Test
