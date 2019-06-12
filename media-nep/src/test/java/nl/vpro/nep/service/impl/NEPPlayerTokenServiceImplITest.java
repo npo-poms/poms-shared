@@ -13,7 +13,7 @@ import nl.vpro.nep.service.NEPPlayerTokenService;
  * @since 5.11
  */
 @Slf4j
-public class NEPPlayerTokenServiceImplTest extends AbstractNEPTest {
+public class NEPPlayerTokenServiceImplITest extends AbstractNEPTest {
 
 
 
@@ -23,7 +23,7 @@ public class NEPPlayerTokenServiceImplTest extends AbstractNEPTest {
         getProperty("playreadykey")
     );
 
-    public NEPPlayerTokenServiceImplTest() {
+    public NEPPlayerTokenServiceImplITest() {
         super("nep.tokengenerator-api");
     }
 
