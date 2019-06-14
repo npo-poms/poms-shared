@@ -4,8 +4,6 @@
  */
 package nl.vpro.domain.media.search;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
@@ -30,6 +28,7 @@ import nl.vpro.domain.media.ScheduleEvent;
 public class ScheduleForm implements Predicate<ScheduleEvent> {
     private SchedulePager pager;
 
+    private InstantRange dateRange;
     private InstantRange startRange;
 
     private LocalDateRange guideDayRange;
