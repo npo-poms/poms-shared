@@ -32,6 +32,7 @@ class ExtendedScheduleForm extends ScheduleForm {
 
     private MediaType mediaType;
 
+    @Deprecated
     private LocalDate guideDay;
 
     private Collection<String> descendantOf;
