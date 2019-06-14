@@ -491,9 +491,10 @@ public abstract class MediaObject
      *  BROADCAST | 1526381
      *  MOVIE     |      20
      */
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = false, cascade={MERGE})
+    @OneToMany(mappedBy = "mediaObject", orphanRemoval = true, cascade={MERGE})
     @SortNatural
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    // Caching doesn't work proprerly because ScheduleEventRepository may touch this
+    // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<ScheduleEvent> scheduleEvents;
 

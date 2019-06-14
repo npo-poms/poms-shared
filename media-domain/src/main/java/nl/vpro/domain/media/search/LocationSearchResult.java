@@ -16,7 +16,7 @@ public class LocationSearchResult extends AbstractSearchResult<Location> {
     public LocationSearchResult() {
         super();
     }
-    public LocationSearchResult(final Integer count, final List<Location> result) {
+    public LocationSearchResult(final Long count, final List<Location> result) {
         super(count, result);
     }
 
