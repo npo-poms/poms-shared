@@ -33,6 +33,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.i18n.Country;
 import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.persistence.RegionToStringConverter;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -354,6 +355,7 @@ public abstract class MediaObject
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Convert(converter = RegionToStringConverter.class)
     protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
