@@ -7,15 +7,18 @@ import java.util.TreeMap;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.meeuw.i18n.*;
+import org.meeuw.i18n.Region;
+import org.meeuw.i18n.Regions;
 import org.meeuw.i18n.bind.jaxb.Code;
-
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision;
 import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.i18n.Locales;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.meeuw.i18n.Country.*;
+import static org.meeuw.i18n.countries.Country.*;
 
 public class CountryCodeAdapterTest {
 
