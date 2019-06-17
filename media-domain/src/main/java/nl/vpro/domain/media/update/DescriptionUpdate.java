@@ -33,6 +33,11 @@ public class DescriptionUpdate implements TypedText {
 
     private MediaUpdate media;
 
+    private DescriptionUpdate() {
+        // needed by jaxb
+    }
+
+
     public DescriptionUpdate(@Nullable String description, @Nonnull TextualType type) {
         this.value = description;
         this.type = type;
