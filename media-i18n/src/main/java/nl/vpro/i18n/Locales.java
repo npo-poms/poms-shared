@@ -3,8 +3,6 @@ package nl.vpro.i18n;
 import java.util.Locale;
 
 import org.meeuw.i18n.Region;
-import org.meeuw.i18n.Regions;
-
 import com.neovisionaries.i18n.CountryCode;
 import com.neovisionaries.i18n.LanguageCode;
 
@@ -46,7 +44,7 @@ public class Locales {
 
 
     public static String getCountryName(Region country, Locale locale) {
-        return Regions.toString(country, locale);
+        return country.getName(locale);
     }
 
 }
