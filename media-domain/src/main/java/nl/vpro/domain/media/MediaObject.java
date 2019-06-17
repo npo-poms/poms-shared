@@ -34,7 +34,7 @@ import org.hibernate.annotations.*;
 import org.meeuw.i18n.Country;
 import org.meeuw.i18n.Regions;
 import org.meeuw.i18n.persistence.RegionToStringConverter;
-
+import org.meeuw.i18n.validation.ValidCountry;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -356,6 +356,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Convert(converter = RegionToStringConverter.class)
+    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
     protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
