@@ -5,12 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.util.*;
 
+import org.meeuw.i18n.Country;
+import org.meeuw.i18n.Region;
+
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.AgeRating;
 import nl.vpro.domain.media.Genre;
@@ -95,16 +97,16 @@ public class BackwardsCompatibility {
     }
 
     public static class CountryCodeList {
-        public static class Serializer extends AbstractList.Serializer<CountryCode> {
+        public static class Serializer extends AbstractList.Serializer<Country> {
 
             @Override
-            protected void serializeValue(CountryCode value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
+            protected void serializeValue(Country value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
                 if (v1Compatibility.get()) {
-                    if (value == null || value.getAlpha2() == null) {
+                    if (value == null || value.getCode() == null) {
                         log.warn("country code {} is null", value);
                         jgen.writeNull();
                     } else {
-                        jgen.writeString(value.getAlpha2());
+                        jgen.writeString(value.getCode());
                     }
                 } else {
                     if (value == null) {
@@ -118,13 +120,13 @@ public class BackwardsCompatibility {
             }
         }
 
-        public static class Deserializer extends AbstractList.Deserializer<CountryCode> {
+        public static class Deserializer extends AbstractList.Deserializer<Region> {
 
             @Override
-            protected CountryCode deserialize(JsonNode node, DeserializationContext ctxt) throws IOException {
+            protected Region deserialize(JsonNode node, DeserializationContext ctxt) throws IOException {
                 if (v1Compatibility.get()) {
                     try {
-                        return CountryCode.valueOf(node.textValue());
+                        return Country.getByCode(node.textValue()).orElse(null);
                     } catch (Exception e) {
                         return null;
                     }

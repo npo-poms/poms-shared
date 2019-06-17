@@ -31,11 +31,15 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.meeuw.i18n.Country;
+import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.persistence.RegionToStringConverter;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.neovisionaries.i18n.CountryCode;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
@@ -348,11 +352,11 @@ public abstract class MediaObject
     protected String source;
 
     @ElementCollection
-    @Enumerated(EnumType.STRING)
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<CountryCode> countries;
+    @Convert(converter = RegionToStringConverter.class)
+    protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
     @Column(length = 10)
@@ -1270,27 +1274,29 @@ public abstract class MediaObject
     @JsonDeserialize(using = BackwardsCompatibility.CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<CountryCode> getCountries() {
+    public List<org.meeuw.i18n.Region> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();
         }
         return countries;
     }
 
-    public void setCountries(List<CountryCode> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = updateList(this.countries, countries);
     }
 
     public MediaObject addCountry(String code) {
-        CountryCode country = CountryCode.getByCode(code, false);
-        if (country == null) {
-            throw new IllegalArgumentException("Unknown country " + code);
-        }
+        org.meeuw.i18n.Region country = Regions.getByCode(code).orElseThrow(() ->
+            new IllegalArgumentException("Unknown country " + code));
+
         return addCountry(country);
 
     }
+    public MediaObject addCountry(@Nonnull CountryCode country) {
+        return addCountry(Country.of(country));
+    }
 
-    public MediaObject addCountry(CountryCode country) {
+    public MediaObject addCountry(org.meeuw.i18n.Region country) {
         nullCheck(country, "country");
 
         if (countries == null) {

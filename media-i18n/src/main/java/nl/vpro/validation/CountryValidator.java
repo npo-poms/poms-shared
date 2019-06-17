@@ -3,7 +3,7 @@ package nl.vpro.validation;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
+import com.neovisionaries.i18n.CountryCode;
 
 /**
  * @author Michiel Meeuwissen
