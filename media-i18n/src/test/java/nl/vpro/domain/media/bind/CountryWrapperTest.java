@@ -4,13 +4,13 @@ import java.util.Locale;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.meeuw.i18n.CountrySubdivision;
-import org.meeuw.i18n.CurrentCountry;
+import org.meeuw.i18n.subdivisions.CountrySubdivision;
+import org.meeuw.i18n.countries.CurrentCountry;
 
 import static com.neovisionaries.i18n.CountryCode.GB;
 import static com.neovisionaries.i18n.CountryCode.NL;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.meeuw.i18n.Country.of;
+import static org.meeuw.i18n.countries.Country.of;
 
 /**
  * @author Michiel Meeuwissen
