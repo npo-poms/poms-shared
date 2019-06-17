@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.bind;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
@@ -13,6 +15,7 @@ import nl.vpro.i18n.Locales;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 public class CountryCodeAdapterTest {
 
     @BeforeClass
@@ -27,6 +30,7 @@ public class CountryCodeAdapterTest {
         CountryCodeAdapter.Code cca = new CountryCodeAdapter.Code();
         Map<String, CountryCode> result = new TreeMap<>();
         for (CountryCode cc : CountryCode.values()) {
+            try {
             String a2 = cc.getAlpha2();
             String a3 = cc.getAlpha3();
             if (a2 != null) {
@@ -34,6 +38,9 @@ public class CountryCodeAdapterTest {
             }
             if (a3 != null && ! a3.equals(a2)) {
                 result.put(a3, cca.unmarshal(a3));
+            }
+            } catch (Exception e) {
+                log.warn(e.getMessage());
             }
         }
         // output sorted
