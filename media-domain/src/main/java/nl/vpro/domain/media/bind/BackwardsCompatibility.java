@@ -5,9 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.util.*;
 
-import org.meeuw.i18n.Country;
 import org.meeuw.i18n.Region;
-
+import org.meeuw.i18n.countries.Country;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
