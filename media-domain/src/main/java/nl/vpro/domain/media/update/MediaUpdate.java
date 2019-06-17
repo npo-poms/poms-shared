@@ -28,10 +28,11 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.meeuw.i18n.bind.jaxb.Code;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.MutableEmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
@@ -39,7 +40,6 @@ import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.TwitterRef;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
@@ -192,7 +192,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     Boolean isDeleted;
 
-    List<CountryCode> countries;
+    List<org.meeuw.i18n.Region> countries;
 
     List<Locale> languages;
 
@@ -890,15 +890,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "country")
-    @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
-    public List<CountryCode> getCountries() {
+    @XmlJavaTypeAdapter(Code.class)
+    public List<org.meeuw.i18n.Region> getCountries() {
          if (countries == null) {
             countries = new ArrayList<>();
          }
         return countries;
     }
 
-    public void setCountries(List<CountryCode> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = countries;
     }
 

@@ -145,8 +145,8 @@
               <modelPackage>nl.vpro.nep.sam.model</modelPackage>
               <invokerPackage>nl.vpro.nep.sam.invoker</invokerPackage>
               <configHelp>false</configHelp>
-              <generateModelTests>false</generateModelTests>
               <generateApiTests>false</generateApiTests>
+              <generateModelTests>false</generateModelTests>
               <configOptions>
                 <strictSpec>true</strictSpec>
                 <dateLibrary>java8</dateLibrary>
