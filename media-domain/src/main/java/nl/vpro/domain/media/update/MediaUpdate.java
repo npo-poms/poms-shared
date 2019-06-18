@@ -522,7 +522,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
 
-        if(intentions != null){
+        if(intentions != null) {
             returnObject.addIntention(toIntentions(intentions, owner));
         }
         if(targetGroups != null){
@@ -548,10 +548,19 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * that are aware of this field (we use empty list to delete)
      */
     private List<IntentionType> toUpdateIntentions(SortedSet<Intentions> intentions, OwnerType owner){
-        return Ownables.filter(intentions, owner).map(Intentions::getValues).map(l -> l.stream().map(Intention::getValue).collect(Collectors.toList())).orElse(new ArrayList<>());
+        if (intentions == null) {
+            return null;
+        }
+        return Ownables.filter(intentions, owner)
+            .map(Intentions::getValues)
+            .map(l -> l.stream().map(Intention::getValue).collect(Collectors.toList()))
+            .orElse(new ArrayList<>());
     }
 
     private Intentions toIntentions(List<IntentionType> intentionValues, OwnerType owner){
+        if (intentionValues == null) {
+            return null;
+        }
         return Intentions.builder()
                 .owner(owner)
                 .values(intentionValues)
@@ -568,10 +577,20 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * that are aware of this field (we use empty list to delete)
      */
     private List<TargetGroupType> toUpdateTargetGroups(SortedSet<TargetGroups> targetGroups, OwnerType owner){
-        return Ownables.filter(targetGroups, owner).map(TargetGroups::getValues).map(l -> l.stream().map(TargetGroup::getValue).collect(Collectors.toList())).orElse(new ArrayList<>());
+        if (targetGroups == null){
+            return null;
+        }
+        return Ownables
+            .filter(targetGroups, owner)
+            .map(TargetGroups::getValues)
+            .map(l -> l.stream().map(TargetGroup::getValue).collect(Collectors.toList()))
+            .orElse(new ArrayList<>());
     }
 
     private TargetGroups toTargetGroups(List<TargetGroupType> targetGroupValues, OwnerType owner){
+        if (targetGroupValues == null){
+            return null;
+        }
         return TargetGroups.builder()
                 .owner(owner)
                 .values(targetGroupValues)
