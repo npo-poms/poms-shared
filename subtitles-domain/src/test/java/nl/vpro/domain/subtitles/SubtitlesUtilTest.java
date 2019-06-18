@@ -44,6 +44,7 @@ public class SubtitlesUtilTest {
     public void toTT888() throws IOException {
         assertThat(TT888.format(SubtitlesUtil
             .parse(getSubtitles(), true)
+            .getCues()
             .findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 00:02:20 00:04:15\n" +
             "888\n" +
             "\n");

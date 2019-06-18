@@ -1,6 +1,5 @@
 package nl.vpro.api.rs.subtitles;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
@@ -10,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.MessageBodyReader;
 
+import nl.vpro.domain.Changeables;
 import nl.vpro.domain.subtitles.Subtitles;
 import nl.vpro.domain.subtitles.SubtitlesFormat;
 
@@ -35,7 +35,9 @@ abstract class AbstractSubtitlesReader implements MessageBodyReader<Subtitles> {
 
     @Override
     public Subtitles readFrom(Class<Subtitles> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws WebApplicationException {
-        return read(entityStream, format);
+        Subtitles subtitles = read(entityStream, format);
+        Changeables.fillFromHeaders(subtitles, httpHeaders);
+        return subtitles;
     }
 
     protected static Subtitles read(InputStream entityStream, SubtitlesFormat format) {

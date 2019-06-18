@@ -46,17 +46,11 @@ public class AVAttributes implements Serializable {
     private AVFileFormat avFileFormat;
 
     @XmlElement
-    @OneToOne(optional = true, orphanRemoval = true)
-    @org.hibernate.annotations.Cascade({
-        org.hibernate.annotations.CascadeType.ALL
-    })
+    @OneToOne(optional = true, orphanRemoval = true, cascade = CascadeType.ALL)
     private AudioAttributes audioAttributes;
 
     @XmlElement
-    @OneToOne(optional = true, orphanRemoval = true)
-    @org.hibernate.annotations.Cascade({
-        org.hibernate.annotations.CascadeType.ALL
-    })
+    @OneToOne(optional = true, orphanRemoval = true, cascade = CascadeType.ALL)
     private VideoAttributes videoAttributes;
 
     public AVAttributes() {

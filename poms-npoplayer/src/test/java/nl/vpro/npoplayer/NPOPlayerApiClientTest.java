@@ -1,11 +1,14 @@
 package nl.vpro.npoplayer;
 
-import nl.vpro.domain.npoplayer.NPOPlayerApiRequest;
-import nl.vpro.domain.npoplayer.NPOPlayerApiResponse;
-import nl.vpro.util.Env;
+import lombok.extern.slf4j.Slf4j;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import nl.vpro.domain.npoplayer.NPOPlayerApiRequest;
+import nl.vpro.domain.npoplayer.NPOPlayerApiResponse;
+import nl.vpro.util.Env;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,6 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author r.jansen
  */
 @Ignore("Tests running server")
+@Slf4j
 public class NPOPlayerApiClientTest {
 
     NPOPlayerApiClient client;
@@ -25,6 +29,7 @@ public class NPOPlayerApiClientTest {
 
     @Test
     public void testGetRestService() throws Exception {
+        log.info("{}", client);
         NPOPlayerApiResponse response = client.getRestService().getVideo("KN_1688939", NPOPlayerApiRequest.builder()
             .id("eenid")
             .startAt(10)

@@ -8,7 +8,7 @@ import javax.annotation.Nonnull;
 
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.util.ResortedSortedSet;
@@ -158,6 +158,7 @@ public class TextualObjects {
         };
     }
 
+    @SuppressWarnings("unchecked")
     public static <OT extends OwnedText> Collection<? extends OwnedText> getObjects(
         Collection<? extends OT> titles,
         Comparator<OwnerType> ownerTypeComparator,
@@ -171,7 +172,6 @@ public class TextualObjects {
         Comparator<OT> comparator = getComparator(ownerTypeComparator);
         List<OT> list;
         if (titles instanceof List) {
-            //noinspection unchecked
             list = (List<OT>) titles;
         } else {
             list = new ArrayList<>(titles);
@@ -197,7 +197,7 @@ public class TextualObjects {
         for (D description : media.getDescriptions()) {
             result.add(description.getOwner());
         }
-        return result.toArray(new OwnerType[result.size()]);
+        return result.toArray(new OwnerType[0]);
     }
 
 
@@ -239,17 +239,17 @@ public class TextualObjects {
         }
     }
 
-    public static <T extends Ownable> List<T> filter(Collection<T> ownables, OwnerType owner) {
+    public static <T extends MutableOwnable> List<T> filter(Collection<T> ownables, OwnerType owner) {
         return ownables.stream().filter(item -> item.getOwner() == owner).collect(Collectors.toList());
     }
 
 
+    @SuppressWarnings("unchecked")
     public static <S> SortedSet<S> sorted(Set<S> set) {
         if (set == null) {
             return null;
         }
         if (set instanceof SortedSet) {
-            //noinspection unchecked
             return (SortedSet) set;
         } else {
             return new ResortedSortedSet<>(set);
@@ -458,6 +458,33 @@ public class TextualObjects {
             }
         }
     }
+
+
+    /**
+     * Copies all titles and descriptions from one {@link TextualObjectUpdate} to a {@link TextualObject}.
+     *
+     * @since 5.11
+     */
+    public static <
+        T1 extends TypedText, D1 extends TypedText, TO1 extends TextualObjectUpdate<T1, D1, TO1>,
+        T2 extends TypedText, D2 extends TypedText, TO2 extends TextualObjectUpdate<T2, D2, TO2>
+        > void copy(
+        TO1 from,
+        TO2 to
+    ) {
+        if (from.getTitles() != null) {
+            for (T1 title : from.getTitles()) {
+                to.setTitle(title.get(), title.getType());
+            }
+        }
+        if (from.getDescriptions() != null) {
+            for (D1 description : from.getDescriptions()) {
+                to.setDescription(description.get(), description.getType());
+            }
+        }
+    }
+
+
 
     /**
      * Copies all titles and descriptions from one {@link TextualObjectUpdate} to a {@link TextualObject}.

@@ -32,7 +32,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.AbstractPublishableObject;
 import nl.vpro.domain.support.License;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -71,7 +71,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @AllArgsConstructor
 @lombok.Builder(builderClassName = "Builder", buildMethodName= "_build")
 @Slf4j
-public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image>, Serializable, Ownable {
+public class Image extends AbstractPublishableObject<Image> implements ImageMetadata<Image>, Serializable, MutableOwnable {
     private static final long serialVersionUID = -140942203904508506L;
 
     public static final String BASE_URN = "urn:vpro:image:";

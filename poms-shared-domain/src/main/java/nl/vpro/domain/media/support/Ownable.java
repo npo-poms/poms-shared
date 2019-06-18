@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.support;
 
+import javax.annotation.Nonnull;
+
 /**
  * Ownable objects are owned by a certain {@link OwnerType}. This indicates something about the authority of the value, and normally the same field value exist for different 'owner types'. E.g. a main title may be owned by 'MIS', but may have a another value but than owned by 'BROADCASTER'. Both values remain available, but in principle the BROADCASTER value overwrites the MIS value (but one may interpret differently).
  *
@@ -12,8 +14,7 @@ package nl.vpro.domain.media.support;
 
 public interface Ownable {
 
+    @Nonnull
     OwnerType getOwner();
-
-    void setOwner(OwnerType owner);
 
 }

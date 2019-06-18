@@ -65,7 +65,8 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     protected RoleType role;
 
     @Column(name = "list_index",
-        nullable = true // hibernate sucks incredibly
+        nullable = true
+        // hibernate sucks incredibly https://stackoverflow.com/questions/41194606/why-does-hibernate-require-the-list-index-to-be-nullable
     )
     @XmlTransient
     @NotNull
@@ -115,13 +116,17 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
 
 
     @lombok.Builder(builderClassName = "Builder")
-    private Person(Long id, String givenName, String familyName, RoleType role, MediaObject mediaObject, GTAARecord gtaaRecord) {
+    private Person(
+        Long id,
+        String givenName,
+        String familyName,
+        RoleType role,
+        MediaObject mediaObject,
+        GTAARecord gtaaRecord) {
         this(id, givenName, familyName, role);
         this.mediaObject = mediaObject;
         this.gtaaRecord = gtaaRecord;
     }
-
-
 
     /**
      * Sets both the given name and the family name by splitting the String.

@@ -51,6 +51,8 @@
           <xs:element name="description" type="descriptionType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="intentions" type="intentionsType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="targetGroups" type="targetGroupsType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -163,13 +165,9 @@
   </xs:complexType>
 
   <xs:complexType name="restriction" abstract="true">
-    <xs:complexContent>
-      <xs:extension base="shared:domainObjectType">
-        <xs:sequence/>
-        <xs:attribute name="start" type="xs:dateTime"/>
-        <xs:attribute name="stop" type="xs:dateTime"/>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence/>
+    <xs:attribute name="start" type="xs:dateTime"/>
+    <xs:attribute name="stop" type="xs:dateTime"/>
   </xs:complexType>
 
   <xs:complexType name="geoRestrictionType">
@@ -218,6 +216,28 @@
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
+  <xs:complexType name="intentionsType">
+    <xs:sequence>
+      <xs:element name="intention" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
+
+  <xs:simpleType name="intentionType">
+    <xs:restriction base="intentionEnum"/>
+  </xs:simpleType>
+
+  <xs:complexType name="targetGroupsType">
+    <xs:sequence>
+      <xs:element name="targetGroup" type="targetGroupType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
+
+  <xs:simpleType name="targetGroupType">
+    <xs:restriction base="targetGroupEnum"/>
+  </xs:simpleType>
 
   <xs:complexType name="countryType">
     <xs:simpleContent>
@@ -270,16 +290,12 @@
   </xs:complexType>
 
   <xs:complexType name="personType">
-    <xs:complexContent>
-      <xs:extension base="shared:domainObjectType">
-        <xs:sequence>
-          <xs:element name="givenName" type="xs:string" minOccurs="0"/>
-          <xs:element name="familyName" type="xs:string" minOccurs="0"/>
-        </xs:sequence>
-        <xs:attribute name="role" type="roleType" use="required"/>
-        <xs:attribute name="gtaaUri" type="xs:string"/>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence>
+      <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+      <xs:element name="familyName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="role" type="roleType" use="required"/>
+    <xs:attribute name="gtaaUri" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="descendantRefType">
@@ -502,11 +518,11 @@
   <xs:simpleType name="region">
     <xs:restriction base="xs:string">
       <xs:enumeration value="NL"/>
-      <xs:enumeration value="BENELUX"/>
       <xs:enumeration value="NLBES"/>
       <xs:enumeration value="NLALL"/>
-      <xs:enumeration value="EU"/>
+      <xs:enumeration value="BENELUX"/>
       <xs:enumeration value="EUROPE"/>
+      <xs:enumeration value="EU"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -530,6 +546,31 @@
       <xs:enumeration value="LEXICO"/>
       <xs:enumeration value="WORK"/>
       <xs:enumeration value="ABBREVIATION"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="intentionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INFORM"/>
+      <xs:enumeration value="INFORM_NEWS_AND_FACTS"/>
+      <xs:enumeration value="INFORM_INDEPTH"/>
+      <xs:enumeration value="INFORM_GENERAL"/>
+      <xs:enumeration value="ENTERTAINMENT"/>
+      <xs:enumeration value="ENTERTAINMENT_LEASURE"/>
+      <xs:enumeration value="ENTERTAINMENT_INFORMATIVE"/>
+      <xs:enumeration value="ACTIVATING"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="targetGroupEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="KIDS_6"/>
+      <xs:enumeration value="KIDS_12"/>
+      <xs:enumeration value="YOUNG_ADULTS"/>
+      <xs:enumeration value="ADULTS"/>
+      <xs:enumeration value="ADULTS_WITH_KIDS_6"/>
+      <xs:enumeration value="ADULTS_WITH_KIDS_12"/>
+      <xs:enumeration value="EVERYONE"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -589,6 +630,8 @@
       <xs:enumeration value="SCRIPTWRITER"/>
       <xs:enumeration value="NEWS_PRESENTER"/>
       <xs:enumeration value="SIDEKICK"/>
+      <xs:enumeration value="SUBJECT"/>
+      <xs:enumeration value="PARTICIPANT"/>
       <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>
@@ -705,6 +748,7 @@
       <xs:enumeration value="SHOW"/>
       <xs:enumeration value="LIGT"/>
       <xs:enumeration value="TURK"/>
+      <xs:enumeration value="ATVT"/>
       <xs:enumeration value="RRTM"/>
       <xs:enumeration value="RMBC"/>
       <xs:enumeration value="RART"/>
@@ -745,6 +789,7 @@
       <xs:enumeration value="ENTE"/>
       <xs:enumeration value="FASH"/>
       <xs:enumeration value="COMC"/>
+      <xs:enumeration value="COMF"/>
       <xs:enumeration value="TBN_"/>
       <xs:enumeration value="DISC"/>
       <xs:enumeration value="ZONE"/>
@@ -792,6 +837,7 @@
       <xs:enumeration value="PALJ"/>
       <xs:enumeration value="ALJA"/>
       <xs:enumeration value="FOXN"/>
+      <xs:enumeration value="FOXT"/>
       <xs:enumeration value="MTV_"/>
       <xs:enumeration value="MTV2"/>
       <xs:enumeration value="HITS"/>
@@ -833,6 +879,7 @@
       <xs:enumeration value="MGMM"/>
       <xs:enumeration value="TCM_"/>
       <xs:enumeration value="HALL"/>
+      <xs:enumeration value="HABN"/>
       <xs:enumeration value="ACNW"/>
       <xs:enumeration value="RHUS"/>
       <xs:enumeration value="PLAY"/>
@@ -895,6 +942,7 @@
       <xs:enumeration value="SBS9"/>
       <xs:enumeration value="DIXD"/>
       <xs:enumeration value="BRNL"/>
+      <xs:enumeration value="BRHD"/>
       <xs:enumeration value="FOXL"/>
       <xs:enumeration value="TLC_"/>
       <xs:enumeration value="VRTC"/>
@@ -905,7 +953,25 @@
       <xs:enumeration value="ZGS1"/>
       <xs:enumeration value="BRTZ"/>
       <xs:enumeration value="DVIC"/>
+      <xs:enumeration value="DVB1"/>
+      <xs:enumeration value="DVB2"/>
+      <xs:enumeration value="DVB3"/>
+      <xs:enumeration value="ZIZO"/>
+      <xs:enumeration value="FANT"/>
       <xs:enumeration value="ONL1"/>
+      <xs:enumeration value="KPN1"/>
+      <xs:enumeration value="KPN2"/>
+      <xs:enumeration value="KPN3"/>
+      <xs:enumeration value="KPN4"/>
+      <xs:enumeration value="ZONH"/>
+      <xs:enumeration value="XM24"/>
+      <xs:enumeration value="MNET"/>
+      <xs:enumeration value="OU24"/>
+      <xs:enumeration value="POKE"/>
+      <xs:enumeration value="RACW"/>
+      <xs:enumeration value="STTV"/>
+      <xs:enumeration value="TVPO"/>
+      <xs:enumeration value="VOOM"/>
     </xs:restriction>
   </xs:simpleType>
 

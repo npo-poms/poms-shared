@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:annotation>
+		<xs:documentation>NPO Restriction XSD 2.2 Copyright 2014 NPO</xs:documentation>
+	</xs:annotation>
+	<!-- geoiprestrictie container -->
+	<xs:element name="geoiprestrictie">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="geoiplabel" type="xs:string" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- encryptie container -->
+	<xs:element name="encryptie">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="encryptielabel" type="xs:string" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- tijdsbeperking container -->
+	<xs:element name="tijdsbeperking">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="starttijd" type="xs:dateTime" />
+				<xs:element name="eindtijd" type="xs:dateTime" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- leeftijdsbeperking container -->
+	<xs:element name="leeftijdsbeperking">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="leeftijd" type="xs:string" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- omroepen container -->
+	<xs:element name="omroepen">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="omroep" type="xs:string" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- restriction / main container -->
+	<xs:element name="restriction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="prid" type="xs:string" />
+				<xs:element name="pridexport" type="xs:string" />
+				<xs:element name="titel" type="xs:string" />
+				<xs:element name="platform" type="xs:string" />
+				<xs:element ref="geoiprestrictie" minOccurs="0" />
+				<xs:element ref="encryptie" minOccurs="0" />
+				<xs:element ref="leeftijdsbeperking" minOccurs="0" />
+				<xs:element ref="tijdsbeperking" minOccurs="0" />
+				<xs:element ref="omroepen" />
+			</xs:sequence>
+			<xs:attribute name="timestamp" type="xs:dateTime" use="required" />
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

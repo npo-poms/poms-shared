@@ -2,39 +2,79 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Range;
 
 /**
- * Also includes setters.
+ * An object having or defining a publication embargo, meaning that it has publish start and stop instants.
+ *
+ * Utilities are provided in {@link Embargos}.
  *
  * @author Michiel Meeuwissen
- * @since 5.1
+ * @since 5.3
  */
-public interface Embargo<T extends Embargo<T>> extends ReadonlyEmbargo {
+public interface Embargo {
 
-    @Nonnull
-    T setPublishStartInstant(@Nullable Instant publishStart);
+    Instant getPublishStartInstant();
 
-    @Nonnull
-    T setPublishStopInstant(@Nullable Instant publishStop);
+    Instant getPublishStopInstant();
 
-    default T set(Range<Instant> range) {
-        if (range.hasLowerBound()) {
-            setPublishStartInstant(range.lowerEndpoint());
+    /**
+     * Returns this embargo object as a guava {@link Range} object.
+     */
+    default Range<Instant> asRange() {
+        if (getPublishStopInstant() == null) {
+            if (getPublishStartInstant() == null) {
+                return Range.all();
+            } else {
+                return Range.lessThan(getPublishStopInstant());
+            }
+        } else if (getPublishStopInstant() == null) {
+            return Range.atLeast(getPublishStartInstant());
         } else {
-            setPublishStartInstant(null);
+            return Range.closedOpen(getPublishStartInstant(), getPublishStopInstant());
         }
-        if (range.hasUpperBound()) {
-            setPublishStopInstant(range.upperEndpoint());
-        } else {
-            setPublishStopInstant(null);
-        }
-        return (T) this;
+
     }
 
+    default boolean isUnderEmbargo(Instant now) {
+        return !inPublicationWindow(now);
+    }
+
+    default boolean isUnderEmbargo() {
+        return isUnderEmbargo(Instant.now());
+    }
+
+    default boolean wasUnderEmbargo() {
+        Instant stop = getPublishStopInstant();
+        return stop != null && stop.isBefore(Instant.now());
+    }
+
+    default boolean willBeUnderEmbargo() {
+        return willBeUnderEmbargo(Instant.now());
+    }
+
+
+    default boolean willBeUnderEmbargo(Instant now) {
+        Instant start = getPublishStartInstant();
+        Instant stop = getPublishStopInstant();
+        return (start != null && start.isAfter(now)) || (stop != null && stop.isAfter(now));
+    }
+    default boolean willBePublished() {
+        return isUnderEmbargo() && getPublishStopInstant().isAfter(Instant.now());
+    }
+
+    default boolean inPublicationWindow(Instant now) {
+        Instant stop = getPublishStopInstant();
+        if (stop != null && ! now.isBefore(stop)) {
+            return false;
+        }
+        Instant start = getPublishStartInstant();
+        if (start != null && start.isAfter(now)) {
+            return false;
+        }
+
+        return true;
+    }
 
 
 }

@@ -11,6 +11,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -23,8 +24,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -73,7 +76,8 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
         "source",
         "sourceName",
         "license",
-        "date"
+        "date",
+        "crids"
     })
 @JsonPropertyOrder({
     "title",
@@ -91,11 +95,12 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "type",
     "highlighted",
     "creationDate",
-    "workflow"
+    "workflow",
+    "crids"
 })
 @Slf4j
 public class Image extends PublishableObject<Image>
-    implements Metadata<Image>, Ownable, MediaObjectChild, Child<MediaObject> {
+    implements Metadata<Image>, MutableOwnable, Child<MediaObject> {
     public static final Pattern SERVER_URI_PATTERN = Pattern.compile("^urn:vpro[.:]image:(\\d+)$");
 
     public static final String BASE_URN = "urn:vpro:media:image:";
@@ -129,6 +134,7 @@ public class Image extends PublishableObject<Image>
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE, required = true)
     private String title;
 
+    @SuppressWarnings("NullableProblems")
     @Column(name = "imageurl")
     @ImageURI
     @NotNull(groups = {PrePersistValidatorGroup.class})
@@ -157,11 +163,13 @@ public class Image extends PublishableObject<Image>
     @Setter
     private Integer height;
 
+    @SuppressWarnings("NullableProblems")
     @NoHtml
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
     private String credits;
 
+    @SuppressWarnings("NullableProblems")
     @URI()
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
@@ -169,6 +177,7 @@ public class Image extends PublishableObject<Image>
     @Setter
     private String source;
 
+    @SuppressWarnings("NullableProblems")
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @Size.List({
         @Size(max = 255, message = "{nl.vpro.constraints.text.Size.max}")
@@ -178,6 +187,7 @@ public class Image extends PublishableObject<Image>
     @Setter
     private String sourceName;
 
+    @SuppressWarnings("NullableProblems")
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     @NotNull(groups = {WarningValidatorGroup.class})
     @Embedded
@@ -188,6 +198,19 @@ public class Image extends PublishableObject<Image>
     @ReleaseDate()
     @XmlElement(namespace = Xmlns.SHARED_NAMESPACE)
     private String date;
+
+
+    @ElementCollection
+    @Column(name = "crid", nullable = false, unique = true)
+    @OrderColumn(name = "list_index", nullable = false)
+    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @StringList(maxLength = 255)
+    @Getter
+    @Setter
+    @XmlElement(name = "crid", namespace = Xmlns.SHARED_NAMESPACE)
+    @JsonProperty("crids")
+    protected List<String> crids;
+
 
     @ManyToOne
     @XmlTransient
@@ -214,8 +237,6 @@ public class Image extends PublishableObject<Image>
     public static class Builder implements EmbargoBuilder<Builder> {
         private OwnerType owner = OwnerType.BROADCASTER;
         private ImageType type = ImageType.PICTURE;
-
-
 
 
         public Builder creationDate(Instant instant) {
@@ -340,10 +361,6 @@ public class Image extends PublishableObject<Image>
 
     @Override
     public void setDescription(String description) {
-        if(description != null && description.length() > 255) {
-            description = description.substring(0, 254);
-        }
-
         this.description = description;
     }
 
@@ -362,6 +379,7 @@ public class Image extends PublishableObject<Image>
         return imageUri;
     }
 
+    @SuppressWarnings("ConstantConditions")
     public Image setImageUri(String uri) {
         this.imageUri = uri == null ? null : uri.trim();
         return this;
@@ -390,6 +408,7 @@ public class Image extends PublishableObject<Image>
         return credits;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public void setCredits(String credits) {
         this.credits = !StringUtils.isBlank(credits) ? credits : null;
@@ -488,6 +507,7 @@ public class Image extends PublishableObject<Image>
         return image;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public ChangeReport copyFrom(@Nonnull Metadata<?> metadata) {
         ChangeReport change = Metadata.super.copyFrom(metadata);
@@ -502,6 +522,7 @@ public class Image extends PublishableObject<Image>
         return change;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : (imageUri == null ? 0 : imageUri.hashCode());

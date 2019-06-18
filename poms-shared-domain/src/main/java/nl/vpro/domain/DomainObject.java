@@ -11,10 +11,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -23,13 +20,12 @@ import javax.xml.bind.annotation.XmlType;
  * @author roekoe
  */
 @MappedSuperclass
-@XmlType(name = "domainObjectType", namespace = Xmlns.SHARED_NAMESPACE)
-@XmlAccessorType(XmlAccessType.FIELD)
 @ToString
+@XmlTransient
 public abstract class DomainObject implements Identifiable<Long>, Serializable {
 
     @Id
-    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize=1)
+    @SequenceGenerator(name = "hibernate_sequences", sequenceName = "hibernate_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hibernate_sequences")
     @XmlTransient // Don't remove!
     @Getter

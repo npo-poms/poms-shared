@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Xmlns;
 import nl.vpro.validation.LicenseId;
 
@@ -42,7 +43,7 @@ import nl.vpro.validation.LicenseId;
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonSerialize(using = License.Serializer.class)
 @Embeddable
-public class License implements nl.vpro.domain.Displayable, Serializable { // Not an enum, because that is hard for older clients!
+public class License implements Displayable, Serializable { // Not an enum, because that is hard for older clients!
 
     private static final long serialVersionUID = 0L;
 
@@ -95,7 +96,7 @@ public class License implements nl.vpro.domain.Displayable, Serializable { // No
                 }
             }
         }
-        ALL =  alls.toArray(new License[alls.size()]);
+        ALL =  alls.toArray(new License[0]);
     }
 
 

@@ -8,7 +8,13 @@
     <xs:sequence>
       <xs:any processContents="lax" namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute name="version" type="xs:float"/>
+    <xs:attribute name="version">
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[0-9]+(\.[0-9]+(\.[0-9]+)?)?" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
   </xs:complexType>
 </xs:schema>
 

@@ -93,11 +93,11 @@ import static nl.vpro.domain.TextualObjects.sorted;
     "primaryLifestyle",
     "secondaryLifestyle"
 })
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "NullableProblems", "ConstantConditions"})
 public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventIdentifier>,
     Comparable<ScheduleEvent>,
     TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent>,
-    MediaObjectChild, Child<MediaObject> {
+    Child<MediaObject> {
 
     @Id
     @Enumerated(EnumType.STRING)

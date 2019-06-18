@@ -23,6 +23,8 @@ import nl.vpro.domain.page.PageType;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
+import static nl.vpro.test.util.jaxb.JAXBTestUtil.roundTrip;
+import static nl.vpro.test.util.jaxb.JAXBTestUtil.roundTripContains;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -42,8 +44,10 @@ public class PageUpdateBuilderTest {
     @Test
     public void testBroadcasters() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").broadcasters("VPRO", "VARA").build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:broadcaster>VPRO</pageUpdate:broadcaster>\n" +
-            "    <pageUpdate:broadcaster>VARA</pageUpdate:broadcaster>");
+        PageUpdate result = roundTripContains(page,
+            "<pageUpdate:broadcaster xmlns:pageUpdate='urn:vpro:pages:update:2013'>VPRO</pageUpdate:broadcaster>",
+            "<pageUpdate:broadcaster xmlns:pageUpdate='urn:vpro:pages:update:2013'>VARA</pageUpdate:broadcaster>"
+        );
         assertThat(result.getBroadcasters()).containsExactly("VPRO", "VARA");
     }
 
@@ -60,36 +64,37 @@ public class PageUpdateBuilderTest {
     @Test
     public void testTitle() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").title("Page title").build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:title>Page title</pageUpdate:title>");
+        PageUpdate result = roundTripContains(page, "<pageUpdate:title xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">Page title</pageUpdate:title>");
         assertThat(result.getTitle()).isEqualTo("Page title");
     }
 
     @Test
     public void testSubtitle() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").subtitle("Page subtitle").build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:subtitle>Page subtitle</pageUpdate:subtitle>");
+        PageUpdate result = roundTripContains(page, "<pageUpdate:subtitle xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">Page subtitle</pageUpdate:subtitle>");
         assertThat(result.getSubtitle()).isEqualTo("Page subtitle");
     }
 
     @Test
     public void testKeywords() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").keywords("key", "word").build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:keyword>key</pageUpdate:keyword>\n" +
-            "    <pageUpdate:keyword>word</pageUpdate:keyword>");
+        PageUpdate result = roundTripContains(page, "<pageUpdate:keyword xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">key</pageUpdate:keyword>",
+            "<pageUpdate:keyword  xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">word</pageUpdate:keyword>"
+        );
         assertThat(result.getKeywords()).containsExactly("key", "word");
     }
 
     @Test
     public void testSummary() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").summary("summary").build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:summary>summary</pageUpdate:summary>");
+        PageUpdate result = roundTripContains(page, "<pageUpdate:summary  xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">summary</pageUpdate:summary>");
         assertThat(result.getSummary()).isEqualTo("summary");
     }
 
     @Test
     public void testParagraphs() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").paragraphs(new ParagraphUpdate(null, "body1", null), new ParagraphUpdate(null, "body2", null)).build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:paragraphs>\n" +
+        PageUpdate result = roundTripContains(page, "<pageUpdate:paragraphs xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
             "        <pageUpdate:paragraph>\n" +
             "            <pageUpdate:body>body1</pageUpdate:body>\n" +
             "        </pageUpdate:paragraph>\n" +
@@ -103,7 +108,7 @@ public class PageUpdateBuilderTest {
     @Test
     public void testTags() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").tags("tag1", "tag2").build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:tag>tag1</pageUpdate:tag>\n" +
+        PageUpdate result = roundTrip(page, "<pageUpdate:tag>tag1</pageUpdate:tag>\n" +
             "    <pageUpdate:tag>tag2</pageUpdate:tag>");
         assertThat(result.getTags()).containsExactly("tag1", "tag2");
     }
@@ -111,7 +116,7 @@ public class PageUpdateBuilderTest {
     @Test
     public void testLinks() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").links(new LinkUpdate("http://www.vpro.nl", "Link text")).build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:link pageRef=\"http://www.vpro.nl\">\n" +
+        PageUpdate result = roundTrip(page, "<pageUpdate:link pageRef=\"http://www.vpro.nl\">\n" +
             "        <pageUpdate:text>Link text</pageUpdate:text>\n" +
             "    </pageUpdate:link>");
         assertThat(result.getLinks()).containsExactly(new LinkUpdate("http://www.vpro.nl", "Link text"));
@@ -120,7 +125,7 @@ public class PageUpdateBuilderTest {
     @Test
     public void testEmbeds() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").embeds(new EmbedUpdate("MID_1234", "Title", "Description")).build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:embeds>\n" +
+        PageUpdate result = roundTrip(page, "<pageUpdate:embeds>\n" +
             "        <pageUpdate:embed midRef=\"MID_1234\">\n" +
             "            <pageUpdate:title>Title</pageUpdate:title>\n" +
             "            <pageUpdate:description>Description</pageUpdate:description>\n" +
@@ -132,7 +137,7 @@ public class PageUpdateBuilderTest {
     @Test
     public void testImages() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").images(new ImageUpdate(new Image("http://somewhere"))).build();
-        PageUpdate result = JAXBTestUtil.roundTrip(page, "<pageUpdate:image>\n" +
+        PageUpdate result = roundTrip(page, "<pageUpdate:image>\n" +
             "        <pageUpdate:imageLocation>\n" +
             "            <pageUpdate:url>http://somewhere</pageUpdate:url>\n" +
             "        </pageUpdate:imageLocation>\n" +

@@ -14,12 +14,14 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.Iterables;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
 import nl.vpro.util.DateUtils;
@@ -32,7 +34,7 @@ import static nl.vpro.domain.media.support.Workflow.PUBLISHED;
 /**
  * Various methods related to dealing with {@link MediaObject}s, like copying and filling.
  *
- * See {@link TextualObjects}, and {@link Embargos} for methods like this (because media objects are {@link TextualObject} and {@link Embargo}
+ * See {@link TextualObjects}, and {@link Embargos} for methods like this (because media objects are {@link TextualObject} and {@link MutableEmbargo}
  * @since 1.5
  */
 @Slf4j
@@ -79,6 +81,9 @@ public class MediaObjects {
         }
     }
 
+    /**
+     * Perfomrs of deep copy of the media object, this is currently implemented by serializing/deserializing it.
+     */
     @SuppressWarnings("unchecked")
     public static <T extends MediaObject> T deepCopy(T media) {
         ObjectOutputStream objectOut = null;
@@ -115,20 +120,93 @@ public class MediaObjects {
     }
 
 
-    public static void copy(MediaObject from, MediaObject to) {
+    /**
+     * Copies most field values from one media object to another.
+     *
+     * In principal this should be all fields of which the value logically can exist on more than one mediaobject the same time,
+     * so not unique fields like id and mid.
+     *
+     * Also membership of groups will not be automatically filled. This would need write access on those objects.
+     *
+     * Scheduleevents, predictions, workflow, subtitles status are not copied too, since this this would not make sense.
+     *
+     *
+     *
+     */
+    public static void copy(@Nonnull MediaObject from, @Nonnull MediaObject to) {
         Embargos.copy(from, to);
         TextualObjects.copy(from, to);
-        to.setCountries(from.getCountries());
-        to.setLanguages(from.getLanguages());
-        to.setDuration(from.getDuration());
+
         to.setAgeRating(from.getAgeRating());
+        to.setAvAttributes(from.getAvAttributes());
+        to.setAVType(from.getAVType());
+        to.setAwards(from.getAwards());
+
+        to.setBroadcasters(from.getBroadcasters());
+
         to.setContentRatings(from.getContentRatings());
-        to.setWebsites(from.getWebsites());
+        to.setCountries(from.getCountries());
+
+        to.setDuration(from.getDuration());
+
+
+        //to.setDescendantOf();
         to.setEmail(from.getEmail());
+        to.setEmbeddable(from.isEmbeddable());
+
         to.setGenres(from.getGenres());
-        // TODO: more fields
+        to.setGeoRestrictions(from.getGeoRestrictions());
+
+        // to.setHasSubtitles(from.hasSubtitles());
+        to.setImages(from.getImages());
+        to.setIntentions(from.getIntentions());
+
+        to.setIsDubbed(from.isDubbed());
+
+        to.setLanguages(from.getLanguages());
+        to.setLocations(from.getLocations());
+
+        //to.setMediaType(from.getMediaType());
+        //to.setMemberOf();
+
+        to.setPersons(from.getPersons());
+        to.setPortalRestrictions(from.getPortalRestrictions());
+        to.setPortals(from.getPortals());
+        //to.setPredictions();
+        to.setRelations(from.getRelations());
+        to.setReleaseYear(from.getReleaseYear());
+
+        //to.setScheduleEvents();
+        to.setSource(from.getSource());
+
+        to.setTags(from.getTags());
+        to.setTeletext(from.getTeletext());
+        to.setTwitterRefs(from.getTwitterRefs());
+        to.setTargetGroups(from.getTargetGroups());
+
+        to.setWebsites(from.getWebsites());
 
     }
+
+
+    /**
+     * A more full copy, also copying field that you could normally not copy, like MID.
+     *
+     * The assumption is that both objects are not yet persistent
+     * @since 5.11
+     */
+    public static void copyFull(@Nonnull MediaObject from, @Nonnull MediaObject to) {
+        copy(from, to);
+        to.setMid(from.getMid());
+        to.setScheduleEvents(from.getScheduleEvents());
+        if (to.getClass().isAssignableFrom(from.getClass())) {
+            to.setMediaType(from.getMediaType());
+        }
+        to.setMemberOf(from.getMemberOf());
+        to.setCrids(from.getCrids());
+
+    }
+
 
 
     public static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject) throws NotFoundException {
@@ -196,7 +274,7 @@ public class MediaObjects {
     /**
      * Returns the channel associated with this program. That is the channel of the earliest schedule event that is not a rerun.
      */
-    public static Channel getChannel(MediaObject program) {
+    public static Channel getChannel(@Nonnull MediaObject program) {
         for (ScheduleEvent se : program.getScheduleEvents()) {
             if (! ScheduleEvents.isRerun(se)) {
                 return se.getChannel();
@@ -209,7 +287,7 @@ public class MediaObjects {
     /**
      * @since 2.2.3
      */
-    public static String getRelationText(MediaObject object, String relationType) {
+    public static String getRelationText(@Nonnull MediaObject object, String relationType) {
         Relation rel = getRelation(object, relationType);
         return rel == null ? null : rel.getText();
     }
@@ -217,7 +295,7 @@ public class MediaObjects {
     /**
      * @since 3.3.0
      */
-    public static Relation getRelation(MediaObject object, String relationType) {
+    public static Relation getRelation(@Nonnull MediaObject object, String relationType) {
         for (Relation relation : object.getRelations()) {
             if (relation.getType().equals(relationType)) {
                 return relation;
@@ -226,7 +304,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static TwitterRef getTwitterHash(MediaObject object) {
+    public static TwitterRef getTwitterHash(@Nonnull  MediaObject object) {
         for (TwitterRef ref : object.getTwitterRefs()) {
             if (ref.getType() == TwitterRef.Type.HASHTAG) {
                 return ref;
@@ -235,7 +313,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static TwitterRef getTwitterAccount(MediaObject object) {
+    public static TwitterRef getTwitterAccount(@Nonnull MediaObject object) {
         for (TwitterRef ref : object.getTwitterRefs()) {
             if (ref.getType() == TwitterRef.Type.ACCOUNT) {
                 return ref;
@@ -244,7 +322,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static String getKijkwijzer(MediaObject media) {
+    public static String getKijkwijzer(@Nonnull MediaObject media) {
         StringBuilder sb = new StringBuilder();
         if (media.getAgeRating() != null) {
             switch (media.getAgeRating()) {
@@ -273,7 +351,7 @@ public class MediaObjects {
     }
 
 
-    private static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject, Set<MediaObject> handled) throws NotFoundException {
+    private static void matchBroadcasters(@Nonnull  BroadcasterService broadcasterService, @Nonnull  MediaObject mediaObject, @Nonnull Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
@@ -307,13 +385,13 @@ public class MediaObjects {
         }
     }
 
-    public static void removeLocations(MediaObject mediaObject) {
+    public static void removeLocations(@Nonnull MediaObject mediaObject) {
         while (mediaObject.getLocations().size() > 0) {
             mediaObject.removeLocation(mediaObject.getLocations().first());
         }
     }
 
-    public static void addAll(MediaObject mediaObject, Iterable<Location> i) {
+    public static void addAll(@Nonnull MediaObject mediaObject, Iterable<Location> i) {
         for (Location l : i) {
             mediaObject.addLocation(l);
         }
@@ -321,7 +399,7 @@ public class MediaObjects {
 
 
 
-    public static Instant getSortInstant(MediaObject mo) {
+    public static Instant getSortInstant(@Nonnull MediaObject mo) {
         if (mo instanceof Group) {
             return mo.sortInstant;
         } else if (mo instanceof Segment) {
@@ -361,7 +439,7 @@ public class MediaObjects {
     }
 
 
-    public static boolean trim(Collection<?> collection) {
+    public static boolean trim(@Nonnull Collection<?> collection) {
         boolean trimmed = false;
         for (java.util.Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
             Object next = iterator.next();
@@ -374,7 +452,7 @@ public class MediaObjects {
         return trimmed;
     }
 
-    public static <T extends UpdatableIdentifiable<?, T>> void integrate(List<T> existing, List<T> updates) {
+    public static <T extends UpdatableIdentifiable<?, T>> void integrate(@Nonnull List<T> existing, @Nonnull List<T> updates) {
         T move = null;
         for (int i = 0; i < updates.size(); i++) {
             T incoming = updates.get(i);
@@ -401,7 +479,7 @@ public class MediaObjects {
         }
     }
 
-    public static void markForRepublication(MediaObject media, String reason) {
+    public static void markForRepublication(@Nonnull MediaObject media, String reason) {
         if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(Instant.now())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             media.setRepubReason(reason);
@@ -410,7 +488,24 @@ public class MediaObjects {
         }
     }
 
-    public static void markPublished(MediaObject media, Instant now, String reason) {
+
+    public static void markForDeletion(@Nonnull MediaObject media, String reason) {
+        if (! Workflow.DELETES.contains(media.getWorkflow())) {
+            media.setWorkflow(Workflow.FOR_DELETION);
+            media.setRepubReason(reason);
+            media.setRepubDestinations(null);
+        }
+    }
+
+    public static void markForUnDeletion(@Nonnull MediaObject media, String reason) {
+        if (Workflow.DELETES.contains(media.getWorkflow())) {
+            media.setWorkflow(Workflow.FOR_REPUBLICATION);
+            media.setRepubReason(reason);
+            media.setRepubDestinations(null);
+        }
+    }
+
+    public static void markPublished(@Nonnull MediaObject media, @Nonnull Instant now, String reason) {
         media.setLastPublishedInstant(now);
         media.setRepubReason(reason);
         media.setRepubDestinations(null);
@@ -468,7 +563,7 @@ public class MediaObjects {
         return prediction;
     }
 
-    public static Prediction updatePrediction(MediaObject media, Platform platform, ReadonlyEmbargo embargo, Encryption drm) {
+    public static Prediction updatePrediction(MediaObject media, Platform platform, Embargo embargo, Encryption drm) {
         Prediction prediction = media.findOrCreatePrediction(platform);
         prediction.setEncryption(drm);
         Embargos.copy(embargo, prediction);
@@ -484,7 +579,7 @@ public class MediaObjects {
     /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
      *
-     * TODO work in progress. This may replace the hibernate filter solution now in place (but probably broken right now MSE-3526 ?)
+     * TODO work in progress. This may replace the hibernate filter solution now in place.
      */
     public static <T extends PublishableObject> T filterPublishable(T object) {
         Predicate<Object> p = (o) -> {
@@ -727,7 +822,7 @@ public class MediaObjects {
      * @deprecated Use {@link TextualObjects#filter}
      */
     @Deprecated
-    public static <T extends Ownable> List<T> filter(Collection<T> ownables, OwnerType owner) {
+    public static <T extends MutableOwnable> List<T> filter(Collection<T> ownables, OwnerType owner) {
         return TextualObjects.filter(ownables, owner);
     }
 

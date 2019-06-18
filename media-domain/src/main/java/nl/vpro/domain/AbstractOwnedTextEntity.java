@@ -23,6 +23,7 @@ import nl.vpro.validation.NoHtml;
 @XmlTransient
 public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity, P> extends AbstractOwnedText<T> {
 
+    @SuppressWarnings("NullableProblems")
     @Column(nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @Size.List({
@@ -39,6 +40,7 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity,
     @XmlTransient
     private Long id;
 
+    @SuppressWarnings("NullableProblems")
     @ManyToOne
     @NotNull
     private P parent;
@@ -79,6 +81,7 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity,
         this.parent = parent;
     }
 
+    @SuppressWarnings({"unchecked", "ConstantConditions"})
     @Override
     public boolean equals(Object o) {
         if (this.getClass().isInstance(o)) {

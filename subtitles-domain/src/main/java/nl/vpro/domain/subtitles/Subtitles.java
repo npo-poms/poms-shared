@@ -25,8 +25,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.PeekingIterator;
 
+import nl.vpro.domain.Changeable;
 import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.persistence.InstantToTimestampConverter;
@@ -53,27 +54,33 @@ import static nl.vpro.i18n.Locales.DUTCH;
 })
 @Slf4j
 @IdClass(SubtitlesId.class)
-public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Ownable {
+public class Subtitles implements Serializable, Identifiable<SubtitlesId>, MutableOwnable, Changeable {
 
     private static final long serialVersionUID = 0L;
 
-    @Column(nullable = false)
-    @XmlAttribute
+    @Column(nullable = false, name="creationDate")
+    @XmlAttribute(name = "creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @Convert(converter = InstantToTimestampConverter.class)
     @XmlSchemaType(name = "dateTime")
-    protected Instant creationDate = Instant.now();
+    @Getter
+    @Setter
+    protected Instant creationInstant = Instant.now();
 
 
-    @Column(nullable = false)
-    @XmlAttribute
+    @Column(nullable = false, name = "lastModified")
+    @XmlAttribute(name = "lastModified")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @Convert(converter = InstantToTimestampConverter.class)
     @XmlSchemaType(name = "dateTime")
-    protected Instant lastModified = Instant.now();
+    @Getter
+    @Setter
+    protected Instant lastModifiedInstant = Instant.now();
 
     @Id
     @XmlAttribute(required = true)
+    @Getter
+    @Setter
     protected String mid;
 
 
@@ -186,8 +193,8 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Ownab
     public static Subtitles from(Iterator<StandaloneCue> cueIterator) {
         PeekingIterator<StandaloneCue> peeking = Iterators.peekingIterator(cueIterator);
         Subtitles subtitles = new Subtitles();
-        subtitles.setCreationDate(null);
-        subtitles.setLastModified(null);
+        subtitles.setCreationInstant(null);
+        subtitles.setLastModifiedInstant(null);
 
         StringWriter writer = new StringWriter();
         try {
@@ -238,30 +245,6 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Ownab
             .build();
     }
 
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
-    }
-
-
-    public Instant getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getMid() {
-        return mid;
-    }
-
-    public void setMid(String mid) {
-        this.mid = mid;
-    }
 
     public Duration getOffset() {
         return offset;
@@ -341,7 +324,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Ownab
         final StringBuilder sb = new StringBuilder();
         sb.append("Subtitles");
         sb.append("{mid='").append(mid).append('\'');
-        sb.append(", creationDate=").append(creationDate);
+        sb.append(", creationDate=").append(creationInstant);
         sb.append('}');
         return sb.toString();
     }

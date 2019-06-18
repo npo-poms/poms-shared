@@ -46,10 +46,10 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
 
     @Inject
     public NEPCurlDownloadServiceImpl(
-        @Value("${nep.sftp.host}") String ftpHost,
-        @Value("${nep.sftp.username}") String username,
-        @Value("${nep.sftp.password}") String password,
-        @Value("${nep.sftp.hostkey}") String hostkey,
+        @Value("${nep.gatekeeper-download.host}") String ftpHost,
+        @Value("${nep.gatekeeper-download.username}") String username,
+        @Value("${nep.gatekeeper-download.password}") String password,
+        @Value("${nep.gatekeeper-download.hostkey}") String hostkey,
         @Value("${executables.curl}") List<String> executables
     ) {
         this.ftpHost = ftpHost;

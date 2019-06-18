@@ -16,12 +16,14 @@ public class StandaloneCueTest {
     public void json() throws Exception {
         StandaloneCue cue = new StandaloneCue(Cue.forMid("MID_123")
             .content("bla bla")
+            .identifier("cue 1")
             .sequence(0).build(),
             Locale.US, SubtitlesType.TRANSLATION);
 
         Jackson2TestUtil.roundTripAndSimilar(cue, "{\n" +
             "  \"parent\" : \"MID_123\",\n" +
             "  \"sequence\" : 0,\n" +
+            "   \"identifier\" : \"cue 1\"," +
             "  \"type\" : \"TRANSLATION\",\n" +
             "  \"content\" : \"bla bla\",\n" +
             "  \"lang\" : \"en-US\"\n" +

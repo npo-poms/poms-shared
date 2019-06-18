@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -56,6 +57,7 @@ public class MultipleFacetsResult implements Nameable, Iterable<TermFacetResultI
         this.facets = facets;
     }
 
+    @Nonnull
     @Override
     public Iterator<TermFacetResultItem> iterator() {
         if (facets == null) {

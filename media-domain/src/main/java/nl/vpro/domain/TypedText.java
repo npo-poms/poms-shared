@@ -2,6 +2,8 @@ package nl.vpro.domain;
 
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Typable;
 
@@ -23,7 +25,7 @@ public interface TypedText extends Typable<TextualType>, Supplier<String>, Compa
     }
 
     @Override
-    default int compareTo(TypedText title) {
+    default int compareTo(@Nonnull TypedText title) {
         if (title == null) {
             return -1;
         }

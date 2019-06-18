@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.time.Instant;
 import java.util.*;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -102,20 +103,20 @@ public class MediaTable implements Iterable<MediaObject> {
         return this;
     }
 
-    public <T extends MediaObject> T find(String mid) {
+    public <T extends MediaObject> Optional<T> find(String mid) {
         for (MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
             if (Objects.equals(p.getMid(), mid)) {
-                return (T) p;
+                return Optional.of((T) p);
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
      * @since 5.9
      */
     public boolean contains(String mid) {
-        return find(mid) != null;
+        return find(mid).isPresent();
     }
 
     public List<Program> getProgramTable() {
@@ -155,8 +156,12 @@ public class MediaTable implements Iterable<MediaObject> {
         return "MediaTable " + getGroupTable().size() + " groups " + getProgramTable().size() + " program " + getSchedule();
     }
 
+    @Nonnull
     @Override
     public Iterator<MediaObject> iterator() {
-        return Iterators.concat(getProgramTable().listIterator(), getGroupTable().listIterator());
+        return Iterators.concat(
+            getProgramTable().listIterator(),
+            getGroupTable().listIterator()
+        );
     }
 }

@@ -23,6 +23,7 @@ public class OwnerTypeTest {
         assertThat(ot.compare(OwnerType.BROADCASTER, OwnerType.NPO)).isNegative();
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void deprecated() {
         assertThat(OwnerType.IMMIX.isDeprecated()).isTrue();

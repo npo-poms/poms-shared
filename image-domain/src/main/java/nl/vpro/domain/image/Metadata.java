@@ -5,7 +5,7 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.ChangeReport;
 import nl.vpro.domain.support.License;
@@ -15,7 +15,7 @@ import nl.vpro.util.TimeUtils;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
+public interface Metadata<T extends Metadata<T>>  extends MutableEmbargo<T> {
 
     String getImageUri();
 
@@ -115,7 +115,7 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
             setType(source.getType());
             change.change();
         }
-        if (StringUtils.isEmpty(getTitle()) &&  ! Objects.equals(getType(), source.getType())) {
+        if (StringUtils.isEmpty(getTitle()) &&  ! Objects.equals(getTitle(), source.getTitle())) {
             setTitle(source.getTitle());
             change.change();
         }
@@ -123,6 +123,7 @@ public interface Metadata<T extends Metadata<T>>  extends Embargo<T> {
             setDescription(source.getDescription());
             change.change();
         }
+
         if ((getHeight() == null || getHeight() < 0) &&  ! Objects.equals(getHeight(), source.getHeight())) {
             setHeight(source.getHeight());
             change.change();

@@ -118,6 +118,26 @@ public enum RoleType {
         }
 
     },
+    /**
+     * https://jira.vpro.nl/browse/MSE-4371
+     * @since 5.11
+     */
+    SUBJECT {
+        @Override
+        public String toString() {
+            return "Onderwerp";
+        }
+    },
+    /**
+     * See https://jira.vpro.nl/browse/MSE-4371
+     * @since 5.11
+     */
+    PARTICIPANT {
+        @Override
+        public String toString() {
+            return "Deelnemer";
+        }
+    },
     UNDEFINED {
         @Override
         public String toString() {

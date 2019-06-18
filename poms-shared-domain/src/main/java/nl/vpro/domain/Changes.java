@@ -10,9 +10,12 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import nl.vpro.util.CloseableIterator;
 
 /**
+ * Represent an iterable of {@link Change}'s.
  * @author Michiel Meeuwissen
  * @since 5.1
  */
@@ -55,6 +58,7 @@ public class Changes<T> implements AutoCloseable, Iterable<Change<T>> {
     public void close() throws Exception {
         iterator.close();
     }
+    @Nonnull
     @Override
     public Iterator<Change<T>> iterator() {
         return (Iterator<Change<T>>) iterator;

@@ -17,7 +17,7 @@ import static nl.vpro.api.rs.subtitles.Constants.*;
  * @since 5.1
  */
 @Provider
-@Produces(TT888)
+@Produces(TT888_WITH_CHARSET)
 public class TT888SubtitlesWriter extends AbstractSubtitlesWriter {
 
 

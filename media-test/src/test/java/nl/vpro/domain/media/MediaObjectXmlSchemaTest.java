@@ -28,6 +28,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -36,6 +37,7 @@ import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
+import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -375,7 +377,7 @@ public class MediaObjectXmlSchemaTest {
     public void testAgeRating() {
         Program program = program().withAgeRating().build();
 
-        Program result = JAXBTestUtil.roundTrip(program, "<ageRating>12</ageRating>");
+        Program result = JAXBTestUtil.roundTripContains(program, "<ageRating xmlns='urn:vpro:media:2009'>12</ageRating>");
 
         assertThat(result.getAgeRating()).isNotNull();
     }
@@ -845,6 +847,57 @@ public class MediaObjectXmlSchemaTest {
             "</program>");
 
 
+    }
+
+    @Test
+    public void testWithIntentions() throws IOException, JAXBException {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/intention-scenarios.xml"), segment, "UTF-8");
+        String expected = segment.toString();
+        log.info(expected);
+
+        Intentions intentions = Intentions.builder()
+                .owner(OwnerType.NPO)
+                .values(Arrays.asList(IntentionType.ACTIVATING, IntentionType.INFORM_INDEPTH))
+                .build();
+        Program program = program().lean()
+                .mid("9").avType(AVType.AUDIO)
+                .type(ProgramType.BROADCAST).embeddable(true)
+                .build();
+
+        program.setSortInstant(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).toInstant());
+        program.addIntention(intentions);
+
+        String actual = toXml(program);
+
+        assertThat(actual).isXmlEqualTo(segment.toString());
+
+        intentions.setParent(null);
+        Intentions intentionsWithoutParent = intentions;
+        Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);
+        assertThat(programExpected.getIntentions().iterator().next()).isEqualTo(intentionsWithoutParent);
+    }
+
+    @Test
+    public void testUnmarshalWithNullIntentions() throws IOException, JAXBException {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/intention-null-scenarios.xml"), segment, "UTF-8");
+        String xmlInput = segment.toString();
+        log.info(xmlInput);
+
+        Program programExpected = JAXBTestUtil.unmarshal(xmlInput, Program.class);
+        assertThat(programExpected.getIntentions()).isNull();
+    }
+
+    @Test
+    public void testUnmarshalWithEmptyIntentions() throws IOException, JAXBException {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/intention-empty-scenarios.xml"), segment, "UTF-8");
+        String xmlInput = segment.toString();
+        log.info(xmlInput);
+
+        Program programExpected = JAXBTestUtil.unmarshal(xmlInput, Program.class);
+        assertThat(programExpected.getIntentions().first().getOwner()).isEqualTo(OwnerType.NPO);
     }
 
     @Test
