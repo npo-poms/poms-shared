@@ -1196,7 +1196,11 @@ public abstract class MediaObject
 
 
     @SuppressWarnings("unchecked")
-    public void setIntentions(@Nonnull SortedSet<Intentions> newIntentions) {
+    public void setIntentions(SortedSet<Intentions> newIntentions) {
+        if (newIntentions == null) {
+            this.intentions = null;
+            return;
+        }
 
         if (containsDuplicateOwner(newIntentions)) {
             throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
@@ -1234,8 +1238,12 @@ public abstract class MediaObject
     }
 
     @SuppressWarnings("unchecked")
-    public void setTargetGroups(@Nonnull SortedSet<TargetGroups> newTargetGroups) {
+    public void setTargetGroups(SortedSet<TargetGroups> newTargetGroups) {
 
+        if (newTargetGroups == null){
+            this.targetGroups = null;
+            return ;
+        }
         if (containsDuplicateOwner(newTargetGroups)) {
            throw new IllegalArgumentException("The targetgroup list you want to set has a duplicate owner: " + newTargetGroups);
         }
@@ -2928,7 +2936,7 @@ public abstract class MediaObject
         }
         return result;
     }
-    
+
     @Override
     public final String toString() {
         String mainTitle;
