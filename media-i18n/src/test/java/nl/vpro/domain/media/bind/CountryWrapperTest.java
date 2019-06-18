@@ -27,7 +27,7 @@ public class CountryWrapperTest {
     @Test
     public void getNameGBNL() {
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "GBN").get());
-        assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië (Verenigd Koninkrijk)");
+        assertThat(wrapper.getName()).isEqualTo("Groot-Brittannië");
 
     }
 
@@ -54,7 +54,7 @@ public class CountryWrapperTest {
     public void getNameENGNL() {
         //Locale.setDefault(Locales.DUTCH);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(GB, "ENG").get());
-        assertThat(wrapper.getName()).isEqualTo("Engeland (Verenigd Koninkrijk)");
+        assertThat(wrapper.getName()).isEqualTo("Engeland");
 
     }
 
@@ -71,7 +71,7 @@ public class CountryWrapperTest {
     public void getNameUTUK() {
         Locale.setDefault(Locale.UK);
         CountryWrapper wrapper = new CountryWrapper(CountrySubdivision.of(NL, "UT").get());
-        assertThat(wrapper.getName()).isEqualTo("Utrecht (Nederland)");
+        assertThat(wrapper.getName()).isEqualTo("Utrecht");
 
     }
 
