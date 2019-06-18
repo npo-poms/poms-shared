@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.meeuw.i18n.bind.jaxb.Code;
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -135,6 +134,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
             log.info(ve.getClass().getName() + " " + ve.getMessage());
             validator = null;
 
+        } catch(Throwable e) {
+            // like java.lang.NoSuchMethodError: javax.el.ELUtil.getExpressionFactory()Ljavax/el/ExpressionFactory;
+            log.warn(e.getClass().getName() + " " + e.getMessage());
+            log.info("javax.validation will be disabled");
+            validator = null;
         }
         VALIDATOR = validator;
     }
