@@ -2928,8 +2928,7 @@ public abstract class MediaObject
         }
         return result;
     }
-
-
+    
     @Override
     public final String toString() {
         String mainTitle;
