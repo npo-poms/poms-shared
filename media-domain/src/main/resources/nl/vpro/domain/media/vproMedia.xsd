@@ -148,7 +148,9 @@
       <xs:enumeration value="ALBUM"/>
       <xs:enumeration value="PLAYLIST"/>
       <xs:enumeration value="ARCHIVE"/>
+      <!--
       <xs:enumeration value="UG ARCHIVE"/>
+      -->
       <xs:enumeration value="SEASON"/>
       <xs:enumeration value="SERIES"/>
       <xs:enumeration value="UMBRELLA"/>
@@ -284,6 +286,8 @@
       </xs:element>
       <xs:element type="genreType" name="genre" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="tagType" name="tag" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="intentionType" name="intentions" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="targetGroupsType" name="targetGroups"  minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="xs:string" name="source" minOccurs="0"/>
       <xs:element type="countryType" name="country" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="languageType" name="language" minOccurs="0" maxOccurs="unbounded"/>
@@ -396,6 +400,31 @@
       <xs:enumeration value="WORK"/>
       <xs:enumeration value="LEXICO"/>
       <xs:enumeration value="ABBREVIATION"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="intentionEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INFORM"/>
+      <xs:enumeration value="INFORM_NEWS_AND_FACTS"/>
+      <xs:enumeration value="INFORM_INDEPTH"/>
+      <xs:enumeration value="INFORM_GENERAL"/>
+      <xs:enumeration value="ENTERTAINMENT"/>
+      <xs:enumeration value="ENTERTAINMENT_LEASURE"/>
+      <xs:enumeration value="ENTERTAINMENT_INFORMATIVE"/>
+      <xs:enumeration value="ACTIVATING"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="targetGroupEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="KIDS_6"/>
+      <xs:enumeration value="KIDS_12"/>
+      <xs:enumeration value="YOUNG_ADULTS"/>
+      <xs:enumeration value="ADULTS"/>
+      <xs:enumeration value="ADULTS_WITH_KIDS_6"/>
+      <xs:enumeration value="ADULTS_WITH_KIDS_12"/>
+      <xs:enumeration value="EVERYONE"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -538,7 +567,12 @@
       <xs:enumeration value="COMMENTATOR"/>
       <xs:enumeration value="SCRIPTWRITER"/>
       <xs:enumeration value="COMPOSER"/>
-      <xs:enumeration value="UNDEFINED"/>
+      <xs:enumeration value="SUBJECT">
+
+      </xs:enumeration>
+      <xs:enumeration value="PARTICIPANT">
+      </xs:enumeration>
+
 
       <xs:enumeration value="SIDEKICK">
         <xs:annotation>
@@ -550,6 +584,7 @@
           <xs:documentation>Introduced for MediaConnect sync. This is experimental</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+       <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -885,6 +920,21 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:complexType name="intentionType">
+    <xs:sequence>
+      <xs:element name="intention" type="intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
+
+  <xs:complexType name="targetGroupsType">
+    <xs:sequence>
+      <xs:element name="targetGroup" type="targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
+
+
   <xs:simpleType name="geoRestrictionEnum">
     <xs:restriction base="xs:string">
       <xs:enumeration value="NL">
@@ -1079,6 +1129,13 @@
         <xs:annotation>
           <xs:documentation>
             NPO 3 &amp; Z@pp.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+       <xs:enumeration value="NEDE">
+        <xs:annotation>
+          <xs:documentation>
+            Nederland-e.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1713,6 +1770,20 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="3VCN">
+        <xs:annotation>
+          <xs:documentation>
+            3voor12 Central.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="3VOS">
+        <xs:annotation>
+          <xs:documentation>
+            3voor12 On Stage.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="STER">
         <xs:annotation>
           <xs:documentation>
@@ -2021,6 +2092,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="DIER">
+        <xs:annotation>
+          <xs:documentation>
+            AVRO Dier en Natuur.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="POKE">
         <xs:annotation>
           <xs:documentation>
@@ -2081,6 +2159,13 @@
         <xs:annotation>
           <xs:documentation>
             PO Zizone TV.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DVIC">
+        <xs:annotation>
+          <xs:documentation>
+            Viceland.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2207,6 +2292,13 @@
         <xs:annotation>
           <xs:documentation>
             Fox News.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+       <xs:enumeration value="FXNL">
+        <xs:annotation>
+          <xs:documentation>
+            Fox Nederland.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2963,6 +3055,14 @@
         </xs:annotation>
       </xs:enumeration>
 
+       <xs:enumeration value="OMEG">
+         <xs:annotation>
+          <xs:documentation>
+            Omega TV
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
       <!-- missing channels -->
       <xs:enumeration value="D24K"/>
       <xs:enumeration value="H1NL"/>
@@ -2978,6 +3078,12 @@
       <xs:enumeration value="FLM1"/>
       <xs:enumeration value="ZGS1"/>
       <xs:enumeration value="BRTZ"/>
+
+      <xs:enumeration value="RTLF"/>
+      <xs:enumeration value="TVDR"/>
+      <xs:enumeration value="VRTC"/>
+
+
 
 
     </xs:restriction>

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.Displayable;
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -44,7 +44,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @Table(
     uniqueConstraints = {@UniqueConstraint(columnNames = {"mediaobject_id", "platform"})}
 )
-public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, Embargo, Child<MediaObject> {
+public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, MutableEmbargo, Child<MediaObject> {
 
     private static final long serialVersionUID = 0L;
 
@@ -318,7 +318,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     @Override
-    public int compareTo(Prediction o) {
+    public int compareTo(@Nonnull Prediction o) {
         if (platform == null) {
             return o == null ? 0 : o.platform == null ? 0 : 1;
         } else {

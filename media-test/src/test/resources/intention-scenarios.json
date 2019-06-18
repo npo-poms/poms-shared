@@ -1,0 +1,26 @@
+{
+  "mediaWithTwoIntention":
+  {
+    "objectType":"program","embeddable":true,
+    "broadcasters":[],
+    "genres":[],
+    "intentions":
+    [
+      {"owner":"BROADCASTER", "values":["ACTIVATING", "INFORM_INDEPTH"]},
+      {"owner":"NPO", "values":["ENTERTAINMENT_INFORMATIVE", "INFORM"]}
+    ],
+    "countries":[],
+    "languages":[]
+  },
+  "mediaWithOneIntention":  {
+    "objectType":"program","embeddable":true,
+    "broadcasters":[],
+    "genres":[],
+    "intentions":
+    [
+      {"owner":"BROADCASTER", "values":["ACTIVATING"]}
+    ],
+    "countries":[],
+    "languages":[]
+  }
+}

@@ -46,10 +46,16 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         if (getTitles() == null) {
             setTitles(new TreeSet<>());
         }
-        getTitles().add(getTitleCreator().apply(title, type));
+        T created = getTitleCreator().apply(title, type);
+        boolean added = getTitles().add(created);
         return self();
     }
 
+
+    /**
+     * Sets title if already set, otherwise {@link #addTitle(String, TextualType)}
+     * @since 5.11
+     */
     default void setTitle(String title, @Nonnull TextualType type) {
         if (getTitles() != null) {
             for (T t : getTitles()) {
@@ -98,6 +104,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
         return hasTitles() && getTitles().remove(title);
     }
 
+    @SuppressWarnings("unchecked")
     default TO self() {
         return (TO) this;
     }
@@ -165,11 +172,15 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
+     /**
+     * Sets description if already set, otherwise {@link #addDescription(String, TextualType)}
+     * @since 5.11
+     */
     default void setDescription(String description, @Nonnull TextualType type) {
         if (getDescriptions() != null) {
-            for (D t : getDescriptions()) {
-                if (t.getType() == type) {
-                    t.set(description);
+            for (D d : getDescriptions()) {
+                if (d.getType() == type) {
+                    d.set(description);
                     return;
                 }
             }

@@ -22,7 +22,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-@SuppressWarnings("ConstantConditions")
+@SuppressWarnings({"OptionalGetWithoutIsPresent", "deprecation"})
 @Slf4j
 public class TextualObjectsTest {
 

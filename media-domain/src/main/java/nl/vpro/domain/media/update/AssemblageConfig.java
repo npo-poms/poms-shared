@@ -9,12 +9,13 @@ import java.util.function.Function;
 
 import org.slf4j.Logger;
 
+import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Segment;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.logging.simple.SimpleLogger;
 import nl.vpro.logging.simple.Slf4jSimpleLogger;
-import nl.vpro.util.Version;
+import nl.vpro.util.IntegerVersion;
 
 /**
  * @author Michiel Meeuwissen
@@ -73,6 +74,10 @@ public class AssemblageConfig {
     Duration mergeScheduleEvents = Duration.ofMillis(-1);
 
     @lombok.Builder.Default
+    BiFunction<MediaObject, AssemblageConfig, Boolean> inferDurationFromScheduleEvents = (s, ac) -> false;
+
+
+    @lombok.Builder.Default
     boolean locationsUpdate = false;
 
     @lombok.Builder.Default
@@ -90,7 +95,7 @@ public class AssemblageConfig {
      * Otherwise consider this situation errorneous.
      */
     @lombok.Builder.Default
-    boolean stealSegments = false;
+    Steal stealSegments = Steal.NO;
 
     /**
      * On default it you merge a program, exsisting segments will not be removed
@@ -99,6 +104,12 @@ public class AssemblageConfig {
      */
     @lombok.Builder.Default
     BiFunction<Segment, AssemblageConfig, Boolean> segmentsForDeletion = (s, ac) -> false;
+
+    @lombok.Builder.Default
+    Function<String, Boolean> cridsForDelete = (c) -> false;
+
+    @lombok.Builder.Default
+    Steal updateType = Steal.NO;
 
     SimpleLogger logger;
 
@@ -124,11 +135,14 @@ public class AssemblageConfig {
             copyTwitterrefs,
             createScheduleEvents,
             mergeScheduleEvents,
+            inferDurationFromScheduleEvents,
             locationsUpdate,
             stealMids,
             stealCrids,
             stealSegments,
             segmentsForDeletion,
+            cridsForDelete,
+            updateType,
             logger);
     }
     public AssemblageConfig withLogger(SimpleLogger logger) {
@@ -158,7 +172,8 @@ public class AssemblageConfig {
             .locationsUpdate(true)
             .stealMids(Steal.YES)
             .stealCrids(Steal.YES)
-            .stealSegments(true)
+            .stealSegments(Steal.YES)
+            .updateType(Steal.YES)
             ;
     }
 
@@ -166,7 +181,7 @@ public class AssemblageConfig {
         return segmentsForDeletion.apply(segment, this);
     }
 
-    public void backwardsCompatible(Version version) {
+    public void backwardsCompatible(IntegerVersion version) {
         setCopyLanguageAndCountry(version != null && version.isNotBefore(5, 0));
         setCopyPredictions(version != null && version.isNotBefore(5, 6));
         setCopyTwitterrefs(version != null && version.isNotBefore(5, 10));
@@ -183,18 +198,26 @@ public class AssemblageConfig {
     }
 
     public enum Steal {
-        YES((w) -> true),
-        IF_DELETED(Workflow.PUBLISHED_AS_DELETED::contains),
-        NO((w) -> true);
+        YES((incoming, toUpdate) -> true),
+        IF_DELETED((incoming, toUpdate) ->  Workflow.PUBLISHED_AS_DELETED.contains(toUpdate.getWorkflow())),
+        NO((incoming, toUpdate) -> true),
 
-        private final Function<Workflow, Boolean> is;
+        /**
+         * Only if the incoming object is new. We matched on crid.
+         */
+        IF_INCOMING_NO_MID((incoming, toUpdate) -> incoming.getMid() == null)
+        ;
 
-        Steal(Function<Workflow, Boolean> is) {
+        private final BiFunction<MediaObject, MediaObject, Boolean> is;
+
+        Steal(BiFunction<MediaObject, MediaObject, Boolean> is) {
             this.is = is;
         }
 
-        public boolean is(Workflow workflow) {
-            return is.apply(workflow);
+
+        public boolean is(MediaObject incoming, MediaObject toUpdate) {
+            return is.apply(incoming, toUpdate);
         }
+
     }
 }

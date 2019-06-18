@@ -23,7 +23,6 @@ import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -31,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.jayway.jsonpath.JsonPath;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
@@ -705,6 +705,35 @@ public class MediaObjectJsonSchemaTest {
         assertThat(program.getLocations().first().getOwner()).isNull();
 
 
+    }
+
+    @Test
+    public void testWithIntentions() throws Exception {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/intention-scenarios.json"), segment, "UTF-8");
+        Map expected = JsonPath.read(segment.toString(),"$.mediaWithTwoIntention");
+        log.info(expected.toString());
+
+        Program program = program().lean().withIntentions().build();
+        Map actual = JsonPath.read(toJson(program),"$");
+
+        JSONAssert.assertEquals(expected, actual);
+
+        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"intentions\" : [ {\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"values\" : [ \"ACTIVATING\", \"INFORM_INDEPTH\" ]\n" +
+            "  }, {\n" +
+            "    \"owner\" : \"NPO\",\n" +
+            "    \"values\" : [ \"ENTERTAINMENT_INFORMATIVE\", \"INFORM\" ]\n" +
+            "  } ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ]\n" +
+            "}");
     }
 
     @Test

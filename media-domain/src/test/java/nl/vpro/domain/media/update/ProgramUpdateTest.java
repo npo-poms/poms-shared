@@ -11,19 +11,10 @@ import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import javax.validation.ConstraintViolation;
-import javax.xml.XMLConstants;
 import javax.xml.bind.JAXB;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-import javax.xml.validation.Validator;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -31,7 +22,6 @@ import org.xml.sax.SAXException;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
@@ -127,6 +117,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(errors).hasSize(1);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testFetchForOwner() {
         SegmentUpdate segment = SegmentUpdate.create();
@@ -144,11 +135,53 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
     @Test
+    public void testFetchForMultiOwnerNullLists() {
+        SegmentUpdate segment = SegmentUpdate.create();
+        segment.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
+
+        ProgramUpdate program = ProgramUpdate.create();
+        program.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.EPISODE))));
+
+        program.setSegments(new TreeSet<>(Collections.singletonList(segment)));
+
+        Program result = program.fetch(OwnerType.MIS);
+
+        assertThat(result.getTitles().first().getOwner()).isEqualTo(OwnerType.MIS);
+        assertThat(result.getSegments().first().getIntentions()).isNull();
+        assertThat(result.getSegments().first().getTargetGroups()).isNull();
+    }
+
+    @Test
+    public void testFetchForMultiOwnerEmptyLists() {
+        SegmentUpdate segment = SegmentUpdate.create();
+        segment.setIntentions(new ArrayList<>());
+        segment.setTargetGroups(new ArrayList<>());
+        segment.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
+
+        ProgramUpdate program = ProgramUpdate.create();
+        program.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.EPISODE))));
+
+        program.setSegments(new TreeSet<>(Collections.singletonList(segment)));
+
+        Program result = program.fetch(OwnerType.MIS);
+
+        assertThat(result.getTitles().first().getOwner()).isEqualTo(OwnerType.MIS);
+        assertThat(result.getSegments().first().getIntentions()).isNotEmpty();
+        assertThat(result.getSegments().first().getTargetGroups()).isNotEmpty();
+    }
+
+    @Test
     public void testGetAVType() throws Exception {
         ProgramUpdate update = programUpdate();
         update.setAVType(AVType.MIXED);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" avType=\"MIXED\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program avType=\"MIXED\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -158,7 +191,13 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setEmbeddable(false);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"false\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"false\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>\n";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -168,7 +207,10 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setPublishStartInstant(Instant.ofEpochMilli(4444));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program publishStart=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program publishStart=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<locations/>" +
+                "<scheduleEvents/><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -178,7 +220,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setPublishStopInstant(Instant.ofEpochMilli(4444));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program publishStop=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program publishStop=\"1970-01-01T01:00:04.444+01:00\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<locations/><scheduleEvents/><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -196,17 +240,20 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 )
         );
         update.setVersion(null);
+        update.setIntentions(null);
+        update.setTargetGroups(null);
 
-        String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images>\n" +
-            "        <image type=\"PICTURE\" publishStop=\"1970-01-01T01:00:05.444+01:00\" highlighted=\"false\">\n" +
-            "            <urn>urn:vpro:image:123</urn>\n" +
-            "        </image>\n" +
-            "    </images>\n" +
-            "    <segments/>\n" +
-            "</program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images>\n" +
+                "        <image type=\"PICTURE\" publishStop=\"1970-01-01T01:00:05.444+01:00\" highlighted=\"false\">\n" +
+                "            <urn>urn:vpro:image:123</urn>\n" +
+                "        </image>\n" +
+                "    </images>\n" +
+                "    <segments/>\n" +
+                "</program>\n";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -216,7 +263,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setCrids(Collections.singletonList("crid://bds.tv/23678459"));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><crid>crid://bds.tv/23678459</crid><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <crid>crid://bds.tv/23678459</crid>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -226,7 +280,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setBroadcasters(Collections.singletonList("MAX"));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><broadcaster>MAX</broadcaster><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <broadcaster>MAX</broadcaster>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>";
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         rounded.getBroadcasters().add("VPRO");
@@ -246,11 +307,20 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setPortalRestrictions(Arrays.asList(new PortalRestrictionUpdate(new PortalRestriction(new Portal("3VOOR12_GRONINGEN", "3voor12 Groningen"))),
             new PortalRestrictionUpdate(new PortalRestriction(new Portal("STERREN24", "Sterren24"), Instant.ofEpochMilli(0), Instant.ofEpochMilli(1000000)))));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><exclusive>3VOOR12_GRONINGEN</exclusive><exclusive stop=\"1970-01-01T01:16:40+01:00\" start=\"1970-01-01T01:00:00+01:00\">STERREN24</exclusive><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <exclusive>3VOOR12_GRONINGEN</exclusive>\n" +
+            "    <exclusive start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:16:40+01:00\">STERREN24</exclusive>\n" +
+            "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+                "    <segments/>\n" +
+            "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testGetGeoRestrictions() throws Exception {
         ProgramUpdate update = programUpdate();
@@ -259,21 +329,23 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 new GeoRestrictionUpdate(new GeoRestriction(Region.BENELUX)), new GeoRestrictionUpdate(new GeoRestriction(Region.NL, Instant.ofEpochMilli(0), Instant.ofEpochMilli((1000000)))))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:16:40+01:00\" platform=\"INTERNETVOD\">NL</region>\n" +
-            "    <region platform=\"INTERNETVOD\">BENELUX</region>\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images/>\n" +
-            "    <segments/>\n" +
-            "</program>";
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <region start=\"1970-01-01T01:00:00+01:00\" stop=\"1970-01-01T01:16:40+01:00\" platform=\"INTERNETVOD\">NL</region>\n" +
+                "    <region platform=\"INTERNETVOD\">BENELUX</region>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
     @Test
     public void testGetGeoRestrictionsReverse() {
-        String input = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><region>BENELUX</region><region stop=\"1970-01-01T01:16:40+01:00\" start=\"1970-01-01T01:00:00+01:00\">NL</region><locations/><scheduleEvents/><images/><segments/></program>";
+        String input = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<region>BENELUX</region><region stop=\"1970-01-01T01:16:40+01:00\" start=\"1970-01-01T01:00:00+01:00\">NL</region><locations/><scheduleEvents/><images/><segments/></program>";
         ProgramUpdate update = JAXB.unmarshal(new StringReader(input), ProgramUpdate.class);
 
         assertThat(update.fetch().getGeoRestrictions()).isNotEmpty();
@@ -284,7 +356,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("Hoofdtitel", TextualType.MAIN))));
 
-         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><title type=\"MAIN\">Hoofdtitel</title><locations/><scheduleEvents/><images/><segments/></program>";
+         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                 "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                 "    <title type=\"MAIN\">Hoofdtitel</title>\n" +
+                 "    <locations/>\n" +
+                 "    <scheduleEvents/>\n" +
+                 "    <images/>\n" +
+                 "    <segments/>\n" +
+                 "</program>";
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertThat(rounded.getTitles()).hasSize(1);
         assertThat(rounded.fetch().getTitles()).hasSize(1);
@@ -304,6 +383,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
             "  <title type=\"MAIN\">hoofdtitel omroep</title>\n" +
+            " <intentions/>\n" +
+            " <targetGroups/>\n" +
             "  <locations/>\n" +
             "  <scheduleEvents/>\n" +
             "  <images/>\n" +
@@ -321,7 +402,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setDescriptions(new TreeSet<>(Collections.singletonList(new DescriptionUpdate("Beschrijving", TextualType.MAIN))));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><description type=\"MAIN\">Beschrijving</description><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <description type=\"MAIN\">Beschrijving</description>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>";
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
@@ -331,8 +419,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setAvAttributes(avAttributes());
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <avAttributes>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" + "    <avAttributes>\n" +
             "        <bitrate>1000</bitrate>\n" +
             "        <avFileFormat>H264</avFileFormat>\n" +
             "        <videoAttributes width=\"320\" height=\"180\">\n" +
@@ -356,7 +443,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setDuration(Duration.ofMillis(656565));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><duration>P0DT0H10M56.565S</duration><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<duration>P0DT0H10M56.565S</duration><locations/><scheduleEvents/><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -366,7 +455,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setDuration(Duration.ofSeconds(3 * 3600 + 46 * 60));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><duration>P0DT3H46M0.000S</duration><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<duration>P0DT3H46M0.000S</duration><locations/><scheduleEvents/><images/><segments/></program>";
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
@@ -376,7 +467,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(update.getMid()).isNull();
         update.setMemberOf(new TreeSet<>(Collections.singletonList(new MemberRefUpdate(20, "urn:vpro:media:group:864"))));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><memberOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</memberOf><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<memberOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</memberOf><locations/><scheduleEvents/><images/><segments/></program>";
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertThat(rounded.fetch().getMemberOf()).hasSize(1);
@@ -404,7 +497,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setEmail(Collections.singletonList("info@vpro.nl"));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><email>info@vpro.nl</email><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<email>info@vpro.nl</email><locations/><scheduleEvents/><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -414,7 +509,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setWebsiteObjects(Collections.singletonList(new Website("www.vpro.nl")));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><website>www.vpro.nl</website><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<website>www.vpro.nl</website><locations/><scheduleEvents/><images/><segments/></program>";
 
         ProgramUpdate found = JAXBTestUtil.roundTripAndSimilar(update, expected);
         found.getWebsites().add("http://www.npo.nl");
@@ -433,8 +530,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 320, 180, 1000000, AVFileFormat.M4V))));
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <locations>\n" +
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" + "    " +
+            "<locations>\n" +
             "        <location>\n" +
             "            <programUrl>rtsp:someurl</programUrl>\n" +
             "            <avAttributes>\n" +
@@ -460,7 +557,9 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setPersons(Collections.singletonList(new PersonUpdate("Pietje", "Puk", RoleType.DIRECTOR)));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><credits><person role='DIRECTOR'><givenName>Pietje</givenName><familyName>Puk</familyName></person></credits><locations /><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<credits><person role='DIRECTOR'><givenName>Pietje</givenName><familyName>Puk</familyName></person></credits><locations /><scheduleEvents/><images/><segments/></program>";
 
         Program program = JAXBTestUtil.roundTripAndSimilar(update, expected).fetch();
 
@@ -537,11 +636,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "Radiohead")
         )));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><relation uriRef=\"http://3voor12.vpro.nl/artists/444555\" broadcaster=\"VPRO\" type=\"ARTIST\">Radiohead</relation><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<locations/><scheduleEvents/><relation uriRef=\"http://3voor12.vpro.nl/artists/444555\" broadcaster=\"VPRO\" type=\"ARTIST\">Radiohead</relation><images/><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testGetImages() throws Exception {
 
@@ -569,6 +671,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Program program = program().images(image, image2).build();
         ProgramUpdate update = ProgramUpdate.create(program);
         update.setVersion(null);
+        update.setIntentions(null);
+        update.setTargetGroups(null);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
@@ -594,14 +698,17 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update = programUpdate();
         update.setEpisodeOf(new TreeSet<>(Collections.singletonList(new MemberRefUpdate(20, "urn:vpro:media:group:864"))));
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/><episodeOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</episodeOf><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\">" +
+                "<locations/><scheduleEvents/><images/><episodeOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</episodeOf><segments/></program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
 
     @Test
     public void testUnmarshalEpisodeOf() {
-        String xml = "<program xmlns=\"urn:vpro:media:update:2009\"><episodeOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</episodeOf></program>";
+        String xml = "<program xmlns=\"urn:vpro:media:update:2009\">" +
+                "<episodeOf highlighted=\"false\" position=\"20\">urn:vpro:media:group:864</episodeOf></program>";
         ProgramUpdate update = JAXB.unmarshal(new StringReader(xml), ProgramUpdate.class);
         assertThat(update.getEpisodeOf().size()).isEqualTo(1);
     }
@@ -616,20 +723,23 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             ))));
         //update.getSegments().first().setVersion(5.5f);
 
-        String expected = "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images/>\n" +
-            "    <segments>\n" +
-            "        <segment embeddable=\"true\">\n" +
-            "            <duration>P0DT0H0M0.100S</duration>\n" +
-            "            <locations/>\n" +
-            "            <scheduleEvents/>\n" +
-            "            <images/>\n" +
-            "            <start>P0DT0H0M5.555S</start>\n" +
-            "        </segment>\n" +
-            "    </segments>\n" +
-            "</program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments>\n" +
+                "        <segment embeddable=\"true\">\n" +
+               "             <intentions/>\n" +
+               "             <targetGroups/>\n" +
+                "            <duration>P0DT0H0M0.100S</duration>\n" +
+                "            <locations/>\n" +
+                "            <scheduleEvents/>\n" +
+                "            <images/>\n" +
+                "            <start>P0DT0H0M5.555S</start>\n" +
+                "        </segment>\n" +
+                "    </segments>\n" +
+                "</program>";
 
         ProgramUpdate unmarshal = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertEquals(1, unmarshal.getSegments().size());
@@ -641,7 +751,14 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setPortals(Collections.singletonList("STERREN24"));
 
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><portal>STERREN24</portal><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <portal>STERREN24</portal>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -651,18 +768,20 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         ProgramUpdate update  = ProgramUpdate.create();
         update.setVersion(Version.of(5, 5));
         update.setAgeRating(AgeRating._6);
+        update.setIntentions(null);
+        update.setTargetGroups(null);
 
         assertThat(update.getAgeRating()).isEqualTo(AgeRating._6);
         assertThat(update.fetch().getAgeRating()).isEqualTo(AgeRating._6);
 
         JAXBTestUtil.roundTripAndSimilar(update,
-            "<program version=\"5.5\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <ageRating>6</ageRating>\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images/>\n" +
-            "    <segments/>\n" +
-            "</program>");
+            "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                    "    <ageRating>6</ageRating>\n" +
+                    "    <locations/>\n" +
+                    "    <scheduleEvents/>\n" +
+                    "    <images/>\n" +
+                    "    <segments/>\n" +
+                    "</program>");
     }
 
 
@@ -674,7 +793,15 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(update.getContentRatings()).containsExactly(ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL);
         assertThat(update.fetch().getContentRatings()).containsExactly(ContentRating.ANGST, ContentRating.DRUGS_EN_ALCOHOL);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><contentRating>ANGST</contentRating><contentRating>DRUGS_EN_ALCOHOL</contentRating><locations/><scheduleEvents/><images/><segments/></program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <contentRating>ANGST</contentRating>\n" +
+                "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>";
 
         JAXBTestUtil.roundTripAndSimilar(update, expected);
     }
@@ -685,14 +812,15 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         update.setId(10L);
         update.setTags(new TreeSet<>(Arrays.asList("foo", "bar")));
 
-        String expected = "<program embeddable=\"true\" urn=\"urn:vpro:media:program:10\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <tag>bar</tag>\n" +
-            "    <tag>foo</tag>\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images/>\n" +
-            "    <segments/>\n" +
-            "</program>";
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" urn=\"urn:vpro:media:program:10\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <tag>bar</tag>\n" +
+                "    <tag>foo</tag>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>\n";
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertThat(rounded.getTags()).hasSize(2);
         assertThat(rounded.fetch().getTags()).hasSize(2);
@@ -715,11 +843,13 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testWithPredictions() throws IOException, SAXException {
         ProgramUpdate update = ProgramUpdate.create();
+        update.setIntentions(null);
+        update.setTargetGroups(null);
         update.setPredictions(new TreeSet<>(Arrays.asList(PredictionUpdate.builder().platform(Platform.INTERNETVOD).build())));
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <prediction>INTERNETVOD</prediction>\n" +
+                "    <prediction>INTERNETVOD</prediction>\n" +
             "    <locations/>\n" +
             "    <scheduleEvents/>\n" +
             "    <images/>\n" +
@@ -737,6 +867,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 Prediction.builder().platform(Platform.INTERNETVOD).plannedAvailability(false).build(),
                 Prediction.builder().platform(Platform.TVVOD).plannedAvailability(true).build()
             ));
+        update.setIntentions(null);
+        update.setTargetGroups(null);
 
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <prediction>TVVOD</prediction>\n" +
@@ -746,19 +878,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
             "    <segments/>\n" +
             "</program>");
         assertThat(rounded.getPredictions()).hasSize(1);
-    }
-
-    @Test
-    public void testXSD() throws Exception {
-        Source xmlFile = new StreamSource(new StringReader("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><program avType=\"VIDEO\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><broadcaster>VPRO</broadcaster><portal>STERREN24</portal><title type=\"MAIN\">bla</title><credits><person role='DIRECTOR'><givenName>Pietje</givenName><familyName>Puk</familyName></person></credits><locations/><scheduleEvents/><images/><segments/></program>"));
-        SchemaFactory schemaFactory = SchemaFactory
-            .newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        log.info("{}", getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
-        Schema schema = schemaFactory.newSchema(
-            getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd")
-        );
-        Validator validator = schema.newValidator();
-        validator.validate(xmlFile);
     }
 
     @Test
@@ -836,20 +955,26 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     public void testCountriesAndLanguages() throws IOException, SAXException {
         Program program = program().countries("NL").languages("nl").build();
         ProgramUpdate update = ProgramUpdate.create(program);
+        update.setIntentions(null);
+        update.setTargetGroups(null);
         update.setVersion(Version.of(5, 5));
-        JAXBTestUtil.roundTripAndSimilar(update, "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-            "    <country>NL</country>\n" +
-            "    <language>nl</language>\n" +
-            "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
-            "    <images/>\n" +
-            "    <segments/>\n" +
-            "</program>");
+        JAXBTestUtil.roundTripAndSimilar(update, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+                "    <country>NL</country>\n" +
+                "    <language>nl</language>\n" +
+                "    <locations/>\n" +
+                "    <scheduleEvents/>\n" +
+                "    <images/>\n" +
+                "    <segments/>\n" +
+                "</program>");
 
     }
+
     protected ProgramUpdate programUpdate() {
         ProgramUpdate update = ProgramUpdate.create();
         update.setVersion(null);
+        update.setTargetGroups(null);
+        update.setIntentions(null);
         return update;
     }
 

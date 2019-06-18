@@ -7,7 +7,7 @@ import java.util.MissingResourceException;
 
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
+import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.media.bind.TvaCountryAdapter;
 

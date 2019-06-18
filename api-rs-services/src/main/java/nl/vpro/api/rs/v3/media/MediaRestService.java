@@ -4,7 +4,6 @@
  */
 package nl.vpro.api.rs.v3.media;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +63,15 @@ public interface MediaRestService {
     );
 
 
+    /**
+     * Lists a number of object directly from the API.
+     *
+     * This only gives examples. It doesn't allow for any filtering, and is not fit for much data. See e.g. {@link #find(MediaForm, String, String, Long, Integer)} for a better use case.
+     *
+     * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer, HttpServletRequest, HttpServletResponse)} or {@link #changes(String, String, Long, String, String, Integer, Boolean, Deletes, HttpServletRequest, HttpServletResponse)}.
+     *
+     * @param offset the first result. Not that this cannot be too big!
+     */
     @GET
     MediaResult list(
         @QueryParam(PROPERTIES) String properties,
@@ -72,6 +80,10 @@ public interface MediaRestService {
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
     );
 
+    /**
+     * Perform a search on the Media API.
+     *
+     */
     @POST
     MediaSearchResult find(
         @Valid MediaForm form,
@@ -188,7 +200,9 @@ public interface MediaRestService {
     MediaResult listRelated(
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @QueryParam("partyId") String partyId
+
     );
 
     @POST
@@ -198,7 +212,8 @@ public interface MediaRestService {
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @QueryParam("partyId") String partyId
     );
 
     @GET

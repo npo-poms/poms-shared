@@ -13,21 +13,13 @@
   </xs:complexType>
 
   <xs:complexType name="abstractPublishableObjectType" abstract="true">
-    <xs:complexContent>
-      <xs:extension base="tns:domainObjectType">
-        <xs:sequence/>
-        <xs:attribute name="creationDate" type="xs:dateTime"/>
-        <xs:attribute name="lastModified" type="xs:dateTime"/>
-        <xs:attribute name="publishDate" type="xs:dateTime"/>
-        <xs:attribute name="publishStart" type="xs:dateTime"/>
-        <xs:attribute name="publishStop" type="xs:dateTime"/>
-        <xs:attribute name="urn" type="xs:string"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-
-  <xs:complexType name="domainObjectType" abstract="true">
     <xs:sequence/>
+    <xs:attribute name="creationDate" type="xs:dateTime"/>
+    <xs:attribute name="lastModified" type="xs:dateTime"/>
+    <xs:attribute name="publishDate" type="xs:dateTime"/>
+    <xs:attribute name="publishStart" type="xs:dateTime"/>
+    <xs:attribute name="publishStop" type="xs:dateTime"/>
+    <xs:attribute name="urn" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="durationType">
@@ -53,6 +45,7 @@
           <xs:element name="sourceName" type="xs:string" form="qualified" minOccurs="0"/>
           <xs:element name="license" type="tns:licenseEnum" form="qualified" minOccurs="0"/>
           <xs:element name="date" type="xs:string" form="qualified" minOccurs="0"/>
+          <xs:element name="crid" type="xs:string" form="qualified" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
         <xs:attribute name="owner" type="tns:ownerTypeEnum"/>
         <xs:attribute name="type" type="tns:imageTypeEnum" use="required"/>

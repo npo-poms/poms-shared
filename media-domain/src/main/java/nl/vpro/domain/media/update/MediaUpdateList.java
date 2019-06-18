@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javax.annotation.Nonnull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
@@ -104,6 +105,7 @@ public class MediaUpdateList<T> implements Iterable<T>, IntegerVersionSpecific {
         return "" + list;
     }
 
+    @Nonnull
     @Override
     public Iterator<T> iterator() {
         return list == null ? Collections.<T>emptyList().iterator() : list.iterator();

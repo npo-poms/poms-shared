@@ -24,13 +24,6 @@ public enum Region implements Displayable {
     @XmlDocumentation("Means that this object can only be played in the Netherlands")
     NL("Nederland"),
 
-    /**
-     * @deprecated Not supported by VMV
-     */
-    @Deprecated
-    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not support by the NPO player)")
-    BENELUX("Benelux"),
-
      /**
      * @since 5.6
      */
@@ -44,18 +37,24 @@ public enum Region implements Displayable {
     NLALL("Nederland, de BES-gemeenten, Curaçao, St. Maarten en Aruba"),
 
 
-     /**
-     * @since 5.6
+    /**
+     * @deprecated Not supported by VMV
      */
-    @XmlDocumentation("European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba")
-    EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba"),
+    @Deprecated
+    @XmlDocumentation("Means that this object can only be played in the Netherlands, Belgium and Luxemburg (This is, as far was we know, not support by the NPO player)")
+    BENELUX("Benelux"),
 
     /**
      * @since 5.6
      */
     @XmlDocumentation("Means that this object can only be played in Europe")
-    EUROPE("Europa");
+    EUROPE("Europa"),
 
+     /**
+     * @since 5.6
+     */
+    @XmlDocumentation("European Union incl. BES gemeentes, Curaçao, St. Maarten en Aruba")
+    EU("De EU inclusief de BES-gemeenten, Curaçao, St. Maarten en Aruba");
 
 
 

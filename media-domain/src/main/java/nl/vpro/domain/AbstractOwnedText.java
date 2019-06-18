@@ -37,6 +37,7 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
     @XmlAttribute(required = true)
     @Getter
     @Setter
+    @Nonnull
     protected OwnerType owner = OwnerType.BROADCASTER;
 
     @Column(nullable = false)

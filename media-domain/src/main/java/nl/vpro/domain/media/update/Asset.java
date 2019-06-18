@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Embargo;
+import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -29,7 +29,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "assetType", propOrder = {
     "source"
 })
-public class Asset implements Embargo<Asset> {
+public class Asset implements MutableEmbargo<Asset> {
 
     @XmlAttribute
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)

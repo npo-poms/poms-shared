@@ -95,7 +95,7 @@ public class MediaTypeTest {
             log.info("{}",type.getSubType());
             log.info("{}",type.getSubTypes());
             log.info("{}",type.hasEpisodeOf());
-            log.info("{}",type.hasEpisodes());
+            log.info("{}",type.canContainEpisodes());
             log.info("{}",type.hasMemberOf());
             log.info("{}",type.hasMembers());
             log.info("{}",type.hasOrdering());

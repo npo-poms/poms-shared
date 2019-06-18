@@ -13,6 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TitleTest {
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testCompareTo() {
         SortedSet<Title> set = new TreeSet<>();

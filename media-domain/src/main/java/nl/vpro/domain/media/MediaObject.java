@@ -16,9 +16,9 @@ import java.util.zip.CRC32;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -31,11 +31,15 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.persistence.RegionToStringConverter;
+import org.meeuw.i18n.validation.ValidCountry;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.neovisionaries.i18n.CountryCode;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
@@ -45,7 +49,6 @@ import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
-import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
@@ -67,12 +70,14 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObject.*;
+import static nl.vpro.domain.media.support.Ownables.containsDuplicateOwner;
 
 /**
  * Base objects for programs and groups
  *
  * @author roekoe
  */
+@SuppressWarnings("WSReferenceInspection")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable
@@ -89,6 +94,8 @@ import static nl.vpro.domain.media.MediaObject.*;
         "descriptions",
         "genres",
         "tags",
+        "intentions",
+        "targetGroups",
         "source",
         "countries",
         "languages",
@@ -139,6 +146,8 @@ import static nl.vpro.domain.media.MediaObject.*;
     "descriptions",
     "genres",
     "tags",
+    "intentions",
+    "targetGroups",
     "source",
     "hasSubtitles",
     "countries",
@@ -234,7 +243,9 @@ public abstract class MediaObject
 
     @Column(name = "mid", nullable = false, unique = true)
     @Size.List({ @Size(max = 255), @Size(min = 4) })
-    @Pattern(regexp = "^[a-zA-Z0-9][ \\.a-zA-Z0-9_-]*$", flags = {
+    @Pattern(
+        regexp = "^[a-zA-Z0-9][ .a-zA-Z0-9_-]*$",
+        flags = {
             Pattern.Flag.CASE_INSENSITIVE }, message = "{nl.vpro.constraints.mid}")
     protected String mid;
 
@@ -244,7 +255,7 @@ public abstract class MediaObject
     protected Integer version;
 
     @ElementCollection
-    @Column(name = "crids", nullable = false, unique = true)
+    @Column(name = "crids", nullable = false, unique = true) // TODO, rename to 'crid'.
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     // TODO cache configuration can be put in a hibernate-config.xml. See
@@ -315,15 +326,38 @@ public abstract class MediaObject
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
     protected Set<Tag> tags;
 
+
+    @OneToMany(orphanRemoval = true, cascade = ALL)
+    @JoinColumn(name = "parent_id")
+    @OrderColumn(name = "list_index", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
+    @XmlElement(name = "intentions")
+    @JsonProperty("intentions")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @SortNatural
+    protected SortedSet<Intentions> intentions;
+
+    @OneToMany(orphanRemoval = true, cascade = ALL)
+    @JoinColumn(name = "parent_id")
+    @OrderColumn(name = "list_index", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
+    @XmlElement
+    @JsonProperty
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @SortNatural
+    protected SortedSet<TargetGroups> targetGroups;
+
     protected String source;
 
     @ElementCollection
-    @Enumerated(EnumType.STRING)
-
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<CountryCode> countries;
+    @Convert(converter = RegionToStringConverter.class)
+    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+    protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
     @Column(length = 10)
@@ -332,6 +366,7 @@ public abstract class MediaObject
     @Language
     protected List<Locale> languages;
 
+    @SuppressWarnings("NullableProblems")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
@@ -381,6 +416,7 @@ public abstract class MediaObject
     @Valid
     protected Set<MemberRef> memberOf;
 
+    @SuppressWarnings("NullableProblems")
     @Enumerated(EnumType.STRING)
     @NotNull(groups = { WarningValidatorGroup.class })
     protected AgeRating ageRating;
@@ -447,9 +483,21 @@ public abstract class MediaObject
     @Valid
     protected Set<Location> locations;
 
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = false, cascade={MERGE})
+
+    /**
+     * TODO: This shoudl be moved to {@link Program}
+     * mediadb=> select  mediatype(mediaobject_id), count(*) from scheduleevent group by 1;
+     *  mediatype |  count
+     * -----------+---------
+     *  STRAND    |    3941
+     *  CLIP      |       2
+     *  BROADCAST | 1526381
+     *  MOVIE     |      20
+     */
+    @OneToMany(mappedBy = "mediaObject", orphanRemoval = true, cascade={MERGE})
     @SortNatural
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    // Caching doesn't work proprerly because ScheduleEventRepository may touch this
+    // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<ScheduleEvent> scheduleEvents;
 
@@ -632,7 +680,8 @@ public abstract class MediaObject
         return toUpdate;
     }
 
-    protected static <T> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
+    @SuppressWarnings("unchecked")
+    protected static <T extends Comparable<?>> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
         if (toUpdate != null && toUpdate == values) {
             return toUpdate;
         }
@@ -648,7 +697,6 @@ public abstract class MediaObject
                 for (T v : values) {
                     for (T toUpdateValue : toUpdate) {
                         if (toUpdateValue instanceof Updatable && toUpdateValue.equals(v)) {
-                            // noinspection unchecked
                             ((Updatable) toUpdateValue).update(v);
                         }
                     }
@@ -1047,7 +1095,7 @@ public abstract class MediaObject
         return this;
     }
 
-    private <T extends Child<MediaObject>> Set<T> addTo(Set<T> co, T ot) {
+    private <T extends Child<MediaObject> & Comparable<?>> Set<T> addTo(Set<T> co, T ot) {
         if (ot != null) {
             ot.setParent(this);
             if (co == null) {
@@ -1139,6 +1187,79 @@ public abstract class MediaObject
         this.tags = updateSortedSet(this.tags, tags);
     }
 
+
+    //region Intentions logic
+
+    public SortedSet<Intentions> getIntentions() {
+        return intentions;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public void setIntentions(@Nonnull SortedSet<Intentions> newIntentions) {
+
+        if (containsDuplicateOwner(newIntentions)) {
+            throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
+        }
+        if (this.intentions == null) {
+            this.intentions = new TreeSet<>();
+        } else {
+           this.intentions.clear();
+        }
+        for (Intentions i : newIntentions) {
+            addIntention(i.copy());
+        }
+    }
+
+    public MediaObject addIntention(@Nonnull Intentions newIntentions) {
+        if(this.intentions != null) {
+            this.intentions.removeIf(existing -> existing.getOwner() == newIntentions.getOwner());
+        } else {
+            this.intentions = new TreeSet<>();
+        }
+        newIntentions.setParent(this);
+        intentions.add(newIntentions);
+        return this;
+    }
+
+    public boolean removeIntention(Intentions intentions) {
+        return this.intentions.remove(intentions);
+    }
+
+    //endregion
+
+
+    public SortedSet<TargetGroups> getTargetGroups() {
+        return targetGroups;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setTargetGroups(@Nonnull SortedSet<TargetGroups> newTargetGroups) {
+
+        if (containsDuplicateOwner(newTargetGroups)) {
+           throw new IllegalArgumentException("The targetgroup list you want to set has a duplicate owner: " + newTargetGroups);
+        }
+        if (this.targetGroups == null) {
+            this.targetGroups = new TreeSet<>();
+        } else {
+           this.targetGroups.clear();
+        }
+        for (TargetGroups i : newTargetGroups) {
+            addTargetGroups(i.copy());
+        }
+    }
+
+    public MediaObject addTargetGroups(@Nonnull TargetGroups newTargetGroups) {
+        if(this.targetGroups != null) {
+            targetGroups.removeIf(existing -> existing.getOwner() == newTargetGroups.getOwner());
+        } else {
+            this.targetGroups = new TreeSet<>();
+        }
+        newTargetGroups.setParent(this);
+        targetGroups.add(newTargetGroups);
+        return this;
+    }
+
     @XmlElement
     public String getSource() {
         return source;
@@ -1154,27 +1275,29 @@ public abstract class MediaObject
     @JsonDeserialize(using = BackwardsCompatibility.CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<CountryCode> getCountries() {
+    public List<org.meeuw.i18n.Region> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();
         }
         return countries;
     }
 
-    public void setCountries(List<CountryCode> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = updateList(this.countries, countries);
     }
 
     public MediaObject addCountry(String code) {
-        CountryCode country = CountryCode.getByCode(code, false);
-        if (country == null) {
-            throw new IllegalArgumentException("Unknown country " + code);
-        }
+        org.meeuw.i18n.Region country = Regions.getByCode(code).orElseThrow(() ->
+            new IllegalArgumentException("Unknown country " + code));
+
         return addCountry(country);
 
     }
+    public MediaObject addCountry(@Nonnull CountryCode country) {
+        return addCountry(Country.of(country));
+    }
 
-    public MediaObject addCountry(CountryCode country) {
+    public MediaObject addCountry(org.meeuw.i18n.Region country) {
         nullCheck(country, "country");
 
         if (countries == null) {
@@ -1257,7 +1380,7 @@ public abstract class MediaObject
 
 
     /**
-     * Use {@link AuthorizedDuration#duration} in combination with {@link #getDuration} to get the java.time.Duration
+     * Use {@link AuthorizedDuration#get()} in combination with {@link #getDuration} to get the java.time.Duration
      * @throws ModificationException If you may not set the duration
      */
     @JsonIgnore
@@ -1441,7 +1564,16 @@ public abstract class MediaObject
     }
 
     public void setMemberOf(SortedSet<MemberRef> memberOf) {
-        this.memberOf = memberOf;
+        if (this.memberOf == null) {
+            this.memberOf = new TreeSet<>();
+        } else {
+            this.memberOf.clear();
+        }
+        if (memberOf != null) {
+            for (MemberRef ref : memberOf) {
+                this.memberOf.add(MemberRef.copy(ref, this));
+            }
+        }
     }
 
     public boolean isMember() {
@@ -1520,7 +1652,9 @@ public abstract class MediaObject
     }
 
     MemberRef createMemberOf(
-        @Nonnull MediaObject group, Integer number, OwnerType owner) throws CircularReferenceException {
+        @Nonnull MediaObject group,
+        Integer number,
+        OwnerType owner) throws CircularReferenceException {
         return group.createMember(this, number, owner);
     }
 
@@ -1583,6 +1717,7 @@ public abstract class MediaObject
         return ageRating;
     }
 
+    @SuppressWarnings("ConstantConditions")
     public void setAgeRating(AgeRating ageRating) {
         if (this.ageRating != ageRating) {
             this.locationAuthorityUpdate = true;
@@ -1944,10 +2079,10 @@ public abstract class MediaObject
         return findOrCreatePrediction(platform, Embargos.unrestrictedInstance());
     }
 
-    protected Prediction findOrCreatePrediction(Platform platform, ReadonlyEmbargo embargo) {
+    protected Prediction findOrCreatePrediction(Platform platform, Embargo embargo) {
          Prediction prediction = getPrediction(platform);
         if (prediction == null) {
-            log.debug("Creating prediction object for {}: ", platform, this);
+            log.debug("Creating prediction object for {}: {}", platform, this);
             prediction = new Prediction(platform);
             Embargos.copy(embargo, prediction);
             prediction.setPlannedAvailability(false);
@@ -1974,7 +2109,16 @@ public abstract class MediaObject
     }
 
     public void setLocations(SortedSet<Location> locations) {
-        this.locations = locations;
+
+        if (this.locations == null) {
+            this.locations = new TreeSet<>();
+        } else {
+           this.locations.clear();
+        }
+        for (Location l : locations) {
+            l = Location.copy(l, this);
+            addLocation(l);
+        }
     }
 
     public Location getLocation(Location location) {
@@ -2141,8 +2285,18 @@ public abstract class MediaObject
     }
 
     public void setRelations(SortedSet<Relation> relations) {
-        this.relations = relations;
+
+
+        if (this.relations == null) {
+            this.relations = new TreeSet<>();
+        } else {
+            this.relations.clear();
+        }
+        for (Relation i : relations) {
+            addRelation(Relation.copy(i));
+        }
     }
+
 
     public MediaObject addRelation(Relation relation) {
         nullCheck(relation, "relation");
@@ -2329,6 +2483,9 @@ public abstract class MediaObject
         return success;
     }
 
+    /**
+     * What does it mean to be 'embedddable'?
+     */
     @XmlAttribute(name = "embeddable")
     public boolean isEmbeddable() {
         return isEmbeddable;
@@ -2771,8 +2928,7 @@ public abstract class MediaObject
         }
         return result;
     }
-
-
+    
     @Override
     public final String toString() {
         String mainTitle;
@@ -2782,10 +2938,10 @@ public abstract class MediaObject
         } catch(RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
-        return String.format(getClass().getSimpleName() + "{%1$s%2$smid=\"%3$s\", title=%4$s}",
+        return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s}",
             (! Workflow.PUBLICATIONS.contains(workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
-            this.getMid(),
+            this.getMid() == null ? "null" : "\"" + this.getMid() + "\"",
             mainTitle);
     }
 

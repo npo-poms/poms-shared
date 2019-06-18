@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Identifiable;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -74,7 +75,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
     "index",
     "highlighted"
 })
-public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, Ownable {
+public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Serializable, MutableOwnable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -149,13 +150,16 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     public MemberRef(MemberRef source, MediaObject member, OwnerType owner) {
-        this(member, source.group, source.number, owner);
-        this.added = source.added;
+        this.member = member;
+        this.group = source.group;
+        this.number = source.number;
+        this.owner = owner;
+        this.added       = source.added;
         this.highlighted = source.highlighted;
 
         this.cridRef = source.cridRef;
-        this.midRef= source.midRef;
-        this.urnRef= source.urnRef;
+        this.midRef  = source.midRef;
+        this.urnRef  = source.urnRef;
     }
 
 
@@ -461,7 +465,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @Override
-    public int compareTo(MemberRef memberRef) {
+    public int compareTo(@Nonnull MemberRef memberRef) {
         if(this.getUrnRef() != null
             && memberRef.getUrnRef() != null
             && this.getUrnRef().compareTo(memberRef.getUrnRef()) != 0) {
@@ -512,8 +516,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         if (getMidRef() != null) {
             builder.append("midRef", getMidRef());
         }
-        if (getMediaRef() != null) {
+        if (getMidRef() == null && getMediaRef() != null) {
             builder.append("mediaRef", getMediaRef());
+        }
+        if (getMember() != null) {
+            builder.append("member", getMember().getCorrelationId());
         }
         if (number != null) {
             builder.append("number", number);
@@ -561,6 +568,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         }
     }
 
+    @Nonnull
     @Override
     @XmlTransient
     public OwnerType getOwner() {
@@ -569,7 +577,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @Override
-    public void setOwner(OwnerType owner) {
+    public void setOwner(@Nonnull OwnerType owner) {
         this.owner = owner;
     }
 

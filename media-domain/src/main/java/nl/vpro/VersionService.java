@@ -18,7 +18,7 @@ import nl.vpro.util.IntegerVersion;
 @Slf4j
 public class VersionService {
 
-    private static final String FALLBACK = "5.10.0";
+    private static final String FALLBACK = "5.11.0";
 
     private static String version;
 

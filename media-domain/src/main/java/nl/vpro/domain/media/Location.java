@@ -31,7 +31,7 @@ import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.util.TimeUtils;
@@ -71,7 +71,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 })
 @Slf4j
 public class Location extends PublishableObject<Location>
-    implements Ownable, Comparable<Location>, MediaObjectChild, Child<MediaObject> {
+    implements MutableOwnable, Comparable<Location>, Child<MediaObject> {
     private static final long serialVersionUID = -140942203904508506L;
 
     private static final String BASE_URN = "urn:vpro:media:location:";
@@ -128,6 +128,7 @@ public class Location extends PublishableObject<Location>
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @XmlAttribute(required = true)
+    @Nonnull
     protected OwnerType owner = OwnerType.BROADCASTER;
 
     @Column(nullable = true)
@@ -398,13 +399,14 @@ public class Location extends PublishableObject<Location>
         this.duration = duration;
     }
 
+    @Nonnull
     @Override
     public OwnerType getOwner() {
         return owner;
     }
 
     @Override
-    public void setOwner(OwnerType owner) {
+    public void setOwner(@Nonnull OwnerType owner) {
         this.owner = owner;
     }
 

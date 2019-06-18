@@ -12,8 +12,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
@@ -111,7 +110,10 @@ public interface MediaTestDataBuilder<
     @Deprecated
     <TT extends MediaBuilder<TT, M>> MediaBuilder<TT, M> getMediaBuilder();
 
-
+    /**
+     * Made object smaller and more predictable
+     * (especially the creationDate we rather want a null)
+     */
     default T lean() {
         return creationDate((Instant) null).workflow(null);
     }
@@ -395,6 +397,7 @@ public interface MediaTestDataBuilder<
     default T withReleaseYear() {
         return releaseYear(Short.valueOf("2004"));
             }
+
     default T withPersons() {
         return persons(
             Person.builder()
@@ -403,9 +406,47 @@ public interface MediaTestDataBuilder<
                 .role(RoleType.DIRECTOR)
                 .gtaaUri("http://gtaa/1234")
                 .build(),
-            new Person("Hans", "Goedkoop", RoleType.PRESENTER),
-            new Person("Meta", "de Vries", RoleType.PRESENTER),
-            new Person("Claire", "Holt", RoleType.ACTOR));
+            Person.builder()
+                .givenName("Hans")
+                .familyName("Goedkoop")
+                .role(RoleType.PRESENTER)
+                .build(),
+            Person.builder()
+                .givenName("Meta")
+                .familyName("de Vries")
+                .role(RoleType.PRESENTER)
+                .build(),
+            Person.builder()
+                .givenName("Claire")
+                .familyName("Holt")
+                .role(RoleType.ACTOR)
+                .build());
+    }
+
+    default T withIntentions() {
+        return intentions(
+            Intentions.builder()
+                .values(Arrays.asList(IntentionType.ACTIVATING, IntentionType.INFORM_INDEPTH))
+                .owner(OwnerType.BROADCASTER)
+                .build(),
+            Intentions.builder()
+                .values(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE, IntentionType.INFORM))
+                .owner(OwnerType.NPO)
+                .build()
+        );
+    }
+
+    default T withTargetGroups(){
+        return targetGroups(
+                TargetGroups.builder()
+                    .values(Arrays.asList(TargetGroupType.ADULTS))
+                    .owner(OwnerType.BROADCASTER)
+                    .build(),
+                TargetGroups.builder()
+                    .values(Arrays.asList(TargetGroupType.KIDS_6, TargetGroupType.KIDS_12))
+                    .owner(OwnerType.NPO)
+                    .build()
+        );
     }
 
     default T withAwards() {
@@ -499,48 +540,6 @@ public interface MediaTestDataBuilder<
 
         return locations(l1, l2);
 
-    }
-
-    default T withScheduleEvents() {
-        return scheduleEvents(
-            ScheduleEvent.builder()
-                .channel(Channel.NED3)
-                .start(Instant.ofEpochMilli(100))
-                .duration(Duration.ofMillis(200))
-                .guideDay(LocalDate.of(1969, 12, 31))
-                .repeat(Repeat.original())
-                .build(),
-            ScheduleEvent.builder()
-                .channel(Channel.NED3)
-                .net(new Net("ZAPP"))
-                .start(Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000))
-                .duration(Duration.ofMillis(50))
-                .repeat(Repeat.rerun())
-                .build(),
-            ScheduleEvent.builder()
-                .channel(Channel.HOLL)
-                .start(Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000))
-                .duration(Duration.ofMillis(250))
-                .rerun(true)
-                .build(),
-            ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000)).duration(Duration.ofMillis(200)).rerun(true).build()
-        );
-    }
-
-    default T withScheduleEvent(LocalDateTime localDateTime, Function<ScheduleEvent, ScheduleEvent> merger) {
-        return scheduleEvent(Channel.NED1, localDateTime, Duration.ofMinutes(30L), merger);
-    }
-
-    default T withScheduleEvent(LocalDateTime localDateTime) {
-        return scheduleEvent(Channel.NED1, localDateTime, Duration.ofMinutes(30L));
-    }
-
-    default T withScheduleEvent(int year, int month, int day, int hour, int minutes, Function<ScheduleEvent, ScheduleEvent> merger) {
-        return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes), merger);
-    }
-
-    default T withScheduleEvent(int year, int month, int day, int hour, int minutes) {
-        return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes));
     }
 
     RelationDefinition VPRO_LABEL     = RelationDefinition.of("LABEL", "VPRO");
@@ -661,15 +660,6 @@ public interface MediaTestDataBuilder<
     default T withEverything() {
         return withEverything(new AtomicLong(1), new AtomicLong(20000L));
     }
-    default T withEverything(Float version) {
-        T result = withEverything();
-        if (version != null && version < 5.9) {
-            for (ScheduleEvent se :result.getMediaBuilder().build().getScheduleEvents()) {
-                se.setGuideDate(null);
-            }
-        }
-        return result;
-    }
 
     default T withEverything(AtomicLong ids, AtomicLong mids) {
         return
@@ -692,6 +682,8 @@ public interface MediaTestDataBuilder<
                 .withGenres()
                 .withGeoRestrictions()
                 .withImagesWithCredits()
+                .withIntentions()
+                .withTargetGroups()
                 .withLanguages()
                 .withLastModifiedBy()
                 .withLocations()
@@ -705,7 +697,6 @@ public interface MediaTestDataBuilder<
                 .withFixedPublishStart()
                 .withRelations()
                 .withReleaseYear()
-                .withScheduleEvents()
                 .withSource()
                 .withSubtitles()
                 .withTags()
@@ -742,27 +733,25 @@ public interface MediaTestDataBuilder<
             AtomicLong mids = new AtomicLong(30000L);
             return MediaTestDataBuilder.super
                 .withEverything()
+                .withScheduleEvents()
                 .withType()
                 .withEpisodeOfIfAllowed(null, null, mids)
                 .withPoProgType()
                 .withPredictions()
                 .withSegmentsWithEveryting()
                 .withFixedSegmentMids(mids);
-
         }
 
-        @Override
         public ProgramTestDataBuilder withEverything(Float version) {
-            ProgramTestDataBuilder result = MediaTestDataBuilder.super.withEverything(version);
+            ProgramTestDataBuilder result = withEverything();
             if (version != null && version < 5.9) {
-                for (Segment s : result.getMediaBuilder().build().getSegments()) {
-                    for (ScheduleEvent se : s.getScheduleEvents()) {
-                        se.setGuideDate(null);
-                    }
+                for (ScheduleEvent se :result.getMediaBuilder().build().getScheduleEvents()) {
+                    se.setGuideDate(null);
                 }
             }
             return result;
         }
+
         @Override
         public MediaBuilder<MediaBuilder.ProgramBuilder, Program> getMediaBuilder() {
             ProgramBuilder builder = MediaBuilder.program(mediaObject());
@@ -816,6 +805,49 @@ public interface MediaTestDataBuilder<
 
             return episodeOf(season, 1);
         }
+
+        public ProgramTestDataBuilder withScheduleEvents() {
+            return scheduleEvents(
+                    ScheduleEvent.builder()
+                            .channel(Channel.NED3)
+                            .start(Instant.ofEpochMilli(100))
+                            .duration(Duration.ofMillis(200))
+                            .guideDay(LocalDate.of(1969, 12, 31))
+                            .repeat(Repeat.original())
+                            .build(),
+                    ScheduleEvent.builder()
+                            .channel(Channel.NED3)
+                            .net(new Net("ZAPP"))
+                            .start(Instant.ofEpochMilli(300 + 3 * 24 * 3600 * 1000))
+                            .duration(Duration.ofMillis(50))
+                            .repeat(Repeat.rerun())
+                            .build(),
+                    ScheduleEvent.builder()
+                            .channel(Channel.HOLL)
+                            .start(Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000))
+                            .duration(Duration.ofMillis(250))
+                            .rerun(true)
+                            .build(),
+                    ScheduleEvent.builder().channel(Channel.CONS).start(Instant.ofEpochMilli(600 + 10 * 24 * 3600 * 1000)).duration(Duration.ofMillis(200)).rerun(true).build()
+            );
+        }
+
+        public ProgramTestDataBuilder withScheduleEvent(LocalDateTime localDateTime, Function<ScheduleEvent, ScheduleEvent> merger) {
+            return scheduleEvent(Channel.NED1, localDateTime, Duration.ofMinutes(30L), merger);
+        }
+
+        public ProgramTestDataBuilder withScheduleEvent(LocalDateTime localDateTime) {
+            return scheduleEvent(Channel.NED1, localDateTime, Duration.ofMinutes(30L));
+        }
+
+        public ProgramTestDataBuilder withScheduleEvent(int year, int month, int day, int hour, int minutes, Function<ScheduleEvent, ScheduleEvent> merger) {
+            return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes), merger);
+        }
+
+        public ProgramTestDataBuilder withScheduleEvent(int year, int month, int day, int hour, int minutes) {
+            return withScheduleEvent(LocalDateTime.of(year, month, day, hour, minutes));
+        }
+
         public ProgramTestDataBuilder withEpisodeOfIfAllowed(Long seriesId, Long seasonId, AtomicLong midId)  {
             if (mediaObject().getType().hasEpisodeOf()) {
                 withEpisodeOf(seriesId, seasonId, midId);

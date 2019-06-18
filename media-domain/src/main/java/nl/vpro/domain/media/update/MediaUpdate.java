@@ -28,26 +28,28 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.meeuw.i18n.bind.jaxb.Code;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
-import nl.vpro.domain.EmbargoDeprecated;
 import nl.vpro.domain.Embargos;
+import nl.vpro.domain.MutableEmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
 import nl.vpro.domain.TextualObjects;
-import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.TwitterRef;
-import nl.vpro.domain.media.bind.CountryCodeAdapter;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.util.*;
+import nl.vpro.util.IntegerVersion;
+import nl.vpro.util.IntegerVersionSpecific;
+import nl.vpro.util.TimeUtils;
+import nl.vpro.util.Version;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
@@ -59,7 +61,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
  *
  * A MediaUpdate is like a {@link MediaObject} but
  * <ul>
- *  <li>It does not have {@link Ownable} objects. When converting between a MediaUpdate and a MediaObject one need to indicate for which owner type this must happen.
+ *  <li>It does not have {@link MutableOwnable} objects. When converting between a MediaUpdate and a MediaObject one need to indicate for which owner type this must happen.
  *  If you are updating you are always associated with a certain owner (normally {@link OwnerType#BROADCASTER}), so there is no case for updating fields of other owners.
  * </li>
  * <li>It contains fewer implicit fields. E.g. a Broadcaster is just an id, and it does not contain a better string representation.
@@ -94,6 +96,8 @@ import nl.vpro.xml.bind.LocaleAdapter;
         "countries",
         "languages",
         "genres",
+        "intentions",
+        "targetGroups",
         "avAttributes",
         "releaseYear",
         "duration",
@@ -115,7 +119,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @Slf4j
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
-    EmbargoDeprecated,
+    MutableEmbargoDeprecated,
     TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,
     IntegerVersionSpecific,
     MediaIdentifiable {
@@ -184,11 +188,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected AVType avType;
 
-    protected Boolean embeddable;
+    protected Boolean embeddable = Boolean.TRUE;
 
     Boolean isDeleted;
 
-    List<CountryCode> countries;
+    List<org.meeuw.i18n.Region> countries;
 
     List<Locale> languages;
 
@@ -210,6 +214,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
     List<@Email String> email;
 
     protected List<ImageUpdate> images;
+
+    /**
+     * This represent the editable intentions
+     * Only display the intentions for the given owner
+     * (more intentions might be present in the metadata).
+     */
+    protected List<IntentionType> intentions;
+
+    protected List<TargetGroupType> targetGroups;
 
     @Valid
     protected Asset asset;
@@ -281,7 +294,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
     protected MediaUpdate() {
-        fillFromMedia(newMedia(), OwnerType.BROADCASTER);
+        //
     }
 
 
@@ -290,6 +303,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         fillFrom(mediaobject, ownerType);
     }
 
+    //Part of the process of creating a MediaUpdate from a MediaObject
     protected final void fillFromMedia(M mediaobject, OwnerType owner) {
         this.mid = mediaobject.getMid();
         this.urn = mediaobject.getUrn();
@@ -326,6 +340,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         this.tags = toSet(mediaobject.getTags(), Tag::getText);
         this.persons = toList(MediaObjects.getPersons(mediaobject), PersonUpdate::new, true);
+
+        this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
+        this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
 
         this.portalRestrictions = toList(mediaobject.getPortalRestrictions(), PortalRestrictionUpdate::new);
         this.geoRestrictions= toSet(mediaobject.getGeoRestrictions(), GeoRestrictionUpdate::new);
@@ -434,7 +451,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         media.setCreationInstant(null); //   not supported by update format. will be set by persistence layer
         media.setCrids(crids);
         media.setAVType(avType);
-        media.setEmbeddable(embeddable);
+        media.setEmbeddable(embeddable == null || embeddable);
         media.setCountries(countries);
         media.setLanguages(languages);
 
@@ -475,14 +492,24 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         media.setPredictions(toSet(predictions, PredictionUpdate::toPrediction));
 
-
+        if (isDeleted == Boolean.TRUE) {
+            MediaObjects.markForDeletion(media, "");
+        } else {
+            MediaObjects.markForRepublication(media, "");
+        }
         return media;
     }
 
+    /**
+     * Convert this MediaUpdate object to a MediaObject
+     * Clone all the fields of MediaUpdate into a new MediaObject
+     */
     public M fetch(OwnerType owner) {
         M returnObject = fetchOwnerless();
         TextualObjects.copy(this, returnObject, owner);
-        returnObject.setLocations(toSet(locations, l -> l.toLocation(owner)));
+        for (Location l : toSet(locations, l -> l.toLocation(owner))) {
+            returnObject.addLocation(l);
+        }
         Predicate<Image> imageFilter = isImported() ? (i) -> i.getImageUri() != null : (i) -> true;
         returnObject.setImages(toList(images, i -> i.toImage(owner)).stream()
                 .filter(imageFilter)
@@ -491,14 +518,61 @@ public abstract class  MediaUpdate<M extends MediaObject>
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
 
+        if(intentions != null){
+            returnObject.addIntention(toIntentions(intentions, owner));
+        }
+        if(targetGroups != null){
+            returnObject.addTargetGroups(toTargetGroups(targetGroups, owner));
+        }
+
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
             ScheduleEvent e = s.toScheduleEvent(owner);
             e.setParent(returnObject);
             return e;
         }));
+
         return returnObject;
     }
 
+    /**
+     * From a SortedSet<Intentions> to a List<IntentionType>
+     * Returning only the values for the given owner.
+     * We decided to return an empty list if owner differ rather than raise an
+     * exception (this code will usually be executed behind a queue)
+     *
+     * Given a null it will return null to keep the distinction between systems
+     * that are aware of this field (we use empty list to delete)
+     */
+    private List<IntentionType> toUpdateIntentions(SortedSet<Intentions> intentions, OwnerType owner){
+        return Ownables.filter(intentions, owner).map(Intentions::getValues).map(l -> l.stream().map(Intention::getValue).collect(Collectors.toList())).orElse(new ArrayList<>());
+    }
+
+    private Intentions toIntentions(List<IntentionType> intentionValues, OwnerType owner){
+        return Intentions.builder()
+                .owner(owner)
+                .values(intentionValues)
+                .build();
+    }
+
+    /**
+     * From a SortedSet<TargetGroups> to a List<TargetGroupType>
+     * Returning only the values for the given owner.
+     * We decided to return an empty list if owner differ rather than raise an
+     * exception (this code will usually be executed behind a queue)
+     *
+     * Given a null it will return null to keep the distinction between systems
+     * that are aware of this field (we use empty list to delete)
+     */
+    private List<TargetGroupType> toUpdateTargetGroups(SortedSet<TargetGroups> targetGroups, OwnerType owner){
+        return Ownables.filter(targetGroups, owner).map(TargetGroups::getValues).map(l -> l.stream().map(TargetGroup::getValue).collect(Collectors.toList())).orElse(new ArrayList<>());
+    }
+
+    private TargetGroups toTargetGroups(List<TargetGroupType> targetGroupValues, OwnerType owner){
+        return TargetGroups.builder()
+                .owner(owner)
+                .values(targetGroupValues)
+                .build();
+    }
 
     public M fetch() {
         return fetch(OwnerType.BROADCASTER);
@@ -584,7 +658,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlAttribute
     public Boolean isDeleted() {
-        return isDeleted ? true : null;
+        return isDeleted != null && isDeleted ? true : null;
     }
 
     public void setDeleted(Boolean deleted) {
@@ -816,15 +890,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "country")
-    @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
-    public List<CountryCode> getCountries() {
+    @XmlJavaTypeAdapter(Code.class)
+    public List<org.meeuw.i18n.Region> getCountries() {
          if (countries == null) {
             countries = new ArrayList<>();
          }
         return countries;
     }
 
-    public void setCountries(List<CountryCode> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = countries;
     }
 
@@ -856,6 +930,30 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     public void setGenres(String... genres) {
         this.genres = new TreeSet<>(Arrays.asList(genres));
+    }
+
+
+
+    @XmlElementWrapper(name = "intentions")
+    @XmlElement(name = "intention")
+    @Nonnull
+    public List<IntentionType> getIntentions() {
+        return intentions;
+    }
+
+    public void setIntentions(List<IntentionType> intentions) {
+        this.intentions = intentions;
+    }
+
+    @XmlElementWrapper(name = "targetGroups")
+    @XmlElement(name = "targetGroup")
+    @Nonnull
+    public List<TargetGroupType> getTargetGroups() {
+        return targetGroups;
+    }
+
+    public void setTargetGroups(List<TargetGroupType> targetGroups) {
+        this.targetGroups = targetGroups;
     }
 
 

@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.Range;
 
 /**
- * Utilities related to {@link Embargo}
+ * Utilities related to {@link MutableEmbargo}
  * @author Michiel Meeuwissen
  * @since 5.3
  */
@@ -18,7 +18,7 @@ public class Embargos {
     private static final String PUBLISH_START = "publishstart";
     private static final String PUBLISH_STOP = "publishstop";
 
-    public static ChangeReport copy(ReadonlyEmbargo from, Embargo to) {
+    public static ChangeReport copy(Embargo from, MutableEmbargo to) {
         ChangeReport change = new ChangeReport();
 
         if (!Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
@@ -32,7 +32,7 @@ public class Embargos {
         return change;
     }
 
-    public static ChangeReport copyIfTargetUnset(ReadonlyEmbargo from, Embargo to) {
+    public static ChangeReport copyIfTargetUnset(Embargo from, MutableEmbargo to) {
         ChangeReport change = new ChangeReport();
         if (to.getPublishStartInstant() == null && !Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
             to.setPublishStartInstant(from.getPublishStartInstant());
@@ -45,7 +45,7 @@ public class Embargos {
         return change;
     }
 
-    public static ChangeReport copyIfSourceSet(ReadonlyEmbargo from, Embargo to) {
+    public static ChangeReport copyIfSourceSet(Embargo from, MutableEmbargo to) {
         ChangeReport change = new ChangeReport();
         if (from.getPublishStartInstant() != null && ! Objects.equals(to.getPublishStartInstant(), from.getPublishStartInstant())) {
             to.setPublishStartInstant(from.getPublishStartInstant());
@@ -61,7 +61,7 @@ public class Embargos {
     /**
      * Takes from both the start and stop of the two embargo's the least restrictive one and copies them to the second.
      */
-    public static ChangeReport copyIfMoreRestricted(ReadonlyEmbargo from, Embargo to) {
+    public static ChangeReport copyIfMoreRestricted(Embargo from, MutableEmbargo to) {
         ChangeReport change = new ChangeReport();
         if (from.getPublishStartInstant() != null &&
             (to.getPublishStartInstant() == null || to.getPublishStartInstant().isBefore(from.getPublishStartInstant()))
@@ -85,7 +85,7 @@ public class Embargos {
      *
      * If they were connected, the result is the union.
      */
-     public static ChangeReport copyIfLessRestricted(ReadonlyEmbargo from, Embargo to) {
+     public static ChangeReport copyIfLessRestricted(Embargo from, MutableEmbargo to) {
          ChangeReport change = new ChangeReport();
 
          if (from.getPublishStartInstant() == null ||
@@ -111,7 +111,7 @@ public class Embargos {
      *
      * If they were connected, the result is the union.
      */
-     public static ChangeReport copyIfLessRestrictedOrTargetUnset(ReadonlyEmbargo from, Embargo to) {
+     public static ChangeReport copyIfLessRestrictedOrTargetUnset(Embargo from, MutableEmbargo to) {
          ChangeReport change = new ChangeReport();
          if (from.getPublishStartInstant() == null || to.getPublishStartInstant() == null || to.getPublishStartInstant().isAfter(from.getPublishStartInstant())) {
              to.setPublishStartInstant(from.getPublishStartInstant());
@@ -124,15 +124,15 @@ public class Embargos {
          return change;
     }
 
-    public static ReadonlyEmbargo readyOnly(final Embargo embargo) {
+    public static Embargo readyOnly(final MutableEmbargo embargo) {
         return readyOnly(
             embargo.getPublishStartInstant(),
             embargo.getPublishStopInstant()
         );
     }
 
-    public static ReadonlyEmbargo readyOnly(final Instant start, final Instant stop) {
-        return new ReadonlyEmbargo() {
+    public static Embargo readyOnly(final Instant start, final Instant stop) {
+        return new Embargo() {
             @Override
             public Instant getPublishStartInstant() {
                 return start;
@@ -149,33 +149,33 @@ public class Embargos {
 
         };
     }
-    public static Embargo<BasicEmbargo> of(final Instant start, final Instant stop) {
+    public static MutableEmbargo<BasicEmbargo> of(final Instant start, final Instant stop) {
         return new BasicEmbargo(start, stop);
     }
 
-     public static Embargo<BasicEmbargo> of(Range<Instant> range) {
+     public static MutableEmbargo<BasicEmbargo> of(Range<Instant> range) {
         BasicEmbargo result = new BasicEmbargo(null, null);
         result.set(range);
         return result;
     }
 
-    public static Embargo<BasicEmbargo> of(ReadonlyEmbargo readonlyEmbargo) {
+    public static MutableEmbargo<BasicEmbargo> of(Embargo readonlyEmbargo) {
         return new BasicEmbargo(readonlyEmbargo.getPublishStartInstant(), readonlyEmbargo.getPublishStopInstant());
     }
 
-    public static Embargo<BasicEmbargo> unrestrictedInstance() {
+    public static MutableEmbargo<BasicEmbargo> unrestrictedInstance() {
         return new BasicEmbargo(null,  null);
     }
-    public static Embargo<BasicEmbargo> restrictedInstance() {
+    public static MutableEmbargo<BasicEmbargo> restrictedInstance() {
         return new BasicEmbargo(Instant.MAX, Instant.MIN);
     }
 
-    public static boolean equals(ReadonlyEmbargo e1, ReadonlyEmbargo e2) {
+    public static boolean equals(Embargo e1, Embargo e2) {
          return Objects.equals(e1.getPublishStartInstant(), e2.getPublishStartInstant()) &&
              Objects.equals(e1.getPublishStopInstant(), e2.getPublishStopInstant());
     }
 
-    public static String toString(ReadonlyEmbargo embargo) {
+    public static String toString(Embargo embargo) {
         Instant start = embargo.getPublishStartInstant();
         Instant stop = embargo.getPublishStopInstant();
         return "[" + (start == null ? "" : start) + "-" + (stop == null ? "" : stop) + "]";
@@ -183,7 +183,7 @@ public class Embargos {
 
 
     @Nonnull
-    public static Instant getPublishStop(@Nullable ReadonlyEmbargo readonlyEmbargo) {
+    public static Instant getPublishStop(@Nullable Embargo readonlyEmbargo) {
         if (readonlyEmbargo == null) {
             return Instant.MAX;
         }
@@ -194,7 +194,7 @@ public class Embargos {
         return result;
     }
     @Nonnull
-    public static Instant getPublishStart(@Nullable ReadonlyEmbargo readonlyEmbargo) {
+    public static Instant getPublishStart(@Nullable Embargo readonlyEmbargo) {
         if (readonlyEmbargo == null) {
             return Instant.MIN;
         }

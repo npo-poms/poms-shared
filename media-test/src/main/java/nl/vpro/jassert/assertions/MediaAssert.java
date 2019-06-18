@@ -8,13 +8,15 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.annotation.Nonnull;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.assertj.core.api.Fail;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.user.Broadcaster;
 
 import static nl.vpro.jassert.assertions.MediaAssertions.assertThat;
@@ -553,10 +555,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         return myself;
     }
 
-    private <T extends Ownable> void hasOwners(Collection<T> ownables, OwnerType... owners) {
+    private <T extends MutableOwnable> void hasOwners(Collection<T> ownables, OwnerType... owners) {
         validateIsNotNull(owners);
         Set<OwnerType> set = new TreeSet<>();
-        for(Ownable ownable : ownables) {
+        for(MutableOwnable ownable : ownables) {
             set.add(ownable.getOwner());
         }
 
@@ -564,10 +566,10 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
 
     }
 
-    private <T extends Ownable> void hasOnlyOwners(Collection<T> ownables, OwnerType... owners) {
+    private <T extends MutableOwnable> void hasOnlyOwners(Collection<T> ownables, OwnerType... owners) {
         validateIsNotNull(owners);
         Set<OwnerType> set = new TreeSet<>();
-        for(Ownable ownable : ownables) {
+        for(MutableOwnable ownable : ownables) {
             set.add(ownable.getOwner());
         }
 
@@ -666,7 +668,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         }
 
         @Override
-        public int compareTo(Quartet<P, Q, R, S> quartet) {
+        public int compareTo(@Nonnull Quartet<P, Q, R, S> quartet) {
             int result = p == null && quartet.p == null ? 0 : p.compareTo(quartet.p);
             if(result != 0) {
                 return result;

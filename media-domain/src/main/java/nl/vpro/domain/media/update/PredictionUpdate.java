@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import nl.vpro.domain.media.Encryption;
 import nl.vpro.domain.media.Platform;
 import nl.vpro.domain.media.Prediction;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
@@ -49,23 +50,27 @@ public class PredictionUpdate implements Comparable<PredictionUpdate> {
     @JsonProperty("platform")
     protected Platform platform;
 
+    @XmlAttribute
+    protected Encryption encryption;
+
     public PredictionUpdate() {
 
     }
 
     public static PredictionUpdate of(Prediction prediction) {
         return PredictionUpdate.builder()
-            .platform(prediction.getPlatform())
-            .publishStart(prediction.getPublishStartInstant())
-            .publishStop(prediction.getPublishStopInstant())
-
-            .build();
+               .platform(prediction.getPlatform())
+               .publishStart(prediction.getPublishStartInstant())
+               .publishStop(prediction.getPublishStopInstant())
+               .encryption(prediction.getEncryption())
+               .build();
     }
 
     public Prediction toPrediction(Prediction prediction) {
         prediction.setPlatform(platform);
         prediction.setPublishStartInstant(publishStart);
         prediction.setPublishStopInstant(publishStop);
+        prediction.setEncryption(encryption);
         return prediction;
     }
 

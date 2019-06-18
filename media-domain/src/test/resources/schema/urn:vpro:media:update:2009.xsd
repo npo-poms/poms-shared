@@ -78,6 +78,20 @@
       <xs:element name="country" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="language" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genre" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="intentions" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="intention" type="media:intentionEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="targetGroups" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="targetGroup" type="media:targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="avAttributes" type="avAtributeUpdateType" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
       <xs:element name="duration" type="xs:duration" minOccurs="0"/>
@@ -225,6 +239,7 @@
       <xs:extension base="media:platformTypeEnum">
         <xs:attribute name="publishStart" type="xs:dateTime"/>
         <xs:attribute name="publishStop" type="xs:dateTime"/>
+        <xs:attribute name="encryption" type="media:encryption"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -293,6 +308,7 @@
         <xs:element name="imageLocation" type="imageLocationType"/>
         <xs:element name="urn" type="xs:string"/>
       </xs:choice>
+      <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type" type="shared:imageTypeEnum" use="required"/>
     <xs:attribute name="urn" type="xs:string"/>

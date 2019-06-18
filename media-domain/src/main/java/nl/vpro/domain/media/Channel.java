@@ -747,6 +747,13 @@ public enum Channel implements Displayable, XmlValued {
             return "Turkmax";
         }
     },
+    @XmlEnumValue("ATVT")
+    ATVT {
+        @Override
+        public String toString() {
+            return "ATV";
+        }
+    },
 
     @XmlEnumValue("RRTM")
     RRTM {
@@ -1115,6 +1122,13 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "Comedy CentralNickelodeon";
+        }
+    },
+    @XmlEnumValue("COMF")
+    COMF {
+        @Override
+        public String toString() {
+            return "Comedy Family";
         }
     },
 
@@ -1500,6 +1514,17 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
 
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("FOXT")
+    FOXT {
+        @Override
+        public String toString() {
+            return "Fox Türk";
+        }
+    },
+
     @XmlEnumValue("MTV_")
     MTV_ {
         @Override
@@ -1825,6 +1850,16 @@ public enum Channel implements Displayable, XmlValued {
         @Override
         public String toString() {
             return "Hallmark";
+        }
+    },
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("HABN")
+    HABN {
+        @Override
+        public String toString() {
+            return "HaberTürk";
         }
     },
 
@@ -2390,6 +2425,13 @@ public enum Channel implements Displayable, XmlValued {
             return "Brava NL";
         }
     },
+    @XmlEnumValue("BRHD")
+    BRHD {
+        @Override
+        public String toString() {
+            return "Brava HD";
+        }
+    },
     @XmlEnumValue("FOXL")
     FOXL{
         @Override
@@ -2462,13 +2504,202 @@ public enum Channel implements Displayable, XmlValued {
         public String toString() {
             return "Viceland";
         }
-    }
-    ,
+    },
+
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("DVB1")
+    DVB1 {
+        @Override
+        public String toString() {
+            return "PO DVB-H 1";
+        }
+    },
+
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("DVB2")
+    DVB2 {
+        @Override
+        public String toString() {
+            return "PO DVB-H 2";
+        }
+    },
+
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("DVB3")
+    DVB3 {
+        @Override
+        public String toString() {
+            return "PO DVB-H 3";
+        }
+    },
+
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("ZIZO")
+    ZIZO {
+        @Override
+        public String toString() {
+            return "PO Zizone TV";
+        }
+    },
+
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("FANT")
+    FANT {
+        @Override
+        public String toString() {
+            return "Fan TV";
+        }
+    },
+
+    /**
+     * @since 5.11
+     */
     @XmlEnumValue("ONL1")
     ONL1(VIDEO) {
         @Override
         public String toString() {
             return "NPO Online 1";
+        }
+    },
+
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("KPN1")
+    KPN1(VIDEO) {
+        @Override
+        public String toString() {
+            return "Eredivisie Live 1";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("KPN2")
+    KPN2(VIDEO) {
+        @Override
+        public String toString() {
+            return "Eredivisie Live 2";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("KPN3")
+    KPN3(VIDEO) {
+        @Override
+        public String toString() {
+            return "Eredivisie Live 3";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("KPN4")
+    KPN4(VIDEO) {
+        @Override
+        public String toString() {
+            return "Eredivisie Live 4";
+        }
+    },
+    /**
+     * @since 5.11
+     */
+    @XmlEnumValue("ZONH")
+    ZONH(VIDEO) {
+        @Override
+        public String toString() {
+            return "Zone Horror";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("XM24")
+    XM24() {
+        @Override
+        public String toString() {
+            return "X-MO DI";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("MNET")
+    MNET() {
+        @Override
+        public String toString() {
+            return "Misdaadnet";
+        }
+    },
+     /**
+     * @since 5.11
+     */
+    @XmlEnumValue("OU24")
+    OU24() {
+        @Override
+        public String toString() {
+            return "PO Out TV";
+        }
+    },
+      /**
+     * @since 5.11
+     */
+    @XmlEnumValue("POKE")
+    POKE() {
+        @Override
+        public String toString() {
+            return "Poker Channel";
+        }
+    },
+      /**
+     * @since 5.11
+     */
+    @XmlEnumValue("RACW")
+    RACW() {
+        @Override
+        public String toString() {
+            return "Raceworld TV";
+        }
+    },
+      /**
+     * @since 5.11
+     */
+    @XmlEnumValue("STTV")
+    STTV() {
+        @Override
+        public String toString() {
+            return "Star TV";
+        }
+    },
+      /**
+     * @since 5.11
+     */
+    @XmlEnumValue("TVPO")
+    TVPO() {
+        @Override
+        public String toString() {
+            return "TV Polonia";
+        }
+    },
+       /**
+     * @since 5.11
+     */
+    @XmlEnumValue("VOOM")
+    VOOM() {
+        @Override
+        public String toString() {
+            return "Voom HD";
         }
     }
     ;
