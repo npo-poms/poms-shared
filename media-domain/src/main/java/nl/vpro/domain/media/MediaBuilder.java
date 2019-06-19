@@ -1012,7 +1012,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
                 mediaObject().getPredictions().clear();
             } else {
                 for(Prediction pred : predictions) {
-                    pred.setMediaObject(mediaObject);
+                    pred.setParent(mediaObject);
                     mediaObject().getPredictions().add(pred);
                 }
             }
