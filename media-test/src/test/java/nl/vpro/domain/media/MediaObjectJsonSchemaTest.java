@@ -737,13 +737,13 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithGeoNames() throws Exception {
+    public void testWithGeoLocations() throws Exception {
         StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/geonames-scenarios.json"), segment, "UTF-8");
-        Map expected = JsonPath.read(segment.toString(),"$.mediaWithTwoGeoNames");
+        IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.json"), segment, "UTF-8");
+        Map expected = JsonPath.read(segment.toString(),"$.mediaWithTwoGeoLocations");
         log.info(expected.toString());
 
-        Program program = program().lean().withGeoNames().build();
+        Program program = program().lean().withGeoLocations().build();
         Map actual = JsonPath.read(toJson(program),"$");
 
         JSONAssert.assertEquals(expected, actual);
@@ -755,7 +755,7 @@ public class MediaObjectJsonSchemaTest {
                 "  \"genres\" : [ ],\n" +
                 "  \"countries\" : [ ],\n" +
                 "  \"languages\" : [ ],\n" +
-                "  \"geoNames\" : [ {\n" +
+                "  \"geoLocations\" : [ {\n" +
                 "    \"owner\" : \"BROADCASTER\",\n" +
                 "    \"values\" : [ {\n" +
                 "      \"name\" : \"England\",\n" +
