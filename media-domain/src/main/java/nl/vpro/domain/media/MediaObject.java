@@ -96,6 +96,7 @@ import static nl.vpro.domain.media.support.Ownables.containsDuplicateOwner;
         "tags",
         "intentions",
         "targetGroups",
+        "geoNames",
         "source",
         "countries",
         "languages",
@@ -388,6 +389,17 @@ public abstract class MediaObject
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected List<Person> persons;
+
+    @OneToMany(orphanRemoval = true, cascade = ALL)
+    @JoinColumn(name = "parent_id")
+    @OrderColumn(name = "list_index", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
+    @XmlElement(name = "geoNames")
+    @JsonProperty("geoNames")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @SortNatural
+    protected SortedSet<GeoNames> geoNames;
 
     @ElementCollection
     @JoinTable(name = "mediaobject_awards")
@@ -1187,13 +1199,49 @@ public abstract class MediaObject
         this.tags = updateSortedSet(this.tags, tags);
     }
 
+    //region GeoNames logic
+    public SortedSet<GeoNames> getGeoNames() {
+        return geoNames;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setGeoNames(@Nonnull SortedSet<GeoNames> newGeoNames) {
+
+        if (containsDuplicateOwner(newGeoNames)) {
+            throw new IllegalArgumentException("The geoNames list you want to set has a duplicate owner: " + newGeoNames);
+        }
+        if (this.geoNames == null) {
+            this.geoNames = new TreeSet<>();
+        } else {
+            this.geoNames.clear();
+        }
+        for (GeoNames i : newGeoNames) {
+            addGeoNames(i.copy());
+        }
+    }
+
+    public MediaObject addGeoNames(@Nonnull GeoNames newGeoNames) {
+        if(this.geoNames != null) {
+            this.geoNames.removeIf(existing -> existing.getOwner() == newGeoNames.getOwner());
+        } else {
+            this.geoNames = new TreeSet<>();
+        }
+        newGeoNames.setParent(this);
+        this.geoNames.add(newGeoNames);
+        return this;
+    }
+
+    public boolean removeGeoNames(GeoNames geoNames) {
+        return this.geoNames.remove(geoNames);
+    }
+
+    //end region
 
     //region Intentions logic
 
     public SortedSet<Intentions> getIntentions() {
         return intentions;
     }
-
 
     @SuppressWarnings("unchecked")
     public void setIntentions(SortedSet<Intentions> newIntentions) {
@@ -1222,7 +1270,7 @@ public abstract class MediaObject
             this.intentions = new TreeSet<>();
         }
         newIntentions.setParent(this);
-        intentions.add(newIntentions);
+        this.intentions.add(newIntentions);
         return this;
     }
 

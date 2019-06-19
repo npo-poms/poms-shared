@@ -737,6 +737,45 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
+    public void testWithGeoNames() throws Exception {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/geonames-scenarios.json"), segment, "UTF-8");
+        Map expected = JsonPath.read(segment.toString(),"$.mediaWithTwoGeoNames");
+        log.info(expected.toString());
+
+        Program program = program().lean().withGeoNames().build();
+        Map actual = JsonPath.read(toJson(program),"$");
+
+        JSONAssert.assertEquals(expected, actual);
+
+        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
+                "  \"objectType\" : \"program\",\n" +
+                "  \"embeddable\" : true,\n" +
+                "  \"broadcasters\" : [ ],\n" +
+                "  \"genres\" : [ ],\n" +
+                "  \"countries\" : [ ],\n" +
+                "  \"languages\" : [ ],\n" +
+                "  \"geoNames\" : [ {\n" +
+                "    \"owner\" : \"BROADCASTER\",\n" +
+                "    \"values\" : [ {\n" +
+                "      \"name\" : \"England\",\n" +
+                "      \"relationType\" : \"SUBJECT\"\n" +
+                "    }, {\n" +
+                "      \"name\" : \"UK\",\n" +
+                "      \"relationType\" : \"RECORDED_IN\"\n" +
+                "    } ]\n" +
+                "  }, {\n" +
+                "    \"owner\" : \"NPO\",\n" +
+                "    \"values\" : [ {\n" +
+                "      \"name\" : \"Africa\",\n" +
+                "      \"description\" : \"Continent\",\n" +
+                "      \"relationType\" : \"SUBJECT\"\n" +
+                "    } ]\n" +
+                "  } ]\n" +
+                "}");
+    }
+
+    @Test
     public void testAvailableSubtitles() throws Exception {
     	ObjectNode media = JsonNodeFactory.instance.objectNode();
     	media.put("objectType", "program");

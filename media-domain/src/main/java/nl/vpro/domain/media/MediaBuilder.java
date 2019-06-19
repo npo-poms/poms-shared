@@ -533,6 +533,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
+
+    default B geoNames(GeoNames... geoNames) {
+        return geoNames(Arrays.asList(geoNames));
+    }
+
+    default B geoNames(Collection<GeoNames> geoNames) {
+        geoNames.forEach(geos -> mediaObject().addGeoNames(geos));
+        return (B)this;
+    }
+
     default B intentions(Intentions... intentions) {
         return intentions(Arrays.asList(intentions));
     }

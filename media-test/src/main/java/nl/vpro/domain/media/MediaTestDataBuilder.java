@@ -28,6 +28,9 @@ import nl.vpro.domain.user.TestEditors;
 import nl.vpro.i18n.Locales;
 import nl.vpro.util.IntegerVersion;
 
+import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
+import static nl.vpro.domain.media.support.OwnerType.NPO;
+
 @SuppressWarnings({"unchecked", "deprecation"})
 public interface MediaTestDataBuilder<
         T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>,
@@ -435,6 +438,29 @@ public interface MediaTestDataBuilder<
                 .values(Arrays.asList(IntentionType.ENTERTAINMENT_INFORMATIVE, IntentionType.INFORM))
                 .owner(OwnerType.NPO)
                 .build()
+        );
+    }
+
+    default T withGeoNames() {
+        List<GeoName> geoNames1 = Arrays.asList(
+                GeoName.builder().name("Africa").relationType(GeoRelationType.SUBJECT)
+                        .description("Continent").build());
+
+        List<GeoName> geoNames2 =  Arrays.asList(
+                GeoName.builder().name("England").relationType(GeoRelationType.SUBJECT)
+                        .gtaaUri("http://gtaa/1234").build(),
+                GeoName.builder().name("UK").relationType(GeoRelationType.RECORDED_IN)
+                        .gtaaUri("http://gtaa/1235").build()
+        );
+        return geoNames(
+                GeoNames.builder()
+                        .values(geoNames1)
+                        .owner(NPO)
+                        .build(),
+                GeoNames.builder()
+                        .values(geoNames2)
+                        .owner(BROADCASTER)
+                        .build()
         );
     }
 
