@@ -101,8 +101,6 @@ public class MediaUpdateListTest {
             "    <item xsi:type=\"programUpdateType\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_1234\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "        <broadcaster>VPRO</broadcaster>\n" +
             "        <title type=\"MAIN\">hoi</title>\n" +
-            "        <intentions/>\n" +
-            "        <targetGroups/>\n" +
             "        <locations/>\n" +
             "        <scheduleEvents/>\n" +
             "        <images/>\n" +
@@ -110,8 +108,6 @@ public class MediaUpdateListTest {
             "            <segment midRef=\"POMS_1234\" type=\"VISUALRADIOSEGMENT\" avType=\"VIDEO\" embeddable=\"true\">\n" +
             "                <broadcaster>VPRO</broadcaster>\n" +
             "                <title type=\"MAIN\">segmenttitel</title>\n" +
-            "                <intentions/>\n" +
-            "                <targetGroups/>\n" +
             "                <locations/>\n" +
             "                <scheduleEvents/>\n" +
             "                <images/>\n" +
