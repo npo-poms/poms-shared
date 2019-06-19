@@ -441,24 +441,24 @@ public interface MediaTestDataBuilder<
         );
     }
 
-    default T withGeoNames() {
-        List<GeoName> geoNames1 = Arrays.asList(
-                GeoName.builder().name("Africa").relationType(GeoRelationType.SUBJECT)
+    default T withGeoLocations() {
+        List<GeoLocation> geoLocations1 = Arrays.asList(
+                GeoLocation.builder().name("Africa").relationType(GeoRelationType.SUBJECT)
                         .description("Continent").build());
 
-        List<GeoName> geoNames2 =  Arrays.asList(
-                GeoName.builder().name("England").relationType(GeoRelationType.SUBJECT)
+        List<GeoLocation> geoLocations2 =  Arrays.asList(
+                GeoLocation.builder().name("England").relationType(GeoRelationType.SUBJECT)
                         .gtaaUri("http://gtaa/1234").build(),
-                GeoName.builder().name("UK").relationType(GeoRelationType.RECORDED_IN)
+                GeoLocation.builder().name("UK").relationType(GeoRelationType.RECORDED_IN)
                         .gtaaUri("http://gtaa/1235").build()
         );
-        return geoNames(
-                GeoNames.builder()
-                        .values(geoNames1)
+        return geoLocations(
+                GeoLocations.builder()
+                        .values(geoLocations1)
                         .owner(NPO)
                         .build(),
-                GeoNames.builder()
-                        .values(geoNames2)
+                GeoLocations.builder()
+                        .values(geoLocations2)
                         .owner(BROADCASTER)
                         .build()
         );

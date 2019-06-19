@@ -1,20 +1,16 @@
 package nl.vpro.domain.media;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import net.fortuna.ical4j.model.property.Geo;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.gtaa.GTAARecord;
-import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.NoHtml;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NotFound;
 
 import javax.annotation.Nonnull;
 import javax.persistence.*;
@@ -26,26 +22,26 @@ import java.util.Optional;
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "geoNameType")
+@XmlType(name = "geoLocationType")
 @Getter
 @Setter
-public class GeoName extends DomainObject implements Child<GeoNames>, Comparable<GeoName>{
+public class GeoLocation extends DomainObject implements Child<GeoLocations>, Comparable<GeoLocation>{
 
-    public static GeoName copy(GeoName source) {
+    public static GeoLocation copy(GeoLocation source) {
         return copy(source, source.parent);
     }
 
-    public static GeoName copy(GeoName source, GeoNames parent) {
+    public static GeoLocation copy(GeoLocation source, GeoLocations parent) {
         if (source == null) {
             return null;
         }
 
-        return new GeoName(source, parent);
+        return new GeoLocation(source, parent);
     }
 
-    @ManyToOne(targetEntity = GeoNames.class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = GeoLocations.class, fetch = FetchType.LAZY)
     @XmlTransient
-    private GeoNames parent;
+    private GeoLocations parent;
 
     @NoHtml
     @XmlElement
@@ -55,7 +51,7 @@ public class GeoName extends DomainObject implements Child<GeoNames>, Comparable
     @XmlElement
     private String description;
 
-    @Column(nullable = false)
+    @Column(name= "relation_type", nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @XmlAttribute(required = true)
     @Enumerated(EnumType.STRING)
@@ -67,36 +63,36 @@ public class GeoName extends DomainObject implements Child<GeoNames>, Comparable
     @XmlTransient
     private GTAARecord gtaaRecord;
 
-    public GeoName() {
+    public GeoLocation() {
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GeoName(@NonNull String name, @NonNull GeoRelationType relationType, String description) {
+    public GeoLocation(@NonNull String name, @NonNull GeoRelationType relationType, String description) {
         this.name = name;
         this.relationType = relationType;
         this.description = description;
     }
 
-    public GeoName(Long id, @NonNull String name, @NonNull GeoRelationType relationType, String description, GTAARecord gtaaRecord) {
+    public GeoLocation(Long id, @NonNull String name, @NonNull GeoRelationType relationType, String description, GTAARecord gtaaRecord) {
         this(name, relationType, description);
         this.id = id;
         this.gtaaRecord = gtaaRecord;
     }
 
-    public GeoName(GeoName source, GeoNames parent) {
+    public GeoLocation(GeoLocation source, GeoLocations parent) {
         this(source.getName(), source.getRelationType(), source.getDescription());
         this.gtaaRecord = source.gtaaRecord;
         this.parent = parent;
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private GeoName(
+    private GeoLocation(
             Long id,
             @NonNull String name,
             @NonNull OwnerType owner,
             @Nonnull GeoRelationType relationType,
             String description,
-            GeoNames parent,
+            GeoLocations parent,
             GTAARecord gtaaRecord) {
         this(id, name, relationType, description, gtaaRecord);
         this.parent = parent;
@@ -117,25 +113,25 @@ public class GeoName extends DomainObject implements Child<GeoNames>, Comparable
         if(super.equals(o)) {
             return true;
         }
-        if(!(o instanceof GeoName)) {
+        if(!(o instanceof GeoLocation)) {
             return false;
         }
 
-        GeoName geoName = (GeoName)o;
+        GeoLocation geoLocation = (GeoLocation)o;
 
-        if(!Objects.equals(name, geoName.name)) {
+        if(!Objects.equals(name, geoLocation.name)) {
             return false;
         }
 
-        if(!Objects.equals(relationType, geoName.relationType)) {
+        if(!Objects.equals(relationType, geoLocation.relationType)) {
             return false;
         }
 
-        if(!Objects.equals(description, geoName.description)) {
+        if(!Objects.equals(description, geoLocation.description)) {
             return false;
         }
 
-        return Objects.equals(getGtaaUri(), geoName.getGtaaUri());
+        return Objects.equals(getGtaaUri(), geoLocation.getGtaaUri());
     }
 
     @Override
@@ -161,21 +157,21 @@ public class GeoName extends DomainObject implements Child<GeoNames>, Comparable
     }
 
     @Override
-    public int compareTo(GeoName geoName) {
-        if(!this.name.equals(geoName.name)) {
-            return this.name.compareTo(geoName.name);
+    public int compareTo(GeoLocation geoLocation) {
+        if(!this.name.equals(geoLocation.name)) {
+            return this.name.compareTo(geoLocation.name);
         }
 
-        if(!this.relationType.equals(geoName.relationType)) {
-            return this.relationType.compareTo(geoName.relationType);
+        if(!this.relationType.equals(geoLocation.relationType)) {
+            return this.relationType.compareTo(geoLocation.relationType);
         }
 
-        if(description != null && geoName.description != null && !description.equals(geoName.description)) {
-            return this.description.compareTo(geoName.description);
+        if(description != null && geoLocation.description != null && !description.equals(geoLocation.description)) {
+            return this.description.compareTo(geoLocation.description);
         }
 
-        if(getGtaaUri() != null && geoName.getGtaaUri() != null && !getGtaaUri().equals(geoName.getGtaaUri())) {
-            return this.getGtaaUri().compareTo(geoName.getGtaaUri());
+        if(getGtaaUri() != null && geoLocation.getGtaaUri() != null && !getGtaaUri().equals(geoLocation.getGtaaUri())) {
+            return this.getGtaaUri().compareTo(geoLocation.getGtaaUri());
         }
 
         return (getGtaaUri() != null) ? 1 : -1;

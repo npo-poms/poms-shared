@@ -879,28 +879,28 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testWithGeoNames() throws IOException, JAXBException {
+    public void testWithGeoLocations() throws IOException, JAXBException {
         StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/geonames-scenarios.xml"), segment, "UTF-8");
+        IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.xml"), segment, "UTF-8");
         String expected = segment.toString();
         log.info(expected);
 
-        Program program = program().lean().withGeoNames()
+        Program program = program().lean().withGeoLocations()
                 .mid("9").avType(AVType.AUDIO)
                 .type(ProgramType.BROADCAST).embeddable(true)
                 .build();
 
         program.setSortInstant(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).toInstant());
-        GeoNames geoNames = program.getGeoNames().first();
+        GeoLocations geoLocations = program.getGeoLocations().first();
 
         String actual = toXml(program);
 
         assertThat(actual).isXmlEqualTo(segment.toString());
 
-        geoNames.setParent(null);
-        GeoNames geoNamesWithoutParent = geoNames;
+        geoLocations.setParent(null);
+        GeoLocations geoLocationsWithoutParent = geoLocations;
         Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);
-        assertThat(programExpected.getGeoNames().iterator().next()).isEqualTo(geoNamesWithoutParent);
+        assertThat(programExpected.getGeoLocations().iterator().next()).isEqualTo(geoLocationsWithoutParent);
     }
 
     @Test
