@@ -1,31 +1,34 @@
 package nl.vpro.domain.media;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import nl.vpro.domain.Child;
+import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.gtaa.GTAARecord;
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.validation.NoHtml;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
-
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.Ownable;
-import nl.vpro.domain.media.support.OwnerType;
 
 import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(name = "intentionsType")
+@XmlType(name = "geoNamesType")
 @Getter
 @Setter
-public class Intentions extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intentions>, Ownable {
+public class GeoNames extends DomainObject implements Child<MediaObject>, Comparable<GeoNames>, Ownable {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
@@ -40,14 +43,15 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     @JoinColumn(name = "parent_id")
     @JsonProperty("values")
     @OrderColumn(name = "list_index", nullable = true)
-    @XmlElement(name="intention")
-    private List<Intention> values = new ArrayList<>();
+    @XmlElement(name="geoName")
+    private List<GeoName> values = new ArrayList<>();
 
-    public Intentions() {}
+    public GeoNames() {
+    }
 
     @lombok.Builder(builderClassName = "Builder")
-    private Intentions(@NonNull @Singular  List<IntentionType> values, @NonNull OwnerType owner) {
-        this.values = values.stream().map(Intention::new).collect(Collectors.toList());
+    private GeoNames(@NonNull @Singular List<GeoName> values, @NonNull OwnerType owner) {
+        this.values = values.stream().map(GeoName::copy).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
         //explicitly set the parent!
@@ -55,17 +59,17 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     }
 
 
-    public Intentions copy() {
-        return new Intentions(values.stream().map(Intention::getValue).collect(Collectors.toList()), owner);
+    public GeoNames copy() {
+        return new GeoNames(values.stream().map(GeoName::copy).collect(Collectors.toList()), owner);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Intentions intentions = (Intentions) o;
-        return owner == intentions.owner &&
-                values.equals(intentions.values);
+        GeoNames geoNames = (GeoNames) o;
+        return owner == geoNames.owner &&
+                values.equals(geoNames.values);
     }
 
     @Override
@@ -75,12 +79,10 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
 
     /**
      *  Just ensuring the comparator match equality.
-     *  Once owner is ordered we don't really
-     *  care about values ordering.
-     *  Order of the value List should be enforced somewhere else
+     *  We never expect 2 lists from the same owner anyway
      */
     @Override
-    public int compareTo(Intentions o) {
+    public int compareTo(GeoNames o) {
         if (this.getOwner().equals(o.getOwner())){
             if (!Objects.equals(this.values, o.values)) {
                 //order is undefined (we never expect 2 intentions with same owner in a set anyway)
@@ -92,6 +94,7 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
 
     @Override
     public String toString() {
-        return "Intentions:" + owner + ":" + values;
+        return "GeoNames:" + owner + ":" + values;
     }
+
 }

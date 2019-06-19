@@ -104,7 +104,6 @@ public class SchemaTest {
     @Test
     public void testMedia() throws IOException {
         testNamespace(Xmlns.MEDIA_NAMESPACE);
-
     }
 
     @Test
