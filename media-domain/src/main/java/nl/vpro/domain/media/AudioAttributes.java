@@ -3,10 +3,7 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 import java.util.Locale;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -19,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import nl.vpro.domain.media.bind.LocaleCodeAdapter;
 
-@Entity
+@Entity(name = "audioattributes")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "audioAttributesType", propOrder = {
@@ -37,6 +34,7 @@ public class AudioAttributes implements Serializable {
 
     @XmlElement
     @Size(min = 1, max = 255)
+    @Column(name = "audiocoding")
     protected String audioCoding;
 
     @XmlElement
