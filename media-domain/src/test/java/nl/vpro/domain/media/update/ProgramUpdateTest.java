@@ -383,8 +383,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
             "  <title type=\"MAIN\">hoofdtitel omroep</title>\n" +
-            " <intentions/>\n" +
-            " <targetGroups/>\n" +
             "  <locations/>\n" +
             "  <scheduleEvents/>\n" +
             "  <images/>\n" +
@@ -730,8 +728,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "    <images/>\n" +
                 "    <segments>\n" +
                 "        <segment embeddable=\"true\">\n" +
-               "             <intentions/>\n" +
-               "             <targetGroups/>\n" +
                 "            <duration>P0DT0H0M0.100S</duration>\n" +
                 "            <locations/>\n" +
                 "            <scheduleEvents/>\n" +
