@@ -358,7 +358,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Convert(converter = RegionToStringConverter.class)
-    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, excludes = {"KN"})
     protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
