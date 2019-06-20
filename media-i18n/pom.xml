@@ -30,8 +30,11 @@
     </dependency>
     <dependency>
       <groupId>org.meeuw.i18n</groupId>
-      <artifactId>i18n-regions</artifactId>
-      <version>0.1-SNAPSHOT</version>
+      <artifactId>i18n-regions-countries</artifactId>
     </dependency>
+     <dependency>
+      <groupId>org.meeuw.i18n</groupId>
+      <artifactId>i18n-regions-subdivisions</artifactId>
+     </dependency>
   </dependencies>
 </project>
