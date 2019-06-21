@@ -1,21 +1,20 @@
 package nl.vpro.domain.media.bind;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
-
+import com.neovisionaries.i18n.CountryCode;
+import nl.vpro.i18n.Locales;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.meeuw.i18n.Region;
-import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.bind.jaxb.Code;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.CurrentCountry;
 import org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision;
-import com.neovisionaries.i18n.CountryCode;
 
-import nl.vpro.i18n.Locales;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.countries.Country.*;
@@ -33,7 +32,7 @@ public class CountryCodeAdapterTest {
     public void wiki() {
         Code cca = new Code();
         Map<String, Region> result = new TreeMap<>();
-        Regions.values().filter(
+        RegionService.getInstance().values().filter(
             IS_OFFICIAL
                 .or(IS_FORMER)
                 .or(IS_USER_ASSIGNED)
