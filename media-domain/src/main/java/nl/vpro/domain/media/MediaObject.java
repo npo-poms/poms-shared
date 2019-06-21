@@ -31,10 +31,11 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
-import org.meeuw.i18n.Regions;
+import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.persistence.RegionToStringConverter;
-import org.meeuw.i18n.validation.ValidCountry;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -96,7 +97,7 @@ import static nl.vpro.domain.media.support.Ownables.containsDuplicateOwner;
         "tags",
         "intentions",
         "targetGroups",
-        "geoNames",
+        "geoLocations",
         "source",
         "countries",
         "languages",
@@ -357,7 +358,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Convert(converter = RegionToStringConverter.class)
-    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, excludes = {"KN"})
     protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
@@ -395,11 +396,11 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    @XmlElement(name = "geoNames")
-    @JsonProperty("geoNames")
+    @XmlElement(name = "geoLocations")
+    @JsonProperty("geoLocations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<GeoNames> geoNames;
+    protected SortedSet<GeoLocations> geoLocations;
 
     @ElementCollection
     @JoinTable(name = "mediaobject_awards")
@@ -1199,40 +1200,53 @@ public abstract class MediaObject
         this.tags = updateSortedSet(this.tags, tags);
     }
 
-    //region GeoNames logic
-    public SortedSet<GeoNames> getGeoNames() {
-        return geoNames;
+    //region GeoLocations logic
+    public SortedSet<GeoLocations> getGeoLocations() {
+        return geoLocations;
     }
 
     @SuppressWarnings("unchecked")
-    public void setGeoNames(@Nonnull SortedSet<GeoNames> newGeoNames) {
+    public void setGeoLocations(@Nonnull SortedSet<GeoLocations> newGeoLocations) {
 
-        if (containsDuplicateOwner(newGeoNames)) {
-            throw new IllegalArgumentException("The geoNames list you want to set has a duplicate owner: " + newGeoNames);
+        if (containsDuplicateOwner(newGeoLocations)) {
+            throw new IllegalArgumentException("The geoLocations list you want to set has a duplicate owner: " + newGeoLocations);
         }
-        if (this.geoNames == null) {
-            this.geoNames = new TreeSet<>();
+        if (this.geoLocations == null) {
+            this.geoLocations = new TreeSet<>();
         } else {
-            this.geoNames.clear();
+            this.geoLocations.clear();
         }
-        for (GeoNames i : newGeoNames) {
-            addGeoNames(i.copy());
+        for (GeoLocations i : newGeoLocations) {
+            addGeoLocations(i.copy());
         }
     }
 
-    public MediaObject addGeoNames(@Nonnull GeoNames newGeoNames) {
-        if(this.geoNames != null) {
-            this.geoNames.removeIf(existing -> existing.getOwner() == newGeoNames.getOwner());
-        } else {
-            this.geoNames = new TreeSet<>();
+    public MediaObject addGeoLocation(@Nonnull GeoLocation newGeoLocation, @Nonnull OwnerType owner) {
+        if(this.geoLocations == null) {
+            this.geoLocations = new TreeSet<>();
         }
-        newGeoNames.setParent(this);
-        this.geoNames.add(newGeoNames);
+        Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
+        if(match.isPresent()){
+            match.get().getValues().add(newGeoLocation);
+        }else{
+            geoLocations.add(GeoLocations.builder().owner(owner).value(newGeoLocation).build());
+        }
         return this;
     }
 
-    public boolean removeGeoNames(GeoNames geoNames) {
-        return this.geoNames.remove(geoNames);
+    public MediaObject addGeoLocations(@Nonnull GeoLocations newGeoLocations) {
+        if(this.geoLocations != null) {
+            this.geoLocations.removeIf(existing -> existing.getOwner() == newGeoLocations.getOwner());
+        } else {
+            this.geoLocations = new TreeSet<>();
+        }
+        newGeoLocations.setParent(this);
+        this.geoLocations.add(newGeoLocations);
+        return this;
+    }
+
+    public boolean removeGeoLocations(GeoLocations geoLocations) {
+        return this.geoLocations.remove(geoLocations);
     }
 
     //end region
@@ -1343,10 +1357,8 @@ public abstract class MediaObject
     }
 
     public MediaObject addCountry(String code) {
-        org.meeuw.i18n.Region country = Regions.getByCode(code).orElseThrow(() ->
-            new IllegalArgumentException("Unknown country " + code));
-
-        return addCountry(country);
+        return addCountry(RegionService.getInstance().getByCode(code).orElseThrow(() ->
+            new IllegalArgumentException("Unknown country " + code)));
 
     }
     public MediaObject addCountry(@Nonnull CountryCode country) {
