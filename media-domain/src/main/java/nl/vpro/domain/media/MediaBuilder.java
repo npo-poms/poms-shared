@@ -534,12 +534,12 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
-    default B geoNames(GeoNames... geoNames) {
-        return geoNames(Arrays.asList(geoNames));
+    default B geoLocations(GeoLocations... geoLocations) {
+        return geoLocations(Arrays.asList(geoLocations));
     }
 
-    default B geoNames(Collection<GeoNames> geoNames) {
-        geoNames.forEach(geos -> mediaObject().addGeoNames(geos));
+    default B geoLocations(Collection<GeoLocations> geoLocations) {
+        geoLocations.forEach(geos -> mediaObject().addGeoLocations(geos));
         return (B)this;
     }
 

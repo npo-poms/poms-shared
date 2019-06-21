@@ -2,20 +2,20 @@
 <program avType="AUDIO" embeddable="true" mid="9"
          sortDate="2015-03-06T00:00:00+01:00" type="BROADCAST"
          xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
-    <geoNames owner="BROADCASTER">
-        <geoName relationType="SUBJECT">
+    <geoLocations owner="BROADCASTER">
+        <geoLocation relationType="SUBJECT">
             <name>England</name>
-        </geoName>
-        <geoName relationType="RECORDED_IN">
+        </geoLocation>
+        <geoLocation relationType="RECORDED_IN">
             <name>UK</name>
-        </geoName>
-    </geoNames>
-    <geoNames owner="NPO">
-        <geoName relationType="SUBJECT">
+        </geoLocation>
+    </geoLocations>
+    <geoLocations owner="NPO">
+        <geoLocation relationType="SUBJECT">
             <name>Africa</name>
             <description>Continent</description>
-        </geoName>
-    </geoNames>
+        </geoLocation>
+    </geoLocations>
     <credits/>
     <locations/>
     <scheduleEvents/>
