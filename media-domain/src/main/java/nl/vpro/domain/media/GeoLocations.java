@@ -43,10 +43,9 @@ public class GeoLocations extends DomainObject implements Child<MediaObject>, Co
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private GeoLocations(@NonNull @Singular List<GeoLocation> values, @NonNull OwnerType owner, MediaObject parent) {
+    private GeoLocations(@NonNull @Singular List<GeoLocation> values, @NonNull OwnerType owner) {
         this.values = values.stream().map(GeoLocation::copy).collect(Collectors.toList());
         this.owner = owner;
-        this.parent = parent;
         //To help Hibernate understand the relationship we
         //explicitly set the parent!
         this.values.forEach(v -> v.setParent(this));
@@ -54,7 +53,7 @@ public class GeoLocations extends DomainObject implements Child<MediaObject>, Co
 
 
     public GeoLocations copy() {
-        return new GeoLocations(values.stream().map(GeoLocation::copy).collect(Collectors.toList()), owner, parent);
+        return new GeoLocations(values.stream().map(GeoLocation::copy).collect(Collectors.toList()), owner);
     }
 
     @Override

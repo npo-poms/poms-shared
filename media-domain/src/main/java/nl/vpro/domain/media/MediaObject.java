@@ -1227,6 +1227,7 @@ public abstract class MediaObject
         }
         Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
         if(match.isPresent()){
+            newGeoLocation.setParent(match.get());
             match.get().getValues().add(newGeoLocation);
         }else{
             geoLocations.add(GeoLocations.builder().owner(owner).value(newGeoLocation).build());
