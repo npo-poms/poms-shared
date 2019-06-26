@@ -32,12 +32,13 @@ public class MediaObjectLockerTest {
 
             public void run() {
                 log.info("start test1");
-                withMidLock("mid", "test1", new Runnable() {
+                withMidLock("mid0", "test1", new Runnable() {
+                    @Override
                     @SneakyThrows
                     public void run() {
                         for (int i = 0; i < 10; i++) {
                             final int fi = i;
-                            withMidLock("mid", "test1.sub", new Runnable() {
+                            withMidLock("mid" + (i % 2), "test1.sub", new Runnable() {
                                 @SneakyThrows
                                 @Override
                                 public void run() {
@@ -57,7 +58,8 @@ public class MediaObjectLockerTest {
             @Override
             public void run() {
                 log.info("start test2");
-                withMidLock("mid", "test2", new Runnable() {
+                withMidLock("mid0", "test2", new Runnable() {
+                    @Override
                     @SneakyThrows
                     public void run() {
                         for (int i = 0; i < 10; i++) {
@@ -98,6 +100,7 @@ public class MediaObjectLockerTest {
             "INFO 1:9");
 
 
+        assertThat(MediaObjectLocker.HOLDS.get()).isEmpty();
     }
 
     @Test
