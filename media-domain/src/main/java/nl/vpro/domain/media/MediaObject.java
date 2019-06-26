@@ -685,6 +685,10 @@ public abstract class MediaObject
         if (toUpdate == null) {
             toUpdate = new ArrayList<>();
         } else {
+            if (toUpdate.equals(values)) {
+                // the object is already exactly correct, do nothing
+                return toUpdate;
+            }
             toUpdate.clear();
         }
         if (values != null) {
@@ -1449,7 +1453,7 @@ public abstract class MediaObject
 
 
     /**
-     * Use {@link AuthorizedDuration#get()} in combination with {@link #getDuration} to get the java.time.Duration
+     * Use {@link AuthorizedDuration#get} in combination with {@link #getDuration} to get the java.time.Duration
      * @throws ModificationException If you may not set the duration
      */
     @JsonIgnore
@@ -1510,6 +1514,7 @@ public abstract class MediaObject
                 person.setParent(this);
             }
         }
+
         this.persons = updateList(this.persons, persons);
     }
 
