@@ -69,6 +69,11 @@
       <artifactId>user-domain</artifactId>
     </dependency>
     <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>javax.activation-api</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
       <!-- contains javax.persistence -->
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
