@@ -35,6 +35,7 @@ import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.persistence.RegionToStringConverter;
+import org.meeuw.i18n.validation.ValidRegion;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -358,7 +359,8 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Convert(converter = RegionToStringConverter.class)
-    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"}, excludes = {"KN"})
+    @ValidRegion(classes = {Country.class}, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
     protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
