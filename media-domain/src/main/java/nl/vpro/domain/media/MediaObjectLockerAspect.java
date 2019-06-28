@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.Duration;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -30,6 +31,7 @@ public abstract class MediaObjectLockerAspect  {
 
     static boolean stricltyOne;
     static boolean monitor;
+    static Duration maxLockAcquireTime = Duration.ofMinutes(10);
     static SessionFactory sessionFactory;
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")

@@ -294,7 +294,12 @@ public class MediaObjectLocker {
             Duration maxWait = Duration.ofSeconds(30);
             try {
                 while (!lock.lock.tryLock(wait.toMillis(), TimeUnit.MILLISECONDS)) {
-                    log.info("Couldn't  acquire lock for {} during {}, {}, locked by {}", key, Duration.ofNanos(System.nanoTime() - start), summarize(), lock.summarize());
+                    Duration duration = Duration.ofNanos(System.nanoTime() - start);
+                    log.info("Couldn't  acquire lock for {} during {}, {}, locked by {}", key, duration, summarize(), lock.summarize());
+                    if (duration.compareTo(MediaObjectLockerAspect.maxLockAcquireTime) > 0) {
+                        log.warn("Took over {}, continuing without lock now", MediaObjectLockerAspect.maxLockAcquireTime);
+                        break;
+                    }
                     if (wait.compareTo(maxWait) < 0) {
                         wait = wait.multipliedBy(2);
                         if (wait.compareTo(maxWait) > 0) {
