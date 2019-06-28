@@ -31,7 +31,7 @@ class MediaObjectLockerAdmin implements MediaObjectLockerAdminMXBean {
 
     @Override
     public Set<String> getLocks() {
-        return MediaObjectLocker.LOCKED_MEDIA.keySet();
+        return MediaObjectLocker.LOCKED_MEDIA.values().stream().map(MediaObjectLocker.LockHolder::summarize).collect(Collectors.toSet());
     }
 
     @Override

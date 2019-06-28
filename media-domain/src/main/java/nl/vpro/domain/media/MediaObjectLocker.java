@@ -382,7 +382,7 @@ public class MediaObjectLocker {
 
     }
 
-    private static class LockHolder {
+    static class LockHolder {
         final Object key;
         final ReentrantLock lock;
         final Exception cause;
