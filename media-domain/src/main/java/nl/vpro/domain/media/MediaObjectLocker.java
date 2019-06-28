@@ -21,12 +21,13 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.event.Level;
 
 import nl.vpro.logging.Slf4jHelper;
@@ -255,7 +256,19 @@ public class MediaObjectLocker {
             lock = locks.computeIfAbsent(key, (m) -> {
                 log.trace("New lock for " + m);
                 if (! HOLDS.get().isEmpty()) {
-                    log.warn("Getting a lock on a different key! {} + {}", HOLDS.get(), key);
+                     if (MediaObjectLockerAspect.monitor) {
+                         if (MediaObjectLockerAspect.sessionFactory != null) {
+                             if (MediaObjectLockerAspect.sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                                 log.warn("Trying to acuquire lock in transaction this active already! {}", summarize());
+                             }
+
+                         }
+                     }
+                    if (MediaObjectLockerAspect.stricltyOne) {
+                        throw new IllegalStateException(String.format("%s Getting a lock on a different key! %s + %s", summarize(), HOLDS.get().get(0).summarize(), key));
+                    } else {
+                        log.warn("Getting a lock on a different key! {} + {}", HOLDS.get(), key);
+                    }
                 }
 
 
@@ -275,15 +288,27 @@ public class MediaObjectLocker {
 
         }
 
-        long start = System.nanoTime();
-        try {
-            while (!lock.lock.tryLock(5, TimeUnit.SECONDS)) {
-                log.info("Couldn't  acquire lock for {} during {}, {}, locked by {}", key, Duration.ofNanos(System.nanoTime() - start), ExceptionUtils.getStackTrace(new Exception()), ExceptionUtils.getStackTrace(lock.cause));
-            }
-        } catch (InterruptedException e) {
-            log.error(e.getMessage(), e);
-            return Optional.empty();
+        if (MediaObjectLockerAspect.monitor) {
+            long start = System.nanoTime();
+            Duration wait = Duration.ofSeconds(5);
+            Duration maxWait = Duration.ofSeconds(30);
+            try {
+                while (!lock.lock.tryLock(wait.toMillis(), TimeUnit.MILLISECONDS)) {
+                    log.info("Couldn't  acquire lock for {} during {}, {}, locked by {}", key, Duration.ofNanos(System.nanoTime() - start), summarize(), lock.summarize());
+                    if (wait.compareTo(maxWait) < 0) {
+                        wait = wait.multipliedBy(2);
+                        if (wait.compareTo(maxWait) > 0) {
+                            wait = maxWait;
+                        }
+                    }
+                }
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(), e);
+                return Optional.empty();
 
+            }
+        } else {
+            lock.lock.lock();
         }
         if (alreadyWaiting) {
             log.debug("Released and continuing {}", key);
@@ -327,15 +352,38 @@ public class MediaObjectLocker {
         }
     }
 
+    private static String summarizeStackTrace(Exception ex) {
+        return "\n" +
+            Stream.of(ex.getStackTrace())
+                .filter(e -> e.getClassName().startsWith("nl.vpro"))
+                .filter(e -> ! e.getClassName().startsWith(MediaObject.class.getName()))
+                .filter(e -> ! e.getClassName().startsWith("nl.vpro.spring"))
+                .filter(e -> ! e.getClassName().startsWith("nl.vpro.services"))
+                .filter(e -> !e.getFileName().contains("generated"))
+                .map(StackTraceElement::toString)
+                .collect(Collectors.joining("\n   <-"));
+    }
+
+    private static String summarize(Thread t, Exception e) {
+        return t.toString() + ":" + summarizeStackTrace(e);
+
+    }
+     private static String summarize() {
+        return summarize(Thread.currentThread(), new Exception());
+
+    }
+
     private static class Holder {
         final Object key;
         final ReentrantLock lock;
         final Exception cause;
+        final Thread thread;
 
         private Holder(Object k, ReentrantLock lock, Exception cause) {
             this.key = k;
             this.lock = lock;
             this.cause = cause;
+            this.thread = Thread.currentThread();
         }
 
         @Override
@@ -351,6 +399,10 @@ public class MediaObjectLocker {
         @Override
         public int hashCode() {
             return key.hashCode();
+        }
+
+        public String summarize() {
+            return key + ":" + MediaObjectLocker.summarize(this.thread, this.cause);
         }
 
         @Override
