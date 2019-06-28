@@ -37,6 +37,17 @@ public interface MediaObjectLockerAdminMXBean {
 
     String clearMidLocks();
 
+    String getMaxLockAcquireTime();
+
+    void setMaxLockAcquireTime(String duration);
+
+
+    boolean isMonitor();
+
+    void setMonitor(boolean monitor);
+
+
+
 
 
 
