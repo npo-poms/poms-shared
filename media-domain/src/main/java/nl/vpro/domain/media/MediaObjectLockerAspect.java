@@ -10,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.hibernate.SessionFactory;
+
 
 /**
  * This is an idea to make locking on mid easier.
@@ -24,6 +26,11 @@ import org.aspectj.lang.annotation.Aspect;
 @Slf4j
 //@DeclarePrecedence("nl.vpro.domain.media.MediaObjectLockerAspect, org.springframework.transaction.aspectj.AnnotationTransactionAspect, *")
 public abstract class MediaObjectLockerAspect  {
+
+
+    static boolean stricltyOne;
+    static boolean monitor;
+    static SessionFactory sessionFactory;
 
     @Around(value="@annotation(annotation)", argNames="joinPoint,annotation")
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
