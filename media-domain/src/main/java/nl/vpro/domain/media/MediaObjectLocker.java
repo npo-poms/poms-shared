@@ -20,6 +20,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import javax.management.MBeanServer;
@@ -249,8 +251,27 @@ public class MediaObjectLocker {
         boolean alreadyWaiting = false;
         synchronized (locks) {
             lock = locks.computeIfAbsent(key, (m) -> {
-                    log.trace("New lock for " + m);
-                    return new ReentrantLock();
+                log.trace("New lock for " + m);
+                if (! HOLDS.get().isEmpty()) {
+                     if (MediaObjectLockerAspect.monitor) {
+                         if (MediaObjectLockerAspect.sessionFactory != null) {
+                             if (MediaObjectLockerAspect.sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                                 log.warn("Trying to acuquire lock in transaction this active already! {}", summarize());
+                             }
+
+                         }
+                     }
+                    if (MediaObjectLockerAspect.stricltyOne) {
+                        throw new IllegalStateException(String.format("%s Getting a lock on a different key! %s + %s", summarize(), HOLDS.get().get(0).summarize(), key));
+                    } else {
+                        log.warn("Getting a lock on a different key! {} + {}", HOLDS.get(), key);
+                    }
+                }
+
+
+                Holder holder = new Holder(key, new ReentrantLock(), new Exception());
+                HOLDS.get().add(holder);
+                return holder;
                 }
             );
             if (lock.isLocked() && !lock.isHeldByCurrentThread()) {
@@ -263,7 +284,32 @@ public class MediaObjectLocker {
             }
         }
 
+<<<<<<< HEAD
         lock.lock();
+=======
+        if (MediaObjectLockerAspect.monitor) {
+            long start = System.nanoTime();
+            Duration wait = Duration.ofSeconds(5);
+            Duration maxWait = Duration.ofSeconds(30);
+            try {
+                while (!lock.lock.tryLock(wait.toMillis(), TimeUnit.MILLISECONDS)) {
+                    log.info("Couldn't  acquire lock for {} during {}, {}, locked by {}", key, Duration.ofNanos(System.nanoTime() - start), summarize(), lock.summarize());
+                    if (wait.compareTo(maxWait) < 0) {
+                        wait = wait.multipliedBy(2);
+                        if (wait.compareTo(maxWait) > 0) {
+                            wait = maxWait;
+                        }
+                    }
+                }
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(), e);
+                return Optional.empty();
+
+            }
+        } else {
+            lock.lock.lock();
+        }
+>>>>>>> 71140a121... MSE-4555 Settings and logging to be able to debug dead-locks.
         if (alreadyWaiting) {
             log.debug("Released and continuing {}", key);
         }
@@ -304,5 +350,67 @@ public class MediaObjectLocker {
         }
     }
 
+<<<<<<< HEAD
+=======
+    private static String summarizeStackTrace(Exception ex) {
+        return "\n" +
+            Stream.of(ex.getStackTrace())
+                .filter(e -> e.getClassName().startsWith("nl.vpro"))
+                .filter(e -> ! e.getClassName().startsWith(MediaObject.class.getName()))
+                .filter(e -> ! e.getClassName().startsWith("nl.vpro.spring"))
+                .filter(e -> ! e.getClassName().startsWith("nl.vpro.services"))
+                .filter(e -> !e.getFileName().contains("generated"))
+                .map(StackTraceElement::toString)
+                .collect(Collectors.joining("\n   <-"));
+    }
+
+    private static String summarize(Thread t, Exception e) {
+        return t.toString() + ":" + summarizeStackTrace(e);
+
+    }
+     private static String summarize() {
+        return summarize(Thread.currentThread(), new Exception());
+
+    }
+
+    private static class Holder {
+        final Object key;
+        final ReentrantLock lock;
+        final Exception cause;
+        final Thread thread;
+
+        private Holder(Object k, ReentrantLock lock, Exception cause) {
+            this.key = k;
+            this.lock = lock;
+            this.cause = cause;
+            this.thread = Thread.currentThread();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Holder holder = (Holder) o;
+
+            return key.equals(holder.key);
+        }
+
+        @Override
+        public int hashCode() {
+            return key.hashCode();
+        }
+
+        public String summarize() {
+            return key + ":" + MediaObjectLocker.summarize(this.thread, this.cause);
+        }
+
+        @Override
+        public String toString() {
+            return "holder:" + key;
+        }
+    }
+
+>>>>>>> 71140a121... MSE-4555 Settings and logging to be able to debug dead-locks.
 
 }
