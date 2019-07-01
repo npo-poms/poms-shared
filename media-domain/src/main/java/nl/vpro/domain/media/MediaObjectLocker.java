@@ -191,7 +191,7 @@ public class MediaObjectLocker {
             return callable.call();
         }
         long nanoStart = System.nanoTime();
-        LockHolder lock = aquireLock(nanoStart, key, reason, locks);
+        LockHolder lock = acquireLock(nanoStart, key, reason, locks);
         try {
             return callable.call();
         } finally {
@@ -211,7 +211,7 @@ public class MediaObjectLocker {
         final List<K> copyOfKeys = new ArrayList<>();
         for (K key : keys) {
             if (key != null) {
-                lockList.add(aquireLock(nanoStart, key, reason, locks));
+                lockList.add(acquireLock(nanoStart, key, reason, locks));
                 copyOfKeys.add(key);
             }
         }
@@ -236,7 +236,7 @@ public class MediaObjectLocker {
         final List<K> copyOfKeys = new ArrayList<>();
         for (K key : keys) {
             if (key != null) {
-                Optional<LockHolder> reentrantLock = aquireLock(nanoStart, key, reason, locks, true);
+                Optional<LockHolder> reentrantLock = acquireLock(nanoStart, key, reason, locks, true);
                 if (reentrantLock.isPresent()) {
                     lockList.add(reentrantLock.get());
                     copyOfKeys.add(key);
@@ -253,7 +253,7 @@ public class MediaObjectLocker {
         }
     }
 
-    private static  <K extends Serializable> Optional<LockHolder> aquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks, boolean onlyIfFree) {
+    private static  <K extends Serializable> Optional<LockHolder> acquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks, boolean onlyIfFree) {
         LockHolder holder;
         boolean alreadyWaiting = false;
         synchronized (locks) {
@@ -334,8 +334,8 @@ public class MediaObjectLocker {
         return Optional.of(holder);
     }
 
-    private static  <K extends Serializable> LockHolder aquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks) {
-        return aquireLock(nanoStart, key, reason, locks, false).get();
+    private static  <K extends Serializable> LockHolder acquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks) {
+        return acquireLock(nanoStart, key, reason, locks, false).get();
     }
 
 
