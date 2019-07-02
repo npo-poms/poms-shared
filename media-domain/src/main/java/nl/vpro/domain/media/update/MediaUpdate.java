@@ -228,6 +228,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected List<TargetGroupType> targetGroups;
 
+    protected List<GeoLocation> geoLocations;
+
     @Valid
     protected Asset asset;
 
@@ -979,6 +981,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.targetGroups = targetGroups;
     }
 
+    public void setGeoLocations(List<GeoLocation> geoLocations) {
+        this.geoLocations = geoLocations;
+    }
 
     @XmlElement(name = "avAttributes")
     public AVAttributesUpdate getAvAttributes() {
