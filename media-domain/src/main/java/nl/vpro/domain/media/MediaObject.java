@@ -1231,16 +1231,18 @@ public abstract class MediaObject
         if(this.geoLocations == null) {
             this.geoLocations = new TreeSet<>();
         }
-        Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
-        if(match.isPresent()){
-            newGeoLocation.setParent(match.get());
-            match.get().getValues().add(newGeoLocation);
-        }else{
-            final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
-            geoLocations.setParent(this);
-            newGeoLocation.setParent(geoLocations);
-            geoLocations.getValues().add(newGeoLocation);
-            this.geoLocations.add(geoLocations);
+        if(!geoLocations.contains(newGeoLocation)) {
+            Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
+            if (match.isPresent()) {
+                newGeoLocation.setParent(match.get());
+                match.get().getValues().add(newGeoLocation);
+            } else {
+                final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
+                geoLocations.setParent(this);
+                newGeoLocation.setParent(geoLocations);
+                geoLocations.getValues().add(newGeoLocation);
+                this.geoLocations.add(geoLocations);
+            }
         }
         return this;
     }
@@ -1258,6 +1260,42 @@ public abstract class MediaObject
 
     public boolean removeGeoLocations(GeoLocations geoLocations) {
         return this.geoLocations.remove(geoLocations);
+    }
+
+    public boolean removeGeoLocation(@Nonnull GeoLocation geoLocation, OwnerType owner) {
+
+        final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
+                .filter(owned -> owned.getOwner().equals(owner))
+                .findAny().map(o -> o.getValues());
+
+        if(maybeValues.isPresent()) {
+            return maybeValues.get().remove(geoLocation);
+        }
+        return false;
+    }
+
+    public List<GeoLocation> findGeoLocation(@Nonnull Long id,@Nonnull OwnerType owner){
+        final List<GeoLocation> empty = new ArrayList<>();
+        if (geoLocations.isEmpty()) {
+            return empty;
+        }
+
+        final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
+                .filter(owned -> owned.getOwner().equals(owner))
+                .findAny().map(o -> o.getValues());
+
+        if(maybeValues.isPresent()) {
+            final Optional<GeoLocation> locationFound = maybeValues.get().stream().filter(
+                    v -> id.equals(v.getId())
+            ).findAny();
+
+            if(locationFound.isPresent()){
+                return maybeValues.get();
+            }
+        }
+        return empty;
+
+
     }
 
     //end region

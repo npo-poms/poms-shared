@@ -156,6 +156,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         SegmentUpdate segment = SegmentUpdate.create();
         segment.setIntentions(new ArrayList<>());
         segment.setTargetGroups(new ArrayList<>());
+        segment.setGeoLocations(new ArrayList<>());
         segment.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
 
         ProgramUpdate program = ProgramUpdate.create();
@@ -168,6 +169,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         assertThat(result.getTitles().first().getOwner()).isEqualTo(OwnerType.MIS);
         assertThat(result.getSegments().first().getIntentions()).isNotEmpty();
         assertThat(result.getSegments().first().getTargetGroups()).isNotEmpty();
+        assertThat(result.getSegments().first().getGeoLocations()).isNotEmpty();
     }
 
     @Test
