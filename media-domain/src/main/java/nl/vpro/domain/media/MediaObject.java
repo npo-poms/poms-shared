@@ -1236,7 +1236,11 @@ public abstract class MediaObject
             newGeoLocation.setParent(match.get());
             match.get().getValues().add(newGeoLocation);
         }else{
-            geoLocations.add(GeoLocations.builder().owner(owner).value(newGeoLocation).build());
+            final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
+            geoLocations.setParent(this);
+            newGeoLocation.setParent(geoLocations);
+            geoLocations.getValues().add(newGeoLocation);
+            this.geoLocations.add(geoLocations);
         }
         return this;
     }
