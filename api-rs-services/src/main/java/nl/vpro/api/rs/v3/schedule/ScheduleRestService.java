@@ -49,6 +49,8 @@ public interface ScheduleRestService {
     String STOP = "stop";
     String SORT = "sort";
 
+    String NOW = "now";
+
 
     @GET
     ScheduleResult list(
@@ -79,14 +81,17 @@ public interface ScheduleRestService {
     @Path("/ancestor/{ancestor}/now")
     ApiScheduleEvent nowForAncestor(
         @Encoded @PathParam(ANCESTOR) String mediaId,
-        @QueryParam(PROPERTIES) String properties
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(NOW) Instant now
     );
 
     @GET
     @Path("/ancestor/{ancestor}/next")
     ApiScheduleEvent nextForAncestor(
         @Encoded @PathParam(ANCESTOR) String mediaId,
-        @QueryParam(PROPERTIES) String properties
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(NOW) Instant now
+
     );
 
     @GET
@@ -107,14 +112,17 @@ public interface ScheduleRestService {
     @Path("/broadcaster/{broadcaster}/now")
     ApiScheduleEvent nowForBroadcaster(
         @PathParam(BROADCASTER) String broadcaster,
-        @QueryParam(PROPERTIES) String properties
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam("mustberunning") @DefaultValue("true") boolean mustBeRunning,
+        @QueryParam(NOW) Instant now
     );
 
     @GET
     @Path("/broadcaster/{broadcaster}/next")
     ApiScheduleEvent nextForBroadcaster(
         @PathParam(BROADCASTER) String broadcaster,
-        @QueryParam(PROPERTIES) String properties
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(NOW) Instant now
     );
 
     @GET
@@ -135,14 +143,16 @@ public interface ScheduleRestService {
     @Path("/channel/{channel}/now")
     ApiScheduleEvent nowForChannel(
         @PathParam(CHANNEL) String channel,
-        @QueryParam(PROPERTIES) String properties
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(NOW) Instant now
     );
 
     @GET
     @Path("/channel/{channel}/next")
     ApiScheduleEvent nextForChannel(
         @PathParam(CHANNEL) String channel,
-        @QueryParam(PROPERTIES) String properties
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(NOW) Instant now
     );
 
     @GET
@@ -163,14 +173,16 @@ public interface ScheduleRestService {
     @Path("/net/{net}/now")
     ApiScheduleEvent nowForNet(
         @Encoded @PathParam(NET) String net,
-        @QueryParam(PROPERTIES) String properties
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(NOW) Instant now
     );
 
     @GET
     @Path("/net/{net}/next")
     ApiScheduleEvent nextForNet(
         @Encoded @PathParam(NET) String net,
-        @QueryParam(PROPERTIES) String properties
+        @QueryParam(PROPERTIES) String properties,
+        @QueryParam(NOW) Instant now
     );
 
     @POST
