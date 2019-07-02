@@ -30,9 +30,14 @@ import nl.vpro.domain.media.ScheduleEvent;
 public class ScheduleForm implements Predicate<ScheduleEvent> {
     private SchedulePager pager;
 
+    /**
+     * A filter on the 'start' of the scheduleEvent
+     */
     private InstantRange dateRange;
-    private InstantRange startRange;
 
+    /**
+     * A filter on the 'guide day' of the scheduleEvent
+     */
     private LocalDateRange guideDayRange;
 
     private List<Channel> channels;
@@ -47,18 +52,18 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
             throw new IllegalArgumentException("Must supply a pager, got: null");
         }
         this.pager = pager;
-        this.startRange = startRange == null ? new InstantRange() : startRange;
+        this.dateRange = startRange == null ? new InstantRange() : startRange;
         this.guideDayRange = guideDayRange == null ? new LocalDateRange(): guideDayRange;
         this.channels = channels;
     }
 
 
     public boolean hasStart() {
-        return startRange != null && startRange.getStartValue() != null;
+        return dateRange != null && dateRange.getStartValue() != null;
     }
 
     public boolean hasStop() {
-        return startRange != null && startRange.getStopValue() != null;
+        return dateRange != null && dateRange.getStopValue() != null;
     }
 
     public boolean hasChannels() {
@@ -67,7 +72,7 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
 
     @Override
     public boolean test(ScheduleEvent scheduleEvent) {
-        return (startRange == null || startRange.test(scheduleEvent.getStartInstant()))
+        return (dateRange == null || dateRange.test(scheduleEvent.getStartInstant()))
             && (guideDayRange == null || guideDayRange.test(scheduleEvent.getGuideDate()))
             && (channels == null || channels.contains(scheduleEvent.getChannel()));
     }
