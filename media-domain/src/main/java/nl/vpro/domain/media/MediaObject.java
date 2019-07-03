@@ -1231,7 +1231,7 @@ public abstract class MediaObject
         if(this.geoLocations == null) {
             this.geoLocations = new TreeSet<>();
         }
-        if(!geoLocations.contains(newGeoLocation)) {
+        if(!geoLocations.stream().anyMatch(loc -> loc.getOwner().equals(owner))) {
             Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
             if (match.isPresent()) {
                 newGeoLocation.setParent(match.get());
