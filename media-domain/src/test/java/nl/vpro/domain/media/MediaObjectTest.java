@@ -10,6 +10,7 @@ import java.util.*;
 import javax.validation.ConstraintViolation;
 import javax.xml.bind.JAXB;
 
+import nl.vpro.domain.media.gtaa.GTAARecord;
 import org.assertj.core.api.Assertions;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -63,16 +64,52 @@ public class MediaObjectTest {
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
-        mediaObject.addGeoLocation(geoLocation, BROADCASTER);
+        final boolean result = mediaObject.addGeoLocation(geoLocation, BROADCASTER);
+        assertThat(result).isTrue();
 
-        final List<GeoLocation> oneResult = mediaObject.findGeoLocation(1L, BROADCASTER);
-        assertThat(oneResult.size()).isEqualTo(1);
+        final boolean resultDuplicate = mediaObject.addGeoLocation(geoLocation, BROADCASTER);
+        assertThat(resultDuplicate).isFalse();
 
-        final List<GeoLocation> emptyResult1 = mediaObject.findGeoLocation(2L, BROADCASTER);
-        assertThat(emptyResult1).isEmpty();
+        final Optional<GeoLocation> oneResult = mediaObject.findGeoLocation(1L, BROADCASTER);
+        assertThat(oneResult.isPresent()).isTrue();
 
-        final List<GeoLocation> emptyResult2 = mediaObject.findGeoLocation(1L, NPO);
-        assertThat(emptyResult2).isEmpty();
+        final Optional<GeoLocation> emptyResult1 = mediaObject.findGeoLocation(2L, BROADCASTER);
+        assertThat(emptyResult1.isPresent()).isFalse();
+
+        final Optional<GeoLocation> emptyResult2 = mediaObject.findGeoLocation(1L, NPO);
+        assertThat(emptyResult2.isPresent()).isFalse();
+
+    }
+
+    @Test
+    public void testAddGeoLocation(){
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").relationType(GeoRelationType.RECORDED_IN).build();
+        geoLocation.setId(1L);
+
+        MediaObject mediaObject = new Program();
+        final boolean result = mediaObject.addGeoLocation(geoLocation, BROADCASTER);
+        assertThat(result).isTrue();
+
+        //Avoid duplicates
+        GeoLocation geoLocation2 = GeoLocation.builder().name("Amsterdam").relationType(GeoRelationType.RECORDED_IN).build();
+
+        final boolean resultDuplicate = mediaObject.addGeoLocation(geoLocation2, BROADCASTER);
+        assertThat(resultDuplicate).isFalse();
+        assertThat(mediaObject.getGeoLocations().size()).isEqualTo(1);
+        assertThat(mediaObject.getGeoLocations().first().getValues().size()).isEqualTo(1);
+
+        //Add second geoLocation same Owner
+        geoLocation2.setGtaaRecord(GTAARecord.builder().uri("test/123").build());
+        final boolean add = mediaObject.addGeoLocation(geoLocation2, BROADCASTER);
+        assertThat(add).isTrue();
+        assertThat(mediaObject.getGeoLocations().size()).isEqualTo(1);
+        assertThat(mediaObject.getGeoLocations().first().getValues().size()).isEqualTo(2);
+
+        //Add third geoLocation different Owner
+        final boolean addNewOwner = mediaObject.addGeoLocation(geoLocation2, NPO);
+        assertThat(addNewOwner).isTrue();
+        assertThat(mediaObject.getGeoLocations().size()).isEqualTo(2);
+        assertThat(mediaObject.getGeoLocations().last().getValues().size()).isEqualTo(1);
 
     }
 
