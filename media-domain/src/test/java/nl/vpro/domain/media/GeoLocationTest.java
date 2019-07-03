@@ -28,7 +28,7 @@ public class GeoLocationTest {
         assertThat(geoLocations1).isNotNull();
         assertThat(geoLocations2).isNotNull();
 
-        //when I add intentions
+        //when I add GeoLocations
         MediaObject newProgram = program.addGeoLocations(geoLocations1);
         newProgram = newProgram.addGeoLocations(geoLocations2);
 

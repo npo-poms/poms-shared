@@ -58,6 +58,44 @@ public class MediaObjectTest {
     }
 
     @Test
+    public void testFindGeoLocation(){
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").relationType(GeoRelationType.RECORDED_IN).build();
+        geoLocation.setId(1L);
+
+        MediaObject mediaObject = new Program();
+        mediaObject.addGeoLocation(geoLocation, BROADCASTER);
+
+        final List<GeoLocation> oneResult = mediaObject.findGeoLocation(1L, BROADCASTER);
+        assertThat(oneResult.size()).isEqualTo(1);
+
+        final List<GeoLocation> emptyResult1 = mediaObject.findGeoLocation(2L, BROADCASTER);
+        assertThat(emptyResult1).isEmpty();
+
+        final List<GeoLocation> emptyResult2 = mediaObject.findGeoLocation(1L, NPO);
+        assertThat(emptyResult2).isEmpty();
+
+    }
+
+    @Test
+    public void testRemoveGeoLocation(){
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").relationType(GeoRelationType.RECORDED_IN).build();
+        geoLocation.setId(2L);
+
+        MediaObject mediaObject = new Program();
+        mediaObject.addGeoLocation(geoLocation, BROADCASTER);
+
+        final boolean emptyResult1 = mediaObject.removeGeoLocation(geoLocation, BROADCASTER);
+        assertThat(emptyResult1).isFalse();
+
+        geoLocation.setId(1L);
+        final boolean emptyResult2 = mediaObject.removeGeoLocation(geoLocation, NPO);
+        assertThat(emptyResult2).isFalse();
+
+        final boolean trueResult = mediaObject.removeGeoLocation(geoLocation, BROADCASTER);
+        assertThat(trueResult).isEqualTo(true);
+    }
+
+    @Test
     public void testAddTitle() {
         MediaObject mediaObject = new Program();
         mediaObject.addTitle(null);
