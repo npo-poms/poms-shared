@@ -1227,24 +1227,26 @@ public abstract class MediaObject
         }
     }
 
-    public MediaObject addGeoLocation(@Nonnull GeoLocation newGeoLocation, @Nonnull OwnerType owner) {
+    public boolean addGeoLocation(@Nonnull GeoLocation newGeoLocation, @Nonnull OwnerType owner) {
+        boolean isAdded = false;
         if(this.geoLocations == null) {
             this.geoLocations = new TreeSet<>();
         }
-        if(!geoLocations.stream().anyMatch(loc -> loc.getOwner().equals(owner))) {
-            Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
-            if (match.isPresent()) {
-                newGeoLocation.setParent(match.get());
-                match.get().getValues().add(newGeoLocation);
-            } else {
-                final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
-                geoLocations.setParent(this);
-                newGeoLocation.setParent(geoLocations);
-                geoLocations.getValues().add(newGeoLocation);
-                this.geoLocations.add(geoLocations);
-            }
+        Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
+        if (match.isPresent() && match.get().getValues().contains(newGeoLocation))
+            return false;
+
+        if (match.isPresent()) {
+            newGeoLocation.setParent(match.get());
+            isAdded = match.get().getValues().add(newGeoLocation);
+        } else {
+            final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
+            geoLocations.setParent(this);
+            newGeoLocation.setParent(geoLocations);
+            geoLocations.getValues().add(newGeoLocation);
+            isAdded = this.geoLocations.add(geoLocations);
         }
-        return this;
+        return isAdded;
     }
 
     public MediaObject addGeoLocations(@Nonnull GeoLocations newGeoLocations) {
