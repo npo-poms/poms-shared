@@ -116,19 +116,22 @@ public class MediaObjectTest {
     @Test
     public void testRemoveGeoLocation(){
         GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").relationType(GeoRelationType.RECORDED_IN).build();
-        geoLocation.setId(2L);
+        geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
         mediaObject.addGeoLocation(geoLocation, BROADCASTER);
 
-        final boolean emptyResult1 = mediaObject.removeGeoLocation(geoLocation, BROADCASTER);
-        assertThat(emptyResult1).isFalse();
+        GeoLocation geoLocDiffName = GeoLocation.builder().name("Amsterdam2").relationType(GeoRelationType.RECORDED_IN).build();;
+        final boolean geoLocDiffNameResult = mediaObject.removeGeoLocation(geoLocDiffName, BROADCASTER);
+        assertThat(geoLocDiffNameResult).isFalse();
 
-        geoLocation.setId(1L);
-        final boolean emptyResult2 = mediaObject.removeGeoLocation(geoLocation, NPO);
+        OwnerType wrongOwner = NPO;
+        final boolean emptyResult2 = mediaObject.removeGeoLocation(geoLocation, wrongOwner);
         assertThat(emptyResult2).isFalse();
 
-        final boolean trueResult = mediaObject.removeGeoLocation(geoLocation, BROADCASTER);
+        OwnerType sameOwner = BROADCASTER;
+        GeoLocation sameGeoLocId = GeoLocation.builder().name("Amsterdam").relationType(GeoRelationType.RECORDED_IN).build();
+        final boolean trueResult = mediaObject.removeGeoLocation(sameGeoLocId, sameOwner);
         assertThat(trueResult).isEqualTo(true);
     }
 
