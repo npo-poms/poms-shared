@@ -132,11 +132,9 @@ public interface MediaTestDataBuilder<
     }
 
     /**
-     * Created an object with all required fields filled.
+     * Created an object with all required fields filled. This is used in tests which want a complete and valid object, but don't have an actual persistence layer.
      *
-     * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database so you should persist objects like this*
-     *
-     * Use {@link #dbConstrained()}
+     * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database so you should persist objects like this. Use {@link #dbConstrained()} then.
      */
     default T constrained() {
         return constrainedNew()
@@ -144,6 +142,12 @@ public interface MediaTestDataBuilder<
             .withMid();
     }
 
+    /**
+     * Fills all required fields besides 'id' (which is filled by persistence layer).
+     *
+     * This should be used in tests which tests the persistence layer itself.
+     *
+     */
     default T dbConstrained() {
         return constrainedNew()
             .withMid();
