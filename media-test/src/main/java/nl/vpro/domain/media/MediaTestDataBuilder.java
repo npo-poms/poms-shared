@@ -735,6 +735,7 @@ public interface MediaTestDataBuilder<
                 .withImagesWithCredits()
                 .withIntentions()
                 .withTargetGroups()
+                .withGeoLocations()
                 .withLanguages()
                 .withLastModifiedBy()
                 .withLocations()
