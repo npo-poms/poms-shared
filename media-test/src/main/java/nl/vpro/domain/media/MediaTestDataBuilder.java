@@ -131,9 +131,21 @@ public interface MediaTestDataBuilder<
         return constrainedNew();
     }
 
+    /**
+     * Created an object with all required fields filled.
+     *
+     * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database so you should persist objects like this*
+     *
+     * Use {@link #dbConstrained()}
+     */
     default T constrained() {
         return constrainedNew()
             .withId()
+            .withMid();
+    }
+
+    default T dbConstrained() {
+        return constrainedNew()
             .withMid();
     }
 
