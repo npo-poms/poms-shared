@@ -15,6 +15,7 @@ import javax.ws.rs.client.Client;
 
 import org.apache.http.HttpHeaders;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.nep.sam.api.AccessApi;
@@ -82,7 +83,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     }
     private Client getHttpClient() {
         if (httpClient == null) {
-            ResteasyClientBuilder builder = new ResteasyClientBuilder();
+            ResteasyClientBuilder builder = new ResteasyClientBuilderImpl();
             builder.connectTimeout(connectTimeout.toMillis(), TimeUnit.MILLISECONDS);
             builder.readTimeout(socketTimeout.toMillis(), TimeUnit.MILLISECONDS);
             httpClient = builder.build();
