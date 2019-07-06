@@ -130,7 +130,7 @@
 
   <xsd:complexType name="searchResult" abstract="true">
     <xsd:sequence>
-      <xsd:element name="count" type="xsd:int" minOccurs="0"/>
+      <xsd:element name="count" type="xsd:long" minOccurs="0"/>
       <xsd:element name="result" type="xsd:anyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
   </xsd:complexType>

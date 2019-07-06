@@ -110,27 +110,26 @@
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-jaxb-annotations</artifactId>
     </dependency>
-   <!-- <dependency>
-      <groupId>org.hibernate.javax.persistence</groupId>
-      <artifactId>hibernate-jpa-2.1-api</artifactId>
-    </dependency>
     <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
+      <groupId>javax.annotation</groupId>
+      <artifactId>javax.annotation-api</artifactId>
+      <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
-    </dependency>-->
     <dependency>
       <groupId>org.hibernate.validator</groupId>
       <artifactId>hibernate-validator</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- TODO: This dependency needs to be dropped -->
+
     <dependency>
+      <!--
+      This dependency is afaik only relevant for annotation, hence it can be optional
+      Nicer would be to drop it altogether
+
+      -->
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
+      <optional>true</optional>
     </dependency>
 
     <dependency>
@@ -148,6 +147,7 @@
     <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-persistence</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>

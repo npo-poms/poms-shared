@@ -15,7 +15,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import nl.vpro.com.neovisionaries.i18n.LanguageAlpha3Code;
+import com.neovisionaries.i18n.LanguageAlpha3Code;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

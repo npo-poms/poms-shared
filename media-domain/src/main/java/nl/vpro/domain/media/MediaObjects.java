@@ -274,7 +274,7 @@ public class MediaObjects {
     /**
      * Returns the channel associated with this program. That is the channel of the earliest schedule event that is not a rerun.
      */
-    public static Channel getChannel(MediaObject program) {
+    public static Channel getChannel(@Nonnull MediaObject program) {
         for (ScheduleEvent se : program.getScheduleEvents()) {
             if (! ScheduleEvents.isRerun(se)) {
                 return se.getChannel();
@@ -287,7 +287,7 @@ public class MediaObjects {
     /**
      * @since 2.2.3
      */
-    public static String getRelationText(MediaObject object, String relationType) {
+    public static String getRelationText(@Nonnull MediaObject object, String relationType) {
         Relation rel = getRelation(object, relationType);
         return rel == null ? null : rel.getText();
     }
@@ -295,7 +295,7 @@ public class MediaObjects {
     /**
      * @since 3.3.0
      */
-    public static Relation getRelation(MediaObject object, String relationType) {
+    public static Relation getRelation(@Nonnull MediaObject object, String relationType) {
         for (Relation relation : object.getRelations()) {
             if (relation.getType().equals(relationType)) {
                 return relation;
@@ -304,7 +304,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static TwitterRef getTwitterHash(MediaObject object) {
+    public static TwitterRef getTwitterHash(@Nonnull  MediaObject object) {
         for (TwitterRef ref : object.getTwitterRefs()) {
             if (ref.getType() == TwitterRef.Type.HASHTAG) {
                 return ref;
@@ -313,7 +313,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static TwitterRef getTwitterAccount(MediaObject object) {
+    public static TwitterRef getTwitterAccount(@Nonnull MediaObject object) {
         for (TwitterRef ref : object.getTwitterRefs()) {
             if (ref.getType() == TwitterRef.Type.ACCOUNT) {
                 return ref;
@@ -322,7 +322,7 @@ public class MediaObjects {
         return null;
     }
 
-    public static String getKijkwijzer(MediaObject media) {
+    public static String getKijkwijzer(@Nonnull MediaObject media) {
         StringBuilder sb = new StringBuilder();
         if (media.getAgeRating() != null) {
             switch (media.getAgeRating()) {
@@ -351,7 +351,7 @@ public class MediaObjects {
     }
 
 
-    private static void matchBroadcasters(BroadcasterService broadcasterService, MediaObject mediaObject, Set<MediaObject> handled) throws NotFoundException {
+    private static void matchBroadcasters(@Nonnull  BroadcasterService broadcasterService, @Nonnull  MediaObject mediaObject, @Nonnull Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
             handled = new HashSet<>(); // to avoid accidental stack overflows
         }
@@ -385,13 +385,13 @@ public class MediaObjects {
         }
     }
 
-    public static void removeLocations(MediaObject mediaObject) {
+    public static void removeLocations(@Nonnull MediaObject mediaObject) {
         while (mediaObject.getLocations().size() > 0) {
             mediaObject.removeLocation(mediaObject.getLocations().first());
         }
     }
 
-    public static void addAll(MediaObject mediaObject, Iterable<Location> i) {
+    public static void addAll(@Nonnull MediaObject mediaObject, Iterable<Location> i) {
         for (Location l : i) {
             mediaObject.addLocation(l);
         }
@@ -399,7 +399,7 @@ public class MediaObjects {
 
 
 
-    public static Instant getSortInstant(MediaObject mo) {
+    public static Instant getSortInstant(@Nonnull MediaObject mo) {
         if (mo instanceof Group) {
             return mo.sortInstant;
         } else if (mo instanceof Segment) {
@@ -439,7 +439,7 @@ public class MediaObjects {
     }
 
 
-    public static boolean trim(Collection<?> collection) {
+    public static boolean trim(@Nonnull Collection<?> collection) {
         boolean trimmed = false;
         for (java.util.Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
             Object next = iterator.next();
@@ -452,7 +452,7 @@ public class MediaObjects {
         return trimmed;
     }
 
-    public static <T extends UpdatableIdentifiable<?, T>> void integrate(List<T> existing, List<T> updates) {
+    public static <T extends UpdatableIdentifiable<?, T>> void integrate(@Nonnull List<T> existing, @Nonnull List<T> updates) {
         T move = null;
         for (int i = 0; i < updates.size(); i++) {
             T incoming = updates.get(i);
@@ -479,17 +479,19 @@ public class MediaObjects {
         }
     }
 
-    public static void markForRepublication(MediaObject media, String reason) {
+    public static boolean markForRepublication(@Nonnull MediaObject media, String reason) {
         if ((Workflow.MERGED.equals(media.getWorkflow()) || Workflow.PUBLISHED.equals(media.getWorkflow())) && media.inPublicationWindow(Instant.now())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             media.setRepubReason(reason);
             media.setRepubDestinations(null);
-
+            return true;
+        } else {
+            return false;
         }
     }
 
 
-    public static void markForDeletion(MediaObject media, String reason) {
+    public static void markForDeletion(@Nonnull MediaObject media, String reason) {
         if (! Workflow.DELETES.contains(media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_DELETION);
             media.setRepubReason(reason);
@@ -497,7 +499,7 @@ public class MediaObjects {
         }
     }
 
-    public static void markForUnDeletion(MediaObject media, String reason) {
+    public static void markForUnDeletion(@Nonnull MediaObject media, String reason) {
         if (Workflow.DELETES.contains(media.getWorkflow())) {
             media.setWorkflow(Workflow.FOR_REPUBLICATION);
             media.setRepubReason(reason);
@@ -505,7 +507,7 @@ public class MediaObjects {
         }
     }
 
-    public static void markPublished(MediaObject media, Instant now, String reason) {
+    public static void markPublished(@Nonnull MediaObject media, @Nonnull Instant now, String reason) {
         media.setLastPublishedInstant(now);
         media.setRepubReason(reason);
         media.setRepubDestinations(null);

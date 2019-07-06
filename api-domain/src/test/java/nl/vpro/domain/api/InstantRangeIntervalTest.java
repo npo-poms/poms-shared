@@ -20,7 +20,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @Slf4j
-public class DateRangeIntervalTest {
+public class InstantRangeIntervalTest {
 
     private String[][] exampleIntervals = {
         {"2 YEAR", "2016"},

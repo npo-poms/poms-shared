@@ -26,6 +26,10 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.TestEditors;
 import nl.vpro.i18n.Locales;
+import nl.vpro.util.IntegerVersion;
+
+import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
+import static nl.vpro.domain.media.support.OwnerType.NPO;
 
 @SuppressWarnings({"unchecked", "deprecation"})
 public interface MediaTestDataBuilder<
@@ -110,6 +114,7 @@ public interface MediaTestDataBuilder<
     @Deprecated
     <TT extends MediaBuilder<TT, M>> MediaBuilder<TT, M> getMediaBuilder();
 
+
     /**
      * Made object smaller and more predictable
      * (especially the creationDate we rather want a null)
@@ -126,9 +131,25 @@ public interface MediaTestDataBuilder<
         return constrainedNew();
     }
 
+    /**
+     * Created an object with all required fields filled. This is used in tests which want a complete and valid object, but don't have an actual persistence layer.
+     *
+     * Note that this also includes the {@link PublishableObject#getId()}, which normally is filled by a sequence on the database so you should persist objects like this. Use {@link #dbConstrained()} then.
+     */
     default T constrained() {
         return constrainedNew()
             .withId()
+            .withMid();
+    }
+
+    /**
+     * Fills all required fields besides 'id' (which is filled by persistence layer).
+     *
+     * This should be used in tests which tests the persistence layer itself.
+     *
+     */
+    default T dbConstrained() {
+        return constrainedNew()
             .withMid();
     }
 
@@ -436,6 +457,34 @@ public interface MediaTestDataBuilder<
         );
     }
 
+    default T withGeoLocations() {
+        List<GeoLocation> geoLocations1 = Arrays.asList(
+                GeoLocation.builder().name("Africa").relationType(GeoRelationType.SUBJECT)
+                        .description("Continent").build());
+
+        List<GeoLocation> geoLocations2 =  Arrays.asList(
+                GeoLocation.builder().name("England").relationType(GeoRelationType.SUBJECT)
+                        .gtaaUri("http://gtaa/1234").build(),
+                GeoLocation.builder().name("UK").relationType(GeoRelationType.RECORDED_IN)
+                        .gtaaUri("http://gtaa/1235").build()
+        );
+        return geoLocations(
+                GeoLocations.builder()
+                        .values(geoLocations1)
+                        .owner(NPO)
+                        .build(),
+                GeoLocations.builder()
+                        .values(geoLocations2)
+                        .owner(BROADCASTER)
+                        .build()
+        );
+    }
+
+    default T clearIntentions() {
+        mediaObject().setIntentions(null);
+        return (T) this;
+    }
+
     default T withTargetGroups(){
         return targetGroups(
                 TargetGroups.builder()
@@ -447,6 +496,12 @@ public interface MediaTestDataBuilder<
                     .owner(OwnerType.NPO)
                     .build()
         );
+    }
+
+
+    default T clearTargetGroups() {
+        mediaObject().setTargetGroups(null);
+        return (T) this;
     }
 
     default T withAwards() {
@@ -684,6 +739,7 @@ public interface MediaTestDataBuilder<
                 .withImagesWithCredits()
                 .withIntentions()
                 .withTargetGroups()
+                .withGeoLocations()
                 .withLanguages()
                 .withLastModifiedBy()
                 .withLocations()
@@ -707,6 +763,8 @@ public interface MediaTestDataBuilder<
                 .withWorkflow()
                 .withIds(ids)
         ;
+
+
     }
 
 
@@ -742,12 +800,24 @@ public interface MediaTestDataBuilder<
                 .withFixedSegmentMids(mids);
         }
 
-        public ProgramTestDataBuilder withEverything(Float version) {
+        public ProgramTestDataBuilder withEverything(IntegerVersion version) {
             ProgramTestDataBuilder result = withEverything();
-            if (version != null && version < 5.9) {
-                for (ScheduleEvent se :result.getMediaBuilder().build().getScheduleEvents()) {
-                    se.setGuideDate(null);
+            if (version != null) {
+                if (version.isBefore(5, 9)) {
+                    for (ScheduleEvent se : result.getMediaBuilder().build().getScheduleEvents()) {
+                        se.setGuideDate(null);
+                    }
                 }
+                if (version.isBefore(5, 11)) {
+                    clearIntentions();
+                    clearTargetGroups();
+                    for (Segment s : mediaObject().getSegments()) {
+                        s.setIntentions(null);
+                        s.setTargetGroups(null);
+
+                    }
+                }
+
             }
             return result;
         }

@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.within;
  * @author Michiel Meeuwissen
  * @since 3.3
  */
-public class DateRangeMatcherListJsonTest {
+public class InstantRangeMatcherListJsonTest {
 
     @Test
     public void testGetValueJson() throws Exception {

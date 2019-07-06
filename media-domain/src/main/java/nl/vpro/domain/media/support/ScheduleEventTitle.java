@@ -1,7 +1,10 @@
 package nl.vpro.domain.media.support;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Entity;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -24,8 +27,21 @@ import nl.vpro.domain.media.ScheduleEvent;
 @JsonPropertyOrder({"value", "owner", "type"})
 public class ScheduleEventTitle extends AbstractOwnedTextEntity<ScheduleEventTitle, ScheduleEvent> {
 
+    @Getter
+    @Setter
+    @ManyToOne
+    @NotNull
+    @JoinColumns({
+       @JoinColumn(name = "parent_channel", referencedColumnName = "channel"),
+       @JoinColumn(name = "parent_start", referencedColumnName = "start")
+
+    })
+    ScheduleEvent parent;
+
+
     public ScheduleEventTitle(ScheduleEvent parent, String title, OwnerType owner, TextualType type) {
-        super(parent, title, owner, type);
+        super(title, owner, type);
+        this.parent = parent;
     }
 
     public ScheduleEventTitle() {

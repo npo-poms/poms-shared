@@ -78,8 +78,7 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
         LocalDateTime localStop,
         LocalDate startDay,
         LocalDate stopDay,
-        @Singular
-        Collection<ScheduleEventUpdate> scheduleEvents
+        @Singular Collection<ScheduleEventUpdate> scheduleEvents
         ) {
         this.channel = channel;
         this.start = Schedule.of(start, localStart, startDay);

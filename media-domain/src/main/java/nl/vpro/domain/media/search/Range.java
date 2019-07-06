@@ -3,25 +3,26 @@ package nl.vpro.domain.media.search;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
-import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.3
  */
-public interface Range<T extends Comparable, S extends Range.RangeValue<T>> extends Predicate<T> {
+public interface Range<T extends Comparable<T>, S extends Range.RangeValue<T>> extends Predicate<T> {
 
     S getStart();
     void setStart(S start);
 
     S getStop();
     void setStop(S  stop);
-    
+
     default T getStartValue() {
         S start = getStart();
         return start == null ? null : start.get();
@@ -31,7 +32,7 @@ public interface Range<T extends Comparable, S extends Range.RangeValue<T>> exte
         S stop= getStop();
         return stop == null ? null : stop.get();
     }
-    
+
     @Override
     default boolean test(T other) {
         return testStart(other) && testStop(other);
@@ -62,7 +63,7 @@ public interface Range<T extends Comparable, S extends Range.RangeValue<T>> exte
     default boolean hasValues() {
         return getStartValue() != null || getStopValue() != null;
     }
-    
+
     @Data
     @AllArgsConstructor
     @XmlAccessorType(XmlAccessType.NONE)
@@ -70,11 +71,11 @@ public interface Range<T extends Comparable, S extends Range.RangeValue<T>> exte
     abstract class RangeValue<T extends Comparable> implements Supplier<T> {
         @XmlAttribute
         Boolean inclusive = null;
-        
+
         RangeValue() {
-            
+
         }
-        
+
         public boolean isInclusive() {
             return inclusive == null || inclusive;
         }

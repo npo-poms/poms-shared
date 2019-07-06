@@ -29,8 +29,8 @@ public class NEPTranscodeServiceImplITest {
 
     private String apiUser = "webonly-user";
     private String ftpUser = "npoweb-vpro";
-    NEPTranscodeServiceImpl nepService =
-        new NEPTranscodeServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl", apiUser,
+    NEPGatekeeperServiceImpl nepService =
+        new NEPGatekeeperServiceImpl("https://npo-webonly-gatekeeper.nepworldwide.nl", apiUser,
             System.getProperty("password"),
             Duration.ofMillis(100).toString(), "", "", 200,  ftpUser);
 

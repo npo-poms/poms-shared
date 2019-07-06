@@ -137,10 +137,10 @@ public class MediaForm {
     private Boolean noPlaylist;
 
     @XmlElement
-    private DateRange sortRange;
+    private InstantRange sortRange;
 
     @XmlElement
-    private DateRange eventRange;
+    private InstantRange eventRange;
 
     @XmlElement(name = "channel")
     @JsonProperty("channels")
@@ -160,7 +160,7 @@ public class MediaForm {
     private EditorSearch createdBy;
 
     @XmlElement
-    private DateRange creationRange;
+    private InstantRange creationRange;
 
     @XmlElement
     @Getter
@@ -168,15 +168,15 @@ public class MediaForm {
     private EditorSearch lastModifiedBy;
 
     @XmlElement
-    private DateRange lastModifiedRange;
+    private InstantRange lastModifiedRange;
 
     @XmlElement
-    private DateRange scheduleEventRange;
+    private InstantRange scheduleEventRange;
 
     @XmlElement
     @Getter
     @Setter
-    private DateRange lastPublishedRange;
+    private InstantRange lastPublishedRange;
 
     @XmlElement(name = "tag")
     @JsonProperty("tags")
@@ -263,14 +263,14 @@ public class MediaForm {
         Boolean noBroadcast,
         Boolean hasLocations,
         Boolean noPlaylist,
-        DateRange eventRange,
+        InstantRange eventRange,
         String createdBy,
         String createdById,
-        DateRange creationRange,
+        InstantRange creationRange,
         String lastModifiedBy,
         String lastModifiedById,
-        DateRange lastModifiedRange,
-        DateRange lastPublishedRange,
+        InstantRange lastModifiedRange,
+        InstantRange lastPublishedRange,
         IntegerRange locationsCount,
         Boolean notAnEpisode,
         Boolean noMembers,
@@ -516,7 +516,7 @@ public class MediaForm {
     /**
      * @since 3.4
      */
-    public DateRange getSortRange() {
+    public InstantRange getSortRange() {
         return sortRange;
     }
 
@@ -524,7 +524,7 @@ public class MediaForm {
         return sortRange != null && sortRange.hasValues();
     }
 
-    public void setSortRange(DateRange sortRange) {
+    public void setSortRange(InstantRange sortRange) {
         this.sortRange = sortRange;
     }
 
@@ -532,7 +532,7 @@ public class MediaForm {
     /**
      * Searches only in 'first showing' event
      */
-    public DateRange getEventRange() {
+    public InstantRange getEventRange() {
         return eventRange;
     }
 
@@ -553,7 +553,7 @@ public class MediaForm {
         return createdBy != null && StringUtils.isNotBlank(createdBy.getText());
     }
 
-    public DateRange getCreationRange() {
+    public InstantRange getCreationRange() {
         return creationRange;
     }
 
@@ -561,7 +561,7 @@ public class MediaForm {
         return creationRange != null && creationRange.hasValues();
     }
 
-    public void setCreationRange(DateRange creationRange) {
+    public void setCreationRange(InstantRange creationRange) {
         this.creationRange = creationRange;
     }
 
@@ -569,11 +569,11 @@ public class MediaForm {
         return lastModifiedBy != null && StringUtils.isNotBlank(lastModifiedBy.getText());
     }
 
-    public DateRange getLastModifiedRange() {
+    public InstantRange getLastModifiedRange() {
         return lastModifiedRange;
     }
 
-    public void setLastModifiedRange(DateRange lastModifiedRange) {
+    public void setLastModifiedRange(InstantRange lastModifiedRange) {
         this.lastModifiedRange = lastModifiedRange;
     }
 
@@ -584,11 +584,11 @@ public class MediaForm {
     /**
      * Searches in all available events.
      */
-    public DateRange getScheduleEventRange() {
+    public InstantRange getScheduleEventRange() {
         return scheduleEventRange;
     }
 
-    public void setScheduleEventRange(DateRange scheduleEventRange) {
+    public void setScheduleEventRange(InstantRange scheduleEventRange) {
         this.scheduleEventRange = scheduleEventRange;
     }
 

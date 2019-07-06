@@ -44,12 +44,7 @@ public class TitleUpdate implements TypedText {
         this.type = type;
     }
 
-    TitleUpdate(String title,  @Nonnull TextualType type, MediaUpdate media) {
-        this(title, type);
-        this.media = media;
-    }
-
-    public static TitleUpdate of(TypedText to) {
+    public static TitleUpdate of(@Nonnull TypedText to) {
         return new TitleUpdate(to.get(), to.getType());
     }
 

@@ -53,6 +53,7 @@
           <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="intentions" type="intentionsType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="targetGroups" type="targetGroupsType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -238,6 +239,22 @@
   <xs:simpleType name="targetGroupType">
     <xs:restriction base="targetGroupEnum"/>
   </xs:simpleType>
+
+  <xs:complexType name="geoLocationsType">
+    <xs:sequence>
+      <xs:element name="geoLocation" type="geoLocationType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
+
+  <xs:complexType name="geoLocationType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="relationType" type="geoRelationType" use="required"/>
+    <xs:attribute name="gtaaUri" type="xs:string"/>
+  </xs:complexType>
 
   <xs:complexType name="countryType">
     <xs:simpleContent>
@@ -571,6 +588,14 @@
       <xs:enumeration value="ADULTS_WITH_KIDS_6"/>
       <xs:enumeration value="ADULTS_WITH_KIDS_12"/>
       <xs:enumeration value="EVERYONE"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="geoRelationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RECORDED_IN"/>
+      <xs:enumeration value="SUBJECT"/>
+      <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>
 

@@ -1,5 +1,8 @@
 package nl.vpro.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import org.junit.Test;
 
 import nl.vpro.domain.media.support.OwnerType;
@@ -15,8 +18,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AbstractOwnedTextEntityTest {
 
     class OwnedTextEntity extends AbstractOwnedTextEntity<OwnedTextEntity, Object> {
+        @Getter
+        @Setter
+        Object parent;
         public OwnedTextEntity(String value, OwnerType owner, TextualType type) {
-            super(null, value, owner, type);
+            super(value, owner, type);
         }
     }
     @Test

@@ -41,9 +41,14 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "predictionType",
         propOrder = {
 })
+/*
+
 @Table(
     uniqueConstraints = {@UniqueConstraint(columnNames = {"mediaobject_id", "platform"})}
 )
+*/
+
+
 public class Prediction implements Comparable<Prediction>, Updatable<Prediction>, Serializable, MutableEmbargo, Child<MediaObject> {
 
     private static final long serialVersionUID = 0L;
@@ -134,8 +139,6 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
 
     @ManyToOne
     @XmlTransient
-    @Setter
-    @Getter
     protected MediaObject mediaObject;
 
     @Column

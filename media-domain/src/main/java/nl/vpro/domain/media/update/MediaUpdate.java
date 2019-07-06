@@ -28,10 +28,10 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.meeuw.i18n.bind.jaxb.Code;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.Embargos;
 import nl.vpro.domain.MutableEmbargoDeprecated;
 import nl.vpro.domain.TextualObjectUpdate;
@@ -39,7 +39,6 @@ import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.Location;
 import nl.vpro.domain.media.TwitterRef;
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.bind.CountryCodeAdapter;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
@@ -135,6 +134,11 @@ public abstract class  MediaUpdate<M extends MediaObject>
             log.info(ve.getClass().getName() + " " + ve.getMessage());
             validator = null;
 
+        } catch(Throwable e) {
+            // like java.lang.NoSuchMethodError: javax.el.ELUtil.getExpressionFactory()Ljavax/el/ExpressionFactory;
+            log.warn(e.getClass().getName() + " " + e.getMessage());
+            log.info("javax.validation will be disabled");
+            validator = null;
         }
         VALIDATOR = validator;
     }
@@ -192,7 +196,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     Boolean isDeleted;
 
-    List<CountryCode> countries;
+    List<org.meeuw.i18n.Region> countries;
 
     List<Locale> languages;
 
@@ -223,6 +227,8 @@ public abstract class  MediaUpdate<M extends MediaObject>
     protected List<IntentionType> intentions;
 
     protected List<TargetGroupType> targetGroups;
+
+    protected List<GeoLocation> geoLocations;
 
     @Valid
     protected Asset asset;
@@ -518,7 +524,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         returnObject.setWebsites(toList(websites, (w) -> new Website(w, owner)));
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
 
-        if(intentions != null){
+        if(intentions != null) {
             returnObject.addIntention(toIntentions(intentions, owner));
         }
         if(targetGroups != null){
@@ -544,10 +550,19 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * that are aware of this field (we use empty list to delete)
      */
     private List<IntentionType> toUpdateIntentions(SortedSet<Intentions> intentions, OwnerType owner){
-        return Ownables.filter(intentions, owner).map(Intentions::getValues).map(l -> l.stream().map(Intention::getValue).collect(Collectors.toList())).orElse(new ArrayList<>());
+        if (intentions == null) {
+            return null;
+        }
+        return Ownables.filter(intentions, owner)
+            .map(Intentions::getValues)
+            .map(l -> l.stream().map(Intention::getValue).collect(Collectors.toList()))
+            .orElse(new ArrayList<>());
     }
 
     private Intentions toIntentions(List<IntentionType> intentionValues, OwnerType owner){
+        if (intentionValues == null) {
+            return null;
+        }
         return Intentions.builder()
                 .owner(owner)
                 .values(intentionValues)
@@ -564,10 +579,20 @@ public abstract class  MediaUpdate<M extends MediaObject>
      * that are aware of this field (we use empty list to delete)
      */
     private List<TargetGroupType> toUpdateTargetGroups(SortedSet<TargetGroups> targetGroups, OwnerType owner){
-        return Ownables.filter(targetGroups, owner).map(TargetGroups::getValues).map(l -> l.stream().map(TargetGroup::getValue).collect(Collectors.toList())).orElse(new ArrayList<>());
+        if (targetGroups == null){
+            return null;
+        }
+        return Ownables
+            .filter(targetGroups, owner)
+            .map(TargetGroups::getValues)
+            .map(l -> l.stream().map(TargetGroup::getValue).collect(Collectors.toList()))
+            .orElse(new ArrayList<>());
     }
 
     private TargetGroups toTargetGroups(List<TargetGroupType> targetGroupValues, OwnerType owner){
+        if (targetGroupValues == null){
+            return null;
+        }
         return TargetGroups.builder()
                 .owner(owner)
                 .values(targetGroupValues)
@@ -890,15 +915,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     @XmlElement(name = "country")
-    @XmlJavaTypeAdapter(CountryCodeAdapter.Code.class)
-    public List<CountryCode> getCountries() {
+    @XmlJavaTypeAdapter(Code.class)
+    public List<org.meeuw.i18n.Region> getCountries() {
          if (countries == null) {
             countries = new ArrayList<>();
          }
         return countries;
     }
 
-    public void setCountries(List<CountryCode> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = countries;
     }
 
@@ -956,6 +981,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.targetGroups = targetGroups;
     }
 
+    public void setGeoLocations(List<GeoLocation> geoLocations) {
+        this.geoLocations = geoLocations;
+    }
 
     @XmlElement(name = "avAttributes")
     public AVAttributesUpdate getAvAttributes() {

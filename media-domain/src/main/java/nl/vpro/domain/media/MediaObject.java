@@ -31,11 +31,17 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
+import org.meeuw.i18n.RegionService;
+import org.meeuw.i18n.countries.Country;
+import org.meeuw.i18n.countries.validation.ValidCountry;
+import org.meeuw.i18n.persistence.RegionToStringConverter;
+import org.meeuw.i18n.validation.ValidRegion;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.neovisionaries.i18n.CountryCode;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
@@ -92,6 +98,7 @@ import static nl.vpro.domain.media.support.Ownables.containsDuplicateOwner;
         "tags",
         "intentions",
         "targetGroups",
+        "geoLocations",
         "source",
         "countries",
         "languages",
@@ -348,11 +355,13 @@ public abstract class MediaObject
     protected String source;
 
     @ElementCollection
-    @Enumerated(EnumType.STRING)
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<CountryCode> countries;
+    @Convert(converter = RegionToStringConverter.class)
+    @ValidRegion(classes = {Country.class}, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
+    protected List<org.meeuw.i18n.Region> countries;
 
     @ElementCollection
     @Column(length = 10)
@@ -383,6 +392,17 @@ public abstract class MediaObject
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected List<Person> persons;
+
+    @OneToMany(orphanRemoval = true, cascade = ALL)
+    @JoinColumn(name = "parent_id")
+    @OrderColumn(name = "list_index", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
+    @XmlElement(name = "geoLocations")
+    @JsonProperty("geoLocations")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @SortNatural
+    protected SortedSet<GeoLocations> geoLocations;
 
     @ElementCollection
     @JoinTable(name = "mediaobject_awards")
@@ -489,9 +509,10 @@ public abstract class MediaObject
      *  BROADCAST | 1526381
      *  MOVIE     |      20
      */
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = false, cascade={MERGE})
+    @OneToMany(mappedBy = "mediaObject", orphanRemoval = true, cascade={MERGE})
     @SortNatural
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    // Caching doesn't work proprerly because ScheduleEventRepository may touch this
+    // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     protected Set<ScheduleEvent> scheduleEvents;
 
@@ -666,6 +687,10 @@ public abstract class MediaObject
         if (toUpdate == null) {
             toUpdate = new ArrayList<>();
         } else {
+            if (toUpdate.equals(values)) {
+                // the object is already exactly correct, do nothing
+                return toUpdate;
+            }
             toUpdate.clear();
         }
         if (values != null) {
@@ -1181,6 +1206,99 @@ public abstract class MediaObject
         this.tags = updateSortedSet(this.tags, tags);
     }
 
+    //region GeoLocations logic
+    public SortedSet<GeoLocations> getGeoLocations() {
+        return geoLocations;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void setGeoLocations(@Nonnull SortedSet<GeoLocations> newGeoLocations) {
+
+        if (containsDuplicateOwner(newGeoLocations)) {
+            throw new IllegalArgumentException("The geoLocations list you want to set has a duplicate owner: " + newGeoLocations);
+        }
+        if (this.geoLocations == null) {
+            this.geoLocations = new TreeSet<>();
+        } else {
+            this.geoLocations.clear();
+        }
+        for (GeoLocations i : newGeoLocations) {
+            addGeoLocations(i.copy());
+        }
+    }
+
+    public boolean addGeoLocation(@Nonnull GeoLocation newGeoLocation, @Nonnull OwnerType owner) {
+        boolean isAdded = false;
+        if(this.geoLocations == null) {
+            this.geoLocations = new TreeSet<>();
+        }
+        Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
+        if (match.isPresent() && match.get().getValues().contains(newGeoLocation))
+            return false;
+
+        if (match.isPresent()) {
+            newGeoLocation.setParent(match.get());
+            isAdded = match.get().getValues().add(newGeoLocation);
+        } else {
+            final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
+            geoLocations.setParent(this);
+            newGeoLocation.setParent(geoLocations);
+            geoLocations.getValues().add(newGeoLocation);
+            isAdded = this.geoLocations.add(geoLocations);
+        }
+        return isAdded;
+    }
+
+    public MediaObject addGeoLocations(@Nonnull GeoLocations newGeoLocations) {
+        if(this.geoLocations != null) {
+            this.geoLocations.removeIf(existing -> existing.getOwner() == newGeoLocations.getOwner());
+        } else {
+            this.geoLocations = new TreeSet<>();
+        }
+        newGeoLocations.setParent(this);
+        this.geoLocations.add(newGeoLocations);
+        return this;
+    }
+
+    public boolean removeGeoLocations(GeoLocations geoLocations) {
+        return this.geoLocations.remove(geoLocations);
+    }
+
+    public boolean removeGeoLocation(@Nonnull GeoLocation geoLocation, OwnerType owner) {
+
+        final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
+                .filter(owned -> owned.getOwner().equals(owner))
+                .findAny().map(o -> o.getValues());
+
+        if(maybeValues.isPresent()) {
+            return maybeValues.get().remove(geoLocation);
+        }
+        return false;
+    }
+
+    public Optional<GeoLocation> findGeoLocation(@Nonnull Long id,@Nonnull OwnerType owner){
+        final Optional<GeoLocation> empty = Optional.empty();
+        if (geoLocations.isEmpty()) {
+            return empty;
+        }
+
+        final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
+                .filter(owned -> owned.getOwner().equals(owner))
+                .findAny().map(o -> o.getValues());
+
+        if(maybeValues.isPresent()) {
+            final Optional<GeoLocation> maybeLocationFound = maybeValues.get().stream().filter(
+                    v -> id.equals(v.getId())
+            ).findAny();
+
+            return maybeLocationFound;
+        }
+        return empty;
+
+
+    }
+
+    //end region
 
     //region Intentions logic
 
@@ -1188,9 +1306,12 @@ public abstract class MediaObject
         return intentions;
     }
 
-
     @SuppressWarnings("unchecked")
-    public void setIntentions(@Nonnull SortedSet<Intentions> newIntentions) {
+    public void setIntentions(SortedSet<Intentions> newIntentions) {
+        if (newIntentions == null) {
+            this.intentions = null;
+            return;
+        }
 
         if (containsDuplicateOwner(newIntentions)) {
             throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
@@ -1212,7 +1333,7 @@ public abstract class MediaObject
             this.intentions = new TreeSet<>();
         }
         newIntentions.setParent(this);
-        intentions.add(newIntentions);
+        this.intentions.add(newIntentions);
         return this;
     }
 
@@ -1228,8 +1349,12 @@ public abstract class MediaObject
     }
 
     @SuppressWarnings("unchecked")
-    public void setTargetGroups(@Nonnull SortedSet<TargetGroups> newTargetGroups) {
+    public void setTargetGroups(SortedSet<TargetGroups> newTargetGroups) {
 
+        if (newTargetGroups == null){
+            this.targetGroups = null;
+            return ;
+        }
         if (containsDuplicateOwner(newTargetGroups)) {
            throw new IllegalArgumentException("The targetgroup list you want to set has a duplicate owner: " + newTargetGroups);
         }
@@ -1269,27 +1394,27 @@ public abstract class MediaObject
     @JsonDeserialize(using = BackwardsCompatibility.CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<CountryCode> getCountries() {
+    public List<org.meeuw.i18n.Region> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();
         }
         return countries;
     }
 
-    public void setCountries(List<CountryCode> countries) {
+    public void setCountries(List<org.meeuw.i18n.Region> countries) {
         this.countries = updateList(this.countries, countries);
     }
 
     public MediaObject addCountry(String code) {
-        CountryCode country = CountryCode.getByCode(code, false);
-        if (country == null) {
-            throw new IllegalArgumentException("Unknown country " + code);
-        }
-        return addCountry(country);
+        return addCountry(RegionService.getInstance().getByCode(code).orElseThrow(() ->
+            new IllegalArgumentException("Unknown country " + code)));
 
     }
+    public MediaObject addCountry(@Nonnull CountryCode country) {
+        return addCountry(Country.of(country));
+    }
 
-    public MediaObject addCountry(CountryCode country) {
+    public MediaObject addCountry(org.meeuw.i18n.Region country) {
         nullCheck(country, "country");
 
         if (countries == null) {
@@ -1372,7 +1497,7 @@ public abstract class MediaObject
 
 
     /**
-     * Use {@link AuthorizedDuration#get()} in combination with {@link #getDuration} to get the java.time.Duration
+     * Use {@link AuthorizedDuration#get} in combination with {@link #getDuration} to get the java.time.Duration
      * @throws ModificationException If you may not set the duration
      */
     @JsonIgnore
@@ -1433,6 +1558,7 @@ public abstract class MediaObject
                 person.setParent(this);
             }
         }
+
         this.persons = updateList(this.persons, persons);
     }
 
@@ -2920,7 +3046,6 @@ public abstract class MediaObject
         }
         return result;
     }
-
 
     @Override
     public final String toString() {

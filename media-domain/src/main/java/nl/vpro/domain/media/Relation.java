@@ -45,6 +45,11 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
     private Long id; // Can not extend from DomainObject because of an XmlValue annotation...
 
     @ManyToOne(optional = false)
+    @JoinColumns({
+       @JoinColumn(name = "definition_broadcaster", referencedColumnName = "broadcaster"),
+       @JoinColumn(name = "definition_type", referencedColumnName = "type")
+
+    })
     @Valid
     @NotNull
     @XmlTransient

@@ -1,0 +1,26 @@
+{
+  "mediaWithTwoGeoLocations":
+  {
+    "objectType":"program","embeddable":true,
+    "broadcasters":[],
+    "genres":[],
+    "geoLocations":
+    [
+      {"owner":"BROADCASTER", "values":[{"name":"England","relationType":"SUBJECT"},{"name":"UK","relationType":"RECORDED_IN"}]},
+      {"owner":"NPO", "values":[{"name":"Africa","description":"Continent","relationType":"SUBJECT"}]}
+    ],
+    "countries":[],
+    "languages":[]
+  },
+  "mediaWithOneGeoLocations":  {
+    "objectType":"program","embeddable":true,
+    "broadcasters":[],
+    "genres":[],
+    "geoLocations":
+    [
+      {"owner":"BROADCASTER", "values":["ACTIVATING"]}
+    ],
+    "countries":[],
+    "languages":[]
+  }
+}

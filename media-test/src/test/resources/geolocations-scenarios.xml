@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program avType="AUDIO" embeddable="true" mid="9"
+         sortDate="2015-03-06T00:00:00+01:00" type="BROADCAST"
+         xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
+    <geoLocations owner="BROADCASTER">
+        <geoLocation relationType="SUBJECT">
+            <name>England</name>
+        </geoLocation>
+        <geoLocation relationType="RECORDED_IN">
+            <name>UK</name>
+        </geoLocation>
+    </geoLocations>
+    <geoLocations owner="NPO">
+        <geoLocation relationType="SUBJECT">
+            <name>Africa</name>
+            <description>Continent</description>
+        </geoLocation>
+    </geoLocations>
+    <credits/>
+    <locations/>
+    <scheduleEvents/>
+    <images/>
+    <segments/>
+</program>

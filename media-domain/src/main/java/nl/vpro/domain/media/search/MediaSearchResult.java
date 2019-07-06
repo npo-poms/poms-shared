@@ -17,7 +17,7 @@ public class MediaSearchResult extends AbstractSearchResult<MediaObject> {
         super();
     }
 
-    public MediaSearchResult(final Integer count, final List<MediaObject> result) {
+    public MediaSearchResult(final Long count, final List<MediaObject> result) {
         super(count, result);
     }
 }

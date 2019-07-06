@@ -15,11 +15,14 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.annotation.Nonnull;
 import javax.management.MBeanServer;
@@ -41,16 +44,22 @@ import nl.vpro.services.TransactionService;
 @Slf4j
 public class MediaObjectLocker {
 
+    /**
+     * The lock the current thread is holding. It would be suspicious (and a possible cause of dead lock) if that is more than one.
+     */
+
+    static final ThreadLocal<List<LockHolder>> HOLDS = ThreadLocal.withInitial(ArrayList::new);
+
 
     /**
      * Map mid -> ReentrantLock
      */
-    static final Map<String, ReentrantLock>       LOCKED_MEDIA   = new ConcurrentHashMap<>();
+    static final Map<String, LockHolder>       LOCKED_MEDIA              = new ConcurrentHashMap<>();
 
     /**
      * Map key -> ReentrantLock
      */
-    private static final Map<Serializable, ReentrantLock> LOCKED_OBJECTS = new ConcurrentHashMap<>();
+    private static final Map<Serializable, LockHolder> LOCKED_OBJECTS    = new ConcurrentHashMap<>();
 
 
     private static final MediaObjectLockerAdmin          JMX_INSTANCE    = new MediaObjectLockerAdmin();
@@ -175,14 +184,14 @@ public class MediaObjectLocker {
         K key,
         @Nonnull String reason,
         @Nonnull Callable<T> callable,
-        @Nonnull Map<K, ReentrantLock> locks) {
+        @Nonnull Map<K, LockHolder> locks) {
         if (key == null) {
             //log.warn("Calling with null mid: {}", reason, new Exception());
             log.warn("Calling with null key: {}", reason);
             return callable.call();
         }
         long nanoStart = System.nanoTime();
-        ReentrantLock lock = aquireLock(nanoStart, key, reason, locks);
+        LockHolder lock = acquireLock(nanoStart, key, reason, locks);
         try {
             return callable.call();
         } finally {
@@ -195,14 +204,14 @@ public class MediaObjectLocker {
         @Nonnull Iterable<K> keys,
         @Nonnull String reason,
         @Nonnull Callable<T> callable,
-        @Nonnull Map<K, ReentrantLock> locks) {
+        @Nonnull Map<K, LockHolder> locks) {
 
         final long nanoStart = System.nanoTime();
-        final List<ReentrantLock> lockList = new ArrayList<>();
+        final List<LockHolder> lockList = new ArrayList<>();
         final List<K> copyOfKeys = new ArrayList<>();
         for (K key : keys) {
             if (key != null) {
-                lockList.add(aquireLock(nanoStart, key, reason, locks));
+                lockList.add(acquireLock(nanoStart, key, reason, locks));
                 copyOfKeys.add(key);
             }
         }
@@ -220,14 +229,14 @@ public class MediaObjectLocker {
         @Nonnull Iterable<K> keys,
         @Nonnull String reason,
         @Nonnull Function<Iterable<K>, T> callable,
-        @Nonnull Map<K, ReentrantLock> locks) {
+        @Nonnull Map<K, LockHolder> locks) {
 
         final long nanoStart = System.nanoTime();
-        final List<ReentrantLock> lockList = new ArrayList<>();
+        final List<LockHolder> lockList = new ArrayList<>();
         final List<K> copyOfKeys = new ArrayList<>();
         for (K key : keys) {
             if (key != null) {
-                Optional<ReentrantLock> reentrantLock = aquireLock(nanoStart, key, reason, locks, true);
+                Optional<LockHolder> reentrantLock = acquireLock(nanoStart, key, reason, locks, true);
                 if (reentrantLock.isPresent()) {
                     lockList.add(reentrantLock.get());
                     copyOfKeys.add(key);
@@ -244,53 +253,100 @@ public class MediaObjectLocker {
         }
     }
 
-    private static  <K extends Serializable> Optional<ReentrantLock> aquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, ReentrantLock> locks, boolean onlyIfFree) {
-        ReentrantLock lock;
+    private static  <K extends Serializable> Optional<LockHolder> acquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks, boolean onlyIfFree) {
+        LockHolder holder;
         boolean alreadyWaiting = false;
         synchronized (locks) {
-            lock = locks.computeIfAbsent(key, (m) -> {
-                    log.trace("New lock for " + m);
-                    return new ReentrantLock();
+            holder = locks.computeIfAbsent(key, (m) -> {
+                log.trace("New lock for " + m);
+                if (! HOLDS.get().isEmpty()) {
+                     if (MediaObjectLockerAspect.monitor) {
+                         if (MediaObjectLockerAspect.sessionFactory != null) {
+                             if (MediaObjectLockerAspect.sessionFactory.getCurrentSession().getTransaction().isActive()) {
+                                 log.warn("Trying to acquire lock in transaction this active already! {}", summarize());
+                             }
+
+                         }
+                     }
+                    if (MediaObjectLockerAspect.stricltyOne) {
+                        throw new IllegalStateException(String.format("%s Getting a lock on a different key! %s + %s", summarize(), HOLDS.get().get(0).summarize(), key));
+                    } else {
+                        log.warn("Getting a lock on a different key! {} + {}", HOLDS.get(), key);
+                    }
+                }
+
+
+                LockHolder newHolder = new LockHolder(key, new ReentrantLock(), new Exception());
+                HOLDS.get().add(newHolder);
+                return newHolder;
                 }
             );
-            if (lock.isLocked() && !lock.isHeldByCurrentThread()) {
+            if (holder.lock.isLocked() && !holder.lock.isHeldByCurrentThread()) {
                 if (onlyIfFree) {
                     return Optional.empty();
                 }
-                log.debug("There are already threads ({}) for {}, waiting", lock.getQueueLength(), key);
-                JMX_INSTANCE.maxConcurrency = Math.max(lock.getQueueLength(), JMX_INSTANCE.maxConcurrency);
+                log.debug("There are already threads ({}) for {}, waiting", holder.lock.getQueueLength(), key);
+                JMX_INSTANCE.maxConcurrency = Math.max(holder.lock.getQueueLength(), JMX_INSTANCE.maxConcurrency);
                 alreadyWaiting = true;
             }
+
         }
 
-        lock.lock();
+        if (MediaObjectLockerAspect.monitor) {
+            long start = System.nanoTime();
+            Duration wait = Duration.ofSeconds(5);
+            Duration maxWait = Duration.ofSeconds(30);
+            try {
+                while (!holder.lock.tryLock(wait.toMillis(), TimeUnit.MILLISECONDS)) {
+                    Duration duration = Duration.ofNanos(System.nanoTime() - start);
+                    log.info("Couldn't  acquire lock for {} during {}, {}, locked by {}", key, duration, summarize(), holder.summarize());
+                    if (duration.compareTo(MediaObjectLockerAspect.maxLockAcquireTime) > 0) {
+                        log.warn("Took over {} to acquire {}, continuing without lock now", MediaObjectLockerAspect.maxLockAcquireTime, holder);
+                        break;
+                    }
+                    if (wait.compareTo(maxWait) < 0) {
+                        wait = wait.multipliedBy(2);
+                        if (wait.compareTo(maxWait) > 0) {
+                            wait = maxWait;
+                        }
+                    }
+                }
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(), e);
+                return Optional.empty();
+
+            }
+        } else {
+            holder.lock.lock();
+        }
         if (alreadyWaiting) {
             log.debug("Released and continuing {}", key);
         }
 
-        JMX_INSTANCE.maxDepth = Math.max(JMX_INSTANCE.maxDepth, lock.getHoldCount());
-        log.trace("{} holdcount {}", Thread.currentThread().hashCode(), lock.getHoldCount());
-        if (lock.getHoldCount() == 1) {
+        JMX_INSTANCE.maxDepth = Math.max(JMX_INSTANCE.maxDepth, holder.lock.getHoldCount());
+        log.trace("{} holdcount {}", Thread.currentThread().hashCode(), holder.lock.getHoldCount());
+        if (holder.lock.getHoldCount() == 1) {
             JMX_INSTANCE.lockCount.computeIfAbsent(reason, (s) -> new AtomicInteger(0)).incrementAndGet();
             JMX_INSTANCE.currentCount.computeIfAbsent(reason, (s) -> new AtomicInteger()).incrementAndGet();
             Duration aquireTime = Duration.ofNanos(System.nanoTime() - nanoStart);
             log.debug("Acquired lock for {}  ({}) in {}", key, reason, aquireTime);
         }
-        return Optional.of(lock);
+        return Optional.of(holder);
     }
 
-    private static  <K extends Serializable> ReentrantLock aquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, ReentrantLock> locks) {
-        return aquireLock(nanoStart, key, reason, locks, false).get();
+    private static  <K extends Serializable> LockHolder acquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks) {
+        return acquireLock(nanoStart, key, reason, locks, false).get();
     }
 
 
-    private static  <K extends Serializable> void releaseLock(long nanoStart, K key, @Nonnull  String reason,  final @Nonnull Map<K, ReentrantLock> locks, @Nonnull ReentrantLock lock) {
+    private static  <K extends Serializable> void releaseLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks, @Nonnull LockHolder lock) {
         synchronized (locks) {
-            if (lock.getHoldCount() == 1) {
-                if (!lock.hasQueuedThreads()) {
+            if (lock.lock.getHoldCount() == 1) {
+                if (!lock.lock.hasQueuedThreads()) {
                     log.trace("Removed " + key);
-                    ReentrantLock remove = locks.remove(key);
+                    LockHolder remove = locks.remove(key);
                     if (remove != null) {
+
 
                     }
                 }
@@ -299,8 +355,68 @@ public class MediaObjectLocker {
                 Slf4jHelper.log(log, duration.compareTo(Duration.ofSeconds(30))> 0 ? Level.WARN :  Level.DEBUG,
                     "Released lock for {} ({}) in {}", key, reason, Duration.ofNanos(System.nanoTime() - nanoStart));
             }
-            lock.unlock();
+            HOLDS.get().remove(lock);
+            lock.lock.unlock();
             locks.notifyAll();
+        }
+    }
+
+    private static String summarizeStackTrace(Exception ex) {
+        return "\n" +
+            Stream.of(ex.getStackTrace())
+                .filter(e -> e.getClassName().startsWith("nl.vpro"))
+                .filter(e -> ! e.getClassName().startsWith(MediaObject.class.getName()))
+                .filter(e -> ! e.getClassName().startsWith("nl.vpro.spring"))
+                .filter(e -> ! e.getClassName().startsWith("nl.vpro.services"))
+                .filter(e -> !e.getFileName().contains("generated"))
+                .map(StackTraceElement::toString)
+                .collect(Collectors.joining("\n   <-"));
+    }
+
+    private static String summarize(Thread t, Exception e) {
+        return t.toString() + ":" + summarizeStackTrace(e);
+
+    }
+     private static String summarize() {
+        return summarize(Thread.currentThread(), new Exception());
+
+    }
+
+    static class LockHolder {
+        final Object key;
+        final ReentrantLock lock;
+        final Exception cause;
+        final Thread thread;
+
+        private LockHolder(Object k, ReentrantLock lock, Exception cause) {
+            this.key = k;
+            this.lock = lock;
+            this.cause = cause;
+            this.thread = Thread.currentThread();
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            LockHolder holder = (LockHolder) o;
+
+            return key.equals(holder.key);
+        }
+
+        @Override
+        public int hashCode() {
+            return key.hashCode();
+        }
+
+        public String summarize() {
+            return key + ":" + MediaObjectLocker.summarize(this.thread, this.cause);
+        }
+
+        @Override
+        public String toString() {
+            return "holder:" + key;
         }
     }
 
