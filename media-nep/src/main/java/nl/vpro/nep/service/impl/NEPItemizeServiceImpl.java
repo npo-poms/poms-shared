@@ -56,7 +56,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Inject
     public NEPItemizeServiceImpl(
-        @Value("${nep.itemizer.baseUrl}") @Nonnull String itemizeUrl,
+        @Value("${nep.itemizer-api.baseUrl}") @Nonnull String itemizeUrl,
         @Named("NEPItemizeServiceAuthenticator") @Nonnull Supplier<String> itemizeKey) {
         this.itemizeKey = itemizeKey;
         this.itemizeUrl = itemizeUrl;

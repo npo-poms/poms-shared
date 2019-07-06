@@ -1,12 +1,10 @@
 package nl.vpro.i18n;
 
 import java.util.Locale;
-import java.util.MissingResourceException;
-import java.util.Objects;
-import java.util.ResourceBundle;
 
-import nl.vpro.com.neovisionaries.i18n.CountryCode;
-import nl.vpro.com.neovisionaries.i18n.LanguageCode;
+import org.meeuw.i18n.Region;
+import com.neovisionaries.i18n.CountryCode;
+import com.neovisionaries.i18n.LanguageCode;
 
 /**
  * @author Michiel Meeuwissen
@@ -45,31 +43,8 @@ public class Locales {
     }
 
 
-    public static String getCountryName(CountryCode code, Locale locale) {
-        if (code.getIso3166_2() != null) {
-            try {
-                ResourceBundle bundle = ResourceBundle.getBundle("CountryCode", locale);
-                return bundle.getString(code.getIso3166_2());
-            } catch(MissingResourceException mre) {
-                return code.getName();
-            }
-        }  else {
-            CountryCode byAlpha3 = null;
-            if (code.getAssignment() != CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
-                if (code.getAlpha3() != null) {
-                    for (CountryCode c : CountryCode.values()) {
-                        if (Objects.equals(code.getAlpha3(), c.getAlpha3()) && c.getAssignment() == CountryCode.Assignment.OFFICIALLY_ASSIGNED) {
-                            byAlpha3 = c;
-                            break;
-                        }
-                    }
-                }
-            }
-            if (byAlpha3 != null && byAlpha3 != code) {
-                return getCountryName(byAlpha3, locale);
-            }
-            return code.toLocale().getDisplayCountry(locale);
-        }
+    public static String getCountryName(Region country, Locale locale) {
+        return country.getName(locale);
     }
 
 }

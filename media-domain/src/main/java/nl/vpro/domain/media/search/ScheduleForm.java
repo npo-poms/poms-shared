@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.search;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
@@ -23,40 +25,38 @@ import nl.vpro.domain.media.ScheduleEvent;
     "channels"
 })
 @ToString
+@Getter
+@Setter
 public class ScheduleForm implements Predicate<ScheduleEvent> {
     private SchedulePager pager;
 
-    private DateRange dateRange;
+    /**
+     * A filter on the 'start' of the scheduleEvent
+     */
+    private InstantRange dateRange;
+
+    /**
+     * A filter on the 'guide day' of the scheduleEvent
+     */
+    private LocalDateRange guideDayRange;
 
     private List<Channel> channels;
 
 
-    private ScheduleForm() {
+    public ScheduleForm() {
     }
 
-    public ScheduleForm(SchedulePager pager, DateRange dateRange) {
+    @lombok.Builder
+    protected ScheduleForm(SchedulePager pager, InstantRange startRange, LocalDateRange guideDayRange, List<Channel> channels) {
         if(pager == null) {
             throw new IllegalArgumentException("Must supply a pager, got: null");
         }
         this.pager = pager;
-        this.dateRange = dateRange == null ? new DateRange() : dateRange;
-    }
-
-    public SchedulePager getPager() {
-        return pager;
-    }
-
-    public DateRange getDateRange() {
-        return dateRange;
-    }
-
-    public List<Channel> getChannels() {
-        return channels;
-    }
-
-    public void setChannels(List<Channel> channels) {
+        this.dateRange = startRange == null ? new InstantRange() : startRange;
+        this.guideDayRange = guideDayRange == null ? new LocalDateRange(): guideDayRange;
         this.channels = channels;
     }
+
 
     public boolean hasStart() {
         return dateRange != null && dateRange.getStartValue() != null;
@@ -73,6 +73,7 @@ public class ScheduleForm implements Predicate<ScheduleEvent> {
     @Override
     public boolean test(ScheduleEvent scheduleEvent) {
         return (dateRange == null || dateRange.test(scheduleEvent.getStartInstant()))
+            && (guideDayRange == null || guideDayRange.test(scheduleEvent.getGuideDate()))
             && (channels == null || channels.contains(scheduleEvent.getChannel()));
     }
 }

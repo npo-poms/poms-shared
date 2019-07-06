@@ -65,10 +65,10 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
     @Inject
     public NEPSSHJUploadServiceImpl(
-        @Value("${nep.transcode.sftp.host}") String sftpHost,
-        @Value("${nep.transcode.sftp.username}") String username,
-        @Value("${nep.transcode.sftp.password}") String password,
-        @Value("${nep.transcode.sftp.hostkey}") String hostKey
+        @Value("${nep.gatekeeper-upload.host}") String sftpHost,
+        @Value("${nep.gatekeeper-upload.username}") String username,
+        @Value("${nep.gatekeeper-upload.password}") String password,
+        @Value("${nep.gatekeeper-upload.hostkey}") String hostKey
     ) {
         this.sftpHost = sftpHost;
         this.username = username;

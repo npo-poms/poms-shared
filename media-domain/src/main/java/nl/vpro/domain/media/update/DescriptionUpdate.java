@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -31,21 +33,17 @@ public class DescriptionUpdate implements TypedText {
 
     private MediaUpdate media;
 
-    public DescriptionUpdate() {
+    private DescriptionUpdate() {
+        // needed by jaxb
     }
 
-    public DescriptionUpdate(String description, TextualType type) {
+
+    public DescriptionUpdate(@Nullable String description, @Nonnull TextualType type) {
         this.value = description;
         this.type = type;
     }
 
-    DescriptionUpdate(String description, TextualType type, MediaUpdate media) {
-        this(description, type);
-        this.media = media;
-    }
-
-
-    public static DescriptionUpdate of(TypedText to) {
+    public static DescriptionUpdate of(@Nonnull TypedText to) {
         return new DescriptionUpdate(to.get(), to.getType());
     }
 

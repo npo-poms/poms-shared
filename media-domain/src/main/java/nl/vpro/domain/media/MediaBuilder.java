@@ -533,6 +533,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
+
+    default B geoLocations(GeoLocations... geoLocations) {
+        return geoLocations(Arrays.asList(geoLocations));
+    }
+
+    default B geoLocations(Collection<GeoLocations> geoLocations) {
+        geoLocations.forEach(geos -> mediaObject().addGeoLocations(geos));
+        return (B)this;
+    }
+
     default B intentions(Intentions... intentions) {
         return intentions(Arrays.asList(intentions));
     }
@@ -1002,7 +1012,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
                 mediaObject().getPredictions().clear();
             } else {
                 for(Prediction pred : predictions) {
-                    pred.setMediaObject(mediaObject);
+                    pred.setParent(mediaObject);
                     mediaObject().getPredictions().add(pred);
                 }
             }

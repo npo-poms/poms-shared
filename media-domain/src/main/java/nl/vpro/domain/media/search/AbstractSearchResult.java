@@ -27,14 +27,14 @@ public abstract class AbstractSearchResult<T> implements SearchResult<T> {
 
     @Getter
     @Setter
-    protected Integer count;
+    protected Long count;
 
     protected List<T> result;
 
     public AbstractSearchResult() {
     }
 
-    protected AbstractSearchResult(final Integer count, final List<T> result) {
+    protected AbstractSearchResult(final Long  count, final List<T> result) {
         this.count = count;
         this.result = Collections.unmodifiableList(result);
     }
@@ -46,7 +46,7 @@ public abstract class AbstractSearchResult<T> implements SearchResult<T> {
 
     public final void setResult(List<T> l) {
         this.result = Collections.unmodifiableList(l);
-        this.count = l.size();
+        this.count = (long) l.size();
     }
 
 

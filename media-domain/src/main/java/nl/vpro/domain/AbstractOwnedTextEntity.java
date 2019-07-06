@@ -40,15 +40,9 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity,
     @XmlTransient
     private Long id;
 
-    @SuppressWarnings("NullableProblems")
-    @ManyToOne
-    @NotNull
-    private P parent;
-
-    protected AbstractOwnedTextEntity(P parent, String value, OwnerType owner, TextualType type) {
+    protected AbstractOwnedTextEntity(String value, OwnerType owner, TextualType type) {
         super(owner, type);
         this.value = value;
-        this.parent = parent;
     }
 
     protected AbstractOwnedTextEntity() {
@@ -73,13 +67,10 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity,
         this.id = id;
     }
 
-    public P getParent() {
-        return parent;
-    }
+    public abstract P getParent();
 
-    public void setParent(P  parent) {
-        this.parent = parent;
-    }
+    public abstract  void setParent(P  parent);
+
 
     @SuppressWarnings({"unchecked", "ConstantConditions"})
     @Override
@@ -89,8 +80,9 @@ public abstract class AbstractOwnedTextEntity<T extends AbstractOwnedTextEntity,
             if (ownedTextEntity.id != null && id != null) {
                 return Objects.equals(ownedTextEntity.id, id);
             } else {
-                if (ownedTextEntity.parent != null && parent != null) {
-                    if (!Objects.equals(ownedTextEntity.parent, parent)) {
+                P parent = getParent();
+                if (ownedTextEntity.getParent() != null && parent != null) {
+                    if (!Objects.equals(ownedTextEntity.getParent(), parent)) {
                         // different parents, we require equals value too!
                         if (!Objects.equals(ownedTextEntity.value, value)) {
                             return false;
