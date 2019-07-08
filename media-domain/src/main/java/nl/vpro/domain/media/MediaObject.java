@@ -1227,24 +1227,26 @@ public abstract class MediaObject
         }
     }
 
-    public MediaObject addGeoLocation(@Nonnull GeoLocation newGeoLocation, @Nonnull OwnerType owner) {
+    public boolean addGeoLocation(@Nonnull GeoLocation newGeoLocation, @Nonnull OwnerType owner) {
+        boolean isAdded = false;
         if(this.geoLocations == null) {
             this.geoLocations = new TreeSet<>();
         }
-        if(!geoLocations.contains(newGeoLocation)) {
-            Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
-            if (match.isPresent()) {
-                newGeoLocation.setParent(match.get());
-                match.get().getValues().add(newGeoLocation);
-            } else {
-                final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
-                geoLocations.setParent(this);
-                newGeoLocation.setParent(geoLocations);
-                geoLocations.getValues().add(newGeoLocation);
-                this.geoLocations.add(geoLocations);
-            }
+        Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
+        if (match.isPresent() && match.get().getValues().contains(newGeoLocation))
+            return false;
+
+        if (match.isPresent()) {
+            newGeoLocation.setParent(match.get());
+            isAdded = match.get().getValues().add(newGeoLocation);
+        } else {
+            final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
+            geoLocations.setParent(this);
+            newGeoLocation.setParent(geoLocations);
+            geoLocations.getValues().add(newGeoLocation);
+            isAdded = this.geoLocations.add(geoLocations);
         }
-        return this;
+        return isAdded;
     }
 
     public MediaObject addGeoLocations(@Nonnull GeoLocations newGeoLocations) {
@@ -1274,8 +1276,8 @@ public abstract class MediaObject
         return false;
     }
 
-    public List<GeoLocation> findGeoLocation(@Nonnull Long id,@Nonnull OwnerType owner){
-        final List<GeoLocation> empty = new ArrayList<>();
+    public Optional<GeoLocation> findGeoLocation(@Nonnull Long id,@Nonnull OwnerType owner){
+        final Optional<GeoLocation> empty = Optional.empty();
         if (geoLocations.isEmpty()) {
             return empty;
         }
@@ -1285,13 +1287,11 @@ public abstract class MediaObject
                 .findAny().map(o -> o.getValues());
 
         if(maybeValues.isPresent()) {
-            final Optional<GeoLocation> locationFound = maybeValues.get().stream().filter(
+            final Optional<GeoLocation> maybeLocationFound = maybeValues.get().stream().filter(
                     v -> id.equals(v.getId())
             ).findAny();
 
-            if(locationFound.isPresent()){
-                return maybeValues.get();
-            }
+            return maybeLocationFound;
         }
         return empty;
 

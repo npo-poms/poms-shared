@@ -16,7 +16,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 
 public class RelationFacetListTest {
 
@@ -41,7 +41,7 @@ public class RelationFacetListTest {
             "</local:relationFacetList>");
 
         assertThat(list.facets).isNotEmpty();
-        assertTrue(list.facets.get(0).getSubSearch() != null);
+        assertNotNull(list.facets.get(0).getSubSearch());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class RelationFacetListTest {
         list = Jackson2TestUtil.roundTripAndSimilar(list, "{\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation\",\"subSearch\":{\"broadcasters\":\"VPRO\"}}");
 
         assertThat(list.facets).hasSize(1);
-        assertTrue(list.facets.get(0).getSubSearch() != null);
+        assertNotNull(list.facets.get(0).getSubSearch());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class RelationFacetListTest {
         list = Jackson2Mapper.getInstance().readValue(new StringReader(actual), RelationFacetList.class);
 
         assertThat(list.facets).hasSize(2);
-        assertTrue(list.facets.get(0).getSubSearch() != null);
+        assertNotNull(list.facets.get(0).getSubSearch());
     }
 
     @Test
@@ -113,7 +113,7 @@ public class RelationFacetListTest {
 
         assertThat(list.facets).hasSize(2);
         assertThat(list.getFilter()).isNotNull();
-        assertTrue(list.facets.get(0).getSubSearch() != null);
+        assertNotNull(list.facets.get(0).getSubSearch());
     }
 
 
@@ -184,12 +184,12 @@ public class RelationFacetListTest {
 
         assertThat(list.facets).hasSize(1);
         assertThat(list.getFilter()).isNull();
-        assertTrue(list.getSubSearch() != null);
+        assertNotNull(list.getSubSearch());
         assertThat(list.getSubSearch().getBroadcasters().get(0).getValue()).isEqualTo("VPRO");
         assertThat(list.getSubSearch().getBroadcasters().get(0).getMatch()).isEqualTo(Match.SHOULD);
         assertThat(list.getSubSearch().getBroadcasters().get(1).getValue()).isEqualTo("EO");
         assertThat(list.getSubSearch().getBroadcasters().get(1).getMatch()).isEqualTo(Match.NOT);
-        assertTrue(list.getFacets().get(0).getSubSearch() != null);
+        assertNotNull(list.getFacets().get(0).getSubSearch());
         assertThat(list.getFacets().get(0).getSubSearch().getBroadcasters().get(0).getValue()).isEqualTo("VPRO");
         assertThat(list.getFacets().get(0).getSubSearch().getBroadcasters().get(0).getMatch()).isEqualTo(Match.MUST);
         assertThat(list.getFacets().get(0).getSubSearch().getBroadcasters().get(1).getValue()).isEqualTo("EO");
