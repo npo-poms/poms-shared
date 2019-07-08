@@ -3,6 +3,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.StringReader;
 import java.time.Instant;
 import java.util.*;
@@ -29,6 +31,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.Assert.assertEquals;
 
 @SuppressWarnings("deprecation")
+@Slf4j
 public class MediaObjectTest {
 
     @BeforeClass
@@ -318,6 +321,29 @@ public class MediaObjectTest {
     }
 
     @Test
+    public void testLanguageWithCountryValidation() {
+        Program p = new Program();
+        p.setType(ProgramType.BROADCAST);
+        p.setAVType(AVType.MIXED);
+        p.addTitle("title", OwnerType.BROADCASTER, TextualType.MAIN);
+        p.setLanguages(Arrays.asList(Locales.NETHERLANDISH, new Locale("nl", "XX")));
+
+        List<ConstraintViolation<Program>> constraintViolations = new ArrayList<>(validator.validate(p));
+        Comparator<ConstraintViolation<Program>> comparing = Comparator.comparing(c -> c.getPropertyPath().toString());
+        constraintViolations.sort(comparing.thenComparing(ConstraintViolation::getMessageTemplate)
+
+        );
+
+
+        assertThat(constraintViolations.get(0).getMessageTemplate()).startsWith("{org.meeuw.i18n.validation.language.message}");
+        assertThat(constraintViolations.get(0).getMessage()).isEqualTo("nl_XX is an invalid ISO 639 language code");
+         assertThat(constraintViolations.get(1).getMessageTemplate()).startsWith("{org.meeuw.i18n.validation.region.message}");
+        assertThat(constraintViolations.get(1).getMessage()).isEqualTo("nl_XX is not a valid region");
+        assertThat(constraintViolations).hasSize(2);
+
+    }
+
+    @Test
     public void testRelationValidation() {
         Relation r = new Relation(new RelationDefinition("AAAA", "a", "a"));
         r.setUriRef(":");
@@ -328,6 +354,8 @@ public class MediaObjectTest {
 
         Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
         assertThat(constraintViolations).hasSize(1);
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("must contain a valid URI (: isn't)");
+        log.info("{}", constraintViolations);
     }
 
     @Test

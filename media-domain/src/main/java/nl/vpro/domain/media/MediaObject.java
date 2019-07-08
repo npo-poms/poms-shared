@@ -20,6 +20,7 @@ import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -63,6 +64,7 @@ import nl.vpro.util.DateUtils;
 import nl.vpro.util.ResortedSortedSet;
 import nl.vpro.util.SortedSetSameElementWrapper;
 import nl.vpro.util.TriFunction;
+import nl.vpro.validation.CRID;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.FalseToNullAdapter;
@@ -79,6 +81,7 @@ import static nl.vpro.domain.media.support.Ownables.containsDuplicateOwner;
  *
  * @author roekoe
  */
+@SuppressWarnings("WSReferenceInspection")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable
@@ -263,7 +266,7 @@ public abstract class MediaObject
     // TODO cache configuration can be put in a hibernate-config.xml. See
     // https://docs.jboss.org/hibernate/orm/4.0/devguide/en-US/html/ch06.html
     @StringList(maxLength = 255)
-    protected List<String> crids;
+    protected List<@NotNull @CRID  String> crids;
 
     @ManyToMany
     @OrderColumn(name = "list_index",
@@ -272,19 +275,19 @@ public abstract class MediaObject
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Size(min = 0, message = "{nl.vpro.constraints.Size.min}") // komt soms voor
                                                                 // bij imports.
-    protected List<Broadcaster> broadcasters;
+    protected List<@NotNull Broadcaster> broadcasters;
 
     @ManyToMany
     @OrderColumn(name = "list_index", nullable = false)
-    // @Valid
+    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<Portal> portals;
+    protected List<@NotNull  Portal> portals;
 
     @ManyToMany
     @OrderColumn(name = "list_index", nullable = false)
-    // @Valid
+    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<ThirdParty> thirdParties;
+    protected List<@NotNull  ThirdParty> thirdParties;
 
     @OneToMany(cascade = ALL, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id")
@@ -292,7 +295,7 @@ public abstract class MediaObject
     @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
             + "and (stop is null or stop > now())")
     @Valid
-    protected List<PortalRestriction> portalRestrictions;
+    protected List<@NotNull PortalRestriction> portalRestrictions;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "mediaobject_id")
@@ -300,7 +303,7 @@ public abstract class MediaObject
     @Filter(name = PUBLICATION_FILTER, condition = "(start is null or start <= now()) "
             + "and (stop is null or stop > now())")
     @Valid
-    protected Set<GeoRestriction> geoRestrictions;
+    protected Set<@NotNull GeoRestriction> geoRestrictions;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade = {ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -308,25 +311,25 @@ public abstract class MediaObject
     // hibernates on merge first merges an object without titles.
     @Size.List({ @Size(min = 1, message = "{nl.vpro.constraints.collection.Size.min}"), })
     @Valid
-    protected Set<Title> titles;
+    protected Set<@NotNull Title> titles;
 
     @OneToMany(mappedBy = "parent", orphanRemoval = true, cascade=ALL)
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected Set<Description> descriptions;
+    protected Set<@NotNull Description> descriptions;
 
     @ManyToMany(cascade = {ALL})
     @SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected Set<Genre> genres;
+    protected Set<@NotNull Genre> genres;
 
     @ManyToMany(cascade = {ALL})
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @JoinTable(foreignKey = @ForeignKey(name = "fk_mediaobject_tag__mediaobject"), inverseForeignKey = @ForeignKey(name = "fk_mediaobject_tag__tag"))
-    protected Set<Tag> tags;
+    protected Set<@NotNull Tag> tags;
 
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
@@ -338,7 +341,7 @@ public abstract class MediaObject
     @JsonProperty("intentions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<Intentions> intentions;
+    protected SortedSet<@NotNull Intentions> intentions;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
@@ -349,7 +352,7 @@ public abstract class MediaObject
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<TargetGroups> targetGroups;
+    protected SortedSet<@NotNull TargetGroups> targetGroups;
 
     protected String source;
 
@@ -371,7 +374,9 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     protected List<
-        @Language(mayContainCountry = false)
+        @ValidRegion(classes = {Country.class})
+        @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
+        @Language(mayContainCountry = true)
         @NotNull Locale> languages;
 
     @Enumerated(EnumType.STRING)
@@ -394,7 +399,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected List<Person> persons;
+    protected List<@NotNull Person> persons;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
@@ -405,14 +410,14 @@ public abstract class MediaObject
     @JsonProperty("geoLocations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
-    protected SortedSet<GeoLocations> geoLocations;
+    protected SortedSet<@NotNull GeoLocations> geoLocations;
 
     @ElementCollection
     @JoinTable(name = "mediaobject_awards")
     @OrderColumn(name = "list_index", nullable = false)
     @Column(name = "awards")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected List<String> awards;
+    protected List<@NotNull String> awards;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinTable(name = "mediaobject_memberof", inverseJoinColumns = @JoinColumn(name = "id"))
@@ -432,7 +437,7 @@ public abstract class MediaObject
                     + "or 0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = mediaobjec2_.id and o.broadcasters_id in (:broadcasters)))"),
             @FilterJoinTable(name = DELETED_FILTER, condition = "(mediaobjec2_.workflow NOT IN ('FOR_DELETION', 'DELETED') and (mediaobjec2_.mergedTo_id is null))") })
     @Valid
-    protected Set<MemberRef> memberOf;
+    protected Set<@NotNull MemberRef> memberOf;
 
     @Enumerated(EnumType.STRING)
     @NotNull(groups = { WarningValidatorGroup.class })
@@ -442,13 +447,15 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Enumerated(value = EnumType.STRING)
-    protected List<ContentRating> contentRatings;
+    protected List<@NotNull ContentRating> contentRatings;
 
     @ElementCollection
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @StringList(maxLength = 255)
-    protected List<String> email;
+    protected List<
+        @NotNull
+        @Email String> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -458,7 +465,7 @@ public abstract class MediaObject
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected List<Website> websites;
+    protected List<@NotNull Website> websites;
 
     @OneToMany(cascade = ALL, targetEntity = TwitterRef.class, orphanRemoval = true)
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -468,7 +475,7 @@ public abstract class MediaObject
     )
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected List<TwitterRef> twitterRefs;
+    protected List<@NotNull TwitterRef> twitterRefs;
 
     protected Short teletext;
 
@@ -498,7 +505,7 @@ public abstract class MediaObject
 
     )
     @Valid
-    protected Set<Location> locations;
+    protected Set<@NotNull Location> locations;
 
 
     /**
@@ -516,14 +523,14 @@ public abstract class MediaObject
     // Caching doesn't work proprerly because ScheduleEventRepository may touch this
     // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected Set<ScheduleEvent> scheduleEvents;
+    protected Set<@NotNull ScheduleEvent> scheduleEvents;
 
     @OneToMany(orphanRemoval = true, cascade= {ALL})
     @JoinColumn(name = "mediaobject_id", updatable = false, nullable = false)
-    @Valid
     @SortNatural
+    @Valid
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    protected Set<Relation> relations;
+    protected Set<@NotNull Relation> relations;
 
     @OneToMany(
         orphanRemoval = true,
@@ -541,7 +548,7 @@ public abstract class MediaObject
     // @Field(name = "images", store=Store.YES, analyze = Analyze.NO,
     // bridge = @FieldBridge(impl = JsonBridge.class, params = @Parameter(name =
     // "class", value = "[Lnl.vpro.domain.media.support.Image;")))
-    protected List<Image> images;
+    protected List<@NotNull Image> images;
 
     @Column(nullable = false)
     @JsonIgnore // Oh Jackson2...
