@@ -62,11 +62,11 @@ public class AuthorizedDuration implements Serializable, TemporalAmount {
     private java.time.Duration duration;
 
     public static AuthorizedDuration of(long amount, ChronoUnit unit) {
-        return new AuthorizedDuration(java.time.Duration.of(amount, unit));
+        return of(java.time.Duration.of(amount, unit));
     }
 
     public static AuthorizedDuration ofMillis(long amount) {
-        return new AuthorizedDuration(java.time.Duration.ofMillis(amount));
+        return of(java.time.Duration.ofMillis(amount));
     }
 
     public static AuthorizedDuration of(java.time.Duration duration) {
