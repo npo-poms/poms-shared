@@ -28,6 +28,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -63,7 +64,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     }
 
     protected NEPItemizeServiceImpl(Properties properties) {
-        this(properties.getProperty("nep.itemizer.baseUrl"), () -> properties.getProperty("nep.itemizer.key"));
+        this(properties.getProperty("nep.itemizer-api.baseUrl"), () -> properties.getProperty("nep.itemizer-api.key"));
     }
 
 
@@ -76,7 +77,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Override
     @SneakyThrows
-    public NEPItemizeResponse itemize(NEPItemizeRequest request) {
+    public NEPItemizeResponse itemize(@NonNull  NEPItemizeRequest request) {
         String playerUrl = itemizeUrl + "/api/itemizer/job";
         log.info("Itemizing {} @ {}", request, playerUrl);
         HttpClientContext clientContext = HttpClientContext.create();
@@ -101,7 +102,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Override
     @SneakyThrows
-    public void grabScreen(String identifier, String time, OutputStream outputStream) {
+    public void grabScreen(@NonNull String identifier, @NonNull String time, @NonNull  OutputStream outputStream) {
         HttpClientContext clientContext = HttpClientContext.create();
         String framegrabber = itemizeUrl + "/api/framegrabber?identifier=" + identifier + "&time=" + time;
         HttpGet get = new HttpGet(framegrabber);
