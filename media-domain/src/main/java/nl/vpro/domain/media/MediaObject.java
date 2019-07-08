@@ -79,7 +79,6 @@ import static nl.vpro.domain.media.support.Ownables.containsDuplicateOwner;
  *
  * @author roekoe
  */
-@SuppressWarnings("WSReferenceInspection")
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Cacheable
@@ -1211,7 +1210,6 @@ public abstract class MediaObject
         return geoLocations;
     }
 
-    @SuppressWarnings("unchecked")
     public void setGeoLocations(@Nonnull SortedSet<GeoLocations> newGeoLocations) {
 
         if (containsDuplicateOwner(newGeoLocations)) {
@@ -1228,7 +1226,7 @@ public abstract class MediaObject
     }
 
     public boolean addGeoLocation(@Nonnull GeoLocation newGeoLocation, @Nonnull OwnerType owner) {
-        boolean isAdded = false;
+        boolean isAdded;
         if(this.geoLocations == null) {
             this.geoLocations = new TreeSet<>();
         }
@@ -1240,7 +1238,7 @@ public abstract class MediaObject
             newGeoLocation.setParent(match.get());
             isAdded = match.get().getValues().add(newGeoLocation);
         } else {
-            final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<GeoLocation>()).build();
+            final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<>()).build();
             geoLocations.setParent(this);
             newGeoLocation.setParent(geoLocations);
             geoLocations.getValues().add(newGeoLocation);
@@ -1268,7 +1266,7 @@ public abstract class MediaObject
 
         final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
                 .filter(owned -> owned.getOwner().equals(owner))
-                .findAny().map(o -> o.getValues());
+                .findAny().map(GeoLocations::getValues);
 
         if(maybeValues.isPresent()) {
             return maybeValues.get().remove(geoLocation);
@@ -1284,7 +1282,7 @@ public abstract class MediaObject
 
         final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
                 .filter(owned -> owned.getOwner().equals(owner))
-                .findAny().map(o -> o.getValues());
+                .findAny().map(GeoLocations::getValues);
 
         if(maybeValues.isPresent()) {
             final Optional<GeoLocation> maybeLocationFound = maybeValues.get().stream().filter(
@@ -1306,7 +1304,6 @@ public abstract class MediaObject
         return intentions;
     }
 
-    @SuppressWarnings("unchecked")
     public void setIntentions(SortedSet<Intentions> newIntentions) {
         if (newIntentions == null) {
             this.intentions = null;
@@ -1348,7 +1345,6 @@ public abstract class MediaObject
         return targetGroups;
     }
 
-    @SuppressWarnings("unchecked")
     public void setTargetGroups(SortedSet<TargetGroups> newTargetGroups) {
 
         if (newTargetGroups == null){
