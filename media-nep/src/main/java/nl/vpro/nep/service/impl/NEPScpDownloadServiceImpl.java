@@ -86,10 +86,10 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     protected NEPScpDownloadServiceImpl(Properties properties) {
         this(
-            properties.getProperty("nep.sftp.host"),
-            properties.getProperty("nep.sftp.username"),
-            properties.getProperty("nep.sftp.password"),
-            properties.getProperty("nep.sftp.hostkey"),
+            properties.getProperty("nep.itemizer-download.host"),
+            properties.getProperty("nep.itemizer-download.username"),
+            properties.getProperty("nep.itemizer-download.password"),
+            properties.getProperty("nep.itemizer-download.hostkey"),
             true,
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
             Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass")
