@@ -10,7 +10,7 @@ import javax.validation.ValidatorFactory;
 
 public class ValidationTestHelper {
 
-    public static Validator validator;
+    public static final Validator validator;
 
     static {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();

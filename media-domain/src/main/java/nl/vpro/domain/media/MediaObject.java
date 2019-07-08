@@ -35,6 +35,7 @@ import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.persistence.RegionToStringConverter;
+import org.meeuw.i18n.validation.Language;
 import org.meeuw.i18n.validation.ValidRegion;
 
 import com.fasterxml.jackson.annotation.*;
@@ -62,7 +63,6 @@ import nl.vpro.util.DateUtils;
 import nl.vpro.util.ResortedSortedSet;
 import nl.vpro.util.SortedSetSameElementWrapper;
 import nl.vpro.util.TriFunction;
-import nl.vpro.validation.Language;
 import nl.vpro.validation.StringList;
 import nl.vpro.validation.WarningValidatorGroup;
 import nl.vpro.xml.bind.FalseToNullAdapter;
@@ -358,18 +358,22 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Convert(converter = RegionToStringConverter.class)
-    @ValidRegion(classes = {Country.class}, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
-    @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
-    protected List<org.meeuw.i18n.Region> countries;
+    protected List<
+        // valid are countries (further validated by @ValidCountry), and a list of codes.
+        org.meeuw.i18n.
+        @ValidRegion(classes = {Country.class}, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
+        @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
+        @NotNull Region> countries;
+
 
     @ElementCollection
     @Column(length = 10)
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Language
-    protected List<Locale> languages;
+    protected List<
+        @Language(mayContainCountry = false)
+        @NotNull Locale> languages;
 
-    @SuppressWarnings("NullableProblems")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
@@ -430,7 +434,6 @@ public abstract class MediaObject
     @Valid
     protected Set<MemberRef> memberOf;
 
-    @SuppressWarnings("NullableProblems")
     @Enumerated(EnumType.STRING)
     @NotNull(groups = { WarningValidatorGroup.class })
     protected AgeRating ageRating;
@@ -1831,7 +1834,6 @@ public abstract class MediaObject
         return ageRating;
     }
 
-    @SuppressWarnings("ConstantConditions")
     public void setAgeRating(AgeRating ageRating) {
         if (this.ageRating != ageRating) {
             this.locationAuthorityUpdate = true;

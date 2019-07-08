@@ -10,13 +10,13 @@ import java.util.*;
 import javax.validation.ConstraintViolation;
 import javax.xml.bind.JAXB;
 
-import nl.vpro.domain.media.gtaa.GTAARecord;
 import org.assertj.core.api.Assertions;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
@@ -33,6 +33,7 @@ public class MediaObjectTest {
 
     @BeforeClass
     public static void init() {
+        //Locale.setDefault(Locales.DUTCH);
         Locale.setDefault(Locale.US);
     }
 
@@ -309,9 +310,10 @@ public class MediaObjectTest {
         p.setLanguages(Arrays.asList(new Locale("ZZ"), Locales.DUTCH));
 
         Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
+
+        assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{org.meeuw.i18n.validation.language.message}");
+        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("zz is an invalid ISO 639 language code");
         assertThat(constraintViolations).hasSize(1);
-        assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{nl.vpro.constraints.language}");
-        assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("[zz, nl] contains an invalid ISO 639 language code: zz");
 
     }
 
