@@ -25,6 +25,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public abstract class AbstractSearchResult<T> implements SearchResult<T> {
 
+    /**
+     * The total number of results (when no pager would have been applied)
+     */
     @Getter
     @Setter
     protected Long count;
