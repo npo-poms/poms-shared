@@ -56,4 +56,8 @@ public abstract class Pager<S extends SortField> {
         return getSort().name();
     }
 
+    public boolean hasOffset() {
+        return offset != null && offset != 0;
+    }
+
 }
