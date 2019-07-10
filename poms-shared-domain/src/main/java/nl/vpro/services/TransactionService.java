@@ -9,6 +9,9 @@ import javax.annotation.Nonnull;
 
 /**
  * Please note that transactions are only rolled back in case of a runtime exception
+ *
+ * Also note that in new transactions the currently existing hibernate filters will be gone.
+ *
  * @author Danny Sedney
  */
 public interface TransactionService {
