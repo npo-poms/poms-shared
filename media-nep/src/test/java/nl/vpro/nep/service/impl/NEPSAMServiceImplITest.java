@@ -28,6 +28,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
         null,
         null,
         null,
+        null,
         authenticator
     );
 
@@ -38,7 +39,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
     @Test
     public void streamUrlForMid() {
-        String streamUrl = impl.streamAccess("POW_04146689", createStreamAccessItem("145.58.169.92", null));
+        String streamUrl = impl.streamAccess("POW_04146689", false, createStreamAccessItem("145.58.169.92", null));
         log.info("{}", streamUrl);
 
     }
@@ -46,7 +47,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
     @Test
     public void streamUrlForLive() {
-        String streamUrl = impl.streamAccess("npo1", createStreamAccessItem("145.58.169.92", Duration.ofHours(24)));
+        String streamUrl = impl.streamAccess("npo1", true, createStreamAccessItem("145.58.169.92", Duration.ofHours(24)));
         log.info("{}", streamUrl);
 
     }

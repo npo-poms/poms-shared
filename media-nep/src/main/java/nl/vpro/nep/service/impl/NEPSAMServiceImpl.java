@@ -34,7 +34,8 @@ public class NEPSAMServiceImpl implements NEPSAMService {
 
     private String provider = "npo";
     private String platform = "npo";
-    private String profile = "dash";
+    private String drmProfile = "dash";
+    private String noDrmProfile = "dash";
 
 
     final Supplier<String> authenticator;
@@ -42,7 +43,6 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     final String baseUrl;
 
     private Duration connectTimeout = Duration.ofMillis(1000);
-    private Duration connectionRequestTimeout =  Duration.ofMillis(1000);
     private Duration socketTimeout = Duration.ofMillis(1000);
 
     Client httpClient = null;
@@ -53,22 +53,26 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         @Value("${nep.sam-api.baseUrl}") @Nonnull String baseUrl,
         @Value("${nep.sam-api.provider}") String provider,
         @Value("${nep.sam-api.platform}") String platform,
-        @Value("${nep.sam-api.profile}") String profile,
+        @Value("${nep.sam-api.profile.drm}") String drmProfile,
+        @Value("${nep.sam-api.profile.nodrm}") String noDrmProfile,
         @Named("NEPSAMAuthenticator") @Nonnull Supplier<String> authenticator) {
         this.authenticator = authenticator;
         this.baseUrl = baseUrl;
         this.provider = provider == null ? this.provider : provider;
         this.platform = platform == null ? this.platform : platform;
-        this.profile = profile == null ? this.profile : profile;
+        this.drmProfile = drmProfile == null ? this.drmProfile: drmProfile;
+        this.noDrmProfile = noDrmProfile == null ? this.noDrmProfile: noDrmProfile;
     }
 
 
 
     @Override
     @SneakyThrows
-    public String streamAccess(String streamId, StreamAccessItem request) {
+    public String streamAccess(String streamId, boolean drm, StreamAccessItem request) {
         AccessApi streamApi = getStreamApi();
-        StreamAccessResponseItem streamAccessResponseItem = streamApi.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(provider, platform, profile, streamId, request);
+        String profile = drm ? drmProfile : noDrmProfile;
+        log.info("Using profile " + profile);
+        StreamAccessResponseItem streamAccessResponseItem = streamApi.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(provider, platform,  profile, streamId, request);
         Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
         return (String) attributes.get("url");
     }
