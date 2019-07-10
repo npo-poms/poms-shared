@@ -30,11 +30,14 @@ public class ErrorTest {
 
     @Test
     public void jsonWithPredicate() {
-        Error error = new Error(404, "bla");
+        Error error = new Error(404, new RuntimeException("bla"));
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
+        error.causeString("cause");
         assertThatJson(error).isSimilarTo("{\n" +
             "  \"status\" : 404,\n" +
             "  \"message\" : \"bla\",\n" +
+            "  \"classes\" : [ \"java.lang.RuntimeException\", \"java.lang.Exception\", \"java.lang.Throwable\", \"java.io.Serializable\" ],\n" +
+            "   \"cause\" : \"cause\",\n" +
             "  \"testResult\" : {\n" +
             "    \"reason\" : \"And\",\n" +
             "    \"applies\" : false,\n" +
