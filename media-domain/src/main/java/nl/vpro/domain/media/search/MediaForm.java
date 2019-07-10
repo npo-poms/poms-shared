@@ -6,7 +6,6 @@ package nl.vpro.domain.media.search;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Singular;
 import lombok.ToString;
 
 import java.util.ArrayList;
@@ -21,12 +20,8 @@ import javax.xml.bind.annotation.*;
 import org.apache.commons.lang.StringUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.Channel;
-import nl.vpro.domain.media.MediaType;
-import nl.vpro.domain.media.Net;
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.domain.user.Organization;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -260,7 +255,7 @@ public class MediaForm {
         Collection<String> broadcasters,
         Collection<String> portals,
         String text,
-        @Singular Collection<MediaType> types,
+        Collection<MediaType> types,
         Boolean noBroadcast,
         Boolean hasLocations,
         Boolean noPlaylist,
