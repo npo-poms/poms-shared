@@ -116,8 +116,8 @@ public class NEPServiceImpl implements NEPService {
     }
 
     @Override
-    public String streamAccess(String streamId, StreamAccessItem streamUrlRequest) {
-        return samService.get().streamAccess(streamId, streamUrlRequest);
+    public String streamAccess(String streamId, boolean drm, StreamAccessItem streamUrlRequest) {
+        return samService.get().streamAccess(streamId, drm, streamUrlRequest);
     }
 
     @Override

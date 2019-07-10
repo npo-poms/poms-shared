@@ -17,7 +17,7 @@ public interface NEPSAMService {
 
 
 
-    String streamAccess(String streamId, StreamAccessItem streamUrlRequest);
+    String streamAccess(String streamId, boolean drm, StreamAccessItem streamUrlRequest);
 
 
     static StreamAccessItem createStreamAccessItem(String ip, Duration duration) {
