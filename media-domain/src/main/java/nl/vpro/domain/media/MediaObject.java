@@ -455,7 +455,7 @@ public abstract class MediaObject
     @StringList(maxLength = 255)
     protected List<
         @NotNull
-        @Email String> email;
+        @Email(message = "{nl.vpro.constraints.Email.message}") String> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
