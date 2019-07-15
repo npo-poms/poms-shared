@@ -194,6 +194,10 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this(channel, null, guideDay, start, duration, null);
     }
 
+     public ScheduleEvent(Channel channel, LocalDateTime start, Duration duration) {
+        this(channel, null, Schedule.guideDay(start), start.atZone(Schedule.ZONE_ID).toInstant(), duration, null);
+    }
+
     public ScheduleEvent(Channel channel, Net net, LocalDate guideDay, Instant start, Duration duration) {
         this(channel, net, guideDay, start, duration, null);
     }
