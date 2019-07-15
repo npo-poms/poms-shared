@@ -215,8 +215,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     List<ContentRating> contentRatings;
 
-    List<@Email String> email;
+    List<@Email(message = "{nl.vpro.constraints.Email.message}") String> email;
 
+    
     protected List<ImageUpdate> images;
 
     /**
