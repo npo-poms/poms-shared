@@ -14,8 +14,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.CRC32;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.*;
@@ -30,6 +28,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import org.meeuw.i18n.RegionService;
@@ -38,7 +38,6 @@ import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.persistence.RegionToStringConverter;
 import org.meeuw.i18n.validation.Language;
 import org.meeuw.i18n.validation.ValidRegion;
-
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -382,7 +381,7 @@ public abstract class MediaObject
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
-    protected AVType avType;
+    protected AVType avType = AVType.MIXED;
 
     @OneToOne(orphanRemoval = true, cascade = {ALL})
     protected AVAttributes avAttributes;
@@ -439,6 +438,7 @@ public abstract class MediaObject
     @Valid
     protected Set<@NotNull MemberRef> memberOf;
 
+    @SuppressWarnings("NullableProblems")
     @Enumerated(EnumType.STRING)
     @NotNull(groups = { WarningValidatorGroup.class })
     protected AgeRating ageRating;
@@ -455,7 +455,7 @@ public abstract class MediaObject
     @StringList(maxLength = 255)
     protected List<
         @NotNull
-        @Email(message = "{nl.vpro.constraints.Email.message}") String> email;
+        @Email(message = "{nl.vpro.constraints.Email.message}", groups = {}) String> email;
 
     @OneToMany(targetEntity = Website.class, orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "mediaobject_id", nullable = true)
@@ -1076,7 +1076,7 @@ public abstract class MediaObject
     }
 
     @Override
-    public MediaObject addTitle(@Nonnull String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+    public MediaObject addTitle(@NonNull String title, @NonNull OwnerType owner, @NonNull TextualType type) {
         final Title existingTitle = findTitle(owner, type);
         if (existingTitle != null) {
             existingTitle.set(title);
@@ -1151,7 +1151,7 @@ public abstract class MediaObject
     }
 
     @Override
-    public MediaObject addDescription(@Nullable String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+    public MediaObject addDescription(@Nullable String description, @NonNull OwnerType owner, @NonNull TextualType type) {
         if (description != null) {
             final Description existingDescription = findDescription(owner, type);
 
@@ -1220,7 +1220,7 @@ public abstract class MediaObject
         return geoLocations;
     }
 
-    public void setGeoLocations(@Nonnull SortedSet<GeoLocations> newGeoLocations) {
+    public void setGeoLocations(@NonNull SortedSet<GeoLocations> newGeoLocations) {
 
         if (containsDuplicateOwner(newGeoLocations)) {
             throw new IllegalArgumentException("The geoLocations list you want to set has a duplicate owner: " + newGeoLocations);
@@ -1235,7 +1235,7 @@ public abstract class MediaObject
         }
     }
 
-    public boolean addGeoLocation(@Nonnull GeoLocation newGeoLocation, @Nonnull OwnerType owner) {
+    public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, @NonNull OwnerType owner) {
         boolean isAdded;
         if(this.geoLocations == null) {
             this.geoLocations = new TreeSet<>();
@@ -1257,7 +1257,7 @@ public abstract class MediaObject
         return isAdded;
     }
 
-    public MediaObject addGeoLocations(@Nonnull GeoLocations newGeoLocations) {
+    public MediaObject addGeoLocations(@NonNull GeoLocations newGeoLocations) {
         if(this.geoLocations != null) {
             this.geoLocations.removeIf(existing -> existing.getOwner() == newGeoLocations.getOwner());
         } else {
@@ -1272,7 +1272,7 @@ public abstract class MediaObject
         return this.geoLocations.remove(geoLocations);
     }
 
-    public boolean removeGeoLocation(@Nonnull GeoLocation geoLocation, OwnerType owner) {
+    public boolean removeGeoLocation(@NonNull GeoLocation geoLocation, OwnerType owner) {
 
         final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
                 .filter(owned -> owned.getOwner().equals(owner))
@@ -1284,7 +1284,7 @@ public abstract class MediaObject
         return false;
     }
 
-    public Optional<GeoLocation> findGeoLocation(@Nonnull Long id,@Nonnull OwnerType owner){
+    public Optional<GeoLocation> findGeoLocation(@NonNull Long id,@NonNull OwnerType owner){
         final Optional<GeoLocation> empty = Optional.empty();
         if (geoLocations.isEmpty()) {
             return empty;
@@ -1333,7 +1333,7 @@ public abstract class MediaObject
         }
     }
 
-    public MediaObject addIntention(@Nonnull Intentions newIntentions) {
+    public MediaObject addIntention(@NonNull Intentions newIntentions) {
         if(this.intentions != null) {
             this.intentions.removeIf(existing -> existing.getOwner() == newIntentions.getOwner());
         } else {
@@ -1374,7 +1374,7 @@ public abstract class MediaObject
         }
     }
 
-    public MediaObject addTargetGroups(@Nonnull TargetGroups newTargetGroups) {
+    public MediaObject addTargetGroups(@NonNull TargetGroups newTargetGroups) {
         if(this.targetGroups != null) {
             targetGroups.removeIf(existing -> existing.getOwner() == newTargetGroups.getOwner());
         } else {
@@ -1416,7 +1416,7 @@ public abstract class MediaObject
             new IllegalArgumentException("Unknown country " + code)));
 
     }
-    public MediaObject addCountry(@Nonnull CountryCode country) {
+    public MediaObject addCountry(@NonNull CountryCode country) {
         return addCountry(Country.of(country));
     }
 
@@ -1754,7 +1754,7 @@ public abstract class MediaObject
     }
 
     MemberRef createMember(
-        @Nonnull MediaObject member,
+        @NonNull MediaObject member,
         @Nullable Integer number,
         OwnerType owner) throws CircularReferenceException {
         if (number == null) {
@@ -1776,7 +1776,7 @@ public abstract class MediaObject
     }
 
     MemberRef createMemberOf(
-        @Nonnull MediaObject group,
+        @NonNull MediaObject group,
         Integer number,
         OwnerType owner) throws CircularReferenceException {
         return group.createMember(this, number, owner);
@@ -1841,7 +1841,7 @@ public abstract class MediaObject
         return ageRating;
     }
 
-    public void setAgeRating(AgeRating ageRating) {
+    public void setAgeRating(@NonNull  AgeRating ageRating) {
         if (this.ageRating != ageRating) {
             this.locationAuthorityUpdate = true;
         }
@@ -2630,7 +2630,7 @@ public abstract class MediaObject
         this.locationAuthorityUpdate = ceresUpdate;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public MediaObject setPublishStartInstant(Instant publishStart) {
         if (!Objects.equals(this.publishStart, publishStart)) {
@@ -2642,7 +2642,7 @@ public abstract class MediaObject
         return super.setPublishStartInstant(publishStart);
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public MediaObject setPublishStopInstant(Instant publishStop) {
         if (!Objects.equals(this.publishStop, publishStop)) {
