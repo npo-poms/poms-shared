@@ -5,19 +5,18 @@ import lombok.Setter;
 import lombok.Singular;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Predicate;
 
-import javax.annotation.Nonnull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Range;
@@ -55,12 +54,33 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         }
         ZonedDateTime dateTime = instant.atZone(Schedule.ZONE_ID);
 
-        if (dateTime.toLocalTime().isBefore(Schedule.START_OF_SCHEDULE.minus(2, ChronoUnit.MINUTES))) {
+        if (localTimeBelongsToPreviousDay(dateTime.toLocalTime())) {
             dateTime = dateTime.minusDays(1);
         }
 
         return dateTime.toLocalDate();
     }
+
+    /**
+     * @since 5.11
+     */
+    public static LocalDate guideDay(LocalDateTime datetime) {
+        if (datetime == null) {
+            return null;
+        }
+        LocalDate localDate = datetime.toLocalDate();
+        if (localTimeBelongsToPreviousDay(datetime.toLocalTime())) {
+            localDate = localDate.minusDays(1);
+        }
+        return localDate;
+    }
+     /**
+     * @since 5.11
+     */
+    public static boolean localTimeBelongsToPreviousDay(@NonNull LocalTime localTime) {
+        return localTime.isBefore(Schedule.START_OF_SCHEDULE.minus(2, ChronoUnit.MINUTES));
+    }
+
     public static LocalDate guideDay() {
         return guideDay(Instant.now());
     }
@@ -513,7 +533,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     }
 
     @Override
-    @Nonnull
+    @NonNull
     public Iterator<ScheduleEvent> iterator() {
         return getScheduleEvents().iterator();
     }
@@ -546,7 +566,7 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
             this.events = events;
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public Iterator<ScheduleEvent> iterator() {
             return new UnmodifiableIterator<ScheduleEvent>() {
@@ -601,19 +621,19 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
             return events.comparator();
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public SortedSet<ScheduleEvent> subSet(ScheduleEvent fromElement, ScheduleEvent toElement) {
             return events.subSet(fromElement, toElement);
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public SortedSet<ScheduleEvent> headSet(ScheduleEvent toElement) {
             return events.headSet(toElement);
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public SortedSet<ScheduleEvent> tailSet(ScheduleEvent fromElement) {
             return events.tailSet(fromElement);
