@@ -5,6 +5,7 @@
 package nl.vpro.domain.api;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -33,9 +35,10 @@ import nl.vpro.domain.constraint.PredicateTestResult;
     "message",
     "classes",
     "cause",
+    "violations",
     "testResult"})
 @XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class})
-@JsonPropertyOrder({"status", "message", "classes", "cause", "testResult"})
+@JsonPropertyOrder({"status", "message", "classes", "cause", "violations", "testResult"})
 public class Error {
 
     @XmlAttribute
@@ -44,7 +47,6 @@ public class Error {
 
     @XmlElement
     @Getter
-
     private String message;
 
     @XmlElement
@@ -56,9 +58,14 @@ public class Error {
     @Getter
     private List<String> classes;
 
-    @XmlElement
+    @XmlAnyElement(lax = true)
     @Getter
+    @Setter
+    List<?> violations;
 
+    @Getter
+    @Setter
+    @XmlElement
     private PredicateTestResult<?> testResult;
 
 
@@ -97,9 +104,6 @@ public class Error {
     }
 
 
-    public void setTestResult(PredicateTestResult<?> testResult) {
-        this.testResult = testResult;
-    }
 
     void causeString(String string) {
         this.cause = string;
