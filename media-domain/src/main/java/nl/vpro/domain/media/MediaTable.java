@@ -112,6 +112,15 @@ public class MediaTable implements Iterable<MediaObject> {
         return Optional.empty();
     }
 
+    public <T extends MediaObject> Optional<T> findByCrid(String crid) {
+        for (MediaObject p : Iterables.concat(getProgramTable(), getGroupTable())) {
+            if (p.getCrids().contains(crid)) {
+                return Optional.of((T) p);
+            }
+        }
+        return Optional.empty();
+    }
+
     /**
      * @since 5.9
      */
