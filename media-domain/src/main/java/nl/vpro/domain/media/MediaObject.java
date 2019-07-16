@@ -632,7 +632,6 @@ public abstract class MediaObject
     @Embedded()
     @XmlTransient
     @Setter(AccessLevel.PACKAGE)
-    @Getter(AccessLevel.PACKAGE)
     private StreamingStatus streamingPlatformStatus = StreamingStatus.unset();
 
     public MediaObject() {
@@ -2100,6 +2099,13 @@ public abstract class MediaObject
         return result;
     }
 
+    /**
+     * Returns (a copy of, since you have no bussines setting it) the {@link StreamingStatus}.
+     * @since 5.11
+     */
+    public StreamingStatus getStreamingPlatformStatus() {
+        return StreamingStatus.copy(streamingPlatformStatus);
+    }
 
     @XmlTransient
     public SortedSet<Prediction> getPredictions() {
