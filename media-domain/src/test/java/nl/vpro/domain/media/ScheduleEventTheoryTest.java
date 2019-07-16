@@ -38,7 +38,7 @@ public class ScheduleEventTheoryTest extends ObjectTest<ScheduleEvent> { // TODO
         Instant.ofEpochMilli(100), Duration.ofMillis(1000));
 
     @DataPoint
-    public static ScheduleEvent nullStart = new ScheduleEvent(Channel.NED2, null, Duration.ofMillis(1000));
+    public static ScheduleEvent nullStart = new ScheduleEvent(Channel.NED2, (Instant) null, Duration.ofMillis(1000));
 
     @DataPoint
     public static ScheduleEvent nullDuration = new ScheduleEvent(Channel.NED2, Instant.ofEpochMilli(100), null);
