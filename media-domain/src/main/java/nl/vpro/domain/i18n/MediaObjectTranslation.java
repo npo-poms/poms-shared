@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.time.Instant;
 import java.util.*;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -164,7 +164,7 @@ public class MediaObjectTranslation implements
     }
 
     @Override
-    public MediaObjectTranslation addTitle(@Nonnull String title, @Nonnull OwnerType owner,  @Nonnull TextualType type) {
+    public MediaObjectTranslation addTitle(@NonNull String title, @NonNull OwnerType owner,  @NonNull TextualType type) {
         final TitleTranslation existingTitle = findTitle(owner, type);
 
         if (existingTitle != null) {
@@ -201,7 +201,7 @@ public class MediaObjectTranslation implements
 
     @Override
     public MediaObjectTranslation addDescription(
-        @Nonnull String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+        @NonNull String description, @NonNull OwnerType owner, @NonNull TextualType type) {
         final DescriptionTranslation existingDescription = findDescription(owner, type);
 
         if (existingDescription != null) {

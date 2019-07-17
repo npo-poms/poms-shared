@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Utilities related to {@link Changeable}
@@ -15,19 +15,19 @@ import javax.annotation.Nonnull;
 @SuppressWarnings("JavadocReference")
 public class Changeables {
 
-    public static void fillFor(@Nonnull Changeable accountable, @Nonnull Instant now) {
+    public static void fillFor(@NonNull Changeable accountable, @NonNull Instant now) {
         accountable.setLastModifiedInstant(now);
         if (accountable.getCreationInstant() == null) {
             accountable.setCreationInstant(now);
         }
     }
 
-     public static void copyFrom(@Nonnull Changeable source, @Nonnull Changeable target) {
+     public static void copyFrom(@NonNull Changeable source, @NonNull Changeable target) {
         target.setLastModifiedInstant(source.getLastModifiedInstant());
         target.setCreationInstant(source.getCreationInstant());
     }
 
-    public static  void copyFromIfTargetUnset(@Nonnull Changeable source, @Nonnull Changeable target) {
+    public static  void copyFromIfTargetUnset(@NonNull Changeable source, @NonNull Changeable target) {
 
         if (target.getLastModifiedInstant() == null) {
             target.setLastModifiedInstant(source.getLastModifiedInstant());
@@ -38,7 +38,7 @@ public class Changeables {
     }
 
 
-    public static void copyFromIfSourceSet(@Nonnull Changeable source,  @Nonnull Changeable target) {
+    public static void copyFromIfSourceSet(@NonNull Changeable source,  @NonNull Changeable target) {
         if (source.getLastModifiedInstant() != null) {
             target.setLastModifiedInstant(source.getLastModifiedInstant());
         }
@@ -53,12 +53,12 @@ public class Changeables {
      * @since 5.11
      */
     public static boolean updateEntity(
-        @Nonnull Changeable changeable,
+        @NonNull Changeable changeable,
         boolean updateLastModified,
-        @Nonnull String creationInstantProperty,
-        @Nonnull String lastModifiedInstantProperty,
-        @Nonnull Object[] state,
-        @Nonnull String[] propertyNames) {
+        @NonNull String creationInstantProperty,
+        @NonNull String lastModifiedInstantProperty,
+        @NonNull Object[] state,
+        @NonNull String[] propertyNames) {
         boolean updated = false;
 
         final Instant now = Instant.now();
@@ -79,7 +79,7 @@ public class Changeables {
     /**
      * Used by implementations of {@link org.hibernate.Interceptor}
      */
-    public static void setProperty(@Nonnull String propertyName, @Nonnull Object propertyValue, @Nonnull Object[] state, @Nonnull String[] propertyNames) {
+    public static void setProperty(@NonNull String propertyName, @NonNull Object propertyValue, @NonNull Object[] state, @NonNull String[] propertyNames) {
         for(int i = 0; i < propertyNames.length; i++) {
             if(propertyNames[i].equals(propertyName)) {
                 state[i] = propertyValue;

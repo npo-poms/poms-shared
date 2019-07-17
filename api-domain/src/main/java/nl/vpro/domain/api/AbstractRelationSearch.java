@@ -8,8 +8,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -97,7 +97,7 @@ public abstract class AbstractRelationSearch extends AbstractSearch
         this.uriRefs = uriRefs;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<AbstractTextMatcher<?>> iterator() {
         return Iterators.concat(iterator(types), iterator(broadcasters), iterator(values), iterator(uriRefs));

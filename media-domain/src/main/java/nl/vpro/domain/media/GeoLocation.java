@@ -1,23 +1,26 @@
 package nl.vpro.domain.media;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
+import lombok.NonNull;
+
+import java.util.Objects;
+import java.util.Optional;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.*;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.NoHtml;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.annotation.Nonnull;
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
-import java.util.Objects;
-import java.util.Optional;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -90,7 +93,7 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
             Long id,
             @NonNull String name,
             @NonNull OwnerType owner,
-            @Nonnull GeoRelationType relationType,
+            @NonNull GeoRelationType relationType,
             String description,
             GeoLocations parent,
             GTAARecord gtaaRecord) {

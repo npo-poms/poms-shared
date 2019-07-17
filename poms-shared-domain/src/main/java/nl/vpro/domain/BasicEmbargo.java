@@ -2,7 +2,7 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @author Michiel Meeuwissen
@@ -22,7 +22,7 @@ public class BasicEmbargo implements MutableEmbargo<BasicEmbargo> {
         return publishStartInstant;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public BasicEmbargo setPublishStartInstant(Instant publishStartInstant) {
         this.publishStartInstant = publishStartInstant;
@@ -34,7 +34,7 @@ public class BasicEmbargo implements MutableEmbargo<BasicEmbargo> {
         return publishStopInstant;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public BasicEmbargo setPublishStopInstant(Instant publishStopInstant) {
         this.publishStopInstant = publishStopInstant;

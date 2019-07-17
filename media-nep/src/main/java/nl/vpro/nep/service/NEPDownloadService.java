@@ -6,8 +6,8 @@ import java.time.Duration;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.util.FileMetadata;
 
@@ -22,9 +22,9 @@ public interface NEPDownloadService {
      *                           You can use it for logging only and return {@link Proceed#TRUE} always. You can also return something else.
      */
     void download(
-        @Nonnull String nepFile,
-        @Nonnull Supplier<OutputStream> outputStream,
-        @Nonnull Duration timeout,
+        @NonNull String nepFile,
+        @NonNull Supplier<OutputStream> outputStream,
+        @NonNull Duration timeout,
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer) throws IOException;
 
 
@@ -32,9 +32,9 @@ public interface NEPDownloadService {
      * Download the given file from the NEP ftp server to the given outputStream.
      */
     default void download(
-        @Nonnull String nepFile,
-        @Nonnull  Supplier<OutputStream> outputStream,
-        @Nonnull Function<FileMetadata, Proceed> descriptorConsumer) throws IOException {
+        @NonNull String nepFile,
+        @NonNull  Supplier<OutputStream> outputStream,
+        @NonNull Function<FileMetadata, Proceed> descriptorConsumer) throws IOException {
         download(nepFile, outputStream, Duration.ZERO, descriptorConsumer);
     }
 

@@ -15,13 +15,13 @@ import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.simple.SimpleLogger;
@@ -92,10 +92,10 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     private final FileSizeFormatter formatter = FileSizeFormatter.DEFAULT;
     @Override
     public long upload(
-        @Nonnull SimpleLogger logger,
-        @Nonnull String nepFile,
-        @Nonnull Long size,
-        @Nonnull InputStream stream,
+        @NonNull SimpleLogger logger,
+        @NonNull String nepFile,
+        @NonNull Long size,
+        @NonNull InputStream stream,
         boolean replaces) throws IOException {
         Instant start = Instant.now();
         log.info("Started nep file transfer service for {} @ {} (hostkey: {})", username, sftpHost, hostKey);

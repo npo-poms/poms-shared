@@ -7,7 +7,7 @@ package nl.vpro.domain.constraint;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.el.ELContext;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -49,7 +49,7 @@ public abstract class AbstractAnd<T> implements Constraint<T> {
 
     @Override
     public boolean test(@Nullable T t) {
-        return constraints == null || 
+        return constraints == null ||
             constraints.stream()
                 .filter(Objects::nonNull)
                 .allMatch(p -> p.test(t));
@@ -83,12 +83,12 @@ public abstract class AbstractAnd<T> implements Constraint<T> {
     public String toString() {
         return constraints.stream().map(Object::toString).collect(Collectors.joining(" AND "));
     }
-    
+
     @Override
     public List<String> getDefaultBundleKey() {
         List<String> result = Constraint.super.getDefaultBundleKey();
         result.add(0, "And");
-        return result;   
+        return result;
     }
-    
+
 }

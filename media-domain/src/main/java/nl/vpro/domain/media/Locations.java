@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,10 +29,10 @@ public class Locations {
 
 
     public static Program realize(
-        @Nonnull Program program,
-        @Nonnull Platform platform,
-        @Nonnull String pubOptie, OwnerType owner,
-        @Nonnull Set<OwnerType> replaces) {
+        @NonNull Program program,
+        @NonNull Platform platform,
+        @NonNull String pubOptie, OwnerType owner,
+        @NonNull Set<OwnerType> replaces) {
         Prediction prediction = program.getPrediction(platform);
         StreamingStatus streamingStatus = program.getStreamingPlatformStatus();
 
@@ -210,11 +210,11 @@ public class Locations {
 
 
     private static Program addLocation(
-        @Nonnull Program program,
-        @Nonnull Platform platform,
+        @NonNull Program program,
+        @NonNull Platform platform,
         Encryption encryption,
-        @Nonnull String pubOptie, OwnerType owner,
-        @Nonnull Set<OwnerType> replaces) {
+        @NonNull String pubOptie, OwnerType owner,
+        @NonNull Set<OwnerType> replaces) {
         String locationUrl = createLocationUrl(program, platform, encryption, pubOptie);
         if (locationUrl == null) {
             return program;
@@ -277,10 +277,10 @@ public class Locations {
 
 
     private static Location createOrFindLocation(
-        @Nonnull Program program,
-        @Nonnull String locationUrl,
-        @Nonnull OwnerType owner,
-        @Nonnull Platform platform) {
+        @NonNull Program program,
+        @NonNull String locationUrl,
+        @NonNull OwnerType owner,
+        @NonNull Platform platform) {
         Location location = program.findLocation(locationUrl);
         if (location == null) {
             log.info("Creating new location {} {} {} for mediaObject {}", locationUrl, owner, platform, program.getMid());

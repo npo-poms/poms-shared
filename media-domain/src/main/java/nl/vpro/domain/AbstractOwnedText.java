@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -37,7 +37,7 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
     @XmlAttribute(required = true)
     @Getter
     @Setter
-    @Nonnull
+    @NonNull
     protected OwnerType owner = OwnerType.BROADCASTER;
 
     @Column(nullable = false)
@@ -65,7 +65,7 @@ public abstract class AbstractOwnedText<T extends AbstractOwnedText> implements 
         throw new UnsupportedOperationException("Please implement equals!");
     }
     @Override
-    @Nonnull
+    @NonNull
     public final String toString() {
         return get();
     }

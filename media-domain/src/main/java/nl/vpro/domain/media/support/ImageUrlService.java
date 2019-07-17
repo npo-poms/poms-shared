@@ -2,7 +2,7 @@ package nl.vpro.domain.media.support;
 
 import java.util.regex.Matcher;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,11 +13,11 @@ import org.apache.commons.lang3.StringUtils;
 public interface ImageUrlService {
 
 
-    default Long getId(@Nonnull Image image) {
+    default Long getId(@NonNull Image image) {
         return getIdFromImageUri(image.getImageUri());
     }
 
-    default Long getIdFromImageUri(@Nonnull String imageUri) {
+    default Long getIdFromImageUri(@NonNull String imageUri) {
 
         if (imageUri == null) {
             return null;
@@ -38,14 +38,14 @@ public interface ImageUrlService {
     String getImageBaseUrl();
 
 
-    default String getOriginalUrl(@Nonnull Long id) {
+    default String getOriginalUrl(@NonNull Long id) {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder result = new StringBuilder();
         result.append(imageServerBaseUrl).append(id);
         return result.toString();
     }
 
-    default String getOriginalUrlFromImageUri(@Nonnull  String imageUri) {
+    default String getOriginalUrlFromImageUri(@NonNull  String imageUri) {
         return getOriginalUrl(getIdFromImageUri(imageUri));
     }
 
@@ -56,7 +56,7 @@ public interface ImageUrlService {
      * @return valid url string or null if it can't resolve a location
      * @throws NullPointerException on null arguments or null imageUri
      */
-    default String getImageLocation(@Nonnull Long  id , String fileExtension, String... conversions) {
+    default String getImageLocation(@NonNull Long  id , String fileExtension, String... conversions) {
         String imageServerBaseUrl = getImageBaseUrl();
         StringBuilder builder = new StringBuilder(imageServerBaseUrl);
         for (String conversion : conversions) {

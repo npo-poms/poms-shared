@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 @Slf4j
 final class SSHClientFactory {
@@ -35,10 +35,10 @@ final class SSHClientFactory {
      * @param hostKeys the RSA host key or if containing a semicolon one of the fingerprints supported by sshj.
      */
     static ClientHolder create(
-        @Nonnull final String hostKeys,
-        @Nonnull final String host,
-        @Nonnull String username,
-        @Nonnull String password) throws IOException {
+        @NonNull final String hostKeys,
+        @NonNull final String host,
+        @NonNull String username,
+        @NonNull String password) throws IOException {
 
         final DefaultConfig configuration = new DefaultConfig();
         configuration.setKeepAliveProvider(KeepAliveProvider.KEEP_ALIVE);

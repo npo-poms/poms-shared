@@ -13,8 +13,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,7 +125,7 @@ public interface UserService<T extends User> {
      * @since 5.6
      */
     default <R> Callable<R> wrap(
-        @Nonnull  Callable<R> callable,
+        @NonNull  Callable<R> callable,
         @Nullable Logger logger,
         @Nullable Boolean throwExceptions) {
 

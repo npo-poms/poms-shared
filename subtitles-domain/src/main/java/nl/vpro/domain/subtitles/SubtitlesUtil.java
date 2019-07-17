@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import org.apache.commons.io.IOUtils;
 
@@ -64,8 +64,8 @@ public class SubtitlesUtil {
 
 
 
-    @Nonnull
-    public static ParseResult parse(@Nonnull Subtitles subtitles, boolean guessOffset) {
+    @NonNull
+    public static ParseResult parse(@NonNull Subtitles subtitles, boolean guessOffset) {
 
         SubtitlesContent content = subtitles.getContent();
         String mid = subtitles.getMid();

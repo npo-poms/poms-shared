@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -54,7 +54,7 @@ public class AssociationSearchList implements Predicate<Association>, Iterable<A
     public int size() {
         return asList().size();
     }
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<AssociationSearch> iterator() {
         return associationSearches.iterator();

@@ -6,7 +6,7 @@ package nl.vpro.transfer.extjs;
 
 import java.util.*;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -74,7 +74,7 @@ public abstract class TransferList<T> implements Iterable<T> {
         this.writable = writable;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<T> iterator() {
         return list.iterator();

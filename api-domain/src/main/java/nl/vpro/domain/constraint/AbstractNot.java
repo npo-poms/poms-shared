@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.constraint;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.el.ELContext;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
