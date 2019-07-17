@@ -108,7 +108,7 @@ public class PageUpdateBuilderTest {
     @Test
     public void testTags() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").tags("tag1", "tag2").build();
-        PageUpdate result = roundTrip(page, "<pageUpdate:tag>tag1</pageUpdate:tag>\n" +
+        PageUpdate result = roundTripContains(page, "<pageUpdate:tag>tag1</pageUpdate:tag>\n" +
             "    <pageUpdate:tag>tag2</pageUpdate:tag>");
         assertThat(result.getTags()).containsExactly("tag1", "tag2");
     }
