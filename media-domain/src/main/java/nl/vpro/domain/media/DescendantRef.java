@@ -4,7 +4,7 @@ import lombok.Builder;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -70,7 +70,7 @@ public class DescendantRef implements Comparable<DescendantRef>, Serializable {
     }
 
     @Override
-    public int compareTo(@Nonnull DescendantRef descendantRef) {
+    public int compareTo(@NonNull DescendantRef descendantRef) {
         return (urnRef != null && descendantRef.urnRef != null) ? urnRef.compareTo(descendantRef.urnRef)
             : (midRef != null && descendantRef.midRef != null) ? midRef.compareTo(descendantRef.midRef)
             : (urnRef != null) ? 1 : -1;

@@ -3,7 +3,7 @@ package nl.vpro.domain.constraint;
 import java.time.Instant;
 import java.util.Date;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 

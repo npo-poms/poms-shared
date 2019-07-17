@@ -24,7 +24,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
@@ -107,10 +107,10 @@ public class MediaObjectLocker {
 
 
     public static <T> T withMidLock(
-        @Nonnull TransactionService transactionService,
+        @NonNull TransactionService transactionService,
         String mid,
-        @Nonnull String reason,
-        @Nonnull Callable<T> callable) {
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
         return withMidLock(
             mid,
             reason,
@@ -120,16 +120,16 @@ public class MediaObjectLocker {
 
     public static <T> T getWithMidLock(
         String mid,
-        @Nonnull String reason,
-        @Nonnull Supplier<T> callable) {
+        @NonNull String reason,
+        @NonNull Supplier<T> callable) {
         return withMidLock(mid, reason, callable::get);
     }
 
 
      public static void withMidLock(
          String mid,
-         @Nonnull String reason,
-         @Nonnull Runnable runnable) {
+         @NonNull String reason,
+         @NonNull Runnable runnable) {
         withMidLock(mid, reason, () -> {
             runnable.run();
             return null;
@@ -139,23 +139,23 @@ public class MediaObjectLocker {
 
     public static <T> T withMidLock(
         String mid,
-        @Nonnull String reason,
-        @Nonnull Callable<T> callable) {
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
         return withObjectLock(mid, reason, callable, LOCKED_MEDIA);
     }
 
 
     public static <T> T withMidsLock(
         Iterable<String> mids,
-        @Nonnull String reason,
-        @Nonnull Callable<T> callable) {
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
         return withObjectsLock(mids, reason, callable, LOCKED_MEDIA);
     }
 
      public static void withMidsLock(
          Iterable<String> mid,
-         @Nonnull String reason,
-         @Nonnull Runnable runnable) {
+         @NonNull String reason,
+         @NonNull Runnable runnable) {
          withMidsLock(mid, reason, () -> {
             runnable.run();
             return null;
@@ -165,8 +165,8 @@ public class MediaObjectLocker {
 
      public static void withMidsLockIfFree(
          Iterable<String> mid,
-         @Nonnull String reason,
-         @Nonnull Consumer<Iterable<String>> consumer) {
+         @NonNull String reason,
+         @NonNull Consumer<Iterable<String>> consumer) {
         withObjectsLockIfFree(mid, reason, (mids) -> {consumer.accept(mids); return null; }, LOCKED_MEDIA);
 
      }
@@ -174,17 +174,17 @@ public class MediaObjectLocker {
 
     public static <T> T withKeyLock(
         Serializable id,
-        @Nonnull String reason,
-        @Nonnull Callable<T> callable) {
+        @NonNull String reason,
+        @NonNull Callable<T> callable) {
         return withObjectLock(id, reason, callable, LOCKED_OBJECTS);
     }
 
     @SneakyThrows
     private static <T, K extends Serializable> T withObjectLock(
         K key,
-        @Nonnull String reason,
-        @Nonnull Callable<T> callable,
-        @Nonnull Map<K, LockHolder> locks) {
+        @NonNull String reason,
+        @NonNull Callable<T> callable,
+        @NonNull Map<K, LockHolder> locks) {
         if (key == null) {
             //log.warn("Calling with null mid: {}", reason, new Exception());
             log.warn("Calling with null key: {}", reason);
@@ -201,10 +201,10 @@ public class MediaObjectLocker {
 
     @SneakyThrows
     private static <T, K extends Serializable> T withObjectsLock(
-        @Nonnull Iterable<K> keys,
-        @Nonnull String reason,
-        @Nonnull Callable<T> callable,
-        @Nonnull Map<K, LockHolder> locks) {
+        @NonNull Iterable<K> keys,
+        @NonNull String reason,
+        @NonNull Callable<T> callable,
+        @NonNull Map<K, LockHolder> locks) {
 
         final long nanoStart = System.nanoTime();
         final List<LockHolder> lockList = new ArrayList<>();
@@ -226,10 +226,10 @@ public class MediaObjectLocker {
     }
     @SneakyThrows
     private static <T, K extends Serializable> T withObjectsLockIfFree(
-        @Nonnull Iterable<K> keys,
-        @Nonnull String reason,
-        @Nonnull Function<Iterable<K>, T> callable,
-        @Nonnull Map<K, LockHolder> locks) {
+        @NonNull Iterable<K> keys,
+        @NonNull String reason,
+        @NonNull Function<Iterable<K>, T> callable,
+        @NonNull Map<K, LockHolder> locks) {
 
         final long nanoStart = System.nanoTime();
         final List<LockHolder> lockList = new ArrayList<>();
@@ -253,7 +253,7 @@ public class MediaObjectLocker {
         }
     }
 
-    private static  <K extends Serializable> Optional<LockHolder> acquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks, boolean onlyIfFree) {
+    private static  <K extends Serializable> Optional<LockHolder> acquireLock(long nanoStart, K key, @NonNull  String reason, final @NonNull Map<K, LockHolder> locks, boolean onlyIfFree) {
         LockHolder holder;
         boolean alreadyWaiting = false;
         synchronized (locks) {
@@ -334,12 +334,12 @@ public class MediaObjectLocker {
         return Optional.of(holder);
     }
 
-    private static  <K extends Serializable> LockHolder acquireLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks) {
+    private static  <K extends Serializable> LockHolder acquireLock(long nanoStart, K key, @NonNull  String reason, final @NonNull Map<K, LockHolder> locks) {
         return acquireLock(nanoStart, key, reason, locks, false).get();
     }
 
 
-    private static  <K extends Serializable> void releaseLock(long nanoStart, K key, @Nonnull  String reason, final @Nonnull Map<K, LockHolder> locks, @Nonnull LockHolder lock) {
+    private static  <K extends Serializable> void releaseLock(long nanoStart, K key, @NonNull  String reason, final @NonNull Map<K, LockHolder> locks, @NonNull LockHolder lock) {
         synchronized (locks) {
             if (lock.lock.getHoldCount() == 1) {
                 if (!lock.lock.hasQueuedThreads()) {

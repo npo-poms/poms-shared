@@ -7,7 +7,7 @@ package nl.vpro.domain.constraint;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.el.ELContext;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -50,7 +50,7 @@ public abstract class AbstractOr<T> implements Constraint<T> {
 
     @Override
     public boolean test(@Nullable T t) {
-        return constraints != null && 
+        return constraints != null &&
             constraints
                 .stream()
                 .filter(Objects::nonNull)

@@ -6,7 +6,7 @@ package nl.vpro.domain.media.search;
 
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.MutableEmbargo;
@@ -147,7 +147,7 @@ public abstract class PublishableListItem implements MutableEmbargo {
         return publishStart;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public PublishableListItem setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
@@ -160,7 +160,7 @@ public abstract class PublishableListItem implements MutableEmbargo {
         return publishStop;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public PublishableListItem setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;

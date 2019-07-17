@@ -2,7 +2,7 @@ package nl.vpro.domain;
 
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Typable;
@@ -25,7 +25,7 @@ public interface TypedText extends Typable<TextualType>, Supplier<String>, Compa
     }
 
     @Override
-    default int compareTo(@Nonnull TypedText title) {
+    default int compareTo(@NonNull TypedText title) {
         if (title == null) {
             return -1;
         }

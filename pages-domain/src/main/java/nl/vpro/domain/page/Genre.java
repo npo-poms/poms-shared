@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -97,7 +97,7 @@ public class Genre implements Comparable<Genre>, Serializable {
     }
 
     @Override
-    public int compareTo(@Nonnull Genre o) {
+    public int compareTo(@NonNull Genre o) {
         return termId == null ? this.hashCode() - o.hashCode() : new TermId(termId).compareTo(new TermId(o.termId));
     }
 

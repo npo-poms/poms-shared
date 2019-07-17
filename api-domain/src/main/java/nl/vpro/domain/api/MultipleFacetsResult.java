@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -57,7 +57,7 @@ public class MultipleFacetsResult implements Nameable, Iterable<TermFacetResultI
         this.facets = facets;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<TermFacetResultItem> iterator() {
         if (facets == null) {

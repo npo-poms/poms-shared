@@ -2,8 +2,7 @@ package nl.vpro.domain.media.support;
 
 import java.util.Arrays;
 
-import javax.annotation.Nonnull;
-
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +21,7 @@ public class OwnablesTest {
             this.ownerType = ownerType;
         }
 
-        @Nonnull
+        @NonNull
         @Override
         public OwnerType getOwner() {
             return ownerType;

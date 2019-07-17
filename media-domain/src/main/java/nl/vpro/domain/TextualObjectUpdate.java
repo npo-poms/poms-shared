@@ -7,8 +7,8 @@ import java.util.TreeSet;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,7 +42,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      */
     BiFunction<String, TextualType, T> getTitleCreator();
 
-    default TO addTitle(String title, @Nonnull TextualType type) {
+    default TO addTitle(String title, @NonNull TextualType type) {
         if (getTitles() == null) {
             setTitles(new TreeSet<>());
         }
@@ -56,7 +56,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      * Sets title if already set, otherwise {@link #addTitle(String, TextualType)}
      * @since 5.11
      */
-    default void setTitle(String title, @Nonnull TextualType type) {
+    default void setTitle(String title, @NonNull TextualType type) {
         if (getTitles() != null) {
             for (T t : getTitles()) {
                 if (t.getType() == type) {
@@ -71,7 +71,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * Updates a title with a {@link Supplier}, if at least the given supplier is not null.
      */
-    default TO setTitle(@Nullable Supplier<String> up, @Nonnull TextualType type) {
+    default TO setTitle(@Nullable Supplier<String> up, @NonNull TextualType type) {
         if (up != null) {
             setTitle(up.get(), type);
         }
@@ -110,7 +110,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     }
 
 
-    default T findTitle(@Nonnull TextualType type) {
+    default T findTitle(@NonNull TextualType type) {
         if (hasTitles()) {
             for (T title : getTitles()) {
                 if (type == title.getType()) {
@@ -176,7 +176,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      * Sets description if already set, otherwise {@link #addDescription(String, TextualType)}
      * @since 5.11
      */
-    default void setDescription(String description, @Nonnull TextualType type) {
+    default void setDescription(String description, @NonNull TextualType type) {
         if (getDescriptions() != null) {
             for (D d : getDescriptions()) {
                 if (d.getType() == type) {
@@ -191,7 +191,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
     /**
      * Updates a description with a {@link Supplier}, if at least the given supplier is not null.
      */
-    default TO setDescription(@Nullable  Supplier<String> up, @Nonnull TextualType type) {
+    default TO setDescription(@Nullable  Supplier<String> up, @NonNull TextualType type) {
         if (up != null) {
             setDescription(up.get(), type);
         }
@@ -203,7 +203,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
      */
     BiFunction<String, TextualType, D> getDescriptionCreator();
 
-    default TO addDescription(@Nullable String description, @Nonnull TextualType type) {
+    default TO addDescription(@Nullable String description, @NonNull TextualType type) {
         if (StringUtils.isNotEmpty(description)) {
             if (getDescriptions() == null) {
                 setDescriptions(new TreeSet<>());
@@ -259,7 +259,7 @@ public interface TextualObjectUpdate<T extends TypedText, D extends TypedText, T
 
 
 
-    default D findDescription(@Nonnull TextualType type) {
+    default D findDescription(@NonNull TextualType type) {
         if (hasDescriptions()) {
             for (D description : getDescriptions()) {
                 if (type == description.getType()) {

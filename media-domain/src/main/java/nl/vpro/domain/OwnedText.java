@@ -1,6 +1,6 @@
 package nl.vpro.domain;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.support.MutableOwnable;
 import nl.vpro.domain.media.support.OwnerType;
@@ -20,7 +20,7 @@ public interface OwnedText extends MutableOwnable, TypedText, Comparable<TypedTe
      * We want to sort first per Type then per Owner.
      */
     @Override
-    default int compareTo(@Nonnull TypedText o) {
+    default int compareTo(@NonNull TypedText o) {
         if (o == null) {
             return -1;
         }

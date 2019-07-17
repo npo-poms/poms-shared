@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.Valid;
 import javax.xml.bind.JAXB;
 
@@ -331,16 +331,16 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B mainTitle(@Nonnull String title, @Nonnull OwnerType owner) {
+    default B mainTitle(@NonNull String title, @NonNull OwnerType owner) {
         return titles(new Title(title, owner, TextualType.MAIN));
     }
 
-    default B mainTitle(@Nonnull String title) {
+    default B mainTitle(@NonNull String title) {
         return mainTitle(title, OwnerType.BROADCASTER);
     }
 
 
-    default B subTitle(String title, @Nonnull OwnerType owner) {
+    default B subTitle(String title, @NonNull OwnerType owner) {
         if (StringUtils.isNotEmpty(title)) {
             return titles(new Title(title, owner, TextualType.SUB));
         } else {
@@ -353,7 +353,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
 
-    default B lexicoTitle(String title, @Nonnull OwnerType owner) {
+    default B lexicoTitle(String title, @NonNull OwnerType owner) {
         if (StringUtils.isNotEmpty(title)) {
             return titles(new Title(title, owner, TextualType.LEXICO));
         } else {
@@ -377,7 +377,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B)this;
     }
 
-    default B mainDescription(String description, @Nonnull OwnerType owner) {
+    default B mainDescription(String description, @NonNull OwnerType owner) {
         if (StringUtils.isNotEmpty(description)) {
             return descriptions(new Description(description, owner, TextualType.MAIN));
         } else {
@@ -581,7 +581,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     @SuppressWarnings("unchecked")
-    default B memberOf(@Nonnull MediaObject media, Integer number) throws CircularReferenceException {
+    default B memberOf(@NonNull MediaObject media, Integer number) throws CircularReferenceException {
         mediaObject().createMemberOf(media, number, null);
         return (B) this;
     }

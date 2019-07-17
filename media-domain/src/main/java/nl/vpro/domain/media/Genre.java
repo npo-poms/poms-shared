@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.Serializable;
 import java.util.*;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -179,7 +179,7 @@ public class Genre implements Displayable, Comparable<Genre>, Serializable {
 
 
     @Override
-    public int compareTo(@Nonnull Genre o) {
+    public int compareTo(@NonNull Genre o) {
         return termId == null ? this.hashCode() - o.hashCode() : new TermId(termId).compareTo(new TermId(o.termId));
     }
 

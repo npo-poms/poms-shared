@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.user.Trusted;
 
@@ -17,65 +17,65 @@ import nl.vpro.domain.user.Trusted;
 public class MockDoAsTransactionService extends MockTransactionService implements DoAsTransactionService {
     @Override
     @SneakyThrows
-    public <T> T executeInNewTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable) {
+    public <T> T executeInNewTransaction(@NonNull Trusted user, @NonNull Callable<T> callable) {
         return callable.call();
     }
 
     @Override
-    public <T, S> T executeInNewTransaction(@Nonnull Trusted user, S argument, @Nonnull Function<S, T> function) {
+    public <T, S> T executeInNewTransaction(@NonNull Trusted user, S argument, @NonNull Function<S, T> function) {
         return function.apply(argument);
     }
 
     @Override
-    public void executeInNewTransaction(@Nonnull Trusted user, @Nonnull Runnable runnable) {
+    public void executeInNewTransaction(@NonNull Trusted user, @NonNull Runnable runnable) {
         runnable.run();
     }
 
     @Override
     @Deprecated
-    public void executeInNewTransaction(@Nonnull String user, @Nonnull Runnable runnable) {
+    public void executeInNewTransaction(@NonNull String user, @NonNull Runnable runnable) {
         runnable.run();
     }
 
     @Override
     @SneakyThrows
-    public <T> T executeInReadonlyTransaction(@Nonnull Trusted user, @Nonnull Callable<T> callable) {
+    public <T> T executeInReadonlyTransaction(@NonNull Trusted user, @NonNull Callable<T> callable) {
         return callable.call();
 
     }
 
     @Override
-    public <T, S> T executeInReadonlyTransaction(@Nonnull Trusted user, S argument, @Nonnull Function<S, T> function) {
+    public <T, S> T executeInReadonlyTransaction(@NonNull Trusted user, S argument, @NonNull Function<S, T> function) {
         return function.apply(argument);
 
     }
 
     @Override
-    public void executeInReadonlyTransaction(@Nonnull Trusted user, @Nonnull Runnable runnable) {
+    public void executeInReadonlyTransaction(@NonNull Trusted user, @NonNull Runnable runnable) {
         runnable.run();
 
     }
 
     @Override
-    public <T> void executeInReadonlyTransaction(@Nonnull Trusted user, T argument, @Nonnull Consumer<T> consumer) {
+    public <T> void executeInReadonlyTransaction(@NonNull Trusted user, T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
 
     }
 
     @Override
-    public <T> T getInNewTransaction(@Nonnull Trusted user, @Nonnull Supplier<T> supplier) {
+    public <T> T getInNewTransaction(@NonNull Trusted user, @NonNull Supplier<T> supplier) {
         return supplier.get();
 
     }
 
     @Override
-    public <T> T getInReadonlyTransaction(@Nonnull Trusted user, @Nonnull Supplier<T> supplier) {
+    public <T> T getInReadonlyTransaction(@NonNull Trusted user, @NonNull Supplier<T> supplier) {
         return supplier.get();
 
     }
 
     @Override
-    public <T> void executeInNewTransaction(@Nonnull Trusted user, T argument, @Nonnull Consumer<T> consumer) {
+    public <T> void executeInNewTransaction(@NonNull Trusted user, T argument, @NonNull Consumer<T> consumer) {
         consumer.accept(argument);
 
     }

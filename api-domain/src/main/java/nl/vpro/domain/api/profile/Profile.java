@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.*;
@@ -93,7 +93,7 @@ public class Profile implements Comparable<Profile> {
     }
 
     @Override
-    public int compareTo(@Nonnull Profile o) {
+    public int compareTo(@NonNull Profile o) {
         // inverse ordering on time
         if(o == null) {
             return -1;

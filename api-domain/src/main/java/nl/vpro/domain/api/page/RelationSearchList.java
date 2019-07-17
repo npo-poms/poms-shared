@@ -6,8 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -67,7 +67,7 @@ public class RelationSearchList implements Predicate<Relation>, Iterable<Relatio
         return false;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<RelationSearch> iterator() {
         return asList().iterator();

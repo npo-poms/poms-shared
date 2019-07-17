@@ -6,7 +6,7 @@ package nl.vpro.domain.user;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
@@ -29,7 +29,7 @@ public abstract class OrganizationEditor<T extends Organization>
     public abstract OrganizationEditorIdentifier<T> getId();
 
     @Override
-    public int compareTo(@Nonnull OrganizationEditor<T> organizationEditor) {
+    public int compareTo(@NonNull OrganizationEditor<T> organizationEditor) {
         T org = getOrganization();
         return org == null ?
             (organizationEditor.getOrganization() == null ? 0 : -1):

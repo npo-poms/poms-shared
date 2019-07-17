@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -238,7 +238,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
     }
 
     @Override
-    public int compareTo(@Nonnull Relation r) {
+    public int compareTo(@NonNull Relation r) {
         if(definition != null) {
             if(definition.getBroadcaster().compareTo(r.getBroadcaster()) != 0) {
                 return definition.getBroadcaster().compareTo(r.getBroadcaster());

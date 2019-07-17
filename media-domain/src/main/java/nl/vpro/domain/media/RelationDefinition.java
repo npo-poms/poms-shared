@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -70,7 +70,7 @@ public class RelationDefinition implements Serializable, Identifiable<RelationDe
     }
 
 
-    public void setType(@Nonnull String type) {
+    public void setType(@NonNull String type) {
         if(type != null) {
             type = type.toUpperCase();
         }
