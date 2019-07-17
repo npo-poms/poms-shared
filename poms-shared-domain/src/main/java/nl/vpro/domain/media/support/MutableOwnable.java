@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media.support;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @see OwnerType
@@ -13,6 +13,6 @@ import javax.annotation.Nonnull;
 
 public interface MutableOwnable extends Ownable {
 
-    void setOwner(@Nonnull OwnerType owner);
+    void setOwner(@NonNull OwnerType owner);
 
 }
