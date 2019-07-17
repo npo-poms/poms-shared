@@ -11,7 +11,6 @@ import java.nio.charset.Charset;
 import java.util.Properties;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -57,8 +56,8 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
 
     @Inject
     public NEPItemizeServiceImpl(
-        @Value("${nep.itemizer-api.baseUrl}") @Nonnull String itemizeUrl,
-        @Named("NEPItemizeServiceAuthenticator") @Nonnull Supplier<String> itemizeKey) {
+        @Value("${nep.itemizer-api.baseUrl}") @NonNull String itemizeUrl,
+        @Named("NEPItemizeServiceAuthenticator") @NonNull Supplier<String> itemizeKey) {
         this.itemizeKey = itemizeKey;
         this.itemizeUrl = itemizeUrl;
     }

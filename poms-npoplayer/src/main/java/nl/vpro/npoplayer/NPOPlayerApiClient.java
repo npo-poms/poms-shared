@@ -8,12 +8,12 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.ClientRequestFilter;
 import javax.ws.rs.core.MediaType;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 import nl.vpro.api.client.resteasy.AbstractApiClient;
@@ -59,7 +59,7 @@ public class NPOPlayerApiClient extends AbstractApiClient {
 
     @lombok.Builder(builderClassName = "Builder")
     protected NPOPlayerApiClient(
-        @Nonnull String baseUrl,
+        @NonNull String baseUrl,
         Duration connectionRequestTimeout,
         Duration connectTimeout,
         Duration socketTimeout,
@@ -77,7 +77,7 @@ public class NPOPlayerApiClient extends AbstractApiClient {
         Boolean trustAll,
         Jackson2Mapper objectMapper,
         String mbeanName,
-        @Nonnull String apiKey,
+        @NonNull String apiKey,
         ClassLoader classLoader,
         Boolean registerMBean) {
         super(
