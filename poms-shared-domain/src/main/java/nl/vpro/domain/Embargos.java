@@ -3,9 +3,8 @@ package nl.vpro.domain;
 import java.time.Instant;
 import java.util.Objects;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import com.google.common.collect.Range;
 
 /**
@@ -182,7 +181,7 @@ public class Embargos {
     }
 
 
-    @Nonnull
+    @NonNull
     public static Instant getPublishStop(@Nullable Embargo readonlyEmbargo) {
         if (readonlyEmbargo == null) {
             return Instant.MAX;
@@ -193,7 +192,7 @@ public class Embargos {
         }
         return result;
     }
-    @Nonnull
+    @NonNull
     public static Instant getPublishStart(@Nullable Embargo readonlyEmbargo) {
         if (readonlyEmbargo == null) {
             return Instant.MIN;
