@@ -18,7 +18,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
 
     NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator(
-            "npo_poms",
+        "npo_poms",
         getProperty("password"),
         getProperty("baseUrl")
 
@@ -39,7 +39,7 @@ public class NEPSAMServiceImplITest extends  AbstractNEPTest {
 
     @Test
     public void streamUrlForMid() {
-        String streamUrl = impl.streamAccess("POW_04146689", false, createStreamAccessItem("145.58.169.92", null));
+        String streamUrl = impl.streamAccess("VPWON_1271554", true, createStreamAccessItem("145.58.169.92", null));
         log.info("{}", streamUrl);
 
     }
