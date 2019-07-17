@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Iterator;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
@@ -19,12 +19,12 @@ import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
  */
 public interface NEPGatekeeperService {
 
-    @Nonnull
+    @NonNull
     WorkflowExecution transcode(
-        @Nonnull WorkflowExecutionRequest request
+        @NonNull WorkflowExecutionRequest request
     ) throws IOException;
 
-    @Nonnull
+    @NonNull
     Iterator<WorkflowExecution> getTranscodeStatuses(
         @Nullable String mid,
         @Nullable StatusType status,

@@ -14,13 +14,13 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.Slf4jHelper;
@@ -64,9 +64,9 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public void download(
-        @Nonnull String nepFile,
-        @Nonnull Supplier<OutputStream> outputStream,
-        @Nonnull Duration timeout, Function<FileMetadata, Proceed> descriptorConsumer) {
+        @NonNull String nepFile,
+        @NonNull Supplier<OutputStream> outputStream,
+        @NonNull Duration timeout, Function<FileMetadata, Proceed> descriptorConsumer) {
         log.info("Started nep file transfer service for {}@{} (hostkey: {})", username, ftpHost, hostKey);
         if (StringUtils.isBlank(nepFile)) {
             throw new IllegalArgumentException();
@@ -106,10 +106,10 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
 
     protected void checkAvailabilityAndConsume   (
-        @Nonnull String nepFile,
+        @NonNull String nepFile,
         @Nullable Duration timeout,
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer,
-        @Nonnull  Consumer<RemoteFile> remoteFileConsumer) throws IOException, InterruptedException  {
+        @NonNull  Consumer<RemoteFile> remoteFileConsumer) throws IOException, InterruptedException  {
         Duration retry = Duration.ofSeconds(10);
         try(final SSHClient sessionFactory = createClient();
             final SFTPClient sftp = sessionFactory.newSFTPClient()) {

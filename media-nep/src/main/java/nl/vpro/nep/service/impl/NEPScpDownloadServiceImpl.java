@@ -11,8 +11,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -112,9 +112,9 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public void download(
-        @Nonnull String nepFile,
-        @Nonnull Supplier<OutputStream> outputStream,
-        @Nonnull Duration timeout,
+        @NonNull String nepFile,
+        @NonNull Supplier<OutputStream> outputStream,
+        @NonNull Duration timeout,
         Function<FileMetadata, Proceed> descriptorConsumer) {
         int exitCode = 0;
         String url = getUrl(nepFile);
@@ -148,9 +148,9 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
 
     protected void checkAvailability(
-        @Nonnull String nepFile,
+        @NonNull String nepFile,
         @Nullable Duration timeout,
-        @Nonnull Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
+        @NonNull Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
     }
 
