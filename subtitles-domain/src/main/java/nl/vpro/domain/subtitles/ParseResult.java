@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @author Michiel Meeuwissen
@@ -19,7 +19,7 @@ public class ParseResult implements Iterable<Cue> {
 
     private final List<Header> headers;
 
-    @Nonnull
+    @NonNull
     private final Stream<Cue> cues;
 
     private ParseResult(Stream<Cue> cues, List<Header> headers) {
@@ -39,7 +39,7 @@ public class ParseResult implements Iterable<Cue> {
     }
 
     @Override
-    @Nonnull
+    @NonNull
     public Iterator<Cue> iterator() {
         return cues.iterator();
     }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -33,18 +33,18 @@ public class ServiceLocator  {
         serviceLocator = this;
     }
 
-    @Nonnull
+    @NonNull
     public static BroadcasterService getBroadcasterService() {
 
         return serviceLocator == null ? new BroadcasterServiceImpl(new Broadcaster[0]) : serviceLocator.broadcasterService.get();
     }
 
-    @Nonnull
+    @NonNull
     public static PortalService getPortalService() {
         return serviceLocator == null ? new PortalServiceImpl() : serviceLocator.portalService.get();
     }
 
-    @Nonnull
+    @NonNull
     public static ThirdPartyService getThirdPartyService() {
         return serviceLocator == null ? new ThirdPartyServiceImpl() : serviceLocator.thirdPartyService.get();
     }
@@ -100,7 +100,7 @@ public class ServiceLocator  {
         }
 
         @Override
-        public T find(@Nonnull String id) {
+        public T find(@NonNull String id) {
             return repository.stream().filter(o -> o.getId().equals(id)).findFirst().orElse(null);
 
         }

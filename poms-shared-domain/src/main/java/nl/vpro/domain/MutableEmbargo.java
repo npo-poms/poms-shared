@@ -2,9 +2,8 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import com.google.common.collect.Range;
 
 /**
@@ -15,10 +14,10 @@ import com.google.common.collect.Range;
  */
 public interface MutableEmbargo<T extends MutableEmbargo<T>> extends Embargo {
 
-    @Nonnull
+    @NonNull
     T setPublishStartInstant(@Nullable Instant publishStart);
 
-    @Nonnull
+    @NonNull
     T setPublishStopInstant(@Nullable Instant publishStop);
 
     default T set(Range<Instant> range) {

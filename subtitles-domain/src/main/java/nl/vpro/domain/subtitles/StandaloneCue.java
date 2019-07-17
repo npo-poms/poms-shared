@@ -12,12 +12,13 @@ import lombok.ToString;
 import java.time.Duration;
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
 import javax.xml.XMLConstants;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.xml.bind.LocaleAdapter;
 
@@ -65,7 +66,7 @@ public class StandaloneCue extends Cue {
 
     }
 
-    public StandaloneCue(@Nonnull Cue cue, Locale language, SubtitlesType type) {
+    public StandaloneCue(@NonNull Cue cue, Locale language, SubtitlesType type) {
         super(cue);
         this.language = language;
         this.type = type;

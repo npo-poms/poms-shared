@@ -6,7 +6,7 @@ import lombok.Setter;
 import java.util.List;
 import java.util.SortedSet;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
@@ -277,7 +277,7 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
     }
 
     @Override
-    public int compareTo(@Nonnull Segment o) {
+    public int compareTo(@NonNull Segment o) {
         if(super.equals(o)) {
             return 0;
         }

@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 
 import nl.vpro.domain.classification.ClassificationService;
 import nl.vpro.domain.classification.Term;
@@ -333,8 +333,8 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
 
     public static PageBuilder from(
         PageUpdate update,
-        @Nonnull Instant creationDate,
-        @Nonnull Instant lastModified,
+        @NonNull Instant creationDate,
+        @NonNull Instant lastModified,
         @Nullable List<Referral> referrals,
         @Nullable Integer referrerCount,
         @Nullable List<Embed> embeds,

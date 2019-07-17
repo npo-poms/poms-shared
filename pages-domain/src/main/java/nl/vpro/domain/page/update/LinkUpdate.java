@@ -6,7 +6,7 @@ package nl.vpro.domain.page.update;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -52,7 +52,7 @@ public class LinkUpdate implements Serializable{
     public LinkUpdate() {
     }
 
-    public LinkUpdate(@Nonnull String pageRef) {
+    public LinkUpdate(@NonNull String pageRef) {
         this.pageRef = pageRef;
     }
 

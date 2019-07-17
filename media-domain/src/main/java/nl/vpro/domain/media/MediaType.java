@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
@@ -649,7 +649,7 @@ public enum MediaType {
     }
 
 
-    @Nonnull
+    @NonNull
     public static MediaType getMediaType(MediaObject media) {
         SubMediaType type = media.getType();
         if (type != null) {

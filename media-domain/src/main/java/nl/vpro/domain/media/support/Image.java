@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -425,14 +425,14 @@ public class Image extends PublishableObject<Image>
         this.date = !StringUtils.isBlank(date) ? date : null;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Image setPublishStopInstant(Instant publishStop) {
         super.setPublishStopInstant(publishStop);
         return this;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Image setPublishStartInstant(Instant publishStart) {
         super.setPublishStartInstant(publishStart);
@@ -501,7 +501,7 @@ public class Image extends PublishableObject<Image>
         ;
     }
 
-    public static Image of(@Nonnull ImageMetadata<?> metaData) {
+    public static Image of(@NonNull ImageMetadata<?> metaData) {
         Image image = new Image();
         image.copyFrom(metaData);
         return image;
@@ -509,7 +509,7 @@ public class Image extends PublishableObject<Image>
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public ChangeReport copyFrom(@Nonnull Metadata<?> metadata) {
+    public ChangeReport copyFrom(@NonNull Metadata<?> metadata) {
         ChangeReport change = Metadata.super.copyFrom(metadata);
         if (metadata.getImageUri() != null) {
             if (imageUri == null) {

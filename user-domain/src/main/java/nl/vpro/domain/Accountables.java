@@ -2,7 +2,7 @@ package nl.vpro.domain;
 
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.user.Editor;
 
@@ -17,9 +17,9 @@ import static nl.vpro.domain.Changeables.setProperty;
 public class Accountables {
 
     public static void fillFor(
-        @Nonnull Accountable accountable,
-        @Nonnull Instant now,
-        @Nonnull Editor currentUser) {
+        @NonNull Accountable accountable,
+        @NonNull Instant now,
+        @NonNull Editor currentUser) {
         Changeables.fillFor(accountable, now);
         accountable.setLastModifiedBy(currentUser);
         if (accountable.getCreatedBy() == null) {
@@ -32,11 +32,11 @@ public class Accountables {
      * Used by implementations of {@link org.hibernate.Interceptor}
      */
     public static boolean updateEntity(
-        @Nonnull Editor user,
+        @NonNull Editor user,
         boolean updateLastModified,
-        @Nonnull Accountable accountable,
-        @Nonnull Object[] state,
-        @Nonnull String[] propertyNames) {
+        @NonNull Accountable accountable,
+        @NonNull Object[] state,
+        @NonNull String[] propertyNames) {
         boolean updated = false;
 
         Changeables.updateEntity(accountable, updateLastModified,  CREATION_INSTANT, LAST_MODIFIED, state, propertyNames);

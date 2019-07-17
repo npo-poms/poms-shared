@@ -1,5 +1,8 @@
 package nl.vpro.domain.api;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +15,10 @@ import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.PageBuilder;
 import nl.vpro.domain.page.PageType;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
+@Slf4j
 public class PageSearchResultTest {
 
     @Test
@@ -90,4 +95,12 @@ public class PageSearchResultTest {
             "}");
 
     }
+
+    @Test
+    public void testUnMarshal() throws IOException {
+        PageSearchResult searchResultItems = Jackson2Mapper.getInstance().readValue(getClass().getResourceAsStream("/pageSearchResult.json"), PageSearchResult.class);
+        log.info("{}", searchResultItems);
+    }
+
+
 }

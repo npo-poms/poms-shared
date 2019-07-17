@@ -23,13 +23,13 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-import javax.annotation.Nonnull;
 import javax.annotation.PostConstruct;
 import javax.ws.rs.core.Context;
 import javax.xml.bind.JAXB;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
@@ -86,9 +86,9 @@ public class OpenskosRepository implements GTAARepository {
     private int retries;
 
     public OpenskosRepository(
-        @Nonnull String gtaaUrl,
-        @Nonnull String gtaaKey,
-        @Nonnull RestTemplate template) {
+        @NonNull String gtaaUrl,
+        @NonNull String gtaaKey,
+        @NonNull RestTemplate template) {
         this.gtaaUrl = gtaaUrl.trim();
         this.gtaaKey = gtaaKey.trim();
         this.template = template;
@@ -280,12 +280,12 @@ public class OpenskosRepository implements GTAARepository {
 
         template.setErrorHandler(new ResponseErrorHandler() {
             @Override
-            public boolean hasError(@Nonnull ClientHttpResponse response) throws IOException {
+            public boolean hasError(@NonNull ClientHttpResponse response) throws IOException {
                 return !response.getStatusCode().is2xxSuccessful();
             }
 
             @Override
-            public void handleError(@Nonnull ClientHttpResponse response) throws IOException {
+            public void handleError(@NonNull ClientHttpResponse response) throws IOException {
                 StringWriter body = new StringWriter();
                 IOUtils.copy(response.getBody(), body, Charset.forName("UTF-8"));
                 switch (response.getStatusCode()) {

@@ -4,8 +4,8 @@
  */
 package nl.vpro.domain.media.update;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -38,12 +38,12 @@ public class DescriptionUpdate implements TypedText {
     }
 
 
-    public DescriptionUpdate(@Nullable String description, @Nonnull TextualType type) {
+    public DescriptionUpdate(@Nullable String description, @NonNull TextualType type) {
         this.value = description;
         this.type = type;
     }
 
-    public static DescriptionUpdate of(@Nonnull TypedText to) {
+    public static DescriptionUpdate of(@NonNull TypedText to) {
         return new DescriptionUpdate(to.get(), to.getType());
     }
 

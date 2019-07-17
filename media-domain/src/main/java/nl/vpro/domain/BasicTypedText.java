@@ -3,7 +3,7 @@ package nl.vpro.domain;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.support.TextualType;
 
@@ -43,7 +43,7 @@ public class BasicTypedText implements TypedText, Comparable<TypedText> {
         return text;
 
     }
-    @Nonnull
+    @NonNull
     @Override
     public final String toString() {
         return get();

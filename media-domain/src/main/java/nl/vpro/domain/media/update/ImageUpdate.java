@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import javax.activation.DataHandler;
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.ConstraintViolation;
@@ -325,7 +325,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
         urn = id == null ? null : Image.BASE_URN + id;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public ImageUpdate setPublishStartInstant(Instant publishStart) {
         this.publishStartInstant = publishStart;
@@ -337,7 +337,7 @@ public class ImageUpdate implements MutableEmbargo<ImageUpdate>, Metadata<ImageU
         return publishStopInstant;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public ImageUpdate setPublishStopInstant(Instant publishStop) {
         this.publishStopInstant = publishStop;

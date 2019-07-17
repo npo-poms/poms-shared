@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 
 import org.apache.commons.lang3.StringUtils;
 

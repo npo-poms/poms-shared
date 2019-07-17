@@ -11,7 +11,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -128,7 +128,7 @@ public class Location extends PublishableObject<Location>
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @XmlAttribute(required = true)
-    @Nonnull
+    @NonNull
     protected OwnerType owner = OwnerType.BROADCASTER;
 
     @Column(nullable = true)
@@ -399,14 +399,14 @@ public class Location extends PublishableObject<Location>
         this.duration = duration;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public OwnerType getOwner() {
         return owner;
     }
 
     @Override
-    public void setOwner(@Nonnull OwnerType owner) {
+    public void setOwner(@NonNull OwnerType owner) {
         this.owner = owner;
     }
 
@@ -525,7 +525,7 @@ public class Location extends PublishableObject<Location>
         return super.getPublishStartInstant();
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Location setPublishStartInstant(Instant publishStart) {
         if (! Objects.equals(this.publishStart, publishStart)) {
@@ -576,7 +576,7 @@ public class Location extends PublishableObject<Location>
         return super.getPublishStopInstant();
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Location setPublishStopInstant(Instant publishStop) {
         if (! Objects.equals(this.publishStop, publishStop)) {
@@ -606,7 +606,7 @@ public class Location extends PublishableObject<Location>
 
 
     @Override
-    public int compareTo(@Nonnull Location that) {
+    public int compareTo(@NonNull Location that) {
         int result = 0;
         if (programUrl != null) {
             result = programUrl.compareTo(that.programUrl == null ? "" : that.programUrl);

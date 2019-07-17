@@ -2,7 +2,7 @@ package nl.vpro.domain.page.update;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.page.Relation;
@@ -122,7 +122,7 @@ public class RelationUpdate implements Comparable<RelationUpdate>, Serializable 
     }
 
     @Override
-    public int compareTo(@Nonnull RelationUpdate relationUpdate) {
+    public int compareTo(@NonNull RelationUpdate relationUpdate) {
         if (broadcaster != null && relationUpdate.broadcaster != null && broadcaster.compareTo(relationUpdate.broadcaster) != 0) {
             return broadcaster.compareTo(relationUpdate.broadcaster);
         }

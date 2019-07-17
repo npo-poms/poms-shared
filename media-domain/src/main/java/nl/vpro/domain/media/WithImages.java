@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.support.Image;
@@ -58,16 +58,16 @@ public interface WithImages {
         return null;
     }
 
-    default void addImage(@Nonnull Image image) {
+    default void addImage(@NonNull Image image) {
         addImage(image, hasImages() ? getImages().size() : 0);
     }
-    void addImage(@Nonnull Image image, int index);
+    void addImage(@NonNull Image image, int index);
 
-    default List<Image> findImages(@Nonnull OwnerType owner) {
+    default List<Image> findImages(@NonNull OwnerType owner) {
         return getImages().stream().filter(i -> owner.equals(i.getOwner())).collect(Collectors.toList());
     }
 
-    default Image findImage(@Nonnull ImageType type) {
+    default Image findImage(@NonNull ImageType type) {
         if (hasImages()){
             for (Image image : getImages()) {
                 if (type.equals(image.getType())) {

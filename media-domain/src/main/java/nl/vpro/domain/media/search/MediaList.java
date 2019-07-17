@@ -2,7 +2,7 @@ package nl.vpro.domain.media.search;
 
 import java.util.*;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.media.Member;
@@ -115,7 +115,7 @@ public class MediaList<T> implements Iterable<T> {
         return "" + list;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<T> iterator() {
         return list == null ? Collections.<T>emptyList().iterator() : list.iterator();

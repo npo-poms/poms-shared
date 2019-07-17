@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.apache.http.client.utils.DateUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.nep.service.NEPDownloadService;
@@ -67,10 +67,10 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
 
     @Override
     public void download(
-        @Nonnull  String nepFile,
-        @Nonnull Supplier<OutputStream> outputStream,
-        @Nonnull Duration timeout,
-        @Nullable  Function<FileMetadata, Proceed> descriptorConsumer) {
+        @NonNull String nepFile,
+        @NonNull Supplier<OutputStream> outputStream,
+        @NonNull Duration timeout,
+        @Nullable Function<FileMetadata, Proceed> descriptorConsumer) {
         int exitCode = 0;
         try {
             checkAvailability(nepFile, timeout, descriptorConsumer);

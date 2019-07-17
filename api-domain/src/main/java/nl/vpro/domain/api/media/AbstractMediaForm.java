@@ -9,17 +9,19 @@ import lombok.ToString;
 
 import java.util.function.Predicate;
 
-import javax.annotation.Nullable;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.api.Form;
 import nl.vpro.domain.api.FormUtils;
 import nl.vpro.domain.media.MediaObject;
+
+;
 
 /**
  *

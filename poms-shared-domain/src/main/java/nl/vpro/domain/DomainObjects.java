@@ -4,7 +4,7 @@ import java.io.File;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @author Michiel Meeuwissen
@@ -14,7 +14,7 @@ public class DomainObjects {
 
 
 
-    public static String getCanonicalFilePath(@Nonnull DomainObject domain) {
+    public static String getCanonicalFilePath(@NonNull DomainObject domain) {
         String id = String.valueOf(domain.getId());
         StringBuilder path = new StringBuilder(id.length() * 2);
         appendCanonicalFilePath(domain, path);
@@ -22,17 +22,17 @@ public class DomainObjects {
     }
 
 
-    public static void appendCanonicalFilePath(@Nonnull DomainObject domain, @Nonnull StringBuilder builder) {
+    public static void appendCanonicalFilePath(@NonNull DomainObject domain, @NonNull StringBuilder builder) {
         appendCanonicalFilePath(domain.getId(), builder);
     }
 
-    public static void appendCanonicalFilePath(@Nonnull Long i, @Nonnull StringBuilder builder) {
+    public static void appendCanonicalFilePath(@NonNull Long i, @NonNull StringBuilder builder) {
         if (i == null) {
             throw new IllegalArgumentException();
         }
         appendCanonicalFilePath(String.valueOf(i), builder);
     }
-     public static void appendCanonicalFilePath(@Nonnull final String id, @Nonnull StringBuilder builder) {
+     public static void appendCanonicalFilePath(@NonNull final String id, @NonNull StringBuilder builder) {
         if (id == null) {
             throw new IllegalArgumentException();
         }
