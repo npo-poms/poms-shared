@@ -9,7 +9,7 @@ package nl.vpro.domain.media;
 import java.time.Instant;
 import java.util.TreeSet;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -117,7 +117,7 @@ public class Group extends MediaObject {
 
     @Override
     MemberRef createMember(
-        @Nonnull MediaObject member,
+        @NonNull MediaObject member,
         Integer number,
         OwnerType owner) throws CircularReferenceException {
         if(number == null) {

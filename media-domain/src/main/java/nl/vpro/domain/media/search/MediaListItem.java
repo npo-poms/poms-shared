@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.SortedSet;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -304,7 +304,7 @@ public class MediaListItem extends PublishableListItem {
         return super.getPublishStartInstant();
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public MediaListItem setPublishStartInstant(Instant stop) {
         return (MediaListItem) super.setPublishStartInstant(stop);
@@ -321,7 +321,7 @@ public class MediaListItem extends PublishableListItem {
         return super.getPublishStopInstant();
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public MediaListItem setPublishStopInstant(Instant stop) {
         return (MediaListItem) super.setPublishStopInstant(stop);

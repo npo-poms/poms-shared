@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -106,7 +106,7 @@ public class ScheduleUpdate implements Iterable<ScheduleEventUpdate> {
     }
 
     @Override
-    @Nonnull
+    @NonNull
     public Iterator<ScheduleEventUpdate> iterator() {
         return getScheduleEvents().iterator();
     }

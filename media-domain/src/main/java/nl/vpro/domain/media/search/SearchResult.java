@@ -3,7 +3,7 @@ package nl.vpro.domain.media.search;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @author Michiel Meeuwissen
@@ -18,7 +18,7 @@ public interface SearchResult<T> extends Iterable<T> {
     default int size() {
         return getResult().size();
     }
-    @Nonnull
+    @NonNull
     @Override
     default Iterator<T> iterator() {
         return getResult().iterator();

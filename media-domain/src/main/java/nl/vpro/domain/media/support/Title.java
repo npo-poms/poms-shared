@@ -2,7 +2,7 @@ package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -76,7 +76,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
     /**
      * Creates a new <code>Title</code> with a length of 256 characters.
      */
-    public Title(@Nonnull String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+    public Title(@NonNull String title, @NonNull OwnerType owner, @NonNull TextualType type) {
         this(title, owner, type, true);
     }
 
@@ -84,7 +84,7 @@ public class Title extends AbstractOwnedText<Title> implements  Serializable, Ch
      * Optional constructor to bypass cropping the title to a length of 256
      * characters which is the default.
      */
-    public Title(@Nonnull String title, @Nonnull OwnerType owner, @Nonnull TextualType type, boolean crop) {
+    public Title(@NonNull String title, @NonNull OwnerType owner, @NonNull TextualType type, boolean crop) {
         super(owner, type);
         this.value = strip(title);
         if (crop) {

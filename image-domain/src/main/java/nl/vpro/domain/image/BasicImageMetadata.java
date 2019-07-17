@@ -12,7 +12,7 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.UUID;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -144,7 +144,7 @@ public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicIma
     }
 
 
-    @Nonnull
+    @NonNull
     @Override
     public BasicImageMetadata setPublishStartInstant(Instant publishStart) {
         this.publishStartInstant = publishStart;
@@ -152,7 +152,7 @@ public class BasicImageMetadata implements Serializable, MutableEmbargo<BasicIma
 
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public BasicImageMetadata setPublishStopInstant(Instant publishStop) {
         this.publishStopInstant = publishStop;

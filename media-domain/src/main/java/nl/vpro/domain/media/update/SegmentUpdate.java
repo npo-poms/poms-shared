@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -178,7 +178,7 @@ public final class SegmentUpdate extends MediaUpdate<Segment>
 
 
     @Override
-    public int compareTo(@Nonnull SegmentUpdate segmentUpdate) {
+    public int compareTo(@NonNull SegmentUpdate segmentUpdate) {
         //return builder.build().compareTo(segmentUpdate.builder.build());
          if(super.equals(segmentUpdate)) {
             return 0;

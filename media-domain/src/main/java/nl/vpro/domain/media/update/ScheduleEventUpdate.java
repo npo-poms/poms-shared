@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.function.BiFunction;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.Valid;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -100,8 +100,8 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     @lombok.Builder(builderClassName = "Builder")
     private ScheduleEventUpdate(
-        @Nonnull Channel channel,
-        @Nonnull Instant start,
+        @NonNull Channel channel,
+        @NonNull Instant start,
         LocalDate guideDay,
         Duration  duration,
         ProgramUpdate media) {
@@ -181,7 +181,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
     }
 
     @Override
-    public ScheduleEventUpdate addTitle(String title, @Nonnull TextualType type) {
+    public ScheduleEventUpdate addTitle(String title, @NonNull TextualType type) {
         if (titles == null) {
             titles = new TreeSet<>();
         }
@@ -213,7 +213,7 @@ public class ScheduleEventUpdate implements Comparable<ScheduleEventUpdate>, Tex
 
     @Override
     public ScheduleEventUpdate addDescription(
-        @Nullable String description, @Nonnull TextualType type) {
+        @Nullable String description, @NonNull TextualType type) {
         if (StringUtils.isNotEmpty(description)) {
             if (descriptions == null) {
                 descriptions  = new TreeSet<>();

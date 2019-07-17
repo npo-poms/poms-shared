@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import java.time.Instant;
 import java.util.*;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -469,7 +469,7 @@ public class Page implements MutableEmbargo {
         return publishStart;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Page setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
@@ -487,7 +487,7 @@ public class Page implements MutableEmbargo {
         return publishStop;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Page setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;

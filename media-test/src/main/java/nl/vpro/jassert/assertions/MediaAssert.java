@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.assertj.core.api.Fail;
@@ -668,7 +668,7 @@ public class MediaAssert extends PublishableObjectAssert<MediaAssert, MediaObjec
         }
 
         @Override
-        public int compareTo(@Nonnull Quartet<P, Q, R, S> quartet) {
+        public int compareTo(@NonNull Quartet<P, Q, R, S> quartet) {
             int result = p == null && quartet.p == null ? 0 : p.compareTo(quartet.p);
             if(result != 0) {
                 return result;

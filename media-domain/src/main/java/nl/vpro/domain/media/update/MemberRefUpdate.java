@@ -7,7 +7,7 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.ObjectUtils;
@@ -80,7 +80,7 @@ public class MemberRefUpdate implements Comparable<MemberRefUpdate> {
     }
 
     @Override
-    public int compareTo(@Nonnull MemberRefUpdate memberRefUpdate) {
+    public int compareTo(@NonNull MemberRefUpdate memberRefUpdate) {
         if (position != null && memberRefUpdate.getPosition() != null) {
             int diff = getPosition() - memberRefUpdate.getPosition();
             if (diff != 0) {

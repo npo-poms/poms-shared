@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -80,7 +80,7 @@ public class Asset implements MutableEmbargo<Asset> {
         return publishStart;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Asset setPublishStartInstant(Instant publishStart) {
         this.publishStart = publishStart;
@@ -92,7 +92,7 @@ public class Asset implements MutableEmbargo<Asset> {
         return publishStop;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Asset setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;

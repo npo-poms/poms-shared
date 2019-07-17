@@ -2,7 +2,7 @@ package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -58,7 +58,7 @@ public class Description extends AbstractOwnedText<Description> implements Seria
     public Description() {
     }
 
-    public Description(@Nonnull String description, OwnerType owner, TextualType type) {
+    public Description(@NonNull String description, OwnerType owner, TextualType type) {
         super(owner, type);
         this.value = description;
     }

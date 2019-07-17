@@ -3,7 +3,7 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -465,7 +465,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @Override
-    public int compareTo(@Nonnull MemberRef memberRef) {
+    public int compareTo(@NonNull MemberRef memberRef) {
         if(this.getUrnRef() != null
             && memberRef.getUrnRef() != null
             && this.getUrnRef().compareTo(memberRef.getUrnRef()) != 0) {
@@ -568,7 +568,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         }
     }
 
-    @Nonnull
+    @NonNull
     @Override
     @XmlTransient
     public OwnerType getOwner() {
@@ -577,7 +577,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @Override
-    public void setOwner(@Nonnull OwnerType owner) {
+    public void setOwner(@NonNull OwnerType owner) {
         this.owner = owner;
     }
 

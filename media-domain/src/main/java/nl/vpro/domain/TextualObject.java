@@ -3,8 +3,8 @@ package nl.vpro.domain;
 
 import java.util.function.BiFunction;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -36,7 +36,7 @@ public interface TextualObject<
         return (s, t) -> getOwnedTitleCreator().apply(s, DEFAULT_OWNER, t);
     }
 
-    default TO addTitle(@Nonnull String title, @Nonnull  OwnerType owner, @Nonnull  TextualType type) {
+    default TO addTitle(@NonNull String title, @NonNull  OwnerType owner, @NonNull  TextualType type) {
         T t = getOwnedTitleCreator().apply(title, owner, type);
         getTitles().add(t);
         return self();
@@ -46,7 +46,7 @@ public interface TextualObject<
      * Sets title if already set, otherwise {@link #addTitle(String, OwnerType owner, TextualType)}
      * @since 5.11
      */
-    default void setTitle(String title, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+    default void setTitle(String title, @NonNull OwnerType owner, @NonNull TextualType type) {
         if (getTitles() != null) {
             for (T t : getTitles()) {
                 if (t.getType() == type && t.getOwner() == owner) {
@@ -59,11 +59,11 @@ public interface TextualObject<
     }
 
     @Override
-    default TO addTitle(@Nonnull String title,  @Nonnull TextualType type) {
+    default TO addTitle(@NonNull String title,  @NonNull TextualType type) {
         return addTitle(title, DEFAULT_OWNER, type);
     }
 
-    default boolean removeTitle(@Nonnull OwnerType owner, @Nonnull TextualType type) {
+    default boolean removeTitle(@NonNull OwnerType owner, @NonNull TextualType type) {
         if (hasTitles()) {
             return getTitles()
                 .removeIf(
@@ -75,7 +75,7 @@ public interface TextualObject<
         return false;
     }
 
-    default TO removeTitlesForOwner(@Nonnull OwnerType owner) {
+    default TO removeTitlesForOwner(@NonNull OwnerType owner) {
         if (hasTitles()) {
             getTitles().removeIf(
                 title -> title.getOwner().equals(owner)
@@ -84,7 +84,7 @@ public interface TextualObject<
         return self();
     }
 
-    default T findTitle(@Nonnull OwnerType owner, @Nonnull TextualType type) {
+    default T findTitle(@NonNull OwnerType owner, @NonNull TextualType type) {
         if (hasTitles()) {
             for (T title : getTitles()) {
                 if (owner == title.getOwner() && type == title.getType()) {
@@ -106,7 +106,7 @@ public interface TextualObject<
      */
     TriFunction<String, OwnerType, TextualType, D> getOwnedDescriptionCreator();
 
-    default TO addDescription(@Nullable String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+    default TO addDescription(@Nullable String description, @NonNull OwnerType owner, @NonNull TextualType type) {
         if (StringUtils.isNotEmpty(description)) {
             D d = getOwnedDescriptionCreator().apply(description, owner, type);
             getDescriptions().add(d);
@@ -118,7 +118,7 @@ public interface TextualObject<
     /**
      * @since 5.11
      */
-    default void setDescription(String description, @Nonnull OwnerType owner, @Nonnull TextualType type) {
+    default void setDescription(String description, @NonNull OwnerType owner, @NonNull TextualType type) {
         if (getDescriptions() != null) {
             for (D d : getDescriptions()) {
                 if (d.getType() == type && d.getOwner() == owner) {
@@ -131,11 +131,11 @@ public interface TextualObject<
     }
 
     @Override
-    default TO addDescription(@Nullable String description, @Nonnull TextualType type) {
+    default TO addDescription(@Nullable String description, @NonNull TextualType type) {
         return addDescription(description, DEFAULT_OWNER, type);
     }
 
-    default boolean removeDescription(@Nonnull OwnerType owner, @Nonnull TextualType type) {
+    default boolean removeDescription(@NonNull OwnerType owner, @NonNull TextualType type) {
         if (hasDescriptions()) {
             return getDescriptions().removeIf(
                 description ->
@@ -147,7 +147,7 @@ public interface TextualObject<
     }
 
 
-    default TO removeDescriptionsForOwner(@Nonnull OwnerType owner) {
+    default TO removeDescriptionsForOwner(@NonNull OwnerType owner) {
         if (hasDescriptions()) {
 
             getDescriptions().removeIf(description -> description.getOwner().equals(owner));
@@ -155,7 +155,7 @@ public interface TextualObject<
         return self();
     }
 
-    default D findDescription(@Nonnull OwnerType owner, @Nonnull TextualType type) {
+    default D findDescription(@NonNull OwnerType owner, @NonNull TextualType type) {
         if (hasDescriptions()) {
             for (D description : getDescriptions()) {
                 if (owner == description.getOwner()

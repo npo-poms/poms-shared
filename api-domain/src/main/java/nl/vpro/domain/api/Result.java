@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -101,7 +101,7 @@ public class Result<T> implements Iterable<T> {
         return total;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<T> iterator() {
         return items == null ? Collections.<T>emptyIterator() : Collections.<T>unmodifiableList(getItems()).iterator();

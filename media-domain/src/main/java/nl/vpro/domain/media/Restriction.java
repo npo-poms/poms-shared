@@ -2,7 +2,7 @@ package nl.vpro.domain.media;
 
 import java.time.Instant;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -149,7 +149,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
     }
 
     @SuppressWarnings("unchecked")
-    @Nonnull
+    @NonNull
     @Override
     public T setPublishStartInstant(Instant publishStart) {
         setStart(publishStart);
@@ -164,7 +164,7 @@ abstract public class Restriction<T extends Restriction<T>> extends DomainObject
     }
 
     @SuppressWarnings("unchecked")
-    @Nonnull
+    @NonNull
     @Override
     public T setPublishStopInstant(Instant publishStop) {
         setStop(publishStop);

@@ -10,8 +10,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -211,22 +211,22 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     public ScheduleEvent(
-        @Nonnull  Channel channel,
+        @NonNull  Channel channel,
         @Nullable Net net,
         @Nullable LocalDate guideDay,
-        @Nonnull  Instant start,
-        @Nonnull  Duration duration,
+        @NonNull  Instant start,
+        @NonNull  Duration duration,
         @Nullable MediaObject media) {
         this(channel, net, guideDay, start, duration, media, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
     private ScheduleEvent(
-        @Nonnull Channel channel,
+        @NonNull Channel channel,
         @Null  Net net,
         @Nullable  LocalDate guideDay,
-        @Nonnull  Instant start,
-        @Nonnull  Duration duration,
+        @NonNull  Instant start,
+        @NonNull  Duration duration,
         @Nullable MediaObject media,
         @Nullable  Repeat repeat) {
         this.channel = channel;

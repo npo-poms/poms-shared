@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -39,12 +39,12 @@ public class TitleUpdate implements TypedText {
         return new TitleUpdate(title, TextualType.MAIN);
     }
 
-    public TitleUpdate(String title, @Nonnull TextualType type) {
+    public TitleUpdate(String title, @NonNull TextualType type) {
         this.value  = title;
         this.type = type;
     }
 
-    public static TitleUpdate of(@Nonnull TypedText to) {
+    public static TitleUpdate of(@NonNull TypedText to) {
         return new TitleUpdate(to.get(), to.getType());
     }
 
@@ -112,7 +112,7 @@ public class TitleUpdate implements TypedText {
         return result;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public String toString() {
         return "TitleUpdate{" +

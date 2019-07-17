@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
@@ -12,7 +12,7 @@ import nl.vpro.domain.media.support.OwnerType;
 public interface ImageImporter {
 
     Image save(
-        @Nonnull ImageUpdate download, boolean metadata, @Nonnull  OwnerType owne) throws DownloadException;
+        @NonNull ImageUpdate download, boolean metadata, @NonNull  OwnerType owne) throws DownloadException;
 
     class DownloadException extends RuntimeException {
 

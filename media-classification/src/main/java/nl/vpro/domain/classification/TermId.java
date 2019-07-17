@@ -2,7 +2,7 @@ package nl.vpro.domain.classification;
 
 import java.util.Arrays;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @author Michiel Meeuwissen
@@ -28,7 +28,7 @@ public class TermId implements Comparable<TermId> {
     }
 
     @Override
-    public int compareTo(@Nonnull TermId o) {
+    public int compareTo(@NonNull TermId o) {
         if (o == null) return 1;
         for (int i = 0; i < Math.min(parts.length, o.parts.length); i++) {
             int diff = parts[i] - o.parts[i];

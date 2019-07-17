@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Recommendations implements Iterable<Recommendation> {
     private List<Recommendation> recommendations = new ArrayList<>();
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<Recommendation> iterator() {
         return recommendations.iterator();

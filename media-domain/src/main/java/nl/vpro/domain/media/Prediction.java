@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
@@ -261,7 +261,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
 
-    @Nonnull
+    @NonNull
     @Override
     public Prediction setPublishStartInstant(Instant start) {
         this.publishStart = start;
@@ -275,7 +275,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
         return publishStop;
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Prediction setPublishStopInstant(Instant publishStop) {
         this.publishStop = publishStop;
@@ -321,7 +321,7 @@ public class Prediction implements Comparable<Prediction>, Updatable<Prediction>
     }
 
     @Override
-    public int compareTo(@Nonnull Prediction o) {
+    public int compareTo(@NonNull Prediction o) {
         if (platform == null) {
             return o == null ? 0 : o.platform == null ? 0 : 1;
         } else {

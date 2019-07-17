@@ -3,8 +3,7 @@ package nl.vpro.domain;
 import java.time.Instant;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.annotation.Nullable;
-
+import org.checkerframework.checker.nullness.qual.Nullable;
 import com.google.common.collect.Range;
 
 /**
