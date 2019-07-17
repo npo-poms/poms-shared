@@ -9,14 +9,18 @@ import java.util.Iterator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import nl.vpro.logging.simple.SimpleLogger;
-import nl.vpro.nep.domain.*;
+import nl.vpro.nep.domain.NEPItemizeRequest;
+import nl.vpro.nep.domain.NEPItemizeResponse;
+import nl.vpro.nep.domain.PlayreadyResponse;
+import nl.vpro.nep.domain.WideVineResponse;
 import nl.vpro.nep.domain.workflow.StatusType;
 import nl.vpro.nep.domain.workflow.WorkflowExecution;
 import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
@@ -71,15 +75,15 @@ public class NEPServiceImpl implements NEPService {
 
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public WorkflowExecution transcode(
-        @Nonnull WorkflowExecutionRequest request) throws IOException {
+        @NonNull WorkflowExecutionRequest request) throws IOException {
         return gatekeeperService.get().transcode(request);
 
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
         return gatekeeperService.get().getTranscodeStatuses(mid, status, from, limit);
@@ -88,17 +92,17 @@ public class NEPServiceImpl implements NEPService {
 
     @Override
     public void download(
-        @Nonnull String nepFile,
-        @Nonnull Supplier<OutputStream> outputStream,
-        @Nonnull Duration timeout,
-        @Nullable  Function<FileMetadata, Proceed> descriptorConsumer) throws IOException {
+        @NonNull String nepFile,
+        @NonNull Supplier<OutputStream> outputStream,
+        @NonNull Duration timeout,
+        @Nullable Function<FileMetadata, Proceed> descriptorConsumer) throws IOException {
         nepftpDownloadService.get()
             .download(nepFile, outputStream, timeout, descriptorConsumer);
 
     }
 
     @Override
-    public long upload(@Nonnull SimpleLogger logger, @Nonnull String nepFile, @Nonnull Long size, @Nonnull InputStream stream, boolean replaces) throws IOException {
+    public long upload(@NonNull SimpleLogger logger, @NonNull String nepFile, @NonNull Long size, @NonNull InputStream stream, boolean replaces) throws IOException {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
     }
 

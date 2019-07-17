@@ -18,8 +18,8 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
@@ -146,10 +146,10 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         }
     }
 
-    @Nonnull
+    @NonNull
     @Override
     public WorkflowExecution transcode(
-        @Nonnull  WorkflowExecutionRequest request) throws IOException {
+        @NonNull  WorkflowExecutionRequest request) throws IOException {
         CloseableHttpClient client = getHttpClient();
         String json = MAPPER.writeValueAsString(request);
         StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
@@ -171,7 +171,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         return MAPPER.readValue(response.getEntity().getContent(), WorkflowExecution.class);
     }
 
-    @Nonnull
+    @NonNull
     @Override
     @SneakyThrows
     public Iterator<WorkflowExecution> getTranscodeStatuses(

@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
@@ -50,12 +50,12 @@ public class NEPSAMServiceImpl implements NEPSAMService {
 
     @Inject
     public NEPSAMServiceImpl(
-        @Value("${nep.sam-api.baseUrl}") @Nonnull String baseUrl,
+        @Value("${nep.sam-api.baseUrl}") @NonNull String baseUrl,
         @Value("${nep.sam-api.provider}") String provider,
         @Value("${nep.sam-api.platform}") String platform,
         @Value("${nep.sam-api.profile.drm}") String drmProfile,
         @Value("${nep.sam-api.profile.nodrm}") String noDrmProfile,
-        @Named("NEPSAMAuthenticator") @Nonnull Supplier<String> authenticator) {
+        @Named("NEPSAMAuthenticator") @NonNull Supplier<String> authenticator) {
         this.authenticator = authenticator;
         this.baseUrl = baseUrl;
         this.provider = provider == null ? this.provider : provider;
