@@ -5,7 +5,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import javax.annotation.Nonnull;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Please note that transactions are only rolled back in case of a runtime exception
@@ -21,26 +22,26 @@ public interface TransactionService {
      * @return The result of the callable
      * @throws Exception The exception thrown by the callable
      */
-    <T> T executeInNewTransaction(@Nonnull Callable<T> callable) throws Exception;
+    <T> T executeInNewTransaction(@NonNull Callable<T> callable) throws Exception;
 
-    <T> T getInNewTransaction(@Nonnull Supplier<T> supplier);
+    <T> T getInNewTransaction(@NonNull Supplier<T> supplier);
 
-    void executeInNewTransaction(@Nonnull Runnable runnable);
+    void executeInNewTransaction(@NonNull Runnable runnable);
 
-    <T, S> T executeInNewTransaction(S argument, @Nonnull Function<S, T> function);
+    <T, S> T executeInNewTransaction(S argument, @NonNull Function<S, T> function);
 
-    <T> void executeInNewTransaction(T argument,@Nonnull  Consumer<T> consumer);
+    <T> void executeInNewTransaction(T argument,@NonNull  Consumer<T> consumer);
 
 
-    <T> T executeInReadonlyTransaction(@Nonnull Callable<T> callable) throws Exception;
+    <T> T executeInReadonlyTransaction(@NonNull Callable<T> callable) throws Exception;
 
-    <T> T getInReadonlyTransaction(@Nonnull Supplier<T> supplier);
+    <T> T getInReadonlyTransaction(@NonNull Supplier<T> supplier);
 
-    void executeInReadonlyTransaction(@Nonnull Runnable runnable);
+    void executeInReadonlyTransaction(@NonNull Runnable runnable);
 
-    <T, S> T executeInReadonlyTransaction(S argument, @Nonnull Function<S, T> function);
+    <T, S> T executeInReadonlyTransaction(S argument, @NonNull Function<S, T> function);
 
-    <T> void executeInReadonlyTransaction(T argument, @Nonnull Consumer<T> consumer);
+    <T> void executeInReadonlyTransaction(T argument, @NonNull Consumer<T> consumer);
 
 
 }
