@@ -52,7 +52,7 @@ public class NEPItemizeServiceImplITest {
         Instant start = Instant.now();
         NEPItemizeServiceImpl itemizer = new NEPItemizeServiceImpl(NEPTest.PROPERTIES);
         NEPItemizeRequest request = new NEPItemizeRequest();
-        request.setIdentifier("'npo-1dvr");
+        request.setIdentifier("npo-1dvr");
         request.setStarttime(NEPItemizeRequest.fromInstant(Instant.now().minusSeconds(300)).orElseThrow(IllegalArgumentException::new));
         request.setEndtime(NEPItemizeRequest.fromInstant(Instant.now().minusSeconds(60)).orElseThrow(IllegalArgumentException::new));
         NEPItemizeResponse response = itemizer.itemize(request);

@@ -579,6 +579,20 @@ public class MediaObjects {
     }
 
     /**
+     * Whether this mediaobject is playable in a NPO player.
+     * @since 5.11
+     */
+    public static boolean isPlayable(MediaObject media) {
+        if (media == null) {
+            return false;
+        }
+        // TODO, it seems that this is enough
+        return media.getStreamingPlatformStatus().isAvailable();
+        // but why not this?
+        //return media.getStreamingPlatformStatus().isAvailable() && Optional.ofNullable(media.getPrediction(Platform.INTERNETVOD)).map(p -> p.inPublicationWindow(Instant.now())).orElse(false);
+    }
+
+    /**
      * Filters a PublishableObject. Removes all subobject which dont' have a correct workflow.
      *
      * TODO work in progress. This may replace the hibernate filter solution now in place.

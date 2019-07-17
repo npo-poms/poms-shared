@@ -15,6 +15,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import nl.vpro.domain.Displayable;
 import nl.vpro.i18n.Dutch;
 
@@ -116,6 +118,11 @@ public class StreamingStatus implements Serializable, Displayable  {
         return new StreamingStatus(withDrm, withoutDrm);
     }
 
+
+    @NonNull
+    public static StreamingStatus copy(StreamingStatus of) {
+        return of == null ? unset() : of.copy();
+    }
 
     public void set(boolean drm, Value value) {
         if (drm) {
