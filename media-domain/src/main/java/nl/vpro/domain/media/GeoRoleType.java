@@ -4,6 +4,11 @@ import javax.xml.bind.annotation.XmlEnum;
 
 import nl.vpro.domain.Displayable;
 
+
+/**
+ * @author Giorgio Vinci
+ * @since 5.11
+ */
 @XmlEnum
 public enum GeoRoleType implements Displayable {
 

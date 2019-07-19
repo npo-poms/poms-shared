@@ -1,21 +1,29 @@
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.Ownable;
-import nl.vpro.domain.media.support.OwnerType;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import nl.vpro.domain.Child;
+import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.OwnerType;
+
 import static javax.persistence.CascadeType.ALL;
 
+
+/**
+ * @author Giorgio Vinci
+ * @since 5.11
+ */
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoLocationsType")

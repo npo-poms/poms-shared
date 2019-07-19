@@ -20,6 +20,10 @@ import nl.vpro.domain.media.support.OwnerType;
 
 import static javax.persistence.CascadeType.ALL;
 
+/**
+ * @author Giorgio Vinci
+ * @since 5.11
+ */
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "intentionsType")
