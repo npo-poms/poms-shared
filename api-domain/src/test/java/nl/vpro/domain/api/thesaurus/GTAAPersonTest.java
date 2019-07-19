@@ -8,7 +8,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.*;
+import nl.vpro.domain.gtaa.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;

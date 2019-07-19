@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.gtaa;
+package nl.vpro.domain.gtaa;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 import nl.vpro.domain.api.Result;
-import nl.vpro.domain.media.gtaa.*;
+import nl.vpro.domain.gtaa.*;
 
 @XmlRootElement(name = "thesaurusItems")
 @XmlType(name = "thesaurusItemsType")

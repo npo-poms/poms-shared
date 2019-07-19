@@ -16,7 +16,7 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.*;
+import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;

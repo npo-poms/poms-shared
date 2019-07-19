@@ -7,7 +7,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.gtaa.GTAAPerson;
 
 /**
  * @author Michiel Meeuwissen

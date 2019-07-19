@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.gtaa;
+package nl.vpro.domain.gtaa;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

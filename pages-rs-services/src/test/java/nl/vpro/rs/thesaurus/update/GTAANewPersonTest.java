@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import nl.vpro.domain.media.gtaa.GTAANewPerson;
+import nl.vpro.domain.gtaa.GTAANewPerson;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;

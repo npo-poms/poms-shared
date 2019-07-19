@@ -17,9 +17,9 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.gtaa.GTAAGeographicName;
-import nl.vpro.domain.media.gtaa.persistence.EmbeddableGTAARecord;
-import nl.vpro.domain.media.gtaa.persistence.EmbeddableGeographicName;
+import nl.vpro.domain.gtaa.GTAAGeographicName;
+import nl.vpro.domain.gtaa.persistence.EmbeddableGTAARecord;
+import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.NoHtml;
 

@@ -12,7 +12,7 @@
     },
     elementFormDefault = javax.xml.bind.annotation.XmlNsForm.QUALIFIED,
     attributeFormDefault = XmlNsForm.QUALIFIED
-) package nl.vpro.domain.media.gtaa;
+) package nl.vpro.domain.gtaa;
 
 import javax.xml.bind.annotation.XmlNs;
 import javax.xml.bind.annotation.XmlNsForm;
