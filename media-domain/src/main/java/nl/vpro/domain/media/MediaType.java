@@ -14,9 +14,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import nl.vpro.domain.Displayable;
 
 /**
  * This class provides a combined view on all program and group types and their
@@ -26,14 +29,14 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlEnum
 @XmlType(name = "mediaTypeEnum")
-public enum MediaType {
+public enum MediaType implements Displayable {
 
     /**
      * The abstract type denoting every possible media type
      */
     MEDIA(MediaObject.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Alle media";
         }
 
@@ -65,7 +68,7 @@ public enum MediaType {
      */
     PROGRAM(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Programma";
         }
 
@@ -89,7 +92,7 @@ public enum MediaType {
 
     BROADCAST(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Uitzending";
         }
 
@@ -107,7 +110,7 @@ public enum MediaType {
     },
     CLIP(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Clip";
         }
 
@@ -125,7 +128,7 @@ public enum MediaType {
     },
     STRAND(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Koepelprogramma";
         }
 
@@ -138,7 +141,7 @@ public enum MediaType {
     },
     TRAILER(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Trailer";
         }
 
@@ -157,7 +160,7 @@ public enum MediaType {
     },
     MOVIE(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Film";
         }
 
@@ -181,7 +184,7 @@ public enum MediaType {
 
     GROUP(Group.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Groep";
         }
 
@@ -200,7 +203,7 @@ public enum MediaType {
 
     SERIES(Group.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Serie";
         }
 
@@ -216,7 +219,7 @@ public enum MediaType {
     },
     SEASON(Group.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Seizoen";
         }
 
@@ -232,7 +235,7 @@ public enum MediaType {
     },
     UMBRELLA(Group.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Paraplu";
         }
 
@@ -251,7 +254,7 @@ public enum MediaType {
     @Deprecated
     ARCHIVE(Group.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Archief";
         }
 
@@ -262,7 +265,7 @@ public enum MediaType {
     },
     COLLECTION(Group.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Collectie";
         }
 
@@ -275,7 +278,7 @@ public enum MediaType {
     },
     PLAYLIST(Group.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Speellijst";
         }
 
@@ -293,7 +296,7 @@ public enum MediaType {
     },
     ALBUM(Group.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Album";
         }
 
@@ -311,7 +314,7 @@ public enum MediaType {
     },
     SEGMENT(Segment.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Segment";
         }
 
@@ -325,7 +328,7 @@ public enum MediaType {
 /*
     COLLECTION {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Collectie";
         }
 
@@ -335,7 +338,7 @@ public enum MediaType {
     },
     COMPILATION {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Compilatie";
         }
         @Override
@@ -346,7 +349,7 @@ public enum MediaType {
     },
     CONCEPT {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Concept";
         }
 
@@ -356,7 +359,7 @@ public enum MediaType {
     },
     SHOW {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Show";
         }
 
@@ -369,7 +372,7 @@ public enum MediaType {
 
     TRACK(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Track";
         }
 
@@ -392,7 +395,7 @@ public enum MediaType {
     },
     VISUALRADIO(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Visual radio";
         }
 
@@ -411,13 +414,13 @@ public enum MediaType {
 
     VISUALRADIOSEGMENT(Segment.class) {
         @Override
-        public String toString () {
+        public String getDisplayName() {
             return "Visual radio segment";
         }
 
 
         @Override
-        public SegmentType getSubType () {
+        public SegmentType getSubType() {
             return SegmentType.VISUALRADIOSEGMENT;
 
         }
@@ -427,7 +430,7 @@ public enum MediaType {
      */
      SEGMENTTYPE(Segment.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Segments";
         }
 
@@ -450,7 +453,7 @@ public enum MediaType {
     RECORDING(Program.class) {
 
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Opname";
         }
 
@@ -467,7 +470,7 @@ public enum MediaType {
     },
     PROMO(Program.class) {
         @Override
-        public String toString() {
+       public String getDisplayName() {
             return "Promo";
         }
 
@@ -486,6 +489,11 @@ public enum MediaType {
 
     };
 
+
+    @Override
+    public String toString() {
+        return getDisplayName();
+    }
 
     final Class<? extends MediaObject> clazz;
     final Constructor<?> constructor;
