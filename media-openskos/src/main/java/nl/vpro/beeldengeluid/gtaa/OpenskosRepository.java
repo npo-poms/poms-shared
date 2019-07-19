@@ -417,12 +417,17 @@ public class OpenskosRepository implements GTAARepository {
 
         String operator = "";
         for (String axis : axisList) {
+            boolean not = false;
+            if (axis.startsWith("!")) {
+                not = true;
+                axis = axis.substring(1);
+            }
             sb.append(
                     String.format(
-                            "%s %s inScheme:\"http://data.beeldengeluid.nl/gtaa/%s\" ",
-                            operator,
-                            axis.contains("!") ? "NOT" : "",
-                            axis)
+                        "%s %s inScheme:\"%s\" ",
+                        operator,
+                        not ? "NOT" : "",
+                        Scheme.valueOf(axis).getUrl())
             );
             operator = "OR";
         }
