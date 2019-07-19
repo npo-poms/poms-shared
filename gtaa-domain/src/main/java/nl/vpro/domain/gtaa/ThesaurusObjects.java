@@ -2,6 +2,8 @@ package nl.vpro.domain.gtaa;
 
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
@@ -11,6 +13,10 @@ import nl.vpro.w3.rdf.Description;
  */
 public class ThesaurusObjects {
     private static final String SCHEME_URI = "http://data.beeldengeluid.nl/gtaa/";
+
+    static {
+
+    }
 
     public static ThesaurusObject toThesaurusObject(Description d) {
         Optional<Scheme> scheme = Scheme.ofUrl(d.getInScheme().getResource());
@@ -38,6 +44,7 @@ public class ThesaurusObjects {
             return ThesaurusItem.create(d);
         }
     }
+
 
     public static ThesaurusObject toThesaurusObject(GTAANewThesaurusObject thesaurusObject) {
         Description description = Description.builder()

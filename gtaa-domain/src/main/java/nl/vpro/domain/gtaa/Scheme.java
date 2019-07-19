@@ -1,6 +1,7 @@
 package nl.vpro.domain.gtaa;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import nl.vpro.domain.Displayable;
  * @author Michiel Meeuwissen
  * @since 5.3
  */
+@Slf4j
 public enum Scheme implements Displayable {
 
     PERSOONSNAMEN("http://data.beeldengeluid.nl/gtaa/Persoonsnamen",
@@ -39,12 +41,16 @@ public enum Scheme implements Displayable {
     private final String pluralDisplayName;
     private final String displayName;
 
+    @Getter
+    private Class<? extends ThesaurusObject> implementation;
+
 
     Scheme(String url, String displayName, String pluralDisplayName) {
         this.url = url;
         this.displayName = displayName;
         this.pluralDisplayName = pluralDisplayName;
     }
+
 
     public static Optional<Scheme> ofUrl(String url) {
         for (Scheme s: values()) {
@@ -53,6 +59,16 @@ public enum Scheme implements Displayable {
             }
         }
         return Optional.empty();
+    }
+
+    static void init(Class<?> gtaaClass) {
+        GTAAScheme annotation = gtaaClass.getAnnotation(GTAAScheme.class);
+        if (annotation != null) {
+            log.info("Registering {}", gtaaClass);
+            annotation.value().implementation = (Class<? extends ThesaurusObject>) gtaaClass;
+        } else {
+
+        }
     }
 
     @Override

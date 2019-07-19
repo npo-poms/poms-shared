@@ -15,7 +15,6 @@ import nl.vpro.w3.rdf.Description;
     "value",
     "notes",
     "redirectedFrom"
-
 })
 @XmlRootElement(name = "geographicname")
 public class GTAAGeographicName extends AbstractThesaurusItem {
