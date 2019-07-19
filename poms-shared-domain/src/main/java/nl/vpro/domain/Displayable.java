@@ -13,17 +13,11 @@ import java.util.Locale;
  */
 public interface Displayable {
 
+    Locale DEFAULT = new Locale("nl");
+
     default String getDisplayName() {
-        return getDisplayName(new Locale("nl"));
+        return getDisplayName(DEFAULT);
     }
-
-    /**
-     * @since 5.11
-     */
-    default String getPluralDisplayName() {
-        throw new UnsupportedOperationException();
-    }
-
 
 
     /**
@@ -32,5 +26,22 @@ public interface Displayable {
     default String getDisplayName(Locale locale) {
         return getDisplayName();
     }
+
+
+    /**
+     * @since 5.11
+     */
+    default String getPluralDisplayName(Locale locale) {
+        throw new UnsupportedOperationException();
+    }
+
+
+     /**
+     * @since 5.11
+     */
+    default String getPluralDisplayName() {
+        return getPluralDisplayName(DEFAULT);
+    }
+
 
 }

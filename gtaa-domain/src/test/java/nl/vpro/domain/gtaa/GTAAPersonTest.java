@@ -1,4 +1,4 @@
-package nl.vpro.domain.api.thesaurus;
+package nl.vpro.domain.gtaa;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -7,12 +7,11 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.gtaa.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.BindingUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -76,11 +75,11 @@ public class GTAAPersonTest {
             .familyName("puk")
             .gtaaUri("http://gtaa/1234")
             .status(Status.approved)
-            .lastModified(LocalDateTime.of(2017, 9, 20, 10, 43, 0).atZone(Schedule.ZONE_ID).toInstant())
+            .lastModified(LocalDateTime.of(2017, 9, 20, 10, 43, 0).atZone(BindingUtils.DEFAULT_ZONE).toInstant())
             .build();
 
         JAXBTestUtil.roundTripAndSimilarAndEquals(person, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<gtaa:person gtaa:status=\"approved\" gtaa:lastModified=\"2017-09-20T10:43:00+02:00\" gtaa:gtaaUri=\"http://gtaa/1234\" gtaa:id=\"http://gtaa/1234\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:oai=\"http://www.openarchives.org/OAI/2.0/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:gtaa=\"urn:vpro:gtaa:2017\" xmlns:openskos=\"http://openskos.org/xmlns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n" +
+            "<gtaa:person gtaa:status=\"approved\" gtaa:lastModified=\"2017-09-20T10:43:00+02:00\" gtaa:id=\"http://gtaa/1234\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:oai=\"http://www.openarchives.org/OAI/2.0/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:gtaa=\"urn:vpro:gtaa:2017\" xmlns:openskos=\"http://openskos.org/xmlns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n" +
             "    <gtaa:value>puk</gtaa:value>\n" +
             "    <gtaa:familyName>puk</gtaa:familyName>\n" +
             "    <gtaa:notes xml:lang=\"nl\">bla</gtaa:notes>\n" +

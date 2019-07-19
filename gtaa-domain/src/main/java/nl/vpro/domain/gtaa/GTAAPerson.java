@@ -34,8 +34,9 @@ import nl.vpro.w3.rdf.Description;
     "redirectedFrom"
 
 })
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @ToString
+@EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.PERSOONSNAMEN)
 public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterface, Serializable {
@@ -43,20 +44,21 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
     private static final long serialVersionUID = 1L;
 
     @NoHtml
-    @XmlElement
     @Getter
     @Setter
+    @XmlElement
     protected String givenName;
 
     @NoHtml
-    @XmlElement
     @Getter
     @Setter
+    @XmlElement
     protected String familyName;
 
 
     @Getter
     @Setter
+    @XmlElement
     private List<Names> knownAs;
 
 
