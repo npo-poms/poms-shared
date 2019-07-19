@@ -7,8 +7,8 @@
     <artifactId>poms-shared-parent</artifactId>
     <version>5.11-SNAPSHOT</version>
   </parent>
-  <artifactId>media-gtaa</artifactId>
-  <name>media-gtaa</name>
+  <artifactId>gtaa-domain</artifactId>
+  <name>gtaa-domain</name>
 
   <build>
     <plugins>
