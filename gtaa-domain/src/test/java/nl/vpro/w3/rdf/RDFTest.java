@@ -8,9 +8,9 @@ import javax.xml.bind.JAXB;
 
 import org.junit.Test;
 
-import nl.vpro.domain.media.Schedule;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.BindingUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -57,7 +57,7 @@ public class RDFTest {
             Description
                 .builder()
                 .prefLabel(new Label("prefLabel"))
-                .dateSubmitted(LocalDateTime.of(2018, 6, 19, 14, 28).atZone(Schedule.ZONE_ID))
+                .dateSubmitted(LocalDateTime.of(2018, 6, 19, 14, 28).atZone(BindingUtils.DEFAULT_ZONE))
                 .build()
             )
         );

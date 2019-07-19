@@ -33,5 +33,9 @@
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-validation</artifactId>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-test</artifactId>
+    </dependency>
   </dependencies>
 </project>
