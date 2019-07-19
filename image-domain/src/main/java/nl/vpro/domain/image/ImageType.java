@@ -9,61 +9,68 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang3.StringUtils;
 
+import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Xmlns;
 /**
  * @author rico
  */
 @XmlEnum
 @XmlType(name = "imageTypeEnum", namespace = Xmlns.SHARED_NAMESPACE)
-public enum ImageType {
+public enum ImageType implements Displayable {
     PICTURE("Picture") {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Afbeelding";
         }
     },
     PORTRAIT("Portrait") {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Portret";
         }
     },
     STILL("Video still"){
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Still";
         }
     },
     LOGO("Product logo") {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Logo";
         }
     },
     ICON("Product icon") {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Icoon";
         }
     },
     PROMO_LANDSCAPE("Promotie landschap") {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Landschap";
         }
     },
     PROMO_PORTRAIT("Promotie portrait") {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Portrait";
         }
     },
     BACKGROUND("Background picture") {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Achtergrond";
         }
     };
+
+    @Override
+    public String toString() {
+        return getDisplayName();
+    }
+
 
     private String description;
 
