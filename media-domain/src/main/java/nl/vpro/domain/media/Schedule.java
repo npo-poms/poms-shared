@@ -45,8 +45,8 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
     private static long serialVersionUID = 0L;
 
 
-    public static ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
-    public static LocalTime START_OF_SCHEDULE = LocalTime.of(6, 0);
+    public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
+    public static final LocalTime START_OF_SCHEDULE = LocalTime.of(6, 0);
 
     public static LocalDate guideDay(Instant instant) {
         if (instant == null) {

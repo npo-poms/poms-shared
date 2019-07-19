@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.time.Instant;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
@@ -39,7 +40,6 @@ import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
-import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
@@ -58,6 +58,9 @@ import static org.springframework.http.HttpStatus.CREATED;
 @Slf4j
 
 public class OpenskosRepository implements GTAARepository {
+
+    public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
+
     private final DateTimeFormatter isoInstant = DateTimeFormatter.ISO_INSTANT;
 
     private final RestTemplate template;
@@ -275,7 +278,7 @@ public class OpenskosRepository implements GTAARepository {
                     .creator(creator)
                     .prefLabelOrXL(useXLLabels, prefLabel, tenant)
                     .editorialNote(notes)
-                    .dateSubmitted(Instant.now().atZone(Schedule.ZONE_ID))
+                    .dateSubmitted(Instant.now().atZone(ZONE_ID))
                     .inScheme(scheme).build()));
 
         template.setErrorHandler(new ResponseErrorHandler() {

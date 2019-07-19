@@ -71,6 +71,10 @@
       <artifactId>image-domain</artifactId>
     </dependency>
     <dependency>
+      <groupId>nl.vpro.poms</groupId>
+      <artifactId>media-gtaa</artifactId>
+    </dependency>
+    <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-xml</artifactId>
     </dependency>
