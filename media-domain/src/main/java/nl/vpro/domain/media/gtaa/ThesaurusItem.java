@@ -2,7 +2,6 @@ package nl.vpro.domain.media.gtaa;
 
 import lombok.Getter;
 
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
 public class ThesaurusItem extends AbstractThesaurusItem {

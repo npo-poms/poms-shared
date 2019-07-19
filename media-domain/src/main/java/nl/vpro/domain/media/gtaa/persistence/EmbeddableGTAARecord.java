@@ -2,7 +2,7 @@
  * Copyright (C) 2015 All rights reserved
  * VPRO The Netherlands
  */
-package nl.vpro.domain.media.gtaa;
+package nl.vpro.domain.media.gtaa.persistence;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,13 +15,16 @@ import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.domain.media.gtaa.ThesaurusObject;
+
 /**
- * @author Roelof Jan Koekoek
- * @since 3.7
+ *
+ * @since 5.11
  */
 @Embeddable
 @ToString
-public class GTAARecord implements Serializable {
+public abstract class EmbeddableGTAARecord implements Serializable {
 
     @Column(nullable = true, name = "gtaa_uri")
     @Getter
@@ -33,29 +36,17 @@ public class GTAARecord implements Serializable {
     @Setter
     private Status status;
 
-    @Column(name = "gtaa_knownas")
-    private Boolean knownAs = false;
-
-    protected GTAARecord() {
-    }
-
-    public GTAARecord(String uri, Status status) {
+    EmbeddableGTAARecord(String uri, Status status) {
         this.uri = uri;
         this.status = status;
     }
 
-    @lombok.Builder
-    public GTAARecord(String uri, Status status, boolean knownAs) {
-        this.uri = uri;
-        this.status = status;
-        this.knownAs = knownAs;
+    EmbeddableGTAARecord(ThesaurusObject thesaurusObject) {
+        this.uri = thesaurusObject.getId();
+        this.status = thesaurusObject.getStatus();
     }
 
-    public boolean isKnownAs() {
-        return knownAs != null ? knownAs : false;
-    }
+    EmbeddableGTAARecord() {
 
-    public void setKnownAs(boolean knownAs) {
-        this.knownAs = knownAs;
     }
 }

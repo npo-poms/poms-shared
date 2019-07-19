@@ -459,13 +459,13 @@ public interface MediaTestDataBuilder<
 
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
-                GeoLocation.builder().name("Africa").relationType(GeoRelationType.SUBJECT)
+                GeoLocation.builder().name("Africa").relationType(GeoRoleType.SUBJECT)
                         .description("Continent").build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
-                GeoLocation.builder().name("England").relationType(GeoRelationType.SUBJECT)
+                GeoLocation.builder().name("England").relationType(GeoRoleType.SUBJECT)
                         .gtaaUri("http://gtaa/1234").build(),
-                GeoLocation.builder().name("UK").relationType(GeoRelationType.RECORDED_IN)
+                GeoLocation.builder().name("UK").relationType(GeoRoleType.RECORDED_IN)
                         .gtaaUri("http://gtaa/1235").build()
         );
         return geoLocations(

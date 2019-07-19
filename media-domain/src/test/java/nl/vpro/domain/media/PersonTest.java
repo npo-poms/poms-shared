@@ -2,7 +2,7 @@ package nl.vpro.domain.media;
 
 import org.junit.Test;
 
-import nl.vpro.domain.media.gtaa.GTAARecord;
+import nl.vpro.domain.media.gtaa.persistence.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.Status;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -18,7 +18,7 @@ public class PersonTest {
     @Test
     public void json() {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
-        person.setGtaaRecord(new GTAARecord("http://data.beeldengeluid.nl/gtaa/1869521", Status.approved));
+        person.setGtaaRecord(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", Status.approved));
         assertThatJson(person).isSimilarTo(
             "{\n" +
             "  \"givenName\" : \"Pietje\",\n" +
@@ -33,7 +33,7 @@ public class PersonTest {
     @Test
     public void xml() {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
-        person.setGtaaRecord(new GTAARecord("http://data.beeldengeluid.nl/gtaa/1869521", Status.approved));
+        person.setGtaaRecord(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", Status.approved));
         JAXBTestUtil.assertThatXml(person).isSimilarTo(
             "<local:person role=\"ACTOR\" gtaaUri=\"http://data.beeldengeluid.nl/gtaa/1869521\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
             "    <givenName>Pietje</givenName>\n" +
