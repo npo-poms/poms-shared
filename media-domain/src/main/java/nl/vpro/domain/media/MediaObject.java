@@ -624,6 +624,10 @@ public abstract class MediaObject
         if (toUpdate == null) {
             toUpdate = new ArrayList<>();
         } else {
+            if (toUpdate.equals(values)) {
+                // the object is already exactly correct, do nothing
+                return toUpdate;
+            }
             toUpdate.clear();
         }
         if (values != null) {
@@ -632,7 +636,7 @@ public abstract class MediaObject
         return toUpdate;
     }
 
-    protected static <T> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
+    protected static <T extends Comparable> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
         if (toUpdate != null && toUpdate == values) {
             return toUpdate;
         }
@@ -1258,7 +1262,7 @@ public abstract class MediaObject
 
 
     /**
-     * Use {@link AuthorizedDuration#duration} in combination with {@link #getDuration} to get the java.time.Duration
+     * Use {@link AuthorizedDuration#duration(Authorizedation)} in combination with {@link #getDuration} to get the java.time.Duration
      * @throws ModificationException If you may not set the duration
      */
     @JsonIgnore
@@ -1319,6 +1323,7 @@ public abstract class MediaObject
                 person.setParent(this);
             }
         }
+
         this.persons = updateList(this.persons, persons);
     }
 

@@ -122,6 +122,9 @@ public class BackwardsCompatibility {
 
             @Override
             protected CountryCode deserialize(JsonNode node, DeserializationContext ctxt) throws IOException {
+                if (node == null) {
+                    return null;
+                }
                 if (v1Compatibility.get()) {
                     try {
                         return CountryCode.valueOf(node.textValue());
@@ -130,6 +133,9 @@ public class BackwardsCompatibility {
                     }
                 } else {
                     CountryWrapper wrapper = Jackson2Mapper.getInstance().readerFor(CountryWrapper.class).readValue(node);
+                    if (wrapper == null) {
+                        return null;
+                    }
                     return wrapper.getCode();
                 }
             }
