@@ -8,12 +8,14 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.PersonInterface;
+import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.MetaData;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
@@ -34,8 +36,6 @@ import nl.vpro.w3.rdf.Description;
 })
 @XmlAccessorType(XmlAccessType.FIELD)
 @ToString
-@AllArgsConstructor
-@Builder
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.PERSOONSNAMEN)
 public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterface, Serializable {
@@ -64,7 +64,17 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
 
     }
 
+    @lombok.Builder(builderClassName = "Builder")
+    public GTAAPerson(String id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified, @NoHtml String givenName, @NoHtml String familyName, List<Names> knownAs) {
+        super(id, notes, value, redirectedFrom, status, lastModified);
+        this.givenName = givenName;
+        this.familyName = familyName;
+        this.knownAs = knownAs;
+    }
+
     public GTAAPerson(String givenName, String familyName, Status status) {
+
+        super();
         this.givenName = givenName;
         this.familyName = familyName;
         this.status = status;
@@ -144,6 +154,14 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
     @Override
     public String getGtaaUri() {
         return getId();
+    }
+
+    public static class Builder {
+
+        public Builder gtaaUri(String id) {
+            return id(id);
+        }
 
     }
+
 }

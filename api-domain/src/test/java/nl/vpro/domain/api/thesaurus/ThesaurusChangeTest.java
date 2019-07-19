@@ -4,9 +4,8 @@ import java.time.LocalDateTime;
 
 import org.junit.Test;
 
-import nl.vpro.domain.media.Person;
-import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.gtaa.GTAAPerson;
+import nl.vpro.domain.media.Schedule;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -20,8 +19,7 @@ public class ThesaurusChangeTest {
                 .id("http://data.beeldengeluid.nl/gtaa/1672221")
                 .deleted(false)
                 .publishDate(LocalDateTime.of(2017, 1, 30, 11, 41).atZone(Schedule.ZONE_ID).toInstant())
-                .object(new GTAAPerson(new Person("pietje", "puk")))
-
+                .object(GTAAPerson.builder().givenName("pietje").familyName("puk").build())
                 .build();
 
 

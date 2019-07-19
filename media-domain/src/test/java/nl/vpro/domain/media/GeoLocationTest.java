@@ -1,10 +1,10 @@
 package nl.vpro.domain.media;
 
-import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+import org.junit.Test;
 
 import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -104,7 +104,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
                 .owner(BROADCASTER).values(
                         Arrays.asList(
-                                GeoLocation.builder().name("Africa").relationType(GeoRoleType.SUBJECT)
+                                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
                                         .description("Continent").build()
                         )
                 )
@@ -115,7 +115,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
                 .owner(BROADCASTER).values(
                         Arrays.asList(
-                                GeoLocation.builder().name("Africa").relationType(GeoRoleType.SUBJECT)
+                                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
                                         .description("Continent").build()
                         )
                 )
@@ -126,7 +126,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
                 .owner(BROADCASTER).values(
                         Arrays.asList(
-                                GeoLocation.builder().name("England").relationType(GeoRoleType.RECORDED_IN)
+                                GeoLocation.builder().name("England").role(GeoRoleType.RECORDED_IN)
                                         .gtaaUri("https://wikipedia/lll").build()
                         )
                 )

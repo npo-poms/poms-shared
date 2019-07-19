@@ -409,12 +409,10 @@ public interface MediaTestDataBuilder<
         return aspectRatio(AspectRatio._16x9);
     }
 
-    @SuppressWarnings("unchecked")
     default T withDuration()  {
         return duration(Duration.of(2, ChronoUnit.HOURS));
     }
 
-    @SuppressWarnings("unchecked")
     default T withReleaseYear() {
         return releaseYear(Short.valueOf("2004"));
             }
@@ -459,13 +457,13 @@ public interface MediaTestDataBuilder<
 
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
-                GeoLocation.builder().name("Africa").relationType(GeoRoleType.SUBJECT)
+                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
                         .description("Continent").build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
-                GeoLocation.builder().name("England").relationType(GeoRoleType.SUBJECT)
+                GeoLocation.builder().name("England").role(GeoRoleType.SUBJECT)
                         .gtaaUri("http://gtaa/1234").build(),
-                GeoLocation.builder().name("UK").relationType(GeoRoleType.RECORDED_IN)
+                GeoLocation.builder().name("UK").role(GeoRoleType.RECORDED_IN)
                         .gtaaUri("http://gtaa/1235").build()
         );
         return geoLocations(
@@ -990,13 +988,12 @@ public interface MediaTestDataBuilder<
             return predictions(internetVOD, new Prediction(Platform.TVVOD));
         }
 
-        @SuppressWarnings("unchecked")
         public ProgramTestDataBuilder predictions(Platform... platforms) {
             List<Prediction> predictions = new ArrayList<>();
             for(Platform p : platforms) {
                 predictions.add(new Prediction(p));
             }
-            predictions(predictions.toArray(new Prediction[predictions.size()]));
+            predictions(predictions.toArray(new Prediction[0]));
             return this;
         }
     }
