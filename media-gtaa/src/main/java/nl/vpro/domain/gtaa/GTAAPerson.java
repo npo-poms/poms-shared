@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.PersonInterface;
-import nl.vpro.domain.media.Person;
 import nl.vpro.openarchives.oai.MetaData;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
@@ -65,17 +64,14 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
 
     }
 
-    public GTAAPerson(Person person) {
-        this.givenName = person.getGivenName();
-        this.familyName = person.getFamilyName();
-        status = person.getGtaaRecord() == null ? null : person.getGtaaRecord().getStatus();
+    public GTAAPerson(String givenName, String familyName, Status status) {
+        this.givenName = givenName;
+        this.familyName = familyName;
+        this.status = status;
     }
 
     public GTAAPerson(GTAANewPerson newPerson) {
-        this(Person.builder()
-            .givenName(newPerson.getGivenName())
-            .familyName(newPerson.getFamilyName())
-            .build());
+        this(newPerson.getGivenName(), newPerson.getFamilyName(), (Status) null);
         this.setNotes(newPerson.getNotesAsLabel());
     }
 
