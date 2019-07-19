@@ -1,5 +1,6 @@
 package nl.vpro.domain.gtaa;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,9 +8,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -20,7 +19,9 @@ import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlTransient
+@XmlAccessorType(XmlAccessType.NONE)
+@EqualsAndHashCode
 public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializable {
 
 
@@ -31,6 +32,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
 
     @Getter
     @Setter
+    @XmlElement
     List<Label> notes;
 
     @Getter
@@ -39,6 +41,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
 
     @Getter
     @Setter
+    @XmlElement
     String redirectedFrom;
 
     @Getter
