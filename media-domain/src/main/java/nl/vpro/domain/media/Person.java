@@ -17,7 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.PersonInterface;
-import nl.vpro.domain.media.gtaa.GTAARecord;
+import nl.vpro.domain.media.gtaa.persistence.EmbeddablePerson;
 import nl.vpro.validation.NoHtml;
 
 @Entity
@@ -82,7 +82,7 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     @XmlTransient
     @Getter
     @Setter
-    protected GTAARecord gtaaRecord;
+    protected EmbeddablePerson gtaaRecord;
 
     public Person() {
     }
@@ -122,7 +122,7 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
         String familyName,
         RoleType role,
         MediaObject mediaObject,
-        GTAARecord gtaaRecord) {
+        EmbeddablePerson gtaaRecord) {
         this(id, givenName, familyName, role);
         this.mediaObject = mediaObject;
         this.gtaaRecord = gtaaRecord;
@@ -170,11 +170,11 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     @XmlAttribute
     public String getGtaaUri() {
         return Optional.ofNullable(gtaaRecord)
-                .map(GTAARecord::getUri)
+                .map(EmbeddablePerson::getUri)
                 .orElse(null);
     }
     public void setGtaaUri(String uri) {
-        this.gtaaRecord = new GTAARecord(uri, null);
+        this.gtaaRecord = new EmbeddablePerson(uri, null);
     }
 
     @Override
@@ -225,7 +225,7 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
 
     public static class Builder {
         public Builder gtaaUri(String uri) {
-            return gtaaRecord(GTAARecord.builder().uri(uri).build());
+            return gtaaRecord(EmbeddablePerson.builder().uri(uri).build());
         }
     }
 

@@ -1,8 +1,8 @@
 package nl.vpro.domain.media;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NonNull;
+import lombok.Setter;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -12,16 +12,21 @@ import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.gtaa.GTAARecord;
+import nl.vpro.domain.media.gtaa.GTAAGeographicName;
+import nl.vpro.domain.media.gtaa.persistence.EmbeddableGTAARecord;
+import nl.vpro.domain.media.gtaa.persistence.EmbeddableGeographicName;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.NoHtml;
 
+
+/**
+ * A wrapper around GTAA {@link GTAAGeographicName}
+ */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -54,36 +59,36 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
     @XmlElement
     private String description;
 
-    @Column(name= "relation_type", nullable = false)
+    @Column(name= "role", nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @XmlAttribute(required = true)
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
-    protected GeoRelationType relationType;
+    protected GeoRoleType role;
 
     @Embedded
     @XmlTransient
-    private GTAARecord gtaaRecord;
+    private EmbeddableGeographicName gtaaRecord;
 
     public GeoLocation() {
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GeoLocation(@NonNull String name, @NonNull GeoRelationType relationType, String description) {
+    public GeoLocation(@NonNull String name, @NonNull GeoRoleType role, String description) {
         this.name = name;
-        this.relationType = relationType;
+        this.role = role;
         this.description = description;
     }
 
-    public GeoLocation(Long id, @NonNull String name, @NonNull GeoRelationType relationType, String description, GTAARecord gtaaRecord) {
-        this(name, relationType, description);
+    public GeoLocation(Long id, @NonNull String name, @NonNull GeoRoleType role, String description, EmbeddableGeographicName gtaaRecord) {
+        this(name, role, description);
         this.id = id;
         this.gtaaRecord = gtaaRecord;
     }
 
     public GeoLocation(GeoLocation source, GeoLocations parent) {
-        this(source.getName(), source.getRelationType(), source.getDescription());
+        this(source.getName(), source.getRole(), source.getDescription());
         this.gtaaRecord = source.gtaaRecord;
         this.parent = parent;
     }
@@ -93,22 +98,22 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
             Long id,
             @NonNull String name,
             @NonNull OwnerType owner,
-            @NonNull GeoRelationType relationType,
+            @NonNull GeoRoleType role,
             String description,
             GeoLocations parent,
-            GTAARecord gtaaRecord) {
-        this(id, name, relationType, description, gtaaRecord);
+            EmbeddableGeographicName gtaaRecord) {
+        this(id, name, role, description, gtaaRecord);
         this.parent = parent;
     }
 
     @XmlAttribute
     public String getGtaaUri() {
         return Optional.ofNullable(gtaaRecord)
-                .map(GTAARecord::getUri)
+                .map(EmbeddableGTAARecord::getUri)
                 .orElse(null);
     }
     public void setGtaaUri(String uri) {
-        this.gtaaRecord = new GTAARecord(uri, null);
+        this.gtaaRecord = new EmbeddableGeographicName(uri, null);
     }
 
     @Override
@@ -126,7 +131,7 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
             return false;
         }
 
-        if(!Objects.equals(relationType, geoLocation.relationType)) {
+        if(!Objects.equals(role, geoLocation.role)) {
             return false;
         }
 
@@ -141,7 +146,7 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (relationType != null ? relationType.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         String gtaaUri = getGtaaUri();
         result = 31 * result + (gtaaUri != null ? gtaaUri.hashCode() : 0);
@@ -153,7 +158,7 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
         return new ToStringBuilder(this)
             .appendSuper(super.toString())
             .append("name", name)
-            .append("relationType", relationType)
+            .append("relationType", role)
             .append("description", description)
             .append("gtaa_uri", getGtaaUri())
             .toString();
@@ -165,8 +170,8 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
             return this.name.compareTo(geoLocation.name);
         }
 
-        if(!this.relationType.equals(geoLocation.relationType)) {
-            return this.relationType.compareTo(geoLocation.relationType);
+        if(!this.role.equals(geoLocation.role)) {
+            return this.role.compareTo(geoLocation.role);
         }
 
         if(description != null && geoLocation.description != null && !description.equals(geoLocation.description)) {
@@ -182,7 +187,7 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
 
     public static class Builder {
         public Builder gtaaUri(String uri) {
-            return gtaaRecord(GTAARecord.builder().uri(uri).build());
+            return gtaaRecord(EmbeddableGeographicName.builder().uri(uri).build());
         }
     }
 

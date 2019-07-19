@@ -104,7 +104,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
                 .owner(BROADCASTER).values(
                         Arrays.asList(
-                                GeoLocation.builder().name("Africa").relationType(GeoRelationType.SUBJECT)
+                                GeoLocation.builder().name("Africa").relationType(GeoRoleType.SUBJECT)
                                         .description("Continent").build()
                         )
                 )
@@ -115,7 +115,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
                 .owner(BROADCASTER).values(
                         Arrays.asList(
-                                GeoLocation.builder().name("Africa").relationType(GeoRelationType.SUBJECT)
+                                GeoLocation.builder().name("Africa").relationType(GeoRoleType.SUBJECT)
                                         .description("Continent").build()
                         )
                 )
@@ -126,7 +126,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
                 .owner(BROADCASTER).values(
                         Arrays.asList(
-                                GeoLocation.builder().name("England").relationType(GeoRelationType.RECORDED_IN)
+                                GeoLocation.builder().name("England").relationType(GeoRoleType.RECORDED_IN)
                                         .gtaaUri("https://wikipedia/lll").build()
                         )
                 )

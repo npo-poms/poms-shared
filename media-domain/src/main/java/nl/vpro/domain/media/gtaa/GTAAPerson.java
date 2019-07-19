@@ -8,24 +8,16 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.Person;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.MetaData;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
-import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
  * @author Roelof Jan Koekoek
@@ -42,13 +34,12 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 })
 @XmlAccessorType(XmlAccessType.FIELD)
-@EqualsAndHashCode
 @ToString
 @AllArgsConstructor
 @Builder
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.PERSOONSNAMEN)
-public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializable {
+public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -64,35 +55,11 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializabl
     @Setter
     protected String familyName;
 
-    @Getter
-    @Setter
-    private List<Label> notes;
 
     @Getter
     @Setter
     private List<Names> knownAs;
 
-    @Getter
-    @Setter
-    @XmlAttribute
-    private Status status;
-
-    @Getter
-    @Setter
-    private String redirectedFrom;
-
-    @Getter
-    @Setter
-    @XmlAttribute
-    @XmlJavaTypeAdapter(InstantXmlAdapter.class)
-    @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    private Instant lastModified;
-
-    @Getter
-    @Setter
-    @XmlAttribute
-    private String gtaaUri;
 
     public GTAAPerson() {
 
@@ -130,11 +97,7 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializabl
         return familyName + (givenName == null ? "":  ", " + givenName);
     }
 
-    @Override
-    @XmlAttribute
-    public String getId() {
-        return gtaaUri;
-    }
+
 
     public static GTAAPerson create(Description description, String submittedPrefLabel) {
         if (description == null) {
@@ -177,9 +140,14 @@ public class GTAAPerson implements ThesaurusObject, PersonInterface, Serializabl
         }
 
         answer.setStatus(description.getStatus());
-        answer.setGtaaUri(description.getAbout());
+        answer.setId(description.getAbout());
 
         return answer;
     }
 
+    @Override
+    public String getGtaaUri() {
+        return getId();
+
+    }
 }

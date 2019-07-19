@@ -3,10 +3,10 @@ package nl.vpro.domain.media.gtaa;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 
-import javax.validation.constraints.Null;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -21,7 +21,7 @@ import nl.vpro.w3.rdf.Description;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-public abstract class AbstractThesaurusItem implements ThesaurusObject {
+public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializable {
 
 
     @Getter
@@ -31,7 +31,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject {
 
     @Getter
     @Setter
-    private List<Label> notes;
+    List<Label> notes;
 
     @Getter
     @Setter
@@ -44,7 +44,8 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject {
     @Getter
     @Setter
     @XmlAttribute
-    private Status status;
+    Status status;
+
 
     @Getter
     @Setter
@@ -52,7 +53,9 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject {
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
-    private Instant lastModified;
+    Instant lastModified;
+
+
 
 
     protected static void fill(Description description, AbstractThesaurusItem answer) {
