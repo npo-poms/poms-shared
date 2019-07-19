@@ -9,10 +9,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
-import nl.vpro.domain.media.gtaa.GTAANewPerson;
-import nl.vpro.domain.media.gtaa.GTAANewThesaurusObject;
-import nl.vpro.domain.media.gtaa.GTAAPerson;
-import nl.vpro.domain.media.gtaa.ThesaurusObject;
+import nl.vpro.domain.gtaa.GTAANewPerson;
+import nl.vpro.domain.gtaa.GTAANewThesaurusObject;
+import nl.vpro.domain.gtaa.GTAAPerson;
+import nl.vpro.domain.gtaa.ThesaurusObject;
 
 /**
  * @author Machiel Groeneveld

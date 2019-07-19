@@ -40,7 +40,7 @@ import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.*;
+import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.*;
 import nl.vpro.util.BatchedReceiver;
 import nl.vpro.util.CountedIterator;

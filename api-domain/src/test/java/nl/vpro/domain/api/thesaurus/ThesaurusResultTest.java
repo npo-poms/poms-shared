@@ -1,15 +1,12 @@
 package nl.vpro.domain.api.thesaurus;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-import nl.vpro.domain.media.gtaa.GTAAGeographicName;
+import nl.vpro.domain.gtaa.GTAAGeographicName;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import org.junit.Test;
 
-import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.gtaa.GTAAPerson;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
 public class ThesaurusResultTest {

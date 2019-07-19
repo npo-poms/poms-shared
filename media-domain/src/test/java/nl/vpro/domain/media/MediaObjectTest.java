@@ -18,7 +18,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.gtaa.persistence.EmbeddablePerson;
+import nl.vpro.domain.gtaa.persistence.EmbeddablePerson;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;

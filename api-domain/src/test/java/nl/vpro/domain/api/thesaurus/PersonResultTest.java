@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import nl.vpro.domain.media.gtaa.GTAAPerson;
+import nl.vpro.domain.gtaa.GTAAPerson;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 

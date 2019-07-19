@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.domain.media.gtaa.AbstractGTAAObject;
+import nl.vpro.domain.gtaa.AbstractGTAAObject;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.Namespaces;
 

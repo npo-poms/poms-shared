@@ -2,8 +2,8 @@ package nl.vpro.domain.media;
 
 import org.junit.Test;
 
-import nl.vpro.domain.media.gtaa.persistence.EmbeddablePerson;
-import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.domain.gtaa.persistence.EmbeddablePerson;
+import nl.vpro.domain.gtaa.Status;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;

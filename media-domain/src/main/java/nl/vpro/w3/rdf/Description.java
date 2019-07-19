@@ -30,11 +30,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Singular;
 import lombok.ToString;
-import nl.vpro.domain.media.gtaa.AbstractGTAAObject;
+import nl.vpro.domain.gtaa.AbstractGTAAObject;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.openarchives.oai.Note;
-import nl.vpro.domain.media.gtaa.Status;
-import nl.vpro.domain.media.gtaa.XLLabel;
+import nl.vpro.domain.gtaa.Status;
+import nl.vpro.domain.gtaa.XLLabel;
 import nl.vpro.dublincore.terms.Date;
 import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
 

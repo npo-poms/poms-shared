@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.gtaa;
+package nl.vpro.domain.gtaa;
 
 import java.time.Instant;
 import java.util.List;

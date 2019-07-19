@@ -14,9 +14,9 @@ import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.media.gtaa.GTAAConflict;
-import nl.vpro.domain.media.gtaa.GTAANewPerson;
-import nl.vpro.domain.media.gtaa.GTAARepository;
+import nl.vpro.domain.gtaa.GTAAConflict;
+import nl.vpro.domain.gtaa.GTAANewPerson;
+import nl.vpro.domain.gtaa.GTAARepository;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;

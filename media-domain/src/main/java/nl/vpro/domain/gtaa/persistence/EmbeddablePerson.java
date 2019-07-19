@@ -2,7 +2,7 @@
  * Copyright (C) 2015 All rights reserved
  * VPRO The Netherlands
  */
-package nl.vpro.domain.media.gtaa.persistence;
+package nl.vpro.domain.gtaa.persistence;
 
 import lombok.ToString;
 
@@ -11,7 +11,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.domain.gtaa.Status;
 
 /**
  *

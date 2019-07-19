@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import nl.vpro.domain.Change;
-import nl.vpro.domain.media.gtaa.*;
+import nl.vpro.domain.gtaa.*;
 
 @ToString
 @EqualsAndHashCode(callSuper = true)

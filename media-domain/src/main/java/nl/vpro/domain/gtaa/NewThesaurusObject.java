@@ -1,4 +1,4 @@
-package nl.vpro.domain.media.gtaa;
+package nl.vpro.domain.gtaa;
 
 import java.util.List;
 import java.util.stream.Collectors;

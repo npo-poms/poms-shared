@@ -2,7 +2,7 @@
  * Copyright (C) 2015 All rights reserved
  * VPRO The Netherlands
  */
-package nl.vpro.domain.media.gtaa;
+package nl.vpro.domain.gtaa;
 
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;

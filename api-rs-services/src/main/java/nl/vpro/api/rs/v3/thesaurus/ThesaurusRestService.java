@@ -2,7 +2,6 @@ package nl.vpro.api.rs.v3.thesaurus;
 
 import java.io.InputStream;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -17,7 +16,7 @@ import org.jboss.resteasy.annotations.cache.NoCache;
 import nl.vpro.domain.api.Constants;
 import nl.vpro.domain.api.thesaurus.PersonResult;
 import nl.vpro.domain.api.thesaurus.ThesaurusResult;
-import nl.vpro.domain.media.gtaa.ThesaurusObject;
+import nl.vpro.domain.gtaa.ThesaurusObject;
 
 import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
 import static nl.vpro.domain.api.Constants.MAX;

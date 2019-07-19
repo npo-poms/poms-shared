@@ -16,8 +16,8 @@ import org.springframework.web.client.HttpServerErrorException;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
-import nl.vpro.domain.media.gtaa.GTAANewThesaurusObject;
-import nl.vpro.domain.media.gtaa.Status;
+import nl.vpro.domain.gtaa.GTAANewThesaurusObject;
+import nl.vpro.domain.gtaa.Status;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
