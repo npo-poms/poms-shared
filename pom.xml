@@ -34,7 +34,7 @@
     <module>poms-shared-test</module>
     <module>user-domain</module>
     <module>media-domain</module>
-    <module>media-gtaa</module>
+    <module>gtaa-domain</module>
     <module>pages-domain</module>
     <module>image-domain</module>
     <module>subtitles-domain</module>
