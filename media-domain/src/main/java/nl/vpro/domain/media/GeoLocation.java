@@ -26,6 +26,8 @@ import nl.vpro.validation.NoHtml;
 
 /**
  * A wrapper around GTAA {@link GTAAGeographicName}
+ * @author Giorgio Vinci
+ *  @since 5.11
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

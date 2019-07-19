@@ -3,55 +3,66 @@ package nl.vpro.domain.media;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+import nl.vpro.domain.Displayable;
+
+/**
+ * @author Giorgio Vinci
+ * @since 5.11
+ */
 @XmlEnum
 @XmlType(name = "intentionEnum")
-public enum IntentionType {
+public enum IntentionType implements Displayable {
     INFORM {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Informeren";
         }
     },
     INFORM_NEWS_AND_FACTS {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Informeren / verdiepen - nieuws en actualiteiten";
         }
     },
     INFORM_INDEPTH {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Informeren / verdiepen - zwaar informatief";
         }
     },
     INFORM_GENERAL {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Informeren / verdiepen - licht informatief";
         }
     },
     ENTERTAINMENT {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Vermaken";
         }
     },
     ENTERTAINMENT_LEASURE {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Vermaken - Puur vermaak";
         }
     },
     ENTERTAINMENT_INFORMATIVE {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Informatief vermaak";
         }
     },
     ACTIVATING {
         @Override
-        public String toString() {
+        public String getDisplayName() {
             return "Activeren";
         }
+    };
+
+    @Override
+    public String toString() {
+        return getDisplayName();
     }
 }
