@@ -15,7 +15,6 @@ import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
-import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
@@ -149,8 +148,8 @@ public class OpenskosRepositoryITest {
     @Ignore
     public void testChanges() {
         OpenskosRepository impl = getRealInstance();
-        Instant start = LocalDate.of(2017, 10, 4).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
-        Instant stop = LocalDate.of(2017, 10, 4).atTime(9, 20).atZone(Schedule.ZONE_ID).toInstant();
+        Instant start = LocalDate.of(2017, 10, 4).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+        Instant stop = LocalDate.of(2017, 10, 4).atTime(9, 20).atZone(OpenskosRepository.ZONE_ID).toInstant();
 
         CountedIterator<Record> updates = impl.getPersonUpdates(start, stop);
         long count = 0;

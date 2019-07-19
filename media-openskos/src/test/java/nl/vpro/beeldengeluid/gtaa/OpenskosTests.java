@@ -13,7 +13,6 @@ import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
 
-import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.gtaa.GTAAConflict;
 import nl.vpro.domain.gtaa.GTAANewPerson;
 import nl.vpro.domain.gtaa.GTAARepository;
@@ -88,8 +87,8 @@ public class OpenskosTests {
     @Ignore
     public void testChanges() {
         GTAARepository impl = getRealInstance();
-        Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
-        Instant stop = LocalDate.now().atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
+        Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+        Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
 
         CountedIterator<Record> updates = impl.getPersonUpdates(start, stop);
         long count = 0;
@@ -109,8 +108,8 @@ public class OpenskosTests {
     @Ignore
     public void testAllChanges() {
         GTAARepository impl = getRealInstance();
-        Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
-        Instant stop = LocalDate.now().atStartOfDay().atZone(Schedule.ZONE_ID).toInstant();
+        Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+        Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
 
         CountedIterator<Record> updates = impl.getAllUpdates(start, stop);
         long count = 0;
