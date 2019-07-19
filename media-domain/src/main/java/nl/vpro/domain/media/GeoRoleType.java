@@ -2,6 +2,8 @@ package nl.vpro.domain.media;
 
 import javax.xml.bind.annotation.XmlEnum;
 
+import org.apache.commons.lang3.StringUtils;
+
 import nl.vpro.domain.Displayable;
 
 
@@ -37,7 +39,10 @@ public enum GeoRoleType implements Displayable {
         return getDisplayName();
     }
 
-    public static GeoRoleType fromToString(String string) {
+    public static GeoRoleType fromDisplayName(String string) {
+        if (StringUtils.isEmpty(string)) {
+            return UNDEFINED;
+        }
         for (GeoRoleType role : GeoRoleType.values()) {
             if (string.equals(role.getDisplayName())) {
                 return role;
