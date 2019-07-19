@@ -72,7 +72,7 @@
     </dependency>
     <dependency>
       <groupId>nl.vpro.poms</groupId>
-      <artifactId>media-gtaa</artifactId>
+      <artifactId>gtaa-domain</artifactId>
     </dependency>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
