@@ -38,7 +38,7 @@ public class GTAAGeographicNameTest {
     public void json() throws Exception {
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(geoName, "{\n" +
-            "  \"objectType\" : \"geographicname\",\n" +
+            "  \"objectType\" : \"GEOGRAFISCHENAMEN\",\n" +
             "  \"value\" : \"Amsterdam\",\n" +
             "  \"notes\" : [ {\n" +
             "    \"value\" : \"bla\",\n" +

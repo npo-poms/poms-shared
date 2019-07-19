@@ -7,24 +7,25 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 
 import nl.vpro.openarchives.oai.Label;
 
 
 @JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
+    use = JsonTypeInfo.Id.CUSTOM,
     property = "objectType"
 )
+@JsonTypeIdResolver(ThesaurusObjectIdResolver.class)
 @JsonSubTypes(
     {
-        @JsonSubTypes.Type(value = GTAAPerson.class, name = "person"),
-        @JsonSubTypes.Type(value = GTAATopic.class, name = "topic"),
-        @JsonSubTypes.Type(value = GTAAGenre.class, name = "genre"),
-        @JsonSubTypes.Type(value = GTAAGeographicName.class, name = "geographicname"),
-        @JsonSubTypes.Type(value = GTAAMaker.class, name = "maker"),
-        @JsonSubTypes.Type(value = GTAAName.class, name = "name"),
-        @JsonSubTypes.Type(value = ThesaurusItem.class, name = "item")
+        @JsonSubTypes.Type(value = GTAAPerson.class),
+        @JsonSubTypes.Type(value = GTAATopic.class),
+        @JsonSubTypes.Type(value = GTAAGenre.class),
+        @JsonSubTypes.Type(value = GTAAGeographicName.class),
+        @JsonSubTypes.Type(value = GTAAMaker.class),
+        @JsonSubTypes.Type(value = GTAAName.class),
+        @JsonSubTypes.Type(value = ThesaurusItem.class)
     })
 @XmlSeeAlso({
     GTAAPerson.class,
@@ -36,6 +37,7 @@ import nl.vpro.openarchives.oai.Label;
     ThesaurusItem.class
 })
 public interface ThesaurusObject {
+
 
     String getId();
 

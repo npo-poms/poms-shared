@@ -21,7 +21,7 @@ public class GTAAPersonTest {
         GTAAPerson person = GTAAPerson.builder().givenName("Pietje").familyName("puk").build();
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(person, "{\n" +
-            "  \"objectType\" : \"person\",\n" +
+            "  \"objectType\" : \"PERSOONSNAMEN\",\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"puk\",\n" +
             "  \"value\" : \"puk, Pietje\"\n" +
