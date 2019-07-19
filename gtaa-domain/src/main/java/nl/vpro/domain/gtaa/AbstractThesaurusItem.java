@@ -46,7 +46,6 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
     @XmlAttribute
     Status status;
 
-
     @Getter
     @Setter
     @XmlAttribute
@@ -56,7 +55,18 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
     Instant lastModified;
 
 
+    AbstractThesaurusItem() {
 
+    }
+
+    AbstractThesaurusItem(String id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+        this.id = id;
+        this.notes = notes;
+        this.value = value;
+        this.redirectedFrom = redirectedFrom;
+        this.status = status;
+        this.lastModified = lastModified;
+    }
 
     protected static void fill(Description description, AbstractThesaurusItem answer) {
         answer.setId(description.getAbout());
