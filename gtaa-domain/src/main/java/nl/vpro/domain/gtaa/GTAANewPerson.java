@@ -19,7 +19,7 @@ import nl.vpro.domain.PersonInterface;
 
 @NoArgsConstructor
 @XmlRootElement(name = "newPerson")
-@GTAAScheme(Scheme.PERSOONSNAMEN)
+@GTAAScheme(Scheme.PERSON)
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonTypeName("person")
 public class GTAANewPerson implements PersonInterface, NewThesaurusObject<GTAAPerson> {

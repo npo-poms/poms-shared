@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import nl.vpro.w3.rdf.Description;
 
+@GTAAScheme(Scheme.ITEM)
 public class ThesaurusItem extends AbstractThesaurusItem {
 
 
