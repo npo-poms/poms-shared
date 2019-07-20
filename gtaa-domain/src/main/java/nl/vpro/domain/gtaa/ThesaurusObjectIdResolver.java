@@ -28,7 +28,7 @@ public class ThesaurusObjectIdResolver extends TypeIdResolverBase {
 
     @Override
     public String idFromValueAndType(Object value, Class<?> suggestedType) {
-        return suggestedType.getAnnotation(GTAAScheme.class).value().name();
+        return suggestedType.getAnnotation(GTAAScheme.class).value().name().toLowerCase();
 
     }
 
@@ -38,6 +38,6 @@ public class ThesaurusObjectIdResolver extends TypeIdResolverBase {
     }
     @Override
     public JavaType typeFromId(DatabindContext context, String id)  throws IOException {
-        return TypeFactory.defaultInstance().constructSimpleType(Scheme.valueOf(id).getImplementation(), new JavaType[0]);
+        return TypeFactory.defaultInstance().constructSimpleType(Scheme.valueOf(id.toUpperCase()).getImplementation(), new JavaType[0]);
     }
 }

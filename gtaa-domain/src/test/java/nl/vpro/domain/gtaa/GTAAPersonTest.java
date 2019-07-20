@@ -20,11 +20,12 @@ public class GTAAPersonTest {
     public void json() throws Exception {
         GTAAPerson person = GTAAPerson.builder().givenName("Pietje").familyName("puk").build();
 
-        Jackson2TestUtil.roundTripAndSimilarAndEquals(person, "{\n" +
-            "  \"objectType\" : \"PERSOONSNAMEN\",\n" +
+        Jackson2TestUtil.roundTripAndSimilarAndEquals(person,
+            "{\n" +
+            "  \"objectType\" : \"person\",\n" +
+            "  \"value\" : \"puk, Pietje\",\n" +
             "  \"givenName\" : \"Pietje\",\n" +
-            "  \"familyName\" : \"puk\",\n" +
-            "  \"value\" : \"puk, Pietje\"\n" +
+            "  \"familyName\" : \"puk\"\n" +
             "}");
 
     }

@@ -2,8 +2,6 @@ package nl.vpro.domain.gtaa;
 
 import java.util.Optional;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
@@ -22,20 +20,20 @@ public class ThesaurusObjects {
         Optional<Scheme> scheme = Scheme.ofUrl(d.getInScheme().getResource());
         if (scheme.isPresent()) {
             switch(scheme.get()) {
-                case PERSOONSNAMEN:
+                case PERSON:
                     return GTAAPerson.create(d);
-                case ONDERWERPEN:
+                case TOPIC:
                     return GTAATopic.create(d);
                 case GENRE:
                     return GTAAGenre.create(d);
-                case NAMEN:
+                case NAMES:
                     return GTAAName.create(d);
-                case GEOGRAFISCHENAMEN:
+                case GEOGRAPHICNAME:
                     return GTAAGeographicName.create(d);
                 case MAKER:
                     return GTAAMaker.create(d);
-                case CLASSIFICATIE:
-                case ONDERWERPENBENG:
+                case CLASSIFICATION:
+                case TOPICBANDG:
                 default:
                     return ThesaurusItem.create(d);
 

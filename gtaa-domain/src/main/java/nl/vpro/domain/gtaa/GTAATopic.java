@@ -6,7 +6,7 @@ package nl.vpro.domain.gtaa;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
-@GTAAScheme(Scheme.ONDERWERPEN)
+@GTAAScheme(Scheme.TOPIC)
 public class GTAATopic extends AbstractThesaurusItem {
 
 

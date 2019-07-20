@@ -38,7 +38,7 @@ import nl.vpro.w3.rdf.Description;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = "person")
-@GTAAScheme(Scheme.PERSOONSNAMEN)
+@GTAAScheme(Scheme.PERSON)
 public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
