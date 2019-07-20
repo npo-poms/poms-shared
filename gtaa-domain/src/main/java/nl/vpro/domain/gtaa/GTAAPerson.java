@@ -25,7 +25,9 @@ import nl.vpro.w3.rdf.Description;
  * @since 3.7
  */
 @Slf4j
-@XmlType(propOrder = {
+@XmlType(
+    name = "person",
+    propOrder = {
     "value",
     "givenName",
     "familyName",
@@ -102,7 +104,10 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
     @Override
     @XmlElement
     public String getValue() {
-        return familyName + (givenName == null ? "":  ", " + givenName);
+        if (familyName == null && givenName == null) {
+            return null;
+        }
+        return (familyName == null ? "" : familyName) + (givenName == null ? "":  ", " + givenName);
     }
 
 
