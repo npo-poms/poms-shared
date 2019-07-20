@@ -11,12 +11,14 @@ import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
 @GTAAScheme(Scheme.GEOGRAPHICNAME)
-@XmlType(propOrder = {
+@XmlType(
+    name = "geographicName",
+    propOrder = {
     "value",
     "notes",
     "redirectedFrom"
 })
-@XmlRootElement(name = "geographicname")
+@XmlRootElement(name = "geographicName")
 public class GTAAGeographicName extends AbstractThesaurusItem {
 
     @lombok.Builder
