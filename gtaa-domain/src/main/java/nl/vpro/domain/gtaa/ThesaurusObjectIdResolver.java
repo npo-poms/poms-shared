@@ -14,9 +14,18 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
  * @since 5.11
  */
 public class ThesaurusObjectIdResolver extends TypeIdResolverBase {
+
+    private static boolean inited = false;
     static {
-         for (JsonSubTypes.Type type :ThesaurusObject.class.getAnnotation(JsonSubTypes.class).value()) {
-            Scheme.init(type.value());
+        init();
+    }
+
+    static void init() {
+        if (! inited) {
+            for (JsonSubTypes.Type type : ThesaurusObject.class.getAnnotation(JsonSubTypes.class).value()) {
+                Scheme.init(type.value());
+            }
+            inited = true;
         }
     }
 

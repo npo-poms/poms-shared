@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -28,15 +29,12 @@ public class SchemaTest extends AbstractSchemaTest {
 
     @BeforeClass
     public static void generateXSDs() throws JAXBException, IOException {
+
         context = generate(
-            GTAAPerson.class,
-            GTAAGeographicName.class,
-            GTAAName.class,
-            GTAAGenre.class,
-            GTAAMaker.class,
-            GTAATopic.class,
-            GTAANewThesaurusObject.class,
-            GTAANewPerson.class
+            ArrayUtils.addAll(Scheme.classes(),
+                GTAANewThesaurusObject.class,
+                GTAANewPerson.class
+            )
         );
 
     }

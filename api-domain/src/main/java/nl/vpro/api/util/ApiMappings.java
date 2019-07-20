@@ -19,6 +19,7 @@ import nl.vpro.domain.api.page.PageSearchResult;
 import nl.vpro.domain.api.page.PageSearchResults;
 import nl.vpro.domain.api.profile.Profile;
 import nl.vpro.domain.api.subtitles.SubtitlesForm;
+import nl.vpro.domain.gtaa.Scheme;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.update.PageUpdate;
@@ -56,6 +57,7 @@ public class ApiMappings extends Mappings {
         MAPPING.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
         MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class});
         MAPPING.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class, SubtitlesType.class});
+        MAPPING.put(GTAA_NAMESPACE, Scheme.classes());
 
         Xmlns.fillLocationsAtPoms(KNOWN_LOCATIONS, pomsLocation.toString());
     }
