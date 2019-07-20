@@ -3,6 +3,8 @@ package nl.vpro.domain.gtaa;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 
 import nl.vpro.domain.Displayable;
@@ -37,7 +39,6 @@ public enum Scheme implements Displayable {
     ITEM(null, "item", "items")
 
     ;
-
     @Getter
     private final String url;
 
@@ -81,7 +82,14 @@ public enum Scheme implements Displayable {
     @Override
     public String getDisplayName() {
         return displayName;
+    }
 
+    public static Class[] classes() {
+        ThesaurusObjectIdResolver.init();
+        return Arrays.stream(values()).map(s -> s.implementation)
+            .filter(Objects::nonNull)
+            .toArray(Class[]::new);
     }
 }
+
 
