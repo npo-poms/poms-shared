@@ -1,36 +1,13 @@
 package nl.vpro.domain.media;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.*;
-import java.util.Set;
-import java.util.TreeSet;
+import java.io.IOException;
 
-import javax.xml.XMLConstants;
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.SchemaOutputResolver;
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Result;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.meeuw.jaxbdocumentation.DocumentationAdder;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.xmlunit.builder.DiffBuilder;
-import org.xmlunit.diff.Diff;
-
-import com.google.common.io.Files;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.search.MediaForm;
@@ -40,8 +17,7 @@ import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
 import nl.vpro.domain.user.Broadcaster;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 
 
 /**
@@ -56,11 +32,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 3.4
  */
 @Slf4j
-public class SchemaTest {
+public class SchemaTest extends AbstractSchemaTest {
 
-    private final static File DIR = Files.createTempDir();
 
-    private static JAXBContext context;
 
     @BeforeClass
     public static void generateXSDs() throws JAXBException, IOException {
@@ -182,82 +156,5 @@ public class SchemaTest {
 
     }
 
-    @SneakyThrows
-    protected <T extends Enum<T>> void testEnum(String resource, String enumTypeName, Class<T> enumClass) {
-         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document document = dBuilder.parse(getClass().getResourceAsStream(resource));
 
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        NodeList nodes = (NodeList)xPath.evaluate("/schema/simpleType[@name='" + enumTypeName + "']/restriction/enumeration", document, XPathConstants.NODESET);
-
-        Set<String> valuesInXsd = new TreeSet<>();
-        for (int i  = 0; i < nodes.getLength(); i++) {
-            valuesInXsd.add(nodes.item(i).getAttributes().getNamedItem("value").getTextContent());
-        }
-
-        Set<String> valuesInEnum = new TreeSet<>();
-
-        T[] values = enumClass.getEnumConstants();
-        for (T v : values) {
-            XmlEnumValue xmlEnumValue = enumClass.getField(v.name()).getAnnotation(XmlEnumValue.class);
-            valuesInEnum.add(xmlEnumValue != null ? xmlEnumValue.value() : v.name());
-        }
-        assertThat(valuesInXsd)
-            .isEqualTo(
-                valuesInEnum);
-    }
-
-    private static File getFile(final String namespace) {
-        String filename = namespace;
-        if (StringUtils.isEmpty(namespace)) {
-            filename = "absentnamespace";
-        }
-        return new File(DIR, filename + ".xsd");
-    }
-
-    private  void testNamespace(String namespace) throws IOException {
-        File file = getFile(namespace);
-        InputStream control = getClass().getResourceAsStream("/schema/" + file.getName());
-        if (control == null) {
-            System.out.println(file.getName());
-            IOUtils.copy(new FileInputStream(file), System.out);
-            throw new RuntimeException("No file " + file.getName());
-        }
-        Diff diff = DiffBuilder.compare(control)
-            .withTest(file)
-            .checkForIdentical()
-            .build();
-
-        assertThat(diff.hasDifferences())
-            .withFailMessage("" + file + " should be equal to " + getClass().getResource("/schema/" + file.getName())).isFalse();
-    }
-
-    private static JAXBContext generate(Class... classes) throws JAXBException, IOException {
-        DocumentationAdder collector = new DocumentationAdder(classes);
-
-        JAXBContext context = JAXBContext.newInstance(classes);
-
-        context.generateSchema(new SchemaOutputResolver() {
-            @Override
-            public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
-                if (XMLConstants.XML_NS_URI.equals(namespaceUri)) {
-                    return null;
-                }
-                File f = getFile(namespaceUri);
-                if (f.exists()) {
-                    f = File.createTempFile(namespaceUri, "");
-                }
-                log.info(namespaceUri + " -> " + f);
-
-                StreamResult result = new StreamResult(f);
-                result.setSystemId(f);
-                FileOutputStream fo = new FileOutputStream(f);
-                result.setOutputStream(fo);
-
-                return result;
-            }
-        });
-        return context;
-    }
 }
