@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:gtaa:2017" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:tns="urn:vpro:gtaa:2017" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.openarchives.org/OAI/2.0/" xmlns:gtaa="urn:vpro:gtaa:2017" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openskos="http://openskos.org/xmlns#">
+
+  <xs:import namespace="http://www.openarchives.org/OAI/2.0/" schemaLocation="http:__www.openarchives.org_OAI_2.0_.xsd"/>
+
+  <xs:element name="geographicname" type="tns:gtaaGeographicName"/>
+
+  <xs:element name="gtaaNewThesaurusObject" type="tns:gtaaNewThesaurusObject"/>
+
+  <xs:element name="newPerson" type="tns:gtaaNewPerson"/>
+
+  <xs:element name="person" type="tns:gtaaPerson"/>
+
+  <xs:complexType name="gtaaPerson">
+    <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+      <xs:element name="familyName" type="xs:string" minOccurs="0"/>
+      <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="knownAs" type="tns:names" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="tns:id"/>
+    <xs:attribute ref="tns:status"/>
+    <xs:attribute ref="tns:lastModified"/>
+  </xs:complexType>
+
+  <xs:complexType name="names">
+    <xs:sequence>
+      <xs:element name="familyName" type="xs:string" minOccurs="0"/>
+      <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="gtaaGeographicName">
+    <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="tns:id"/>
+    <xs:attribute ref="tns:status"/>
+    <xs:attribute ref="tns:lastModified"/>
+  </xs:complexType>
+
+  <xs:complexType name="gtaaName">
+    <xs:sequence>
+      <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="tns:id"/>
+    <xs:attribute ref="tns:status"/>
+    <xs:attribute ref="tns:lastModified"/>
+  </xs:complexType>
+
+  <xs:complexType name="gtaaGenre">
+    <xs:sequence>
+      <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="tns:id"/>
+    <xs:attribute ref="tns:status"/>
+    <xs:attribute ref="tns:lastModified"/>
+  </xs:complexType>
+
+  <xs:complexType name="gtaaMaker">
+    <xs:sequence>
+      <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="tns:id"/>
+    <xs:attribute ref="tns:status"/>
+    <xs:attribute ref="tns:lastModified"/>
+  </xs:complexType>
+
+  <xs:complexType name="gtaaTopic">
+    <xs:sequence>
+      <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="tns:id"/>
+    <xs:attribute ref="tns:status"/>
+    <xs:attribute ref="tns:lastModified"/>
+  </xs:complexType>
+
+  <xs:complexType name="gtaaNewThesaurusObject">
+    <xs:sequence>
+      <xs:element name="notes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="objectType" type="xs:string" minOccurs="0"/>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="gtaaNewPerson">
+    <xs:sequence>
+      <xs:element name="givenName" type="xs:string" minOccurs="0"/>
+      <xs:element name="familyName" type="xs:string" minOccurs="0"/>
+      <xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="status">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="candidate"/>
+      <xs:enumeration value="approved"/>
+      <xs:enumeration value="redirected"/>
+      <xs:enumeration value="not_compliant"/>
+      <xs:enumeration value="rejected"/>
+      <xs:enumeration value="obsolete"/>
+      <xs:enumeration value="deleted"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:attribute name="id" type="xs:string"/>
+
+  <xs:attribute name="lastModified" type="xs:string"/>
+
+  <xs:attribute name="status" type="xs:string"/>
+</xs:schema>
+
