@@ -12,7 +12,7 @@ import nl.vpro.w3.rdf.Description;
 
 @GTAAScheme(Scheme.geographicname)
 @XmlType(
-    name = "geographicNameType",
+    name = "geographicName",
     propOrder = {
     "value",
     "notes",

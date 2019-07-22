@@ -26,7 +26,7 @@ import nl.vpro.w3.rdf.Description;
  */
 @Slf4j
 @XmlType(
-    name = "personType",
+    name = "person",
     propOrder = {
     "value",
     "givenName",
