@@ -3,15 +3,15 @@
 
   <xs:import namespace="http://www.openarchives.org/OAI/2.0/" schemaLocation="http:__www.openarchives.org_OAI_2.0_.xsd"/>
 
-  <xs:element name="geographicName" type="tns:geographicNameType"/>
+  <xs:element name="geographicName" type="tns:geographicName"/>
 
   <xs:element name="newConcept" type="tns:newConceptType"/>
 
   <xs:element name="newPerson" type="tns:newPersonType"/>
 
-  <xs:element name="person" type="tns:personType"/>
+  <xs:element name="person" type="tns:person"/>
 
-  <xs:complexType name="personType">
+  <xs:complexType name="person">
     <xs:sequence>
       <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="givenName" type="xs:string" minOccurs="0"/>
@@ -32,7 +32,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="geographicNameType">
+  <xs:complexType name="geographicName">
     <xs:sequence>
       <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
@@ -121,11 +121,25 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="scheme">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="person"/>
+      <xs:enumeration value="geographicname"/>
+      <xs:enumeration value="topic"/>
+      <xs:enumeration value="topicbandg"/>
+      <xs:enumeration value="classification"/>
+      <xs:enumeration value="maker"/>
+      <xs:enumeration value="genre"/>
+      <xs:enumeration value="name"/>
+      <xs:enumeration value="item"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:attribute name="id" type="xs:string"/>
 
   <xs:attribute name="lastModified" type="xs:string"/>
 
-  <xs:attribute name="objectType" type="xs:string"/>
+  <xs:attribute name="objectType" type="tns:scheme"/>
 
   <xs:attribute name="status" type="tns:status"/>
 </xs:schema>
