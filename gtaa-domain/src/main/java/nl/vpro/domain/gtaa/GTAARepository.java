@@ -24,7 +24,7 @@ public interface GTAARepository {
 
     List<Description> findPersons(String input, Integer max);
 
-    <T extends ThesaurusObject, S extends NewThesaurusObject<T>>  T  submit(S thesaurusObject, String creator);
+    <T extends ThesaurusObject, S extends NewThesaurusObject>  T  submit(S thesaurusObject, String creator);
 
     List<Description> findAnything(String input, Integer max);
 

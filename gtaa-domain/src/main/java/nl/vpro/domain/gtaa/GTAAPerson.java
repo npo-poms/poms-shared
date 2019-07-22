@@ -26,7 +26,7 @@ import nl.vpro.w3.rdf.Description;
  */
 @Slf4j
 @XmlType(
-    name = "person",
+    name = "personType",
     propOrder = {
     "value",
     "givenName",
@@ -40,7 +40,7 @@ import nl.vpro.w3.rdf.Description;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = "person")
-@GTAAScheme(Scheme.PERSON)
+@GTAAScheme(Scheme.person)
 public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;

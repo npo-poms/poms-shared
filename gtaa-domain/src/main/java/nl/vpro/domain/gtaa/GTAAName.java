@@ -8,7 +8,7 @@ import java.util.List;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
-@GTAAScheme(Scheme.NAMES)
+@GTAAScheme(Scheme.name)
 public class GTAAName extends AbstractThesaurusItem {
 
     @Builder

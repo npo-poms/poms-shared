@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
-@GTAAScheme(Scheme.GEOGRAPHICNAME)
+@GTAAScheme(Scheme.geographicname)
 @XmlType(
-    name = "geographicName",
+    name = "geographicNameType",
     propOrder = {
     "value",
     "notes",

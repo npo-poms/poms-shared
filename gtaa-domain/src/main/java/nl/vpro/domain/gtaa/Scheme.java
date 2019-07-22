@@ -16,27 +16,28 @@ import nl.vpro.domain.Displayable;
 @Slf4j
 public enum Scheme implements Displayable {
 
-    PERSON("http://data.beeldengeluid.nl/gtaa/Persoonsnamen",
+    person("http://data.beeldengeluid.nl/gtaa/Persoonsnamen",
         "persoonsnaam",
         "persoonsnamen"),
 
-    GEOGRAPHICNAME("http://data.beeldengeluid.nl/gtaa/GeografischeNamen",
+    geographicname("http://data.beeldengeluid.nl/gtaa/GeografischeNamen",
         "geografische naam",
         "geografische namen"),
 
-    TOPIC("http://data.beeldengeluid.nl/gtaa/Onderwerpen", "onderwerp", "onderwerpen"),
+    topic("http://data.beeldengeluid.nl/gtaa/Onderwerpen", "onderwerp", "onderwerpen"),
 
-    TOPICBANDG("http://data.beeldengeluid.nl/gtaa/OnderwerpenBenG", "onderwerp van B&G", "onderwerpen van B&G"),
+    topicbandg("http://data.beeldengeluid.nl/gtaa/OnderwerpenBenG", "onderwerp van B&G", "onderwerpen van B&G"),
 
-    CLASSIFICATION("http://data.beeldengeluid.nl/gtaa/Classificatie", "classificatie", "classificaties"),
+    classification("http://data.beeldengeluid.nl/gtaa/Classificatie", "classificatie", "classificaties"),
 
-    MAKER("http://data.beeldengeluid.nl/gtaa/Maker", "maker", "makers"),
+    maker("http://data.beeldengeluid.nl/gtaa/Maker", "maker", "makers"),
 
-    GENRE("http://data.beeldengeluid.nl/gtaa/Genre", "genre", "genres"),
+    genre("http://data.beeldengeluid.nl/gtaa/Genre", "genre", "genres"),
 
-    NAMES("http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen"),
+    name("http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen"),
 
-    ITEM(null, "item", "items")
+
+    item(null, "item", "items")
 
     ;
     @Getter
@@ -65,6 +66,10 @@ public enum Scheme implements Displayable {
         return Optional.empty();
     }
 
+    public static Scheme ofJsonObjectType(String objectType) {
+        return Scheme.valueOf(objectType);
+    }
+
     static void init(Class<?> gtaaClass) {
         GTAAScheme annotation = gtaaClass.getAnnotation(GTAAScheme.class);
         if (annotation != null) {
@@ -82,6 +87,11 @@ public enum Scheme implements Displayable {
     @Override
     public String getDisplayName() {
         return displayName;
+    }
+
+
+    public String getJsonObjectType() {
+        return name();
     }
 
     public static Class[] classes() {

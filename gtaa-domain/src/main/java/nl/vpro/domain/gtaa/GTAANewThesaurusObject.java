@@ -1,39 +1,51 @@
 package nl.vpro.domain.gtaa;
 
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
-@Data
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+
+/**
+ * @author Eric Kuijt?
+ */
 @NoArgsConstructor
-@XmlRootElement
-public class GTAANewThesaurusObject implements NewThesaurusObject<ThesaurusObject> {
+@XmlRootElement(name="newConcept")
+@XmlType(
+    name = "newConceptType",
+    propOrder = {
+    "value",
+    "notes"
+})
+@XmlAccessorType(XmlAccessType.NONE)
+@JsonTypeName("concept")
+public class GTAANewThesaurusObject extends AbstractGTAANewConcept  {
 
     @Getter
     @Setter
+    @XmlElement
     private String value;
 
     @Getter
     @Setter
-    private List<String> notes;
-
-    @Getter
-    @Setter
-    private String objectType;
+    @XmlAttribute
+    private Scheme objectType;
 
     @lombok.Builder
     public GTAANewThesaurusObject(
         String value,
         @lombok.Singular List<String> notes,
-        String objectType) {
+        Scheme scheme) {
         this.value = value;
         this.notes = notes;
-        this.objectType = objectType;
+        this.objectType = scheme;
     }
+
+
 }
