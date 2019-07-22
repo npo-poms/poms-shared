@@ -26,6 +26,12 @@ public enum GeoRoleType implements Displayable {
             return "Onderwerp";
         }
     },
+    PRODUCED_IN {
+        @Override
+        public String getDisplayName() {
+            return "Geproduceerd in";
+        }
+    },
     UNDEFINED {
         @Override
         public String getDisplayName() {
