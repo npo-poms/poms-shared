@@ -52,7 +52,6 @@ public class ThesaurusChangeTest {
             "    \"objectType\" : \"person\",\n" +
             "    \"givenName\" : \"pietje\",\n" +
             "    \"familyName\" : \"puk\",\n" +
-            "    \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1672221\",\n" +
             "    \"value\" : \"puk, pietje\",\n" +
             "    \"id\" : \"http://data.beeldengeluid.nl/gtaa/1672221\"\n" +
             "  }\n" +
