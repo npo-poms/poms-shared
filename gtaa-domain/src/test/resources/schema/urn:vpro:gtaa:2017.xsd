@@ -3,15 +3,15 @@
 
   <xs:import namespace="http://www.openarchives.org/OAI/2.0/" schemaLocation="http:__www.openarchives.org_OAI_2.0_.xsd"/>
 
-  <xs:element name="geographicName" type="tns:geographicName"/>
+  <xs:element name="geographicName" type="tns:geographicNameType"/>
 
-  <xs:element name="gtaaNewThesaurusObject" type="tns:gtaaNewThesaurusObject"/>
+  <xs:element name="newConcept" type="tns:newConceptType"/>
 
-  <xs:element name="newPerson" type="tns:gtaaNewPerson"/>
+  <xs:element name="newPerson" type="tns:newPersonType"/>
 
-  <xs:element name="person" type="tns:person"/>
+  <xs:element name="person" type="tns:personType"/>
 
-  <xs:complexType name="person">
+  <xs:complexType name="personType">
     <xs:sequence>
       <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="givenName" type="xs:string" minOccurs="0"/>
@@ -32,7 +32,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="geographicName">
+  <xs:complexType name="geographicNameType">
     <xs:sequence>
       <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
@@ -93,15 +93,15 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="gtaaNewThesaurusObject">
+  <xs:complexType name="newConceptType">
     <xs:sequence>
-      <xs:element name="notes" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="objectType" type="xs:string" minOccurs="0"/>
       <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="note" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
+    <xs:attribute ref="tns:objectType"/>
   </xs:complexType>
 
-  <xs:complexType name="gtaaNewPerson">
+  <xs:complexType name="newPersonType">
     <xs:sequence>
       <xs:element name="givenName" type="xs:string" minOccurs="0"/>
       <xs:element name="familyName" type="xs:string" minOccurs="0"/>
@@ -124,6 +124,8 @@
   <xs:attribute name="id" type="xs:string"/>
 
   <xs:attribute name="lastModified" type="xs:string"/>
+
+  <xs:attribute name="objectType" type="xs:string"/>
 
   <xs:attribute name="status" type="tns:status"/>
 </xs:schema>

@@ -1,11 +1,10 @@
-package nl.vpro.rs.thesaurus.update;
+package nl.vpro.domain.gtaa;
 
 import java.io.IOException;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import nl.vpro.domain.gtaa.GTAANewPerson;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -23,7 +22,7 @@ public class GTAANewPersonTest {
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build();
 
         Jackson2TestUtil.roundTripAndSimilar(person, "{\n" +
-            "  \"objectType\" : \"person\",\n" +
+            "  \"newObjectType\" : \"person\",\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"Puk\",\n" +
             "  \"notes\" : [ \"test\" ]\n" +

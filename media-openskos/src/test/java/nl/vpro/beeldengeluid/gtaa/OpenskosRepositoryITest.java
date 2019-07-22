@@ -54,7 +54,7 @@ public class OpenskosRepositoryITest {
                 .builder()
                 .value("Driedorp")
                 .note("Buurtschap binnen de gemeente Nijkerk")
-                .objectType("GeografischeNamen")
+                .scheme(Scheme.geographicname)
                 .build();
 
         ;

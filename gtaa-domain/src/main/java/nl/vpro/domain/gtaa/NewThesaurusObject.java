@@ -14,21 +14,23 @@ import nl.vpro.openarchives.oai.Label;
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
-    property = "objectType"
+    property = "newObjectType"
 )
 @JsonSubTypes(
     {
         @JsonSubTypes.Type(value = GTAANewPerson.class, name = "person"),
-        @JsonSubTypes.Type(value = GTAANewThesaurusObject.class, name = "object")
+        @JsonSubTypes.Type(value = GTAANewThesaurusObject.class, name = "concept")
     })
 @XmlSeeAlso({
     GTAANewPerson.class,
     GTAANewThesaurusObject.class
 })
-public interface NewThesaurusObject<T extends ThesaurusObject> {
+public interface NewThesaurusObject {
     String getValue();
 
     List<String> getNotes();
+
+    Scheme getObjectType();
 
     default List<Label> getNotesAsLabel() {
         return getNotes().stream().map(Label::forValue).collect(Collectors.toList());

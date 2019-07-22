@@ -20,20 +20,20 @@ public class ThesaurusObjects {
         Optional<Scheme> scheme = Scheme.ofUrl(d.getInScheme().getResource());
         if (scheme.isPresent()) {
             switch(scheme.get()) {
-                case PERSON:
+                case person:
                     return GTAAPerson.create(d);
-                case TOPIC:
+                case topic:
                     return GTAATopic.create(d);
-                case GENRE:
+                case genre:
                     return GTAAGenre.create(d);
-                case NAMES:
+                case name:
                     return GTAAName.create(d);
-                case GEOGRAPHICNAME:
+                case geographicname:
                     return GTAAGeographicName.create(d);
-                case MAKER:
+                case maker:
                     return GTAAMaker.create(d);
-                case CLASSIFICATION:
-                case TOPICBANDG:
+                case classification:
+                case topicbandg:
                 default:
                     return ThesaurusItem.create(d);
 
@@ -58,14 +58,16 @@ public class ThesaurusObjects {
 
 
     public static Scheme toScheme(ThesaurusObject d) {
-        return toScheme((Object) d);
+        return toScheme((Object) d).orElseThrow(() -> new IllegalArgumentException("" + d + " has no scheme"));
     }
 
-    public static Scheme toScheme(NewThesaurusObject<?> d) {
-        return toScheme((Object) d);
-    }
-    private static Scheme toScheme(Object d) {
-        return d.getClass().getAnnotation(GTAAScheme.class).value();
+     private static Optional<Scheme> toScheme(Object d) {
+        GTAAScheme annotation = d.getClass().getAnnotation(GTAAScheme.class);
+        if (annotation != null) {
+            return Optional.of(annotation.value());
+        } else {
+            return Optional.empty();
+        }
     }
 
 

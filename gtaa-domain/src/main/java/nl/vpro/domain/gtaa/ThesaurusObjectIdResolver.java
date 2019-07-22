@@ -37,7 +37,7 @@ public class ThesaurusObjectIdResolver extends TypeIdResolverBase {
 
     @Override
     public String idFromValueAndType(Object value, Class<?> suggestedType) {
-        return suggestedType.getAnnotation(GTAAScheme.class).value().name().toLowerCase();
+        return suggestedType.getAnnotation(GTAAScheme.class).value().getJsonObjectType();
 
     }
 
@@ -46,7 +46,7 @@ public class ThesaurusObjectIdResolver extends TypeIdResolverBase {
         return JsonTypeInfo.Id.CUSTOM;
     }
     @Override
-    public JavaType typeFromId(DatabindContext context, String id)  throws IOException {
-        return TypeFactory.defaultInstance().constructSimpleType(Scheme.valueOf(id.toUpperCase()).getImplementation(), new JavaType[0]);
+    public JavaType typeFromId(DatabindContext context, String objectType)  throws IOException {
+        return TypeFactory.defaultInstance().constructSimpleType(Scheme.ofJsonObjectType(objectType).getImplementation(), new JavaType[0]);
     }
 }

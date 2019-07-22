@@ -2,7 +2,7 @@ package nl.vpro.domain.gtaa;
 
 import nl.vpro.w3.rdf.Description;
 
-@GTAAScheme(Scheme.GENRE)
+@GTAAScheme(Scheme.genre)
 public class GTAAGenre extends AbstractThesaurusItem {
 
 
