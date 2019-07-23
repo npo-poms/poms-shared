@@ -93,12 +93,12 @@ public class StreamingStatusImpl implements StreamingStatus {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof StreamingStatus)) return false;
 
-        StreamingStatusImpl that = (StreamingStatusImpl) o;
+        StreamingStatus that = (StreamingStatus) o;
 
-        if (withDrm != that.withDrm) return false;
-        return withoutDrm == that.withoutDrm;
+        if (withDrm != that.getWithDrm()) return false;
+        return withoutDrm == that.getWithoutDrm();
     }
 
 

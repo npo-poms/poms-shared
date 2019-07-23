@@ -27,4 +27,23 @@ public class ReadonlyStreamingStatus implements StreamingStatus {
         this.withoutDrm = withoutDrm;
         this.withoutDrmOffline = withoutDrmOffline;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StreamingStatus)) return false;
+
+        StreamingStatus that = (StreamingStatus) o;
+
+        if (withDrm != that.getWithDrm()) return false;
+        return withoutDrm == that.getWithoutDrm();
+    }
+
+    @Override
+    public String toString() {
+         return withDrm + (withDrmOffline != null ? ("(-" + withDrmOffline + ")") : "") +  "_" +
+             withoutDrm + (withoutDrmOffline != null ? ("(-" + withoutDrmOffline + ")") : "");
+     }
+
+
 }
