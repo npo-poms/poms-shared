@@ -23,7 +23,7 @@ public class StreamingStatusTest {
 
         StringReader reader = new StringReader(xml);
 
-        StreamingStatus status = JAXB.unmarshal(reader, StreamingStatus.class);
+        StreamingStatusImpl status = JAXB.unmarshal(reader, StreamingStatusImpl.class);
 
         assertThat(status.getWithDrm()).isEqualTo(StreamingStatus.Value.ONLINE);
 
