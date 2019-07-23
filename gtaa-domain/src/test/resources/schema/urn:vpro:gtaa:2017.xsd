@@ -3,13 +3,25 @@
 
   <xs:import namespace="http://www.openarchives.org/OAI/2.0/" schemaLocation="http:__www.openarchives.org_OAI_2.0_.xsd"/>
 
+  <xs:element name="classification" type="tns:classification"/>
+
+  <xs:element name="genre" type="tns:genre"/>
+
   <xs:element name="geographicName" type="tns:geographicName"/>
+
+  <xs:element name="maker" type="tns:maker"/>
+
+  <xs:element name="name" type="tns:name"/>
 
   <xs:element name="newConcept" type="tns:newConceptType"/>
 
   <xs:element name="newPerson" type="tns:newPersonType"/>
 
   <xs:element name="person" type="tns:person"/>
+
+  <xs:element name="topic" type="tns:topic"/>
+
+  <xs:element name="topicbandg" type="tns:topicbandg"/>
 
   <xs:complexType name="person">
     <xs:sequence>
@@ -43,8 +55,9 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="gtaaTopic">
+  <xs:complexType name="topic">
     <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -53,8 +66,9 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="gtaaMaker">
+  <xs:complexType name="topicbandg">
     <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -63,8 +77,9 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="gtaaGenre">
+  <xs:complexType name="classification">
     <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -73,8 +88,9 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="gtaaName">
+  <xs:complexType name="maker">
     <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -83,8 +99,20 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="thesaurusItem">
+  <xs:complexType name="genre">
     <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="tns:id"/>
+    <xs:attribute ref="tns:status"/>
+    <xs:attribute ref="tns:lastModified"/>
+  </xs:complexType>
+
+  <xs:complexType name="name">
+    <xs:sequence>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
       <xs:element name="notes" type="ns1:label" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -131,7 +159,6 @@
       <xs:enumeration value="maker"/>
       <xs:enumeration value="genre"/>
       <xs:enumeration value="name"/>
-      <xs:enumeration value="item"/>
     </xs:restriction>
   </xs:simpleType>
 
@@ -141,6 +168,6 @@
 
   <xs:attribute name="objectType" type="tns:scheme"/>
 
-  <xs:attribute name="status" type="tns:status"/>
+  <xs:attribute name="status" type="xs:string"/>
 </xs:schema>
 
