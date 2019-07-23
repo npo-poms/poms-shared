@@ -1216,6 +1216,9 @@ public abstract class MediaObject
 
     //region GeoLocations logic
     public SortedSet<GeoLocations> getGeoLocations() {
+        if (geoLocations == null) {
+            geoLocations = new TreeSet<>();
+        }
         return geoLocations;
     }
 

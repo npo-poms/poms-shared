@@ -15,20 +15,18 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import javax.validation.groups.Default;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.i18n.bind.jaxb.Code;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -53,7 +51,6 @@ import nl.vpro.validation.*;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 import nl.vpro.xml.bind.LocaleAdapter;
-
 
 /**
  * A MediaUpdate is meant for communicating updates. It is not meant as a complete representation of the object.
@@ -169,7 +166,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         return update;
     }
 
-    @SuppressWarnings("unchecked")
     public static <M extends MediaObject, MB extends MediaBuilder<MB, M>> MediaUpdate<M> createUpdate(MB object, OwnerType ownerType) {
         return create(object.build(), ownerType);
     }
@@ -451,7 +447,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected abstract M newMedia();
 
-    private final M fetchOwnerless() {
+    private M fetchOwnerless() {
         M media = newMedia();
         media.setUrn(urn);
         media.setMid(mid);
@@ -531,6 +527,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if(targetGroups != null){
             returnObject.addTargetGroups(toTargetGroups(targetGroups, owner));
         }
+        if(geoLocations != null){
+            returnObject.addGeoLocations(toGeoLocations(geoLocations, owner));
+        }
 
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
             ScheduleEvent e = s.toScheduleEvent(owner);
@@ -590,7 +589,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
             .orElse(new ArrayList<>());
     }
 
-    private TargetGroups toTargetGroups(List<TargetGroupType> targetGroupValues, OwnerType owner){
+    private TargetGroups toTargetGroups(@Nullable List<TargetGroupType> targetGroupValues, @NonNull  OwnerType owner){
         if (targetGroupValues == null){
             return null;
         }
@@ -600,6 +599,15 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 .build();
     }
 
+    private GeoLocations toGeoLocations(@Nullable List<GeoLocation> targetGeoLocations, @NonNull OwnerType owner){
+        if (targetGeoLocations == null){
+            return null;
+        }
+        return GeoLocations.builder()
+                .owner(owner)
+                .values(targetGeoLocations)
+                .build();
+    }
     public M fetch() {
         return fetch(OwnerType.BROADCASTER);
     }
@@ -630,7 +638,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
 
 
-    protected <T, U> TreeSet<T> toSet(Set<U> list, Predicate<U> filter, Function<U, T> mapper) {
+    protected <T, U extends Comparable<U>> TreeSet<T> toSet(Set<U> list, Predicate<U> filter, Function<U, T> mapper) {
         if (list == null) {
             list = new TreeSet<>();
         }
@@ -640,13 +648,9 @@ public abstract class  MediaUpdate<M extends MediaObject>
             .map(mapper)
             .collect(Collectors.toCollection(TreeSet::new));
     }
-     protected <T, U> TreeSet<T> toSet(Set<U> list, Function<U, T> mapper) {
-         return toSet(list, (u) -> true, mapper);
-     }
-
-
-
-
+    protected <T, U extends Comparable<U>> TreeSet<T> toSet(Set<U> list, Function<U, T> mapper) {
+        return toSet(list, (u) -> true, mapper);
+    }
 
 
     /**
@@ -655,7 +659,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
      */
     @XmlAttribute
     @Size.List({@Size(max = 255), @Size(min = 4)})
-    @Pattern(regexp = "^[ \\.a-zA-Z0-9_-]+$", flags = {Pattern.Flag.CASE_INSENSITIVE}, message = "{nl.vpro.constraints.mid}")
+    @Pattern(regexp = "^[ .a-zA-Z0-9_-]+$", flags = {Pattern.Flag.CASE_INSENSITIVE}, message = "{nl.vpro.constraints.mid}")
     @Override
     public final String getMid() {
         return mid;
@@ -1260,7 +1264,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     }
 
     void beforeMarshal(Marshaller marshaller) {
-        log.debug("Before");
+        log.trace("Before");
     }
 
 }
