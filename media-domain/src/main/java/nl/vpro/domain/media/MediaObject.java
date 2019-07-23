@@ -381,7 +381,7 @@ public abstract class MediaObject
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
-    protected AVType avType = AVType.MIXED;
+    protected AVType avType = null;
 
     @OneToOne(orphanRemoval = true, cascade = {ALL})
     protected AVAttributes avAttributes;
