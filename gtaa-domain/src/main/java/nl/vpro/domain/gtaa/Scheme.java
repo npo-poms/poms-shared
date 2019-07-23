@@ -40,6 +40,9 @@ public enum Scheme implements Displayable {
 
 
     ;
+    static {
+        ThesaurusObjectIdResolver.init();
+    }
     @Getter
     private final String url;
 
@@ -102,7 +105,6 @@ public enum Scheme implements Displayable {
     }
 
     public static Class[] classes() {
-        ThesaurusObjectIdResolver.init();
         return Arrays.stream(values()).map(s -> s.implementation)
             .filter(Objects::nonNull)
             .toArray(Class[]::new);
