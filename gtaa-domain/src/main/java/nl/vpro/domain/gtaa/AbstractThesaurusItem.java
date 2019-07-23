@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
     @Getter
     @Setter
     @XmlAttribute
-    private String id;
+    private URI id;
 
     @Getter
     @Setter
@@ -62,7 +63,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
 
     }
 
-    AbstractThesaurusItem(String id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+    AbstractThesaurusItem(URI id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
         this.id = id;
         this.notes = notes;
         this.value = value;
@@ -86,7 +87,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
         }
     }
 
-    protected void fill(String id,
+    protected void fill(URI id,
                         String value,
                         List<Label> notes,
                         Status status,

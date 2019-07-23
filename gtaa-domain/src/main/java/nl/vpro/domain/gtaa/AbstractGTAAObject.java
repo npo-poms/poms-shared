@@ -6,6 +6,7 @@ package nl.vpro.domain.gtaa;
 
 import lombok.Data;
 
+import java.net.URI;
 import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -25,12 +26,12 @@ public abstract class AbstractGTAAObject {
     private UUID uuid;
 
     @XmlAttribute(name = "about", namespace = Namespaces.RDF)
-    private String about;
+    private URI about;
 
     protected AbstractGTAAObject() {
     }
 
-    protected AbstractGTAAObject(UUID uuid, String about) {
+    protected AbstractGTAAObject(UUID uuid, URI about) {
         this.uuid = uuid;
         this.about = about;
     }

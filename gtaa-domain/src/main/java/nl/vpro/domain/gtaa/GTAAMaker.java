@@ -1,5 +1,6 @@
 package nl.vpro.domain.gtaa;
 
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class GTAAMaker extends AbstractSimpleValueThesaurusItem {
 
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAAMaker(String id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+    public GTAAMaker(URI id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
         super(id, notes, value, redirectedFrom, status, lastModified);
     }
     public GTAAMaker() {
