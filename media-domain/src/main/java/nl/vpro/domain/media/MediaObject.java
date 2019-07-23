@@ -632,7 +632,7 @@ public abstract class MediaObject
     @Embedded()
     @XmlTransient
     @Setter(AccessLevel.PACKAGE)
-    private StreamingStatus streamingPlatformStatus = StreamingStatus.unset();
+    private StreamingStatusImpl streamingPlatformStatus = StreamingStatus.unset();
 
     public MediaObject() {
     }
@@ -2107,6 +2107,9 @@ public abstract class MediaObject
         return StreamingStatus.copy(streamingPlatformStatus);
     }
 
+    protected StreamingStatusImpl getModifiableStreamingPlatformStatus() {
+        return streamingPlatformStatus;
+    }
     @XmlTransient
     public SortedSet<Prediction> getPredictions() {
         if (predictions == null) {
