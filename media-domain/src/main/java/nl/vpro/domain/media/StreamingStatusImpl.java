@@ -10,16 +10,14 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Michiel Meeuwissen
  * @since 5.11
  */
 @Embeddable
+@XmlType(name = "streamingStatus")
 @XmlRootElement(name="streamingStatus")
 @XmlAccessorType(XmlAccessType.NONE)
 public class StreamingStatusImpl implements StreamingStatus {
