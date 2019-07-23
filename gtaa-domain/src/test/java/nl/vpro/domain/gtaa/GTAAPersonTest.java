@@ -55,18 +55,6 @@ public class GTAAPersonTest {
 
     }
 
-    @Test
-    public void jsonAsThesaurusObjectReturnsItem() throws Exception {
-
-
-        ThesaurusObject object = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
-            "  \"objectType\" : \"item\",\n" +
-            "  \"prefLabel\" : \"augustijnen\"\n" +
-            "}"), ThesaurusObject.class);
-
-        assertThat(object).isInstanceOf(ThesaurusItem.class);
-
-    }
 
     @Test
     public void xml() throws Exception {

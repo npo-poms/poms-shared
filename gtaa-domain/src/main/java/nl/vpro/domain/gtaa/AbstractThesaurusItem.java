@@ -73,7 +73,9 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
 
     protected static void fill(Description description, AbstractThesaurusItem answer) {
         answer.setId(description.getAbout());
-        answer.setValue(description.getPrefLabel().getValue());
+        if (description.getPrefLabel() != null) {
+            answer.setValue(description.getPrefLabel().getValue());
+        }
         answer.setNotes(description.getScopeNote());
         answer.setStatus(description.getStatus());
         if (description.getChangeNote() != null) {

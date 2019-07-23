@@ -21,20 +21,24 @@ import nl.vpro.openarchives.oai.Label;
     {
         @JsonSubTypes.Type(value = GTAAPerson.class),
         @JsonSubTypes.Type(value = GTAATopic.class),
+        @JsonSubTypes.Type(value = GTAATopicBandG.class),
+
         @JsonSubTypes.Type(value = GTAAGenre.class),
         @JsonSubTypes.Type(value = GTAAGeographicName.class),
         @JsonSubTypes.Type(value = GTAAMaker.class),
         @JsonSubTypes.Type(value = GTAAName.class),
-        @JsonSubTypes.Type(value = ThesaurusItem.class)
+        @JsonSubTypes.Type(value = GTAAClassification.class),
+
     })
 @XmlSeeAlso({
     GTAAPerson.class,
     GTAATopic.class,
+    GTAATopicBandG.class,
     GTAAGenre.class,
     GTAAGeographicName.class,
     GTAAMaker.class,
     GTAAName.class,
-    ThesaurusItem.class
+    GTAAClassification.class
 })
 public interface ThesaurusObject {
 
