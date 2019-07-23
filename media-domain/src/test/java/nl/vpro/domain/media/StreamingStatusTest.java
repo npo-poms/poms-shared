@@ -32,7 +32,7 @@ public class StreamingStatusTest {
 
     @Test
     public void testMarshalToXml() throws IOException, SAXException {
-        StreamingStatus status = new StreamingStatus();
+        StreamingStatusImpl status = new StreamingStatusImpl();
         status.setWithDrm(StreamingStatus.Value.ONLINE);
 
         JAXBTestUtil.roundTripAndSimilar(status,
@@ -44,7 +44,7 @@ public class StreamingStatusTest {
      *  The DRM status offline date is in the far future, the long display notation is expected
      */
     public void displayName() {
-        StreamingStatus status = StreamingStatus.builder()
+        StreamingStatus status = StreamingStatusImpl.builder()
             .withDrmOffline(LocalDate.of(2200, 1, 1).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant())
             .withDrm(StreamingStatus.Value.ONLINE)
             .build();
