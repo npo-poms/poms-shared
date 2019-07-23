@@ -1,5 +1,6 @@
 package nl.vpro.domain.gtaa;
 
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -10,8 +11,6 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.BindingUtils;
 
-import static org.junit.Assert.*;
-
 /**
  * @author Michiel Meeuwissen
  * @since 5.11
@@ -20,7 +19,7 @@ public class GTAAGenreTest {
      GTAAGenre concept = GTAAGenre.builder()
             .notes(Arrays.asList(Label.builder().value("bla").lang("nl").build()))
             .value("Amsterdam")
-            .id("http://gtaa/1234")
+            .id(URI.create("http://gtaa/1234"))
             .status(Status.approved)
             .lastModified(LocalDateTime.of(2017, 9, 20, 10, 43, 0).atZone(BindingUtils.DEFAULT_ZONE).toInstant())
             .build();

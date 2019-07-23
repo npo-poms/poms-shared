@@ -3,6 +3,7 @@ package nl.vpro.domain.gtaa;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
@@ -49,7 +50,7 @@ public class GTAAConceptTest {
         assertThat(jsonType).isEqualTo(xmlType.toLowerCase());
         concept = (AbstractThesaurusItem) this.scheme.getImplementation().getConstructor().newInstance();
         concept.setValue("concept");
-        concept.setId("http://gtaa/1234");
+        concept.setId(URI.create("http://gtaa/1234"));
         concept.setNotes(Arrays.asList(Label.builder().value("bla").lang("nl").build()));
         concept.setLastModified(LocalDateTime.of(2017, 9, 20, 10, 43, 0).atZone(BindingUtils.DEFAULT_ZONE).toInstant());
         concept.setStatus(Status.approved);
@@ -70,12 +71,12 @@ public class GTAAConceptTest {
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(concept, "{\n" +
             "  \"objectType\" : \"" + jsonType + "\",\n" +
+            "  \"id\" : \"http://gtaa/1234\",\n" +
             "  \"value\" : \"concept\",\n" +
             "  \"notes\" : [ {\n" +
             "    \"value\" : \"bla\",\n" +
             "    \"lang\" : \"nl\"\n" +
             "  } ],\n" +
-            "  \"id\" : \"http://gtaa/1234\",\n" +
             "  \"status\" : \"approved\",\n" +
             "  \"lastModified\" : 1505896980000\n" +
             "}");

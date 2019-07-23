@@ -42,7 +42,7 @@ public abstract class EmbeddableGTAARecord implements Serializable {
     }
 
     EmbeddableGTAARecord(ThesaurusObject thesaurusObject) {
-        this.uri = thesaurusObject.getId();
+        this.uri = thesaurusObject.getId().toString();
         this.status = thesaurusObject.getStatus();
     }
 
