@@ -111,7 +111,6 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
     }
 
     @Override
-    @XmlElement
     public void setValue(String v) {
         // ignore
     }

@@ -3,8 +3,6 @@ package nl.vpro.domain.gtaa;
 import java.time.Instant;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlSeeAlso;
-
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
@@ -30,16 +28,7 @@ import nl.vpro.openarchives.oai.Label;
         @JsonSubTypes.Type(value = GTAAClassification.class),
 
     })
-@XmlSeeAlso({
-    GTAAPerson.class,
-    GTAATopic.class,
-    GTAATopicBandG.class,
-    GTAAGenre.class,
-    GTAAGeographicName.class,
-    GTAAMaker.class,
-    GTAAName.class,
-    GTAAClassification.class
-})
+
 public interface ThesaurusObject {
 
 

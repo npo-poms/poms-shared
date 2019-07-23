@@ -30,7 +30,9 @@ public class GTAAConceptTest {
     @Parameterized.Parameters
     public static Collection<Object[]> data() {
         Scheme.classes();
-        return Arrays.stream(Scheme.values()).filter(s -> s != Scheme.person).map(s -> new Object[]{s}).collect(Collectors.toList());
+        return Arrays.stream(Scheme.values()).filter(
+            s -> s != Scheme.person // persons are tested separatedly
+        ).map(s -> new Object[]{s}).collect(Collectors.toList());
     }
 
 
