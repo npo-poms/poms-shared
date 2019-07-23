@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import nl.vpro.domain.Displayable;
 
 /**
@@ -34,10 +36,8 @@ public enum Scheme implements Displayable {
 
     genre("http://data.beeldengeluid.nl/gtaa/Genre", "genre", "genres"),
 
-    name("http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen"),
+    name("http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen")
 
-
-    item(null, "item", "items")
 
     ;
     @Getter
@@ -89,6 +89,13 @@ public enum Scheme implements Displayable {
         return displayName;
     }
 
+    public String getXmlElement() {
+        XmlRootElement annotation = getImplementation().getAnnotation(XmlRootElement.class);
+        if (annotation == null) {
+            throw new RuntimeException("No root element defined for " + this);
+        }
+        return annotation.name();
+    }
 
     public String getJsonObjectType() {
         return name();

@@ -110,6 +110,12 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
         return (familyName == null ? "" : familyName) + (givenName == null ? "":  ", " + givenName);
     }
 
+    @Override
+    @XmlElement
+    public void setValue(String v) {
+        // ignore
+    }
+
 
 
     public static GTAAPerson create(Description description, String submittedPrefLabel) {
