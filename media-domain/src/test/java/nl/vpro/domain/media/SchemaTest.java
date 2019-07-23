@@ -35,7 +35,6 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 public class SchemaTest extends AbstractSchemaTest {
 
 
-
     @BeforeClass
     public static void generateXSDs() throws JAXBException, IOException {
         context = generate(
