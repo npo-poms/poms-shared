@@ -100,6 +100,7 @@ public class PageSearchResultTest {
     public void testUnMarshal() throws IOException {
         PageSearchResult searchResultItems = Jackson2Mapper.getInstance().readValue(getClass().getResourceAsStream("/pageSearchResult.json"), PageSearchResult.class);
         log.info("{}", searchResultItems);
+
     }
 
 

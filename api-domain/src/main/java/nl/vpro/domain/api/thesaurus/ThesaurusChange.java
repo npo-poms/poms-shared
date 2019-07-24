@@ -53,7 +53,7 @@ public class ThesaurusChange extends Change<ThesaurusObject> {
 
     @Override
     @JsonIgnore
-    @XmlAnyElement
+    @XmlAnyElement(lax = true)
     public ThesaurusObject getObject() {
         return super.getObject();
     }

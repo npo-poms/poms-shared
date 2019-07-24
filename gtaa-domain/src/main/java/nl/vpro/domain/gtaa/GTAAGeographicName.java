@@ -1,5 +1,6 @@
 package nl.vpro.domain.gtaa;
 
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import nl.vpro.w3.rdf.Description;
 public class GTAAGeographicName extends AbstractSimpleValueThesaurusItem  {
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAAGeographicName(String id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+    public GTAAGeographicName(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         super(id, notes, value, redirectedFrom, status, lastModified);
     }
 

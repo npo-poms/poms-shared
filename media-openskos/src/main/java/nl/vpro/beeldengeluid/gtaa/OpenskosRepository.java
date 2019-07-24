@@ -122,12 +122,12 @@ public class OpenskosRepository implements GTAARepository {
 
 
     @SuppressWarnings("StringConcatenationInLoop")
-    private Description submit(String prefLabel, List<Label> notes, String creator, Scheme scheme) {
+    private Description submit(@NonNull String prefLabel, @NonNull  List<Label> notes, @NonNull  String creator, @NonNull  Scheme scheme) {
 
         ResponseEntity<RDF> response = null;
         RuntimeException rte = null;
         try {
-            response = postRDF(prefLabel, notes, creator, scheme.getUrl());
+            response = postRDF(prefLabel, notes, creator, scheme);
         } catch (GTAAConflict ex) {
             String postFix = ".";
             while(postFix.length() <= retries) {
@@ -136,7 +136,7 @@ public class OpenskosRepository implements GTAARepository {
                     // returned
                     // See MSE-3366
                     log.warn("Retrying label on 409 Conflict: \"{}\"", prefLabel + postFix);
-                    response = postRDF(prefLabel + postFix, notes, creator, scheme.getUrl());
+                    response = postRDF(prefLabel + postFix, notes, creator, scheme);
                     break;
                 } catch (GTAAConflict ex2) {
                     /* The version with "." already exists too */
@@ -267,7 +267,11 @@ public class OpenskosRepository implements GTAARepository {
         return oai_pmh.getListRecord();
     }
 
-    private ResponseEntity<RDF> postRDF(String prefLabel, List<Label> notes, String creator, String scheme) {
+    private ResponseEntity<RDF> postRDF(
+        @NonNull String prefLabel,
+        @NonNull List<Label> notes,
+        @NonNull String creator,
+        @NonNull Scheme scheme) {
         log.info("Submitting {} {} {} to {}", prefLabel, notes, creator, gtaaUrl);
         RDF rdf = new RDF();
         rdf.setDescriptions(
@@ -279,7 +283,8 @@ public class OpenskosRepository implements GTAARepository {
                     .prefLabelOrXL(useXLLabels, prefLabel, tenant)
                     .editorialNote(notes)
                     .dateSubmitted(Instant.now().atZone(ZONE_ID))
-                    .inScheme(scheme).build()));
+                    .inScheme(scheme.getUrl())
+                    .build()));
 
         template.setErrorHandler(new ResponseErrorHandler() {
             @Override

@@ -108,21 +108,32 @@
   "intentions": [
     {
       "owner": "BROADCASTER",
-      "values": [ "ACTIVATING", "INFORM_INDEPTH" ]
+      "values": [
+        "ACTIVATING",
+        "INFORM_INDEPTH"
+      ]
     },
     {
       "owner": "NPO",
-      "values": [ "ENTERTAINMENT_INFORMATIVE", "INFORM" ]
+      "values": [
+        "ENTERTAINMENT_INFORMATIVE",
+        "INFORM"
+      ]
     }
   ],
   "targetGroups": [
     {
       "owner": "BROADCASTER",
-      "values": [ "ADULTS" ]
+      "values": [
+        "ADULTS"
+      ]
     },
     {
       "owner": "NPO",
-      "values": [ "KIDS_6", "KIDS_12" ]
+      "values": [
+        "KIDS_6",
+        "KIDS_12"
+      ]
     }
   ],
   "source": "Naar het gelijknamige boek van W.F. Hermans",
@@ -390,6 +401,31 @@
       "creationDate": 1494489600000,
       "workflow": "FOR_PUBLICATION",
       "urn": "urn:vpro:media:image:5"
+    }
+  ],
+  "geoLocations": [
+    {
+      "owner": "BROADCASTER",
+      "values": [
+        {
+          "name": "England",
+          "role": "SUBJECT"
+        },
+        {
+          "name": "UK",
+          "role": "RECORDED_IN"
+        }
+      ]
+    },
+    {
+      "owner": "NPO",
+      "values": [
+        {
+          "name": "Africa",
+          "description": "Continent",
+          "role": "SUBJECT"
+        }
+      ]
     }
   ],
   "start": 120000,

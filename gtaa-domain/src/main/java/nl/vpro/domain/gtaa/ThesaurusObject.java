@@ -1,5 +1,6 @@
 package nl.vpro.domain.gtaa;
 
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
@@ -32,7 +33,7 @@ import nl.vpro.openarchives.oai.Label;
 public interface ThesaurusObject {
 
 
-    String getId();
+    URI getId();
 
     List<Label> getNotes();
 
@@ -42,7 +43,7 @@ public interface ThesaurusObject {
 
     Status getStatus();
 
-    String getRedirectedFrom();
+    URI getRedirectedFrom();
 
 
 }

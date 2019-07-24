@@ -4,15 +4,13 @@
  */
 package nl.vpro.w3.rdf;
 
-import static nl.vpro.openarchives.oai.Namespaces.DC_TERMS;
-import static nl.vpro.openarchives.oai.Namespaces.DC_TERMS_ELEMENTS;
-import static nl.vpro.openarchives.oai.Namespaces.OPEN_SKOS;
-import static nl.vpro.openarchives.oai.Namespaces.SKOS;
-import static nl.vpro.openarchives.oai.Namespaces.SKOS_XL;
+import lombok.*;
 
+import java.net.URI;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -24,28 +22,48 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang.StringUtils;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Singular;
-import lombok.ToString;
 import nl.vpro.domain.gtaa.AbstractGTAAObject;
-import nl.vpro.openarchives.oai.Label;
-import nl.vpro.openarchives.oai.Note;
 import nl.vpro.domain.gtaa.Status;
 import nl.vpro.domain.gtaa.XLLabel;
 import nl.vpro.dublincore.terms.Date;
+import nl.vpro.openarchives.oai.Label;
+import nl.vpro.openarchives.oai.Note;
 import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
 
+import static nl.vpro.openarchives.oai.Namespaces.*;
+
 /**
+ *
  * @author Roelof Jan Koekoek
  * @since 3.7
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(propOrder = { "type", "editorialNote", "creatorResource", "modifiedBy", "prefLabel", "xlPrefLabel", "modified", "uuid", "set", "inScheme", "notation",
-        "creator", "status", "tenant", "acceptedBy", "dateAccepted", "dateSubmitted", "hiddenLabels", "xlHiddenLabels", "historyNote", "altLabels",
-        "xlAltLabels", "scopeNote", "changeNote" })
+@XmlType(propOrder = {
+    "type",
+    "editorialNote",
+    "creatorResource",
+    "modifiedBy",
+    "prefLabel",
+    "xlPrefLabel",
+    "modified",
+    "uuid",
+    "set",
+    "inScheme",
+    "notation",
+    "creator",
+    "status",
+    "tenant",
+    "acceptedBy",
+    "dateAccepted",
+    "dateSubmitted",
+    "hiddenLabels",
+    "xlHiddenLabels",
+    "historyNote",
+    "altLabels",
+    "xlAltLabels",
+    "scopeNote",
+    "changeNote"
+})
 @ToString
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -147,12 +165,8 @@ public class Description extends AbstractGTAAObject {
         return StringUtils.substringAfterLast(getInScheme().getResource(), "/");
     }
 
-    public boolean hasRedirectedFrom() {
-        return getCleanChangeNote().anyMatch(note -> StringUtils.contains(note, FORWARD));
-    }
-
-    public String getRedirectedFrom() {
-        return getCleanChangeNote().filter(note -> StringUtils.contains(note, FORWARD)).map(note -> StringUtils.substringAfter(note, FORWARD)).findAny().orElse("");
+    public Optional<URI> getRedirectedFrom() {
+        return getCleanChangeNote().filter(note -> StringUtils.contains(note, FORWARD)).map(note -> StringUtils.substringAfter(note, FORWARD)).map(URI::create).findAny();
     }
 
     private Stream<String> getCleanChangeNote() {

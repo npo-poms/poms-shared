@@ -8,9 +8,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.SortedSet;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,7 +19,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.*;
-import nl.vpro.domain.media.StreamingStatus;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
@@ -180,7 +180,7 @@ public class MediaListItem extends PublishableListItem {
 
     @Getter
     @Setter
-    private StreamingStatus streamingPlatformStatus;
+    private StreamingStatusImpl streamingPlatformStatus;
 
     public MediaListItem() {
     }

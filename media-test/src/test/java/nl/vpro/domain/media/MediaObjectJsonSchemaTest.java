@@ -759,17 +759,17 @@ public class MediaObjectJsonSchemaTest {
                 "    \"owner\" : \"BROADCASTER\",\n" +
                 "    \"values\" : [ {\n" +
                 "      \"name\" : \"England\",\n" +
-                "      \"relationType\" : \"SUBJECT\"\n" +
+                "      \"role\" : \"SUBJECT\"\n" +
                 "    }, {\n" +
                 "      \"name\" : \"UK\",\n" +
-                "      \"relationType\" : \"RECORDED_IN\"\n" +
+                "      \"role\" : \"RECORDED_IN\"\n" +
                 "    } ]\n" +
                 "  }, {\n" +
                 "    \"owner\" : \"NPO\",\n" +
                 "    \"values\" : [ {\n" +
                 "      \"name\" : \"Africa\",\n" +
                 "      \"description\" : \"Continent\",\n" +
-                "      \"relationType\" : \"SUBJECT\"\n" +
+                "      \"role\" : \"SUBJECT\"\n" +
                 "    } ]\n" +
                 "  } ]\n" +
                 "}");
