@@ -30,7 +30,7 @@ public interface ThesaurusRestService {
 
 
     @GET
-    @Path("/people")
+    @Path("/persons")
     PersonResult findPersons(
         @QueryParam("text") @DefaultValue("") String text,
         @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max);
@@ -38,7 +38,7 @@ public interface ThesaurusRestService {
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON})
-    @Path("/people/updates")
+    @Path("/persons/updates")
     @NoCache
     InputStream listPersonUpdates(
         @QueryParam("from") Instant from,
