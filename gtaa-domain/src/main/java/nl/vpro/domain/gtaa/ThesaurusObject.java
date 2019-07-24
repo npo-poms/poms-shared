@@ -43,7 +43,7 @@ public interface ThesaurusObject {
 
     Status getStatus();
 
-    String getRedirectedFrom();
+    URI getRedirectedFrom();
 
 
 }

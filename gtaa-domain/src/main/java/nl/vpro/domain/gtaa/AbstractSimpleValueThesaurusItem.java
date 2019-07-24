@@ -18,7 +18,7 @@ import nl.vpro.openarchives.oai.Label;
 @XmlAccessorType(XmlAccessType.NONE)
 public class AbstractSimpleValueThesaurusItem extends AbstractThesaurusItem {
 
-    public AbstractSimpleValueThesaurusItem(URI id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+    public AbstractSimpleValueThesaurusItem(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         super(id, notes, value, redirectedFrom, status, lastModified);
     }
 
