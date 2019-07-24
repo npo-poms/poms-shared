@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -52,6 +53,7 @@ import static org.junit.Assert.assertFalse;
  * This class verifies JAXB XML output format and wether this format complies to the vproMedia.xsd schema definitions.
  * It's located here so it can use the test data builder for more concise code.
  */
+@SuppressWarnings("UnnecessaryLocalVariable")
 @Slf4j
 public class MediaObjectXmlSchemaTest {
 
@@ -391,8 +393,8 @@ public class MediaObjectXmlSchemaTest {
     public void testContentRating() {
         Program program = program().withContentRating().build();
 
-        Program result = JAXBTestUtil.roundTrip(program, "<contentRating>ANGST</contentRating>\n" +
-            "    <contentRating>DRUGS_EN_ALCOHOL</contentRating>");
+        Program result = JAXBTestUtil.roundTripContains(program, "<contentRating>ANGST</contentRating>",
+            "<contentRating>DRUGS_EN_ALCOHOL</contentRating>");
 
         assertThat(result.getContentRatings()).hasSize(2);
     }
@@ -632,7 +634,7 @@ public class MediaObjectXmlSchemaTest {
 
         Schedule schedule = new Schedule(Channel.NED1, Instant.ofEpochMilli(0), Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000));
         Program program = program().id(100L).lean().withScheduleEvents().build();
-        schedule.addScheduleEventsFromMedia(Arrays.asList(program));
+        schedule.addScheduleEventsFromMedia(program);
 
         String actual = toXml(schedule);
 
@@ -676,7 +678,7 @@ public class MediaObjectXmlSchemaTest {
         Schedule schedule = new Schedule(Channel.NED3, Instant.ofEpochMilli(0), Instant.ofEpochMilli(350 + 8 * 24 * 3600 * 1000));
         schedule.setFiltered(true);
         Program program = program().id(100L).lean().withScheduleEvents().build();
-        schedule.addScheduleEventsFromMedia(Arrays.asList(program));
+        schedule.addScheduleEventsFromMedia(program);
 
         String actual = toXml(schedule);
 
@@ -710,7 +712,7 @@ public class MediaObjectXmlSchemaTest {
             .build();
 
         Program program = program().id(100L).lean().withScheduleEvents().build();
-        schedule.addScheduleEventsFromMedia(Arrays.asList(program));
+        schedule.addScheduleEventsFromMedia(program);
 
         assertThat(toXml(schedule)).isXmlEqualTo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<schedule net=\"ZAPP\" start=\"1970-01-01T01:00:00+01:00\"\n" +
@@ -728,7 +730,7 @@ public class MediaObjectXmlSchemaTest {
     public void testCountries() {
         Program program = program().withCountries().build();
 
-        Program result = JAXBTestUtil.roundTrip(program, "<country code=\"GB\">Verenigd Koninkrijk</country>");
+        Program result = JAXBTestUtil.roundTripContains(program, "<country code=\"GB\">Verenigd Koninkrijk</country>");
 
         assertThat(result.getCountries()).hasSize(2);
     }
@@ -743,7 +745,7 @@ public class MediaObjectXmlSchemaTest {
     public void testLanguages() {
         Program program = program().withLanguages().build();
 
-        Program result = JAXBTestUtil.roundTrip(program, "<language code=\"nl\">Nederlands</language>");
+        Program result = JAXBTestUtil.roundTripContains(program, "<language code=\"nl\">Nederlands</language>");
 
         assertThat(result.getLanguages()).hasSize(2);
     }
@@ -904,9 +906,9 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testUnmarshalWithNullIntentions() throws IOException, JAXBException {
+    public void testUnmarshalWithNullIntentions() throws IOException {
         StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/intention-null-scenarios.xml"), segment, "UTF-8");
+        IOUtils.copy(getClass().getResourceAsStream("/intention-null-scenarios.xml"), segment, StandardCharsets.UTF_8);
         String xmlInput = segment.toString();
         log.info(xmlInput);
 
@@ -915,9 +917,9 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testUnmarshalWithEmptyIntentions() throws IOException, JAXBException {
+    public void testUnmarshalWithEmptyIntentions() throws IOException {
         StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/intention-empty-scenarios.xml"), segment, "UTF-8");
+        IOUtils.copy(getClass().getResourceAsStream("/intention-empty-scenarios.xml"), segment, StandardCharsets.UTF_8);
         String xmlInput = segment.toString();
         log.info(xmlInput);
 
