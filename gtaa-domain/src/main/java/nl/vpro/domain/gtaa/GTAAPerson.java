@@ -4,15 +4,21 @@
  */
 package nl.vpro.domain.gtaa;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.openarchives.oai.Label;
@@ -21,6 +27,10 @@ import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
 
 /**
+ * A representation of the gtaa concept {@link Scheme#person}.
+ *
+ * We have the small distinction what we try to make sense of {@link #givenName} and {@link #familyName}. It's doubtful that this is culturally neutral, but for the use cases at hand it's probably sensible.
+ *
  * @author Roelof Jan Koekoek
  * @since 3.7
  */
@@ -36,11 +46,24 @@ import nl.vpro.w3.rdf.Description;
     "redirectedFrom"
 
 })
+@JsonPropertyOrder({
+    "objectType",
+    "id",
+    "value",
+    "givenName",
+    "familyName",
+    "notes",
+    "knownAs",
+    "redirectedFrom"
+}
+
+)
 @XmlAccessorType(XmlAccessType.NONE)
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.person)
+
 public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,7 +92,7 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAAPerson(String id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified, @NoHtml String givenName, @NoHtml String familyName, List<Names> knownAs) {
+    public GTAAPerson(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified, @NoHtml String givenName, @NoHtml String familyName, List<Names> knownAs) {
         super(id, notes, value, redirectedFrom, status, lastModified);
         this.givenName = givenName;
         this.familyName = familyName;
@@ -108,6 +131,11 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
             return null;
         }
         return (familyName == null ? "" : familyName) + (givenName == null ? "":  ", " + givenName);
+    }
+
+    @Override
+    public void setValue(String v) {
+        // ignore
     }
 
 
@@ -160,13 +188,13 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
 
     @Override
     public String getGtaaUri() {
-        return getId();
+        return getId().toString();
     }
 
     public static class Builder {
 
         public Builder gtaaUri(String id) {
-            return id(id);
+            return id(URI.create(id));
         }
 
     }

@@ -252,7 +252,7 @@
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="description" type="xs:string" minOccurs="0"/>
     </xs:sequence>
-    <xs:attribute name="relationType" type="geoRelationType" use="required"/>
+    <xs:attribute name="role" type="geoRoleType" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>
   </xs:complexType>
 
@@ -591,10 +591,11 @@
     </xs:restriction>
   </xs:simpleType>
 
-  <xs:simpleType name="geoRelationType">
+  <xs:simpleType name="geoRoleType">
     <xs:restriction base="xs:string">
       <xs:enumeration value="RECORDED_IN"/>
       <xs:enumeration value="SUBJECT"/>
+      <xs:enumeration value="PRODUCED_IN"/>
       <xs:enumeration value="UNDEFINED"/>
     </xs:restriction>
   </xs:simpleType>

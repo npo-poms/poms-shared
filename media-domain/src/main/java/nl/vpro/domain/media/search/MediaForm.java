@@ -239,7 +239,7 @@ public class MediaForm {
     @JsonProperty("streamingPlatformStatus")
     @Getter
     @Setter
-    private Collection<StreamingStatus> streamingPlatformStatuses;
+    private Collection<StreamingStatusImpl> streamingPlatformStatuses;
 
     public MediaForm() {
         // for jaxb

@@ -1,5 +1,8 @@
 package nl.vpro.domain.gtaa;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
 
 import nl.vpro.openarchives.oai.Label;
@@ -9,6 +12,7 @@ import nl.vpro.w3.rdf.Description;
  * @author Michiel Meeuwissen
  * @since 5.5
  */
+@Slf4j
 public class ThesaurusObjects {
     private static final String SCHEME_URI = "http://data.beeldengeluid.nl/gtaa/";
 
@@ -17,30 +21,14 @@ public class ThesaurusObjects {
     }
 
     public static ThesaurusObject toThesaurusObject(Description d) {
-        Optional<Scheme> scheme = Scheme.ofUrl(d.getInScheme().getResource());
-        if (scheme.isPresent()) {
-            switch(scheme.get()) {
-                case person:
-                    return GTAAPerson.create(d);
-                case topic:
-                    return GTAATopic.create(d);
-                case genre:
-                    return GTAAGenre.create(d);
-                case name:
-                    return GTAAName.create(d);
-                case geographicname:
-                    return GTAAGeographicName.create(d);
-                case maker:
-                    return GTAAMaker.create(d);
-                case classification:
-                case topicbandg:
-                default:
-                    return ThesaurusItem.create(d);
-
+        return (ThesaurusObject) Scheme.ofUrl(d.getInScheme().getResource()).map(s -> {
+            try {
+                return s.getImplementation().getMethod("create", Description.class).invoke(null, d);
+            } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                log.error(e.getMessage(), e);
+                return null;
             }
-        } else {
-            return ThesaurusItem.create(d);
-        }
+        }).orElseThrow(() -> new IllegalStateException("Not convertible " + d));
     }
 
 

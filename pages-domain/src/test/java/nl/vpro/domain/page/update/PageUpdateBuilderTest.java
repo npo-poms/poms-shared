@@ -23,7 +23,6 @@ import nl.vpro.domain.page.PageType;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
-import static nl.vpro.test.util.jaxb.JAXBTestUtil.roundTrip;
 import static nl.vpro.test.util.jaxb.JAXBTestUtil.roundTripContains;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -108,15 +107,16 @@ public class PageUpdateBuilderTest {
     @Test
     public void testTags() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").tags("tag1", "tag2").build();
-        PageUpdate result = roundTripContains(page, "<pageUpdate:tag>tag1</pageUpdate:tag>\n" +
-            "    <pageUpdate:tag>tag2</pageUpdate:tag>");
+        PageUpdate result = roundTripContains(page,
+            "<pageUpdate:tag xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">tag1</pageUpdate:tag>",
+            "<pageUpdate:tag xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">tag2</pageUpdate:tag>");
         assertThat(result.getTags()).containsExactly("tag1", "tag2");
     }
 
     @Test
     public void testLinks() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").links(new LinkUpdate("http://www.vpro.nl", "Link text")).build();
-        PageUpdate result = roundTrip(page, "<pageUpdate:link pageRef=\"http://www.vpro.nl\">\n" +
+        PageUpdate result = roundTripContains(page, "<pageUpdate:link pageRef=\"http://www.vpro.nl\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
             "        <pageUpdate:text>Link text</pageUpdate:text>\n" +
             "    </pageUpdate:link>");
         assertThat(result.getLinks()).containsExactly(new LinkUpdate("http://www.vpro.nl", "Link text"));
@@ -125,7 +125,7 @@ public class PageUpdateBuilderTest {
     @Test
     public void testEmbeds() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").embeds(new EmbedUpdate("MID_1234", "Title", "Description")).build();
-        PageUpdate result = roundTrip(page, "<pageUpdate:embeds>\n" +
+        PageUpdate result = roundTripContains(page, "<pageUpdate:embeds xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
             "        <pageUpdate:embed midRef=\"MID_1234\">\n" +
             "            <pageUpdate:title>Title</pageUpdate:title>\n" +
             "            <pageUpdate:description>Description</pageUpdate:description>\n" +
@@ -137,7 +137,7 @@ public class PageUpdateBuilderTest {
     @Test
     public void testImages() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").images(new ImageUpdate(new Image("http://somewhere"))).build();
-        PageUpdate result = roundTrip(page, "<pageUpdate:image>\n" +
+        PageUpdate result = roundTripContains(page, "<pageUpdate:image xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
             "        <pageUpdate:imageLocation>\n" +
             "            <pageUpdate:url>http://somewhere</pageUpdate:url>\n" +
             "        </pageUpdate:imageLocation>\n" +
