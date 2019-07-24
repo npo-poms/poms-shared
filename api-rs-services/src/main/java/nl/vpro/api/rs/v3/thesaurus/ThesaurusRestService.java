@@ -4,13 +4,13 @@ import java.io.InputStream;
 import java.time.Instant;
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import nl.vpro.domain.api.Constants;
@@ -49,17 +49,17 @@ public interface ThesaurusRestService {
 
 
     @GET
-    @Path("/items")
-    ThesaurusResult<ThesaurusObject> listItems(
+    @Path("/concepts")
+    ThesaurusResult<ThesaurusObject> listConcepts(
         @QueryParam("text") @DefaultValue("") String text,
-        @QueryParam("axes") @DefaultValue(("")) @NonNull List<String> axisList,
+        @QueryParam("schemes") @DefaultValue(("")) @NonNull List<String> axisList,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
 
     @GET
     @Produces({ MediaType.APPLICATION_JSON})
-    @Path("/items/updates")
+    @Path("/concepts/updates")
     @NoCache
-    InputStream listItemUpdates(
+    InputStream listConceptUpdates(
         @QueryParam("from") Instant from,
         @QueryParam("to") Instant to,
         @Context HttpServletRequest request,
@@ -67,9 +67,9 @@ public interface ThesaurusRestService {
     );
 
     @GET
-    @Path("/items/status")
+    @Path("/concepts/status")
     @NoCache
-    ThesaurusObject itemStatus(
+    ThesaurusObject conceptStatus(
         @QueryParam("id") String id
     );
 
