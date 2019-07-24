@@ -47,12 +47,9 @@ public class GTAANewPerson extends AbstractGTAANewConcept implements PersonInter
         this.notes = notes;
     }
 
-
-
     @Override
     public String getValue() {
-        return this.givenName + " " + this.familyName;
-
+        return PersonInterface.stringValue(givenName, familyName);
     }
 
     @Override

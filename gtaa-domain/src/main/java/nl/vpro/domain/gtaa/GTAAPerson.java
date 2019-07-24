@@ -104,10 +104,7 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
     @Override
     @XmlElement
     public String getValue() {
-        if (familyName == null && givenName == null) {
-            return null;
-        }
-        return (familyName == null ? "" : familyName) + (givenName == null ? "":  ", " + givenName);
+        return PersonInterface.stringValue(givenName, familyName);
     }
 
     @Override
