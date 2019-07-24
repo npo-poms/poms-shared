@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang.StringUtils;
 
 import nl.vpro.domain.gtaa.AbstractGTAAObject;
+import nl.vpro.domain.gtaa.Scheme;
 import nl.vpro.domain.gtaa.Status;
 import nl.vpro.domain.gtaa.XLLabel;
 import nl.vpro.dublincore.terms.Date;
@@ -183,6 +184,12 @@ public class Description extends AbstractGTAAObject {
 
         public Builder inScheme(String scheme) {
             this.inScheme = ResourceElement.builder().resource(scheme).build();
+            return this;
+        }
+
+
+        public Builder inScheme(Scheme scheme) {
+            this.inScheme = ResourceElement.builder().resource(scheme.getUrl()).build();
             return this;
         }
 

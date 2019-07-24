@@ -159,7 +159,7 @@ public class OpenskosTests {
     @Test
     public void testStatus() {
         GTAARepository impl = getRealInstance();
-        impl.retrieveItemStatus("bla");
+        impl.retrieveConceptStatus("bla");
     }
 
     private GTAARepository getRealInstance() {

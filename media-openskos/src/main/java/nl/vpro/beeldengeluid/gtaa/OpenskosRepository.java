@@ -34,8 +34,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
@@ -97,9 +95,6 @@ public class OpenskosRepository implements GTAARepository {
         this.template = template;
     }
 
-    public OpenskosRepository(String gtaaUrl, String gtaaKey) {
-        this(gtaaUrl, gtaaKey, createRestTemplate());
-    }
 
     @PostConstruct
     public void init() {
@@ -369,7 +364,7 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     @Override
-    public List<Description> findOnAxis(String input, Integer max, List<String> axisList) {
+    public List<Description> findForSchemes(String input, Integer max, List<String> schemes) {
         if (max == null) {
             max = 50;
         }
@@ -377,7 +372,7 @@ public class OpenskosRepository implements GTAARepository {
 
         String query = String.format("(status:(candidate OR approved) " +
                 "OR (status:not_compliant AND dc_creator:POMS)) " +
-                 generateQueryByAxis(axisList) +
+                 generateQueryByScheme(schemes) +
                 "AND ( %s*)", input);
 
         String path = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
@@ -389,7 +384,7 @@ public class OpenskosRepository implements GTAARepository {
     private static final Pattern NOT_FOUND = Pattern.compile(".*The requested resource .* was not found.*", Pattern.DOTALL);
 
     @Override
-    public Optional<Description> retrieveItemStatus(String id) {
+    public Optional<Description> retrieveConceptStatus(String id) {
         String url = gtaaUrl + "api/find-concepts?id=" + id;
         try {
             RDF rdf = template.getForObject(url, RDF.class);
@@ -410,9 +405,9 @@ public class OpenskosRepository implements GTAARepository {
     }
 
 
-    private String generateQueryByAxis(List<String> axisList) {
+    private String generateQueryByScheme(List<String> schemeList) {
         Predicate<String> empty = s -> s.equals("");
-        if (axisList.stream().allMatch(empty)) {
+        if (schemeList.stream().allMatch(empty)) {
             return "";
         }
 
@@ -421,7 +416,7 @@ public class OpenskosRepository implements GTAARepository {
         sb.append("AND (");
 
         String operator = "";
-        for (String axis : axisList) {
+        for (String axis : schemeList) {
             boolean not = false;
             if (axis.startsWith("!")) {
                 not = true;
@@ -441,24 +436,6 @@ public class OpenskosRepository implements GTAARepository {
         return sb.toString();
     }
 
-
-    private static RestTemplate createRestTemplate() {
-        MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
-        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("nl.vpro.beeldengeluid.gtaa", "nl.vpro.w3.rdf", "nl.vpro.openarchives.oai");
-
-        try {
-            jaxb2Marshaller.afterPropertiesSet();
-        } catch (Exception ex) {
-            /* Ignore */
-        }
-        marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-        marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
-
-        RestTemplate template = new RestTemplate();
-        template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
-        return template;
-    }
 
     private List<Description> descriptions(RDF rdf) {
         if (rdf == null || rdf.getDescriptions() == null) {

@@ -28,7 +28,7 @@ public interface GTAARepository {
 
     List<Description> findAnything(String input, Integer max);
 
-    List<Description> findOnAxis(String input, Integer max, List<String> axisList);
+    List<Description> findForSchemes(String input, Integer max, List<String> schemes);
 
-    Optional<Description> retrieveItemStatus(String id);
+    Optional<Description> retrieveConceptStatus(String id);
 }
