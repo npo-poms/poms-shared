@@ -36,7 +36,7 @@ public interface ThesaurusUpdateRestService {
     );
 
     @POST
-    @Path("/item")
+    @Path("/concept")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     ThesaurusObject submit(
         @HeaderParam(HttpHeaders.AUTHORIZATION) String jws,
