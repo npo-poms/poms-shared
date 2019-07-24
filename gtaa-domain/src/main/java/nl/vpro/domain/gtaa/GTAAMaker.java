@@ -23,7 +23,7 @@ public class GTAAMaker extends AbstractSimpleValueThesaurusItem {
 
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAAMaker(URI id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+    public GTAAMaker(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         super(id, notes, value, redirectedFrom, status, lastModified);
     }
     public GTAAMaker() {

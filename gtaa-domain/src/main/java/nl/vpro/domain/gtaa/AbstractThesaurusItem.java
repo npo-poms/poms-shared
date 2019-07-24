@@ -43,7 +43,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
     @Getter
     @Setter
     @XmlElement
-    String redirectedFrom;
+    URI redirectedFrom;
 
     @Getter
     @Setter
@@ -63,7 +63,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
 
     }
 
-    AbstractThesaurusItem(URI id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+    AbstractThesaurusItem(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         this.id = id;
         this.notes = notes;
         this.value = value;
@@ -80,7 +80,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
         answer.setNotes(description.getScopeNote());
         answer.setStatus(description.getStatus());
         if (description.getChangeNote() != null) {
-            answer.setRedirectedFrom(description.getRedirectedFrom());
+            description.getRedirectedFrom().ifPresent(answer::setRedirectedFrom);
         }
         if (description.getModified() != null) {
             answer.setLastModified(description.getModified().getValue().toInstant());
@@ -91,7 +91,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
                         String value,
                         List<Label> notes,
                         Status status,
-                        String changeNote,
+                        URI changeNote,
                         Instant modified) {
         this.setId(id);
         this.setValue(value);
