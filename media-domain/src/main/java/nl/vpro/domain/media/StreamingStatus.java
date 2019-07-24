@@ -62,7 +62,7 @@ public interface StreamingStatus extends Serializable, Displayable {
         return Arrays.asList(withDrm(offline()), withDrm(unset()), withoutDrm(offline()), withoutDrm(unset()), withAndWithoutDrm());
     }
 
-    static List<StreamingStatus> notAvailableStatuses() {
+    static List<StreamingStatusImpl> notAvailableStatuses() {
         return Arrays.asList(unset(), offline());
     }
 
