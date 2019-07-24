@@ -22,11 +22,15 @@ import nl.vpro.domain.gtaa.Status;
 @ToString
 public class EmbeddableGeographicName extends EmbeddableGTAARecord implements Serializable {
 
+
+    public EmbeddableGeographicName() {
+
+    }
     public EmbeddableGeographicName(GTAAGeographicName gtaaGeographicName) {
         super(gtaaGeographicName);
     }
 
-    @lombok.Builder
+    @lombok.Builder(builderClassName = "Builder")
     public EmbeddableGeographicName(String uri, Status status) {
         super(uri, status);
     }
