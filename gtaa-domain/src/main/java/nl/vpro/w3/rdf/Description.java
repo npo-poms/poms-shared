@@ -33,13 +33,37 @@ import nl.vpro.xml.bind.ZonedDateTimeXmlAdapter;
 import static nl.vpro.openarchives.oai.Namespaces.*;
 
 /**
+ *
  * @author Roelof Jan Koekoek
  * @since 3.7
  */
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlType(propOrder = { "type", "editorialNote", "creatorResource", "modifiedBy", "prefLabel", "xlPrefLabel", "modified", "uuid", "set", "inScheme", "notation",
-        "creator", "status", "tenant", "acceptedBy", "dateAccepted", "dateSubmitted", "hiddenLabels", "xlHiddenLabels", "historyNote", "altLabels",
-        "xlAltLabels", "scopeNote", "changeNote" })
+@XmlType(propOrder = {
+    "type",
+    "editorialNote",
+    "creatorResource",
+    "modifiedBy",
+    "prefLabel",
+    "xlPrefLabel",
+    "modified",
+    "uuid",
+    "set",
+    "inScheme",
+    "notation",
+    "creator",
+    "status",
+    "tenant",
+    "acceptedBy",
+    "dateAccepted",
+    "dateSubmitted",
+    "hiddenLabels",
+    "xlHiddenLabels",
+    "historyNote",
+    "altLabels",
+    "xlAltLabels",
+    "scopeNote",
+    "changeNote"
+})
 @ToString
 @Data
 @EqualsAndHashCode(callSuper = true)
