@@ -88,7 +88,7 @@ public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterfac
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAAPerson(URI id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified, @NoHtml String givenName, @NoHtml String familyName, List<Names> knownAs) {
+    public GTAAPerson(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified, @NoHtml String givenName, @NoHtml String familyName, List<Names> knownAs) {
         super(id, notes, value, redirectedFrom, status, lastModified);
         this.givenName = givenName;
         this.familyName = familyName;

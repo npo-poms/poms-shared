@@ -26,7 +26,7 @@ package nl.vpro.domain.gtaa;
 public class GTAATopic extends AbstractSimpleValueThesaurusItem {
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAATopic(URI id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+    public GTAATopic(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         super(id, notes, value, redirectedFrom, status, lastModified);
     }
     public GTAATopic() {
