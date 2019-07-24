@@ -16,29 +16,6 @@ public class DescriptionTest {
         d = new Description();
     }
 
-    @Test
-    public void hasRedirectedFrom_null() {
-        addNote(null);
-        assertThat(d.hasRedirectedFrom()).isFalse();
-    }
-
-    @Test
-    public void hasRedirectedFrom_empty() {
-        addNote("");
-        assertThat(d.hasRedirectedFrom()).isFalse();
-    }
-
-    @Test
-    public void hasRedirectedFrom_Exists() {
-        addNote("Forward:asdas");
-        assertThat(d.hasRedirectedFrom()).isTrue();
-    }
-
-    @Test
-    public void hasRedirectedFrom_ExistsSpaces() {
-        addNote("Forward: \n somethign");
-        assertThat(d.hasRedirectedFrom()).isTrue();
-    }
 
     @Test
     public void getRedirectedFrom_Empty() {
