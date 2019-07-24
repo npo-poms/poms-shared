@@ -18,15 +18,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class GTAAPersonTest {
     @Test
     public void json() throws Exception {
-        GTAAPerson person = GTAAPerson.builder().givenName("Pietje").familyName("puk").build();
+        GTAAPerson person = GTAAPerson
+            .builder()
+            .givenName("Pietje")
+            .familyName("puk")
+            .gtaaUri("http://data.beeldengeluid.nl/gtaa/167222")
+            .build();
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(person,
-            "{\n" +
-            "  \"objectType\" : \"person\",\n" +
-            "  \"value\" : \"puk, Pietje\",\n" +
-            "  \"givenName\" : \"Pietje\",\n" +
-            "  \"familyName\" : \"puk\"\n" +
-            "}");
+            "{\"objectType\" : \"person\",\n" +
+                "  \"id\" : \"http://data.beeldengeluid.nl/gtaa/167222\",\n" +
+                "  \"value\" : \"puk, Pietje\",\n" +
+                "  \"givenName\" : \"Pietje\",\n" +
+                "  \"familyName\" : \"puk\"\n" +
+                "}");
 
     }
 

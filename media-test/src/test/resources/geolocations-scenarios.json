@@ -1,26 +1,27 @@
 {
   "mediaWithTwoGeoLocations":
   {
-    "objectType":"program","embeddable":true,
+    "objectType":"program",
+    "embeddable":true,
     "broadcasters":[],
     "genres":[],
+    "countries": [],
+    "languages": [],
     "geoLocations":
     [
-      {"owner":"BROADCASTER", "values":[{"name":"England","relationType":"SUBJECT"},{"name":"UK","relationType":"RECORDED_IN"}]},
-      {"owner":"NPO", "values":[{"name":"Africa","description":"Continent","relationType":"SUBJECT"}]}
-    ],
-    "countries":[],
-    "languages":[]
+      {"owner":"BROADCASTER", "values":[{"name":"England","role":"SUBJECT"},{"name":"UK","role":"RECORDED_IN"}]},
+      {"owner":"NPO", "values":[{"name":"Africa","description":"Continent","role":"SUBJECT"}]}
+    ]
   },
   "mediaWithOneGeoLocations":  {
     "objectType":"program","embeddable":true,
     "broadcasters":[],
     "genres":[],
+    "countries": [],
+    "languages": [],
     "geoLocations":
     [
       {"owner":"BROADCASTER", "values":["ACTIVATING"]}
-    ],
-    "countries":[],
-    "languages":[]
+    ]
   }
 }

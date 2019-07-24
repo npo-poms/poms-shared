@@ -3,4 +3,4 @@ Group
 Segment
 Schedule
 MediaTable
-StreamingStatus
+StreamingStatusImpl
