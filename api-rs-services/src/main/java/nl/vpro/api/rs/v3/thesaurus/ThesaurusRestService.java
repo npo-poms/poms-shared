@@ -10,7 +10,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import nl.vpro.domain.api.Constants;
@@ -52,7 +51,7 @@ public interface ThesaurusRestService {
     @Path("/concepts")
     ThesaurusResult<ThesaurusObject> listConcepts(
         @QueryParam("text") @DefaultValue("") String text,
-        @QueryParam("schemes") @DefaultValue(("")) @NonNull List<String> axisList,
+        @QueryParam("schemes") List<String> axisList,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
 
     @GET

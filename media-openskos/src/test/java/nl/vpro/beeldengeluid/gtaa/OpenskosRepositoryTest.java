@@ -3,6 +3,7 @@ package nl.vpro.beeldengeluid.gtaa;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +13,10 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.RestTemplate;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
@@ -35,7 +39,7 @@ public class OpenskosRepositoryTest {
     private OpenskosRepository repo;
     @Before
     public void createRepo() {
-        repo = new OpenskosRepository("http://localhost:" + wireMockRule.port(), "");
+        repo = new OpenskosRepository("http://localhost:" + wireMockRule.port(), "", createRestTemplate());
     }
 
     @Test
@@ -124,23 +128,41 @@ public class OpenskosRepositoryTest {
     @Test
     public void testRetrieveItemStatus() throws Exception {
         wireMockRule.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(okXml(f("retrieve-status.xml"))));
-        Optional<Description> description = repo.retrieveItemStatus("http://data.beeldengeluid.nl/gtaa/1672723");
+        Optional<Description> description = repo.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1672723");
         assertThat(description.get().getStatus().toString()).isEqualTo("approved");
     }
 
     @Test
     public void retrieveItemStatusShouldReturnIllegalArgumentEx() throws Exception {
         wireMockRule.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody(f("retrieve-status-not-found.xml"))));
-        Optional<Description> desc = repo.retrieveItemStatus("blabla");
+        Optional<Description> desc = repo.retrieveConceptStatus("blabla");
         assertThat(desc.isPresent()).isFalse();
     }
 
     @Test(expected = HttpServerErrorException.class)
     public void retrieveItemStatusShouldReturnUnexpectedError() {
         wireMockRule.stubFor(get(urlPathEqualTo("/api/find-concepts")).willReturn(status(500).withBody("Random error")));
-        Optional<Description> desc = repo.retrieveItemStatus("http://data.beeldengeluid.nl/gtaa/1672723");
+        Optional<Description> desc = repo.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1672723");
     }
 
+
+    private static RestTemplate createRestTemplate() {
+        MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
+        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
+        jaxb2Marshaller.setPackagesToScan("nl.vpro.beeldengeluid.gtaa", "nl.vpro.w3.rdf", "nl.vpro.openarchives.oai");
+
+        try {
+            jaxb2Marshaller.afterPropertiesSet();
+        } catch (Exception ex) {
+            /* Ignore */
+        }
+        marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
+        marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
+
+        RestTemplate template = new RestTemplate();
+        template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
+        return template;
+    }
 
 
 }

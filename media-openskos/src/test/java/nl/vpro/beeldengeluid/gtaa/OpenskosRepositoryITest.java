@@ -188,7 +188,7 @@ public class OpenskosRepositoryITest {
     @Ignore
     public void retrieveItemStatus() {
         OpenskosRepository impl = getRealInstance();
-        Optional<Description> description = impl.retrieveItemStatus("http://data.beeldengeluid.nl/gtaa/1711640");
+        Optional<Description> description = impl.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1711640");
         log.info("{} ", description.get());
     }
 
