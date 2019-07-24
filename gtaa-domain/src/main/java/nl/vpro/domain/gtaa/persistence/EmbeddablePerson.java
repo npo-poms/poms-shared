@@ -34,7 +34,7 @@ public class EmbeddablePerson extends EmbeddableGTAARecord implements Serializab
         super(uri, status);
     }
 
-    @lombok.Builder
+    @lombok.Builder(builderClassName = "Builder")
     public EmbeddablePerson(String uri, Status status, boolean knownAs) {
         super(uri, status);
         this.knownAs = knownAs;
