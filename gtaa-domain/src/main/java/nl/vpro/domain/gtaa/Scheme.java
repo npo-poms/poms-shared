@@ -10,6 +10,8 @@ import java.util.Optional;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Locales;
+import nl.vpro.i18n.LocalizedString;
 
 /**
  * @author Michiel Meeuwissen
@@ -84,8 +86,8 @@ public enum Scheme implements Displayable {
     }
 
     @Override
-    public String getPluralDisplayName() {
-        return pluralDisplayName;
+    public Optional<LocalizedString> getPluralDisplayName() {
+        return Optional.of(LocalizedString.of(pluralDisplayName, Locales.DUTCH));
     }
     @Override
     public String getDisplayName() {
