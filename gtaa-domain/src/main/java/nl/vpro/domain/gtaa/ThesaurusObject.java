@@ -1,9 +1,8 @@
 package nl.vpro.domain.gtaa;
 
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlSeeAlso;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -21,25 +20,20 @@ import nl.vpro.openarchives.oai.Label;
     {
         @JsonSubTypes.Type(value = GTAAPerson.class),
         @JsonSubTypes.Type(value = GTAATopic.class),
+        @JsonSubTypes.Type(value = GTAATopicBandG.class),
+
         @JsonSubTypes.Type(value = GTAAGenre.class),
         @JsonSubTypes.Type(value = GTAAGeographicName.class),
         @JsonSubTypes.Type(value = GTAAMaker.class),
         @JsonSubTypes.Type(value = GTAAName.class),
-        @JsonSubTypes.Type(value = ThesaurusItem.class)
+        @JsonSubTypes.Type(value = GTAAClassification.class),
+
     })
-@XmlSeeAlso({
-    GTAAPerson.class,
-    GTAATopic.class,
-    GTAAGenre.class,
-    GTAAGeographicName.class,
-    GTAAMaker.class,
-    GTAAName.class,
-    ThesaurusItem.class
-})
+
 public interface ThesaurusObject {
 
 
-    String getId();
+    URI getId();
 
     List<Label> getNotes();
 
@@ -49,7 +43,7 @@ public interface ThesaurusObject {
 
     Status getStatus();
 
-    String getRedirectedFrom();
+    URI getRedirectedFrom();
 
 
 }

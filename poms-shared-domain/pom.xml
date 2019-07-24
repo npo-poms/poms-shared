@@ -75,6 +75,10 @@
       <artifactId>vpro-shared-test</artifactId>
     </dependency>
     <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-i18n</artifactId>
+    </dependency>
+    <dependency>
       <groupId>javax.annotation</groupId>
       <artifactId>javax.annotation-api</artifactId>
       <optional>true</optional>

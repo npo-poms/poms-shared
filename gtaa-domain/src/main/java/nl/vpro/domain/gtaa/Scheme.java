@@ -7,7 +7,11 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import nl.vpro.domain.Displayable;
+import nl.vpro.i18n.Locales;
+import nl.vpro.i18n.LocalizedString;
 
 /**
  * @author Michiel Meeuwissen
@@ -34,12 +38,13 @@ public enum Scheme implements Displayable {
 
     genre("http://data.beeldengeluid.nl/gtaa/Genre", "genre", "genres"),
 
-    name("http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen"),
+    name("http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen")
 
-
-    item(null, "item", "items")
 
     ;
+    static {
+        ThesaurusObjectIdResolver.init();
+    }
     @Getter
     private final String url;
 
@@ -81,21 +86,27 @@ public enum Scheme implements Displayable {
     }
 
     @Override
-    public String getPluralDisplayName() {
-        return pluralDisplayName;
+    public Optional<LocalizedString> getPluralDisplayName() {
+        return Optional.of(LocalizedString.of(pluralDisplayName, Locales.DUTCH));
     }
     @Override
     public String getDisplayName() {
         return displayName;
     }
 
+    public String getXmlElement() {
+        XmlRootElement annotation = getImplementation().getAnnotation(XmlRootElement.class);
+        if (annotation == null) {
+            throw new RuntimeException("No root element defined for " + this);
+        }
+        return annotation.name();
+    }
 
     public String getJsonObjectType() {
         return name();
     }
 
     public static Class[] classes() {
-        ThesaurusObjectIdResolver.init();
         return Arrays.stream(values()).map(s -> s.implementation)
             .filter(Objects::nonNull)
             .toArray(Class[]::new);

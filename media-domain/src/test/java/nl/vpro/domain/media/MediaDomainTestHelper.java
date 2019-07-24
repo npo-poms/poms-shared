@@ -4,6 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.time.Instant;
 import java.util.*;
 
@@ -26,6 +28,7 @@ import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Broadcaster;
 
+@Slf4j
 public class MediaDomainTestHelper extends ValidationTestHelper {
     private static JAXBContext jaxbContext;
 
@@ -33,7 +36,7 @@ public class MediaDomainTestHelper extends ValidationTestHelper {
         try {
             jaxbContext = JAXBContext.newInstance("nl.vpro.domain.media");
         } catch(JAXBException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -43,7 +46,7 @@ public class MediaDomainTestHelper extends ValidationTestHelper {
         try {
             unmarshaller = jaxbContext.createUnmarshaller();
         } catch(JAXBException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 
@@ -53,7 +56,7 @@ public class MediaDomainTestHelper extends ValidationTestHelper {
         try {
             marshaller = jaxbContext.createMarshaller();
         } catch(JAXBException e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
     }
 

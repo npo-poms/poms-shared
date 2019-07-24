@@ -6,14 +6,10 @@ import lombok.ToString;
 
 import java.time.Instant;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import nl.vpro.domain.Change;
@@ -22,7 +18,18 @@ import nl.vpro.domain.gtaa.*;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement
-public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
+@XmlSeeAlso({
+    GTAAPerson.class,
+    GTAATopic.class,
+    GTAAGenre.class,
+    GTAAGeographicName.class,
+    GTAAMaker.class,
+    GTAAName.class,
+    GTAAGeographicName.class,
+    GTAAClassification.class,
+    GTAATopicBandG.class}
+)
+public class ThesaurusChange extends Change<ThesaurusObject> {
 
     @XmlAttribute
     private Long sequence;
@@ -37,28 +44,22 @@ public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
     }
 
     @Builder
-    public ThesaurusChange(Instant publishDate, String id, Boolean deleted, Boolean tail, T object) {
+    public ThesaurusChange(Instant publishDate, String id, Boolean deleted, Boolean tail, ThesaurusObject object) {
         super(publishDate, id, deleted, tail, object);
+
+        // TODO
     }
 
 
     @Override
-    @XmlElements({
-        @XmlElement(name = "person", type = GTAAPerson.class),
-        @XmlElement(name = "topic", type = GTAATopic.class),
-        @XmlElement(name = "genre", type = GTAAGenre.class),
-        @XmlElement(name = "geographicname", type = GTAAGeographicName.class),
-        @XmlElement(name = "maker", type = GTAAMaker.class),
-        @XmlElement(name = "name", type = GTAAName.class),
-        @XmlElement(name = "item", type = ThesaurusItem.class)
-    })
     @JsonIgnore
-    public T getObject() {
+    @XmlAnyElement(lax = true)
+    public ThesaurusObject getObject() {
         return super.getObject();
     }
 
     @Override
-    public void setObject(T p) {
+    public void setObject(ThesaurusObject p) {
         super.setObject(p);
     }
 
@@ -66,15 +67,11 @@ public class ThesaurusChange<T extends ThesaurusObject> extends Change<T> {
 
     @JsonProperty("object")
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
-    @JsonSubTypes({
-            @JsonSubTypes.Type(value = GTAAPerson.class, name = "person"),
-            @JsonSubTypes.Type(value = ThesaurusItem.class, name = "item")}
-    )
-    protected T getJsonObject() {
+    protected ThesaurusObject getJsonObject() {
         return getObject();
     }
 
-    protected void setJsonObject(T o) {
+    protected void setJsonObject(ThesaurusObject o) {
         setObject(o);
     }
 

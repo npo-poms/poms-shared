@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
     @Getter
     @Setter
     @XmlAttribute
-    private String id;
+    private URI id;
 
     @Getter
     @Setter
@@ -42,7 +43,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
     @Getter
     @Setter
     @XmlElement
-    String redirectedFrom;
+    URI redirectedFrom;
 
     @Getter
     @Setter
@@ -62,7 +63,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
 
     }
 
-    AbstractThesaurusItem(String id, List<Label> notes, String value, String redirectedFrom, Status status, Instant lastModified) {
+    AbstractThesaurusItem(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         this.id = id;
         this.notes = notes;
         this.value = value;
@@ -73,22 +74,24 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
 
     protected static void fill(Description description, AbstractThesaurusItem answer) {
         answer.setId(description.getAbout());
-        answer.setValue(description.getPrefLabel().getValue());
+        if (description.getPrefLabel() != null) {
+            answer.setValue(description.getPrefLabel().getValue());
+        }
         answer.setNotes(description.getScopeNote());
         answer.setStatus(description.getStatus());
         if (description.getChangeNote() != null) {
-            answer.setRedirectedFrom(description.getRedirectedFrom());
+            description.getRedirectedFrom().ifPresent(answer::setRedirectedFrom);
         }
         if (description.getModified() != null) {
             answer.setLastModified(description.getModified().getValue().toInstant());
         }
     }
 
-    protected void fill(String id,
+    protected void fill(URI id,
                         String value,
                         List<Label> notes,
                         Status status,
-                        String changeNote,
+                        URI changeNote,
                         Instant modified) {
         this.setId(id);
         this.setValue(value);

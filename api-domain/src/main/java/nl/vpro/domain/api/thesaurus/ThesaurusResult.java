@@ -15,13 +15,15 @@ import nl.vpro.domain.gtaa.*;
 @XmlType(name = "thesaurusItemsType")
 @NoArgsConstructor
 @XmlSeeAlso({
-        GTAAPerson.class,
-        GTAATopic.class,
-        GTAAGenre.class,
-        GTAAGeographicName.class,
-        GTAAMaker.class,
-        GTAAName.class,
-        ThesaurusItem.class
+    GTAAPerson.class,
+    GTAATopic.class,
+    GTAAGenre.class,
+    GTAAGeographicName.class,
+    GTAAMaker.class,
+    GTAAName.class,
+    GTAAGeographicName.class,
+    GTAAClassification.class,
+    GTAATopicBandG.class
 })public class ThesaurusResult<T extends ThesaurusObject> extends Result<T> {
 
     public ThesaurusResult(List<T> list, Integer max) {

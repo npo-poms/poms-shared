@@ -381,7 +381,7 @@ public abstract class MediaObject
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @NotNull(message = "avType: {nl.vpro.constraints.NotNull}")
-    protected AVType avType = AVType.MIXED;
+    protected AVType avType = null;
 
     @OneToOne(orphanRemoval = true, cascade = {ALL})
     protected AVAttributes avAttributes;
@@ -632,7 +632,7 @@ public abstract class MediaObject
     @Embedded()
     @XmlTransient
     @Setter(AccessLevel.PACKAGE)
-    private StreamingStatus streamingPlatformStatus = StreamingStatus.unset();
+    private StreamingStatusImpl streamingPlatformStatus = StreamingStatus.unset();
 
     public MediaObject() {
     }
@@ -1216,6 +1216,9 @@ public abstract class MediaObject
 
     //region GeoLocations logic
     public SortedSet<GeoLocations> getGeoLocations() {
+        if (geoLocations == null) {
+            geoLocations = new TreeSet<>();
+        }
         return geoLocations;
     }
 
@@ -2107,6 +2110,9 @@ public abstract class MediaObject
         return StreamingStatus.copy(streamingPlatformStatus);
     }
 
+    protected StreamingStatusImpl getModifiableStreamingPlatformStatus() {
+        return streamingPlatformStatus;
+    }
     @XmlTransient
     public SortedSet<Prediction> getPredictions() {
         if (predictions == null) {
