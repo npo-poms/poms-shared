@@ -12,6 +12,10 @@ import javax.xml.bind.annotation.XmlTransient;
 import nl.vpro.openarchives.oai.Label;
 
 /**
+ * A thesaurus item of which the value is represented by a simple {@code <value></value>}
+ *
+ * These are all ones besides {@link GTAAPerson}.
+ *
  * @since 5.11
  */
 @XmlTransient

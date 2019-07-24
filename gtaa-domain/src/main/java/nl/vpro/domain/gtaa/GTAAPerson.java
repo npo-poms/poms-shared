@@ -27,6 +27,10 @@ import nl.vpro.validation.NoHtml;
 import nl.vpro.w3.rdf.Description;
 
 /**
+ * A representation of the gtaa concept {@link Scheme#person}.
+ *
+ * We have the small distinction what we try to make sense of {@link #givenName} and {@link #familyName}. It's doubtful that this is culturally neutral, but for the use cases at hand it's probably sensible.
+ *
  * @author Roelof Jan Koekoek
  * @since 3.7
  */
