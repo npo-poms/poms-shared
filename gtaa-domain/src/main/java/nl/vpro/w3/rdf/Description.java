@@ -141,10 +141,6 @@ public class Description extends AbstractGTAAObject {
         return StringUtils.substringAfterLast(getInScheme().getResource(), "/");
     }
 
-    public boolean hasRedirectedFrom() {
-        return getCleanChangeNote().anyMatch(note -> StringUtils.contains(note, FORWARD));
-    }
-
     public Optional<URI> getRedirectedFrom() {
         return getCleanChangeNote().filter(note -> StringUtils.contains(note, FORWARD)).map(note -> StringUtils.substringAfter(note, FORWARD)).map(URI::create).findAny();
     }
