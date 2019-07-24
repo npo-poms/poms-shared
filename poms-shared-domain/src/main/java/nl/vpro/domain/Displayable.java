@@ -7,6 +7,7 @@ package nl.vpro.domain;
 import java.util.Locale;
 import java.util.Optional;
 
+import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.LocalizedString;
 
 /**
@@ -16,19 +17,17 @@ import nl.vpro.i18n.LocalizedString;
  */
 public interface Displayable {
 
-    Locale DEFAULT = new Locale("nl");
-
     default String getDisplayName() {
-        return getDisplayName(DEFAULT).getValue();
+        return getDisplayName(Locales.getDefault()).getValue();
     }
 
 
     /**
-     * Returns a displayable name for this item in the given Locale, or the default locale if not available or not implemented
+     * Returns a displayable name for this item in the given Locale, or the default locale ({@link Locales#getDefault()}) if not available or not implemented
      * @since 5.11
      */
     default LocalizedString getDisplayName(Locale locale) {
-        return LocalizedString.of(getDisplayName(), DEFAULT);
+        return LocalizedString.of(getDisplayName(), Locales.getDefault());
     }
 
 
@@ -41,11 +40,12 @@ public interface Displayable {
     }
 
 
-     /**
+    /**
+     * Returns {@link #getDisplayName(Locale)} for the default locale {@link Locales#getDefault()}
      * @since 5.11
      */
     default Optional<LocalizedString> getPluralDisplayName() {
-        return getPluralDisplayName(DEFAULT);
+        return getPluralDisplayName(Locales.getDefault());
     }
 
 
