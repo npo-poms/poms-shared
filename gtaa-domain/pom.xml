@@ -12,10 +12,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>nl.vpro.poms</groupId>
-      <artifactId>poms-shared-domain</artifactId>
-    </dependency>
-    <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-annotations</artifactId>
     </dependency>
@@ -35,6 +31,21 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-jackson2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>nl.vpro.shared</groupId>
+      <artifactId>vpro-shared-i18n</artifactId>
+    </dependency>
+    <!--
+    the following dependency is for things like 'Displayable' and 'PersonInterface'
+    -->
+    <dependency>
+      <groupId>nl.vpro.poms</groupId>
+      <artifactId>poms-shared-domain</artifactId>
     </dependency>
   </dependencies>
 </project>
