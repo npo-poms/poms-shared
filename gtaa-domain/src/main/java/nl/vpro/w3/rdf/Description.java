@@ -174,7 +174,6 @@ public class Description extends AbstractGTAAObject {
         return getChangeNote().stream().map(StringUtils::deleteWhitespace);
     }
 
-    @SuppressWarnings("rawtypes")
     public static class Builder extends AbstractBuilder {
 
         public Builder type(String type) {
@@ -186,7 +185,6 @@ public class Description extends AbstractGTAAObject {
             this.inScheme = ResourceElement.builder().resource(scheme).build();
             return this;
         }
-
 
         public Builder inScheme(Scheme scheme) {
             this.inScheme = ResourceElement.builder().resource(scheme.getUrl()).build();
