@@ -31,7 +31,7 @@ public interface ThesaurusUpdateRestService {
     @Path("/person")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     GTAAPerson submit(
-        @HeaderParam(HttpHeaders.AUTHORIZATION) String jws,
+        @NotNull @HeaderParam(HttpHeaders.AUTHORIZATION) String jws,
         @NotNull GTAANewPerson person
     );
 
@@ -39,7 +39,7 @@ public interface ThesaurusUpdateRestService {
     @Path("/concept")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     ThesaurusObject submit(
-        @HeaderParam(HttpHeaders.AUTHORIZATION) String jws,
+        @NotNull@HeaderParam(HttpHeaders.AUTHORIZATION) String jws,
         @NotNull GTAANewThesaurusObject thesaurusObject
     );
 
