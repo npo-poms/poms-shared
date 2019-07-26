@@ -8,12 +8,12 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
 
 import org.apache.http.HttpHeaders;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.internal.ResteasyClientBuilderImpl;
 import org.springframework.beans.factory.annotation.Value;
@@ -71,7 +71,7 @@ public class NEPSAMServiceImpl implements NEPSAMService {
     public String streamAccess(String streamId, boolean drm, StreamAccessItem request) {
         AccessApi streamApi = getStreamApi();
         String profile = drm ? drmProfile : noDrmProfile;
-        log.info("Using profile " + profile);
+        log.info("Using profile {}",profile);
         StreamAccessResponseItem streamAccessResponseItem = streamApi.v2AccessProviderProviderNamePlatformPlatformNameProfileProfileNameStreamStreamIdPost(provider, platform,  profile, streamId, request);
         Map<String, Object> attributes = (Map<String, Object>) streamAccessResponseItem.getData().getAttributes();
         return (String) attributes.get("url");
