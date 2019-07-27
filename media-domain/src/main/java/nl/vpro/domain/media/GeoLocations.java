@@ -12,9 +12,8 @@ import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.MediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
 
 import static javax.persistence.CascadeType.ALL;
@@ -29,7 +28,7 @@ import static javax.persistence.CascadeType.ALL;
 @XmlType(name = "geoLocationsType")
 @Getter
 @Setter
-public class GeoLocations extends DomainObject implements Child<MediaObject>, Comparable<GeoLocations>, Ownable {
+public class GeoLocations extends DomainObject implements Comparable<GeoLocations>, MediaObjectOwnableList<GeoLocations, GeoLocation> {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
@@ -48,6 +47,9 @@ public class GeoLocations extends DomainObject implements Child<MediaObject>, Co
     private List<GeoLocation> values = new ArrayList<>();
 
     public GeoLocations() {
+    }
+    public GeoLocations(@NonNull  OwnerType owner) {
+        this.owner = owner;
     }
 
     @lombok.Builder(builderClassName = "Builder")
