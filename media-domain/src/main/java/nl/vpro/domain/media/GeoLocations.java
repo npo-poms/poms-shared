@@ -1,50 +1,29 @@
 package nl.vpro.domain.media;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.Singular;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.MediaObjectOwnableList;
+import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
-
-import static javax.persistence.CascadeType.ALL;
 
 
 /**
+ *
  * @author Giorgio Vinci
  * @since 5.11
  */
-@Entity
-@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoLocationsType")
 @Getter
 @Setter
-public class GeoLocations extends DomainObject implements Comparable<GeoLocations>, MediaObjectOwnableList<GeoLocations, GeoLocation> {
-
-    @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
-    @XmlTransient
-    private MediaObject parent;
-
-    @Enumerated(EnumType.STRING)
-    @XmlAttribute
-    @Setter(AccessLevel.PRIVATE)
-    private OwnerType owner;
-
-    @OneToMany(cascade = {ALL})
-    @JoinColumn(name = "parent_id")
-    @JsonProperty("values")
-    @OrderColumn(name = "list_index", nullable = true)
-    @XmlElement(name="geoLocation")
-    private List<GeoLocation> values = new ArrayList<>();
+public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, GeoLocation> {
 
     public GeoLocations() {
     }
@@ -61,43 +40,14 @@ public class GeoLocations extends DomainObject implements Comparable<GeoLocation
         this.values.forEach(v -> v.setParent(this));
     }
 
+    @Override
+    @org.checkerframework.checker.nullness.qual.NonNull
+    @XmlElement(name="geoLocation")
+    public List<GeoLocation> getValues() {
+        return super.getValues();
+    }
 
     public GeoLocations copy() {
         return new GeoLocations(values.stream().map(GeoLocation::copy).collect(Collectors.toList()), owner);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        GeoLocations geoLocations = (GeoLocations) o;
-        return owner == geoLocations.owner &&
-                values.equals(geoLocations.values);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(owner, values);
-    }
-
-    /**
-     *  Just ensuring the comparator match equality.
-     *  We never expect 2 lists from the same owner anyway
-     */
-    @Override
-    public int compareTo(GeoLocations o) {
-        if (this.getOwner().equals(o.getOwner())){
-            if (!Objects.equals(this.values, o.values)) {
-                //order is undefined (we never expect 2 intentions with same owner in a set anyway)
-                return -1;
-            }
-        }
-        return this.getOwner().compareTo(o.getOwner());
-    }
-
-    @Override
-    public String toString() {
-        return "GeoLocations:" + owner + ":" + values;
-    }
-
 }
