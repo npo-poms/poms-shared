@@ -1226,6 +1226,7 @@ public abstract class MediaObject
     //    - must methods are only used in testing, and will not unncessarily pollute code
     //    - avoid code duplication, for every similar field 'intentions' etc, the same thing will otherwise be needed
     //
+    @NonNull
     public SortedSet<GeoLocations> getGeoLocations() {
         return this.geoLocations = MediaObjectOwnableLists.createIfNull(this.geoLocations);
     }
@@ -1245,10 +1246,21 @@ public abstract class MediaObject
         }
     }
 
+    /**
+     *
+     * @deprecated See remark
+     */
+    @Deprecated
     public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, @NonNull OwnerType owner) {
         return newGeoLocation.addTo(this.geoLocations = MediaObjectOwnableLists.createIfNull(this.geoLocations), owner);
     }
 
+
+    /**
+     *
+     * @deprecated See remark
+     */
+    @Deprecated
     public MediaObject addGeoLocations(@NonNull GeoLocations newGeoLocations) {
         if(this.geoLocations != null) {
             this.geoLocations.removeIf(existing -> existing.getOwner() == newGeoLocations.getOwner());
@@ -1261,10 +1273,22 @@ public abstract class MediaObject
     }
 
 
+
+    /**
+     *
+     * @deprecated See remark
+     */
+    @Deprecated
     public boolean removeGeoLocation(@NonNull GeoLocation geoLocation, OwnerType owner) {
         return MediaObjectOwnableLists.remove(this.geoLocations, geoLocation, owner);
     }
 
+
+    /**
+     *
+     * @deprecated See remark
+     */
+    @Deprecated
     public Optional<GeoLocation> findGeoLocation(@NonNull Long id,@NonNull OwnerType owner){
         final Optional<GeoLocation> empty = Optional.empty();
         if (geoLocations.isEmpty()) {
