@@ -73,7 +73,7 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObject.*;
-import static nl.vpro.domain.media.support.Ownables.containsDuplicateOwner;
+import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
 
 /**
  * Base objects for programs and groups
@@ -1215,11 +1215,19 @@ public abstract class MediaObject
     }
 
     //region GeoLocations logic
+    // TODO following methods seems to be mostly utilities to deal with these kind of objects.
+
+    // Remarks:
+    // - I think the Mediaobject is huge enough already. I understand that this kind of follows the example, but I think it may be a good idea to not aggravate the issue.
+    // - I'd suggest to remove all methods besided '#getGeolocations' (and perhaps #setGeolocations to help jaxb/jackson), and move all stuff to an utility class like 'MediaObjectOwnablesLists'.
+    // All similar fields can do the same.
+    // This will:
+    //    - avoid making this class even much bigger than it is already
+    //    - must methods are only used in testing, and will not unncessarily pollute code
+    //    - avoid code duplication, for every similar field 'intentions' etc, the same thing will otherwise be needed
+    //
     public SortedSet<GeoLocations> getGeoLocations() {
-        if (geoLocations == null) {
-            geoLocations = new TreeSet<>();
-        }
-        return geoLocations;
+        return this.geoLocations = MediaObjectOwnableLists.createIfNull(this.geoLocations);
     }
 
     public void setGeoLocations(@NonNull SortedSet<GeoLocations> newGeoLocations) {
@@ -1238,25 +1246,7 @@ public abstract class MediaObject
     }
 
     public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, @NonNull OwnerType owner) {
-        boolean isAdded;
-        if(this.geoLocations == null) {
-            this.geoLocations = new TreeSet<>();
-        }
-        Optional<GeoLocations> match = geoLocations.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
-        if (match.isPresent() && match.get().getValues().contains(newGeoLocation))
-            return false;
-
-        if (match.isPresent()) {
-            newGeoLocation.setParent(match.get());
-            isAdded = match.get().getValues().add(newGeoLocation);
-        } else {
-            final GeoLocations geoLocations = GeoLocations.builder().owner(owner).values(new ArrayList<>()).build();
-            geoLocations.setParent(this);
-            newGeoLocation.setParent(geoLocations);
-            geoLocations.getValues().add(newGeoLocation);
-            isAdded = this.geoLocations.add(geoLocations);
-        }
-        return isAdded;
+        return newGeoLocation.addTo(this.geoLocations = MediaObjectOwnableLists.createIfNull(this.geoLocations), owner);
     }
 
     public MediaObject addGeoLocations(@NonNull GeoLocations newGeoLocations) {
@@ -1270,20 +1260,9 @@ public abstract class MediaObject
         return this;
     }
 
-    public boolean removeGeoLocations(GeoLocations geoLocations) {
-        return this.geoLocations.remove(geoLocations);
-    }
 
     public boolean removeGeoLocation(@NonNull GeoLocation geoLocation, OwnerType owner) {
-
-        final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
-                .filter(owned -> owned.getOwner().equals(owner))
-                .findAny().map(GeoLocations::getValues);
-
-        if(maybeValues.isPresent()) {
-            return maybeValues.get().remove(geoLocation);
-        }
-        return false;
+        return MediaObjectOwnableLists.remove(this.geoLocations, geoLocation, owner);
     }
 
     public Optional<GeoLocation> findGeoLocation(@NonNull Long id,@NonNull OwnerType owner){

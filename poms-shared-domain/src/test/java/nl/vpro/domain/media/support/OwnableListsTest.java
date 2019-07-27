@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class OwnablesTest {
+public class OwnableListsTest {
 
 
     public static class AOwnable implements Ownable {
@@ -33,9 +33,9 @@ public class OwnablesTest {
     public void containsDuplicateOwner() {
 
 
-        assertThat(Ownables.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER), new AOwnable(OwnerType.AUTHORITY)))).isFalse();
-        assertThat(Ownables.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER), new AOwnable(OwnerType.BROADCASTER)))).isTrue();
-        assertThat(Ownables.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER)))).isFalse();
-        assertThat(Ownables.containsDuplicateOwner(Arrays.asList())).isFalse();
+        assertThat(OwnableLists.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER), new AOwnable(OwnerType.AUTHORITY)))).isFalse();
+        assertThat(OwnableLists.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER), new AOwnable(OwnerType.BROADCASTER)))).isTrue();
+        assertThat(OwnableLists.containsDuplicateOwner(Arrays.asList(new AOwnable(OwnerType.BROADCASTER)))).isFalse();
+        assertThat(OwnableLists.containsDuplicateOwner(Arrays.asList())).isFalse();
     }
 }

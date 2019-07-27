@@ -25,8 +25,8 @@ public class GeoLocationTest {
                 .build();
 
         assertThat(program).isNotNull();
-        assertThat(geoLocations1).isNotNull();
-        assertThat(geoLocations2).isNotNull();
+        assertThat((Object) geoLocations1).isNotNull();
+        assertThat((Object) geoLocations2).isNotNull();
 
         //when I add GeoLocations
         MediaObject newProgram = program.addGeoLocations(geoLocations1);
@@ -47,8 +47,8 @@ public class GeoLocationTest {
         Program program = MediaBuilder.program().build();
 
         assertThat(program).isNotNull();
-        assertThat(geoLocations1).isNotNull();
-        assertThat(geoLocations3).isNotNull();
+        assertThat((Object) geoLocations1).isNotNull();
+        assertThat((Object) geoLocations3).isNotNull();
 
         //when I add something with same owner
         MediaObject newProgram = program.addGeoLocations(geoLocations1);
@@ -69,8 +69,8 @@ public class GeoLocationTest {
         Program program = MediaBuilder.program().build();
 
         assertThat(program).isNotNull();
-        assertThat(geoLocations1).isNotNull();
-        assertThat(geoLocations3).isNotNull();
+        assertThat((Object) geoLocations1).isNotNull();
+        assertThat((Object) geoLocations3).isNotNull();
 
         //when I set geoLocations with duplicate owner I expect an exception to be raise
         SortedSet<GeoLocations> newGeoLocations = new TreeSet<>(Arrays.asList(geoLocations1, geoLocations3));
@@ -93,7 +93,7 @@ public class GeoLocationTest {
         System.out.println("Program:" + program);
 
         //when I remove an intention
-        program.removeGeoLocations(geoLocations1);
+        program.getGeoLocations().remove(geoLocations1);
 
         //I expect not to find it anymore
         assertThat(program.geoLocations).doesNotContain(geoLocations1);

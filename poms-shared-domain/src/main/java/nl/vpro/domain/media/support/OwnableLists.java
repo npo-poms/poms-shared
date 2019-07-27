@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class Ownables {
+public class OwnableLists {
 
 
     public static <T extends Ownable> boolean containsDuplicateOwner(Iterable<T> newValues){
