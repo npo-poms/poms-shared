@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
 import nl.vpro.domain.gtaa.GTAANewThesaurusObject;
+import nl.vpro.domain.gtaa.Scheme;
 import nl.vpro.domain.gtaa.Status;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
@@ -60,6 +61,7 @@ public class OpenskosRepositoryTest {
         GTAANewThesaurusObject testNameX = GTAANewThesaurusObject.builder()
             .value("Testlabel1")
             .note("Note123")
+            .scheme(Scheme.name)
             .build();
 
         repo.submit(testNameX, "testCreatorX");
