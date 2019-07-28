@@ -24,7 +24,7 @@ import nl.vpro.domain.gtaa.ThesaurusObject;
  */
 @Embeddable
 @ToString
-public abstract class EmbeddableGTAARecord implements Serializable {
+public abstract class EmbeddableGTAARecord implements Serializable, Cloneable {
 
     @Column(nullable = true, name = "gtaa_uri")
     @Getter
