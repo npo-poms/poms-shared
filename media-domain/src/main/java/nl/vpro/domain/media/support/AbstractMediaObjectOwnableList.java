@@ -86,4 +86,13 @@ public abstract class AbstractMediaObjectOwnableList<
         return getClass().getSimpleName() + ":" + owner + ":" + values;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public THIS clone() {
+        try {
+            return (THIS) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException();
+        }
+    }
 }
