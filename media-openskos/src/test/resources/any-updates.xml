@@ -7954,6 +7954,6 @@
         <setSpec>beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2</setSpec>
       </header>
     </record>
-    <resumptionToken completeListSize="3399" cursor="100">eyJvZmZzZXQiOjIwMCwibWV0YWRhdGFQcmVmaXgiOiJvYWlfcmRmIiwic2V0IjpudWxsLCJmcm9tIjoxNDgzMjI1MjAwLCJ1bnRpbCI6MTUwMzYxMjAwMH0=</resumptionToken>
+    <resumptionToken completeListSize="3399" cursor="100"><!--eyJvZmZzZXQiOjIwMCwibWV0YWRhdGFQcmVmaXgiOiJvYWlfcmRmIiwic2V0IjpudWxsLCJmcm9tIjoxNDgzMjI1MjAwLCJ1bnRpbCI6MTUwMzYxMjAwMH0=--></resumptionToken>
   </ListRecords>
 </OAI-PMH>
