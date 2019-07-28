@@ -30,6 +30,7 @@ import static javax.persistence.CascadeType.ALL;
  */
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlTransient
 public abstract class AbstractMediaObjectOwnableList<
     THIS extends AbstractMediaObjectOwnableList<THIS, I>,
     I extends MediaObjectOwnableListItem<I, THIS>>
