@@ -102,34 +102,30 @@ public class GeoLocationTest {
 
     private GeoLocations geoLocations1() {
         return GeoLocations.builder()
-                .owner(BROADCASTER).values(
-                        Arrays.asList(
-                                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
-                                        .description("Continent").build()
-                        )
-                )
-                .build();
+                .owner(BROADCASTER).value(
+                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
+                    .description("Continent").build()
+            )
+            .build();
     }
 
     private GeoLocations geoLocations2() {
         return GeoLocations.builder()
-                .owner(BROADCASTER).values(
-                        Arrays.asList(
-                                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
-                                        .description("Continent").build()
-                        )
-                )
-                .build();
+            .owner(BROADCASTER)
+            .value(
+                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
+                    .description("Continent").build()
+            )
+            .build();
     }
 
     private GeoLocations geoLocations3() {
         return GeoLocations.builder()
-                .owner(BROADCASTER).values(
-                        Arrays.asList(
-                                GeoLocation.builder().name("England").role(GeoRoleType.RECORDED_IN)
-                                        .gtaaUri("https://wikipedia/lll").build()
-                        )
-                )
-                .build();
+            .owner(BROADCASTER).value(
+                GeoLocation.builder().name("England").role(GeoRoleType.RECORDED_IN)
+                    .gtaaUri("https://wikipedia/lll").build()
+
+            )
+            .build();
     }
 }
