@@ -10,10 +10,12 @@ import nl.vpro.domain.media.MediaObject;
 import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
 
 /**
+ * Utilities related to updating {@link MediaObjectOwnableList}.
  * @author Michiel Meeuwissen
  * @since 5.11
  */
 public class MediaObjectOwnableLists {
+
 
     public static  <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     SortedSet<P> createIfNull(SortedSet<P> set) {
@@ -50,8 +52,6 @@ public class MediaObjectOwnableLists {
         Set<P> set,
         @NonNull I value,
         @NonNull OwnerType owner
-
-
     ) {
         if (set == null) {
             return false;
@@ -87,6 +87,7 @@ public class MediaObjectOwnableLists {
         }
         return Optional.empty();
     }
+
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     MediaObject add(@NonNull MediaObject parent, @NonNull Collection<P> list, @NonNull P newOwnableList) {
         list.removeIf(existing -> existing.getOwner() == newOwnableList.getOwner());
