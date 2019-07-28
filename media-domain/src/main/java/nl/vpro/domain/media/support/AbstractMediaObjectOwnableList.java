@@ -30,9 +30,6 @@ import static javax.persistence.CascadeType.ALL;
  */
 @MappedSuperclass
 @XmlAccessorType(XmlAccessType.NONE)
-@XmlTransient
-@Getter
-@Setter
 public abstract class AbstractMediaObjectOwnableList<
     THIS extends AbstractMediaObjectOwnableList<THIS, I>,
     I extends MediaObjectOwnableListItem<I, THIS>>
@@ -41,11 +38,14 @@ public abstract class AbstractMediaObjectOwnableList<
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient
+    @Getter
+    @Setter
     private MediaObject parent;
 
     @Enumerated(EnumType.STRING)
     @XmlAttribute
     @Setter(AccessLevel.PRIVATE)
+    @Getter
     protected OwnerType owner;
 
     @OneToMany(cascade = {ALL})

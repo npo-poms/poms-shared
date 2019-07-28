@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.Singular;
 
@@ -11,6 +10,8 @@ import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,14 +32,14 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
 
     public GeoLocations() {
     }
-    public GeoLocations(@NonNull  OwnerType owner) {
+    public GeoLocations(@lombok.NonNull  OwnerType owner) {
         this.owner = owner;
     }
 
     @lombok.Builder(builderClassName = "Builder")
     private GeoLocations(
-        @NonNull @Singular List<GeoLocation> values,
-        @NonNull OwnerType owner) {
+        @lombok.NonNull @Singular List<GeoLocation> values,
+        @lombok.NonNull OwnerType owner) {
         this.values = values.stream().map(GeoLocation::clone).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
@@ -47,15 +48,15 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
     }
 
     @Override
-    @org.checkerframework.checker.nullness.qual.NonNull
+    @NonNull
     @XmlElement(name="geoLocation")
     @JsonIgnore
     public List<GeoLocation> getValues() {
-        return super.getValues();
+        return values;
     }
-    @Override
+
     public void setValues(List<GeoLocation> list) {
-        super.setValues(list);
+        this.values = list;
     }
 
     @Override

@@ -16,7 +16,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @param <THIS> The self type, used in {@link Comparable}, and in the item type
  * @param <I> The item type
  */
-public interface OwnableList<THIS extends OwnableList<THIS, I>, I extends OwnableListItem<I, THIS>> extends Collection<I>, Comparable<THIS>, Ownable {
+public interface OwnableList<THIS extends OwnableList<THIS, I>, I extends OwnableListItem<I, THIS>>
+    //extends Collection<I>, // Implementing Collection confuses Jackson, it will ignore all annotation and serialize as an array.
+    extends Iterable<I>,
+    Comparable<THIS>, Ownable {
 
 
     @NonNull
@@ -24,78 +27,78 @@ public interface OwnableList<THIS extends OwnableList<THIS, I>, I extends Ownabl
 
     // Default implementing Collection
 
-    @Override
+    //@Override
     default int size() {
         return getValues().size();
     }
 
-    @Override
+    //@Override
     default boolean isEmpty() {
         return getValues().isEmpty();
     }
 
-    @Override
+    //@Override
     default boolean contains(Object element) {
         return getValues().contains(element);
     }
 
-    @Override
+    //@Override
     @NonNull
     default Iterator<I> iterator() {
         return getValues().iterator();
     }
 
-    @Override
+    //@Override
     @NonNull
     default Object[] toArray() {
         return getValues().toArray();
 
     }
 
-    @Override
+    //@Override
     @NonNull
     default <T> T[] toArray(@NonNull T[] a) {
         return getValues().toArray(a);
 
     }
 
-    @Override
+    //@Override
     default boolean add(I value) {
         return getValues().add(value);
 
     }
 
-    @Override
+    //@Override
     default boolean remove(Object o) {
         return getValues().remove(o);
 
     }
 
-    @Override
+    //@Override
     default boolean containsAll(@NonNull Collection<?> c) {
         return getValues().containsAll(c);
 
     }
 
-    @Override
+    //@Override
     default boolean addAll(@NonNull Collection<? extends I> c) {
         return getValues().addAll(c);
     }
 
-    @Override
+    //@Override
     default boolean removeAll(@NonNull Collection<?> c) {
         return getValues().removeAll(c);
 
     }
 
 
-    @Override
+    //@Override
     default boolean retainAll(@NonNull Collection<?> c) {
         return getValues().retainAll(c);
 
     }
 
-    @Override
+    //@Override
     default void clear() {
         getValues().clear();
     }
