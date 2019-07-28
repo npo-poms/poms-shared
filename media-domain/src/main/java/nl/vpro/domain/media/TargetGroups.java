@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.Singular;
 
@@ -13,6 +12,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -30,7 +31,7 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     public TargetGroups() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    private TargetGroups(@NonNull @Singular  List<TargetGroupType> values, @NonNull OwnerType owner) {
+    private TargetGroups(@lombok.NonNull @Singular  List<TargetGroupType> values, @lombok.NonNull OwnerType owner) {
         this.values = values.stream().map(TargetGroup::new).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
@@ -46,14 +47,14 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
 
 
     @Override
-    @org.checkerframework.checker.nullness.qual.NonNull
+    @NonNull
     @XmlElement(name="targetGroup")
     @JsonIgnore
     public List<TargetGroup> getValues() {
-        return super.getValues();
+        return values;
     }
-    @Override
+
     public void setValues(List<TargetGroup> list) {
-        super.setValues(list);
+        this.values = list;
     }
 }

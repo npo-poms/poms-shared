@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.Singular;
 
@@ -15,7 +14,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
@@ -29,13 +31,17 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlType(name = "intentionsType")
 @Getter
 @Setter
+@JsonPropertyOrder({
+    "owner",
+    "values"
+})
 public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Intention> {
 
 
     public Intentions() {}
 
     @lombok.Builder(builderClassName = "Builder")
-    private Intentions(@NonNull @Singular  List<IntentionType> values, @NonNull OwnerType owner) {
+    private Intentions(@lombok.NonNull @Singular  List<IntentionType> values, @lombok.NonNull OwnerType owner) {
         this.values = values.stream().map(Intention::new).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
@@ -45,15 +51,15 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
 
 
     @Override
-    @org.checkerframework.checker.nullness.qual.NonNull
+    @NonNull
     @XmlElement(name="intention")
     @JsonIgnore
     public List<Intention> getValues() {
-        return super.getValues();
+        return values;
     }
-    @Override
+
     public void setValues(List<Intention> list) {
-        super.setValues(list);
+        this.values = list;
     }
 
     @Override
