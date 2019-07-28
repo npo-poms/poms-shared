@@ -6,7 +6,7 @@ import nl.vpro.domain.Child;
 import nl.vpro.domain.media.MediaObject;
 
 /**
- * A MediaObjectOwnableList is a {@link OwnableList} that is also a {@link Child} of {@link MediaObject}, and of wich the items are {@link MediaObjectOwnableListItem}.
+ * A MediaObjectOwnableList is a {@link OwnableList} that is also a {@link Child} of {@link MediaObject}, and of which the items are {@link MediaObjectOwnableListItem}.
  *
  * @author Michiel Meeuwissen
  * @since 5.11
