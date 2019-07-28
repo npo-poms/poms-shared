@@ -830,9 +830,7 @@ public abstract class MediaObject
         this.broadcasters = broadcasters;
     }
 
-    public MediaObject addBroadcaster(Broadcaster broadcaster) {
-        nullCheck(broadcaster, "broadcaster");
-
+    public MediaObject addBroadcaster(@lombok.NonNull Broadcaster broadcaster) {
         if (this.broadcasters == null) {
             this.broadcasters = new ArrayList<>();
         }
@@ -1180,13 +1178,10 @@ public abstract class MediaObject
         this.genres = updateSortedSet(this.genres, genres);
     }
 
-    public MediaObject addGenre(Genre genre) {
-        nullCheck(genre, "genre");
-
+    public MediaObject addGenre(@lombok.NonNull Genre genre) {
         if (genres == null) {
             genres = new TreeSet<>();
         }
-
         genres.add(genre);
 
         return this;
@@ -1388,9 +1383,7 @@ public abstract class MediaObject
         return addCountry(Country.of(country));
     }
 
-    public MediaObject addCountry(org.meeuw.i18n.Region country) {
-        nullCheck(country, "country");
-
+    public MediaObject addCountry(@lombok.NonNull org.meeuw.i18n.Region country) {
         if (countries == null) {
             countries = new ArrayList<>();
         }
@@ -1418,9 +1411,7 @@ public abstract class MediaObject
         this.languages = updateList(this.languages, languages);
     }
 
-    public MediaObject addLanguage(Locale language) {
-        nullCheck(language, "language");
-
+    public MediaObject addLanguage(@lombok.NonNull Locale language) {
         if (languages == null) {
             languages = new ArrayList<>();
         }
@@ -2398,10 +2389,7 @@ public abstract class MediaObject
         }
     }
 
-
-    public MediaObject addRelation(Relation relation) {
-        nullCheck(relation, "relation");
-
+    public MediaObject addRelation(@lombok.NonNull Relation relation) {
         if (this.relations == null) {
             this.relations = new TreeSet<>();
         }
@@ -2806,14 +2794,6 @@ public abstract class MediaObject
     public final MediaType getMediaType() {
         SubMediaType subMediaType = getType();
         return subMediaType == null ? MediaType.getMediaType(this) : subMediaType.getMediaType();
-    }
-
-
-
-    private void nullCheck(Object o, String type) {
-        if (o == null) {
-            throw new IllegalArgumentException("Received a null " + type + " argument");
-        }
     }
 
     @Override
