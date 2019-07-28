@@ -7,6 +7,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.meeuw.i18n.Region;
+
 import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
@@ -19,7 +21,7 @@ import nl.vpro.w3.rdf.Description;
     "redirectedFrom"
 })
 @XmlRootElement(name = "geographicName")
-public class GTAAGeographicName extends AbstractSimpleValueThesaurusItem  {
+public class GTAAGeographicName extends AbstractSimpleValueThesaurusItem implements Region {
 
     @lombok.Builder(builderClassName = "Builder")
     public GTAAGeographicName(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
@@ -37,4 +39,20 @@ public class GTAAGeographicName extends AbstractSimpleValueThesaurusItem  {
     }
 
 
+    @Override
+    public String getCode() {
+        return getId().toString();
+
+    }
+
+    @Override
+    public Type getType() {
+        return Type.UNDEFINED;
+
+    }
+
+    @Override
+    public String getName() {
+        return getValue();
+    }
 }
