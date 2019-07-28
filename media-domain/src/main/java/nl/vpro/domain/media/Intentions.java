@@ -56,10 +56,10 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
         super.setValues(list);
     }
 
-    public Intentions copy() {
+    @Override
+    public Intentions clone() {
         return new Intentions(values.stream().map(Intention::getValue).collect(Collectors.toList()), owner);
     }
-
 
     /**
      *  Just ensuring the comparator match equality.

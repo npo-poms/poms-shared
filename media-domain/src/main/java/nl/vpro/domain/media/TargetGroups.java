@@ -38,8 +38,8 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
         this.values.forEach(v -> v.setParent(this));
     }
 
-
-    public TargetGroups copy() {
+    @Override
+    public TargetGroups clone() {
         return new TargetGroups(values.stream().map(TargetGroup::getValue).collect(Collectors.toList()), owner);
     }
 

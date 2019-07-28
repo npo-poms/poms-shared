@@ -1233,18 +1233,7 @@ public abstract class MediaObject
     }
 
     public void setGeoLocations(@NonNull SortedSet<GeoLocations> newGeoLocations) {
-
-        if (containsDuplicateOwner(newGeoLocations)) {
-            throw new IllegalArgumentException("The geoLocations list you want to set has a duplicate owner: " + newGeoLocations);
-        }
-        if (this.geoLocations == null) {
-            this.geoLocations = new TreeSet<>();
-        } else {
-            this.geoLocations.clear();
-        }
-        for (GeoLocations i : newGeoLocations) {
-            addGeoLocations(i.clone());
-        }
+        MediaObjectOwnableLists.set(this, getGeoLocations(), newGeoLocations);
     }
 
     /**
@@ -1253,7 +1242,7 @@ public abstract class MediaObject
      */
     @Deprecated
     public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, @NonNull OwnerType owner) {
-        return newGeoLocation.addTo(this.geoLocations = createIfNull(this.geoLocations), owner);
+        return newGeoLocation.addTo(getGeoLocations(), owner);
     }
 
     /**
@@ -1262,7 +1251,7 @@ public abstract class MediaObject
      */
     @Deprecated
     public MediaObject addGeoLocations(@NonNull GeoLocations newGeoLocations) {
-        return MediaObjectOwnableLists.add(this, this.geoLocations = createIfNull(this.geoLocations), newGeoLocations);
+        return MediaObjectOwnableLists.add(this, getGeoLocations(), newGeoLocations);
     }
 
     /**
@@ -1308,7 +1297,7 @@ public abstract class MediaObject
            this.intentions.clear();
         }
         for (Intentions i : newIntentions) {
-            addIntention(i.copy());
+            addIntention(i.clone());
         }
     }
 
@@ -1349,7 +1338,7 @@ public abstract class MediaObject
            this.targetGroups.clear();
         }
         for (TargetGroups i : newTargetGroups) {
-            addTargetGroups(i.copy());
+            addTargetGroups(i.clone());
         }
     }
 

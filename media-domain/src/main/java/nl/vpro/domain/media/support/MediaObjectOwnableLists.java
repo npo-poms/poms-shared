@@ -7,6 +7,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.MediaObject;
 
+import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.11
@@ -66,8 +68,8 @@ public class MediaObjectOwnableLists {
     }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
-    Optional<I> find(@NonNull Collection<P> list, @NonNull Long id, @NonNull OwnerType owner){
-        if (list.isEmpty()) {
+    Optional<I> find(Collection<P> list, @NonNull Long id, @NonNull OwnerType owner){
+        if (list == null || list.isEmpty()) {
             return Optional.empty();
         }
         final Optional<List<I>> maybeValues = list.stream()
@@ -91,6 +93,17 @@ public class MediaObjectOwnableLists {
         newOwnableList.setParent(parent);
         list.add(newOwnableList);
         return parent;
+    }
+
+    public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
+    void set(@NonNull MediaObject parent, @NonNull Collection<P> existingCollection, @NonNull Collection<P> newCollection) {
+        if (containsDuplicateOwner(newCollection)) {
+            throw new IllegalArgumentException("The list you want to set has a duplicate owner: " + newCollection);
+        }
+        existingCollection.clear();
+        for (P i : newCollection) {
+            add(parent, existingCollection, i.clone());
+        }
     }
 
 

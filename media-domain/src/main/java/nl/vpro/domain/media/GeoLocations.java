@@ -56,7 +56,6 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
         super.setValues(list);
     }
 
-    @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
     public GeoLocations clone() {
         return new GeoLocations(values.stream().map(GeoLocation::clone).collect(Collectors.toList()), owner);
