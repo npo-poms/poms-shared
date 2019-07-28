@@ -82,7 +82,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
     public GeoLocation(GeoLocation source, GeoLocations parent) {
         this(source.getName(), source.getRole(), source.getDescription());
-        this.gtaaRecord = new EmbeddableGeographicName(source.gtaaRecord.getUri(), source.gtaaRecord.getStatus());
+        this.gtaaRecord = source.gtaaRecord == null ? null : new EmbeddableGeographicName(source.gtaaRecord.getUri(), source.gtaaRecord.getStatus());
         this.parent = parent;
     }
 
