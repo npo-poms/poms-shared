@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
 
@@ -43,6 +45,7 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
     @Override
     @org.checkerframework.checker.nullness.qual.NonNull
     @XmlElement(name="geoLocation")
+    @JsonIgnore
     public List<GeoLocation> getValues() {
         return super.getValues();
     }
