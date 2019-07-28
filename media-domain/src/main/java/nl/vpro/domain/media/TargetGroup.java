@@ -1,7 +1,9 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -17,10 +19,8 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import lombok.Getter;
-import lombok.Setter;
-import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
@@ -29,7 +29,7 @@ import nl.vpro.domain.DomainObject;
 @Setter
 @JsonSerialize(using = TargetGroup.Serializer.class)
 @JsonDeserialize(using = TargetGroup.Deserializer.class)
-public class TargetGroup extends DomainObject implements Serializable, Child<TargetGroups> {
+public class TargetGroup extends DomainObject implements MediaObjectOwnableListItem<TargetGroup, TargetGroups> {
 
 
     @ManyToOne(targetEntity = TargetGroups.class, fetch = FetchType.LAZY)
@@ -65,6 +65,24 @@ public class TargetGroup extends DomainObject implements Serializable, Child<Tar
     public int hashCode() {
         return Objects.hash(super.hashCode(), value);
     }
+
+
+    @Override
+    public TargetGroup clone() {
+        try {
+            return (TargetGroup) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException();
+        }
+
+    }
+
+    @Override
+    public int compareTo(TargetGroup o) {
+        return 0;
+
+    }
+
 
     public static class Serializer extends JsonSerializer<TargetGroup> {
         @Override

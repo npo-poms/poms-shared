@@ -25,8 +25,8 @@ public class TargetGroupsTest {
         Program program = MediaBuilder.program().targetGroups().build();
 
         assertThat(program).isNotNull();
-        assertThat(targetGroups1).isNotNull();
-        assertThat(targetGroups2).isNotNull();
+        assertThat((Object) targetGroups1).isNotNull();
+        assertThat((Object) targetGroups2).isNotNull();
 
         //when I add targetGroups
         MediaObject newProgram = program.addTargetGroups(targetGroups1);
@@ -52,8 +52,8 @@ public class TargetGroupsTest {
         Program program = MediaBuilder.program().targetGroups().build();
 
         assertThat(program).isNotNull();
-        assertThat(targetGroups1).isNotNull();
-        assertThat(targetGroups2).isNotNull();
+        assertThat((Object) targetGroups1).isNotNull();
+        assertThat((Object) targetGroups2).isNotNull();
 
         //when I add targetGroups with same owner
         MediaObject newProgram = program.addTargetGroups(targetGroups1);

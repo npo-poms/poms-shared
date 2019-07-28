@@ -1,24 +1,24 @@
 package nl.vpro.domain.media;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
+import lombok.Singular;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import javax.persistence.*;
-import javax.xml.bind.annotation.*;
+import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.Ownable;
+import nl.vpro.domain.media.support.AbstractMediaObjectOwnableList;
 import nl.vpro.domain.media.support.OwnerType;
-
-import static javax.persistence.CascadeType.ALL;
 
 /**
  * @author Giorgio Vinci
@@ -29,23 +29,8 @@ import static javax.persistence.CascadeType.ALL;
 @XmlType(name = "intentionsType")
 @Getter
 @Setter
-public class Intentions extends DomainObject implements Serializable, Child<MediaObject>, Comparable<Intentions>, Ownable {
+public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Intention> {
 
-    @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
-    @XmlTransient
-    private MediaObject parent;
-
-    @Enumerated(EnumType.STRING)
-    @XmlAttribute
-    @Setter(AccessLevel.PRIVATE)
-    private OwnerType owner;
-
-    @OneToMany(cascade = {ALL})
-    @JoinColumn(name = "parent_id")
-    @JsonProperty("values")
-    @OrderColumn(name = "list_index", nullable = true)
-    @XmlElement(name="intention")
-    private List<Intention> values = new ArrayList<>();
 
     public Intentions() {}
 
@@ -59,23 +44,22 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
     }
 
 
+    @Override
+    @org.checkerframework.checker.nullness.qual.NonNull
+    @XmlElement(name="intention")
+    @JsonIgnore
+    public List<Intention> getValues() {
+        return super.getValues();
+    }
+    @Override
+    public void setValues(List<Intention> list) {
+        super.setValues(list);
+    }
+
     public Intentions copy() {
         return new Intentions(values.stream().map(Intention::getValue).collect(Collectors.toList()), owner);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Intentions intentions = (Intentions) o;
-        return owner == intentions.owner &&
-                values.equals(intentions.values);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(owner, values);
-    }
 
     /**
      *  Just ensuring the comparator match equality.
@@ -94,8 +78,4 @@ public class Intentions extends DomainObject implements Serializable, Child<Medi
         return this.getOwner().compareTo(o.getOwner());
     }
 
-    @Override
-    public String toString() {
-        return "Intentions:" + owner + ":" + values;
-    }
 }
