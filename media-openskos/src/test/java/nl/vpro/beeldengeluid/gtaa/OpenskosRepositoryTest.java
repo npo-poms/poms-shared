@@ -10,7 +10,6 @@ import java.util.Optional;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
@@ -30,7 +29,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Ignore  //This gives an Out of Memory error in test env.
 public class OpenskosRepositoryTest {
 
     @Rule
@@ -59,7 +57,7 @@ public class OpenskosRepositoryTest {
         wireMockRule.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(okXml(f("/submit-person-response.xml")).withStatus(201)));
 
         repo.setUseXLLabels(true);
-        GTAANewThesaurusObject testNameX = GTAANewThesaurusObject.builder().build().builder()
+        GTAANewThesaurusObject testNameX = GTAANewThesaurusObject.builder()
             .value("Testlabel1")
             .note("Note123")
             .build();
