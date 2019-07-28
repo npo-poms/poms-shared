@@ -17,9 +17,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.MediaObject;
 
 import static javax.persistence.CascadeType.ALL;
@@ -32,10 +30,14 @@ import static javax.persistence.CascadeType.ALL;
  */
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlTransient
 @Getter
 @Setter
-public abstract class AbstractMediaObjectOwnableList<THIS extends AbstractMediaObjectOwnableList, I extends Comparable<I> & Child<THIS> & Identifiable<Long>>
-    extends DomainObject implements Comparable<THIS>, MediaObjectOwnableList<THIS, I> {
+public abstract class AbstractMediaObjectOwnableList<
+    THIS extends AbstractMediaObjectOwnableList<THIS, I>,
+    I extends MediaObjectOwnableListItem<I, THIS>>
+    extends DomainObject
+    implements MediaObjectOwnableList<THIS, I>  {
 
     @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
     @XmlTransient

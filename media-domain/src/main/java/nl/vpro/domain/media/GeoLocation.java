@@ -16,11 +16,11 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.gtaa.GTAAGeographicName;
 import nl.vpro.domain.gtaa.persistence.EmbeddableGTAARecord;
 import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
+import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 import nl.vpro.domain.media.support.MediaObjectOwnableLists;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.NoHtml;
@@ -37,19 +37,8 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "geoLocationType")
 @Getter
 @Setter
-public class GeoLocation extends DomainObject implements Child<GeoLocations>, Comparable<GeoLocation>{
+public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations> {
 
-    public static GeoLocation copy(GeoLocation source) {
-        return copy(source, source.parent);
-    }
-
-    public static GeoLocation copy(GeoLocation source, GeoLocations parent) {
-        if (source == null) {
-            return null;
-        }
-
-        return new GeoLocation(source, parent);
-    }
 
     @ManyToOne(targetEntity = GeoLocations.class, fetch = FetchType.LAZY)
     @XmlTransient
@@ -93,7 +82,7 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
 
     public GeoLocation(GeoLocation source, GeoLocations parent) {
         this(source.getName(), source.getRole(), source.getDescription());
-        this.gtaaRecord = source.gtaaRecord;
+        this.gtaaRecord = new EmbeddableGeographicName(source.gtaaRecord.getUri(), source.gtaaRecord.getStatus());
         this.parent = parent;
     }
 
@@ -187,6 +176,13 @@ public class GeoLocation extends DomainObject implements Child<GeoLocations>, Co
         }
 
         return (getGtaaUri() != null) ? 1 : -1;
+    }
+
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
+    @Override
+    public GeoLocation clone() {
+        return new GeoLocation(this, parent);
+
     }
 
     public static class Builder {

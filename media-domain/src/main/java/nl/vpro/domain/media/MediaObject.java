@@ -1242,7 +1242,7 @@ public abstract class MediaObject
             this.geoLocations.clear();
         }
         for (GeoLocations i : newGeoLocations) {
-            addGeoLocations(i.copy());
+            addGeoLocations(i.clone());
         }
     }
 

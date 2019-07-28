@@ -33,7 +33,7 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
 
     @lombok.Builder(builderClassName = "Builder")
     private GeoLocations(@NonNull @Singular List<GeoLocation> values, @NonNull OwnerType owner) {
-        this.values = values.stream().map(GeoLocation::copy).collect(Collectors.toList());
+        this.values = values.stream().map(GeoLocation::clone).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
         //explicitly set the parent!
@@ -46,8 +46,14 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
     public List<GeoLocation> getValues() {
         return super.getValues();
     }
+    @Override
+    public void setValues(List<GeoLocation> list) {
+        super.setValues(list);
+    }
 
-    public GeoLocations copy() {
-        return new GeoLocations(values.stream().map(GeoLocation::copy).collect(Collectors.toList()), owner);
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
+    @Override
+    public GeoLocations clone() {
+        return new GeoLocations(values.stream().map(GeoLocation::clone).collect(Collectors.toList()), owner);
     }
 }
