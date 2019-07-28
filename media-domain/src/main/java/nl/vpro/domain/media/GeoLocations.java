@@ -36,7 +36,9 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private GeoLocations(@NonNull @Singular List<GeoLocation> values, @NonNull OwnerType owner) {
+    private GeoLocations(
+        @NonNull @Singular List<GeoLocation> values,
+        @NonNull OwnerType owner) {
         this.values = values.stream().map(GeoLocation::clone).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
