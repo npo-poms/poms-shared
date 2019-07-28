@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.meeuw.i18n.Region;
 
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.gtaa.GTAAGeographicName;
@@ -29,7 +30,7 @@ import nl.vpro.validation.NoHtml;
 /**
  * A wrapper around GTAA {@link GTAAGeographicName}
  * @author Giorgio Vinci
- *  @since 5.11
+ * @since 5.11
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -37,7 +38,7 @@ import nl.vpro.validation.NoHtml;
 @XmlType(name = "geoLocationType")
 @Getter
 @Setter
-public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations> {
+public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations>, Region {
 
 
     @ManyToOne(targetEntity = GeoLocations.class, fetch = FetchType.LAZY)
@@ -182,6 +183,18 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @Override
     public GeoLocation clone() {
         return new GeoLocation(this, parent);
+
+    }
+
+    @Override
+    public String getCode() {
+        return getGtaaUri();
+
+    }
+
+    @Override
+    public Type getType() {
+        return Type.UNDEFINED;
 
     }
 
