@@ -902,7 +902,7 @@ public class MediaObjectXmlSchemaTest {
         geoLocations.setParent(null);
         GeoLocations geoLocationsWithoutParent = geoLocations;
         Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);
-        assertThat(programExpected.getGeoLocations().iterator().next()).isEqualTo(geoLocationsWithoutParent);
+        assertThat((Object) programExpected.getGeoLocations().iterator().next()).isEqualTo(geoLocationsWithoutParent);
     }
 
     @Test
