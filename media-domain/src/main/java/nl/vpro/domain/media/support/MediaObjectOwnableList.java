@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.support;
 
+import java.io.Serializable;
+
 import nl.vpro.domain.Child;
 import nl.vpro.domain.media.MediaObject;
 
@@ -9,7 +11,7 @@ import nl.vpro.domain.media.MediaObject;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public interface MediaObjectOwnableList<P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>  extends OwnableList<P, I>, Child<MediaObject> {
+public interface MediaObjectOwnableList<P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>  extends OwnableList<P, I>, Child<MediaObject>, Serializable {
 
 }
 

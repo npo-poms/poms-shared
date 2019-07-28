@@ -28,7 +28,7 @@ import static javax.persistence.CascadeType.ALL;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-@Entity
+@MappedSuperclass
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlTransient
 @Getter

@@ -877,7 +877,7 @@ public class MediaObjectXmlSchemaTest {
         intentions.setParent(null);
         Intentions intentionsWithoutParent = intentions;
         Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);
-        assertThat(programExpected.getIntentions().iterator().next()).isEqualTo(intentionsWithoutParent);
+        assertThat((Object) programExpected.getIntentions().iterator().next()).isEqualTo(intentionsWithoutParent);
     }
 
     @Test

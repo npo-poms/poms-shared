@@ -29,8 +29,8 @@ public class IntentionsTest {
         Program program = MediaBuilder.program().intentions(intentions1).build();
 
         assertThat(program).isNotNull();
-        assertThat(intentions1).isNotNull();
-        assertThat(intentions2).isNotNull();
+        assertThat((Object) intentions1).isNotNull();
+        assertThat((Object) intentions2).isNotNull();
 
         //when I add intentions
         MediaObject newProgram = program.addIntention(intentions1);
@@ -50,8 +50,8 @@ public class IntentionsTest {
         Program program = MediaBuilder.program().intentions().build();
 
         assertThat(program).isNotNull();
-        assertThat(intentions1).isNotNull();
-        assertThat(intentions2).isNotNull();
+        assertThat((Object) intentions1).isNotNull();
+        assertThat((Object) intentions2).isNotNull();
 
         //when I add intentions with same owner
         MediaObject newProgram = program.addIntention(intentions1);
@@ -75,8 +75,8 @@ public class IntentionsTest {
         Program program = MediaBuilder.program().build();
 
         assertThat(program).isNotNull();
-        assertThat(intentions1).isNotNull();
-        assertThat(intentions2).isNotNull();
+        assertThat((Object) intentions1).isNotNull();
+        assertThat((Object) intentions2).isNotNull();
 
         //when I set intentions with duplicate owner I expect an exception to be raise
         SortedSet<Intentions> newIntentions = new TreeSet<>(Arrays.asList(intentions1, intentions2));

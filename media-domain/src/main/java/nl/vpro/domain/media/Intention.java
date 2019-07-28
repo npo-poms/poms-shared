@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.*;
@@ -20,8 +19,8 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 
 /**
  * @author Giorgio Vinci
@@ -34,7 +33,7 @@ import nl.vpro.domain.DomainObject;
 @Setter
 @JsonSerialize(using = Intention.Serializer.class)
 @JsonDeserialize(using = Intention.Deserializer.class)
-public class Intention extends DomainObject implements Serializable, Child<Intentions> {
+public class Intention extends DomainObject implements MediaObjectOwnableListItem<Intention, Intentions> {
 
 
     @ManyToOne(targetEntity = Intentions.class, fetch = FetchType.LAZY)
@@ -69,6 +68,22 @@ public class Intention extends DomainObject implements Serializable, Child<Inten
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), value);
+    }
+
+    @Override
+    public Intention clone() {
+        try {
+            return (Intention) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException();
+        }
+
+    }
+
+    @Override
+    public int compareTo(Intention o) {
+        return 0;
+
     }
 
     public static class Serializer extends JsonSerializer<Intention> {

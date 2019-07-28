@@ -8,6 +8,7 @@ import lombok.Singular;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -22,6 +23,7 @@ import nl.vpro.domain.media.support.OwnerType;
  * @author Giorgio Vinci
  * @since 5.11
  */
+@Entity
 @XmlType(name = "geoLocationsType")
 @Getter
 @Setter
