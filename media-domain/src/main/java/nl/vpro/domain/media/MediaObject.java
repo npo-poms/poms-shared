@@ -73,6 +73,7 @@ import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObject.*;
+import static nl.vpro.domain.media.support.MediaObjectOwnableLists.createIfNull;
 import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
 
 /**
@@ -1228,7 +1229,7 @@ public abstract class MediaObject
     //
     @NonNull
     public SortedSet<GeoLocations> getGeoLocations() {
-        return this.geoLocations = MediaObjectOwnableLists.createIfNull(this.geoLocations);
+        return this.geoLocations = createIfNull(this.geoLocations);
     }
 
     public void setGeoLocations(@NonNull SortedSet<GeoLocations> newGeoLocations) {
@@ -1252,9 +1253,8 @@ public abstract class MediaObject
      */
     @Deprecated
     public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, @NonNull OwnerType owner) {
-        return newGeoLocation.addTo(this.geoLocations = MediaObjectOwnableLists.createIfNull(this.geoLocations), owner);
+        return newGeoLocation.addTo(this.geoLocations = createIfNull(this.geoLocations), owner);
     }
-
 
     /**
      *
@@ -1262,17 +1262,8 @@ public abstract class MediaObject
      */
     @Deprecated
     public MediaObject addGeoLocations(@NonNull GeoLocations newGeoLocations) {
-        if(this.geoLocations != null) {
-            this.geoLocations.removeIf(existing -> existing.getOwner() == newGeoLocations.getOwner());
-        } else {
-            this.geoLocations = new TreeSet<>();
-        }
-        newGeoLocations.setParent(this);
-        this.geoLocations.add(newGeoLocations);
-        return this;
+        return MediaObjectOwnableLists.add(this, this.geoLocations = createIfNull(this.geoLocations), newGeoLocations);
     }
-
-
 
     /**
      *
@@ -1290,24 +1281,7 @@ public abstract class MediaObject
      */
     @Deprecated
     public Optional<GeoLocation> findGeoLocation(@NonNull Long id,@NonNull OwnerType owner){
-        final Optional<GeoLocation> empty = Optional.empty();
-        if (geoLocations.isEmpty()) {
-            return empty;
-        }
-
-        final Optional<List<GeoLocation>> maybeValues = this.geoLocations.stream()
-                .filter(owned -> owned.getOwner().equals(owner))
-                .findAny().map(GeoLocations::getValues);
-
-        if(maybeValues.isPresent()) {
-            final Optional<GeoLocation> maybeLocationFound = maybeValues.get().stream().filter(
-                    v -> id.equals(v.getId())
-            ).findAny();
-
-            return maybeLocationFound;
-        }
-        return empty;
-
+        return MediaObjectOwnableLists.find(this.geoLocations, id, owner);
 
     }
 
