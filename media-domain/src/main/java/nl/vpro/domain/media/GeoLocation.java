@@ -21,7 +21,6 @@ import nl.vpro.domain.gtaa.GTAAGeographicName;
 import nl.vpro.domain.gtaa.persistence.EmbeddableGTAARecord;
 import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
-import nl.vpro.domain.media.support.MediaObjectOwnableLists;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.NoHtml;
 
@@ -203,13 +202,6 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         }
     }
 
-    public boolean addTo(@NonNull MediaObject parent, @NonNull OwnerType owner) {
-        return MediaObjectOwnableLists.add(
-            parent.getGeoLocations(),
-            () -> new GeoLocations(parent, owner),
-            this,
-            owner
-        );
-    }
+
 
 }

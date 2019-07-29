@@ -1236,8 +1236,14 @@ public abstract class MediaObject
      * @deprecated See remark
      */
     @Deprecated
-    public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, @NonNull OwnerType owner) {
-        return newGeoLocation.addTo(this, owner);
+    public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, final @NonNull OwnerType owner) {
+        return MediaObjectOwnableLists.add(
+            getGeoLocations(),
+            () -> new GeoLocations(this, owner),
+            newGeoLocation,
+            owner
+        );
+
     }
 
     /**
