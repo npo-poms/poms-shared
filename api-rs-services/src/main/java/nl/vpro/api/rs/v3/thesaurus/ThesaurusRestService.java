@@ -51,7 +51,7 @@ public interface ThesaurusRestService {
     @Path("/concepts")
     ThesaurusResult<ThesaurusObject> listConcepts(
         @QueryParam("text") @DefaultValue("") String text,
-        @QueryParam("schemes") List<String> axisList,
+        @QueryParam("schemes") List<String> schemes,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
 
     @GET
