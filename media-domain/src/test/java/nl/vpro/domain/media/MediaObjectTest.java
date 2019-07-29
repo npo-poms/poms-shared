@@ -68,8 +68,7 @@ public class MediaObjectTest {
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
-        // MM: I propose to add geolocations like so:
-        final boolean result = geoLocation.addTo(mediaObject.getGeoLocations(), BROADCASTER);
+        final boolean result = mediaObject.addGeoLocation(geoLocation, BROADCASTER);
         assertThat(result).isTrue();
 
         // rather then like so. See remark in MediaObject.

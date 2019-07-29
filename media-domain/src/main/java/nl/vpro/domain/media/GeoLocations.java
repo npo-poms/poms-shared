@@ -32,7 +32,8 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
 
     public GeoLocations() {
     }
-    public GeoLocations(@lombok.NonNull  OwnerType owner) {
+    public GeoLocations(@lombok.NonNull MediaObject parent, @lombok.NonNull  OwnerType owner) {
+        this.parent = parent;
         this.owner = owner;
     }
 
