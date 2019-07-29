@@ -34,7 +34,10 @@
     <module>poms-shared-test</module>
     <module>user-domain</module>
     <module>media-domain</module>
+
     <module>gtaa-domain</module>
+    <module>gtaa-openskos</module>
+
     <module>pages-domain</module>
     <module>image-domain</module>
     <module>subtitles-domain</module>
@@ -54,7 +57,6 @@
     <module>poms-extjs</module>
     <module>poms-npoplayer</module>
 
-    <module>media-openskos</module>
     <module>media-nep</module>
     <module>media-projectm</module>
     <module>media-nebo</module>

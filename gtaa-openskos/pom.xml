@@ -5,7 +5,7 @@
     <artifactId>poms-shared-parent</artifactId>
     <version>5.11-SNAPSHOT</version>
   </parent>
-  <artifactId>media-openskos</artifactId>
+  <artifactId>gtaa-openskos</artifactId>
   <dependencies>
     <dependency>
       <groupId>nl.vpro.shared</groupId>
