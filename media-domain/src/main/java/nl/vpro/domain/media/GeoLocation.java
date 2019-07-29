@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -204,10 +203,10 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         }
     }
 
-    public boolean addTo(@NonNull Set<GeoLocations> parent, @NonNull OwnerType owner) {
+    public boolean addTo(@NonNull MediaObject parent, @NonNull OwnerType owner) {
         return MediaObjectOwnableLists.add(
-            parent,
-            () -> new GeoLocations(owner),
+            parent.getGeoLocations(),
+            () -> new GeoLocations(parent, owner),
             this,
             owner
         );
