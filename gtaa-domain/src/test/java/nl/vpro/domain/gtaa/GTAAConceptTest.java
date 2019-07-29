@@ -37,7 +37,7 @@ public class GTAAConceptTest {
 
 
     Scheme scheme;
-    AbstractThesaurusItem  concept;
+    AbstractGTAAConcept concept;
 
     String xmlType;
     String jsonType;
@@ -48,7 +48,7 @@ public class GTAAConceptTest {
         xmlType = scheme.getXmlElement();
         jsonType = scheme.getJsonObjectType();
         assertThat(jsonType).isEqualTo(xmlType.toLowerCase());
-        concept = (AbstractThesaurusItem) this.scheme.getImplementation().getConstructor().newInstance();
+        concept = (AbstractGTAAConcept) this.scheme.getImplementation().getConstructor().newInstance();
         concept.setValue("concept");
         concept.setId(URI.create("http://gtaa/1234"));
         concept.setNotes(Arrays.asList(Label.builder().value("bla").lang("nl").build()));

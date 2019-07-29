@@ -25,7 +25,7 @@ import nl.vpro.openarchives.oai.Label;
     GTAANewPerson.class,
     GTAANewThesaurusObject.class
 })
-public interface NewThesaurusObject {
+public interface GTAANewConcept {
     String getValue();
 
     List<String> getNotes();
