@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import nl.vpro.domain.gtaa.GTAAGeographicName;
 import nl.vpro.domain.gtaa.GTAAPerson;
-import nl.vpro.domain.gtaa.ThesaurusObject;
+import nl.vpro.domain.gtaa.GTAAConcept;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
@@ -14,7 +14,7 @@ public class ThesaurusResultTest {
 
     @Test
     public void json() throws Exception {
-        Jackson2TestUtil.roundTripAndSimilar(new ThesaurusResult<ThesaurusObject>(
+        Jackson2TestUtil.roundTripAndSimilar(new ThesaurusResult<GTAAConcept>(
             Arrays.asList(
                 GTAAPerson.builder().build(),
                 GTAAGeographicName.builder().build()), 10), "{\n" +
@@ -31,7 +31,7 @@ public class ThesaurusResultTest {
 
     @Test
     public void xml() throws Exception {
-        JAXBTestUtil.roundTripAndSimilar(new ThesaurusResult<ThesaurusObject>(Arrays.asList(
+        JAXBTestUtil.roundTripAndSimilar(new ThesaurusResult<GTAAConcept>(Arrays.asList(
             GTAAPerson.builder().givenName("pietje").familyName("puk").build(),
             GTAAGeographicName.builder().value("Amsterdam").build()
             ), 10),

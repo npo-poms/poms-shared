@@ -23,7 +23,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode
-public abstract class AbstractGTAAConcept implements ThesaurusObject, Serializable {
+public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
 
     @Getter

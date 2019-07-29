@@ -24,7 +24,7 @@ import nl.vpro.domain.gtaa.*;
     GTAAGeographicName.class,
     GTAAClassification.class,
     GTAATopicBandG.class
-})public class ThesaurusResult<T extends ThesaurusObject> extends Result<T> {
+})public class ThesaurusResult<T extends GTAAConcept> extends Result<T> {
 
     public ThesaurusResult(List<T> list, Integer max) {
         super(list, 0L, max, null);

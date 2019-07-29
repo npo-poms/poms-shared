@@ -23,7 +23,7 @@ import nl.vpro.w3.rdf.Description;
     }
 )
 @XmlRootElement(name = "classification")
-public class GTAAClassification extends AbstractSimpleValueThesaurusItem {
+public class GTAAClassification extends AbstractSimpleValueGTAAConcept {
 
     @lombok.Builder(builderClassName = "Builder")
     public GTAAClassification(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {

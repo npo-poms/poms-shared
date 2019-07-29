@@ -29,7 +29,7 @@ import nl.vpro.domain.gtaa.*;
     GTAAClassification.class,
     GTAATopicBandG.class}
 )
-public class ThesaurusChange extends Change<ThesaurusObject> {
+public class ThesaurusChange extends Change<GTAAConcept> {
 
     @XmlAttribute
     private Long sequence;
@@ -44,7 +44,7 @@ public class ThesaurusChange extends Change<ThesaurusObject> {
     }
 
     @Builder
-    public ThesaurusChange(Instant publishDate, String id, Boolean deleted, Boolean tail, ThesaurusObject object) {
+    public ThesaurusChange(Instant publishDate, String id, Boolean deleted, Boolean tail, GTAAConcept object) {
         super(publishDate, id, deleted, tail, object);
 
         // TODO
@@ -54,12 +54,12 @@ public class ThesaurusChange extends Change<ThesaurusObject> {
     @Override
     @JsonIgnore
     @XmlAnyElement(lax = true)
-    public ThesaurusObject getObject() {
+    public GTAAConcept getObject() {
         return super.getObject();
     }
 
     @Override
-    public void setObject(ThesaurusObject p) {
+    public void setObject(GTAAConcept p) {
         super.setObject(p);
     }
 
@@ -67,11 +67,11 @@ public class ThesaurusChange extends Change<ThesaurusObject> {
 
     @JsonProperty("object")
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
-    protected ThesaurusObject getJsonObject() {
+    protected GTAAConcept getJsonObject() {
         return getObject();
     }
 
-    protected void setJsonObject(ThesaurusObject o) {
+    protected void setJsonObject(GTAAConcept o) {
         setObject(o);
     }
 

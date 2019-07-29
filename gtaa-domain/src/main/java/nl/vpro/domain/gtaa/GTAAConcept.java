@@ -15,7 +15,7 @@ import nl.vpro.openarchives.oai.Label;
     use = JsonTypeInfo.Id.CUSTOM,
     property = "objectType"
 )
-@JsonTypeIdResolver(ThesaurusObjectIdResolver.class)
+@JsonTypeIdResolver(GTAAConceptIdResolver.class)
 @JsonSubTypes(
     {
         @JsonSubTypes.Type(value = GTAAPerson.class),
@@ -30,7 +30,7 @@ import nl.vpro.openarchives.oai.Label;
 
     })
 
-public interface ThesaurusObject {
+public interface GTAAConcept {
 
 
     URI getId();

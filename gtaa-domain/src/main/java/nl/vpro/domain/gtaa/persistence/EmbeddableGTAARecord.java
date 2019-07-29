@@ -16,7 +16,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import nl.vpro.domain.gtaa.Status;
-import nl.vpro.domain.gtaa.ThesaurusObject;
+import nl.vpro.domain.gtaa.GTAAConcept;
 
 /**
  *
@@ -41,7 +41,7 @@ public abstract class EmbeddableGTAARecord implements Serializable, Cloneable {
         this.status = status;
     }
 
-    EmbeddableGTAARecord(ThesaurusObject thesaurusObject) {
+    EmbeddableGTAARecord(GTAAConcept thesaurusObject) {
         this.uri = thesaurusObject.getId().toString();
         this.status = thesaurusObject.getStatus();
     }

@@ -43,7 +43,7 @@ public enum Scheme implements Displayable {
 
     ;
     static {
-        ThesaurusObjectIdResolver.init();
+        GTAAConceptIdResolver.init();
     }
     @Getter
     private final String url;
@@ -52,7 +52,7 @@ public enum Scheme implements Displayable {
     private final String displayName;
 
     @Getter
-    private Class<? extends ThesaurusObject> implementation;
+    private Class<? extends GTAAConcept> implementation;
 
 
     Scheme(String url, String displayName, String pluralDisplayName) {
@@ -79,7 +79,7 @@ public enum Scheme implements Displayable {
         GTAAScheme annotation = gtaaClass.getAnnotation(GTAAScheme.class);
         if (annotation != null) {
             log.info("Registering {}", gtaaClass);
-            annotation.value().implementation = (Class<? extends ThesaurusObject>) gtaaClass;
+            annotation.value().implementation = (Class<? extends GTAAConcept>) gtaaClass;
         } else {
 
         }

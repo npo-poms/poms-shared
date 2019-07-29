@@ -104,14 +104,14 @@ public class OpenskosRepository implements GTAARepository {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends ThesaurusObject, S extends GTAANewConcept> T submit(S thesaurusObject, String creator) {
+    public <T extends GTAAConcept, S extends GTAANewConcept> T submit(S thesaurusObject, String creator) {
         final Description description = submit(
             thesaurusObject.getValue(),
             thesaurusObject.getNotesAsLabel(),
             creator,
             thesaurusObject.getObjectType()
         );
-        return (T) ThesaurusObjects.toThesaurusObject(description);
+        return (T) GTAAConcepts.toConcept(description);
 
     }
 

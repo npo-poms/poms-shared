@@ -35,7 +35,7 @@ public class ThesaurusObjectsTest {
 
     @Test
     public void toThesaurusObject() {
-        ThesaurusObject thesaurusObject = ThesaurusObjects.toThesaurusObject(Description
+        GTAAConcept thesaurusObject = GTAAConcepts.toConcept(Description
             .builder()
             .inScheme(scheme.getUrl())
             .build());
@@ -49,10 +49,10 @@ public class ThesaurusObjectsTest {
 
     @Test
     public void toScheme() {
-        ThesaurusObject thesaurusObject = ThesaurusObjects.toThesaurusObject(Description
+        GTAAConcept thesaurusObject = GTAAConcepts.toConcept(Description
             .builder()
             .inScheme(scheme.getUrl())
             .build());
-        assertThat(ThesaurusObjects.toScheme(thesaurusObject)).isEqualTo(scheme);
+        assertThat(GTAAConcepts.toScheme(thesaurusObject)).isEqualTo(scheme);
     }
 }

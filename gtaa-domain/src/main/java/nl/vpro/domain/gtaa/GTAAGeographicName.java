@@ -21,7 +21,7 @@ import nl.vpro.w3.rdf.Description;
     "redirectedFrom"
 })
 @XmlRootElement(name = "geographicName")
-public class GTAAGeographicName extends AbstractSimpleValueThesaurusItem implements Region {
+public class GTAAGeographicName extends AbstractSimpleValueGTAAConcept implements Region {
 
     @lombok.Builder(builderClassName = "Builder")
     public GTAAGeographicName(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {

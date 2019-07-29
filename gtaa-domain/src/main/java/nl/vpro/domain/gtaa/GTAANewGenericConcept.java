@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 })
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonTypeName("concept")
-public class GTAANewThesaurusObject extends AbstractGTAANewConcept  {
+public class GTAANewGenericConcept extends AbstractGTAANewConcept  {
 
     @Getter
     @Setter
@@ -38,7 +38,7 @@ public class GTAANewThesaurusObject extends AbstractGTAANewConcept  {
     private Scheme objectType;
 
     @lombok.Builder
-    public GTAANewThesaurusObject(
+    public GTAANewGenericConcept(
         String value,
         @lombok.Singular List<String> notes,
         Scheme scheme) {

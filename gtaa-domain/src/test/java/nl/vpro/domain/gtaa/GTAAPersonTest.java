@@ -49,12 +49,12 @@ public class GTAAPersonTest {
     public void jsonAsThesaurusObjectReturnsPerson() throws Exception {
 
 
-        ThesaurusObject object = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
+        GTAAConcept object = Jackson2Mapper.getInstance().readValue(new StringReader("{\n" +
             "  \"objectType\" : \"person\",\n" +
             "  \"familyName\" : \"puk\",\n" +
             "  \"value\" : \"null puk\",\n" +
             "  \"prefLabel\" : \"null puk\"\n" +
-            "}"), ThesaurusObject.class);
+            "}"), GTAAConcept.class);
 
         assertThat(object).isInstanceOf(GTAAPerson.class);
 

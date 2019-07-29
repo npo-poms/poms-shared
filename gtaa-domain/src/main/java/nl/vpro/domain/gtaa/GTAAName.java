@@ -19,7 +19,7 @@ import nl.vpro.w3.rdf.Description;
     }
 )
 @XmlRootElement(name = "name")
-public class GTAAName extends AbstractSimpleValueThesaurusItem {
+public class GTAAName extends AbstractSimpleValueGTAAConcept {
 
 
     @lombok.Builder(builderClassName = "Builder")

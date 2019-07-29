@@ -20,13 +20,13 @@ import nl.vpro.openarchives.oai.Label;
  */
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
-public class AbstractSimpleValueThesaurusItem extends AbstractGTAAConcept {
+public class AbstractSimpleValueGTAAConcept extends AbstractGTAAConcept {
 
-    public AbstractSimpleValueThesaurusItem(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
+    public AbstractSimpleValueGTAAConcept(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         super(id, notes, value, redirectedFrom, status, lastModified);
     }
 
-    public AbstractSimpleValueThesaurusItem() {
+    public AbstractSimpleValueGTAAConcept() {
     }
 
     @Override

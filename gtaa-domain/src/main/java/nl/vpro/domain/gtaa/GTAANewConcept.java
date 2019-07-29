@@ -19,11 +19,11 @@ import nl.vpro.openarchives.oai.Label;
 @JsonSubTypes(
     {
         @JsonSubTypes.Type(value = GTAANewPerson.class, name = "person"),
-        @JsonSubTypes.Type(value = GTAANewThesaurusObject.class, name = "concept")
+        @JsonSubTypes.Type(value = GTAANewGenericConcept.class, name = "concept")
     })
 @XmlSeeAlso({
     GTAANewPerson.class,
-    GTAANewThesaurusObject.class
+    GTAANewGenericConcept.class
 })
 public interface GTAANewConcept {
     String getValue();
