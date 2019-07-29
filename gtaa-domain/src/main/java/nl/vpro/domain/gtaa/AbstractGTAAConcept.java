@@ -23,7 +23,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode
-public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializable {
+public abstract class AbstractGTAAConcept implements ThesaurusObject, Serializable {
 
 
     @Getter
@@ -59,11 +59,11 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
     Instant lastModified;
 
 
-    AbstractThesaurusItem() {
+    AbstractGTAAConcept() {
 
     }
 
-    AbstractThesaurusItem(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
+    AbstractGTAAConcept(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         this.id = id;
         this.notes = notes;
         this.value = value;
@@ -72,7 +72,7 @@ public abstract class AbstractThesaurusItem implements ThesaurusObject, Serializ
         this.lastModified = lastModified;
     }
 
-    protected static void fill(Description description, AbstractThesaurusItem answer) {
+    protected static void fill(Description description, AbstractGTAAConcept answer) {
         answer.setId(description.getAbout());
         if (description.getPrefLabel() != null) {
             answer.setValue(description.getPrefLabel().getValue());

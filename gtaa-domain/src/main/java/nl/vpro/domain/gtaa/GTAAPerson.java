@@ -64,7 +64,7 @@ import nl.vpro.w3.rdf.Description;
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.person)
 
-public class GTAAPerson extends AbstractThesaurusItem implements  PersonInterface, Serializable {
+public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
 
