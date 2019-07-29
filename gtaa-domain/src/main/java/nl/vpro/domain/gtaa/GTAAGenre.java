@@ -19,7 +19,7 @@ import nl.vpro.w3.rdf.Description;
     }
 )
 @XmlRootElement(name = "genre")
-public class GTAAGenre extends AbstractSimpleValueThesaurusItem {
+public class GTAAGenre extends AbstractSimpleValueGTAAConcept {
 
     @lombok.Builder(builderClassName = "Builder")
     public GTAAGenre(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {

@@ -50,7 +50,7 @@ public class OpenskosRepositoryITest {
         OpenskosRepository impl = getRealInstance();
         impl.setTenant("beng");
 
-        GTAANewThesaurusObject geographicName = GTAANewThesaurusObject
+        GTAANewGenericConcept geographicName = GTAANewGenericConcept
                 .builder()
                 .value("Driedorp")
                 .note("Buurtschap binnen de gemeente Nijkerk")

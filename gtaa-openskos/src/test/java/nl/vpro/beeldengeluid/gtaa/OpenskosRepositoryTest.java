@@ -19,7 +19,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
-import nl.vpro.domain.gtaa.GTAANewThesaurusObject;
+import nl.vpro.domain.gtaa.GTAANewGenericConcept;
 import nl.vpro.domain.gtaa.Scheme;
 import nl.vpro.domain.gtaa.Status;
 import nl.vpro.openarchives.oai.Record;
@@ -58,7 +58,7 @@ public class OpenskosRepositoryTest {
         wireMockRule.stubFor(post(urlPathEqualTo("/api/concept")).willReturn(okXml(f("/submit-person-response.xml")).withStatus(201)));
 
         repo.setUseXLLabels(true);
-        GTAANewThesaurusObject testNameX = GTAANewThesaurusObject.builder()
+        GTAANewGenericConcept testNameX = GTAANewGenericConcept.builder()
             .value("Testlabel1")
             .note("Note123")
             .scheme(Scheme.name)

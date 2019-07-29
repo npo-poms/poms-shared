@@ -32,7 +32,7 @@ public class SchemaTest extends AbstractSchemaTest {
 
         context = generate(
             ArrayUtils.addAll(Scheme.classes(),
-                GTAANewThesaurusObject.class,
+                GTAANewGenericConcept.class,
                 GTAANewPerson.class
             )
         );

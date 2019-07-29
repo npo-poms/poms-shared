@@ -23,7 +23,7 @@ package nl.vpro.domain.gtaa;
     }
 )
 @XmlRootElement(name = "topic")
-public class GTAATopic extends AbstractSimpleValueThesaurusItem {
+public class GTAATopic extends AbstractSimpleValueGTAAConcept {
 
     @lombok.Builder(builderClassName = "Builder")
     public GTAATopic(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {

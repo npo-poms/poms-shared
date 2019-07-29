@@ -10,9 +10,9 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
 import nl.vpro.domain.gtaa.GTAANewPerson;
-import nl.vpro.domain.gtaa.GTAANewThesaurusObject;
+import nl.vpro.domain.gtaa.GTAANewGenericConcept;
 import nl.vpro.domain.gtaa.GTAAPerson;
-import nl.vpro.domain.gtaa.ThesaurusObject;
+import nl.vpro.domain.gtaa.GTAAConcept;
 
 /**
  * @author Machiel Groeneveld
@@ -38,9 +38,9 @@ public interface ThesaurusUpdateRestService {
     @POST
     @Path("/concept")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    ThesaurusObject submit(
+    GTAAConcept submit(
         @NotNull@HeaderParam(HttpHeaders.AUTHORIZATION) String jws,
-        @NotNull GTAANewThesaurusObject thesaurusObject
+        @NotNull GTAANewGenericConcept thesaurusObject
     );
 
 }

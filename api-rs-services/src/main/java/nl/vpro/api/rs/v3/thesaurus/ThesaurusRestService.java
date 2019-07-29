@@ -15,7 +15,7 @@ import org.jboss.resteasy.annotations.cache.NoCache;
 import nl.vpro.domain.api.Constants;
 import nl.vpro.domain.api.thesaurus.PersonResult;
 import nl.vpro.domain.api.thesaurus.ThesaurusResult;
-import nl.vpro.domain.gtaa.ThesaurusObject;
+import nl.vpro.domain.gtaa.GTAAConcept;
 
 import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
 import static nl.vpro.domain.api.Constants.MAX;
@@ -49,7 +49,7 @@ public interface ThesaurusRestService {
 
     @GET
     @Path("/concepts")
-    ThesaurusResult<ThesaurusObject> listConcepts(
+    ThesaurusResult<GTAAConcept> listConcepts(
         @QueryParam("text") @DefaultValue("") String text,
         @QueryParam("schemes") List<String> schemes,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
@@ -68,7 +68,7 @@ public interface ThesaurusRestService {
     @GET
     @Path("/concepts/status")
     @NoCache
-    ThesaurusObject conceptStatus(
+    GTAAConcept conceptStatus(
         @QueryParam("id") String id
     );
 

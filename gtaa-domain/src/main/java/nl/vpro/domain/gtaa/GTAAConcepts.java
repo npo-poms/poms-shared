@@ -13,15 +13,15 @@ import nl.vpro.w3.rdf.Description;
  * @since 5.5
  */
 @Slf4j
-public class ThesaurusObjects {
+public class GTAAConcepts {
     private static final String SCHEME_URI = "http://data.beeldengeluid.nl/gtaa/";
 
     static {
 
     }
 
-    public static ThesaurusObject toThesaurusObject(Description d) {
-        return (ThesaurusObject) Scheme.ofUrl(d.getInScheme().getResource()).map(s -> {
+    public static GTAAConcept toConcept(Description d) {
+        return (GTAAConcept) Scheme.ofUrl(d.getInScheme().getResource()).map(s -> {
             try {
                 return s.getImplementation().getMethod("create", Description.class).invoke(null, d);
             } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
@@ -32,7 +32,7 @@ public class ThesaurusObjects {
     }
 
 
-    public static ThesaurusObject toThesaurusObject(GTAANewThesaurusObject thesaurusObject) {
+    public static GTAAConcept toConcept(GTAANewGenericConcept thesaurusObject) {
         Description description = Description.builder()
                 .prefLabel(
                         Label.builder()
@@ -41,11 +41,11 @@ public class ThesaurusObjects {
                 ).scopeNote(thesaurusObject.getNotesAsLabel())
                 .inScheme(SCHEME_URI + thesaurusObject.getObjectType())
                 .build();
-        return toThesaurusObject(description);
+        return toConcept(description);
     }
 
 
-    public static Scheme toScheme(ThesaurusObject d) {
+    public static Scheme toScheme(GTAAConcept d) {
         return toScheme((Object) d).orElseThrow(() -> new IllegalArgumentException("" + d + " has no scheme"));
     }
 
@@ -59,7 +59,7 @@ public class ThesaurusObjects {
     }
 
 
-    private static Description toDescription(GTAANewThesaurusObject thesaurusObject) {
+    private static Description toDescription(GTAANewGenericConcept thesaurusObject) {
         return Description.builder()
                 .prefLabel(
                         Label.builder()

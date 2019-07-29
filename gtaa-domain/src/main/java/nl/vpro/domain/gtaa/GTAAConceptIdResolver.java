@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class ThesaurusObjectIdResolver extends TypeIdResolverBase {
+public class GTAAConceptIdResolver extends TypeIdResolverBase {
 
     private static boolean inited = false;
     static {
@@ -22,7 +22,7 @@ public class ThesaurusObjectIdResolver extends TypeIdResolverBase {
 
     static void init() {
         if (! inited) {
-            for (JsonSubTypes.Type type : ThesaurusObject.class.getAnnotation(JsonSubTypes.class).value()) {
+            for (JsonSubTypes.Type type : GTAAConcept.class.getAnnotation(JsonSubTypes.class).value()) {
                 Scheme.init(type.value());
             }
             inited = true;

@@ -15,8 +15,8 @@ public class GTAANewThesaurusObjectTest {
     @Test
     public void json() throws Exception {
 
-        GTAANewThesaurusObject person =
-            GTAANewThesaurusObject.builder().value("bla")
+        GTAANewGenericConcept person =
+            GTAANewGenericConcept.builder().value("bla")
                 .scheme(Scheme.genre)
                 .value("new genre")
                 .note("Bla")
@@ -35,7 +35,7 @@ public class GTAANewThesaurusObjectTest {
 
     @Test
     public void xml() throws Exception {
-        GTAANewThesaurusObject person = GTAANewThesaurusObject
+        GTAANewGenericConcept person = GTAANewGenericConcept
             .builder()
             .scheme(Scheme.maker)
             .value("Pietje Puk")
