@@ -41,7 +41,8 @@ public abstract class AbstractMediaObjectOwnableList<
     @XmlTransient
     @Getter
     @Setter
-    private MediaObject parent;
+    protected
+    MediaObject parent;
 
     @Enumerated(EnumType.STRING)
     @XmlAttribute
