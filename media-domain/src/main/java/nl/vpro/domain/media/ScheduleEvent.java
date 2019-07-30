@@ -1,6 +1,5 @@
 package nl.vpro.domain.media;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
@@ -25,11 +24,9 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.util.StdConverter;
 import com.google.common.collect.Range;
 
 import nl.vpro.domain.Child;
@@ -54,7 +51,6 @@ import nl.vpro.xml.bind.ZonedLocalDateXmlAdapter;
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 
-;
 
 @Entity
 @IdClass(ScheduleEventIdentifier.class)
@@ -102,7 +98,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
     "primaryLifestyle",
     "secondaryLifestyle"
 })
-@SuppressWarnings({"serial", "NullableProblems", "ConstantConditions"})
+@JsonSerialize(converter = ScheduleEvent.Repeats.class)
 public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventIdentifier>,
     Comparable<ScheduleEvent>,
     TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent>,
@@ -226,7 +222,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Instant start,
         @NonNull  Duration duration,
         @Nullable MediaObject media) {
-        this(channel, net, guideDay, start, duration, media, null);
+        this(channel, net, guideDay, start, duration, null, media, null);
     }
 
     @lombok.Builder(builderClassName = "Builder")
@@ -236,6 +232,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Nullable  LocalDate guideDay,
         @NonNull  Instant start,
         @NonNull  Duration duration,
+        String midRef,
         @Nullable MediaObject media,
         @Nullable  Repeat repeat) {
         this.channel = channel;
@@ -244,6 +241,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this.start = start;
         this.duration = duration;
         this.repeat = Repeat.nullIfDefault(repeat);
+        this.midRef = midRef;
         setParent(media);
     }
 
@@ -380,7 +378,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @XmlElement
-    @JsonSerialize(nullsUsing = NullRepeats.class)
     public Repeat getRepeat() {
         return repeat;
     }
@@ -858,15 +855,24 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
             return repeat(b ? Repeat.rerun() : Repeat.original());
         }
 
+        public Builder rerun(String text) {
+            return repeat(Repeat.rerun(text));
+        }
+
     }
-    public static class NullRepeats extends com.fasterxml.jackson.databind.JsonSerializer<Repeat> {
+
+
+    public static class Repeats extends StdConverter<ScheduleEvent, ScheduleEvent> {
 
         @Override
-        public void serialize(Repeat repeat, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-            if (serializerProvider.getActiveView() == Views.Publisher.class) {
-                jsonGenerator.writeObject(Repeat.original());
+        public ScheduleEvent convert(ScheduleEvent value) {
+            ScheduleEvent copy = ScheduleEvent.copy(value);
+            if (copy.getRepeat() == null) {
+                copy.setRepeat(Repeat.original());
             }
-        }
-    }
+            return copy;
 
+        }
+
+    }
 }
