@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,7 +21,6 @@ import nl.vpro.domain.gtaa.GTAAGeographicName;
 import nl.vpro.domain.gtaa.persistence.EmbeddableGTAARecord;
 import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
-import nl.vpro.domain.media.support.MediaObjectOwnableLists;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.validation.NoHtml;
 
@@ -204,13 +202,6 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         }
     }
 
-    public boolean addTo(@NonNull Set<GeoLocations> parent, @NonNull OwnerType owner) {
-        return MediaObjectOwnableLists.add(
-            parent,
-            () -> new GeoLocations(owner),
-            this,
-            owner
-        );
-    }
+
 
 }

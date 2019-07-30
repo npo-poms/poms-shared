@@ -104,7 +104,7 @@ public class OpenskosRepository implements GTAARepository {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends GTAAConcept, S extends GTAANewConcept> T submit(S thesaurusObject, String creator) {
+    public <T extends GTAAConcept, S extends GTAANewConcept> T submit(@NonNull S thesaurusObject, @NonNull String creator) {
         final Description description = submit(
             thesaurusObject.getValue(),
             thesaurusObject.getNotesAsLabel(),
@@ -125,7 +125,7 @@ public class OpenskosRepository implements GTAARepository {
             response = postRDF(prefLabel, notes, creator, scheme);
         } catch (GTAAConflict ex) {
             String postFix = ".";
-            while(postFix.length() <= retries) {
+            while (postFix.length() <= retries) {
                 try {
                     // Retry the submit by adding a "." after the label name when a 409 Conflict is
                     // returned
@@ -143,7 +143,10 @@ public class OpenskosRepository implements GTAARepository {
             if (response == null) {
                 throw ex;
             }
-
+        } catch (NullPointerException npe) {
+            log.error(npe.getClass().getName() + " " + npe.getMessage(), npe);
+            rte = npe;
+            response = null;
         } catch (RuntimeException rt) {
             log.error(rt.getClass().getName() + " " + rt.getMessage());
             rte = rt;
@@ -342,6 +345,9 @@ public class OpenskosRepository implements GTAARepository {
         try {
             ResponseEntity<T> entity = template.getForEntity(url, tClass);
             return entity.getStatusCode().is2xxSuccessful() ? entity.getBody() : null;
+        } catch (NullPointerException npe) {
+            log.error("For GET {}: {}", url, npe.getMessage(), npe);
+            throw npe;
         } catch (RuntimeException rt) {
             log.error("For GET {}: {}", url, rt.getMessage());
             throw rt;

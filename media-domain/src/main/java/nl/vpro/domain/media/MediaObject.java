@@ -1236,8 +1236,14 @@ public abstract class MediaObject
      * @deprecated See remark
      */
     @Deprecated
-    public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, @NonNull OwnerType owner) {
-        return newGeoLocation.addTo(getGeoLocations(), owner);
+    public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, final @NonNull OwnerType owner) {
+        return MediaObjectOwnableLists.add(
+            getGeoLocations(),
+            () -> new GeoLocations(this, owner),
+            newGeoLocation,
+            owner
+        );
+
     }
 
     /**
@@ -1266,7 +1272,6 @@ public abstract class MediaObject
     @Deprecated
     public Optional<GeoLocation> findGeoLocation(@NonNull Long id,@NonNull OwnerType owner){
         return MediaObjectOwnableLists.find(this.geoLocations, id, owner);
-
     }
 
     //end region
@@ -1284,7 +1289,7 @@ public abstract class MediaObject
         }
 
         if (containsDuplicateOwner(newIntentions)) {
-            throw new IllegalArgumentException("The intention list you want to set has a duplicate owner: " + newIntentions);
+            throw new IllegalArgumentException("The list you want to set has a duplicate owner: " + newIntentions);
         }
         if (this.intentions == null) {
             this.intentions = new TreeSet<>();
@@ -2441,6 +2446,7 @@ public abstract class MediaObject
     @XmlElement(name = "image", namespace = Xmlns.SHARED_NAMESPACE)
     @JsonProperty("images")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @NonNull
     public List<Image> getImages() {
         if (images == null) {
             images = new ArrayList<>();

@@ -11,9 +11,9 @@ import nl.vpro.domain.media.MediaObject;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public interface MediaObjectOwnableList<P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>  extends OwnableList<P, I>, Child<MediaObject>, Serializable {
+public interface MediaObjectOwnableList<THIS extends MediaObjectOwnableList<THIS, I>, I extends MediaObjectOwnableListItem<I, THIS>>  extends OwnableList<THIS, I>, Child<MediaObject>, Serializable {
 
-    P clone();
+    THIS clone();
 
 
 }
