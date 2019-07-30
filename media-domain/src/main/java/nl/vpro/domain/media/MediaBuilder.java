@@ -15,11 +15,12 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.Valid;
 import javax.xml.bind.JAXB;
 
 import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import com.google.common.annotations.VisibleForTesting;
 
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.classification.Term;
@@ -31,6 +32,7 @@ import nl.vpro.domain.user.Editor;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.i18n.LocalizedString;
+import nl.vpro.jmx.ForTesting;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.TimeUtils;
 
@@ -802,7 +804,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
      * See {@link #descendantOf(DescendantRef...)}
      *
      */
-    @Deprecated
+    @VisibleForTesting
     default B descendantOf(String... mids) {
         return descendantOf(Arrays.stream(mids).map(m -> DescendantRef.builder().midRef(m).build())
             .toArray(DescendantRef[]::new));

@@ -10,8 +10,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -21,6 +19,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import com.fasterxml.jackson.annotation.*;
@@ -32,7 +32,10 @@ import nl.vpro.domain.Child;
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.TextualObject;
 import nl.vpro.domain.media.bind.NetToString;
-import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.ScheduleEventDescription;
+import nl.vpro.domain.media.support.ScheduleEventTitle;
+import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.StringZonedLocalDateToJsonTimestamp;
@@ -46,6 +49,8 @@ import nl.vpro.xml.bind.ZonedLocalDateXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
+
+;
 
 @Entity
 @IdClass(ScheduleEventIdentifier.class)
@@ -372,12 +377,16 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @XmlElement
     public Repeat getRepeat() {
+        if (repeat == null) {
+            repeat = Repeat.original();
+        }
         return repeat;
     }
 
     public void setRepeat(Repeat value) {
         this.repeat = value;
     }
+
 
     @XmlElement
     public String getMemberOf() {

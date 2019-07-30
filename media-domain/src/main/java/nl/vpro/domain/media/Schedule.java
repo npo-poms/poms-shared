@@ -134,9 +134,8 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this((Channel)null, start, stop, null);
     }
 
-    @Deprecated
     public Schedule(Instant  start, Instant stop) {
-        this((Channel) null, toDate(start), toDate(stop), null);
+        this((Channel) null, start, stop, null);
     }
 
     @Deprecated
@@ -215,9 +214,8 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this(net, DateUtils.toInstant(start), DateUtils.toInstant(stop), scheduleEvents);
     }
 
-    @Deprecated
     public Schedule(Net net, Instant start, Instant stop) {
-        this(net, toDate(start), toDate(stop), null);
+        this(net, start, stop, null);
     }
 
     public Schedule(Net net, Instant start, Instant stop, Collection<ScheduleEvent> scheduleEvents) {
@@ -481,6 +479,10 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
         this.stop = stop == null ? null : stop.atZone(ZONE_ID).toInstant();
     }
 
+    /**
+     * If the schedule is 'filtered' then any scheduleEvents not actually in this schedule (as specified by fields like {@link #start}, {@link #stop}, {@link #channel}, {@link #net} and {@link #reruns} are not
+     * returned in {@link #getScheduleEvents()}.
+     */
     public boolean isFiltered() {
         return filtered;
     }
