@@ -17,6 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 @XmlType(name = "repeatType", propOrder = {
         "value"
         })
+
+
 public class Repeat implements Serializable {
 
     @Column(name = "reruntext")

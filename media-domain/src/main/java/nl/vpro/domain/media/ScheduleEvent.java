@@ -1,5 +1,6 @@
 package nl.vpro.domain.media;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
@@ -24,6 +25,9 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.collect.Range;
@@ -376,10 +380,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     @XmlElement
+    @JsonSerialize(nullsUsing = NullRepeats.class)
     public Repeat getRepeat() {
-        if (repeat == null) {
-            repeat = Repeat.original();
-        }
         return repeat;
     }
 
@@ -857,4 +859,14 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         }
 
     }
+    public static class NullRepeats extends com.fasterxml.jackson.databind.JsonSerializer<Repeat> {
+
+        @Override
+        public void serialize(Repeat repeat, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+            if (serializerProvider.getActiveView() == Views.Publisher.class) {
+                jsonGenerator.writeObject(Repeat.original());
+            }
+        }
+    }
+
 }
