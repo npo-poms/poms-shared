@@ -376,23 +376,52 @@ public class MediaObjectJsonSchemaTest {
             "  \"countries\" : [ ],\n" +
             "  \"languages\" : [ ],\n" +
             "  \"scheduleEvents\" : [ {\n" +
-            "    \"guideDay\" : -90000000,\n" +
-            "    \"start\" : 0,\n" +
-            "    \"duration\" : 100000,\n" +
-            "    \"poProgID\" : \"VPRO_123456\",\n" +
             "    \"channel\" : \"NED1\",\n" +
+            "    \"start\" : 0,\n" +
+            "    \"guideDay\" : -90000000,\n" +
+            "    \"duration\" : 100000,\n" +
+            "    \"midRef\" : \"VPRO_123456\",\n" +
+            "    \"poProgID\" : \"VPRO_123456\",\n" +
+            "    \"repeat\" : {\n" +
+            "      \"isRerun\" : false\n" +
+            "    },\n" +
             "    \"net\" : \"ZAPP\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:program:100\",\n" +
-            "    \"midRef\" : \"VPRO_123456\"\n" +
+            "    \"urnRef\" : \"urn:vpro:media:program:100\"\n" +
+            "  }, {\n" +
+            "    \"channel\" : \"NED2\",\n" +
+            "    \"start\" : 1,\n" +
+            "    \"guideDay\" : -90000000,\n" +
+            "    \"duration\" : 100000,\n" +
+            "    \"midRef\" : \"VPRO_123457\",\n" +
+            "    \"poProgID\" : \"VPRO_123457\",\n" +
+            "    \"repeat\" : {\n" +
+            "      \"value\" : \"herhaling\",\n" +
+            "      \"isRerun\" : true\n" +
+            "    },\n" +
+            "    \"urnRef\" : \"urn:vpro:media:program:100\"\n" +
             "  } ]\n" +
             "}";
 
-        ScheduleEvent event = new ScheduleEvent(Channel.NED1, LocalDate.of(1970, 1, 1), Instant.ofEpochMilli(0), java.time.Duration.ofMillis(100000L));
-        event.setGuideDate(LocalDate.of(1969, 12, 31));
-        event.setNet(new Net("ZAPP", "Zapp"));
-        event.setPoProgID("VPRO_123456");
 
-        Program program = program().id(100L).lean().scheduleEvents(event).build();
+
+        Program program = program().id(100L).lean()
+            .scheduleEvents(
+                ScheduleEvent.builder()
+                    .channel(Channel.NED1)
+                    .start(Instant.ofEpochMilli(0))
+                    .duration(Duration.ofMillis(100000L))
+                    .guideDay(LocalDate.of(1969, 12, 31))
+                    .net(new Net("ZAPP"))
+                    .midRef("VPRO_123456")
+                    .build(),
+                ScheduleEvent.builder()
+                    .channel(Channel.NED2)
+                    .start(Instant.ofEpochMilli(1))
+                    .duration(Duration.ofMillis(100000L))
+                    .midRef("VPRO_123457")
+                    .rerun("herhaling")
+                    .build()
+            ).build();
 
 
         Program unmarshalled = Jackson2TestUtil.assertThatJson(program).isSimilarTo(expected).get();
