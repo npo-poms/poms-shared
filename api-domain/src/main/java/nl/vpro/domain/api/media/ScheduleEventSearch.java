@@ -10,12 +10,12 @@ import lombok.Setter;
 import java.time.Instant;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -25,6 +25,8 @@ import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.ScheduleEvent;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+
+;
 
 /**
  * @author rico
@@ -119,5 +121,17 @@ public class ScheduleEventSearch extends RangeMatcher<Instant> implements Predic
     @Override
     public String toString() {
         return "ScheduleEventMatcher{channel=" + channel + ", net=" + net + ", begin=" + begin + ", end=" + end + ", rerun=" + rerun + "}";
+    }
+
+    public static class Builder {
+
+        Builder original() {
+            return rerun(false);
+        }
+
+        Builder repeat() {
+            return rerun(true);
+        }
+
     }
 }
