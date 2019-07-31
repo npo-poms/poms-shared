@@ -385,6 +385,15 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     public void setRepeat(Repeat value) {
         this.repeat = value;
     }
+    @JsonView({Views.Publisher.class})
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public boolean isRerun() {
+        if (repeat == null) {
+            return false;
+        } else {
+            return repeat.isRerun;
+        }
+    }
 
 
     @XmlElement
