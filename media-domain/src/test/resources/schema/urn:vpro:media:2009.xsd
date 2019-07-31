@@ -190,14 +190,7 @@
     </xs:simpleContent>
   </xs:complexType>
 
-  <xs:complexType name="descriptionType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
-        <xs:attribute name="type" type="textualTypeEnum" use="required"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
+
 
   <xs:complexType name="genreType">
     <xs:sequence>
@@ -214,6 +207,15 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute ref="xml:lang"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="descriptionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
+        <xs:attribute name="type" type="textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -254,6 +256,7 @@
     </xs:sequence>
     <xs:attribute name="role" type="geoRoleType" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>
+    <xs:attribute name="gtaaStatus" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="countryType">

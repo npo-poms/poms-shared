@@ -9,19 +9,23 @@
     "languages": [],
     "geoLocations":
     [
-      {"owner":"BROADCASTER", "values":[{"name":"England","role":"SUBJECT"},{"name":"UK","role":"RECORDED_IN"}]},
+      {"owner":"BROADCASTER", "values": [{"name":"England","role":"SUBJECT", "gtaaUri": "http://gtaa/123",
+        "gtaaStatus": "accepted"
+      },{"name":"UK","role":"RECORDED_IN"}]},
       {"owner":"NPO", "values":[{"name":"Africa","description":"Continent","role":"SUBJECT"}]}
     ]
   },
-  "mediaWithOneGeoLocations":  {
-    "objectType":"program","embeddable":true,
-    "broadcasters":[],
-    "genres":[],
-    "countries": [],
-    "languages": [],
-    "geoLocations":
+  "OneFullGeoLocations":
     [
-      {"owner":"BROADCASTER", "values":["ACTIVATING"]}
+      {
+        "owner":"BROADCASTER",
+        "values": [{
+          "name":"myName",
+          "description": "myDescription",
+          "role":"RECORDED_IN",
+          "gtaaUri": "myuri",
+          "gtaaStatus": "approved"
+        }]
+      }
     ]
-  }
 }

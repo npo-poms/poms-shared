@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
+import nl.vpro.domain.gtaa.Status;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -67,21 +68,21 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GeoLocation(@NonNull String name, @NonNull GeoRoleType role, String description) {
+    public GeoLocation(@NonNull String name, @NonNull GeoRoleType role, String description, EmbeddableGeographicName gtaaRecord) {
         this.name = name;
         this.role = role;
         this.description = description;
-    }
-
-    public GeoLocation(Long id, @NonNull String name, @NonNull GeoRoleType role, String description, EmbeddableGeographicName gtaaRecord) {
-        this(name, role, description);
-        this.id = id;
         this.gtaaRecord = gtaaRecord;
     }
 
+    @lombok.Builder(builderClassName = "Builder")
+    public GeoLocation(Long id, @NonNull String name, @NonNull GeoRoleType role, String description, EmbeddableGeographicName gtaaRecord) {
+        this(name, role, description, gtaaRecord);
+        this.id = id;
+    }
+
     public GeoLocation(GeoLocation source, GeoLocations parent) {
-        this(source.getName(), source.getRole(), source.getDescription());
-        this.gtaaRecord = source.gtaaRecord == null ? null : new EmbeddableGeographicName(source.gtaaRecord.getUri(), source.gtaaRecord.getStatus());
+        this(source.getName(), source.getRole(), source.getDescription(), source.getGtaaRecord());
         this.parent = parent;
     }
 
@@ -97,6 +98,14 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         this(id, name, role, description, gtaaRecord);
         this.parent = parent;
     }
+
+    @XmlAttribute
+    public Status getGtaaStatus() {
+        return Optional.ofNullable(gtaaRecord)
+                .map(EmbeddableGTAARecord::getStatus)
+                .orElse(null);
+    }
+
 
     @XmlAttribute
     public String getGtaaUri() {

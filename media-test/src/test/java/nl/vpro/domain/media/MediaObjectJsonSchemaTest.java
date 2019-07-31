@@ -15,10 +15,12 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import nl.vpro.domain.gtaa.Status;
+import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -778,32 +780,30 @@ public class MediaObjectJsonSchemaTest {
 
         JSONAssert.assertEquals(expected, actual);
 
-        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
-                "  \"objectType\" : \"program\",\n" +
-                "  \"embeddable\" : true,\n" +
-                "  \"broadcasters\" : [ ],\n" +
-                "  \"genres\" : [ ],\n" +
-                "  \"countries\" : [ ],\n" +
-                "  \"languages\" : [ ],\n" +
-                "  \"geoLocations\" : [ {\n" +
-                "    \"owner\" : \"BROADCASTER\",\n" +
-                "    \"values\" : [ {\n" +
-                "      \"name\" : \"England\",\n" +
-                "      \"role\" : \"SUBJECT\"\n" +
-                "    }, {\n" +
-                "      \"name\" : \"UK\",\n" +
-                "      \"role\" : \"RECORDED_IN\"\n" +
-                "    } ]\n" +
-                "  }, {\n" +
-                "    \"owner\" : \"NPO\",\n" +
-                "    \"values\" : [ {\n" +
-                "      \"name\" : \"Africa\",\n" +
-                "      \"description\" : \"Continent\",\n" +
-                "      \"role\" : \"SUBJECT\"\n" +
-                "    } ]\n" +
-                "  } ]\n" +
-                "}");
+        Jackson2TestUtil.roundTripAndSimilar(program, expected.toString());
     }
+
+    @Test
+    public void testWithFullGeoLocations() throws Exception {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.json"), segment, "UTF-8");
+        List expected = JsonPath.read(segment.toString(),"$.OneFullGeoLocations");
+
+        Program program = program().lean().build();
+
+        GeoLocation value = GeoLocation.builder()
+                .description("myDescription").name("myName")
+                .role(GeoRoleType.RECORDED_IN)
+                .gtaaRecord(EmbeddableGeographicName.builder().uri("myuri").status(Status.approved).build())
+                .build();
+        SortedSet geoLocations = Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build()).collect(Collectors.toCollection(TreeSet::new));
+        program.setGeoLocations(geoLocations);
+        List actual = JsonPath.read(toJson2(geoLocations),"$");
+
+        JSONAssert.assertEquals(expected, actual);
+
+    }
+
 
     @Test
     public void testAvailableSubtitles() throws Exception {
@@ -945,6 +945,12 @@ public class MediaObjectJsonSchemaTest {
     private String toJson(MediaObject program) throws IOException {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, program);
+        return writer.toString();
+    }
+
+    private <O>  String toJson2(O javaObject) throws IOException {
+        StringWriter writer = new StringWriter();
+        Jackson2Mapper.INSTANCE.writeValue(writer, javaObject);
         return writer.toString();
     }
 }
