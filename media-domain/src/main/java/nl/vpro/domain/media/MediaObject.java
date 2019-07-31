@@ -1231,6 +1231,14 @@ public abstract class MediaObject
         MediaObjectOwnableLists.set(this, getGeoLocations(), newGeoLocations);
     }
 
+
+    @JsonView({Views.Publisher.class})
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public SortedSet<GeoLocations>  getExpandedGeoLocations() {
+        // TODO
+        // implmement this see getExpandedTitle
+        return geoLocations;
+    }
     /**
      *
      * @deprecated See remark
