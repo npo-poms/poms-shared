@@ -382,9 +382,6 @@ public class MediaObjectJsonSchemaTest {
             "    \"duration\" : 100000,\n" +
             "    \"midRef\" : \"VPRO_123456\",\n" +
             "    \"poProgID\" : \"VPRO_123456\",\n" +
-            "    \"repeat\" : {\n" +
-            "      \"isRerun\" : false\n" +
-            "    },\n" +
             "    \"rerun\" : false,\n" +
             "    \"net\" : \"ZAPP\",\n" +
             "    \"urnRef\" : \"urn:vpro:media:program:100\",\n" +
