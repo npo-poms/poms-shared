@@ -385,8 +385,10 @@ public class MediaObjectJsonSchemaTest {
             "    \"repeat\" : {\n" +
             "      \"isRerun\" : false\n" +
             "    },\n" +
+            "    \"rerun\" : false,\n" +
             "    \"net\" : \"ZAPP\",\n" +
-            "    \"urnRef\" : \"urn:vpro:media:program:100\"\n" +
+            "    \"urnRef\" : \"urn:vpro:media:program:100\",\n" +
+            "    \"eventStart\" : 0\n" +
             "  }, {\n" +
             "    \"channel\" : \"NED2\",\n" +
             "    \"start\" : 1,\n" +
@@ -398,7 +400,9 @@ public class MediaObjectJsonSchemaTest {
             "      \"value\" : \"herhaling\",\n" +
             "      \"isRerun\" : true\n" +
             "    },\n" +
-            "    \"urnRef\" : \"urn:vpro:media:program:100\"\n" +
+            "    \"rerun\" : true,\n" +
+            "    \"urnRef\" : \"urn:vpro:media:program:100\",\n" +
+            "    \"eventStart\" : 1\n" +
             "  } ]\n" +
             "}";
 
@@ -424,7 +428,7 @@ public class MediaObjectJsonSchemaTest {
             ).build();
 
 
-        Program unmarshalled = Jackson2TestUtil.assertThatJson(program).isSimilarTo(expected).get();
+        Program unmarshalled = Jackson2TestUtil.assertThatJson(Jackson2Mapper.getPrettyPublisherInstance(), program).isSimilarTo(expected).get();
         assertThat(unmarshalled.getScheduleEvents().first().getParent()).isNotNull();
     }
 
