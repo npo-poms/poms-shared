@@ -16,6 +16,8 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
+import nl.vpro.domain.gtaa.Status;
+import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -458,13 +460,13 @@ public interface MediaTestDataBuilder<
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
                 GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
-                        .description("Continent").build());
+                        .description("Continent").gtaaUri("http://gtaa/1231").build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
                 GeoLocation.builder().name("England").role(GeoRoleType.SUBJECT)
-                        .gtaaUri("http://gtaa/1234").build(),
+                        .gtaaRecord(EmbeddableGeographicName.builder().uri("http://gtaa/1232").status(Status.approved).build()).build(),
                 GeoLocation.builder().name("UK").role(GeoRoleType.RECORDED_IN)
-                        .gtaaUri("http://gtaa/1235").build()
+                        .gtaaUri("http://gtaa/1233").build()
         );
         return geoLocations(
                 GeoLocations.builder()
