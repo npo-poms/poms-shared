@@ -26,7 +26,6 @@ import org.hibernate.annotations.*;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.util.StdConverter;
 import com.google.common.collect.Range;
 
 import nl.vpro.domain.Child;
@@ -98,7 +97,6 @@ import static nl.vpro.domain.TextualObjects.sorted;
     "primaryLifestyle",
     "secondaryLifestyle"
 })
-@JsonSerialize(converter = ScheduleEvent.Repeats.class)
 public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventIdentifier>,
     Comparable<ScheduleEvent>,
     TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent>,
@@ -866,21 +864,6 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
         public Builder rerun(String text) {
             return repeat(Repeat.rerun(text));
-        }
-
-    }
-
-
-    public static class Repeats extends StdConverter<ScheduleEvent, ScheduleEvent> {
-
-        @Override
-        public ScheduleEvent convert(ScheduleEvent value) {
-            ScheduleEvent copy = ScheduleEvent.copy(value);
-            if (copy.getRepeat() == null) {
-                copy.setRepeat(Repeat.original());
-            }
-            return copy;
-
         }
 
     }

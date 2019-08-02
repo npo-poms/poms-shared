@@ -9,7 +9,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
-public class GTAANewThesaurusObjectTest {
+public class GTAANewGenericConceptTest {
 
 
     @Test
