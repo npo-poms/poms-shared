@@ -17,7 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
@@ -104,7 +103,7 @@ public class MediaObjectTest {
         assertThat(mediaObject.getGeoLocations().first().getValues().size()).isEqualTo(1);
 
         //Add second geoLocation same Owner
-        geoLocation2.setGtaaRecord(EmbeddableGeographicName.builder().uri("test/123").build());
+        geoLocation2.setGtaaRecord(GtaaGeoLocationRecord.builder().uri("test/123").build());
         final boolean add = mediaObject.addGeoLocation(geoLocation2, BROADCASTER);
         assertThat(add).isTrue();
         assertThat(mediaObject.getGeoLocations().size()).isEqualTo(1);

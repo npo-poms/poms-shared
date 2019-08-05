@@ -476,12 +476,10 @@
       "owner": "BROADCASTER",
       "values": [
         {
-          "name": "England",
-          "role": "SUBJECT"
-        },
-        {
-          "name": "UK",
-          "role": "RECORDED_IN"
+          "name": "Africa",
+          "description": "Continent",
+          "role": "SUBJECT",
+          "gtaaUri": "http://gtaa/1231"
         }
       ]
     },
@@ -489,9 +487,15 @@
       "owner": "NPO",
       "values": [
         {
-          "name": "Africa",
-          "description": "Continent",
-          "role": "SUBJECT"
+          "name": "England",
+          "role": "SUBJECT",
+          "gtaaUri": "http://gtaa/1232",
+          "gtaaStatus": "approved"
+        },
+        {
+          "name": "UK",
+          "role": "RECORDED_IN",
+          "gtaaUri": "http://gtaa/1233"
         }
       ]
     }
@@ -920,12 +924,10 @@
           "owner": "BROADCASTER",
           "values": [
             {
-              "name": "England",
-              "role": "SUBJECT"
-            },
-            {
-              "name": "UK",
-              "role": "RECORDED_IN"
+              "name": "Africa",
+              "description": "Continent",
+              "role": "SUBJECT",
+              "gtaaUri": "http://gtaa/1231"
             }
           ]
         },
@@ -933,9 +935,15 @@
           "owner": "NPO",
           "values": [
             {
-              "name": "Africa",
-              "description": "Continent",
-              "role": "SUBJECT"
+              "name": "England",
+              "role": "SUBJECT",
+              "gtaaUri": "http://gtaa/1232",
+              "gtaaStatus": "approved"
+            },
+            {
+              "name": "UK",
+              "role": "RECORDED_IN",
+              "gtaaUri": "http://gtaa/1233"
             }
           ]
         }
