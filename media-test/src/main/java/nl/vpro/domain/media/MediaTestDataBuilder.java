@@ -463,16 +463,15 @@ public interface MediaTestDataBuilder<
 
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
-                GeoLocation.builder().gtaaRecord(GtaaGeoLocationRecord.builder()
-                                .name("Africa").description("Continent")
-                                .uri("http://gtaa/1231").build())
+                GeoLocation.builder().name("Africa")
+                        .description("Continent").gtaaUri("http://gtaa/1231")
                         .role(GeoRoleType.SUBJECT).build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
                 GeoLocation.builder().role(GeoRoleType.SUBJECT)
-                        .gtaaRecord(GtaaGeoLocationRecord.builder().name("England").uri("http://gtaa/1232").status(Status.approved).build()).build(),
-                GeoLocation.builder().gtaaRecord(GtaaGeoLocationRecord.builder()
-                        .name("UK").uri("http://gtaa/1233").build())
+                        .name("England").gtaaUri("http://gtaa/1232").gtaaStatus(Status.approved).build(),
+                GeoLocation.builder()
+                        .name("UK").gtaaUri("http://gtaa/1233")
                         .role(GeoRoleType.RECORDED_IN).build()
         );
         return geoLocations(

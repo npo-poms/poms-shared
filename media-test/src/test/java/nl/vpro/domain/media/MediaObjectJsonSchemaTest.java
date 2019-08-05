@@ -822,7 +822,7 @@ public class MediaObjectJsonSchemaTest {
 
         GeoLocation value = GeoLocation.builder()
                 .role(GeoRoleType.RECORDED_IN)
-                .gtaaRecord(GtaaGeoLocationRecord.builder().description("myDescription").name("myName").uri("myuri").status(Status.approved).build())
+                .name("myName").description("myDescription").gtaaUri("myuri").gtaaStatus(Status.approved)
                 .build();
         SortedSet geoLocations = Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build()).collect(Collectors.toCollection(TreeSet::new));
 
@@ -848,7 +848,7 @@ public class MediaObjectJsonSchemaTest {
         GeoLocations actualGeoLocations = Jackson2Mapper.STRICT.readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
         GeoLocation value = GeoLocation.builder()
                 .role(GeoRoleType.RECORDED_IN)
-                .gtaaRecord(GtaaGeoLocationRecord.builder().description("myDescription").name("myName").uri("myuri").status(Status.approved).build())
+                .name("myName").description("myDescription").gtaaUri("myuri").gtaaStatus(Status.approved)
                 .build();
         final GeoLocations expectedGeoLocations = GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build();
 
