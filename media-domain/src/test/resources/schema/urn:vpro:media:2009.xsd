@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:media:2009" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:tns="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:media:2009" xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:tns="urn:vpro:media:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn:vpro:gtaa:2017">
 
   <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
 
   <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+  <xs:import namespace="urn:vpro:gtaa:2017" schemaLocation="urn:vpro:gtaa:2017.xsd"/>
 
   <xs:element name="group" type="groupType"/>
 
@@ -190,7 +192,14 @@
     </xs:simpleContent>
   </xs:complexType>
 
-
+  <xs:complexType name="descriptionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
+        <xs:attribute name="type" type="textualTypeEnum" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
 
   <xs:complexType name="genreType">
     <xs:sequence>
@@ -207,15 +216,6 @@
     <xs:simpleContent>
       <xs:extension base="xs:string">
         <xs:attribute ref="xml:lang"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:complexType name="descriptionType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="owner" type="shared:ownerTypeEnum" use="required"/>
-        <xs:attribute name="type" type="textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -255,8 +255,8 @@
       <xs:element name="description" type="xs:string" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="role" type="geoRoleType" use="required"/>
+    <xs:attribute name="gtaaStatus" type="ns1:status"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>
-    <xs:attribute name="gtaaStatus" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="countryType">
