@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import nl.vpro.domain.gtaa.Status;
-import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -766,6 +765,10 @@ public class MediaObjectJsonSchemaTest {
             "  \"countries\" : [ ],\n" +
             "  \"languages\" : [ ]\n" +
             "}");
+
+        //Marshal
+        Program marshalled = Jackson2Mapper.INSTANCE.readValue(toJson(program), Program.class);
+        assertEquals(marshalled.intentions, program.intentions);
     }
 
     @Test
@@ -780,27 +783,76 @@ public class MediaObjectJsonSchemaTest {
 
         JSONAssert.assertEquals(expected, actual);
 
-        Jackson2TestUtil.roundTripAndSimilar(program, expected.toString());
+        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
+                "  \"objectType\" : \"program\",\n" +
+                "  \"embeddable\" : true,\n" +
+                "  \"broadcasters\" : [ ],\n" +
+                "  \"genres\" : [ ],\n" +
+                "  \"countries\" : [ ],\n" +
+                "  \"languages\" : [ ],\n" +
+                "  \"geoLocations\" : [ {\n" +
+                "    \"owner\" : \"BROADCASTER\",\n" +
+                "    \"values\" : [ {\n" +
+                "      \"role\" : \"SUBJECT\",\n" +
+                "      \"name\" : \"Africa\",\n" +
+                "      \"description\" : \"Continent\",\n" +
+                "      \"gtaaUri\" : \"http://gtaa/1231\"\n" +
+                "    } ]\n" +
+                "  }, {\n" +
+                "    \"owner\" : \"NPO\",\n" +
+                "    \"values\" : [ {\n" +
+                "      \"role\" : \"SUBJECT\",\n" +
+                "      \"name\" : \"England\",\n" +
+                "      \"gtaaStatus\" : \"approved\",\n" +
+                "      \"gtaaUri\" : \"http://gtaa/1232\"\n" +
+                "    }, {\n" +
+                "      \"role\" : \"RECORDED_IN\",\n" +
+                "      \"name\" : \"UK\",\n" +
+                "      \"gtaaUri\" : \"http://gtaa/1233\"\n" +
+                "    } ]\n" +
+                "  } ]\n" +
+                "}");
     }
 
     @Test
-    public void testWithFullGeoLocations() throws Exception {
+    public void testMarshalWithFullGeoLocations() throws Exception {
         StringWriter segment = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.json"), segment, "UTF-8");
         List expected = JsonPath.read(segment.toString(),"$.OneFullGeoLocations");
 
-        Program program = program().lean().build();
-
         GeoLocation value = GeoLocation.builder()
-                .description("myDescription").name("myName")
                 .role(GeoRoleType.RECORDED_IN)
-                .gtaaRecord(EmbeddableGeographicName.builder().uri("myuri").status(Status.approved).build())
+                .gtaaRecord(GtaaGeoLocationRecord.builder().description("myDescription").name("myName").uri("myuri").status(Status.approved).build())
                 .build();
         SortedSet geoLocations = Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build()).collect(Collectors.toCollection(TreeSet::new));
-        program.setGeoLocations(geoLocations);
+
         List actual = JsonPath.read(toJson2(geoLocations),"$");
 
         JSONAssert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testUnMarshalWithFullGeoLocations() throws Exception {
+        String geoLocationsJson = "      {\n" +
+                "        \"owner\":\"BROADCASTER\",\n" +
+                "        \"values\": [{\n" +
+                "          \"name\":\"myName\",\n" +
+                "          \"description\": \"myDescription\",\n" +
+                "          \"role\":\"RECORDED_IN\",\n" +
+                "          \"gtaaUri\": \"myuri\",\n" +
+                "          \"gtaaStatus\": \"approved\"\n" +
+                "        }]\n" +
+                "      }";
+
+        GeoLocations actualGeoLocations = Jackson2Mapper.STRICT.readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
+        GeoLocation value = GeoLocation.builder()
+                .role(GeoRoleType.RECORDED_IN)
+                .gtaaRecord(GtaaGeoLocationRecord.builder().description("myDescription").name("myName").uri("myuri").status(Status.approved).build())
+                .build();
+        final GeoLocations expectedGeoLocations = GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build();
+
+        assertEquals(expectedGeoLocations, actualGeoLocations);
 
     }
 
@@ -901,6 +953,17 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void programWithEverything() throws Exception {
+        StringWriter programJson = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, "UTF-8");
+        Program program =  MediaTestDataBuilder
+                .program()
+                .withEverything()
+                .build();
+        Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
+    }
+
+    @Test
+    public void programWithEverythingMarshUnmarsh() throws Exception {
         StringWriter programJson = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, "UTF-8");
         Program program =  MediaTestDataBuilder

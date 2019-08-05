@@ -3,17 +3,17 @@
          sortDate="2015-03-06T00:00:00+01:00" type="BROADCAST"
          xmlns="urn:vpro:media:2009" xmlns:shared="urn:vpro:shared:2009">
     <geoLocations owner="BROADCASTER">
+        <geoLocation role="SUBJECT" gtaaUri="http://gtaa/1231">
+            <name>Africa</name>
+            <description>Continent</description>
+        </geoLocation>
+    </geoLocations>
+    <geoLocations owner="NPO">
         <geoLocation gtaaStatus="approved" gtaaUri="http://gtaa/1232" role="SUBJECT">
             <name>England</name>
         </geoLocation>
         <geoLocation role="RECORDED_IN" gtaaUri="http://gtaa/1233">
             <name>UK</name>
-        </geoLocation>
-    </geoLocations>
-    <geoLocations owner="NPO">
-        <geoLocation role="SUBJECT" gtaaUri="http://gtaa/1231">
-            <name>Africa</name>
-            <description>Continent</description>
         </geoLocation>
     </geoLocations>
     <credits/>

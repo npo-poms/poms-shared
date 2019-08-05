@@ -17,7 +17,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
 import nl.vpro.domain.gtaa.Status;
-import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -457,25 +456,33 @@ public interface MediaTestDataBuilder<
         );
     }
 
+    default T withGTAARecords() {
+        return   withGeoLocations()
+        .withPersons();
+    }
+
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
-                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
-                        .description("Continent").gtaaUri("http://gtaa/1231").build());
+                GeoLocation.builder().gtaaRecord(GtaaGeoLocationRecord.builder()
+                                .name("Africa").description("Continent")
+                                .uri("http://gtaa/1231").build())
+                        .role(GeoRoleType.SUBJECT).build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
-                GeoLocation.builder().name("England").role(GeoRoleType.SUBJECT)
-                        .gtaaRecord(EmbeddableGeographicName.builder().uri("http://gtaa/1232").status(Status.approved).build()).build(),
-                GeoLocation.builder().name("UK").role(GeoRoleType.RECORDED_IN)
-                        .gtaaUri("http://gtaa/1233").build()
+                GeoLocation.builder().role(GeoRoleType.SUBJECT)
+                        .gtaaRecord(GtaaGeoLocationRecord.builder().name("England").uri("http://gtaa/1232").status(Status.approved).build()).build(),
+                GeoLocation.builder().gtaaRecord(GtaaGeoLocationRecord.builder()
+                        .name("UK").uri("http://gtaa/1233").build())
+                        .role(GeoRoleType.RECORDED_IN).build()
         );
         return geoLocations(
                 GeoLocations.builder()
                         .values(geoLocations1)
-                        .owner(NPO)
+                        .owner(BROADCASTER)
                         .build(),
                 GeoLocations.builder()
                         .values(geoLocations2)
-                        .owner(BROADCASTER)
+                        .owner(NPO)
                         .build()
         );
     }

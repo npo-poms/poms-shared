@@ -19,11 +19,7 @@ import org.meeuw.i18n.Region;
 
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.gtaa.GTAAGeographicName;
-import nl.vpro.domain.gtaa.persistence.EmbeddableGTAARecord;
-import nl.vpro.domain.gtaa.persistence.EmbeddableGeographicName;
 import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.validation.NoHtml;
 
 
 /**
@@ -34,7 +30,10 @@ import nl.vpro.validation.NoHtml;
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "geoLocationType")
+@XmlType(name = "geoLocationType", propOrder = {
+        "name",
+        "description"
+})
 @Getter
 @Setter
 public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations>, Region {
@@ -44,14 +43,6 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @XmlTransient
     private GeoLocations parent;
 
-    @NoHtml
-    @XmlElement
-    private String name;
-
-    @NoHtml
-    @XmlElement
-    private String description;
-
     @Column(name= "role", nullable = false)
     @NotNull(message = "{nl.vpro.constraints.NotNull}")
     @XmlAttribute(required = true)
@@ -60,61 +51,86 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @Setter
     protected GeoRoleType role;
 
-    @Embedded
     @XmlTransient
-    private EmbeddableGeographicName gtaaRecord;
+    @ManyToOne(targetEntity = GtaaGeoLocationRecord.class)
+    @JoinColumn(name = "gtaa_uri")
+    private GtaaGeoLocationRecord gtaaRecord = new GtaaGeoLocationRecord();
 
     public GeoLocation() {
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GeoLocation(@NonNull String name, @NonNull GeoRoleType role, String description, EmbeddableGeographicName gtaaRecord) {
-        this.name = name;
+    public GeoLocation(@NonNull GeoRoleType role, GtaaGeoLocationRecord gtaaRecord) {
         this.role = role;
-        this.description = description;
         this.gtaaRecord = gtaaRecord;
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GeoLocation(Long id, @NonNull String name, @NonNull GeoRoleType role, String description, EmbeddableGeographicName gtaaRecord) {
-        this(name, role, description, gtaaRecord);
+    public GeoLocation(Long id, @NonNull GeoRoleType role, GtaaGeoLocationRecord gtaaRecord) {
+        this(role, gtaaRecord);
         this.id = id;
     }
 
+    @lombok.Builder(builderClassName = "Builder")
+    public GeoLocation(String name, String description, @NonNull GeoRoleType role) {
+        this.role = role;
+        this.gtaaRecord = GtaaGeoLocationRecord.builder().name(name).description(description).build();
+    }
+
     public GeoLocation(GeoLocation source, GeoLocations parent) {
-        this(source.getName(), source.getRole(), source.getDescription(), source.getGtaaRecord());
+        this(source.getRole(), source.getGtaaRecord());
         this.parent = parent;
     }
 
     @lombok.Builder(builderClassName = "Builder")
     private GeoLocation(
             Long id,
-            @NonNull String name,
-            @NonNull OwnerType owner,
             @NonNull GeoRoleType role,
-            String description,
             GeoLocations parent,
-            EmbeddableGeographicName gtaaRecord) {
-        this(id, name, role, description, gtaaRecord);
+            GtaaGeoLocationRecord gtaaRecord) {
+        this(id, role, gtaaRecord);
         this.parent = parent;
+    }
+
+    @XmlElement
+    public String getName() {
+        return Optional.ofNullable(gtaaRecord)
+                .map(GtaaGeoLocationRecord::getName)
+                .orElse(null);
+    }
+    public void setName(String name) {
+        this.gtaaRecord.setName(name);
+    }
+
+    @XmlElement
+    public String getDescription() {
+        return Optional.ofNullable(gtaaRecord)
+                .map(GtaaGeoLocationRecord::getDescription)
+                .orElse(null);
+    }
+    public void setDescription(String description) {
+        this.gtaaRecord.setDescription(description);
     }
 
     @XmlAttribute
     public Status getGtaaStatus() {
         return Optional.ofNullable(gtaaRecord)
-                .map(EmbeddableGTAARecord::getStatus)
+                .map(GtaaGeoLocationRecord::getStatus)
                 .orElse(null);
+    }
+    public void setGtaaStatus(String gtaaStatus) {
+        this.gtaaRecord.setStatus(gtaaStatus);
     }
 
 
     @XmlAttribute
     public String getGtaaUri() {
         return Optional.ofNullable(gtaaRecord)
-                .map(EmbeddableGTAARecord::getUri)
+                .map(GtaaGeoLocationRecord::getUri)
                 .orElse(null);
     }
     public void setGtaaUri(String uri) {
-        this.gtaaRecord = new EmbeddableGeographicName(uri, null);
+        this.gtaaRecord.setUri(uri);
     }
 
     @Override
@@ -128,7 +144,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
         GeoLocation geoLocation = (GeoLocation)o;
 
-        if(!Objects.equals(name, geoLocation.name)) {
+        if(!Objects.equals(getName(), geoLocation.getName())) {
             return false;
         }
 
@@ -136,7 +152,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
             return false;
         }
 
-        if(!Objects.equals(description, geoLocation.description)) {
+        if(!Objects.equals(getDescription(), geoLocation.getDescription())) {
             return false;
         }
 
@@ -146,11 +162,10 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        String gtaaUri = getGtaaUri();
-        result = 31 * result + (gtaaUri != null ? gtaaUri.hashCode() : 0);
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getGtaaUri() != null ? getGtaaUri().hashCode() : 0);
         return result;
     }
 
@@ -158,25 +173,25 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     public String toString() {
         return new ToStringBuilder(this)
             .appendSuper(super.toString())
-            .append("name", name)
+            .append("name", getName())
             .append("relationType", role)
-            .append("description", description)
+            .append("description", getDescription())
             .append("gtaa_uri", getGtaaUri())
             .toString();
     }
 
     @Override
     public int compareTo(GeoLocation geoLocation) {
-        if(!this.name.equals(geoLocation.name)) {
-            return this.name.compareTo(geoLocation.name);
+        if(!this.getName().equals(geoLocation.getName())) {
+            return this.getName().compareTo(geoLocation.getName());
         }
 
         if(!this.role.equals(geoLocation.role)) {
             return this.role.compareTo(geoLocation.role);
         }
 
-        if(description != null && geoLocation.description != null && !description.equals(geoLocation.description)) {
-            return this.description.compareTo(geoLocation.description);
+        if(getDescription() != null && geoLocation.getDescription() != null && !getDescription().equals(geoLocation.getDescription())) {
+            return this.getDescription().compareTo(geoLocation.getDescription());
         }
 
         if(getGtaaUri() != null && geoLocation.getGtaaUri() != null && !getGtaaUri().equals(geoLocation.getGtaaUri())) {
@@ -207,7 +222,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
     public static class Builder {
         public Builder gtaaUri(String uri) {
-            return gtaaRecord(EmbeddableGeographicName.builder().uri(uri).build());
+            return gtaaRecord(GtaaGeoLocationRecord.builder().uri(uri).build());
         }
     }
 
