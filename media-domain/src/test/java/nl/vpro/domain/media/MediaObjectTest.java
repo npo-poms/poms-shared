@@ -63,7 +63,7 @@ public class MediaObjectTest {
 
     @Test
     public void testFindGeoLocation(){
-        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
@@ -87,7 +87,7 @@ public class MediaObjectTest {
 
     @Test
     public void testAddGeoLocation(){
-        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").gtaaUri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
@@ -95,7 +95,7 @@ public class MediaObjectTest {
         assertThat(result).isTrue();
 
         //Avoid duplicates
-        GeoLocation geoLocation2 = GeoLocation.builder().name("Amsterdam").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation geoLocation2 = GeoLocation.builder().name("Amsterdam").gtaaUri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
 
         final boolean resultDuplicate = mediaObject.addGeoLocation(geoLocation2, BROADCASTER);
         assertThat(resultDuplicate).isFalse();
@@ -103,7 +103,7 @@ public class MediaObjectTest {
         assertThat(mediaObject.getGeoLocations().first().getValues().size()).isEqualTo(1);
 
         //Add second geoLocation same Owner
-        geoLocation2.setGtaaRecord(GtaaGeoLocationRecord.builder().uri("test/123").build());
+        geoLocation2.setGtaaRecord(GtaaGeoLocationRecord.builder().name("AnotherAmsterdam").uri("test/123").build());
         final boolean add = mediaObject.addGeoLocation(geoLocation2, BROADCASTER);
         assertThat(add).isTrue();
         assertThat(mediaObject.getGeoLocations().size()).isEqualTo(1);
@@ -119,13 +119,13 @@ public class MediaObjectTest {
 
     @Test
     public void testRemoveGeoLocation(){
-        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
         mediaObject.addGeoLocation(geoLocation, BROADCASTER);
 
-        GeoLocation geoLocDiffName = GeoLocation.builder().name("Amsterdam2").role(GeoRoleType.RECORDED_IN).build();;
+        GeoLocation geoLocDiffName = GeoLocation.builder().name("Amsterdam2").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();;
         final boolean geoLocDiffNameResult = mediaObject.removeGeoLocation(geoLocDiffName, BROADCASTER);
         assertThat(geoLocDiffNameResult).isFalse();
 
@@ -134,7 +134,7 @@ public class MediaObjectTest {
         assertThat(emptyResult2).isFalse();
 
         OwnerType sameOwner = BROADCASTER;
-        GeoLocation sameGeoLocId = GeoLocation.builder().name("Amsterdam").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation sameGeoLocId = GeoLocation.builder().name("Amsterdam").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();
         final boolean trueResult = mediaObject.removeGeoLocation(sameGeoLocId, sameOwner);
         assertThat(trueResult).isEqualTo(true);
     }

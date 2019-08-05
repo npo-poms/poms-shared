@@ -103,8 +103,8 @@ public class GeoLocationTest {
     private GeoLocations geoLocations1() {
         return GeoLocations.builder()
                 .owner(BROADCASTER).value(
-                GeoLocation.builder().gtaaRecord(GtaaGeoLocationRecord.builder().name("Africa").description("Continent").build())
-                        .role(GeoRoleType.SUBJECT).build()
+                GeoLocation.builder().name("Africa").description("Continent")
+                        .gtaaUri("test/123").role(GeoRoleType.SUBJECT).build()
             )
             .build();
     }
@@ -113,7 +113,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
             .owner(BROADCASTER)
             .value(
-                GeoLocation.builder().gtaaRecord(GtaaGeoLocationRecord.builder().name("Africa").description("Continent").build())
+                GeoLocation.builder().name("Africa").description("Continent").gtaaUri("test/123")
                         .role(GeoRoleType.SUBJECT).build()
             )
             .build();
@@ -122,7 +122,7 @@ public class GeoLocationTest {
     private GeoLocations geoLocations3() {
         return GeoLocations.builder()
             .owner(BROADCASTER).value(
-                GeoLocation.builder().gtaaRecord(GtaaGeoLocationRecord.builder().name("England").uri("https://wikipedia/lll").build())
+                GeoLocation.builder().name("England").gtaaUri("https://wikipedia/lll")
                         .role(GeoRoleType.RECORDED_IN).build()
 
             )

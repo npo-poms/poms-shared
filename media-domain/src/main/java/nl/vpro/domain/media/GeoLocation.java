@@ -32,7 +32,10 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "geoLocationType", propOrder = {
         "name",
-        "description"
+        "description",
+        "gtaaUri",
+        "gtaaStatus",
+        "role"
 })
 @Getter
 @Setter
@@ -52,7 +55,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     protected GeoRoleType role;
 
     @XmlTransient
-    @ManyToOne(targetEntity = GtaaGeoLocationRecord.class)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, targetEntity = GtaaGeoLocationRecord.class)
     @JoinColumn(name = "gtaa_uri")
     private GtaaGeoLocationRecord gtaaRecord = new GtaaGeoLocationRecord();
 
@@ -60,21 +63,20 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GeoLocation(@NonNull GeoRoleType role, GtaaGeoLocationRecord gtaaRecord) {
+    public GeoLocation(String name, String description, @NonNull String gtaaUri, Status gtaaStatus, @NonNull GeoRoleType role) {
         this.role = role;
-        this.gtaaRecord = gtaaRecord;
+        this.gtaaRecord = GtaaGeoLocationRecord.builder().name(name).description(description).uri(gtaaUri).status(gtaaStatus).build();
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GeoLocation(Long id, @NonNull GeoRoleType role, GtaaGeoLocationRecord gtaaRecord) {
+    public GeoLocation(Long id, @NonNull GeoRoleType role, @NonNull GtaaGeoLocationRecord gtaaRecord) {
         this(role, gtaaRecord);
         this.id = id;
     }
 
-    @lombok.Builder(builderClassName = "Builder")
-    public GeoLocation(String name, String description, @NonNull GeoRoleType role) {
+    public GeoLocation(@NonNull GeoRoleType role, @NonNull GtaaGeoLocationRecord gtaaRecord) {
         this.role = role;
-        this.gtaaRecord = GtaaGeoLocationRecord.builder().name(name).description(description).build();
+        this.gtaaRecord = gtaaRecord;
     }
 
     public GeoLocation(GeoLocation source, GeoLocations parent) {
@@ -219,13 +221,5 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         return Type.UNDEFINED;
 
     }
-
-    public static class Builder {
-        public Builder gtaaUri(String uri) {
-            return gtaaRecord(GtaaGeoLocationRecord.builder().uri(uri).build());
-        }
-    }
-
-
 
 }
