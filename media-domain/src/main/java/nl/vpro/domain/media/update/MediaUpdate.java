@@ -528,7 +528,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
             returnObject.addTargetGroups(toTargetGroups(targetGroups, owner));
         }
         if(geoLocations != null){
-            returnObject.addGeoLocations(toGeoLocations(geoLocations, owner));
+            MediaObjectOwnableLists.addOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
         }
 
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
