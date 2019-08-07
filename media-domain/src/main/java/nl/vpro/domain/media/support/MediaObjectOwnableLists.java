@@ -27,7 +27,7 @@ public class MediaObjectOwnableLists {
     }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
-    boolean add(
+    boolean addValue(
         @NonNull Set<P> set,
         @NonNull Supplier<P> creator,
         @NonNull I newValue,
@@ -35,9 +35,7 @@ public class MediaObjectOwnableLists {
         Optional<P> match = set.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
         if (match.isPresent() && match.get().getValues().contains(newValue)) {
             return false;
-        }
-
-        if (match.isPresent()) {
+        } else if (match.isPresent()) {
             newValue.setParent(match.get());
             return match.get().getValues().add(newValue);
         } else {
@@ -46,6 +44,14 @@ public class MediaObjectOwnableLists {
             newList.getValues().add(newValue);
             return set.add(newList);
         }
+    }
+
+    public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
+    MediaObject addOwnableList(@NonNull MediaObject parent, @NonNull Collection<P> list, @NonNull P newOwnableList) {
+        list.removeIf(existing -> existing.getOwner() == newOwnableList.getOwner());
+        newOwnableList.setParent(parent);
+        list.add(newOwnableList);
+        return parent;
     }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
@@ -68,6 +74,13 @@ public class MediaObjectOwnableLists {
         return false;
     }
 
+    /**
+     * Find an MediaObjectOwnableListItem given id and owner
+     * @param list collection to search into
+     * @param id
+     * @param owner
+     * @return Optional/<MediaObjectOwnableListItem/> empty if nothing matched
+     */
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     Optional<I> find(Collection<P> list, @NonNull Long id, @NonNull OwnerType owner){
         if (list == null || list.isEmpty()) {
@@ -90,25 +103,17 @@ public class MediaObjectOwnableLists {
     }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
-    MediaObject add(@NonNull MediaObject parent, @NonNull Collection<P> list, @NonNull P newOwnableList) {
-        list.removeIf(existing -> existing.getOwner() == newOwnableList.getOwner());
-        newOwnableList.setParent(parent);
-        list.add(newOwnableList);
-        return parent;
-    }
-
-    public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     void set(@NonNull MediaObject parent, @NonNull Collection<P> existingCollection, @NonNull Collection<P> newCollection) {
         if (containsDuplicateOwner(newCollection)) {
             throw new IllegalArgumentException("The list you want to set has a duplicate owner: " + newCollection);
         }
         existingCollection.clear();
         for (P i : newCollection) {
-            add(parent, existingCollection, i.clone());
+            addOwnableList(parent, existingCollection, i.clone());
         }
     }
 
-    public static <OL extends AbstractMediaObjectOwnableList> SortedSet<OL> expandOwnedList(
+    public static <OL extends MediaObjectOwnableList> SortedSet<OL> expandOwnedList(
             SortedSet<OL> values,
             BiFunction<OwnerType, List, OL> creator,
             List<OwnerType> ownersToExpand) {
