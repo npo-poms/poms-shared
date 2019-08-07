@@ -62,13 +62,12 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     public GeoLocation() {
     }
 
-    @lombok.Builder(builderClassName = "Builder")
-    public GeoLocation(String name, String description, @NonNull String gtaaUri, Status gtaaStatus, @NonNull GeoRoleType role) {
+    @lombok.Builder
+    public GeoLocation(@NonNull String name, String description, @NonNull String gtaaUri, Status gtaaStatus, @NonNull GeoRoleType role) {
         this.role = role;
         this.gtaaRecord = GtaaGeoLocationRecord.builder().name(name).description(description).uri(gtaaUri).status(gtaaStatus).build();
     }
 
-    @lombok.Builder(builderClassName = "Builder")
     public GeoLocation(Long id, @NonNull GeoRoleType role, @NonNull GtaaGeoLocationRecord gtaaRecord) {
         this(role, gtaaRecord);
         this.id = id;
@@ -84,7 +83,6 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         this.parent = parent;
     }
 
-    @lombok.Builder(builderClassName = "Builder")
     private GeoLocation(
             Long id,
             @NonNull GeoRoleType role,
