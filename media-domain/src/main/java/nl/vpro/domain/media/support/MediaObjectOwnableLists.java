@@ -1,6 +1,7 @@
 package nl.vpro.domain.media.support;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -107,5 +108,19 @@ public class MediaObjectOwnableLists {
         }
     }
 
+    public static <OL extends AbstractMediaObjectOwnableList> SortedSet<OL> expandOwnedList(
+            SortedSet<OL> values,
+            BiFunction<OwnerType, List, OL> creator,
+            List<OwnerType> ownersToExpand) {
+
+        SortedSet additions = new TreeSet();
+        for(OwnerType owner: ownersToExpand){
+
+            if(values.stream().anyMatch(value -> value.getOwner() == owner)) continue;
+            additions.add(creator.apply(owner, values.first().getValues()));
+        }
+        values.addAll(additions);
+        return values;
+    }
 
 }
