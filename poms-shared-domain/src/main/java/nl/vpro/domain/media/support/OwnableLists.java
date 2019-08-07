@@ -25,13 +25,20 @@ public class OwnableLists {
         return false;
     }
 
-    public static <T extends Ownable> Optional<T>  filter(SortedSet<T> intentions, OwnerType owner){
-        if(intentions == null || intentions.isEmpty()) return Optional.empty();
-        for (T intention : intentions) {
+    /**
+     * Return the element to display
+     * @param ownableSet the collection of all the sets
+     * @param owner to match
+     * @param <T>
+     * @return the element matching the given owner or the one to display if nothing matches.
+     */
+    public static <T extends Ownable> Optional<T>  filterByOwner(SortedSet<T> ownableSet, OwnerType owner){
+        if(ownableSet == null || ownableSet.isEmpty()) return Optional.empty();
+        for (T intention : ownableSet) {
             if (intention.getOwner() == owner) {
                 return Optional.of(intention);
             }
         }
-        return Optional.of(intentions.first());
+        return Optional.of(ownableSet.first());
     };
 }
