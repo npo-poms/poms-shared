@@ -24,7 +24,7 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
  * @since 5.11
  */
 @Slf4j
-public class SchemaTest extends AbstractSchemaTest {
+public class GtaaSchemaTest extends AbstractSchemaTest {
 
 
     @BeforeClass
