@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.MediaObject;
@@ -119,7 +118,7 @@ public class MediaObjectOwnableLists {
             BiFunction<OwnerType, List, OL> creator,
             List<OwnerType> ownersToExpand) {
 
-        if(CollectionUtils.isEmpty(values)) return null;
+        if(values == null || values.isEmpty()) return null;
         SortedSet additions = new TreeSet();
         for(OwnerType owner: ownersToExpand){
 
