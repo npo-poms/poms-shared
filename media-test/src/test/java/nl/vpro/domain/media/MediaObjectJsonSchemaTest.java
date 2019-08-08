@@ -977,11 +977,12 @@ public class MediaObjectJsonSchemaTest {
     public void publisherView() throws IOException {
 
         String publisherString = Jackson2Mapper.getPublisherInstance()
-            .writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+            .writeValueAsString(MediaTestDataBuilder.program().withEverything().build());
         Map<String, Object> map = Jackson2Mapper.getInstance().readValue(publisherString, new TypeReference<Map<String, Object>>() {
         });
         assertThat(map.get("expandedTitles")).isNotNull();
         assertThat(((List) map.get("expandedTitles")).get(0)).isNotNull();
+        assertThat(((List) map.get("expandedGeoLocations")).get(0)).isNotNull();
         assertThat(((Map<String, Object>)(((List) map.get("expandedTitles")).get(0))).get("value")).isEqualTo("Main title");
 
         log.info("{}", publisherString);
@@ -990,6 +991,39 @@ public class MediaObjectJsonSchemaTest {
         assertThat(p.getMainTitle()).isEqualTo("Main title");
     }
 
+    @Test
+    public void publisherViewGeoLocations() throws IOException {
+
+        final Program program = program().withGeoLocations().build();
+        final GeoLocations broadcasterGeo = program.getGeoLocations().first();
+        program.getGeoLocations().remove(broadcasterGeo);
+        final GeoLocations newGeoLocations = GeoLocations.builder().owner(OwnerType.MIS).values(broadcasterGeo.getValues()).build();
+        program.getGeoLocations().add(newGeoLocations);
+
+        String publisherString = Jackson2Mapper.getPublisherInstance()
+                .writeValueAsString(program);
+        Map<String, Object> map = Jackson2Mapper.getInstance().readValue(publisherString, new TypeReference<Map<String, Object>>() {
+        });
+        final List expandedGeoLocations = (List) map.get("expandedGeoLocations");
+        assertThat(expandedGeoLocations.size()).isEqualTo(3);
+
+        final Map<String,Object> broadcasterGeoLoc =  (Map<String,Object>)expandedGeoLocations.get(0);
+        final Map<String,Object>  npoGeoLoc = (Map<String,Object> ) expandedGeoLocations.get(1);
+        final Map<String,Object>  misGeoLoc = (Map<String,Object> ) expandedGeoLocations.get(2);
+        assertThat(broadcasterGeoLoc.get("owner")).isEqualTo("BROADCASTER");
+        assertThat(((List)broadcasterGeoLoc.get("values")).size()).isEqualTo(2);
+
+        assertThat(npoGeoLoc.get("owner")).isEqualTo("NPO");
+        assertThat(((List)npoGeoLoc.get("values")).size()).isEqualTo(2);
+
+        assertThat(misGeoLoc.get("owner")).isEqualTo("MIS");
+        assertThat(((List)misGeoLoc.get("values")).size()).isEqualTo(1);
+
+
+
+        log.info("{}", publisherString);
+
+    }
 
     @Test
     public void normalView() throws IOException {
