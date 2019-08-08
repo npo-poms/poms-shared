@@ -153,7 +153,12 @@ public class MediaObjectTest {
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
-        mediaObject.addGeoLocation(geoLocation, BROADCASTER);
+        MediaObjectOwnableLists.addValue(
+                mediaObject.getGeoLocations(),
+                () -> new GeoLocations(mediaObject, BROADCASTER),
+                geoLocation,
+                BROADCASTER
+        );
 
         GeoLocation geoLocDiffName = GeoLocation.builder().name("Amsterdam2").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();;
         final boolean geoLocDiffNameResult = MediaObjectOwnableLists.remove(mediaObject.geoLocations, geoLocDiffName, BROADCASTER);

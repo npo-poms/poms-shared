@@ -1232,31 +1232,6 @@ public abstract class MediaObject
         return expandedGeoLocations;
     }
 
-    /**
-     *
-     * @deprecated See remark
-     */
-    @Deprecated
-    public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, final @NonNull OwnerType owner) {
-        return MediaObjectOwnableLists.addValue(
-            getGeoLocations(),
-            () -> new GeoLocations(this, owner),
-            newGeoLocation,
-            owner
-        );
-
-    }
-
-
-    /**
-     *
-     * @deprecated See remark
-     */
-    @Deprecated
-    public Optional<GeoLocation> findGeoLocation(@NonNull Long id,@NonNull OwnerType owner){
-        return MediaObjectOwnableLists.find(this.geoLocations, id, owner);
-    }
-
     //end region
 
     //region Intentions logic
