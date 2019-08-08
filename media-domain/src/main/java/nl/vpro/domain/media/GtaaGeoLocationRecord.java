@@ -2,15 +2,17 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.vpro.domain.gtaa.Status;
-import nl.vpro.validation.NoHtml;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.search.annotations.Indexed;
+
+import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
-import java.io.Serializable;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import nl.vpro.domain.gtaa.Status;
+import nl.vpro.validation.NoHtml;
 
 @Entity
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)

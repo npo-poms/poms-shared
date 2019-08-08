@@ -129,7 +129,6 @@
       <!--
       This dependency is afaik only relevant for annotation, hence it can be optional
       Nicer would be to drop it altogether
-
       -->
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
@@ -206,14 +205,6 @@
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
       <scope>provided</scope>
-    </dependency>
-      <dependency>
-          <groupId>org.hibernate</groupId>
-          <artifactId>hibernate-search-engine</artifactId>
-      </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-search-engine</artifactId>
     </dependency>
   </dependencies>
 </project>
