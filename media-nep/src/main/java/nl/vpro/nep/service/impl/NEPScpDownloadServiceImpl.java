@@ -82,10 +82,10 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 .executablesPaths(sshpassExecutables)
                 .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
                 .useFileCache(useFileCache)
-                .commonArgs(
-                    Arrays.asList("-p", password,
-                        scpcommand.getAbsolutePath(),
-                        "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile));
+                .commonArg(
+                    "-p", password,
+                    scpcommand.getAbsolutePath(),
+                    "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile);
             if (debugSsh) {
                 builder.commonArg("-v");
             }
