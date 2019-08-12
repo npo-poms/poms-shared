@@ -11,11 +11,11 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
 
 import nl.vpro.logging.LoggerOutputStream;
@@ -45,6 +45,9 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
     private final static Map<String, File> knownHosts = new HashMap<>();
 
 
+    private final Duration waitBetweenRetries = Duration.ofSeconds(10);
+    private final int maxDownloadRetries;
+
 
     @Inject
     public NEPScpDownloadServiceImpl(
@@ -54,10 +57,14 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         @Value("${nep.itemizer-download.hostkey}") String hostkey,
         @Value("${nep.itemizer-download.scp.useFileCache}") boolean useFileCache,
         @Value("${executables.scp}") List<String> scpExecutables,
-        @Value("${executables.sshpass}") List<String> sshpassExecutables
+        @Value("${executables.sshpass}") List<String> sshpassExecutables,
+        @Value("${nep.itemizer-download.maxDownloadRetries}") int maxDownloadRetries,
+        @Value("${nep.itemizer-download.debugSsh}") boolean debugSsh
+
+
     ) {
         this.url = username + "@" + ftpHost;
-
+        this.maxDownloadRetries = maxDownloadRetries;
         File scpcommand = CommandExecutorImpl
             .getExecutableFromStrings(scpExecutables)
             .orElseThrow(IllegalArgumentException::new);
@@ -70,14 +77,19 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
                 knownHosts.remove(hostkey);
                 tempFile = knownHosts.computeIfAbsent(hostkey, (k) -> knowHosts(ftpHost, hostkey));
             }
-            scptry = CommandExecutorImpl.builder()
+
+            CommandExecutorImpl.Builder builder = CommandExecutorImpl.builder()
                 .executablesPaths(sshpassExecutables)
                 .wrapLogInfo((message) -> message.toString().replaceAll(password, "??????"))
                 .useFileCache(useFileCache)
-                .commonArgs(Arrays.asList("-p", password, scpcommand.getAbsolutePath(), "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile))
-                .build();
-
-
+                .commonArgs(
+                    Arrays.asList("-p", password,
+                        scpcommand.getAbsolutePath(),
+                        "-o", "StrictHostKeyChecking=yes", "-o", "UserKnownHostsFile=" + tempFile));
+            if (debugSsh) {
+                builder.commonArg("-v");
+            }
+            scptry = builder.build();
         } catch (RuntimeException rte) {
             log.error(rte.getMessage(), rte);
         }
@@ -92,7 +104,9 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
             properties.getProperty("nep.itemizer-download.hostkey"),
             true,
             Arrays.asList("/local/bin/scp", "/usr/bin/scp"),
-            Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass")
+            Arrays.asList("/usr/bin/sshpass", "/opt/local/bin/sshpass"),
+            3,
+            false
         );
     }
 
@@ -118,27 +132,52 @@ public class NEPScpDownloadServiceImpl implements NEPDownloadService {
         Function<FileMetadata, Proceed> descriptorConsumer) {
         int exitCode = 0;
         String url = getUrl(nepFile);
-        try {
-            checkAvailability(nepFile, timeout, descriptorConsumer);
-            try (OutputStream out = outputStream.get()){
-                if (out != null) {
-                    exitCode = scp.execute(out, LoggerOutputStream.error(log), url, "/dev/stdout");
-                } else {
-                    log.warn("Can't download from null stream to " + url);
+        int tryNumber = 0;
+        RuntimeException catchedException;
+        do {
+            catchedException = null;
+            if (tryNumber > 0) {
+                try {
+                    Thread.sleep(waitBetweenRetries.toMillis());
+                } catch (InterruptedException ie) {
+                    return;
                 }
             }
-        } catch (IOException | InterruptedException e) {
-            log.error(e.getMessage(), e);
-        } catch (CommandExecutor.BrokenPipe bp) {
-            log.debug(bp.getMessage());
-            throw bp;
-        } catch (RuntimeException rte) {
-            log.error(rte.getMessage(), rte);
-            throw rte;
+            try {
+                checkAvailability(nepFile, timeout, descriptorConsumer);
+
+                try (OutputStream out = outputStream.get()) {
+                    if (out != null) {
+                        exitCode = scp.execute(out, LoggerOutputStream.error(log), url, "/dev/stdout");
+                    } else {
+                        log.warn("Can't download from null stream to " + url);
+                    }
+                }
+            } catch (IOException | InterruptedException e) {
+                log.error(e.getMessage(), e);
+                return;
+            } catch (CommandExecutor.BrokenPipe bp) {
+                log.debug(bp.getMessage());
+                throw bp;
+            } catch (RuntimeException rte) {
+                log.warn(rte.getMessage());
+                catchedException = rte;
+                exitCode = -100;
+            }
+            if (exitCode == 0) {
+                return;
+            } else {
+                log.warn("SCP command  from " + url + " failed. Will try again in {}", exitCode, waitBetweenRetries);
+
+            }
+        } while (tryNumber++ < maxDownloadRetries);
+
+        if (catchedException != null) {
+            log.error(catchedException.getMessage(), catchedException);
+
+            throw catchedException;
         }
-        if (exitCode != 0) {
-            throw new CommandExecutor.ExitCodeException("SCP command  from " + url + " failed", exitCode);
-        }
+        throw new CommandExecutor.ExitCodeException("SCP command  from " + url + " failed", exitCode);
 
     }
 
