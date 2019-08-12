@@ -119,7 +119,7 @@ public class MediaObjectOwnableLists {
             List<OwnerType> ownersToExpand) {
 
         if(values == null || values.isEmpty()) return null;
-        SortedSet additions = new TreeSet();
+        SortedSet<OL> additions = new TreeSet<>();
         for(OwnerType owner: ownersToExpand){
 
             if(values.stream().anyMatch(value -> value.getOwner() == owner)) continue;
