@@ -9,6 +9,7 @@ import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import javax.ws.rs.*;
@@ -59,7 +60,7 @@ public interface MediaRestService {
     SuggestResult suggest(
         @QueryParam("input") @Size(min = 1) String input,
         @QueryParam(PROFILE) String profile,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
 
@@ -77,7 +78,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     /**
@@ -90,7 +91,7 @@ public interface MediaRestService {
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     @GET
@@ -131,7 +132,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     @POST
@@ -142,7 +143,7 @@ public interface MediaRestService {
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     /**
@@ -156,7 +157,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     /**
@@ -170,7 +171,7 @@ public interface MediaRestService {
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     @GET
@@ -181,7 +182,7 @@ public interface MediaRestService {
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SORT) @DefaultValue(ASC) String sort,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     @POST
@@ -192,7 +193,7 @@ public interface MediaRestService {
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max
     );
 
     @GET
@@ -200,7 +201,7 @@ public interface MediaRestService {
     MediaResult listRelated(
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max,
         @QueryParam("partyId") String partyId
 
     );
@@ -212,7 +213,7 @@ public interface MediaRestService {
         @Encoded @PathParam(ID) String mid,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) @Max(Constants.MAX_RESULTS) Integer max,
         @QueryParam("partyId") String partyId
     );
 
