@@ -132,7 +132,8 @@ public class MediaObjectXmlSchemaTest {
             SubtitlesType.TRANSLATION));
 
 
-    	JAXBTestUtil.roundTripAndSimilar(program, expected);
+        Program rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
+        assertThat(rounded.getAvailableSubtitles()).hasSize(2);
 
 
     }
