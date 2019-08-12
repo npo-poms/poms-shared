@@ -132,7 +132,8 @@ public class MediaObjectXmlSchemaTest {
             SubtitlesType.TRANSLATION));
 
 
-    	JAXBTestUtil.roundTripAndSimilar(program, expected);
+        Program rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
+        assertThat(rounded.getAvailableSubtitles()).hasSize(2);
 
 
     }
@@ -885,7 +886,7 @@ public class MediaObjectXmlSchemaTest {
         StringWriter segment = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.xml"), segment, "UTF-8");
         String expected = segment.toString();
-        log.info(expected);
+        log.info("Expected: " + expected);
 
         Program program = program().lean().withGeoLocations()
                 .mid("9").avType(AVType.AUDIO)
@@ -893,12 +894,12 @@ public class MediaObjectXmlSchemaTest {
                 .build();
 
         program.setSortInstant(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).toInstant());
-        GeoLocations geoLocations = program.getGeoLocations().first();
 
         String actual = toXml(program);
 
         assertThat(actual).isXmlEqualTo(segment.toString());
 
+        GeoLocations geoLocations = program.getGeoLocations().first();
         geoLocations.setParent(null);
         GeoLocations geoLocationsWithoutParent = geoLocations;
         Program programExpected = JAXBTestUtil.unmarshal(expected, Program.class);

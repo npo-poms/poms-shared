@@ -222,7 +222,7 @@
       </xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element type="xs:anyURI" name="crid" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="crid" type="xs:anyURI" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             A crid (content reference identifier) is a reference to an entity in another system. E.g. a crid like
@@ -234,7 +234,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element type="organizationType" name="broadcaster" minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="broadcaster" type="organizationType" minOccurs="1" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             One or more broadcasters can be the owner of a POMS media object. This information is meta information about the object, but it is also used
@@ -242,7 +242,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element type="organizationType" name="portal" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="portal" type="organizationType" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             Optionally 'portals' can be assigned to a media object. Portals are also 'owners', and employees can also work for a certain portal.
@@ -250,7 +250,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element type="portalRestrictionType" name="exclusive" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="exclusive" type="portalRestrictionType" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             Besides having portals, which mainly indicates where the object originates, a media object can also be assigned 'portal restrictions'.
@@ -258,7 +258,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element type="geoRestrictionType" name="region" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="region" type="geoRestrictionType" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             Media with a geo restriction can only be played in the indicated region (NL, BENELUX, WORLD). This
@@ -266,7 +266,7 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element type="titleType" name="title" minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="title" type="titleType" minOccurs="1" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             A media object has one or more titles. All titles have a type (MAIN, SUB etc.) and an owner (BROADCASTER, MIS etc.).
@@ -277,20 +277,21 @@
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element type="descriptionType" name="description" minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="description" type="descriptionType" minOccurs="0" maxOccurs="unbounded">
         <xs:annotation>
           <xs:documentation>
             Optional descriptions for the media object. Descriptions have an owner and a type, and are ordered just like titles.
           </xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element type="genreType" name="genre" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element type="tagType" name="tag" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element type="intentionType" name="intentions" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element type="targetGroupsType" name="targetGroups"  minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element type="xs:string" name="source" minOccurs="0"/>
-      <xs:element type="countryType" name="country" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element type="languageType" name="language" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="intentions" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="targetGroups" type="targetGroupsType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="source" type="xs:string" minOccurs="0"/>
+      <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="isDubbed" type="xs:boolean" minOccurs="0"/>
       <xs:element name="availableSubtitles" type="availableSubtitleType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="avAttributesType" name="avAttributes" minOccurs="0"/>
@@ -919,6 +920,23 @@
       </xs:pattern>
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:complexType name="geoLocationsType">
+    <xs:sequence>
+      <xs:element name="geoLocation" type="geoLocationType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
+
+  <xs:complexType name="geoLocationType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="description" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute type="roleType" name="role" use="required"/>
+    <xs:attribute name="gtaaUri" type="xs:string"/>
+    <xs:attribute name="gtaaStatus" type="xs:string"/>
+  </xs:complexType>
 
   <xs:complexType name="intentionType">
     <xs:sequence>

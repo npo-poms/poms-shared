@@ -129,7 +129,6 @@
       <!--
       This dependency is afaik only relevant for annotation, hence it can be optional
       Nicer would be to drop it altogether
-
       -->
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>

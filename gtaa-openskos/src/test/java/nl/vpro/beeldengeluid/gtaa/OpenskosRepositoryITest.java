@@ -52,14 +52,14 @@ public class OpenskosRepositoryITest {
 
         GTAANewGenericConcept geographicName = GTAANewGenericConcept
                 .builder()
-                .value("Driedorp")
+                .value("Driedorp3")
                 .note("Buurtschap binnen de gemeente Nijkerk")
                 .scheme(Scheme.geographicname)
                 .build();
 
         ;
-        impl.submit(geographicName, "poms_test");
-
+        GTAAConcept concept = impl.submit(geographicName, "poms_test");
+        assertThat(concept.getNotes()).isNotEmpty();
 
         String result = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:openskos=\"http://openskos.org/xmlns#\" openskos:numFound=\"1\" openskos:rows=\"20\" openskos:start=\"0\">\n" +
                 "<rdf:Description rdf:about=\"http://data.beeldengeluid.nl/gtaa/1711531\">\n" +
@@ -79,6 +79,8 @@ public class OpenskosRepositoryITest {
                 "<dcterms:dateSubmitted>2018-10-31T13:57:47.331+01:00</dcterms:dateSubmitted>\n" +
                 "</rdf:Description>\n" +
                 "</rdf:RDF>";
+
+
     }
 
     @Test
@@ -210,27 +212,18 @@ public class OpenskosRepositoryITest {
         template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
 
 
-        //Nieuw
-        //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://production-v2.openskos.beeldengeluid.nl.pictura-dp.nl/", "8il3Ut09weJ4h1GQ", template);
-
-
-        // Acceptatie
+        // acceptatie
         //OpenskosRepository impl = new OpenskosRepository("http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
 
         // test
-//        OpenskosRepository impl = new OpenskosRepository("http://test.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
-
-
-        // Acceptatie
-        //GTAARepositoryImpl impl = new GTAARepositoryImpl("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
+        // OpenskosRepository impl = new OpenskosRepository("http://beg-openskos.test7.picturae.pro", "1dX1nJHX5GNeT8O7", template);
 
         // productie
         //OpenskosRepository impl = new OpenskosRepository("http://openskos.beeldengeluid.nl/", "1dX1nJHX5GNeT8O7", template);
 
 
         // dev
-
-        OpenskosRepository impl = new OpenskosRepository("http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
+        OpenskosRepository impl = new OpenskosRepository("http://beg-openskos.test7.picturae.pro/", "1dX1nJHX5GNeT8O7", template);
 
         impl.setUseXLLabels(true);
 

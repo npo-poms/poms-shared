@@ -279,7 +279,7 @@ public class OpenskosRepository implements GTAARepository {
                     .tenant(tenant)
                     .creator(creator)
                     .prefLabelOrXL(useXLLabels, prefLabel, tenant)
-                    .editorialNote(notes)
+                    .scopeNote(notes)
                     .dateSubmitted(Instant.now().atZone(ZONE_ID))
                     .inScheme(scheme.getUrl())
                     .build()));
