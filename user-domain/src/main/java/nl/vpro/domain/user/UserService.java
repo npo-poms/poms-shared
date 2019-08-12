@@ -103,6 +103,8 @@ public interface UserService<T extends User> {
         Supplier<R> supplier  = () -> {
             try {
                 return wrapped.call();
+            } catch (RuntimeException rte) {
+                throw  rte;
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

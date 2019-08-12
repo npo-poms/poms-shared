@@ -6,7 +6,7 @@ env:
 jdk:
 - openjdk8
 sudo: false
-script: mvn --fail-never -T 1C -DskipLocalStaging=true -Pdeploy,ossrh test deploy
+script: mvn --fail-never -T 1C -DskipLocalStaging=true -Pdeploy test deploy
   --settings .travis-settings.xml -Dgpg.skip=true
 after_success:
 - bash <(curl -s https://codecov.io/bash)

@@ -16,6 +16,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
+import nl.vpro.domain.gtaa.Status;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -455,25 +456,32 @@ public interface MediaTestDataBuilder<
         );
     }
 
+    default T withGTAARecords() {
+        return   withGeoLocations()
+        .withPersons();
+    }
+
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
-                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
-                        .description("Continent").build());
+                GeoLocation.builder().name("Africa")
+                        .description("Continent").gtaaUri("http://gtaa/1231")
+                        .role(GeoRoleType.SUBJECT).build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
-                GeoLocation.builder().name("England").role(GeoRoleType.SUBJECT)
-                        .gtaaUri("http://gtaa/1234").build(),
-                GeoLocation.builder().name("UK").role(GeoRoleType.RECORDED_IN)
-                        .gtaaUri("http://gtaa/1235").build()
+                GeoLocation.builder().role(GeoRoleType.SUBJECT)
+                        .name("England").gtaaUri("http://gtaa/1232").gtaaStatus(Status.approved).build(),
+                GeoLocation.builder()
+                        .name("UK").gtaaUri("http://gtaa/1233")
+                        .role(GeoRoleType.RECORDED_IN).build()
         );
         return geoLocations(
                 GeoLocations.builder()
                         .values(geoLocations1)
-                        .owner(NPO)
+                        .owner(BROADCASTER)
                         .build(),
                 GeoLocations.builder()
                         .values(geoLocations2)
-                        .owner(BROADCASTER)
+                        .owner(NPO)
                         .build()
         );
     }

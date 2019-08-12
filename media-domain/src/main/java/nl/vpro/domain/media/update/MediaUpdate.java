@@ -528,7 +528,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
             returnObject.addTargetGroups(toTargetGroups(targetGroups, owner));
         }
         if(geoLocations != null){
-            returnObject.addGeoLocations(toGeoLocations(geoLocations, owner));
+            MediaObjectOwnableLists.addOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
         }
 
         returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
@@ -553,7 +553,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if (intentions == null) {
             return null;
         }
-        return OwnableLists.filter(intentions, owner)
+        return OwnableLists.filterByOwner(intentions, owner)
             .map(Intentions::getValues)
             .map(l -> l.stream().map(Intention::getValue).collect(Collectors.toList()))
             .orElse(new ArrayList<>());
@@ -583,7 +583,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
             return null;
         }
         return OwnableLists
-            .filter(targetGroups, owner)
+            .filterByOwner(targetGroups, owner)
             .map(TargetGroups::getValues)
             .map(l -> l.stream().map(TargetGroup::getValue).collect(Collectors.toList()))
             .orElse(new ArrayList<>());

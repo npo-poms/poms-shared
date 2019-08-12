@@ -184,7 +184,7 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
     @JsonSubTypes.Type(value = Group.class, name = "group"),
     @JsonSubTypes.Type(value = Segment.class, name = "segment") })
 
-// TODO: Filters can be defined in hibernate-mapping in the hibernate-config.xml
+// Improvement: Filters can be defined in hibernate-mapping in the hibernate-config.xml
 // See https://docs.jboss.org/hibernate/orm/5.0/manual/en-US/html/ch19.html
 @FilterDefs({ @FilterDef(name = "titleFilter", parameters = { @ParamDef(name = "title", type = "string") }),
     @FilterDef(name = "typeFilter", parameters = { @ParamDef(name = "types", type = "string"),
@@ -263,7 +263,7 @@ public abstract class MediaObject
     @Column(name = "crids", nullable = false, unique = true) // TODO, rename to 'crid'.
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    // TODO cache configuration can be put in a hibernate-config.xml. See
+    // Improvement: cache configuration can be put in a hibernate-config.xml. See
     // https://docs.jboss.org/hibernate/orm/4.0/devguide/en-US/html/ch06.html
     @StringList(maxLength = 255)
     protected List<@NotNull @CRID  String> crids;
@@ -424,7 +424,7 @@ public abstract class MediaObject
     //@SortNatural
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 
-    // TODO: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
+    // Improvement: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
 
     // Before hiberante 5.2 we used Filter rather then FilterJoinTable.
     // It doesn't really make much sense.
@@ -510,7 +510,7 @@ public abstract class MediaObject
 
 
     /**
-     * TODO: This shoudl be moved to {@link Program}
+     * Improvement: This shoudl be moved to {@link Program}
      * mediadb=> select  mediatype(mediaobject_id), count(*) from scheduleevent group by 1;
      *  mediatype |  count
      * -----------+---------
@@ -1211,17 +1211,7 @@ public abstract class MediaObject
     }
 
     //region GeoLocations logic
-    // TODO following methods seems to be mostly utilities to deal with these kind of objects.
 
-    // Remarks:
-    // - I think the Mediaobject is huge enough already. I understand that this kind of follows the example, but I think it may be a good idea to not aggravate the issue.
-    // - I'd suggest to remove all methods besided '#getGeolocations' (and perhaps #setGeolocations to help jaxb/jackson), and move all stuff to an utility class like 'MediaObjectOwnablesLists'.
-    // All similar fields can do the same.
-    // This will:
-    //    - avoid making this class even much bigger than it is already
-    //    - must methods are only used in testing, and will not unncessarily pollute code
-    //    - avoid code duplication, for every similar field 'intentions' etc, the same thing will otherwise be needed
-    //
     @NonNull
     public SortedSet<GeoLocations> getGeoLocations() {
         return this.geoLocations = createIfNull(this.geoLocations);
@@ -1235,51 +1225,11 @@ public abstract class MediaObject
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<GeoLocations>  getExpandedGeoLocations() {
-        // TODO
-        // implmement this see getExpandedTitle
-        return geoLocations;
-    }
-    /**
-     *
-     * @deprecated See remark
-     */
-    @Deprecated
-    public boolean addGeoLocation(@NonNull GeoLocation newGeoLocation, final @NonNull OwnerType owner) {
-        return MediaObjectOwnableLists.add(
-            getGeoLocations(),
-            () -> new GeoLocations(this, owner),
-            newGeoLocation,
-            owner
+        final SortedSet<GeoLocations> expandedGeoLocations = MediaObjectOwnableLists.expandOwnedList(this.geoLocations,
+                (owner, values) -> GeoLocations.builder().values(values).owner(owner).build(),
+                OwnerType.ENTRIES
         );
-
-    }
-
-    /**
-     *
-     * @deprecated See remark
-     */
-    @Deprecated
-    public MediaObject addGeoLocations(@NonNull GeoLocations newGeoLocations) {
-        return MediaObjectOwnableLists.add(this, getGeoLocations(), newGeoLocations);
-    }
-
-    /**
-     *
-     * @deprecated See remark
-     */
-    @Deprecated
-    public boolean removeGeoLocation(@NonNull GeoLocation geoLocation, OwnerType owner) {
-        return MediaObjectOwnableLists.remove(this.geoLocations, geoLocation, owner);
-    }
-
-
-    /**
-     *
-     * @deprecated See remark
-     */
-    @Deprecated
-    public Optional<GeoLocation> findGeoLocation(@NonNull Long id,@NonNull OwnerType owner){
-        return MediaObjectOwnableLists.find(this.geoLocations, id, owner);
+        return expandedGeoLocations;
     }
 
     //end region

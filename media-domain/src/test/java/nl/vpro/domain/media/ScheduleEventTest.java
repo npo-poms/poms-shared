@@ -64,6 +64,7 @@ public class ScheduleEventTest {
             "  \"start\" : 1503928260000,\n" +
             "  \"guideDay\" : 1503871200000,\n" +
             "  \"duration\" : 600000,\n" +
+            "  \"rerun\" : false,\n" +
             "  \"eventStart\" : 1503928260000\n" +
             "}");
     }

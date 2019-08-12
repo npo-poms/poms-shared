@@ -15,10 +15,11 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import nl.vpro.domain.gtaa.Status;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -764,6 +765,10 @@ public class MediaObjectJsonSchemaTest {
             "  \"countries\" : [ ],\n" +
             "  \"languages\" : [ ]\n" +
             "}");
+
+        //Marshal
+        Program marshalled = Jackson2Mapper.INSTANCE.readValue(toJson(program), Program.class);
+        assertEquals(marshalled.intentions, program.intentions);
     }
 
     @Test
@@ -788,22 +793,69 @@ public class MediaObjectJsonSchemaTest {
                 "  \"geoLocations\" : [ {\n" +
                 "    \"owner\" : \"BROADCASTER\",\n" +
                 "    \"values\" : [ {\n" +
-                "      \"name\" : \"England\",\n" +
-                "      \"role\" : \"SUBJECT\"\n" +
-                "    }, {\n" +
-                "      \"name\" : \"UK\",\n" +
-                "      \"role\" : \"RECORDED_IN\"\n" +
+                "      \"role\" : \"SUBJECT\",\n" +
+                "      \"name\" : \"Africa\",\n" +
+                "      \"description\" : \"Continent\",\n" +
+                "      \"gtaaUri\" : \"http://gtaa/1231\"\n" +
                 "    } ]\n" +
                 "  }, {\n" +
                 "    \"owner\" : \"NPO\",\n" +
                 "    \"values\" : [ {\n" +
-                "      \"name\" : \"Africa\",\n" +
-                "      \"description\" : \"Continent\",\n" +
-                "      \"role\" : \"SUBJECT\"\n" +
+                "      \"role\" : \"SUBJECT\",\n" +
+                "      \"name\" : \"England\",\n" +
+                "      \"gtaaStatus\" : \"approved\",\n" +
+                "      \"gtaaUri\" : \"http://gtaa/1232\"\n" +
+                "    }, {\n" +
+                "      \"role\" : \"RECORDED_IN\",\n" +
+                "      \"name\" : \"UK\",\n" +
+                "      \"gtaaUri\" : \"http://gtaa/1233\"\n" +
                 "    } ]\n" +
                 "  } ]\n" +
                 "}");
     }
+
+    @Test
+    public void testMarshalWithFullGeoLocations() throws Exception {
+        StringWriter segment = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.json"), segment, "UTF-8");
+        List expected = JsonPath.read(segment.toString(),"$.OneFullGeoLocations");
+
+        GeoLocation value = GeoLocation.builder()
+                .role(GeoRoleType.RECORDED_IN)
+                .name("myName").description("myDescription").gtaaUri("myuri").gtaaStatus(Status.approved)
+                .build();
+        SortedSet geoLocations = Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build()).collect(Collectors.toCollection(TreeSet::new));
+
+        List actual = JsonPath.read(toJson2(geoLocations),"$");
+
+        JSONAssert.assertEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testUnMarshalWithFullGeoLocations() throws Exception {
+        String geoLocationsJson = "      {\n" +
+                "        \"owner\":\"BROADCASTER\",\n" +
+                "        \"values\": [{\n" +
+                "          \"name\":\"myName\",\n" +
+                "          \"description\": \"myDescription\",\n" +
+                "          \"role\":\"RECORDED_IN\",\n" +
+                "          \"gtaaUri\": \"myuri\",\n" +
+                "          \"gtaaStatus\": \"approved\"\n" +
+                "        }]\n" +
+                "      }";
+
+        GeoLocations actualGeoLocations = Jackson2Mapper.STRICT.readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
+        GeoLocation value = GeoLocation.builder()
+                .role(GeoRoleType.RECORDED_IN)
+                .name("myName").description("myDescription").gtaaUri("myuri").gtaaStatus(Status.approved)
+                .build();
+        final GeoLocations expectedGeoLocations = GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build();
+
+        assertEquals(expectedGeoLocations, actualGeoLocations);
+
+    }
+
 
     @Test
     public void testAvailableSubtitles() throws Exception {
@@ -911,14 +963,26 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
+    public void programWithEverythingMarshUnmarsh() throws Exception {
+        StringWriter programJson = new StringWriter();
+        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, "UTF-8");
+        Program program =  MediaTestDataBuilder
+                .program()
+                .withEverything()
+                .build();
+        Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
+    }
+
+    @Test
     public void publisherView() throws IOException {
 
         String publisherString = Jackson2Mapper.getPublisherInstance()
-            .writeValueAsString(MediaTestDataBuilder.program().withTitles().build());
+            .writeValueAsString(MediaTestDataBuilder.program().withEverything().build());
         Map<String, Object> map = Jackson2Mapper.getInstance().readValue(publisherString, new TypeReference<Map<String, Object>>() {
         });
         assertThat(map.get("expandedTitles")).isNotNull();
         assertThat(((List) map.get("expandedTitles")).get(0)).isNotNull();
+        assertThat(((List) map.get("expandedGeoLocations")).get(0)).isNotNull();
         assertThat(((Map<String, Object>)(((List) map.get("expandedTitles")).get(0))).get("value")).isEqualTo("Main title");
 
         log.info("{}", publisherString);
@@ -927,6 +991,39 @@ public class MediaObjectJsonSchemaTest {
         assertThat(p.getMainTitle()).isEqualTo("Main title");
     }
 
+    @Test
+    public void publisherViewGeoLocations() throws IOException {
+
+        final Program program = program().withGeoLocations().build();
+        final GeoLocations broadcasterGeo = program.getGeoLocations().first();
+        program.getGeoLocations().remove(broadcasterGeo);
+        final GeoLocations newGeoLocations = GeoLocations.builder().owner(OwnerType.MIS).values(broadcasterGeo.getValues()).build();
+        program.getGeoLocations().add(newGeoLocations);
+
+        String publisherString = Jackson2Mapper.getPublisherInstance()
+                .writeValueAsString(program);
+        Map<String, Object> map = Jackson2Mapper.getInstance().readValue(publisherString, new TypeReference<Map<String, Object>>() {
+        });
+        final List expandedGeoLocations = (List) map.get("expandedGeoLocations");
+        assertThat(expandedGeoLocations.size()).isEqualTo(3);
+
+        final Map<String,Object> broadcasterGeoLoc =  (Map<String,Object>)expandedGeoLocations.get(0);
+        final Map<String,Object>  npoGeoLoc = (Map<String,Object> ) expandedGeoLocations.get(1);
+        final Map<String,Object>  misGeoLoc = (Map<String,Object> ) expandedGeoLocations.get(2);
+        assertThat(broadcasterGeoLoc.get("owner")).isEqualTo("BROADCASTER");
+        assertThat(((List)broadcasterGeoLoc.get("values")).size()).isEqualTo(2);
+
+        assertThat(npoGeoLoc.get("owner")).isEqualTo("NPO");
+        assertThat(((List)npoGeoLoc.get("values")).size()).isEqualTo(2);
+
+        assertThat(misGeoLoc.get("owner")).isEqualTo("MIS");
+        assertThat(((List)misGeoLoc.get("values")).size()).isEqualTo(1);
+
+
+
+        log.info("{}", publisherString);
+
+    }
 
     @Test
     public void normalView() throws IOException {
@@ -945,6 +1042,12 @@ public class MediaObjectJsonSchemaTest {
     private String toJson(MediaObject program) throws IOException {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, program);
+        return writer.toString();
+    }
+
+    private <O>  String toJson2(O javaObject) throws IOException {
+        StringWriter writer = new StringWriter();
+        Jackson2Mapper.INSTANCE.writeValue(writer, javaObject);
         return writer.toString();
     }
 }

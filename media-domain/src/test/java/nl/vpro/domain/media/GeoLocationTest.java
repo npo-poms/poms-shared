@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import nl.vpro.domain.media.support.MediaObjectOwnableLists;
 import org.junit.Test;
 
 import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
@@ -29,8 +30,8 @@ public class GeoLocationTest {
         assertThat((Object) geoLocations2).isNotNull();
 
         //when I add GeoLocations
-        MediaObject newProgram = program.addGeoLocations(geoLocations1);
-        newProgram = newProgram.addGeoLocations(geoLocations2);
+        MediaObject newProgram = MediaObjectOwnableLists.addOwnableList(program, program.getGeoLocations(), geoLocations1);
+        newProgram = MediaObjectOwnableLists.addOwnableList(newProgram, newProgram.getGeoLocations(), geoLocations2);
 
         //I expect to find them
         assertThat(newProgram.getGeoLocations()).contains(geoLocations1);
@@ -51,8 +52,8 @@ public class GeoLocationTest {
         assertThat((Object) geoLocations3).isNotNull();
 
         //when I add something with same owner
-        MediaObject newProgram = program.addGeoLocations(geoLocations1);
-        newProgram = newProgram.addGeoLocations(geoLocations3);
+        MediaObject newProgram = MediaObjectOwnableLists.addOwnableList(program, program.getGeoLocations(), geoLocations1);
+        newProgram = MediaObjectOwnableLists.addOwnableList(newProgram, program.getGeoLocations(), geoLocations3);
 
         //I expect the second item to override the previous one
         assertThat(newProgram.getGeoLocations()).doesNotContain(geoLocations1);
@@ -103,8 +104,8 @@ public class GeoLocationTest {
     private GeoLocations geoLocations1() {
         return GeoLocations.builder()
                 .owner(BROADCASTER).value(
-                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
-                    .description("Continent").build()
+                GeoLocation.builder().name("Africa").description("Continent")
+                        .gtaaUri("test/123").role(GeoRoleType.SUBJECT).build()
             )
             .build();
     }
@@ -113,8 +114,8 @@ public class GeoLocationTest {
         return GeoLocations.builder()
             .owner(BROADCASTER)
             .value(
-                GeoLocation.builder().name("Africa").role(GeoRoleType.SUBJECT)
-                    .description("Continent").build()
+                GeoLocation.builder().name("Africa").description("Continent").gtaaUri("test/123")
+                        .role(GeoRoleType.SUBJECT).build()
             )
             .build();
     }
@@ -122,8 +123,8 @@ public class GeoLocationTest {
     private GeoLocations geoLocations3() {
         return GeoLocations.builder()
             .owner(BROADCASTER).value(
-                GeoLocation.builder().name("England").role(GeoRoleType.RECORDED_IN)
-                    .gtaaUri("https://wikipedia/lll").build()
+                GeoLocation.builder().name("England").gtaaUri("https://wikipedia/lll")
+                        .role(GeoRoleType.RECORDED_IN).build()
 
             )
             .build();
