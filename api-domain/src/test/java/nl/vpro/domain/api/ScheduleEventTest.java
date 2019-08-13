@@ -51,8 +51,8 @@ public class ScheduleEventTest {
             "                <media:availableSubtitles language=\"nl\" type=\"CAPTION\"/>\n" +
             "                <media:credits/>\n" +
             "                <media:locations/>\n" +
-            "                <media:scheduleEvents/>\n" +
             "                <media:images/>\n" +
+            "                <media:scheduleEvents/>\n" +
             "                <media:segments/>\n" +
             "            </media:program>\n" +
             "        </api:item>\n" +
@@ -82,8 +82,8 @@ public class ScheduleEventTest {
             "    <media:program embeddable=\"true\" mid=\"VPROWON_12346\" sortDate=\"1970-01-01T01:00:00.100+01:00\" creationDate=\"1970-01-01T01:00:00.100+01:00\" workflow=\"FOR PUBLICATION\">\n" +
             "        <media:credits/>\n" +
             "        <media:locations/>\n" +
-            "        <media:scheduleEvents/>\n" +
             "        <media:images/>\n" +
+            "        <media:scheduleEvents/>\n" +
             "        <media:segments/>\n" +
             "    </media:program>\n" +
             "</api:scheduleItem>";
