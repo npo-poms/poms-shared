@@ -732,7 +732,6 @@ public class ProgramUpdateTest extends MediaUpdateTest {
                 "        <segment embeddable=\"true\">\n" +
                 "            <duration>P0DT0H0M0.100S</duration>\n" +
                 "            <locations/>\n" +
-                "            <scheduleEvents/>\n" +
                 "            <images/>\n" +
                 "            <start>P0DT0H0M5.555S</start>\n" +
                 "        </segment>\n" +
