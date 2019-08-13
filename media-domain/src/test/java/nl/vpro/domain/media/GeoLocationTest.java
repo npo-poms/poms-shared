@@ -105,7 +105,7 @@ public class GeoLocationTest {
     private GeoLocations geoLocations1() {
         return GeoLocations.builder()
                 .owner(BROADCASTER).value(
-                GeoLocation.builder().name("Africa").scopeNotes("Continent")
+                GeoLocation.builder().name("Africa").scopeNote("Continent")
                         .gtaaUri("test/123").role(GeoRoleType.SUBJECT).build()
             )
             .build();
@@ -115,7 +115,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
             .owner(BROADCASTER)
             .value(
-                GeoLocation.builder().name("Africa").scopeNotes("Continent").gtaaUri("test/123")
+                GeoLocation.builder().name("Africa").scopeNote("Continent").gtaaUri("test/123")
                         .role(GeoRoleType.SUBJECT).build()
             )
             .build();

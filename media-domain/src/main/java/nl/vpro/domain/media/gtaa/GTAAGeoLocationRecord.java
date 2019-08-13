@@ -22,7 +22,8 @@ public class GTAAGeoLocationRecord extends GTAAConceptRecord<GTAAGeoLocationReco
     public GTAAGeoLocationRecord(
         @lombok.NonNull String uri,
         GTAAStatus status,
-        @lombok.NonNull String name, String scopeNotes) {
+        @lombok.NonNull String name,
+        String scopeNotes) {
         super(uri, status, name, scopeNotes);
     }
 

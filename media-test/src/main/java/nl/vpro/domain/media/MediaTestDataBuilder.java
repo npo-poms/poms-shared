@@ -464,7 +464,7 @@ public interface MediaTestDataBuilder<
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
                 GeoLocation.builder().name("Africa")
-                        .scopeNotes("Continent").gtaaUri("http://gtaa/1231")
+                        .scopeNote("Continent").gtaaUri("http://gtaa/1231")
                         .role(GeoRoleType.SUBJECT).build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
