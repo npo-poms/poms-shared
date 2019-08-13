@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.update;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -11,6 +13,7 @@ import javax.xml.validation.Validator;
 
 import org.junit.Test;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
@@ -31,6 +34,7 @@ import static org.junit.Assert.assertFalse;
 /**
  * @author Michiel Meeuwissen
  */
+@Slf4j
 public class MediaUpdateListTest {
 
 
@@ -109,7 +113,6 @@ public class MediaUpdateListTest {
             "                <broadcaster>VPRO</broadcaster>\n" +
             "                <title type=\"MAIN\">segmenttitel</title>\n" +
             "                <locations/>\n" +
-            "                <scheduleEvents/>\n" +
             "                <images/>\n" +
             "                <start>P0DT0H0M0.000S</start>\n" +
             "            </segment>\n" +
@@ -131,8 +134,13 @@ public class MediaUpdateListTest {
 
 
     protected void validate(String string) throws SAXException, IOException {
-        Validator validator = Xmlns.SCHEMA.newValidator();
-        validator.validate(new StreamSource(new StringReader(string)));
+        try {
+            Validator validator = Xmlns.SCHEMA.newValidator();
+            validator.validate(new StreamSource(new StringReader(string)));
+        } catch (SAXParseException se) {
+            log.error("For {}", string);
+            throw se;
+        }
     }
 
 }
