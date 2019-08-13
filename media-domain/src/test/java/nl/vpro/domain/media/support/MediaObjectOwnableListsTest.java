@@ -26,10 +26,10 @@ public class MediaObjectOwnableListsTest {
     public <OL extends AbstractMediaObjectOwnableList> void expandGeoLocation() {
 
         List<GeoLocation> geoLocation1 = Arrays.asList(
-                GeoLocation.builder().name("Amsterdam").scopeNotes("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
+                GeoLocation.builder().name("Amsterdam").scopeNote("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
         );
         List<GeoLocation> geoLocation2 = Arrays.asList(
-                GeoLocation.builder().name("Utrecht").scopeNotes("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
+                GeoLocation.builder().name("Utrecht").scopeNote("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
         );
         GeoLocations g1 = GeoLocations.builder().owner(OwnerType.MIS).values(geoLocation1).build();
         GeoLocations g2 = GeoLocations.builder().owner(OwnerType.WHATS_ON).values(geoLocation2).build();
