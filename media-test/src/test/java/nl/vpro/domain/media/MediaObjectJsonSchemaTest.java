@@ -19,7 +19,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import nl.vpro.domain.gtaa.Status;
 import org.apache.commons.io.IOUtils;
 import org.junit.After;
 import org.junit.BeforeClass;
@@ -34,6 +33,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jayway.jsonpath.JsonPath;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
+import nl.vpro.domain.gtaa.Status;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
@@ -959,7 +959,8 @@ public class MediaObjectJsonSchemaTest {
                 .program()
                 .withEverything()
                 .build();
-        Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
+        Program rounded  = Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
+        assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
     }
 
     @Test
@@ -1041,7 +1042,7 @@ public class MediaObjectJsonSchemaTest {
 
     private String toJson(MediaObject program) throws IOException {
         StringWriter writer = new StringWriter();
-        Jackson2Mapper.INSTANCE.writeValue(writer, program);
+        Jackson2Mapper.getPrettyPublisherInstance().writeValue(writer, program);
         return writer.toString();
     }
 

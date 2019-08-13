@@ -506,7 +506,11 @@ public abstract class MediaObject
 
     )
     @Valid
-    protected Set<@NotNull Location> locations;
+    @XmlElementWrapper(name = "locations")
+    @XmlElement(name = "location")
+    @JsonProperty("locations")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    protected Set<@NotNull Location> locations = new TreeSet<>();
 
 
     /**
@@ -2152,10 +2156,6 @@ public abstract class MediaObject
     }
 
 
-    @XmlElementWrapper(name = "locations")
-    @XmlElement(name = "location")
-    @JsonProperty("locations")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<Location> getLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
