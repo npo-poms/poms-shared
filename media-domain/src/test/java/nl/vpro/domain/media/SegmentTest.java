@@ -29,7 +29,6 @@ public class SegmentTest {
             "    <descendantOf urnRef=\"urn:vpro:media:group:13405607\" midRef=\"AUTO_NTROPERALIVE\" type=\"SERIES\"/>\n" +
             "    <descendantOf urnRef=\"urn:vpro:media:program:83538010\" midRef=\"RBX_NTR_2648108\" type=\"BROADCAST\"/>\n" +
             "    <locations/>\n" +
-            "    <scheduleEvents/>\n" +
             "    <images>\n" +
             "        <shared:image owner=\"RADIOBOX\" type=\"PICTURE\" highlighted=\"false\" creationDate=\"2016-11-01T04:36:34.659+01:00\" lastModified=\"2016-11-01T04:36:35.079+01:00\" urn=\"urn:vpro:media:image:83538017\" workflow=\"PUBLISHED\">\n" +
             "            <shared:title>Orfeo ed Euridice</shared:title>\n" +
@@ -99,7 +98,6 @@ public class SegmentTest {
                 "    <credits/>\n" +
                 "    <descendantOf midRef=\"parentMid\" type=\"BROADCAST\"/>\n" +
                 "    <locations/>\n" +
-                "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
                 "</segment>").getSortInstant()
         ).isEqualTo(program.getCreationInstant());
