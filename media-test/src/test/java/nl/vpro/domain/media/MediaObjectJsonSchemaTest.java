@@ -809,7 +809,8 @@ public class MediaObjectJsonSchemaTest {
                 .program()
                 .withEverything()
                 .build();
-        Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
+        Program rounded  = Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
+        assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
     }
 
     @Test

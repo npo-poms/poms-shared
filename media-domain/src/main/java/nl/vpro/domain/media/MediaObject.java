@@ -445,13 +445,28 @@ public abstract class MediaObject
 
     )
     @Valid
-    protected Set<Location> locations;
+    @XmlElementWrapper(name = "locations")
+    @XmlElement(name = "location")
+    @JsonProperty("locations")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    protected Set<Location> locations = new TreeSet<>();
 
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = false, cascade={MERGE})
+     /**
+     * Improvement: This should be moved to {@link Program}
+     * mediadb=> select  mediatype(mediaobject_id), count(*) from scheduleevent group by 1;
+     *  mediatype |  count
+     * -----------+---------
+     *  STRAND    |    3941
+     *  CLIP      |       2
+     *  BROADCAST | 1526381
+     *  MOVIE     |      20
+     */
+    @OneToMany(mappedBy = "mediaObject", orphanRemoval = true, cascade={MERGE})
     @SortNatural
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    // Caching doesn't work proprerly because ScheduleEventRepository may touch this
+    // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected Set<ScheduleEvent> scheduleEvents;
+    protected Set<@NotNull ScheduleEvent> scheduleEvents;
 
     @OneToMany(orphanRemoval = true, cascade= {ALL})
     @JoinColumn(name = "mediaobject_id", updatable = false, nullable = false)
@@ -1979,10 +1994,6 @@ public abstract class MediaObject
     }
 
 
-    @XmlElementWrapper(name = "locations")
-    @XmlElement(name = "location")
-    @JsonProperty("locations")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<Location> getLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
