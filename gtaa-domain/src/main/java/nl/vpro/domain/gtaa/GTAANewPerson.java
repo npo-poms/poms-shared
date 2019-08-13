@@ -20,7 +20,7 @@ import nl.vpro.domain.PersonInterface;
     propOrder = {
         "givenName",
         "familyName",
-        "notes"
+        "scopeNotes"
 })
 @GTAAScheme(Scheme.person)
 @XmlAccessorType(XmlAccessType.NONE)

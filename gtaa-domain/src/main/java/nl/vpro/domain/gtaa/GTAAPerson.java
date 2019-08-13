@@ -56,7 +56,7 @@ import nl.vpro.w3.rdf.Description;
 
 )
 @XmlAccessorType(XmlAccessType.NONE)
-@ToString
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.person)

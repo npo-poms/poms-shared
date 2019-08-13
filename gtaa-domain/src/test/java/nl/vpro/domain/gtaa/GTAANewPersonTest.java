@@ -25,7 +25,7 @@ public class GTAANewPersonTest {
             "  \"newObjectType\" : \"person\",\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"Puk\",\n" +
-            "  \"notes\" : [ \"test\" ]\n" +
+            "  \"scopeNotes\" : [ \"test\" ]\n" +
             "}");
 
     }
@@ -36,7 +36,7 @@ public class GTAANewPersonTest {
         String json = "{\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"Puk\",\n" +
-            "  \"notes\" : [ \"test\" ]\n" +
+            "  \"scopeNotes\" : [ \"test\" ]\n" +
             "}";
         GTAANewPerson gtaaNewPerson = Jackson2Mapper.getLenientInstance().readValue(json, GTAANewPerson.class);
     }
@@ -47,7 +47,7 @@ public class GTAANewPersonTest {
         JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newPerson   xmlns:gtaa=\"urn:vpro:gtaa:2017\" >\n" +
             "    <gtaa:givenName>Pietje</gtaa:givenName>\n" +
             "    <gtaa:familyName>Puk</gtaa:familyName>\n" +
-            "    <gtaa:note>test</gtaa:note>\n" +
+            "    <gtaa:scopeNote>test</gtaa:scopeNote>\n" +
             "</gtaa:newPerson>");
 
     }

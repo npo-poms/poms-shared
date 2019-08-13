@@ -3,6 +3,7 @@ package nl.vpro.domain.gtaa;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -25,6 +26,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlTransient
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode
+@ToString
 public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
 
@@ -68,7 +70,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
     AbstractGTAAConcept(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         this.id = id;
-        this.scopeNotes = scopeNotes;
+        this.scopeNotes = scopeNotes == null || scopeNotes.isEmpty() ? null : scopeNotes;
         this.value = value;
         this.redirectedFrom = redirectedFrom;
         this.status = status;
