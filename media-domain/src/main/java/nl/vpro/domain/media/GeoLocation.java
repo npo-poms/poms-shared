@@ -42,13 +42,14 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
         "gtaaStatus",
         "role"
 })
-@Getter
-@Setter
+
 public class GeoLocation extends DomainObject implements MediaObjectOwnableListItem<GeoLocation, GeoLocations>, Region {
 
 
     @ManyToOne(targetEntity = GeoLocations.class, fetch = FetchType.LAZY)
     @XmlTransient
+    @Getter
+    @Setter
     private GeoLocations parent;
 
     @Column(name= "role", nullable = false)
@@ -92,7 +93,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     }
 
     private GeoLocation(GeoLocation source, GeoLocations parent) {
-        this(source.getRole(), source.getGtaaRecord());
+        this(source.getRole(), source.gtaaRecord);
         this.parent = parent;
     }
 
