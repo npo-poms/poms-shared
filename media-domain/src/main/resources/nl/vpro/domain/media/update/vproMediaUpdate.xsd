@@ -203,14 +203,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element form="qualified" name="scheduleEvents" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="scheduleEvent" type="scheduleEventUpdateType" form="qualified" maxOccurs="unbounded"
-                        minOccurs="0"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="relation" type="relationUpdateType" form="qualified" maxOccurs="unbounded" minOccurs="0"/>
       <xs:element form="qualified" name="images" minOccurs="0">
         <xs:complexType>
@@ -464,6 +456,14 @@
     <xs:complexContent>
       <xs:extension base="mediaUpdateType">
         <xs:sequence>
+          <xs:element form="qualified" name="scheduleEvents" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="scheduleEvent" type="scheduleEventUpdateType" form="qualified" maxOccurs="unbounded"
+                        minOccurs="0"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element name="episodeOf" type="memberRefUpdateType" form="qualified" maxOccurs="unbounded" minOccurs="0">
             <xs:annotation>
               <xs:documentation>

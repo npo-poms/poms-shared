@@ -88,6 +88,7 @@
     <xs:complexContent>
       <xs:extension base="baseMediaType">
         <xs:sequence>
+          <xs:element type="scheduleEventsType" name="scheduleEvents" minOccurs="0"/>
           <xs:element name="episodeOf" type="memberRefType" minOccurs="0" maxOccurs="unbounded">
             <xs:annotation>
               <xs:documentation>
@@ -309,7 +310,6 @@
       <xs:element type="xs:short" name="teletext" minOccurs="0" maxOccurs="1"/>
       <xs:element type="predictionType" name="prediction" minOccurs="0" maxOccurs="2"/>
       <xs:element type="locationsType" name="locations" minOccurs="0"/>
-      <xs:element type="scheduleEventsType" name="scheduleEvents" minOccurs="0"/>
       <xs:element type="relationType" name="relation" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element type="imagesType" name="images" minOccurs="0"/>
     </xs:sequence>
