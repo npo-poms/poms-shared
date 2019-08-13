@@ -935,7 +935,7 @@
     </xs:sequence>
     <xs:attribute type="roleType" name="role" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>
-    <xs:attribute name="gtaaStatus" type="xs:string"/>
+    <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
   </xs:complexType>
 
   <xs:complexType name="intentionType">
@@ -999,6 +999,19 @@
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
+
+  <xs:simpleType name="gtaaStatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="candidate"/>
+      <xs:enumeration value="approved"/>
+      <xs:enumeration value="redirected"/>
+      <xs:enumeration value="not_compliant"/>
+      <xs:enumeration value="rejected"/>
+      <xs:enumeration value="obsolete"/>
+      <xs:enumeration value="deleted"/>
+    </xs:restriction>
+  </xs:simpleType>
+
 
   <xs:simpleType name="contentRatingType">
     <xs:restriction base="xs:string">

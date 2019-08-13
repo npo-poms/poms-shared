@@ -38,7 +38,7 @@ import nl.vpro.w3.rdf.Description;
     "value",
     "givenName",
     "familyName",
-    "notes",
+    "scopeNotes",
     "knownAs",
     "redirectedFrom"
 
@@ -49,7 +49,7 @@ import nl.vpro.w3.rdf.Description;
     "value",
     "givenName",
     "familyName",
-    "notes",
+    "scopeNotes",
     "knownAs",
     "redirectedFrom"
 }
@@ -60,7 +60,6 @@ import nl.vpro.w3.rdf.Description;
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = "person")
 @GTAAScheme(Scheme.person)
-
 public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface, Serializable {
 
     private static final long serialVersionUID = 1L;
