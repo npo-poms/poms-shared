@@ -5,10 +5,11 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 
+import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
 public class GTAAGeoLocationRecord extends GTAAConceptRecord<GTAAGeoLocationRecord> {
