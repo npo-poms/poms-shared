@@ -33,7 +33,7 @@ public class ApiScheduleEvent extends ScheduleEvent {
         super(event);
     }
 
-    public ApiScheduleEvent(nl.vpro.domain.media.ScheduleEvent event, MediaObject media) {
+    public ApiScheduleEvent(nl.vpro.domain.media.ScheduleEvent event, Program media) {
         super(event, media);
     }
 
@@ -44,20 +44,20 @@ public class ApiScheduleEvent extends ScheduleEvent {
         @XmlElement(name = "segment", namespace = Xmlns.MEDIA_NAMESPACE, type = Segment.class)
     })
     @Override
-    public MediaObject getParent() {
+    public Program getParent() {
         return super.getParent();
     }
     @Override
-    public void setParent(MediaObject o) {
+    public void setParent(Program o) {
         this.mediaObject = o;
     }
 
     @JsonProperty("media")
-    public MediaObject getMediaJSON() {
+    public Program getMediaJSON() {
         return this.getParent();
     }
 
-    public void setMediaJSON(MediaObject media) {
+    public void setMediaJSON(Program media) {
         this.setParent(media);
     }
 }

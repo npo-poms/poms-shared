@@ -32,7 +32,6 @@ import nl.vpro.domain.user.Editor;
 import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.i18n.LocalizedString;
-import nl.vpro.jmx.ForTesting;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.TimeUtils;
 
@@ -702,91 +701,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return (B) this;
     }
 
-    @SuppressWarnings("unchecked")
-    default B scheduleEvents(ScheduleEvent... scheduleEvents) {
-        for(ScheduleEvent event : scheduleEvents) {
-            event.setParent(mediaObject());
-        }
-        return (B)this;
-    }
-
-    default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger, ScheduleEventTitle... titles) {
-        return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration, merger, titles);
-    }
-
-    default B scheduleEventRerun(Channel c, LocalDateTime time, java.time.Duration duration, ScheduleEventTitle... titles) {
-        return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration,
-            e -> {e.setRepeat(Repeat.rerun());return e;},
-            titles);
-    }
-
-
-    default B scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, ScheduleEventTitle... titles) {
-        return scheduleEvent(c, time, duration, e -> e, titles);
-    }
-
-    default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger, ScheduleEventTitle... titles) {
-        ScheduleEvent event = ScheduleEvent.builder()
-            .channel(c)
-            .start(time)
-            .duration(duration)
-            .build();
-        event.setParent(mediaObject());
-        for (ScheduleEventTitle title : titles) {
-            event.addTitle(title);
-        }
-        merger.apply(event);
-        return (B) this;
-    }
-
-     default B scheduleEvent(ScheduleEvent event) {
-        event.setParent(mediaObject());
-        return (B) this;
-    }
-
-    default B scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, ScheduleEventTitle... titles) {
-        return scheduleEvent(c, time, duration, e->e, titles);
-    }
-
-
-    @SuppressWarnings("unchecked")
-    default B firstScheduleEventTitles(ScheduleEventTitle... titles) {
-        for (ScheduleEventTitle title : titles) {
-            mediaObject().getScheduleEvents().first().addTitle(title);
-        }
-        return (B) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    default B scheduleEventTitles(Channel channel, LocalDateTime time, ScheduleEventTitle... titles) {
-        ScheduleEvent scheduleEvent = MediaObjects.findScheduleEvent(channel, time, mediaObject().getScheduleEvents());
-        if (scheduleEvent != null) {
-            for (ScheduleEventTitle title : titles) {
-                scheduleEvent.addTitle(title);
-            }
-        }
-        return (B) this;
-    }
-
-
-    @SuppressWarnings("unchecked")
-    default B firstScheduleEventDescriptions(ScheduleEventDescription... descriptions) {
-        for (ScheduleEventDescription description : descriptions) {
-            mediaObject().getScheduleEvents().first().addDescription(description);
-        }
-        return (B) this;
-    }
-
-    @SuppressWarnings("unchecked")
-    default B scheduleEventDescriptions(Channel channel, LocalDateTime time, ScheduleEventDescription... descriptions) {
-        ScheduleEvent scheduleEvent = MediaObjects.findScheduleEvent(channel, time, mediaObject().getScheduleEvents());
-        if (scheduleEvent != null) {
-            for (ScheduleEventDescription description : descriptions) {
-                scheduleEvent.addDescription(description);
-            }
-        }
-        return (B) this;
-    }
 
     /**
      * This adds descendantOf's explicitely. The use cases for this are limited, a mediaobject basicly has {@link #memberOf} or {@link ProgramBuilder#episodeOf(String)}
@@ -966,6 +880,92 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
 
         public T type(ProgramType type) {
             mediaObject().setType(type);
+            return (T) this;
+        }
+
+        @SuppressWarnings("unchecked")
+        public T  scheduleEvents(ScheduleEvent... scheduleEvents) {
+            for(ScheduleEvent event : scheduleEvents) {
+                event.setParent(mediaObject());
+            }
+            return (T)this;
+        }
+
+        public T scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger, ScheduleEventTitle... titles) {
+            return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration, merger, titles);
+        }
+
+        public T  scheduleEventRerun(Channel c, LocalDateTime time, java.time.Duration duration, ScheduleEventTitle... titles) {
+            return scheduleEvent(c, time.atZone(Schedule.ZONE_ID).toInstant(), duration,
+                e -> {e.setRepeat(Repeat.rerun());return e;},
+                titles);
+        }
+
+
+        public T scheduleEvent(Channel c, LocalDateTime time, java.time.Duration duration, ScheduleEventTitle... titles) {
+            return scheduleEvent(c, time, duration, e -> e, titles);
+        }
+
+        public T scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, Function<ScheduleEvent, ScheduleEvent> merger, ScheduleEventTitle... titles) {
+            ScheduleEvent event = ScheduleEvent.builder()
+                .channel(c)
+                .start(time)
+                .duration(duration)
+                .build();
+            event.setParent(mediaObject());
+            for (ScheduleEventTitle title : titles) {
+                event.addTitle(title);
+            }
+            merger.apply(event);
+            return (T) this;
+        }
+
+        public T scheduleEvent(ScheduleEvent event) {
+            event.setParent(mediaObject());
+            return (T) this;
+        }
+
+        public T scheduleEvent(Channel c, java.time.Instant time, java.time.Duration duration, ScheduleEventTitle... titles) {
+            return scheduleEvent(c, time, duration, e->e, titles);
+        }
+
+
+        @SuppressWarnings("unchecked")
+        public T firstScheduleEventTitles(ScheduleEventTitle... titles) {
+            for (ScheduleEventTitle title : titles) {
+                mediaObject().getScheduleEvents().first().addTitle(title);
+            }
+            return (T) this;
+        }
+
+        @SuppressWarnings("unchecked")
+        public T scheduleEventTitles(Channel channel, LocalDateTime time, ScheduleEventTitle... titles) {
+            ScheduleEvent scheduleEvent = MediaObjects.findScheduleEvent(channel, time, mediaObject().getScheduleEvents());
+            if (scheduleEvent != null) {
+                for (ScheduleEventTitle title : titles) {
+                    scheduleEvent.addTitle(title);
+                }
+            }
+            return (T) this;
+        }
+
+
+        @SuppressWarnings("unchecked")
+        public T firstScheduleEventDescriptions(ScheduleEventDescription... descriptions) {
+            for (ScheduleEventDescription description : descriptions) {
+                mediaObject().getScheduleEvents().first().addDescription(description);
+            }
+            return (T) this;
+        }
+
+        @SuppressWarnings("unchecked")
+        public T  scheduleEventDescriptions(Channel channel, LocalDateTime time, ScheduleEventDescription... descriptions) {
+            ScheduleEvent scheduleEvent = MediaObjects.findScheduleEvent(channel, time, mediaObject().getScheduleEvents());
+            if (scheduleEvent != null) {
+                for (ScheduleEventDescription description : descriptions) {
+                    scheduleEvent.addDescription(description);
+                }
+            }
             return (T) this;
         }
 

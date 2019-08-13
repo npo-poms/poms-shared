@@ -4,12 +4,14 @@ import java.util.*;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -23,6 +25,7 @@ import nl.vpro.domain.user.Portal;
 import nl.vpro.domain.user.ThirdParty;
 import nl.vpro.validation.Broadcast;
 
+import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
 
 /**
@@ -42,6 +45,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 @XmlRootElement(name = "program")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "programType", propOrder = {
+    "scheduleEvents",
     "episodeOf",
     "segments",
     "poProgTypeLegacy"
@@ -54,6 +58,16 @@ public class Program extends MediaObject {
     public static MediaBuilder.ProgramBuilder builder() {
         return MediaBuilder.program();
     }
+
+
+    @OneToMany(mappedBy = "mediaObject", orphanRemoval = true, cascade={MERGE})
+    @SortNatural
+    // Caching doesn't work properly because ScheduleEventRepository may touch this
+    // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
+    protected Set<@NotNull ScheduleEvent> scheduleEvents;
+
+
 
     // DRS I found that the 'hardcoded' mediaobject alias in the filter below changes when
     // relational fields are added; I had to change the alias from mediaobjec_9 to mediaobjec_11
@@ -123,6 +137,8 @@ public class Program extends MediaObject {
         source.getSegments().forEach(segment -> this.addSegment(Segment.copy(segment)));
         this.type = source.type;
         this.poProgType = source.poProgType;
+        source.getScheduleEvents()
+            .forEach(scheduleevent -> this.addScheduleEvent(ScheduleEvent.copy(scheduleevent, this)));
     }
 
     public static Program copy(Program source) {
@@ -131,6 +147,48 @@ public class Program extends MediaObject {
         }
         return new Program(source);
     }
+
+    public boolean hasScheduleEvents() {
+        return scheduleEvents != null && scheduleEvents.size() > 0;
+    }
+
+    @XmlElementWrapper(name = "scheduleEvents")
+    @XmlElement(name = "scheduleEvent")
+    @JsonProperty("scheduleEvents")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @JsonManagedReference
+    public SortedSet<ScheduleEvent> getScheduleEvents() {
+        if (scheduleEvents == null) {
+            scheduleEvents = new TreeSet<>();
+        }
+        // return Collections.unmodifiableSortedSet(scheduleEvents); Would be
+        // nice for hibernate, but jaxb gets confused (run ScheduleTest)
+        return sorted(scheduleEvents);
+    }
+
+    public void setScheduleEvents(SortedSet<ScheduleEvent> scheduleEvents) {
+        this.scheduleEvents = scheduleEvents;
+        invalidateSortDate();
+    }
+
+    MediaObject addScheduleEvent(ScheduleEvent scheduleEvent) {
+        if (scheduleEvent != null) {
+            if (scheduleEvents == null) {
+                scheduleEvents = new TreeSet<>();
+            }
+            scheduleEvents.add(scheduleEvent);
+            invalidateSortDate();
+        }
+        return this;
+    }
+
+    boolean removeScheduleEvent(ScheduleEvent scheduleEvent) {
+        if (scheduleEvents != null) {
+            return scheduleEvents.remove(scheduleEvent);
+        }
+        return false;
+    }
+
 
     private static boolean isEmpty(Collection<?> collection) {
         return collection == null || collection.isEmpty();

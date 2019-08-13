@@ -1042,7 +1042,7 @@ public class MediaObjectJsonSchemaTest {
 
     private String toJson(MediaObject program) throws IOException {
         StringWriter writer = new StringWriter();
-        Jackson2Mapper.getPrettyPublisherInstance().writeValue(writer, program);
+        Jackson2Mapper.getPublisherInstance().writeValue(writer, program);
         return writer.toString();
     }
 

@@ -12,6 +12,7 @@ import org.meeuw.xml.bind.annotation.XmlDocumentation;
 
 import nl.vpro.domain.constraint.DateConstraint;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ScheduleEvent;
 
 /**
@@ -35,9 +36,11 @@ public class ScheduleEventDateConstraint extends DateConstraint<MediaObject> {
 
     @Override
     public boolean test(MediaObject input) {
-        for(ScheduleEvent scheduleEvent : input.getScheduleEvents()) {
-            if (applyDate(scheduleEvent.getStartInstant())) {
-                return true;
+        if (input instanceof Program) {
+            for (ScheduleEvent scheduleEvent : ((Program) input).getScheduleEvents()) {
+                if (applyDate(scheduleEvent.getStartInstant())) {
+                    return true;
+                }
             }
         }
 

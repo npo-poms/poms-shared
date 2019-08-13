@@ -50,7 +50,7 @@ public class ScheduleEvents {
         return builder.toString();
     }
 
-    public static String userFriendlyToString(MediaObject object) {
+    public static String userFriendlyToString(Program object) {
         return userFriendlyToString(object.getScheduleEvents());
     }
 

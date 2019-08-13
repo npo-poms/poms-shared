@@ -198,13 +198,26 @@ public class MediaObjects {
     public static void copyFull(@NonNull MediaObject from, @NonNull MediaObject to) {
         copy(from, to);
         to.setMid(from.getMid());
-        to.setScheduleEvents(from.getScheduleEvents());
         if (to.getClass().isAssignableFrom(from.getClass())) {
             to.setMediaType(from.getMediaType());
+            if (to instanceof Program) {
+                copyFullProgram((Program) from,  (Program) to);
+            }
         }
         to.setMemberOf(from.getMemberOf());
         to.setCrids(from.getCrids());
 
+
+    }
+
+     /**
+     * A more full copy, also copying field that you could normally not copy, like MID.
+     *
+     * The assumption is that both objects are not yet persistent
+     * @since 5.11
+     */
+    public static void copyFullProgram(@NonNull Program from, @NonNull Program  to) {
+        to.setScheduleEvents(from.getScheduleEvents());
     }
 
 
@@ -213,11 +226,11 @@ public class MediaObjects {
         matchBroadcasters(broadcasterService, mediaObject, null);
     }
 
-    public static boolean hasChannel(MediaObject media, Channel... channels) {
+    public static boolean hasChannel(Program media, Channel... channels) {
         return hasChannel(media, Arrays.asList(channels));
     }
 
-    public static boolean hasChannel(MediaObject media, Collection<Channel> channels) {
+    public static boolean hasChannel(Program media, Collection<Channel> channels) {
         for (ScheduleEvent scheduleEvent : media.getScheduleEvents()) {
             if (channels.contains(scheduleEvent.getChannel())) {
                 return true;
@@ -226,7 +239,7 @@ public class MediaObjects {
         return false;
     }
 
-    public static ScheduleEvent findScheduleEventHonoringOffset(MediaObject media, ScheduleEvent source) {
+    public static ScheduleEvent findScheduleEventHonoringOffset(Program media, ScheduleEvent source) {
         for (ScheduleEvent existing : media.getScheduleEvents()) {
             if (ScheduleEvents.equalHonoringOffset(existing, source)) {
                 return existing;
@@ -274,7 +287,7 @@ public class MediaObjects {
     /**
      * Returns the channel associated with this program. That is the channel of the earliest schedule event that is not a rerun.
      */
-    public static Channel getChannel(@NonNull MediaObject program) {
+    public static Channel getChannel(@NonNull Program program) {
         for (ScheduleEvent se : program.getScheduleEvents()) {
             if (! ScheduleEvents.isRerun(se)) {
                 return se.getChannel();
@@ -409,15 +422,18 @@ public class MediaObjects {
             }
         }
         Instant date = null;
-        if (mo.scheduleEvents != null && mo.scheduleEvents.size() > 0) {
-            List<ScheduleEvent> list = new ArrayList<>(mo.scheduleEvents);
-            list.sort(Collections.reverseOrder());
-            date = list.stream()
-                .filter(ScheduleEvents::isOriginal).findFirst()
-                // TODO for groups we also filter before now. Shouldn't we do that for programs too?
-                // .filter(se -> se.getStartInstant().isBefore(Instant.now))
-                .map(ScheduleEvent::getStartInstant)
-                .orElse(null);
+        if (mo instanceof Program) {
+            Program p = (Program) mo;
+            if (p.scheduleEvents != null && p.scheduleEvents.size() > 0) {
+                List<ScheduleEvent> list = new ArrayList<>(p.scheduleEvents);
+                list.sort(Collections.reverseOrder());
+                date = list.stream()
+                    .filter(ScheduleEvents::isOriginal).findFirst()
+                    // TODO for groups we also filter before now. Shouldn't we do that for programs too?
+                    // .filter(se -> se.getStartInstant().isBefore(Instant.now))
+                    .map(ScheduleEvent::getStartInstant)
+                    .orElse(null);
+            }
         }
         if (date == null) {
             if (mo.predictions != null && mo.predictions.size() > 0) {

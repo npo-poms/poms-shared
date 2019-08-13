@@ -4,22 +4,23 @@
  */
 package nl.vpro.domain.media.update;
 
+import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javax.validation.Valid;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.media.MediaBuilder;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.ProgramType;
-import nl.vpro.domain.media.Segment;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.OwnerType;
 
 
 @XmlRootElement(name = "program")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "programUpdateType", propOrder = {
+    "scheduleEvents",
     "episodeOf",
     "segments"
 })
@@ -30,6 +31,10 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
     @Valid
     protected SortedSet<MemberRefUpdate> episodeOf;
+
+    @Valid
+    protected  SortedSet<ScheduleEventUpdate> scheduleEvents;
+
 
 
     private ProgramType programType;
@@ -73,6 +78,8 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         this.programType = mediaobject.getType();
         this.segments = toSet(mediaobject.getSegments(), s -> SegmentUpdate.createForParent(this, s, owner));
         this.episodeOf = toSet(mediaobject.getEpisodeOf(), MemberRefUpdate::create);
+        this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
+
     }
 
     @Override
@@ -82,16 +89,22 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     }
 
     @Override
-    public Program fetch(OwnerType ownerType) {
-        Program p  = super.fetch(ownerType);
+    public Program fetch(OwnerType owner) {
+        Program p  = super.fetch(owner);
         p.setType(programType);
         p.setSegments(toSet(segments, (s) -> {
-                Segment result = s.fetch(ownerType);
+                Segment result = s.fetch(owner);
                 result.setMidRef(null);
                 result.setParent(p);
                 return result;
             })
         );
+
+        p.setScheduleEvents(toSet(scheduleEvents, s -> {
+            ScheduleEvent e = s.toScheduleEvent(owner);
+            e.setParent(p);
+            return e;
+        }));
         return p;
     }
 
@@ -111,6 +124,20 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
 
     public void setType(ProgramType type) {
         this.programType = type;
+    }
+
+    @XmlElementWrapper(name = "scheduleEvents")
+    @XmlElement(name = "scheduleEvent")
+    @NonNull
+    public SortedSet<ScheduleEventUpdate> getScheduleEvents() {
+        if (scheduleEvents == null) {
+            scheduleEvents = new TreeSet<>();
+        }
+        return scheduleEvents;
+    }
+
+    public void setScheduleEvent(ScheduleEventUpdate... events) {
+        this.scheduleEvents = new TreeSet<>(Arrays.asList(events));
     }
 
     @XmlElement
