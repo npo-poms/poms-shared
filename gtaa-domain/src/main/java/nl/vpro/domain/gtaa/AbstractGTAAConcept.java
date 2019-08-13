@@ -80,7 +80,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
         if (description.getPrefLabel() != null) {
             answer.setValue(description.getPrefLabel().getValue());
         }
-        answer.setScopeNotes(description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList()));
+        answer.setScopeNotes(description.getScopeNote() == null ? null : description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList()));
         answer.setStatus(description.getStatus());
         if (description.getChangeNote() != null) {
             description.getRedirectedFrom().ifPresent(answer::setRedirectedFrom);
