@@ -159,7 +159,7 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
             answer.familyName = prefName.getFamilyName();
         }
 
-        answer.scopeNotes = description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList());
+        answer.scopeNotes = description.getScopeNote() == null ? null : description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList());
         answer.lastModified = description.getModified() == null ? null : description.getModified().getValue().toInstant();
 
         if (description.getAltLabels() != null && !description.getAltLabels().isEmpty()) {
