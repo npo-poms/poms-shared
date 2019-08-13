@@ -100,7 +100,7 @@ import static nl.vpro.domain.TextualObjects.sorted;
 public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventIdentifier>,
     Comparable<ScheduleEvent>,
     TextualObject<ScheduleEventTitle, ScheduleEventDescription, ScheduleEvent>,
-    Child<MediaObject> {
+    Child<Program> {
 
     @Id
     @Enumerated(EnumType.STRING)
@@ -149,7 +149,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JsonBackReference
-    protected MediaObject mediaObject;
+    protected Program mediaObject;
 
     @Enumerated(EnumType.STRING)
     protected ScheduleEventType type;
@@ -205,11 +205,11 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this(channel, net, guideDay, start, duration, null);
     }
 
-    public ScheduleEvent(Channel channel, Instant start, Duration duration, MediaObject media) {
+    public ScheduleEvent(Channel channel, Instant start, Duration duration, Program media) {
         this(channel, null, guideLocalDate(start), start, duration, media);
     }
 
-    public ScheduleEvent(Channel channel, Net net, Instant start, Duration duration, MediaObject media) {
+    public ScheduleEvent(Channel channel, Net net, Instant start, Duration duration, Program media) {
         this(channel, net, guideLocalDate(start), start, duration, media);
     }
 
@@ -219,7 +219,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @Nullable LocalDate guideDay,
         @NonNull  Instant start,
         @NonNull  Duration duration,
-        @Nullable MediaObject media) {
+        @Nullable Program media) {
         this(channel, net, guideDay, start, duration, null, media, null);
     }
 
@@ -231,7 +231,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         @NonNull  Instant start,
         @NonNull  Duration duration,
         String midRef,
-        @Nullable MediaObject media,
+        @Nullable Program media,
         @Nullable  Repeat repeat) {
         this.channel = channel;
         this.net = net;
@@ -280,7 +280,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
      * @deprecated use constructor with types from java.time
      */
     @Deprecated
-    public ScheduleEvent(Channel channel, Date start, Date duration, MediaObject media) {
+    public ScheduleEvent(Channel channel, Date start, Date duration, Program media) {
         this(channel, null, guideDay(start), start, duration, media);
     }
 
@@ -288,7 +288,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
      * @deprecated use constructor with types from java.time
      */
     @Deprecated
-    public ScheduleEvent(Channel channel, Net net, Date start, Date duration, MediaObject media) {
+    public ScheduleEvent(Channel channel, Net net, Date start, Date duration, Program media) {
         this(channel, net, guideDay(start), start, duration, media);
     }
 
@@ -296,7 +296,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
      * @deprecated use constructor with types from java.time
      */
     @Deprecated
-    public ScheduleEvent(Channel channel, Net net, Date guideDay, Date start, Date duration, MediaObject media) {
+    public ScheduleEvent(Channel channel, Net net, Date guideDay, Date start, Date duration, Program media) {
         this(channel, net, guideLocalDate(guideDay), instant(start), duration(duration), media);
     }
 
@@ -305,7 +305,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         this(source, source.mediaObject);
     }
 
-    public ScheduleEvent(ScheduleEvent source, MediaObject parent) {
+    public ScheduleEvent(ScheduleEvent source, Program parent) {
         this.channel = source.channel;
         this.net = source.net;
         this.start = source.start;
@@ -335,7 +335,7 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
         return copy(source, source.mediaObject);
     }
 
-    public static ScheduleEvent copy(ScheduleEvent source, MediaObject parent) {
+    public static ScheduleEvent copy(ScheduleEvent source, Program parent) {
         if (source == null) {
             return null;
         }
@@ -618,12 +618,12 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
 
     @Override
     @XmlTransient
-    public MediaObject getParent() {
+    public Program getParent() {
         return mediaObject;
     }
 
     @Override
-    public void setParent(MediaObject mediaObject) {
+    public void setParent(Program mediaObject) {
         if (this.mediaObject != null) {
             this.mediaObject.removeScheduleEvent(this);
         }
@@ -758,8 +758,8 @@ public class ScheduleEvent implements Serializable, Identifiable<ScheduleEventId
     }
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-        if (parent instanceof MediaObject) {
-            this.mediaObject = (MediaObject) parent;
+        if (parent instanceof Program) {
+            this.mediaObject = (Program) parent;
         }
 
         if (guideDay == null && start != null) {

@@ -324,21 +324,21 @@ public class Schedule implements Serializable, Iterable<ScheduleEvent>, Predicat
 
 
 
-    public void addScheduleEventsFromMedia(Collection<? extends MediaObject> mediaObjects) {
+    public void addScheduleEventsFromMedia(Collection<? extends Program> mediaObjects) {
         if (scheduleEvents == null) {
             scheduleEvents = new TreeSet<>();
         }
-        for (MediaObject mediaObject : mediaObjects) {
+        for (Program mediaObject : mediaObjects) {
             scheduleEvents.addAll(mediaObject.getScheduleEvents());
         }
     }
 
 
-    public void addScheduleEventsFromMedia(MediaObject... mediaObjects) {
+    public void addScheduleEventsFromMedia(Program... mediaObjects) {
         addScheduleEventsFromMedia(Arrays.asList(mediaObjects));
     }
 
-    public void addScheduleEventsFromMedia(MediaObject mediaObject) {
+    public void addScheduleEventsFromMedia(Program mediaObject) {
         if (scheduleEvents == null) {
             scheduleEvents = new TreeSet<>();
         }

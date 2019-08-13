@@ -106,7 +106,6 @@ import nl.vpro.xml.bind.LocaleAdapter;
         "twitterrefs",
         "predictions",
         "locations",
-        "scheduleEvents",
         "relations",
         "images",
         "asset"
@@ -285,11 +284,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     private SortedSet<RelationUpdate> relations;
 
-
-    private SortedSet<ScheduleEventUpdate> scheduleEvents;
-
     protected SortedSet<PredictionUpdate> predictions;
-
 
 
     @Getter
@@ -364,7 +359,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == owner, LocationUpdate::new);
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
-        this.scheduleEvents = toSet(mediaobject.getScheduleEvents(), (s) -> new ScheduleEventUpdate(this, s));
         this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability,PredictionUpdate::of);
 
     }
@@ -531,11 +525,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
             MediaObjectOwnableLists.addOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
         }
 
-        returnObject.setScheduleEvents(toSet(scheduleEvents, s -> {
-            ScheduleEvent e = s.toScheduleEvent(owner);
-            e.setParent(returnObject);
-            return e;
-        }));
 
         return returnObject;
     }
@@ -1185,19 +1174,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.locations = new TreeSet<>(Arrays.asList(locations));
     }
 
-    @XmlElementWrapper(name = "scheduleEvents")
-    @XmlElement(name = "scheduleEvent")
-    @NonNull
-    public SortedSet<ScheduleEventUpdate> getScheduleEvents() {
-        if (scheduleEvents == null) {
-            scheduleEvents = new TreeSet<>();
-        }
-        return scheduleEvents;
-    }
 
-    public void setScheduleEvent(ScheduleEventUpdate... events) {
-        this.scheduleEvents = new TreeSet<>(Arrays.asList(events));
-    }
 
     @XmlElement(name = "relation")
     @NonNull

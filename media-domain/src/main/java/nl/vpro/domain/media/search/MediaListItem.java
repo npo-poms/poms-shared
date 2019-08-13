@@ -205,6 +205,14 @@ public class MediaListItem extends PublishableListItem {
         if(media instanceof Program) {
             // proxy's...
             this.mediaType = Program.class.getName();
+            SortedSet<ScheduleEvent> scheduleEvents = ((Program) media).getScheduleEvents();
+            if(scheduleEvents.size() > 0) {
+                this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, false).orElse(null);
+                this.firstScheduleEventNoRerun = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, true).orElse(null);
+                this.lastScheduleEvent= ScheduleEvents.getLastScheduleEvent(scheduleEvents, false).orElse(null);
+                this.lastScheduleEventNoRerun = ScheduleEvents.getLastScheduleEvent(scheduleEvents, true).orElse(null);
+                this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(scheduleEvents).orElse(null);
+            }
         } else if(media instanceof Group) {
             this.mediaType = Group.class.getName();
         } else if(media instanceof Segment) {
@@ -220,13 +228,7 @@ public class MediaListItem extends PublishableListItem {
 
         this.lastPublished = media.getLastPublishedInstant();
 
-        if(media.getScheduleEvents().size() > 0) {
-            this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(media.getScheduleEvents(), false).orElse(null);
-            this.firstScheduleEventNoRerun = ScheduleEvents.getFirstScheduleEvent(media.getScheduleEvents(), true).orElse(null);
-            this.lastScheduleEvent= ScheduleEvents.getLastScheduleEvent(media.getScheduleEvents(), false).orElse(null);
-            this.lastScheduleEventNoRerun = ScheduleEvents.getLastScheduleEvent(media.getScheduleEvents(), true).orElse(null);
-            this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(media.getScheduleEvents()).orElse(null);
-        }
+
     }
 
     @Override

@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.validation.Valid;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.meeuw.xml.bind.annotation.XmlDocumentation;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -33,6 +33,8 @@ import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.Title;
 import nl.vpro.domain.user.Broadcaster;
+
+;
 
 /**
  * @author Roelof Jan Koekoek
@@ -331,10 +333,12 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             return true;
         }
 
-        for (ScheduleEvent event : input.getScheduleEvents()) {
-            for (ScheduleEventSearch search : scheduleEvents) {
-                if (search.test(event)) {
-                    return true;
+        if (input instanceof Program) {
+            for (ScheduleEvent event : ((Program) input).getScheduleEvents()) {
+                for (ScheduleEventSearch search : scheduleEvents) {
+                    if (search.test(event)) {
+                        return true;
+                    }
                 }
             }
         }

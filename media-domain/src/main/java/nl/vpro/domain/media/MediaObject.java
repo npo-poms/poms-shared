@@ -70,7 +70,6 @@ import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObject.*;
 import static nl.vpro.domain.media.support.MediaObjectOwnableLists.createIfNull;
@@ -513,23 +512,6 @@ public abstract class MediaObject
     protected Set<@NotNull Location> locations = new TreeSet<>();
 
 
-    /**
-     * Improvement: This shoudl be moved to {@link Program}
-     * mediadb=> select  mediatype(mediaobject_id), count(*) from scheduleevent group by 1;
-     *  mediatype |  count
-     * -----------+---------
-     *  STRAND    |    3941
-     *  CLIP      |       2
-     *  BROADCAST | 1526381
-     *  MOVIE     |      20
-     */
-    @OneToMany(mappedBy = "mediaObject", orphanRemoval = true, cascade={MERGE})
-    @SortNatural
-    // Caching doesn't work proprerly because ScheduleEventRepository may touch this
-    // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    @Valid
-    protected Set<@NotNull ScheduleEvent> scheduleEvents;
-
     @OneToMany(orphanRemoval = true, cascade= {ALL})
     @JoinColumn(name = "mediaobject_id", updatable = false, nullable = false)
     @SortNatural
@@ -680,8 +662,6 @@ public abstract class MediaObject
             MediaObjects.updatePrediction(this, prediction.getPlatform(), prediction.getState());
         });
         source.getLocations().forEach(location -> this.addLocation(Location.copy(location, this)));
-        source.getScheduleEvents()
-                .forEach(scheduleevent -> this.addScheduleEvent(ScheduleEvent.copy(scheduleevent, this)));
         source.getRelations().forEach(relation -> this.addRelation(Relation.copy(relation)));
         source.getImages().forEach(images -> this.addImage(Image.copy(images)));
         this.mergedTo = source.mergedTo;
@@ -1926,6 +1906,7 @@ public abstract class MediaObject
         // it will set 'available subtitles' too.
     }
 
+
     public boolean hasEpisode(Program episode) {
         return episode.isEpisodeOf(this);
     }
@@ -2288,46 +2269,6 @@ public abstract class MediaObject
         prediction.setState(Prediction.State.REVOKED);
     }
 
-    public boolean hasScheduleEvents() {
-        return scheduleEvents != null && scheduleEvents.size() > 0;
-    }
-
-    @XmlElementWrapper(name = "scheduleEvents")
-    @XmlElement(name = "scheduleEvent")
-    @JsonProperty("scheduleEvents")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JsonManagedReference
-    public SortedSet<ScheduleEvent> getScheduleEvents() {
-        if (scheduleEvents == null) {
-            scheduleEvents = new TreeSet<>();
-        }
-        // return Collections.unmodifiableSortedSet(scheduleEvents); Would be
-        // nice for hibernate, but jaxb gets confused (run ScheduleTest)
-        return sorted(scheduleEvents);
-    }
-
-    public void setScheduleEvents(SortedSet<ScheduleEvent> scheduleEvents) {
-        this.scheduleEvents = scheduleEvents;
-        invalidateSortDate();
-    }
-
-    MediaObject addScheduleEvent(ScheduleEvent scheduleEvent) {
-        if (scheduleEvent != null) {
-            if (scheduleEvents == null) {
-                scheduleEvents = new TreeSet<>();
-            }
-            scheduleEvents.add(scheduleEvent);
-            invalidateSortDate();
-        }
-        return this;
-    }
-
-    boolean removeScheduleEvent(ScheduleEvent scheduleEvent) {
-        if (scheduleEvents != null) {
-            return scheduleEvents.remove(scheduleEvent);
-        }
-        return false;
-    }
 
     @XmlElement(name = "relation")
     @JsonProperty("relations")

@@ -5,6 +5,7 @@
 package nl.vpro.domain.constraint.media;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -14,6 +15,7 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.domain.constraint.EnumConstraint;
 import nl.vpro.domain.media.Channel;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.ScheduleEvent;
 
 /**
@@ -39,7 +41,11 @@ public class ChannelConstraint extends EnumConstraint<Channel, MediaObject> {
 
     @Override
     protected Collection<Channel> getEnumValues(MediaObject input) {
-        return input.getScheduleEvents().stream().map(ScheduleEvent::getChannel).collect(Collectors.toList());
+        if (input instanceof Program) {
+            return ((Program) input).getScheduleEvents().stream().map(ScheduleEvent::getChannel).collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
 
     }
 }
