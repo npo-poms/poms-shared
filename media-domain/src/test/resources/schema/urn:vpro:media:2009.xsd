@@ -342,7 +342,7 @@
   <xs:complexType name="geoLocationType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
-      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="scopeNotes" type="xs:string" minOccurs="0"/>
     </xs:sequence>
     <xs:attribute name="gtaaUri" type="xs:string"/>
     <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
