@@ -21,6 +21,7 @@ import static nl.vpro.jassert.assertions.MediaAssertions.mediaAssertThat;
  * @author Roelof Jan Koekoek
  * @since 1.5
  */
+@SuppressWarnings("deprecation")
 public class MediaAssertTest {
 
     @Test(expected = AssertionError.class)
