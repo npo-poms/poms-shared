@@ -300,7 +300,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withTitles().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        Jackson2TestUtil.assertThatJson(actual).isSimilarTo(expected);
     }
 
     @Test
@@ -853,7 +853,7 @@ public class MediaObjectJsonSchemaTest {
                 "    \"values\" : [ {\n" +
                 "      \"role\" : \"SUBJECT\",\n" +
                 "      \"name\" : \"Africa\",\n" +
-                "      \"description\" : \"Continent\",\n" +
+                "      \"scopeNotes\" : [\"Continent\"],\n" +
                 "      \"gtaaUri\" : \"http://gtaa/1231\"\n" +
                 "    } ]\n" +
                 "  }, {\n" +
@@ -896,7 +896,7 @@ public class MediaObjectJsonSchemaTest {
                 "        \"owner\":\"BROADCASTER\",\n" +
                 "        \"values\": [{\n" +
                 "          \"name\":\"myName\",\n" +
-                "          \"description\": \"myDescription\",\n" +
+                "          \"scopeNotes\": [\"myDescription\"],\n" +
                 "          \"role\":\"RECORDED_IN\",\n" +
                 "          \"gtaaUri\": \"myuri\",\n" +
                 "          \"gtaaStatus\": \"approved\"\n" +

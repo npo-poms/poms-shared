@@ -409,7 +409,7 @@
       "values": [
         {
           "name": "Africa",
-          "description": "Continent",
+          "scopeNotes": ["Continent"],
           "role": "SUBJECT",
           "gtaaUri": "http://gtaa/1231"
         }
