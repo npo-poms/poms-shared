@@ -63,14 +63,20 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     }
 
     @lombok.Builder
-    private GeoLocation(@NonNull String name,
-                       String scopeNotes,
-                       @NonNull String gtaaUri,
-                       @NonNull GTAAStatus gtaaStatus,
-                       @NonNull GeoRoleType role
+    private GeoLocation(
+        @NonNull String name,
+        String scopeNotes,
+        @NonNull String gtaaUri,
+        GTAAStatus gtaaStatus,
+        @NonNull GeoRoleType role
     ) {
         this.role = role;
-        this.gtaaRecord = GTAAGeoLocationRecord.builder().name(name).scopeNotes(scopeNotes).uri(gtaaUri).status(gtaaStatus).build();
+        this.gtaaRecord = GTAAGeoLocationRecord.builder()
+            .name(name)
+            .scopeNotes(scopeNotes)
+            .uri(gtaaUri)
+            .status(gtaaStatus)
+            .build();
     }
 
     public GeoLocation(Long id, @NonNull GeoRoleType role, @NonNull GTAAGeoLocationRecord gtaaRecord) {
