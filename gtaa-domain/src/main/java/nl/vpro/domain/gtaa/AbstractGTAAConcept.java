@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -34,7 +35,8 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
     @Getter
     @Setter
-    @XmlElement
+    @XmlElement(name="scopeNote")
+    @JsonProperty("scopeNotes")
     List<String> scopeNotes;
 
     @Getter
