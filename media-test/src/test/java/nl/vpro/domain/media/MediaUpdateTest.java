@@ -312,7 +312,6 @@ public class MediaUpdateTest {
                     "                    </avAttributes>\n" +
                     "                </location>\n" +
                     "            </locations>\n" +
-                    "            <scheduleEvents/>\n" +
                     "            <relation type=\"THESAURUS\" broadcaster=\"AVRO\">synoniem</relation>\n" +
                     "            <relation type=\"KOOR\" broadcaster=\"EO\">Ulfts Mannenkoor</relation>\n" +
                     "            <relation type=\"ARTIST\" broadcaster=\"VPRO\">Marco Borsato</relation>\n" +
@@ -456,7 +455,27 @@ public class MediaUpdateTest {
             "            </avAttributes>\n" +
             "        </location>\n" +
             "    </locations>\n" +
-            "    <scheduleEvents>\n" +
+            "    <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +
+            "    <relation broadcaster=\"EO\" type=\"KOOR\">Ulfts Mannenkoor</relation>\n" +
+            "    <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
+            "    <relation uriRef=\"http://www.bluenote.com/\" broadcaster=\"VPRO\" type=\"LABEL\">Blue Note</relation>\n" +
+            "    <images>\n" +
+            "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:2\">\n" +
+            "            <shared:title>Eerste plaatje met credits</shared:title>\n" +
+            "            <shared:imageUri>urn:vpro:image:11234</shared:imageUri>\n" +
+            "            <shared:credits>CREDITS</shared:credits>\n" +
+            "            <shared:source>SOURCE</shared:source>\n" +
+            "            <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
+            "        </shared:image>\n" +
+            "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:3\">\n" +
+            "            <shared:title>Tweede plaatje met credits</shared:title>\n" +
+            "            <shared:imageUri>urn:vpro:image:15678</shared:imageUri>\n" +
+            "            <shared:credits>CREDITS</shared:credits>\n" +
+            "            <shared:source>SOURCE</shared:source>\n" +
+            "            <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
+            "        </shared:image>\n" +
+            "    </images>\n" +
+              "    <scheduleEvents>\n" +
             "        <scheduleEvent channel=\"NED3\" midRef=\"VPROWON_20001\" urnRef=\"urn:vpro:media:program:12\">\n" +
             "            <guideDay>1969-12-31+01:00</guideDay>\n" +
             "            <start>1970-01-01T01:00:00.100+01:00</start>\n" +
@@ -482,26 +501,6 @@ public class MediaUpdateTest {
             "            <poProgID>VPROWON_20001</poProgID>\n" +
             "        </scheduleEvent>\n" +
             "    </scheduleEvents>\n" +
-            "    <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +
-            "    <relation broadcaster=\"EO\" type=\"KOOR\">Ulfts Mannenkoor</relation>\n" +
-            "    <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
-            "    <relation uriRef=\"http://www.bluenote.com/\" broadcaster=\"VPRO\" type=\"LABEL\">Blue Note</relation>\n" +
-            "    <images>\n" +
-            "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:2\">\n" +
-            "            <shared:title>Eerste plaatje met credits</shared:title>\n" +
-            "            <shared:imageUri>urn:vpro:image:11234</shared:imageUri>\n" +
-            "            <shared:credits>CREDITS</shared:credits>\n" +
-            "            <shared:source>SOURCE</shared:source>\n" +
-            "            <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
-            "        </shared:image>\n" +
-            "        <shared:image owner=\"BROADCASTER\" type=\"PICTURE\" highlighted=\"false\" workflow=\"FOR PUBLICATION\" urn=\"urn:vpro:media:image:3\">\n" +
-            "            <shared:title>Tweede plaatje met credits</shared:title>\n" +
-            "            <shared:imageUri>urn:vpro:image:15678</shared:imageUri>\n" +
-            "            <shared:credits>CREDITS</shared:credits>\n" +
-            "            <shared:source>SOURCE</shared:source>\n" +
-            "            <shared:license>PUBLIC_DOMAIN</shared:license>\n" +
-            "        </shared:image>\n" +
-            "    </images>\n" +
             "    <segments>\n" +
             "        <segment midRef=\"VPROWON_20001\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:12\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPROWON_12345_1\" sortDate=\"1970-01-11T01:00:00.600+01:00\" workflow=\"FOR PUBLICATION\" publishStart=\"1970-01-01T01:00:00+01:00\" publishStop=\"2500-01-01T00:00:00+01:00\" urn=\"urn:vpro:media:segment:12\">\n" +
             "            <broadcaster id=\"BNN\">BNN</broadcaster>\n" +
@@ -614,7 +613,6 @@ public class MediaUpdateTest {
             "                    </avAttributes>\n" +
             "                </location>\n" +
             "            </locations>\n" +
-            "            <scheduleEvents/>\n" +
             "            <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +
             "            <relation broadcaster=\"EO\" type=\"KOOR\">Ulfts Mannenkoor</relation>\n" +
             "            <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
