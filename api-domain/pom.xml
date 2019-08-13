@@ -35,6 +35,10 @@
       <artifactId>media-domain</artifactId>
     </dependency>
     <dependency>
+      <groupId>nl.vpro.poms</groupId>
+      <artifactId>gtaa-domain</artifactId>
+    </dependency>
+    <dependency>
       <groupId>nl.vpro.subtitles</groupId>
       <artifactId>subtitles-domain</artifactId>
     </dependency>
