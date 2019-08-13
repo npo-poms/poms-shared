@@ -296,6 +296,14 @@ public class MediaObjects {
         return null;
     }
 
+    public static SortedSet<ScheduleEvent> getScheduleEvents(MediaObject media) {
+        if (media instanceof Program) {
+            return ((Program) media).getScheduleEvents();
+        } else {
+            return Collections.emptySortedSet();
+        }
+    }
+
 
     /**
      * @since 2.2.3
