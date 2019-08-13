@@ -4,11 +4,11 @@
  */
 package nl.vpro.domain.media.update;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -25,8 +25,36 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
 @XmlRootElement(name = "segment")
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "segmentUpdateType", propOrder = {
-        "start"
-        })
+    "crids",
+    "broadcasters",
+    "portals",
+    "portalRestrictions",
+    "geoRestrictions",
+    "titles",
+    "descriptions",
+    "tags",
+    "countries",
+    "languages",
+    "genres",
+    "intentions",
+    "targetGroups",
+    "avAttributes",
+    "releaseYear",
+    "duration",
+    "persons",
+    "memberOf",
+    "ageRating",
+    "contentRatings",
+    "email",
+    "websites",
+    "twitterrefs",
+    "predictions",
+    "locations",
+    "relations",
+    "images",
+    "asset",
+    "start"
+})
 public final class SegmentUpdate extends MediaUpdate<Segment>
     implements Comparable<SegmentUpdate>, Child<ProgramUpdate> {
 

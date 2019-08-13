@@ -78,40 +78,9 @@ import nl.vpro.xml.bind.LocaleAdapter;
  */
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(
-    name = "mediaUpdateType",
-    propOrder = {
-        "crids",
-        "broadcasters",
-        "portals",
-        "portalRestrictions",
-        "geoRestrictions",
-        "titles",
-        "descriptions",
-        "tags",
-        "countries",
-        "languages",
-        "genres",
-        "intentions",
-        "targetGroups",
-        "avAttributes",
-        "releaseYear",
-        "duration",
-        "persons",
-        "memberOf",
-        "ageRating",
-        "contentRatings",
-        "email",
-        "websites",
-        "twitterrefs",
-        "predictions",
-        "locations",
-        "relations",
-        "images",
-        "asset"
-})
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
+@XmlTransient
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
     MutableEmbargoDeprecated,

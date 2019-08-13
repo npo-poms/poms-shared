@@ -14,8 +14,36 @@ import nl.vpro.domain.media.support.OwnerType;
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlType(name = "groupUpdateType",
     propOrder = {
+        "crids",
+        "broadcasters",
+        "portals",
+        "portalRestrictions",
+        "geoRestrictions",
+        "titles",
+        "descriptions",
+        "tags",
+        "countries",
+        "languages",
+        "genres",
+        "intentions",
+        "targetGroups",
+        "avAttributes",
+        "releaseYear",
+        "duration",
+        "persons",
+        "memberOf",
+        "ageRating",
+        "contentRatings",
+        "email",
+        "websites",
+        "twitterrefs",
+        "predictions",
+        "locations",
+        "relations",
+        "images",
+        "asset",
         "poSeriesID"
-        })
+    })
 public final class GroupUpdate extends MediaUpdate<Group> {
 
 
