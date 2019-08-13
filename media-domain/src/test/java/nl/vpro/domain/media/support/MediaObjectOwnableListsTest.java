@@ -1,10 +1,6 @@
 package nl.vpro.domain.media.support;
 
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.domain.media.GeoLocation;
-import nl.vpro.domain.media.GeoLocations;
-import nl.vpro.domain.media.GeoRoleType;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,8 +8,13 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import org.junit.Test;
+
+import nl.vpro.domain.media.GeoLocation;
+import nl.vpro.domain.media.GeoLocations;
+import nl.vpro.domain.media.GeoRoleType;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 @Slf4j
 public class MediaObjectOwnableListsTest {
@@ -25,10 +26,10 @@ public class MediaObjectOwnableListsTest {
     public <OL extends AbstractMediaObjectOwnableList> void expandGeoLocation() {
 
         List<GeoLocation> geoLocation1 = Arrays.asList(
-                GeoLocation.builder().name("Amsterdam").description("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
+                GeoLocation.builder().name("Amsterdam").scopeNotes("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
         );
         List<GeoLocation> geoLocation2 = Arrays.asList(
-                GeoLocation.builder().name("Utrecht").description("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
+                GeoLocation.builder().name("Utrecht").scopeNotes("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
         );
         GeoLocations g1 = GeoLocations.builder().owner(OwnerType.MIS).values(geoLocation1).build();
         GeoLocations g2 = GeoLocations.builder().owner(OwnerType.WHATS_ON).values(geoLocation2).build();

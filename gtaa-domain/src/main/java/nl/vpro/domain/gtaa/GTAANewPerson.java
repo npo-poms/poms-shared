@@ -41,10 +41,10 @@ public class GTAANewPerson extends AbstractGTAANewConcept implements PersonInter
     public GTAANewPerson(
         String givenName,
         String familyName,
-        @lombok.Singular List<String> notes) {
+        @lombok.Singular List<String> scopeNotes) {
         this.givenName = givenName;
         this.familyName = familyName;
-        this.notes = notes;
+        this.scopeNotes = scopeNotes;
     }
 
     @Override

@@ -28,11 +28,11 @@ import nl.vpro.openarchives.oai.Label;
 public interface GTAANewConcept {
     String getValue();
 
-    List<String> getNotes();
+    List<String> getScopeNotes();
 
     Scheme getObjectType();
 
-    default List<Label> getNotesAsLabel() {
-        return getNotes().stream().map(Label::forValue).collect(Collectors.toList());
+    default List<Label> getScopeNotesAsLabel() {
+        return getScopeNotes().stream().map(Label::forValue).collect(Collectors.toList());
     }
 }

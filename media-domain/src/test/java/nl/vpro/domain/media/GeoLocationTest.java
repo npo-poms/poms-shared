@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import nl.vpro.domain.media.support.MediaObjectOwnableLists;
 import org.junit.Test;
+
+import nl.vpro.domain.media.support.MediaObjectOwnableLists;
 
 import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -104,7 +105,7 @@ public class GeoLocationTest {
     private GeoLocations geoLocations1() {
         return GeoLocations.builder()
                 .owner(BROADCASTER).value(
-                GeoLocation.builder().name("Africa").description("Continent")
+                GeoLocation.builder().name("Africa").scopeNotes("Continent")
                         .gtaaUri("test/123").role(GeoRoleType.SUBJECT).build()
             )
             .build();
@@ -114,7 +115,7 @@ public class GeoLocationTest {
         return GeoLocations.builder()
             .owner(BROADCASTER)
             .value(
-                GeoLocation.builder().name("Africa").description("Continent").gtaaUri("test/123")
+                GeoLocation.builder().name("Africa").scopeNotes("Continent").gtaaUri("test/123")
                         .role(GeoRoleType.SUBJECT).build()
             )
             .build();

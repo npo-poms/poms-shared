@@ -40,10 +40,10 @@ public class GTAANewGenericConcept extends AbstractGTAANewConcept  {
     @lombok.Builder
     public GTAANewGenericConcept(
         String value,
-        @lombok.Singular List<String> notes,
+        @lombok.Singular List<String> scopeNotes,
         Scheme scheme) {
         this.value = value;
-        this.notes = notes;
+        this.scopeNotes = scopeNotes;
         this.objectType = scheme;
     }
 

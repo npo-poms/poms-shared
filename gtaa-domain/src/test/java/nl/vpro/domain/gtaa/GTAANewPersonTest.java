@@ -19,7 +19,7 @@ public class GTAANewPersonTest {
     @Test
     public void json() throws Exception {
 
-        GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build();
+        GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").scopeNote("test").build();
 
         Jackson2TestUtil.roundTripAndSimilar(person, "{\n" +
             "  \"newObjectType\" : \"person\",\n" +
@@ -43,7 +43,7 @@ public class GTAANewPersonTest {
 
     @Test
     public void xml() throws Exception {
-        GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").note("test").build();
+        GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").scopeNote("test").build();
         JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newPerson   xmlns:gtaa=\"urn:vpro:gtaa:2017\" >\n" +
             "    <gtaa:givenName>Pietje</gtaa:givenName>\n" +
             "    <gtaa:familyName>Puk</gtaa:familyName>\n" +

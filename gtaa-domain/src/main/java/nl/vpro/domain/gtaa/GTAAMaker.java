@@ -7,14 +7,13 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
 @GTAAScheme(Scheme.maker)
 @XmlType(name = "maker",
     propOrder = {
         "value",
-        "notes",
+        "scopeNotes",
         "redirectedFrom"
     }
 )
@@ -23,8 +22,8 @@ public class GTAAMaker extends AbstractSimpleValueGTAAConcept {
 
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAAMaker(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
-        super(id, notes, value, redirectedFrom, status, lastModified);
+    public GTAAMaker(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {
+        super(id, scopeNotes, value, redirectedFrom, status, lastModified);
     }
     public GTAAMaker() {
 

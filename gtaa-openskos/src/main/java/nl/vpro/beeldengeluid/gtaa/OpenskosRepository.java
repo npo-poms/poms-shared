@@ -15,10 +15,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -107,7 +104,7 @@ public class OpenskosRepository implements GTAARepository {
     public <T extends GTAAConcept, S extends GTAANewConcept> T submit(@NonNull S thesaurusObject, @NonNull String creator) {
         final Description description = submit(
             thesaurusObject.getValue(),
-            thesaurusObject.getNotesAsLabel(),
+            thesaurusObject.getScopeNotesAsLabel(),
             creator,
             thesaurusObject.getObjectType()
         );
@@ -370,7 +367,7 @@ public class OpenskosRepository implements GTAARepository {
     }
 
     @Override
-    public List<Description> findForSchemes(String input, Integer max, List<String> schemes) {
+    public List<Description> findForSchemes(String input, Integer max, String... schemes) {
         if (max == null) {
             max = 50;
         }
@@ -411,9 +408,9 @@ public class OpenskosRepository implements GTAARepository {
     }
 
 
-    private String generateQueryByScheme(List<String> schemeList) {
+    private String generateQueryByScheme(String... schemeList) {
         Predicate<String> empty = s -> s.equals("");
-        if (schemeList.stream().allMatch(empty)) {
+        if (Arrays.stream(schemeList).allMatch(empty)) {
             return "";
         }
 

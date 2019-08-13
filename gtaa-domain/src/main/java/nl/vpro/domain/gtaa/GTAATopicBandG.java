@@ -7,7 +7,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.w3.rdf.Description;
 
 /**
@@ -18,7 +17,7 @@ import nl.vpro.w3.rdf.Description;
 @XmlType(name = "topicbandg",
     propOrder = {
         "value",
-        "notes",
+        "scopeNotes",
         "redirectedFrom"
     }
 )
@@ -26,8 +25,8 @@ import nl.vpro.w3.rdf.Description;
 public class GTAATopicBandG extends AbstractSimpleValueGTAAConcept {
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAATopicBandG(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
-        super(id, notes, value, redirectedFrom, status, lastModified);
+    public GTAATopicBandG(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {
+        super(id, scopeNotes, value, redirectedFrom, status, lastModified);
     }
     public GTAATopicBandG() {
 

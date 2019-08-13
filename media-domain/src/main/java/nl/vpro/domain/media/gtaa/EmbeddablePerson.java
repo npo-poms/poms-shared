@@ -2,7 +2,7 @@
  * Copyright (C) 2015 All rights reserved
  * VPRO The Netherlands
  */
-package nl.vpro.domain.gtaa.persistence;
+package nl.vpro.domain.media.gtaa;
 
 import lombok.ToString;
 
@@ -11,7 +11,6 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import nl.vpro.domain.gtaa.Status;
 
 /**
  *
@@ -30,12 +29,12 @@ public class EmbeddablePerson extends EmbeddableGTAARecord implements Serializab
         super();
     }
 
-    public EmbeddablePerson(String uri, Status status) {
+    public EmbeddablePerson(String uri, GTAAStatus status) {
         super(uri, status);
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public EmbeddablePerson(String uri, Status status, boolean knownAs) {
+    public EmbeddablePerson(String uri, GTAAStatus status, boolean knownAs) {
         super(uri, status);
         this.knownAs = knownAs;
     }

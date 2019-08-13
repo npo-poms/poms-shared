@@ -6,7 +6,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.BindingUtils;
@@ -17,7 +16,7 @@ import nl.vpro.util.BindingUtils;
  */
 public class GTAAGenreTest {
      GTAAGenre concept = GTAAGenre.builder()
-            .notes(Arrays.asList(Label.builder().value("bla").lang("nl").build()))
+            .scopeNotes(Arrays.asList("bla"))
             .value("Amsterdam")
             .id(URI.create("http://gtaa/1234"))
             .status(Status.approved)
