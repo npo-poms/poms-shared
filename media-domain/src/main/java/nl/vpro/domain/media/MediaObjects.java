@@ -296,6 +296,13 @@ public class MediaObjects {
         return null;
     }
 
+    /**
+     * Returns the {@link ScheduleEvent}s associated with the media object.
+     *
+     * An empty collection for all non programs.
+     *
+     * @since 5.11
+     */
     public static SortedSet<ScheduleEvent> getScheduleEvents(MediaObject media) {
         if (media instanceof Program) {
             return ((Program) media).getScheduleEvents();
