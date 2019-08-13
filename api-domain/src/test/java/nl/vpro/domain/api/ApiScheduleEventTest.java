@@ -109,6 +109,7 @@ public class ApiScheduleEventTest {
             "    <media:program embeddable=\"true\" mid=\"VPROWON_12345\" sortDate=\"1970-01-01T01:00:00.100+01:00\" creationDate=\"2014-09-03T10:40:42.642+02:00\" workflow=\"FOR PUBLICATION\">\n" +
             "        <media:credits/>\n" +
             "        <media:locations/>\n" +
+            "        <media:images/>\n" +
             "        <media:scheduleEvents>\n" +
             "            <media:scheduleEvent channel=\"NED3\" midRef=\"VPROWON_12345\">\n" +
             "                <media:guideDay>1969-12-31+01:00</media:guideDay>\n" +
@@ -138,7 +139,6 @@ public class ApiScheduleEventTest {
             "                <media:poProgID>VPROWON_12345</media:poProgID>\n" +
             "            </media:scheduleEvent>\n" +
             "        </media:scheduleEvents>\n" +
-            "        <media:images/>\n" +
             "        <media:segments/>\n" +
             "    </media:program>\n" +
             "</api:scheduleItem>";
