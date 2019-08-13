@@ -108,7 +108,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testPulishStartStop() throws Exception {
+    public void testPublishStartStop() throws Exception {
         String expected = "{\"objectType\":\"program\",\"sortDate\":1,\"publishStart\":1,\"publishStop\":7200000,\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().publishStart(Instant.ofEpochMilli(1))
