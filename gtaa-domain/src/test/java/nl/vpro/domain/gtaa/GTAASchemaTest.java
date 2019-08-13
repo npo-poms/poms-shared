@@ -15,16 +15,13 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 
 
 /**
- * Tests whether the POMS schema's are changed. If tests-cases fail here, fix them, but <em>also don't forget to make the changes to the XSD's also to the manually maintained ones</em>.
- * in nl/vpro/domain/media
- *
  *
  *
  * @author Michiel Meeuwissen
  * @since 5.11
  */
 @Slf4j
-public class GtaaSchemaTest extends AbstractSchemaTest {
+public class GTAASchemaTest extends AbstractSchemaTest {
 
 
     @BeforeClass
