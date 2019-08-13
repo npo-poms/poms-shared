@@ -17,7 +17,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.PersonInterface;
-import nl.vpro.domain.gtaa.persistence.EmbeddablePerson;
+import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.validation.NoHtml;
 
 @Entity

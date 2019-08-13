@@ -2,7 +2,7 @@
  * Copyright (C) 2015 All rights reserved
  * VPRO The Netherlands
  */
-package nl.vpro.domain.gtaa.persistence;
+package nl.vpro.domain.media.gtaa;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,9 +14,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
-import nl.vpro.domain.gtaa.Status;
-import nl.vpro.domain.gtaa.GTAAConcept;
 
 /**
  *
@@ -34,16 +31,11 @@ public abstract class EmbeddableGTAARecord implements Serializable, Cloneable {
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
-    private Status status;
+    private GTAAStatus status;
 
-    EmbeddableGTAARecord(String uri, Status status) {
+    EmbeddableGTAARecord(String uri, GTAAStatus status) {
         this.uri = uri;
         this.status = status;
-    }
-
-    EmbeddableGTAARecord(GTAAConcept thesaurusObject) {
-        this.uri = thesaurusObject.getId().toString();
-        this.status = thesaurusObject.getStatus();
     }
 
     EmbeddableGTAARecord() {

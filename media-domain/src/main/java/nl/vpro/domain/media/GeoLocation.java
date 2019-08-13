@@ -11,19 +11,19 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.gtaa.Status;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.meeuw.i18n.Region;
 
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.gtaa.GTAAGeographicName;
+import nl.vpro.domain.media.gtaa.GTAAGeoLocationRecord;
+import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 
 
 /**
- * A wrapper around GTAA {@link GTAAGeographicName}
+ * A wrapper around GTAA {@link GTAAGeoLocationRecord}
  * @author Giorgio Vinci
  * @since 5.11
  */
@@ -55,25 +55,30 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     protected GeoRoleType role;
 
     @XmlTransient
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, targetEntity = GtaaGeoLocationRecord.class)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, targetEntity = GTAAGeoLocationRecord.class)
     @JoinColumn(name = "gtaa_uri")
-    private GtaaGeoLocationRecord gtaaRecord = new GtaaGeoLocationRecord();
+    private GTAAGeoLocationRecord gtaaRecord = new GTAAGeoLocationRecord();
 
     public GeoLocation() {
     }
 
     @lombok.Builder
-    public GeoLocation(@NonNull String name, String description, @NonNull String gtaaUri, Status gtaaStatus, @NonNull GeoRoleType role) {
+    private GeoLocation(@NonNull String name,
+                       String scopeNotes,
+                       @NonNull String gtaaUri,
+                       @NonNull GTAAStatus gtaaStatus,
+                       @NonNull GeoRoleType role
+    ) {
         this.role = role;
-        this.gtaaRecord = GtaaGeoLocationRecord.builder().name(name).description(description).uri(gtaaUri).status(gtaaStatus).build();
+        this.gtaaRecord = GTAAGeoLocationRecord.builder().name(name).scopeNotes(scopeNotes).uri(gtaaUri).status(gtaaStatus).build();
     }
 
-    public GeoLocation(Long id, @NonNull GeoRoleType role, @NonNull GtaaGeoLocationRecord gtaaRecord) {
+    public GeoLocation(Long id, @NonNull GeoRoleType role, @NonNull GTAAGeoLocationRecord gtaaRecord) {
         this(role, gtaaRecord);
         this.id = id;
     }
 
-    public GeoLocation(@NonNull GeoRoleType role, @NonNull GtaaGeoLocationRecord gtaaRecord) {
+    public GeoLocation(@NonNull GeoRoleType role, @NonNull GTAAGeoLocationRecord gtaaRecord) {
         this.role = role;
         this.gtaaRecord = gtaaRecord;
     }
@@ -83,19 +88,12 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         this.parent = parent;
     }
 
-    private GeoLocation(
-            Long id,
-            @NonNull GeoRoleType role,
-            GeoLocations parent,
-            GtaaGeoLocationRecord gtaaRecord) {
-        this(id, role, gtaaRecord);
-        this.parent = parent;
-    }
 
+    @Override
     @XmlElement
     public String getName() {
         return Optional.ofNullable(gtaaRecord)
-                .map(GtaaGeoLocationRecord::getName)
+                .map(GTAAGeoLocationRecord::getName)
                 .orElse(null);
     }
     public void setName(String name) {
@@ -105,20 +103,20 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @XmlElement
     public String getDescription() {
         return Optional.ofNullable(gtaaRecord)
-                .map(GtaaGeoLocationRecord::getDescription)
+                .map(GTAAGeoLocationRecord::getScopeNotes)
                 .orElse(null);
     }
     public void setDescription(String description) {
-        this.gtaaRecord.setDescription(description);
+        this.gtaaRecord.setScopeNotes(description);
     }
 
     @XmlAttribute
-    public Status getGtaaStatus() {
+    public GTAAStatus getGtaaStatus() {
         return Optional.ofNullable(gtaaRecord)
-                .map(GtaaGeoLocationRecord::getStatus)
+                .map(GTAAGeoLocationRecord::getStatus)
                 .orElse(null);
     }
-    public void setGtaaStatus(String gtaaStatus) {
+    public void setGtaaStatus(GTAAStatus gtaaStatus) {
         this.gtaaRecord.setStatus(gtaaStatus);
     }
 
@@ -126,7 +124,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @XmlAttribute
     public String getGtaaUri() {
         return Optional.ofNullable(gtaaRecord)
-                .map(GtaaGeoLocationRecord::getUri)
+                .map(GTAAGeoLocationRecord::getUri)
                 .orElse(null);
     }
     public void setGtaaUri(String uri) {

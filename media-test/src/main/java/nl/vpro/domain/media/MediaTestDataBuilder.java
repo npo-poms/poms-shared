@@ -16,10 +16,10 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
-import nl.vpro.domain.gtaa.Status;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.support.License;
@@ -464,12 +464,12 @@ public interface MediaTestDataBuilder<
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
                 GeoLocation.builder().name("Africa")
-                        .description("Continent").gtaaUri("http://gtaa/1231")
+                        .scopeNotes("Continent").gtaaUri("http://gtaa/1231")
                         .role(GeoRoleType.SUBJECT).build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
                 GeoLocation.builder().role(GeoRoleType.SUBJECT)
-                        .name("England").gtaaUri("http://gtaa/1232").gtaaStatus(Status.approved).build(),
+                        .name("England").gtaaUri("http://gtaa/1232").gtaaStatus(GTAAStatus.approved).build(),
                 GeoLocation.builder()
                         .name("UK").gtaaUri("http://gtaa/1233")
                         .role(GeoRoleType.RECORDED_IN).build()

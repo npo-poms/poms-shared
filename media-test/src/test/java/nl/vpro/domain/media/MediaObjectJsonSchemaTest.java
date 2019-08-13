@@ -33,8 +33,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.jayway.jsonpath.JsonPath;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
-import nl.vpro.domain.gtaa.Status;
 import nl.vpro.domain.media.bind.BackwardsCompatibility;
+import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -822,7 +822,7 @@ public class MediaObjectJsonSchemaTest {
 
         GeoLocation value = GeoLocation.builder()
                 .role(GeoRoleType.RECORDED_IN)
-                .name("myName").description("myDescription").gtaaUri("myuri").gtaaStatus(Status.approved)
+                .name("myName").scopeNotes("myDescription").gtaaUri("myuri").gtaaStatus(GTAAStatus.approved)
                 .build();
         SortedSet geoLocations = Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build()).collect(Collectors.toCollection(TreeSet::new));
 
@@ -848,7 +848,7 @@ public class MediaObjectJsonSchemaTest {
         GeoLocations actualGeoLocations = Jackson2Mapper.STRICT.readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
         GeoLocation value = GeoLocation.builder()
                 .role(GeoRoleType.RECORDED_IN)
-                .name("myName").description("myDescription").gtaaUri("myuri").gtaaStatus(Status.approved)
+                .name("myName").scopeNotes("myDescription").gtaaUri("myuri").gtaaStatus(GTAAStatus.approved)
                 .build();
         final GeoLocations expectedGeoLocations = GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build();
 

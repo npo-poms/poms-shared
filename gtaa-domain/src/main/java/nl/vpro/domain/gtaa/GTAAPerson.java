@@ -4,10 +4,7 @@
  */
 package nl.vpro.domain.gtaa;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -92,8 +89,8 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public GTAAPerson(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified, @NoHtml String givenName, @NoHtml String familyName, List<Names> knownAs) {
-        super(id, notes, value, redirectedFrom, status, lastModified);
+    public GTAAPerson(URI id, @Singular  List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified, @NoHtml String givenName, @NoHtml String familyName, List<Names> knownAs) {
+        super(id, scopeNotes, value, redirectedFrom, status, lastModified);
         this.givenName = givenName;
         this.familyName = familyName;
         this.knownAs = knownAs;
@@ -109,7 +106,7 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
 
     public GTAAPerson(GTAANewPerson newPerson) {
         this(newPerson.getGivenName(), newPerson.getFamilyName(), (Status) null);
-        this.setNotes(newPerson.getNotesAsLabel());
+        this.setScopeNotes(newPerson.getScopeNotes());
     }
 
     public static GTAAPerson create(MetaData metaData) {
@@ -163,7 +160,7 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
             answer.familyName = prefName.getFamilyName();
         }
 
-        answer.notes = description.getScopeNote();
+        answer.scopeNotes = description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList());
         answer.lastModified = description.getModified() == null ? null : description.getModified().getValue().toInstant();
 
         if (description.getAltLabels() != null && !description.getAltLabels().isEmpty()) {

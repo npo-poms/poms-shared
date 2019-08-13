@@ -13,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.BindingUtils;
@@ -51,7 +50,7 @@ public class GTAAConceptTest {
         concept = (AbstractGTAAConcept) this.scheme.getImplementation().getConstructor().newInstance();
         concept.setValue("concept");
         concept.setId(URI.create("http://gtaa/1234"));
-        concept.setNotes(Arrays.asList(Label.builder().value("bla").lang("nl").build()));
+        concept.setScopeNotes(Arrays.asList("bla"));
         concept.setLastModified(LocalDateTime.of(2017, 9, 20, 10, 43, 0).atZone(BindingUtils.DEFAULT_ZONE).toInstant());
         concept.setStatus(Status.approved);
     }

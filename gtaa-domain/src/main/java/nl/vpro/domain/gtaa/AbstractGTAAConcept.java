@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -34,7 +35,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
     @Getter
     @Setter
     @XmlElement
-    List<Label> notes;
+    List<String> scopeNotes;
 
     @Getter
     @Setter
@@ -63,9 +64,9 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
     }
 
-    AbstractGTAAConcept(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
+    AbstractGTAAConcept(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {
         this.id = id;
-        this.notes = notes;
+        this.scopeNotes = scopeNotes;
         this.value = value;
         this.redirectedFrom = redirectedFrom;
         this.status = status;
@@ -77,7 +78,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
         if (description.getPrefLabel() != null) {
             answer.setValue(description.getPrefLabel().getValue());
         }
-        answer.setNotes(description.getScopeNote());
+        answer.setScopeNotes(description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList()));
         answer.setStatus(description.getStatus());
         if (description.getChangeNote() != null) {
             description.getRedirectedFrom().ifPresent(answer::setRedirectedFrom);
@@ -89,13 +90,13 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
     protected void fill(URI id,
                         String value,
-                        List<Label> notes,
+                        List<String> notes,
                         Status status,
                         URI changeNote,
                         Instant modified) {
         this.setId(id);
         this.setValue(value);
-        this.setNotes(notes);
+        this.setScopeNotes(notes);
         this.setStatus(status);
         if (changeNote != null) {
             this.setRedirectedFrom(changeNote);

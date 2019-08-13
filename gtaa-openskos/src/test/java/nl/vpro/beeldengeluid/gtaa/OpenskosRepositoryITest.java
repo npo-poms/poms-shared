@@ -38,7 +38,7 @@ public class OpenskosRepositoryITest {
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
             .givenName("Pietje")
             .familyName("Puk"  + System.currentTimeMillis())
-            .notes(new ArrayList<>())
+            .scopeNotes(new ArrayList<>())
             .build();
 
         impl.submit(pietjePuk, "POMS2");
@@ -53,13 +53,13 @@ public class OpenskosRepositoryITest {
         GTAANewGenericConcept geographicName = GTAANewGenericConcept
                 .builder()
                 .value("Driedorp3")
-                .note("Buurtschap binnen de gemeente Nijkerk")
+                .scopeNote("Buurtschap binnen de gemeente Nijkerk")
                 .scheme(Scheme.geographicname)
                 .build();
 
         ;
         GTAAConcept concept = impl.submit(geographicName, "poms_test");
-        assertThat(concept.getNotes()).isNotEmpty();
+        assertThat(concept.getScopeNotes()).isNotEmpty();
 
         String result = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:openskos=\"http://openskos.org/xmlns#\" openskos:numFound=\"1\" openskos:rows=\"20\" openskos:start=\"0\">\n" +
                 "<rdf:Description rdf:about=\"http://data.beeldengeluid.nl/gtaa/1711531\">\n" +
@@ -96,7 +96,7 @@ public class OpenskosRepositoryITest {
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
                 .familyName("Puk")
-                .notes(new ArrayList<>()).build();
+                .scopeNotes(new ArrayList<>()).build();
         impl.submit(pietjePuk, "POMS");
         impl.submit(pietjePuk, "POMS");
     }
@@ -108,7 +108,7 @@ public class OpenskosRepositoryITest {
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
                 .familyName("Puk"  + System.currentTimeMillis())
-                .notes(new ArrayList<>()).build();
+                .scopeNotes(new ArrayList<>()).build();
 
         impl.submit(pietjePuk, "POMS");
         impl.submit(pietjePuk, "POMS");
@@ -135,11 +135,27 @@ public class OpenskosRepositoryITest {
     @Ignore("This is not a junit test")
     public void testFindAnyThing() {
         OpenskosRepository impl = getRealInstance();
-        List<Description> persons = impl.findAnything("johan c", 100);
-        assertThat(persons).isNotEmpty();
-        assertThat(persons.get(0).getStatus()).isNotNull();
-        for (Description person : persons)  {
-            log.info("{}", person);
+        List<Description> concepts = impl.findAnything("hasselt", 100);
+        assertThat(concepts).isNotEmpty();
+        assertThat(concepts.get(0).getStatus()).isNotNull();
+        for (Description oncept : concepts)  {
+            log.info("{}", oncept);
+
+        }
+
+
+    }
+
+
+    @Test
+    @Ignore("This is not a junit test")
+    public void testFindGeo() {
+        OpenskosRepository impl = getRealInstance();
+        List<Description> geonames = impl.findForSchemes("hasselt", 1000, Scheme.geographicname.name());
+        assertThat(geonames).isNotEmpty();
+        assertThat(geonames.get(0).getStatus()).isNotNull();
+        for (Description geoname : geonames)  {
+            log.info("{}", geoname);
 
         }
 
@@ -153,7 +169,7 @@ public class OpenskosRepositoryITest {
         Instant start = LocalDate.of(2017, 10, 4).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.of(2017, 10, 4).atTime(9, 20).atZone(OpenskosRepository.ZONE_ID).toInstant();
 
-        CountedIterator<Record> updates = impl.getPersonUpdates(start, stop);
+        CountedIterator<Record> updates = impl.getPersonUpdates(start, Instant.now());
         long count = 0;
         while (updates.hasNext()) {
             Record record = updates.next();

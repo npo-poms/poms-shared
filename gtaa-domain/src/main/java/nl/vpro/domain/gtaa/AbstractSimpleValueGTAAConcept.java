@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import nl.vpro.openarchives.oai.Label;
-
 /**
  * A thesaurus item of which the value is represented by a simple {@code <value></value>}
  *
@@ -22,8 +20,8 @@ import nl.vpro.openarchives.oai.Label;
 @XmlAccessorType(XmlAccessType.NONE)
 public class AbstractSimpleValueGTAAConcept extends AbstractGTAAConcept {
 
-    public AbstractSimpleValueGTAAConcept(URI id, List<Label> notes, String value, URI redirectedFrom, Status status, Instant lastModified) {
-        super(id, notes, value, redirectedFrom, status, lastModified);
+    public AbstractSimpleValueGTAAConcept(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {
+        super(id, scopeNotes, value, redirectedFrom, status, lastModified);
     }
 
     public AbstractSimpleValueGTAAConcept() {

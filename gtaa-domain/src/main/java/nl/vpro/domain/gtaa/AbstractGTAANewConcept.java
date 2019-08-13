@@ -19,9 +19,9 @@ public abstract class AbstractGTAANewConcept implements GTAANewConcept {
 
     @Getter
     @Setter
-    @XmlElement(name = "note")
-    @JsonProperty("notes")
-    List<String> notes;
+    @XmlElement(name = "scopeNote")
+    @JsonProperty("scopeNotes")
+    List<String> scopeNotes;
 
 
     public String getGtaaUri() {

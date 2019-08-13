@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 
-import nl.vpro.openarchives.oai.Label;
-
 
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.CUSTOM,
@@ -35,7 +33,7 @@ public interface GTAAConcept {
 
     URI getId();
 
-    List<Label> getNotes();
+    List<String> getScopeNotes();
 
     Instant getLastModified();
 

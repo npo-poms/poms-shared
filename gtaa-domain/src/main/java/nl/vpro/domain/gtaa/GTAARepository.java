@@ -28,7 +28,7 @@ public interface GTAARepository {
 
     List<Description> findAnything(String input, Integer max);
 
-    List<Description> findForSchemes(String input, Integer max, List<String> schemes);
+    List<Description> findForSchemes(String input, Integer max, String... schemes);
 
     Optional<Description> retrieveConceptStatus(String id);
 }

@@ -8,7 +8,6 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import nl.vpro.jackson2.Jackson2Mapper;
-import nl.vpro.openarchives.oai.Label;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.BindingUtils;
@@ -64,7 +63,7 @@ public class GTAAPersonTest {
     @Test
     public void xml() throws Exception {
         GTAAPerson person = GTAAPerson.builder()
-            .notes(Arrays.asList(Label.builder().value("bla").lang("nl").build()))
+            .scopeNotes(Arrays.asList("bla"))
             .knownAs(Arrays.asList(Names.builder().familyName("pietje").build()))
             .familyName("puk")
             .gtaaUri("http://gtaa/1234")
