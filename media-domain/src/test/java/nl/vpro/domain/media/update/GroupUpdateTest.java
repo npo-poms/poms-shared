@@ -45,7 +45,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
 
     @Test
     public void testUnMarshal() {
-        String input = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><group type=\"SEASON\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><scheduleEvents/><images/></group>";
+        String input = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><group type=\"SEASON\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\"><locations/><images/></group>";
 
         GroupUpdate result = toUpdate(input);
 
@@ -61,7 +61,6 @@ public class GroupUpdateTest extends MediaUpdateTest {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<group ordered=\"true\" type=\"SEASON\" embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <locations/>\n" +
-                "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
                 "</group>\n";
 
@@ -77,7 +76,6 @@ public class GroupUpdateTest extends MediaUpdateTest {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
                 "<group ordered=\"true\" embeddable=\"true\" mid=\"VPWON_333\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <locations/>\n" +
-                "    <scheduleEvents/>\n" +
                 "    <images/>\n" +
                 "    <poSeriesID>VPWON_333</poSeriesID>\n" +
                 "</group>\n";
