@@ -120,7 +120,6 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
         "teletext",
         "predictionsForXml",
         "locations",
-        "scheduleEvents",
         "relations",
         "images"
     })
@@ -173,7 +172,6 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
     "teletext",
     "predictionsForXml",
     "locations",
-    "scheduleEvents",
     "relations",
     "images"
 

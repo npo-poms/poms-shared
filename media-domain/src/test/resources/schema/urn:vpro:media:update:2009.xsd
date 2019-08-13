@@ -51,6 +51,13 @@
     <xs:complexContent>
       <xs:extension base="mediaUpdateType">
         <xs:sequence>
+          <xs:element name="scheduleEvents" minOccurs="0">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="scheduleEvent" type="scheduleEventUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
           <xs:element name="episodeOf" type="memberRefUpdateType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="segments" minOccurs="0">
             <xs:complexType>
@@ -116,13 +123,6 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="scheduleEvents" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="scheduleEvent" type="scheduleEventUpdateType" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="relation" type="relationUpdateType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="images" minOccurs="0">
         <xs:complexType>
@@ -141,6 +141,46 @@
     <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="urn" type="xs:string"/>
     <xs:attribute name="version" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="scheduleEventUpdateType">
+    <xs:sequence>
+      <xs:element name="start" type="xs:dateTime"/>
+      <xs:element name="guideDay" type="xs:date" minOccurs="0"/>
+      <xs:element name="duration" type="xs:duration"/>
+      <xs:element name="titles" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="title" type="titleUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="descriptions" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="description" type="descriptionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="channel" type="media:channelEnum" use="required"/>
+    <xs:attribute name="net" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="titleUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="descriptionUpdateType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
   </xs:complexType>
 
   <xs:complexType name="memberRefUpdateType">
@@ -179,22 +219,6 @@
         <xs:attribute name="start" type="xs:dateTime"/>
         <xs:attribute name="stop" type="xs:dateTime"/>
         <xs:attribute name="platform" type="media:platformTypeEnum"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:complexType name="titleUpdateType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-
-  <xs:complexType name="descriptionUpdateType">
-    <xs:simpleContent>
-      <xs:extension base="xs:string">
-        <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -254,30 +278,6 @@
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="urn" type="xs:string"/>
-  </xs:complexType>
-
-  <xs:complexType name="scheduleEventUpdateType">
-    <xs:sequence>
-      <xs:element name="start" type="xs:dateTime"/>
-      <xs:element name="guideDay" type="xs:date" minOccurs="0"/>
-      <xs:element name="duration" type="xs:duration"/>
-      <xs:element name="titles" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="title" type="titleUpdateType" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="descriptions" minOccurs="0">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="description" type="descriptionUpdateType" minOccurs="0" maxOccurs="unbounded"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name="channel" type="media:channelEnum" use="required"/>
-    <xs:attribute name="net" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="relationUpdateType">
