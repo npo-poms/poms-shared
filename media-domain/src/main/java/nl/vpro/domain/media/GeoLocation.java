@@ -32,7 +32,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "geoLocationType", propOrder = {
         "name",
-        "description",
+        "scopeNotes",
         "gtaaUri",
         "gtaaStatus",
         "role"
@@ -107,12 +107,12 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     }
 
     @XmlElement
-    public String getDescription() {
+    public String getScopeNotes() {
         return Optional.ofNullable(gtaaRecord)
                 .map(GTAAGeoLocationRecord::getScopeNotes)
                 .orElse(null);
     }
-    public void setDescription(String description) {
+    public void setScopeNotes(String description) {
         this.gtaaRecord.setScopeNotes(description);
     }
 
@@ -156,7 +156,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
             return false;
         }
 
-        if(!Objects.equals(getDescription(), geoLocation.getDescription())) {
+        if(!Objects.equals(getScopeNotes(), geoLocation.getScopeNotes())) {
             return false;
         }
 
@@ -168,7 +168,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         int result = super.hashCode();
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (getScopeNotes() != null ? getScopeNotes().hashCode() : 0);
         result = 31 * result + (getGtaaUri() != null ? getGtaaUri().hashCode() : 0);
         return result;
     }
@@ -179,7 +179,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
             .appendSuper(super.toString())
             .append("name", getName())
             .append("relationType", role)
-            .append("description", getDescription())
+            .append("description", getScopeNotes())
             .append("gtaa_uri", getGtaaUri())
             .toString();
     }
@@ -194,8 +194,8 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
             return this.role.compareTo(geoLocation.role);
         }
 
-        if(getDescription() != null && geoLocation.getDescription() != null && !getDescription().equals(geoLocation.getDescription())) {
-            return this.getDescription().compareTo(geoLocation.getDescription());
+        if(getScopeNotes() != null && geoLocation.getScopeNotes() != null && !getScopeNotes().equals(geoLocation.getScopeNotes())) {
+            return this.getScopeNotes().compareTo(geoLocation.getScopeNotes());
         }
 
         if(getGtaaUri() != null && geoLocation.getGtaaUri() != null && !getGtaaUri().equals(geoLocation.getGtaaUri())) {
