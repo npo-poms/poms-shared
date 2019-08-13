@@ -5,7 +5,7 @@
     <geoLocations owner="BROADCASTER">
         <geoLocation role="SUBJECT" gtaaUri="http://gtaa/1231">
             <name>Africa</name>
-            <description>Continent</description>
+            <scopeNote>Continent</scopeNote>
         </geoLocation>
     </geoLocations>
     <geoLocations owner="NPO">
