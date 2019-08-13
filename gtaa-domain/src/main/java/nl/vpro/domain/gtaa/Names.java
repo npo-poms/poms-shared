@@ -3,6 +3,7 @@ package nl.vpro.domain.gtaa;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import nl.vpro.openarchives.oai.Label;
 
@@ -13,6 +14,7 @@ import nl.vpro.openarchives.oai.Label;
 @AllArgsConstructor
 @Data
 @Builder
+@EqualsAndHashCode
 public class Names {
 
     protected String givenName;

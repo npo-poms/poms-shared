@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
     name = "newConceptType",
     propOrder = {
     "value",
-    "notes"
+    "scopeNotes"
 })
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonTypeName("concept")
