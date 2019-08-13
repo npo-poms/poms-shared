@@ -1,35 +1,57 @@
 {
-  "mediaWithTwoGeoLocations":
-  {
-    "objectType":"program",
-    "embeddable":true,
-    "broadcasters":[],
-    "genres":[],
+  "mediaWithTwoGeoLocations": {
+    "objectType": "program",
+    "embeddable": true,
+    "broadcasters": [],
+    "genres": [],
     "countries": [],
     "languages": [],
-    "geoLocations":
-    [
-      {"owner":"BROADCASTER", "values":[{"name":"Africa","scopeNotes":["Continent"],"role":"SUBJECT", "gtaaUri": "http://gtaa/1231"}]},
-
-      {"owner":"NPO", "values": [
-        {
-          "name":"England","role":"SUBJECT",
-          "gtaaUri": "http://gtaa/1232", "gtaaStatus": "approved"
-        },
-        {"name":"UK","role":"RECORDED_IN", "gtaaUri": "http://gtaa/1233"}]}
-    ]
-  },
-  "OneFullGeoLocations":
-    [
+    "geoLocations": [
       {
-        "owner":"BROADCASTER",
-        "values": [{
-          "name":"myName",
-          "scopeNotes": ["myDescription"],
-          "role":"RECORDED_IN",
-          "gtaaUri": "myuri",
-          "gtaaStatus": "approved"
-        }]
+        "owner": "BROADCASTER",
+        "values": [
+          {
+            "name": "Africa",
+            "scopeNotes": [
+              "Continent"
+            ],
+            "role": "SUBJECT",
+            "gtaaUri": "http://gtaa/1231"
+          }
+        ]
+      },
+      {
+        "owner": "NPO",
+        "values": [
+          {
+            "name": "England",
+            "role": "SUBJECT",
+            "gtaaUri": "http://gtaa/1232",
+            "gtaaStatus": "approved"
+          },
+          {
+            "name": "UK",
+            "role": "RECORDED_IN",
+            "gtaaUri": "http://gtaa/1233"
+          }
+        ]
       }
     ]
+  },
+  "OneFullGeoLocations": [
+    {
+      "owner": "BROADCASTER",
+      "values": [
+        {
+          "name": "myName",
+          "scopeNotes": [
+            "myDescription"
+          ],
+          "role": "RECORDED_IN",
+          "gtaaUri": "myuri",
+          "gtaaStatus": "approved"
+        }
+      ]
+    }
+  ]
 }
