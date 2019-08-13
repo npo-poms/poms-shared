@@ -238,7 +238,64 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testTitles() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"titles\":[{\"value\":\"Main title\",\"owner\":\"BROADCASTER\",\"type\":\"MAIN\"},{\"value\":\"Main title MIS\",\"owner\":\"MIS\",\"type\":\"MAIN\"},{\"value\":\"Short title\",\"owner\":\"BROADCASTER\",\"type\":\"SHORT\"},{\"value\":\"Episode title MIS\",\"owner\":\"MIS\",\"type\":\"SUB\"}],\"genres\":[],\"countries\":[],\"languages\":[]}";
+        String expected = "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"titles\" : [ {\n" +
+            "    \"value\" : \"Main title\",\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"type\" : \"MAIN\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Main title MIS\",\n" +
+            "    \"owner\" : \"MIS\",\n" +
+            "    \"type\" : \"MAIN\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Short title\",\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"type\" : \"SHORT\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Episode title MIS\",\n" +
+            "    \"owner\" : \"MIS\",\n" +
+            "    \"type\" : \"SUB\"\n" +
+            "  } ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"expandedTitles\" : [ {\n" +
+            "    \"value\" : \"Main title\",\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"type\" : \"MAIN\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Main title\",\n" +
+            "    \"owner\" : \"NPO\",\n" +
+            "    \"type\" : \"MAIN\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Short title\",\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"type\" : \"SHORT\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Short title\",\n" +
+            "    \"owner\" : \"NPO\",\n" +
+            "    \"type\" : \"SHORT\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Episode title MIS\",\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"type\" : \"SUB\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Episode title MIS\",\n" +
+            "    \"owner\" : \"NPO\",\n" +
+            "    \"type\" : \"SUB\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Main title\",\n" +
+            "    \"owner\" : \"BROADCASTER\",\n" +
+            "    \"type\" : \"LEXICO\"\n" +
+            "  }, {\n" +
+            "    \"value\" : \"Main title\",\n" +
+            "    \"owner\" : \"NPO\",\n" +
+            "    \"type\" : \"LEXICO\"\n" +
+            "  } ]\n" +
+            "}";
 
         Program program = program().lean().withTitles().build();
         String actual = toJson(program);
@@ -779,6 +836,7 @@ public class MediaObjectJsonSchemaTest {
         log.info(expected.toString());
 
         Program program = program().lean().withGeoLocations().build();
+
         Map actual = JsonPath.read(toJson(program),"$");
 
         JSONAssert.assertEquals(expected, actual);

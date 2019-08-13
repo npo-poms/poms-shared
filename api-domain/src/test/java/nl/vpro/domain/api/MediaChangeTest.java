@@ -1,16 +1,17 @@
 package nl.vpro.domain.api;
 
+import java.io.IOException;
+import java.time.Instant;
+import java.time.LocalDate;
+
+import org.junit.Test;
 import com.fasterxml.jackson.core.JsonGenerator;
+
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.time.Instant;
-import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,8 +66,8 @@ public class MediaChangeTest {
             "    <api:media xsi:type=\"media:programType\" embeddable=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "        <media:credits/>\n" +
             "        <media:locations/>\n" +
-            "        <media:scheduleEvents/>\n" +
             "        <media:images/>\n" +
+            "        <media:scheduleEvents/>\n" +
             "        <media:segments/>\n" +
             "    </api:media>\n" +
             "</api:change>");
@@ -109,5 +110,5 @@ public class MediaChangeTest {
         assertThat(change.isDeleted()).isTrue();
         assertThat(change.getMid()).isEqualTo("POW_00107979");
     }
-    
+
 }
