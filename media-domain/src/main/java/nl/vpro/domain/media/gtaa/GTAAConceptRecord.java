@@ -18,13 +18,13 @@ import nl.vpro.validation.NoHtml;
 @Setter
 public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> implements Serializable, Comparable<SELF> {
 
-    @Column(name = "gtaa_uri", columnDefinition="varchar(255)", length = 255)
+    @Column(columnDefinition="varchar(255)", length = 255)
     @Getter
     @Id
     @lombok.NonNull
     private URI uri;
 
-    @Column(nullable = true, length = 30, name = "gtaa_status")
+    @Column(nullable = true, length = 30)
     @Enumerated(EnumType.STRING)
     @Setter
     private GTAAStatus status;
