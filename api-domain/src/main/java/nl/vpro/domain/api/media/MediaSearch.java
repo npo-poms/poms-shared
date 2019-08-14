@@ -159,6 +159,12 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
     @Setter
     private List<TitleSearch> titles;
 
+    @Valid
+    @Getter
+    @Setter
+    private List<GeoLocationSearch> geoLocations;
+
+
 
     /**
      * @deprecated For json backwards compatibility
@@ -192,7 +198,8 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
                 scheduleEvents,
                 ageRatings,
                 contentRatings,
-                titles
+                titles,
+                geoLocations
             );
     }
 
@@ -216,7 +223,8 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
             applyMemberOf(input) &&
             applyRelations(input) &&
             applySchedule(input) &&
-            applyTitles(input);
+            applyTitles(input) &&
+            applyGeoLocations(input);
     }
 
     protected boolean applyAvTypes(MediaObject input) {
@@ -356,6 +364,19 @@ public class MediaSearch extends AbstractTextSearch implements Predicate<MediaOb
                     return true;
                 }
             }
+        }
+        return false;
+    }
+
+
+
+    protected boolean applyGeoLocations(MediaObject input) {
+        if (geoLocations == null) {
+            return true;
+        }
+        // TODO
+        for (GeoLocations title : input.getGeoLocations()) {
+
         }
         return false;
     }
