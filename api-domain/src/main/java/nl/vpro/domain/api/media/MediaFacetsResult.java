@@ -28,6 +28,7 @@ import nl.vpro.domain.api.*;
     "sortDates",
     "broadcasters",
     "genres",
+    "geoLocations",
     "tags",
     "durations",
     "descendantOf",
@@ -36,6 +37,7 @@ import nl.vpro.domain.api.*;
     "relations",
     "ageRatings",
     "contentRatings",
+
 
 })
 @Getter
@@ -70,6 +72,9 @@ public class MediaFacetsResult {
     private List<TermFacetResultItem> ageRatings;
 
     private List<TermFacetResultItem> contentRatings;
+
+    private List<GeoLocationFacetResultItem> geoLocations;
+
 
     List<MemberRefFacetResultItem> getMemberOf(MediaSearch search) {
         if (search != null && search.getMemberOf() != null && memberOf == null) {

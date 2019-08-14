@@ -31,6 +31,10 @@ public class MediaFacet extends TextFacet<MediaSearch> {
         this.filter = filter;
     }
 
+    /**
+     * @javadoc
+     */
+
     @XmlElement
     @Override
     public MediaSearch getFilter() {
