@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.api.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -18,6 +21,8 @@ import nl.vpro.domain.api.DurationRangeFacets;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "mediaFacetsType")
+@Getter
+@Setter
 public class MediaFacets {
 
     @XmlElement
@@ -64,6 +69,10 @@ public class MediaFacets {
 
 
     @XmlElement
+    private MediaSearchableTermFacet geoLocations;
+
+
+    @XmlElement
     private MediaSearch filter;
 
 
@@ -81,126 +90,8 @@ public class MediaFacets {
             || memberOf != null
             || relations != null
             || ageRatings != null
-            || contentRatings != null;
+            || contentRatings != null
+            || geoLocations != null;
     }
 
-    public TitleFacetList getTitles() {
-        return titles;
-    }
-
-    public void setTitles(TitleFacetList titles) {
-        this.titles = titles;
-    }
-
-    public MediaFacet getTypes() {
-        return types;
-    }
-
-    public void setTypes(MediaFacet types) {
-        this.types = types;
-    }
-
-    public MediaFacet getAvTypes() {
-        return avTypes;
-    }
-
-    public void setAvTypes(MediaFacet avTypes) {
-        this.avTypes = avTypes;
-    }
-
-    public DateRangeFacets getSortDates() {
-        return sortDates;
-    }
-
-    public void setSortDates(DateRangeFacets sortDates) {
-        this.sortDates = sortDates;
-    }
-
-    public MediaFacet getBroadcasters() {
-        return broadcasters;
-    }
-
-    public void setBroadcasters(MediaFacet broadcasters) {
-        this.broadcasters = broadcasters;
-    }
-
-    public MediaSearchableTermFacet getGenres() {
-        return genres;
-    }
-
-    public void setGenres(MediaSearchableTermFacet genres) {
-        this.genres = genres;
-    }
-
-    public ExtendedMediaFacet getTags() {
-        return tags;
-    }
-
-    public void setTags(ExtendedMediaFacet tags) {
-        this.tags = tags;
-    }
-
-    public DurationRangeFacets getDurations() {
-        return durations;
-    }
-
-    public void setDurations(DurationRangeFacets durations) {
-        this.durations = durations;
-    }
-
-    public MemberRefFacet getDescendantOf() {
-        return descendantOf;
-    }
-
-    public void setDescendantOf(MemberRefFacet descendantOf) {
-        this.descendantOf = descendantOf;
-    }
-
-    public MemberRefFacet getEpisodeOf() {
-        return episodeOf;
-    }
-
-    public void setEpisodeOf(MemberRefFacet episodeOf) {
-        this.episodeOf = episodeOf;
-    }
-
-    public MemberRefFacet getMemberOf() {
-        return memberOf;
-    }
-
-    public void setMemberOf(MemberRefFacet memberOf) {
-        this.memberOf = memberOf;
-    }
-
-    public RelationFacetList getRelations() {
-        return relations;
-    }
-
-    public void setRelations(RelationFacetList relations) {
-        this.relations = relations;
-    }
-
-    public MediaSearch getFilter() {
-        return filter;
-    }
-
-    public void setFilter(MediaSearch filter) {
-        this.filter = filter;
-    }
-
-    public MediaFacet getAgeRatings() {
-        return ageRatings;
-    }
-
-    public void setAgeRatings(MediaFacet ageRating) {
-        this.ageRatings = ageRating;
-    }
-
-    public MediaFacet getContentRatings() {
-        return contentRatings;
-    }
-
-    public void setContentRatings(MediaFacet contentRatings) {
-        this.contentRatings = contentRatings;
-    }
 }

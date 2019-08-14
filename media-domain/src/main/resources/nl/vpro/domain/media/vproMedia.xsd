@@ -589,6 +589,15 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="geoRoleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RECORDED_IN"/>
+      <xs:enumeration value="SUBJECT"/>
+      <xs:enumeration value="PRODUCED_IN"/>
+      <xs:enumeration value="UNDEFINED"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:complexType name="segmentsType">
     <xs:sequence>
       <xs:element type="segmentType" name="segment" minOccurs="0" maxOccurs="unbounded"/>
@@ -933,7 +942,7 @@
       <xs:element name="name" type="xs:string" />
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
-    <xs:attribute type="roleType" name="role" use="required"/>
+    <xs:attribute type="geoRoleType" name="role" use="required"/>
     <xs:attribute name="gtaaUri" type="xs:string"/>
     <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
   </xs:complexType>

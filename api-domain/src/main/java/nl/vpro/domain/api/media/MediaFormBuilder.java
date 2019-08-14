@@ -7,9 +7,7 @@ package nl.vpro.domain.api.media;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import nl.vpro.domain.api.*;
@@ -331,7 +329,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
 
     public MediaFormBuilder relation(RelationDefinition definition, ExtendedTextMatcher text, TextMatcher uri) {
         RelationSearch relationSearch = new RelationSearch();
-        RelationSearchList search = search().getRelations();
+        RelationSearchList releationSearchList = search().getRelations();
         if (text != null) {
             relationSearch.setValues(ExtendedTextMatcherList.must(text));
         }
@@ -340,15 +338,27 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         }
         relationSearch.setBroadcasters(TextMatcherList.must(TextMatcher.must(definition.getBroadcaster())));
         relationSearch.setTypes(TextMatcherList.must(TextMatcher.must(definition.getType())));
-        if (search == null) {
-            search = new RelationSearchList();
-            search().setRelations(search);
+        if (releationSearchList == null) {
+            releationSearchList = new RelationSearchList();
+            search().setRelations(releationSearchList);
         }
-        search.asList().add(relationSearch);
+        releationSearchList.asList().add(relationSearch);
 
         return this;
     }
 
+    /**
+     * @since 5.11
+     */
+    public MediaFormBuilder geoLocation(GeoLocationSearch... searches) {
+        List<GeoLocationSearch> geoLocations = search().getGeoLocations();
+        if (geoLocations == null) {
+            geoLocations = new ArrayList<>();
+            search().setGeoLocations(geoLocations);
+        }
+        geoLocations.addAll(Arrays.asList(searches));
+        return this;
+    }
 
     public MediaFormBuilder highlight(boolean b) {
         form.setHighlight(b);
@@ -397,14 +407,16 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
-    public MediaFormBuilder sortDateFacet(RangeFacet<Instant>... ranges) {
+    @SafeVarargs
+    public final MediaFormBuilder sortDateFacet(RangeFacet<Instant>... ranges) {
         DateRangeFacets dateRangeFacets = new DateRangeFacets();
         dateRangeFacets.setRanges(Arrays.asList(ranges));
         facets().setSortDates(dateRangeFacets);
         return this;
     }
 
-    public MediaFormBuilder durationFacet(RangeFacet<Duration>... ranges) {
+    @SafeVarargs
+    public final MediaFormBuilder durationFacet(RangeFacet<Duration>... ranges) {
         DurationRangeFacets dateRangeFacets = new DurationRangeFacets();
         dateRangeFacets.setRanges(Arrays.asList(ranges));
         facets().setDurations(dateRangeFacets);
@@ -495,6 +507,14 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     public MediaFormBuilder contentRatingsFacet() {
         facets().setContentRatings(new MediaFacet());
         return this;
+    }
+
+    /**
+     * @since 5.11
+     */
+    public MediaFormBuilder geoLocationFacet() {
+         facets().setGeoLocations(new MediaSearchableTermFacet());
+         return this;
     }
 
     public MediaFormBuilder facetFilter(MediaSearch search) {

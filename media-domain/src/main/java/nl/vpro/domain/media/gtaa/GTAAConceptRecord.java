@@ -4,12 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.net.URI;
+import java.util.List;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import nl.vpro.persistence.StringListConverter;
 import nl.vpro.validation.NoHtml;
 
 @MappedSuperclass
@@ -17,29 +19,32 @@ import nl.vpro.validation.NoHtml;
 @Setter
 public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> implements Serializable, Comparable<SELF> {
 
-    @Column(name = "gtaa_uri")
+    @Column(columnDefinition="varchar(255)", length = 255)
     @Getter
     @Id
     @lombok.NonNull
-    private String uri;
+    private URI uri;
 
-    @Column(nullable = true, length = 30, name = "gtaa_status")
+    @Column(nullable = true, length = 30)
     @Enumerated(EnumType.STRING)
     @Setter
     private GTAAStatus status;
 
+    @Column
     @NoHtml
-    @XmlElement
     @lombok.NonNull
     private String name;
 
+    @Column
+    @Convert(converter = StringListConverter.class)
     @NoHtml
-    @XmlElement
-    private String scopeNotes;
+    private List<String> scopeNotes;
 
     GTAAConceptRecord() {}
 
-    GTAAConceptRecord(@lombok.NonNull String uri, GTAAStatus status, @lombok.NonNull String name, String scopeNotes) {
+    GTAAConceptRecord(
+        @lombok.NonNull URI uri, GTAAStatus status, @lombok.NonNull String name,
+        List<String> scopeNotes) {
         this.name = name;
         this.scopeNotes = scopeNotes;
         this.uri = uri;
@@ -55,7 +60,6 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> im
             }
             return -1;
         }
-        int result = uri.compareToIgnoreCase(gtaaConceptRecord.getUri());
-        return result == 0 ? uri.compareTo(gtaaConceptRecord.getUri()) : result;
+        return uri.compareTo(gtaaConceptRecord.getUri());
     }
 }
