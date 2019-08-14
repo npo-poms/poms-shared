@@ -20,19 +20,16 @@ import nl.vpro.validation.NoHtml;
 public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> implements Serializable, Comparable<SELF> {
 
     @Column(columnDefinition="varchar(255)", length = 255)
-    @Getter
+    //@Convert(converter = URIConverter.class)
     @Id
-    @lombok.NonNull
-    private URI uri;
+    String uri;
 
     @Column(nullable = true, length = 30)
     @Enumerated(EnumType.STRING)
-    @Setter
     private GTAAStatus status;
 
     @Column
     @NoHtml
-    @lombok.NonNull
     private String name;
 
     @Column
@@ -47,10 +44,16 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> im
         List<String> scopeNotes) {
         this.name = name;
         this.scopeNotes = scopeNotes;
-        this.uri = uri;
+        this.uri = uri.toString();
         this.status = status;
     }
 
+    public URI getUri() {
+        return URI.create(uri);
+    }
+    public void  setUri(URI uri) {
+        this.uri = uri.toString();
+    }
 
     @Override
     public int compareTo(@NonNull SELF gtaaConceptRecord) {
@@ -60,6 +63,6 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> im
             }
             return -1;
         }
-        return uri.compareTo(gtaaConceptRecord.getUri());
+        return uri.compareTo(gtaaConceptRecord.uri);
     }
 }
