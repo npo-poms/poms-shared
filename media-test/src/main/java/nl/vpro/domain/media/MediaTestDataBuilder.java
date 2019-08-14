@@ -54,7 +54,7 @@ public interface MediaTestDataBuilder<
         .gtaaUri("http://data.beeldengeluid.nl/gtaa/36318")
         .status(GTAAStatus.approved)
         .name("Hilversum")
-        .scopeNotes("Nederland")
+        .scopeNote("Nederland")
         .build();
 
     AtomicLong idBase = new AtomicLong(0L);

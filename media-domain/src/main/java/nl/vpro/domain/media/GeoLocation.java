@@ -98,7 +98,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         this.role = role;
         this.gtaaRecord = GTAAGeoLocationRecord.builder()
             .name(name)
-            .scopeNotes(scopeNotes == null || scopeNotes.isEmpty() ? null : String.join("\t", scopeNotes))
+            .scopeNotes(scopeNotes)
             .uri(uri)
             .status(gtaaStatus)
             .build();
