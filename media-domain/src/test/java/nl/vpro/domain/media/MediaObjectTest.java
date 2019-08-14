@@ -124,7 +124,7 @@ public class MediaObjectTest {
         assertThat(mediaObject.getGeoLocations().first().getValues().size()).isEqualTo(1);
 
         //Add second geoLocation same Owner
-        geoLocation2.setGtaaRecord(GTAAGeoLocationRecord.builder().name("AnotherAmsterdam").uri("test/123").build());
+        geoLocation2.setGtaaRecord(GTAAGeoLocationRecord.builder().name("AnotherAmsterdam").gtaaUri("test/123").build());
         final boolean add =  MediaObjectOwnableLists.addValue(
                 mediaObject.getGeoLocations(),
                 () -> new GeoLocations(mediaObject, BROADCASTER),

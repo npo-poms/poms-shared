@@ -18,7 +18,7 @@ import nl.vpro.validation.NoHtml;
 @Setter
 public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> implements Serializable, Comparable<SELF> {
 
-    @Column(name = "gtaa_uri")
+    @Column(name = "gtaa_uri", columnDefinition="varchar(255)", length = 255)
     @Getter
     @Id
     @lombok.NonNull

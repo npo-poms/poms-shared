@@ -68,12 +68,12 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     public GeoLocation() {
     }
 
-    @lombok.Builder
+    @lombok.Builder(builderClassName = "Builder")
     private GeoLocation(
         Long id,
         @NonNull String name,
         @Singular List<String> scopeNotes,
-        @NonNull String gtaaUri,
+        @NonNull URI uri,
         GTAAStatus gtaaStatus,
         @NonNull GeoRoleType role
     ) {
@@ -82,7 +82,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         this.gtaaRecord = GTAAGeoLocationRecord.builder()
             .name(name)
             .scopeNotes(scopeNotes == null || scopeNotes.isEmpty() ? null : String.join("\t", scopeNotes))
-            .uri(gtaaUri)
+            .uri(uri)
             .status(gtaaStatus)
             .build();
     }
@@ -223,6 +223,14 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @Override
     public Type getType() {
         return Type.UNDEFINED;
+
+    }
+
+    public static class Builder {
+
+        public Builder gtaaUri(String uri) {
+            return uri(URI.create(uri));
+        }
 
     }
 

@@ -3,6 +3,8 @@ package nl.vpro.domain.media.gtaa;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.net.URI;
+
 import javax.persistence.Entity;
 
 import org.hibernate.annotations.Cache;
@@ -21,11 +23,19 @@ public class GTAAGeoLocationRecord extends GTAAConceptRecord<GTAAGeoLocationReco
 
     @lombok.Builder(builderClassName = "Builder")
     public GTAAGeoLocationRecord(
-        @lombok.NonNull String uri,
+        @lombok.NonNull URI uri,
         GTAAStatus status,
         @lombok.NonNull String name,
         String scopeNotes) {
         super(uri, status, name, scopeNotes);
+    }
+
+    public static class Builder {
+
+        public Builder gtaaUri(String uri) {
+            return uri(URI.create(uri));
+        }
+
     }
 
 }
