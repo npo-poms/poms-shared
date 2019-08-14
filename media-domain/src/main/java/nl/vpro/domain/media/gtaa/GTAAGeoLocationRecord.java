@@ -2,8 +2,10 @@ package nl.vpro.domain.media.gtaa;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Singular;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.persistence.Entity;
 
@@ -26,7 +28,7 @@ public class GTAAGeoLocationRecord extends GTAAConceptRecord<GTAAGeoLocationReco
         @lombok.NonNull URI uri,
         GTAAStatus status,
         @lombok.NonNull String name,
-        String scopeNotes) {
+        @Singular List<String> scopeNotes) {
         super(uri, status, name, scopeNotes);
     }
 
