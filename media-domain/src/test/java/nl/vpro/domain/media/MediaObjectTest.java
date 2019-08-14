@@ -111,7 +111,7 @@ public class MediaObjectTest {
         assertThat(result).isTrue();
 
         //Avoid duplicates
-        GeoLocation geoLocation2 = GeoLocation.builder().name("Amsterdam").gtaaUri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
+        final GeoLocation geoLocation2 = GeoLocation.builder().name("Amsterdam").gtaaUri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
 
         final boolean resultDuplicate =  MediaObjectOwnableLists.addValue(
                 mediaObject.getGeoLocations(),
@@ -124,7 +124,8 @@ public class MediaObjectTest {
         assertThat(mediaObject.getGeoLocations().first().getValues().size()).isEqualTo(1);
 
         //Add second geoLocation same Owner
-        geoLocation2.setGtaaRecord(GTAAGeoLocationRecord.builder().name("AnotherAmsterdam").gtaaUri("test/123").build());
+
+        geoLocation2.setGtaaRecord(GTAAGeoLocationRecord.builder().name("AnotherAmsterdam").gtaaUri("test/124").build());
         final boolean add =  MediaObjectOwnableLists.addValue(
                 mediaObject.getGeoLocations(),
                 () -> new GeoLocations(mediaObject, BROADCASTER),
