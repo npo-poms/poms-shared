@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.Singular;
 
 import java.net.URI;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -15,11 +14,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.meeuw.i18n.Region;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import nl.vpro.domain.DomainObject;
@@ -64,6 +64,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, targetEntity = GTAAGeoLocationRecord.class)
     @JoinColumn(name = "gtaa_uri")
     private GTAAGeoLocationRecord gtaaRecord = new GTAAGeoLocationRecord();
+
 
 
     public static GeoLocation of(GeoRoleType role, GTAAGeoLocationRecord gtaaRecord) {
@@ -128,14 +129,10 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @XmlElement(name = "scopeNote")
     @JsonProperty("scopeNotes")
     public List<String> getScopeNotes() {
-        String scopeNotes = gtaaRecord.getScopeNotes();
-        if (StringUtils.isEmpty(scopeNotes)) {
-            return null;
-        }
-        return Arrays.asList(scopeNotes.split("\t"));
+        return gtaaRecord.getScopeNotes();
     }
     public void setScopeNotes(List<String> scopeNotes) {
-        this.gtaaRecord.setScopeNotes(scopeNotes == null || scopeNotes.isEmpty() ? null : String.join("\t", scopeNotes));
+        this.gtaaRecord.setScopeNotes(scopeNotes);
     }
 
     @XmlAttribute
@@ -197,11 +194,10 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-            .appendSuper(super.toString())
+        return new ToStringBuilder(this, ToStringStyle.SHORT_PREFIX_STYLE)
             .append("name", getName())
             .append("relationType", role)
-            .append("description", getScopeNotes())
+            .append("scopeNotes", getScopeNotes())
             .append("gtaa_uri", getGtaaUri())
             .toString();
     }

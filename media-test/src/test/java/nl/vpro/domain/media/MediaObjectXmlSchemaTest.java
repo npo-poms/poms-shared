@@ -923,7 +923,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testWithGeoLocations() throws IOException, JAXBException {
+    public void testWithGeoLocations() throws Exception {
         StringWriter segment = new StringWriter();
         IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.xml"), segment, "UTF-8");
         String expected = segment.toString();
@@ -935,6 +935,10 @@ public class MediaObjectXmlSchemaTest {
                 .build();
 
         program.setSortInstant(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).toInstant());
+
+        JAXBTestUtil.roundTripAndSimilarAndEquals(program, expected);
+
+
 
         String actual = toXml(program);
 

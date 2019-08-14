@@ -5,12 +5,13 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.List;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import nl.vpro.persistence.StringListConverter;
 import nl.vpro.validation.NoHtml;
 
 @MappedSuperclass
@@ -29,18 +30,21 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> im
     @Setter
     private GTAAStatus status;
 
+    @Column
     @NoHtml
-    @XmlElement
     @lombok.NonNull
     private String name;
 
+    @Column
+    @Convert(converter = StringListConverter.class)
     @NoHtml
-    @XmlElement
-    private String scopeNotes;
+    private List<String> scopeNotes;
 
     GTAAConceptRecord() {}
 
-    GTAAConceptRecord(@lombok.NonNull URI uri, GTAAStatus status, @lombok.NonNull String name, String scopeNotes) {
+    GTAAConceptRecord(
+        @lombok.NonNull URI uri, GTAAStatus status, @lombok.NonNull String name,
+        List<String> scopeNotes) {
         this.name = name;
         this.scopeNotes = scopeNotes;
         this.uri = uri;
