@@ -69,6 +69,16 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     public static GeoLocation of(GeoRoleType role, GTAAGeoLocationRecord gtaaRecord) {
         return new GeoLocation(role, gtaaRecord);
     }
+    public static GeoLocation subject(GTAAGeoLocationRecord gtaaRecord) {
+        return of(GeoRoleType.SUBJECT, gtaaRecord);
+    }
+    public static GeoLocation producedIn(GTAAGeoLocationRecord gtaaRecord) {
+        return of(GeoRoleType.PRODUCED_IN, gtaaRecord);
+    }
+    public static GeoLocation recordedIn(GTAAGeoLocationRecord gtaaRecord) {
+        return of(GeoRoleType.RECORDED_IN, gtaaRecord);
+    }
+
 
 
     public GeoLocation() {

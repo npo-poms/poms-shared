@@ -547,6 +547,11 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         return geoLocations(wrapper);
     }
 
+
+    default B geoLocations(GeoLocation... geoLocations) {
+        return geoLocations(OwnerType.BROADCASTER, geoLocations);
+    }
+
     default B geoLocations(Collection<GeoLocations> geoLocations) {
         geoLocations.forEach(geos -> MediaObjectOwnableLists.addOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
         return (B)this;
