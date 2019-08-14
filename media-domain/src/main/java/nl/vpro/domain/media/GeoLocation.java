@@ -65,6 +65,12 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
     @JoinColumn(name = "gtaa_uri")
     private GTAAGeoLocationRecord gtaaRecord = new GTAAGeoLocationRecord();
 
+
+    public static GeoLocation of(GeoRoleType role, GTAAGeoLocationRecord gtaaRecord) {
+        return new GeoLocation(role, gtaaRecord);
+    }
+
+
     public GeoLocation() {
     }
 

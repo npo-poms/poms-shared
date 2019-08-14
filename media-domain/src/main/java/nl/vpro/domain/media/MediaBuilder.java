@@ -538,6 +538,14 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     default B geoLocations(GeoLocations... geoLocations) {
         return geoLocations(Arrays.asList(geoLocations));
     }
+    default B geoLocations(OwnerType owner, GeoLocation... geoLocations) {
+        GeoLocations wrapper= GeoLocations.builder()
+            .owner(owner)
+            .values(Arrays.asList(geoLocations))
+            .parent(mediaObject())
+            .build();
+        return geoLocations(wrapper);
+    }
 
     default B geoLocations(Collection<GeoLocations> geoLocations) {
         geoLocations.forEach(geos -> MediaObjectOwnableLists.addOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
