@@ -19,6 +19,7 @@ import java.util.function.Function;
 import org.apache.commons.lang3.StringUtils;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.gtaa.GTAAGeoLocationRecord;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -38,6 +39,23 @@ public interface MediaTestDataBuilder<
         M extends MediaObject
         >
     extends MediaBuilder<T, M>, Cloneable {
+
+    GTAAGeoLocationRecord AMSTERDAM = GTAAGeoLocationRecord.builder()
+        .gtaaUri("http://data.beeldengeluid.nl/gtaa/31586")
+        .status(GTAAStatus.approved)
+        .name("Amsterdam")
+        .build();
+    GTAAGeoLocationRecord UTRECHT = GTAAGeoLocationRecord.builder()
+        .gtaaUri("http://data.beeldengeluid.nl/gtaa/43996")
+        .status(GTAAStatus.approved)
+        .name("Utrecht (stad)")
+        .build();
+    GTAAGeoLocationRecord HILVERSUM = GTAAGeoLocationRecord.builder()
+        .gtaaUri("http://data.beeldengeluid.nl/gtaa/36318")
+        .status(GTAAStatus.approved)
+        .name("Hilversum")
+        .scopeNote("Nederland")
+        .build();
 
     AtomicLong idBase = new AtomicLong(0L);
 
