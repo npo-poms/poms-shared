@@ -347,6 +347,9 @@ public class MediaFormBuilder extends AbstractFormBuilder {
         return this;
     }
 
+    /**
+     * @since 5.11
+     */
     public MediaFormBuilder geoLocation(GeoLocationSearch... searches) {
         List<GeoLocationSearch> geoLocations = search().getGeoLocations();
         if (geoLocations == null) {
@@ -504,6 +507,14 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     public MediaFormBuilder contentRatingsFacet() {
         facets().setContentRatings(new MediaFacet());
         return this;
+    }
+
+    /**
+     * @since 5.11
+     */
+    public MediaFormBuilder geoLocationFacet() {
+         facets().setGeoLocations(new MediaSearchableTermFacet());
+         return this;
     }
 
     public MediaFormBuilder facetFilter(MediaSearch search) {
