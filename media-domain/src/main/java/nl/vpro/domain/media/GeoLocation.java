@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.Setter;
 import lombok.Singular;
 
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -133,12 +134,12 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
 
     @XmlAttribute
-    public String getGtaaUri() {
+    public URI getGtaaUri() {
         return Optional.ofNullable(gtaaRecord)
                 .map(GTAAGeoLocationRecord::getUri)
                 .orElse(null);
     }
-    public void setGtaaUri(String uri) {
+    public void setGtaaUri(URI uri) {
         this.gtaaRecord.setUri(uri);
     }
 
@@ -215,7 +216,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
     @Override
     public String getCode() {
-        return getGtaaUri();
+        return getGtaaUri().toString();
 
     }
 

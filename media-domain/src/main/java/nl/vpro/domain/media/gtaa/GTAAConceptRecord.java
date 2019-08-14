@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.net.URI;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
@@ -21,7 +22,7 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> im
     @Getter
     @Id
     @lombok.NonNull
-    private String uri;
+    private URI uri;
 
     @Column(nullable = true, length = 30, name = "gtaa_status")
     @Enumerated(EnumType.STRING)
@@ -39,7 +40,7 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> im
 
     GTAAConceptRecord() {}
 
-    GTAAConceptRecord(@lombok.NonNull String uri, GTAAStatus status, @lombok.NonNull String name, String scopeNotes) {
+    GTAAConceptRecord(@lombok.NonNull URI uri, GTAAStatus status, @lombok.NonNull String name, String scopeNotes) {
         this.name = name;
         this.scopeNotes = scopeNotes;
         this.uri = uri;
@@ -55,7 +56,6 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> im
             }
             return -1;
         }
-        int result = uri.compareToIgnoreCase(gtaaConceptRecord.getUri());
-        return result == 0 ? uri.compareTo(gtaaConceptRecord.getUri()) : result;
+        return uri.compareTo(gtaaConceptRecord.getUri());
     }
 }
