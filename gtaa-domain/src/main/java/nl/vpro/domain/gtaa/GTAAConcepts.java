@@ -36,7 +36,7 @@ public class GTAAConcepts {
         Description description = Description.builder()
                 .prefLabel(
                         Label.builder()
-                                .value(thesaurusObject.getValue())
+                                .value(thesaurusObject.getName())
                                 .build()
                 ).scopeNote(thesaurusObject.getScopeNotesAsLabel())
                 .inScheme(SCHEME_URI + thesaurusObject.getObjectType())
@@ -63,7 +63,7 @@ public class GTAAConcepts {
         return Description.builder()
                 .prefLabel(
                         Label.builder()
-                                .value(thesaurusObject.getValue())
+                                .value(thesaurusObject.getName())
                                 .build()
                 ).scopeNote(thesaurusObject.getScopeNotesAsLabel())
                 .inScheme(SCHEME_URI + thesaurusObject.getObjectType())

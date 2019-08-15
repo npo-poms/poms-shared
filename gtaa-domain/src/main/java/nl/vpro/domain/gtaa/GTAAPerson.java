@@ -127,7 +127,7 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
     }
 
     @Override
-    public void setValue(String v) {
+    public void setName(String v) {
         // ignore
     }
 

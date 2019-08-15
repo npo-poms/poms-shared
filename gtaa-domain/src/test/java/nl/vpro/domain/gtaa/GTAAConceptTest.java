@@ -48,7 +48,7 @@ public class GTAAConceptTest {
         jsonType = scheme.getJsonObjectType();
         assertThat(jsonType).isEqualTo(xmlType.toLowerCase());
         concept = (AbstractGTAAConcept) this.scheme.getImplementation().getConstructor().newInstance();
-        concept.setValue("concept");
+        concept.setName("concept");
         concept.setId(URI.create("http://gtaa/1234"));
         concept.setScopeNotes(Arrays.asList("bla"));
         concept.setLastModified(LocalDateTime.of(2017, 9, 20, 10, 43, 0).atZone(BindingUtils.DEFAULT_ZONE).toInstant());

@@ -103,7 +103,7 @@ public class OpenskosRepository implements GTAARepository {
     @Override
     public <T extends GTAAConcept, S extends GTAANewConcept> T submit(@NonNull S thesaurusObject, @NonNull String creator) {
         final Description description = submit(
-            thesaurusObject.getValue(),
+            thesaurusObject.getName(),
             thesaurusObject.getScopeNotesAsLabel(),
             creator,
             thesaurusObject.getObjectType()
