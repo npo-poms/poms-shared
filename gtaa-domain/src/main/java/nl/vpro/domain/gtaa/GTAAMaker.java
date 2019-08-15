@@ -12,7 +12,7 @@ import nl.vpro.w3.rdf.Description;
 @GTAAScheme(Scheme.maker)
 @XmlType(name = "maker",
     propOrder = {
-        "value",
+        "name",
         "scopeNotes",
         "redirectedFrom"
     }

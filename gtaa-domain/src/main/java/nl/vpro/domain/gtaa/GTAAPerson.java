@@ -35,7 +35,7 @@ import nl.vpro.w3.rdf.Description;
 @XmlType(
     name = "person",
     propOrder = {
-    "value",
+        "name",
     "givenName",
     "familyName",
     "scopeNotes",
@@ -122,7 +122,7 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
 
     @Override
     @XmlElement
-    public String getValue() {
+    public String getName() {
         return PersonInterface.stringValue(givenName, familyName);
     }
 

@@ -15,7 +15,7 @@ import nl.vpro.w3.rdf.Description;
 @XmlType(
     name = "geographicName",
     propOrder = {
-    "value",
+    "name",
     "scopeNotes",
     "redirectedFrom"
 })
@@ -48,10 +48,5 @@ public class GTAAGeographicName extends AbstractSimpleValueGTAAConcept implement
     public Type getType() {
         return Type.UNDEFINED;
 
-    }
-
-    @Override
-    public String getName() {
-        return getValue();
     }
 }

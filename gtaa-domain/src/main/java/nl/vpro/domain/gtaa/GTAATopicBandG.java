@@ -16,7 +16,7 @@ import nl.vpro.w3.rdf.Description;
 @GTAAScheme(Scheme.topicbandg)
 @XmlType(name = "topicbandg",
     propOrder = {
-        "value",
+        "name",
         "scopeNotes",
         "redirectedFrom"
     }

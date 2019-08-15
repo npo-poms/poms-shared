@@ -29,8 +29,8 @@ public class AbstractSimpleValueGTAAConcept extends AbstractGTAAConcept {
 
     @Override
     @XmlElement
-    public String getValue() {
-         return super.getValue();
+    public String getName() {
+         return super.getName();
     }
 
 }
