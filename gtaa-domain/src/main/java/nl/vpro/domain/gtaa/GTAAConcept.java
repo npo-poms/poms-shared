@@ -37,7 +37,7 @@ public interface GTAAConcept {
 
     Instant getLastModified();
 
-    String getValue();
+    String getName();
 
     Status getStatus();
 

@@ -35,7 +35,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "geoLocationType", propOrder = {
         "name",
         "scopeNotes",

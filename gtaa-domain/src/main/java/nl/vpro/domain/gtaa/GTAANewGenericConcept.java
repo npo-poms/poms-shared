@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 @XmlType(
     name = "newConceptType",
     propOrder = {
-    "value",
+    "name",
     "scopeNotes"
 })
 @XmlAccessorType(XmlAccessType.NONE)
@@ -30,7 +30,7 @@ public class GTAANewGenericConcept extends AbstractGTAANewConcept  {
     @Getter
     @Setter
     @XmlElement
-    private String value;
+    private String name;
 
     @Getter
     @Setter
@@ -39,10 +39,10 @@ public class GTAANewGenericConcept extends AbstractGTAANewConcept  {
 
     @lombok.Builder
     public GTAANewGenericConcept(
-        String value,
+        String name,
         @lombok.Singular List<String> scopeNotes,
         Scheme scheme) {
-        this.value = value;
+        this.name = name;
         this.scopeNotes = scopeNotes;
         this.objectType = scheme;
     }

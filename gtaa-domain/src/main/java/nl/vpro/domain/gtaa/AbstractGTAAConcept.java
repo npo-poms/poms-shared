@@ -43,7 +43,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
     @Getter
     @Setter
-    String value;
+    String name;
 
     @Getter
     @Setter
@@ -68,10 +68,10 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
 
     }
 
-    AbstractGTAAConcept(URI id, List<String> scopeNotes, String value, URI redirectedFrom, Status status, Instant lastModified) {
+    AbstractGTAAConcept(URI id, List<String> scopeNotes, String name, URI redirectedFrom, Status status, Instant lastModified) {
         this.id = id;
         this.scopeNotes = scopeNotes == null || scopeNotes.isEmpty() ? null : scopeNotes;
-        this.value = value;
+        this.name = name;
         this.redirectedFrom = redirectedFrom;
         this.status = status;
         this.lastModified = lastModified;
@@ -80,7 +80,7 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
     protected static void fill(Description description, AbstractGTAAConcept answer) {
         answer.setId(description.getAbout());
         if (description.getPrefLabel() != null) {
-            answer.setValue(description.getPrefLabel().getValue());
+            answer.setName(description.getPrefLabel().getValue());
         }
         answer.setScopeNotes(description.getScopeNote() == null ? null : description.getScopeNote().stream().map(Label::getValue).collect(Collectors.toList()));
         answer.setStatus(description.getStatus());
@@ -93,13 +93,13 @@ public abstract class AbstractGTAAConcept implements GTAAConcept, Serializable {
     }
 
     protected void fill(URI id,
-                        String value,
+                        String name,
                         List<String> notes,
                         Status status,
                         URI changeNote,
                         Instant modified) {
         this.setId(id);
-        this.setValue(value);
+        this.setName(name);
         this.setScopeNotes(notes);
         this.setStatus(status);
         if (changeNote != null) {

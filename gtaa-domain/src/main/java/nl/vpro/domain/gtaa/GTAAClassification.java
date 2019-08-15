@@ -16,7 +16,7 @@ import nl.vpro.w3.rdf.Description;
 @GTAAScheme(Scheme.classification)
 @XmlType(name = "classification",
     propOrder = {
-        "value",
+        "name",
         "scopeNotes",
         "redirectedFrom"
     }

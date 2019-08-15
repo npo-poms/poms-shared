@@ -26,7 +26,7 @@ import nl.vpro.openarchives.oai.Label;
     GTAANewGenericConcept.class
 })
 public interface GTAANewConcept {
-    String getValue();
+    String getName();
 
     List<String> getScopeNotes();
 
