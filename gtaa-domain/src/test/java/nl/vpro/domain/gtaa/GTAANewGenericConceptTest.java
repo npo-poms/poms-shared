@@ -16,16 +16,16 @@ public class GTAANewGenericConceptTest {
     public void json() throws Exception {
 
         GTAANewGenericConcept person =
-            GTAANewGenericConcept.builder().value("bla")
+            GTAANewGenericConcept.builder()
                 .scheme(Scheme.genre)
-                .value("new genre")
+                .name("new genre")
                 .scopeNote("Bla")
                 .build();
 
 
         Jackson2TestUtil.roundTripAndSimilar(person, "{\n" +
             "  \"newObjectType\" : \"concept\",\n" +
-            "  \"value\" : \"new genre\",\n" +
+            "  \"name\" : \"new genre\",\n" +
             "  \"scopeNotes\" : [ \"Bla\" ],\n" +
             "  \"objectType\" : \"genre\"\n" +
             "}");
@@ -38,10 +38,10 @@ public class GTAANewGenericConceptTest {
         GTAANewGenericConcept person = GTAANewGenericConcept
             .builder()
             .scheme(Scheme.maker)
-            .value("Pietje Puk")
+            .name("Pietje Puk")
             .scopeNote("test").build();
         JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newConcept gtaa:objectType=\"maker\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:gtaa=\"urn:vpro:gtaa:2017\" xmlns:openskos=\"http://openskos.org/xmlns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n" +
-            "    <gtaa:value>Pietje Puk</gtaa:value>\n" +
+            "    <gtaa:name>Pietje Puk</gtaa:name>\n" +
             "    <gtaa:scopeNote>test</gtaa:scopeNote>\n" +
             "</gtaa:newConcept>");
 

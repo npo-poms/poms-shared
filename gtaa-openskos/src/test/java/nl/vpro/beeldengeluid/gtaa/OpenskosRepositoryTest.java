@@ -59,7 +59,7 @@ public class OpenskosRepositoryTest {
 
         repo.setUseXLLabels(true);
         GTAANewGenericConcept testNameX = GTAANewGenericConcept.builder()
-            .value("Testlabel1")
+            .name("Testlabel1")
             .scopeNote("Note123")
             .scheme(Scheme.name)
             .build();

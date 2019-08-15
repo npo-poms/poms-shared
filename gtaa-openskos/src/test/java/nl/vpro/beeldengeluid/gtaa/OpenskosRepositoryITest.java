@@ -52,7 +52,7 @@ public class OpenskosRepositoryITest {
 
         GTAANewGenericConcept geographicName = GTAANewGenericConcept
                 .builder()
-                .value("Driedorp3")
+                .name("Driedorp3")
                 .scopeNote("Buurtschap binnen de gemeente Nijkerk")
                 .scheme(Scheme.geographicname)
                 .build();
