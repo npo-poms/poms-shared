@@ -1,5 +1,6 @@
 package nl.vpro.domain.gtaa;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,6 +34,14 @@ public interface GTAANewConcept {
     Scheme getObjectType();
 
     default List<Label> getScopeNotesAsLabel() {
-        return getScopeNotes().stream().map(Label::forValue).collect(Collectors.toList());
+        List<String> scopeNotes = getScopeNotes();
+        if (scopeNotes != null) {
+            return scopeNotes
+                .stream()
+                .map(Label::forValue)
+                .collect(Collectors.toList());
+        } else {
+            return Collections.emptyList();
+        }
     }
 }
