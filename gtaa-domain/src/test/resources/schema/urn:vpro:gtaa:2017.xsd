@@ -23,7 +23,7 @@
 
   <xs:complexType name="person">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="givenName" type="xs:string" minOccurs="0"/>
       <xs:element name="familyName" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -44,7 +44,7 @@
 
   <xs:complexType name="geographicName">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -55,7 +55,7 @@
 
   <xs:complexType name="topic">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -66,7 +66,7 @@
 
   <xs:complexType name="topicbandg">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -77,7 +77,7 @@
 
   <xs:complexType name="classification">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -88,7 +88,7 @@
 
   <xs:complexType name="maker">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -99,7 +99,7 @@
 
   <xs:complexType name="genre">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -110,7 +110,7 @@
 
   <xs:complexType name="name">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="redirectedFrom" type="xs:string" minOccurs="0"/>
     </xs:sequence>
@@ -121,7 +121,7 @@
 
   <xs:complexType name="newConceptType">
     <xs:sequence>
-      <xs:element name="value" type="xs:string" minOccurs="0"/>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute ref="tns:objectType"/>
