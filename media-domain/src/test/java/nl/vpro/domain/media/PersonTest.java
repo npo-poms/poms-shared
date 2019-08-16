@@ -24,7 +24,8 @@ public class PersonTest {
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"Puk\",\n" +
             "  \"role\" : \"ACTOR\",\n" +
-            "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\"\n" +
+            "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
+                " \"gtaaStatus\" : \"approved\"\n"  +
             "}").andRounded().isEqualTo(person);
 
     }
@@ -35,7 +36,7 @@ public class PersonTest {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
         person.setGtaaRecord(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         JAXBTestUtil.assertThatXml(person).isSimilarTo(
-            "<local:person role=\"ACTOR\" gtaaUri=\"http://data.beeldengeluid.nl/gtaa/1869521\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
+            "<local:person role=\"ACTOR\" gtaaStatus=\"approved\" gtaaUri=\"http://data.beeldengeluid.nl/gtaa/1869521\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
             "    <givenName>Pietje</givenName>\n" +
             "    <familyName>Puk</familyName>\n" +
             "</local:person>").andRounded().isEqualTo(person);
