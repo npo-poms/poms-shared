@@ -10,21 +10,20 @@ import lombok.ToString;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 /**
  *
  * @since 5.11
  */
 @Embeddable
+@MappedSuperclass
 @ToString
 public abstract class EmbeddableGTAARecord implements Serializable, Cloneable {
 
     @Column(nullable = true, name = "gtaa_uri")
     @Getter
+    @Setter
     private String uri;
 
     @Column(nullable = true, length = 30, name = "gtaa_status")

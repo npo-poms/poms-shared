@@ -3,6 +3,7 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.net.URI;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -18,6 +19,7 @@ import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
+import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.validation.NoHtml;
 
 @Entity
@@ -122,10 +124,25 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
         String familyName,
         RoleType role,
         MediaObject mediaObject,
-        EmbeddablePerson gtaaRecord) {
+        GTAAStatus gtaaStatus,
+        URI uri,
+        Boolean gtaaKnownAs
+        ) {
         this(id, givenName, familyName, role);
         this.mediaObject = mediaObject;
-        this.gtaaRecord = gtaaRecord;
+        if (uri != null) {
+            this.gtaaRecord = new EmbeddablePerson();
+            this.gtaaRecord.setStatus(gtaaStatus);
+            this.gtaaRecord.setUri(uri.toString());
+            if (gtaaKnownAs != null) {
+                this.gtaaRecord.setKnownAs(gtaaKnownAs);
+            }
+        } else {
+            if (gtaaStatus != null) {
+                throw new IllegalArgumentException();
+            }
+        }
+
     }
 
     /**
@@ -174,8 +191,40 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
                 .orElse(null);
     }
     public void setGtaaUri(String uri) {
-        this.gtaaRecord = new EmbeddablePerson(uri, null);
+        if (this.gtaaRecord == null) {
+            this.gtaaRecord = new EmbeddablePerson();
+        }
+        this.gtaaRecord.setUri(uri);
     }
+
+
+    @XmlAttribute
+    public GTAAStatus getGtaaStatus() {
+        return Optional.ofNullable(gtaaRecord)
+                .map(EmbeddablePerson::getStatus)
+                .orElse(null);
+    }
+    public void setGtaaStatus(GTAAStatus status) {
+        if (this.gtaaRecord == null) {
+            this.gtaaRecord = new EmbeddablePerson();
+        }
+        this.gtaaRecord.setStatus(status);
+    }
+
+
+
+    public Boolean getGtaaKnownAs() {
+        return Optional.ofNullable(gtaaRecord)
+                .map(EmbeddablePerson::isKnownAs)
+                .orElse(null);
+    }
+    public void setGtaaKnownAs(Boolean knownAs) {
+        if (this.gtaaRecord == null) {
+            this.gtaaRecord = new EmbeddablePerson();
+        }
+        this.gtaaRecord.setKnownAs(knownAs);
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -225,7 +274,7 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
 
     public static class Builder {
         public Builder gtaaUri(String uri) {
-            return gtaaRecord(EmbeddablePerson.builder().uri(uri).build());
+            return uri(uri == null ? null : URI.create(uri));
         }
     }
 

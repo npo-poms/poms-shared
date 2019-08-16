@@ -18,14 +18,14 @@ import javax.persistence.Embeddable;
  * @since 3.7
  */
 @Embeddable
-@ToString
+@ToString(callSuper = true)
 public class EmbeddablePerson extends EmbeddableGTAARecord implements Serializable {
 
 
     @Column(name = "gtaa_knownas")
     private Boolean knownAs = false;
 
-    protected EmbeddablePerson() {
+    public EmbeddablePerson() {
         super();
     }
 
