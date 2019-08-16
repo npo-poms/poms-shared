@@ -1,6 +1,5 @@
 package nl.vpro.domain.gtaa;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -29,7 +28,7 @@ public class ThesaurusObjectsTest {
 
     Scheme scheme;
 
-    public ThesaurusObjectsTest(Scheme scheme) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public ThesaurusObjectsTest(Scheme scheme) {
         this.scheme = scheme;
     }
 
