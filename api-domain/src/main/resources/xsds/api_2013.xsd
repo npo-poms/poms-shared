@@ -179,6 +179,7 @@
       <xs:element name="ageRatings" type="textMatcherListType" minOccurs="0"/>
       <xs:element name="contentRatings" type="textMatcherListType" minOccurs="0"/>
       <xs:element name="titles" type="titleSearchType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="geoLocations" type="geoLocationSearchType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="match" type="match"/>
   </xs:complexType>
@@ -256,6 +257,17 @@
         <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
         <xs:attribute name="type" type="media:textualTypeEnum"/>
         <xs:attribute name="matchType" type="standardMatchType"/>
+        <xs:attribute name="match" type="match"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="geoLocationSearchType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+        <xs:attribute name="role" type="media:geoRoleType"/>
+        <xs:attribute name="gtaaUri" type="xs:string"/>
         <xs:attribute name="match" type="match"/>
       </xs:extension>
     </xs:simpleContent>
@@ -462,6 +474,7 @@
       <xs:element name="relations" type="mediaRelationFacetListType" minOccurs="0"/>
       <xs:element name="ageRatings" type="mediaFacetType" minOccurs="0"/>
       <xs:element name="contentRatings" type="mediaFacetType" minOccurs="0"/>
+      <xs:element name="geoLocations" type="mediaSearchableTermFacetType" minOccurs="0"/>
       <xs:element name="filter" type="mediaSearchType" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
@@ -662,6 +675,7 @@
       <xs:element name="sortDates" type="dateFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="broadcasters" type="termFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="genres" type="mediaGenreFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="geoLocations" type="mediaGeoLocationFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tags" type="termFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="durations" type="durationFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="descendantOf" type="memberRefFacetResultItemType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
@@ -713,6 +727,16 @@
   </xs:complexType>
 
   <xs:complexType name="mediaGenreFacetResultItemType">
+    <xs:complexContent>
+      <xs:extension base="termFacetResultItemType">
+        <xs:sequence>
+          <xs:element name="term" type="media:termType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="mediaGeoLocationFacetResultItemType">
     <xs:complexContent>
       <xs:extension base="termFacetResultItemType">
         <xs:sequence>
