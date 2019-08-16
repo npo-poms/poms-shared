@@ -39,12 +39,12 @@ public class ThesaurusResultTest {
                     "<api:thesaurusItems offset=\"0\" max=\"10\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:media=\"urn:vpro:media:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:oai=\"http://www.openarchives.org/OAI/2.0/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:api=\"urn:vpro:api:2013\" xmlns:gtaa=\"urn:vpro:gtaa:2017\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:openskos=\"http://openskos.org/xmlns#\">\n" +
                     "    <api:items>\n" +
                     "        <api:item xsi:type=\"gtaa:person\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-                    "            <gtaa:value>puk, pietje</gtaa:value>\n" +
+                    "            <gtaa:name>puk, pietje</gtaa:name>\n" +
                     "            <gtaa:givenName>pietje</gtaa:givenName>\n" +
                     "            <gtaa:familyName>puk</gtaa:familyName>\n" +
                     "        </api:item>\n" +
                     "        <api:item xsi:type=\"gtaa:geographicName\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
-                    "            <gtaa:value>Amsterdam</gtaa:value>\n" +
+                    "            <gtaa:name>Amsterdam</gtaa:name>\n" +
                     "        </api:item>\n" +
                     "    </api:items>\n" +
                     "</api:thesaurusItems>");
