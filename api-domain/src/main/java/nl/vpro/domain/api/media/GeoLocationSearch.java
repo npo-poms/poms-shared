@@ -43,7 +43,7 @@ public class GeoLocationSearch extends AbstractSearch implements Predicate<GeoLo
     @XmlAttribute
     @Getter
     @Setter
-    private URI gtaaURI;
+    private URI gtaaUri;
 
     @XmlValue
     @Setter
@@ -62,7 +62,7 @@ public class GeoLocationSearch extends AbstractSearch implements Predicate<GeoLo
     private GeoLocationSearch(
         OwnerType owner,
         String value,
-        URI gtaaURI,
+        URI gtaaUri,
         GeoRoleType role,
         Match match,
         Boolean caseSensitive) {
@@ -70,7 +70,7 @@ public class GeoLocationSearch extends AbstractSearch implements Predicate<GeoLo
         this.value = value;
         this.caseSensitive = caseSensitive;
         this.owner = owner;
-        this.gtaaURI = gtaaURI;
+        this.gtaaUri = gtaaUri;
         this.role = role;
     }
 
@@ -89,7 +89,7 @@ public class GeoLocationSearch extends AbstractSearch implements Predicate<GeoLo
         return "GeoLocationSearch{" +
             "owner=" + owner +
             ", role=" + role +
-            ", gtaaURI=" + gtaaURI +
+            ", gtaaURI=" + gtaaUri +
             ", value='" + value + '\'' +
             ", caseSensitive=" + caseSensitive +
             '}';
@@ -115,7 +115,7 @@ public class GeoLocationSearch extends AbstractSearch implements Predicate<GeoLo
 
     public boolean searchEquals(GeoLocationSearch other) {
         return Objects.equals(owner, other.owner) &&
-            Objects.equals(gtaaURI, other.gtaaURI) &&
+            Objects.equals(gtaaUri, other.gtaaUri) &&
             Objects.equals(value, other.value);
 
     }
