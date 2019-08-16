@@ -151,7 +151,7 @@ public class OpenskosRepositoryITest {
     @Ignore("This is not a junit test")
     public void testFindGeo() {
         OpenskosRepository impl = getRealInstance();
-        List<Description> geonames = impl.findForSchemes("hasselt", 1000, Scheme.geographicname.name());
+        List<Description> geonames = impl.findForSchemes("amsterdam", 1000, Scheme.geographicname.name());
         assertThat(geonames).isNotEmpty();
         assertThat(geonames.get(0).getStatus()).isNotNull();
         for (Description geoname : geonames)  {
