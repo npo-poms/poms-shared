@@ -558,7 +558,7 @@ public class Location extends PublishableObject<Location>
     @Override
     public Instant getPublishStopInstant() {
         if(hasPlatform() && mediaObject != null) {
-            Instant streamingOffline = onStreaming() ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;
+            Instant streamingOffline = onStreaming() && mediaObject.getStreamingPlatformStatus() != null ? mediaObject.getStreamingPlatformStatus().getOffline(hasDrm()) : null;
             try {
                 Prediction record = getAuthorityRecord(false);
                 if (record != null) {
