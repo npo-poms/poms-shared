@@ -28,7 +28,7 @@ public class CountryWrapper {
     }
 
     public CountryWrapper(String code) {
-        this.code = Country.getByCode(code).orElseThrow(() -> new IllegalArgumentException("no such country  + code"));
+        this.code = Country.getByCode(code).orElseThrow(() -> new IllegalArgumentException("no such country " + code));
     }
 
     public CountryWrapper(Region code) {
