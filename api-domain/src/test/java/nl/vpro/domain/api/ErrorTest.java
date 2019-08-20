@@ -37,8 +37,9 @@ public class ErrorTest {
             "  \"status\" : 404,\n" +
             "  \"message\" : \"bla\",\n" +
             "  \"classes\" : [ \"java.lang.RuntimeException\", \"java.lang.Exception\", \"java.lang.Throwable\", \"java.io.Serializable\" ],\n" +
-            "   \"cause\" : \"cause\",\n" +
+            "  \"cause\" : \"cause\",\n" +
             "  \"testResult\" : {\n" +
+            "    \"objectType\" : \"AndPredicateTestResult\",\n" +
             "    \"reason\" : \"And\",\n" +
             "    \"applies\" : false,\n" +
             "    \"description\" : {\n" +
@@ -46,6 +47,7 @@ public class ErrorTest {
             "      \"lang\" : \"en_US\"\n" +
             "    },\n" +
             "    \"clauses\" : [ {\n" +
+            "      \"objectType\" : \"PredicateTestResult\",\n" +
             "      \"reason\" : \"AlwaysFalse\",\n" +
             "      \"applies\" : false,\n" +
             "      \"description\" : {\n" +
@@ -53,6 +55,7 @@ public class ErrorTest {
             "        \"lang\" : \"en_US\"\n" +
             "      }\n" +
             "    }, {\n" +
+            "      \"objectType\" : \"PredicateTestResult\",\n" +
             "      \"reason\" : \"AlwaysTrue\",\n" +
             "      \"applies\" : true,\n" +
             "      \"description\" : {\n" +

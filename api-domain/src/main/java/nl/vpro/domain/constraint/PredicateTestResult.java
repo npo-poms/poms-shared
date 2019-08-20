@@ -5,17 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.Locale;
 
-import javax.el.ELContext;
-import javax.el.ExpressionFactory;
-import javax.el.ValueExpression;
+import javax.el.*;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.LocalizedString;
@@ -29,6 +23,13 @@ import nl.vpro.i18n.LocalizedString;
 @Slf4j
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonPropertyOrder({"reason", "applies", "description"})
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "objectType")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = PredicateTestResult.class),
+    @JsonSubTypes.Type(value = AndPredicateTestResult.class),
+    @JsonSubTypes.Type(value = NotPredicateTestResult.class),
+    @JsonSubTypes.Type(value = OrPredicateTestResult.class)
+})
 public class PredicateTestResult<T> {
 
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();
