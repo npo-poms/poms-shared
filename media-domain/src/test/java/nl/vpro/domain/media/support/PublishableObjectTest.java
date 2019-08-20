@@ -11,6 +11,7 @@ import org.junit.experimental.theories.Theory;
 
 import nl.vpro.theory.ObjectTest;
 
+import static nl.vpro.domain.media.support.Workflow.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertFalse;
@@ -33,20 +34,20 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     public static PublishableObject withId2 = data(2L, null, null, null);
 
     @DataPoint
-    public static PublishableObject forPublication = data(2L, Workflow.FOR_PUBLICATION, null, null);
+    public static PublishableObject forPublication = data(2L, FOR_PUBLICATION, null, null);
 
     @DataPoint
-    public static PublishableObject forRePublication = data(3L, Workflow.FOR_REPUBLICATION, null, null);
+    public static PublishableObject forRePublication = data(3L, FOR_REPUBLICATION, null, null);
 
     @DataPoint
-    public static PublishableObject revoked = data(1L, Workflow.REVOKED, null, null);
+    public static PublishableObject revoked = data(1L, REVOKED, null, null);
 
     @DataPoint
-    public static PublishableObject published = data(2L, Workflow.PUBLISHED, null, null);
+    public static PublishableObject published = data(2L, PUBLISHED, null, null);
 
     @DataPoint
     public static PublishableObject publishedWithFutureStop = data(2L,
-        Workflow.PUBLISHED,
+        PUBLISHED,
         null,
         Instant.now().plusSeconds(100)
     );
@@ -58,12 +59,12 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     public static PublishableObject deleted = data(4L, Workflow.DELETED, null, null);
 
     @DataPoint
-    public static PublishableObject futurePublication = data(5L, Workflow.FOR_PUBLICATION,
+    public static PublishableObject futurePublication = data(5L, FOR_PUBLICATION,
         Instant.now().plusSeconds(100), null);
 
     @DataPoint
     public static PublishableObject revocationFallsForPublication = data(7L,
-        Workflow.PUBLISHED,
+        PUBLISHED,
         Instant.now().plusSeconds(100),
         Instant.now().minusSeconds(100)
     );
@@ -71,7 +72,7 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     @Theory
     public void testIsActivationWhenTrue(PublishableObject data) {
         assumeNotNull(data);
-        assumeThat(data.getWorkflow(), anyOf(equalTo(Workflow.FOR_PUBLICATION), equalTo(Workflow.REVOKED)));
+        assumeThat(data.getWorkflow(), anyOf(equalTo(FOR_PUBLICATION), equalTo(REVOKED)));
         assumeThat(data.isPublishable(), is(true));
         assertTrue(data.isActivation());
     }
@@ -79,7 +80,7 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     @Theory
     public void testIsActivationWhenFalse(PublishableObject data) {
         assumeNotNull(data);
-        assumeThat(data.getWorkflow(), not(anyOf(equalTo(Workflow.FOR_PUBLICATION), equalTo(Workflow.REVOKED))));
+        assumeThat(data.getWorkflow(), not(anyOf(equalTo(FOR_PUBLICATION), equalTo(REVOKED))));
         assertFalse(data.isActivation());
     }
 
@@ -93,7 +94,7 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     @Theory
     public void testIsRevocationWhenTrueOnWindow(PublishableObject data) {
         assumeNotNull(data);
-        assumeThat(data.getWorkflow(), equalTo(Workflow.PUBLISHED));
+        assumeThat(data.getWorkflow(), equalTo(PUBLISHED));
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
@@ -103,14 +104,14 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     @Theory
     public void testIsRevocationWhenFalse(PublishableObject data) {
         assumeNotNull(data);
-        assumeThat(data.getWorkflow(), not(anyOf(equalTo(Workflow.PUBLISHED), equalTo(Workflow.FOR_DELETION))));
+        assumeThat(data.getWorkflow(), not(anyOf(equalTo(PUBLISHED), equalTo(Workflow.FOR_DELETION))));
         assertFalse(data.isDeactivation());
     }
 
     @Theory
     public void testIsRevocationWhenFalseOnWindow(PublishableObject data) {
         assumeNotNull(data);
-        assumeThat(data.getWorkflow(), equalTo(Workflow.PUBLISHED));
+        assumeThat(data.getWorkflow(), equalTo(PUBLISHED));
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
@@ -120,7 +121,15 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     @Theory
     public void testIsPublishableWhenTrue(PublishableObject data) {
         assumeNotNull(data);
-        assumeThat(data.getWorkflow(), anyOf(equalTo(Workflow.FOR_PUBLICATION), equalTo(Workflow.FOR_REPUBLICATION), equalTo(Workflow.PUBLISHED), equalTo(Workflow.REVOKED)));
+        assumeThat(data.getWorkflow(),
+            anyOf(
+                equalTo(FOR_PUBLICATION),
+                equalTo(FOR_REPUBLICATION),
+                equalTo(PUBLISHED),
+                equalTo(REVOKED),
+                nullValue()
+            )
+        );
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assertTrue(data.isPublishable());
@@ -129,7 +138,16 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
     @Theory
     public void testIsPublishableWhenFalse(PublishableObject data) {
         assumeNotNull(data);
-        assumeThat(data.getWorkflow(), not(anyOf(equalTo(Workflow.FOR_PUBLICATION), equalTo(Workflow.FOR_REPUBLICATION), equalTo(Workflow.PUBLISHED), equalTo(Workflow.REVOKED))));
+        assumeThat(data.getWorkflow(),
+            not(anyOf(
+                equalTo(FOR_PUBLICATION),
+                equalTo(FOR_REPUBLICATION),
+                equalTo(PUBLISHED),
+                equalTo(REVOKED),
+                nullValue()
+                )
+            )
+        );
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
         assertFalse(data.isPublishable());
@@ -158,10 +176,10 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         assumeNotNull(data.getWorkflow());
         assumeThat(data.getWorkflow(),
             anyOf(
-                equalTo(Workflow.PUBLISHED),
-                equalTo(Workflow.FOR_REPUBLICATION),
-                equalTo(Workflow.FOR_PUBLICATION),
-                equalTo(Workflow.REVOKED)));
+                equalTo(PUBLISHED),
+                equalTo(FOR_REPUBLICATION),
+                equalTo(FOR_PUBLICATION),
+                equalTo(REVOKED)));
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
@@ -173,8 +191,8 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         assumeNotNull(data);
         assumeThat(data.getWorkflow(),
             anyOf(
-                equalTo(Workflow.PUBLISHED),
-                equalTo(Workflow.REVOKED)));
+                equalTo(PUBLISHED),
+                equalTo(REVOKED)));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assertFalse(data.isRevocable());
@@ -192,7 +210,7 @@ public class PublishableObjectTest extends ObjectTest<PublishableObject> {
         assumeNotNull(data.getWorkflow());
         assumeThat(
             data.getWorkflow().ordinal(),
-            not(greaterThan(Workflow.FOR_PUBLICATION.ordinal())));
+            not(greaterThan(FOR_PUBLICATION.ordinal())));
         assumeTrue(!(data.getPublishStartInstant() == null && data.getPublishStopInstant() == null));
         assumeThat(data.getPublishStartInstant(), anyOf(equalTo(null), greaterThan(Instant.now())));
         assumeThat(data.getPublishStopInstant(), anyOf(equalTo(null), not(greaterThan(Instant.now()))));
