@@ -1100,6 +1100,34 @@ public class MediaObjectJsonSchemaTest {
         assertThat(p.getMainTitle()).isEqualTo("Main title");
     }
 
+    @Test
+    public void withMemberOf() throws Exception {
+        Program program = Program.builder()
+            .creationDate(LocalDateTime.of(2019, 8, 20, 21, 0))
+
+            .memberOf(MemberRef.builder().type(MediaType.SEASON).build()).build();
+
+        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "  \"sortDate\" : 1566327600000,\n" +
+            "  \"creationDate\" : 1566327600000,\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"descendantOf\" : [ {\n" +
+            "    \"type\" : \"SEASON\"\n" +
+            "  } ],\n" +
+            "  \"memberOf\" : [ {\n" +
+            "    \"type\" : \"SEASON\",\n" +
+            "    \"highlighted\" : false\n" +
+            "  } ]\n" +
+            "}");
+
+    }
+
     private String toJson(MediaObject program) throws IOException {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.getPublisherInstance().writeValue(writer, program);
