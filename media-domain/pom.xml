@@ -180,7 +180,6 @@
     <dependency>
       <groupId>nl.vpro.poms</groupId>
       <artifactId>poms-shared-test</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>net.sf.json-lib</groupId>
