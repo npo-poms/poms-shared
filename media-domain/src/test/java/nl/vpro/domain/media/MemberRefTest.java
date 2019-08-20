@@ -1,7 +1,6 @@
 package nl.vpro.domain.media;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 import org.junit.Test;
@@ -16,19 +15,28 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
  */
 public class MemberRefTest {
 
+    MemberRef ref = new MemberRef();
+    {
+        ref.setAdded(LocalDateTime.of(2017, 5, 24, 16, 30).atZone(Schedule.ZONE_ID).toInstant());
+
+        ref.setType(MediaType.SERIES);
+        ref.setNumber(1);
+        ref.setMidRef("MID_123");
+        ref.setHighlighted(true);
+    }
     @Test
     public void xml() throws IOException, SAXException {
-        MemberRef ref = new MemberRef();
-        ref.setAdded(Instant.EPOCH);
-        JAXBTestUtil.roundTripAndSimilar(ref, "<memberRef added=\"1970-01-01T01:00:00+01:00\" highlighted=\"false\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>");
+
+        JAXBTestUtil.roundTripAndSimilar(ref, "<memberRef added=\"2017-05-24T16:30:00+02:00\" highlighted=\"true\" midRef=\"MID_123\" index=\"1\" type=\"SERIES\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>");
     }
 
     @Test
     public void json() throws Exception {
-        MemberRef ref = new MemberRef();
-        ref.setAdded(LocalDateTime.of(2017, 5, 24, 16, 30).atZone(Schedule.ZONE_ID).toInstant());
         Jackson2TestUtil.roundTripAndSimilar(ref, "{\n" +
-            "  \"highlighted\" : false,\n" +
+            "  \"midRef\" : \"MID_123\",\n" +
+            "  \"type\" : \"SERIES\",\n" +
+            "  \"index\" : 1,\n" +
+            "  \"highlighted\" : true,\n" +
             "  \"added\" : 1495636200000\n" +
             "}");
     }
