@@ -1017,9 +1017,11 @@ public class MediaObjectJsonSchemaTest {
                 .program()
                 .withEverything()
                 .build();
-        Program rounded  = Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
+        Program rounded  = Jackson2TestUtil.roundTripAndSimilarAndEquals(program, programJson.toString());
         assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
+        assertThat(rounded.getMemberOf().first().getType()).isEqualTo(MediaType.SEASON);
     }
+
 
     @Test
     public void programWithEverythingMarshUnmarsh() throws Exception {
