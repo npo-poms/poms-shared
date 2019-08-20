@@ -4,8 +4,8 @@ env:
   - SONATYPE_USERNAME=vpro
   - secure: Ra9zGqU1rDybwUHCo+vEpQKANi/TWWOoBGQ//rJYIYjDqOoCi/hWiBAliXsd9d3rWb6LylViIT5gAdxTokP0qW8wxfDx/nBii+nZZEUVirWsHhIvnwYH1cpt9+MU0M8JGQTkivzKceODSJItawheUeCq1mDtz4RSsTxGs20D2Pdje0SnzVV4F9Gj92YTF+auN5UNxeuIfWfPmOfpmu2Hk+NLrSNCydY24hDQN3YQyZAXl9RgeapXkHpDF1rLEw2mFvZXk9hpBOaPyB5yVrP1SpSkDSDGwVF+/kneprmITv92cdJOdI5T9ldHznnQKeIzv/9lRGDmYzrn2vX8kZFWQnsmd7N3uNhEERR93lBC118QnJT/JaUDgUbFzCLxBH2iDW5atsbZYmjfKWvMi4JWwEDSW7tzkNNXIQKgAIXT4ZhCPCYJbWzIHH/I7MkC+ZpjMiokmsQ5HxdEeesxJFwksy4LDdT6+8tqPD0yg3DIocmvsiVLYCGjUzl/VSkIC3VPDXl9/z4IfZoanAfVYlIVvxXisw9I8gZlcQbis8GplPvx+qUNt7rEY/rICw5fDhojYfFiWop/WAKxwpA1xBC4hpxXEPXiCRrYQergwwEXozZhebzs6Ux/a53Gcefb+o2+oK3FVrwb89sp60jeeQmoIP5kyhkIovpF6ECBRXHYcs4=
 jdk:
-- oraclejdk8
+- openjdk8
 sudo: false
-script: mvn --fail-never -T 1C -Pdeploy,ossrh clean test deploy --settings .travis-settings.xml -Dgpg.skip=true
+script: mvn --fail-never -T 1C -Pdeploy clean test deploy --settings .travis-settings.xml -Dgpg.skip=true
 after_success:
 - bash <(curl -s https://codecov.io/bash)
