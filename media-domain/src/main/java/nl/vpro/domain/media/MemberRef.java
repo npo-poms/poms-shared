@@ -3,9 +3,8 @@ package nl.vpro.domain.media;
 import java.io.Serializable;
 import java.time.Instant;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -13,7 +12,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.*;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -152,11 +153,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public MemberRef(MemberRef source, MediaObject member, OwnerType owner) {
         this.member = member;
         this.group = source.group;
+        this.typeOfGroup = source.typeOfGroup;
         this.number = source.number;
         this.owner = owner;
         this.added       = source.added;
         this.highlighted = source.highlighted;
-
         this.cridRef = source.cridRef;
         this.midRef  = source.midRef;
         this.urnRef  = source.urnRef;
@@ -182,7 +183,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.midRef = midRef;
         this.cridRef = cridRef;
         this.added = added;
-        this.highlighted = highlighted;
+        this.highlighted = highlighted == null ? false : highlighted;
         this.typeOfGroup = type;
         this.owner = owner;
     }
