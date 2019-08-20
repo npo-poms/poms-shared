@@ -11,7 +11,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -20,7 +19,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -29,9 +30,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.EmbargoBuilder;
 import nl.vpro.domain.Embargos;
-import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.media.support.MutableOwnable;
+import nl.vpro.domain.media.support.OwnerType;
+import nl.vpro.domain.media.support.PublishableObject;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.jackson2.DurationToJsonTimestamp;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;
 import nl.vpro.util.TimeUtils;
@@ -181,6 +183,15 @@ public class Location extends PublishableObject<Location>
     public static class Builder implements EmbargoBuilder<Builder> {
 
     }
+    /**
+     * Unset some default values, to ensure that roundtripping will result same object
+     * @since 5.11
+     */
+    @JsonCreator
+    static Location jsonCreator() {
+        return builder().workflow(null).build();
+    }
+
 
     @lombok.Builder(builderClassName = "Builder")
     protected Location(

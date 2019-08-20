@@ -1,19 +1,18 @@
 package nl.vpro.domain.media;
 
+import java.time.Instant;
 import java.util.*;
 
-import javax.persistence.*;
 import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.*;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
@@ -57,6 +56,14 @@ public class Program extends MediaObject {
 
     public static MediaBuilder.ProgramBuilder builder() {
         return MediaBuilder.program();
+    }
+    /**
+     * Unset some default values, to ensure that roundtripping will result same object
+     * @since 5.11
+     */
+    @JsonCreator
+    static Program jsonCreator() {
+        return builder().workflow(null).creationDate((Instant) null).build();
     }
 
 

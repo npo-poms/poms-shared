@@ -3,16 +3,19 @@ package nl.vpro.domain.media;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.SortedSet;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -42,6 +45,18 @@ public class Segment extends MediaObject implements Comparable<Segment>, Child<P
 
 
     private static final long serialVersionUID = -868293795041160925L;
+
+    public static MediaBuilder.SegmentBuilder builder() {
+        return MediaBuilder.segment();
+    }
+    /**
+     * Unset some default values, to ensure that roundtripping will result same object
+     * @since 5.11
+     */
+    @JsonCreator
+    static Segment jsonCreator() {
+        return builder().workflow(null).creationDate((Instant) null).build();
+    }
 
     @ManyToOne(targetEntity = Program.class, optional = false)
     protected Program parent;
