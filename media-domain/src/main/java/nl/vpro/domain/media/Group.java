@@ -9,11 +9,13 @@ package nl.vpro.domain.media;
 import java.time.Instant;
 import java.util.TreeSet;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
@@ -36,6 +38,16 @@ public class Group extends MediaObject {
     public static MediaBuilder.GroupBuilder builder() {
         return MediaBuilder.group();
     }
+
+    /**
+     * Unset some default values, to ensure that roundtripping will result same object
+     * @since 5.11
+     */
+    @JsonCreator
+    static Group jsonCreator() {
+        return builder().workflow(null).creationDate((Instant) null).build();
+    }
+
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
