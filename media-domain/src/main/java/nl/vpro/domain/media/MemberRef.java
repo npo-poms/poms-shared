@@ -1,28 +1,27 @@
 package nl.vpro.domain.media;
 
-import java.io.Serializable;
-import java.time.Instant;
-
-import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.*;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import nl.vpro.domain.Identifiable;
 import nl.vpro.domain.media.support.Ownable;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.hibernate.annotations.*;
+
+import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
+import java.time.Instant;
 
 /**
  * Expresses an association between MediaObjects. MediaObjects can become a
@@ -151,6 +150,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     public MemberRef(MemberRef source, MediaObject member, OwnerType owner) {
         this.member = member;
         this.group = source.group;
+        this.typeOfGroup = source.typeOfGroup;
         this.number = source.number;
         this.owner = owner;
         this.added       = source.added;
@@ -181,7 +181,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         this.midRef = midRef;
         this.cridRef = cridRef;
         this.added = added;
-        this.highlighted = highlighted;
+        this.highlighted = highlighted == null ? false : highlighted;
         this.typeOfGroup = type;
         this.owner = owner;
     }
@@ -464,7 +464,7 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
     }
 
     @Override
-    public int compareTo(MemberRef memberRef) {
+    public int compareTo(@NonNull MemberRef memberRef) {
         if(this.getUrnRef() != null
             && memberRef.getUrnRef() != null
             && this.getUrnRef().compareTo(memberRef.getUrnRef()) != 0) {
@@ -515,8 +515,11 @@ public class MemberRef implements Identifiable<Long>, Comparable<MemberRef>, Ser
         if (getMidRef() != null) {
             builder.append("midRef", getMidRef());
         }
-        if (getMediaRef() != null) {
+        if (getMidRef() == null && getMediaRef() != null) {
             builder.append("mediaRef", getMediaRef());
+        }
+        if (getMember() != null) {
+            builder.append("member", getMember().getCorrelationId());
         }
         if (number != null) {
             builder.append("number", number);
