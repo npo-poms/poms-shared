@@ -29,6 +29,7 @@ public class ErrorTest {
     }
 
     @Test
+    // TODO. Fails and if I fix it, swagger fails. See nl.vpro.domain.constraint.PredicateTestResult
     public void jsonWithPredicate() {
         Error error = new Error(404, new RuntimeException("bla"));
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
