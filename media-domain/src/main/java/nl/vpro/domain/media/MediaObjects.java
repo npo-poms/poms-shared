@@ -307,7 +307,7 @@ public class MediaObjects {
         if (media instanceof Program) {
             return ((Program) media).getScheduleEvents();
         } else {
-            return Collections.emptySortedSet();
+            return new TreeSet<>();
         }
     }
 
