@@ -15,7 +15,10 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.zip.CRC32;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.MappedSuperclass;
 import javax.xml.bind.JAXB;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -27,8 +30,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import nl.vpro.domain.*;
 import nl.vpro.util.DateUtils;
-import nl.vpro.validation.PomsValidatorGroup;
 import nl.vpro.validation.EmbargoValidation;
+import nl.vpro.validation.PomsValidatorGroup;
 
 /**
  * A publishable object implements {@link Accountable} and {@link MutableEmbargo}, but furthermore also has {@link #workflow}.
@@ -42,6 +45,7 @@ import nl.vpro.validation.EmbargoValidation;
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
+
 public abstract class PublishableObject<T extends PublishableObject<T>>
     extends AbstractPublishableObject<T>
     implements MutableEmbargoDeprecated<T> {
@@ -58,6 +62,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         super(source);
         this.workflow = source.workflow;
     }
+
 
 
 
@@ -171,7 +176,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
             Workflow.FOR_DELETION == workflow ||
             Workflow.PARENT_REVOKED == workflow || // The parent is revoked so this object itself is not publishable either
             Workflow.DELETED == workflow) {
-            // These kind of objects are explicely not publishable.
+            // These kind of objects are explicitely not publishable.
             return false;
         }
 
