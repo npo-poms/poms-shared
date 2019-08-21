@@ -478,8 +478,8 @@
         {
           "name": "Africa",
           "scopeNotes": ["Continent"],
-          "role": "SUBJECT",
-          "gtaaUri": "http://gtaa/1231"
+          "gtaaUri": "http://gtaa/1231",
+          "role": "SUBJECT"
         }
       ]
     },
@@ -488,14 +488,14 @@
       "values": [
         {
           "name": "England",
-          "role": "SUBJECT",
           "gtaaUri": "http://gtaa/1232",
-          "gtaaStatus": "approved"
+          "gtaaStatus": "approved",
+          "role": "SUBJECT"
         },
         {
           "name": "UK",
-          "role": "RECORDED_IN",
-          "gtaaUri": "http://gtaa/1233"
+          "gtaaUri": "http://gtaa/1233",
+          "role": "RECORDED_IN"
         }
       ]
     }
@@ -926,8 +926,8 @@
             {
               "name": "Africa",
               "scopeNotes": ["Continent"],
-              "role": "SUBJECT",
-              "gtaaUri": "http://gtaa/1231"
+              "gtaaUri": "http://gtaa/1231",
+              "role": "SUBJECT"
             }
           ]
         },
@@ -936,14 +936,14 @@
           "values": [
             {
               "name": "England",
-              "role": "SUBJECT",
               "gtaaUri": "http://gtaa/1232",
-              "gtaaStatus": "approved"
+              "gtaaStatus": "approved",
+              "role": "SUBJECT"
             },
             {
               "name": "UK",
-              "role": "RECORDED_IN",
-              "gtaaUri": "http://gtaa/1233"
+              "gtaaUri": "http://gtaa/1233",
+              "role": "RECORDED_IN"
             }
           ]
         }
