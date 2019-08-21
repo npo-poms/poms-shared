@@ -841,35 +841,45 @@ public class MediaObjectJsonSchemaTest {
 
         JSONAssert.assertEquals(expected, actual);
 
-        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
-                "  \"objectType\" : \"program\",\n" +
-                "  \"embeddable\" : true,\n" +
-                "  \"broadcasters\" : [ ],\n" +
-                "  \"genres\" : [ ],\n" +
-                "  \"countries\" : [ ],\n" +
-                "  \"languages\" : [ ],\n" +
-                "  \"geoLocations\" : [ {\n" +
-                "    \"owner\" : \"BROADCASTER\",\n" +
-                "    \"values\" : [ {\n" +
-                "      \"role\" : \"SUBJECT\",\n" +
-                "      \"name\" : \"Africa\",\n" +
-                "      \"scopeNotes\" : [\"Continent\"],\n" +
-                "      \"gtaaUri\" : \"http://gtaa/1231\"\n" +
-                "    } ]\n" +
-                "  }, {\n" +
-                "    \"owner\" : \"NPO\",\n" +
-                "    \"values\" : [ {\n" +
-                "      \"role\" : \"SUBJECT\",\n" +
-                "      \"name\" : \"England\",\n" +
-                "      \"gtaaStatus\" : \"approved\",\n" +
-                "      \"gtaaUri\" : \"http://gtaa/1232\"\n" +
-                "    }, {\n" +
-                "      \"role\" : \"RECORDED_IN\",\n" +
-                "      \"name\" : \"UK\",\n" +
-                "      \"gtaaUri\" : \"http://gtaa/1233\"\n" +
-                "    } ]\n" +
-                "  } ]\n" +
-                "}");
+        Jackson2TestUtil.roundTripAndSimilar(program, " {\n" +
+                "    \"objectType\": \"program\",\n" +
+                "    \"embeddable\": true,\n" +
+                "    \"broadcasters\": [],\n" +
+                "    \"genres\": [],\n" +
+                "    \"countries\": [],\n" +
+                "    \"languages\": [],\n" +
+                "    \"geoLocations\": [\n" +
+                "      {\n" +
+                "        \"owner\": \"BROADCASTER\",\n" +
+                "        \"values\": [\n" +
+                "          {\n" +
+                "            \"name\": \"Africa\",\n" +
+                "            \"scopeNotes\": [\n" +
+                "              \"Continent\"\n" +
+                "            ],\n" +
+                "            \"gtaaUri\": \"http://gtaa/1231\",\n" +
+                "            \"role\": \"SUBJECT\"\n" +
+                "          }\n" +
+                "        ]\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"owner\": \"NPO\",\n" +
+                "        \"values\": [\n" +
+                "          {\n" +
+                "            \"name\": \"England\",\n" +
+                "            \"gtaaUri\": \"http://gtaa/1232\",\n" +
+                "            \"gtaaStatus\": \"approved\",\n" +
+                "            \"role\": \"SUBJECT\"\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"name\": \"UK\",\n" +
+                "            \"gtaaUri\": \"http://gtaa/1233\",\n" +
+                "            \"role\": \"RECORDED_IN\"\n" +
+                "          }\n" +
+                "        ]\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  }");
     }
 
     @Test
@@ -897,9 +907,9 @@ public class MediaObjectJsonSchemaTest {
                 "        \"values\": [{\n" +
                 "          \"name\":\"myName\",\n" +
                 "          \"scopeNotes\": [\"myDescription\"],\n" +
-                "          \"role\":\"RECORDED_IN\",\n" +
                 "          \"gtaaUri\": \"myuri\",\n" +
-                "          \"gtaaStatus\": \"approved\"\n" +
+                "          \"gtaaStatus\": \"approved\",\n" +
+                "          \"role\":\"RECORDED_IN\"\n" +
                 "        }]\n" +
                 "      }";
 
