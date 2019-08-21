@@ -99,6 +99,7 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
         "tags",
         "intentions",
         "targetGroups",
+        "expandedGeoLocations",
         "geoLocations",
         "source",
         "countries",
