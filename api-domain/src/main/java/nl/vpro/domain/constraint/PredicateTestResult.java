@@ -23,13 +23,15 @@ import nl.vpro.i18n.LocalizedString;
 @Slf4j
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonPropertyOrder({"reason", "applies", "description"})
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "objectType")
+// https://github.com/swagger-api/swagger-core/issues/2289
+// swagger sucks
+/*@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "objectType")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = PredicateTestResult.class),
     @JsonSubTypes.Type(value = AndPredicateTestResult.class),
     @JsonSubTypes.Type(value = NotPredicateTestResult.class),
     @JsonSubTypes.Type(value = OrPredicateTestResult.class)
-})
+})*/
 public class PredicateTestResult<T> {
 
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();
