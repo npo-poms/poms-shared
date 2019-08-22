@@ -745,7 +745,10 @@ public class MediaObjectJsonSchemaTest {
             "  } ]\n" +
             "}";
 
-        Program program = program().id(100L).lean().withLocations().build();
+        Program program = program().id(100L)
+            .lean()
+            .withLocations()
+            .build();
         program.getLocations().first().setPublishStartInstant(LocalDateTime.of(2017, 2, 16, 12, 23).atZone(Schedule.ZONE_ID).toInstant());
 
         Program out = Jackson2TestUtil.roundTripAndSimilar(program, expected);
@@ -1032,17 +1035,6 @@ public class MediaObjectJsonSchemaTest {
         assertThat(rounded.getMemberOf().first().getType()).isEqualTo(MediaType.SEASON);
     }
 
-
-    @Test
-    public void programWithEverythingMarshUnmarsh() throws Exception {
-        StringWriter programJson = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, "UTF-8");
-        Program program =  MediaTestDataBuilder
-                .program()
-                .withEverything()
-                .build();
-        Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
-    }
 
     @Test
     public void publisherView() throws IOException {
