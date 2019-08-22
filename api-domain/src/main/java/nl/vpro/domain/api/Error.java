@@ -16,13 +16,9 @@ import javax.xml.bind.annotation.*;
 import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 
-import nl.vpro.domain.constraint.AndPredicateTestResult;
-import nl.vpro.domain.constraint.NotPredicateTestResult;
-import nl.vpro.domain.constraint.OrPredicateTestResult;
-import nl.vpro.domain.constraint.PredicateTestResult;
+import nl.vpro.domain.constraint.*;
 
 /**
  *
@@ -37,7 +33,7 @@ import nl.vpro.domain.constraint.PredicateTestResult;
     "cause",
     "violations",
     "testResult"})
-@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class})
+@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, PredicateTestResult.class})
 @JsonPropertyOrder({"status", "message", "classes", "cause", "violations", "testResult"})
 public class Error {
 
@@ -66,6 +62,7 @@ public class Error {
     @Getter
     @Setter
     @XmlElement
+
     private PredicateTestResult<?> testResult;
 
 

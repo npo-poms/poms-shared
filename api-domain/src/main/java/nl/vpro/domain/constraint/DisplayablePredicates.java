@@ -28,7 +28,7 @@ class DisplayablePredicates {
      * Default implemention of the reason for true. (Empty suffices)
      */
     public static <T> PredicateTestResult<T> testsTrue(DisplayablePredicate<T> predicate, T value, List<String> bundleKey) {
-        return new PredicateTestResult<>(predicate, value, true, bundleKey);
+        return new SimplePredicateTestResult<T>(predicate, value, true, bundleKey);
     }
 
     public static <T> PredicateTestResult<T> testsTrue(DisplayablePredicate<T> predicate, T value) {
@@ -39,7 +39,7 @@ class DisplayablePredicates {
      * Default implemention of the reason for false.
      */
     public static <T> PredicateTestResult<T> testsFalse(DisplayablePredicate<T> predicate, T value, List<String> bundleKey) {
-        return new PredicateTestResult<>(predicate, value, false, bundleKey);
+        return new SimplePredicateTestResult<>(predicate, value, false, bundleKey);
     }
 
     public static <T> PredicateTestResult<T> testsFalse(DisplayablePredicate<T> predicate, T value) {
