@@ -33,7 +33,7 @@ import nl.vpro.domain.constraint.*;
     "cause",
     "violations",
     "testResult"})
-@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, PredicateTestResult.class})
+@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, SimplePredicateTestResult.class})
 @JsonPropertyOrder({"status", "message", "classes", "cause", "violations", "testResult"})
 public class Error {
 
