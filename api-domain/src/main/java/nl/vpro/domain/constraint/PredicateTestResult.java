@@ -25,14 +25,15 @@ import nl.vpro.i18n.LocalizedString;
 @JsonPropertyOrder({"reason", "applies", "description"})
 // https://github.com/swagger-api/swagger-core/issues/2289
 // swagger sucks
-/*@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "objectType")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "objectType")
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = PredicateTestResult.class),
+    @JsonSubTypes.Type(value = SimplePredicateTestResult.class),
     @JsonSubTypes.Type(value = AndPredicateTestResult.class),
     @JsonSubTypes.Type(value = NotPredicateTestResult.class),
     @JsonSubTypes.Type(value = OrPredicateTestResult.class)
-})*/
-public class PredicateTestResult<T> {
+})
+@XmlTransient
+public abstract class PredicateTestResult<T> {
 
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();
 
