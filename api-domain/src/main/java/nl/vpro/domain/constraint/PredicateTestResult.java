@@ -33,6 +33,8 @@ import nl.vpro.i18n.LocalizedString;
     @JsonSubTypes.Type(value = OrPredicateTestResult.class)
 })*/
 @XmlTransient
+@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, SimplePredicateTestResult.class})
+
 public abstract class PredicateTestResult<T> {
 
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();

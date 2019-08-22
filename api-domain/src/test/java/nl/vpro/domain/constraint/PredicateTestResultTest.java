@@ -61,9 +61,9 @@ public class PredicateTestResultTest {
     public void xml() throws IOException, SAXException {
         PredicateTestResult<String> result =  Constraints.<String>alwaysFalse().testWithReason("bla");
 
-        PredicateTestResult<String> rounded = JAXBTestUtil.roundTripAndSimilar(result, "<local:predicateTestResult applies=\"false\" reason=\"AlwaysFalse\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:local=\"uri:local\">\n" +
+        PredicateTestResult<String> rounded = JAXBTestUtil.roundTripAndSimilar(result, "<local:simplePredicateTestResult applies=\"false\" reason=\"AlwaysFalse\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:local=\"uri:local\">\n" +
             "    <constraint:description xml:lang=\"en_US\">Never matches</constraint:description>\n" +
-            "</local:predicateTestResult>");
+            "</local:simplePredicateTestResult>");
 
         System.out.println(rounded.toString());
 
