@@ -20,8 +20,8 @@ import org.slf4j.LoggerFactory;
 class DisplayablePredicates {
     private static final Logger LOG = LoggerFactory.getLogger(DisplayablePredicate.class);
 
-    private static final String BUNDLE_FALSE = "nl.vpro.domain.api.PredicateTestFalse";
-    private static final String BUNDLE_TRUE = "nl.vpro.domain.api.PredicateTestTrue";
+    static final String BUNDLE_FALSE = "nl.vpro.domain.api.PredicateTestFalse";
+    static final String BUNDLE_TRUE = "nl.vpro.domain.api.PredicateTestTrue";
 
 
     /**
