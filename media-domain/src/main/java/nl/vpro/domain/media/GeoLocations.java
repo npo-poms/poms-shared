@@ -30,12 +30,17 @@ import nl.vpro.domain.media.support.OwnerType;
 @Setter
 public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, GeoLocation> {
 
+    public static GeoLocations empty(@NonNull  OwnerType owner){
+        return GeoLocations.builder().owner(owner).build();
+    }
+
     public GeoLocations() {
     }
     public GeoLocations(@lombok.NonNull MediaObject parent, @lombok.NonNull  OwnerType owner) {
         this.parent = parent;
         this.owner = owner;
     }
+
 
     @lombok.Builder(builderClassName = "Builder")
     private GeoLocations(
