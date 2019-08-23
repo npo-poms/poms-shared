@@ -247,6 +247,9 @@ public interface MediaTestDataBuilder<
             return workflow(Workflow.PUBLISHED);
         }
     }
+    default T deleted() {
+        return workflow(Workflow.DELETED);
+    }
 
     default T published(Instant lastPublished) {
         return published().lastPublished(lastPublished);

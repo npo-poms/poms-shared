@@ -245,14 +245,14 @@ public class TextualObjects {
 
 
     @SuppressWarnings("unchecked")
-    public static <S> SortedSet<S> sorted(Set<S> set) {
+    public static <S extends Comparable<?>> SortedSet<S> sorted(Set<S> set) {
         if (set == null) {
             return null;
         }
         if (set instanceof SortedSet) {
             return (SortedSet) set;
         } else {
-            return new ResortedSortedSet<>(set);
+            return ResortedSortedSet.of(set);
         }
     }
 

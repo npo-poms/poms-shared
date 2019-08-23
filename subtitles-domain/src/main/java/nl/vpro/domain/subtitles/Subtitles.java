@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.io.IOUtils;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -57,6 +58,11 @@ import static nl.vpro.i18n.Locales.DUTCH;
 public class Subtitles implements Serializable, Identifiable<SubtitlesId>, MutableOwnable, Changeable {
 
     private static final long serialVersionUID = 0L;
+
+    @JsonCreator
+    static Subtitles jsonCreator() {
+        return Subtitles.builder().lastModified(null).created(null).build();
+    }
 
     @Column(nullable = false, name="creationDate")
     @XmlAttribute(name = "creationDate")
@@ -130,10 +136,14 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
             InputStream value,
             Iterator<Cue> cues,
             SubtitlesType type,
-            OwnerType owner) {
+            OwnerType owner,
+            Instant created,
+            Instant lastModified) {
         this.mid = mid;
         this.offset = offset;
-        if (content == null && value == null && format == null && cues != null) {
+        if (content == null && value == null && cues == null) {
+            this.content = null;
+        } else if (content == null && value == null && format == null && cues != null) {
             StringWriter writer = new StringWriter();
             try {
                 WEBVTTandSRT.formatWEBVTT(cues, writer);
@@ -159,6 +169,8 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
         this.language = language;
         this.cueCount = null;
         this.type = type == null ? SubtitlesType.CAPTION : type;
+        this.creationInstant = created;
+        this.lastModifiedInstant = lastModified;
     }
 
     public static Subtitles tt888Caption(String mid, Duration offset, String content) {

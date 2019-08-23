@@ -40,6 +40,11 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
 
     public Intentions() {}
 
+    public static Intentions empty(@NonNull OwnerType owner) {
+        return Intentions.builder().owner(owner).build();
+
+    }
+
     @lombok.Builder(builderClassName = "Builder")
     private Intentions(@lombok.NonNull @Singular  List<IntentionType> values, @lombok.NonNull OwnerType owner) {
         this.values = values.stream().map(Intention::new).collect(Collectors.toList());
