@@ -1207,11 +1207,10 @@ public abstract class MediaObject
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<GeoLocations>  getExpandedGeoLocations() {
-        final SortedSet<GeoLocations> expandedGeoLocations = MediaObjectOwnableLists.expandOwnedList(this.geoLocations,
+        return MediaObjectOwnableLists.expandOwnedList(this.geoLocations,
                 (owner, values) -> GeoLocations.builder().values(values).owner(owner).build(),
                 OwnerType.ENTRIES
         );
-        return expandedGeoLocations;
     }
 
     //end region
