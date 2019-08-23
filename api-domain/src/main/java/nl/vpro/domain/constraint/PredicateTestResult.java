@@ -24,8 +24,9 @@ import nl.vpro.i18n.LocalizedString;
 @XmlAccessorType(XmlAccessType.NONE)
 @JsonPropertyOrder({"reason", "applies", "description"})
 // https://github.com/swagger-api/swagger-core/issues/2289
-// swagger sucks
-/*@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "objectType")
+// swagger sucks, we should consider migrating away from it. The code is very brittle, doesn't produce the right yaml, and pull requests are ignored.
+/*
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "objectType")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = SimplePredicateTestResult.class),
     @JsonSubTypes.Type(value = AndPredicateTestResult.class),
@@ -33,8 +34,7 @@ import nl.vpro.i18n.LocalizedString;
     @JsonSubTypes.Type(value = OrPredicateTestResult.class)
 })*/
 @XmlTransient
-@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, SimplePredicateTestResult.class})
-
+//@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, SimplePredicateTestResult.class})
 public abstract class PredicateTestResult<T> {
 
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();
