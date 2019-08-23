@@ -1,7 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
-
   <parent>
     <groupId>nl.vpro.poms</groupId>
     <artifactId>poms-shared-parent</artifactId>
@@ -42,7 +40,7 @@
           </dependency>
         </dependencies>
       </plugin>
-      <!-- dit helpt blijkbaar eclipse om te begrijpen dat generated-sources/apt ook een source dir is? -->
+      <!-- this seems to help eclipse understand that generated-sources/apt is a source dir? -->
       <!-- https://stackoverflow.com/questions/10735380/define-additional-source-directory-in-maven ? -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -123,7 +121,7 @@
 
     <dependency>
       <!--
-      This dependency is afaik only relevant for annotation, hence it can be optional
+      This dependency is afaik only relevant for annotations, hence it can be optional
       Nicer would be to drop it altogether
       -->
       <groupId>org.hibernate</groupId>
@@ -174,7 +172,6 @@
     <dependency>
       <groupId>nl.vpro.poms</groupId>
       <artifactId>poms-shared-test</artifactId>
-      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>net.sf.json-lib</groupId>

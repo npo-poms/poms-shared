@@ -507,7 +507,7 @@ public abstract class MediaObject
     @XmlElement(name = "location")
     @JsonProperty("locations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    protected Set<@NotNull Location> locations = new TreeSet<>();
+    protected SortedSet<@NotNull Location> locations = new TreeSet<>();
 
 
     @OneToMany(orphanRemoval = true, cascade= {ALL})

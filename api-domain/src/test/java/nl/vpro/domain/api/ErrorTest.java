@@ -29,6 +29,7 @@ public class ErrorTest {
     }
 
     @Test
+    // TODO. Fails and if I fix it, swagger fails. See nl.vpro.domain.constraint.PredicateTestResult
     public void jsonWithPredicate() {
         Error error = new Error(404, new RuntimeException("bla"));
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
@@ -37,8 +38,9 @@ public class ErrorTest {
             "  \"status\" : 404,\n" +
             "  \"message\" : \"bla\",\n" +
             "  \"classes\" : [ \"java.lang.RuntimeException\", \"java.lang.Exception\", \"java.lang.Throwable\", \"java.io.Serializable\" ],\n" +
-            "   \"cause\" : \"cause\",\n" +
+            "  \"cause\" : \"cause\",\n" +
             "  \"testResult\" : {\n" +
+            "    \"objectType\" : \"and\",\n" +
             "    \"reason\" : \"And\",\n" +
             "    \"applies\" : false,\n" +
             "    \"description\" : {\n" +
@@ -46,6 +48,7 @@ public class ErrorTest {
             "      \"lang\" : \"en_US\"\n" +
             "    },\n" +
             "    \"clauses\" : [ {\n" +
+            "      \"objectType\" : \"simple\",\n" +
             "      \"reason\" : \"AlwaysFalse\",\n" +
             "      \"applies\" : false,\n" +
             "      \"description\" : {\n" +
@@ -53,6 +56,7 @@ public class ErrorTest {
             "        \"lang\" : \"en_US\"\n" +
             "      }\n" +
             "    }, {\n" +
+            "      \"objectType\" : \"simple\",\n" +
             "      \"reason\" : \"AlwaysTrue\",\n" +
             "      \"applies\" : true,\n" +
             "      \"description\" : {\n" +

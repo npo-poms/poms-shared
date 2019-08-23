@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
+import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 
 @Entity
 @XmlAccessorType(XmlAccessType.NONE)
@@ -29,7 +30,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @Setter
 @JsonSerialize(using = TargetGroup.Serializer.class)
 @JsonDeserialize(using = TargetGroup.Deserializer.class)
-public class TargetGroup extends DomainObject implements MediaObjectOwnableListItem<TargetGroup, TargetGroups> {
+public class TargetGroup extends DomainObject implements SimpleValueMediaObjectOwnableListItem<TargetGroup, TargetGroups, TargetGroupType> {
 
 
     @ManyToOne(targetEntity = TargetGroups.class, fetch = FetchType.LAZY)

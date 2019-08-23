@@ -745,7 +745,10 @@ public class MediaObjectJsonSchemaTest {
             "  } ]\n" +
             "}";
 
-        Program program = program().id(100L).lean().withLocations().build();
+        Program program = program().id(100L)
+            .lean()
+            .withLocations()
+            .build();
         program.getLocations().first().setPublishStartInstant(LocalDateTime.of(2017, 2, 16, 12, 23).atZone(Schedule.ZONE_ID).toInstant());
 
         Program out = Jackson2TestUtil.roundTripAndSimilar(program, expected);
@@ -841,35 +844,45 @@ public class MediaObjectJsonSchemaTest {
 
         JSONAssert.assertEquals(expected, actual);
 
-        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
-                "  \"objectType\" : \"program\",\n" +
-                "  \"embeddable\" : true,\n" +
-                "  \"broadcasters\" : [ ],\n" +
-                "  \"genres\" : [ ],\n" +
-                "  \"countries\" : [ ],\n" +
-                "  \"languages\" : [ ],\n" +
-                "  \"geoLocations\" : [ {\n" +
-                "    \"owner\" : \"BROADCASTER\",\n" +
-                "    \"values\" : [ {\n" +
-                "      \"role\" : \"SUBJECT\",\n" +
-                "      \"name\" : \"Africa\",\n" +
-                "      \"scopeNotes\" : [\"Continent\"],\n" +
-                "      \"gtaaUri\" : \"http://gtaa/1231\"\n" +
-                "    } ]\n" +
-                "  }, {\n" +
-                "    \"owner\" : \"NPO\",\n" +
-                "    \"values\" : [ {\n" +
-                "      \"role\" : \"SUBJECT\",\n" +
-                "      \"name\" : \"England\",\n" +
-                "      \"gtaaStatus\" : \"approved\",\n" +
-                "      \"gtaaUri\" : \"http://gtaa/1232\"\n" +
-                "    }, {\n" +
-                "      \"role\" : \"RECORDED_IN\",\n" +
-                "      \"name\" : \"UK\",\n" +
-                "      \"gtaaUri\" : \"http://gtaa/1233\"\n" +
-                "    } ]\n" +
-                "  } ]\n" +
-                "}");
+        Jackson2TestUtil.roundTripAndSimilar(program, " {\n" +
+                "    \"objectType\": \"program\",\n" +
+                "    \"embeddable\": true,\n" +
+                "    \"broadcasters\": [],\n" +
+                "    \"genres\": [],\n" +
+                "    \"countries\": [],\n" +
+                "    \"languages\": [],\n" +
+                "    \"geoLocations\": [\n" +
+                "      {\n" +
+                "        \"owner\": \"BROADCASTER\",\n" +
+                "        \"values\": [\n" +
+                "          {\n" +
+                "            \"name\": \"Africa\",\n" +
+                "            \"scopeNotes\": [\n" +
+                "              \"Continent\"\n" +
+                "            ],\n" +
+                "            \"gtaaUri\": \"http://gtaa/1231\",\n" +
+                "            \"role\": \"SUBJECT\"\n" +
+                "          }\n" +
+                "        ]\n" +
+                "      },\n" +
+                "      {\n" +
+                "        \"owner\": \"NPO\",\n" +
+                "        \"values\": [\n" +
+                "          {\n" +
+                "            \"name\": \"England\",\n" +
+                "            \"gtaaUri\": \"http://gtaa/1232\",\n" +
+                "            \"gtaaStatus\": \"approved\",\n" +
+                "            \"role\": \"SUBJECT\"\n" +
+                "          },\n" +
+                "          {\n" +
+                "            \"name\": \"UK\",\n" +
+                "            \"gtaaUri\": \"http://gtaa/1233\",\n" +
+                "            \"role\": \"RECORDED_IN\"\n" +
+                "          }\n" +
+                "        ]\n" +
+                "      }\n" +
+                "    ]\n" +
+                "  }");
     }
 
     @Test
@@ -897,9 +910,9 @@ public class MediaObjectJsonSchemaTest {
                 "        \"values\": [{\n" +
                 "          \"name\":\"myName\",\n" +
                 "          \"scopeNotes\": [\"myDescription\"],\n" +
-                "          \"role\":\"RECORDED_IN\",\n" +
                 "          \"gtaaUri\": \"myuri\",\n" +
-                "          \"gtaaStatus\": \"approved\"\n" +
+                "          \"gtaaStatus\": \"approved\",\n" +
+                "          \"role\":\"RECORDED_IN\"\n" +
                 "        }]\n" +
                 "      }";
 
@@ -1017,20 +1030,11 @@ public class MediaObjectJsonSchemaTest {
                 .program()
                 .withEverything()
                 .build();
-        Program rounded  = Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
+        Program rounded  = Jackson2TestUtil.roundTripAndSimilarAndEquals(program, programJson.toString());
         assertThat(rounded.getLocations().first().getId()).isEqualTo(6);
+        assertThat(rounded.getMemberOf().first().getType()).isEqualTo(MediaType.SEASON);
     }
 
-    @Test
-    public void programWithEverythingMarshUnmarsh() throws Exception {
-        StringWriter programJson = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/program-with-everything.json"), programJson, "UTF-8");
-        Program program =  MediaTestDataBuilder
-                .program()
-                .withEverything()
-                .build();
-        Jackson2TestUtil.roundTripAndSimilar(program, programJson.toString());
-    }
 
     @Test
     public void publisherView() throws IOException {
@@ -1096,6 +1100,34 @@ public class MediaObjectJsonSchemaTest {
 
         Program p = Jackson2Mapper.getLenientInstance().readValue(normalString, Program.class);
         assertThat(p.getMainTitle()).isEqualTo("Main title");
+    }
+
+    @Test
+    public void withMemberOf() throws Exception {
+        Program program = Program.builder()
+            .creationDate(LocalDateTime.of(2019, 8, 20, 21, 0))
+
+            .memberOf(MemberRef.builder().type(MediaType.SEASON).build()).build();
+
+        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "  \"sortDate\" : 1566327600000,\n" +
+            "  \"creationDate\" : 1566327600000,\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"descendantOf\" : [ {\n" +
+            "    \"type\" : \"SEASON\"\n" +
+            "  } ],\n" +
+            "  \"memberOf\" : [ {\n" +
+            "    \"type\" : \"SEASON\",\n" +
+            "    \"highlighted\" : false\n" +
+            "  } ]\n" +
+            "}");
+
     }
 
     private String toJson(MediaObject program) throws IOException {

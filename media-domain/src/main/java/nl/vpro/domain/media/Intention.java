@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
+import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 
 /**
  * @author Giorgio Vinci
@@ -33,7 +33,7 @@ import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 @Setter
 @JsonSerialize(using = Intention.Serializer.class)
 @JsonDeserialize(using = Intention.Deserializer.class)
-public class Intention extends DomainObject implements MediaObjectOwnableListItem<Intention, Intentions> {
+public class Intention extends DomainObject implements SimpleValueMediaObjectOwnableListItem<Intention, Intentions, IntentionType> {
 
 
     @ManyToOne(targetEntity = Intentions.class, fetch = FetchType.LAZY)
