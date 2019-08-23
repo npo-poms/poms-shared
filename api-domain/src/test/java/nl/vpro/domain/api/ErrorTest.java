@@ -77,14 +77,14 @@ public class ErrorTest {
             "    <api:testResult xsi:type=\"constraint:andPredicateTestResult\" applies=\"false\" reason=\"And\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "        <constraint:description xml:lang=\"en_US\">(Never matches)</constraint:description>\n" +
             "        <constraint:clauses>\n" +
-            "            <constraint:clause applies=\"false\" reason=\"AlwaysFalse\">\n" +
+            "            <constraint:clause xsi:type=\"constraint:simplePredicateTestResult\" applies=\"false\" reason=\"AlwaysFalse\">\n" +
             "                <constraint:description xml:lang=\"en_US\">Never matches</constraint:description>\n" +
             "            </constraint:clause>\n" +
-            "            <constraint:clause applies=\"true\" reason=\"AlwaysTrue\">\n" +
+            "            <constraint:clause xsi:type=\"constraint:simplePredicateTestResult\" applies=\"true\" reason=\"AlwaysTrue\">\n" +
             "                <constraint:description xml:lang=\"en_US\">Always matches</constraint:description>\n" +
             "            </constraint:clause>\n" +
             "        </constraint:clauses>\n" +
             "    </api:testResult>\n" +
-            "</api:error>");
+            "</api:error>\n");
     }
 }
