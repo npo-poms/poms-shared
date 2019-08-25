@@ -50,7 +50,7 @@ public abstract class AbstractMediaObjectOwnableList<
     @Getter
     protected OwnerType owner;
 
-    @OneToMany(cascade = {ALL})
+    @OneToMany(orphanRemoval = true, cascade = {ALL})
     @JoinColumn(name = "parent_id")
     @JsonProperty("values")
     @OrderColumn(name = "list_index", nullable = true)

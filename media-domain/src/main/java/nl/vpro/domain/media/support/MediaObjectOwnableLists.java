@@ -73,6 +73,30 @@ public class MediaObjectOwnableLists {
         }
         return false;
     }
+    public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
+    boolean remove(
+        Set<P> set,
+        @NonNull OwnerType owner
+    ) {
+        if (set == null) {
+            return false;
+        }
+        boolean changed = false;
+        Iterator<P> i = set.iterator();
+        while (i.hasNext()) {
+            P candidate = i.next();
+            if (candidate.getOwner() == owner) {
+                candidate.getValues().forEach(v -> {
+                    //v.setParent(null);
+                });
+                //candidate.getValues().clear();
+                i.remove();
+                changed = true;
+            }
+        }
+
+        return changed;
+    }
 
     /**
      * Find an MediaObjectOwnableListItem given id and owner
