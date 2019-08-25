@@ -30,6 +30,10 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
 
     public TargetGroups() {}
 
+    public static TargetGroups empty(@NonNull  OwnerType owner) {
+        return TargetGroups.builder().owner(owner).build();
+    }
+
     @lombok.Builder(builderClassName = "Builder")
     private TargetGroups(@lombok.NonNull @Singular  List<TargetGroupType> values, @lombok.NonNull OwnerType owner) {
         this.values = values.stream().map(TargetGroup::new).collect(Collectors.toList());

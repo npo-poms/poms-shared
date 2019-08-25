@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.11
  */
 @JsonTypeName("simple")
 public class SimplePredicateTestResult<T> extends PredicateTestResult<T> {
