@@ -178,11 +178,16 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
             return false;
         }
 
-        if(!Objects.equals(getScopeNotes(), geoLocation.getScopeNotes())) {
+        //Null or empty list are semantically equals.
+        if(!Objects.equals(getScopeNotes(), geoLocation.getScopeNotes()) && !areEmpty(getScopeNotes(), geoLocation.getScopeNotes())) {
             return false;
         }
 
         return Objects.equals(getGtaaUri(), geoLocation.getGtaaUri());
+    }
+
+    public static boolean areEmpty(List<String> a, List<String> b){
+       return (a == null || a.isEmpty()) && (b == null || b.isEmpty());
     }
 
     @Override
@@ -190,7 +195,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
         int result = super.hashCode();
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (getScopeNotes() != null ? getScopeNotes().hashCode() : 0);
+        result = 31 * result + (getScopeNotes() != null && !getScopeNotes().isEmpty() ? getScopeNotes().hashCode() : 0);
         result = 31 * result + (getGtaaUri() != null ? getGtaaUri().hashCode() : 0);
         return result;
     }
