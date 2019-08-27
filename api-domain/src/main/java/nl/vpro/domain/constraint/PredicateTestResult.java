@@ -25,22 +25,21 @@ import nl.vpro.i18n.LocalizedString;
 @JsonPropertyOrder({"reason", "applies", "description"})
 // https://github.com/swagger-api/swagger-core/issues/2289
 // swagger sucks, we should consider migrating away from it. The code is very brittle, doesn't produce the right yaml, and pull requests are ignored.
-/*
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME,  property = "objectType")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = SimplePredicateTestResult.class),
     @JsonSubTypes.Type(value = AndPredicateTestResult.class),
     @JsonSubTypes.Type(value = NotPredicateTestResult.class),
     @JsonSubTypes.Type(value = OrPredicateTestResult.class)
-})*/
-//@XmlTransient
-//@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, SimplePredicateTestResult.class})
-public abstract class PredicateTestResult<T> {
+})
+@XmlTransient
+@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, SimplePredicateTestResult.class})
+public abstract class PredicateTestResult {
 
     public static final ExpressionFactory FACTORY = ExpressionFactory.newInstance();
 
 
-    private DisplayablePredicate<T> predicate;
+    private DisplayablePredicate<? extends Object> predicate;
     private List<String> bundleKey;
 
 
@@ -52,9 +51,9 @@ public abstract class PredicateTestResult<T> {
     @XmlElement(name = "description")
     private LocalizedString xmlDescription;
 
-    private T value;
+    private Object value;
 
-    PredicateTestResult(DisplayablePredicate<T> constraint, T value, boolean applies, List<String> bundleKey) {
+    PredicateTestResult(DisplayablePredicate<?> constraint, Object value, boolean applies, List<String> bundleKey) {
         this.predicate = constraint;
         this.value = value;
         this.applies = applies;
