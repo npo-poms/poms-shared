@@ -30,11 +30,11 @@ public interface MediaPublisherHeaders {
     enum Destination implements Displayable {
 
         UG("Uitzending gemist"),
-        CouchDB_API("NPO API CouchDB"),
         ElasticSearch("NPO API Elastic Search"),
         TVVOD("TvVOD"),
         PROJECTM("Project M")
         ;
+
 
         private String displayName;
 
