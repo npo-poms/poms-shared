@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Locale;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.domain.constraint.Constraints;
@@ -29,7 +30,7 @@ public class ErrorTest {
     }
 
     @Test
-    // TODO. Fails and if I fix it, swagger fails. See nl.vpro.domain.constraint.PredicateTestResult
+    // TODO (before 5.11 release). Fails and if I fix it, swagger fails. See nl.vpro.domain.constraint.PredicateTestResult
     public void jsonWithPredicate() {
         Error error = new Error(404, new RuntimeException("bla"));
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
@@ -69,6 +70,7 @@ public class ErrorTest {
     }
 
     @Test
+    // TODO (before 5.11 release). "failing see comment on {@ErrorTest.jsonWithPredicate} test")
     public void xmlWithPredicate() {
         Error error = new Error(404, "bla");
         error.setTestResult(new And(Constraints.alwaysFalse(), Constraints.alwaysTrue()).testWithReason(new Program()));
