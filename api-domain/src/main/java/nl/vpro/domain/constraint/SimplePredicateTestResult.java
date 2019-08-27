@@ -9,12 +9,12 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * @since 5.11
  */
 @JsonTypeName("simple")
-public class SimplePredicateTestResult<T> extends PredicateTestResult<T> {
+public class SimplePredicateTestResult extends PredicateTestResult {
     SimplePredicateTestResult() {
 
     }
 
-    SimplePredicateTestResult(DisplayablePredicate<T> constraint, T value, boolean applies, List<String> bundleKey) {
+    SimplePredicateTestResult(DisplayablePredicate<?> constraint, Object value, boolean applies, List<String> bundleKey) {
         super(constraint, value, applies, bundleKey);
     }
 

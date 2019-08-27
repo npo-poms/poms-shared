@@ -34,7 +34,7 @@ public class PredicateTestResultTest {
     public void and() {
         AbstractAnd<String> constraint = new AbstractAnd<String>(Constraints.alwaysTrue(), Constraints.alwaysFalse(), Constraints.alwaysFalse()) {
         };
-        AndPredicateTestResult<String> result = constraint.testWithReason("foobar");
+        AndPredicateTestResult result = constraint.testWithReason("foobar");
 
         assertThat(result.getReason()).isEqualTo("And");
 
@@ -51,7 +51,7 @@ public class PredicateTestResultTest {
             Constraints.alwaysFalse()
         ) {
         };
-        PredicateTestResult<String> result = constraint.testWithReason("foobar");
+        PredicateTestResult result = constraint.testWithReason("foobar");
 
         assertThat(result.getReason()).isEqualTo("Or");
         assertThat(result.getDescription(Locale.US)).isEqualTo("(Never matches or Never matches should match)");
@@ -59,9 +59,9 @@ public class PredicateTestResultTest {
 
     @Test
     public void xml() throws IOException, SAXException {
-        PredicateTestResult<String> result =  Constraints.<String>alwaysFalse().testWithReason("bla");
+        PredicateTestResult result =  Constraints.<String>alwaysFalse().testWithReason("bla");
 
-        PredicateTestResult<String> rounded = JAXBTestUtil.roundTripAndSimilar(result, "<local:simplePredicateTestResult applies=\"false\" reason=\"AlwaysFalse\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:local=\"uri:local\">\n" +
+        PredicateTestResult rounded = JAXBTestUtil.roundTripAndSimilar(result, "<local:simplePredicateTestResult applies=\"false\" reason=\"AlwaysFalse\" xmlns:constraint=\"urn:vpro:api:constraint:2014\" xmlns:local=\"uri:local\">\n" +
             "    <constraint:description xml:lang=\"en_US\">Never matches</constraint:description>\n" +
             "</local:simplePredicateTestResult>");
 
@@ -73,7 +73,7 @@ public class PredicateTestResultTest {
     public void json() throws Exception {
         log.info("{}", Locale.getDefault());
 
-        PredicateTestResult<String> result = Constraints.<String>alwaysFalse()
+        PredicateTestResult result = Constraints.<String>alwaysFalse()
             .testWithReason("bla");
 
         log.info("{}", Locale.getDefault());
