@@ -33,7 +33,7 @@ import nl.vpro.i18n.LocalizedString;
     @JsonSubTypes.Type(value = NotPredicateTestResult.class),
     @JsonSubTypes.Type(value = OrPredicateTestResult.class)
 })*/
-@XmlTransient
+//@XmlTransient
 //@XmlSeeAlso({AndPredicateTestResult.class, OrPredicateTestResult.class, NotPredicateTestResult.class, SimplePredicateTestResult.class})
 public abstract class PredicateTestResult<T> {
 
