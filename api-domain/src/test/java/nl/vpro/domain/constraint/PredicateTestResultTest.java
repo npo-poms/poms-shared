@@ -79,6 +79,7 @@ public class PredicateTestResultTest {
         log.info("{}", Locale.getDefault());
 
         Jackson2TestUtil.roundTripAndSimilar(result, "{\n" +
+            "  \"objectType\" : \"simple\",\n" +
             "  \"reason\" : \"AlwaysFalse\",\n" +
             "  \"applies\" : false,\n" +
             "  \"description\" : {\n" +
