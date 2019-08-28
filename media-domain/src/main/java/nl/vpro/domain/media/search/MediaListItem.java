@@ -43,12 +43,12 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "title",
             "subTitle",
             "description",
-            "creationDate",
-            "lastModified",
+            "creationInstant",
+            "lastModifiedInstant",
             "createdByPrincipalId",
             "lastModifiedByPrincipalId",
             "sortDate",
-            "type",
+            "mediaType",
             "publishStartInstant",
             "publishStopInstant",
             "lastPublished",
@@ -64,7 +64,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "streamingPlatformStatus"
         }
 )
-public class MediaListItem extends PublishableListItem {
+public class MediaListItem extends PublishableListItem implements TrackableMedia {
 
     @XmlAttribute
     @Getter
@@ -82,10 +82,10 @@ public class MediaListItem extends PublishableListItem {
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant lastPublished;
 
-    @XmlAttribute
+    @XmlAttribute(name = "mediaType")
     @Getter
     @Setter
-    private String mediaType;
+    private String mediaClass;
 
     @XmlAttribute
     @Getter
@@ -143,7 +143,8 @@ public class MediaListItem extends PublishableListItem {
 
     @Getter
     @Setter
-    private MediaType type;
+    @XmlElement(name = "type")
+    private MediaType mediaType;
 
     @Getter
     @Setter
@@ -204,7 +205,7 @@ public class MediaListItem extends PublishableListItem {
 
         if(media instanceof Program) {
             // proxy's...
-            this.mediaType = Program.class.getName();
+            this.mediaClass = Program.class.getName();
             SortedSet<ScheduleEvent> scheduleEvents = ((Program) media).getScheduleEvents();
             if(scheduleEvents.size() > 0) {
                 this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, false).orElse(null);
@@ -214,13 +215,13 @@ public class MediaListItem extends PublishableListItem {
                 this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(scheduleEvents).orElse(null);
             }
         } else if(media instanceof Group) {
-            this.mediaType = Group.class.getName();
+            this.mediaClass = Group.class.getName();
         } else if(media instanceof Segment) {
-            this.mediaType = Segment.class.getName();
+            this.mediaClass = Segment.class.getName();
         } else {
-            this.mediaType = getClass().getName();
+            this.mediaClass = getClass().getName();
         }
-        this.type = media.getType().getMediaType();
+        this.mediaType = media.getType().getMediaType();
         this.sortDate = media.getSortInstant();
         this.locations = media.getLocations();
         this.numberOfLocations = media.getLocations().size();
@@ -233,7 +234,7 @@ public class MediaListItem extends PublishableListItem {
 
     @Override
     public String getUrn() {
-        return (type == null ? "null" : type.getSubType().getUrnPrefix()) + id;
+        return (mediaType == null ? "null" : mediaType.getSubType().getUrnPrefix()) + id;
     }
 
 
@@ -257,33 +258,33 @@ public class MediaListItem extends PublishableListItem {
     }
 
     @Override
-    @XmlElement
+    @XmlElement(name = "creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public Instant  getCreationDate() {
-        return super.getCreationDate();
+    public Instant getCreationInstant() {
+        return super.getCreationInstant();
     }
 
     @Override
-    public void setCreationDate(Instant creationDate) {
-        super.setCreationDate(creationDate);
+    public void setCreationInstant(Instant creationInstant) {
+        super.setCreationInstant(creationInstant);
     }
 
     @Override
-    @XmlElement
+    @XmlElement(name = "lastModified")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public Instant getLastModified() {
-        return super.getLastModified();
+    public Instant getLastModifiedInstant() {
+        return super.getLastModifiedInstant();
     }
 
     @Override
-    public void setLastModified(Instant lastModified) {
-        super.setLastModified(lastModified);
+    public void setLastModifiedInstant(Instant lastModifiedInstant) {
+        super.setLastModifiedInstant(lastModifiedInstant);
     }
 
     @XmlElement(name = "lastModifiedBy")
@@ -329,11 +330,8 @@ public class MediaListItem extends PublishableListItem {
         return (MediaListItem) super.setPublishStopInstant(stop);
     }
 
-
-
     @Override
     public String toString() {
         return mid + " " + title;
     }
-
 }
