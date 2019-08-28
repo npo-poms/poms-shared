@@ -1,8 +1,11 @@
 package nl.vpro.domain.constraint;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import java.util.Arrays;
 import java.util.List;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+
+;
 
 /**
  * @author Michiel Meeuwissen
@@ -17,7 +20,7 @@ public interface DelegatingDisplayablePredicate<T> extends DisplayablePredicate<
     }
 
     @Override
-    default PredicateTestResult<T> testWithReason(T input) {
+    default PredicateTestResult testWithReason(T input) {
         DisplayablePredicate<T> predicate = getPredicate();
         return predicate == null ? DisplayablePredicates.testsTrue(this, input) : predicate.testWithReason(input);
     }

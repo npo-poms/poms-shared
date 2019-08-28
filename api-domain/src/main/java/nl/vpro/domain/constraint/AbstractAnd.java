@@ -7,13 +7,14 @@ package nl.vpro.domain.constraint;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.el.ELContext;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import static nl.vpro.domain.constraint.PredicateTestResult.FACTORY;
+
+;
 
 /**
  * @author Roelof Jan Koekoek
@@ -56,15 +57,15 @@ public abstract class AbstractAnd<T> implements Constraint<T> {
     }
 
     @Override
-    public AndPredicateTestResult<T> testWithReason(@Nullable T t) {
-        List<PredicateTestResult<T>> clauses = constraints.stream().map(c -> c.testWithReason(t)).collect(Collectors.toList());
+    public AndPredicateTestResult testWithReason(@Nullable T t) {
+        List<PredicateTestResult> clauses = constraints.stream().map(c -> c.testWithReason(t)).collect(Collectors.toList());
         return DisplayablePredicates.and(this, t, clauses);
     }
 
     @Override
-    public void setELContext(ELContext ctx, T value, Locale locale, PredicateTestResult<T> result) {
+    public void setELContext(ELContext ctx, Object value, Locale locale, PredicateTestResult result) {
         Constraint.super.setELContext(ctx, value, locale, result);
-        AndPredicateTestResult<T> andResult = (AndPredicateTestResult<T>) result;
+        AndPredicateTestResult andResult = (AndPredicateTestResult) result;
         List<String> failingClauses = andResult
             .getClauses()
             .stream()
