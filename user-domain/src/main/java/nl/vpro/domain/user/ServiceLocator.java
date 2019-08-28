@@ -1,12 +1,11 @@
 package nl.vpro.domain.user;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.inject.Inject;
 import javax.inject.Provider;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * @author Michiel Meeuwissen
@@ -51,6 +50,13 @@ public class ServiceLocator  {
 
     public static EditorService getEditorService() {
         return serviceLocator == null ? null : serviceLocator.editorService.get();
+    }
+
+    public static void  setEditorService(final EditorService editorService) {
+         if (serviceLocator == null) {
+            new ServiceLocator();
+        }
+        serviceLocator.editorService = () -> editorService;
     }
 
 
