@@ -126,7 +126,7 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
     }
 
     @Override
-    public void setELContext(ELContext ctx, T v, Locale locale, PredicateTestResult<T> result) {
+    public void setELContext(ELContext ctx, Object v, Locale locale, PredicateTestResult result) {
         TextConstraint.super.setELContext(ctx, v, locale, result);
         if (enumValue instanceof Displayable) {
             ctx.getVariableMapper().setVariable("displayablepredicatevalue", FACTORY.createValueExpression(((Displayable) enumValue).getDisplayName(), String.class));

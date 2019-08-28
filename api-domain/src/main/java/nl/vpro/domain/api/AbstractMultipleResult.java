@@ -41,7 +41,7 @@ public abstract class AbstractMultipleResult<M> extends Result<MultipleEntry<M>>
             public MultipleEntry<M> get(int index) {
                 MultipleEntry<M> entry = producer.apply(ids.get(index), list.get(index));
                 if (predicate != null) {
-                    PredicateTestResult<M> result = predicate.testWithReason(entry.getResult());
+                    PredicateTestResult result = predicate.testWithReason(entry.getResult());
                     if (! result.applies()) {
                         entry.setError("Does not match profile " + predicate.toString() + ": " + ids.get(index));
                         entry.setReason(result);

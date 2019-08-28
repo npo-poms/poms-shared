@@ -9,18 +9,18 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * @since 4.8
  */
 @JsonTypeName("not")
-public class NotPredicateTestResult<T> extends PredicateTestResult<T> {
+public class NotPredicateTestResult extends PredicateTestResult {
 
-    private PredicateTestResult<T> clause;
+    private PredicateTestResult clause;
 
-    NotPredicateTestResult(DisplayablePredicate<T> predicate, T value, boolean applies, PredicateTestResult<T> predicateTestResult) {
+    NotPredicateTestResult(DisplayablePredicate<?> predicate, Object value, boolean applies, PredicateTestResult predicateTestResult) {
         super(predicate, value, applies, predicate.getDefaultBundleKey());
         this.clause = predicateTestResult;
 
     }
 
     @XmlElement
-    public PredicateTestResult<T> getClause() {
+    public PredicateTestResult getClause() {
         return clause;
     }
 }

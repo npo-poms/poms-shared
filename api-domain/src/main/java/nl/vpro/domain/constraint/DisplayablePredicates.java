@@ -27,49 +27,49 @@ class DisplayablePredicates {
     /**
      * Default implemention of the reason for true. (Empty suffices)
      */
-    public static <T> PredicateTestResult<T> testsTrue(DisplayablePredicate<T> predicate, T value, List<String> bundleKey) {
-        return new SimplePredicateTestResult<T>(predicate, value, true, bundleKey);
+    public static <T> PredicateTestResult testsTrue(DisplayablePredicate<T> predicate, T value, List<String> bundleKey) {
+        return new SimplePredicateTestResult(predicate, value, true, bundleKey);
     }
 
-    public static <T> PredicateTestResult<T> testsTrue(DisplayablePredicate<T> predicate, T value) {
+    public static <T> PredicateTestResult testsTrue(DisplayablePredicate<T> predicate, T value) {
         return testsTrue(predicate, value, predicate.getDefaultBundleKey());
     }
 
     /**
      * Default implemention of the reason for false.
      */
-    public static <T> PredicateTestResult<T> testsFalse(DisplayablePredicate<T> predicate, T value, List<String> bundleKey) {
-        return new SimplePredicateTestResult<>(predicate, value, false, bundleKey);
+    public static <T> PredicateTestResult testsFalse(DisplayablePredicate<T> predicate, T value, List<String> bundleKey) {
+        return new SimplePredicateTestResult(predicate, value, false, bundleKey);
     }
 
-    public static <T> PredicateTestResult<T> testsFalse(DisplayablePredicate<T> predicate, T value) {
+    public static <T> PredicateTestResult testsFalse(DisplayablePredicate<T> predicate, T value) {
         return testsFalse(predicate, value, predicate.getDefaultBundleKey());
     }
 
-    public static <S> AndPredicateTestResult<S> and(AbstractAnd<S> constraint, S value, List<PredicateTestResult<S>> results) {
+    public static <S> AndPredicateTestResult and(AbstractAnd<S> constraint, S value, List<PredicateTestResult> results) {
         boolean applies = true;
         for (PredicateTestResult t : results) {
             applies &= t.applies();
         }
         if (applies) {
-            return new AndPredicateTestResult<>(constraint, value, true, results);
+            return new AndPredicateTestResult(constraint, value, true, results);
         } else {
-            return new AndPredicateTestResult<>(constraint, value, false, results);
+            return new AndPredicateTestResult(constraint, value, false, results);
         }
     }
 
-    public static <T> OrPredicateTestResult<T> or(AbstractOr<T> constraint, T value, List<PredicateTestResult<T>>  results) {
+    public static <T> OrPredicateTestResult or(AbstractOr<T> constraint, T value, List<PredicateTestResult>  results) {
         if (results.size() == 0) {
-            return new OrPredicateTestResult<>(constraint, value, false, Collections.singletonList("orwithoutpredicates"), Collections.emptyList());
+            return new OrPredicateTestResult(constraint, value, false, Collections.singletonList("orwithoutpredicates"), Collections.emptyList());
         }
         boolean applies = false;
         for (PredicateTestResult t : results) {
             applies |= t.applies();
         }
         if (applies) {
-            return new OrPredicateTestResult<>(constraint, value, true, results);
+            return new OrPredicateTestResult(constraint, value, true, results);
         } else {
-            return new OrPredicateTestResult<>(constraint, value, false, results);
+            return new OrPredicateTestResult(constraint, value, false, results);
         }
     }
 

@@ -75,7 +75,7 @@ public abstract class AbstractTextConstraint<T> implements WildTextConstraint<T>
 
 
     @Override
-    public void setELContext(ELContext ctx, T v, Locale locale, PredicateTestResult<T> result) {
+    public void setELContext(ELContext ctx, Object v, Locale locale, PredicateTestResult result) {
         WildTextConstraint.super.setELContext(ctx, v, locale, result);
     }
 
