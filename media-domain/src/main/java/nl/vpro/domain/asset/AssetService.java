@@ -21,25 +21,17 @@ public interface AssetService {
     }
 
     default String getFilePath(String fileName) {
-        return String.format("/assets/asset/%s.asset", fileName);
+        return String.format("/assets/asset/%s", fileName);
     }
 
     File getFile(String fileName);
 
     default String getMimeType(String fileName) {
-        fileName = getNormalFileName(fileName);
         if (fileName.endsWith(".mp4")) {
             return "video/mp4";
         } else {
             return "application/octet-stream";
         }
-    }
-
-    default String getNormalFileName(String fileName) {
-        if (fileName.endsWith(".asset")) {
-            fileName = fileName.substring(0, fileName.length() - ".asset".length());
-        }
-        return fileName;
     }
 
 

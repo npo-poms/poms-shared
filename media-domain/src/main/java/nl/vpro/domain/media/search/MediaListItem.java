@@ -3,10 +3,11 @@ package nl.vpro.domain.media.search;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.List;
-import java.util.SortedSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -20,9 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.domain.user.ThirdParty;
+import nl.vpro.domain.user.*;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -333,5 +332,50 @@ public class MediaListItem extends PublishableListItem implements TrackableMedia
     @Override
     public String toString() {
         return mid + " " + title;
+    }
+
+    public static final String[] FIELD_NAMES;
+    private static final  List<Field> FIELDS;
+    static {
+        FIELDS  = Arrays.stream(MediaListItem.class.getDeclaredFields()).filter(
+                (f) -> {
+                    f.setAccessible(true);
+                    return ! Modifier.isStatic(f.getModifiers());
+                })
+            .collect(Collectors.toList());
+        FIELD_NAMES = FIELDS.stream().map(Field::getName).toArray(String[]::new);
+    }
+    private static Object toRecordObject(Object o) {
+        if (o == null) {
+            return "";
+        }
+        if (o instanceof Collection) {
+            return ((Collection<?>) o).stream().map( e -> toRecordObject(e).toString()).collect(Collectors.joining(", "));
+        }
+        if (o instanceof ScheduleEvent) {
+            return ((ScheduleEvent) o).getId().toString();
+        }
+         if (o instanceof Location) {
+             Location l = (Location) o;
+             return l.getOwner() + ":" + l.getPlatform() + ":" + l.getProgramUrl();
+        }
+        if (o instanceof Number || o instanceof Boolean || o.getClass().isPrimitive()) {
+            return o;
+        }
+          if (o instanceof Organization) {
+            return ((Organization) o).getId();
+        }
+        return o.toString();
+    }
+
+    public Object[] asRecord() {
+        return FIELDS.stream().map(f ->{
+            try {
+                return toRecordObject(f.get(MediaListItem.this));
+            } catch (IllegalAccessException e) {
+                return e.getMessage();
+            }
+        }).toArray(Object[]::new);
+
     }
 }
