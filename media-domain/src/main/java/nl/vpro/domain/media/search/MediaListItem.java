@@ -355,14 +355,18 @@ public class MediaListItem extends PublishableListItem implements TrackableMedia
         if (o instanceof ScheduleEvent) {
             return ((ScheduleEvent) o).getId().toString();
         }
-         if (o instanceof Location) {
-             Location l = (Location) o;
-             return l.getOwner() + ":" + l.getPlatform() + ":" + l.getProgramUrl();
+        if (o instanceof Location) {
+            Location l = (Location) o;
+            return l.getOwner() + ":" + l.getPlatform() + ":" + l.getProgramUrl();
+        }
+        if (o instanceof ImageListItem) {
+            ImageListItem i = (ImageListItem) o;
+            return i.getImageUri() + ":" + i.getLicense();
         }
         if (o instanceof Number || o instanceof Boolean || o.getClass().isPrimitive()) {
             return o;
         }
-          if (o instanceof Organization) {
+        if (o instanceof Organization) {
             return ((Organization) o).getId();
         }
         return o.toString();
