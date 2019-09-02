@@ -18,6 +18,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+import nl.vpro.domain.constraint.*;
+
 /**
  *
  * @author Roelof Jan Koekoek
@@ -59,8 +61,8 @@ public class Error {
 
     @Getter
     @Setter
-    @XmlAnyElement(lax = true)
-    private Object testResult;
+    @XmlElement
+    private PredicateTestResult testResult;
 
 
     public Error() {

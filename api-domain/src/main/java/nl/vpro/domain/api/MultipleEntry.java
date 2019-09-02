@@ -31,7 +31,7 @@ public class MultipleEntry<T> {
     private String error;
 
     @XmlElement
-    private PredicateTestResult<T> reason;
+    private PredicateTestResult reason;
 
     public MultipleEntry(String id, T object) {
         this.result = object;

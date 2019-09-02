@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlType;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import nl.vpro.domain.*;
+import nl.vpro.domain.media.TrackableObject;
 import nl.vpro.util.DateUtils;
 import nl.vpro.validation.EmbargoValidation;
 import nl.vpro.validation.PomsValidatorGroup;
@@ -48,7 +49,7 @@ import nl.vpro.validation.PomsValidatorGroup;
 
 public abstract class PublishableObject<T extends PublishableObject<T>>
     extends AbstractPublishableObject<T>
-    implements MutableEmbargoDeprecated<T> {
+    implements MutableEmbargoDeprecated<T>, TrackableObject {
 
 
     @Column(nullable = false)
@@ -165,46 +166,8 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         return Workflow.PUBLISHED == workflow && isRevocable();
     }
 
-    /**
-     * Wether this object could be  publicly visible in the API.
-     *
-     * This returns <code>false</code> if the workflow explictely indicates that it is not (like 'DELETED', 'MERGED')
-     * and otherwise it depends on {@link #inPublicationWindow(Instant)}
-     */
-    public boolean isPublishable() {
-        if(isMerged() ||
-            Workflow.FOR_DELETION == workflow ||
-            Workflow.PARENT_REVOKED == workflow || // The parent is revoked so this object itself is not publishable either
-            Workflow.DELETED == workflow) {
-            // These kind of objects are explicitely not publishable.
-            return false;
-        }
 
-        if(Workflow.FOR_PUBLICATION.equals(workflow)
-            || Workflow.FOR_REPUBLICATION.equals(workflow)
-            || Workflow.PUBLISHED.equals(workflow)
-            || Workflow.REVOKED.equals(workflow)
-            || Workflow.MERGED.equals(workflow)
-            || workflow == null /* may happen when property filtering active NPA-493 */) {
 
-            return inPublicationWindow(Instant.now());
-        }
-        log.error("Unexpected state of {}. Workflow: {}. Supposing this is not publishable for now", this, workflow);
-        return false;
-
-    }
-
-    public boolean isRevocable() {
-        return ! isPublishable();
-    }
-
-    /**
-     * If the sub class supports being merged, this can be overriden.
-     *
-     */
-    public  boolean isMerged() {
-        return false;
-    }
 
     @Deprecated
     public Date getLastModified() {
@@ -243,6 +206,7 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
     @XmlAttribute
+    @Override
     public Workflow getWorkflow() {
         return workflow;
     }

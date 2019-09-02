@@ -29,12 +29,9 @@ public interface MediaPublisherHeaders {
     @Slf4j
     enum Destination implements Displayable {
 
-        UG("Uitzending gemist"),
-        CouchDB_MID("CouchDB Poms (mids)"),
-        CouchDB_URN("CouchDB Poms (urns)"),
-        CouchDB_API("NPO API CouchDB"),
+        UG("Uitzending gemist"), // TODO: I doubt whether this is used
         ElasticSearch("NPO API Elastic Search"),
-        TVVOD("TvVOD"),
+        TVVOD("TvVOD"),// TODO: I doubt whether this is used
         PROJECTM("Project M")
         ;
 

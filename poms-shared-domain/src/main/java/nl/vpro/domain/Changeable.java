@@ -10,15 +10,8 @@ import java.time.Instant;
  * @author Michiel Meeuwissen
  * @since 5.10
  */
-public interface Changeable {
-     default boolean hasChanges() {
-        return true;
-    }
-    Instant getLastModifiedInstant();
+public interface Changeable extends Trackable {
     void setLastModifiedInstant(Instant lastModified);
-    Instant getCreationInstant();
     void setCreationInstant(Instant creationDate);
-
-
 
 }

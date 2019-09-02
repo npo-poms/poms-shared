@@ -9,8 +9,8 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
  * @since 4.8
  */
 @JsonTypeName("and")
-public class AndPredicateTestResult<T> extends BooleanPredicateTestResult<T> {
-    public AndPredicateTestResult(DisplayablePredicate<T> predicate, T value, boolean b, List<PredicateTestResult<T>> predicates) {
+public class AndPredicateTestResult extends BooleanPredicateTestResult {
+    public AndPredicateTestResult(DisplayablePredicate<?> predicate, Object value, boolean b, List<PredicateTestResult> predicates) {
         super(predicate, value, b, predicate.getDefaultBundleKey(), predicates);
 
     }

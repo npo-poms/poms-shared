@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.vpro.domain.constraint.PredicateTestResult;
-import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.domain.media.Program;
 import nl.vpro.logging.LoggerOutputStream;
@@ -118,7 +117,7 @@ public class FilterTest {
             "</images>\n" +
             "<segments/>\n" +
             "</program>"), Program.class);
-        PredicateTestResult<MediaObject> mediaObjectPredicateTestResult = filter.testWithReason(program);
+        PredicateTestResult mediaObjectPredicateTestResult = filter.testWithReason(program);
         assertThat(mediaObjectPredicateTestResult.applies()).isTrue();
         JAXB.marshal(mediaObjectPredicateTestResult, LoggerOutputStream.info(log));
 
