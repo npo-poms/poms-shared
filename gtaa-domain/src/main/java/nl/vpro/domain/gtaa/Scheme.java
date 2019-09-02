@@ -3,10 +3,13 @@ package nl.vpro.domain.gtaa;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import nl.vpro.domain.Displayable;
 import nl.vpro.i18n.Locales;
@@ -112,10 +115,7 @@ public enum Scheme implements Displayable {
     }
 
     public static Class[] classesAndNew() {
-        List<Class> result = Arrays.stream(values()).map(s -> s.implementation)
-            .filter(Objects::nonNull).collect(Collectors.toList());
-        result.addAll(Arrays.asList(GTAANewPerson.class, GTAANewConcept.class));
-        return result.toArray(new Class[0]);
+        return ArrayUtils.addAll(classes(), GTAANewPerson.class, GTAANewConcept.class);
     }
 }
 

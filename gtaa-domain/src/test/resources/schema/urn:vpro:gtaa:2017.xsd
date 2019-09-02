@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:gtaa:2017" xmlns:skosxl="http://www.w3.org/2008/05/skos-xl#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:tns="urn:vpro:gtaa:2017" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:gtaa="urn:vpro:gtaa:2017" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:openskos="http://openskos.org/xmlns#">
 
-  <xs:element name="classification" type="tns:classification"/>
+  <xs:element name="classification" type="tns:classificationType"/>
 
-  <xs:element name="genre" type="tns:genre"/>
+  <xs:element name="genre" type="tns:genreType"/>
 
-  <xs:element name="geographicName" type="tns:geographicName"/>
+  <xs:element name="geographicName" type="tns:geographicNameType"/>
 
-  <xs:element name="maker" type="tns:maker"/>
+  <xs:element name="maker" type="tns:makerType"/>
 
-  <xs:element name="name" type="tns:name"/>
+  <xs:element name="name" type="tns:nameType"/>
 
   <xs:element name="newConcept" type="tns:newConceptType"/>
 
   <xs:element name="newPerson" type="tns:newPersonType"/>
 
-  <xs:element name="person" type="tns:person"/>
+  <xs:element name="person" type="tns:personType"/>
 
-  <xs:element name="topic" type="tns:topic"/>
+  <xs:element name="topic" type="tns:topicType"/>
 
-  <xs:element name="topicbandg" type="tns:topicbandg"/>
+  <xs:element name="topicbandg" type="tns:topicbandgType"/>
 
-  <xs:complexType name="person">
+  <xs:complexType name="personType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="givenName" type="xs:string" minOccurs="0"/>
@@ -42,7 +42,7 @@
     </xs:sequence>
   </xs:complexType>
 
-  <xs:complexType name="geographicName">
+  <xs:complexType name="geographicNameType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -53,7 +53,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="topic">
+  <xs:complexType name="topicType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -64,7 +64,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="topicbandg">
+  <xs:complexType name="topicbandgType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -75,7 +75,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="classification">
+  <xs:complexType name="classificationType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -86,7 +86,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="maker">
+  <xs:complexType name="makerType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -97,7 +97,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="genre">
+  <xs:complexType name="genreType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
@@ -108,7 +108,7 @@
     <xs:attribute ref="tns:lastModified"/>
   </xs:complexType>
 
-  <xs:complexType name="name">
+  <xs:complexType name="nameType">
     <xs:sequence>
       <xs:element name="name" type="xs:string" minOccurs="0"/>
       <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
