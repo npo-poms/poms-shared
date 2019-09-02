@@ -14,7 +14,7 @@ import nl.vpro.w3.rdf.Description;
  * @since 5.11
  */
 @GTAAScheme(Scheme.topicbandg)
-@XmlType(name = "topicbandg",
+@XmlType(name = "topicbandgType",
     propOrder = {
         "name",
         "scopeNotes",
