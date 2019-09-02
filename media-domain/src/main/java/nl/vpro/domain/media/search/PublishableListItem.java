@@ -6,11 +6,11 @@ package nl.vpro.domain.media.search;
 
 import java.time.Instant;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.MutableEmbargo;
-import nl.vpro.domain.Embargos;
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.support.PublishableObject;
 import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.user.Editor;
@@ -23,7 +23,7 @@ import nl.vpro.domain.user.Editor;
 @XmlRootElement(name = "item")
 @XmlType(
     name = "publishableListItem")
-public abstract class PublishableListItem implements MutableEmbargo {
+public abstract class PublishableListItem implements MutableEmbargo, Identifiable<Long> {
     @XmlAttribute
     protected Long id;
 
@@ -37,9 +37,9 @@ public abstract class PublishableListItem implements MutableEmbargo {
 
     protected Editor createdBy;
 
-    protected Instant lastModified;
+    protected Instant lastModifiedInstant;
 
-    protected Instant creationDate;
+    protected Instant creationInstant;
 
     protected Instant publishStart;
 
@@ -55,10 +55,10 @@ public abstract class PublishableListItem implements MutableEmbargo {
         this.id       = mediaObject.getId();
         this.workflow = mediaObject.getWorkflow();
 
-        this.lastModified = mediaObject.getLastModifiedInstant();
+        this.lastModifiedInstant = mediaObject.getLastModifiedInstant();
         this.lastModifiedBy = mediaObject.getLastModifiedBy();
 
-        this.creationDate = mediaObject.getCreationInstant();
+        this.creationInstant = mediaObject.getCreationInstant();
         this.createdBy = mediaObject.getCreatedBy();
 
         Embargos.copy(mediaObject, this);
@@ -88,6 +88,7 @@ public abstract class PublishableListItem implements MutableEmbargo {
         return getDeletedAttributeValue() == Boolean.TRUE;
     }
 
+    @Override
     public Long getId() {
         if (id == null) {
             if (urn != null) {
@@ -126,20 +127,20 @@ public abstract class PublishableListItem implements MutableEmbargo {
         this.createdBy = createdBy;
     }
 
-    public Instant getLastModified() {
-        return lastModified;
+    public Instant getLastModifiedInstant() {
+        return lastModifiedInstant;
     }
 
-    public void setLastModified(Instant lastModified) {
-        this.lastModified = lastModified;
+    public void setLastModifiedInstant(Instant lastModifiedInstant) {
+        this.lastModifiedInstant = lastModifiedInstant;
     }
 
-    public Instant getCreationDate() {
-        return creationDate;
+    public Instant getCreationInstant() {
+        return creationInstant;
     }
 
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
+    public void setCreationInstant(Instant creationInstant) {
+        this.creationInstant = creationInstant;
     }
 
     @Override

@@ -3,10 +3,11 @@ package nl.vpro.domain.media.search;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.List;
-import java.util.SortedSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -20,9 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.media.*;
 import nl.vpro.domain.media.support.Tag;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.domain.user.ThirdParty;
+import nl.vpro.domain.user.*;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -43,12 +42,12 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "title",
             "subTitle",
             "description",
-            "creationDate",
-            "lastModified",
+            "creationInstant",
+            "lastModifiedInstant",
             "createdByPrincipalId",
             "lastModifiedByPrincipalId",
             "sortDate",
-            "type",
+            "mediaType",
             "publishStartInstant",
             "publishStopInstant",
             "lastPublished",
@@ -64,7 +63,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
             "streamingPlatformStatus"
         }
 )
-public class MediaListItem extends PublishableListItem {
+public class MediaListItem extends PublishableListItem implements TrackableMedia {
 
     @XmlAttribute
     @Getter
@@ -82,10 +81,10 @@ public class MediaListItem extends PublishableListItem {
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
     private Instant lastPublished;
 
-    @XmlAttribute
+    @XmlAttribute(name = "mediaType")
     @Getter
     @Setter
-    private String mediaType;
+    private String mediaClass;
 
     @XmlAttribute
     @Getter
@@ -143,7 +142,8 @@ public class MediaListItem extends PublishableListItem {
 
     @Getter
     @Setter
-    private MediaType type;
+    @XmlElement(name = "type")
+    private MediaType mediaType;
 
     @Getter
     @Setter
@@ -204,7 +204,7 @@ public class MediaListItem extends PublishableListItem {
 
         if(media instanceof Program) {
             // proxy's...
-            this.mediaType = Program.class.getName();
+            this.mediaClass = Program.class.getName();
             SortedSet<ScheduleEvent> scheduleEvents = ((Program) media).getScheduleEvents();
             if(scheduleEvents.size() > 0) {
                 this.firstScheduleEvent = ScheduleEvents.getFirstScheduleEvent(scheduleEvents, false).orElse(null);
@@ -214,13 +214,13 @@ public class MediaListItem extends PublishableListItem {
                 this.sortDateScheduleEvent = ScheduleEvents.sortDateEventForProgram(scheduleEvents).orElse(null);
             }
         } else if(media instanceof Group) {
-            this.mediaType = Group.class.getName();
+            this.mediaClass = Group.class.getName();
         } else if(media instanceof Segment) {
-            this.mediaType = Segment.class.getName();
+            this.mediaClass = Segment.class.getName();
         } else {
-            this.mediaType = getClass().getName();
+            this.mediaClass = getClass().getName();
         }
-        this.type = media.getType().getMediaType();
+        this.mediaType = media.getType().getMediaType();
         this.sortDate = media.getSortInstant();
         this.locations = media.getLocations();
         this.numberOfLocations = media.getLocations().size();
@@ -233,7 +233,7 @@ public class MediaListItem extends PublishableListItem {
 
     @Override
     public String getUrn() {
-        return (type == null ? "null" : type.getSubType().getUrnPrefix()) + id;
+        return (mediaType == null ? "null" : mediaType.getSubType().getUrnPrefix()) + id;
     }
 
 
@@ -257,33 +257,33 @@ public class MediaListItem extends PublishableListItem {
     }
 
     @Override
-    @XmlElement
+    @XmlElement(name = "creationDate")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public Instant  getCreationDate() {
-        return super.getCreationDate();
+    public Instant getCreationInstant() {
+        return super.getCreationInstant();
     }
 
     @Override
-    public void setCreationDate(Instant creationDate) {
-        super.setCreationDate(creationDate);
+    public void setCreationInstant(Instant creationInstant) {
+        super.setCreationInstant(creationInstant);
     }
 
     @Override
-    @XmlElement
+    @XmlElement(name = "lastModified")
     @XmlJavaTypeAdapter(InstantXmlAdapter.class)
     @XmlSchemaType(name = "dateTime")
     @JsonDeserialize(using = StringInstantToJsonTimestamp.Deserializer.class)
     @JsonSerialize(using = StringInstantToJsonTimestamp.Serializer.class)
-    public Instant getLastModified() {
-        return super.getLastModified();
+    public Instant getLastModifiedInstant() {
+        return super.getLastModifiedInstant();
     }
 
     @Override
-    public void setLastModified(Instant lastModified) {
-        super.setLastModified(lastModified);
+    public void setLastModifiedInstant(Instant lastModifiedInstant) {
+        super.setLastModifiedInstant(lastModifiedInstant);
     }
 
     @XmlElement(name = "lastModifiedBy")
@@ -329,11 +329,53 @@ public class MediaListItem extends PublishableListItem {
         return (MediaListItem) super.setPublishStopInstant(stop);
     }
 
-
-
     @Override
     public String toString() {
         return mid + " " + title;
     }
 
+    public static final String[] FIELD_NAMES;
+    private static final  List<Field> FIELDS;
+    static {
+        FIELDS  = Arrays.stream(MediaListItem.class.getDeclaredFields()).filter(
+                (f) -> {
+                    f.setAccessible(true);
+                    return ! Modifier.isStatic(f.getModifiers());
+                })
+            .collect(Collectors.toList());
+        FIELD_NAMES = FIELDS.stream().map(Field::getName).toArray(String[]::new);
+    }
+    private static Object toRecordObject(Object o) {
+        if (o == null) {
+            return "";
+        }
+        if (o instanceof Collection) {
+            return ((Collection<?>) o).stream().map( e -> toRecordObject(e).toString()).collect(Collectors.joining(", "));
+        }
+        if (o instanceof ScheduleEvent) {
+            return ((ScheduleEvent) o).getId().toString();
+        }
+         if (o instanceof Location) {
+             Location l = (Location) o;
+             return l.getOwner() + ":" + l.getPlatform() + ":" + l.getProgramUrl();
+        }
+        if (o instanceof Number || o instanceof Boolean || o.getClass().isPrimitive()) {
+            return o;
+        }
+          if (o instanceof Organization) {
+            return ((Organization) o).getId();
+        }
+        return o.toString();
+    }
+
+    public Object[] asRecord() {
+        return FIELDS.stream().map(f ->{
+            try {
+                return toRecordObject(f.get(MediaListItem.this));
+            } catch (IllegalAccessException e) {
+                return e.getMessage();
+            }
+        }).toArray(Object[]::new);
+
+    }
 }
