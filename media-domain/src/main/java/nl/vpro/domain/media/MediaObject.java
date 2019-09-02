@@ -233,7 +233,7 @@ public abstract class MediaObject
     implements
     NicamRated,
     LocalizedObject<Title, Description, Website, TwitterRef, MediaObject>,
-    MediaIdentifiable {
+    TrackableMedia, MediaIdentifiable {
 
 
     public static final String DELETED_FILTER = "deletedFilter";
