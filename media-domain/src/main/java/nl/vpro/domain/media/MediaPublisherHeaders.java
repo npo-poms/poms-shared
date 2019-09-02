@@ -14,7 +14,6 @@ import nl.vpro.domain.Displayable;
  */
 public interface MediaPublisherHeaders {
 
-
     String PUBLISH_TO_HEADER = "publishTo";
     String QUEUETIME_HEADER = "queueTime";
     String TRANSACTION_UUID_HEADER = "transactionUUID";
@@ -28,10 +27,8 @@ public interface MediaPublisherHeaders {
 
     @Slf4j
     enum Destination implements Displayable {
-
-        UG("Uitzending gemist"), // TODO: I doubt whether this is used
-        ElasticSearch("NPO API Elastic Search"),
-        TVVOD("TvVOD"),// TODO: I doubt whether this is used
+        ElasticSearch("NPO Frontend API"),
+        TVVOD("TvVOD"),
         PROJECTM("Project M")
         ;
 
