@@ -4,15 +4,17 @@
  */
 package nl.vpro.domain.constraint;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
-import javax.el.ELContext;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 import java.util.Locale;
 
+import javax.el.ELContext;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 import static nl.vpro.domain.constraint.PredicateTestResult.FACTORY;
+
+;
 
 
 /**
@@ -47,15 +49,15 @@ public abstract class AbstractNot<T> implements Constraint<T> {
 
 
     @Override
-    public NotPredicateTestResult<T> testWithReason(@Nullable T t) {
-        PredicateTestResult<T> result = constraint.testWithReason(t);
-        return new NotPredicateTestResult<>(this, t, ! result.applies(), result);
+    public NotPredicateTestResult testWithReason(@Nullable T t) {
+        PredicateTestResult result = constraint.testWithReason(t);
+        return new NotPredicateTestResult(this, t, ! result.applies(), result);
     }
 
     @Override
-    public void setELContext(ELContext ctx, T value, Locale locale, PredicateTestResult<T> result) {
+    public void setELContext(ELContext ctx, Object value, Locale locale, PredicateTestResult result) {
         Constraint.super.setELContext(ctx, value, locale, result);
-        NotPredicateTestResult<T> notResult = (NotPredicateTestResult<T>) result;
+        NotPredicateTestResult notResult = (NotPredicateTestResult) result;
         ctx.getVariableMapper().setVariable("clause",
             FACTORY.createValueExpression(notResult.getClause().getDescription(locale), String.class));
     }

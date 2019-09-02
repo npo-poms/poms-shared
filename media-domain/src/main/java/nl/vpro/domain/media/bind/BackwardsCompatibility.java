@@ -21,8 +21,11 @@ import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.Jackson2Mapper;
 
 /**
+ * This is used to generate json compatible with the old Couchdb Datbases. This means that it can be dropped soon.
+ *
  * @author Michiel Meeuwissen
  * @since 3.0
+ * @deprecated Will be dropped in >= 5.12
  */
 @Slf4j
 public class BackwardsCompatibility {

@@ -7,13 +7,14 @@ package nl.vpro.domain.constraint;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
 import javax.el.ELContext;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import static nl.vpro.domain.constraint.PredicateTestResult.FACTORY;
+
+;
 
 /**
  * See https://jira.vpro.nl/browse/API-
@@ -59,19 +60,19 @@ public abstract class AbstractOr<T> implements Constraint<T> {
 
 
     @Override
-    public OrPredicateTestResult<T> testWithReason(@Nullable T t) {
+    public OrPredicateTestResult testWithReason(@Nullable T t) {
         return DisplayablePredicates.or(this, t, testsWithReason(t));
 
     }
 
-    public List<PredicateTestResult<T>> testsWithReason(@Nullable T t) {
+    public List<PredicateTestResult> testsWithReason(@Nullable T t) {
         return constraints.stream().map(c -> c.testWithReason(t)).collect(Collectors.toList());
     }
 
     @Override
-    public void setELContext(ELContext ctx, T value, Locale locale, PredicateTestResult<T> result) {
+    public void setELContext(ELContext ctx, Object value, Locale locale, PredicateTestResult result) {
         Constraint.super.setELContext(ctx, value, locale, result);
-        OrPredicateTestResult<T> orResult = (OrPredicateTestResult<T>) result;
+        OrPredicateTestResult orResult = (OrPredicateTestResult) result;
         ResourceBundle bundle = DisplayablePredicates.getBundleForFalse(this, locale);
         List<String> clauses = orResult.getClauses()
             .stream().map(p -> p.getDescription(locale))

@@ -98,7 +98,7 @@ public class ProfileTest {
         assertNotNull(out.getMediaProfile());
         assertThat((Predicate<MediaObject>) out.getMediaProfile()).isInstanceOf(ProfileDefinition.class);
     }
-    
+
     @Test
     public void testGenreProfile() throws Exception {
         Profile in = new Profile("genre", null, new ProfileDefinition<>(new Filter(new GenreConstraint("Jeugd"))));
@@ -153,7 +153,7 @@ public class ProfileTest {
     public void testPredicate() {
         Program program = MediaTestDataBuilder.program().build();
         ProfileDefinition<MediaObject> predicate = getHumanProfile().getMediaProfile();
-        PredicateTestResult<MediaObject> predicateTestResult = predicate.testWithReason(program);
+        PredicateTestResult predicateTestResult = predicate.testWithReason(program);
         System.out.println(Arrays.asList(predicateTestResult.getDescription()));
     }
 
@@ -163,10 +163,10 @@ public class ProfileTest {
         Program program1 = MediaTestDataBuilder.program().withImages().withLocations().build();
         Program program2 = MediaTestDataBuilder.program().withImages().withLocations().ageRating(AgeRating._16).build();
         ProfileDefinition<MediaObject> predicate = getZappProfile().getMediaProfile();
-        PredicateTestResult<MediaObject> predicateTestResult1 = predicate.testWithReason(program1);
+        PredicateTestResult predicateTestResult1 = predicate.testWithReason(program1);
         assertThat(predicate.test(program1)).isTrue();
         System.out.println(Arrays.asList(predicateTestResult1.getDescription()));
-        PredicateTestResult<MediaObject> predicateTestResult2 = predicate.testWithReason(program2);
+        PredicateTestResult predicateTestResult2 = predicate.testWithReason(program2);
         assertThat(predicate.test(program2)).isFalse();
         System.out.println(Arrays.asList(predicateTestResult2.getDescription()));
     }

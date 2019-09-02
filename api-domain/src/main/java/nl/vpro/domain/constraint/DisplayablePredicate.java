@@ -23,7 +23,7 @@ public interface DisplayablePredicate<T> extends Predicate<T> {
     /**
      * Returns a reason and result for the predicate evaluation. The default implementation is based on the resource bundle {@link DisplayablePredicates#BUNDLE_TRUE}
      */
-    default PredicateTestResult<T> testWithReason(T input) {
+    default PredicateTestResult testWithReason(T input) {
         boolean applies = test(input);
         if (applies) {
             return DisplayablePredicates.testsTrue(this, input);
@@ -64,11 +64,11 @@ public interface DisplayablePredicate<T> extends Predicate<T> {
         return getDefaultBundleKey().get(0);
     }
 
-    default void setELContext(ELContext ctx, T value, Locale locale, PredicateTestResult<T> result) {
+    default void setELContext(ELContext ctx, Object value, Locale locale, PredicateTestResult result) {
         ctx.getVariableMapper().setVariable("value", FACTORY.createValueExpression(value, Object.class));
         if (value instanceof Displayable) {
             ctx.getVariableMapper().setVariable("displayablevalue", FACTORY.createValueExpression(((Displayable) value).getDisplayName(), String.class));
-            
+
         } else if (value instanceof Enum) {
             ctx.getVariableMapper().setVariable("displayablevalue", FACTORY.createValueExpression(value.toString(), String.class));
         }
