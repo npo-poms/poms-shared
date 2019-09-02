@@ -115,7 +115,7 @@ public enum Scheme implements Displayable {
     }
 
     public static Class[] classesAndNew() {
-        return ArrayUtils.addAll(classes(), GTAANewPerson.class, GTAANewConcept.class);
+        return ArrayUtils.addAll(classes(), GTAANewPerson.class, GTAANewGenericConcept.class);
     }
 }
 
