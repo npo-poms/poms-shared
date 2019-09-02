@@ -1,6 +1,6 @@
 package nl.vpro.domain.gtaa;
 
-        import java.net.URI;
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
 
@@ -14,7 +14,7 @@ import nl.vpro.w3.rdf.Description;
  * @since 5.5
  */
 @GTAAScheme(Scheme.topic)
-@XmlType(name = "topic",
+@XmlType(name = "topicType",
     propOrder = {
         "name",
         "scopeNotes",
