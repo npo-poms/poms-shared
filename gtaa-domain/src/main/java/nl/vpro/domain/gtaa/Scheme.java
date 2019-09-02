@@ -3,9 +3,8 @@ package nl.vpro.domain.gtaa;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -110,6 +109,13 @@ public enum Scheme implements Displayable {
         return Arrays.stream(values()).map(s -> s.implementation)
             .filter(Objects::nonNull)
             .toArray(Class[]::new);
+    }
+
+    public static Class[] classesAndNew() {
+        List<Class> result = Arrays.stream(values()).map(s -> s.implementation)
+            .filter(Objects::nonNull).collect(Collectors.toList());
+        result.addAll(Arrays.asList(GTAANewPerson.class, GTAANewConcept.class));
+        return result.toArray(new Class[0]);
     }
 }
 
