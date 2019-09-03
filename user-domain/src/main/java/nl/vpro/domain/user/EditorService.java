@@ -6,11 +6,12 @@ package nl.vpro.domain.user;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.SortedSet;
 
 public interface EditorService extends UserService<Editor> {
 
-    Broadcaster currentEmployer();
+    Optional<Broadcaster> currentEmployer();
 
     SortedSet<Broadcaster> allowedBroadcasters();
 

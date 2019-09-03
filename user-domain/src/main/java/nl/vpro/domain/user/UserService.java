@@ -7,6 +7,7 @@ package nl.vpro.domain.user;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -14,8 +15,7 @@ import java.util.concurrent.Future;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;;
-
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -23,6 +23,8 @@ import org.slf4j.MDC;
 import nl.vpro.domain.Roles;
 
 import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
+
+;
 
 public interface UserService<T extends User> {
 
@@ -36,11 +38,10 @@ public interface UserService<T extends User> {
 
     void delete(T object);
 
-    T currentUser();
+    Optional<T> currentUser();
 
-    default String currentPrincipalId() {
-        T currentUser = currentUser();
-        return currentUser == null ? null : currentUser.getPrincipalId();
+    default Optional<String> currentPrincipalId() {
+        return currentUser().map(User::getPrincipalId);
     }
 
     void authenticate(String principalId, String password);
