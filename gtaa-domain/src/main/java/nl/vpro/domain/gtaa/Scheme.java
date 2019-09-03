@@ -9,6 +9,8 @@ import java.util.Optional;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import nl.vpro.domain.Displayable;
 import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.LocalizedString;
@@ -110,6 +112,10 @@ public enum Scheme implements Displayable {
         return Arrays.stream(values()).map(s -> s.implementation)
             .filter(Objects::nonNull)
             .toArray(Class[]::new);
+    }
+
+    public static Class[] classesAndNew() {
+        return ArrayUtils.addAll(classes(), GTAANewPerson.class, GTAANewGenericConcept.class);
     }
 }
 

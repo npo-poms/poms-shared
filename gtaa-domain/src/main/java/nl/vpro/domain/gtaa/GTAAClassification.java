@@ -14,7 +14,7 @@ import nl.vpro.w3.rdf.Description;
  * @since 5.11
  */
 @GTAAScheme(Scheme.classification)
-@XmlType(name = "classification",
+@XmlType(name = "classificationType",
     propOrder = {
         "name",
         "scopeNotes",
