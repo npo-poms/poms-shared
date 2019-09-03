@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 
 import nl.vpro.domain.Change;
 import nl.vpro.domain.gtaa.*;
@@ -67,6 +68,7 @@ public class ThesaurusChange extends Change<GTAAConcept> {
 
     @JsonProperty("object")
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "objectType")
+    @JsonTypeIdResolver(GTAAConceptIdResolver.class)
     protected GTAAConcept getJsonObject() {
         return getObject();
     }

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import nl.vpro.w3.rdf.Description;
 
 @GTAAScheme(Scheme.name)
-@XmlType(name = "name",
+@XmlType(name = "nameType",
     propOrder = {
         "name",
         "scopeNotes",
