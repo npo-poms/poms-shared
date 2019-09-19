@@ -20,6 +20,8 @@ public interface GTAARepository {
 
     CountedIterator<Record> getPersonUpdates(Instant from, Instant until);
 
+    CountedIterator<Record> getGeoLocationsUpdates(Instant from, Instant until);
+
     CountedIterator<Record> getAllUpdates(Instant from, Instant until);
 
     List<Description> findPersons(String input, Integer max);

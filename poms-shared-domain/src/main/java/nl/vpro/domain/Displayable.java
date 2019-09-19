@@ -21,7 +21,6 @@ public interface Displayable {
         return getDisplayName(Locales.getDefault()).getValue();
     }
 
-
     /**
      * Returns a displayable name for this item in the given Locale, or the default locale ({@link Locales#getDefault()}) if not available or not implemented
      * @since 5.11

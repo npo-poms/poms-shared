@@ -22,34 +22,33 @@ import nl.vpro.i18n.LocalizedString;
 @Slf4j
 public enum Scheme implements Displayable {
 
-    person("http://data.beeldengeluid.nl/gtaa/Persoonsnamen",
+    person("Persoonsnamen", "http://data.beeldengeluid.nl/gtaa/Persoonsnamen",
         "persoonsnaam",
         "persoonsnamen"),
 
-    geographicname("http://data.beeldengeluid.nl/gtaa/GeografischeNamen",
+    geographicname("GeografischeNamen", "http://data.beeldengeluid.nl/gtaa/GeografischeNamen",
         "geografische naam",
         "geografische namen"),
 
-    topic("http://data.beeldengeluid.nl/gtaa/Onderwerpen", "onderwerp", "onderwerpen"),
+    topic("Onderwerpen", "http://data.beeldengeluid.nl/gtaa/Onderwerpen", "onderwerp", "onderwerpen"),
 
-    topicbandg("http://data.beeldengeluid.nl/gtaa/OnderwerpenBenG", "onderwerp van B&G", "onderwerpen van B&G"),
+    topicbandg("OnderwerpenBenG", "http://data.beeldengeluid.nl/gtaa/OnderwerpenBenG", "onderwerp van B&G", "onderwerpen van B&G"),
 
-    classification("http://data.beeldengeluid.nl/gtaa/Classificatie", "classificatie", "classificaties"),
+    classification("Classificatie", "http://data.beeldengeluid.nl/gtaa/Classificatie", "classificatie", "classificaties"),
 
-    maker("http://data.beeldengeluid.nl/gtaa/Maker", "maker", "makers"),
+    maker("Maker", "http://data.beeldengeluid.nl/gtaa/Maker", "maker", "makers"),
 
-    genre("http://data.beeldengeluid.nl/gtaa/Genre", "genre", "genres"),
+    genre("Genre", "http://data.beeldengeluid.nl/gtaa/Genre", "genre", "genres"),
 
-    name("http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen")
+    name("Namen", "http://data.beeldengeluid.nl/gtaa/Namen", "naam", "namen");
 
-
-    ;
     static {
         GTAAConceptIdResolver.init();
     }
     @Getter
     private final String url;
-
+    @Getter
+    private final String id;
     private final String pluralDisplayName;
     private final String displayName;
 
@@ -57,7 +56,8 @@ public enum Scheme implements Displayable {
     private Class<? extends GTAAConcept> implementation;
 
 
-    Scheme(String url, String displayName, String pluralDisplayName) {
+    Scheme(String id, String url, String displayName, String pluralDisplayName) {
+        this.id = id;
         this.url = url;
         this.displayName = displayName;
         this.pluralDisplayName = pluralDisplayName;
@@ -91,6 +91,7 @@ public enum Scheme implements Displayable {
     public Optional<LocalizedString> getPluralDisplayName() {
         return Optional.of(LocalizedString.of(pluralDisplayName, Locales.DUTCH));
     }
+
     @Override
     public String getDisplayName() {
         return displayName;
