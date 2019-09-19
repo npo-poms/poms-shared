@@ -87,7 +87,7 @@ public class OpenskosTests {
 
     @Test
     @Ignore
-    public void testChanges() {
+    public void testPersonsChanges() {
         GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -98,6 +98,27 @@ public class OpenskosTests {
             Record record = updates.next();
             if (!record.isDeleted())
                 assertThat(record.getMetaData().getFirstDescription().isPerson()).isTrue();
+            count++;
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+
+        }
+        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    //@Ignore
+    public void testGeoLocationsChanges() {
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        Instant start = LocalDate.of(2018, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+        Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+
+        CountedIterator<Record> updates = impl.getGeoLocationsUpdates(start, stop);
+        long count = 0;
+        while (updates.hasNext()) {
+            Record record = updates.next();
+            if (!record.isDeleted())
+                assertThat(record.getMetaData().getFirstDescription().isGeoLocation()).isTrue();
             count++;
             log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
 

@@ -159,7 +159,11 @@ public class Description extends AbstractGTAAObject {
     }
 
     public boolean isPerson() {
-        return getSimpleType().contains("Persoon");
+        return getSimpleType().equals(Scheme.person.getId());
+    }
+
+    public boolean isGeoLocation() {
+        return getSimpleType().equals(Scheme.geographicname.getId());
     }
 
     public String getSimpleType() {

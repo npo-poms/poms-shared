@@ -68,6 +68,11 @@ public class OpenskosRepository implements GTAARepository {
     @Setter
     private String personsSpec;
 
+    @Value("${gtaa.spec.geolocations}")
+    @Getter
+    @Setter
+    private String geoLocationsSpec;
+
     @Value("${gtaa.use-xllabels}")
     @Getter
     @Setter
@@ -165,12 +170,14 @@ public class OpenskosRepository implements GTAARepository {
 
     }
 
-
-
-
     @Override
     public CountedIterator<Record> getPersonUpdates(@Context Instant from, @Context Instant to) {
         return getUpdates(from, to, personsSpec);
+    }
+
+    @Override
+    public CountedIterator<Record> getGeoLocationsUpdates(@Context Instant from, @Context Instant to) {
+        return getUpdates(from, to, geoLocationsSpec);
     }
 
     @Override

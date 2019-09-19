@@ -163,6 +163,4 @@ public class OpenskosRepositoryTest {
         template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
         return template;
     }
-
-
 }
