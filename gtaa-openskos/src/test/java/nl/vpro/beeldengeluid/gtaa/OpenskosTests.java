@@ -24,10 +24,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
 public class OpenskosTests {
+    String env = "dev";
+    
     @Ignore
     @Test
     public void testPost1() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
 
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
             .givenName("Pietje")
@@ -39,7 +41,7 @@ public class OpenskosTests {
     @Test
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
                 .familyName("Puk"  + System.currentTimeMillis())
@@ -52,7 +54,7 @@ public class OpenskosTests {
     @Test(expected = GTAAConflict.class)
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
             .givenName("Pietje")
             .familyName("Puk"  + System.currentTimeMillis())
@@ -66,7 +68,7 @@ public class OpenskosTests {
     @Test
     @Ignore
     public void testFindPerson() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         List<Description> persons = impl.findPersons("pietje", 100);
         assertThat(persons).isNotEmpty();
         System.out.println(persons);
@@ -76,7 +78,7 @@ public class OpenskosTests {
     @Test
     @Ignore
     public void testFindAnything() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         List<Description> items = impl.findAnything("hilversum", 100);
         assertThat(items).isNotEmpty();
         System.out.println(items);
@@ -86,7 +88,7 @@ public class OpenskosTests {
     @Test
     @Ignore
     public void testChanges() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
 
@@ -105,9 +107,9 @@ public class OpenskosTests {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void testAllChanges() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         Instant start = LocalDate.of(2017, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
 
@@ -120,7 +122,6 @@ public class OpenskosTests {
             }
             count++;
             log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
-
         }
         // TODO check out why count doesn't match
         // assertThat(count).isEqualTo(updates.getSize().get());
@@ -129,7 +130,7 @@ public class OpenskosTests {
     @Test
     @Ignore
     public void addPerson() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         GTAANewPerson p = new GTAANewPerson();
         p.setFamilyName("asdasd");
         p.setGivenName("asdasd");
@@ -140,7 +141,7 @@ public class OpenskosTests {
     @Test
     @Ignore
     public void testChangesRecent() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         Instant start = Instant.now().minusSeconds(3600000);
         Instant stop = Instant.now();
 
@@ -158,44 +159,8 @@ public class OpenskosTests {
 
     @Test
     public void testStatus() {
-        GTAARepository impl = getRealInstance();
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         impl.retrieveConceptStatus("bla");
     }
 
-    private GTAARepository getRealInstance() {
-        MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
-        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("nl.vpro.beeldengeluid.gtaa", "nl.vpro.w3.rdf", "nl.vpro.openarchives.oai");
-
-        try {
-            jaxb2Marshaller.afterPropertiesSet();
-        } catch (Exception ex) {
-            /* Ignore */
-        }
-        marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-        marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
-
-        RestTemplate template = new RestTemplate();
-        template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
-
-        //String host = "http://localhost:8080";
-        //String host = "http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        String host = "http://test.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        // String host = "http://openskos.beeldengeluid.nl/";
-        // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        // String host =
-        // "http://production-v2.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        String code = "***REMOVED***";
-        // String code = "8il3Ut09weJ4h1GQ";
-        String spec = "beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2";
-        // String spec = "beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352";
-        boolean useXL = true;
-        OpenskosRepository impl = new OpenskosRepository(host, code, template);
-        impl.setUseXLLabels(useXL);
-
-        impl.init();
-        impl.setPersonsSpec(spec);
-        return impl;
-    }
 }
