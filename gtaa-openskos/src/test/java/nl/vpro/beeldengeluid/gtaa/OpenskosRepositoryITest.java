@@ -129,8 +129,8 @@ public class OpenskosRepositoryITest {
         List<Description> concepts = impl.findAnything("hasselt", 100);
         assertThat(concepts).isNotEmpty();
         assertThat(concepts.get(0).getStatus()).isNotNull();
-        for (Description oncept : concepts)  {
-            log.info("{}", oncept);
+        for (Description concept : concepts) {
+            log.info("{}", concept);
 
         }
     }
@@ -158,11 +158,66 @@ public class OpenskosRepositoryITest {
         long count = 0;
         while (updates.hasNext()) {
             Record record = updates.next();
+            if (!record.isDeleted())
+                assertThat(record.getMetaData().getFirstDescription().isPerson()).isTrue();
             count++;
             log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), GTAAPerson.create(record.getMetaData().getFirstDescription()));
 
         }
         assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    @Ignore
+    public void testGeoLocationsChanges() {
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        Instant start = LocalDate.of(2018, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+        Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+
+        CountedIterator<Record> updates = impl.getGeoLocationsUpdates(start, stop);
+        long count = 0;
+        while (updates.hasNext()) {
+            Record record = updates.next();
+            if (!record.isDeleted())
+                assertThat(record.getMetaData().getFirstDescription().isGeoLocation()).isTrue();
+            count++;
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+
+        }
+        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    //@Ignore
+    public void testAllChanges() {
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        Instant start = LocalDate.of(2019, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+        Instant stop = LocalDate.of(2019, 3, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+
+        CountedIterator<Record> updates = impl.getAllUpdates(start, stop);
+        long count = 0;
+        while (updates.hasNext()) {
+            Record record = updates.next();
+            if (record.getMetaData() == null) {
+                assertThat(record.getHeader().getStatus()).isEqualTo("deleted");
+            }
+            count++;
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+        }
+        assertThat(count).isEqualTo(updates.getSize().get());
+    }
+
+    @Test
+    @Ignore
+    public void addPerson() {
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        GTAANewPerson p = new GTAANewPerson();
+        p.setFamilyName("asdasd");
+        p.setGivenName("asdasd");
+        //p.setListIndex(0);
+        impl.submit(p, "demo-cms:gtaa-user");
     }
 
     @Test

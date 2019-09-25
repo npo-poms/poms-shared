@@ -51,7 +51,6 @@ import static org.springframework.http.HttpStatus.CREATED;
  * @since 3.7
  */
 @Slf4j
-
 public class OpenskosRepository implements GTAARepository {
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");

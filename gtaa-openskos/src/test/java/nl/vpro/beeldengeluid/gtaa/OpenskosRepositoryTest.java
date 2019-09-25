@@ -90,6 +90,18 @@ public class OpenskosRepositoryTest {
     }
 
     @Test
+    public void getUpdatesAndApplyThem() throws Exception {
+        wireMockRule.stubFor(get(urlPathEqualTo("/oai-pmh")).willReturn(okXml(f("updates.xml"))));
+        try (CountedIterator<Record> updates = repo.getPersonUpdates(Instant.EPOCH, Instant.now())) {
+            Record next = updates.next();
+            assertThat(next).isNotNull();
+            assertThat(next.getHeader().getDatestamp()).isNotNull();
+            assertThat(next.getMetaData().getFirstDescription().getPrefLabel().getValue()).isEqualTo("Benoist, André");
+        }
+    }
+
+
+    @Test
     public void anyUpdates() throws Exception {
         wireMockRule.stubFor(get(urlPathEqualTo("/oai-pmh"))
             .willReturn(okXml(f("any-updates.xml"))));
