@@ -63,7 +63,7 @@ public class GeoLocation extends DomainObject implements MediaObjectOwnableListI
 
     @XmlTransient
     @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST }, targetEntity = GTAAGeoLocationRecord.class)
-    @JoinColumn(name = "gtaa_uri")
+    @JoinColumn(name = "gtaa_id")
     @Getter
     @Setter
     private GTAAGeoLocationRecord gtaaRecord = new GTAAGeoLocationRecord();
