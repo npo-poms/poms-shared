@@ -91,9 +91,22 @@ public class OpenskosRepository implements GTAARepository {
         @NonNull String gtaaUrl,
         @NonNull String gtaaKey,
         @NonNull RestTemplate template) {
-        this.gtaaUrl = gtaaUrl.trim();
-        this.gtaaKey = gtaaKey.trim();
+        this.gtaaUrl = StringUtils.trim(gtaaUrl);
+        this.gtaaKey = StringUtils.trim(gtaaKey);
         this.template = template;
+    }
+
+    @lombok.Builder
+    private OpenskosRepository(
+        @NonNull String gtaaUrl,
+        @NonNull String gtaaKey,
+        @NonNull RestTemplate template,
+        String tenant,
+        String personsSpec) {
+        this(gtaaUrl, gtaaKey, template);
+        this.tenant = tenant;
+        this.personsSpec = personsSpec;
+
     }
 
 

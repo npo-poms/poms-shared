@@ -4,20 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
+import nl.vpro.util.Env;
 import nl.vpro.w3.rdf.Description;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class OpenskosRepositoryITest {
 
-    private String env = "dev";
+    private Env env = Env.ACC;
     @Ignore
     @Test
     public void testPost1() {
@@ -46,7 +41,7 @@ public class OpenskosRepositoryITest {
     }
 
     @Test
-    //@Ignore
+    @Ignore("Vervuilt GTAA")
     public void testPostGeographicName() {
         OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         impl.setTenant("beng");
