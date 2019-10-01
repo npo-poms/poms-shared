@@ -6,9 +6,9 @@ import nl.vpro.util.ConfigUtils;
 import nl.vpro.util.Env;
 
 /**
- * This class is duplicated in media-gtaa test
+ *
  */
-public class OpenskosRepositoryBuilder {
+class OpenskosRepositoryBuilder {
 
 
     public static OpenskosRepository getRealInstance(final Env env) {

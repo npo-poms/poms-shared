@@ -98,18 +98,24 @@ public class OpenskosRepository implements GTAARepository {
         this.template = createTemplateIfNull(template);
     }
 
-    @lombok.Builder
+    @lombok.Builder(builderClassName = "Builder")
     private OpenskosRepository(
         @NonNull String gtaaUrl,
         @NonNull String gtaaKey,
         @NonNull RestTemplate template,
-        String tenant,
+
         String personsSpec,
-        boolean useXLLabels) {
+        String geoLocationsSpec,
+        boolean useXLLabels,
+        String tenant,
+        int retries
+        ) {
         this(gtaaUrl, gtaaKey, template);
         this.tenant = tenant;
         this.personsSpec = personsSpec;
+        this.geoLocationsSpec = geoLocationsSpec;
         this.useXLLabels = useXLLabels;
+        this.retries = retries;
 
     }
 
