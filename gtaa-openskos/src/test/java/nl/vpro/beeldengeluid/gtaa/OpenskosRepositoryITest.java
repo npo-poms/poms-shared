@@ -1,20 +1,22 @@
 package nl.vpro.beeldengeluid.gtaa;
 
 import lombok.extern.slf4j.Slf4j;
-
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.*;
-
-import org.junit.Ignore;
-import org.junit.Test;
-
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
+import nl.vpro.util.ConfigUtils;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.util.Env;
 import nl.vpro.w3.rdf.Description;
+import org.junit.Ignore;
+import org.junit.Test;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static nl.vpro.beeldengeluid.gtaa.OpenskosRepository.CONFIG_FILE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -30,7 +32,7 @@ public class OpenskosRepositoryITest {
     @Ignore
     @Test
     public void testPost1() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
             .givenName("Pietje")
             .familyName("Puk"  + System.currentTimeMillis())
@@ -43,7 +45,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore("Vervuilt GTAA")
     public void testPostGeographicName() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         impl.setTenant("beng");
         String name = "Driedorp3" + System.currentTimeMillis();
         GTAANewGenericConcept geographicName = GTAANewGenericConcept
@@ -81,7 +83,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         String label = "Pietje, Puk" + System.currentTimeMillis();
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
@@ -94,7 +96,7 @@ public class OpenskosRepositoryITest {
     @Test(expected = GTAAConflict.class)
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
                 .familyName("Puk"  + System.currentTimeMillis())
@@ -108,7 +110,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore("This is not a junit test")
     public void testFindPerson() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         List<Description> persons = impl.findPersons("johan c", 100);
         assertThat(persons).isNotEmpty();
         assertThat(persons.get(0).getStatus()).isNotNull();
@@ -120,7 +122,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore("This is not a junit test")
     public void testFindAnyThing() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findAnything("hasselt", 100);
         assertThat(concepts).isNotEmpty();
         assertThat(concepts.get(0).getStatus()).isNotNull();
@@ -133,7 +135,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore("This is not a junit test")
     public void testFindGeo() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         List<Description> geonames = impl.findForSchemes("amsterdam", 1000, Scheme.geographicname.name());
         assertThat(geonames).isNotEmpty();
         assertThat(geonames.get(0).getStatus()).isNotNull();
@@ -145,7 +147,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore
     public void testChanges() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         Instant start = LocalDate.of(2017, 10, 4).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.of(2017, 10, 4).atTime(9, 20).atZone(OpenskosRepository.ZONE_ID).toInstant();
 
@@ -166,7 +168,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore
     public void testGeoLocationsChanges() {
-        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        GTAARepository impl = getRealInstance(env);
         Instant start = LocalDate.of(2018, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
 
@@ -187,7 +189,7 @@ public class OpenskosRepositoryITest {
     @Test
     //@Ignore
     public void testAllChanges() {
-        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        GTAARepository impl = getRealInstance(env);
         Instant start = LocalDate.of(2019, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.of(2019, 3, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
 
@@ -207,7 +209,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore
     public void addPerson() {
-        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        GTAARepository impl = getRealInstance(env);
         GTAANewPerson p = new GTAANewPerson();
         p.setFamilyName("asdasd");
         p.setGivenName("asdasd");
@@ -218,7 +220,7 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore
     public void testChangesRecent() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         Instant start = Instant.now().minusSeconds(3600);
         Instant stop = Instant.now();
 
@@ -236,9 +238,14 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore
     public void retrieveItemStatus() {
-        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        OpenskosRepository impl = getRealInstance(env);
         Optional<Description> description = impl.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1711640");
         log.info("{} ", description.get());
     }
 
+    OpenskosRepository getRealInstance(final Env env) {
+        final OpenskosRepository impl = ConfigUtils.configuredInHome(env, OpenskosRepository.class, CONFIG_FILE);
+        impl.init();
+        return impl;
+    }
 }
