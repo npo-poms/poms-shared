@@ -4,20 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.client.RestTemplate;
 
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
+import nl.vpro.util.Env;
 import nl.vpro.w3.rdf.Description;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,10 +26,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Slf4j
 public class OpenskosRepositoryITest {
 
+    private Env env = Env.ACC;
     @Ignore
     @Test
     public void testPost1() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
             .givenName("Pietje")
             .familyName("Puk"  + System.currentTimeMillis())
@@ -45,14 +41,14 @@ public class OpenskosRepositoryITest {
     }
 
     @Test
-    //@Ignore
+    @Ignore("Vervuilt GTAA")
     public void testPostGeographicName() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         impl.setTenant("beng");
-
+        String name = "Driedorp3" + System.currentTimeMillis();
         GTAANewGenericConcept geographicName = GTAANewGenericConcept
                 .builder()
-                .name("Driedorp3")
+                .name(name)
                 .scopeNote("Buurtschap binnen de gemeente Nijkerk")
                 .scheme(Scheme.geographicname)
                 .build();
@@ -60,6 +56,7 @@ public class OpenskosRepositoryITest {
         ;
         GTAAConcept concept = impl.submit(geographicName, "poms_test");
         assertThat(concept.getScopeNotes()).isNotEmpty();
+        assertThat(concept.getName()).isEqualTo(name);
 
         String result = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:dcterms=\"http://purl.org/dc/terms/\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:skosxl=\"http://www.w3.org/2008/05/skos-xl#\" xmlns:openskos=\"http://openskos.org/xmlns#\" openskos:numFound=\"1\" openskos:rows=\"20\" openskos:start=\"0\">\n" +
                 "<rdf:Description rdf:about=\"http://data.beeldengeluid.nl/gtaa/1711531\">\n" +
@@ -79,19 +76,12 @@ public class OpenskosRepositoryITest {
                 "<dcterms:dateSubmitted>2018-10-31T13:57:47.331+01:00</dcterms:dateSubmitted>\n" +
                 "</rdf:Description>\n" +
                 "</rdf:RDF>";
-
-
-    }
-
-    @Test
-    public void testGeographicName() {
-
     }
 
     @Test
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         String label = "Pietje, Puk" + System.currentTimeMillis();
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
@@ -104,7 +94,7 @@ public class OpenskosRepositoryITest {
     @Test(expected = GTAAConflict.class)
     @Ignore("Vervuilt GTAA")
     public void test409ConflictResolution3ShouldThrowException() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
                 .familyName("Puk"  + System.currentTimeMillis())
@@ -118,54 +108,44 @@ public class OpenskosRepositoryITest {
     @Test
     @Ignore("This is not a junit test")
     public void testFindPerson() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         List<Description> persons = impl.findPersons("johan c", 100);
         assertThat(persons).isNotEmpty();
         assertThat(persons.get(0).getStatus()).isNotNull();
         for (Description person : persons)  {
             log.info("{}", person);
-
         }
-
-
     }
-
 
     @Test
     @Ignore("This is not a junit test")
     public void testFindAnyThing() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         List<Description> concepts = impl.findAnything("hasselt", 100);
         assertThat(concepts).isNotEmpty();
         assertThat(concepts.get(0).getStatus()).isNotNull();
-        for (Description oncept : concepts)  {
-            log.info("{}", oncept);
+        for (Description concept : concepts) {
+            log.info("{}", concept);
 
         }
-
-
     }
-
 
     @Test
     @Ignore("This is not a junit test")
     public void testFindGeo() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         List<Description> geonames = impl.findForSchemes("amsterdam", 1000, Scheme.geographicname.name());
         assertThat(geonames).isNotEmpty();
         assertThat(geonames.get(0).getStatus()).isNotNull();
         for (Description geoname : geonames)  {
             log.info("{}", geoname);
-
         }
-
-
     }
 
     @Test
     @Ignore
     public void testChanges() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         Instant start = LocalDate.of(2017, 10, 4).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.of(2017, 10, 4).atTime(9, 20).atZone(OpenskosRepository.ZONE_ID).toInstant();
 
@@ -173,17 +153,72 @@ public class OpenskosRepositoryITest {
         long count = 0;
         while (updates.hasNext()) {
             Record record = updates.next();
+            if (!record.isDeleted())
+                assertThat(record.getMetaData().getFirstDescription().isPerson()).isTrue();
             count++;
             log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), GTAAPerson.create(record.getMetaData().getFirstDescription()));
 
+        }
+        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    @Ignore
+    public void testGeoLocationsChanges() {
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        Instant start = LocalDate.of(2018, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+        Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+
+        CountedIterator<Record> updates = impl.getGeoLocationsUpdates(start, stop);
+        long count = 0;
+        while (updates.hasNext()) {
+            Record record = updates.next();
+            if (!record.isDeleted())
+                assertThat(record.getMetaData().getFirstDescription().isGeoLocation()).isTrue();
+            count++;
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+
+        }
+        assertThat(count).isEqualTo(updates.getSize().get());
+        assertThat(count).isGreaterThan(0);
+    }
+
+    @Test
+    //@Ignore
+    public void testAllChanges() {
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        Instant start = LocalDate.of(2019, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+        Instant stop = LocalDate.of(2019, 3, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
+
+        CountedIterator<Record> updates = impl.getAllUpdates(start, stop);
+        long count = 0;
+        while (updates.hasNext()) {
+            Record record = updates.next();
+            if (record.getMetaData() == null) {
+                assertThat(record.getHeader().getStatus()).isEqualTo("deleted");
+            }
+            count++;
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
         }
         assertThat(count).isEqualTo(updates.getSize().get());
     }
 
     @Test
     @Ignore
+    public void addPerson() {
+        GTAARepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
+        GTAANewPerson p = new GTAANewPerson();
+        p.setFamilyName("asdasd");
+        p.setGivenName("asdasd");
+        //p.setListIndex(0);
+        impl.submit(p, "demo-cms:gtaa-user");
+    }
+
+    @Test
+    @Ignore
     public void testChangesRecent() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         Instant start = Instant.now().minusSeconds(3600);
         Instant stop = Instant.now();
 
@@ -198,65 +233,12 @@ public class OpenskosRepositoryITest {
         assertThat(count).isEqualTo(updates.getSize().get());
     }
 
-
-
-
-
     @Test
     @Ignore
     public void retrieveItemStatus() {
-        OpenskosRepository impl = getRealInstance();
+        OpenskosRepository impl = OpenskosRepositoryBuilder.getRealInstance(env);
         Optional<Description> description = impl.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1711640");
         log.info("{} ", description.get());
     }
-
-
-    private OpenskosRepository getRealInstance() {
-        MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
-        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("nl.vpro.beeldengeluid.gtaa", "nl.vpro.w3.rdf", "nl.vpro.openarchives.oai");
-
-        try {
-            jaxb2Marshaller.afterPropertiesSet();
-        } catch (Exception ex) {
-            /* Ignore */
-        }
-        marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-        marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
-
-        RestTemplate template = new RestTemplate();
-        template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
-
-
-        // acceptatie
-        //OpenskosRepository impl = new OpenskosRepository("http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/", "1dX1nJHX5GNeT8O7", template);
-
-        // test
-        // OpenskosRepository impl = new OpenskosRepository("http://beg-openskos.test7.picturae.pro", "1dX1nJHX5GNeT8O7", template);
-
-        // productie
-        //OpenskosRepository impl = new OpenskosRepository("http://openskos.beeldengeluid.nl/", "1dX1nJHX5GNeT8O7", template);
-
-
-        // dev
-        OpenskosRepository impl = new OpenskosRepository("http://beg-openskos.test7.picturae.pro/", "1dX1nJHX5GNeT8O7", template);
-
-        impl.setUseXLLabels(true);
-
-        impl.setTenant("beng");
-        impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");
-        //impl.setPersonsSpec("beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352");
-
-        impl.init();
-        /* Acceptatie */
-        //impl.setPersonsSpec("beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352");
-
-
-        /* Productie */
-        //impl.setPersonsSpec("beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2");
-        return impl;
-    }
-
-
 
 }

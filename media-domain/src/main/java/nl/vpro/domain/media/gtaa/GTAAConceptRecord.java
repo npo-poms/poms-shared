@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import nl.vpro.domain.DomainObject;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.persistence.StringListConverter;
@@ -17,11 +18,10 @@ import nl.vpro.validation.NoHtml;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> implements Serializable, Comparable<SELF> {
+public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> extends DomainObject implements Serializable, Comparable<SELF> {
 
     @Column(columnDefinition="varchar(255)", length = 255)
     //@Convert(converter = URIConverter.class)
-    @Id
     String uri;
 
     @Column(nullable = true, length = 30)
