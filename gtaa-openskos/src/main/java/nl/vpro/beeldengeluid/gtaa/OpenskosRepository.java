@@ -7,7 +7,27 @@ package nl.vpro.beeldengeluid.gtaa;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import nl.vpro.domain.gtaa.*;
+import nl.vpro.openarchives.oai.*;
+import nl.vpro.util.BatchedReceiver;
+import nl.vpro.util.CountedIterator;
+import nl.vpro.w3.rdf.Description;
+import nl.vpro.w3.rdf.RDF;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.web.client.ResponseErrorHandler;
+import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
+import javax.ws.rs.core.Context;
+import javax.xml.bind.JAXB;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
@@ -21,29 +41,6 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-import javax.annotation.PostConstruct;
-import javax.ws.rs.core.Context;
-import javax.xml.bind.JAXB;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.ResponseErrorHandler;
-import org.springframework.web.client.RestTemplate;
-
-import nl.vpro.domain.gtaa.*;
-import nl.vpro.openarchives.oai.*;
-import nl.vpro.util.BatchedReceiver;
-import nl.vpro.util.CountedIterator;
-import nl.vpro.w3.rdf.Description;
-import nl.vpro.w3.rdf.RDF;
-
 import static org.springframework.http.HttpStatus.CREATED;
 
 /**
@@ -54,6 +51,8 @@ import static org.springframework.http.HttpStatus.CREATED;
  */
 @Slf4j
 public class OpenskosRepository implements GTAARepository {
+
+    public static final String CONFIG_FILE = "openskosrepository.properties";
 
     public static final ZoneId ZONE_ID = ZoneId.of("Europe/Amsterdam");
 
@@ -103,7 +102,6 @@ public class OpenskosRepository implements GTAARepository {
         @NonNull String gtaaUrl,
         @NonNull String gtaaKey,
         @NonNull RestTemplate template,
-
         String personsSpec,
         String geoLocationsSpec,
         boolean useXLLabels,
