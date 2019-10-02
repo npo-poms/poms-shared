@@ -45,9 +45,7 @@ import com.neovisionaries.i18n.CountryCode;
 
 import nl.vpro.domain.*;
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.media.bind.BackwardsCompatibility;
-import nl.vpro.domain.media.bind.CountryCodeAdapter;
-import nl.vpro.domain.media.bind.LocaleAdapter;
+import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
@@ -798,8 +796,8 @@ public abstract class MediaObject
 
     @XmlElement(name = "broadcaster", required = true)
     @JsonProperty("broadcasters")
-    @JsonSerialize(using = BackwardsCompatibility.BroadcasterList.Serializer.class)
-    @JsonDeserialize(using = BackwardsCompatibility.BroadcasterList.Deserializer.class)
+    @JsonSerialize(using = BroadcasterList.Serializer.class)
+    @JsonDeserialize(using = BroadcasterList.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Broadcaster> getBroadcasters() {
         if (broadcasters == null) {
@@ -1146,8 +1144,8 @@ public abstract class MediaObject
 
     @XmlElement(name = "genre")
     @JsonProperty("genres")
-    @JsonSerialize(using = BackwardsCompatibility.GenreSortedSet.Serializer.class)
-    @JsonDeserialize(using = BackwardsCompatibility.GenreSortedSet.Deserializer.class)
+    @JsonSerialize(using = GenreSortedSet.Serializer.class)
+    @JsonDeserialize(using = GenreSortedSet.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public SortedSet<Genre> getGenres() {
         if (genres == null) {
@@ -1303,8 +1301,8 @@ public abstract class MediaObject
 
     @XmlElement(name = "country")
     @JsonProperty("countries")
-    @JsonSerialize(using = BackwardsCompatibility.CountryCodeList.Serializer.class)
-    @JsonDeserialize(using = BackwardsCompatibility.CountryCodeList.Deserializer.class)
+    @JsonSerialize(using = CountryCodeList.Serializer.class)
+    @JsonDeserialize(using = CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<org.meeuw.i18n.Region> getCountries() {
@@ -1341,8 +1339,8 @@ public abstract class MediaObject
     @XmlElement(name = "language")
     @XmlJavaTypeAdapter(value = LocaleAdapter.class)
     @JsonProperty("languages")
-    @JsonSerialize(using = BackwardsCompatibility.LanguageList.Serializer.class)
-    @JsonDeserialize(using = BackwardsCompatibility.LanguageList.Deserializer.class)
+    @JsonSerialize(using = LanguageList.Serializer.class)
+    @JsonDeserialize(using = LanguageList.Deserializer.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     public List<Locale> getLanguages() {
         if (languages == null) {

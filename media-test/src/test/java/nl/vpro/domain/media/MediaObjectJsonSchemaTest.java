@@ -38,7 +38,6 @@ import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.domain.subtitles.SubtitlesType;
-import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Editor;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.Jackson2Mapper;
@@ -56,10 +55,6 @@ import static org.junit.Assert.assertEquals;
 @Slf4j
 public class MediaObjectJsonSchemaTest {
 
-    @After
-    public void after() {
-        BackwardsCompatibility.clearCompatibility();
-    }
     @BeforeClass
     public static void before() {
         Locale.setDefault(Locales.DUTCH);
@@ -148,29 +143,8 @@ public class MediaObjectJsonSchemaTest {
         JSONAssert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void testV1Broadcasters() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[\"BNN\",\"AVRO\",\"Human\"],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
-        BackwardsCompatibility.setV1Compatibility(true);
 
-        Program program = program().lean().withBroadcasters().broadcasters(new Broadcaster("HUMA", "Human")).build();
-        String actual = toJson(program);
-
-        JSONAssert.assertEquals(expected, actual);
-
-    }
-
-    @Test
-    public void testReverseV1Broadcasters() throws Exception {
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String input = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[\"BNN\",\"AVRO\"]}";
-
-        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
-
-        assertThat(program.getBroadcasters()).hasSize(2);
-    }
 
     @Test
     public void testExclusives() throws Exception {
@@ -323,18 +297,7 @@ public class MediaObjectJsonSchemaTest {
         JSONAssert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void testGenresV1() throws Exception {
 
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[\"Documentaire\",\"Informatief\",\"Natuur\",\"Nieuws/actualiteiten\"],\"countries\":[],\"languages\":[]}";
-
-        Program program = program().lean().withGenres().build();
-        String actual = toJson(program);
-
-        JSONAssert.assertEquals(expected, actual);
-    }
 
     @Test
     public void testReverseGenres() throws Exception {
@@ -346,17 +309,6 @@ public class MediaObjectJsonSchemaTest {
         assertThat(program.getGenres().first().getTermId()).isEqualTo("3.0.1.7.21");
         assertThat(program.getGenres().last().getTermId()).isEqualTo("3.0.1.8.25");
 
-    }
-
-    @Test
-    public void testReverseV1Genres() throws Exception {
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String input = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"genres\":[\"Film\",\"Jeugd\",\"Serie/soap\"]}";
-
-        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
-
-        assertThat(program.getGenres()).hasSize(2);
     }
 
     @Test
@@ -551,30 +503,6 @@ public class MediaObjectJsonSchemaTest {
         JSONAssert.assertEquals(expected, actual);
     }
 
-    @Test
-    public void testLanguagesV1() throws Exception {
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[\"NL\"]}";
-
-        Program program = program().id(100L).lean().languages("nl").build();
-
-        String actual = toJson(program);
-
-        JSONAssert.assertEquals(expected, actual);
-    }
-
-
-    @Test
-    public void testReverseV1Languages() throws Exception {
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String input = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"languages\":[\"NL\"]}";
-
-        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
-
-        assertThat(program.getLanguages()).hasSize(1);
-    }
 
     @Test
     public void testCountries() throws Exception {
@@ -585,30 +513,6 @@ public class MediaObjectJsonSchemaTest {
         String actual = toJson(program);
 
         JSONAssert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testCountriesV1() throws Exception {
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[\"NL\"],\"languages\":[]}";
-
-        Program program = program().id(100L).lean().countries("NL").build();
-
-        String actual = toJson(program);
-
-        JSONAssert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testReverseV1Countries() throws Exception {
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String input = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"hasSubtitles\":false,\"countries\":[\"NL\"]}";
-
-        Program program = Jackson2Mapper.getInstance().readerFor(Program.class).readValue(input);
-
-        assertThat(program.getCountries()).hasSize(1);
     }
 
 
@@ -634,33 +538,6 @@ public class MediaObjectJsonSchemaTest {
         JSONAssert.assertEquals(expected, actual);
     }
 
-
-    @Test
-    public void testAgeRatingV1() throws Exception {
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":16}";
-
-        Program program = program().id(100L).lean().ageRating(AgeRating._16).build();
-
-        String actual = toJson(program);
-
-        JSONAssert.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void testAgeRatingAllV1() throws Exception {
-
-        BackwardsCompatibility.setV1Compatibility(true);
-
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"ageRating\":null}";
-
-        Program program = program().id(100L).lean().ageRating(AgeRating.ALL).build();
-
-        String actual = toJson(program);
-
-        JSONAssert.assertEquals(expected, actual);
-    }
 
 
     @Test

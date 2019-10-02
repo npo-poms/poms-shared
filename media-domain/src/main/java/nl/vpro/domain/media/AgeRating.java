@@ -5,16 +5,16 @@ import javax.xml.bind.annotation.XmlEnumValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.XmlValued;
-import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.Displayable;
+import nl.vpro.domain.XmlValued;
+import nl.vpro.domain.media.bind.AgeRatingToString;
 
 /**
  * @author Michiel Meeuwissen
  * @since 3.0
  */
-@JsonSerialize(using = BackwardsCompatibility.AgeRatingToString.Serializer.class)
-@JsonDeserialize(using = BackwardsCompatibility.AgeRatingToString.Deserializer.class)
+@JsonSerialize(using = AgeRatingToString.Serializer.class)
+@JsonDeserialize(using = AgeRatingToString.Deserializer.class)
 public enum AgeRating implements Displayable, XmlValued {
 
     @XmlEnumValue("6")
