@@ -90,7 +90,9 @@ public class OpenskosRepository implements GTAARepository {
     private int retries;
 
     public OpenskosRepository(
+        @Value("${gtaa.baseUrl}")
         @NonNull String baseUrl,
+        @Value("${gtaa.key}")
         @NonNull String key,
         @NonNull RestTemplate template) {
         this.gtaaUrl = StringUtils.trim(baseUrl);
