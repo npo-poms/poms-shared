@@ -7,33 +7,25 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.json.test.JSONAssert;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.io.*;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.After;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.*;
 import com.jayway.jsonpath.JsonPath;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
-import nl.vpro.domain.media.bind.BackwardsCompatibility;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.Image;
 import nl.vpro.domain.media.support.OwnerType;
