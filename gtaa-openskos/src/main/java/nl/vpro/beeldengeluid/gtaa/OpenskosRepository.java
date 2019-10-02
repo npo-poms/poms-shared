@@ -7,30 +7,10 @@ package nl.vpro.beeldengeluid.gtaa;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.domain.gtaa.*;
-import nl.vpro.openarchives.oai.*;
-import nl.vpro.util.BatchedReceiver;
-import nl.vpro.util.CountedIterator;
-import nl.vpro.w3.rdf.Description;
-import nl.vpro.w3.rdf.RDF;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.ResponseErrorHandler;
-import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
-import javax.ws.rs.core.Context;
-import javax.xml.bind.JAXB;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +20,27 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.regex.Pattern;
+
+import javax.annotation.PostConstruct;
+import javax.ws.rs.core.Context;
+import javax.xml.bind.JAXB;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.web.client.*;
+
+import nl.vpro.domain.gtaa.*;
+import nl.vpro.openarchives.oai.*;
+import nl.vpro.util.BatchedReceiver;
+import nl.vpro.util.CountedIterator;
+import nl.vpro.w3.rdf.Description;
+import nl.vpro.w3.rdf.RDF;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -63,17 +64,17 @@ public class OpenskosRepository implements GTAARepository {
     private final String gtaaUrl;
     private final String gtaaKey;
 
-    @Value("${gtaa.spec.persons}")
+    @Value("${gtaa.personsSpec}")
     @Getter
     @Setter
     private String personsSpec;
 
-    @Value("${gtaa.spec.geolocations}")
+    @Value("${gtaa.geolocationsSpec}")
     @Getter
     @Setter
     private String geoLocationsSpec;
 
-    @Value("${gtaa.use-xllabels}")
+    @Value("${gtaa.useXLLabels}")
     @Getter
     @Setter
     private boolean useXLLabels;
@@ -89,26 +90,26 @@ public class OpenskosRepository implements GTAARepository {
     private int retries;
 
     public OpenskosRepository(
-        @NonNull String gtaaUrl,
-        @NonNull String gtaaKey,
+        @NonNull String baseUrl,
+        @NonNull String key,
         @NonNull RestTemplate template) {
-        this.gtaaUrl = StringUtils.trim(gtaaUrl);
-        this.gtaaKey = StringUtils.trim(gtaaKey);
+        this.gtaaUrl = StringUtils.trim(baseUrl);
+        this.gtaaKey = StringUtils.trim(key);
         this.template = createTemplateIfNull(template);
     }
 
     @lombok.Builder(builderClassName = "Builder")
     private OpenskosRepository(
-        @NonNull String gtaaUrl,
-        @NonNull String gtaaKey,
+        @NonNull String baseUrl,
+        @NonNull String key,
         @NonNull RestTemplate template,
         String personsSpec,
         String geoLocationsSpec,
         boolean useXLLabels,
-        String tenant,
+        @NonNull String tenant,
         int retries
         ) {
-        this(gtaaUrl, gtaaKey, template);
+        this(baseUrl, key, template);
         this.tenant = tenant;
         this.personsSpec = personsSpec;
         this.geoLocationsSpec = geoLocationsSpec;
@@ -143,7 +144,12 @@ public class OpenskosRepository implements GTAARepository {
 
     @PostConstruct
     public void init() {
-        log.info("Communicating with {} (personSpec: {}), useXLLabels: {})", gtaaUrl, personsSpec, useXLLabels);
+        log.info("Communicating with {} (personSpec: {}, geolocationsSpec: {}), useXLLabels: {})",
+            gtaaUrl,
+            personsSpec,
+            geoLocationsSpec,
+            useXLLabels
+        );
     }
 
 
@@ -340,7 +346,7 @@ public class OpenskosRepository implements GTAARepository {
             @Override
             public void handleError(@NonNull ClientHttpResponse response) throws IOException {
                 StringWriter body = new StringWriter();
-                IOUtils.copy(response.getBody(), body, Charset.forName("UTF-8"));
+                IOUtils.copy(response.getBody(), body, StandardCharsets.UTF_8);
                 switch (response.getStatusCode()) {
                 case CONFLICT:
                     throw new GTAAConflict("Conflicting or duplicate label: " + prefLabel + ": " + body);
@@ -379,7 +385,7 @@ public class OpenskosRepository implements GTAARepository {
         // String fields = "&fl=uuid,uri,prefLabel,altLabel,hiddenLabel,status";
         input = input.replaceAll("[\\-.,]+", " ");
         String query = "(status:(candidate OR approved) OR (status:not_compliant AND dc_creator:POMS)) " +
-                "AND inScheme:\"http://data.beeldengeluid.nl/gtaa/Persoonsnamen\" " +
+                "AND inScheme:\"" + Scheme.person.getUrl()  + "\" " +
                 "AND (" + input + "*)";
 
         String path = "api/find-concepts?tenant=" + tenant + "&collection=gtaa&q=" + query + "&rows=" + max;
@@ -388,7 +394,7 @@ public class OpenskosRepository implements GTAARepository {
 
     protected <T> T getForPath(final String path, final Class<T> tClass) {
         String url = gtaaUrl + path;
-        log.debug("Calling gtaa {}", url);
+        log.info("Calling gtaa {}", url);
         try {
             ResponseEntity<T> entity = template.getForEntity(url, tClass);
             return entity.getStatusCode().is2xxSuccessful() ? entity.getBody() : null;
@@ -428,7 +434,9 @@ public class OpenskosRepository implements GTAARepository {
                  generateQueryByScheme(schemes) +
                 "AND ( %s*)", input);
 
-        String path = String.format("api/find-concepts?collection=gtaa&q=%s&rows=%s", query, max);
+        String path = String.format("api/find-concepts?tenant=%s&collection=gtaa&q=%s&rows=%s",
+            tenant, query, max);
+
         return descriptions(getForPath(path, RDF.class));
 
 
