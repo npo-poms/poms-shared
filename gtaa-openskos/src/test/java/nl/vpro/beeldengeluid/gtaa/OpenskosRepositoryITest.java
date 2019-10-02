@@ -9,7 +9,10 @@ import nl.vpro.util.Env;
 import nl.vpro.w3.rdf.Description;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,9 +29,22 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  */
 @Slf4j
+@RunWith(Parameterized.class)
 public class OpenskosRepositoryITest {
 
-    private Env env = Env.ACC;
+    private final Env env;
+
+
+
+    @Parameterized.Parameters
+    public static Object[] envs() {
+        return new Object[]{Env.DEV, Env.TEST,  Env.ACC, Env.PROD };
+    }
+
+    public OpenskosRepositoryITest(Env env) {
+        this.env = env;
+    }
+
     @Ignore
     @Test
     public void testPost1() {
@@ -151,7 +167,7 @@ public class OpenskosRepositoryITest {
         Instant start = LocalDate.of(2017, 10, 4).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.of(2017, 10, 4).atTime(9, 20).atZone(OpenskosRepository.ZONE_ID).toInstant();
 
-        CountedIterator<Record> updates = impl.getPersonUpdates(start, Instant.now());
+        CountedIterator<Record> updates = impl.getPersonUpdates(start, stop);
         long count = 0;
         while (updates.hasNext()) {
             Record record = updates.next();
@@ -218,13 +234,50 @@ public class OpenskosRepositoryITest {
     }
 
     @Test
-    @Ignore
-    public void testChangesRecent() {
+    public void testChangesPersonsRecent() {
         OpenskosRepository impl = getRealInstance(env);
-        Instant start = Instant.now().minusSeconds(3600);
+        Instant start = Instant.now().minus(Duration.ofDays(70));
         Instant stop = Instant.now();
 
         CountedIterator<Record> updates = impl.getPersonUpdates(start, stop);
+        long count = 0;
+        while (updates.hasNext()) {
+            Record record = updates.next();
+            count++;
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+
+        }
+        assertThat(count).isEqualTo(updates.getSize().get());
+    }
+
+
+    @Test
+    public void testChangesGeolocationsRecent() {
+        OpenskosRepository impl = getRealInstance(env);
+        Instant start = Instant.now().minus(Duration.ofDays(70));
+        Instant stop = Instant.now();
+
+        CountedIterator<Record> updates = impl.getGeoLocationsUpdates(start, stop);
+        long count = 0;
+        while (updates.hasNext()) {
+            Record record = updates.next();
+            count++;
+            log.info("{}/{}: {}", updates.getCount(), updates.getSize().get(), record);
+
+
+        }
+        assertThat(count).isEqualTo(updates.getSize().get());
+    }
+
+
+
+    @Test
+    public void testChangesRecent() {
+        OpenskosRepository impl = getRealInstance(env);
+        Instant start = Instant.now().minus(Duration.ofDays(70));
+        Instant stop = Instant.now();
+
+        CountedIterator<Record> updates = impl.getAllUpdates(start, stop);
         long count = 0;
         while (updates.hasNext()) {
             Record record = updates.next();
