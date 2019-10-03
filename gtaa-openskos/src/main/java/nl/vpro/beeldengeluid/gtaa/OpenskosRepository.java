@@ -93,25 +93,24 @@ public class OpenskosRepository implements GTAARepository {
         @Value("${gtaa.baseUrl}")
         @NonNull String baseUrl,
         @Value("${gtaa.key}")
-        @NonNull String key,
-        @NonNull RestTemplate template) {
-        this.gtaaUrl = StringUtils.trim(baseUrl);
-        this.gtaaKey = StringUtils.trim(key);
-        this.template = createTemplateIfNull(template);
+        @NonNull String key) {
+        this(baseUrl, key, null, null, null, true, null, 1);
     }
 
     @lombok.Builder(builderClassName = "Builder")
     private OpenskosRepository(
         @NonNull String baseUrl,
         @NonNull String key,
-        @NonNull RestTemplate template,
+        RestTemplate template,
         String personsSpec,
         String geoLocationsSpec,
         boolean useXLLabels,
         @NonNull String tenant,
         int retries
         ) {
-        this(baseUrl, key, template);
+        this.gtaaUrl = baseUrl;
+        this.gtaaKey = key;
+        this.template = createTemplateIfNull(template);
         this.tenant = tenant;
         this.personsSpec = personsSpec;
         this.geoLocationsSpec = geoLocationsSpec;
