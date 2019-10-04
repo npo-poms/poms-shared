@@ -2264,10 +2264,21 @@ public abstract class MediaObject
         prediction.setState(Prediction.State.REVOKED);
     }
 
-
+    /**
+     * Property used for marshalling/unmarshalling, avoiding the {@link Relation#copy} (which disappears the id)
+     */
     @XmlElement(name = "relation")
     @JsonProperty("relations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    protected SortedSet<Relation> get_Relations() {
+        return getRelations();
+    }
+
+    protected void set_Relations(SortedSet<Relation> relations) {
+        this.relations = relations;
+    }
+
+
     public SortedSet<Relation> getRelations() {
         if (this.relations == null) {
             this.relations = new TreeSet<>();

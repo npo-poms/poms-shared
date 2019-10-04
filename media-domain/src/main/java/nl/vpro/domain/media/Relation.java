@@ -202,7 +202,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
 
     public void setUrn(String urn) {
         if (urn == null) {
-            id = null;
+            this.id = null;
             return;
         }
         Matcher matcher = URN_PATTERN.matcher(urn);
@@ -210,7 +210,7 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
             throw new IllegalArgumentException("Unexpected urn format: " + urn);
         }
 
-        id = Long.valueOf(matcher.group(2));
+        this.id = Long.valueOf(matcher.group(2));
     }
 
     @Override
