@@ -615,6 +615,9 @@ public class Location extends PublishableObject<Location>
         return getAuthorityRecord().getAuthority();
     }
 
+    /**
+     * Locations are basicly order on their programUrl
+     */
 
     @Override
     public int compareTo(@NonNull Location that) {
@@ -715,14 +718,6 @@ public class Location extends PublishableObject<Location>
         int result = super.hashCode();
         result = 31 * result + (this.programUrl != null ? this.programUrl.hashCode() : 0);
         return result;
-    }
-
-    public Long getNeboId() {
-        return neboId;
-    }
-
-    public void setNeboId(Long neboId) {
-        this.neboId = neboId;
     }
 
     /**

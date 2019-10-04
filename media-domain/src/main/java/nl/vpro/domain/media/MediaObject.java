@@ -2132,12 +2132,27 @@ public abstract class MediaObject
     }
 
 
+    /**
+     * Returns the locations in {@link Location#PRESENTATION_ORDER}
+     */
     public SortedSet<Location> getLocations() {
+        if (locations == null) {
+            locations = new TreeSet<>();
+        }
+        return locations;
+    }
+
+    /**
+     * Returns the locations in {@link Location#PRESENTATION_ORDER}
+     * @since 5.12 (in 5.11 {@link #getLocations} behaved like this)
+     */
+    public SortedSet<Location> getPresentationOrderLocations() {
         if (locations == null) {
             locations = new TreeSet<>();
         }
         return new ResortedSortedSet<>(locations, Location.PRESENTATION_ORDER);
     }
+
 
     public void setLocations(SortedSet<Location> locations) {
 

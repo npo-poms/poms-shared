@@ -592,15 +592,19 @@ public interface MediaTestDataBuilder<
     default T withLocations() {
         Location l1 = new Location("http://player.omroep.nl/?aflID=4393288", OwnerType.NEBO);
         l1.setCreationInstant(LocalDateTime.of(2016, 3, 4, 12, 45).atZone(Schedule.ZONE_ID).toInstant());
+        l1.setBitrate(1000);
         Location l2 = new Location("http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf", OwnerType.BROADCASTER);
         l2.setCreationInstant(LocalDateTime.of(2016, 3, 4, 13, 45).atZone(Schedule.ZONE_ID).toInstant());
         l2.setDuration(Duration.of(30L, ChronoUnit.MINUTES).plus(Duration.of(33, ChronoUnit.SECONDS)));
+        l2.setBitrate(2000);
         Location l3 = new Location("http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf", OwnerType.BROADCASTER);
         l3.setCreationInstant(LocalDateTime.of(2016, 3, 4, 14, 45).atZone(Schedule.ZONE_ID).toInstant());
+        l3.setBitrate(3000);
         Location l4 = new Location("http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v", OwnerType.BROADCASTER);
         l4.setDuration(Duration.of(10L, ChronoUnit.MINUTES));
         l4.setOffset(Duration.of(13L, ChronoUnit.MINUTES));
         l4.setCreationInstant(LocalDateTime.of(2016, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant());
+        l4.setBitrate(1500);
 
         return locations(l1, l2, l3, l4);
 
