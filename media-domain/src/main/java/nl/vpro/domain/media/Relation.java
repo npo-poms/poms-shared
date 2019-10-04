@@ -1,13 +1,10 @@
 package nl.vpro.domain.media;
 
-import lombok.Builder;
-
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -15,6 +12,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.Identifiable;
 import nl.vpro.validation.NoHtml;
@@ -86,8 +84,16 @@ public class Relation implements Comparable<Relation>, Serializable, Identifiabl
         this.definition = definition;
     }
 
-    @Builder
     public Relation(RelationDefinition definition, String uriRef, String text) {
+        this.definition = definition;
+        this.uriRef = uriRef;
+        this.text = text;
+    }
+
+
+    @lombok.Builder
+    public Relation(Long id, RelationDefinition definition, String uriRef, String text) {
+        this.id = id;
         this.definition = definition;
         this.uriRef = uriRef;
         this.text = text;

@@ -400,29 +400,28 @@
       "urnRef": "urn:vpro:media:program:12"
     }
   ],
-  "relations": [
-    {
-      "value": "synoniem",
-      "type": "THESAURUS",
-      "broadcaster": "AVRO"
-    },
-    {
-      "value": "Ulfts Mannenkoor",
-      "type": "KOOR",
-      "broadcaster": "EO"
-    },
-    {
-      "value": "Marco Borsato",
-      "type": "ARTIST",
-      "broadcaster": "VPRO"
-    },
-    {
-      "uriRef": "http://www.bluenote.com/",
-      "value": "Blue Note",
-      "type": "LABEL",
-      "broadcaster": "VPRO"
-    }
-  ],
+  "relations" : [ {
+    "value" : "synoniem",
+    "type" : "THESAURUS",
+    "urn" : "urn:vpro:media:relation:2",
+    "broadcaster" : "AVRO"
+  }, {
+    "value" : "Ulfts Mannenkoor",
+    "type" : "KOOR",
+    "urn" : "urn:vpro:media:relation:4",
+    "broadcaster" : "EO"
+  }, {
+    "value" : "Marco Borsato",
+    "type" : "ARTIST",
+    "urn" : "urn:vpro:media:relation:3",
+    "broadcaster" : "VPRO"
+  }, {
+    "uriRef" : "http://www.bluenote.com/",
+    "value" : "Blue Note",
+    "type" : "LABEL",
+    "urn" : "urn:vpro:media:relation:1",
+    "broadcaster" : "VPRO"
+  } ],
   "images": [
     {
       "title": "Eerste plaatje met credits",
@@ -848,29 +847,28 @@
           "urn": "urn:vpro:media:location:11"
         }
       ],
-      "relations": [
-        {
-          "value": "synoniem",
-          "type": "THESAURUS",
-          "broadcaster": "AVRO"
-        },
-        {
-          "value": "Ulfts Mannenkoor",
-          "type": "KOOR",
-          "broadcaster": "EO"
-        },
-        {
-          "value": "Marco Borsato",
-          "type": "ARTIST",
-          "broadcaster": "VPRO"
-        },
-        {
-          "uriRef": "http://www.bluenote.com/",
-          "value": "Blue Note",
-          "type": "LABEL",
-          "broadcaster": "VPRO"
-        }
-      ],
+      "relations" : [ {
+        "value" : "synoniem",
+        "type" : "THESAURUS",
+        "urn" : "urn:vpro:media:relation:2",
+        "broadcaster" : "AVRO"
+      }, {
+        "value" : "Ulfts Mannenkoor",
+        "type" : "KOOR",
+        "urn" : "urn:vpro:media:relation:4",
+        "broadcaster" : "EO"
+      }, {
+        "value" : "Marco Borsato",
+        "type" : "ARTIST",
+        "urn" : "urn:vpro:media:relation:3",
+        "broadcaster" : "VPRO"
+      }, {
+        "uriRef" : "http://www.bluenote.com/",
+        "value" : "Blue Note",
+        "type" : "LABEL",
+        "urn" : "urn:vpro:media:relation:1",
+        "broadcaster" : "VPRO"
+      } ],
       "images": [
         {
           "title": "Eerste plaatje met credits",

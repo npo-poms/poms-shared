@@ -12,12 +12,10 @@ import javax.xml.bind.util.JAXBSource;
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
 
+import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.theory.ComparableTest;
 
-import static nl.vpro.domain.media.MediaDomainTestHelper.getXmlValidProgram;
-import static nl.vpro.domain.media.MediaDomainTestHelper.marshaller;
-import static nl.vpro.domain.media.MediaDomainTestHelper.schemaValidator;
-import static nl.vpro.domain.media.MediaDomainTestHelper.validator;
+import static nl.vpro.domain.media.MediaDomainTestHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RelationTest extends ComparableTest<Relation> {
@@ -127,6 +125,22 @@ public class RelationTest extends ComparableTest<Relation> {
     @Test
     public void testSchemaMapping() throws Exception {
         schemaValidator.validate(new JAXBSource(marshaller, validProgramWithRelation()));
+    }
+
+    @Test
+    public void json() throws Exception {
+        Jackson2TestUtil.roundTripAndSimilarAndEquals( new Relation(
+                56L,
+                new RelationDefinition("LABEL", "VPRO", "Record label"),
+                "http://sony.com",
+                "Sony"
+        ), "{\n" +
+                "  \"uriRef\" : \"http://sony.com\",\n" +
+                "  \"value\" : \"Sony\",\n" +
+                "  \"type\" : \"LABEL\",\n" +
+                "  \"urn\" : \"urn:vpro:media:relation:56\",\n" +
+                "  \"broadcaster\" : \"VPRO\"\n" +
+                "}");
     }
 
     private Program validProgramWithRelation() {
