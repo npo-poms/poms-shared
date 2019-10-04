@@ -999,6 +999,44 @@ public class MediaObjectJsonSchemaTest {
 
     }
 
+    @Test
+    public void testWithRelations() throws Exception {
+
+        Program program = program().lean().withRelations().build();
+
+        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
+                "  \"objectType\" : \"program\",\n" +
+                "  \"embeddable\" : true,\n" +
+                "  \"broadcasters\" : [ ],\n" +
+                "  \"genres\" : [ ],\n" +
+                "  \"countries\" : [ ],\n" +
+                "  \"languages\" : [ ],\n" +
+                "  \"relations\" : [ {\n" +
+                "    \"value\" : \"synoniem\",\n" +
+                "    \"type\" : \"THESAURUS\",\n" +
+                "    \"broadcaster\" : \"AVRO\",\n" +
+                "    \"urn\" : \"urn:vpro:media:relation:2\"\n" +
+                "  }, {\n" +
+                "    \"value\" : \"Ulfts Mannenkoor\",\n" +
+                "    \"type\" : \"KOOR\",\n" +
+                "    \"broadcaster\" : \"EO\",\n" +
+                "    \"urn\" : \"urn:vpro:media:relation:4\"\n" +
+                "  }, {\n" +
+                "    \"value\" : \"Marco Borsato\",\n" +
+                "    \"type\" : \"ARTIST\",\n" +
+                "    \"broadcaster\" : \"VPRO\",\n" +
+                "    \"urn\" : \"urn:vpro:media:relation:3\"\n" +
+                "  }, {\n" +
+                "    \"uriRef\" : \"http://www.bluenote.com/\",\n" +
+                "    \"value\" : \"Blue Note\",\n" +
+                "    \"type\" : \"LABEL\",\n" +
+                "    \"broadcaster\" : \"VPRO\",\n" +
+                "    \"urn\" : \"urn:vpro:media:relation:1\"\n" +
+                "  } ]\n" +
+                "}");
+
+    }
+
     private String toJson(MediaObject program) throws IOException {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.getPublisherInstance().writeValue(writer, program);
