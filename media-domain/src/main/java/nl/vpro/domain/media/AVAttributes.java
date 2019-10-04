@@ -1,18 +1,15 @@
 package nl.vpro.domain.media;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.*;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.io.Serializable;
 
 @Entity(name = "avattributes")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -65,7 +62,7 @@ public class AVAttributes implements Serializable {
         this.avFileFormat = avFileFormat;
     }
 
-    @Builder
+    @lombok.Builder
     private AVAttributes(
         Integer bitrate,
         Long byteSize,

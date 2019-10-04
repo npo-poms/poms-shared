@@ -1,16 +1,13 @@
 package nl.vpro.domain.media;
 
-import lombok.Builder;
-
-import java.io.Serializable;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.checkerframework.checker.nullness.qual.NonNull;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
-
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.io.Serializable;
 
 /**
  * @author roekoe
@@ -37,7 +34,7 @@ public class DescendantRef implements Comparable<DescendantRef>, Serializable {
     public DescendantRef() {
     }
 
-    @Builder
+    @lombok.Builder
     public DescendantRef(String midRef, String urnRef, MediaType type) {
         this.urnRef = urnRef;
         this.midRef = midRef;
