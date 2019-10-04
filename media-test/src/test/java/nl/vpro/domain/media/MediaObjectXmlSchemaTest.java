@@ -476,10 +476,11 @@ public class MediaObjectXmlSchemaTest {
             "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00+01:00\" creationDate=\"1970-01-01T01:00:00+01:00\" urn=\"urn:vpro:media:program:100\" workflow=\"PUBLISHED\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <credits/>\n" +
             "    <locations/>\n" +
-            "    <relation broadcaster=\"AVRO\" type=\"THESAURUS\">synoniem</relation>\n" +
-            "    <relation broadcaster=\"EO\" type=\"KOOR\">Ulfts Mannenkoor</relation>\n" +
-            "    <relation broadcaster=\"VPRO\" type=\"ARTIST\">Marco Borsato</relation>\n" +
-            "    <relation uriRef=\"http://www.bluenote.com/\" broadcaster=\"VPRO\" type=\"LABEL\">Blue Note</relation>\n" +
+            "    <relation broadcaster=\"AVRO\" type=\"THESAURUS\" urn=\"urn:vpro:media:relation:2\">synoniem</relation>\n" +
+            "    <relation broadcaster=\"EO\" type=\"KOOR\" urn=\"urn:vpro:media:relation:4\">Ulfts Mannenkoor</relation>\n" +
+            "    <relation broadcaster=\"VPRO\" type=\"ARTIST\" urn=\"urn:vpro:media:relation:3\">Marco Borsato</relation>\n" +
+            "    <relation uriRef=\"http://www.bluenote.com/\" broadcaster=\"VPRO\" type=\"LABEL\" urn=\"urn:vpro:media:relation:1\">Blue Note</relation>\n" +
+            " \n" +
             "    <images/>\n" +
             "    <scheduleEvents/>\n" +
             "    <segments/>\n" +
@@ -811,33 +812,38 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testWithLocations() throws Exception {
-        String expected = "<program embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <credits/>\n" +
             "    <locations>\n" +
-            "        <location owner=\"BROADCASTER\" creationDate=\"2016-03-04T15:45:00+01:00\" workflow=\"FOR PUBLICATION\">\n" +
+            "        <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" creationDate=\"2016-03-04T15:45:00+01:00\">\n" +
             "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v</programUrl>\n" +
             "            <avAttributes>\n" +
+            "                <bitrate>1500</bitrate>\n" +
             "                <avFileFormat>MP4</avFileFormat>\n" +
             "            </avAttributes>\n" +
             "            <offset>P0DT0H13M0.000S</offset>\n" +
             "            <duration>P0DT0H10M0.000S</duration>\n" +
             "        </location>\n" +
-            "        <location owner=\"BROADCASTER\" creationDate=\"2016-03-04T14:45:00+01:00\" workflow=\"FOR PUBLICATION\">\n" +
+            "        <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" creationDate=\"2016-03-04T14:45:00+01:00\">\n" +
             "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf</programUrl>\n" +
             "            <avAttributes>\n" +
+            "                <bitrate>3000</bitrate>\n" +
             "                <avFileFormat>WM</avFileFormat>\n" +
             "            </avAttributes>\n" +
             "        </location>\n" +
-            "        <location owner=\"BROADCASTER\" creationDate=\"2016-03-04T13:45:00+01:00\" workflow=\"FOR PUBLICATION\">\n" +
+            "        <location owner=\"BROADCASTER\" workflow=\"FOR PUBLICATION\" creationDate=\"2016-03-04T13:45:00+01:00\">\n" +
             "            <programUrl>http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf</programUrl>\n" +
             "            <avAttributes>\n" +
+            "                <bitrate>2000</bitrate>\n" +
             "                <avFileFormat>WM</avFileFormat>\n" +
             "            </avAttributes>\n" +
             "            <duration>P0DT0H30M33.000S</duration>\n" +
             "        </location>\n" +
-            "        <location owner=\"NEBO\" creationDate=\"2016-03-04T12:45:00+01:00\" workflow=\"FOR PUBLICATION\">\n" +
+            "        <location owner=\"NEBO\" workflow=\"FOR PUBLICATION\" creationDate=\"2016-03-04T12:45:00+01:00\">\n" +
             "            <programUrl>http://player.omroep.nl/?aflID=4393288</programUrl>\n" +
             "            <avAttributes>\n" +
+            "                <bitrate>1000</bitrate>\n" +
             "                <avFileFormat>HTML</avFileFormat>\n" +
             "            </avAttributes>\n" +
             "        </location>\n" +
@@ -845,7 +851,7 @@ public class MediaObjectXmlSchemaTest {
             "    <images/>\n" +
             "    <scheduleEvents/>\n" +
             "    <segments/>\n" +
-            "</program>";
+            "</program>\n";
 
         Program program = program().id(100L).lean().withLocations().build();
 
@@ -992,7 +998,12 @@ public class MediaObjectXmlSchemaTest {
     }
 
 
-
+    @Test
+    public void programWithEverything() throws IOException, SAXException {
+        Program withEverything = MediaTestDataBuilder.program().withEverything()
+            .build();
+        JAXBTestUtil.roundTripAndSimilar(withEverything, getClass().getResourceAsStream("/program-with-everything.xml"));
+    }
 
 
     protected String toXml(Object o) throws JAXBException {
