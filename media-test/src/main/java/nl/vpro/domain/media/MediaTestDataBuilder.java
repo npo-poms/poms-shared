@@ -7,10 +7,7 @@ package nl.vpro.domain.media;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
@@ -24,9 +21,7 @@ import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.support.License;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.domain.user.TestEditors;
+import nl.vpro.domain.user.*;
 import nl.vpro.i18n.Locales;
 import nl.vpro.util.IntegerVersion;
 
@@ -633,10 +628,10 @@ public interface MediaTestDataBuilder<
 
     default T withRelations() {
         return relations(
-            new Relation(VPRO_LABEL, "http://www.bluenote.com/", "Blue Note"),
-            new Relation(AVRO_THESAURUS, null, "synoniem"),
-            new Relation(VPRO_ARTIST, null, "Marco Borsato"),
-            new Relation(EO_KOOR, null, "Ulfts Mannenkoor"));
+            new Relation(1L, VPRO_LABEL, "http://www.bluenote.com/", "Blue Note"),
+            new Relation(2L, AVRO_THESAURUS, null, "synoniem"),
+            new Relation(3L, VPRO_ARTIST, null, "Marco Borsato"),
+            new Relation(4L, EO_KOOR, null, "Ulfts Mannenkoor"));
     }
 
     default T withImages() {
