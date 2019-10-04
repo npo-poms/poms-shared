@@ -55,16 +55,18 @@ public class PageSearchResultTest {
             "          \"locations\" : [ {\n" +
             "            \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v\",\n" +
             "            \"avAttributes\" : {\n" +
+            "              \"bitrate\" : 1500,\n" +
             "              \"avFileFormat\" : \"MP4\"\n" +
             "            },\n" +
-            "            \"offset\" : 780000,\n" +
-            "            \"duration\" : 600000,\n" +
             "            \"owner\" : \"BROADCASTER\",\n" +
             "            \"creationDate\" : 1457102700000,\n" +
-            "            \"workflow\" : \"FOR_PUBLICATION\"\n" +
+            "            \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "            \"offset\" : 780000,\n" +
+            "            \"duration\" : 600000\n" +
             "          }, {\n" +
             "            \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf\",\n" +
             "            \"avAttributes\" : {\n" +
+            "              \"bitrate\" : 3000,\n" +
             "              \"avFileFormat\" : \"WM\"\n" +
             "            },\n" +
             "            \"owner\" : \"BROADCASTER\",\n" +
@@ -73,15 +75,17 @@ public class PageSearchResultTest {
             "          }, {\n" +
             "            \"programUrl\" : \"http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf\",\n" +
             "            \"avAttributes\" : {\n" +
+            "              \"bitrate\" : 2000,\n" +
             "              \"avFileFormat\" : \"WM\"\n" +
             "            },\n" +
-            "            \"duration\" : 1833000,\n" +
             "            \"owner\" : \"BROADCASTER\",\n" +
             "            \"creationDate\" : 1457095500000,\n" +
-            "            \"workflow\" : \"FOR_PUBLICATION\"\n" +
+            "            \"workflow\" : \"FOR_PUBLICATION\",\n" +
+            "            \"duration\" : 1833000\n" +
             "          }, {\n" +
             "            \"programUrl\" : \"http://player.omroep.nl/?aflID=4393288\",\n" +
             "            \"avAttributes\" : {\n" +
+            "              \"bitrate\" : 1000,\n" +
             "              \"avFileFormat\" : \"HTML\"\n" +
             "            },\n" +
             "            \"owner\" : \"NEBO\",\n" +
