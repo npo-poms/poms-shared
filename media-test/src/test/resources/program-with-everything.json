@@ -285,73 +285,70 @@
       "platform": "TVVOD"
     }
   ],
-  "locations": [
-    {
-      "programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
-      "avAttributes": {
-        "avFileFormat": "MP4"
-      },
-      "owner": "BROADCASTER",
-      "creationDate": 1457102700000,
-      "workflow": "FOR_PUBLICATION",
-      "offset": 780000,
-      "duration": 600000,
-      "urn": "urn:vpro:media:location:6"
+   "locations" : [ {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+    "avAttributes" : {
+      "bitrate" : 1500,
+      "avFileFormat" : "MP4"
     },
-    {
-      "programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
-      "avAttributes": {
-        "avFileFormat": "WM"
-      },
-      "owner": "BROADCASTER",
-      "creationDate": 1457099100000,
-      "workflow": "FOR_PUBLICATION",
-      "urn": "urn:vpro:media:location:7"
+    "owner" : "BROADCASTER",
+    "creationDate" : 1457102700000,
+    "workflow" : "FOR_PUBLICATION",
+    "offset" : 780000,
+    "duration" : 600000,
+    "urn" : "urn:vpro:media:location:6"
+  }, {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+    "avAttributes" : {
+      "bitrate" : 3000,
+      "avFileFormat" : "WM"
     },
-    {
-      "programUrl": "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
-      "avAttributes": {
-        "avFileFormat": "WM"
-      },
-      "owner": "BROADCASTER",
-      "creationDate": 1457095500000,
-      "workflow": "FOR_PUBLICATION",
-      "duration": 1833000,
-      "urn": "urn:vpro:media:location:8"
+    "owner" : "BROADCASTER",
+    "creationDate" : 1457099100000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:location:7"
+  }, {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
+    "avAttributes" : {
+      "bitrate" : 2000,
+      "avFileFormat" : "WM"
     },
-    {
-      "programUrl": "http://player.omroep.nl/?aflID=4393288",
-      "avAttributes": {
-        "avFileFormat": "HTML"
-      },
-      "owner": "NEBO",
-      "creationDate": 1457091900000,
-      "workflow": "FOR_PUBLICATION",
-      "urn": "urn:vpro:media:location:9"
+    "owner" : "BROADCASTER",
+    "creationDate" : 1457095500000,
+    "workflow" : "FOR_PUBLICATION",
+    "duration" : 1833000,
+    "urn" : "urn:vpro:media:location:8"
+  }, {
+    "programUrl" : "http://player.omroep.nl/?aflID=4393288",
+    "avAttributes" : {
+      "bitrate" : 1000,
+      "avFileFormat" : "HTML"
     },
-    {
-      "programUrl": "http://www.npo.nl/location/1",
-      "avAttributes": {
-        "avFileFormat": "UNKNOWN"
-      },
-      "owner": "NPO",
-      "creationDate": 1488638700000,
-      "workflow": "FOR_PUBLICATION",
-      "offset": 780000,
-      "duration": 600000,
-      "urn": "urn:vpro:media:location:10"
+    "owner" : "NEBO",
+    "creationDate" : 1457091900000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:location:9"
+  }, {
+    "programUrl" : "http://www.npo.nl/location/1",
+    "avAttributes" : {
+      "avFileFormat" : "UNKNOWN"
     },
-    {
-      "programUrl": "http://www.vpro.nl/location/1",
-      "avAttributes": {
-        "avFileFormat": "UNKNOWN"
-      },
-      "owner": "BROADCASTER",
-      "creationDate": 1486291320000,
-      "workflow": "PUBLISHED",
-      "urn": "urn:vpro:media:location:11"
-    }
-  ],
+    "owner" : "NPO",
+    "creationDate" : 1488638700000,
+    "workflow" : "FOR_PUBLICATION",
+    "offset" : 780000,
+    "duration" : 600000,
+    "urn" : "urn:vpro:media:location:10"
+  }, {
+    "programUrl" : "http://www.vpro.nl/location/1",
+    "avAttributes" : {
+      "avFileFormat" : "UNKNOWN"
+    },
+    "owner" : "BROADCASTER",
+    "creationDate" : 1486291320000,
+    "workflow" : "PUBLISHED",
+    "urn" : "urn:vpro:media:location:11"
+  } ],
   "scheduleEvents": [
     {
       "channel": "NED3",
@@ -780,73 +777,71 @@
           "platform": "INTERNETVOD"
         }
       ],
-      "locations": [
+      "locations" : [
         {
-          "programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
-          "avAttributes": {
-            "avFileFormat": "MP4"
+          "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1132492/bb.20090317.m4v",
+          "avAttributes" : {
+            "bitrate" : 1500,
+            "avFileFormat" : "MP4"
           },
-          "owner": "BROADCASTER",
-          "creationDate": 1457102700000,
-          "workflow": "FOR_PUBLICATION",
-          "offset": 780000,
-          "duration": 600000,
-          "urn": "urn:vpro:media:location:6"
-        },
-        {
-          "programUrl": "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
-          "avAttributes": {
-            "avFileFormat": "WM"
-          },
-          "owner": "BROADCASTER",
-          "creationDate": 1457099100000,
-          "workflow": "FOR_PUBLICATION",
-          "urn": "urn:vpro:media:location:7"
-        },
-        {
-          "programUrl": "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
-          "avAttributes": {
-            "avFileFormat": "WM"
-          },
-          "owner": "BROADCASTER",
-          "creationDate": 1457095500000,
-          "workflow": "FOR_PUBLICATION",
-          "duration": 1833000,
-          "urn": "urn:vpro:media:location:8"
-        },
-        {
-          "programUrl": "http://player.omroep.nl/?aflID=4393288",
-          "avAttributes": {
-            "avFileFormat": "HTML"
-          },
-          "owner": "NEBO",
-          "creationDate": 1457091900000,
-          "workflow": "FOR_PUBLICATION",
-          "urn": "urn:vpro:media:location:9"
-        },
-        {
-          "programUrl": "http://www.npo.nl/location/1",
-          "avAttributes": {
-            "avFileFormat": "UNKNOWN"
-          },
-          "owner": "NPO",
-          "creationDate": 1488638700000,
-          "workflow": "FOR_PUBLICATION",
-          "offset": 780000,
-          "duration": 600000,
-          "urn": "urn:vpro:media:location:10"
-        },
-        {
-          "programUrl": "http://www.vpro.nl/location/1",
-          "avAttributes": {
-            "avFileFormat": "UNKNOWN"
-          },
-          "owner": "BROADCASTER",
-          "creationDate": 1486291320000,
-          "workflow": "PUBLISHED",
-          "urn": "urn:vpro:media:location:11"
-        }
-      ],
+          "owner" : "BROADCASTER",
+          "creationDate" : 1457102700000,
+          "workflow" : "FOR_PUBLICATION",
+          "offset" : 780000,
+          "duration" : 600000,
+          "urn" : "urn:vpro:media:location:6"
+        }, {
+          "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/ceres/1/vpro/rest/2009/VPRO_1135479/sb.20091106.asf",
+          "avAttributes" : {
+      "bitrate" : 3000,
+      "avFileFormat" : "WM"
+    },
+    "owner" : "BROADCASTER",
+    "creationDate" : 1457099100000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:location:7"
+  }, {
+    "programUrl" : "http://cgi.omroep.nl/legacy/nebo?/id/KRO/serie/KRO_1237031/KRO_1242626/sb.20070211.asf",
+    "avAttributes" : {
+      "bitrate" : 2000,
+      "avFileFormat" : "WM"
+    },
+    "owner" : "BROADCASTER",
+    "creationDate" : 1457095500000,
+    "workflow" : "FOR_PUBLICATION",
+    "duration" : 1833000,
+    "urn" : "urn:vpro:media:location:8"
+  }, {
+    "programUrl" : "http://player.omroep.nl/?aflID=4393288",
+    "avAttributes" : {
+      "bitrate" : 1000,
+      "avFileFormat" : "HTML"
+    },
+    "owner" : "NEBO",
+    "creationDate" : 1457091900000,
+    "workflow" : "FOR_PUBLICATION",
+    "urn" : "urn:vpro:media:location:9"
+  }, {
+    "programUrl" : "http://www.npo.nl/location/1",
+    "avAttributes" : {
+      "avFileFormat" : "UNKNOWN"
+    },
+    "owner" : "NPO",
+    "creationDate" : 1488638700000,
+    "workflow" : "FOR_PUBLICATION",
+    "offset" : 780000,
+    "duration" : 600000,
+    "urn" : "urn:vpro:media:location:10"
+  }, {
+    "programUrl" : "http://www.vpro.nl/location/1",
+    "avAttributes" : {
+      "avFileFormat" : "UNKNOWN"
+    },
+    "owner" : "BROADCASTER",
+    "creationDate" : 1486291320000,
+    "workflow" : "PUBLISHED",
+    "urn" : "urn:vpro:media:location:11"
+        } ],
       "relations" : [ {
         "value" : "synoniem",
         "type" : "THESAURUS",
