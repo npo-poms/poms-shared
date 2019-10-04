@@ -1,9 +1,6 @@
 package nl.vpro.domain.subtitles;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.Duration;
 
@@ -20,7 +17,7 @@ public class TimeLine {
     final Duration start;
     final Duration end;
 
-    @Builder
+    @lombok.Builder
     TimeLine(Integer sequence, Duration start, Duration end) {
         this.sequence = sequence;
         this.start = start;
