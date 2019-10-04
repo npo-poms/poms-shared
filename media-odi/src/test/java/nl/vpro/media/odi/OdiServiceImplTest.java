@@ -91,7 +91,7 @@ public class OdiServiceImplTest {
     @Test
     public void testPlayLocation() {
 
-        target.playLocation(program.getLocations().first(), request);
+        target.playLocation(program.getPresentationOrderLocations().first(), request);
 
         verify(handlerMock).produceIfSupports(eq(new Location("odip+http://odi.omroep.nl/video/adaptive/EO_101197072", OwnerType.BROADCASTER)), eq(request));
     }
