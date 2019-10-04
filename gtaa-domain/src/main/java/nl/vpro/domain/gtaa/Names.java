@@ -1,9 +1,6 @@
 package nl.vpro.domain.gtaa;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import nl.vpro.openarchives.oai.Label;
 
@@ -13,7 +10,7 @@ import nl.vpro.openarchives.oai.Label;
  */
 @AllArgsConstructor
 @Data
-@Builder
+@lombok.Builder(builderClassName = "Builder")
 @EqualsAndHashCode
 public class Names {
 
@@ -37,7 +34,7 @@ public class Names {
         if (label == null) {
             return null;
         }
-        NamesBuilder names = Names.builder();
+        Names.Builder names = Names.builder();
         int splitIndex = label.indexOf(", ");
 
         if (splitIndex > 0) {
