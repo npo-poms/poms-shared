@@ -4,22 +4,17 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.client.RestTemplate;
 
-import nl.vpro.domain.gtaa.GTAAConflict;
-import nl.vpro.domain.gtaa.GTAANewPerson;
-import nl.vpro.domain.gtaa.GTAARepository;
+import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
-import nl.vpro.util.CountedIterator;
+import nl.vpro.util.*;
 import nl.vpro.w3.rdf.Description;
 
+import static nl.vpro.beeldengeluid.gtaa.OpenskosRepository.CONFIG_FILE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -162,40 +157,18 @@ public class OpenskosTests {
         impl.retrieveConceptStatus("bla");
     }
 
-    private GTAARepository getRealInstance() {
-        MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
-        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("nl.vpro.beeldengeluid.gtaa", "nl.vpro.w3.rdf", "nl.vpro.openarchives.oai");
+    OpenskosRepository getRealInstance() {
+        return getRealInstance(Env.DEV);
+    }
 
-        try {
-            jaxb2Marshaller.afterPropertiesSet();
-        } catch (Exception ex) {
-            /* Ignore */
-        }
-        marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-        marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
-
-        RestTemplate template = new RestTemplate();
-        template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
-
-        //String host = "http://localhost:8080";
-        //String host = "http://accept.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        String host = "http://test.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        // String host = "http://openskos.beeldengeluid.nl/";
-        // String host = "http://accept-v1.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        // String host =
-        // "http://production-v2.openskos.beeldengeluid.nl.pictura-dp.nl/";
-        String code = "1dX1nJHX5GNeT8O7";
-        // String code = "8il3Ut09weJ4h1GQ";
-        String spec = "beng:gtaa:138d0e62-d688-e289-f136-05ad7acc85a2";
-        // String spec = "beng:gtaa:8fcb1c4f-663d-00d3-95b2-cccd5abda352";
-        boolean useXL = true;
-        OpenskosRepository impl = new OpenskosRepository(host, code, template);
-        impl.setUseXLLabels(useXL);
-
+    OpenskosRepository getRealInstance(final Env env) {
+        final OpenskosRepository impl = ConfigUtils.configuredInHome(
+            env,
+            OpenskosRepository.class,
+            CONFIG_FILE
+        );
         impl.init();
-        impl.setPersonsSpec(spec);
         return impl;
     }
+
 }

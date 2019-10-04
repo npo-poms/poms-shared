@@ -3,25 +3,17 @@ package nl.vpro.beeldengeluid.gtaa;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.springframework.http.converter.xml.MarshallingHttpMessageConverter;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.junit.*;
 import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.RestTemplate;
 
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 
-import nl.vpro.domain.gtaa.GTAANewGenericConcept;
-import nl.vpro.domain.gtaa.Scheme;
-import nl.vpro.domain.gtaa.Status;
+import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
 import nl.vpro.util.CountedIterator;
 import nl.vpro.w3.rdf.Description;
@@ -38,7 +30,7 @@ public class OpenskosRepositoryTest {
     private OpenskosRepository repo;
     @Before
     public void createRepo() {
-        repo = new OpenskosRepository("http://localhost:" + wireMockRule.port(), "", createRestTemplate());
+        repo = new OpenskosRepository("http://localhost:" + wireMockRule.port(), "");
     }
 
     @Test
@@ -158,21 +150,4 @@ public class OpenskosRepositoryTest {
     }
 
 
-    private static RestTemplate createRestTemplate() {
-        MarshallingHttpMessageConverter marshallingHttpMessageConverter = new MarshallingHttpMessageConverter();
-        Jaxb2Marshaller jaxb2Marshaller = new Jaxb2Marshaller();
-        jaxb2Marshaller.setPackagesToScan("nl.vpro.beeldengeluid.gtaa", "nl.vpro.w3.rdf", "nl.vpro.openarchives.oai");
-
-        try {
-            jaxb2Marshaller.afterPropertiesSet();
-        } catch (Exception ex) {
-            /* Ignore */
-        }
-        marshallingHttpMessageConverter.setMarshaller(jaxb2Marshaller);
-        marshallingHttpMessageConverter.setUnmarshaller(jaxb2Marshaller);
-
-        RestTemplate template = new RestTemplate();
-        template.setMessageConverters(Collections.singletonList(marshallingHttpMessageConverter));
-        return template;
-    }
 }
