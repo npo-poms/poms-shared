@@ -1,7 +1,5 @@
 package nl.vpro.domain.api.thesaurus;
 
-import lombok.Builder;
-
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,7 +19,7 @@ public class PersonResult extends ThesaurusResult<GTAAPerson> {
 
     }
 
-    @Builder
+    @lombok.Builder
     public PersonResult(List<GTAAPerson> list, Integer max) {
         super(list, max);
     }

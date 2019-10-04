@@ -1,6 +1,5 @@
 package nl.vpro.domain.api.thesaurus;
 
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -8,9 +7,7 @@ import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 
 import nl.vpro.domain.Change;
@@ -44,7 +41,7 @@ public class ThesaurusChange extends Change<GTAAConcept> {
     public ThesaurusChange() {
     }
 
-    @Builder
+    @lombok.Builder
     public ThesaurusChange(Instant publishDate, String id, Boolean deleted, Boolean tail, GTAAConcept object) {
         super(publishDate, id, deleted, tail, object);
 

@@ -4,7 +4,6 @@
  */
 package nl.vpro.media.odi.util;
 
-import lombok.Builder;
 import lombok.ToString;
 
 import javax.xml.bind.annotation.*;
@@ -48,8 +47,12 @@ public class LocationResult implements Comparable<LocationResult> {
         return new LocationResult(location.getAvFileFormat(), location.getBitrate(), location.getProgramUrl(), location.getUrn());
     }
 
-    @Builder
-    public LocationResult(AVFileFormat avFileFormat, Integer bitrate, String programUrl, String urn) {
+    @lombok.Builder
+    public LocationResult(
+        AVFileFormat avFileFormat,
+        Integer bitrate,
+        String programUrl,
+        String urn) {
         this.avFileFormat = avFileFormat;
         this.bitrate = bitrate;
         this.programUrl = programUrl;
