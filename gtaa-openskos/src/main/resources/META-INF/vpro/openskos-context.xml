@@ -3,7 +3,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-   <bean class="nl.vpro.beeldengeluid.gtaa.OpenskosRepository">
+   <bean id="openskosRepo" class="nl.vpro.beeldengeluid.gtaa.OpenskosRepository">
       <constructor-arg value="${gtaa.baseUrl}" />
       <constructor-arg value="${gtaa.key}" />
    </bean>
