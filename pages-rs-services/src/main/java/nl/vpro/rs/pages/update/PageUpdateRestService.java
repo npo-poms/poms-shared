@@ -44,7 +44,11 @@ public interface PageUpdateRestService {
     @GET
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("")
-    PageUpdate load(@QueryParam("url") @NotNull String url);
+    PageUpdate load(
+        @QueryParam("url") @NotNull String url,
+        @QueryParam("loadDeleted") boolean loadDeleted
+
+    );
 
 
 }
