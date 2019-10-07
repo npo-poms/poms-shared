@@ -32,6 +32,8 @@ import nl.vpro.validation.NoHtml;
     })
 public class Person extends DomainObject implements PersonInterface, Child<MediaObject> {
 
+//public class Person extends Credit implements PersonInterface { MSE-4616
+
 
     public static Person copy(Person source) {
         return copy(source, source.mediaObject);
