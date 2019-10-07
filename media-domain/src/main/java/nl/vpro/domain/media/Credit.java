@@ -26,5 +26,5 @@ public abstract class Credit extends DomainObject implements Child<MediaObject> 
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
-    protected RoleType role;
+    protected RoleType role = RoleType.UNDEFINED;
 }

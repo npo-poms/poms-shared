@@ -563,10 +563,10 @@ public class ProgramUpdateTest extends MediaUpdateTest {
 
         Program program = JAXBTestUtil.roundTripAndSimilar(update, expected).fetch();
 
-        assertThat(program.getPersons().size()).isEqualTo(1);
-        assertThat(program.getPersons().get(0).getGivenName()).isEqualTo("Pietje");
-        assertThat(program.getPersons().get(0).getFamilyName()).isEqualTo("Puk");
-        assertThat(program.getPersons().get(0).getRole()).isEqualTo(RoleType.DIRECTOR);
+        assertThat(program.getCredits().size()).isEqualTo(1);
+        assertThat(program.getCredits().get(0).getGivenName()).isEqualTo("Pietje");
+        assertThat(program.getCredits().get(0).getFamilyName()).isEqualTo("Puk");
+        assertThat(program.getCredits().get(0).getRole()).isEqualTo(RoleType.DIRECTOR);
     }
 
     @Test

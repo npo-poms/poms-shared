@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
@@ -193,7 +192,7 @@ public class MetaData_v2_1 {
 
     protected static Personen createPersonen(MediaObject mediaObject) {
 
-        List<Person> persons = mediaObject.getPersons();
+        List<Person> persons = mediaObject.getCredits();
         if (persons.isEmpty()) {
             return null;
         }

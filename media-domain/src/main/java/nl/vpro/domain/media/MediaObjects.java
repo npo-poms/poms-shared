@@ -169,7 +169,7 @@ public class MediaObjects {
         //to.setMediaType(from.getMediaType());
         //to.setMemberOf();
 
-        to.setPersons(from.getPersons());
+        to.setCredits(from.getCredits());
         to.setPortalRestrictions(from.getPortalRestrictions());
         to.setPortals(from.getPortals());
         //to.setPredictions();
@@ -817,7 +817,7 @@ public class MediaObjects {
 
 
     public static List<Person> getPersons(MediaObject o) {
-        return o.persons;
+        return o.credits;
 
     }
 

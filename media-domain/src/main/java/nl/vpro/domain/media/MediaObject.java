@@ -106,7 +106,7 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
         "avAttributes",
         "releaseYear",
         "duration",
-        "persons",
+        "credits",
         "awards",
         "descendantOf",
         "memberOf",
@@ -394,7 +394,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected List<@NotNull Person> persons;
+    protected List<@NotNull Person> credits;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
@@ -644,7 +644,7 @@ public abstract class MediaObject
         this.avAttributes = AVAttributes.copy(source.avAttributes);
         this.releaseYear = source.releaseYear;
         this.duration = AuthorizedDuration.copy(source.duration);
-        source.getPersons().forEach(person -> this.addPerson(Person.copy(person, this)));
+        source.getCredits().forEach(person -> this.addPerson(Person.copy(person, this)));
         source.getAwards().forEach(this::addAward);
         source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber(), ref.getOwner()));
         this.ageRating = source.ageRating;
@@ -1452,36 +1452,51 @@ public abstract class MediaObject
     @XmlElement(name = "person")
     @JsonProperty("credits")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<Person> getPersons() {
-        if (persons == null) {
-            persons = new ArrayList<>();
+    public List<Person> getCredits() {
+        if (credits == null) {
+            credits = new ArrayList<>();
         }
-        return persons;
+        return credits;
     }
 
-    public void setPersons(@Nullable List<Person> persons) {
+    public void setCredits(@Nullable List<Person> persons) {
         if (persons != null) {
             for (Person person : persons) {
                 person.setParent(this);
             }
         }
 
-        this.persons = updateList(this.persons, persons);
+        this.credits = updateList(this.credits, persons);
+    }
+
+    /**
+     * @deprecated Use {@link #getCredits}
+     */
+    @Deprecated
+    public List<Person> getPersons() {
+        return getCredits();
+    }
+     /**
+     * @deprecated Use {@link #getCredits}
+     */
+    @Deprecated
+    public void setPersons(@Nullable List<Person> persons) {
+        setCredits(persons);
     }
 
     public boolean removePerson(Person person) {
-        if (persons != null) {
-            return persons.remove(person);
+        if (credits != null) {
+            return credits.remove(person);
         }
         return false;
     }
 
     public boolean removePerson(Long id) {
-        if (persons == null) {
+        if (credits == null) {
             return false;
         }
 
-        for (Person person : persons) {
+        for (Person person : credits) {
             if (id.equals(person.getId())) {
                 return removePerson(person);
             }
@@ -1491,15 +1506,15 @@ public abstract class MediaObject
     }
 
     public MediaObject addPerson(Person person) {
-        if (persons == null) {
-            persons = new ArrayList<>();
+        if (credits == null) {
+            credits = new ArrayList<>();
         }
 
-        if (!persons.contains(person)) {
+        if (!credits.contains(person)) {
             if (person != null) {
                 person.setParent(this);
-                person.setListIndex(persons.size());
-                persons.add(person);
+                person.setListIndex(credits.size());
+                credits.add(person);
             }
         }
 
@@ -1507,11 +1522,11 @@ public abstract class MediaObject
     }
 
     public Person findPerson(Person person) {
-        if (persons == null) {
+        if (credits == null) {
             return null;
         }
 
-        for (Person p : persons) {
+        for (Person p : credits) {
             if (p.equals(person)) {
                 return p;
             }
@@ -1521,11 +1536,11 @@ public abstract class MediaObject
     }
 
     public Person findPerson(Long id) {
-        if (persons == null) {
+        if (credits == null) {
             return null;
         }
 
-        for (Person p : persons) {
+        for (Person p : credits) {
             if (p.getId().equals(id)) {
                 return p;
             }

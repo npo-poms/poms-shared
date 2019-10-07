@@ -441,7 +441,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         media.setPortals(toList(portals, Portal::new));
         media.setTags(toSet(tags, Tag::new));
-        media.setPersons(toList(persons, PersonUpdate::toPerson, true));
+        media.setCredits(toList(persons, PersonUpdate::toPerson, true));
         media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
         media.setGeoRestrictions(toSet(geoRestrictions, GeoRestrictionUpdate::toGeoRestriction));
 
