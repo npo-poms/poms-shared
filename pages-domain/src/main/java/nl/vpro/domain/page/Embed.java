@@ -4,6 +4,9 @@
  */
 package nl.vpro.domain.page;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,9 +27,13 @@ import nl.vpro.domain.media.Segment;
 public class Embed {
 
     @XmlElement
+    @Getter
+    @Setter
     private String title;
 
     @XmlElement
+    @Getter
+    @Setter
     private String description;
 
     @XmlElements({
@@ -50,22 +57,6 @@ public class Embed {
         this.description = description;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     @JsonProperty
     public MediaObject getMedia() {
         return media;
@@ -73,5 +64,10 @@ public class Embed {
 
     public void setMedia(MediaObject media) {
         this.media = media;
+    }
+
+    @Override
+    public String toString() {
+        return title + ":" + getMedia();
     }
 }
