@@ -886,13 +886,12 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void segmentWithEverything() throws Exception {
-        StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/segment-with-everything.json"), segment, "UTF-8");
-        Jackson2TestUtil.roundTripAndSimilar(MediaTestDataBuilder
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPublisherInstance(),
+            MediaTestDataBuilder
                 .segment()
                 .withEverything()
                 .build(),
-            segment.toString());
+            getClass().getResourceAsStream("/segment-with-everything.json"));
     }
 
     @Test
