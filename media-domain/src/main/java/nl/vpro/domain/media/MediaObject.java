@@ -1221,6 +1221,15 @@ public abstract class MediaObject
         return intentions;
     }
 
+    @JsonView({Views.Publisher.class})
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public SortedSet<Intentions>  getExpandedIntentions() {
+        return MediaObjectOwnableLists.expandOwnedList(this.intentions,
+                (owner, values) -> Intentions.builder().values(values).owner(owner).build(),
+                OwnerType.ENTRIES
+        );
+    }
+
     public void setIntentions(SortedSet<Intentions> newIntentions) {
         if (newIntentions == null) {
             this.intentions = null;
@@ -1260,6 +1269,16 @@ public abstract class MediaObject
 
     public SortedSet<TargetGroups> getTargetGroups() {
         return targetGroups;
+    }
+
+
+    @JsonView({Views.Publisher.class})
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public SortedSet<TargetGroups>  getExpandedTargetGroups() {
+        return MediaObjectOwnableLists.expandOwnedList(this.targetGroups,
+                (owner, values) -> TargetGroups.builder().values(values).owner(owner).build(),
+                OwnerType.ENTRIES
+        );
     }
 
     public void setTargetGroups(SortedSet<TargetGroups> newTargetGroups) {
