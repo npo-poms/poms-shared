@@ -18,7 +18,7 @@ public class MediaObjectOwnableListsTest {
      * The values for the Owner with higher rank should be used for expansion
      */
     @Test
-    public <OL extends AbstractMediaObjectOwnableList> void expandGeoLocation() {
+    public void expandGeoLocation() {
 
         List<GeoLocation> geoLocation1 = Arrays.asList(
                 GeoLocation.builder().name("Amsterdam").scopeNote("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
@@ -38,12 +38,12 @@ public class MediaObjectOwnableListsTest {
                 OwnerType.ENTRIES
         );
 
-        SortedSet<OL> result = r;
+        SortedSet<GeoLocations> result = r;
         assertThat(result.size()).isEqualTo(4);
         assertThat(result.stream().map(v -> v.getOwner() + ":" + ((GeoLocation) v.getValues().get(0)).getName()).collect(Collectors.toList()))
                 .isEqualTo(Arrays.asList("BROADCASTER:Amsterdam", "NPO:Amsterdam", "MIS:Amsterdam", "WHATS_ON:Utrecht"));
 
-        for (OL value : result) {
+        for (GeoLocations value : result) {
             log.info(value.toString());
         }
     }
@@ -59,7 +59,7 @@ public class MediaObjectOwnableListsTest {
         );
         GeoLocations g1 = GeoLocations.builder().owner(OwnerType.MIS).values(geoLocation1).build();
         GeoLocations g2 = GeoLocations.builder().owner(OwnerType.WHATS_ON).values(geoLocation2).build();
-        SortedSet set = new TreeSet();
+        SortedSet<GeoLocations> set = new TreeSet<>();
         set.add(g2);
         set.add(g1);
         program.setGeoLocations(set);
