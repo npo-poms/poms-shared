@@ -20,6 +20,7 @@ public interface MutableEmbargo<T extends MutableEmbargo<T>> extends Embargo {
     @NonNull
     T setPublishStopInstant(@Nullable Instant publishStop);
 
+    @SuppressWarnings("unchecked")
     default T set(Range<Instant> range) {
         if (range.hasLowerBound()) {
             setPublishStartInstant(range.lowerEndpoint());
