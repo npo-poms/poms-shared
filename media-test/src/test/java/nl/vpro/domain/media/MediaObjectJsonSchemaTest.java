@@ -21,9 +21,9 @@ import org.junit.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.*;
-import com.jayway.jsonpath.JsonPath;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
@@ -673,96 +673,37 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testWithIntentions() throws Exception {
-        StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/intention-scenarios.json"), segment, "UTF-8");
-        Map expected = JsonPath.read(segment.toString(),"$.mediaWithTwoIntention");
-        log.info(expected.toString());
 
+        JsonNode jsonNode = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/intention-scenarios.json"));
+
+        JsonNode  expected = jsonNode.get("mediaWithTwoIntention");
         Program program = program().lean().withIntentions().build();
-        Map actual = JsonPath.read(toJson(program),"$");
 
-        JSONAssert.assertEquals(expected, actual);
 
-        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
-            "  \"objectType\" : \"program\",\n" +
-            "  \"embeddable\" : true,\n" +
-            "  \"broadcasters\" : [ ],\n" +
-            "  \"genres\" : [ ],\n" +
-            "  \"intentions\" : [ {\n" +
-            "    \"owner\" : \"BROADCASTER\",\n" +
-            "    \"values\" : [ \"ACTIVATING\", \"INFORM_INDEPTH\" ]\n" +
-            "  }, {\n" +
-            "    \"owner\" : \"NPO\",\n" +
-            "    \"values\" : [ \"ENTERTAINMENT_INFORMATIVE\", \"INFORM\" ]\n" +
-            "  } ],\n" +
-            "  \"countries\" : [ ],\n" +
-            "  \"languages\" : [ ]\n" +
-            "}");
+        Jackson2TestUtil.roundTripAndSimilar(program, expected);
 
-        //Marshal
         Program marshalled = Jackson2Mapper.INSTANCE.readValue(toJson(program), Program.class);
         assertEquals(marshalled.intentions, program.intentions);
     }
 
     @Test
     public void testWithGeoLocations() throws Exception {
-        StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.json"), segment, "UTF-8");
-        Map expected = JsonPath.read(segment.toString(),"$.mediaWithTwoGeoLocations");
-        log.info(expected.toString());
+
+        JsonNode jsonNode = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/geolocations-scenarios.json"));
+
+        JsonNode  expected = jsonNode.get("mediaWithTwoGeoLocations");
 
         Program program = program().lean().withGeoLocations().build();
 
-        Map actual = JsonPath.read(toJson(program),"$");
+        Jackson2TestUtil.roundTripAndSimilar(program, expected);
 
-        JSONAssert.assertEquals(expected, actual);
-
-        Jackson2TestUtil.roundTripAndSimilar(program, " {\n" +
-                "    \"objectType\": \"program\",\n" +
-                "    \"embeddable\": true,\n" +
-                "    \"broadcasters\": [],\n" +
-                "    \"genres\": [],\n" +
-                "    \"countries\": [],\n" +
-                "    \"languages\": [],\n" +
-                "    \"geoLocations\": [\n" +
-                "      {\n" +
-                "        \"owner\": \"BROADCASTER\",\n" +
-                "        \"values\": [\n" +
-                "          {\n" +
-                "            \"name\": \"Africa\",\n" +
-                "            \"scopeNotes\": [\n" +
-                "              \"Continent\"\n" +
-                "            ],\n" +
-                "            \"gtaaUri\": \"http://gtaa/1231\",\n" +
-                "            \"role\": \"SUBJECT\"\n" +
-                "          }\n" +
-                "        ]\n" +
-                "      },\n" +
-                "      {\n" +
-                "        \"owner\": \"NPO\",\n" +
-                "        \"values\": [\n" +
-                "          {\n" +
-                "            \"name\": \"England\",\n" +
-                "            \"gtaaUri\": \"http://gtaa/1232\",\n" +
-                "            \"gtaaStatus\": \"approved\",\n" +
-                "            \"role\": \"SUBJECT\"\n" +
-                "          },\n" +
-                "          {\n" +
-                "            \"name\": \"UK\",\n" +
-                "            \"gtaaUri\": \"http://gtaa/1233\",\n" +
-                "            \"role\": \"RECORDED_IN\"\n" +
-                "          }\n" +
-                "        ]\n" +
-                "      }\n" +
-                "    ]\n" +
-                "  }");
     }
 
     @Test
     public void testMarshalWithFullGeoLocations() throws Exception {
-        StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.json"), segment, "UTF-8");
-        List expected = JsonPath.read(segment.toString(),"$.OneFullGeoLocations");
+        JsonNode jsonNode = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/geolocations-scenarios.json"));
+        JsonNode  expected = jsonNode.get("OneFullGeoLocations");
+
 
         GeoLocation value = GeoLocation.builder()
                 .role(GeoRoleType.RECORDED_IN)
@@ -770,9 +711,8 @@ public class MediaObjectJsonSchemaTest {
                 .build();
         SortedSet geoLocations = Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build()).collect(Collectors.toCollection(TreeSet::new));
 
-        List actual = JsonPath.read(toJson2(geoLocations),"$");
+        Jackson2TestUtil.roundTripAndSimilar(geoLocations, expected);
 
-        JSONAssert.assertEquals(expected, actual);
 
     }
 
