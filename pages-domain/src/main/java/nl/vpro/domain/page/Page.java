@@ -6,12 +6,13 @@ import lombok.EqualsAndHashCode;
 import java.time.Instant;
 import java.util.*;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -157,7 +158,7 @@ public class Page implements MutableEmbargo {
     protected Instant lastPublished;
 
 
-    protected Page() {
+    public Page() {
     }
 
     public Page(PageType type) {
