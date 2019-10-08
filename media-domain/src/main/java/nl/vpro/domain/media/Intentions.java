@@ -42,11 +42,14 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
 
     public static Intentions empty(@NonNull OwnerType owner) {
         return Intentions.builder().owner(owner).build();
-
     }
 
+
+
     @lombok.Builder(builderClassName = "Builder")
-    private Intentions(@lombok.NonNull @Singular  List<IntentionType> values, @lombok.NonNull OwnerType owner) {
+    private Intentions(
+        @Singular List<IntentionType> values,
+        OwnerType owner) {
         this.values = values.stream().map(Intention::new).collect(Collectors.toList());
         this.owner = owner;
         //To help Hibernate understand the relationship we
@@ -69,7 +72,10 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
 
     @Override
     public Intentions clone() {
-        return new Intentions(values.stream().map(Intention::getValue).collect(Collectors.toList()), owner);
+        return clone(this.owner);
+    }
+    public Intentions clone(OwnerType newOwner) {
+        return new Intentions(values.stream().map(Intention::getValue).collect(Collectors.toList()), newOwner);
     }
 
     /**
