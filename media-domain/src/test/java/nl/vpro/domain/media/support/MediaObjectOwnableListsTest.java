@@ -65,9 +65,7 @@ public class MediaObjectOwnableListsTest {
         final SortedSet<GeoLocations> programGeoLocations = program.getGeoLocations();
         assertThat(programGeoLocations.size()).isEqualTo(2);
 
-        final boolean result = MediaObjectOwnableLists.remove(programGeoLocations,
-                OwnerType.MIS
-        );
+        MediaObjectOwnableLists.remove(programGeoLocations, OwnerType.MIS);
 
         assertThat(programGeoLocations.size()).isEqualTo(1);
     }
