@@ -87,6 +87,11 @@
       <artifactId>hibernate-core</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>nl.vpro.media</groupId>
+      <artifactId>media-test</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
