@@ -33,12 +33,10 @@ public class MediaObjectOwnableListsTest {
         set.add(g1);
 
 
-        final SortedSet r = MediaObjectOwnableLists.expandOwnedList(set,
+        final SortedSet<GeoLocations> result = MediaObjectOwnableLists.expandOwnedList(set,
                 (owner, values) -> GeoLocations.builder().values(values).owner(owner).build(),
                 OwnerType.ENTRIES
         );
-
-        SortedSet<GeoLocations> result = r;
         assertThat(result.size()).isEqualTo(4);
         assertThat(result.stream().map(v -> v.getOwner() + ":" + ((GeoLocation) v.getValues().get(0)).getName()).collect(Collectors.toList()))
                 .isEqualTo(Arrays.asList("BROADCASTER:Amsterdam", "NPO:Amsterdam", "MIS:Amsterdam", "WHATS_ON:Utrecht"));
