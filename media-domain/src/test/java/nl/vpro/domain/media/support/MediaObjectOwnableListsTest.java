@@ -28,17 +28,14 @@ public class MediaObjectOwnableListsTest {
         );
         GeoLocations g1 = GeoLocations.builder().owner(OwnerType.MIS).values(geoLocation1).build();
         GeoLocations g2 = GeoLocations.builder().owner(OwnerType.WHATS_ON).values(geoLocation2).build();
-        SortedSet<GeoLocations> set = new TreeSet<>();
-        set.add(g2);
-        set.add(g1);
-
+        SortedSet<GeoLocations> set = new TreeSet<>(Arrays.asList(g2, g1));
 
         final SortedSet<GeoLocations> result = MediaObjectOwnableLists.expandOwnedList(set,
                 (owner, values) -> GeoLocations.builder().values(values).owner(owner).build(),
                 OwnerType.ENTRIES
         );
         assertThat(result.size()).isEqualTo(4);
-        assertThat(result.stream().map(v -> v.getOwner() + ":" + ((GeoLocation) v.getValues().get(0)).getName()).collect(Collectors.toList()))
+        assertThat(result.stream().map(v -> v.getOwner() + ":" + v.getValues().get(0).getName()).collect(Collectors.toList()))
                 .isEqualTo(Arrays.asList("BROADCASTER:Amsterdam", "NPO:Amsterdam", "MIS:Amsterdam", "WHATS_ON:Utrecht"));
 
         for (GeoLocations value : result) {
@@ -57,9 +54,7 @@ public class MediaObjectOwnableListsTest {
         );
         GeoLocations g1 = GeoLocations.builder().owner(OwnerType.MIS).values(geoLocation1).build();
         GeoLocations g2 = GeoLocations.builder().owner(OwnerType.WHATS_ON).values(geoLocation2).build();
-        SortedSet<GeoLocations> set = new TreeSet<>();
-        set.add(g2);
-        set.add(g1);
+        SortedSet<GeoLocations> set = new TreeSet<>(Arrays.asList(g2, g1));
         program.setGeoLocations(set);
 
         final SortedSet<GeoLocations> programGeoLocations = program.getGeoLocations();
