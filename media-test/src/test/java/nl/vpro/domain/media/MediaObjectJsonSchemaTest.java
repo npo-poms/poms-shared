@@ -560,7 +560,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"isOrdered\":true}";
 
         MediaObject mo = Jackson2Mapper.getInstance().readValue(expected, MediaObject.class);
-        System.out.println(mo);
+        log.info("{}", mo);
 
 
     }
@@ -695,7 +695,7 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().lean().withGeoLocations().build();
 
-        Jackson2TestUtil.roundTripAndSimilar(program, expected);
+        Jackson2TestUtil.roundTripAndSimilar(Jackson2Mapper.getPublisherInstance(), program, expected);
 
     }
 
@@ -709,11 +709,11 @@ public class MediaObjectJsonSchemaTest {
                 .role(GeoRoleType.RECORDED_IN)
                 .name("myName").scopeNote("myDescription").gtaaUri("myuri").gtaaStatus(GTAAStatus.approved)
                 .build();
-        SortedSet geoLocations = Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build()).collect(Collectors.toCollection(TreeSet::new));
-
-        Jackson2TestUtil.roundTripAndSimilar(geoLocations, expected);
-
-
+        SortedSet<GeoLocations> geoLocations =
+            Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build())
+                .collect(Collectors.toCollection(TreeSet::new));
+        JsonNode actual = Jackson2Mapper.getLenientInstance().valueToTree(geoLocations);
+        Jackson2TestUtil.assertThatJson(actual).isSimilarTo(expected);
     }
 
     @Test
