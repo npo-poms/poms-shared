@@ -4,9 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
@@ -18,10 +16,7 @@ import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -38,6 +33,7 @@ import org.meeuw.i18n.countries.validation.ValidCountry;
 import org.meeuw.i18n.persistence.RegionToStringConverter;
 import org.meeuw.i18n.validation.Language;
 import org.meeuw.i18n.validation.ValidRegion;
+
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -48,22 +44,16 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
+import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.domain.user.ThirdParty;
+import nl.vpro.domain.user.*;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
 import nl.vpro.nicam.NicamRated;
-import nl.vpro.util.DateUtils;
-import nl.vpro.util.ResortedSortedSet;
-import nl.vpro.util.SortedSetSameElementWrapper;
-import nl.vpro.util.TriFunction;
-import nl.vpro.validation.CRID;
-import nl.vpro.validation.StringList;
-import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.util.*;
+import nl.vpro.validation.*;
 import nl.vpro.xml.bind.FalseToNullAdapter;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -144,11 +134,16 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
     "portalRestrictions",
     "geoRestrictions",
     "titles",
+    "expandedTitles",
     "descriptions",
     "genres",
     "tags",
     "intentions",
+    "expandedIntentions",
     "targetGroups",
+    "expandedTargetGroups",
+    "geoLocations",
+    "expandedGeoLocations",
     "source",
     "hasSubtitles",
     "countries",
@@ -1223,8 +1218,11 @@ public abstract class MediaObject
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Intentions>  getExpandedIntentions() {
         return MediaObjectOwnableLists.expandOwnedList(this.intentions,
-                (owner, values) -> Intentions.builder().values(values).owner(owner).build(),
-                OwnerType.ENTRIES
+            (owner, list) -> Intentions.builder()
+                .owner(owner)
+                .values(list.stream().map(Intention::getValue).collect(Collectors.toList()))
+                .build(),
+            OwnerType.ENTRIES
         );
     }
 
@@ -1273,9 +1271,12 @@ public abstract class MediaObject
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<TargetGroups>  getExpandedTargetGroups() {
-        return MediaObjectOwnableLists.expandOwnedList(this.targetGroups,
-                (owner, values) -> TargetGroups.builder().values(values).owner(owner).build(),
-                OwnerType.ENTRIES
+         return MediaObjectOwnableLists.expandOwnedList(this.targetGroups,
+            (owner, list) -> TargetGroups.builder()
+                .owner(owner)
+                .values(list.stream().map(TargetGroup::getValue).collect(Collectors.toList()))
+                .build(),
+            OwnerType.ENTRIES
         );
     }
 
