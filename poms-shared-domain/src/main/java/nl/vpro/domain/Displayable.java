@@ -19,6 +19,7 @@ import nl.vpro.i18n.LocalizedString;
  */
 public interface Displayable {
 
+    @XmlTransient
     default String getDisplayName() {
         return getDisplayName(Locales.getDefault()).getValue();
     }
