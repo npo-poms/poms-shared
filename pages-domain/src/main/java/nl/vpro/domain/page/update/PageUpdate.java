@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -18,6 +19,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -214,12 +216,15 @@ public class PageUpdate implements Serializable {
     public PageUpdate() {
     }
 
-    public PageUpdate(PageType type, String url) {
+    public PageUpdate(
+        @NonNull PageType type,
+        @NonNull String url) {
         this.type = type;
         setUrl(url);
     }
 
 
+    @SuppressWarnings("ConstantConditions")
     public void setUrl(String url) {
         this.url = url == null ? null : Urls.normalize(url);
     }
@@ -341,14 +346,14 @@ public class PageUpdate implements Serializable {
         PageUpdate that = (PageUpdate) o;
 
         if (type != that.type) return false;
-        if (url != null ? !url.equals(that.url) : that.url != null) return false;
+        if (!Objects.equals(url, that.url)) return false;
         if (publishStart != null ? !publishStart.equals(that.publishStart) : that.publishStart != null) return false;
         if (crids != null ? !crids.equals(that.crids) : that.crids != null) return false;
         if (alternativeUrls != null ? !alternativeUrls.equals(that.alternativeUrls) : that.alternativeUrls != null)
             return false;
-        if (broadcasters != null ? !broadcasters.equals(that.broadcasters) : that.broadcasters != null) return false;
+        if (!Objects.equals(broadcasters, that.broadcasters)) return false;
         if (portal != null ? !portal.equals(that.portal) : that.portal != null) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (!Objects.equals(title, that.title)) return false;
         if (subtitle != null ? !subtitle.equals(that.subtitle) : that.subtitle != null) return false;
         if (keywords != null ? !keywords.equals(that.keywords) : that.keywords != null) return false;
         if (summary != null ? !summary.equals(that.summary) : that.summary != null) return false;
@@ -366,6 +371,7 @@ public class PageUpdate implements Serializable {
         return lastModified != null ? lastModified.equals(that.lastModified) : that.lastModified == null;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public int hashCode() {
         int result = type != null ? type.hashCode() : 0;

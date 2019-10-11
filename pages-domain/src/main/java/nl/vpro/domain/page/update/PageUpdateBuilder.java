@@ -219,7 +219,8 @@ public class PageUpdateBuilder<PB extends PageUpdateBuilder<PB, P>, P extends Pa
 
     public PB withNow() {
         Instant now = Instant.now();
-        return creationDate(now).lastModified(now);
+        return creationDate(now)
+            .lastModified(now);
     }
 
     Instant fromDate(Date date) {
