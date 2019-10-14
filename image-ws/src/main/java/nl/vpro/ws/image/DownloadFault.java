@@ -4,6 +4,8 @@
  */
 package nl.vpro.ws.image;
 
+import lombok.Getter;
+
 import javax.xml.ws.WebFault;
 
 import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
@@ -11,6 +13,7 @@ import static nl.vpro.domain.Xmlns.IMAGE_WS_NAMESPACE;
 @WebFault(name = "downloadFault", targetNamespace = IMAGE_WS_NAMESPACE)
 public class DownloadFault extends RuntimeException {
 
+    @Getter
     private final ImageNotFound faultInfo;
 
     public DownloadFault(String message) {
@@ -31,7 +34,4 @@ public class DownloadFault extends RuntimeException {
         this.faultInfo = faultInfo;
     }
 
-    public ImageNotFound getFaultInfo() {
-        return faultInfo;
-    }
 }
