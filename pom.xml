@@ -31,7 +31,6 @@
   <modules>
     <module>poms-shared-domain</module>
     <module>poms-shared</module>
-    <module>poms-shared-test</module>
     <module>user-domain</module>
     <module>media-domain</module>
 

@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import nl.vpro.theory.ComparableTest;
+import nl.vpro.test.theory.ComparableTest;
 
 import static nl.vpro.domain.media.MediaDomainTestHelper.*;
 import static org.assertj.core.api.Assertions.assertThat;

@@ -7,7 +7,7 @@ import org.junit.experimental.theories.DataPoint;
 import org.xml.sax.SAXException;
 
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
-import nl.vpro.theory.ComparableTest;
+import nl.vpro.test.theory.ComparableTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

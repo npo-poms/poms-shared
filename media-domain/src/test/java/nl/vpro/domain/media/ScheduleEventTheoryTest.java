@@ -10,7 +10,7 @@ import java.time.Instant;
 import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
 
-import nl.vpro.theory.ObjectTest;
+import nl.vpro.test.theory.ObjectTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

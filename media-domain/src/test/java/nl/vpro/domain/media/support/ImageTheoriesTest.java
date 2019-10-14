@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.junit.experimental.theories.DataPoint;
 
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.theory.ObjectTest;
+import nl.vpro.test.theory.ObjectTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

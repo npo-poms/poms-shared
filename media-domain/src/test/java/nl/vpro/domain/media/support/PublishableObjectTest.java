@@ -9,7 +9,7 @@ import java.time.Instant;
 import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.Theory;
 
-import nl.vpro.theory.ObjectTest;
+import nl.vpro.test.theory.ObjectTest;
 
 import static nl.vpro.domain.media.support.Workflow.*;
 import static org.hamcrest.CoreMatchers.*;
