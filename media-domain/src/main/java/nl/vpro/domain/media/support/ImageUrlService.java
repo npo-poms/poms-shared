@@ -7,6 +7,8 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.apache.commons.lang3.StringUtils;
 
 /**
+ * This services knows how to create urls from image ids.
+ *
  * @author Michiel Meeuwissen
  * @since 5.11
  */
@@ -35,6 +37,11 @@ public interface ImageUrlService {
         return Long.parseLong(id);
     }
 
+    /**
+     * Returns the base url for image 'api' calls.
+     * For the backend server this is e.g. https://poms-dev.omroep.nl/images/api/
+     * for a frontend server this is e.g. https://images-dev.poms.omroep.nl/
+     */
     String getImageBaseUrl();
 
 
