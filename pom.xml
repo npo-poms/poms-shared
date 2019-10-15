@@ -52,8 +52,6 @@
 
     <module>api-domain</module>
     <module>api-rs-services</module>
-
-    <module>poms-extjs</module>
     <module>poms-npoplayer</module>
 
     <module>media-nep</module>
