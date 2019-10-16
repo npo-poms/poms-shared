@@ -7,9 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.*;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -151,13 +149,23 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
                 log.error(e.getMessage(), e);
             }
             this.content = new SubtitlesContent(SubtitlesFormat.WEBVTT, writer.toString());
-        } else if (content != null && format != null && cues == null && value == null) {
+        } else if (content != null && cues == null && value == null) {
             this.content = new SubtitlesContent(format, content);
-        } else if (value != null && format != null && cues == null && content == null) {
+        } else if (value != null && cues == null && content == null) {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             try {
                 int copy = IOUtils.copy(value, bytes);
                 log.debug("Copied {} bytes", copy);
+                byte[] byteArray = bytes.toByteArray();
+                if (format == null){
+                    if (new String(Arrays.copyOf(byteArray, 6)).equals("WEBVTT")) {
+                        format = SubtitlesFormat.WEBVTT;
+                    } else {
+                        format = SubtitlesFormat.SRT;
+                        log.warn("No format given, supposing {}", format);
+                    }
+                }
+
                 this.content = SubtitlesContent.builder().content(bytes.toByteArray()).format(format).build();
             } catch (IOException e) {
                 log.error(e.getMessage(), e);

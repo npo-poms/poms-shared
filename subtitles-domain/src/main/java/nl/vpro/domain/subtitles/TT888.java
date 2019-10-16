@@ -158,7 +158,7 @@ public class TT888 {
                 parseTime(split[1]),
                 parseTime(split[2])
             );
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException nfe) {
             throw new IllegalArgumentException("Could not parse " + timeLine + " (" + Arrays.asList(split) + ").  Reason: " + nfe.getClass() + " " + nfe.getMessage(), nfe);
         }
 
