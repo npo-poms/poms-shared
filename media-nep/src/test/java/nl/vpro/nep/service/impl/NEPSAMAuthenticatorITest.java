@@ -24,7 +24,7 @@ public class NEPSAMAuthenticatorITest {
         NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator(
             "npo_poms",
             System.getProperty("password"),
-            "https://api.samgcloud.nepworldwide.nl/v2/"
+            "https://api.samgcloud.nepworldwide.nl/"
         );
 
         authenticator.get();
