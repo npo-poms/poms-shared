@@ -14,6 +14,8 @@ Intake for transcoding jobs. No call back. Poll NEPDownloadService
 
 `nep.gatekeeper-api.baseUrl=https://npo-webonly-gatekeeper.nepworldwide.nl`
 
+http://npo-gatekeeper-prd.cdn2.usvc.nepworldwide.nl/swagger-ui.html
+
 
 NEPItemizeService
 --
