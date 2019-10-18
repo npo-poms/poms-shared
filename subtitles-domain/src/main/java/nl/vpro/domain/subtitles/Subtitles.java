@@ -47,9 +47,9 @@ import static nl.vpro.i18n.Locales.DUTCH;
 @XmlRootElement(name = "subtitles")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "subtitlesType", propOrder = {
-        "mid",
-        "offset",
-        "content"
+    "mid",
+    "offset",
+    "content"
 })
 @Slf4j
 @IdClass(SubtitlesId.class)
@@ -120,6 +120,15 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @Getter
     @Setter
     private OwnerType owner = OwnerType.BROADCASTER;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @XmlTransient
+    @NotNull
+    @Getter
+    @Setter
+    private SubtitlesWorkflow  workflow = SubtitlesWorkflow.FOR_PUBLICATION;
+
 
     public Subtitles() {
     }
