@@ -1,13 +1,17 @@
 package nl.vpro.domain.media.support;
 
+<<<<<<< HEAD
 import nl.vpro.domain.media.MediaObject;
 
+=======
+>>>>>>> b15b9e184... MSE-4619
 /**
  *
  * @author Michiel Meeuwissen
  * @since 5.3
  */
 public enum AvailableSubtitlesWorkflow {
+<<<<<<< HEAD
     /**
      * The mediaobject is properly published with respect to its subtitles.
      */
@@ -23,4 +27,8 @@ public enum AvailableSubtitlesWorkflow {
      */
     REVOKED
 
+=======
+    PUBLISHED,
+    FOR_PUBLICATION
+>>>>>>> b15b9e184... MSE-4619
 }
