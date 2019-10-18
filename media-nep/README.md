@@ -10,12 +10,29 @@ REST API
 
 NEPGatekeeperService
 --
+Intake for transcoding jobs. No call back. Poll NEPDownloadService
+nep.gatekeeper-api.baseUrl=https://npo-webonly-gatekeeper.nepworldwide.nl
+
+
 NEPItemizeService
 --
+Intake for 'itemize' and 'grab screen'.
+
+nep.itemizer-api.baseUrl=https://itemizer-npocdn-prd.nepworldwide.nl/v1
+
+
 NEPPlayerTokenService
 --
+nep.tokengenerator-api.baseUrl=http://tokengenerator-npo.cdn.streamgate.nl/keys-dev/token-provider/web/authenticate
+
+widevine token, playready tokens
+
 NEPSAMService
 --
+
+'Stream Access Management' API
+
+nep.sam-api.baseUrl=https://api.samgcloud.nepworldwide.nl/
 
 FTP Services
 ===
