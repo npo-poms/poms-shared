@@ -3,7 +3,7 @@ NEP api clients
 
 As used by POMS.
 
-NEP makes several API's available, which we make use of in POMS.
+NEP makes several API's available, which we make use of in POMS. It's a bit messy, we don't quite know which people are responsible for which API's nor how they relate to one another, and don't know of any publicly available documentation.
 
 REST API
 =====
