@@ -43,7 +43,13 @@ NEPUploadService
 --
 If you want to upload something for trancoding upload it here.
 
+`nep.gatekeeper-upload.host=ftp.nepworldwide.nl`
+
+
 
 NEPDownloadService
 --
 If you want to download transcoded item, or itemized item. (iirc)
+
+`nep.itemizer-download.host=sftp-itemizer.nepworldwide.nl`
+`
