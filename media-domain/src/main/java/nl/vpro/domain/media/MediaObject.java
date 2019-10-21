@@ -594,7 +594,7 @@ public abstract class MediaObject
     private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.FOR_PUBLICATION;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    // it is needed for every persist and display (because of hasSubitltes), so lets fetch it eager
+    // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
     // also we got odd NPE's from PersistentBag otherwise.
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
     @Setter
@@ -730,6 +730,13 @@ public abstract class MediaObject
         this.mid = mid;
     }
 
+    /**
+     * Return the available subtitles. These subtitles may not be published.
+     *
+     * In the publisher this list is explicely cleared before publishing to the API if there are no published locations
+     * This is kind of a hack, may be it is better to have the workflow in AvailableSubtitles also.
+     * @return
+     */
     @XmlElement(name = "availableSubtitles")
     public List<AvailableSubtitles> getAvailableSubtitles() {
         if (availableSubtitles == null) {
