@@ -8,6 +8,8 @@ import java.time.Duration;
 import nl.vpro.domain.media.support.OwnerType;
 
 /**
+ * A cheaper view on {@link Subtitles}, most fields, but most importantly not {@link Subtitles#getContent()}
+ *
  * @author Michiel Meeuwissen
  * @since 5.5
  */
