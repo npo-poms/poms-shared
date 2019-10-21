@@ -6,10 +6,7 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.lang.reflect.InvocationTargetException;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -182,7 +179,7 @@ public class MediaObjectsTest {
     public void hasSubtitles_Translation() {
 
         final Program program = MediaBuilder.program().build();
-        program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH, SubtitlesType.TRANSLATION));
+        program.getAvailableSubtitles().add(AvailableSubtitles.builder().language(Locales.DUTCH).type(SubtitlesType.TRANSLATION).build());
         assertFalse(program.hasSubtitles());
     }
 
@@ -190,8 +187,7 @@ public class MediaObjectsTest {
     public void hasSubtitles_DutchCaption() {
         final Program program = MediaBuilder.program()
             .build();
-        program.getAvailableSubtitles().add(new AvailableSubtitles(Locales.DUTCH,
-            SubtitlesType.CAPTION));
+        program.getAvailableSubtitles().add(AvailableSubtitles.builder().language(Locales.DUTCH).type(SubtitlesType.CAPTION).build());
         assertTrue(program.hasSubtitles());
     }
 

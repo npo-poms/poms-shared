@@ -22,6 +22,7 @@ public class SubtitlesMetadata {
     private OwnerType owner;
     private Duration offset;
     private Integer cueCount;
+    private SubtitlesWorkflow workflow;
 
 
 }

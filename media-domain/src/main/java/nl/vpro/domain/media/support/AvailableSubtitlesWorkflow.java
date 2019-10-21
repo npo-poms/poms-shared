@@ -7,5 +7,6 @@ package nl.vpro.domain.media.support;
  */
 public enum AvailableSubtitlesWorkflow {
     PUBLISHED,
-    FOR_PUBLICATION
+    FOR_PUBLICATION,
+    REVOKED
 }

@@ -147,7 +147,8 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
             SubtitlesType type,
             OwnerType owner,
             Instant created,
-            Instant lastModified) {
+            Instant lastModified,
+            SubtitlesWorkflow workflow) {
         this.mid = mid;
         this.offset = offset;
         if (content == null && value == null && cues == null) {
@@ -180,6 +181,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
         this.type = type == null ? SubtitlesType.CAPTION : type;
         this.creationInstant = created;
         this.lastModifiedInstant = lastModified;
+        this.workflow = workflow == null ? SubtitlesWorkflow.FOR_PUBLICATION : workflow;
     }
 
     public static Subtitles tt888Caption(String mid, Duration offset, String content) {
