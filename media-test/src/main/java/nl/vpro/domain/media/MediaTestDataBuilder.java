@@ -617,7 +617,7 @@ public interface MediaTestDataBuilder<
         l2.setDuration(Duration.of(10L, ChronoUnit.MINUTES));
         l2.setOffset(Duration.of(13L, ChronoUnit.MINUTES));
         l2.setCreationInstant(LocalDateTime.of(2017, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant());
-        l2.setWorkflow(Workflow.PUBLISHED);
+        l2.setWorkflow(Workflow.FOR_PUBLICATION);
 
         return locations(l1, l2);
 
