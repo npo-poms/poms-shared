@@ -2,10 +2,17 @@ package nl.vpro.domain.subtitles;
 
 import java.util.*;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlType;
+
+import nl.vpro.domain.Xmlns;
+
 /**
  * @author Michiel Meeuwissen
  * @since 5.11
  */
+@XmlEnum
+@XmlType(name = "subtitlesWorkflowEnum", namespace = Xmlns.SHARED_NAMESPACE)
 public enum SubtitlesWorkflow {
     IGNORE,
 
