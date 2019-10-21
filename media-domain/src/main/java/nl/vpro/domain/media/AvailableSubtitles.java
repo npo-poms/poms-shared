@@ -36,6 +36,7 @@ public class AvailableSubtitles implements Serializable {
     @XmlAttribute
     private SubtitlesType type;
 
+    @Enumerated(EnumType.STRING)
     private SubtitlesWorkflow workflow = null;
 
     public AvailableSubtitles() {
