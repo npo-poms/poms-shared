@@ -15,7 +15,7 @@ import nl.vpro.domain.media.support.OwnerType;
  */
 @Data
 @AllArgsConstructor
-@lombok.Builder(builderClassName = "Builder")
+@lombok.Builder
 public class SubtitlesMetadata {
 
     private SubtitlesId id;
