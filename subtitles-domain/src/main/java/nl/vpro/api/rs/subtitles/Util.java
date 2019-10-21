@@ -40,6 +40,10 @@ public class Util {
     }
 
     static String getContentDisposition(SubtitlesId id, String extension) {
+        // Sadly inline with filename is not support any more by chrome
+        // It is indeed not in the specs that it should.
+        // We could make it 'attachment', but then it won't show in the browser.
+        // I liked it that you could specify a better filename for inline content which was saved to disk anyway.
         return "inline; filename=\"" + id.getMid() + "." + id.getLanguage() + "." + extension + "\"";
     }
 
