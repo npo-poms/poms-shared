@@ -34,7 +34,4 @@ public enum SubtitlesWorkflow {
 
     public static final  Set<SubtitlesWorkflow> NEEDS_WORK = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(FOR_DELETION, FOR_PUBLICATION, FOR_REPUBLICATION)));
 
-    public static final Set<SubtitlesWorkflow> NEEDS_MEDIA_PUBLICATION = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(FOR_PUBLICATION, FOR_DELETION)));
-
-    public static final  Set<SubtitlesWorkflow> TO_REVOKE = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(FOR_DELETION, DELETED, REVOKED)));
 }

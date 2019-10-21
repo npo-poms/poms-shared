@@ -48,6 +48,8 @@ import static java.util.Arrays.asList;
 @JsonDeserialize(using = Workflow.Deserializer.class)
 public enum Workflow implements Displayable {
 
+    IGNORE("Genegeerd"),
+
     @XmlEnumValue("FOR PUBLICATION")
     FOR_PUBLICATION("Voor publicatie"),
 
