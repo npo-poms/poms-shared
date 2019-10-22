@@ -10,9 +10,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.search.MediaForm;
-import nl.vpro.domain.media.search.MediaListItem;
-import nl.vpro.domain.media.search.MediaSearchResult;
+import nl.vpro.domain.media.search.*;
+import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
@@ -150,10 +149,20 @@ public class SchemaTest extends AbstractSchemaTest {
         testMediaEnum("targetGroupEnum", TargetGroupType.class);
     }
 
+
+
+    @Test
+    public void testWorkflow() {
+        testSharedEnum("workflowEnumType", Workflow.class);
+    }
     protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass)  {
         testEnum("/nl/vpro/domain/media/vproMedia.xsd", enumTypeName, enumClass);
-
     }
 
+
+
+    protected <T extends Enum<T>> void testSharedEnum(String enumTypeName, Class<T> enumClass)  {
+        testEnum("/nl/vpro/domain/media/vproShared.xsd", enumTypeName, enumClass);
+    }
 
 }
