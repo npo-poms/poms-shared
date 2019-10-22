@@ -28,7 +28,9 @@ public interface TrackableObject extends Trackable, Embargo {
         if(isMerged() ||
             Workflow.FOR_DELETION == workflow ||
             Workflow.PARENT_REVOKED == workflow || // The parent is revoked so this object itself is not publishable either
-            Workflow.DELETED == workflow) {
+            Workflow.DELETED == workflow ||
+            Workflow.IGNORE == workflow
+        ) {
             // These kind of objects are explicitely not publishable.
             return false;
         }
@@ -49,6 +51,10 @@ public interface TrackableObject extends Trackable, Embargo {
 
 
     default boolean isRevocable() {
+        Workflow workflow = getWorkflow();
+        if (workflow == Workflow.IGNORE) {
+            return false;
+        }
         return ! isPublishable();
     }
 
