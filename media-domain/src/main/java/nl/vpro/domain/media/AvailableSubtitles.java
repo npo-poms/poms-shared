@@ -21,22 +21,29 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @Cacheable
 @XmlType(name="availableSubtitlesType")
 @XmlAccessorType(XmlAccessType.NONE)
-@EqualsAndHashCode
-@ToString
-@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class AvailableSubtitles implements Serializable {
 
     private static final long serialVersionUID = 0L;
 
     @XmlJavaTypeAdapter(LocaleAdapter.class)
     @XmlAttribute
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    @EqualsAndHashCode.Include
+
     private Locale language;
 
     @Enumerated(EnumType.STRING)
     @XmlAttribute
+    @Getter
+    @Setter(AccessLevel.PRIVATE)
+    @EqualsAndHashCode.Include
     private SubtitlesType type;
 
     @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
     private SubtitlesWorkflow workflow = null;
 
     public AvailableSubtitles() {
@@ -46,6 +53,14 @@ public class AvailableSubtitles implements Serializable {
     public AvailableSubtitles(Locale language, SubtitlesType type) {
         this.language = language;
         this.type = type;
+    }
+
+    public static AvailableSubtitles published(Locale language, SubtitlesType type) {
+        return AvailableSubtitles.builder()
+            .language(language)
+            .type(type)
+            .workflow(SubtitlesWorkflow.PUBLISHED)
+            .build();
     }
 
     @lombok.Builder
@@ -65,4 +80,5 @@ public class AvailableSubtitles implements Serializable {
     protected void setWorkflow_(SubtitlesWorkflow workflow) {
         this.workflow = workflow == null ? SubtitlesWorkflow.PUBLISHED : workflow;
     }
+
 }
