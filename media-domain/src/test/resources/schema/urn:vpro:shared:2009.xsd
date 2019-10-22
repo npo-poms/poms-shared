@@ -98,6 +98,7 @@
 
   <xs:simpleType name="workflowEnumType">
     <xs:restriction base="xs:string">
+      <xs:enumeration value="IGNORE"/>
       <xs:enumeration value="FOR PUBLICATION"/>
       <xs:enumeration value="FOR REPUBLICATION"/>
       <xs:enumeration value="PUBLISHED"/>
