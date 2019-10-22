@@ -14,32 +14,16 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.media.MediaObject;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 
 /**
- * <p>The workflow status for publishable items.
- * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
- * <pre>
- * &lt;simpleType name="workflowEnumType">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="DRAFT"/>
- *     &lt;enumeration value="FOR_APPROVAL"/>
- *     &lt;enumeration value="PUBLISHED"/>
- *     &lt;enumeration value="REFUSED"/>
- *     &lt;enumeration value="DELETED"/>
- *     &lt;enumeration value="MERGED"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
- *
- * @author arne
+ * <p>The workflow status for publishable items.</p>
+  * @author arne
  * @author roekoe
- * @version $Id$
  */
 @XmlEnum
 @XmlType(name = "workflowEnumType", namespace = Xmlns.SHARED_NAMESPACE)
@@ -47,16 +31,32 @@ import static java.util.Collections.unmodifiableList;
 @JsonDeserialize(using = Workflow.Deserializer.class)
 public enum Workflow implements Displayable {
 
+    /**
+     * Will be completely ignored by publishers. Will not be published, will not be revoked.
+     * Handy for debugging, to mute all objects besides the one you're interested in.
+     */
     IGNORE("Genegeerd"),
 
+    /**
+     * The object is not yet published, but should be considered for publication. This probably is a new object.
+     */
     @XmlEnumValue("FOR PUBLICATION")
     FOR_PUBLICATION("Voor publicatie"),
 
+    /**
+     * The object is already published, but something has been changed, and it needs to be published again.
+     */
     @XmlEnumValue("FOR REPUBLICATION")
     FOR_REPUBLICATION("Wordt gepubliceerd"),
 
     PUBLISHED("Gepubliceerd"),
 
+    /**
+     * The object is merged with another object. An object with this status can be published.
+     * Used only on {@link MediaObject}s.
+     *
+     * Normal users should not see these objects, but should be directed to the object {@link MediaObject#getMergedTo()}
+     */
     MERGED("Samengevoegd"),
 
     /**
@@ -68,8 +68,7 @@ public enum Workflow implements Displayable {
 
     /**
      * Set when a publishStop date has expired and an entity is revoked. This state is nether set by the end-user.
-     * Setting this state directly without an expired publishStop is useless, because an entity will be republished
-     * anyhow.
+     * Setting this state directly without an expired publishStop is useless, because an entity will be republished anyhow.
      */
     REVOKED("Ingetrokken"),
 
