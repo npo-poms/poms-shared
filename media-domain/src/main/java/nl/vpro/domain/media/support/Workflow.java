@@ -67,7 +67,7 @@ public enum Workflow implements Displayable {
     PARENT_REVOKED("Programma ingetrokken"),
 
     /**
-     * Set when a publishStop date has expired and an entity is revoked. This state is nether set by the end-user.
+     * Set when a publishStop date has expired and an entity is revoked. This state is not set by the end-user.
      * Setting this state directly without an expired publishStop is useless, because an entity will be republished anyhow.
      */
     REVOKED("Ingetrokken"),
