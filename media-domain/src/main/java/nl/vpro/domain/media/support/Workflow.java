@@ -22,7 +22,7 @@ import static java.util.Collections.unmodifiableList;
 
 /**
  * <p>The workflow status for publishable items.</p>
-  * @author arne
+ * @author arne
  * @author roekoe
  */
 @XmlEnum
@@ -52,7 +52,8 @@ public enum Workflow implements Displayable {
     PUBLISHED("Gepubliceerd"),
 
     /**
-     * The object is merged with another object. An object with this status can be published.
+     * The object is merged with another object. An object will get this status when it is published for the last time.
+     *
      * Used only on {@link MediaObject}s.
      *
      * Normal users should not see these objects, but should be directed to the object {@link MediaObject#getMergedTo()}
