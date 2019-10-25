@@ -81,4 +81,8 @@ public class AvailableSubtitles implements Serializable {
         this.workflow = workflow == null ? SubtitlesWorkflow.PUBLISHED : workflow;
     }
 
+    @Override
+    public String toString() {
+        return language + ":" + type + (workflow != null   ? (":"+ workflow) : "");
+    }
 }
