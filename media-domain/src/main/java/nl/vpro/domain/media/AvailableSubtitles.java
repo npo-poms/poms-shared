@@ -22,7 +22,6 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @XmlType(name="availableSubtitlesType")
 @XmlAccessorType(XmlAccessType.NONE)
 @EqualsAndHashCode
-@ToString
 @Data
 public class AvailableSubtitles implements Serializable {
 
@@ -64,5 +63,11 @@ public class AvailableSubtitles implements Serializable {
 
     protected void setWorkflow_(SubtitlesWorkflow workflow) {
         this.workflow = workflow == null ? SubtitlesWorkflow.PUBLISHED : workflow;
+    }
+
+
+    @Override
+    public String toString() {
+        return language + ":" + type + (workflow != null   ? (":"+ workflow) : "");
     }
 }
