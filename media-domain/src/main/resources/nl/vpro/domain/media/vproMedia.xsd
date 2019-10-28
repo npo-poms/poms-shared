@@ -286,9 +286,9 @@
       </xs:element>
       <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="intentions" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="targetGroups" type="targetGroupsType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="source" type="xs:string" minOccurs="0"/>
       <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
