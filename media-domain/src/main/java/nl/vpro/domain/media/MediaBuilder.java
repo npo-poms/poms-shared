@@ -84,6 +84,17 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     static SegmentBuilder segment(Segment segment) {
         return new SegmentBuilder(segment);
     }
+    static <B extends MediaBuilder<B, T>, T extends MediaObject> B of(T media) {
+        if (media instanceof Program) {
+            return (B) program((Program) media);
+        } else if (media instanceof Group) {
+            return (B) group((Group) media);
+         } else if (media instanceof Segment) {
+            return (B) segment((Segment) media);
+        } else {
+            throw new IllegalStateException();
+        }
+    }
 
     M build();
 
@@ -211,6 +222,9 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     default B workflow(Workflow workflow) {
         mediaObject().setWorkflow(workflow);
         return (B)this;
+    }
+    default Workflow getWorkflow() {
+        return mediaObject().getWorkflow();
     }
 
     @SuppressWarnings("unchecked")
