@@ -24,7 +24,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "childRef",
     "type",
     "index",
-    "highlighted"
+    "highlighted",
+    "objectType"
 })
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder(builderClassName = "Builder")
@@ -36,14 +37,18 @@ public class StandaloneMemberRef {
     protected Integer index;
     protected String midRef;
     protected String childRef;
+    protected ObjectType objectType;
 
-    public StandaloneMemberRef(String childRef, MemberRef ref) {
+
+    public StandaloneMemberRef(String childRef, MemberRef ref, ObjectType objectType) {
         this.childRef = childRef;
         added = ref.getAdded();
         highlighted = ref.isHighlighted();
         type = ref.getType();
         midRef = ref.getMidRef();
         index = ref.getNumber();
+        this.objectType = objectType;
+
     }
 
     public static class Builder {
@@ -115,5 +120,19 @@ public class StandaloneMemberRef {
 
     public void setChildRef(String childRef) {
         this.childRef = childRef;
+    }
+
+    @XmlAttribute
+    public ObjectType getObjectType() {
+        return objectType;
+    }
+
+    public void setObjectType(ObjectType objectType) {
+        this.objectType = objectType;
+    }
+
+    public enum ObjectType {
+        memberRef,
+        episodeRef
     }
 }
