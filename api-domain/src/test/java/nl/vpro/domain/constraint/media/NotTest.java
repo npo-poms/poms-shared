@@ -6,8 +6,8 @@ package nl.vpro.domain.constraint.media;
 
 import java.util.Locale;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Program;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class NotTest {
 
-    @Before
+    @BeforeEach
     public void setup() {
         Locale.setDefault(Locale.US);
     }
@@ -98,7 +98,7 @@ public class NotTest {
         assertThat(not.test(new Program())).isTrue();
         assertThat(not.testWithReason(new Program()).applies()).isTrue();
         assertThat(not.testWithReason(new Program()).getReason()).isEqualTo("Not");
-        assertThat(not.testWithReason(new Program()).getDescription(Locale.US)).isEqualTo("The value 'Program{mid=null, title=null}' does not match Never matches");
+        assertThat(not.testWithReason(new Program()).getDescription(Locale.US)).isEqualTo("The value 'Program{mid=null, title=null (new)}' does not match Never matches");
     }
 
     @Test
