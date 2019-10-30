@@ -1,7 +1,5 @@
 package nl.vpro.domain.api.media;
 
-import net.sf.json.test.JSONAssert;
-
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.Collections;
@@ -78,7 +76,7 @@ public class RelationFacetListTest {
 
         String expected = "[{\"threshold\":2,\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation\",\"subSearch\":{\"broadcasters\":\"VPRO\"}},{\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation2\",\"subSearch\":{\"broadcasters\":\"VPRO\"}}]";
         String actual  = Jackson2Mapper.getInstance().writeValueAsString(list);
-        JSONAssert.assertEquals(expected, actual);
+        Jackson2TestUtil.assertThatJson(actual).isSimilarTo(expected);
 
         list = Jackson2Mapper.getInstance().readValue(new StringReader(actual), RelationFacetList.class);
 
@@ -107,7 +105,7 @@ public class RelationFacetListTest {
 
         String expected = "{\"value\":[{\"threshold\":0,\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation\",\"subSearch\":{\"broadcasters\":\"VPRO\"}},{\"threshold\":3,\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation2\",\"subSearch\":{\"broadcasters\":\"VPRO\"}}],\"filter\":{}}";
         String actual = Jackson2Mapper.getInstance().writeValueAsString(list);
-        JSONAssert.assertEquals(expected, actual);
+        Jackson2TestUtil.assertThatJson(actual).isSimilarTo(expected);
 
         list = Jackson2Mapper.getInstance().readValue(new StringReader(actual), RelationFacetList.class);
 
@@ -177,8 +175,7 @@ public class RelationFacetListTest {
             "  }\n" +
             "}";
         String actual = Jackson2Mapper.getInstance().writeValueAsString(list);
-        JSONAssert.assertJsonEquals(expected, actual);
-
+        Jackson2TestUtil.assertThatJson(actual).isSimilarTo(expected);
 
         list = Jackson2Mapper.getInstance().readValue(new StringReader(actual), RelationFacetList.class);
 

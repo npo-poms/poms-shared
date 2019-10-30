@@ -1,6 +1,5 @@
 package nl.vpro.domain.page;
 
-import net.sf.json.test.JSONAssert;
 
 import java.io.IOException;
 import java.time.Instant;
@@ -129,7 +128,7 @@ public class PageBuilderTest {
     public void testGenresJson() throws IOException {
         Page page = PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").genres(classificationService.getTerm("3.0.1.1.4")).build();
         String result = Jackson2Mapper.getInstance().writer().writeValueAsString(page);
-        JSONAssert.assertJsonEquals("{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"url\":\"http://www.vpro.nl\",\"genres\":[{\"id\":\"3.0.1.1.4\",\"terms\":[\"Jeugd\",\"Sport\"],\"displayName\":\"Jeugd - Sport\"}]}", result);
+        Jackson2TestUtil.assertThatJson(result).isSimilarTo("{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"url\":\"http://www.vpro.nl\",\"genres\":[{\"id\":\"3.0.1.1.4\",\"terms\":[\"Jeugd\",\"Sport\"],\"displayName\":\"Jeugd - Sport\"}]}");
     }
 
 

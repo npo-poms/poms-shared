@@ -1,7 +1,7 @@
 package nl.vpro.domain.page;
 
 
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.*;
@@ -91,10 +91,23 @@ public class Page implements MutableEmbargo {
     }
 
     @NotNull
+    @XmlAttribute(required = true)
+    @Getter
+    @Setter
     private PageType type;
+
+
+    @NotNull
+    @XmlAttribute(required = true)
+    @Getter
+    @Setter
+    private PageWorkflow workflow;
 
     @NotNull
     @URI
+    @XmlAttribute(required = true)
+    @Getter
+    @Setter
     protected String url;
 
     @Valid
@@ -165,25 +178,8 @@ public class Page implements MutableEmbargo {
         this.type = type;
     }
 
-    @XmlAttribute(required = true)
-//    @JsonSerialize(using = PageTypeToDisplay.Serializer.class)
-//    @JsonDeserialize(using = PageTypeToDisplay.Deserializer.class)
-    public PageType getType() {
-        return type;
-    }
 
-    public void setType(PageType type) {
-        this.type = type;
-    }
 
-    @XmlAttribute(required = true)
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     @XmlElement(name = "crid")
     @JsonProperty("crids")

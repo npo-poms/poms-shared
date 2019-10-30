@@ -25,8 +25,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.page.Crid;
-import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.page.*;
 import nl.vpro.domain.page.util.Urls;
 import nl.vpro.domain.page.validation.ValidBroadcaster;
 import nl.vpro.domain.page.validation.ValidGenre;
@@ -59,6 +58,12 @@ public class PageUpdate implements Serializable {
     @Getter
     @Setter
     protected PageType type;
+
+    @NotNull
+    @XmlAttribute
+    @Getter
+    @Setter
+    protected PageWorkflow workflow;
 
     @NotNull
     @URI
@@ -224,7 +229,6 @@ public class PageUpdate implements Serializable {
     }
 
 
-    @SuppressWarnings("ConstantConditions")
     public void setUrl(String url) {
         this.url = url == null ? null : Urls.normalize(url);
     }
@@ -371,7 +375,6 @@ public class PageUpdate implements Serializable {
         return lastModified != null ? lastModified.equals(that.lastModified) : that.lastModified == null;
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public int hashCode() {
         int result = type != null ? type.hashCode() : 0;
