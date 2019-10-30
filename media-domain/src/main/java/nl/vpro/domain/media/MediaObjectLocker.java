@@ -9,25 +9,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.management.ManagementFactory;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.slf4j.event.Level;
 
 import nl.vpro.logging.Slf4jHelper;
@@ -269,7 +262,8 @@ public class MediaObjectLocker {
                          }
                      }
                     if (MediaObjectLockerAspect.stricltyOne) {
-                        throw new IllegalStateException(String.format("%s Getting a lock on a different key! %s + %s", summarize(), HOLDS.get().get(0).summarize(), key));
+                        throw new IllegalStateException(
+                            String.format("%s Getting a lock on a different key! %s + %s", summarize(), HOLDS.get().get(0).summarize(), key));
                     } else {
                         log.warn("Getting a lock on a different key! {} + {}", HOLDS.get(), key);
                     }
@@ -368,7 +362,7 @@ public class MediaObjectLocker {
                 .filter(e -> ! e.getClassName().startsWith(MediaObject.class.getName()))
                 .filter(e -> ! e.getClassName().startsWith("nl.vpro.spring"))
                 .filter(e -> ! e.getClassName().startsWith("nl.vpro.services"))
-                .filter(e -> !e.getFileName().contains("generated"))
+                .filter(e -> e.getFileName() == null || ! e.getFileName().contains("generated"))
                 .map(StackTraceElement::toString)
                 .collect(Collectors.joining("\n   <-"));
     }
