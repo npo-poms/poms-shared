@@ -59,7 +59,6 @@ public class PageUpdate implements Serializable {
     @Setter
     protected PageType type;
 
-    @NotNull
     @XmlAttribute
     @Getter
     @Setter
