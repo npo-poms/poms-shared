@@ -6,20 +6,16 @@ package nl.vpro.domain.media;
 
 import lombok.ToString;
 
-import java.io.StringWriter;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
-import javax.xml.bind.JAXB;
 
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.google.common.annotations.VisibleForTesting;
 
 import nl.vpro.domain.EmbargoBuilder;
@@ -27,10 +23,7 @@ import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.Editor;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.domain.user.ThirdParty;
+import nl.vpro.domain.user.*;
 import nl.vpro.i18n.LocalizedString;
 import nl.vpro.util.DateUtils;
 import nl.vpro.util.TimeUtils;
@@ -881,8 +874,6 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
         public T copy() {
             try {
                 T o = (T) super.clone();
-                StringWriter writer = new StringWriter();
-                JAXB.marshal(this.mediaObject, writer);
                 o.mediaObject = MediaObjects.deepCopy(this.mediaObject);
                 o.mediaObject.setMid(null);
                 o.mid(this.mid);
