@@ -2502,7 +2502,7 @@ public enum Channel implements Displayable, XmlValued {
     DVIC {
         @Override
         public String toString() {
-            return "Viceland";
+            return "Vice TV";
         }
     },
 
