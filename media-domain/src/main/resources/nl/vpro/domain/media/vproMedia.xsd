@@ -1092,10 +1092,24 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="14">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of age 12 and up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="16">
         <xs:annotation>
           <xs:documentation>
             Suitable for people of age 16 and up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="18">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of age 18 and up.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
