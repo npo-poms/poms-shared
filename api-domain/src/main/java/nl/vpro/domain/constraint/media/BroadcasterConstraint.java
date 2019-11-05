@@ -37,9 +37,11 @@ public class BroadcasterConstraint extends AbstractTextConstraint<MediaObject> {
 
     @Override
     public boolean test(MediaObject input) {
-        for(Broadcaster broadcaster : input.getBroadcasters()) {
-            if(value.equals(broadcaster.getId())) {
-                return true;
+        if (input != null) {
+            for(Broadcaster broadcaster : input.getBroadcasters()) {
+                if(value.equals(broadcaster.getId())) {
+                    return true;
+                }
             }
         }
         return false;

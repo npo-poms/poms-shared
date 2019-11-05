@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlEnumValue;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.common.annotations.Beta;
 
 import nl.vpro.domain.Displayable;
 import nl.vpro.domain.XmlValued;
@@ -23,8 +24,25 @@ public enum AgeRating implements Displayable, XmlValued {
     _9("9"),
     @XmlEnumValue("12")
     _12("12"),
+
+    /**
+     * See MSE-4628
+     * @since 5.12
+     */
+    @XmlEnumValue("14")
+    @Beta
+    _14("14"),
+
     @XmlEnumValue("16")
     _16("16"),
+
+    /**
+     * See MSE-4628
+     * @since 5.12
+     */
+    @XmlEnumValue("18")
+    @Beta
+    _18("18"),
 
     ALL("Alle leeftijden") {
         @Override
