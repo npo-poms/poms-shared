@@ -1,6 +1,7 @@
 package nl.vpro.nicam;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ import nl.vpro.domain.media.ContentRating;
  * @since 4.2
  */
 @Data
+@Slf4j
 public class Kijkwijzer implements NicamRated {
 
     private AgeRating ageRating;
@@ -38,7 +40,9 @@ public class Kijkwijzer implements NicamRated {
                         ageRating = AgeRating._16;
                         break;
                     default:
-                        contentRatings.add(ContentRating.valueOf(c));
+                        contentRatings.add(
+                            ContentRating.valueOf(c)
+                        );
 
                 }
             }
@@ -129,6 +133,10 @@ public class Kijkwijzer implements NicamRated {
                 return '4';
             case _16:
                 return '5';
+            case _14:
+            case _18:
+                log.warn("We don't know the code of {}", ageRating);
+                return null;
             default:
             case ALL:
                 return null;
