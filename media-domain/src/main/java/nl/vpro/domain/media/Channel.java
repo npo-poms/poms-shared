@@ -2419,6 +2419,7 @@ public enum Channel implements Displayable, XmlValued {
         }
     },
     @XmlEnumValue("BRNL")
+    @Deprecated
     BRNL {
         @Override
         public String toString() {
