@@ -47,6 +47,11 @@ public interface Displayable {
         return getPluralDisplayName(Locales.getDefault());
     }
 
+    /**
+     * An url for an icon associated with this displayable object.
+     *
+     * It may be that this to be interpreted relative to the current 'context path'.
+     */
     default Optional<String> getIcon() {
         return Optional.empty();
     }

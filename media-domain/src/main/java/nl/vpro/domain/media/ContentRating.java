@@ -66,6 +66,7 @@ public enum ContentRating implements Displayable {
     }
 
 
+    @Override
     public Optional<String> getIcon() {
         return Optional.of("/kijkwijzer/icons/contentrating/" + name().toLowerCase() + ".svg");
     }

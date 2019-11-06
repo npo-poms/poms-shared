@@ -95,6 +95,7 @@ public enum AgeRating implements Displayable, XmlValued {
         return "Vanaf " + displayName + " jaar";
     }
 
+    @Override
     public Optional<String> getIcon() {
         return Optional.of("/kijkwijzer/icons/agerating/" + getXmlValue().toLowerCase() + ".svg");
     }
