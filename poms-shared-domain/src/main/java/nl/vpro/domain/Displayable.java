@@ -47,5 +47,9 @@ public interface Displayable {
         return getPluralDisplayName(Locales.getDefault());
     }
 
+    default Optional<String> getIcon() {
+        return Optional.empty();
+    }
+
 
 }

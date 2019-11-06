@@ -1,5 +1,7 @@
 package nl.vpro.domain.media;
 
+import java.util.Optional;
+
 import javax.xml.bind.annotation.XmlEnumValue;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -91,5 +93,9 @@ public enum AgeRating implements Displayable, XmlValued {
 
     public String getDescription() {
         return "Vanaf " + displayName + " jaar";
+    }
+
+    public Optional<String> getIcon() {
+        return Optional.of("/kijkwijzer/icons/agerating/" + getXmlValue().toLowerCase() + ".svg");
     }
 }

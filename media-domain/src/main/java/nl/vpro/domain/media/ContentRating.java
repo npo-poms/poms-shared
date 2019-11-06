@@ -1,9 +1,6 @@
 package nl.vpro.domain.media;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
@@ -66,5 +63,10 @@ public enum ContentRating implements Displayable {
     @Override
     public String getDisplayName() {
         return displayName;
+    }
+
+
+    public Optional<String> getIcon() {
+        return Optional.of("/kijkwijzer/icons/contentrating/" + name().toLowerCase() + ".svg");
     }
 }
