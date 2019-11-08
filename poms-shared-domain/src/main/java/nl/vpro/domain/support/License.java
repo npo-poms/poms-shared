@@ -90,6 +90,9 @@ public class License implements Displayable, Serializable { // Not an enum, beca
                 try {
                     License license = (License) field.get(null);
                     license.id = field.getName();
+                    if (field.getName().endsWith("0")) {
+                        license.display = false;
+                    }
                     alls.add(license);
                 } catch (Exception ignored ) {
 
@@ -121,6 +124,9 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     @Getter
     @Transient
     private URI url;
+
+
+    private boolean display = true;
 
     private License (){}
 
@@ -189,6 +195,12 @@ public class License implements Displayable, Serializable { // Not an enum, beca
         return id.hashCode();
     }
 
+
+
+    @Override
+    public boolean display() {
+        return display;
+    }
 
     static class Serializer extends JsonSerializer<License> {
 

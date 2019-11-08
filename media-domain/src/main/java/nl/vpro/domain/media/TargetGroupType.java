@@ -3,9 +3,11 @@ package nl.vpro.domain.media;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
+import nl.vpro.domain.Displayable;
+
 @XmlEnum
 @XmlType(name = "targetGroupEnum")
-public enum TargetGroupType {
+public enum TargetGroupType implements Displayable {
     KIDS_6 {
         @Override
         public String toString() {

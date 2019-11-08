@@ -2,8 +2,10 @@ package nl.vpro.domain.media;
 
 import javax.xml.bind.annotation.XmlEnum;
 
+import nl.vpro.domain.Displayable;
+
 @XmlEnum
-public enum RoleType {
+public enum RoleType  implements Displayable {
 
     DIRECTOR {
 

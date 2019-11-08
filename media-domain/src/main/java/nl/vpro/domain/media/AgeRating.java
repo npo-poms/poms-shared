@@ -32,7 +32,6 @@ public enum AgeRating implements Displayable, XmlValued {
      * @since 5.12
      */
     @XmlEnumValue("14")
-    @Beta
     _14("14"),
 
     @XmlEnumValue("16")
@@ -43,7 +42,6 @@ public enum AgeRating implements Displayable, XmlValued {
      * @since 5.12
      */
     @XmlEnumValue("18")
-    @Beta
     _18("18"),
 
     ALL("Alle leeftijden") {
@@ -52,16 +50,19 @@ public enum AgeRating implements Displayable, XmlValued {
             return getDisplayName();
         }
     },
-    /**
-     * @since 5.12
-     */
+
     @Beta
     NOT_YET_RATED("Nog niet beoordeeld") {
         @Override
         public String getDescription() {
             return getDisplayName();
         }
+        @Override
+        public boolean display() {
+            return false;
+        }
     };
+
 
     private String displayName;
 
@@ -69,16 +70,15 @@ public enum AgeRating implements Displayable, XmlValued {
         this.displayName = displayName;
     }
 
+
     public static AgeRating xmlValueOf(String text) {
-        if (text == null) {
+        if (text == null || text.length() == 0) {
             return null;
         }
-        switch (text) {
-            case "": return null;
-            case "ALL":
-                return AgeRating.ALL;
-            default:
-                return AgeRating.valueOf('_' + text);
+        if (Character.isDigit(text.charAt(0))) {
+            return AgeRating.valueOf('_' + text);
+        } else {
+            return AgeRating.valueOf(text);
         }
     }
 
@@ -113,4 +113,6 @@ public enum AgeRating implements Displayable, XmlValued {
     public Optional<String> getIconClass() {
         return Optional.of("kijkwijzer-icon kijkwijzer-icon-agerating-" + getXmlValue().toLowerCase());
     }
+
+
 }

@@ -64,5 +64,9 @@ public interface Displayable {
         return Optional.empty();
     }
 
+    default boolean display() {
+        return true;
+    }
+
 
 }
