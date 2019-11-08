@@ -993,6 +993,7 @@
       <xs:enumeration value="16"/>
       <xs:enumeration value="18"/>
       <xs:enumeration value="ALL"/>
+      <xs:enumeration value="NOT_YET_RATED"/>
     </xs:restriction>
   </xs:simpleType>
 

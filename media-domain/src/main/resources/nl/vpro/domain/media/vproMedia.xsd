@@ -1120,6 +1120,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="NOT_YET_RATED">
+        <xs:annotation>
+          <xs:documentation>
+            Not yet rated
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 

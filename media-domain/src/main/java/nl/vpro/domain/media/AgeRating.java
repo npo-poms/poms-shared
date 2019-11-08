@@ -52,7 +52,10 @@ public enum AgeRating implements Displayable, XmlValued {
             return getDisplayName();
         }
     },
-
+    /**
+     * @since 5.12
+     */
+    @Beta
     NOT_YET_RATED("Nog niet beoordeeld") {
         @Override
         public String getDescription() {
