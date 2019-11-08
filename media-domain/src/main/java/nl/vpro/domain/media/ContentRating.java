@@ -70,4 +70,8 @@ public enum ContentRating implements Displayable {
     public Optional<String> getIcon() {
         return Optional.of("/kijkwijzer/icons/contentrating/" + name().toLowerCase() + ".svg");
     }
+    @Override
+    public Optional<String> getIconClass() {
+        return Optional.of("kijkwijzer-icon kijkwijzer-icon-contentrating-" + name().toLowerCase());
+    }
 }

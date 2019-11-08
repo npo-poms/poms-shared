@@ -99,4 +99,8 @@ public enum AgeRating implements Displayable, XmlValued {
     public Optional<String> getIcon() {
         return Optional.of("/kijkwijzer/icons/agerating/" + getXmlValue().toLowerCase() + ".svg");
     }
+    @Override
+    public Optional<String> getIconClass() {
+        return Optional.of("kijkwijzer-icon kijkwijzer-icon-agerating-" + getXmlValue().toLowerCase());
+    }
 }
