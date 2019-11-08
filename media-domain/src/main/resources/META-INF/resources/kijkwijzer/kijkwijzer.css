@@ -25,6 +25,9 @@
 .kijkwijzer-icon-agerating-all {
   background-image: url(icons/agerating/all.svg)
 }
+.kijkwijzer-icon-agerating-not_yet_rated {
+  background-image: url(icons/agerating/not_yet_rated.svg)
+}
 
 .kijkwijzer-icon-contentrating-angst{
     background-image: url(icons/contentrating/angst.svg);
