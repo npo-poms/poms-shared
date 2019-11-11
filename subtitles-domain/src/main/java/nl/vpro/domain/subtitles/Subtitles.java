@@ -53,7 +53,7 @@ import static nl.vpro.i18n.Locales.DUTCH;
 })
 @Slf4j
 @IdClass(SubtitlesId.class)
-public class Subtitles implements Serializable, Identifiable<SubtitlesId>, MutableOwnable, Changeable {
+public class Subtitles implements Serializable, Identifiable<SubtitlesId>, MutableOwnable, Changeable, SubtitlesMetadata {
 
     private static final long serialVersionUID = 0L;
 
@@ -277,6 +277,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     }
 
 
+    @Override
     public Duration getOffset() {
         return offset;
     }
@@ -319,6 +320,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     }
 
     @XmlAttribute
+    @Override
     public Integer getCueCount() {
         if (cueCount == null) {
             int result = 0;
@@ -342,12 +344,13 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     }
 
     public SubtitlesMetadata getMetadata() {
-        return SubtitlesMetadata.builder()
-                .cueCount(getCueCount())
-                .offset(getOffset())
-                .id(getId())
-                .build()
-                ;
+        return SubtitlesMetadataImpl.builder()
+            .cueCount(getCueCount())
+            .offset(getOffset())
+            .id(getId())
+            .workflow(getWorkflow())
+            .build()
+            ;
     }
 
     @Override
