@@ -126,6 +126,7 @@ public class License implements Displayable, Serializable { // Not an enum, beca
     private URI url;
 
 
+    @Transient
     private boolean display = true;
 
     private License (){}
