@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,21 +23,15 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.ChangeReport;
-import nl.vpro.domain.Child;
-import nl.vpro.domain.EmbargoBuilder;
-import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.image.ImageMetadata;
-import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.image.Metadata;
+import nl.vpro.domain.*;
+import nl.vpro.domain.image.*;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.support.License;
 import nl.vpro.jackson2.XMLDurationToJsonTimestamp;

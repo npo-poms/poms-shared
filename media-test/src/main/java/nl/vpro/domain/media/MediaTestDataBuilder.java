@@ -796,6 +796,7 @@ public interface MediaTestDataBuilder<
     static Image image(OwnerType ownerType, String urn, Workflow workflow) {
         Image image = new Image(ownerType, urn);
         PublishableObjectAccess.setWorkflow(image, workflow);
+        image.setLicense(License.COPYRIGHTED);
         return image;
     }
 
