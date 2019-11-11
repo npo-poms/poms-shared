@@ -46,10 +46,10 @@ public enum RoleType  implements Displayable {
     ;
 
     @Getter
-    private final String displayValue;
+    private final String displayName;
 
-    RoleType(String displayValue) {
-        this.displayValue = displayValue;
+    RoleType(String displayName) {
+        this.displayName = displayName;
     }
 
     @Override
