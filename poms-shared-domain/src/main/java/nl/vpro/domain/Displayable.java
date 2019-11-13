@@ -7,6 +7,8 @@ package nl.vpro.domain;
 import java.util.Locale;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.LocalizedString;
 
@@ -25,6 +27,7 @@ public interface Displayable {
      * Returns a displayable name for this item in the given Locale, or the default locale ({@link Locales#getDefault()}) if not available or not implemented
      * @since 5.11
      */
+    @JsonIgnore
     default LocalizedString getDisplayName(Locale locale) {
         return LocalizedString.of(getDisplayName(), Locales.getDefault());
     }
@@ -34,6 +37,7 @@ public interface Displayable {
      * Returns the plural of the display name, if implemented. Otherwise {@link Optional#empty()}
      * @since 5.11
      */
+    @JsonIgnore
     default Optional<LocalizedString> getPluralDisplayName(Locale locale) {
         return Optional.empty();
     }
@@ -43,6 +47,7 @@ public interface Displayable {
      * Returns {@link #getDisplayName(Locale)} for the default locale {@link Locales#getDefault()}
      * @since 5.11
      */
+    @JsonIgnore
     default Optional<LocalizedString> getPluralDisplayName() {
         return getPluralDisplayName(Locales.getDefault());
     }
@@ -52,18 +57,21 @@ public interface Displayable {
      *
      * It may be that this to be interpreted relative to the current 'context path'.
      */
+    @JsonIgnore
     default Optional<String> getIcon() {
         return Optional.empty();
     }
-      /**
+    /**
      * An url for an icon associated with this displayable object.
      *
      * It may be that this to be interpreted relative to the current 'context path'.
      */
+    @JsonIgnore
     default Optional<String> getIconClass() {
         return Optional.empty();
     }
 
+    @JsonIgnore
     default boolean display() {
         return true;
     }
