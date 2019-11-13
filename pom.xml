@@ -31,7 +31,6 @@
   <modules>
     <module>poms-shared-domain</module>
     <module>poms-shared</module>
-    <module>poms-shared-test</module>
     <module>user-domain</module>
     <module>media-domain</module>
 
@@ -53,8 +52,6 @@
 
     <module>api-domain</module>
     <module>api-rs-services</module>
-
-    <module>poms-extjs</module>
     <module>poms-npoplayer</module>
 
     <module>media-nep</module>
@@ -95,9 +92,11 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
+
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-migrationsupport</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

@@ -289,9 +289,7 @@ public interface MediaTestDataBuilder<
         return mainTitle(mainTitle);
     }
 
-    AvailableSubtitles DUTCH_CAPTION = new AvailableSubtitles(
-        Locales.DUTCH,
-        SubtitlesType.CAPTION);
+    AvailableSubtitles DUTCH_CAPTION = AvailableSubtitles.builder().language(Locales.DUTCH).type(SubtitlesType.CAPTION).build();
 
     default T withDutchCaptions() {
         mediaObject().getAvailableSubtitles().add(DUTCH_CAPTION);
@@ -618,6 +616,7 @@ public interface MediaTestDataBuilder<
         l2.setDuration(Duration.of(10L, ChronoUnit.MINUTES));
         l2.setOffset(Duration.of(13L, ChronoUnit.MINUTES));
         l2.setCreationInstant(LocalDateTime.of(2017, 3, 4, 15, 45).atZone(Schedule.ZONE_ID).toInstant());
+        l2.setWorkflow(Workflow.FOR_PUBLICATION);
 
         return locations(l1, l2);
 
@@ -797,6 +796,7 @@ public interface MediaTestDataBuilder<
     static Image image(OwnerType ownerType, String urn, Workflow workflow) {
         Image image = new Image(ownerType, urn);
         PublishableObjectAccess.setWorkflow(image, workflow);
+        image.setLicense(License.COPYRIGHTED);
         return image;
     }
 

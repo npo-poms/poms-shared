@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
 import java.time.Duration;
 import java.util.Iterator;
 import java.util.Locale;
@@ -95,7 +96,16 @@ public class SubtitlesUtil {
             log.debug("Using default");
             return defaultValue;
         }
-        return Charset.forName(c);
+        try {
+            return Charset.forName(c);
+        } catch (UnsupportedCharsetException usce) {
+            if (!defaultValue.name().equals(c)) {
+                log.warn(usce.getMessage());
+            }
+            return defaultValue;
+
+        }
+
     }
 
     public static Stream<StandaloneCue> standaloneStream(Subtitles subtitles, boolean guessOffset, boolean fillCueNumbers) {

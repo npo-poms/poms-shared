@@ -591,15 +591,10 @@ public abstract class MediaObject
     @Enumerated(EnumType.STRING)
     @Getter(AccessLevel.PACKAGE)
     @Setter(AccessLevel.PACKAGE)
-    // It is a bit odd that this is not on {@link Subtitles}.
-    // Perhaps that is possible too, it would however complicate matters in MaintenanceRepository
-    // because it is impossible to do join between unrelated tables in hsql.
-    // (perhaps in hiberante 5.1 ; http://www.thoughts-on-java.org/how-to-join-unrelated-entities/)
-    // Sometimes I wonder why we use hibernate/jpa. Just plain SQL is so much more powerfull and easier to understand...
-    private SubtitlesWorkflow subtitlesWorkflow = SubtitlesWorkflow.UNDEFINED;
+    private AvailableSubtitlesWorkflow subtitlesWorkflow = AvailableSubtitlesWorkflow.FOR_PUBLICATION;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    // it is needed for every persist and display (because of hasSubitltes), so lets fetch it eager
+    // it is needed for every persist and display (because of hasSubtitles), so lets fetch it eager
     // also we got odd NPE's from PersistentBag otherwise.
     @CollectionTable(name = "Subtitles", joinColumns = @JoinColumn(name = "mid", referencedColumnName = "mid"))
     @Setter
@@ -735,6 +730,13 @@ public abstract class MediaObject
         this.mid = mid;
     }
 
+    /**
+     * Return the available subtitles. These subtitles may not be published.
+     *
+     * In the publisher this list is explicely cleared before publishing to the API if there are no published locations
+     * This is kind of a hack, may be it is better to have the workflow in AvailableSubtitles also.
+     * @return
+     */
     @XmlElement(name = "availableSubtitles")
     public List<AvailableSubtitles> getAvailableSubtitles() {
         if (availableSubtitles == null) {
@@ -2980,11 +2982,13 @@ public abstract class MediaObject
         } catch(RuntimeException le) {
             mainTitle = "[" + le.getClass() + " " + le.getMessage() + "]"; // (could be a LazyInitializationException)
         }
-        return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s}",
+        return String.format(getClass().getSimpleName() + "{%1$s%2$smid=%3$s, title=%4$s%5$s}",
             (! Workflow.PUBLICATIONS.contains(workflow) ? workflow + ":" : "" ),
             getType() == null ? "" : getType() + " ",
             this.getMid() == null ? "null" : "\"" + this.getMid() + "\"",
-            mainTitle);
+            mainTitle,
+            this.getId() == null ? " (new)" : (", id=" + this.getId() + ")")
+            );
     }
 
 }

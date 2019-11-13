@@ -35,7 +35,7 @@ public class NEPSAMAuthenticatorTest {
     public WireMockRule wireMockRule = new WireMockRule(wireMockConfig().dynamicPort());
 
     @Test
-    public void authenticate() throws IOException {
+    public void authenticate() {
 
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

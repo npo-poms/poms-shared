@@ -40,6 +40,8 @@
       <xs:element name="relation" type="tns:relationType" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="url" type="xs:string" use="required"/>
+    <xs:attribute name="type" type="tns:pageTypeEnum" use="required"/>
+    <xs:attribute name="workflow" type="tns:pageWorkflow" use="required"/>
     <xs:attribute name="creationDate" type="xs:dateTime"/>
     <xs:attribute name="lastModified" type="xs:dateTime"/>
     <xs:attribute name="lastPublished" type="xs:dateTime"/>
@@ -47,7 +49,6 @@
     <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="refCount" type="xs:int"/>
     <xs:attribute name="sortDate" type="xs:dateTime"/>
-    <xs:attribute name="type" type="tns:pageTypeEnum" use="required"/>
   </xs:complexType>
 
   <xs:simpleType name="pridType">
@@ -165,6 +166,13 @@
       <xs:enumeration value="SERIES"/>
       <xs:enumeration value="PERSON"/>
       <xs:enumeration value="SEARCH"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="pageWorkflow">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PUBLISHED"/>
+      <xs:enumeration value="DELETED"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>

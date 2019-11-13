@@ -1,7 +1,7 @@
 package nl.vpro.domain.page;
 
 
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.*;
@@ -91,22 +91,52 @@ public class Page implements MutableEmbargo {
     }
 
     @NotNull
+    @XmlAttribute(required = true)
+    @Getter
+    @Setter
     private PageType type;
+
+
+    @NotNull
+    @XmlAttribute(required = true)
+    @Getter
+    @Setter
+    private PageWorkflow workflow;
 
     @NotNull
     @URI
+    @XmlAttribute(required = true)
+    @Getter
+    @Setter
     protected String url;
 
     @Valid
+    @XmlElement(name = "crid")
+    @JsonProperty("crids")
+    @Getter
+    @Setter
     protected List<Crid> crids;
 
     @Valid
     @URI
+    @XmlElement(name = "alternativeUrl")
+    @JsonProperty("alternativeUrls")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @Getter
+    @Setter
     protected List<String> alternativeUrls;
 
     @Valid
+    @XmlElement(name = "broadcaster", required=true)
+    @JsonProperty("broadcasters")
+    @Getter
+    @Setter
     protected List<Broadcaster> broadcasters;
 
+    @XmlElement(name = "portal")
+    @JsonProperty("portal")
+    @Getter
+    @Setter
     protected Portal portal;
 
     @NotNull
@@ -165,69 +195,9 @@ public class Page implements MutableEmbargo {
         this.type = type;
     }
 
-    @XmlAttribute(required = true)
-//    @JsonSerialize(using = PageTypeToDisplay.Serializer.class)
-//    @JsonDeserialize(using = PageTypeToDisplay.Deserializer.class)
-    public PageType getType() {
-        return type;
-    }
 
-    public void setType(PageType type) {
-        this.type = type;
-    }
 
-    @XmlAttribute(required = true)
-    public String getUrl() {
-        return url;
-    }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    @XmlElement(name = "crid")
-    @JsonProperty("crids")
-    public List<Crid> getCrids() {
-        return crids;
-    }
-
-    public void setCrids(List<Crid> crids) {
-        this.crids = crids;
-    }
-
-    @XmlElement(name = "alternativeUrl")
-    @JsonProperty("alternativeUrls")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<String> getAlternativeUrls() {
-        return alternativeUrls;
-    }
-
-    public void setAlternativeUrls(List<String> alternativeUrls) {
-        this.alternativeUrls = alternativeUrls;
-    }
-
-    @XmlElement(name = "broadcaster", required=true)
-    @JsonProperty("broadcasters")
-//    @JsonSerialize(using = BroadcasterListToJson.class, include = JsonSerialize.Inclusion.NON_EMPTY)
-    public List<Broadcaster> getBroadcasters() {
-        return broadcasters;
-
-    }
-
-    public void setBroadcasters(final List<Broadcaster> broadcasters) {
-        this.broadcasters = broadcasters;
-
-    }
-
-    @XmlElement(name = "portal")
-    @JsonProperty("portal")
-    public Portal getPortal() {
-        return portal;
-    }
-
-    public void setPortal(Portal portal) {
-        this.portal = portal;
-    }
 
     @XmlElement(name = "title", required = true)
     @JsonProperty("title")

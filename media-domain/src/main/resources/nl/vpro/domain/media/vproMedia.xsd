@@ -159,7 +159,6 @@
       <xs:enumeration value="MOVIE"/>
       <xs:enumeration value="TRAILER"/>
       <xs:enumeration value="CLIP"/>
-      <xs:enumeration value="STRAND"/>
       <xs:enumeration value="TRACK"/>
       <xs:enumeration value="SEGMENT"/>
       <xs:enumeration value="VISUALRADIO"/>
@@ -287,9 +286,9 @@
       </xs:element>
       <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="intentions" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="targetGroups" type="targetGroupsType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="source" type="xs:string" minOccurs="0"/>
       <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1093,6 +1092,13 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="14">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of age 12 and up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="16">
         <xs:annotation>
           <xs:documentation>
@@ -1100,10 +1106,24 @@
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="18">
+        <xs:annotation>
+          <xs:documentation>
+            Suitable for people of age 18 and up.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="ALL">
         <xs:annotation>
           <xs:documentation>
             Suitable for people of all ages.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NOT_YET_RATED">
+        <xs:annotation>
+          <xs:documentation>
+            Not yet rated
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -1253,7 +1273,7 @@
       <xs:enumeration value="RTVD">
         <xs:annotation>
           <xs:documentation>
-            RTV Drenthe tv.
+            RTV Drenthe.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2761,13 +2781,6 @@
         <xs:annotation>
           <xs:documentation>
             Radio Noord.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="RTVD">
-        <xs:annotation>
-          <xs:documentation>
-            RTV Drenthe radio.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>

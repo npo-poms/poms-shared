@@ -41,6 +41,7 @@
       <xs:element name="relation" type="tns:relationUpdateType" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type" type="page:pageTypeEnum" use="required"/>
+    <xs:attribute name="workflow" type="page:pageWorkflow"/>
     <xs:attribute name="url" type="xs:string" use="required"/>
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="lastPublished" type="xs:dateTime"/>

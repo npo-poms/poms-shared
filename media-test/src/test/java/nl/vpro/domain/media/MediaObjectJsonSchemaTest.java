@@ -4,8 +4,8 @@
  */
 package nl.vpro.domain.media;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.json.test.JSONAssert;
 
 import java.io.*;
 import java.time.*;
@@ -17,12 +17,12 @@ import java.util.stream.Stream;
 import org.apache.commons.io.IOUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.*;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
@@ -38,7 +38,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import static nl.vpro.domain.media.MediaTestDataBuilder.group;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Roelof Jan Koekoek
@@ -69,7 +69,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withSubtitles().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -81,7 +81,7 @@ public class MediaObjectJsonSchemaTest {
             .build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -91,7 +91,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -102,7 +102,7 @@ public class MediaObjectJsonSchemaTest {
             .publishStop(Instant.ofEpochSecond(2 * 60 * 60)).build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -112,7 +112,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().mergedTo(program().mid("MERGE_TARGET").build()).build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withCrids().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withBroadcasters().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -145,7 +145,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withPortalRestrictions().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -185,7 +185,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
 
     }
 
@@ -276,7 +276,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withDescriptions().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -286,7 +286,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withGenres().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -310,7 +310,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withTags().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -320,7 +320,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withPortals().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -330,7 +330,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withDuration().build();
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -347,7 +347,7 @@ public class MediaObjectJsonSchemaTest {
         program.getMemberOf().first().setAdded(Instant.EPOCH);
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -362,7 +362,7 @@ public class MediaObjectJsonSchemaTest {
         program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -440,7 +440,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -453,7 +453,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
         Jackson2TestUtil.roundTripAndSimilar(location, "{\"programUrl\":\"2\",\"avAttributes\":{\"avFileFormat\":\"UNKNOWN\"},\"owner\":\"BROADCASTER\",\"creationDate\":1,\"workflow\":\"FOR_PUBLICATION\"}");
     }
 
@@ -468,7 +468,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -480,7 +480,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -492,7 +492,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -504,7 +504,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -516,7 +516,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -527,7 +527,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -540,7 +540,7 @@ public class MediaObjectJsonSchemaTest {
 
         String actual = toJson(program);
 
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
     }
 
 
@@ -550,7 +550,7 @@ public class MediaObjectJsonSchemaTest {
         Group group = group().id(100L).lean().build();
 
         String actual = toJson(group);
-        JSONAssert.assertEquals(expected, actual);
+        assertJsonEquals(expected, actual);
 
 
     }
@@ -990,5 +990,10 @@ public class MediaObjectJsonSchemaTest {
         StringWriter writer = new StringWriter();
         Jackson2Mapper.INSTANCE.writeValue(writer, javaObject);
         return writer.toString();
+    }
+
+    @SneakyThrows
+    private void assertJsonEquals(String expected, String actual) {
+        JSONAssert.assertEquals(expected, actual, JSONCompareMode.STRICT);
     }
 }

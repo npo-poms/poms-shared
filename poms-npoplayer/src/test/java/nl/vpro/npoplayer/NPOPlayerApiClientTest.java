@@ -28,7 +28,7 @@ public class NPOPlayerApiClientTest {
     }
 
     @Test
-    public void testGetRestService() throws Exception {
+    public void testGetRestService() {
         log.info("{}", client);
         NPOPlayerApiResponse response = client.getRestService().getVideo("KN_1688939", NPOPlayerApiRequest.builder()
             .id("eenid")
@@ -42,7 +42,7 @@ public class NPOPlayerApiClientTest {
     }
 
     @Test
-    public void testGetRestServiceWithTopSpin() throws Exception {
+    public void testGetRestServiceWithTopSpin() {
         NPOPlayerApiResponse response = client.getRestService().getVideoWithTopspin("KN_1688939", NPOPlayerApiRequest.builder()
             .id("eenid")
             .startAt(10)

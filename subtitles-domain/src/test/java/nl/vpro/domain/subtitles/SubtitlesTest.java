@@ -105,4 +105,14 @@ public class SubtitlesTest {
             "}");
 
     }
+
+    @Test
+
+    public void guessFormat() {
+        Subtitles subtitles = Subtitles.builder()
+            .value(getClass().getResourceAsStream("/WO_NPO_14933889.vtt"))
+            .build();
+
+        assertThat(subtitles.getContent().getFormat()).isEqualTo(SubtitlesFormat.WEBVTT);
+    }
 }

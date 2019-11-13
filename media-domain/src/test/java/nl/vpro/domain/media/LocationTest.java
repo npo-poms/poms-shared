@@ -24,7 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import nl.vpro.domain.media.support.OwnerType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import nl.vpro.theory.ObjectTest;
+import nl.vpro.test.theory.ObjectTest;
 import nl.vpro.validation.PomsValidatorGroup;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -19,12 +19,12 @@ public class NEPSAMAuthenticatorITest {
 
 
     @Test
-    public void authenticate() throws IOException {
+    public void authenticate() {
 
         NEPSAMAuthenticator authenticator = new NEPSAMAuthenticator(
             "npo_poms",
             System.getProperty("password"),
-            "https://api.samgcloud.nepworldwide.nl/v2/"
+            "https://api.samgcloud.nepworldwide.nl/"
         );
 
         authenticator.get();

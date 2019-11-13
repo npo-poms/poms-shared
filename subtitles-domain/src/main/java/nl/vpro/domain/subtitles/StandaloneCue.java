@@ -89,8 +89,19 @@ public class StandaloneCue extends Cue {
 
     @XmlTransient
     public String getId() {
-        return getParent() + "\t" + getType() + "\t" + getLanguage() + "\t" + getSequence();
+        return getParent() + "\t" + getType() + "\t" + getLanguage().toLanguageTag() + "\t" + getSequence();
         //return getParent() + "_" + getType() + "_" + getLocale() + "_" + getSequence();
+    }
+
+    public static CueId parseId(String id) {
+        String[] split = id.split("\t", 4);
+        return new CueId(SubtitlesId.builder()
+            .mid(split[0])
+            .type(SubtitlesType.valueOf(split[1]))
+            .language(Locale.forLanguageTag(split[2]))
+            .build(),
+            Integer.parseInt(split[3]));
+
     }
     @XmlTransient
     public SubtitlesId getSubtitlesId() {

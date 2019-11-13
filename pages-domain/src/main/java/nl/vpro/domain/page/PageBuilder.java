@@ -2,23 +2,22 @@ package nl.vpro.domain.page;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
-import nl.vpro.domain.classification.ClassificationService;
-import nl.vpro.domain.classification.Term;
-import nl.vpro.domain.classification.TermNotFoundException;
+import nl.vpro.domain.classification.*;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.page.update.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.BroadcasterService;
+
+;
 
 /**
  * @author Michiel Meeuwissen
@@ -73,6 +72,12 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
 
     public PB type(PageType pt) {
         page.setType(pt);
+        return self;
+    }
+
+
+    public PB workflow(PageWorkflow workflow) {
+        page.setWorkflow(workflow);
         return self;
     }
 
@@ -227,7 +232,6 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         return broadcasters(Arrays.asList(broadcasters));
     }
 
-    @SuppressWarnings("unchecked")
     public PB broadcasters(List<Broadcaster> broadcasters) {
         page.setBroadcasters(broadcasters);
         return self;
@@ -239,7 +243,6 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
 
 
 
-    @SuppressWarnings("unchecked")
     public PB embeds(Embed... embeds) {
         return embeds(Arrays.asList(embeds));
     }
@@ -436,7 +439,6 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         return new DefaultPageBuilder(page);
     }
 
-    @SuppressWarnings("unchecked")
     public PB example() {
         return
             title("Groot brein in klein dier")

@@ -5,42 +5,25 @@
  */
 package nl.vpro.domain.media.support;
 
-import java.util.List;
+import java.util.*;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.Displayable;
 import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.media.MediaObject;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 
 /**
- * <p>The workflow status for publishable items.
- * <p/>
- * <p>The following schema fragment specifies the expected content contained within this class.
- * <p/>
- * <pre>
- * &lt;simpleType name="workflowEnumType">
- *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="DRAFT"/>
- *     &lt;enumeration value="FOR_APPROVAL"/>
- *     &lt;enumeration value="PUBLISHED"/>
- *     &lt;enumeration value="REFUSED"/>
- *     &lt;enumeration value="DELETED"/>
- *     &lt;enumeration value="MERGED"/>
- *   &lt;/restriction>
- * &lt;/simpleType>
- * </pre>
- *
+ * <p>The workflow status for publishable items.</p>
  * @author arne
  * @author roekoe
- * @version $Id$
  */
 @XmlEnum
 @XmlType(name = "workflowEnumType", namespace = Xmlns.SHARED_NAMESPACE)
@@ -48,14 +31,33 @@ import static java.util.Arrays.asList;
 @JsonDeserialize(using = Workflow.Deserializer.class)
 public enum Workflow implements Displayable {
 
+    /**
+     * Will be completely ignored by publishers. Will not be published, will not be revoked.
+     * Handy for debugging, to mute all objects besides the one you're interested in.
+     */
+    IGNORE("Genegeerd"),
+
+    /**
+     * The object is not yet published, but should be considered for publication. This probably is a new object.
+     */
     @XmlEnumValue("FOR PUBLICATION")
     FOR_PUBLICATION("Voor publicatie"),
 
+    /**
+     * The object is already published, but something has been changed, and it needs to be published again.
+     */
     @XmlEnumValue("FOR REPUBLICATION")
     FOR_REPUBLICATION("Wordt gepubliceerd"),
 
     PUBLISHED("Gepubliceerd"),
 
+    /**
+     * The object is merged with another object. An object will get this status when it is published for the last time.
+     *
+     * Used only on {@link MediaObject}s.
+     *
+     * Normal users should not see these objects, but should be directed to the object {@link MediaObject#getMergedTo()}
+     */
     MERGED("Samengevoegd"),
 
     /**
@@ -66,9 +68,8 @@ public enum Workflow implements Displayable {
     PARENT_REVOKED("Programma ingetrokken"),
 
     /**
-     * Set when a publishStop date has expired and an entity is revoked. This state is nether set by the end-user.
-     * Setting this state directly without an expired publishStop is useless, because an entity will be republished
-     * anyhow.
+     * Set when a publishStop date has expired and an entity is revoked. This state is not set by the end-user.
+     * Setting this state directly without an expired publishStop is useless, because an entity will be republished anyhow.
      */
     REVOKED("Ingetrokken"),
 
@@ -84,44 +85,51 @@ public enum Workflow implements Displayable {
      */
     DELETED("Verwijderd");
 
-    public static final List<Workflow> WITH_MEDIA_ACTIVATION = asList(
+    public static final List<Workflow> WITH_MEDIA_ACTIVATION = unmodifiableList(asList(
         FOR_PUBLICATION,
         PARENT_REVOKED,
-        REVOKED);
+        REVOKED
+    ));
 
 
 
-    public static final List<Workflow> PUBLICATIONS = asList(
+    public static final List<Workflow> PUBLICATIONS = unmodifiableList(asList(
         PUBLISHED,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    );
+    ));
 
-    public static final List<Workflow> DELETES = asList(
+    public static final List<Workflow> DELETES = unmodifiableList(asList(
         FOR_DELETION,
         DELETED
-    );
+    ));
 
 
-    public static final List<Workflow> PUBLISHED_AS_DELETED = asList(
+    public static final List<Workflow> PUBLISHED_AS_DELETED = unmodifiableList(asList(
         FOR_DELETION,
         DELETED,
         MERGED,
         PARENT_REVOKED
-    );
+    ));
 
-    public static final List<Workflow> REVOKES = asList(
+    public static final List<Workflow> REVOKES = unmodifiableList(asList(
         FOR_DELETION,
         DELETED,
         REVOKED,
         MERGED
-    );
+    ));
+    public static final List<Workflow> REVOKES_OR_IGNORE;
+    static {
+        List<Workflow> list = new ArrayList<>(REVOKES);
+        list.add(Workflow.IGNORE);
+        REVOKES_OR_IGNORE = unmodifiableList(list);
+    }
 
-    public static final List<Workflow> NEEDWORK = asList(
+    public static final List<Workflow> NEEDWORK = unmodifiableList(asList(
         FOR_DELETION,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    );
+    ));
 
     private final String description;
 

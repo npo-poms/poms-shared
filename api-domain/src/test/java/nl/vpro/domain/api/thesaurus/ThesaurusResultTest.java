@@ -21,7 +21,7 @@ public class ThesaurusResultTest {
             "  \"offset\" : 0,\n" +
             "  \"max\" : 10,\n" +
             "  \"items\" : [ {\n" +
-            "    \"objectType\" : \"person\",\n" +
+            "    \"objectType\" : \"person\"\n" +
             "  }, {\n" +
             "    \"objectType\" : \"geographicname\"\n" +
             "  } ]\n" +

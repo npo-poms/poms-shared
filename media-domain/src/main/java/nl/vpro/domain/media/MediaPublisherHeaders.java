@@ -28,6 +28,7 @@ public interface MediaPublisherHeaders {
     @Slf4j
     enum Destination implements Displayable {
         ElasticSearch("NPO Frontend API"),
+        ElasticSearch_previous("NPO Frontend API (a previous ES-deployment)"),
         TVVOD("TvVOD"),
         PROJECTM("Project M")
         ;
