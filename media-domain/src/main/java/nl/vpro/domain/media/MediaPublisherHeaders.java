@@ -56,7 +56,7 @@ public interface MediaPublisherHeaders {
             if (destinations == null) {
                 return null;
             }
-            return toStringArray(destinations.toArray(new Destination[destinations.size()]));
+            return toStringArray(destinations.toArray(new Destination[0]));
         }
 
         public static Destination[] arrayOf(String destination) {
