@@ -7,6 +7,8 @@ package nl.vpro.domain;
 import java.util.Locale;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.LocalizedString;
 
@@ -34,6 +36,7 @@ public interface Displayable {
      * Returns the plural of the display name, if implemented. Otherwise {@link Optional#empty()}
      * @since 5.11
      */
+
     default Optional<LocalizedString> getPluralDisplayName(Locale locale) {
         return Optional.empty();
     }
@@ -55,7 +58,7 @@ public interface Displayable {
     default Optional<String> getIcon() {
         return Optional.empty();
     }
-      /**
+    /**
      * An url for an icon associated with this displayable object.
      *
      * It may be that this to be interpreted relative to the current 'context path'.
@@ -64,6 +67,7 @@ public interface Displayable {
         return Optional.empty();
     }
 
+    @JsonIgnore
     default boolean display() {
         return true;
     }
