@@ -87,4 +87,8 @@ public class MediaForm extends AbstractMediaForm implements SortableForm, Predic
         sortFields.add(order);
     }
 
+    public boolean hasSearches() {
+        return getSearches() != null && getSearches().hasSearches();
+    }
+
 }
