@@ -10,6 +10,8 @@ import java.time.Instant;
 import java.util.Base64;
 import java.util.function.Supplier;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
@@ -53,8 +55,14 @@ public class NEPSAMAuthenticator implements Supplier<String> {
     ) {
         this.loginRequest = new LoginRequest(username, password);
         this.baseUrl = baseUrl;
-
     }
+
+    @PostConstruct
+    public void log() {
+        log.info("Authenticating with {}", this.baseUrl);
+    }
+
+
 
 
     @Override

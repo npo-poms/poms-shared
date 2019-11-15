@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
@@ -64,6 +65,10 @@ public class NEPSAMServiceImpl implements NEPSAMService {
         this.noDrmProfile = noDrmProfile == null ? this.noDrmProfile: noDrmProfile;
     }
 
+    @PostConstruct
+    public void log() {
+        log.info("Connecting with {}", this.baseUrl);
+    }
 
 
     @Override
