@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:media:subtitles:2009" xmlns:shared="urn:vpro:shared:2009" xmlns:subtitles="urn:vpro:media:subtitles:2009" xmlns:tns="urn:vpro:media:subtitles:2009" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:import namespace="urn:vpro:shared:2009" schemaLocation="urn:vpro:shared:2009.xsd"/>
+
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace"/>
+
+  <xs:element name="subtitles" type="tns:subtitlesType"/>
+
+  <xs:complexType name="subtitlesType">
+    <xs:sequence>
+      <xs:element name="content" type="tns:subtitlesContentType"/>
+    </xs:sequence>
+    <xs:attribute name="mid" type="xs:string" use="required"/>
+    <xs:attribute name="offset" type="xs:duration"/>
+    <xs:attribute name="creationDate" type="xs:dateTime"/>
+    <xs:attribute name="lastModified" type="xs:dateTime"/>
+    <xs:attribute name="type" type="shared:subtitlesTypeEnum"/>
+    <xs:attribute ref="xml:lang"/>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+    <xs:attribute name="workflow" type="shared:subtitlesWorkflowEnum"/>
+    <xs:attribute name="cueCount" type="xs:int"/>
+  </xs:complexType>
+
+  <xs:complexType name="subtitlesContentType">
+    <xs:simpleContent>
+      <xs:extension base="xs:base64Binary">
+        <xs:attribute name="format" type="tns:subtitlesFormatEnum"/>
+        <xs:attribute name="charset" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:simpleType name="subtitlesFormatEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="WEBVTT"/>
+      <xs:enumeration value="TT888"/>
+      <xs:enumeration value="EBU"/>
+      <xs:enumeration value="SRT"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

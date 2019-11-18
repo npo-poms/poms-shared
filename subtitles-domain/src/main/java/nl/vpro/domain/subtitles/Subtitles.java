@@ -115,7 +115,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    @XmlTransient
+    @XmlAttribute
     @NotNull
     @Getter
     @Setter
@@ -123,7 +123,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    @XmlTransient
+    @XmlAttribute
     @NotNull
     @Getter
     @Setter

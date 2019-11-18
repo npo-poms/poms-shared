@@ -7,6 +7,8 @@
 
 
 # poms-shared
-The java domain classes used by NPO Frontend API, POMS Backend and other POMS projects
+The java domain classes used by NPO Frontend API, POMS Backend and other POMS projects.
+
+These are also used by the API clients.
 
 See also [poms parent](https://github.com/npo-poms/poms-parent)
