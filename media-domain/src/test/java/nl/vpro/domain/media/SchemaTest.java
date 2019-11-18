@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.xml.bind.JAXBException;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.Xmlns;
 import nl.vpro.domain.media.search.*;
@@ -15,6 +15,8 @@ import nl.vpro.domain.media.support.Workflow;
 import nl.vpro.domain.media.update.*;
 import nl.vpro.domain.media.update.action.MoveAction;
 import nl.vpro.domain.media.update.collections.XmlCollection;
+import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.domain.subtitles.SubtitlesWorkflow;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 
@@ -34,7 +36,7 @@ import nl.vpro.test.util.jaxb.AbstractSchemaTest;
 public class SchemaTest extends AbstractSchemaTest {
 
 
-    @BeforeClass
+    @BeforeAll
     public static void generateXSDs() throws JAXBException, IOException {
         context = generate(
             // media
@@ -149,11 +151,18 @@ public class SchemaTest extends AbstractSchemaTest {
         testMediaEnum("targetGroupEnum", TargetGroupType.class);
     }
 
-
-
     @Test
     public void testWorkflow() {
         testSharedEnum("workflowEnumType", Workflow.class);
+    }
+
+    @Test
+    public void testSubtitlesType() {
+        testSharedEnum("subtitlesTypeEnum", SubtitlesType.class);
+    }
+    @Test
+    public void testSubtitlesWorkflow() {
+        testSharedEnum("subtitlesWorkflowEnum", SubtitlesWorkflow.class);
     }
     protected <T extends Enum<T>> void testMediaEnum(String enumTypeName, Class<T> enumClass)  {
         testEnum("/nl/vpro/domain/media/vproMedia.xsd", enumTypeName, enumClass);
