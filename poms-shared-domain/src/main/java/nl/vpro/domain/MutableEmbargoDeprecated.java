@@ -2,7 +2,8 @@ package nl.vpro.domain;
 
 import java.util.Date;
 
-import nl.vpro.util.DateUtils;
+import static nl.vpro.util.DateUtils.toDate;
+import static nl.vpro.util.DateUtils.toInstant;
 
 /**
  * Some deprecated methods related to {@link Embargo}s
@@ -14,21 +15,21 @@ public interface MutableEmbargoDeprecated<T extends MutableEmbargoDeprecated<T>>
 
     @Deprecated
     default Date getPublishStart() {
-        return DateUtils.toDate(getPublishStartInstant());
+        return toDate(getPublishStartInstant());
     }
 
     @Deprecated
     default void setPublishStart(Date publishStart) {
-        setPublishStartInstant(DateUtils.toInstant(publishStart));
+        setPublishStartInstant(toInstant(publishStart));
     }
     @Deprecated
     default Date getPublishStop() {
-        return DateUtils.toDate(getPublishStopInstant());
+        return toDate(getPublishStopInstant());
     }
 
     @Deprecated
     default void setPublishStop(Date publishStop) {
-        setPublishStopInstant(DateUtils.toInstant(publishStop));
+        setPublishStopInstant(toInstant(publishStop));
     }
 
 
