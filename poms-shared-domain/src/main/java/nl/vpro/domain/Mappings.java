@@ -198,7 +198,7 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
 
     protected void generateXSDs() throws IOException, JAXBException {
         Class<?>[] classes = getClasses();
-        log.info("Generating xsds in {}", Arrays.asList(classes), getTempDir());
+        log.info("Generating xsds {} in {}", Arrays.asList(classes), getTempDir());
         JAXBContext context = JAXBContext.newInstance(classes);
         context.generateSchema(new SchemaOutputResolver() {
             @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -273,6 +273,13 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         if (file.exists() && TimeUnit.SECONDS.convert(file.lastModified(), TimeUnit.MILLISECONDS) < TimeUnit.SECONDS.convert(startTime, TimeUnit.MILLISECONDS)) {
             log.info("Deleting {}, it is old {} < {}", file, file.lastModified(), startTime);
             file.delete();
+        }
+    }
+
+    public static void reset() {
+        KNOWN_LOCATIONS.clear();
+        for (File f : getTempDir().listFiles()) {
+            f.delete();
         }
     }
 }

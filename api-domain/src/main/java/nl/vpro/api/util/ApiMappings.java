@@ -41,7 +41,6 @@ public class ApiMappings extends Mappings {
     @Inject
     public ApiMappings(@Named("${poms.location}") String pomsLocation) {
         this.pomsLocation = pomsLocation == null ? URI.create("https://poms.omroep.nl/") : URI.create(pomsLocation);
-        String scheme = this.pomsLocation.getScheme();
         generateDocumentation = true;
         log.info("Using poms location {}", this.pomsLocation);
     }
@@ -57,7 +56,6 @@ public class ApiMappings extends Mappings {
         MAPPING.put(Xmlns.PAGE_CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.page.Filter.class});
         MAPPING.put(Xmlns.CONSTRAINT_NAMESPACE, new Class[]{nl.vpro.domain.constraint.Operator.class});
         MAPPING.put(Xmlns.MEDIA_SUBTITLES_NAMESPACE, new Class[]{Subtitles.class, SubtitlesType.class});
-        Class[] schemes = Scheme.classesAndNew();
         MAPPING.put(GTAA_NAMESPACE, Scheme.classes());
 
         Xmlns.fillLocationsAtPoms(KNOWN_LOCATIONS, pomsLocation.toString());

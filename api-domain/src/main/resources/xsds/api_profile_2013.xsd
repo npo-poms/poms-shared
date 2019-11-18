@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0" targetNamespace="urn:vpro:api:profile:2013" xmlns="urn:vpro:api:profile:2013" xmlns:shared="urn:vpro:shared:2009" xmlns:tns="urn:vpro:api:profile:2013" xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:media="urn:vpro:api:constraint:media:2013" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0"
+           targetNamespace="urn:vpro:api:profile:2013" xmlns="urn:vpro:api:profile:2013"
+           xmlns:shared="urn:vpro:shared:2009"
+           xmlns:page="urn:vpro:api:constraint:page:2013" xmlns:media="urn:vpro:api:constraint:media:2013"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xs:import namespace="urn:vpro:api:constraint:media:2013" schemaLocation="api_constraint_media_2013.xsd"/>
 
