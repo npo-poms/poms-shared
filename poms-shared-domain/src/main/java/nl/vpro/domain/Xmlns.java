@@ -21,11 +21,14 @@ import org.xml.sax.SAXException;
  */
 @Slf4j
 public final class Xmlns {
-    public static final String MEDIA_NAMESPACE = "urn:vpro:media:2009";
-    public static final URL    MEDIA_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/vproMedia.xsd");
 
+    public static final String MEDIA_XSD_NAME = "vproMedia.xsd";
+    public static final String MEDIA_NAMESPACE = "urn:vpro:media:2009";
+    public static final URL    MEDIA_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/" + MEDIA_XSD_NAME);
+
+    public static final String SHARED_XSD_NAME = "vproShared.xsd";
     public static final String SHARED_NAMESPACE = "urn:vpro:shared:2009";
-    public static final URL    SHARED_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/vproShared.xsd");
+    public static final URL    SHARED_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/" + SHARED_XSD_NAME);
 
     public static final String UPDATE_NAMESPACE = "urn:vpro:media:update:2009";
     public static final URL    UPDATE_XSD       = Xmlns.class.getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd");
@@ -106,13 +109,14 @@ public final class Xmlns {
 
     }
 
+
     public static void fillLocationsAtPoms(Map<String, URI> map, String pomsLocation) {
         if (pomsLocation == null) {
             throw new IllegalArgumentException();
         }
         //map.put(XMLConstants.XML_NS_URI, URI.create(pomsLocation + "schema/xml.xsd"));
-        map.put(MEDIA_NAMESPACE, URI.create(pomsLocation + "schema/vproMedia.xsd"));
-        map.put(SHARED_NAMESPACE, URI.create(pomsLocation + "schema/vproShared.xsd"));
+        map.put(MEDIA_NAMESPACE, URI.create(pomsLocation + "schema/" + MEDIA_XSD_NAME));
+        map.put(SHARED_NAMESPACE, URI.create(pomsLocation + "schema/" + SHARED_XSD_NAME));
         map.put(SEARCH_NAMESPACE, URI.create(pomsLocation + "schema/search/vproMediaSearch.xsd"));
         map.put(UPDATE_NAMESPACE, URI.create(pomsLocation + "schema/update/vproMediaUpdate.xsd"));
 
