@@ -5,7 +5,10 @@
  */
 package nl.vpro.domain.media.support;
 
+import lombok.Getter;
+
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.*;
 
@@ -35,21 +38,21 @@ public enum Workflow implements Displayable {
      * Will be completely ignored by publishers. Will not be published, will not be revoked.
      * Handy for debugging, to mute all objects besides the one you're interested in.
      */
-    IGNORE("Genegeerd"),
+    IGNORE("Genegeerd", false),
 
     /**
      * The object is not yet published, but should be considered for publication. This probably is a new object.
      */
     @XmlEnumValue("FOR PUBLICATION")
-    FOR_PUBLICATION("Voor publicatie"),
+    FOR_PUBLICATION("Voor publicatie", false),
 
     /**
      * The object is already published, but something has been changed, and it needs to be published again.
      */
     @XmlEnumValue("FOR REPUBLICATION")
-    FOR_REPUBLICATION("Wordt gepubliceerd"),
+    FOR_REPUBLICATION("Wordt gepubliceerd", false),
 
-    PUBLISHED("Gepubliceerd"),
+    PUBLISHED("Gepubliceerd", true),
 
     /**
      * The object is merged with another object. An object will get this status when it is published for the last time.
@@ -58,32 +61,32 @@ public enum Workflow implements Displayable {
      *
      * Normal users should not see these objects, but should be directed to the object {@link MediaObject#getMergedTo()}
      */
-    MERGED("Samengevoegd"),
+    MERGED("Samengevoegd", true),
 
     /**
      * Set when a publishStop date has expired on a parent. For example: a Segment is obtains this workflow when it's
      * parent Program is revoked.
      */
     @XmlEnumValue("PARENT REVOKED")
-    PARENT_REVOKED("Programma ingetrokken"),
+    PARENT_REVOKED("Programma ingetrokken", true),
 
     /**
      * Set when a publishStop date has expired and an entity is revoked. This state is not set by the end-user.
      * Setting this state directly without an expired publishStop is useless, because an entity will be republished anyhow.
      */
-    REVOKED("Ingetrokken"),
+    REVOKED("Ingetrokken", true),
 
     /**
      * Schedule an entity for deletion.
      */
     @XmlEnumValue("FOR DELETION")
-    FOR_DELETION("Wordt verwijderd"),
+    FOR_DELETION("Wordt verwijderd", false),
 
     /**
      * If someone explicitly deleted an entity than it becomes 'deleted'. This implies revocation from publication.
      * Normal users should not see these entities.
      */
-    DELETED("Verwijderd");
+    DELETED("Verwijderd", true);
 
     public static final List<Workflow> WITH_MEDIA_ACTIVATION = unmodifiableList(asList(
         FOR_PUBLICATION,
@@ -109,8 +112,11 @@ public enum Workflow implements Displayable {
         FOR_DELETION,
         DELETED,
         MERGED,
-        PARENT_REVOKED
+        PARENT_REVOKED,
+        REVOKED
     ));
+
+    public static final List<Workflow> AS_DELETED_IN_API = PUBLISHED_AS_DELETED.stream().filter(Workflow::isPublishable).collect(Collectors.toList());
 
     public static final List<Workflow> REVOKES = unmodifiableList(asList(
         FOR_DELETION,
@@ -133,8 +139,15 @@ public enum Workflow implements Displayable {
 
     private final String description;
 
-    Workflow(String description) {
+    /**
+     * Wether this workflow can appear in the ES.
+     */
+    @Getter
+    private final boolean publishable;
+
+    Workflow(String description, boolean publishable) {
         this.description = description;
+        this.publishable = publishable;
     }
 
     public String getDescription() {
