@@ -622,8 +622,9 @@ public class MediaFormBuilder extends AbstractFormBuilder {
                     .creationDates(
                         DateRangeMatcherList.builder().value(
                             DateRangeMatcher.builder()
-                            .begin(LocalDateTime.of(2010, 1, 1, 12, 0)
-                                .atZone(Schedule.ZONE_ID).toInstant())
+                                .begin(LocalDateTime.of(2010, 1, 1, 12, 0)
+                                    .atZone(Schedule.ZONE_ID).toInstant()
+                                )
                             .build()
                         ).build()
                     )

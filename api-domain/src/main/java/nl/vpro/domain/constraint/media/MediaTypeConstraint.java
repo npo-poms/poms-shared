@@ -38,6 +38,7 @@ public class MediaTypeConstraint extends EnumConstraint<MediaType, MediaObject> 
     @Override
     protected Collection<MediaType> getEnumValues(MediaObject input) {
         return asCollection(input.getMediaType());
-
     }
+
+
 }

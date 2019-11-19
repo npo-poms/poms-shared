@@ -104,5 +104,8 @@ public class DateRangeMatcher extends RangeMatcher<Instant> implements Predicate
         public Builder localBegin(LocalDateTime localDateTime) {
             return begin(localDateTime.atZone(Schedule.ZONE_ID).toInstant());
         }
+        public Builder localEnd(LocalDateTime localDateTime) {
+            return end(localDateTime.atZone(Schedule.ZONE_ID).toInstant());
+        }
     }
 }

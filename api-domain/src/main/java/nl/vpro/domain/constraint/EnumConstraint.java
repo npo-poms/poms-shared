@@ -136,5 +136,10 @@ public abstract class EnumConstraint<S extends Enum<S>, T> implements TextConstr
         }
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ":" + getESPath() + "=" + getXmlValue();
+    }
+
 
 }
