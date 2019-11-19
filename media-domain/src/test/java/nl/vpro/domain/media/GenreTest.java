@@ -36,7 +36,7 @@ public class GenreTest {
     }
 
     @Test
-    public void testGetEpgTerms() throws Exception {
+    public void testGetEpgTerms() {
         Genre genre = new Genre("3.0.1.2.10");
 
         JAXB.marshal(genre, System.out);

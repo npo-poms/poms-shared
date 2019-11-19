@@ -2,7 +2,7 @@ package nl.vpro.domain.subtitles;
 
 import java.time.Duration;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
@@ -15,7 +15,7 @@ public class CueTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Cue cue = Cue.builder().mid("MID_1234")
             .sequence(10)
             .identifier("cue tien")
@@ -37,7 +37,7 @@ public class CueTest {
 
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         Cue cue = Cue.forMid("MID_1234")
             .sequence(10)
             .identifier("cue 10")

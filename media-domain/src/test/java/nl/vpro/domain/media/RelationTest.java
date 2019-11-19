@@ -128,7 +128,7 @@ public class RelationTest extends ComparableTest<Relation> {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Jackson2TestUtil.roundTripAndSimilarAndEquals( new Relation(
                 56L,
                 new RelationDefinition("LABEL", "VPRO", "Record label"),

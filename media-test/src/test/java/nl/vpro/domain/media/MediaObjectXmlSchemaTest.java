@@ -114,7 +114,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testAvailableSubtitles() throws Exception {
+    public void testAvailableSubtitles() {
         String expected = "<program embeddable=\"true\" hasSubtitles=\"true\" mid=\"MID_000001\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <availableSubtitles language=\"nl\" type=\"CAPTION\"/>\n" +
             "    <availableSubtitles language=\"nl\" type=\"TRANSLATION\"/>\n" +
@@ -144,7 +144,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testHasSubtitles() throws Exception {
+    public void testHasSubtitles() {
         String expected = "<program embeddable=\"true\" hasSubtitles=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <availableSubtitles language=\"nl\" type=\"CAPTION\"/>\n" +
             "    <credits/>\n" +
@@ -254,7 +254,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testRegions() throws Exception {
+    public void testRegions() {
 
 
         JAXBTestUtil.roundTripAndSimilar(program().lean().withGeoRestrictions().build(),
@@ -349,7 +349,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testGenres() throws IOException, SAXException {
+    public void testGenres() {
         Program program = program().withGenres().withFixedDates().build();
 
         Program result = JAXBTestUtil.roundTripAndSimilar(program, "<program embeddable=\"true\" sortDate=\"2015-03-06T00:00:00+01:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2015-03-06T00:00:00+01:00\" lastModified=\"2015-03-06T01:00:00+01:00\" publishDate=\"2015-03-06T02:00:00+01:00\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
@@ -471,7 +471,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testRelations() throws Exception {
+    public void testRelations() {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00+01:00\" creationDate=\"1970-01-01T01:00:00+01:00\" urn=\"urn:vpro:media:program:100\" workflow=\"PUBLISHED\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <credits/>\n" +
@@ -586,7 +586,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testScheduleEventsWithNet() throws Exception {
+    public void testScheduleEventsWithNet() {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" sortDate=\"1970-01-01T01:00:00+01:00\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <credits/>\n" +
@@ -811,7 +811,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testWithLocations() throws Exception {
+    public void testWithLocations() {
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" urn=\"urn:vpro:media:program:100\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <credits/>\n" +
@@ -881,7 +881,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void testWithDescendantOf() throws IOException, SAXException {
+    public void testWithDescendantOf() {
 
         Program program = program().lean().withDescendantOf().build();
         JAXBTestUtil.roundTripAndSimilar(program, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
@@ -980,7 +980,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    public void roundTripWithPrediction() throws IOException, SAXException {
+    public void roundTripWithPrediction() {
         String example =
             "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" type=\"BROADCAST\" avType=\"VIDEO\" embeddable=\"true\" mid=\"VPWON_1199058\" sortDate=\"2013-04-09T15:25:00+02:00\" workflow=\"FOR PUBLICATION\" creationDate=\"2013-03-17T06:48:59.719+01:00\" lastModified=\"2018-02-07T11:58:43.578+01:00\" publishDate=\"2015-01-08T17:42:19.202+01:00\" urn=\"urn:vpro:media:program:23197206\">\n" +
                 "  <broadcaster id=\"VPRO\">VPRO</broadcaster>\n" +
@@ -999,7 +999,7 @@ public class MediaObjectXmlSchemaTest {
 
 
     @Test
-    public void programWithEverything() throws IOException, SAXException {
+    public void programWithEverything() throws IOException {
         Program withEverything = MediaTestDataBuilder.program().withEverything()
             .build();
         JAXBTestUtil.roundTripAndSimilar(withEverything, getClass().getResourceAsStream("/program-with-everything.xml"));

@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SegmentUpdateTest extends MediaUpdateTest {
 
     @Test
-    public void testCreate() throws Exception {
+    public void testCreate() {
         SegmentUpdate update = SegmentUpdate.create();
         update.setVersion(null);
         update.setStart(Duration.ofMillis(100));

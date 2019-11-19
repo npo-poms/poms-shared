@@ -46,7 +46,7 @@ public class GTAAConceptIdResolver extends TypeIdResolverBase {
         return JsonTypeInfo.Id.CUSTOM;
     }
     @Override
-    public JavaType typeFromId(DatabindContext context, String objectType)  throws IOException {
+    public JavaType typeFromId(DatabindContext context, String objectType) {
         return TypeFactory.defaultInstance().constructSimpleType(Scheme.ofJsonObjectType(objectType).getImplementation(), new JavaType[0]);
     }
 }

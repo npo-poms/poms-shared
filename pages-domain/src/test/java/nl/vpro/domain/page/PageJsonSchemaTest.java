@@ -54,7 +54,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testPortalWithSection() throws Exception {
+    public void testPortalWithSection() {
         Portal portal = new Portal("VPRONL", "http://vpro.nl", "VPRO");
         Section section = new Section("/tegenlicht", "Tegenlicht");
         portal.setSection(section);
@@ -123,7 +123,7 @@ public class PageJsonSchemaTest {
 
 
     @Test
-    public void testRelations() throws Exception {
+    public void testRelations() {
         Page news = builder.relationText(RelationDefinition.of("CINEMA_DIRECTOR", "VPRO"), "Stanley Kubrick").build();
 
         news = Jackson2TestUtil.roundTripAndSimilar(news, "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"relations\":[{\"value\":\"Stanley Kubrick\",\"type\":\"CINEMA_DIRECTOR\",\"broadcaster\":\"VPRO\"}]}");
@@ -133,7 +133,7 @@ public class PageJsonSchemaTest {
     }
 
     @Test
-    public void testDateFields() throws Exception {
+    public void testDateFields() {
         Instant date = LocalDateTime.of(LocalDate.of(2016, 4, 25), LocalTime.NOON).atZone(Schedule.ZONE_ID).toInstant();
         Page news = builder.creationDate(date).lastModified(date.plus(5, ChronoUnit.MINUTES)).lastPublished(date.plus(10, ChronoUnit.MINUTES)).build();
         news = Jackson2TestUtil.roundTripAndSimilar(news, "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"sortDate\":1461578400000,\"creationDate\":1461578400000,\"lastModified\":1461578700000,\"lastPublished\":1461579000000}");

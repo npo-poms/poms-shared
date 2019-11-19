@@ -34,7 +34,7 @@ public class PageBuilderTest {
 
 
     @Test
-    public void testSortDate() throws Exception {
+    public void testSortDate() {
         Page page = PageBuilder.page(PageType.ARTICLE).publishStart(TEST_INSTANT).build();
         String test = "<local:page publishStart=\"2016-04-18T12:00:00+02:00\" sortDate=\"2016-04-18T12:00:00+02:00\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\"/>\n";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
@@ -43,7 +43,7 @@ public class PageBuilderTest {
 
     }
     @Test
-    public void testSortDateJson() throws Exception {
+    public void testSortDateJson() {
         Page page = PageBuilder.page(PageType.ARTICLE).publishStart(TEST_INSTANT).build();
         String test = "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"sortDate\":1460973600000,\"publishStart\":1460973600000}";
         Page result = Jackson2TestUtil.roundTripAndSimilar(page, test);
@@ -53,7 +53,7 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testCreationDateJson() throws Exception {
+    public void testCreationDateJson() {
         Page page = PageBuilder.page(PageType.ARTICLE).creationDate(TEST_INSTANT).build();
         String test = "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"sortDate\":1460973600000,\"creationDate\":1460973600000}";
         Page result = Jackson2TestUtil.roundTripAndSimilar(page, test);
@@ -110,7 +110,7 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testGenres() throws IOException, SAXException {
+    public void testGenres() {
         Page page = PageBuilder.page(PageType.ARTICLE).url("http://www.vpro.nl").genres(classificationService.getTerm("3.0.1.1.4")).build();
         String test = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<local:page url=\"http://www.vpro.nl\" type=\"ARTICLE\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:local=\"uri:local\">\n" +
@@ -134,7 +134,7 @@ public class PageBuilderTest {
 
 
     @Test
-    public void testLastPublished() throws IOException, SAXException {
+    public void testLastPublished() {
         Page page = PageBuilder.page(PageType.ARTICLE).lastPublished(Instant.EPOCH).build();
         String test = "<local:page xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\" lastPublished=\"1970-01-01T01:00:00+01:00\" type=\"ARTICLE\"/>";
         Page result = JAXBTestUtil.roundTripAndSimilar(page, test);
@@ -142,7 +142,7 @@ public class PageBuilderTest {
     }
 
     @Test
-    public void testLastPublishedJson() throws Exception {
+    public void testLastPublishedJson() {
         Page page = PageBuilder.page(PageType.ARTICLE).lastPublished(Instant.EPOCH).build();
         String test = "{\"objectType\":\"page\",\"type\":\"ARTICLE\",\"lastPublished\":0}";
         Page result = Jackson2TestUtil.roundTripAndSimilar(page, test);

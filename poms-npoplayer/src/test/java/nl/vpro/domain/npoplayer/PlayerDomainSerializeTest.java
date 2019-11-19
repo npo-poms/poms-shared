@@ -12,7 +12,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 public class PlayerDomainSerializeTest {
 
     @Test
-    public void testRequest() throws Exception {
+    public void testRequest() {
         PlayerRequest playerRequest = PlayerRequest.builder()
             .mid("MID")
             .id("324242jl222")
@@ -37,7 +37,7 @@ public class PlayerDomainSerializeTest {
     }
 
     @Test
-    public void testResponse() throws Exception {
+    public void testResponse() {
         PlayerResponse playerResponse = PlayerResponse.builder()
             .mid("eenmid")
             .token("b8a1458f-2ece-488f-8178-c0511dec39a8")

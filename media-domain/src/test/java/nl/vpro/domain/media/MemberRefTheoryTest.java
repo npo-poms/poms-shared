@@ -79,7 +79,7 @@ public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
     }
 
     @Test
-    public void testTypeRoundTrip() throws IOException, SAXException {
+    public void testTypeRoundTrip() {
         MemberRef memberRef = new MemberRef();
         memberRef.setType(CLIP);
         MemberRef result = JAXBTestUtil.roundTripAndSimilar(memberRef, "<memberRef highlighted=\"false\" type=\"CLIP\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");

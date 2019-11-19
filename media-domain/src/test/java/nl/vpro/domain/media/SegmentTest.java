@@ -18,7 +18,7 @@ public class SegmentTest {
 
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         String xml = "<segment midRef=\"RBX_NTR_2648108\" type=\"SEGMENT\" urnRef=\"urn:vpro:media:program:83538010\" avType=\"AUDIO\" embeddable=\"true\" mid=\"RBX_NTR_4965178\" sortDate=\"2013-11-01T04:36:35.076+01:00\" creationDate=\"2016-11-01T04:36:35.076+01:00\" lastModified=\"2016-11-01T04:36:35.105+01:00\" publishDate=\"2016-11-01T04:42:23.506+01:00\" urn=\"urn:vpro:media:segment:83538015\" workflow=\"PUBLISHED\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
             "    <crid>crid://item.radiobox2/372578</crid>\n" +
             "    <broadcaster id=\"NTR\">NTR</broadcaster>\n" +
@@ -44,7 +44,7 @@ public class SegmentTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Segment segment = MediaBuilder.segment()
             .start(Duration.ofMillis(100))
             .creationDate(LocalDateTime.of(2017, 5, 9, 14, 0))
@@ -76,7 +76,7 @@ public class SegmentTest {
     }
 
     @Test
-    public void sortDate() throws Exception {
+    public void sortDate() {
         Program program = MediaBuilder.program(ProgramType.BROADCAST)
             .mid("parentMid")
             .creationDate(LocalDateTime.of(2017, 10, 24, 0, 0))

@@ -31,7 +31,7 @@ public class StreamingStatusTest {
 
 
     @Test
-    public void testMarshalToXml() throws IOException, SAXException {
+    public void testMarshalToXml() {
         StreamingStatusImpl status = new StreamingStatusImpl();
         status.setWithDrm(StreamingStatus.Value.ONLINE);
 

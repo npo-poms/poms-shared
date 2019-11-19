@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PageUpdateBuilderTest {
 
     @Test
-    public void testPage() throws Exception {
+    public void testPage() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page, "<pageUpdate:page type=\"ARTICLE\" url=\"http://www.vpro.nl\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\"/>");
         assertThat(result.getType()).isEqualTo(PageType.ARTICLE);
@@ -51,7 +51,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testPortal() throws Exception {
+    public void testPortal() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").portal(new PortalUpdate("VproNL", "http://www.vpro.nl")).build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page,
             "<pageUpdate:page type=\"ARTICLE\" url=\"http://www.vpro.nl\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
@@ -147,7 +147,7 @@ public class PageUpdateBuilderTest {
 
 
     @Test
-    public void testGenres() throws Exception {
+    public void testGenres() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl").genres("3.0.1.1.11").build();
         PageUpdate result = JAXBTestUtil.roundTripAndSimilar(page,
             "<pageUpdate:page type=\"ARTICLE\" url=\"http://www.vpro.nl\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:pageUpdate=\"urn:vpro:pages:update:2013\">\n" +
@@ -160,7 +160,7 @@ public class PageUpdateBuilderTest {
 
 
     @Test
-    public void testDates() throws Exception {
+    public void testDates() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www/vpro.nl")
             .publishStart(TEST_INSTANT)
             .creationDate(TEST_INSTANT.minus(1, ChronoUnit.DAYS))
@@ -174,7 +174,7 @@ public class PageUpdateBuilderTest {
     }
 
     @Test
-    public void testDatesJson() throws Exception {
+    public void testDatesJson() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www/vpro.nl")
             .publishStart(TEST_INSTANT)
             .creationDate(TEST_INSTANT.minus(1, ChronoUnit.DAYS))

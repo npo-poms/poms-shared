@@ -13,7 +13,7 @@ public class NEPItemizeRequestTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         NEPItemizeRequest request = NEPItemizeRequest.builder()
             .starttime("2018-05-09T16:03:01.121")
             .endtime("2018-05-09T16:53:01.122")

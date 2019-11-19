@@ -17,7 +17,7 @@ public class MediaFormTest {
 
 
     @Test
-    public void xml() throws IOException, SAXException {
+    public void xml() {
         MediaForm form = MediaForm.builder()
             .asc(MediaSortField.lastModified)
             .max(1000)
@@ -35,7 +35,7 @@ public class MediaFormTest {
     }
 
     @Test
-    public void builder() throws IOException, SAXException {
+    public void builder() {
         MediaForm form = MediaForm.builder()
             .broadcasters(null)
             .locationsCount(IntegerRange.builder().start(0L).stop(0L, true).build())

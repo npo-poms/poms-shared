@@ -56,7 +56,7 @@ public class AuthorizedDurationTest {
     }
 
     @Test
-    public void xml() throws IOException, SAXException {
+    public void xml() {
         AuthorizedDuration result = JAXBTestUtil.roundTripAndSimilar(AuthorizedDuration.of(186010, ChronoUnit.MILLIS),
             "<local:authorizedDuration xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">P0DT0H3M6.010S</local:authorizedDuration>"
         );
@@ -65,7 +65,7 @@ public class AuthorizedDurationTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         AuthorizedDuration result =  Jackson2TestUtil.roundTripAndSimilarValue(
             AuthorizedDuration.of(185010, ChronoUnit.MILLIS),
             "185010"

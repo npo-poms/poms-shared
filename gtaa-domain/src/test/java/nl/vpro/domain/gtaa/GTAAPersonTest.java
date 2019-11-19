@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class GTAAPersonTest {
     @Test
-    public void json() throws Exception {
+    public void json() {
         GTAAPerson person = GTAAPerson
             .builder()
             .givenName("Pietje")
@@ -61,7 +61,7 @@ public class GTAAPersonTest {
 
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         GTAAPerson person = GTAAPerson.builder()
             .scopeNotes(Arrays.asList("bla"))
             .knownAs(Arrays.asList(Names.builder().familyName("pietje").build()))

@@ -11,7 +11,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 public class WorkflowExecutionRequestTest {
 
     @Test
-    public void testWorkflowExecutionRequest() throws Exception{
+    public void testWorkflowExecutionRequest() {
         List<String> platforms = new ArrayList<>();
         platforms.add("internetvod");
         platforms.add("tvvod");

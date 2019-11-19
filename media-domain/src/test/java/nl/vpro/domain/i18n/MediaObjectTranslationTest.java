@@ -17,7 +17,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class MediaObjectTranslationTest {
 
     @Test
-    public void xml() throws IOException, SAXException {
+    public void xml() {
         MediaObjectTranslation trans = new MediaObjectTranslation("MID_1234", Locale.ENGLISH);
         trans.setCreationInstant(Instant.EPOCH);
         trans.setMainTitle("bla bla");
@@ -29,7 +29,7 @@ public class MediaObjectTranslationTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         MediaObjectTranslation trans = new MediaObjectTranslation("MID_1234", Locale.ENGLISH);
         trans.setCreationInstant(Instant.EPOCH);
         trans.setMainTitle("bla bla");

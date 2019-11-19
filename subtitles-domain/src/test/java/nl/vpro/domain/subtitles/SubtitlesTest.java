@@ -56,7 +56,7 @@ public class SubtitlesTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Subtitles subtitles = Subtitles.webvtt("VPRO_1234",
             Duration.ofMillis(2 * 60 * 1000), NETHERLANDISH,
             "WEBVTT\n" +

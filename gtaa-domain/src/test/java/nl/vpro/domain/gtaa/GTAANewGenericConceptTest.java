@@ -13,7 +13,7 @@ public class GTAANewGenericConceptTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
 
         GTAANewGenericConcept person =
             GTAANewGenericConcept.builder()
@@ -34,7 +34,7 @@ public class GTAANewGenericConceptTest {
 
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         GTAANewGenericConcept person = GTAANewGenericConcept
             .builder()
             .scheme(Scheme.maker)

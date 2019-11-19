@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RDFTest {
 
     @Test
-    public void testJaxbBinding() throws Exception {
+    public void testJaxbBinding() {
         String in = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:openskos=\"http://openskos.org/xmlns#\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:dcterms=\"http://purl.org/dc/terms/\" \t\topenskos:numFound=\"122468\"\n" +
             "      openskos:start=\"0\"\n" +
@@ -51,7 +51,7 @@ public class RDFTest {
     }
 
     @Test
-    public void testXmlLangOnLabel() throws Exception {
+    public void testXmlLangOnLabel() {
         RDF rdf = new RDF();
         rdf.setDescriptions(Collections.singletonList(
             Description
@@ -72,7 +72,7 @@ public class RDFTest {
     }
 
     @Test
-    public void testJaxbBindingWithXLLabel() throws Exception {
+    public void testJaxbBindingWithXLLabel() {
         String in = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
             "<rdf:RDF xmlns:skosxl='http://www.w3.org/2008/05/skos-xl#' xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:openskos=\"http://openskos.org/xmlns#\" xmlns:skos=\"http://www.w3.org/2004/02/skos/core#\" xmlns:dcterms=\"http://purl.org/dc/terms/\" \t\topenskos:numFound=\"122468\"\n" +
             "      openskos:start=\"0\"\n" +

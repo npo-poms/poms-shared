@@ -82,7 +82,7 @@ public class PageUpdateTest {
     private static RelationDefinition DEF = new RelationDefinition("FOO", "VPRO");
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         PageUpdate page = PageUpdateBuilder
             .article("http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html")
             .portal(PortalUpdate

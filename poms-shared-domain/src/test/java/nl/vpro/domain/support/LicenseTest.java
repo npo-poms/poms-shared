@@ -44,14 +44,14 @@ public class LicenseTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Jackson2TestUtil.roundTripAndSimilar(new A(License.CC_BY), "{\n" +
             "  \"license\" : \"CC_BY\"\n" +
             "}");
     }
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         JAXBTestUtil.roundTripAndSimilar(new A(License.CC_BY), "<a>\n" +
             "    <license>CC_BY</license>\n" +
             "</a>\n");

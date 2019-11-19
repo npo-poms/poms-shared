@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DeleteResultTest {
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         DeleteResult result = DeleteResult.builder()
             .future(CompletableFuture.completedFuture("bla"))
             .count(100)
@@ -37,7 +37,7 @@ public class DeleteResultTest {
 
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         DeleteResult result = DeleteResult.builder()
             .future(CompletableFuture.completedFuture("bla"))
             .count(100)

@@ -25,13 +25,13 @@ public class MemberRefTest {
         ref.setHighlighted(true);
     }
     @Test
-    public void xml() throws IOException, SAXException {
+    public void xml() {
 
         JAXBTestUtil.roundTripAndSimilar(ref, "<memberRef added=\"2017-05-24T16:30:00+02:00\" highlighted=\"true\" midRef=\"MID_123\" index=\"1\" type=\"SERIES\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>");
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Jackson2TestUtil.roundTripAndSimilar(ref, "{\n" +
             "  \"midRef\" : \"MID_123\",\n" +
             "  \"type\" : \"SERIES\",\n" +

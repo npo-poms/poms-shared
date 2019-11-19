@@ -53,7 +53,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetType() throws Exception {
+    public void testGetType() {
         GroupUpdate update = GroupUpdate.create();
         update.setVersion(null);
         update.setType(GroupType.SEASON);
@@ -68,7 +68,7 @@ public class GroupUpdateTest extends MediaUpdateTest {
     }
 
     @Test
-    public void testGetPoSeriesID() throws Exception {
+    public void testGetPoSeriesID() {
         GroupUpdate update = GroupUpdate.create();
         update.setVersion(null);
         update.setPoSeriesID("VPWON_333");

@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ScheduleEventTest {
 
     @Test
-    public void testTitles() throws IOException, SAXException {
+    public void testTitles() {
 
         ScheduleEvent e = new ScheduleEvent();
         e.setTitle("bbb", TextualType.ABBREVIATION);
@@ -36,7 +36,7 @@ public class ScheduleEventTest {
     }
 
     @Test
-    public void testJson() throws Exception {
+    public void testJson() {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)
@@ -52,7 +52,7 @@ public class ScheduleEventTest {
     }
 
     @Test
-    public void testJsonPublisher() throws Exception {
+    public void testJsonPublisher() {
         ScheduleEvent e = ScheduleEvent.builder()
             .localStart(of(2017, 8, 28, 15, 51))
             .channel(Channel.NED1)

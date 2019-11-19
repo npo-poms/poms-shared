@@ -2,15 +2,12 @@ package nl.vpro.domain.subtitles;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static nl.vpro.domain.subtitles.SubtitlesUtilTest.getSubtitles;
 import static nl.vpro.domain.subtitles.SubtitlesUtilTest.getSubtitlesAr;

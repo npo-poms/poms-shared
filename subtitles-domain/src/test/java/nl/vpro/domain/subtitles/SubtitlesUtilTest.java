@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static nl.vpro.i18n.Locales.DUTCH;
 import static org.assertj.core.api.Assertions.assertThat;

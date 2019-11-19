@@ -55,7 +55,7 @@ public class MediaObjectJsonSchemaTest {
 
 
     @Test
-    public void testMid() throws Exception {
+    public void testMid() {
         String expected = "{\"objectType\":\"program\",\"mid\":\"MID_000001\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[], \"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().mid("MID_000001").build();
@@ -149,7 +149,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testRegions() throws Exception {
+    public void testRegions() {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"regions\":[\"NL\",\"BENELUX\",\"TVVOD:NL\"],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withGeoRestrictions().build();
@@ -566,7 +566,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithLocations() throws Exception {
+    public void testWithLocations() {
         String expected = "{\n" +
             "  \"objectType\" : \"program\",\n" +
             "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
@@ -784,7 +784,7 @@ public class MediaObjectJsonSchemaTest {
 	}
 
     @Test
-    public void testWithPersons() throws Exception {
+    public void testWithPersons() {
         Program program = program().lean().withPersons().build();
 
         Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
@@ -915,7 +915,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void withMemberOf() throws Exception {
+    public void withMemberOf() {
         Program program = Program.builder()
             .creationDate(LocalDateTime.of(2019, 8, 20, 21, 0))
 
@@ -943,7 +943,7 @@ public class MediaObjectJsonSchemaTest {
     }
 
     @Test
-    public void testWithRelations() throws Exception {
+    public void testWithRelations() {
 
         Program program = program().lean().withRelations().build();
 

@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ImageUpdateTest {
 
     @Test
-    public void xml() throws IOException, SAXException {
+    public void xml() {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
@@ -43,7 +43,7 @@ public class ImageUpdateTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
          ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setSourceName("placeholdit");
@@ -65,7 +65,7 @@ public class ImageUpdateTest {
 
 
     @Test
-    public void xmlBackwards() throws IOException, SAXException {
+    public void xmlBackwards() {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
         update.setLicense(License.CC_BY);
         update.setCredits(getClass().getName());
@@ -83,7 +83,7 @@ public class ImageUpdateTest {
 
 
     @Test
-    public void xmlLicense() throws IOException, SAXException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public void xmlLicense() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         ImageUpdate update = new ImageUpdate(ImageType.PICTURE, "title", null, new ImageLocation("http://placehold.it/150/7735a"));
 
         // If you insist an invalid License can be created. It won't be valid though!

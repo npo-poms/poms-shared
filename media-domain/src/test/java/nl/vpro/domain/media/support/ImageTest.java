@@ -37,7 +37,7 @@ public class ImageTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Image image = new Image();
         image.setSource(null);
         image.setImageUri("urn:vpro:image:123");
@@ -60,7 +60,7 @@ public class ImageTest {
     }
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         Image image = new Image();
         image.setSource(null);
         image.setImageUri("urn:vpro:image:123");

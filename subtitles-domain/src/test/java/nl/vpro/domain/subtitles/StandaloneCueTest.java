@@ -2,7 +2,7 @@ package nl.vpro.domain.subtitles;
 
 import java.util.Locale;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
@@ -13,7 +13,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 public class StandaloneCueTest {
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         StandaloneCue cue = new StandaloneCue(Cue.forMid("MID_123")
             .content("bla bla")
             .identifier("cue 1")

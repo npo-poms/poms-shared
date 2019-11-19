@@ -38,7 +38,7 @@ public class PortalTest {
     }
 
     @Test
-    public void testXmlBinding() throws Exception {
+    public void testXmlBinding() {
         target.setUrl("http://tegenlicht.vpro.nl/");
         target.setDisplayName("Wetenschap24");
         target.setSection(new Section("/noorderlicht", "Noorderlicht"));

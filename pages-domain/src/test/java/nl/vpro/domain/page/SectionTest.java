@@ -56,7 +56,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testXmlBinding() throws Exception {
+    public void testXmlBinding() {
         target.setPath("/tegenlicht");
         target.setDisplayName("Tegenlicht");
         Portal portal = new Portal();
@@ -72,7 +72,7 @@ public class SectionTest {
     }
 
     @Test
-    public void testJsonBinding() throws Exception {
+    public void testJsonBinding() {
         target.setPath("/tegenlicht");
         target.setDisplayName("Tegenlicht");
         Portal portal = new Portal();

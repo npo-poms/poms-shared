@@ -16,7 +16,7 @@ public class TranscodeStatusTest {
 
 
     @Test
-    public void xml() throws IOException, SAXException {
+    public void xml() {
         TranscodeStatus status = TranscodeStatus
             .builder()
             .mid("mid_123")

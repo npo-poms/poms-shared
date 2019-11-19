@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class GeoRestrictionTest {
     @Test
-    public void xml() throws Exception {
+    public void xml() {
 
         GeoRestriction restriction = GeoRestriction.builder()
             .region(Region.EUROPE)

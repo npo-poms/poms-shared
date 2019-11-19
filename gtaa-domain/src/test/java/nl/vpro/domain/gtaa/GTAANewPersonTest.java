@@ -17,7 +17,7 @@ public class GTAANewPersonTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
 
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").scopeNote("test").build();
 
@@ -42,7 +42,7 @@ public class GTAANewPersonTest {
     }
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         GTAANewPerson person = GTAANewPerson.builder().familyName("Puk").givenName("Pietje").scopeNote("test").build();
         JAXBTestUtil.roundTripAndSimilar(person, "<gtaa:newPerson   xmlns:gtaa=\"urn:vpro:gtaa:2017\" >\n" +
             "    <gtaa:givenName>Pietje</gtaa:givenName>\n" +

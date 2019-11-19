@@ -50,7 +50,7 @@ public class CueSettings {
     public static class Adapter extends XmlAdapter<String, CueSettings> {
 
         @Override
-        public CueSettings unmarshal(String v) throws Exception {
+        public CueSettings unmarshal(String v) {
             if (v == null) {
                 return null;
             }
@@ -59,7 +59,7 @@ public class CueSettings {
         }
 
         @Override
-        public String marshal(CueSettings v) throws Exception {
+        public String marshal(CueSettings v) {
             if (v == null || StringUtils.isEmpty(v.value)) {
                 return null;
             }

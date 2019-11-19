@@ -16,7 +16,7 @@ public class TranscodeRequestTest {
 
 
     @Test
-    public void xml() throws IOException, SAXException {
+    public void xml() {
         TranscodeRequest request = TranscodeRequest.builder()
             .mid("MID_123")
             .encryption(Encryption.DRM)

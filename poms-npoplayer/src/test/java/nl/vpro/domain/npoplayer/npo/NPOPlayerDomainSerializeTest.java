@@ -9,7 +9,7 @@ import org.junit.Test;
  */
 public class NPOPlayerDomainSerializeTest {
     @Test
-       public void testJSON() throws Exception {
+       public void testJSON() {
            NPOPlayerApiRequest request = NPOPlayerApiRequest.builder()
                .id("eenid")
                .stylesheet("https://www.vpro.nl/flitsend.css")
@@ -60,7 +60,7 @@ public class NPOPlayerDomainSerializeTest {
 
 
     @Test
-    public void testResponse() throws Exception {
+    public void testResponse() {
         NPOPlayerApiResponse playerResponse = NPOPlayerApiResponse.builder()
             .token("b8a1458f-2ece-488f-8178-c0511dec39a8")
             .embedUrl("https://start-player.npo.nl/embed/b8a1458f-2ece-488f-8178-c0511dec39a8")

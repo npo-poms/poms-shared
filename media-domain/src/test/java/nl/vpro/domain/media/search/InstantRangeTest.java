@@ -71,7 +71,7 @@ public class InstantRangeTest {
         assertThat(range.test(Instant.ofEpochMilli(201))).isTrue();
 
     }
-    
+
     @Test
     public void unmarshallBackwards() throws IOException {
         InstantRange range = Jackson2Mapper.getInstance().readValue("{\n" +
@@ -84,7 +84,7 @@ public class InstantRangeTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Jackson2TestUtil.roundTripAndSimilar(
             new InstantRange(
                 InstantRange.Value.builder().value(Instant.ofEpochMilli(100)).build(),
@@ -119,7 +119,7 @@ public class InstantRangeTest {
 
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         JAXBTestUtil.roundTripAndSimilar(new InstantRange(Instant.ofEpochMilli(100), Instant.ofEpochMilli(200)), "<local:instantRange xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:s=\"urn:vpro:media:search:2012\" xmlns:update=\"urn:vpro:media:update:2009\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:local=\"uri:local\">\n" +
             "    <s:start>1970-01-01T01:00:00.100+01:00</s:start>\n" +
             "    <s:stop>1970-01-01T01:00:00.200+01:00</s:stop>\n" +

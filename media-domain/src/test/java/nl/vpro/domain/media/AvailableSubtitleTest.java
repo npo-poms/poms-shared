@@ -12,7 +12,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class AvailableSubtitleTest {
 
     @Test
-    public void test() throws IOException, SAXException {
+    public void test() {
         JAXBTestUtil.roundTripAndSimilar(AvailableSubtitles.builder().language(Locale.ENGLISH).type(SubtitlesType.TRANSLATION).build(),
             "<local:availableSubtitles language=\"en\" type=\"TRANSLATION\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\"/>");
     }

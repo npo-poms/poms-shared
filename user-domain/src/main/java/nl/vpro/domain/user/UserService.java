@@ -28,7 +28,7 @@ import static nl.vpro.mdc.MDCConstants.ONBEHALFOF;
 
 public interface UserService<T extends User> {
 
-    <S> S doAs(String principalId, Callable<S> handler) throws Exception;
+    <S> S doAs(String principalId, Callable<S> handler);
 
     T get(String id);
 
