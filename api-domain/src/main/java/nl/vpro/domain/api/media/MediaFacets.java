@@ -7,10 +7,7 @@ package nl.vpro.domain.api.media;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.DateRangeFacets;
 import nl.vpro.domain.api.DurationRangeFacets;
@@ -92,6 +89,40 @@ public class MediaFacets {
             || ageRatings != null
             || contentRatings != null
             || geoLocations != null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        appendToString(builder, "titles", titles);
+        appendToString(builder, "types", types);
+        appendToString(builder, "avTypes", avTypes);
+        appendToString(builder, "sortDates", sortDates);
+        appendToString(builder, "broadcasters", broadcasters);
+        appendToString(builder, "genres", genres);
+        appendToString(builder, "tags", tags);
+        appendToString(builder, "durations", durations);
+        appendToString(builder, "descendantOf", descendantOf);
+        appendToString(builder, "episodeOf", episodeOf);
+        appendToString(builder, "memberOf", memberOf);
+        appendToString(builder, "relations", relations);
+        appendToString(builder, "memberOf", memberOf);
+        appendToString(builder, "ageRatings", ageRatings);
+        appendToString(builder, "contentRatings", contentRatings);
+        appendToString(builder, "geoLocations", geoLocations);
+        appendToString(builder, "filter", filter);
+        builder.insert(0, "MediaFacet{");
+        builder.append("}");
+        return builder.toString();
+    }
+    private void appendToString(StringBuilder builder, String fieldName, Object value) {
+        if (value != null) {
+            if (builder.length() > 0){
+                builder.append(", ");
+            }
+            builder.append(fieldName).append("=").append(value);
+        }
+
     }
 
 }

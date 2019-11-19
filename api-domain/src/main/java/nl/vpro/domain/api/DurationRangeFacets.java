@@ -72,4 +72,13 @@ public class DurationRangeFacets<T extends AbstractSearch> extends AbstractFacet
     public void setFilter(T filter) {
         this.filter = filter;
     }
+
+    @Override
+    public String toString() {
+        return "DurationRangeFacets{" +
+            "ranges=" + ranges +
+            ", filter=" + filter +
+            '}';
+    }
 }
+

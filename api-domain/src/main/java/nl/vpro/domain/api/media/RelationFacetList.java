@@ -10,12 +10,10 @@ import lombok.Setter;
 import java.util.Iterator;
 import java.util.List;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.Valid;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -118,5 +116,14 @@ public class RelationFacetList extends AbstractFacet<MediaSearch> implements Sea
                 throw new UnsupportedOperationException("Unsupported");
             }
         };
+    }
+
+    @Override
+    public String toString() {
+        return "RelationFacetList{" +
+            "filter=" + filter +
+            ", subSearch=" + subSearch +
+            ", facets=" + facets +
+            '}';
     }
 }
