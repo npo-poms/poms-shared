@@ -22,7 +22,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 public class PageSearchResultTest {
 
     @Test
-    public void testJson() throws Exception {
+    public void testJson() {
         List<SearchResultItem<? extends Page>> list = new ArrayList<>();
         Page page = PageBuilder
             .page(PageType.ARTICLE)

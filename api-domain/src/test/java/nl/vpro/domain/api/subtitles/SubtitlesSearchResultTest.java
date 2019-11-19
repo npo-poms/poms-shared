@@ -20,7 +20,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class SubtitlesSearchResultTest {
 
     @Test
-    public void xml() throws IOException, SAXException {
+    public void xml() {
         StandaloneCue cue1 = StandaloneCue.standaloneBuilder().content("bla").type(SubtitlesType.CAPTION).start(Duration.ofSeconds(10)).build();
         SearchResultItem<StandaloneCue> item = new SearchResultItem<>(cue1);
         SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, 100);
@@ -34,7 +34,7 @@ public class SubtitlesSearchResultTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         StandaloneCue cue1 = StandaloneCue.standaloneBuilder().content("bla").type(SubtitlesType.CAPTION).start(Duration.ofSeconds(10)).build();
         SearchResultItem<StandaloneCue> item = new SearchResultItem<>(cue1);
         SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, 100);

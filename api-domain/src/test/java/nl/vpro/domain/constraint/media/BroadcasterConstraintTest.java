@@ -26,7 +26,7 @@ public class BroadcasterConstraintTest {
     }
 
     @Test
-    public void testGetStringValue() throws Exception {
+    public void testGetStringValue() {
         BroadcasterConstraint in = new BroadcasterConstraint("VPRO");
         BroadcasterConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:broadcasterConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">VPRO</local:broadcasterConstraint>");

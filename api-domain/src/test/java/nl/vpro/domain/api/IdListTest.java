@@ -32,14 +32,14 @@ public class IdListTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         IdList list = new IdList("a", "b");
         Jackson2TestUtil.roundTripAndSimilar(list, "[\"a\",\"b\"]");
 
     }
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         IdList list = new IdList("a", "b");
         JAXBTestUtil.roundTripAndSimilar(list, "<api:idList xmlns:api=\"urn:vpro:api:2013\" >\n" +
             "    <api:id>a</api:id>\n" +

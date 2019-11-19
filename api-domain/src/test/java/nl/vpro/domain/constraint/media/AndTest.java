@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AndTest {
 
     @Test
-    public void testAndBinding() throws Exception {
+    public void testAndBinding() {
         And in = new And(new And());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:and xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -31,7 +31,7 @@ public class AndTest {
     }
 
     @Test
-    public void testOrBinding() throws Exception {
+    public void testOrBinding() {
         And in = new And(new Or());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:and xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -42,7 +42,7 @@ public class AndTest {
     }
 
     @Test
-    public void testNotBinding() throws Exception {
+    public void testNotBinding() {
         And in = new And(new Not());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:and xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -53,7 +53,7 @@ public class AndTest {
     }
 
     @Test
-    public void testAvTypeBinding() throws Exception {
+    public void testAvTypeBinding() {
         And in = new And(new AvTypeConstraint());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:and xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -64,7 +64,7 @@ public class AndTest {
     }
 
     @Test
-    public void testAvFileFormatBinding() throws Exception {
+    public void testAvFileFormatBinding() {
         And in = new And(new AvFileFormatConstraint());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:and xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -75,7 +75,7 @@ public class AndTest {
     }
 
     @Test
-    public void testAvFileExtensionBinding() throws Exception {
+    public void testAvFileExtensionBinding() {
         And in = new And(new AVFileExtensionConstraint());
         And out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:and xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +

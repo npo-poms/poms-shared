@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PortalConstraintTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         PortalConstraint in = new PortalConstraint("VPRONL");
         PortalConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:portalConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">VPRONL</local:portalConstraint>\n");

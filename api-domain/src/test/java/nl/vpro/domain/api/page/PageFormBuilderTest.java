@@ -26,7 +26,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 public class PageFormBuilderTest {
 
     @Test
-    public void testForm() throws Exception {
+    public void testForm() {
         PageForm form = PageFormBuilder.form()
             .text(Match.SHOULD, "text")
             .sortDate(Instant.EPOCH, Instant.ofEpochMilli(1000))

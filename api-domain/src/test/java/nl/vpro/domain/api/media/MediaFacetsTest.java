@@ -25,7 +25,7 @@ public class MediaFacetsTest {
 
 
     @Test
-    public void testGetSortDateXml() throws Exception {
+    public void testGetSortDateXml() {
         MediaFacets in = new MediaFacets();
         in.setSortDates(new DateRangeFacets(
             DateRangePreset.THIS_WEEK,
@@ -123,7 +123,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetBroadcaster() throws Exception {
+    public void testGetBroadcaster() {
         MediaFacets in = new MediaFacets();
         in.setBroadcasters(new MediaFacet());
         MediaFacets out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -136,7 +136,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetGenre() throws Exception {
+    public void testGetGenre() {
         MediaFacets in = new MediaFacets();
         in.setGenres(new MediaSearchableTermFacet());
 
@@ -166,7 +166,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetTag() throws IOException, SAXException {
+    public void testGetTag() {
         MediaFacets in = new MediaFacets();
         in.setTags(new ExtendedMediaFacet());
 
@@ -182,7 +182,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetDurations() throws IOException, SAXException {
+    public void testGetDurations() {
         MediaFacets in = new MediaFacets();
         in.setDurations(new DurationRangeFacets(
             new DurationRangeInterval("YEAR")
@@ -200,7 +200,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetMediaSearchFromFacetXml() throws Exception {
+    public void testGetMediaSearchFromFacetXml() {
         MediaSearch search = new MediaSearch();
         search.setText(new SimpleTextMatcher("find me"));
 
@@ -220,7 +220,7 @@ public class MediaFacetsTest {
     }
 
     @Test
-    public void testGetMediaSearchFromFacetJson() throws Exception {
+    public void testGetMediaSearchFromFacetJson() {
         MediaSearch search = new MediaSearch();
         search.setText(new SimpleTextMatcher("find me"));
 

@@ -26,7 +26,7 @@ public class ScheduleEventSearchTest {
 
 
     @Test
-    public void testGetBeginXml() throws Exception {
+    public void testGetBeginXml() {
         Instant begin = Instant.EPOCH;
         Channel channel = Channel.NED3;
         ScheduleEventSearch in = new ScheduleEventSearch(channel, begin, null);
@@ -40,7 +40,7 @@ public class ScheduleEventSearchTest {
     }
 
     @Test
-    public void testGetEndXml() throws Exception {
+    public void testGetEndXml() {
         Instant end = Instant.EPOCH;
         Channel channel = Channel.NED3;
         ScheduleEventSearch in = ScheduleEventSearch.builder()

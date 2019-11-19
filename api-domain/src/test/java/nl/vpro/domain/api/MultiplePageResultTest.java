@@ -25,7 +25,7 @@ public class MultiplePageResultTest {
 
     }
     @Test
-    public void testXml() throws IOException, SAXException {
+    public void testXml() {
         MultiplePageResult list = new MultiplePageResult(Arrays.asList("http://vpro.nl/bla", "http://vpro.nl/foo"), Arrays.asList(new Page(PageType.PLAYER), null), null);
         JAXBTestUtil.roundTripAndSimilar(list, "<api:multiplePageResult total=\"2\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:items>\n" +

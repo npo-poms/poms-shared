@@ -70,7 +70,7 @@ public class InstantRangeMatcherTest extends RangeMatcherTest<Instant, DateRange
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         DateRangeMatcher rangeMatcher = DateRangeMatcher.builder()
             .begin(LocalDateTime.of(2017, 6, 24, 18, 0).atZone(Schedule.ZONE_ID).toInstant())
             .end(LocalDateTime.of(2017, 7, 24, 18, 0).atZone(Schedule.ZONE_ID).toInstant())

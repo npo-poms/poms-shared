@@ -26,7 +26,7 @@ public class NotTest {
     }
 
     @Test
-    public void testAndBinding() throws Exception {
+    public void testAndBinding() {
         Not in = new Not(new And());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -37,7 +37,7 @@ public class NotTest {
     }
 
     @Test
-    public void testOrBinding() throws Exception {
+    public void testOrBinding() {
         Not in = new Not(new Or());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -48,7 +48,7 @@ public class NotTest {
     }
 
     @Test
-    public void testNotBinding() throws Exception {
+    public void testNotBinding() {
         Not in = new Not(new Not());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -59,7 +59,7 @@ public class NotTest {
     }
 
     @Test
-    public void testAvTypeBinding() throws Exception {
+    public void testAvTypeBinding() {
         Not in = new Not(new AvTypeConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -70,7 +70,7 @@ public class NotTest {
     }
 
     @Test
-    public void testAvFileFormatBinding() throws Exception {
+    public void testAvFileFormatBinding() {
         Not in = new Not(new AvFileFormatConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -81,7 +81,7 @@ public class NotTest {
     }
 
     @Test
-    public void testAvFileExtensionBinding() throws Exception {
+    public void testAvFileExtensionBinding() {
         Not in = new Not(new AVFileExtensionConstraint());
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:not xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +

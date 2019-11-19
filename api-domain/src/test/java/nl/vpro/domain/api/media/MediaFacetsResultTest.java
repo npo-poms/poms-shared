@@ -15,7 +15,7 @@ public class MediaFacetsResultTest {
 
 
     @Test
-    public void getTitles() throws Exception {
+    public void getTitles() {
 
         MediaFacetsResult result = new MediaFacetsResult();
         result.setTitles(new ArrayList<>());

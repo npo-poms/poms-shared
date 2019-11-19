@@ -35,7 +35,7 @@ public class ThesaurusChangeTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         ThesaurusChange change =
             ThesaurusChange.builder()
                 .id("http://data.beeldengeluid.nl/gtaa/1672221")

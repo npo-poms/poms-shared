@@ -27,7 +27,7 @@ public class ScheduleEventTest {
 
     @Test
     //@Ignore("Fails for https://java.net/jira/browse/JAXB-1069")
-    public void testListMedia() throws Exception {
+    public void testListMedia() {
         nl.vpro.domain.media.ScheduleEvent mediaEvent;
         ApiScheduleEvent apiEvent;
 
@@ -64,7 +64,7 @@ public class ScheduleEventTest {
 
     @Test
     //@Ignore("Fails for https://java.net/jira/browse/JAXB-1069")
-    public void testGetMedia() throws Exception {
+    public void testGetMedia() {
         nl.vpro.domain.media.ScheduleEvent mediaEvent;
         ApiScheduleEvent apiEvent;
 

@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HasPredictionConstraintTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         HasPredictionConstraint in = new HasPredictionConstraint();
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:hasPredictionConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\"/>");

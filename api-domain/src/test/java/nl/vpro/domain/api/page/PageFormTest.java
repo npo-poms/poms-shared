@@ -178,7 +178,7 @@ public class PageFormTest {
     }
 
     @Test
-    public void testReferralsJson() throws Exception {
+    public void testReferralsJson() {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY)).build();
         String json = "{\"searches\":{\"referrals\":{\"types\":\"TOP_STORY\"}}}";
 
@@ -189,7 +189,7 @@ public class PageFormTest {
 
 
     @Test
-    public void testReferralsJsonShould() throws Exception {
+    public void testReferralsJsonShould() {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY, Match.SHOULD)).build();
         String json = "{\"searches\":{\"referrals\":{\"match\":\"SHOULD\",\"types\":\"TOP_STORY\"}}}";
 
@@ -200,7 +200,7 @@ public class PageFormTest {
 
 
     @Test
-    public void testReferralsXml() throws Exception {
+    public void testReferralsXml() {
         PageForm form = PageFormBuilder.form().referrals(AssociationSearch.of(LinkType.TOP_STORY)).build();
         String xml = "<api:pagesForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
@@ -220,7 +220,7 @@ public class PageFormTest {
     }
 
     @Test
-    public void getLinksJson() throws Exception {
+    public void getLinksJson() {
         PageForm form = PageFormBuilder.form().links(AssociationSearch.of(LinkType.TOP_STORY)).highlight(true).build();
         String json = "{\"searches\":{\"links\":{\"types\":\"TOP_STORY\"}},  \"highlight\" : true}";
 

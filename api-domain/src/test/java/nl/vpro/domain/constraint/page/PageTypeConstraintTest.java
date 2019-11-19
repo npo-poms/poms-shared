@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PageTypeConstraintTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         PageTypeConstraint in = new PageTypeConstraint(PageType.HOME);
         PageTypeConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:pageTypeConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">HOME</local:pageTypeConstraint>");

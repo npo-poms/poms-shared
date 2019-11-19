@@ -18,7 +18,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class ScheduleFormTest {
 
     @Test
-    public void adapter() throws IOException, SAXException {
+    public void adapter() {
         ScheduleForm form = new ScheduleForm();
         JAXBTestUtil.roundTripAndSimilar(form, "<api:scheduleForm xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\"/>");
     }

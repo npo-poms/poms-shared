@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HasImageConstraintTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         HasImageConstraint in = new HasImageConstraint();
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:hasImageConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\"/>");

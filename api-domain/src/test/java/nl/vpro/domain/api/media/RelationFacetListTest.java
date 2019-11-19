@@ -19,7 +19,7 @@ import static org.junit.Assert.assertNotNull;
 public class RelationFacetListTest {
 
     @Test
-    public void testJaxbBinding() throws Exception {
+    public void testJaxbBinding() {
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
         RelationFacet facet = new RelationFacet();
@@ -43,7 +43,7 @@ public class RelationFacetListTest {
     }
 
     @Test
-    public void testJsonBinding() throws Exception {
+    public void testJsonBinding() {
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO")));
         RelationFacet facet = new RelationFacet();
@@ -116,7 +116,7 @@ public class RelationFacetListTest {
 
 
     @Test
-    public void testSubSearch() throws Exception {
+    public void testSubSearch() {
         String example = "{\"broadcasters\":[\"VPRO\",{\"value\":\"EO\",\"match\":\"NOT\"}]}";
         RelationSearch subSearch = new RelationSearch();
         subSearch.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("EO", Match.NOT)));
@@ -125,7 +125,7 @@ public class RelationFacetListTest {
 
 
     @Test
-    public void testRelationFacet() throws Exception {
+    public void testRelationFacet() {
         String example = "{\"threshold\":0,\"sort\":\"VALUE_ASC\",\"max\":24,\"name\":\"myrelation\",\"subSearch\":{\"broadcasters\":[\"VPRO\",{\"value\":\"EO\",\"match\":\"NOT\"}]}}";
         RelationFacet facet  = new RelationFacet();
         facet.setThreshold(0);

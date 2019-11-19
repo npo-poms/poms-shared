@@ -16,7 +16,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class MediaSearchResultTest {
 
     @Test
-    public void toJson() throws Exception {
+    public void toJson() {
         List<SearchResultItem<? extends MediaObject>> list = Collections.emptyList();
         MediaSearchResult result = new MediaSearchResult(list, 0L, 10, 0L);
         MediaFacetsResult facets = new MediaFacetsResult();
@@ -34,7 +34,7 @@ public class MediaSearchResultTest {
 
 
     @Test
-    public void toXml() throws Exception {
+    public void toXml() {
         List<SearchResultItem<? extends MediaObject>> list = Collections.emptyList();
         MediaSearchResult result = new MediaSearchResult(list, 0L, 10, 0L);
         MediaFacetsResult facets = new MediaFacetsResult();

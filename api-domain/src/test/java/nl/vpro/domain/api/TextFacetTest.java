@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class TextFacetTest  {
     @Test
-    public void testGetThreshold() throws Exception {
+    public void testGetThreshold() {
         TextFacet in = new TextFacet();
         in.setThreshold(1111);
         TextFacet out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -34,7 +34,7 @@ public class TextFacetTest  {
     }
 
     @Test
-    public void testGetThreshold0Json() throws Exception {
+    public void testGetThreshold0Json() {
         TextFacet in = new TextFacet();
         in.setThreshold(0);
         TextFacet out = Jackson2TestUtil.roundTripAndSimilar(in,
@@ -56,7 +56,7 @@ public class TextFacetTest  {
     }
 
     @Test
-    public void testGetIncludeXml() throws IOException, SAXException {
+    public void testGetIncludeXml() {
         TextFacet in = new TextFacet();
         in.setInclude("3\\.0\\.1\\.[0-9]+");
         JAXBTestUtil.roundTripAndSimilar(in, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +

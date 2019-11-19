@@ -14,7 +14,7 @@ public class MultiplePageEntryTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         MultiplePageEntry entry = new MultiplePageEntry("bla", Page.builder().type(PageType.HOME).url("http://www.vpro.nl/bla").build());
 
         Jackson2TestUtil.roundTripAndSimilar(entry, "{\n" +

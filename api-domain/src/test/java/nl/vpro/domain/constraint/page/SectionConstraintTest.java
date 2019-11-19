@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class SectionConstraintTest {
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         SectionConstraint in = new SectionConstraint("cinema");
         SectionConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:sectionConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">cinema</local:sectionConstraint>\n");

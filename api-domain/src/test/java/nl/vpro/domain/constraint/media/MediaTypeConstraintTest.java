@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MediaTypeConstraintTest {
 
     @Test
-    public void testGetStringValue() throws Exception {
+    public void testGetStringValue() {
         MediaTypeConstraint in = new MediaTypeConstraint(MediaType.BROADCAST);
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:mediaTypeConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">BROADCAST</local:mediaTypeConstraint>");

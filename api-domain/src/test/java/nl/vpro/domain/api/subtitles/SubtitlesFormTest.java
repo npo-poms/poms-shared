@@ -15,7 +15,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class SubtitlesFormTest {
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         SubtitlesForm form = SubtitlesForm.builder()
             .searches(
                 SubtitlesSearch.builder().text(
@@ -33,7 +33,7 @@ public class SubtitlesFormTest {
     }
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         SubtitlesForm form = SubtitlesForm.builder()
             .searches(
                 SubtitlesSearch.builder().text(

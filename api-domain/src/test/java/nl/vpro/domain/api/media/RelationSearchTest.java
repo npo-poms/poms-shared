@@ -14,7 +14,7 @@ public class RelationSearchTest {
 
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         RelationSearch search = new RelationSearch();
         search.setBroadcasters(TextMatcherList.must(TextMatcher.not("VPRO")));
         Jackson2TestUtil.roundTripAndSimilarAndEquals(search, "{\n" +

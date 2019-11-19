@@ -53,7 +53,7 @@ public class TitleFacetListTest {
     }
 
     @Test
-    public void testJsonBinding() throws Exception {
+    public void testJsonBinding() {
 
 
         TitleFacetList rounded = Jackson2TestUtil.roundTripAndSimilar(list,
@@ -157,7 +157,7 @@ public class TitleFacetListTest {
 
 
     @Test
-    public void testJsonBindingBackwards() throws Exception {
+    public void testJsonBindingBackwards() {
         TitleFacetList backwards = new TitleFacetList();
         backwards.setMax(11);
         backwards.setSort(FacetOrder.COUNT_DESC);
@@ -180,7 +180,7 @@ public class TitleFacetListTest {
     }
 
     @Test
-    public void testXmlBinding() throws Exception {
+    public void testXmlBinding() {
 
         TitleFacetList rounded = JAXBTestUtil.roundTripAndSimilar(list,
             "<local:titleFacetList sort=\"COUNT_DESC\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\" xmlns:local=\"uri:local\">\n" +
@@ -199,7 +199,7 @@ public class TitleFacetListTest {
     }
 
     @Test
-    public void testSubSearch() throws Exception {
+    public void testSubSearch() {
         String example = "{\n" +
             "  \"value\" : \"a*\"\n" +
             "}";

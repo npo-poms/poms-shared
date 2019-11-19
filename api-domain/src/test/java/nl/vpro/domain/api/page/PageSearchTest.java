@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class PageSearchTest {
     @Test
-    public void testGetText() throws Exception {
+    public void testGetText() {
         PageSearch in = new PageSearch();
         in.setText(new SimpleTextMatcher("Title"));
         PageSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -154,7 +154,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testGetTags() throws Exception {
+    public void testGetTags() {
         PageSearch in = new PageSearch();
         in.setTags(new ExtendedTextMatcherList(new ExtendedTextMatcher("tag1")));
 
@@ -247,7 +247,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testRelations() throws IOException, SAXException {
+    public void testRelations() {
         PageSearch in = new PageSearch();
         RelationSearch rs1 = new RelationSearch();
         RelationSearch rs2 = new RelationSearch();
@@ -273,7 +273,7 @@ public class PageSearchTest {
     }
 
     @Test
-    public void testReferrals() throws IOException, SAXException {
+    public void testReferrals() {
         PageSearch in = new PageSearch();
         AssociationSearch as1 = new AssociationSearch();
         AssociationSearch as2 = new AssociationSearch();

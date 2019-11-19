@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ExtendedTextMatcherTest {
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         ExtendedTextMatcher in = new ExtendedTextMatcher("title");
         ExtendedTextMatcher out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:extendedTextMatcher xmlns=\"urn:vpro:api:2013\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:media:2009\">title</local:extendedTextMatcher>");

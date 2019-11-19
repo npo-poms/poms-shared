@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ContentRatingsConstraintTest {
 
     @Test
-    public void testGetStringValue() throws IOException, SAXException {
+    public void testGetStringValue() {
         ContentRatingConstraint in = new ContentRatingConstraint(ContentRating.ANGST);
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:contentRatingConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:local=\"uri:local\">ANGST</local:contentRatingConstraint>\n");

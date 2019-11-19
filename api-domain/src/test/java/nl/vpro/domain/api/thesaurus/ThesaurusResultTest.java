@@ -13,7 +13,7 @@ import nl.vpro.test.util.jaxb.JAXBTestUtil;
 public class ThesaurusResultTest {
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         Jackson2TestUtil.roundTripAndSimilar(new ThesaurusResult<GTAAConcept>(
             Arrays.asList(
                 GTAAPerson.builder().build(),
@@ -30,7 +30,7 @@ public class ThesaurusResultTest {
 
 
     @Test
-    public void xml() throws Exception {
+    public void xml() {
         JAXBTestUtil.roundTripAndSimilar(new ThesaurusResult<GTAAConcept>(Arrays.asList(
             GTAAPerson.builder().givenName("pietje").familyName("puk").build(),
             GTAAGeographicName.builder().value("Amsterdam").build()

@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MediaSearchTest {
 
     @Test
-    public void testGetText() throws Exception {
+    public void testGetText() {
         MediaSearch in = new MediaSearch();
         in.setText(new SimpleTextMatcher("Title"));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -39,7 +39,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testGetBroadcasters() throws Exception {
+    public void testGetBroadcasters() {
         MediaSearch in = new MediaSearch();
         in.setBroadcasters(new TextMatcherList(new TextMatcher("VPRO"), new TextMatcher("TROS")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -55,7 +55,7 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testGetLocations() throws Exception {
+    public void testGetLocations() {
         MediaSearch in = new MediaSearch();
         in.setLocations(new TextMatcherList(new TextMatcher("http://some.domain.com/path"), new TextMatcher(".extension")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -69,7 +69,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testGetTags() throws Exception {
+    public void testGetTags() {
         MediaSearch in = new MediaSearch();
         in.setTags(new ExtendedTextMatcherList(new ExtendedTextMatcher("cultuur"), new ExtendedTextMatcher("kunst")));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -84,7 +84,7 @@ public class MediaSearchTest {
 
 
     @Test
-    public void testGetTypes() throws Exception {
+    public void testGetTypes() {
         MediaSearch in = new MediaSearch();
         in.setTypes(new TextMatcherList(Arrays.asList(new TextMatcher("A"), new TextMatcher("B", Match.SHOULD)), Match.SHOULD));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -106,7 +106,7 @@ public class MediaSearchTest {
             .build();
 
     @Test
-    public void testTitleSearchJson() throws Exception {
+    public void testTitleSearchJson() {
         MediaSearch in = new MediaSearch();
         in.setTitles(Arrays.asList(TESTRESULT));
         MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
@@ -316,7 +316,7 @@ public class MediaSearchTest {
     private static final ScheduleEventSearch FROM_EPOCH = ScheduleEventSearch.builder().begin(Instant.EPOCH).build();
 
     @Test
-    public void testScheduleEventSearchXml() throws Exception {
+    public void testScheduleEventSearchXml() {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1, AT_NED2));
         MediaSearch out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -334,7 +334,7 @@ public class MediaSearchTest {
 
     }
    @Test
-    public void testScheduleEventSearchJson() throws Exception {
+    public void testScheduleEventSearchJson() {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1));
         MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +
@@ -347,7 +347,7 @@ public class MediaSearchTest {
     }
 
     @Test
-    public void testScheduleEventSearchJson2() throws Exception {
+    public void testScheduleEventSearchJson2() {
         MediaSearch in = new MediaSearch();
         in.setScheduleEvents(Arrays.asList(AT_NED1, AT_NED2));
         MediaSearch out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +

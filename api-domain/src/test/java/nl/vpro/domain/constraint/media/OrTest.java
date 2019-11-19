@@ -26,7 +26,7 @@ public class OrTest {
     }
 
     @Test
-    public void testAndBinding() throws Exception {
+    public void testAndBinding() {
         Or in = new Or(new And());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:or xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -37,7 +37,7 @@ public class OrTest {
     }
 
     @Test
-    public void testOrBinding() throws Exception {
+    public void testOrBinding() {
         Or in = new Or(new Or());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:or xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -48,7 +48,7 @@ public class OrTest {
     }
 
     @Test
-    public void testNotBinding() throws Exception {
+    public void testNotBinding() {
         Or in = new Or(new Not());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:or xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -59,7 +59,7 @@ public class OrTest {
     }
 
     @Test
-    public void testAvTypeBinding() throws Exception {
+    public void testAvTypeBinding() {
         Or in = new Or(new AvTypeConstraint());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:or xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -70,7 +70,7 @@ public class OrTest {
     }
 
     @Test
-    public void testAvFileFormatBinding() throws Exception {
+    public void testAvFileFormatBinding() {
         Or in = new Or(new AvFileFormatConstraint("MP3"));
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
                     "<local:or xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -81,7 +81,7 @@ public class OrTest {
     }
 
     @Test
-    public void testAvFileExtensionBinding() throws Exception {
+    public void testAvFileExtensionBinding() {
         Or in = new Or(new AVFileExtensionConstraint());
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:or xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +
@@ -92,7 +92,7 @@ public class OrTest {
     }
 
     @Test
-    public void testChannelBinding() throws Exception {
+    public void testChannelBinding() {
         Or in = new Or(new ChannelConstraint(Channel.NED1));
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:or xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">\n" +

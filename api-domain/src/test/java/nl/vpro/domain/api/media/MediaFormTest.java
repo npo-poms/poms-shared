@@ -13,8 +13,7 @@ import java.time.LocalDate;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
-import org.xml.sax.SAXException;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.media.Channel;
@@ -23,10 +22,10 @@ import nl.vpro.domain.media.support.Tag;
 import nl.vpro.domain.media.support.TextualType;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
-import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.Version;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
+import static nl.vpro.test.util.jaxb.JAXBTestUtil.roundTripAndSimilar;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
 
@@ -38,7 +37,7 @@ import static org.junit.Assert.assertNotNull;
 public class MediaFormTest {
 
     @Test
-    public void testGetSort() throws Exception {
+    public void testGetSort() {
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
         list.put(MediaSortField.sortDate, Order.DESC);
@@ -46,7 +45,7 @@ public class MediaFormTest {
         list.add(TitleSortOrder.builder().textualType(TextualType.LEXICO).build());
         in.setHighlight(true);
         in.setSortFields(list);
-        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
+        MediaForm out = roundTripAndSimilar(in,
             "<api:mediaForm highlight=\"true\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <api:sortFields>\n" +
                 "        <api:sort order=\"DESC\">sortDate</api:sort>\n" +
@@ -59,7 +58,7 @@ public class MediaFormTest {
     }
 
     @Test
-    public void testGetSortJson() throws Exception {
+    public void testGetSortJson() {
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
         list.put(MediaSortField.sortDate, Order.DESC);
@@ -86,7 +85,7 @@ public class MediaFormTest {
 
 
     @Test
-    public void testGetSortJsonBackward() throws Exception {
+    public void testGetSortJsonBackward() {
         Compatibility.setCompatibility(Version.of(5, 4));
         MediaForm in = new MediaForm();
         MediaSortOrderList list = new MediaSortOrderList();
@@ -120,9 +119,9 @@ public class MediaFormTest {
     }
 
     @Test
-    public void testGetTags() throws Exception {
+    public void testGetTags() {
         MediaForm in = MediaFormBuilder.form().tags(Match.SHOULD, new Tag("XML")).build();
-        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
+        MediaForm out = roundTripAndSimilar(in,
                 "<api:mediaForm  xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                     "    <api:searches>\n" +
                     "        <api:tags match=\"SHOULD\">\n" +
@@ -137,14 +136,15 @@ public class MediaFormTest {
     }
 
     @Test
-    public void testGetFacets() throws Exception {
+    public void testGetFacets() {
         MediaForm in = MediaFormBuilder.form().broadcasterFacet().scheduleEvents(
             new ScheduleEventSearch(Channel.NED3,
                 LocalDate.of(2015, 1, 26).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant(),
                 LocalDate.of(2015, 1, 27).atStartOfDay().atZone(Schedule.ZONE_ID).toInstant())
         ).build();
-        MediaForm out = JAXBTestUtil.roundTripAndSimilar(in,
-            "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        MediaForm out = roundTripAndSimilar(in,
+            "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+                "<api:mediaForm xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
                 "    <api:searches>\n" +
                 "        <api:scheduleEvents>\n" +
                 "            <api:begin>2015-01-26T00:00:00+01:00</api:begin>\n" +
@@ -154,10 +154,11 @@ public class MediaFormTest {
                 "    </api:searches>\n" +
                 "    <api:facets>\n" +
                 "        <api:broadcasters sort=\"VALUE_ASC\">\n" +
+                "            <api:threshold>0</api:threshold>\n" +
                 "            <api:max>24</api:max>\n" +
                 "        </api:broadcasters>\n" +
                 "    </api:facets>\n" +
-                "</api:mediaForm>");
+                "</api:mediaForm>\n");
         assertThat(out.getFacets().getBroadcasters().getSort()).isEqualTo(FacetOrder.VALUE_ASC);
     }
 
@@ -260,9 +261,9 @@ public class MediaFormTest {
     }
 
     @Test
-    public void testFuzzinessBinding() throws Exception {
+    public void testFuzzinessBinding() {
         MediaForm form = MediaForm.builder().fuzzyText("bla").build();
-        JAXBTestUtil.roundTripAndSimilar(form, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        roundTripAndSimilar(form, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:text fuzziness=\"AUTO\" match=\"SHOULD\">bla</api:text>\n" +
             "    </api:searches>\n" +
@@ -283,12 +284,12 @@ public class MediaFormTest {
 
 
     @Test
-    public void testTitleSearch() throws Exception {
+    public void testTitleSearch() {
         MediaForm form = MediaForm
             .builder()
             .fuzzyText("bla")
             .build();
-        JAXBTestUtil.roundTripAndSimilar(form, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        roundTripAndSimilar(form, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:text fuzziness=\"AUTO\" match=\"SHOULD\">bla</api:text>\n" +
             "    </api:searches>\n" +
@@ -309,12 +310,12 @@ public class MediaFormTest {
 
 
     @Test
-    public void testTitleSearch2() throws Exception {
+    public void testTitleSearch2() {
         MediaForm form = MediaForm
             .builder()
             .titles(TitleSearch.builder().type(TextualType.MAIN).value("Flikken").build())
             .build();
-        JAXBTestUtil.roundTripAndSimilar(form, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+        roundTripAndSimilar(form, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<api:mediaForm xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:titles type=\"MAIN\">Flikken</api:titles>\n" +
@@ -344,7 +345,7 @@ public class MediaFormTest {
 
     }
 
-    private static String LUNATIC_BACKWARD_COMPATIBLE = "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+    private static final String LUNATIC_BACKWARD_COMPATIBLE = "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
         "    <api:searches>\n" +
         "        <api:durations match=\"MUST\">\n" +
         "            <api:matcher inclusiveEnd=\"false\">\n" +
@@ -384,7 +385,7 @@ public class MediaFormTest {
         "    </api:facets>\n" +
         "</api:mediaForm>\n";
     @Test
-    public void testDurations() throws IOException, SAXException {
+    public void testDurations() throws IOException {
         String json = "{\n" +
             "\n" +
             "    \"searches\" : {\n" +
@@ -424,7 +425,7 @@ public class MediaFormTest {
             "}\n";
 
         MediaForm fromJson = Jackson2Mapper.STRICT.readerFor(MediaForm.class).readValue(new StringReader(json));
-        JAXBTestUtil.roundTripAndSimilar(fromJson, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        roundTripAndSimilar(fromJson, "<api:mediaForm xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:searches>\n" +
             "        <api:durations match=\"MUST\">\n" +
             "            <api:matcher>\n" +
@@ -515,7 +516,7 @@ public class MediaFormTest {
     }
 
     @Test
-    public void facetBroadcasters() throws Exception {
+    public void facetBroadcasters() {
         MediaForm builder = MediaForm.builder().broadcasterFacet(new MediaFacet()).build();
         Jackson2TestUtil.roundTripAndSimilar(builder, "{\n" +
             "  \"facets\" : {\n" +

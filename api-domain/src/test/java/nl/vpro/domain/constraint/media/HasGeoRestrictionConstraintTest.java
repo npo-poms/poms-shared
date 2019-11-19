@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HasGeoRestrictionConstraintTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         HasGeoRestrictionConstraint in = new HasGeoRestrictionConstraint();
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:hasGeoRestrictionConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\"/>");

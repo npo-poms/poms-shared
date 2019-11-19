@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class InstantRangeFacetsTest {
 
     @Test
-    public void testGetBeginWithPreset() throws Exception {
+    public void testGetBeginWithPreset() {
         DateRangeFacets<AbstractSearch> in = new DateRangeFacets<>();
         in.setRanges(Arrays.asList(DateRangePreset.LAST_YEAR, DateRangePreset.LAST_WEEK));
         DateRangeFacets<AbstractSearch> out = JAXBTestUtil.roundTripAndSimilar(in,

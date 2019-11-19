@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TextMatcherListTest {
 
     @Test
-    public void marshal() throws IOException, SAXException {
+    public void marshal() {
         final TextMatcherList textMatcherList = new TextMatcherList(
                 Arrays.asList(new TextMatcher("a", Match.SHOULD), new TextMatcher("b", Match.SHOULD)), Match.MUST);
         TextMatcherList result = JAXBTestUtil.roundTripAndSimilar(textMatcherList,

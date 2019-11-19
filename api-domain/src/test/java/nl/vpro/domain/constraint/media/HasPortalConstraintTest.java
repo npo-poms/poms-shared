@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HasPortalConstraintTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         HasPortalConstraint in = new HasPortalConstraint();
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:hasPortalConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\"/>");

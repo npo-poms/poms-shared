@@ -33,7 +33,7 @@ public class GenreConstraintTest {
     }
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         GenreConstraint in = new GenreConstraint("jeugd");
         GenreConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:genreConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">jeugd</local:genreConstraint>");

@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ChannelConstraintTest {
 
     @Test
-    public void testGetStringValue() throws Exception {
+    public void testGetStringValue() {
         ChannelConstraint in = new ChannelConstraint(Channel.NED1);
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:channelConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">NED1</local:channelConstraint>\n\n");

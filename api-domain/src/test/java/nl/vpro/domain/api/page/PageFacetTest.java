@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PageFacetTest {
 
     @Test
-    public void testGetPageSearchFromFacetXml() throws IOException, SAXException {
+    public void testGetPageSearchFromFacetXml() {
         PageSearch search = new PageSearch();
         search.setText(new SimpleTextMatcher("find me"));
 
@@ -34,7 +34,7 @@ public class PageFacetTest {
     }
 
     @Test
-    public void testGetPageSearchFromFacetJson() throws Exception {
+    public void testGetPageSearchFromFacetJson() {
         PageSearch search = new PageSearch();
         search.setText(new SimpleTextMatcher("find me"));
 

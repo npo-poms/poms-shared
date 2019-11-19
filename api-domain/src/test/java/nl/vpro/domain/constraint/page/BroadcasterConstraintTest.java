@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BroadcasterConstraintTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         BroadcasterConstraint in = new BroadcasterConstraint("VPRO");
         BroadcasterConstraint out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:broadcasterConstraint xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">VPRO</local:broadcasterConstraint>");

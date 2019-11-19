@@ -48,7 +48,7 @@ public class ProfileTest {
         assertNull(in.getMediaProfile());
     }
     @Test
-    public void testGetName() throws Exception {
+    public void testGetName() {
         Profile in = new Profile("name");
         in.setTimestamp(Instant.EPOCH);
 
@@ -60,7 +60,7 @@ public class ProfileTest {
 
 
     @Test
-    public void testGetPageProfile() throws Exception {
+    public void testGetPageProfile() {
         Profile in = new Profile("media", new ProfileDefinition<>(), null);
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -72,7 +72,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void testGetMediaProfile() throws Exception {
+    public void testGetMediaProfile() {
         Profile in = new Profile("media", null, new ProfileDefinition<>());
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -84,7 +84,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void testAgeRatingProfile() throws Exception {
+    public void testAgeRatingProfile() {
         Profile in = new Profile("agerating", null, new ProfileDefinition<>(new Filter(new AgeRatingConstraint(AgeRating._6))));
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,
@@ -100,7 +100,7 @@ public class ProfileTest {
     }
 
     @Test
-    public void testGenreProfile() throws Exception {
+    public void testGenreProfile() {
         Profile in = new Profile("genre", null, new ProfileDefinition<>(new Filter(new GenreConstraint("Jeugd"))));
         in.setTimestamp(Instant.EPOCH);
         Profile out = JAXBTestUtil.roundTripAndSimilar(in,

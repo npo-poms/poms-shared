@@ -17,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TextMatcherTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         TextMatcher in = new TextMatcher("title");
         TextMatcher out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:textMatcher xmlns=\"urn:vpro:api:2013\" xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:media:2009\">title</local:textMatcher>");

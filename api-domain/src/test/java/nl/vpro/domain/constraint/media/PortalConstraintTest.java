@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PortalConstraintTest {
 
     @Test
-    public void testGetStringValue() throws Exception {
+    public void testGetStringValue() {
         PortalConstraint in = new PortalConstraint(new Portal("VPRO", "VPRO.nl"));
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:portalConstraint xmlns:local=\"uri:local\" xmlns:media=\"urn:vpro:api:constraint:media:2013\">VPRO</local:portalConstraint>");

@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ExtendedTextMatcherListTest {
 
     @Test
-    public void marshal() throws IOException, SAXException {
+    public void marshal() {
         final ExtendedTextMatcherList textMatcherList = new ExtendedTextMatcherList(
                 Arrays.asList(new ExtendedTextMatcher("a", Match.SHOULD, StandardMatchType.TEXT, false),
                         new ExtendedTextMatcher("b", Match.SHOULD)),

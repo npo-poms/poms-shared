@@ -28,7 +28,7 @@ public class ExtendedTextMatcherListJsonTest {
     }
 
     @Test
-    public void testGetValueJsonIgnoreCase() throws Exception {
+    public void testGetValueJsonIgnoreCase() {
         ExtendedTextMatcherList in = new ExtendedTextMatcherList(new ExtendedTextMatcher("title", false));
 
         ExtendedTextMatcherList out = Jackson2TestUtil.roundTripAndSimilar(in, "{\n" +

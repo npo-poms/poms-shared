@@ -21,7 +21,7 @@ public class RedirectListTest {
     }
 
     @Test
-    public void json() throws Exception {
+    public void json() {
         RedirectList rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(instance,
             "{\"lastUpdate\":\"1970-01-01T01:00:00+01:00\",\"map\":{\"a\":\"b\"}}");
         assertThat(rounded.getList()).hasSize(1);
@@ -32,7 +32,7 @@ public class RedirectListTest {
     }
 
     @Test
-    public void jaxb() throws Exception {
+    public void jaxb() {
         RedirectList rounded = JAXBTestUtil.roundTripAndSimilarAndEquals(instance,
             "<redirects lastUpdate=\"1970-01-01T01:00:00+01:00\" xmlns=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <entry from=\"a\" to=\"b\"/>\n" +

@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OrTest {
 
     @Test
-    public void testGetConstraints() throws Exception {
+    public void testGetConstraints() {
         Or in = new Or(new BroadcasterConstraint("VPRO"), new PortalConstraint("http://www.vpro.nl"));
         Or out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:or xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">\n" +

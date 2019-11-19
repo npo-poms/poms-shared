@@ -25,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HasLocationConstraintTest {
 
     @Test
-    public void testGetValue() throws Exception {
+    public void testGetValue() {
         HasLocationConstraint in = new HasLocationConstraint();
         in.setPlatform(Platform.INTERNETVOD.name());
         JAXBTestUtil.roundTripAndSimilar(in,

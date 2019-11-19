@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NotTest {
 
     @Test
-    public void testGetConstraints() throws Exception {
+    public void testGetConstraints() {
         Not in = new Not(new PageTypeConstraint(PageType.ARTICLE));
         Not out = JAXBTestUtil.roundTripAndSimilar(in,
             "<local:not xmlns:page=\"urn:vpro:api:constraint:page:2013\" xmlns:local=\"uri:local\">\n" +

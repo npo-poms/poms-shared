@@ -33,7 +33,7 @@ public class PersonResultTest {
 
 
     @Test
-    public void toJson() throws Exception {
+    public void toJson() {
 
         Jackson2TestUtil.roundTripAndSimilarAndEquals(result, "{\n" +
             "  \"offset\" : 0,\n" +
@@ -50,7 +50,7 @@ public class PersonResultTest {
 
 
     @Test
-    public void toXml() throws Exception {
+    public void toXml() {
         // TODO: It seems silly to have a dedicated result type, but then still have to rely on xsi:type
 
         JAXBTestUtil.roundTripAndSimilarAndEquals(result, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +

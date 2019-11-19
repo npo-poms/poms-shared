@@ -30,7 +30,7 @@ public class AgeRatingConstraintTest {
     }
 
     @Test
-    public void testGetStringValue() throws Exception {
+    public void testGetStringValue() {
         AgeRatingConstraint in = new AgeRatingConstraint(AgeRating._6);
         JAXBTestUtil.roundTripAndSimilar(in,
             "<local:ageRatingConstraint xmlns:constraint=\"urn:vpro:api:constraint\" xmlns:media=\"urn:vpro:api:constraint:media:2013\" xmlns:local=\"uri:local\">6</local:ageRatingConstraint>\n");
