@@ -366,7 +366,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
     }
 
     public MediaFormBuilder broadcasterFacet() {
-        facets().setBroadcasters(new MediaFacet());
+        facets().setBroadcasters(new MediaFacet(1, FacetOrder.COUNT_DESC, 20));
         return this;
     }
 
