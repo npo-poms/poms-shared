@@ -65,7 +65,7 @@ public class StandaloneMemberRef {
 
     @XmlTransient
     public String getId() {
-        return midRef+ "/" + (index == null ? "_" : index) + "/" + childRef;
+        return midRef+ "/" + (index == null ? "_" : index) + "/" + childRef + "/" + objectType;
     }
 
     @XmlAttribute
