@@ -126,7 +126,11 @@ public class MediaChange extends Change<MediaObject> {
                 break;
 
             default:
-                log.warn("Invalid workflow for {} : {}", media.getMid(), media.getWorkflow());
+                if (media.getWorkflow().isPublishable()) {
+                    log.error("Unanticipated workflow for {} : {}. This is a bug.", media.getMid(), media.getWorkflow());
+                } else {
+                    log.warn("Invalid workflow for {} : {}", media.getMid(), media.getWorkflow());
+                }
                 change = null;
                 break;
 
