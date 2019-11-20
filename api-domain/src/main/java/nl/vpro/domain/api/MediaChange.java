@@ -4,14 +4,17 @@
  */
 package nl.vpro.domain.api;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.extern.slf4j.Slf4j;
+
+import java.time.Instant;
+
+import javax.xml.bind.annotation.*;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import nl.vpro.domain.Change;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.util.DateUtils;
-
-import javax.xml.bind.annotation.*;
-import java.time.Instant;
 
 /**
  * @author Roelof Jan Koekoek
@@ -109,6 +112,7 @@ public class MediaChange extends Change<MediaObject> {
         switch (media.getWorkflow()) {
             case DELETED:
             case REVOKED:
+            case PARENT_REVOKED:
                 change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null);
                 break;
 
