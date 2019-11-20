@@ -106,7 +106,7 @@ public class MediaChange extends Change<MediaObject> {
         MediaChange change;
         final Instant lastPublished = media.getLastPublishedInstant();
         if (media.getWorkflow() == null) {
-            log.warn("Invalid workflow for {} : {}", media.getMid(), media.getWorkflow());
+            log.warn("Workflow is null for {}", media.getMid());
             return null;
         }
         switch (media.getWorkflow()) {
