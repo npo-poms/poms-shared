@@ -253,7 +253,7 @@ public class WEBVTTandSRT {
     }
 
     static String formatDuration(Duration duration, String separator) {
-        Long millis = duration.toMillis();
+        long millis = duration.toMillis();
         boolean negative = millis < 0L;
         if (negative) {
             millis *= -1;
@@ -302,7 +302,7 @@ public class WEBVTTandSRT {
     static StringBuilder formatCue(Cue cue, StringBuilder builder, String decimalSeparator, boolean settings) {
         if (cue.getSequence() != null) {
             builder.append(cue.getSequence());
-        };
+        }
         Duration offset = Duration.ZERO;
         builder.append("\n");
         if (cue.getStart() != null) {
