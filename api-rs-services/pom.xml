@@ -13,6 +13,7 @@
   <name>api-rs-services</name>
 
   <dependencies>
+    <!-- todo, drop this dependency -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
