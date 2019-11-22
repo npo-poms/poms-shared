@@ -54,8 +54,8 @@ abstract class AbstractSubtitlesWriter implements MessageBodyWriter<Subtitles> {
     }
 
 
-    protected Iterator<Cue> iterate(Subtitles subtitles) {
-        return SubtitlesUtil.iterator(subtitles, true);
+    protected Iterator<Cue> iterate(Subtitles subtitles, boolean guessOffset) {
+        return SubtitlesUtil.iterator(subtitles, guessOffset);
     }
     abstract protected void stream(Subtitles subtitles, OutputStream entityStream) throws IOException;
 
