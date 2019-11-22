@@ -105,10 +105,39 @@ public class WEBVTTTest {
             "*Dat wil ik doen\n" +
             "in jouw mobiele bakkerij\n" +
             "\n";
-        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(2), new StringReader(example), ".").getCues().collect(Collectors.toList());
+        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofSeconds(2), new StringReader(example), ".").getCues().collect(Collectors.toList());
         assertThat(cues).hasSize(3);
         assertThat(cues.get(0).getSequence()).isEqualTo(1);
         assertThat(cues.get(0).getContent()).isEqualTo("888");
+        assertThat(cues.get(0).getStart()).isEqualTo(Duration.ofMillis(200));
+
+
+    }
+
+    @Test
+    public void parseNegative() {
+        String example = "WEBVTT\n" +
+            "\n" +
+            "1\n" +
+            "-0:02.200 --> 2:04.150\n" +
+            "888\n" +
+            "\n" +
+            "2\n" +
+            "2:04.200 --> 2:08.060\n" +
+            "*'k Heb een paar puntjes\n" +
+            "die ik met je wil bespreken\n" +
+            "\n" +
+            "3\n" +
+            "2:08.110 --> 2:11.060\n" +
+            "*Dat wil ik doen\n" +
+            "in jouw mobiele bakkerij\n" +
+            "\n";
+        List<Cue> cues = WEBVTTandSRT.parse("bla", Duration.ofMinutes(0), new StringReader(example), ".").getCues().collect(Collectors.toList());
+        assertThat(cues).hasSize(3);
+        assertThat(cues.get(0).getSequence()).isEqualTo(1);
+        assertThat(cues.get(0).getContent()).isEqualTo("888");
+        assertThat(cues.get(0).getStart()).isEqualTo(Duration.ofSeconds(2).plusMillis(200).negated());
+
 
 
     }
