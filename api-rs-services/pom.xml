@@ -15,17 +15,9 @@
   <dependencies>
     <!-- todo, drop this dependency -->
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.api</groupId>
       <artifactId>api-domain</artifactId>
     </dependency>
-  <!--  <dependency>
-      <groupId>nl.vpro.shared</groupId>
-      <artifactId>vpro-shared-resteasy</artifactId>
-    </dependency>-->
     <dependency>
       <groupId>nl.vpro.media</groupId>
       <artifactId>media-domain</artifactId>
