@@ -268,7 +268,12 @@ public class WEBVTTandSRT {
     }
 
     static Duration parseDuration(String duration, String decimalSeparator) {
-        String[] split = duration.split(":", 3);
+        boolean negative = false;
+        if (duration.startsWith("-")) {
+            negative = true;
+            duration.substring(1);
+        }
+                String[] split = duration.split(":", 3);
         int index = 0;
         Long hours;
         if (split.length == 3) {
@@ -287,7 +292,11 @@ public class WEBVTTandSRT {
         String [] split2 = split[index].split(Pattern.quote(decimalSeparator), 2);
         Long seconds = Long.parseLong(split2[0]);
         Long millis = Long.parseLong(split2[1]);
-        return Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
+        Duration result =  Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
+        if (negative) {
+            result = result.negated();
+        }
+        return result;
     }
 
     static StringBuilder formatCue(Cue cue, StringBuilder builder, String decimalSeparator, boolean settings) {
