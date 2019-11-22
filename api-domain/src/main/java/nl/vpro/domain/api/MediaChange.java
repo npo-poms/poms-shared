@@ -113,7 +113,13 @@ public class MediaChange extends Change<MediaObject> {
             case DELETED:
             case REVOKED:
             case PARENT_REVOKED:
-                change = new MediaChange(lastPublished, revision, media.getMid(), media, true, null);
+                change = MediaChange.builder()
+                    .publishDate(lastPublished)
+                    .revision(revision)
+                    .mid(media.getMid())
+                    .media(media)
+                    .deleted(true)
+                    .build();
                 break;
 
             case PUBLISHED:
