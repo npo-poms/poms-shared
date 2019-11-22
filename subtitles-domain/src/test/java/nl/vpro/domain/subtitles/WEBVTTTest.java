@@ -61,6 +61,24 @@ public class WEBVTTTest {
                 "");
     }
 
+    @Test
+    public void toWEBVTTWithOffset() throws IOException {
+        StringWriter writer = new StringWriter();
+        Subtitles subtitles = getSubtitles();
+        subtitles.setOffset(Duration.ofMinutes(4));
+        WEBVTTandSRT.formatWEBVTT(
+            SubtitlesUtil.standaloneStream(subtitles, false, false).limit(1).collect(Collectors.toList()).iterator(), writer
+        );
+        assertThat(writer.toString()).isEqualTo(
+            "WEBVTT\n" +
+                "\n" +
+                "1\n" +
+                "-00:01:57.800 --> -00:01:55.850\n" +
+                "888\n" +
+                "\n");
+    }
+
+
 
     @Test
     public void toWEBVTT2Ar() throws IOException {
