@@ -271,18 +271,18 @@ public class WEBVTTandSRT {
         boolean negative = false;
         if (duration.startsWith("-")) {
             negative = true;
-            duration.substring(1);
+            duration = duration.substring(1);
         }
-                String[] split = duration.split(":", 3);
+        String[] split = duration.split(":", 3);
         int index = 0;
-        Long hours;
+        long hours;
         if (split.length == 3) {
             hours = Long.parseLong(split[0]);
             index++;
         } else {
             hours = 0L;
         }
-        Long minutes;
+        long minutes;
         if (split.length >= 2) {
             minutes =  Long.parseLong(split[index]);
             index++;
@@ -290,8 +290,8 @@ public class WEBVTTandSRT {
             minutes = 0L;
         }
         String [] split2 = split[index].split(Pattern.quote(decimalSeparator), 2);
-        Long seconds = Long.parseLong(split2[0]);
-        Long millis = Long.parseLong(split2[1]);
+        long seconds = Long.parseLong(split2[0]);
+        long millis = Long.parseLong(split2[1]);
         Duration result =  Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(millis);
         if (negative) {
             result = result.negated();
