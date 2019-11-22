@@ -49,13 +49,13 @@ import static nl.vpro.i18n.Locales.DUTCH;
 @XmlRootElement(name = "subtitles")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "subtitlesType", propOrder = {
-        "mid",
-        "offset",
-        "content"
+    "mid",
+    "offset",
+    "content"
 })
 @Slf4j
 @IdClass(SubtitlesId.class)
-public class Subtitles implements Serializable, Identifiable<SubtitlesId>, MutableOwnable, Changeable {
+public class Subtitles implements Serializable, Identifiable<SubtitlesId>, MutableOwnable, Changeable, SubtitlesMetadata {
 
     private static final long serialVersionUID = 0L;
 
@@ -123,6 +123,15 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     @Setter
     private OwnerType owner = OwnerType.BROADCASTER;
 
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    @XmlTransient
+    @NotNull
+    @Getter
+    @Setter
+    private SubtitlesWorkflow  workflow = SubtitlesWorkflow.FOR_PUBLICATION;
+
+
     public Subtitles() {
     }
 
@@ -138,7 +147,8 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
             SubtitlesType type,
             OwnerType owner,
             Instant created,
-            Instant lastModified) {
+            Instant lastModified,
+            SubtitlesWorkflow workflow) {
         this.mid = mid;
         this.offset = offset;
         if (content == null && value == null && cues == null) {
@@ -171,6 +181,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
         this.type = type == null ? SubtitlesType.CAPTION : type;
         this.creationInstant = created;
         this.lastModifiedInstant = lastModified;
+        this.workflow = workflow == null ? SubtitlesWorkflow.FOR_PUBLICATION : workflow;
     }
 
     public static Subtitles tt888Caption(String mid, Duration offset, String content) {
@@ -258,6 +269,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     }
 
 
+    @Override
     public Duration getOffset() {
         return offset;
     }
@@ -300,6 +312,7 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     }
 
     @XmlAttribute
+    @Override
     public Integer getCueCount() {
         if (cueCount == null) {
             int result = 0;
@@ -323,12 +336,13 @@ public class Subtitles implements Serializable, Identifiable<SubtitlesId>, Mutab
     }
 
     public SubtitlesMetadata getMetadata() {
-        return SubtitlesMetadata.builder()
-                .cueCount(getCueCount())
-                .offset(getOffset())
-                .id(getId())
-                .build()
-                ;
+        return SubtitlesMetadataImpl.builder()
+            .cueCount(getCueCount())
+            .offset(getOffset())
+            .id(getId())
+            .workflow(getWorkflow())
+            .build()
+            ;
     }
 
     @Override

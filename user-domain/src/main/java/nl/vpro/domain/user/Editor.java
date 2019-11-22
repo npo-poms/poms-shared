@@ -25,17 +25,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @Slf4j
 public class Editor extends AbstractUser {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
     @Valid
     @XmlTransient
     Set<BroadcasterEditor> broadcasters = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
     @Valid
     @XmlTransient
     Set<PortalEditor> portals = new TreeSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editor", fetch = FetchType.EAGER)
     @Valid
     @XmlTransient
     @OrderBy("organization.id asc")

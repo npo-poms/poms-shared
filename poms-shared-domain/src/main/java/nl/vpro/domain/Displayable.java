@@ -7,6 +7,10 @@ package nl.vpro.domain;
 import java.util.Locale;
 import java.util.Optional;
 
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import nl.vpro.i18n.Locales;
 import nl.vpro.i18n.LocalizedString;
 
@@ -17,6 +21,8 @@ import nl.vpro.i18n.LocalizedString;
  */
 public interface Displayable {
 
+    @XmlTransient
+    @JsonIgnore
     default String getDisplayName() {
         return getDisplayName(Locales.getDefault()).getValue();
     }
@@ -43,6 +49,8 @@ public interface Displayable {
      * Returns {@link #getDisplayName(Locale)} for the default locale {@link Locales#getDefault()}
      * @since 5.11
      */
+    @XmlTransient
+    @JsonIgnore
     default Optional<LocalizedString> getPluralDisplayName() {
         return getPluralDisplayName(Locales.getDefault());
     }

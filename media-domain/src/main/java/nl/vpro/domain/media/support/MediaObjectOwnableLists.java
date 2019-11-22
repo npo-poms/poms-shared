@@ -137,15 +137,14 @@ public class MediaObjectOwnableLists {
         }
     }
 
-    public static <OL extends MediaObjectOwnableList> SortedSet<OL> expandOwnedList(
+    public static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>> SortedSet<OL> expandOwnedList(
             SortedSet<OL> values,
-            BiFunction<OwnerType, List, OL> creator,
+            BiFunction<OwnerType, List<I>, OL> creator,
             List<OwnerType> ownersToExpand) {
 
         if(values == null || values.isEmpty()) return null;
         SortedSet<OL> additions = new TreeSet<>();
         for(OwnerType owner: ownersToExpand){
-
             if(values.stream().anyMatch(value -> value.getOwner() == owner)) continue;
             additions.add(creator.apply(owner, values.first().getValues()));
         }

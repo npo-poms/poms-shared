@@ -159,7 +159,6 @@
       <xs:enumeration value="MOVIE"/>
       <xs:enumeration value="TRAILER"/>
       <xs:enumeration value="CLIP"/>
-      <xs:enumeration value="STRAND"/>
       <xs:enumeration value="TRACK"/>
       <xs:enumeration value="SEGMENT"/>
       <xs:enumeration value="VISUALRADIO"/>
@@ -287,9 +286,9 @@
       </xs:element>
       <xs:element name="genre" type="genreType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="tag" type="tagType" minOccurs="0" maxOccurs="unbounded"/>
-      <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="intentions" type="intentionType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="targetGroups" type="targetGroupsType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="source" type="xs:string" minOccurs="0"/>
       <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -1253,7 +1252,7 @@
       <xs:enumeration value="RTVD">
         <xs:annotation>
           <xs:documentation>
-            RTV Drenthe tv.
+            RTV Drenthe.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
@@ -2761,13 +2760,6 @@
         <xs:annotation>
           <xs:documentation>
             Radio Noord.
-          </xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="RTVD">
-        <xs:annotation>
-          <xs:documentation>
-            RTV Drenthe radio.
           </xs:documentation>
         </xs:annotation>
       </xs:enumeration>

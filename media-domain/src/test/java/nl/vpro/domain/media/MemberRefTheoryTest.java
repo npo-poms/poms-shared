@@ -9,6 +9,7 @@ import org.xml.sax.SAXException;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.theory.ComparableTest;
 
+import static nl.vpro.domain.media.MediaType.CLIP;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
@@ -80,9 +81,9 @@ public class MemberRefTheoryTest extends ComparableTest<MemberRef> {
     @Test
     public void testTypeRoundTrip() throws IOException, SAXException {
         MemberRef memberRef = new MemberRef();
-        memberRef.setType(MediaType.CLIP);
+        memberRef.setType(CLIP);
         MemberRef result = JAXBTestUtil.roundTripAndSimilar(memberRef, "<memberRef highlighted=\"false\" type=\"CLIP\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\"/>\n");
-        assertThat(result.getType()).isEqualTo(MediaType.CLIP);
+        assertThat(result.getType()).isEqualTo(CLIP);
     }
 
     private static MemberRef memberRefWithMid() {

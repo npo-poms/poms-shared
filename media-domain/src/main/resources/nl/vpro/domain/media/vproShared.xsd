@@ -23,6 +23,12 @@
   </xs:complexType>
 
   <xs:simpleType name="workflowEnumType">
+    <xs:annotation>
+      <xs:documentation>
+        These are the possible values of several 'workflow' fields. These serve administrative purposes only. In the Frontent API you should
+        only encounter 'PUBLISHED'.
+      </xs:documentation>
+    </xs:annotation>
     <xs:restriction base="xs:string">
       <xs:enumeration value="FOR PUBLICATION"/>
       <xs:enumeration value="FOR REPUBLICATION"/>
@@ -32,6 +38,13 @@
       <xs:enumeration value="FOR DELETION"/>
       <xs:enumeration value="DELETED"/>
       <xs:enumeration value="MERGED"/>
+      <xs:enumeration value="IGNORE">
+        <xs:annotation>
+          <xs:documentation>
+            This means that the object is ignored for workflow changes. This is mainly usefull during testing.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
 

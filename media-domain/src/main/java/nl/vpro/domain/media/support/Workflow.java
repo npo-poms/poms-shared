@@ -5,11 +5,9 @@
  */
 package nl.vpro.domain.media.support;
 
-import java.util.List;
+import java.util.*;
 
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlEnumValue;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -19,6 +17,7 @@ import nl.vpro.domain.Xmlns;
 import nl.vpro.jackson2.BackwardsCompatibleJsonEnum;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * <p>The workflow status for publishable items.
@@ -47,6 +46,8 @@ import static java.util.Arrays.asList;
 @JsonSerialize(using = BackwardsCompatibleJsonEnum.Serializer.class)
 @JsonDeserialize(using = Workflow.Deserializer.class)
 public enum Workflow implements Displayable {
+
+    IGNORE("Genegeerd"),
 
     @XmlEnumValue("FOR PUBLICATION")
     FOR_PUBLICATION("Voor publicatie"),
@@ -84,44 +85,51 @@ public enum Workflow implements Displayable {
      */
     DELETED("Verwijderd");
 
-    public static final List<Workflow> WITH_MEDIA_ACTIVATION = asList(
+    public static final List<Workflow> WITH_MEDIA_ACTIVATION = unmodifiableList(asList(
         FOR_PUBLICATION,
         PARENT_REVOKED,
-        REVOKED);
+        REVOKED
+    ));
 
 
 
-    public static final List<Workflow> PUBLICATIONS = asList(
+    public static final List<Workflow> PUBLICATIONS = unmodifiableList(asList(
         PUBLISHED,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    );
+    ));
 
-    public static final List<Workflow> DELETES = asList(
+    public static final List<Workflow> DELETES = unmodifiableList(asList(
         FOR_DELETION,
         DELETED
-    );
+    ));
 
 
-    public static final List<Workflow> PUBLISHED_AS_DELETED = asList(
+    public static final List<Workflow> PUBLISHED_AS_DELETED = unmodifiableList(asList(
         FOR_DELETION,
         DELETED,
         MERGED,
         PARENT_REVOKED
-    );
+    ));
 
-    public static final List<Workflow> REVOKES = asList(
+    public static final List<Workflow> REVOKES = unmodifiableList(asList(
         FOR_DELETION,
         DELETED,
         REVOKED,
         MERGED
-    );
+    ));
+    public static final List<Workflow> REVOKES_OR_IGNORE;
+    static {
+        List<Workflow> list = new ArrayList<>(REVOKES);
+        list.add(Workflow.IGNORE);
+        REVOKES_OR_IGNORE = unmodifiableList(list);
+    }
 
-    public static final List<Workflow> NEEDWORK = asList(
+    public static final List<Workflow> NEEDWORK = unmodifiableList(asList(
         FOR_DELETION,
         FOR_PUBLICATION,
         FOR_REPUBLICATION
-    );
+    ));
 
     private final String description;
 
