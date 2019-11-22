@@ -5,13 +5,11 @@
 package nl.vpro.domain.api.media;
 
 import java.time.Instant;
-import java.util.Iterator;
 
-import nl.vpro.domain.api.MediaChange;
-import nl.vpro.domain.api.Deletes;
-import nl.vpro.domain.api.Order;
+import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.media.MediaObject;
+import nl.vpro.util.CloseableIterator;
 import nl.vpro.util.FilteringIterator;
 
 /**
@@ -29,11 +27,11 @@ public interface MediaRepository extends MediaLoader, Redirector {
     ProgramResult listEpisodes(MediaObject media, ProfileDefinition<MediaObject> profile, Order order, long offset, Integer max);
 
     @Deprecated
-    Iterator<MediaChange> changes(Long since, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);
+    CloseableIterator<MediaChange> changes(Long since, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive);
 
-    Iterator<MediaChange> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive, Deletes deletes);
+    CloseableIterator<MediaChange> changes(Instant since, String mid, ProfileDefinition<MediaObject> current, ProfileDefinition<MediaObject> previous, Order order, Integer max, Long keepAlive, Deletes deletes);
 
-    Iterator<MediaObject> iterate(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
+    CloseableIterator<MediaObject> iterate(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
 
 
 }
