@@ -93,7 +93,6 @@ public interface PageRestService {
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
-        @Context Request request
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
     );
 }

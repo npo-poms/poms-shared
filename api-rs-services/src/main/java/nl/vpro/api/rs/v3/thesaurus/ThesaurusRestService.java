@@ -37,9 +37,8 @@ public interface ThesaurusRestService {
     @NoCache
     Response listPersonUpdates(
         @QueryParam("from") Instant from,
-        @QueryParam("to") Instant to,
-        @Context Request request
-        );
+        @QueryParam("to") Instant to
+    );
 
 
     @GET
@@ -55,8 +54,7 @@ public interface ThesaurusRestService {
     @NoCache
     Response listConceptUpdates(
         @QueryParam("from") Instant from,
-        @QueryParam("to") Instant to,
-        @Context Request request
+        @QueryParam("to") Instant to
     );
 
     @GET
