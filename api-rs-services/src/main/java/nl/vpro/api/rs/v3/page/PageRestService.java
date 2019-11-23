@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
+import org.jboss.resteasy.annotations.cache.NoCache;
+
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.page.*;
 
@@ -88,6 +90,7 @@ public interface PageRestService {
     @Path("/iterate/")
     @Deprecated
         //"This targets sitemaps, we'll make a sitemap feature on the page rest service"
+    @NoCache
     Response iterate(
         @Valid PageForm form,
         @QueryParam(PROFILE) String profile,

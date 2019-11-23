@@ -62,7 +62,7 @@ public interface MediaRestService {
      *
      * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer)} or {@link #changes(String, String, Long, String, String, Integer, Boolean, Deletes)}.
      *
-     * @param offset the first result. Not that this cannot be too big!
+     * @param offset the first result. Note that this cannot be too big!
      */
     @GET
     MediaResult list(
@@ -229,6 +229,7 @@ public interface MediaRestService {
      */
     @POST
     @Path("/iterate/")
+    @NoCache
     Response iterate(
         @Valid MediaForm form,
         @QueryParam(PROFILE) String profile,
