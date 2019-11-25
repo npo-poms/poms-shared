@@ -1,14 +1,10 @@
 package nl.vpro.api.rs.v3.thesaurus;
 
-import java.io.InputStream;
 import java.time.Instant;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.*;
 
 import org.jboss.resteasy.annotations.cache.NoCache;
 
@@ -39,12 +35,10 @@ public interface ThesaurusRestService {
     @Produces({ MediaType.APPLICATION_JSON})
     @Path("/persons/updates")
     @NoCache
-    InputStream listPersonUpdates(
+    Response listPersonUpdates(
         @QueryParam("from") Instant from,
-        @QueryParam("to") Instant to,
-        @Context HttpServletRequest request,
-        @Context HttpServletResponse response
-        );
+        @QueryParam("to") Instant to
+    );
 
 
     @GET
@@ -58,11 +52,9 @@ public interface ThesaurusRestService {
     @Produces({ MediaType.APPLICATION_JSON})
     @Path("/concepts/updates")
     @NoCache
-    InputStream listConceptUpdates(
+    Response listConceptUpdates(
         @QueryParam("from") Instant from,
-        @QueryParam("to") Instant to,
-        @Context HttpServletRequest request,
-        @Context HttpServletResponse response
+        @QueryParam("to") Instant to
     );
 
     @GET

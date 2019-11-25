@@ -1,11 +1,11 @@
 package nl.vpro.domain.api.page;
 
-import java.util.Iterator;
 import java.util.concurrent.CompletableFuture;
 
 import nl.vpro.domain.api.profile.ProfileDefinition;
 import nl.vpro.domain.page.Page;
 import nl.vpro.domain.page.update.SectionRepository;
+import nl.vpro.util.CloseableIterator;
 import nl.vpro.util.FilteringIterator;
 
 /**
@@ -30,5 +30,5 @@ public interface PageSearchRepository extends SectionRepository {
 
     PageSearchResult findRelated(Page media, ProfileDefinition<Page> profile, PageForm form, Integer max);
 
-    Iterator<Page> iterate(ProfileDefinition<Page> profile, PageForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
+    CloseableIterator<Page> iterate(ProfileDefinition<Page> profile, PageForm form, long offset, Integer max, FilteringIterator.KeepAlive keepAlive);
 }

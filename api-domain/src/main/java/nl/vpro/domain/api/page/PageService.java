@@ -1,12 +1,12 @@
 package nl.vpro.domain.api.page;
 
-import java.util.Iterator;
 import java.util.List;
 
 import nl.vpro.domain.api.IdList;
 import nl.vpro.domain.api.SuggestResult;
 import nl.vpro.domain.api.profile.exception.ProfileNotFoundException;
 import nl.vpro.domain.page.Page;
+import nl.vpro.util.CloseableIterator;
 import nl.vpro.util.FilteringIterator;
 
 /**
@@ -27,7 +27,7 @@ public interface PageService {
 
     PageSearchResult findRelated(Page page, String profile, PageForm form, Integer max) throws ProfileNotFoundException;
 
-    Iterator<Page> iterate(String profile, PageForm  form, Long offset, Integer max, FilteringIterator.KeepAlive keepAlive) throws ProfileNotFoundException;
+    CloseableIterator<Page> iterate(String profile, PageForm  form, Long offset, Integer max, FilteringIterator.KeepAlive keepAlive) throws ProfileNotFoundException;
 
 
 }

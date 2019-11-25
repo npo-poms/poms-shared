@@ -8,7 +8,7 @@ package nl.vpro.domain.api;
  * A searchable facet can have a 'sub search'. This is needed as the facet is not on precisely one field, but on some
  * selection of it.
  *
- * See e.g. http://wiki.publiekeomroep.nl/display/npoapi/Media-+and+Schedule-API#Media-andSchedule-API-relations
+ * See e.g. https://wiki.publiekeomroep.nl/display/npoapi/Media-+and+Schedule-API#Media-andSchedule-API-relations
  *
  * Another example are genres, you may be interested in just the genres starting with 3.0.1 or so.
  *

@@ -4,19 +4,10 @@
  */
 package nl.vpro.api.rs.v3.media;
 
-import java.io.InputStream;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
 import org.jboss.resteasy.annotations.cache.NoCache;
 
@@ -69,9 +60,9 @@ public interface MediaRestService {
      *
      * This only gives examples. It doesn't allow for any filtering, and is not fit for much data. See e.g. {@link #find(MediaForm, String, String, Long, Integer)} for a better use case.
      *
-     * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer, HttpServletRequest, HttpServletResponse)} or {@link #changes(String, String, Long, String, String, Integer, Boolean, Deletes, HttpServletRequest, HttpServletResponse)}.
+     * If you need huge amount of data use {@link #iterate(MediaForm, String, String, Long, Integer)} or {@link #changes(String, String, Long, String, String, Integer, Boolean, Deletes)}.
      *
-     * @param offset the first result. Not that this cannot be too big!
+     * @param offset the first result. Note that this cannot be too big!
      */
     @GET
     MediaResult list(
@@ -220,7 +211,7 @@ public interface MediaRestService {
     @GET
     @Path("/changes/")
     @NoCache
-    InputStream changes(
+    Response changes(
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(SINCE) Long since,
@@ -228,9 +219,7 @@ public interface MediaRestService {
         @QueryParam(ORDER) @DefaultValue(ASC) String order,
         @QueryParam(MAX) Integer max,
         @QueryParam(CHECK_PROFILE) Boolean profileCheck,
-        @QueryParam(DELETES) Deletes deletes,
-        @Context HttpServletRequest request,
-        @Context HttpServletResponse response);
+        @QueryParam(DELETES) Deletes deletes);
 
 
     /**
@@ -240,14 +229,13 @@ public interface MediaRestService {
      */
     @POST
     @Path("/iterate/")
-    InputStream iterate(
+    @NoCache
+    Response iterate(
         @Valid MediaForm form,
         @QueryParam(PROFILE) String profile,
         @QueryParam(PROPERTIES) String properties,
         @QueryParam(OFFSET) @DefaultValue(ZERO) @Min(0) Long offset,
-        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max,
-        @Context HttpServletRequest request,
-        @Context HttpServletResponse response
+        @QueryParam(MAX) @DefaultValue(Constants.DEFAULT_MAX_RESULTS_STRING) Integer max
     );
 
 
