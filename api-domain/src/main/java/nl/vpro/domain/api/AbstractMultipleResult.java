@@ -31,8 +31,10 @@ public abstract class AbstractMultipleResult<M> extends Result<MultipleEntry<M>>
         this(producer);
         this.items = adapt(ids, objects, predicate);
         this.total = (long) objects.size();
+        this.totalQualifier = TotalQualifier.EQUAL_TO;
         this.offset = null;
         this.max = null;
+
     }
 
     private List<? extends MultipleEntry<M>> adapt(final List<String> ids, final List<? extends M> list, DisplayablePredicate<M> predicate) {
