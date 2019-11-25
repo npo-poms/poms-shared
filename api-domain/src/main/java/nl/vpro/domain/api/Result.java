@@ -38,6 +38,7 @@ public class Result<T> implements Iterable<T> {
 
     /**
      * The value of {@link #getTotal()} may  not be exact
+     * @since 5.12
      */
     @XmlAttribute
     @Getter

@@ -6,15 +6,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.api.media.MediaFacetsResult;
 import nl.vpro.domain.api.page.PageFacetsResult;
 import nl.vpro.domain.api.page.PageSearchResult;
 import nl.vpro.domain.media.MediaTestDataBuilder;
-import nl.vpro.domain.page.Page;
-import nl.vpro.domain.page.PageBuilder;
-import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.page.*;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 
@@ -38,6 +36,7 @@ public class PageSearchResultTest {
             "  \"facets\" : { },\n" +
             "  \"mediaFacets\" : { },\n" +
             "  \"total\" : 1,\n" +
+            "  \"totalQualifier\" : \"EQUAL_TO\",\n" +
             "  \"offset\" : 0,\n" +
             "  \"max\" : 10,\n" +
             "  \"items\" : [ {\n" +
