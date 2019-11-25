@@ -212,10 +212,7 @@ public class PageUpdate implements Serializable {
     @Setter
     private Instant lastModified;
 
-    @XmlTransient
-    @Getter
-    @Setter
-    private boolean deleted = false;
+
 
     public PageUpdate() {
     }
@@ -335,6 +332,10 @@ public class PageUpdate implements Serializable {
         return genres;
     }
 
+
+    public boolean isDeleted() {
+        return workflow == PageWorkflow.DELETED;
+    }
 
     @Override
     public String toString() {
