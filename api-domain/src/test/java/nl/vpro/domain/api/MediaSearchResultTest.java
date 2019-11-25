@@ -26,6 +26,7 @@ public class MediaSearchResultTest {
             "  \"facets\" : {\n" +
             "  },\n" +
             "  \"total\" : 0,\n" +
+            "  \"totalQualifier\" : \"EQUAL_TO\",\n" +
             "  \"offset\" : 0,\n" +
             "  \"max\" : 10,\n" +
             "  \"items\" : [ ]\n" +
@@ -40,7 +41,7 @@ public class MediaSearchResultTest {
         MediaFacetsResult facets = new MediaFacetsResult();
         facets.setAgeRatings(new ArrayList<>());
         result.setFacets(facets);
-        MediaSearchResult rounded = JAXBTestUtil.roundTripAndSimilar(result, "<api:mediaSearchResult total=\"0\" offset=\"0\" max=\"10\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        MediaSearchResult rounded = JAXBTestUtil.roundTripAndSimilar(result, "<api:mediaSearchResult total=\"0\" totalQualifier=\"EQUAL_TO\" offset=\"0\" max=\"10\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:items/>\n" +
             "    <api:facets/>\n" +
             "</api:mediaSearchResult>");
