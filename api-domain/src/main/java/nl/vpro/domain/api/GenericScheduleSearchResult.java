@@ -1,10 +1,8 @@
 package nl.vpro.domain.api;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 import java.util.List;
+
+import javax.xml.bind.annotation.*;
 
 import nl.vpro.domain.api.media.MediaFacetsResult;
 
@@ -22,16 +20,16 @@ public class GenericScheduleSearchResult<S extends ApiScheduleEvent> extends Sea
     public GenericScheduleSearchResult() {
     }
 
-    public GenericScheduleSearchResult(List<SearchResultItem<? extends S>> list, Long offset, Integer max, long total) {
-        super(list, offset, max, total);
+    public GenericScheduleSearchResult(List<SearchResultItem<? extends S>> list, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
+        super(list, offset, max, total, totalQualifier);
     }
 
     protected GenericScheduleSearchResult(SearchResult<? extends S> sr) {
         super(sr);
     }
 
-    public GenericScheduleSearchResult(List<SearchResultItem<? extends S>> list, MediaFacetsResult facets, Long offset, Integer max, long listSizes) {
-        super(list, offset, max, listSizes);
+    public GenericScheduleSearchResult(List<SearchResultItem<? extends S>> list, MediaFacetsResult facets, Long offset, Integer max, Long listSizes, TotalQualifier totalQualifier) {
+        super(list, offset, max, listSizes, totalQualifier);
         this.facets = facets;
     }
 

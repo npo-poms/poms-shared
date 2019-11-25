@@ -1,12 +1,11 @@
 package nl.vpro.domain.api.subtitles;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
+import nl.vpro.domain.api.Result;
 import nl.vpro.domain.api.SearchResultItem;
 import nl.vpro.domain.subtitles.StandaloneCue;
 import nl.vpro.domain.subtitles.SubtitlesType;
@@ -23,8 +22,8 @@ public class SubtitlesSearchResultTest {
     public void xml() {
         StandaloneCue cue1 = StandaloneCue.standaloneBuilder().content("bla").type(SubtitlesType.CAPTION).start(Duration.ofSeconds(10)).build();
         SearchResultItem<StandaloneCue> item = new SearchResultItem<>(cue1);
-        SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, 100);
-        JAXBTestUtil.roundTripAndSimilar(result, "<api:subtitlesSearchResult total=\"100\" offset=\"0\" max=\"10\" xmlns=\"urn:vpro:media:2009\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, 100L, Result.TotalQualifier.EQUAL_TO);
+        JAXBTestUtil.roundTripAndSimilar(result, "<api:subtitlesSearchResult total=\"100\" totalQualifier=\"EQUAL_TO\" offset=\"0\" max=\"10\" xmlns=\"urn:vpro:media:2009\" xmlns:subtitles=\"urn:vpro:media:subtitles:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <api:items>\n" +
             "        <api:item xsi:type=\"api:searchResultItem\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "            <api:result xsi:type=\"subtitles:standaloneCue\" type=\"CAPTION\" sequence=\"0\" identifier=\"0\" start=\"P0DT0H0M10.000S\">bla</api:result>\n" +
@@ -37,9 +36,10 @@ public class SubtitlesSearchResultTest {
     public void json() {
         StandaloneCue cue1 = StandaloneCue.standaloneBuilder().content("bla").type(SubtitlesType.CAPTION).start(Duration.ofSeconds(10)).build();
         SearchResultItem<StandaloneCue> item = new SearchResultItem<>(cue1);
-        SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, 100);
+        SubtitlesSearchResult result = new SubtitlesSearchResult(Arrays.asList(item), 0L, 10, 100L, Result.TotalQualifier.EQUAL_TO);
         Jackson2TestUtil.roundTripAndSimilar(result, "{\n" +
             "  \"total\" : 100,\n" +
+            "  \"totalQualifier\" : \"EQUAL_TO\",\n" +
             "  \"offset\" : 0,\n" +
             "  \"max\" : 10,\n" +
             "  \"items\" : [ {\n" +

@@ -23,11 +23,11 @@ public class MediaResult extends Result<MediaObject> {
     }
 
     public static MediaResult emptyResult(Long offset, Integer max) {
-        return new MediaResult(Collections.emptyList(), offset, max, 0L);
+        return new MediaResult(Collections.emptyList(), offset, max, 0L, TotalQualifier.EQUAL_TO);
     }
 
-    public MediaResult(List<? extends MediaObject> list, Long offset, Integer max, Long total) {
-        super(list, offset, max, total);
+    public MediaResult(List<? extends MediaObject> list, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
+        super(list, offset, max, total, totalQualifier);
     }
 
     public MediaResult(Result<? extends MediaObject> mediaObjects) {

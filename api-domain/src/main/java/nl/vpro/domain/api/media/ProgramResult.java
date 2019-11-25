@@ -1,12 +1,13 @@
 package nl.vpro.domain.api.media;
 
-import nl.vpro.domain.api.Result;
-import nl.vpro.domain.media.Program;
+import java.util.Collections;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.Collections;
-import java.util.List;
+
+import nl.vpro.domain.api.Result;
+import nl.vpro.domain.media.Program;
 
 /**
  * Exists only because of https://jira.vpro.nl/browse/API-118
@@ -25,7 +26,7 @@ public class ProgramResult extends Result<Program> {
 
     }
     public ProgramResult(List<Program> programs, Long offset, Integer max, long listSizes) {
-        super(programs,  offset, max, listSizes);
+        super(programs,  offset, max, listSizes, TotalQualifier.EQUAL_TO);
     }
 
     public ProgramResult(Result<Program> programs) {

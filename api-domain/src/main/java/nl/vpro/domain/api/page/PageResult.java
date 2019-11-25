@@ -19,8 +19,8 @@ public class PageResult extends Result<Page> {
     public PageResult() {
     }
 
-    public PageResult(List<? extends Page> pages, Long offset, Integer max, long total) {
-        super(pages, offset, max, total);
+    public PageResult(List<? extends Page> pages, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
+        super(pages, offset, max, total, totalQualifier);
     }
 
     public PageResult(Result<? extends Page> pages) {

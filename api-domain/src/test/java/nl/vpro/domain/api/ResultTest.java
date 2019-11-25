@@ -1,8 +1,8 @@
 package nl.vpro.domain.api;
 
-import org.junit.Test;
-
 import java.util.Arrays;
+
+import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class ResultTest {
     @Test
     public void testGetList() {
-        Result<String> result = new Result<>(Arrays.asList("a", "b"), 10l, 5, 20l);
+        Result<String> result = new Result<>(Arrays.asList("a", "b"), 10L, 5, 20L, Result.TotalQualifier.EQUAL_TO);
         assertEquals(Arrays.asList("a", "b"), result.getItems());
         assertEquals(Long.valueOf(10), result.getOffset());
         assertEquals(Long.valueOf(20), result.getTotal());
@@ -25,7 +25,7 @@ public class ResultTest {
 
     @Test
     public void testIterator() {
-        Result<String> result = new Result<>(Arrays.asList("a", "b"), 10l, 5, 20l);
+        Result<String> result = new Result<>(Arrays.asList("a", "b"), 10L, 5, 20L, Result.TotalQualifier.EQUAL_TO);
         StringBuilder build = new StringBuilder();
         for(String s : result) {
             build.append(s);

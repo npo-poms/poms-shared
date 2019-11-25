@@ -30,7 +30,7 @@ public class PageSearchResultTest {
             .build();
         SearchResultItem<Page> item = new SearchResultItem<>(page);
         list.add(item);
-        PageSearchResult result = new PageSearchResult(list, 0L, 10, 1L);
+        PageSearchResult result = new PageSearchResult(list, 0L, 10, 1L, Result.TotalQualifier.EQUAL_TO);
         result.setFacets(new PageFacetsResult());
         result.setMediaFacets(new MediaFacetsResult());
 

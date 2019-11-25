@@ -27,7 +27,7 @@ import nl.vpro.domain.gtaa.*;
 })public class ThesaurusResult<T extends GTAAConcept> extends Result<T> {
 
     public ThesaurusResult(List<T> list, Integer max) {
-        super(list, 0L, max, null);
+        super(list, 0L, max, null, TotalQualifier.MISSING);
     }
 
 

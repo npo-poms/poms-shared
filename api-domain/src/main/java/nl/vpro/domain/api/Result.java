@@ -4,25 +4,21 @@
  */
 package nl.vpro.domain.api;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
-import lombok.EqualsAndHashCode;
-import nl.vpro.domain.media.Group;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.Segment;
+import com.fasterxml.jackson.annotation.*;
+
+import nl.vpro.domain.media.*;
 import nl.vpro.domain.page.Page;
 
 /**
@@ -32,12 +28,20 @@ import nl.vpro.domain.page.Page;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "resultType", propOrder = {"items"})
 @XmlSeeAlso({Page.class, Program.class, Group.class, Segment.class, ApiScheduleEvent.class, Suggestion.class})
-@JsonPropertyOrder({"total", "offset", "max", "items"})
+@JsonPropertyOrder({"total", "totalQualifier", "offset", "max", "items"})
 @EqualsAndHashCode
 public class Result<T> implements Iterable<T> {
 
     @XmlAttribute
     protected Long total;
+
+
+    /**
+     * The value of {@link #getTotal()} may  not be exact
+     */
+    @XmlAttribute
+    @Getter
+    protected TotalQualifier totalQualifier = TotalQualifier.MISSING;
 
     @XmlAttribute
     protected Long offset = 0L;
@@ -54,11 +58,12 @@ public class Result<T> implements Iterable<T> {
     public Result() {
     }
 
-    public Result(List<? extends T> items, Long offset, Integer max, Long total) {
+    public Result(List<? extends T> items, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
         this.items = items;
         this.offset = offset;
         this.max = max;
         this.total = total;
+        this.totalQualifier = totalQualifier;
     }
 
     public Result(Result<? extends T> copy) {
@@ -66,6 +71,7 @@ public class Result<T> implements Iterable<T> {
         this.offset = copy.offset;
         this.max = copy.max;
         this.total = copy.total;
+        this.totalQualifier = copy.totalQualifier;
     }
 
     public List<? extends T> getItems() {
@@ -104,18 +110,18 @@ public class Result<T> implements Iterable<T> {
     @NonNull
     @Override
     public Iterator<T> iterator() {
-        return items == null ? Collections.<T>emptyIterator() : Collections.<T>unmodifiableList(getItems()).iterator();
+        return items == null ? Collections.emptyIterator() : Collections.<T>unmodifiableList(getItems()).iterator();
     }
 
     public Stream<? extends T> stream() {
-        return items == null ? Collections.<T>emptyList().stream() : items.stream();
+        return items == null ? Stream.of() : items.stream();
     }
 
     public static <T> Collector<T, List<T>, Result<T>> collector() {
         return new Collector<T, List<T>, Result<T>>() {
             @Override
             public Supplier<List<T>> supplier() {
-                return ArrayList<T>::new;
+                return ArrayList::new;
 
             }
 
@@ -132,7 +138,7 @@ public class Result<T> implements Iterable<T> {
 
             @Override
             public Function<List<T>, Result<T>> finisher() {
-                return l -> new Result<T>(l, null, null, (long) l.size());
+                return l -> new Result<T>(l, null, null, (long) l.size(), TotalQualifier.EQUAL_TO);
             }
 
 
@@ -147,6 +153,17 @@ public class Result<T> implements Iterable<T> {
     @Override
     public String toString() {
         return "" + getItems();
+    }
+
+
+    /**
+     * @since 5.12
+     */
+    public enum TotalQualifier {
+        EQUAL_TO,
+        APPROXIMATE,
+        GREATER_THAN_OR_EQUAL_TO,
+        MISSING
     }
 
 

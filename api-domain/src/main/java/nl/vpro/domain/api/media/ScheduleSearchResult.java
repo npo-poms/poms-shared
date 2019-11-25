@@ -26,11 +26,11 @@ public class ScheduleSearchResult extends GenericScheduleSearchResult<ApiSchedul
     }
 
     public static ScheduleSearchResult emptyResult(Long offset, Integer max) {
-        return new ScheduleSearchResult(Collections.emptyList(), offset, max, 0L);
+        return new ScheduleSearchResult(Collections.emptyList(), offset, max, 0L, TotalQualifier.EQUAL_TO);
     }
 
-    public ScheduleSearchResult(List<SearchResultItem<? extends ApiScheduleEvent>> list, Long offset, Integer max, long total) {
-        super(list, offset, max, total);
+    public ScheduleSearchResult(List<SearchResultItem<? extends ApiScheduleEvent>> list, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
+        super(list, offset, max, total, totalQualifier);
     }
 
     public ScheduleSearchResult(SearchResult<? extends ApiScheduleEvent> sr) {

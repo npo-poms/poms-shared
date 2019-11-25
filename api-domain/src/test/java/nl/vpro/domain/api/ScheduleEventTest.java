@@ -37,7 +37,7 @@ public class ScheduleEventTest {
         apiEvent = new ApiScheduleEvent(mediaEvent, program);
         List<ApiScheduleEvent> events = new ArrayList<>();
         events.add(apiEvent);
-        ScheduleResult result = new ScheduleResult(new Result<>(events, 0L, 10, 1L));
+        ScheduleResult result = new ScheduleResult(new Result<>(events, 0L, 10, 1L, Result.TotalQualifier.APPROXIMATE));
 
 
         String expected = "<api:scheduleResult total=\"1\" offset=\"0\" max=\"10\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:pages=\"urn:vpro:pages:2013\" xmlns:api=\"urn:vpro:api:2013\" xmlns:media=\"urn:vpro:media:2009\">\n" +

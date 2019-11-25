@@ -1,14 +1,13 @@
 package nl.vpro.domain.api.media;
 
-import nl.vpro.domain.api.GenericMediaSearchResult;
-import nl.vpro.domain.api.SearchResult;
-import nl.vpro.domain.api.SearchResultItem;
-import nl.vpro.domain.media.Program;
+import java.util.Collections;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import java.util.Collections;
-import java.util.List;
+
+import nl.vpro.domain.api.*;
+import nl.vpro.domain.media.Program;
 
 /**
  * Exists only because of https://jira.vpro.nl/browse/API-118
@@ -24,11 +23,11 @@ public class ProgramSearchResult extends GenericMediaSearchResult<Program> {
     }
 
     public static ProgramSearchResult emptyResult(Long offset, Integer max) {
-        return new ProgramSearchResult(Collections.emptyList(), offset, max, 0L);
+        return new ProgramSearchResult(Collections.emptyList(), offset, max, 0L, TotalQualifier.EQUAL_TO);
     }
 
-    public ProgramSearchResult(List<SearchResultItem<? extends Program>> searchResultItems, Long offset, Integer max, long listSizes) {
-        super(searchResultItems, offset, max, listSizes);
+    public ProgramSearchResult(List<SearchResultItem<? extends Program>> searchResultItems, Long offset, Integer max, Long listSizes, TotalQualifier totalQualifier) {
+        super(searchResultItems, offset, max, listSizes, totalQualifier);
     }
 
     public ProgramSearchResult(SearchResult<Program> episodes) {
