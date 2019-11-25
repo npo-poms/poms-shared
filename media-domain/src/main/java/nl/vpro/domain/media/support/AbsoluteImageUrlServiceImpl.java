@@ -25,6 +25,10 @@ public class AbsoluteImageUrlServiceImpl implements ImageUrlService {
     @Override
     public String getImageBaseUrl() {
         return imageServerBaseUrl;
+    }
 
+    @Override
+    public String toString() {
+        return imageServerBaseUrl + "<image>";
     }
 }
