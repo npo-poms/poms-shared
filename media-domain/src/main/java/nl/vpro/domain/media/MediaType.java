@@ -4,12 +4,7 @@
  */
 package nl.vpro.domain.media;
 
-import lombok.SneakyThrows;
-
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -506,7 +501,7 @@ public enum MediaType implements Displayable {
             this.constructor = null;
         } else {
             try {
-                this.constructor = clazz.getConstructor();
+                this.constructor = clazz.getDeclaredConstructor();
             } catch (NoSuchMethodException nsme) {
                 throw new RuntimeException(nsme);
             }
@@ -536,7 +531,7 @@ public enum MediaType implements Displayable {
     public final MediaObject getMediaInstance() {
         try {
             if (constructor == null) {
-                throw new RuntimeException("Not possible to make instances of " + this);
+                throw new IllegalStateException("Not possible to make instances of " + this);
             }
             MediaObject o = (MediaObject) constructor.newInstance();
             setType(o);
@@ -675,27 +670,11 @@ public enum MediaType implements Displayable {
         return MediaType.MEDIA;
     }
 
-    @SneakyThrows
+    /**
+     * @deprecated
+     */
     public MediaObject createInstance() {
-
-        Class<? extends MediaObject> clazz = getMediaObjectClass();
-
-        if (Program.class.isAssignableFrom(clazz)) {
-            Program o = (Program) clazz.newInstance();
-            o.setType((ProgramType) getSubType());
-            return o;
-        }
-        if (Group.class.isAssignableFrom(clazz)) {
-            Group o = (Group) clazz.newInstance();
-            o.setType((GroupType) getSubType());
-            return o;
-        }
-        if (Segment.class.isAssignableFrom(clazz)) {
-            Segment o = (Segment) clazz.newInstance();
-            o.setType((SegmentType) getSubType());
-            return o;
-        }
-        throw new IllegalStateException(clazz + " of " + this + " is not a program, group or segment");
+        return getMediaInstance();
     }
 
     /**

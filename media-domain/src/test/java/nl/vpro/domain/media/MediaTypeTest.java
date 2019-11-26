@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static nl.vpro.domain.media.MediaType.*;
 import static org.assertj.core.api.Assertions.assertThat;
