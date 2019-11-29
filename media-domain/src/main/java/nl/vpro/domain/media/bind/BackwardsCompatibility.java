@@ -99,10 +99,10 @@ public class BackwardsCompatibility {
     }
 
     public static class CountryCodeList {
-        public static class Serializer extends AbstractList.Serializer<Country> {
+        public static class Serializer extends AbstractList.Serializer<Region> {
 
             @Override
-            protected void serializeValue(Country value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
+            protected void serializeValue(Region value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
                 if (v1Compatibility.get()) {
                     if (value == null || value.getCode() == null) {
                         log.warn("country code {} is null", value);
