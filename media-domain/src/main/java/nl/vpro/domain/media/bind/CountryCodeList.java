@@ -5,11 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 
 import org.meeuw.i18n.Region;
-import org.meeuw.i18n.countries.Country;
+
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.*;
 
 import nl.vpro.jackson2.Jackson2Mapper;
 
@@ -20,10 +18,10 @@ import nl.vpro.jackson2.Jackson2Mapper;
  */
 @Slf4j
 public class CountryCodeList {
-    public static class Serializer extends AbstractList.Serializer<Country> {
+    public static class Serializer extends AbstractList.Serializer<Region> {
 
         @Override
-        protected void serializeValue(Country value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
+        protected void serializeValue(Region value, JsonGenerator jgen, SerializerProvider serializerProvider) throws IOException {
             if (value == null) {
                 log.warn("country code is null");
                 jgen.writeNull();
