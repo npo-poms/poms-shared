@@ -2,222 +2,202 @@ package nl.vpro.domain.page.update;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
-import org.checkerframework.checker.nullness.qual.Nullable;;
-
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.classification.Term;
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.Schedule;
-import nl.vpro.domain.page.Crid;
-import nl.vpro.domain.page.PageType;
-import nl.vpro.domain.page.Section;
+import nl.vpro.domain.page.*;
+
+;
 
 /**
  * @author Michiel Meeuwissen
  * @since 2.0
  */
-public class PageUpdateBuilder<PB extends PageUpdateBuilder<PB, P>, P extends PageUpdate> {
+public class PageUpdateBuilder {
 
-    protected final P page;
+    protected final PageUpdate page;
 
-    @SuppressWarnings("unchecked")
-    protected final PB self = (PB) this;
 
-    public static DefaultPageBuilder page(PageType type, String url) {
-        return new DefaultPageBuilder(new PageUpdate(type, url));
+    public static PageUpdateBuilder page(@NonNull PageType type, @NonNull String url) {
+        return new PageUpdateBuilder(new PageUpdate(type, url));
     }
 
-    public static DefaultPageBuilder article(String url) {
+    public static PageUpdateBuilder article(String url) {
         return page(PageType.ARTICLE, url);
     }
 
-    private PageUpdateBuilder(P page) {
+    private PageUpdateBuilder(PageUpdate page) {
         this.page = page;
     }
 
 
-    public PB broadcasters(String... broadcasters) {
+    public PageUpdateBuilder broadcasters(String... broadcasters) {
         return broadcasters(Arrays.asList(broadcasters));
     }
 
-    public PB portal(PortalUpdate portal) {
+    public PageUpdateBuilder portal(PortalUpdate portal) {
         page.setPortal(portal);
-        return self;
+        return this;
     }
 
-    public PB title(String title) {
+    public PageUpdateBuilder title(String title) {
         page.setTitle(title);
-        return self;
+        return this;
     }
 
-    public PB subtitle(String subtitle) {
+    public PageUpdateBuilder subtitle(String subtitle) {
         page.setSubtitle(subtitle);
-        return self;
+        return this;
     }
 
-    public PB keywords(String... keywords) {
+    public PageUpdateBuilder keywords(String... keywords) {
         return keywords(Arrays.asList(keywords));
     }
 
-    public PB keywords(List<String> keywords) {
+    public PageUpdateBuilder keywords(List<String> keywords) {
         page.setKeywords(keywords);
-        return self;
+        return this;
     }
 
-    public PB genres(String... genres) {
+    public PageUpdateBuilder genres(String... genres) {
         return genres(Arrays.asList(genres));
     }
-    public PB genres(List<String> genres) {
+    public PageUpdateBuilder genres(List<String> genres) {
         page.setGenres(genres);
-        return self;
+        return this;
     }
 
-    public PB genres(Term... genres) {
+    public PageUpdateBuilder genres(Term... genres) {
         return genreTerms(Arrays.asList(genres));
     }
 
-    public PB genreTerms(List<Term> genres) {
-        page.setGenres(Lists.transform(genres, new Function<Term, String>() {
-            @Nullable
-            @Override
-            public String apply(@Nullable Term input) {
-                return input == null ? null : input.getTermId();
-
-            }
-        }));
-        return self;
+    public PageUpdateBuilder genreTerms(List<Term> genres) {
+        page.setGenres(genres.stream().map(Term::getTermId).collect(Collectors.toList()));
+        return this;
     }
 
-    public PB paragraphs(ParagraphUpdate... paragraphs) {
+    public PageUpdateBuilder paragraphs(ParagraphUpdate... paragraphs) {
         return paragraphs(Arrays.asList(paragraphs));
     }
 
-    public PB paragraphs(List<ParagraphUpdate> paragraphs) {
+    public PageUpdateBuilder paragraphs(List<ParagraphUpdate> paragraphs) {
         page.setParagraphs(paragraphs);
-        return self;
+        return this;
     }
 
-    public PB summary(String summary) {
+    public PageUpdateBuilder summary(String summary) {
         page.setSummary(summary);
-        return self;
+        return this;
     }
 
-    public PB tags(String... tags) {
+    public PageUpdateBuilder tags(String... tags) {
         return tags(Arrays.asList(tags));
     }
 
 
-    public PB tags(List<String> tags) {
+    public PageUpdateBuilder tags(List<String> tags) {
         page.setTags(tags);
-        return self;
+        return this;
     }
 
-    public PB broadcasters(List<String> broadcasters) {
+    public PageUpdateBuilder broadcasters(List<String> broadcasters) {
         page.setBroadcasters(broadcasters);
-        return self;
+        return this;
     }
 
-    public PB links(LinkUpdate... links) {
+    public PageUpdateBuilder links(LinkUpdate... links) {
         return links(Arrays.asList(links));
     }
 
-    public PB links(List<LinkUpdate> links) {
+    public PageUpdateBuilder links(List<LinkUpdate> links) {
         page.setLinks(links);
-        return self;
+        return this;
     }
 
-    public PB embeds(EmbedUpdate... embeds) {
+    public PageUpdateBuilder embeds(EmbedUpdate... embeds) {
         page.setEmbeds(Arrays.asList(embeds));
-        return self;
+        return this;
     }
 
-    public PB images(ImageUpdate... images) {
+    public PageUpdateBuilder images(ImageUpdate... images) {
         page.setImages(Arrays.asList(images));
-        return self;
+        return this;
     }
 
-    public PB relations(RelationUpdate... relations) {
+    public PageUpdateBuilder relations(RelationUpdate... relations) {
         page.setRelations(Arrays.asList(relations));
-        return self;
+        return this;
     }
 
-    public PB crids(Crid... crids) {
+    public PageUpdateBuilder crids(Crid... crids) {
         page.setCrids(Arrays.asList(crids));
-        return self;
+        return this;
     }
-    public PB crids(String... crids) {
-        page.setCrids(Lists.transform(Arrays.asList(crids), new Function<String, Crid>() {
-            @Nullable
-            @Override
-            public Crid apply(@Nullable String input) {
-                return input == null ? null : new Crid(input);
-
-            }
-        }));
-        return self;
+    public PageUpdateBuilder crids(String... crids) {
+        page.setCrids(Arrays.stream(crids).map(Crid::new).collect(Collectors.toList()));
+        return this;
     }
 
-    public PB alternativeUrls(String... urls) {
+    public PageUpdateBuilder alternativeUrls(String... urls) {
         page.setAlternativeUrls(Arrays.asList(urls));
-        return self;
+        return this;
     }
 
-    public PB statRefs(String... statRefs) {
+    public PageUpdateBuilder statRefs(String... statRefs) {
         page.setStatRefs(Arrays.asList(statRefs));
-        return self;
+        return this;
     }
 
-    public PB publishStart(Date date) {
+    public PageUpdateBuilder publishStart(Date date) {
         page.setPublishStart(fromDate(date));
-        return self;
+        return this;
     }
 
-    public PB publishStart(Instant date) {
+    public PageUpdateBuilder publishStart(Instant date) {
         page.setPublishStart(date);
-        return self;
+        return this;
     }
 
-    public PB publishStart(LocalDateTime date) {
+    public PageUpdateBuilder publishStart(LocalDateTime date) {
         return publishStart(date.atZone(Schedule.ZONE_ID).toInstant());
 
     }
 
-    public PB lastPublished(Instant date) {
+    public PageUpdateBuilder lastPublished(Instant date) {
         page.setLastPublished(date);
-        return self;
+        return this;
     }
 
-    public PB lastPublished(LocalDateTime date) {
+    public PageUpdateBuilder lastPublished(LocalDateTime date) {
         return lastPublished(date.atZone(Schedule.ZONE_ID).toInstant());
     }
 
-    public PB creationDate(Instant date) {
+    public PageUpdateBuilder creationDate(Instant date) {
         page.setCreationDate(date);
-        return self;
+        return this;
     }
 
-    public PB creationDate(LocalDateTime date) {
+    public PageUpdateBuilder creationDate(LocalDateTime date) {
         return creationDate(date.atZone(Schedule.ZONE_ID).toInstant());
     }
 
 
-    public PB lastModified(Instant date) {
+    public PageUpdateBuilder lastModified(Instant date) {
         page.setLastModified(date);
-        return self;
+        return this;
     }
 
 
-    public PB lastModified(LocalDateTime date) {
+    public PageUpdateBuilder lastModified(LocalDateTime date) {
         return lastModified(date.atZone(Schedule.ZONE_ID).toInstant());
     }
 
-    public PB withNow() {
+    public PageUpdateBuilder withNow() {
         Instant now = Instant.now();
         return creationDate(now)
             .lastModified(now);
@@ -227,7 +207,7 @@ public class PageUpdateBuilder<PB extends PageUpdateBuilder<PB, P>, P extends Pa
         return date == null ? null : date.toInstant();
     }
 
-    public PB example() {
+    public PageUpdateBuilder example() {
         return
             title("Groot brein in klein dier")
                 .subtitle("De naakte molrat heeft ‘m")
@@ -257,13 +237,8 @@ public class PageUpdateBuilder<PB extends PageUpdateBuilder<PB, P>, P extends Pa
             ;
     }
 
-    public P build() {
+    public PageUpdate build() {
         return page;
     }
 
-    public static class DefaultPageBuilder extends PageUpdateBuilder<DefaultPageBuilder, PageUpdate> {
-        private DefaultPageBuilder(PageUpdate page) {
-            super(page);
-        }
-    }
 }
