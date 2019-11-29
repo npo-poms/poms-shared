@@ -124,7 +124,7 @@ public class TT888 {
                     }
                     while (stream.hasNext()) {
                         String l = stream.next();
-                        if (StringUtils.isBlank(l)) {
+                        if (StringUtils.isBlank(l) && content.length() > 0) {
                             break;
                         }
                         if (content.length() > 0) {
@@ -168,10 +168,10 @@ public class TT888 {
     private static Duration parseTime(String duration) {
         String[] split = duration.split(":", 4);
         int index = 0;
-        Long hours = Long.parseLong(split[0]);
-        Long minutes = Long.parseLong(split[1]);
-        Long seconds = Long.parseLong(split[2]);
-        Long hunderds = Long.parseLong(split[3]);
+        long hours = Long.parseLong(split[0]);
+        long minutes = Long.parseLong(split[1]);
+        long seconds = Long.parseLong(split[2]);
+        long hunderds = Long.parseLong(split[3]);
         return Duration.ofHours(hours).plusMinutes(minutes).plusSeconds(seconds).plusMillis(hunderds * 10);
     }
 
