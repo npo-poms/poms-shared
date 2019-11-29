@@ -203,6 +203,15 @@ public class PageUpdateBuilder {
             .lastModified(now);
     }
 
+    public PageUpdateBuilder workflow(PageWorkflow workflow) {
+        page.setWorkflow(workflow);
+        return this;
+    }
+
+    public PageUpdateBuilder deleted() {
+        return workflow(PageWorkflow.DELETED);
+    }
+
     Instant fromDate(Date date) {
         return date == null ? null : date.toInstant();
     }
@@ -238,6 +247,9 @@ public class PageUpdateBuilder {
     }
 
     public PageUpdate build() {
+        if (page.getWorkflow() == null) {
+            page.setWorkflow(PageWorkflow.PUBLISHED);
+        }
         return page;
     }
 
