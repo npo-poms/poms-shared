@@ -159,6 +159,14 @@ public class Result<T> implements Iterable<T> {
 
     /**
      * @since 5.12
+     * @throws IndexOutOfBoundsException  if the index is out of range (index < 0 || index >= size())
+     */
+    public T get(int i) {
+        return items.get(i);
+    }
+
+    /**
+     * @since 5.12
      */
     public enum TotalQualifier {
         EQUAL_TO,

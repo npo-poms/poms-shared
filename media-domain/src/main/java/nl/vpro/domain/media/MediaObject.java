@@ -735,7 +735,6 @@ public abstract class MediaObject
      *
      * In the publisher this list is explicely cleared before publishing to the API if there are no published locations
      * This is kind of a hack, may be it is better to have the workflow in AvailableSubtitles also.
-     * @return
      */
     @XmlElement(name = "availableSubtitles")
     public List<AvailableSubtitles> getAvailableSubtitles() {
