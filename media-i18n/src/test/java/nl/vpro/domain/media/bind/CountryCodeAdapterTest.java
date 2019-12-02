@@ -1,20 +1,18 @@
 package nl.vpro.domain.media.bind;
 
-import com.neovisionaries.i18n.CountryCode;
-import nl.vpro.i18n.Locales;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.RegionService;
-import org.meeuw.i18n.bind.jaxb.Code;
+import java.util.*;
+
+import org.junit.*;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.CurrentCountry;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.RegionService;
+import org.meeuw.i18n.regions.bind.jaxb.Code;
 import org.meeuw.i18n.subdivisions.UserAssignedCountrySubdivision;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
+import com.neovisionaries.i18n.CountryCode;
+
+import nl.vpro.i18n.Locales;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.meeuw.i18n.countries.Country.*;
