@@ -351,7 +351,7 @@ public class MediaObjectTest {
 
         Set<ConstraintViolation<Program>> constraintViolations = validator.validate(p);
 
-        assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{org.meeuw.i18n.validation.language.message}");
+        assertThat(constraintViolations.iterator().next().getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
         assertThat(constraintViolations.iterator().next().getMessage()).isEqualTo("zz is an invalid ISO 639 language code");
         assertThat(constraintViolations).hasSize(1);
 
@@ -372,9 +372,9 @@ public class MediaObjectTest {
         );
 
 
-        assertThat(constraintViolations.get(0).getMessageTemplate()).startsWith("{org.meeuw.i18n.validation.language.message}");
+        assertThat(constraintViolations.get(0).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.language.message}");
         assertThat(constraintViolations.get(0).getMessage()).isEqualTo("nl_XX is an invalid ISO 639 language code");
-         assertThat(constraintViolations.get(1).getMessageTemplate()).startsWith("{org.meeuw.i18n.validation.region.message}");
+         assertThat(constraintViolations.get(1).getMessageTemplate()).startsWith("{org.meeuw.i18n.regions.validation.region.message}");
         assertThat(constraintViolations.get(1).getMessage()).isEqualTo("nl_XX is not a valid region");
         assertThat(constraintViolations).hasSize(2);
 
