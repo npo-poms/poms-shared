@@ -1,12 +1,6 @@
-/*
- * Copyright (C) 2011 All rights reserved
- * VPRO The Netherlands
- */
-package nl.vpro.validation;
+package nl.vpro.domain.validation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -14,14 +8,20 @@ import javax.validation.Payload;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+/**
+ * @author Michiel Meeuwissen
+ * @since 5.12
+ */
+
 @Target({TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = RestrictionValidator.class)
+@Constraint(validatedBy = EmbargoValidator.class)
 @Documented
-public @interface Restriction {
+public @interface ValidEmbargo {
     String message() default "{nl.vpro.constraints.publishable}";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
 }
+
