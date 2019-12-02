@@ -3,8 +3,8 @@ package nl.vpro.domain.media.bind;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import org.meeuw.i18n.Region;
-import org.meeuw.i18n.bind.jaxb.Code;
+import org.meeuw.i18n.regions.Region;
+import org.meeuw.i18n.regions.bind.jaxb.Code;
 import org.meeuw.i18n.countries.Country;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;

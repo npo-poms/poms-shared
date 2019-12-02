@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-import org.meeuw.i18n.Region;
+import org.meeuw.i18n.regions.Region;
 
 /**
  * @author Michiel Meeuwissen
