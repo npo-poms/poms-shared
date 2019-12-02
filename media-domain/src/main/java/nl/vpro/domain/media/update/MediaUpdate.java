@@ -42,6 +42,7 @@ import nl.vpro.domain.media.exceptions.ModificationException;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.domain.user.Portal;
+import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.util.IntegerVersion;
 import nl.vpro.util.IntegerVersionSpecific;
@@ -81,9 +82,10 @@ import nl.vpro.xml.bind.LocaleAdapter;
 @XmlSeeAlso({SegmentUpdate.class, ProgramUpdate.class, GroupUpdate.class})
 @Slf4j
 @XmlTransient
+@ValidEmbargo(groups = WarningValidatorGroup.class)
 public abstract class  MediaUpdate<M extends MediaObject>
     implements
-    MutableEmbargoDeprecated,
+    MutableEmbargoDeprecated<MediaUpdate<M>>,
     TextualObjectUpdate<TitleUpdate, DescriptionUpdate,  MediaUpdate<M>>,
     IntegerVersionSpecific,
     MediaIdentifiable {
@@ -348,7 +350,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @XmlAttribute(name = "version")
     protected String getVersionAttribute() {
         if (xmlVersion) {
-            Version version = getVersion();
+            IntegerVersion version = getVersion();
             return version == null ? null : version.toString();
         } else {
             return null;
@@ -399,7 +401,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         }
 
         StringBuilder sb = new StringBuilder("List of constraint violations: [\n");
-        for(ConstraintViolation violation : violations) {
+        for(ConstraintViolation<?> violation : violations) {
             sb.append('\t')
                 .append(violation.toString())
                 .append('\n');

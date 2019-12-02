@@ -9,22 +9,22 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.Instant;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.user.Editor;
+import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.validation.EmbargoValidation;
-import nl.vpro.validation.PomsValidatorGroup;
+import nl.vpro.validation.*;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -37,6 +37,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @XmlType(name = "abstractPublishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
+@ValidEmbargo(groups = WarningValidatorGroup.class)
 public abstract class AbstractPublishableObject<T extends AbstractPublishableObject<T>>
     extends DomainObject implements Publishable<T> {
 

@@ -44,10 +44,10 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.bind.*;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.Description;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.domain.user.*;
+import nl.vpro.domain.validation.ValidEmbargo;
 import nl.vpro.i18n.Locales;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.jackson2.Views;
@@ -217,8 +217,8 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
     @Filter(name = EMBARGO_FILTER, condition = "(publishstart is null "
         + "or publishstart < now() " + "or (select p.type from program p where p.id = id) != 'CLIP' "
         + "or (0 < (select count(*) from mediaobject_broadcaster o where o.mediaobject_id = id and o.broadcasters_id in (:broadcasters))))"),
-    @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)") })
-
+    @Filter(name = DELETED_FILTER, condition = "(workflow NOT IN ('MERGED', 'FOR_DELETION', 'DELETED') and mergedTo_id is null)")
+})
 @Slf4j
 public abstract class MediaObject
     extends
