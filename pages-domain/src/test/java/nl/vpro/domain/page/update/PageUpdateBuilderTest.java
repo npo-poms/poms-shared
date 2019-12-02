@@ -6,16 +6,13 @@ package nl.vpro.domain.page.update;
 
 import java.io.StringWriter;
 import java.io.Writer;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZonedDateTime;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
 
 import javax.xml.bind.JAXB;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.page.Image;
@@ -198,7 +195,7 @@ public class PageUpdateBuilderTest {
 
 
     @Test
-    @Ignore("Used for building test data")
+    @Disabled("Used for building test data")
     public void testExample() {
         PageUpdate page = PageUpdateBuilder.page(PageType.ARTICLE, "http://www.vpro.nl/article").example().build();
         Writer writer = new StringWriter();

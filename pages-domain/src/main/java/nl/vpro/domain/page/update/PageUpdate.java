@@ -59,7 +59,8 @@ public class PageUpdate implements Serializable {
     @Setter
     protected PageType type;
 
-    @XmlAttribute
+
+    @XmlTransient
     @Getter
     @Setter
     protected PageWorkflow workflow;
@@ -335,6 +336,11 @@ public class PageUpdate implements Serializable {
 
     public boolean isDeleted() {
         return workflow == PageWorkflow.DELETED;
+    }
+
+    @XmlAttribute(name = "workflow")
+    protected PageWorkflow getWorkflowAttribute() {
+        return workflow == PageWorkflow.PUBLISHED ? null : workflow;
     }
 
     @Override
