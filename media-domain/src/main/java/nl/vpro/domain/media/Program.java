@@ -16,13 +16,8 @@ import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.TextualObjects;
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Workflow;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.domain.user.ThirdParty;
-import nl.vpro.validation.Broadcast;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.user.*;
 
 import static javax.persistence.CascadeType.MERGE;
 import static nl.vpro.domain.TextualObjects.sorted;
@@ -40,7 +35,6 @@ import static nl.vpro.domain.TextualObjects.sorted;
  * @author roekoe
  */
 @Entity
-@Broadcast
 @XmlRootElement(name = "program")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "programType", propOrder = {
