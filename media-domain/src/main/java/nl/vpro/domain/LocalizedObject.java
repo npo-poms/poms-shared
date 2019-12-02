@@ -21,7 +21,7 @@ import nl.vpro.domain.media.support.Tag;
 public interface LocalizedObject<
     T extends OwnedText,
     D extends OwnedText,
-    WS extends Supplier<String> & UpdatableIdentifiable,
+    WS extends Supplier<String> & UpdatableIdentifiable<Long, WS>,
     TR extends Supplier<String>,
     TO extends LocalizedObject<T, D, WS, TR, TO>>
     extends TextualObject<T, D, TO> {
