@@ -5,10 +5,13 @@ import java.lang.annotation.*;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import nl.vpro.domain.Embargo;
+
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * Checks whether the embargo settings {@link Embargo#getPublishStartInstant()} and {@link Embargo#getPublishStopInstant()} are consistent. I.e. the latter one is before the first one.
  * @author Michiel Meeuwissen
  * @since 5.12
  */

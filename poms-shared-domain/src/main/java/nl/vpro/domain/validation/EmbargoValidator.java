@@ -7,7 +7,7 @@ import nl.vpro.domain.Embargo;
 
 /**
  * @author Michiel Meeuwissen
- * @since ...
+ * @since 5.12
  */
 public class EmbargoValidator implements ConstraintValidator<ValidEmbargo, Embargo> {
 
