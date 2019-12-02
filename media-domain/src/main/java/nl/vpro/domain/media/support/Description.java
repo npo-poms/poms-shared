@@ -2,19 +2,18 @@ package nl.vpro.domain.media.support;
 
 import java.io.Serializable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import nl.vpro.domain.AbstractOwnedText;
-import nl.vpro.domain.Child;
-import nl.vpro.domain.Xmlns;
+import nl.vpro.domain.*;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.validation.NoHtml;
 
@@ -27,7 +26,6 @@ import nl.vpro.validation.NoHtml;
  * @since 0.4
  */
 @Entity
-@nl.vpro.validation.Description
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "descriptionType",
     namespace = Xmlns.MEDIA_NAMESPACE)
