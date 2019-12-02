@@ -7,7 +7,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import com.google.common.collect.Range;
 
 /**
- * Also includes setters.
+ * As {@link Embargo} but, also includes setters
  *
  * @author Michiel Meeuwissen
  * @since 5.1
