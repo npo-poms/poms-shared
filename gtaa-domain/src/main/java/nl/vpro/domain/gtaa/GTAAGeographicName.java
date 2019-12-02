@@ -7,7 +7,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.meeuw.i18n.Region;
+import org.meeuw.i18n.regions.Region;
 
 import nl.vpro.w3.rdf.Description;
 

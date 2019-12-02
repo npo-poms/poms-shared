@@ -5,17 +5,14 @@ import java.util.Date;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.*;
 
 
 /**
- * @see @link(http://jira.codehaus.org/browse/JACKSON-920)
+ * @see  {@link http://jira.codehaus.org/browse/JACKSON-920}
  * @deprecated Jackson2Mapper arranged it with a module in shared-jackson2 >= 0.21
  */
+@Deprecated
 public class DateToJsonTimestamp {
 
     public static class Serializer extends JsonSerializer<Date> {

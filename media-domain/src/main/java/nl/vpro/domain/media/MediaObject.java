@@ -27,12 +27,12 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.*;
-import org.meeuw.i18n.RegionService;
 import org.meeuw.i18n.countries.Country;
 import org.meeuw.i18n.countries.validation.ValidCountry;
-import org.meeuw.i18n.persistence.RegionToStringConverter;
-import org.meeuw.i18n.validation.Language;
-import org.meeuw.i18n.validation.ValidRegion;
+import org.meeuw.i18n.regions.RegionService;
+import org.meeuw.i18n.regions.persistence.RegionToStringConverter;
+import org.meeuw.i18n.regions.validation.Language;
+import org.meeuw.i18n.regions.validation.ValidRegion;
 
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -353,7 +353,7 @@ public abstract class MediaObject
     @Convert(converter = RegionToStringConverter.class)
     protected List<
         // valid are countries (further validated by @ValidCountry), and a list of codes.
-        org.meeuw.i18n.
+        org.meeuw.i18n.regions.
         @ValidRegion(classes = {Country.class}, includes = {"GB-ENG", "GB-NIR", "GB-SCT", "GB-WLS"})
         @ValidCountry(value = ValidCountry.OFFICIAL | ValidCountry.USER_ASSIGNED | ValidCountry.FORMER, excludes = {"XN"})
         @NotNull Region> countries;
@@ -1326,14 +1326,14 @@ public abstract class MediaObject
     @JsonDeserialize(using = CountryCodeList.Deserializer.class)
     @XmlJavaTypeAdapter(value = CountryCodeAdapter.class)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<org.meeuw.i18n.Region> getCountries() {
+    public List<org.meeuw.i18n.regions.Region> getCountries() {
         if (countries == null) {
             countries = new ArrayList<>();
         }
         return countries;
     }
 
-    public void setCountries(List<org.meeuw.i18n.Region> countries) {
+    public void setCountries(List<org.meeuw.i18n.regions.Region> countries) {
         this.countries = updateList(this.countries, countries);
     }
 
@@ -1346,7 +1346,7 @@ public abstract class MediaObject
         return addCountry(Country.of(country));
     }
 
-    public MediaObject addCountry(@lombok.NonNull org.meeuw.i18n.Region country) {
+    public MediaObject addCountry(@lombok.NonNull org.meeuw.i18n.regions.Region country) {
         if (countries == null) {
             countries = new ArrayList<>();
         }

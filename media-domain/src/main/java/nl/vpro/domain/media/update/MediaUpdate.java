@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.meeuw.i18n.bind.jaxb.Code;
+import org.meeuw.i18n.regions.bind.jaxb.Code;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -160,7 +160,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     Boolean isDeleted;
 
-    List<org.meeuw.i18n.Region> countries;
+    List<org.meeuw.i18n.regions.Region> countries;
 
     List<Locale> languages;
 
@@ -879,14 +879,14 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     @XmlElement(name = "country")
     @XmlJavaTypeAdapter(Code.class)
-    public List<org.meeuw.i18n.Region> getCountries() {
+    public List<org.meeuw.i18n.regions.Region> getCountries() {
          if (countries == null) {
             countries = new ArrayList<>();
          }
         return countries;
     }
 
-    public void setCountries(List<org.meeuw.i18n.Region> countries) {
+    public void setCountries(List<org.meeuw.i18n.regions.Region> countries) {
         this.countries = countries;
     }
 

@@ -4,7 +4,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.meeuw.i18n.spi.RegionProvider;
+import org.meeuw.i18n.regions.spi.RegionProvider;
 
 import nl.vpro.domain.gtaa.GTAAGeographicName;
 

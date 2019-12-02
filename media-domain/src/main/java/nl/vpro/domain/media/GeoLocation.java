@@ -18,7 +18,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.meeuw.i18n.Region;
+import org.meeuw.i18n.regions.Region;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
