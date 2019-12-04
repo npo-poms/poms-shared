@@ -67,6 +67,10 @@ public interface Displayable {
         return Optional.empty();
     }
 
+    /**
+     * Sometimes displayable values are deprecated or experimental. Their value is possible but they should not be
+     * displayed in situations where the value is not yet present. Then this can return false.
+     */
     @JsonIgnore
     default boolean display() {
         return true;
