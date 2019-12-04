@@ -343,6 +343,11 @@ public class PageUpdate implements Serializable {
         return workflow == PageWorkflow.PUBLISHED ? null : workflow;
     }
 
+
+    protected void setWorkflowAttribute(PageWorkflow workflow) {
+        this.workflow = workflow;
+    }
+
     @Override
     public String toString() {
         return url + (crids != null ? (" " + crids) : "") + " " + getTitle();
