@@ -1,4 +1,4 @@
-package nl.vpro.domain.api.media;
+package nl.vpro.domain.media;
 
 import java.util.Optional;
 

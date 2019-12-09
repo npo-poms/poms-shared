@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.page;
 
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.*;
@@ -35,16 +35,22 @@ public class Referral implements  Association {
     @XmlAttribute
     @URI
     @NotNull
+    @Getter
+    @Setter
     private String referrer;
 
 
     @XmlAttribute
+    @Getter
+    @Setter
     private LinkType type;
 
     @XmlValue
     @NoHtml
     @JsonProperty("title")
-    private String title;
+    @Getter
+    @Setter
+    private String linkText;
 
     protected Referral() {
     }
@@ -55,32 +61,14 @@ public class Referral implements  Association {
 
     public Referral(String referrer, String linkText, LinkType type) {
         this.referrer = referrer;
-        this.title = linkText;
+        this.linkText = linkText;
         this.type = type;
     }
-
-    public String getReferrer() {
-        return referrer;
-    }
-
-    public void setReferrer(String referrer) {
-        this.referrer = referrer;
-    }
-
-    public String getLinkText() {
-        return title;
-    }
-
-    public void setLinkText(String linkText) {
-        this.title = linkText;
-    }
-
 
 
     @Override
     public String getText() {
         return getLinkText();
-
     }
 
     @Override
@@ -89,12 +77,4 @@ public class Referral implements  Association {
 
     }
 
-    @Override
-    public LinkType getType() {
-        return type;
-    }
-
-    public void setType(LinkType type) {
-        this.type = type;
-    }
 }

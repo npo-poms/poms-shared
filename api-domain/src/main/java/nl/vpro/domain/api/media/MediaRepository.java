@@ -8,6 +8,7 @@ import java.time.Instant;
 
 import nl.vpro.domain.api.*;
 import nl.vpro.domain.api.profile.ProfileDefinition;
+import nl.vpro.domain.media.MediaLoader;
 import nl.vpro.domain.media.MediaObject;
 import nl.vpro.util.CloseableIterator;
 import nl.vpro.util.FilteringIterator;

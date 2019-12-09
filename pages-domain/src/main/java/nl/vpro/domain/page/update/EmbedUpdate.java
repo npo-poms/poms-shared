@@ -4,7 +4,7 @@
  */
 package nl.vpro.domain.page.update;
 
-import lombok.Builder;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -26,12 +26,18 @@ public class EmbedUpdate implements Serializable {
 
     @NotNull
     @XmlAttribute
+    @Getter
+    @Setter
     private String midRef;
 
     @NoHtml
+    @Getter
+    @Setter
     private String title;
 
     @NoHtml
+    @Getter
+    @Setter
     private String description;
 
     public EmbedUpdate() {
@@ -49,30 +55,6 @@ public class EmbedUpdate implements Serializable {
     public EmbedUpdate(String midRef, String title, String description) {
         this.midRef = midRef;
         this.title = title;
-        this.description = description;
-    }
-
-    public String getMidRef() {
-        return midRef;
-    }
-
-    public void setMidRef(String midRef) {
-        this.midRef = midRef;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
     }
 

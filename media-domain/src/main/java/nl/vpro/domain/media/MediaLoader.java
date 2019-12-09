@@ -1,19 +1,19 @@
-package nl.vpro.domain.api.media;
+package nl.vpro.domain.media;
 
+import java.util.Arrays;
 import java.util.List;
-
-import nl.vpro.domain.media.MediaObject;
-import nl.vpro.domain.media.MediaProvider;
 
 /**
  * @author Michiel Meeuwissen
  * @since 3.4
  */
-public interface MediaLoader extends MediaProvider, MediaRedirector {
+public interface MediaLoader extends MediaProvider {
 
     List<MediaObject> loadAll(List<String> ids);
 
-    MediaObject load(String id);
+    default MediaObject load(String id) {
+        return loadAll(Arrays.asList(id)).get(0);
+    }
 
     @SuppressWarnings("unchecked")
     @Override

@@ -48,6 +48,7 @@ public abstract class Change<T>  {
     //@XmlElement(name = "object")
     private T object;
 
+
     protected Change() {
 
     }

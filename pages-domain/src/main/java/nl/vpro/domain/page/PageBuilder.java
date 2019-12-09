@@ -29,31 +29,31 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
 
     protected final P page;
 
-    public static PageBuilder page(PageType type) {
+    public static DefaultPageBuilder page(PageType type) {
         return new DefaultPageBuilder(new Page(type));
     }
-    public static PageBuilder article(){
+    public static DefaultPageBuilder article(){
         return page(PageType.ARTICLE);
     }
 
-    public static PageBuilder article(String url) {
+    public static DefaultPageBuilder article(String url) {
         return article().url(url);
     }
 
-    public static PageBuilder movie() {
+    public static DefaultPageBuilder movie() {
         return page(PageType.MOVIE);
     }
 
-    public static PageBuilder movie(String url) {
+    public static DefaultPageBuilder movie(String url) {
         return movie().url(url);
     }
 
-    public static PageBuilder home() {
+    public static DefaultPageBuilder home() {
         return page(PageType.HOME);
     }
 
 
-    public static PageBuilder home(String url) {
+    public static DefaultPageBuilder home(String url) {
         return home().url(url);
     }
 

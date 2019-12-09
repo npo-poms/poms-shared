@@ -5,6 +5,7 @@
 package nl.vpro.domain.api.media;
 
 import nl.vpro.domain.api.profile.ProfileDefinition;
+import nl.vpro.domain.media.MediaLoader;
 import nl.vpro.domain.media.MediaObject;
 
 /**

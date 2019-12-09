@@ -51,6 +51,7 @@ public class Embed {
         this.media = media;
     }
 
+    @lombok.Builder
     public Embed(MediaObject media, String title, String description) {
         this.media = media;
         this.title = title;

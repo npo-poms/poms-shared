@@ -4,14 +4,15 @@
  */
 package nl.vpro.domain.page.update;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.page.Link;
 import nl.vpro.domain.page.LinkType;
@@ -28,12 +29,18 @@ public class LinkUpdate implements Serializable{
     @NotNull
     @URI(lenient = true, mustHaveScheme = true, minHostParts = 2)
     @XmlAttribute
+    @Getter
+    @Setter
     private String pageRef;
 
     @NoHtml
+    @Getter
+    @Setter
     private String text;
 
     @XmlAttribute
+    @Getter
+    @Setter
     private LinkType type;
 
     public static LinkUpdate of(String pageRef, String text) {
@@ -69,22 +76,6 @@ public class LinkUpdate implements Serializable{
         this.text = text;
     }
 
-    public String getPageRef() {
-        return pageRef;
-    }
-
-    public void setPageRef(String pageRef) {
-        this.pageRef = pageRef;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
     @Override
     public boolean equals(Object o) {
         if(this == o) {
@@ -109,14 +100,6 @@ public class LinkUpdate implements Serializable{
 
     public Link toLink() {
         return new Link(pageRef, text, type);
-    }
-
-    public LinkType getType() {
-        return type;
-    }
-
-    public void setType(LinkType type) {
-        this.type = type;
     }
 
     @Override

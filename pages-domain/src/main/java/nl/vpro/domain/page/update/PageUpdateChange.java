@@ -5,7 +5,7 @@ import java.time.Instant;
 
 import javax.xml.bind.annotation.*;
 
-import nl.vpro.domain.Change;
+import nl.vpro.domain.VersionedChange;
 
 /**
  * @author Michiel Meeuwissen
@@ -15,15 +15,17 @@ import nl.vpro.domain.Change;
 @XmlType(name = "changeType")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlSeeAlso(PageUpdate.class)
-public class PageUpdateChange extends Change<PageUpdate> implements Serializable {
+public class PageUpdateChange extends VersionedChange<PageUpdate> implements Serializable {
+
+
 
     public PageUpdateChange() {
         super();
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    public PageUpdateChange(Instant publishDate, String id, Boolean deleted, Boolean tail, PageUpdate object) {
-        super(publishDate, id, deleted, tail, object);
+    public PageUpdateChange(Instant publishDate, String id, Boolean deleted, Boolean tail,  Integer version, PageUpdate object) {
+        super(publishDate, id, deleted, tail, version, object);
     }
 
 
