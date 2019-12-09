@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class PageJsonSchemaTest {
 
-    private PageBuilder builder;
+    private PageBuilder.DefaultPageBuilder builder;
 
     @Before
     public void setUp() {
@@ -50,7 +50,7 @@ public class PageJsonSchemaTest {
         news = roundTripContains(news, "\"crids\":[\"crid://vpro.nl/article/12345\"]}");
 
         assertThat(news.getCrids()).hasSize(1);
-        assertThat(news.getCrids().get(0).getValue()).isEqualTo("crid://vpro.nl/article/12345");
+        assertThat(news.getCrids().get(0)).isEqualTo("crid://vpro.nl/article/12345");
     }
 
     @Test
