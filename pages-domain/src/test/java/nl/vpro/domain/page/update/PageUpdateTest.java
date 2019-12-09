@@ -14,11 +14,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.page.PageType;
-import nl.vpro.domain.page.RelationDefinition;
-import nl.vpro.domain.page.Section;
+import nl.vpro.domain.page.*;
 import nl.vpro.domain.support.License;
 import nl.vpro.domain.user.*;
+import nl.vpro.domain.user.Portal;
 import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import nl.vpro.test.util.serialize.SerializeTestUtil;
@@ -114,6 +113,7 @@ public class PageUpdateTest {
                 .build()
             )
             .build();
+        assertThat(page.getWorkflow()).isEqualTo(PageWorkflow.PUBLISHED);
         PageUpdate rounded = Jackson2TestUtil.roundTripAndSimilarAndEquals(Jackson2Mapper.getPublisherInstance(), page, "{\n" +
             "  \"type\" : \"ARTICLE\",\n" +
             "  \"url\" : \"http://3voor12-beta-test.vpro.nl/lokaal/amsterdam/archief/Nieuws-test-pagina.html\",\n" +
@@ -150,7 +150,8 @@ public class PageUpdateTest {
             "    \"type\" : \"FOO\",\n" +
             "    \"broadcaster\" : \"VPRO\",\n" +
             "    \"value\" : \"bla\"\n" +
-            "  } ]\n" +
+            "  } ]," +
+            "  \"expandedWorkflow\":\"PUBLISHED\"\n" +
             "}");
 
         assertThat(rounded.getPortal().getSection().getDisplayName()).isEqualTo("display");

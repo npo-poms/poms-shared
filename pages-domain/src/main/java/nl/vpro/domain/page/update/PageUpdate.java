@@ -63,7 +63,8 @@ public class PageUpdate implements Serializable {
     @XmlTransient
     @Getter
     @Setter
-    protected PageWorkflow workflow;
+    @XmlAttribute(required = true)
+    protected PageWorkflow workflow = PageWorkflow.PUBLISHED;
 
     @NotNull
     @URI
@@ -346,6 +347,12 @@ public class PageUpdate implements Serializable {
 
     protected void setWorkflowAttribute(PageWorkflow workflow) {
         this.workflow = workflow;
+    }
+
+    @JsonProperty("expandedWorkflow")
+    @JsonView({Views.Publisher.class})
+    protected PageWorkflow getExpandedWorkflow() {
+        return workflow;
     }
 
     @Override
