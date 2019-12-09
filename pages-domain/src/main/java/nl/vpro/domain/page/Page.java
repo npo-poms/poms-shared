@@ -21,8 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.validation.NoHtml;
-import nl.vpro.validation.URI;
+import nl.vpro.validation.*;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
 /**
@@ -115,7 +114,7 @@ public class Page implements MutableEmbargo<Page> {
     @JsonProperty("crids")
     @Getter
     @Setter
-    protected List<Crid> crids;
+    protected List<@CRID String> crids;
 
     @Valid
     @URI

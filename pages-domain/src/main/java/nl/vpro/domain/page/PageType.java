@@ -28,8 +28,9 @@ public enum PageType implements Displayable {
     MOVIE("Film"),
     SERIES("Serie"),
     PERSON("Persoon"),
-    SEARCH("Zoekpagina")
-    ;
+    SEARCH("Zoekpagina");
+
+
 
     private final String displayName;
 
