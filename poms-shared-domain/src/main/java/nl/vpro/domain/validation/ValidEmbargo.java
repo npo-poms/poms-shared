@@ -11,7 +11,7 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Checks whether the embargo settings {@link Embargo#getPublishStartInstant()} and {@link Embargo#getPublishStopInstant()} are consistent. I.e. the latter one is before the first one.
+ * Checks whether the embargo settings {@link Embargo#getPublishStartInstant()} and {@link Embargo#getPublishStopInstant()} are consistent. I.e. the latter one is after the first one.
  * @author Michiel Meeuwissen
  * @since 5.12
  */
