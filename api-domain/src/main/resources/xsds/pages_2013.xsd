@@ -9,7 +9,7 @@
 
   <xs:complexType name="pageType">
     <xs:sequence>
-      <xs:element name="crid" type="tns:pridType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="alternativeUrl" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="broadcaster" type="media:broadcasterType" maxOccurs="unbounded"/>
       <xs:element name="portal" type="tns:portalType" minOccurs="0"/>
@@ -50,10 +50,6 @@
     <xs:attribute name="refCount" type="xs:int"/>
     <xs:attribute name="sortDate" type="xs:dateTime"/>
   </xs:complexType>
-
-  <xs:simpleType name="pridType">
-    <xs:restriction base="xs:string"/>
-  </xs:simpleType>
 
   <xs:complexType name="portalType">
     <xs:sequence>

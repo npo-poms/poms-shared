@@ -11,7 +11,7 @@
 
   <xs:complexType name="pageUpdateType">
     <xs:sequence>
-      <xs:element name="crid" type="page:pridType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="crid" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="alternativeUrl" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
       <xs:element name="broadcaster" type="xs:string" maxOccurs="unbounded"/>
       <xs:element name="portal" type="tns:portalUpdateType" minOccurs="0"/>
@@ -41,12 +41,12 @@
       <xs:element name="relation" type="tns:relationUpdateType" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
     <xs:attribute name="type" type="page:pageTypeEnum" use="required"/>
-    <xs:attribute name="workflow" type="page:pageWorkflow"/>
     <xs:attribute name="url" type="xs:string" use="required"/>
     <xs:attribute name="publishStart" type="xs:dateTime"/>
     <xs:attribute name="lastPublished" type="xs:dateTime"/>
     <xs:attribute name="creationDate" type="xs:dateTime"/>
     <xs:attribute name="lastModified" type="xs:dateTime"/>
+    <xs:attribute name="workflow" type="page:pageWorkflow"/>
   </xs:complexType>
 
   <xs:complexType name="portalUpdateType">

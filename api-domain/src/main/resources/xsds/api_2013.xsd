@@ -663,6 +663,7 @@
       </xs:element>
     </xs:sequence>
     <xs:attribute name="total" type="xs:long"/>
+    <xs:attribute name="totalQualifier" type="totalQualifier"/>
     <xs:attribute name="offset" type="xs:long"/>
     <xs:attribute name="max" type="xs:int"/>
   </xs:complexType>
@@ -919,6 +920,15 @@
       <xs:enumeration value="member"/>
       <xs:enumeration value="creationDate"/>
       <xs:enumeration value="lastModified"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="totalQualifier">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="EQUAL_TO"/>
+      <xs:enumeration value="APPROXIMATE"/>
+      <xs:enumeration value="GREATER_THAN_OR_EQUAL_TO"/>
+      <xs:enumeration value="MISSING"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
