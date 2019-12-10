@@ -1,5 +1,7 @@
 package nl.vpro.domain.page;
 
+import lombok.*;
+
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -16,8 +18,8 @@ import nl.vpro.validation.URI;
  */
 @XmlType(name = "linkType", propOrder = {"text"})
 @XmlAccessorType(XmlAccessType.FIELD)
+@Data
 public class Link implements Association {
-
 
     public static Link of(String url, String title, LinkType type) {
         Link referral = new Link();
@@ -49,33 +51,6 @@ public class Link implements Association {
     public Link(String pageRef, String text, LinkType type) {
         this.pageRef = pageRef;
         this.text = text;
-        this.type = type;
-    }
-
-    @Override
-    public String getPageRef() {
-        return pageRef;
-    }
-
-    public void setPageRef(String pageRef) {
-        this.pageRef = pageRef;
-    }
-
-    @Override
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    @Override
-    public LinkType getType() {
-        return type;
-    }
-
-    public void setType(LinkType type) {
         this.type = type;
     }
 }
