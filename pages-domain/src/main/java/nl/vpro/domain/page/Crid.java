@@ -20,6 +20,7 @@ import nl.vpro.validation.CRID;
  * @since 2.3
  * @deprecated There is no real point. Just use @{@link CRID} {@link String}
  */
+@SuppressWarnings("DeprecatedIsStillUsed")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pridType")
 @JsonSerialize(using = CridToString.Serializer.class)

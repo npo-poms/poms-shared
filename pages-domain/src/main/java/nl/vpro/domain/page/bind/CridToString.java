@@ -19,6 +19,7 @@ import nl.vpro.domain.page.Crid;
  * @author Roelof Jan Koekoek
  * @since 3.0
  */
+@SuppressWarnings("DeprecatedIsStillUsed")
 @Deprecated
 public class CridToString {
 

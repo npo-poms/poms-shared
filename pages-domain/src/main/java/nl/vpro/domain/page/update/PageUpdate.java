@@ -323,6 +323,8 @@ public class PageUpdate implements Serializable {
         return workflow == PageWorkflow.DELETED;
     }
 
+    // protected methods related to xml/json binding
+
     @XmlAttribute(name = "workflow")
     protected PageWorkflow getWorkflowAttribute() {
         return workflow == PageWorkflow.PUBLISHED ? null : workflow;
