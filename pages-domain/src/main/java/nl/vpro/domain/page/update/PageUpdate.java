@@ -61,7 +61,6 @@ public class PageUpdate implements Serializable {
     @XmlTransient
     @Getter
     @Setter
-    @XmlAttribute(required = true)
     protected PageWorkflow workflow = PageWorkflow.PUBLISHED;
 
     @NotNull
