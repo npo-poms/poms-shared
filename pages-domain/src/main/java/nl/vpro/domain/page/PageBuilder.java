@@ -82,11 +82,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
     }
 
     public PB crids(String... crids) {
-        List<Crid> list = new ArrayList<>(crids.length);
-        for(String crid : crids) {
-            list.add(new Crid(crid));
-        }
-        page.setCrids(list);
+        page.setCrids(Arrays.asList(crids));
         return self;
     }
 

@@ -429,7 +429,6 @@ public abstract class MediaObject
     @Valid
     protected Set<@NotNull MemberRef> memberOf;
 
-    @SuppressWarnings("NullableProblems")
     @Enumerated(EnumType.STRING)
     @NotNull(groups = { WarningValidatorGroup.class })
     protected AgeRating ageRating;
@@ -539,7 +538,7 @@ public abstract class MediaObject
 
     // Used for monitoring publication delay. Not exposed via java.
     // Set its value in sql to now() when unmodified media is republished.
-    @Column(name = "repubDate", nullable = true, unique = false)
+    @Column(name = "repubDate", unique = false)
     protected Instant repubDate;
 
     @Column
@@ -756,11 +755,11 @@ public abstract class MediaObject
         return crids;
     }
 
-    public void setCrids(List<String> crids) {
+    public void setCrids(List<@CRID String> crids) {
         this.crids = crids;
     }
 
-    public MediaObject addCrid(String crid) {
+    public MediaObject addCrid(@CRID String crid) {
         if (StringUtils.isNotBlank(crid)) {
             crid = crid.trim();
             if (crids == null) {

@@ -12,8 +12,6 @@ import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.Schedule;
 import nl.vpro.domain.page.*;
 
-;
-
 /**
  * @author Michiel Meeuwissen
  * @since 2.0
@@ -22,6 +20,9 @@ public class PageUpdateBuilder {
 
     protected final PageUpdate page;
 
+    public static PageUpdateBuilder page() {
+        return new PageUpdateBuilder(new PageUpdate());
+    }
 
     public static PageUpdateBuilder page(@NonNull PageType type, @NonNull String url) {
         return new PageUpdateBuilder(new PageUpdate(type, url));
@@ -134,12 +135,13 @@ public class PageUpdateBuilder {
         return this;
     }
 
+    @Deprecated
     public PageUpdateBuilder crids(Crid... crids) {
-        page.setCrids(Arrays.asList(crids));
+        page.setCrids(Arrays.stream(crids).map(Crid::getValue).collect(Collectors.toList()));
         return this;
     }
     public PageUpdateBuilder crids(String... crids) {
-        page.setCrids(Arrays.stream(crids).map(Crid::new).collect(Collectors.toList()));
+        page.setCrids(Arrays.asList(crids));
         return this;
     }
 

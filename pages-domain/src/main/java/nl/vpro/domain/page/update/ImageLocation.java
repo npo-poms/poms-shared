@@ -25,7 +25,7 @@ public final class ImageLocation implements Serializable{
     @URI(message = "provide a valid url to image location")
     private String url;
 
-    private ImageLocation() {
+    public ImageLocation() {
 
     }
 

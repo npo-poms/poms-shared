@@ -18,11 +18,13 @@ import nl.vpro.validation.CRID;
 /**
  * @author Roelof Jan Koekoek
  * @since 2.3
+ * @deprecated There is no real point. Just use @{@link CRID} {@link String}
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "pridType")
 @JsonSerialize(using = CridToString.Serializer.class)
 @JsonDeserialize(using = CridToString.Deserializer.class)
+@Deprecated
 public class Crid {
 
     @XmlValue
