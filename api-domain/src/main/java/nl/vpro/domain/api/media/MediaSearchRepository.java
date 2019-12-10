@@ -5,14 +5,13 @@
 package nl.vpro.domain.api.media;
 
 import nl.vpro.domain.api.profile.ProfileDefinition;
-import nl.vpro.domain.media.MediaLoader;
-import nl.vpro.domain.media.MediaObject;
+import nl.vpro.domain.media.*;
 
 /**
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
-public interface MediaSearchRepository extends MediaLoader, MediaRepository {
+public interface MediaSearchRepository extends MediaLoader, MediaRedirector, MediaRepository {
 
     MediaSearchResult find(ProfileDefinition<MediaObject> profile, MediaForm form, long offset, Integer max);
 
