@@ -20,14 +20,17 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import nl.vpro.domain.page.*;
+import nl.vpro.domain.page.PageType;
+import nl.vpro.domain.page.PageWorkflow;
 import nl.vpro.domain.page.util.Urls;
 import nl.vpro.domain.page.validation.ValidBroadcaster;
 import nl.vpro.domain.page.validation.ValidGenre;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
