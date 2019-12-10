@@ -27,7 +27,12 @@ import nl.vpro.validation.URI;
 public class LinkUpdate implements Serializable{
 
     @NotNull
-    @URI(lenient = true, mustHaveScheme = true, minHostParts = 2)
+    @URI(
+        lenient = true,
+        mustHaveScheme = true,
+        minHostParts = 2,
+        schemes = {"http", "https"}
+    )
     @XmlAttribute
     @Getter
     @Setter
