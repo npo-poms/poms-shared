@@ -1,12 +1,9 @@
 package nl.vpro.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -60,8 +57,8 @@ public class Changes<T> implements AutoCloseable, Iterable<Change<T>> {
     }
     @NonNull
     @Override
-    public Iterator<Change<T>> iterator() {
-        return (Iterator<Change<T>>) iterator;
+    public CloseableIterator<Change<T>> iterator() {
+        return (CloseableIterator<Change<T>>) iterator;
     }
 
     public Optional<Instant> getETA() {
