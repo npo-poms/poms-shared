@@ -144,7 +144,6 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
         return new File(getTempDir(), fileName);
     }
 
-    @SuppressWarnings("ResultOfMethodCallIgnored")
     public File getFileWithDocumentation(String namespace) {
         File file = getFile(namespace);
         File fileWithDocumentation = new File(file.getParentFile(), "documented." + file.getName());
@@ -199,6 +198,8 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
     protected void generateXSDs() throws IOException, JAXBException {
         Class<?>[] classes = getClasses();
         log.info("Generating xsds {} in {}", Arrays.asList(classes), getTempDir());
+        final DocumentationAdder collector = new DocumentationAdder(classes);
+
         JAXBContext context = JAXBContext.newInstance(classes);
         context.generateSchema(new SchemaOutputResolver() {
             @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -219,7 +220,6 @@ public abstract class Mappings implements Function<String, File>, LSResourceReso
                 if (!f.exists()) {
                     f.getParentFile().mkdirs();
                     log.info("Creating {} -> {}", namespaceUri, f);
-
                     StreamResult result = new StreamResult(f);
                     result.setSystemId(f);
 
