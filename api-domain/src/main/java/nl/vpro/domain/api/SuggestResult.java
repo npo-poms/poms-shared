@@ -26,6 +26,6 @@ public class SuggestResult extends Result<Suggestion> {
     }
 
     public SuggestResult(List<Suggestion> list, Integer max, long listSizes) {
-        super(list, null, max, listSizes, TotalQualifier.EQUAL_TO);
+        super(list, null, max, Total.equalsTo(listSizes));
     }
 }

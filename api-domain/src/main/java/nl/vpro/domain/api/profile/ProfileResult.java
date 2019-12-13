@@ -19,6 +19,6 @@ public class ProfileResult extends Result<Profile> {
     }
 
     public ProfileResult(List<? extends Profile> pages, Long offset, Integer max, long listSizes) {
-        super(pages, offset, max, listSizes, TotalQualifier.EQUAL_TO);
+        super(pages, offset, max, Total.equalsTo(listSizes));
     }
 }

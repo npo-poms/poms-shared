@@ -23,11 +23,11 @@ public class ProgramSearchResult extends GenericMediaSearchResult<Program> {
     }
 
     public static ProgramSearchResult emptyResult(Long offset, Integer max) {
-        return new ProgramSearchResult(Collections.emptyList(), offset, max, 0L, TotalQualifier.EQUAL_TO);
+        return new ProgramSearchResult(Collections.emptyList(), offset, max, Total.EMPTY);
     }
 
-    public ProgramSearchResult(List<SearchResultItem<? extends Program>> searchResultItems, Long offset, Integer max, Long listSizes, TotalQualifier totalQualifier) {
-        super(searchResultItems, offset, max, listSizes, totalQualifier);
+    public ProgramSearchResult(List<SearchResultItem<? extends Program>> searchResultItems, Long offset, Integer max, Total total) {
+        super(searchResultItems, offset, max, total);
     }
 
     public ProgramSearchResult(SearchResult<Program> episodes) {

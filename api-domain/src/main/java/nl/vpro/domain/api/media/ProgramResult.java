@@ -19,14 +19,14 @@ import nl.vpro.domain.media.Program;
 public class ProgramResult extends Result<Program> {
 
     public static ProgramResult emptyResult(Long offset, Integer max) {
-        return new ProgramResult(Collections.emptyList(), offset, max, 0L, TotalQualifier.EQUAL_TO);
+        return new ProgramResult(Collections.emptyList(), offset, max, Total.EMPTY);
     }
 
     public ProgramResult() {
 
     }
-    public ProgramResult(List<Program> programs, Long offset, Integer max, long listSizes, TotalQualifier totalQualifier) {
-        super(programs,  offset, max, listSizes, totalQualifier);
+    public ProgramResult(List<Program> programs, Long offset, Integer max, Total total) {
+        super(programs,  offset, max, total);
     }
 
     public ProgramResult(Result<Program> programs) {
