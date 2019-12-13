@@ -20,16 +20,16 @@ public class GenericScheduleSearchResult<S extends ApiScheduleEvent> extends Sea
     public GenericScheduleSearchResult() {
     }
 
-    public GenericScheduleSearchResult(List<SearchResultItem<? extends S>> list, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
-        super(list, offset, max, total, totalQualifier);
+    public GenericScheduleSearchResult(List<SearchResultItem<? extends S>> list, Long offset, Integer max, Total total) {
+        super(list, offset, max, total);
     }
 
     protected GenericScheduleSearchResult(SearchResult<? extends S> sr) {
         super(sr);
     }
 
-    public GenericScheduleSearchResult(List<SearchResultItem<? extends S>> list, MediaFacetsResult facets, Long offset, Integer max, Long listSizes, TotalQualifier totalQualifier) {
-        super(list, offset, max, listSizes, totalQualifier);
+    public GenericScheduleSearchResult(List<SearchResultItem<? extends S>> list, MediaFacetsResult facets, Long offset, Integer max, Total total) {
+        super(list, offset, max, total);
         this.facets = facets;
     }
 

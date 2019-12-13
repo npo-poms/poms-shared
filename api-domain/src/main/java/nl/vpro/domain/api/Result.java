@@ -59,12 +59,12 @@ public class Result<T> implements Iterable<T> {
     public Result() {
     }
 
-    public Result(List<? extends T> items, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
+    public Result(List<? extends T> items, Long offset, Integer max, Total total) {
         this.items = items;
         this.offset = offset;
         this.max = max;
-        this.total = total;
-        this.totalQualifier = totalQualifier;
+        this.total = total.total;
+        this.totalQualifier = total.qualifier;
     }
 
     public Result(Result<? extends T> copy) {
@@ -139,7 +139,7 @@ public class Result<T> implements Iterable<T> {
 
             @Override
             public Function<List<T>, Result<T>> finisher() {
-                return l -> new Result<T>(l, null, null, (long) l.size(), TotalQualifier.EQUAL_TO);
+                return l -> new Result<T>(l, null, null, new Total((long) l.size(), TotalQualifier.EQUAL_TO));
             }
 
 
@@ -173,6 +173,32 @@ public class Result<T> implements Iterable<T> {
         APPROXIMATE,
         GREATER_THAN_OR_EQUAL_TO,
         MISSING
+    }
+
+    /**
+     * @since 5.12
+     */
+    public static class Total {
+        public static final Total EMPTY = equalsTo(0L);
+        public static final Total MISSING = new Total(null, TotalQualifier.MISSING);
+
+        public static Total equalsTo(Long total) {
+            return new Total(total, TotalQualifier.EQUAL_TO);
+        }
+        public static Total equalsTo(int total) {
+            return new Total((long) total, TotalQualifier.EQUAL_TO);
+        }
+        public static Total approximate(Long total) {
+            return new Total(total, TotalQualifier.APPROXIMATE);
+        }
+
+        final Long total;
+        final TotalQualifier qualifier;
+
+        public Total(Long total, TotalQualifier qualifier) {
+            this.total = total;
+            this.qualifier = qualifier;
+        }
     }
 
 

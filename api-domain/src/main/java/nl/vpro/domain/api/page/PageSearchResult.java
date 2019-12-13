@@ -51,12 +51,12 @@ public class PageSearchResult extends SearchResult<Page> {
         mediaFacets = searchResultItems.getMediaFacets();
     }
 
-    public PageSearchResult(List<SearchResultItem<? extends Page>> searchResultItems, Long offset, Integer max, Long listSizes, TotalQualifier totalQualifier) {
-        super(searchResultItems, offset, max, listSizes, totalQualifier);
+    public PageSearchResult(List<SearchResultItem<? extends Page>> searchResultItems, Long offset, Integer max, Total total) {
+        super(searchResultItems, offset, max, total);
     }
 
-    public PageSearchResult(List<SearchResultItem<? extends Page>> searchResultItems, PageFacetsResult facets, MediaFacetsResult mediaFacets, Long offset, Integer max, Long  listSizes, TotalQualifier totalQualifier) {
-        super(searchResultItems, offset, max, listSizes, totalQualifier);
+    public PageSearchResult(List<SearchResultItem<? extends Page>> searchResultItems, PageFacetsResult facets, MediaFacetsResult mediaFacets, Long offset, Integer max, Total total) {
+        super(searchResultItems, offset, max, total);
         this.facets = facets;
         this.mediaFacets = mediaFacets;
     }

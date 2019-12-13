@@ -25,11 +25,11 @@ public class SubtitlesSearchResult extends SearchResult<StandaloneCue> {
     }
 
     public static SubtitlesSearchResult emptyResult(Long offset, Integer max) {
-        return new SubtitlesSearchResult(Collections.<SearchResultItem<? extends StandaloneCue>>emptyList(), offset, max, 0L, TotalQualifier.EQUAL_TO);
+        return new SubtitlesSearchResult(Collections.<SearchResultItem<? extends StandaloneCue>>emptyList(), offset, max, Total.EMPTY);
     }
 
-    public SubtitlesSearchResult(List<SearchResultItem<? extends StandaloneCue>> list, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
-        super(list, offset, max, total, totalQualifier);
+    public SubtitlesSearchResult(List<SearchResultItem<? extends StandaloneCue>> list, Long offset, Integer max, Total total) {
+        super(list, offset, max, total);
     }
 
 

@@ -19,8 +19,8 @@ public class SearchResult<S> extends Result<SearchResultItem<? extends S>> {
     public SearchResult() {
     }
 
-    public SearchResult(List<SearchResultItem<? extends S>> list, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
-        super(list, offset, max, total, totalQualifier);
+    public SearchResult(List<SearchResultItem<? extends S>> list, Long offset, Integer max, Total total) {
+        super(list, offset, max, total);
     }
 
     public SearchResult(SearchResult<? extends S> copy) {
@@ -57,6 +57,6 @@ public class SearchResult<S> extends Result<SearchResultItem<? extends S>> {
      * Returns this SearchResult as a {@link #Result}, which means that all items are unwrapped, and the facet results are removed.
      */
     public Result<S> asResult() {
-        return new Result<>(asList(), getOffset(), getMax(), getTotal(), getTotalQualifier());
+        return new Result<>(asList(), getOffset(), getMax(), new Total(getTotal(), getTotalQualifier()));
     }
 }

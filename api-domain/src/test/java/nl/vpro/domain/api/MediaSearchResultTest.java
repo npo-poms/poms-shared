@@ -18,7 +18,7 @@ public class MediaSearchResultTest {
     @Test
     public void toJson() {
         List<SearchResultItem<? extends MediaObject>> list = Collections.emptyList();
-        MediaSearchResult result = new MediaSearchResult(list, 0L, 10, 0L, Result.TotalQualifier.EQUAL_TO);
+        MediaSearchResult result = new MediaSearchResult(list, 0L, 10, Result.Total.EMPTY);
         MediaFacetsResult facets = new MediaFacetsResult();
         facets.setAgeRatings(new ArrayList<>());
         result.setFacets(facets);
@@ -37,7 +37,7 @@ public class MediaSearchResultTest {
     @Test
     public void toXml() {
         List<SearchResultItem<? extends MediaObject>> list = Collections.emptyList();
-        MediaSearchResult result = new MediaSearchResult(list, 0L, 10, 0L, Result.TotalQualifier.EQUAL_TO);
+        MediaSearchResult result = new MediaSearchResult(list, 0L, 10, Result.Total.EMPTY);
         MediaFacetsResult facets = new MediaFacetsResult();
         facets.setAgeRatings(new ArrayList<>());
         result.setFacets(facets);
