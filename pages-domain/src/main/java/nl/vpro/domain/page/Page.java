@@ -84,7 +84,6 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 @EqualsAndHashCode
 public class Page implements MutableEmbargo<Page> {
 
-
     public static <T extends PageBuilder<T, Page>> PageBuilder<T, Page> builder() {
         return new PageBuilder<>(new Page());
     }
@@ -174,7 +173,6 @@ public class Page implements MutableEmbargo<Page> {
     @Valid
     protected SortedSet<Relation> relations;
 
-
     protected Instant creationDate;
 
     protected Instant lastModified;
@@ -182,7 +180,6 @@ public class Page implements MutableEmbargo<Page> {
     protected Instant publishStart;
 
     protected Instant publishStop;
-
 
     protected Instant lastPublished;
 
@@ -416,11 +413,12 @@ public class Page implements MutableEmbargo<Page> {
         return publishStart != null ? publishStart : creationDate;
     }
 
+    @SuppressWarnings("unused")
     public void setSortDate(Instant date) {
         // ignored
-
     }
 
+    @SuppressWarnings("unused")
     @XmlTransient
     @JsonIgnore
     public void setSortDate(Date date) {

@@ -29,15 +29,15 @@ public class MediaSearchResult extends GenericMediaSearchResult<MediaObject> {
     }
 
     public static MediaSearchResult emptyResult(Long offset, Integer max) {
-        return new MediaSearchResult(Collections.emptyList(), offset, max, 0L, TotalQualifier.EQUAL_TO);
+        return new MediaSearchResult(Collections.emptyList(), offset, max, Total.EMPTY);
     }
 
-    public MediaSearchResult(List<SearchResultItem<? extends MediaObject>> list, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
-        super(list, offset, max, total, totalQualifier);
+    public MediaSearchResult(List<SearchResultItem<? extends MediaObject>> list, Long offset, Integer max, Total total) {
+        super(list, offset, max, total);
     }
 
-    public MediaSearchResult(List<SearchResultItem<? extends MediaObject>> list, MediaFacetsResult facetsResult, Long offset, Integer max, Long listSizes, TotalQualifier totalQualifier) {
-        super(list, facetsResult, offset, max, listSizes, totalQualifier);
+    public MediaSearchResult(List<SearchResultItem<? extends MediaObject>> list, MediaFacetsResult facetsResult, Long offset, Integer max, Total total) {
+        super(list, facetsResult, offset, max, total);
     }
 
     public MediaSearchResult(SearchResult<? extends MediaObject> sr) {

@@ -30,16 +30,16 @@ public class GenericMediaSearchResult<S extends MediaObject> extends SearchResul
     public GenericMediaSearchResult() {
     }
 
-    public GenericMediaSearchResult(List<SearchResultItem<? extends S>> list, Long offset, Integer max, Long total, TotalQualifier totalQualifier) {
-        super(list, offset, max, total, totalQualifier);
+    public GenericMediaSearchResult(List<SearchResultItem<? extends S>> list, Long offset, Integer max, Total total) {
+        super(list, offset, max, total);
     }
 
     protected GenericMediaSearchResult(SearchResult<? extends S> sr) {
         super(sr);
     }
 
-    public GenericMediaSearchResult(List<SearchResultItem<? extends S>> list, MediaFacetsResult facets, Long offset, Integer max, Long listSizes, TotalQualifier totalQualifier) {
-        super(list, offset, max, listSizes, totalQualifier);
+    public GenericMediaSearchResult(List<SearchResultItem<? extends S>> list, MediaFacetsResult facets, Long offset, Integer max,  Total total) {
+        super(list, offset, max, total);
         this.facets = facets;
     }
 
