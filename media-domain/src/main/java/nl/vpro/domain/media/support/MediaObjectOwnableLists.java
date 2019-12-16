@@ -27,18 +27,19 @@ public class MediaObjectOwnableLists {
     }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
-    boolean addValue(
-        @NonNull Set<P> set,
-        @NonNull Supplier<P> creator,
-        @NonNull I newValue,
-        @NonNull OwnerType owner) {
+    boolean addValue(@NonNull Set<P> set,
+                     @NonNull Supplier<P> creator,
+                     @NonNull I newValue,
+                     @NonNull OwnerType owner) {
         Optional<P> match = set.stream().filter(o -> Objects.equals(o.getOwner(), owner)).findFirst();
         if (match.isPresent() && match.get().getValues().contains(newValue)) {
             return false;
-        } else if (match.isPresent()) {
+        }
+        else if (match.isPresent()) {
             newValue.setParent(match.get());
             return match.get().getValues().add(newValue);
-        } else {
+        }
+        else {
             P newList = creator.get();
             newValue.setParent(newList);
             newList.getValues().add(newValue);

@@ -14,17 +14,21 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.persistence.StringListConverter;
 import nl.vpro.validation.NoHtml;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-@MappedSuperclass
+@Entity
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Getter
 @Setter
-public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> extends DomainObject implements Serializable, Comparable<SELF> {
+public class GTAARecord extends DomainObject implements Serializable, Comparable<GTAARecord> {
 
-    @Column(columnDefinition="varchar(255)", length = 255)
-    //@Convert(converter = URIConverter.class)
+    private static final long serialVersionUID = 0L;
+
+    @Column(columnDefinition="varchar(255)")
     String uri;
 
-    @Column(nullable = true, length = 30)
+    @Column(length = 30)
     @Enumerated(EnumType.STRING)
     private GTAAStatus status;
 
@@ -37,11 +41,15 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> ex
     @NoHtml
     private List<String> scopeNotes;
 
-    GTAAConceptRecord() {}
+    public GTAARecord() {
+    }
 
-    GTAAConceptRecord(
-        @lombok.NonNull URI uri, GTAAStatus status, @lombok.NonNull String name,
-        List<String> scopeNotes) {
+    @lombok.Builder(builderClassName = "Builder")
+    public GTAARecord(@lombok.NonNull URI uri,
+                      GTAAStatus status,
+                      @lombok.NonNull String name,
+                      List<String> scopeNotes) {
+
         this.name = name;
         this.scopeNotes = scopeNotes;
         this.uri = uri.toString();
@@ -51,12 +59,14 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> ex
     public URI getUri() {
         return URI.create(uri);
     }
+
     public void  setUri(URI uri) {
         this.uri = uri.toString();
     }
 
     @Override
-    public int compareTo(@NonNull SELF gtaaConceptRecord) {
+    public int compareTo(@NonNull GTAARecord gtaaConceptRecord) {
+
         if (uri == null) {
             if (gtaaConceptRecord.getUri() == null) {
                 return 0;
@@ -64,5 +74,12 @@ public abstract class GTAAConceptRecord<SELF extends GTAAConceptRecord<SELF>> ex
             return -1;
         }
         return uri.compareTo(gtaaConceptRecord.uri);
+    }
+
+    public static class Builder {
+
+        public Builder gtaaUri(String uri) {
+            return uri(URI.create(uri));
+        }
     }
 }
