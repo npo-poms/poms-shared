@@ -330,7 +330,7 @@ public class PageBuilder<PB extends PageBuilder<PB, P>, P extends Page> {
         return self;
     }
 
-    public static PageBuilder from(
+    public static DefaultPageBuilder from(
         PageUpdate update,
         @NonNull Instant creationDate,
         @NonNull Instant lastModified,

@@ -19,6 +19,7 @@ import nl.vpro.domain.media.Program;
 import nl.vpro.domain.media.Segment;
 
 /**
+ * An embed represents an embedded {@link MediaObject}. This is indexed with  reference only (see {@link nl.vpro.domain.page.update.EmbedUpdate}, but will be published with the complete actual {@link MediaObject}. Embeds are not visible if this media object is not published.
  * @author Roelof Jan Koekoek
  * @since 2.0
  */
