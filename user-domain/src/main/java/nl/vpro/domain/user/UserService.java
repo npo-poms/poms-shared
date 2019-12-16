@@ -30,6 +30,12 @@ public interface UserService<T extends User> {
 
     <S> S doAs(String principalId, Callable<S> handler);
 
+    /**
+     *  Do as a certain user, without the need to be logged in already.
+     */
+    <S> S systemDoAs(String principalId, Callable<S> handler);
+
+
     T get(String id);
 
     List<? extends T> findUsers(String name, int limit);

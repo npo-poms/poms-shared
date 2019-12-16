@@ -161,7 +161,7 @@ public class OpenskosRepositoryITest {
     }
 
     @Test
-    @Ignore
+//    @Ignore
     public void testChanges() {
         OpenskosRepository impl = getRealInstance(env);
         Instant start = LocalDate.of(2017, 10, 4).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -182,7 +182,7 @@ public class OpenskosRepositoryITest {
     }
 
     @Test
-    @Ignore
+//    @Ignore
     public void testGeoLocationsChanges() {
         GTAARepository impl = getRealInstance(env);
         Instant start = LocalDate.of(2018, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();

@@ -4,23 +4,37 @@
  */
 package nl.vpro.domain.media;
 
-import lombok.*;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.neovisionaries.i18n.CountryCode;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-
-import java.time.Instant;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.zip.CRC32;
-
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.*;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
+import nl.vpro.domain.*;
+import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.bind.*;
+import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.exceptions.ModificationException;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.domain.user.Broadcaster;
+import nl.vpro.domain.user.Portal;
+import nl.vpro.domain.user.ThirdParty;
+import nl.vpro.i18n.Locales;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
+import nl.vpro.nicam.NicamRated;
+import nl.vpro.util.DateUtils;
+import nl.vpro.util.ResortedSortedSet;
+import nl.vpro.util.SortedSetSameElementWrapper;
+import nl.vpro.util.TriFunction;
+import nl.vpro.validation.CRID;
+import nl.vpro.validation.StringList;
+import nl.vpro.validation.WarningValidatorGroup;
+import nl.vpro.xml.bind.FalseToNullAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -34,28 +48,21 @@ import org.meeuw.i18n.regions.persistence.RegionToStringConverter;
 import org.meeuw.i18n.regions.validation.Language;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.neovisionaries.i18n.CountryCode;
-
-import nl.vpro.domain.*;
-import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.media.bind.*;
-import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.subtitles.SubtitlesType;
-import nl.vpro.domain.user.*;
-import nl.vpro.domain.validation.ValidEmbargo;
-import nl.vpro.i18n.Locales;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
-import nl.vpro.nicam.NicamRated;
-import nl.vpro.util.*;
-import nl.vpro.validation.*;
-import nl.vpro.xml.bind.FalseToNullAdapter;
-import nl.vpro.xml.bind.InstantXmlAdapter;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.Instant;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.zip.CRC32;
 
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
@@ -88,6 +95,7 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
         "intentions",
         "targetGroups",
         "geoLocations",
+        "topics",
         "source",
         "countries",
         "languages",
@@ -143,6 +151,7 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
     "targetGroups",
     "expandedTargetGroups",
     "geoLocations",
+    "topics",
     "expandedGeoLocations",
     "source",
     "hasSubtitles",
@@ -401,6 +410,17 @@ public abstract class MediaObject
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @SortNatural
     protected SortedSet<@NotNull GeoLocations> geoLocations;
+
+    @OneToMany(orphanRemoval = true, cascade = ALL)
+    @JoinColumn(name = "parent_id")
+    @OrderColumn(name = "list_index", nullable = false)
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @Valid
+    @XmlElement(name = "topics")
+    @JsonProperty("topics")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @SortNatural
+    protected SortedSet<@NotNull Topics> topics;
 
     @ElementCollection
     @JoinTable(name = "mediaobject_awards")
@@ -1196,7 +1216,6 @@ public abstract class MediaObject
         MediaObjectOwnableLists.set(this, getGeoLocations(), newGeoLocations);
     }
 
-
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<GeoLocations>  getExpandedGeoLocations() {
@@ -1207,6 +1226,24 @@ public abstract class MediaObject
     }
 
     //end region
+
+    @NonNull
+    public SortedSet<Topics> getTopics() {
+        return this.topics = createIfNull(this.topics);
+    }
+
+    public void setTopics(@NonNull SortedSet<Topics> newTopics) {
+        MediaObjectOwnableLists.set(this, getTopics(), newTopics);
+    }
+
+    @JsonView({Views.Publisher.class})
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public SortedSet<Topics> getExpandedTopics() {
+
+        return MediaObjectOwnableLists.expandOwnedList(this.topics,
+                (owner, values) -> Topics.builder().values(values).owner(owner).build(),
+                OwnerType.ENTRIES);
+    }
 
     //region Intentions logic
 
