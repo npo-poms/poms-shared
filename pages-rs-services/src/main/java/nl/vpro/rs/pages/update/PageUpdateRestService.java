@@ -25,10 +25,15 @@ public interface PageUpdateRestService {
 
     String PATH = "/pages/updates";
 
+    String WAIT = "wait";
+    String URL = "url";
+
+
     @POST
     @Path("")
     Response save(
-        @NotNull @Valid PageUpdate update
+        @NotNull @Valid PageUpdate update,
+        @QueryParam(WAIT) Boolean wait
     );
 
     @DELETE
@@ -38,14 +43,14 @@ public interface PageUpdateRestService {
         @QueryParam("url") @NotNull String url,
         @QueryParam("batch")  Boolean batch,
         @QueryParam("max") Integer max,
-        @QueryParam("wait") Boolean wait
+        @QueryParam(WAIT) Boolean wait
     );
 
     @GET
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("")
     PageUpdate load(
-        @QueryParam("url") @NotNull String url,
+        @QueryParam(URL) @NotNull String url,
         @QueryParam("loadDeleted") boolean loadDeleted
 
     );
