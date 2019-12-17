@@ -1,26 +1,22 @@
 package nl.vpro.beeldengeluid.gtaa;
 
 import lombok.extern.slf4j.Slf4j;
+
+import java.time.*;
+import java.util.*;
+
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import nl.vpro.domain.gtaa.*;
 import nl.vpro.openarchives.oai.Record;
-import nl.vpro.util.ConfigUtils;
-import nl.vpro.util.CountedIterator;
-import nl.vpro.util.Env;
+import nl.vpro.util.*;
 import nl.vpro.w3.rdf.Description;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 import static nl.vpro.beeldengeluid.gtaa.OpenskosRepository.CONFIG_FILE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 
 /**
@@ -29,25 +25,16 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Michiel Meeuwissen
  */
 @Slf4j
-@RunWith(Parameterized.class)
 public class OpenskosRepositoryITest {
 
-    private final Env env;
 
-
-
-    @Parameterized.Parameters
     public static Object[] envs() {
         return new Object[]{Env.DEV, Env.TEST,  Env.ACC, Env.PROD };
     }
 
-    public OpenskosRepositoryITest(Env env) {
-        this.env = env;
-    }
-
-    @Ignore
-    @Test
-    public void testPost1() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    public void testPost1(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
             .givenName("Pietje")
@@ -58,9 +45,10 @@ public class OpenskosRepositoryITest {
         impl.submit(pietjePuk, "POMS2");
     }
 
-    @Test
-    @Ignore("Vervuilt GTAA")
-    public void testPostGeographicName() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("Vervuilt GTAA")
+    public void testPostGeographicName(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         impl.setTenant("beng");
         String name = "Driedorp3" + System.currentTimeMillis();
@@ -96,9 +84,10 @@ public class OpenskosRepositoryITest {
                 "</rdf:RDF>";
     }
 
-    @Test
-    @Ignore("Vervuilt GTAA")
-    public void test409ConflictResolution() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("Vervuilt GTAA")
+    public void test409ConflictResolution(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         String label = "Pietje, Puk" + System.currentTimeMillis();
         GTAANewPerson pietjePuk = GTAANewPerson.builder()
@@ -109,23 +98,29 @@ public class OpenskosRepositoryITest {
         impl.submit(pietjePuk, "POMS");
     }
 
-    @Test(expected = GTAAConflict.class)
-    @Ignore("Vervuilt GTAA")
-    public void test409ConflictResolution3ShouldThrowException() {
-        OpenskosRepository impl = getRealInstance(env);
-        GTAANewPerson pietjePuk = GTAANewPerson.builder()
+
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("Vervuilt GTAA")
+    public void test409ConflictResolution3ShouldThrowException(Env env) {
+        assertThatThrownBy(() -> {
+            OpenskosRepository impl = getRealInstance(env);
+            GTAANewPerson pietjePuk = GTAANewPerson.builder()
                 .givenName("Pietje")
-                .familyName("Puk"  + System.currentTimeMillis())
+                .familyName("Puk" + System.currentTimeMillis())
                 .scopeNotes(new ArrayList<>()).build();
 
-        impl.submit(pietjePuk, "POMS");
-        impl.submit(pietjePuk, "POMS");
-        impl.submit(pietjePuk, "POMS");
+            impl.submit(pietjePuk, "POMS");
+            impl.submit(pietjePuk, "POMS");
+            impl.submit(pietjePuk, "POMS");
+        });
     }
 
-    @Test
-    @Ignore("This is not a junit test")
-    public void testFindPerson() {
+
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testFindPerson(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> persons = impl.findPersons("johan c", 100);
         assertThat(persons).isNotEmpty();
@@ -135,9 +130,10 @@ public class OpenskosRepositoryITest {
         }
     }
 
-    @Test
-    @Ignore("This is not a junit test")
-    public void testFindAnyThing() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testFindAnyThing(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> concepts = impl.findAnything("hasselt", 100);
         assertThat(concepts).isNotEmpty();
@@ -148,9 +144,10 @@ public class OpenskosRepositoryITest {
         }
     }
 
-    @Test
-    @Ignore("This is not a junit test")
-    public void testFindGeo() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testFindGeo(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         List<Description> geonames = impl.findForSchemes("amsterdam", 1000, Scheme.geographicname.name());
         assertThat(geonames).isNotEmpty();
@@ -160,9 +157,24 @@ public class OpenskosRepositoryITest {
         }
     }
 
-    @Test
-//    @Ignore
-    public void testChanges() {
+
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testFindByGtaaUrl(Env env) {
+        OpenskosRepository impl = getRealInstance(env);
+        List<Description> geonames = impl.findForSchemes("amsterdam", 1000, Scheme.geographicname.name());
+        assertThat(geonames).isNotEmpty();
+        assertThat(geonames.get(0).getStatus()).isNotNull();
+        for (Description geoname : geonames)  {
+            log.info("{}", geoname);
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testChanges(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         Instant start = LocalDate.of(2017, 10, 4).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.of(2017, 10, 4).atTime(9, 20).atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -181,9 +193,10 @@ public class OpenskosRepositoryITest {
         assertThat(count).isGreaterThan(0);
     }
 
-    @Test
-//    @Ignore
-    public void testGeoLocationsChanges() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testGeoLocationsChanges(Env env) {
         GTAARepository impl = getRealInstance(env);
         Instant start = LocalDate.of(2018, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.now().atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -202,9 +215,10 @@ public class OpenskosRepositoryITest {
         assertThat(count).isGreaterThan(0);
     }
 
-    @Test
-    //@Ignore
-    public void testAllChanges() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testAllChanges(Env env) {
         GTAARepository impl = getRealInstance(env);
         Instant start = LocalDate.of(2019, 1, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
         Instant stop = LocalDate.of(2019, 3, 1).atStartOfDay().atZone(OpenskosRepository.ZONE_ID).toInstant();
@@ -222,9 +236,10 @@ public class OpenskosRepositoryITest {
         assertThat(count).isEqualTo(updates.getSize().get());
     }
 
-    @Test
-    @Ignore
-    public void addPerson() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void addPerson(Env env) {
         GTAARepository impl = getRealInstance(env);
         GTAANewPerson p = new GTAANewPerson();
         p.setFamilyName("asdasd");
@@ -233,8 +248,10 @@ public class OpenskosRepositoryITest {
         impl.submit(p, "demo-cms:gtaa-user");
     }
 
-    @Test
-    public void testChangesPersonsRecent() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testChangesPersonsRecent(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         Instant start = Instant.now().minus(Duration.ofDays(70));
         Instant stop = Instant.now();
@@ -251,8 +268,10 @@ public class OpenskosRepositoryITest {
     }
 
 
-    @Test
-    public void testChangesGeolocationsRecent() {
+   @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testChangesGeolocationsRecent(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         Instant start = Instant.now().minus(Duration.ofDays(70));
         Instant stop = Instant.now();
@@ -271,8 +290,10 @@ public class OpenskosRepositoryITest {
 
 
 
-    @Test
-    public void testChangesRecent() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void testChangesRecent(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         Instant start = Instant.now().minus(Duration.ofDays(70));
         Instant stop = Instant.now();
@@ -288,9 +309,10 @@ public class OpenskosRepositoryITest {
         assertThat(count).isEqualTo(updates.getSize().get());
     }
 
-    @Test
-    @Ignore
-    public void retrieveItemStatus() {
+    @ParameterizedTest
+    @MethodSource("envs")
+    @Disabled("This is not a junit test")
+    public void retrieveItemStatus(Env env) {
         OpenskosRepository impl = getRealInstance(env);
         Optional<Description> description = impl.retrieveConceptStatus("http://data.beeldengeluid.nl/gtaa/1711640");
         log.info("{} ", description.get());
