@@ -192,6 +192,10 @@ public class Result<T> implements Iterable<T> {
             return new Total(total, TotalQualifier.APPROXIMATE);
         }
 
+        public static Total atLeast(Long total) {
+            return new Total(total, TotalQualifier.GREATER_THAN_OR_EQUAL_TO);
+        }
+
         final Long total;
         final TotalQualifier qualifier;
 
