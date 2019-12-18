@@ -18,7 +18,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.gtaa.GTAAGeoLocationRecord;
+import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.i18n.Locales;
@@ -125,7 +125,7 @@ public class MediaObjectTest {
 
         //Add second geoLocation same Owner
 
-        geoLocation2.setGtaaRecord(GTAAGeoLocationRecord.builder().name("AnotherAmsterdam").gtaaUri("test/124").build());
+        geoLocation2.setGtaaRecord(GTAARecord.builder().name("AnotherAmsterdam").gtaaUri("test/124").build());
         final boolean add =  MediaObjectOwnableLists.addValue(
                 mediaObject.getGeoLocations(),
                 () -> new GeoLocations(mediaObject, BROADCASTER),
@@ -173,6 +173,123 @@ public class MediaObjectTest {
         OwnerType sameOwner = BROADCASTER;
         GeoLocation sameGeoLocId = GeoLocation.builder().name("Amsterdam").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();
         final boolean trueResult = MediaObjectOwnableLists.remove(mediaObject.geoLocations, sameGeoLocId, sameOwner);
+        assertThat(trueResult).isEqualTo(true);
+    }
+
+    @Test
+    public void testFindTopic() {
+
+        Topic topic = Topic.builder().name("kattenkwa").gtaaUri("test/123").build();
+        topic.setId(1L);
+
+        MediaObject mediaObject = new Program();
+        final boolean result = MediaObjectOwnableLists.addValue(
+                mediaObject.getTopics(),
+                () -> new Topics(mediaObject, BROADCASTER),
+                topic,
+                BROADCASTER
+        );
+        assertThat(result).isTrue();
+
+        final boolean resultDuplicate =  MediaObjectOwnableLists.addValue(
+                mediaObject.getTopics(),
+                () -> new Topics(mediaObject, BROADCASTER),
+                topic,
+                BROADCASTER
+        );
+        assertThat(resultDuplicate).isFalse();
+
+        final Optional<Topic> oneResult = MediaObjectOwnableLists.find(mediaObject.topics,1L, BROADCASTER);
+        assertThat(oneResult.isPresent()).isTrue();
+
+        final Optional<Topic> emptyResult1 = MediaObjectOwnableLists.find(mediaObject.topics,2L, BROADCASTER);
+        assertThat(emptyResult1.isPresent()).isFalse();
+
+        final Optional<Topic> emptyResult2 = MediaObjectOwnableLists.find(mediaObject.topics,1L, NPO);
+        assertThat(emptyResult2.isPresent()).isFalse();
+    }
+
+    @Test
+    public void testAddTopic() {
+
+        Topic topic1 = Topic.builder().name("kattenkwaad").gtaaUri("test/123").build();
+        topic1.setId(1L);
+
+        Topic topic2 = Topic.builder().name("kattenkwaad").gtaaUri("test/123").build();
+        topic2.setId(1L);
+
+        MediaObject mediaObject = new Program();
+        final boolean result =  MediaObjectOwnableLists.addValue(
+                mediaObject.getTopics(),
+                () -> new Topics(mediaObject, BROADCASTER),
+                topic1,
+                BROADCASTER
+        );
+        assertThat(result).isTrue();
+
+        //Avoid duplicates
+        final boolean resultDuplicate =  MediaObjectOwnableLists.addValue(
+                mediaObject.getTopics(),
+                () -> new Topics(mediaObject, BROADCASTER),
+                topic2,
+                BROADCASTER
+        );
+        assertThat(resultDuplicate).isFalse();
+        assertThat(mediaObject.getTopics().size()).isEqualTo(1);
+        assertThat(mediaObject.getTopics().first().getValues().size()).isEqualTo(1);
+
+        //Add second topic same Owner
+        topic2.setGtaaRecord(GTAARecord.builder().name("kattenkwaad2").gtaaUri("test/124").build());
+        final boolean add =  MediaObjectOwnableLists.addValue(
+                mediaObject.getTopics(),
+                () -> new Topics(mediaObject, BROADCASTER),
+                topic2,
+                BROADCASTER
+        );
+        assertThat(add).isTrue();
+        assertThat(mediaObject.getTopics().size()).isEqualTo(1);
+        assertThat(mediaObject.getTopics().first().getValues().size()).isEqualTo(2);
+
+        //Add third topic different Owner
+        final boolean addNewOwner =  MediaObjectOwnableLists.addValue(
+                mediaObject.getTopics(),
+                () -> new Topics(mediaObject, NPO),
+                topic2,
+                NPO
+        );
+        assertThat(addNewOwner).isTrue();
+        assertThat(mediaObject.getTopics().size()).isEqualTo(2);
+        assertThat(mediaObject.getTopics().last().getValues().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void testRemoveTopic() {
+
+        Topic topic1 = Topic.builder().name("kattenkwaad").gtaaUri("test/123").build();
+        topic1.setId(1L);
+
+        Topic topic2 = Topic.builder().name("kattenkwaad2").gtaaUri("test/123").build();
+        topic2.setId(1L);
+
+        Topic topic3 = Topic.builder().name("kattenkwaad").gtaaUri("test/123").build();
+        topic3.setId(1L);
+
+        MediaObject mediaObject = new Program();
+        MediaObjectOwnableLists.addValue(
+                mediaObject.getTopics(),
+                () -> new Topics(mediaObject, BROADCASTER),
+                topic1,
+                BROADCASTER
+        );
+
+        final boolean topicDiffNameResult = MediaObjectOwnableLists.remove(mediaObject.topics, topic2, BROADCASTER);
+        assertThat(topicDiffNameResult).isFalse();
+
+        OwnerType wrongOwner = NPO;
+        final boolean emptyResult2 = MediaObjectOwnableLists.remove(mediaObject.topics, topic1, wrongOwner);
+        assertThat(emptyResult2).isFalse();
+
+        final boolean trueResult = MediaObjectOwnableLists.remove(mediaObject.topics, topic3, BROADCASTER);
         assertThat(trueResult).isEqualTo(true);
     }
 

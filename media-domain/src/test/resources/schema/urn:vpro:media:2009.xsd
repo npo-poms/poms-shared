@@ -61,6 +61,7 @@
           <xs:element name="intentions" type="intentionsType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="targetGroups" type="targetGroupsType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="geoLocations" type="geoLocationsType" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="topics" type="topicsType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="source" type="xs:string" minOccurs="0"/>
           <xs:element name="country" type="countryType" minOccurs="0" maxOccurs="unbounded"/>
           <xs:element name="language" type="languageType" minOccurs="0" maxOccurs="unbounded"/>
@@ -347,6 +348,22 @@
     <xs:attribute name="gtaaUri" type="xs:string"/>
     <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
     <xs:attribute name="role" type="geoRoleType" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="topicsType">
+    <xs:sequence>
+      <xs:element name="topics" type="topicType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="owner" type="shared:ownerTypeEnum"/>
+  </xs:complexType>
+
+  <xs:complexType name="topicType">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string" minOccurs="0"/>
+      <xs:element name="scopeNote" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="gtaaUri" type="xs:string"/>
+    <xs:attribute name="gtaaStatus" type="gtaaStatusType"/>
   </xs:complexType>
 
   <xs:complexType name="countryType">
