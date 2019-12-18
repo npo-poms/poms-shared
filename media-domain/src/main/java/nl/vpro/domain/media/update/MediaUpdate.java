@@ -65,14 +65,14 @@ import nl.vpro.xml.bind.LocaleAdapter;
  *  These kind of fields are non modifiable, or are implicitely calculated. So there is no case in updating them.
  * </li>
  * <li>It may contain a 'version'
- * Some code may check this version to know whether certains fields ought to be ignored or not. This is to arrange forward and backwards compatibility.
+ * Some code may check this version to know whether certain fields ought to be ignored or not. This is to arrange forward and backwards compatibility.
  * It may e.g. happen that a newer version of POMS has a new field. If you are not aware of this, sending an update XML without the field may result in the value to be emptied.
  * To indicate that you <em>are</em> aware, you should sometimes supply a sufficiently high version.
  * </li>
  * </ul>
  *
 
- * As {@link MediaObject} it has three extenstions {@link ProgramUpdate}, {@link GroupUpdate} and {@link SegmentUpdate}
+ * As {@link MediaObject} it has three extensions {@link ProgramUpdate}, {@link GroupUpdate} and {@link SegmentUpdate}
  *
  * @param <M>  The {@link MediaObject} extension this is for.
  *

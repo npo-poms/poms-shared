@@ -4,37 +4,23 @@
  */
 package nl.vpro.domain.media;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.neovisionaries.i18n.CountryCode;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import nl.vpro.domain.*;
-import nl.vpro.domain.image.ImageType;
-import nl.vpro.domain.media.bind.*;
-import nl.vpro.domain.media.exceptions.CircularReferenceException;
-import nl.vpro.domain.media.exceptions.ModificationException;
-import nl.vpro.domain.media.support.*;
-import nl.vpro.domain.subtitles.SubtitlesType;
-import nl.vpro.domain.user.Broadcaster;
-import nl.vpro.domain.user.Portal;
-import nl.vpro.domain.user.ThirdParty;
-import nl.vpro.i18n.Locales;
-import nl.vpro.jackson2.StringInstantToJsonTimestamp;
-import nl.vpro.jackson2.Views;
-import nl.vpro.nicam.NicamRated;
-import nl.vpro.util.DateUtils;
-import nl.vpro.util.ResortedSortedSet;
-import nl.vpro.util.SortedSetSameElementWrapper;
-import nl.vpro.util.TriFunction;
-import nl.vpro.validation.CRID;
-import nl.vpro.validation.StringList;
-import nl.vpro.validation.WarningValidatorGroup;
-import nl.vpro.xml.bind.FalseToNullAdapter;
-import nl.vpro.xml.bind.InstantXmlAdapter;
+
+import java.time.Instant;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.zip.CRC32;
+
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -48,21 +34,27 @@ import org.meeuw.i18n.regions.persistence.RegionToStringConverter;
 import org.meeuw.i18n.regions.validation.Language;
 import org.meeuw.i18n.regions.validation.ValidRegion;
 
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.*;
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.Instant;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.zip.CRC32;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.neovisionaries.i18n.CountryCode;
+
+import nl.vpro.domain.*;
+import nl.vpro.domain.image.ImageType;
+import nl.vpro.domain.media.bind.*;
+import nl.vpro.domain.media.exceptions.CircularReferenceException;
+import nl.vpro.domain.media.exceptions.ModificationException;
+import nl.vpro.domain.media.support.*;
+import nl.vpro.domain.subtitles.SubtitlesType;
+import nl.vpro.domain.user.*;
+import nl.vpro.i18n.Locales;
+import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
+import nl.vpro.nicam.NicamRated;
+import nl.vpro.util.*;
+import nl.vpro.validation.*;
+import nl.vpro.xml.bind.FalseToNullAdapter;
+import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
@@ -71,7 +63,18 @@ import static nl.vpro.domain.media.support.MediaObjectOwnableLists.createIfNull;
 import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
 
 /**
- * Base objects for programs and groups
+ * Base objects for programs, groups and segments.
+ *
+ * Media objects are the most central objects of POMS. A media object  represents one document of meta-information, with all titles, descriptions, tags and
+ * all other fields that are associated with 'media' in general.
+ *
+ * Also {@link Group}'s are an extentions, which implies e.g. that things like {@link GroupType#PLAYLIST} may themselves have similar meta data, touch they
+ * basicly represent groups of other {@link MediaObject}s.
+ *
+ * But also {@link Program}'s themselves can function as a group and therefor have 'members' (e.g. it may be a {@link ProgramType#PROMO}).
+ *
+ * {@link Segment}s are a special kind of members of only {@link Program}s, and represent a 'segment' from a larger 'program' only.
+ *
  *
  * @author roekoe
  */
