@@ -15,13 +15,18 @@ import javax.xml.bind.annotation.*;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.*;
 
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.support.OwnerType;
 
+
+
+/**
+ * A group represents a collection of other {@link MediaObject}s. They may contain similar meta data, but their main goal is to work
+ * as a container. It may e.g. represent a {@link GroupType#SERIES}, {@link GroupType#SEASON}, {@link GroupType#ALBUM} or {@link GroupType#PLAYLIST}
+ *
+ */
 @Entity
 @Table(name = "group_table")
 @XmlRootElement(name = "group")

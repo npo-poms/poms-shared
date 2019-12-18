@@ -32,6 +32,9 @@ import static nl.vpro.domain.TextualObjects.sorted;
  * program. A strand programs has the ability to become an episode of other strand programs
  * as opposed to strand groups.
  *
+ * Another important distinction is that only programs may contain {@link Segment}s. Also they themselves know of their segments,
+ * and the XML and JSON representations on programs normally contain all their segments too.
+ *
  * @author roekoe
  */
 @Entity

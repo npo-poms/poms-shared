@@ -68,10 +68,10 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
  * Media objects are the most central objects of POMS. A media object  represents one document of meta-information, with all titles, descriptions, tags and
  * all other fields that are associated with 'media' in general.
  *
- * Also {@link Group}'s are an extentions, which implies e.g. that things like {@link GroupType#PLAYLIST} may themselves have similar meta data, touch they
- * basicly represent groups of other {@link MediaObject}s.
+ * Also {@link Group}s are an extension, which implies e.g. that things like a {@link GroupType#PLAYLIST} may themselves have similar meta data, though they
+ * basicly represent groups of other {@link MediaObject}s, and are not themselves associated with actual audio or video.
  *
- * But also {@link Program}'s themselves can function as a group and therefor have 'members' (e.g. it may be a {@link ProgramType#PROMO}).
+ * But also {@link Program}s themselves can function as a group and therefor have 'members' (e.g. it may be a {@link ProgramType#PROMO}).
  *
  * {@link Segment}s are a special kind of members of only {@link Program}s, and represent a 'segment' from a larger 'program' only.
  *

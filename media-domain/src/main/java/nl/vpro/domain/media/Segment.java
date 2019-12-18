@@ -30,7 +30,7 @@ import nl.vpro.validation.SegmentValidation;
 import nl.vpro.xml.bind.DurationXmlAdapter;
 
 /**
- * A segment is a view on a program.
+ * A segment is a view on a program. It cannot exist alone, and always has a {@link #getParent()}, which always is a {@link Program}.
  */
 
 @Entity
