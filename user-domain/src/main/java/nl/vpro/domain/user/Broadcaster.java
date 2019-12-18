@@ -82,6 +82,9 @@ public class Broadcaster extends Organization {
         this.misId = misId;
     }
 
+    public Broadcaster(Broadcaster b) {
+        this(b.id, b.displayName, b.whatsOnId, b.neboId, b.misId);
+    }
 
     @Override
     @Size(min = 2, max = 4, message = "2 < id < 5")
