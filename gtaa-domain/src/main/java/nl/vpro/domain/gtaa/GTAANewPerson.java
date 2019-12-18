@@ -13,6 +13,10 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import nl.vpro.domain.PersonInterface;
 
+/**
+ * For persons we distinguish 'given name' and 'family name'. We do this mainly because this was done traditionally like so in POMS.
+ *
+ */
 @NoArgsConstructor
 @XmlRootElement(name = "newPerson")
 @XmlType(
