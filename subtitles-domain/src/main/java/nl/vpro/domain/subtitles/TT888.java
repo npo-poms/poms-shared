@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.*;
 import java.util.function.Function;
@@ -62,6 +63,10 @@ public class TT888 {
 
     public static Stream<Cue> parse(String parent, Duration offset, Function<TimeLine, Duration> offsetGuesser, InputStream inputStream) {
         return parse(parent, offset, offsetGuesser, inputStream, CHARSET);
+    }
+
+    public static Stream<Cue> parseUTF8(String parent, Duration offset, Function<TimeLine, Duration> offsetGuesser, InputStream inputStream) {
+        return parse(parent, offset, offsetGuesser, inputStream, StandardCharsets.UTF_8);
     }
 
 

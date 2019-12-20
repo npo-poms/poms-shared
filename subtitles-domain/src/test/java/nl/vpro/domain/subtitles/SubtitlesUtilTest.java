@@ -1,6 +1,7 @@
 package nl.vpro.domain.subtitles;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
@@ -45,7 +46,8 @@ public class SubtitlesUtilTest {
         assertThat(TT888.format(SubtitlesUtil
             .parse(getSubtitles(), true)
             .getCues()
-            .findFirst().orElse(null), new StringBuilder()).toString()).isEqualTo("0001 00:02:20 00:04:15\n" +
+            .findFirst()
+            .orElseThrow(NullPointerException::new), new StringBuilder()).toString()).isEqualTo("0001 00:02:20 00:04:15\n" +
             "888\n" +
             "\n");
 
@@ -55,7 +57,7 @@ public class SubtitlesUtilTest {
     public void toWEBTTVtoTT888() throws IOException {
         InputStream example = SubtitlesUtilTest.class.getResourceAsStream("/POW_00943209.utf8.txt");
         StringWriter w = new StringWriter();
-        IOUtils.copy(new InputStreamReader(example, "UTF-8"), w);
+        IOUtils.copy(new InputStreamReader(example, StandardCharsets.UTF_8), w);
         Subtitles subtitles = Subtitles.builder()
             .mid("POW_00943209")
             .offset(Duration.ofMinutes(2))
