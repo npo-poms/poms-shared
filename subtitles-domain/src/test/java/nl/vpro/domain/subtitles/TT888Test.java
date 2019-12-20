@@ -37,4 +37,20 @@ public class TT888Test {
         assertThat(cueList.get(1).getContent()).isEqualTo("Als moeder van twee kinderen\n" +
             "vraag ik me af...");
     }
+
+    @Test
+    public void readWithEncoding() {
+        Stream<Cue> cues = TT888.parse("POW_04322816", Duration.ZERO, (tl) -> Duration.ZERO, getClass().getResourceAsStream("/POW_04322816.txt"));
+        List<Cue> cueList = new ArrayList<>();
+        cues.forEach(cueList::add);
+        assertThat(cueList.get(160).getContent()).startsWith("Geachte heer D¼r¼st, bij deze delen");
+    }
+
+    @Test
+    public void readWithEncodingUTF8() {
+        Stream<Cue> cues = TT888.parseUTF8("POW_04322816", Duration.ZERO, (tl) -> Duration.ZERO, getClass().getResourceAsStream("/POW_04322816.txt"));
+        List<Cue> cueList = new ArrayList<>();
+        cues.forEach(cueList::add);
+        assertThat(cueList.get(160).getContent()).startsWith("Geachte heer Dürüst, bij deze delen");
+    }
 }
