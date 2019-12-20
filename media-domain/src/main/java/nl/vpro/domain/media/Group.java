@@ -1,8 +1,6 @@
 /*
-/*
  * Copyright (C) 2008 All rights reserved
  * VPRO The Netherlands
- * Creation date 3 nov 2008.
  */
 package nl.vpro.domain.media;
 
