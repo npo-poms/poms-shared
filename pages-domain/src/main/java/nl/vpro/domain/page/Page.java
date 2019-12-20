@@ -97,10 +97,8 @@ public class Page implements MutableEmbargo<Page> {
 
 
     @NotNull
-    @XmlAttribute(required = true)
     @Getter
     @Setter
-    @JsonIgnore
     private PageWorkflow workflow;
 
     @NotNull
