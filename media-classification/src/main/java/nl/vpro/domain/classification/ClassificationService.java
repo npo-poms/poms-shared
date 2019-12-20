@@ -1,17 +1,18 @@
 package nl.vpro.domain.classification;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 /**
+ * Access to the possible 'term ids', and {@link Term}, which is basicly used to define the possible 'genres' in POMs
+ *
+ *
  * @author Michiel Meeuwissen
  * @since 3.2
  */
 public interface ClassificationService {
-    
+
     /**
      * Returns the Term with the given id.
      * @param termId
