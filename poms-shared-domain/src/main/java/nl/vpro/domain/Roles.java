@@ -112,10 +112,12 @@ public class Roles {
     public static final String TVVOD = API + "TVVOD";
     public static final String TVVOD_ROLE = ROLE + TVVOD;
 
-    public static final String API_USER = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CLIENT','ROLE_API_USER','ROLE_API_SUPERUSER','ROLE_API_SUPERCLIENT')";
+    public static final String API_CLIENT = API + "CLIENT";
+    public static final String API_CHANGES_CLIENT = API + "CHANGES_CLIENT";
 
 
-    public static final String API_CHANGES_USER = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CHANGES_CLIENT', 'ROLE_API_CHANGES_SUPERCLIENT', 'ROLE_API_USER', 'ROLE_API_SUPERUSER')";
+    public static final String HAS_API_ROLE = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CLIENT','ROLE_API_USER','ROLE_API_SUPERUSER','ROLE_API_SUPERCLIENT')";
+    public static final String HAS_API_CHANGES_ROLE = "hasAnyRole('" + USER_ROLE + "','ROLE_API_CHANGES_CLIENT', 'ROLE_API_CHANGES_SUPERCLIENT', 'ROLE_API_USER', 'ROLE_API_SUPERUSER')";
 
     public static final String PAGES_USER = "ROLE_PAGES_USER";
 

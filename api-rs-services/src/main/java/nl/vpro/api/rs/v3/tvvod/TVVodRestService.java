@@ -17,7 +17,9 @@ import nl.vpro.domain.media.MediaTable;
 @Path(TVVodRestService.PATH)
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public interface TVVodRestService {
-    String PATH = "/tvvod";
+    String TAG  = "tvvod";
+    String PATH = "/" + TAG;
+
 
     @GET
     @Path("/{mid}")
