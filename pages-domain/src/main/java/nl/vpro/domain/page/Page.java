@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.vpro.domain.MutableEmbargo;
 import nl.vpro.domain.user.Broadcaster;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
+import nl.vpro.jackson2.Views;
 import nl.vpro.validation.*;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
@@ -99,6 +100,7 @@ public class Page implements MutableEmbargo<Page> {
     @XmlAttribute(required = true)
     @Getter
     @Setter
+    @JsonIgnore
     private PageWorkflow workflow;
 
     @NotNull
@@ -480,6 +482,22 @@ public class Page implements MutableEmbargo<Page> {
     @Override
     public String toString() {
         return "Page{url='" + url + '\'' + '}';
+    }
+
+    @XmlAttribute(name = "workflow")
+    protected PageWorkflow getWorkflowAttribute() {
+        return workflow == PageWorkflow.PUBLISHED ? null : workflow;
+    }
+
+
+    protected void setWorkflowAttribute(PageWorkflow workflow) {
+        this.workflow = workflow;
+    }
+
+    @JsonProperty("expandedWorkflow")
+    @JsonView({Views.Publisher.class})
+    protected PageWorkflow getExpandedWorkflow() {
+        return workflow == null ? PageWorkflow.PUBLISHED : workflow;
     }
 
 
