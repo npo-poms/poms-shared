@@ -41,7 +41,6 @@
     </xs:sequence>
     <xs:attribute name="url" type="xs:string" use="required"/>
     <xs:attribute name="type" type="tns:pageTypeEnum" use="required"/>
-    <xs:attribute name="workflow" type="tns:pageWorkflow" use="required"/>
     <xs:attribute name="creationDate" type="xs:dateTime"/>
     <xs:attribute name="lastModified" type="xs:dateTime"/>
     <xs:attribute name="lastPublished" type="xs:dateTime"/>
@@ -49,6 +48,7 @@
     <xs:attribute name="publishStop" type="xs:dateTime"/>
     <xs:attribute name="refCount" type="xs:int"/>
     <xs:attribute name="sortDate" type="xs:dateTime"/>
+    <xs:attribute name="workflow" type="tns:pageWorkflow"/>
   </xs:complexType>
 
   <xs:complexType name="portalType">
