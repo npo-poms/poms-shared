@@ -123,8 +123,10 @@ public class ApiMappingsTest {
             IOUtils.copy(new FileInputStream(file), System.out);
             throw new RuntimeException("No file " + file.getName());
         }
+        //File xsdFile = mappings.getFileWithDocumentation(xmlns);
+        File xsdFile = mappings.getFile(xmlns);
         Diff diff = DiffBuilder.compare(control).withTest(
-            new FileInputStream(file))
+            new FileInputStream(xsdFile))
             .ignoreWhitespace()
             .ignoreComments()
             .checkForIdentical()
@@ -134,7 +136,7 @@ public class ApiMappingsTest {
         URL resource = getClass().getResource("/xsds/" + file.getName());
         log.info("Checking workspace file " + resource);
         log.info("And classpath file " + file);
-        assertThat(diff.hasDifferences()).withFailMessage("Not identical " + file + " " + resource).isFalse();
+        assertThat(diff.hasDifferences()).withFailMessage("Not identical " + file + " " + resource + " " + diff.toString()).isFalse();
         log.info("Identical {} {}", file, getClass().getResource("/xsds/" + file.getName()));
 
 

@@ -23,6 +23,7 @@ import static nl.vpro.domain.api.Constants.*;
  */
 @Path(PageRestService.PATH)
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public interface PageRestService {
     String TAG = "pages";
     String PATH = "/" + TAG;
