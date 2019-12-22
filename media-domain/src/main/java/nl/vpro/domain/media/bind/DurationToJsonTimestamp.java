@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import nl.vpro.domain.media.support.AuthorizedDuration;
 
 /**
- * Adaptes the Duration of the media domain. (This actualy contains an 'authoritity', but we don't expose that in json).
+ * Adapts the Duration of the media domain. (This actually contains an 'authority', but we don't expose that in json).
  * @author Michiel Meeuwissen
  * @since 2.3
  */
