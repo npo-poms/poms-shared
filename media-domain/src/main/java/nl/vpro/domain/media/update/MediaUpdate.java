@@ -76,6 +76,7 @@ import nl.vpro.xml.bind.LocaleAdapter;
  *
  * @param <M>  The {@link MediaObject} extension this is for.
  *
+ * @see nl.vpro.domain.media.update
  */
 
 @XmlAccessorType(XmlAccessType.PROPERTY)

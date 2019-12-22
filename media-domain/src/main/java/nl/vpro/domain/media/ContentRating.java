@@ -22,12 +22,10 @@ public enum ContentRating implements Displayable {
 
     private static final Map<Character, ContentRating> charToEnum = new HashMap<>();
 
-    private static final Map<String, ContentRating> stringToEnum = new HashMap<>();
 
     static {
         for(ContentRating r : values()) {
             charToEnum.put(r.letter, r);
-            stringToEnum.put(r.displayName, r);
         }
     }
 

@@ -1,6 +1,5 @@
 /**
- * The update objects are data transfer objects, and represent versions of the objects in {@link nl.vpro.domain.media} that are simplified, and contain in principal no redundant information, or data data in principal is not updatable of settable at all. E.g. n update objects all field that are {@link nl.vpro.domain.media.support.Ownable} in {@link nl.vpro.domain.media.MediaObject} are not ownable in {@link nl.vpro.domain.media.update.MediaUpdate}.
- *
+ * The update objects are data transfer objects, and represent versions of the objects in {@link nl.vpro.domain.media} that are simplified, and contain in principal no redundant information, or data that is not updatable of settable at all. E.g. in update objects all field that are {@link nl.vpro.domain.media.support.Ownable} in {@link nl.vpro.domain.media.MediaObject} are not ownable in {@link nl.vpro.domain.media.update.MediaUpdate}
  */
 @XmlSchema(
     namespace = Xmlns.UPDATE_NAMESPACE,
