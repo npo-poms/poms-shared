@@ -36,7 +36,6 @@ import nl.vpro.domain.media.MediaObject;
 @EqualsAndHashCode(callSuper = true)
 public class MediaForm extends AbstractMediaForm implements SortableForm, Predicate<MediaObject> {
 
-
     public static MediaFormBuilder builder() {
         return MediaFormBuilder.form();
     }

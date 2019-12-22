@@ -409,7 +409,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
 
     @SafeVarargs
     public final MediaFormBuilder sortDateFacet(RangeFacet<Instant>... ranges) {
-        DateRangeFacets dateRangeFacets = new DateRangeFacets();
+        DateRangeFacets<?> dateRangeFacets = new DateRangeFacets<>();
         dateRangeFacets.setRanges(Arrays.asList(ranges));
         facets().setSortDates(dateRangeFacets);
         return this;
@@ -417,7 +417,7 @@ public class MediaFormBuilder extends AbstractFormBuilder {
 
     @SafeVarargs
     public final MediaFormBuilder durationFacet(RangeFacet<Duration>... ranges) {
-        DurationRangeFacets dateRangeFacets = new DurationRangeFacets();
+        DurationRangeFacets<?> dateRangeFacets = new DurationRangeFacets<>();
         dateRangeFacets.setRanges(Arrays.asList(ranges));
         facets().setDurations(dateRangeFacets);
         return this;
@@ -620,13 +620,14 @@ public class MediaFormBuilder extends AbstractFormBuilder {
             .facetFilter(
                 MediaSearch.builder()
                     .creationDates(
-                        DateRangeMatcherList.builder().value(
-                            DateRangeMatcher.builder()
-                                .begin(LocalDateTime.of(2010, 1, 1, 12, 0)
-                                    .atZone(Schedule.ZONE_ID).toInstant()
-                                )
-                            .build()
-                        ).build()
+                        DateRangeMatcherList.builder()
+                            .value(
+                                DateRangeMatcher.builder()
+                                    .begin(LocalDateTime.of(2010, 1, 1, 12, 0)
+                                        .atZone(Schedule.ZONE_ID).toInstant()
+                                    )
+                                    .build()
+                            ).build()
                     )
                     .build()
             )

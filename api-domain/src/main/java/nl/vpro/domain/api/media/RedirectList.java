@@ -4,10 +4,11 @@ import java.time.Instant;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -83,8 +84,12 @@ public class RedirectList implements Iterable<RedirectEntry> {
 
         RedirectList that = (RedirectList) o;
 
-        if (lastUpdate != null ? !lastUpdate.equals(that.lastUpdate) : that.lastUpdate != null) return false;
-        if (redirects != null ? !redirects.equals(that.redirects) : that.redirects != null) return false;
+        if (lastUpdate != null ? !lastUpdate.equals(that.lastUpdate) : that.lastUpdate != null) {
+            return false;
+        }
+        if (redirects != null ? !redirects.equals(that.redirects) : that.redirects != null) {
+            return false;
+        }
 
         return true;
     }

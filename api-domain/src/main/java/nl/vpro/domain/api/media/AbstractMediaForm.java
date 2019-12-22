@@ -4,8 +4,7 @@
  */
 package nl.vpro.domain.api.media;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.function.Predicate;
 
@@ -40,16 +39,14 @@ public abstract class AbstractMediaForm implements Form, Predicate<MediaObject> 
 
     @XmlElement
     @Valid
+    @Getter
+    @Setter
     private MediaSearch searches;
-
-
-
 
     @Override
     public String getText() {
         return FormUtils.getText(searches);
     }
-
 
     @Override
     public boolean isHighlight() {
@@ -58,14 +55,6 @@ public abstract class AbstractMediaForm implements Form, Predicate<MediaObject> 
 
     public void setHighlight(boolean highlight) {
         this.highlighted = highlight;
-    }
-
-    public MediaSearch getSearches() {
-        return searches;
-    }
-
-    public void setSearches(MediaSearch searches) {
-        this.searches = searches;
     }
 
     @Override

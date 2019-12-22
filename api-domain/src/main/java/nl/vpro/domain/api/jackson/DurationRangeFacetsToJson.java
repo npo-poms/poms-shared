@@ -41,8 +41,8 @@ public class DurationRangeFacetsToJson {
     public static class Deserializer extends JsonDeserializer<DurationRangeFacets<?>> {
 
         @Override
-        public DurationRangeFacets deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            DurationRangeFacets result = new DurationRangeFacets();
+        public DurationRangeFacets<?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+            DurationRangeFacets<?> result = new DurationRangeFacets<>();
 
             TreeNode treeNode = mapper.readTree(jp);
             if(treeNode instanceof ArrayNode) {

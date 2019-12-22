@@ -71,9 +71,8 @@ public class RelationFacetListJson {
                     List<RelationFacet> facets = new ArrayList<>();
                     if (m.isArray()) {
                         ArrayNode array = (ArrayNode) m;
-                        Iterator<JsonNode> i = array.iterator();
-                        while(i.hasNext()) {
-                            RelationFacet f  = jp.getCodec().readValue(i.next().traverse(jp.getCodec()), RelationFacet.class);
+                        for (JsonNode node : array) {
+                            RelationFacet f = jp.getCodec().readValue(node.traverse(jp.getCodec()), RelationFacet.class);
                             facets.add(f);
                         }
                     } else {

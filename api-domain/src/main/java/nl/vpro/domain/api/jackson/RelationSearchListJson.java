@@ -53,7 +53,7 @@ public class RelationSearchListJson {
                 while (i.hasNext()) {
                     list.add(i.next());
                 }
-                return new RelationSearchList(list.toArray(new RelationSearch[list.size()]));
+                return new RelationSearchList(list.toArray(new RelationSearch[0]));
             } else {
                 throw new IllegalStateException();
             }

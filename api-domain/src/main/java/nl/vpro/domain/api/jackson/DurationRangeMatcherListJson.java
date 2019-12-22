@@ -68,7 +68,7 @@ public class DurationRangeMatcherListJson {
                 while (i.hasNext()) {
                     list.add(i.next());
                 }
-                return new DurationRangeMatcherList(list.toArray(new DurationRangeMatcher[list.size()]));
+                return new DurationRangeMatcherList(list.toArray(new DurationRangeMatcher[0]));
             } else {
                 throw new IllegalStateException();
             }

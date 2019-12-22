@@ -25,7 +25,7 @@ public class PagedList<T> extends AbstractList<T> {
     public PagedList(List<T> wrappedList, long offset, int max) {
         this.wrappedList = wrappedList;
         this.offset = offset > 0 ? offset : 0;
-        this.max = max > 0 ? max : 0;
+        this.max = Math.max(max, 0);
     }
 
     @Override
@@ -36,6 +36,6 @@ public class PagedList<T> extends AbstractList<T> {
     @Override
     public int size() {
         int headRoom = wrappedList.size() - (int)offset;
-        return headRoom > 0 ? headRoom > max ? max : headRoom : 0;
+        return headRoom > 0 ? Math.min(headRoom, max) : 0;
     }
 }

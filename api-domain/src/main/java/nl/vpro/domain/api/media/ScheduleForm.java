@@ -19,11 +19,11 @@ import nl.vpro.domain.media.MediaObject;
  * @author Michiel Meeuwissen
  * @since 4.2
  */
+@SuppressWarnings("WSReferenceInspection")         // Intellij warnings are incorrect since parent class is @XmlTransient
 @XmlRootElement(name = "scheduleForm")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "scheduleFormType",
     propOrder = {
-        // Intellij warnings are incorrect since parent class is @XmlTransient
         "searches"
     })
 public class ScheduleForm extends AbstractMediaForm implements Form, Predicate<MediaObject> {

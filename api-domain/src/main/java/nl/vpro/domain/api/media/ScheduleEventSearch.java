@@ -26,8 +26,6 @@ import nl.vpro.domain.media.ScheduleEvent;
 import nl.vpro.jackson2.StringInstantToJsonTimestamp;
 import nl.vpro.xml.bind.InstantXmlAdapter;
 
-;
-
 /**
  * @author rico
  */

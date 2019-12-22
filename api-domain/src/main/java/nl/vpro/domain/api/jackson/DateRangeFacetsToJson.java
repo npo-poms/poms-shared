@@ -38,11 +38,11 @@ public class DateRangeFacetsToJson {
         }
     }
 
-    public static class Deserializer extends JsonDeserializer<DateRangeFacets> {
+    public static class Deserializer extends JsonDeserializer<DateRangeFacets<?>> {
 
         @Override
-        public DateRangeFacets deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-            DateRangeFacets result = new DateRangeFacets();
+        public DateRangeFacets<?> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+            DateRangeFacets<?> result = new DateRangeFacets<>();
 
             TreeNode treeNode = jp.getCodec().readTree(jp);
             if(treeNode instanceof ArrayNode) {

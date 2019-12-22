@@ -15,8 +15,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import nl.vpro.domain.Child;
-import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
@@ -24,15 +22,14 @@ import nl.vpro.validation.NoHtml;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "personType",
     propOrder = {
         "givenName",
         "familyName"
     })
-public class Person extends DomainObject implements PersonInterface, Child<MediaObject> {
+public class Person extends Credit implements PersonInterface {
 
-//public class Person extends Credit implements PersonInterface { MSE-4616
 
 
     public static Person copy(Person source) {
@@ -59,14 +56,6 @@ public class Person extends DomainObject implements PersonInterface, Child<Media
     @Setter
     protected String familyName;
 
-
-    @Column(nullable = false)
-    @NotNull(message = "{nl.vpro.constraints.NotNull}")
-    @XmlAttribute(required = true)
-    @Enumerated(EnumType.STRING)
-    @Getter
-    @Setter
-    protected RoleType role;
 
     @Column(name = "list_index",
         nullable = true

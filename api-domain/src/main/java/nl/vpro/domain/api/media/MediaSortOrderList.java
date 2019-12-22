@@ -37,7 +37,7 @@ public class MediaSortOrderList extends AbstractList<MediaSortOrder> implements 
     @NonNull
     @Override
     public Iterator<MediaSortOrder> iterator() {
-        return sort == null ? Collections.<MediaSortOrder>emptyList().iterator() : sort.iterator();
+        return sort == null ? Collections.emptyIterator() : sort.iterator();
 
     }
 

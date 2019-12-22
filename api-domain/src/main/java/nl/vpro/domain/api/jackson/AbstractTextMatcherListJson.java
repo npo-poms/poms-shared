@@ -40,7 +40,7 @@ public abstract class AbstractTextMatcherListJson<L extends AbstractTextMatcherL
         if (value.getMatch() != MatcherList.DEFAULT_MATCH) {
             jgen.writeStartObject();
             jgen.writeArrayFieldStart("value");
-            for (AbstractTextMatcher matcher : value) {
+            for (AbstractTextMatcher<?> matcher : value) {
                 jgen.writeObject(matcher);
             }
             jgen.writeEndArray();
@@ -51,7 +51,7 @@ public abstract class AbstractTextMatcherListJson<L extends AbstractTextMatcherL
                 jgen.writeObject(value.get(0));
             } else {
                 jgen.writeStartArray();
-                for (AbstractTextMatcher matcher : value) {
+                for (AbstractTextMatcher<?> matcher : value) {
                     jgen.writeObject(matcher);
                 }
                 jgen.writeEndArray();

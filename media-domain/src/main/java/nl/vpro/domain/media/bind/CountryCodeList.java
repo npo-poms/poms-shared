@@ -38,8 +38,15 @@ public class CountryCodeList {
             if (node == null) {
                 return null;
             }
-            CountryWrapper wrapper = Jackson2Mapper.getInstance().readerFor(CountryWrapper.class).readValue(node);
-            return wrapper == null ? null : wrapper.getCode();
+            try {
+                CountryWrapper wrapper = Jackson2Mapper.getInstance().readerFor(CountryWrapper.class).readValue(node);
+                return wrapper == null ? null : wrapper.getCode();
+
+            } catch (Exception e) {
+                log.warn(e.getMessage());
+                return null;
+
+            }
         }
     }
 }

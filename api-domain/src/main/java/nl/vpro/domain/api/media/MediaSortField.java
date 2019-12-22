@@ -23,5 +23,4 @@ public enum MediaSortField {
     member,
     creationDate,
     lastModified
-
 }

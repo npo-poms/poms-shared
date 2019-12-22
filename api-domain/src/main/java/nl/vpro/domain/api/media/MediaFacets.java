@@ -32,7 +32,7 @@ public class MediaFacets {
     private MediaFacet avTypes;
 
     @XmlElement
-    private DateRangeFacets sortDates;
+    private DateRangeFacets<?> sortDates;
 
     @XmlElement
     private MediaFacet broadcasters;
@@ -44,7 +44,7 @@ public class MediaFacets {
     private ExtendedMediaFacet tags;
 
     @XmlElement
-    private DurationRangeFacets durations;
+    private DurationRangeFacets<?> durations;
 
     @XmlElement
     private MemberRefFacet descendantOf;

@@ -56,12 +56,13 @@ public class MediaFacetsBuilder {
     }
 
     public MediaFacetsBuilder sortDates() {
-        facets.setSortDates(new DateRangeFacets());
+        facets.setSortDates(new DateRangeFacets<>());
         return this;
     }
 
-    public MediaFacetsBuilder sortDates(RangeFacet<Instant>... facetItems) {
-        facets.setSortDates(new DateRangeFacets(facetItems));
+    @SafeVarargs
+    public final MediaFacetsBuilder sortDates(RangeFacet<Instant>... facetItems) {
+        facets.setSortDates(new DateRangeFacets<>(facetItems));
         return this;
     }
 

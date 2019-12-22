@@ -72,7 +72,7 @@ public class DateRangeMatcherListJson {
                 while (i.hasNext()) {
                     list.add(i.next());
                 }
-                return new DateRangeMatcherList(list.toArray(new DateRangeMatcher[list.size()]));
+                return new DateRangeMatcherList(list.toArray(new DateRangeMatcher[0]));
             } else {
                 throw new IllegalStateException();
             }

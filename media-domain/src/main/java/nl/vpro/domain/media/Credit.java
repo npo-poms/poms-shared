@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
@@ -17,6 +18,7 @@ import nl.vpro.domain.DomainObject;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@XmlTransient
 public abstract class Credit extends DomainObject implements Child<MediaObject>  {
 
 

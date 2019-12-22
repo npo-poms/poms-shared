@@ -80,7 +80,7 @@ public class SearchResults {
                     selected.add(facetResultItem);
                 }
             }
-            for (AbstractTextMatcher item : searches) {
+            for (AbstractTextMatcher<?> item : searches) {
                 if (item.getMatch() != Match.NOT) {
                     boolean find = false;
                     for (TermFacetResultItem selectItem : selected) {
@@ -292,6 +292,7 @@ public class SearchResults {
                                 for (TermFacetResultItem selectedItem : selectedMultiple) {
                                     if (Objects.equals(selectedItem.getId(), term.getValue())) {
                                         find = true;
+                                        break;
                                     }
                                 }
                                 if (!find) {
@@ -310,7 +311,7 @@ public class SearchResults {
     }
 
 
-    public static boolean contains(Iterable<? extends AbstractTextMatcher> matchers, String value) {
+    public static boolean contains(Iterable<? extends AbstractTextMatcher<?>> matchers, String value) {
         return contains(matchers, value, input -> {
             if (input == null) {
                 return null;
@@ -319,11 +320,11 @@ public class SearchResults {
         });
     }
 
-    private static boolean contains(Iterable<? extends AbstractTextMatcher> matchers, String value, Function<AbstractTextMatcher, String> function) {
+    private static boolean contains(Iterable<? extends AbstractTextMatcher<?>> matchers, String value, Function<AbstractTextMatcher<?>, String> function) {
         if (matchers == null) {
             return false;
         }
-        for (AbstractTextMatcher matcher : matchers) {
+        for (AbstractTextMatcher<?> matcher : matchers) {
             if (matcher.isCaseSensitive()) {
                 if (function.apply(matcher).equals(value)) {
                     return true;

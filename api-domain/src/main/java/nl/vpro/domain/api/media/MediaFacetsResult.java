@@ -36,14 +36,11 @@ import nl.vpro.domain.api.*;
     "memberOf",
     "relations",
     "ageRatings",
-    "contentRatings",
-
-
+    "contentRatings"
 })
 @Getter
 @Setter
 public class MediaFacetsResult {
-
 
     private List<TermFacetResultItem> titles;
 
