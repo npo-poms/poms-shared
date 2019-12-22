@@ -46,7 +46,6 @@
 
     <module>media-test</module>
     <module>user-test</module>
-    <module>media-i18n</module>
     <module>media-classification</module>
     <module>media-organizations</module>
 

@@ -44,10 +44,6 @@
       <artifactId>poms-shared-domain</artifactId>
     </dependency>
     <dependency>
-      <groupId>nl.vpro.media</groupId>
-      <artifactId>media-i18n</artifactId>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.shared</groupId>
       <artifactId>vpro-shared-util</artifactId>
     </dependency>
