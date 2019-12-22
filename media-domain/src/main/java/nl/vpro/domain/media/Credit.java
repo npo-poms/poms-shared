@@ -16,7 +16,7 @@ import nl.vpro.domain.DomainObject;
  * @author Michiel Meeuwissen
  * @since 5.12
  */
-@Entity
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
 @XmlTransient
 public abstract class Credit extends DomainObject implements Child<MediaObject>  {
