@@ -64,8 +64,7 @@ public enum Workflow implements Displayable {
     MERGED("Samengevoegd", true),
 
     /**
-     * Set when a publishStop date has expired on a parent. For example: a Segment is obtains this workflow when it's
-     * parent Program is revoked.
+     * Set when a publishStop date has expired on a parent. For example: a Segment obtains this workflow when its parent Program is revoked.
      */
     @XmlEnumValue("PARENT REVOKED")
     PARENT_REVOKED("Programma ingetrokken", true),
@@ -77,13 +76,13 @@ public enum Workflow implements Displayable {
     REVOKED("Ingetrokken", true),
 
     /**
-     * Schedule an entity for deletion.
+     * The entity is scheduled for deletion.
      */
     @XmlEnumValue("FOR DELETION")
     FOR_DELETION("Wordt verwijderd", false),
 
     /**
-     * If someone explicitly deleted an entity than it becomes 'deleted'. This implies revocation from publication.
+     * If someone explicitly deleted an entity then it becomes 'deleted'. This implies revocation from publication.
      * Normal users should not see these entities.
      */
     DELETED("Verwijderd", true);
@@ -140,7 +139,7 @@ public enum Workflow implements Displayable {
     private final String description;
 
     /**
-     * Wether this workflow can appear in the ES.
+     * Wether this workflow can appear in the frontend api.
      */
     @Getter
     private final boolean publishable;

@@ -5,15 +5,16 @@
 package nl.vpro.domain.media.update;
 
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.Relation;
 import nl.vpro.domain.media.RelationDefinition;
 
 
 /**
- * @see {@link Relation}
+ * @see Relation
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "relationUpdateType",

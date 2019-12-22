@@ -18,6 +18,7 @@ import nl.vpro.logging.simple.Slf4jSimpleLogger;
 import nl.vpro.util.IntegerVersion;
 
 /**
+ * Contains hints and configuration about how to assemble media objects from {@link MediaUpdate} objects.
  * @author Michiel Meeuwissen
  * @since 5.5
  */
