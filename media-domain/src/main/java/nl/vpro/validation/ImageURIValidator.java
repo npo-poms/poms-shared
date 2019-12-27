@@ -14,10 +14,6 @@ import nl.vpro.domain.media.support.Image;
 public class ImageURIValidator implements ConstraintValidator<ImageURI, String> {
 
     @Override
-    public void initialize(ImageURI imageURI) {
-    }
-
-    @Override
     public boolean isValid(String imageUri, ConstraintValidatorContext constraintValidatorContext) {
         if(imageUri == null) {
             return true;

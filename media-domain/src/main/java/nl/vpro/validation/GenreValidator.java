@@ -13,10 +13,6 @@ import nl.vpro.domain.media.Genre;
 public class GenreValidator implements ConstraintValidator<GenreValidation, Genre> {
 
     @Override
-    public void initialize(GenreValidation genre) {
-    }
-
-    @Override
     public boolean isValid(Genre value, ConstraintValidatorContext constraintValidatorContext) {
         return ClassificationServiceLocator.getInstance().hasTerm(value.getTermId());
     }

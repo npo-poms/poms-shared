@@ -13,10 +13,6 @@ public class ReleaseDateValidator implements ConstraintValidator<ReleaseDate, St
     static final Pattern YEAR_ONLY = Pattern.compile("[1-9][\\d]{3}");
 
     @Override
-    public void initialize(ReleaseDate annotation){
-    }
-
-    @Override
     public boolean isValid(String date, ConstraintValidatorContext constraintValidatorContext){
         return date == null || YEAR_ONLY.matcher(date).matches();
     }

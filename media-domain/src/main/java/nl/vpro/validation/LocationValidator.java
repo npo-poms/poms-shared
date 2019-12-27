@@ -11,12 +11,6 @@ import javax.validation.ConstraintValidatorContext;
  */
 public class LocationValidator implements ConstraintValidator<Location, String> {
 
-
-
-    @Override
-    public void initialize(Location uri) {
-    }
-
     @Override
     public boolean isValid(String value, ConstraintValidatorContext constraintValidatorContext) {
         if(value == null) {

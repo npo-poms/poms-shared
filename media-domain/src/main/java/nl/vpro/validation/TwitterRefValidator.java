@@ -12,11 +12,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class TwitterRefValidator implements ConstraintValidator<TwitterRef , nl.vpro.domain.media.TwitterRef> {
 
-    public static final Pattern PATTERN = Pattern.compile("^(@|#)[A-Za-z0-9_]{1,140}$");
-
-    @Override
-    public void initialize(TwitterRef twitterRef) {
-    }
+    public static final Pattern PATTERN = Pattern.compile("^@\\w{1,50}|#\\w{1,279}$", Pattern.CASE_INSENSITIVE);
 
     @Override
     public boolean isValid(nl.vpro.domain.media.TwitterRef twitterRef, ConstraintValidatorContext context) {
@@ -46,4 +42,5 @@ public class TwitterRefValidator implements ConstraintValidator<TwitterRef , nl.
 
         return true;
     }
+
 }
