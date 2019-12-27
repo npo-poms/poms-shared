@@ -192,7 +192,7 @@ public class MetaData_v2_1 {
 
     protected static Personen createPersonen(MediaObject mediaObject) {
 
-        List<Person> persons = mediaObject.getCredits();
+        List<Person> persons = mediaObject.getPersons();
         if (persons.isEmpty()) {
             return null;
         }

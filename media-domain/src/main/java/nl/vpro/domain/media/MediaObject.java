@@ -59,6 +59,7 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.MediaObject.*;
+import static nl.vpro.domain.media.CollectionUtils.*;
 import static nl.vpro.domain.media.support.MediaObjectOwnableLists.createIfNull;
 import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
 
@@ -339,6 +340,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
+    @NoDuplicateOwner
     @XmlElement(name = "intentions")
     @JsonProperty("intentions")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -350,6 +352,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
+    @NoDuplicateOwner
     @XmlElement
     @JsonProperty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -401,13 +404,14 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
-    protected List<@NotNull Person> credits;
+    protected List<@NotNull Credits> credits;
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
+    @NoDuplicateOwner
     @XmlElement(name = "geoLocations")
     @JsonProperty("geoLocations")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -419,6 +423,7 @@ public abstract class MediaObject
     @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
+    @NoDuplicateOwner
     @XmlElement(name = "topics")
     @JsonProperty("topics")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -439,7 +444,7 @@ public abstract class MediaObject
 
     // Improvement: These filters are EXTREMELY HORRIBLE, actually UNACCEPTABLE
 
-    // Before hiberante 5.2 we used Filter rather then FilterJoinTable.
+    // Before hibernate 5.2 we used Filter rather then FilterJoinTable.
     // It doesn't really make much sense.
     @FilterJoinTables({
             @FilterJoinTable(name = PUBLICATION_FILTER, condition = "(" + "(mediaobjec2_.mergedTo_id is null) and " + // MSE-3526                 // ?
@@ -656,7 +661,7 @@ public abstract class MediaObject
         this.avAttributes = AVAttributes.copy(source.avAttributes);
         this.releaseYear = source.releaseYear;
         this.duration = AuthorizedDuration.copy(source.duration);
-        source.getCredits().forEach(person -> this.addPerson(Person.copy(person, this)));
+        source.getCredits().forEach(credits -> this.giveCredits(Credits.copy(credits, this)));
         source.getAwards().forEach(this::addAward);
         source.getMemberOf().forEach(ref -> this.createMemberOf(ref.getGroup(), ref.getNumber(), ref.getOwner()));
         this.ageRating = source.ageRating;
@@ -674,65 +679,6 @@ public abstract class MediaObject
         source.getImages().forEach(images -> this.addImage(Image.copy(images)));
         this.mergedTo = source.mergedTo;
         this.streamingPlatformStatus = source.streamingPlatformStatus;
-    }
-
-    public static Long idFromUrn(String urn) {
-        final String id = urn.substring(urn.lastIndexOf(':') + 1);
-        return Long.valueOf(id);
-    }
-
-    protected static <T> List<T> updateList(List<T> toUpdate, Collection<T> values) {
-        if (toUpdate != null && toUpdate == values) {
-            return toUpdate;
-        }
-        if (toUpdate == null) {
-            toUpdate = new ArrayList<>();
-        } else {
-            if (toUpdate.equals(values)) {
-                // the object is already exactly correct, do nothing
-                return toUpdate;
-            }
-            toUpdate.clear();
-        }
-        if (values != null) {
-            toUpdate.addAll(values);
-        }
-        return toUpdate;
-    }
-
-    @SuppressWarnings("unchecked")
-    protected static <T extends Comparable<?>> Set<T> updateSortedSet(Set<T> toUpdate, Collection<T> values) {
-        if (toUpdate != null && toUpdate == values) {
-            return toUpdate;
-        }
-        if (toUpdate == null) {
-            toUpdate = new TreeSet<>();
-            if (values != null) {
-                toUpdate.addAll(values);
-            }
-
-        } else {
-            if (values != null) {
-                toUpdate.retainAll(values);
-                for (T v : values) {
-                    for (T toUpdateValue : toUpdate) {
-                        if (toUpdateValue instanceof Updatable && toUpdateValue.equals(v)) {
-                            ((Updatable) toUpdateValue).update(v);
-                        }
-                    }
-                }
-                toUpdate.addAll(values);
-            }
-        }
-        return toUpdate;
-    }
-
-    protected static <E> E getFromList(List<E> list) {
-        if (list != null && list.size() > 0) {
-            return list.get(0);
-        } else {
-            return null;
-        }
     }
 
     @XmlAttribute(required = true)
@@ -1242,7 +1188,6 @@ public abstract class MediaObject
     @JsonView({Views.Publisher.class})
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<Topics> getExpandedTopics() {
-
         return MediaObjectOwnableLists.expandOwnedList(this.topics,
                 (owner, values) -> Topics.builder().values(values).owner(owner).build(),
                 OwnerType.ENTRIES);
@@ -1512,16 +1457,16 @@ public abstract class MediaObject
     @XmlElement(name = "person")
     @JsonProperty("credits")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    public List<Person> getCredits() {
+    public List<Credits> getCredits() {
         if (credits == null) {
             credits = new ArrayList<>();
         }
         return credits;
     }
 
-    public void setCredits(@Nullable List<Person> persons) {
+    public void setCredits(@Nullable List<? extends Credits> persons) {
         if (persons != null) {
-            for (Person person : persons) {
+            for (Credits person : persons) {
                 person.setParent(this);
             }
         }
@@ -1530,11 +1475,10 @@ public abstract class MediaObject
     }
 
     /**
-     * @deprecated Use {@link #getCredits}
+     * Returns only the {@link #getCredits()} that are {@link Person}
      */
-    @Deprecated
     public List<Person> getPersons() {
-        return getCredits();
+        return getCredits().stream().filter(c -> c instanceof Person).map(c -> (Person) c).collect(Collectors.toList());
     }
      /**
      * @deprecated Use {@link #getCredits}
@@ -1556,9 +1500,9 @@ public abstract class MediaObject
             return false;
         }
 
-        for (Person person : credits) {
+        for (Credits person : credits) {
             if (id.equals(person.getId())) {
-                return removePerson(person);
+                return removePerson((Person) person);
             }
         }
 
@@ -1566,15 +1510,22 @@ public abstract class MediaObject
     }
 
     public MediaObject addPerson(Person person) {
+        return giveCredits(person);
+    }
+
+    /**
+     * @since 5.12
+     */
+    public MediaObject giveCredits(Credits credit) {
         if (credits == null) {
             credits = new ArrayList<>();
         }
 
-        if (!credits.contains(person)) {
-            if (person != null) {
-                person.setParent(this);
-                person.setListIndex(credits.size());
-                credits.add(person);
+        if (!credits.contains(credit)) {
+            if (credit != null) {
+                credit.setParent(this);
+                credit.setListIndex(credits.size());
+                credits.add(credit);
             }
         }
 
@@ -1586,9 +1537,9 @@ public abstract class MediaObject
             return null;
         }
 
-        for (Person p : credits) {
+        for (Credits p : credits) {
             if (p.equals(person)) {
-                return p;
+                return (Person) p;
             }
         }
 
@@ -1600,9 +1551,9 @@ public abstract class MediaObject
             return null;
         }
 
-        for (Person p : credits) {
+        for (Credits p : credits) {
             if (p.getId().equals(id)) {
-                return p;
+                return (Person) p;
             }
         }
 

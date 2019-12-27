@@ -7,13 +7,11 @@ import java.net.URI;
 import java.util.Objects;
 import java.util.Optional;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
 import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
@@ -21,15 +19,13 @@ import nl.vpro.domain.media.gtaa.GTAAStatus;
 import nl.vpro.validation.NoHtml;
 
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "personType",
     propOrder = {
         "givenName",
         "familyName"
     })
-public class Person extends Credit implements PersonInterface {
-
+public class Person extends Credits implements PersonInterface {
 
 
     public static Person copy(Person source) {
@@ -56,20 +52,6 @@ public class Person extends Credit implements PersonInterface {
     @Setter
     protected String familyName;
 
-
-    @Column(name = "list_index",
-        nullable = true
-        // hibernate sucks incredibly https://stackoverflow.com/questions/41194606/why-does-hibernate-require-the-list-index-to-be-nullable
-    )
-    @XmlTransient
-    @NotNull
-    @Getter
-    @Setter
-    private Integer listIndex = 0;
-
-    @ManyToOne(targetEntity = MediaObject.class, fetch = FetchType.LAZY)
-    @XmlTransient
-    protected MediaObject mediaObject;
 
     @Embedded
     @XmlTransient
@@ -160,16 +142,6 @@ public class Person extends Credit implements PersonInterface {
     @Deprecated
     public void setMediaObject(MediaObject mediaObject) {
         this.mediaObject = mediaObject;
-    }
-
-    @Override
-    public void setParent(MediaObject mo) {
-        this.mediaObject = mo;
-    }
-
-    @Override
-    public MediaObject getParent() {
-        return this.mediaObject;
     }
 
 

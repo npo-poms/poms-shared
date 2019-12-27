@@ -42,7 +42,7 @@ public class MediaObjectTest {
 
     @Test
     public void testIdFromUrn() {
-        assertThat(Program.idFromUrn("urn:vpro:media:program:12463402")).isEqualTo(12463402L);
+        assertThat(MediaObjects.idFromUrn("urn:vpro:media:program:12463402")).isEqualTo(12463402L);
     }
 
     @Test

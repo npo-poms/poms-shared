@@ -6,7 +6,6 @@ package nl.vpro.domain.media.update;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.Field;
 import java.time.Duration;
@@ -17,7 +16,6 @@ import javax.validation.ConstraintViolation;
 import javax.xml.bind.JAXB;
 
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
@@ -564,8 +562,8 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         Program program = JAXBTestUtil.roundTripAndSimilar(update, expected).fetch();
 
         assertThat(program.getCredits().size()).isEqualTo(1);
-        assertThat(program.getCredits().get(0).getGivenName()).isEqualTo("Pietje");
-        assertThat(program.getCredits().get(0).getFamilyName()).isEqualTo("Puk");
+        assertThat(program.getPersons().get(0).getGivenName()).isEqualTo("Pietje");
+        assertThat(program.getPersons().get(0).getFamilyName()).isEqualTo("Puk");
         assertThat(program.getCredits().get(0).getRole()).isEqualTo(RoleType.DIRECTOR);
     }
 

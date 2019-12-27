@@ -376,6 +376,11 @@ public class MediaObjects {
         return sb.length() > 0 ? sb.toString() : null;
     }
 
+    public static Long idFromUrn(String urn) {
+        final String id = urn.substring(urn.lastIndexOf(':') + 1);
+        return Long.valueOf(id);
+    }
+
 
     private static void matchBroadcasters(@NonNull  BroadcasterService broadcasterService, @NonNull  MediaObject mediaObject, @NonNull Set<MediaObject> handled) throws NotFoundException {
         if (handled == null) {
@@ -470,7 +475,7 @@ public class MediaObjects {
 
     public static boolean trim(@NonNull Collection<?> collection) {
         boolean trimmed = false;
-        for (java.util.Iterator iterator = collection.iterator(); iterator.hasNext(); ) {
+        for (java.util.Iterator<?> iterator = collection.iterator(); iterator.hasNext(); ) {
             Object next = iterator.next();
             if (next == null) {
                 iterator.remove();
@@ -626,7 +631,7 @@ public class MediaObjects {
      *
      * TODO work in progress. This may replace the hibernate filter solution now in place.
      */
-    public static <T extends PublishableObject> T filterPublishable(T object) {
+    public static <T extends PublishableObject<?>> T filterPublishable(T object) {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
                 return ((PublishableObject) o).isPublishable();
@@ -638,7 +643,7 @@ public class MediaObjects {
         log.debug("Filtered {} from {}", result.filterCount(), result.get());
         return result.get();
     }
-    public static <T extends PublishableObject> T filterOnWorkflow(T object, Predicate<Workflow> predicate) {
+    public static <T extends PublishableObject<?>> T filterOnWorkflow(T object, Predicate<Workflow> predicate) {
         Predicate<Object> p = (o) -> {
             if (o instanceof PublishableObject) {
                 return predicate.test(((PublishableObject) o).getWorkflow());
@@ -815,12 +820,12 @@ public class MediaObjects {
 
 
     public static List<Person> getPersons(MediaObject o) {
-        return o.credits;
+        return o.getPersons();
 
     }
 
 
-    public static <T extends PublishableObject> boolean revokeRelatedPublishables(MediaObject media, Collection<T> publishables, Instant now, Runnable callbackOnChange) {
+    public static <T extends PublishableObject<?>> boolean revokeRelatedPublishables(MediaObject media, Collection<T> publishables, Instant now, Runnable callbackOnChange) {
         boolean foundRevokedPublishable = false;
         for(T publishable : publishables) {
             if(Workflow.REVOKES.contains(publishable.getWorkflow())) {
