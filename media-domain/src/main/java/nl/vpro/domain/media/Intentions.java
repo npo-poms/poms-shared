@@ -44,8 +44,6 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
         return Intentions.builder().owner(owner).build();
     }
 
-
-
     @lombok.Builder(builderClassName = "Builder")
     private Intentions(
         @Singular List<IntentionType> values,
@@ -56,7 +54,6 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
         //explicitly set the parent!
         this.values.forEach(v -> v.setParent(this));
     }
-
 
     @Override
     @NonNull
@@ -70,12 +67,19 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
         this.values = list;
     }
 
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
     @Override
     public Intentions clone() {
         return clone(this.owner);
     }
+
     public Intentions clone(OwnerType newOwner) {
-        return new Intentions(values.stream().map(Intention::getValue).collect(Collectors.toList()), newOwner);
+        return new Intentions(
+            values.stream()
+                .map(Intention::getValue)
+                .collect(Collectors.toList()),
+            newOwner
+        );
     }
 
     /**
@@ -94,5 +98,4 @@ public class Intentions extends AbstractMediaObjectOwnableList<Intentions, Inten
         }
         return this.getOwner().compareTo(o.getOwner());
     }
-
 }
