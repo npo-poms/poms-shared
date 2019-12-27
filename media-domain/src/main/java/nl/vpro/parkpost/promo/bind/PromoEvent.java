@@ -92,4 +92,10 @@ public class PromoEvent {
     @XmlElementWrapper(name = "Files")
     @XmlElement(name = "File")
     private List<File> files;
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ":" + getProductCode() + ":" + getProgramTitle();
+    }
+
 }

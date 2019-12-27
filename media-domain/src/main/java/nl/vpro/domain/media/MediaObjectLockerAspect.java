@@ -38,14 +38,14 @@ public abstract class MediaObjectLockerAspect  {
     public Object lockMid(ProceedingJoinPoint joinPoint, MediaObjectLocker.Mid annotation) {
         Object media = joinPoint.getArgs()[annotation.argNumber()];
         String method = annotation.method();
-        String mid = getMid(method, media);
+        MediaIdentifiable.Correlation correlation = getCorrelation(method, media);
         String reason = annotation.reason();
 
         if (StringUtils.isEmpty(reason)) {
             reason = joinPoint.getSignature().getDeclaringType().getSimpleName() + "#" + joinPoint.getSignature().getName();
         }
 
-        return MediaObjectLocker.withMidLock(mid, reason, () -> {
+        return MediaObjectLocker.withCorrelationLock(correlation, reason, () -> {
             try {
                 return joinPoint.proceed(joinPoint.getArgs());
             } catch(Throwable t) {
@@ -78,28 +78,28 @@ public abstract class MediaObjectLockerAspect  {
     }
 
 
-    public static String getMid(String method, Object object) {
+    protected static MediaIdentifiable.Correlation getCorrelation(String method, Object object) {
         if (StringUtils.isNotBlank(method)) {
             try {
                 Method m = object.getClass().getMethod(method);
-                return (String) m.invoke(object);
+                return MediaIdentifiable.Correlation.mid((String) m.invoke(object));
             } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                 log.error(e.getMessage(), e);
                 throw new IllegalStateException();
             }
         } else {
             if (object instanceof CharSequence) {
-                return object.toString();
+                return  MediaIdentifiable.Correlation.mid(object.toString());
             }
             if (object instanceof MediaIdentifiable) {
-                String mid = ((MediaIdentifiable) object).getCorrelationId();
-                if (mid == null) {
+                MediaIdentifiable.Correlation correlation = ((MediaIdentifiable) object).getCorrelation();
+                if (correlation == null || correlation.getType() == MediaIdentifiable.Correlation.Type.HASH) {
                     log.warn("Object {} has no correlation id", object);
                 } else {
-                    log.debug("{} has id {}", object, mid);
+                    log.debug("{} has correlation {}", object, correlation);
                 }
 
-                return mid;
+                return correlation;
             }
             throw new IllegalStateException();
         }

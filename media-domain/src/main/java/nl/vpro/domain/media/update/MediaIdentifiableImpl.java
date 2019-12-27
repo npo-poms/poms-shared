@@ -50,7 +50,7 @@ public class MediaIdentifiableImpl implements Serializable, MediaIdentifiable {
     public MediaIdentifiableImpl(String mid, MediaType type, List<String> crids) {
         this.mid = mid;
         this.mediaType = type;
-        this.crids = Collections.unmodifiableList(crids);
+        this.crids = crids == null ? Collections.emptyList() : Collections.unmodifiableList(crids);
     }
 
 
