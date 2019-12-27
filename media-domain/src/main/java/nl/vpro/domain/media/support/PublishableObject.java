@@ -46,7 +46,6 @@ import nl.vpro.validation.PomsValidatorGroup;
 @XmlType(name = "publishableObjectType", namespace = Xmlns.SHARED_NAMESPACE)
 //@XmlTransient
 @Slf4j
-
 public abstract class PublishableObject<T extends PublishableObject<T>>
     extends AbstractPublishableObject<T>
     implements MutableEmbargoDeprecated<T>, TrackableObject {
@@ -63,8 +62,6 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
         super(source);
         this.workflow = source.workflow;
     }
-
-
 
 
     /**
@@ -167,8 +164,6 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     }
 
 
-
-
     @Deprecated
     public Date getLastModified() {
         return DateUtils.toDate(lastModified);
@@ -187,12 +182,6 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
     @Deprecated
     public final void setCreationDate(Date creationDate) {
         setCreationInstant(DateUtils.toInstant(creationDate));
-    }
-
-
-    // can be resolved if indeed no need to override any more
-    private void setUnrecognizedUrn(String urn) {
-        throw new IllegalArgumentException("The urn " + urn + " is not valid for objects with urns " + getUrnPrefix());
     }
 
     @Deprecated
@@ -227,12 +216,10 @@ public abstract class PublishableObject<T extends PublishableObject<T>>
             .toString();
     }
 
-
     @Deprecated
     public boolean isInAllowedPublicationWindow(long millisFromNow) {
         return inPublicationWindow(Instant.now().plusMillis(millisFromNow));
     }
-
 
     @Override
     protected void beforeUnmarshal(Unmarshaller u, Object parent) {
