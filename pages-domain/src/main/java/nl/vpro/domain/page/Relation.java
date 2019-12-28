@@ -2,11 +2,14 @@ package nl.vpro.domain.page;
 
 import lombok.EqualsAndHashCode;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.URI;
@@ -16,6 +19,12 @@ import nl.vpro.validation.URI;
     "text"
 })
 @EqualsAndHashCode
+@JsonPropertyOrder({
+    "value",
+    "type",
+    "urn",
+    "broadcaster"
+})
 public class Relation implements Comparable<Relation> {
 
     @Valid

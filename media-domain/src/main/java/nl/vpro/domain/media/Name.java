@@ -3,9 +3,12 @@ package nl.vpro.domain.media;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.*;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 @Entity(name = "name")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "nameType")
+@JsonTypeName("person")
 public class Name extends Credits  {
 
 

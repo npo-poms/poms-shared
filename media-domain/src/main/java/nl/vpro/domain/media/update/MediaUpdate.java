@@ -222,8 +222,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
     // jaxb annotations are here, because if on property, the credits wrapper will be marshalled always.
     // This arguably better, but for now we want to be backwards compatible.
     @XmlElementWrapper(name = "credits")
-    @XmlElement(name = "person")
-    private List<PersonUpdate> persons;
+    @XmlElements({
+        @XmlElement(name = "person", type = PersonUpdate.class)
+    })
+    private List<PersonUpdate> credits;
 
     private List<PortalRestrictionUpdate> portalRestrictions;
 
@@ -309,7 +311,10 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.portals = toList(mediaobject.getPortals(), Portal::getId);
 
         this.tags = toSet(mediaobject.getTags(), Tag::getText);
-        this.persons = toList(MediaObjects.getPersons(mediaobject), PersonUpdate::new, true);
+        this.credits = toList(mediaobject.getPersons(), PersonUpdate::new, true);
+        if (this.credits.isEmpty()) {
+            this.credits = null;
+        }
 
         this.intentions = toUpdateIntentions(mediaobject.getIntentions(), owner);
         this.targetGroups = toUpdateTargetGroups(mediaobject.getTargetGroups(), owner);
@@ -444,7 +449,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         media.setPortals(toList(portals, Portal::new));
         media.setTags(toSet(tags, Tag::new));
-        media.setCredits(toList(persons, PersonUpdate::toPerson, true));
+        media.setCredits(toList(credits, PersonUpdate::toPerson, true));
         media.setPortalRestrictions(toList(portalRestrictions, PortalRestrictionUpdate::toPortalRestriction));
         media.setGeoRestrictions(toSet(geoRestrictions, GeoRestrictionUpdate::toGeoRestriction));
 
@@ -989,17 +994,17 @@ public abstract class  MediaUpdate<M extends MediaObject>
     @NonNull
     @XmlTransient
     public List<PersonUpdate> getPersons() {
-        if (persons == null) {
-            persons = new ArrayList<>();
+        if (credits == null) {
+            credits = new ArrayList<>();
         }
-        return persons;
+        return credits;
     }
 
     public void setPersons(List<PersonUpdate> persons) {
-        this.persons = persons;
+        this.credits = persons;
     }
     public void setPersons(PersonUpdate... persons){
-        this.persons = new ArrayList<>(Arrays.asList(persons));
+        this.credits = new ArrayList<>(Arrays.asList(persons));
     }
 
     @XmlElement

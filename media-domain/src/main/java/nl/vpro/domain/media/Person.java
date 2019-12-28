@@ -13,6 +13,9 @@ import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
@@ -25,6 +28,8 @@ import nl.vpro.validation.NoHtml;
         "givenName",
         "familyName"
     })
+@JsonTypeName("person")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "objectType")
 public class Person extends Credits implements PersonInterface {
 
 

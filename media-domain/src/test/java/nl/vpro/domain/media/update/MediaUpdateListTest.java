@@ -96,7 +96,8 @@ public class MediaUpdateListTest {
 
         assertThat(program.getMid()).isEqualTo("POMS_1234");
         MediaUpdateList<ProgramUpdate> list = new MediaUpdateList<>(
-            ProgramUpdate.create(program));
+            ProgramUpdate.create(program)
+        );
         StringWriter writer = new StringWriter();
         JAXB.marshal(list, writer);
 

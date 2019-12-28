@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import nl.vpro.domain.Identifiable;
 import nl.vpro.validation.NoHtml;
 import nl.vpro.validation.URI;
@@ -30,7 +32,13 @@ import nl.vpro.validation.URI;
 @XmlType(name = "relationType", propOrder = {
         "text"
         })
-
+@JsonPropertyOrder({
+    "uriRef",
+    "value",
+    "type",
+    "urn",
+    "broadcaster"
+})
 public class Relation implements Comparable<Relation>, Serializable, Identifiable<Long> {
 
     private static final String BASE_URN = "urn:vpro:media:relation:";

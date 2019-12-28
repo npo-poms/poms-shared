@@ -41,7 +41,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "avAttributes",
     "releaseYear",
     "duration",
-    "persons",
+    "credits",
     "memberOf",
     "ageRating",
     "contentRatings",

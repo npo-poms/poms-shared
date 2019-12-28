@@ -817,14 +817,10 @@ public class MediaObjects {
         }
     }
 
-
-
     public static List<Person> getPersons(MediaObject o) {
         return o.getPersons();
 
     }
-
-
     public static <T extends PublishableObject<?>> boolean revokeRelatedPublishables(MediaObject media, Collection<T> publishables, Instant now, Runnable callbackOnChange) {
         boolean foundRevokedPublishable = false;
         for(T publishable : publishables) {

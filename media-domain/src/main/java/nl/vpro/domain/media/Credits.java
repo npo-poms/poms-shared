@@ -9,6 +9,9 @@ import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 
@@ -24,10 +27,19 @@ import nl.vpro.domain.DomainObject;
 @Inheritance(strategy = InheritanceType.JOINED)
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlSeeAlso({
-    Person.class
-    //, Name.class
+    Person.class,
+    Name.class
 })
+@XmlType(name = "creditsType")
 @XmlAccessorType(XmlAccessType.NONE)
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    property = "objectType"
+)
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "person", value = Person.class),
+    @JsonSubTypes.Type(name = "name", value = Name.class)
+})
 public abstract class Credits extends DomainObject implements Child<MediaObject>  {
 
 

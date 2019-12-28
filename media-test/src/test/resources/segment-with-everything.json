@@ -376,19 +376,23 @@
     "urn" : "urn:vpro:media:image:5"
   } ],
   "credits" : [ {
+    "objectType" : "person",
     "givenName" : "Bregtje",
     "familyName" : "van der Haak",
     "role" : "DIRECTOR",
     "gtaaUri" : "http://gtaa/1234"
   }, {
+    "objectType" : "person",
     "givenName" : "Hans",
     "familyName" : "Goedkoop",
     "role" : "PRESENTER"
   }, {
+    "objectType" : "person",
     "givenName" : "Meta",
     "familyName" : "de Vries",
     "role" : "PRESENTER"
   }, {
+    "objectType" : "person",
     "givenName" : "Claire",
     "familyName" : "Holt",
     "role" : "ACTOR"

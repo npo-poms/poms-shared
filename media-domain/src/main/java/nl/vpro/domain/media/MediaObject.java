@@ -1454,9 +1454,11 @@ public abstract class MediaObject
     }
 
     @XmlElementWrapper(name = "credits")
-    @XmlElement(name = "person")
-    @JsonProperty("credits")
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @XmlElements({
+        @XmlElement(name = "person", type = Person.class),
+        @XmlElement(name = "name", type = Name.class)
+    })
+    @JsonIgnore
     public List<Credits> getCredits() {
         if (credits == null) {
             credits = new ArrayList<>();
@@ -1464,24 +1466,40 @@ public abstract class MediaObject
         return credits;
     }
 
-    public void setCredits(@Nullable List<? extends Credits> persons) {
-        if (persons != null) {
-            for (Credits person : persons) {
-                person.setParent(this);
+    @JsonProperty("credits")
+    @JsonSubTypes({
+        @JsonSubTypes.Type(value = Person.class, name = "person"),
+        @JsonSubTypes.Type(value = Name.class, name = "name")
+    })
+
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    protected List<Credits> getJsonCredits() {
+        return getCredits();
+    }
+    protected void setJsonCredits(List<Credits> credits) {
+        setCredits(credits);
+    }
+
+    public void setCredits(@Nullable List<? extends Credits> credits) {
+        if (credits != null) {
+            for (Credits name : credits) {
+                name.setParent(this);
             }
         }
-
-        this.credits = updateList(this.credits, persons);
+        this.credits = updateList(this.credits, credits);
     }
 
     /**
      * Returns only the {@link #getCredits()} that are {@link Person}
      */
     public List<Person> getPersons() {
-        return getCredits().stream().filter(c -> c instanceof Person).map(c -> (Person) c).collect(Collectors.toList());
+        return getCredits().stream()
+            .filter(c -> c instanceof Person)
+            .map(c -> (Person) c)
+            .collect(Collectors.toList());
     }
      /**
-     * @deprecated Use {@link #getCredits}
+     * @deprecated Use {@link #setCredits(List)}
      */
     @Deprecated
     public void setPersons(@Nullable List<Person> persons) {

@@ -795,19 +795,23 @@ public class MediaObjectJsonSchemaTest {
             "  \"countries\" : [ ],\n" +
             "  \"languages\" : [ ],\n" +
             "  \"credits\" : [ {\n" +
+            "    \"objectType\" : \"person\",\n" +
             "    \"givenName\" : \"Bregtje\",\n" +
             "    \"familyName\" : \"van der Haak\",\n" +
             "    \"role\" : \"DIRECTOR\",\n" +
             "    \"gtaaUri\" : \"http://gtaa/1234\"\n" +
             "  }, {\n" +
+            "    \"objectType\" : \"person\",\n" +
             "    \"givenName\" : \"Hans\",\n" +
             "    \"familyName\" : \"Goedkoop\",\n" +
             "    \"role\" : \"PRESENTER\"\n" +
             "  }, {\n" +
+            "    \"objectType\" : \"person\",\n" +
             "    \"givenName\" : \"Meta\",\n" +
             "    \"familyName\" : \"de Vries\",\n" +
             "    \"role\" : \"PRESENTER\"\n" +
             "  }, {\n" +
+            "    \"objectType\" : \"person\",\n" +
             "    \"givenName\" : \"Claire\",\n" +
             "    \"familyName\" : \"Holt\",\n" +
             "    \"role\" : \"ACTOR\"\n" +

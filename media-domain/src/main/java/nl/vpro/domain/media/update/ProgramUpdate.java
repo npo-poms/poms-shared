@@ -36,7 +36,7 @@ import nl.vpro.domain.media.support.OwnerType;
     "avAttributes",
     "releaseYear",
     "duration",
-    "persons",
+    "credits",
     "memberOf",
     "ageRating",
     "contentRatings",

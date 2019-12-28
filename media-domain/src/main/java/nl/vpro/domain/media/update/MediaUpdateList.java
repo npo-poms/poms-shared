@@ -3,15 +3,13 @@ package nl.vpro.domain.media.update;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.util.IntegerVersion;
 import nl.vpro.util.IntegerVersionSpecific;
@@ -72,6 +70,7 @@ public class MediaUpdateList<T> implements Iterable<T>, IntegerVersionSpecific {
     }
 
 
+    @SafeVarargs
     public MediaUpdateList(T... list) {
         this.list = Collections.unmodifiableList(Arrays.asList(list));
         this.offset = 0;

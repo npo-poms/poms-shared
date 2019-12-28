@@ -1,5 +1,7 @@
 package nl.vpro.domain.media.update;
 
+import lombok.Getter;
+
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.xml.bind.annotation.*;
@@ -22,13 +24,16 @@ import nl.vpro.domain.media.RoleType;
 public class PersonUpdate {
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
+    @Getter
     protected String givenName;
 
     @XmlElement(namespace = Xmlns.UPDATE_NAMESPACE)
+    @Getter
     protected String familyName;
 
     @XmlAttribute(required = true)
     @Enumerated(EnumType.STRING)
+    @Getter
     protected RoleType role;
 
     public PersonUpdate(String givenName, String familyName, RoleType role) {
@@ -43,17 +48,6 @@ public class PersonUpdate {
 
     protected PersonUpdate() {
         // needed for jaxb
-    }
-
-    public String getGivenName() {
-        return givenName;
-    }
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public RoleType getRole() {
-        return role;
     }
 
     @Override
