@@ -413,7 +413,9 @@
   <xs:complexType name="nameType">
     <xs:complexContent>
       <xs:extension base="creditsType">
-        <xs:sequence/>
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
