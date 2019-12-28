@@ -2,11 +2,15 @@ package nl.vpro.domain.media;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
+import nl.vpro.jackson2.Jackson2Mapper;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 
 import static nl.vpro.test.util.jackson2.Jackson2TestUtil.assertThatJson;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Michiel Meeuwissen
@@ -21,12 +25,28 @@ public class PersonTest {
         person.setGtaaRecord(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         assertThatJson(person).isSimilarTo(
             "{\n" +
+             " \"objectType\" : \"person\",\n" +
             "  \"givenName\" : \"Pietje\",\n" +
             "  \"familyName\" : \"Puk\",\n" +
             "  \"role\" : \"ACTOR\",\n" +
             "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
                 " \"gtaaStatus\" : \"approved\"\n"  +
             "}").andRounded().isEqualTo(person);
+
+    }
+    @Test
+    public void jsonWithoutType() throws JsonProcessingException {
+
+        Person person = (Person) Jackson2Mapper.getInstance().readValue(
+            "{\n" +
+            "  \"givenName\" : \"Pietje\",\n" +
+            "  \"familyName\" : \"Puk\",\n" +
+            "  \"role\" : \"ACTOR\",\n" +
+            "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
+                " \"gtaaStatus\" : \"approved\"\n"  +
+                "}", Credits.class);
+        assertThat(person.getRole()).isEqualTo(RoleType.ACTOR);
+
 
     }
 

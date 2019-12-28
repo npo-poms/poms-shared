@@ -1,7 +1,5 @@
 package nl.vpro.domain.gtaa;
 
-import java.io.IOException;
-
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.DatabindContext;
@@ -47,6 +45,7 @@ public class GTAAConceptIdResolver extends TypeIdResolverBase {
     }
     @Override
     public JavaType typeFromId(DatabindContext context, String objectType) {
-        return TypeFactory.defaultInstance().constructSimpleType(Scheme.ofJsonObjectType(objectType).getImplementation(), new JavaType[0]);
+        return TypeFactory.defaultInstance()
+            .constructSimpleType(Scheme.ofJsonObjectType(objectType).getImplementation(), new JavaType[0]);
     }
 }

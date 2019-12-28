@@ -9,11 +9,12 @@ import javax.xml.bind.annotation.*;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
+import nl.vpro.domain.media.bind.CreditsDeserializer;
 
 /**
  * A container class for credits, linking the role to an actual entity.
@@ -32,15 +33,9 @@ import nl.vpro.domain.DomainObject;
 })
 @XmlType(name = "creditsType")
 @XmlAccessorType(XmlAccessType.NONE)
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    property = "objectType"
-)
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "person", value = Person.class),
-    @JsonSubTypes.Type(name = "name", value = Name.class)
-})
+@JsonDeserialize(using = CreditsDeserializer.class)
 public abstract class Credits extends DomainObject implements Child<MediaObject>  {
+
 
 
     @Column(nullable = false)
@@ -85,6 +80,12 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
     @Override
     public MediaObject getParent() {
         return this.mediaObject;
+    }
+
+    @JsonProperty
+    protected String getObjectType() {
+        return getClass().getSimpleName().toLowerCase();
+
     }
 
 }

@@ -526,13 +526,19 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B person(RoleType role, String givenName, String familyName) {
-        mediaObject().addPerson(Person.builder()
+        mediaObject().giveCredits(Person.builder()
             .givenName(givenName)
             .familyName(familyName)
             .role(role)
             .build());
         return (B) this;
     }
+
+    default B credits(Credits name) {
+        mediaObject().giveCredits(name);
+        return (B) this;
+    }
+
 
 
     @SuppressWarnings("unchecked")

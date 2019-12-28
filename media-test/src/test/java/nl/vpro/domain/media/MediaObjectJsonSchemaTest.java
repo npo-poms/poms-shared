@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -38,6 +38,7 @@ import nl.vpro.test.util.jackson2.Jackson2TestUtil;
 import static nl.vpro.domain.media.MediaTestDataBuilder.group;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -47,7 +48,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Slf4j
 public class MediaObjectJsonSchemaTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void before() {
         Locale.setDefault(Locales.DUTCH);
         ClassificationServiceLocator.setInstance(new MediaClassificationService());
@@ -433,14 +434,28 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testCredits() throws Exception {
-        String expected = "{\"objectType\":\"program\",\"urn\":\"urn:vpro:media:program:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"credits\":[{\"givenName\":\"Pietje\",\"familyName\":\"Puk\",\"role\":\"GUEST\"}]}";
+        String expected = "{\n" +
+            "  \"objectType\" : \"program\",\n" +
+            "  \"urn\" : \"urn:vpro:media:program:100\",\n" +
+            "  \"embeddable\" : true,\n" +
+            "  \"broadcasters\" : [ ],\n" +
+            "  \"genres\" : [ ],\n" +
+            "  \"countries\" : [ ],\n" +
+            "  \"languages\" : [ ],\n" +
+            "  \"credits\" : [ {\n" +
+            "    \"objectType\" : \"person\",\n" +
+            "    \"givenName\" : \"Pietje\",\n" +
+            "    \"familyName\" : \"Puk\",\n" +
+            "    \"role\" : \"GUEST\"\n" +
+            "  } ]\n" +
+            "}";
 
         Person person = new Person("Pietje", "Puk", RoleType.GUEST);
         Program program = program().id(100L).lean().persons(person).build();
 
         String actual = toJson(program);
 
-        assertJsonEquals(expected, actual);
+        Jackson2TestUtil.assertJsonEquals(expected, actual);
     }
 
     @Test
@@ -555,12 +570,14 @@ public class MediaObjectJsonSchemaTest {
 
     }
 
-    @Test(expected = JsonMappingException.class)
-    public void testUnMarshalGroupWithoutObjectType() throws IOException {
-        String expected = "{\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"isOrdered\":true}";
+    @Test
+    public void testUnMarshalGroupWithoutObjectType()  {
+        assertThatThrownBy(() -> {
+            String expected = "{\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":false,\"countries\":[],\"languages\":[],\"isOrdered\":true}";
 
-        MediaObject mo = Jackson2Mapper.getInstance().readValue(expected, MediaObject.class);
-        log.info("{}", mo);
+            MediaObject mo = Jackson2Mapper.getInstance().readValue(expected, MediaObject.class);
+            log.info("{}", mo);
+        }).isInstanceOf(JsonMappingException.class);
 
 
     }
@@ -784,10 +801,10 @@ public class MediaObjectJsonSchemaTest {
 	}
 
     @Test
-    public void testWithPersons() {
-        Program program = program().lean().withPersons().build();
+    public void testWithCredits() {
+        Program program = program().lean().withCredits().build();
 
-        Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
+        Program rounded = Jackson2TestUtil.roundTripAndSimilar(program, "{\n" +
             "  \"objectType\" : \"program\",\n" +
             "  \"embeddable\" : true,\n" +
             "  \"broadcasters\" : [ ],\n" +
@@ -815,8 +832,14 @@ public class MediaObjectJsonSchemaTest {
             "    \"givenName\" : \"Claire\",\n" +
             "    \"familyName\" : \"Holt\",\n" +
             "    \"role\" : \"ACTOR\"\n" +
+            "  }, {\n" +
+            "    \"objectType\" : \"name\",\n" +
+            "    \"role\" : \"COMPOSER\",\n" +
+            "    \"name\" : \"bla\"\n" +
             "  } ]\n" +
             "}");
+
+        log.info("{}", rounded.getCredits());
 
     }
 

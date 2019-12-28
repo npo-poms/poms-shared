@@ -1,19 +1,42 @@
 package nl.vpro.domain.media;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.*;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity(name = "name")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "nameType")
-@JsonTypeName("person")
+@JsonDeserialize
+@JsonPropertyOrder({
+    "objectType",
+    "name",
+    "role"/*,
+    "gtaaUri",
+    "gtaaStatus"
+    */
+
+})
 public class Name extends Credits  {
 
-
+    @XmlElement
+    @Getter
+    @Setter
+    protected String name;
 
     public Name() {
+
+    }
+
+    @lombok.Builder
+    private Name(RoleType role, String name) {
+        this.role = role;
+        this.name = name;
     }
 
     public Name(Name source, MediaObject parent) {
@@ -43,5 +66,10 @@ public class Name extends Credits  {
     private GTAARecord gtaaRecord = new GTAARecord();
 
 */
+    @Override
+    public String toString() {
+        return Name.class.getSimpleName() + ":" + role + ":" + name;
+    }
+
 
 }

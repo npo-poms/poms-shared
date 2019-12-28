@@ -1467,11 +1467,6 @@ public abstract class MediaObject
     }
 
     @JsonProperty("credits")
-    @JsonSubTypes({
-        @JsonSubTypes.Type(value = Person.class, name = "person"),
-        @JsonSubTypes.Type(value = Name.class, name = "name")
-    })
-
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     protected List<Credits> getJsonCredits() {
         return getCredits();

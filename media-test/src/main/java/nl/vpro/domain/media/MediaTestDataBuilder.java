@@ -456,6 +456,9 @@ public interface MediaTestDataBuilder<
                 .role(RoleType.ACTOR)
                 .build());
     }
+    default T withCredits() {
+        return withPersons().credits(Name.builder().name("bla").role(RoleType.COMPOSER).build());
+    }
 
     default T withIntentions() {
         return intentions(
