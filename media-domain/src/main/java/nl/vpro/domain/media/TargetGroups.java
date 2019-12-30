@@ -44,13 +44,6 @@ public class TargetGroups  extends AbstractMediaObjectOwnableList<TargetGroups, 
     }
 
     @Override
-    public TargetGroups clone() {
-        return new TargetGroups(values.stream().map(TargetGroup::getValue).collect(Collectors.toList()), owner);
-    }
-
-
-
-    @Override
     @NonNull
     @XmlElement(name="targetGroup")
     @JsonIgnore

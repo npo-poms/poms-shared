@@ -1,9 +1,6 @@
 package nl.vpro.domain.media.support;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.SortedSet;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -35,7 +32,23 @@ public class OwnableLists {
      * @param <T>
      * @return the element matching the given owner or the one to display if nothing matches.
      */
-    public static <T extends Ownable> Optional<T>  filterByOwner(SortedSet<T> ownableSet, OwnerType owner){
+    public static <T extends Ownable> Optional<T> filterByOwnerOrFirst(SortedSet<T> ownableSet, OwnerType owner){
+
+        Optional<T> filtered = filterByOwner(ownableSet, owner);
+
+        if (! filtered.isPresent() && ! ownableSet.isEmpty()) {
+            return Optional.of(ownableSet.first());
+        }
+        return filtered;
+    }
+    /**
+     * Return the element to display
+     * @param ownableSet the collection of all the sets
+     * @param owner to match
+     * @param <T>
+     * @return the element matching the given owner or the one to display if nothing matches.
+     */
+    public static <T extends Ownable> Optional<T>  filterByOwner(Collection<T> ownableSet, OwnerType owner){
         if(ownableSet == null || ownableSet.isEmpty()) {
             return Optional.empty();
         }
@@ -44,6 +57,6 @@ public class OwnableLists {
                 return Optional.of(intention);
             }
         }
-        return Optional.of(ownableSet.first());
+        return Optional.empty();
     };
 }

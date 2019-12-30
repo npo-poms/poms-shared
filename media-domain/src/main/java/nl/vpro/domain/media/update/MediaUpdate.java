@@ -519,7 +519,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         if (intentions == null) {
             return null;
         }
-        return OwnableLists.filterByOwner(intentions, owner)
+        return OwnableLists.filterByOwnerOrFirst(intentions, owner)
             .map(Intentions::getValues)
             .map(l -> l.stream().map(Intention::getValue).collect(Collectors.toList()))
             .orElse(new ArrayList<>());
@@ -549,7 +549,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
             return null;
         }
         return OwnableLists
-            .filterByOwner(targetGroups, owner)
+            .filterByOwnerOrFirst(targetGroups, owner)
             .map(TargetGroups::getValues)
             .map(l -> l.stream().map(TargetGroup::getValue).collect(Collectors.toList()))
             .orElse(new ArrayList<>());

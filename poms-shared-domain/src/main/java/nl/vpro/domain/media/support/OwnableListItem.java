@@ -5,7 +5,7 @@ import nl.vpro.domain.Child;
 /**
  * An item in a {@link OwnableList}, that is it is a {@link Child} of that.
  *
- * It also is {@link Comparable}
+ * It also is {@link Comparable}, though this is not actually essential,
  *
  * @author Michiel Meeuwissen
  * @since 5.11

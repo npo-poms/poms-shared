@@ -67,8 +67,4 @@ public class GeoLocations extends AbstractMediaObjectOwnableList<GeoLocations, G
         this.values = list;
     }
 
-    @Override
-    public GeoLocations clone() {
-        return new GeoLocations(values.stream().map(GeoLocation::clone).collect(Collectors.toList()), owner, null);
-    }
 }

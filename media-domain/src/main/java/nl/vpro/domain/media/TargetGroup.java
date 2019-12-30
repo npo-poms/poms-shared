@@ -9,18 +9,12 @@ import java.util.Objects;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import nl.vpro.domain.DomainObject;
-import nl.vpro.domain.media.support.MediaObjectOwnableListItem;
 import nl.vpro.domain.media.support.SimpleValueMediaObjectOwnableListItem;
 
 @Entity
@@ -59,12 +53,12 @@ public class TargetGroup extends DomainObject implements SimpleValueMediaObjectO
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TargetGroup that = (TargetGroup) o;
-        return value == that.value;
+        return value == that.value && Objects.equals(parent, that.parent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), value);
+        return Objects.hash(value, parent);
     }
 
 

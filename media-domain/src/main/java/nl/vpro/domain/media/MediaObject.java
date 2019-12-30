@@ -337,7 +337,6 @@ public abstract class MediaObject
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
-    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @NoDuplicateOwner
@@ -349,7 +348,6 @@ public abstract class MediaObject
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
-    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @NoDuplicateOwner
@@ -408,7 +406,6 @@ public abstract class MediaObject
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
-    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @NoDuplicateOwner
@@ -420,7 +417,6 @@ public abstract class MediaObject
 
     @OneToMany(orphanRemoval = true, cascade = ALL)
     @JoinColumn(name = "parent_id")
-    @OrderColumn(name = "list_index", nullable = false)
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @Valid
     @NoDuplicateOwner
@@ -1169,7 +1165,8 @@ public abstract class MediaObject
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public SortedSet<GeoLocations>  getExpandedGeoLocations() {
         return MediaObjectOwnableLists.expandOwnedList(this.geoLocations,
-                (owner, values) -> GeoLocations.builder().values(values).owner(owner).build(),
+                (owner, values) -> GeoLocations.builder()
+                    .values(values).owner(owner).build(),
                 OwnerType.ENTRIES
         );
     }
@@ -1216,10 +1213,6 @@ public abstract class MediaObject
             this.intentions = null;
             return;
         }
-
-        if (containsDuplicateOwner(newIntentions)) {
-            throw new IllegalArgumentException("The list you want to set has a duplicate owner: " + newIntentions);
-        }
         if (this.intentions == null) {
             this.intentions = new TreeSet<>();
         } else {
@@ -1231,14 +1224,10 @@ public abstract class MediaObject
     }
 
     public MediaObject addIntention(@NonNull Intentions newIntentions) {
-        if(this.intentions != null) {
-            this.intentions.removeIf(existing -> existing.getOwner() == newIntentions.getOwner());
-        } else {
+        if(this.intentions == null) {
             this.intentions = new TreeSet<>();
         }
-        newIntentions.setParent(this);
-        this.intentions.add(newIntentions);
-        return this;
+        return MediaObjectOwnableLists.addOwnableList(this, this.intentions, newIntentions);
     }
 
     public boolean removeIntention(Intentions intentions) {
@@ -1466,6 +1455,11 @@ public abstract class MediaObject
         return credits;
     }
 
+    /**
+     * This method just exists to contain the json annotations.
+     * Putting them on {@link #getCredits()} complicates matters, because we basicly configured jackson to
+     * use jaxb annotations.
+     */
     @JsonProperty("credits")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     protected List<Credits> getJsonCredits() {

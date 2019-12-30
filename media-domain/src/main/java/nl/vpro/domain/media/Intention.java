@@ -62,12 +62,12 @@ public class Intention extends DomainObject implements SimpleValueMediaObjectOwn
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Intention intention = (Intention) o;
-        return value == intention.value;
+        return value == intention.value && Objects.equals(parent, intention.parent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), value);
+        return Objects.hash(value, parent);
     }
 
     @Override
@@ -82,8 +82,7 @@ public class Intention extends DomainObject implements SimpleValueMediaObjectOwn
 
     @Override
     public int compareTo(Intention o) {
-        return 0;
-
+        return value.compareTo(o.value);
     }
 
     public static class Serializer extends JsonSerializer<Intention> {

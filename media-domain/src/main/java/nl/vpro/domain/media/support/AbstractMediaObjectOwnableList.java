@@ -1,19 +1,12 @@
 package nl.vpro.domain.media.support;
 
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -58,17 +51,11 @@ public abstract class AbstractMediaObjectOwnableList<
 
     @Override
     public int hashCode() {
-        return Objects.hash(owner, values);
+        return Objects.hash(owner);
     }
 
     @Override
     public int compareTo(THIS o) {
-        if (this.getOwner().equals(o.getOwner())){
-            if (!Objects.equals(this.values, o.getValues())) {
-                //order is undefined (we never expect 2 intentions with same owner in a set anyway)
-                return -1;
-            }
-        }
         return this.getOwner().compareTo(o.getOwner());
     }
 
@@ -78,8 +65,12 @@ public abstract class AbstractMediaObjectOwnableList<
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         THIS list = (THIS) o;
-        return owner == list.owner &&
-                values.equals(list.values);
+        if (getParent() == null || list.getParent() == null) {
+            // No parent, this is odd
+            return owner == list.owner;
+        } else {
+            return owner == list.owner && Objects.equals(getParent().getMid(), list.getParent().getMid());
+        }
     }
 
     @Override
@@ -91,9 +82,15 @@ public abstract class AbstractMediaObjectOwnableList<
     @Override
     public THIS clone() {
         try {
-            return (THIS) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new RuntimeException();
+            THIS result = (THIS) super.clone();
+            result.parent = null;
+            for (I v : result.values) {
+                v.setParent(result);
+            }
+            return result;
+        } catch (CloneNotSupportedException cnse) {
+            throw new RuntimeException(cnse);
         }
     }
+
 }

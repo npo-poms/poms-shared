@@ -24,7 +24,6 @@ public class Topics extends AbstractMediaObjectOwnableList<Topics, Topic> {
     }
 
     public Topics(@lombok.NonNull MediaObject parent, @lombok.NonNull OwnerType owner) {
-
         this.parent = parent;
         this.owner = owner;
     }
@@ -52,9 +51,4 @@ public class Topics extends AbstractMediaObjectOwnableList<Topics, Topic> {
         values = list;
     }
 
-    @SuppressWarnings("MethodDoesntCallSuperMethod")
-    @Override
-    public Topics clone() {
-        return new Topics(values, owner, null);
-    }
 }

@@ -12,6 +12,8 @@ import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
 
 /**
  * Utilities related to updating {@link MediaObjectOwnableList}.
+ *
+ * @see  OwnableLists
  * @author Michiel Meeuwissen
  * @since 5.11
  */
@@ -45,11 +47,24 @@ public class MediaObjectOwnableLists {
         }
     }
 
+
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     MediaObject addOwnableList(@NonNull MediaObject parent, @NonNull Collection<P> list, @NonNull P newOwnableList) {
-        list.removeIf(existing -> existing.getOwner() == newOwnableList.getOwner());
-        newOwnableList.setParent(parent);
-        list.add(newOwnableList);
+        Optional<P> existing = OwnableLists.filterByOwner(list, newOwnableList.getOwner());
+        if (existing.isPresent()) {
+            P existingList = existing.get();
+            if ( ! Objects.equals(existingList.getValues(), newOwnableList.getValues())) {
+                existing.get().getValues().clear();
+                newOwnableList.getValues().forEach(nv -> {
+                    nv.setParent(existingList);
+                    existingList.add(nv);
+                });
+
+            }
+        } else {
+            newOwnableList.setParent(parent);;
+            list.add(newOwnableList);
+        }
         return parent;
     }
 
