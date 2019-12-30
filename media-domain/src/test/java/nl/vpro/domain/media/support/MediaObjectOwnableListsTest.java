@@ -6,7 +6,7 @@ import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.*;
 
