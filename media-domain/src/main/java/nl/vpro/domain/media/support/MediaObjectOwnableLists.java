@@ -63,11 +63,12 @@ public class MediaObjectOwnableLists {
     }
 
 
+    @SuppressWarnings("StatementWithEmptyBody")
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     void addOrUpdateOwnableListForOwner(@NonNull MediaObject parent, @NonNull SortedSet<P> toUpdate,@Nullable  SortedSet<P> incoming, OwnerType forOwner) {
-        //noinspection StatementWithEmptyBody
         if(incoming == null) {
-            //we don't update empty values
+            // Ignore it completely, this mainly is for the case that a media update xml was incoming with not values for the given set at all (the xml wrapper was missing)
+            // indicating that client is at all interested or aware of the feature, and we don't want to empty the value for the owner
         } else  {
             Optional<P> is = OwnableLists.filterByOwner(incoming, forOwner);
             if (is.isPresent()) {
