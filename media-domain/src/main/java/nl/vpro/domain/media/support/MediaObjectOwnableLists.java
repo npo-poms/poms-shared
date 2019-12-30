@@ -8,8 +8,6 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.MediaObject;
 
-import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
-
 /**
  * Utilities related to updating {@link MediaObjectOwnableList}.
  *
@@ -49,7 +47,7 @@ public class MediaObjectOwnableLists {
 
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
-    MediaObject addOwnableList(@NonNull MediaObject parent, @NonNull Collection<P> list, @NonNull P newOwnableList) {
+    MediaObject addOrUpdateOwnableList(@NonNull MediaObject parent, @NonNull Collection<P> list, @NonNull P newOwnableList) {
         Optional<P> existing = OwnableLists.filterByOwner(list, newOwnableList.getOwner());
         if (existing.isPresent()) {
             P existingList = existing.get();
@@ -141,13 +139,10 @@ public class MediaObjectOwnableLists {
     }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
-    void set(@NonNull MediaObject parent, @NonNull Collection<P> existingCollection, @NonNull Collection<P> newCollection) {
-        if (containsDuplicateOwner(newCollection)) {
-            throw new IllegalArgumentException("The list you want to set has a duplicate owner: " + newCollection);
-        }
+    void set(@NonNull MediaObject parent, @NonNull Set<P> existingCollection, @NonNull Set<P> newCollection) {
         existingCollection.clear();
         for (P i : newCollection) {
-            addOwnableList(parent, existingCollection, i.clone());
+            addOrUpdateOwnableList(parent, existingCollection, i.clone());
         }
     }
 

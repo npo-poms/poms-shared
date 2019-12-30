@@ -58,10 +58,9 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
-import static nl.vpro.domain.media.MediaObject.*;
 import static nl.vpro.domain.media.CollectionUtils.*;
+import static nl.vpro.domain.media.MediaObject.*;
 import static nl.vpro.domain.media.support.MediaObjectOwnableLists.createIfNull;
-import static nl.vpro.domain.media.support.OwnableLists.containsDuplicateOwner;
 
 /**
  * Base objects for programs, groups and segments.
@@ -1190,10 +1189,10 @@ public abstract class MediaObject
                 OwnerType.ENTRIES);
     }
 
-    //region Intentions logic
+
 
     public SortedSet<Intentions> getIntentions() {
-        return intentions;
+        return this.intentions = createIfNull(this.intentions);
     }
 
     @JsonView({Views.Publisher.class})
@@ -1209,36 +1208,12 @@ public abstract class MediaObject
     }
 
     public void setIntentions(SortedSet<Intentions> newIntentions) {
-        if (newIntentions == null) {
-            this.intentions = null;
-            return;
-        }
-        if (this.intentions == null) {
-            this.intentions = new TreeSet<>();
-        } else {
-           this.intentions.clear();
-        }
-        for (Intentions i : newIntentions) {
-            addIntention(i.clone());
-        }
+        MediaObjectOwnableLists.set(this, getIntentions(), newIntentions);
     }
-
-    public MediaObject addIntention(@NonNull Intentions newIntentions) {
-        if(this.intentions == null) {
-            this.intentions = new TreeSet<>();
-        }
-        return MediaObjectOwnableLists.addOwnableList(this, this.intentions, newIntentions);
-    }
-
-    public boolean removeIntention(Intentions intentions) {
-        return this.intentions.remove(intentions);
-    }
-
-    //endregion
 
 
     public SortedSet<TargetGroups> getTargetGroups() {
-        return targetGroups;
+        return this.targetGroups = createIfNull(this.targetGroups);
     }
 
 
@@ -1255,33 +1230,7 @@ public abstract class MediaObject
     }
 
     public void setTargetGroups(SortedSet<TargetGroups> newTargetGroups) {
-
-        if (newTargetGroups == null){
-            this.targetGroups = null;
-            return ;
-        }
-        if (containsDuplicateOwner(newTargetGroups)) {
-           throw new IllegalArgumentException("The targetgroup list you want to set has a duplicate owner: " + newTargetGroups);
-        }
-        if (this.targetGroups == null) {
-            this.targetGroups = new TreeSet<>();
-        } else {
-           this.targetGroups.clear();
-        }
-        for (TargetGroups i : newTargetGroups) {
-            addTargetGroups(i.clone());
-        }
-    }
-
-    public MediaObject addTargetGroups(@NonNull TargetGroups newTargetGroups) {
-        if(this.targetGroups != null) {
-            targetGroups.removeIf(existing -> existing.getOwner() == newTargetGroups.getOwner());
-        } else {
-            this.targetGroups = new TreeSet<>();
-        }
-        newTargetGroups.setParent(this);
-        targetGroups.add(newTargetGroups);
-        return this;
+        MediaObjectOwnableLists.set(this, getTargetGroups(), newTargetGroups);
     }
 
     @XmlElement

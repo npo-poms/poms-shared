@@ -2,6 +2,7 @@ package nl.vpro.domain.media.support;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.net.URI;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -9,6 +10,7 @@ import org.junit.Test;
 
 import nl.vpro.domain.media.*;
 
+import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
@@ -18,7 +20,7 @@ public class MediaObjectOwnableListsTest {
      * The values for the Owner with higher rank should be used for expansion
      */
     @Test
-    public void expandGeoLocation() {
+    public void expandOwnedLists() {
 
         List<GeoLocation> geoLocation1 = Arrays.asList(
                 GeoLocation.builder().name("Amsterdam").scopeNote("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
@@ -44,7 +46,7 @@ public class MediaObjectOwnableListsTest {
     }
 
     @Test
-    public <OL extends AbstractMediaObjectOwnableList> void removeGeoLocations() {
+    public void removeGeoLocations() {
         Program program = MediaBuilder.program().mid("VPRO-1").titles(Title.main("Test 1")).build();
         List<GeoLocation> geoLocation1 = Arrays.asList(
                 GeoLocation.builder().id(1L).name("Amsterdam").scopeNote("City").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build()
@@ -63,5 +65,39 @@ public class MediaObjectOwnableListsTest {
         MediaObjectOwnableLists.remove(programGeoLocations, OwnerType.MIS);
 
         assertThat(programGeoLocations.size()).isEqualTo(1);
+    }
+
+    @Test
+    public void addOrUpdateOwnableList() {
+        Program program = MediaBuilder.program().build();
+
+
+        GeoLocations geoLocations1 = GeoLocations.builder()
+                .owner(BROADCASTER).value(
+                GeoLocation.builder().name("Africa").scopeNote("Continent")
+                        .gtaaUri("test/123").role(GeoRoleType.SUBJECT).build()
+            )
+            .build();
+        GeoLocations geoLocations3 =  GeoLocations.builder()
+            .owner(BROADCASTER).value(
+                GeoLocation.builder().name("England").gtaaUri("https://wikipedia/lll")
+                        .role(GeoRoleType.RECORDED_IN).build()
+
+            )
+            .build();
+
+
+        program.getGeoLocations().add(geoLocations1);
+        MediaObjectOwnableLists.addOrUpdateOwnableList(program, program.getGeoLocations(), geoLocations3);
+
+        //I expect the second item to override the previous one
+        assertThat(program.getGeoLocations()).hasSize(1);
+        assertThat(program.getGeoLocations().first().getValues()).hasSize(1);
+        assertThat(program.getGeoLocations().first().getValues().get(0).getGtaaUri()).isEqualTo(URI.create("https://wikipedia/lll"));
+
+        // but actually the object should not have been changed
+        assertThat(program.getGeoLocations().first() == geoLocations1).isTrue();
+        assertThat(program.getGeoLocations().first() == geoLocations3).isFalse();
+
     }
 }

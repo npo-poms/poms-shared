@@ -566,7 +566,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B geoLocations(Collection<GeoLocations> geoLocations) {
-        geoLocations.forEach(geos -> MediaObjectOwnableLists.addOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
+        geoLocations.forEach(geos -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getGeoLocations(), geos));
         return (B)this;
     }
 
@@ -575,7 +575,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B intentions(Collection<Intentions> intentions) {
-        intentions.forEach(intention -> mediaObject().addIntention(intention));
+        intentions.forEach(i -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getIntentions(), i));
         return (B)this;
     }
 
@@ -584,7 +584,7 @@ public interface MediaBuilder<B extends MediaBuilder<B, M>, M extends MediaObjec
     }
 
     default B targetGroups(Collection<TargetGroups> targetGroups) {
-        targetGroups.forEach(targetGroup -> mediaObject().addTargetGroups(targetGroup));
+        targetGroups.forEach(i -> MediaObjectOwnableLists.addOrUpdateOwnableList(mediaObject(), mediaObject().getTargetGroups(), i));
         return (B)this;
     }
 

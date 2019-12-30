@@ -62,12 +62,12 @@ public class Intention extends DomainObject implements SimpleValueMediaObjectOwn
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Intention intention = (Intention) o;
-        return value == intention.value && Objects.equals(parent, intention.parent);
+        return value == intention.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, parent);
+        return Objects.hash(value);
     }
 
     @Override

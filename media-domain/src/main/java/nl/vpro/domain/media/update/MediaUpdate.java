@@ -493,13 +493,13 @@ public abstract class  MediaUpdate<M extends MediaObject>
         returnObject.setTwitterRefs(toList(twitterrefs, (t) -> new TwitterRef(t, owner)));
 
         if(intentions != null) {
-            returnObject.addIntention(toIntentions(intentions, owner));
+            MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getIntentions(), toIntentions(intentions, owner));
         }
         if(targetGroups != null){
-            returnObject.addTargetGroups(toTargetGroups(targetGroups, owner));
+            MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getTargetGroups(), toTargetGroups(targetGroups, owner));
         }
         if(geoLocations != null){
-            MediaObjectOwnableLists.addOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
+            MediaObjectOwnableLists.addOrUpdateOwnableList(returnObject, returnObject.getGeoLocations(), toGeoLocations(geoLocations, owner));
         }
 
 
