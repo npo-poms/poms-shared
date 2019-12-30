@@ -68,7 +68,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"hasSubtitles\":true,\"countries\":[],\"languages\":[],\"availableSubtitles\":[{\"language\":\"nl\",\"type\":\"CAPTION\"}]}";
 
         Program program = program().lean().withSubtitles().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -80,7 +80,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().creationInstant(Instant.ofEpochMilli(1))
             .lastModified(Instant.ofEpochSecond(2 * 60 * 60))
             .build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -90,7 +90,7 @@ public class MediaObjectJsonSchemaTest {
         Program program = program().lean().withCreatedBy().withLastModifiedBy().build();
 
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -101,7 +101,7 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().lean().publishStart(Instant.ofEpochMilli(1))
             .publishStop(Instant.ofEpochSecond(2 * 60 * 60)).build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -111,7 +111,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"workflow\":\"MERGED\",\"mergedTo\":\"MERGE_TARGET\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().mergedTo(program().mid("MERGE_TARGET").build()).build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -121,7 +121,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"crids\":[\"crid://bds.tv/9876\",\"crid://tmp.fragment.mmbase.vpro.nl/1234\"],\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withCrids().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -131,7 +131,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[{\"id\":\"BNN\",\"value\":\"BNN\"},{\"id\":\"AVRO\",\"value\":\"AVRO\"}],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withBroadcasters().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -144,7 +144,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"exclusives\":[\"STERREN24\",\"3VOOR12_GRONINGEN\"],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withPortalRestrictions().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -184,7 +184,7 @@ public class MediaObjectJsonSchemaTest {
 
         program.getPredictions().add(nonavailable);
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
 
@@ -265,7 +265,7 @@ public class MediaObjectJsonSchemaTest {
             "}";
 
         Program program = program().lean().withTitles().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         Jackson2TestUtil.assertThatJson(actual).isSimilarTo(expected);
     }
@@ -275,7 +275,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"descriptions\":[{\"value\":\"Main description\",\"owner\":\"BROADCASTER\",\"type\":\"MAIN\"},{\"value\":\"Main description MIS\",\"owner\":\"MIS\",\"type\":\"MAIN\"},{\"value\":\"Short description\",\"owner\":\"BROADCASTER\",\"type\":\"SHORT\"},{\"value\":\"Episode description MIS\",\"owner\":\"MIS\",\"type\":\"EPISODE\"}],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withDescriptions().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -285,7 +285,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[{\"id\":\"3.0.1.7.21\",\"terms\":[\"Informatief\",\"Nieuws/actualiteiten\"]},{\"id\":\"3.0.1.8.25\",\"terms\":[\"Documentaire\",\"Natuur\"]}],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withGenres().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -309,7 +309,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"tags\":[\"tag1\",\"tag2\",\"tag3\"],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withTags().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -319,7 +319,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"portals\":[{\"id\":\"3VOOR12_GRONINGEN\",\"value\":\"3voor12 Groningen\"},{\"id\":\"STERREN24\",\"value\":\"Sterren24\"}],\"genres\":[],\"countries\":[],\"languages\":[]}";
 
         Program program = program().lean().withPortals().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -329,7 +329,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"program\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"duration\":7200000}";
 
         Program program = program().lean().withDuration().build();
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -346,7 +346,7 @@ public class MediaObjectJsonSchemaTest {
         program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
         program.getMemberOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
         program.getMemberOf().first().setAdded(Instant.EPOCH);
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -361,7 +361,7 @@ public class MediaObjectJsonSchemaTest {
         program.getEpisodeOf().first().getGroup().setMid("AVRO_7777777");
         program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid(null);
         program.getEpisodeOf().first().getGroup().getMemberOf().first().getGroup().setMid("AVRO_5555555");
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -453,7 +453,7 @@ public class MediaObjectJsonSchemaTest {
         Person person = new Person("Pietje", "Puk", RoleType.GUEST);
         Program program = program().id(100L).lean().persons(person).build();
 
-        String actual = toJson(program);
+        String actual = toApiJson(program);
 
         Jackson2TestUtil.assertJsonEquals(expected, actual);
     }
@@ -466,7 +466,7 @@ public class MediaObjectJsonSchemaTest {
         location.setCreationInstant(Instant.ofEpochMilli(1));
         Program program = program().id(100L).lean().locations(location).build();
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
         Jackson2TestUtil.roundTripAndSimilar(location, "{\"programUrl\":\"2\",\"avAttributes\":{\"avFileFormat\":\"UNKNOWN\"},\"owner\":\"BROADCASTER\",\"creationDate\":1,\"workflow\":\"FOR_PUBLICATION\"}");
@@ -481,7 +481,7 @@ public class MediaObjectJsonSchemaTest {
         image.setLastModifiedBy(Editor.builder().email("bla@foo.bar").build());
         Program program = program().id(100L).lean().images(image).build();
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -493,7 +493,7 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().id(100L).lean().withTwitterRefs().build();
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -505,7 +505,7 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().id(100L).lean().languages("nl").build();
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -517,7 +517,7 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().id(100L).lean().countries("NL").build();
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -529,7 +529,7 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().id(100L).lean().ageRating(AgeRating._16).build();
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -540,7 +540,7 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().id(100L).lean().ageRating(AgeRating.ALL).build();
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -553,7 +553,7 @@ public class MediaObjectJsonSchemaTest {
 
         Program program = program().id(100L).lean().aspectRatio(AspectRatio._16x9).build();
 
-        String actual = toJson(program);
+        String actual = toPublisherJson(program);
 
         assertJsonEquals(expected, actual);
     }
@@ -564,7 +564,7 @@ public class MediaObjectJsonSchemaTest {
         String expected = "{\"objectType\":\"group\",\"urn\":\"urn:vpro:media:group:100\",\"embeddable\":true,\"broadcasters\":[],\"genres\":[],\"countries\":[],\"languages\":[],\"isOrdered\":true}";
         Group group = group().id(100L).lean().build();
 
-        String actual = toJson(group);
+        String actual = toPublisherJson(group);
         assertJsonEquals(expected, actual);
 
 
@@ -699,7 +699,7 @@ public class MediaObjectJsonSchemaTest {
 
         Jackson2TestUtil.roundTripAndSimilar(program, expected);
 
-        Program marshalled = Jackson2Mapper.INSTANCE.readValue(toJson(program), Program.class);
+        Program marshalled = Jackson2Mapper.INSTANCE.readValue(toPublisherJson(program), Program.class);
         assertEquals(marshalled.intentions, program.intentions);
     }
 
@@ -1007,10 +1007,16 @@ public class MediaObjectJsonSchemaTest {
 
     }
 
-    private String toJson(MediaObject program) throws IOException {
+    private String toJson(Jackson2Mapper mapper, MediaObject program) throws IOException {
         StringWriter writer = new StringWriter();
-        Jackson2Mapper.getPublisherInstance().writeValue(writer, program);
+        mapper.writeValue(writer, program);
         return writer.toString();
+    }
+    private String toPublisherJson(MediaObject program) throws IOException {
+        return toJson(Jackson2Mapper.getPublisherInstance(), program);
+    }
+    private String toApiJson(MediaObject program) throws IOException {
+        return toJson(Jackson2Mapper.getPrettyInstance(), program);
     }
 
     private <O>  String toJson2(O javaObject) throws IOException {

@@ -10,13 +10,11 @@ import javax.xml.bind.annotation.*;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.bind.CreditsDeserializer;
-import nl.vpro.jackson2.Views;
 
 /**
  * A container class for credits, linking the role to an actual entity.
@@ -89,7 +87,6 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
         return getClass().getSimpleName().toLowerCase();
     }
 
-    @JsonView({Views.Publisher.class})
     public abstract String getName();
 
 }

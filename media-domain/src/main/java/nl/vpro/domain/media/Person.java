@@ -13,12 +13,13 @@ import javax.xml.bind.annotation.*;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import nl.vpro.domain.PersonInterface;
 import nl.vpro.domain.media.gtaa.EmbeddablePerson;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
+import nl.vpro.jackson2.Views;
 import nl.vpro.validation.NoHtml;
 
 @Entity
@@ -248,6 +249,8 @@ public class Person extends Credits implements PersonInterface {
     }
 
     @Override
+    @JsonProperty
+    @JsonView({Views.Publisher.class})
     public String getName() {
         return givenName + " " + familyName;
     }
