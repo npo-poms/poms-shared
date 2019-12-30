@@ -59,8 +59,8 @@ import nl.vpro.xml.bind.InstantXmlAdapter;
 import static javax.persistence.CascadeType.ALL;
 import static nl.vpro.domain.TextualObjects.sorted;
 import static nl.vpro.domain.media.CollectionUtils.*;
+import static nl.vpro.domain.media.CollectionUtils.createIfNull;
 import static nl.vpro.domain.media.MediaObject.*;
-import static nl.vpro.domain.media.support.MediaObjectOwnableLists.createIfNull;
 
 /**
  * Base objects for programs, groups and segments.
@@ -1157,7 +1157,8 @@ public abstract class MediaObject
     }
 
     public void setGeoLocations(@NonNull SortedSet<GeoLocations> newGeoLocations) {
-        MediaObjectOwnableLists.set(this, getGeoLocations(), newGeoLocations);
+        this.geoLocations = createIfNullUnlessNull(this.geoLocations, newGeoLocations);
+        MediaObjectOwnableLists.setIfNotNull(this, this.geoLocations, newGeoLocations);
     }
 
     @JsonView({Views.Publisher.class})
@@ -1189,8 +1190,7 @@ public abstract class MediaObject
                 OwnerType.ENTRIES);
     }
 
-
-
+    @NonNull
     public SortedSet<Intentions> getIntentions() {
         return this.intentions = createIfNull(this.intentions);
     }
@@ -1208,12 +1208,13 @@ public abstract class MediaObject
     }
 
     public void setIntentions(SortedSet<Intentions> newIntentions) {
-        MediaObjectOwnableLists.set(this, getIntentions(), newIntentions);
+        this.intentions = createIfNullUnlessNull(this.intentions, newIntentions);
+        MediaObjectOwnableLists.setIfNotNull(this, this.intentions, newIntentions);
     }
 
-
+    @NonNull
     public SortedSet<TargetGroups> getTargetGroups() {
-        return this.targetGroups = createIfNull(this.targetGroups);
+        return this.targetGroups =  createIfNull(this.targetGroups);
     }
 
 
@@ -1230,7 +1231,8 @@ public abstract class MediaObject
     }
 
     public void setTargetGroups(SortedSet<TargetGroups> newTargetGroups) {
-        MediaObjectOwnableLists.set(this, getTargetGroups(), newTargetGroups);
+        this.targetGroups = createIfNullUnlessNull(this.targetGroups, newTargetGroups);
+        MediaObjectOwnableLists.set(this,this.targetGroups, newTargetGroups);
     }
 
     @XmlElement

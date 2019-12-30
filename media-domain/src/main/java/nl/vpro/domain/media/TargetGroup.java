@@ -53,12 +53,12 @@ public class TargetGroup extends DomainObject implements SimpleValueMediaObjectO
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TargetGroup that = (TargetGroup) o;
-        return value == that.value && Objects.equals(parent, that.parent);
+        return value == that.value;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(value, parent);
+        return Objects.hash(value);
     }
 
 

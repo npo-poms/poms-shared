@@ -66,4 +66,23 @@ class CollectionUtils {
             return null;
         }
     }
+
+    public static <P extends Comparable<P>> SortedSet<P> createIfNull(SortedSet<P> set) {
+        if(set == null) {
+            set = new TreeSet<P>();
+        }
+        return set;
+    }
+
+    public static <P extends Comparable<P>> SortedSet<P> createIfNullUnlessNull(SortedSet<P> set, Object check) {
+        if (check == null) {
+            return null;
+        } else {
+            if (set == null) {
+                set = new TreeSet<P>();
+            }
+            return set;
+        }
+    }
+
 }

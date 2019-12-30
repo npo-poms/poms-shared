@@ -38,8 +38,7 @@ import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.classification.ClassificationServiceLocator;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.Workflow;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
@@ -916,7 +915,8 @@ public class MediaObjectXmlSchemaTest {
                 .build();
 
         program.setSortInstant(LocalDate.of(2015, 3, 6).atStartOfDay(Schedule.ZONE_ID).toInstant());
-        program.addIntention(intentions);
+
+        MediaObjectOwnableLists.addOrUpdateOwnableList(program, program.getIntentions(), intentions);
 
         String actual = toXml(program);
 

@@ -1,10 +1,13 @@
 package nl.vpro.domain.media.support;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 
 import nl.vpro.domain.media.MediaObject;
 
@@ -15,16 +18,9 @@ import nl.vpro.domain.media.MediaObject;
  * @author Michiel Meeuwissen
  * @since 5.11
  */
+@Slf4j
 public class MediaObjectOwnableLists {
 
-
-    public static  <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
-    SortedSet<P> createIfNull(SortedSet<P> set) {
-        if(set == null) {
-            set = new TreeSet<>();
-        }
-        return set;
-    }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
     boolean addValue(@NonNull Set<P> set,
@@ -64,6 +60,21 @@ public class MediaObjectOwnableLists {
             list.add(newOwnableList);
         }
         return parent;
+    }
+
+
+    public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
+    void addOrUpdateOwnableListForOwner(@NonNull MediaObject parent, @NonNull SortedSet<P> toUpdate,@Nullable  SortedSet<P> incoming, OwnerType forOwner) {
+        //noinspection StatementWithEmptyBody
+        if(incoming == null) {
+            //we don't update empty values
+        } else if (incoming.size() > 1) {
+            throw new IllegalArgumentException("cannot be saved. We expect only changes related to one owner " + incoming);
+        } else if (!incoming.first().getOwner().equals(forOwner)){
+            throw new IllegalArgumentException("cannot be saved. We expect only changes related to one owner " + forOwner + " " + incoming);
+        } else {
+            addOrUpdateOwnableList(parent, toUpdate, incoming.first());
+        }
     }
 
     public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
@@ -146,7 +157,15 @@ public class MediaObjectOwnableLists {
         }
     }
 
-    public static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>> SortedSet<OL> expandOwnedList(
+    public static <P extends MediaObjectOwnableList<P, I>, I extends MediaObjectOwnableListItem<I, P>>
+    void setIfNotNull(@NonNull MediaObject parent, @Nullable  Set<P> existingCollection, @NonNull Set<P> newCollection) {
+        if (existingCollection != null) {
+            set(parent, existingCollection, newCollection);
+        }
+    }
+
+    public static <OL extends MediaObjectOwnableList<OL, I>, I extends MediaObjectOwnableListItem<I, OL>>
+    SortedSet<OL> expandOwnedList(
             SortedSet<OL> values,
             BiFunction<OwnerType, List<I>, OL> creator,
             List<OwnerType> ownersToExpand) {
