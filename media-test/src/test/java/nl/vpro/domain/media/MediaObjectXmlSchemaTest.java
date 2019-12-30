@@ -965,7 +965,7 @@ public class MediaObjectXmlSchemaTest {
         log.info(xmlInput);
 
         Program programExpected = JAXBTestUtil.unmarshal(xmlInput, Program.class);
-        assertThat(programExpected.getIntentions()).isNull();
+        assertThat(programExpected.intentions).isNull();
     }
 
     @Test

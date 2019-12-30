@@ -4,6 +4,7 @@
  */
 package nl.vpro.domain.media.update;
 
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.StringReader;
@@ -15,7 +16,7 @@ import java.util.*;
 import javax.validation.ConstraintViolation;
 import javax.xml.bind.JAXB;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.image.ImageType;
 import nl.vpro.domain.media.*;
@@ -137,16 +138,60 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         SegmentUpdate segment = SegmentUpdate.create();
         segment.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.MAIN))));
 
-        ProgramUpdate program = ProgramUpdate.create();
-        program.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.EPISODE))));
+        ProgramUpdate programUpdate = ProgramUpdate.create();
+        programUpdate.setTitles(new TreeSet<>(Collections.singletonList(new TitleUpdate("title", TextualType.EPISODE))));
+        programUpdate.setSegments(new TreeSet<>(Collections.singletonList(segment)));
 
-        program.setSegments(new TreeSet<>(Collections.singletonList(segment)));
+        String expected = "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <title type=\"EPISODE\">title</title>\n" +
+            "    <intentions/>\n" +
+            "    <targetGroups/>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments>\n" +
+            "        <segment embeddable=\"true\">\n" +
+            "            <title type=\"MAIN\">title</title>\n" +
+            "            <locations/>\n" +
+            "            <images/>\n" +
+            "        </segment>\n" +
+            "    </segments>\n" +
+            "</program>";
+        JAXBTestUtil.roundTripAndSimilar(programUpdate, expected);
 
-        Program result = program.fetch(OwnerType.MIS);
+        Program result = programUpdate.fetch(OwnerType.MIS);
 
         assertThat(result.getTitles().first().getOwner()).isEqualTo(OwnerType.MIS);
-        assertThat(result.getSegments().first().getIntentions()).isNull();
-        assertThat(result.getSegments().first().getTargetGroups()).isNull();
+        assertThat(result.getSegments().first().getIntentions()).isEmpty();
+        assertThat(result.getSegments().first().getTargetGroups()).isEmpty();
+
+        JAXBTestUtil.roundTripAndSimilar(result, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
+            "<program xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" embeddable=\"true\" workflow=\"FOR PUBLICATION\">\n" +
+            "    <title owner=\"MIS\" type=\"EPISODE\">title</title>\n" +
+            "    <intentions owner=\"MIS\"/>\n" +
+            "    <targetGroups owner=\"MIS\"/>\n" +
+            "    <credits/>\n" +
+            "    <locations/>\n" +
+            "    <images/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <segments>\n" +
+            "        <segment type=\"SEGMENT\" embeddable=\"true\" workflow=\"FOR PUBLICATION\">\n" +
+            "            <title owner=\"MIS\" type=\"MAIN\">title</title>\n" +
+            "            <credits/>\n" +
+            "            <descendantOf type=\"PROGRAM\"/>\n" +
+            "            <locations/>\n" +
+            "            <images/>\n" +
+            "        </segment>\n" +
+            "    </segments>\n" +
+            "</program>\n");
+        // imagine client does not know about these new fields targetgroups/intentions
+
+
+        String withoutFields = expected.replaceAll("<intentions\\s*/>", "").replaceAll("<targetGroups\\s*/>", "");
+        programUpdate = JAXB.unmarshal(new StringReader(withoutFields), ProgramUpdate.class);
+        assertThat(programUpdate.intentions).isNull();
+        result = programUpdate.fetch(OwnerType.MIS);
+        assertFieldNull(result, "intentions");
     }
 
     @Test
@@ -381,13 +426,15 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         program.setVersion(null);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<program xmlns=\"urn:vpro:media:update:2009\" embeddable=\"true\">\n" +
-            "  <title type=\"MAIN\">hoofdtitel omroep</title>\n" +
-            "  <locations/>\n" +
-            "  <scheduleEvents/>\n" +
-            "  <images/>\n" +
-            "  <segments/>\n" +
-            "</program>\n";
+            "<program embeddable=\"true\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <title type=\"MAIN\">hoofdtitel omroep</title>\n" +
+            "    <intentions/>\n" +
+            "    <targetGroups/>\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments/>\n" +
+            "</program>";
         ProgramUpdate rounded = JAXBTestUtil.roundTripAndSimilar(program, expected);
         assertThat(rounded.getTitles()).hasSize(1);
         assertThat(rounded.fetch().getTitles()).hasSize(1);
@@ -714,7 +761,7 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     @Test
     public void testGetSegments() {
         ProgramUpdate update = programUpdate();
-        update.setVersion(Version.of(5, 5));
+        update.setVersion(Version.of(5, 12));
         update.setSegments(new TreeSet<>(Collections.singletonList(
             SegmentUpdate.create(
                 new Segment(update.fetch(), Duration.ofMillis(5555), AuthorizedDuration.ofMillis(100))
@@ -722,19 +769,21 @@ public class ProgramUpdateTest extends MediaUpdateTest {
         //update.getSegments().first().setVersion(5.5f);
 
         String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                "<program embeddable=\"true\" version=\"5.5\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
-                "    <locations/>\n" +
-                "    <scheduleEvents/>\n" +
-                "    <images/>\n" +
-                "    <segments>\n" +
-                "        <segment embeddable=\"true\">\n" +
-                "            <duration>P0DT0H0M0.100S</duration>\n" +
-                "            <locations/>\n" +
-                "            <images/>\n" +
-                "            <start>P0DT0H0M5.555S</start>\n" +
-                "        </segment>\n" +
-                "    </segments>\n" +
-                "</program>";
+            "<program embeddable=\"true\" version=\"5.12\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+            "    <locations/>\n" +
+            "    <scheduleEvents/>\n" +
+            "    <images/>\n" +
+            "    <segments>\n" +
+            "        <segment embeddable=\"true\">\n" +
+            "            <intentions/>\n" +
+            "            <targetGroups/>\n" +
+            "            <duration>P0DT0H0M0.100S</duration>\n" +
+            "            <locations/>\n" +
+            "            <images/>\n" +
+            "            <start>P0DT0H0M5.555S</start>\n" +
+            "        </segment>\n" +
+            "    </segments>\n" +
+            "</program>";
 
         ProgramUpdate unmarshal = JAXBTestUtil.roundTripAndSimilar(update, expected);
         assertEquals(1, unmarshal.getSegments().size());
@@ -974,4 +1023,13 @@ public class ProgramUpdateTest extends MediaUpdateTest {
     }
 
 
+
+    @SneakyThrows
+    protected void assertFieldNull(MediaObject mo, String fieldName) {
+        Field field = MediaObject.class.getDeclaredField(fieldName);
+        field.setAccessible(true);
+        assertThat(field.get(mo)).isNull();
+    }
 }
+
+

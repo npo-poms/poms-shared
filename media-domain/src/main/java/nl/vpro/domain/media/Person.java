@@ -247,6 +247,11 @@ public class Person extends Credits implements PersonInterface {
             .toString();
     }
 
+    @Override
+    public String getName() {
+        return givenName + " " + familyName;
+    }
+
 
     public static class Builder {
         public Builder gtaaUri(String uri) {

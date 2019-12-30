@@ -2,29 +2,22 @@ package nl.vpro.domain.media.update;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.time.Duration;
 
 import javax.xml.bind.JAXB;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Validator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
 
 import nl.vpro.domain.Xmlns;
-import nl.vpro.domain.media.AVType;
-import nl.vpro.domain.media.MediaBuilder;
-import nl.vpro.domain.media.Program;
-import nl.vpro.domain.media.SegmentType;
-import nl.vpro.domain.media.support.OwnerType;
-import nl.vpro.domain.media.support.TextualType;
-import nl.vpro.domain.media.support.Title;
+import nl.vpro.domain.media.*;
+import nl.vpro.domain.media.support.*;
 import nl.vpro.domain.user.Broadcaster;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -101,18 +94,21 @@ public class MediaUpdateListTest {
         StringWriter writer = new StringWriter();
         JAXB.marshal(list, writer);
 
-        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-            "<list offset=\"0\" totalCount=\"1\" size=\"1\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
+        String expected = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<list offset=\"0\" totalCount=\"1\" size=\"1\" xmlns=\"urn:vpro:media:update:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:media=\"urn:vpro:media:2009\">\n" +
             "    <item xsi:type=\"programUpdateType\" avType=\"VIDEO\" embeddable=\"true\" mid=\"POMS_1234\" urn=\"urn:vpro:media:program:123\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n" +
             "        <broadcaster>VPRO</broadcaster>\n" +
             "        <title type=\"MAIN\">hoi</title>\n" +
+            "        <intentions/>\n" +
+            "        <targetGroups/>\n" +
             "        <locations/>\n" +
             "        <scheduleEvents/>\n" +
             "        <images/>\n" +
             "        <segments>\n" +
-            "            <segment midRef=\"POMS_1234\" type=\"VISUALRADIOSEGMENT\" avType=\"VIDEO\" embeddable=\"true\">\n" +
+            "            <segment avType=\"VIDEO\" embeddable=\"true\" midRef=\"POMS_1234\" type=\"VISUALRADIOSEGMENT\">\n" +
             "                <broadcaster>VPRO</broadcaster>\n" +
             "                <title type=\"MAIN\">segmenttitel</title>\n" +
+            "                <intentions/>\n" +
+            "                <targetGroups/>\n" +
             "                <locations/>\n" +
             "                <images/>\n" +
             "                <start>P0DT0H0M0.000S</start>\n" +
@@ -120,7 +116,7 @@ public class MediaUpdateListTest {
             "        </segments>\n" +
             "    </item>\n" +
             "</list>";
-        System.out.println(writer.toString());
+        log.info(writer.toString());
         Diff diff = DiffBuilder.compare(expected).withTest(writer.toString()).build();
         MediaUpdateList<ProgramUpdate> list2 = JAXB.unmarshal(new StringReader(writer.toString()), MediaUpdateList.class);
         if (diff.hasDifferences()) {

@@ -9,6 +9,12 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+
+/**
+ * Connects an  entry in GTAA with the scheme 'http://data.beeldengeluid.nl/gtaa/Namen' with a {@link MediaObject}.
+ **
+ *
+ */
 @Entity(name = "name")
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "nameType")
