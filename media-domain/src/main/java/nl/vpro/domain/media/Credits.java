@@ -90,11 +90,8 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
 
     public abstract String getName();
 
-
-    @XmlAttribute
     public abstract String getGtaaUri();
 
-    @XmlAttribute
     public abstract GTAAStatus getGtaaStatus();
 
     public abstract Boolean getGtaaKnownAs();

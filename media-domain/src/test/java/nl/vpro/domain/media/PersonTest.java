@@ -25,13 +25,13 @@ public class PersonTest {
         person.setGtaaRecord(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         assertThatJson(person).isSimilarTo(
             "{\n" +
-             " \"objectType\" : \"person\",\n" +
-            "  \"givenName\" : \"Pietje\",\n" +
-            "  \"familyName\" : \"Puk\",\n" +
-            "  \"role\" : \"ACTOR\",\n" +
-            "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
-                " \"gtaaStatus\" : \"approved\"\n"  +
-            "}").andRounded().isEqualTo(person);
+                " \"objectType\" : \"person\",\n" +
+                "  \"givenName\" : \"Pietje\",\n" +
+                "  \"familyName\" : \"Puk\",\n" +
+                "  \"role\" : \"ACTOR\",\n" +
+                "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
+                "  \"gtaaStatus\" : \"approved\"\n"  +
+                "}").andRounded().isEqualTo(person);
 
     }
     @Test
@@ -39,11 +39,11 @@ public class PersonTest {
 
         Person person = (Person) Jackson2Mapper.getInstance().readValue(
             "{\n" +
-            "  \"givenName\" : \"Pietje\",\n" +
-            "  \"familyName\" : \"Puk\",\n" +
-            "  \"role\" : \"ACTOR\",\n" +
-            "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
-                " \"gtaaStatus\" : \"approved\"\n"  +
+                "  \"givenName\" : \"Pietje\",\n" +
+                "  \"familyName\" : \"Puk\",\n" +
+                "  \"role\" : \"ACTOR\",\n" +
+                "  \"gtaaUri\" : \"http://data.beeldengeluid.nl/gtaa/1869521\",\n" +
+                "  \"gtaaStatus\" : \"approved\"\n"  +
                 "}", Credits.class);
         assertThat(person.getRole()).isEqualTo(RoleType.ACTOR);
 

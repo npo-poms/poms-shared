@@ -167,6 +167,7 @@ public class Person extends Credits implements PersonInterface {
                 .map(EmbeddablePerson::getUri)
                 .orElse(null);
     }
+
     public void setGtaaUri(String uri) {
         if (this.gtaaRecord == null) {
             this.gtaaRecord = new EmbeddablePerson();
