@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.*;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import nl.vpro.domain.media.gtaa.GTAAStatus;
+
 
 /**
  * Connects an  entry in GTAA with the scheme 'http://data.beeldengeluid.nl/gtaa/Namen' with a {@link MediaObject}.
@@ -78,4 +80,21 @@ public class Name extends Credits  {
     }
 
 
+    @Override
+    public String getGtaaUri() {
+        return null;
+
+    }
+
+    @Override
+    public GTAAStatus getGtaaStatus() {
+        return null;
+
+    }
+
+    @Override
+    public Boolean getGtaaKnownAs() {
+        return null;
+
+    }
 }

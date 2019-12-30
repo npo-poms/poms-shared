@@ -175,6 +175,7 @@ public class Person extends Credits implements PersonInterface {
     }
 
 
+    @Override
     @XmlAttribute
     public GTAAStatus getGtaaStatus() {
         return Optional.ofNullable(gtaaRecord)
@@ -190,6 +191,7 @@ public class Person extends Credits implements PersonInterface {
 
 
 
+    @Override
     public Boolean getGtaaKnownAs() {
         return Optional.ofNullable(gtaaRecord)
                 .map(EmbeddablePerson::isKnownAs)
@@ -252,7 +254,7 @@ public class Person extends Credits implements PersonInterface {
     @JsonProperty
     @JsonView({Views.Publisher.class})
     public String getName() {
-        return givenName + " " + familyName;
+        return familyName + ", " + givenName;
     }
 
 

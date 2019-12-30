@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import nl.vpro.domain.Child;
 import nl.vpro.domain.DomainObject;
 import nl.vpro.domain.media.bind.CreditsDeserializer;
+import nl.vpro.domain.media.gtaa.GTAAStatus;
 
 /**
  * A container class for credits, linking the role to an actual entity.
@@ -88,5 +89,15 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
     }
 
     public abstract String getName();
+
+
+    @XmlAttribute
+    public abstract String getGtaaUri();
+
+    @XmlAttribute
+    public abstract GTAAStatus getGtaaStatus();
+
+    public abstract Boolean getGtaaKnownAs();
+
 
 }
