@@ -68,12 +68,13 @@ public class MediaObjectOwnableLists {
         //noinspection StatementWithEmptyBody
         if(incoming == null) {
             //we don't update empty values
-        } else if (incoming.size() > 1) {
-            throw new IllegalArgumentException("cannot be saved. We expect only changes related to one owner " + incoming);
-        } else if (!incoming.first().getOwner().equals(forOwner)){
-            throw new IllegalArgumentException("cannot be saved. We expect only changes related to one owner " + forOwner + " " + incoming);
-        } else {
-            addOrUpdateOwnableList(parent, toUpdate, incoming.first());
+        } else  {
+            Optional<P> is = OwnableLists.filterByOwner(incoming, forOwner);
+            if (is.isPresent()) {
+                addOrUpdateOwnableList(parent, toUpdate, is.get());
+            } else {
+                log.debug("No value found for {} found in {}", forOwner, incoming);
+            }
         }
     }
 
