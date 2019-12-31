@@ -409,25 +409,25 @@
         "familyName" : "van der Haak",
         "role" : "DIRECTOR",
         "gtaaUri" : "http://gtaa/1234",
-        "name" : "Bregtje van der Haak"
+        "name" : "van der Haak, Bregtje"
       }, {
         "objectType" : "person",
         "givenName" : "Hans",
         "familyName" : "Goedkoop",
         "role" : "PRESENTER",
-        "name" : "Hans Goedkoop"
+        "name" : "Goedkoop, Hans"
       }, {
         "objectType" : "person",
         "givenName" : "Meta",
         "familyName" : "de Vries",
         "role" : "PRESENTER",
-        "name" : "Meta de Vries"
+        "name" : "de Vries, Meta"
       }, {
         "objectType" : "person",
         "givenName" : "Claire",
         "familyName" : "Holt",
         "role" : "ACTOR",
-        "name" : "Claire Holt"
+        "name" : "Holt, Claire"
       } ],
       "scheduleEvents" : [ {
         "channel" : "NED3",
@@ -871,25 +871,25 @@
           "familyName" : "van der Haak",
           "role" : "DIRECTOR",
           "gtaaUri" : "http://gtaa/1234",
-          "name" : "Bregtje van der Haak"
+          "name" : "van der Haak, Bregtje"
         }, {
           "objectType" : "person",
           "givenName" : "Hans",
           "familyName" : "Goedkoop",
           "role" : "PRESENTER",
-          "name" : "Hans Goedkoop"
+          "name" : "Goedkoop, Hans"
         }, {
           "objectType" : "person",
           "givenName" : "Meta",
           "familyName" : "de Vries",
           "role" : "PRESENTER",
-          "name" : "Meta de Vries"
+          "name" : "de Vries, Meta"
         }, {
           "objectType" : "person",
           "givenName" : "Claire",
           "familyName" : "Holt",
           "role" : "ACTOR",
-          "name" : "Claire Holt"
+          "name" : "Holt, Claire"
         } ],
         "start" : 0,
         "urnRef" : "urn:vpro:media:program:12",

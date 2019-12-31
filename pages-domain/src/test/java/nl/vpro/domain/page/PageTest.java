@@ -1,6 +1,6 @@
 package nl.vpro.domain.page;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import nl.vpro.domain.media.MediaTestDataBuilder;
 import nl.vpro.jackson2.Jackson2Mapper;
