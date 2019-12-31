@@ -82,6 +82,9 @@ public class MediaObjectLocker {
      */
     @Retention(RetentionPolicy.RUNTIME)
     public @interface Mid {
+        /**
+         * The argument on which to lock. First one is 0.
+         */
         int argNumber() default 0;
         String reason() default "";
         String method() default "";
