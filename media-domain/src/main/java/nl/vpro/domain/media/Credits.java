@@ -83,10 +83,14 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
         return this.mediaObject;
     }
 
+    /**
+     * return the 'objectType' of this Credits. Should probably correspond to the two relevant enums in nl.vpro.domain.gtaa.Scheme
+     */
     @JsonProperty
     protected String getObjectType() {
         return getClass().getSimpleName().toLowerCase();
     }
+
 
     public abstract String getName();
 
