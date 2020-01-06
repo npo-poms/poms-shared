@@ -19,7 +19,7 @@ public class PortalEditor  extends OrganizationEditor<Portal> {
     private Editor editor;
 
     @Id
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn
     private Portal organization;
 

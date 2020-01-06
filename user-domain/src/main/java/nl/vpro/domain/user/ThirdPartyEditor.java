@@ -19,7 +19,7 @@ public class ThirdPartyEditor extends OrganizationEditor<ThirdParty> {
     private Editor editor;
 
     @Id
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn
     private ThirdParty organization;
 
