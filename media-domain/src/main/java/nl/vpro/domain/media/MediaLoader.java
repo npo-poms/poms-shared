@@ -9,16 +9,26 @@ import java.util.List;
  */
 public interface MediaLoader extends MediaProvider {
 
-    List<MediaObject> loadAll(List<String> ids);
+
+
+    List<MediaObject> loadAll(boolean loadDeleted, List<String> ids);
+
+    default List<MediaObject> loadAll(List<String> ids){
+        return loadAll(false, ids);
+    }
+
+    default MediaObject load(boolean loadDeleted, String id) {
+        return loadAll(loadDeleted, Arrays.asList(id)).get(0);
+    }
 
     default MediaObject load(String id) {
-        return loadAll(Arrays.asList(id)).get(0);
+        return load(false, id);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     default <T extends MediaObject> T findByMid(String mid) {
-        return (T) load(mid);
+        return (T) load(false, mid);
     }
 
 }
