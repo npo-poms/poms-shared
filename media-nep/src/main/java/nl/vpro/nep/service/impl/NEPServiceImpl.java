@@ -34,16 +34,13 @@ import nl.vpro.util.FileMetadata;
  */
 @Named("NEPService")
 public class NEPServiceImpl implements NEPService {
+
     private final Provider<NEPGatekeeperService> gatekeeperService;
     private final Provider<NEPUploadService> nepftpUploadService;
     private final Provider<NEPDownloadService> nepftpDownloadService;
     private final Provider<NEPItemizeService> itemizeService;
     private final Provider<NEPSAMService> samService;
     private final Provider<NEPPlayerTokenService> tokenService;
-
-
-
-
 
     @Inject
     public NEPServiceImpl(
@@ -53,7 +50,6 @@ public class NEPServiceImpl implements NEPService {
         @Named("NEPItemizeService") Provider<NEPItemizeService> itemizeService,
         @Named("NEPSAMService") Provider<NEPSAMService> samService,
         @Named("NEPTokenService") Provider<NEPPlayerTokenService> tokenService
-
         ) {
         this.gatekeeperService = gatekeeperService;
         this.nepftpUploadService = nepftpUploadService;
@@ -61,7 +57,6 @@ public class NEPServiceImpl implements NEPService {
         this.itemizeService = itemizeService;
         this.samService = samService;
         this.tokenService = tokenService;
-
     }
 
     @Override
@@ -72,7 +67,6 @@ public class NEPServiceImpl implements NEPService {
     @Override
     public void grabScreen(String identifier, String date, OutputStream outputStream) {
         itemizeService.get().grabScreen(identifier, date, outputStream);
-
     }
 
     @NonNull
@@ -80,14 +74,12 @@ public class NEPServiceImpl implements NEPService {
     public WorkflowExecution transcode(
         @NonNull WorkflowExecutionRequest request) throws IOException {
         return gatekeeperService.get().transcode(request);
-
     }
 
     @NonNull
     @Override
     public Iterator<WorkflowExecution> getTranscodeStatuses(String mid, StatusType status, Instant from, Long limit) {
         return gatekeeperService.get().getTranscodeStatuses(mid, status, from, limit);
-
     }
 
     @Override
@@ -98,7 +90,6 @@ public class NEPServiceImpl implements NEPService {
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer) throws IOException {
         nepftpDownloadService.get()
             .download(nepFile, outputStream, timeout, descriptorConsumer);
-
     }
 
     @Override
@@ -106,17 +97,14 @@ public class NEPServiceImpl implements NEPService {
         return nepftpUploadService.get().upload(logger, nepFile, size, stream, replaces);
     }
 
-
     @Override
     public WideVineResponse widevineToken(String ip) {
         return tokenService.get().widevineToken(ip);
-
     }
 
     @Override
     public PlayreadyResponse playreadyToken(String ip) {
         return tokenService.get().playreadyToken(ip);
-
     }
 
     @Override

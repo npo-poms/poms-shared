@@ -53,11 +53,9 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
     @Setter
     private Duration socketTimeout = Duration.ofSeconds(10L);
 
-
     @Getter
     @Setter
     private Duration maxaliveClient = Duration.ofMinutes(3);
-
 
     ThreadLocal<SSHClientFactory.ClientHolder> sshClient = new ThreadLocal<>();
 
@@ -89,7 +87,8 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
         }
     }
 
-    private final FileSizeFormatter formatter = FileSizeFormatter.DEFAULT;
+    private final static FileSizeFormatter FORMATTER = FileSizeFormatter.DEFAULT;
+
     @Override
     public long upload(
         @NonNull SimpleLogger logger,
@@ -105,8 +104,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             .build());
         try(
             final SSHClient client = createClient().get();
-            final SFTPClient sftp = client.newSFTPClient();
-
+            final SFTPClient sftp = client.newSFTPClient()
         ) {
             int split  = nepFile.lastIndexOf("/");
             if (split > 0) {
@@ -114,8 +112,7 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
             }
             if (! replaces) {
                 try (
-                    final RemoteFile handleToCheck = sftp.open(nepFile, EnumSet.of(OpenMode.READ));
-
+                    final RemoteFile handleToCheck = sftp.open(nepFile, EnumSet.of(OpenMode.READ))
                 ) {
                     FileAttributes attributes = handleToCheck.fetchAttributes();
                     if (attributes.getSize() != size) {
@@ -156,17 +153,17 @@ public class NEPSSHJUploadServiceImpl implements NEPUploadService {
                         logger.info(
                             en("Uploaded {}/{} to {}:{}")
                                 .nl("Geüpload {}/{} naar {}:{}")
-                                .slf4jArgs(formatter.format(numberOfBytes), formatter.format(size), sftpHost, nepFile)
+                                .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), sftpHost, nepFile)
                                 .build()
                         );
                     } else {
-                        log.debug("Uploaded {}/{} bytes to NEP", formatter.format(numberOfBytes), formatter.format(size));
+                        log.debug("Uploaded {}/{} bytes to NEP", FORMATTER.format(numberOfBytes), FORMATTER.format(size));
                     }
                 }
                 logger.info(
                     en("Ready uploading {}/{} (took {})")
                         .nl("Klaar met uploaden van {}/{} (kostte: {})")
-                        .slf4jArgs(formatter.format(numberOfBytes), formatter.format(size), Duration.between(start, Instant.now()))
+                        .slf4jArgs(FORMATTER.format(numberOfBytes), FORMATTER.format(size), Duration.between(start, Instant.now()))
                         .build());
                 return numberOfBytes;
             }

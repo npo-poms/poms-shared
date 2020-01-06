@@ -18,7 +18,6 @@ public interface NEPItemizeService {
 
     NEPItemizeResponse itemize(NEPItemizeRequest request);
 
-
     /**
      * NEP provides one service for two basicly different things.
      *
@@ -38,7 +37,6 @@ public interface NEPItemizeService {
      */
     default void grabScreen(String channel, Instant instant, OutputStream outputStream) {
         grabScreen(channel, instant.atZone(ZoneId.of("UTC")).toLocalDateTime().toString(), outputStream);
-
     }
 
     /**
@@ -46,9 +44,5 @@ public interface NEPItemizeService {
      * @since 5.10
      */
     void grabScreen(String identifier, String time, OutputStream outputStream);
-
-
-
-
 
 }

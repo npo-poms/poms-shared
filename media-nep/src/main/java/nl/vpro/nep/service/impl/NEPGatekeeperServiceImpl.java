@@ -10,55 +10,40 @@ import java.io.IOException;
 import java.net.URI;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
+import org.apache.http.*;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.*;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.*;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.springframework.beans.factory.annotation.Value;
+
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import nl.vpro.logging.LoggerOutputStream;
-import nl.vpro.nep.domain.workflow.StatusType;
-import nl.vpro.nep.domain.workflow.WorkflowExecution;
-import nl.vpro.nep.domain.workflow.WorkflowExecutionRequest;
-import nl.vpro.nep.domain.workflow.WorkflowList;
+import nl.vpro.nep.domain.workflow.*;
 import nl.vpro.nep.service.NEPGatekeeperService;
-import nl.vpro.util.BatchedReceiver;
-import nl.vpro.util.FilteringIterator;
-import nl.vpro.util.MaxOffsetIterator;
-import nl.vpro.util.TimeUtils;
+import nl.vpro.util.*;
 
 
 /**
@@ -84,8 +69,6 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         MAPPER.registerModule(new JavaTimeModule());
     }
-
-
     private final String url;
 
     private final String userName;
@@ -249,6 +232,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
         log.debug("Executing {}", u);
         return getHttpClient().execute(new HttpGet(u), clientContext);
     }
+
     private CloseableHttpClient getHttpClient() {
         if (httpClient == null) {
             RequestConfig config = RequestConfig.custom()

@@ -27,7 +27,6 @@ public interface NEPDownloadService {
         @NonNull Duration timeout,
         @Nullable Function<FileMetadata, Proceed> descriptorConsumer) throws IOException;
 
-
     /**
      * Download the given file from the NEP ftp server to the given outputStream.
      */
@@ -37,7 +36,6 @@ public interface NEPDownloadService {
         @NonNull Function<FileMetadata, Proceed> descriptorConsumer) throws IOException {
         download(nepFile, outputStream, Duration.ZERO, descriptorConsumer);
     }
-
 
     enum Proceed {
         /**
