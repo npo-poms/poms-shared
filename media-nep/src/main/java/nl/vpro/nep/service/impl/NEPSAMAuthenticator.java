@@ -40,10 +40,6 @@ import static nl.vpro.nep.service.impl.NEPItemizeServiceImpl.JSON;
  */
 @Slf4j
 public class NEPSAMAuthenticator implements Supplier<String> {
-
-
-    private static final Duration DEFAULT_EXPIRY = Duration.ofDays(7);
-
     private final LoginRequest loginRequest;
     LoginResponse loginResponse;
     private final String baseUrl;

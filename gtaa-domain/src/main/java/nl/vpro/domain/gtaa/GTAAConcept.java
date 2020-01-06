@@ -3,12 +3,20 @@ package nl.vpro.domain.gtaa;
 import java.net.URI;
 import java.time.Instant;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonTypeIdResolver;
 
 
+/**
+ * These are the data transfer objects that we use for thesaurus objects
+ *
+ * They are
+ * <ul>
+ *  <li>The 'POMS' representation of objects in the thesaurus, the frontend API directly maps the second to the first </li>
+ *  <li>In the POMS backend there is also a database representation of these objects (called GTAARecord)</li>
+ * </ul>
+ */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.CUSTOM,
     property = "objectType"

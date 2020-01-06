@@ -15,10 +15,7 @@ import nl.vpro.nep.sam.model.StreamAccessItem;
  */
 public interface NEPSAMService {
 
-
-
     String streamAccess(String streamId, boolean drm, StreamAccessItem streamUrlRequest);
-
 
     static StreamAccessItem createStreamAccessItem(String ip, Duration duration) {
         StreamAccessItem item = new StreamAccessItem().data(new ApiObject().type("access"));

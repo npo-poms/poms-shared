@@ -9,7 +9,6 @@ import nl.vpro.nep.domain.WideVineResponse;
  */
 public interface NEPPlayerTokenService {
 
-
     WideVineResponse widevineToken(String ip);
 
     PlayreadyResponse playreadyToken(String ip);

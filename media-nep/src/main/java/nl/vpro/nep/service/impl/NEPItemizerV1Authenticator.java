@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 @Slf4j
 public class NEPItemizerV1Authenticator implements Supplier<String> {
 
-
-
     private final String bearerToken;
 
     public NEPItemizerV1Authenticator(

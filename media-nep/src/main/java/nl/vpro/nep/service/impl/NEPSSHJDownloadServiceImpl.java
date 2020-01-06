@@ -37,7 +37,6 @@ import nl.vpro.util.FileMetadata;
 @Slf4j
 public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
-
     private final String ftpHost;
     private final String username;
     private final String password;
@@ -45,7 +44,6 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
 
     @Inject
     public NEPSSHJDownloadServiceImpl(
-
         @Value("${nep.itemizer-download.host}") String ftpHost,
         @Value("${nep.itemizer-download.username}") String username,
         @Value("${nep.itemizer-download.password}") String password,
@@ -101,9 +99,7 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
         } catch (IOException | InterruptedException  e) {
             log.error(e.getMessage(), e);
         }
-
     }
-
 
     protected void checkAvailabilityAndConsume   (
         @NonNull String nepFile,
@@ -145,7 +141,6 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-
                     }
                     break;
                 } catch (SFTPException sftpe) {
@@ -164,14 +159,12 @@ public class NEPSSHJDownloadServiceImpl implements NEPDownloadService {
                 handle.close();
             }
         }
-
     }
 
     protected SSHClient createClient() throws IOException {
         return SSHClientFactory
                 .create(hostKey, ftpHost, username, password).get();
     }
-
 
     @Override
     public String toString() {

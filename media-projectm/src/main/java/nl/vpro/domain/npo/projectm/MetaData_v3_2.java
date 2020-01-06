@@ -160,7 +160,7 @@ public class MetaData_v3_2 {
 
     protected static String getGenreAtLevel(Genre genre, int level) {
         TermId id = new TermId(genre.getTermId());
-        int parts[] = id.getParts();
+        int[] parts = id.getParts();
         if (parts.length < level) {
             return null;
         }

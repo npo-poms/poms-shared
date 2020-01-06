@@ -123,8 +123,8 @@ public class GTAAPerson extends AbstractGTAAConcept implements  PersonInterface,
     @Override
     @XmlElement
     public String getName() {
-        return PersonInterface.stringValue(givenName, familyName);
-    }
+        return PersonInterface.super.getName();
+ }
 
     @Override
     public void setName(String v) {

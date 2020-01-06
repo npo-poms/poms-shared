@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import java.util.function.Supplier;
 
@@ -48,7 +49,7 @@ public class NEPItemizeServiceImpl implements NEPItemizeService {
     private final Supplier<String> itemizeKey;
     private final String itemizeUrl;
 
-    static final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(Charset.forName("UTF-8"));
+    static final ContentType JSON = ContentType.APPLICATION_JSON.withCharset(StandardCharsets.UTF_8);
 
     CloseableHttpClient httpClient = HttpClients.custom()
             .build();

@@ -38,18 +38,16 @@ import nl.vpro.util.FileMetadata;
 @Slf4j
 public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
 
-
     private final String ftpHost;
     private final CommandExecutor curl;
     private final NEPSSHJDownloadServiceImpl sshj;
 
-
     @Inject
     public NEPCurlDownloadServiceImpl(
-        @Value("${nep.gatekeeper-download.host}") String ftpHost,
-        @Value("${nep.gatekeeper-download.username}") String username,
-        @Value("${nep.gatekeeper-download.password}") String password,
-        @Value("${nep.gatekeeper-download.hostkey}") String hostkey,
+        @Value("${nep.itemizer-download.host}") String ftpHost,
+        @Value("${nep.itemizer-download.username}") String username,
+        @Value("${nep.itemizer-download.password}") String password,
+        @Value("${nep.itemizer-download.hostkey}") String hostkey,
         @Value("${executables.curl}") List<String> executables
     ) {
         this.ftpHost = ftpHost;
@@ -91,17 +89,14 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
         if (exitCode != 0) {
             throw new CommandExecutor.ExitCodeException("Curl call failed", exitCode);
         }
-
     }
 
     protected String getUrl(String nepFile) {
         return "sftp://" + ftpHost + "/" + nepFile;
     }
 
-
     protected void checkAvailability(String nepFile, Duration timeout,  Function<FileMetadata, Proceed> descriptorConsumer) throws IOException, InterruptedException {
         sshj.checkAvailabilityAndConsume(nepFile, timeout, descriptorConsumer, (handle) -> {});
-
     }
 
     /**
@@ -109,7 +104,6 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
      */
     protected void checkAvailabilityWithCurl(String nepFile, Duration timeout,  Function<FileMetadata, Boolean> descriptorConsumer) throws InterruptedException {
         Instant start = Instant.now();
-
         while(true) {
             StringWriter writer = new StringWriter();
             int result = curl.execute(writer, "-I", getUrl(nepFile));
@@ -138,7 +132,6 @@ public class NEPCurlDownloadServiceImpl implements NEPDownloadService {
                     throw new IllegalStateException("File " + nepFile + " didn't appear in " + timeout);
                 }
                 Thread.sleep(10000L);
-
             }
         }
     }

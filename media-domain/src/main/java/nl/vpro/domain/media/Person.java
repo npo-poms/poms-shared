@@ -255,7 +255,7 @@ public class Person extends Credits implements PersonInterface {
     @JsonProperty
     @JsonView({Views.Publisher.class})
     public String getName() {
-        return familyName + ", " + givenName;
+        return PersonInterface.super.getName();
     }
 
 

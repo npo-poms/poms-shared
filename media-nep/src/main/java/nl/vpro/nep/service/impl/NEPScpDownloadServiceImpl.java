@@ -38,16 +38,12 @@ import nl.vpro.util.FileMetadata;
 @Slf4j
 public class NEPScpDownloadServiceImpl implements NEPDownloadService {
 
-
     private final String url;
     private final CommandExecutor scp;
     private final NEPSSHJDownloadServiceImpl sshj;
     private final static Map<String, File> knownHosts = new HashMap<>();
-
-
     private final Duration waitBetweenRetries = Duration.ofSeconds(10);
     private final int maxDownloadRetries;
-
 
     @Inject
     public NEPScpDownloadServiceImpl(

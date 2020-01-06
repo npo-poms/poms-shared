@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @ToString
 public class WorkflowExecutionRequest implements Serializable {
+
     private String mid;
     private String filename;
     private EncryptionType encryption;
@@ -22,7 +23,6 @@ public class WorkflowExecutionRequest implements Serializable {
     private Type type = Type.VIDEO;
     @lombok.Builder.Default
     private List<String> platforms = new ArrayList<>();
-
 
     public WorkflowExecutionRequest() {
 

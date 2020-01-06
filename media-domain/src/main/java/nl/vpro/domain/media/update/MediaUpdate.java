@@ -336,7 +336,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
         this.locations = toSet(mediaobject.getLocations(), (l) -> l.getOwner() == owner, LocationUpdate::new);
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
-        this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability,PredictionUpdate::of);
+        this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability, PredictionUpdate::of);
 
     }
 

@@ -109,13 +109,13 @@ public enum Scheme implements Displayable {
         return name();
     }
 
-    public static Class[] classes() {
+    public static Class<? extends GTAAConcept>[] classes() {
         return Arrays.stream(values()).map(s -> s.implementation)
             .filter(Objects::nonNull)
             .toArray(Class[]::new);
     }
 
-    public static Class[] classesAndNew() {
+    public static Class<?>[] classesAndNew() {
         return ArrayUtils.addAll(classes(), GTAANewPerson.class, GTAANewGenericConcept.class);
     }
 }
