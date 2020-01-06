@@ -53,7 +53,7 @@ public class GTAANewPerson extends AbstractGTAANewConcept implements PersonInter
 
     @Override
     public String getName() {
-        return PersonInterface.stringValue(givenName, familyName);
+        return PersonInterface.super.getName();
     }
 
     @Override
