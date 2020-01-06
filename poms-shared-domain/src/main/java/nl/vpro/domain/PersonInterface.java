@@ -10,6 +10,16 @@ public interface PersonInterface {
 
 
     /**
+     * @since 5.12
+     */
+    default String getName() {
+        String giveName = getGivenName();
+        String familyName = getFamilyName();
+        return stringValue(giveName, familyName);
+
+    }
+
+    /**
      * @since 5.11
      */
     static String stringValue(String givenName, String familyName) {
