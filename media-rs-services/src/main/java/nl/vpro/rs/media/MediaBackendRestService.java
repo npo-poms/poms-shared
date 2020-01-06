@@ -395,7 +395,6 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors);
 
-
     @DELETE
     @Path("subtitles/{mid:.*}/{language}/{type}")
     Response deleteSubtitles(
@@ -405,14 +404,12 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges,
         @QueryParam(ERRORS) String errors);
 
-
     @GET
     @Path("streamingstatus/{mid:.*}")
     StreamingStatus getStreamingstatus(
         @Encoded @PathParam(MID) String mid,
         @Context HttpServletRequest request
     ) throws IOException, URISyntaxException;
-
 
     @GET
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions")
@@ -421,7 +418,6 @@ public interface MediaBackendRestService {
         @Encoded @PathParam(ID) final String id,
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
-
 
     @GET
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions/{platform}")
@@ -432,7 +428,6 @@ public interface MediaBackendRestService {
         @QueryParam(FOLLOW) @DefaultValue("true") Boolean followMerges
     ) throws IOException;
 
-
     @POST
     @Path("{entity:(media|program|segment)}/{id:.*}/predictions")
     Response setPredictions(
@@ -442,7 +437,6 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors,
         XmlCollection<PredictionUpdate> collection
     ) throws IOException;
-
 
     @POST
     @Path("{entity:(media|program|group|segment)}/{id:.*}/predictions/{platform}")
@@ -464,14 +458,11 @@ public interface MediaBackendRestService {
         @QueryParam(ERRORS) String errors,
         TranscodeRequest transcodeRequest);
 
-
     @POST
     @Path("transcode")
     Response transcode(
         @QueryParam(ERRORS) String errors,
         TranscodeRequest transcodeRequest);
-
-
 
     @POST
     @Path("upload/{mid}/{fileName}")
@@ -485,8 +476,6 @@ public interface MediaBackendRestService {
         @QueryParam(LOG) @DefaultValue("false") Boolean log,
         @QueryParam("replace") @DefaultValue("false") Boolean replace,
         @Context HttpServletResponse response) throws IOException;
-
-
 
     @POST
     @Path("upload/{mid}/{encryption}/{priority}/{fileName}")
@@ -505,10 +494,6 @@ public interface MediaBackendRestService {
         @Context HttpServletResponse response) throws IOException;
 
 
-
-
-
-
     @GET
     @Path("{entity:(media|program|segment)}/{mid:.*}/transcodingstatus")
     XmlCollection<TranscodeStatus> getTranscodeStatus(
@@ -520,11 +505,9 @@ public interface MediaBackendRestService {
     @GET
     @Path("transcodingstatuses")
     XmlCollection<TranscodeStatus> getTranscodeStatusForBroadcaster(
-        @QueryParam("from") final Instant maxAge,
+        @QueryParam("from") final Instant since,
         @QueryParam("status") @DefaultValue("RUNNING") final TranscodeStatus.Status status,
         @QueryParam(MAX) @DefaultValue("20") final Integer max
-
-
     );
 
 
@@ -536,7 +519,6 @@ public interface MediaBackendRestService {
         @Context HttpServletRequest request,
         ItemizeRequest itemizeRequest
     );
-
 
 }
 
