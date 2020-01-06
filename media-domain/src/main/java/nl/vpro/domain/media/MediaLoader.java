@@ -9,8 +9,6 @@ import java.util.List;
  */
 public interface MediaLoader extends MediaProvider {
 
-
-
     List<MediaObject> loadAll(boolean loadDeleted, List<String> ids);
 
     default List<MediaObject> loadAll(List<String> ids){
