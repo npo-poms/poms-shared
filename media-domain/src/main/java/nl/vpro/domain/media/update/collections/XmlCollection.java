@@ -3,15 +3,13 @@ package nl.vpro.domain.media.update.collections;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
+import java.util.*;
 import java.util.stream.Stream;
 
-import org.checkerframework.checker.nullness.qual.NonNull;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 import nl.vpro.domain.media.update.*;
 import nl.vpro.util.IntegerVersion;
@@ -87,5 +85,9 @@ public class XmlCollection<T> implements Iterable<T> , IntegerVersionSpecific {
                 version = ((IntegerVersionSpecific) parent).getVersion();
             }
         }
+    }
+    @Override
+    public String toString() {
+        return "xmlcollection:" + list;
     }
 }
