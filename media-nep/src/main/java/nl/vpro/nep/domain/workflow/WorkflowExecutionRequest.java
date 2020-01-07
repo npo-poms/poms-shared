@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.checkerframework.checker.nullness.qual.Nullable;
+
 @lombok.Builder(builderClassName = "Builder")
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -25,15 +27,17 @@ public class WorkflowExecutionRequest implements Serializable {
     private List<String> platforms = new ArrayList<>();
 
     public WorkflowExecutionRequest() {
-
     }
 
     public static class Builder {
 
-        public Builder file(String ftpUsername, String fileName) {
+        /**
+         * Sets the file name in the request, optionally prefixing it with the given ftp user name
+         */
+        public Builder file(@Nullable String ftpUsername, String fileName) {
             if (fileName != null) {
-                if (fileName.startsWith("/")) {
-                    return filename(ftpUsername + fileName);
+                if (fileName.startsWith("/") || ftpUsername == null) {
+                    return filename(fileName.substring(1));
                 } else {
                     return filename(ftpUsername + "/" + fileName);
                 }

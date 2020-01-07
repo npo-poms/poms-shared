@@ -28,7 +28,7 @@ public class TranscodeRequest implements MediaIdentifiable {
     private String mid;
 
     /**
-     * File name (not prefixed by ftp account)
+     * File name. If starts with /, then it is prefixed by your ftp account name. Otherwise the ftp account of POMS itself will be implicetely prefixed.
      */
     @NotNull
     private String fileName;
