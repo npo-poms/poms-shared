@@ -21,7 +21,6 @@ import static nl.vpro.domain.Xmlns.SEARCH_NAMESPACE;
         })
 public class MediaPager extends Pager<MediaSortField> {
 
-
     @lombok.Builder
     public MediaPager(long offset, Integer max, MediaSortField sort, Direction order) {
         super(offset, max, sort, order);

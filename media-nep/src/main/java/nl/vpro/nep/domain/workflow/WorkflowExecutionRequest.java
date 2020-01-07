@@ -33,6 +33,7 @@ public class WorkflowExecutionRequest implements Serializable {
 
         /**
          * Sets the file name in the request, optionally prefixing it with the given ftp user name
+         * @param fileName If starts with /
          */
         public Builder file(@Nullable String ftpUsername, String fileName) {
             if (fileName != null) {
