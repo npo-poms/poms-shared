@@ -249,7 +249,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     protected List<TargetGroupType> targetGroups;
 
-    protected List<GeoLocation> geoLocations;
+    protected List<GeoLocationUpdate> geoLocations;
 
     private List<TopicUpdate> topics;
 
@@ -389,6 +389,7 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.relations = toSet(mediaobject.getRelations(), RelationUpdate::new);
         this.predictions = toSet(mediaobject.getPredictions(), Prediction::isPlannedAvailability, PredictionUpdate::of);
 
+        this.geoLocations = toUpdateGeoLocations(mediaobject.getGeoLocations(), owner);
         this.topics = toUpdateTopics(mediaobject.getTopics(), owner);
     }
 
@@ -617,14 +618,35 @@ public abstract class  MediaUpdate<M extends MediaObject>
                 .build();
     }
 
-    private GeoLocations toGeoLocations(@Nullable List<GeoLocation> targetGeoLocations, @NonNull OwnerType owner){
-        if (targetGeoLocations == null){
+    private List<GeoLocationUpdate> toUpdateGeoLocations(SortedSet<GeoLocations> geoLocationsSet, OwnerType owner) {
+
+        if (geoLocationsSet == null) {
             return null;
         }
+
+        return OwnableLists.filterByOwner(geoLocationsSet, owner)
+            .map(GeoLocations::getValues)
+            .map(l -> l.stream()
+                .map(GeoLocationUpdate::new)
+                .collect(Collectors.toList()))
+            .orElse(new ArrayList<>());
+    }
+
+    private GeoLocations toGeoLocations(List<GeoLocationUpdate> geoLocationUpdates, OwnerType owner) {
+
+        if (geoLocationUpdates == null){
+            return null;
+        }
+
+        List<GeoLocation> geoLocations = geoLocationUpdates
+            .stream()
+            .map(GeoLocationUpdate::toGeoLocation)
+            .collect(Collectors.toList());
+
         return GeoLocations.builder()
-                .owner(owner)
-                .values(targetGeoLocations)
-                .build();
+            .owner(owner)
+            .values(geoLocations)
+            .build();
     }
 
     private List<TopicUpdate> toUpdateTopics(SortedSet<Topics> topicsSet, OwnerType owner) {
@@ -1025,10 +1047,6 @@ public abstract class  MediaUpdate<M extends MediaObject>
         this.targetGroups = targetGroups;
     }
 
-    public void setGeoLocations(List<GeoLocation> geoLocations) {
-        this.geoLocations = geoLocations;
-    }
-
     @XmlElement(name = "avAttributes")
     public AVAttributesUpdate getAvAttributes() {
         return avAttributes;
@@ -1267,6 +1285,22 @@ public abstract class  MediaUpdate<M extends MediaObject>
 
     public void setAsset(Asset asset) {
         this.asset = asset;
+    }
+
+    @XmlElementWrapper(name = "geoLocations")
+    @XmlElement(name = "geoLocation")
+    @Valid
+    @NonNull
+    public List<GeoLocationUpdate> getGeoLocations() {
+        return geoLocations;
+    }
+
+    public void setGeoLocations(List<GeoLocationUpdate> geoLocationUpdates) {
+        this.geoLocations = geoLocationUpdates;
+    }
+
+    public void setGeoLocations(GeoLocationUpdate... geoLocationUpdates) {
+        this.geoLocations = Arrays.asList(geoLocationUpdates);
     }
 
     @XmlElementWrapper(name = "topics")

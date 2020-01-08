@@ -93,6 +93,7 @@
 
   <xs:complexType name="geoLocationUpdateType">
     <xs:attribute name="gtaaUri" type="xs:string"/>
+    <xs:attribute name="role" type="media:geoRoleType"/>
   </xs:complexType>
 
   <xs:complexType name="topicUpdateType">
@@ -183,8 +184,8 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="geoLocations" type="geoLocationsUpdateType" form="qualified" minOccurs="0" maxOccurs="1"/>
-      <xs:element name="topics" type="topicsUpdateType" form="qualified" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="geoLocations" type="geoLocationsUpdateType" form="qualified" minOccurs="0"/>
+      <xs:element name="topics" type="topicsUpdateType" form="qualified" minOccurs="0"/>
       <xs:element name="avAttributes" type="avAtributeUpdateType" form="qualified" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" form="qualified" minOccurs="0"/>
       <xs:element name="duration" type="xs:duration" form="qualified" minOccurs="0"/>

@@ -33,6 +33,9 @@
     <targetGroups owner="BROADCASTER">
         <targetGroup>ADULTS</targetGroup>
     </targetGroups>
+    <geoLocations owner="BROADCASTER">
+        <geoLocation gtaaUri="http://gtaa/1231" role="SUBJECT"/>
+    </geoLocations>
     <topics owner="BROADCASTER"/>
     <country code="GB">Verenigd Koninkrijk</country>
     <country code="US">Verenigde Staten</country>
@@ -195,6 +198,9 @@
             <targetGroups owner="BROADCASTER">
                 <targetGroup>ADULTS</targetGroup>
             </targetGroups>
+            <geoLocations owner="BROADCASTER">
+                <geoLocation gtaaUri="http://gtaa/1231" role="SUBJECT"/>
+            </geoLocations>
             <topics owner="BROADCASTER"/>
             <country code="GB">Verenigd Koninkrijk</country>
             <country code="US">Verenigde Staten</country>
