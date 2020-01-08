@@ -724,12 +724,10 @@ public interface MediaTestDataBuilder<
         );
     }
 
-
     default T clearTopics() {
-        mediaObject().setTopics(null);
+        mediaObject().getTopics().clear();
         return (T) this;
     }
-
 
     default T withAuthorityRecord() {
         return authoritativeRecord(Platform.INTERNETVOD);
