@@ -33,4 +33,6 @@ public interface GTAARepository {
     List<Description> findForSchemes(String input, Integer max, String... schemes);
 
     Optional<Description> retrieveConceptStatus(String id);
+
+    Optional<GTAAConcept> get(String id);
 }

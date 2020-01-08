@@ -33,6 +33,7 @@
     <targetGroups owner="BROADCASTER">
         <targetGroup>ADULTS</targetGroup>
     </targetGroups>
+    <topics owner="BROADCASTER"/>
     <country code="GB">Verenigd Koninkrijk</country>
     <country code="US">Verenigde Staten</country>
     <language code="nl">Nederlands</language>
@@ -194,6 +195,7 @@
             <targetGroups owner="BROADCASTER">
                 <targetGroup>ADULTS</targetGroup>
             </targetGroups>
+            <topics owner="BROADCASTER"/>
             <country code="GB">Verenigd Koninkrijk</country>
             <country code="US">Verenigde Staten</country>
             <language code="nl">Nederlands</language>

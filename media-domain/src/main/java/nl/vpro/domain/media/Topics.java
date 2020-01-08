@@ -29,8 +29,8 @@ public class Topics extends AbstractMediaObjectOwnableList<Topics, Topic> {
     }
 
     @lombok.Builder(builderClassName = "Builder")
-    private Topics(@lombok.NonNull @Singular List<Topic> values,
-                   @lombok.NonNull OwnerType owner,
+    private Topics(@NonNull @Singular List<Topic> values,
+                   @NonNull OwnerType owner,
                    MediaObject parent) {
 
         this.values = values.stream().map(Topic::clone).collect(Collectors.toList());

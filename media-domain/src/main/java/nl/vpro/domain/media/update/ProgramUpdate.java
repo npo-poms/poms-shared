@@ -33,6 +33,7 @@ import nl.vpro.domain.media.support.OwnerType;
     "genres",
     "intentions",
     "targetGroups",
+    "topics",
     "avAttributes",
     "releaseYear",
     "duration",
@@ -76,12 +77,9 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         super(program, owner);
     }
 
-
     public static ProgramUpdate create() {
         return create(new Program());
     }
-
-
 
     public static ProgramUpdate create(Program program) {
         return create(program, OwnerType.BROADCASTER);
@@ -91,11 +89,9 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         return new ProgramUpdate(program, owner);
     }
 
-
     public static ProgramUpdate create(MediaBuilder.ProgramBuilder builder) {
         return  create(builder, OwnerType.BROADCASTER);
     }
-
 
     public static ProgramUpdate create(MediaBuilder.ProgramBuilder builder, OwnerType owner) {
         return  create(builder.build(), owner);
@@ -135,8 +131,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         }));
         return p;
     }
-
-
 
     @XmlAttribute
     @Override
@@ -180,8 +174,6 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
         this.episodeOf = memberOf;
     }
 
-
-
     @XmlElementWrapper(name = "segments")
     @XmlElement(name = "segment")
     public SortedSet<SegmentUpdate> getSegments() {
@@ -195,9 +187,4 @@ public final class ProgramUpdate extends MediaUpdate<Program> {
     public void setSegments(SortedSet<SegmentUpdate> segments) {
         this.segments = segments;
     }
-
-
-
-
-
 }

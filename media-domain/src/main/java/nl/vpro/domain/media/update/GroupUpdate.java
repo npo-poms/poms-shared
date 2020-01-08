@@ -27,6 +27,7 @@ import nl.vpro.domain.media.support.OwnerType;
         "genres",
         "intentions",
         "targetGroups",
+        "topics",
         "avAttributes",
         "releaseYear",
         "duration",

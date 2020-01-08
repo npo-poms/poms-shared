@@ -1,0 +1,50 @@
+{
+  "objectType" : "program",
+  "embeddable" : true,
+  "broadcasters" : [ ],
+  "genres" : [ ],
+  "geoLocations" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ {
+      "gtaaUri" : "http://gtaa/1231",
+      "name" : "Africa",
+      "scopeNotes" : [ "Continent" ],
+      "role" : "SUBJECT"
+    } ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ {
+      "gtaaUri" : "http://gtaa/1232",
+      "name" : "England",
+      "gtaaStatus" : "approved",
+      "role" : "SUBJECT"
+    }, {
+      "gtaaUri" : "http://gtaa/1233",
+      "name" : "UK",
+      "role" : "RECORDED_IN"
+    } ]
+  } ],
+  "expandedGeoLocations" : [ {
+    "owner" : "BROADCASTER",
+    "values" : [ {
+      "gtaaUri" : "http://gtaa/1231",
+      "name" : "Africa",
+      "scopeNotes" : [ "Continent" ],
+      "role" : "SUBJECT"
+    } ]
+  }, {
+    "owner" : "NPO",
+    "values" : [ {
+      "gtaaUri" : "http://gtaa/1232",
+      "name" : "England",
+      "gtaaStatus" : "approved",
+      "role" : "SUBJECT"
+    }, {
+      "gtaaUri" : "http://gtaa/1233",
+      "name" : "UK",
+      "role" : "RECORDED_IN"
+    } ]
+  } ],
+  "countries" : [ ],
+  "languages" : [ ]
+}

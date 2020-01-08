@@ -1,12 +1,11 @@
 package nl.vpro.domain.media;
 
-import nl.vpro.domain.media.gtaa.GTAARecord;
-import nl.vpro.domain.media.gtaa.GTAAStatus;
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collections;
+import nl.vpro.domain.media.gtaa.GTAARecord;
+import nl.vpro.domain.media.gtaa.GTAAStatus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,29 +20,28 @@ class TopicTest {
         Topic topic3 = createTestTopic();
         Topic topic4 = createTestTopic();
         Topic topic5 = createTestTopic();
-        Topic topic6 = createTestTopic();
-        Topic topic7 = createTestTopic();
 
-        topic1.setId(123L);
+        topic3.setId(123L);
         topic3.setName("bla");
-        topic4.setScopeNotes(Collections.singletonList("oops"));
-        topic5.setGtaaUri(URI.create("http://bla.bla.nl/gtaa/31182"));
-        topic6.setScopeNotes(new ArrayList<>());
-        topic7.setId(123L);
-        topic7.setName("blablabla");
+        topic3.setScopeNotes(Collections.singletonList("oops"));
+        topic3.setGtaaStatus(GTAAStatus.deleted);
+
+        topic4.setGtaaUri("http://bla.bla.nl/gtaa/31182");
+
+        topic5.setName(null);
+        topic5.setScopeNotes(null);
+        topic5.setGtaaStatus(null);
 
         //noinspection EqualsWithItself
         assertTrue(topic1.equals(topic1));
         assertTrue(topic1.equals(topic2));
-        assertFalse(topic1.equals(topic3));
+        assertTrue(topic1.equals(topic3));
         assertFalse(topic1.equals(topic4));
-        assertFalse(topic1.equals(topic5));
-        assertFalse(topic1.equals(topic6));
+        assertTrue(topic1.equals(topic5));
         //noinspection ConstantConditions
         assertFalse(topic1.equals(null));
         //noinspection EqualsBetweenInconvertibleTypes
         assertFalse(topic1.equals("topic"));
-        assertTrue(topic1.equals(topic7));
     }
 
     @Test
@@ -60,7 +58,7 @@ class TopicTest {
     public void testToString() {
 
         Topic topic = createTestTopic();
-        assertEquals("Topic[name=kattenkwaad,scopeNotes=[blabla],gtaa_uri=http://data.beeldengeluid.nl/gtaa/31182]",
+        assertEquals("Topic(gtaaRecord=GTAARecord(uri=http://data.beeldengeluid.nl/gtaa/31182, status=approved, name=kattenkwaad, scopeNotes=[blabla]))",
                 topic.toString());
     }
 
@@ -72,12 +70,12 @@ class TopicTest {
         Topic topic3 = createTestTopic();
 
         topic2.setName(topic1.getName() + "1");
-        topic3.setGtaaUri(URI.create(topic1.getGtaaUri().toString() + "1"));
+        topic3.setGtaaUri(topic1.getGtaaUri() + "1");
 
         //noinspection EqualsWithItself
         assertEquals(0, topic1.compareTo(topic1));
-        assertEquals(-1, topic1.compareTo(topic2));
-        assertEquals(1, topic2.compareTo(topic1));
+        assertEquals(0, topic1.compareTo(topic2));
+        assertEquals(0, topic2.compareTo(topic1));
         assertEquals(-1, topic1.compareTo(topic3));
         assertEquals(1, topic3.compareTo(topic1));
     }
@@ -112,14 +110,11 @@ class TopicTest {
 
     private GTAARecord createTestGtaaRecord() {
 
-        GTAARecord gtaaRecord = GTAARecord.builder()
+        return GTAARecord.builder()
                 .name("kattenkwaad")
                 .scopeNotes(Collections.singletonList("blabla"))
-                .uri(URI.create("http://data.beeldengeluid.nl/gtaa/31182"))
+                .uri("http://data.beeldengeluid.nl/gtaa/31182")
                 .status(GTAAStatus.approved)
                 .build();
-
-        gtaaRecord.setId(100L);
-        return gtaaRecord;
     }
 }

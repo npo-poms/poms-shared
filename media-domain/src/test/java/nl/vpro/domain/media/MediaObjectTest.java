@@ -64,7 +64,7 @@ public class MediaObjectTest {
 
     @Test
     public void testFindGeoLocation(){
-        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").uri("test/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
@@ -98,7 +98,7 @@ public class MediaObjectTest {
 
     @Test
     public void testAddGeoLocation(){
-        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").gtaaUri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").uri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
@@ -111,7 +111,7 @@ public class MediaObjectTest {
         assertThat(result).isTrue();
 
         //Avoid duplicates
-        final GeoLocation geoLocation2 = GeoLocation.builder().name("Amsterdam").gtaaUri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
+        final GeoLocation geoLocation2 = GeoLocation.builder().name("Amsterdam").uri("http://gtaa/123").role(GeoRoleType.RECORDED_IN).build();
 
         final boolean resultDuplicate =  MediaObjectOwnableLists.addValue(
                 mediaObject.getGeoLocations(),
@@ -125,7 +125,7 @@ public class MediaObjectTest {
 
         //Add second geoLocation same Owner
 
-        geoLocation2.setGtaaRecord(GTAARecord.builder().name("AnotherAmsterdam").gtaaUri("test/124").build());
+        geoLocation2.setGtaaRecord(GTAARecord.builder().name("AnotherAmsterdam").uri("test/124").build());
         final boolean add =  MediaObjectOwnableLists.addValue(
                 mediaObject.getGeoLocations(),
                 () -> new GeoLocations(mediaObject, BROADCASTER),
@@ -151,7 +151,7 @@ public class MediaObjectTest {
 
     @Test
     public void testRemoveGeoLocation(){
-        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation geoLocation = GeoLocation.builder().name("Amsterdam").uri("test/123").role(GeoRoleType.RECORDED_IN).build();
         geoLocation.setId(1L);
 
         MediaObject mediaObject = new Program();
@@ -162,7 +162,7 @@ public class MediaObjectTest {
                 BROADCASTER
         );
 
-        GeoLocation geoLocDiffName = GeoLocation.builder().name("Amsterdam2").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();;
+        GeoLocation geoLocDiffName = GeoLocation.builder().name("Amsterdam").uri("test/1234").role(GeoRoleType.RECORDED_IN).build();;
         final boolean geoLocDiffNameResult = MediaObjectOwnableLists.remove(mediaObject.geoLocations, geoLocDiffName, BROADCASTER);
         assertThat(geoLocDiffNameResult).isFalse();
 
@@ -171,7 +171,7 @@ public class MediaObjectTest {
         assertThat(emptyResult2).isFalse();
 
         OwnerType sameOwner = BROADCASTER;
-        GeoLocation sameGeoLocId = GeoLocation.builder().name("Amsterdam").gtaaUri("test/123").role(GeoRoleType.RECORDED_IN).build();
+        GeoLocation sameGeoLocId = GeoLocation.builder().name("Amsterdam").uri("test/123").role(GeoRoleType.RECORDED_IN).build();
         final boolean trueResult = MediaObjectOwnableLists.remove(mediaObject.geoLocations, sameGeoLocId, sameOwner);
         assertThat(trueResult).isEqualTo(true);
     }
@@ -179,7 +179,7 @@ public class MediaObjectTest {
     @Test
     public void testFindTopic() {
 
-        Topic topic = Topic.builder().name("kattenkwa").gtaaUri("test/123").build();
+        Topic topic = Topic.builder().name("kattenkwa").uri("test/123").build();
         topic.setId(1L);
 
         MediaObject mediaObject = new Program();
@@ -212,11 +212,8 @@ public class MediaObjectTest {
     @Test
     public void testAddTopic() {
 
-        Topic topic1 = Topic.builder().name("kattenkwaad").gtaaUri("test/123").build();
-        topic1.setId(1L);
-
-        Topic topic2 = Topic.builder().name("kattenkwaad").gtaaUri("test/123").build();
-        topic2.setId(1L);
+        Topic topic1 = Topic.builder().name("kattenkwaad").uri("test/123").build();
+        Topic topic2 = Topic.builder().name("kattenkwaad").uri("test/123").build();
 
         MediaObject mediaObject = new Program();
         final boolean result =  MediaObjectOwnableLists.addValue(
@@ -239,7 +236,7 @@ public class MediaObjectTest {
         assertThat(mediaObject.getTopics().first().getValues().size()).isEqualTo(1);
 
         //Add second topic same Owner
-        topic2.setGtaaRecord(GTAARecord.builder().name("kattenkwaad2").gtaaUri("test/124").build());
+        topic2.setGtaaRecord(GTAARecord.builder().name("kattenkwaad2").uri("test/124").build());
         final boolean add =  MediaObjectOwnableLists.addValue(
                 mediaObject.getTopics(),
                 () -> new Topics(mediaObject, BROADCASTER),
@@ -265,15 +262,9 @@ public class MediaObjectTest {
     @Test
     public void testRemoveTopic() {
 
-        Topic topic1 = Topic.builder().name("kattenkwaad").gtaaUri("test/123").build();
-        topic1.setId(1L);
-
-        Topic topic2 = Topic.builder().name("kattenkwaad2").gtaaUri("test/123").build();
-        topic2.setId(1L);
-
-        Topic topic3 = Topic.builder().name("kattenkwaad").gtaaUri("test/123").build();
-        topic3.setId(1L);
-
+        Topic topic1 = Topic.builder().name("kattenkwaad").uri("test/123").build();
+        Topic topic2 = Topic.builder().name("kattenkwaad").uri("test/1234").build();
+        Topic topic3 = Topic.builder().name("kattenkwaad").uri("test/123").build();
         MediaObject mediaObject = new Program();
         MediaObjectOwnableLists.addValue(
                 mediaObject.getTopics(),

@@ -707,9 +707,7 @@ public class MediaObjectJsonSchemaTest {
     @Test
     public void testWithGeoLocations() throws Exception {
 
-        JsonNode jsonNode = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/geolocations-scenarios.json"));
-
-        JsonNode  expected = jsonNode.get("mediaWithTwoGeoLocations");
+        JsonNode expected = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/geolocations-media-with-two-geolocations.json"));
 
         Program program = program().lean().withGeoLocations().build();
 
@@ -719,13 +717,11 @@ public class MediaObjectJsonSchemaTest {
 
     @Test
     public void testMarshalWithFullGeoLocations() throws Exception {
-        JsonNode jsonNode = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/geolocations-scenarios.json"));
-        JsonNode  expected = jsonNode.get("OneFullGeoLocations");
-
+        JsonNode expected = Jackson2Mapper.getLenientInstance().readTree(getClass().getResourceAsStream("/geolocations-media-with-one-full-geolocations.json"));
 
         GeoLocation value = GeoLocation.builder()
                 .role(GeoRoleType.RECORDED_IN)
-                .name("myName").scopeNote("myDescription").gtaaUri("myuri").gtaaStatus(GTAAStatus.approved)
+                .name("myName").scopeNote("myDescription").uri("myuri").gtaaStatus(GTAAStatus.approved)
                 .build();
         SortedSet<GeoLocations> geoLocations =
             Stream.of(GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build())
@@ -750,7 +746,7 @@ public class MediaObjectJsonSchemaTest {
         GeoLocations actualGeoLocations = Jackson2Mapper.STRICT.readerFor(GeoLocations.class).readValue(new StringReader(geoLocationsJson));
         GeoLocation value = GeoLocation.builder()
                 .role(GeoRoleType.RECORDED_IN)
-                .name("myName").scopeNote("myDescription").gtaaUri("myuri").gtaaStatus(GTAAStatus.approved)
+                .name("myName").scopeNote("myDescription").uri("myuri").gtaaStatus(GTAAStatus.approved)
                 .build();
         final GeoLocations expectedGeoLocations = GeoLocations.builder().owner(OwnerType.BROADCASTER).value(value).build();
 

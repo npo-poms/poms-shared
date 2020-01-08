@@ -38,6 +38,7 @@ import nl.vpro.xml.bind.DurationXmlAdapter;
     "genres",
     "intentions",
     "targetGroups",
+    "topics",
     "avAttributes",
     "releaseYear",
     "duration",

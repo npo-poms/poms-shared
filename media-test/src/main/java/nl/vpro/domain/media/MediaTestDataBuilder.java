@@ -36,17 +36,17 @@ public interface MediaTestDataBuilder<
     extends MediaBuilder<T, M>, Cloneable {
 
     GTAARecord AMSTERDAM = GTAARecord.builder()
-        .gtaaUri("http://data.beeldengeluid.nl/gtaa/31586")
+        .uri("http://data.beeldengeluid.nl/gtaa/31586")
         .status(GTAAStatus.approved)
         .name("Amsterdam")
         .build();
     GTAARecord UTRECHT = GTAARecord.builder()
-        .gtaaUri("http://data.beeldengeluid.nl/gtaa/43996")
+        .uri("http://data.beeldengeluid.nl/gtaa/43996")
         .status(GTAAStatus.approved)
         .name("Utrecht (stad)")
         .build();
     GTAARecord HILVERSUM = GTAARecord.builder()
-        .gtaaUri("http://data.beeldengeluid.nl/gtaa/36318")
+        .uri("http://data.beeldengeluid.nl/gtaa/36318")
         .status(GTAAStatus.approved)
         .name("Hilversum")
         .scopeNotes(Collections.singletonList("Nederland"))
@@ -481,14 +481,14 @@ public interface MediaTestDataBuilder<
     default T withGeoLocations() {
         List<GeoLocation> geoLocations1 = Arrays.asList(
                 GeoLocation.builder().name("Africa")
-                        .scopeNote("Continent").gtaaUri("http://gtaa/1231")
+                        .scopeNote("Continent").uri("http://gtaa/1231")
                         .role(GeoRoleType.SUBJECT).build());
 
         List<GeoLocation> geoLocations2 =  Arrays.asList(
                 GeoLocation.builder().role(GeoRoleType.SUBJECT)
-                        .name("England").gtaaUri("http://gtaa/1232").gtaaStatus(GTAAStatus.approved).build(),
+                        .name("England").uri("http://gtaa/1232").gtaaStatus(GTAAStatus.approved).build(),
                 GeoLocation.builder()
-                        .name("UK").gtaaUri("http://gtaa/1233")
+                        .name("UK").uri("http://gtaa/1233")
                         .role(GeoRoleType.RECORDED_IN).build()
         );
         return geoLocations(

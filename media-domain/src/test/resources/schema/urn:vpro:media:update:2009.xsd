@@ -34,6 +34,8 @@
 
   <xs:element name="segment" type="segmentUpdateType"/>
 
+  <xs:element name="topic" type="topicUpdateType"/>
+
   <xs:element name="transcode" type="transcodeType"/>
 
   <xs:element name="transcodeStatus" type="transcodeStatusType"/>
@@ -71,6 +73,13 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="targetGroup" type="media:targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="topics" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="topic" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -167,6 +176,11 @@
         <xs:attribute name="type" type="media:textualTypeEnum" use="required"/>
       </xs:extension>
     </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:complexType name="topicUpdateType">
+    <xs:sequence/>
+    <xs:attribute name="gtaaUri" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="avAtributeUpdateType">
@@ -359,6 +373,13 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
+      <xs:element name="topics" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="topic" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
       <xs:element name="avAttributes" type="avAtributeUpdateType" minOccurs="0"/>
       <xs:element name="releaseYear" type="xs:short" minOccurs="0"/>
       <xs:element name="duration" type="xs:duration" minOccurs="0"/>
@@ -430,6 +451,13 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="targetGroup" type="media:targetGroupEnum" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="topics" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="topic" minOccurs="0" maxOccurs="unbounded"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
