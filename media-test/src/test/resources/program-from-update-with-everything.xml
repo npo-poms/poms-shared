@@ -74,9 +74,9 @@
 
   <topics owner="BROADCASTER">
 
-    <topics gtaaUri="http://gtaa/123"/>
+    <topic gtaaUri="http://gtaa/123"/>
 
-    <topics gtaaUri="http://gtaa/124"/>
+    <topic gtaaUri="http://gtaa/124"/>
 
   </topics>
 
@@ -410,9 +410,9 @@
 
       <topics owner="BROADCASTER">
 
-        <topics gtaaUri="http://gtaa/123"/>
+        <topic gtaaUri="http://gtaa/123"/>
 
-        <topics gtaaUri="http://gtaa/124"/>
+        <topic gtaaUri="http://gtaa/124"/>
 
       </topics>
 

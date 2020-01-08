@@ -103,9 +103,7 @@ public class MediaUpdateTest {
             "</program>";
 
         ProgramUpdate update = JAXB.unmarshal(new StringReader(withoutIntentions), ProgramUpdate.class);
-
         assertThat(update.getIntentions()).isNull();
-
 
     }
 
@@ -136,8 +134,6 @@ public class MediaUpdateTest {
         );
 
         assertThat(update.getIntentions()).containsExactly(IntentionType.INFORM_INDEPTH);
-
-
     }
 
     @Test
