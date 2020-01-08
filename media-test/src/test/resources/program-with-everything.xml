@@ -116,27 +116,27 @@
 
   <topics owner="BROADCASTER">
 
-    <topics gtaaUri="http://gtaa/123" gtaaStatus="approved">
+    <topic gtaaUri="http://gtaa/123" gtaaStatus="approved">
 
       <name>foo</name>
 
-    </topics>
+    </topic>
 
-    <topics gtaaUri="http://gtaa/124" gtaaStatus="candidate">
+    <topic gtaaUri="http://gtaa/124" gtaaStatus="candidate">
 
       <name>bar</name>
 
-    </topics>
+    </topic>
 
   </topics>
 
   <topics owner="NPO">
 
-    <topics gtaaUri="http://gtaa/125" gtaaStatus="approved">
+    <topic gtaaUri="http://gtaa/125" gtaaStatus="approved">
 
       <name>foos</name>
 
-    </topics>
+    </topic>
 
   </topics>
 
@@ -590,27 +590,27 @@
 
       <topics owner="BROADCASTER">
 
-        <topics gtaaUri="http://gtaa/123" gtaaStatus="approved">
+        <topic gtaaUri="http://gtaa/123" gtaaStatus="approved">
 
           <name>foo</name>
 
-        </topics>
+        </topic>
 
-        <topics gtaaUri="http://gtaa/124" gtaaStatus="candidate">
+        <topic gtaaUri="http://gtaa/124" gtaaStatus="candidate">
 
           <name>bar</name>
 
-        </topics>
+        </topic>
 
       </topics>
 
       <topics owner="NPO">
 
-        <topics gtaaUri="http://gtaa/125" gtaaStatus="approved">
+        <topic gtaaUri="http://gtaa/125" gtaaStatus="approved">
 
           <name>foos</name>
 
-        </topics>
+        </topic>
 
       </topics>
 
