@@ -96,7 +96,7 @@ public class NEPGatekeeperServiceImpl implements NEPGatekeeperService {
          @Value("${nep.gatekeeper-api.connectionRequestTimeout}") String connectionRequestTimeout,
          @Value("${nep.gatekeeper-api.socketTimeout}") String socketTimeout,
          @Value("${nep.gatekeeper-api.pageSize}") int pageSize,
-         @Value("${nep.gatekeeper-api.upload.username}") String ftpUserName) {
+         @Value("${nep.gatekeeper-upload.username}") String ftpUserName) {
         this.url = url;
         this.userName = userName;
         this.password = password;
