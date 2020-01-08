@@ -40,9 +40,15 @@ import static nl.vpro.util.MultiLanguageString.en;
 @Slf4j
 public class NEPSSHJUploadServiceImpl implements NEPUploadService {
 
+    @Getter
     private final String sftpHost;
+
+    @Getter
     private final String username;
+
     private final String password;
+
+    @Getter
     private final String hostKey;
 
     @Getter
