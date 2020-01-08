@@ -15,6 +15,8 @@ import java.util.function.Function;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+
 import nl.vpro.domain.media.exceptions.CircularReferenceException;
 import nl.vpro.domain.media.gtaa.GTAARecord;
 import nl.vpro.domain.media.gtaa.GTAAStatus;
@@ -29,6 +31,7 @@ import static nl.vpro.domain.media.support.OwnerType.BROADCASTER;
 import static nl.vpro.domain.media.support.OwnerType.NPO;
 
 @SuppressWarnings({"unchecked", "deprecation"})
+@CanIgnoreReturnValue
 public interface MediaTestDataBuilder<
         T extends MediaTestDataBuilder<T, M> &  MediaBuilder<T, M>,
         M extends MediaObject
@@ -521,7 +524,6 @@ public interface MediaTestDataBuilder<
         );
     }
 
-
     default T clearTargetGroups() {
         mediaObject().setTargetGroups(null);
         return (T) this;
@@ -689,6 +691,44 @@ public interface MediaTestDataBuilder<
         );
     }
 
+    default T withTopics(){
+        return topics(
+                Topics.builder()
+                    .value(
+                        Topic
+                            .builder()
+                            .name("foo")
+                            .gtaaStatus(GTAAStatus.approved)
+                            .uri("http://gtaa/123")
+                            .build())
+                    .value(
+                        Topic
+                            .builder()
+                            .name("bar")
+                            .gtaaStatus(GTAAStatus.candidate)
+                            .uri("http://gtaa/124")
+                            .build()
+                    )
+                    .owner(BROADCASTER)
+                    .build(),
+                Topics.builder()
+                    .value(
+                        Topic
+                            .builder()
+                            .name("foos")
+                            .gtaaStatus(GTAAStatus.approved)
+                            .uri("http://gtaa/125")
+                            .build())
+                    .owner(OwnerType.NPO)
+                    .build()
+        );
+    }
+
+
+    default T clearTopics() {
+        mediaObject().setTopics(null);
+        return (T) this;
+    }
 
 
     default T withAuthorityRecord() {
@@ -786,6 +826,7 @@ public interface MediaTestDataBuilder<
                 .withTags()
                 .withTeletext()
                 .withTitles()
+                .withTopics()
                 .withTwitterRefs()
                 .withWebsites()
                 .withWorkflow()
