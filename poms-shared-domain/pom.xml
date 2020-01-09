@@ -9,6 +9,7 @@
 
   <artifactId>poms-shared-domain</artifactId>
   <name>poms-shared-domain</name>
+  <description>Several domains like 'media', pages' and 'subtitles' in the POMS system share some common properties which are collected here</description>
 
   <build>
     <plugins>

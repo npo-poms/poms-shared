@@ -9,6 +9,7 @@
 
   <artifactId>poms-shared</artifactId>
   <name>poms-shared</name>
+  <description>Generic utility which are not quite generic enough to make it to vpro-shared.</description>
 
   <dependencies>
     <dependency>

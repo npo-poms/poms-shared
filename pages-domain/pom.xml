@@ -11,6 +11,7 @@
   <groupId>nl.vpro.pages</groupId>
   <artifactId>pages-domain</artifactId>
   <name>pages-domain</name>
+  <description>Domain objects 'pages'. Also contains analogous to media-domain 'update' versions of the objects (which are understood by the 'pages publisher api')</description>
 
   <dependencies>
     <dependency>

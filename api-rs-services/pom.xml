@@ -11,9 +11,10 @@
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-rs-services</artifactId>
   <name>api-rs-services</name>
+  <description>Contains rest interface implemented by  the Frontend API</description>
+
 
   <dependencies>
-    <!-- todo, drop this dependency -->
     <dependency>
       <groupId>nl.vpro.api</groupId>
       <artifactId>api-domain</artifactId>

@@ -12,6 +12,7 @@
   <groupId>nl.vpro.api</groupId>
   <artifactId>api-domain</artifactId>
   <name>api-domain</name>
+  <description>Contains the object used by the Frontend API, like forms and result objects</description>
 
   <dependencies>
     <dependency>

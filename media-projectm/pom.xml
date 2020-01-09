@@ -10,6 +10,7 @@
   <groupId>nl.vpro.media</groupId>
   <artifactId>media-projectm</artifactId>
   <name>media-projectm</name>
+  <description>Java bindings for 'project m' related XML formats</description>
 
   <dependencies>
     <dependency>
