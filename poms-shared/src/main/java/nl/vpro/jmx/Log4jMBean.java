@@ -9,12 +9,16 @@ import org.apache.log4j.LogManager;
 import org.springframework.jmx.export.annotation.ManagedOperation;
 import org.springframework.jmx.export.annotation.ManagedResource;
 
+/**
+ * @deprecate moved to vpro-shared
+ */
 @ManagedResource(
         objectName="nl.vpro:name=logging",
         description="Logging configuration.",
         log=true,
         logFile="jmx.log"
 )
+@Deprecated
 public class Log4jMBean {
 
     @ManagedOperation(description="Get current level for category")
