@@ -89,10 +89,6 @@
       <artifactId>user-domain</artifactId>
     </dependency>
     <dependency>
-      <groupId>nl.vpro.user</groupId>
-      <artifactId>user-test</artifactId>
-    </dependency>
-    <dependency>
       <groupId>nl.vpro.media</groupId>
       <artifactId>media-classification</artifactId>
     </dependency>
