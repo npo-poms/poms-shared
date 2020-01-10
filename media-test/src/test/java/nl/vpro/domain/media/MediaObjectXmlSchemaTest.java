@@ -6,33 +6,21 @@ package nl.vpro.domain.media;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.TimeZone;
+import java.time.*;
+import java.util.*;
 
-import javax.xml.bind.JAXB;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import javax.xml.XMLConstants;
+import javax.xml.bind.*;
 import javax.xml.bind.util.JAXBSource;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
+import javax.xml.validation.*;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.*;
 import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
 import org.xmlunit.diff.Diff;
@@ -43,6 +31,7 @@ import nl.vpro.domain.media.update.ProgramUpdate;
 import nl.vpro.domain.subtitles.SubtitlesType;
 import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
+import nl.vpro.util.IntegerVersion;
 
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -96,7 +85,7 @@ public class MediaObjectXmlSchemaTest {
         ClassificationServiceLocator.setInstance(MediaClassificationService.getInstance());
     }
 
-    @Before
+    @BeforeEach
     public void init() {
         Locale.setDefault(Locales.DUTCH);
     }
@@ -632,7 +621,7 @@ public class MediaObjectXmlSchemaTest {
     }
 
     @Test
-    @Ignore("Used to generate an example XML document")
+    @Disabled("Used to generate an example XML document")
     public void generateExample() throws Exception {
         Segment segment = MediaTestDataBuilder
             .segment()
@@ -1005,6 +994,51 @@ public class MediaObjectXmlSchemaTest {
         JAXBTestUtil.roundTripAndSimilar(withEverything, getClass().getResourceAsStream("/program-with-everything.xml"));
     }
 
+
+    /**
+     * Tests wether 'withEveryting' is indeed valid according to manually maintained XSD
+     */
+    @Test
+    public void testUpdateSchema() throws IOException, SAXException {
+        SchemaFactory factory = SchemaFactory.newInstance(
+            XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema xsdSchema = factory.newSchema(getClass().getResource("/nl/vpro/domain/media/update/vproMediaUpdate.xsd"));
+        Validator xsdValidator = xsdSchema.newValidator();
+
+        ProgramUpdate update = ProgramUpdate.create(MediaTestDataBuilder.program()
+            .withEverything(IntegerVersion.of(5, 12))
+            .build());
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        JAXB.marshal(update, out);
+        log.info(new String(out.toByteArray()));
+
+        Source streamSource = new StreamSource(new ByteArrayInputStream(out.toByteArray()));
+        xsdValidator.validate(streamSource);
+
+
+    }
+
+
+    /**
+     * Tests wether 'withEverything' is indeed valid according to manually maintained XSD
+     */
+    @Test
+    public void testSchema() throws IOException, SAXException {
+        SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        Schema xsdSchema = factory.newSchema(getClass().getResource("/nl/vpro/domain/media/vproMedia.xsd"));
+        Validator xsdValidator = xsdSchema.newValidator();
+
+        Program program = MediaTestDataBuilder.program().withEverything().build();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        JAXB.marshal(program, out);
+        log.info(new String(out.toByteArray()));
+
+        Source streamSource = new StreamSource(new ByteArrayInputStream(out.toByteArray()));
+        xsdValidator.validate(streamSource);
+
+
+    }
 
     protected String toXml(Object o) throws JAXBException {
         Writer writer = new StringWriter();

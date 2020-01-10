@@ -174,4 +174,5 @@ public class SchemaTest extends AbstractSchemaTest {
         testEnum("/nl/vpro/domain/media/vproShared.xsd", enumTypeName, enumClass);
     }
 
+
 }
