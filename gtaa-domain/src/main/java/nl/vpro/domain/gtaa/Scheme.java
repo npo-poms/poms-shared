@@ -109,14 +109,24 @@ public enum Scheme implements Displayable {
         return name();
     }
 
+    @SuppressWarnings("unchecked")
     public static Class<? extends GTAAConcept>[] classes() {
         return Arrays.stream(values()).map(s -> s.implementation)
             .filter(Objects::nonNull)
             .toArray(Class[]::new);
     }
 
+    @SuppressWarnings("unchecked")
     public static Class<?>[] classesAndNew() {
         return ArrayUtils.addAll(classes(), GTAANewPerson.class, GTAANewGenericConcept.class);
+    }
+
+    /**
+     * // doens't work
+     * See https://docs.jboss.org/resteasy/docs/3.5.1.Final/userguide/html/StringConverter.html
+     */
+    public static Scheme fromString(String value) {
+        return ofUrl(value).orElseGet(() -> Scheme.valueOf(value));
     }
 }
 

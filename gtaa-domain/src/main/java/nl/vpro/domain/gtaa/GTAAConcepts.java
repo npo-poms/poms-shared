@@ -28,7 +28,7 @@ public class GTAAConcepts {
                 log.error(e.getMessage(), e);
                 return null;
             }
-        }).orElseThrow(() -> new IllegalStateException("Not convertible " + d));
+        }).orElseThrow(() -> new IllegalArgumentException("Not convertible " + d));
     }
 
 

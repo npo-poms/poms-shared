@@ -1,10 +1,11 @@
 package nl.vpro.api.rs.v3.thesaurus;
 
 import java.time.Instant;
-import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.annotations.cache.NoCache;
 
@@ -12,6 +13,7 @@ import nl.vpro.domain.api.Constants;
 import nl.vpro.domain.api.thesaurus.PersonResult;
 import nl.vpro.domain.api.thesaurus.ThesaurusResult;
 import nl.vpro.domain.gtaa.GTAAConcept;
+import nl.vpro.domain.gtaa.Scheme;
 
 import static nl.vpro.domain.api.Constants.DEFAULT_MAX_RESULTS_STRING;
 import static nl.vpro.domain.api.Constants.MAX;
@@ -45,7 +47,8 @@ public interface ThesaurusRestService {
     @Path("/concepts")
     ThesaurusResult<GTAAConcept> listConcepts(
         @QueryParam("text") @DefaultValue("") String text,
-        @QueryParam("schemes") List<String> schemes,
+        @QueryParam("schemes") Set<Scheme> schemes,
+        @QueryParam("not") @DefaultValue("false")  boolean not,
         @QueryParam(MAX) @DefaultValue(DEFAULT_MAX_RESULTS_STRING) Integer max);
 
     @GET
