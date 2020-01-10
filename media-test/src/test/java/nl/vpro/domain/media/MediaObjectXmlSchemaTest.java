@@ -7,7 +7,6 @@ package nl.vpro.domain.media;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.time.*;
 import java.util.*;
 
@@ -33,6 +32,7 @@ import nl.vpro.i18n.Locales;
 import nl.vpro.test.util.jaxb.JAXBTestUtil;
 import nl.vpro.util.IntegerVersion;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static nl.vpro.domain.media.MediaTestDataBuilder.program;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertFalse;
@@ -870,7 +870,6 @@ public class MediaObjectXmlSchemaTest {
 
     @Test
     public void testWithDescendantOf() {
-
         Program program = program().lean().withDescendantOf().build();
         JAXBTestUtil.roundTripAndSimilar(program, "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
             "<program embeddable=\"true\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\">\n" +
@@ -890,7 +889,7 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testWithIntentions() throws IOException, JAXBException {
         StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/intention-scenarios.xml"), segment, "UTF-8");
+        IOUtils.copy(getClass().getResourceAsStream("/intention-scenarios.xml"), segment, UTF_8);
         String expected = segment.toString();
         log.info(expected);
 
@@ -920,7 +919,7 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testWithGeoLocations() throws Exception {
         StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.xml"), segment, "UTF-8");
+        IOUtils.copy(getClass().getResourceAsStream("/geolocations-scenarios.xml"), segment, UTF_8);
         String expected = segment.toString();
         log.info("Expected: " + expected);
 
@@ -949,7 +948,7 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testUnmarshalWithNullIntentions() throws IOException {
         StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/intention-null-scenarios.xml"), segment, StandardCharsets.UTF_8);
+        IOUtils.copy(getClass().getResourceAsStream("/intention-null-scenarios.xml"), segment, UTF_8);
         String xmlInput = segment.toString();
         log.info(xmlInput);
 
@@ -960,7 +959,7 @@ public class MediaObjectXmlSchemaTest {
     @Test
     public void testUnmarshalWithEmptyIntentions() throws IOException {
         StringWriter segment = new StringWriter();
-        IOUtils.copy(getClass().getResourceAsStream("/intention-empty-scenarios.xml"), segment, StandardCharsets.UTF_8);
+        IOUtils.copy(getClass().getResourceAsStream("/intention-empty-scenarios.xml"), segment, UTF_8);
         String xmlInput = segment.toString();
         log.info(xmlInput);
 

@@ -7,7 +7,7 @@
     </geoLocations>
     <geoLocations owner="NPO">
         <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/34812" gtaaStatus="approved" role="SUBJECT">
-            <name>England</name>
+            <name>Engeland</name>
             <scopeNote>deel Groot-Brittannië</scopeNote>
         </geoLocation>
         <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/35768" role="RECORDED_IN">
