@@ -1159,7 +1159,7 @@ public interface MediaTestDataBuilder<
     }
 
 
-    public static Editor vproEditor() {
+    static Editor vproEditor() {
         return Editor.builder()
             .principalId("editor@vpro.nl")
             .displayName("Editor")
