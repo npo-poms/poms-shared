@@ -9,7 +9,9 @@ import java.time.Instant;
 /**
  * @author Roelof Jan Koekoek
  * @since 2.3
+ * @deprecated I think this is too flimsy to warrant a complete utility class like this.
  */
+@Deprecated
 public class TestEditors {
 
     public static Editor vproEditor() {

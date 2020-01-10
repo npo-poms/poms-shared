@@ -180,11 +180,11 @@ public interface MediaTestDataBuilder<
     }
 
     default T withCreatedBy() {
-        return createdBy(TestEditors.vproEditor());
+        return createdBy(vproEditor());
     }
 
     default T withLastModifiedBy() {
-        return lastModifiedBy(TestEditors.vproEditor());
+        return lastModifiedBy(vproEditor());
     }
 
     default T withCreationDate() {
@@ -1156,5 +1156,18 @@ public interface MediaTestDataBuilder<
                 .withStart();
 
         }
+    }
+
+
+    public static Editor vproEditor() {
+        return Editor.builder()
+            .principalId("editor@vpro.nl")
+            .displayName("Editor")
+            .email("editor@vpro.nl")
+            .broadcaster(new Broadcaster("VPRO", "VPRO"))
+            .givenName("Test")
+            .familiyName("Editor")
+            .lastLogin(Instant.now())
+            .build();
     }
 }
