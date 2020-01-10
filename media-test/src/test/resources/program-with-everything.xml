@@ -53,7 +53,7 @@
             <name>England</name>
             <scopeNote>deel Groot-Brittannië</scopeNote>
         </geoLocation>
-        <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/35768&quot;" role="RECORDED_IN">
+        <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/35768" role="RECORDED_IN">
             <name>Groot-Brittannië</name>
         </geoLocation>
     </geoLocations>
@@ -299,7 +299,7 @@
                     <name>England</name>
                     <scopeNote>deel Groot-Brittannië</scopeNote>
                 </geoLocation>
-                <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/35768&quot;" role="RECORDED_IN">
+                <geoLocation gtaaUri="http://data.beeldengeluid.nl/gtaa/35768" role="RECORDED_IN">
                     <name>Groot-Brittannië</name>
                 </geoLocation>
             </geoLocations>
