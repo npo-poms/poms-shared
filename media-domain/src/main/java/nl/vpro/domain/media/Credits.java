@@ -2,13 +2,25 @@ package nl.vpro.domain.media;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -27,6 +39,7 @@ import nl.vpro.domain.media.gtaa.GTAAStatus;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@ToString(of = { "role" })
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @XmlSeeAlso({
     Person.class,
@@ -91,7 +104,6 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
         return getClass().getSimpleName().toLowerCase();
     }
 
-
     public abstract String getName();
 
     public abstract String getGtaaUri();
@@ -99,6 +111,4 @@ public abstract class Credits extends DomainObject implements Child<MediaObject>
     public abstract GTAAStatus getGtaaStatus();
 
     public abstract Boolean getGtaaKnownAs();
-
-
 }

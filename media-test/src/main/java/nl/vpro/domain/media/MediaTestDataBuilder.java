@@ -460,7 +460,7 @@ public interface MediaTestDataBuilder<
                 .build());
     }
     default T withCredits() {
-        return withPersons().credits(Name.builder().name("bla").role(RoleType.COMPOSER).build());
+        return withPersons().credits(Name.builder().uri("http://gtaa/1").name("bla").role(RoleType.COMPOSER).build());
     }
 
     default T withIntentions() {

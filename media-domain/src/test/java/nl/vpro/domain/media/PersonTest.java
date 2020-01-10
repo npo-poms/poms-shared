@@ -22,7 +22,7 @@ public class PersonTest {
     @Test
     public void json() {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
-        person.setGtaaRecord(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
+        person.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         assertThatJson(person).isSimilarTo(
             "{\n" +
                 " \"objectType\" : \"person\",\n" +
@@ -54,7 +54,7 @@ public class PersonTest {
     @Test
     public void xml() {
         Person person = new Person("Pietje", "Puk", RoleType.ACTOR);
-        person.setGtaaRecord(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
+        person.setGtaaInfo(new EmbeddablePerson("http://data.beeldengeluid.nl/gtaa/1869521", GTAAStatus.approved));
         JAXBTestUtil.assertThatXml(person).isSimilarTo(
             "<local:person role=\"ACTOR\" gtaaStatus=\"approved\" gtaaUri=\"http://data.beeldengeluid.nl/gtaa/1869521\" xmlns=\"urn:vpro:media:2009\" xmlns:shared=\"urn:vpro:shared:2009\" xmlns:local=\"uri:local\">\n" +
             "    <givenName>Pietje</givenName>\n" +

@@ -832,7 +832,8 @@ public class MediaObjectJsonSchemaTest {
             "  }, {\n" +
             "    \"objectType\" : \"name\",\n" +
             "    \"role\" : \"COMPOSER\",\n" +
-            "    \"name\" : \"bla\"\n" +
+            "    \"name\" : \"bla\",\n" +
+            "    \"gtaaUri\" : \"http://gtaa/1\"\n" +
             "  } ]\n" +
             "}");
 
